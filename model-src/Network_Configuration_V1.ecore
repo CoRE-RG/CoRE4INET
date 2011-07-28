@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Network_Configuration"
+    nsURI="http://www.tttech.com/Schema/TTEthernet/Network_Config_V1" nsPrefix="nc">
+  <eClassifiers xsi:type="ecore:EClass" name="DeviceReferringElement" eSuperTypes="System_Specification_V0.ecore#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Associates the device element (logical definition) of the system specification &#xD;&#xA;with the corresponding device specification and the synchronization parameters of the device."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refDeviceSpecification"
+        eType="ecore:EClass Device_Specification_V1.ecore#//DeviceSpecification" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="XPointer reference to the root element of the particular device specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refSyncConfiguration" eType="#//SyncBase"
+        eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="XPointer reference to the synchronization configuration of this device."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refDevice" eType="ecore:EClass System_Specification_V0.ecore#//Device"
+        eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="References the device in the system specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NetworkConfig" eSuperTypes="System_Specification_V0.ecore#//ModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is the root element for the network configuration. It comprises the &#xD;&#xA;network-wide configuration data such as the synchronization configuration or&#xD;&#xA;protocol configuration. It contains references to the device specifications of all&#xD;&#xA;devices in the network."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaInformation" ordered="false"
+        eType="ecore:EClass System_Specification_V0.ecore#//MetaInformation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Meta-information about this network configuration mapping. This information can be used for configuration management."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="units" ordered="false"
+        eType="ecore:EClass System_Specification_V0.ecore#//Units" containment="true"
+        eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Container for additional units, used inside the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="synchronization" ordered="false"
+        eType="#//Synchronization" containment="true" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization parameters of the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deviceReferringElement"
+        ordered="false" upperBound="-1" eType="#//DeviceReferringElement" containment="true"
+        eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the device referring elements, which connect the devices defined in the system specification with the corresponding device specifications."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refSystemSpecification"
+        ordered="false" eType="ecore:EClass System_Specification_V0.ecore#//SystemSpecification">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="References the system specification of the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refMappings" ordered="false"
+        eType="ecore:EClass Device_Target_Mapping_V1.ecore#//Mappings">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the mapping information (device, port buffer mapping, etc.)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refProtocol" ordered="false"
+        eType="ecore:EClass Protocol_V1.ecore#//Protocol" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the protocol used in the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periods" upperBound="-1"
+        eType="#//Periods" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains additional periods used in the configurations."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refVirtualLinkMapping"
+        eType="ecore:EClass Virtuallink_Map_V1.ecore#//VirtualLinkMapping" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="References a virtual link mapping."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Synchronization" eSuperTypes="System_Specification_V0.ecore#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The clock synchronization configuration for the whole network. This is only needed if at least one time-triggered virtual link is used.&#xD;&#xA;For an AFDX-only network this can be omitted."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncDomain" ordered="false"
+        upperBound="-1" eType="#//SyncDomain" containment="true" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The synchronization domain of the network, according to the TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="integrityConfigurations"
+        ordered="false" eType="#//IntegrityConfigurations" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization integrity configurations, referenced by the devices of the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyncDomain" eSuperTypes="System_Specification_V0.ecore#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Models one synchronization domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncDomainId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The numerical value of the synchronization domain, which is used by the protocol control frames (PCF)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clusterCycleDuration" lowerBound="1"
+        eType="ecore:EDataType System_Specification_V0.ecore#//TimeType" defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Duration of the cluster cycle. This has to be an integral multiple of the integration cycle duration."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integrationCycleDuration"
+        lowerBound="1" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The integration cycle duration for this synchronization domain."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxPcfTransmissionDelay"
+        lowerBound="1" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncPriority" lowerBound="1"
+        upperBound="-1" eType="#//SyncPriority" containment="true" eKeys="#//SyncPriority/value">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization domains of the network, including the containing devices."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="faultToleranceLevel" eType="#//FaultToleranceEnum"
+        defaultValueLiteral="singleFaultTolerant">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The fault tolerance level of the synchronization domain. See TTEthernet specification - part &quot;Synchronization Parameters Summary&quot;."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integrityLevel" eType="#//IntegrityLevelEnum"
+        defaultValueLiteral="standard">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The integrity level of the synchronization domain. See TTEthernet specification - part &quot;Synchronization Parameters Summary&quot;."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="avgMode" eType="#//AvgModeEnum"
+        defaultValueLiteral="median">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The algorithm used by the synchronization clients to determine the fault-tolerant average of the clock values."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyncPriority" eSuperTypes="System_Specification_V0.ecore#//ModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Models a synchronization priority inside a synchronization domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The numerical value of the synchronization priority, which is used by the protocol control frames (PCF)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncClient" upperBound="-1"
+        eType="#//SyncClient" containment="true" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization clients of the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncMaster" upperBound="-1"
+        eType="#//SyncMaster" containment="true" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization masters of the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compressionMaster" upperBound="-1"
+        eType="#//CompressionMaster" containment="true" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the compression masters of the network."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyncBase" abstract="true" eSuperTypes="System_Specification_V0.ecore#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Abstract base for defining components, which are participants in the clock synchronization service."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduledReceivePit" lowerBound="1"
+        eType="ecore:EDataType System_Specification_V0.ecore#//TimeType" defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This parameter is also called expected arrival. For further documentation see the TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="acceptanceWindow" lowerBound="1"
+        eType="ecore:EDataType System_Specification_V0.ecore#//TimeType" defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="listenTimeout" lowerBound="1"
+        eType="ecore:EDataType System_Specification_V0.ecore#//TimeType" defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priorityFallbackCycles"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncToStableEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyncClient" eSuperTypes="#//SyncBase">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Models a synchronization client service of a device."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refIntegrityConfig" lowerBound="1"
+        eType="#//SyncClientIntegrityConfig" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the integrity configuration of the synchronization realizing component."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveSyncComponent" eSuperTypes="#//SyncBase">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Base for defining active synchronization components. &#xD;&#xA;Active synchronization components, are components which implement the clock synchronization service for the network&#xD;&#xA;(synchronization masters and synchronization compression masters)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceMacAddress" lowerBound="1"
+        eType="ecore:EDataType System_Specification_V0.ecore#//MacAddressType" defaultValueLiteral="00:00:00:00:00:00">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The source MAC address to be used for sending protocol control frames (PCF) by the synchronization module."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refPcfVlidIntegration"
+        eType="ecore:EClass System_Specification_V0.ecore#//PCFVirtualLink" eKeys="System_Specification_V0.ecore#//VirtualLink/vlid">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the virtual link to be used for sending integration protocol control frames (INT) by the synchronization module."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DistributedSyncMaster" eSuperTypes="#//SyncMaster">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Models a synchronization master service inside a device."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompressionMaster" eSuperTypes="#//ActiveSyncComponent">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Models a compression master service inside a device."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="busGuardian" eType="#//BusGuardian"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the settings for a bus guardian. If not defined, no bus guardian is activated."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cliqueDetection" eType="#//CliqueDetection"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the settings for the clique detection in the network (see TTEthernet specification)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="observationWindowSize"
+        lowerBound="1" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="caEnableTimeout" lowerBound="1"
+        eType="ecore:EDataType System_Specification_V0.ecore#//TimeType" defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wait4in0Timeout" lowerBound="1"
+        eType="ecore:EDataType System_Specification_V0.ecore#//TimeType" defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refIntegrityConfig" lowerBound="1"
+        eType="#//CompressionMasterIntegrityConfig" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the integrity configuration of the synchronization realizing component."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CliqueDetection" eSuperTypes="System_Specification_V0.ecore#//ModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Settings for configuring the clique detection in the network (see TTEthernet specification)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tentativeSyncRelayEnabled"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncRelayEnabled" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stableRelayEnabled" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tentativeSyncMembershipAsyncEnabled"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tentativeSyncMembershipSyncEnabled"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncMembershipAsyncEnabled"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncMembershipSyncEnabled"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stableMembershipAsyncEnabled"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stableMembershipSyncEnabled"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusGuardian" eSuperTypes="System_Specification_V0.ecore#//ModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Models the settings for the bus guardian.  If present, a bus guardian is requested."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrityConfigurations" eSuperTypes="System_Specification_V0.ecore#//ModelElement">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Integrity configurations of the network."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncClientIntegrityConfig"
+        ordered="false" upperBound="-1" eType="#//SyncClientIntegrityConfig" containment="true"
+        eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization integrity configurations, referenced by the synchronization clients."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compressionMasterIntegrityConfig"
+        ordered="false" upperBound="-1" eType="#//CompressionMasterIntegrityConfig"
+        containment="true" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization integrity configurations, referenced by the compression masters."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncMasterIntegrityConfig"
+        ordered="false" upperBound="-1" eType="#//SyncMasterIntegrityConfig" containment="true"
+        eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contains the synchronization integrity configurations, referenced by the synchronization masters."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrityConfigBase" abstract="true"
+      eSuperTypes="System_Specification_V0.ecore#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Abstract base for configuring the integrity settings for one or more compontents of the network."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integrateToSyncThreshold"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numUnstableCycles" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numStableCycles" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyncClientIntegrityConfig" eSuperTypes="#//IntegrityConfigBase">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Configures the integrity settings for one or more synchronization clients of the network."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveSyncComponentIntegrityConfig"
+      abstract="true" eSuperTypes="#//IntegrityConfigBase">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Abstract base for configuring the integrity settings for one or more active synchronization components of the network."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="waitThresholdAsync" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsyncToSyncThreshold"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsyncToTentativeThreshold"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tentativeSyncThresholdAsync"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tentativeSyncThresholdSync"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tentativeToSyncThreshold"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncThresholdAsync" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncThresholdSync" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stableThresholdAsync" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stableThresholdSync" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompressionMasterIntegrityConfig" eSuperTypes="#//ActiveSyncComponentIntegrityConfig">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Configures the integrity settings for one or more compression masters of the network."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integrateToTentativeThreshold"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyncMasterIntegrityConfig" eSuperTypes="#//ActiveSyncComponentIntegrityConfig">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Configures the integrity settings for one or more synchronization master of the network."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integrateToWaitThreshold"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Periods" eSuperTypes="System_Specification_V0.ecore#//ModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Defines periods in addition to those defined in the system specification."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="period" upperBound="-1"
+        eType="ecore:EClass System_Specification_V0.ecore#//Period" containment="true"
+        eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="List of periods (see system specification)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AvgModeEnum">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The algorithm used by the synchronization clients to determine the fault-tolerant average of the clock values."/>
+    </eAnnotations>
+    <eLiterals name="median" value="1" literal="median"/>
+    <eLiterals name="average" literal="average"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FaultToleranceEnum">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Desired fault tolerance level (see TTEthernet specification - section &quot;synchronization parameters&quot;)."/>
+    </eAnnotations>
+    <eLiterals name="nonFaultTolerant" literal="nonFaultTolerant"/>
+    <eLiterals name="singleFaultTolerant" value="1" literal="singleFaultTolerant"/>
+    <eLiterals name="doubleFaultTolerant" value="2" literal="doubleFaultTolerant"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IntegrityLevelEnum">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Desired integrity level (see TTEthernet specification - part &quot;synchronization parameters&quot;)."/>
+    </eAnnotations>
+    <eLiterals name="standard" literal="standard"/>
+    <eLiterals name="high" value="1" literal="high"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyncMaster" eSuperTypes="#//ActiveSyncComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="membershipBit" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Bit number of the membership bit set inside the Membership New field of a protocol control frame (PCF) for this synchronization master. &#xD;&#xA;The LSB has the value 0."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialIntegrationCycle"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This parameter specifies the integration cycle number to be used by the first integration frame to be transmitted after coldstart."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refIntegrityConfig" lowerBound="1"
+        eType="#//SyncMasterIntegrityConfig" eKeys="System_Specification_V0.ecore#//NamedElement/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the integrity configuration of the synchronization realizing component."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="caOffset" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coldstartTimeout" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="csOffset" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restartTimeoutAsync" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restartTimeoutSync" eType="ecore:EDataType System_Specification_V0.ecore#//TimeType"
+        defaultValueLiteral="0ns">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="See TTEthernet specification."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="clksyncFilterMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This parameter is used to define by how many flags a PCF received during the acceptance window may deviate from the number of flags set in the membership vector of the best PCF received in the same acceptance window.&#xD;&#xA;When the deviation criterion is fulfilled, the PCF takes part in the computation of the fault-tolerant average.&#xD;&#xA;The best PCF is the frame with most membership flags received in the same acceptance window.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refPcfVlidColdstart" eType="ecore:EClass System_Specification_V0.ecore#//PCFVirtualLink"
+        eKeys="System_Specification_V0.ecore#//VirtualLink/vlid">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the virtual link (in the system specification) to be used for sending coldstart protocol control frames (CS) by the synchronization module."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refPcfVlidColdstartAck"
+        eType="ecore:EClass System_Specification_V0.ecore#//PCFVirtualLink" eKeys="System_Specification_V0.ecore#//VirtualLink/vlid">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to the virtual link (in the system specification) to be used for sending coldstart acknowledgement protocol control frames (CA) by the synchronization module."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandaloneSyncMaster" eSuperTypes="#//SyncMaster"/>
+</ecore:EPackage>
