@@ -1,0 +1,16 @@
+<features cppSourceRoots="src">
+    <feature
+        id="TTE_common"
+        name="TTEthernet Common"
+        description = "The common part of TTEthernet implementations"
+        initiallyEnabled = "true"
+        requires = ""
+        labels = ""
+        nedPackages = "
+                       ttethernet
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_TTE_COMMON"
+        linkerFlags = ""
+        />
+</features>

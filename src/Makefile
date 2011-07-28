@@ -1,0 +1,270 @@
+#
+# OMNeT++/OMNEST Makefile for libTTEthernetSupport
+#
+# This file was generated with the command:
+#  opp_makemake -f --deep --make-so -o TTEthernetSupport -O out -I/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp -I/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/model-src -I../../inet/src/linklayer/ethernet -I../../inet/src/networklayer/ipv4 -I../../inet/src/networklayer/common -I../../inet/src/networklayer/ipv4/contract -I../../inet/src/util/headerserializers/ipv4 -I../../inet/src/base -I../../inet/src/util/headerserializers -I../../inet/src/networklayer/contract -I../../inet/src/util -I../../inet/src/applications/pingapp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -L../../inet/out/$(CONFIGNAME)/src -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet -DWITH_TTE_COMMON -KINET_PROJ=../../inet -- -L../emf4cpp-0.0.2/lib -L../model-src
+#
+
+# Name of target to be created (-o option)
+TARGET = libTTEthernetSupport$(SHARED_LIB_SUFFIX)
+
+# C++ include paths (with -I)
+INCLUDE_PATH = \
+    -I../emf4cpp-0.0.2/include/emf4cpp \
+    -I../model-src \
+    -I../../inet/src/linklayer/ethernet \
+    -I../../inet/src/networklayer/ipv4 \
+    -I../../inet/src/networklayer/common \
+    -I../../inet/src/networklayer/ipv4/contract \
+    -I../../inet/src/util/headerserializers/ipv4 \
+    -I../../inet/src/base \
+    -I../../inet/src/util/headerserializers \
+    -I../../inet/src/networklayer/contract \
+    -I../../inet/src/util \
+    -I../../inet/src/applications/pingapp \
+    -I../../inet/src/linklayer/contract \
+    -I../../inet/src/networklayer/arp \
+    -I. \
+    -Iapi \
+    -Iapplications \
+    -Ibuffer \
+    -Iconfiguration \
+    -Ictc \
+    -Ilinklayer \
+    -Ilinklayer/ethernet \
+    -Inodes \
+    -Inodes/ethernet \
+    -Ischeduler
+
+# Additional object and library files to link with
+EXTRA_OBJS = -L../emf4cpp-0.0.2/lib -L../model-src
+
+# Additional libraries (-L, -l options)
+LIBS = -L../../inet/out/$(CONFIGNAME)/src  -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet
+LIBS += -Wl,-rpath,`abspath ../../inet/out/$(CONFIGNAME)/src`
+
+# Output directory
+PROJECT_OUTPUT_DIR = ../out
+PROJECTRELATIVE_PATH = src
+O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
+
+# Object files for local .cc and .msg files
+OBJS = \
+    $O/buffer/TTDoubleBuffer.o \
+    $O/buffer/TTQueueBuffer.o \
+    $O/buffer/BufferManager.o \
+    $O/buffer/TTBuffer.o \
+    $O/buffer/Buffer.o \
+    $O/configuration/ConfigurationUtils.o \
+    $O/ctc/TTIncoming.o \
+    $O/ctc/Incoming.o \
+    $O/linklayer/TTEInput.o \
+    $O/linklayer/TTEOutput.o \
+    $O/linklayer/Sync.o \
+    $O/scheduler/SchedulerEvent.o \
+    $O/scheduler/TTEScheduler.o \
+    $O/linklayer/ethernet/CTFrame_m.o \
+    $O/scheduler/SchedulerMessage_m.o \
+    $O/scheduler/SchedulerMessageEvents_m.o
+
+# Message files
+MSGFILES = \
+    linklayer/ethernet/CTFrame.msg \
+    scheduler/SchedulerMessage.msg \
+    scheduler/SchedulerMessageEvents.msg
+
+# Other makefile variables (-K)
+INET_PROJ=../../inet
+
+#------------------------------------------------------------------------------
+
+# Pull in OMNeT++ configuration (Makefile.inc or configuser.vc)
+
+ifneq ("$(OMNETPP_CONFIGFILE)","")
+CONFIGFILE = $(OMNETPP_CONFIGFILE)
+else
+ifneq ("$(OMNETPP_ROOT)","")
+CONFIGFILE = $(OMNETPP_ROOT)/Makefile.inc
+else
+CONFIGFILE = $(shell opp_configfilepath)
+endif
+endif
+
+ifeq ("$(wildcard $(CONFIGFILE))","")
+$(error Config file '$(CONFIGFILE)' does not exist -- add the OMNeT++ bin directory to the path so that opp_configfilepath can be found, or set the OMNETPP_CONFIGFILE variable to point to Makefile.inc)
+endif
+
+include $(CONFIGFILE)
+
+# Simulation kernel and user interface libraries
+OMNETPP_LIB_SUBDIR = $(OMNETPP_LIB_DIR)/$(TOOLCHAIN_NAME)
+OMNETPP_LIBS = -L"$(OMNETPP_LIB_SUBDIR)" -L"$(OMNETPP_LIB_DIR)" -loppenvir$D $(KERNEL_LIBS) $(SYS_LIBS)
+
+COPTS = $(CFLAGS) -DWITH_TTE_COMMON $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)
+MSGCOPTS = $(INCLUDE_PATH)
+
+#------------------------------------------------------------------------------
+# User-supplied makefile fragment(s)
+# >>>
+# <<<
+#------------------------------------------------------------------------------
+
+# Main target
+all: $(TARGET)
+
+$(TARGET) : $O/$(TARGET)
+	$(LN) $O/$(TARGET) .
+
+$O/$(TARGET): $(OBJS)  $(wildcard $(EXTRA_OBJS)) Makefile
+	@$(MKPATH) $O
+	$(SHLIB_LD) -o $O/$(TARGET)  $(OBJS) $(EXTRA_OBJS) $(LIBS) $(OMNETPP_LIBS) $(LDFLAGS)
+	$(SHLIB_POSTPROCESS) $O/$(TARGET)
+
+.PHONY:
+
+.SUFFIXES: .cc
+
+$O/%.o: %.cc
+	@$(MKPATH) $(dir $@)
+	$(CXX) -c $(COPTS) -o $@ $<
+
+%_m.cc %_m.h: %.msg
+	$(MSGC) -s _m.cc $(MSGCOPTS) $?
+
+msgheaders: $(MSGFILES:.msg=_m.h)
+
+clean:
+	-rm -rf $O
+	-rm -f TTEthernetSupport TTEthernetSupport.exe libTTEthernetSupport.so libTTEthernetSupport.a libTTEthernetSupport.dll libTTEthernetSupport.dylib
+	-rm -f ./*_m.cc ./*_m.h
+	-rm -f api/*_m.cc api/*_m.h
+	-rm -f applications/*_m.cc applications/*_m.h
+	-rm -f buffer/*_m.cc buffer/*_m.h
+	-rm -f configuration/*_m.cc configuration/*_m.h
+	-rm -f ctc/*_m.cc ctc/*_m.h
+	-rm -f linklayer/*_m.cc linklayer/*_m.h
+	-rm -f linklayer/ethernet/*_m.cc linklayer/ethernet/*_m.h
+	-rm -f nodes/*_m.cc nodes/*_m.h
+	-rm -f nodes/ethernet/*_m.cc nodes/ethernet/*_m.h
+	-rm -f scheduler/*_m.cc scheduler/*_m.h
+
+cleanall: clean
+	-rm -rf $(PROJECT_OUTPUT_DIR)
+
+depend:
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc applications/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/buffer/TTBuffer.o: buffer/TTBuffer.cc \
+	scheduler/SchedulerEvent.h \
+	buffer/TTBuffer.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/TTEScheduler.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	linklayer/ethernet/CTFrame_m.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/buffer/Buffer.o: buffer/Buffer.cc \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
+	buffer/TTBuffer.h \
+	buffer/TTQueueBuffer.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/buffer/TTDoubleBuffer.o: buffer/TTDoubleBuffer.cc \
+	buffer/TTDoubleBuffer.h \
+	buffer/TTBuffer.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/buffer/BufferManager.o: buffer/BufferManager.cc \
+	ctc/Incoming.h \
+	buffer/BufferManager.h \
+	configuration/ConfigurationUtils.h \
+	linklayer/TTEInput.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/configuration/ConfigurationUtils.o: configuration/ConfigurationUtils.cc \
+	configuration/ConfigurationUtils.h
+$O/ctc/TTIncoming.o: ctc/TTIncoming.cc \
+	scheduler/SchedulerEvent.h \
+	ctc/Incoming.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/TTEScheduler.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	ctc/TTIncoming.h
+$O/ctc/Incoming.o: ctc/Incoming.cc \
+	ctc/Incoming.h
+$O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
+	$(INET_PROJ)/src/base/IPassiveQueue.h \
+	$(INET_PROJ)/src/base/AbstractQueue.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	linklayer/TTEOutput.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/base/EnqueueHook.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	buffer/TTDoubleBuffer.h \
+	buffer/TTBuffer.h \
+	$(INET_PROJ)/src/base/QueueWithQoS.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
+$O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
+	ctc/Incoming.h \
+	configuration/ConfigurationUtils.h \
+	linklayer/TTEInput.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/linklayer/Sync.o: linklayer/Sync.cc \
+	linklayer/Sync.h
+$O/linklayer/ethernet/CTFrame_m.o: linklayer/ethernet/CTFrame_m.cc \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	linklayer/ethernet/CTFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/scheduler/SchedulerMessageEvents_m.o: scheduler/SchedulerMessageEvents_m.cc \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/SchedulerMessageEvents_m.h
+$O/scheduler/SchedulerMessage_m.o: scheduler/SchedulerMessage_m.cc \
+	scheduler/SchedulerMessage_m.h
+$O/scheduler/TTEScheduler.o: scheduler/TTEScheduler.cc \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessage_m.h \
+	configuration/ConfigurationUtils.h \
+	scheduler/TTEScheduler.h \
+	scheduler/SchedulerMessageEvents_m.h
+$O/scheduler/SchedulerEvent.o: scheduler/SchedulerEvent.cc \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessage_m.h
+
