@@ -84,6 +84,7 @@ void TTEScheduler::handleMessage(cMessage *msg)
 	}
 	else if(msg->isSelfMessage() && msg->getKind() == NEW_CYCLE){
 		lastCycleStart=simTime();
+		lastCycleTicks+=par("cycle_ticks").longValue();
 		scheduleAt(lastCycleStart+precision(tick*par("cycle_ticks")), msg);
 		//now the precision can be changed (TBD)
 	}
@@ -91,6 +92,10 @@ void TTEScheduler::handleMessage(cMessage *msg)
 
 unsigned int TTEScheduler::getTicks(){
 	return precision(simTime()-lastCycleStart)/tick;
+}
+
+unsigned long TTEScheduler::getTotalTicks(){
+    return lastCycleTicks+getTicks();
 }
 
 SimTime TTEScheduler::precision(SimTime logical){

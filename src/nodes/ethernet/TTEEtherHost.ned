@@ -35,7 +35,7 @@ import inet.applications.ethernet.EtherAppCli;
 module TTEEtherHost
 {
     parameters:
-        @display("bgb=270,314;i=device/device");
+        @display("bgb=596,314;i=device/device");
         string network_configuration;
         string device_name;
     gates:

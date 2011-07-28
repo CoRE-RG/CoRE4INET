@@ -11,7 +11,7 @@ module TTEEtherSwitch
 {
     parameters:
         @node();
-        @display("i=block/switch;bgb=276,302");
+        @display("i=block/switch;bgb=666,302");
         string network_configuration;
         string device_name;
 

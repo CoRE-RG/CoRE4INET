@@ -62,11 +62,18 @@ void BufferManager::initialize(int stage)
 					newCTCModule->par("permanence_pit")=ConfigurationUtils::time2ticks(
 							ttincoming->getPermanencePit(),getParentModule()->getSubmodule("tteScheduler")->par("tick_ns"));
 				}
-	//			else if(!incoming->eClass()->getName().compare("RCIncoming")){
-	//				moduleType = cModuleType::get("ttethernet.buffer.TTDoubleBuffer");
-	//				newCTCModule = moduleType->create("laladede", getParentModule());
-	//				//parameters
-	//			}
+				else if(incoming->eClass()->getName() == "RCIncoming"){
+				    Device_Specification::RCIncoming *rcincoming = incoming->as<Device_Specification::RCIncoming>();
+					moduleType = cModuleType::get("ttethernet.ctc.RCIncoming");
+					std::string ctcName = vls->getRefVirtualLink()->getVlid().c_str();
+					ctcName.append("_CTC");
+					newCTCModule = moduleType->create(ctcName.c_str(), getParentModule());
+					//parameters
+					newCTCModule->par("bag")=ConfigurationUtils::time2ticks(
+					        rcincoming->getRefBagAccount()->getBag(),getParentModule()->getSubmodule("tteScheduler")->par("tick_ns"));
+					newCTCModule->par("jitter")=ConfigurationUtils::time2ticks(
+                            rcincoming->getRefBagAccount()->getJitter(),getParentModule()->getSubmodule("tteScheduler")->par("tick_ns"));
+				}
 				else {
 					continue;
 				}
@@ -80,7 +87,7 @@ void BufferManager::initialize(int stage)
 				for(unsigned int k=0; k<outgoingList.size(); k++)
 				{
 					Outgoing_ptr outgoing = outgoingList.get(k);
-					if(!outgoing->eClass()->getName().compare("TTOutgoing")){
+					if(outgoing->eClass()->getName() == "TTOutgoing"){
 						TTOutgoing_ptr ttoutgoing = outgoing->as< TTOutgoing >();
 						//TODO: This may be wrong! What is the difference between incoming and outgoing buffer depth
 						if(incoming->getBufferDepth()>1){

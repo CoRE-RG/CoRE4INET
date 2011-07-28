@@ -56,6 +56,7 @@ OBJS = \
     $O/buffer/TTBuffer.o \
     $O/buffer/Buffer.o \
     $O/configuration/ConfigurationUtils.o \
+    $O/ctc/RCIncoming.o \
     $O/ctc/TTIncoming.o \
     $O/ctc/Incoming.o \
     $O/linklayer/TTEInput.o \
@@ -218,6 +219,11 @@ $O/ctc/TTIncoming.o: ctc/TTIncoming.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	ctc/TTIncoming.h
+$O/ctc/RCIncoming.o: ctc/RCIncoming.cc \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/TTEScheduler.h \
+	ctc/RCIncoming.h
 $O/ctc/Incoming.o: ctc/Incoming.cc \
 	ctc/Incoming.h
 $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \

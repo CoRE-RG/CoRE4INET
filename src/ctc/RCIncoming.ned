@@ -13,36 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_TTESCHEDULER_H_
-#define __TTETHERNETMODELV2_TTESCHEDULER_H_
+package ttethernet.ctc;
 
-#include <omnetpp.h>
-
-#include <SchedulerMessage_m.h>
-#include <SchedulerEvent.h>
-
-namespace TTEthernetModel {
-
-
-class TTEScheduler : public cSimpleModule
+//
+// TODO auto-generated module
+//
+simple RCIncoming extends Incoming
 {
-private:
-	SimTime tick;
-	SimTime lastCycleStart;
-	unsigned long lastCycleTicks;
-
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-    virtual SimTime precision(SimTime logical);
-
-  public:
-    virtual unsigned int getTicks();
-    virtual unsigned long getTotalTicks();
-    virtual void registerEvent(SchedulerEvent *event);
-
-};
-
-} //namespace
-
-#endif
+    parameters:
+        @class(RCIncoming);
+        int bag;
+        int jitter;
+}
