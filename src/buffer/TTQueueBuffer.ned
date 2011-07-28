@@ -21,5 +21,6 @@ package ttethernet.buffer;
 simple TTQueueBuffer extends TTBuffer
 {
     @class(TTQueueBuffer);
+    @statistic[queueLength](title="Queue Length"; record=vector);
     
 }

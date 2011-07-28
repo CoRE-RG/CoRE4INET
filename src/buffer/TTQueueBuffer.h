@@ -26,17 +26,23 @@ namespace TTEthernetModel {
  */
 class TTQueueBuffer : public TTBuffer
 {
-	public:
-	TTQueueBuffer();
-		virtual ~TTQueueBuffer();
+    public:
+        TTQueueBuffer();
+        virtual ~TTQueueBuffer();
 
-	private:
-		cQueue frames;
-	  protected:
-		virtual void initialize();
-		virtual void enqueue(EtherFrame *newFrame);
-		virtual EtherFrame* dequeue();
-	};
+    private:
+        cQueue frames;
+
+    private:
+        virtual void initializeStatistics();
+    protected:
+        virtual void initialize();
+        virtual void enqueue(EtherFrame *newFrame);
+        virtual EtherFrame* dequeue();
+
+    protected:
+        static simsignal_t queueLengthSignal;
+};
 
 } //namespace
 

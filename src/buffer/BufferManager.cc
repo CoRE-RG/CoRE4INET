@@ -82,7 +82,14 @@ void BufferManager::initialize(int stage)
 					Outgoing_ptr outgoing = outgoingList.get(k);
 					if(!outgoing->eClass()->getName().compare("TTOutgoing")){
 						TTOutgoing_ptr ttoutgoing = outgoing->as< TTOutgoing >();
-						moduleType = cModuleType::get("ttethernet.buffer.TTDoubleBuffer");
+						//TODO: This may be wrong! What is the difference between incoming and outgoing buffer depth
+						if(incoming->getBufferDepth()>1){
+							moduleType = cModuleType::get("ttethernet.buffer.TTQueueBuffer");
+						}
+						else{
+							moduleType = cModuleType::get("ttethernet.buffer.TTDoubleBuffer");
+						}
+
 						newModule = moduleType->create(vls->getRefVirtualLink()->getVlid().c_str(), getParentModule());
 						//parameters
 						newModule->par("sendWindowStart")=ConfigurationUtils::time2ticks(
