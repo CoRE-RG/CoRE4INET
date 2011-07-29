@@ -8,6 +8,8 @@
 #include <QueueWithQoS.h>
 #include <EtherFrame_m.h>
 
+#define NUM_RC_PRIORITIES 10
+
 namespace TTEthernetModel
 {
 	class INET_API TTEOutput : public cSimpleModule, public IPassiveQueue
@@ -19,8 +21,8 @@ namespace TTEthernetModel
 	private:
 		int framesRequested;
 		cQueue ttQueue;
+		cQueue rcQueue[NUM_RC_PRIORITIES];
 		cQueue beQueue;
-		cQueue rcQueue;
 
 	protected:
 		/** @name Redefined cSimpleModule member functions. */

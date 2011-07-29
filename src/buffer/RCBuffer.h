@@ -13,15 +13,35 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.linklayer;
+#ifndef __TTETHERNETMODELV2_RCBUFFER_H_
+#define __TTETHERNETMODELV2_RCBUFFER_H_
 
+#include <omnetpp.h>
+#include "Buffer.h"
+#include <SchedulerMessageEvents_m.h>
 
+namespace TTEthernetModel {
 
-//
-// TODO documentation
-//
-moduleinterface Port
+/**
+ * TODO - Generated class
+ */
+class RCBuffer : public virtual Buffer
 {
-    parameters:
-    gates:
-}
+  private:
+    bool bagExpired;
+    unsigned int numReset;
+    SchedulerTimerEvent *timerMessage;
+
+  public:
+    RCBuffer();
+    virtual ~RCBuffer();
+    virtual void resetBag();
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
+
+} //namespace
+
+#endif

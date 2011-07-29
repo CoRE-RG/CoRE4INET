@@ -24,7 +24,7 @@
  */
 namespace TTEthernetModel
 {
-	class TTBuffer : public Buffer
+	class TTBuffer : public virtual Buffer
 	{
 	  protected:
 		virtual void initialize();

@@ -21,7 +21,7 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 import inet.networklayer.queue.DropTailQueue;
 import inet.networklayer.queue.DropTailQoSQueue;
 
-module TTEPHYPort like Port
+module TTEPHYPort like IPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
@@ -31,6 +31,7 @@ module TTEPHYPort like Port
         inout phys @labels(EtherFrame);
         
         input TTin @directIn @labels(CTFrame);
+        input RCin @directIn @labels(CTFrame);
 
     submodules:
         tteOutput: TTEOutput {
@@ -56,4 +57,5 @@ module TTEPHYPort like Port
         phys <--> mac.phys;
         
         TTin --> tteOutput.TTin;
+        RCin --> tteOutput.RCin;
 }

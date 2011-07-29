@@ -13,37 +13,21 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_TTQUEUEBUFFER_H_
-#define __TTETHERNETMODELV2_TTQUEUEBUFFER_H_
+#ifndef __TTETHERNETMODELV2_TTDOUBLEBUFFER_H_
+#define __TTETHERNETMODELV2_TTDOUBLEBUFFER_H_
 
 #include <omnetpp.h>
 #include <TTBuffer.h>
-
-namespace TTEthernetModel {
+#include <QueueBuffer.h>
+#include <EtherFrame_m.h>
 
 /**
  * TODO - Generated class
  */
-class TTQueueBuffer : public TTBuffer
+namespace TTEthernetModel
 {
-    public:
-        TTQueueBuffer();
-        virtual ~TTQueueBuffer();
-
-    private:
-        cQueue frames;
-
-    private:
-        virtual void initializeStatistics();
-    protected:
-        virtual void initialize();
-        virtual void enqueue(EtherFrame *newFrame);
-        virtual EtherFrame* dequeue();
-
-    protected:
-        static simsignal_t queueLengthSignal;
+class TTQueueBuffer : public TTBuffer, public QueueBuffer
+{
 };
-
-} //namespace
-
+}
 #endif

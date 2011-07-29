@@ -15,7 +15,9 @@
 
 package ttethernet.applications;
 
+import ttethernet.linklayer.IPort;
 
-moduleinterface ITTEApplication
+
+moduleinterface ITTEApplication extends IPort
 {
 }

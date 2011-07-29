@@ -15,18 +15,12 @@
 
 package ttethernet.buffer;
 
-import inet.networklayer.queue.IOutputQueue;
 //
 // TODO auto-generated module
 //
-simple Buffer like IOutputQueue
+simple RCQueueBuffer extends RCBuffer
 {
-    parameters:
-        @display("i=block/buffer");
-        @statistic[txPk](title="TX Packets"; record=count,vector);
-        int priority=-1;
-        
-    gates:
-        input in @labels(CTFrame);
-        output out @labels(CTFrame);
+    @class(RCQueueBuffer);
+    @statistic[queueLength](title="Queue Length"; record=vector);
+    
 }

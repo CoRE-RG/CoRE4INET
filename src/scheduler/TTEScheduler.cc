@@ -78,7 +78,7 @@ void TTEScheduler::registerEvent(SchedulerEvent *event){
 
 void TTEScheduler::handleMessage(cMessage *msg)
 {
-	if(msg->isSelfMessage() && msg->getKind() == ACTION_TIME_EVENT){
+	if(msg->isSelfMessage() && (msg->getKind() == ACTION_TIME_EVENT || msg->getKind() == TIMER_EVENT )){
 		SchedulerEvent *event= (SchedulerEvent*)msg;
 		sendDirect(event,event->getDestinationGate());
 	}

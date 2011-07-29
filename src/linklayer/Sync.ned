@@ -18,7 +18,11 @@ package ttethernet.linklayer;
 //
 // TODO auto-generated module
 //
-simple Sync like Port
+simple Sync like IPort
 {
     @display("i=block/timer");
+    
+    gates:
+        input TTin @directIn @labels(CTFrame);
+        input RCin @directIn @labels(CTFrame);
 }

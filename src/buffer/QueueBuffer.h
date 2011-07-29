@@ -13,20 +13,36 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.buffer;
+#ifndef __TTETHERNETMODELV2_QUEUEBUFFER_H_
+#define __TTETHERNETMODELV2_QUEUEBUFFER_H_
 
-import inet.networklayer.queue.IOutputQueue;
-//
-// TODO auto-generated module
-//
-simple Buffer like IOutputQueue
+#include <omnetpp.h>
+#include <TTBuffer.h>
+
+namespace TTEthernetModel {
+
+/**
+ * TODO - Generated class
+ */
+class QueueBuffer : public virtual Buffer
 {
-    parameters:
-        @display("i=block/buffer");
-        @statistic[txPk](title="TX Packets"; record=count,vector);
-        int priority=-1;
-        
-    gates:
-        input in @labels(CTFrame);
-        output out @labels(CTFrame);
-}
+    public:
+        QueueBuffer();
+        virtual ~QueueBuffer();
+
+    private:
+        cQueue frames;
+
+    private:
+        virtual void initializeStatistics();
+    protected:
+        virtual void enqueue(EtherFrame *newFrame);
+        virtual EtherFrame* dequeue();
+
+    protected:
+        static simsignal_t queueLengthSignal;
+};
+
+} //namespace
+
+#endif

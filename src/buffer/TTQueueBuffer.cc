@@ -15,49 +15,6 @@
 
 #include "TTQueueBuffer.h"
 
-namespace TTEthernetModel {
+using namespace  ::TTEthernetModel;
 
-Define_Module( TTQueueBuffer);
-
-simsignal_t TTQueueBuffer::queueLengthSignal = SIMSIGNAL_NULL;
-
-TTQueueBuffer::TTQueueBuffer()
-{
-}
-
-TTQueueBuffer::~TTQueueBuffer()
-{
-}
-void TTQueueBuffer::initialize()
-{
-    TTBuffer::initialize();
-    ev << "Initialize TTQueueBuffer" << endl;
-    setIsEmpty(frames.length() == 0);
-    initializeStatistics();
-}
-
-void TTQueueBuffer::initializeStatistics()
-{
-    queueLengthSignal = registerSignal("queueLength");
-}
-
-void TTQueueBuffer::enqueue(EtherFrame *newFrame)
-{
-    frames.insert(newFrame);
-    setIsEmpty(frames.length() == 0);
-    emit(queueLengthSignal, frames.length());
-}
-
-EtherFrame * TTQueueBuffer::dequeue()
-{
-    if (frames.length() > 0)
-    {
-        setIsEmpty(frames.length() - 1 == 0);
-        emit(queueLengthSignal, frames.length() - 1);
-        return (EtherFrame*) frames.pop();
-    }
-    else
-        return NULL;
-}
-
-} //namespace
+Define_Module(TTQueueBuffer);

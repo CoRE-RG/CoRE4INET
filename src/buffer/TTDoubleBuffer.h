@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include <TTBuffer.h>
+#include <DoubleBuffer.h>
 #include <EtherFrame_m.h>
 
 /**
@@ -25,18 +26,8 @@
  */
 namespace TTEthernetModel
 {
-class TTDoubleBuffer : public TTBuffer
+class TTDoubleBuffer : public TTBuffer, public DoubleBuffer
 {
-	public:
-		TTDoubleBuffer();
-		virtual ~TTDoubleBuffer();
-
-	private:
-		EtherFrame *frame;
-	  protected:
-		virtual void initialize();
-		virtual void enqueue(EtherFrame *newFrame);
-		virtual EtherFrame* dequeue();
-	};
+};
 }
 #endif

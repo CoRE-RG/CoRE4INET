@@ -33,6 +33,7 @@ void TTBuffer::initialize()
 	frame->setDest("03 04 05 06 00 64");
 	frame->setCtID(100);
 	enqueue(frame);
+	//ENDE TEST
 
 
 	//Register Event
@@ -41,6 +42,8 @@ void TTBuffer::initialize()
 	event->setAction_time(par("sendWindowStart"));
 	event->setDestinationGate(gate("schedulerIn"));
 	tteScheduler->registerEvent(event);
+
+	setIsEmpty(true);
 }
 
 void TTBuffer::handleMessage(cMessage *msg)
@@ -52,7 +55,7 @@ void TTBuffer::handleMessage(cMessage *msg)
 		if(outgoingMessage){
 			//Send Message
 			for (std::list<cGate*>::iterator gate = destinationGates.begin();
-					gate != destinationGates.end(); gate++) {
+					gate != destinationGates.end(); ++gate) {
 				sendDirect(outgoingMessage->dup(), *gate);
 			}
 			recordPacketSent();

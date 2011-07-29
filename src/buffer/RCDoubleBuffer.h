@@ -13,20 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.buffer;
+#ifndef __TTETHERNETMODELV2_RCDOUBLEBUFFER_H_
+#define __TTETHERNETMODELV2_RCDOUBLEBUFFER_H_
 
-import inet.networklayer.queue.IOutputQueue;
-//
-// TODO auto-generated module
-//
-simple Buffer like IOutputQueue
+#include <omnetpp.h>
+#include <RCBuffer.h>
+#include <DoubleBuffer.h>
+#include <EtherFrame_m.h>
+
+/**
+ * TODO - Generated class
+ */
+namespace TTEthernetModel
 {
-    parameters:
-        @display("i=block/buffer");
-        @statistic[txPk](title="TX Packets"; record=count,vector);
-        int priority=-1;
-        
-    gates:
-        input in @labels(CTFrame);
-        output out @labels(CTFrame);
+class RCDoubleBuffer : public RCBuffer, DoubleBuffer
+{
+
+	};
 }
+
+
+
+#endif

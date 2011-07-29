@@ -25,4 +25,5 @@ simple TTEOutput like IOutputQueue
         output out;
 
         input TTin @labels(CTFrame);
+        input RCin @labels(CTFrame);
 }

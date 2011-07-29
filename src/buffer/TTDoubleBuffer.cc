@@ -18,39 +18,3 @@
 using namespace  ::TTEthernetModel;
 
 Define_Module(TTDoubleBuffer);
-
-
-TTDoubleBuffer::TTDoubleBuffer()
-{
-	frame=NULL;
-}
-
-TTDoubleBuffer::~TTDoubleBuffer()
-{
-	delete frame;
-}
-void TTDoubleBuffer::initialize()
-{
-	TTBuffer::initialize();
-	ev << "Initialize TTDoubleBuffer" << endl;
-
-	//Update displaystring
-	setIsEmpty(frame==NULL);
-}
-
-
-void TTDoubleBuffer::enqueue(EtherFrame *newFrame){
-	if(frame!=NULL)
-		delete frame;
-	else{
-		setIsEmpty(newFrame==NULL);
-	}
-	frame = newFrame;
-}
-
-EtherFrame * TTDoubleBuffer::dequeue(){
-	if(frame)
-		return frame->dup();
-	else
-		return NULL;
-}

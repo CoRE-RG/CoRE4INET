@@ -13,20 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.buffer;
+package ttethernet.linklayer;
 
-import inet.networklayer.queue.IOutputQueue;
+
+
 //
-// TODO auto-generated module
+// TODO documentation
 //
-simple Buffer like IOutputQueue
+moduleinterface IPort
 {
     parameters:
-        @display("i=block/buffer");
-        @statistic[txPk](title="TX Packets"; record=count,vector);
-        int priority=-1;
-        
     gates:
-        input in @labels(CTFrame);
-        output out @labels(CTFrame);
+        input TTin @directIn @labels(CTFrame);
+        input RCin @directIn @labels(CTFrame);
 }

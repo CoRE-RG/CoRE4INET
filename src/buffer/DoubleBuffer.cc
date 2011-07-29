@@ -13,20 +13,33 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.buffer;
+#include "DoubleBuffer.h"
 
-import inet.networklayer.queue.IOutputQueue;
-//
-// TODO auto-generated module
-//
-simple Buffer like IOutputQueue
+using namespace  ::TTEthernetModel;
+
+DoubleBuffer::DoubleBuffer()
 {
-    parameters:
-        @display("i=block/buffer");
-        @statistic[txPk](title="TX Packets"; record=count,vector);
-        int priority=-1;
-        
-    gates:
-        input in @labels(CTFrame);
-        output out @labels(CTFrame);
+	frame=NULL;
+}
+
+DoubleBuffer::~DoubleBuffer()
+{
+	delete frame;
+}
+
+
+void DoubleBuffer::enqueue(EtherFrame *newFrame){
+	if(frame!=NULL)
+		delete frame;
+	else{
+		setIsEmpty(newFrame==NULL);
+	}
+	frame = newFrame;
+}
+
+EtherFrame * DoubleBuffer::dequeue(){
+	if(frame)
+		return frame->dup();
+	else
+		return NULL;
 }
