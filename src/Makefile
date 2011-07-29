@@ -50,6 +50,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
 OBJS = \
+    $O/applications/TTETestApp.o \
     $O/buffer/TTDoubleBuffer.o \
     $O/buffer/TTQueueBuffer.o \
     $O/buffer/RCDoubleBuffer.o \
@@ -161,6 +162,8 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc applications/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/applications/TTETestApp.o: applications/TTETestApp.cc \
+	applications/TTETestApp.h
 $O/buffer/TTBuffer.o: buffer/TTBuffer.cc \
 	scheduler/SchedulerEvent.h \
 	buffer/TTBuffer.h \

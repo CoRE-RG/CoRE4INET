@@ -19,6 +19,7 @@
 
 package ttethernet.nodes.ethernet;
 
+import ttethernet.applications.TTETestApp;
 import ttethernet.scheduler.TTEScheduler;
 import ttethernet.buffer.BufferManager;
 import ttethernet.api.TTEthAPI;
@@ -71,6 +72,9 @@ module TTEEtherHost
         }
         tteScheduler: TTEScheduler {
             @display("p=52,180");
+        }
+        tteApp: TTETestApp {
+            @display("p=301,55");
         }
     connections:
         phy[0].phys <--> ethg;

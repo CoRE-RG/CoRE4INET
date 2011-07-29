@@ -90,7 +90,7 @@ void BufferManager::initialize(int stage)
 					if(outgoing->eClass()->getName() == "TTOutgoing"){
 						TTOutgoing_ptr ttoutgoing = outgoing->as< TTOutgoing >();
 						//TODO: This may be wrong! What is the difference between incoming and outgoing buffer depth
-						if(incoming->getBufferDepth()>1){
+						if(incoming->getBufferDepth()>0){
 							moduleType = cModuleType::get("ttethernet.buffer.TTQueueBuffer");
 						}
 						else{
@@ -107,7 +107,7 @@ void BufferManager::initialize(int stage)
 					else if(outgoing->eClass()->getName() == "RCOutgoing"){
                         RCOutgoing_ptr rcoutgoing = outgoing->as< RCOutgoing >();
                         //TODO: This may be wrong! What is the difference between incoming and outgoing buffer depth
-                        if(incoming->getBufferDepth()>1){
+                        if(incoming->getBufferDepth()>0){
                             moduleType = cModuleType::get("ttethernet.buffer.RCQueueBuffer");
                         }
                         else{
@@ -145,11 +145,28 @@ void BufferManager::initialize(int stage)
 					for(unsigned int m=0; m<outgoingportList.size(); m++)
 					{
 						Port_ptr outgoingport = outgoingportList.get(m);
+						string portName = ConfigurationUtils::getPortName(outgoingport,nc->getRefMappings());
 						int oport = ConfigurationUtils::getPortSerialNumber(outgoingport,nc->getRefMappings());
+						cModule *destModule;
+						//TODO fix parsing of porttype attribute and use it
+						if(portName.find("PHY") != string::npos){
+						    destModule = getParentModule()->getSubmodule("phy",oport);
+						}
+						else if(portName == "SYNC"){
+						    destModule = getParentModule()->getSubmodule("sync",oport);
+						}
+						else if(portName == "HOST"){
+                            destModule = getParentModule()->getSubmodule("tteApp",oport);
+                        }
+						else{
+						    ev << portName << ":" << oport << endl << endl;
+						    continue;
+						}
+
 						if(outgoing->eClass()->getName() == "TTOutgoing")
-						    ((TTEthernetModel::Buffer*)newModule)->addDestinationGate(getParentModule()->getSubmodule("phy",oport)->gate("TTin"));
+						    ((TTEthernetModel::Buffer*)newModule)->addDestinationGate(destModule->gate("TTin"));
 						else if(outgoing->eClass()->getName() == "RCOutgoing")
-						    ((TTEthernetModel::Buffer*)newModule)->addDestinationGate(getParentModule()->getSubmodule("phy",oport)->gate("RCin"));
+						    ((TTEthernetModel::Buffer*)newModule)->addDestinationGate(destModule->gate("RCin"));
 					}
 
 					//generate connections

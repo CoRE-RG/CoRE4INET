@@ -146,6 +146,39 @@ int ConfigurationUtils::getPortSerialNumber(System_Specification::Port_ptr port,
 	return -1;
 }
 
+string ConfigurationUtils::getPortName(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map){
+    ecorecpp::mapping::EList< Device_Target_Mapping::DeviceMapping >& devicemapList= map->getDeviceMappings()->getDeviceMapping();
+    for(unsigned int i=0;i<devicemapList.size();i++){
+        Device_Target_Mapping::PortMappings_ptr pms = devicemapList.get(i)->getPortMappings();
+        // Switch Portmappings
+        if(!pms->eClass()->getName().compare("SwPortMappings")){
+            ecorecpp::mapping::EList< Device_Target_Mapping::SwPortMapping >& portmapList = pms->as<Device_Target_Mapping::SwPortMappings>()->getTargetPortMapping();
+            //Go through port mappings
+            for(unsigned int j=0;j<portmapList.size();j++){
+                Device_Target_Mapping::SwPortMapping_ptr pm = portmapList.get(j);
+                std::string refname =pm->getRefPort()->getName();
+                //If reference device is our device
+                if(!pm->getRefPort()->getName().compare(port->getName())){
+                    return pm->getRefTargetPort()->getName();
+                }
+            }
+        }
+        // EndSystem Portmappings
+        else if(!pms->eClass()->getName().compare("EsPortMappings")){
+            ecorecpp::mapping::EList< Device_Target_Mapping::EsPortMapping >& portmapList = pms->as<Device_Target_Mapping::EsPortMappings>()->getTargetPortMapping();
+            //Go through port mappings
+            for(unsigned int j=0;j<portmapList.size();j++){
+                Device_Target_Mapping::EsPortMapping_ptr pm = portmapList.get(j);
+                //If reference device is our device and PHY is found we have a physical port
+                if(!pm->getRefPort()->getName().compare(port->getName())){
+                    return pm->getRefTargetPort()->getName();
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
 int ConfigurationUtils::getVLid(System_Specification::VirtualLink_ptr vl, Device_Target_Mapping::Mappings_ptr map){
 	Virtuallink_Map::VirtualLinkMapping_ptr vlming = map->getRefVirtualLinkMappings();
 	ecorecpp::mapping::EList< Virtuallink_Map::VirtualLinkMap >& vlmList = vlming->getVirtualLinkMap();

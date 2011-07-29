@@ -54,6 +54,7 @@ public:
 	//Find Utils
 	static Device_Specification::DeviceSpecification_ptr getDeviceSpecification(std::string device_name, Network_Configuration::NetworkConfig_ptr nc);
 	static int getPortSerialNumber(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
+	static string getPortName(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
 	static int getVLid(System_Specification::VirtualLink_ptr vl, Device_Target_Mapping::Mappings_ptr map);
 	static System_Specification::VirtualLink_ptr getVLfromVLid(int vlid, Device_Target_Mapping::Mappings_ptr map);
 };
