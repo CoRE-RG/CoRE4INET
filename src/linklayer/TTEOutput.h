@@ -7,6 +7,7 @@
 #include <IPassiveQueue.h>
 #include <QueueWithQoS.h>
 #include <EtherFrame_m.h>
+#include <TTBuffer.h>
 
 #define NUM_RC_PRIORITIES 10
 
@@ -17,13 +18,21 @@ namespace TTEthernetModel
 	public:
 		TTEOutput();
 		virtual ~TTEOutput();
+		virtual void registerTTBuffer(TTBuffer *buffer);
 
 	private:
+		cChannel *outChannel;
 		int framesRequested;
 		cQueue ttQueue;
 		cQueue rcQueue[NUM_RC_PRIORITIES];
 		cQueue beQueue;
-
+		std::vector < TTBuffer * > ttBuffers;
+		size_t ttBuffersPos;
+    protected:
+        static simsignal_t ttQueueLengthSignal;
+        static simsignal_t beQueueLengthSignal;
+private:
+		virtual bool isTransmissionAllowed(EtherFrame *message);
 	protected:
 		/** @name Redefined cSimpleModule member functions. */
 		//@{

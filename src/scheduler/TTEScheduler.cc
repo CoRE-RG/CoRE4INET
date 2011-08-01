@@ -43,12 +43,10 @@ void TTEScheduler::initialize()
 		TargetDevice_ptr td = ds->as< Switch >()->getRefDeviceMapping()->getRefTargetDevice();
 		if(td->eClass()->getName() == ("TTTechIpTargetDevice")){
 			TTTechIpTargetDevice_ptr iptd = td->as< TTTechIpTargetDevice >();
-			par("tick_ns").setLongValue(ConfigurationUtils::freq2ns(iptd->getClockSpeed()));
+			par("tick").setDoubleValue(ConfigurationUtils::freq2s(iptd->getClockSpeed()));
 			//TODO Infomessage of parameter change
 		}
 	}
-
-	tick.setRaw(par("tick_ns").longValue()*pow(10,SimTime::SCALEEXP_NS-SimTime::getScaleExp()));
 
 	//Start Timer
 	scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
@@ -57,21 +55,25 @@ void TTEScheduler::initialize()
 }
 
 void TTEScheduler::registerEvent(SchedulerEvent *event){
+#ifdef DEBUG
 	Enter_Method("registerEvent(SchedulerEvent %s)",event->getName());
+#else
+	Enter_Method_Silent();
+#endif
 	take(event);
 	if(event->getKind() == ACTION_TIME_EVENT){
 		SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*)event;
 
 		if(actionTimeEvent->getAction_time()>getTicks()){
-			scheduleAt(simTime()+precision(tick*actionTimeEvent->getAction_time()),actionTimeEvent);
+			scheduleAt(simTime()+precision(par("tick").doubleValue()*actionTimeEvent->getAction_time()),actionTimeEvent);
 		}
 		else{
-			scheduleAt(simTime()+precision(tick*(actionTimeEvent->getAction_time()-getTicks()+par("cycle_ticks").longValue())),actionTimeEvent);
+			scheduleAt(simTime()+precision(par("tick").doubleValue()*(actionTimeEvent->getAction_time()-getTicks()+par("cycle_ticks").longValue())),actionTimeEvent);
 		}
 	}
 	else if(event->getKind() == TIMER_EVENT){
 		SchedulerTimerEvent *timerEvent = (SchedulerTimerEvent*)event;;
-		scheduleAt(simTime()+precision(tick*timerEvent->getTimer()),event);
+		scheduleAt(simTime()+precision(par("tick").doubleValue()*timerEvent->getTimer()),event);
 	}
 }
 
@@ -85,13 +87,13 @@ void TTEScheduler::handleMessage(cMessage *msg)
 	else if(msg->isSelfMessage() && msg->getKind() == NEW_CYCLE){
 		lastCycleStart=simTime();
 		lastCycleTicks+=par("cycle_ticks").longValue();
-		scheduleAt(lastCycleStart+precision(tick*par("cycle_ticks")), msg);
+		scheduleAt(lastCycleStart+precision(par("tick").doubleValue()*par("cycle_ticks").longValue()), msg);
 		//now the precision can be changed (TBD)
 	}
 }
 
 unsigned int TTEScheduler::getTicks(){
-	return precision(simTime()-lastCycleStart)/tick;
+	return (int)(precision(simTime()-lastCycleStart)/par("tick").doubleValue()).dbl();
 }
 
 unsigned long TTEScheduler::getTotalTicks(){

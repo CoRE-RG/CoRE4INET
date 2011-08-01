@@ -19,7 +19,10 @@ import inet.networklayer.queue.IOutputQueue;
 
 simple TTEOutput like IOutputQueue
 {
-    @display("i=block/tx");
+    parameters:
+        @display("i=block/tx");
+        @statistic[ttQueueLength](title="TT-Queue Length"; record=vector);
+        @statistic[beQueueLength](title="BE-Queue Length"; record=vector);
     gates:
         input in;
         output out;

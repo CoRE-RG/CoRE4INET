@@ -48,8 +48,8 @@ public:
 	//Conversion Utils
 	static long mac2long(std::string string);
 	static void mac2Bytes(std::string string, uint8_t string_len, uint8_t mac[], uint8_t mac_len);
-	static unsigned long time2ticks(std::string string,unsigned int tick_nanoseconds);
-	static unsigned long freq2ns(std::string string);
+	static unsigned long time2ticks(std::string string, double tick);
+	static double freq2s(std::string string);
 
 	//Find Utils
 	static Device_Specification::DeviceSpecification_ptr getDeviceSpecification(std::string device_name, Network_Configuration::NetworkConfig_ptr nc);

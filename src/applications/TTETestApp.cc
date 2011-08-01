@@ -14,6 +14,7 @@
 // 
 
 #include "TTETestApp.h"
+#include <CTFrame_m.h>
 
 namespace TTEthernetModel {
 
@@ -21,11 +22,22 @@ Define_Module(TTETestApp);
 
 void TTETestApp::initialize()
 {
-    // TODO - Generated method body
+    scheduleAt(simTime(), new cMessage("ACTIVATOR!"));
 }
 
 void TTETestApp::handleMessage(cMessage *msg)
 {
+    if(!msg->arrivedOn("TTin") && *new std::string(getParentModule()->getName()) != "videoclient"){
+        CTFrame *frame = new CTFrame("CT-ID=100");
+        frame->setDest("03 04 05 06 00 64");
+        frame->setCtID(100);
+        //ENDE TEST
+
+        if(getParentModule()->getSubmodule("VL_TT_100_CTC"))
+            sendDirect(frame,getParentModule()->getSubmodule("VL_TT_100_CTC")->gate("in"));
+    }
+
+
     delete msg;
     // TODO - Generated method body
 }

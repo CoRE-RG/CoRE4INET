@@ -37,15 +37,6 @@ void RCBuffer::initialize()
 
     //Update displaystring
     setIsEmpty(true);
-
-
-    //Test:
-    CTFrame *frame = new CTFrame("CT-ID=4043");
-    frame->setDest("03 04 05 06 0F CB");
-    frame->setCtID(4043);
-    enqueue(frame);
-    resetBag();
-    //ENDE TEST
 }
 
 void RCBuffer::handleMessage(cMessage *msg)

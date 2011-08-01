@@ -14,7 +14,6 @@
 // 
 
 #include "TTBuffer.h"
-#include <CTFrame_m.h>
 #include <TTEScheduler.h>
 #include <SchedulerMessageEvents_m.h>
 
@@ -26,15 +25,6 @@ void TTBuffer::initialize()
 {
 	Buffer::initialize();
 	ev << "Initialize TTBuffer" << endl;
-    // TODO - Generated method body
-
-	//Test:
-	CTFrame *frame = new CTFrame("CT-ID=100");
-	frame->setDest("03 04 05 06 00 64");
-	frame->setCtID(100);
-	enqueue(frame);
-	//ENDE TEST
-
 
 	//Register Event
 	TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("tteScheduler");

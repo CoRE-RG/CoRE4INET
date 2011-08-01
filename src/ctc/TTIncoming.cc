@@ -22,6 +22,16 @@ namespace TTEthernetModel {
 
 Define_Module(TTIncoming);
 
+TTIncoming::TTIncoming(){
+    frame=NULL;
+}
+
+TTIncoming::~TTIncoming(){
+    if(frame!=NULL){
+        delete frame;
+    }
+}
+
 void TTIncoming::initialize()
 {
     // TODO - Generated method body
@@ -35,6 +45,9 @@ void TTIncoming::handleMessage(cMessage *msg)
 		//get current time in cylce
 		unsigned int currentTicks = tteScheduler->getTicks();
 		//Now check for correct arrival:
+		if(frame!=NULL){
+		    ev.printf("Received frame before permanence point of previous frame \n");
+		}
 		//Check too early
 		if(currentTicks < (unsigned int)par("receive_window_start").longValue()){
 			ev.printf("Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n", getName(), currentTicks, par("receive_window_start").longValue(),par("receive_window_end").longValue());
@@ -62,6 +75,7 @@ void TTIncoming::handleMessage(cMessage *msg)
 		delete msg;
 		getDisplayString().setTagArg("i2",0,"");
 		send(frame,"out");
+		frame = NULL;
 	}
 
 }

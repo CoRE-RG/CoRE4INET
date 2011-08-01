@@ -66,28 +66,28 @@ void ConfigurationUtils::mac2Bytes(std::string string, uint8_t string_len, uint8
 	}
 }
 
-unsigned long ConfigurationUtils::time2ticks(std::string string, unsigned int tick_nanoseconds){
-	unsigned long factor=0;
+unsigned long ConfigurationUtils::time2ticks(std::string string, double tick){
+	double factor=0;
 	std::string::size_type pos;
 	if((pos=string.find("ns"))!=std::string::npos){
-		factor=1;
+		factor=1000000000;
 	}
 	else if((pos=string.find("us"))!=std::string::npos){
-		factor=1000;
-	}
-	else if((pos=string.find("ms"))!=std::string::npos){
 		factor=1000000;
 	}
+	else if((pos=string.find("ms"))!=std::string::npos){
+		factor=1000;
+	}
 	else if((pos=string.find("s"))!=std::string::npos)
-		factor=1000000000;
+		factor=1;
 
 	if(pos!=std::string::npos)
 		string.erase(pos);
-	return (strtoul(string.c_str(),NULL,10)*factor)/tick_nanoseconds;
+	return round(::strtod(string.c_str(),0)/(tick*factor));
 }
 
-unsigned long ConfigurationUtils::freq2ns(std::string string){
-	unsigned long factor=0;
+double ConfigurationUtils::freq2s(std::string string){
+	double factor=0;
 	std::string::size_type pos;
 	if((pos=string.find("MHZ"))!=std::string::npos ||
 			(pos=string.find("MHz"))!=std::string::npos ||
@@ -96,7 +96,7 @@ unsigned long ConfigurationUtils::freq2ns(std::string string){
 	}
 	if(pos!=std::string::npos)
 		string.erase(pos);
-	return 1000000000/(strtof(string.c_str(),NULL)*factor);
+	return 1/(::strtod(string.c_str(),0)*factor);
 }
 
 Device_Specification::DeviceSpecification_ptr ConfigurationUtils::getDeviceSpecification(std::string device_name, Network_Configuration::NetworkConfig_ptr nc){

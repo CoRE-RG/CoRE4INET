@@ -27,7 +27,6 @@ namespace TTEthernetModel {
 class TTEScheduler : public cSimpleModule
 {
 private:
-	SimTime tick;
 	SimTime lastCycleStart;
 	unsigned long lastCycleTicks;
 

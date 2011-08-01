@@ -22,6 +22,6 @@ simple TTEScheduler
 {
     parameters:
         @display("i=block/cogwheel");
-        int tick_ns=80;
+        double tick @unit(s) = 80ns;
         int cycle_ticks=37500;
 }
