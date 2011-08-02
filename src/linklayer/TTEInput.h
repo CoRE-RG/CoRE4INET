@@ -35,6 +35,8 @@ namespace TTEthernetModel
 		std::map< uint16, std::list< Incoming* > > incomings;
 		unsigned int ct_marker;
 		unsigned int ct_mask;
+	protected:
+		static simsignal_t ctDroppedSignal;
 	public:
 		virtual void addIncoming(uint16 ctID, Incoming *incoming);
 	  protected:

@@ -21,6 +21,8 @@ using namespace TTEthernetModel;
 
 Define_Module(TTEInput);
 
+simsignal_t TTEInput::ctDroppedSignal = SIMSIGNAL_NULL;
+
 void TTEInput::initialize()
 {
     ConfigurationUtils::getPreloadedMMR();
@@ -49,7 +51,7 @@ void TTEInput::initialize()
 		}
 	}
 
-
+	ctDroppedSignal = registerSignal("ctDropped");
 }
 
 void TTEInput::addIncoming(uint16 ctID, Incoming *incoming){
@@ -74,6 +76,7 @@ void TTEInput::handleMessage(cMessage *msg)
     		else{
     			ev << "No incoming traffic allowed for CT ID " << getCTID(frame) << endl;
     			bubble("Frame not allowed here!");
+    			emit(ctDroppedSignal, 1);
     			delete frame;
     		}
     	}

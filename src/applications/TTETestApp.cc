@@ -41,6 +41,7 @@ void TTETestApp::handleMessage(cMessage *msg)
             CTFrame *frame = new CTFrame("CT-ID=101");
             frame->setDest("03 04 05 06 00 65");
             frame->setCtID(100);
+            frame->setByteLength(1500);
             //ENDE TEST
 
             if(getParentModule()->getSubmodule("VL_TT_101_CTC"))

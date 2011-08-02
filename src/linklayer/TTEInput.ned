@@ -22,7 +22,9 @@ import inet.networklayer.queue.IOutputQueue;
 //
 simple TTEInput like IOutputQueue
 {
-    @display("i=block/rx");
+    parameters:
+        @display("i=block/rx");
+        @statistic[ctDropped](title="Unconfigured CT dropped"; record=sum);
     gates:
         input in;
         output out;
