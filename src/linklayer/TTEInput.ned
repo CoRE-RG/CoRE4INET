@@ -1,32 +1,25 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 package ttethernet.linklayer;
 
 import inet.networklayer.queue.IOutputQueue;
 
 //
-// TODO auto-generated module
+// Module for incoming traffic from MAC layer. The traffic is checked for
+// critical traffic ID and then forwarded either as best-effort traffic to
+// the upper layer or when critical traffic to the CTC module (via sendDirect).
 //
+// @see EtherLLC, IMacRelayUnit, IOutputQueue
+//
+// @author Till Steinbach
 simple TTEInput like IOutputQueue
 {
     parameters:
         @display("i=block/rx");
+        //Statistic of the amount of packets that were dropped due to no configured buffer/ctc
         @statistic[ctDropped](title="Unconfigured CT dropped"; record=sum);
     gates:
-        input in;
-        output out;
+        //Input from the lower layer (MAC layer)
+        input in @labels(EtherFrame);
+        //Output for best-effort frames to the upper layer (EtherLLC or IMacRelayUnit)
+        output out @labels(EtherFrame);
 
 }

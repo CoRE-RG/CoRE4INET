@@ -1,32 +1,32 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 package ttethernet.linklayer;
 
 import inet.networklayer.queue.IOutputQueue;
-
+//
+// Module for outgoing traffic to MAC layer. The module maintains the adherence of priorities
+// for all traffic classes.
+//
+// @todo Statistics for rate-constrained queue lengths (per priority if possible)
+// @todo Better documentation of behaviour!
+//
+// @see EtherLLC, IMacRelayUnit, IOutputQueue
+//
+// @author Till Steinbach
 simple TTEOutput like IOutputQueue
 {
     parameters:
         @display("i=block/tx");
+        //Statistic of the queue length of time-triggered frames
         @statistic[ttQueueLength](title="TT-Queue Length"; record=vector);
+        //Statistic of the queue length of best-effort frames
         @statistic[beQueueLength](title="BE-Queue Length"; record=vector);
     gates:
-        input in;
-        output out;
+        //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)
+        input in @labels(EtherFrame);
+        //Output to the lower layer (MAC layer)
+        output out @labels(EtherFrame);
 
+        //Input for time-triggered frames from the buffers
         input TTin @labels(CTFrame);
+        //Input for rate-constrained frames from the buffers
         input RCin @labels(CTFrame);
 }
