@@ -65,7 +65,7 @@ void TTEScheduler::registerEvent(SchedulerEvent *event){
 		SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*)event;
 
 		if(actionTimeEvent->getAction_time()>getTicks()){
-			scheduleAt(simTime()+precision(par("tick").doubleValue()*actionTimeEvent->getAction_time()),actionTimeEvent);
+			scheduleAt(lastCycleStart+precision(par("tick").doubleValue()*actionTimeEvent->getAction_time()),actionTimeEvent);
 		}
 		else{
 			scheduleAt(simTime()+precision(par("tick").doubleValue()*(actionTimeEvent->getAction_time()-getTicks()+par("cycle_ticks").longValue())),actionTimeEvent);
@@ -93,7 +93,7 @@ void TTEScheduler::handleMessage(cMessage *msg)
 }
 
 unsigned int TTEScheduler::getTicks(){
-	return (int)(precision(simTime()-lastCycleStart)/par("tick").doubleValue()).dbl();
+	return round((precision(simTime()-lastCycleStart)/par("tick").doubleValue()).dbl());
 }
 
 unsigned long TTEScheduler::getTotalTicks(){

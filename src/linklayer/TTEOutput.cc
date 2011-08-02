@@ -3,6 +3,7 @@
 #include <Buffer.h>
 #include <RCBuffer.h>
 #include <TTEScheduler.h>
+#include <TTBufferEmpty_m.h>
 
 using namespace TTEthernetModel;
 
@@ -35,21 +36,34 @@ void TTEOutput::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("TTin"))
     {
-        //TODO THIS ASSERT IS ONLY FOR DEBUGGING PURPOSES!
+        //TODO THIS ASSERT IS ONLY FOR DEBUGGING PURPOSES! Later it might be allowed to queue TTframes!?!?
         ASSERT(framesRequested>0);
         ASSERT(framesRequested==1);
         //TODO Hier überprüfen ob das so ok ist, insbesondere müssen die Buffer auch "leere" messages schicken damit der Buffer weiter gesetzt wird!
         ttBuffersPos=(++ttBuffersPos%ttBuffers.size());
 
-        if (framesRequested)
-        {
-            framesRequested--;
-            send(msg, gateBaseId("out"));
+        //If we have an empty message allow other frame to be sent
+        if(dynamic_cast<TTBufferEmpty *>(msg)){
+            if (framesRequested)
+            {
+                framesRequested--;
+                requestPacket();
+            }
+            delete msg;
         }
+        //Else send frame
         else
         {
-            ttQueue.insert(msg);
-            emit(ttQueueLengthSignal, ttQueue.length());
+            if (framesRequested)
+            {
+                framesRequested--;
+                send(msg, gateBaseId("out"));
+            }
+            else
+            {
+                ttQueue.insert(msg);
+                emit(ttQueueLengthSignal, ttQueue.length());
+            }
         }
     }
     else if (msg->arrivedOn("RCin"))
@@ -93,11 +107,11 @@ void TTEOutput::handleMessage(cMessage *msg)
             emit(beQueueLengthSignal, beQueue.length());
         }
     }
-
 }
 
 void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
 {
+    Enter_Method("registerTTBuffer(%s)",ttBuffer->getName());
     int sendWindowStart = ttBuffer->par("sendWindowStart");
     for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();)
     {
@@ -105,6 +119,17 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
         if (buffer==ttBuffers.end() || (*buffer)->par("sendWindowStart").longValue() > sendWindowStart)
         {
             ttBuffers.insert(buffer, ttBuffer);
+            //Now doublecheck that the schedule is not overlapping for this port
+            for (std::vector<TTBuffer*>::iterator buffer2 = ttBuffers.begin(); buffer2 != ttBuffers.end();)
+            {
+                Buffer *tmpBuffer = *buffer2;
+                ++buffer2;
+                if (buffer2!=ttBuffers.end() &&
+                        (tmpBuffer->par("sendWindowEnd").longValue() > (*buffer2)->par("sendWindowStart").longValue()))
+                {
+                    opp_error("Port cannot be scheduled due to overlapping schedules: %s and %s", tmpBuffer->getName(), (*buffer2)->getName());
+                }
+            }
             return;
         }
     }
@@ -114,6 +139,12 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
 
 void TTEOutput::finish()
 {
+    ttQueue.clear();
+    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    {
+        rcQueue[i].clear();
+    }
+    beQueue.clear();
 }
 
 void TTEOutput::requestPacket()
@@ -177,9 +208,19 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
     unsigned long sendTicks = ceil((sendTime/scheduler->par("tick")).dbl());
     unsigned long startTicks = ttBuffers[ttBuffersPos]->par("sendWindowStart").longValue();
     unsigned long endTicks = ttBuffers[ttBuffersPos]->par("sendWindowEnd").longValue();
-    //TODO: More complex calculations needed
-    if((scheduler->getTicks()+sendTicks)>startTicks
-            && scheduler->getTicks() < endTicks){
+
+    //Send Window Start is in next cycle
+    if(scheduler->getTicks()>startTicks){
+        startTicks+=scheduler->par("cycle_ticks").longValue();
+        endTicks+=scheduler->par("cycle_ticks").longValue();
+    }
+    //Send Window End is in next cycle
+    else if(scheduler->getTicks()>endTicks){
+        endTicks+=scheduler->par("cycle_ticks").longValue();
+    }
+
+    //TODO: Perhaps more complex calculations needed?
+    if((scheduler->getTicks()+sendTicks)>=startTicks){
         ev << "transmission not allowed!" << endl;
         return false;
     }

@@ -70,12 +70,14 @@ OBJS = \
     $O/linklayer/Sync.o \
     $O/scheduler/SchedulerEvent.o \
     $O/scheduler/TTEScheduler.o \
+    $O/buffer/TTBufferEmpty_m.o \
     $O/linklayer/ethernet/CTFrame_m.o \
     $O/scheduler/SchedulerMessage_m.o \
     $O/scheduler/SchedulerMessageEvents_m.o
 
 # Message files
 MSGFILES = \
+    buffer/TTBufferEmpty.msg \
     linklayer/ethernet/CTFrame.msg \
     scheduler/SchedulerMessage.msg \
     scheduler/SchedulerMessageEvents.msg
@@ -181,6 +183,7 @@ $O/buffer/TTBuffer.o: buffer/TTBuffer.cc \
 	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	buffer/TTBufferEmpty_m.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/RCBuffer.o: buffer/RCBuffer.cc \
 	scheduler/SchedulerEvent.h \
@@ -215,6 +218,8 @@ $O/buffer/TTDoubleBuffer.o: buffer/TTDoubleBuffer.cc \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+$O/buffer/TTBufferEmpty_m.o: buffer/TTBufferEmpty_m.cc \
+	buffer/TTBufferEmpty_m.h
 $O/buffer/QueueBuffer.o: buffer/QueueBuffer.cc \
 	buffer/QueueBuffer.h \
 	buffer/TTBuffer.h \
@@ -313,6 +318,7 @@ $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
 	linklayer/TTEOutput.h \
 	buffer/Buffer.h \
 	$(INET_PROJ)/src/base/EnqueueHook.h \
+	buffer/TTBufferEmpty_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	scheduler/SchedulerEvent.h \

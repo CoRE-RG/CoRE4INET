@@ -16,6 +16,7 @@
 #include "TTBuffer.h"
 #include <TTEScheduler.h>
 #include <SchedulerMessageEvents_m.h>
+#include <TTBufferEmpty_m.h>
 
 using namespace TTEthernetModel;
 
@@ -42,15 +43,22 @@ void TTBuffer::handleMessage(cMessage *msg)
 
 	if(msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT){
 		cMessage *outgoingMessage = dequeue();
-		if(outgoingMessage){
-			//Send Message
-			for (std::list<cGate*>::iterator gate = destinationGates.begin();
-					gate != destinationGates.end(); ++gate) {
-				sendDirect(outgoingMessage->dup(), *gate);
-			}
-			recordPacketSent();
-			delete outgoingMessage;
-		}
+
+        //Send Message
+        for (std::list<cGate*>::iterator gate = destinationGates.begin();
+                gate != destinationGates.end(); ++gate) {
+            if(outgoingMessage){
+                sendDirect(outgoingMessage->dup(), *gate);
+            }
+            else{
+                sendDirect(new TTBufferEmpty("TT Buffer Empty"), *gate);
+            }
+        }
+        if(outgoingMessage){
+            recordPacketSent();
+            delete outgoingMessage;
+        }
+
 		//Reregister scheduler
 		TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("tteScheduler");
 		tteScheduler->registerEvent((SchedulerEvent *)msg);
