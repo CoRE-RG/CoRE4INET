@@ -29,6 +29,7 @@ void doUnpacking(cCommBuffer *, T& t) {
 
 
 
+namespace TTEthernetModel {
 
 Register_Class(CTFrame);
 
@@ -116,7 +117,7 @@ class CTFrameDescriptor : public cClassDescriptor
 
 Register_ClassDescriptor(CTFrameDescriptor);
 
-CTFrameDescriptor::CTFrameDescriptor() : cClassDescriptor("CTFrame", "EtherFrame")
+CTFrameDescriptor::CTFrameDescriptor() : cClassDescriptor("TTEthernetModel::CTFrame", "EtherFrame")
 {
 }
 
@@ -283,4 +284,5 @@ void *CTFrameDescriptor::getFieldStructPointer(void *object, int field, int i) c
     }
 }
 
+}; // end namespace TTEthernetModel
 

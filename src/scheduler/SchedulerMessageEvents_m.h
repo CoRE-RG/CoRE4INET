@@ -24,7 +24,8 @@ namespace TTEthernetModel {
  * Class generated from <tt>scheduler/SchedulerMessageEvents.msg</tt> by opp_msgc.
  * <pre>
  * message SchedulerActionTimeEvent extends SchedulerEvent {
- *     unsigned int action_time;
+ *         
+ *         unsigned int action_time;
  * }
  * </pre>
  */
@@ -57,7 +58,8 @@ inline void doUnpacking(cCommBuffer *b, SchedulerActionTimeEvent& obj) {obj.pars
  * Class generated from <tt>scheduler/SchedulerMessageEvents.msg</tt> by opp_msgc.
  * <pre>
  * message SchedulerTimerEvent extends SchedulerEvent {
- *     unsigned int timer;
+ *         
+ *         unsigned int timer;
  * }
  * </pre>
  */

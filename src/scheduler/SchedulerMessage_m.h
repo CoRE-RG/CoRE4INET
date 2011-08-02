@@ -20,8 +20,11 @@ namespace TTEthernetModel {
  * Enum generated from <tt>scheduler/SchedulerMessage.msg</tt> by opp_msgc.
  * <pre>
  * enum SchedulerMessageKind {
+ *     
  *     NEW_CYCLE=0;
+ *     
  *     ACTION_TIME_EVENT=1;
+ *     
  *     TIMER_EVENT=2;
  * }
  * </pre>

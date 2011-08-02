@@ -2,8 +2,9 @@ cplusplus {{
         #include "EtherFrame_m.h"
 }}
 
-class EtherFrame;
+class ::EtherFrame;
 
+namespace TTEthernetModel;
 //
 // Represents a critical traffic frame
 //

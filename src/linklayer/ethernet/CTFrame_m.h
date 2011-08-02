@@ -18,6 +18,7 @@
 // }}
 
 
+namespace TTEthernetModel {
 
 /**
  * Class generated from <tt>linklayer/ethernet/CTFrame.msg</tt> by opp_msgc.
@@ -59,5 +60,6 @@ class CTFrame : public ::EtherFrame
 inline void doPacking(cCommBuffer *b, CTFrame& obj) {obj.parsimPack(b);}
 inline void doUnpacking(cCommBuffer *b, CTFrame& obj) {obj.parsimUnpack(b);}
 
+}; // end namespace TTEthernetModel
 
 #endif // _CTFRAME_M_H_
