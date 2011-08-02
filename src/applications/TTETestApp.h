@@ -25,9 +25,9 @@ namespace TTEthernetModel {
  */
 class TTETestApp : public cSimpleModule
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

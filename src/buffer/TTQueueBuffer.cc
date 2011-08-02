@@ -15,6 +15,6 @@
 
 #include "TTQueueBuffer.h"
 
-using namespace  ::TTEthernetModel;
+using namespace ::TTEthernetModel;
 
-Define_Module(TTQueueBuffer);
+Define_Module( TTQueueBuffer);

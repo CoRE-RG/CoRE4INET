@@ -20,47 +20,51 @@
 
 using namespace TTEthernetModel;
 
-Define_Module(TTBuffer);
+Define_Module( TTBuffer);
 
 void TTBuffer::initialize()
 {
-	Buffer::initialize();
-	ev << "Initialize TTBuffer" << endl;
+    Buffer::initialize();
+    ev << "Initialize TTBuffer" << endl;
 
-	//Register Event
-	TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("tteScheduler");
-	SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("TTBuffer Scheduler Event",ACTION_TIME_EVENT);
-	event->setAction_time(par("sendWindowStart"));
-	event->setDestinationGate(gate("schedulerIn"));
-	tteScheduler->registerEvent(event);
+    //Register Event
+    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
+    event->setAction_time(par("sendWindowStart"));
+    event->setDestinationGate(gate("schedulerIn"));
+    tteScheduler->registerEvent(event);
 
-	setIsEmpty(true);
+    setIsEmpty(true);
 }
 
 void TTBuffer::handleMessage(cMessage *msg)
 {
-	Buffer::handleMessage(msg);
+    Buffer::handleMessage(msg);
 
-	if(msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT){
-		cMessage *outgoingMessage = dequeue();
+    if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
+    {
+        cMessage *outgoingMessage = dequeue();
 
         //Send Message
-        for (std::list<cGate*>::iterator gate = destinationGates.begin();
-                gate != destinationGates.end(); ++gate) {
-            if(outgoingMessage){
+        for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+        {
+            if (outgoingMessage)
+            {
                 sendDirect(outgoingMessage->dup(), *gate);
             }
-            else{
+            else
+            {
                 sendDirect(new TTBufferEmpty("TT Buffer Empty"), *gate);
             }
         }
-        if(outgoingMessage){
+        if (outgoingMessage)
+        {
             recordPacketSent();
             delete outgoingMessage;
         }
 
-		//Reregister scheduler
-		TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("tteScheduler");
-		tteScheduler->registerEvent((SchedulerEvent *)msg);
-	}
+        //Reregister scheduler
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        tteScheduler->registerEvent((SchedulerEvent *) msg);
+    }
 }

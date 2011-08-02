@@ -15,31 +15,33 @@
 
 #include "DoubleBuffer.h"
 
-using namespace  ::TTEthernetModel;
+using namespace ::TTEthernetModel;
 
 DoubleBuffer::DoubleBuffer()
 {
-	frame=NULL;
+    frame = NULL;
 }
 
 DoubleBuffer::~DoubleBuffer()
 {
-	delete frame;
+    delete frame;
 }
 
-
-void DoubleBuffer::enqueue(EtherFrame *newFrame){
-	if(frame!=NULL)
-		delete frame;
-	else{
-		setIsEmpty(newFrame==NULL);
-	}
-	frame = newFrame;
+void DoubleBuffer::enqueue(EtherFrame *newFrame)
+{
+    if (frame != NULL)
+        delete frame;
+    else
+    {
+        setIsEmpty(newFrame == NULL);
+    }
+    frame = newFrame;
 }
 
-EtherFrame * DoubleBuffer::dequeue(){
-	if(frame)
-		return frame->dup();
-	else
-		return NULL;
+EtherFrame * DoubleBuffer::dequeue()
+{
+    if (frame)
+        return frame->dup();
+    else
+        return NULL;
 }

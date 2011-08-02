@@ -22,86 +22,103 @@
 
 namespace TTEthernetModel {
 
-Define_Module(TTEScheduler);
+Define_Module( TTEScheduler);
 
 void TTEScheduler::initialize()
 {
-	ConfigurationUtils::getPreloadedMMR();
-	ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
-	ConfigurationUtils::resolveCommonAliases(mr);
-	::ecore::EObject_ptr eobj = mr->getByFilename(getParentModule()->par("network_configuration"));
-	assert(eobj);
-	NetworkConfig_ptr nc = ::ecore::instanceOf< NetworkConfig >(eobj);
-	assert(nc);
-	DeviceSpecification_ptr ds = ConfigurationUtils::getDeviceSpecification(getParentModule()->par("device_name").stdstringValue(),nc);
-	assert(ds);
+    ConfigurationUtils::getPreloadedMMR();
+    ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
+    ConfigurationUtils::resolveCommonAliases(mr);
+    ::ecore::EObject_ptr eobj = mr->getByFilename(getParentModule()->par("network_configuration"));
+    assert(eobj);
+    NetworkConfig_ptr nc = ::ecore::instanceOf<NetworkConfig>(eobj);
+    assert(nc);
+    DeviceSpecification_ptr ds = ConfigurationUtils::getDeviceSpecification(
+            getParentModule()->par("device_name").stdstringValue(), nc);
+    assert(ds);
 
-	//TODO cycle time auslesen
+    //TODO cycle time auslesen
 
 
-	if(ds->eClass()->getName() == "Switch"){
-		TargetDevice_ptr td = ds->as< Switch >()->getRefDeviceMapping()->getRefTargetDevice();
-		if(td->eClass()->getName() == ("TTTechIpTargetDevice")){
-			TTTechIpTargetDevice_ptr iptd = td->as< TTTechIpTargetDevice >();
-			par("tick").setDoubleValue(ConfigurationUtils::freq2s(iptd->getClockSpeed()));
-			//TODO Infomessage of parameter change
-		}
-	}
+    if (ds->eClass()->getName() == "Switch")
+    {
+        TargetDevice_ptr td = ds->as<Switch> ()->getRefDeviceMapping()->getRefTargetDevice();
+        if (td->eClass()->getName() == ("TTTechIpTargetDevice"))
+        {
+            TTTechIpTargetDevice_ptr iptd = td->as<TTTechIpTargetDevice> ();
+            par("tick").setDoubleValue(ConfigurationUtils::freq2s(iptd->getClockSpeed()));
+            //TODO Infomessage of parameter change
+        }
+    }
 
-	//Start Timer
-	scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
+    //Start Timer
+    scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
 
-	lastCycleStart=simTime();
+    lastCycleStart = simTime();
 }
 
-void TTEScheduler::registerEvent(SchedulerEvent *event){
+void TTEScheduler::registerEvent(SchedulerEvent *event)
+{
 #ifdef DEBUG
-	Enter_Method("registerEvent(SchedulerEvent %s)",event->getName());
+    Enter_Method("registerEvent(SchedulerEvent %s)",event->getName());
 #else
-	Enter_Method_Silent();
+    Enter_Method_Silent();
 #endif
-	take(event);
-	if(event->getKind() == ACTION_TIME_EVENT){
-		SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*)event;
+    take(event);
+    if (event->getKind() == ACTION_TIME_EVENT)
+    {
+        SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*) event;
 
-		if(actionTimeEvent->getAction_time()>getTicks()){
-			scheduleAt(lastCycleStart+precision(par("tick").doubleValue()*actionTimeEvent->getAction_time()),actionTimeEvent);
-		}
-		else{
-			scheduleAt(simTime()+precision(par("tick").doubleValue()*(actionTimeEvent->getAction_time()-getTicks()+par("cycle_ticks").longValue())),actionTimeEvent);
-		}
-	}
-	else if(event->getKind() == TIMER_EVENT){
-		SchedulerTimerEvent *timerEvent = (SchedulerTimerEvent*)event;;
-		scheduleAt(simTime()+precision(par("tick").doubleValue()*timerEvent->getTimer()),event);
-	}
+        if (actionTimeEvent->getAction_time() > getTicks())
+        {
+            scheduleAt(lastCycleStart + precision(par("tick").doubleValue() * actionTimeEvent->getAction_time()),
+                    actionTimeEvent);
+        }
+        else
+        {
+            scheduleAt(
+                    simTime() + precision(
+                            par("tick").doubleValue() * (actionTimeEvent->getAction_time() - getTicks() + par(
+                                    "cycle_ticks").longValue())), actionTimeEvent);
+        }
+    }
+    else if (event->getKind() == TIMER_EVENT)
+    {
+        SchedulerTimerEvent *timerEvent = (SchedulerTimerEvent*) event;
+        ;
+        scheduleAt(simTime() + precision(par("tick").doubleValue() * timerEvent->getTimer()), event);
+    }
 }
-
 
 void TTEScheduler::handleMessage(cMessage *msg)
 {
-	if(msg->isSelfMessage() && (msg->getKind() == ACTION_TIME_EVENT || msg->getKind() == TIMER_EVENT )){
-		SchedulerEvent *event= (SchedulerEvent*)msg;
-		sendDirect(event,event->getDestinationGate());
-	}
-	else if(msg->isSelfMessage() && msg->getKind() == NEW_CYCLE){
-		lastCycleStart=simTime();
-		lastCycleTicks+=par("cycle_ticks").longValue();
-		scheduleAt(lastCycleStart+precision(par("tick").doubleValue()*par("cycle_ticks").longValue()), msg);
-		//now the precision can be changed (TBD)
-	}
+    if (msg->isSelfMessage() && (msg->getKind() == ACTION_TIME_EVENT || msg->getKind() == TIMER_EVENT))
+    {
+        SchedulerEvent *event = (SchedulerEvent*) msg;
+        sendDirect(event, event->getDestinationGate());
+    }
+    else if (msg->isSelfMessage() && msg->getKind() == NEW_CYCLE)
+    {
+        lastCycleStart = simTime();
+        lastCycleTicks += par("cycle_ticks").longValue();
+        scheduleAt(lastCycleStart + precision(par("tick").doubleValue() * par("cycle_ticks").longValue()), msg);
+        //now the precision can be changed (TBD)
+    }
 }
 
-unsigned int TTEScheduler::getTicks(){
-	return round((precision(simTime()-lastCycleStart)/par("tick").doubleValue()).dbl());
+unsigned int TTEScheduler::getTicks()
+{
+    return round((precision(simTime() - lastCycleStart) / par("tick").doubleValue()).dbl());
 }
 
-unsigned long TTEScheduler::getTotalTicks(){
-    return lastCycleTicks+getTicks();
+unsigned long TTEScheduler::getTotalTicks()
+{
+    return lastCycleTicks + getTicks();
 }
 
-SimTime TTEScheduler::precision(SimTime logical){
-	return logical*1.000000;
+SimTime TTEScheduler::precision(SimTime logical)
+{
+    return logical * 1.000000;
 }
 
 } //namespace

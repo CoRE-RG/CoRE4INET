@@ -27,25 +27,24 @@
 /**
  * TODO - Generated class
  */
-namespace TTEthernetModel
+namespace TTEthernetModel {
+class TTEInput : public cSimpleModule
 {
-	class TTEInput : public cSimpleModule
-	{
-	private:
-		std::map< uint16, std::list< Incoming* > > incomings;
-		unsigned int ct_marker;
-		unsigned int ct_mask;
-	protected:
-		static simsignal_t ctDroppedSignal;
-	public:
-		virtual void addIncoming(uint16 ctID, Incoming *incoming);
-	  protected:
-		virtual void initialize();
-		virtual void handleMessage(cMessage *msg);
-	  private:
-		virtual bool isCT(EtherFrame *frame);
-		virtual uint16 getCTID(EtherFrame *frame);
-	};
+    private:
+        std::map<uint16, std::list<Incoming*> > incomings;
+        unsigned int ct_marker;
+        unsigned int ct_mask;
+    protected:
+        static simsignal_t ctDroppedSignal;
+    public:
+        virtual void addIncoming(uint16 ctID, Incoming *incoming);
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+    private:
+        virtual bool isCT(EtherFrame *frame);
+        virtual uint16 getCTID(EtherFrame *frame);
+};
 }
 
 #endif

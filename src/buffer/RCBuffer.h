@@ -27,19 +27,19 @@ namespace TTEthernetModel {
  */
 class RCBuffer : public virtual Buffer
 {
-  private:
-    bool bagExpired;
-    unsigned int numReset;
-    SchedulerTimerEvent *timerMessage;
+    private:
+        bool bagExpired;
+        unsigned int numReset;
+        SchedulerTimerEvent *timerMessage;
 
-  public:
-    RCBuffer();
-    virtual ~RCBuffer();
-    virtual void resetBag();
+    public:
+        RCBuffer();
+        virtual ~RCBuffer();
+        virtual void resetBag();
 
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

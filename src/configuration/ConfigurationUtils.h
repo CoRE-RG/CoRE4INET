@@ -36,27 +36,26 @@ using namespace ecore;
 using namespace ecorecpp;
 using namespace ecorecpp::mapping;
 
+class ConfigurationUtils
+{
 
+    public:
+        static ecorecpp::MetaModelRepository_ptr getPreloadedMMR();
+        static void resolveCommonAliases(ecorecpp::ModelRepository_ptr mr);
 
+        //Conversion Utils
+        static long mac2long(std::string string);
+        static void mac2Bytes(std::string string, uint8_t string_len, uint8_t mac[], uint8_t mac_len);
+        static unsigned long time2ticks(std::string string, double tick);
+        static double freq2s(std::string string);
 
-class ConfigurationUtils {
-
-public:
-	static ecorecpp::MetaModelRepository_ptr getPreloadedMMR();
-	static void resolveCommonAliases(ecorecpp::ModelRepository_ptr mr);
-
-	//Conversion Utils
-	static long mac2long(std::string string);
-	static void mac2Bytes(std::string string, uint8_t string_len, uint8_t mac[], uint8_t mac_len);
-	static unsigned long time2ticks(std::string string, double tick);
-	static double freq2s(std::string string);
-
-	//Find Utils
-	static Device_Specification::DeviceSpecification_ptr getDeviceSpecification(std::string device_name, Network_Configuration::NetworkConfig_ptr nc);
-	static int getPortSerialNumber(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
-	static string getPortName(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
-	static int getVLid(System_Specification::VirtualLink_ptr vl, Device_Target_Mapping::Mappings_ptr map);
-	static System_Specification::VirtualLink_ptr getVLfromVLid(int vlid, Device_Target_Mapping::Mappings_ptr map);
+        //Find Utils
+        static Device_Specification::DeviceSpecification_ptr getDeviceSpecification(std::string device_name,
+                Network_Configuration::NetworkConfig_ptr nc);
+        static int getPortSerialNumber(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
+        static string getPortName(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
+        static int getVLid(System_Specification::VirtualLink_ptr vl, Device_Target_Mapping::Mappings_ptr map);
+        static System_Specification::VirtualLink_ptr getVLfromVLid(int vlid, Device_Target_Mapping::Mappings_ptr map);
 };
 
 #endif /* CONFIGURATIONUTILS_H_ */

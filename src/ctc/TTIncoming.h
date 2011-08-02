@@ -28,15 +28,15 @@ namespace TTEthernetModel {
  */
 class TTIncoming : public Incoming
 {
-private:
-	EtherFrame *frame;
+    private:
+        EtherFrame *frame;
 
-public:
-	TTIncoming();
-	virtual ~TTIncoming();
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    public:
+        TTIncoming();
+        virtual ~TTIncoming();
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

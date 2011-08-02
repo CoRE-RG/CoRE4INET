@@ -15,7 +15,7 @@
 
 #include "RCDoubleBuffer.h"
 
-using namespace  ::TTEthernetModel;
+using namespace ::TTEthernetModel;
 
-Define_Module(RCDoubleBuffer);
+Define_Module( RCDoubleBuffer);
 

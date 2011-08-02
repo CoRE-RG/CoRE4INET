@@ -22,14 +22,13 @@
 /**
  * TODO - Generated class
  */
-namespace TTEthernetModel
+namespace TTEthernetModel {
+class TTBuffer : public virtual Buffer
 {
-	class TTBuffer : public virtual Buffer
-	{
-	  protected:
-		virtual void initialize();
-		virtual void handleMessage(cMessage *msg);
-	};
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+};
 }
 
 #endif

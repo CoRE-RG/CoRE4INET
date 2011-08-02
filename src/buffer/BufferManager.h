@@ -25,10 +25,10 @@ namespace TTEthernetModel {
  */
 class BufferManager : public cSimpleModule
 {
-  protected:
-    virtual void initialize(int stage);
-    virtual int numInitStages() const;
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        virtual void initialize(int stage);
+        virtual int numInitStages() const;
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

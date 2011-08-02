@@ -23,19 +23,18 @@
 /**
  * TODO - Generated class
  */
-namespace TTEthernetModel
+namespace TTEthernetModel {
+class DoubleBuffer : public virtual Buffer
 {
-class DoubleBuffer: public virtual Buffer
-{
-	public:
-		DoubleBuffer();
-		virtual ~DoubleBuffer();
+    public:
+        DoubleBuffer();
+        virtual ~DoubleBuffer();
 
-	private:
-		EtherFrame *frame;
-	  protected:
-		virtual void enqueue(EtherFrame *newFrame);
-		virtual EtherFrame* dequeue();
-	};
+    private:
+        EtherFrame *frame;
+    protected:
+        virtual void enqueue(EtherFrame *newFrame);
+        virtual EtherFrame* dequeue();
+};
 }
 #endif

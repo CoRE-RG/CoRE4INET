@@ -193,10 +193,11 @@ void BufferManager::initialize(int stage)
 
                         if (outgoing->eClass()->getName() == "TTOutgoing")
                         {
-                            TTBuffer *ttbuffer = dynamic_cast<TTBuffer*>(newModule);
+                            TTBuffer *ttbuffer = dynamic_cast<TTBuffer*> (newModule);
                             ttbuffer->addDestinationGate(destModule->gate("TTin"));
-                            if(((TTEOutput *)destModule->getSubmodule("tteOutput"))){
-                                ((TTEOutput *)destModule->getSubmodule("tteOutput"))->registerTTBuffer(ttbuffer);
+                            if (((TTEOutput *) destModule->getSubmodule("tteOutput")))
+                            {
+                                ((TTEOutput *) destModule->getSubmodule("tteOutput"))->registerTTBuffer(ttbuffer);
                             }
                         }
                         else if (outgoing->eClass()->getName() == "RCOutgoing")

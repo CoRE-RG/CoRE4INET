@@ -23,34 +23,33 @@
 /**
  * TODO - Generated class
  */
-namespace TTEthernetModel
+namespace TTEthernetModel {
+class Buffer : public cSimpleModule
 {
-	class Buffer : public cSimpleModule
-	{
-	protected:
-		std::list<cGate*> destinationGates;
+    protected:
+        std::list<cGate*> destinationGates;
 
-	private:
-		virtual void initializeStatistics();
-	protected:
-		virtual void initialize();
-		virtual void handleMessage(cMessage *msg);
-		virtual void enqueue(EtherFrame *newFrame);
-		virtual EtherFrame* dequeue();
-		virtual void recordPacketSent();
-		virtual void setIsEmpty(bool empty);
+    private:
+        virtual void initializeStatistics();
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+        virtual void enqueue(EtherFrame *newFrame);
+        virtual EtherFrame* dequeue();
+        virtual void recordPacketSent();
+        virtual void setIsEmpty(bool empty);
 
-	  public:
-		public:
-		Buffer();
-		virtual ~Buffer();
-		virtual void addDestinationGate(cGate *destinationGate);
-		virtual void removeDestinationGate(cGate *destinationGate);
+    public:
+    public:
+        Buffer();
+        virtual ~Buffer();
+        virtual void addDestinationGate(cGate *destinationGate);
+        virtual void removeDestinationGate(cGate *destinationGate);
 
-	protected:
-	    static simsignal_t txPkSignal;
+    protected:
+        static simsignal_t txPkSignal;
 
-	};
+};
 }
 
 #endif

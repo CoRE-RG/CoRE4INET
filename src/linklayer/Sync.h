@@ -21,14 +21,13 @@
 /**
  * TODO - Generated class
  */
-namespace TTEthernetModel
-{
+namespace TTEthernetModel {
 class Sync : public cSimpleModule
 {
-	  protected:
-		virtual void initialize();
-		virtual void handleMessage(cMessage *msg);
-	};
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+};
 }
 
 #endif

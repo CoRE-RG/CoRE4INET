@@ -23,22 +23,21 @@
 
 namespace TTEthernetModel {
 
-
 class TTEScheduler : public cSimpleModule
 {
-private:
-	SimTime lastCycleStart;
-	unsigned long lastCycleTicks;
+    private:
+        SimTime lastCycleStart;
+        unsigned long lastCycleTicks;
 
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-    virtual SimTime precision(SimTime logical);
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+        virtual SimTime precision(SimTime logical);
 
-  public:
-    virtual unsigned int getTicks();
-    virtual unsigned long getTotalTicks();
-    virtual void registerEvent(SchedulerEvent *event);
+    public:
+        virtual unsigned int getTicks();
+        virtual unsigned long getTotalTicks();
+        virtual void registerEvent(SchedulerEvent *event);
 
 };
 

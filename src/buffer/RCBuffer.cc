@@ -19,13 +19,15 @@
 
 namespace TTEthernetModel {
 
-Define_Module(RCBuffer);
+Define_Module( RCBuffer);
 
-RCBuffer::RCBuffer(){
-    bagExpired=true;
+RCBuffer::RCBuffer()
+{
+    bagExpired = true;
 }
 
-RCBuffer::~RCBuffer(){
+RCBuffer::~RCBuffer()
+{
     delete timerMessage;
 }
 
@@ -41,53 +43,61 @@ void RCBuffer::initialize()
 
 void RCBuffer::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("in")){
-        if(bagExpired){
-            bagExpired=false;
-            numReset=0;
+    if (msg->arrivedOn("in"))
+    {
+        if (bagExpired)
+        {
+            bagExpired = false;
+            numReset = 0;
             //Send Message
-            for (std::list<cGate*>::iterator gate = destinationGates.begin();
-                    gate != destinationGates.end(); ++gate) {
+            for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+            {
                 sendDirect(msg->dup(), *gate);
             }
             recordPacketSent();
             delete msg;
         }
-        else{
-            enqueue((EtherFrame*)msg);
+        else
+        {
+            enqueue((EtherFrame*) msg);
         }
     }
 
-    if(msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT){
+    if (msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT)
+    {
         cMessage *outgoingMessage = dequeue();
-        if(outgoingMessage){
-            bagExpired=false;
-            numReset=0;
+        if (outgoingMessage)
+        {
+            bagExpired = false;
+            numReset = 0;
             //Send Message
-            for (std::list<cGate*>::iterator gate = destinationGates.begin();
-                    gate != destinationGates.end(); ++gate) {
+            for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+            {
                 sendDirect(outgoingMessage->dup(), *gate);
             }
             recordPacketSent();
             delete outgoingMessage;
         }
-        else{
-            bagExpired=true;
-            getDisplayString().setTagArg("i2",0,"");
+        else
+        {
+            bagExpired = true;
+            getDisplayString().setTagArg("i2", 0, "");
             delete msg;
         }
     }
 }
 
-void RCBuffer::resetBag(){
+void RCBuffer::resetBag()
+{
     Enter_Method("resetBag()");
     //Set icon:
-    getDisplayString().setTagArg("i2",0,"status/hourglass");
+    getDisplayString().setTagArg("i2", 0, "status/hourglass");
 
     numReset++;
-    if(numReset==destinationGates.size()){
+    if (numReset == destinationGates.size())
+    {
         //Reregister scheduler
-        TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         tteScheduler->registerEvent(timerMessage);
     }
 }

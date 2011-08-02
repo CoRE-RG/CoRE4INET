@@ -24,14 +24,11 @@
 /**
  * TODO - Generated class
  */
-namespace TTEthernetModel
-{
+namespace TTEthernetModel {
 class RCDoubleBuffer : public RCBuffer, DoubleBuffer
 {
 
-	};
+};
 }
-
-
 
 #endif

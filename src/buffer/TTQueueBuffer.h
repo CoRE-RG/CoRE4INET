@@ -24,8 +24,7 @@
 /**
  * TODO - Generated class
  */
-namespace TTEthernetModel
-{
+namespace TTEthernetModel {
 class TTQueueBuffer : public TTBuffer, public QueueBuffer
 {
 };

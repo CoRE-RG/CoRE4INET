@@ -15,6 +15,6 @@
 
 #include "RCQueueBuffer.h"
 
-using namespace  ::TTEthernetModel;
+using namespace ::TTEthernetModel;
 
-Define_Module(RCQueueBuffer);
+Define_Module( RCQueueBuffer);

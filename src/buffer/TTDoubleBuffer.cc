@@ -15,6 +15,6 @@
 
 #include "TTDoubleBuffer.h"
 
-using namespace  ::TTEthernetModel;
+using namespace ::TTEthernetModel;
 
-Define_Module(TTDoubleBuffer);
+Define_Module( TTDoubleBuffer);

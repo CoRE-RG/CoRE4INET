@@ -27,12 +27,12 @@ class RCIncoming : public cSimpleModule
 {
     private:
         unsigned long lastArrived;
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-  public:
-    RCIncoming();
-    virtual ~RCIncoming();
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+    public:
+        RCIncoming();
+        virtual ~RCIncoming();
 };
 
 } //namespace

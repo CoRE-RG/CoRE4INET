@@ -17,7 +17,7 @@
 
 using namespace TTEthernetModel;
 
-Define_Module(Sync);
+Define_Module( Sync);
 
 void Sync::initialize()
 {
