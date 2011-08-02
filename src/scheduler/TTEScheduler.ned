@@ -1,27 +1,23 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 package ttethernet.scheduler;
 
 //
-// TODO auto-generated module
+// TTEthernet scheduler module. The module allows to register Events using the
+// registerEvent(SchedulerEvent) method. Allowed Events are:
+// - SchedulerActionTimeEvent: Event that is triggered at a specified time in the cycle
+// - SchedulerTimerEvent: Event that is triggered after a specified time
 //
+// The Scheduler can be asked for the current time with the getTicks() method.
+// The cycle is configured by the parameters tick and cycle_ticks.
+//
+// @see SchedulerTimerEvent, SchedulerActionTimeEvent, SchedulerTimerEvent
+//
+// @author Till Steinbach
 simple TTEScheduler
 {
     parameters:
         @display("i=block/cogwheel");
+        // Length of a tick
         double tick @unit(s) = 80ns;
+        // Number of ticks for one cycle
         int cycle_ticks=37500;
 }
