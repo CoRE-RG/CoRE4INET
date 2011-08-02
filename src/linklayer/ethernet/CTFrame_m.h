@@ -24,10 +24,10 @@
  * <pre>
  * packet CTFrame extends EtherFrame
  * {    
- *      
- *     unsigned short ctID;
- *     
- *     string displayString="b=15,15,rect,white,kind,5";
+ *         
+ *         unsigned short ctID;
+ *         
+ *         string displayString="b=15,15,rect,white,kind,5";
  * }
  * </pre>
  */

@@ -34,7 +34,8 @@ INCLUDE_PATH = \
     -Ilinklayer/ethernet \
     -Inodes \
     -Inodes/ethernet \
-    -Ischeduler
+    -Ischeduler \
+    -Isynchronisation
 
 # Additional object and library files to link with
 EXTRA_OBJS = -L../emf4cpp-0.0.2/lib -L../model-src
@@ -69,9 +70,9 @@ OBJS = \
     $O/ctc/Incoming.o \
     $O/linklayer/TTEInput.o \
     $O/linklayer/TTEOutput.o \
-    $O/linklayer/Sync.o \
     $O/scheduler/SchedulerEvent.o \
     $O/scheduler/TTEScheduler.o \
+    $O/synchronisation/Sync.o \
     $O/buffer/TTBufferEmpty_m.o \
     $O/linklayer/ethernet/CTFrame_m.o \
     $O/scheduler/SchedulerMessage_m.o \
@@ -158,12 +159,13 @@ clean:
 	-rm -f nodes/*_m.cc nodes/*_m.h
 	-rm -f nodes/ethernet/*_m.cc nodes/ethernet/*_m.h
 	-rm -f scheduler/*_m.cc scheduler/*_m.h
+	-rm -f synchronisation/*_m.cc synchronisation/*_m.h
 
 cleanall: clean
 	-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
-	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc applications/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc applications/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \
@@ -346,8 +348,7 @@ $O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
-$O/linklayer/Sync.o: linklayer/Sync.cc \
-	linklayer/Sync.h
+$O/linklayer/Sync.o: linklayer/Sync.cc
 $O/linklayer/ethernet/CTFrame_m.o: linklayer/ethernet/CTFrame_m.cc \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
@@ -370,4 +371,5 @@ $O/scheduler/TTEScheduler.o: scheduler/TTEScheduler.cc \
 $O/scheduler/SchedulerEvent.o: scheduler/SchedulerEvent.cc \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessage_m.h
+$O/synchronisation/Sync.o: synchronisation/Sync.cc
 
