@@ -1,23 +1,16 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 package ttethernet.buffer;
 
+// The BufferManager is responsible for the configuration of a Node (Host or Switch).
+// It creates the necessary Buffer and Incoming modules and connects them.
 //
-// TODO auto-generated module
+// The BufferManager uses a TTEthernet network configuration (XML-Format) specified in
+// the network_configuration parameter of its parent device and the parent devices device_name
 //
+// @warning The BufferManager requires a certain structure of modules, thus it is
+// currently only applicable for the TTEEtherHost and TTEEtherSwitch
+//
+// @see TTEEtherHost, TTEEtherSwitch
+// @author Till Steinbach
 simple BufferManager
 {
 }

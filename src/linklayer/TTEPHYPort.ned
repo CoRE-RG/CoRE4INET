@@ -1,18 +1,3 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 package ttethernet.linklayer;
 
 
@@ -21,32 +6,43 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 import inet.networklayer.queue.DropTailQueue;
 import inet.networklayer.queue.DropTailQoSQueue;
 
+// The TTEPHYPort is a compund module that contains the TTEOutput, TTEInput and MAC (EtherMACFullDuplex)
+// It represents a physical port for a TTEthernet device (Switch or Host)
+//
+// @see IPort, TTEOutput, TTEInput, EtherMACFullDuplex
+//
+// @author Till Steinbach
 module TTEPHYPort like IPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
     gates:
+        //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
+        //Output to the upper layer for best-effort Traffic
         output upperLayerOut @loose @labels(EtherFrame);
+        //Connection to the physical layer
         inout phys @labels(EtherFrame);
-        
+        //Input from the upper layer for time-triggered traffic
         input TTin @directIn @labels(CTFrame);
+        //Input from the upper layer for rate-constrained traffic
         input RCin @directIn @labels(CTFrame);
 
     submodules:
+        //Module for the organisation of outbound traffic
         tteOutput: TTEOutput {
             @display("p=48,45");
         }
-
+        //Module for the organisation of inbound traffic
         tteInput: TTEInput {
 
             @display("p=142,45");
         }
-
+        //MAC interface
         mac: EtherMACFullDuplex {
             parameters:
-                promiscuous = true;
-                queueModule = "tteOutput";
+                promiscuous = true; //MAC must be set promiscuous to allow for CT receiption
+                queueModule = "tteOutput";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
                 @display("p=87,139");
         }
     connections:

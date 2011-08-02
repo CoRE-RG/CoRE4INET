@@ -1,30 +1,31 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 package ttethernet.buffer;
 
 //
-// TODO auto-generated module
+// Represents an abstract Buffer for time-triggerd traffic. Messages are sent using the configured
+// send window.
 //
+// The TTBuffer registers a timer (SchedulerActionTimeEvent) at the scheduler module (TTEScheduler) to send its
+// Message in conformance with the send window.
+//
+// @warning Do not instantiate the module. Use TTDoubleBuffer or TTQueueBuffer instead!
+//
+// @todo The TTBuffer module should be converted to an interface since it should
+// not be used directly in simulation.
+//
+// @see TTDoubleBuffer, TTQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
+//
+// @author Till Steinbach
 simple TTBuffer extends Buffer
 {
     parameters:
+        //TTBuffer is implemented by the TTBuffer C++ Class
         @class(TTBuffer);
+        //Beginning of the send window in number of ticks
         int sendWindowStart=0;
+        //End of the send window in number of ticks
         int sendWindowEnd=0;
     gates:
+        //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn;
 
 }

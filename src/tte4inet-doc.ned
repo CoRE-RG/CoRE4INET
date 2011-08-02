@@ -18,6 +18,8 @@
 //
 // @titlepage
 //
+//<center><img src="../images/CoRE.png"/><img src="../images/HAW.gif"/></center>
+//
 // <center><h1>TTEthernet Model for INET Framework</h1></center>
 // <center>release ?</center>
 //
@@ -26,6 +28,8 @@
 //
 // <h2>Introductory material</h2>
 //  - 
+//
+// @image html CoRE.png
 //
 // A few useful starting points for browsing the documentation:
 //  - 

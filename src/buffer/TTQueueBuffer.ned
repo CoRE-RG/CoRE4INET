@@ -1,26 +1,20 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 package ttethernet.buffer;
 
 //
-// TODO auto-generated module
+// Represents a queue buffer for time-triggered traffic. Messages are sent using the configured
+// send window.
 //
+// The buffer stores infinit messages in a fifo queue.
+// The buffer removes and sends the first message in the queue.
+//
+// @see TTBuffer, Buffer,
+//
+// @author Till Steinbach
 simple TTQueueBuffer extends TTBuffer
 {
+    //TTQueueBuffer is implemented by the TTQueueBuffer C++ Class
     @class(TTQueueBuffer);
+    //Statistic of the queue length of the buffer
     @statistic[queueLength](title="Queue Length"; record=vector);
     
 }
