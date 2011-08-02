@@ -1,4 +1,4 @@
 package ttethernet;
 
-@license(LGPL);
+@license(GPL);
 @namespace(TTEthernetModel);
