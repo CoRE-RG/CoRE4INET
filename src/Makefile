@@ -27,6 +27,7 @@ INCLUDE_PATH = \
     -I. \
     -Iapi \
     -Iapplications \
+    -Ibase \
     -Ibuffer \
     -Iconfiguration \
     -Ictc \
@@ -151,6 +152,7 @@ clean:
 	-rm -f ./*_m.cc ./*_m.h
 	-rm -f api/*_m.cc api/*_m.h
 	-rm -f applications/*_m.cc applications/*_m.h
+	-rm -f base/*_m.cc base/*_m.h
 	-rm -f buffer/*_m.cc buffer/*_m.h
 	-rm -f configuration/*_m.cc configuration/*_m.h
 	-rm -f ctc/*_m.cc ctc/*_m.h
@@ -165,7 +167,7 @@ cleanall: clean
 	-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
-	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc applications/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc applications/*.cc base/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \

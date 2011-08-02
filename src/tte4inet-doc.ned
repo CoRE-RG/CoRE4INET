@@ -20,19 +20,24 @@
 //
 //<center><img src="../images/CoRE.png"/><img src="../images/HAW.gif"/></center>
 //
-// <center><h1>TTEthernet Model for INET Framework</h1></center>
+// <center><h1>TTEthernet Model for INET Framework (TTE4INET)</h1></center>
 // <center>release 2.0</center>
 //
-// TTE4INET was created by the <a href="http://www.informatik.haw-hamburg.de/core.html" target="_top">CoRE (Communication over Realtime Ethernet)</a> research group
+// TTE4INET is an extension to the INET-Framework for the event-based simulation
+// of time-triggered Ethernet (<a href="http://www.ttethernet.com" target="_top">TTEthernet</a>)
+// in the OMNEST/OMNeT++ simulation system.
+// It was created by the <a href="http://www.informatik.haw-hamburg.de/core.html" target="_top">CoRE (Communication over Realtime Ethernet)</a> research group
 // at the <a href="http://www.informatik.haw-hamburg.de/core.html" target="_top">HAW-Hamburg (Hamburg University of Applied Sciences) </a>.
+//
+// There are several bugfixes and improvements; see the <tt><a href="../doxy/whatsnew.html">WHATSNEW</a></tt> file.
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.2)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 2.0)
+// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 1.99)
 // - <a href="http://code.google.com/p/emf4cpp/" target="_top">emf4cpp library</a> (minimum version 0.0.2) for configuration parsing.
 //
 // <h2>Introductory material</h2>
-//  - 
+//  - For help with the installation see the <tt><a href="../doxy/install.html">INSTALL</a></tt> page.
 //
 // A few useful starting points for browsing the documentation:
 //  - 
@@ -42,8 +47,24 @@
 //   - <a href="http://inet.omnetpp.org/doc/INET/neddoc/index.html" target="_top">INET Model Documentation</a>
 //   - <a href="http://inet.omnetpp.org/doc/INET/doxy/index.html" target="_top">INET C++ source documentation (Doxygen)</a>
 //
+// <h2>History</h2>
+// TTE4INET was first introduced at the <a href="http://www.omnet-workshop.org/2011/" target="_top">4th International Workshop on OMNeT++ (2011)</a>
+// along with the <a href="http://www.simutools.org/2011/" target="_top">4th International ICST Conference on Simulation Tools and Techniques (2011)</a>.
+// You can find the presentation slides <a href="http://papers.till-steinbach.de/sdkks-eifre-11b.pdf" target="_top">here</a>
 //
-// <h2>Contributors</h2>
+// Since there were changes necessary to support OMNeT++ 4.2 and INET 1.99, TTE4INET was completely redesigned in Version 2.0
+//
+// <h2>IMPORTANT</h2>
+// The TTE4INET model is continuously being improved: new parts
+// are added, bugs are corrected, and so on. We cannot assert that the implementation
+// will work fully according to the specifications. YOU ARE RESPONSIBLE YOURSELF
+// TO MAKE SURE THAT THE MODELS YOU USE IN YOUR SIMULATIONS WORK CORRECTLY, AND YOU'RE
+// GETTING VALID RESULTS.
+//
+// <h2>Contributions</h2>
+// Contributions are highly welcome. Please contact us if you would like to participate!
+//
+// <h3>Contributors</h3>
 // - Till Steinbach (HAW-Hamburg)
 // - Hermand Dieumo Kenfack (HAW-Hamburg)
 // - Fabian Kempf (HAW-Hamburg)
@@ -52,5 +73,11 @@
 // CoRE Research Group
 // <a href="mailto:core@informatik.haw-hamburg.de">core@informatik.haw-hamburg.de</a>
 //
+//
+//
+//
+//
+//
+// <a href="http://www.ttethernet.com" target="_top">TTEthernet</a> is a registred trademark of  <a href="http://www.tttech.com" target="_top">TTTech Computertechnik AG (Vienna)</a>
 
 package ttethernet;
