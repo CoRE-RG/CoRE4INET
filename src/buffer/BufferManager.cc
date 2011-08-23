@@ -15,7 +15,7 @@
 
 #include "BufferManager.h"
 
-#include <Buffer.h>
+#include <buffer/Buffer.h>
 #include <TTEInput.h>
 #include <TTEOutput.h>
 

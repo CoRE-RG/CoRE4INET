@@ -17,6 +17,10 @@
 #define __TTETHERNETMODELV2_TTEAPIAPPLICATIONBASE_H_
 
 #include <omnetpp.h>
+#include "tte_api.h"
+
+
+#define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
 
 namespace TTEthernetModel {
 
@@ -30,6 +34,15 @@ class TTEAPIApplicationBase : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
   protected:
     virtual void startApplication();
+
+  public:
+    virtual int32_t tte_get_ct_output_buf(const uint8_t ctrl_id,
+                                  const uint16_t ct_id,
+                                  tte_buffer_t * const buf);
+    virtual int32_t tte_get_var(const uint8_t ctrl_id,
+                                    const tte_var_id_t var_id,
+                                    const uint32_t var_size,
+                                    void * const value);
 };
 
 } //namespace

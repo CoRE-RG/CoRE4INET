@@ -18,7 +18,7 @@
 
 #include <omnetpp.h>
 
-#include <Incoming.h>
+#include <ctc/Incoming.h>
 #include <EtherFrame_m.h>
 
 #include <map>

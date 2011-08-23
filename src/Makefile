@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for libTTEthernetSupport
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep --make-so -o TTEthernetSupport -O out -I/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp -I/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/model-src -I../../inet/src/linklayer/ethernet -I../../inet/src/networklayer/ipv4 -I../../inet/src/networklayer/common -I../../inet/src/networklayer/ipv4/contract -I../../inet/src/util/headerserializers/ipv4 -I../../inet/src/base -I../../inet/src/util/headerserializers -I../../inet/src/networklayer/contract -I../../inet/src/util -I../../inet/src/applications/pingapp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -L../../inet/out/$(CONFIGNAME)/src -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet -DWITH_TTE_COMMON -KINET_PROJ=../../inet -- -L../emf4cpp-0.0.2/lib -L../model-src
+#  opp_makemake -f --deep --make-so -o TTEthernetSupport -O out -I/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp -I/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/model-src -I../../inet/src/linklayer/ethernet -I../../inet/src/networklayer/ipv4 -I../../inet/src/networklayer/common -I../../inet/src/networklayer/ipv4/contract -I../../inet/src/util/headerserializers/ipv4 -I../../inet/src/base -I../../inet/src/util/headerserializers -I../../inet/src/networklayer/contract -I../../inet/src/util -I../../inet/src/applications/pingapp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -L../../inet/out/$(CONFIGNAME)/src -lxerces-c -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet -DWITH_TTE_COMMON -KINET_PROJ=../../inet -- -L../emf4cpp-0.0.2/lib -L../model-src
 #
 
 # Name of target to be created (-o option)
@@ -26,6 +26,7 @@ INCLUDE_PATH = \
     -I../../inet/src/networklayer/arp \
     -I. \
     -Iapi \
+    -Iapi/tte_api \
     -Iapplications \
     -Ibase \
     -Ibuffer \
@@ -42,7 +43,7 @@ INCLUDE_PATH = \
 EXTRA_OBJS = -L../emf4cpp-0.0.2/lib -L../model-src
 
 # Additional libraries (-L, -l options)
-LIBS = -L../../inet/out/$(CONFIGNAME)/src  -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet
+LIBS = -L../../inet/out/$(CONFIGNAME)/src  -lxerces-c -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet
 LIBS += -Wl,-rpath,`abspath ../../inet/out/$(CONFIGNAME)/src`
 
 # Output directory
@@ -151,6 +152,7 @@ clean:
 	-rm -f TTEthernetSupport TTEthernetSupport.exe libTTEthernetSupport.so libTTEthernetSupport.a libTTEthernetSupport.dll libTTEthernetSupport.dylib
 	-rm -f ./*_m.cc ./*_m.h
 	-rm -f api/*_m.cc api/*_m.h
+	-rm -f api/tte_api/*_m.cc api/tte_api/*_m.h
 	-rm -f applications/*_m.cc applications/*_m.h
 	-rm -f base/*_m.cc base/*_m.h
 	-rm -f buffer/*_m.cc buffer/*_m.h
@@ -167,16 +169,22 @@ cleanall: clean
 	-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
-	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc applications/*.cc base/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc api/tte_api/*.cc applications/*.cc base/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \
 	applications/TTEAPITestApplication.h \
-	api/API_TEMP.h \
-	applications/TTEAPIApplicationBase.h
+	applications/TTEAPIApplicationBase.h \
+	api/tte_api/tte_api.h
 $O/applications/TTEAPIApplicationBase.o: applications/TTEAPIApplicationBase.cc \
-	api/API_TEMP.h \
-	applications/TTEAPIApplicationBase.h
+	$(INET_PROJ)/src/linklayer/contract/TxNotifDetails.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherMACFullDuplex.h \
+	$(INET_PROJ)/src/base/INotifiable.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	applications/TTEAPIApplicationBase.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherMACBase.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	api/tte_api/tte_api.h
 $O/applications/TTETestApp.o: applications/TTETestApp.cc \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	applications/TTETestApp.h \
@@ -350,7 +358,6 @@ $O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
-$O/linklayer/Sync.o: linklayer/Sync.cc
 $O/linklayer/ethernet/CTFrame_m.o: linklayer/ethernet/CTFrame_m.cc \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
@@ -373,5 +380,6 @@ $O/scheduler/TTEScheduler.o: scheduler/TTEScheduler.cc \
 $O/scheduler/SchedulerEvent.o: scheduler/SchedulerEvent.cc \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessage_m.h
-$O/synchronisation/Sync.o: synchronisation/Sync.cc
+$O/synchronisation/Sync.o: synchronisation/Sync.cc \
+	synchronisation/Sync.h
 
