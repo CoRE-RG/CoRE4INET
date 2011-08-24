@@ -18,16 +18,22 @@
 
 #include <omnetpp.h>
 #include "tte_api.h"
+#include "TTEApplicationBase.h"
+#include "CTFrame_m.h"
 
 
 #define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
 
 namespace TTEthernetModel {
 
+enum TTEAPIApplicationMessageKind{
+    START_APPLICATION
+};
+
 /**
  * TODO - Generated class
  */
-class TTEAPIApplicationBase : public cSimpleModule
+class TTEAPIApplicationBase : public TTEApplicationBase
 {
   private:
     virtual void initialize();
@@ -43,7 +49,21 @@ class TTEAPIApplicationBase : public cSimpleModule
                                     const tte_var_id_t var_id,
                                     const uint32_t var_size,
                                     void * const value);
+
+    virtual int32_t tte_open_output_buf(tte_buffer_t * const buf,
+                                       tte_frame_t * const frame);
+
+    virtual int32_t tte_close_output_buf(tte_buffer_t * const buf);
 };
+
+class APIBufferPriv
+{
+    public:
+        Incoming *ctc;
+        CTFrame *frame;
+        void *data;
+};
+
 
 } //namespace
 

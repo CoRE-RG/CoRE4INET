@@ -22,6 +22,12 @@ simple Buffer like IOutputQueue
         @statistic[txPk](title="TX Packets"; record=count,vector);
         //Priority of the buffer (currently only used for rate-constrained traffic)
         int priority=-1;
+        //Critical traffic ID of the buffer
+        int ct_id=0;
+        //Critical traffic marker of the buffer
+        int ct_marker=0;
+        //Critical traffic mask of the buffer
+        int ct_mask=0;
         
     gates:
         //The buffers Input

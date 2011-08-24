@@ -54,6 +54,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/applications/TTETestApp.o \
+    $O/applications/TTEApplicationBase.o \
     $O/applications/TTEAPIApplicationBase.o \
     $O/applications/TTEAPITestApplication.o \
     $O/buffer/TTDoubleBuffer.o \
@@ -75,6 +76,7 @@ OBJS = \
     $O/scheduler/SchedulerEvent.o \
     $O/scheduler/TTEScheduler.o \
     $O/synchronisation/Sync.o \
+    $O/api/APIPayload_m.o \
     $O/buffer/TTBufferEmpty_m.o \
     $O/linklayer/ethernet/CTFrame_m.o \
     $O/scheduler/SchedulerMessage_m.o \
@@ -82,6 +84,7 @@ OBJS = \
 
 # Message files
 MSGFILES = \
+    api/APIPayload.msg \
     buffer/TTBufferEmpty.msg \
     linklayer/ethernet/CTFrame.msg \
     scheduler/SchedulerMessage.msg \
@@ -172,9 +175,23 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc api/tte_api/*.cc applications/*.cc base/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/api/APIPayload_m.o: api/APIPayload_m.cc \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	api/APIPayload_m.h
+$O/applications/TTEApplicationBase.o: applications/TTEApplicationBase.cc \
+	applications/TTEApplicationBase.h \
+	ctc/Incoming.h
 $O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \
+	applications/TTEApplicationBase.h \
+	ctc/Incoming.h \
 	applications/TTEAPITestApplication.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
 	applications/TTEAPIApplicationBase.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	linklayer/ethernet/CTFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	api/tte_api/tte_api.h
 $O/applications/TTEAPIApplicationBase.o: applications/TTEAPIApplicationBase.cc \
 	$(INET_PROJ)/src/linklayer/contract/TxNotifDetails.h \
@@ -182,9 +199,18 @@ $O/applications/TTEAPIApplicationBase.o: applications/TTEAPIApplicationBase.cc \
 	$(INET_PROJ)/src/base/INotifiable.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	applications/TTEAPIApplicationBase.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherMACBase.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	api/tte_api/tte_api.h
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	api/tte_api/tte_api.h \
+	ctc/TTIncoming.h \
+	applications/TTEApplicationBase.h \
+	ctc/Incoming.h \
+	api/APIPayload_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	linklayer/ethernet/CTFrame_m.h \
+	ctc/RCIncoming.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherMACBase.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
 $O/applications/TTETestApp.o: applications/TTETestApp.cc \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	applications/TTETestApp.h \
@@ -261,6 +287,7 @@ $O/buffer/BufferManager.o: buffer/BufferManager.cc \
 	$(INET_PROJ)/src/base/EnqueueHook.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	applications/TTEApplicationBase.h \
 	ctc/Incoming.h \
 	buffer/TTBuffer.h \
 	linklayer/TTEInput.h \

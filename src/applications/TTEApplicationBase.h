@@ -13,12 +13,29 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications;
+#ifndef __TTETHERNETMODELV2_TTEAPPLICATIONBASE_H_
+#define __TTETHERNETMODELV2_TTEAPPLICATIONBASE_H_
 
-//
-// TODO auto-generated module
-//
-simple TTEAPIApplicationBase extends TTEApplicationBase
+#include <omnetpp.h>
+#include "Incoming.h"
+
+namespace TTEthernetModel {
+
+/**
+ * TODO - Generated class
+ */
+class TTEApplicationBase : public cSimpleModule
 {
+  protected:
+    std::map<uint16, std::list<Incoming*> > incomings;
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
 
-}
+  public:
+    virtual void addIncoming(uint16 ctID, Incoming *incoming);
+};
+
+} //namespace
+
+#endif

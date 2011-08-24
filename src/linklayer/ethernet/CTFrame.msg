@@ -5,6 +5,8 @@ cplusplus {{
 class ::EtherFrame;
 
 namespace TTEthernetModel;
+
+
 //
 // Represents a critical traffic frame
 //

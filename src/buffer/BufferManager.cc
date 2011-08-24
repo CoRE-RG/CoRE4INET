@@ -18,6 +18,7 @@
 #include <buffer/Buffer.h>
 #include <TTEInput.h>
 #include <TTEOutput.h>
+#include "TTEApplicationBase.h"
 
 #include <configuration/ConfigurationUtils.h>
 
@@ -151,17 +152,56 @@ void BufferManager::initialize(int stage)
                     {
                         continue;
                     }
+                    //Set CT ID, marker and mask
+                    newModule->par("ct_id") = ConfigurationUtils::getVLid(vls->getRefVirtualLink(), nc->getRefMappings());
+                    if (dc->eClass()->getName() == "Switch")
+                        {
+                            Switch *sw = dc->as<Switch> ();
+                            if (sw->getConfig())
+                            {
+                                newModule->par("ct_marker") = ConfigurationUtils::mac2long(sw->getConfig()->getCtMarker());
+                                newModule->par("ct_mask") = ConfigurationUtils::mac2long(sw->getConfig()->getCtMask());
+                            }
+                        }
+                        else if (dc->eClass()->getName() == "EndSystem")
+                        {
+                            EndSystem *es = dc->as<EndSystem> ();
+                            if (es->getConfig())
+                            {
+                                newModule->par("ct_marker") = ConfigurationUtils::mac2long(es->getConfig()->getCtMarker());
+                                newModule->par("ct_mask") = ConfigurationUtils::mac2long(es->getConfig()->getCtMask());
+                            }
+                        }
+
                     //Register Incoming at Ports
                     //destination Ports
                     EList<Port>& incomingportList = incoming->getRefInPort();
                     for (unsigned int l = 0; l < incomingportList.size(); l++)
                     {
                         Port_ptr incomingport = incomingportList.get(l);
-                        int iport = ConfigurationUtils::getPortSerialNumber(incomingport, nc->getRefMappings());
+                        string portName = ConfigurationUtils::getPortName(incomingport, nc->getRefMappings());
                         int ctID = ConfigurationUtils::getVLid(vls->getRefVirtualLink(), nc->getRefMappings());
-                        if (iport >= 0)
-                            ((TTEInput*) getParentModule()->getSubmodule("phy", iport)->getSubmodule("tteInput"))->addIncoming(
-                                    ctID, (Incoming*) newCTCModule);
+                        if (portName.find("PHY") != string::npos)
+                        {
+                            Port_ptr incomingport = incomingportList.get(l);
+                            int iport = ConfigurationUtils::getPortSerialNumber(incomingport, nc->getRefMappings());
+                            if (iport >= 0)
+                                ((TTEInput*) getParentModule()->getSubmodule("phy", iport)->getSubmodule("tteInput"))->addIncoming(
+                                        ctID, (Incoming*) newCTCModule);
+                        }
+                        else if (portName == "SYNC")
+                        {
+
+                        }
+                        else if (portName == "HOST")
+                        {
+                            ((TTEApplicationBase*) getParentModule()->getSubmodule("tteApp"))->addIncoming(
+                                        ctID, (Incoming*) newCTCModule);
+                        }
+                        else
+                        {
+
+                        }
                     }
 
                     //destination Ports

@@ -36,17 +36,33 @@ unsigned int main(){
 
     tte_get_var(0, TTE_VAR_MAC_ADDRESS,sizeof(mac), mac);
 
-    ev.printf("TTE_VAR_MAC_ADDRESS: %02x:%02x:%02x:%02x:%02x:%02x\n\n", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    ev.printf("TTE_VAR_MAC_ADDRESS: %02x:%02x:%02x:%02x:%02x:%02x\n\n", mac[5], mac[4], mac[3], mac[2], mac[1], mac[0]);
 
-   /* tte_frame_t frame;
+    tte_frame_t frame;
+    frame.length=46;
+
+    frame.eth_hdr.src_mac[0] = 0x00;
+    frame.eth_hdr.src_mac[1] = 0x00;
+    frame.eth_hdr.src_mac[2] = 0x00;
+    frame.eth_hdr.src_mac[3] = 0x00;
+    frame.eth_hdr.src_mac[4] = 0x00;
+    frame.eth_hdr.src_mac[5] = 0x00;
+
+    frame.eth_hdr.dst_mac[0] = 0x00;
+    frame.eth_hdr.dst_mac[1] = 0x00;
+    frame.eth_hdr.dst_mac[2] = 0x00;
+    frame.eth_hdr.dst_mac[3] = 0x00;
+    frame.eth_hdr.dst_mac[4] = 0x00;
+    frame.eth_hdr.dst_mac[5] = 0x00;
+
     if(tte_open_output_buf(&testbuffer, &frame) != ETT_SUCCESS){
         ev << "MIST2!" << endl << endl;
         return -1;
     }
-    if(tte_close_input_buf(&testbuffer) != ETT_SUCCESS){
+    if(tte_close_output_buf(&testbuffer) != ETT_SUCCESS){
         ev << "MIST3!" << endl << endl;
         return -1;
-    }*/
+    }
 
     return 0;
 }

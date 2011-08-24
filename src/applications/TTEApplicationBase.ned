@@ -18,7 +18,9 @@ package ttethernet.applications;
 //
 // TODO auto-generated module
 //
-simple TTEAPIApplicationBase extends TTEApplicationBase
+simple TTEApplicationBase like ITTEApplication
 {
-
+        gates:
+            input TTin @directIn @labels(CTFrame);
+            input RCin @directIn @labels(CTFrame);
 }

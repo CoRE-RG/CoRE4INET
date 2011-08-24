@@ -71,7 +71,22 @@ void Buffer::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        enqueue((EtherFrame*) msg);
+        EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
+        if(frame->getDest().isUnspecified()){
+            MACAddress mac;
+            unsigned long ct_mask = par("ct_mask").longValue();
+            unsigned long ct_marker = par("ct_marker").longValue();
+            unsigned long ct_id = par("ct_id").longValue();
+            ct_marker &= ct_mask;
+            mac.setAddressByte(0, ct_marker>>24);
+            mac.setAddressByte(1, ct_marker>>16);
+            mac.setAddressByte(2, ct_marker>>8);
+            mac.setAddressByte(3, ct_marker);
+            mac.setAddressByte(4, ct_id>>8);
+            mac.setAddressByte(5, ct_id);
+            frame->setDest(mac);
+        }
+        enqueue((EtherFrame*) frame);
     }
 }
 
