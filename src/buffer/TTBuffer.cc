@@ -61,8 +61,13 @@ void TTBuffer::handleMessage(cMessage *msg)
         {
             recordPacketSent();
             delete outgoingMessage;
-        }
 
+            // Now execute transmit callbacks if there are some
+            for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
+                    iter != transmitCallbacks.end(); ++iter){
+                iter->first->executeCallback(iter->second);
+            }
+        }
         //Reregister scheduler
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         tteScheduler->registerEvent((SchedulerEvent *) msg);

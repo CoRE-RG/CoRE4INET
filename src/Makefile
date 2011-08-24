@@ -189,6 +189,7 @@ $O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \
 	applications/TTEAPIApplicationBase.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	linklayer/ethernet/CTFrame_m.h \
+	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
@@ -199,6 +200,7 @@ $O/applications/TTEAPIApplicationBase.o: applications/TTEAPIApplicationBase.cc \
 	$(INET_PROJ)/src/base/INotifiable.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	applications/TTEAPIApplicationBase.h \
+	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	api/tte_api/tte_api.h \
@@ -220,33 +222,39 @@ $O/applications/TTETestApp.o: applications/TTETestApp.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/TTBuffer.o: buffer/TTBuffer.cc \
-	scheduler/SchedulerEvent.h \
-	buffer/TTBuffer.h \
 	scheduler/SchedulerMessage_m.h \
-	scheduler/TTEScheduler.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
-	scheduler/SchedulerMessageEvents_m.h \
 	buffer/Buffer.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	buffer/TTBufferEmpty_m.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
-$O/buffer/RCBuffer.o: buffer/RCBuffer.cc \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	scheduler/SchedulerEvent.h \
-	scheduler/SchedulerMessage_m.h \
+	applications/TTEApplicationBase.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
 	scheduler/TTEScheduler.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
-	linklayer/ethernet/CTFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
+$O/buffer/RCBuffer.o: buffer/RCBuffer.cc \
+	scheduler/SchedulerMessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
 	buffer/RCBuffer.h \
 	buffer/Buffer.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	scheduler/SchedulerEvent.h \
+	applications/TTEApplicationBase.h \
+	ctc/Incoming.h \
+	scheduler/TTEScheduler.h \
+	linklayer/ethernet/CTFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
 $O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
+	applications/TTEApplicationBase.h \
 	buffer/QueueBuffer.h \
+	ctc/Incoming.h \
 	buffer/TTBuffer.h \
 	buffer/TTQueueBuffer.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
@@ -256,7 +264,9 @@ $O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/TTDoubleBuffer.o: buffer/TTDoubleBuffer.cc \
+	applications/TTEApplicationBase.h \
 	buffer/TTDoubleBuffer.h \
+	ctc/Incoming.h \
 	buffer/TTBuffer.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
@@ -268,7 +278,9 @@ $O/buffer/TTDoubleBuffer.o: buffer/TTDoubleBuffer.cc \
 $O/buffer/TTBufferEmpty_m.o: buffer/TTBufferEmpty_m.cc \
 	buffer/TTBufferEmpty_m.h
 $O/buffer/QueueBuffer.o: buffer/QueueBuffer.cc \
+	applications/TTEApplicationBase.h \
 	buffer/QueueBuffer.h \
+	ctc/Incoming.h \
 	buffer/TTBuffer.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
@@ -295,6 +307,8 @@ $O/buffer/BufferManager.o: buffer/BufferManager.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
 $O/buffer/Buffer.o: buffer/Buffer.cc \
+	applications/TTEApplicationBase.h \
+	ctc/Incoming.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	buffer/Buffer.h \
@@ -302,19 +316,23 @@ $O/buffer/Buffer.o: buffer/Buffer.cc \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/RCDoubleBuffer.o: buffer/RCDoubleBuffer.cc \
-	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	buffer/RCBuffer.h \
-	scheduler/SchedulerMessageEvents_m.h \
-	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
-	buffer/DoubleBuffer.h \
 	buffer/Buffer.h \
-	buffer/RCDoubleBuffer.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	buffer/DoubleBuffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	applications/TTEApplicationBase.h \
+	scheduler/SchedulerEvent.h \
+	ctc/Incoming.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	buffer/RCDoubleBuffer.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
 $O/buffer/DoubleBuffer.o: buffer/DoubleBuffer.cc \
+	applications/TTEApplicationBase.h \
+	ctc/Incoming.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	buffer/Buffer.h \
@@ -331,7 +349,9 @@ $O/buffer/RCQueueBuffer.o: buffer/RCQueueBuffer.cc \
 	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	applications/TTEApplicationBase.h \
 	scheduler/SchedulerEvent.h \
+	ctc/Incoming.h \
 	buffer/TTBuffer.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	scheduler/SchedulerMessageEvents_m.h \
@@ -370,7 +390,9 @@ $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	scheduler/SchedulerEvent.h \
+	applications/TTEApplicationBase.h \
 	buffer/TTBuffer.h \
+	ctc/Incoming.h \
 	scheduler/TTEScheduler.h \
 	$(INET_PROJ)/src/base/QueueWithQoS.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \

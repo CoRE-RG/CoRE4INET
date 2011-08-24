@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 #include <EtherFrame_m.h>
 #include <list>
+#include "TTEApplicationBase.h"
 
 /**
  * TODO - Generated class
@@ -28,6 +29,8 @@ class Buffer : public cSimpleModule
 {
     protected:
         std::list<cGate*> destinationGates;
+        std::map<TTEApplicationBase*, Callback*> receiveCallbacks;
+        std::map<TTEApplicationBase*, Callback*> transmitCallbacks;
 
     private:
         virtual void initializeStatistics();
@@ -42,9 +45,14 @@ class Buffer : public cSimpleModule
     public:
     public:
         Buffer();
+        virtual EtherFrame* getFrame();
         virtual ~Buffer();
         virtual void addDestinationGate(cGate *destinationGate);
         virtual void removeDestinationGate(cGate *destinationGate);
+        virtual void addReceiveCallback(Callback *cb, TTEApplicationBase *application);
+        virtual Callback* getReceiveCallback(TTEApplicationBase *application);
+        virtual void addTransmitCallback(Callback *cb, TTEApplicationBase *application);
+        virtual Callback* getTransmitCallback(TTEApplicationBase *application);
 
     protected:
         static simsignal_t txPkSignal;

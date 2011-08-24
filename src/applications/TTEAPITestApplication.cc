@@ -22,6 +22,11 @@ namespace TTEthernetModel {
 
 Define_Module(TTEAPITestApplication);
 
+void testCallback(void* arg){
+    std::string teststring = (const char *)arg;
+    ev << "CALLBACK EXECUTED! " << teststring << endl << endl;
+}
+
 unsigned int main(){
     //tte_init();
     tte_buffer_t testbuffer;
@@ -37,6 +42,9 @@ unsigned int main(){
     tte_get_var(0, TTE_VAR_MAC_ADDRESS,sizeof(mac), mac);
 
     ev.printf("TTE_VAR_MAC_ADDRESS: %02x:%02x:%02x:%02x:%02x:%02x\n\n", mac[5], mac[4], mac[3], mac[2], mac[1], mac[0]);
+
+    tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void(*)(void*)), (void*)&testCallback);
+    tte_set_buf_var(&testbuffer, TTE_BUFVAR_CB_ARG, 5, "Test");
 
     tte_frame_t frame;
     frame.length=46;

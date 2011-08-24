@@ -20,6 +20,7 @@
 #include "tte_api.h"
 #include "TTEApplicationBase.h"
 #include "CTFrame_m.h"
+#include "Buffer.h"
 
 
 #define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
@@ -28,6 +29,21 @@ namespace TTEthernetModel {
 
 enum TTEAPIApplicationMessageKind{
     START_APPLICATION
+};
+
+
+class TTEAPIPriv
+{
+    public:
+        Buffer *buffer;
+};
+
+class TTEAPIOutgoingPriv: public TTEAPIPriv
+{
+    public:
+        Incoming *ctc;
+        CTFrame *frame;
+        void *data;
 };
 
 /**
@@ -54,14 +70,11 @@ class TTEAPIApplicationBase : public TTEApplicationBase
                                        tte_frame_t * const frame);
 
     virtual int32_t tte_close_output_buf(tte_buffer_t * const buf);
-};
 
-class APIBufferPriv
-{
-    public:
-        Incoming *ctc;
-        CTFrame *frame;
-        void *data;
+    virtual int32_t tte_set_buf_var(tte_buffer_t * const buf,
+                                   const tte_buf_var_id_t var_id,
+                                   const uint32_t var_size,
+                                   const void * const value);
 };
 
 

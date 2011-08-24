@@ -216,6 +216,19 @@ void BufferManager::initialize(int stage)
                         if (portName.find("PHY") != string::npos)
                         {
                             destModule = getParentModule()->getSubmodule("phy", oport);
+                            if (outgoing->eClass()->getName() == "TTOutgoing")
+                            {
+                                TTBuffer *ttbuffer = dynamic_cast<TTBuffer*> (newModule);
+                                ttbuffer->addDestinationGate(destModule->gate("TTin"));
+                                if (((TTEOutput *) destModule->getSubmodule("tteOutput")))
+                                {
+                                    ((TTEOutput *) destModule->getSubmodule("tteOutput"))->registerTTBuffer(ttbuffer);
+                                }
+                            }
+                            else if (outgoing->eClass()->getName() == "RCOutgoing")
+                            {
+                                ((TTEthernetModel::Buffer*) newModule)->addDestinationGate(destModule->gate("RCin"));
+                            }
                         }
                         else if (portName == "SYNC")
                         {
@@ -231,19 +244,6 @@ void BufferManager::initialize(int stage)
                             continue;
                         }
 
-                        if (outgoing->eClass()->getName() == "TTOutgoing")
-                        {
-                            TTBuffer *ttbuffer = dynamic_cast<TTBuffer*> (newModule);
-                            ttbuffer->addDestinationGate(destModule->gate("TTin"));
-                            if (((TTEOutput *) destModule->getSubmodule("tteOutput")))
-                            {
-                                ((TTEOutput *) destModule->getSubmodule("tteOutput"))->registerTTBuffer(ttbuffer);
-                            }
-                        }
-                        else if (outgoing->eClass()->getName() == "RCOutgoing")
-                        {
-                            ((TTEthernetModel::Buffer*) newModule)->addDestinationGate(destModule->gate("RCin"));
-                        }
                     }
 
                     //generate connections

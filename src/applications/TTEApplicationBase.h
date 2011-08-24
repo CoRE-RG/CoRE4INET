@@ -21,6 +21,19 @@
 
 namespace TTEthernetModel {
 
+
+
+class Callback
+{
+    public:
+        void (*fn)(void *);
+        void *arg;
+
+        virtual void executeCallback(){
+            fn(arg);
+        }
+};
+
 /**
  * TODO - Generated class
  */
@@ -33,6 +46,7 @@ class TTEApplicationBase : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
 
   public:
+    virtual void executeCallback(Callback *cb);
     virtual void addIncoming(uint16 ctID, Incoming *incoming);
 };
 

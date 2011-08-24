@@ -40,7 +40,6 @@ void TTEAPIApplicationBase::startApplication(){
     throw;
 }
 
-
 int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
                                                      const uint16_t ct_id,
                                                      tte_buffer_t * const buf){
@@ -65,8 +64,9 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
         buf->ct_id=ct_id;
         buf->shared=0;
 
-        APIBufferPriv *priv = new APIBufferPriv();
+        TTEAPIOutgoingPriv *priv = new TTEAPIOutgoingPriv();
         priv->ctc = (*incoming);
+        priv->buffer = (Buffer *)priv->ctc->gate("out")->getPathEndGate()->getOwner();
 
         buf->priv=priv;
         return ETT_SUCCESS;
@@ -102,9 +102,11 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
         }
         case TTE_VAR_CTRL_STATUS:{
             *((uint32_t*)value) = TTE_STAT_CONFIGURED | TTE_STAT_RUNNING;
+            break;
         }
         case TTE_VAR_CTRL_COUNT:{
             *((uint8_t*)value) = 1;
+            break;
         }
         case TTE_VAR_CHANNEL_COUNT:{
             cModule *phy = getParentModule()->getSubmodule("phy", 0);
@@ -134,6 +136,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
         case TTE_VAR_THREAD_SAFE:{
             //TODO: CHECK WHETHER IT IS POSSIBLE TO SET TO TRUE (1)
             *((uint8_t*)value) = 0;
+            break;
         }
         case TTE_VAR_MAC_ADDRESS:{
             uint8_t *valueArr= (uint8_t *)value;
@@ -163,10 +166,10 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
 
 int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf,
                                                    tte_frame_t * const frame){
-    APIBufferPriv *priv = (APIBufferPriv*)buf->priv;
+    TTEAPIOutgoingPriv *priv = (TTEAPIOutgoingPriv*)buf->priv;
 
     //Now we create a frame that can be accessed later
-    //TODO Devide TT and RC frames in separate types?
+    //TODO Divide TT and RC frames in separate types?
     priv->frame = new CTFrame("TODO Aussagekräftigen String erstellen!");
     priv->frame->setByteLength(ETHER_MAC_FRAME_BYTES);
 
@@ -199,7 +202,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf,
 
 
 int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf){
-    APIBufferPriv *priv = (APIBufferPriv *)buf->priv;
+    TTEAPIOutgoingPriv *priv = (TTEAPIOutgoingPriv *)buf->priv;
     //Copy frame data and free memory
     APIPayload *payload = (APIPayload*)priv->frame->getEncapsulatedPacket();
     for(unsigned int i=0;i<payload->getDataArraySize();i++){
@@ -208,6 +211,46 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf){
     free(priv->data);
     sendDirect(priv->frame, priv->ctc->gate("in"));
     delete priv;
+    return ETT_SUCCESS;
+}
+
+int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
+                                   const tte_buf_var_id_t var_id,
+                                   const uint32_t var_size,
+                                   const void * const value){
+    TTEAPIPriv *priv = (TTEAPIPriv*)buf->priv;
+    switch(var_id){
+        case TTE_BUFVAR_RECEIVE_CB:{
+            Callback *cb = priv->buffer->getReceiveCallback(this);
+            if(cb == NULL){
+                cb = new Callback();
+                priv->buffer->addReceiveCallback(cb, this);
+                cb->arg = buf;
+            }
+            cb->fn = (void(*)(void *))value;
+            break;
+        }
+        case TTE_BUFVAR_TRANSMIT_CB:{
+            Callback *cb = priv->buffer->getTransmitCallback(this);
+            if(cb == NULL){
+                cb = new Callback();
+                priv->buffer->addTransmitCallback(cb, this);
+                cb->arg = buf;
+            }
+            cb->fn = (void(*)(void *))value;
+            break;
+        }
+        case TTE_BUFVAR_CB_ARG:{
+            Callback *cb = priv->buffer->getTransmitCallback(this);
+            if(cb == NULL){
+                return ETT_NULLPTR;
+            }
+            cb->arg = (void*)value;
+            break;
+        }
+        default:
+            return ETT_NOTSUPPORTED;
+    }
     return ETT_SUCCESS;
 }
 
@@ -325,7 +368,10 @@ extern "C" int32_t tte_set_buf_var(tte_buffer_t * const buf,
                                const tte_buf_var_id_t var_id,
                                const uint32_t var_size,
                                const void * const value){
-    return ETT_NOTSUPPORTED;
+    TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
+        if(app != NULL)
+            return app->tte_set_buf_var(buf, var_id, var_size, value);
+        return ETT_NULLPTR;
 }
 
 extern "C" int32_t tte_flush_buffers(const uint8_t ctrl_id){

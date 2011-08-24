@@ -67,11 +67,36 @@ void Buffer::removeDestinationGate(cGate *destinationGate)
     destinationGates.remove(destinationGate);
 }
 
+void Buffer::addReceiveCallback(Callback *cb, TTEApplicationBase *application)
+{
+    receiveCallbacks[application]=cb;
+}
+
+Callback* Buffer::getReceiveCallback(TTEApplicationBase *application)
+{
+    return receiveCallbacks[application];
+}
+
+void Buffer::addTransmitCallback(Callback *cb, TTEApplicationBase *application)
+{
+    transmitCallbacks[application]=cb;
+}
+
+Callback* Buffer::getTransmitCallback(TTEApplicationBase *application)
+{
+    return transmitCallbacks[application];
+}
+
+EtherFrame* Buffer::getFrame(){
+    return dequeue();
+}
+
 void Buffer::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
         EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
+        //Try to correct destination mac
         if(frame->getDest().isUnspecified()){
             MACAddress mac;
             unsigned long ct_mask = par("ct_mask").longValue();
@@ -87,6 +112,11 @@ void Buffer::handleMessage(cMessage *msg)
             frame->setDest(mac);
         }
         enqueue((EtherFrame*) frame);
+        // Now execute callbacks if there are some
+        for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = receiveCallbacks.begin();
+                iter != receiveCallbacks.end(); ++iter){
+            iter->first->executeCallback(iter->second);
+        }
     }
 }
 
