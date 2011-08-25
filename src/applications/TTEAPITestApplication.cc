@@ -43,8 +43,14 @@ unsigned int main(){
 
     ev.printf("TTE_VAR_MAC_ADDRESS: %02x:%02x:%02x:%02x:%02x:%02x\n\n", mac[5], mac[4], mac[3], mac[2], mac[1], mac[0]);
 
-    tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void(*)(void*)), (void*)&testCallback);
-    tte_set_buf_var(&testbuffer, TTE_BUFVAR_CB_ARG, 5, "Test");
+    if(tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void(*)(void*)), (void*)&testCallback) != ETT_SUCCESS){
+        ev << "MIST21!" << endl << endl;
+        return -1;
+    }
+    if(tte_set_buf_var(&testbuffer, TTE_BUFVAR_CB_ARG, 5, "SENT") != ETT_SUCCESS){
+        ev << "MIST22!" << endl << endl;
+        return -1;
+    }
 
     tte_frame_t frame;
     frame.length=46;
@@ -69,6 +75,20 @@ unsigned int main(){
     }
     if(tte_close_output_buf(&testbuffer) != ETT_SUCCESS){
         ev << "MIST3!" << endl << endl;
+        return -1;
+    }
+
+    tte_buffer_t testbuffer2;
+    if(tte_get_ct_output_buf(0, 100, &testbuffer2) != ETT_SUCCESS){
+        ev << "MIST4!" << endl << endl;
+        return -1;
+    }
+    if(tte_set_buf_var(&testbuffer2, TTE_BUFVAR_RECEIVE_CB, sizeof(void(*)(void*)), (void*)&testCallback) != ETT_SUCCESS){
+        ev << "MIST41!" << endl << endl;
+        return -1;
+    }
+    if(tte_set_buf_var(&testbuffer2, TTE_BUFVAR_CB_ARG, 9, "RECEIVED") != ETT_SUCCESS){
+        ev << "MIST42!" << endl << endl;
         return -1;
     }
 

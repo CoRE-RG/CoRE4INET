@@ -61,6 +61,10 @@ class TTEAPIApplicationBase : public TTEApplicationBase
     virtual int32_t tte_get_ct_output_buf(const uint8_t ctrl_id,
                                   const uint16_t ct_id,
                                   tte_buffer_t * const buf);
+    virtual int32_t tte_get_ct_input_buf(const uint8_t ctrl_id,
+                                  const uint16_t ct_id,
+                                  tte_buffer_t * const buf);
+
     virtual int32_t tte_get_var(const uint8_t ctrl_id,
                                     const tte_var_id_t var_id,
                                     const uint32_t var_size,
@@ -75,6 +79,10 @@ class TTEAPIApplicationBase : public TTEApplicationBase
                                    const tte_buf_var_id_t var_id,
                                    const uint32_t var_size,
                                    const void * const value);
+    virtual int32_t tte_get_buf_var(const tte_buffer_t * const buf,
+                                       const tte_buf_var_id_t var_id,
+                                       const uint32_t var_size,
+                                       void * const value);
 };
 
 

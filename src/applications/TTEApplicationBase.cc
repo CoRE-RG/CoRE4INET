@@ -34,6 +34,11 @@ void TTEApplicationBase::addIncoming(uint16 ctID, Incoming *incoming)
     incomings[ctID].push_back(incoming);
 }
 
+void TTEApplicationBase::addBuffer(uint16 ctID, Buffer *buffer)
+{
+    buffers[ctID].push_back(buffer);
+}
+
 void TTEApplicationBase::executeCallback(Callback *cb){
     Enter_Method("executeCallback(cb)");
     cb->executeCallback();

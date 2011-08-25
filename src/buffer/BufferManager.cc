@@ -210,6 +210,7 @@ void BufferManager::initialize(int stage)
                     {
                         Port_ptr outgoingport = outgoingportList.get(m);
                         string portName = ConfigurationUtils::getPortName(outgoingport, nc->getRefMappings());
+                        int ctID = ConfigurationUtils::getVLid(vls->getRefVirtualLink(), nc->getRefMappings());
                         int oport = ConfigurationUtils::getPortSerialNumber(outgoingport, nc->getRefMappings());
                         cModule *destModule;
                         //TODO fix parsing of porttype attribute and use it
@@ -237,6 +238,7 @@ void BufferManager::initialize(int stage)
                         else if (portName == "HOST")
                         {
                             destModule = getParentModule()->getSubmodule("tteApp", oport);
+                            ((TTEApplicationBase*) destModule)->addBuffer(ctID, (Buffer*) newModule);
                         }
                         else
                         {

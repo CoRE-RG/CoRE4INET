@@ -19,12 +19,15 @@
 #include <omnetpp.h>
 #include <EtherFrame_m.h>
 #include <list>
-#include "TTEApplicationBase.h"
+#include "Callback.h"
 
 /**
  * TODO - Generated class
  */
 namespace TTEthernetModel {
+
+class TTEApplicationBase;
+
 class Buffer : public cSimpleModule
 {
     protected:

@@ -16,6 +16,7 @@
 #include "RCBuffer.h"
 #include <CTFrame_m.h>
 #include <TTEScheduler.h>
+#include "TTEApplicationBase.h"
 
 namespace TTEthernetModel {
 

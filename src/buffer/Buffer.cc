@@ -14,6 +14,7 @@
 // 
 
 #include "Buffer.h"
+#include "TTEApplicationBase.h"
 
 using namespace TTEthernetModel;
 
@@ -74,6 +75,8 @@ void Buffer::addReceiveCallback(Callback *cb, TTEApplicationBase *application)
 
 Callback* Buffer::getReceiveCallback(TTEApplicationBase *application)
 {
+    if(receiveCallbacks.find(application) == receiveCallbacks.end())
+        return NULL;
     return receiveCallbacks[application];
 }
 
@@ -84,6 +87,8 @@ void Buffer::addTransmitCallback(Callback *cb, TTEApplicationBase *application)
 
 Callback* Buffer::getTransmitCallback(TTEApplicationBase *application)
 {
+    if(transmitCallbacks.find(application) == transmitCallbacks.end())
+        return NULL;
     return transmitCallbacks[application];
 }
 

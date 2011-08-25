@@ -17,6 +17,7 @@
 #include <TTEScheduler.h>
 #include <SchedulerMessageEvents_m.h>
 #include <TTBufferEmpty_m.h>
+#include "TTEApplicationBase.h"
 
 using namespace TTEthernetModel;
 
