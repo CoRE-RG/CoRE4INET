@@ -195,8 +195,10 @@ void BufferManager::initialize(int stage)
                         }
                         else if (portName == "HOST")
                         {
-                            ((TTEApplicationBase*) getParentModule()->getSubmodule("tteApp"))->addIncoming(
-                                        ctID, (Incoming*) newCTCModule);
+//                            ((TTEApplicationBase*) getParentModule()->getSubmodule("tteApp"))->addIncoming(
+//                                        ctID, (Incoming*) newCTCModule);
+                            ((TTEApplicationBase*) getParentModule()->getSubmodule("tteApp"))->addBuffer(
+                                          ctID, (Buffer*) newModule);
                         }
                         else
                         {

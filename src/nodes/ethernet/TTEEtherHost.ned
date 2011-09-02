@@ -33,6 +33,8 @@ module TTEEtherHost
         string network_configuration;
         // Name of the device in the network configuration
         string device_name;
+        //Application running on the Host
+        string appType = default("TTEAPITestApplication");
     gates:
         // Physical port of the host
         inout ethg;
@@ -73,7 +75,7 @@ module TTEEtherHost
         tteScheduler: TTEScheduler {
             @display("p=52,180");
         }
-        tteApp: TTEAPITestApplication {
+        tteApp: <appType> like ITTEApplication {
             @display("p=301,55");
         }
     connections:

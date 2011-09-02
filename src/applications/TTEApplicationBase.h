@@ -19,9 +19,10 @@
 #include <omnetpp.h>
 #include "Incoming.h"
 #include "Callback.h"
-#include "Buffer.h"
 
 namespace TTEthernetModel {
+
+class Buffer;
 
 /**
  * TODO - Generated class
@@ -29,7 +30,7 @@ namespace TTEthernetModel {
 class TTEApplicationBase : public cSimpleModule
 {
   protected:
-    std::map<uint16, std::list<Incoming*> > incomings;
+    //std::map<uint16, std::list<Incoming*> > incomings;
     std::map<uint16, std::list<Buffer*> > buffers;
   protected:
     virtual void initialize();
@@ -37,7 +38,7 @@ class TTEApplicationBase : public cSimpleModule
 
   public:
     virtual void executeCallback(Callback *cb);
-    virtual void addIncoming(uint16 ctID, Incoming *incoming);
+    //virtual void addIncoming(uint16 ctID, Incoming *incoming);
     virtual void addBuffer(uint16 ctID, Buffer *buffer);
 };
 

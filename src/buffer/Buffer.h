@@ -19,7 +19,6 @@
 #include <omnetpp.h>
 #include <EtherFrame_m.h>
 #include <list>
-#include "Callback.h"
 
 /**
  * TODO - Generated class
@@ -27,6 +26,8 @@
 namespace TTEthernetModel {
 
 class TTEApplicationBase;
+class TTEAPIPriv;
+class Callback;
 
 class Buffer : public cSimpleModule
 {

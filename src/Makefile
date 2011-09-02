@@ -53,6 +53,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
 OBJS = \
+    $O/api/Callback.o \
     $O/applications/TTETestApp.o \
     $O/applications/TTEApplicationBase.o \
     $O/applications/TTEAPIApplicationBase.o \
@@ -178,26 +179,55 @@ depend:
 $O/api/APIPayload_m.o: api/APIPayload_m.cc \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	api/APIPayload_m.h
-$O/applications/TTEApplicationBase.o: applications/TTEApplicationBase.cc \
-	applications/TTEApplicationBase.h \
-	ctc/Incoming.h \
+$O/api/Callback.o: api/Callback.cc \
+	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
-	buffer/Buffer.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	api/Callback.h
-$O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \
-	$(INET_PROJ)/src/base/INETDefs.h \
+	buffer/RCBuffer.h \
 	applications/TTEAPIApplicationBase.h \
 	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	api/tte_api/tte_api.h \
+	scheduler/SchedulerEvent.h \
 	applications/TTEApplicationBase.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	linklayer/ethernet/CTFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	api/Callback.h
+$O/applications/TTEApplicationBase.o: applications/TTEApplicationBase.cc \
+	scheduler/SchedulerMessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	buffer/RCBuffer.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	api/tte_api/tte_api.h \
+	applications/TTEApplicationBase.h \
+	scheduler/SchedulerEvent.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	api/Callback.h
+$O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \
+	scheduler/SchedulerMessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	buffer/RCBuffer.h \
+	applications/TTEAPIApplicationBase.h \
+	buffer/Buffer.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	api/tte_api/tte_api.h \
+	scheduler/SchedulerEvent.h \
+	applications/TTEApplicationBase.h \
+	buffer/TTBuffer.h \
 	applications/TTEAPITestApplication.h \
 	ctc/Incoming.h \
+	scheduler/SchedulerMessageEvents_m.h \
 	linklayer/ethernet/CTFrame_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
@@ -238,17 +268,19 @@ $O/applications/TTETestApp.o: applications/TTETestApp.cc \
 $O/buffer/TTBuffer.o: buffer/TTBuffer.cc \
 	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
+	buffer/RCBuffer.h \
 	buffer/Buffer.h \
-	buffer/TTBufferEmpty_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	buffer/TTBufferEmpty_m.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	api/tte_api/tte_api.h \
 	applications/TTEApplicationBase.h \
 	scheduler/SchedulerEvent.h \
 	buffer/TTBuffer.h \
 	ctc/Incoming.h \
 	scheduler/TTEScheduler.h \
-	scheduler/SchedulerMessageEvents_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	scheduler/SchedulerMessageEvents_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	api/Callback.h
 $O/buffer/RCBuffer.o: buffer/RCBuffer.cc \
@@ -258,13 +290,15 @@ $O/buffer/RCBuffer.o: buffer/RCBuffer.cc \
 	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	api/tte_api/tte_api.h \
 	applications/TTEApplicationBase.h \
 	scheduler/SchedulerEvent.h \
+	buffer/TTBuffer.h \
 	ctc/Incoming.h \
 	scheduler/TTEScheduler.h \
-	scheduler/SchedulerMessageEvents_m.h \
 	linklayer/ethernet/CTFrame_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	scheduler/SchedulerMessageEvents_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	api/Callback.h
 $O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
@@ -276,8 +310,7 @@ $O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
 	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	api/Callback.h
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/TTDoubleBuffer.o: buffer/TTDoubleBuffer.cc \
 	buffer/TTDoubleBuffer.h \
 	buffer/TTBuffer.h \
@@ -287,8 +320,7 @@ $O/buffer/TTDoubleBuffer.o: buffer/TTDoubleBuffer.cc \
 	buffer/DoubleBuffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	api/Callback.h
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/TTBufferEmpty_m.o: buffer/TTBufferEmpty_m.cc \
 	buffer/TTBufferEmpty_m.h
 $O/buffer/QueueBuffer.o: buffer/QueueBuffer.cc \
@@ -299,51 +331,60 @@ $O/buffer/QueueBuffer.o: buffer/QueueBuffer.cc \
 	buffer/Buffer.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	api/Callback.h
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/BufferManager.o: buffer/BufferManager.cc \
 	$(INET_PROJ)/src/base/IPassiveQueue.h \
 	$(INET_PROJ)/src/base/AbstractQueue.h \
 	buffer/BufferManager.h \
+	scheduler/SchedulerMessage_m.h \
 	configuration/ConfigurationUtils.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
+	buffer/RCBuffer.h \
 	buffer/Buffer.h \
 	linklayer/TTEOutput.h \
 	$(INET_PROJ)/src/base/EnqueueHook.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	api/tte_api/tte_api.h \
+	scheduler/SchedulerEvent.h \
 	applications/TTEApplicationBase.h \
 	buffer/TTBuffer.h \
 	ctc/Incoming.h \
 	linklayer/TTEInput.h \
 	$(INET_PROJ)/src/base/QueueWithQoS.h \
+	scheduler/SchedulerMessageEvents_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	api/Callback.h
 $O/buffer/Buffer.o: buffer/Buffer.cc \
-	applications/TTEApplicationBase.h \
-	ctc/Incoming.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
-	buffer/Buffer.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	api/Callback.h
-$O/buffer/RCDoubleBuffer.o: buffer/RCDoubleBuffer.cc \
 	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	buffer/RCBuffer.h \
 	buffer/Buffer.h \
-	buffer/DoubleBuffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	api/tte_api/tte_api.h \
 	scheduler/SchedulerEvent.h \
-	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	applications/TTEApplicationBase.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
 	scheduler/SchedulerMessageEvents_m.h \
-	buffer/RCDoubleBuffer.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	api/Callback.h
+$O/buffer/RCDoubleBuffer.o: buffer/RCDoubleBuffer.cc \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	buffer/RCBuffer.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
+	buffer/DoubleBuffer.h \
+	buffer/Buffer.h \
+	buffer/RCDoubleBuffer.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/DoubleBuffer.o: buffer/DoubleBuffer.cc \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
@@ -351,8 +392,7 @@ $O/buffer/DoubleBuffer.o: buffer/DoubleBuffer.cc \
 	buffer/DoubleBuffer.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	api/Callback.h
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h
 $O/buffer/RCQueueBuffer.o: buffer/RCQueueBuffer.cc \
 	buffer/QueueBuffer.h \
 	scheduler/SchedulerMessage_m.h \
@@ -366,8 +406,7 @@ $O/buffer/RCQueueBuffer.o: buffer/RCQueueBuffer.cc \
 	buffer/TTBuffer.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	scheduler/SchedulerMessageEvents_m.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	api/Callback.h
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
 $O/configuration/ConfigurationUtils.o: configuration/ConfigurationUtils.cc \
 	configuration/ConfigurationUtils.h
 $O/ctc/TTIncoming.o: ctc/TTIncoming.cc \
@@ -407,8 +446,7 @@ $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
 	$(INET_PROJ)/src/base/QueueWithQoS.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	scheduler/SchedulerMessageEvents_m.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	api/Callback.h
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h
 $O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
 	ctc/Incoming.h \
 	configuration/ConfigurationUtils.h \

@@ -17,6 +17,8 @@
 
 #include <configuration/ConfigurationUtils.h>
 
+#include <iostream>
+
 using namespace TTEthernetModel;
 
 Define_Module( TTEInput);

@@ -47,18 +47,18 @@ void TTEAPIApplicationBase::startApplication(){
 int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
                                                      const uint16_t ct_id,
                                                      tte_buffer_t * const buf){
-    std::map<uint16, std::list<Incoming *> >::iterator incomingList = incomings.find(ct_id);
-    if (incomingList != incomings.end())
+    std::map<uint16, std::list<Buffer *> >::iterator bufferList = buffers.find(ct_id);
+    if (bufferList != buffers.end())
     {
         //Currently we use only the first entry!
-        std::list<Incoming*>::iterator incoming = incomingList->second.begin();
+        std::list<Buffer*>::iterator buffer = bufferList->second.begin();
 
         buf->ctrl_id=0;
         buf->direction= TTE_DIR_OUTPUT;
-        if(dynamic_cast<TTIncoming*>(*incoming) != NULL){
+        if(dynamic_cast<TTBuffer*>(*buffer) != NULL){
             buf->traffic_type= TTE_TT_TRAFFIC;
         }
-        else if(dynamic_cast<RCIncoming*>(*incoming) != NULL){
+        else if(dynamic_cast<RCBuffer*>(*buffer) != NULL){
             buf->traffic_type= TTE_CT_TRAFFIC;
         }
         else{
@@ -69,8 +69,7 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
         buf->shared=0;
 
         TTEAPIOutgoingPriv *priv = new TTEAPIOutgoingPriv();
-        priv->ctc = (*incoming);
-        priv->buffer = (Buffer *)priv->ctc->gate("out")->getPathEndGate()->getOwner();
+        priv->buffer = (*buffer);
 
         buf->priv=priv;
         return ETT_SUCCESS;
@@ -253,8 +252,14 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf){
         payload->setData(i, ((unsigned char *)priv->data)[i]);
     }
     free(priv->data);
-    sendDirect(priv->frame, priv->ctc->gate("in"));
-    delete priv;
+    //Send to CTC
+    if(priv->buffer)
+        if(priv->buffer->gate("in"))
+            if(priv->buffer->gate("in")->getPathStartGate())
+                if((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())
+                    if(((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"))
+                        sendDirect(priv->frame, ((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"));
+    //delete priv;
     return ETT_SUCCESS;
 }
 
@@ -267,21 +272,19 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
         case TTE_BUFVAR_RECEIVE_CB:{
             Callback *cb = priv->buffer->getReceiveCallback(this);
             if(cb == NULL){
-                cb = new Callback();
+                cb = new APICallback(priv->buffer);
                 priv->buffer->addReceiveCallback(cb, this);
-                cb->arg = buf;
             }
-            cb->fn = (void(*)(void *))value;
+            cb->setFunctionPointer((void(*)(void *))value);
             break;
         }
         case TTE_BUFVAR_TRANSMIT_CB:{
             Callback *cb = priv->buffer->getTransmitCallback(this);
             if(cb == NULL){
-                cb = new Callback();
+                cb = new APICallback(priv->buffer);
                 priv->buffer->addTransmitCallback(cb, this);
-                cb->arg = buf;
             }
-            cb->fn = (void(*)(void *))value;
+            cb->setFunctionPointer((void(*)(void *))value);
             break;
         }
         case TTE_BUFVAR_CB_ARG:{
@@ -291,10 +294,10 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
                 if(cb == NULL){
                     return ETT_NULLPTR;
                 }
-                cb->arg = (void*)value;
+                cb->setFunctionArg((void*)value);
             }
             else{
-                cb->arg = (void*)value;
+                cb->setFunctionArg((void*)value);
             }
             break;
         }
@@ -315,7 +318,8 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
             if(cb == NULL){
                 return ETT_NULLPTR;
             }
-            memcpy(value, &(cb->fn), sizeof(void (*)(void *)));
+            void (*func)(void *) = cb->getFunctionPointer();
+            memcpy(value, &func, sizeof(void (*)(void *)));
             break;
         }
         case TTE_BUFVAR_TRANSMIT_CB:{
@@ -323,7 +327,8 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
             if(cb == NULL){
                 return ETT_NULLPTR;
             }
-            memcpy(value, &(cb->fn), sizeof(void (*)(void *)));
+            void (*func)(void *) = cb->getFunctionPointer();
+            memcpy(value, &func, sizeof(void (*)(void *)));
             break;
         }
         case TTE_BUFVAR_CB_ARG:{
@@ -333,10 +338,12 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
                 if(cb == NULL){
                     return ETT_NULLPTR;
                 }
-                memcpy(value, &(cb->arg), sizeof(void *));
+                void * arg=cb->getFunctionArg();
+                memcpy(value, &arg, sizeof(void *));
             }
             else{
-                memcpy(value, &(cb->arg), sizeof(void *));
+                void * arg=cb->getFunctionArg();
+                memcpy(value, &arg, sizeof(void *));
             }
             break;
         }

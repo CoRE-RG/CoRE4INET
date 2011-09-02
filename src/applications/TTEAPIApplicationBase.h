@@ -20,7 +20,6 @@
 #include "tte_api.h"
 #include "TTEApplicationBase.h"
 #include "CTFrame_m.h"
-#include "Buffer.h"
 
 
 #define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
@@ -31,7 +30,6 @@ enum TTEAPIApplicationMessageKind{
     START_APPLICATION
 };
 
-
 class TTEAPIPriv
 {
     public:
@@ -41,7 +39,6 @@ class TTEAPIPriv
 class TTEAPIOutgoingPriv: public TTEAPIPriv
 {
     public:
-        Incoming *ctc;
         CTFrame *frame;
         void *data;
 };
