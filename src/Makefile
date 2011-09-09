@@ -53,6 +53,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
 OBJS = \
+    $O/api/Task.o \
     $O/api/Callback.o \
     $O/applications/TTETestApp.o \
     $O/applications/TTEApplicationBase.o \
@@ -179,6 +180,8 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc api/tte_api/*.cc applications/*.cc base/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/api/Task.o: api/Task.cc \
+	api/Task.h
 $O/api/APIPayload_m.o: api/APIPayload_m.cc \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	api/APIPayload_m.h
@@ -238,14 +241,16 @@ $O/applications/TTEAPITestApplication.o: applications/TTEAPITestApplication.cc \
 $O/applications/TTEAPIApplicationBase.o: applications/TTEAPIApplicationBase.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherMACFullDuplex.h \
 	scheduler/SchedulerMessage_m.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/base/INotifiable.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
 	buffer/RCBuffer.h \
 	applications/TTEAPIApplicationBase.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	api/Task.h \
 	scheduler/SchedulerEvent.h \
 	applications/TTEApplicationBase.h \
 	buffer/TTBuffer.h \
+	scheduler/TTEScheduler.h \
 	api/APIPayload_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h \
 	scheduler/SchedulerMessageEvents_m.h \

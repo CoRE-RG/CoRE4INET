@@ -22,6 +22,8 @@
 #include "RCBuffer.h"
 #include "BGBuffer.h"
 #include "APIPayload_m.h"
+#include "Task.h"
+#include "TTEScheduler.h"
 
 namespace TTEthernetModel {
 
@@ -38,11 +40,34 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
         startApplication();
         delete msg;
     }
+    if(msg->arrivedOn("schedulerIn")){
+        Task *task = (Task*)msg->par("task").pointerValue();
+        task->executeTask();
+        //Reregister scheduler
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        tteScheduler->registerEvent((SchedulerEvent *) msg);
+    }
 }
 
 void TTEAPIApplicationBase::startApplication(){
     ev << "TTEAPIApplicationBase::startApplication() not implemented" << endl;
     throw;
+}
+
+void TTEAPIApplicationBase::registerTask(unsigned int actionTime, void (*functionPointer)(void*), void *setFunctionArg){
+    Task *task = new Task();
+    task->setFunctionPointer(functionPointer);
+    task->setFunctionArg(setFunctionArg);
+
+    //Register Event
+    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
+
+    event->addPar("task").setPointerValue(task);
+
+    event->setAction_time(actionTime);
+    event->setDestinationGate(gate("schedulerIn"));
+    tteScheduler->registerEvent(event);
 }
 
 int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
@@ -321,6 +346,7 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf,
     }
 
     delete msg;
+    delete payload;
 
     return ETT_SUCCESS;
 }

@@ -55,6 +55,8 @@ class TTEAPIApplicationBase : public TTEApplicationBase
     virtual void startApplication();
 
   public:
+    virtual void registerTask(unsigned int actionTime, void (*functionPointer)(void*), void *setFunctionArg);
+
     virtual int32_t tte_get_ct_output_buf(const uint8_t ctrl_id,
                                   const uint16_t ct_id,
                                   tte_buffer_t * const buf);

@@ -23,4 +23,6 @@ simple TTEApplicationBase like ITTEApplication
         gates:
             input TTin @directIn @labels(CTFrame);
             input RCin @directIn @labels(CTFrame);
+            //Input gate for the incoming SchedulerActionTimeEvent messages
+            input schedulerIn @directIn;
 }
