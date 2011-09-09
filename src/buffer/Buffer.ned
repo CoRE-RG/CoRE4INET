@@ -31,7 +31,7 @@ simple Buffer like IOutputQueue
         
     gates:
         //The buffers Input
-        input in @labels(CTFrame);
+        input in @loose @labels(CTFrame);
         //The buffers Output @warning CURRENTLY NOT USED!
-        output out @labels(CTFrame);
+        output out @loose @labels(CTFrame);
 }

@@ -39,7 +39,7 @@ class TTEAPIPriv
 class TTEAPIOutgoingPriv: public TTEAPIPriv
 {
     public:
-        CTFrame *frame;
+        EtherFrame *frame;
         void *data;
 };
 
@@ -58,6 +58,12 @@ class TTEAPIApplicationBase : public TTEApplicationBase
     virtual int32_t tte_get_ct_output_buf(const uint8_t ctrl_id,
                                   const uint16_t ct_id,
                                   tte_buffer_t * const buf);
+    virtual int32_t tte_get_bg_output_buf(const uint8_t ctrl_id,
+                                  const uint8_t channel,
+                                  tte_buffer_t * const buf);
+    virtual int32_t tte_get_bg_input_buf(const uint8_t ctrl_id,
+                                  const uint8_t channel,
+                                  tte_buffer_t * const buf);
     virtual int32_t tte_get_ct_input_buf(const uint8_t ctrl_id,
                                   const uint16_t ct_id,
                                   tte_buffer_t * const buf);
@@ -70,7 +76,13 @@ class TTEAPIApplicationBase : public TTEApplicationBase
     virtual int32_t tte_open_output_buf(tte_buffer_t * const buf,
                                        tte_frame_t * const frame);
 
+    virtual int32_t tte_open_input_buf(tte_buffer_t * const buf,
+                                    tte_frame_t * const frame,
+                                    tte_buf_status_t * const status);
+
     virtual int32_t tte_close_output_buf(tte_buffer_t * const buf);
+
+    virtual int32_t tte_close_input_buf(tte_buffer_t * const buf);
 
     virtual int32_t tte_set_buf_var(tte_buffer_t * const buf,
                                    const tte_buf_var_id_t var_id,
@@ -80,6 +92,7 @@ class TTEAPIApplicationBase : public TTEApplicationBase
                                        const tte_buf_var_id_t var_id,
                                        const uint32_t var_size,
                                        void * const value);
+
 };
 
 

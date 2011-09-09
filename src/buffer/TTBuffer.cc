@@ -58,6 +58,14 @@ void TTBuffer::handleMessage(cMessage *msg)
                 sendDirect(new TTBufferEmpty("TT Buffer Empty"), *gate);
             }
         }
+        if(gate("out")->isConnected()){
+            if (outgoingMessage){
+                send(outgoingMessage->dup(),"out");
+            }
+            else{
+                send(new TTBufferEmpty("TT Buffer Empty"),"out");
+            }
+        }
         if (outgoingMessage)
         {
             recordPacketSent();

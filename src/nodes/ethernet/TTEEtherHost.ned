@@ -1,5 +1,7 @@
 package ttethernet.nodes.ethernet;
 
+import ttethernet.buffer.BGQueueBuffer;
+import ttethernet.linklayer.BGTrafficHandle;
 import ttethernet.applications.TTEAPITestApplication;
 import ttethernet.scheduler.TTEScheduler;
 import ttethernet.buffer.BufferManager;
@@ -49,10 +51,10 @@ module TTEEtherHost
             parameters:
                 @display("p=132,127");
             gates:
-                upperLayerIn[2];
-                upperLayerOut[2];
+                upperLayerIn[3];
+                upperLayerOut[3];
         }
-        
+
         cli: EtherAppCli {
             parameters:
                 registerSAP = true;
@@ -61,7 +63,7 @@ module TTEEtherHost
         srv: EtherAppSrv {
             parameters:
                 registerSAP = true;
-                @display("p=235,55,col");
+                @display("p=132,55,col");
         }
         // Buffer manager that creates the buffers according to the configuration
         bufferManager: BufferManager {
@@ -76,7 +78,16 @@ module TTEEtherHost
             @display("p=52,180");
         }
         tteApp: <appType> like ITTEApplication {
-            @display("p=301,55");
+            @display("p=434,55");
+        }
+        bgIn: BGQueueBuffer {
+            @display("p=291,55");
+        }
+        bgOut: BGQueueBuffer {
+            @display("p=291,119");
+        }
+        bgTrafficHandle: BGTrafficHandle {
+            @display("p=216,94");
         }
     connections:
         phy[0].phys <--> ethg;
@@ -88,5 +99,10 @@ module TTEEtherHost
 
         srv.out --> llc.upperLayerIn[1];
         srv.in <-- llc.upperLayerOut[1];
+
+        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
+        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
+        bgTrafficHandle.out --> bgIn.in;
+        bgOut.out --> bgTrafficHandle.in;
 }
 

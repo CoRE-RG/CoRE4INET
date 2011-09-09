@@ -44,23 +44,25 @@ void RCBuffer::initialize()
 
 void RCBuffer::handleMessage(cMessage *msg)
 {
+    Buffer::handleMessage(msg);
+
     if (msg->arrivedOn("in"))
     {
         if (bagExpired)
         {
+            cMessage *outgoingMessage = dequeue();
             bagExpired = false;
             numReset = 0;
             //Send Message
             for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
             {
-                sendDirect(msg->dup(), *gate);
+                sendDirect(outgoingMessage->dup(), *gate);
+            }
+            if(gate("out")->isConnected()){
+                send(outgoingMessage->dup(),"out");
             }
             recordPacketSent();
-            delete msg;
-        }
-        else
-        {
-            enqueue((EtherFrame*) msg);
+            delete outgoingMessage;
         }
     }
 
