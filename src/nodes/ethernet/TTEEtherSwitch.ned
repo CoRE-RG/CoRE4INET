@@ -28,7 +28,7 @@ module TTEEtherSwitch
         // Name of the device in the network configuration
         string device_name;
         // type of the best-effort MACRelayUnit; currently possible MACRelayUnitNP, MACRelayUnitPP
-        string beRelayUnitType = default("MACRelayUnitNP"); 
+        string beRelayUnitType = default("MACRelayUnitNP");
     gates:
         // Physical ports of the switch
         inout ethg[] @loose;
@@ -36,7 +36,7 @@ module TTEEtherSwitch
         // Implementation of the best-effort forwarding part
         beswitch: <beRelayUnitType> like IMACRelayUnit {
             parameters:
-                @display("p=135,54");
+                @display("p=141,256");
             gates:
                 lowerLayerIn[sizeof(ethg)];
                 lowerLayerOut[sizeof(ethg)];
@@ -44,28 +44,28 @@ module TTEEtherSwitch
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEPHYPort {
             parameters:
-                @display("p=135,216");
+                @display("p=235,255");
         }
         // Sync module for synchronisation of the scheduler
         sync: Sync {
             parameters:
-                @display("p=45,217");
+                @display("p=141,169");
         }
         // Buffer manager that creates the buffers according to the configuration
         bufferManager: BufferManager {
             parameters:
-                @display("p=203,121");
+                @display("p=999,999");
         }
         // Scheudler for the device
         tteScheduler: TTEScheduler {
             parameters:
-                @display("p=45,158");
+                @display("p=235,169");
         }
     connections:
         for i=0..sizeof(ethg)-1 {
-                phy[i].phys <--> ethg[i];
-                phy[i].upperLayerIn <-- beswitch.lowerLayerOut[i];
-                phy[i].upperLayerOut --> beswitch.lowerLayerIn[i];
+            phy[i].phys <--> ethg[i];
+            phy[i].upperLayerIn <-- beswitch.lowerLayerOut[i];
+            phy[i].upperLayerOut --> beswitch.lowerLayerIn[i];
         }
 }
 

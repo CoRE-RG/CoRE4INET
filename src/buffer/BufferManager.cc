@@ -22,6 +22,10 @@
 
 #include <configuration/ConfigurationUtils.h>
 
+
+#define X_POS_GUIBUFFER 330
+#define Y_POS_GUIBUFFER 30
+
 namespace TTEthernetModel {
 
 Define_Module( BufferManager);
@@ -35,6 +39,9 @@ void BufferManager::initialize(int stage)
 {
     if (stage == 1)
     {
+        unsigned int xPosition = 0;
+        unsigned int yPosition = 0;
+
         ConfigurationUtils::getPreloadedMMR();
         ecorecpp::ModelRepository *mr = ecorecpp::ModelRepository::_instance();
         ConfigurationUtils::resolveCommonAliases(mr);
@@ -92,6 +99,8 @@ void BufferManager::initialize(int stage)
                 newCTCModule->finalizeParameters();
                 newCTCModule->buildInside();
                 newCTCModule->callInitialize();
+                newCTCModule->getDisplayString().setTagArg("p", 0, X_POS_GUIBUFFER+200*xPosition);
+                newCTCModule->getDisplayString().setTagArg("p", 1, Y_POS_GUIBUFFER+60*yPosition);
 
                 cModule* newModule;
                 //Create Outgoing Buffers
@@ -256,6 +265,14 @@ void BufferManager::initialize(int stage)
                     newModule->finalizeParameters();
                     newModule->buildInside();
                     newModule->callInitialize();
+                    newModule->getDisplayString().setTagArg("p", 0, X_POS_GUIBUFFER+100+200*xPosition);
+                    newModule->getDisplayString().setTagArg("p", 1, Y_POS_GUIBUFFER+15+60*yPosition);
+
+                    yPosition++;
+                    if(yPosition>=4){
+                        xPosition++;
+                        yPosition=0;
+                    }
                 }
 
             }

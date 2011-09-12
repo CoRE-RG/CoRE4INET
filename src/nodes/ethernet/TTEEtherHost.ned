@@ -30,7 +30,7 @@ import inet.applications.ethernet.EtherAppCli;
 module TTEEtherHost
 {
     parameters:
-        @display("bgb=596,314;i=device/device");
+        @display("bgb=671,314;i=device/device");
         // Network configuration file
         string network_configuration;
         // Name of the device in the network configuration
@@ -44,12 +44,12 @@ module TTEEtherHost
     submodules:
         // Physical port of the host
         phy[1]: TTEPHYPort {
-            @display("p=132,239");
+            @display("p=235,255");
         }
         // LLC for best-effort traffic
         llc: EtherLLC {
             parameters:
-                @display("p=132,127");
+                @display("p=141,256");
             gates:
                 upperLayerIn[3];
                 upperLayerOut[3];
@@ -58,36 +58,36 @@ module TTEEtherHost
         cli: EtherAppCli {
             parameters:
                 registerSAP = true;
-                @display("p=45,55,col");
+                @display("p=60,256,col");
         }
         srv: EtherAppSrv {
             parameters:
                 registerSAP = true;
-                @display("p=132,55,col");
+                @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
         bufferManager: BufferManager {
-            @display("p=216,203");
+            @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler
         sync: Sync {
-            @display("p=52,240");
+            @display("p=141,169");
         }
         // Scheudler for the device
         tteScheduler: TTEScheduler {
-            @display("p=52,180");
+            @display("p=235,169");
         }
         tteApp: <appType> like ITTEApplication {
-            @display("p=434,55");
+            @display("p=235,99");
         }
         bgIn: BGQueueBuffer {
-            @display("p=291,55");
+            @display("p=141,37");
         }
         bgOut: BGQueueBuffer {
-            @display("p=291,119");
+            @display("p=141,99");
         }
         bgTrafficHandle: BGTrafficHandle {
-            @display("p=216,94");
+            @display("p=60,99");
         }
     connections:
         phy[0].phys <--> ethg;
