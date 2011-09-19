@@ -326,6 +326,7 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf,
     }
     frame->length = payload->getByteLength();
     frame->data = (uint8_t*)malloc(payload->getByteLength());
+    priv->data = frame->data;
     MACAddress dest= msg->getDest();
     frame->eth_hdr.dst_mac[0] = dest.getAddressByte(5);
     frame->eth_hdr.dst_mac[1] = dest.getAddressByte(4);
@@ -366,11 +367,15 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf){
                 if((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())
                     if(((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"))
                         sendDirect(priv->frame, ((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"));
-    //delete priv;
+    delete priv;
     return ETT_SUCCESS;
 }
 
 int32_t TTEAPIApplicationBase::tte_close_input_buf(tte_buffer_t * const buf){
+    TTEAPIOutgoingPriv *priv = (TTEAPIOutgoingPriv *)buf->priv;
+    //Free memory
+    free(priv->data);
+    delete priv;
     return ETT_SUCCESS;
 }
 
