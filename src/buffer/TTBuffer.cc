@@ -40,12 +40,13 @@ void TTBuffer::initialize()
 
 void TTBuffer::handleMessage(cMessage *msg)
 {
+    bool arrivedOnSchedulerIn = msg->arrivedOn("schedulerIn");
+
     Buffer::handleMessage(msg);
 
-    if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
+    if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT)
     {
         cMessage *outgoingMessage = dequeue();
-
         //Send Message
         for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
         {

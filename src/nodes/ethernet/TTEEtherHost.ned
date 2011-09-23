@@ -30,7 +30,7 @@ import inet.applications.ethernet.EtherAppCli;
 module TTEEtherHost
 {
     parameters:
-        @display("bgb=671,314;i=device/device");
+        @display("bgb=894,314;i=device/device");
         // Network configuration file
         string network_configuration;
         // Name of the device in the network configuration

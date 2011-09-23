@@ -37,6 +37,10 @@ namespace TTEthernetModel {
         buf.priv = priv;
         priv->buffer = buffer;
         fn((void*)&buf);
+        if(buf.priv){
+            delete priv;
+            buf.priv=0;
+        }
     }
 }
 

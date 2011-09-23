@@ -34,11 +34,6 @@ class TTEAPIPriv
 {
     public:
         Buffer *buffer;
-};
-
-class TTEAPIOutgoingPriv: public TTEAPIPriv
-{
-    public:
         EtherFrame *frame;
         void *data;
 };

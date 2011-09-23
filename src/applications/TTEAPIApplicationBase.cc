@@ -73,6 +73,7 @@ void TTEAPIApplicationBase::registerTask(unsigned int actionTime, void (*functio
 int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
                                                      const uint16_t ct_id,
                                                      tte_buffer_t * const buf){
+    Enter_Method_Silent();
     std::map<uint16, std::list<Buffer *> >::iterator bufferList = buffers.find(ct_id);
     if (bufferList != buffers.end())
     {
@@ -94,7 +95,7 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
         buf->ct_id=ct_id;
         buf->shared=0;
 
-        TTEAPIOutgoingPriv *priv = new TTEAPIOutgoingPriv();
+        TTEAPIPriv *priv = new TTEAPIPriv();
         priv->buffer = (*buffer);
 
         buf->priv=priv;
@@ -109,7 +110,7 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id,
 
 int32_t TTEAPIApplicationBase::tte_get_bg_output_buf(const uint8_t ctrl_id, const uint8_t channel,
                                                      tte_buffer_t * const buf){
-
+    Enter_Method_Silent();
     Buffer *buffer = dynamic_cast<Buffer*>(getParentModule()->getSubmodule("bgOut"));
 
     buf->ctrl_id=0;
@@ -119,7 +120,7 @@ int32_t TTEAPIApplicationBase::tte_get_bg_output_buf(const uint8_t ctrl_id, cons
     buf->channel=0;
     buf->shared=1;
 
-    TTEAPIOutgoingPriv *priv = new TTEAPIOutgoingPriv();
+    TTEAPIPriv *priv = new TTEAPIPriv();
     priv->buffer = buffer;
 
     buf->priv=priv;
@@ -128,7 +129,7 @@ int32_t TTEAPIApplicationBase::tte_get_bg_output_buf(const uint8_t ctrl_id, cons
 
 int32_t TTEAPIApplicationBase::tte_get_bg_input_buf(const uint8_t ctrl_id, const uint8_t channel,
                                                      tte_buffer_t * const buf){
-
+    Enter_Method_Silent();
     Buffer *buffer = dynamic_cast<Buffer*>(getParentModule()->getSubmodule("bgIn"));
 
     buf->ctrl_id=0;
@@ -138,7 +139,7 @@ int32_t TTEAPIApplicationBase::tte_get_bg_input_buf(const uint8_t ctrl_id, const
     buf->channel=0;
     buf->shared=1;
 
-    TTEAPIOutgoingPriv *priv = new TTEAPIOutgoingPriv();
+    TTEAPIPriv *priv = new TTEAPIPriv();
     priv->buffer = buffer;
 
     buf->priv=priv;
@@ -148,6 +149,7 @@ int32_t TTEAPIApplicationBase::tte_get_bg_input_buf(const uint8_t ctrl_id, const
 int32_t TTEAPIApplicationBase::tte_get_ct_input_buf(const uint8_t ctrl_id,
                                                      const uint16_t ct_id,
                                                      tte_buffer_t * const buf){
+    Enter_Method_Silent();
     std::map<uint16, std::list<Buffer *> >::iterator bufferList = buffers.find(ct_id);
     if (bufferList != buffers.end())
     {
@@ -186,6 +188,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
                                                             const tte_var_id_t var_id,
                                                             const uint32_t var_size,
                                                             void * const value){
+    Enter_Method_Silent();
     switch(var_id){
         case TTE_VAR_LINK_STATUS:{
             cModule *phy = getParentModule()->getSubmodule("phy", 0);
@@ -270,7 +273,8 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
 
 int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf,
                                                    tte_frame_t * const frame){
-    TTEAPIOutgoingPriv *priv = (TTEAPIOutgoingPriv*)buf->priv;
+    Enter_Method_Silent();
+    TTEAPIPriv *priv = (TTEAPIPriv*)buf->priv;
 
     //Now we create a frame that can be accessed later
     //TODO Divide TT and RC frames in separate types?
@@ -308,6 +312,8 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf,
     priv->frame->encapsulate(payload);
 
     frame->data = (uint8_t*)malloc(frame->length);
+    if(!frame->data)
+        return ETT_NOMEM;
     priv->data = frame->data;
     return ETT_SUCCESS;
 }
@@ -316,7 +322,8 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf,
 int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf,
                                                    tte_frame_t * const frame,
                                                    tte_buf_status_t * const status){
-    TTEAPIOutgoingPriv *priv = (TTEAPIOutgoingPriv*)buf->priv;
+    Enter_Method_Silent();
+    TTEAPIPriv *priv = (TTEAPIPriv*)buf->priv;
 
 
     EtherFrame *msg = priv->buffer->getFrame();
@@ -346,36 +353,52 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf,
         frame->data[i] = payload->getData(i);
     }
 
-    delete msg;
     delete payload;
+    delete msg;
 
     return ETT_SUCCESS;
 }
 
 int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf){
-    TTEAPIOutgoingPriv *priv = (TTEAPIOutgoingPriv *)buf->priv;
+    Enter_Method_Silent();
+    TTEAPIPriv *priv = (TTEAPIPriv *)buf->priv;
     //Copy frame data and free memory
     APIPayload *payload = (APIPayload*)priv->frame->getEncapsulatedPacket();
     for(unsigned int i=0;i<payload->getDataArraySize();i++){
         payload->setData(i, ((unsigned char *)priv->data)[i]);
     }
-    free(priv->data);
     //Send to CTC
     if(priv->buffer)
         if(priv->buffer->gate("in"))
             if(priv->buffer->gate("in")->getPathStartGate())
                 if((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())
-                    if(((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"))
+                    if(((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in")){
                         sendDirect(priv->frame, ((cModule *)priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"));
-    delete priv;
+                    }
+
+    if(priv->data){
+        free(priv->data);
+        priv->data = NULL;
+    }
+    if(priv){
+        delete priv;
+        buf->priv=NULL;
+    }
     return ETT_SUCCESS;
 }
 
 int32_t TTEAPIApplicationBase::tte_close_input_buf(tte_buffer_t * const buf){
-    TTEAPIOutgoingPriv *priv = (TTEAPIOutgoingPriv *)buf->priv;
+    Enter_Method_Silent();
+    TTEAPIPriv *priv = (TTEAPIPriv *)buf->priv;
     //Free memory
-    free(priv->data);
-    delete priv;
+    if(priv->data){
+        //free(priv->data);
+        priv->data = NULL;
+    }
+    if(priv){
+        delete priv;
+        buf->priv=NULL;
+    }
     return ETT_SUCCESS;
 }
 
@@ -383,10 +406,11 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
                                    const tte_buf_var_id_t var_id,
                                    const uint32_t var_size,
                                    const void * const value){
+    Enter_Method_Silent();
     TTEAPIPriv *priv = (TTEAPIPriv*)buf->priv;
     switch(var_id){
         case TTE_BUFVAR_RECEIVE_CB:{
-            Callback *cb = priv->buffer->getReceiveCallback(this);
+            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
             if(cb == NULL){
                 cb = new APICallback(priv->buffer);
                 priv->buffer->addReceiveCallback(cb, this);
@@ -395,7 +419,7 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
             break;
         }
         case TTE_BUFVAR_TRANSMIT_CB:{
-            Callback *cb = priv->buffer->getTransmitCallback(this);
+            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
             if(cb == NULL){
                 cb = new APICallback(priv->buffer);
                 priv->buffer->addTransmitCallback(cb, this);
@@ -404,9 +428,9 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
             break;
         }
         case TTE_BUFVAR_CB_ARG:{
-            Callback *cb = priv->buffer->getReceiveCallback(this);
+            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
             if(cb == NULL){
-                cb = priv->buffer->getTransmitCallback(this);
+                cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
                 if(cb == NULL){
                     return ETT_NULLPTR;
                 }
@@ -427,10 +451,11 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
                                    const tte_buf_var_id_t var_id,
                                    const uint32_t var_size,
                                    void * const value){
+    Enter_Method_Silent();
     TTEAPIPriv *priv = (TTEAPIPriv*)buf->priv;
     switch(var_id){
         case TTE_BUFVAR_RECEIVE_CB:{
-            Callback *cb = priv->buffer->getReceiveCallback(this);
+            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
             if(cb == NULL){
                 return ETT_NULLPTR;
             }
@@ -439,7 +464,7 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
             break;
         }
         case TTE_BUFVAR_TRANSMIT_CB:{
-            Callback *cb = priv->buffer->getTransmitCallback(this);
+            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
             if(cb == NULL){
                 return ETT_NULLPTR;
             }
@@ -448,9 +473,9 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
             break;
         }
         case TTE_BUFVAR_CB_ARG:{
-            Callback *cb = priv->buffer->getReceiveCallback(this);
+            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
             if(cb == NULL){
-                Callback *cb = priv->buffer->getTransmitCallback(this);
+                APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
                 if(cb == NULL){
                     return ETT_NULLPTR;
                 }
