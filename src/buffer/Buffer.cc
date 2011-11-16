@@ -21,6 +21,7 @@ using namespace TTEthernetModel;
 Define_Module( Buffer);
 
 simsignal_t Buffer::txPkSignal = SIMSIGNAL_NULL;
+simsignal_t Buffer::latencySignal = SIMSIGNAL_NULL;
 
 Buffer::Buffer()
 {
@@ -39,6 +40,7 @@ void Buffer::initialize()
 void Buffer::initializeStatistics()
 {
     txPkSignal = registerSignal("txPk");
+    latencySignal = registerSignal("latency");
 }
 
 void Buffer::recordPacketSent()
@@ -116,6 +118,7 @@ void Buffer::handleMessage(cMessage *msg)
             mac.setAddressByte(5, ct_id);
             frame->setDest(mac);
         }
+        emit(latencySignal, simTime()-msg->getCreationTime());
         enqueue((EtherFrame*) frame);
         // Now execute callbacks if there are some
         for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = receiveCallbacks.begin();

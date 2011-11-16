@@ -89,7 +89,6 @@ class TTEAPIApplicationBase : public TTEApplicationBase
                                        const tte_buf_var_id_t var_id,
                                        const uint32_t var_size,
                                        void * const value);
-
 };
 
 

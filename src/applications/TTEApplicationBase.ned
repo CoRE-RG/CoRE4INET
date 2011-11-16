@@ -20,6 +20,8 @@ package ttethernet.applications;
 //
 simple TTEApplicationBase like ITTEApplication
 {
+        parameters:
+            
         gates:
             input TTin @directIn @labels(CTFrame);
             input RCin @directIn @labels(CTFrame);

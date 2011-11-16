@@ -22,7 +22,7 @@ module TTEEtherSwitch
 {
     parameters:
         @node();
-        @display("i=block/switch;bgb=666,302");
+        @display("i=block/switch;bgb=1219,302");
         // Network configuration file
         string network_configuration;
         // Name of the device in the network configuration

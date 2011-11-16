@@ -29,6 +29,7 @@ namespace TTEthernetModel {
 
 Define_Module(TTEAPIApplicationBase);
 
+
 void TTEAPIApplicationBase::initialize()
 {
     scheduleAt(simTime(), new cMessage("Start Application", START_APPLICATION));

@@ -20,6 +20,8 @@ simple Buffer like IOutputQueue
         @display("i=block/buffer");
         //Statistic of the amount of packets that were sent by the buffer
         @statistic[txPk](title="TX Packets"; record=count,vector);
+        //End-to-end latency
+        @statistic[latency](title="End-to-end latency"; record=count,vector);
         //Priority of the buffer (currently only used for rate-constrained traffic)
         int priority=-1;
         //Critical traffic ID of the buffer

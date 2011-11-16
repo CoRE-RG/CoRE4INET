@@ -60,6 +60,7 @@ class Buffer : public cSimpleModule
 
     protected:
         static simsignal_t txPkSignal;
+        static simsignal_t latencySignal;
 
 };
 }
