@@ -5,9 +5,9 @@ cplusplus {{
 
 
 //
-// Represents payload in an ICMP/ICMPv6 Echo Request/Reply.
+// Represents payload in an TTEthernet-Message sent over API
 //
 packet APIPayload
 {
-    unsigned char data[];
+    unsigned char data[]; //The actual payload encoded in bytes
 }

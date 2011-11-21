@@ -33,6 +33,8 @@ class Task
             argSet=false;
         }
 
+        virtual ~Task();
+
         virtual void setFunctionPointer(void (*functionPointer)(void*)){
             fn=functionPointer;
         }
