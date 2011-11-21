@@ -46,6 +46,10 @@ class SchedulerMessage : public ::cMessage
 {
   protected:
 
+  private:
+    void copy(const SchedulerMessage& other);
+
+  protected:
     // protected and unimplemented operator==(), to prevent accidental usage
     bool operator==(const SchedulerMessage&);
 
@@ -78,10 +82,13 @@ inline void doUnpacking(cCommBuffer *b, SchedulerMessage& obj) {obj.parsimUnpack
  * <pre>
  * class SchedulerEvent : public SchedulerEvent_Base
  * {
+ *   private:
+ *     void copy(const SchedulerEvent& other) { ... }
+
  *   public:
  *     SchedulerEvent(const char *name=NULL, int kind=0) : SchedulerEvent_Base(name,kind) {}
- *     SchedulerEvent(const SchedulerEvent& other) : SchedulerEvent_Base(other.getName()) {operator=(other);}
- *     SchedulerEvent& operator=(const SchedulerEvent& other) {SchedulerEvent_Base::operator=(other); return *this;}
+ *     SchedulerEvent(const SchedulerEvent& other) : SchedulerEvent_Base(other) {copy(other);}
+ *     SchedulerEvent& operator=(const SchedulerEvent& other) {if (this==&other) return *this; SchedulerEvent_Base::operator=(other); copy(other); return *this;}
  *     virtual SchedulerEvent *dup() const {return new SchedulerEvent(*this);}
  *     // ADD CODE HERE to redefine and implement pure virtual functions from SchedulerEvent_Base
  * };
@@ -97,6 +104,10 @@ class SchedulerEvent_Base : public ::TTEthernetModel::SchedulerMessage
 {
   protected:
 
+  private:
+    void copy(const SchedulerEvent_Base& other);
+
+  protected:
     // protected and unimplemented operator==(), to prevent accidental usage
     bool operator==(const SchedulerEvent_Base&);
     // make constructors protected to avoid instantiation

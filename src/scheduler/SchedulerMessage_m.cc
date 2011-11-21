@@ -45,10 +45,9 @@ SchedulerMessage::SchedulerMessage(const char *name, int kind) : cMessage(name,k
 {
 }
 
-SchedulerMessage::SchedulerMessage(const SchedulerMessage& other) : cMessage()
+SchedulerMessage::SchedulerMessage(const SchedulerMessage& other) : cMessage(other)
 {
-    setName(other.getName());
-    operator=(other);
+    copy(other);
 }
 
 SchedulerMessage::~SchedulerMessage()
@@ -59,7 +58,12 @@ SchedulerMessage& SchedulerMessage::operator=(const SchedulerMessage& other)
 {
     if (this==&other) return *this;
     cMessage::operator=(other);
+    copy(other);
     return *this;
+}
+
+void SchedulerMessage::copy(const SchedulerMessage& other)
+{
 }
 
 void SchedulerMessage::parsimPack(cCommBuffer *b)
@@ -245,10 +249,9 @@ SchedulerEvent_Base::SchedulerEvent_Base(const char *name, int kind) : TTEtherne
 {
 }
 
-SchedulerEvent_Base::SchedulerEvent_Base(const SchedulerEvent_Base& other) : TTEthernetModel::SchedulerMessage()
+SchedulerEvent_Base::SchedulerEvent_Base(const SchedulerEvent_Base& other) : TTEthernetModel::SchedulerMessage(other)
 {
-    setName(other.getName());
-    operator=(other);
+    copy(other);
 }
 
 SchedulerEvent_Base::~SchedulerEvent_Base()
@@ -259,7 +262,12 @@ SchedulerEvent_Base& SchedulerEvent_Base::operator=(const SchedulerEvent_Base& o
 {
     if (this==&other) return *this;
     TTEthernetModel::SchedulerMessage::operator=(other);
+    copy(other);
     return *this;
+}
+
+void SchedulerEvent_Base::copy(const SchedulerEvent_Base& other)
+{
 }
 
 void SchedulerEvent_Base::parsimPack(cCommBuffer *b)

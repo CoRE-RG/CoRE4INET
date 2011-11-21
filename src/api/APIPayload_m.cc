@@ -38,12 +38,11 @@ APIPayload::APIPayload(const char *name, int kind) : cPacket(name,kind)
     this->data_var = 0;
 }
 
-APIPayload::APIPayload(const APIPayload& other) : cPacket()
+APIPayload::APIPayload(const APIPayload& other) : cPacket(other)
 {
-    setName(other.getName());
     data_arraysize = 0;
     this->data_var = 0;
-    operator=(other);
+    copy(other);
 }
 
 APIPayload::~APIPayload()
@@ -55,12 +54,17 @@ APIPayload& APIPayload::operator=(const APIPayload& other)
 {
     if (this==&other) return *this;
     cPacket::operator=(other);
+    copy(other);
+    return *this;
+}
+
+void APIPayload::copy(const APIPayload& other)
+{
     delete [] this->data_var;
     this->data_var = (other.data_arraysize==0) ? NULL : new unsigned char[other.data_arraysize];
     data_arraysize = other.data_arraysize;
     for (unsigned int i=0; i<data_arraysize; i++)
         this->data_var[i] = other.data_var[i];
-    return *this;
 }
 
 void APIPayload::parsimPack(cCommBuffer *b)
@@ -107,10 +111,10 @@ unsigned char APIPayload::getData(unsigned int k) const
     return data_var[k];
 }
 
-void APIPayload::setData(unsigned int k, unsigned char data_var)
+void APIPayload::setData(unsigned int k, unsigned char data)
 {
     if (k>=data_arraysize) throw cRuntimeError("Array of size %d indexed by %d", data_arraysize, k);
-    this->data_var[k]=data_var;
+    this->data_var[k] = data;
 }
 
 class APIPayloadDescriptor : public cClassDescriptor

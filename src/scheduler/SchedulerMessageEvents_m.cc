@@ -38,10 +38,9 @@ SchedulerActionTimeEvent::SchedulerActionTimeEvent(const char *name, int kind) :
     this->action_time_var = 0;
 }
 
-SchedulerActionTimeEvent::SchedulerActionTimeEvent(const SchedulerActionTimeEvent& other) : TTEthernetModel::SchedulerEvent()
+SchedulerActionTimeEvent::SchedulerActionTimeEvent(const SchedulerActionTimeEvent& other) : TTEthernetModel::SchedulerEvent(other)
 {
-    setName(other.getName());
-    operator=(other);
+    copy(other);
 }
 
 SchedulerActionTimeEvent::~SchedulerActionTimeEvent()
@@ -52,8 +51,13 @@ SchedulerActionTimeEvent& SchedulerActionTimeEvent::operator=(const SchedulerAct
 {
     if (this==&other) return *this;
     TTEthernetModel::SchedulerEvent::operator=(other);
-    this->action_time_var = other.action_time_var;
+    copy(other);
     return *this;
+}
+
+void SchedulerActionTimeEvent::copy(const SchedulerActionTimeEvent& other)
+{
+    this->action_time_var = other.action_time_var;
 }
 
 void SchedulerActionTimeEvent::parsimPack(cCommBuffer *b)
@@ -73,9 +77,9 @@ unsigned int SchedulerActionTimeEvent::getAction_time() const
     return action_time_var;
 }
 
-void SchedulerActionTimeEvent::setAction_time(unsigned int action_time_var)
+void SchedulerActionTimeEvent::setAction_time(unsigned int action_time)
 {
-    this->action_time_var = action_time_var;
+    this->action_time_var = action_time;
 }
 
 class SchedulerActionTimeEventDescriptor : public cClassDescriptor
@@ -270,10 +274,9 @@ SchedulerTimerEvent::SchedulerTimerEvent(const char *name, int kind) : TTEtherne
     this->timer_var = 0;
 }
 
-SchedulerTimerEvent::SchedulerTimerEvent(const SchedulerTimerEvent& other) : TTEthernetModel::SchedulerEvent()
+SchedulerTimerEvent::SchedulerTimerEvent(const SchedulerTimerEvent& other) : TTEthernetModel::SchedulerEvent(other)
 {
-    setName(other.getName());
-    operator=(other);
+    copy(other);
 }
 
 SchedulerTimerEvent::~SchedulerTimerEvent()
@@ -284,8 +287,13 @@ SchedulerTimerEvent& SchedulerTimerEvent::operator=(const SchedulerTimerEvent& o
 {
     if (this==&other) return *this;
     TTEthernetModel::SchedulerEvent::operator=(other);
-    this->timer_var = other.timer_var;
+    copy(other);
     return *this;
+}
+
+void SchedulerTimerEvent::copy(const SchedulerTimerEvent& other)
+{
+    this->timer_var = other.timer_var;
 }
 
 void SchedulerTimerEvent::parsimPack(cCommBuffer *b)
@@ -305,9 +313,9 @@ unsigned int SchedulerTimerEvent::getTimer() const
     return timer_var;
 }
 
-void SchedulerTimerEvent::setTimer(unsigned int timer_var)
+void SchedulerTimerEvent::setTimer(unsigned int timer)
 {
-    this->timer_var = timer_var;
+    this->timer_var = timer;
 }
 
 class SchedulerTimerEventDescriptor : public cClassDescriptor

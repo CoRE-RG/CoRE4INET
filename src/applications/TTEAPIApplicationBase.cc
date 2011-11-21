@@ -25,6 +25,8 @@
 #include "Task.h"
 #include "TTEScheduler.h"
 
+#include "Ethernet.h"
+
 namespace TTEthernetModel {
 
 Define_Module(TTEAPIApplicationBase);
@@ -240,6 +242,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
         }
         case TTE_VAR_API_VERSION:{
             *((uint32_t*)value) = TTE_API_VER;
+            break;
         }
         case TTE_VAR_THREAD_SAFE:{
             //TODO: CHECK WHETHER IT IS POSSIBLE TO SET TO TRUE (1)
@@ -532,7 +535,7 @@ extern "C" int32_t tte_get_var(const uint8_t ctrl_id,
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
     if(app != NULL)
         return app->tte_get_var(ctrl_id, var_id, var_size, value);
-    return ETT_NULLPTR;;
+    return ETT_NULLPTR;
 }
 
 extern "C" int32_t tte_get_ct_input_buf(const uint8_t ctrl_id,

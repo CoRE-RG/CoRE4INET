@@ -34,6 +34,10 @@ class SchedulerActionTimeEvent : public ::TTEthernetModel::SchedulerEvent
   protected:
     unsigned int action_time_var;
 
+  private:
+    void copy(const SchedulerActionTimeEvent& other);
+
+  protected:
     // protected and unimplemented operator==(), to prevent accidental usage
     bool operator==(const SchedulerActionTimeEvent&);
 
@@ -48,7 +52,7 @@ class SchedulerActionTimeEvent : public ::TTEthernetModel::SchedulerEvent
 
     // field getter/setter methods
     virtual unsigned int getAction_time() const;
-    virtual void setAction_time(unsigned int action_time_var);
+    virtual void setAction_time(unsigned int action_time);
 };
 
 inline void doPacking(cCommBuffer *b, SchedulerActionTimeEvent& obj) {obj.parsimPack(b);}
@@ -68,6 +72,10 @@ class SchedulerTimerEvent : public ::TTEthernetModel::SchedulerEvent
   protected:
     unsigned int timer_var;
 
+  private:
+    void copy(const SchedulerTimerEvent& other);
+
+  protected:
     // protected and unimplemented operator==(), to prevent accidental usage
     bool operator==(const SchedulerTimerEvent&);
 
@@ -82,7 +90,7 @@ class SchedulerTimerEvent : public ::TTEthernetModel::SchedulerEvent
 
     // field getter/setter methods
     virtual unsigned int getTimer() const;
-    virtual void setTimer(unsigned int timer_var);
+    virtual void setTimer(unsigned int timer);
 };
 
 inline void doPacking(cCommBuffer *b, SchedulerTimerEvent& obj) {obj.parsimPack(b);}

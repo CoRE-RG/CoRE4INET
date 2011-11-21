@@ -38,6 +38,10 @@ class CTFrame : public ::EtherFrame
     unsigned short ctID_var;
     opp_string displayString_var;
 
+  private:
+    void copy(const CTFrame& other);
+
+  protected:
     // protected and unimplemented operator==(), to prevent accidental usage
     bool operator==(const CTFrame&);
 
@@ -52,9 +56,9 @@ class CTFrame : public ::EtherFrame
 
     // field getter/setter methods
     virtual unsigned short getCtID() const;
-    virtual void setCtID(unsigned short ctID_var);
+    virtual void setCtID(unsigned short ctID);
     virtual const char * getDisplayString() const;
-    virtual void setDisplayString(const char * displayString_var);
+    virtual void setDisplayString(const char * displayString);
 };
 
 inline void doPacking(cCommBuffer *b, CTFrame& obj) {obj.parsimPack(b);}

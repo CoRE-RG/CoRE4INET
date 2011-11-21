@@ -34,6 +34,10 @@ class APIPayload : public ::cPacket
     unsigned char *data_var; // array ptr
     unsigned int data_arraysize;
 
+  private:
+    void copy(const APIPayload& other);
+
+  protected:
     // protected and unimplemented operator==(), to prevent accidental usage
     bool operator==(const APIPayload&);
 
@@ -50,7 +54,7 @@ class APIPayload : public ::cPacket
     virtual void setDataArraySize(unsigned int size);
     virtual unsigned int getDataArraySize() const;
     virtual unsigned char getData(unsigned int k) const;
-    virtual void setData(unsigned int k, unsigned char data_var);
+    virtual void setData(unsigned int k, unsigned char data);
 };
 
 inline void doPacking(cCommBuffer *b, APIPayload& obj) {obj.parsimPack(b);}

@@ -39,10 +39,9 @@ CTFrame::CTFrame(const char *name, int kind) : EtherFrame(name,kind)
     this->displayString_var = "b=15,15,rect,white,kind,5";
 }
 
-CTFrame::CTFrame(const CTFrame& other) : EtherFrame()
+CTFrame::CTFrame(const CTFrame& other) : EtherFrame(other)
 {
-    setName(other.getName());
-    operator=(other);
+    copy(other);
 }
 
 CTFrame::~CTFrame()
@@ -53,9 +52,14 @@ CTFrame& CTFrame::operator=(const CTFrame& other)
 {
     if (this==&other) return *this;
     EtherFrame::operator=(other);
+    copy(other);
+    return *this;
+}
+
+void CTFrame::copy(const CTFrame& other)
+{
     this->ctID_var = other.ctID_var;
     this->displayString_var = other.displayString_var;
-    return *this;
 }
 
 void CTFrame::parsimPack(cCommBuffer *b)
@@ -77,9 +81,9 @@ unsigned short CTFrame::getCtID() const
     return ctID_var;
 }
 
-void CTFrame::setCtID(unsigned short ctID_var)
+void CTFrame::setCtID(unsigned short ctID)
 {
-    this->ctID_var = ctID_var;
+    this->ctID_var = ctID;
 }
 
 const char * CTFrame::getDisplayString() const
@@ -87,9 +91,9 @@ const char * CTFrame::getDisplayString() const
     return displayString_var.c_str();
 }
 
-void CTFrame::setDisplayString(const char * displayString_var)
+void CTFrame::setDisplayString(const char * displayString)
 {
-    this->displayString_var = displayString_var;
+    this->displayString_var = displayString;
 }
 
 class CTFrameDescriptor : public cClassDescriptor

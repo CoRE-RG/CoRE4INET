@@ -36,10 +36,9 @@ TTBufferEmpty::TTBufferEmpty(const char *name, int kind) : cMessage(name,kind)
 {
 }
 
-TTBufferEmpty::TTBufferEmpty(const TTBufferEmpty& other) : cMessage()
+TTBufferEmpty::TTBufferEmpty(const TTBufferEmpty& other) : cMessage(other)
 {
-    setName(other.getName());
-    operator=(other);
+    copy(other);
 }
 
 TTBufferEmpty::~TTBufferEmpty()
@@ -50,7 +49,12 @@ TTBufferEmpty& TTBufferEmpty::operator=(const TTBufferEmpty& other)
 {
     if (this==&other) return *this;
     cMessage::operator=(other);
+    copy(other);
     return *this;
+}
+
+void TTBufferEmpty::copy(const TTBufferEmpty& other)
+{
 }
 
 void TTBufferEmpty::parsimPack(cCommBuffer *b)

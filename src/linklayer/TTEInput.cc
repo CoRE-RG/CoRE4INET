@@ -103,7 +103,8 @@ void TTEInput::handleMessage(cMessage *msg)
 
 bool TTEInput::isCT(EtherFrame *frame)
 {
-    unsigned char* macBytes = frame->getDest().getAddressBytes();
+    unsigned char macBytes[6];
+    frame->getDest().getAddressBytes(macBytes);
     //Check for ct
     if ((((macBytes[0] << 24) | (macBytes[1] << 16) | (macBytes[2] << 8) | (macBytes[3])) & ct_mask) == (ct_marker
             & ct_mask))
@@ -116,6 +117,7 @@ bool TTEInput::isCT(EtherFrame *frame)
 
 uint16 TTEInput::getCTID(EtherFrame *frame)
 {
-    unsigned char* macBytes = frame->getDest().getAddressBytes();
+    unsigned char macBytes[6];
+    frame->getDest().getAddressBytes(macBytes);
     return (macBytes[4] << 8) | macBytes[5];
 }

@@ -28,6 +28,10 @@ class TTBufferEmpty : public ::cMessage
 {
   protected:
 
+  private:
+    void copy(const TTBufferEmpty& other);
+
+  protected:
     // protected and unimplemented operator==(), to prevent accidental usage
     bool operator==(const TTBufferEmpty&);
 
