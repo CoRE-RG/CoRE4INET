@@ -18,6 +18,7 @@
 
 #include <cobject.h>
 
+
 namespace TTEthernetModel {
 
 typedef void(*cbFunc)(void *);
@@ -32,8 +33,6 @@ class Task
         Task(){
             argSet=false;
         }
-
-        virtual ~Task();
 
         virtual void setFunctionPointer(void (*functionPointer)(void*)){
             fn=functionPointer;
