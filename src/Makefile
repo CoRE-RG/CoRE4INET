@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for libTTEthernetModelV2
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/workspaces/omnet4.2/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp -I/home/tillsteinbach/workspaces/omnet4.2/TTEthernetModelV2/model-src -I../../inet/src/linklayer/ethernet -I../../inet/src/util -I../../inet/src/networklayer/common -I../../inet/src/linklayer/contract -I../../inet/src/base -I../../inet/src/networklayer/contract -L../../inet/out/$(CONFIGNAME)/src -lxerces-c -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=../../inet -- -L../emf4cpp-0.0.2/lib -L../model-src
+#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/git/TTEthernetModel/emf4cpp-0.0.2/include/emf4cpp -I/home/tillsteinbach/git/TTEthernetModel/model-src -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/ethernet -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/common -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/base -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/contract -L/home/tillsteinbach/workspaces/omnet4.2/inet/out/$(CONFIGNAME)/src -lxerces-c -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet -- -L../emf4cpp-0.0.2/lib -L../model-src
 #
 
 # Name of target to be created (-o option)
@@ -12,12 +12,12 @@ TARGET = libTTEthernetModelV2$(SHARED_LIB_SUFFIX)
 INCLUDE_PATH = \
     -I../emf4cpp-0.0.2/include/emf4cpp \
     -I../model-src \
-    -I../../inet/src/linklayer/ethernet \
-    -I../../inet/src/util \
-    -I../../inet/src/networklayer/common \
-    -I../../inet/src/linklayer/contract \
-    -I../../inet/src/base \
-    -I../../inet/src/networklayer/contract \
+    -I$(INET_PROJ)/src/linklayer/ethernet \
+    -I$(INET_PROJ)/src/util \
+    -I$(INET_PROJ)/src/networklayer/common \
+    -I$(INET_PROJ)/src/linklayer/contract \
+    -I$(INET_PROJ)/src/base \
+    -I$(INET_PROJ)/src/networklayer/contract \
     -I. \
     -Iapi \
     -Iapi/tte_api \
@@ -37,8 +37,8 @@ INCLUDE_PATH = \
 EXTRA_OBJS = -L../emf4cpp-0.0.2/lib -L../model-src
 
 # Additional libraries (-L, -l options)
-LIBS = -L../../inet/out/$(CONFIGNAME)/src  -lxerces-c -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet
-LIBS += -Wl,-rpath,`abspath ../../inet/out/$(CONFIGNAME)/src`
+LIBS = -L$(INET_PROJ)/out/$(CONFIGNAME)/src  -lxerces-c -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet
+LIBS += -Wl,-rpath,`abspath $(INET_PROJ)/out/$(CONFIGNAME)/src`
 
 # Output directory
 PROJECT_OUTPUT_DIR = ../out
@@ -90,7 +90,7 @@ MSGFILES = \
     scheduler/SchedulerMessageEvents.msg
 
 # Other makefile variables (-K)
-INET_PROJ=../../inet
+INET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet
 
 #------------------------------------------------------------------------------
 

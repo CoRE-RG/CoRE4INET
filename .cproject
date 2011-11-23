@@ -50,7 +50,6 @@
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
-									<listOptionValue builtIn="false" value="_LARGEFILE_SOURCE"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN__"/>
 									<listOptionValue builtIn="false" value="__SCHAR_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MANT_DIG__"/>
@@ -60,7 +59,6 @@
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="HAVE_PCAP"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_PTRDIFF_T__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX__"/>
@@ -74,9 +72,9 @@
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
-									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
+									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
+									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="i386"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
@@ -86,14 +84,13 @@
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
-									<listOptionValue builtIn="false" value="WITH_NETBUILDER"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4"/>
-									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
+									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
@@ -105,7 +102,6 @@
 									<listOptionValue builtIn="false" value="__FLT_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GXX_RTTI"/>
-									<listOptionValue builtIn="false" value="XMLPARSER"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SIZE_T__"/>
@@ -135,10 +131,8 @@
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GNUC__"/>
-									<listOptionValue builtIn="false" value="WITH_PARSIM"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_FLOAT__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_MAX__"/>
-									<listOptionValue builtIn="false" value="_FILE_OFFSET_BITS"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__unix"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
@@ -189,7 +183,7 @@
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1164351677" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
 								</option>
-								<option id="gnu.c.compiler.option.include.paths.1282023526" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath"/>
+								<option id="gnu.c.compiler.option.include.paths.1282023526" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1006037084" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1900352952" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
@@ -197,7 +191,7 @@
 								<option id="gnu.cpp.link.option.paths.1193847787" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/emf4cpp-0.0.2/lib}&quot;"/>
 								</option>
-								<option id="gnu.cpp.link.option.libs.2085481639" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
+								<option id="gnu.cpp.link.option.libs.2085481639" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.84394541" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -227,7 +221,6 @@
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
-									<listOptionValue builtIn="false" value="_LARGEFILE_SOURCE"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN__"/>
 									<listOptionValue builtIn="false" value="__SCHAR_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MANT_DIG__"/>
@@ -237,7 +230,6 @@
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="HAVE_PCAP"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_PTRDIFF_T__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX__"/>
@@ -251,9 +243,9 @@
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
-									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
+									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
+									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="i386"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
@@ -263,14 +255,13 @@
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
-									<listOptionValue builtIn="false" value="WITH_NETBUILDER"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4"/>
-									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
+									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
@@ -282,7 +273,6 @@
 									<listOptionValue builtIn="false" value="__FLT_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GXX_RTTI"/>
-									<listOptionValue builtIn="false" value="XMLPARSER"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SIZE_T__"/>
@@ -312,10 +302,8 @@
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GNUC__"/>
-									<listOptionValue builtIn="false" value="WITH_PARSIM"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_FLOAT__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_MAX__"/>
-									<listOptionValue builtIn="false" value="_FILE_OFFSET_BITS"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__unix"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
@@ -575,8 +563,8 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.91231544" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1417484555" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-								<option id="gnu.cpp.link.option.paths.1604024000" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
-								<option id="gnu.cpp.link.option.libs.1120035773" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
+								<option id="gnu.cpp.link.option.paths.1604024000" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
+								<option id="gnu.cpp.link.option.libs.1120035773" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.2112954128" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
