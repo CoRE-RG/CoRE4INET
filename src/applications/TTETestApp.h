@@ -17,16 +17,27 @@
 #define __TTETHERNETMODELV2_TTETESTAPP_H_
 
 #include <omnetpp.h>
+#include "TTEApplicationBase.h"
 
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * @brief Simple Test-Application.
+ *
+ *
+ * @sa TTEApplicationBase
+ * @ingroup Applications
  */
-class TTETestApp : public cSimpleModule
+class TTETestApp : public TTEApplicationBase
 {
     protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
         virtual void initialize();
+        /**
+         * @brief Handles message generation
+         */
         virtual void handleMessage(cMessage *msg);
 };
 

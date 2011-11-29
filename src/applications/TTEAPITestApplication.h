@@ -22,11 +22,19 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * @brief Simple Test-Application based on the TTEthernet-API.
+ *
+ * Containes main() and callback
+ *
+ * @sa TTEAPITestApplication, TTEApplicationBase
+ * @ingroup Applications
  */
 class TTEAPITestApplication : public TTEAPIApplicationBase
 {
   protected:
+    /**
+     * @brief Implementation of startApplication() that starts the main()
+     */
     virtual void startApplication();
 };
 

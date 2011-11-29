@@ -4,6 +4,10 @@
  * @defgroup Buffer Buffers
  */
 
+/**
+ * @defgroup Applications Applications
+ */
+
 
 /**
  * @page whatsnew What's New

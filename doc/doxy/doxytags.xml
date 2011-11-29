@@ -1090,6 +1090,12 @@
     <class kind="class">TTEthernetModel::TTDoubleBuffer</class>
     <class kind="class">TTEthernetModel::TTQueueBuffer</class>
   </compound>
+  <compound kind="group">
+    <name>Applications</name>
+    <title>Applications</title>
+    <filename>group___applications.html</filename>
+    <class kind="class">TTEthernetModel::TTEAPIApplicationBase</class>
+  </compound>
   <compound kind="class">
     <name>APIPayload</name>
     <filename>class_a_p_i_payload.html</filename>

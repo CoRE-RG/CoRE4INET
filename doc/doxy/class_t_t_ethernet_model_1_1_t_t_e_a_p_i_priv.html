@@ -32,18 +32,25 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::TTEAPIPriv Class Reference</h1><!-- doxytag: class="TTEthernetModel::TTEAPIPriv" -->
+<p>Class that contains different pointers. Internally used for TTEthernet-API.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>&gt;</code></p>
 
 <p><a href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html">Buffer</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be">buffer</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Pointer to a <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> for the current application request.  <a href="#a6a893471fa70005204729eacc9c836be"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EtherFrame *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a68b9ff1f0c2431ab0e05b7f20ff35cc0">frame</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Pointer to an EtherFrame for the current application request.  <a href="#a68b9ff1f0c2431ab0e05b7f20ff35cc0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#ae37461f566a7771f6798e5e692e197ef">data</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Pointer to the raw data.  <a href="#ae37461f566a7771f6798e5e692e197ef"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Class that contains different pointers. Internally used for TTEthernet-API. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00033">33</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00042">42</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
 <hr/><h2>Member Data Documentation</h2>
 <a class="anchor" id="a6a893471fa70005204729eacc9c836be"></a><!-- doxytag: member="TTEthernetModel::TTEAPIPriv::buffer" ref="a6a893471fa70005204729eacc9c836be" args="" -->
 <div class="memitem">
@@ -56,7 +63,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00036">36</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
+<p>Pointer to a <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> for the current application request. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00048">48</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_callback_8cc_source.html#l00015">TTEthernetModel::APICallback::executeCallback()</a>.</p>
 
@@ -73,7 +82,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00038">38</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
+<p>Pointer to the raw data. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00058">58</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00396">TTEthernetModel::TTEAPIApplicationBase::tte_set_buf_var()</a>.</p>
 
@@ -90,7 +101,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00037">37</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
+<p>Pointer to an EtherFrame for the current application request. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00053">53</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
 
 </div>
 </div>
@@ -98,7 +111,7 @@
 <li><a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:38:59 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

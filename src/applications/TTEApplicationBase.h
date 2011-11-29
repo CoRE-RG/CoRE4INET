@@ -25,21 +25,41 @@ namespace TTEthernetModel {
 class Buffer;
 
 /**
- * TODO - Generated class
+ * @brief Base class for a TTEthernet-Application.
+ *
+ * Containes the mapping to Buffers and the ability to execute Callbacks
+ *
+ * @sa Buffer, Callback
+ *
+ * @ingroup Applications
  */
 class TTEApplicationBase : public cSimpleModule
 {
-  protected:
-    //std::map<uint16, std::list<Incoming*> > incomings;
-    std::map<uint16, std::list<Buffer*> > buffers;
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        //std::map<uint16, std::list<Incoming*> > incomings;
 
-  public:
-    virtual void executeCallback(Callback *cb);
-    //virtual void addIncoming(uint16 ctID, Incoming *incoming);
-    virtual void addBuffer(uint16 ctID, Buffer *buffer);
+        /**
+         * @brief Map of critical traffic identifies with their
+         * corresponding Buffers.
+         */
+        std::map<uint16, std::list<Buffer*> > buffers;
+
+    public:
+        /**
+         * @brief executes the given Callback in the context of the Application
+         *
+         * @param cb the Callback to execute
+         */
+        virtual void executeCallback(Callback *cb);
+        //virtual void addIncoming(uint16 ctID, Incoming *incoming);
+
+        /**
+         * @brief Adds a Buffer with the corresponding CT-ID to the Application
+         *
+         * @param ctID the critical traffic id of the buffer to register
+         * @param buffer a pointer to the Buffer to register
+         */
+        virtual void addBuffer(uint16 ctID, Buffer *buffer);
 };
 
 } //namespace

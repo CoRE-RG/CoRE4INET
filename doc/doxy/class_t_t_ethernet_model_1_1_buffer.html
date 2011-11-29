@@ -115,7 +115,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <p><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue(EtherFrame *newFrame)</a> is called to queue a message in the buffer. It must be implemented according to the correct buffer behaviour.</p>
 <p><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue()</a> is called to get a frame from the buffer. </p>
 
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00051">51</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00047">47</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a89b421859697d7a8a5c10309c4b3a523"></a><!-- doxytag: member="TTEthernetModel::Buffer::addDestinationGate" ref="a89b421859697d7a8a5c10309c4b3a523" args="(cGate *destinationGate)" -->
 <div class="memitem">
@@ -644,7 +644,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <div class="memdoc">
 <p>Stores the Gates to that the messages are delivered </p>
 
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00057">57</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00053">53</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00055">addDestinationGate()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00041">TTEthernetModel::TTBuffer::handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00060">removeDestinationGate()</a>.</p>
 
@@ -662,7 +662,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <div class="memdoc">
 <p>Signal that contains the latency until the frame enters the buffer. </p>
 
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00202">202</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00198">198</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00093">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00032">initializeStatistics()</a>.</p>
 
@@ -680,7 +680,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <div class="memdoc">
 <p>Stores the callbacks that are executed when a frame is added to the buffer </p>
 
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00061">61</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00057">57</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00065">addReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00070">getReceiveCallback()</a>, and <a class="el" href="_buffer_8cc_source.html#l00093">handleMessage()</a>.</p>
 
@@ -698,7 +698,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <div class="memdoc">
 <p>Stores the callbacks that are executed when a frame is removed from the buffer </p>
 
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00065">65</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00061">61</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00077">addTransmitCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00082">getTransmitCallback()</a>, and <a class="el" href="_t_t_buffer_8cc_source.html#l00041">TTEthernetModel::TTBuffer::handleMessage()</a>.</p>
 
@@ -716,7 +716,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <div class="memdoc">
 <p>Signal that is emitted every time a frame was sent. </p>
 
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00197">197</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00193">193</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00032">initializeStatistics()</a>, and <a class="el" href="_buffer_8cc_source.html#l00038">recordPacketSent()</a>.</p>
 
@@ -727,7 +727,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <li><a class="el" href="_buffer_8cc_source.html">Buffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:38:59 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

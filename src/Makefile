@@ -271,8 +271,18 @@ $O/applications/TTEApplicationBase.o: applications/TTEApplicationBase.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
 $O/applications/TTETestApp.o: applications/TTETestApp.cc \
+	api/Callback.h \
+	api/tte_api/tte_api.h \
+	applications/TTEApplicationBase.h \
 	applications/TTETestApp.h \
+	buffer/Buffer.h \
+	buffer/RCBuffer.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
 	linklayer/ethernet/CTFrame_m.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \

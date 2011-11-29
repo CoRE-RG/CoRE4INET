@@ -35,7 +35,9 @@
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_task.html">Task</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_a_p_i_task.html">APITask</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html">TTEAPIPriv</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class that contains different pointers. Internally used for TTEthernet-API.  <a href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html">TTEAPIApplicationBase</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Base class for a TTEthernet-Application based on the TTEthernet-API.  <a href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html">TTEAPITestApplication</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_test_app.html">TTETestApp</a></td></tr>
@@ -82,6 +84,8 @@
 <tr><td colspan="2"><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95f">TTEAPIApplicationMessageKind</a> { <a class="el" href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828">START_APPLICATION</a>
  }</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><p>Message kinds for application control messages. </p>
+ <a href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95f">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499">SchedulerMessageKind</a> { <a class="el" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a> =  0, 
 <a class="el" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a> =  1, 
 <a class="el" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a> =  2
@@ -198,18 +202,21 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Message kinds for application control messages. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
 <tr><td valign="top"><em><a class="anchor" id="a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828"></a><!-- doxytag: member="START_APPLICATION" ref="a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828" args="" -->START_APPLICATION</em>&nbsp;</td><td>
+<p>Message to trigger the application start. </p>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00029">29</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00032">32</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029                                  {
-<a name="l00030"></a>00030     <a class="code" href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828">START_APPLICATION</a>
-<a name="l00031"></a>00031 };
+<p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032                                  {
+<a name="l00036"></a>00036     <a class="code" href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828" title="Message to trigger the application start.">START_APPLICATION</a>
+<a name="l00037"></a>00037 };
 </pre></div></p>
 
 </div>
@@ -1565,7 +1572,7 @@
 </div>
 </div>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:38:59 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

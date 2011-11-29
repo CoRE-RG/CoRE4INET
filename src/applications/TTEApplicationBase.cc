@@ -19,16 +19,6 @@ namespace TTEthernetModel {
 
 Define_Module(TTEApplicationBase);
 
-void TTEApplicationBase::initialize()
-{
-    // TODO - Generated method body
-}
-
-void TTEApplicationBase::handleMessage(cMessage *msg)
-{
-    // TODO - Generated method body
-}
-
 /*void TTEApplicationBase::addIncoming(uint16 ctID, Incoming *incoming)
 {
     incomings[ctID].push_back(incoming);
