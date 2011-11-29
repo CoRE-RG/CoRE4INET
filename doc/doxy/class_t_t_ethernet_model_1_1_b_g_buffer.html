@@ -55,6 +55,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a211a308b66c69421bc399cec124fc9b2">initialize</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes the module.  <a href="#a211a308b66c69421bc399cec124fc9b2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a91fc44bd17d4f3bf9c4f6c8f6e92b369">handleMessage</a> (cMessage *msg)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Is called when a new Frame is received in the buffer.  <a href="#a91fc44bd17d4f3bf9c4f6c8f6e92b369"></a><br/></td></tr>
 </table>
@@ -103,7 +104,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <a name="l00036"></a>00036 
 <a name="l00037"></a>00037         <span class="keywordflow">if</span>(outgoingMessage){
 <a name="l00038"></a>00038             <span class="comment">//Send Message</span>
-<a name="l00039"></a>00039             <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.end(); ++gate)
+<a name="l00039"></a>00039             <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++gate)
 <a name="l00040"></a>00040             {
 <a name="l00041"></a>00041                 sendDirect(outgoingMessage-&gt;dup(), *gate);
 <a name="l00042"></a>00042             }
@@ -111,8 +112,8 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <a name="l00044"></a>00044                 send(outgoingMessage-&gt;dup(),<span class="stringliteral">&quot;out&quot;</span>);
 <a name="l00045"></a>00045             }
 <a name="l00046"></a>00046             <span class="comment">//TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback</span>
-<a name="l00047"></a>00047             <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.begin();
-<a name="l00048"></a>00048                     iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.end(); ++iter){
+<a name="l00047"></a>00047             <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.begin();
+<a name="l00048"></a>00048                     iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end(); ++iter){
 <a name="l00049"></a>00049                 iter-&gt;first-&gt;executeCallback(iter-&gt;second);
 <a name="l00050"></a>00050             }
 <a name="l00051"></a>00051             <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();
@@ -136,7 +137,8 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Initializes the module </p>
+
+<p>Initializes the module. </p>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a976b864b117683fbc02a043090e54db2">TTEthernetModel::Buffer</a>.</p>
 
@@ -153,7 +155,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <li><a class="el" href="_b_g_buffer_8cc_source.html">BGBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

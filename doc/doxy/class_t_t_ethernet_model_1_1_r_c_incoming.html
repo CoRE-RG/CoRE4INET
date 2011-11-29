@@ -47,6 +47,7 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards messages arriving on in-gate to out-gate checks conformance with configured bag.  <a href="#a723830f6e453a9c1bb05cd6b81ac77f9"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Saves the tickcount of the last message.  <a href="#ac44dce091ecefc6f3a635f2811835c69"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Class for the critical traffic conformance check of rate-constrained traffic. </p>
@@ -113,14 +114,14 @@
 <a name="l00035"></a>00035         <span class="comment">//Now check for correct arrival:</span>
 <a name="l00036"></a>00036         <span class="comment">//TODO what todo with JITTER?</span>
 <a name="l00037"></a>00037         <span class="comment">//Check too early</span>
-<a name="l00038"></a>00038         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a> &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)par(<span class="stringliteral">&quot;bag&quot;</span>).longValue()){
-<a name="l00039"></a>00039             ev.printf(<span class="stringliteral">&quot;Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n&quot;</span>, getName(), currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>,par(<span class="stringliteral">&quot;bag&quot;</span>).longValue());
+<a name="l00038"></a>00038         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a> &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)par(<span class="stringliteral">&quot;bag&quot;</span>).longValue()){
+<a name="l00039"></a>00039             ev.printf(<span class="stringliteral">&quot;Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n&quot;</span>, getName(), currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>,par(<span class="stringliteral">&quot;bag&quot;</span>).longValue());
 <a name="l00040"></a>00040             bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
 <a name="l00041"></a>00041             <span class="keyword">delete</span> msg;
 <a name="l00042"></a>00042         }
 <a name="l00043"></a>00043         <span class="comment">//Timing ok</span>
 <a name="l00044"></a>00044         <span class="keywordflow">else</span>{
-<a name="l00045"></a>00045             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>=currentTotalTicks;
+<a name="l00045"></a>00045             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>=currentTotalTicks;
 <a name="l00046"></a>00046             send(msg,<span class="stringliteral">&quot;out&quot;</span>);
 </pre></div></p>
 
@@ -137,7 +138,8 @@
       </table>
 </div>
 <div class="memdoc">
-<p>Saves the tickcount of the last message </p>
+
+<p>Saves the tickcount of the last message. </p>
 
 <p>Definition at line <a class="el" href="_r_c_incoming_8h_source.html#l00038">38</a> of file <a class="el" href="_r_c_incoming_8h_source.html">RCIncoming.h</a>.</p>
 
@@ -148,7 +150,7 @@
 <li><a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:56 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

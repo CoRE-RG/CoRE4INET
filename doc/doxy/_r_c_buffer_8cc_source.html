@@ -66,7 +66,7 @@
 <a name="l00034"></a>00034 
 <a name="l00035"></a>00035 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a5d3328cee349d4ceb3127acee1f41d44" title="Initializes the timerMessage.">RCBuffer::initialize</a>()
 <a name="l00036"></a>00036 {
-<a name="l00037"></a>00037     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html">SchedulerTimerEvent</a>(<span class="stringliteral">&quot;RCBuffer Scheduler Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);
+<a name="l00037"></a>00037     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a>(<span class="stringliteral">&quot;RCBuffer Scheduler Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);
 <a name="l00038"></a>00038     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a2fb753af35fa839f02e0435cdc496878">setDestinationGate</a>(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
 <a name="l00039"></a>00039     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#aed673828ade2b4e814b53493af7cc967">setTimer</a>(par(<span class="stringliteral">&quot;bag&quot;</span>).doubleValue());
 <a name="l00040"></a>00040 
@@ -86,7 +86,7 @@
 <a name="l00054"></a>00054             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">false</span>;
 <a name="l00055"></a>00055             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> = 0;
 <a name="l00056"></a>00056             <span class="comment">//Send Message</span>
-<a name="l00057"></a>00057             <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.end(); ++gate)
+<a name="l00057"></a>00057             <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++gate)
 <a name="l00058"></a>00058             {
 <a name="l00059"></a>00059                 sendDirect(outgoingMessage-&gt;dup(), *gate);
 <a name="l00060"></a>00060             }
@@ -106,7 +106,7 @@
 <a name="l00074"></a>00074             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">false</span>;
 <a name="l00075"></a>00075             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> = 0;
 <a name="l00076"></a>00076             <span class="comment">//Send Message</span>
-<a name="l00077"></a>00077             <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.end(); ++gate)
+<a name="l00077"></a>00077             <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++gate)
 <a name="l00078"></a>00078             {
 <a name="l00079"></a>00079                 sendDirect(outgoingMessage-&gt;dup(), *gate);
 <a name="l00080"></a>00080             }
@@ -126,8 +126,8 @@
 <a name="l00094"></a>00094 {
 <a name="l00095"></a>00095     Enter_Method(<span class="stringliteral">&quot;resetBag()&quot;</span>);
 <a name="l00096"></a>00096     <span class="comment">//This is the moment when the message was transmitted execute transmit callbacks if there are some</span>
-<a name="l00097"></a>00097     <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.begin();
-<a name="l00098"></a>00098             iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.end(); ++iter){
+<a name="l00097"></a>00097     <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.begin();
+<a name="l00098"></a>00098             iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end(); ++iter){
 <a name="l00099"></a>00099         iter-&gt;first-&gt;executeCallback(iter-&gt;second);
 <a name="l00100"></a>00100     }
 <a name="l00101"></a>00101 
@@ -135,7 +135,7 @@
 <a name="l00103"></a>00103     getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/hourglass&quot;</span>);
 <a name="l00104"></a>00104 
 <a name="l00105"></a>00105     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a>++;
-<a name="l00106"></a>00106     <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.size())
+<a name="l00106"></a>00106     <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size())
 <a name="l00107"></a>00107     {
 <a name="l00108"></a>00108         <span class="comment">//Reregister scheduler</span>
 <a name="l00109"></a>00109         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
@@ -145,7 +145,7 @@
 <a name="l00113"></a>00113 
 <a name="l00114"></a>00114 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

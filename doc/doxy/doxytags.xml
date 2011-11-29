@@ -4,7 +4,8 @@
     <name>APIPayload_m.h</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/api/</path>
     <filename>_a_p_i_payload__m_8h</filename>
-    <class kind="class">APIPayload</class>
+    <class kind="class">TTEthernetModel::APIPayload</class>
+    <namespace>TTEthernetModel</namespace>
     <member kind="define">
       <type>#define</type>
       <name>MSGC_VERSION</name>
@@ -15,15 +16,15 @@
     <member kind="function">
       <type>void</type>
       <name>doPacking</name>
-      <anchorfile>_a_p_i_payload__m_8h.html</anchorfile>
-      <anchor>a8114792a6c3d18881665a0c06724a99d</anchor>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a6281240ab3b6b517511d0d14bccfd745</anchor>
       <arglist>(cCommBuffer *b, APIPayload &amp;obj)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>doUnpacking</name>
-      <anchorfile>_a_p_i_payload__m_8h.html</anchorfile>
-      <anchor>af52a19261a8730eb36231a1f0a0e9402</anchor>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>afb69a66fe1825ae4a81ce48bcf2c2930</anchor>
       <arglist>(cCommBuffer *b, APIPayload &amp;obj)</arglist>
     </member>
   </compound>
@@ -572,7 +573,8 @@
     <name>TTBufferEmpty_m.h</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/buffer/</path>
     <filename>_t_t_buffer_empty__m_8h</filename>
-    <class kind="class">TTBufferEmpty</class>
+    <class kind="class">TTEthernetModel::TTBufferEmpty</class>
+    <namespace>TTEthernetModel</namespace>
     <member kind="define">
       <type>#define</type>
       <name>MSGC_VERSION</name>
@@ -583,15 +585,15 @@
     <member kind="function">
       <type>void</type>
       <name>doPacking</name>
-      <anchorfile>_t_t_buffer_empty__m_8h.html</anchorfile>
-      <anchor>adeb188b5b8ce1750eae4930aff1ac24c</anchor>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a6678db5193e5777d266c3fa18f1cbd62</anchor>
       <arglist>(cCommBuffer *b, TTBufferEmpty &amp;obj)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>doUnpacking</name>
-      <anchorfile>_t_t_buffer_empty__m_8h.html</anchorfile>
-      <anchor>abf6a01c2e8d408657ae8026729083c55</anchor>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a8080299cdc6b0d91f71aeab68333bcfc</anchor>
       <arglist>(cCommBuffer *b, TTBufferEmpty &amp;obj)</arglist>
     </member>
   </compound>
@@ -1103,115 +1105,6 @@
     <class kind="class">ConfigurationUtils</class>
   </compound>
   <compound kind="class">
-    <name>APIPayload</name>
-    <filename>class_a_p_i_payload.html</filename>
-    <member kind="function">
-      <type></type>
-      <name>APIPayload</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>ad4b5e47a7fad6e8b30440740db67e1db</anchor>
-      <arglist>(const char *name=NULL, int kind=0)</arglist>
-    </member>
-    <member kind="function">
-      <type></type>
-      <name>APIPayload</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a3f372cec2204909d9a653d476f03da10</anchor>
-      <arglist>(const APIPayload &amp;other)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual</type>
-      <name>~APIPayload</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a4856b901faa398e3165e646ec3e793f2</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>APIPayload &amp;</type>
-      <name>operator=</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a5167bedebfb39620555d4980c975935c</anchor>
-      <arglist>(const APIPayload &amp;other)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual APIPayload *</type>
-      <name>dup</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a26fe43086b33ed61c1a110034b9bae4a</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>parsimPack</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>ac2804428e5b9593a2618bb29122cc7ba</anchor>
-      <arglist>(cCommBuffer *b)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>parsimUnpack</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>ac35808f4e907ff0e669d582438828290</anchor>
-      <arglist>(cCommBuffer *b)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>setDataArraySize</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a56b234f6ce35445f746cee598eafb24a</anchor>
-      <arglist>(unsigned int size)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual unsigned int</type>
-      <name>getDataArraySize</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a3397c2526057be99baecf3adcdd6fa21</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual unsigned char</type>
-      <name>getData</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>af1d8511f6732ecdeed63e467f1daa573</anchor>
-      <arglist>(unsigned int k) const </arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>setData</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>af0203b3c981a0924d6eaf41a396904d7</anchor>
-      <arglist>(unsigned int k, unsigned char data)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>bool</type>
-      <name>operator==</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a20d7f8164dd35e3695e5107949e1e787</anchor>
-      <arglist>(const APIPayload &amp;)</arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>unsigned char *</type>
-      <name>data_var</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>ae7899a99fb724fde68f7b04ef55774f1</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="protected">
-      <type>unsigned int</type>
-      <name>data_arraysize</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a854ea67c86f94aede2efa6a1b7987957</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function" protection="private">
-      <type>void</type>
-      <name>copy</name>
-      <anchorfile>class_a_p_i_payload.html</anchorfile>
-      <anchor>a4ea2f20ae10b6981543d92d6d70e17db</anchor>
-      <arglist>(const APIPayload &amp;other)</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
     <name>ConfigurationUtils</name>
     <filename>class_configuration_utils.html</filename>
     <member kind="function" static="yes">
@@ -1285,76 +1178,10 @@
       <arglist>(int vlid, Device_Target_Mapping::Mappings_ptr map)</arglist>
     </member>
   </compound>
-  <compound kind="class">
-    <name>TTBufferEmpty</name>
-    <filename>class_t_t_buffer_empty.html</filename>
-    <member kind="function">
-      <type></type>
-      <name>TTBufferEmpty</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a001bc5b1904861799b5131b9212b0078</anchor>
-      <arglist>(const char *name=NULL, int kind=0)</arglist>
-    </member>
-    <member kind="function">
-      <type></type>
-      <name>TTBufferEmpty</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a5bba5029fc4f9c930a946d7108d16a34</anchor>
-      <arglist>(const TTBufferEmpty &amp;other)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual</type>
-      <name>~TTBufferEmpty</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a4129ecdcb4733c27dd78c5923e26dd8e</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>TTBufferEmpty &amp;</type>
-      <name>operator=</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a7d87ec3e43e80df3434a51948db4d4f5</anchor>
-      <arglist>(const TTBufferEmpty &amp;other)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual TTBufferEmpty *</type>
-      <name>dup</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a67e6b30f9254e8cfff5de538570177c9</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>parsimPack</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a2b90c80e978861c4174859082a365d36</anchor>
-      <arglist>(cCommBuffer *b)</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual void</type>
-      <name>parsimUnpack</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a8a8e2a407af369513fe638246fbd89da</anchor>
-      <arglist>(cCommBuffer *b)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>bool</type>
-      <name>operator==</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a5ca92bb3892b23c397b92f43bd3f9908</anchor>
-      <arglist>(const TTBufferEmpty &amp;)</arglist>
-    </member>
-    <member kind="function" protection="private">
-      <type>void</type>
-      <name>copy</name>
-      <anchorfile>class_t_t_buffer_empty.html</anchorfile>
-      <anchor>a37d7afb9245d795943a1bc7c1f0c2aa7</anchor>
-      <arglist>(const TTBufferEmpty &amp;other)</arglist>
-    </member>
-  </compound>
   <compound kind="namespace">
     <name>TTEthernetModel</name>
     <filename>namespace_t_t_ethernet_model.html</filename>
+    <class kind="class">TTEthernetModel::APIPayload</class>
     <class kind="class">TTEthernetModel::Callback</class>
     <class kind="class">TTEthernetModel::APICallback</class>
     <class kind="class">TTEthernetModel::Task</class>
@@ -1374,6 +1201,7 @@
     <class kind="class">TTEthernetModel::RCDoubleBuffer</class>
     <class kind="class">TTEthernetModel::RCQueueBuffer</class>
     <class kind="class">TTEthernetModel::TTBuffer</class>
+    <class kind="class">TTEthernetModel::TTBufferEmpty</class>
     <class kind="class">TTEthernetModel::TTDoubleBuffer</class>
     <class kind="class">TTEthernetModel::TTQueueBuffer</class>
     <class kind="class">TTEthernetModel::Incoming</class>
@@ -1432,6 +1260,20 @@
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
       <anchor>a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a6281240ab3b6b517511d0d14bccfd745</anchor>
+      <arglist>(cCommBuffer *b, APIPayload &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>afb69a66fe1825ae4a81ce48bcf2c2930</anchor>
+      <arglist>(cCommBuffer *b, APIPayload &amp;obj)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1651,6 +1493,20 @@
       <arglist>(RCBuffer)</arglist>
     </member>
     <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a6678db5193e5777d266c3fa18f1cbd62</anchor>
+      <arglist>(cCommBuffer *b, TTBufferEmpty &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a8080299cdc6b0d91f71aeab68333bcfc</anchor>
+      <arglist>(cCommBuffer *b, TTBufferEmpty &amp;obj)</arglist>
+    </member>
+    <member kind="function">
       <type></type>
       <name>Define_Module</name>
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
@@ -1747,6 +1603,115 @@
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
       <anchor>acd0c2d26fd64ce9e389bf26933c682b8</anchor>
       <arglist>(TTEScheduler)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::APIPayload</name>
+    <filename>class_t_t_ethernet_model_1_1_a_p_i_payload.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>APIPayload</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a9e72eb7d300c4c3946b34dc0f12cc4bc</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>APIPayload</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>add89b4361cf76fb2e1b02a767006320e</anchor>
+      <arglist>(const APIPayload &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~APIPayload</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>adcce61382005e81869ed48a788b8bba5</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>APIPayload &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a6a7636841c9a0253c516d7bfb47da881</anchor>
+      <arglist>(const APIPayload &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual APIPayload *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a9c1d1941f7e7f921212f864c74369d47</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>aa977d14a191dccb1e230dff6b1d223df</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a1617bf0e4f4d36b7aaec5c41c0365a00</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setDataArraySize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>aa78d332aba9881ef36103a38cc7db855</anchor>
+      <arglist>(unsigned int size)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned int</type>
+      <name>getDataArraySize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a9206099c4333990a469573bf727a1d4c</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned char</type>
+      <name>getData</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>ac17d0fcd624feff47496113533db708f</anchor>
+      <arglist>(unsigned int k) const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setData</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a6023b81cdd1519fd5a26e624e08f7d28</anchor>
+      <arglist>(unsigned int k, unsigned char data)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a2ee8093790e0015494048487e60cde0e</anchor>
+      <arglist>(const APIPayload &amp;)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned char *</type>
+      <name>data_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a863c858da1354795d08f183bd7151a1f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned int</type>
+      <name>data_arraysize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>a50ff80a49acb7d27f6000f2a85374fb5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_a_p_i_payload.html</anchorfile>
+      <anchor>afb61f2a267f812d598ec0afccc79b78e</anchor>
+      <arglist>(const APIPayload &amp;other)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -2469,6 +2434,73 @@
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer.html</anchorfile>
       <anchor>a78eff1b2851f7f86a09377237ea14847</anchor>
       <arglist>(cMessage *msg)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::TTBufferEmpty</name>
+    <filename>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>TTBufferEmpty</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>a6c481edaac22f65e33f33b901f07b7ae</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>TTBufferEmpty</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>aea8b05d0af0e753bd36d89ccbb444b8e</anchor>
+      <arglist>(const TTBufferEmpty &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~TTBufferEmpty</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>ab6dd684f1f930388fc67865bd311b050</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>TTBufferEmpty &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>ab1334c1ce52ac3fb90f40e671b05823e</anchor>
+      <arglist>(const TTBufferEmpty &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual TTBufferEmpty *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>a81168ffeefb0c21aa54dfd3293702fe5</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>ac8e4b78753c335b2b409e39218f1ae83</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>a48bc3cc75438d769c8d139442ac079c5</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>a34dff78e66c19a20f5063156c5de6280</anchor>
+      <arglist>(const TTBufferEmpty &amp;)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer_empty.html</anchorfile>
+      <anchor>a3e3c9132ee0c2d33b0c9b47846f4ebde</anchor>
+      <arglist>(const TTBufferEmpty &amp;other)</arglist>
     </member>
   </compound>
   <compound kind="class">

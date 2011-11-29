@@ -32,6 +32,9 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::SchedulerEvent_Base Class Reference</h1><!-- doxytag: class="TTEthernetModel::SchedulerEvent_Base" --><!-- doxytag: inherits="TTEthernetModel::SchedulerMessage" -->
+<p>Class generated from <code>scheduler/SchedulerMessage.msg</code> by opp_msgc.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_scheduler_message__m_8h_source.html">SchedulerMessage_m.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::SchedulerEvent_Base:</div>
@@ -65,12 +68,12 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent_Base:</div>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Class generated from <code>scheduler/SchedulerMessage.msg</code> by opp_msgc. </p>
 <pre>
- message <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> extends <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_message.html">SchedulerMessage</a> {
+ message <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> extends <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_message.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerMessage</a> {
      (true);
  }
- </pre><p><a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html">SchedulerEvent_Base</a> is only useful if it gets subclassed, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> is derived from it. The minimum code to be written for <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> is the following:</p>
+ </pre><p><a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerEvent_Base</a> is only useful if it gets subclassed, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> is derived from it. The minimum code to be written for <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> is the following:</p>
 <pre>
- class <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> : public <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html">SchedulerEvent_Base</a>
+ class <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> : public <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerEvent_Base</a>
  {
    private:
      void copy(const SchedulerEvent&amp; other) { ... }</pre><pre>   public:
@@ -78,7 +81,7 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent_Base:</div>
      SchedulerEvent(const SchedulerEvent&amp; other) : SchedulerEvent_Base(other) {copy(other);}
      <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a>&amp; operator=(const SchedulerEvent&amp; other) {if (this==&amp;other) return *this; SchedulerEvent_Base::operator=(other); copy(other); return *this;}
      virtual <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> *dup() const {return new SchedulerEvent(*this);}
-     // ADD CODE HERE to redefine and implement pure virtual functions from <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html">SchedulerEvent_Base</a>
+     // ADD CODE HERE to redefine and implement pure virtual functions from <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerEvent_Base</a>
  };
  </pre><p>The following should go into a .cc (.cpp) file:</p>
 <pre>
@@ -277,7 +280,7 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent_Base:</div>
 <li><a class="el" href="_scheduler_message__m_8h_source.html">SchedulerMessage_m.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:56 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

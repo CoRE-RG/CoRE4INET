@@ -103,6 +103,11 @@ class Task
         }
 };
 
+/**
+ * @brief Class representing a Task especially for API.
+ *
+ * @sa Task
+ */
 class APITask : public Task
 {
 };

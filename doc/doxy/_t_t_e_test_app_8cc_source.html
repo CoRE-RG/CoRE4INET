@@ -52,7 +52,7 @@
 <a name="l00020"></a>00020 
 <a name="l00021"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_test_app.html#a276a04fb43cf3de3563c45ebc0550acc">00021</a> <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_test_app.html" title="Simple Test-Application.">TTETestApp</a>);
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_test_app.html#a276a04fb43cf3de3563c45ebc0550acc" title="Initialization of the module. Sends activator message.">TTETestApp::initialize</a>()
+<a name="l00023"></a>00023 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_test_app.html#a276a04fb43cf3de3563c45ebc0550acc" title="Initialization of the module.">TTETestApp::initialize</a>()
 <a name="l00024"></a>00024 {
 <a name="l00025"></a>00025     scheduleAt(simTime(), <span class="keyword">new</span> cMessage(<span class="stringliteral">&quot;ACTIVATOR!&quot;</span>));
 <a name="l00026"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_test_app.html#a07fea9940a97ebef177e7dda880b39f3">00026</a> }
@@ -61,7 +61,7 @@
 <a name="l00029"></a>00029 {
 <a name="l00030"></a>00030     <span class="keywordflow">if</span> (!msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>) &amp;&amp; *<span class="keyword">new</span> std::string(getParentModule()-&gt;getName()) != <span class="stringliteral">&quot;videoclient&quot;</span>)
 <a name="l00031"></a>00031     {
-<a name="l00032"></a>00032         <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html">CTFrame</a> *frame = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html">CTFrame</a>(<span class="stringliteral">&quot;CT-ID=100&quot;</span>);
+<a name="l00032"></a>00032         <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a> *frame = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a>(<span class="stringliteral">&quot;CT-ID=100&quot;</span>);
 <a name="l00033"></a>00033         frame-&gt;setDest(<span class="stringliteral">&quot;03 04 05 06 00 64&quot;</span>);
 <a name="l00034"></a>00034         frame-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html#af71d47380ceff7510b4462a3f45576b4">setCtID</a>(100);
 <a name="l00035"></a>00035         <span class="comment">//ENDE TEST</span>
@@ -88,7 +88,7 @@
 <a name="l00056"></a>00056 
 <a name="l00057"></a>00057 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

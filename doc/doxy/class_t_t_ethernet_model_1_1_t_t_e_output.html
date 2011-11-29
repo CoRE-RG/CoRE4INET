@@ -42,15 +42,21 @@
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa915182c2ca1fa08c42d5bd7778e8049">registerTTBuffer</a> (<a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html">TTBuffer</a> *buffer)</td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359">requestPacket</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The queue should send a packet whenever this method is invoked.  <a href="#a94831b378a881dd1677657884c75d359"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e">getNumPendingRequests</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns number of pending requests.  <a href="#ac55e4e6ffd709810a2c2ca85c7fb112e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb">isEmpty</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Return true when queue is empty, otherwise return false.  <a href="#a6d424bc0883c8e7550dc0e796bf0c8cb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0">clear</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Clear all queued packets and stored requests.  <a href="#a674f0c4a336bdaf7b5b4d01e01ef11b0"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Redefined cSimpleModule member functions.</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="amgrpede89ca0182b0b38021d78469e8661de"></a> </p>
 </div></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a986591ead93237643e88d4020f764df0">initialize</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a70262cb8679514a6b781aa655ac5090f">handleMessage</a> (cMessage *msg)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calls handleIncomingFrame() for frames arrived from outside, and processFrame() for self messages.  <a href="#a70262cb8679514a6b781aa655ac5090f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2d5907a8b4c8f4299b83dee3dabf0add">finish</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Writes statistics.  <a href="#a2d5907a8b4c8f4299b83dee3dabf0add"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Static Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static simsignal_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec">ttQueueLengthSignal</a> = SIMSIGNAL_NULL</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static simsignal_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5">beQueueLengthSignal</a> = SIMSIGNAL_NULL</td></tr>
@@ -133,6 +139,7 @@
       </table>
 </div>
 <div class="memdoc">
+
 <p>Clear all queued packets and stored requests. </p>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00253">253</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
@@ -163,6 +170,7 @@
       </table>
 </div>
 <div class="memdoc">
+
 <p>Writes statistics. </p>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00142">142</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
@@ -193,6 +201,7 @@
       </table>
 </div>
 <div class="memdoc">
+
 <p>Returns number of pending requests. </p>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00237">237</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
@@ -219,6 +228,7 @@
       </table>
 </div>
 <div class="memdoc">
+
 <p>Calls handleIncomingFrame() for frames arrived from outside, and processFrame() for self messages. </p>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00035">35</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
@@ -238,7 +248,7 @@
 <a name="l00048"></a>00048             <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7">framesRequested</a>)
 <a name="l00049"></a>00049             {
 <a name="l00050"></a>00050                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7">framesRequested</a>--;
-<a name="l00051"></a>00051                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359">requestPacket</a>();
+<a name="l00051"></a>00051                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359" title="The queue should send a packet whenever this method is invoked.">requestPacket</a>();
 <a name="l00052"></a>00052             }
 <a name="l00053"></a>00053             <span class="keyword">delete</span> msg;
 <a name="l00054"></a>00054         }
@@ -345,6 +355,7 @@
       </table>
 </div>
 <div class="memdoc">
+
 <p>Return true when queue is empty, otherwise return false. </p>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00242">242</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
@@ -491,7 +502,9 @@
       </table>
 </div>
 <div class="memdoc">
-<p>The queue should send a packet whenever this method is invoked. If the queue is currently empty, it should send a packet when when one becomes available. </p>
+
+<p>The queue should send a packet whenever this method is invoked. </p>
+<p>If the queue is currently empty, it should send a packet when when one becomes available. </p>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00152">152</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
@@ -518,7 +531,7 @@
 <a name="l00171"></a>00171     <span class="comment">//RCFrames</span>
 <a name="l00172"></a>00172     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de">NUM_RC_PRIORITIES</a>; i++)
 <a name="l00173"></a>00173     {
-<a name="l00174"></a>00174         <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">rcQueue</a>[i].<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb">isEmpty</a>() &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d">isTransmissionAllowed</a>((EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">rcQueue</a>[i].front()))
+<a name="l00174"></a>00174         <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">rcQueue</a>[i].<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Return true when queue is empty, otherwise return false.">isEmpty</a>() &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d">isTransmissionAllowed</a>((EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">rcQueue</a>[i].front()))
 <a name="l00175"></a>00175         {
 <a name="l00176"></a>00176             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7">framesRequested</a>--;
 <a name="l00177"></a>00177             EtherFrame *message = (EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">rcQueue</a>[i].pop();
@@ -702,7 +715,7 @@
 <li><a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:56 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

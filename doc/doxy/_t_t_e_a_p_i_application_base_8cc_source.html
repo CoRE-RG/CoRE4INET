@@ -72,7 +72,7 @@
 <a name="l00040"></a>00040 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a6a91f5372abc6bd1edd29c797c5c087c" title="Handles incoming START_APPLICATION or Scheduler messages.">TTEAPIApplicationBase::handleMessage</a>(cMessage *msg)
 <a name="l00041"></a>00041 {
 <a name="l00042"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df">00042</a>     <span class="keywordflow">if</span>(msg-&gt;isSelfMessage() &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828" title="Message to trigger the application start.">START_APPLICATION</a>){
-<a name="l00043"></a>00043         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application. Must be overwritten with actual application behavior...">startApplication</a>();
+<a name="l00043"></a>00043         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">startApplication</a>();
 <a name="l00044"></a>00044         <span class="keyword">delete</span> msg;
 <a name="l00045"></a>00045     }
 <a name="l00046"></a>00046     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>)){
@@ -84,7 +84,7 @@
 <a name="l00052"></a>00052     }
 <a name="l00053"></a>00053 }
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application. Must be overwritten with actual application behavior...">TTEAPIApplicationBase::startApplication</a>(){
+<a name="l00055"></a>00055 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">TTEAPIApplicationBase::startApplication</a>(){
 <a name="l00056"></a>00056     ev &lt;&lt; <span class="stringliteral">&quot;TTEAPIApplicationBase::startApplication() not implemented&quot;</span> &lt;&lt; endl;
 <a name="l00057"></a>00057     <span class="keywordflow">throw</span>;
 <a name="l00058"></a>00058 }
@@ -96,7 +96,7 @@
 <a name="l00064"></a>00064 
 <a name="l00065"></a>00065     <span class="comment">//Register Event</span>
 <a name="l00066"></a>00066     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00067"></a>00067     <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;API Scheduler Task Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
+<a name="l00067"></a>00067     <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;API Scheduler Task Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
 <a name="l00068"></a>00068 
 <a name="l00069"></a>00069     <span class="keyword">event</span>-&gt;addPar(<span class="stringliteral">&quot;task&quot;</span>).setPointerValue(task);
 <a name="l00070"></a>00070 
@@ -130,7 +130,7 @@
 <a name="l00098"></a>00098         buf-&gt;ct_id=ct_id;
 <a name="l00099"></a>00099         buf-&gt;shared=0;
 <a name="l00100"></a>00100 
-<a name="l00101"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9493a178576b42719e346740a94758f7">00101</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a>();
+<a name="l00101"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9493a178576b42719e346740a94758f7">00101</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a>();
 <a name="l00102"></a>00102         priv-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be" title="Pointer to a Buffer for the current application request.">buffer</a> = (*buffer);
 <a name="l00103"></a>00103 
 <a name="l00104"></a>00104         buf-&gt;priv=priv;
@@ -155,7 +155,7 @@
 <a name="l00123"></a>00123     buf-&gt;channel=0;
 <a name="l00124"></a>00124     buf-&gt;shared=1;
 <a name="l00125"></a>00125 
-<a name="l00126"></a>00126     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a>();
+<a name="l00126"></a>00126     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a>();
 <a name="l00127"></a>00127     priv-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be" title="Pointer to a Buffer for the current application request.">buffer</a> = buffer;
 <a name="l00128"></a>00128 
 <a name="l00129"></a>00129     buf-&gt;priv=priv;
@@ -174,7 +174,7 @@
 <a name="l00142"></a>00142     buf-&gt;channel=0;
 <a name="l00143"></a>00143     buf-&gt;shared=1;
 <a name="l00144"></a>00144 
-<a name="l00145"></a>00145     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a>();
+<a name="l00145"></a>00145     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a>();
 <a name="l00146"></a>00146     priv-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be" title="Pointer to a Buffer for the current application request.">buffer</a> = buffer;
 <a name="l00147"></a>00147 
 <a name="l00148"></a>00148     buf-&gt;priv=priv;
@@ -206,7 +206,7 @@
 <a name="l00174"></a>00174         buf-&gt;ct_id=ct_id;
 <a name="l00175"></a>00175         buf-&gt;shared=0;
 <a name="l00176"></a>00176 
-<a name="l00177"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aed85f82bfe571df81436339852f1a7a8">00177</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a>();
+<a name="l00177"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aed85f82bfe571df81436339852f1a7a8">00177</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a>();
 <a name="l00178"></a>00178         priv-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be" title="Pointer to a Buffer for the current application request.">buffer</a> = (*buffer);
 <a name="l00179"></a>00179 
 <a name="l00180"></a>00180         buf-&gt;priv=priv;
@@ -342,9 +342,9 @@
 <a name="l00310"></a>00310     src.setAddressByte(0, frame-&gt;eth_hdr.src_mac[5]);
 <a name="l00311"></a>00311     priv-&gt;frame-&gt;setSrc(src);
 <a name="l00312"></a>00312 
-<a name="l00313"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae857de443d19fe185f14cf4d24f61b4b">00313</a>     <a class="code" href="class_a_p_i_payload.html">APIPayload</a> *payload = <span class="keyword">new</span> <a class="code" href="class_a_p_i_payload.html">APIPayload</a>(<span class="stringliteral">&quot;TTEthernet API Payload&quot;</span>);
+<a name="l00313"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae857de443d19fe185f14cf4d24f61b4b">00313</a>     <a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html" title="Class generated from api/APIPayload.msg by opp_msgc.">APIPayload</a> *payload = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html" title="Class generated from api/APIPayload.msg by opp_msgc.">APIPayload</a>(<span class="stringliteral">&quot;TTEthernet API Payload&quot;</span>);
 <a name="l00314"></a>00314     payload-&gt;setByteLength(frame-&gt;length);
-<a name="l00315"></a>00315     payload-&gt;<a class="code" href="class_a_p_i_payload.html#a56b234f6ce35445f746cee598eafb24a">setDataArraySize</a>(frame-&gt;length);
+<a name="l00315"></a>00315     payload-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html#aa78d332aba9881ef36103a38cc7db855">setDataArraySize</a>(frame-&gt;length);
 <a name="l00316"></a>00316     priv-&gt;frame-&gt;encapsulate(payload);
 <a name="l00317"></a>00317 
 <a name="l00318"></a>00318     frame-&gt;data = (uint8_t*)malloc(frame-&gt;length);
@@ -359,13 +359,13 @@
 <a name="l00327"></a>00327                                                    tte_frame_t * <span class="keyword">const</span> frame,
 <a name="l00328"></a>00328                                                    tte_buf_status_t * <span class="keyword">const</span> status){
 <a name="l00329"></a>00329     Enter_Method_Silent();
-<a name="l00330"></a>00330     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a> *priv = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a>*)buf-&gt;priv;
+<a name="l00330"></a>00330     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a> *priv = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a>*)buf-&gt;priv;
 <a name="l00331"></a>00331 
 <a name="l00332"></a>00332 
 <a name="l00333"></a>00333     EtherFrame *msg = priv-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be" title="Pointer to a Buffer for the current application request.">buffer</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();
-<a name="l00334"></a>00334     <a class="code" href="class_a_p_i_payload.html">APIPayload</a> *payload = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_a_p_i_payload.html">APIPayload</a>*<span class="keyword">&gt;</span>(msg-&gt;decapsulate());
+<a name="l00334"></a>00334     <a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html" title="Class generated from api/APIPayload.msg by opp_msgc.">APIPayload</a> *payload = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html" title="Class generated from api/APIPayload.msg by opp_msgc.">APIPayload</a>*<span class="keyword">&gt;</span>(msg-&gt;decapsulate());
 <a name="l00335"></a>00335     <span class="keywordflow">if</span>(buf-&gt;traffic_type==TTE_CT_TRAFFIC){
-<a name="l00336"></a>00336         frame-&gt;ct_id = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html">CTFrame</a>*<span class="keyword">&gt;</span>(msg)-&gt;getCtID();
+<a name="l00336"></a>00336         frame-&gt;ct_id = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a>*<span class="keyword">&gt;</span>(msg)-&gt;getCtID();
 <a name="l00337"></a>00337     }
 <a name="l00338"></a>00338     frame-&gt;length = payload-&gt;getByteLength();
 <a name="l00339"></a>00339     frame-&gt;data = (uint8_t*)malloc(payload-&gt;getByteLength());
@@ -385,8 +385,8 @@
 <a name="l00353"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ac1a61c340af54c6b06b9e68373b8ef09">00353</a>     frame-&gt;eth_hdr.src_mac[4] = src.getAddressByte(1);
 <a name="l00354"></a>00354     frame-&gt;eth_hdr.src_mac[5] = src.getAddressByte(0);
 <a name="l00355"></a>00355 
-<a name="l00356"></a>00356     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;payload-&gt;<a class="code" href="class_a_p_i_payload.html#a3397c2526057be99baecf3adcdd6fa21">getDataArraySize</a>();i++){
-<a name="l00357"></a>00357         frame-&gt;data[i] = payload-&gt;<a class="code" href="class_a_p_i_payload.html#af1d8511f6732ecdeed63e467f1daa573">getData</a>(i);
+<a name="l00356"></a>00356     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;payload-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html#a9206099c4333990a469573bf727a1d4c">getDataArraySize</a>();i++){
+<a name="l00357"></a>00357         frame-&gt;data[i] = payload-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html#ac17d0fcd624feff47496113533db708f">getData</a>(i);
 <a name="l00358"></a>00358     }
 <a name="l00359"></a>00359 
 <a name="l00360"></a>00360     <span class="keyword">delete</span> payload;
@@ -399,9 +399,9 @@
 <a name="l00367"></a>00367     Enter_Method_Silent();
 <a name="l00368"></a>00368     TTEAPIPriv *priv = (TTEAPIPriv *)buf-&gt;priv;
 <a name="l00369"></a>00369     <span class="comment">//Copy frame data and free memory</span>
-<a name="l00370"></a>00370     <a class="code" href="class_a_p_i_payload.html">APIPayload</a> *payload = (<a class="code" href="class_a_p_i_payload.html">APIPayload</a>*)priv-&gt;frame-&gt;getEncapsulatedPacket();
-<a name="l00371"></a>00371     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;payload-&gt;<a class="code" href="class_a_p_i_payload.html#a3397c2526057be99baecf3adcdd6fa21">getDataArraySize</a>();i++){
-<a name="l00372"></a>00372         payload-&gt;<a class="code" href="class_a_p_i_payload.html#af0203b3c981a0924d6eaf41a396904d7">setData</a>(i, ((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)priv-&gt;data)[i]);
+<a name="l00370"></a>00370     APIPayload *payload = (APIPayload*)priv-&gt;frame-&gt;getEncapsulatedPacket();
+<a name="l00371"></a>00371     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;payload-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html#a9206099c4333990a469573bf727a1d4c">getDataArraySize</a>();i++){
+<a name="l00372"></a>00372         payload-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html#a6023b81cdd1519fd5a26e624e08f7d28">setData</a>(i, ((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)priv-&gt;data)[i]);
 <a name="l00373"></a>00373     }
 <a name="l00374"></a>00374     <span class="comment">//Send to CTC</span>
 <a name="l00375"></a>00375     <span class="keywordflow">if</span>(priv-&gt;buffer)
@@ -425,7 +425,7 @@
 <a name="l00393"></a>00393 
 <a name="l00394"></a>00394 int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aa38b602984406d089b81f4676d3114d9" title="implementation of the TTEthernet-API method.">TTEAPIApplicationBase::tte_close_input_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf){
 <a name="l00395"></a>00395     Enter_Method_Silent();
-<a name="l00396"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae1cd0a759a9626632cb3f72f219653c6">00396</a>     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a> *priv = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a> *)buf-&gt;priv;
+<a name="l00396"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae1cd0a759a9626632cb3f72f219653c6">00396</a>     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a> *priv = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a> *)buf-&gt;priv;
 <a name="l00397"></a>00397     <span class="comment">//Free memory</span>
 <a name="l00398"></a>00398     <span class="keywordflow">if</span>(priv-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#ae37461f566a7771f6798e5e692e197ef" title="Pointer to the raw data.">data</a>){
 <a name="l00399"></a>00399         <span class="comment">//free(priv-&gt;data);</span>
@@ -686,7 +686,7 @@
 <a name="l00654"></a>00654 
 <a name="l00655"></a>00655 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

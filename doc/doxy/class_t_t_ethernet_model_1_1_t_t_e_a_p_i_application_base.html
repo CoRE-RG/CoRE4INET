@@ -80,7 +80,7 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">implementation of the TTEthernet-API method.  <a href="#a31069033961d39a5fad323f6e33995f2"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df">startApplication</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Does nothing in this application. Must be overwritten with actual application behavior.  <a href="#a7f9324b6d5675dc375a0def922b202df"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Does nothing in this application.  <a href="#a7f9324b6d5675dc375a0def922b202df"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a508e4c6e531a7df3c9b273ca1ca0cb15">initialize</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">initializes the module.  <a href="#a508e4c6e531a7df3c9b273ca1ca0cb15"></a><br/></td></tr>
@@ -112,7 +112,7 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <div class="memdoc">
 
 <p>Handles incoming START_APPLICATION or Scheduler messages. </p>
-<p>The module receives START_APPLICATION messages that trigger <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application. Must be overwritten with actual application behavior...">startApplication()</a> or messages via schedulerIn that contain Tasks to be executed.</p>
+<p>The module receives START_APPLICATION messages that trigger <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">startApplication()</a> or messages via schedulerIn that contain Tasks to be executed.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>the incoming message </td></tr>
@@ -232,14 +232,15 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 </div>
 <div class="memdoc">
 
-<p>Does nothing in this application. Must be overwritten with actual application behavior. </p>
+<p>Does nothing in this application. </p>
+<p>Must be overwritten with actual application behavior. </p>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html#ad9351f7c43a7b6053d953a122e328c3a">TTEthernetModel::TTEAPITestApplication</a>.</p>
 
 <p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00042">42</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00042"></a>00042                                                                    {
-<a name="l00043"></a>00043         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application. Must be overwritten with actual application behavior...">startApplication</a>();
+<a name="l00043"></a>00043         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">startApplication</a>();
 <a name="l00044"></a>00044         <span class="keyword">delete</span> msg;
 <a name="l00045"></a>00045     }
 </pre></div></p>
@@ -318,7 +319,7 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <a name="l00367"></a>00367     Enter_Method_Silent();
 <a name="l00368"></a>00368     TTEAPIPriv *priv = (TTEAPIPriv *)buf-&gt;priv;
 <a name="l00369"></a>00369     <span class="comment">//Copy frame data and free memory</span>
-<a name="l00370"></a>00370     <a class="code" href="class_a_p_i_payload.html">APIPayload</a> *payload = (<a class="code" href="class_a_p_i_payload.html">APIPayload</a>*)priv-&gt;frame-&gt;getEncapsulatedPacket();
+<a name="l00370"></a>00370     APIPayload *payload = (APIPayload*)priv-&gt;frame-&gt;getEncapsulatedPacket();
 <a name="l00371"></a>00371     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;payload-&gt;getDataArraySize();i++){
 <a name="l00372"></a>00372         payload-&gt;setData(i, ((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)priv-&gt;data)[i]);
 <a name="l00373"></a>00373     }
@@ -809,7 +810,7 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <a name="l00331"></a>00331 
 <a name="l00332"></a>00332 
 <a name="l00333"></a>00333     EtherFrame *msg = priv-&gt;buffer-&gt;getFrame();
-<a name="l00334"></a>00334     <a class="code" href="class_a_p_i_payload.html">APIPayload</a> *payload = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_a_p_i_payload.html">APIPayload</a>*<span class="keyword">&gt;</span>(msg-&gt;decapsulate());
+<a name="l00334"></a>00334     APIPayload *payload = <span class="keyword">dynamic_cast&lt;</span>APIPayload*<span class="keyword">&gt;</span>(msg-&gt;decapsulate());
 <a name="l00335"></a>00335     <span class="keywordflow">if</span>(buf-&gt;traffic_type==TTE_CT_TRAFFIC){
 <a name="l00336"></a>00336         frame-&gt;ct_id = <span class="keyword">dynamic_cast&lt;</span>CTFrame*<span class="keyword">&gt;</span>(msg)-&gt;getCtID();
 <a name="l00337"></a>00337     }
@@ -1003,7 +1004,7 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <li><a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

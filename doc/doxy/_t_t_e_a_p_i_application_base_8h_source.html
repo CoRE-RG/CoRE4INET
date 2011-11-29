@@ -62,7 +62,7 @@
 <a name="l00036"></a><a class="code" href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828">00036</a>     <a class="code" href="namespace_t_t_ethernet_model.html#a668234575b96b5b06f3ee757f2c8f95fa64ea6e73041a2aff8b4d811e3bc39828" title="Message to trigger the application start.">START_APPLICATION</a>
 <a name="l00037"></a>00037 };
 <a name="l00038"></a>00038 
-<a name="l00042"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html">00042</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers. Internally used for TTEthernet-API.">TTEAPIPriv</a>
+<a name="l00042"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html">00042</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html" title="Class that contains different pointers.">TTEAPIPriv</a>
 <a name="l00043"></a>00043 {
 <a name="l00044"></a>00044     <span class="keyword">public</span>:
 <a name="l00048"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be">00048</a>         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be" title="Pointer to a Buffer for the current application request.">buffer</a>;
@@ -79,7 +79,7 @@
 <a name="l00081"></a>00081 
 <a name="l00090"></a>00090         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a6a91f5372abc6bd1edd29c797c5c087c" title="Handles incoming START_APPLICATION or Scheduler messages.">handleMessage</a>(cMessage *msg);
 <a name="l00091"></a>00091     <span class="keyword">protected</span>:
-<a name="l00096"></a>00096         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application. Must be overwritten with actual application behavior...">startApplication</a>();
+<a name="l00096"></a>00096         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">startApplication</a>();
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098     <span class="keyword">public</span>:
 <a name="l00105"></a>00105         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9472479b1788c65b84199fdd89eebbc9" title="registers a task that is periodically scheduled.">registerTask</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> actionTime, <span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*), <span class="keywordtype">void</span> *setFunctionArg);
@@ -132,7 +132,7 @@
 <a name="l00207"></a>00207 
 <a name="l00208"></a>00208 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

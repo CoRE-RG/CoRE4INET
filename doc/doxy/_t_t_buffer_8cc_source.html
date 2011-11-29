@@ -62,7 +62,7 @@
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031     <span class="comment">//Register Event</span>
 <a name="l00032"></a>00032     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00033"></a>00033     <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;TTBuffer Scheduler Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
+<a name="l00033"></a>00033     <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;TTBuffer Scheduler Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
 <a name="l00034"></a>00034     <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).doubleValue());
 <a name="l00035"></a>00035     <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
 <a name="l00036"></a>00036     tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b">registerEvent</a>(event);
@@ -80,7 +80,7 @@
 <a name="l00048"></a>00048     {
 <a name="l00049"></a>00049         cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
 <a name="l00050"></a>00050         <span class="comment">//Send Message</span>
-<a name="l00051"></a>00051         <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.end(); ++gate)
+<a name="l00051"></a>00051         <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++gate)
 <a name="l00052"></a>00052         {
 <a name="l00053"></a>00053             <span class="keywordflow">if</span> (outgoingMessage)
 <a name="l00054"></a>00054             {
@@ -88,7 +88,7 @@
 <a name="l00056"></a>00056             }
 <a name="l00057"></a>00057             <span class="keywordflow">else</span>
 <a name="l00058"></a>00058             {
-<a name="l00059"></a>00059                 sendDirect(<span class="keyword">new</span> <a class="code" href="class_t_t_buffer_empty.html">TTBufferEmpty</a>(<span class="stringliteral">&quot;TT Buffer Empty&quot;</span>), *gate);
+<a name="l00059"></a>00059                 sendDirect(<span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer_empty.html" title="Class generated from buffer/TTBufferEmpty.msg by opp_msgc.">TTBufferEmpty</a>(<span class="stringliteral">&quot;TT Buffer Empty&quot;</span>), *gate);
 <a name="l00060"></a>00060             }
 <a name="l00061"></a>00061         }
 <a name="l00062"></a>00062         <span class="keywordflow">if</span>(gate(<span class="stringliteral">&quot;out&quot;</span>)-&gt;isConnected()){
@@ -96,7 +96,7 @@
 <a name="l00064"></a>00064                 send(outgoingMessage-&gt;dup(),<span class="stringliteral">&quot;out&quot;</span>);
 <a name="l00065"></a>00065             }
 <a name="l00066"></a>00066             <span class="keywordflow">else</span>{
-<a name="l00067"></a>00067                 send(<span class="keyword">new</span> <a class="code" href="class_t_t_buffer_empty.html">TTBufferEmpty</a>(<span class="stringliteral">&quot;TT Buffer Empty&quot;</span>),<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00067"></a>00067                 send(<span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer_empty.html" title="Class generated from buffer/TTBufferEmpty.msg by opp_msgc.">TTBufferEmpty</a>(<span class="stringliteral">&quot;TT Buffer Empty&quot;</span>),<span class="stringliteral">&quot;out&quot;</span>);
 <a name="l00068"></a>00068             }
 <a name="l00069"></a>00069         }
 <a name="l00070"></a>00070         <span class="keywordflow">if</span> (outgoingMessage)
@@ -105,8 +105,8 @@
 <a name="l00073"></a>00073             <span class="keyword">delete</span> outgoingMessage;
 <a name="l00074"></a>00074 
 <a name="l00075"></a>00075             <span class="comment">// Now execute transmit callbacks if there are some</span>
-<a name="l00076"></a>00076             <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.begin();
-<a name="l00077"></a>00077                     iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.end(); ++iter){
+<a name="l00076"></a>00076             <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.begin();
+<a name="l00077"></a>00077                     iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end(); ++iter){
 <a name="l00078"></a>00078                 iter-&gt;first-&gt;executeCallback(iter-&gt;second);
 <a name="l00079"></a>00079             }
 <a name="l00080"></a>00080         }
@@ -116,7 +116,7 @@
 <a name="l00084"></a>00084     }
 <a name="l00085"></a>00085 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
