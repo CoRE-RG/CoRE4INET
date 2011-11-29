@@ -1,0 +1,223 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>RCQueueBuffer</i></h2>
+<b>Package:</b> ttethernet.buffer<br/><b>File: <a href="src-buffer-RCQueueBuffer.ned.html">src/buffer/RCQueueBuffer.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Represents a queue buffer for rate-constrained traffic. Messages are sent using the configured
+gandwidth alocation gap.</p>
+<p>The buffer stores infinit messages in a fifo queue.
+The buffer removes and sends the first message in the queue.</p>
+<p><b>See also:</b> <a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a>, <a href="ttethernet.buffer.Buffer.html">Buffer</a>,</p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.buffer.RCQueueBuffer-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="RCQueueBuffer" alt="RCQueueBuffer" coords="0,31,142,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.RCQueueBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="5,5,115,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.RCQueueBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="5,80,115,107">
+<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="24,5,96,32">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for rate-constrained traffic. Messages are sent using the configured
+bandwidth allocation gap.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>max_dispatch_delay</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td></td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>bag</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td></td>
+   <td>
+<p>Bandwidth allocation gap in number of ticks</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>jitter</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td></td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/buffer</i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>class</td>
+   <td><i>RCQueueBuffer</i></td>
+   <td>
+<p><a href="ttethernet.buffer.RCQueueBuffer.html">RCQueueBuffer</a> is implemented by the <a href="ttethernet.buffer.RCQueueBuffer.html">RCQueueBuffer</a> C++ Class</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>in</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>The buffers Input</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>out</xsl:if></td>
+   <td><i>output</i></td>
+   <td></td>   <td>
+<p>The buffers Output </p>
+<p><b>WARNING:</b> CURRENTLY NOT USED!</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>schedulerIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming <a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a> messages</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>queueLength</td>
+   <td>Queue Length</td>
+   <td></td>
+   <td>vector</td>
+   <td></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Represents a queue buffer for rate-constrained traffic. Messages are sent using the configured
+// gandwidth alocation gap.
+//
+// The buffer stores infinit messages in a fifo queue.
+// The buffer removes and sends the first message in the queue.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> RCBuffer, Buffer,
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCQueueBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; ">
+{
+    </span><span style="color: #808080; font-style: italic; ">//RCQueueBuffer is implemented by the RCQueueBuffer C++ Class
+</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCQueueBuffer</span><span style="color: #000000; ">);
+    </span><span style="color: #808080; font-style: italic; ">//Statistic of the queue length of the buffer
+</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">queueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

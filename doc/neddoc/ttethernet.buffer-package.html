@@ -1,0 +1,155 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2>Package ttethernet.buffer</h2>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.BGBuffer.html">BGBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for background traffic. Messages are sent immediatly to the LLC</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.BGQueueBuffer.html">BGQueueBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a queue buffer for background traffic. Messages are sent immediatly to LLC</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.Buffer.html">Buffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for the various Buffers of TTEthernet.
+Since this is an abstract module please do not instantiate it</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.BufferManager.html">BufferManager</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>The <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> is responsible for the configuration of a Node (Host or Switch).
+It creates the necessary <a href="ttethernet.buffer.Buffer.html">Buffer</a> and <a href="ttethernet.ctc.Incoming.html">Incoming</a> modules and connects them.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for rate-constrained traffic. Messages are sent using the configured
+bandwidth allocation gap.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.RCDoubleBuffer.html">RCDoubleBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a double buffer for rate-constrained traffic. Messages are sent using the configured
+gandwidth alocation gap.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.RCQueueBuffer.html">RCQueueBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a queue buffer for rate-constrained traffic. Messages are sent using the configured
+gandwidth alocation gap.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for time-triggerd traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTDoubleBuffer.html">TTDoubleBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a double buffer for time-triggered traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTQueueBuffer.html">TTQueueBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a queue buffer for time-triggered traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+</table>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

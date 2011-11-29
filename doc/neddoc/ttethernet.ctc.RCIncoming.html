@@ -1,0 +1,146 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>RCIncoming</i></h2>
+<b>Package:</b> ttethernet.ctc<br/><b>File: <a href="src-ctc-RCIncoming.ned.html">src/ctc/RCIncoming.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_r_c_incoming.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Module for the conformance checks of incoming rate-constrained traffic.</p>
+<p>The traffic is checked for conformance with the bag.</p>
+<p><b>WARNING:</b> Only the bag parameter is used!</p>
+<p><b>See also:</b> <a href="ttethernet.ctc.Incoming.html">Incoming</a>,</p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.ctc.RCIncoming-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="RCIncoming" alt="RCIncoming" coords="0,31,121,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.ctc.RCIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="5,5,96,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.ctc.RCIncoming-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="5,80,96,107">
+<area shape="rect" href="ttethernet.ctc.Incoming.html" title="Simple Module Incoming" alt="" coords="15,5,87,32">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.ctc.Incoming.html">Incoming</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Abstract module for the conformance checks of incoming traffic.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>bag</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td></td>
+   <td>
+<p>Bandwidth allocation gap in number of ticks</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>jitter</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td></td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>class</td>
+   <td><i>RCIncoming</i></td>
+   <td>
+<p><a href="ttethernet.ctc.RCIncoming.html">RCIncoming</a> is implemented by the <a href="ttethernet.ctc.RCIncoming.html">RCIncoming</a> C++ Class</p>
+</td>
+</tr>
+<tr>
+   <td>display</td>
+   <td><i>i=device/firewall</i></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>in</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>input of the ctc</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>out</xsl:if></td>
+   <td><i>output</i></td>
+   <td></td>   <td>
+<p>output of the ctc</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Module for the conformance checks of incoming rate-constrained traffic.
+//
+// The traffic is checked for conformance with the bag.
+//
+// </span><span style="color: #000080; ">@warning</span><span style="color: #808080; font-style: italic; "> Only the bag parameter is used!
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> Incoming,
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCIncoming</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">Incoming</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//RCIncoming is implemented by the RCIncoming C++ Class
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCIncoming</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Bandwidth allocation gap in number of ticks
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bag</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//Not used
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">jitter</span><span style="color: #000000; ">;
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

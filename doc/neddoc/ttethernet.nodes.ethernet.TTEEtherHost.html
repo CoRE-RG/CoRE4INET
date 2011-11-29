@@ -1,0 +1,328 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Compound Module <i>TTEEtherHost</i></h2>
+<b>Package:</b> ttethernet.nodes.ethernet<br/><b>File: <a href="src-nodes-ethernet-TTEEtherHost.ned.html">src/nodes/ethernet/TTEEtherHost.ned</a></b><br/>
+<p>Module for a TTEthernet Host.
+Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> module as physical port,
+sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+The Host is configured by the provided TTEthernet XML network configuration
+(network_configuration parameter) and uses the device_name parameter to find its config.
+The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> that deletes itself at runtime.</p>
+<p><b>TODO:</b> Ports for redundancy!</p>
+<p><b>TODO:</b> Documentation for Applications!</p>
+<p><b>See also:</b> EtherLLC, <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a>, <a href="ttethernet.synchronisation.Sync.html">Sync</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>, <a href="ttethernet.buffer.BufferManager.html">BufferManager</a></p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="216,278,261,334">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="EtherLLC" alt="EtherLLC" coords="123,276,167,337">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="EtherAppCli" alt="EtherAppCli" coords="42,276,86,337">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="EtherAppSrv" alt="EtherAppSrv" coords="42,189,86,250">
+<area shape="rect" href="ttethernet.buffer.BufferManager.html" title="BufferManager" alt="BufferManager" coords="954,1019,1049,1080">
+<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Sync" alt="Sync" coords="123,189,167,250">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="TTEScheduler" alt="TTEScheduler" coords="196,189,278,250">
+<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="216,119,261,180">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="123,57,167,118">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="123,119,167,180">
+<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="BGTrafficHandle" alt="BGTrafficHandle" coords="12,119,113,180">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="609,5,711,32">
+<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="5,80,120,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="144,80,219,107">
+<area shape="rect" href="ttethernet.buffer.BufferManager.html" title="Simple Module BufferManager" alt="" coords="243,80,347,107">
+<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="371,80,483,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="507,80,600,107">
+<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="624,80,696,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="720,80,816,107">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="840,80,952,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="976,80,1077,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="1101,80,1192,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="1216,80,1312,107">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="5,5,107,32">
+</map>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>network_configuration</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td></td>
+   <td>
+<p>Network configuration file</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>device_name</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td></td>
+   <td>
+<p>Name of the device in the network configuration</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>appType</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>"TTEAPITestApplication"</td>
+   <td>
+<p>Application running on the Host</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>bgb=894,314;i=device/device</i></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>ethg</xsl:if></td>
+   <td><i>inout</i></td>
+   <td></td>   <td>
+<p>Physical port of the host</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Unassigned submodule parameters:</h3>
+<table class="deepparamstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.address</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>"auto"</td>
+   <td>
+<p>MAC address as hex string (12 hex digits), or
+"auto". "auto" values will be replaced by
+a generated MAC address in init stage 0.</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.txQueueLimit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>1000</td>
+   <td>
+<p>maximum number of frames queued up for transmission;
+additional frames are dropped. Only used if queueModule==""</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.frameBursting</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>true</td>
+   <td>
+<p>enable/disable frame bursting mode in Gigabit Ethernet</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.mtu</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>1500</td>
+   <td>   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html">cli</a>.destAddress</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>destination MAC address, or module path name of destination station; empty means off</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html">cli</a>.startTime</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>this.sendInterval</td>
+   <td>
+<p>time of sending the first request</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html">cli</a>.stopTime</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>time of finish sending, 0 means forever</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html">cli</a>.sendInterval</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>uniform(0s,1s)</td>
+   <td>
+<p>interval between sending requests</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html">cli</a>.reqLength</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>100B</td>
+   <td>
+<p>length of request packets</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html">cli</a>.respLength</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>1KiB</td>
+   <td>
+<p>length of response packets</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Module for a TTEthernet Host.
+// Contains a EtherLLC for best-effort traffic, a TTEPHYPort module as physical port,
+// sync module (Sync) and a TTEScheduler module.
+// The Host is configured by the provided TTEthernet XML network configuration
+// (network_configuration parameter) and uses the device_name parameter to find its config.
+// The configuration is done by the BufferManager that deletes itself at runtime.
+//
+// </span><span style="color: #000080; ">@todo</span><span style="color: #808080; font-style: italic; "> Ports for redundancy!
+// </span><span style="color: #000080; ">@todo</span><span style="color: #808080; font-style: italic; "> Documentation for Applications!
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> EtherLLC, TTEPHYPort, Sync, TTEScheduler, BufferManager
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=894,314;i=device/device&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Network configuration file
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">network_configuration</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">// Name of the device in the network configuration
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">device_name</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//Application running on the Host
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">appType</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;TTEAPITestApplication&quot;</span><span style="color: #000000; ">);
+    </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">// Physical port of the host
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">inout</span><span style="color: #000000; "> </span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">;
+
+    </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">// Physical port of the host
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">phy</span><span style="color: #000000; ">[</span><span style="color: #008000; ">1</span><span style="color: #000000; ">]: </span><span style="color: #000000; ">TTEPHYPort</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,255&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #808080; font-style: italic; ">// LLC for best-effort traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">EtherLLC</span><span style="color: #000000; "> {
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,256&quot;</span><span style="color: #000000; ">);
+            </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; ">[</span><span style="color: #008000; ">3</span><span style="color: #000000; ">];
+                </span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; ">[</span><span style="color: #008000; ">3</span><span style="color: #000000; ">];
+        }
+
+        </span><span style="color: #000000; ">cli</span><span style="color: #000000; ">: </span><span style="color: #000000; ">EtherAppCli</span><span style="color: #000000; "> {
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; ">registerSAP</span><span style="color: #000000; "> = </span><span style="color: #008000; ">true</span><span style="color: #000000; ">;
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=60,256,col&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #000000; ">srv</span><span style="color: #000000; ">: </span><span style="color: #000000; ">EtherAppSrv</span><span style="color: #000000; "> {
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; ">registerSAP</span><span style="color: #000000; "> = </span><span style="color: #008000; ">true</span><span style="color: #000000; ">;
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=60,169,col&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #808080; font-style: italic; ">// Buffer manager that creates the buffers according to the configuration
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">bufferManager</span><span style="color: #000000; ">: </span><span style="color: #000000; ">BufferManager</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=999,999&quot;</span><span style="color: #000000; ">);
+        }
+         </span><span style="color: #808080; font-style: italic; ">// Sync module for synchronisation of the scheduler
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">sync</span><span style="color: #000000; ">: </span><span style="color: #000000; ">Sync</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,169&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #808080; font-style: italic; ">// Scheudler for the device
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteScheduler</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,169&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #000000; ">tteApp</span><span style="color: #000000; ">: &lt;</span><span style="color: #000000; ">appType</span><span style="color: #000000; ">&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,99&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #000000; ">bgIn</span><span style="color: #000000; ">: </span><span style="color: #000000; ">BGQueueBuffer</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,37&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #000000; ">bgOut</span><span style="color: #000000; ">: </span><span style="color: #000000; ">BGQueueBuffer</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,99&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #000000; ">bgTrafficHandle</span><span style="color: #000000; ">: </span><span style="color: #000000; ">BGTrafficHandle</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=60,99&quot;</span><span style="color: #000000; ">);
+        }
+    </span><span style="color: #800000; font-weight: bold; ">connections</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; ">phy</span><span style="color: #000000; ">[</span><span style="color: #008000; ">0</span><span style="color: #000000; ">].</span><span style="color: #000000; ">phys</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">&lt;--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">lowerLayerOut</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">phy</span><span style="color: #000000; ">[</span><span style="color: #008000; ">0</span><span style="color: #000000; ">].</span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">phy</span><span style="color: #000000; ">[</span><span style="color: #008000; ">0</span><span style="color: #000000; ">].</span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">lowerLayerIn</span><span style="color: #000000; ">;
+
+        </span><span style="color: #000000; ">cli</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; ">[</span><span style="color: #008000; ">0</span><span style="color: #000000; ">];
+        </span><span style="color: #000000; ">cli</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">&lt;--</span><span style="color: #000000; "> </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; ">[</span><span style="color: #008000; ">0</span><span style="color: #000000; ">];
+
+        </span><span style="color: #000000; ">srv</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; ">[</span><span style="color: #008000; ">1</span><span style="color: #000000; ">];
+        </span><span style="color: #000000; ">srv</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">&lt;--</span><span style="color: #000000; "> </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; ">[</span><span style="color: #008000; ">1</span><span style="color: #000000; ">];
+
+        </span><span style="color: #000000; ">bgTrafficHandle</span><span style="color: #000000; ">.</span><span style="color: #000000; ">lowerLayerOut</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; ">[</span><span style="color: #008000; ">2</span><span style="color: #000000; ">];
+        </span><span style="color: #000000; ">bgTrafficHandle</span><span style="color: #000000; ">.</span><span style="color: #000000; ">lowerLayerIn</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">&lt;--</span><span style="color: #000000; "> </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; ">[</span><span style="color: #008000; ">2</span><span style="color: #000000; ">];
+        </span><span style="color: #000000; ">bgTrafficHandle</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">bgIn</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">bgOut</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">bgTrafficHandle</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;
+}
+
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

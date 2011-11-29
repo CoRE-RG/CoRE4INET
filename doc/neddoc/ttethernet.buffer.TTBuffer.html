@@ -1,0 +1,273 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>TTBuffer</i></h2>
+<b>Package:</b> ttethernet.buffer<br/><b>File: <a href="src-buffer-TTBuffer.ned.html">src/buffer/TTBuffer.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_t_t_buffer.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for time-triggerd traffic. Messages are sent using the configured
+send window.</p>
+<p>The <a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a> registers a timer (<a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a>) at the scheduler module (<a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>) to send its
+Message in conformance with the send window.</p>
+<p><b>WARNING:</b> Do not instantiate the module. Use <a href="ttethernet.buffer.TTDoubleBuffer.html">TTDoubleBuffer</a> or <a href="ttethernet.buffer.TTQueueBuffer.html">TTQueueBuffer</a> instead!</p>
+<p><b>TODO:</b> The <a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a> module should be converted to an interface since it should
+not be used directly in simulation.</p>
+<p><b>See also:</b> <a href="ttethernet.buffer.TTDoubleBuffer.html">TTDoubleBuffer</a>, <a href="ttethernet.buffer.TTQueueBuffer.html">TTQueueBuffer</a>, <a href="ttethernet.buffer.Buffer.html">Buffer</a>, <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a></p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.buffer.TTBuffer-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="TTBuffer" alt="TTBuffer" coords="0,31,99,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.TTBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="5,5,77,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.TTBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="88,80,160,107">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="5,155,112,181">
+<area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="136,155,243,181">
+<area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="88,5,160,32">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.Buffer.html">Buffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for the various Buffers of TTEthernet.
+Since this is an abstract module please do not instantiate it</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Known subclasses:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTDoubleBuffer.html">TTDoubleBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a double buffer for time-triggered traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTQueueBuffer.html">TTQueueBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a queue buffer for time-triggered traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>sendWindowStart</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Beginning of the send window in number of ticks</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>sendWindowEnd</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>End of the send window in number of ticks</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/buffer</i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>class</td>
+   <td><i>TTBuffer</i></td>
+   <td>
+<p><a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a> is implemented by the <a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a> C++ Class</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>in</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>The buffers Input</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>out</xsl:if></td>
+   <td><i>output</i></td>
+   <td></td>   <td>
+<p>The buffers Output </p>
+<p><b>WARNING:</b> CURRENTLY NOT USED!</p>
+</td>
+</tr>
+<tr class="local">
+   <td>schedulerIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a> messages</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>txPk</td>
+   <td>TX Packets</td>
+   <td></td>
+   <td>count, vector</td>
+   <td></td>
+   <td></td>
+</tr>
+<tr class="local">
+   <td>latency</td>
+   <td>End-to-end latency</td>
+   <td></td>
+   <td>count, vector</td>
+   <td></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Represents an abstract Buffer for time-triggerd traffic. Messages are sent using the configured
+// send window.
+//
+// The TTBuffer registers a timer (SchedulerActionTimeEvent) at the scheduler module (TTEScheduler) to send its
+// Message in conformance with the send window.
+//
+// </span><span style="color: #000080; ">@warning</span><span style="color: #808080; font-style: italic; "> Do not instantiate the module. Use TTDoubleBuffer or TTQueueBuffer instead!
+//
+// </span><span style="color: #000080; ">@todo</span><span style="color: #808080; font-style: italic; "> The TTBuffer module should be converted to an interface since it should
+// not be used directly in simulation.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTDoubleBuffer, TTQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">Buffer</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//TTBuffer is implemented by the TTBuffer C++ Class
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTBuffer</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Beginning of the send window in number of ticks
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sendWindowStart</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//End of the send window in number of ticks
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sendWindowEnd</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+    </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; ">;
+
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

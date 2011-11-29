@@ -1,0 +1,38 @@
+<area shape="rect" href="ttethernet.buffer.BGBuffer.html" title="Simple Module BGBuffer" alt="" coords="163,5,235,32">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="1264,80,1376,107">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="709,5,811,32">
+<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="608,80,723,107">
+<area shape="rect" href="ttethernet.buffer.BufferManager.html" title="Simple Module BufferManager" alt="" coords="264,80,368,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="659,155,755,181">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="392,80,488,107">
+<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="797,80,909,107">
+<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="512,80,584,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="933,80,1008,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="1032,80,1125,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="139,80,240,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="1149,80,1240,107">
+<area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="835,5,907,32">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="259,5,373,32">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="5,80,115,107">
+<area shape="rect" href="ned.DatarateChannel.html" title="Channel DatarateChannel" alt="" coords="931,5,1048,32">
+<area shape="rect" href="ned.DelayChannel.html" title="Channel DelayChannel" alt="" coords="1072,5,1173,32">
+<area shape="rect" href="ned.IBidirectionalChannel.html" title="Module Interface IBidirectionalChannel" alt="" coords="1197,5,1339,32">
+<area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="Simple Module TTEInput" alt="" coords="404,155,476,181">
+<area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="Simple Module TTEOutput" alt="" coords="500,155,583,181">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="Simple Module EtherMACFullDuplex" alt="" coords="239,155,380,181">
+<area shape="rect" href="ttethernet.ctc.Incoming.html" title="Simple Module Incoming" alt="" coords="1363,5,1435,32">
+<area shape="rect" href="ttethernet.linklayer.IPort.html" title="Module Interface IPort" alt="" coords="1459,5,1531,32">
+<area shape="rect" href="ned.IUnidirectionalChannel.html" title="Module Interface IUnidirectionalChannel" alt="" coords="1555,5,1704,32">
+<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="1728,5,1800,32">
+<area shape="rect" href="ttethernet.buffer.RCDoubleBuffer.html" title="Simple Module RCDoubleBuffer" alt="" coords="1824,5,1936,32">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="1960,5,2051,32">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="2075,5,2184,32">
+<area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="2208,5,2280,32">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="2304,5,2411,32">
+<area shape="rect" href="ttethernet.applications.TTEAPIApplicationBase.html" title="Simple Module TTEAPIApplicationBase" alt="" coords="2435,5,2595,32">
+<area shape="rect" href="ttethernet.applications.TTEAPITestApplication.html" title="Simple Module TTEAPITestApplication" alt="" coords="2619,5,2771,32">
+<area shape="rect" href="ttethernet.applications.TTEApplicationBase.html" title="Simple Module TTEApplicationBase" alt="" coords="2795,5,2933,32">
+<area shape="rect" href="ttethernet.applications.TTETestApp.html" title="Simple Module TTETestApp" alt="" coords="2957,5,3048,32">
+<area shape="rect" href="ttethernet.api.TTEthAPI.html" title="Simple Module TTEthAPI" alt="" coords="3072,5,3147,32">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="3171,5,3259,32">
+<area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="3283,5,3389,32">

@@ -1,0 +1,4 @@
+<area shape="rect" href="ttethernet.ctc.Incoming.html" title="Simple Module Incoming" alt="" coords="71,80,143,107">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="5,155,96,181">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="120,155,208,181">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.networklayer.queue.IOutputQueue.html" title="Module Interface IOutputQueue" alt="" coords="56,5,157,32">

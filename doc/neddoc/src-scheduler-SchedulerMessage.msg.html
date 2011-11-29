@@ -1,0 +1,92 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Msg File <i>src/scheduler/SchedulerMessage.msg</i></h2>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="SchedulerMessage.html">SchedulerMessage</a>
+   </td>
+   <td>
+<i>message</i>
+   </td>
+   <td>
+
+<p>abstract base message for <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="SchedulerEvent.html">SchedulerEvent</a>
+   </td>
+   <td>
+<i>message</i>
+   </td>
+   <td>
+
+<p>Message used for events of <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> with <a href="SchedulerMessageKind.html">SchedulerMessageKind</a> = NEW_CYCLE</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="SchedulerMessageKind.html">SchedulerMessageKind</a>
+   </td>
+   <td>
+<i>enum</i>
+   </td>
+   <td>
+
+<p>Enum for different <a href="SchedulerEvent.html">SchedulerEvent</a> messages </p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #800000; font-weight: bold; ">namespace</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEthernetModel</span><span style="color: #000000; ">;
+
+</span><span style="color: #808080; font-style: italic; ">//
+// abstract base message for TTEScheduler.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTEScheduler
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerMessage</span><span style="color: #000000; "> {
+}
+
+</span><span style="color: #808080; font-style: italic; ">//
+// Message used for events of TTEScheduler with SchedulerMessageKind = NEW_CYCLE
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> SchedulerMessageKind
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerEvent</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerMessage</span><span style="color: #000000; "> {
+    </span><span style="color: #000000; font-weight: bold; ">@customize</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+}
+
+</span><span style="color: #808080; font-style: italic; ">//
+// Enum for different SchedulerEvent messages 
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> SchedulerEvent
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">enum</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerMessageKind</span><span style="color: #000000; "> {
+    </span><span style="color: #808080; font-style: italic; ">// Event that signals the beginning of a new cycle
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">NEW_CYCLE</span><span style="color: #000000; ">=</span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+    </span><span style="color: #808080; font-style: italic; ">// Event with a specified action time
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">ACTION_TIME_EVENT</span><span style="color: #000000; ">=</span><span style="color: #008000; ">1</span><span style="color: #000000; ">;
+    </span><span style="color: #808080; font-style: italic; ">// Event that is triggered after a specified amount of time
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">TIMER_EVENT</span><span style="color: #000000; ">=</span><span style="color: #008000; ">2</span><span style="color: #000000; ">;
+}</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

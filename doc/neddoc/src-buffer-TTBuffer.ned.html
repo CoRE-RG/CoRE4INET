@@ -1,0 +1,64 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">NED File <i>src/buffer/TTBuffer.ned</i></h2>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for time-triggerd traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #800000; font-weight: bold; ">package</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">buffer</span><span style="color: #000000; ">;
+
+</span><span style="color: #808080; font-style: italic; ">//
+// Represents an abstract Buffer for time-triggerd traffic. Messages are sent using the configured
+// send window.
+//
+// The TTBuffer registers a timer (SchedulerActionTimeEvent) at the scheduler module (TTEScheduler) to send its
+// Message in conformance with the send window.
+//
+// </span><span style="color: #000080; ">@warning</span><span style="color: #808080; font-style: italic; "> Do not instantiate the module. Use TTDoubleBuffer or TTQueueBuffer instead!
+//
+// </span><span style="color: #000080; ">@todo</span><span style="color: #808080; font-style: italic; "> The TTBuffer module should be converted to an interface since it should
+// not be used directly in simulation.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTDoubleBuffer, TTQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">Buffer</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//TTBuffer is implemented by the TTBuffer C++ Class
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTBuffer</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Beginning of the send window in number of ticks
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sendWindowStart</span><span style="color: #000000; ">=</span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//End of the send window in number of ticks
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sendWindowEnd</span><span style="color: #000000; ">=</span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+    </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; ">;
+
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

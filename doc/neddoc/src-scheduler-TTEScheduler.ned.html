@@ -1,0 +1,56 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">NED File <i>src/scheduler/TTEScheduler.ned</i></h2>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>TTEthernet scheduler module. The module allows to register Events using the
+registerEvent(<a href="SchedulerEvent.html">SchedulerEvent</a>) method. Allowed Events are:</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #800000; font-weight: bold; ">package</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">scheduler</span><span style="color: #000000; ">;
+
+</span><span style="color: #808080; font-style: italic; ">//
+// TTEthernet scheduler module. The module allows to register Events using the
+// registerEvent(SchedulerEvent) method. Allowed Events are:
+// - SchedulerActionTimeEvent: Event that is triggered at a specified time in the cycle
+// - SchedulerTimerEvent: Event that is triggered after a specified time
+//
+// The Scheduler can be asked for the current time with the getTicks() method.
+// The cycle is configured by the parameters tick and cycle_ticks.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> SchedulerTimerEvent, SchedulerActionTimeEvent, SchedulerTimerEvent
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/cogwheel&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Length of a tick
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">tick</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #008000; ">80</span><span style="color: #000000; ">ns</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">// Number of ticks for one cycle
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">cycle_ticks</span><span style="color: #000000; ">=</span><span style="color: #008000; ">37500</span><span style="color: #000000; ">;
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>
