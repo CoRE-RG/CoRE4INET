@@ -27,10 +27,6 @@ class TTEAPIPriv;
 class Callback;
 
 /**
- * @defgroup Buffer Buffers
- */
-
-/**
  * @brief Base class for all buffer classes.
  *
  * Buffer, although packed with buffer-related functionality, does not do

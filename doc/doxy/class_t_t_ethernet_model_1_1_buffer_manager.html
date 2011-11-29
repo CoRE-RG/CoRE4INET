@@ -158,13 +158,13 @@
 <a name="l00070"></a>00070                     <span class="comment">//parameters</span>
 <a name="l00071"></a>00071                     newCTCModule-&gt;par(<span class="stringliteral">&quot;receive_window_start&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00072"></a>00072                             ttincoming-&gt;getReceiveWindowStart(),
-<a name="l00073"></a>00073                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00073"></a>00073                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00074"></a>00074                     newCTCModule-&gt;par(<span class="stringliteral">&quot;receive_window_end&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00075"></a>00075                             ttincoming-&gt;getReceiveWindowEnd(),
-<a name="l00076"></a>00076                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00076"></a>00076                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00077"></a>00077                     newCTCModule-&gt;par(<span class="stringliteral">&quot;permanence_pit&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00078"></a>00078                             ttincoming-&gt;getPermanencePit(),
-<a name="l00079"></a>00079                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00079"></a>00079                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00080"></a>00080                 }
 <a name="l00081"></a>00081                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (incoming-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;RCIncoming&quot;</span>)
 <a name="l00082"></a>00082                 {
@@ -175,10 +175,10 @@
 <a name="l00087"></a>00087                     newCTCModule = moduleType-&gt;create(ctcName.c_str(), getParentModule());
 <a name="l00088"></a>00088                     <span class="comment">//parameters</span>
 <a name="l00089"></a>00089                     newCTCModule-&gt;par(<span class="stringliteral">&quot;bag&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(rcincoming-&gt;getRefBagAccount()-&gt;getBag(),
-<a name="l00090"></a>00090                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00090"></a>00090                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00091"></a>00091                     newCTCModule-&gt;par(<span class="stringliteral">&quot;jitter&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00092"></a>00092                             rcincoming-&gt;getRefBagAccount()-&gt;getJitter(),
-<a name="l00093"></a>00093                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00093"></a>00093                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00094"></a>00094                 }
 <a name="l00095"></a>00095                 <span class="keywordflow">else</span>
 <a name="l00096"></a>00096                 {
@@ -213,10 +213,10 @@
 <a name="l00125"></a>00125                         <span class="comment">//parameters</span>
 <a name="l00126"></a>00126                         newModule-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00127"></a>00127                                 ttoutgoing-&gt;getSendWindowStart(),
-<a name="l00128"></a>00128                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00128"></a>00128                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00129"></a>00129                         newModule-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00130"></a>00130                                 ttoutgoing-&gt;getSendWindowEnd(),
-<a name="l00131"></a>00131                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00131"></a>00131                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00132"></a>00132 
 <a name="l00133"></a>00133                     }
 <a name="l00134"></a>00134                     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (outgoing-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;RCOutgoing&quot;</span>)
@@ -236,13 +236,13 @@
 <a name="l00148"></a>00148                         <span class="comment">//parameters</span>
 <a name="l00149"></a>00149                         newModule-&gt;par(<span class="stringliteral">&quot;max_dispatch_delay&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00150"></a>00150                                 rcoutgoing-&gt;getMaxDispatchDelay(),
-<a name="l00151"></a>00151                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00151"></a>00151                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00152"></a>00152                         newModule-&gt;par(<span class="stringliteral">&quot;bag&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00153"></a>00153                                 rcoutgoing-&gt;getRefBagAccount()-&gt;getBag(),
-<a name="l00154"></a>00154                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00154"></a>00154                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00155"></a>00155                         newModule-&gt;par(<span class="stringliteral">&quot;jitter&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
 <a name="l00156"></a>00156                                 rcoutgoing-&gt;getRefBagAccount()-&gt;getJitter(),
-<a name="l00157"></a>00157                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>));
+<a name="l00157"></a>00157                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00158"></a>00158 
 <a name="l00159"></a>00159                     }
 <a name="l00160"></a>00160                     <span class="keywordflow">else</span>
@@ -405,7 +405,7 @@
 <li><a class="el" href="_buffer_manager_8cc_source.html">BufferManager.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:38 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:38:59 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
