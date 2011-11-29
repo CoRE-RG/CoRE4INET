@@ -21,10 +21,21 @@
 #include <QueueBuffer.h>
 #include <EtherFrame_m.h>
 
-/**
- * TODO - Generated class
- */
 namespace TTEthernetModel {
+
+/**
+ * @brief Rate-constrained queue buffer class.
+ *
+ * The Frame is stored and released immediately when the bag has expired previously.
+ * If the bag has not expired yet the frame is stored. The implementation uses a
+ * SchedulerTimerEvent that is registered at the TTEScheduler.
+ *
+ * The queue is an endless fifo queue
+ *
+ * @sa RCBuffer, RCQueueBuffer, Buffer
+ *
+ * @ingroup Buffer
+ */
 class RCQueueBuffer : public RCBuffer, public QueueBuffer
 {
 };

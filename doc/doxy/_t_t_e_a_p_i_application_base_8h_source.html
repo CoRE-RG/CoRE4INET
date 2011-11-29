@@ -49,7 +49,7 @@
 <a name="l00017"></a>00017 <span class="preprocessor"></span><span class="preprocessor">#define __TTETHERNETMODELV2_TTEAPIAPPLICATIONBASE_H_</span>
 <a name="l00018"></a>00018 <span class="preprocessor"></span>
 <a name="l00019"></a>00019 <span class="preprocessor">#include &lt;omnetpp.h&gt;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;<a class="code" href="tte__api_8h.html" title="Generic TTEthernet API.">tte_api.h</a>&quot;</span>
+<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;tte_api.h&quot;</span>
 <a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_t_t_e_application_base_8h.html">TTEApplicationBase.h</a>&quot;</span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_c_t_frame__m_8h.html">CTFrame_m.h</a>&quot;</span>
 <a name="l00023"></a>00023 
@@ -82,40 +82,40 @@
 <a name="l00053"></a>00053     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9472479b1788c65b84199fdd89eebbc9">registerTask</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> actionTime, <span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*), <span class="keywordtype">void</span> *setFunctionArg);
 <a name="l00054"></a>00054 
 <a name="l00055"></a>00055     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a004aa5acb4b8bf25cdcb8dfa29b35569">tte_get_ct_output_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
-<a name="l00056"></a>00056                                   <span class="keyword">const</span> uint16_t <a class="code" href="group__functions__status.html#ga080f34e2bd03f30d6ab5becaf198c69e">ct_id</a>,
-<a name="l00057"></a>00057                                   <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf);
+<a name="l00056"></a>00056                                   <span class="keyword">const</span> uint16_t ct_id,
+<a name="l00057"></a>00057                                   tte_buffer_t * <span class="keyword">const</span> buf);
 <a name="l00058"></a>00058     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9493a178576b42719e346740a94758f7">tte_get_bg_output_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
 <a name="l00059"></a>00059                                   <span class="keyword">const</span> uint8_t channel,
-<a name="l00060"></a>00060                                   <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf);
+<a name="l00060"></a>00060                                   tte_buffer_t * <span class="keyword">const</span> buf);
 <a name="l00061"></a>00061     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#af8024cfd62c23545d3226c1fae26d504">tte_get_bg_input_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
 <a name="l00062"></a>00062                                   <span class="keyword">const</span> uint8_t channel,
-<a name="l00063"></a>00063                                   <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf);
+<a name="l00063"></a>00063                                   tte_buffer_t * <span class="keyword">const</span> buf);
 <a name="l00064"></a>00064     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7441ae1141a1993ca486014cb2406ab7">tte_get_ct_input_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
 <a name="l00065"></a>00065                                   <span class="keyword">const</span> uint16_t ct_id,
-<a name="l00066"></a>00066                                   <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf);
+<a name="l00066"></a>00066                                   tte_buffer_t * <span class="keyword">const</span> buf);
 <a name="l00067"></a>00067 
 <a name="l00068"></a>00068     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aed85f82bfe571df81436339852f1a7a8">tte_get_var</a>(<span class="keyword">const</span> uint8_t ctrl_id,
-<a name="l00069"></a>00069                                     <span class="keyword">const</span> <a class="code" href="group__basic__api__types.html#gadb7dd6c113e3cf75b77e9bada8c76779">tte_var_id_t</a> var_id,
+<a name="l00069"></a>00069                                     <span class="keyword">const</span> tte_var_id_t var_id,
 <a name="l00070"></a>00070                                     <span class="keyword">const</span> uint32_t var_size,
 <a name="l00071"></a>00071                                     <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a70ba853e240dc96c91460457c3921657">tte_open_output_buf</a>(<a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf,
-<a name="l00074"></a>00074                                        <a class="code" href="structtte__frame__t.html">tte_frame_t</a> * <span class="keyword">const</span> frame);
+<a name="l00073"></a>00073     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a70ba853e240dc96c91460457c3921657">tte_open_output_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00074"></a>00074                                        tte_frame_t * <span class="keyword">const</span> frame);
 <a name="l00075"></a>00075 
-<a name="l00076"></a>00076     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae857de443d19fe185f14cf4d24f61b4b">tte_open_input_buf</a>(<a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf,
-<a name="l00077"></a>00077                                     <a class="code" href="structtte__frame__t.html">tte_frame_t</a> * <span class="keyword">const</span> frame,
-<a name="l00078"></a>00078                                     <a class="code" href="structtte__buf__status__t.html">tte_buf_status_t</a> * <span class="keyword">const</span> status);
+<a name="l00076"></a>00076     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae857de443d19fe185f14cf4d24f61b4b">tte_open_input_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00077"></a>00077                                     tte_frame_t * <span class="keyword">const</span> frame,
+<a name="l00078"></a>00078                                     tte_buf_status_t * <span class="keyword">const</span> status);
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ac1a61c340af54c6b06b9e68373b8ef09">tte_close_output_buf</a>(<a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf);
+<a name="l00080"></a>00080     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ac1a61c340af54c6b06b9e68373b8ef09">tte_close_output_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf);
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aa38b602984406d089b81f4676d3114d9">tte_close_input_buf</a>(<a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf);
+<a name="l00082"></a>00082     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aa38b602984406d089b81f4676d3114d9">tte_close_input_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf);
 <a name="l00083"></a>00083 
-<a name="l00084"></a>00084     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae1cd0a759a9626632cb3f72f219653c6">tte_set_buf_var</a>(<a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf,
-<a name="l00085"></a>00085                                    <span class="keyword">const</span> <a class="code" href="group__basic__api__types.html#ga0de42e81f2265084380c9e6e805c3db6">tte_buf_var_id_t</a> var_id,
+<a name="l00084"></a>00084     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae1cd0a759a9626632cb3f72f219653c6">tte_set_buf_var</a>(tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00085"></a>00085                                    <span class="keyword">const</span> tte_buf_var_id_t var_id,
 <a name="l00086"></a>00086                                    <span class="keyword">const</span> uint32_t var_size,
 <a name="l00087"></a>00087                                    <span class="keyword">const</span> <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
-<a name="l00088"></a>00088     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a31069033961d39a5fad323f6e33995f2">tte_get_buf_var</a>(<span class="keyword">const</span> <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> * <span class="keyword">const</span> buf,
-<a name="l00089"></a>00089                                        <span class="keyword">const</span> <a class="code" href="group__basic__api__types.html#ga0de42e81f2265084380c9e6e805c3db6">tte_buf_var_id_t</a> var_id,
+<a name="l00088"></a>00088     <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a31069033961d39a5fad323f6e33995f2">tte_get_buf_var</a>(<span class="keyword">const</span> tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00089"></a>00089                                        <span class="keyword">const</span> tte_buf_var_id_t var_id,
 <a name="l00090"></a>00090                                        <span class="keyword">const</span> uint32_t var_size,
 <a name="l00091"></a>00091                                        <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
 <a name="l00092"></a>00092 };
@@ -125,7 +125,7 @@
 <a name="l00096"></a>00096 
 <a name="l00097"></a>00097 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -21,10 +21,19 @@
 #include <DoubleBuffer.h>
 #include <EtherFrame_m.h>
 
-/**
- * TODO - Generated class
- */
 namespace TTEthernetModel {
+
+/**
+ * @brief Rate-constrained double buffer class.
+ *
+ * The Frame is stored and released immediately when the bag has expired previously.
+ * If the bag has not expired yet the frame is stored. The implementation uses a
+ * SchedulerTimerEvent that is registered at the TTEScheduler.
+ *
+ * @sa RCBuffer, RCDoubleBuffer, Buffer
+ *
+ * @ingroup Buffer
+ */
 class RCDoubleBuffer : public RCBuffer, DoubleBuffer
 {
 

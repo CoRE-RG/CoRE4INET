@@ -132,7 +132,7 @@
 <a name="l00100"></a>00100             MACAddress mac;
 <a name="l00101"></a>00101             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ct_mask = par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();
 <a name="l00102"></a>00102             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ct_marker = par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();
-<a name="l00103"></a>00103             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__functions__status.html#ga080f34e2bd03f30d6ab5becaf198c69e">ct_id</a> = par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
+<a name="l00103"></a>00103             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ct_id = par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
 <a name="l00104"></a>00104             ct_marker &amp;= ct_mask;
 <a name="l00105"></a>00105             mac.setAddressByte(0, ct_marker&gt;&gt;24);
 <a name="l00106"></a>00106             mac.setAddressByte(1, ct_marker&gt;&gt;16);
@@ -164,7 +164,7 @@
 <a name="l00132"></a>00132     <span class="keywordflow">throw</span>;
 <a name="l00133"></a>00133 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

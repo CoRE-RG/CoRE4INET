@@ -48,7 +48,7 @@
 <a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="_t_t_e_a_p_i_test_application_8h.html">TTEAPITestApplication.h</a>&quot;</span>
 <a name="l00017"></a>00017 
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;<a class="code" href="tte__api_8h.html" title="Generic TTEthernet API.">tte_api.h</a>&quot;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;tte_api.h&quot;</span>
 <a name="l00020"></a>00020 
 <a name="l00021"></a><a class="code" href="namespace_t_t_ethernet_model.html#a96e25ddc242fc9843315ae7758949f39">00021</a> <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00022"></a>00022 
@@ -61,8 +61,8 @@
 <a name="l00029"></a>00029 
 <a name="l00030"></a>00030 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespace_t_t_ethernet_model.html#abc712099a1b61a09a06b1ace93447f1c">main</a>(){
 <a name="l00031"></a>00031     <span class="comment">//tte_init();</span>
-<a name="l00032"></a>00032     <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> testbuffer;
-<a name="l00033"></a>00033     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#ga7fc5497e1eb50381c0286432cffd4a13">tte_get_ct_output_buf</a>(0, 100, &amp;testbuffer) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00032"></a>00032     tte_buffer_t testbuffer;
+<a name="l00033"></a>00033     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#acb8ba34f04ede8b84801a4f2be3f69b4">tte_get_ct_output_buf</a>(0, 100, &amp;testbuffer) != ETT_SUCCESS){
 <a name="l00034"></a>00034         ev &lt;&lt; <span class="stringliteral">&quot;MIST1!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00035"></a>00035         <span class="keywordflow">return</span> -1;
 <a name="l00036"></a>00036     }
@@ -71,55 +71,55 @@
 <a name="l00039"></a>00039 
 <a name="l00040"></a>00040     uint8_t mac[6];
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042     <a class="code" href="group__functions__status.html#ga35533534e2019f42cf3c0bbf805b18b3">tte_get_var</a>(0, <a class="code" href="group__basic__api__types.html#ggadb7dd6c113e3cf75b77e9bada8c76779a7bcd03e1a396300dc798fc149ce563f5">TTE_VAR_MAC_ADDRESS</a>,<span class="keyword">sizeof</span>(mac), mac);
+<a name="l00042"></a>00042     <a class="code" href="namespace_t_t_ethernet_model.html#ac913d0815a05a381414ce63a38578107">tte_get_var</a>(0, TTE_VAR_MAC_ADDRESS,<span class="keyword">sizeof</span>(mac), mac);
 <a name="l00043"></a>00043 
 <a name="l00044"></a>00044     ev.printf(<span class="stringliteral">&quot;TTE_VAR_MAC_ADDRESS: %02x:%02x:%02x:%02x:%02x:%02x\n\n&quot;</span>, mac[5], mac[4], mac[3], mac[2], mac[1], mac[0]);
 <a name="l00045"></a>00045 
-<a name="l00046"></a>00046     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#ga643ccea18091046c8ecdfd24f9660893">tte_set_buf_var</a>(&amp;testbuffer, <a class="code" href="group__basic__api__types.html#gga0de42e81f2265084380c9e6e805c3db6ad3ff1a8483c59d7c1493e3299b114062">TTE_BUFVAR_TRANSMIT_CB</a>, <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>(*)(<span class="keywordtype">void</span>*)), (<span class="keywordtype">void</span>*)&amp;<a class="code" href="namespace_t_t_ethernet_model.html#a96e25ddc242fc9843315ae7758949f39">testCallback</a>) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00046"></a>00046     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#a9ebc765b80522eb49e17a710cdcb946c">tte_set_buf_var</a>(&amp;testbuffer, TTE_BUFVAR_TRANSMIT_CB, <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>(*)(<span class="keywordtype">void</span>*)), (<span class="keywordtype">void</span>*)&amp;<a class="code" href="namespace_t_t_ethernet_model.html#a96e25ddc242fc9843315ae7758949f39">testCallback</a>) != ETT_SUCCESS){
 <a name="l00047"></a>00047         ev &lt;&lt; <span class="stringliteral">&quot;MIST21!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00048"></a>00048         <span class="keywordflow">return</span> -1;
 <a name="l00049"></a>00049     }
-<a name="l00050"></a>00050     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#ga643ccea18091046c8ecdfd24f9660893">tte_set_buf_var</a>(&amp;testbuffer, <a class="code" href="group__basic__api__types.html#gga0de42e81f2265084380c9e6e805c3db6a60ddc628539353b655fe3d04cf975f58">TTE_BUFVAR_CB_ARG</a>, 5, <span class="stringliteral">&quot;SENT&quot;</span>) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00050"></a>00050     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#a9ebc765b80522eb49e17a710cdcb946c">tte_set_buf_var</a>(&amp;testbuffer, TTE_BUFVAR_CB_ARG, 5, <span class="stringliteral">&quot;SENT&quot;</span>) != ETT_SUCCESS){
 <a name="l00051"></a>00051         ev &lt;&lt; <span class="stringliteral">&quot;MIST22!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00052"></a>00052         <span class="keywordflow">return</span> -1;
 <a name="l00053"></a>00053     }
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055     <a class="code" href="structtte__frame__t.html">tte_frame_t</a> frame;
-<a name="l00056"></a>00056     frame.<a class="code" href="structtte__frame__t.html#a956da9868df69c1f75d08a3f12be14b2">length</a>=46;
+<a name="l00055"></a>00055     tte_frame_t frame;
+<a name="l00056"></a>00056     frame.length=46;
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.src_mac[0] = 0x00;
-<a name="l00059"></a>00059     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.src_mac[1] = 0x00;
-<a name="l00060"></a>00060     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.src_mac[2] = 0x00;
-<a name="l00061"></a>00061     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.src_mac[3] = 0x00;
-<a name="l00062"></a>00062     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.src_mac[4] = 0x00;
-<a name="l00063"></a>00063     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.src_mac[5] = 0x00;
+<a name="l00058"></a>00058     frame.eth_hdr.src_mac[0] = 0x00;
+<a name="l00059"></a>00059     frame.eth_hdr.src_mac[1] = 0x00;
+<a name="l00060"></a>00060     frame.eth_hdr.src_mac[2] = 0x00;
+<a name="l00061"></a>00061     frame.eth_hdr.src_mac[3] = 0x00;
+<a name="l00062"></a>00062     frame.eth_hdr.src_mac[4] = 0x00;
+<a name="l00063"></a>00063     frame.eth_hdr.src_mac[5] = 0x00;
 <a name="l00064"></a>00064 
-<a name="l00065"></a>00065     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.dst_mac[0] = 0x00;
-<a name="l00066"></a>00066     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.dst_mac[1] = 0x00;
-<a name="l00067"></a>00067     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.dst_mac[2] = 0x00;
-<a name="l00068"></a>00068     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.dst_mac[3] = 0x00;
-<a name="l00069"></a>00069     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.dst_mac[4] = 0x00;
-<a name="l00070"></a>00070     frame.<a class="code" href="group__functions__status.html#ga762b7fde319f28226e086ae270816379">eth_hdr</a>.dst_mac[5] = 0x00;
+<a name="l00065"></a>00065     frame.eth_hdr.dst_mac[0] = 0x00;
+<a name="l00066"></a>00066     frame.eth_hdr.dst_mac[1] = 0x00;
+<a name="l00067"></a>00067     frame.eth_hdr.dst_mac[2] = 0x00;
+<a name="l00068"></a>00068     frame.eth_hdr.dst_mac[3] = 0x00;
+<a name="l00069"></a>00069     frame.eth_hdr.dst_mac[4] = 0x00;
+<a name="l00070"></a>00070     frame.eth_hdr.dst_mac[5] = 0x00;
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#gad797cda733ece2bc22dfa0d585b06ace">tte_open_output_buf</a>(&amp;testbuffer, &amp;frame) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00072"></a>00072     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#afa376f71c699c168c7c46bd19a58088f">tte_open_output_buf</a>(&amp;testbuffer, &amp;frame) != ETT_SUCCESS){
 <a name="l00073"></a>00073         ev &lt;&lt; <span class="stringliteral">&quot;MIST2!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00074"></a>00074         <span class="keywordflow">return</span> -1;
 <a name="l00075"></a>00075     }
-<a name="l00076"></a>00076     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#gab180de0ba5b24bb7391097a5d0b977c5">tte_close_output_buf</a>(&amp;testbuffer) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00076"></a>00076     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#a20495ed75c9f5a8da1ee165cac3d62c9">tte_close_output_buf</a>(&amp;testbuffer) != ETT_SUCCESS){
 <a name="l00077"></a>00077         ev &lt;&lt; <span class="stringliteral">&quot;MIST3!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00078"></a>00078         <span class="keywordflow">return</span> -1;
 <a name="l00079"></a>00079     }
 <a name="l00080"></a>00080 
-<a name="l00081"></a>00081     <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> testbuffer2;
-<a name="l00082"></a>00082     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#ga7fc5497e1eb50381c0286432cffd4a13">tte_get_ct_output_buf</a>(0, 100, &amp;testbuffer2) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00081"></a>00081     tte_buffer_t testbuffer2;
+<a name="l00082"></a>00082     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#acb8ba34f04ede8b84801a4f2be3f69b4">tte_get_ct_output_buf</a>(0, 100, &amp;testbuffer2) != ETT_SUCCESS){
 <a name="l00083"></a>00083         ev &lt;&lt; <span class="stringliteral">&quot;MIST4!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00084"></a>00084         <span class="keywordflow">return</span> -1;
 <a name="l00085"></a>00085     }
-<a name="l00086"></a>00086     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#ga643ccea18091046c8ecdfd24f9660893">tte_set_buf_var</a>(&amp;testbuffer2, <a class="code" href="group__basic__api__types.html#gga0de42e81f2265084380c9e6e805c3db6a1d3020f3b427526d6bd84a8053ee265f">TTE_BUFVAR_RECEIVE_CB</a>, <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>(*)(<span class="keywordtype">void</span>*)), (<span class="keywordtype">void</span>*)&amp;testCallback) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00086"></a>00086     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#a9ebc765b80522eb49e17a710cdcb946c">tte_set_buf_var</a>(&amp;testbuffer2, TTE_BUFVAR_RECEIVE_CB, <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>(*)(<span class="keywordtype">void</span>*)), (<span class="keywordtype">void</span>*)&amp;testCallback) != ETT_SUCCESS){
 <a name="l00087"></a>00087         ev &lt;&lt; <span class="stringliteral">&quot;MIST41!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00088"></a>00088         <span class="keywordflow">return</span> -1;
 <a name="l00089"></a>00089     }
-<a name="l00090"></a>00090     <span class="keywordflow">if</span>(<a class="code" href="group__functions__status.html#ga643ccea18091046c8ecdfd24f9660893">tte_set_buf_var</a>(&amp;testbuffer2, <a class="code" href="group__basic__api__types.html#gga0de42e81f2265084380c9e6e805c3db6a60ddc628539353b655fe3d04cf975f58">TTE_BUFVAR_CB_ARG</a>, 9, <span class="stringliteral">&quot;RECEIVED&quot;</span>) != <a class="code" href="group__return__codes.html#gga120e22a04f623691e1716ac1252da42aaeb058efebe8d78429184917ce4e58818">ETT_SUCCESS</a>){
+<a name="l00090"></a>00090     <span class="keywordflow">if</span>(<a class="code" href="namespace_t_t_ethernet_model.html#a9ebc765b80522eb49e17a710cdcb946c">tte_set_buf_var</a>(&amp;testbuffer2, TTE_BUFVAR_CB_ARG, 9, <span class="stringliteral">&quot;RECEIVED&quot;</span>) != ETT_SUCCESS){
 <a name="l00091"></a>00091         ev &lt;&lt; <span class="stringliteral">&quot;MIST42!&quot;</span> &lt;&lt; endl &lt;&lt; endl;
 <a name="l00092"></a>00092         <span class="keywordflow">return</span> -1;
 <a name="l00093"></a>00093     }
@@ -135,7 +135,7 @@
 <a name="l00103"></a>00103 
 <a name="l00104"></a>00104 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

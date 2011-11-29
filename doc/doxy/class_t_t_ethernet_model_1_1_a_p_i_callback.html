@@ -105,27 +105,27 @@ Inheritance diagram for TTEthernetModel::APICallback:</div>
 <a name="l00019"></a>00019         fn(arg);
 <a name="l00020"></a>00020     }
 <a name="l00021"></a>00021     <span class="keywordflow">else</span>{
-<a name="l00022"></a>00022         <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> buf;
+<a name="l00022"></a>00022         tte_buffer_t buf;
 <a name="l00023"></a>00023         <span class="keywordflow">if</span>(dynamic_cast&lt;TTBuffer*&gt;(buffer) != NULL){
-<a name="l00024"></a>00024             buf.<a class="code" href="group__functions__status.html#gaecfb89ad48d86a2eb73baefb96ae413b">traffic_type</a>= <a class="code" href="group__basic__api__types.html#gga267c63054c65244f0668ffc22cc88ee4a6232a7b467e6ec48d078b855895e6656">TTE_TT_TRAFFIC</a>;
+<a name="l00024"></a>00024             buf.traffic_type= TTE_TT_TRAFFIC;
 <a name="l00025"></a>00025         }
 <a name="l00026"></a>00026         <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dynamic_cast&lt;RCBuffer*&gt;(buffer) != NULL){
-<a name="l00027"></a>00027             buf.<a class="code" href="group__functions__status.html#gaecfb89ad48d86a2eb73baefb96ae413b">traffic_type</a>= <a class="code" href="group__basic__api__types.html#gga267c63054c65244f0668ffc22cc88ee4a1617f3e9212aeb4a7fe558d3cc03ba58">TTE_CT_TRAFFIC</a>;
+<a name="l00027"></a>00027             buf.traffic_type= TTE_CT_TRAFFIC;
 <a name="l00028"></a>00028         }
 <a name="l00029"></a>00029         <span class="keywordflow">else</span>{
-<a name="l00030"></a>00030             buf.<a class="code" href="group__functions__status.html#gaecfb89ad48d86a2eb73baefb96ae413b">traffic_type</a>= <a class="code" href="group__basic__api__types.html#gga267c63054c65244f0668ffc22cc88ee4a912a256668cfee2fa4d246b02b33618b">TTE_BG_TRAFFIC</a>;
+<a name="l00030"></a>00030             buf.traffic_type= TTE_BG_TRAFFIC;
 <a name="l00031"></a>00031         }
-<a name="l00032"></a>00032         buf.<a class="code" href="group__functions__status.html#gadc30c11cd333c6187fe7645b4a2dda16">channel</a>=0;
-<a name="l00033"></a>00033         buf.<a class="code" href="group__functions__status.html#ga005d310a1dd07335cf83a5118200ef77">ct_id</a>=buffer-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
-<a name="l00034"></a>00034         buf.<a class="code" href="group__functions__status.html#ga482a6615de265895bd700813edab7e3b">shared</a>=0;
+<a name="l00032"></a>00032         buf.channel=0;
+<a name="l00033"></a>00033         buf.ct_id=buffer-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
+<a name="l00034"></a>00034         buf.shared=0;
 <a name="l00035"></a>00035 
 <a name="l00036"></a>00036         TTEAPIPriv *priv = <span class="keyword">new</span> TTEAPIPriv();
-<a name="l00037"></a>00037         buf.<a class="code" href="group__functions__status.html#ga5f4ebe0e4e846933334cfbc3f8d1bf17">priv</a> = priv;
+<a name="l00037"></a>00037         buf.priv = priv;
 <a name="l00038"></a>00038         priv-&gt;buffer = buffer;
 <a name="l00039"></a>00039         fn((<span class="keywordtype">void</span>*)&amp;buf);
-<a name="l00040"></a>00040         <span class="keywordflow">if</span>(buf.<a class="code" href="group__functions__status.html#ga5f4ebe0e4e846933334cfbc3f8d1bf17">priv</a>){
+<a name="l00040"></a>00040         <span class="keywordflow">if</span>(buf.priv){
 <a name="l00041"></a>00041             <span class="keyword">delete</span> priv;
-<a name="l00042"></a>00042             buf.<a class="code" href="group__functions__status.html#ga5f4ebe0e4e846933334cfbc3f8d1bf17">priv</a>=0;
+<a name="l00042"></a>00042             buf.priv=0;
 <a name="l00043"></a>00043         }
 </pre></div></p>
 
@@ -136,7 +136,7 @@ Inheritance diagram for TTEthernetModel::APICallback:</div>
 <li><a class="el" href="_callback_8cc_source.html">Callback.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:48 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

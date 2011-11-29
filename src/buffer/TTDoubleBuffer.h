@@ -21,10 +21,18 @@
 #include <DoubleBuffer.h>
 #include <EtherFrame_m.h>
 
-/**
- * TODO - Generated class
- */
 namespace TTEthernetModel {
+
+/**
+ * @brief Time-triggeredd double buffer class.
+ *
+ * The Frame is stored and released time-triggered using a previously
+ * registered SchedulerActionTimeEvent. The Buffer interacts with the TTEScheduler.
+ *
+ * @sa TTBuffer, TTDoubleBuffer, Buffer
+ *
+ * @ingroup Buffer
+ */
 class TTDoubleBuffer : public TTBuffer, public DoubleBuffer
 {
 };

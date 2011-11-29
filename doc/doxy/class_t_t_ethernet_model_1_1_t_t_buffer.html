@@ -31,7 +31,13 @@
   </div>
 </div>
 <div class="contents">
-<h1>TTEthernetModel::TTBuffer Class Reference</h1><!-- doxytag: class="TTEthernetModel::TTBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
+<h1>TTEthernetModel::TTBuffer Class Reference<br/>
+<small>
+[<a class="el" href="group___buffer.html">Buffers</a>]</small>
+</h1><!-- doxytag: class="TTEthernetModel::TTBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
+<p>Base class for a time-triggered buffer class.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_t_t_buffer_8h_source.html">TTBuffer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::TTBuffer:</div>
@@ -50,12 +56,17 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8">initialize</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes the <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a>.  <a href="#aef03862ddc2b35ae7d4fe02a1671dbb8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847">handleMessage</a> (cMessage *msg)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Is called when a new Frame is received in the buffer.  <a href="#a78eff1b2851f7f86a09377237ea14847"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">handles the incoming and outgoing messages of the buffer.  <a href="#a78eff1b2851f7f86a09377237ea14847"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Base class for a time-triggered buffer class. </p>
+<p>The Frame is stored and released time-triggered using a previously registered <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a>. The <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> interacts with the <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>.</p>
+<p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>.</p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_buffer_8h_source.html#l00026">26</a> of file <a class="el" href="_t_t_buffer_8h_source.html">TTBuffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_buffer_8h_source.html#l00036">36</a> of file <a class="el" href="_t_t_buffer_8h_source.html">TTBuffer.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a78eff1b2851f7f86a09377237ea14847"></a><!-- doxytag: member="TTEthernetModel::TTBuffer::handleMessage" ref="a78eff1b2851f7f86a09377237ea14847" args="(cMessage *msg)" -->
 <div class="memitem">
@@ -73,11 +84,11 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 </div>
 <div class="memdoc">
 
-<p>Is called when a new Frame is received in the buffer. </p>
-<p>When a frame is received on the in-Gate it is processed. If the destination address is unspecified it is set according to the ct marker of the buffer. Afterwards it is enqueued using the buffer specific <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue(EtherFrame *newFrame)</a> method. In the end all registered receive callbacks are executed.</p>
+<p>handles the incoming and outgoing messages of the buffer. </p>
+<p>If message arrived on in, it is queued by calling <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage(cMessage *msg)</a>. When a <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a> message arrives the previously stored message is released and the callbacks are executed. When there is no message to send a <a class="el" href="class_t_t_buffer_empty.html">TTBufferEmpty</a> message is transmitted. This allowes the receiving application to use the bandwidth for other messages.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>The incoming message </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>incoming EtherFrame for the <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> or <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a> message. </td></tr>
   </table>
   </dd>
 </dl>
@@ -89,7 +100,7 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <p><div class="fragment"><pre class="fragment"><a name="l00042"></a>00042 {
 <a name="l00043"></a>00043     <span class="keywordtype">bool</span> arrivedOnSchedulerIn = msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>);
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(msg);
+<a name="l00045"></a>00045     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="handles the incoming and outgoing messages of the buffer.">Buffer::handleMessage</a>(msg);
 <a name="l00046"></a>00046 
 <a name="l00047"></a>00047     <span class="keywordflow">if</span> (arrivedOnSchedulerIn &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)
 <a name="l00048"></a>00048     {
@@ -148,14 +159,15 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Initializes the module </p>
+
+<p>Initializes the <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html">SchedulerActionTimeEvent</a>. </p>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a976b864b117683fbc02a043090e54db2">TTEthernetModel::Buffer</a>.</p>
 
 <p>Definition at line <a class="el" href="_t_t_buffer_8cc_source.html#l00026">26</a> of file <a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00027"></a>00027 {
-<a name="l00028"></a>00028     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8">Buffer::initialize</a>();
+<a name="l00028"></a>00028     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8" title="Initializes the SchedulerActionTimeEvent.">Buffer::initialize</a>();
 <a name="l00029"></a>00029     ev &lt;&lt; <span class="stringliteral">&quot;Initialize TTBuffer&quot;</span> &lt;&lt; endl;
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031     <span class="comment">//Register Event</span>
@@ -176,7 +188,7 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <li><a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:48 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:38 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

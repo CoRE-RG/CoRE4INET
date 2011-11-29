@@ -31,7 +31,13 @@
   </div>
 </div>
 <div class="contents">
-<h1>TTEthernetModel::DoubleBuffer Class Reference</h1><!-- doxytag: class="TTEthernetModel::DoubleBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
+<h1>TTEthernetModel::DoubleBuffer Class Reference<br/>
+<small>
+[<a class="el" href="group___buffer.html">Buffers</a>]</small>
+</h1><!-- doxytag: class="TTEthernetModel::DoubleBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
+<p>Base class for a double buffer class.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_double_buffer_8h_source.html">DoubleBuffer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
@@ -50,18 +56,23 @@ Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a09a256c9f3f99f60915ce459f77461d3">DoubleBuffer</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#a09a256c9f3f99f60915ce459f77461d3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a8f71f567eac302e3eff6a8496ba06db7">~DoubleBuffer</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor.  <a href="#a8f71f567eac302e3eff6a8496ba06db7"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a76046f00752b4f2b539b5c2b13427dcd">enqueue</a> (EtherFrame *newFrame)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Is called to store an EtherFrame in the buffer.  <a href="#a76046f00752b4f2b539b5c2b13427dcd"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stores a new frame.  <a href="#a76046f00752b4f2b539b5c2b13427dcd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual EtherFrame *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a213af00b300ba26b7318c9fdee013cb4">dequeue</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Is called to get an EtherFrame from the buffer.  <a href="#a213af00b300ba26b7318c9fdee013cb4"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the frame that is stored in the buffer.  <a href="#a213af00b300ba26b7318c9fdee013cb4"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EtherFrame *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a0f3686cef203e3bd5aaa2fe5bf7a6d40">frame</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Base class for a double buffer class. </p>
+<p>Use the implementations BGDoubleBuffer, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" title="Rate-constrained double buffer class.">RCDoubleBuffer</a>.</p>
+<dl class="see"><dt><b>See also:</b></dt><dd>BGDoubleBuffer, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" title="Rate-constrained double buffer class.">RCDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_double_buffer_8h_source.html#l00027">27</a> of file <a class="el" href="_double_buffer_8h_source.html">DoubleBuffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_double_buffer_8h_source.html#l00034">34</a> of file <a class="el" href="_double_buffer_8h_source.html">DoubleBuffer.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a09a256c9f3f99f60915ce459f77461d3"></a><!-- doxytag: member="TTEthernetModel::DoubleBuffer::DoubleBuffer" ref="a09a256c9f3f99f60915ce459f77461d3" args="()" -->
 <div class="memitem">
@@ -77,6 +88,8 @@ Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Constructor. </p>
 
 </div>
 </div>
@@ -94,6 +107,8 @@ Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -113,9 +128,9 @@ Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
 </div>
 <div class="memdoc">
 
-<p>Is called to get an EtherFrame from the buffer. </p>
-<p>This method must be implemented according to the buffer strategy.</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>a pointer to the next EtherFrame from the buffer. Returns null if there is no EtherFrame in the buffer </dd></dl>
+<p>Returns the frame that is stored in the buffer. </p>
+<p>The stored frame is copied and the copy is being returned. If there is no EtherFrame stored NULL is returned.</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Pointer to the copied frame or NULL if no frame is stored. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43">TTEthernetModel::Buffer</a>.</p>
 
@@ -137,11 +152,11 @@ Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
 </div>
 <div class="memdoc">
 
-<p>Is called to store an EtherFrame in the buffer. </p>
-<p>This method must be implemented according to the buffer strategy.</p>
+<p>Stores a new frame. </p>
+<p>The incoming EtherFrame pointer is stored. A previously stored frame is deleted </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>newFrame</em>&nbsp;</td><td>a pointer to the new EtherFrame to be saved in the buffer </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>newFrame</em>&nbsp;</td><td>the new EtherFrame to store. </td></tr>
   </table>
   </dd>
 </dl>
@@ -161,8 +176,9 @@ Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
       </table>
 </div>
 <div class="memdoc">
+<p>The EtherFrame pointer is stored here </p>
 
-<p>Definition at line <a class="el" href="_double_buffer_8h_source.html#l00034">34</a> of file <a class="el" href="_double_buffer_8h_source.html">DoubleBuffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_double_buffer_8h_source.html#l00050">50</a> of file <a class="el" href="_double_buffer_8h_source.html">DoubleBuffer.h</a>.</p>
 
 </div>
 </div>
@@ -170,7 +186,7 @@ Inheritance diagram for TTEthernetModel::DoubleBuffer:</div>
 <li><a class="el" href="_double_buffer_8h_source.html">DoubleBuffer.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:48 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:38 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

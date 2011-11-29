@@ -38,7 +38,7 @@
 <a name="l00006"></a>00006 <span class="comment"> */</span>
 <a name="l00007"></a>00007 
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;stdint.h&gt;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="tte__api_8h.html" title="Generic TTEthernet API.">tte_api.h</a>&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;tte_api.h&quot;</span>
 <a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="_t_t_buffer_8h.html">TTBuffer.h</a>&quot;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="_r_c_buffer_8h.html">RCBuffer.h</a>&quot;</span>
 <a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="_callback_8h.html">Callback.h</a>&quot;</span>
@@ -51,22 +51,22 @@
 <a name="l00019"></a>00019         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">fn</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598">arg</a>);
 <a name="l00020"></a>00020     }
 <a name="l00021"></a>00021     <span class="keywordflow">else</span>{
-<a name="l00022"></a>00022         <a class="code" href="structtte__buffer__t.html">tte_buffer_t</a> buf;
+<a name="l00022"></a>00022         tte_buffer_t buf;
 <a name="l00023"></a>00023         <span class="keywordflow">if</span>(dynamic_cast&lt;TTBuffer*&gt;(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>) != NULL){
-<a name="l00024"></a>00024             buf.<a class="code" href="group__functions__status.html#gaecfb89ad48d86a2eb73baefb96ae413b">traffic_type</a>= <a class="code" href="group__basic__api__types.html#gga267c63054c65244f0668ffc22cc88ee4a6232a7b467e6ec48d078b855895e6656">TTE_TT_TRAFFIC</a>;
+<a name="l00024"></a>00024             buf.traffic_type= TTE_TT_TRAFFIC;
 <a name="l00025"></a>00025         }
 <a name="l00026"></a>00026         <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dynamic_cast&lt;RCBuffer*&gt;(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>) != NULL){
-<a name="l00027"></a>00027             buf.<a class="code" href="group__functions__status.html#gaecfb89ad48d86a2eb73baefb96ae413b">traffic_type</a>= <a class="code" href="group__basic__api__types.html#gga267c63054c65244f0668ffc22cc88ee4a1617f3e9212aeb4a7fe558d3cc03ba58">TTE_CT_TRAFFIC</a>;
+<a name="l00027"></a>00027             buf.traffic_type= TTE_CT_TRAFFIC;
 <a name="l00028"></a>00028         }
 <a name="l00029"></a>00029         <span class="keywordflow">else</span>{
-<a name="l00030"></a>00030             buf.<a class="code" href="group__functions__status.html#gaecfb89ad48d86a2eb73baefb96ae413b">traffic_type</a>= <a class="code" href="group__basic__api__types.html#gga267c63054c65244f0668ffc22cc88ee4a912a256668cfee2fa4d246b02b33618b">TTE_BG_TRAFFIC</a>;
+<a name="l00030"></a>00030             buf.traffic_type= TTE_BG_TRAFFIC;
 <a name="l00031"></a>00031         }
-<a name="l00032"></a>00032         buf.<a class="code" href="group__functions__status.html#gadc30c11cd333c6187fe7645b4a2dda16">channel</a>=0;
-<a name="l00033"></a>00033         buf.<a class="code" href="group__functions__status.html#ga005d310a1dd07335cf83a5118200ef77">ct_id</a>=<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
-<a name="l00034"></a>00034         buf.<a class="code" href="group__functions__status.html#ga482a6615de265895bd700813edab7e3b">shared</a>=0;
+<a name="l00032"></a>00032         buf.channel=0;
+<a name="l00033"></a>00033         buf.ct_id=<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
+<a name="l00034"></a>00034         buf.shared=0;
 <a name="l00035"></a>00035 
 <a name="l00036"></a>00036         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html">TTEAPIPriv</a> *priv = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html">TTEAPIPriv</a>();
-<a name="l00037"></a>00037         buf.<a class="code" href="group__functions__status.html#ga5f4ebe0e4e846933334cfbc3f8d1bf17">priv</a> = priv;
+<a name="l00037"></a>00037         buf.priv = priv;
 <a name="l00038"></a>00038         priv-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html#a6a893471fa70005204729eacc9c836be">buffer</a> = <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>;
 <a name="l00039"></a>00039         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">fn</a>((<span class="keywordtype">void</span>*)&amp;buf);
 <a name="l00040"></a>00040         <span class="keywordflow">if</span>(buf.priv){
@@ -78,7 +78,7 @@
 <a name="l00046"></a>00046 
 <a name="l00047"></a>00047 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

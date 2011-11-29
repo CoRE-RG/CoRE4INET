@@ -27,7 +27,11 @@ class TTEAPIPriv;
 class Callback;
 
 /**
- * \brief Base class for all buffer classes.
+ * @defgroup Buffer Buffers
+ */
+
+/**
+ * @brief Base class for all buffer classes.
  *
  * Buffer, although packed with buffer-related functionality, does not do
  * anything useful by itself: one has to subclass from it and redefine one
@@ -73,43 +77,43 @@ class Buffer : public cSimpleModule
         void initialize();
 
         /**
-         * \brief Is called when a new Frame is received in the buffer.
+         * @brief Is called when a new Frame is received in the buffer.
          *
          * When a frame is received on the in-Gate it is processed. If the destination
          * address is unspecified it is set according to the ct marker of the buffer.
          * Afterwards it is enqueued using the buffer specific enqueue(EtherFrame *newFrame)
          * method. In the end all registered receive callbacks are executed.
          *
-         * \param msg The incoming message
+         * @param msg The incoming message
          */
         void handleMessage(cMessage *msg);
 
         /**
-         * \brief Is called to store an EtherFrame in the buffer.
+         * @brief Is called to store an EtherFrame in the buffer.
          *
          * This method must be implemented according to the buffer strategy.
          *
-         * \param newFrame a pointer to the new EtherFrame to be saved in the buffer
+         * @param newFrame a pointer to the new EtherFrame to be saved in the buffer
          */
         virtual void enqueue(EtherFrame *newFrame);
 
         /**
-         * \brief Is called to get an EtherFrame from the buffer.
+         * @brief Is called to get an EtherFrame from the buffer.
          *
          * This method must be implemented according to the buffer strategy.
          *
-         * \return a pointer to the next EtherFrame from the buffer. Returns
+         * @return a pointer to the next EtherFrame from the buffer. Returns
          * null if there is no EtherFrame in the buffer
          */
         virtual EtherFrame* dequeue();
 
         /**
-         * \brief Emits a statistics signal that a frame was sent from the buffer
+         * @brief Emits a statistics signal that a frame was sent from the buffer
          */
         void recordPacketSent();
 
         /**
-         * \brief Sets the status of the Buffer to empty or non-empty.
+         * @brief Sets the status of the Buffer to empty or non-empty.
          *
          * This method changes the GUI according to the buffer status.
          */
@@ -117,71 +121,71 @@ class Buffer : public cSimpleModule
 
     public:
         /**
-         * \brief Wrapper function arround dequeue().
+         * @brief Wrapper function arround dequeue().
          *
-         * \return a pointer to the next EtherFrame from the buffer. Returns
+         * @return a pointer to the next EtherFrame from the buffer. Returns
          * null if there is no EtherFrame in the buffer
          *
-         * \sa dequeue();
+         * @sa dequeue();
          */
         EtherFrame* getFrame();
 
         /**
-         * \brief Adds a destination gate to the buffer.
+         * @brief Adds a destination gate to the buffer.
          *
          * The destination gate must be loosely coupled
          *
-         * \param destinationGate pointer to the destination gate to be added.
+         * @param destinationGate pointer to the destination gate to be added.
          */
         void addDestinationGate(cGate *destinationGate);
 
         /**
-         * \brief Removes a destination gate to the buffer.
+         * @brief Removes a destination gate to the buffer.
          *
          * The destination gate should be previously added.
          *
-         * \param destinationGate pointer to the destination gate to be removed.
+         * @param destinationGate pointer to the destination gate to be removed.
          */
         void removeDestinationGate(cGate *destinationGate);
 
         /**
-         * \brief Adds a receive callback for an application to the buffer.
+         * @brief Adds a receive callback for an application to the buffer.
          *
          * The callback is registered for a specific application. Each application is
          * allowed to only register one receive callback per buffer. Further calls
          * overwrite the registered callback.
          *
-         * \param cb the receive callback to be added.
-         * \param the corresponding application that registers the callback
+         * @param cb the receive callback to be added.
+         * @param the corresponding application that registers the callback
          */
         void addReceiveCallback(Callback *cb, TTEApplicationBase *application);
 
         /**
-         * \brief Returns the currently registered receive callback for an application.
+         * @brief Returns the currently registered receive callback for an application.
          *
-         * \param the corresponding application that registered callbacks
-         * \return The callback that is currently registered. Null if there is no
+         * @param the corresponding application that registered callbacks
+         * @return The callback that is currently registered. Null if there is no
          * receive callback registered
          */
         Callback* getReceiveCallback(TTEApplicationBase *application);
 
         /**
-         * \brief Adds a transmit callback for an application to the buffer.
+         * @brief Adds a transmit callback for an application to the buffer.
          *
          * The callback is registered for a specific application. Each application is
          * allowed to only register one transmit callback per buffer. Further calls
          * overwrite the registered callback.
          *
-         * \param cb the transmit callback to be added.
-         * \param the corresponding application that registers the callback
+         * @param cb the transmit callback to be added.
+         * @param the corresponding application that registers the callback
          */
         void addTransmitCallback(Callback *cb, TTEApplicationBase *application);
 
         /**
-         * \brief Returns the currently registered transmit callback for an application.
+         * @brief Returns the currently registered transmit callback for an application.
          *
-         * \param the corresponding application that registered callbacks
-         * \return The callback that is currently registered. Null if there is no
+         * @param the corresponding application that registered callbacks
+         * @return The callback that is currently registered. Null if there is no
          * transmit callback registered
          */
         Callback* getTransmitCallback(TTEApplicationBase *application);

@@ -54,28 +54,33 @@
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00024"></a>00024 
-<a name="l00028"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">00028</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">RCBuffer</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>
-<a name="l00029"></a>00029 {
-<a name="l00030"></a>00030     <span class="keyword">private</span>:
-<a name="l00031"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3">00031</a>         <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3">bagExpired</a>;
-<a name="l00032"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b">00032</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b">numReset</a>;
-<a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01">00033</a>         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html">SchedulerTimerEvent</a> *<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01">timerMessage</a>;
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035     <span class="keyword">public</span>:
-<a name="l00036"></a>00036         <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a28a7080ddfdf7e174c60e603e591a163">RCBuffer</a>();
-<a name="l00037"></a>00037         <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a212e2052db6d39afc9eaa2ababfe0b80">~RCBuffer</a>();
-<a name="l00038"></a>00038         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed">resetBag</a>();
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040     <span class="keyword">protected</span>:
-<a name="l00041"></a>00041         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a5d3328cee349d4ceb3127acee1f41d44">initialize</a>();
-<a name="l00042"></a>00042         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af" title="Is called when a new Frame is received in the buffer.">handleMessage</a>(cMessage *msg);
-<a name="l00043"></a>00043 };
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045 } <span class="comment">//namespace</span>
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="preprocessor">#endif</span>
+<a name="l00038"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">00038</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>
+<a name="l00039"></a>00039 {
+<a name="l00040"></a>00040     <span class="keyword">private</span>:
+<a name="l00044"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3">00044</a>         <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a>;
+<a name="l00045"></a>00045 
+<a name="l00051"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b">00051</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a>;
+<a name="l00052"></a>00052 
+<a name="l00056"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01">00056</a>         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html">SchedulerTimerEvent</a> *<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>;
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058     <span class="keyword">public</span>:
+<a name="l00062"></a>00062         <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a28a7080ddfdf7e174c60e603e591a163" title="Constructor.">RCBuffer</a>();
+<a name="l00063"></a>00063 
+<a name="l00067"></a>00067         <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a212e2052db6d39afc9eaa2ababfe0b80" title="Destructor.">~RCBuffer</a>();
+<a name="l00068"></a>00068 
+<a name="l00077"></a>00077         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed" title="resets the bag for a destination gate.">resetBag</a>();
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079     <span class="keyword">protected</span>:
+<a name="l00083"></a>00083         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a5d3328cee349d4ceb3127acee1f41d44" title="Initializes the timerMessage.">initialize</a>();
+<a name="l00084"></a>00084 
+<a name="l00096"></a>00096         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af" title="handles the incoming and outgoing messages of the buffer.">handleMessage</a>(cMessage *msg);
+<a name="l00097"></a>00097 };
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 } <span class="comment">//namespace</span>
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -21,10 +21,20 @@
 #include <QueueBuffer.h>
 #include <EtherFrame_m.h>
 
-/**
- * TODO - Generated class
- */
 namespace TTEthernetModel {
+
+/**
+ * @brief Time-triggered queue buffer class.
+ *
+ * The Frame is stored and released time-triggered using a previously
+ * registered SchedulerActionTimeEvent. The Buffer interacts with the TTEScheduler.
+ *
+ * The queue is an endless fifo queue
+ *
+ * @sa TTBuffer, TTQueueBuffer, Buffer
+ *
+ * @ingroup Buffer
+ */
 class TTQueueBuffer : public TTBuffer, public QueueBuffer
 {
 };

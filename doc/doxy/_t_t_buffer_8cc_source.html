@@ -53,11 +53,11 @@
 <a name="l00021"></a>00021 
 <a name="l00022"></a>00022 <span class="keyword">using namespace </span>TTEthernetModel;
 <a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html">TTBuffer</a>);
+<a name="l00024"></a>00024 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a>);
 <a name="l00025"></a>00025 
 <a name="l00026"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8">00026</a> <span class="keywordtype">void</span> TTBuffer::initialize()
 <a name="l00027"></a>00027 {
-<a name="l00028"></a>00028     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8">Buffer::initialize</a>();
+<a name="l00028"></a>00028     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8" title="Initializes the SchedulerActionTimeEvent.">Buffer::initialize</a>();
 <a name="l00029"></a>00029     ev &lt;&lt; <span class="stringliteral">&quot;Initialize TTBuffer&quot;</span> &lt;&lt; endl;
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031     <span class="comment">//Register Event</span>
@@ -70,11 +70,11 @@
 <a name="l00038"></a>00038     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<span class="keyword">true</span>);
 <a name="l00039"></a>00039 }
 <a name="l00040"></a>00040 
-<a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847">00041</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="Is called when a new Frame is received in the buffer.">TTBuffer::handleMessage</a>(cMessage *msg)
+<a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847">00041</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="handles the incoming and outgoing messages of the buffer.">TTBuffer::handleMessage</a>(cMessage *msg)
 <a name="l00042"></a>00042 {
 <a name="l00043"></a>00043     <span class="keywordtype">bool</span> arrivedOnSchedulerIn = msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>);
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(msg);
+<a name="l00045"></a>00045     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="handles the incoming and outgoing messages of the buffer.">Buffer::handleMessage</a>(msg);
 <a name="l00046"></a>00046 
 <a name="l00047"></a>00047     <span class="keywordflow">if</span> (arrivedOnSchedulerIn &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)
 <a name="l00048"></a>00048     {
@@ -116,7 +116,7 @@
 <a name="l00084"></a>00084     }
 <a name="l00085"></a>00085 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

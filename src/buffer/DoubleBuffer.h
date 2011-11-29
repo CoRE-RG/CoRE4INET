@@ -20,20 +20,52 @@
 #include <EtherFrame_m.h>
 #include "Buffer.h"
 
-/**
- * TODO - Generated class
- */
 namespace TTEthernetModel {
+
+/**
+ * @brief Base class for a double buffer class.
+ *
+ * Use the implementations BGDoubleBuffer, TTDoubleBuffer, RCDoubleBuffer.
+ *
+ * @sa BGDoubleBuffer, TTDoubleBuffer, RCDoubleBuffer, Buffer
+ *
+ * @ingroup Buffer
+ */
 class DoubleBuffer : public virtual Buffer
 {
     public:
+        /**
+         * @brief Constructor
+         */
         DoubleBuffer();
+        /**
+         * @brief Destructor
+         */
         virtual ~DoubleBuffer();
 
     private:
+        /**
+         * The EtherFrame pointer is stored here
+         */
         EtherFrame *frame;
+
     protected:
+        /**
+         * @brief Stores a new frame.
+         *
+         * The incoming EtherFrame pointer is stored. A previously stored frame is deleted
+         * @param newFrame the new EtherFrame to store.
+         */
         virtual void enqueue(EtherFrame *newFrame);
+
+        /**
+         * @brief Returns the frame that is stored in the buffer
+         *
+         * The stored frame is copied and the copy is being returned. If there is no EtherFrame
+         * stored NULL is returned.
+         *
+         * @return Pointer to the copied frame or NULL if no frame is stored.
+         */
         virtual EtherFrame* dequeue();
 };
 }

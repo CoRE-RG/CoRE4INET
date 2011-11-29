@@ -262,7 +262,7 @@
 <a name="l00230"></a>00230                             destModule = getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;phy&quot;</span>, oport);
 <a name="l00231"></a>00231                             <span class="keywordflow">if</span> (outgoing-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;TTOutgoing&quot;</span>)
 <a name="l00232"></a>00232                             {
-<a name="l00233"></a>00233                                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html">TTBuffer</a> *ttbuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html">TTBuffer</a>*<span class="keyword">&gt;</span> (newModule);
+<a name="l00233"></a>00233                                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a> *ttbuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a>*<span class="keyword">&gt;</span> (newModule);
 <a name="l00234"></a>00234                                 ttbuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a89b421859697d7a8a5c10309c4b3a523" title="Adds a destination gate to the buffer.">addDestinationGate</a>(destModule-&gt;gate(<span class="stringliteral">&quot;TTin&quot;</span>));
 <a name="l00235"></a>00235                                 <span class="keywordflow">if</span> (((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html">TTEOutput</a> *) destModule-&gt;getSubmodule(<span class="stringliteral">&quot;tteOutput&quot;</span>)))
 <a name="l00236"></a>00236                                 {
@@ -323,7 +323,7 @@
 <a name="l00291"></a>00291 
 <a name="l00292"></a>00292 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:37 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

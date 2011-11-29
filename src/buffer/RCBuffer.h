@@ -23,22 +23,76 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * @brief Base class for a rate-constrained buffer class.
+ *
+ * The Frame is stored and released immediately when the bag has expired previously.
+ * If the bag has not expired yet the frame is stored. The implementation uses a
+ * SchedulerTimerEvent that is registered at the TTEScheduler.
+ *
+ * Use the implementations RCDoubleBuffer, RCQueueBuffer.
+ *
+ * @sa RCDoubleBuffer, RCQueueBuffer, Buffer
+ *
+ * @ingroup Buffer
  */
 class RCBuffer : public virtual Buffer
 {
     private:
+        /**
+         * @brief Boolean indicating the bag already expired
+         */
         bool bagExpired;
+
+        /**
+         * @brief Number of reset messages by the destination Gates.
+         *
+         * The bag is only reseted when all gates invoked resetBag().
+         */
         unsigned int numReset;
+
+        /**
+         * @brief The timer Message is stored for reusage purpose.
+         */
         SchedulerTimerEvent *timerMessage;
 
     public:
+        /**
+         * @brief Constructor
+         */
         RCBuffer();
+
+        /**
+         * @brief Destructor
+         */
         virtual ~RCBuffer();
+
+        /**
+         * @brief resets the bag for a destination gate.
+         *
+         * This method must be invoked only once by each destination gate
+         * to indicate the message left the interface.
+         * The method executes the transmit callbacks and registers a
+         * SchedulerTimerEvent that indicates the beginning of a new bag
+         */
         virtual void resetBag();
 
     protected:
+        /**
+         * @brief Initializes the timerMessage
+         */
         virtual void initialize();
+
+        /**
+         * @brief handles the incoming and outgoing messages of the buffer.
+         *
+         * If message arrived on in, it is queued by calling
+         * Buffer::handleMessage(cMessage *msg). Afterwards the message is directly
+         * send when the bag already expired. When the scheduler message arrives (schedulerIn)
+         * a pending message is transferred. If there is no message waiting the bagExpired
+         * state is saved.
+         *
+         * @param msg incoming EtherFrame for the Buffer or SchedulerTimerEvent message.
+         */
         virtual void handleMessage(cMessage *msg);
 };
 

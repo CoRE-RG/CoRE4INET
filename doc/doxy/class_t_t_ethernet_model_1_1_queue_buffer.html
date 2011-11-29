@@ -31,7 +31,10 @@
   </div>
 </div>
 <div class="contents">
-<h1>TTEthernetModel::QueueBuffer Class Reference</h1><!-- doxytag: class="TTEthernetModel::QueueBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
+<h1>TTEthernetModel::QueueBuffer Class Reference<br/>
+<small>
+[<a class="el" href="group___buffer.html">Buffers</a>]</small>
+</h1><!-- doxytag: class="TTEthernetModel::QueueBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
 <p>Base class for a queuing buffer class.  
 <a href="#_details">More...</a></p>
 
@@ -71,10 +74,11 @@ Inheritance diagram for TTEthernetModel::QueueBuffer:</div>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Base class for a queuing buffer class. </p>
-<p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html">RCQueueBuffer</a>.</p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html">RCQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
+<p>The queue is an endless fifo queue.</p>
+<p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>.</p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00033">33</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00035">35</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aff1e2fd154dee22cbf7b1b3b8faf6e98"></a><!-- doxytag: member="TTEthernetModel::QueueBuffer::QueueBuffer" ref="aff1e2fd154dee22cbf7b1b3b8faf6e98" args="()" -->
 <div class="memitem">
@@ -217,7 +221,7 @@ Inheritance diagram for TTEthernetModel::QueueBuffer:</div>
 
 <p>Queue for the EtherFrames in the <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>. </p>
 
-<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00049">49</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00051">51</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00038">dequeue()</a>, and <a class="el" href="_queue_buffer_8cc_source.html#l00031">enqueue()</a>.</p>
 
@@ -236,7 +240,7 @@ Inheritance diagram for TTEthernetModel::QueueBuffer:</div>
 
 <p>Signal containing the queue length, that is emitted every time a frame was inserted or removed. </p>
 
-<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00076">76</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00078">78</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00038">dequeue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00031">enqueue()</a>, and <a class="el" href="_queue_buffer_8cc_source.html#l00026">initializeStatistics()</a>.</p>
 
@@ -247,7 +251,7 @@ Inheritance diagram for TTEthernetModel::QueueBuffer:</div>
 <li><a class="el" href="_queue_buffer_8cc_source.html">QueueBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:48 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:38 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

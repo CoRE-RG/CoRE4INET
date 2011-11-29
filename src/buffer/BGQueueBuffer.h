@@ -24,9 +24,9 @@
 namespace TTEthernetModel {
 
 /**
- * \brief Class for a queuing background (best-effort) buffer class.
+ * @brief Class for a queuing background (best-effort) buffer class.
  *
- * \sa BGBuffer, QueueBuffer, Buffer
+ * @sa BGBuffer, QueueBuffer, Buffer
  *
  * @ingroup Buffer
  */

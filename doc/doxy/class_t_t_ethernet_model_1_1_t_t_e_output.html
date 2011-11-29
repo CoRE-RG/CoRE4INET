@@ -264,9 +264,9 @@
 <a name="l00074"></a>00074             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7">framesRequested</a>--;
 <a name="l00075"></a>00075 
 <a name="l00076"></a>00076             <span class="comment">//Reset Bag</span>
-<a name="l00077"></a>00077             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">RCBuffer</a>*<span class="keyword">&gt;</span> (msg-&gt;getSenderModule());
+<a name="l00077"></a>00077             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a>*<span class="keyword">&gt;</span> (msg-&gt;getSenderModule());
 <a name="l00078"></a>00078             <span class="keywordflow">if</span> (rcBuffer)
-<a name="l00079"></a>00079                 rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed">resetBag</a>();
+<a name="l00079"></a>00079                 rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed" title="resets the bag for a destination gate.">resetBag</a>();
 <a name="l00080"></a>00080             send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));
 <a name="l00081"></a>00081         }
 <a name="l00082"></a>00082         <span class="keywordflow">else</span>
@@ -523,9 +523,9 @@
 <a name="l00176"></a>00176             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7">framesRequested</a>--;
 <a name="l00177"></a>00177             EtherFrame *message = (EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">rcQueue</a>[i].pop();
 <a name="l00178"></a>00178             <span class="comment">//Reset Bag</span>
-<a name="l00179"></a>00179             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">RCBuffer</a>*<span class="keyword">&gt;</span> (message-&gt;getSenderModule());
+<a name="l00179"></a>00179             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a>*<span class="keyword">&gt;</span> (message-&gt;getSenderModule());
 <a name="l00180"></a>00180             <span class="keywordflow">if</span> (rcBuffer)
-<a name="l00181"></a>00181                 rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed">resetBag</a>();
+<a name="l00181"></a>00181                 rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed" title="resets the bag for a destination gate.">resetBag</a>();
 <a name="l00182"></a>00182             send(message, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));
 <a name="l00183"></a>00183             <span class="keywordflow">return</span>;
 <a name="l00184"></a>00184         }
@@ -702,7 +702,7 @@
 <li><a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:48 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 14:17:38 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

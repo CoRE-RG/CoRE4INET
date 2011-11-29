@@ -21,7 +21,7 @@
 namespace TTEthernetModel {
 
 /**
- * \brief Class implementing the BufferManager module that parses the TTEthernet
+ * @brief Class implementing the BufferManager module that parses the TTEthernet
  * XML configuration and configures the buffers.
  *
  * The class requires the following libraries:
@@ -40,27 +40,26 @@ namespace TTEthernetModel {
  * The parsing is done in the second stage (stage=1) in the initialization phase. The module
  * registers a self message to delete itself when the simulation starts.
  *
- * @ingroup Buffer
  */
 class BufferManager : public cSimpleModule
 {
     protected:
         /**
-         * \brief Is called in initialization phase. The module parses when stage==1
+         * @brief Is called in initialization phase. The module parses when stage==1
          *
-         * \param stage the stages. Module parses when stage==1, otherwise it does nothing.
+         * @param stage the stages. Module parses when stage==1, otherwise it does nothing.
          */
         virtual void initialize(int stage);
 
         /**
-         * \brief Returns the numer of initializaiton stages this module needs.
+         * @brief Returns the numer of initializaiton stages this module needs.
          *
-         * \return always returns 2
+         * @return always returns 2
          */
         virtual int numInitStages() const;
 
         /**
-         * \brief Deletes the module when it receives a message.
+         * @brief Deletes the module when it receives a message.
          *
          * param msg the incoming delete message
          */
