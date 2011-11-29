@@ -62,12 +62,12 @@
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( BufferManager);
 <a name="l00032"></a>00032 
-<a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a7b77186f45bf8e61809e9ab13117f0ea">00033</a> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a7b77186f45bf8e61809e9ab13117f0ea">BufferManager::numInitStages</a>()<span class="keyword"> const</span>
+<a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a7b77186f45bf8e61809e9ab13117f0ea">00033</a> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a7b77186f45bf8e61809e9ab13117f0ea" title="Returns the numer of initializaiton stages this module needs.">BufferManager::numInitStages</a>()<span class="keyword"> const</span>
 <a name="l00034"></a>00034 <span class="keyword"></span>{
 <a name="l00035"></a>00035     <span class="keywordflow">return</span> 2;
 <a name="l00036"></a>00036 }
 <a name="l00037"></a>00037 
-<a name="l00038"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a68ef4b31aa82c0ffa836a25bac0ffbd2">00038</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a68ef4b31aa82c0ffa836a25bac0ffbd2">BufferManager::initialize</a>(<span class="keywordtype">int</span> stage)
+<a name="l00038"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a68ef4b31aa82c0ffa836a25bac0ffbd2">00038</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a68ef4b31aa82c0ffa836a25bac0ffbd2" title="Is called in initialization phase. The module parses when stage==1.">BufferManager::initialize</a>(<span class="keywordtype">int</span> stage)
 <a name="l00039"></a>00039 {
 <a name="l00040"></a>00040     <span class="keywordflow">if</span> (stage == 1)
 <a name="l00041"></a>00041     {
@@ -314,7 +314,7 @@
 <a name="l00282"></a>00282     }
 <a name="l00283"></a>00283 }
 <a name="l00284"></a>00284 
-<a name="l00285"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#ab1d68a62d996c3c4be77e7385756d8d0">00285</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#ab1d68a62d996c3c4be77e7385756d8d0">BufferManager::handleMessage</a>(cMessage *msg)
+<a name="l00285"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#ab1d68a62d996c3c4be77e7385756d8d0">00285</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer_manager.html#ab1d68a62d996c3c4be77e7385756d8d0" title="Deletes the module when it receives a message.">BufferManager::handleMessage</a>(cMessage *msg)
 <a name="l00286"></a>00286 {
 <a name="l00287"></a>00287     <span class="comment">//delete module on first message, it is not needed anymore;</span>
 <a name="l00288"></a>00288     <span class="keyword">delete</span> msg;
@@ -323,7 +323,7 @@
 <a name="l00291"></a>00291 
 <a name="l00292"></a>00292 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 11:52:42 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

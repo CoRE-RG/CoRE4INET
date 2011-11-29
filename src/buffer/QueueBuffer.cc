@@ -24,10 +24,6 @@ QueueBuffer::QueueBuffer()
     initializeStatistics();
 }
 
-QueueBuffer::~QueueBuffer()
-{
-}
-
 void QueueBuffer::initializeStatistics()
 {
     queueLengthSignal = registerSignal("queueLength");

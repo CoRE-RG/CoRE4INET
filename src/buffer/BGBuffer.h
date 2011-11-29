@@ -22,12 +22,30 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * \brief Base class for a background (best-effort) buffer class.
+ *
+ * Use the implementation BGQueueBuffer.
+ *
+ * \sa BGQueueBuffer, Buffer
+ *
+ * @ingroup Buffer
  */
 class BGBuffer : public virtual Buffer
 {
   protected:
+    /**
+     * Initializes the module
+     */
     virtual void initialize();
+
+    /**
+     * \brief Is called when a new Frame is received in the buffer.
+     *
+     * Extends the handleMessage(cMessage *msg) method in Buffer class.
+     * An incoming frame is directly dequeued. No buffering!
+     *
+     * \param msg The incoming message
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

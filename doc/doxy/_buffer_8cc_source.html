@@ -119,7 +119,7 @@
 <a name="l00087"></a>00087 }
 <a name="l00088"></a>00088 
 <a name="l00089"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55">00089</a> EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">Buffer::getFrame</a>(){
-<a name="l00090"></a>00090     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a081fbe9704d5012d814867e1e3e1152b" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
+<a name="l00090"></a>00090     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
 <a name="l00091"></a>00091 }
 <a name="l00092"></a>00092 
 <a name="l00093"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8">00093</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(cMessage *msg)
@@ -143,7 +143,7 @@
 <a name="l00111"></a>00111             frame-&gt;setDest(mac);
 <a name="l00112"></a>00112         }
 <a name="l00113"></a>00113         emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d">latencySignal</a>, simTime()-msg-&gt;getCreationTime());
-<a name="l00114"></a>00114         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a6e6c9b4d3d3e10f4942f0f24f33b828a" title="Is called to store an EtherFrame in the buffer.">enqueue</a>((EtherFrame*) frame);
+<a name="l00114"></a>00114         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>((EtherFrame*) frame);
 <a name="l00115"></a>00115         <span class="comment">// Now execute callbacks if there are some</span>
 <a name="l00116"></a>00116         <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">receiveCallbacks</a>.begin();
 <a name="l00117"></a>00117                 iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">receiveCallbacks</a>.end(); ++iter){
@@ -152,19 +152,19 @@
 <a name="l00120"></a>00120     }
 <a name="l00121"></a>00121 }
 <a name="l00122"></a>00122 
-<a name="l00123"></a>00123 <span class="comment">//void Buffer::enqueue(EtherFrame *newFrame)</span>
-<a name="l00124"></a>00124 <span class="comment">//{</span>
-<a name="l00125"></a>00125 <span class="comment">//    ev &lt;&lt; &quot;Buffer::enqueue not implemented&quot; &lt;&lt; endl;</span>
-<a name="l00126"></a>00126 <span class="comment">//    throw;</span>
-<a name="l00127"></a>00127 <span class="comment">//}</span>
-<a name="l00128"></a>00128 <span class="comment">//</span>
-<a name="l00129"></a>00129 <span class="comment">//EtherFrame * Buffer::dequeue()</span>
-<a name="l00130"></a>00130 <span class="comment">//{</span>
-<a name="l00131"></a>00131 <span class="comment">//    ev &lt;&lt; &quot;Buffer::dequeue not implemented&quot; &lt;&lt; endl;</span>
-<a name="l00132"></a>00132 <span class="comment">//    throw;</span>
-<a name="l00133"></a>00133 <span class="comment">//}</span>
+<a name="l00123"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57">00123</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">Buffer::enqueue</a>(EtherFrame *newFrame)
+<a name="l00124"></a>00124 {
+<a name="l00125"></a>00125     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00126"></a>00126     <span class="keywordflow">throw</span>;
+<a name="l00127"></a>00127 }
+<a name="l00128"></a>00128 
+<a name="l00129"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43">00129</a> EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">Buffer::dequeue</a>()
+<a name="l00130"></a>00130 {
+<a name="l00131"></a>00131     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00132"></a>00132     <span class="keywordflow">throw</span>;
+<a name="l00133"></a>00133 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 11:52:42 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:47 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

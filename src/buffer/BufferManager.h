@@ -21,13 +21,49 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * \brief Class implementing the BufferManager module that parses the TTEthernet
+ * XML configuration and configures the buffers.
+ *
+ * The class requires the following libraries:
+ * - emf4cpp-ecore
+ * - emf4cpp-ecorecpp
+ *
+ * - emf4cpp-Device_Specification
+ * - emf4cpp-Device_Target_Mapping
+ * - emf4cpp-Device_Targets
+ * - emf4cpp-IP_Configuration
+ * - emf4cpp-Network_Configuration
+ * - emf4cpp-Protocol_Definition
+ * - emf4cpp-System_Specification
+ * - emf4cpp-Virtuallink_Map
+ *
+ * The parsing is done in the second stage (stage=1) in the initialization phase. The module
+ * registers a self message to delete itself when the simulation starts.
+ *
+ * @ingroup Buffer
  */
 class BufferManager : public cSimpleModule
 {
     protected:
+        /**
+         * \brief Is called in initialization phase. The module parses when stage==1
+         *
+         * \param stage the stages. Module parses when stage==1, otherwise it does nothing.
+         */
         virtual void initialize(int stage);
+
+        /**
+         * \brief Returns the numer of initializaiton stages this module needs.
+         *
+         * \return always returns 2
+         */
         virtual int numInitStages() const;
+
+        /**
+         * \brief Deletes the module when it receives a message.
+         *
+         * param msg the incoming delete message
+         */
         virtual void handleMessage(cMessage *msg);
 };
 

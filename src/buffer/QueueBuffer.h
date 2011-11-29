@@ -22,24 +22,57 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * \brief Base class for a queuing buffer class.
+ *
+ * Use the implementations BGQueueBuffer, TTQueueBuffer, RCQueueBuffer.
+ *
+ * \sa BGQueueBuffer, TTQueueBuffer, RCQueueBuffer, Buffer
+ *
+ * @ingroup Buffer
  */
 class QueueBuffer : public virtual Buffer
 {
     public:
+        /**
+         * \brief Constructor for the class.
+         *
+         * executes initializeStatistics()
+         *
+         * \sa initializeStatistics()
+         */
         QueueBuffer();
-        virtual ~QueueBuffer();
 
     private:
+        /**
+         * \brief Queue for the EtherFrames in the Buffer.
+         */
         cQueue frames;
 
     private:
+        /**
+         * Initializes the statistics for the Queue
+         */
         virtual void initializeStatistics();
     protected:
+        /**
+         * \brief Inserts EtherFrame in the Queue and emits the queue length.
+         *
+         * \param newFrame a pointer to the EtherFrame to insert in the queue.
+         */
         virtual void enqueue(EtherFrame *newFrame);
+
+        /**
+         * \brief Removes and returns an EtherFrame from the Queue and emits the queue length.
+         *
+         * \return Aa pointer to the EtherFrame removed from the queue.
+         */
         virtual EtherFrame* dequeue();
 
     protected:
+        /**
+         * \brief Signal containing the queue length, that is emitted every time a frame
+         * was inserted or removed.
+         */
         static simsignal_t queueLengthSignal;
 };
 

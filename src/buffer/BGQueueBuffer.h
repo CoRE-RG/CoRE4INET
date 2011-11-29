@@ -22,6 +22,14 @@
 #include <EtherFrame_m.h>
 
 namespace TTEthernetModel {
+
+/**
+ * \brief Class for a queuing background (best-effort) buffer class.
+ *
+ * \sa BGBuffer, QueueBuffer, Buffer
+ *
+ * @ingroup Buffer
+ */
 class BGQueueBuffer : public BGBuffer, public QueueBuffer
 {
 };

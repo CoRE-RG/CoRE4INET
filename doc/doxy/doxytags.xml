@@ -6130,14 +6130,14 @@
       <type>virtual void</type>
       <name>enqueue</name>
       <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
-      <anchor>a6e6c9b4d3d3e10f4942f0f24f33b828a</anchor>
+      <anchor>a7eb775139a8c4b60f4dc02542764be57</anchor>
       <arglist>(EtherFrame *newFrame)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual EtherFrame *</type>
       <name>dequeue</name>
       <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
-      <anchor>a081fbe9704d5012d814867e1e3e1152b</anchor>
+      <anchor>abd0a3ec42e4b1167cd526e42fb014f43</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
@@ -6271,13 +6271,6 @@
       <name>QueueBuffer</name>
       <anchorfile>class_t_t_ethernet_model_1_1_queue_buffer.html</anchorfile>
       <anchor>aff1e2fd154dee22cbf7b1b3b8faf6e98</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual</type>
-      <name>~QueueBuffer</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_queue_buffer.html</anchorfile>
-      <anchor>a7f11141bd9474385aeb4503a448411ca</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">

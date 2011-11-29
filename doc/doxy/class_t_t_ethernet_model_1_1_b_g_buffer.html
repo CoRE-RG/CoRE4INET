@@ -32,6 +32,9 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::BGBuffer Class Reference</h1><!-- doxytag: class="TTEthernetModel::BGBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
+<p>Base class for a background (best-effort) buffer class.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_b_g_buffer_8h_source.html">BGBuffer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::BGBuffer:</div>
@@ -53,9 +56,11 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Is called when a new Frame is received in the buffer.  <a href="#a91fc44bd17d4f3bf9c4f6c8f6e92b369"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>TODO - Generated class </p>
+<p>Base class for a background (best-effort) buffer class. </p>
+<p>Use the implementation <a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>.</p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_b_g_buffer_8h_source.html#l00027">27</a> of file <a class="el" href="_b_g_buffer_8h_source.html">BGBuffer.h</a>.</p>
+<p>Definition at line <a class="el" href="_b_g_buffer_8h_source.html#l00033">33</a> of file <a class="el" href="_b_g_buffer_8h_source.html">BGBuffer.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a91fc44bd17d4f3bf9c4f6c8f6e92b369"></a><!-- doxytag: member="TTEthernetModel::BGBuffer::handleMessage" ref="a91fc44bd17d4f3bf9c4f6c8f6e92b369" args="(cMessage *msg)" -->
 <div class="memitem">
@@ -74,7 +79,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <div class="memdoc">
 
 <p>Is called when a new Frame is received in the buffer. </p>
-<p>When a frame is received on the in-Gate it is processed. If the destination address is unspecified it is set according to the ct marker of the buffer. Afterwards it is enqueued using the buffer specific <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a6e6c9b4d3d3e10f4942f0f24f33b828a" title="Is called to store an EtherFrame in the buffer.">enqueue(EtherFrame *newFrame)</a> method. In the end all registered receive callbacks are executed.</p>
+<p>Extends the <a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a91fc44bd17d4f3bf9c4f6c8f6e92b369" title="Is called when a new Frame is received in the buffer.">handleMessage(cMessage *msg)</a> method in <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> class. An incoming frame is directly dequeued. No buffering!</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>The incoming message </td></tr>
@@ -91,7 +96,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <a name="l00032"></a>00032 
 <a name="l00033"></a>00033     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
 <a name="l00034"></a>00034     {
-<a name="l00035"></a>00035         cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a081fbe9704d5012d814867e1e3e1152b" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
+<a name="l00035"></a>00035         cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
 <a name="l00036"></a>00036 
 <a name="l00037"></a>00037         <span class="keywordflow">if</span>(outgoingMessage){
 <a name="l00038"></a>00038             <span class="comment">//Send Message</span>
@@ -145,7 +150,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <li><a class="el" href="_b_g_buffer_8cc_source.html">BGBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 11:52:42 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:48 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -73,8 +73,7 @@ class Buffer : public cSimpleModule
         void initialize();
 
         /**
-         * \brief Is called when a new Frame is received
-         * in the buffer.
+         * \brief Is called when a new Frame is received in the buffer.
          *
          * When a frame is received on the in-Gate it is processed. If the destination
          * address is unspecified it is set according to the ct marker of the buffer.

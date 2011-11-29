@@ -32,19 +32,41 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::BufferManager Class Reference</h1><!-- doxytag: class="TTEthernetModel::BufferManager" -->
+<p>Class implementing the <a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html" title="Class implementing the BufferManager module that parses the TTEthernet XML configuration...">BufferManager</a> module that parses the TTEthernet XML configuration and configures the buffers.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_buffer_manager_8h_source.html">BufferManager.h</a>&gt;</code></p>
 
 <p><a href="class_t_t_ethernet_model_1_1_buffer_manager-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a68ef4b31aa82c0ffa836a25bac0ffbd2">initialize</a> (int stage)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Is called in initialization phase. The module parses when stage==1.  <a href="#a68ef4b31aa82c0ffa836a25bac0ffbd2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html#a7b77186f45bf8e61809e9ab13117f0ea">numInitStages</a> () const </td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the numer of initializaiton stages this module needs.  <a href="#a7b77186f45bf8e61809e9ab13117f0ea"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html#ab1d68a62d996c3c4be77e7385756d8d0">handleMessage</a> (cMessage *msg)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes the module when it receives a message.  <a href="#ab1d68a62d996c3c4be77e7385756d8d0"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>TODO - Generated class </p>
+<p>Class implementing the <a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html" title="Class implementing the BufferManager module that parses the TTEthernet XML configuration...">BufferManager</a> module that parses the TTEthernet XML configuration and configures the buffers. </p>
+<p>The class requires the following libraries:</p>
+<ul>
+<li>emf4cpp-ecore</li>
+<li>emf4cpp-ecorecpp</li>
+</ul>
+<ul>
+<li>emf4cpp-Device_Specification</li>
+<li>emf4cpp-Device_Target_Mapping</li>
+<li>emf4cpp-Device_Targets</li>
+<li>emf4cpp-IP_Configuration</li>
+<li>emf4cpp-Network_Configuration</li>
+<li>emf4cpp-Protocol_Definition</li>
+<li>emf4cpp-System_Specification</li>
+<li>emf4cpp-Virtuallink_Map</li>
+</ul>
+<p>The parsing is done in the second stage (stage=1) in the initialization phase. The module registers a self message to delete itself when the simulation starts. </p>
 
-<p>Definition at line <a class="el" href="_buffer_manager_8h_source.html#l00026">26</a> of file <a class="el" href="_buffer_manager_8h_source.html">BufferManager.h</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_manager_8h_source.html#l00045">45</a> of file <a class="el" href="_buffer_manager_8h_source.html">BufferManager.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="ab1d68a62d996c3c4be77e7385756d8d0"></a><!-- doxytag: member="TTEthernetModel::BufferManager::handleMessage" ref="ab1d68a62d996c3c4be77e7385756d8d0" args="(cMessage *msg)" -->
 <div class="memitem">
@@ -61,6 +83,9 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Deletes the module when it receives a message. </p>
+<p>param msg the incoming delete message </p>
 
 <p>Definition at line <a class="el" href="_buffer_manager_8cc_source.html#l00285">285</a> of file <a class="el" href="_buffer_manager_8cc_source.html">BufferManager.cc</a>.</p>
 
@@ -88,6 +113,14 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Is called in initialization phase. The module parses when stage==1. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>stage</em>&nbsp;</td><td>the stages. Module parses when stage==1, otherwise it does nothing. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Definition at line <a class="el" href="_buffer_manager_8cc_source.html#l00038">38</a> of file <a class="el" href="_buffer_manager_8cc_source.html">BufferManager.cc</a>.</p>
 
@@ -355,6 +388,9 @@
 </div>
 <div class="memdoc">
 
+<p>Returns the numer of initializaiton stages this module needs. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>always returns 2 </dd></dl>
+
 <p>Definition at line <a class="el" href="_buffer_manager_8cc_source.html#l00033">33</a> of file <a class="el" href="_buffer_manager_8cc_source.html">BufferManager.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00034"></a>00034 {
@@ -369,7 +405,7 @@
 <li><a class="el" href="_buffer_manager_8cc_source.html">BufferManager.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 11:52:42 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 13:08:48 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
