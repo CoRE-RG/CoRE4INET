@@ -9,64 +9,140 @@
 #include <EtherFrame_m.h>
 #include <TTBuffer.h>
 
+/**
+ * Maximum number of priorities allowed for rate-constrained messages
+ */
 #define NUM_RC_PRIORITIES 10
 
 namespace TTEthernetModel {
-class INET_API TTEOutput : public cSimpleModule, public IPassiveQueue
+
+/**
+ * @brief Represents the part of a port that sends messages (TX)
+ *
+ */
+class TTEOutput : public cSimpleModule, public IPassiveQueue
 {
     public:
+        /**
+         * @brief Constructor
+         */
         TTEOutput();
-        virtual ~TTEOutput();
-        virtual void registerTTBuffer(TTBuffer *buffer);
-    private:
-        cChannel *outChannel;
-        int framesRequested;
-        cQueue ttQueue;
-        cQueue rcQueue[NUM_RC_PRIORITIES];
-        cQueue beQueue;
-        std::vector < TTBuffer * > ttBuffers;
-        size_t ttBuffersPos;
-    protected:
-        static simsignal_t ttQueueLengthSignal;
-        static simsignal_t beQueueLengthSignal;
-    private:
-        virtual bool isTransmissionAllowed(EtherFrame *message);
-    protected:
-        /** @name Redefined cSimpleModule member functions. */
-        //@{
-        virtual void initialize();
 
         /**
-         * Calls handleIncomingFrame() for frames arrived from outside,
-         * and processFrame() for self messages.
+         * @brief Registers a time-triggered buffer that feeds the module.
+         */
+        virtual void registerTTBuffer(TTBuffer *buffer);
+    private:
+        /**
+         * @brief Outgoing Channel used to calculate transmission duration.
+         */
+        cChannel *outChannel;
+        /**
+         * @brief Number of frames that were requested from lower layer
+         */
+        int framesRequested;
+
+        /**
+         * @brief Queue for TT-Messages. Will be only filled when there is TT shuffling
+         * configured or there was an error in the configuration.
+         */
+        cQueue ttQueue;
+
+        /**
+         * @brief Dedicated queue for each priority of rate-constrained messages
+         */
+        cQueue rcQueue[NUM_RC_PRIORITIES];
+
+        /**
+         * @brief Queue for best-effort messages
+         */
+        cQueue beQueue;
+
+        /**
+         * @brief Vector of TTBuffers.
+         *
+         * The vector is ordered by action time
+         */
+        std::vector < TTBuffer * > ttBuffers;
+
+        /**
+         * @brief Current position of the next Buffer (action time) in the ttBuffers vector
+         */
+        size_t ttBuffersPos;
+    protected:
+        /**
+         * @brief Signal that is emitted when the queue length of time-triggered messages changes.
+         */
+        static simsignal_t ttQueueLengthSignal;
+
+        /**
+         * @brief Signal that is emitted when the queue length of best-effort messages changes.
+         */
+        static simsignal_t beQueueLengthSignal;
+    private:
+        /**
+         * @brief Helper function to check whether a Messages is allowed to be transmitted.
+         *
+         * The function checks whether a message fits in the gap until the next TT-message
+         * should be transmitted. It uses the message length to calculate the transmission
+         * duration.
+         *
+         * @param message The message that should be transmitted
+         * @returns true if transmission is allowed else false
+         */
+        virtual bool isTransmissionAllowed(EtherFrame *message);
+    protected:
+        /**
+         * @brief Initialization of the module
+         */
+        virtual void initialize();
+
+
+        /**
+         * @brief Forwards the messages from the different buffers and LLC
+         * according to the TTEthernet specification.
+         *
+         * Time-triggered messages are send immediately, rate-constrained and best-effort
+         * messages are delayed if they do not fit in the gap until the next time-triggered
+         * message. If the lower layer is idle messages are picked from the queues according
+         * to the priorities.
+         * Time-triggered buffers can free the bandwidth reservation mechanism by sending
+         * a TTBufferEmpty message.
+         *
+         * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
 
         /**
-         * Writes statistics.
+         * @brief Clears queues.
+         *
+         * @todo should be done in Destructor. Finish is intended for statistics.
          */
         virtual void finish();
-        //@}
 
         /**
-         * The queue should send a packet whenever this method is invoked.
-         * If the queue is currently empty, it should send a packet when
-         * when one becomes available.
+         * @brief this method is invoked when the underlying mac is idle.
+         *
+         * When this method is invoked the module sends a new message when there is
+         * one. Else it saves the state and sends the message immediately when it is
+         * received.
          */
         virtual void requestPacket();
 
         /**
-         * Returns number of pending requests.
+         * @brief Returns number of requested messages.
          */
         virtual int getNumPendingRequests();
 
         /**
-         * Return true when queue is empty, otherwise return false.
+         * @brief Returns true when there are no pending messages.
+         *
+         * @return true if all queues are empty.
          */
         virtual bool isEmpty();
 
         /**
-         * Clear all queued packets and stored requests.
+         * @brief Clears all queued packets and stored requests.
          */
         virtual void clear();
 };

@@ -18,11 +18,6 @@ TTEOutput::TTEOutput()
     ttBuffersPos = 0;
 }
 
-TTEOutput::~TTEOutput()
-{
-
-}
-
 void TTEOutput::initialize()
 {
     cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
@@ -258,5 +253,6 @@ void TTEOutput::clear()
         rcQueue[i].clear();
     }
     ttQueue.clear();
+    framesRequested = 0;
 }
 

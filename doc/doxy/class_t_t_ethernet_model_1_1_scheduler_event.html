@@ -32,6 +32,9 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::SchedulerEvent Class Reference</h1><!-- doxytag: class="TTEthernetModel::SchedulerEvent" --><!-- doxytag: inherits="TTEthernetModel::SchedulerEvent_Base" -->
+<p>Redefines <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerEvent_Base</a> and adds destinationGate.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
@@ -60,8 +63,9 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
 <tr><td class="memItemLeft" align="right" valign="top">cGate *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html#aa28d7c5c37651874570e63d928154522">destinationGate_var</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Redefines <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerEvent_Base</a> and adds destinationGate. </p>
 
-<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00008">8</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
+<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00011">11</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ad741b59d49d26c2cfd704042a2e02734"></a><!-- doxytag: member="TTEthernetModel::SchedulerEvent::SchedulerEvent" ref="ad741b59d49d26c2cfd704042a2e02734" args="(const char *name=NULL, int kind=0)" -->
 <div class="memitem">
@@ -88,14 +92,14 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00013">13</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
+<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00016">16</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_scheduler_event_8h_source.html#l00028">dup()</a>.</p>
+<p>Referenced by <a class="el" href="_scheduler_event_8h_source.html#l00031">dup()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00014"></a>00014                                                               :
-<a name="l00015"></a>00015             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html#a243aa907cf88c4b3c7025ccd63b12046">SchedulerEvent_Base</a>(name, kind)
-<a name="l00016"></a>00016         {
-<a name="l00017"></a>00017             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#aa28d7c5c37651874570e63d928154522">destinationGate_var</a> = NULL;
+<p><div class="fragment"><pre class="fragment"><a name="l00017"></a>00017                                                               :
+<a name="l00018"></a>00018             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html#a243aa907cf88c4b3c7025ccd63b12046">SchedulerEvent_Base</a>(name, kind)
+<a name="l00019"></a>00019         {
+<a name="l00020"></a>00020             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#aa28d7c5c37651874570e63d928154522">destinationGate_var</a> = NULL;
         }
 </pre></div></p>
 
@@ -117,12 +121,12 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00018">18</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
+<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00021">21</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00019"></a>00019                                                     :
-<a name="l00020"></a>00020             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html#a243aa907cf88c4b3c7025ccd63b12046">SchedulerEvent_Base</a>(other.getName())
-<a name="l00021"></a>00021         {
-<a name="l00022"></a>00022             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a8187e29c29291a50a78d45b11d719de1">operator=</a>(other);
+<p><div class="fragment"><pre class="fragment"><a name="l00022"></a>00022                                                     :
+<a name="l00023"></a>00023             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html#a243aa907cf88c4b3c7025ccd63b12046">SchedulerEvent_Base</a>(other.getName())
+<a name="l00024"></a>00024         {
+<a name="l00025"></a>00025             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a8187e29c29291a50a78d45b11d719de1">operator=</a>(other);
         }
 </pre></div></p>
 
@@ -148,11 +152,11 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a3a2a1b92dc94a5b1dab3d4534e4b6b8c">TTEthernetModel::SchedulerActionTimeEvent</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a02d50f61dcb7958beed7b30c43115f0b">TTEthernetModel::SchedulerTimerEvent</a>.</p>
 
-<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00028">28</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
+<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00031">31</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029         {
-<a name="l00030"></a>00030             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#ad741b59d49d26c2cfd704042a2e02734">SchedulerEvent</a>(*<span class="keyword">this</span>);
-<a name="l00031"></a>00031         }
+<p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032         {
+<a name="l00033"></a>00033             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#ad741b59d49d26c2cfd704042a2e02734">SchedulerEvent</a>(*<span class="keyword">this</span>);
+<a name="l00034"></a>00034         }
 </pre></div></p>
 
 </div>
@@ -196,14 +200,14 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00023">23</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
+<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00026">26</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_scheduler_event_8h_source.html#l00018">SchedulerEvent()</a>.</p>
+<p>Referenced by <a class="el" href="_scheduler_event_8h_source.html#l00021">SchedulerEvent()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00024"></a>00024         {
-<a name="l00025"></a>00025             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a8187e29c29291a50a78d45b11d719de1">SchedulerEvent_Base::operator=</a>(other);
-<a name="l00026"></a>00026             <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00027"></a>00027         }
+<p><div class="fragment"><pre class="fragment"><a name="l00027"></a>00027         {
+<a name="l00028"></a>00028             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a8187e29c29291a50a78d45b11d719de1">SchedulerEvent_Base::operator=</a>(other);
+<a name="l00029"></a>00029             <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00030"></a>00030         }
 </pre></div></p>
 
 </div>
@@ -244,9 +248,9 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00011">11</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
+<p>Definition at line <a class="el" href="_scheduler_event_8h_source.html#l00014">14</a> of file <a class="el" href="_scheduler_event_8h_source.html">SchedulerEvent.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_scheduler_event_8cc_source.html#l00006">getDestinationGate()</a>, and <a class="el" href="_scheduler_event_8h_source.html#l00013">SchedulerEvent()</a>.</p>
+<p>Referenced by <a class="el" href="_scheduler_event_8cc_source.html#l00006">getDestinationGate()</a>, and <a class="el" href="_scheduler_event_8h_source.html#l00016">SchedulerEvent()</a>.</p>
 
 </div>
 </div>
@@ -255,7 +259,7 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent:</div>
 <li><a class="el" href="_scheduler_event_8cc_source.html">SchedulerEvent.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:56 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

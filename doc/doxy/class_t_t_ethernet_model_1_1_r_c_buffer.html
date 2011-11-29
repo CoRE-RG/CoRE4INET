@@ -76,7 +76,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Base class for a rate-constrained buffer class. </p>
-<p>The Frame is stored and released immediately when the bag has expired previously. If the bag has not expired yet the frame is stored. The implementation uses a <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> that is registered at the <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>.</p>
+<p>The Frame is stored and released immediately when the bag has expired previously. If the bag has not expired yet the frame is stored. The implementation uses a <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> that is registered at the <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>.</p>
 <p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" title="Rate-constrained double buffer class.">RCDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" title="Rate-constrained double buffer class.">RCDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
 
@@ -266,7 +266,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00089">89</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00035">TTEthernetModel::TTEOutput::handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00152">TTEthernetModel::TTEOutput::requestPacket()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00030">TTEthernetModel::TTEOutput::handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00147">TTEthernetModel::TTEOutput::requestPacket()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00094"></a>00094 {
 <a name="l00095"></a>00095     Enter_Method(<span class="stringliteral">&quot;resetBag()&quot;</span>);
@@ -349,7 +349,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 <li><a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

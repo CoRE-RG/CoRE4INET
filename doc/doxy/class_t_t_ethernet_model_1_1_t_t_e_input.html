@@ -32,29 +32,44 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::TTEInput Class Reference</h1><!-- doxytag: class="TTEthernetModel::TTEInput" -->
+<p>Represents the part of a port that receives messages (RX).  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>&gt;</code></p>
 
 <p><a href="class_t_t_ethernet_model_1_1_t_t_e_input-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f">addIncoming</a> (uint16 ctID, <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a> *incoming)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds an incoming module to the list.  <a href="#a3b0d7c60edcd44edd1e21fa9a86aac5f"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a662ebf14464f337aa3a5a21ee2c8451c">initialize</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialization of the module.  <a href="#a662ebf14464f337aa3a5a21ee2c8451c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage</a> (cMessage *msg)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards frames to the appropriate incoming modules.  <a href="#a787189dd1096648e01c28fb2ae51d42f"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Static Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static simsignal_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">ctDroppedSignal</a> = SIMSIGNAL_NULL</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Signal that is emitted when a frame is dropped.  <a href="#ac3e45a6edb1c107af246b74feb7ecb94"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed">isCT</a> (EtherFrame *frame)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Helper function checks whether a Frame is critical traffic.  <a href="#a3b0e81aeb6f2cafae491db474a097eed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint16&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b">getCTID</a> (EtherFrame *frame)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the critical traffic id for a given frame.  <a href="#acc66a60a5931d503ce0b775c5f7f695b"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::map&lt; uint16, std::list<br class="typebreak"/>
 &lt; <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a> * &gt; &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1">incomings</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Lists of incoming modules for each critical traffic id.  <a href="#a32077cb5a5db1a6df7ff18ca5a91a6f1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Configured critical traffic marker for the device.  <a href="#a8914bb449830a3e16efb722ac317497b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">ct_mask</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Configured critical traffic mask for the device.  <a href="#a68dfe4bfa0f54522c2eee9edfd651f57"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Represents the part of a port that receives messages (RX). </p>
+<p>Critical traffic arriving on in-gate is forwarded to the incoming modules or dropped if there is no module configured. Best-effort frames are forwarded through the out-gate.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>remove XML parsing here. Should be maybe in <a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html" title="Class implementing the BufferManager module that parses the TTEthernet XML configuration...">BufferManager</a> class </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00031">31</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00039">39</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a3b0d7c60edcd44edd1e21fa9a86aac5f"></a><!-- doxytag: member="TTEthernetModel::TTEInput::addIncoming" ref="a3b0d7c60edcd44edd1e21fa9a86aac5f" args="(uint16 ctID, Incoming *incoming)" -->
 <div class="memitem">
@@ -81,10 +96,19 @@
 </div>
 <div class="memdoc">
 
+<p>Adds an incoming module to the list. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>ctID</em>&nbsp;</td><td>critical traffic id of the incoming module </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>incoming</em>&nbsp;</td><td>Pointer to the <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a> module </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00064">64</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00065"></a>00065 {
-<a name="l00066"></a>00066     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1">incomings</a>[ctID].push_back(incoming);
+<a name="l00066"></a>00066     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>[ctID].push_back(incoming);
 <a name="l00067"></a>00067 }
 </pre></div></p>
 
@@ -105,6 +129,17 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns the critical traffic id for a given frame. </p>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>does not check if it is really critical traffic. If you need to be sure use <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT(EtherFrame *frame)</a></dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>frame</em>&nbsp;</td><td>Pointer to the frame to get critical traffic id from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>critical traffic id</dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT(EtherFrame *frame)</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00118">118</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 
@@ -135,6 +170,15 @@
 </div>
 <div class="memdoc">
 
+<p>Forwards frames to the appropriate incoming modules. </p>
+<p>Critical traffic arriving on in-gate is forwarded to the incoming modules or dropped if there is no module configured. Best-effort frames are forwarded through the out-gate.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>incoming message </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00069">69</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00070"></a>00070 {
@@ -142,10 +186,10 @@
 <a name="l00072"></a>00072     {
 <a name="l00073"></a>00073         EtherFrame *frame = (EtherFrame*) msg;
 <a name="l00074"></a>00074         <span class="comment">//Auf CTCs verteilen oder BE traffic</span>
-<a name="l00075"></a>00075         <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed">isCT</a>(frame))
+<a name="l00075"></a>00075         <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT</a>(frame))
 <a name="l00076"></a>00076         {
-<a name="l00077"></a>00077             std::map&lt;uint16, std::list&lt;Incoming *&gt; &gt;::iterator incomingList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1">incomings</a>.find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b">getCTID</a>(frame));
-<a name="l00078"></a>00078             <span class="keywordflow">if</span> (incomingList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1">incomings</a>.end())
+<a name="l00077"></a>00077             std::map&lt;uint16, std::list&lt;Incoming *&gt; &gt;::iterator incomingList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>.find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b" title="Returns the critical traffic id for a given frame.">getCTID</a>(frame));
+<a name="l00078"></a>00078             <span class="keywordflow">if</span> (incomingList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>.end())
 <a name="l00079"></a>00079             {
 <a name="l00080"></a>00080                 <span class="comment">//Send to all CTCs for the CT-ID</span>
 <a name="l00081"></a>00081                 <span class="keywordflow">for</span> (std::list&lt;Incoming*&gt;::iterator incoming = incomingList-&gt;second.begin(); incoming
@@ -157,9 +201,9 @@
 <a name="l00087"></a>00087             }
 <a name="l00088"></a>00088             <span class="keywordflow">else</span>
 <a name="l00089"></a>00089             {
-<a name="l00090"></a>00090                 ev &lt;&lt; <span class="stringliteral">&quot;No incoming traffic allowed for CT ID &quot;</span> &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b">getCTID</a>(frame) &lt;&lt; endl;
+<a name="l00090"></a>00090                 ev &lt;&lt; <span class="stringliteral">&quot;No incoming traffic allowed for CT ID &quot;</span> &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b" title="Returns the critical traffic id for a given frame.">getCTID</a>(frame) &lt;&lt; endl;
 <a name="l00091"></a>00091                 bubble(<span class="stringliteral">&quot;Frame not allowed here!&quot;</span>);
-<a name="l00092"></a>00092                 emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">ctDroppedSignal</a>, 1);
+<a name="l00092"></a>00092                 emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
 <a name="l00093"></a>00093                 <span class="keyword">delete</span> frame;
 <a name="l00094"></a>00094             }
 <a name="l00095"></a>00095         }
@@ -189,6 +233,8 @@
 </div>
 <div class="memdoc">
 
+<p>Initialization of the module. </p>
+
 <p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00028">28</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029 {
@@ -209,8 +255,8 @@
 <a name="l00044"></a>00044         Switch *sw = ds-&gt;as&lt;Switch&gt; ();
 <a name="l00045"></a>00045         <span class="keywordflow">if</span> (sw-&gt;getConfig())
 <a name="l00046"></a>00046         {
-<a name="l00047"></a>00047             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMarker());
-<a name="l00048"></a>00048             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">ct_mask</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMask());
+<a name="l00047"></a>00047             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b" title="Configured critical traffic marker for the device.">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMarker());
+<a name="l00048"></a>00048             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57" title="Configured critical traffic mask for the device.">ct_mask</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMask());
 <a name="l00049"></a>00049         }
 <a name="l00050"></a>00050     }
 <a name="l00051"></a>00051     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ds-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;EndSystem&quot;</span>)
@@ -218,12 +264,12 @@
 <a name="l00053"></a>00053         EndSystem *es = ds-&gt;as&lt;EndSystem&gt; ();
 <a name="l00054"></a>00054         <span class="keywordflow">if</span> (es-&gt;getConfig())
 <a name="l00055"></a>00055         {
-<a name="l00056"></a>00056             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMarker());
+<a name="l00056"></a>00056             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b" title="Configured critical traffic marker for the device.">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMarker());
 <a name="l00057"></a>00057             ct_mask = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMask());
 <a name="l00058"></a>00058         }
 <a name="l00059"></a>00059     }
 <a name="l00060"></a>00060 
-<a name="l00061"></a>00061     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
+<a name="l00061"></a>00061     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
 <a name="l00062"></a>00062 }
 </pre></div></p>
 
@@ -245,6 +291,15 @@
 </div>
 <div class="memdoc">
 
+<p>Helper function checks whether a Frame is critical traffic. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>frame</em>&nbsp;</td><td>Pointer to the frame to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if frame is critical, else false </dd></dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00104">104</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00069">handleMessage()</a>.</p>
@@ -253,7 +308,7 @@
 <a name="l00106"></a>00106     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> macBytes[6];
 <a name="l00107"></a>00107     frame-&gt;getDest().getAddressBytes(macBytes);
 <a name="l00108"></a>00108     <span class="comment">//Check for ct</span>
-<a name="l00109"></a>00109     <span class="keywordflow">if</span> ((((macBytes[0] &lt;&lt; 24) | (macBytes[1] &lt;&lt; 16) | (macBytes[2] &lt;&lt; 8) | (macBytes[3])) &amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">ct_mask</a>) == (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a>
+<a name="l00109"></a>00109     <span class="keywordflow">if</span> ((((macBytes[0] &lt;&lt; 24) | (macBytes[1] &lt;&lt; 16) | (macBytes[2] &lt;&lt; 8) | (macBytes[3])) &amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57" title="Configured critical traffic mask for the device.">ct_mask</a>) == (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b" title="Configured critical traffic marker for the device.">ct_marker</a>
 <a name="l00110"></a>00110             &amp; ct_mask))
 <a name="l00111"></a>00111     {
 <a name="l00112"></a>00112         <span class="keywordflow">return</span> <span class="keyword">true</span>;
@@ -277,7 +332,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00035">35</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
+<p>Configured critical traffic marker for the device. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00050">50</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00028">initialize()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00104">isCT()</a>.</p>
 
@@ -294,7 +351,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00036">36</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
+<p>Configured critical traffic mask for the device. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00055">55</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00028">initialize()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00104">isCT()</a>.</p>
 
@@ -311,7 +370,10 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00038">38</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
+<p>Signal that is emitted when a frame is dropped. </p>
+<p>Frames may be dropped when no incoming module is configured. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00062">62</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00069">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00028">initialize()</a>.</p>
 
@@ -328,7 +390,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00034">34</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
+<p>Lists of incoming modules for each critical traffic id. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00045">45</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00064">addIncoming()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00069">handleMessage()</a>.</p>
 
@@ -339,7 +403,7 @@
 <li><a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:56 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

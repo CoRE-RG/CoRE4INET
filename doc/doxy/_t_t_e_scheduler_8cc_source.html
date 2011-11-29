@@ -54,9 +54,9 @@
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>);
+<a name="l00025"></a>00025 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>);
 <a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e">TTEScheduler::initialize</a>()
+<a name="l00027"></a>00027 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e" title="Initialization of the module.">TTEScheduler::initialize</a>()
 <a name="l00028"></a>00028 {
 <a name="l00029"></a>00029     <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe" title="Loads the complete Model in the MetaModelRepository.">ConfigurationUtils::getPreloadedMMR</a>();
 <a name="l00030"></a>00030     ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
@@ -84,12 +84,12 @@
 <a name="l00052"></a>00052     }
 <a name="l00053"></a>00053 
 <a name="l00054"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b">00054</a>     <span class="comment">//Start Timer</span>
-<a name="l00055"></a>00055     scheduleAt(simTime(), <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a>(<span class="stringliteral">&quot;NEW_CYCLE&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a>));
+<a name="l00055"></a>00055     scheduleAt(simTime(), <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a>(<span class="stringliteral">&quot;NEW_CYCLE&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a>));
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a> = simTime();
+<a name="l00057"></a>00057     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> = simTime();
 <a name="l00058"></a>00058 }
 <a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b">TTEScheduler::registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> *event)
+<a name="l00060"></a>00060 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b" title="Register a new event in the scheduler.">TTEScheduler::registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *event)
 <a name="l00061"></a>00061 {
 <a name="l00062"></a>00062 <span class="preprocessor">#ifdef DEBUG</span>
 <a name="l00063"></a>00063 <span class="preprocessor"></span>    Enter_Method(<span class="stringliteral">&quot;registerEvent(SchedulerEvent %s)&quot;</span>,event-&gt;getName());
@@ -101,16 +101,16 @@
 <a name="l00069"></a>00069     {
 <a name="l00070"></a>00070         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *actionTimeEvent = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>*) event;
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072         <span class="keywordflow">if</span> (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">getTicks</a>())
+<a name="l00072"></a>00072         <span class="keywordflow">if</span> (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>())
 <a name="l00073"></a>00073         {
-<a name="l00074"></a>00074             scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>()),
+<a name="l00074"></a>00074             scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>()),
 <a name="l00075"></a>00075                     actionTimeEvent);
 <a name="l00076"></a>00076         }
 <a name="l00077"></a>00077         <span class="keywordflow">else</span>
 <a name="l00078"></a>00078         {
 <a name="l00079"></a>00079             scheduleAt(
-<a name="l00080"></a>00080                     simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(
-<a name="l00081"></a>00081                             par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">getTicks</a>() + par(
+<a name="l00080"></a>00080                     simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(
+<a name="l00081"></a>00081                             par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() + par(
 <a name="l00082"></a>00082                                     <span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue())), actionTimeEvent);
 <a name="l00083"></a>00083         }
 <a name="l00084"></a>00084     }
@@ -118,11 +118,11 @@
 <a name="l00086"></a>00086     {
 <a name="l00087"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e">00087</a>         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> *timerEvent = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a>*) event;
 <a name="l00088"></a>00088         ;
-<a name="l00089"></a>00089         scheduleAt(simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * timerEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#ae9e464cecbed854f2c1b65f4677fda0c">getTimer</a>()), event);
+<a name="l00089"></a>00089         scheduleAt(simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * timerEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#ae9e464cecbed854f2c1b65f4677fda0c">getTimer</a>()), event);
 <a name="l00090"></a>00090     }
 <a name="l00091"></a>00091 }
 <a name="l00092"></a>00092 
-<a name="l00093"></a>00093 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e">TTEScheduler::handleMessage</a>(cMessage *msg)
+<a name="l00093"></a>00093 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e" title="Handles all scheduler messages.">TTEScheduler::handleMessage</a>(cMessage *msg)
 <a name="l00094"></a>00094 {
 <a name="l00095"></a>00095     <span class="keywordflow">if</span> (msg-&gt;isSelfMessage() &amp;&amp; (msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a> || msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>))
 <a name="l00096"></a>00096     {
@@ -131,31 +131,31 @@
 <a name="l00099"></a>00099     }
 <a name="l00100"></a>00100     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;isSelfMessage() &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a>)
 <a name="l00101"></a>00101     {
-<a name="l00102"></a>00102         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a> = simTime();
-<a name="l00103"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">00103</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c">lastCycleTicks</a> += par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
-<a name="l00104"></a>00104         scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue()), msg);
+<a name="l00102"></a>00102         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> = simTime();
+<a name="l00103"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">00103</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c" title="Number of ticks since the simulation started when the last cycle started.">lastCycleTicks</a> += par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
+<a name="l00104"></a>00104         scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue()), msg);
 <a name="l00105"></a>00105         <span class="comment">//now the precision can be changed (TBD)</span>
 <a name="l00106"></a>00106     }
 <a name="l00107"></a>00107 }
 <a name="l00108"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">00108</a> 
-<a name="l00109"></a>00109 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">TTEScheduler::getTicks</a>()
+<a name="l00109"></a>00109 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">TTEScheduler::getTicks</a>()
 <a name="l00110"></a>00110 {
-<a name="l00111"></a>00111     <span class="keywordflow">return</span> round((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(simTime() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a>) / par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue()).dbl());
+<a name="l00111"></a>00111     <span class="keywordflow">return</span> round((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(simTime() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>) / par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue()).dbl());
 <a name="l00112"></a>00112 }
 <a name="l00113"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">00113</a> 
-<a name="l00114"></a>00114 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">TTEScheduler::getTotalTicks</a>()
+<a name="l00114"></a>00114 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f" title="Returns the absolute number of ticks.">TTEScheduler::getTotalTicks</a>()
 <a name="l00115"></a>00115 {
-<a name="l00116"></a>00116     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c">lastCycleTicks</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">getTicks</a>();
+<a name="l00116"></a>00116     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c" title="Number of ticks since the simulation started when the last cycle started.">lastCycleTicks</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>();
 <a name="l00117"></a>00117 }
 <a name="l00118"></a>00118 
-<a name="l00119"></a>00119 SimTime <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">TTEScheduler::precision</a>(SimTime logical)
+<a name="l00119"></a>00119 SimTime <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">TTEScheduler::precision</a>(SimTime logical)
 <a name="l00120"></a>00120 {
 <a name="l00121"></a>00121     <span class="keywordflow">return</span> logical * 1.000000;
 <a name="l00122"></a>00122 }
 <a name="l00123"></a>00123 
 <a name="l00124"></a>00124 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

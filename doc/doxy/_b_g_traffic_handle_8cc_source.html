@@ -54,7 +54,7 @@
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>(BGTrafficHandle);
 <a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a95560712bbfdfeb3b8cc0ee5ec9d1e54">00025</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a95560712bbfdfeb3b8cc0ee5ec9d1e54">BGTrafficHandle::initialize</a>()
+<a name="l00025"></a><a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a95560712bbfdfeb3b8cc0ee5ec9d1e54">00025</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a95560712bbfdfeb3b8cc0ee5ec9d1e54" title="In initialization the handle sends a register_DSAP message to register itself at...">BGTrafficHandle::initialize</a>()
 <a name="l00026"></a>00026 {
 <a name="l00027"></a>00027     Ieee802Ctrl *etherctrl = <span class="keyword">new</span> Ieee802Ctrl();
 <a name="l00028"></a>00028     etherctrl-&gt;setDsap(<a class="code" href="_b_g_traffic_handle_8cc.html#adfda9e1906c8a96fad2fdbc2341c1f41">ETHERAPP_BUFFER_SAP</a>);
@@ -64,7 +64,7 @@
 <a name="l00032"></a>00032     send(msg, <span class="stringliteral">&quot;lowerLayerOut&quot;</span>);
 <a name="l00033"></a>00033 }
 <a name="l00034"></a>00034 
-<a name="l00035"></a><a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a63ec50dfd77c3ee9cf1e4f8420836adc">00035</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a63ec50dfd77c3ee9cf1e4f8420836adc">BGTrafficHandle::handleMessage</a>(cMessage *msg)
+<a name="l00035"></a><a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a63ec50dfd77c3ee9cf1e4f8420836adc">00035</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#a63ec50dfd77c3ee9cf1e4f8420836adc" title="Messages are transferred between lower and upper layer.">BGTrafficHandle::handleMessage</a>(cMessage *msg)
 <a name="l00036"></a>00036 {
 <a name="l00037"></a>00037     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;lowerLayerIn&quot;</span>)){
 <a name="l00038"></a>00038         send(msg, <span class="stringliteral">&quot;out&quot;</span>);
@@ -80,7 +80,7 @@
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

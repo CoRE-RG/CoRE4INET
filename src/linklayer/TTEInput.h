@@ -24,25 +24,86 @@
 #include <map>
 #include <list>
 
-/**
- * TODO - Generated class
- */
+
 namespace TTEthernetModel {
+
+/**
+ * @brief Represents the part of a port that receives messages (RX)
+ *
+ *Critical traffic arriving on in-gate is forwarded to the incoming modules
+ * or dropped if there is no module configured. Best-effort frames are
+ * forwarded through the out-gate.
+ *
+ * @todo remove XML parsing here. Should be maybe in BufferManager class
+ */
 class TTEInput : public cSimpleModule
 {
     private:
+        /**
+         * @brief Lists of incoming modules for each critical traffic id.
+         */
         std::map<uint16, std::list<Incoming*> > incomings;
+
+        /**
+         * @brief Configured critical traffic marker for the device.
+         */
         unsigned int ct_marker;
+
+        /**
+         * @brief Configured critical traffic mask for the device.
+         */
         unsigned int ct_mask;
     protected:
+        /**
+         * @brief Signal that is emitted when a frame is dropped.
+         *
+         * Frames may be dropped when no incoming module is configured.
+         */
         static simsignal_t ctDroppedSignal;
     public:
+        /**
+         * @brief Adds an incoming module to the list.
+         *
+         * @param ctID critical traffic id of the incoming module
+         * @param incoming Pointer to the Incoming module
+         */
         virtual void addIncoming(uint16 ctID, Incoming *incoming);
     protected:
+        /**
+         * @brief Initialization of the module
+         */
         virtual void initialize();
+
+        /**
+         * @brief Forwards frames to the appropriate incoming modules
+         *
+         * Critical traffic arriving on in-gate is forwarded to the incoming modules
+         * or dropped if there is no module configured. Best-effort frames are
+         * forwarded through the out-gate.
+         *
+         * @param msg incoming message
+         */
         virtual void handleMessage(cMessage *msg);
     private:
+        /**
+         * @brief Helper function checks whether a Frame is critical traffic.
+         *
+         * @param frame Pointer to the frame to check.
+         * @return true if frame is critical, else false
+         */
         virtual bool isCT(EtherFrame *frame);
+
+        /**
+         * @brief Returns the critical traffic id for a given frame.
+         *
+         * @warning does not check if it is really critical traffic.
+         * If you need to be sure use isCT(EtherFrame *frame)
+         *
+         * @param frame Pointer to the frame to get critical traffic id from.
+         * @return critical traffic id
+         *
+         * @sa isCT(EtherFrame *frame)
+         */
         virtual uint16 getCTID(EtherFrame *frame);
 };
 }

@@ -5,6 +5,9 @@
 
 namespace TTEthernetModel {
 
+/**
+ * @brief Redefines SchedulerEvent_Base and adds destinationGate
+ */
 class SchedulerEvent : public TTEthernetModel::SchedulerEvent_Base
 {
     private:

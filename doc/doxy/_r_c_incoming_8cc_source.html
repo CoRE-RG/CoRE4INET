@@ -62,8 +62,8 @@
 <a name="l00030"></a>00030 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9" title="Forwards messages arriving on in-gate to out-gate checks conformance with configured...">RCIncoming::handleMessage</a>(cMessage *msg)
 <a name="l00031"></a>00031 {
 <a name="l00032"></a>00032     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00033"></a>00033         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>*)getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00034"></a>00034         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> currentTotalTicks = tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">getTotalTicks</a>();
+<a name="l00033"></a>00033         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*)getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
+<a name="l00034"></a>00034         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> currentTotalTicks = tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f" title="Returns the absolute number of ticks.">getTotalTicks</a>();
 <a name="l00035"></a>00035         <span class="comment">//Now check for correct arrival:</span>
 <a name="l00036"></a>00036         <span class="comment">//TODO what todo with JITTER?</span>
 <a name="l00037"></a>00037         <span class="comment">//Check too early</span>
@@ -82,7 +82,7 @@
 <a name="l00050"></a>00050 
 <a name="l00051"></a>00051 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

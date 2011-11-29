@@ -32,25 +32,38 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::TTEScheduler Class Reference</h1><!-- doxytag: class="TTEthernetModel::TTEScheduler" -->
+<p>Scheduler module.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>&gt;</code></p>
 
 <p><a href="class_t_t_ethernet_model_1_1_t_t_e_scheduler-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">getTicks</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the current number of ticks.  <a href="#a64bb264151d0e84841207f16d76c9f5c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">getTotalTicks</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the absolute number of ticks.  <a href="#a0a07f031be84a14f0caa1575c77c149f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b">registerEvent</a> (<a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> *event)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Register a new event in the scheduler.  <a href="#aa4e1f9bf81886dfda80190f6f722936b"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e">initialize</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialization of the module.  <a href="#a09132b4b872add769d397afdb065e91e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e">handleMessage</a> (cMessage *msg)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Handles all scheduler messages.  <a href="#a6c787721f21a9e9d4484cc121d41d65e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual SimTime&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a> (SimTime logical)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">makes a simulation time unprecise  <a href="#ad367a45a23c0783dd9e8b1fd5fd91ed0"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">SimTime&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Simulation time when the last cycle started.  <a href="#adb93cd3401e0c20955decca5937aa056"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c">lastCycleTicks</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Number of ticks since the simulation started when the last cycle started.  <a href="#a15a5e21cf00de7823dfc65c7ff2d3d3c"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Scheduler module. </p>
+<p>Implements a scheduler with a dedicated local clock with adjustable precision that may be synchronized by a synchronization module </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00026">26</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00033">33</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a64bb264151d0e84841207f16d76c9f5c"></a><!-- doxytag: member="TTEthernetModel::TTEScheduler::getTicks" ref="a64bb264151d0e84841207f16d76c9f5c" args="()" -->
 <div class="memitem">
@@ -67,9 +80,12 @@
 </div>
 <div class="memdoc">
 
+<p>Returns the current number of ticks. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Number of ticks since last cycle start </dd></dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00103">103</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00196">TTEthernetModel::TTEOutput::isTransmissionAllowed()</a>, and <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00113">precision()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00191">TTEthernetModel::TTEOutput::isTransmissionAllowed()</a>, and <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00113">precision()</a>.</p>
 
 </div>
 </div>
@@ -88,10 +104,13 @@
 </div>
 <div class="memdoc">
 
+<p>Returns the absolute number of ticks. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Number of ticks since simulation start </dd></dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00108">108</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00110"></a>00110 {
-<a name="l00111"></a>00111     <span class="keywordflow">return</span> round((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(simTime() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a>) / par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue()).dbl());
+<a name="l00111"></a>00111     <span class="keywordflow">return</span> round((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(simTime() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>) / par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue()).dbl());
 </pre></div></p>
 
 </div>
@@ -111,6 +130,15 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Handles all scheduler messages. </p>
+<p>Registers self-messages for events sends messages to trigger events in remote modules.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>the incoming message. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00087">87</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
@@ -141,13 +169,16 @@
 </div>
 <div class="memdoc">
 
+<p>Initialization of the module. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>remove XML parsing, this should be done in a dedicated class. </dd></dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00021">21</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00023"></a>00023                           {
 <a name="l00024"></a>00024 
 <a name="l00025"></a>00025 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( TTEScheduler);
 <a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e">TTEScheduler::initialize</a>()
+<a name="l00027"></a>00027 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e" title="Initialization of the module.">TTEScheduler::initialize</a>()
 <a name="l00028"></a>00028 {
 <a name="l00029"></a>00029     <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe" title="Loads the complete Model in the MetaModelRepository.">ConfigurationUtils::getPreloadedMMR</a>();
 <a name="l00030"></a>00030     ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
@@ -193,12 +224,21 @@
 </div>
 <div class="memdoc">
 
+<p>makes a simulation time unprecise </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>logical</em>&nbsp;</td><td>the precise simulation time </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the unprecise simulation time </dd></dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00113">113</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00108">getTotalTicks()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00115"></a>00115 {
-<a name="l00116"></a>00116     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c">lastCycleTicks</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">getTicks</a>();
+<a name="l00116"></a>00116     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c" title="Number of ticks since the simulation started when the last cycle started.">lastCycleTicks</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>();
 </pre></div></p>
 
 </div>
@@ -219,6 +259,15 @@
 </div>
 <div class="memdoc">
 
+<p>Register a new event in the scheduler. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>event</em>&nbsp;</td><td>Pointer to the Event to be scheduled. The scheduler will send the event according to the event type</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerEvent_Base</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> </dd></dl>
+
 <p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00054">54</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00041">TTEthernetModel::TTBuffer::handleMessage()</a>, and <a class="el" href="_t_t_buffer_8cc_source.html#l00026">TTEthernetModel::TTBuffer::initialize()</a>.</p>
@@ -234,16 +283,16 @@
 <a name="l00069"></a>00069     {
 <a name="l00070"></a>00070         SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*) event;
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072         <span class="keywordflow">if</span> (actionTimeEvent-&gt;getAction_time() &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">getTicks</a>())
+<a name="l00072"></a>00072         <span class="keywordflow">if</span> (actionTimeEvent-&gt;getAction_time() &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>())
 <a name="l00073"></a>00073         {
-<a name="l00074"></a>00074             scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * actionTimeEvent-&gt;getAction_time()),
+<a name="l00074"></a>00074             scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * actionTimeEvent-&gt;getAction_time()),
 <a name="l00075"></a>00075                     actionTimeEvent);
 <a name="l00076"></a>00076         }
 <a name="l00077"></a>00077         <span class="keywordflow">else</span>
 <a name="l00078"></a>00078         {
 <a name="l00079"></a>00079             scheduleAt(
-<a name="l00080"></a>00080                     simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">precision</a>(
-<a name="l00081"></a>00081                             par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * (actionTimeEvent-&gt;getAction_time() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">getTicks</a>() + par(
+<a name="l00080"></a>00080                     simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(
+<a name="l00081"></a>00081                             par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * (actionTimeEvent-&gt;getAction_time() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() + par(
 <a name="l00082"></a>00082                                     <span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue())), actionTimeEvent);
 <a name="l00083"></a>00083         }
 <a name="l00084"></a>00084     }
@@ -264,7 +313,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00029">29</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+<p>Simulation time when the last cycle started. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00039">39</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00108">getTotalTicks()</a>.</p>
 
@@ -281,7 +332,9 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00030">30</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+<p>Number of ticks since the simulation started when the last cycle started. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00045">45</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00113">precision()</a>.</p>
 
@@ -292,7 +345,7 @@
 <li><a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:56 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

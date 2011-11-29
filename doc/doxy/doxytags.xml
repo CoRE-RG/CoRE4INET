@@ -2789,18 +2789,32 @@
       <arglist>()</arglist>
     </member>
     <member kind="function" virtualness="virtual">
-      <type>virtual</type>
-      <name>~TTEOutput</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
-      <anchor>a4157c9b499b19acccb411a309aa7c686</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>registerTTBuffer</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
       <anchor>aa915182c2ca1fa08c42d5bd7778e8049</anchor>
       <arglist>(TTBuffer *buffer)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
+      <anchor>a986591ead93237643e88d4020f764df0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
+      <anchor>a70262cb8679514a6b781aa655ac5090f</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>finish</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
+      <anchor>a2d5907a8b4c8f4299b83dee3dabf0add</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
@@ -2828,27 +2842,6 @@
       <name>clear</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
       <anchor>a674f0c4a336bdaf7b5b4d01e01ef11b0</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>initialize</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
-      <anchor>a986591ead93237643e88d4020f764df0</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>handleMessage</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
-      <anchor>a70262cb8679514a6b781aa655ac5090f</anchor>
-      <arglist>(cMessage *msg)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>finish</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
-      <anchor>a2d5907a8b4c8f4299b83dee3dabf0add</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="variable" protection="protected" static="yes">

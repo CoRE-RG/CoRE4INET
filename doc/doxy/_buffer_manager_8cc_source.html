@@ -227,7 +227,7 @@
 <a name="l00195"></a>00195                             Port_ptr incomingport = incomingportList.get(l);
 <a name="l00196"></a>00196                             <span class="keywordtype">int</span> iport = <a class="code" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56" title="Returns the number of a port.">ConfigurationUtils::getPortSerialNumber</a>(incomingport, nc-&gt;getRefMappings());
 <a name="l00197"></a>00197                             <span class="keywordflow">if</span> (iport &gt;= 0)
-<a name="l00198"></a>00198                                 ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html">TTEInput</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;phy&quot;</span>, iport)-&gt;getSubmodule(<span class="stringliteral">&quot;tteInput&quot;</span>))-&gt;addIncoming(
+<a name="l00198"></a>00198                                 ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html" title="Represents the part of a port that receives messages (RX).">TTEInput</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;phy&quot;</span>, iport)-&gt;getSubmodule(<span class="stringliteral">&quot;tteInput&quot;</span>))-&gt;addIncoming(
 <a name="l00199"></a>00199                                         ctID, (<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a>*) newCTCModule);
 <a name="l00200"></a>00200                         }
 <a name="l00201"></a>00201                         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (portName == <span class="stringliteral">&quot;SYNC&quot;</span>)
@@ -264,9 +264,9 @@
 <a name="l00232"></a>00232                             {
 <a name="l00233"></a>00233                                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a> *ttbuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a>*<span class="keyword">&gt;</span> (newModule);
 <a name="l00234"></a>00234                                 ttbuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a89b421859697d7a8a5c10309c4b3a523" title="Adds a destination gate to the buffer.">addDestinationGate</a>(destModule-&gt;gate(<span class="stringliteral">&quot;TTin&quot;</span>));
-<a name="l00235"></a>00235                                 <span class="keywordflow">if</span> (((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html">TTEOutput</a> *) destModule-&gt;getSubmodule(<span class="stringliteral">&quot;tteOutput&quot;</span>)))
+<a name="l00235"></a>00235                                 <span class="keywordflow">if</span> (((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html" title="Represents the part of a port that sends messages (TX).">TTEOutput</a> *) destModule-&gt;getSubmodule(<span class="stringliteral">&quot;tteOutput&quot;</span>)))
 <a name="l00236"></a>00236                                 {
-<a name="l00237"></a>00237                                     ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html">TTEOutput</a> *) destModule-&gt;getSubmodule(<span class="stringliteral">&quot;tteOutput&quot;</span>))-&gt;registerTTBuffer(ttbuffer);
+<a name="l00237"></a>00237                                     ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html" title="Represents the part of a port that sends messages (TX).">TTEOutput</a> *) destModule-&gt;getSubmodule(<span class="stringliteral">&quot;tteOutput&quot;</span>))-&gt;registerTTBuffer(ttbuffer);
 <a name="l00238"></a>00238                                 }
 <a name="l00239"></a>00239                             }
 <a name="l00240"></a>00240                             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (outgoing-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;RCOutgoing&quot;</span>)
@@ -323,7 +323,7 @@
 <a name="l00291"></a>00291 
 <a name="l00292"></a>00292 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:55 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -18,10 +18,13 @@
 
 #include <omnetpp.h>
 
-/**
- * TODO - Generated class
- */
 namespace TTEthernetModel {
+
+/**
+ * @brief Sync module.
+ *
+ * @warning Currently only dummy
+ */
 class Sync : public cSimpleModule
 {
     protected:

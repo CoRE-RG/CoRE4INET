@@ -62,7 +62,7 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Base class for a time-triggered buffer class. </p>
-<p>The Frame is stored and released time-triggered using a previously registered <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>. The <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> interacts with the <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>.</p>
+<p>The Frame is stored and released time-triggered using a previously registered <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>. The <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> interacts with the <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>.</p>
 <p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
 
@@ -137,8 +137,8 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <a name="l00079"></a>00079             }
 <a name="l00080"></a>00080         }
 <a name="l00081"></a>00081         <span class="comment">//Reregister scheduler</span>
-<a name="l00082"></a>00082         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00083"></a>00083         tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b">registerEvent</a>((<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html">SchedulerEvent</a> *) msg);
+<a name="l00082"></a>00082         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
+<a name="l00083"></a>00083         tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b" title="Register a new event in the scheduler.">registerEvent</a>((<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *) msg);
 <a name="l00084"></a>00084     }
 <a name="l00085"></a>00085 }
 </pre></div></p>
@@ -171,11 +171,11 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <a name="l00029"></a>00029     ev &lt;&lt; <span class="stringliteral">&quot;Initialize TTBuffer&quot;</span> &lt;&lt; endl;
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031     <span class="comment">//Register Event</span>
-<a name="l00032"></a>00032     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
+<a name="l00032"></a>00032     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
 <a name="l00033"></a>00033     <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;TTBuffer Scheduler Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
 <a name="l00034"></a>00034     <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).doubleValue());
 <a name="l00035"></a>00035     <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
-<a name="l00036"></a>00036     tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b">registerEvent</a>(event);
+<a name="l00036"></a>00036     tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b" title="Register a new event in the scheduler.">registerEvent</a>(event);
 <a name="l00037"></a>00037 
 <a name="l00038"></a>00038     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<span class="keyword">true</span>);
 <a name="l00039"></a>00039 }
@@ -188,7 +188,7 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <li><a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:50:56 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
