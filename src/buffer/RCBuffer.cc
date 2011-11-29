@@ -36,7 +36,7 @@ void RCBuffer::initialize()
 {
     timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
     timerMessage->setDestinationGate(gate("schedulerIn"));
-    timerMessage->setTimer(par("bag"));
+    timerMessage->setTimer(par("bag").doubleValue());
 
     //Update displaystring
     setIsEmpty(true);

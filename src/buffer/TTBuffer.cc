@@ -31,7 +31,7 @@ void TTBuffer::initialize()
     //Register Event
     TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
-    event->setAction_time(par("sendWindowStart"));
+    event->setAction_time(par("sendWindowStart").doubleValue());
     event->setDestinationGate(gate("schedulerIn"));
     tteScheduler->registerEvent(event);
 

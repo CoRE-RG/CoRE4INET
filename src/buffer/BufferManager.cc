@@ -70,13 +70,13 @@ void BufferManager::initialize(int stage)
                     //parameters
                     newCTCModule->par("receive_window_start") = ConfigurationUtils::time2ticks(
                             ttincoming->getReceiveWindowStart(),
-                            getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                            getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                     newCTCModule->par("receive_window_end") = ConfigurationUtils::time2ticks(
                             ttincoming->getReceiveWindowEnd(),
-                            getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                            getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                     newCTCModule->par("permanence_pit") = ConfigurationUtils::time2ticks(
                             ttincoming->getPermanencePit(),
-                            getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                            getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                 }
                 else if (incoming->eClass()->getName() == "RCIncoming")
                 {
@@ -87,10 +87,10 @@ void BufferManager::initialize(int stage)
                     newCTCModule = moduleType->create(ctcName.c_str(), getParentModule());
                     //parameters
                     newCTCModule->par("bag") = ConfigurationUtils::time2ticks(rcincoming->getRefBagAccount()->getBag(),
-                            getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                            getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                     newCTCModule->par("jitter") = ConfigurationUtils::time2ticks(
                             rcincoming->getRefBagAccount()->getJitter(),
-                            getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                            getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                 }
                 else
                 {
@@ -125,10 +125,10 @@ void BufferManager::initialize(int stage)
                         //parameters
                         newModule->par("sendWindowStart") = ConfigurationUtils::time2ticks(
                                 ttoutgoing->getSendWindowStart(),
-                                getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                                getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                         newModule->par("sendWindowEnd") = ConfigurationUtils::time2ticks(
                                 ttoutgoing->getSendWindowEnd(),
-                                getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                                getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
 
                     }
                     else if (outgoing->eClass()->getName() == "RCOutgoing")
@@ -148,13 +148,13 @@ void BufferManager::initialize(int stage)
                         //parameters
                         newModule->par("max_dispatch_delay") = ConfigurationUtils::time2ticks(
                                 rcoutgoing->getMaxDispatchDelay(),
-                                getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                                getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                         newModule->par("bag") = ConfigurationUtils::time2ticks(
                                 rcoutgoing->getRefBagAccount()->getBag(),
-                                getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                                getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
                         newModule->par("jitter") = ConfigurationUtils::time2ticks(
                                 rcoutgoing->getRefBagAccount()->getJitter(),
-                                getParentModule()->getSubmodule("tteScheduler")->par("tick"));
+                                getParentModule()->getSubmodule("tteScheduler")->par("tick").doubleValue());
 
                     }
                     else
