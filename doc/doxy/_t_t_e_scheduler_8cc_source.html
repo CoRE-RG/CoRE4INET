@@ -58,14 +58,14 @@
 <a name="l00026"></a>00026 
 <a name="l00027"></a>00027 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e">TTEScheduler::initialize</a>()
 <a name="l00028"></a>00028 {
-<a name="l00029"></a>00029     <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe">ConfigurationUtils::getPreloadedMMR</a>();
+<a name="l00029"></a>00029     <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe" title="Loads the complete Model in the MetaModelRepository.">ConfigurationUtils::getPreloadedMMR</a>();
 <a name="l00030"></a>00030     ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
-<a name="l00031"></a>00031     <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22">ConfigurationUtils::resolveCommonAliases</a>(mr);
+<a name="l00031"></a>00031     <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22" title="Resolves links to Eclipse paths that can&amp;#39;t be found.">ConfigurationUtils::resolveCommonAliases</a>(mr);
 <a name="l00032"></a>00032     ::ecore::EObject_ptr eobj = mr-&gt;getByFilename(getParentModule()-&gt;par(<span class="stringliteral">&quot;network_configuration&quot;</span>));
 <a name="l00033"></a>00033     assert(eobj);
 <a name="l00034"></a>00034     NetworkConfig_ptr nc = ::ecore::instanceOf&lt;NetworkConfig&gt;(eobj);
 <a name="l00035"></a>00035     assert(nc);
-<a name="l00036"></a>00036     DeviceSpecification_ptr ds = <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e">ConfigurationUtils::getDeviceSpecification</a>(
+<a name="l00036"></a>00036     DeviceSpecification_ptr ds = <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e" title="Finds a DeviceSpecification from NetworkConfiguration by device name.">ConfigurationUtils::getDeviceSpecification</a>(
 <a name="l00037"></a>00037             getParentModule()-&gt;par(<span class="stringliteral">&quot;device_name&quot;</span>).stdstringValue(), nc);
 <a name="l00038"></a>00038     assert(ds);
 <a name="l00039"></a>00039 
@@ -78,7 +78,7 @@
 <a name="l00046"></a>00046         <span class="keywordflow">if</span> (td-&gt;eClass()-&gt;getName() == (<span class="stringliteral">&quot;TTTechIpTargetDevice&quot;</span>))
 <a name="l00047"></a>00047         {
 <a name="l00048"></a>00048             TTTechIpTargetDevice_ptr iptd = td-&gt;as&lt;TTTechIpTargetDevice&gt; ();
-<a name="l00049"></a>00049             par(<span class="stringliteral">&quot;tick&quot;</span>).setDoubleValue(<a class="code" href="class_configuration_utils.html#a55312972db83f146ec5aa9bc44941af9">ConfigurationUtils::freq2s</a>(iptd-&gt;getClockSpeed()));
+<a name="l00049"></a>00049             par(<span class="stringliteral">&quot;tick&quot;</span>).setDoubleValue(<a class="code" href="class_configuration_utils.html#a55312972db83f146ec5aa9bc44941af9" title="Converts frequency from string to double.">ConfigurationUtils::freq2s</a>(iptd-&gt;getClockSpeed()));
 <a name="l00050"></a>00050             <span class="comment">//TODO Infomessage of parameter change</span>
 <a name="l00051"></a>00051         }
 <a name="l00052"></a>00052     }
@@ -155,7 +155,7 @@
 <a name="l00123"></a>00123 
 <a name="l00124"></a>00124 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -50,22 +50,17 @@
 <a name="l00018"></a>00018 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00019"></a>00019 
 <a name="l00020"></a>00020 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>(Incoming);
-<a name="l00021"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">00021</a> 
-<a name="l00022"></a>00022 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">Incoming::initialize</a>()
+<a name="l00021"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">00021</a> 
+<a name="l00022"></a>00022 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7" title="Forwards messages arriving on in-gate to out-gate.">Incoming::handleMessage</a>(cMessage *msg)
 <a name="l00023"></a>00023 {
-<a name="l00024"></a>00024     <span class="comment">// TODO - Generated method body</span>
-<a name="l00025"></a>00025 }
-<a name="l00026"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">00026</a> 
-<a name="l00027"></a>00027 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">Incoming::handleMessage</a>(cMessage *msg)
-<a name="l00028"></a>00028 {
-<a name="l00029"></a>00029     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00030"></a>00030         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00031"></a>00031     }
-<a name="l00032"></a>00032 }
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 } <span class="comment">//namespace</span>
+<a name="l00024"></a>00024     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
+<a name="l00025"></a>00025         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00026"></a>00026     }
+<a name="l00027"></a>00027 }
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

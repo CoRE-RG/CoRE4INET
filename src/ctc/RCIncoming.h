@@ -21,18 +21,34 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * @brief Class for the critical traffic conformance check of
+ * rate-constrained traffic.
+ *
+ * This class checks whether incoming traffic was conform with the configured bag.
+ * Conform messages are forwarded from in to out
+ *
+ * @sa Incoming
  */
 class RCIncoming : public cSimpleModule
 {
     private:
+        /**
+         * Saves the tickcount of the last message
+         */
         unsigned long lastArrived;
     protected:
-        virtual void initialize();
+        /**
+         * @brief Forwards messages arriving on in-gate to out-gate checks
+         * conformance with configured bag.
+         *
+         * @param msg the incoming message
+         */
         virtual void handleMessage(cMessage *msg);
     public:
+        /**
+         * @brief Constructor.
+         */
         RCIncoming();
-        virtual ~RCIncoming();
 };
 
 } //namespace

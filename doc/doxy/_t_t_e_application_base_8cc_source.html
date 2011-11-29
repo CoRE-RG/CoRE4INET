@@ -51,34 +51,24 @@
 <a name="l00019"></a>00019 
 <a name="l00020"></a>00020 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>(TTEApplicationBase);
 <a name="l00021"></a>00021 
-<a name="l00022"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a215f9436e3a733f703cfb04e32212a2d">00022</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a215f9436e3a733f703cfb04e32212a2d">TTEApplicationBase::initialize</a>()
-<a name="l00023"></a>00023 {
-<a name="l00024"></a>00024     <span class="comment">// TODO - Generated method body</span>
-<a name="l00025"></a>00025 }
+<a name="l00022"></a>00022 <span class="comment">/*void TTEApplicationBase::addIncoming(uint16 ctID, Incoming *incoming)</span>
+<a name="l00023"></a>00023 <span class="comment">{</span>
+<a name="l00024"></a>00024 <span class="comment">    incomings[ctID].push_back(incoming);</span>
+<a name="l00025"></a>00025 <span class="comment">}*/</span>
 <a name="l00026"></a>00026 
-<a name="l00027"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#afb51c02d68bc0e74091f9343c9d685b1">00027</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#afb51c02d68bc0e74091f9343c9d685b1">TTEApplicationBase::handleMessage</a>(cMessage *msg)
+<a name="l00027"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a427a8772d81dd1e3e10968c31807dd53">00027</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a427a8772d81dd1e3e10968c31807dd53" title="Adds a Buffer with the corresponding CT-ID to the Application.">TTEApplicationBase::addBuffer</a>(uint16 ctID, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *buffer)
 <a name="l00028"></a>00028 {
-<a name="l00029"></a>00029     <span class="comment">// TODO - Generated method body</span>
+<a name="l00029"></a>00029     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[ctID].push_back(buffer);
 <a name="l00030"></a>00030 }
 <a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="comment">/*void TTEApplicationBase::addIncoming(uint16 ctID, Incoming *incoming)</span>
-<a name="l00033"></a>00033 <span class="comment">{</span>
-<a name="l00034"></a>00034 <span class="comment">    incomings[ctID].push_back(incoming);</span>
-<a name="l00035"></a>00035 <span class="comment">}*/</span>
+<a name="l00032"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e">00032</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e" title="executes the given Callback in the context of the Application">TTEApplicationBase::executeCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb){
+<a name="l00033"></a>00033     Enter_Method(<span class="stringliteral">&quot;executeCallback(cb)&quot;</span>);
+<a name="l00034"></a>00034     cb-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa3e7f47a402a69d3c20d65bf2100d669" title="execution of the callback.">executeCallback</a>();
+<a name="l00035"></a>00035 }
 <a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a427a8772d81dd1e3e10968c31807dd53">00037</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a427a8772d81dd1e3e10968c31807dd53">TTEApplicationBase::addBuffer</a>(uint16 ctID, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *buffer)
-<a name="l00038"></a>00038 {
-<a name="l00039"></a>00039     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">buffers</a>[ctID].push_back(buffer);
-<a name="l00040"></a>00040 }
-<a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e">00042</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e">TTEApplicationBase::executeCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a> *cb){
-<a name="l00043"></a>00043     Enter_Method(<span class="stringliteral">&quot;executeCallback(cb)&quot;</span>);
-<a name="l00044"></a>00044     cb-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa3e7f47a402a69d3c20d65bf2100d669">executeCallback</a>();
-<a name="l00045"></a>00045 }
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047 } <span class="comment">//namespace</span>
+<a name="l00037"></a>00037 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

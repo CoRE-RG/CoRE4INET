@@ -49,55 +49,59 @@
 <a name="l00017"></a>00017 
 <a name="l00018"></a><a class="code" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">00018</a> <span class="keyword">typedef</span> void(*<a class="code" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">cbFunc</a>)(<span class="keywordtype">void</span> *);
 <a name="l00019"></a>00019 
-<a name="l00020"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html">00020</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a>
-<a name="l00021"></a>00021 {
-<a name="l00022"></a>00022     <span class="keyword">protected</span>:
-<a name="l00023"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">00023</a>         void (*<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">fn</a>)(<span class="keywordtype">void</span> *);
-<a name="l00024"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598">00024</a>         <span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598">arg</a>;
-<a name="l00025"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f">00025</a>         <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f">argSet</a>;
-<a name="l00026"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">00026</a>         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>;
-<a name="l00027"></a>00027     <span class="keyword">public</span>:
-<a name="l00028"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#ac429c903d83a86d58c0fa1d25839112d">00028</a>         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#ac429c903d83a86d58c0fa1d25839112d">Callback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>){
-<a name="l00029"></a>00029             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f">argSet</a>=<span class="keyword">false</span>;
-<a name="l00030"></a>00030             this-&gt;buffer=buffer;
-<a name="l00031"></a>00031         }
-<a name="l00032"></a>00032 
-<a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a1f9693145db468086fe515a3c8f013e7">00033</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a1f9693145db468086fe515a3c8f013e7">setFunctionPointer</a>(<span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*)){
-<a name="l00034"></a>00034             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">fn</a>=functionPointer;
-<a name="l00035"></a>00035         }
-<a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a896dfa84e9a30772145d299dfb1d6f3d">00037</a>         <span class="keyword">virtual</span> <a class="code" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">cbFunc</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a896dfa84e9a30772145d299dfb1d6f3d">getFunctionPointer</a>(){
-<a name="l00038"></a>00038             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">fn</a>;
-<a name="l00039"></a>00039         }
-<a name="l00040"></a>00040 
-<a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#adc42d514caa3a02b999bc35fd5a079a1">00041</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#adc42d514caa3a02b999bc35fd5a079a1">setFunctionArg</a>(<span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#adc42d514caa3a02b999bc35fd5a079a1">setFunctionArg</a>){
-<a name="l00042"></a>00042             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598">arg</a>=setFunctionArg;
-<a name="l00043"></a>00043             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f">argSet</a>=<span class="keyword">true</span>;
-<a name="l00044"></a>00044         }
-<a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a6d97ea9315e9c4acc5590e502ebcff3f">00046</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span>* <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a6d97ea9315e9c4acc5590e502ebcff3f">getFunctionArg</a>(){
-<a name="l00047"></a>00047             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598">arg</a>;
-<a name="l00048"></a>00048         }
-<a name="l00049"></a>00049 
-<a name="l00050"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa3e7f47a402a69d3c20d65bf2100d669">00050</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa3e7f47a402a69d3c20d65bf2100d669">executeCallback</a>(){
-<a name="l00051"></a>00051             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">fn</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598">arg</a>);
-<a name="l00052"></a>00052         }
-<a name="l00053"></a>00053 };
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html">00055</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html">APICallback</a>: <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a>
-<a name="l00056"></a>00056 {
-<a name="l00057"></a>00057     <span class="keyword">public</span>:
-<a name="l00058"></a><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html#acf06f2db54bd5d7509fdf371121754e9">00058</a>         <a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html#acf06f2db54bd5d7509fdf371121754e9">APICallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">buffer</a>) : <a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a>(buffer){
-<a name="l00059"></a>00059         }
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html#af24a22d40df515c22abe0965457b2e2f">executeCallback</a>();
-<a name="l00062"></a>00062 };
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064 }
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="preprocessor">#endif </span><span class="comment">/* CALLBACK_H_ */</span>
+<a name="l00030"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html">00030</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>
+<a name="l00031"></a>00031 {
+<a name="l00032"></a>00032     <span class="keyword">protected</span>:
+<a name="l00036"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1">00036</a>         void (*<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1" title="Function pointer of the callback.">fn</a>)(<span class="keywordtype">void</span> *);
+<a name="l00037"></a>00037 
+<a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598">00041</a>         <span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598" title="Pointer to the function args.">arg</a>;
+<a name="l00045"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f">00045</a>         <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f" title="Boolean indicating whether args were set.">argSet</a>;
+<a name="l00046"></a>00046 
+<a name="l00050"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757">00050</a>         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757" title="Pointer to the Buffer that issues the Callback.">buffer</a>;
+<a name="l00051"></a>00051     <span class="keyword">public</span>:
+<a name="l00055"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#ac429c903d83a86d58c0fa1d25839112d">00055</a>         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#ac429c903d83a86d58c0fa1d25839112d" title="Constructor.">Callback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757" title="Pointer to the Buffer that issues the Callback.">buffer</a>){
+<a name="l00056"></a>00056             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f" title="Boolean indicating whether args were set.">argSet</a>=<span class="keyword">false</span>;
+<a name="l00057"></a>00057             this-&gt;buffer=buffer;
+<a name="l00058"></a>00058         }
+<a name="l00059"></a>00059 
+<a name="l00065"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a1f9693145db468086fe515a3c8f013e7">00065</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a1f9693145db468086fe515a3c8f013e7" title="Setter for the function pointer.">setFunctionPointer</a>(<span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*)){
+<a name="l00066"></a>00066             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1" title="Function pointer of the callback.">fn</a>=functionPointer;
+<a name="l00067"></a>00067         }
+<a name="l00068"></a>00068 
+<a name="l00074"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a896dfa84e9a30772145d299dfb1d6f3d">00074</a>         <span class="keyword">virtual</span> <a class="code" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">cbFunc</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a896dfa84e9a30772145d299dfb1d6f3d" title="Getter for the function pointer.">getFunctionPointer</a>(){
+<a name="l00075"></a>00075             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1" title="Function pointer of the callback.">fn</a>;
+<a name="l00076"></a>00076         }
+<a name="l00077"></a>00077 
+<a name="l00083"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#adc42d514caa3a02b999bc35fd5a079a1">00083</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#adc42d514caa3a02b999bc35fd5a079a1" title="Setter for the function args.">setFunctionArg</a>(<span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#adc42d514caa3a02b999bc35fd5a079a1" title="Setter for the function args.">setFunctionArg</a>){
+<a name="l00084"></a>00084             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598" title="Pointer to the function args.">arg</a>=setFunctionArg;
+<a name="l00085"></a>00085             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f" title="Boolean indicating whether args were set.">argSet</a>=<span class="keyword">true</span>;
+<a name="l00086"></a>00086         }
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088 
+<a name="l00094"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a6d97ea9315e9c4acc5590e502ebcff3f">00094</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span>* <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a6d97ea9315e9c4acc5590e502ebcff3f" title="Getter for the function args.">getFunctionArg</a>(){
+<a name="l00095"></a>00095             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598" title="Pointer to the function args.">arg</a>;
+<a name="l00096"></a>00096         }
+<a name="l00097"></a>00097 
+<a name="l00103"></a><a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa3e7f47a402a69d3c20d65bf2100d669">00103</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa3e7f47a402a69d3c20d65bf2100d669" title="execution of the callback.">executeCallback</a>(){
+<a name="l00104"></a>00104             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1" title="Function pointer of the callback.">fn</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598" title="Pointer to the function args.">arg</a>);
+<a name="l00105"></a>00105         }
+<a name="l00106"></a>00106 };
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 
+<a name="l00114"></a><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html">00114</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html" title="Class representing a Callback especially for API callbacks.">APICallback</a>: <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>
+<a name="l00115"></a>00115 {
+<a name="l00116"></a>00116     <span class="keyword">public</span>:
+<a name="l00117"></a><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html#acf06f2db54bd5d7509fdf371121754e9">00117</a>         <a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html#acf06f2db54bd5d7509fdf371121754e9">APICallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a4d030c5d94df6b63625cfd06e09cd757" title="Pointer to the Buffer that issues the Callback.">buffer</a>) : <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>(buffer){
+<a name="l00118"></a>00118         }
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html#af24a22d40df515c22abe0965457b2e2f" title="execution of the callback.">executeCallback</a>();
+<a name="l00121"></a>00121 };
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 }
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125 <span class="preprocessor">#endif </span><span class="comment">/* CALLBACK_H_ */</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

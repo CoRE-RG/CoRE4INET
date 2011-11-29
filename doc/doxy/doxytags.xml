@@ -388,12 +388,6 @@
     <namespace>TTEthernetModel</namespace>
   </compound>
   <compound kind="file">
-    <name>ScheduleInfo.h</name>
-    <path>/home/tillsteinbach/git/TTEthernetModel/src/configuration/</path>
-    <filename>_schedule_info_8h</filename>
-    <class kind="class">ScheduleInfo</class>
-  </compound>
-  <compound kind="file">
     <name>SchedulerEvent.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/scheduler/</path>
     <filename>_scheduler_event_8cc</filename>
@@ -993,6 +987,7 @@
     <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
     <filename>_t_t_e_test_app_8cc</filename>
     <includes id="_t_t_e_test_app_8cc" name="TTETestApp.cc" local="yes" imported="no">TTETestApp.h</includes>
+    <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
     <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="no" imported="no">CTFrame_m.h</includes>
     <namespace>TTEthernetModel</namespace>
     <member kind="function">
@@ -1007,6 +1002,7 @@
     <name>TTETestApp.h</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
     <filename>_t_t_e_test_app_8h</filename>
+    <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
     <class kind="class">TTEthernetModel::TTETestApp</class>
     <namespace>TTEthernetModel</namespace>
   </compound>
@@ -1075,6 +1071,15 @@
     <filename>install</filename>
   </compound>
   <compound kind="group">
+    <name>Applications</name>
+    <title>Applications</title>
+    <filename>group___applications.html</filename>
+    <class kind="class">TTEthernetModel::TTEAPIApplicationBase</class>
+    <class kind="class">TTEthernetModel::TTEAPITestApplication</class>
+    <class kind="class">TTEthernetModel::TTEApplicationBase</class>
+    <class kind="class">TTEthernetModel::TTETestApp</class>
+  </compound>
+  <compound kind="group">
     <name>Buffer</name>
     <title>Buffers</title>
     <filename>group___buffer.html</filename>
@@ -1091,10 +1096,11 @@
     <class kind="class">TTEthernetModel::TTQueueBuffer</class>
   </compound>
   <compound kind="group">
-    <name>Applications</name>
-    <title>Applications</title>
-    <filename>group___applications.html</filename>
-    <class kind="class">TTEthernetModel::TTEAPIApplicationBase</class>
+    <name>Configuration</name>
+    <title>Configuration</title>
+    <filename>group___configuration.html</filename>
+    <class kind="class">TTEthernetModel::BufferManager</class>
+    <class kind="class">ConfigurationUtils</class>
   </compound>
   <compound kind="class">
     <name>APIPayload</name>
@@ -1230,13 +1236,6 @@
       <arglist>(std::string string)</arglist>
     </member>
     <member kind="function" static="yes">
-      <type>static void</type>
-      <name>mac2Bytes</name>
-      <anchorfile>class_configuration_utils.html</anchorfile>
-      <anchor>a29403deeae6215ae8664a9e3e5bacde4</anchor>
-      <arglist>(std::string string, uint8_t string_len, uint8_t mac[], uint8_t mac_len)</arglist>
-    </member>
-    <member kind="function" static="yes">
       <type>static unsigned long</type>
       <name>time2ticks</name>
       <anchorfile>class_configuration_utils.html</anchorfile>
@@ -1284,73 +1283,6 @@
       <anchorfile>class_configuration_utils.html</anchorfile>
       <anchor>a59dbadf8e616a4437d5f3418cd16c253</anchor>
       <arglist>(int vlid, Device_Target_Mapping::Mappings_ptr map)</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>ScheduleInfo</name>
-    <filename>class_schedule_info.html</filename>
-    <member kind="function">
-      <type>void</type>
-      <name>setCTID</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>a3e5240b180400512d09acd6324fca973</anchor>
-      <arglist>(u_int16_t ctID)</arglist>
-    </member>
-    <member kind="function">
-      <type>u_int16_t</type>
-      <name>getCTID</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>a870f7753170a557a0d75afaf6e5cfa96</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setWindowStart</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>adc131902233be7eb4a6530cfcc310b0c</anchor>
-      <arglist>(u_int64_t windowStart)</arglist>
-    </member>
-    <member kind="function">
-      <type>u_int64_t</type>
-      <name>getWindowStart</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>ab3aa6815b5c9568c7f73bbfa11294ce8</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setWindowEnd</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>a70c3fe18766ff86ae07fefcba4667f95</anchor>
-      <arglist>(u_int64_t windowEnd)</arglist>
-    </member>
-    <member kind="function">
-      <type>u_int64_t</type>
-      <name>getWindowEnd</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>a1dbf0f0bf13c6531219a9e01a4a5689b</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="variable" protection="private">
-      <type>u_int16_t</type>
-      <name>_ctID</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>a58d17e36e25d4828700d1a08c67abe9b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="private">
-      <type>u_int64_t</type>
-      <name>_windowStart</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>ad494a598bb7b0e3924ab4d4a82970e57</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" protection="private">
-      <type>u_int64_t</type>
-      <name>_windowEnd</name>
-      <anchorfile>class_schedule_info.html</anchorfile>
-      <anchor>a66f398fb8b80e2d9cc0a0f4f3db65afc</anchor>
-      <arglist></arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -2146,20 +2078,6 @@
       <anchor>a427a8772d81dd1e3e10968c31807dd53</anchor>
       <arglist>(uint16 ctID, Buffer *buffer)</arglist>
     </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>initialize</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_application_base.html</anchorfile>
-      <anchor>a215f9436e3a733f703cfb04e32212a2d</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>handleMessage</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_application_base.html</anchorfile>
-      <anchor>afb51c02d68bc0e74091f9343c9d685b1</anchor>
-      <arglist>(cMessage *msg)</arglist>
-    </member>
     <member kind="variable" protection="protected">
       <type>std::map&lt; uint16, std::list&lt; Buffer * &gt; &gt;</type>
       <name>buffers</name>
@@ -2171,6 +2089,7 @@
   <compound kind="class">
     <name>TTEthernetModel::TTETestApp</name>
     <filename>class_t_t_ethernet_model_1_1_t_t_e_test_app.html</filename>
+    <base>TTEthernetModel::TTEApplicationBase</base>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>initialize</name>
@@ -2569,13 +2488,6 @@
     <filename>class_t_t_ethernet_model_1_1_incoming.html</filename>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
-      <name>initialize</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_incoming.html</anchorfile>
-      <anchor>addb7e0a67350ee855fd2ee12229f5a1a</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
       <name>handleMessage</name>
       <anchorfile>class_t_t_ethernet_model_1_1_incoming.html</anchorfile>
       <anchor>a5ac75f71601c607f38b7a96525b5b8e7</anchor>
@@ -2590,20 +2502,6 @@
       <name>RCIncoming</name>
       <anchorfile>class_t_t_ethernet_model_1_1_r_c_incoming.html</anchorfile>
       <anchor>a2e91469273a2dadc6ddc128765fd37f2</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual</type>
-      <name>~RCIncoming</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_r_c_incoming.html</anchorfile>
-      <anchor>a93d69751aea344f571401b37d4f3f122</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>initialize</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_r_c_incoming.html</anchorfile>
-      <anchor>aa8aaea0ddf8e2dc540dd52db47c37e67</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
@@ -2637,13 +2535,6 @@
       <name>~TTIncoming</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_incoming.html</anchorfile>
       <anchor>a5d1ffb0940fff4fc9ef8284ca58dca6c</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>initialize</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_incoming.html</anchorfile>
-      <anchor>a47dab8dd43bb0c11f199ba936a4df5a5</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
@@ -3509,7 +3400,6 @@
     <filename>dir_167948e7818992f0a0c2d0fef2c62405.html</filename>
     <file>ConfigurationUtils.cc</file>
     <file>ConfigurationUtils.h</file>
-    <file>ScheduleInfo.h</file>
   </compound>
   <compound kind="dir">
     <name>src/ctc/</name>

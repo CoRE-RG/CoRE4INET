@@ -51,47 +51,38 @@
 <a name="l00019"></a>00019 
 <a name="l00020"></a>00020 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00021"></a>00021 
-<a name="l00022"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a2e91469273a2dadc6ddc128765fd37f2">00022</a> <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>(<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html">RCIncoming</a>);
+<a name="l00022"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a2e91469273a2dadc6ddc128765fd37f2">00022</a> <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>(<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html" title="Class for the critical traffic conformance check of rate-constrained traffic.">RCIncoming</a>);
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a2e91469273a2dadc6ddc128765fd37f2">RCIncoming::RCIncoming</a>()
+<a name="l00025"></a>00025 <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a2e91469273a2dadc6ddc128765fd37f2" title="Constructor.">RCIncoming::RCIncoming</a>()
 <a name="l00026"></a>00026 {
-<a name="l00027"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a93d69751aea344f571401b37d4f3f122">00027</a>     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>=0;
+<a name="l00027"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">00027</a>     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>=0;
 <a name="l00028"></a>00028 }
 <a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a93d69751aea344f571401b37d4f3f122">RCIncoming::~RCIncoming</a>()
-<a name="l00031"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#aa8aaea0ddf8e2dc540dd52db47c37e67">00031</a> {
-<a name="l00032"></a>00032 }
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#aa8aaea0ddf8e2dc540dd52db47c37e67">RCIncoming::initialize</a>()
-<a name="l00035"></a>00035 {
-<a name="l00036"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">00036</a>     <span class="comment">// TODO - Generated method body</span>
-<a name="l00037"></a>00037 }
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">RCIncoming::handleMessage</a>(cMessage *msg)
-<a name="l00040"></a>00040 {
-<a name="l00041"></a>00041     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00042"></a>00042         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>*)getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00043"></a>00043         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> currentTotalTicks = tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">getTotalTicks</a>();
-<a name="l00044"></a>00044         <span class="comment">//Now check for correct arrival:</span>
-<a name="l00045"></a>00045         <span class="comment">//TODO what todo with JITTER?</span>
-<a name="l00046"></a>00046         <span class="comment">//Check too early</span>
-<a name="l00047"></a>00047         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a> &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)par(<span class="stringliteral">&quot;bag&quot;</span>).longValue()){
-<a name="l00048"></a>00048             ev.printf(<span class="stringliteral">&quot;Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n&quot;</span>, getName(), currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>,par(<span class="stringliteral">&quot;bag&quot;</span>).longValue());
-<a name="l00049"></a>00049             bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
-<a name="l00050"></a>00050             <span class="keyword">delete</span> msg;
-<a name="l00051"></a>00051         }
-<a name="l00052"></a>00052         <span class="comment">//Timing ok</span>
-<a name="l00053"></a>00053         <span class="keywordflow">else</span>{
-<a name="l00054"></a>00054             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>=currentTotalTicks;
-<a name="l00055"></a>00055             send(msg,<span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00056"></a>00056         }
-<a name="l00057"></a>00057     }
-<a name="l00058"></a>00058 }
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 } <span class="comment">//namespace</span>
+<a name="l00030"></a>00030 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9" title="Forwards messages arriving on in-gate to out-gate checks conformance with configured...">RCIncoming::handleMessage</a>(cMessage *msg)
+<a name="l00031"></a>00031 {
+<a name="l00032"></a>00032     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
+<a name="l00033"></a>00033         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a>*)getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
+<a name="l00034"></a>00034         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> currentTotalTicks = tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">getTotalTicks</a>();
+<a name="l00035"></a>00035         <span class="comment">//Now check for correct arrival:</span>
+<a name="l00036"></a>00036         <span class="comment">//TODO what todo with JITTER?</span>
+<a name="l00037"></a>00037         <span class="comment">//Check too early</span>
+<a name="l00038"></a>00038         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a> &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)par(<span class="stringliteral">&quot;bag&quot;</span>).longValue()){
+<a name="l00039"></a>00039             ev.printf(<span class="stringliteral">&quot;Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n&quot;</span>, getName(), currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>,par(<span class="stringliteral">&quot;bag&quot;</span>).longValue());
+<a name="l00040"></a>00040             bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
+<a name="l00041"></a>00041             <span class="keyword">delete</span> msg;
+<a name="l00042"></a>00042         }
+<a name="l00043"></a>00043         <span class="comment">//Timing ok</span>
+<a name="l00044"></a>00044         <span class="keywordflow">else</span>{
+<a name="l00045"></a>00045             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a>=currentTotalTicks;
+<a name="l00046"></a>00046             send(msg,<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00047"></a>00047         }
+<a name="l00048"></a>00048     }
+<a name="l00049"></a>00049 }
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

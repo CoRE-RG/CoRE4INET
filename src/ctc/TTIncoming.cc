@@ -35,11 +35,6 @@ TTIncoming::~TTIncoming()
     }
 }
 
-void TTIncoming::initialize()
-{
-    // TODO - Generated method body
-}
-
 void TTIncoming::handleMessage(cMessage *msg)
 {
     //Incoming Message
@@ -80,7 +75,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
             frame = (EtherFrame *) msg;
             SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
-            event->setAction_time(par("permanence_pit"));
+            event->setAction_time(par("permanence_pit").doubleValue());
             event->setDestinationGate(gate("schedulerIn"));
             tteScheduler->registerEvent(event);
         }

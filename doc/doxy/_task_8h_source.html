@@ -55,48 +55,48 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">typedef</span> void(*<a class="code" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">cbFunc</a>)(<span class="keywordtype">void</span> *);
 <a name="l00025"></a>00025 
-<a name="l00026"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html">00026</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_task.html">Task</a>
-<a name="l00027"></a>00027 {
-<a name="l00028"></a>00028     <span class="keyword">protected</span>:
-<a name="l00029"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103">00029</a>         void (*<a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103">fn</a>)(<span class="keywordtype">void</span> *);
-<a name="l00030"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7">00030</a>         <span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7">arg</a>;
-<a name="l00031"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7">00031</a>         <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7">argSet</a>;
-<a name="l00032"></a>00032     <span class="keyword">public</span>:
-<a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a18c0b610645e9b19b85d49fdf629f07a">00033</a>         <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a18c0b610645e9b19b85d49fdf629f07a">Task</a>(){
-<a name="l00034"></a>00034             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7">argSet</a>=<span class="keyword">false</span>;
-<a name="l00035"></a>00035         }
-<a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a72955c53dc491d5ad13f9e8412714c24">00037</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a72955c53dc491d5ad13f9e8412714c24">setFunctionPointer</a>(<span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*)){
-<a name="l00038"></a>00038             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103">fn</a>=functionPointer;
-<a name="l00039"></a>00039         }
-<a name="l00040"></a>00040 
-<a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a66fd75e65247e9c74761e46a0adbed80">00041</a>         <span class="keyword">virtual</span> <a class="code" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">cbFunc</a> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a66fd75e65247e9c74761e46a0adbed80">getFunctionPointer</a>(){
-<a name="l00042"></a>00042             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103">fn</a>;
-<a name="l00043"></a>00043         }
-<a name="l00044"></a>00044 
-<a name="l00045"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5">00045</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5">setFunctionArg</a>(<span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5">setFunctionArg</a>){
-<a name="l00046"></a>00046             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7">arg</a>=setFunctionArg;
-<a name="l00047"></a>00047             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7">argSet</a>=<span class="keyword">true</span>;
-<a name="l00048"></a>00048         }
-<a name="l00049"></a>00049 
-<a name="l00050"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#adffe247a4b5c389ac8263dae059f84b5">00050</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span>* <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adffe247a4b5c389ac8263dae059f84b5">getFunctionArg</a>(){
-<a name="l00051"></a>00051             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7">arg</a>;
-<a name="l00052"></a>00052         }
-<a name="l00053"></a>00053 
-<a name="l00054"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a6528388c6375cb74a0e9463702573689">00054</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a6528388c6375cb74a0e9463702573689">executeTask</a>(){
-<a name="l00055"></a>00055             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103">fn</a>(<a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7">arg</a>);
-<a name="l00056"></a>00056         }
-<a name="l00057"></a>00057 };
+<a name="l00036"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html">00036</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_task.html" title="Class representing a Task.">Task</a>
+<a name="l00037"></a>00037 {
+<a name="l00038"></a>00038     <span class="keyword">protected</span>:
+<a name="l00042"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103">00042</a>         void (*<a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103" title="Function pointer of the task.">fn</a>)(<span class="keywordtype">void</span> *);
+<a name="l00046"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7">00046</a>         <span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7" title="Pointer to the function args.">arg</a>;
+<a name="l00050"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7">00050</a>         <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7" title="Boolean indicating whether args were set.">argSet</a>;
+<a name="l00051"></a>00051     <span class="keyword">public</span>:
+<a name="l00055"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a18c0b610645e9b19b85d49fdf629f07a">00055</a>         <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a18c0b610645e9b19b85d49fdf629f07a" title="Constructor.">Task</a>(){
+<a name="l00056"></a>00056             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7" title="Boolean indicating whether args were set.">argSet</a>=<span class="keyword">false</span>;
+<a name="l00057"></a>00057         }
 <a name="l00058"></a>00058 
-<a name="l00059"></a><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_task.html">00059</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_task.html">APITask</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html">Task</a>
-<a name="l00060"></a>00060 {
-<a name="l00061"></a>00061 };
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 }
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065 <span class="preprocessor">#endif </span><span class="comment">/* TASK_H_ */</span>
+<a name="l00064"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a72955c53dc491d5ad13f9e8412714c24">00064</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a72955c53dc491d5ad13f9e8412714c24" title="Setter for the function pointer.">setFunctionPointer</a>(<span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*)){
+<a name="l00065"></a>00065             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103" title="Function pointer of the task.">fn</a>=functionPointer;
+<a name="l00066"></a>00066         }
+<a name="l00067"></a>00067 
+<a name="l00073"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a66fd75e65247e9c74761e46a0adbed80">00073</a>         <span class="keyword">virtual</span> <a class="code" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">cbFunc</a> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a66fd75e65247e9c74761e46a0adbed80" title="Getter for the function pointer.">getFunctionPointer</a>(){
+<a name="l00074"></a>00074             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103" title="Function pointer of the task.">fn</a>;
+<a name="l00075"></a>00075         }
+<a name="l00076"></a>00076 
+<a name="l00082"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5">00082</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5" title="Setter for the function args.">setFunctionArg</a>(<span class="keywordtype">void</span> *<a class="code" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5" title="Setter for the function args.">setFunctionArg</a>){
+<a name="l00083"></a>00083             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7" title="Pointer to the function args.">arg</a>=setFunctionArg;
+<a name="l00084"></a>00084             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7" title="Boolean indicating whether args were set.">argSet</a>=<span class="keyword">true</span>;
+<a name="l00085"></a>00085         }
+<a name="l00086"></a>00086 
+<a name="l00092"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#adffe247a4b5c389ac8263dae059f84b5">00092</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span>* <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adffe247a4b5c389ac8263dae059f84b5" title="Getter for the function args.">getFunctionArg</a>(){
+<a name="l00093"></a>00093             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7" title="Pointer to the function args.">arg</a>;
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095 
+<a name="l00101"></a><a class="code" href="class_t_t_ethernet_model_1_1_task.html#a6528388c6375cb74a0e9463702573689">00101</a>         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a6528388c6375cb74a0e9463702573689" title="execution of the task.">executeTask</a>(){
+<a name="l00102"></a>00102             <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103" title="Function pointer of the task.">fn</a>(<a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7" title="Pointer to the function args.">arg</a>);
+<a name="l00103"></a>00103         }
+<a name="l00104"></a>00104 };
+<a name="l00105"></a>00105 
+<a name="l00106"></a><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_task.html">00106</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_a_p_i_task.html">APITask</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html" title="Class representing a Task.">Task</a>
+<a name="l00107"></a>00107 {
+<a name="l00108"></a>00108 };
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110 }
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112 <span class="preprocessor">#endif </span><span class="comment">/* TASK_H_ */</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

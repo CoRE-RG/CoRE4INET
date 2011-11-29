@@ -27,15 +27,6 @@ RCIncoming::RCIncoming()
     lastArrived=0;
 }
 
-RCIncoming::~RCIncoming()
-{
-}
-
-void RCIncoming::initialize()
-{
-    // TODO - Generated method body
-}
-
 void RCIncoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){

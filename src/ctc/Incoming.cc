@@ -19,11 +19,6 @@ namespace TTEthernetModel {
 
 Define_Module(Incoming);
 
-void Incoming::initialize()
-{
-    // TODO - Generated method body
-}
-
 void Incoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){

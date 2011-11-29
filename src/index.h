@@ -1,11 +1,15 @@
 // This file is used only during the doxygen documentation generation.
 
 /**
+ * @defgroup Applications Applications
+ */
+
+/**
  * @defgroup Buffer Buffers
  */
 
 /**
- * @defgroup Applications Applications
+ * @defgroup Configuration Configuration
  */
 
 

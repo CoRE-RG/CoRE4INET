@@ -74,14 +74,14 @@
 <a name="l00042"></a>00042         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> xPosition = 0;
 <a name="l00043"></a>00043         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> yPosition = 0;
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045         <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe">ConfigurationUtils::getPreloadedMMR</a>();
+<a name="l00045"></a>00045         <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe" title="Loads the complete Model in the MetaModelRepository.">ConfigurationUtils::getPreloadedMMR</a>();
 <a name="l00046"></a>00046         ecorecpp::ModelRepository *mr = ecorecpp::ModelRepository::_instance();
-<a name="l00047"></a>00047         <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22">ConfigurationUtils::resolveCommonAliases</a>(mr);
+<a name="l00047"></a>00047         <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22" title="Resolves links to Eclipse paths that can&amp;#39;t be found.">ConfigurationUtils::resolveCommonAliases</a>(mr);
 <a name="l00048"></a>00048         ::ecore::EObject *eobj = mr-&gt;getByFilename(getParentModule()-&gt;par(<span class="stringliteral">&quot;network_configuration&quot;</span>));
 <a name="l00049"></a>00049         assert(eobj);
 <a name="l00050"></a>00050         NetworkConfig *nc = ::ecore::instanceOf&lt;NetworkConfig&gt;(eobj);
 <a name="l00051"></a>00051         assert(nc);
-<a name="l00052"></a>00052         DeviceSpecification *dc = <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e">ConfigurationUtils::getDeviceSpecification</a>(getParentModule()-&gt;par(<span class="stringliteral">&quot;device_name&quot;</span>), nc);
+<a name="l00052"></a>00052         DeviceSpecification *dc = <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e" title="Finds a DeviceSpecification from NetworkConfiguration by device name.">ConfigurationUtils::getDeviceSpecification</a>(getParentModule()-&gt;par(<span class="stringliteral">&quot;device_name&quot;</span>), nc);
 <a name="l00053"></a>00053         EList&lt;VirtualLinkSchedule&gt;&amp; vlSchedulesList = dc-&gt;getVlSchedules()-&gt;getVlSchedule();
 <a name="l00054"></a>00054         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; vlSchedulesList.size(); i++)
 <a name="l00055"></a>00055         {
@@ -100,13 +100,13 @@
 <a name="l00068"></a>00068                     ctcName.append(<span class="stringliteral">&quot;_CTC&quot;</span>);
 <a name="l00069"></a>00069                     newCTCModule = moduleType-&gt;create(ctcName.c_str(), getParentModule());
 <a name="l00070"></a>00070                     <span class="comment">//parameters</span>
-<a name="l00071"></a>00071                     newCTCModule-&gt;par(<span class="stringliteral">&quot;receive_window_start&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00071"></a>00071                     newCTCModule-&gt;par(<span class="stringliteral">&quot;receive_window_start&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00072"></a>00072                             ttincoming-&gt;getReceiveWindowStart(),
 <a name="l00073"></a>00073                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
-<a name="l00074"></a>00074                     newCTCModule-&gt;par(<span class="stringliteral">&quot;receive_window_end&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00074"></a>00074                     newCTCModule-&gt;par(<span class="stringliteral">&quot;receive_window_end&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00075"></a>00075                             ttincoming-&gt;getReceiveWindowEnd(),
 <a name="l00076"></a>00076                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
-<a name="l00077"></a>00077                     newCTCModule-&gt;par(<span class="stringliteral">&quot;permanence_pit&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00077"></a>00077                     newCTCModule-&gt;par(<span class="stringliteral">&quot;permanence_pit&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00078"></a>00078                             ttincoming-&gt;getPermanencePit(),
 <a name="l00079"></a>00079                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00080"></a>00080                 }
@@ -118,9 +118,9 @@
 <a name="l00086"></a>00086                     ctcName.append(<span class="stringliteral">&quot;_CTC&quot;</span>);
 <a name="l00087"></a>00087                     newCTCModule = moduleType-&gt;create(ctcName.c_str(), getParentModule());
 <a name="l00088"></a>00088                     <span class="comment">//parameters</span>
-<a name="l00089"></a>00089                     newCTCModule-&gt;par(<span class="stringliteral">&quot;bag&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(rcincoming-&gt;getRefBagAccount()-&gt;getBag(),
+<a name="l00089"></a>00089                     newCTCModule-&gt;par(<span class="stringliteral">&quot;bag&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(rcincoming-&gt;getRefBagAccount()-&gt;getBag(),
 <a name="l00090"></a>00090                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
-<a name="l00091"></a>00091                     newCTCModule-&gt;par(<span class="stringliteral">&quot;jitter&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00091"></a>00091                     newCTCModule-&gt;par(<span class="stringliteral">&quot;jitter&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00092"></a>00092                             rcincoming-&gt;getRefBagAccount()-&gt;getJitter(),
 <a name="l00093"></a>00093                             getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00094"></a>00094                 }
@@ -155,10 +155,10 @@
 <a name="l00123"></a>00123 
 <a name="l00124"></a>00124                         newModule = moduleType-&gt;create(vls-&gt;getRefVirtualLink()-&gt;getVlid().c_str(), getParentModule());
 <a name="l00125"></a>00125                         <span class="comment">//parameters</span>
-<a name="l00126"></a>00126                         newModule-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00126"></a>00126                         newModule-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00127"></a>00127                                 ttoutgoing-&gt;getSendWindowStart(),
 <a name="l00128"></a>00128                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
-<a name="l00129"></a>00129                         newModule-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00129"></a>00129                         newModule-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00130"></a>00130                                 ttoutgoing-&gt;getSendWindowEnd(),
 <a name="l00131"></a>00131                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00132"></a>00132 
@@ -178,13 +178,13 @@
 <a name="l00146"></a>00146 
 <a name="l00147"></a>00147                         newModule = moduleType-&gt;create(vls-&gt;getRefVirtualLink()-&gt;getVlid().c_str(), getParentModule());
 <a name="l00148"></a>00148                         <span class="comment">//parameters</span>
-<a name="l00149"></a>00149                         newModule-&gt;par(<span class="stringliteral">&quot;max_dispatch_delay&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00149"></a>00149                         newModule-&gt;par(<span class="stringliteral">&quot;max_dispatch_delay&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00150"></a>00150                                 rcoutgoing-&gt;getMaxDispatchDelay(),
 <a name="l00151"></a>00151                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
-<a name="l00152"></a>00152                         newModule-&gt;par(<span class="stringliteral">&quot;bag&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00152"></a>00152                         newModule-&gt;par(<span class="stringliteral">&quot;bag&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00153"></a>00153                                 rcoutgoing-&gt;getRefBagAccount()-&gt;getBag(),
 <a name="l00154"></a>00154                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
-<a name="l00155"></a>00155                         newModule-&gt;par(<span class="stringliteral">&quot;jitter&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">ConfigurationUtils::time2ticks</a>(
+<a name="l00155"></a>00155                         newModule-&gt;par(<span class="stringliteral">&quot;jitter&quot;</span>) = <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">ConfigurationUtils::time2ticks</a>(
 <a name="l00156"></a>00156                                 rcoutgoing-&gt;getRefBagAccount()-&gt;getJitter(),
 <a name="l00157"></a>00157                                 getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>)-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());
 <a name="l00158"></a>00158 
@@ -194,14 +194,14 @@
 <a name="l00162"></a>00162                         <span class="keywordflow">continue</span>;
 <a name="l00163"></a>00163                     }
 <a name="l00164"></a>00164                     <span class="comment">//Set CT ID, marker and mask</span>
-<a name="l00165"></a>00165                     newModule-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>) = <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303">ConfigurationUtils::getVLid</a>(vls-&gt;getRefVirtualLink(), nc-&gt;getRefMappings());
+<a name="l00165"></a>00165                     newModule-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>) = <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303" title="Returns the critical traffic id of a virtual link.">ConfigurationUtils::getVLid</a>(vls-&gt;getRefVirtualLink(), nc-&gt;getRefMappings());
 <a name="l00166"></a>00166                     <span class="keywordflow">if</span> (dc-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;Switch&quot;</span>)
 <a name="l00167"></a>00167                         {
 <a name="l00168"></a>00168                             Switch *sw = dc-&gt;as&lt;Switch&gt; ();
 <a name="l00169"></a>00169                             <span class="keywordflow">if</span> (sw-&gt;getConfig())
 <a name="l00170"></a>00170                             {
-<a name="l00171"></a>00171                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_marker&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMarker());
-<a name="l00172"></a>00172                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_mask&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMask());
+<a name="l00171"></a>00171                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_marker&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMarker());
+<a name="l00172"></a>00172                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_mask&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMask());
 <a name="l00173"></a>00173                             }
 <a name="l00174"></a>00174                         }
 <a name="l00175"></a>00175                         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dc-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;EndSystem&quot;</span>)
@@ -209,8 +209,8 @@
 <a name="l00177"></a>00177                             EndSystem *es = dc-&gt;as&lt;EndSystem&gt; ();
 <a name="l00178"></a>00178                             <span class="keywordflow">if</span> (es-&gt;getConfig())
 <a name="l00179"></a>00179                             {
-<a name="l00180"></a>00180                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_marker&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMarker());
-<a name="l00181"></a>00181                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_mask&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMask());
+<a name="l00180"></a>00180                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_marker&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMarker());
+<a name="l00181"></a>00181                                 newModule-&gt;par(<span class="stringliteral">&quot;ct_mask&quot;</span>) = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMask());
 <a name="l00182"></a>00182                             }
 <a name="l00183"></a>00183                         }
 <a name="l00184"></a>00184 
@@ -220,15 +220,15 @@
 <a name="l00188"></a>00188                     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> l = 0; l &lt; incomingportList.size(); l++)
 <a name="l00189"></a>00189                     {
 <a name="l00190"></a>00190                         Port_ptr incomingport = incomingportList.get(l);
-<a name="l00191"></a>00191                         <span class="keywordtype">string</span> portName = <a class="code" href="class_configuration_utils.html#a67c2807de34a3487ec1469befeeb5023">ConfigurationUtils::getPortName</a>(incomingport, nc-&gt;getRefMappings());
-<a name="l00192"></a>00192                         <span class="keywordtype">int</span> ctID = <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303">ConfigurationUtils::getVLid</a>(vls-&gt;getRefVirtualLink(), nc-&gt;getRefMappings());
+<a name="l00191"></a>00191                         <span class="keywordtype">string</span> portName = <a class="code" href="class_configuration_utils.html#a67c2807de34a3487ec1469befeeb5023" title="Returns the name of a Port.">ConfigurationUtils::getPortName</a>(incomingport, nc-&gt;getRefMappings());
+<a name="l00192"></a>00192                         <span class="keywordtype">int</span> ctID = <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303" title="Returns the critical traffic id of a virtual link.">ConfigurationUtils::getVLid</a>(vls-&gt;getRefVirtualLink(), nc-&gt;getRefMappings());
 <a name="l00193"></a>00193                         <span class="keywordflow">if</span> (portName.find(<span class="stringliteral">&quot;PHY&quot;</span>) != string::npos)
 <a name="l00194"></a>00194                         {
 <a name="l00195"></a>00195                             Port_ptr incomingport = incomingportList.get(l);
-<a name="l00196"></a>00196                             <span class="keywordtype">int</span> iport = <a class="code" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56">ConfigurationUtils::getPortSerialNumber</a>(incomingport, nc-&gt;getRefMappings());
+<a name="l00196"></a>00196                             <span class="keywordtype">int</span> iport = <a class="code" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56" title="Returns the number of a port.">ConfigurationUtils::getPortSerialNumber</a>(incomingport, nc-&gt;getRefMappings());
 <a name="l00197"></a>00197                             <span class="keywordflow">if</span> (iport &gt;= 0)
 <a name="l00198"></a>00198                                 ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html">TTEInput</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;phy&quot;</span>, iport)-&gt;getSubmodule(<span class="stringliteral">&quot;tteInput&quot;</span>))-&gt;addIncoming(
-<a name="l00199"></a>00199                                         ctID, (<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a>*) newCTCModule);
+<a name="l00199"></a>00199                                         ctID, (<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a>*) newCTCModule);
 <a name="l00200"></a>00200                         }
 <a name="l00201"></a>00201                         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (portName == <span class="stringliteral">&quot;SYNC&quot;</span>)
 <a name="l00202"></a>00202                         {
@@ -238,7 +238,7 @@
 <a name="l00206"></a>00206                         {
 <a name="l00207"></a>00207 <span class="comment">//                            ((TTEApplicationBase*) getParentModule()-&gt;getSubmodule(&quot;tteApp&quot;))-&gt;addIncoming(</span>
 <a name="l00208"></a>00208 <span class="comment">//                                        ctID, (Incoming*) newCTCModule);</span>
-<a name="l00209"></a>00209                             ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteApp&quot;</span>))-&gt;addBuffer(
+<a name="l00209"></a>00209                             ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteApp&quot;</span>))-&gt;addBuffer(
 <a name="l00210"></a>00210                                           ctID, (<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>*) newModule);
 <a name="l00211"></a>00211                         }
 <a name="l00212"></a>00212                         <span class="keywordflow">else</span>
@@ -252,9 +252,9 @@
 <a name="l00220"></a>00220                     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m = 0; m &lt; outgoingportList.size(); m++)
 <a name="l00221"></a>00221                     {
 <a name="l00222"></a>00222                         Port_ptr outgoingport = outgoingportList.get(m);
-<a name="l00223"></a>00223                         <span class="keywordtype">string</span> portName = <a class="code" href="class_configuration_utils.html#a67c2807de34a3487ec1469befeeb5023">ConfigurationUtils::getPortName</a>(outgoingport, nc-&gt;getRefMappings());
-<a name="l00224"></a>00224                         <span class="keywordtype">int</span> ctID = <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303">ConfigurationUtils::getVLid</a>(vls-&gt;getRefVirtualLink(), nc-&gt;getRefMappings());
-<a name="l00225"></a>00225                         <span class="keywordtype">int</span> oport = <a class="code" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56">ConfigurationUtils::getPortSerialNumber</a>(outgoingport, nc-&gt;getRefMappings());
+<a name="l00223"></a>00223                         <span class="keywordtype">string</span> portName = <a class="code" href="class_configuration_utils.html#a67c2807de34a3487ec1469befeeb5023" title="Returns the name of a Port.">ConfigurationUtils::getPortName</a>(outgoingport, nc-&gt;getRefMappings());
+<a name="l00224"></a>00224                         <span class="keywordtype">int</span> ctID = <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303" title="Returns the critical traffic id of a virtual link.">ConfigurationUtils::getVLid</a>(vls-&gt;getRefVirtualLink(), nc-&gt;getRefMappings());
+<a name="l00225"></a>00225                         <span class="keywordtype">int</span> oport = <a class="code" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56" title="Returns the number of a port.">ConfigurationUtils::getPortSerialNumber</a>(outgoingport, nc-&gt;getRefMappings());
 <a name="l00226"></a>00226                         cModule *destModule;
 <a name="l00227"></a>00227                         <span class="comment">//TODO fix parsing of porttype attribute and use it</span>
 <a name="l00228"></a>00228                         <span class="keywordflow">if</span> (portName.find(<span class="stringliteral">&quot;PHY&quot;</span>) != string::npos)
@@ -281,7 +281,7 @@
 <a name="l00249"></a>00249                         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (portName == <span class="stringliteral">&quot;HOST&quot;</span>)
 <a name="l00250"></a>00250                         {
 <a name="l00251"></a>00251                             destModule = getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteApp&quot;</span>, oport);
-<a name="l00252"></a>00252                             ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a>*) destModule)-&gt;addBuffer(ctID, (<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>*) newModule);
+<a name="l00252"></a>00252                             ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a>*) destModule)-&gt;addBuffer(ctID, (<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>*) newModule);
 <a name="l00253"></a>00253                         }
 <a name="l00254"></a>00254                         <span class="keywordflow">else</span>
 <a name="l00255"></a>00255                         {
@@ -323,7 +323,7 @@
 <a name="l00291"></a>00291 
 <a name="l00292"></a>00292 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

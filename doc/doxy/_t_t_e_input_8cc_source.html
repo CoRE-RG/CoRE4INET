@@ -59,15 +59,15 @@
 <a name="l00027"></a>00027 
 <a name="l00028"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a662ebf14464f337aa3a5a21ee2c8451c">00028</a> <span class="keywordtype">void</span> TTEInput::initialize()
 <a name="l00029"></a>00029 {
-<a name="l00030"></a>00030     <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe">ConfigurationUtils::getPreloadedMMR</a>();
+<a name="l00030"></a>00030     <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe" title="Loads the complete Model in the MetaModelRepository.">ConfigurationUtils::getPreloadedMMR</a>();
 <a name="l00031"></a>00031     ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
-<a name="l00032"></a>00032     <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22">ConfigurationUtils::resolveCommonAliases</a>(mr);
+<a name="l00032"></a>00032     <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22" title="Resolves links to Eclipse paths that can&amp;#39;t be found.">ConfigurationUtils::resolveCommonAliases</a>(mr);
 <a name="l00033"></a>00033     ::ecore::EObject_ptr eobj = mr-&gt;getByFilename(getParentModule()-&gt;getParentModule()-&gt;par(<span class="stringliteral">&quot;network_configuration&quot;</span>));
 <a name="l00034"></a>00034     assert(eobj);
 <a name="l00035"></a>00035     NetworkConfig *nc = ::ecore::instanceOf&lt;NetworkConfig&gt;(eobj);
 <a name="l00036"></a>00036     assert(nc);
 <a name="l00037"></a>00037 
-<a name="l00038"></a>00038     DeviceSpecification *ds = <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e">ConfigurationUtils::getDeviceSpecification</a>(
+<a name="l00038"></a>00038     DeviceSpecification *ds = <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e" title="Finds a DeviceSpecification from NetworkConfiguration by device name.">ConfigurationUtils::getDeviceSpecification</a>(
 <a name="l00039"></a>00039             getParentModule()-&gt;getParentModule()-&gt;par(<span class="stringliteral">&quot;device_name&quot;</span>), nc);
 <a name="l00040"></a>00040     assert(ds);
 <a name="l00041"></a>00041 
@@ -76,8 +76,8 @@
 <a name="l00044"></a>00044         Switch *sw = ds-&gt;as&lt;Switch&gt; ();
 <a name="l00045"></a>00045         <span class="keywordflow">if</span> (sw-&gt;getConfig())
 <a name="l00046"></a>00046         {
-<a name="l00047"></a>00047             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMarker());
-<a name="l00048"></a>00048             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">ct_mask</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMask());
+<a name="l00047"></a>00047             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMarker());
+<a name="l00048"></a>00048             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">ct_mask</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(sw-&gt;getConfig()-&gt;getCtMask());
 <a name="l00049"></a>00049         }
 <a name="l00050"></a>00050     }
 <a name="l00051"></a>00051     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ds-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;EndSystem&quot;</span>)
@@ -85,15 +85,15 @@
 <a name="l00053"></a>00053         EndSystem *es = ds-&gt;as&lt;EndSystem&gt; ();
 <a name="l00054"></a>00054         <span class="keywordflow">if</span> (es-&gt;getConfig())
 <a name="l00055"></a>00055         {
-<a name="l00056"></a>00056             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMarker());
-<a name="l00057"></a>00057             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">ct_mask</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMask());
+<a name="l00056"></a>00056             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">ct_marker</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMarker());
+<a name="l00057"></a>00057             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">ct_mask</a> = <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">ConfigurationUtils::mac2long</a>(es-&gt;getConfig()-&gt;getCtMask());
 <a name="l00058"></a>00058         }
 <a name="l00059"></a>00059     }
 <a name="l00060"></a>00060 
 <a name="l00061"></a>00061     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
 <a name="l00062"></a>00062 }
 <a name="l00063"></a>00063 
-<a name="l00064"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f">00064</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f">TTEInput::addIncoming</a>(uint16 ctID, <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a> *incoming)
+<a name="l00064"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f">00064</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f">TTEInput::addIncoming</a>(uint16 ctID, <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a> *incoming)
 <a name="l00065"></a>00065 {
 <a name="l00066"></a>00066     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1">incomings</a>[ctID].push_back(incoming);
 <a name="l00067"></a>00067 }
@@ -154,7 +154,7 @@
 <a name="l00122"></a>00122     <span class="keywordflow">return</span> (macBytes[4] &lt;&lt; 8) | macBytes[5];
 <a name="l00123"></a>00123 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

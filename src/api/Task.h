@@ -23,34 +23,81 @@ namespace TTEthernetModel {
 
 typedef void(*cbFunc)(void *);
 
+/**
+ * @brief Class representing a Task.
+ *
+ * The class stores a funtion pointer and args and invokes the function periodically.
+ *
+ * @todo This may be merged with the Callback class in a joined superclass. The
+ * code seems identical.
+ *
+ * @sa TTEApplicationBase
+ */
 class Task
 {
     protected:
+        /**
+         * @brief Function pointer of the task.
+         */
         void (*fn)(void *);
+        /**
+         * @brief Pointer to the function args.
+         */
         void *arg;
+        /**
+         * @brief Boolean indicating whether args were set.
+         */
         bool argSet;
     public:
+        /**
+         * @brief Constructor
+         */
         Task(){
             argSet=false;
         }
 
+        /**
+         * @brief Setter for the function pointer.
+         *
+         * @param functionPointer the funtion pointer to be invoked in the task
+         */
         virtual void setFunctionPointer(void (*functionPointer)(void*)){
             fn=functionPointer;
         }
 
+        /**
+         * @brief Getter for the function pointer.
+         *
+         * @return the funtion pointer that is invoked in the task
+         */
         virtual cbFunc getFunctionPointer(){
             return fn;
         }
 
+        /**
+         * @brief Setter for the function args.
+         *
+         * @param setFunctionArg the funtion arg to be used in the task
+         */
         virtual void setFunctionArg(void *setFunctionArg){
             arg=setFunctionArg;
             argSet=true;
         }
 
+        /**
+         * @brief Getter for the function args.
+         *
+         * @return the funtion arg used in the task
+         */
         virtual void* getFunctionArg(){
             return arg;
         }
 
+        /**
+         * @brief execution of the task.
+         *
+         * If method is called the stored function pointer is invoked.
+         */
         virtual void executeTask(){
             fn(arg);
         }

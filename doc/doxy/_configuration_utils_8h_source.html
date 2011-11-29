@@ -68,31 +68,37 @@
 <a name="l00036"></a>00036 <span class="keyword">using namespace </span>ecorecpp;
 <a name="l00037"></a>00037 <span class="keyword">using namespace </span>ecorecpp::mapping;
 <a name="l00038"></a>00038 
-<a name="l00039"></a><a class="code" href="class_configuration_utils.html">00039</a> <span class="keyword">class </span><a class="code" href="class_configuration_utils.html">ConfigurationUtils</a>
-<a name="l00040"></a>00040 {
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042     <span class="keyword">public</span>:
-<a name="l00043"></a>00043         <span class="keyword">static</span> ecorecpp::MetaModelRepository_ptr <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe">getPreloadedMMR</a>();
-<a name="l00044"></a>00044         <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22">resolveCommonAliases</a>(ecorecpp::ModelRepository_ptr mr);
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046         <span class="comment">//Conversion Utils</span>
-<a name="l00047"></a>00047         <span class="keyword">static</span> <span class="keywordtype">long</span> <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">mac2long</a>(std::string <span class="keywordtype">string</span>);
-<a name="l00048"></a>00048         <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_configuration_utils.html#a29403deeae6215ae8664a9e3e5bacde4">mac2Bytes</a>(std::string <span class="keywordtype">string</span>, uint8_t string_len, uint8_t mac[], uint8_t mac_len);
-<a name="l00049"></a>00049         <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">time2ticks</a>(std::string <span class="keywordtype">string</span>, <span class="keywordtype">double</span> tick);
-<a name="l00050"></a>00050         <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_configuration_utils.html#a55312972db83f146ec5aa9bc44941af9">freq2s</a>(std::string <span class="keywordtype">string</span>);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052         <span class="comment">//Find Utils</span>
-<a name="l00053"></a>00053         <span class="keyword">static</span> Device_Specification::DeviceSpecification_ptr <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e">getDeviceSpecification</a>(std::string device_name,
-<a name="l00054"></a>00054                 Network_Configuration::NetworkConfig_ptr nc);
-<a name="l00055"></a>00055         <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56">getPortSerialNumber</a>(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
-<a name="l00056"></a>00056         <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code" href="class_configuration_utils.html#a67c2807de34a3487ec1469befeeb5023">getPortName</a>(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
-<a name="l00057"></a>00057         <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303">getVLid</a>(System_Specification::VirtualLink_ptr vl, Device_Target_Mapping::Mappings_ptr map);
-<a name="l00058"></a>00058         <span class="keyword">static</span> System_Specification::VirtualLink_ptr <a class="code" href="class_configuration_utils.html#a59dbadf8e616a4437d5f3418cd16c253">getVLfromVLid</a>(<span class="keywordtype">int</span> vlid, Device_Target_Mapping::Mappings_ptr map);
-<a name="l00059"></a>00059 };
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061 <span class="preprocessor">#endif </span><span class="comment">/* CONFIGURATIONUTILS_H_ */</span>
+<a name="l00044"></a><a class="code" href="class_configuration_utils.html">00044</a> <span class="keyword">class </span><a class="code" href="class_configuration_utils.html" title="Utility class with convenience functions for XML-Parsing.">ConfigurationUtils</a>
+<a name="l00045"></a>00045 {
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047     <span class="keyword">public</span>:
+<a name="l00053"></a>00053         <span class="keyword">static</span> ecorecpp::MetaModelRepository_ptr <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe" title="Loads the complete Model in the MetaModelRepository.">getPreloadedMMR</a>();
+<a name="l00054"></a>00054 
+<a name="l00060"></a>00060         <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22" title="Resolves links to Eclipse paths that can&amp;#39;t be found.">resolveCommonAliases</a>(ecorecpp::ModelRepository_ptr mr);
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062         <span class="comment">//Conversion Utils</span>
+<a name="l00063"></a>00063 
+<a name="l00070"></a>00070         <span class="keyword">static</span> <span class="keywordtype">long</span> <a class="code" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede" title="Converts MAC address from string to long.">mac2long</a>(std::string <span class="keywordtype">string</span>);
+<a name="l00079"></a>00079         <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3" title="Converts time from sting to ticks.">time2ticks</a>(std::string <span class="keywordtype">string</span>, <span class="keywordtype">double</span> tick);
+<a name="l00080"></a>00080 
+<a name="l00087"></a>00087         <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_configuration_utils.html#a55312972db83f146ec5aa9bc44941af9" title="Converts frequency from string to double.">freq2s</a>(std::string <span class="keywordtype">string</span>);
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089         <span class="comment">//Find Utils</span>
+<a name="l00097"></a>00097 <span class="comment"></span>        <span class="keyword">static</span> Device_Specification::DeviceSpecification_ptr <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e" title="Finds a DeviceSpecification from NetworkConfiguration by device name.">getDeviceSpecification</a>(std::string device_name,
+<a name="l00098"></a>00098                 Network_Configuration::NetworkConfig_ptr nc);
+<a name="l00099"></a>00099 
+<a name="l00107"></a>00107         <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56" title="Returns the number of a port.">getPortSerialNumber</a>(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
+<a name="l00108"></a>00108 
+<a name="l00116"></a>00116         <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code" href="class_configuration_utils.html#a67c2807de34a3487ec1469befeeb5023" title="Returns the name of a Port.">getPortName</a>(System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map);
+<a name="l00117"></a>00117 
+<a name="l00125"></a>00125         <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303" title="Returns the critical traffic id of a virtual link.">getVLid</a>(System_Specification::VirtualLink_ptr vl, Device_Target_Mapping::Mappings_ptr map);
+<a name="l00126"></a>00126 
+<a name="l00134"></a>00134         <span class="keyword">static</span> System_Specification::VirtualLink_ptr <a class="code" href="class_configuration_utils.html#a59dbadf8e616a4437d5f3418cd16c253" title="Finds the virtual link object of a given critical traffic id.">getVLfromVLid</a>(<span class="keywordtype">int</span> vlid, Device_Target_Mapping::Mappings_ptr map);
+<a name="l00135"></a>00135 };
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137 <span class="preprocessor">#endif </span><span class="comment">/* CONFIGURATIONUTILS_H_ */</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

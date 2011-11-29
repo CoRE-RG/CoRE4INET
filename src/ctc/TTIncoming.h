@@ -24,18 +24,42 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * @brief Class for the critical traffic conformance check of
+ * time-triggered traffic.
+ *
+ * This class checks whether incoming traffic arrived in the configured receive window.
+ * Messages are delayed until the configured permanence point in time.
+ *
+ * @sa Incoming
  */
 class TTIncoming : public Incoming
 {
     private:
+        /**
+         * @brief Stores the frame until the configured permanence point in time.
+         */
         EtherFrame *frame;
 
     public:
+        /**
+         * @brief Constructor
+         */
         TTIncoming();
+        /**
+         * @brief Destructor
+         */
         virtual ~TTIncoming();
     protected:
-        virtual void initialize();
+        /**
+         * @brief Forwards messages arriving on in-gate to out-gate checks
+         * conformance with receive window, delays messages until permanence pit.
+         *
+         * After checking the receive window when a frame arrived, a SchedulerActionTimeEvent
+         * is registered at the TTEScheduler that triggeres the forwarding at the permanence
+         * point in time that was configured
+         *
+         * @param msg the incoming message
+         */
         virtual void handleMessage(cMessage *msg);
 };
 

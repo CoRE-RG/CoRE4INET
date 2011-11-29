@@ -52,26 +52,6 @@ long ConfigurationUtils::mac2long(std::string string)
     return strtoul(string.c_str(), NULL, 16);
 }
 
-// Vorsicht: mac_len ist immer 6,  string_len ist 4 (für ct_marker) oder 6
-// TODO: Längen überprüfen
-void ConfigurationUtils::mac2Bytes(std::string string, uint8_t string_len, uint8_t mac[], uint8_t mac_len)
-{
-    std::string::size_type pos;
-
-    while ((pos = string.find(":")) != std::string::npos)
-    {
-        string.erase(pos, 1);
-    }
-
-    memset(mac, 0, mac_len);
-    unsigned long macInt = strtoul(string.c_str(), NULL, 16);
-    for (int i = 0; i < string_len; i++)
-    {
-        mac[string_len - (i + 1)] = (uint8_t) macInt;
-        macInt = macInt >> 8;
-    }
-}
-
 unsigned long ConfigurationUtils::time2ticks(std::string string, double tick)
 {
     double factor = 0;
@@ -122,7 +102,7 @@ Device_Specification::DeviceSpecification_ptr ConfigurationUtils::getDeviceSpeci
             return dre->getRefDeviceSpecification();
         }
     }
-    return 0;
+    return NULL;
 }
 
 int ConfigurationUtils::getPortSerialNumber(System_Specification::Port_ptr port,

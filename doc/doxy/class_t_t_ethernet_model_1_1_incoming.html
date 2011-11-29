@@ -32,6 +32,9 @@
 </div>
 <div class="contents">
 <h1>TTEthernetModel::Incoming Class Reference</h1><!-- doxytag: class="TTEthernetModel::Incoming" -->
+<p>Base class for the critical traffic conformance check.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_incoming_8h_source.html">Incoming.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::Incoming:</div>
@@ -47,13 +50,15 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 <p><a href="class_t_t_ethernet_model_1_1_incoming-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">initialize</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">handleMessage</a> (cMessage *msg)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards messages arriving on in-gate to out-gate.  <a href="#a5ac75f71601c607f38b7a96525b5b8e7"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>TODO - Generated class </p>
+<p>Base class for the critical traffic conformance check. </p>
+<p>This base class simply forwards messages from in to out</p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html" title="Class for the critical traffic conformance check of rate-constrained traffic.">RCIncoming</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html" title="Class for the critical traffic conformance check of time-triggered traffic.">TTIncoming</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00026">26</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
+<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00030">30</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a5ac75f71601c607f38b7a96525b5b8e7"></a><!-- doxytag: member="TTEthernetModel::Incoming::handleMessage" ref="a5ac75f71601c607f38b7a96525b5b8e7" args="(cMessage *msg)" -->
 <div class="memitem">
@@ -71,39 +76,22 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 </div>
 <div class="memdoc">
 
+<p>Forwards messages arriving on in-gate to out-gate. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>the incoming message </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a957fe196b6e0e5fd38c6bf3af879e14b">TTEthernetModel::TTIncoming</a>.</p>
-
-<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00026">26</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00028"></a>00028 {
-<a name="l00029"></a>00029     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00030"></a>00030         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00031"></a>00031     }
-</pre></div></p>
-
-</div>
-</div>
-<a class="anchor" id="addb7e0a67350ee855fd2ee12229f5a1a"></a><!-- doxytag: member="TTEthernetModel::Incoming::initialize" ref="addb7e0a67350ee855fd2ee12229f5a1a" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void TTEthernetModel::Incoming::initialize </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [protected, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a47dab8dd43bb0c11f199ba936a4df5a5">TTEthernetModel::TTIncoming</a>.</p>
 
 <p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00021">21</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00023"></a>00023 {
-<a name="l00024"></a>00024     <span class="comment">// TODO - Generated method body</span>
+<a name="l00024"></a>00024     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
+<a name="l00025"></a>00025         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00026"></a>00026     }
 </pre></div></p>
 
 </div>
@@ -113,7 +101,7 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 <li><a class="el" href="_incoming_8cc_source.html">Incoming.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

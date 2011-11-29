@@ -21,12 +21,20 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * @brief Base class for the critical traffic conformance check.
+ *
+ * This base class simply forwards messages from in to out
+ *
+ * @sa RCIncoming, TTIncoming
  */
 class Incoming : public cSimpleModule
 {
   protected:
-    virtual void initialize();
+    /**
+     * @brief Forwards messages arriving on in-gate to out-gate
+     *
+     * @param msg the incoming message
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

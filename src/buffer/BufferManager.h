@@ -40,6 +40,7 @@ namespace TTEthernetModel {
  * The parsing is done in the second stage (stage=1) in the initialization phase. The module
  * registers a self message to delete itself when the simulation starts.
  *
+ * @ingroup Configuration
  */
 class BufferManager : public cSimpleModule
 {

@@ -94,24 +94,24 @@
 <a name="l00062"></a>00062     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">destinationGates</a>.remove(destinationGate);
 <a name="l00063"></a>00063 }
 <a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e">00065</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e" title="Adds a receive callback for an application to the buffer.">Buffer::addReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a> *application)
+<a name="l00065"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e">00065</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e" title="Adds a receive callback for an application to the buffer.">Buffer::addReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
 <a name="l00066"></a>00066 {
 <a name="l00067"></a>00067     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">receiveCallbacks</a>[application]=cb;
 <a name="l00068"></a>00068 }
 <a name="l00069"></a>00069 
-<a name="l00070"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7">00070</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7" title="Returns the currently registered receive callback for an application.">Buffer::getReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a> *application)
+<a name="l00070"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7">00070</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7" title="Returns the currently registered receive callback for an application.">Buffer::getReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
 <a name="l00071"></a>00071 {
 <a name="l00072"></a>00072     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">receiveCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">receiveCallbacks</a>.end())
 <a name="l00073"></a>00073         <span class="keywordflow">return</span> NULL;
 <a name="l00074"></a>00074     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">receiveCallbacks</a>[application];
 <a name="l00075"></a>00075 }
 <a name="l00076"></a>00076 
-<a name="l00077"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015">00077</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015" title="Adds a transmit callback for an application to the buffer.">Buffer::addTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a> *application)
+<a name="l00077"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015">00077</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015" title="Adds a transmit callback for an application to the buffer.">Buffer::addTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
 <a name="l00078"></a>00078 {
 <a name="l00079"></a>00079     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>[application]=cb;
 <a name="l00080"></a>00080 }
 <a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252">00082</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252" title="Returns the currently registered transmit callback for an application.">Buffer::getTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a> *application)
+<a name="l00082"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252">00082</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252" title="Returns the currently registered transmit callback for an application.">Buffer::getTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
 <a name="l00083"></a>00083 {
 <a name="l00084"></a>00084     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a>.end())
 <a name="l00085"></a>00085         <span class="keywordflow">return</span> NULL;
@@ -164,7 +164,7 @@
 <a name="l00132"></a>00132     <span class="keywordflow">throw</span>;
 <a name="l00133"></a>00133 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

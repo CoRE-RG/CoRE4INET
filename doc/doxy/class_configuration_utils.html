@@ -29,7 +29,13 @@
   </div>
 </div>
 <div class="contents">
-<h1>ConfigurationUtils Class Reference</h1><!-- doxytag: class="ConfigurationUtils" -->
+<h1>ConfigurationUtils Class Reference<br/>
+<small>
+[<a class="el" href="group___configuration.html">Configuration</a>]</small>
+</h1><!-- doxytag: class="ConfigurationUtils" -->
+<p>Utility class with convenience functions for XML-Parsing.  
+<a href="#_details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_configuration_utils_8h_source.html">ConfigurationUtils.h</a>&gt;</code></p>
 
 <p><a href="class_configuration_utils-members.html">List of all members.</a></p>
@@ -37,22 +43,32 @@
 <tr><td colspan="2"><h2>Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <br class="typebreak"/>
 ecorecpp::MetaModelRepository_ptr&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe">getPreloadedMMR</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Loads the complete Model in the MetaModelRepository.  <a href="#a8fa52683fd3c3332718ada090f646cbe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22">resolveCommonAliases</a> (ecorecpp::ModelRepository_ptr mr)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Resolves links to Eclipse paths that can't be found.  <a href="#a322b24ea573499ae087fa3b872c46c22"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#ac986518ab4f75521a8be6c0dd3ed9ede">mac2long</a> (std::string string)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a29403deeae6215ae8664a9e3e5bacde4">mac2Bytes</a> (std::string string, uint8_t string_len, uint8_t mac[], uint8_t mac_len)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Converts MAC address from string to long.  <a href="#ac986518ab4f75521a8be6c0dd3ed9ede"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a7926414e6e93c7288ec252ff6c45c7d3">time2ticks</a> (std::string string, double tick)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Converts time from sting to ticks.  <a href="#a7926414e6e93c7288ec252ff6c45c7d3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a55312972db83f146ec5aa9bc44941af9">freq2s</a> (std::string string)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Converts frequency from string to double.  <a href="#a55312972db83f146ec5aa9bc44941af9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <br class="typebreak"/>
 Device_Specification::DeviceSpecification_ptr&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e">getDeviceSpecification</a> (std::string device_name, Network_Configuration::NetworkConfig_ptr nc)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Finds a DeviceSpecification from NetworkConfiguration by device name.  <a href="#a2683d78cb18f8b928a13d62f3f33a80e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#aedd0123abd559962caf48bba0b81ca56">getPortSerialNumber</a> (System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the number of a port.  <a href="#aedd0123abd559962caf48bba0b81ca56"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a67c2807de34a3487ec1469befeeb5023">getPortName</a> (System_Specification::Port_ptr port, Device_Target_Mapping::Mappings_ptr map)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the name of a Port.  <a href="#a67c2807de34a3487ec1469befeeb5023"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a434355f9df412daf4e2fcbac65c54303">getVLid</a> (System_Specification::VirtualLink_ptr vl, Device_Target_Mapping::Mappings_ptr map)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the critical traffic id of a virtual link.  <a href="#a434355f9df412daf4e2fcbac65c54303"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <br class="typebreak"/>
 System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configuration_utils.html#a59dbadf8e616a4437d5f3418cd16c253">getVLfromVLid</a> (int vlid, Device_Target_Mapping::Mappings_ptr map)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Finds the virtual link object of a given critical traffic id.  <a href="#a59dbadf8e616a4437d5f3418cd16c253"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Utility class with convenience functions for XML-Parsing. </p>
 
-<p>Definition at line <a class="el" href="_configuration_utils_8h_source.html#l00039">39</a> of file <a class="el" href="_configuration_utils_8h_source.html">ConfigurationUtils.h</a>.</p>
+<p>Definition at line <a class="el" href="_configuration_utils_8h_source.html#l00044">44</a> of file <a class="el" href="_configuration_utils_8h_source.html">ConfigurationUtils.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a55312972db83f146ec5aa9bc44941af9"></a><!-- doxytag: member="ConfigurationUtils::freq2s" ref="a55312972db83f146ec5aa9bc44941af9" args="(std::string string)" -->
 <div class="memitem">
@@ -70,22 +86,31 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00099">99</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+<p>Converts frequency from string to double. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>frequency as string e.g. "100MHZ allowed Units: "Mhz" </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>double representing the frequency </dd></dl>
+
+<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00079">79</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00021">TTEthernetModel::TTEScheduler::initialize()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00100"></a>00100 {
-<a name="l00101"></a>00101     <span class="keywordtype">double</span> factor = 0;
-<a name="l00102"></a>00102     std::string::size_type pos;
-<a name="l00103"></a>00103     <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;MHZ&quot;</span>)) != std::string::npos || (pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;MHz&quot;</span>)) != std::string::npos || (pos
-<a name="l00104"></a>00104             = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;Mhz&quot;</span>)) != std::string::npos)
-<a name="l00105"></a>00105     {
-<a name="l00106"></a>00106         factor = 1000000;
-<a name="l00107"></a>00107     }
-<a name="l00108"></a>00108     <span class="keywordflow">if</span> (pos != std::string::npos)
-<a name="l00109"></a>00109         <span class="keywordtype">string</span>.erase(pos);
-<a name="l00110"></a>00110     <span class="keywordflow">return</span> 1 / (::strtod(<span class="keywordtype">string</span>.c_str(), 0) * factor);
-<a name="l00111"></a>00111 }
+<p><div class="fragment"><pre class="fragment"><a name="l00080"></a>00080 {
+<a name="l00081"></a>00081     <span class="keywordtype">double</span> factor = 0;
+<a name="l00082"></a>00082     std::string::size_type pos;
+<a name="l00083"></a>00083     <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;MHZ&quot;</span>)) != std::string::npos || (pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;MHz&quot;</span>)) != std::string::npos || (pos
+<a name="l00084"></a>00084             = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;Mhz&quot;</span>)) != std::string::npos)
+<a name="l00085"></a>00085     {
+<a name="l00086"></a>00086         factor = 1000000;
+<a name="l00087"></a>00087     }
+<a name="l00088"></a>00088     <span class="keywordflow">if</span> (pos != std::string::npos)
+<a name="l00089"></a>00089         <span class="keywordtype">string</span>.erase(pos);
+<a name="l00090"></a>00090     <span class="keywordflow">return</span> 1 / (::strtod(<span class="keywordtype">string</span>.c_str(), 0) * factor);
+<a name="l00091"></a>00091 }
 </pre></div></p>
 
 </div>
@@ -115,22 +140,32 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00113">113</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+<p>Finds a DeviceSpecification from NetworkConfiguration by device name. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>device_name</em>&nbsp;</td><td>Name of the device </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>nc</em>&nbsp;</td><td>network configuration to search in </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Pointer to the DeviceSpecification or NULL if not found </dd></dl>
+
+<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00093">93</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00021">TTEthernetModel::TTEScheduler::initialize()</a>, <a class="el" href="_t_t_e_input_8cc_source.html#l00028">TTEthernetModel::TTEInput::initialize()</a>, and <a class="el" href="_buffer_manager_8cc_source.html#l00038">TTEthernetModel::BufferManager::initialize()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00115"></a>00115 {
-<a name="l00116"></a>00116     ecorecpp::mapping::EList&lt;Network_Configuration::DeviceReferringElement&gt;&amp; dreList = nc-&gt;getDeviceReferringElement();
-<a name="l00117"></a>00117     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dreList.size(); i++)
-<a name="l00118"></a>00118     {
-<a name="l00119"></a>00119         Network_Configuration::DeviceReferringElement_ptr dre = dreList.get(i);
-<a name="l00120"></a>00120         <span class="keywordflow">if</span> (!dre-&gt;getRefDevice()-&gt;getName().compare(device_name))
-<a name="l00121"></a>00121         {
-<a name="l00122"></a>00122             <span class="keywordflow">return</span> dre-&gt;getRefDeviceSpecification();
-<a name="l00123"></a>00123         }
-<a name="l00124"></a>00124     }
-<a name="l00125"></a>00125     <span class="keywordflow">return</span> 0;
-<a name="l00126"></a>00126 }
+<p><div class="fragment"><pre class="fragment"><a name="l00095"></a>00095 {
+<a name="l00096"></a>00096     ecorecpp::mapping::EList&lt;Network_Configuration::DeviceReferringElement&gt;&amp; dreList = nc-&gt;getDeviceReferringElement();
+<a name="l00097"></a>00097     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dreList.size(); i++)
+<a name="l00098"></a>00098     {
+<a name="l00099"></a>00099         Network_Configuration::DeviceReferringElement_ptr dre = dreList.get(i);
+<a name="l00100"></a>00100         <span class="keywordflow">if</span> (!dre-&gt;getRefDevice()-&gt;getName().compare(device_name))
+<a name="l00101"></a>00101         {
+<a name="l00102"></a>00102             <span class="keywordflow">return</span> dre-&gt;getRefDeviceSpecification();
+<a name="l00103"></a>00103         }
+<a name="l00104"></a>00104     }
+<a name="l00105"></a>00105     <span class="keywordflow">return</span> NULL;
+<a name="l00106"></a>00106 }
 </pre></div></p>
 
 </div>
@@ -160,52 +195,62 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00176">176</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+<p>Returns the name of a Port. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>port</em>&nbsp;</td><td>Pointer to the Port </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>map</em>&nbsp;</td><td>Pointer to the Device_Target_Mapping </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>string containing the port name or NULL if not found </dd></dl>
+
+<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00156">156</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_manager_8cc_source.html#l00038">TTEthernetModel::BufferManager::initialize()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00177"></a>00177 {
-<a name="l00178"></a>00178     ecorecpp::mapping::EList&lt;Device_Target_Mapping::DeviceMapping&gt;&amp; devicemapList =
-<a name="l00179"></a>00179             map-&gt;getDeviceMappings()-&gt;getDeviceMapping();
-<a name="l00180"></a>00180     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; devicemapList.size(); i++)
-<a name="l00181"></a>00181     {
-<a name="l00182"></a>00182         Device_Target_Mapping::PortMappings_ptr pms = devicemapList.get(i)-&gt;getPortMappings();
-<a name="l00183"></a>00183         <span class="comment">// Switch Portmappings</span>
-<a name="l00184"></a>00184         <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;SwPortMappings&quot;</span>))
-<a name="l00185"></a>00185         {
-<a name="l00186"></a>00186             ecorecpp::mapping::EList&lt;Device_Target_Mapping::SwPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
-<a name="l00187"></a>00187                     Device_Target_Mapping::SwPortMappings&gt; ()-&gt;getTargetPortMapping();
-<a name="l00188"></a>00188             <span class="comment">//Go through port mappings</span>
-<a name="l00189"></a>00189             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
-<a name="l00190"></a>00190             {
-<a name="l00191"></a>00191                 Device_Target_Mapping::SwPortMapping_ptr pm = portmapList.get(j);
-<a name="l00192"></a>00192                 std::string refname = pm-&gt;getRefPort()-&gt;getName();
-<a name="l00193"></a>00193                 <span class="comment">//If reference device is our device</span>
-<a name="l00194"></a>00194                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()))
-<a name="l00195"></a>00195                 {
-<a name="l00196"></a>00196                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getName();
-<a name="l00197"></a>00197                 }
-<a name="l00198"></a>00198             }
-<a name="l00199"></a>00199         }
-<a name="l00200"></a>00200         <span class="comment">// EndSystem Portmappings</span>
-<a name="l00201"></a>00201         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;EsPortMappings&quot;</span>))
-<a name="l00202"></a>00202         {
-<a name="l00203"></a>00203             ecorecpp::mapping::EList&lt;Device_Target_Mapping::EsPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
-<a name="l00204"></a>00204                     Device_Target_Mapping::EsPortMappings&gt; ()-&gt;getTargetPortMapping();
-<a name="l00205"></a>00205             <span class="comment">//Go through port mappings</span>
-<a name="l00206"></a>00206             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
-<a name="l00207"></a>00207             {
-<a name="l00208"></a>00208                 Device_Target_Mapping::EsPortMapping_ptr pm = portmapList.get(j);
-<a name="l00209"></a>00209                 <span class="comment">//If reference device is our device and PHY is found we have a physical port</span>
-<a name="l00210"></a>00210                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()))
-<a name="l00211"></a>00211                 {
-<a name="l00212"></a>00212                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getName();
-<a name="l00213"></a>00213                 }
-<a name="l00214"></a>00214             }
-<a name="l00215"></a>00215         }
-<a name="l00216"></a>00216     }
-<a name="l00217"></a>00217     <span class="keywordflow">return</span> NULL;
-<a name="l00218"></a>00218 }
+<p><div class="fragment"><pre class="fragment"><a name="l00157"></a>00157 {
+<a name="l00158"></a>00158     ecorecpp::mapping::EList&lt;Device_Target_Mapping::DeviceMapping&gt;&amp; devicemapList =
+<a name="l00159"></a>00159             map-&gt;getDeviceMappings()-&gt;getDeviceMapping();
+<a name="l00160"></a>00160     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; devicemapList.size(); i++)
+<a name="l00161"></a>00161     {
+<a name="l00162"></a>00162         Device_Target_Mapping::PortMappings_ptr pms = devicemapList.get(i)-&gt;getPortMappings();
+<a name="l00163"></a>00163         <span class="comment">// Switch Portmappings</span>
+<a name="l00164"></a>00164         <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;SwPortMappings&quot;</span>))
+<a name="l00165"></a>00165         {
+<a name="l00166"></a>00166             ecorecpp::mapping::EList&lt;Device_Target_Mapping::SwPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
+<a name="l00167"></a>00167                     Device_Target_Mapping::SwPortMappings&gt; ()-&gt;getTargetPortMapping();
+<a name="l00168"></a>00168             <span class="comment">//Go through port mappings</span>
+<a name="l00169"></a>00169             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
+<a name="l00170"></a>00170             {
+<a name="l00171"></a>00171                 Device_Target_Mapping::SwPortMapping_ptr pm = portmapList.get(j);
+<a name="l00172"></a>00172                 std::string refname = pm-&gt;getRefPort()-&gt;getName();
+<a name="l00173"></a>00173                 <span class="comment">//If reference device is our device</span>
+<a name="l00174"></a>00174                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()))
+<a name="l00175"></a>00175                 {
+<a name="l00176"></a>00176                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getName();
+<a name="l00177"></a>00177                 }
+<a name="l00178"></a>00178             }
+<a name="l00179"></a>00179         }
+<a name="l00180"></a>00180         <span class="comment">// EndSystem Portmappings</span>
+<a name="l00181"></a>00181         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;EsPortMappings&quot;</span>))
+<a name="l00182"></a>00182         {
+<a name="l00183"></a>00183             ecorecpp::mapping::EList&lt;Device_Target_Mapping::EsPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
+<a name="l00184"></a>00184                     Device_Target_Mapping::EsPortMappings&gt; ()-&gt;getTargetPortMapping();
+<a name="l00185"></a>00185             <span class="comment">//Go through port mappings</span>
+<a name="l00186"></a>00186             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
+<a name="l00187"></a>00187             {
+<a name="l00188"></a>00188                 Device_Target_Mapping::EsPortMapping_ptr pm = portmapList.get(j);
+<a name="l00189"></a>00189                 <span class="comment">//If reference device is our device and PHY is found we have a physical port</span>
+<a name="l00190"></a>00190                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()))
+<a name="l00191"></a>00191                 {
+<a name="l00192"></a>00192                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getName();
+<a name="l00193"></a>00193                 }
+<a name="l00194"></a>00194             }
+<a name="l00195"></a>00195         }
+<a name="l00196"></a>00196     }
+<a name="l00197"></a>00197     <span class="keywordflow">return</span> NULL;
+<a name="l00198"></a>00198 }
 </pre></div></p>
 
 </div>
@@ -235,55 +280,65 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00128">128</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+<p>Returns the number of a port. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>port</em>&nbsp;</td><td>Pointer to the Port </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>map</em>&nbsp;</td><td>Pointer to the Device_Target_Mapping </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>number of the port or -1 if not a physical port </dd></dl>
+
+<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00108">108</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_manager_8cc_source.html#l00038">TTEthernetModel::BufferManager::initialize()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00130"></a>00130 {
-<a name="l00131"></a>00131     ecorecpp::mapping::EList&lt;Device_Target_Mapping::DeviceMapping&gt;&amp; devicemapList =
-<a name="l00132"></a>00132             map-&gt;getDeviceMappings()-&gt;getDeviceMapping();
-<a name="l00133"></a>00133     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; devicemapList.size(); i++)
-<a name="l00134"></a>00134     {
-<a name="l00135"></a>00135         Device_Target_Mapping::PortMappings_ptr pms = devicemapList.get(i)-&gt;getPortMappings();
-<a name="l00136"></a>00136         <span class="comment">// Switch Portmappings</span>
-<a name="l00137"></a>00137         <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;SwPortMappings&quot;</span>))
-<a name="l00138"></a>00138         {
-<a name="l00139"></a>00139             ecorecpp::mapping::EList&lt;Device_Target_Mapping::SwPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
-<a name="l00140"></a>00140                     Device_Target_Mapping::SwPortMappings&gt; ()-&gt;getTargetPortMapping();
-<a name="l00141"></a>00141             <span class="comment">//Go through port mappings</span>
-<a name="l00142"></a>00142             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
-<a name="l00143"></a>00143             {
-<a name="l00144"></a>00144                 Device_Target_Mapping::SwPortMapping_ptr pm = portmapList.get(j);
-<a name="l00145"></a>00145                 std::string refname = pm-&gt;getRefPort()-&gt;getName();
-<a name="l00146"></a>00146                 std::string pname = port-&gt;getName();
-<a name="l00147"></a>00147                 <span class="comment">//If reference device is our device and PHY is found we have a physical port</span>
-<a name="l00148"></a>00148                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()) &amp;&amp; !pm-&gt;getRefTargetPort()-&gt;getName().find(
-<a name="l00149"></a>00149                         <span class="stringliteral">&quot;PHY&quot;</span>) != -1)
-<a name="l00150"></a>00150                 {
-<a name="l00151"></a>00151                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getPortSerialNumber();
-<a name="l00152"></a>00152                 }
-<a name="l00153"></a>00153             }
-<a name="l00154"></a>00154         }
-<a name="l00155"></a>00155         <span class="comment">// EndSystem Portmappings</span>
-<a name="l00156"></a>00156         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;EsPortMappings&quot;</span>))
-<a name="l00157"></a>00157         {
-<a name="l00158"></a>00158             ecorecpp::mapping::EList&lt;Device_Target_Mapping::EsPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
-<a name="l00159"></a>00159                     Device_Target_Mapping::EsPortMappings&gt; ()-&gt;getTargetPortMapping();
-<a name="l00160"></a>00160             <span class="comment">//Go through port mappings</span>
-<a name="l00161"></a>00161             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
-<a name="l00162"></a>00162             {
-<a name="l00163"></a>00163                 Device_Target_Mapping::EsPortMapping_ptr pm = portmapList.get(j);
-<a name="l00164"></a>00164                 <span class="comment">//If reference device is our device and PHY is found we have a physical port</span>
-<a name="l00165"></a>00165                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()) &amp;&amp; !pm-&gt;getRefTargetPort()-&gt;getName().find(
-<a name="l00166"></a>00166                         <span class="stringliteral">&quot;PHY&quot;</span>) != -1)
-<a name="l00167"></a>00167                 {
-<a name="l00168"></a>00168                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getPortSerialNumber();
-<a name="l00169"></a>00169                 }
-<a name="l00170"></a>00170             }
-<a name="l00171"></a>00171         }
-<a name="l00172"></a>00172     }
-<a name="l00173"></a>00173     <span class="keywordflow">return</span> -1;
-<a name="l00174"></a>00174 }
+<p><div class="fragment"><pre class="fragment"><a name="l00110"></a>00110 {
+<a name="l00111"></a>00111     ecorecpp::mapping::EList&lt;Device_Target_Mapping::DeviceMapping&gt;&amp; devicemapList =
+<a name="l00112"></a>00112             map-&gt;getDeviceMappings()-&gt;getDeviceMapping();
+<a name="l00113"></a>00113     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; devicemapList.size(); i++)
+<a name="l00114"></a>00114     {
+<a name="l00115"></a>00115         Device_Target_Mapping::PortMappings_ptr pms = devicemapList.get(i)-&gt;getPortMappings();
+<a name="l00116"></a>00116         <span class="comment">// Switch Portmappings</span>
+<a name="l00117"></a>00117         <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;SwPortMappings&quot;</span>))
+<a name="l00118"></a>00118         {
+<a name="l00119"></a>00119             ecorecpp::mapping::EList&lt;Device_Target_Mapping::SwPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
+<a name="l00120"></a>00120                     Device_Target_Mapping::SwPortMappings&gt; ()-&gt;getTargetPortMapping();
+<a name="l00121"></a>00121             <span class="comment">//Go through port mappings</span>
+<a name="l00122"></a>00122             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
+<a name="l00123"></a>00123             {
+<a name="l00124"></a>00124                 Device_Target_Mapping::SwPortMapping_ptr pm = portmapList.get(j);
+<a name="l00125"></a>00125                 std::string refname = pm-&gt;getRefPort()-&gt;getName();
+<a name="l00126"></a>00126                 std::string pname = port-&gt;getName();
+<a name="l00127"></a>00127                 <span class="comment">//If reference device is our device and PHY is found we have a physical port</span>
+<a name="l00128"></a>00128                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()) &amp;&amp; !pm-&gt;getRefTargetPort()-&gt;getName().find(
+<a name="l00129"></a>00129                         <span class="stringliteral">&quot;PHY&quot;</span>) != -1)
+<a name="l00130"></a>00130                 {
+<a name="l00131"></a>00131                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getPortSerialNumber();
+<a name="l00132"></a>00132                 }
+<a name="l00133"></a>00133             }
+<a name="l00134"></a>00134         }
+<a name="l00135"></a>00135         <span class="comment">// EndSystem Portmappings</span>
+<a name="l00136"></a>00136         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!pms-&gt;eClass()-&gt;getName().compare(<span class="stringliteral">&quot;EsPortMappings&quot;</span>))
+<a name="l00137"></a>00137         {
+<a name="l00138"></a>00138             ecorecpp::mapping::EList&lt;Device_Target_Mapping::EsPortMapping&gt;&amp; portmapList = pms-&gt;as&lt;
+<a name="l00139"></a>00139                     Device_Target_Mapping::EsPortMappings&gt; ()-&gt;getTargetPortMapping();
+<a name="l00140"></a>00140             <span class="comment">//Go through port mappings</span>
+<a name="l00141"></a>00141             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; portmapList.size(); j++)
+<a name="l00142"></a>00142             {
+<a name="l00143"></a>00143                 Device_Target_Mapping::EsPortMapping_ptr pm = portmapList.get(j);
+<a name="l00144"></a>00144                 <span class="comment">//If reference device is our device and PHY is found we have a physical port</span>
+<a name="l00145"></a>00145                 <span class="keywordflow">if</span> (!pm-&gt;getRefPort()-&gt;getName().compare(port-&gt;getName()) &amp;&amp; !pm-&gt;getRefTargetPort()-&gt;getName().find(
+<a name="l00146"></a>00146                         <span class="stringliteral">&quot;PHY&quot;</span>) != -1)
+<a name="l00147"></a>00147                 {
+<a name="l00148"></a>00148                     <span class="keywordflow">return</span> pm-&gt;getRefTargetPort()-&gt;getPortSerialNumber();
+<a name="l00149"></a>00149                 }
+<a name="l00150"></a>00150             }
+<a name="l00151"></a>00151         }
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153     <span class="keywordflow">return</span> -1;
+<a name="l00154"></a>00154 }
 </pre></div></p>
 
 </div>
@@ -302,6 +357,9 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
       </table>
 </div>
 <div class="memdoc">
+
+<p>Loads the complete Model in the MetaModelRepository. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the pre-configured MetaModelRepository </dd></dl>
 
 <p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00023">23</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
@@ -348,22 +406,32 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00235">235</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+<p>Finds the virtual link object of a given critical traffic id. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vlid</em>&nbsp;</td><td>critical traffic id </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>map</em>&nbsp;</td><td>Pointer to the Device_Target_Mapping </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Pointer to the virtual link object </dd></dl>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00237"></a>00237 {
-<a name="l00238"></a>00238     Virtuallink_Map::VirtualLinkMapping_ptr vlming = map-&gt;getRefVirtualLinkMappings();
-<a name="l00239"></a>00239     ecorecpp::mapping::EList&lt;Virtuallink_Map::VirtualLinkMap&gt;&amp; vlmList = vlming-&gt;getVirtualLinkMap();
-<a name="l00240"></a>00240     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; vlmList.size(); j++)
-<a name="l00241"></a>00241     {
-<a name="l00242"></a>00242         Virtuallink_Map::VirtualLinkMap_ptr vlm = vlmList.get(j);
-<a name="l00243"></a>00243         <span class="keywordflow">if</span> (vlm-&gt;getId() == vlid)
-<a name="l00244"></a>00244         {
-<a name="l00245"></a>00245             <span class="keywordflow">return</span> vlm-&gt;getRefVirtualLink();
-<a name="l00246"></a>00246         }
-<a name="l00247"></a>00247     }
-<a name="l00248"></a>00248     <span class="comment">//NOT FOUND</span>
-<a name="l00249"></a>00249     <span class="keywordflow">return</span> 0;
-<a name="l00250"></a>00250 }
+<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00215">215</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00217"></a>00217 {
+<a name="l00218"></a>00218     Virtuallink_Map::VirtualLinkMapping_ptr vlming = map-&gt;getRefVirtualLinkMappings();
+<a name="l00219"></a>00219     ecorecpp::mapping::EList&lt;Virtuallink_Map::VirtualLinkMap&gt;&amp; vlmList = vlming-&gt;getVirtualLinkMap();
+<a name="l00220"></a>00220     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; vlmList.size(); j++)
+<a name="l00221"></a>00221     {
+<a name="l00222"></a>00222         Virtuallink_Map::VirtualLinkMap_ptr vlm = vlmList.get(j);
+<a name="l00223"></a>00223         <span class="keywordflow">if</span> (vlm-&gt;getId() == vlid)
+<a name="l00224"></a>00224         {
+<a name="l00225"></a>00225             <span class="keywordflow">return</span> vlm-&gt;getRefVirtualLink();
+<a name="l00226"></a>00226         }
+<a name="l00227"></a>00227     }
+<a name="l00228"></a>00228     <span class="comment">//NOT FOUND</span>
+<a name="l00229"></a>00229     <span class="keywordflow">return</span> 0;
+<a name="l00230"></a>00230 }
 </pre></div></p>
 
 </div>
@@ -393,82 +461,33 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00220">220</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+<p>Returns the critical traffic id of a virtual link. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vl</em>&nbsp;</td><td>Pointer to the virtual link </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>map</em>&nbsp;</td><td>Pointer to the Device_Target_Mapping </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>critical traffic id </dd></dl>
+
+<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00200">200</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_manager_8cc_source.html#l00038">TTEthernetModel::BufferManager::initialize()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00221"></a>00221 {
-<a name="l00222"></a>00222     Virtuallink_Map::VirtualLinkMapping_ptr vlming = map-&gt;getRefVirtualLinkMappings();
-<a name="l00223"></a>00223     ecorecpp::mapping::EList&lt;Virtuallink_Map::VirtualLinkMap&gt;&amp; vlmList = vlming-&gt;getVirtualLinkMap();
-<a name="l00224"></a>00224     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; vlmList.size(); j++)
-<a name="l00225"></a>00225     {
-<a name="l00226"></a>00226         Virtuallink_Map::VirtualLinkMap_ptr vlm = vlmList.get(j);
-<a name="l00227"></a>00227         <span class="keywordflow">if</span> (!vlm-&gt;getRefVirtualLink()-&gt;getVlid().compare(vl-&gt;getVlid()))
-<a name="l00228"></a>00228         {
-<a name="l00229"></a>00229             <span class="keywordflow">return</span> vlm-&gt;getId();
-<a name="l00230"></a>00230         }
-<a name="l00231"></a>00231     }
-<a name="l00232"></a>00232     <span class="keywordflow">return</span> -1;
-<a name="l00233"></a>00233 }
-</pre></div></p>
-
-</div>
-</div>
-<a class="anchor" id="a29403deeae6215ae8664a9e3e5bacde4"></a><!-- doxytag: member="ConfigurationUtils::mac2Bytes" ref="a29403deeae6215ae8664a9e3e5bacde4" args="(std::string string, uint8_t string_len, uint8_t mac[], uint8_t mac_len)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ConfigurationUtils::mac2Bytes </td>
-          <td>(</td>
-          <td class="paramtype">std::string&nbsp;</td>
-          <td class="paramname"> <em>string</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&nbsp;</td>
-          <td class="paramname"> <em>string_len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&nbsp;</td>
-          <td class="paramname"> <em>mac</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&nbsp;</td>
-          <td class="paramname"> <em>mac_len</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00057">57</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00058"></a>00058 {
-<a name="l00059"></a>00059     std::string::size_type pos;
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061     <span class="keywordflow">while</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;:&quot;</span>)) != std::string::npos)
-<a name="l00062"></a>00062     {
-<a name="l00063"></a>00063         <span class="keywordtype">string</span>.erase(pos, 1);
-<a name="l00064"></a>00064     }
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066     memset(mac, 0, mac_len);
-<a name="l00067"></a>00067     <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> macInt = strtoul(<span class="keywordtype">string</span>.c_str(), NULL, 16);
-<a name="l00068"></a>00068     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; string_len; i++)
-<a name="l00069"></a>00069     {
-<a name="l00070"></a>00070         mac[string_len - (i + 1)] = (uint8_t) macInt;
-<a name="l00071"></a>00071         macInt = macInt &gt;&gt; 8;
-<a name="l00072"></a>00072     }
-<a name="l00073"></a>00073 }
+<p><div class="fragment"><pre class="fragment"><a name="l00201"></a>00201 {
+<a name="l00202"></a>00202     Virtuallink_Map::VirtualLinkMapping_ptr vlming = map-&gt;getRefVirtualLinkMappings();
+<a name="l00203"></a>00203     ecorecpp::mapping::EList&lt;Virtuallink_Map::VirtualLinkMap&gt;&amp; vlmList = vlming-&gt;getVirtualLinkMap();
+<a name="l00204"></a>00204     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; vlmList.size(); j++)
+<a name="l00205"></a>00205     {
+<a name="l00206"></a>00206         Virtuallink_Map::VirtualLinkMap_ptr vlm = vlmList.get(j);
+<a name="l00207"></a>00207         <span class="keywordflow">if</span> (!vlm-&gt;getRefVirtualLink()-&gt;getVlid().compare(vl-&gt;getVlid()))
+<a name="l00208"></a>00208         {
+<a name="l00209"></a>00209             <span class="keywordflow">return</span> vlm-&gt;getId();
+<a name="l00210"></a>00210         }
+<a name="l00211"></a>00211     }
+<a name="l00212"></a>00212     <span class="keywordflow">return</span> -1;
+<a name="l00213"></a>00213 }
 </pre></div></p>
 
 </div>
@@ -488,6 +507,15 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
       </table>
 </div>
 <div class="memdoc">
+
+<p>Converts MAC address from string to long. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>with ":" seperated hex bytes e.g. "01:02:03:04:05:06" </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>MAC address as long </dd></dl>
 
 <p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00047">47</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
@@ -518,6 +546,14 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
       </table>
 </div>
 <div class="memdoc">
+
+<p>Resolves links to Eclipse paths that can't be found. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>mr</em>&nbsp;</td><td>Pointer to the ModelRepository that should be fixed </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00037">37</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
@@ -560,32 +596,42 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00075">75</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
+<p>Converts time from sting to ticks. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>time as string e.g. "10us" allowed units: "s", "ms", "us", "ns" </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>tick</em>&nbsp;</td><td>length of one tick in nanoseconds</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>time converted in ticks </dd></dl>
+
+<p>Definition at line <a class="el" href="_configuration_utils_8cc_source.html#l00055">55</a> of file <a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_manager_8cc_source.html#l00038">TTEthernetModel::BufferManager::initialize()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00076"></a>00076 {
-<a name="l00077"></a>00077     <span class="keywordtype">double</span> factor = 0;
-<a name="l00078"></a>00078     std::string::size_type pos;
-<a name="l00079"></a>00079     <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;ns&quot;</span>)) != std::string::npos)
-<a name="l00080"></a>00080     {
-<a name="l00081"></a>00081         factor = 1000000000;
-<a name="l00082"></a>00082     }
-<a name="l00083"></a>00083     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;us&quot;</span>)) != std::string::npos)
-<a name="l00084"></a>00084     {
-<a name="l00085"></a>00085         factor = 1000000;
-<a name="l00086"></a>00086     }
-<a name="l00087"></a>00087     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;ms&quot;</span>)) != std::string::npos)
-<a name="l00088"></a>00088     {
-<a name="l00089"></a>00089         factor = 1000;
-<a name="l00090"></a>00090     }
-<a name="l00091"></a>00091     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;s&quot;</span>)) != std::string::npos)
-<a name="l00092"></a>00092         factor = 1;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094     <span class="keywordflow">if</span> (pos != std::string::npos)
-<a name="l00095"></a>00095         <span class="keywordtype">string</span>.erase(pos);
-<a name="l00096"></a>00096     <span class="keywordflow">return</span> round(::strtod(<span class="keywordtype">string</span>.c_str(), 0) / (tick * factor));
-<a name="l00097"></a>00097 }
+<p><div class="fragment"><pre class="fragment"><a name="l00056"></a>00056 {
+<a name="l00057"></a>00057     <span class="keywordtype">double</span> factor = 0;
+<a name="l00058"></a>00058     std::string::size_type pos;
+<a name="l00059"></a>00059     <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;ns&quot;</span>)) != std::string::npos)
+<a name="l00060"></a>00060     {
+<a name="l00061"></a>00061         factor = 1000000000;
+<a name="l00062"></a>00062     }
+<a name="l00063"></a>00063     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;us&quot;</span>)) != std::string::npos)
+<a name="l00064"></a>00064     {
+<a name="l00065"></a>00065         factor = 1000000;
+<a name="l00066"></a>00066     }
+<a name="l00067"></a>00067     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;ms&quot;</span>)) != std::string::npos)
+<a name="l00068"></a>00068     {
+<a name="l00069"></a>00069         factor = 1000;
+<a name="l00070"></a>00070     }
+<a name="l00071"></a>00071     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((pos = <span class="keywordtype">string</span>.find(<span class="stringliteral">&quot;s&quot;</span>)) != std::string::npos)
+<a name="l00072"></a>00072         factor = 1;
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074     <span class="keywordflow">if</span> (pos != std::string::npos)
+<a name="l00075"></a>00075         <span class="keywordtype">string</span>.erase(pos);
+<a name="l00076"></a>00076     <span class="keywordflow">return</span> round(::strtod(<span class="keywordtype">string</span>.c_str(), 0) / (tick * factor));
+<a name="l00077"></a>00077 }
 </pre></div></p>
 
 </div>
@@ -595,7 +641,7 @@ System_Specification::VirtualLink_ptr&nbsp;</td><td class="memItemRight" valign=
 <li><a class="el" href="_configuration_utils_8cc_source.html">ConfigurationUtils.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

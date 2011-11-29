@@ -90,8 +90,8 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Base class for a TTEthernet-Application based on the TTEthernet-API. </p>
 <p>The class contains the wrappers for the C to C++ Mapping. </p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Please note that the TTEthernet-API funcitonallity is not yet completely implemented</dd></dl>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html">TTEAPITestApplication</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a> </dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Please note that the TTEthernet-API functionality is not yet completely implemented</dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html" title="Simple Test-Application based on the TTEthernet-API.">TTEAPITestApplication</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00071">71</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
@@ -119,8 +119,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
   </table>
   </dd>
 </dl>
-
-<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#afb51c02d68bc0e74091f9343c9d685b1">TTEthernetModel::TTEApplicationBase</a>.</p>
 
 <p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00027">27</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
@@ -156,8 +154,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>initializes the module. </p>
 <p>Registeres a START_APPLICATION self-message that triggers the application start </p>
-
-<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a215f9436e3a733f703cfb04e32212a2d">TTEthernetModel::TTEApplicationBase</a>.</p>
 
 <p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00022">22</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
@@ -560,8 +556,8 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00154"></a>00154                                                                               {
 <a name="l00155"></a>00155     Enter_Method_Silent();
-<a name="l00156"></a>00156     std::map&lt;uint16, std::list&lt;Buffer *&gt; &gt;::iterator bufferList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">buffers</a>.find(ct_id);
-<a name="l00157"></a>00157     <span class="keywordflow">if</span> (bufferList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">buffers</a>.end())
+<a name="l00156"></a>00156     std::map&lt;uint16, std::list&lt;Buffer *&gt; &gt;::iterator bufferList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.find(ct_id);
+<a name="l00157"></a>00157     <span class="keywordflow">if</span> (bufferList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.end())
 <a name="l00158"></a>00158     {
 <a name="l00159"></a>00159         <span class="comment">//Currently we use only the first entry!</span>
 <a name="l00160"></a>00160         std::list&lt;Buffer*&gt;::iterator buffer = bufferList-&gt;second.begin();
@@ -622,8 +618,8 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00078"></a>00078                                                                               {
 <a name="l00079"></a>00079     Enter_Method_Silent();
-<a name="l00080"></a>00080     std::map&lt;uint16, std::list&lt;Buffer *&gt; &gt;::iterator bufferList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">buffers</a>.find(ct_id);
-<a name="l00081"></a>00081     <span class="keywordflow">if</span> (bufferList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">buffers</a>.end())
+<a name="l00080"></a>00080     std::map&lt;uint16, std::list&lt;Buffer *&gt; &gt;::iterator bufferList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.find(ct_id);
+<a name="l00081"></a>00081     <span class="keywordflow">if</span> (bufferList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.end())
 <a name="l00082"></a>00082     {
 <a name="l00083"></a>00083         <span class="comment">//Currently we use only the first entry!</span>
 <a name="l00084"></a>00084         std::list&lt;Buffer*&gt;::iterator buffer = bufferList-&gt;second.begin();
@@ -1007,7 +1003,7 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <li><a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 15:27:13 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 16:40:34 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
