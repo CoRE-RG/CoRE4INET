@@ -47,9 +47,10 @@ void TTIncoming::handleMessage(cMessage *msg)
         if (frame != NULL)
         {
             ev.printf("Received frame before permanence point of previous frame \n");
+            delete msg;
         }
         //Check too early
-        if (currentTicks < (unsigned int) par("receive_window_start").longValue())
+        else if (currentTicks < (unsigned int) par("receive_window_start").longValue())
         {
             ev.printf(
                     "Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
