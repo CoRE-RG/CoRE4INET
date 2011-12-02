@@ -118,7 +118,7 @@ unsigned long TTEScheduler::getTotalTicks()
 
 SimTime TTEScheduler::precision(SimTime logical)
 {
-    return logical;// + (logical.dbl() * 0.0002);
+    return logical + (logical.dbl() * 0.0002);
 }
 
 } //namespace
