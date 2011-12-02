@@ -44,6 +44,8 @@ class TTEScheduler : public cSimpleModule
          */
         unsigned long lastCycleTicks;
 
+        std::list<SchedulerEvent*> registredEvents;
+
     protected:
         /**
          * @brief Initialization of the module.
@@ -62,14 +64,6 @@ class TTEScheduler : public cSimpleModule
          */
         virtual void handleMessage(cMessage *msg);
 
-        /**
-         * @brief makes a simulation time unprecise
-         *
-         * @param logical the precise simulation time
-         * @return the unprecise simulation time
-         */
-        virtual SimTime precision(SimTime logical);
-
     public:
         /**
          * @brief Returns the current number of ticks
@@ -86,6 +80,13 @@ class TTEScheduler : public cSimpleModule
         virtual unsigned long getTotalTicks();
 
         /**
+         * @brief Corrects the clock by the number of ticks
+         *
+         * @param number of ticks the clock must be corrected
+         */
+        virtual void clockCorrection(int ticks);
+
+        /**
          * Register a new event in the scheduler
          *
          * @param event Pointer to the Event to be scheduled.
@@ -96,6 +97,17 @@ class TTEScheduler : public cSimpleModule
          */
         virtual void registerEvent(SchedulerEvent *event);
 
+        virtual void correctEvents();
+    protected:
+        /**
+         * Signal that is emitted every time the drift (Difference of configured and actual tick length) changes
+         */
+        static simsignal_t currentDrift;
+
+        /**
+         * Signal that is emitted at the beginning of a new cycle
+         */
+        static simsignal_t newCycle;
 };
 
 } //namespace
