@@ -24,6 +24,8 @@ simple TTEScheduler
         double tick @unit(s) = 80ns;
         // Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)
         double max_drift @unit(s) = 16ps;
+        // Maximum clock drift change per cycle
+        double max_drift_change @unit(s) = 1ps;
         // Current length of a tick (with imprecission)
         double current_tick @unit(s) = tick;
         // Number of ticks for one cycle

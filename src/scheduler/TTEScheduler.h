@@ -46,6 +46,29 @@ class TTEScheduler : public cSimpleModule
 
         std::list<SchedulerEvent*> registredEvents;
 
+        cMessage* newCyclemsg;
+
+        /**
+         * @brief caches max_drift_change parameter
+         */
+        double maxDriftChange;
+        /**
+         * @brief caches max_drift parameter
+         */
+        double maxDrift;
+
+        /**
+         * @brief caches current_tick parameter
+         */
+        double currentTick;
+        /**
+         * @brief caches tick parameter
+         */
+        double tick;
+        /**
+         * @brief caches cycle_ticks parameter
+         */
+        long cycleTicks;
     protected:
         /**
          * @brief Initialization of the module.
@@ -63,6 +86,8 @@ class TTEScheduler : public cSimpleModule
          * @param msg the incoming message.
          */
         virtual void handleMessage(cMessage *msg);
+
+        virtual void handleParameterChange(const char* parname);
 
     public:
         /**
@@ -87,17 +112,20 @@ class TTEScheduler : public cSimpleModule
         virtual void clockCorrection(int ticks);
 
         /**
-         * Register a new event in the scheduler
+         * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
          *
          * @param event Pointer to the Event to be scheduled.
          * The scheduler will send the event according to the event type
+         * @return returns true on success, else false
          *
          * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
          * SchedulerTimerEvent
          */
-        virtual void registerEvent(SchedulerEvent *event);
+        virtual bool registerEvent(SchedulerEvent *event);
 
         virtual void correctEvents();
+
+        virtual void changeDrift();
     protected:
         /**
          * Signal that is emitted every time the drift (Difference of configured and actual tick length) changes
