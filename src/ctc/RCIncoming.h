@@ -36,6 +36,11 @@ class RCIncoming : public cSimpleModule
          * Saves the tickcount of the last message
          */
         unsigned long lastArrived;
+
+        /**
+         * @brief caches bag parameter
+         */
+        unsigned long bag;
     protected:
         /**
          * @brief Forwards messages arriving on in-gate to out-gate checks
@@ -44,6 +49,13 @@ class RCIncoming : public cSimpleModule
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
     public:
         /**
          * @brief Constructor.

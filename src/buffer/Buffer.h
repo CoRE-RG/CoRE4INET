@@ -60,6 +60,19 @@ class Buffer : public cSimpleModule
          */
         std::map<TTEApplicationBase*, Callback*> transmitCallbacks;
 
+        /**
+         * @brief caches ct_mask parameter
+         */
+        unsigned long ctMask;
+        /**
+         * @brief caches ct_marker parameter
+         */
+        unsigned long ctMarker;
+        /**
+         * @brief caches ct_id parameter
+         */
+        unsigned long ctId;
+
     private:
         /**
          * Initializes the statistics for the module
@@ -83,6 +96,13 @@ class Buffer : public cSimpleModule
          * @param msg The incoming message
          */
         void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 
         /**
          * @brief Is called to store an EtherFrame in the buffer.

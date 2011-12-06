@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include <Buffer.h>
+#include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
 
@@ -35,6 +36,12 @@ namespace TTEthernetModel {
  */
 class TTBuffer : public virtual Buffer
 {
+    private:
+        /**
+         * @brief Event indicating the actionTime
+         */
+        SchedulerActionTimeEvent* actionTimeEvent;
+
     protected:
         /**
          * @brief Initializes the SchedulerActionTimeEvent
@@ -54,6 +61,24 @@ class TTBuffer : public virtual Buffer
          * @param msg incoming EtherFrame for the Buffer or SchedulerActionTimeEvent message.
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
+
+    public:
+        /**
+         * @brief Constructor
+         */
+        TTBuffer();
+
+        /**
+         * @brief Destructor
+         */
+        ~TTBuffer();
 };
 }
 

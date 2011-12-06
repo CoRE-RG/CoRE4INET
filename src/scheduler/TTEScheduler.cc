@@ -32,11 +32,6 @@ void TTEScheduler::initialize()
     currentDrift = registerSignal("currentDrift");
     newCycle = registerSignal("newCycle");
 
-
-    //Initialize parameter cache
-    handleParameterChange(NULL);
-
-
     ConfigurationUtils::getPreloadedMMR();
     ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
     ConfigurationUtils::resolveCommonAliases(mr);

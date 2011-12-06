@@ -311,6 +311,9 @@ $O/buffer/BGQueueBuffer.o: buffer/BGQueueBuffer.cc \
 	buffer/Buffer.h \
 	buffer/QueueBuffer.h \
 	buffer/TTBuffer.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
@@ -368,6 +371,9 @@ $O/buffer/QueueBuffer.o: buffer/QueueBuffer.cc \
 	buffer/Buffer.h \
 	buffer/QueueBuffer.h \
 	buffer/TTBuffer.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
@@ -443,6 +449,9 @@ $O/buffer/TTDoubleBuffer.o: buffer/TTDoubleBuffer.cc \
 	buffer/DoubleBuffer.h \
 	buffer/TTBuffer.h \
 	buffer/TTDoubleBuffer.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
@@ -453,6 +462,9 @@ $O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
 	buffer/QueueBuffer.h \
 	buffer/TTBuffer.h \
 	buffer/TTQueueBuffer.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \

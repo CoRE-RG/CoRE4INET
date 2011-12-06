@@ -15,13 +15,23 @@
 
 #include "TTBuffer.h"
 #include <TTEScheduler.h>
-#include <SchedulerMessageEvents_m.h>
 #include <TTBufferEmpty_m.h>
 #include "TTEApplicationBase.h"
 
 using namespace TTEthernetModel;
 
 Define_Module( TTBuffer);
+
+TTBuffer::TTBuffer()
+{
+    actionTimeEvent = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
+}
+
+TTBuffer::~TTBuffer()
+{
+    cancelEvent(actionTimeEvent);
+    delete actionTimeEvent;
+}
 
 void TTBuffer::initialize()
 {
@@ -30,10 +40,8 @@ void TTBuffer::initialize()
 
     //Register Event
     TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
-    event->setAction_time(par("sendWindowStart").doubleValue());
-    event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
+    actionTimeEvent->setDestinationGate(gate("schedulerIn"));
+    tteScheduler->registerEvent(actionTimeEvent);
 
     setIsEmpty(true);
 }
@@ -82,4 +90,11 @@ void TTBuffer::handleMessage(cMessage *msg)
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         tteScheduler->registerEvent((SchedulerEvent *) msg);
     }
+}
+
+void TTBuffer::handleParameterChange(const char* parname){
+    Buffer::handleParameterChange(parname);
+
+    if(actionTimeEvent)
+        actionTimeEvent->setAction_time(par("sendWindowStart").doubleValue());
 }

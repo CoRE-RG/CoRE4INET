@@ -35,7 +35,7 @@ void RCIncoming::handleMessage(cMessage *msg)
         //Now check for correct arrival:
         //TODO what todo with JITTER?
         //Check too early
-        if(currentTotalTicks-lastArrived < (unsigned long)par("bag").longValue()){
+        if(currentTotalTicks-lastArrived < bag){
             ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n", getName(), currentTotalTicks-lastArrived,par("bag").longValue());
             bubble("Frame to early");
             delete msg;
@@ -46,6 +46,10 @@ void RCIncoming::handleMessage(cMessage *msg)
             send(msg,"out");
         }
     }
+}
+
+void RCIncoming::handleParameterChange(const char* parname){
+    bag = (unsigned long)par("bag").longValue();
 }
 
 } //namespace

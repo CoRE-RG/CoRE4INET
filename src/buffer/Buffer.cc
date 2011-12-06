@@ -27,6 +27,9 @@ void Buffer::initialize()
 {
     ev << "Initialize Buffer" << endl;
     initializeStatistics();
+
+    //Initialize parameter cache
+    handleParameterChange(NULL);
 }
 
 void Buffer::initializeStatistics()
@@ -98,16 +101,13 @@ void Buffer::handleMessage(cMessage *msg)
         //Try to correct destination mac
         if(frame->getDest().isUnspecified()){
             MACAddress mac;
-            unsigned long ct_mask = par("ct_mask").longValue();
-            unsigned long ct_marker = par("ct_marker").longValue();
-            unsigned long ct_id = par("ct_id").longValue();
-            ct_marker &= ct_mask;
-            mac.setAddressByte(0, ct_marker>>24);
-            mac.setAddressByte(1, ct_marker>>16);
-            mac.setAddressByte(2, ct_marker>>8);
-            mac.setAddressByte(3, ct_marker);
-            mac.setAddressByte(4, ct_id>>8);
-            mac.setAddressByte(5, ct_id);
+            unsigned long maskedMarker= ctMarker & ctMask;
+            mac.setAddressByte(0, maskedMarker>>24);
+            mac.setAddressByte(1, maskedMarker>>16);
+            mac.setAddressByte(2, maskedMarker>>8);
+            mac.setAddressByte(3, maskedMarker);
+            mac.setAddressByte(4, ctId>>8);
+            mac.setAddressByte(5, ctId);
             frame->setDest(mac);
         }
         emit(latencySignal, simTime()-msg->getCreationTime());
@@ -118,6 +118,12 @@ void Buffer::handleMessage(cMessage *msg)
             iter->first->executeCallback(iter->second);
         }
     }
+}
+
+void Buffer::handleParameterChange(const char* parname){
+    ctMask = (unsigned long)par("ct_mask").longValue();
+    ctMarker = (unsigned long)par("ct_marker").longValue();
+    ctId = (unsigned long)par("ct_id").longValue();
 }
 
 void Buffer::enqueue(EtherFrame *newFrame)

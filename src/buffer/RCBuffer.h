@@ -94,6 +94,13 @@ class RCBuffer : public virtual Buffer
          * @param msg incoming EtherFrame for the Buffer or SchedulerTimerEvent message.
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

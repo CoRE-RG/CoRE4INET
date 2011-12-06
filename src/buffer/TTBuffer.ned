@@ -20,7 +20,7 @@ simple TTBuffer extends Buffer
     parameters:
         //TTBuffer is implemented by the TTBuffer C++ Class
         @class(TTBuffer);
-        //Beginning of the send window in number of ticks
+        //Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)
         int sendWindowStart=0;
         //End of the send window in number of ticks
         int sendWindowEnd=0;

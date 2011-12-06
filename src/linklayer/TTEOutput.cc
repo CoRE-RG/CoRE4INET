@@ -211,8 +211,9 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
     //Send Window Start is in next cycle
     if (scheduler->getTicks() > startTicks)
     {
-        startTicks += scheduler->par("cycle_ticks").longValue();
-        endTicks += scheduler->par("cycle_ticks").longValue();
+        long cycleTicks = scheduler->par("cycle_ticks").longValue();
+        startTicks += cycleTicks;
+        endTicks += cycleTicks;
     }
     //Send Window End is in next cycle
     else if (scheduler->getTicks() > endTicks)

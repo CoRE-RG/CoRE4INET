@@ -25,18 +25,18 @@ Define_Module( RCBuffer);
 RCBuffer::RCBuffer()
 {
     bagExpired = true;
+    timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
 }
 
 RCBuffer::~RCBuffer()
 {
+    cancelEvent(timerMessage);
     delete timerMessage;
 }
 
 void RCBuffer::initialize()
 {
-    timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
     timerMessage->setDestinationGate(gate("schedulerIn"));
-    timerMessage->setTimer(par("bag").doubleValue());
 
     //Update displaystring
     setIsEmpty(true);
@@ -88,6 +88,12 @@ void RCBuffer::handleMessage(cMessage *msg)
             delete msg;
         }
     }
+}
+
+void RCBuffer::handleParameterChange(const char* parname){
+    Buffer::handleParameterChange(parname);
+
+    timerMessage->setTimer(par("bag").doubleValue());
 }
 
 void RCBuffer::resetBag()

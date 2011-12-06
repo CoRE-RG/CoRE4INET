@@ -23,7 +23,7 @@ simple RCBuffer extends Buffer
         @class(RCBuffer);
         // Not used
         int max_dispatch_delay;
-        // Bandwidth allocation gap in number of ticks
+        // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
         int bag;
         // Not used
         int jitter;
