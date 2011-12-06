@@ -44,6 +44,11 @@ class TTEScheduler : public cSimpleModule
          */
         unsigned long lastCycleTicks;
 
+        /**
+         * @brief List of registered SchedulerEvents.
+         *
+         * Used to reregister after clock tick changes.
+         */
         std::list<SchedulerEvent*> registredEvents;
 
         cMessage* newCyclemsg;
@@ -87,6 +92,11 @@ class TTEScheduler : public cSimpleModule
          */
         virtual void handleMessage(cMessage *msg);
 
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
         virtual void handleParameterChange(const char* parname);
 
     public:
@@ -123,8 +133,16 @@ class TTEScheduler : public cSimpleModule
          */
         virtual bool registerEvent(SchedulerEvent *event);
 
+        /**
+         * @brief Helper function to correct Events after tick length changes
+         */
         virtual void correctEvents();
 
+        /**
+         * @brief Helper function to change the drift
+         *
+         * Can be overwritten to implement special clock drift behavior.
+         */
         virtual void changeDrift();
     protected:
         /**
