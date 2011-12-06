@@ -19,6 +19,13 @@ namespace TTEthernetModel {
 
 Define_Module(Incoming);
 
+simsignal_t Incoming::ctDroppedSignal = SIMSIGNAL_NULL;
+
+void Incoming::initialize()
+{
+    ctDroppedSignal = registerSignal("ctDropped");
+}
+
 void Incoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){

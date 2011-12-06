@@ -14,5 +14,5 @@ simple BGQueueBuffer extends BGBuffer
     //BGQueueBuffer is implemented by the BGQueueBuffer C++ Class
     @class(BGQueueBuffer);
     //Statistic of the queue length of the buffer
-    @statistic[queueLength](title="Queue Length"; record=vector);
+    @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
 }

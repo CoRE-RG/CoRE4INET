@@ -29,13 +29,24 @@ namespace TTEthernetModel {
  */
 class Incoming : public cSimpleModule
 {
-  protected:
-    /**
-     * @brief Forwards messages arriving on in-gate to out-gate
-     *
-     * @param msg the incoming message
-     */
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * @brief Signal that is emitted when a frame is dropped.
+         *
+         * Frames may be dropped when there was a violation of CT rules.
+         */
+        static simsignal_t ctDroppedSignal;
+    protected:
+        /**
+         * @brief Initialization of the module
+         */
+        virtual void initialize();
+        /**
+         * @brief Forwards messages arriving on in-gate to out-gate
+         *
+         * @param msg the incoming message
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

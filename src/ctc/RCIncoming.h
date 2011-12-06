@@ -17,6 +17,7 @@
 #define __TTETHERNETMODELV2_RCINCOMING_H_
 
 #include <omnetpp.h>
+#include <Incoming.h>
 
 namespace TTEthernetModel {
 
@@ -29,7 +30,7 @@ namespace TTEthernetModel {
  *
  * @sa Incoming
  */
-class RCIncoming : public cSimpleModule
+class RCIncoming : public Incoming
 {
     private:
         /**

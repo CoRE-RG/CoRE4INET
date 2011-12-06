@@ -17,7 +17,7 @@ simple TTEScheduler
     parameters:
         @display("i=block/cogwheel");
         //Statistic of the current drift (Difference of configured and actual tick length)
-        @statistic[currentDrift](title="Current drift"; record=vector);
+        @statistic[currentDrift](title="Current drift"; unit=s; record=vector);
         //Statistic of the beginning of a new cycle
         @statistic[newCycle](title="Start of cycle"; record=count,vector);
         // Length of a tick

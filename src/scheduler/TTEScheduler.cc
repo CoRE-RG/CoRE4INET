@@ -124,14 +124,12 @@ void TTEScheduler::handleMessage(cMessage *msg)
         newCyclemsg = msg;
 
 
-        //TODO
+        //TODO This must be done in sync module
         int modticks = (int)(simTime().dbl()/tick)%cycleTicks;
         if(modticks>(cycleTicks/2))
             modticks=modticks-cycleTicks;
-        ev << "TICKS:" << modticks << endl;
         modticks+=uniform(-0.000002,0.000002)/tick;
         clockCorrection(-modticks);
-        ev << "NOW: " << getTicks() << endl;
     }
 }
 

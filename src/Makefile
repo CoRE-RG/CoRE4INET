@@ -475,6 +475,7 @@ $O/configuration/ConfigurationUtils.o: configuration/ConfigurationUtils.cc \
 $O/ctc/Incoming.o: ctc/Incoming.cc \
 	ctc/Incoming.h
 $O/ctc/RCIncoming.o: ctc/RCIncoming.cc \
+	ctc/Incoming.h \
 	ctc/RCIncoming.h \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessage_m.h \

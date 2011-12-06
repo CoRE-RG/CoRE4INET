@@ -15,6 +15,6 @@ simple TTQueueBuffer extends TTBuffer
     //TTQueueBuffer is implemented by the TTQueueBuffer C++ Class
     @class(TTQueueBuffer);
     //Statistic of the queue length of the buffer
-    @statistic[queueLength](title="Queue Length"; record=vector);
+    @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
     
 }

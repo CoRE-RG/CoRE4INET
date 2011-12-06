@@ -16,9 +16,9 @@ simple TTEOutput like IOutputQueue
     parameters:
         @display("i=block/tx");
         //Statistic of the queue length of time-triggered frames
-        @statistic[ttQueueLength](title="TT-Queue Length"; record=vector);
+        @statistic[ttQueueLength](title="TT-Queue Length"; record=vector; interpolationmode=sample-hold);
         //Statistic of the queue length of best-effort frames
-        @statistic[beQueueLength](title="BE-Queue Length"; record=vector);
+        @statistic[beQueueLength](title="BE-Queue Length"; record=vector; interpolationmode=sample-hold);
     gates:
         //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)
         input in @labels(EtherFrame);

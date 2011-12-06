@@ -47,6 +47,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         if (frame != NULL)
         {
             ev.printf("Received frame before permanence point of previous frame \n");
+            emit(ctDroppedSignal, 1);
             delete msg;
         }
         //Check too early
@@ -57,6 +58,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                     getName(), currentTicks, par("receive_window_start").longValue(),
                     par("receive_window_end").longValue());
             bubble("Frame to early");
+            emit(ctDroppedSignal, 1);
             delete msg;
         }
         //Check too late
@@ -67,6 +69,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                     getName(), currentTicks, par("receive_window_start").longValue(),
                     par("receive_window_end").longValue());
             bubble("Frame to late");
+            emit(ctDroppedSignal, 1);
             delete msg;
         }
         //Timing ok

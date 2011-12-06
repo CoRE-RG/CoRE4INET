@@ -15,6 +15,6 @@ simple RCQueueBuffer extends RCBuffer
     //RCQueueBuffer is implemented by the RCQueueBuffer C++ Class
     @class(RCQueueBuffer);
     //Statistic of the queue length of the buffer
-    @statistic[queueLength](title="Queue Length"; record=vector);
+    @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
     
 }
