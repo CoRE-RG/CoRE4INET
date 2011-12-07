@@ -152,24 +152,6 @@ class Buffer : public cSimpleModule
         EtherFrame* getFrame();
 
         /**
-         * @brief Adds a destination gate to the buffer.
-         *
-         * The destination gate must be loosely coupled
-         *
-         * @param destinationGate pointer to the destination gate to be added.
-         */
-        void addDestinationGate(cGate *destinationGate);
-
-        /**
-         * @brief Removes a destination gate to the buffer.
-         *
-         * The destination gate should be previously added.
-         *
-         * @param destinationGate pointer to the destination gate to be removed.
-         */
-        void removeDestinationGate(cGate *destinationGate);
-
-        /**
          * @brief Adds a receive callback for an application to the buffer.
          *
          * The callback is registered for a specific application. Each application is

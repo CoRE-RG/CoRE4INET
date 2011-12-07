@@ -16,6 +16,8 @@
 #include "Buffer.h"
 #include "TTEApplicationBase.h"
 
+#include "HelperFunctions.h"
+
 using namespace TTEthernetModel;
 
 Define_Module( Buffer);
@@ -33,9 +35,6 @@ void Buffer::initialize()
 {
     ev << "Initialize Buffer" << endl;
     initializeStatistics();
-
-    //Initialize parameter cache
-    handleParameterChange(NULL);
 }
 
 void Buffer::initializeStatistics()
@@ -63,16 +62,6 @@ void Buffer::setIsEmpty(bool empty)
             getDisplayString().setTagArg("tt", 0, "");
         }
     }
-}
-
-void Buffer::addDestinationGate(cGate *destinationGate)
-{
-    destinationGates.push_back(destinationGate);
-}
-
-void Buffer::removeDestinationGate(cGate *destinationGate)
-{
-    destinationGates.remove(destinationGate);
 }
 
 void Buffer::addReceiveCallback(Callback *cb, TTEApplicationBase *application)
@@ -134,6 +123,30 @@ void Buffer::handleParameterChange(const char* parname){
     ctMask = (unsigned long)par("ct_mask").longValue();
     ctMarker = (unsigned long)par("ct_marker").longValue();
     ctId = (unsigned long)par("ct_id").longValue();
+
+    destinationGates.clear();
+    if(ev.isGUI()){
+        //TODO check why this does not work
+        //getDisplayString().setTagArg("i2", 0, "");
+        //getDisplayString().setTagArg("tt", 0, "");
+    }
+    std::string destinationGatesString = par("destination_gates").stdstringValue();
+    std::vector<std::string> destinationGatePaths;
+    split(destinationGatesString,',',destinationGatePaths);
+    for(std::vector<std::string>::iterator destinationGatePath = destinationGatePaths.begin();
+            destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
+        cGate* gate = gateByFullPath((*destinationGatePath));
+        if(gate){
+            destinationGates.push_back(gate);
+        }
+        else{
+            if(ev.isGUI()){
+                ev<<"Configuration problem: Gate "<<(*destinationGatePath)<<" could not be resolved!"<<endl;
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem outgoing gate!");
+            }
+        }
+    }
 }
 
 void Buffer::enqueue(EtherFrame *newFrame)

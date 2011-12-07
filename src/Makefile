@@ -31,7 +31,8 @@ INCLUDE_PATH = \
     -Inodes \
     -Inodes/ethernet \
     -Ischeduler \
-    -Isynchronisation
+    -Isynchronisation \
+    -Iutilities
 
 # Additional object and library files to link with
 EXTRA_OBJS = -L../emf4cpp-0.0.2/lib -L../model-src
@@ -75,6 +76,7 @@ OBJS = \
     $O/scheduler/SchedulerEvent.o \
     $O/scheduler/TTEScheduler.o \
     $O/synchronisation/Sync.o \
+    $O/utilities/HelperFunctions.o \
     $O/api/APIPayload_m.o \
     $O/buffer/TTBufferEmpty_m.o \
     $O/linklayer/ethernet/CTFrame_m.o \
@@ -176,12 +178,13 @@ clean:
 	-rm -f nodes/ethernet/*_m.cc nodes/ethernet/*_m.h
 	-rm -f scheduler/*_m.cc scheduler/*_m.h
 	-rm -f synchronisation/*_m.cc synchronisation/*_m.h
+	-rm -f utilities/*_m.cc utilities/*_m.h
 
 cleanall: clean
 	-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
-	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc api/tte_api/*.cc applications/*.cc base/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc api/*.cc api/tte_api/*.cc applications/*.cc base/*.cc buffer/*.cc configuration/*.cc ctc/*.cc linklayer/*.cc linklayer/ethernet/*.cc nodes/*.cc nodes/ethernet/*.cc scheduler/*.cc synchronisation/*.cc utilities/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/api/APIPayload_m.o: api/APIPayload_m.cc \
@@ -330,6 +333,7 @@ $O/buffer/Buffer.o: buffer/Buffer.cc \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
+	utilities/HelperFunctions.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
@@ -461,6 +465,7 @@ $O/configuration/ConfigurationManager.o: configuration/ConfigurationManager.cc \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
+	utilities/HelperFunctions.h \
 	$(INET_PROJ)/src/base/AbstractQueue.h \
 	$(INET_PROJ)/src/base/EnqueueHook.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
@@ -547,4 +552,6 @@ $O/scheduler/TTEScheduler.o: scheduler/TTEScheduler.cc \
 	scheduler/TTEScheduler.h
 $O/synchronisation/Sync.o: synchronisation/Sync.cc \
 	synchronisation/Sync.h
+$O/utilities/HelperFunctions.o: utilities/HelperFunctions.cc \
+	utilities/HelperFunctions.h
 

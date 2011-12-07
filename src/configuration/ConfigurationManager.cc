@@ -22,6 +22,8 @@
 
 #include <configuration/ConfigurationUtils.h>
 
+#include "HelperFunctions.h"
+
 
 #define X_POS_GUIBUFFER 330
 #define Y_POS_GUIBUFFER 30
@@ -276,15 +278,21 @@ void ConfigurationManager::initialize(int stage)
                             if (outgoing->eClass()->getName() == "TTOutgoing")
                             {
                                 TTBuffer *ttbuffer = dynamic_cast<TTBuffer*> (newModule);
-                                ttbuffer->addDestinationGate(destModule->gate("TTin"));
+                                std::string destPath = destModule->gate("TTin")->getFullPath();
+                                addPath(ttbuffer->par("destination_gates"),destPath);
+
+
                                 if (((TTEOutput *) destModule->getSubmodule("tteOutput")))
                                 {
+                                    //TODO !!!!!
                                     ((TTEOutput *) destModule->getSubmodule("tteOutput"))->registerTTBuffer(ttbuffer);
                                 }
                             }
                             else if (outgoing->eClass()->getName() == "RCOutgoing")
                             {
-                                ((TTEthernetModel::Buffer*) newModule)->addDestinationGate(destModule->gate("RCin"));
+                                RCBuffer *ttbuffer = dynamic_cast<RCBuffer*> (newModule);
+                                std::string destPath = destModule->gate("RCin")->getFullPath();
+                                addPath(ttbuffer->par("destination_gates"),destPath);
                             }
                         }
                         else if (portName == "SYNC")
@@ -294,6 +302,7 @@ void ConfigurationManager::initialize(int stage)
                         else if (portName == "HOST")
                         {
                             destModule = getParentModule()->getSubmodule("tteApp", oport);
+                            //TODO !!!!! App parameter mit pfaden zu Buffern
                             ((TTEApplicationBase*) destModule)->addBuffer(ctID, (Buffer*) newModule);
                         }
                         else
