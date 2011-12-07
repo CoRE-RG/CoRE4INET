@@ -4,7 +4,7 @@ import ttethernet.buffer.BGQueueBuffer;
 import ttethernet.linklayer.BGTrafficHandle;
 import ttethernet.applications.TTEAPITestApplication;
 import ttethernet.scheduler.TTEScheduler;
-import ttethernet.buffer.BufferManager;
+import ttethernet.configuration.ConfigurationManager;
 import ttethernet.api.TTEthAPI;
 import ttethernet.linklayer.TTEPHYPort;
 import ttethernet.synchronisation.Sync;
@@ -66,7 +66,7 @@ module TTEEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        bufferManager: BufferManager {
+        configurationManager: ConfigurationManager {
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler

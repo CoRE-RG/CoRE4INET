@@ -1,4 +1,4 @@
-package ttethernet.buffer;
+package ttethernet.configuration;
 
 // The BufferManager is responsible for the configuration of a Node (Host or Switch).
 // It creates the necessary Buffer and Incoming modules and connects them.
@@ -11,6 +11,6 @@ package ttethernet.buffer;
 //
 // @see TTEEtherHost, TTEEtherSwitch
 // @author Till Steinbach
-simple BufferManager
+simple ConfigurationManager
 {
 }

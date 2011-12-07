@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_BUFFERMANAGER_H_
-#define __TTETHERNETMODELV2_BUFFERMANAGER_H_
+#ifndef __TTETHERNETMODEL_CONFIGURATIONMANAGER_H_
+#define __TTETHERNETMODEL_CONFIGURATIONMANAGER_H_
 
 #include <omnetpp.h>
 
@@ -42,7 +42,7 @@ namespace TTEthernetModel {
  *
  * @ingroup Configuration
  */
-class BufferManager : public cSimpleModule
+class ConfigurationManager : public cSimpleModule
 {
     protected:
         /**

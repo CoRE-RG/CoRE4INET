@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "BufferManager.h"
+#include "ConfigurationManager.h"
 
 #include <buffer/Buffer.h>
 #include <TTEInput.h>
@@ -28,14 +28,14 @@
 
 namespace TTEthernetModel {
 
-Define_Module( BufferManager);
+Define_Module( ConfigurationManager);
 
-int BufferManager::numInitStages() const
+int ConfigurationManager::numInitStages() const
 {
     return 2;
 }
 
-void BufferManager::initialize(int stage)
+void ConfigurationManager::initialize(int stage)
 {
     if (stage == 1)
     {
@@ -282,7 +282,7 @@ void BufferManager::initialize(int stage)
     }
 }
 
-void BufferManager::handleMessage(cMessage *msg)
+void ConfigurationManager::handleMessage(cMessage *msg)
 {
     //delete module on first message, it is not needed anymore;
     delete msg;

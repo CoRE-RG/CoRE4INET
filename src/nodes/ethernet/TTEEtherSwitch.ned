@@ -1,7 +1,7 @@
 package ttethernet.nodes.ethernet;
 
 import ttethernet.scheduler.TTEScheduler;
-import ttethernet.buffer.BufferManager;
+import ttethernet.configuration.ConfigurationManager;
 import ttethernet.synchronisation.Sync;
 import ttethernet.linklayer.TTEPHYPort;
 
@@ -52,7 +52,7 @@ module TTEEtherSwitch
                 @display("p=141,169");
         }
         // Buffer manager that creates the buffers according to the configuration
-        bufferManager: BufferManager {
+        configurationManager: ConfigurationManager {
             parameters:
                 @display("p=999,999");
         }
