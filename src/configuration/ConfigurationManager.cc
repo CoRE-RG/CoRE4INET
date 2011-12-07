@@ -50,6 +50,35 @@ void ConfigurationManager::initialize(int stage)
         NetworkConfig *nc = ::ecore::instanceOf<NetworkConfig>(eobj);
         assert(nc);
         DeviceSpecification *dc = ConfigurationUtils::getDeviceSpecification(getParentModule()->par("device_name"), nc);
+
+        long ct_marker = 0;
+        long ct_mask = 0;
+        //Vonfigure Inputs
+        if (dc->eClass()->getName() == "Switch")
+        {
+            Switch *sw = dc->as<Switch> ();
+            if (sw->getConfig())
+            {
+                ct_marker = ConfigurationUtils::mac2long(sw->getConfig()->getCtMarker());
+                ct_mask = ConfigurationUtils::mac2long(sw->getConfig()->getCtMask());
+            }
+        }
+        else if (dc->eClass()->getName() == "EndSystem")
+        {
+            EndSystem *es = dc->as<EndSystem> ();
+            if (es->getConfig())
+            {
+                ct_marker = ConfigurationUtils::mac2long(es->getConfig()->getCtMarker());
+                ct_mask = ConfigurationUtils::mac2long(es->getConfig()->getCtMask());
+            }
+        }
+        for(int i=0;getParentModule()->getSubmodule("phy",i);i++){
+            cModule* input = getParentModule()->getSubmodule("phy",i)->getSubmodule("tteInput");
+            input->par("ct_marker").setLongValue(ct_marker);
+            input->par("ct_mask").setLongValue(ct_mask);
+        }
+
+
         EList<VirtualLinkSchedule>& vlSchedulesList = dc->getVlSchedules()->getVlSchedule();
         for (unsigned int i = 0; i < vlSchedulesList.size(); i++)
         {

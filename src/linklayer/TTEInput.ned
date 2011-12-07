@@ -16,6 +16,11 @@ simple TTEInput like IOutputQueue
         @display("i=block/rx");
         //Statistic of the amount of packets that were dropped due to no configured buffer/ctc
         @statistic[ctDropped](title="Unconfigured CT dropped"; record=sum);
+        
+        //Critical traffic marker of the buffer
+        int ct_marker=0;
+        //Critical traffic mask of the buffer
+        int ct_mask=0;
     gates:
         //Input from the lower layer (MAC layer)
         input in @labels(EtherFrame);

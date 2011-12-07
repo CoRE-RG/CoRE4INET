@@ -27,37 +27,6 @@ simsignal_t TTEInput::ctDroppedSignal = SIMSIGNAL_NULL;
 
 void TTEInput::initialize()
 {
-    ConfigurationUtils::getPreloadedMMR();
-    ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
-    ConfigurationUtils::resolveCommonAliases(mr);
-    ::ecore::EObject_ptr eobj = mr->getByFilename(getParentModule()->getParentModule()->par("network_configuration"));
-    assert(eobj);
-    NetworkConfig *nc = ::ecore::instanceOf<NetworkConfig>(eobj);
-    assert(nc);
-
-    DeviceSpecification *ds = ConfigurationUtils::getDeviceSpecification(
-            getParentModule()->getParentModule()->par("device_name"), nc);
-    assert(ds);
-
-    if (ds->eClass()->getName() == "Switch")
-    {
-        Switch *sw = ds->as<Switch> ();
-        if (sw->getConfig())
-        {
-            ct_marker = ConfigurationUtils::mac2long(sw->getConfig()->getCtMarker());
-            ct_mask = ConfigurationUtils::mac2long(sw->getConfig()->getCtMask());
-        }
-    }
-    else if (ds->eClass()->getName() == "EndSystem")
-    {
-        EndSystem *es = ds->as<EndSystem> ();
-        if (es->getConfig())
-        {
-            ct_marker = ConfigurationUtils::mac2long(es->getConfig()->getCtMarker());
-            ct_mask = ConfigurationUtils::mac2long(es->getConfig()->getCtMask());
-        }
-    }
-
     ctDroppedSignal = registerSignal("ctDropped");
 }
 
@@ -101,13 +70,18 @@ void TTEInput::handleMessage(cMessage *msg)
     }
 }
 
+void TTEInput::handleParameterChange(const char* parname){
+    ctMask = (unsigned int)par("ct_mask").longValue();
+    ctMarker = (unsigned int)par("ct_marker").longValue();
+}
+
 bool TTEInput::isCT(EtherFrame *frame)
 {
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);
     //Check for ct
-    if ((((macBytes[0] << 24) | (macBytes[1] << 16) | (macBytes[2] << 8) | (macBytes[3])) & ct_mask) == (ct_marker
-            & ct_mask))
+    if ((((macBytes[0] << 24) | (macBytes[1] << 16) | (macBytes[2] << 8) | (macBytes[3])) & ctMask) == (ctMarker
+            & ctMask))
     {
         return true;
     }

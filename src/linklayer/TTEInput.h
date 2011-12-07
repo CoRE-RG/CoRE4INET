@@ -33,8 +33,6 @@ namespace TTEthernetModel {
  *Critical traffic arriving on in-gate is forwarded to the incoming modules
  * or dropped if there is no module configured. Best-effort frames are
  * forwarded through the out-gate.
- *
- * @todo remove XML parsing here. Should be maybe in BufferManager class
  */
 class TTEInput : public cSimpleModule
 {
@@ -45,14 +43,13 @@ class TTEInput : public cSimpleModule
         std::map<uint16, std::list<Incoming*> > incomings;
 
         /**
-         * @brief Configured critical traffic marker for the device.
+         * @brief caches ct_mask parameter
          */
-        unsigned int ct_marker;
-
+        unsigned int ctMask;
         /**
-         * @brief Configured critical traffic mask for the device.
+         * @brief caches ct_marker parameter
          */
-        unsigned int ct_mask;
+        unsigned int ctMarker;
     protected:
         /**
          * @brief Signal that is emitted when a frame is dropped.
@@ -84,6 +81,12 @@ class TTEInput : public cSimpleModule
          * @param msg incoming message
          */
         virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
     private:
         /**
          * @brief Helper function checks whether a Frame is critical traffic.
