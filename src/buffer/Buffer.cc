@@ -51,13 +51,17 @@ void Buffer::recordPacketSent()
 
 void Buffer::setIsEmpty(bool empty)
 {
-    if (empty)
-    {
-        getDisplayString().setTagArg("i", 1, "black");
-    }
-    else
-    {
-        getDisplayString().setTagArg("i", 1, "");
+    if(ev.isGUI()){
+        if (empty)
+        {
+            getDisplayString().setTagArg("i", 1, "black");
+            getDisplayString().setTagArg("tt", 0, "Buffer is empty");
+        }
+        else
+        {
+            getDisplayString().setTagArg("i", 1, "");
+            getDisplayString().setTagArg("tt", 0, "");
+        }
     }
 }
 

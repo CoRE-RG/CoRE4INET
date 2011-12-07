@@ -40,6 +40,11 @@ class Incoming : public cSimpleModule
          * Frames may be dropped when there was a violation of CT rules.
          */
         static simsignal_t ctDroppedSignal;
+    public:
+        /**
+         * @brief Constructor
+         */
+        Incoming();
     protected:
         /**
          * @brief Initialization of the module

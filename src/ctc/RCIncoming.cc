@@ -24,6 +24,7 @@ Define_Module(RCIncoming);
 
 RCIncoming::RCIncoming()
 {
+    Incoming::Incoming();
     lastArrived=0;
 }
 
@@ -36,10 +37,14 @@ void RCIncoming::handleMessage(cMessage *msg)
         //TODO what todo with JITTER?
         //Check too early
         if(currentTotalTicks-lastArrived < bag){
-            ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n", getName(), currentTotalTicks-lastArrived,par("bag").longValue());
-            bubble("Frame to early");
             emit(ctDroppedSignal, 1);
-            getDisplayString().setTagArg("i2", 0, "status/excl3");
+            if(ev.isGUI()){
+                ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n", getName(), currentTotalTicks-lastArrived,par("bag").longValue());
+                bubble("Frame to early");
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+            }
+
             delete msg;
         }
         //Timing ok

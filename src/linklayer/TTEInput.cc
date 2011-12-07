@@ -23,6 +23,10 @@ Define_Module( TTEInput);
 
 simsignal_t TTEInput::ctDroppedSignal = SIMSIGNAL_NULL;
 
+TTEInput::TTEInput(){
+    hadError=false;
+}
+
 void TTEInput::initialize()
 {
     ctDroppedSignal = registerSignal("ctDropped");
@@ -54,9 +58,17 @@ void TTEInput::handleMessage(cMessage *msg)
             }
             else
             {
-                ev << "No incoming traffic allowed for CT ID " << getCTID(frame) << endl;
-                bubble("Frame not allowed here!");
                 emit(ctDroppedSignal, 1);
+                hadError=true;
+                if(ev.isGUI()){
+                    bubble("No matching buffer configured");
+                    getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                    getParentModule()->getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                }
                 delete frame;
             }
         }

@@ -24,6 +24,7 @@ Define_Module( TTIncoming);
 
 TTIncoming::TTIncoming()
 {
+    Incoming::Incoming();
     frame = NULL;
 }
 
@@ -46,40 +47,57 @@ void TTIncoming::handleMessage(cMessage *msg)
         //Now check for correct arrival:
         if (frame != NULL)
         {
-            ev.printf("Received frame before permanence point of previous frame \n");
             emit(ctDroppedSignal, 1);
-            getDisplayString().setTagArg("i2", 0, "status/excl3");
+            hadError=true;
+            if(ev.isGUI()){
+                ev.printf("Received frame before permanence point of previous frame \n");
+                bubble("Received frame before permanence point of previous frame");
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: Received frame before permanence point of previous frame");
+                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getParentModule()->getDisplayString().setTagArg("tt", 0, "Problem with Buffer");
+            }
             delete msg;
         }
         //Check too early
         else if (currentTicks < (unsigned int) par("receive_window_start").longValue())
         {
-            ev.printf(
-                    "Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
-                    getName(), currentTicks, par("receive_window_start").longValue(),
-                    par("receive_window_end").longValue());
-            bubble("Frame to early");
             emit(ctDroppedSignal, 1);
-            getDisplayString().setTagArg("i2", 0, "status/excl3");
+            hadError=true;
+            if(ev.isGUI()){
+                ev.printf("Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
+                        getName(), currentTicks, par("receive_window_start").longValue(),
+                        par("receive_window_end").longValue());
+                bubble("Frame to early");
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: Buffer configuration problem - Received frame too early");
+                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Buffer configuration problem - Received frame too early");
+            }
             delete msg;
         }
         //Check too late
         else if (currentTicks > (unsigned int) par("receive_window_end").longValue())
         {
-            ev.printf(
-                    "Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n",
-                    getName(), currentTicks, par("receive_window_start").longValue(),
-                    par("receive_window_end").longValue());
-            bubble("Frame to late");
             emit(ctDroppedSignal, 1);
-            getDisplayString().setTagArg("i2", 0, "status/excl3");
+            hadError=true;
+            if(ev.isGUI()){
+                ev.printf("Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n",
+                        getName(), currentTicks, par("receive_window_start").longValue(),
+                        par("receive_window_end").longValue());
+                bubble("Frame to late");
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: Buffer configuration problem - Received frame too late");
+                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Buffer configuration problem - Received frame too late");
+            }
             delete msg;
         }
         //Timing ok
         else
         {
             //delay for permanence_pit
-            if(!hadError)
+            if(!hadError && ev.isGUI())
                 getDisplayString().setTagArg("i2", 0, "status/hourglass");
             frame = (EtherFrame *) msg;
             SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
@@ -91,7 +109,7 @@ void TTIncoming::handleMessage(cMessage *msg)
     else if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
         delete msg;
-        if(!hadError)
+        if(!hadError && ev.isGUI())
             getDisplayString().setTagArg("i2", 0, "");
         send(frame, "out");
         frame = NULL;

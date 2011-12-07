@@ -52,12 +52,20 @@ class TTEInput : public cSimpleModule
         unsigned int ctMarker;
     protected:
         /**
+         * @brief set to true if there was an error during runtime
+         */
+        bool hadError;
+        /**
          * @brief Signal that is emitted when a frame is dropped.
          *
          * Frames may be dropped when no incoming module is configured.
          */
         static simsignal_t ctDroppedSignal;
     public:
+        /**
+         * @brief Constructor
+         */
+        TTEInput();
         /**
          * @brief Adds an incoming module to the list.
          *
