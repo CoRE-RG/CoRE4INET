@@ -56,8 +56,6 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class for a queuing background (best-effort) buffer class.  <a href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html">Buffer</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Base class for all buffer classes.  <a href="class_t_t_ethernet_model_1_1_buffer.html#_details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html">BufferManager</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class implementing the <a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html" title="Class implementing the BufferManager module that parses the TTEthernet XML configuration...">BufferManager</a> module that parses the TTEthernet XML configuration and configures the buffers.  <a href="class_t_t_ethernet_model_1_1_buffer_manager.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html">DoubleBuffer</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Base class for a double buffer class.  <a href="class_t_t_ethernet_model_1_1_double_buffer.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html">QueueBuffer</a></td></tr>
@@ -76,6 +74,8 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Time-triggeredd double buffer class.  <a href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html">TTQueueBuffer</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Time-triggered queue buffer class.  <a href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_configuration_manager.html">ConfigurationManager</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class implementing the BufferManager module that parses the TTEthernet XML configuration and configures the buffers.  <a href="class_t_t_ethernet_model_1_1_configuration_manager.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Base class for the critical traffic conformance check.  <a href="class_t_t_ethernet_model_1_1_incoming.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html">RCIncoming</a></td></tr>
@@ -149,10 +149,10 @@
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a03d5f3df852840d56243f2e9a5c57859">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#ac08cb52af056142b87e90106292a4818">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_test_app.html">TTETestApp</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a1a30572760654f2bc826ac57dcd5ba75">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html">BGBuffer</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#ae002bcf11610f9579cd285dc66a3fb9c">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_buffer_manager.html">BufferManager</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#aa7001417b7427ebf8ec8cf7ae864a137">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">RCBuffer</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a6678db5193e5777d266c3fa18f1cbd62">doPacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer_empty.html">TTBufferEmpty</a> &amp;obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a8080299cdc6b0d91f71aeab68333bcfc">doUnpacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer_empty.html">TTBufferEmpty</a> &amp;obj)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#aa353cae0f153238d86af574dd30a0735">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_configuration_manager.html">ConfigurationManager</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#aeea9743591e321db140489ba522d583b">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a2264014da3e972e42d74c2304fd3b844">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html">RCIncoming</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#ab535594f76930f3a95f966fec03daac2">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html">TTIncoming</a>)</td></tr>
@@ -342,14 +342,14 @@
 
 </div>
 </div>
-<a class="anchor" id="aa7001417b7427ebf8ec8cf7ae864a137"></a><!-- doxytag: member="TTEthernetModel::Define_Module" ref="aa7001417b7427ebf8ec8cf7ae864a137" args="(RCBuffer)" -->
+<a class="anchor" id="aa353cae0f153238d86af574dd30a0735"></a><!-- doxytag: member="TTEthernetModel::Define_Module" ref="aa353cae0f153238d86af574dd30a0735" args="(ConfigurationManager)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">TTEthernetModel::Define_Module </td>
           <td>(</td>
-          <td class="paramtype">RCBuffer&nbsp;</td>
+          <td class="paramtype">ConfigurationManager&nbsp;</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -360,14 +360,14 @@
 
 </div>
 </div>
-<a class="anchor" id="ae002bcf11610f9579cd285dc66a3fb9c"></a><!-- doxytag: member="TTEthernetModel::Define_Module" ref="ae002bcf11610f9579cd285dc66a3fb9c" args="(BufferManager)" -->
+<a class="anchor" id="aa7001417b7427ebf8ec8cf7ae864a137"></a><!-- doxytag: member="TTEthernetModel::Define_Module" ref="aa7001417b7427ebf8ec8cf7ae864a137" args="(RCBuffer)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">TTEthernetModel::Define_Module </td>
           <td>(</td>
-          <td class="paramtype">BufferManager&nbsp;</td>
+          <td class="paramtype">RCBuffer&nbsp;</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -466,7 +466,7 @@
 </div>
 <div class="memdoc">
 
-<p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00027">TTEthernetModel::TTEAPIApplicationBase::handleMessage()</a>, <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00021">TTEthernetModel::TTEScheduler::initialize()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00021">TTEthernetModel::RCBuffer::RCBuffer()</a>, <a class="el" href="_t_t_e_a_p_i_test_application_8cc_source.html#l00021">testCallback()</a>, and <a class="el" href="_t_t_incoming_8cc_source.html#l00021">TTEthernetModel::TTIncoming::TTIncoming()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00027">TTEthernetModel::TTEAPIApplicationBase::handleMessage()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00021">TTEthernetModel::RCBuffer::RCBuffer()</a>, <a class="el" href="_t_t_e_a_p_i_test_application_8cc_source.html#l00021">testCallback()</a>, and <a class="el" href="_t_t_incoming_8cc_source.html#l00021">TTEthernetModel::TTIncoming::TTIncoming()</a>.</p>
 
 </div>
 </div>
@@ -1730,7 +1730,7 @@
 </div>
 </div>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

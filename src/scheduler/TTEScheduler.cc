@@ -15,8 +15,6 @@
 
 #include "TTEScheduler.h"
 
-#include <configuration/ConfigurationUtils.h>
-
 #include <SchedulerMessage_m.h>
 #include <SchedulerMessageEvents_m.h>
 
@@ -31,32 +29,6 @@ void TTEScheduler::initialize()
 {
     currentDrift = registerSignal("currentDrift");
     newCycle = registerSignal("newCycle");
-
-    ConfigurationUtils::getPreloadedMMR();
-    ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
-    ConfigurationUtils::resolveCommonAliases(mr);
-    ::ecore::EObject_ptr eobj = mr->getByFilename(getParentModule()->par("network_configuration"));
-    assert(eobj);
-    NetworkConfig_ptr nc = ::ecore::instanceOf<NetworkConfig>(eobj);
-    assert(nc);
-    DeviceSpecification_ptr ds = ConfigurationUtils::getDeviceSpecification(
-            getParentModule()->par("device_name").stdstringValue(), nc);
-    assert(ds);
-
-    //TODO cycle time auslesen
-
-
-    if (ds->eClass()->getName() == "Switch")
-    {
-        TargetDevice_ptr td = ds->as<Switch> ()->getRefDeviceMapping()->getRefTargetDevice();
-        if (td->eClass()->getName() == ("TTTechIpTargetDevice"))
-        {
-            TTTechIpTargetDevice_ptr iptd = td->as<TTTechIpTargetDevice> ();
-            par("tick").setDoubleValue(ConfigurationUtils::freq2s(iptd->getClockSpeed()));
-            par("current_tick").setDoubleValue(par("tick").doubleValue());
-            //TODO Infomessage of parameter change
-        }
-    }
 
     //Start Timer
     scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
@@ -172,7 +144,6 @@ void TTEScheduler::correctEvents(){
                                             actionTimeEvent);
                 }
             }
-            assert(actionTimeEvent->isScheduled());
         }
     }
 }

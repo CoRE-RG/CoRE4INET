@@ -11,25 +11,25 @@ Contains a configurable best-effort implementation (beRelayUnitType like IMACRel
 <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The switch is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
-The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> that deletes itself at runtime.</p>
-<p><b>See also:</b> IMacRelayUnit, <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a>, <a href="ttethernet.synchronisation.Sync.html">Sync</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>, <a href="ttethernet.buffer.BufferManager.html">BufferManager</a></p>
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
+<p><b>See also:</b> IMacRelayUnit, <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a>, <a href="ttethernet.synchronisation.Sync.html">Sync</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>, BufferManager</p>
 <p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.nodes.ethernet.TTEEtherSwitch-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="IMACRelayUnit" alt="IMACRelayUnit" coords="114,276,172,337">
 <area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="181,278,293,334">
 <area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Sync" alt="Sync" coords="123,189,167,250">
-<area shape="rect" href="ttethernet.buffer.BufferManager.html" title="BufferManager" alt="BufferManager" coords="954,1019,1049,1080">
+<area shape="rect" href="ttethernet.configuration.ConfigurationManager.html" title="ConfigurationManager" alt="ConfigurationManager" coords="930,1019,1072,1080">
 <area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="TTEScheduler" alt="TTEScheduler" coords="196,189,278,250">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="245,5,360,32">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="5,80,115,107">
-<area shape="rect" href="ttethernet.buffer.BufferManager.html" title="Simple Module BufferManager" alt="" coords="139,80,243,107">
-<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="267,80,339,107">
-<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="363,80,464,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="488,80,584,107">
+<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="303,5,417,32">
+<area shape="rect" href="ttethernet.configuration.ConfigurationManager.html" title="Simple Module ConfigurationManager" alt="" coords="5,80,152,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="176,80,285,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="309,80,411,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="435,80,531,107">
+<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="555,80,627,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -236,7 +236,7 @@ additional frames are dropped. Only used if queueModule==""</p>
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,169&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// Buffer manager that creates the buffers according to the configuration
-</span><span style="color: #000000; ">        </span><span style="color: #000000; ">bufferManager</span><span style="color: #000000; ">: </span><span style="color: #000000; ">BufferManager</span><span style="color: #000000; "> {
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; ">: </span><span style="color: #000000; ">ConfigurationManager</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=999,999&quot;</span><span style="color: #000000; ">);
         }

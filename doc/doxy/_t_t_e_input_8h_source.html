@@ -59,32 +59,32 @@
 <a name="l00027"></a>00027 
 <a name="l00028"></a>00028 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00029"></a>00029 
-<a name="l00039"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html">00039</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html" title="Represents the part of a port that receives messages (RX).">TTEInput</a> : <span class="keyword">public</span> cSimpleModule
-<a name="l00040"></a>00040 {
-<a name="l00041"></a>00041     <span class="keyword">private</span>:
-<a name="l00045"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1">00045</a>         std::map&lt;uint16, std::list&lt;Incoming*&gt; &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>;
-<a name="l00046"></a>00046 
-<a name="l00050"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b">00050</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a8914bb449830a3e16efb722ac317497b" title="Configured critical traffic marker for the device.">ct_marker</a>;
-<a name="l00051"></a>00051 
-<a name="l00055"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57">00055</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a68dfe4bfa0f54522c2eee9edfd651f57" title="Configured critical traffic mask for the device.">ct_mask</a>;
-<a name="l00056"></a>00056     <span class="keyword">protected</span>:
-<a name="l00062"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">00062</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>;
-<a name="l00063"></a>00063     <span class="keyword">public</span>:
-<a name="l00070"></a>00070         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f" title="Adds an incoming module to the list.">addIncoming</a>(uint16 ctID, <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a> *incoming);
-<a name="l00071"></a>00071     <span class="keyword">protected</span>:
-<a name="l00075"></a>00075         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a662ebf14464f337aa3a5a21ee2c8451c" title="Initialization of the module.">initialize</a>();
-<a name="l00076"></a>00076 
-<a name="l00086"></a>00086         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f" title="Forwards frames to the appropriate incoming modules.">handleMessage</a>(cMessage *msg);
-<a name="l00087"></a>00087     <span class="keyword">private</span>:
-<a name="l00094"></a>00094         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT</a>(EtherFrame *frame);
-<a name="l00095"></a>00095 
-<a name="l00107"></a>00107         <span class="keyword">virtual</span> uint16 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b" title="Returns the critical traffic id for a given frame.">getCTID</a>(EtherFrame *frame);
-<a name="l00108"></a>00108 };
-<a name="l00109"></a>00109 }
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111 <span class="preprocessor">#endif</span>
+<a name="l00037"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html">00037</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html" title="Represents the part of a port that receives messages (RX).">TTEInput</a> : <span class="keyword">public</span> cSimpleModule
+<a name="l00038"></a>00038 {
+<a name="l00039"></a>00039     <span class="keyword">private</span>:
+<a name="l00043"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1">00043</a>         std::map&lt;uint16, std::list&lt;Incoming*&gt; &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>;
+<a name="l00044"></a>00044 
+<a name="l00048"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ab3f3b7b560ea62d08a7593baecf021d4">00048</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ab3f3b7b560ea62d08a7593baecf021d4" title="caches ct_mask parameter">ctMask</a>;
+<a name="l00052"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#abb510124a4bc0754ec37fcd3f8a73ee6">00052</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#abb510124a4bc0754ec37fcd3f8a73ee6" title="caches ct_marker parameter">ctMarker</a>;
+<a name="l00053"></a>00053     <span class="keyword">protected</span>:
+<a name="l00059"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">00059</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>;
+<a name="l00060"></a>00060     <span class="keyword">public</span>:
+<a name="l00067"></a>00067         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f" title="Adds an incoming module to the list.">addIncoming</a>(uint16 ctID, <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a> *incoming);
+<a name="l00068"></a>00068     <span class="keyword">protected</span>:
+<a name="l00072"></a>00072         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a662ebf14464f337aa3a5a21ee2c8451c" title="Initialization of the module.">initialize</a>();
+<a name="l00073"></a>00073 
+<a name="l00083"></a>00083         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f" title="Forwards frames to the appropriate incoming modules.">handleMessage</a>(cMessage *msg);
+<a name="l00089"></a>00089         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3c9f4c8b21c9f67fe94f1f47d4f116aa" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);
+<a name="l00090"></a>00090     <span class="keyword">private</span>:
+<a name="l00097"></a>00097         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT</a>(EtherFrame *frame);
+<a name="l00098"></a>00098 
+<a name="l00110"></a>00110         <span class="keyword">virtual</span> uint16 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b" title="Returns the critical traffic id for a given frame.">getCTID</a>(EtherFrame *frame);
+<a name="l00111"></a>00111 };
+<a name="l00112"></a>00112 }
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -62,7 +62,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td></td>
    <td>
-<p>Bandwidth allocation gap in number of ticks</p>
+<p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
 </tr>
 <tr class="local">
@@ -119,6 +119,25 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 </td>
 </tr>
 </table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>ctDropped</td>
+   <td>CT violation</td>
+   <td></td>
+   <td>sum</td>
+   <td></td>
+   <td></td>
+</tr>
+</table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
 // Module for the conformance checks of incoming rate-constrained traffic.
@@ -135,7 +154,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//RCIncoming is implemented by the RCIncoming C++ Class
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCIncoming</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">// Bandwidth allocation gap in number of ticks
+        </span><span style="color: #808080; font-style: italic; ">// Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bag</span><span style="color: #000000; ">;
         </span><span style="color: #808080; font-style: italic; ">//Not used
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">jitter</span><span style="color: #000000; ">;

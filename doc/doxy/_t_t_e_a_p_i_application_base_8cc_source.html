@@ -80,7 +80,7 @@
 <a name="l00048"></a>00048         task-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_task.html#a6528388c6375cb74a0e9463702573689" title="execution of the task.">executeTask</a>();
 <a name="l00049"></a>00049         <span class="comment">//Reregister scheduler</span>
 <a name="l00050"></a>00050         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00051"></a>00051         tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b" title="Register a new event in the scheduler.">registerEvent</a>((<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *) msg);
+<a name="l00051"></a>00051         tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>((<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *) msg);
 <a name="l00052"></a>00052     }
 <a name="l00053"></a>00053 }
 <a name="l00054"></a>00054 
@@ -102,7 +102,7 @@
 <a name="l00070"></a>00070 
 <a name="l00071"></a>00071     <span class="keyword">event</span>-&gt;setAction_time(actionTime);
 <a name="l00072"></a>00072     <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
-<a name="l00073"></a>00073     tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b" title="Register a new event in the scheduler.">registerEvent</a>(event);
+<a name="l00073"></a>00073     tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(event);
 <a name="l00074"></a>00074 }
 <a name="l00075"></a>00075 
 <a name="l00076"></a>00076 int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a004aa5acb4b8bf25cdcb8dfa29b35569" title="implementation of the TTEthernet-API method.">TTEAPIApplicationBase::tte_get_ct_output_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
@@ -686,7 +686,7 @@
 <a name="l00654"></a>00654 
 <a name="l00655"></a>00655 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

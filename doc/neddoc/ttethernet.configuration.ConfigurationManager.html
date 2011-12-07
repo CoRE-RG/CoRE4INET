@@ -4,31 +4,31 @@
       <link rel="stylesheet" type="text/css" href="style.css" />
    </head>
    <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
-<h2 class="comptitle">Simple Module <i>BufferManager</i></h2>
-<b>Package:</b> ttethernet.buffer<br/><b>File: <a href="src-buffer-BufferManager.ned.html">src/buffer/BufferManager.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_buffer_manager.html" target="mainframe"><b>C++ definition</b></a></p>
+<h2 class="comptitle">Simple Module <i>ConfigurationManager</i></h2>
+<b>Package:</b> ttethernet.configuration<br/><b>File: <a href="src-configuration-ConfigurationManager.ned.html">src/configuration/ConfigurationManager.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_configuration_manager.html" target="mainframe"><b>C++ definition</b></a></p>
 
-<p>The <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> is responsible for the configuration of a Node (Host or Switch).
+<p>The BufferManager is responsible for the configuration of a Node (Host or Switch).
 It creates the necessary <a href="ttethernet.buffer.Buffer.html">Buffer</a> and <a href="ttethernet.ctc.Incoming.html">Incoming</a> modules and connects them.</p>
-<p>The <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> uses a TTEthernet network configuration (XML-Format) specified in
+<p>The BufferManager uses a TTEthernet network configuration (XML-Format) specified in
 the network_configuration parameter of its parent device and the parent devices device_name</p>
-<p><b>WARNING:</b> The <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> requires a certain structure of modules, thus it is
+<p><b>WARNING:</b> The BufferManager requires a certain structure of modules, thus it is
 currently only applicable for the <a href="ttethernet.nodes.ethernet.TTEEtherHost.html">TTEEtherHost</a> and <a href="ttethernet.nodes.ethernet.TTEEtherSwitch.html">TTEEtherSwitch</a></p>
 <p><b>See also:</b> <a href="ttethernet.nodes.ethernet.TTEEtherHost.html">TTEEtherHost</a>, <a href="ttethernet.nodes.ethernet.TTEEtherSwitch.html">TTEEtherSwitch</a></p>
 <p><b>Author:</b> Till Steinbach</p>
-<img src="ttethernet.buffer.BufferManager-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.buffer.BufferManager.html" title="BufferManager" alt="BufferManager" coords="0,31,140,71">
+<img src="ttethernet.configuration.ConfigurationManager-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.configuration.ConfigurationManager.html" title="ConfigurationManager" alt="ConfigurationManager" coords="0,31,188,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.BufferManager-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.BufferManager.html" title="Simple Module BufferManager" alt="" coords="69,80,173,107">
+<img src="ttethernet.configuration.ConfigurationManager-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.configuration.ConfigurationManager.html" title="Simple Module ConfigurationManager" alt="" coords="48,80,195,107">
 <area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="5,5,107,32">
 <area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="131,5,245,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.BufferManager-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.BufferManager.html" title="Simple Module BufferManager" alt="" coords="5,5,109,32">
+<img src="ttethernet.configuration.ConfigurationManager-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.configuration.ConfigurationManager.html" title="Simple Module ConfigurationManager" alt="" coords="5,5,152,32">
 </map>
 <h3 class="subtitle">Used in compound modules:</h3>
 <table class="typestable">
@@ -51,7 +51,7 @@ Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTE
 sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The Host is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
-The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> that deletes itself at runtime.</p>
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
 
    </td>
 </tr>
@@ -69,7 +69,7 @@ Contains a configurable best-effort implementation (beRelayUnitType like IMACRel
 <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The switch is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
-The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> that deletes itself at runtime.</p>
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
 
    </td>
 </tr>
@@ -86,7 +86,7 @@ The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">
 //
 // </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTEEtherHost, TTEEtherSwitch
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
-</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">BufferManager</span><span style="color: #000000; ">
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">ConfigurationManager</span><span style="color: #000000; ">
 {
 }
 </span></pre>

@@ -42,7 +42,8 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
  <div class="center">
   <img src="class_t_t_ethernet_model_1_1_incoming.png" usemap="#TTEthernetModel::Incoming_map" alt=""/>
   <map id="TTEthernetModel::Incoming_map" name="TTEthernetModel::Incoming_map">
-<area href="class_t_t_ethernet_model_1_1_t_t_incoming.html" alt="TTEthernetModel::TTIncoming" shape="rect" coords="0,56,178,80"/>
+<area href="class_t_t_ethernet_model_1_1_r_c_incoming.html" alt="TTEthernetModel::RCIncoming" shape="rect" coords="0,56,181,80"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_incoming.html" alt="TTEthernetModel::TTIncoming" shape="rect" coords="191,56,372,80"/>
 </map>
  </div>
 </div>
@@ -50,8 +51,13 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 <p><a href="class_t_t_ethernet_model_1_1_incoming-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">initialize</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialization of the module.  <a href="#addb7e0a67350ee855fd2ee12229f5a1a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">handleMessage</a> (cMessage *msg)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards messages arriving on in-gate to out-gate.  <a href="#a5ac75f71601c607f38b7a96525b5b8e7"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Static Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static simsignal_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5">ctDroppedSignal</a> = SIMSIGNAL_NULL</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Signal that is emitted when a frame is dropped.  <a href="#a7943b1436f1d363536ac89bfbd12d3c5"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Base class for the critical traffic conformance check. </p>
@@ -84,15 +90,61 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a957fe196b6e0e5fd38c6bf3af879e14b">TTEthernetModel::TTIncoming</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">TTEthernetModel::RCIncoming</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a957fe196b6e0e5fd38c6bf3af879e14b">TTEthernetModel::TTIncoming</a>.</p>
 
-<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00021">21</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
+<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00028">28</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00023"></a>00023 {
-<a name="l00024"></a>00024     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00025"></a>00025         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00026"></a>00026     }
+<p><div class="fragment"><pre class="fragment"><a name="l00030"></a>00030 {
+<a name="l00031"></a>00031     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
+<a name="l00032"></a>00032         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00033"></a>00033     }
 </pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="addb7e0a67350ee855fd2ee12229f5a1a"></a><!-- doxytag: member="TTEthernetModel::Incoming::initialize" ref="addb7e0a67350ee855fd2ee12229f5a1a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TTEthernetModel::Incoming::initialize </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Initialization of the module. </p>
+
+<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00023">23</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00025"></a>00025 {
+<a name="l00026"></a>00026     <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
+</pre></div></p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a7943b1436f1d363536ac89bfbd12d3c5"></a><!-- doxytag: member="TTEthernetModel::Incoming::ctDroppedSignal" ref="a7943b1436f1d363536ac89bfbd12d3c5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">simsignal_t <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5">TTEthernetModel::Incoming::ctDroppedSignal</a> = SIMSIGNAL_NULL<code> [static, protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Signal that is emitted when a frame is dropped. </p>
+<p>Frames may be dropped when there was a violation of CT rules. </p>
+
+<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00038">38</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
+
+<p>Referenced by <a class="el" href="_incoming_8cc_source.html#l00023">initialize()</a>.</p>
 
 </div>
 </div>
@@ -101,7 +153,7 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 <li><a class="el" href="_incoming_8cc_source.html">Incoming.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:07 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

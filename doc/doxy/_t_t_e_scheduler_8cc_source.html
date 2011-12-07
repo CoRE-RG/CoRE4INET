@@ -47,115 +47,175 @@
 <a name="l00015"></a>00015 
 <a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="_t_t_e_scheduler_8h.html">TTEScheduler.h</a>&quot;</span>
 <a name="l00017"></a>00017 
-<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;<a class="code" href="_configuration_utils_8h.html">configuration/ConfigurationUtils.h</a>&gt;</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="preprocessor">#include &lt;<a class="code" href="_scheduler_message__m_8h.html">SchedulerMessage_m.h</a>&gt;</span>
-<a name="l00021"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e">00021</a> <span class="preprocessor">#include &lt;<a class="code" href="_scheduler_message_events__m_8h.html">SchedulerMessageEvents_m.h</a>&gt;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;<a class="code" href="_scheduler_message__m_8h.html">SchedulerMessage_m.h</a>&gt;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;<a class="code" href="_scheduler_message_events__m_8h.html">SchedulerMessageEvents_m.h</a>&gt;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">namespace </span>TTEthernetModel {
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>);
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e" title="Initialization of the module.">TTEScheduler::initialize</a>()
-<a name="l00028"></a>00028 {
-<a name="l00029"></a>00029     <a class="code" href="class_configuration_utils.html#a8fa52683fd3c3332718ada090f646cbe" title="Loads the complete Model in the MetaModelRepository.">ConfigurationUtils::getPreloadedMMR</a>();
-<a name="l00030"></a>00030     ecorecpp::ModelRepository_ptr mr = ecorecpp::ModelRepository::_instance();
-<a name="l00031"></a>00031     <a class="code" href="class_configuration_utils.html#a322b24ea573499ae087fa3b872c46c22" title="Resolves links to Eclipse paths that can&amp;#39;t be found.">ConfigurationUtils::resolveCommonAliases</a>(mr);
-<a name="l00032"></a>00032     ::ecore::EObject_ptr eobj = mr-&gt;getByFilename(getParentModule()-&gt;par(<span class="stringliteral">&quot;network_configuration&quot;</span>));
-<a name="l00033"></a>00033     assert(eobj);
-<a name="l00034"></a>00034     NetworkConfig_ptr nc = ::ecore::instanceOf&lt;NetworkConfig&gt;(eobj);
-<a name="l00035"></a>00035     assert(nc);
-<a name="l00036"></a>00036     DeviceSpecification_ptr ds = <a class="code" href="class_configuration_utils.html#a2683d78cb18f8b928a13d62f3f33a80e" title="Finds a DeviceSpecification from NetworkConfiguration by device name.">ConfigurationUtils::getDeviceSpecification</a>(
-<a name="l00037"></a>00037             getParentModule()-&gt;par(<span class="stringliteral">&quot;device_name&quot;</span>).stdstringValue(), nc);
-<a name="l00038"></a>00038     assert(ds);
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040     <span class="comment">//TODO cycle time auslesen</span>
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043     <span class="keywordflow">if</span> (ds-&gt;eClass()-&gt;getName() == <span class="stringliteral">&quot;Switch&quot;</span>)
-<a name="l00044"></a>00044     {
-<a name="l00045"></a>00045         TargetDevice_ptr td = ds-&gt;as&lt;Switch&gt; ()-&gt;getRefDeviceMapping()-&gt;getRefTargetDevice();
-<a name="l00046"></a>00046         <span class="keywordflow">if</span> (td-&gt;eClass()-&gt;getName() == (<span class="stringliteral">&quot;TTTechIpTargetDevice&quot;</span>))
-<a name="l00047"></a>00047         {
-<a name="l00048"></a>00048             TTTechIpTargetDevice_ptr iptd = td-&gt;as&lt;TTTechIpTargetDevice&gt; ();
-<a name="l00049"></a>00049             par(<span class="stringliteral">&quot;tick&quot;</span>).setDoubleValue(<a class="code" href="class_configuration_utils.html#a55312972db83f146ec5aa9bc44941af9" title="Converts frequency from string to double.">ConfigurationUtils::freq2s</a>(iptd-&gt;getClockSpeed()));
-<a name="l00050"></a>00050             <span class="comment">//TODO Infomessage of parameter change</span>
-<a name="l00051"></a>00051         }
-<a name="l00052"></a>00052     }
-<a name="l00053"></a>00053 
-<a name="l00054"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b">00054</a>     <span class="comment">//Start Timer</span>
-<a name="l00055"></a>00055     scheduleAt(simTime(), <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a>(<span class="stringliteral">&quot;NEW_CYCLE&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a>));
+<a name="l00023"></a>00023 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( TTEScheduler);
+<a name="l00024"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e">00024</a> 
+<a name="l00025"></a>00025 simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual...">TTEScheduler::currentDrift</a> = SIMSIGNAL_NULL;
+<a name="l00026"></a>00026 simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfe085a06ee865037999c12e5c3a2e58" title="Signal that is emitted at the beginning of a new cycle.">TTEScheduler::newCycle</a> = SIMSIGNAL_NULL;
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e" title="Initialization of the module.">TTEScheduler::initialize</a>()
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual...">currentDrift</a> = registerSignal(<span class="stringliteral">&quot;currentDrift&quot;</span>);
+<a name="l00031"></a>00031     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfe085a06ee865037999c12e5c3a2e58" title="Signal that is emitted at the beginning of a new cycle.">newCycle</a> = registerSignal(<span class="stringliteral">&quot;newCycle&quot;</span>);
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033     <span class="comment">//Start Timer</span>
+<a name="l00034"></a>00034     scheduleAt(simTime(), <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a>(<span class="stringliteral">&quot;NEW_CYCLE&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a>));
+<a name="l00035"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865">00035</a> 
+<a name="l00036"></a>00036     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> = simTime();
+<a name="l00037"></a>00037 }
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">TTEScheduler::registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *event)
+<a name="l00040"></a>00040 {
+<a name="l00041"></a>00041 <span class="preprocessor">#ifdef DEBUG</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span>    Enter_Method(<span class="stringliteral">&quot;registerEvent(SchedulerEvent %s)&quot;</span>,event-&gt;getName());
+<a name="l00043"></a>00043 <span class="preprocessor">#else</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span>    Enter_Method_Silent();
+<a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span>    take(event);
+<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0791fe14690ef7e7d8522bd327b131a4" title="List of registered SchedulerEvents.">registredEvents</a>.push_back(event);
+<a name="l00048"></a>00048     <span class="keywordflow">if</span> (event-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)
+<a name="l00049"></a>00049     {
+<a name="l00050"></a>00050         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *actionTimeEvent = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>*) event;
+<a name="l00051"></a>00051         <span class="comment">//Check whether event is in cycle</span>
+<a name="l00052"></a>00052         <span class="keywordflow">if</span>(actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>()&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>){
+<a name="l00053"></a>00053             bubble(<span class="stringliteral">&quot;Schedule contains out of cycle events!&quot;</span>);
+<a name="l00054"></a>00054             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00055"></a>00055         }
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> = simTime();
-<a name="l00058"></a>00058 }
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aa4e1f9bf81886dfda80190f6f722936b" title="Register a new event in the scheduler.">TTEScheduler::registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *event)
-<a name="l00061"></a>00061 {
-<a name="l00062"></a>00062 <span class="preprocessor">#ifdef DEBUG</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span>    Enter_Method(<span class="stringliteral">&quot;registerEvent(SchedulerEvent %s)&quot;</span>,event-&gt;getName());
-<a name="l00064"></a>00064 <span class="preprocessor">#else</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span>    Enter_Method_Silent();
-<a name="l00066"></a>00066 <span class="preprocessor">#endif</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>    take(event);
-<a name="l00068"></a>00068     <span class="keywordflow">if</span> (event-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)
-<a name="l00069"></a>00069     {
-<a name="l00070"></a>00070         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *actionTimeEvent = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>*) event;
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072         <span class="keywordflow">if</span> (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>())
-<a name="l00073"></a>00073         {
-<a name="l00074"></a>00074             scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>()),
-<a name="l00075"></a>00075                     actionTimeEvent);
-<a name="l00076"></a>00076         }
-<a name="l00077"></a>00077         <span class="keywordflow">else</span>
-<a name="l00078"></a>00078         {
-<a name="l00079"></a>00079             scheduleAt(
-<a name="l00080"></a>00080                     simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(
-<a name="l00081"></a>00081                             par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() + par(
-<a name="l00082"></a>00082                                     <span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue())), actionTimeEvent);
-<a name="l00083"></a>00083         }
-<a name="l00084"></a>00084     }
-<a name="l00085"></a>00085     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>)
-<a name="l00086"></a>00086     {
-<a name="l00087"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e">00087</a>         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> *timerEvent = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a>*) event;
-<a name="l00088"></a>00088         ;
-<a name="l00089"></a>00089         scheduleAt(simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * timerEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#ae9e464cecbed854f2c1b65f4677fda0c">getTimer</a>()), event);
-<a name="l00090"></a>00090     }
-<a name="l00091"></a>00091 }
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e" title="Handles all scheduler messages.">TTEScheduler::handleMessage</a>(cMessage *msg)
-<a name="l00094"></a>00094 {
-<a name="l00095"></a>00095     <span class="keywordflow">if</span> (msg-&gt;isSelfMessage() &amp;&amp; (msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a> || msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>))
-<a name="l00096"></a>00096     {
-<a name="l00097"></a>00097         SchedulerEvent *<span class="keyword">event</span> = (SchedulerEvent*) msg;
-<a name="l00098"></a>00098         sendDirect(event, event-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a597c63bcc7eebb347b6e143a7b847e38">getDestinationGate</a>());
-<a name="l00099"></a>00099     }
-<a name="l00100"></a>00100     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;isSelfMessage() &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a>)
-<a name="l00101"></a>00101     {
-<a name="l00102"></a>00102         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> = simTime();
-<a name="l00103"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">00103</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c" title="Number of ticks since the simulation started when the last cycle started.">lastCycleTicks</a> += par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
-<a name="l00104"></a>00104         scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue() * par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue()), msg);
-<a name="l00105"></a>00105         <span class="comment">//now the precision can be changed (TBD)</span>
-<a name="l00106"></a>00106     }
-<a name="l00107"></a>00107 }
-<a name="l00108"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">00108</a> 
-<a name="l00109"></a>00109 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">TTEScheduler::getTicks</a>()
-<a name="l00110"></a>00110 {
-<a name="l00111"></a>00111     <span class="keywordflow">return</span> round((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">precision</a>(simTime() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>) / par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue()).dbl());
-<a name="l00112"></a>00112 }
-<a name="l00113"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0">00113</a> 
-<a name="l00114"></a>00114 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f" title="Returns the absolute number of ticks.">TTEScheduler::getTotalTicks</a>()
-<a name="l00115"></a>00115 {
-<a name="l00116"></a>00116     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c" title="Number of ticks since the simulation started when the last cycle started.">lastCycleTicks</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>();
-<a name="l00117"></a>00117 }
-<a name="l00118"></a>00118 
-<a name="l00119"></a>00119 SimTime <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad367a45a23c0783dd9e8b1fd5fd91ed0" title="makes a simulation time unprecise">TTEScheduler::precision</a>(SimTime logical)
-<a name="l00120"></a>00120 {
-<a name="l00121"></a>00121     <span class="keywordflow">return</span> logical * 1.000000;
-<a name="l00122"></a>00122 }
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124 } <span class="comment">//namespace</span>
+<a name="l00057"></a>00057         <span class="keywordflow">if</span> (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>())
+<a name="l00058"></a>00058         {
+<a name="l00059"></a>00059             scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a> * actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>(),
+<a name="l00060"></a>00060                     actionTimeEvent);
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062         <span class="keywordflow">else</span>
+<a name="l00063"></a>00063         {
+<a name="l00064"></a>00064             scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>
+<a name="l00065"></a>00065                     + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>
+<a name="l00066"></a>00066                     * (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>),
+<a name="l00067"></a>00067                     actionTimeEvent);
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069         }
+<a name="l00070"></a>00070     }
+<a name="l00071"></a>00071     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>)
+<a name="l00072"></a>00072     {
+<a name="l00073"></a>00073         SchedulerTimerEvent *timerEvent = (SchedulerTimerEvent*) event;
+<a name="l00074"></a>00074         scheduleAt(simTime() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a> * timerEvent-&gt;getTimer(), event);
+<a name="l00075"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e">00075</a>     }
+<a name="l00076"></a>00076     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00077"></a>00077 }
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e" title="Handles all scheduler messages.">TTEScheduler::handleMessage</a>(cMessage *msg)
+<a name="l00080"></a>00080 {
+<a name="l00081"></a>00081     <span class="keywordflow">if</span> (msg-&gt;isSelfMessage() &amp;&amp; (msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a> || msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>))
+<a name="l00082"></a>00082     {
+<a name="l00083"></a>00083         SchedulerEvent *<span class="keyword">event</span> = (SchedulerEvent*) msg;
+<a name="l00084"></a>00084         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0791fe14690ef7e7d8522bd327b131a4" title="List of registered SchedulerEvents.">registredEvents</a>.remove(event);
+<a name="l00085"></a>00085         sendDirect(event, event-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a597c63bcc7eebb347b6e143a7b847e38">getDestinationGate</a>());
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;isSelfMessage() &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a2859c30aff3d9e94ebba06a6bac34622">NEW_CYCLE</a>)
+<a name="l00088"></a>00088     {
+<a name="l00089"></a>00089         <span class="comment">//First the precision is changed for the next cycle</span>
+<a name="l00090"></a>00090         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de" title="Helper function to change the drift.">changeDrift</a>();
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092         emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfe085a06ee865037999c12e5c3a2e58" title="Signal that is emitted at the beginning of a new cycle.">newCycle</a>, 1L);
+<a name="l00093"></a>00093         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> = simTime();
+<a name="l00094"></a>00094         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c" title="Number of ticks since the simulation started when the last cycle started.">lastCycleTicks</a> += <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>;
+<a name="l00095"></a>00095         scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a> * <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>, msg);
+<a name="l00096"></a>00096         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a2888779973a53b90f45b75572e9a4ff4">newCyclemsg</a> = msg;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099         <span class="comment">//TODO This must be done in sync module</span>
+<a name="l00100"></a>00100         <span class="keywordtype">int</span> modticks = (int)(simTime().dbl()/<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>)%<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>;
+<a name="l00101"></a>00101         <span class="keywordflow">if</span>(modticks&gt;(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>/2))
+<a name="l00102"></a>00102             modticks=modticks-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>;
+<a name="l00103"></a>00103         modticks+=uniform(-0.000002,0.000002)/<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>;
+<a name="l00104"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de">00104</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8" title="Corrects the clock by the number of ticks.">clockCorrection</a>(-modticks);
+<a name="l00105"></a>00105     }
+<a name="l00106"></a>00106 }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de" title="Helper function to change the drift.">TTEScheduler::changeDrift</a>(){
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110     <span class="keywordtype">double</span> newDriftChange = uniform(-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac239147d43b2e9cbaf2cfcc4217a5b01" title="caches max_drift_change parameter">maxDriftChange</a>,<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac239147d43b2e9cbaf2cfcc4217a5b01" title="caches max_drift_change parameter">maxDriftChange</a>);
+<a name="l00111"></a>00111     <span class="keywordtype">double</span> newTick = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>+newDriftChange;
+<a name="l00112"></a>00112     <span class="keywordflow">if</span>((newTick-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>)&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a4fa276eb9d8cf9cf50a31d366a135cc8" title="caches max_drift parameter">maxDrift</a>)
+<a name="l00113"></a>00113         par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>+<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a4fa276eb9d8cf9cf50a31d366a135cc8" title="caches max_drift parameter">maxDrift</a>);
+<a name="l00114"></a>00114     <span class="keywordflow">else</span> <span class="keywordflow">if</span>((newTick-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>)&lt;-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a4fa276eb9d8cf9cf50a31d366a135cc8" title="caches max_drift parameter">maxDrift</a>)
+<a name="l00115"></a>00115         par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a4fa276eb9d8cf9cf50a31d366a135cc8" title="caches max_drift parameter">maxDrift</a>);
+<a name="l00116"></a>00116     <span class="keywordflow">else</span>
+<a name="l00117"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1d44b1afcda7d7fda8dbe9974ca50d59">00117</a>         par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue(newTick);
+<a name="l00118"></a>00118     emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual...">currentDrift</a>, par(<span class="stringliteral">&quot;current_tick&quot;</span>).doubleValue()-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>);
+<a name="l00119"></a>00119 }
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1d44b1afcda7d7fda8dbe9974ca50d59" title="Helper function to correct Events after tick length changes.">TTEScheduler::correctEvents</a>(){
+<a name="l00122"></a>00122     <span class="keywordflow">for</span>(std::list&lt;SchedulerEvent*&gt;::const_iterator registredEvent = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0791fe14690ef7e7d8522bd327b131a4" title="List of registered SchedulerEvents.">registredEvents</a>.begin(); registredEvent != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0791fe14690ef7e7d8522bd327b131a4" title="List of registered SchedulerEvents.">registredEvents</a>.end(); registredEvent++){
+<a name="l00123"></a>00123         <span class="keywordflow">if</span>((*registredEvent)-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>){
+<a name="l00124"></a>00124             <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *actionTimeEvent = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>*)*registredEvent;
+<a name="l00125"></a>00125             cancelEvent(actionTimeEvent);
+<a name="l00126"></a>00126             <span class="comment">//TODO alles mögliche ;)</span>
+<a name="l00127"></a>00127             <span class="keywordflow">if</span> (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>())
+<a name="l00128"></a>00128             {
+<a name="l00129"></a>00129                 scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a> * actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>(),
+<a name="l00130"></a>00130                         actionTimeEvent);
+<a name="l00131"></a>00131             }
+<a name="l00132"></a>00132             <span class="keywordflow">else</span>
+<a name="l00133"></a>00133             {
+<a name="l00134"></a>00134                 <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>&gt;simTime()){
+<a name="l00135"></a>00135                     scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>
+<a name="l00136"></a>00136                                             + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>
+<a name="l00137"></a>00137                                             * (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>()),
+<a name="l00138"></a>00138                                             actionTimeEvent);
+<a name="l00139"></a>00139                 }
+<a name="l00140"></a>00140                 <span class="keywordflow">else</span>{
+<a name="l00141"></a>00141                     scheduleAt(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>
+<a name="l00142"></a>00142                                             + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>
+<a name="l00143"></a>00143                                             * (actionTimeEvent-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ab720f567c5f8d6548ffe981987aa48e0">getAction_time</a>() + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>),
+<a name="l00144"></a>00144                                             actionTimeEvent);
+<a name="l00145"></a>00145                 }
+<a name="l00146"></a>00146             }
+<a name="l00147"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ae3cee7dfc4267e06777e68d24676a199">00147</a>         }
+<a name="l00148"></a>00148     }
+<a name="l00149"></a>00149 }
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ae3cee7dfc4267e06777e68d24676a199" title="Indicates a parameter has changed.">TTEScheduler::handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname){
+<a name="l00152"></a>00152     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac239147d43b2e9cbaf2cfcc4217a5b01" title="caches max_drift_change parameter">maxDriftChange</a> = par(<span class="stringliteral">&quot;max_drift_change&quot;</span>).doubleValue();
+<a name="l00153"></a>00153     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a4fa276eb9d8cf9cf50a31d366a135cc8" title="caches max_drift parameter">maxDrift</a> = par(<span class="stringliteral">&quot;max_drift&quot;</span>).doubleValue();
+<a name="l00154"></a>00154     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a> = par(<span class="stringliteral">&quot;current_tick&quot;</span>).doubleValue();
+<a name="l00155"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8">00155</a>     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a> = par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue();
+<a name="l00156"></a>00156     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a> = par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
+<a name="l00157"></a>00157 }
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8" title="Corrects the clock by the number of ticks.">TTEScheduler::clockCorrection</a>(<span class="keywordtype">int</span> ticks){
+<a name="l00160"></a>00160     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>+=SimTime(ticks*<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>);
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162     <span class="comment">//Now correct the new cylce time</span>
+<a name="l00163"></a>00163     cancelEvent(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a2888779973a53b90f45b75572e9a4ff4">newCyclemsg</a>);
+<a name="l00164"></a>00164     scheduleAt(simTime()-(simTime()-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>) + currentTick * <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a2888779973a53b90f45b75572e9a4ff4">newCyclemsg</a>);
+<a name="l00165"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c">00165</a>     <span class="comment">//Now correct the events</span>
+<a name="l00166"></a>00166     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1d44b1afcda7d7fda8dbe9974ca50d59" title="Helper function to correct Events after tick length changes.">correctEvents</a>();
+<a name="l00167"></a>00167 }
+<a name="l00168"></a>00168 
+<a name="l00169"></a>00169 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">TTEScheduler::getTicks</a>()
+<a name="l00170"></a>00170 {
+<a name="l00171"></a>00171     <span class="keywordflow">if</span>(simTime() &gt;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>){
+<a name="l00172"></a>00172         <span class="keywordflow">return</span> round(((simTime() - <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>) / <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>).dbl());
+<a name="l00173"></a>00173     }
+<a name="l00174"></a>00174     <span class="keywordflow">else</span>{
+<a name="l00175"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f">00175</a>         <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a> - round(((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a> - simTime()) / <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>).dbl());
+<a name="l00176"></a>00176     }
+<a name="l00177"></a>00177 }
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179 <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f" title="Returns the absolute number of ticks.">TTEScheduler::getTotalTicks</a>()
+<a name="l00180"></a>00180 {
+<a name="l00181"></a>00181     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a15a5e21cf00de7823dfc65c7ff2d3d3c" title="Number of ticks since the simulation started when the last cycle started.">lastCycleTicks</a> + <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>();
+<a name="l00182"></a>00182 }
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

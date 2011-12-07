@@ -78,6 +78,22 @@ void ConfigurationManager::initialize(int stage)
             input->par("ct_mask").setLongValue(ct_mask);
         }
 
+        //Switch clockspeed
+        if (dc->eClass()->getName() == "Switch")
+        {
+            TargetDevice_ptr td = dc->as<Switch> ()->getRefDeviceMapping()->getRefTargetDevice();
+            if (td->eClass()->getName() == ("TTTechIpTargetDevice"))
+            {
+                TTTechIpTargetDevice_ptr iptd = td->as<TTTechIpTargetDevice> ();
+
+                cModule* scheduler = getParentModule()->getSubmodule("tteScheduler");
+
+                scheduler->par("tick").setDoubleValue(ConfigurationUtils::freq2s(iptd->getClockSpeed()));
+                scheduler->par("current_tick").setDoubleValue(scheduler->par("tick").doubleValue());
+                //TODO Infomessage of parameter change
+            }
+        }
+
 
         EList<VirtualLinkSchedule>& vlSchedulesList = dc->getVlSchedules()->getVlSchedule();
         for (unsigned int i = 0; i < vlSchedulesList.size(); i++)

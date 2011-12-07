@@ -1,12 +1,12 @@
-<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="609,5,711,32">
-<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="5,80,120,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="144,80,219,107">
-<area shape="rect" href="ttethernet.buffer.BufferManager.html" title="Simple Module BufferManager" alt="" coords="243,80,347,107">
-<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="371,80,483,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="507,80,600,107">
-<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="624,80,696,107">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="720,80,816,107">
-<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="840,80,952,107">
-<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="976,80,1077,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="1101,80,1192,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="1216,80,1312,107">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="641,5,743,32">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="5,80,117,107">
+<area shape="rect" href="ttethernet.configuration.ConfigurationManager.html" title="Simple Module ConfigurationManager" alt="" coords="141,80,288,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="312,80,387,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="411,80,512,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="536,80,632,107">
+<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="656,80,728,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="752,80,845,107">
+<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="869,80,984,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="1008,80,1104,107">
+<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="1128,80,1240,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="1264,80,1355,107">

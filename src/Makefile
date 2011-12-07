@@ -498,7 +498,6 @@ $O/linklayer/BGTrafficHandle.o: linklayer/BGTrafficHandle.cc \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h
 $O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
-	configuration/ConfigurationUtils.h \
 	ctc/Incoming.h \
 	linklayer/TTEInput.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
@@ -542,7 +541,6 @@ $O/scheduler/SchedulerMessageEvents_m.o: scheduler/SchedulerMessageEvents_m.cc \
 $O/scheduler/SchedulerMessage_m.o: scheduler/SchedulerMessage_m.cc \
 	scheduler/SchedulerMessage_m.h
 $O/scheduler/TTEScheduler.o: scheduler/TTEScheduler.cc \
-	configuration/ConfigurationUtils.h \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \

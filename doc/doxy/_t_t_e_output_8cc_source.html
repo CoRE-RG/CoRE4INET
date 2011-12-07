@@ -243,53 +243,54 @@
 <a name="l00211"></a>00211     <span class="comment">//Send Window Start is in next cycle</span>
 <a name="l00212"></a>00212     <span class="keywordflow">if</span> (scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() &gt; startTicks)
 <a name="l00213"></a>00213     {
-<a name="l00214"></a>00214         startTicks += scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
-<a name="l00215"></a>00215         endTicks += scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
-<a name="l00216"></a>00216     }
-<a name="l00217"></a>00217     <span class="comment">//Send Window End is in next cycle</span>
-<a name="l00218"></a>00218     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() &gt; endTicks)
-<a name="l00219"></a>00219     {
-<a name="l00220"></a>00220         endTicks += scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
-<a name="l00221"></a>00221     }
-<a name="l00222"></a>00222 
-<a name="l00223"></a>00223     <span class="comment">//TODO: Perhaps more complex calculations needed?</span>
-<a name="l00224"></a>00224     <span class="keywordflow">if</span> ((scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() + sendTicks) &gt;= startTicks)
-<a name="l00225"></a>00225     {
-<a name="l00226"></a>00226         ev &lt;&lt; <span class="stringliteral">&quot;transmission not allowed!&quot;</span> &lt;&lt; endl;
-<a name="l00227"></a>00227         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00228"></a>00228     }
-<a name="l00229"></a>00229     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00230"></a>00230 }
-<a name="l00231"></a>00231 
-<a name="l00232"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e">00232</a> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e" title="Returns number of requested messages.">TTEOutput::getNumPendingRequests</a>()
-<a name="l00233"></a>00233 {
-<a name="l00234"></a>00234     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a>;
-<a name="l00235"></a>00235 }
-<a name="l00236"></a>00236 
-<a name="l00237"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb">00237</a> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Returns true when there are no pending messages.">TTEOutput::isEmpty</a>()
-<a name="l00238"></a>00238 {
-<a name="l00239"></a>00239     <span class="keywordtype">bool</span> empty = <span class="keyword">true</span>;
-<a name="l00240"></a>00240     empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.isEmpty();
-<a name="l00241"></a>00241     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
-<a name="l00242"></a>00242     {
-<a name="l00243"></a>00243         empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].isEmpty();
-<a name="l00244"></a>00244     }
-<a name="l00245"></a>00245     empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.isEmpty();
-<a name="l00246"></a>00246     <span class="keywordflow">return</span> empty;
-<a name="l00247"></a>00247 }
-<a name="l00248"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0">00248</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0" title="Clears all queued packets and stored requests.">TTEOutput::clear</a>()
-<a name="l00249"></a>00249 {
-<a name="l00250"></a>00250     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();
-<a name="l00251"></a>00251     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
-<a name="l00252"></a>00252     {
-<a name="l00253"></a>00253         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();
-<a name="l00254"></a>00254     }
-<a name="l00255"></a>00255     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();
-<a name="l00256"></a>00256     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a> = 0;
-<a name="l00257"></a>00257 }
-<a name="l00258"></a>00258 
+<a name="l00214"></a>00214         <span class="keywordtype">long</span> cycleTicks = scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
+<a name="l00215"></a>00215         startTicks += cycleTicks;
+<a name="l00216"></a>00216         endTicks += cycleTicks;
+<a name="l00217"></a>00217     }
+<a name="l00218"></a>00218     <span class="comment">//Send Window End is in next cycle</span>
+<a name="l00219"></a>00219     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() &gt; endTicks)
+<a name="l00220"></a>00220     {
+<a name="l00221"></a>00221         endTicks += scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
+<a name="l00222"></a>00222     }
+<a name="l00223"></a>00223 
+<a name="l00224"></a>00224     <span class="comment">//TODO: Perhaps more complex calculations needed?</span>
+<a name="l00225"></a>00225     <span class="keywordflow">if</span> ((scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>() + sendTicks) &gt;= startTicks)
+<a name="l00226"></a>00226     {
+<a name="l00227"></a>00227         ev &lt;&lt; <span class="stringliteral">&quot;transmission not allowed!&quot;</span> &lt;&lt; endl;
+<a name="l00228"></a>00228         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00229"></a>00229     }
+<a name="l00230"></a>00230     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00231"></a>00231 }
+<a name="l00232"></a>00232 
+<a name="l00233"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e">00233</a> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e" title="Returns number of requested messages.">TTEOutput::getNumPendingRequests</a>()
+<a name="l00234"></a>00234 {
+<a name="l00235"></a>00235     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a>;
+<a name="l00236"></a>00236 }
+<a name="l00237"></a>00237 
+<a name="l00238"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb">00238</a> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Returns true when there are no pending messages.">TTEOutput::isEmpty</a>()
+<a name="l00239"></a>00239 {
+<a name="l00240"></a>00240     <span class="keywordtype">bool</span> empty = <span class="keyword">true</span>;
+<a name="l00241"></a>00241     empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.isEmpty();
+<a name="l00242"></a>00242     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
+<a name="l00243"></a>00243     {
+<a name="l00244"></a>00244         empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].isEmpty();
+<a name="l00245"></a>00245     }
+<a name="l00246"></a>00246     empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.isEmpty();
+<a name="l00247"></a>00247     <span class="keywordflow">return</span> empty;
+<a name="l00248"></a>00248 }
+<a name="l00249"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0">00249</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0" title="Clears all queued packets and stored requests.">TTEOutput::clear</a>()
+<a name="l00250"></a>00250 {
+<a name="l00251"></a>00251     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();
+<a name="l00252"></a>00252     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
+<a name="l00253"></a>00253     {
+<a name="l00254"></a>00254         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();
+<a name="l00255"></a>00255     }
+<a name="l00256"></a>00256     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();
+<a name="l00257"></a>00257     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a> = 0;
+<a name="l00258"></a>00258 }
+<a name="l00259"></a>00259 
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

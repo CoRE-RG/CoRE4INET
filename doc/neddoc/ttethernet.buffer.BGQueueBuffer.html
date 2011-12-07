@@ -69,7 +69,7 @@ Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTE
 sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The Host is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
-The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> that deletes itself at runtime.</p>
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
 
    </td>
 </tr>
@@ -183,7 +183,7 @@ The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">
    <td></td>
    <td>vector</td>
    <td></td>
-   <td></td>
+   <td>sample-hold</td>
 </tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
@@ -201,7 +201,7 @@ The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">
     </span><span style="color: #808080; font-style: italic; ">//BGQueueBuffer is implemented by the BGQueueBuffer C++ Class
 </span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">BGQueueBuffer</span><span style="color: #000000; ">);
     </span><span style="color: #808080; font-style: italic; ">//Statistic of the queue length of the buffer
-</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">queueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">queueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">; </span><span style="color: #000000; ">interpolationmode</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sample</span><span style="color: #000000; ">-</span><span style="color: #000000; ">hold</span><span style="color: #000000; ">);
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

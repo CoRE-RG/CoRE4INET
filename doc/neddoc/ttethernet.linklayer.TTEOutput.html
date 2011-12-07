@@ -116,7 +116,7 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
    <td></td>
    <td>vector</td>
    <td></td>
-   <td></td>
+   <td>sample-hold</td>
 </tr>
 <tr class="local">
    <td>beQueueLength</td>
@@ -124,7 +124,7 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
    <td></td>
    <td>vector</td>
    <td></td>
-   <td></td>
+   <td>sample-hold</td>
 </tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
@@ -143,9 +143,9 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/tx&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Statistic of the queue length of time-triggered frames
-</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">ttQueueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;TT-Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">ttQueueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;TT-Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">; </span><span style="color: #000000; ">interpolationmode</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sample</span><span style="color: #000000; ">-</span><span style="color: #000000; ">hold</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Statistic of the queue length of best-effort frames
-</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">beQueueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;BE-Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">beQueueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;BE-Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">; </span><span style="color: #000000; ">interpolationmode</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sample</span><span style="color: #000000; ">-</span><span style="color: #000000; ">hold</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">in</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">);

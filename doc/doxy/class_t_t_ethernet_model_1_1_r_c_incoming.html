@@ -31,11 +31,21 @@
   </div>
 </div>
 <div class="contents">
-<h1>TTEthernetModel::RCIncoming Class Reference</h1><!-- doxytag: class="TTEthernetModel::RCIncoming" -->
+<h1>TTEthernetModel::RCIncoming Class Reference</h1><!-- doxytag: class="TTEthernetModel::RCIncoming" --><!-- doxytag: inherits="TTEthernetModel::Incoming" -->
 <p>Class for the critical traffic conformance check of rate-constrained traffic.  
 <a href="#_details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_r_c_incoming_8h_source.html">RCIncoming.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for TTEthernetModel::RCIncoming:</div>
+<div class="dynsection">
+ <div class="center">
+  <img src="class_t_t_ethernet_model_1_1_r_c_incoming.png" usemap="#TTEthernetModel::RCIncoming_map" alt=""/>
+  <map id="TTEthernetModel::RCIncoming_map" name="TTEthernetModel::RCIncoming_map">
+<area href="class_t_t_ethernet_model_1_1_incoming.html" alt="TTEthernetModel::Incoming" shape="rect" coords="0,0,181,24"/>
+</map>
+ </div>
+</div>
 
 <p><a href="class_t_t_ethernet_model_1_1_r_c_incoming-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -45,16 +55,20 @@
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">handleMessage</a> (cMessage *msg)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards messages arriving on in-gate to out-gate checks conformance with configured bag.  <a href="#a723830f6e453a9c1bb05cd6b81ac77f9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a1b5ad168546c8989b2612d208b77d1e7">handleParameterChange</a> (const char *parname)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates a parameter has changed.  <a href="#a1b5ad168546c8989b2612d208b77d1e7"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69">lastArrived</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Saves the tickcount of the last message.  <a href="#ac44dce091ecefc6f3a635f2811835c69"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a0440f4ea1b79459f69d71ee8b6af22cd">bag</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">caches bag parameter  <a href="#a0440f4ea1b79459f69d71ee8b6af22cd"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Class for the critical traffic conformance check of rate-constrained traffic. </p>
 <p>This class checks whether incoming traffic was conform with the configured bag. Conform messages are forwarded from in to out</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_r_c_incoming_8h_source.html#l00032">32</a> of file <a class="el" href="_r_c_incoming_8h_source.html">RCIncoming.h</a>.</p>
+<p>Definition at line <a class="el" href="_r_c_incoming_8h_source.html#l00033">33</a> of file <a class="el" href="_r_c_incoming_8h_source.html">RCIncoming.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2e91469273a2dadc6ddc128765fd37f2"></a><!-- doxytag: member="TTEthernetModel::RCIncoming::RCIncoming" ref="a2e91469273a2dadc6ddc128765fd37f2" args="()" -->
 <div class="memitem">
@@ -105,6 +119,8 @@
   </dd>
 </dl>
 
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">TTEthernetModel::Incoming</a>.</p>
+
 <p>Definition at line <a class="el" href="_r_c_incoming_8cc_source.html#l00027">27</a> of file <a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00031"></a>00031 {
@@ -114,20 +130,66 @@
 <a name="l00035"></a>00035         <span class="comment">//Now check for correct arrival:</span>
 <a name="l00036"></a>00036         <span class="comment">//TODO what todo with JITTER?</span>
 <a name="l00037"></a>00037         <span class="comment">//Check too early</span>
-<a name="l00038"></a>00038         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a> &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)par(<span class="stringliteral">&quot;bag&quot;</span>).longValue()){
+<a name="l00038"></a>00038         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a> &lt; <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a0440f4ea1b79459f69d71ee8b6af22cd" title="caches bag parameter">bag</a>){
 <a name="l00039"></a>00039             ev.printf(<span class="stringliteral">&quot;Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n&quot;</span>, getName(), currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>,par(<span class="stringliteral">&quot;bag&quot;</span>).longValue());
 <a name="l00040"></a>00040             bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
-<a name="l00041"></a>00041             <span class="keyword">delete</span> msg;
-<a name="l00042"></a>00042         }
-<a name="l00043"></a>00043         <span class="comment">//Timing ok</span>
-<a name="l00044"></a>00044         <span class="keywordflow">else</span>{
-<a name="l00045"></a>00045             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>=currentTotalTicks;
-<a name="l00046"></a>00046             send(msg,<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00041"></a>00041             emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
+<a name="l00042"></a>00042             <span class="keyword">delete</span> msg;
+<a name="l00043"></a>00043         }
+<a name="l00044"></a>00044         <span class="comment">//Timing ok</span>
+<a name="l00045"></a>00045         <span class="keywordflow">else</span>{
+<a name="l00046"></a>00046             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>=currentTotalTicks;
+<a name="l00047"></a>00047             send(msg,<span class="stringliteral">&quot;out&quot;</span>);
 </pre></div></p>
 
 </div>
 </div>
+<a class="anchor" id="a1b5ad168546c8989b2612d208b77d1e7"></a><!-- doxytag: member="TTEthernetModel::RCIncoming::handleParameterChange" ref="a1b5ad168546c8989b2612d208b77d1e7" args="(const char *parname)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TTEthernetModel::RCIncoming::handleParameterChange </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>parname</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indicates a parameter has changed. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>parname</em>&nbsp;</td><td>Name of the changed parameter or NULL if multiple parameter changed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_r_c_incoming_8cc_source.html#l00049">49</a> of file <a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a0440f4ea1b79459f69d71ee8b6af22cd"></a><!-- doxytag: member="TTEthernetModel::RCIncoming::bag" ref="a0440f4ea1b79459f69d71ee8b6af22cd" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a0440f4ea1b79459f69d71ee8b6af22cd">TTEthernetModel::RCIncoming::bag</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>caches bag parameter </p>
+
+<p>Definition at line <a class="el" href="_r_c_incoming_8h_source.html#l00044">44</a> of file <a class="el" href="_r_c_incoming_8h_source.html">RCIncoming.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ac44dce091ecefc6f3a635f2811835c69"></a><!-- doxytag: member="TTEthernetModel::RCIncoming::lastArrived" ref="ac44dce091ecefc6f3a635f2811835c69" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +203,7 @@
 
 <p>Saves the tickcount of the last message. </p>
 
-<p>Definition at line <a class="el" href="_r_c_incoming_8h_source.html#l00038">38</a> of file <a class="el" href="_r_c_incoming_8h_source.html">RCIncoming.h</a>.</p>
+<p>Definition at line <a class="el" href="_r_c_incoming_8h_source.html#l00039">39</a> of file <a class="el" href="_r_c_incoming_8h_source.html">RCIncoming.h</a>.</p>
 
 </div>
 </div>
@@ -150,7 +212,7 @@
 <li><a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:07 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

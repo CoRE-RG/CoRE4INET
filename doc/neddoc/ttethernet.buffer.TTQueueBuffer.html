@@ -104,7 +104,7 @@ send window.</p>
    </td>
    <td>0</td>
    <td>
-<p>Beginning of the send window in number of ticks</p>
+<p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
 </tr>
 <tr class="inherited">
@@ -185,7 +185,7 @@ send window.</p>
    <td></td>
    <td>vector</td>
    <td></td>
-   <td></td>
+   <td>sample-hold</td>
 </tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
@@ -204,7 +204,7 @@ send window.</p>
     </span><span style="color: #808080; font-style: italic; ">//TTQueueBuffer is implemented by the TTQueueBuffer C++ Class
 </span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTQueueBuffer</span><span style="color: #000000; ">);
     </span><span style="color: #808080; font-style: italic; ">//Statistic of the queue length of the buffer
-</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">queueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">queueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">; </span><span style="color: #000000; ">interpolationmode</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sample</span><span style="color: #000000; ">-</span><span style="color: #000000; ">hold</span><span style="color: #000000; ">);
 
 }
 </span></pre>

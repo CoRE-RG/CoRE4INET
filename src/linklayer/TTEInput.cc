@@ -15,8 +15,6 @@
 
 #include "TTEInput.h"
 
-#include <configuration/ConfigurationUtils.h>
-
 #include <iostream>
 
 using namespace TTEthernetModel;

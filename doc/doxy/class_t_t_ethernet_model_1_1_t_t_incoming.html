@@ -166,44 +166,48 @@ Inheritance diagram for TTEthernetModel::TTIncoming:</div>
 <a name="l00047"></a>00047         <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a> != NULL)
 <a name="l00048"></a>00048         {
 <a name="l00049"></a>00049             ev.printf(<span class="stringliteral">&quot;Received frame before permanence point of previous frame \n&quot;</span>);
-<a name="l00050"></a>00050         }
-<a name="l00051"></a>00051         <span class="comment">//Check too early</span>
-<a name="l00052"></a>00052         <span class="keywordflow">if</span> (currentTicks &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue())
-<a name="l00053"></a>00053         {
-<a name="l00054"></a>00054             ev.printf(
-<a name="l00055"></a>00055                     <span class="stringliteral">&quot;Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n&quot;</span>,
-<a name="l00056"></a>00056                     getName(), currentTicks, par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue(),
-<a name="l00057"></a>00057                     par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue());
-<a name="l00058"></a>00058             bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
-<a name="l00059"></a>00059             <span class="keyword">delete</span> msg;
-<a name="l00060"></a>00060         }
-<a name="l00061"></a>00061         <span class="comment">//Check too late</span>
-<a name="l00062"></a>00062         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (currentTicks &gt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue())
-<a name="l00063"></a>00063         {
-<a name="l00064"></a>00064             ev.printf(
-<a name="l00065"></a>00065                     <span class="stringliteral">&quot;Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n&quot;</span>,
-<a name="l00066"></a>00066                     getName(), currentTicks, par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue(),
-<a name="l00067"></a>00067                     par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue());
-<a name="l00068"></a>00068             bubble(<span class="stringliteral">&quot;Frame to late&quot;</span>);
-<a name="l00069"></a>00069             <span class="keyword">delete</span> msg;
-<a name="l00070"></a>00070         }
-<a name="l00071"></a>00071         <span class="comment">//Timing ok</span>
-<a name="l00072"></a>00072         <span class="keywordflow">else</span>
-<a name="l00073"></a>00073         {
-<a name="l00074"></a>00074             <span class="comment">//delay for permanence_pit</span>
-<a name="l00075"></a>00075             getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/hourglass&quot;</span>);
-<a name="l00076"></a>00076             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a> = (EtherFrame *) msg;
-<a name="l00077"></a>00077             SchedulerActionTimeEvent *<span class="keyword">event</span> = <span class="keyword">new</span> SchedulerActionTimeEvent(<span class="stringliteral">&quot;PIT Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
-<a name="l00078"></a>00078             <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;permanence_pit&quot;</span>).doubleValue());
-<a name="l00079"></a>00079             <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
-<a name="l00080"></a>00080             tteScheduler-&gt;registerEvent(event);
-<a name="l00081"></a>00081         }
-<a name="l00082"></a>00082     }
-<a name="l00083"></a>00083     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>) &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)
-<a name="l00084"></a>00084     {
-<a name="l00085"></a>00085         <span class="keyword">delete</span> msg;
-<a name="l00086"></a>00086         getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);
-<a name="l00087"></a>00087         send(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a>, <span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00050"></a>00050             emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
+<a name="l00051"></a>00051             <span class="keyword">delete</span> msg;
+<a name="l00052"></a>00052         }
+<a name="l00053"></a>00053         <span class="comment">//Check too early</span>
+<a name="l00054"></a>00054         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (currentTicks &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue())
+<a name="l00055"></a>00055         {
+<a name="l00056"></a>00056             ev.printf(
+<a name="l00057"></a>00057                     <span class="stringliteral">&quot;Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n&quot;</span>,
+<a name="l00058"></a>00058                     getName(), currentTicks, par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue(),
+<a name="l00059"></a>00059                     par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue());
+<a name="l00060"></a>00060             bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
+<a name="l00061"></a>00061             emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
+<a name="l00062"></a>00062             <span class="keyword">delete</span> msg;
+<a name="l00063"></a>00063         }
+<a name="l00064"></a>00064         <span class="comment">//Check too late</span>
+<a name="l00065"></a>00065         <span class="keywordflow">else</span> <span class="keywordflow">if</span> (currentTicks &gt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue())
+<a name="l00066"></a>00066         {
+<a name="l00067"></a>00067             ev.printf(
+<a name="l00068"></a>00068                     <span class="stringliteral">&quot;Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n&quot;</span>,
+<a name="l00069"></a>00069                     getName(), currentTicks, par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue(),
+<a name="l00070"></a>00070                     par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue());
+<a name="l00071"></a>00071             bubble(<span class="stringliteral">&quot;Frame to late&quot;</span>);
+<a name="l00072"></a>00072             emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
+<a name="l00073"></a>00073             <span class="keyword">delete</span> msg;
+<a name="l00074"></a>00074         }
+<a name="l00075"></a>00075         <span class="comment">//Timing ok</span>
+<a name="l00076"></a>00076         <span class="keywordflow">else</span>
+<a name="l00077"></a>00077         {
+<a name="l00078"></a>00078             <span class="comment">//delay for permanence_pit</span>
+<a name="l00079"></a>00079             getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/hourglass&quot;</span>);
+<a name="l00080"></a>00080             <a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a> = (EtherFrame *) msg;
+<a name="l00081"></a>00081             SchedulerActionTimeEvent *<span class="keyword">event</span> = <span class="keyword">new</span> SchedulerActionTimeEvent(<span class="stringliteral">&quot;PIT Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
+<a name="l00082"></a>00082             <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;permanence_pit&quot;</span>).doubleValue());
+<a name="l00083"></a>00083             <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
+<a name="l00084"></a>00084             tteScheduler-&gt;registerEvent(event);
+<a name="l00085"></a>00085         }
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>) &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)
+<a name="l00088"></a>00088     {
+<a name="l00089"></a>00089         <span class="keyword">delete</span> msg;
+<a name="l00090"></a>00090         getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);
+<a name="l00091"></a>00091         send(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a>, <span class="stringliteral">&quot;out&quot;</span>);
 </pre></div></p>
 
 </div>
@@ -233,7 +237,7 @@ Inheritance diagram for TTEthernetModel::TTIncoming:</div>
 <li><a class="el" href="_t_t_incoming_8cc_source.html">TTIncoming.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:09 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:07 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

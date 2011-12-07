@@ -51,7 +51,7 @@ Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTE
 sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The Host is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
-The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> that deletes itself at runtime.</p>
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
 
    </td>
 </tr>
@@ -69,7 +69,7 @@ Contains a configurable best-effort implementation (beRelayUnitType like IMACRel
 <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The switch is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
-The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">BufferManager</a> that deletes itself at runtime.</p>
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
 
    </td>
 </tr>
@@ -90,6 +90,36 @@ The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">
    <td>80ns</td>
    <td>
 <p>Length of a tick</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>max_drift</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>16ps</td>
+   <td>
+<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>max_drift_change</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>1ps</td>
+   <td>
+<p>Maximum clock drift change per cycle</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>current_tick</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>tick</td>
+   <td>
+<p>Current length of a tick (with imprecission)</p>
    </td>
 </tr>
 <tr class="local">
@@ -116,6 +146,33 @@ The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">
    <td></td>
 </tr>
 </table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>newCycle</td>
+   <td>Start of cycle</td>
+   <td></td>
+   <td>count, vector</td>
+   <td></td>
+   <td></td>
+</tr>
+<tr class="local">
+   <td>currentDrift</td>
+   <td>Current drift</td>
+   <td></td>
+   <td>vector</td>
+   <td>s</td>
+   <td></td>
+</tr>
+</table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
 // TTEthernet scheduler module. The module allows to register Events using the
@@ -133,8 +190,18 @@ The configuration is done by the <a href="ttethernet.buffer.BufferManager.html">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/cogwheel&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Statistic of the current drift (Difference of configured and actual tick length)
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">currentDrift</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Current drift&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">unit</span><span style="color: #000000; ">=</span><span style="color: #000000; ">s</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Statistic of the beginning of a new cycle
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">newCycle</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Start of cycle&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">count</span><span style="color: #000000; ">,</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">// Length of a tick
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">tick</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #008000; ">80</span><span style="color: #000000; ">ns</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">// Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_drift</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #008000; ">16</span><span style="color: #000000; ">ps</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">// Maximum clock drift change per cycle
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_drift_change</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #008000; ">1</span><span style="color: #000000; ">ps</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">// Current length of a tick (with imprecission)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">current_tick</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #000000; ">tick</span><span style="color: #000000; ">;
         </span><span style="color: #808080; font-style: italic; ">// Number of ticks for one cycle
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">cycle_ticks</span><span style="color: #000000; "> = </span><span style="color: #008000; ">37500</span><span style="color: #000000; ">;
 }

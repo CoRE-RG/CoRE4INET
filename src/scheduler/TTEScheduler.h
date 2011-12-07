@@ -77,8 +77,6 @@ class TTEScheduler : public cSimpleModule
     protected:
         /**
          * @brief Initialization of the module.
-         *
-         * @todo remove XML parsing, this should be done in a dedicated class.
          */
         virtual void initialize();
 

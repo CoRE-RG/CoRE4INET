@@ -59,87 +59,87 @@
 <a name="l00027"></a>00027 {
 <a name="l00028"></a>00028     ev &lt;&lt; <span class="stringliteral">&quot;Initialize Buffer&quot;</span> &lt;&lt; endl;
 <a name="l00029"></a>00029     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">initializeStatistics</a>();
-<a name="l00030"></a>00030 }
-<a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd">00032</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">Buffer::initializeStatistics</a>()
-<a name="l00033"></a>00033 {
-<a name="l00034"></a>00034     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a> = registerSignal(<span class="stringliteral">&quot;txPk&quot;</span>);
-<a name="l00035"></a>00035     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a> = registerSignal(<span class="stringliteral">&quot;latency&quot;</span>);
-<a name="l00036"></a>00036 }
-<a name="l00037"></a>00037 
-<a name="l00038"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583">00038</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">Buffer::recordPacketSent</a>()
-<a name="l00039"></a>00039 {
-<a name="l00040"></a>00040     emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a>, 1L);
-<a name="l00041"></a>00041 }
-<a name="l00042"></a>00042 
-<a name="l00043"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d">00043</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">Buffer::setIsEmpty</a>(<span class="keywordtype">bool</span> empty)
-<a name="l00044"></a>00044 {
-<a name="l00045"></a>00045     <span class="keywordflow">if</span> (empty)
-<a name="l00046"></a>00046     {
-<a name="l00047"></a>00047         getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;black&quot;</span>);
-<a name="l00048"></a>00048     }
-<a name="l00049"></a>00049     <span class="keywordflow">else</span>
-<a name="l00050"></a>00050     {
-<a name="l00051"></a>00051         getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;&quot;</span>);
-<a name="l00052"></a>00052     }
-<a name="l00053"></a>00053 }
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a89b421859697d7a8a5c10309c4b3a523">00055</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a89b421859697d7a8a5c10309c4b3a523" title="Adds a destination gate to the buffer.">Buffer::addDestinationGate</a>(cGate *destinationGate)
-<a name="l00056"></a>00056 {
-<a name="l00057"></a>00057     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(destinationGate);
-<a name="l00058"></a>00058 }
-<a name="l00059"></a>00059 
-<a name="l00060"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a15e34ce075694416b75da6825d7e83ee">00060</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a15e34ce075694416b75da6825d7e83ee" title="Removes a destination gate to the buffer.">Buffer::removeDestinationGate</a>(cGate *destinationGate)
-<a name="l00061"></a>00061 {
-<a name="l00062"></a>00062     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.remove(destinationGate);
-<a name="l00063"></a>00063 }
-<a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e">00065</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e" title="Adds a receive callback for an application to the buffer.">Buffer::addReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
-<a name="l00066"></a>00066 {
-<a name="l00067"></a>00067     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application]=cb;
-<a name="l00068"></a>00068 }
-<a name="l00069"></a>00069 
-<a name="l00070"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7">00070</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7" title="Returns the currently registered receive callback for an application.">Buffer::getReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
-<a name="l00071"></a>00071 {
-<a name="l00072"></a>00072     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end())
-<a name="l00073"></a>00073         <span class="keywordflow">return</span> NULL;
-<a name="l00074"></a>00074     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application];
-<a name="l00075"></a>00075 }
-<a name="l00076"></a>00076 
-<a name="l00077"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015">00077</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015" title="Adds a transmit callback for an application to the buffer.">Buffer::addTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
-<a name="l00078"></a>00078 {
-<a name="l00079"></a>00079     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application]=cb;
-<a name="l00080"></a>00080 }
-<a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252">00082</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252" title="Returns the currently registered transmit callback for an application.">Buffer::getTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
-<a name="l00083"></a>00083 {
-<a name="l00084"></a>00084     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end())
-<a name="l00085"></a>00085         <span class="keywordflow">return</span> NULL;
-<a name="l00086"></a>00086     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application];
-<a name="l00087"></a>00087 }
-<a name="l00088"></a>00088 
-<a name="l00089"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55">00089</a> EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">Buffer::getFrame</a>(){
-<a name="l00090"></a>00090     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
-<a name="l00091"></a>00091 }
-<a name="l00092"></a>00092 
-<a name="l00093"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8">00093</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(cMessage *msg)
-<a name="l00094"></a>00094 {
-<a name="l00095"></a>00095     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
-<a name="l00096"></a>00096     {
-<a name="l00097"></a>00097         EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);
-<a name="l00098"></a>00098         <span class="comment">//Try to correct destination mac</span>
-<a name="l00099"></a>00099         <span class="keywordflow">if</span>(frame-&gt;getDest().isUnspecified()){
-<a name="l00100"></a>00100             MACAddress mac;
-<a name="l00101"></a>00101             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ct_mask = par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();
-<a name="l00102"></a>00102             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ct_marker = par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();
-<a name="l00103"></a>00103             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> ct_id = par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
-<a name="l00104"></a>00104             ct_marker &amp;= ct_mask;
-<a name="l00105"></a>00105             mac.setAddressByte(0, ct_marker&gt;&gt;24);
-<a name="l00106"></a>00106             mac.setAddressByte(1, ct_marker&gt;&gt;16);
-<a name="l00107"></a>00107             mac.setAddressByte(2, ct_marker&gt;&gt;8);
-<a name="l00108"></a>00108             mac.setAddressByte(3, ct_marker);
-<a name="l00109"></a>00109             mac.setAddressByte(4, ct_id&gt;&gt;8);
-<a name="l00110"></a>00110             mac.setAddressByte(5, ct_id);
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031     <span class="comment">//Initialize parameter cache</span>
+<a name="l00032"></a>00032     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44" title="Indicates a parameter has changed.">handleParameterChange</a>(NULL);
+<a name="l00033"></a>00033 }
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd">00035</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">Buffer::initializeStatistics</a>()
+<a name="l00036"></a>00036 {
+<a name="l00037"></a>00037     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a> = registerSignal(<span class="stringliteral">&quot;txPk&quot;</span>);
+<a name="l00038"></a>00038     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a> = registerSignal(<span class="stringliteral">&quot;latency&quot;</span>);
+<a name="l00039"></a>00039 }
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583">00041</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">Buffer::recordPacketSent</a>()
+<a name="l00042"></a>00042 {
+<a name="l00043"></a>00043     emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a>, 1L);
+<a name="l00044"></a>00044 }
+<a name="l00045"></a>00045 
+<a name="l00046"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d">00046</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">Buffer::setIsEmpty</a>(<span class="keywordtype">bool</span> empty)
+<a name="l00047"></a>00047 {
+<a name="l00048"></a>00048     <span class="keywordflow">if</span> (empty)
+<a name="l00049"></a>00049     {
+<a name="l00050"></a>00050         getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;black&quot;</span>);
+<a name="l00051"></a>00051     }
+<a name="l00052"></a>00052     <span class="keywordflow">else</span>
+<a name="l00053"></a>00053     {
+<a name="l00054"></a>00054         getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;&quot;</span>);
+<a name="l00055"></a>00055     }
+<a name="l00056"></a>00056 }
+<a name="l00057"></a>00057 
+<a name="l00058"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a89b421859697d7a8a5c10309c4b3a523">00058</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a89b421859697d7a8a5c10309c4b3a523" title="Adds a destination gate to the buffer.">Buffer::addDestinationGate</a>(cGate *destinationGate)
+<a name="l00059"></a>00059 {
+<a name="l00060"></a>00060     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(destinationGate);
+<a name="l00061"></a>00061 }
+<a name="l00062"></a>00062 
+<a name="l00063"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a15e34ce075694416b75da6825d7e83ee">00063</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a15e34ce075694416b75da6825d7e83ee" title="Removes a destination gate to the buffer.">Buffer::removeDestinationGate</a>(cGate *destinationGate)
+<a name="l00064"></a>00064 {
+<a name="l00065"></a>00065     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.remove(destinationGate);
+<a name="l00066"></a>00066 }
+<a name="l00067"></a>00067 
+<a name="l00068"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e">00068</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e" title="Adds a receive callback for an application to the buffer.">Buffer::addReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
+<a name="l00069"></a>00069 {
+<a name="l00070"></a>00070     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application]=cb;
+<a name="l00071"></a>00071 }
+<a name="l00072"></a>00072 
+<a name="l00073"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7">00073</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7" title="Returns the currently registered receive callback for an application.">Buffer::getReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
+<a name="l00074"></a>00074 {
+<a name="l00075"></a>00075     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end())
+<a name="l00076"></a>00076         <span class="keywordflow">return</span> NULL;
+<a name="l00077"></a>00077     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application];
+<a name="l00078"></a>00078 }
+<a name="l00079"></a>00079 
+<a name="l00080"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015">00080</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015" title="Adds a transmit callback for an application to the buffer.">Buffer::addTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
+<a name="l00081"></a>00081 {
+<a name="l00082"></a>00082     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application]=cb;
+<a name="l00083"></a>00083 }
+<a name="l00084"></a>00084 
+<a name="l00085"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252">00085</a> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252" title="Returns the currently registered transmit callback for an application.">Buffer::getTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application)
+<a name="l00086"></a>00086 {
+<a name="l00087"></a>00087     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end())
+<a name="l00088"></a>00088         <span class="keywordflow">return</span> NULL;
+<a name="l00089"></a>00089     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application];
+<a name="l00090"></a>00090 }
+<a name="l00091"></a>00091 
+<a name="l00092"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55">00092</a> EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">Buffer::getFrame</a>(){
+<a name="l00093"></a>00093     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
+<a name="l00094"></a>00094 }
+<a name="l00095"></a>00095 
+<a name="l00096"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8">00096</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(cMessage *msg)
+<a name="l00097"></a>00097 {
+<a name="l00098"></a>00098     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
+<a name="l00099"></a>00099     {
+<a name="l00100"></a>00100         EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);
+<a name="l00101"></a>00101         <span class="comment">//Try to correct destination mac</span>
+<a name="l00102"></a>00102         <span class="keywordflow">if</span>(frame-&gt;getDest().isUnspecified()){
+<a name="l00103"></a>00103             MACAddress mac;
+<a name="l00104"></a>00104             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> maskedMarker= <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a> &amp; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a>;
+<a name="l00105"></a>00105             mac.setAddressByte(0, maskedMarker&gt;&gt;24);
+<a name="l00106"></a>00106             mac.setAddressByte(1, maskedMarker&gt;&gt;16);
+<a name="l00107"></a>00107             mac.setAddressByte(2, maskedMarker&gt;&gt;8);
+<a name="l00108"></a>00108             mac.setAddressByte(3, maskedMarker);
+<a name="l00109"></a>00109             mac.setAddressByte(4, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>&gt;&gt;8);
+<a name="l00110"></a>00110             mac.setAddressByte(5, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>);
 <a name="l00111"></a>00111             frame-&gt;setDest(mac);
 <a name="l00112"></a>00112         }
 <a name="l00113"></a>00113         emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>, simTime()-msg-&gt;getCreationTime());
@@ -152,19 +152,25 @@
 <a name="l00120"></a>00120     }
 <a name="l00121"></a>00121 }
 <a name="l00122"></a>00122 
-<a name="l00123"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57">00123</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">Buffer::enqueue</a>(EtherFrame *newFrame)
-<a name="l00124"></a>00124 {
-<a name="l00125"></a>00125     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;
-<a name="l00126"></a>00126     <span class="keywordflow">throw</span>;
+<a name="l00123"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44">00123</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44" title="Indicates a parameter has changed.">Buffer::handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname){
+<a name="l00124"></a>00124     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();
+<a name="l00125"></a>00125     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();
+<a name="l00126"></a>00126     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
 <a name="l00127"></a>00127 }
 <a name="l00128"></a>00128 
-<a name="l00129"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43">00129</a> EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">Buffer::dequeue</a>()
+<a name="l00129"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57">00129</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">Buffer::enqueue</a>(EtherFrame *newFrame)
 <a name="l00130"></a>00130 {
-<a name="l00131"></a>00131     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00131"></a>00131     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;
 <a name="l00132"></a>00132     <span class="keywordflow">throw</span>;
 <a name="l00133"></a>00133 }
+<a name="l00134"></a>00134 
+<a name="l00135"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43">00135</a> EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">Buffer::dequeue</a>()
+<a name="l00136"></a>00136 {
+<a name="l00137"></a>00137     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00138"></a>00138     <span class="keywordflow">throw</span>;
+<a name="l00139"></a>00139 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 29 18:03:08 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

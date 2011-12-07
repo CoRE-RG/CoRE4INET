@@ -145,7 +145,7 @@ send window.</p>
    </td>
    <td>0</td>
    <td>
-<p>Beginning of the send window in number of ticks</p>
+<p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
 </tr>
 <tr class="local">
@@ -232,8 +232,8 @@ send window.</p>
    <td>latency</td>
    <td>End-to-end latency</td>
    <td></td>
-   <td>count, vector</td>
-   <td></td>
+   <td>stats, histogram, vector</td>
+   <td>s</td>
    <td></td>
 </tr>
 </table>
@@ -258,7 +258,7 @@ send window.</p>
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//TTBuffer is implemented by the TTBuffer C++ Class
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTBuffer</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//Beginning of the send window in number of ticks
+        </span><span style="color: #808080; font-style: italic; ">//Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sendWindowStart</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
         </span><span style="color: #808080; font-style: italic; ">//End of the send window in number of ticks
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sendWindowEnd</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
