@@ -23,6 +23,12 @@ Define_Module( Buffer);
 simsignal_t Buffer::txPkSignal = SIMSIGNAL_NULL;
 simsignal_t Buffer::latencySignal = SIMSIGNAL_NULL;
 
+Buffer::~Buffer(){
+    destinationGates.clear();
+    receiveCallbacks.clear();
+    transmitCallbacks.clear();
+}
+
 void Buffer::initialize()
 {
     ev << "Initialize Buffer" << endl;

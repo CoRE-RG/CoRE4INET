@@ -46,6 +46,11 @@ class Callback;
  */
 class Buffer : public cSimpleModule
 {
+    public:
+        /**
+         * @brief Destructor
+         */
+        ~Buffer();
     protected:
         /**
          * Stores the Gates to that the messages are delivered

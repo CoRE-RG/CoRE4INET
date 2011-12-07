@@ -18,6 +18,16 @@ TTEOutput::TTEOutput()
     ttBuffersPos = 0;
 }
 
+TTEOutput::~TTEOutput()
+{
+    ttQueue.clear();
+    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    {
+        rcQueue[i].clear();
+    }
+    beQueue.clear();
+}
+
 void TTEOutput::initialize()
 {
     cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
@@ -132,16 +142,6 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
     }
     //This should only happen if buffer was empty
     ttBuffers.push_back(ttBuffer);
-}
-
-void TTEOutput::finish()
-{
-    ttQueue.clear();
-    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
-    {
-        rcQueue[i].clear();
-    }
-    beQueue.clear();
 }
 
 void TTEOutput::requestPacket()

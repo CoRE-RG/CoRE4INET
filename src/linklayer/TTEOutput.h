@@ -27,6 +27,10 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Constructor
          */
         TTEOutput();
+        /**
+         * @brief Destructor
+         */
+        ~TTEOutput();
 
         /**
          * @brief Registers a time-triggered buffer that feeds the module.
@@ -112,13 +116,6 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
-
-        /**
-         * @brief Clears queues.
-         *
-         * @todo should be done in Destructor. Finish is intended for statistics.
-         */
-        virtual void finish();
 
         /**
          * @brief this method is invoked when the underlying mac is idle.

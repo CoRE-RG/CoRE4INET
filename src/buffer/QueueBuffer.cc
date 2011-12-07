@@ -24,6 +24,11 @@ QueueBuffer::QueueBuffer()
     initializeStatistics();
 }
 
+QueueBuffer::~QueueBuffer()
+{
+    frames.clear();
+}
+
 void QueueBuffer::initializeStatistics()
 {
     queueLengthSignal = registerSignal("queueLength");
