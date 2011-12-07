@@ -39,6 +39,7 @@ void RCIncoming::handleMessage(cMessage *msg)
             ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n", getName(), currentTotalTicks-lastArrived,par("bag").longValue());
             bubble("Frame to early");
             emit(ctDroppedSignal, 1);
+            getDisplayString().setTagArg("i2", 0, "status/excl3");
             delete msg;
         }
         //Timing ok

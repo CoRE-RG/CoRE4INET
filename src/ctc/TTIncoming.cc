@@ -48,6 +48,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         {
             ev.printf("Received frame before permanence point of previous frame \n");
             emit(ctDroppedSignal, 1);
+            getDisplayString().setTagArg("i2", 0, "status/excl3");
             delete msg;
         }
         //Check too early
@@ -59,6 +60,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                     par("receive_window_end").longValue());
             bubble("Frame to early");
             emit(ctDroppedSignal, 1);
+            getDisplayString().setTagArg("i2", 0, "status/excl3");
             delete msg;
         }
         //Check too late
@@ -70,13 +72,15 @@ void TTIncoming::handleMessage(cMessage *msg)
                     par("receive_window_end").longValue());
             bubble("Frame to late");
             emit(ctDroppedSignal, 1);
+            getDisplayString().setTagArg("i2", 0, "status/excl3");
             delete msg;
         }
         //Timing ok
         else
         {
             //delay for permanence_pit
-            getDisplayString().setTagArg("i2", 0, "status/hourglass");
+            if(!hadError)
+                getDisplayString().setTagArg("i2", 0, "status/hourglass");
             frame = (EtherFrame *) msg;
             SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
             event->setAction_time(par("permanence_pit").doubleValue());
@@ -87,7 +91,8 @@ void TTIncoming::handleMessage(cMessage *msg)
     else if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
         delete msg;
-        getDisplayString().setTagArg("i2", 0, "");
+        if(!hadError)
+            getDisplayString().setTagArg("i2", 0, "");
         send(frame, "out");
         frame = NULL;
     }

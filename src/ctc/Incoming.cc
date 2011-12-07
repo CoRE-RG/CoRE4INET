@@ -24,6 +24,7 @@ simsignal_t Incoming::ctDroppedSignal = SIMSIGNAL_NULL;
 void Incoming::initialize()
 {
     ctDroppedSignal = registerSignal("ctDropped");
+    hadError = false;
 }
 
 void Incoming::handleMessage(cMessage *msg)

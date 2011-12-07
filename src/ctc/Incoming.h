@@ -31,6 +31,10 @@ class Incoming : public cSimpleModule
 {
     protected:
         /**
+         * @brief set to true if there was an error during runtime
+         */
+        bool hadError;
+        /**
          * @brief Signal that is emitted when a frame is dropped.
          *
          * Frames may be dropped when there was a violation of CT rules.

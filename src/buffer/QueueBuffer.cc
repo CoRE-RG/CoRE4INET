@@ -32,6 +32,7 @@ QueueBuffer::~QueueBuffer()
 void QueueBuffer::initializeStatistics()
 {
     queueLengthSignal = registerSignal("queueLength");
+    frames.setName("frames");
 }
 
 void QueueBuffer::enqueue(EtherFrame *newFrame)

@@ -22,7 +22,7 @@ module TTEEtherSwitch
 {
     parameters:
         @node();
-        @display("i=block/switch;bgb=1219,302");
+        @display("i=block/switch;bgb=1219,312");
         // Network configuration file
         string network_configuration;
         // Name of the device in the network configuration
@@ -36,7 +36,7 @@ module TTEEtherSwitch
         // Implementation of the best-effort forwarding part
         beswitch: <beRelayUnitType> like IMACRelayUnit {
             parameters:
-                @display("p=141,256");
+                @display("p=141,242");
             gates:
                 lowerLayerIn[sizeof(ethg)];
                 lowerLayerOut[sizeof(ethg)];
@@ -44,7 +44,7 @@ module TTEEtherSwitch
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEPHYPort {
             parameters:
-                @display("p=235,255");
+                @display("p=235,278,r,50");
         }
         // Sync module for synchronisation of the scheduler
         sync: Sync {
