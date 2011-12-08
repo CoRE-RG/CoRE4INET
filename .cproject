@@ -30,8 +30,6 @@
 							<builder id="org.omnetpp.cdt.gnu.builder.debug.494942144" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="OMNeT++ Make Builder (opp_makemake)" superClass="org.omnetpp.cdt.gnu.builder.debug">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name=""/>
-									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name=""/>
-									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name=""/>
 								</outputEntries>
 							</builder>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.870144984" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
@@ -39,10 +37,7 @@
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1246268161" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModel/emf4cpp-0.0.2/include/emf4cpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModel/model-src}&quot;"/>
-								</option>
+								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__FLT_EPSILON__"/>
@@ -188,9 +183,7 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1900352952" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1239806396" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-								<option id="gnu.cpp.link.option.paths.1193847787" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModel/emf4cpp-0.0.2/lib}&quot;"/>
-								</option>
+								<option id="gnu.cpp.link.option.paths.1193847787" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
 								<option id="gnu.cpp.link.option.libs.2085481639" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.84394541" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -198,7 +191,7 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.920973474" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
-								<option id="gnu.both.asm.option.include.paths.1745796125" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath"/>
+								<option id="gnu.both.asm.option.include.paths.1745796125" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1114916911" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
@@ -396,13 +389,7 @@
 								<option id="gnu.cpp.compiler.option.preprocessor.def.276427390" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/model-src"/>
-									<listOptionValue builtIn="false" value="/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp"/>
-									<listOptionValue builtIn="false" value="/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/emf4cpp-0.0.2/include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/model-src}&quot;"/>
-								</option>
+								<option id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.2016080485" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__FLT_EPSILON__"/>
@@ -549,13 +536,7 @@
 									<listOptionValue builtIn="false" value="WITH_PARSIM=1"/>
 									<listOptionValue builtIn="false" value="_FILE_OFFSET_BITS=64"/>
 								</option>
-								<option id="gnu.c.compiler.option.include.paths.111423297" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/model-src"/>
-									<listOptionValue builtIn="false" value="/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp"/>
-									<listOptionValue builtIn="false" value="/home/tillsteinbach/workspaces/omnet4.2b2/TTEthernetModelV2/emf4cpp-0.0.2/include"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/model-src}&quot;"/>
-								</option>
+								<option id="gnu.c.compiler.option.include.paths.111423297" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.298017280" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.91231544" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
@@ -568,10 +549,7 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1792461500" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
-								<option id="gnu.both.asm.option.include.paths.476692849" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/model-src}&quot;"/>
-								</option>
+								<option id="gnu.both.asm.option.include.paths.476692849" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath"/>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1789524155" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>

@@ -1,7 +1,7 @@
 package ttethernet.nodes.ethernet;
 
 import ttethernet.scheduler.TTEScheduler;
-import ttethernet.configuration.ConfigurationManager;
+import ttethernet.configuration.IConfigurationManager;
 import ttethernet.synchronisation.Sync;
 import ttethernet.linklayer.TTEPHYPort;
 
@@ -29,6 +29,8 @@ module TTEEtherSwitch
         string device_name;
         // type of the best-effort MACRelayUnit; currently possible MACRelayUnitNP, MACRelayUnitPP
         string beRelayUnitType = default("MACRelayUnitNP");
+        // type of the configurationManager
+        string configurationManager = default("TTEConfigurationManager");
     gates:
         // Physical ports of the switch
         inout ethg[] @loose;
@@ -52,7 +54,7 @@ module TTEEtherSwitch
                 @display("p=141,169");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: ConfigurationManager {
+        configurationManager: <configurationManager> like IConfigurationManager {
             parameters:
                 @display("p=999,999");
         }

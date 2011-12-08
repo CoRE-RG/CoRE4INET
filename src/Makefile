@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for libTTEthernetModel
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/git/TTEthernetModel/emf4cpp-0.0.2/include/emf4cpp -I/home/tillsteinbach/git/TTEthernetModel/model-src -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/ethernet -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/common -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/base -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/contract -L/home/tillsteinbach/workspaces/omnet4.2/inet/out/$(CONFIGNAME)/src -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet -- -L../emf4cpp-0.0.2/lib -L../model-src
+#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/ethernet -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/common -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/base -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/contract -L/home/tillsteinbach/workspaces/omnet4.2/inet/out/$(CONFIGNAME)/src -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet
 #
 
 # Name of target to be created (-o option)
@@ -10,8 +10,6 @@ TARGET = libTTEthernetModel$(SHARED_LIB_SUFFIX)
 
 # C++ include paths (with -I)
 INCLUDE_PATH = \
-    -I../emf4cpp-0.0.2/include/emf4cpp \
-    -I../model-src \
     -I$(INET_PROJ)/src/linklayer/ethernet \
     -I$(INET_PROJ)/src/networklayer/common \
     -I$(INET_PROJ)/src/base \
@@ -35,10 +33,10 @@ INCLUDE_PATH = \
     -Iutilities
 
 # Additional object and library files to link with
-EXTRA_OBJS = -L../emf4cpp-0.0.2/lib -L../model-src
+EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = -L$(INET_PROJ)/out/$(CONFIGNAME)/src  -lemf4cpp-ecore -lemf4cpp-ecorecpp -lemf4cpp-Device_Specification -lemf4cpp-Device_Target_Mapping -lemf4cpp-Device_Targets -lemf4cpp-IP_Configuration -lemf4cpp-Network_Configuration -lemf4cpp-Protocol_Definition -lemf4cpp-System_Specification -lemf4cpp-Virtuallink_Map -linet
+LIBS = -L$(INET_PROJ)/out/$(CONFIGNAME)/src  -linet
 LIBS += -Wl,-rpath,`abspath $(INET_PROJ)/out/$(CONFIGNAME)/src`
 
 # Output directory
@@ -65,8 +63,6 @@ OBJS = \
     $O/buffer/QueueBuffer.o \
     $O/buffer/RCQueueBuffer.o \
     $O/buffer/Buffer.o \
-    $O/configuration/ConfigurationManager.o \
-    $O/configuration/ConfigurationUtils.o \
     $O/ctc/RCIncoming.o \
     $O/ctc/TTIncoming.o \
     $O/ctc/Incoming.o \
@@ -450,33 +446,6 @@ $O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
-$O/configuration/ConfigurationManager.o: configuration/ConfigurationManager.cc \
-	api/Callback.h \
-	api/tte_api/tte_api.h \
-	applications/TTEApplicationBase.h \
-	buffer/Buffer.h \
-	buffer/RCBuffer.h \
-	buffer/TTBuffer.h \
-	configuration/ConfigurationManager.h \
-	configuration/ConfigurationUtils.h \
-	ctc/Incoming.h \
-	linklayer/TTEInput.h \
-	linklayer/TTEOutput.h \
-	scheduler/SchedulerEvent.h \
-	scheduler/SchedulerMessageEvents_m.h \
-	scheduler/SchedulerMessage_m.h \
-	utilities/HelperFunctions.h \
-	$(INET_PROJ)/src/base/AbstractQueue.h \
-	$(INET_PROJ)/src/base/EnqueueHook.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/base/IPassiveQueue.h \
-	$(INET_PROJ)/src/base/QueueWithQoS.h \
-	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
-	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
-$O/configuration/ConfigurationUtils.o: configuration/ConfigurationUtils.cc \
-	configuration/ConfigurationUtils.h
 $O/ctc/Incoming.o: ctc/Incoming.cc \
 	ctc/Incoming.h
 $O/ctc/RCIncoming.o: ctc/RCIncoming.cc \
