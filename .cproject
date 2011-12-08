@@ -40,8 +40,8 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/model-src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModel/emf4cpp-0.0.2/include/emf4cpp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModel/model-src}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
@@ -189,7 +189,7 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1900352952" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1239806396" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
 								<option id="gnu.cpp.link.option.paths.1193847787" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/emf4cpp-0.0.2/lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModel/emf4cpp-0.0.2/lib}&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.libs.2085481639" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.84394541" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -198,10 +198,7 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.920973474" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
-								<option id="gnu.both.asm.option.include.paths.1745796125" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/emf4cpp-0.0.2/include/emf4cpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModelV2/model-src}&quot;"/>
-								</option>
+								<option id="gnu.both.asm.option.include.paths.1745796125" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath"/>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1114916911" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
