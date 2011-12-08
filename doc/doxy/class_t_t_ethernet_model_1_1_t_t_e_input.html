@@ -35,11 +35,13 @@
 <p>Represents the part of a port that receives messages (RX).  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>&gt;</code></p>
+<p><code>#include &lt;TTEInput.h&gt;</code></p>
 
 <p><a href="class_t_t_ethernet_model_1_1_t_t_e_input-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ae4a93376feb0c86d94bf03a4d1a71e5f">TTEInput</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#ae4a93376feb0c86d94bf03a4d1a71e5f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0d7c60edcd44edd1e21fa9a86aac5f">addIncoming</a> (uint16 ctID, <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a> *incoming)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds an incoming module to the list.  <a href="#a3b0d7c60edcd44edd1e21fa9a86aac5f"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
@@ -49,6 +51,9 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards frames to the appropriate incoming modules.  <a href="#a787189dd1096648e01c28fb2ae51d42f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3c9f4c8b21c9f67fe94f1f47d4f116aa">handleParameterChange</a> (const char *parname)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates a parameter has changed.  <a href="#a3c9f4c8b21c9f67fe94f1f47d4f116aa"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a17a1091fad15b18d3914a28ab4c56b70">hadError</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">set to true if there was an error during runtime  <a href="#a17a1091fad15b18d3914a28ab4c56b70"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Static Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static simsignal_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">ctDroppedSignal</a> = SIMSIGNAL_NULL</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Signal that is emitted when a frame is dropped.  <a href="#ac3e45a6edb1c107af246b74feb7ecb94"></a><br/></td></tr>
@@ -69,8 +74,31 @@
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Represents the part of a port that receives messages (RX). </p>
 <p>Critical traffic arriving on in-gate is forwarded to the incoming modules or dropped if there is no module configured. Best-effort frames are forwarded through the out-gate. </p>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ae4a93376feb0c86d94bf03a4d1a71e5f"></a><!-- doxytag: member="TTEthernetModel::TTEInput::TTEInput" ref="ae4a93376feb0c86d94bf03a4d1a71e5f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TTEInput::TTEInput </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00037">37</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
+<p>Constructor. </p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00026"></a>00026                   {
+<a name="l00027"></a>00027     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a17a1091fad15b18d3914a28ab4c56b70" title="set to true if there was an error during runtime">hadError</a>=<span class="keyword">false</span>;
+<a name="l00028"></a>00028 }
+</pre></div></p>
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a3b0d7c60edcd44edd1e21fa9a86aac5f"></a><!-- doxytag: member="TTEthernetModel::TTEInput::addIncoming" ref="a3b0d7c60edcd44edd1e21fa9a86aac5f" args="(uint16 ctID, Incoming *incoming)" -->
 <div class="memitem">
@@ -106,11 +134,9 @@
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00031">31</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032 {
-<a name="l00033"></a>00033     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>[ctID].push_back(incoming);
-<a name="l00034"></a>00034 }
+<p><div class="fragment"><pre class="fragment"><a name="l00036"></a>00036 {
+<a name="l00037"></a>00037     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>[ctID].push_back(incoming);
+<a name="l00038"></a>00038 }
 </pre></div></p>
 
 </div>
@@ -142,15 +168,13 @@
 <dl class="return"><dt><b>Returns:</b></dt><dd>critical traffic id</dd></dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT(EtherFrame *frame)</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00090">90</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00040">handleMessage()</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00036">handleMessage()</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00091"></a>00091 {
-<a name="l00092"></a>00092     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> macBytes[6];
-<a name="l00093"></a>00093     frame-&gt;getDest().getAddressBytes(macBytes);
-<a name="l00094"></a>00094     <span class="keywordflow">return</span> (macBytes[4] &lt;&lt; 8) | macBytes[5];
-<a name="l00095"></a>00095 }
+<p><div class="fragment"><pre class="fragment"><a name="l00103"></a>00103 {
+<a name="l00104"></a>00104     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> macBytes[6];
+<a name="l00105"></a>00105     frame-&gt;getDest().getAddressBytes(macBytes);
+<a name="l00106"></a>00106     <span class="keywordflow">return</span> (macBytes[4] &lt;&lt; 8) | macBytes[5];
+<a name="l00107"></a>00107 }
 </pre></div></p>
 
 </div>
@@ -180,41 +204,47 @@
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00036">36</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00037"></a>00037 {
-<a name="l00038"></a>00038     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
-<a name="l00039"></a>00039     {
-<a name="l00040"></a>00040         EtherFrame *frame = (EtherFrame*) msg;
-<a name="l00041"></a>00041         <span class="comment">//Auf CTCs verteilen oder BE traffic</span>
-<a name="l00042"></a>00042         <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT</a>(frame))
-<a name="l00043"></a>00043         {
-<a name="l00044"></a>00044             std::map&lt;uint16, std::list&lt;Incoming *&gt; &gt;::iterator incomingList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>.find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b" title="Returns the critical traffic id for a given frame.">getCTID</a>(frame));
-<a name="l00045"></a>00045             <span class="keywordflow">if</span> (incomingList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>.end())
-<a name="l00046"></a>00046             {
-<a name="l00047"></a>00047                 <span class="comment">//Send to all CTCs for the CT-ID</span>
-<a name="l00048"></a>00048                 <span class="keywordflow">for</span> (std::list&lt;Incoming*&gt;::iterator incoming = incomingList-&gt;second.begin(); incoming
-<a name="l00049"></a>00049                         != incomingList-&gt;second.end(); incoming++)
-<a name="l00050"></a>00050                 {
-<a name="l00051"></a>00051                     sendDirect(frame-&gt;dup(), (*incoming)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
-<a name="l00052"></a>00052                 }
-<a name="l00053"></a>00053                 <span class="keyword">delete</span> frame;
-<a name="l00054"></a>00054             }
-<a name="l00055"></a>00055             <span class="keywordflow">else</span>
-<a name="l00056"></a>00056             {
-<a name="l00057"></a>00057                 ev &lt;&lt; <span class="stringliteral">&quot;No incoming traffic allowed for CT ID &quot;</span> &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b" title="Returns the critical traffic id for a given frame.">getCTID</a>(frame) &lt;&lt; endl;
-<a name="l00058"></a>00058                 bubble(<span class="stringliteral">&quot;Frame not allowed here!&quot;</span>);
-<a name="l00059"></a>00059                 emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
-<a name="l00060"></a>00060                 <span class="keyword">delete</span> frame;
-<a name="l00061"></a>00061             }
-<a name="l00062"></a>00062         }
-<a name="l00063"></a>00063         <span class="comment">//Sonst BE</span>
-<a name="l00064"></a>00064         <span class="keywordflow">else</span>
-<a name="l00065"></a>00065         {
-<a name="l00066"></a>00066             send(msg, <span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00067"></a>00067         }
-<a name="l00068"></a>00068     }
-<a name="l00069"></a>00069 }
+<p><div class="fragment"><pre class="fragment"><a name="l00041"></a>00041 {
+<a name="l00042"></a>00042     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
+<a name="l00043"></a>00043     {
+<a name="l00044"></a>00044         EtherFrame *frame = (EtherFrame*) msg;
+<a name="l00045"></a>00045         <span class="comment">//Auf CTCs verteilen oder BE traffic</span>
+<a name="l00046"></a>00046         <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT</a>(frame))
+<a name="l00047"></a>00047         {
+<a name="l00048"></a>00048             std::map&lt;uint16, std::list&lt;Incoming *&gt; &gt;::iterator incomingList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>.find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#acc66a60a5931d503ce0b775c5f7f695b" title="Returns the critical traffic id for a given frame.">getCTID</a>(frame));
+<a name="l00049"></a>00049             <span class="keywordflow">if</span> (incomingList != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a32077cb5a5db1a6df7ff18ca5a91a6f1" title="Lists of incoming modules for each critical traffic id.">incomings</a>.end())
+<a name="l00050"></a>00050             {
+<a name="l00051"></a>00051                 <span class="comment">//Send to all CTCs for the CT-ID</span>
+<a name="l00052"></a>00052                 <span class="keywordflow">for</span> (std::list&lt;Incoming*&gt;::iterator incoming = incomingList-&gt;second.begin(); incoming
+<a name="l00053"></a>00053                         != incomingList-&gt;second.end(); incoming++)
+<a name="l00054"></a>00054                 {
+<a name="l00055"></a>00055                     sendDirect(frame-&gt;dup(), (*incoming)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
+<a name="l00056"></a>00056                 }
+<a name="l00057"></a>00057                 <span class="keyword">delete</span> frame;
+<a name="l00058"></a>00058             }
+<a name="l00059"></a>00059             <span class="keywordflow">else</span>
+<a name="l00060"></a>00060             {
+<a name="l00061"></a>00061                 emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
+<a name="l00062"></a>00062                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a17a1091fad15b18d3914a28ab4c56b70" title="set to true if there was an error during runtime">hadError</a>=<span class="keyword">true</span>;
+<a name="l00063"></a>00063                 <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00064"></a>00064                     bubble(<span class="stringliteral">&quot;No matching buffer configured&quot;</span>);
+<a name="l00065"></a>00065                     getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00066"></a>00066                     getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Input configuration problem - No matching buffer configured&quot;</span>);
+<a name="l00067"></a>00067                     getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00068"></a>00068                     getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Input configuration problem - No matching buffer configured&quot;</span>);
+<a name="l00069"></a>00069                     getParentModule()-&gt;getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00070"></a>00070                     getParentModule()-&gt;getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Input configuration problem - No matching buffer configured&quot;</span>);
+<a name="l00071"></a>00071                 }
+<a name="l00072"></a>00072                 <span class="keyword">delete</span> frame;
+<a name="l00073"></a>00073             }
+<a name="l00074"></a>00074         }
+<a name="l00075"></a>00075         <span class="comment">//Sonst BE</span>
+<a name="l00076"></a>00076         <span class="keywordflow">else</span>
+<a name="l00077"></a>00077         {
+<a name="l00078"></a>00078             send(msg, <span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00079"></a>00079         }
+<a name="l00080"></a>00080     }
+<a name="l00081"></a>00081 }
 </pre></div></p>
 
 </div>
@@ -243,12 +273,10 @@
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00071">71</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00071"></a>00071                                                        {
-<a name="l00072"></a>00072     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ab3f3b7b560ea62d08a7593baecf021d4" title="caches ct_mask parameter">ctMask</a> = (<span class="keywordtype">unsigned</span> int)par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();
-<a name="l00073"></a>00073     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#abb510124a4bc0754ec37fcd3f8a73ee6" title="caches ct_marker parameter">ctMarker</a> = (<span class="keywordtype">unsigned</span> int)par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();
-<a name="l00074"></a>00074 }
+<p><div class="fragment"><pre class="fragment"><a name="l00083"></a>00083                                                        {
+<a name="l00084"></a>00084     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ab3f3b7b560ea62d08a7593baecf021d4" title="caches ct_mask parameter">ctMask</a> = (<span class="keywordtype">unsigned</span> int)par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();
+<a name="l00085"></a>00085     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#abb510124a4bc0754ec37fcd3f8a73ee6" title="caches ct_marker parameter">ctMarker</a> = (<span class="keywordtype">unsigned</span> int)par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();
+<a name="l00086"></a>00086 }
 </pre></div></p>
 
 </div>
@@ -270,11 +298,9 @@
 
 <p>Initialization of the module. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00026">26</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00027"></a>00027 {
-<a name="l00028"></a>00028     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
-<a name="l00029"></a>00029 }
+<p><div class="fragment"><pre class="fragment"><a name="l00031"></a>00031 {
+<a name="l00032"></a>00032     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
+<a name="l00033"></a>00033 }
 </pre></div></p>
 
 </div>
@@ -304,22 +330,20 @@
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if frame is critical, else false </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00076">76</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00040">handleMessage()</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00036">handleMessage()</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00077"></a>00077 {
-<a name="l00078"></a>00078     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> macBytes[6];
-<a name="l00079"></a>00079     frame-&gt;getDest().getAddressBytes(macBytes);
-<a name="l00080"></a>00080     <span class="comment">//Check for ct</span>
-<a name="l00081"></a>00081     <span class="keywordflow">if</span> ((((macBytes[0] &lt;&lt; 24) | (macBytes[1] &lt;&lt; 16) | (macBytes[2] &lt;&lt; 8) | (macBytes[3])) &amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ab3f3b7b560ea62d08a7593baecf021d4" title="caches ct_mask parameter">ctMask</a>) == (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#abb510124a4bc0754ec37fcd3f8a73ee6" title="caches ct_marker parameter">ctMarker</a>
-<a name="l00082"></a>00082             &amp; ctMask))
-<a name="l00083"></a>00083     {
-<a name="l00084"></a>00084         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00085"></a>00085     }
-<a name="l00086"></a>00086     <span class="comment">//TODO More checking ?</span>
-<a name="l00087"></a>00087     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00088"></a>00088 }
+<p><div class="fragment"><pre class="fragment"><a name="l00089"></a>00089 {
+<a name="l00090"></a>00090     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> macBytes[6];
+<a name="l00091"></a>00091     frame-&gt;getDest().getAddressBytes(macBytes);
+<a name="l00092"></a>00092     <span class="comment">//Check for ct</span>
+<a name="l00093"></a>00093     <span class="keywordflow">if</span> ((((macBytes[0] &lt;&lt; 24) | (macBytes[1] &lt;&lt; 16) | (macBytes[2] &lt;&lt; 8) | (macBytes[3])) &amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ab3f3b7b560ea62d08a7593baecf021d4" title="caches ct_mask parameter">ctMask</a>) == (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#abb510124a4bc0754ec37fcd3f8a73ee6" title="caches ct_marker parameter">ctMarker</a>
+<a name="l00094"></a>00094             &amp; ctMask))
+<a name="l00095"></a>00095     {
+<a name="l00096"></a>00096         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00097"></a>00097     }
+<a name="l00098"></a>00098     <span class="comment">//TODO More checking ?</span>
+<a name="l00099"></a>00099     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00100"></a>00100 }
 </pre></div></p>
 
 </div>
@@ -339,9 +363,7 @@
 <p>Signal that is emitted when a frame is dropped. </p>
 <p>Frames may be dropped when no incoming module is configured. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00059">59</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00036">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00026">initialize()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00040">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00030">initialize()</a>.</p>
 
 </div>
 </div>
@@ -358,9 +380,7 @@
 
 <p>caches ct_marker parameter </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00052">52</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00071">handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00076">isCT()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00083">handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00088">isCT()</a>.</p>
 
 </div>
 </div>
@@ -377,9 +397,24 @@
 
 <p>caches ct_mask parameter </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00048">48</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00083">handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00088">isCT()</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00071">handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00076">isCT()</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a17a1091fad15b18d3914a28ab4c56b70"></a><!-- doxytag: member="TTEthernetModel::TTEInput::hadError" ref="a17a1091fad15b18d3914a28ab4c56b70" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a17a1091fad15b18d3914a28ab4c56b70">TTEthernetModel::TTEInput::hadError</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>set to true if there was an error during runtime </p>
+
+<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00040">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00026">TTEInput()</a>.</p>
 
 </div>
 </div>
@@ -396,18 +431,16 @@
 
 <p>Lists of incoming modules for each critical traffic id. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00043">43</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00031">addIncoming()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00036">handleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00035">addIncoming()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00040">handleMessage()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a></li>
-<li><a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a></li>
+<li><a class="el" href="_t_t_e_input_8h.html">TTEInput.h</a></li>
+<li><a class="el" href="_t_t_e_input_8cc.html">TTEInput.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:07 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

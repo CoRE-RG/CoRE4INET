@@ -18,12 +18,12 @@ The buffer removes and sends the first message in the queue.</p>
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
-Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+Unresolved types are missing from the diagram.</p>
 <img src="ttethernet.buffer.RCQueueBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="5,5,115,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
-Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+Unresolved types are missing from the diagram.</p>
 <img src="ttethernet.buffer.RCQueueBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="5,80,115,107">
 <area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="24,5,96,32">
 </map>
@@ -98,6 +98,16 @@ bandwidth allocation gap.</p>
    </td>
 </tr>
 <tr class="inherited">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr class="inherited">
    <td>max_dispatch_delay</td>
    <td>
       <i>int</i>
@@ -137,7 +147,7 @@ bandwidth allocation gap.</p>
    </tr>
 <tr>
    <td>display</td>
-   <td><i>i=block/buffer</i></td>
+   <td><i>q=frames</i></td>
    <td></td>
 </tr>
 <tr>
@@ -213,6 +223,7 @@ bandwidth allocation gap.</p>
 {
     </span><span style="color: #808080; font-style: italic; ">//RCQueueBuffer is implemented by the RCQueueBuffer C++ Class
 </span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCQueueBuffer</span><span style="color: #000000; ">);
+    </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;q=frames&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #808080; font-style: italic; ">//Statistic of the queue length of the buffer
 </span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">queueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">; </span><span style="color: #000000; ">interpolationmode</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sample</span><span style="color: #000000; ">-</span><span style="color: #000000; ">hold</span><span style="color: #000000; ">);
 

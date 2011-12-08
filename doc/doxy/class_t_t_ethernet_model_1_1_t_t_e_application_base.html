@@ -38,7 +38,7 @@
 <p>Base class for a TTEthernet-Application.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>&gt;</code></p>
+<p><code>#include &lt;TTEApplicationBase.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 <div class="dynsection">
@@ -68,8 +68,6 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 <p>Base class for a TTEthernet-Application. </p>
 <p>Containes the mapping to Buffers and the ability to execute Callbacks</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8h_source.html#l00036">36</a> of file <a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a427a8772d81dd1e3e10968c31807dd53"></a><!-- doxytag: member="TTEthernetModel::TTEApplicationBase::addBuffer" ref="a427a8772d81dd1e3e10968c31807dd53" args="(uint16 ctID, Buffer *buffer)" -->
 <div class="memitem">
@@ -105,8 +103,6 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00027">27</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00028"></a>00028 {
 <a name="l00029"></a>00029     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[ctID].push_back(buffer);
 <a name="l00030"></a>00030 }
@@ -138,8 +134,6 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00032">32</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032                                                     {
 <a name="l00033"></a>00033     Enter_Method(<span class="stringliteral">&quot;executeCallback(cb)&quot;</span>);
 <a name="l00034"></a>00034     cb-&gt;executeCallback();
@@ -162,18 +156,16 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 
 <p>Map of critical traffic identifies with their corresponding Buffers. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8h_source.html#l00045">45</a> of file <a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>.</p>
-
 <p>Referenced by <a class="el" href="_t_t_e_application_base_8cc_source.html#l00027">addBuffer()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a></li>
-<li><a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a></li>
+<li><a class="el" href="_t_t_e_application_base_8h.html">TTEApplicationBase.h</a></li>
+<li><a class="el" href="_t_t_e_application_base_8cc.html">TTEApplicationBase.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -35,7 +35,7 @@
 <p>Base class for the critical traffic conformance check.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_incoming_8h_source.html">Incoming.h</a>&gt;</code></p>
+<p><code>#include &lt;Incoming.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::Incoming:</div>
 <div class="dynsection">
@@ -50,11 +50,17 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 
 <p><a href="class_t_t_ethernet_model_1_1_incoming-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a3d8d8f98264c1e8353d7c37af4b4aa94">Incoming</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#a3d8d8f98264c1e8353d7c37af4b4aa94"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">initialize</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialization of the module.  <a href="#addb7e0a67350ee855fd2ee12229f5a1a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">handleMessage</a> (cMessage *msg)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards messages arriving on in-gate to out-gate.  <a href="#a5ac75f71601c607f38b7a96525b5b8e7"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3">hadError</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">set to true if there was an error during runtime  <a href="#a93c9b0218b8b0560152cfa731b70d6a3"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Static Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static simsignal_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5">ctDroppedSignal</a> = SIMSIGNAL_NULL</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Signal that is emitted when a frame is dropped.  <a href="#a7943b1436f1d363536ac89bfbd12d3c5"></a><br/></td></tr>
@@ -63,8 +69,30 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 <p>Base class for the critical traffic conformance check. </p>
 <p>This base class simply forwards messages from in to out</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html" title="Class for the critical traffic conformance check of rate-constrained traffic.">RCIncoming</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html" title="Class for the critical traffic conformance check of time-triggered traffic.">TTIncoming</a> </dd></dl>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a3d8d8f98264c1e8353d7c37af4b4aa94"></a><!-- doxytag: member="TTEthernetModel::Incoming::Incoming" ref="a3d8d8f98264c1e8353d7c37af4b4aa94" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TTEthernetModel::Incoming::Incoming </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
-<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00030">30</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
+<p>Constructor. </p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00024"></a>00024                   {
+<a name="l00025"></a>00025     <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a> = <span class="keyword">false</span>;
+</pre></div></p>
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a5ac75f71601c607f38b7a96525b5b8e7"></a><!-- doxytag: member="TTEthernetModel::Incoming::handleMessage" ref="a5ac75f71601c607f38b7a96525b5b8e7" args="(cMessage *msg)" -->
 <div class="memitem">
@@ -92,12 +120,10 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">TTEthernetModel::RCIncoming</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a957fe196b6e0e5fd38c6bf3af879e14b">TTEthernetModel::TTIncoming</a>.</p>
 
-<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00028">28</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00030"></a>00030 {
-<a name="l00031"></a>00031     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00032"></a>00032         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00033"></a>00033     }
+<p><div class="fragment"><pre class="fragment"><a name="l00034"></a>00034 {
+<a name="l00035"></a>00035     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
+<a name="l00036"></a>00036         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00037"></a>00037     }
 </pre></div></p>
 
 </div>
@@ -119,10 +145,8 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 
 <p>Initialization of the module. </p>
 
-<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00023">23</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00025"></a>00025 {
-<a name="l00026"></a>00026     <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
+<p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
 </pre></div></p>
 
 </div>
@@ -142,18 +166,33 @@ Inheritance diagram for TTEthernetModel::Incoming:</div>
 <p>Signal that is emitted when a frame is dropped. </p>
 <p>Frames may be dropped when there was a violation of CT rules. </p>
 
-<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00038">38</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
+<p>Referenced by <a class="el" href="_incoming_8cc_source.html#l00027">initialize()</a>.</p>
 
-<p>Referenced by <a class="el" href="_incoming_8cc_source.html#l00023">initialize()</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a93c9b0218b8b0560152cfa731b70d6a3"></a><!-- doxytag: member="TTEthernetModel::Incoming::hadError" ref="a93c9b0218b8b0560152cfa731b70d6a3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3">TTEthernetModel::Incoming::hadError</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>set to true if there was an error during runtime </p>
+
+<p>Referenced by <a class="el" href="_incoming_8cc_source.html#l00023">Incoming()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_incoming_8h_source.html">Incoming.h</a></li>
-<li><a class="el" href="_incoming_8cc_source.html">Incoming.cc</a></li>
+<li><a class="el" href="_incoming_8h.html">Incoming.h</a></li>
+<li><a class="el" href="_incoming_8cc.html">Incoming.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:07 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

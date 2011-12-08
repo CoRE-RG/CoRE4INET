@@ -35,7 +35,7 @@
 <p>Class representing a <a class="el" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_callback_8h_source.html">Callback.h</a>&gt;</code></p>
+<p><code>#include &lt;Callback.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::Callback:</div>
 <div class="dynsection">
@@ -77,8 +77,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 <p>The class stores a funtion pointer and args and executes the function on demand.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>This may be merged with the <a class="el" href="class_t_t_ethernet_model_1_1_task.html" title="Class representing a Task.">Task</a> class in a joined superclass. The code seems identical.</dd></dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00030">30</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac429c903d83a86d58c0fa1d25839112d"></a><!-- doxytag: member="TTEthernetModel::Callback::Callback" ref="ac429c903d83a86d58c0fa1d25839112d" args="(Buffer *buffer)" -->
 <div class="memitem">
@@ -97,8 +95,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 <div class="memdoc">
 
 <p>Constructor. </p>
-
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00055">55</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00055"></a>00055                                 {
 <a name="l00056"></a>00056             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7ef8744aee5a2529d55d48d81067ee9f" title="Boolean indicating whether args were set.">argSet</a>=<span class="keyword">false</span>;
@@ -129,8 +125,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_a_p_i_callback.html#af24a22d40df515c22abe0965457b2e2f">TTEthernetModel::APICallback</a>.</p>
 
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00103">103</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
-
 <p>Referenced by <a class="el" href="_t_t_e_application_base_8cc_source.html#l00032">TTEthernetModel::TTEApplicationBase::executeCallback()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00103"></a>00103                                       {
@@ -158,8 +152,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 <p>Getter for the function args. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the funtion arg used in the callback </dd></dl>
 
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00094">94</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00094"></a>00094                                       {
 <a name="l00095"></a>00095             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598" title="Pointer to the function args.">arg</a>;
 <a name="l00096"></a>00096         }
@@ -184,8 +176,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 
 <p>Getter for the function pointer. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the funtion pointer that is invoked in the callback </dd></dl>
-
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00074">74</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00074"></a>00074                                            {
 <a name="l00075"></a>00075             <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1" title="Function pointer of the callback.">fn</a>;
@@ -217,8 +207,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
   </table>
   </dd>
 </dl>
-
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00083">83</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00083"></a>00083                                                          {
 <a name="l00084"></a>00084             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#aa380f67856c5eb956b81635083e6f598" title="Pointer to the function args.">arg</a>=<a class="code" href="class_t_t_ethernet_model_1_1_callback.html#adc42d514caa3a02b999bc35fd5a079a1" title="Setter for the function args.">setFunctionArg</a>;
@@ -252,8 +240,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00065">65</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00065"></a>00065                                                                        {
 <a name="l00066"></a>00066             <a class="code" href="class_t_t_ethernet_model_1_1_callback.html#a7293b3eef51447f1b64cdfbef2c6d6d1" title="Function pointer of the callback.">fn</a>=functionPointer;
 <a name="l00067"></a>00067         }
@@ -275,8 +261,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 
 <p>Pointer to the function args. </p>
 
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00041">41</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
-
 <p>Referenced by <a class="el" href="_callback_8h_source.html#l00103">executeCallback()</a>, <a class="el" href="_callback_8cc_source.html#l00015">TTEthernetModel::APICallback::executeCallback()</a>, <a class="el" href="_callback_8h_source.html#l00094">getFunctionArg()</a>, and <a class="el" href="_callback_8h_source.html#l00083">setFunctionArg()</a>.</p>
 
 </div>
@@ -293,8 +277,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 <div class="memdoc">
 
 <p>Boolean indicating whether args were set. </p>
-
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00045">45</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_callback_8h_source.html#l00055">Callback()</a>, <a class="el" href="_callback_8cc_source.html#l00015">TTEthernetModel::APICallback::executeCallback()</a>, and <a class="el" href="_callback_8h_source.html#l00083">setFunctionArg()</a>.</p>
 
@@ -313,8 +295,6 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 
 <p>Pointer to the <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> that issues the <a class="el" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>. </p>
 
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00050">50</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
-
 <p>Referenced by <a class="el" href="_callback_8cc_source.html#l00015">TTEthernetModel::APICallback::executeCallback()</a>.</p>
 
 </div>
@@ -332,17 +312,15 @@ Inheritance diagram for TTEthernetModel::Callback:</div>
 
 <p>Function pointer of the callback. </p>
 
-<p>Definition at line <a class="el" href="_callback_8h_source.html#l00036">36</a> of file <a class="el" href="_callback_8h_source.html">Callback.h</a>.</p>
-
 <p>Referenced by <a class="el" href="_callback_8h_source.html#l00103">executeCallback()</a>, <a class="el" href="_callback_8cc_source.html#l00015">TTEthernetModel::APICallback::executeCallback()</a>, <a class="el" href="_callback_8h_source.html#l00074">getFunctionPointer()</a>, and <a class="el" href="_callback_8h_source.html#l00065">setFunctionPointer()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_callback_8h_source.html">Callback.h</a></li>
+<li><a class="el" href="_callback_8h.html">Callback.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

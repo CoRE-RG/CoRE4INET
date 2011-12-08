@@ -1,0 +1,74 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Module Interface <i>IConfigurationManager</i></h2>
+<b>Package:</b> ttethernet.configuration<br/><b>File: <a href="src-configuration-IConfigurationManager.ned.html">src/configuration/IConfigurationManager.ned</a></b><br/><p>(no description)</p><img src="ttethernet.configuration.IConfigurationManager-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="0,31,264,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram.</p>
+<img src="ttethernet.configuration.IConfigurationManager-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="47,80,196,107">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="5,5,107,32">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="131,5,245,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram.</p>
+<img src="ttethernet.configuration.IConfigurationManager-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="5,5,155,32">
+</map>
+<h3 class="subtitle">Used in compound modules:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.nodes.ethernet.TTEEtherHost.html">TTEEtherHost</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Module for a TTEthernet Host.
+Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> module as physical port,
+sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+The Host is configured by the provided TTEthernet XML network configuration
+(network_configuration parameter) and uses the device_name parameter to find its config.
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.nodes.ethernet.TTEEtherSwitch.html">TTEEtherSwitch</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Module for a TTEthernet Switch with variable number of ports.
+Contains a configurable best-effort implementation (beRelayUnitType like IMACRelayUnit),
+<a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+The switch is configured by the provided TTEthernet XML network configuration
+(network_configuration parameter) and uses the device_name parameter to find its config.
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #800000; font-weight: bold; ">moduleinterface</span><span style="color: #000000; "> </span><span style="color: #000000; ">IConfigurationManager</span><span style="color: #000000; ">
+{
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

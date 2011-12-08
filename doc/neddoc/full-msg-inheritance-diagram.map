@@ -1,9 +1,0 @@
-<area shape="rect" href="APIPayload.html" title="Packet APIPayload" alt="" coords="5,5,93,32">
-<area shape="rect" href="CTFrame.html" title="Packet CTFrame" alt="" coords="124,80,199,107">
-<area shape="rect" href="../../../inet/doc/neddoc/EtherFrame.html" title="Packet EtherFrame" alt="" coords="117,5,205,32">
-<area shape="rect" href="SchedulerActionTimeEvent.html" title="Message SchedulerActionTimeEvent" alt="" coords="115,155,291,181">
-<area shape="rect" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="239,80,351,107">
-<area shape="rect" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="315,155,459,181">
-<area shape="rect" href="SchedulerMessage.html" title="Message SchedulerMessage" alt="" coords="229,5,360,32">
-<area shape="rect" href="SchedulerMessageKind.html" title="Enum SchedulerMessageKind" alt="" coords="384,5,541,32">
-<area shape="rect" href="TTBufferEmpty.html" title="Message TTBufferEmpty" alt="" coords="565,5,672,32">

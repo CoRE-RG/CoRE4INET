@@ -38,7 +38,7 @@
 <p>Base class for a TTEthernet-Application based on the TTEthernet-API.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>&gt;</code></p>
+<p><code>#include &lt;TTEAPIApplicationBase.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <div class="dynsection">
@@ -92,8 +92,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <p>The class contains the wrappers for the C to C++ Mapping. </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>Please note that the TTEthernet-API functionality is not yet completely implemented</dd></dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html" title="Simple Test-Application based on the TTEthernet-API.">TTEAPITestApplication</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html#l00071">71</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a6a91f5372abc6bd1edd29c797c5c087c"></a><!-- doxytag: member="TTEthernetModel::TTEAPIApplicationBase::handleMessage" ref="a6a91f5372abc6bd1edd29c797c5c087c" args="(cMessage *msg)" -->
 <div class="memitem">
@@ -119,8 +117,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
   </table>
   </dd>
 </dl>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00027">27</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00030"></a>00030                           {
 <a name="l00031"></a>00031 
@@ -154,8 +150,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>initializes the module. </p>
 <p>Registeres a START_APPLICATION self-message that triggers the application start </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00022">22</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00027">handleMessage()</a>.</p>
 
@@ -204,8 +198,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00047">47</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00055"></a>00055                                             {
 <a name="l00056"></a>00056     ev &lt;&lt; <span class="stringliteral">&quot;TTEAPIApplicationBase::startApplication() not implemented&quot;</span> &lt;&lt; endl;
 <a name="l00057"></a>00057     <span class="keywordflow">throw</span>;
@@ -237,8 +229,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html#ad9351f7c43a7b6053d953a122e328c3a">TTEthernetModel::TTEAPITestApplication</a>.</p>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00042">42</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00042"></a>00042                                                                    {
 <a name="l00043"></a>00043         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">startApplication</a>();
 <a name="l00044"></a>00044         <span class="keyword">delete</span> msg;
@@ -265,8 +255,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00381">381</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00383"></a>00383                   {
 <a name="l00384"></a>00384         free(priv-&gt;data);
@@ -302,8 +290,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00353">353</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00356"></a>00356                                                            {
 <a name="l00357"></a>00357         frame-&gt;data[i] = payload-&gt;getData(i);
@@ -367,8 +353,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00120">120</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00134"></a>00134                                                                               {
 <a name="l00135"></a>00135     Enter_Method_Silent();
 <a name="l00136"></a>00136     Buffer *buffer = <span class="keyword">dynamic_cast&lt;</span>Buffer*<span class="keyword">&gt;</span>(getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;bgIn&quot;</span>));
@@ -410,8 +394,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00101">101</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00570">TTEthernetModel::tte_read_input_buf()</a>.</p>
 
@@ -468,8 +450,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00441">441</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00443"></a>00443                 {
 <a name="l00444"></a>00444                 cb-&gt;setFunctionArg((<span class="keywordtype">void</span>*)value);
@@ -553,8 +533,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00139">139</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00154"></a>00154                                                                               {
 <a name="l00155"></a>00155     Enter_Method_Silent();
 <a name="l00156"></a>00156     std::map&lt;uint16, std::list&lt;Buffer *&gt; &gt;::iterator bufferList = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.find(ct_id);
@@ -614,8 +592,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00063">63</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00078"></a>00078                                                                               {
 <a name="l00079"></a>00079     Enter_Method_Silent();
@@ -682,8 +658,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00177">177</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00185"></a>00185     {
 <a name="l00186"></a>00186         <span class="keywordflow">return</span> ETT_INVMSGID;
@@ -802,8 +776,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00313">313</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00328"></a>00328                                                                                    {
 <a name="l00329"></a>00329     Enter_Method_Silent();
 <a name="l00330"></a>00330     TTEAPIPriv *priv = (TTEAPIPriv*)buf-&gt;priv;
@@ -859,8 +831,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00265">265</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00266"></a>00266                 {
 <a name="l00267"></a>00267                 valueArr[0] = valueArr[1] = valueArr[2] = valueArr[3] = valueArr[4] = valueArr[5] = 0;
@@ -951,8 +921,6 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 <p>implementation of the TTEthernet-API method. </p>
 <p>see TTEthernet-API documentation for further information </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00396">396</a> of file <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a>.</p>
-
 <p><div class="fragment"><pre class="fragment"><a name="l00398"></a>00398                   {
 <a name="l00399"></a>00399         <span class="comment">//free(priv-&gt;data);</span>
 <a name="l00400"></a>00400         priv-&gt;data = NULL;
@@ -1000,11 +968,11 @@ Inheritance diagram for TTEthernetModel::TTEAPIApplicationBase:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_e_a_p_i_application_base_8h_source.html">TTEAPIApplicationBase.h</a></li>
-<li><a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html">TTEAPIApplicationBase.cc</a></li>
+<li><a class="el" href="_t_t_e_a_p_i_application_base_8h.html">TTEAPIApplicationBase.h</a></li>
+<li><a class="el" href="_t_t_e_a_p_i_application_base_8cc.html">TTEAPIApplicationBase.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
