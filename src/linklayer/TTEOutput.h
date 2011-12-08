@@ -31,11 +31,6 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Destructor
          */
         ~TTEOutput();
-
-        /**
-         * @brief Registers a time-triggered buffer that feeds the module.
-         */
-        virtual void registerTTBuffer(TTBuffer *buffer);
     private:
         /**
          * @brief Outgoing Channel used to calculate transmission duration.
@@ -95,6 +90,11 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @returns true if transmission is allowed else false
          */
         virtual bool isTransmissionAllowed(EtherFrame *message);
+
+        /**
+         * @brief Registers a time-triggered buffer that feeds the module.
+         */
+        virtual void registerTTBuffer(TTBuffer *buffer);
     protected:
         /**
          * @brief Initialization of the module
@@ -116,6 +116,13 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 
         /**
          * @brief this method is invoked when the underlying mac is idle.

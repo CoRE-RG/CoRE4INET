@@ -5,6 +5,8 @@
 #include <TTEScheduler.h>
 #include <TTBufferEmpty_m.h>
 
+#include <HelperFunctions.h>
+
 using namespace TTEthernetModel;
 
 Define_Module( TTEOutput);
@@ -142,6 +144,35 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
     }
     //This should only happen if buffer was empty
     ttBuffers.push_back(ttBuffer);
+}
+
+void TTEOutput::handleParameterChange(const char* parname){
+    ttBuffers.clear();
+    if(ev.isGUI()){
+        //TODO check why this does not work
+        //getDisplayString().setTagArg("i2", 0, "");
+        //getDisplayString().setTagArg("tt", 0, "");
+    }
+    std::string ttBuffersString = par("tt_buffers").stdstringValue();
+    std::vector<std::string> ttBufferPaths;
+    split(ttBuffersString,',',ttBufferPaths);
+    for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
+            ttBufferPath!=ttBufferPaths.end();ttBufferPath++){
+        cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
+        if(module){
+            TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (module);
+            if(ttBuffer){
+                registerTTBuffer(ttBuffer);
+            }
+        }
+        else{
+            if(ev.isGUI()){
+                ev<<"Configuration problem: Module "<<(*ttBufferPath)<<" could not be resolved or is no TT-Buffer!"<<endl;
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem outgoing TT-Buffer!");
+            }
+        }
+    }
 }
 
 void TTEOutput::requestPacket()

@@ -284,8 +284,8 @@ void ConfigurationManager::initialize(int stage)
 
                                 if (((TTEOutput *) destModule->getSubmodule("tteOutput")))
                                 {
-                                    //TODO !!!!!
-                                    ((TTEOutput *) destModule->getSubmodule("tteOutput"))->registerTTBuffer(ttbuffer);
+                                    std::string destPath = ttbuffer->getFullPath();
+                                    addPath(((TTEOutput *) destModule->getSubmodule("tteOutput"))->par("tt_buffers"),destPath);
                                 }
                             }
                             else if (outgoing->eClass()->getName() == "RCOutgoing")

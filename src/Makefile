@@ -520,6 +520,7 @@ $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
 	scheduler/TTEScheduler.h \
+	utilities/HelperFunctions.h \
 	$(INET_PROJ)/src/base/AbstractQueue.h \
 	$(INET_PROJ)/src/base/EnqueueHook.h \
 	$(INET_PROJ)/src/base/INETDefs.h \

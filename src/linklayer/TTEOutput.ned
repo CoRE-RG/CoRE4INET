@@ -19,6 +19,8 @@ simple TTEOutput like IOutputQueue
         @statistic[ttQueueLength](title="TT-Queue Length"; record=vector; interpolationmode=sample-hold);
         //Statistic of the queue length of best-effort frames
         @statistic[beQueueLength](title="BE-Queue Length"; record=vector; interpolationmode=sample-hold);
+        //Comma seperated list of TTBuffers that send messages to this port
+        string tt_buffers = "";
     gates:
         //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)
         input in @labels(EtherFrame);
