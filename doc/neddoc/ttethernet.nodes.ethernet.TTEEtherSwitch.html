@@ -23,7 +23,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
-Unresolved types are missing from the diagram.</p>
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
 <img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="215,5,329,32">
 <area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="5,80,77,107">
 <area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="101,80,197,107">
@@ -33,7 +33,7 @@ Unresolved types are missing from the diagram.</p>
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
-Unresolved types are missing from the diagram.</p>
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
 <img src="ttethernet.nodes.ethernet.TTEEtherSwitch-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="5,5,120,32">
 </map>
 <h3 class="subtitle">Parameters:</h3>
@@ -79,9 +79,9 @@ Unresolved types are missing from the diagram.</p>
    <td>
       <i>string</i>
    </td>
-   <td>"TTEConfigurationManager"</td>
+   <td>"BaseConfigurationManager"</td>
    <td>
-<p>type of the configurationManager</p>
+<p>type of the configurationManager this package contains a dummy ConfigurationManager (<a href="ttethernet.configuration.BaseConfigurationManager.html">BaseConfigurationManager</a>) that can be extended</p>
    </td>
 </tr>
 </table>
@@ -223,8 +223,8 @@ additional frames are dropped. Only used if queueModule==""</p>
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">device_name</span><span style="color: #000000; ">;
         </span><span style="color: #808080; font-style: italic; ">// type of the best-effort MACRelayUnit; currently possible MACRelayUnitNP, MACRelayUnitPP
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">beRelayUnitType</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;MACRelayUnitNP&quot;</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">// type of the configurationManager
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;TTEConfigurationManager&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// type of the configurationManager this package contains a dummy ConfigurationManager (BaseConfigurationManager) that can be extended
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;BaseConfigurationManager&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">// Physical ports of the switch
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">inout</span><span style="color: #000000; "> </span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">[] </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; ">;

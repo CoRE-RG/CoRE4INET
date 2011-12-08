@@ -35,7 +35,7 @@
 <p>Scheduler module.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;TTEScheduler.h&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>&gt;</code></p>
 
 <p><a href="class_t_t_ethernet_model_1_1_t_t_e_scheduler-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -86,6 +86,8 @@
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Scheduler module. </p>
 <p>Implements a scheduler with a dedicated local clock with adjustable precision that may be synchronized by a synchronization module </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00033">33</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a902defa7f993806c5121a8c0099cf3de"></a><!-- doxytag: member="TTEthernetModel::TTEScheduler::changeDrift" ref="a902defa7f993806c5121a8c0099cf3de" args="()" -->
 <div class="memitem">
@@ -104,6 +106,8 @@
 
 <p>Helper function to change the drift. </p>
 <p>Can be overwritten to implement special clock drift behavior. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00104">104</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00108"></a>00108                               {
 <a name="l00109"></a>00109 
@@ -141,6 +145,8 @@
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00155">155</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
+
 <p><div class="fragment"><pre class="fragment"><a name="l00159"></a>00159                                            {
 <a name="l00160"></a>00160     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#adb93cd3401e0c20955decca5937aa056" title="Simulation time when the last cycle started.">lastCycleStart</a>+=SimTime(ticks*<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acbd978ace81787d4e8b47e33748594e2" title="caches current_tick parameter">currentTick</a>);
 <a name="l00161"></a>00161 
@@ -166,6 +172,8 @@
 <div class="memdoc">
 
 <p>Helper function to correct Events after tick length changes. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00117">117</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00121"></a>00121                                 {
 <a name="l00122"></a>00122     <span class="keywordflow">for</span>(std::list&lt;SchedulerEvent*&gt;::const_iterator registredEvent = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0791fe14690ef7e7d8522bd327b131a4" title="List of registered SchedulerEvents.">registredEvents</a>.begin(); registredEvent != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0791fe14690ef7e7d8522bd327b131a4" title="List of registered SchedulerEvents.">registredEvents</a>.end(); registredEvent++){
@@ -214,6 +222,8 @@
 <p>Returns the current number of ticks. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Number of ticks since last cycle start </dd></dl>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00165">165</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00222">TTEthernetModel::TTEOutput::isTransmissionAllowed()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00170"></a>00170 {
@@ -242,6 +252,8 @@
 <p>Returns the absolute number of ticks. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Number of ticks since simulation start </dd></dl>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00175">175</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6c787721f21a9e9d4484cc121d41d65e"></a><!-- doxytag: member="TTEthernetModel::TTEScheduler::handleMessage" ref="a6c787721f21a9e9d4484cc121d41d65e" args="(cMessage *msg)" -->
@@ -268,6 +280,8 @@
   </table>
   </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00075">75</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00080"></a>00080 {
 <a name="l00081"></a>00081     <span class="keywordflow">if</span> (msg-&gt;isSelfMessage() &amp;&amp; (msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a> || msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>))
@@ -320,6 +334,8 @@
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00147">147</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
+
 <p><div class="fragment"><pre class="fragment"><a name="l00151"></a>00151                                                            {
 <a name="l00152"></a>00152     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac239147d43b2e9cbaf2cfcc4217a5b01" title="caches max_drift_change parameter">maxDriftChange</a> = par(<span class="stringliteral">&quot;max_drift_change&quot;</span>).doubleValue();
 <a name="l00153"></a>00153     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a4fa276eb9d8cf9cf50a31d366a135cc8" title="caches max_drift parameter">maxDrift</a> = par(<span class="stringliteral">&quot;max_drift&quot;</span>).doubleValue();
@@ -343,6 +359,8 @@
 <div class="memdoc">
 
 <p>Initialization of the module. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00024">24</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029 {
 <a name="l00030"></a>00030     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual...">currentDrift</a> = registerSignal(<span class="stringliteral">&quot;currentDrift&quot;</span>);
@@ -379,6 +397,8 @@
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>returns true on success, else false</dd></dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc.">SchedulerEvent_Base</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00035">35</a> of file <a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00049">TTEthernetModel::TTBuffer::handleMessage()</a>, and <a class="el" href="_t_t_buffer_8cc_source.html#l00036">TTEthernetModel::TTBuffer::initialize()</a>.</p>
 
@@ -434,6 +454,8 @@
 
 <p>Signal that is emitted every time the drift (Difference of configured and actual tick length) changes. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00149">149</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00024">initialize()</a>.</p>
 
 </div>
@@ -451,6 +473,8 @@
 
 <p>caches current_tick parameter </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00068">68</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac6946cb8677ed2945222c2f47430d2bd"></a><!-- doxytag: member="TTEthernetModel::TTEScheduler::cycleTicks" ref="ac6946cb8677ed2945222c2f47430d2bd" args="" -->
@@ -465,6 +489,8 @@
 <div class="memdoc">
 
 <p>caches cycle_ticks parameter </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00076">76</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 
 </div>
 </div>
@@ -481,6 +507,8 @@
 
 <p>Simulation time when the last cycle started. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00039">39</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a15a5e21cf00de7823dfc65c7ff2d3d3c"></a><!-- doxytag: member="TTEthernetModel::TTEScheduler::lastCycleTicks" ref="a15a5e21cf00de7823dfc65c7ff2d3d3c" args="" -->
@@ -495,6 +523,8 @@
 <div class="memdoc">
 
 <p>Number of ticks since the simulation started when the last cycle started. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00045">45</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 
 </div>
 </div>
@@ -511,6 +541,8 @@
 
 <p>caches max_drift parameter </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00063">63</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac239147d43b2e9cbaf2cfcc4217a5b01"></a><!-- doxytag: member="TTEthernetModel::TTEScheduler::maxDriftChange" ref="ac239147d43b2e9cbaf2cfcc4217a5b01" args="" -->
@@ -525,6 +557,8 @@
 <div class="memdoc">
 
 <p>caches max_drift_change parameter </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00059">59</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 
 </div>
 </div>
@@ -541,6 +575,8 @@
 
 <p>Signal that is emitted at the beginning of a new cycle. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00154">154</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_scheduler_8cc_source.html#l00024">initialize()</a>.</p>
 
 </div>
@@ -555,6 +591,8 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00054">54</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
 
 </div>
 </div>
@@ -572,6 +610,8 @@
 <p>List of registered SchedulerEvents. </p>
 <p>Used to reregister after clock tick changes. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00052">52</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af547dd4e97d56acb0e703e6107f3a978"></a><!-- doxytag: member="TTEthernetModel::TTEScheduler::tick" ref="af547dd4e97d56acb0e703e6107f3a978" args="" -->
@@ -587,14 +627,16 @@
 
 <p>caches tick parameter </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_scheduler_8h_source.html#l00072">72</a> of file <a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_e_scheduler_8h.html">TTEScheduler.h</a></li>
-<li><a class="el" href="_t_t_e_scheduler_8cc.html">TTEScheduler.cc</a></li>
+<li><a class="el" href="_t_t_e_scheduler_8h_source.html">TTEScheduler.h</a></li>
+<li><a class="el" href="_t_t_e_scheduler_8cc_source.html">TTEScheduler.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:33 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:41 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

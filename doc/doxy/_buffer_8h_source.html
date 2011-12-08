@@ -60,59 +60,57 @@
 <a name="l00028"></a>00028 
 <a name="l00047"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html">00047</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> : <span class="keyword">public</span> cSimpleModule
 <a name="l00048"></a>00048 {
-<a name="l00049"></a>00049     <span class="keyword">protected</span>:
-<a name="l00053"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">00053</a>         std::list&lt;cGate*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>;
-<a name="l00057"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">00057</a>         std::map&lt;TTEApplicationBase*, Callback*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>;
-<a name="l00061"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">00061</a>         std::map&lt;TTEApplicationBase*, Callback*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>;
-<a name="l00062"></a>00062 
-<a name="l00066"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58">00066</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a>;
-<a name="l00070"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f">00070</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a>;
-<a name="l00074"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c">00074</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>;
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076     <span class="keyword">private</span>:
-<a name="l00080"></a>00080         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">initializeStatistics</a>();
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082     <span class="keyword">protected</span>:
-<a name="l00086"></a>00086         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a976b864b117683fbc02a043090e54db2" title="Initializes the module.">initialize</a>();
-<a name="l00087"></a>00087 
-<a name="l00098"></a>00098         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">handleMessage</a>(cMessage *msg);
-<a name="l00099"></a>00099 
-<a name="l00105"></a>00105         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);
-<a name="l00106"></a>00106 
-<a name="l00114"></a>00114         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(EtherFrame *newFrame);
-<a name="l00115"></a>00115 
-<a name="l00124"></a>00124         <span class="keyword">virtual</span> EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
-<a name="l00125"></a>00125 
-<a name="l00129"></a>00129         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();
+<a name="l00049"></a>00049     <span class="keyword">public</span>:
+<a name="l00053"></a>00053         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a59b8743e4a5f731bdd0c4185c9ef263b" title="Destructor.">~Buffer</a>();
+<a name="l00054"></a>00054     <span class="keyword">protected</span>:
+<a name="l00058"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462">00058</a>         std::list&lt;cGate*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>;
+<a name="l00062"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">00062</a>         std::map&lt;TTEApplicationBase*, Callback*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>;
+<a name="l00066"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">00066</a>         std::map&lt;TTEApplicationBase*, Callback*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>;
+<a name="l00067"></a>00067 
+<a name="l00071"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58">00071</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a>;
+<a name="l00075"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f">00075</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a>;
+<a name="l00079"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c">00079</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>;
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081     <span class="keyword">private</span>:
+<a name="l00085"></a>00085         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">initializeStatistics</a>();
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     <span class="keyword">protected</span>:
+<a name="l00091"></a>00091         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a976b864b117683fbc02a043090e54db2" title="Initializes the module.">initialize</a>();
+<a name="l00092"></a>00092 
+<a name="l00103"></a>00103         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">handleMessage</a>(cMessage *msg);
+<a name="l00104"></a>00104 
+<a name="l00110"></a>00110         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);
+<a name="l00111"></a>00111 
+<a name="l00119"></a>00119         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(EtherFrame *newFrame);
+<a name="l00120"></a>00120 
+<a name="l00129"></a>00129         <span class="keyword">virtual</span> EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
 <a name="l00130"></a>00130 
-<a name="l00136"></a>00136         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<span class="keywordtype">bool</span> empty);
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138     <span class="keyword">public</span>:
-<a name="l00147"></a>00147         EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();
-<a name="l00148"></a>00148 
-<a name="l00156"></a>00156         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a89b421859697d7a8a5c10309c4b3a523" title="Adds a destination gate to the buffer.">addDestinationGate</a>(cGate *destinationGate);
-<a name="l00157"></a>00157 
-<a name="l00165"></a>00165         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a15e34ce075694416b75da6825d7e83ee" title="Removes a destination gate to the buffer.">removeDestinationGate</a>(cGate *destinationGate);
-<a name="l00166"></a>00166 
-<a name="l00177"></a>00177         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e" title="Adds a receive callback for an application to the buffer.">addReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
-<a name="l00178"></a>00178 
-<a name="l00186"></a>00186         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7" title="Returns the currently registered receive callback for an application.">getReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
-<a name="l00187"></a>00187 
-<a name="l00198"></a>00198         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015" title="Adds a transmit callback for an application to the buffer.">addTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
-<a name="l00199"></a>00199 
-<a name="l00207"></a>00207         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252" title="Returns the currently registered transmit callback for an application.">getTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
-<a name="l00208"></a>00208 
-<a name="l00209"></a>00209     <span class="keyword">protected</span>:
-<a name="l00213"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5">00213</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a>;
-<a name="l00214"></a>00214 
-<a name="l00218"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d">00218</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>;
-<a name="l00219"></a>00219 
-<a name="l00220"></a>00220 };
-<a name="l00221"></a>00221 }
-<a name="l00222"></a>00222 
-<a name="l00223"></a>00223 <span class="preprocessor">#endif</span>
+<a name="l00134"></a>00134         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();
+<a name="l00135"></a>00135 
+<a name="l00141"></a>00141         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<span class="keywordtype">bool</span> empty);
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143     <span class="keyword">public</span>:
+<a name="l00152"></a>00152         EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();
+<a name="l00153"></a>00153 
+<a name="l00164"></a>00164         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7a1d776c979b17d4108a39c0d8f4513e" title="Adds a receive callback for an application to the buffer.">addReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
+<a name="l00165"></a>00165 
+<a name="l00173"></a>00173         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ae10e7a38f55951ee20af4b28b91c5fe7" title="Returns the currently registered receive callback for an application.">getReceiveCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
+<a name="l00174"></a>00174 
+<a name="l00185"></a>00185         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aade74911a8a34f0940e109274992a015" title="Adds a transmit callback for an application to the buffer.">addTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
+<a name="l00186"></a>00186 
+<a name="l00194"></a>00194         <a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a>* <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252" title="Returns the currently registered transmit callback for an application.">getTransmitCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> *application);
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196     <span class="keyword">protected</span>:
+<a name="l00200"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5">00200</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a>;
+<a name="l00201"></a>00201 
+<a name="l00205"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d">00205</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>;
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207 };
+<a name="l00208"></a>00208 }
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:40 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

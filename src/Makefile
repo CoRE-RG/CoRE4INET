@@ -63,6 +63,7 @@ OBJS = \
     $O/buffer/QueueBuffer.o \
     $O/buffer/RCQueueBuffer.o \
     $O/buffer/Buffer.o \
+    $O/configuration/BaseConfigurationManager.o \
     $O/ctc/RCIncoming.o \
     $O/ctc/TTIncoming.o \
     $O/ctc/Incoming.o \
@@ -446,6 +447,8 @@ $O/buffer/TTQueueBuffer.o: buffer/TTQueueBuffer.cc \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
+$O/configuration/BaseConfigurationManager.o: configuration/BaseConfigurationManager.cc \
+	configuration/BaseConfigurationManager.h
 $O/ctc/Incoming.o: ctc/Incoming.cc \
 	ctc/Incoming.h
 $O/ctc/RCIncoming.o: ctc/RCIncoming.cc \

@@ -15,7 +15,13 @@
 
 package ttethernet.configuration;
 
-
+//
+// Interface for a ConfigurationManager that configures a node according to its
+// configuration
+//
+// @see BaseConfigurationManager
+//
+// @author Till Steinbach
 moduleinterface IConfigurationManager
 {
 }

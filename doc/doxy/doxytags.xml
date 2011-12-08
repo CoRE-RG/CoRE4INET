@@ -29,6 +29,27 @@
     </member>
   </compound>
   <compound kind="file">
+    <name>BaseConfigurationManager.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/configuration/</path>
+    <filename>_base_configuration_manager_8cc</filename>
+    <includes id="_base_configuration_manager_8cc" name="BaseConfigurationManager.cc" local="yes" imported="no">BaseConfigurationManager.h</includes>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>aefd28f6a5636deeca78e7c0554fb7954</anchor>
+      <arglist>(BaseConfigurationManager)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>BaseConfigurationManager.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/configuration/</path>
+    <filename>_base_configuration_manager_8h</filename>
+    <class kind="class">TTEthernetModel::BaseConfigurationManager</class>
+    <namespace>TTEthernetModel</namespace>
+  </compound>
+  <compound kind="file">
     <name>BGBuffer.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/buffer/</path>
     <filename>_b_g_buffer_8cc</filename>
@@ -1145,6 +1166,7 @@
     <class kind="class">TTEthernetModel::TTBufferEmpty</class>
     <class kind="class">TTEthernetModel::TTDoubleBuffer</class>
     <class kind="class">TTEthernetModel::TTQueueBuffer</class>
+    <class kind="class">TTEthernetModel::BaseConfigurationManager</class>
     <class kind="class">TTEthernetModel::Incoming</class>
     <class kind="class">TTEthernetModel::RCIncoming</class>
     <class kind="class">TTEthernetModel::TTIncoming</class>
@@ -1439,6 +1461,13 @@
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
       <anchor>a8080299cdc6b0d91f71aeab68333bcfc</anchor>
       <arglist>(cCommBuffer *b, TTBufferEmpty &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>aefd28f6a5636deeca78e7c0554fb7954</anchor>
+      <arglist>(BaseConfigurationManager)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2486,6 +2515,24 @@
     <filename>class_t_t_ethernet_model_1_1_t_t_queue_buffer.html</filename>
     <base>TTEthernetModel::TTBuffer</base>
     <base>TTEthernetModel::QueueBuffer</base>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::BaseConfigurationManager</name>
+    <filename>class_t_t_ethernet_model_1_1_base_configuration_manager.html</filename>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_base_configuration_manager.html</anchorfile>
+      <anchor>a7a96aa7bb1d1cfdb5cc0c7aeb5c5f0c7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_base_configuration_manager.html</anchorfile>
+      <anchor>a6fd4995bb7f027a1e53e631a7051889e</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>TTEthernetModel::Incoming</name>
@@ -3545,6 +3592,13 @@
     <file>TTQueueBuffer.h</file>
   </compound>
   <compound kind="dir">
+    <name>src/configuration/</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/configuration/</path>
+    <filename>dir_167948e7818992f0a0c2d0fef2c62405.html</filename>
+    <file>BaseConfigurationManager.cc</file>
+    <file>BaseConfigurationManager.h</file>
+  </compound>
+  <compound kind="dir">
     <name>src/ctc/</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/ctc/</path>
     <filename>dir_70493b844ed7499cbfccf4c5cccc6d42.html</filename>
@@ -3592,6 +3646,7 @@
     <dir>src/applications/</dir>
     <dir>src/base/</dir>
     <dir>src/buffer/</dir>
+    <dir>src/configuration/</dir>
     <dir>src/ctc/</dir>
     <dir>src/linklayer/</dir>
     <dir>src/scheduler/</dir>

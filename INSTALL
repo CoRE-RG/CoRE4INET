@@ -1,9 +1,6 @@
 INSTALLATION INSTRUCTIONS
 =========================
 
-The TTE4INET model can currently only be only used on 32Bit Linux systems
-due to the precompiled eemf4cpp libraries.
-
 PREREQUISITES
 
 You should have a working OMNeT++ installation, version 4.2 or later with the

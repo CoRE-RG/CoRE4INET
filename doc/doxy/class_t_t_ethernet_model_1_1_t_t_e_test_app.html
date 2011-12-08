@@ -38,7 +38,7 @@
 <p>Simple Test-Application.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;TTETestApp.h&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_t_t_e_test_app_8h_source.html">TTETestApp.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::TTETestApp:</div>
 <div class="dynsection">
@@ -61,6 +61,8 @@ Inheritance diagram for TTEthernetModel::TTETestApp:</div>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Simple Test-Application. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_t_t_e_test_app_8h_source.html#l00031">31</a> of file <a class="el" href="_t_t_e_test_app_8h_source.html">TTETestApp.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a07fea9940a97ebef177e7dda880b39f3"></a><!-- doxytag: member="TTEthernetModel::TTETestApp::handleMessage" ref="a07fea9940a97ebef177e7dda880b39f3" args="(cMessage *msg)" -->
 <div class="memitem">
@@ -79,6 +81,8 @@ Inheritance diagram for TTEthernetModel::TTETestApp:</div>
 <div class="memdoc">
 
 <p>Handles message generation. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_test_app_8cc_source.html#l00026">26</a> of file <a class="el" href="_t_t_e_test_app_8cc_source.html">TTETestApp.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029 {
 <a name="l00030"></a>00030     <span class="keywordflow">if</span> (!msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>) &amp;&amp; *<span class="keyword">new</span> std::string(getParentModule()-&gt;getName()) != <span class="stringliteral">&quot;videoclient&quot;</span>)
@@ -127,17 +131,19 @@ Inheritance diagram for TTEthernetModel::TTETestApp:</div>
 <p>Initialization of the module. </p>
 <p>Sends activator message </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_test_app_8cc_source.html#l00021">21</a> of file <a class="el" href="_t_t_e_test_app_8cc_source.html">TTETestApp.cc</a>.</p>
+
 <p><div class="fragment"><pre class="fragment"><a name="l00024"></a>00024 {
 </pre></div></p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_e_test_app_8h.html">TTETestApp.h</a></li>
-<li><a class="el" href="_t_t_e_test_app_8cc.html">TTETestApp.cc</a></li>
+<li><a class="el" href="_t_t_e_test_app_8h_source.html">TTETestApp.h</a></li>
+<li><a class="el" href="_t_t_e_test_app_8cc_source.html">TTETestApp.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:40 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

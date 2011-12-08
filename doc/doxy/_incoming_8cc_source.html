@@ -52,22 +52,26 @@
 <a name="l00020"></a>00020 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>(Incoming);
 <a name="l00021"></a>00021 
 <a name="l00022"></a>00022 simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">Incoming::ctDroppedSignal</a> = SIMSIGNAL_NULL;
-<a name="l00023"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">00023</a> 
-<a name="l00024"></a>00024 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a" title="Initialization of the module.">Incoming::initialize</a>()
-<a name="l00025"></a>00025 {
-<a name="l00026"></a>00026     <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
-<a name="l00027"></a>00027 }
-<a name="l00028"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">00028</a> 
-<a name="l00029"></a>00029 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7" title="Forwards messages arriving on in-gate to out-gate.">Incoming::handleMessage</a>(cMessage *msg)
-<a name="l00030"></a>00030 {
-<a name="l00031"></a>00031     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00032"></a>00032         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00033"></a>00033     }
-<a name="l00034"></a>00034 }
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 } <span class="comment">//namespace</span>
+<a name="l00023"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a3d8d8f98264c1e8353d7c37af4b4aa94">00023</a> 
+<a name="l00024"></a>00024 <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a3d8d8f98264c1e8353d7c37af4b4aa94" title="Constructor.">Incoming::Incoming</a>(){
+<a name="l00025"></a>00025     <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a> = <span class="keyword">false</span>;
+<a name="l00026"></a>00026 }
+<a name="l00027"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">00027</a> 
+<a name="l00028"></a>00028 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a" title="Initialization of the module.">Incoming::initialize</a>()
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
+<a name="l00031"></a>00031 }
+<a name="l00032"></a><a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">00032</a> 
+<a name="l00033"></a>00033 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7" title="Forwards messages arriving on in-gate to out-gate.">Incoming::handleMessage</a>(cMessage *msg)
+<a name="l00034"></a>00034 {
+<a name="l00035"></a>00035     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
+<a name="l00036"></a>00036         send(msg,<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00037"></a>00037     }
+<a name="l00038"></a>00038 }
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:40 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -29,8 +29,8 @@ module TTEEtherSwitch
         string device_name;
         // type of the best-effort MACRelayUnit; currently possible MACRelayUnitNP, MACRelayUnitPP
         string beRelayUnitType = default("MACRelayUnitNP");
-        // type of the configurationManager
-        string configurationManager = default("TTEConfigurationManager");
+        // type of the configurationManager this package contains a dummy ConfigurationManager (BaseConfigurationManager) that can be extended
+        string configurationManager = default("BaseConfigurationManager");
     gates:
         // Physical ports of the switch
         inout ethg[] @loose;

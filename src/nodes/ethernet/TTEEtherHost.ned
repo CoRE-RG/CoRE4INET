@@ -37,8 +37,8 @@ module TTEEtherHost
         string device_name;
         //Application running on the Host
         string appType = default("TTEAPITestApplication");
-        // type of the configurationManager
-        string configurationManager = default("TTEConfigurationManager");
+        // type of the configurationManager this package contains a dummy ConfigurationManager (BaseConfigurationManager) that can be extended
+        string configurationManager = default("BaseConfigurationManager");
     gates:
         // Physical port of the host
         inout ethg;

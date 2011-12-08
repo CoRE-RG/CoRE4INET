@@ -38,7 +38,7 @@
 <p>Base class for a time-triggered buffer class.  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;TTBuffer.h&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_t_t_buffer_8h_source.html">TTBuffer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <div class="dynsection">
@@ -75,6 +75,8 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <p>The Frame is stored and released time-triggered using a previously registered <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>. The <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> interacts with the <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>.</p>
 <p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" title="Time-triggeredd double buffer class.">TTDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_t_t_buffer_8h_source.html#l00037">37</a> of file <a class="el" href="_t_t_buffer_8h_source.html">TTBuffer.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2339c6f1ae57205d239aba4fcabcae18"></a><!-- doxytag: member="TTEthernetModel::TTBuffer::TTBuffer" ref="a2339c6f1ae57205d239aba4fcabcae18" args="()" -->
 <div class="memitem">
@@ -92,6 +94,8 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <div class="memdoc">
 
 <p>Constructor. </p>
+
+<p>Definition at line <a class="el" href="_t_t_buffer_8cc_source.html#l00025">25</a> of file <a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00026"></a>00026 {
 <a name="l00027"></a>00027     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a4b75f1f4bde77e1f66506c1dabb9c001" title="Event indicating the actionTime.">actionTimeEvent</a> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;TTBuffer Scheduler Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
@@ -116,6 +120,8 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <div class="memdoc">
 
 <p>Destructor. </p>
+
+<p>Definition at line <a class="el" href="_t_t_buffer_8cc_source.html#l00030">30</a> of file <a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00031"></a>00031 {
 <a name="l00032"></a>00032     cancelEvent(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a4b75f1f4bde77e1f66506c1dabb9c001" title="Event indicating the actionTime.">actionTimeEvent</a>);
@@ -152,6 +158,8 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8">TTEthernetModel::Buffer</a>.</p>
+
+<p>Definition at line <a class="el" href="_t_t_buffer_8cc_source.html#l00049">49</a> of file <a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00050"></a>00050 {
 <a name="l00051"></a>00051     <span class="keywordtype">bool</span> arrivedOnSchedulerIn = msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>);
@@ -227,6 +235,8 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44">TTEthernetModel::Buffer</a>.</p>
 
+<p>Definition at line <a class="el" href="_t_t_buffer_8cc_source.html#l00095">95</a> of file <a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a>.</p>
+
 <p><div class="fragment"><pre class="fragment"><a name="l00095"></a>00095                                                        {
 <a name="l00096"></a>00096     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb" title="Indicates a parameter has changed.">Buffer::handleParameterChange</a>(parname);
 <a name="l00097"></a>00097 
@@ -255,6 +265,8 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 <p>Initializes the <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>. </p>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a976b864b117683fbc02a043090e54db2">TTEthernetModel::Buffer</a>.</p>
+
+<p>Definition at line <a class="el" href="_t_t_buffer_8cc_source.html#l00036">36</a> of file <a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00037"></a>00037 {
 <a name="l00038"></a>00038     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8" title="Initializes the SchedulerActionTimeEvent.">Buffer::initialize</a>();
@@ -285,16 +297,18 @@ Inheritance diagram for TTEthernetModel::TTBuffer:</div>
 
 <p>Event indicating the actionTime. </p>
 
+<p>Definition at line <a class="el" href="_t_t_buffer_8h_source.html#l00043">43</a> of file <a class="el" href="_t_t_buffer_8h_source.html">TTBuffer.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00095">handleParameterChange()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00036">initialize()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00025">TTBuffer()</a>, and <a class="el" href="_t_t_buffer_8cc_source.html#l00030">~TTBuffer()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_buffer_8h.html">TTBuffer.h</a></li>
-<li><a class="el" href="_t_t_buffer_8cc.html">TTBuffer.cc</a></li>
+<li><a class="el" href="_t_t_buffer_8h_source.html">TTBuffer.h</a></li>
+<li><a class="el" href="_t_t_buffer_8cc_source.html">TTBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:41 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

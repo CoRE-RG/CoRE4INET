@@ -57,26 +57,27 @@
 <a name="l00036"></a>00036 {
 <a name="l00037"></a>00037     <span class="keyword">public</span>:
 <a name="l00045"></a>00045         <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#aff1e2fd154dee22cbf7b1b3b8faf6e98" title="Constructor for the class.">QueueBuffer</a>();
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keyword">private</span>:
-<a name="l00051"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c">00051</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>;
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053     <span class="keyword">private</span>:
-<a name="l00057"></a>00057         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">initializeStatistics</a>();
-<a name="l00058"></a>00058     <span class="keyword">protected</span>:
-<a name="l00064"></a>00064         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918" title="Inserts EtherFrame in the Queue and emits the queue length.">enqueue</a>(EtherFrame *newFrame);
-<a name="l00065"></a>00065 
-<a name="l00071"></a>00071         <span class="keyword">virtual</span> EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f" title="Removes and returns an EtherFrame from the Queue and emits the queue length.">dequeue</a>();
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073     <span class="keyword">protected</span>:
-<a name="l00078"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe">00078</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a>;
-<a name="l00079"></a>00079 };
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081 } <span class="comment">//namespace</span>
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083 <span class="preprocessor">#endif</span>
+<a name="l00049"></a>00049         <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a7f11141bd9474385aeb4503a448411ca" title="Destructor for the class.">~QueueBuffer</a>();
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051     <span class="keyword">private</span>:
+<a name="l00055"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c">00055</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>;
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057     <span class="keyword">private</span>:
+<a name="l00061"></a>00061         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">initializeStatistics</a>();
+<a name="l00062"></a>00062     <span class="keyword">protected</span>:
+<a name="l00068"></a>00068         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918" title="Inserts EtherFrame in the Queue and emits the queue length.">enqueue</a>(EtherFrame *newFrame);
+<a name="l00069"></a>00069 
+<a name="l00075"></a>00075         <span class="keyword">virtual</span> EtherFrame* <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f" title="Removes and returns an EtherFrame from the Queue and emits the queue length.">dequeue</a>();
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077     <span class="keyword">protected</span>:
+<a name="l00082"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe">00082</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a>;
+<a name="l00083"></a>00083 };
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 } <span class="comment">//namespace</span>
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Dec 7 11:24:06 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:40 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

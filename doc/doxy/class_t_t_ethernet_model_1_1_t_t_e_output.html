@@ -35,7 +35,7 @@
 <p>Represents the part of a port that sends messages (TX).  
 <a href="#_details">More...</a></p>
 
-<p><code>#include &lt;TTEOutput.h&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>&gt;</code></p>
 
 <p><a href="class_t_t_ethernet_model_1_1_t_t_e_output-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -87,6 +87,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Represents the part of a port that sends messages (TX). </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00023">23</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab968c58c879864bd9985b5998388a2ab"></a><!-- doxytag: member="TTEthernetModel::TTEOutput::TTEOutput" ref="ab968c58c879864bd9985b5998388a2ab" args="()" -->
 <div class="memitem">
@@ -104,6 +106,8 @@
 <div class="memdoc">
 
 <p>Constructor. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00017">17</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00018"></a>00018 {
 <a name="l00019"></a>00019     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a> = 0;
@@ -129,6 +133,8 @@
 <div class="memdoc">
 
 <p>Destructor. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00023">23</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00024"></a>00024 {
 <a name="l00025"></a>00025     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();
@@ -160,6 +166,8 @@
 
 <p>Clears all queued packets and stored requests. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00280">280</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+
 <p><div class="fragment"><pre class="fragment"><a name="l00281"></a>00281 {
 <a name="l00282"></a>00282     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();
 <a name="l00283"></a>00283     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
@@ -189,6 +197,8 @@
 <div class="memdoc">
 
 <p>Returns number of requested messages. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00264">264</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00265"></a>00265 {
 <a name="l00266"></a>00266     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a>;
@@ -221,6 +231,8 @@
   </table>
   </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00042">42</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00043"></a>00043 {
 <a name="l00044"></a>00044     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>))
@@ -326,6 +338,8 @@
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00149">149</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+
 <p><div class="fragment"><pre class="fragment"><a name="l00149"></a>00149                                                         {
 <a name="l00150"></a>00150     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.clear();
 <a name="l00151"></a>00151     <span class="keywordflow">if</span>(ev.isGUI()){
@@ -375,6 +389,8 @@
 
 <p>Initialization of the module. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00033">33</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+
 <p><div class="fragment"><pre class="fragment"><a name="l00034"></a>00034 {
 <a name="l00035"></a>00035     cGate *physOutGate = getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;mac&quot;</span>)-&gt;gate(<span class="stringliteral">&quot;phys$o&quot;</span>);
 <a name="l00036"></a>00036     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a> = physOutGate-&gt;findTransmissionChannel();
@@ -403,6 +419,8 @@
 
 <p>Returns true when there are no pending messages. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if all queues are empty. </dd></dl>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00269">269</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>.</p>
 
@@ -445,6 +463,8 @@
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if transmission is allowed else false </dd></dl>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00222">222</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>.</p>
 
@@ -510,6 +530,8 @@
 
 <p>Registers a time-triggered buffer that feeds the module. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00120">120</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00149">handleParameterChange()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00121"></a>00121 {
@@ -560,6 +582,8 @@
 
 <p>this method is invoked when the underlying mac is idle. </p>
 <p>When this method is invoked the module sends a new message when there is one. Else it saves the state and sends the message immediately when it is received. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00178">178</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>.</p>
 
@@ -623,6 +647,8 @@
 
 <p>Queue for best-effort messages. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00058">58</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00280">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00269">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00023">~TTEOutput()</a>.</p>
 
 </div>
@@ -639,6 +665,8 @@
 <div class="memdoc">
 
 <p>Signal that is emitted when the queue length of best-effort messages changes. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00080">80</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00033">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>.</p>
 
@@ -657,6 +685,8 @@
 
 <p>Number of frames that were requested from lower layer. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00042">42</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00280">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00264">getNumPendingRequests()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00017">TTEOutput()</a>.</p>
 
 </div>
@@ -674,6 +704,8 @@
 
 <p>Outgoing Channel used to calculate transmission duration. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00038">38</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00033">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00222">isTransmissionAllowed()</a>.</p>
 
 </div>
@@ -690,6 +722,8 @@
 <div class="memdoc">
 
 <p>Dedicated queue for each priority of rate-constrained messages. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00053">53</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00280">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00269">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00023">~TTEOutput()</a>.</p>
 
@@ -709,6 +743,8 @@
 <p>Vector of TTBuffers. </p>
 <p>The vector is ordered by action time </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00065">65</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00149">handleParameterChange()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00222">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00120">registerTTBuffer()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>.</p>
 
 </div>
@@ -725,6 +761,8 @@
 <div class="memdoc">
 
 <p>Current position of the next <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> (action time) in the ttBuffers vector. </p>
+
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00070">70</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00222">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00017">TTEOutput()</a>.</p>
 
@@ -744,6 +782,8 @@
 <p>Queue for TT-Messages. </p>
 <p>Will be only filled when there is TT shuffling configured or there was an error in the configuration. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00048">48</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00280">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00269">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00023">~TTEOutput()</a>.</p>
 
 </div>
@@ -761,16 +801,18 @@
 
 <p>Signal that is emitted when the queue length of time-triggered messages changes. </p>
 
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00075">75</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00042">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00033">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00178">requestPacket()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_e_output_8h.html">TTEOutput.h</a></li>
-<li><a class="el" href="_t_t_e_output_8cc.html">TTEOutput.cc</a></li>
+<li><a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a></li>
+<li><a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:07:32 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:41 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
