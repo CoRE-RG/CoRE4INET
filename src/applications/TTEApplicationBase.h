@@ -36,14 +36,11 @@ class Buffer;
 class TTEApplicationBase : public cSimpleModule
 {
     protected:
-        //std::map<uint16, std::list<Incoming*> > incomings;
-
         /**
          * @brief Map of critical traffic identifies with their
          * corresponding Buffers.
          */
         std::map<uint16, std::list<Buffer*> > buffers;
-
     public:
         /**
          * @brief executes the given Callback in the context of the Application
@@ -51,15 +48,13 @@ class TTEApplicationBase : public cSimpleModule
          * @param cb the Callback to execute
          */
         virtual void executeCallback(Callback *cb);
-        //virtual void addIncoming(uint16 ctID, Incoming *incoming);
 
         /**
-         * @brief Adds a Buffer with the corresponding CT-ID to the Application
+         * @brief Indicates a parameter has changed.
          *
-         * @param ctID the critical traffic id of the buffer to register
-         * @param buffer a pointer to the Buffer to register
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
-        virtual void addBuffer(uint16 ctID, Buffer *buffer);
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

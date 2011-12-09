@@ -21,7 +21,8 @@ package ttethernet.applications;
 simple TTEApplicationBase like ITTEApplication
 {
         parameters:
-            
+        	//Comma seperated list of buffer modules the application is allowed to use
+        	string buffers = default("");
         gates:
             input TTin @directIn @labels(CTFrame);
             input RCin @directIn @labels(CTFrame);

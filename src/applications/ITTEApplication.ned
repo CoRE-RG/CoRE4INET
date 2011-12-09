@@ -20,6 +20,9 @@ import ttethernet.linklayer.IPort;
 
 moduleinterface ITTEApplication extends IPort
 {
+    parameters:
+        //Comma seperated list of buffer modules the application is allowed to use
+        string buffers;
     gates:
          //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn;

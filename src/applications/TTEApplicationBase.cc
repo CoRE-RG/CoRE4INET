@@ -15,23 +15,44 @@
 
 #include "TTEApplicationBase.h"
 
+#include "HelperFunctions.h"
+
 namespace TTEthernetModel {
 
 Define_Module(TTEApplicationBase);
 
-/*void TTEApplicationBase::addIncoming(uint16 ctID, Incoming *incoming)
-{
-    incomings[ctID].push_back(incoming);
-}*/
-
-void TTEApplicationBase::addBuffer(uint16 ctID, Buffer *buffer)
-{
-    buffers[ctID].push_back(buffer);
-}
-
 void TTEApplicationBase::executeCallback(Callback *cb){
     Enter_Method("executeCallback(cb)");
     cb->executeCallback();
+}
+
+void TTEApplicationBase::handleParameterChange(const char* parname){
+    buffers.clear();
+    if(ev.isGUI()){
+        //TODO check why this does not work
+        //getDisplayString().setTagArg("i2", 0, "");
+        //getDisplayString().setTagArg("tt", 0, "");
+    }
+    std::string buffersString = par("buffers").stdstringValue();
+    std::vector<std::string> bufferPaths;
+    split(buffersString,',',bufferPaths);
+    for(std::vector<std::string>::iterator bufferPath = bufferPaths.begin();
+            bufferPath!=bufferPaths.end();bufferPath++){
+        cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
+        if(module){
+            Buffer *buffer = dynamic_cast<Buffer*> (module);
+            if(buffer && buffer->hasPar("ct_id")){
+                buffers[buffer->par("ct_id").longValue()].push_back(buffer);
+            }
+        }
+        else{
+            if(ev.isGUI()){
+                ev<<"Configuration problem: Module "<<(*bufferPath)<<" could not be resolved or is no CT-Buffer (TT or RC)!"<<endl;
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem Application Buffer!");
+            }
+        }
+    }
 }
 
 } //namespace

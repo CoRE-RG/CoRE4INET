@@ -265,6 +265,7 @@ $O/applications/TTEApplicationBase.o: applications/TTEApplicationBase.cc \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
+	utilities/HelperFunctions.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \

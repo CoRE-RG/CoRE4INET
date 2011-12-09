@@ -46,7 +46,7 @@ module TTEEtherHost
     submodules:
         // Physical port of the host
         phy[1]: TTEPHYPort {
-            @display("p=235,255");
+            @display("p=235,255,c,50");
         }
         // LLC for best-effort traffic
         llc: EtherLLC {
@@ -79,7 +79,7 @@ module TTEEtherHost
         tteScheduler: TTEScheduler {
             @display("p=235,169");
         }
-        tteApp: <appType> like ITTEApplication {
+        tteApp[1]: <appType> like ITTEApplication {
             @display("p=235,99");
         }
         bgIn: BGQueueBuffer {

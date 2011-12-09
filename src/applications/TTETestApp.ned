@@ -18,11 +18,6 @@ package ttethernet.applications;
 //
 // TODO auto-generated module
 //
-simple TTETestApp like ITTEApplication
+simple TTETestApp extends TTEApplicationBase
 {
-    gates:
-        input TTin @directIn @labels(CTFrame);
-        input RCin @directIn @labels(CTFrame);
-        //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn @directIn;
 }
