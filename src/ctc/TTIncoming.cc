@@ -108,6 +108,7 @@ void TTIncoming::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
+        ASSERT(frame);
         delete msg;
         if(!hadError && ev.isGUI())
             getDisplayString().setTagArg("i2", 0, "");
