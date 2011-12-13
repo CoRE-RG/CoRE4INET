@@ -923,6 +923,7 @@
     <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
     <filename>_t_t_e_application_base_8cc</filename>
     <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
+    <includes id="_helper_functions_8h" name="HelperFunctions.h" local="yes" imported="no">HelperFunctions.h</includes>
     <namespace>TTEthernetModel</namespace>
     <member kind="function">
       <type></type>
@@ -2001,10 +2002,10 @@
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
-      <name>addBuffer</name>
+      <name>handleParameterChange</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_application_base.html</anchorfile>
-      <anchor>a427a8772d81dd1e3e10968c31807dd53</anchor>
-      <arglist>(uint16 ctID, Buffer *buffer)</arglist>
+      <anchor>a97851409093558c7b7483fd6bde8fcd4</anchor>
+      <arglist>(const char *parname)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>std::map&lt; uint16, std::list&lt; Buffer * &gt; &gt;</type>

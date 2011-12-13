@@ -24,7 +24,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="930,1019,1072,1080">
 <area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Sync" alt="Sync" coords="123,189,167,250">
 <area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="TTEScheduler" alt="TTEScheduler" coords="196,189,278,250">
-<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="216,119,261,180">
+<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="207,119,268,180">
 <area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="123,57,167,118">
 <area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="123,119,167,180">
 <area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="BGTrafficHandle" alt="BGTrafficHandle" coords="12,119,113,180">
@@ -237,6 +237,16 @@ additional frames are dropped. Only used if queueModule==""</p>
 <p>length of response packets</p>
    </td>
 </tr>
+<tr>
+   <td><a href="ttethernet.applications.ITTEApplication.html">tteApp</a>.buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td></td>
+   <td>
+<p>Comma seperated list of buffer modules the application is allowed to use</p>
+   </td>
+</tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
@@ -272,7 +282,7 @@ additional frames are dropped. Only used if queueModule==""</p>
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">// Physical port of the host
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">phy</span><span style="color: #000000; ">[</span><span style="color: #008000; ">1</span><span style="color: #000000; ">]: </span><span style="color: #000000; ">TTEPHYPort</span><span style="color: #000000; "> {
-            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,255&quot;</span><span style="color: #000000; ">);
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,255,c,50&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// LLC for best-effort traffic
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">EtherLLC</span><span style="color: #000000; "> {
@@ -305,7 +315,7 @@ additional frames are dropped. Only used if queueModule==""</p>
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteScheduler</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,169&quot;</span><span style="color: #000000; ">);
         }
-        </span><span style="color: #000000; ">tteApp</span><span style="color: #000000; ">: &lt;</span><span style="color: #000000; ">appType</span><span style="color: #000000; ">&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> {
+        </span><span style="color: #000000; ">tteApp</span><span style="color: #000000; ">[</span><span style="color: #008000; ">1</span><span style="color: #000000; ">]: &lt;</span><span style="color: #000000; ">appType</span><span style="color: #000000; ">&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,99&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #000000; ">bgIn</span><span style="color: #000000; ">: </span><span style="color: #000000; ">BGQueueBuffer</span><span style="color: #000000; "> {

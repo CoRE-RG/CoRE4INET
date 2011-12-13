@@ -132,7 +132,7 @@
 <a name="l00100"></a>00100         <span class="keywordtype">int</span> modticks = (int)(simTime().dbl()/<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>)%<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>;
 <a name="l00101"></a>00101         <span class="keywordflow">if</span>(modticks&gt;(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>/2))
 <a name="l00102"></a>00102             modticks=modticks-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>;
-<a name="l00103"></a>00103         modticks+=uniform(-0.000002,0.000002)/<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>;
+<a name="l00103"></a>00103         modticks+=uniform(-0.000000500,0.000000500)/<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af547dd4e97d56acb0e703e6107f3a978" title="caches tick parameter">tick</a>;
 <a name="l00104"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de">00104</a>         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8" title="Corrects the clock by the number of ticks.">clockCorrection</a>(-modticks);
 <a name="l00105"></a>00105     }
 <a name="l00106"></a>00106 }
@@ -215,7 +215,7 @@
 <a name="l00183"></a>00183 
 <a name="l00184"></a>00184 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:40 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Dec 13 13:48:35 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

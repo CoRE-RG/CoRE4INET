@@ -59,22 +59,18 @@
 <a name="l00036"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">00036</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> : <span class="keyword">public</span> cSimpleModule
 <a name="l00037"></a>00037 {
 <a name="l00038"></a>00038     <span class="keyword">protected</span>:
-<a name="l00039"></a>00039         <span class="comment">//std::map&lt;uint16, std::list&lt;Incoming*&gt; &gt; incomings;</span>
-<a name="l00040"></a>00040 
-<a name="l00045"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">00045</a>         std::map&lt;uint16, std::list&lt;Buffer*&gt; &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>;
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keyword">public</span>:
-<a name="l00053"></a>00053         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e" title="executes the given Callback in the context of the Application">executeCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb);
-<a name="l00054"></a>00054         <span class="comment">//virtual void addIncoming(uint16 ctID, Incoming *incoming);</span>
-<a name="l00055"></a>00055 
-<a name="l00062"></a>00062         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a427a8772d81dd1e3e10968c31807dd53" title="Adds a Buffer with the corresponding CT-ID to the Application.">addBuffer</a>(uint16 ctID, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *buffer);
-<a name="l00063"></a>00063 };
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065 } <span class="comment">//namespace</span>
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067 <span class="preprocessor">#endif</span>
+<a name="l00043"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">00043</a>         std::map&lt;uint16, std::list&lt;Buffer*&gt; &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>;
+<a name="l00044"></a>00044     <span class="keyword">public</span>:
+<a name="l00050"></a>00050         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e" title="executes the given Callback in the context of the Application">executeCallback</a>(<a class="code" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> *cb);
+<a name="l00051"></a>00051 
+<a name="l00057"></a>00057         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a97851409093558c7b7483fd6bde8fcd4" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);
+<a name="l00058"></a>00058 };
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 } <span class="comment">//namespace</span>
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:40 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Dec 13 13:48:35 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

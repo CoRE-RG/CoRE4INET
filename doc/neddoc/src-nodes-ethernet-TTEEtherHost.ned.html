@@ -79,7 +79,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">// Physical port of the host
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">phy</span><span style="color: #000000; ">[</span><span style="color: #008000; ">1</span><span style="color: #000000; ">]: </span><span style="color: #000000; ">TTEPHYPort</span><span style="color: #000000; "> {
-            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,255&quot;</span><span style="color: #000000; ">);
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,255,c,50&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// LLC for best-effort traffic
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">llc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">EtherLLC</span><span style="color: #000000; "> {
@@ -112,7 +112,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteScheduler</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,169&quot;</span><span style="color: #000000; ">);
         }
-        </span><span style="color: #000000; ">tteApp</span><span style="color: #000000; ">: &lt;</span><span style="color: #000000; ">appType</span><span style="color: #000000; ">&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> {
+        </span><span style="color: #000000; ">tteApp</span><span style="color: #000000; ">[</span><span style="color: #008000; ">1</span><span style="color: #000000; ">]: &lt;</span><span style="color: #000000; ">appType</span><span style="color: #000000; ">&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,99&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #000000; ">bgIn</span><span style="color: #000000; ">: </span><span style="color: #000000; ">BGQueueBuffer</span><span style="color: #000000; "> {

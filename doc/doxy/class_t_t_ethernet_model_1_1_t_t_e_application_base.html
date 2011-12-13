@@ -57,8 +57,8 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e">executeCallback</a> (<a class="el" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a> *cb)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">executes the given <a class="el" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> in the context of the Application  <a href="#af1c61841a520d233a320651046f8c63e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a427a8772d81dd1e3e10968c31807dd53">addBuffer</a> (uint16 ctID, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html">Buffer</a> *buffer)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds a <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> with the corresponding CT-ID to the Application.  <a href="#a427a8772d81dd1e3e10968c31807dd53"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a97851409093558c7b7483fd6bde8fcd4">handleParameterChange</a> (const char *parname)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates a parameter has changed.  <a href="#a97851409093558c7b7483fd6bde8fcd4"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::map&lt; uint16, std::list<br class="typebreak"/>
 &lt; <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html">Buffer</a> * &gt; &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb">buffers</a></td></tr>
@@ -71,49 +71,6 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 
 <p>Definition at line <a class="el" href="_t_t_e_application_base_8h_source.html#l00036">36</a> of file <a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a427a8772d81dd1e3e10968c31807dd53"></a><!-- doxytag: member="TTEthernetModel::TTEApplicationBase::addBuffer" ref="a427a8772d81dd1e3e10968c31807dd53" args="(uint16 ctID, Buffer *buffer)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void TTEthernetModel::TTEApplicationBase::addBuffer </td>
-          <td>(</td>
-          <td class="paramtype">uint16&nbsp;</td>
-          <td class="paramname"> <em>ctID</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html">Buffer</a> *&nbsp;</td>
-          <td class="paramname"> <em>buffer</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Adds a <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> with the corresponding CT-ID to the Application. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>ctID</em>&nbsp;</td><td>the critical traffic id of the buffer to register </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>buffer</em>&nbsp;</td><td>a pointer to the <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> to register </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00027">27</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00028"></a>00028 {
-<a name="l00029"></a>00029     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[ctID].push_back(buffer);
-<a name="l00030"></a>00030 }
-</pre></div></p>
-
-</div>
-</div>
 <a class="anchor" id="af1c61841a520d233a320651046f8c63e"></a><!-- doxytag: member="TTEthernetModel::TTEApplicationBase::executeCallback" ref="af1c61841a520d233a320651046f8c63e" args="(Callback *cb)" -->
 <div class="memitem">
 <div class="memproto">
@@ -138,12 +95,70 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00032">32</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00024">24</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032                                                     {
-<a name="l00033"></a>00033     Enter_Method(<span class="stringliteral">&quot;executeCallback(cb)&quot;</span>);
-<a name="l00034"></a>00034     cb-&gt;executeCallback();
-<a name="l00035"></a>00035 }
+<p><div class="fragment"><pre class="fragment"><a name="l00024"></a>00024                                                     {
+<a name="l00025"></a>00025     Enter_Method(<span class="stringliteral">&quot;executeCallback(cb)&quot;</span>);
+<a name="l00026"></a>00026     cb-&gt;executeCallback();
+<a name="l00027"></a>00027 }
+</pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="a97851409093558c7b7483fd6bde8fcd4"></a><!-- doxytag: member="TTEthernetModel::TTEApplicationBase::handleParameterChange" ref="a97851409093558c7b7483fd6bde8fcd4" args="(const char *parname)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TTEthernetModel::TTEApplicationBase::handleParameterChange </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>parname</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indicates a parameter has changed. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>parname</em>&nbsp;</td><td>Name of the changed parameter or NULL if multiple parameter changed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">29</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00029"></a>00029                                                                  {
+<a name="l00030"></a>00030     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.clear();
+<a name="l00031"></a>00031     <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00032"></a>00032         <span class="comment">//TODO check why this does not work</span>
+<a name="l00033"></a>00033         <span class="comment">//getDisplayString().setTagArg(&quot;i2&quot;, 0, &quot;&quot;);</span>
+<a name="l00034"></a>00034         <span class="comment">//getDisplayString().setTagArg(&quot;tt&quot;, 0, &quot;&quot;);</span>
+<a name="l00035"></a>00035     }
+<a name="l00036"></a>00036     std::string buffersString = par(<span class="stringliteral">&quot;buffers&quot;</span>).stdstringValue();
+<a name="l00037"></a>00037     std::vector&lt;std::string&gt; bufferPaths;
+<a name="l00038"></a>00038     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f">split</a>(buffersString,<span class="charliteral">&#39;,&#39;</span>,bufferPaths);
+<a name="l00039"></a>00039     <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator bufferPath = bufferPaths.begin();
+<a name="l00040"></a>00040             bufferPath!=bufferPaths.end();bufferPath++){
+<a name="l00041"></a>00041         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
+<a name="l00042"></a>00042         <span class="keywordflow">if</span>(module){
+<a name="l00043"></a>00043             Buffer *buffer = <span class="keyword">dynamic_cast&lt;</span>Buffer*<span class="keyword">&gt;</span> (module);
+<a name="l00044"></a>00044             <span class="keywordflow">if</span>(buffer &amp;&amp; buffer-&gt;hasPar(<span class="stringliteral">&quot;ct_id&quot;</span>)){
+<a name="l00045"></a>00045                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[buffer-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue()].push_back(buffer);
+<a name="l00046"></a>00046             }
+<a name="l00047"></a>00047         }
+<a name="l00048"></a>00048         <span class="keywordflow">else</span>{
+<a name="l00049"></a>00049             <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00050"></a>00050                 ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Module &quot;</span>&lt;&lt;(*bufferPath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved or is no CT-Buffer (TT or RC)!&quot;</span>&lt;&lt;endl;
+<a name="l00051"></a>00051                 getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00052"></a>00052                 getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem Application Buffer!&quot;</span>);
+<a name="l00053"></a>00053             }
+<a name="l00054"></a>00054         }
+<a name="l00055"></a>00055     }
+<a name="l00056"></a>00056 }
 </pre></div></p>
 
 </div>
@@ -162,9 +177,9 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 
 <p>Map of critical traffic identifies with their corresponding Buffers. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8h_source.html#l00045">45</a> of file <a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_application_base_8h_source.html#l00043">43</a> of file <a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_application_base_8cc_source.html#l00027">addBuffer()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">handleParameterChange()</a>.</p>
 
 </div>
 </div>
@@ -173,7 +188,7 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 <li><a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Dec 8 14:51:40 2011 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Dec 13 13:48:35 2011 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
