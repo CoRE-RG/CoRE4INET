@@ -23,10 +23,6 @@ module TTEEtherSwitch
     parameters:
         @node();
         @display("i=block/switch;bgb=1219,312");
-        // Network configuration file
-        string network_configuration;
-        // Name of the device in the network configuration
-        string device_name = default("");
         // type of the best-effort MACRelayUnit; currently possible MACRelayUnitNP, MACRelayUnitPP
         string beRelayUnitType = default("MACRelayUnitNP");
         // type of the configurationManager this package contains a dummy ConfigurationManager (BaseConfigurationManager) that can be extended

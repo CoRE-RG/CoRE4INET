@@ -31,10 +31,6 @@ module TTEEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
-        // Network configuration file
-        string network_configuration;
-        // Name of the device in the network configuration
-        string device_name = default("");
         //Application running on the Host
         string appType = default("TTEAPITestApplication");
         // type of the configurationManager this package contains a dummy ConfigurationManager (BaseConfigurationManager) that can be extended
