@@ -85,7 +85,6 @@ void RCBuffer::handleMessage(cMessage *msg)
         {
             bagExpired = true;
             getDisplayString().setTagArg("i2", 0, "");
-            delete msg;
         }
     }
 }

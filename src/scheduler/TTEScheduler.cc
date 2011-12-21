@@ -100,7 +100,7 @@ void TTEScheduler::handleMessage(cMessage *msg)
         int modticks = (int)(simTime().dbl()/tick)%cycleTicks;
         if(modticks>(cycleTicks/2))
             modticks=modticks-cycleTicks;
-        modticks+=uniform(-0.000000500,0.000000500)/tick;
+        modticks+=uniform(-0.000000250,0.000000250)/tick;
         clockCorrection(-modticks);
     }
 }

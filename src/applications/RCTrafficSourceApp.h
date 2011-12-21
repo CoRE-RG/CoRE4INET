@@ -13,20 +13,34 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications;
+#ifndef __TTETHERNETMODELV2_RCTRAFFICSOURCEAPP_H_
+#define __TTETHERNETMODELV2_RCTRAFFICSOURCEAPP_H_
 
-//
-// TODO auto-generated module
-//
-simple TTEApplicationBase like ITTEApplication
+#include <omnetpp.h>
+#include "TrafficSourceAppBase.h"
+
+namespace TTEthernetModel {
+
+/**
+ * @brief Simple Test-Application.
+ *
+ *
+ * @sa TTEApplicationBase
+ * @ingroup Applications
+ */
+class RCTrafficSourceApp : public TrafficSourceAppBase
 {
-        parameters:
-            @class(TTEApplicationBase);
-        	//Comma seperated list of buffer modules the application is allowed to use
-        	string buffers = default("");
-        gates:
-            input TTin @directIn @labels(CTFrame);
-            input RCin @directIn @labels(CTFrame);
-            //Input gate for the incoming SchedulerActionTimeEvent messages
-            input schedulerIn @directIn;
-}
+    protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize();
+        /**
+         * @brief Handles message generation
+         */
+        virtual void handleMessage(cMessage *msg);
+};
+
+} //namespace
+
+#endif

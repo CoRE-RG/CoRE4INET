@@ -18,15 +18,9 @@ package ttethernet.applications;
 //
 // TODO auto-generated module
 //
-simple TTEApplicationBase like ITTEApplication
+simple TrafficSourceAppBase extends TTEApplicationBase
 {
-        parameters:
-            @class(TTEApplicationBase);
-        	//Comma seperated list of buffer modules the application is allowed to use
-        	string buffers = default("");
-        gates:
-            input TTin @directIn @labels(CTFrame);
-            input RCin @directIn @labels(CTFrame);
-            //Input gate for the incoming SchedulerActionTimeEvent messages
-            input schedulerIn @directIn;
+    parameters:
+        int payload @unit(Byte) = default(46Byte);
+        int ct_id = default(-1);
 }

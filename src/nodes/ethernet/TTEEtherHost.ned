@@ -31,17 +31,15 @@ module TTEEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
-        //Application running on the Host
-        string appType = default("TTEAPITestApplication");
-        // type of the configurationManager this package contains a dummy ConfigurationManager (BaseConfigurationManager) that can be extended
-        string configurationManager = default("BaseConfigurationManager");
+        int numApps = default(1);
+        int numPorts = 1;
     gates:
         // Physical port of the host
         inout ethg;
 
     submodules:
         // Physical port of the host
-        phy[1]: TTEPHYPort {
+        phy[numPorts]: TTEPHYPort {
             @display("p=235,255,c,50");
         }
         // LLC for best-effort traffic
@@ -64,7 +62,7 @@ module TTEEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManager> like IConfigurationManager {
+        configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler
@@ -75,7 +73,7 @@ module TTEEtherHost
         tteScheduler: TTEScheduler {
             @display("p=235,169");
         }
-        tteApp[1]: <appType> like ITTEApplication {
+        tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
             @display("p=235,99");
         }
         bgIn: BGQueueBuffer {

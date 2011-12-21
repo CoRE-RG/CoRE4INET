@@ -21,13 +21,13 @@ simple TTEScheduler
         //Statistic of the beginning of a new cycle
         @statistic[newCycle](title="Start of cycle"; record=count,vector);
         // Length of a tick
-        double tick @unit(s) = 80ns;
+        double tick @unit(s) = default(80ns);
         // Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)
-        double max_drift @unit(s) = 16ps;
+        double max_drift @unit(s) = default(16ps);
         // Maximum clock drift change per cycle
-        double max_drift_change @unit(s) = 1ps;
+        double max_drift_change @unit(s) =default(1ps);
         // Current length of a tick (with imprecission)
         double current_tick @unit(s) = tick;
         // Number of ticks for one cycle
-        int cycle_ticks=37500;
+        int cycle_ticks = default(37500);
 }

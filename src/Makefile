@@ -49,9 +49,11 @@ OBJS = \
     $O/api/Task.o \
     $O/api/Callback.o \
     $O/applications/TTETestApp.o \
+    $O/applications/TrafficSourceAppBase.o \
     $O/applications/TTEApplicationBase.o \
     $O/applications/TTEAPIApplicationBase.o \
     $O/applications/TTEAPITestApplication.o \
+    $O/applications/RCTrafficSourceApp.o \
     $O/buffer/TTDoubleBuffer.o \
     $O/buffer/BGQueueBuffer.o \
     $O/buffer/TTQueueBuffer.o \
@@ -207,6 +209,26 @@ $O/api/Callback.o: api/Callback.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
 $O/api/Task.o: api/Task.cc \
 	api/Task.h
+$O/applications/RCTrafficSourceApp.o: applications/RCTrafficSourceApp.cc \
+	api/Callback.h \
+	api/tte_api/tte_api.h \
+	applications/RCTrafficSourceApp.h \
+	applications/TTEApplicationBase.h \
+	applications/TrafficSourceAppBase.h \
+	buffer/Buffer.h \
+	buffer/RCBuffer.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
+	linklayer/ethernet/CTFrame_m.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/TTEScheduler.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
 $O/applications/TTEAPIApplicationBase.o: applications/TTEAPIApplicationBase.cc \
 	api/APIPayload_m.h \
 	api/Callback.h \
@@ -276,6 +298,24 @@ $O/applications/TTETestApp.o: applications/TTETestApp.cc \
 	api/tte_api/tte_api.h \
 	applications/TTEApplicationBase.h \
 	applications/TTETestApp.h \
+	buffer/Buffer.h \
+	buffer/RCBuffer.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
+	linklayer/ethernet/CTFrame_m.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
+$O/applications/TrafficSourceAppBase.o: applications/TrafficSourceAppBase.cc \
+	api/Callback.h \
+	api/tte_api/tte_api.h \
+	applications/TTEApplicationBase.h \
+	applications/TrafficSourceAppBase.h \
 	buffer/Buffer.h \
 	buffer/RCBuffer.h \
 	buffer/TTBuffer.h \
