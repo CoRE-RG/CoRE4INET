@@ -52,6 +52,7 @@ OBJS = \
     $O/applications/TrafficSourceAppBase.o \
     $O/applications/TTEApplicationBase.o \
     $O/applications/TTEAPIApplicationBase.o \
+    $O/applications/TTTrafficSourceApp.o \
     $O/applications/TTEAPITestApplication.o \
     $O/applications/RCTrafficSourceApp.o \
     $O/buffer/TTDoubleBuffer.o \
@@ -306,6 +307,26 @@ $O/applications/TTETestApp.o: applications/TTETestApp.cc \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
+$O/applications/TTTrafficSourceApp.o: applications/TTTrafficSourceApp.cc \
+	api/Callback.h \
+	api/tte_api/tte_api.h \
+	applications/TTEApplicationBase.h \
+	applications/TTTrafficSourceApp.h \
+	applications/TrafficSourceAppBase.h \
+	buffer/Buffer.h \
+	buffer/RCBuffer.h \
+	buffer/TTBuffer.h \
+	ctc/Incoming.h \
+	linklayer/ethernet/CTFrame_m.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/TTEScheduler.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \

@@ -30,8 +30,8 @@ void TTEApplicationBase::handleParameterChange(const char* parname){
     buffers.clear();
     if(ev.isGUI()){
         //TODO check why this does not work
-        //getDisplayString().setTagArg("i2", 0, "");
-        //getDisplayString().setTagArg("tt", 0, "");
+        getDisplayString().setTagArg("i2", 0, "");
+        getDisplayString().setTagArg("tt", 0, "");
     }
     std::string buffersString = par("buffers").stdstringValue();
     std::vector<std::string> bufferPaths;

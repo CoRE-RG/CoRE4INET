@@ -22,5 +22,6 @@ simple TTTrafficSourceApp extends TrafficSourceAppBase
 {
     parameters:
         @class(TTTrafficSourceApp);
+        double action_time @unit(s);
         
 }
