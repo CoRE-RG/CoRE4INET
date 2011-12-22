@@ -24,4 +24,6 @@ simple TTTrafficSourceApp extends TrafficSourceAppBase
         @class(TTTrafficSourceApp);
         double action_time @unit(s);
         
+        int modulo = default(1);
+        
 }

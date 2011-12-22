@@ -21,6 +21,8 @@ simple TTEInput like IOutputQueue
         int ct_marker=0;
         //Critical traffic mask of the buffer
         int ct_mask=0;
+        //Comma seperated list of ctc modules the input uses
+        string incomings = default("");
     gates:
         //Input from the lower layer (MAC layer)
         input in @labels(EtherFrame);

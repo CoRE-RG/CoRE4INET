@@ -30,6 +30,9 @@ namespace TTEthernetModel {
  */
 class TTTrafficSourceApp : public TrafficSourceAppBase
 {
+    private:
+        unsigned int moduloCycle;
+
     protected:
         /**
          * @brief Initialization of the module. Sends activator message
@@ -39,6 +42,8 @@ class TTTrafficSourceApp : public TrafficSourceAppBase
          * @brief Handles message generation
          */
         virtual void handleMessage(cMessage *msg);
+    public:
+        TTTrafficSourceApp();
 };
 
 } //namespace

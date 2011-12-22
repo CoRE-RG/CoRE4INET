@@ -21,6 +21,9 @@ namespace TTEthernetModel {
 
 Define_Module( TTTrafficSourceApp);
 
+TTTrafficSourceApp::TTTrafficSourceApp():moduloCycle(0){
+}
+
 void TTTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
@@ -35,7 +38,11 @@ void TTTrafficSourceApp::initialize()
 void TTTrafficSourceApp::handleMessage(cMessage *msg){
 
     if(msg->arrivedOn("schedulerIn")){
-        sendMessage();
+        moduloCycle++;
+        if(moduloCycle==(unsigned int)par("modulo").longValue()){
+            sendMessage();
+            moduloCycle=0;
+        }
 
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
