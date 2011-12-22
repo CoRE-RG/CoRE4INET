@@ -123,7 +123,6 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
     int sendWindowStart = ttBuffer->par("sendWindowStart");
     for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();)
     {
-        ++buffer;
         if (buffer == ttBuffers.end() || (*buffer)->par("sendWindowStart").longValue() > sendWindowStart)
         {
             ttBuffers.insert(buffer, ttBuffer);
@@ -135,12 +134,15 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
                 if (buffer2 != ttBuffers.end() && (tmpBuffer->par("sendWindowEnd").longValue() > (*buffer2)->par(
                         "sendWindowStart").longValue()))
                 {
-                    opp_error("Port cannot be scheduled due to overlapping schedules: %s and %s", tmpBuffer->getName(),
-                            (*buffer2)->getName());
+                    opp_error("Port cannot be scheduled due to overlapping schedules: %s (End: %d) and %s (Start: %d)", tmpBuffer->getName(),
+                            tmpBuffer->par("sendWindowEnd").longValue(),
+                            (*buffer2)->getName(),
+                            (*buffer2)->par("sendWindowStart").longValue());
                 }
             }
             return;
         }
+        ++buffer;
     }
     //This should only happen if buffer was empty
     ttBuffers.push_back(ttBuffer);
