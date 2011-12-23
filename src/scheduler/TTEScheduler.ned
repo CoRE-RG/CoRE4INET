@@ -27,7 +27,7 @@ simple TTEScheduler
         // Maximum clock drift change per cycle
         double max_drift_change @unit(s) =default(1ps);
         // Current length of a tick (with imprecission)
-        double current_tick @unit(s) = tick;
+        volatile double current_tick @unit(s) = tick;
         // Number of ticks for one cycle
         int cycle_ticks = default(37500);
 }

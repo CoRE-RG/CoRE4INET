@@ -39,6 +39,7 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg){
 
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         SchedulerTimerEvent *event = (SchedulerTimerEvent *)msg;
+        event->setTimer(par("interval").doubleValue()/tteScheduler->par("tick").doubleValue());
         tteScheduler->registerEvent(event);
     }
     else{

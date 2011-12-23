@@ -22,5 +22,5 @@ simple RCTrafficSourceApp extends TrafficSourceAppBase
 {
     parameters:
         @class(RCTrafficSourceApp);
-        double interval @unit(s);
+        volatile double interval @unit(s);
 }
