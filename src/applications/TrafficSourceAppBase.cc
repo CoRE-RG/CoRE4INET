@@ -28,6 +28,10 @@ void TrafficSourceAppBase::initialize()
 void TrafficSourceAppBase::sendMessage(){
     CTFrame *frame = new CTFrame("");
     frame->setByteLength(par("payload").longValue()+ETHER_MAC_FRAME_BYTES);
+    //Padding
+    if(frame->getByteLength()<MIN_ETHERNET_FRAME){
+        frame->setByteLength(MIN_ETHERNET_FRAME);
+    }
     int ctID = par("ct_id").longValue();
     if(ctID == -1){
 

@@ -31,8 +31,8 @@ module TTEEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
-        int numApps = default(1);
-        int numPorts = 1;
+        int numApps = default(0);
+        int numPorts = default(1);
     gates:
         // Physical port of the host
         inout ethg;
