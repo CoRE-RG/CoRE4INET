@@ -24,12 +24,12 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="215,5,329,32">
+<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="268,5,383,32">
 <area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="5,80,77,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="101,80,197,107">
-<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="221,80,323,107">
-<area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="347,80,496,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="520,80,629,107">
+<area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="101,80,251,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="275,80,376,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="400,80,509,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="533,80,629,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -45,44 +45,12 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <th class="description">Description</th>
    </tr>
 <tr class="local">
-   <td>network_configuration</td>
+   <td>hardware_delay</td>
    <td>
-      <i>string</i>
+      <i>double</i>
    </td>
-   <td></td>
-   <td>
-<p>Network configuration file</p>
-   </td>
-</tr>
-<tr class="local">
-   <td>device_name</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td></td>
-   <td>
-<p>Name of the device in the network configuration</p>
-   </td>
-</tr>
-<tr class="local">
-   <td>beRelayUnitType</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>"MACRelayUnitNP"</td>
-   <td>
-<p>type of the best-effort MACRelayUnit; currently possible MACRelayUnitNP, MACRelayUnitPP</p>
-   </td>
-</tr>
-<tr class="local">
-   <td>configurationManager</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>"BaseConfigurationManager"</td>
-   <td>
-<p>type of the configurationManager this package contains a dummy ConfigurationManager (<a href="ttethernet.configuration.BaseConfigurationManager.html">BaseConfigurationManager</a>) that can be extended</p>
-   </td>
+   <td>8us</td>
+   <td>   </td>
 </tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
@@ -159,6 +127,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.incomings</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of ctc modules the input uses</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.address</td>
    <td>
       <i>string</i>
@@ -199,6 +177,46 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>1500</td>
    <td>   </td>
 </tr>
+<tr>
+   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>80ns</td>
+   <td>
+<p>Length of a tick</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>16ps</td>
+   <td>
+<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>1ps</td>
+   <td>
+<p>Maximum clock drift change per cycle</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>37500</td>
+   <td>
+<p>Number of ticks for one cycle</p>
+   </td>
+</tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
@@ -217,20 +235,13 @@ additional frames are dropped. Only used if queueModule==""</p>
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@node</span><span style="color: #000000; ">();
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/switch;bgb=1219,312&quot;</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">// Network configuration file
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">network_configuration</span><span style="color: #000000; ">;
-        </span><span style="color: #808080; font-style: italic; ">// Name of the device in the network configuration
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">device_name</span><span style="color: #000000; ">;
-        </span><span style="color: #808080; font-style: italic; ">// type of the best-effort MACRelayUnit; currently possible MACRelayUnitNP, MACRelayUnitPP
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">beRelayUnitType</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;MACRelayUnitNP&quot;</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">// type of the configurationManager this package contains a dummy ConfigurationManager (BaseConfigurationManager) that can be extended
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;BaseConfigurationManager&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">hardware_delay</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">8</span><span style="color: #000000; ">us</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">// Physical ports of the switch
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">inout</span><span style="color: #000000; "> </span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">[] </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; ">;
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">// Implementation of the best-effort forwarding part
-</span><span style="color: #000000; ">        </span><span style="color: #000000; ">beswitch</span><span style="color: #000000; ">: &lt;</span><span style="color: #000000; ">beRelayUnitType</span><span style="color: #000000; ">&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IMACRelayUnit</span><span style="color: #000000; "> {
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">beswitch</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;MACRelayUnitNP&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IMACRelayUnit</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,242&quot;</span><span style="color: #000000; ">);
             </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
@@ -248,7 +259,7 @@ additional frames are dropped. Only used if queueModule==""</p>
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,169&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// Buffer manager that creates the buffers according to the configuration
-</span><span style="color: #000000; ">        </span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; ">: &lt;</span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; ">&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IConfigurationManager</span><span style="color: #000000; "> {
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;BaseConfigurationManager&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IConfigurationManager</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=999,999&quot;</span><span style="color: #000000; ">);
         }

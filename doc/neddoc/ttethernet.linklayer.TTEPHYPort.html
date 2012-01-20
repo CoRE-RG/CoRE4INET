@@ -18,13 +18,13 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.linklayer.TTEPHYPort-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="172,80,268,107">
-<area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="Simple Module TTEInput" alt="" coords="5,155,77,181">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="101,155,197,181">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="Simple Module EtherMACFullDuplex" alt="" coords="221,155,363,181">
-<area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="Simple Module TTEOutput" alt="" coords="387,155,469,181">
-<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="104,5,205,32">
-<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="229,5,344,32">
+<img src="ttethernet.linklayer.TTEPHYPort-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="153,80,249,107">
+<area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="Simple Module TTEOutput" alt="" coords="5,155,88,181">
+<area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="Simple Module TTEInput" alt="" coords="112,155,184,181">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="208,155,304,181">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="Simple Module EtherMACFullDuplex" alt="" coords="328,155,469,181">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="85,5,187,32">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="211,5,325,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -141,6 +141,16 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
       <th class="defaultvalue">Default value</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.incomings</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of ctc modules the input uses</p>
+   </td>
+</tr>
 <tr>
    <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.address</td>
    <td>

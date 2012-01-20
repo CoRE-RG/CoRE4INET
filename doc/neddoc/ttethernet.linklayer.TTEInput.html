@@ -77,6 +77,16 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
 <p>Critical traffic mask of the buffer</p>
    </td>
 </tr>
+<tr class="local">
+   <td>incomings</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of ctc modules the input uses</p>
+   </td>
+</tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
 <table class="propertiestable">
@@ -153,6 +163,8 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_marker</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
         </span><span style="color: #808080; font-style: italic; ">//Critical traffic mask of the buffer
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_mask</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of ctc modules the input uses
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">incomings</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input from the lower layer (MAC layer)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">in</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">);

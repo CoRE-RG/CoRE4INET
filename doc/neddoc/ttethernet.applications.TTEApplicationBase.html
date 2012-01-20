@@ -19,10 +19,11 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-usage-dia
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.TTEApplicationBase-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.applications.TTEApplicationBase.html" title="Simple Module TTEApplicationBase" alt="" coords="91,80,229,107">
-<area shape="rect" href="ttethernet.applications.TTEAPIApplicationBase.html" title="Simple Module TTEAPIApplicationBase" alt="" coords="5,155,165,181">
-<area shape="rect" href="ttethernet.applications.TTETestApp.html" title="Simple Module TTETestApp" alt="" coords="189,155,280,181">
-<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="104,5,216,32">
+<img src="ttethernet.applications.TTEApplicationBase-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.applications.TTEApplicationBase.html" title="Simple Module TTEApplicationBase" alt="" coords="189,80,328,107">
+<area shape="rect" href="ttethernet.applications.TrafficSourceAppBase.html" title="Simple Module TrafficSourceAppBase" alt="" coords="5,155,155,181">
+<area shape="rect" href="ttethernet.applications.TTEAPIApplicationBase.html" title="Simple Module TTEAPIApplicationBase" alt="" coords="179,155,339,181">
+<area shape="rect" href="ttethernet.applications.TTETestApp.html" title="Simple Module TTETestApp" alt="" coords="363,155,453,181">
+<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="203,5,315,32">
 </map>
 <h3 class="subtitle">Known subclasses:</h3>
 <table class="typestable">
@@ -31,6 +32,19 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <th class="type">Type</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td>
+<a href="ttethernet.applications.TrafficSourceAppBase.html">TrafficSourceAppBase</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>TODO auto-generated module</p>
+
+   </td>
+</tr>
 <tr>
    <td>
 <a href="ttethernet.applications.TTEAPIApplicationBase.html">TTEAPIApplicationBase</a>
@@ -76,6 +90,27 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <p>Comma seperated list of buffer modules the application is allowed to use</p>
    </td>
 </tr>
+<tr class="local">
+   <td>buffers_manual</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>class</td>
+   <td><i>TTEApplicationBase</i></td>
+   <td></td>
+</tr>
 </table>
 <h3 class="subtitle">Gates:</h3>
 <table class="gatestable">
@@ -110,8 +145,10 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 </span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEApplicationBase</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTEApplicationBase</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of buffer modules the application is allowed to use
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">buffers</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">buffers_manual</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
         </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);

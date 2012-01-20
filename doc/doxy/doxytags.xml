@@ -428,6 +428,32 @@
     <namespace>TTEthernetModel</namespace>
   </compound>
   <compound kind="file">
+    <name>RCTrafficSourceApp.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
+    <filename>_r_c_traffic_source_app_8cc</filename>
+    <includes id="_r_c_traffic_source_app_8cc" name="RCTrafficSourceApp.cc" local="yes" imported="no">RCTrafficSourceApp.h</includes>
+    <includes id="_incoming_8h" name="Incoming.h" local="yes" imported="no">Incoming.h</includes>
+    <includes id="_callback_8h" name="Callback.h" local="yes" imported="no">Callback.h</includes>
+    <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="no" imported="no">CTFrame_m.h</includes>
+    <includes id="_t_t_e_scheduler_8h" name="TTEScheduler.h" local="yes" imported="no">TTEScheduler.h</includes>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a00c1c368ff03571108abf6b923fabc10</anchor>
+      <arglist>(RCTrafficSourceApp)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>RCTrafficSourceApp.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
+    <filename>_r_c_traffic_source_app_8h</filename>
+    <includes id="_traffic_source_app_base_8h" name="TrafficSourceAppBase.h" local="yes" imported="no">TrafficSourceAppBase.h</includes>
+    <class kind="class">TTEthernetModel::RCTrafficSourceApp</class>
+    <namespace>TTEthernetModel</namespace>
+  </compound>
+  <compound kind="file">
     <name>SchedulerEvent.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/scheduler/</path>
     <filename>_scheduler_event_8cc</filename>
@@ -583,6 +609,29 @@
     <namespace>TTEthernetModel</namespace>
   </compound>
   <compound kind="file">
+    <name>TrafficSourceAppBase.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
+    <filename>_traffic_source_app_base_8cc</filename>
+    <includes id="_traffic_source_app_base_8h" name="TrafficSourceAppBase.h" local="yes" imported="no">TrafficSourceAppBase.h</includes>
+    <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="no" imported="no">CTFrame_m.h</includes>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a87980e6759479c67b53d286556b50a40</anchor>
+      <arglist>(TrafficSourceAppBase)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>TrafficSourceAppBase.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
+    <filename>_traffic_source_app_base_8h</filename>
+    <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
+    <class kind="class">TTEthernetModel::TrafficSourceAppBase</class>
+    <namespace>TTEthernetModel</namespace>
+  </compound>
+  <compound kind="file">
     <name>TTBuffer.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/buffer/</path>
     <filename>_t_t_buffer_8cc</filename>
@@ -678,9 +727,9 @@
     <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
     <filename>_t_t_e_a_p_i_application_base_8cc</filename>
     <includes id="_t_t_e_a_p_i_application_base_8cc" name="TTEAPIApplicationBase.cc" local="yes" imported="no">TTEAPIApplicationBase.h</includes>
-    <includes id="_incoming_8h" name="Incoming.h" local="yes" imported="no">Incoming.h</includes>
-    <includes id="_callback_8h" name="Callback.h" local="yes" imported="no">Callback.h</includes>
+    <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
     <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="yes" imported="no">CTFrame_m.h</includes>
+    <includes id="_incoming_8h" name="Incoming.h" local="yes" imported="no">Incoming.h</includes>
     <includes id="_t_t_incoming_8h" name="TTIncoming.h" local="yes" imported="no">TTIncoming.h</includes>
     <includes id="_r_c_incoming_8h" name="RCIncoming.h" local="yes" imported="no">RCIncoming.h</includes>
     <includes id="_t_t_buffer_8h" name="TTBuffer.h" local="yes" imported="no">TTBuffer.h</includes>
@@ -948,6 +997,7 @@
     <filename>_t_t_e_input_8cc</filename>
     <includes id="_t_t_e_input_8cc" name="TTEInput.cc" local="yes" imported="no">TTEInput.h</includes>
     <includes id="_incoming_8h" name="Incoming.h" local="no" imported="no">ctc/Incoming.h</includes>
+    <includes id="_t_t_e_scheduler_8h" name="TTEScheduler.h" local="yes" imported="no">TTEScheduler.h</includes>
     <member kind="function">
       <type></type>
       <name>Define_Module</name>
@@ -1097,6 +1147,31 @@
     <class kind="class">TTEthernetModel::TTQueueBuffer</class>
     <namespace>TTEthernetModel</namespace>
   </compound>
+  <compound kind="file">
+    <name>TTTrafficSourceApp.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
+    <filename>_t_t_traffic_source_app_8cc</filename>
+    <includes id="_t_t_traffic_source_app_8cc" name="TTTrafficSourceApp.cc" local="yes" imported="no">TTTrafficSourceApp.h</includes>
+    <includes id="_traffic_source_app_base_8h" name="TrafficSourceAppBase.h" local="yes" imported="no">TrafficSourceAppBase.h</includes>
+    <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="no" imported="no">CTFrame_m.h</includes>
+    <includes id="_t_t_e_scheduler_8h" name="TTEScheduler.h" local="yes" imported="no">TTEScheduler.h</includes>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a9b8e712c9e98f56bb02b359db087f458</anchor>
+      <arglist>(TTTrafficSourceApp)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>TTTrafficSourceApp.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
+    <filename>_t_t_traffic_source_app_8h</filename>
+    <includes id="_traffic_source_app_base_8h" name="TrafficSourceAppBase.h" local="yes" imported="no">TrafficSourceAppBase.h</includes>
+    <class kind="class">TTEthernetModel::TTTrafficSourceApp</class>
+    <namespace>TTEthernetModel</namespace>
+  </compound>
   <compound kind="page">
     <name>whatsnew</name>
     <title>What&apos;s New</title>
@@ -1116,10 +1191,13 @@
     <name>Applications</name>
     <title>Applications</title>
     <filename>group___applications.html</filename>
+    <class kind="class">TTEthernetModel::RCTrafficSourceApp</class>
+    <class kind="class">TTEthernetModel::TrafficSourceAppBase</class>
     <class kind="class">TTEthernetModel::TTEAPIApplicationBase</class>
     <class kind="class">TTEthernetModel::TTEAPITestApplication</class>
     <class kind="class">TTEthernetModel::TTEApplicationBase</class>
     <class kind="class">TTEthernetModel::TTETestApp</class>
+    <class kind="class">TTEthernetModel::TTTrafficSourceApp</class>
   </compound>
   <compound kind="group">
     <name>Buffer</name>
@@ -1150,11 +1228,14 @@
     <class kind="class">TTEthernetModel::APICallback</class>
     <class kind="class">TTEthernetModel::Task</class>
     <class kind="class">TTEthernetModel::APITask</class>
+    <class kind="class">TTEthernetModel::RCTrafficSourceApp</class>
+    <class kind="class">TTEthernetModel::TrafficSourceAppBase</class>
     <class kind="class">TTEthernetModel::TTEAPIPriv</class>
     <class kind="class">TTEthernetModel::TTEAPIApplicationBase</class>
     <class kind="class">TTEthernetModel::TTEAPITestApplication</class>
     <class kind="class">TTEthernetModel::TTEApplicationBase</class>
     <class kind="class">TTEthernetModel::TTETestApp</class>
+    <class kind="class">TTEthernetModel::TTTrafficSourceApp</class>
     <class kind="class">TTEthernetModel::BGBuffer</class>
     <class kind="class">TTEthernetModel::BGQueueBuffer</class>
     <class kind="class">TTEthernetModel::Buffer</class>
@@ -1238,6 +1319,20 @@
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
       <anchor>afb69a66fe1825ae4a81ce48bcf2c2930</anchor>
       <arglist>(cCommBuffer *b, APIPayload &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a00c1c368ff03571108abf6b923fabc10</anchor>
+      <arglist>(RCTrafficSourceApp)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a87980e6759479c67b53d286556b50a40</anchor>
+      <arglist>(TrafficSourceAppBase)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1434,6 +1529,13 @@
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
       <anchor>ac08cb52af056142b87e90106292a4818</anchor>
       <arglist>(TTETestApp)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a9b8e712c9e98f56bb02b359db087f458</anchor>
+      <arglist>(TTTrafficSourceApp)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1844,6 +1946,44 @@
     <base>TTEthernetModel::Task</base>
   </compound>
   <compound kind="class">
+    <name>TTEthernetModel::RCTrafficSourceApp</name>
+    <filename>class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html</filename>
+    <base>TTEthernetModel::TrafficSourceAppBase</base>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html</anchorfile>
+      <anchor>ad898172513d660cb0776c22f39e9a8e7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html</anchorfile>
+      <anchor>a17f477a3954c6cea4837568e966d0dbe</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::TrafficSourceAppBase</name>
+    <filename>class_t_t_ethernet_model_1_1_traffic_source_app_base.html</filename>
+    <base>TTEthernetModel::TTEApplicationBase</base>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_traffic_source_app_base.html</anchorfile>
+      <anchor>a1330bb8aa9fb62d5644028a6a6e70b6a</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>sendMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_traffic_source_app_base.html</anchorfile>
+      <anchor>a6a960b3fb8884fc7d25a0429bfa1bb07</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>TTEthernetModel::TTEAPIPriv</name>
     <filename>class_t_t_ethernet_model_1_1_t_t_e_a_p_i_priv.html</filename>
     <member kind="variable">
@@ -2032,6 +2172,39 @@
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_test_app.html</anchorfile>
       <anchor>a07fea9940a97ebef177e7dda880b39f3</anchor>
       <arglist>(cMessage *msg)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::TTTrafficSourceApp</name>
+    <filename>class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html</filename>
+    <base>TTEthernetModel::TrafficSourceAppBase</base>
+    <member kind="function">
+      <type></type>
+      <name>TTTrafficSourceApp</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html</anchorfile>
+      <anchor>aa7d92bdb761412701cff2b97f3db5f1e</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html</anchorfile>
+      <anchor>a5bb303c777740aa1add4ac6bd9fd4f60</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html</anchorfile>
+      <anchor>ac619e3780c7d6ae2f1255eec306b49d6</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>unsigned int</type>
+      <name>moduloCycle</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html</anchorfile>
+      <anchor>a51733c2ae3b39d6537d2bda4e067dd0d</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3549,6 +3722,10 @@
     <name>src/applications/</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/</path>
     <filename>dir_d3c648cba0baa191ba5c49bd1b217feb.html</filename>
+    <file>RCTrafficSourceApp.cc</file>
+    <file>RCTrafficSourceApp.h</file>
+    <file>TrafficSourceAppBase.cc</file>
+    <file>TrafficSourceAppBase.h</file>
     <file>TTEAPIApplicationBase.cc</file>
     <file>TTEAPIApplicationBase.h</file>
     <file>TTEAPITestApplication.cc</file>
@@ -3557,6 +3734,8 @@
     <file>TTEApplicationBase.h</file>
     <file>TTETestApp.cc</file>
     <file>TTETestApp.h</file>
+    <file>TTTrafficSourceApp.cc</file>
+    <file>TTTrafficSourceApp.h</file>
   </compound>
   <compound kind="dir">
     <name>src/base/</name>
