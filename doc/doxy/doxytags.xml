@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='ISO-8859-1' standalone='yes' ?>
 <tagfile>
+  <compound kind="page">
+    <name>main</name>
+    <title>Sourcecode Documentation - TTEthernet Model for INET Framework (TTE4INET)</title>
+    <filename>main</filename>
+  </compound>
   <compound kind="file">
     <name>APIPayload_m.h</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/api/</path>
@@ -312,6 +317,35 @@
     <filename>index_8h</filename>
   </compound>
   <compound kind="file">
+    <name>PCFFrame_m.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/linklayer/ethernet/</path>
+    <filename>_p_c_f_frame__m_8h</filename>
+    <includes id="_p_c_f_frame__m_8h" name="PCFFrame_m.h" local="yes" imported="no">RCFrame_m.h</includes>
+    <class kind="class">TTEthernetModel::PCFFrame</class>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="define">
+      <type>#define</type>
+      <name>MSGC_VERSION</name>
+      <anchorfile>_p_c_f_frame__m_8h.html</anchorfile>
+      <anchor>a77f5ea746b531cbdbc322a93741e33a6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a5e59e926f1f8de8fb4294314434f9d22</anchor>
+      <arglist>(cCommBuffer *b, PCFFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a80897207ab278cd578d407100b42b8f7</anchor>
+      <arglist>(cCommBuffer *b, PCFFrame &amp;obj)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
     <name>QueueBuffer.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/buffer/</path>
     <filename>_queue_buffer_8cc</filename>
@@ -378,6 +412,35 @@
     <includes id="_double_buffer_8h" name="DoubleBuffer.h" local="no" imported="no">DoubleBuffer.h</includes>
     <class kind="class">TTEthernetModel::RCDoubleBuffer</class>
     <namespace>TTEthernetModel</namespace>
+  </compound>
+  <compound kind="file">
+    <name>RCFrame_m.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/linklayer/ethernet/</path>
+    <filename>_r_c_frame__m_8h</filename>
+    <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="yes" imported="no">CTFrame_m.h</includes>
+    <class kind="class">TTEthernetModel::RCFrame</class>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="define">
+      <type>#define</type>
+      <name>MSGC_VERSION</name>
+      <anchorfile>_r_c_frame__m_8h.html</anchorfile>
+      <anchor>a77f5ea746b531cbdbc322a93741e33a6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a9eb9b41eb3bccb5e80eb1fa8ad164601</anchor>
+      <arglist>(cCommBuffer *b, RCFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>ab4abfcea993ff748ccf29c60c30ebf4c</anchor>
+      <arglist>(cCommBuffer *b, RCFrame &amp;obj)</arglist>
+    </member>
   </compound>
   <compound kind="file">
     <name>RCIncoming.cc</name>
@@ -1099,6 +1162,35 @@
     <namespace>TTEthernetModel</namespace>
   </compound>
   <compound kind="file">
+    <name>TTFrame_m.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/linklayer/ethernet/</path>
+    <filename>_t_t_frame__m_8h</filename>
+    <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="yes" imported="no">CTFrame_m.h</includes>
+    <class kind="class">TTEthernetModel::TTFrame</class>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="define">
+      <type>#define</type>
+      <name>MSGC_VERSION</name>
+      <anchorfile>_t_t_frame__m_8h.html</anchorfile>
+      <anchor>a77f5ea746b531cbdbc322a93741e33a6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>ad5b55b4e7f434adf857d84b911b7a893</anchor>
+      <arglist>(cCommBuffer *b, TTFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>aba4739dae310fc44a4a29b8f66751f78</anchor>
+      <arglist>(cCommBuffer *b, TTFrame &amp;obj)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
     <name>TTIncoming.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/ctc/</path>
     <filename>_t_t_incoming_8cc</filename>
@@ -1254,6 +1346,9 @@
     <class kind="class">TTEthernetModel::TTIncoming</class>
     <class kind="class">TTEthernetModel::BGTrafficHandle</class>
     <class kind="class">TTEthernetModel::CTFrame</class>
+    <class kind="class">TTEthernetModel::PCFFrame</class>
+    <class kind="class">TTEthernetModel::RCFrame</class>
+    <class kind="class">TTEthernetModel::TTFrame</class>
     <class kind="class">TTEthernetModel::TTEInput</class>
     <class kind="class">TTEthernetModel::TTEOutput</class>
     <class kind="class">TTEthernetModel::SchedulerEvent</class>
@@ -1613,6 +1708,48 @@
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
       <anchor>a5d4a9847358a15b1f0a881220cbe3b2e</anchor>
       <arglist>(cCommBuffer *b, CTFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a5e59e926f1f8de8fb4294314434f9d22</anchor>
+      <arglist>(cCommBuffer *b, PCFFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a80897207ab278cd578d407100b42b8f7</anchor>
+      <arglist>(cCommBuffer *b, PCFFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a9eb9b41eb3bccb5e80eb1fa8ad164601</anchor>
+      <arglist>(cCommBuffer *b, RCFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>ab4abfcea993ff748ccf29c60c30ebf4c</anchor>
+      <arglist>(cCommBuffer *b, RCFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>ad5b55b4e7f434adf857d84b911b7a893</anchor>
+      <arglist>(cCommBuffer *b, TTFrame &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>aba4739dae310fc44a4a29b8f66751f78</anchor>
+      <arglist>(cCommBuffer *b, TTFrame &amp;obj)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2948,6 +3085,336 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>TTEthernetModel::PCFFrame</name>
+    <filename>class_t_t_ethernet_model_1_1_p_c_f_frame.html</filename>
+    <base>TTEthernetModel::RCFrame</base>
+    <member kind="function">
+      <type></type>
+      <name>PCFFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a7edbf4a8ed7741b1171b4ca7c5dec1b9</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>PCFFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a4441cfaa9c93d6122d6ca33cbeac2fee</anchor>
+      <arglist>(const PCFFrame &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~PCFFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>ab7a2b35cd5e084aa254ec8661c4d27d6</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>PCFFrame &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>adf134f10824214c295347dbd14575bc9</anchor>
+      <arglist>(const PCFFrame &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual PCFFrame *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a72c89e669423858cfbfff47e6ae75017</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a27a570dad5f9b94143227937d7c08bde</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a6286816af7351fa26351d542bd5e6d35</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned int</type>
+      <name>getIntegration_cycle</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>ad4490706902f1261ec9a8cfee181bdea</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setIntegration_cycle</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a8e43814984c01c9ad0989651b399d17e</anchor>
+      <arglist>(unsigned int integration_cycle)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned int</type>
+      <name>getMembership_new</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a9825b67ebd7ea09f06913d507f0580c0</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setMembership_new</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a194f7634a67318692b83b0ed3aeef7e6</anchor>
+      <arglist>(unsigned int membership_new)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned char</type>
+      <name>getSync_priority</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a058c3b1147e72e1c84c8d8aac0266e4f</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setSync_priority</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>ad616908b643e176d8928521685c1ac82</anchor>
+      <arglist>(unsigned char sync_priority)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned char</type>
+      <name>getSync_domain</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a3c2257dfb7e345a26f612c30868223a5</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setSync_domain</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a887f0c48124c31149cba31a041aa8277</anchor>
+      <arglist>(unsigned char sync_domain)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned char</type>
+      <name>getType</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a1c9c786ebdc8de5bb9eafdba1ba5657d</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setType</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a21724999da16c9a736b726651a338186</anchor>
+      <arglist>(unsigned char type)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned long</type>
+      <name>getTransparent_clock</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>acdd49806860e1b58b784e82b876db3b2</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setTransparent_clock</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>afd8d94c9972fd2d046eda5d89e6496c8</anchor>
+      <arglist>(unsigned long transparent_clock)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a78f24e90765be1cdd5aa117ddeee2a69</anchor>
+      <arglist>(const PCFFrame &amp;)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned int</type>
+      <name>integration_cycle_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>aaace298683b0c63120eb74afe66b5034</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned int</type>
+      <name>membership_new_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>ad579f765514c9350aaf6b1f796cebd8a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned char</type>
+      <name>sync_priority_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>ad0f92dae4009bf3abbee5fa49bce0cda</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned char</type>
+      <name>sync_domain_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a50914134572289bb75f209fbaa1ab396</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned char</type>
+      <name>type_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a1b911480838eaee2c263a9d47686e56c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned long</type>
+      <name>transparent_clock_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a171a812400751ce1e09241f918ad8eb1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_p_c_f_frame.html</anchorfile>
+      <anchor>a44f6fe1a7a594fd4bb1fcd16b27e0eeb</anchor>
+      <arglist>(const PCFFrame &amp;other)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::RCFrame</name>
+    <filename>class_t_t_ethernet_model_1_1_r_c_frame.html</filename>
+    <base>TTEthernetModel::CTFrame</base>
+    <member kind="function">
+      <type></type>
+      <name>RCFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>a74532a1341809108c31d0838eae713ed</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>RCFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>ab17c70f772011823042b3198262ba3c3</anchor>
+      <arglist>(const RCFrame &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~RCFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>af5a52c00a12dafb5ed423af78573e57d</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>RCFrame &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>ad6a2eafe9d449a821a8f2bdfc0bc12d3</anchor>
+      <arglist>(const RCFrame &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual RCFrame *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>a46f3718b6c8e99bdce957eaa5f3b024c</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>a402750475afd12efc934c8cdfb860db4</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>a7416e213b40a103a9892593674a235a5</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>ad990b4c6e128095f1a1e3c7ba56cec73</anchor>
+      <arglist>(const RCFrame &amp;)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_frame.html</anchorfile>
+      <anchor>ab91613921b2d34d4f7e206f9614650c1</anchor>
+      <arglist>(const RCFrame &amp;other)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::TTFrame</name>
+    <filename>class_t_t_ethernet_model_1_1_t_t_frame.html</filename>
+    <base>TTEthernetModel::CTFrame</base>
+    <member kind="function">
+      <type></type>
+      <name>TTFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>aab16252082ba69af7e5064b60a902de1</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>TTFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>a1ac4a4559e41c01b265ec2a17e06e530</anchor>
+      <arglist>(const TTFrame &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~TTFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>a018cb7ba732769ba614d2b1e886e2855</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>TTFrame &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>ade0dcaa3310083546c23ed086d7b0a54</anchor>
+      <arglist>(const TTFrame &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual TTFrame *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>a0fab9929c53b6718d43df8dabacead11</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>a8b43fa17744a5a8ba5441118abf9b6c7</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>ab9412f52689e2016841faa9d82f42bfa</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>af3edd9c51478b17896a571a66c80ee13</anchor>
+      <arglist>(const TTFrame &amp;)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_frame.html</anchorfile>
+      <anchor>a11346a05c64ca820fa15ed79795e2383</anchor>
+      <arglist>(const TTFrame &amp;other)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>TTEthernetModel::TTEInput</name>
     <filename>class_t_t_ethernet_model_1_1_t_t_e_input.html</filename>
     <member kind="function">
@@ -3794,6 +4261,9 @@
     <path>/home/tillsteinbach/git/TTEthernetModel/src/linklayer/ethernet/</path>
     <filename>dir_adb34554275f836391abf50c1254372f.html</filename>
     <file>CTFrame_m.h</file>
+    <file>PCFFrame_m.h</file>
+    <file>RCFrame_m.h</file>
+    <file>TTFrame_m.h</file>
   </compound>
   <compound kind="dir">
     <name>src/linklayer/</name>

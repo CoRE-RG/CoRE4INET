@@ -10,6 +10,8 @@ namespace TTEthernetModel;
 //
 // Represents a critical traffic frame
 //
+// CTFrames are displayed as small black rectangles in the GUI
+//
 // @see EtherFrame
 //
 // @author Till Steinbach

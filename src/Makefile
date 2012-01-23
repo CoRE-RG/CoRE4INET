@@ -80,6 +80,9 @@ OBJS = \
     $O/api/APIPayload_m.o \
     $O/buffer/TTBufferEmpty_m.o \
     $O/linklayer/ethernet/CTFrame_m.o \
+    $O/linklayer/ethernet/RCFrame_m.o \
+    $O/linklayer/ethernet/PCFFrame_m.o \
+    $O/linklayer/ethernet/TTFrame_m.o \
     $O/scheduler/SchedulerMessage_m.o \
     $O/scheduler/SchedulerMessageEvents_m.o
 
@@ -88,6 +91,9 @@ MSGFILES = \
     api/APIPayload.msg \
     buffer/TTBufferEmpty.msg \
     linklayer/ethernet/CTFrame.msg \
+    linklayer/ethernet/RCFrame.msg \
+    linklayer/ethernet/PCFFrame.msg \
+    linklayer/ethernet/TTFrame.msg \
     scheduler/SchedulerMessage.msg \
     scheduler/SchedulerMessageEvents.msg
 
@@ -569,6 +575,31 @@ $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
 $O/linklayer/ethernet/CTFrame_m.o: linklayer/ethernet/CTFrame_m.cc \
 	linklayer/ethernet/CTFrame_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
+$O/linklayer/ethernet/PCFFrame_m.o: linklayer/ethernet/PCFFrame_m.cc \
+	linklayer/ethernet/CTFrame_m.h \
+	linklayer/ethernet/PCFFrame_m.h \
+	linklayer/ethernet/RCFrame_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
+$O/linklayer/ethernet/RCFrame_m.o: linklayer/ethernet/RCFrame_m.cc \
+	linklayer/ethernet/CTFrame_m.h \
+	linklayer/ethernet/RCFrame_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
+$O/linklayer/ethernet/TTFrame_m.o: linklayer/ethernet/TTFrame_m.cc \
+	linklayer/ethernet/CTFrame_m.h \
+	linklayer/ethernet/TTFrame_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
