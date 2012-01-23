@@ -21,7 +21,7 @@
 //<center><img src="../images/CoRE.png"/><img src="../images/HAW.gif"/></center>
 //
 // <center><h1>TTEthernet Model for INET Framework (TTE4INET)</h1></center>
-// <center>release 2.0</center>
+// <center>release ?</center>
 //
 // TTE4INET is an extension to the INET-Framework for the event-based simulation
 // of time-triggered Ethernet (<a href="http://www.ttethernet.com" target="_top">TTEthernet</a>)
@@ -51,7 +51,7 @@
 // along with the <a href="http://www.simutools.org/2011/" target="_top">4th International ICST Conference on Simulation Tools and Techniques (2011)</a>.
 // You can find the presentation slides <a href="http://papers.till-steinbach.de/sdkks-eifre-11b.pdf" target="_top">here</a>
 //
-// Since there were changes necessary to support OMNeT++ 4.2 and INET 1.99, TTE4INET was completely redesigned in Version 2.0
+// Since there were changes necessary to support OMNeT++ 4.2 and INET 1.99, TTE4INET was completely redesigned in the current version
 //
 // <h2>IMPORTANT</h2>
 // The TTE4INET model is continuously being improved: new parts

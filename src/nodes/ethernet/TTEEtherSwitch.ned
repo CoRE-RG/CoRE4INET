@@ -23,6 +23,7 @@ module TTEEtherSwitch
     parameters:
         @node();
         @display("i=block/switch;bgb=1219,312");
+        double hardware_delay @unit(s) = default(8us);
     gates:
         // Physical ports of the switch
         inout ethg[] @loose;

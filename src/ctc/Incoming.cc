@@ -33,7 +33,8 @@ void Incoming::initialize()
 void Incoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
-    	send(msg,"out");
+        sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
+        //send(msg,"out");
     }
 }
 

@@ -50,7 +50,8 @@ void RCIncoming::handleMessage(cMessage *msg)
         //Timing ok
         else{
             lastArrived=currentTotalTicks;
-            send(msg,"out");
+            sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
+            //send(msg,"out");
         }
     }
 }

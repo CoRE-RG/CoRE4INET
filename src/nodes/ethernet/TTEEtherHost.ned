@@ -33,6 +33,7 @@ module TTEEtherHost
         @display("bgb=894,314;i=device/device");
         int numApps = default(0);
         int numPorts = default(1);
+        double hardware_delay @unit(s) = default(0us);
     gates:
         // Physical port of the host
         inout ethg;

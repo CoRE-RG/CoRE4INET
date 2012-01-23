@@ -14,6 +14,7 @@
 // 
 
 #include "TTEInput.h"
+#include "TTEScheduler.h"
 
 #include <iostream>
 
@@ -42,6 +43,8 @@ void TTEInput::handleMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         EtherFrame *frame = (EtherFrame*) msg;
+        msg->addPar("received").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+        msg->addPar("received_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
         //Auf CTCs verteilen oder BE traffic
         if (isCT(frame))
         {

@@ -18,6 +18,15 @@ TTEOutput::TTEOutput()
 {
     framesRequested = 0;
     ttBuffersPos = 0;
+
+    ttQueue.setName("TT Messages");
+    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    {
+        char strBuf[64];
+        snprintf(strBuf,64,"RC Priority %d Messages", i);
+        rcQueue[i].setName(strBuf);
+    }
+    beQueue.setName("BE Messages");
 }
 
 TTEOutput::~TTEOutput()
@@ -65,6 +74,8 @@ void TTEOutput::handleMessage(cMessage *msg)
             if (framesRequested)
             {
                 framesRequested--;
+                msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+                msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
                 send(msg, gateBaseId("out"));
             }
             else
@@ -84,6 +95,8 @@ void TTEOutput::handleMessage(cMessage *msg)
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (msg->getSenderModule());
             if (rcBuffer)
                 rcBuffer->resetBag();
+            msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+            msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
             send(msg, gateBaseId("out"));
         }
         else
@@ -107,6 +120,8 @@ void TTEOutput::handleMessage(cMessage *msg)
         if (framesRequested && isTransmissionAllowed((EtherFrame*) msg))
         {
             framesRequested--;
+            msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+            msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
             send(msg, gateBaseId("out"));
         }
         else
@@ -193,6 +208,8 @@ void TTEOutput::requestPacket()
         //TODO Update buffers:
         ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
 
+        msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+        msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
         send(msg, gateBaseId("out"));
         return;
     }
@@ -207,6 +224,8 @@ void TTEOutput::requestPacket()
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
             if (rcBuffer)
                 rcBuffer->resetBag();
+            message->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+            message->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
             send(message, gateBaseId("out"));
             return;
         }
@@ -215,7 +234,10 @@ void TTEOutput::requestPacket()
     if (!beQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) beQueue.front()))
     {
         framesRequested--;
-        send((cMessage*) beQueue.pop(), gateBaseId("out"));
+        cMessage* message = (cMessage*) beQueue.pop();
+        message->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+        message->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+        send(message, gateBaseId("out"));
         emit(beQueueLengthSignal, beQueue.length());
         return;
     }

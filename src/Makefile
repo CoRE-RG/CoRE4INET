@@ -539,6 +539,9 @@ $O/linklayer/BGTrafficHandle.o: linklayer/BGTrafficHandle.cc \
 $O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
 	ctc/Incoming.h \
 	linklayer/TTEInput.h \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/TTEScheduler.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
