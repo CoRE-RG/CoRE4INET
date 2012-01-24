@@ -2,6 +2,7 @@
 
 #include <Buffer.h>
 #include <RCBuffer.h>
+#include <PCFrame_m.h>
 #include <TTEScheduler.h>
 #include <TTBufferEmpty_m.h>
 
@@ -55,7 +56,6 @@ void TTEOutput::handleMessage(cMessage *msg)
         //TODO THIS ASSERT IS ONLY FOR DEBUGGING PURPOSES! Later it might be allowed to queue TTframes!?!?
         ASSERT(framesRequested > 0);
         ASSERT(framesRequested == 1);
-        //TODO Hier überprüfen ob das so ok ist, insbesondere müssen die Buffer auch "leere" messages schicken damit der Buffer weiter gesetzt wird!
         ttBuffersPos = (++ttBuffersPos % ttBuffers.size());
 
         //If we have an empty message allow other frame to be sent
@@ -97,6 +97,10 @@ void TTEOutput::handleMessage(cMessage *msg)
                 rcBuffer->resetBag();
             msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
             msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+            PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
+            if(pcf){
+                setTransparentClock(pcf);
+            }
             send(msg, gateBaseId("out"));
         }
         else
@@ -226,6 +230,11 @@ void TTEOutput::requestPacket()
                 rcBuffer->resetBag();
             message->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
             message->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+
+            PCFrame *pcf = dynamic_cast<PCFrame*> (message);
+            if(pcf){
+                setTransparentClock(pcf);
+            }
             send(message, gateBaseId("out"));
             return;
         }
@@ -283,6 +292,13 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
         return false;
     }
     return true;
+}
+
+void TTEOutput::setTransparentClock(PCFrame *pcf){
+    unsigned long transparentClock = pcf->par("transparent_clock").longValue();
+    TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+    transparentClock+=getLocalDelay(pcf)*scheduler->par("current_tick").doubleValue()*1000000*0x10000;
+    pcf->par("transparent_clock").setLongValue(transparentClock);
 }
 
 int TTEOutput::getNumPendingRequests()

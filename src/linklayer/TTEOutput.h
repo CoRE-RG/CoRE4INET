@@ -8,6 +8,7 @@
 #include <QueueWithQoS.h>
 #include <EtherFrame_m.h>
 #include <TTBuffer.h>
+#include <PCFrame_m.h>
 
 /**
  * Maximum number of priorities allowed for rate-constrained messages
@@ -90,6 +91,14 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @returns true if transmission is allowed else false
          */
         virtual bool isTransmissionAllowed(EtherFrame *message);
+
+        /**
+         * @brief Sets the transparent clock field in a protocol control frame
+         * according to the actual sending time
+         *
+         * @param pcf the protocol control frame
+         */
+        virtual void setTransparentClock(PCFrame *pcf);
 
         /**
          * @brief Registers a time-triggered buffer that feeds the module.
