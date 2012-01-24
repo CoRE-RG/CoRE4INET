@@ -348,6 +348,7 @@ $O/applications/TrafficSourceAppBase.o: applications/TrafficSourceAppBase.cc \
 	buffer/TTBuffer.h \
 	ctc/Incoming.h \
 	linklayer/ethernet/CTFrame_m.h \
+	linklayer/ethernet/PCFrame_m.h \
 	linklayer/ethernet/RCFrame_m.h \
 	linklayer/ethernet/TTFrame_m.h \
 	scheduler/SchedulerEvent.h \

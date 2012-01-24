@@ -295,10 +295,10 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
 }
 
 void TTEOutput::setTransparentClock(PCFrame *pcf){
-    unsigned long transparentClock = pcf->par("transparent_clock").longValue();
+    unsigned long transparentClock = pcf->getTransparent_clock();
     TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
     transparentClock+=getLocalDelay(pcf)*scheduler->par("current_tick").doubleValue()*1000000*0x10000;
-    pcf->par("transparent_clock").setLongValue(transparentClock);
+    pcf->setTransparent_clock(transparentClock);
 }
 
 int TTEOutput::getNumPendingRequests()
