@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for libTTEthernetModel
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/ethernet -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/common -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/base -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/contract -L/home/tillsteinbach/workspaces/omnet4.2/inet/out/$(CONFIGNAME)/src -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet
+#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/ethernet -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/common -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/base -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/contract -L/home/tillsteinbach/workspaces/omnet4.2/inet/out/$(CONFIGNAME)/src -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet
 #
 
 # Name of target to be created (-o option)
@@ -11,11 +11,11 @@ TARGET = libTTEthernetModel$(SHARED_LIB_SUFFIX)
 # C++ include paths (with -I)
 INCLUDE_PATH = \
     -I$(INET_PROJ)/src/linklayer/ethernet \
+    -I$(INET_PROJ)/src/util \
     -I$(INET_PROJ)/src/networklayer/common \
+    -I$(INET_PROJ)/src/linklayer/contract \
     -I$(INET_PROJ)/src/base \
     -I$(INET_PROJ)/src/networklayer/contract \
-    -I$(INET_PROJ)/src/util \
-    -I$(INET_PROJ)/src/linklayer/contract \
     -I. \
     -Iapi \
     -Iapi/tte_api \
@@ -81,7 +81,7 @@ OBJS = \
     $O/buffer/TTBufferEmpty_m.o \
     $O/linklayer/ethernet/CTFrame_m.o \
     $O/linklayer/ethernet/RCFrame_m.o \
-    $O/linklayer/ethernet/PCFFrame_m.o \
+    $O/linklayer/ethernet/PCFrame_m.o \
     $O/linklayer/ethernet/TTFrame_m.o \
     $O/scheduler/SchedulerMessage_m.o \
     $O/scheduler/SchedulerMessageEvents_m.o
@@ -92,7 +92,7 @@ MSGFILES = \
     buffer/TTBufferEmpty.msg \
     linklayer/ethernet/CTFrame.msg \
     linklayer/ethernet/RCFrame.msg \
-    linklayer/ethernet/PCFFrame.msg \
+    linklayer/ethernet/PCFrame.msg \
     linklayer/ethernet/TTFrame.msg \
     scheduler/SchedulerMessage.msg \
     scheduler/SchedulerMessageEvents.msg
@@ -348,6 +348,8 @@ $O/applications/TrafficSourceAppBase.o: applications/TrafficSourceAppBase.cc \
 	buffer/TTBuffer.h \
 	ctc/Incoming.h \
 	linklayer/ethernet/CTFrame_m.h \
+	linklayer/ethernet/RCFrame_m.h \
+	linklayer/ethernet/TTFrame_m.h \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
@@ -559,6 +561,9 @@ $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
 	buffer/TTBuffer.h \
 	buffer/TTBufferEmpty_m.h \
 	linklayer/TTEOutput.h \
+	linklayer/ethernet/CTFrame_m.h \
+	linklayer/ethernet/PCFrame_m.h \
+	linklayer/ethernet/RCFrame_m.h \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
@@ -580,9 +585,9 @@ $O/linklayer/ethernet/CTFrame_m.o: linklayer/ethernet/CTFrame_m.cc \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
-$O/linklayer/ethernet/PCFFrame_m.o: linklayer/ethernet/PCFFrame_m.cc \
+$O/linklayer/ethernet/PCFrame_m.o: linklayer/ethernet/PCFrame_m.cc \
 	linklayer/ethernet/CTFrame_m.h \
-	linklayer/ethernet/PCFFrame_m.h \
+	linklayer/ethernet/PCFrame_m.h \
 	linklayer/ethernet/RCFrame_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
@@ -622,5 +627,10 @@ $O/scheduler/TTEScheduler.o: scheduler/TTEScheduler.cc \
 $O/synchronisation/Sync.o: synchronisation/Sync.cc \
 	synchronisation/Sync.h
 $O/utilities/HelperFunctions.o: utilities/HelperFunctions.cc \
-	utilities/HelperFunctions.h
+	utilities/HelperFunctions.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
+	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
 

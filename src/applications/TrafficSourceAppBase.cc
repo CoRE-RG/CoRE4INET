@@ -15,6 +15,8 @@
 
 #include "TrafficSourceAppBase.h"
 #include <CTFrame_m.h>
+#include <TTFrame_m.h>
+#include <RCFrame_m.h>
 
 namespace TTEthernetModel {
 
@@ -26,18 +28,11 @@ void TrafficSourceAppBase::initialize()
 }
 
 void TrafficSourceAppBase::sendMessage(){
-    CTFrame *frame = new CTFrame("");
-    frame->setByteLength(par("payload").longValue()+ETHER_MAC_FRAME_BYTES);
-    //Padding
-    if(frame->getByteLength()<MIN_ETHERNET_FRAME){
-        frame->setByteLength(MIN_ETHERNET_FRAME);
-    }
     int ctID = par("ct_id").longValue();
     if(ctID == -1){
 
     }
     else{
-        frame->setCtID(ctID);
         std::list<Buffer*> buffer = buffers[ctID];
         if(buffer.size()==0){
             ev.printf("No buffer with such CT \n");
@@ -50,15 +45,30 @@ void TrafficSourceAppBase::sendMessage(){
         else{
             for(std::list<Buffer*>::iterator buf = buffer.begin();
                        buf!=buffer.end();buf++){
+                CTFrame *frame;
+                if(dynamic_cast<TTBuffer*>(*buf)){
+                    frame = new TTFrame("");
+                }
+                else if(dynamic_cast<RCBuffer*>(*buf)){
+                    frame = new RCFrame("");
+                }
+                else{
+                    continue;
+                }
+                frame->setByteLength(par("payload").longValue()+ETHER_MAC_FRAME_BYTES);
+                //Padding
+                if(frame->getByteLength()<MIN_ETHERNET_FRAME){
+                    frame->setByteLength(MIN_ETHERNET_FRAME);
+                }
+                frame->setCtID(ctID);
                 //TODO Error check
                 Incoming* in = (Incoming *)(*buf)->gate("in")->getPathStartGate()->getOwner();
                 //TODO Better name for Frame
                 frame->setName((*buf)->getName());
-                sendDirect(frame->dup(), in->gate("in"));
+                sendDirect(frame, in->gate("in"));
             }
         }
     }
-    delete frame;
 }
 
 
