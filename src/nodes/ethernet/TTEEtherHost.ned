@@ -7,7 +7,8 @@ import ttethernet.scheduler.TTEScheduler;
 import ttethernet.configuration.IConfigurationManager;
 import ttethernet.api.TTEthAPI;
 import ttethernet.linklayer.TTEPHYPort;
-import ttethernet.synchronisation.Sync;
+import ttethernet.synchronisation.ISync;
+import ttethernet.synchronisation.DummySync;
 import ttethernet.applications.ITTEApplication;
 import inet.linklayer.ethernet.EtherLLC;
 import inet.applications.ethernet.EtherAppSrv;
@@ -67,7 +68,7 @@ module TTEEtherHost
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler
-        sync: Sync {
+        sync: <default("DummySync")> like ISync {
             @display("p=141,169");
         }
         // Scheudler for the device

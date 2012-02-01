@@ -1,4 +1,4 @@
-<area shape="rect" href="ttethernet.linklayer.IPort.html" title="Module Interface IPort" alt="" coords="113,5,185,32">
-<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="5,80,77,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="101,80,197,107">
+<area shape="rect" href="ttethernet.linklayer.IPort.html" title="Module Interface IPort" alt="" coords="125,5,197,32">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="5,80,101,107">
+<area shape="rect" href="ttethernet.synchronisation.ISync.html" title="Module Interface ISync" alt="" coords="125,80,197,107">
 <area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="221,80,333,107">

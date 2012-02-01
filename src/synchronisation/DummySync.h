@@ -13,22 +13,35 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_SYNC_H_
-#define __TTETHERNETMODELV2_SYNC_H_
+#ifndef __TTETHERNETMODELV2_DUMMYSYNC_H_
+#define __TTETHERNETMODELV2_DUMMYSYNC_H_
 
 #include <omnetpp.h>
 
 namespace TTEthernetModel {
 
 /**
- * @brief Sync module.
+ * @brief Dummy sync module.
+ *
+ * This module corrects the time of a node by using the simulation time
  *
  * @warning Currently only dummy
  */
-class Sync : public cSimpleModule
+class DummySync : public cSimpleModule
 {
     protected:
+        /**
+         * @brief Initializes the dummy synchronization module.
+         *
+         * registers an event in the scheduler to trigger the synchronization
+         */
         virtual void initialize();
+
+        /**
+         * @brief dummy synchronization function.
+         *
+         * @param msg Event of the scheduler that triggers the synchronization
+         */
         virtual void handleMessage(cMessage *msg);
 };
 }

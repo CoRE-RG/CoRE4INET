@@ -35,6 +35,7 @@
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &quot;cpar.h&quot;</code><br/>
 <code>#include &quot;cgate.h&quot;</code><br/>
+<code>#include &quot;EtherFrame_m.h&quot;</code><br/>
 <code>#include &lt;sstream&gt;</code><br/>
 <code>#include &quot;cmodule.h&quot;</code><br/>
 
@@ -42,9 +43,17 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt; &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f">split</a> (const std::string &amp;string, char delimiter, std::vector&lt; std::string &gt; &amp;elements)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Splits a string into a vector of strings by using the delimiter character as separator.  <a href="#ade13b75125e1abc9b3c64dda41bd991f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#ab9d051a1ba408dea46d399d4692ee145">replaceAll</a> (std::string &amp;string, std::string toFind, std::string replacement)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Replaces all occurrences of a string by another string.  <a href="#ab9d051a1ba408dea46d399d4692ee145"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#aa7b454470a0618d9bc176ef18ba6a7c7">addPath</a> (cPar &amp;parameter, std::string &amp;pathToAdd)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds a path to a parameter that contains paths to elements.  <a href="#aa7b454470a0618d9bc176ef18ba6a7c7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">cGate *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b">gateByFullPath</a> (std::string &amp;path)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the gate defined by an object path.  <a href="#af871fed61f87700e83e5ec4a43cb388b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#a95d5bce358502e7292de2da8a5d2217d">getTotalDelay</a> (EtherFrame *frame)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the total delay of a frame.  <a href="#a95d5bce358502e7292de2da8a5d2217d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#a59b2c19a64a51ad282ece2e9e9b32dfb">getLocalDelay</a> (EtherFrame *frame)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the delay of a frame for the current node.  <a href="#a59b2c19a64a51ad282ece2e9e9b32dfb"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aa7b454470a0618d9bc176ef18ba6a7c7"></a><!-- doxytag: member="HelperFunctions.cc::addPath" ref="aa7b454470a0618d9bc176ef18ba6a7c7" args="(cPar &amp;parameter, std::string &amp;pathToAdd)" -->
@@ -71,6 +80,15 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Adds a path to a parameter that contains paths to elements. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>parameter</em>&nbsp;</td><td>the parameter object that contains the paths </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pathToAdd</em>&nbsp;</td><td>a string with the path that should be added to the parameter </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00032">32</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
@@ -101,6 +119,15 @@
 </div>
 <div class="memdoc">
 
+<p>Returns the gate defined by an object path. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>path</em>&nbsp;</td><td>the path to the gate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>reference to the gate defined by path or NULL if no such gate was found </dd></dl>
+
 <p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00040">40</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00122">TTEthernetModel::Buffer::handleParameterChange()</a>.</p>
@@ -117,6 +144,120 @@
 <a name="l00049"></a>00049     }
 <a name="l00050"></a>00050     <span class="keywordflow">return</span> NULL;
 <a name="l00051"></a>00051 }
+</pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="a59b2c19a64a51ad282ece2e9e9b32dfb"></a><!-- doxytag: member="HelperFunctions.cc::getLocalDelay" ref="a59b2c19a64a51ad282ece2e9e9b32dfb" args="(EtherFrame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int getLocalDelay </td>
+          <td>(</td>
+          <td class="paramtype">EtherFrame *&nbsp;</td>
+          <td class="paramname"> <em>frame</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the delay of a frame for the current node. </p>
+<p>The local delay is the time a frame was delayed in this node. It should be only invoked after the sent_total parameter was set.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>frame</em>&nbsp;</td><td>the EtherFrame for which the delay should be calculated </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the delay in ticks (can be translated to real-time using the tick parameter of the scheduler of the current node). Returns 0 if parameters are not present </dd></dl>
+
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00080">80</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00297">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00080"></a>00080                                              {
+<a name="l00081"></a>00081     cArray parlist = frame-&gt;getParList();
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083     <span class="keywordtype">long</span> start = -1;
+<a name="l00084"></a>00084     <span class="keywordtype">long</span> end = -1;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
+<a name="l00087"></a>00087         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
+<a name="l00088"></a>00088         <span class="keywordflow">if</span>(parameter){
+<a name="l00089"></a>00089             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
+<a name="l00090"></a>00090                 start = parameter-&gt;longValue();
+<a name="l00091"></a>00091             }
+<a name="l00092"></a>00092             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0){
+<a name="l00093"></a>00093                 end = parameter-&gt;longValue();
+<a name="l00094"></a>00094             }
+<a name="l00095"></a>00095         }
+<a name="l00096"></a>00096     }
+<a name="l00097"></a>00097     <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
+<a name="l00098"></a>00098         <span class="keywordflow">return</span> end-start;
+<a name="l00099"></a>00099     }
+<a name="l00100"></a>00100     <span class="keywordflow">return</span> 0;
+<a name="l00101"></a>00101 }
+</pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="a95d5bce358502e7292de2da8a5d2217d"></a><!-- doxytag: member="HelperFunctions.cc::getTotalDelay" ref="a95d5bce358502e7292de2da8a5d2217d" args="(EtherFrame *frame)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int getTotalDelay </td>
+          <td>(</td>
+          <td class="paramtype">EtherFrame *&nbsp;</td>
+          <td class="paramname"> <em>frame</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the total delay of a frame. </p>
+<p>The total delay is the time a frame was delayed in hosts and switches. It does not include the transmission. The function relies on the sent_total and received_total parameters.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>frame</em>&nbsp;</td><td>the EtherFrame for which the delay should be calculated </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the delay in ticks (should not be translated to real-time as it relies on the clock speed of different nodes). Returns 0 if parameters are not present </dd></dl>
+
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00053">53</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00053"></a>00053                                              {
+<a name="l00054"></a>00054     cArray parlist = frame-&gt;getParList();
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056     <span class="keywordtype">long</span> start = -1;
+<a name="l00057"></a>00057     <span class="keywordtype">long</span> end = -1;
+<a name="l00058"></a>00058     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delay = 0;
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
+<a name="l00061"></a>00061         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
+<a name="l00062"></a>00062         <span class="keywordflow">if</span>(parameter){
+<a name="l00063"></a>00063             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
+<a name="l00064"></a>00064                 start = parameter-&gt;longValue();
+<a name="l00065"></a>00065             }
+<a name="l00066"></a>00066             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0 &amp;&amp; start&gt;=0){
+<a name="l00067"></a>00067                 end = parameter-&gt;longValue();
+<a name="l00068"></a>00068             }
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070             <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
+<a name="l00071"></a>00071                 delay += end - start;
+<a name="l00072"></a>00072                 start = -1;
+<a name="l00073"></a>00073                 end = -1;
+<a name="l00074"></a>00074             }
+<a name="l00075"></a>00075         }
+<a name="l00076"></a>00076     }
+<a name="l00077"></a>00077     <span class="keywordflow">return</span> delay;
+<a name="l00078"></a>00078 }
 </pre></div></p>
 
 </div>
@@ -151,6 +292,17 @@
       </table>
 </div>
 <div class="memdoc">
+
+<p>Replaces all occurrences of a string by another string. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>the input string where the substrings are replaced </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>toFind</em>&nbsp;</td><td>the substring that should be replaced </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>replacement</em>&nbsp;</td><td>the string that replaces the toFind string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>reference to the the modified string </dd></dl>
 
 <p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00023">23</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
@@ -197,9 +349,20 @@
 </div>
 <div class="memdoc">
 
+<p>Splits a string into a vector of strings by using the delimiter character as separator. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>the input string that is splitted </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>delimiter</em>&nbsp;</td><td>the character that is used to split the string </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>elements</em>&nbsp;</td><td>the vector in which the splitted strings are added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>reference to the the elements vector </dd></dl>
+
 <p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00013">13</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00166">TTEthernetModel::TTEOutput::handleParameterChange()</a>, <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">TTEthernetModel::TTEApplicationBase::handleParameterChange()</a>, and <a class="el" href="_buffer_8cc_source.html#l00122">TTEthernetModel::Buffer::handleParameterChange()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00170">TTEthernetModel::TTEOutput::handleParameterChange()</a>, <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">TTEthernetModel::TTEApplicationBase::handleParameterChange()</a>, and <a class="el" href="_buffer_8cc_source.html#l00122">TTEthernetModel::Buffer::handleParameterChange()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00013"></a>00013                                                                                                     {
 <a name="l00014"></a>00014     std::stringstream stringStream(<span class="keywordtype">string</span>);
@@ -215,7 +378,7 @@
 </div>
 </div>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jan 23 17:55:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 1 17:05:42 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

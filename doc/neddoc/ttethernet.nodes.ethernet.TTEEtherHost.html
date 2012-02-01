@@ -8,13 +8,13 @@
 <b>Package:</b> ttethernet.nodes.ethernet<br/><b>File: <a href="src-nodes-ethernet-TTEEtherHost.ned.html">src/nodes/ethernet/TTEEtherHost.ned</a></b><br/>
 <p>Module for a TTEthernet Host.
 Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> module as physical port,
-sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+sync module (Sync) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The Host is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
 The configuration is done by the BufferManager that deletes itself at runtime.</p>
 <p><b>TODO:</b> Ports for redundancy!</p>
 <p><b>TODO:</b> Documentation for Applications!</p>
-<p><b>See also:</b> EtherLLC, <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a>, <a href="ttethernet.synchronisation.Sync.html">Sync</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>, BufferManager</p>
+<p><b>See also:</b> EtherLLC, <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a>, Sync, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>, BufferManager</p>
 <p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.nodes.ethernet.TTEEtherHost-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="189,278,285,334">
@@ -22,7 +22,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="EtherAppCli" alt="EtherAppCli" coords="42,276,86,337">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="EtherAppSrv" alt="EtherAppSrv" coords="42,189,86,250">
 <area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="930,1019,1072,1080">
-<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Sync" alt="Sync" coords="123,189,167,250">
+<area shape="rect" href="ttethernet.synchronisation.ISync.html" title="ISync" alt="ISync" coords="123,189,167,250">
 <area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="TTEScheduler" alt="TTEScheduler" coords="196,189,278,250">
 <area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="180,119,294,180">
 <area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="123,57,167,118">
@@ -32,18 +32,18 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="648,5,749,32">
-<area shape="rect" href="ttethernet.synchronisation.Sync.html" title="Simple Module Sync" alt="" coords="5,80,77,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="101,80,192,107">
-<area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="216,80,365,107">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="389,80,485,107">
-<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="509,80,624,107">
-<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="648,80,749,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="773,80,848,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="872,80,965,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="989,80,1085,107">
-<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="1109,80,1221,107">
-<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="1245,80,1357,107">
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="664,5,765,32">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="5,80,117,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="141,80,237,107">
+<area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="261,80,411,107">
+<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="435,80,549,107">
+<area shape="rect" href="ttethernet.synchronisation.ISync.html" title="Module Interface ISync" alt="" coords="573,80,645,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="669,80,760,107">
+<area shape="rect" href="ttethernet.applications.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="784,80,896,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="920,80,1013,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="1037,80,1112,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="1136,80,1232,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="1256,80,1357,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -337,7 +337,7 @@ additional frames are dropped. Only used if queueModule==""</p>
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=999,999&quot;</span><span style="color: #000000; ">);
         }
          </span><span style="color: #808080; font-style: italic; ">// Sync module for synchronisation of the scheduler
-</span><span style="color: #000000; ">        </span><span style="color: #000000; ">sync</span><span style="color: #000000; ">: </span><span style="color: #000000; ">Sync</span><span style="color: #000000; "> {
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">sync</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;DummySync&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ISync</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,169&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// Scheudler for the device

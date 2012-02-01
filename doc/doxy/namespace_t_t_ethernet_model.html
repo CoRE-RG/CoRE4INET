@@ -92,8 +92,8 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Implements a standard ETHERAPP that sends and receives best-effort Ethernet frames.  <a href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html">CTFrame</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class generated from <code>linklayer/ethernet/CTFrame.msg</code> by opp_msgc.  <a href="class_t_t_ethernet_model_1_1_c_t_frame.html#_details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_frame.html">PCFFrame</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class generated from <code>linklayer/ethernet/PCFFrame.msg</code> by opp_msgc.  <a href="class_t_t_ethernet_model_1_1_p_c_f_frame.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class generated from <code>linklayer/ethernet/PCFrame.msg</code> by opp_msgc.  <a href="class_t_t_ethernet_model_1_1_p_c_frame.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html">RCFrame</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class generated from <code>linklayer/ethernet/RCFrame.msg</code> by opp_msgc.  <a href="class_t_t_ethernet_model_1_1_r_c_frame.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html">TTFrame</a></td></tr>
@@ -114,8 +114,8 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Class generated from <code>scheduler/SchedulerMessageEvents.msg</code> by opp_msgc.  <a href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#_details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html">TTEScheduler</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Scheduler module.  <a href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#_details">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_sync.html">Sync</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><a class="el" href="class_t_t_ethernet_model_1_1_sync.html" title="Sync module.">Sync</a> module.  <a href="class_t_t_ethernet_model_1_1_sync.html#_details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_dummy_sync.html">DummySync</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Dummy sync module.  <a href="class_t_t_ethernet_model_1_1_dummy_sync.html#_details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2>Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef void(*&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a569061ba77b42c07ef513a4288990de2">cbFunc</a> )(void *)</td></tr>
 <tr><td colspan="2"><h2>Enumerations</h2></td></tr>
@@ -174,8 +174,8 @@
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a681d6f2c0140f3349c5d85c1484f0497">Define_Module</a> (<a class="el" href="class_t_t_ethernet_model_1_1_b_g_traffic_handle.html">BGTrafficHandle</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a080dc3cdd596c24613483a3d2267271d">doPacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html">CTFrame</a> &amp;obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a5d4a9847358a15b1f0a881220cbe3b2e">doUnpacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html">CTFrame</a> &amp;obj)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a5e59e926f1f8de8fb4294314434f9d22">doPacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_frame.html">PCFFrame</a> &amp;obj)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a80897207ab278cd578d407100b42b8f7">doUnpacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_frame.html">PCFFrame</a> &amp;obj)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#ae4a0122c6f713ba7b8dbbd41845eeba9">doPacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> &amp;obj)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a096314f89dfca8a8fcceb1574e3b1a83">doUnpacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> &amp;obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#a9eb9b41eb3bccb5e80eb1fa8ad164601">doPacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html">RCFrame</a> &amp;obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#ab4abfcea993ff748ccf29c60c30ebf4c">doUnpacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html">RCFrame</a> &amp;obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_t_t_ethernet_model.html#ad5b55b4e7f434adf857d84b911b7a893">doPacking</a> (cCommBuffer *b, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html">TTFrame</a> &amp;obj)</td></tr>
@@ -705,7 +705,7 @@
 
 </div>
 </div>
-<a class="anchor" id="a5e59e926f1f8de8fb4294314434f9d22"></a><!-- doxytag: member="TTEthernetModel::doPacking" ref="a5e59e926f1f8de8fb4294314434f9d22" args="(cCommBuffer *b, PCFFrame &amp;obj)" -->
+<a class="anchor" id="ae4a0122c6f713ba7b8dbbd41845eeba9"></a><!-- doxytag: member="TTEthernetModel::doPacking" ref="ae4a0122c6f713ba7b8dbbd41845eeba9" args="(cCommBuffer *b, PCFrame &amp;obj)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -718,7 +718,7 @@
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">PCFFrame &amp;&nbsp;</td>
+          <td class="paramtype">PCFrame &amp;&nbsp;</td>
           <td class="paramname"> <em>obj</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -730,7 +730,7 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_f_frame__m_8h_source.html#l00100">100</a> of file <a class="el" href="_p_c_f_frame__m_8h_source.html">PCFFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00100">100</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00103"></a>00103 {obj.parsimPack(b);}
 </pre></div></p>
@@ -993,7 +993,7 @@
 
 </div>
 </div>
-<a class="anchor" id="a80897207ab278cd578d407100b42b8f7"></a><!-- doxytag: member="TTEthernetModel::doUnpacking" ref="a80897207ab278cd578d407100b42b8f7" args="(cCommBuffer *b, PCFFrame &amp;obj)" -->
+<a class="anchor" id="a096314f89dfca8a8fcceb1574e3b1a83"></a><!-- doxytag: member="TTEthernetModel::doUnpacking" ref="a096314f89dfca8a8fcceb1574e3b1a83" args="(cCommBuffer *b, PCFrame &amp;obj)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -1006,7 +1006,7 @@
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">PCFFrame &amp;&nbsp;</td>
+          <td class="paramtype">PCFrame &amp;&nbsp;</td>
           <td class="paramname"> <em>obj</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -1018,7 +1018,7 @@
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_f_frame__m_8h_source.html#l00101">101</a> of file <a class="el" href="_p_c_f_frame__m_8h_source.html">PCFFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00101">101</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00103"></a>00103 {obj.parsimPack(b);}
 </pre></div></p>
@@ -1997,7 +1997,7 @@
 </div>
 </div>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jan 23 17:55:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 1 17:05:42 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

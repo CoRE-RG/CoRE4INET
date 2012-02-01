@@ -22,7 +22,7 @@
 
 <p>Module for a TTEthernet Switch with variable number of ports.
 Contains a configurable best-effort implementation (beRelayUnitType like IMACRelayUnit),
-<a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (<a href="ttethernet.synchronisation.Sync.html">Sync</a>) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+<a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (Sync) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
 The switch is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
 The configuration is done by the BufferManager that deletes itself at runtime.</p>
@@ -35,7 +35,8 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 
 </span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">scheduler</span><span style="color: #000000; ">.</span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; ">;
 </span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">configuration</span><span style="color: #000000; ">.</span><span style="color: #000000; ">IConfigurationManager</span><span style="color: #000000; ">;
-</span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">synchronisation</span><span style="color: #000000; ">.</span><span style="color: #000000; ">Sync</span><span style="color: #000000; ">;
+</span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">synchronisation</span><span style="color: #000000; ">.</span><span style="color: #000000; ">ISync</span><span style="color: #000000; ">;
+</span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">synchronisation</span><span style="color: #000000; ">.</span><span style="color: #000000; ">DummySync</span><span style="color: #000000; ">;
 </span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">linklayer</span><span style="color: #000000; ">.</span><span style="color: #000000; ">TTEPHYPort</span><span style="color: #000000; ">;
 
 </span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">inet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">linklayer</span><span style="color: #000000; ">.</span><span style="color: #000000; ">IMACRelayUnit</span><span style="color: #000000; ">;
@@ -75,7 +76,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,278,r,50&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// Sync module for synchronisation of the scheduler
-</span><span style="color: #000000; ">        </span><span style="color: #000000; ">sync</span><span style="color: #000000; ">: </span><span style="color: #000000; ">Sync</span><span style="color: #000000; "> {
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">sync</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;DummySync&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ISync</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,169&quot;</span><span style="color: #000000; ">);
         }

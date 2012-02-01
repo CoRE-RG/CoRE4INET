@@ -74,6 +74,11 @@ class TTEScheduler : public cSimpleModule
          * @brief caches cycle_ticks parameter
          */
         long cycleTicks;
+
+        /**
+         * @brief Number of cycles since the simulation started
+         */
+        unsigned long cycles;
     protected:
         /**
          * @brief Initialization of the module.
@@ -111,6 +116,13 @@ class TTEScheduler : public cSimpleModule
          * @return Number of ticks since simulation start
          */
         virtual unsigned long getTotalTicks();
+
+        /**
+         * @brief Returns the current number of cycles
+         *
+         * @return Number of cycles since simulation start
+         */
+        virtual unsigned int getCycles();
 
         /**
          * @brief Corrects the clock by the number of ticks

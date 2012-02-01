@@ -29,6 +29,7 @@ void TTEScheduler::initialize()
 {
     currentDrift = registerSignal("currentDrift");
     newCycle = registerSignal("newCycle");
+    cycles = 0;
 
     //Start Timer
     scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
@@ -90,18 +91,21 @@ void TTEScheduler::handleMessage(cMessage *msg)
         changeDrift();
 
         emit(newCycle, 1L);
+        cycles++;
         lastCycleStart = simTime();
         lastCycleTicks += cycleTicks;
         scheduleAt(lastCycleStart + currentTick * cycleTicks, msg);
         newCyclemsg = msg;
 
 
-        //TODO This must be done in sync module
-        int modticks = (int)(simTime().dbl()/tick)%cycleTicks;
-        if(modticks>(cycleTicks/2))
-            modticks=modticks-cycleTicks;
-        modticks+=uniform(-0.000000250,0.000000250)/tick;
-        clockCorrection(-modticks);
+        //WARNING: NOW IN DUMMYSYNC MODULE CHECK IF CORRECT!
+        //TODO: Delete this code if simulation works properly
+//        int modticks = (int)(simTime().dbl()/tick)%cycleTicks;
+//        if(modticks>(cycleTicks/2))
+//            modticks=modticks-cycleTicks;
+//        modticks+=uniform(-0.000000250,0.000000250)/tick;
+//        clockCorrection(-modticks);
+        correctEvents();
     }
 }
 
@@ -123,11 +127,15 @@ void TTEScheduler::correctEvents(){
         if((*registredEvent)->getKind() == ACTION_TIME_EVENT){
             SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*)*registredEvent;
             cancelEvent(actionTimeEvent);
-            //TODO alles mögliche ;)
+            //TODO lots of improvements!
             if (actionTimeEvent->getAction_time() > getTicks())
             {
                 scheduleAt(lastCycleStart + currentTick * actionTimeEvent->getAction_time(),
                         actionTimeEvent);
+            }
+            else if (actionTimeEvent->getAction_time() == getTicks())
+            {
+                scheduleAt(simTime(), actionTimeEvent);
             }
             else
             {
@@ -157,6 +165,8 @@ void TTEScheduler::handleParameterChange(const char* parname){
 }
 
 void TTEScheduler::clockCorrection(int ticks){
+    Enter_Method("clock correction %d ticks",ticks);
+
     lastCycleStart+=SimTime(ticks*currentTick);
 
     //Now correct the new cylce time
@@ -179,6 +189,11 @@ unsigned int TTEScheduler::getTicks()
 unsigned long TTEScheduler::getTotalTicks()
 {
     return lastCycleTicks + getTicks();
+}
+
+unsigned int TTEScheduler::getCycles()
+{
+    return cycles;
 }
 
 } //namespace

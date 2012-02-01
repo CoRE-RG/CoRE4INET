@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for libTTEthernetModel
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/ethernet -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/common -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/base -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/contract -L/home/tillsteinbach/workspaces/omnet4.2/inet/out/$(CONFIGNAME)/src -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet
+#  opp_makemake -f --deep --make-so -O out -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/ethernet -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/ipv4 -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/common -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/ipv4/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util/headerserializers/ipv4 -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/base -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util/headerserializers -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/util -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/applications/pingapp -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/linklayer/contract -I/home/tillsteinbach/workspaces/omnet4.2/inet/src/networklayer/arp -L/home/tillsteinbach/workspaces/omnet4.2/inet/out/$(CONFIGNAME)/src -linet -DWITH_TTE_COMMON -DINET_IMPORT -KINET_PROJ=/home/tillsteinbach/workspaces/omnet4.2/inet
 #
 
 # Name of target to be created (-o option)
@@ -11,11 +11,17 @@ TARGET = libTTEthernetModel$(SHARED_LIB_SUFFIX)
 # C++ include paths (with -I)
 INCLUDE_PATH = \
     -I$(INET_PROJ)/src/linklayer/ethernet \
-    -I$(INET_PROJ)/src/util \
+    -I$(INET_PROJ)/src/networklayer/ipv4 \
     -I$(INET_PROJ)/src/networklayer/common \
-    -I$(INET_PROJ)/src/linklayer/contract \
+    -I$(INET_PROJ)/src/networklayer/ipv4/contract \
+    -I$(INET_PROJ)/src/util/headerserializers/ipv4 \
     -I$(INET_PROJ)/src/base \
+    -I$(INET_PROJ)/src/util/headerserializers \
     -I$(INET_PROJ)/src/networklayer/contract \
+    -I$(INET_PROJ)/src/util \
+    -I$(INET_PROJ)/src/applications/pingapp \
+    -I$(INET_PROJ)/src/linklayer/contract \
+    -I$(INET_PROJ)/src/networklayer/arp \
     -I. \
     -Iapi \
     -Iapi/tte_api \
@@ -75,7 +81,7 @@ OBJS = \
     $O/linklayer/BGTrafficHandle.o \
     $O/scheduler/SchedulerEvent.o \
     $O/scheduler/TTEScheduler.o \
-    $O/synchronisation/Sync.o \
+    $O/synchronisation/DummySync.o \
     $O/utilities/HelperFunctions.o \
     $O/api/APIPayload_m.o \
     $O/buffer/TTBufferEmpty_m.o \
@@ -348,7 +354,6 @@ $O/applications/TrafficSourceAppBase.o: applications/TrafficSourceAppBase.cc \
 	buffer/TTBuffer.h \
 	ctc/Incoming.h \
 	linklayer/ethernet/CTFrame_m.h \
-	linklayer/ethernet/PCFrame_m.h \
 	linklayer/ethernet/RCFrame_m.h \
 	linklayer/ethernet/TTFrame_m.h \
 	scheduler/SchedulerEvent.h \
@@ -625,8 +630,12 @@ $O/scheduler/TTEScheduler.o: scheduler/TTEScheduler.cc \
 	scheduler/SchedulerMessageEvents_m.h \
 	scheduler/SchedulerMessage_m.h \
 	scheduler/TTEScheduler.h
-$O/synchronisation/Sync.o: synchronisation/Sync.cc \
-	synchronisation/Sync.h
+$O/synchronisation/DummySync.o: synchronisation/DummySync.cc \
+	scheduler/SchedulerEvent.h \
+	scheduler/SchedulerMessageEvents_m.h \
+	scheduler/SchedulerMessage_m.h \
+	scheduler/TTEScheduler.h \
+	synchronisation/DummySync.h
 $O/utilities/HelperFunctions.o: utilities/HelperFunctions.cc \
 	utilities/HelperFunctions.h \
 	$(INET_PROJ)/src/base/INETDefs.h \

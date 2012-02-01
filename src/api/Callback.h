@@ -114,9 +114,17 @@ class Callback
 class APICallback: public Callback
 {
     public:
+        /**
+         * @brief Constructor
+         */
         APICallback(Buffer *buffer) : Callback(buffer){
         }
 
+        /**
+         * @brief execution of the callback.
+         *
+         * If method is called the stored function pointer is invoked.
+         */
         virtual void executeCallback();
 };
 

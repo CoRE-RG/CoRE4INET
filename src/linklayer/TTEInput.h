@@ -84,7 +84,8 @@ class TTEInput : public cSimpleModule
          *
          * Critical traffic arriving on in-gate is forwarded to the incoming modules
          * or dropped if there is no module configured. Best-effort frames are
-         * forwarded through the out-gate.
+         * forwarded through the out-gate. The function timestamps messages using the
+         * received and received_total parameters.
          *
          * @param msg incoming message
          */

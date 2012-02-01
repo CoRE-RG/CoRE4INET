@@ -518,10 +518,10 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <a name="l00132"></a>00132     }
 <a name="l00133"></a>00133     std::string destinationGatesString = par(<span class="stringliteral">&quot;destination_gates&quot;</span>).stdstringValue();
 <a name="l00134"></a>00134     std::vector&lt;std::string&gt; destinationGatePaths;
-<a name="l00135"></a>00135     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);
+<a name="l00135"></a>00135     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);
 <a name="l00136"></a>00136     <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator destinationGatePath = destinationGatePaths.begin();
 <a name="l00137"></a>00137             destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
-<a name="l00138"></a>00138         cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b">gateByFullPath</a>((*destinationGatePath));
+<a name="l00138"></a>00138         cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>((*destinationGatePath));
 <a name="l00139"></a>00139         <span class="keywordflow">if</span>(gate){
 <a name="l00140"></a>00140             <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(gate);
 <a name="l00141"></a>00141         }
@@ -825,7 +825,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <li><a class="el" href="_buffer_8cc_source.html">Buffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jan 23 17:55:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 1 17:05:42 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

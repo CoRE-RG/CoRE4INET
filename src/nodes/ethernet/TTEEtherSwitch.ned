@@ -2,7 +2,8 @@ package ttethernet.nodes.ethernet;
 
 import ttethernet.scheduler.TTEScheduler;
 import ttethernet.configuration.IConfigurationManager;
-import ttethernet.synchronisation.Sync;
+import ttethernet.synchronisation.ISync;
+import ttethernet.synchronisation.DummySync;
 import ttethernet.linklayer.TTEPHYPort;
 
 import inet.linklayer.IMACRelayUnit;
@@ -42,7 +43,7 @@ module TTEEtherSwitch
                 @display("p=235,278,r,50");
         }
         // Sync module for synchronisation of the scheduler
-        sync: Sync {
+        sync: <default("DummySync")> like ISync {
             parameters:
                 @display("p=141,169");
         }

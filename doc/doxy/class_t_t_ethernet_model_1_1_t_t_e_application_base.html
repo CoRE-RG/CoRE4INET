@@ -143,7 +143,7 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 <a name="l00035"></a>00035     }
 <a name="l00036"></a>00036     std::string buffersString = par(<span class="stringliteral">&quot;buffers&quot;</span>).stdstringValue();
 <a name="l00037"></a>00037     std::vector&lt;std::string&gt; bufferPaths;
-<a name="l00038"></a>00038     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f">split</a>(buffersString,<span class="charliteral">&#39;,&#39;</span>,bufferPaths);
+<a name="l00038"></a>00038     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(buffersString,<span class="charliteral">&#39;,&#39;</span>,bufferPaths);
 <a name="l00039"></a>00039     <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator bufferPath = bufferPaths.begin();
 <a name="l00040"></a>00040             bufferPath!=bufferPaths.end();bufferPath++){
 <a name="l00041"></a>00041         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
@@ -182,7 +182,7 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 
 <p>Definition at line <a class="el" href="_t_t_e_application_base_8h_source.html#l00043">43</a> of file <a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">handleParameterChange()</a>, and <a class="el" href="_traffic_source_app_base_8cc_source.html#l00028">TTEthernetModel::TrafficSourceAppBase::sendMessage()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">handleParameterChange()</a>, and <a class="el" href="_traffic_source_app_base_8cc_source.html#l00030">TTEthernetModel::TrafficSourceAppBase::sendMessage()</a>.</p>
 
 </div>
 </div>
@@ -191,7 +191,7 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
 <li><a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jan 23 17:55:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 1 17:05:42 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
