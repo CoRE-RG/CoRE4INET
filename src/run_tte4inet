@@ -1,0 +1,8 @@
+#! /bin/sh
+DIR=`dirname $0`
+
+if [ -x $DIR/TTEthernetModel -o -x $DIR/TTEthernetModel.exe ]; then
+  $DIR/TTEthernetModel -n $DIR/../examples:$DIR $*
+else
+  opp_run -l $DIR/TTEthernetModel -n $DIR/../examples:$DIR:$INETPATH/src $*
+fi

@@ -1,0 +1,21 @@
+TTEthernet Model for INET Framework (TTE4INET)
+==============================================
+
+TTE4INET is an extension to the INET-Framework for the event-based
+simulation of time-triggered Ethernet (TTEthernet) in the OMNEST/OMNeT++
+simulation system. It was created by the CoRE (Communication over Realtime
+Ethernet) research group at the HAW-Hamburg (Hamburg University of Applied
+Sciences).
+
+Example simulations are grouped into the following subdirectories:
+
+   rt-tictoc/             example that shows the usage of the API
+   small_network/         example that shows a small network with traffic generation
+
+
+   
+The package's main README file contains links to additional info to help you
+get started with the model.
+
+PLEASE SET THE PATH TO THE INET-FRAMEWORK:
+export INETPATH=your/path/to/inet
