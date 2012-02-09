@@ -29,5 +29,5 @@ simple RCBuffer extends Buffer
         int jitter;
     gates:
         //Input gate for the incoming SchedulerTimerEvent messages
-        input schedulerIn;
+        input schedulerIn @directIn;
 }

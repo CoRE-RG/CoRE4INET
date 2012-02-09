@@ -26,6 +26,6 @@ simple TTBuffer extends Buffer
         int sendWindowEnd=0;
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn;
+        input schedulerIn @directIn;
 
 }
