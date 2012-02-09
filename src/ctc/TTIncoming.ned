@@ -23,5 +23,5 @@ simple TTIncoming extends Incoming
         int permanence_pit;
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn;
+        input schedulerIn @directIn;
 }
