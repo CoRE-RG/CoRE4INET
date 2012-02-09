@@ -16,35 +16,21 @@
 package ttethernet.examples.small_network;
 
 import ttethernet.nodes.ethernet.TTEEtherHost;
+import ttethernet.ctc.TTIncoming;
+import ttethernet.buffer.TTDoubleBuffer;
 
-network small_network
+module Unit3 extends TTEEtherHost
 {
-    types:
-        channel cable extends ned.DatarateChannel
-        {
-            datarate = 100Mbps;
-        }
     submodules:
-        unit1: Unit1 {
-            @display("p=39,70");
-        }
-
-        unit2: Unit1 {
-            @display("p=249,30");
-        }
-
-        unit3: Unit1 {
-            @display("p=249,102");
-        }
-
-        switch1: Switch1 {
+        vl_100_ctc: TTIncoming {
             parameters:
-                @display("p=147,70");
-            gates:
-                ethg[3];
+            	@display("p=349,60");
+            	
+        }
+        vl_100: TTDoubleBuffer {
+            parameters:
+                @display("p=439,61");
         }
     connections:
-        unit1.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[0];
-        unit2.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
-        unit3.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[2];
+        vl_100_ctc.out --> vl_100.in;
 }

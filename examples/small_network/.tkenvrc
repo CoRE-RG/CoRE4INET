@@ -1,2 +1,5 @@
 # Partial Tkenv config file -- see $HOME/.tkenvrc as well
+inspector "small_network.unit1" "Unit1" "2" "950x424+732+132:normal"
+inspector "small_network" "small_network" "2" "637x250+10+680:normal"
+inspector "small_network.unit1.phy[0].tteOutput" "TTEOutput" "1" "680x314+8+240:normal"
 
