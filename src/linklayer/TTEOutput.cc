@@ -56,7 +56,9 @@ void TTEOutput::handleMessage(cMessage *msg)
         //TODO THIS ASSERT IS ONLY FOR DEBUGGING PURPOSES! Later it might be allowed to queue TTframes!?!?
         ASSERT(framesRequested > 0);
         ASSERT(framesRequested == 1);
-        ttBuffersPos = (++ttBuffersPos % ttBuffers.size());
+        if(ttBuffers.size()>0){
+            ttBuffersPos = (++ttBuffersPos % ttBuffers.size());
+        }
 
         //If we have an empty message allow other frame to be sent
         if (dynamic_cast<TTBufferEmpty *> (msg))
@@ -210,7 +212,9 @@ void TTEOutput::requestPacket()
         emit(ttQueueLengthSignal, ttQueue.length());
 
         //TODO Update buffers:
-        ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
+        if(ttBuffers.size()>0){
+            ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
+        }
 
         msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
         msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());

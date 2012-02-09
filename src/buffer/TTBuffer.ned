@@ -21,9 +21,9 @@ simple TTBuffer extends Buffer
         //TTBuffer is implemented by the TTBuffer C++ Class
         @class(TTBuffer);
         //Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)
-        int sendWindowStart=0;
+        int sendWindowStart=default(0);
         //End of the send window in number of ticks
-        int sendWindowEnd=0;
+        int sendWindowEnd=default(0);
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;
