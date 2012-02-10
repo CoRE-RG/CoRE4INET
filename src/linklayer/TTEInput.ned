@@ -18,9 +18,9 @@ simple TTEInput like IOutputQueue
         @statistic[ctDropped](title="Unconfigured CT dropped"; record=sum);
         
         //Critical traffic marker of the buffer
-        int ct_marker=0;
+        int ct_marker=default(0);
         //Critical traffic mask of the buffer
-        int ct_mask=0;
+        int ct_mask=default(0);
         //Comma seperated list of ctc modules the input uses
         string incomings = default("");
     gates:

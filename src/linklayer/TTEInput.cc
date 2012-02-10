@@ -16,6 +16,8 @@
 #include "TTEInput.h"
 #include "TTEScheduler.h"
 
+#include "Buffer.h"
+
 #include <iostream>
 
 using namespace TTEthernetModel;
@@ -33,10 +35,10 @@ void TTEInput::initialize()
     ctDroppedSignal = registerSignal("ctDropped");
 }
 
-void TTEInput::addIncoming(uint16 ctID, Incoming *incoming)
-{
-    incomings[ctID].push_back(incoming);
-}
+//void TTEInput::addIncoming(uint16 ctID, Incoming *incoming)
+//{
+//    incomings[ctID].push_back(incoming);
+//}
 
 void TTEInput::handleMessage(cMessage *msg)
 {
@@ -86,6 +88,32 @@ void TTEInput::handleMessage(cMessage *msg)
 void TTEInput::handleParameterChange(const char* parname){
     ctMask = (unsigned int)par("ct_mask").longValue();
     ctMarker = (unsigned int)par("ct_marker").longValue();
+
+    incomings.clear();
+
+    std::string incomingsString = par("incomings").stdstringValue();
+    std::vector<std::string> incomingPaths;
+    split(incomingsString,',',incomingPaths);
+    for(std::vector<std::string>::iterator incomingPath = incomingPaths.begin();
+            incomingPath!=incomingPaths.end();incomingPath++){
+        cModule* module = simulation.getModuleByPath((*incomingPath).c_str());
+        if(module){
+            Incoming *incoming = dynamic_cast<Incoming*> (module);
+            if(incoming){
+                Buffer *buffer = dynamic_cast<Buffer*> (incoming->gate("out")->getPathEndGate()->getOwner());
+                if(buffer && buffer->hasPar("ct_id")){
+                    incomings[buffer->par("ct_id").longValue()].push_back(incoming);
+                }
+            }
+        }
+        else{
+            if(ev.isGUI()){
+                ev<<"Configuration problem: Module "<<(*incomingPath)<<" could not be resolved or is no Incoming CTC Module, or module is not connected to a buffer!"<<endl;
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem Input Buffers!");
+            }
+        }
+    }
 }
 
 bool TTEInput::isCT(EtherFrame *frame)

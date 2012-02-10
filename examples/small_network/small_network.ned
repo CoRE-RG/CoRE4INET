@@ -29,11 +29,11 @@ network small_network
             @display("p=39,70");
         }
 
-        unit2: Unit1 {
+        unit2: Unit2 {
             @display("p=249,30");
         }
 
-        unit3: Unit1 {
+        unit3: Unit3 {
             @display("p=249,102");
         }
 

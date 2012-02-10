@@ -7,6 +7,7 @@
 
 #include "HelperFunctions.h"
 
+
 #include <sstream>
 #include "cmodule.h"
 
@@ -15,6 +16,9 @@ std::vector<std::string>& split(const std::string &string, char delimiter, std::
     std::string item;
 
     while(std::getline(stringStream, item, delimiter)){
+        std::stringstream trimmer;
+        trimmer << item;
+        trimmer >> item;
         elements.push_back(item);
     }
     return elements;

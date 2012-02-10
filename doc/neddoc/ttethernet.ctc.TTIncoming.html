@@ -19,7 +19,11 @@ timer message (<a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent<
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.ctc.TTIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="5,5,93,32">
+<img src="ttethernet.ctc.TTIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="141,80,229,107">
+<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,5,77,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="101,5,173,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="197,5,269,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="293,5,365,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -45,6 +49,58 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 
 <p>Abstract module for the conformance checks of incoming traffic.</p>
 
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Used in compound modules:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Switch1.html">Switch1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit1.html">Unit1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit2.html">Unit2</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit3.html">Unit3</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
    </td>
 </tr>
 </table>
@@ -180,7 +236,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">permanence_pit</span><span style="color: #000000; ">;
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

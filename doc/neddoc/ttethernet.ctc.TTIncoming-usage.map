@@ -1,1 +1,5 @@
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="5,5,93,32">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="141,80,229,107">
+<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,5,77,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="101,5,173,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="197,5,269,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="293,5,365,32">

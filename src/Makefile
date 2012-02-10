@@ -551,11 +551,13 @@ $O/linklayer/BGTrafficHandle.o: linklayer/BGTrafficHandle.cc \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h
 $O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
+	buffer/Buffer.h \
 	ctc/Incoming.h \
 	linklayer/TTEInput.h \
 	scheduler/SchedulerEvent.h \
 	scheduler/SchedulerMessage_m.h \
 	scheduler/TTEScheduler.h \
+	utilities/HelperFunctions.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/linklayer/contract/Ieee802Ctrl_m.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \

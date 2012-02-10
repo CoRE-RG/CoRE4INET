@@ -48,8 +48,52 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-usage-dia
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherHost-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="5,5,107,32">
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="87,5,188,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="5,80,77,107">
+<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="101,80,173,107">
+<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="197,80,269,107">
 </map>
+<h3 class="subtitle">Known subclasses:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit1.html">Unit1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit2.html">Unit2</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit3.html">Unit3</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
+   </td>
+</tr>
+</table>
 <h3 class="subtitle">Parameters:</h3>
 <table class="paramstable">
    <tr>
@@ -279,6 +323,106 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td></td>
    <td>
 <p>Comma seperated list of buffer modules the application is allowed to use</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 </table>

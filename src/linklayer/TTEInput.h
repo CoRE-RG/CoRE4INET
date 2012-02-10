@@ -21,6 +21,8 @@
 #include <ctc/Incoming.h>
 #include <EtherFrame_m.h>
 
+#include "HelperFunctions.h"
+
 #include <map>
 #include <list>
 
@@ -66,13 +68,13 @@ class TTEInput : public cSimpleModule
          * @brief Constructor
          */
         TTEInput();
-        /**
-         * @brief Adds an incoming module to the list.
-         *
-         * @param ctID critical traffic id of the incoming module
-         * @param incoming Pointer to the Incoming module
-         */
-        virtual void addIncoming(uint16 ctID, Incoming *incoming);
+//        /**
+//         * @brief Adds an incoming module to the list.
+//         *
+//         * @param ctID critical traffic id of the incoming module
+//         * @param incoming Pointer to the Incoming module
+//         */
+//        virtual void addIncoming(uint16 ctID, Incoming *incoming);
     protected:
         /**
          * @brief Initialization of the module
