@@ -5,7 +5,10 @@
    </head>
    <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
 <h2 class="comptitle">Compound Module <i>Unit1</i></h2>
-<b>Package:</b> ttethernet.examples.small_network<br/><b>File: <a href="examples-small_network-unit1.ned.html">examples/small_network/unit1.ned</a></b><br/><p>(no description)</p><img src="ttethernet.examples.small_network.Unit1-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<b>Package:</b> ttethernet.examples.small_network<br/><b>File: <a href="examples-small_network-unit1.ned.html">examples/small_network/unit1.ned</a></b><br/>
+<p>unit1: configuration in unit1.ini.</p>
+  <ul><li>Sends time-triggered messages at 1ms with VL-ID 100</li></ul>
+<img src="ttethernet.examples.small_network.Unit1-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="189,278,285,334">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="EtherLLC" alt="EtherLLC" coords="123,276,167,337">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="EtherAppCli" alt="EtherAppCli" coords="42,276,86,337">
@@ -76,7 +79,10 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <i>network</i>
    </td>
    <td>
-<i>(no description)</i>
+
+<p>Small sample network with three hosts and one switch that shows how to 
+configure the TTEthernet Model. Configuration in omnetpp.ini</p>
+
    </td>
 </tr>
 </table>
@@ -150,6 +156,26 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
       <th class="defaultvalue">Default value</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
 <tr>
    <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.incomings</td>
    <td>
@@ -513,7 +539,12 @@ additional frames are dropped. Only used if queueModule==""</p>
 </tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
-<pre class="src"><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Unit1</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// unit1: configuration in unit1.ini.
+//
+// - Sends time-triggered messages at 1ms with VL-ID 100
+//
+</span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Unit1</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">vl_100_ctc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTIncoming</span><span style="color: #000000; "> {

@@ -17,9 +17,18 @@ package ttethernet.examples.small_network;
 
 import ttethernet.nodes.ethernet.TTEEtherHost;
 
+//
+// Small sample network with three hosts and one switch that shows how to 
+// configure the TTEthernet Model. Configuration in omnetpp.ini
+// - Uses 3ms Cycletime
+// - 80ns Tick length
+//
 network small_network
 {
     types:
+        //
+        // All links are configured with 100MBit per second and variable delay
+        //
         channel cable extends ned.DatarateChannel
         {
             datarate = 100Mbps;
@@ -28,7 +37,7 @@ network small_network
         unit1: Unit1 {
             @display("p=39,70");
         }
-
+        
         unit2: Unit2 {
             @display("p=249,30");
         }
@@ -44,7 +53,10 @@ network small_network
                 ethg[3];
         }
     connections:
-        unit1.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[0];
+        //
+        // The example uses a simple star topology
+        //
+        unit1.ethg <--> cable {  delay = 200ns; } <--> switch1.ethg[0];
         unit2.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
-        unit3.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[2];
+        unit3.ethg <--> cable {  delay = 50ns; } <--> switch1.ethg[2];
 }

@@ -19,6 +19,10 @@ import ttethernet.nodes.ethernet.TTEEtherSwitch;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
 
+//
+// switch1: configuration in switch1.ini
+// Forwards time-triggered messages with VL-ID 100
+//
 module Switch1 extends TTEEtherSwitch
 {
     submodules:

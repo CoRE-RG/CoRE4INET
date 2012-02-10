@@ -19,7 +19,9 @@
 <i>compound&nbsp;module</i>
    </td>
    <td>
-<i>(no description)</i>
+
+<p>unit1: configuration in unit1.ini.</p>
+
    </td>
 </tr>
 </table>
@@ -45,6 +47,12 @@
 </span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">ctc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">TTIncoming</span><span style="color: #000000; ">;
 </span><span style="color: #800000; font-weight: bold; ">import</span><span style="color: #000000; "> </span><span style="color: #000000; ">ttethernet</span><span style="color: #000000; ">.</span><span style="color: #000000; ">buffer</span><span style="color: #000000; ">.</span><span style="color: #000000; ">TTDoubleBuffer</span><span style="color: #000000; ">;
 
+
+</span><span style="color: #808080; font-style: italic; ">//
+// unit1: configuration in unit1.ini.
+//
+// - Sends time-triggered messages at 1ms with VL-ID 100
+//
 </span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Unit1</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:

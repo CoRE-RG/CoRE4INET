@@ -39,100 +39,104 @@
 <a name="l00007"></a>00007 
 <a name="l00008"></a>00008 <span class="preprocessor">#include &quot;<a class="code" href="_helper_functions_8h.html">HelperFunctions.h</a>&quot;</span>
 <a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;sstream&gt;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;cmodule.h&quot;</span>
-<a name="l00012"></a>00012 
-<a name="l00013"></a><a class="code" href="_helper_functions_8h.html#ade13b75125e1abc9b3c64dda41bd991f">00013</a> std::vector&lt;std::string&gt;&amp; <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(<span class="keyword">const</span> std::string &amp;<span class="keywordtype">string</span>, <span class="keywordtype">char</span> delimiter, std::vector&lt;std::string&gt; &amp;elements){
-<a name="l00014"></a>00014     std::stringstream stringStream(<span class="keywordtype">string</span>);
-<a name="l00015"></a>00015     std::string item;
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017     <span class="keywordflow">while</span>(std::getline(stringStream, item, delimiter)){
-<a name="l00018"></a>00018         elements.push_back(item);
-<a name="l00019"></a>00019     }
-<a name="l00020"></a>00020     <span class="keywordflow">return</span> elements;
-<a name="l00021"></a>00021 }
-<a name="l00022"></a>00022 
-<a name="l00023"></a><a class="code" href="_helper_functions_8h.html#ab9d051a1ba408dea46d399d4692ee145">00023</a> std::string&amp; <a class="code" href="_helper_functions_8cc.html#ab9d051a1ba408dea46d399d4692ee145" title="Replaces all occurrences of a string by another string.">replaceAll</a>(std::string &amp;<span class="keywordtype">string</span>, std::string toFind, std::string replacement){
-<a name="l00024"></a>00024     <span class="keywordtype">size_t</span> pos = <span class="keywordtype">string</span>.find(toFind);
-<a name="l00025"></a>00025     <span class="keywordflow">while</span>(pos!=std::string::npos){
-<a name="l00026"></a>00026         <span class="keywordtype">string</span>.replace(pos,toFind.length(),replacement);
-<a name="l00027"></a>00027         pos = <span class="keywordtype">string</span>.find(toFind);
-<a name="l00028"></a>00028     }
-<a name="l00029"></a>00029     <span class="keywordflow">return</span> string;
-<a name="l00030"></a>00030 }
-<a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="_helper_functions_8h.html#aa7b454470a0618d9bc176ef18ba6a7c7">00032</a> <span class="keywordtype">void</span> <a class="code" href="_helper_functions_8cc.html#aa7b454470a0618d9bc176ef18ba6a7c7" title="Adds a path to a parameter that contains paths to elements.">addPath</a>(cPar &amp;parameter, std::string &amp;pathToAdd){
-<a name="l00033"></a>00033     std::string path = parameter.stdstringValue();
-<a name="l00034"></a>00034     <span class="keywordflow">if</span>(path.length()&gt;0)
-<a name="l00035"></a>00035         path.append(<span class="stringliteral">&quot;,&quot;</span>);
-<a name="l00036"></a>00036     path.append(pathToAdd);
-<a name="l00037"></a>00037     parameter.setStringValue(path);
-<a name="l00038"></a>00038 }
-<a name="l00039"></a>00039 
-<a name="l00040"></a><a class="code" href="_helper_functions_8h.html#af871fed61f87700e83e5ec4a43cb388b">00040</a> cGate* <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>(std::string &amp;path){
-<a name="l00041"></a>00041     std::size_t pos = path.rfind(<span class="charliteral">&#39;.&#39;</span>);
-<a name="l00042"></a>00042     <span class="keywordflow">if</span>(pos!=std::string::npos){
-<a name="l00043"></a>00043         std::string modulePath = path.substr(0,pos);
-<a name="l00044"></a>00044         std::string gateName = path.substr(pos+1);
-<a name="l00045"></a>00045         cModule* module = cSimulation::getActiveSimulation()-&gt;getModuleByPath(modulePath.c_str());
-<a name="l00046"></a>00046         <span class="keywordflow">if</span>(module){
-<a name="l00047"></a>00047             <span class="keywordflow">return</span> module-&gt;gate(gateName.c_str());
-<a name="l00048"></a>00048         }
-<a name="l00049"></a>00049     }
-<a name="l00050"></a>00050     <span class="keywordflow">return</span> NULL;
-<a name="l00051"></a>00051 }
-<a name="l00052"></a>00052 
-<a name="l00053"></a><a class="code" href="_helper_functions_8h.html#a95d5bce358502e7292de2da8a5d2217d">00053</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_helper_functions_8cc.html#a95d5bce358502e7292de2da8a5d2217d" title="Returns the total delay of a frame.">getTotalDelay</a>(EtherFrame *frame){
-<a name="l00054"></a>00054     cArray parlist = frame-&gt;getParList();
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056     <span class="keywordtype">long</span> start = -1;
-<a name="l00057"></a>00057     <span class="keywordtype">long</span> end = -1;
-<a name="l00058"></a>00058     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delay = 0;
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;sstream&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;cmodule.h&quot;</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a><a class="code" href="_helper_functions_8h.html#ade13b75125e1abc9b3c64dda41bd991f">00014</a> std::vector&lt;std::string&gt;&amp; <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(<span class="keyword">const</span> std::string &amp;<span class="keywordtype">string</span>, <span class="keywordtype">char</span> delimiter, std::vector&lt;std::string&gt; &amp;elements){
+<a name="l00015"></a>00015     std::stringstream stringStream(<span class="keywordtype">string</span>);
+<a name="l00016"></a>00016     std::string item;
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018     <span class="keywordflow">while</span>(std::getline(stringStream, item, delimiter)){
+<a name="l00019"></a>00019         std::stringstream trimmer;
+<a name="l00020"></a>00020         trimmer &lt;&lt; item;
+<a name="l00021"></a>00021         trimmer &gt;&gt; item;
+<a name="l00022"></a>00022         elements.push_back(item);
+<a name="l00023"></a>00023     }
+<a name="l00024"></a>00024     <span class="keywordflow">return</span> elements;
+<a name="l00025"></a>00025 }
+<a name="l00026"></a>00026 
+<a name="l00027"></a><a class="code" href="_helper_functions_8h.html#ab9d051a1ba408dea46d399d4692ee145">00027</a> std::string&amp; <a class="code" href="_helper_functions_8cc.html#ab9d051a1ba408dea46d399d4692ee145" title="Replaces all occurrences of a string by another string.">replaceAll</a>(std::string &amp;<span class="keywordtype">string</span>, std::string toFind, std::string replacement){
+<a name="l00028"></a>00028     <span class="keywordtype">size_t</span> pos = <span class="keywordtype">string</span>.find(toFind);
+<a name="l00029"></a>00029     <span class="keywordflow">while</span>(pos!=std::string::npos){
+<a name="l00030"></a>00030         <span class="keywordtype">string</span>.replace(pos,toFind.length(),replacement);
+<a name="l00031"></a>00031         pos = <span class="keywordtype">string</span>.find(toFind);
+<a name="l00032"></a>00032     }
+<a name="l00033"></a>00033     <span class="keywordflow">return</span> string;
+<a name="l00034"></a>00034 }
+<a name="l00035"></a>00035 
+<a name="l00036"></a><a class="code" href="_helper_functions_8h.html#aa7b454470a0618d9bc176ef18ba6a7c7">00036</a> <span class="keywordtype">void</span> <a class="code" href="_helper_functions_8cc.html#aa7b454470a0618d9bc176ef18ba6a7c7" title="Adds a path to a parameter that contains paths to elements.">addPath</a>(cPar &amp;parameter, std::string &amp;pathToAdd){
+<a name="l00037"></a>00037     std::string path = parameter.stdstringValue();
+<a name="l00038"></a>00038     <span class="keywordflow">if</span>(path.length()&gt;0)
+<a name="l00039"></a>00039         path.append(<span class="stringliteral">&quot;,&quot;</span>);
+<a name="l00040"></a>00040     path.append(pathToAdd);
+<a name="l00041"></a>00041     parameter.setStringValue(path);
+<a name="l00042"></a>00042 }
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="_helper_functions_8h.html#af871fed61f87700e83e5ec4a43cb388b">00044</a> cGate* <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>(std::string &amp;path){
+<a name="l00045"></a>00045     std::size_t pos = path.rfind(<span class="charliteral">&#39;.&#39;</span>);
+<a name="l00046"></a>00046     <span class="keywordflow">if</span>(pos!=std::string::npos){
+<a name="l00047"></a>00047         std::string modulePath = path.substr(0,pos);
+<a name="l00048"></a>00048         std::string gateName = path.substr(pos+1);
+<a name="l00049"></a>00049         cModule* module = cSimulation::getActiveSimulation()-&gt;getModuleByPath(modulePath.c_str());
+<a name="l00050"></a>00050         <span class="keywordflow">if</span>(module){
+<a name="l00051"></a>00051             <span class="keywordflow">return</span> module-&gt;gate(gateName.c_str());
+<a name="l00052"></a>00052         }
+<a name="l00053"></a>00053     }
+<a name="l00054"></a>00054     <span class="keywordflow">return</span> NULL;
+<a name="l00055"></a>00055 }
+<a name="l00056"></a>00056 
+<a name="l00057"></a><a class="code" href="_helper_functions_8h.html#a95d5bce358502e7292de2da8a5d2217d">00057</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_helper_functions_8cc.html#a95d5bce358502e7292de2da8a5d2217d" title="Returns the total delay of a frame.">getTotalDelay</a>(EtherFrame *frame){
+<a name="l00058"></a>00058     cArray parlist = frame-&gt;getParList();
 <a name="l00059"></a>00059 
-<a name="l00060"></a>00060     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
-<a name="l00061"></a>00061         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
-<a name="l00062"></a>00062         <span class="keywordflow">if</span>(parameter){
-<a name="l00063"></a>00063             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
-<a name="l00064"></a>00064                 start = parameter-&gt;longValue();
-<a name="l00065"></a>00065             }
-<a name="l00066"></a>00066             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0 &amp;&amp; start&gt;=0){
-<a name="l00067"></a>00067                 end = parameter-&gt;longValue();
-<a name="l00068"></a>00068             }
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070             <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
-<a name="l00071"></a>00071                 delay += end - start;
-<a name="l00072"></a>00072                 start = -1;
-<a name="l00073"></a>00073                 end = -1;
-<a name="l00074"></a>00074             }
-<a name="l00075"></a>00075         }
-<a name="l00076"></a>00076     }
-<a name="l00077"></a>00077     <span class="keywordflow">return</span> delay;
-<a name="l00078"></a>00078 }
-<a name="l00079"></a>00079 
-<a name="l00080"></a><a class="code" href="_helper_functions_8h.html#a59b2c19a64a51ad282ece2e9e9b32dfb">00080</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_helper_functions_8cc.html#a59b2c19a64a51ad282ece2e9e9b32dfb" title="Returns the delay of a frame for the current node.">getLocalDelay</a>(EtherFrame *frame){
-<a name="l00081"></a>00081     cArray parlist = frame-&gt;getParList();
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083     <span class="keywordtype">long</span> start = -1;
-<a name="l00084"></a>00084     <span class="keywordtype">long</span> end = -1;
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
-<a name="l00087"></a>00087         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
-<a name="l00088"></a>00088         <span class="keywordflow">if</span>(parameter){
-<a name="l00089"></a>00089             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
-<a name="l00090"></a>00090                 start = parameter-&gt;longValue();
-<a name="l00091"></a>00091             }
-<a name="l00092"></a>00092             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0){
-<a name="l00093"></a>00093                 end = parameter-&gt;longValue();
-<a name="l00094"></a>00094             }
-<a name="l00095"></a>00095         }
-<a name="l00096"></a>00096     }
-<a name="l00097"></a>00097     <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
-<a name="l00098"></a>00098         <span class="keywordflow">return</span> end-start;
-<a name="l00099"></a>00099     }
-<a name="l00100"></a>00100     <span class="keywordflow">return</span> 0;
-<a name="l00101"></a>00101 }
+<a name="l00060"></a>00060     <span class="keywordtype">long</span> start = -1;
+<a name="l00061"></a>00061     <span class="keywordtype">long</span> end = -1;
+<a name="l00062"></a>00062     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delay = 0;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
+<a name="l00065"></a>00065         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
+<a name="l00066"></a>00066         <span class="keywordflow">if</span>(parameter){
+<a name="l00067"></a>00067             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
+<a name="l00068"></a>00068                 start = parameter-&gt;longValue();
+<a name="l00069"></a>00069             }
+<a name="l00070"></a>00070             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0 &amp;&amp; start&gt;=0){
+<a name="l00071"></a>00071                 end = parameter-&gt;longValue();
+<a name="l00072"></a>00072             }
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074             <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
+<a name="l00075"></a>00075                 delay += end - start;
+<a name="l00076"></a>00076                 start = -1;
+<a name="l00077"></a>00077                 end = -1;
+<a name="l00078"></a>00078             }
+<a name="l00079"></a>00079         }
+<a name="l00080"></a>00080     }
+<a name="l00081"></a>00081     <span class="keywordflow">return</span> delay;
+<a name="l00082"></a>00082 }
+<a name="l00083"></a>00083 
+<a name="l00084"></a><a class="code" href="_helper_functions_8h.html#a59b2c19a64a51ad282ece2e9e9b32dfb">00084</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="_helper_functions_8cc.html#a59b2c19a64a51ad282ece2e9e9b32dfb" title="Returns the delay of a frame for the current node.">getLocalDelay</a>(EtherFrame *frame){
+<a name="l00085"></a>00085     cArray parlist = frame-&gt;getParList();
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     <span class="keywordtype">long</span> start = -1;
+<a name="l00088"></a>00088     <span class="keywordtype">long</span> end = -1;
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
+<a name="l00091"></a>00091         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
+<a name="l00092"></a>00092         <span class="keywordflow">if</span>(parameter){
+<a name="l00093"></a>00093             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
+<a name="l00094"></a>00094                 start = parameter-&gt;longValue();
+<a name="l00095"></a>00095             }
+<a name="l00096"></a>00096             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0){
+<a name="l00097"></a>00097                 end = parameter-&gt;longValue();
+<a name="l00098"></a>00098             }
+<a name="l00099"></a>00099         }
+<a name="l00100"></a>00100     }
+<a name="l00101"></a>00101     <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
+<a name="l00102"></a>00102         <span class="keywordflow">return</span> end-start;
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104     <span class="keywordflow">return</span> 0;
+<a name="l00105"></a>00105 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Feb 9 16:43:58 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Feb 10 16:34:55 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

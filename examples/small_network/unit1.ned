@@ -19,6 +19,12 @@ import ttethernet.nodes.ethernet.TTEEtherHost;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
 
+
+//
+// unit1: configuration in unit1.ini.
+//
+// - Sends time-triggered messages at 1ms with VL-ID 100
+//
 module Unit1 extends TTEEtherHost
 {
     submodules:

@@ -5,7 +5,10 @@
    </head>
    <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
 <h2 class="comptitle">Compound Module <i>Unit3</i></h2>
-<b>Package:</b> ttethernet.examples.small_network<br/><b>File: <a href="examples-small_network-unit3.ned.html">examples/small_network/unit3.ned</a></b><br/><p>(no description)</p><img src="ttethernet.examples.small_network.Unit3-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<b>Package:</b> ttethernet.examples.small_network<br/><b>File: <a href="examples-small_network-unit3.ned.html">examples/small_network/unit3.ned</a></b><br/>
+<p>unit3: configuration in unit3.ini
+Receives time-triggered messages with VL-ID 100</p>
+<img src="ttethernet.examples.small_network.Unit3-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="189,278,285,334">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="EtherLLC" alt="EtherLLC" coords="123,276,167,337">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="EtherAppCli" alt="EtherAppCli" coords="42,276,86,337">
@@ -23,10 +26,11 @@
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.Unit3-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="143,5,215,32">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,80,101,107">
-<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="125,80,232,107">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="256,80,344,107">
+<img src="ttethernet.examples.small_network.Unit3-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="143,80,215,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,155,101,181">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="125,155,232,181">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="256,155,344,181">
+<area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="127,5,231,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -56,6 +60,28 @@ sync module (Sync) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTESch
 The Host is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
 The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Networks:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.small_network.html">small_network</a>
+   </td>
+   <td>
+<i>network</i>
+   </td>
+   <td>
+
+<p>Small sample network with three hosts and one switch that shows how to 
+configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 
    </td>
 </tr>
@@ -130,6 +156,26 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
       <th class="defaultvalue">Default value</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
 <tr>
    <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.incomings</td>
    <td>
@@ -493,7 +539,11 @@ additional frames are dropped. Only used if queueModule==""</p>
 </tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
-<pre class="src"><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Unit3</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// unit3: configuration in unit3.ini
+// Receives time-triggered messages with VL-ID 100
+//
+</span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Unit3</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">vl_100_ctc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTIncoming</span><span style="color: #000000; "> {
