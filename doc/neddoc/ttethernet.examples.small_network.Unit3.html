@@ -6,8 +6,8 @@
    <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
 <h2 class="comptitle">Compound Module <i>Unit3</i></h2>
 <b>Package:</b> ttethernet.examples.small_network<br/><b>File: <a href="examples-small_network-unit3.ned.html">examples/small_network/unit3.ned</a></b><br/>
-<p>unit3: configuration in unit3.ini
-Receives time-triggered messages with VL-ID 100</p>
+<p>unit3: configuration in unit3.ini.</p>
+  <ul><li>Receives time-triggered messages with VL-ID 100</li></ul>
 <img src="ttethernet.examples.small_network.Unit3-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="189,278,285,334">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="EtherLLC" alt="EtherLLC" coords="123,276,167,337">
@@ -540,8 +540,9 @@ additional frames are dropped. Only used if queueModule==""</p>
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
-// unit3: configuration in unit3.ini
-// Receives time-triggered messages with VL-ID 100
+// unit3: configuration in unit3.ini.
+//
+// - Receives time-triggered messages with VL-ID 100
 //
 </span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Unit3</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
 {

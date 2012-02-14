@@ -3,8 +3,8 @@ INSTALLATION INSTRUCTIONS
 
 PREREQUISITES
 
-You should have a working OMNeT++ installation, version 4.2 or later with the
-INET-Framework 1.99.
+You should have a working OMNeT++ installation, version 4.2.1 or later with the
+INET-Framework 1.99.2
 
 General
 -------
