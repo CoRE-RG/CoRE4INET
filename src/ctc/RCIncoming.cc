@@ -22,9 +22,8 @@ namespace TTEthernetModel {
 Define_Module(RCIncoming);
 
 
-RCIncoming::RCIncoming()
+RCIncoming::RCIncoming() : Incoming::Incoming()
 {
-    Incoming::Incoming();
     lastArrived=0;
 }
 

@@ -22,9 +22,8 @@ namespace TTEthernetModel {
 
 Define_Module( TTIncoming);
 
-TTIncoming::TTIncoming()
+TTIncoming::TTIncoming() : Incoming::Incoming()
 {
-    Incoming::Incoming();
     frame = NULL;
 }
 
