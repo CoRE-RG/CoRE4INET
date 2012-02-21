@@ -16,7 +16,7 @@ simple RCIncoming extends Incoming
         //RCIncoming is implemented by the RCIncoming C++ Class
         @class(RCIncoming);
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
-        int bag;
+        int bag = default(0);
         //Not used
-        int jitter;
+        int jitter = default(0);
 }

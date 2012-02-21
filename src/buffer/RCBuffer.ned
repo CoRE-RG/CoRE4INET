@@ -22,11 +22,11 @@ simple RCBuffer extends Buffer
         //RCBuffer is implemented by the RCBuffer C++ Class
         @class(RCBuffer);
         // Not used
-        int max_dispatch_delay;
+        int max_dispatch_delay = default(0);
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
-        int bag;
+        int bag = default(0);
         // Not used
-        int jitter;
+        int jitter = default(0);
     gates:
         //Input gate for the incoming SchedulerTimerEvent messages
         input schedulerIn @directIn;
