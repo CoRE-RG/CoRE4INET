@@ -18,6 +18,8 @@ package ttethernet.examples.small_network;
 import ttethernet.nodes.ethernet.TTEEtherHost;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
+import ttethernet.ctc.RCIncoming;
+import ttethernet.buffer.RCQueueBuffer;
 
 
 //
@@ -37,6 +39,16 @@ module Unit3 extends TTEEtherHost
             parameters:
                 @display("p=439,61");
         }
+        vl_101_ctc: RCIncoming {
+            parameters:
+            	@display("p=349,140");
+            	
+        }
+        vl_101: RCQueueBuffer {
+            parameters:
+                @display("p=439,141");
+        }
     connections:
         vl_100_ctc.out --> vl_100.in;
+        vl_101_ctc.out --> vl_101.in;
 }
