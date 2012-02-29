@@ -7,10 +7,32 @@
         requires = ""
         labels = ""
         nedPackages = "
-                       ttethernet
+                       ttethernet.applications
+                       ttethernet.base
+                       ttethernet.buffer
+                       ttethernet.configuration
+                       ttethernet.ctc
+                       ttethernet.linklayer
+                       ttethernet.nodes
+                       ttethernet.scheduler
+                       ttethernet.synchronisation
                       "
         extraSourceFolders = ""
         compileFlags = "-DWITH_TTE_COMMON"
+        linkerFlags = ""
+        />
+    <feature
+        id="TTE_api"
+        name="TTEthernet API"
+        description = "The TTEthernet API support"
+        initiallyEnabled = "true"
+        requires = "TTE_common"
+        labels = ""
+        nedPackages = "
+                       ttethernet.api
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_TTE_API"
         linkerFlags = ""
         />
 </features>
