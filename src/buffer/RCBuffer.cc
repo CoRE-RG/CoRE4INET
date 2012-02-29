@@ -51,7 +51,6 @@ void RCBuffer::handleMessage(cMessage *msg)
         if (bagExpired)
         {
             cMessage *outgoingMessage = getFrame();
-            ev << outgoingMessage->getSchedulingPriority() << endl;
             bagExpired = false;
             numReset = 0;
             //Send Message
