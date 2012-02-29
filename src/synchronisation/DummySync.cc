@@ -21,13 +21,21 @@ using namespace TTEthernetModel;
 
 Define_Module( DummySync);
 
-void DummySync::initialize()
+int DummySync::numInitStages() const
 {
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
-    event->setAction_time(par("action_time").longValue());
-    event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
+    return 2;
+}
+
+void DummySync::initialize(int stage)
+{
+    if(stage==1)
+    {
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
+        event->setAction_time(par("action_time").longValue());
+        event->setDestinationGate(gate("schedulerIn"));
+        tteScheduler->registerEvent(event);
+    }
 }
 
 void DummySync::handleMessage(cMessage *msg)
