@@ -12,10 +12,15 @@ package ttethernet.buffer;
 // @author Till Steinbach
 simple TTQueueBuffer extends TTBuffer
 {
-    //TTQueueBuffer is implemented by the TTQueueBuffer C++ Class
-    @class(TTQueueBuffer);
-    @display("q=frames");
-    //Statistic of the queue length of the buffer
-    @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
+    parameters:
+        //TTQueueBuffer is implemented by the TTQueueBuffer C++ Class
+        @class(TTQueueBuffer);
+        @display("q=frames");
+        //Statistic of the queue length of the buffer
+        @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
+        //Statistic of the amount of packets that were dropped due to buffer overflows
+        @statistic[ctDropped](title="CT dropped"; record=sum);
+        //Size of the buffer negative means infinite
+        int size = default(-1);
     
 }

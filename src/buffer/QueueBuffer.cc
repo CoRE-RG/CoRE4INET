@@ -18,6 +18,7 @@
 namespace TTEthernetModel {
 
 simsignal_t QueueBuffer::queueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t QueueBuffer::ctDroppedSignal = SIMSIGNAL_NULL;
 
 QueueBuffer::QueueBuffer()
 {
@@ -32,11 +33,25 @@ QueueBuffer::~QueueBuffer()
 void QueueBuffer::initializeStatistics()
 {
     queueLengthSignal = registerSignal("queueLength");
+    ctDroppedSignal = registerSignal("ctDropped");
     frames.setName("frames");
 }
 
 void QueueBuffer::enqueue(EtherFrame *newFrame)
 {
+    int size = par("size").longValue();
+    if(size>=0 && frames.length()>=size){
+        emit(ctDroppedSignal, 1);
+        if(ev.isGUI()){
+            bubble("buffer overflow - dropping frame");
+            getDisplayString().setTagArg("i2", 0, "status/excl3");
+            getDisplayString().setTagArg("tt", 0, "WARNING: buffer overflow");
+            getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+            getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: buffer overflow");
+        }
+        delete newFrame;
+        return;
+    }
     frames.insert(newFrame);
     setIsEmpty(frames.length() == 0);
     emit(queueLengthSignal, frames.length());

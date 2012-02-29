@@ -51,18 +51,20 @@ void RCBuffer::handleMessage(cMessage *msg)
         if (bagExpired)
         {
             cMessage *outgoingMessage = getFrame();
-            bagExpired = false;
-            numReset = 0;
-            //Send Message
-            for (std::list<cGate*>::iterator dgate = destinationGates.begin(); dgate != destinationGates.end(); ++dgate)
-            {
-                sendDirect(outgoingMessage->dup(),0,0, *dgate);
+            if(outgoingMessage){
+                bagExpired = false;
+                numReset = 0;
+                //Send Message
+                for (std::list<cGate*>::iterator dgate = destinationGates.begin(); dgate != destinationGates.end(); ++dgate)
+                {
+                    sendDirect(outgoingMessage->dup(),0,0, *dgate);
+                }
+                if(gate("out")->isConnected()){
+                    send(outgoingMessage->dup(),"out");
+                }
+                recordPacketSent();
+                delete outgoingMessage;
             }
-            if(gate("out")->isConnected()){
-                send(outgoingMessage->dup(),"out");
-            }
-            recordPacketSent();
-            delete outgoingMessage;
         }
     }
 

@@ -80,6 +80,12 @@ class QueueBuffer : public virtual Buffer
          * was inserted or removed.
          */
         static simsignal_t queueLengthSignal;
+        /**
+         * @brief Signal that is emitted when a frame is dropped.
+         *
+         * Frames may be dropped when frame arrives at a full buffer.
+         */
+        static simsignal_t ctDroppedSignal;
 };
 
 } //namespace
