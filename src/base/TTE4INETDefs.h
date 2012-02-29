@@ -10,8 +10,6 @@
 #  error At least OMNeT++/OMNEST version 4.2 required
 #endif
 
-#endif
-
 /**
  * Definition of TTEthernetModel version
  */
@@ -21,3 +19,14 @@
  * Maximum number of priorities allowed for rate-constrained messages
  */
 #define NUM_RC_PRIORITIES 10
+
+
+/**
+ * Maintain backwards compatibility
+ * MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1.99.2 to 1.99.3 can be removed if backwards compatibility is not required any more
+ */
+#ifndef MIN_ETHERNET_FRAME_BYTES
+#define MIN_ETHERNET_FRAME_BYTES 64
+#endif
+
+#endif

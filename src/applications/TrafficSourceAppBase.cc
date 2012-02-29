@@ -17,6 +17,7 @@
 #include <CTFrame_m.h>
 #include <TTFrame_m.h>
 #include <RCFrame_m.h>
+#include "TTE4INETDefs.h"
 
 namespace TTEthernetModel {
 
@@ -57,8 +58,8 @@ void TrafficSourceAppBase::sendMessage(){
                 }
                 frame->setByteLength(par("payload").longValue()+ETHER_MAC_FRAME_BYTES);
                 //Padding
-                if(frame->getByteLength()<MIN_ETHERNET_FRAME){
-                    frame->setByteLength(MIN_ETHERNET_FRAME);
+                if(frame->getByteLength()<MIN_ETHERNET_FRAME_BYTES){
+                    frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
                 }
                 frame->setCtID(ctID);
                 //TODO Error check
