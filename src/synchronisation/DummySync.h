@@ -34,8 +34,17 @@ class DummySync : public cSimpleModule
          * @brief Initializes the dummy synchronization module.
          *
          * registers an event in the scheduler to trigger the synchronization
+         *
+         * @param stage the stages. Module registers events when stage==1
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
+
+        /**
+         * @brief Returns the numer of initializaiton stages this module needs.
+         *
+         * @return always returns 2
+         */
+        virtual int numInitStages() const;
 
         /**
          * @brief dummy synchronization function.
