@@ -1,7 +1,0 @@
-# Partial Tkenv config file -- see $HOME/.tkenvrc as well
-inspector "small_network.switch1.vl_101.size" "cPar" "1" "460x314+2+680:normal"
-inspector "small_network.switch1" "Switch1" "2" "1275x422+403+397:normal"
-inspector "small_network.switch1.vl_101" "RCQueueBuffer" "1" "631x314+2+78:normal"
-inspector "small_network" "small_network" "2" "637x242+1041+105:normal"
-inspector "small_network" "small_network" "1" "631x314+635+51:normal"
-
