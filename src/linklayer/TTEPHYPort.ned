@@ -3,8 +3,6 @@ package ttethernet.linklayer;
 
 import inet.linklayer.IEtherMAC;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
-import inet.networklayer.queue.DropTailQueue;
-import inet.networklayer.queue.DropTailQoSQueue;
 
 // The TTEPHYPort is a compund module that contains the TTEOutput, TTEInput and MAC (EtherMACFullDuplex)
 // It represents a physical port for a TTEthernet device (Switch or Host)

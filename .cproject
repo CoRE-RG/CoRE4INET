@@ -36,9 +36,9 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1592839142" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1246268161" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
@@ -180,9 +180,9 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.507054474" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1164351677" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.1282023526" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1006037084" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -209,9 +209,9 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1609836974" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.1592839142">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.662052049" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.525932788" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
@@ -352,9 +352,9 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.436307686" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.507054474">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.303544471" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1556009094" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
