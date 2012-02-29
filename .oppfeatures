@@ -36,4 +36,18 @@
         compileFlags = "-DWITH_TTE_API"
         linkerFlags = ""
         />
+    <feature
+        id="TTE_trafficsource"
+        name="TTEthernet Traffic generators"
+        description = "Traffic generator applications for RC and TT traffic"
+        initiallyEnabled = "true"
+        requires = "TTE_common"
+        labels = ""
+        nedPackages = "
+                       ttethernet.applications.trafficsource
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_TTE_TRAFFICSOURCE"
+        linkerFlags = ""
+        />
 </features>
