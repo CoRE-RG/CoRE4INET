@@ -399,6 +399,7 @@ $O/buffer/Buffer.o: buffer/Buffer.cc \
 	api/Callback.h \
 	api/tte_api/tte_api.h \
 	applications/TTEApplicationBase.h \
+	base/TTE4INETDefs.h \
 	buffer/Buffer.h \
 	buffer/RCBuffer.h \
 	buffer/TTBuffer.h \
@@ -564,6 +565,7 @@ $O/linklayer/TTEInput.o: linklayer/TTEInput.cc \
 	$(INET_PROJ)/src/linklayer/ethernet/EtherFrame_m.h \
 	$(INET_PROJ)/src/linklayer/ethernet/Ethernet.h
 $O/linklayer/TTEOutput.o: linklayer/TTEOutput.cc \
+	base/TTE4INETDefs.h \
 	buffer/Buffer.h \
 	buffer/RCBuffer.h \
 	buffer/TTBuffer.h \

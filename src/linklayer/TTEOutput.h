@@ -4,16 +4,12 @@
 #include <omnetpp.h>
 #include <csimplemodule.h>
 #include <INETDefs.h>
+#include <TTE4INETDefs.h>
 #include <IPassiveQueue.h>
 #include <QueueWithQoS.h>
 #include <EtherFrame_m.h>
 #include <TTBuffer.h>
 #include <PCFrame_m.h>
-
-/**
- * Maximum number of priorities allowed for rate-constrained messages
- */
-#define NUM_RC_PRIORITIES 10
 
 namespace TTEthernetModel {
 

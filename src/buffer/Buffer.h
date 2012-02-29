@@ -152,6 +152,15 @@ class Buffer : public cSimpleModule
         EtherFrame* getFrame();
 
         /**
+         * @brief Wrapper function arround enqueue().
+         *
+         * @param frame the EtherFrame to put in the buffer.
+         *
+         * @sa enqueue();
+         */
+        void putFrame(EtherFrame* frame);
+
+        /**
          * @brief Adds a receive callback for an application to the buffer.
          *
          * The callback is registered for a specific application. Each application is

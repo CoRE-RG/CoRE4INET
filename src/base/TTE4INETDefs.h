@@ -16,3 +16,8 @@
  * Definition of TTEthernetModel version
  */
 #define TTE4INET_VERSION 0x0200
+
+/**
+ * Maximum number of priorities allowed for rate-constrained messages
+ */
+#define NUM_RC_PRIORITIES 10

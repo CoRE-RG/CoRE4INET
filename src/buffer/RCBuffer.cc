@@ -50,13 +50,14 @@ void RCBuffer::handleMessage(cMessage *msg)
     {
         if (bagExpired)
         {
-            cMessage *outgoingMessage = dequeue();
+            cMessage *outgoingMessage = getFrame();
+            ev << outgoingMessage->getSchedulingPriority() << endl;
             bagExpired = false;
             numReset = 0;
             //Send Message
-            for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+            for (std::list<cGate*>::iterator dgate = destinationGates.begin(); dgate != destinationGates.end(); ++dgate)
             {
-                sendDirect(outgoingMessage->dup(), *gate);
+                sendDirect(outgoingMessage->dup(),0,0, *dgate);
             }
             if(gate("out")->isConnected()){
                 send(outgoingMessage->dup(),"out");
@@ -68,7 +69,7 @@ void RCBuffer::handleMessage(cMessage *msg)
 
     if (msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT)
     {
-        cMessage *outgoingMessage = dequeue();
+        cMessage *outgoingMessage = getFrame();
         if (outgoingMessage)
         {
             bagExpired = false;

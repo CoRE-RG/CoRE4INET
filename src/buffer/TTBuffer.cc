@@ -54,7 +54,7 @@ void TTBuffer::handleMessage(cMessage *msg)
 
     if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT)
     {
-        cMessage *outgoingMessage = dequeue();
+        cMessage *outgoingMessage = getFrame();
         //Send Message
         for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
         {

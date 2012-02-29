@@ -15,6 +15,7 @@
 
 #include "Buffer.h"
 #include "TTEApplicationBase.h"
+#include "TTE4INETDefs.h"
 
 #include "HelperFunctions.h"
 
@@ -92,6 +93,14 @@ EtherFrame* Buffer::getFrame(){
     return dequeue();
 }
 
+ void Buffer::putFrame(EtherFrame* frame){
+    int priority = par("priority").longValue();
+    if(frame && priority>=0){
+        frame->setSchedulingPriority(priority);
+    }
+    enqueue(frame);
+}
+
 void Buffer::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
@@ -110,7 +119,7 @@ void Buffer::handleMessage(cMessage *msg)
             frame->setDest(mac);
         }
         emit(latencySignal, simTime()-msg->getCreationTime());
-        enqueue((EtherFrame*) frame);
+        putFrame((EtherFrame*) frame);
         // Now execute callbacks if there are some
         for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = receiveCallbacks.begin();
                 iter != receiveCallbacks.end(); ++iter){
