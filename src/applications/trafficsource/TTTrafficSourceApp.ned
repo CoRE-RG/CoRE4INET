@@ -22,8 +22,11 @@ simple TTTrafficSourceApp extends TrafficSourceAppBase
 {
     parameters:
         @class(TTTrafficSourceApp);
+        @display("i=,red");
+        
         double action_time @unit(s);
-        
+
         int modulo = default(1);
-        
+
+       
 }

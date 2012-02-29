@@ -15,5 +15,6 @@ namespace TTEthernetModel;
 // @author Till Steinbach
 packet RCFrame extends CTFrame
 {    
+    string displayString="b=15,15,rect,black,orange,5";
 
 }

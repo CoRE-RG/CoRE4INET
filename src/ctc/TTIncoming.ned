@@ -13,6 +13,7 @@ package ttethernet.ctc;
 simple TTIncoming extends Incoming
 {
     parameters:
+        @display("i=,red");
         //TTIncoming is implemented by the TTIncoming C++ Class
         @class(TTIncoming);
         //Beginning of the receive window in number of ticks

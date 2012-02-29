@@ -17,4 +17,5 @@ simple BGBuffer extends Buffer
         parameters:
         //BGBuffer is implemented by the BGBuffer C++ Class
         @class(BGBuffer);
+        @display("i=,green");
 }

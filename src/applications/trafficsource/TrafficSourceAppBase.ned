@@ -25,4 +25,5 @@ simple TrafficSourceAppBase extends TTEApplicationBase
     parameters:
         int payload @unit(Byte) = default(46Byte);
         int ct_id = default(-1);
+        @display("i=block/source");
 }

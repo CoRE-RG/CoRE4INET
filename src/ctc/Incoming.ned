@@ -16,7 +16,7 @@ simple Incoming like IOutputQueue
 {
     //Incoming is implemented by the Incoming C++ Class
     @class(Incoming);
-    @display("i=device/firewall");
+    @display("i=block/arrival");
     //Statistic of the amount of packets that were dropped due to no ct violations
     @statistic[ctDropped](title="CT violation"; record=sum);
     gates:

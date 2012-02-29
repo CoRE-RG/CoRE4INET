@@ -46,4 +46,6 @@ packet PCFrame extends RCFrame
 	//
 	// 64 Bit field
 	unsigned long transparent_clock;
+	
+	string displayString="b=15,15,rect,white,orange,5";
 }

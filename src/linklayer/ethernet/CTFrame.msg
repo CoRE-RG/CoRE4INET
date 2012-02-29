@@ -20,5 +20,5 @@ packet CTFrame extends EtherFrame
         // Critical traffic ID (for TT and RC messages). 
         unsigned short ctID;
         
-        string displayString="b=15,15,rect,black,kind,3";
+        string displayString="b=15,15,rect,black,kind,5";
 }

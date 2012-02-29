@@ -21,6 +21,7 @@ simple RCBuffer extends Buffer
     parameters:
         //RCBuffer is implemented by the RCBuffer C++ Class
         @class(RCBuffer);
+        @display("i=,orange");
         // Not used
         int max_dispatch_delay = default(0);
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)

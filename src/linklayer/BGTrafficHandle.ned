@@ -20,10 +20,11 @@ package ttethernet.linklayer;
 //
 simple BGTrafficHandle
 {
+    @display("i=block/layer,green");
     gates:
         input lowerLayerIn @labels(Ieee802Ctrl/up);
         output lowerLayerOut @labels(Ieee802Ctrl/down);
-        
+
         input in @labels(EtherFrame);
         output out @labels(EtherFrame);
 }

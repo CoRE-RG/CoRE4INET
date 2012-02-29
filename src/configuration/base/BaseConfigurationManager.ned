@@ -25,4 +25,5 @@ package ttethernet.configuration.base;
 // @author Till Steinbach
 simple BaseConfigurationManager like IConfigurationManager
 {
+    @display("i=block/table2");
 }
