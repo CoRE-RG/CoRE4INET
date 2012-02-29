@@ -53,7 +53,7 @@
 <a name="l00021"></a>00021     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> = 0;
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.setName(<span class="stringliteral">&quot;TT Messages&quot;</span>);
-<a name="l00024"></a>00024     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
+<a name="l00024"></a>00024     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
 <a name="l00025"></a>00025     {
 <a name="l00026"></a>00026         <span class="keywordtype">char</span> strBuf[64];
 <a name="l00027"></a>00027         snprintf(strBuf,64,<span class="stringliteral">&quot;RC Priority %d Messages&quot;</span>, i);
@@ -65,7 +65,7 @@
 <a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a4157c9b499b19acccb411a309aa7c686">00033</a> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a4157c9b499b19acccb411a309aa7c686" title="Destructor.">TTEOutput::~TTEOutput</a>()
 <a name="l00034"></a>00034 {
 <a name="l00035"></a>00035     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();
-<a name="l00036"></a>00036     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
+<a name="l00036"></a>00036     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
 <a name="l00037"></a>00037     {
 <a name="l00038"></a>00038         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();
 <a name="l00039"></a>00039     }
@@ -140,7 +140,7 @@
 <a name="l00108"></a>00108         <span class="keywordflow">else</span>
 <a name="l00109"></a>00109         {
 <a name="l00110"></a>00110             <span class="keywordtype">int</span> priority = msg-&gt;getSenderModule()-&gt;par(<span class="stringliteral">&quot;priority&quot;</span>).longValue();
-<a name="l00111"></a>00111             <span class="keywordflow">if</span> (priority &gt; 0 &amp;&amp; priority &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>)
+<a name="l00111"></a>00111             <span class="keywordflow">if</span> (priority &gt; 0 &amp;&amp; priority &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>)
 <a name="l00112"></a>00112             {
 <a name="l00113"></a>00113                 <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[priority].insert(msg);
 <a name="l00114"></a>00114             }
@@ -254,7 +254,7 @@
 <a name="l00222"></a>00222         <span class="keywordflow">return</span>;
 <a name="l00223"></a>00223     }
 <a name="l00224"></a>00224     <span class="comment">//RCFrames</span>
-<a name="l00225"></a>00225     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
+<a name="l00225"></a>00225     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
 <a name="l00226"></a>00226     {
 <a name="l00227"></a>00227         <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Returns true when there are no pending messages.">isEmpty</a>() &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].front()))
 <a name="l00228"></a>00228         {
@@ -346,7 +346,7 @@
 <a name="l00314"></a>00314 {
 <a name="l00315"></a>00315     <span class="keywordtype">bool</span> empty = <span class="keyword">true</span>;
 <a name="l00316"></a>00316     empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.isEmpty();
-<a name="l00317"></a>00317     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
+<a name="l00317"></a>00317     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
 <a name="l00318"></a>00318     {
 <a name="l00319"></a>00319         empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].isEmpty();
 <a name="l00320"></a>00320     }
@@ -356,7 +356,7 @@
 <a name="l00324"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0">00324</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0" title="Clears all queued packets and stored requests.">TTEOutput::clear</a>()
 <a name="l00325"></a>00325 {
 <a name="l00326"></a>00326     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();
-<a name="l00327"></a>00327     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e_output_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
+<a name="l00327"></a>00327     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)
 <a name="l00328"></a>00328     {
 <a name="l00329"></a>00329         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();
 <a name="l00330"></a>00330     }
@@ -365,7 +365,7 @@
 <a name="l00333"></a>00333 }
 <a name="l00334"></a>00334 
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Feb 14 11:04:06 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

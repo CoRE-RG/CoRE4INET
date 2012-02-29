@@ -135,6 +135,7 @@
     <filename>_buffer_8cc</filename>
     <includes id="_buffer_8h" name="Buffer.h" local="yes" imported="no">Buffer.h</includes>
     <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
+    <includes id="_t_t_e4_i_n_e_t_defs_8h" name="TTE4INETDefs.h" local="yes" imported="no">TTE4INETDefs.h</includes>
     <includes id="_helper_functions_8h" name="HelperFunctions.h" local="yes" imported="no">HelperFunctions.h</includes>
     <member kind="function">
       <type></type>
@@ -709,6 +710,7 @@
     <includes id="_c_t_frame__m_8h" name="CTFrame_m.h" local="no" imported="no">CTFrame_m.h</includes>
     <includes id="_t_t_frame__m_8h" name="TTFrame_m.h" local="no" imported="no">TTFrame_m.h</includes>
     <includes id="_r_c_frame__m_8h" name="RCFrame_m.h" local="no" imported="no">RCFrame_m.h</includes>
+    <includes id="_t_t_e4_i_n_e_t_defs_8h" name="TTE4INETDefs.h" local="yes" imported="no">TTE4INETDefs.h</includes>
     <namespace>TTEthernetModel</namespace>
     <member kind="function">
       <type></type>
@@ -814,6 +816,13 @@
       <name>TTE4INET_VERSION</name>
       <anchorfile>_t_t_e4_i_n_e_t_defs_8h.html</anchorfile>
       <anchor>a6987250b99b95db595b8b00a85d384e6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>NUM_RC_PRIORITIES</name>
+      <anchorfile>_t_t_e4_i_n_e_t_defs_8h.html</anchorfile>
+      <anchor>a5cb5b8c633a00972c5fe0da72112b2de</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -1117,6 +1126,7 @@
     <path>/home/tillsteinbach/git/TTEthernetModel/src/linklayer/</path>
     <filename>_t_t_e_output_8cc</filename>
     <includes id="_t_t_e_output_8cc" name="TTEOutput.cc" local="yes" imported="no">TTEOutput.h</includes>
+    <includes id="_t_t_e4_i_n_e_t_defs_8h" name="TTE4INETDefs.h" local="no" imported="no">TTE4INETDefs.h</includes>
     <includes id="_t_t_buffer_8h" name="TTBuffer.h" local="no" imported="no">TTBuffer.h</includes>
     <includes id="_p_c_frame__m_8h" name="PCFrame_m.h" local="no" imported="no">PCFrame_m.h</includes>
     <includes id="_buffer_8h" name="Buffer.h" local="no" imported="no">Buffer.h</includes>
@@ -1136,17 +1146,11 @@
     <name>TTEOutput.h</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/linklayer/</path>
     <filename>_t_t_e_output_8h</filename>
+    <includes id="_t_t_e4_i_n_e_t_defs_8h" name="TTE4INETDefs.h" local="no" imported="no">TTE4INETDefs.h</includes>
     <includes id="_t_t_buffer_8h" name="TTBuffer.h" local="no" imported="no">TTBuffer.h</includes>
     <includes id="_p_c_frame__m_8h" name="PCFrame_m.h" local="no" imported="no">PCFrame_m.h</includes>
     <class kind="class">TTEthernetModel::TTEOutput</class>
     <namespace>TTEthernetModel</namespace>
-    <member kind="define">
-      <type>#define</type>
-      <name>NUM_RC_PRIORITIES</name>
-      <anchorfile>_t_t_e_output_8h.html</anchorfile>
-      <anchor>a5cb5b8c633a00972c5fe0da72112b2de</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="file">
     <name>TTEScheduler.cc</name>
@@ -2422,6 +2426,13 @@
       <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
       <anchor>aa1d4eb4debc0b0769c57f897d5726a55</anchor>
       <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>putFrame</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
+      <anchor>a103fcc93e67999af16858940eb4e788e</anchor>
+      <arglist>(EtherFrame *frame)</arglist>
     </member>
     <member kind="function">
       <type>void</type>

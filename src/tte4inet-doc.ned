@@ -33,7 +33,7 @@
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.2.1)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 1.99.2)
+// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 1.99.3)
 //
 // <h2>Introductory material</h2>
 //  - For help with the installation see the <tt><a href="../doxy/install.html">INSTALL</a></tt> page.

@@ -22,15 +22,19 @@
 <area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="BGTrafficHandle" alt="BGTrafficHandle" coords="12,119,113,180">
 <area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="317,81,386,141">
 <area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="420,81,465,142">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="RCIncoming" alt="RCIncoming" coords="317,161,386,221">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="RCQueueBuffer" alt="RCQueueBuffer" coords="420,161,472,222">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.Unit2-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="143,80,215,107">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,155,101,181">
-<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="125,155,232,181">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="256,155,344,181">
-<area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="127,5,231,32">
+<img src="ttethernet.examples.small_network.Unit2-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="276,80,348,107">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="5,155,115,181">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="139,155,235,181">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="259,155,365,181">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="389,155,480,181">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="504,155,592,181">
+<area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="260,5,364,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -537,6 +541,106 @@ additional frames are dropped. Only used if queueModule==""</p>
 <p>End of the send window in number of ticks</p>
    </td>
 </tr>
+<tr>
+   <td><a href="ttethernet.ctc.RCIncoming.html">vl_101_ctc</a>.bag</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.ctc.RCIncoming.html">vl_101_ctc</a>.jitter</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.max_dispatch_delay</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.bag</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.jitter</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
@@ -556,8 +660,18 @@ additional frames are dropped. Only used if queueModule==""</p>
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
                 </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=439,61&quot;</span><span style="color: #000000; ">);
         }
+        </span><span style="color: #000000; ">vl_101_ctc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">RCIncoming</span><span style="color: #000000; "> {
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=349,140&quot;</span><span style="color: #000000; ">);
+
+        }
+        </span><span style="color: #000000; ">vl_101</span><span style="color: #000000; ">: </span><span style="color: #000000; ">RCQueueBuffer</span><span style="color: #000000; "> {
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=439,141&quot;</span><span style="color: #000000; ">);
+        }
     </span><span style="color: #800000; font-weight: bold; ">connections</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">vl_100_ctc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">vl_100</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">vl_101_ctc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">vl_101</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

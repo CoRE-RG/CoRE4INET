@@ -49,64 +49,65 @@
 <a name="l00017"></a>00017 <span class="preprocessor">#include &lt;<a class="code" href="_c_t_frame__m_8h.html">CTFrame_m.h</a>&gt;</span>
 <a name="l00018"></a>00018 <span class="preprocessor">#include &lt;<a class="code" href="_t_t_frame__m_8h.html">TTFrame_m.h</a>&gt;</span>
 <a name="l00019"></a>00019 <span class="preprocessor">#include &lt;<a class="code" href="_r_c_frame__m_8h.html">RCFrame_m.h</a>&gt;</span>
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021 <span class="keyword">namespace </span>TTEthernetModel {
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <a class="code" href="namespace_t_t_ethernet_model.html#a00c1c368ff03571108abf6b923fabc10">Define_Module</a>( TrafficSourceAppBase);
-<a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a1330bb8aa9fb62d5644028a6a6e70b6a">00025</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a1330bb8aa9fb62d5644028a6a6e70b6a" title="Initialization of the module.">TrafficSourceAppBase::initialize</a>()
-<a name="l00026"></a>00026 {
-<a name="l00027"></a>00027     scheduleAt(simTime(), <span class="keyword">new</span> cMessage(<span class="stringliteral">&quot;ACTIVATOR!&quot;</span>));
-<a name="l00028"></a>00028 }
-<a name="l00029"></a>00029 
-<a name="l00030"></a><a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a6a960b3fb8884fc7d25a0429bfa1bb07">00030</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a6a960b3fb8884fc7d25a0429bfa1bb07" title="Generates and sends a new Message.">TrafficSourceAppBase::sendMessage</a>(){
-<a name="l00031"></a>00031     <span class="keywordtype">int</span> ctID = par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
-<a name="l00032"></a>00032     <span class="keywordflow">if</span>(ctID == -1){
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034     }
-<a name="l00035"></a>00035     <span class="keywordflow">else</span>{
-<a name="l00036"></a>00036         std::list&lt;Buffer*&gt; buffer = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[ctID];
-<a name="l00037"></a>00037         <span class="keywordflow">if</span>(buffer.size()==0){
-<a name="l00038"></a>00038             ev.printf(<span class="stringliteral">&quot;No buffer with such CT \n&quot;</span>);
-<a name="l00039"></a>00039             bubble(<span class="stringliteral">&quot;No buffer with such CT&quot;</span>);
-<a name="l00040"></a>00040             getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
-<a name="l00041"></a>00041             getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: No buffer with such CT&quot;</span>);
-<a name="l00042"></a>00042             getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
-<a name="l00043"></a>00043             getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;No buffer with such CT&quot;</span>);
-<a name="l00044"></a>00044         }
-<a name="l00045"></a>00045         <span class="keywordflow">else</span>{
-<a name="l00046"></a>00046             <span class="keywordflow">for</span>(std::list&lt;Buffer*&gt;::iterator buf = buffer.begin();
-<a name="l00047"></a>00047                        buf!=buffer.end();buf++){
-<a name="l00048"></a>00048                 <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a> *frame;
-<a name="l00049"></a>00049                 <span class="keywordflow">if</span>(dynamic_cast&lt;TTBuffer*&gt;(*buf)){
-<a name="l00050"></a>00050                     frame = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>(<span class="stringliteral">&quot;&quot;</span>);
-<a name="l00051"></a>00051                 }
-<a name="l00052"></a>00052                 <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dynamic_cast&lt;RCBuffer*&gt;(*buf)){
-<a name="l00053"></a>00053                     frame = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>(<span class="stringliteral">&quot;&quot;</span>);
-<a name="l00054"></a>00054                 }
-<a name="l00055"></a>00055                 <span class="keywordflow">else</span>{
-<a name="l00056"></a>00056                     <span class="keywordflow">continue</span>;
-<a name="l00057"></a>00057                 }
-<a name="l00058"></a>00058                 frame-&gt;setByteLength(par(<span class="stringliteral">&quot;payload&quot;</span>).longValue()+ETHER_MAC_FRAME_BYTES);
-<a name="l00059"></a>00059                 <span class="comment">//Padding</span>
-<a name="l00060"></a>00060                 <span class="keywordflow">if</span>(frame-&gt;getByteLength()&lt;MIN_ETHERNET_FRAME){
-<a name="l00061"></a>00061                     frame-&gt;setByteLength(MIN_ETHERNET_FRAME);
-<a name="l00062"></a>00062                 }
-<a name="l00063"></a>00063                 frame-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html#af71d47380ceff7510b4462a3f45576b4">setCtID</a>(ctID);
-<a name="l00064"></a>00064                 <span class="comment">//TODO Error check</span>
-<a name="l00065"></a>00065                 <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a>* in = (<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a> *)(*buf)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>)-&gt;getPathStartGate()-&gt;getOwner();
-<a name="l00066"></a>00066                 <span class="comment">//TODO Better name for Frame</span>
-<a name="l00067"></a>00067                 frame-&gt;setName((*buf)-&gt;getName());
-<a name="l00068"></a>00068                 sendDirect(frame, in-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
-<a name="l00069"></a>00069             }
-<a name="l00070"></a>00070         }
-<a name="l00071"></a>00071     }
-<a name="l00072"></a>00072 }
-<a name="l00073"></a>00073 
+<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html">TTE4INETDefs.h</a>&quot;</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022 <span class="keyword">namespace </span>TTEthernetModel {
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <a class="code" href="namespace_t_t_ethernet_model.html#a00c1c368ff03571108abf6b923fabc10">Define_Module</a>( TrafficSourceAppBase);
+<a name="l00025"></a>00025 
+<a name="l00026"></a><a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a1330bb8aa9fb62d5644028a6a6e70b6a">00026</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a1330bb8aa9fb62d5644028a6a6e70b6a" title="Initialization of the module.">TrafficSourceAppBase::initialize</a>()
+<a name="l00027"></a>00027 {
+<a name="l00028"></a>00028     scheduleAt(simTime(), <span class="keyword">new</span> cMessage(<span class="stringliteral">&quot;ACTIVATOR!&quot;</span>));
+<a name="l00029"></a>00029 }
+<a name="l00030"></a>00030 
+<a name="l00031"></a><a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a6a960b3fb8884fc7d25a0429bfa1bb07">00031</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#a6a960b3fb8884fc7d25a0429bfa1bb07" title="Generates and sends a new Message.">TrafficSourceAppBase::sendMessage</a>(){
+<a name="l00032"></a>00032     <span class="keywordtype">int</span> ctID = par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
+<a name="l00033"></a>00033     <span class="keywordflow">if</span>(ctID == -1){
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035     }
+<a name="l00036"></a>00036     <span class="keywordflow">else</span>{
+<a name="l00037"></a>00037         std::list&lt;Buffer*&gt; buffer = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a317b0d72006c707ed070458610d899fb" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[ctID];
+<a name="l00038"></a>00038         <span class="keywordflow">if</span>(buffer.size()==0){
+<a name="l00039"></a>00039             ev.printf(<span class="stringliteral">&quot;No buffer with such CT \n&quot;</span>);
+<a name="l00040"></a>00040             bubble(<span class="stringliteral">&quot;No buffer with such CT&quot;</span>);
+<a name="l00041"></a>00041             getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00042"></a>00042             getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: No buffer with such CT&quot;</span>);
+<a name="l00043"></a>00043             getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00044"></a>00044             getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;No buffer with such CT&quot;</span>);
+<a name="l00045"></a>00045         }
+<a name="l00046"></a>00046         <span class="keywordflow">else</span>{
+<a name="l00047"></a>00047             <span class="keywordflow">for</span>(std::list&lt;Buffer*&gt;::iterator buf = buffer.begin();
+<a name="l00048"></a>00048                        buf!=buffer.end();buf++){
+<a name="l00049"></a>00049                 <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a> *frame;
+<a name="l00050"></a>00050                 <span class="keywordflow">if</span>(dynamic_cast&lt;TTBuffer*&gt;(*buf)){
+<a name="l00051"></a>00051                     frame = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>(<span class="stringliteral">&quot;&quot;</span>);
+<a name="l00052"></a>00052                 }
+<a name="l00053"></a>00053                 <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dynamic_cast&lt;RCBuffer*&gt;(*buf)){
+<a name="l00054"></a>00054                     frame = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>(<span class="stringliteral">&quot;&quot;</span>);
+<a name="l00055"></a>00055                 }
+<a name="l00056"></a>00056                 <span class="keywordflow">else</span>{
+<a name="l00057"></a>00057                     <span class="keywordflow">continue</span>;
+<a name="l00058"></a>00058                 }
+<a name="l00059"></a>00059                 frame-&gt;setByteLength(par(<span class="stringliteral">&quot;payload&quot;</span>).longValue()+ETHER_MAC_FRAME_BYTES);
+<a name="l00060"></a>00060                 <span class="comment">//Padding</span>
+<a name="l00061"></a>00061                 <span class="keywordflow">if</span>(frame-&gt;getByteLength()&lt;MIN_ETHERNET_FRAME_BYTES){
+<a name="l00062"></a>00062                     frame-&gt;setByteLength(MIN_ETHERNET_FRAME_BYTES);
+<a name="l00063"></a>00063                 }
+<a name="l00064"></a>00064                 frame-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html#af71d47380ceff7510b4462a3f45576b4">setCtID</a>(ctID);
+<a name="l00065"></a>00065                 <span class="comment">//TODO Error check</span>
+<a name="l00066"></a>00066                 <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a>* in = (<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a> *)(*buf)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>)-&gt;getPathStartGate()-&gt;getOwner();
+<a name="l00067"></a>00067                 <span class="comment">//TODO Better name for Frame</span>
+<a name="l00068"></a>00068                 frame-&gt;setName((*buf)-&gt;getName());
+<a name="l00069"></a>00069                 sendDirect(frame, in-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
+<a name="l00070"></a>00070             }
+<a name="l00071"></a>00071         }
+<a name="l00072"></a>00072     }
+<a name="l00073"></a>00073 }
 <a name="l00074"></a>00074 
-<a name="l00075"></a>00075 } <span class="comment">//namespace</span>
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Feb 14 11:04:06 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -86,7 +86,7 @@
 <a name="l00054"></a>00054 
 <a name="l00055"></a>00055     <span class="keywordflow">if</span> (arrivedOnSchedulerIn &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)
 <a name="l00056"></a>00056     {
-<a name="l00057"></a>00057         cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
+<a name="l00057"></a>00057         cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();
 <a name="l00058"></a>00058         <span class="comment">//Send Message</span>
 <a name="l00059"></a>00059         <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++gate)
 <a name="l00060"></a>00060         {
@@ -131,7 +131,7 @@
 <a name="l00099"></a>00099         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a4b75f1f4bde77e1f66506c1dabb9c001" title="Event indicating the actionTime.">actionTimeEvent</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a99401641cb4a1c30ec8392b2ed0d68c8">setAction_time</a>(par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).doubleValue());
 <a name="l00100"></a>00100 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Feb 14 11:04:06 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -349,6 +349,7 @@ $O/applications/TrafficSourceAppBase.o: applications/TrafficSourceAppBase.cc \
 	api/tte_api/tte_api.h \
 	applications/TTEApplicationBase.h \
 	applications/TrafficSourceAppBase.h \
+	base/TTE4INETDefs.h \
 	buffer/Buffer.h \
 	buffer/RCBuffer.h \
 	buffer/TTBuffer.h \

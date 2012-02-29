@@ -89,7 +89,7 @@ Inheritance diagram for TTEthernetModel::RCIncoming:</div>
 
 <p>Definition at line <a class="el" href="_r_c_incoming_8cc_source.html#l00022">22</a> of file <a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00026"></a>00026 {
+<p><div class="fragment"><pre class="fragment"><a name="l00025"></a>00025                        : <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a3d8d8f98264c1e8353d7c37af4b4aa94" title="Constructor.">Incoming::Incoming</a>()
 </pre></div></p>
 
 </div>
@@ -121,31 +121,31 @@ Inheritance diagram for TTEthernetModel::RCIncoming:</div>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">TTEthernetModel::Incoming</a>.</p>
 
-<p>Definition at line <a class="el" href="_r_c_incoming_8cc_source.html#l00028">28</a> of file <a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a>.</p>
+<p>Definition at line <a class="el" href="_r_c_incoming_8cc_source.html#l00027">27</a> of file <a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032 {
-<a name="l00033"></a>00033     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
-<a name="l00034"></a>00034         TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00035"></a>00035         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> currentTotalTicks = tteScheduler-&gt;getTotalTicks();
-<a name="l00036"></a>00036         <span class="comment">//Now check for correct arrival:</span>
-<a name="l00037"></a>00037         <span class="comment">//TODO what todo with JITTER?</span>
-<a name="l00038"></a>00038         <span class="comment">//Check too early</span>
-<a name="l00039"></a>00039         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a> &lt; <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a0440f4ea1b79459f69d71ee8b6af22cd" title="caches bag parameter">bag</a>){
-<a name="l00040"></a>00040             emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
-<a name="l00041"></a>00041             <span class="keywordflow">if</span>(ev.isGUI()){
-<a name="l00042"></a>00042                 ev.printf(<span class="stringliteral">&quot;Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n&quot;</span>, getName(), currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>,par(<span class="stringliteral">&quot;bag&quot;</span>).longValue());
-<a name="l00043"></a>00043                 bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
-<a name="l00044"></a>00044                 getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
-<a name="l00045"></a>00045                 getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
-<a name="l00046"></a>00046             }
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048             <span class="keyword">delete</span> msg;
-<a name="l00049"></a>00049         }
-<a name="l00050"></a>00050         <span class="comment">//Timing ok</span>
-<a name="l00051"></a>00051         <span class="keywordflow">else</span>{
-<a name="l00052"></a>00052             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>=currentTotalTicks;
-<a name="l00053"></a>00053             sendDelayed(msg,SimTime(getParentModule()-&gt;par(<span class="stringliteral">&quot;hardware_delay&quot;</span>).doubleValue()),<span class="stringliteral">&quot;out&quot;</span>);
-<a name="l00054"></a>00054             <span class="comment">//send(msg,&quot;out&quot;);</span>
+<p><div class="fragment"><pre class="fragment"><a name="l00031"></a>00031 {
+<a name="l00032"></a>00032     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){
+<a name="l00033"></a>00033         TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
+<a name="l00034"></a>00034         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> currentTotalTicks = tteScheduler-&gt;getTotalTicks();
+<a name="l00035"></a>00035         <span class="comment">//Now check for correct arrival:</span>
+<a name="l00036"></a>00036         <span class="comment">//TODO what todo with JITTER?</span>
+<a name="l00037"></a>00037         <span class="comment">//Check too early</span>
+<a name="l00038"></a>00038         <span class="keywordflow">if</span>(currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a> &lt; <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a0440f4ea1b79459f69d71ee8b6af22cd" title="caches bag parameter">bag</a>){
+<a name="l00039"></a>00039             emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
+<a name="l00040"></a>00040             <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00041"></a>00041                 ev.printf(<span class="stringliteral">&quot;Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n&quot;</span>, getName(), currentTotalTicks-<a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>,par(<span class="stringliteral">&quot;bag&quot;</span>).longValue());
+<a name="l00042"></a>00042                 bubble(<span class="stringliteral">&quot;Frame to early&quot;</span>);
+<a name="l00043"></a>00043                 getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00044"></a>00044                 getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00045"></a>00045             }
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047             <span class="keyword">delete</span> msg;
+<a name="l00048"></a>00048         }
+<a name="l00049"></a>00049         <span class="comment">//Timing ok</span>
+<a name="l00050"></a>00050         <span class="keywordflow">else</span>{
+<a name="l00051"></a>00051             <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#ac44dce091ecefc6f3a635f2811835c69" title="Saves the tickcount of the last message.">lastArrived</a>=currentTotalTicks;
+<a name="l00052"></a>00052             sendDelayed(msg,SimTime(getParentModule()-&gt;par(<span class="stringliteral">&quot;hardware_delay&quot;</span>).doubleValue()),<span class="stringliteral">&quot;out&quot;</span>);
+<a name="l00053"></a>00053             <span class="comment">//send(msg,&quot;out&quot;);</span>
 </pre></div></p>
 
 </div>
@@ -174,7 +174,7 @@ Inheritance diagram for TTEthernetModel::RCIncoming:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_r_c_incoming_8cc_source.html#l00056">56</a> of file <a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a>.</p>
+<p>Definition at line <a class="el" href="_r_c_incoming_8cc_source.html#l00055">55</a> of file <a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a>.</p>
 
 </div>
 </div>
@@ -218,7 +218,7 @@ Inheritance diagram for TTEthernetModel::RCIncoming:</div>
 <li><a class="el" href="_r_c_incoming_8cc_source.html">RCIncoming.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Feb 14 11:04:06 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:47 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

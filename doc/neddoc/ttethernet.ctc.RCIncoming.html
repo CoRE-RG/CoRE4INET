@@ -18,7 +18,10 @@
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.ctc.RCIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="5,5,96,32">
+<img src="ttethernet.ctc.RCIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="92,80,183,107">
+<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,5,77,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="101,5,173,32">
+<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="197,5,269,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -47,6 +50,54 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
 </tr>
 </table>
+<h3 class="subtitle">Used in compound modules:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Switch1.html">Switch1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>switch1: configuration in switch1.ini
+Forwards time-triggered messages with VL-ID 100</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit2.html">Unit2</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>unit2: configuration in unit2.ini.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Unit3.html">Unit3</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>unit3: configuration in unit3.ini.</p>
+
+   </td>
+</tr>
+</table>
 <h3 class="subtitle">Parameters:</h3>
 <table class="paramstable">
    <tr>
@@ -60,7 +111,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    <td>
       <i>int</i>
    </td>
-   <td></td>
+   <td>0</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -70,7 +121,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    <td>
       <i>int</i>
    </td>
-   <td></td>
+   <td>0</td>
    <td>
 <p>Not used</p>
    </td>
@@ -155,9 +206,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
         </span><span style="color: #808080; font-style: italic; ">//RCIncoming is implemented by the RCIncoming C++ Class
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCIncoming</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">// Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bag</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bag</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Not used
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">jitter</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">jitter</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
