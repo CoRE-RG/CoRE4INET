@@ -2,14 +2,13 @@ package ttethernet.nodes.ethernet;
 
 import ttethernet.buffer.BGQueueBuffer;
 import ttethernet.linklayer.BGTrafficHandle;
-import ttethernet.applications.TTEAPITestApplication;
 import ttethernet.scheduler.TTEScheduler;
-import ttethernet.configuration.IConfigurationManager;
+import ttethernet.configuration.base.IConfigurationManager;
 import ttethernet.api.TTEthAPI;
 import ttethernet.linklayer.TTEPHYPort;
-import ttethernet.synchronisation.ISync;
-import ttethernet.synchronisation.DummySync;
-import ttethernet.applications.ITTEApplication;
+import ttethernet.synchronisation.base.ISync;
+import ttethernet.synchronisation.base.DummySync;
+import ttethernet.applications.base.ITTEApplication;
 import inet.linklayer.ethernet.EtherLLC;
 import inet.applications.ethernet.EtherAppSrv;
 import inet.applications.ethernet.EtherAppCli;

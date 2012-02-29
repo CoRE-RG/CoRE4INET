@@ -13,17 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications;
+package ttethernet.applications.trafficsource;
 
-import ttethernet.linklayer.IPort;
+import ttethernet.applications.base.TTEApplicationBase;
 
-
-moduleinterface ITTEApplication extends IPort
+//
+// TODO auto-generated module
+//
+simple TrafficSourceAppBase extends TTEApplicationBase
 {
     parameters:
-        //Comma seperated list of buffer modules the application is allowed to use
-        string buffers;
-    gates:
-         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn;
+        int payload @unit(Byte) = default(46Byte);
+        int ct_id = default(-1);
 }

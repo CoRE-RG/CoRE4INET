@@ -1,9 +1,9 @@
 package ttethernet.nodes.ethernet;
 
 import ttethernet.scheduler.TTEScheduler;
-import ttethernet.configuration.IConfigurationManager;
-import ttethernet.synchronisation.ISync;
-import ttethernet.synchronisation.DummySync;
+import ttethernet.configuration.base.IConfigurationManager;
+import ttethernet.synchronisation.base.ISync;
+import ttethernet.synchronisation.base.DummySync;
 import ttethernet.linklayer.TTEPHYPort;
 
 import inet.linklayer.IMACRelayUnit;

@@ -13,15 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.configuration;
+package ttethernet.applications.api;
 
 //
-// Interface for a ConfigurationManager that configures a node according to its
-// configuration
+// TODO auto-generated module
 //
-// @see BaseConfigurationManager
-//
-// @author Till Steinbach
-moduleinterface IConfigurationManager
+simple TTEAPITestApplication extends TTEAPIApplicationBase
 {
+    @class(TTEAPITestApplication);
 }

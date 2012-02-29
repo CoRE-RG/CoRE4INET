@@ -7,15 +7,15 @@
         requires = ""
         labels = ""
         nedPackages = "
-                       ttethernet.applications
+                       ttethernet.applications.base
                        ttethernet.base
                        ttethernet.buffer
-                       ttethernet.configuration
+                       ttethernet.configuration.base
                        ttethernet.ctc
                        ttethernet.linklayer
                        ttethernet.nodes
                        ttethernet.scheduler
-                       ttethernet.synchronisation
+                       ttethernet.synchronisation.base
                       "
         extraSourceFolders = ""
         compileFlags = "-DWITH_TTE_COMMON"
@@ -30,6 +30,7 @@
         labels = ""
         nedPackages = "
                        ttethernet.api
+                       ttethernet.applications.api
                       "
         extraSourceFolders = ""
         compileFlags = "-DWITH_TTE_API"

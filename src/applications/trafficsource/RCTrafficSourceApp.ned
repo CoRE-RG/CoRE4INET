@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications;
+package ttethernet.applications.trafficsource;
 
 //
 // TODO auto-generated module

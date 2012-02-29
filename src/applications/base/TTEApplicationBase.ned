@@ -13,14 +13,21 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications;
+package ttethernet.applications.base;
 
 //
 // TODO auto-generated module
 //
-simple TrafficSourceAppBase extends TTEApplicationBase
+simple TTEApplicationBase like ITTEApplication
 {
-    parameters:
-        int payload @unit(Byte) = default(46Byte);
-        int ct_id = default(-1);
+        parameters:
+            @class(TTEApplicationBase);
+        	//Comma seperated list of buffer modules the application is allowed to use
+        	string buffers = default("");
+        	bool buffers_manual = default(false);
+        gates:
+            input TTin @directIn @labels(CTFrame);
+            input RCin @directIn @labels(CTFrame);
+            //Input gate for the incoming SchedulerActionTimeEvent messages
+            input schedulerIn @directIn;
 }

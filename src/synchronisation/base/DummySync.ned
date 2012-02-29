@@ -1,4 +1,4 @@
-package ttethernet.synchronisation;
+package ttethernet.synchronisation.base;
 
 import ttethernet.linklayer.IPort;
 
