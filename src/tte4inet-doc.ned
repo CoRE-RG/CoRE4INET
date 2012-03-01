@@ -21,7 +21,7 @@
 //<center><img src="../images/CoRE.png"/><img src="../images/HAW.gif"/></center>
 //
 // <center><h1>TTEthernet Model for INET Framework (TTE4INET)</h1></center>
-// <center>release ?</center>
+// <center>release [VERSION_STRING]</center>
 //
 // TTE4INET is an extension to the INET-Framework for the event-based simulation
 // of time-triggered Ethernet (<a href="http://www.ttethernet.com" target="_top">TTEthernet</a>)
