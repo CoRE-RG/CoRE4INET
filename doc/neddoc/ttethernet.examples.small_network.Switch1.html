@@ -11,23 +11,24 @@ Forwards time-triggered messages with VL-ID 100</p>
 <img src="ttethernet.examples.small_network.Switch1-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="IMACRelayUnit" alt="IMACRelayUnit" coords="114,262,172,323">
 <area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="181,301,293,357">
-<area shape="rect" href="ttethernet.synchronisation.ISync.html" title="ISync" alt="ISync" coords="123,189,167,250">
-<area shape="rect" href="ttethernet.configuration.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="930,1019,1072,1080">
+<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="ISync" alt="ISync" coords="123,189,167,250">
+<area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="930,1019,1072,1080">
 <area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="TTEScheduler" alt="TTEScheduler" coords="196,189,278,250">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="317,81,386,141">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="317,80,386,141">
 <area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="420,81,465,142">
-<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="RCIncoming" alt="RCIncoming" coords="317,161,386,221">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="RCIncoming" alt="RCIncoming" coords="317,160,386,221">
 <area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="RCQueueBuffer" alt="RCQueueBuffer" coords="420,161,472,222">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.Switch1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="276,5,348,32">
-<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="5,80,115,107">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="139,80,235,107">
-<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="259,80,365,107">
-<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="389,80,480,107">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="504,80,592,107">
+<img src="ttethernet.examples.small_network.Switch1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="265,80,337,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,155,101,181">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="125,155,232,181">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="256,155,347,181">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="371,155,459,181">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="483,155,592,181">
+<area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="249,5,353,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -57,6 +58,28 @@ Contains a configurable best-effort implementation (beRelayUnitType like IMACRel
 The switch is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
 The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Networks:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.small_network.html">small_network</a>
+   </td>
+   <td>
+<i>network</i>
+   </td>
+   <td>
+
+<p>Small sample network with three hosts and one switch that shows how to 
+configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 
    </td>
 </tr>
@@ -460,6 +483,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>0</td>
    <td>
 <p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
    </td>
 </tr>
 </table>

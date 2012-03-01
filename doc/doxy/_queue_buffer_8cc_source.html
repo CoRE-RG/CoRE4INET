@@ -50,45 +50,60 @@
 <a name="l00018"></a>00018 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00019"></a>00019 
 <a name="l00020"></a>00020 simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">QueueBuffer::queueLengthSignal</a> = SIMSIGNAL_NULL;
-<a name="l00021"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#aff1e2fd154dee22cbf7b1b3b8faf6e98">00021</a> 
-<a name="l00022"></a>00022 <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#aff1e2fd154dee22cbf7b1b3b8faf6e98" title="Constructor for the class.">QueueBuffer::QueueBuffer</a>()
-<a name="l00023"></a>00023 {
-<a name="l00024"></a>00024     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">initializeStatistics</a>();
-<a name="l00025"></a>00025 }
-<a name="l00026"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a7f11141bd9474385aeb4503a448411ca">00026</a> 
-<a name="l00027"></a>00027 <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a7f11141bd9474385aeb4503a448411ca" title="Destructor for the class.">QueueBuffer::~QueueBuffer</a>()
-<a name="l00028"></a>00028 {
-<a name="l00029"></a>00029     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.clear();
-<a name="l00030"></a>00030 }
-<a name="l00031"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a">00031</a> 
-<a name="l00032"></a>00032 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">QueueBuffer::initializeStatistics</a>()
-<a name="l00033"></a>00033 {
-<a name="l00034"></a>00034     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;queueLength&quot;</span>);
-<a name="l00035"></a>00035     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.setName(<span class="stringliteral">&quot;frames&quot;</span>);
-<a name="l00036"></a>00036 }
-<a name="l00037"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918">00037</a> 
-<a name="l00038"></a>00038 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918" title="Inserts EtherFrame in the Queue and emits the queue length.">QueueBuffer::enqueue</a>(EtherFrame *newFrame)
-<a name="l00039"></a>00039 {
-<a name="l00040"></a>00040     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.insert(newFrame);
-<a name="l00041"></a>00041     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() == 0);
-<a name="l00042"></a>00042     emit(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length());
-<a name="l00043"></a>00043 }
-<a name="l00044"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f">00044</a> 
-<a name="l00045"></a>00045 EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f" title="Removes and returns an EtherFrame from the Queue and emits the queue length.">QueueBuffer::dequeue</a>()
-<a name="l00046"></a>00046 {
-<a name="l00047"></a>00047     <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() &gt; 0)
-<a name="l00048"></a>00048     {
-<a name="l00049"></a>00049         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() - 1 == 0);
-<a name="l00050"></a>00050         emit(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() - 1);
-<a name="l00051"></a>00051         <span class="keywordflow">return</span> (EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.pop();
-<a name="l00052"></a>00052     }
-<a name="l00053"></a>00053     <span class="keywordflow">else</span>
-<a name="l00054"></a>00054         <span class="keywordflow">return</span> NULL;
-<a name="l00055"></a>00055 }
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 } <span class="comment">//namespace</span>
+<a name="l00021"></a>00021 simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a8baa087bd3c88b6ff4effaa5b61a0de2" title="Signal that is emitted when a frame is dropped.">QueueBuffer::ctDroppedSignal</a> = SIMSIGNAL_NULL;
+<a name="l00022"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#aff1e2fd154dee22cbf7b1b3b8faf6e98">00022</a> 
+<a name="l00023"></a>00023 <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#aff1e2fd154dee22cbf7b1b3b8faf6e98" title="Constructor for the class.">QueueBuffer::QueueBuffer</a>()
+<a name="l00024"></a>00024 {
+<a name="l00025"></a>00025     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">initializeStatistics</a>();
+<a name="l00026"></a>00026 }
+<a name="l00027"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a7f11141bd9474385aeb4503a448411ca">00027</a> 
+<a name="l00028"></a>00028 <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a7f11141bd9474385aeb4503a448411ca" title="Destructor for the class.">QueueBuffer::~QueueBuffer</a>()
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.clear();
+<a name="l00031"></a>00031 }
+<a name="l00032"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a">00032</a> 
+<a name="l00033"></a>00033 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">QueueBuffer::initializeStatistics</a>()
+<a name="l00034"></a>00034 {
+<a name="l00035"></a>00035     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;queueLength&quot;</span>);
+<a name="l00036"></a>00036     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a8baa087bd3c88b6ff4effaa5b61a0de2" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);
+<a name="l00037"></a>00037     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.setName(<span class="stringliteral">&quot;frames&quot;</span>);
+<a name="l00038"></a>00038 }
+<a name="l00039"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918">00039</a> 
+<a name="l00040"></a>00040 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918" title="Inserts EtherFrame in the Queue and emits the queue length.">QueueBuffer::enqueue</a>(EtherFrame *newFrame)
+<a name="l00041"></a>00041 {
+<a name="l00042"></a>00042     <span class="keywordtype">int</span> size = par(<span class="stringliteral">&quot;size&quot;</span>).longValue();
+<a name="l00043"></a>00043     <span class="keywordflow">if</span>(size&gt;=0 &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length()&gt;=size){
+<a name="l00044"></a>00044         emit(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a8baa087bd3c88b6ff4effaa5b61a0de2" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);
+<a name="l00045"></a>00045         <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00046"></a>00046             bubble(<span class="stringliteral">&quot;buffer overflow - dropping frame&quot;</span>);
+<a name="l00047"></a>00047             getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00048"></a>00048             getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: buffer overflow&quot;</span>);
+<a name="l00049"></a>00049             getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00050"></a>00050             getParentModule()-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: buffer overflow&quot;</span>);
+<a name="l00051"></a>00051         }
+<a name="l00052"></a>00052         <span class="keyword">delete</span> newFrame;
+<a name="l00053"></a>00053         <span class="keywordflow">return</span>;
+<a name="l00054"></a>00054     }
+<a name="l00055"></a>00055     <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.insert(newFrame);
+<a name="l00056"></a>00056     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() == 0);
+<a name="l00057"></a>00057     emit(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length());
+<a name="l00058"></a>00058 }
+<a name="l00059"></a><a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f">00059</a> 
+<a name="l00060"></a>00060 EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f" title="Removes and returns an EtherFrame from the Queue and emits the queue length.">QueueBuffer::dequeue</a>()
+<a name="l00061"></a>00061 {
+<a name="l00062"></a>00062     <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() &gt; 0)
+<a name="l00063"></a>00063     {
+<a name="l00064"></a>00064         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() - 1 == 0);
+<a name="l00065"></a>00065         emit(<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted...">queueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() - 1);
+<a name="l00066"></a>00066         <span class="keywordflow">return</span> (EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.pop();
+<a name="l00067"></a>00067     }
+<a name="l00068"></a>00068     <span class="keywordflow">else</span>
+<a name="l00069"></a>00069         <span class="keywordflow">return</span> NULL;
+<a name="l00070"></a>00070 }
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:49 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

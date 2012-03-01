@@ -19,11 +19,12 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.small_network-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="133,5,237,32">
+<img src="ttethernet.examples.small_network.small_network-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="181,5,285,32">
 <area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="5,80,77,107">
-<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="101,80,173,107">
-<area shape="rect" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="197,80,269,107">
+<area shape="rect" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="101,80,173,107">
+<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="197,80,269,107">
 <area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,80,365,107">
+<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="389,80,461,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -223,7 +224,7 @@ additional frames are dropped. Only used if queueModule==""</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.applications.ITTEApplication.html">tteApp</a>.buffers</td>
+   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.applications.base.ITTEApplication.html">tteApp</a>.buffers</td>
    <td>
       <i>string</i>
    </td>
@@ -283,6 +284,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
    <td>
       <i>int</i>
@@ -330,6 +341,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>""</td>
    <td>
 <p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
    </td>
 </tr>
 <tr>
@@ -604,7 +625,7 @@ additional frames are dropped. Only used if queueModule==""</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.applications.ITTEApplication.html">tteApp</a>.buffers</td>
+   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.applications.base.ITTEApplication.html">tteApp</a>.buffers</td>
    <td>
       <i>string</i>
    </td>
@@ -664,6 +685,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
    <td>
       <i>int</i>
@@ -711,6 +742,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>""</td>
    <td>
 <p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
    </td>
 </tr>
 <tr>
@@ -914,6 +955,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_marker</td>
    <td>
       <i>int</i>
@@ -1085,7 +1136,7 @@ additional frames are dropped. Only used if queueModule==""</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.applications.ITTEApplication.html">tteApp</a>.buffers</td>
+   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.applications.base.ITTEApplication.html">tteApp</a>.buffers</td>
    <td>
       <i>string</i>
    </td>
@@ -1145,6 +1196,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
    <td>
       <i>int</i>
@@ -1192,6 +1253,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>""</td>
    <td>
 <p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
    </td>
 </tr>
 <tr>
@@ -1392,6 +1463,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>0</td>
    <td>
 <p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
    </td>
 </tr>
 <tr>
@@ -1734,6 +1815,16 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>0</td>
    <td>
 <p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
    </td>
 </tr>
 </table>

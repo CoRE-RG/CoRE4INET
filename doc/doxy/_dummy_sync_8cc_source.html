@@ -26,7 +26,7 @@
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-  <div class="navpath"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a>&nbsp;&raquo;&nbsp;<a class="el" href="dir_e91b5cc3279f6efa832a22015b9fa21e.html">synchronisation</a>
+  <div class="navpath"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a>&nbsp;&raquo;&nbsp;<a class="el" href="dir_e91b5cc3279f6efa832a22015b9fa21e.html">synchronisation</a>&nbsp;&raquo;&nbsp;<a class="el" href="dir_281c386ea8ca02cdd26bd30f4abb9fd9.html">base</a>
   </div>
 </div>
 <div class="contents">
@@ -51,39 +51,47 @@
 <a name="l00019"></a>00019 
 <a name="l00020"></a>00020 <span class="keyword">using namespace </span>TTEthernetModel;
 <a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <a class="code" href="namespace_t_t_ethernet_model.html#a00c1c368ff03571108abf6b923fabc10">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html" title="Dummy sync module.">DummySync</a>);
+<a name="l00022"></a>00022 <a class="code" href="namespace_t_t_ethernet_model.html#aa58d8e9b8f6e9fc06de623b534f81b80">Define_Module</a>( <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html" title="Dummy sync module.">DummySync</a>);
 <a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#adfc7c1d8db8678c4d661abafbcc81ec2">00024</a> <span class="keywordtype">void</span> DummySync::initialize()
-<a name="l00025"></a>00025 {
-<a name="l00026"></a>00026     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00027"></a>00027     <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;Sync Task Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
-<a name="l00028"></a>00028     <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;action_time&quot;</span>).longValue());
-<a name="l00029"></a>00029     <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
-<a name="l00030"></a>00030     tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(event);
-<a name="l00031"></a>00031 }
-<a name="l00032"></a>00032 
-<a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a56963aa89143a2a483e74b8e48426804">00033</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a56963aa89143a2a483e74b8e48426804" title="dummy synchronization function.">DummySync::handleMessage</a>(cMessage *msg)
-<a name="l00034"></a>00034 {
-<a name="l00035"></a>00035     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
-<a name="l00036"></a>00036     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>)){
-<a name="l00037"></a>00037         <span class="keywordflow">if</span>(tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a18e1193fcf9c705921e24a0841e5536b" title="Returns the current number of cycles.">getCycles</a>()&gt;1){
-<a name="l00038"></a>00038             <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycleTicks = tteScheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
-<a name="l00039"></a>00039             <span class="keywordtype">double</span> tick = tteScheduler-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue();
+<a name="l00024"></a><a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#aee3b5f87f3f7ff9eb608bd54d3b4ced5">00024</a> <span class="keywordtype">int</span> DummySync::numInitStages()<span class="keyword"> const</span>
+<a name="l00025"></a>00025 <span class="keyword"></span>{
+<a name="l00026"></a>00026     <span class="keywordflow">return</span> 2;
+<a name="l00027"></a>00027 }
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a9d6c204caa5950db42fa36aba6e40b87">00029</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a9d6c204caa5950db42fa36aba6e40b87" title="Initializes the dummy synchronization module.">DummySync::initialize</a>(<span class="keywordtype">int</span> stage)
+<a name="l00030"></a>00030 {
+<a name="l00031"></a>00031     <span class="keywordflow">if</span>(stage==1)
+<a name="l00032"></a>00032     {
+<a name="l00033"></a>00033         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
+<a name="l00034"></a>00034         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a>(<span class="stringliteral">&quot;Sync Task Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);
+<a name="l00035"></a>00035         <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;action_time&quot;</span>).longValue());
+<a name="l00036"></a>00036         <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
+<a name="l00037"></a>00037         tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(event);
+<a name="l00038"></a>00038     }
+<a name="l00039"></a>00039 }
 <a name="l00040"></a>00040 
-<a name="l00041"></a>00041             <span class="keywordtype">int</span> modticks = ((int)(simTime().dbl()/tick)-par(<span class="stringliteral">&quot;action_time&quot;</span>).longValue())%cycleTicks;
-<a name="l00042"></a>00042             <span class="keywordflow">if</span>(modticks&gt;(cycleTicks/2))
-<a name="l00043"></a>00043                 modticks=modticks-cycleTicks;
-<a name="l00044"></a>00044             modticks+=uniform(-par(<span class="stringliteral">&quot;precission&quot;</span>).doubleValue()/2, par(<span class="stringliteral">&quot;precission&quot;</span>).doubleValue()/2)/tick;
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046             tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8" title="Corrects the clock by the number of ticks.">clockCorrection</a>(-modticks);
-<a name="l00047"></a>00047         }
+<a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a56963aa89143a2a483e74b8e48426804">00041</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a56963aa89143a2a483e74b8e48426804" title="dummy synchronization function.">DummySync::handleMessage</a>(cMessage *msg)
+<a name="l00042"></a>00042 {
+<a name="l00043"></a>00043     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *tteScheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);
+<a name="l00044"></a>00044     <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>)){
+<a name="l00045"></a>00045         <span class="keywordflow">if</span>(tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a18e1193fcf9c705921e24a0841e5536b" title="Returns the current number of cycles.">getCycles</a>()&gt;1){
+<a name="l00046"></a>00046             <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycleTicks = tteScheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();
+<a name="l00047"></a>00047             <span class="keywordtype">double</span> tick = tteScheduler-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue();
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *)msg;
-<a name="l00050"></a>00050         tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(event);
-<a name="l00051"></a>00051     }
-<a name="l00052"></a>00052 }
+<a name="l00049"></a>00049             <span class="keywordtype">int</span> modticks = ((int)(simTime().dbl()/tick)-par(<span class="stringliteral">&quot;action_time&quot;</span>).longValue())%cycleTicks;
+<a name="l00050"></a>00050             <span class="keywordflow">if</span>(modticks&gt;(cycleTicks/2))
+<a name="l00051"></a>00051                 modticks=modticks-cycleTicks;
+<a name="l00052"></a>00052             modticks+=uniform(-par(<span class="stringliteral">&quot;precission&quot;</span>).doubleValue()/2, par(<span class="stringliteral">&quot;precission&quot;</span>).doubleValue()/2)/tick;
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054             tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8" title="Corrects the clock by the number of ticks.">clockCorrection</a>(-modticks);
+<a name="l00055"></a>00055         }
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057         <a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *<span class="keyword">event</span> = (<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerActionTimeEvent</a> *)msg;
+<a name="l00058"></a>00058         tteScheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(event);
+<a name="l00059"></a>00059     }
+<a name="l00060"></a>00060 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:49 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -57,8 +57,12 @@ Inheritance diagram for TTEthernetModel::TTFrame:</div>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html">TTFrame</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a0fab9929c53b6718d43df8dabacead11">dup</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a8b43fa17744a5a8ba5441118abf9b6c7">parsimPack</a> (cCommBuffer *b)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#ab9412f52689e2016841faa9d82f42bfa">parsimUnpack</a> (cCommBuffer *b)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual const char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a8f49dd8711f5401e3a9aaa0f3f8b8c3e">getDisplayString</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a688dff71dd3c331f2a60d478a02015af">setDisplayString</a> (const char *displayString)</td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#af3edd9c51478b17896a571a66c80ee13">operator==</a> (const <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html">TTFrame</a> &amp;)</td></tr>
+<tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">opp_string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a5473819d1a709660529169fbf3a21550">displayString_var</a></td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a11346a05c64ca820fa15ed79795e2383">copy</a> (const <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html">TTFrame</a> &amp;other)</td></tr>
 </table>
@@ -66,7 +70,9 @@ Inheritance diagram for TTEthernetModel::TTFrame:</div>
 <p>Class generated from <code>linklayer/ethernet/TTFrame.msg</code> by opp_msgc. </p>
 <pre>
  packet <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a> extends <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a>
- {</pre><pre> }
+ {    
+ 	string displayString="b=15,15,rect,black,red,5";
+ }
  </pre> 
 <p>Definition at line <a class="el" href="_t_t_frame__m_8h_source.html#l00032">32</a> of file <a class="el" href="_t_t_frame__m_8h_source.html">TTFrame_m.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -95,7 +101,7 @@ Inheritance diagram for TTEthernetModel::TTFrame:</div>
 </div>
 <div class="memdoc">
 
-<p>Referenced by <a class="el" href="_t_t_frame__m_8h_source.html#l00048">dup()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_frame__m_8h_source.html#l00049">dup()</a>.</p>
 
 </div>
 </div>
@@ -170,10 +176,29 @@ Inheritance diagram for TTEthernetModel::TTFrame:</div>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#a00029d359f0f54ffb9ab68d9b524eedc">TTEthernetModel::CTFrame</a>.</p>
 
-<p>Definition at line <a class="el" href="_t_t_frame__m_8h_source.html#l00048">48</a> of file <a class="el" href="_t_t_frame__m_8h_source.html">TTFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_frame__m_8h_source.html#l00049">49</a> of file <a class="el" href="_t_t_frame__m_8h_source.html">TTFrame_m.h</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00048"></a>00048 {<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(*<span class="keyword">this</span>);}
+<p><div class="fragment"><pre class="fragment"><a name="l00049"></a>00049 {<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(*<span class="keyword">this</span>);}
 </pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="a8f49dd8711f5401e3a9aaa0f3f8b8c3e"></a><!-- doxytag: member="TTEthernetModel::TTFrame::getDisplayString" ref="a8f49dd8711f5401e3a9aaa0f3f8b8c3e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* TTEthernetModel::TTFrame::getDisplayString </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#aa3fe11b5a1402a56ee586d16dcdf15bd">TTEthernetModel::CTFrame</a>.</p>
 
 </div>
 </div>
@@ -231,7 +256,7 @@ Inheritance diagram for TTEthernetModel::TTFrame:</div>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#a17e1de7a6e1d0249857cf3c38d811557">TTEthernetModel::CTFrame</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_frame__m_8h_source.html#l00055">TTEthernetModel::doPacking()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_frame__m_8h_source.html#l00058">TTEthernetModel::doPacking()</a>.</p>
 
 </div>
 </div>
@@ -253,7 +278,45 @@ Inheritance diagram for TTEthernetModel::TTFrame:</div>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#a4e0fd26075a9fa4fb6344ae09e7b70ce">TTEthernetModel::CTFrame</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_frame__m_8h_source.html#l00056">TTEthernetModel::doUnpacking()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_frame__m_8h_source.html#l00059">TTEthernetModel::doUnpacking()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a688dff71dd3c331f2a60d478a02015af"></a><!-- doxytag: member="TTEthernetModel::TTFrame::setDisplayString" ref="a688dff71dd3c331f2a60d478a02015af" args="(const char *displayString)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void TTEthernetModel::TTFrame::setDisplayString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>displayString</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#a948ef6a193dc0c736d49d51bf019689f">TTEthernetModel::CTFrame</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a5473819d1a709660529169fbf3a21550"></a><!-- doxytag: member="TTEthernetModel::TTFrame::displayString_var" ref="a5473819d1a709660529169fbf3a21550" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">opp_string <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a5473819d1a709660529169fbf3a21550">TTEthernetModel::TTFrame::displayString_var</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#a8c9d777c8d9c9cdc60e556cbf3ebb370">TTEthernetModel::CTFrame</a>.</p>
+
+<p>Definition at line <a class="el" href="_t_t_frame__m_8h_source.html#l00035">35</a> of file <a class="el" href="_t_t_frame__m_8h_source.html">TTFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -261,7 +324,7 @@ Inheritance diagram for TTEthernetModel::TTFrame:</div>
 <li><a class="el" href="_t_t_frame__m_8h_source.html">TTFrame_m.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:47 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:50 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

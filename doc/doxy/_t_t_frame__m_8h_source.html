@@ -55,34 +55,37 @@
 <a name="l00032"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html">00032</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a> : <span class="keyword">public</span> ::TTEthernetModel::<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a>
 <a name="l00033"></a>00033 {
 <a name="l00034"></a>00034   <span class="keyword">protected</span>:
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036   <span class="keyword">private</span>:
-<a name="l00037"></a>00037     <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a11346a05c64ca820fa15ed79795e2383">copy</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; other);
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039   <span class="keyword">protected</span>:
-<a name="l00040"></a>00040     <span class="comment">// protected and unimplemented operator==(), to prevent accidental usage</span>
-<a name="l00041"></a>00041     <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#af3edd9c51478b17896a571a66c80ee13">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp;);
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043   <span class="keyword">public</span>:
-<a name="l00044"></a>00044     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name=NULL, <span class="keywordtype">int</span> kind=0);
-<a name="l00045"></a>00045     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; other);
-<a name="l00046"></a>00046     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a018cb7ba732769ba614d2b1e886e2855">~TTFrame</a>();
-<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#ade0dcaa3310083546c23ed086d7b0a54">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; other);
-<a name="l00048"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a0fab9929c53b6718d43df8dabacead11">00048</a>     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a> *<a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a0fab9929c53b6718d43df8dabacead11">dup</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(*<span class="keyword">this</span>);}
-<a name="l00049"></a>00049     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a8b43fa17744a5a8ba5441118abf9b6c7">parsimPack</a>(cCommBuffer *b);
-<a name="l00050"></a>00050     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#ab9412f52689e2016841faa9d82f42bfa">parsimUnpack</a>(cCommBuffer *b);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052     <span class="comment">// field getter/setter methods</span>
-<a name="l00053"></a>00053 };
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="namespace_t_t_ethernet_model.html#ad5b55b4e7f434adf857d84b911b7a893">00055</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#a6281240ab3b6b517511d0d14bccfd745">doPacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a8b43fa17744a5a8ba5441118abf9b6c7">parsimPack</a>(b);}
-<a name="l00056"></a><a class="code" href="namespace_t_t_ethernet_model.html#aba4739dae310fc44a4a29b8f66751f78">00056</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#afb69a66fe1825ae4a81ce48bcf2c2930">doUnpacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#ab9412f52689e2016841faa9d82f42bfa">parsimUnpack</a>(b);}
+<a name="l00035"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a5473819d1a709660529169fbf3a21550">00035</a>     opp_string <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a5473819d1a709660529169fbf3a21550">displayString_var</a>;
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037   <span class="keyword">private</span>:
+<a name="l00038"></a>00038     <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a11346a05c64ca820fa15ed79795e2383">copy</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; other);
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040   <span class="keyword">protected</span>:
+<a name="l00041"></a>00041     <span class="comment">// protected and unimplemented operator==(), to prevent accidental usage</span>
+<a name="l00042"></a>00042     <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#af3edd9c51478b17896a571a66c80ee13">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp;);
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044   <span class="keyword">public</span>:
+<a name="l00045"></a>00045     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name=NULL, <span class="keywordtype">int</span> kind=0);
+<a name="l00046"></a>00046     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; other);
+<a name="l00047"></a>00047     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a018cb7ba732769ba614d2b1e886e2855">~TTFrame</a>();
+<a name="l00048"></a>00048     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#ade0dcaa3310083546c23ed086d7b0a54">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; other);
+<a name="l00049"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a0fab9929c53b6718d43df8dabacead11">00049</a>     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a> *<a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a0fab9929c53b6718d43df8dabacead11">dup</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1">TTFrame</a>(*<span class="keyword">this</span>);}
+<a name="l00050"></a>00050     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a8b43fa17744a5a8ba5441118abf9b6c7">parsimPack</a>(cCommBuffer *b);
+<a name="l00051"></a>00051     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#ab9412f52689e2016841faa9d82f42bfa">parsimUnpack</a>(cCommBuffer *b);
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053     <span class="comment">// field getter/setter methods</span>
+<a name="l00054"></a>00054     <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a8f49dd8711f5401e3a9aaa0f3f8b8c3e">getDisplayString</a>() <span class="keyword">const</span>;
+<a name="l00055"></a>00055     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a688dff71dd3c331f2a60d478a02015af">setDisplayString</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * displayString);
+<a name="l00056"></a>00056 };
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058 }; <span class="comment">// end namespace TTEthernetModel</span>
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="preprocessor">#endif // _TTFRAME_M_H_</span>
+<a name="l00058"></a><a class="code" href="namespace_t_t_ethernet_model.html#ad5b55b4e7f434adf857d84b911b7a893">00058</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#a6281240ab3b6b517511d0d14bccfd745">doPacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a8b43fa17744a5a8ba5441118abf9b6c7">parsimPack</a>(b);}
+<a name="l00059"></a><a class="code" href="namespace_t_t_ethernet_model.html#aba4739dae310fc44a4a29b8f66751f78">00059</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#afb69a66fe1825ae4a81ce48bcf2c2930">doUnpacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html" title="Class generated from linklayer/ethernet/TTFrame.msg by opp_msgc.">TTFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_t_t_frame.html#ab9412f52689e2016841faa9d82f42bfa">parsimUnpack</a>(b);}
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 }; <span class="comment">// end namespace TTEthernetModel</span>
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063 <span class="preprocessor">#endif // _TTFRAME_M_H_</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:49 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

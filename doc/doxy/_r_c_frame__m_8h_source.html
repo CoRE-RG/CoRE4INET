@@ -52,37 +52,40 @@
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021 <span class="keyword">namespace </span>TTEthernetModel {
 <a name="l00022"></a>00022 
-<a name="l00032"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html">00032</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a> : <span class="keyword">public</span> ::TTEthernetModel::<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a>
-<a name="l00033"></a>00033 {
-<a name="l00034"></a>00034   <span class="keyword">protected</span>:
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036   <span class="keyword">private</span>:
-<a name="l00037"></a>00037     <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#ab91613921b2d34d4f7e206f9614650c1">copy</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; other);
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039   <span class="keyword">protected</span>:
-<a name="l00040"></a>00040     <span class="comment">// protected and unimplemented operator==(), to prevent accidental usage</span>
-<a name="l00041"></a>00041     <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#ad990b4c6e128095f1a1e3c7ba56cec73">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp;);
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043   <span class="keyword">public</span>:
-<a name="l00044"></a>00044     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a74532a1341809108c31d0838eae713ed">RCFrame</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name=NULL, <span class="keywordtype">int</span> kind=0);
-<a name="l00045"></a>00045     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a74532a1341809108c31d0838eae713ed">RCFrame</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; other);
-<a name="l00046"></a>00046     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#af5a52c00a12dafb5ed423af78573e57d">~RCFrame</a>();
-<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#ad6a2eafe9d449a821a8f2bdfc0bc12d3">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; other);
-<a name="l00048"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a46f3718b6c8e99bdce957eaa5f3b024c">00048</a>     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a> *<a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a46f3718b6c8e99bdce957eaa5f3b024c">dup</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a74532a1341809108c31d0838eae713ed">RCFrame</a>(*<span class="keyword">this</span>);}
-<a name="l00049"></a>00049     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a402750475afd12efc934c8cdfb860db4">parsimPack</a>(cCommBuffer *b);
-<a name="l00050"></a>00050     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a7416e213b40a103a9892593674a235a5">parsimUnpack</a>(cCommBuffer *b);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052     <span class="comment">// field getter/setter methods</span>
-<a name="l00053"></a>00053 };
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="namespace_t_t_ethernet_model.html#a9eb9b41eb3bccb5e80eb1fa8ad164601">00055</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#a6281240ab3b6b517511d0d14bccfd745">doPacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a402750475afd12efc934c8cdfb860db4">parsimPack</a>(b);}
-<a name="l00056"></a><a class="code" href="namespace_t_t_ethernet_model.html#ab4abfcea993ff748ccf29c60c30ebf4c">00056</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#afb69a66fe1825ae4a81ce48bcf2c2930">doUnpacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a7416e213b40a103a9892593674a235a5">parsimUnpack</a>(b);}
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058 }; <span class="comment">// end namespace TTEthernetModel</span>
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="preprocessor">#endif // _RCFRAME_M_H_</span>
+<a name="l00033"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html">00033</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a> : <span class="keyword">public</span> ::TTEthernetModel::<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a>
+<a name="l00034"></a>00034 {
+<a name="l00035"></a>00035   <span class="keyword">protected</span>:
+<a name="l00036"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a6ff3736774da30ed8f64585fcae9bc67">00036</a>     opp_string <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a6ff3736774da30ed8f64585fcae9bc67">displayString_var</a>;
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038   <span class="keyword">private</span>:
+<a name="l00039"></a>00039     <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#ab91613921b2d34d4f7e206f9614650c1">copy</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; other);
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041   <span class="keyword">protected</span>:
+<a name="l00042"></a>00042     <span class="comment">// protected and unimplemented operator==(), to prevent accidental usage</span>
+<a name="l00043"></a>00043     <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#ad990b4c6e128095f1a1e3c7ba56cec73">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp;);
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045   <span class="keyword">public</span>:
+<a name="l00046"></a>00046     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a74532a1341809108c31d0838eae713ed">RCFrame</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name=NULL, <span class="keywordtype">int</span> kind=0);
+<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a74532a1341809108c31d0838eae713ed">RCFrame</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; other);
+<a name="l00048"></a>00048     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#af5a52c00a12dafb5ed423af78573e57d">~RCFrame</a>();
+<a name="l00049"></a>00049     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#ad6a2eafe9d449a821a8f2bdfc0bc12d3">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; other);
+<a name="l00050"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a46f3718b6c8e99bdce957eaa5f3b024c">00050</a>     <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a> *<a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a46f3718b6c8e99bdce957eaa5f3b024c">dup</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a74532a1341809108c31d0838eae713ed">RCFrame</a>(*<span class="keyword">this</span>);}
+<a name="l00051"></a>00051     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a402750475afd12efc934c8cdfb860db4">parsimPack</a>(cCommBuffer *b);
+<a name="l00052"></a>00052     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a7416e213b40a103a9892593674a235a5">parsimUnpack</a>(cCommBuffer *b);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     <span class="comment">// field getter/setter methods</span>
+<a name="l00055"></a>00055     <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a99c267c9f51ca952728b0ddc5ab35784">getDisplayString</a>() <span class="keyword">const</span>;
+<a name="l00056"></a>00056     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a9b87c58902e8189c528129125b2eb8c5">setDisplayString</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * displayString);
+<a name="l00057"></a>00057 };
+<a name="l00058"></a>00058 
+<a name="l00059"></a><a class="code" href="namespace_t_t_ethernet_model.html#a9eb9b41eb3bccb5e80eb1fa8ad164601">00059</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#a6281240ab3b6b517511d0d14bccfd745">doPacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a402750475afd12efc934c8cdfb860db4">parsimPack</a>(b);}
+<a name="l00060"></a><a class="code" href="namespace_t_t_ethernet_model.html#ab4abfcea993ff748ccf29c60c30ebf4c">00060</a> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespace_t_t_ethernet_model.html#afb69a66fe1825ae4a81ce48bcf2c2930">doUnpacking</a>(cCommBuffer *b, <a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>&amp; obj) {obj.<a class="code" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a7416e213b40a103a9892593674a235a5">parsimUnpack</a>(b);}
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 }; <span class="comment">// end namespace TTEthernetModel</span>
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 <span class="preprocessor">#endif // _RCFRAME_M_H_</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:49 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

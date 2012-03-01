@@ -70,6 +70,8 @@ Inheritance diagram for TTEthernetModel::PCFrame:</div>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a1dd44023b4d4a7d94ecfab546e0a9248">setType</a> (unsigned char type)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#ad6e90510eae6afeb69ae3204d58a9d01">getTransparent_clock</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#af07877094d4e6edf43c79c1f6bd6a155">setTransparent_clock</a> (unsigned long transparent_clock)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual const char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#ad7af2e3570a5d8604160547b88f3810d">getDisplayString</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a67b759c126e9853282bac95ed4ab657d">setDisplayString</a> (const char *displayString)</td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a55eaa4bc782f93eeee3b47a4c4041999">operator==</a> (const <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> &amp;)</td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
@@ -79,6 +81,7 @@ Inheritance diagram for TTEthernetModel::PCFrame:</div>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#ab0b5f8e2acfb2acb49fb94fbd5123da2">sync_domain_var</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a6c33fd5851689dbedbf15870cef31bb2">type_var</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a305767ad7f8ecbbd8a68bda56a6b12bf">transparent_clock_var</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">opp_string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a0916ca7f28ceaa36ad8dc33d64fffd14">displayString_var</a></td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a8845b058d2111858080f922f390ca90d">copy</a> (const <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> &amp;other)</td></tr>
 </table>
@@ -86,10 +89,10 @@ Inheritance diagram for TTEthernetModel::PCFrame:</div>
 <p>Class generated from <code>linklayer/ethernet/PCFrame.msg</code> by opp_msgc. </p>
 <pre>
  packet <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html" title="Class generated from linklayer/ethernet/PCFrame.msg by opp_msgc.">PCFrame</a> extends <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>
- {</pre><pre> 	unsigned int integration_cycle;</pre><pre> 	unsigned int membership_new;</pre><pre> 	unsigned char sync_priority;</pre><pre> 	unsigned char sync_domain;</pre><pre> 	unsigned char type;</pre><pre> 	unsigned long transparent_clock;
+ {</pre><pre> 	unsigned int integration_cycle;</pre><pre> 	unsigned int membership_new;</pre><pre> 	unsigned char sync_priority;</pre><pre> 	unsigned char sync_domain;</pre><pre> 	unsigned char type;</pre><pre> 	unsigned long transparent_clock;</pre><pre> 	string displayString="b=15,15,rect,white,orange,5";
  }
  </pre> 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00059">59</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00061">61</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4fc14437f6fd6a9846c5a16f63f4b1f2"></a><!-- doxytag: member="TTEthernetModel::PCFrame::PCFrame" ref="a4fc14437f6fd6a9846c5a16f63f4b1f2" args="(const char *name=NULL, int kind=0)" -->
 <div class="memitem">
@@ -189,10 +192,29 @@ Inheritance diagram for TTEthernetModel::PCFrame:</div>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a46f3718b6c8e99bdce957eaa5f3b024c">TTEthernetModel::RCFrame</a>.</p>
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00039">39</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00040">40</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00062"></a>00062 : public ::TTEthernetModel::RCFrame
+<p><div class="fragment"><pre class="fragment"><a name="l00064"></a>00064 : public ::TTEthernetModel::RCFrame
 </pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="ad7af2e3570a5d8604160547b88f3810d"></a><!-- doxytag: member="TTEthernetModel::PCFrame::getDisplayString" ref="ad7af2e3570a5d8604160547b88f3810d" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* TTEthernetModel::PCFrame::getDisplayString </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a99c267c9f51ca952728b0ddc5ab35784">TTEthernetModel::RCFrame</a>.</p>
 
 </div>
 </div>
@@ -376,6 +398,26 @@ Inheritance diagram for TTEthernetModel::PCFrame:</div>
 
 </div>
 </div>
+<a class="anchor" id="a67b759c126e9853282bac95ed4ab657d"></a><!-- doxytag: member="TTEthernetModel::PCFrame::setDisplayString" ref="a67b759c126e9853282bac95ed4ab657d" args="(const char *displayString)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void TTEthernetModel::PCFrame::setDisplayString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>displayString</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a9b87c58902e8189c528129125b2eb8c5">TTEthernetModel::RCFrame</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="af87f566ce0d331bb8363061fe0694ce4"></a><!-- doxytag: member="TTEthernetModel::PCFrame::setIntegration_cycle" ref="af87f566ce0d331bb8363061fe0694ce4" args="(unsigned int integration_cycle)" -->
 <div class="memitem">
 <div class="memproto">
@@ -487,6 +529,23 @@ Inheritance diagram for TTEthernetModel::PCFrame:</div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a0916ca7f28ceaa36ad8dc33d64fffd14"></a><!-- doxytag: member="TTEthernetModel::PCFrame::displayString_var" ref="a0916ca7f28ceaa36ad8dc33d64fffd14" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">opp_string <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a0916ca7f28ceaa36ad8dc33d64fffd14">TTEthernetModel::PCFrame::displayString_var</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a6ff3736774da30ed8f64585fcae9bc67">TTEthernetModel::RCFrame</a>.</p>
+
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00026">26</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a553388f564f109b67282883c167929fb"></a><!-- doxytag: member="TTEthernetModel::PCFrame::integration_cycle_var" ref="a553388f564f109b67282883c167929fb" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -581,7 +640,7 @@ Inheritance diagram for TTEthernetModel::PCFrame:</div>
 <li><a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:47 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:50 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

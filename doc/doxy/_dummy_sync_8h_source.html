@@ -26,7 +26,7 @@
       <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-  <div class="navpath"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a>&nbsp;&raquo;&nbsp;<a class="el" href="dir_e91b5cc3279f6efa832a22015b9fa21e.html">synchronisation</a>
+  <div class="navpath"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a>&nbsp;&raquo;&nbsp;<a class="el" href="dir_e91b5cc3279f6efa832a22015b9fa21e.html">synchronisation</a>&nbsp;&raquo;&nbsp;<a class="el" href="dir_281c386ea8ca02cdd26bd30f4abb9fd9.html">base</a>
   </div>
 </div>
 <div class="contents">
@@ -55,15 +55,17 @@
 <a name="l00030"></a><a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html">00030</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html" title="Dummy sync module.">DummySync</a> : <span class="keyword">public</span> cSimpleModule
 <a name="l00031"></a>00031 {
 <a name="l00032"></a>00032     <span class="keyword">protected</span>:
-<a name="l00038"></a>00038         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#adfc7c1d8db8678c4d661abafbcc81ec2" title="Initializes the dummy synchronization module.">initialize</a>();
-<a name="l00039"></a>00039 
-<a name="l00045"></a>00045         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a56963aa89143a2a483e74b8e48426804" title="dummy synchronization function.">handleMessage</a>(cMessage *msg);
-<a name="l00046"></a>00046 };
-<a name="l00047"></a>00047 }
+<a name="l00040"></a>00040         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a9d6c204caa5950db42fa36aba6e40b87" title="Initializes the dummy synchronization module.">initialize</a>(<span class="keywordtype">int</span> stage);
+<a name="l00041"></a>00041 
+<a name="l00047"></a>00047         <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#aee3b5f87f3f7ff9eb608bd54d3b4ced5" title="Returns the numer of initializaiton stages this module needs.">numInitStages</a>() <span class="keyword">const</span>;
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="preprocessor">#endif</span>
+<a name="l00054"></a>00054         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_dummy_sync.html#a56963aa89143a2a483e74b8e48426804" title="dummy synchronization function.">handleMessage</a>(cMessage *msg);
+<a name="l00055"></a>00055 };
+<a name="l00056"></a>00056 }
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Feb 29 15:06:46 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:49 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
