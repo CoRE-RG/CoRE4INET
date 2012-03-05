@@ -63,7 +63,7 @@ void TTBuffer::handleMessage(cMessage *msg)
 
     Buffer::handleMessage(msg);
 
-    if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT)
+    if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT && destinationGates.size() > 0)
     {
         cMessage *outgoingMessage = getFrame();
         //Send Message

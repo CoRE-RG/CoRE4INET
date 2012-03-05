@@ -30,7 +30,7 @@ void BGBuffer::handleMessage(cMessage *msg)
 {
     Buffer::handleMessage(msg);
 
-    if (msg->arrivedOn("in"))
+    if (msg->arrivedOn("in") && destinationGates.size() > 0)
     {
         cMessage *outgoingMessage = dequeue();
 
