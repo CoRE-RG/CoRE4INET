@@ -33,17 +33,28 @@ TTBuffer::~TTBuffer()
     delete actionTimeEvent;
 }
 
-void TTBuffer::initialize()
+int TTBuffer::numInitStages() const
 {
-    Buffer::initialize();
-    ev << "Initialize TTBuffer" << endl;
+    return 2;
+}
 
-    //Register Event
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-    actionTimeEvent->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(actionTimeEvent);
+void TTBuffer::initialize(int stage)
+{
+    if(stage==0)
+    {
+        Buffer::initialize();
+    }
+    else if(stage==1)
+    {
+        ev << "Initialize TTBuffer" << endl;
 
-    setIsEmpty(true);
+        //Register Event
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        actionTimeEvent->setDestinationGate(gate("schedulerIn"));
+        tteScheduler->registerEvent(actionTimeEvent);
+
+        setIsEmpty(true);
+    }
 }
 
 void TTBuffer::handleMessage(cMessage *msg)

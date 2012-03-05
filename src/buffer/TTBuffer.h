@@ -39,14 +39,24 @@ class TTBuffer : public virtual Buffer
     private:
         /**
          * @brief Event indicating the actionTime
+         *
          */
         SchedulerActionTimeEvent* actionTimeEvent;
 
     protected:
         /**
          * @brief Initializes the SchedulerActionTimeEvent
+         *
+         * @param stage the stages. Module registers events when stage==1
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
+
+        /**
+         * @brief Returns the numer of initializaiton stages this module needs.
+         *
+         * @return always returns 2
+         */
+        virtual int numInitStages() const;
 
         /**
          * @brief handles the incoming and outgoing messages of the buffer.
