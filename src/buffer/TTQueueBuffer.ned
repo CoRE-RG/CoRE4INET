@@ -22,6 +22,6 @@ simple TTQueueBuffer extends TTBuffer
         @statistic[ctDropped](title="CT dropped"; record=sum);
         //Size of the buffer negative means infinite
         int size = default(-1);
-    	//Dropping policy, Should the new frame instead of the oldest frame be dropped
+    	//Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)
         bool drop_new = default(false);
 }
