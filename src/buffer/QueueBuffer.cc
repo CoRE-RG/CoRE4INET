@@ -49,8 +49,16 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
             getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
             getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: buffer overflow");
         }
-        delete newFrame;
-        return;
+        if(par("drop_new").boolValue())
+        {
+            delete newFrame;
+            return;
+        }
+        else
+        {
+            EtherFrame *oldFrame = (EtherFrame *)frames.pop();
+            delete oldFrame;
+        }
     }
     frames.insert(newFrame);
     setIsEmpty(frames.length() == 0);

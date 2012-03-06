@@ -20,4 +20,6 @@ simple BGQueueBuffer extends BGBuffer
         @statistic[ctDropped](title="CT dropped"; record=sum);
         //Size of the buffer negative means infinite
         int size = default(-1);
+        //Dropping policy, Should the new frame instead of the oldest frame be dropped
+        bool drop_new = default(false);
 }
