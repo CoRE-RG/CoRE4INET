@@ -2779,8 +2779,15 @@
       <type>virtual void</type>
       <name>initialize</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer.html</anchorfile>
-      <anchor>aef03862ddc2b35ae7d4fe02a1671dbb8</anchor>
-      <arglist>()</arglist>
+      <anchor>a019fc44e7ff5ac11f77dbd05fbab3123</anchor>
+      <arglist>(int stage)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual int</type>
+      <name>numInitStages</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_buffer.html</anchorfile>
+      <anchor>ab218b6f191c2d664696574d519144407</anchor>
+      <arglist>() const </arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>

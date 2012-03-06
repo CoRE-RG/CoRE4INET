@@ -137,6 +137,16 @@ send window.</p>
 <p>Size of the buffer negative means infinite</p>
    </td>
 </tr>
+<tr class="local">
+   <td>drop_new</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+   </td>
+</tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
 <table class="propertiestable">
@@ -239,7 +249,8 @@ send window.</p>
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">ctDropped</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;CT dropped&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sum</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Size of the buffer negative means infinite
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">size</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(-</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
-
+        </span><span style="color: #808080; font-style: italic; ">//Dropping policy, Should the new frame instead of the oldest frame be dropped
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">drop_new</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

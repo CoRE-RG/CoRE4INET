@@ -98,7 +98,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <p><div class="fragment"><pre class="fragment"><a name="l00030"></a>00030 {
 <a name="l00031"></a>00031     <a class="code" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a91fc44bd17d4f3bf9c4f6c8f6e92b369" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(msg);
 <a name="l00032"></a>00032 
-<a name="l00033"></a>00033     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
+<a name="l00033"></a>00033     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>) &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size() &gt; 0)
 <a name="l00034"></a>00034     {
 <a name="l00035"></a>00035         cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
 <a name="l00036"></a>00036 
@@ -155,7 +155,7 @@ Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <li><a class="el" href="_b_g_buffer_8cc_source.html">BGBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:49 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Mar 6 13:58:52 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

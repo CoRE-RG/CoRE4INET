@@ -342,7 +342,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00092">92</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00049">TTEthernetModel::TTBuffer::handleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00060">TTEthernetModel::TTBuffer::handleMessage()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00092"></a>00092                             {
 <a name="l00093"></a>00093     <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();
@@ -559,9 +559,11 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Initializes the module. </p>
 
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a211a308b66c69421bc399cec124fc9b2">TTEthernetModel::BGBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a5d3328cee349d4ceb3127acee1f41d44">TTEthernetModel::RCBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#aef03862ddc2b35ae7d4fe02a1671dbb8">TTEthernetModel::TTBuffer</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a211a308b66c69421bc399cec124fc9b2">TTEthernetModel::BGBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a5d3328cee349d4ceb3127acee1f41d44">TTEthernetModel::RCBuffer</a>.</p>
 
 <p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00035">35</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+
+<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00041">TTEthernetModel::TTBuffer::initialize()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00036"></a>00036 {
 <a name="l00037"></a>00037     ev &lt;&lt; <span class="stringliteral">&quot;Initialize Buffer&quot;</span> &lt;&lt; endl;
@@ -661,7 +663,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00047">47</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00049">TTEthernetModel::TTBuffer::handleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00060">TTEthernetModel::TTBuffer::handleMessage()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00048"></a>00048 {
 <a name="l00049"></a>00049     emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a>, 1L);
@@ -691,7 +693,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00052">52</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00059">TTEthernetModel::QueueBuffer::dequeue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00039">TTEthernetModel::QueueBuffer::enqueue()</a>, and <a class="el" href="_t_t_buffer_8cc_source.html#l00036">TTEthernetModel::TTBuffer::initialize()</a>.</p>
+<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00067">TTEthernetModel::QueueBuffer::dequeue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00039">TTEthernetModel::QueueBuffer::enqueue()</a>, and <a class="el" href="_t_t_buffer_8cc_source.html#l00041">TTEthernetModel::TTBuffer::initialize()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00053"></a>00053 {
 <a name="l00054"></a>00054     <span class="keywordflow">if</span>(ev.isGUI()){
@@ -784,7 +786,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00058">58</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00049">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_buffer_8cc_source.html#l00131">handleParameterChange()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00060">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_buffer_8cc_source.html#l00131">handleParameterChange()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
 
 </div>
 </div>
@@ -841,7 +843,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00066">66</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00080">addTransmitCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00085">getTransmitCallback()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00049">TTEthernetModel::TTBuffer::handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00080">addTransmitCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00085">getTransmitCallback()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00060">TTEthernetModel::TTBuffer::handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
 
 </div>
 </div>
@@ -869,7 +871,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <li><a class="el" href="_buffer_8cc_source.html">Buffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Mar 1 15:34:50 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Mar 6 13:58:52 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

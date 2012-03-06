@@ -184,24 +184,25 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
+   <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.duplexMode</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>true</td>
+   <td>
+<p>must be set to "true", as EtherMACFullDuplex does not support half-duplex operation
+(parameter is present to reduce the risk of accidental misconfiguration)</p>
+   </td>
+</tr>
+<tr>
    <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.txQueueLimit</td>
    <td>
       <i>int</i>
    </td>
    <td>1000</td>
    <td>
-<p>maximum number of frames queued up for transmission;
-additional frames are dropped. Only used if queueModule==""</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.frameBursting</td>
-   <td>
-      <i>bool</i>
-   </td>
-   <td>true</td>
-   <td>
-<p>enable/disable frame bursting mode in Gigabit Ethernet</p>
+<p>maximum number of frames queued up for transmission in the internal queue
+(only used if queueModule==""); additional frames cause a runtime error</p>
    </td>
 </tr>
 <tr>
@@ -209,7 +210,7 @@ additional frames are dropped. Only used if queueModule==""</p>
    <td>
       <i>int</i>
    </td>
-   <td>1500</td>
+   <td>1500B</td>
    <td>   </td>
 </tr>
 </table>
