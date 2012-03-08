@@ -369,8 +369,9 @@ proc checkVersion {} {
 proc setInetDir {} {
 	global dir
 	
-	set dir $::env(INETPATH)
-	if {$dir == ""} {
+	if { [ info exists ::env(INETPATH) ] } {
+		set dir $::env(INETPATH)
+	} else {
 		tk_messageBox -title {Warning} -type ok -icon warning \
         -message {To run the example, the INET-Framework must be installed \
         and the path to the Framework must be set in the INETPATH environment variable!\
