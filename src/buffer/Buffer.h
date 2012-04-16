@@ -51,6 +51,14 @@ class Buffer : public cSimpleModule
          * @brief Destructor
          */
         ~Buffer();
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
+
     protected:
         /**
          * Stores the Gates to that the messages are delivered
@@ -110,13 +118,6 @@ class Buffer : public cSimpleModule
          * @param msg The incoming message
          */
         void handleMessage(cMessage *msg);
-
-        /**
-         * @brief Indicates a parameter has changed.
-         *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
-         */
-        virtual void handleParameterChange(const char* parname);
 
         /**
          * @brief Is called to store an EtherFrame in the buffer.

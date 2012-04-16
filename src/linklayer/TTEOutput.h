@@ -28,6 +28,13 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Destructor
          */
         ~TTEOutput();
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
     private:
         /**
          * @brief Outgoing Channel used to calculate transmission duration.
@@ -121,13 +128,6 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
-
-        /**
-         * @brief Indicates a parameter has changed.
-         *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
-         */
-        virtual void handleParameterChange(const char* parname);
 
         /**
          * @brief this method is invoked when the underlying mac is idle.

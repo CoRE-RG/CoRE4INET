@@ -92,6 +92,7 @@ class TTEInput : public cSimpleModule
          * @param msg incoming message
          */
         virtual void handleMessage(cMessage *msg);
+    public:
         /**
          * @brief Indicates a parameter has changed.
          *

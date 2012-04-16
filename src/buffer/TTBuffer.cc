@@ -33,13 +33,9 @@ TTBuffer::~TTBuffer()
     delete actionTimeEvent;
 }
 
-int TTBuffer::numInitStages()
+int TTBuffer::numInitStages() const
 {
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-    if(Buffer::numInitStages()>(tteScheduler->numInitStages()+1))
-        return Buffer::numInitStages();
-    else
-        return tteScheduler->numInitStages()+1;
+    return 2;
 }
 
 void TTBuffer::initialize(int stage)
@@ -51,6 +47,10 @@ void TTBuffer::initialize(int stage)
 
         //Register Event
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        //Dirty FIX
+        //TODO find out what is wrong here!
+        if(actionTimeEvent->isScheduled())
+            cancelEvent(actionTimeEvent);
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
         tteScheduler->registerEvent(actionTimeEvent);
 
