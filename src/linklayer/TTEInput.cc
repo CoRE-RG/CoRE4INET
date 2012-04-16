@@ -105,6 +105,9 @@ void TTEInput::handleParameterChange(const char* parname){
                     incomings[buffer->par("ct_id").longValue()].push_back(incoming);
                 }
             }
+            else{
+                ev<<"Something seriously went wrong!"<<endl;
+            }
         }
         else{
             if(ev.isGUI()){

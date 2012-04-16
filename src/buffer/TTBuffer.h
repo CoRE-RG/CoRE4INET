@@ -54,9 +54,10 @@ class TTBuffer : public virtual Buffer
         /**
          * @brief Returns the numer of initializaiton stages this module needs.
          *
-         * @return always returns 2
+         * @return returns TTEScheduler::numInitStages()+1 or Buffer::numInitStages()
+         * (depending on which is higher)
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages();
 
         /**
          * @brief handles the incoming and outgoing messages of the buffer.

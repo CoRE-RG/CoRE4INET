@@ -34,12 +34,23 @@ RCBuffer::~RCBuffer()
     delete timerMessage;
 }
 
-void RCBuffer::initialize()
+int RCBuffer::numInitStages() const
 {
-    timerMessage->setDestinationGate(gate("schedulerIn"));
+    if(Buffer::numInitStages()>1)
+        return Buffer::numInitStages();
+    else
+        return 1;
+}
 
-    //Update displaystring
-    setIsEmpty(true);
+void RCBuffer::initialize(int stage)
+{
+    Buffer::initialize(stage);
+    if(stage==0){
+        timerMessage->setDestinationGate(gate("schedulerIn"));
+
+        //Update displaystring
+        setIsEmpty(true);
+    }
 }
 
 void RCBuffer::handleMessage(cMessage *msg)

@@ -25,16 +25,23 @@ Define_Module( TTEScheduler);
 simsignal_t TTEScheduler::currentDrift = SIMSIGNAL_NULL;
 simsignal_t TTEScheduler::newCycle = SIMSIGNAL_NULL;
 
-void TTEScheduler::initialize()
+int TTEScheduler::numInitStages() const
 {
-    currentDrift = registerSignal("currentDrift");
-    newCycle = registerSignal("newCycle");
-    cycles = 0;
+    return 1;
+}
 
-    //Start Timer
-    scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
+void TTEScheduler::initialize(int stage)
+{
+    if(stage==0){
+        currentDrift = registerSignal("currentDrift");
+        newCycle = registerSignal("newCycle");
+        cycles = 0;
 
-    lastCycleStart = simTime();
+        //Start Timer
+        scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
+
+        lastCycleStart = simTime();
+    }
 }
 
 bool TTEScheduler::registerEvent(SchedulerEvent *event)

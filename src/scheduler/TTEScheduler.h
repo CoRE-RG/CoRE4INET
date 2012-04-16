@@ -79,11 +79,21 @@ class TTEScheduler : public cSimpleModule
          * @brief Number of cycles since the simulation started
          */
         unsigned long cycles;
+
+    public:
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return 1
+         */
+        virtual int numInitStages() const;
     protected:
         /**
          * @brief Initialization of the module.
+         *
+         * @param stage the stages. Module initializes when stage==1
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
 
         /**
          * @brief Handles all scheduler messages

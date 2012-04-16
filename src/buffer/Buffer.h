@@ -87,8 +87,17 @@ class Buffer : public cSimpleModule
     protected:
         /**
          * Initializes the module
+         *
+         * @param stage the stages. Module initializes when stage==0
          */
-        void initialize();
+        virtual void initialize(int stage);
+
+        /**
+         * @brief Returns the numer of initializaiton stages this module needs.
+         *
+         * @return always returns 1
+         */
+        virtual int numInitStages() const;
 
         /**
          * @brief Is called when a new Frame is received in the buffer.

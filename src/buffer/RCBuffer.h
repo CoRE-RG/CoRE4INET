@@ -79,8 +79,16 @@ class RCBuffer : public virtual Buffer
     protected:
         /**
          * @brief Initializes the timerMessage
+         *
+         * @param stage the stages. Module initializes when stage==0
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
+        /**
+         * @brief Returns the numer of initializaiton stages this module needs.
+         *
+         * @return always returns 1
+         */
+        virtual int numInitStages() const;
 
         /**
          * @brief handles the incoming and outgoing messages of the buffer.

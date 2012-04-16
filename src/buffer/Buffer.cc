@@ -32,10 +32,17 @@ Buffer::~Buffer(){
     transmitCallbacks.clear();
 }
 
-void Buffer::initialize()
+int Buffer::numInitStages() const
 {
-    ev << "Initialize Buffer" << endl;
-    initializeStatistics();
+    return 1;
+}
+
+void Buffer::initialize(int stage)
+{
+    if(stage==0){
+        ev << "Initialize Buffer" << endl;
+        initializeStatistics();
+    }
 }
 
 void Buffer::initializeStatistics()
