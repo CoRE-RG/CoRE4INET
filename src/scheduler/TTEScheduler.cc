@@ -84,6 +84,14 @@ bool TTEScheduler::registerEvent(SchedulerEvent *event)
     return true;
 }
 
+void TTEScheduler::unregisterEvent(SchedulerEvent *event){
+    if(event->isScheduled()){
+        cancelEvent(event);
+        registredEvents.remove(event);
+    }
+
+}
+
 void TTEScheduler::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage() && (msg->getKind() == ACTION_TIME_EVENT || msg->getKind() == TIMER_EVENT))

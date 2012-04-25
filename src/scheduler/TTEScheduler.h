@@ -154,6 +154,18 @@ class TTEScheduler : public cSimpleModule
         virtual bool registerEvent(SchedulerEvent *event);
 
         /**
+         * Unregister an event that was previously registered in the scheduler.
+         * You must delete the event afterwards manually!
+         *
+         * @param event Pointer to the Event to be unregistered.
+         * The scheduler will not send the event anymore
+         *
+         * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
+         * SchedulerTimerEvent
+         */
+        virtual void unregisterEvent(SchedulerEvent *event);
+
+        /**
          * @brief Helper function to correct Events after tick length changes
          */
         virtual void correctEvents();
