@@ -16,7 +16,8 @@ simple TTEInput like IOutputQueue
         @display("i=block/dispatch");
         //Statistic of the amount of packets that were dropped due to no configured buffer/ctc
         @statistic[ctDropped](title="Unconfigured CT dropped"; record=sum);
-
+        // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
+		bool promiscuous = default(false);  
         //Critical traffic marker of the buffer
         int ct_marker = default(0);
         //Critical traffic mask of the buffer

@@ -32,18 +32,18 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="587,5,688,32">
-<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="5,80,117,107">
-<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="141,80,243,107">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="267,80,363,107">
-<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="387,80,459,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="483,80,576,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="600,80,675,107">
-<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="699,80,813,107">
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="580,5,681,32">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,80,101,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="125,80,227,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="251,80,325,107">
+<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="349,80,464,107">
+<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="488,80,560,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="584,80,677,107">
+<area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="701,80,813,107">
 <area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="837,80,928,107">
-<area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="952,80,1064,107">
-<area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="1088,80,1237,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="1261,80,1357,107">
+<area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="952,80,1101,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="1125,80,1221,107">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="1245,80,1357,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -170,6 +170,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <th class="defaultvalue">Default value</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
+   </td>
+</tr>
 <tr>
    <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_marker</td>
    <td>
@@ -419,7 +429,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -489,7 +499,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 </table>

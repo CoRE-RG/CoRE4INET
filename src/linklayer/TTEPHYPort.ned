@@ -14,6 +14,8 @@ module TTEPHYPort like IPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
+        // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
+        bool promiscuous = default(false);
     gates:
         //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
@@ -33,13 +35,14 @@ module TTEPHYPort like IPort
         }
         //Module for the organisation of inbound traffic
         tteInput: TTEInput {
-
-            @display("p=142,45");
+			parameters:
+            	@display("p=142,45");
+            	promiscuous = promiscuous;
         }
         //MAC interface
         mac: EtherMACFullDuplex {
             parameters:
-                promiscuous = true; //MAC must be set promiscuous to allow for CT receiption
+                promiscuous = true; //MAC must be set promiscuous to allow for CT receiption with all CT-Markers
                 queueModule = "tteOutput";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
                 @display("p=87,139");
         }

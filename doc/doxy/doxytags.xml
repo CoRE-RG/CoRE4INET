@@ -2421,6 +2421,13 @@
       <anchor>a59b8743e4a5f731bdd0c4185c9ef263b</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleParameterChange</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
+      <anchor>a0ac6a8e36c3da9a0a54f01d1060f5e44</anchor>
+      <arglist>(const char *parname)</arglist>
+    </member>
     <member kind="function">
       <type>EtherFrame *</type>
       <name>getFrame</name>
@@ -2463,12 +2470,19 @@
       <anchor>ab8f416aca0c0f61d460896f85b39e252</anchor>
       <arglist>(TTEApplicationBase *application)</arglist>
     </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
       <name>initialize</name>
       <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
-      <anchor>a976b864b117683fbc02a043090e54db2</anchor>
-      <arglist>()</arglist>
+      <anchor>ac606d7037af7ce8e80ee115e15702ac6</anchor>
+      <arglist>(int stage)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual int</type>
+      <name>numInitStages</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
+      <anchor>a1d435625f8dd05ea15fde3eb29922ade</anchor>
+      <arglist>() const </arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -2476,13 +2490,6 @@
       <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
       <anchor>a8800ad2ee324013175cd231eb69cb0f8</anchor>
       <arglist>(cMessage *msg)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>handleParameterChange</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_buffer.html</anchorfile>
-      <anchor>a0ac6a8e36c3da9a0a54f01d1060f5e44</anchor>
-      <arglist>(const char *parname)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
@@ -2706,8 +2713,15 @@
       <type>virtual void</type>
       <name>initialize</name>
       <anchorfile>class_t_t_ethernet_model_1_1_r_c_buffer.html</anchorfile>
-      <anchor>a5d3328cee349d4ceb3127acee1f41d44</anchor>
-      <arglist>()</arglist>
+      <anchor>a1f08d040d089ae71cd04ae090dcf168e</anchor>
+      <arglist>(int stage)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual int</type>
+      <name>numInitStages</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_r_c_buffer.html</anchorfile>
+      <anchor>ae45b6326746540c298c4984ec882a2df</anchor>
+      <arglist>() const </arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
@@ -3550,6 +3564,13 @@
       <anchor>ae4a93376feb0c86d94bf03a4d1a71e5f</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleParameterChange</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_input.html</anchorfile>
+      <anchor>a3c9f4c8b21c9f67fe94f1f47d4f116aa</anchor>
+      <arglist>(const char *parname)</arglist>
+    </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>initialize</name>
@@ -3563,13 +3584,6 @@
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_input.html</anchorfile>
       <anchor>a787189dd1096648e01c28fb2ae51d42f</anchor>
       <arglist>(cMessage *msg)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>handleParameterChange</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_input.html</anchorfile>
-      <anchor>a3c9f4c8b21c9f67fe94f1f47d4f116aa</anchor>
-      <arglist>(const char *parname)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>bool</type>
@@ -3620,6 +3634,13 @@
       <anchor>abb510124a4bc0754ec37fcd3f8a73ee6</anchor>
       <arglist></arglist>
     </member>
+    <member kind="variable" protection="private">
+      <type>bool</type>
+      <name>promiscuous</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_input.html</anchorfile>
+      <anchor>aef2add9ea7abff75f9320e7e5bc5d321</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>TTEthernetModel::TTEOutput</name>
@@ -3638,6 +3659,13 @@
       <anchor>a4157c9b499b19acccb411a309aa7c686</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleParameterChange</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
+      <anchor>aa4ef4ab8ac5d91d1fd5e76814cb10550</anchor>
+      <arglist>(const char *parname)</arglist>
+    </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
       <name>initialize</name>
@@ -3651,13 +3679,6 @@
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
       <anchor>a70262cb8679514a6b781aa655ac5090f</anchor>
       <arglist>(cMessage *msg)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>handleParameterChange</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_output.html</anchorfile>
-      <anchor>aa4ef4ab8ac5d91d1fd5e76814cb10550</anchor>
-      <arglist>(const char *parname)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>
@@ -4143,6 +4164,13 @@
     <name>TTEthernetModel::TTEScheduler</name>
     <filename>class_t_t_ethernet_model_1_1_t_t_e_scheduler.html</filename>
     <member kind="function" virtualness="virtual">
+      <type>virtual int</type>
+      <name>numInitStages</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_scheduler.html</anchorfile>
+      <anchor>ac88fa65ebf14efcf4c5463eda1f8a980</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
       <type>virtual unsigned int</type>
       <name>getTicks</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_scheduler.html</anchorfile>
@@ -4179,6 +4207,13 @@
     </member>
     <member kind="function" virtualness="virtual">
       <type>virtual void</type>
+      <name>unregisterEvent</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_scheduler.html</anchorfile>
+      <anchor>acfeedfdd1219d0ab349663750d1be18a</anchor>
+      <arglist>(SchedulerEvent *event)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
       <name>correctEvents</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_scheduler.html</anchorfile>
       <anchor>a1d44b1afcda7d7fda8dbe9974ca50d59</anchor>
@@ -4195,8 +4230,8 @@
       <type>virtual void</type>
       <name>initialize</name>
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_scheduler.html</anchorfile>
-      <anchor>a09132b4b872add769d397afdb065e91e</anchor>
-      <arglist>()</arglist>
+      <anchor>a44bf1e841a5d31175a74b35c047e6e46</anchor>
+      <arglist>(int stage)</arglist>
     </member>
     <member kind="function" protection="protected" virtualness="virtual">
       <type>virtual void</type>

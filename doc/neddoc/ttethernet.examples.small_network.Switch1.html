@@ -22,13 +22,13 @@ Forwards time-triggered messages with VL-ID 100</p>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.Switch1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="265,80,337,107">
+<img src="ttethernet.examples.small_network.Switch1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="264,80,336,107">
 <area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,155,101,181">
 <area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="125,155,232,181">
-<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="256,155,347,181">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="371,155,459,181">
-<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="483,155,592,181">
-<area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="249,5,353,32">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="256,155,344,181">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="368,155,477,181">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="501,155,592,181">
+<area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="248,5,352,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -172,6 +172,16 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
    <td>
 <p>max idle time for address table entries
 (when it expires, entry is removed from the table)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
    </td>
 </tr>
 <tr>
@@ -503,7 +513,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 </table>

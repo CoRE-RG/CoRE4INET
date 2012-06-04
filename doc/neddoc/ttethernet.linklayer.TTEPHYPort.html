@@ -18,13 +18,13 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.linklayer.TTEPHYPort-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="164,80,260,107">
+<img src="ttethernet.linklayer.TTEPHYPort-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="216,80,312,107">
 <area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,155,101,181">
-<area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="Simple Module TTEInput" alt="" coords="125,155,197,181">
-<area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="Simple Module TTEOutput" alt="" coords="221,155,304,181">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="Simple Module EtherMACFullDuplex" alt="" coords="328,155,469,181">
-<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="96,5,197,32">
-<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="221,5,336,32">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="Simple Module EtherMACFullDuplex" alt="" coords="125,155,267,181">
+<area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="Simple Module TTEOutput" alt="" coords="291,155,373,181">
+<area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="Simple Module TTEInput" alt="" coords="397,155,469,181">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="148,5,249,32">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="273,5,388,32">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -73,6 +73,25 @@ The switch is configured by the provided TTEthernet XML network configuration
 (network_configuration parameter) and uses the device_name parameter to find its config.
 The configuration is done by the BufferManager that deletes itself at runtime.</p>
 
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>promiscuous</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+<p>if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)</p>
    </td>
 </tr>
 </table>
@@ -141,6 +160,16 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
       <th class="defaultvalue">Default value</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
+   </td>
+</tr>
 <tr>
    <td><a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_marker</td>
    <td>
@@ -225,6 +254,8 @@ a generated MAC address in init stage 0.</p>
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=188,180;i=device/port&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input from the upper layer for best-effort Traffic
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">);
@@ -244,13 +275,14 @@ a generated MAC address in init stage 0.</p>
         }
         </span><span style="color: #808080; font-style: italic; ">//Module for the organisation of inbound traffic
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteInput</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTEInput</span><span style="color: #000000; "> {
-
-            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=142,45&quot;</span><span style="color: #000000; ">);
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=142,45&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; ">;
         }
         </span><span style="color: #808080; font-style: italic; ">//MAC interface
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">mac</span><span style="color: #000000; ">: </span><span style="color: #000000; ">EtherMACFullDuplex</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #008000; ">true</span><span style="color: #000000; ">; </span><span style="color: #808080; font-style: italic; ">//MAC must be set promiscuous to allow for CT receiption
+                </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #008000; ">true</span><span style="color: #000000; ">; </span><span style="color: #808080; font-style: italic; ">//MAC must be set promiscuous to allow for CT receiption with all CT-Markers
 </span><span style="color: #000000; ">                </span><span style="color: #000000; ">queueModule</span><span style="color: #000000; "> = </span><span style="color: #008000; ">&quot;tteOutput&quot;</span><span style="color: #000000; ">;</span><span style="color: #808080; font-style: italic; ">//The tteOutput-Module(TTEOutput) is used as external queue for the interface
 </span><span style="color: #000000; ">                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=87,139&quot;</span><span style="color: #000000; ">);
         }

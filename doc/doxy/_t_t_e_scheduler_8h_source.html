@@ -74,38 +74,43 @@
 <a name="l00076"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd">00076</a>         <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac6946cb8677ed2945222c2f47430d2bd" title="caches cycle_ticks parameter">cycleTicks</a>;
 <a name="l00077"></a>00077 
 <a name="l00081"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aacf3c5e468337716d36eb237bd6d93d2">00081</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#aacf3c5e468337716d36eb237bd6d93d2" title="Number of cycles since the simulation started.">cycles</a>;
-<a name="l00082"></a>00082     <span class="keyword">protected</span>:
-<a name="l00086"></a>00086         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09132b4b872add769d397afdb065e91e" title="Initialization of the module.">initialize</a>();
-<a name="l00087"></a>00087 
-<a name="l00096"></a>00096         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e" title="Handles all scheduler messages.">handleMessage</a>(cMessage *msg);
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083     <span class="keyword">public</span>:
+<a name="l00089"></a>00089         <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac88fa65ebf14efcf4c5463eda1f8a980" title="Returns the number of initialization stages this module needs.">numInitStages</a>() <span class="keyword">const</span>;
+<a name="l00090"></a>00090     <span class="keyword">protected</span>:
+<a name="l00096"></a>00096         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a44bf1e841a5d31175a74b35c047e6e46" title="Initialization of the module.">initialize</a>(<span class="keywordtype">int</span> stage);
 <a name="l00097"></a>00097 
-<a name="l00103"></a>00103         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ae3cee7dfc4267e06777e68d24676a199" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105     <span class="keyword">public</span>:
-<a name="l00111"></a>00111         <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>();
-<a name="l00112"></a>00112 
-<a name="l00118"></a>00118         <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f" title="Returns the absolute number of ticks.">getTotalTicks</a>();
-<a name="l00119"></a>00119 
-<a name="l00125"></a>00125         <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a18e1193fcf9c705921e24a0841e5536b" title="Returns the current number of cycles.">getCycles</a>();
-<a name="l00126"></a>00126 
-<a name="l00132"></a>00132         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<span class="keywordtype">int</span> ticks);
-<a name="l00133"></a>00133 
-<a name="l00144"></a>00144         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *event);
-<a name="l00145"></a>00145 
-<a name="l00149"></a>00149         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1d44b1afcda7d7fda8dbe9974ca50d59" title="Helper function to correct Events after tick length changes.">correctEvents</a>();
-<a name="l00150"></a>00150 
-<a name="l00156"></a>00156         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de" title="Helper function to change the drift.">changeDrift</a>();
-<a name="l00157"></a>00157     <span class="keyword">protected</span>:
-<a name="l00161"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9">00161</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual...">currentDrift</a>;
-<a name="l00162"></a>00162 
-<a name="l00166"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfe085a06ee865037999c12e5c3a2e58">00166</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfe085a06ee865037999c12e5c3a2e58" title="Signal that is emitted at the beginning of a new cycle.">newCycle</a>;
-<a name="l00167"></a>00167 };
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169 } <span class="comment">//namespace</span>
-<a name="l00170"></a>00170 
-<a name="l00171"></a>00171 <span class="preprocessor">#endif</span>
+<a name="l00106"></a>00106         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6c787721f21a9e9d4484cc121d41d65e" title="Handles all scheduler messages.">handleMessage</a>(cMessage *msg);
+<a name="l00107"></a>00107 
+<a name="l00113"></a>00113         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ae3cee7dfc4267e06777e68d24676a199" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115     <span class="keyword">public</span>:
+<a name="l00121"></a>00121         <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a64bb264151d0e84841207f16d76c9f5c" title="Returns the current number of ticks.">getTicks</a>();
+<a name="l00122"></a>00122 
+<a name="l00128"></a>00128         <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0a07f031be84a14f0caa1575c77c149f" title="Returns the absolute number of ticks.">getTotalTicks</a>();
+<a name="l00129"></a>00129 
+<a name="l00135"></a>00135         <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a18e1193fcf9c705921e24a0841e5536b" title="Returns the current number of cycles.">getCycles</a>();
+<a name="l00136"></a>00136 
+<a name="l00142"></a>00142         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a515b2734d13bf28a623a16efb50017c8" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<span class="keywordtype">int</span> ticks);
+<a name="l00143"></a>00143 
+<a name="l00154"></a>00154         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *event);
+<a name="l00155"></a>00155 
+<a name="l00166"></a>00166         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfeedfdd1219d0ab349663750d1be18a" title="Unregister an event that was previously registered in the scheduler.">unregisterEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate.">SchedulerEvent</a> *event);
+<a name="l00167"></a>00167 
+<a name="l00171"></a>00171         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1d44b1afcda7d7fda8dbe9974ca50d59" title="Helper function to correct Events after tick length changes.">correctEvents</a>();
+<a name="l00172"></a>00172 
+<a name="l00178"></a>00178         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de" title="Helper function to change the drift.">changeDrift</a>();
+<a name="l00179"></a>00179     <span class="keyword">protected</span>:
+<a name="l00183"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9">00183</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual...">currentDrift</a>;
+<a name="l00184"></a>00184 
+<a name="l00188"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfe085a06ee865037999c12e5c3a2e58">00188</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfe085a06ee865037999c12e5c3a2e58" title="Signal that is emitted at the beginning of a new cycle.">newCycle</a>;
+<a name="l00189"></a>00189 };
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191 } <span class="comment">//namespace</span>
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Mar 6 13:58:51 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 4 13:53:02 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

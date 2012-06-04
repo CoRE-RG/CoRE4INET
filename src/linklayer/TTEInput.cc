@@ -80,7 +80,8 @@ void TTEInput::handleMessage(cMessage *msg)
         //Sonst BE
         else
         {
-            send(msg, "out");
+            if(promiscuous || frame->getDest().isMulticast())
+                send(msg, "out");
         }
     }
 }
@@ -88,6 +89,7 @@ void TTEInput::handleMessage(cMessage *msg)
 void TTEInput::handleParameterChange(const char* parname){
     ctMask = (unsigned int)par("ct_mask").longValue();
     ctMarker = (unsigned int)par("ct_marker").longValue();
+    promiscuous = par("promiscuous").boolValue();
 
     incomings.clear();
 

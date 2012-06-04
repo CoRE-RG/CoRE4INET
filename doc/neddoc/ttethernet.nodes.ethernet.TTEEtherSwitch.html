@@ -24,12 +24,12 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="224,5,339,32">
+<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="244,5,359,32">
 <area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="5,80,107,107">
 <area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="131,80,203,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="227,80,336,107">
-<area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="360,80,509,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="533,80,629,107">
+<area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="227,80,376,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="400,80,496,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="520,80,629,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -147,6 +147,16 @@ Forwards time-triggered messages with VL-ID 100</p>
    <td>
 <p>max idle time for address table entries
 (when it expires, entry is removed from the table)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
    </td>
 </tr>
 <tr>

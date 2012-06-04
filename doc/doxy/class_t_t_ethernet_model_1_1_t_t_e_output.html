@@ -44,13 +44,13 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#ab968c58c879864bd9985b5998388a2ab"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a4157c9b499b19acccb411a309aa7c686">~TTEOutput</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor.  <a href="#a4157c9b499b19acccb411a309aa7c686"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa4ef4ab8ac5d91d1fd5e76814cb10550">handleParameterChange</a> (const char *parname)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates a parameter has changed.  <a href="#aa4ef4ab8ac5d91d1fd5e76814cb10550"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a986591ead93237643e88d4020f764df0">initialize</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialization of the module.  <a href="#a986591ead93237643e88d4020f764df0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a70262cb8679514a6b781aa655ac5090f">handleMessage</a> (cMessage *msg)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Forwards the messages from the different buffers and LLC according to the TTEthernet specification.  <a href="#a70262cb8679514a6b781aa655ac5090f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa4ef4ab8ac5d91d1fd5e76814cb10550">handleParameterChange</a> (const char *parname)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indicates a parameter has changed.  <a href="#aa4ef4ab8ac5d91d1fd5e76814cb10550"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359">requestPacket</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">this method is invoked when the underlying mac is idle.  <a href="#a94831b378a881dd1677657884c75d359"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e">getNumPendingRequests</a> ()</td></tr>
@@ -346,7 +346,7 @@
           <td class="paramtype">const char *&nbsp;</td>
           <td class="paramname"> <em>parname</em></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [protected, virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -723,7 +723,7 @@
 
 <p>Queue for best-effort messages. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00055">55</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00062">62</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00324">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00313">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00018">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00033">~TTEOutput()</a>.</p>
 
@@ -742,7 +742,7 @@
 
 <p>Signal that is emitted when the queue length of best-effort messages changes. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00077">77</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00084">84</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00043">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>.</p>
 
@@ -761,7 +761,7 @@
 
 <p>Number of frames that were requested from lower layer. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00039">39</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00046">46</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00324">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00308">getNumPendingRequests()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00018">TTEOutput()</a>.</p>
 
@@ -780,7 +780,7 @@
 
 <p>Outgoing Channel used to calculate transmission duration. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00035">35</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00042">42</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00043">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00259">isTransmissionAllowed()</a>.</p>
 
@@ -799,7 +799,7 @@
 
 <p>Dedicated queue for each priority of rate-constrained messages. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00050">50</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00057">57</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00324">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00313">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00018">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00033">~TTEOutput()</a>.</p>
 
@@ -819,7 +819,7 @@
 <p>Vector of TTBuffers. </p>
 <p>The vector is ordered by action time </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00062">62</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00069">69</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00172">handleParameterChange()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00259">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00141">registerTTBuffer()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>.</p>
 
@@ -838,7 +838,7 @@
 
 <p>Current position of the next <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> (action time) in the ttBuffers vector. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00067">67</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00074">74</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00259">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00018">TTEOutput()</a>.</p>
 
@@ -858,7 +858,7 @@
 <p>Queue for TT-Messages. </p>
 <p>Will be only filled when there is TT shuffling configured or there was an error in the configuration. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00045">45</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00052">52</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00324">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00313">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00018">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00033">~TTEOutput()</a>.</p>
 
@@ -877,7 +877,7 @@
 
 <p>Signal that is emitted when the queue length of time-triggered messages changes. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00072">72</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00079">79</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00052">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00043">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00201">requestPacket()</a>.</p>
 
@@ -888,7 +888,7 @@
 <li><a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Mar 6 13:58:52 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 4 13:53:02 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

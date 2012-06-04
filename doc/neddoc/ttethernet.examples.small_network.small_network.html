@@ -20,11 +20,11 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
 <img src="ttethernet.examples.small_network.small_network-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="181,5,285,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="5,80,77,107">
-<area shape="rect" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="101,80,173,107">
-<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="197,80,269,107">
-<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,80,365,107">
-<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="389,80,461,107">
+<area shape="rect" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="5,80,77,107">
+<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="101,80,173,107">
+<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="197,80,269,107">
+<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="293,80,365,107">
+<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="389,80,461,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -52,6 +52,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <th class="defaultvalue">Default value</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
+   </td>
+</tr>
 <tr>
    <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_marker</td>
    <td>
@@ -301,7 +311,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -371,7 +381,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -472,6 +482,16 @@ a generated MAC address in init stage 0.</p>
    <td>0</td>
    <td>
 <p>End of the send window in number of ticks</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
    </td>
 </tr>
 <tr>
@@ -723,7 +743,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -793,7 +813,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -1013,7 +1033,17 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
    </td>
 </tr>
 <tr>
@@ -1265,7 +1295,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -1335,7 +1365,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -1555,7 +1585,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 <tr>
@@ -1587,6 +1617,16 @@ a generated MAC address in init stage 0.</p>
    <td>
 <p>max idle time for address table entries
 (when it expires, entry is removed from the table)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.linklayer.TTEPHYPort.html">phy</a>.<a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
    </td>
 </tr>
 <tr>
@@ -1918,7 +1958,7 @@ a generated MAC address in init stage 0.</p>
    </td>
    <td>false</td>
    <td>
-<p>Dropping policy, Should the new frame instead of the oldest frame be dropped</p>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
    </td>
 </tr>
 </table>

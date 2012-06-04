@@ -58,6 +58,16 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
       <th class="description">Description</th>
    </tr>
 <tr class="local">
+   <td>promiscuous</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+<p>if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)</p>
+   </td>
+</tr>
+<tr class="local">
    <td>ct_marker</td>
    <td>
       <i>int</i>
@@ -158,7 +168,8 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/dispatch&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Statistic of the amount of packets that were dropped due to no configured buffer/ctc
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">ctDropped</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Unconfigured CT dropped&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sum</span><span style="color: #000000; ">);
-
+        </span><span style="color: #808080; font-style: italic; ">// if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Critical traffic marker of the buffer
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_marker</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Critical traffic mask of the buffer

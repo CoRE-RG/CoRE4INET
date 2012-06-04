@@ -52,6 +52,10 @@ class TTEInput : public cSimpleModule
          * @brief caches ct_marker parameter
          */
         unsigned int ctMarker;
+        /**
+         * @brief caches promiscuous parameter
+         */
+        bool promiscuous;
     protected:
         /**
          * @brief set to true if there was an error during runtime
