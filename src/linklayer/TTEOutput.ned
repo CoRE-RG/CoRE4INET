@@ -19,6 +19,8 @@ simple TTEOutput like IOutputQueue
         @statistic[ttQueueLength](title="TT-Queue Length"; record=vector; interpolationmode=sample-hold);
         //Statistic of the queue length of best-effort frames
         @statistic[beQueueLength](title="BE-Queue Length"; record=vector; interpolationmode=sample-hold);
+        //Statistic of the queue length of protocol control frames
+        @statistic[pcfQueueLength](title="PCF-Queue Length"; record=vector; interpolationmode=sample-hold);
         //Comma seperated list of TTBuffers that send messages to this port
         string tt_buffers = default("");
     gates:
@@ -31,4 +33,6 @@ simple TTEOutput like IOutputQueue
         input TTin @labels(CTFrame);
         //Input for rate-constrained frames from the buffers
         input RCin @labels(CTFrame);
+        //Input for protocol control frames from the buffers
+        input PCFin @labels(CTFrame);
 }

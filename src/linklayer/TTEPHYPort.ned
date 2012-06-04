@@ -24,9 +24,11 @@ module TTEPHYPort like IPort
         //Connection to the physical layer
         inout phys @labels(EtherFrame);
         //Input from the upper layer for time-triggered traffic
-        input TTin @directIn @labels(CTFrame);
+        input TTin @directIn @labels(TTFrame);
         //Input from the upper layer for rate-constrained traffic
-        input RCin @directIn @labels(CTFrame);
+        input RCin @directIn @labels(RCFrame);
+        //Input from the upper layer for rate-constrained traffic
+        input PCFin @directIn @labels(PCFrame);
 
     submodules:
         //Module for the organisation of outbound traffic
@@ -55,4 +57,5 @@ module TTEPHYPort like IPort
         
         TTin --> tteOutput.TTin;
         RCin --> tteOutput.RCin;
+        PCFin --> tteOutput.PCFin;
 }

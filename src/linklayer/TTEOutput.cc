@@ -14,6 +14,7 @@ Define_Module( TTEOutput);
 
 simsignal_t TTEOutput::ttQueueLengthSignal = SIMSIGNAL_NULL;
 simsignal_t TTEOutput::beQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t TTEOutput::pcfQueueLengthSignal = SIMSIGNAL_NULL;
 
 TTEOutput::TTEOutput()
 {
@@ -28,6 +29,7 @@ TTEOutput::TTEOutput()
         rcQueue[i].setName(strBuf);
     }
     beQueue.setName("BE Messages");
+    pcfQueue.setName("PCF Messages");
 }
 
 TTEOutput::~TTEOutput()
@@ -38,6 +40,7 @@ TTEOutput::~TTEOutput()
         rcQueue[i].clear();
     }
     beQueue.clear();
+    pcfQueue.clear();
 }
 
 void TTEOutput::initialize()
@@ -47,15 +50,29 @@ void TTEOutput::initialize()
 
     ttQueueLengthSignal = registerSignal("ttQueueLength");
     beQueueLengthSignal = registerSignal("beQueueLength");
+    pcfQueueLengthSignal = registerSignal("pcfQueueLength");
 }
 
 void TTEOutput::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("TTin"))
+    if (msg->arrivedOn("PCFin"))
     {
-        //TODO THIS ASSERT IS ONLY FOR DEBUGGING PURPOSES! Later it might be allowed to queue TTframes!?!?
-        ASSERT(framesRequested > 0);
-        ASSERT(framesRequested == 1);
+        if (framesRequested)
+        {
+            framesRequested--;
+            msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+            msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+            send(msg, gateBaseId("out"));
+        }
+        else
+        {
+            pcfQueue.insert(msg);
+            emit(pcfQueueLengthSignal, pcfQueue.length());
+        }
+    }
+    else if (msg->arrivedOn("TTin"))
+    {
+        EV << "There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
         if(ttBuffers.size()>0){
             ttBuffersPos = (++ttBuffersPos % ttBuffers.size());
         }

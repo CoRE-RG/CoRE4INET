@@ -62,6 +62,11 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
         cQueue beQueue;
 
         /**
+         * @brief Queue for protocol control messages
+         */
+        cQueue pcfQueue;
+
+        /**
          * @brief Vector of TTBuffers.
          *
          * The vector is ordered by action time
@@ -82,6 +87,10 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Signal that is emitted when the queue length of best-effort messages changes.
          */
         static simsignal_t beQueueLengthSignal;
+        /**
+         * @brief Signal that is emitted when the queue length of protocol control messages changes.
+         */
+        static simsignal_t pcfQueueLengthSignal;
     private:
         /**
          * @brief Helper function to check whether a Messages is allowed to be transmitted.
