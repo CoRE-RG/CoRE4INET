@@ -80,8 +80,19 @@ void TTEInput::handleMessage(cMessage *msg)
         //Sonst BE
         else
         {
-            if(promiscuous || frame->getDest().isMulticast())
+            if(promiscuous || frame->getDest().isMulticast()){
                 send(msg, "out");
+            }
+            else{
+                MACAddress address;
+                address.setAddress(frame->getArrivalGate()->getPathStartGate()->getOwnerModule()->par("address"));
+                if(frame->getDest().equals(address)){
+                    send(msg, "out");
+                }
+                else{
+                    delete msg;
+                }
+            }
         }
     }
 }
