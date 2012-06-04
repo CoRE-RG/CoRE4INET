@@ -41,6 +41,8 @@ module TTEEtherSwitch
         phy[sizeof(ethg)]: TTEPHYPort {
             parameters:
                 @display("p=235,278,r,50");
+                //For the switch it is necessary to have promiscuous mode enabled
+                promiscuous = true;
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
