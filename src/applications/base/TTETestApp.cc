@@ -30,7 +30,9 @@ void TTETestApp::handleMessage(cMessage *msg)
     if (!msg->arrivedOn("TTin") && *new std::string(getParentModule()->getName()) != "videoclient")
     {
         CTFrame *frame = new CTFrame("CT-ID=100");
-        frame->setDest("03 04 05 06 00 64");
+        MACAddress srcAddr;
+        srcAddr.setAddress("03 04 05 06 00 64");
+        frame->setDest(srcAddr);
         frame->setCtID(100);
         //ENDE TEST
 
@@ -41,7 +43,9 @@ void TTETestApp::handleMessage(cMessage *msg)
     if (!msg->arrivedOn("TTin") && *new std::string(getParentModule()->getName()) != "videoclient")
     {
         CTFrame *frame = new CTFrame("CT-ID=101");
-        frame->setDest("03 04 05 06 00 65");
+        MACAddress srcAddr;
+        srcAddr.setAddress("03 04 05 06 00 65");
+        frame->setDest(srcAddr);
         frame->setCtID(100);
         frame->setByteLength(1500);
         //ENDE TEST
