@@ -23,7 +23,7 @@ import ttethernet.buffer.RCQueueBuffer;
 
 //
 // switch1: configuration in switch1.ini
-// Forwards time-triggered messages with VL-ID 100
+// Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
 //
 module Switch1 extends TTEEtherSwitch
 {

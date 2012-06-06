@@ -20,7 +20,7 @@ import ttethernet.nodes.ethernet.TTEEtherHost;
 //
 // Small sample network with three hosts and one switch that shows how to 
 // configure the TTEthernet Model. Configuration in omnetpp.ini
-// - Uses 3ms Cycletime
+// - Uses 5ms Cycletime
 // - 80ns Tick length
 //
 network small_network

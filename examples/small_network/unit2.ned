@@ -25,6 +25,7 @@ import ttethernet.buffer.RCQueueBuffer;
 // unit2: configuration in unit2.ini.
 //
 // - Receives time-triggered messages with VL-ID 100
+// - Sends rate-constrained messages with VL-ID 101
 //
 module Unit2 extends TTEEtherHost
 {
