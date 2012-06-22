@@ -1,0 +1,211 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>TTEScheduler</i></h2>
+<b>Package:</b> ttethernet.scheduler<br/><b>File: <a href="src-scheduler-TTEScheduler.ned.html">src/scheduler/TTEScheduler.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>TTEthernet scheduler module. The module allows to register Events using the
+registerEvent(<a href="SchedulerEvent.html">SchedulerEvent</a>) method. Allowed Events are:</p>
+  <ul><li><a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a>: Event that is triggered at a specified time in the cycle</li>
+  <li><a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a>: Event that is triggered after a specified time</li></ul>
+<p>The Scheduler can be asked for the current time with the getTicks() method.
+The cycle is configured by the parameters tick and cycle_ticks.</p>
+<p><b>See also:</b> <a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a>, <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a>, <a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a></p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.scheduler.TTEScheduler-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="TTEScheduler" alt="TTEScheduler" coords="0,31,132,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.scheduler.TTEScheduler-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="71,80,172,107">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="5,5,107,32">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="131,5,245,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.scheduler.TTEScheduler-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="5,5,107,32">
+</map>
+<h3 class="subtitle">Used in compound modules:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.nodes.ethernet.TTEEtherHost.html">TTEEtherHost</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Module for a TTEthernet Host.
+Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> module as physical port,
+sync module (Sync) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+The Host is configured by the provided TTEthernet XML network configuration
+(network_configuration parameter) and uses the device_name parameter to find its config.
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.nodes.ethernet.TTEEtherSwitch.html">TTEEtherSwitch</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Module for a TTEthernet Switch with variable number of ports.
+Contains a configurable best-effort implementation (beRelayUnitType like IMACRelayUnit),
+<a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (Sync) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+The switch is configured by the provided TTEthernet XML network configuration
+(network_configuration parameter) and uses the device_name parameter to find its config.
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>tick</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>80ns</td>
+   <td>
+<p>Length of a tick</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>max_drift</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>16ps</td>
+   <td>
+<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>max_drift_change</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>1ps</td>
+   <td>
+<p>Maximum clock drift change per cycle</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>current_tick</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>tick</td>
+   <td>
+<p>Current length of a tick (with imprecission)</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>cycle_ticks</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>37500</td>
+   <td>
+<p>Number of ticks for one cycle</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/cogwheel</i></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>newCycle</td>
+   <td>Start of cycle</td>
+   <td></td>
+   <td>count, vector</td>
+   <td></td>
+   <td></td>
+</tr>
+<tr class="local">
+   <td>currentDrift</td>
+   <td>Current drift</td>
+   <td></td>
+   <td>vector</td>
+   <td>s</td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// TTEthernet scheduler module. The module allows to register Events using the
+// registerEvent(SchedulerEvent) method. Allowed Events are:
+// - SchedulerActionTimeEvent: Event that is triggered at a specified time in the cycle
+// - SchedulerTimerEvent: Event that is triggered after a specified time
+//
+// The Scheduler can be asked for the current time with the getTicks() method.
+// The cycle is configured by the parameters tick and cycle_ticks.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> SchedulerTimerEvent, SchedulerActionTimeEvent, SchedulerTimerEvent
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/cogwheel&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Statistic of the current drift (Difference of configured and actual tick length)
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">currentDrift</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Current drift&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">unit</span><span style="color: #000000; ">=</span><span style="color: #000000; ">s</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Statistic of the beginning of a new cycle
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">newCycle</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Start of cycle&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">count</span><span style="color: #000000; ">,</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Length of a tick
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">tick</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">80</span><span style="color: #000000; ">ns</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_drift</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">16</span><span style="color: #000000; ">ps</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Maximum clock drift change per cycle
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_drift_change</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">1</span><span style="color: #000000; ">ps</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Current length of a tick (with imprecission)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">volatile</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">current_tick</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #000000; ">tick</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">// Number of ticks for one cycle
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">cycle_ticks</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">37500</span><span style="color: #000000; ">);
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

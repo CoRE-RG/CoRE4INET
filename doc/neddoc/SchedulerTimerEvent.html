@@ -1,0 +1,80 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Message <i>SchedulerTimerEvent</i></h2>
+<b>File: <a href="src-scheduler-SchedulerMessageEvents.msg.html">src/scheduler/SchedulerMessageEvents.msg</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_scheduler_timer_event.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Message used for events of <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> that are triggered after a specified time (timer).
+Should be created with message kind <a href="SchedulerMessageKind.html">SchedulerMessageKind</a> = TIMER_EVENT</p>
+<p><b>See also:</b> <a href="SchedulerMessageKind.html">SchedulerMessageKind</a>, <a href="SchedulerEvent.html">SchedulerEvent</a></p>
+<p><b>Author:</b> Till Steinbach</p>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="SchedulerTimerEvent-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="5,5,149,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="SchedulerTimerEvent-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="5,80,149,107">
+<area shape="rect" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="21,5,133,32">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="SchedulerEvent.html">SchedulerEvent</a>
+   </td>
+   <td>
+<i>message</i>
+   </td>
+   <td>
+
+<p>Message used for events of <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> with <a href="SchedulerMessageKind.html">SchedulerMessageKind</a> = NEW_CYCLE</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Fields:</h3>
+<table class="fieldstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>timer</td>
+   <td>
+      <i>
+unsigned int</i>
+   </td>
+   <td>
+<p>Time after that the event is triggered in number of ticks</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Message used for events of TTEScheduler that are triggered after a specified time (timer).
+// Should be created with message kind SchedulerMessageKind = TIMER_EVENT
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> SchedulerMessageKind, SchedulerEvent
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerTimerEvent</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerEvent</span><span style="color: #000000; ">
+{
+    </span><span style="color: #808080; font-style: italic; ">// Time after that the event is triggered in number of ticks
+</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">timer</span><span style="color: #000000; ">;
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

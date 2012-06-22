@@ -1,0 +1,297 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>RCBuffer</i></h2>
+<b>Package:</b> ttethernet.buffer<br/><b>File: <a href="src-buffer-RCBuffer.ned.html">src/buffer/RCBuffer.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_r_c_buffer.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for rate-constrained traffic. Messages are sent using the configured
+bandwidth allocation gap.</p>
+<p>The <a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a> registers a timer (<a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a>) at the scheduler module (<a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>) to send its
+Message in conformance with the BAG account.</p>
+<p><b>WARNING:</b> Do not instantiate the module. Use <a href="ttethernet.buffer.RCDoubleBuffer.html">RCDoubleBuffer</a> or <a href="ttethernet.buffer.RCQueueBuffer.html">RCQueueBuffer</a> instead! 
+Only the bag parameter is currently used!</p>
+<p><b>TODO:</b> The <a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a> module should be converted to an interface since it should
+not be used directly in simulation.</p>
+<p><b>See also:</b> <a href="ttethernet.buffer.RCDoubleBuffer.html">RCDoubleBuffer</a>, <a href="ttethernet.buffer.RCQueueBuffer.html">RCQueueBuffer</a>, <a href="ttethernet.buffer.Buffer.html">Buffer</a>, <a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a></p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.buffer.RCBuffer-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="RCBuffer" alt="RCBuffer" coords="0,31,100,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.RCBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="5,5,77,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.RCBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="92,80,164,107">
+<area shape="rect" href="ttethernet.buffer.RCDoubleBuffer.html" title="Simple Module RCDoubleBuffer" alt="" coords="5,155,117,181">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="141,155,251,181">
+<area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="92,5,164,32">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.Buffer.html">Buffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for the various Buffers of TTEthernet.
+Since this is an abstract module please do not instantiate it</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Known subclasses:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.RCDoubleBuffer.html">RCDoubleBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a double buffer for rate-constrained traffic. Messages are sent using the configured
+gandwidth alocation gap.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.RCQueueBuffer.html">RCQueueBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents a queue buffer for rate-constrained traffic. Messages are sent using the configured
+gandwidth alocation gap.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>max_dispatch_delay</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>bag</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>jitter</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Not used</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=,orange</i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>class</td>
+   <td><i>RCBuffer</i></td>
+   <td>
+<p><a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a> is implemented by the <a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a> C++ Class</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>in</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>The buffers Input</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>out</xsl:if></td>
+   <td><i>output</i></td>
+   <td></td>   <td>
+<p>The buffers Output </p>
+<p><b>WARNING:</b> CURRENTLY NOT USED!</p>
+</td>
+</tr>
+<tr class="local">
+   <td>schedulerIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming <a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a> messages</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>txPk</td>
+   <td>TX Packets</td>
+   <td></td>
+   <td>count, vector</td>
+   <td></td>
+   <td></td>
+</tr>
+<tr class="local">
+   <td>latency</td>
+   <td>End-to-end latency</td>
+   <td></td>
+   <td>stats, histogram, vector</td>
+   <td>s</td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Represents an abstract Buffer for rate-constrained traffic. Messages are sent using the configured
+// bandwidth allocation gap.
+//
+// The RCBuffer registers a timer (SchedulerTimerEvent) at the scheduler module (TTEScheduler) to send its
+// Message in conformance with the BAG account.
+//
+// </span><span style="color: #000080; ">@warning</span><span style="color: #808080; font-style: italic; "> Do not instantiate the module. Use RCDoubleBuffer or RCQueueBuffer instead! 
+// Only the bag parameter is currently used!
+//
+// </span><span style="color: #000080; ">@todo</span><span style="color: #808080; font-style: italic; "> The RCBuffer module should be converted to an interface since it should
+// not be used directly in simulation.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">Buffer</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//RCBuffer is implemented by the RCBuffer C++ Class
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; ">);
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=,orange&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Not used
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_dispatch_delay</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bag</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Not used
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">jitter</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+    </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerTimerEvent messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

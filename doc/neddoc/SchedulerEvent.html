@@ -1,0 +1,98 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Message <i>SchedulerEvent</i></h2>
+<b>File: <a href="src-scheduler-SchedulerMessage.msg.html">src/scheduler/SchedulerMessage.msg</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_scheduler_event.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Message used for events of <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> with <a href="SchedulerMessageKind.html">SchedulerMessageKind</a> = NEW_CYCLE</p>
+<p><b>See also:</b> <a href="SchedulerMessageKind.html">SchedulerMessageKind</a></p>
+<p><b>Author:</b> Till Steinbach</p>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="SchedulerEvent-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="5,5,117,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="SchedulerEvent-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="129,80,241,107">
+<area shape="rect" href="SchedulerActionTimeEvent.html" title="Message SchedulerActionTimeEvent" alt="" coords="5,155,181,181">
+<area shape="rect" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="205,155,349,181">
+<area shape="rect" href="SchedulerMessage.html" title="Message SchedulerMessage" alt="" coords="120,5,251,32">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="SchedulerMessage.html">SchedulerMessage</a>
+   </td>
+   <td>
+<i>message</i>
+   </td>
+   <td>
+
+<p>abstract base message for <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Known subclasses:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a>
+   </td>
+   <td>
+<i>message</i>
+   </td>
+   <td>
+
+<p>Message used for events of <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> that are triggered at a specified time in cycle (action_time).
+Should be created with message kind <a href="SchedulerMessageKind.html">SchedulerMessageKind</a> = ACTION_TIME_EVENT</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a>
+   </td>
+   <td>
+<i>message</i>
+   </td>
+   <td>
+
+<p>Message used for events of <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> that are triggered after a specified time (timer).
+Should be created with message kind <a href="SchedulerMessageKind.html">SchedulerMessageKind</a> = TIMER_EVENT</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Message used for events of TTEScheduler with SchedulerMessageKind = NEW_CYCLE
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> SchedulerMessageKind
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerEvent</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerMessage</span><span style="color: #000000; ">
+{
+    </span><span style="color: #000000; font-weight: bold; ">@customize</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+}
+
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

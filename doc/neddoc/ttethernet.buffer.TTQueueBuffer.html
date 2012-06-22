@@ -1,0 +1,258 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>TTQueueBuffer</i></h2>
+<b>Package:</b> ttethernet.buffer<br/><b>File: <a href="src-buffer-TTQueueBuffer.ned.html">src/buffer/TTQueueBuffer.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Represents a queue buffer for time-triggered traffic. Messages are sent using the configured
+send window.</p>
+<p>The buffer stores infinit messages in a fifo queue.
+The buffer removes and sends the first message in the queue.</p>
+<p><b>See also:</b> <a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>, <a href="ttethernet.buffer.Buffer.html">Buffer</a>,</p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.buffer.TTQueueBuffer-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="TTQueueBuffer" alt="TTQueueBuffer" coords="0,31,141,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.TTQueueBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="5,5,112,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.TTQueueBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="5,80,112,107">
+<area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="23,5,95,32">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for time-triggerd traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>sendWindowStart</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>sendWindowEnd</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>End of the send window in number of ticks</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>size</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Size of the buffer negative means infinite</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>drop_new</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+<p>Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>q=frames</i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>class</td>
+   <td><i>TTQueueBuffer</i></td>
+   <td>
+<p><a href="ttethernet.buffer.TTQueueBuffer.html">TTQueueBuffer</a> is implemented by the <a href="ttethernet.buffer.TTQueueBuffer.html">TTQueueBuffer</a> C++ Class</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>in</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>The buffers Input</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>out</xsl:if></td>
+   <td><i>output</i></td>
+   <td></td>   <td>
+<p>The buffers Output </p>
+<p><b>WARNING:</b> CURRENTLY NOT USED!</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>schedulerIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a> messages</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>queueLength</td>
+   <td>Queue Length</td>
+   <td></td>
+   <td>vector</td>
+   <td></td>
+   <td>sample-hold</td>
+</tr>
+<tr class="local">
+   <td>ctDropped</td>
+   <td>CT dropped</td>
+   <td></td>
+   <td>sum</td>
+   <td></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Represents a queue buffer for time-triggered traffic. Messages are sent using the configured
+// send window.
+//
+// The buffer stores infinit messages in a fifo queue.
+// The buffer removes and sends the first message in the queue.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTBuffer, Buffer,
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTQueueBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTBuffer</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//TTQueueBuffer is implemented by the TTQueueBuffer C++ Class
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTQueueBuffer</span><span style="color: #000000; ">);
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;q=frames&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Statistic of the queue length of the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">queueLength</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;Queue Length&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">; </span><span style="color: #000000; ">interpolationmode</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sample</span><span style="color: #000000; ">-</span><span style="color: #000000; ">hold</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Statistic of the amount of packets that were dropped due to buffer overflows
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">ctDropped</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;CT dropped&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">sum</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Size of the buffer negative means infinite
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">size</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(-</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">drop_new</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

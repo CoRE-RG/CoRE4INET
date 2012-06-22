@@ -33,7 +33,7 @@
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.2.1)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 1.99.3)
+// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 1.99.5)
 //
 // <h2>Introductory material</h2>
 //  - For help with the installation see the <tt><a href="../doxy/install.html">INSTALL</a></tt> page.
@@ -45,6 +45,11 @@
 //   - <a href="../doxy/index.html" target="_top">C++ source documentation (Doxygen)</a>
 //   - <a href="http://inet.omnetpp.org/doc/INET/neddoc/index.html" target="_top">INET Model Documentation</a>
 //   - <a href="http://inet.omnetpp.org/doc/INET/doxy/index.html" target="_top">INET C++ source documentation (Doxygen)</a>
+//
+// <h2>References</h2>
+// If you would like to reference this project please use the following <a href="http://core.informatik.haw-hamburg.de/images/publications/papers/sdkks-eifre-11a.pdf">publication</a>:
+// <ul><li>Steinbach, H. Dieumo Kenfack, F. Korf, and T. C. Schmidt. An Extension of the OMNeT++ INET Framework for Simulating Real-time Ethernet with High Accuracy. In Proceedings of the 4th International ICST Conference on Simulation Tools and Techniques, SIMUTools '11, pages 375-382, ICST, Brussels, Belgium, Belgium, 2011. ICST (Institute for Computer Sciences, Social-Informatics and Telecommunications Engineering). (<a href="http://inet.cpt.haw-hamburg.de/publications/sdks-eoifs-11.bib">bibtex</a>)
+// </li></ul>
 //
 // <h2>History</h2>
 // TTE4INET was first introduced at the <a href="http://www.omnet-workshop.org/2011/" target="_top">4th International Workshop on OMNeT++ (2011)</a>

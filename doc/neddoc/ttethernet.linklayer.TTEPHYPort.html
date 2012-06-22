@@ -1,0 +1,312 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Compound Module <i>TTEPHYPort</i></h2>
+<b>Package:</b> ttethernet.linklayer<br/><b>File: <a href="src-linklayer-TTEPHYPort.ned.html">src/linklayer/TTEPHYPort.ned</a></b><br/>
+<p>The <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> is a compund module that contains the <a href="ttethernet.linklayer.TTEOutput.html">TTEOutput</a>, <a href="ttethernet.linklayer.TTEInput.html">TTEInput</a> and MAC (EtherMACFullDuplex)
+It represents a physical port for a TTEthernet device (Switch or Host)</p>
+<p><b>See also:</b> <a href="ttethernet.linklayer.IPort.html">IPort</a>, <a href="ttethernet.linklayer.TTEOutput.html">TTEOutput</a>, <a href="ttethernet.linklayer.TTEInput.html">TTEInput</a>, EtherMACFullDuplex</p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.linklayer.TTEPHYPort-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="TTEOutput" alt="TTEOutput" coords="19,65,81,126">
+<area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="TTEInput" alt="TTEInput" coords="119,65,170,126">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="EtherMACFullDuplex" alt="EtherMACFullDuplex" coords="69,159,113,220">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.linklayer.TTEPHYPort-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="179,80,275,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,155,101,181">
+<area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="Simple Module TTEInput" alt="" coords="125,155,197,181">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="Simple Module EtherMACFullDuplex" alt="" coords="221,155,363,181">
+<area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="Simple Module TTEOutput" alt="" coords="387,155,469,181">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="111,5,212,32">
+<area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="236,5,351,32">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.linklayer.TTEPHYPort-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="5,80,101,107">
+<area shape="rect" href="ttethernet.linklayer.IPort.html" title="Module Interface IPort" alt="" coords="17,5,89,32">
+</map>
+<h3 class="subtitle">Used in compound modules:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.nodes.ethernet.TTEEtherHost.html">TTEEtherHost</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Module for a TTEthernet Host.
+Contains a EtherLLC for best-effort traffic, a <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> module as physical port,
+sync module (Sync) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+The Host is configured by the provided TTEthernet XML network configuration
+(network_configuration parameter) and uses the device_name parameter to find its config.
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.nodes.ethernet.TTEEtherSwitch.html">TTEEtherSwitch</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Module for a TTEthernet Switch with variable number of ports.
+Contains a configurable best-effort implementation (beRelayUnitType like IMACRelayUnit),
+<a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a> modules for physical ports, sync module (Sync) and a <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a> module.
+The switch is configured by the provided TTEthernet XML network configuration
+(network_configuration parameter) and uses the device_name parameter to find its config.
+The configuration is done by the BufferManager that deletes itself at runtime.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>promiscuous</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+<p>if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>bgb=188,180;i=device/port</i></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>upperLayerIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input from the upper layer for best-effort Traffic</p>
+</td>
+</tr>
+<tr class="local">
+   <td>upperLayerOut</xsl:if></td>
+   <td><i>output</i></td>
+   <td></td>   <td>
+<p>Output to the upper layer for best-effort Traffic</p>
+</td>
+</tr>
+<tr class="local">
+   <td>phys</xsl:if></td>
+   <td><i>inout</i></td>
+   <td></td>   <td>
+<p>Connection to the physical layer</p>
+</td>
+</tr>
+<tr class="local">
+   <td>TTin</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input from the upper layer for time-triggered traffic</p>
+</td>
+</tr>
+<tr class="local">
+   <td>RCin</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input from the upper layer for rate-constrained traffic</p>
+</td>
+</tr>
+<tr class="local">
+   <td>PCFin</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input from the upper layer for rate-constrained traffic</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Unassigned submodule parameters:</h3>
+<table class="deepparamstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEOutput.html">tteOutput</a>.tt_buffers</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of TTBuffers that send messages to this port</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.linklayer.TTEInput.html">tteInput</a>.incomings</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of ctc modules the input uses</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.address</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>"auto"</td>
+   <td>
+<p>MAC address as hex string (12 hex digits), or
+"auto". "auto" values will be replaced by
+a generated MAC address in init stage 0.</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.duplexMode</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>true</td>
+   <td>
+<p>must be set to "true", as EtherMACFullDuplex does not support half-duplex operation
+(parameter is present to reduce the risk of accidental misconfiguration)</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.txQueueLimit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>1000</td>
+   <td>
+<p>maximum number of frames queued up for transmission in the internal queue
+(only used if queueModule==""); additional frames cause a runtime error</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html">mac</a>.mtu</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>1500B</td>
+   <td>   </td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">// The TTEPHYPort is a compund module that contains the TTEOutput, TTEInput and MAC (EtherMACFullDuplex)
+// It represents a physical port for a TTEthernet device (Switch or Host)
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> IPort, TTEOutput, TTEInput, EtherMACFullDuplex
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEPHYPort</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IPort</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=188,180;i=device/port&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+    </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//Input from the upper layer for best-effort Traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Output to the upper layer for best-effort Traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">output</span><span style="color: #000000; "> </span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Connection to the physical layer
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">inout</span><span style="color: #000000; "> </span><span style="color: #000000; ">phys</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Input from the upper layer for time-triggered traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Input from the upper layer for rate-constrained traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Input from the upper layer for rate-constrained traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">PCFin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">PCFrame</span><span style="color: #000000; ">);
+
+    </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//Module for the organisation of outbound traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteOutput</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTEOutput</span><span style="color: #000000; "> {
+            </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=48,45&quot;</span><span style="color: #000000; ">);
+        }
+        </span><span style="color: #808080; font-style: italic; ">//Module for the organisation of inbound traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteInput</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTEInput</span><span style="color: #000000; "> {
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=142,45&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; ">;
+        }
+        </span><span style="color: #808080; font-style: italic; ">//MAC interface
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">mac</span><span style="color: #000000; ">: </span><span style="color: #000000; ">EtherMACFullDuplex</span><span style="color: #000000; "> {
+            </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+                </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #008000; ">true</span><span style="color: #000000; ">; </span><span style="color: #808080; font-style: italic; ">//MAC must be set promiscuous to allow for CT receiption with all CT-Markers
+</span><span style="color: #000000; ">                </span><span style="color: #000000; ">queueModule</span><span style="color: #000000; "> = </span><span style="color: #008000; ">&quot;tteOutput&quot;</span><span style="color: #000000; ">;</span><span style="color: #808080; font-style: italic; ">//The tteOutput-Module(TTEOutput) is used as external queue for the interface
+</span><span style="color: #000000; ">                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=87,139&quot;</span><span style="color: #000000; ">);
+        }
+    </span><span style="color: #800000; font-weight: bold; ">connections</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">tteOutput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">&lt;--</span><span style="color: #000000; "> </span><span style="color: #000000; ">tteInput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">tteOutput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">mac</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">tteInput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">&lt;--</span><span style="color: #000000; "> </span><span style="color: #000000; ">mac</span><span style="color: #000000; ">.</span><span style="color: #000000; ">upperLayerOut</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">phys</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">&lt;--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">mac</span><span style="color: #000000; ">.</span><span style="color: #000000; ">phys</span><span style="color: #000000; ">;
+
+        </span><span style="color: #000000; ">TTin</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">tteOutput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">TTin</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">RCin</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">tteOutput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">RCin</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; ">PCFin</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">tteOutput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">PCFin</span><span style="color: #000000; ">;
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

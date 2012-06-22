@@ -26,3 +26,223 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-usage-dia
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.buffer.Buffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="101,80,173,107">
+<area shape="rect" href="ttethernet.buffer.BGBuffer.html" title="Simple Module BGBuffer" alt="" coords="5,155,77,181">
+<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="101,155,173,181">
+<area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="197,155,269,181">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IOutputQueue.html" title="Module Interface IOutputQueue" alt="" coords="87,5,188,32">
+</map>
+<h3 class="subtitle">Known subclasses:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.BGBuffer.html">BGBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for background traffic. Messages are sent immediatly to the LLC</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for rate-constrained traffic. Messages are sent using the configured
+bandwidth allocation gap.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for time-triggerd traffic. Messages are sent using the configured
+send window.</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>priority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>-1</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>ct_id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic ID of the buffer</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>ct_marker</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic marker of the buffer</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>ct_mask</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Critical traffic mask of the buffer</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/buffer</i></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>in</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>The buffers Input</p>
+</td>
+</tr>
+<tr class="local">
+   <td>out</xsl:if></td>
+   <td><i>output</i></td>
+   <td></td>   <td>
+<p>The buffers Output </p>
+<p><b>WARNING:</b> CURRENTLY NOT USED!</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>txPk</td>
+   <td>TX Packets</td>
+   <td></td>
+   <td>count, vector</td>
+   <td></td>
+   <td></td>
+</tr>
+<tr class="local">
+   <td>latency</td>
+   <td>End-to-end latency</td>
+   <td></td>
+   <td>stats, histogram, vector</td>
+   <td>s</td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Abstract base Buffer used for the various Buffers of TTEthernet.
+// Since this is an abstract module please do not instantiate it
+//
+// </span><span style="color: #000080; ">@warning</span><span style="color: #808080; font-style: italic; "> Currently the out gate is not used. Instead the buffer sends its
+// message via sendDirect to all via addDestinationGate() registred gates.
+//
+// </span><span style="color: #000080; ">@todo</span><span style="color: #808080; font-style: italic; "> The Buffer module should be converted to an interface since it should
+// not be used directly in simulation.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> IOutputQueue
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">Buffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IOutputQueue</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/buffer&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Statistic of the amount of packets that were sent by the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">txPk</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;TX Packets&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">count</span><span style="color: #000000; ">,</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//End-to-end latency
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">latency</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;End-to-end latency&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">unit</span><span style="color: #000000; ">=</span><span style="color: #000000; ">s</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">stats</span><span style="color: #000000; ">,</span><span style="color: #000000; ">histogram</span><span style="color: #000000; ">,</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Priority of the buffer (currently only used for rate-constrained traffic)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">priority</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(-</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Critical traffic ID of the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_id</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Critical traffic marker of the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_marker</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Critical traffic mask of the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_mask</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of gates where the frames of the buffer are delivered
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">destination_gates</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;&quot;</span><span style="color: #000000; ">);
+    </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+        </span><span style="color: #808080; font-style: italic; ">//The buffers Input
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">in</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//The buffers Output </span><span style="color: #000080; ">@warning</span><span style="color: #808080; font-style: italic; "> CURRENTLY NOT USED!
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">output</span><span style="color: #000000; "> </span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>
