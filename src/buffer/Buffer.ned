@@ -1,6 +1,6 @@
 package ttethernet.buffer;
 
-import inet.networklayer.queue.IOutputQueue;
+import inet.linklayer.IOutputQueue;
 //
 // Abstract base Buffer used for the various Buffers of TTEthernet.
 // Since this is an abstract module please do not instantiate it

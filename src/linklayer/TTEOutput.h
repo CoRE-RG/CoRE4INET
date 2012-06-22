@@ -35,6 +35,15 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname);
+        /**
+         * Implementation of IPassiveQueue::addListener().
+         */
+        virtual void addListener(IPassiveQueueListener *listener);
+
+        /**
+         * Implementation of IPassiveQueue::removeListener().
+         */
+        virtual void removeListener(IPassiveQueueListener *listener);
     private:
         /**
          * @brief Outgoing Channel used to calculate transmission duration.
@@ -72,6 +81,13 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * The vector is ordered by action time
          */
         std::vector < TTBuffer * > ttBuffers;
+
+        /**
+         * @brief List of TTBuffers.
+         *
+         * The vector is ordered by action time
+         */
+        std::list < IPassiveQueueListener * > listeners;
 
         /**
          * @brief Current position of the next Buffer (action time) in the ttBuffers vector
@@ -116,6 +132,7 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Registers a time-triggered buffer that feeds the module.
          */
         virtual void registerTTBuffer(TTBuffer *buffer);
+
     protected:
         /**
          * @brief Initialization of the module
@@ -163,6 +180,8 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Clears all queued packets and stored requests.
          */
         virtual void clear();
+
+        void notifyListeners();
 };
 }
 

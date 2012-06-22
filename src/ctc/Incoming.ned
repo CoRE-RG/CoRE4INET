@@ -1,5 +1,5 @@
 package ttethernet.ctc;
-import inet.networklayer.queue.IOutputQueue;
+import inet.linklayer.IOutputQueue;
 
 //
 // Abstract module for the conformance checks of incoming traffic.

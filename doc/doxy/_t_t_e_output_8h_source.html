@@ -52,49 +52,60 @@
 <a name="l00030"></a>00030         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a4157c9b499b19acccb411a309aa7c686" title="Destructor.">~TTEOutput</a>();
 <a name="l00031"></a>00031 
 <a name="l00037"></a>00037         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa4ef4ab8ac5d91d1fd5e76814cb10550" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);
-<a name="l00038"></a>00038     <span class="keyword">private</span>:
-<a name="l00042"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284">00042</a>         cChannel *<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>;
-<a name="l00046"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7">00046</a>         <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a>;
-<a name="l00047"></a>00047 
-<a name="l00052"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7">00052</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>;
-<a name="l00053"></a>00053 
-<a name="l00057"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">00057</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>];
-<a name="l00058"></a>00058 
-<a name="l00062"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419">00062</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>;
-<a name="l00063"></a>00063 
-<a name="l00069"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886">00069</a>         std::vector &lt; TTBuffer * &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>;
-<a name="l00070"></a>00070 
-<a name="l00074"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63">00074</a>         <span class="keywordtype">size_t</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a>;
-<a name="l00075"></a>00075     <span class="keyword">protected</span>:
-<a name="l00079"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec">00079</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a>;
-<a name="l00080"></a>00080 
-<a name="l00084"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5">00084</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a>;
-<a name="l00085"></a>00085     <span class="keyword">private</span>:
-<a name="l00096"></a>00096         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>(EtherFrame *message);
-<a name="l00097"></a>00097 
-<a name="l00104"></a>00104         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual...">setTransparentClock</a>(<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html" title="Class generated from linklayer/ethernet/PCFrame.msg by opp_msgc.">PCFrame</a> *pcf);
-<a name="l00105"></a>00105 
-<a name="l00109"></a>00109         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa915182c2ca1fa08c42d5bd7778e8049" title="Registers a time-triggered buffer that feeds the module.">registerTTBuffer</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a> *buffer);
-<a name="l00110"></a>00110     <span class="keyword">protected</span>:
-<a name="l00114"></a>00114         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a986591ead93237643e88d4020f764df0" title="Initialization of the module.">initialize</a>();
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116 
-<a name="l00130"></a>00130         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a70262cb8679514a6b781aa655ac5090f" title="Forwards the messages from the different buffers and LLC according to the TTEthernet...">handleMessage</a>(cMessage *msg);
-<a name="l00131"></a>00131 
-<a name="l00139"></a>00139         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359" title="this method is invoked when the underlying mac is idle.">requestPacket</a>();
-<a name="l00140"></a>00140 
-<a name="l00144"></a>00144         <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e" title="Returns number of requested messages.">getNumPendingRequests</a>();
-<a name="l00145"></a>00145 
-<a name="l00151"></a>00151         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Returns true when there are no pending messages.">isEmpty</a>();
-<a name="l00152"></a>00152 
-<a name="l00156"></a>00156         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0" title="Clears all queued packets and stored requests.">clear</a>();
-<a name="l00157"></a>00157 };
-<a name="l00158"></a>00158 }
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 <span class="preprocessor">#endif</span>
-<a name="l00161"></a>00161 <span class="preprocessor"></span>
+<a name="l00041"></a>00041         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0676f12c27e9ef3e7776c0acfe70901d" title="Implementation of IPassiveQueue::addListener().">addListener</a>(IPassiveQueueListener *listener);
+<a name="l00042"></a>00042 
+<a name="l00046"></a>00046         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a91e6f036feb0e6308920778003c4253c" title="Implementation of IPassiveQueue::removeListener().">removeListener</a>(IPassiveQueueListener *listener);
+<a name="l00047"></a>00047     <span class="keyword">private</span>:
+<a name="l00051"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284">00051</a>         cChannel *<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>;
+<a name="l00055"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7">00055</a>         <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2568065490efdf1664edfdb1cee893f7" title="Number of frames that were requested from lower layer.">framesRequested</a>;
+<a name="l00056"></a>00056 
+<a name="l00061"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7">00061</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>;
+<a name="l00062"></a>00062 
+<a name="l00066"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc">00066</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>];
+<a name="l00067"></a>00067 
+<a name="l00071"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419">00071</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>;
+<a name="l00072"></a>00072 
+<a name="l00076"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871">00076</a>         cQueue <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>;
+<a name="l00077"></a>00077 
+<a name="l00083"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886">00083</a>         std::vector &lt; TTBuffer * &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>;
+<a name="l00084"></a>00084 
+<a name="l00090"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb">00090</a>         std::list &lt; IPassiveQueueListener * &gt; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>;
+<a name="l00091"></a>00091 
+<a name="l00095"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63">00095</a>         <span class="keywordtype">size_t</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a>;
+<a name="l00096"></a>00096     <span class="keyword">protected</span>:
+<a name="l00100"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec">00100</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a>;
+<a name="l00101"></a>00101 
+<a name="l00105"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5">00105</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a>;
+<a name="l00109"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#abb9e957c0df6f82aebbbb3ecbc08446f">00109</a>         <span class="keyword">static</span> simsignal_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#abb9e957c0df6f82aebbbb3ecbc08446f" title="Signal that is emitted when the queue length of protocol control messages changes...">pcfQueueLengthSignal</a>;
+<a name="l00110"></a>00110     <span class="keyword">private</span>:
+<a name="l00121"></a>00121         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>(EtherFrame *message);
+<a name="l00122"></a>00122 
+<a name="l00129"></a>00129         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual...">setTransparentClock</a>(<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html" title="Class generated from linklayer/ethernet/PCFrame.msg by opp_msgc.">PCFrame</a> *pcf);
+<a name="l00130"></a>00130 
+<a name="l00134"></a>00134         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa915182c2ca1fa08c42d5bd7778e8049" title="Registers a time-triggered buffer that feeds the module.">registerTTBuffer</a>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a> *buffer);
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136     <span class="keyword">protected</span>:
+<a name="l00140"></a>00140         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a986591ead93237643e88d4020f764df0" title="Initialization of the module.">initialize</a>();
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142 
+<a name="l00156"></a>00156         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a70262cb8679514a6b781aa655ac5090f" title="Forwards the messages from the different buffers and LLC according to the TTEthernet...">handleMessage</a>(cMessage *msg);
+<a name="l00157"></a>00157 
+<a name="l00165"></a>00165         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359" title="this method is invoked when the underlying mac is idle.">requestPacket</a>();
+<a name="l00166"></a>00166 
+<a name="l00170"></a>00170         <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ac55e4e6ffd709810a2c2ca85c7fb112e" title="Returns number of requested messages.">getNumPendingRequests</a>();
+<a name="l00171"></a>00171 
+<a name="l00177"></a>00177         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Returns true when there are no pending messages.">isEmpty</a>();
+<a name="l00178"></a>00178 
+<a name="l00182"></a>00182         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a674f0c4a336bdaf7b5b4d01e01ef11b0" title="Clears all queued packets and stored requests.">clear</a>();
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();
+<a name="l00185"></a>00185 };
+<a name="l00186"></a>00186 }
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188 <span class="preprocessor">#endif</span>
+<a name="l00189"></a>00189 <span class="preprocessor"></span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 4 13:53:02 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:09:45 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

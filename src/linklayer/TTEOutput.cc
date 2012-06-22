@@ -1,5 +1,7 @@
 #include "TTEOutput.h"
 
+#include <algorithm>
+
 #include <Buffer.h>
 #include <RCBuffer.h>
 #include <PCFrame_m.h>
@@ -53,6 +55,23 @@ void TTEOutput::initialize()
     pcfQueueLengthSignal = registerSignal("pcfQueueLength");
 }
 
+void TTEOutput::addListener(IPassiveQueueListener *listener){
+    std::list<IPassiveQueueListener*>::iterator it = find(listeners.begin(), listeners.end(), listener);
+    if (it == listeners.end())
+        listeners.push_back(listener);
+}
+void TTEOutput::removeListener(IPassiveQueueListener *listener){
+    std::list<IPassiveQueueListener*>::iterator it = find(listeners.begin(), listeners.end(), listener);
+    if (it != listeners.end())
+        listeners.erase(it);
+}
+
+void TTEOutput::notifyListeners()
+{
+    for (std::list<IPassiveQueueListener*>::iterator it = listeners.begin(); it != listeners.end(); ++it)
+        (*it)->packetEnqueued(this);
+}
+
 void TTEOutput::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("PCFin"))
@@ -67,6 +86,7 @@ void TTEOutput::handleMessage(cMessage *msg)
         else
         {
             pcfQueue.insert(msg);
+            notifyListeners();
             emit(pcfQueueLengthSignal, pcfQueue.length());
         }
     }
@@ -100,6 +120,7 @@ void TTEOutput::handleMessage(cMessage *msg)
             else
             {
                 ttQueue.insert(msg);
+                notifyListeners();
                 emit(ttQueueLengthSignal, ttQueue.length());
             }
         }
@@ -128,10 +149,12 @@ void TTEOutput::handleMessage(cMessage *msg)
             if (priority > 0 && priority < NUM_RC_PRIORITIES)
             {
                 rcQueue[priority].insert(msg);
+                notifyListeners();
             }
             else
             {
                 rcQueue[0].insert(msg);
+                notifyListeners();
                 ev << "Priority missing!" << endl;
             }
         }
@@ -150,6 +173,7 @@ void TTEOutput::handleMessage(cMessage *msg)
         else
         {
             beQueue.insert(msg);
+            notifyListeners();
             emit(beQueueLengthSignal, beQueue.length());
         }
     }

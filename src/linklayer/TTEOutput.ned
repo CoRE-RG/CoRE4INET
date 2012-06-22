@@ -1,6 +1,6 @@
 package ttethernet.linklayer;
 
-import inet.networklayer.queue.IOutputQueue;
+import inet.linklayer.IOutputQueue;
 //
 // Module for outgoing traffic to MAC layer. The module maintains the adherence of priorities
 // for all traffic classes.

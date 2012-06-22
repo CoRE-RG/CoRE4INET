@@ -1,6 +1,6 @@
 package ttethernet.linklayer;
 
-import inet.networklayer.queue.IOutputQueue;
+import inet.linklayer.IOutputQueue;
 
 //
 // Module for incoming traffic from MAC layer. The traffic is checked for

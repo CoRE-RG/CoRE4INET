@@ -62,33 +62,37 @@
 <a name="l00030"></a>00030     <span class="keywordflow">if</span> (!msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>) &amp;&amp; *<span class="keyword">new</span> std::string(getParentModule()-&gt;getName()) != <span class="stringliteral">&quot;videoclient&quot;</span>)
 <a name="l00031"></a>00031     {
 <a name="l00032"></a>00032         <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a> *frame = <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Class generated from linklayer/ethernet/CTFrame.msg by opp_msgc.">CTFrame</a>(<span class="stringliteral">&quot;CT-ID=100&quot;</span>);
-<a name="l00033"></a>00033         frame-&gt;setDest(<span class="stringliteral">&quot;03 04 05 06 00 64&quot;</span>);
-<a name="l00034"></a>00034         frame-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html#af71d47380ceff7510b4462a3f45576b4">setCtID</a>(100);
-<a name="l00035"></a>00035         <span class="comment">//ENDE TEST</span>
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037         <span class="keywordflow">if</span> (getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_100_CTC&quot;</span>))
-<a name="l00038"></a>00038             sendDirect(frame, getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_100_CTC&quot;</span>)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
-<a name="l00039"></a>00039     }
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041     <span class="keywordflow">if</span> (!msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>) &amp;&amp; *<span class="keyword">new</span> std::string(getParentModule()-&gt;getName()) != <span class="stringliteral">&quot;videoclient&quot;</span>)
-<a name="l00042"></a>00042     {
-<a name="l00043"></a>00043         CTFrame *frame = <span class="keyword">new</span> CTFrame(<span class="stringliteral">&quot;CT-ID=101&quot;</span>);
-<a name="l00044"></a>00044         frame-&gt;setDest(<span class="stringliteral">&quot;03 04 05 06 00 65&quot;</span>);
-<a name="l00045"></a>00045         frame-&gt;setCtID(100);
-<a name="l00046"></a>00046         frame-&gt;setByteLength(1500);
-<a name="l00047"></a>00047         <span class="comment">//ENDE TEST</span>
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049         <span class="keywordflow">if</span> (getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_101_CTC&quot;</span>))
-<a name="l00050"></a>00050             sendDirect(frame, getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_101_CTC&quot;</span>)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
-<a name="l00051"></a>00051     }
+<a name="l00033"></a>00033         MACAddress srcAddr;
+<a name="l00034"></a>00034         srcAddr.setAddress(<span class="stringliteral">&quot;03 04 05 06 00 64&quot;</span>);
+<a name="l00035"></a>00035         frame-&gt;setDest(srcAddr);
+<a name="l00036"></a>00036         frame-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_c_t_frame.html#af71d47380ceff7510b4462a3f45576b4">setCtID</a>(100);
+<a name="l00037"></a>00037         <span class="comment">//ENDE TEST</span>
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039         <span class="keywordflow">if</span> (getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_100_CTC&quot;</span>))
+<a name="l00040"></a>00040             sendDirect(frame, getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_100_CTC&quot;</span>)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
+<a name="l00041"></a>00041     }
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keywordflow">if</span> (!msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>) &amp;&amp; *<span class="keyword">new</span> std::string(getParentModule()-&gt;getName()) != <span class="stringliteral">&quot;videoclient&quot;</span>)
+<a name="l00044"></a>00044     {
+<a name="l00045"></a>00045         CTFrame *frame = <span class="keyword">new</span> CTFrame(<span class="stringliteral">&quot;CT-ID=101&quot;</span>);
+<a name="l00046"></a>00046         MACAddress srcAddr;
+<a name="l00047"></a>00047         srcAddr.setAddress(<span class="stringliteral">&quot;03 04 05 06 00 65&quot;</span>);
+<a name="l00048"></a>00048         frame-&gt;setDest(srcAddr);
+<a name="l00049"></a>00049         frame-&gt;setCtID(100);
+<a name="l00050"></a>00050         frame-&gt;setByteLength(1500);
+<a name="l00051"></a>00051         <span class="comment">//ENDE TEST</span>
 <a name="l00052"></a>00052 
-<a name="l00053"></a>00053     <span class="keyword">delete</span> msg;
-<a name="l00054"></a>00054     <span class="comment">// TODO - Generated method body</span>
-<a name="l00055"></a>00055 }
+<a name="l00053"></a>00053         <span class="keywordflow">if</span> (getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_101_CTC&quot;</span>))
+<a name="l00054"></a>00054             sendDirect(frame, getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;VL_TT_101_CTC&quot;</span>)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));
+<a name="l00055"></a>00055     }
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057 } <span class="comment">//namespace</span>
+<a name="l00057"></a>00057     <span class="keyword">delete</span> msg;
+<a name="l00058"></a>00058     <span class="comment">// TODO - Generated method body</span>
+<a name="l00059"></a>00059 }
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 4 13:53:02 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:09:45 2012 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
