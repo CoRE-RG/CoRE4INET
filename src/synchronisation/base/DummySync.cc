@@ -46,7 +46,7 @@ void DummySync::handleMessage(cMessage *msg)
             unsigned int cycleTicks = tteScheduler->par("cycle_ticks").longValue();
             double tick = tteScheduler->par("tick").doubleValue();
 
-            int modticks = ((int)(simTime().dbl()/tick)-par("action_time").longValue())%cycleTicks;
+            long modticks = ((int)(simTime().dbl()/tick)-par("action_time").longValue())%cycleTicks;
             if(modticks>(cycleTicks/2))
                 modticks=modticks-cycleTicks;
             modticks+=uniform(-par("precission").doubleValue()/2, par("precission").doubleValue()/2)/tick;
