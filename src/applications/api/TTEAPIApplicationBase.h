@@ -71,6 +71,8 @@ class TTEAPIPriv
 class TTEAPIApplicationBase : public TTEApplicationBase
 {
     private:
+        bool synchronized;
+    private:
         /**
          * @brief initializes the module.
          *

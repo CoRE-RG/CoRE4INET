@@ -24,6 +24,7 @@
 #include "APIPayload_m.h"
 #include "Task.h"
 #include "TTEScheduler.h"
+#include "SyncNotification_m.h"
 
 #include "Ethernet.h"
 
@@ -49,6 +50,15 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
         //Reregister scheduler
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         tteScheduler->registerEvent((SchedulerEvent *) msg);
+    }
+    if(msg->arrivedOn("syncIn")){
+        SyncNotification *notification = (SyncNotification*)msg;
+        if(notification->getKind()==SYNC){
+            synchronized=true;
+        }
+        else{
+            synchronized=false;
+        }
     }
 }
 
@@ -212,6 +222,9 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
         }
         case TTE_VAR_CTRL_STATUS:{
             *((uint32_t*)value) = TTE_STAT_CONFIGURED | TTE_STAT_RUNNING;
+            if(synchronized){
+                *((uint32_t*)value) |= TTE_STAT_SYNCHRONIZED;
+            }
             break;
         }
         case TTE_VAR_CTRL_COUNT:{

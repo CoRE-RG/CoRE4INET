@@ -30,4 +30,6 @@ simple TTEApplicationBase like ITTEApplication
             input RCin @directIn @labels(CTFrame);
             //Input gate for the incoming SchedulerActionTimeEvent messages
             input schedulerIn @directIn;
+            //Input gate for the incoming SynchronizationNotification messages
+            input syncIn @directIn;
 }

@@ -17,6 +17,7 @@
 #define __TTETHERNETMODELV2_DUMMYSYNC_H_
 
 #include <omnetpp.h>
+#include "SyncBase.h"
 
 namespace TTEthernetModel {
 
@@ -27,7 +28,7 @@ namespace TTEthernetModel {
  *
  * @warning Currently only dummy
  */
-class DummySync : public cSimpleModule
+class DummySync : public SyncBase
 {
     protected:
         /**

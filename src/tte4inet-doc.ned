@@ -33,7 +33,7 @@
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.2.1)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 1.99.5)
+// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 2.0)
 //
 // <h2>Introductory material</h2>
 //  - For help with the installation see the <tt><a href="../doxy/install.html">INSTALL</a></tt> page.
@@ -56,7 +56,7 @@
 // along with the <a href="http://www.simutools.org/2011/" target="_top">4th International ICST Conference on Simulation Tools and Techniques (2011)</a>.
 // You can find the presentation slides <a href="http://papers.till-steinbach.de/sdkks-eifre-11b.pdf" target="_top">here</a>
 //
-// Since there were changes necessary to support OMNeT++ 4.2 and INET 1.99, TTE4INET was completely redesigned in the current version
+// Since there were changes necessary to support OMNeT++ 4.2 and INET 2.0, TTE4INET was completely redesigned in the current version
 //
 // <h2>IMPORTANT</h2>
 // The TTE4INET model is continuously being improved: new parts
@@ -72,6 +72,10 @@
 // - Till Steinbach (HAW-Hamburg)
 // - Hermand Dieumo Kenfack (HAW-Hamburg)
 // - Fabian Kempf (HAW-Hamburg)
+// - Lazar Todorov (HAW Hamburg)
+//
+// <h3>Acknowledgements</h3>
+// - Giancarlo Vasta for finding and reporting bugs 
 //
 // <h2>Contact</h2>
 // CoRE Research Group

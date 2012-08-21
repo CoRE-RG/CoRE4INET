@@ -16,6 +16,7 @@
 #include "DummySync.h"
 #include "TTEScheduler.h"
 #include "SchedulerMessageEvents_m.h"
+#include "SyncNotification_m.h"
 
 using namespace TTEthernetModel;
 
@@ -23,7 +24,7 @@ Define_Module( DummySync);
 
 int DummySync::numInitStages() const
 {
-    return 2;
+    return 3;
 }
 
 void DummySync::initialize(int stage)
@@ -35,6 +36,11 @@ void DummySync::initialize(int stage)
         event->setAction_time(par("action_time").longValue());
         event->setDestinationGate(gate("schedulerIn"));
         tteScheduler->registerEvent(event);
+    }
+    if(stage==2)
+    {
+        notify(SYNC);
+        getDisplayString().setTagArg("i", 1, "green");
     }
 }
 
