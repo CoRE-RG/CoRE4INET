@@ -24,7 +24,8 @@ void SyncBase::notify(SyncNotificationKind kind){
     cModule* tteApps = getParentModule()->getSubmodule("tteApp",0);
     if(tteApps){
         for(int i=0; i<tteApps->size();i++){
-            sendDirect(notification,getParentModule()->getSubmodule("tteApp",i)->gate("syncIn"));
+            sendDirect(notification->dup(),getParentModule()->getSubmodule("tteApp",i)->gate("syncIn"));
         }
     }
+    delete notification;
 }
