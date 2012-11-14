@@ -79,8 +79,6 @@ void TTEOutput::handleMessage(cMessage *msg)
         if (framesRequested)
         {
             framesRequested--;
-            msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-            msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
             send(msg, gateBaseId("out"));
         }
         else
@@ -113,8 +111,6 @@ void TTEOutput::handleMessage(cMessage *msg)
             if (framesRequested)
             {
                 framesRequested--;
-                msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-                msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
                 send(msg, gateBaseId("out"));
             }
             else
@@ -135,8 +131,6 @@ void TTEOutput::handleMessage(cMessage *msg)
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (msg->getSenderModule());
             if (rcBuffer)
                 rcBuffer->resetBag();
-            msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-            msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
             PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
             if(pcf){
                 setTransparentClock(pcf);
@@ -166,8 +160,6 @@ void TTEOutput::handleMessage(cMessage *msg)
         if (framesRequested && isTransmissionAllowed((EtherFrame*) msg))
         {
             framesRequested--;
-            msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-            msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
             send(msg, gateBaseId("out"));
         }
         else
@@ -257,8 +249,6 @@ void TTEOutput::requestPacket()
             ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
         }
 
-        msg->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-        msg->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
         send(msg, gateBaseId("out"));
         return;
     }
@@ -273,8 +263,6 @@ void TTEOutput::requestPacket()
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
             if (rcBuffer)
                 rcBuffer->resetBag();
-            message->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-            message->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
 
             PCFrame *pcf = dynamic_cast<PCFrame*> (message);
             if(pcf){
@@ -289,8 +277,6 @@ void TTEOutput::requestPacket()
     {
         framesRequested--;
         cMessage* message = (cMessage*) beQueue.pop();
-        message->addPar("sent").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-        message->addPar("sent_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
         send(message, gateBaseId("out"));
         emit(beQueueLengthSignal, beQueue.length());
         return;

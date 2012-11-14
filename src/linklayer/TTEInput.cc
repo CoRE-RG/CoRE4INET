@@ -45,8 +45,30 @@ void TTEInput::handleMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         EtherFrame *frame = (EtherFrame*) msg;
-        msg->addPar("received").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
-        msg->addPar("received_total").setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+
+        int i = msg->findPar("received");
+        cMsgPar* par;
+        if( i >=0 )
+            par = &msg->par(i);
+        else
+            par = &msg->addPar("received");
+        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+
+        i = msg->findPar("received_total");
+        if( i >=0 )
+            par = &msg->par(i);
+        else
+            par = &msg->addPar("received_total");
+        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+
+
+        i = msg->findPar("received_port");
+        if( i >=0 )
+            par = &msg->par(i);
+        else
+            par = &msg->addPar("received_port");
+        par->setLongValue(getParentModule()->getIndex());
+
         //Auf CTCs verteilen oder BE traffic
         if (isCT(frame))
         {
