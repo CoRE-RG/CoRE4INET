@@ -41,6 +41,7 @@ void TTEScheduler::initialize(int stage)
         scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
 
         lastCycleStart = simTime();
+        lastCycleTicks = 0;
     }
 }
 
