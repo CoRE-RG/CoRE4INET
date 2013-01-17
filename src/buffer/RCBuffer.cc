@@ -36,15 +36,15 @@ RCBuffer::~RCBuffer()
 
 int RCBuffer::numInitStages() const
 {
-    if(Buffer::numInitStages()>1)
-        return Buffer::numInitStages();
+    if(CTBuffer::numInitStages()>1)
+        return CTBuffer::numInitStages();
     else
         return 1;
 }
 
 void RCBuffer::initialize(int stage)
 {
-    Buffer::initialize(stage);
+    CTBuffer::initialize(stage);
     if(stage==0){
         timerMessage->setDestinationGate(gate("schedulerIn"));
 
@@ -55,7 +55,7 @@ void RCBuffer::initialize(int stage)
 
 void RCBuffer::handleMessage(cMessage *msg)
 {
-    Buffer::handleMessage(msg);
+    CTBuffer::handleMessage(msg);
 
     if(destinationGates.size() > 0)
     {
@@ -105,7 +105,7 @@ void RCBuffer::handleMessage(cMessage *msg)
 }
 
 void RCBuffer::handleParameterChange(const char* parname){
-    Buffer::handleParameterChange(parname);
+    CTBuffer::handleParameterChange(parname);
 
     timerMessage->setTimer(par("bag").doubleValue());
 }

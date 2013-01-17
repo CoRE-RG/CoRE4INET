@@ -17,7 +17,7 @@
 #define __TTETHERNETMODELV2_TTBUFFER_H_
 
 #include <omnetpp.h>
-#include <Buffer.h>
+#include <CTBuffer.h>
 #include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
@@ -30,11 +30,11 @@ namespace TTEthernetModel {
  *
  * Use the implementations TTDoubleBuffer, TTQueueBuffer.
  *
- * @sa TTDoubleBuffer, TTQueueBuffer, Buffer
+ * @sa TTDoubleBuffer, TTQueueBuffer, CTBuffer
  *
  * @ingroup Buffer
  */
-class TTBuffer : public virtual Buffer
+class TTBuffer : public virtual CTBuffer
 {
     private:
         /**

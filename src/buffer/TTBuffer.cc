@@ -40,7 +40,7 @@ int TTBuffer::numInitStages() const
 
 void TTBuffer::initialize(int stage)
 {
-    Buffer::initialize(stage);
+    CTBuffer::initialize(stage);
     if(stage==1)
     {
         ev << "Initialize TTBuffer" << endl;
@@ -63,7 +63,7 @@ void TTBuffer::handleMessage(cMessage *msg)
 {
     bool arrivedOnSchedulerIn = msg->arrivedOn("schedulerIn");
 
-    Buffer::handleMessage(msg);
+    CTBuffer::handleMessage(msg);
 
     if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT && destinationGates.size() > 0)
     {
@@ -106,7 +106,7 @@ void TTBuffer::handleMessage(cMessage *msg)
 }
 
 void TTBuffer::handleParameterChange(const char* parname){
-    Buffer::handleParameterChange(parname);
+    CTBuffer::handleParameterChange(parname);
 
     if(actionTimeEvent)
         actionTimeEvent->setAction_time(par("sendWindowStart").doubleValue());

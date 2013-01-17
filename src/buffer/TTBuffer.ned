@@ -15,7 +15,7 @@ package ttethernet.buffer;
 // @see TTDoubleBuffer, TTQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
 //
 // @author Till Steinbach
-simple TTBuffer extends Buffer
+simple TTBuffer extends CTBuffer
 {
     parameters:
         //TTBuffer is implemented by the TTBuffer C++ Class

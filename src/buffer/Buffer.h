@@ -76,15 +76,15 @@ class Buffer : public cSimpleModule
         /**
          * @brief caches ct_mask parameter
          */
-        unsigned long ctMask;
+//        unsigned long ctMask;
         /**
          * @brief caches ct_marker parameter
          */
-        unsigned long ctMarker;
+//        unsigned long ctMarker;
         /**
          * @brief caches ct_id parameter
          */
-        unsigned long ctId;
+//        unsigned long ctId;
 
     private:
         /**

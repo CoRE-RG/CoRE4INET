@@ -17,7 +17,7 @@
 #define __TTETHERNETMODELV2_RCBUFFER_H_
 
 #include <omnetpp.h>
-#include "Buffer.h"
+#include "CTBuffer.h"
 #include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
@@ -31,11 +31,11 @@ namespace TTEthernetModel {
  *
  * Use the implementations RCDoubleBuffer, RCQueueBuffer.
  *
- * @sa RCDoubleBuffer, RCQueueBuffer, Buffer
+ * @sa RCDoubleBuffer, RCQueueBuffer, CTBuffer
  *
  * @ingroup Buffer
  */
-class RCBuffer : public virtual Buffer
+class RCBuffer : public virtual CTBuffer
 {
     private:
         /**

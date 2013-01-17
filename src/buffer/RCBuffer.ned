@@ -16,7 +16,7 @@ package ttethernet.buffer;
 // @see RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
 //
 // @author Till Steinbach
-simple RCBuffer extends Buffer
+simple RCBuffer extends CTBuffer
 {
     parameters:
         //RCBuffer is implemented by the RCBuffer C++ Class
