@@ -25,6 +25,7 @@
 #include "Task.h"
 #include "TTEScheduler.h"
 #include "SyncNotification_m.h"
+#include "CTFrame.h"
 
 #include "Ethernet.h"
 

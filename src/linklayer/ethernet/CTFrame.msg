@@ -17,8 +17,13 @@ namespace TTEthernetModel;
 // @author Till Steinbach
 packet CTFrame extends EtherFrame
 {    
-        // Critical traffic ID (for TT and RC messages). 
-        unsigned short ctID;
+        // Critical traffic ID (from MAC) (for TT and RC messages). 
+        @customize(true);
+        abstract unsigned short ctID;
+        
+        // Critical traffic marker (from MAC) (for TT and RC messages). 
+        @customize(true);
+        abstract unsigned int ctMarker;
         
         string displayString="b=15,15,rect,black,kind,5";
 }

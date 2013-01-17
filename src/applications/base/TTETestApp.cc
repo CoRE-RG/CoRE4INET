@@ -14,7 +14,7 @@
 // 
 
 #include "TTETestApp.h"
-#include <CTFrame_m.h>
+#include "CTFrame.h"
 
 namespace TTEthernetModel {
 
