@@ -54,31 +54,31 @@
 <a name="l00022"></a>00022     frame = NULL;
 <a name="l00023"></a>00023 }
 <a name="l00024"></a>00024 
-<a name="l00025"></a>00025 DoubleBuffer::~DoubleBuffer()
+<a name="l00025"></a>00025 <a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a8f71f567eac302e3eff6a8496ba06db7" title="Destructor.">DoubleBuffer::~DoubleBuffer</a>()
 <a name="l00026"></a>00026 {
-<a name="l00027"></a>00027     <span class="keyword">delete</span> frame;
+<a name="l00027"></a>00027     <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a0f3686cef203e3bd5aaa2fe5bf7a6d40" title="The EtherFrame pointer is stored here.">frame</a>;
 <a name="l00028"></a>00028 }
 <a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="keywordtype">void</span> DoubleBuffer::enqueue(EtherFrame *newFrame)
+<a name="l00030"></a>00030 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a76046f00752b4f2b539b5c2b13427dcd" title="Stores a new frame.">DoubleBuffer::enqueue</a>(EtherFrame *newFrame)
 <a name="l00031"></a>00031 {
-<a name="l00032"></a>00032     <span class="keywordflow">if</span> (frame != NULL)
-<a name="l00033"></a>00033         <span class="keyword">delete</span> frame;
+<a name="l00032"></a>00032     <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a0f3686cef203e3bd5aaa2fe5bf7a6d40" title="The EtherFrame pointer is stored here.">frame</a> != NULL)
+<a name="l00033"></a>00033         <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a0f3686cef203e3bd5aaa2fe5bf7a6d40" title="The EtherFrame pointer is stored here.">frame</a>;
 <a name="l00034"></a>00034     <span class="keywordflow">else</span>
 <a name="l00035"></a>00035     {
-<a name="l00036"></a>00036         setIsEmpty(newFrame == NULL);
+<a name="l00036"></a>00036         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(newFrame == NULL);
 <a name="l00037"></a>00037     }
-<a name="l00038"></a>00038     frame = newFrame;
+<a name="l00038"></a>00038     <a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a0f3686cef203e3bd5aaa2fe5bf7a6d40" title="The EtherFrame pointer is stored here.">frame</a> = newFrame;
 <a name="l00039"></a>00039 }
 <a name="l00040"></a>00040 
-<a name="l00041"></a>00041 EtherFrame * DoubleBuffer::dequeue()
+<a name="l00041"></a>00041 EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a213af00b300ba26b7318c9fdee013cb4" title="Returns the frame that is stored in the buffer.">DoubleBuffer::dequeue</a>()
 <a name="l00042"></a>00042 {
-<a name="l00043"></a>00043     <span class="keywordflow">if</span> (frame)
-<a name="l00044"></a>00044         <span class="keywordflow">return</span> frame-&gt;dup();
+<a name="l00043"></a>00043     <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a0f3686cef203e3bd5aaa2fe5bf7a6d40" title="The EtherFrame pointer is stored here.">frame</a>)
+<a name="l00044"></a>00044         <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_double_buffer.html#a0f3686cef203e3bd5aaa2fe5bf7a6d40" title="The EtherFrame pointer is stored here.">frame</a>-&gt;dup();
 <a name="l00045"></a>00045     <span class="keywordflow">else</span>
 <a name="l00046"></a>00046         <span class="keywordflow">return</span> NULL;
 <a name="l00047"></a>00047 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

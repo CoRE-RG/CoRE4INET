@@ -32,18 +32,18 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="589,5,691,32">
-<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,80,101,107">
-<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="125,80,227,107">
-<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="251,80,365,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="389,80,483,107">
-<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="507,80,579,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="603,80,677,107">
-<area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="701,80,813,107">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="837,80,928,107">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="952,80,1048,107">
-<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="1072,80,1184,107">
-<area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="1208,80,1357,107">
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="707,5,808,32">
+<area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="5,80,120,107">
+<area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="144,80,256,107">
+<area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="280,80,429,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="453,80,547,107">
+<area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="571,80,683,107">
+<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="707,80,808,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="832,80,907,107">
+<area shape="rect" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="931,80,1027,107">
+<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="1051,80,1123,107">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="1147,80,1237,107">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="1261,80,1357,107">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -363,53 +363,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -433,53 +401,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>

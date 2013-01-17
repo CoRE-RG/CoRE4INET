@@ -68,15 +68,15 @@
 <a name="l00036"></a>00036 
 <a name="l00037"></a>00037 <span class="keywordtype">int</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae45b6326746540c298c4984ec882a2df" title="Returns the numer of initializaiton stages this module needs.">RCBuffer::numInitStages</a>()<span class="keyword"> const</span>
 <a name="l00038"></a>00038 <span class="keyword"></span>{
-<a name="l00039"></a>00039     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">Buffer::numInitStages</a>()&gt;1)
-<a name="l00040"></a>00040         <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae45b6326746540c298c4984ec882a2df" title="Returns the numer of initializaiton stages this module needs.">Buffer::numInitStages</a>();
+<a name="l00039"></a>00039     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">CTBuffer::numInitStages</a>()&gt;1)
+<a name="l00040"></a>00040         <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae45b6326746540c298c4984ec882a2df" title="Returns the numer of initializaiton stages this module needs.">CTBuffer::numInitStages</a>();
 <a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a1f08d040d089ae71cd04ae090dcf168e">00041</a>     <span class="keywordflow">else</span>
 <a name="l00042"></a>00042         <span class="keywordflow">return</span> 1;
 <a name="l00043"></a>00043 }
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a1f08d040d089ae71cd04ae090dcf168e" title="Initializes the timerMessage.">RCBuffer::initialize</a>(<span class="keywordtype">int</span> stage)
 <a name="l00046"></a>00046 {
-<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a1f08d040d089ae71cd04ae090dcf168e" title="Initializes the timerMessage.">Buffer::initialize</a>(stage);
+<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a1f08d040d089ae71cd04ae090dcf168e" title="Initializes the timerMessage.">CTBuffer::initialize</a>(stage);
 <a name="l00048"></a>00048     <span class="keywordflow">if</span>(stage==0){
 <a name="l00049"></a>00049         <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a2fb753af35fa839f02e0435cdc496878">setDestinationGate</a>(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
 <a name="l00050"></a>00050 
@@ -87,7 +87,7 @@
 <a name="l00055"></a>00055 
 <a name="l00056"></a>00056 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af" title="handles the incoming and outgoing messages of the buffer.">RCBuffer::handleMessage</a>(cMessage *msg)
 <a name="l00057"></a>00057 {
-<a name="l00058"></a>00058     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af" title="handles the incoming and outgoing messages of the buffer.">Buffer::handleMessage</a>(msg);
+<a name="l00058"></a>00058     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af" title="handles the incoming and outgoing messages of the buffer.">CTBuffer::handleMessage</a>(msg);
 <a name="l00059"></a>00059 
 <a name="l00060"></a>00060     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size() &gt; 0)
 <a name="l00061"></a>00061     {
@@ -137,7 +137,7 @@
 <a name="l00105"></a>00105 }
 <a name="l00106"></a>00106 
 <a name="l00107"></a>00107 <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aaf4e100095277446da87f5e705532414" title="Indicates a parameter has changed.">RCBuffer::handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname){
-<a name="l00108"></a>00108     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aaf4e100095277446da87f5e705532414" title="Indicates a parameter has changed.">Buffer::handleParameterChange</a>(parname);
+<a name="l00108"></a>00108     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aaf4e100095277446da87f5e705532414" title="Indicates a parameter has changed.">CTBuffer::handleParameterChange</a>(parname);
 <a name="l00109"></a><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed">00109</a> 
 <a name="l00110"></a>00110     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#aed673828ade2b4e814b53493af7cc967">setTimer</a>(par(<span class="stringliteral">&quot;bag&quot;</span>).doubleValue());
 <a name="l00111"></a>00111 }
@@ -165,7 +165,7 @@
 <a name="l00133"></a>00133 
 <a name="l00134"></a>00134 } <span class="comment">//namespace</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

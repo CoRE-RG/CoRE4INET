@@ -46,20 +46,17 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
   <img src="class_t_t_ethernet_model_1_1_buffer.png" usemap="#TTEthernetModel::Buffer_map" alt=""/>
   <map id="TTEthernetModel::Buffer_map" name="TTEthernetModel::Buffer_map">
 <area href="class_t_t_ethernet_model_1_1_b_g_buffer.html" alt="TTEthernetModel::BGBuffer" shape="rect" coords="0,56,206,80"/>
-<area href="class_t_t_ethernet_model_1_1_double_buffer.html" alt="TTEthernetModel::DoubleBuffer" shape="rect" coords="216,56,422,80"/>
-<area href="class_t_t_ethernet_model_1_1_queue_buffer.html" alt="TTEthernetModel::QueueBuffer" shape="rect" coords="648,56,854,80"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_buffer.html" alt="TTEthernetModel::RCBuffer" shape="rect" coords="1080,56,1286,80"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_buffer.html" alt="TTEthernetModel::TTBuffer" shape="rect" coords="1512,56,1718,80"/>
+<area href="class_t_t_ethernet_model_1_1_c_t_buffer.html" alt="TTEthernetModel::CTBuffer" shape="rect" coords="216,56,422,80"/>
+<area href="class_t_t_ethernet_model_1_1_double_buffer.html" alt="TTEthernetModel::DoubleBuffer" shape="rect" coords="648,56,854,80"/>
+<area href="class_t_t_ethernet_model_1_1_queue_buffer.html" alt="TTEthernetModel::QueueBuffer" shape="rect" coords="1080,56,1286,80"/>
 <area href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" alt="TTEthernetModel::BGQueueBuffer" shape="rect" coords="0,112,206,136"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" alt="TTEthernetModel::RCDoubleBuffer" shape="rect" coords="432,112,638,136"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" alt="TTEthernetModel::TTDoubleBuffer" shape="rect" coords="432,168,638,192"/>
-<area href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" alt="TTEthernetModel::BGQueueBuffer" shape="rect" coords="864,112,1070,136"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" alt="TTEthernetModel::RCQueueBuffer" shape="rect" coords="864,168,1070,192"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" alt="TTEthernetModel::TTQueueBuffer" shape="rect" coords="864,224,1070,248"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" alt="TTEthernetModel::RCDoubleBuffer" shape="rect" coords="1296,112,1502,136"/>
+<area href="class_t_t_ethernet_model_1_1_r_c_buffer.html" alt="TTEthernetModel::RCBuffer" shape="rect" coords="432,112,638,136"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_buffer.html" alt="TTEthernetModel::TTBuffer" shape="rect" coords="432,168,638,192"/>
+<area href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" alt="TTEthernetModel::RCDoubleBuffer" shape="rect" coords="864,112,1070,136"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" alt="TTEthernetModel::TTDoubleBuffer" shape="rect" coords="864,168,1070,192"/>
+<area href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" alt="TTEthernetModel::BGQueueBuffer" shape="rect" coords="1296,112,1502,136"/>
 <area href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" alt="TTEthernetModel::RCQueueBuffer" shape="rect" coords="1296,168,1502,192"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_double_buffer.html" alt="TTEthernetModel::TTDoubleBuffer" shape="rect" coords="1728,112,1934,136"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" alt="TTEthernetModel::TTQueueBuffer" shape="rect" coords="1728,168,1934,192"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" alt="TTEthernetModel::TTQueueBuffer" shape="rect" coords="1296,224,1502,248"/>
 </map>
  </div>
 </div>
@@ -107,12 +104,6 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <tr><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a> <br class="typebreak"/>
 *, <a class="el" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a> * &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">transmitCallbacks</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Stores the callbacks that are executed when a frame is removed from the buffer.  <a href="#a43c2174122aab6a6e8727ec2b0ab8c5f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58">ctMask</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">caches ct_mask parameter  <a href="#a3ac6c7b872e596ae1ec4cdc4c7116f58"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f">ctMarker</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">caches ct_marker parameter  <a href="#aac4a11fe22c2fabc54e2ec2096e5934f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c">ctId</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">caches ct_id parameter  <a href="#a12acfd509fb5a63dbe5dc0ab32b4805c"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Static Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static simsignal_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5">txPkSignal</a> = SIMSIGNAL_NULL</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Signal that is emitted every time a frame was sent.  <a href="#aa1ab8b8b2326252ded43a84e816e6bc5"></a><br/></td></tr>
@@ -120,7 +111,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Signal that contains the latency until the frame enters the buffer.  <a href="#a8dab8020603b4991ff88a6c9e019098d"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd">initializeStatistics</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initializes the statistics for the module.  <a href="#ad913ce4432ef7f7f4075be533580acbd"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">caches ct_mask parameter  <a href="#ad913ce4432ef7f7f4075be533580acbd"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Base class for all buffer classes. </p>
@@ -272,14 +263,14 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a213af00b300ba26b7318c9fdee013cb4">TTEthernetModel::DoubleBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f">TTEthernetModel::QueueBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00174">174</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00154">154</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00099">getFrame()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00175"></a>00175 {
-<a name="l00176"></a>00176     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;
-<a name="l00177"></a>00177     <span class="keywordflow">throw</span>;
-<a name="l00178"></a>00178 }
+<p><div class="fragment"><pre class="fragment"><a name="l00155"></a>00155 {
+<a name="l00156"></a>00156     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00157"></a>00157     <span class="keywordflow">throw</span>;
+<a name="l00158"></a>00158 }
 </pre></div></p>
 
 </div>
@@ -311,14 +302,14 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a76046f00752b4f2b539b5c2b13427dcd">TTEthernetModel::DoubleBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918">TTEthernetModel::QueueBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00168">168</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00148">148</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00103">putFrame()</a>.</p>
+<p>Referenced by <a class="el" href="_c_t_buffer_8cc_source.html#l00030">TTEthernetModel::CTBuffer::putFrame()</a>, and <a class="el" href="_buffer_8cc_source.html#l00103">putFrame()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00169"></a>00169 {
-<a name="l00170"></a>00170     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;
-<a name="l00171"></a>00171     <span class="keywordflow">throw</span>;
-<a name="l00172"></a>00172 }
+<p><div class="fragment"><pre class="fragment"><a name="l00149"></a>00149 {
+<a name="l00150"></a>00150     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00151"></a>00151     <span class="keywordflow">throw</span>;
+<a name="l00152"></a>00152 }
 </pre></div></p>
 
 </div>
@@ -450,35 +441,23 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a91fc44bd17d4f3bf9c4f6c8f6e92b369">TTEthernetModel::BGBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af">TTEthernetModel::RCBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847">TTEthernetModel::TTBuffer</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html#a91fc44bd17d4f3bf9c4f6c8f6e92b369">TTEthernetModel::BGBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#a9f63a30295ca896641a180e1a5722c95">TTEthernetModel::CTBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af">TTEthernetModel::RCBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847">TTEthernetModel::TTBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00111">111</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00107">107</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00112"></a>00112 {
-<a name="l00113"></a>00113     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
-<a name="l00114"></a>00114     {
-<a name="l00115"></a>00115         EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);
-<a name="l00116"></a>00116         <span class="comment">//Try to correct destination mac</span>
-<a name="l00117"></a>00117         <span class="keywordflow">if</span>(frame-&gt;getDest().isUnspecified()){
-<a name="l00118"></a>00118             MACAddress mac;
-<a name="l00119"></a>00119             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> maskedMarker= <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a> &amp; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a>;
-<a name="l00120"></a>00120             mac.setAddressByte(0, maskedMarker&gt;&gt;24);
-<a name="l00121"></a>00121             mac.setAddressByte(1, maskedMarker&gt;&gt;16);
-<a name="l00122"></a>00122             mac.setAddressByte(2, maskedMarker&gt;&gt;8);
-<a name="l00123"></a>00123             mac.setAddressByte(3, maskedMarker);
-<a name="l00124"></a>00124             mac.setAddressByte(4, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>&gt;&gt;8);
-<a name="l00125"></a>00125             mac.setAddressByte(5, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>);
-<a name="l00126"></a>00126             frame-&gt;setDest(mac);
-<a name="l00127"></a>00127         }
-<a name="l00128"></a>00128         emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>, simTime()-msg-&gt;getCreationTime());
-<a name="l00129"></a>00129         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e" title="Wrapper function arround enqueue().">putFrame</a>((EtherFrame*) frame);
-<a name="l00130"></a>00130         <span class="comment">// Now execute callbacks if there are some</span>
-<a name="l00131"></a>00131         <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.begin();
-<a name="l00132"></a>00132                 iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end(); ++iter){
-<a name="l00133"></a>00133             iter-&gt;first-&gt;executeCallback(iter-&gt;second);
-<a name="l00134"></a>00134         }
-<a name="l00135"></a>00135     }
-<a name="l00136"></a>00136 }
+<p><div class="fragment"><pre class="fragment"><a name="l00108"></a>00108 {
+<a name="l00109"></a>00109     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
+<a name="l00110"></a>00110     {
+<a name="l00111"></a>00111         EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);
+<a name="l00112"></a>00112         emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>, simTime()-msg-&gt;getCreationTime());
+<a name="l00113"></a>00113         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e" title="Wrapper function arround enqueue().">putFrame</a>((EtherFrame*) frame);
+<a name="l00114"></a>00114         <span class="comment">// Now execute callbacks if there are some</span>
+<a name="l00115"></a>00115         <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.begin();
+<a name="l00116"></a>00116                 iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end(); ++iter){
+<a name="l00117"></a>00117             iter-&gt;first-&gt;executeCallback(iter-&gt;second);
+<a name="l00118"></a>00118         }
+<a name="l00119"></a>00119     }
+<a name="l00120"></a>00120 }
 </pre></div></p>
 
 </div>
@@ -507,39 +486,35 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aaf4e100095277446da87f5e705532414">TTEthernetModel::RCBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb">TTEthernetModel::TTBuffer</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#ac71ac70a5cfebd3e20242558e10647ca">TTEthernetModel::CTBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aaf4e100095277446da87f5e705532414">TTEthernetModel::RCBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb">TTEthernetModel::TTBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00138">138</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00122">122</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00138"></a>00138                                                      {
-<a name="l00139"></a>00139     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();
-<a name="l00140"></a>00140     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();
-<a name="l00141"></a>00141     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();
-<a name="l00144"></a>00144     <span class="keywordflow">if</span>(ev.isGUI()){
-<a name="l00145"></a>00145         <span class="comment">//TODO check why this does not work</span>
-<a name="l00146"></a>00146         <span class="comment">//getDisplayString().setTagArg(&quot;i2&quot;, 0, &quot;&quot;);</span>
-<a name="l00147"></a>00147         <span class="comment">//getDisplayString().setTagArg(&quot;tt&quot;, 0, &quot;&quot;);</span>
-<a name="l00148"></a>00148     }
-<a name="l00149"></a>00149     std::string destinationGatesString = par(<span class="stringliteral">&quot;destination_gates&quot;</span>).stdstringValue();
-<a name="l00150"></a>00150     std::vector&lt;std::string&gt; destinationGatePaths;
-<a name="l00151"></a>00151     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);
-<a name="l00152"></a>00152     <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator destinationGatePath = destinationGatePaths.begin();
-<a name="l00153"></a>00153             destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
-<a name="l00154"></a>00154         cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>((*destinationGatePath));
-<a name="l00155"></a>00155         <span class="keywordflow">if</span>(gate){
-<a name="l00156"></a>00156             <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(gate);
-<a name="l00157"></a>00157         }
-<a name="l00158"></a>00158         <span class="keywordflow">else</span>{
-<a name="l00159"></a>00159             <span class="keywordflow">if</span>(ev.isGUI()){
-<a name="l00160"></a>00160                 ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Gate &quot;</span>&lt;&lt;(*destinationGatePath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved!&quot;</span>&lt;&lt;endl;
-<a name="l00161"></a>00161                 getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
-<a name="l00162"></a>00162                 getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem outgoing gate!&quot;</span>);
-<a name="l00163"></a>00163             }
-<a name="l00164"></a>00164         }
-<a name="l00165"></a>00165     }
-<a name="l00166"></a>00166 }
+<p><div class="fragment"><pre class="fragment"><a name="l00122"></a>00122                                                      {
+<a name="l00123"></a>00123     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();
+<a name="l00124"></a>00124     <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00125"></a>00125         <span class="comment">//TODO check why this does not work</span>
+<a name="l00126"></a>00126         <span class="comment">//getDisplayString().setTagArg(&quot;i2&quot;, 0, &quot;&quot;);</span>
+<a name="l00127"></a>00127         <span class="comment">//getDisplayString().setTagArg(&quot;tt&quot;, 0, &quot;&quot;);</span>
+<a name="l00128"></a>00128     }
+<a name="l00129"></a>00129     std::string destinationGatesString = par(<span class="stringliteral">&quot;destination_gates&quot;</span>).stdstringValue();
+<a name="l00130"></a>00130     std::vector&lt;std::string&gt; destinationGatePaths;
+<a name="l00131"></a>00131     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);
+<a name="l00132"></a>00132     <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator destinationGatePath = destinationGatePaths.begin();
+<a name="l00133"></a>00133             destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
+<a name="l00134"></a>00134         cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>((*destinationGatePath));
+<a name="l00135"></a>00135         <span class="keywordflow">if</span>(gate){
+<a name="l00136"></a>00136             <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(gate);
+<a name="l00137"></a>00137         }
+<a name="l00138"></a>00138         <span class="keywordflow">else</span>{
+<a name="l00139"></a>00139             <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00140"></a>00140                 ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Gate &quot;</span>&lt;&lt;(*destinationGatePath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved!&quot;</span>&lt;&lt;endl;
+<a name="l00141"></a>00141                 getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00142"></a>00142                 getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem outgoing gate!&quot;</span>);
+<a name="l00143"></a>00143             }
+<a name="l00144"></a>00144         }
+<a name="l00145"></a>00145     }
+<a name="l00146"></a>00146 }
 </pre></div></p>
 
 </div>
@@ -575,7 +550,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <p><div class="fragment"><pre class="fragment"><a name="l00041"></a>00041 {
 <a name="l00042"></a>00042     <span class="keywordflow">if</span>(stage==0){
 <a name="l00043"></a>00043         ev &lt;&lt; <span class="stringliteral">&quot;Initialize Buffer&quot;</span> &lt;&lt; endl;
-<a name="l00044"></a>00044         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">initializeStatistics</a>();
+<a name="l00044"></a>00044         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="caches ct_mask parameter">initializeStatistics</a>();
 <a name="l00045"></a>00045     }
 <a name="l00046"></a>00046 }
 </pre></div></p>
@@ -597,7 +572,8 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 </div>
 <div class="memdoc">
 
-<p>Initializes the statistics for the module. </p>
+<p>caches ct_mask parameter </p>
+<p>caches ct_marker parameter caches ct_id parameter Initializes the statistics for the module </p>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a">TTEthernetModel::QueueBuffer</a>.</p>
 
@@ -667,17 +643,15 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 </dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue()</a>; </dd></dl>
 
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#a782921ec7af833958c6dbb3473c4a9fd">TTEthernetModel::CTBuffer</a>.</p>
+
 <p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00103">103</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00111">handleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00107">handleMessage()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00103"></a>00103                                        {
-<a name="l00104"></a>00104     <span class="keywordtype">int</span> priority = par(<span class="stringliteral">&quot;priority&quot;</span>).longValue();
-<a name="l00105"></a>00105     <span class="keywordflow">if</span>(frame &amp;&amp; priority&gt;=0){
-<a name="l00106"></a>00106         frame-&gt;setSchedulingPriority(priority);
-<a name="l00107"></a>00107     }
-<a name="l00108"></a>00108     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(frame);
-<a name="l00109"></a>00109 }
+<a name="l00104"></a>00104     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(frame);
+<a name="l00105"></a>00105 }
 </pre></div></p>
 
 </div>
@@ -752,63 +726,6 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a12acfd509fb5a63dbe5dc0ab32b4805c"></a><!-- doxytag: member="TTEthernetModel::Buffer::ctId" ref="a12acfd509fb5a63dbe5dc0ab32b4805c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c">TTEthernetModel::Buffer::ctId</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>caches ct_id parameter </p>
-
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00087">87</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00111">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00138">handleParameterChange()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aac4a11fe22c2fabc54e2ec2096e5934f"></a><!-- doxytag: member="TTEthernetModel::Buffer::ctMarker" ref="aac4a11fe22c2fabc54e2ec2096e5934f" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f">TTEthernetModel::Buffer::ctMarker</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>caches ct_marker parameter </p>
-
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00083">83</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00111">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00138">handleParameterChange()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3ac6c7b872e596ae1ec4cdc4c7116f58"></a><!-- doxytag: member="TTEthernetModel::Buffer::ctMask" ref="a3ac6c7b872e596ae1ec4cdc4c7116f58" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58">TTEthernetModel::Buffer::ctMask</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>caches ct_mask parameter </p>
-
-<p>Definition at line <a class="el" href="_buffer_8h_source.html#l00079">79</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00111">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00138">handleParameterChange()</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ac648d2729e20841d94b3abee8c999462"></a><!-- doxytag: member="TTEthernetModel::Buffer::destinationGates" ref="ac648d2729e20841d94b3abee8c999462" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -824,7 +741,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00066">66</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00062">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_buffer_8cc_source.html#l00138">handleParameterChange()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00062">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_buffer_8cc_source.html#l00122">handleParameterChange()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
 
 </div>
 </div>
@@ -843,7 +760,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00224">224</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00111">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00048">initializeStatistics()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00107">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00048">initializeStatistics()</a>.</p>
 
 </div>
 </div>
@@ -862,7 +779,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00070">70</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00075">addReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00080">getReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00111">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00075">addReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00080">getReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00107">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
 
 </div>
 </div>
@@ -909,7 +826,7 @@ Inheritance diagram for TTEthernetModel::Buffer:</div>
 <li><a class="el" href="_buffer_8cc_source.html">Buffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

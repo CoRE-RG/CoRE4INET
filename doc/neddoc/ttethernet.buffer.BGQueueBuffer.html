@@ -83,53 +83,21 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
       <th class="description">Description</th>
    </tr>
 <tr class="inherited">
-   <td>priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr class="inherited">
-   <td>ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr class="inherited">
-   <td>ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr class="inherited">
-   <td>ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr class="inherited">
    <td>destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr class="local">

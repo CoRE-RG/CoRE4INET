@@ -26,11 +26,10 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-usage-dia
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.Buffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="101,80,173,107">
+<img src="ttethernet.buffer.Buffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="53,80,125,107">
 <area shape="rect" href="ttethernet.buffer.BGBuffer.html" title="Simple Module BGBuffer" alt="" coords="5,155,77,181">
-<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="101,155,173,181">
-<area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="197,155,269,181">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IOutputQueue.html" title="Module Interface IOutputQueue" alt="" coords="87,5,188,32">
+<area shape="rect" href="ttethernet.buffer.CTBuffer.html" title="Simple Module CTBuffer" alt="" coords="101,155,173,181">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IOutputQueue.html" title="Module Interface IOutputQueue" alt="" coords="39,5,140,32">
 </map>
 <h3 class="subtitle">Known subclasses:</h3>
 <table class="typestable">
@@ -54,29 +53,15 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 </tr>
 <tr>
    <td>
-<a href="ttethernet.buffer.RCBuffer.html">RCBuffer</a>
+<a href="ttethernet.buffer.CTBuffer.html">CTBuffer</a>
    </td>
    <td>
 <i>simple&nbsp;module</i>
    </td>
    <td>
 
-<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for rate-constrained traffic. Messages are sent using the configured
-bandwidth allocation gap.</p>
-
-   </td>
-</tr>
-<tr>
-   <td>
-<a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>
-   </td>
-   <td>
-<i>simple&nbsp;module</i>
-   </td>
-   <td>
-
-<p>Represents an abstract <a href="ttethernet.buffer.Buffer.html">Buffer</a> for time-triggerd traffic. Messages are sent using the configured
-send window.</p>
+<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for critical traffic Buffers of TTEthernet.
+Since this is an abstract module please do not instantiate it</p>
 
    </td>
 </tr>
@@ -90,53 +75,21 @@ send window.</p>
       <th class="description">Description</th>
    </tr>
 <tr class="local">
-   <td>priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr class="local">
-   <td>ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr class="local">
-   <td>ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr class="local">
-   <td>ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr class="local">
    <td>destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 </table>
@@ -227,14 +180,14 @@ send window.</p>
         </span><span style="color: #808080; font-style: italic; ">//End-to-end latency
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">latency</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;End-to-end latency&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">unit</span><span style="color: #000000; ">=</span><span style="color: #000000; ">s</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">stats</span><span style="color: #000000; ">,</span><span style="color: #000000; ">histogram</span><span style="color: #000000; ">,</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Priority of the buffer (currently only used for rate-constrained traffic)
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">priority</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(-</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//Critical traffic ID of the buffer
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_id</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//Critical traffic marker of the buffer
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_marker</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//Critical traffic mask of the buffer
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_mask</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of gates where the frames of the buffer are delivered
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//        int priority=default(-1);
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//Critical traffic ID of the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//        int ct_id=default(0);
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//Critical traffic marker of the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//        int ct_marker=default(0);
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//Critical traffic mask of the buffer
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//        int ct_mask=default(0);
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of gates where the frames of the buffer are delivered
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">destination_gates</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//The buffers Input

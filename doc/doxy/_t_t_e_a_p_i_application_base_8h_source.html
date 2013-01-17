@@ -75,64 +75,66 @@
 <a name="l00071"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html">00071</a> <span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html" title="Base class for a TTEthernet-Application based on the TTEthernet-API.">TTEAPIApplicationBase</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a>
 <a name="l00072"></a>00072 {
 <a name="l00073"></a>00073     <span class="keyword">private</span>:
-<a name="l00080"></a>00080         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a508e4c6e531a7df3c9b273ca1ca0cb15" title="initializes the module.">initialize</a>();
-<a name="l00081"></a>00081 
-<a name="l00090"></a>00090         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a6a91f5372abc6bd1edd29c797c5c087c" title="Handles incoming START_APPLICATION or Scheduler messages.">handleMessage</a>(cMessage *msg);
-<a name="l00091"></a>00091     <span class="keyword">protected</span>:
-<a name="l00096"></a>00096         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">startApplication</a>();
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098     <span class="keyword">public</span>:
-<a name="l00105"></a>00105         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9472479b1788c65b84199fdd89eebbc9" title="registers a task that is periodically scheduled.">registerTask</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> actionTime, <span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*), <span class="keywordtype">void</span> *setFunctionArg);
-<a name="l00106"></a>00106 
-<a name="l00112"></a>00112         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a004aa5acb4b8bf25cdcb8dfa29b35569" title="implementation of the TTEthernet-API method.">tte_get_ct_output_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
-<a name="l00113"></a>00113                 <span class="keyword">const</span> uint16_t ct_id,
-<a name="l00114"></a>00114                 tte_buffer_t * <span class="keyword">const</span> buf);
-<a name="l00115"></a>00115 
-<a name="l00121"></a>00121         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9493a178576b42719e346740a94758f7" title="implementation of the TTEthernet-API method.">tte_get_bg_output_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
-<a name="l00122"></a>00122                 <span class="keyword">const</span> uint8_t channel,
-<a name="l00123"></a>00123                 tte_buffer_t * <span class="keyword">const</span> buf);
-<a name="l00124"></a>00124 
-<a name="l00130"></a>00130         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#af8024cfd62c23545d3226c1fae26d504" title="implementation of the TTEthernet-API method.">tte_get_bg_input_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
-<a name="l00131"></a>00131                 <span class="keyword">const</span> uint8_t channel,
-<a name="l00132"></a>00132                 tte_buffer_t * <span class="keyword">const</span> buf);
-<a name="l00133"></a>00133 
-<a name="l00139"></a>00139         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7441ae1141a1993ca486014cb2406ab7" title="implementation of the TTEthernet-API method.">tte_get_ct_input_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
-<a name="l00140"></a>00140                 <span class="keyword">const</span> uint16_t ct_id,
-<a name="l00141"></a>00141                 tte_buffer_t * <span class="keyword">const</span> buf);
-<a name="l00142"></a>00142 
-<a name="l00148"></a>00148         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aed85f82bfe571df81436339852f1a7a8" title="implementation of the TTEthernet-API method.">tte_get_var</a>(<span class="keyword">const</span> uint8_t ctrl_id,
-<a name="l00149"></a>00149                 <span class="keyword">const</span> tte_var_id_t var_id,
-<a name="l00150"></a>00150                 <span class="keyword">const</span> uint32_t var_size,
-<a name="l00151"></a>00151                 <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
-<a name="l00152"></a>00152 
-<a name="l00158"></a>00158         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a70ba853e240dc96c91460457c3921657" title="implementation of the TTEthernet-API method.">tte_open_output_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf,
-<a name="l00159"></a>00159                 tte_frame_t * <span class="keyword">const</span> frame);
-<a name="l00160"></a>00160 
-<a name="l00166"></a>00166         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae857de443d19fe185f14cf4d24f61b4b" title="implementation of the TTEthernet-API method.">tte_open_input_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf,
-<a name="l00167"></a>00167                 tte_frame_t * <span class="keyword">const</span> frame,
-<a name="l00168"></a>00168                 tte_buf_status_t * <span class="keyword">const</span> status);
-<a name="l00169"></a>00169 
-<a name="l00175"></a>00175         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ac1a61c340af54c6b06b9e68373b8ef09" title="implementation of the TTEthernet-API method.">tte_close_output_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf);
-<a name="l00176"></a>00176 
-<a name="l00182"></a>00182         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aa38b602984406d089b81f4676d3114d9" title="implementation of the TTEthernet-API method.">tte_close_input_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf);
-<a name="l00183"></a>00183 
-<a name="l00189"></a>00189         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae1cd0a759a9626632cb3f72f219653c6" title="implementation of the TTEthernet-API method.">tte_set_buf_var</a>(tte_buffer_t * <span class="keyword">const</span> buf,
-<a name="l00190"></a>00190                 <span class="keyword">const</span> tte_buf_var_id_t var_id,
-<a name="l00191"></a>00191                 <span class="keyword">const</span> uint32_t var_size,
-<a name="l00192"></a>00192                 <span class="keyword">const</span> <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
-<a name="l00193"></a>00193 
-<a name="l00199"></a>00199         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a31069033961d39a5fad323f6e33995f2" title="implementation of the TTEthernet-API method.">tte_get_buf_var</a>(<span class="keyword">const</span> tte_buffer_t * <span class="keyword">const</span> buf,
-<a name="l00200"></a>00200                 <span class="keyword">const</span> tte_buf_var_id_t var_id,
-<a name="l00201"></a>00201                 <span class="keyword">const</span> uint32_t var_size,
-<a name="l00202"></a>00202                 <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
-<a name="l00203"></a>00203 };
-<a name="l00204"></a>00204 
-<a name="l00205"></a>00205 
-<a name="l00206"></a>00206 } <span class="comment">//namespace</span>
+<a name="l00074"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a1f918ae7bd3817f47d9c46a0747e7a15">00074</a>         <span class="keywordtype">bool</span> <span class="keyword">synchronized</span>;
+<a name="l00075"></a>00075     <span class="keyword">private</span>:
+<a name="l00082"></a>00082         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a508e4c6e531a7df3c9b273ca1ca0cb15" title="initializes the module.">initialize</a>();
+<a name="l00083"></a>00083 
+<a name="l00092"></a>00092         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a6a91f5372abc6bd1edd29c797c5c087c" title="Handles incoming START_APPLICATION or Scheduler messages.">handleMessage</a>(cMessage *msg);
+<a name="l00093"></a>00093     <span class="keyword">protected</span>:
+<a name="l00098"></a>00098         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7f9324b6d5675dc375a0def922b202df" title="Does nothing in this application.">startApplication</a>();
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100     <span class="keyword">public</span>:
+<a name="l00107"></a>00107         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9472479b1788c65b84199fdd89eebbc9" title="registers a task that is periodically scheduled.">registerTask</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> actionTime, <span class="keywordtype">void</span> (*functionPointer)(<span class="keywordtype">void</span>*), <span class="keywordtype">void</span> *setFunctionArg);
+<a name="l00108"></a>00108 
+<a name="l00114"></a>00114         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a004aa5acb4b8bf25cdcb8dfa29b35569" title="implementation of the TTEthernet-API method.">tte_get_ct_output_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
+<a name="l00115"></a>00115                 <span class="keyword">const</span> uint16_t ct_id,
+<a name="l00116"></a>00116                 tte_buffer_t * <span class="keyword">const</span> buf);
+<a name="l00117"></a>00117 
+<a name="l00123"></a>00123         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9493a178576b42719e346740a94758f7" title="implementation of the TTEthernet-API method.">tte_get_bg_output_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
+<a name="l00124"></a>00124                 <span class="keyword">const</span> uint8_t channel,
+<a name="l00125"></a>00125                 tte_buffer_t * <span class="keyword">const</span> buf);
+<a name="l00126"></a>00126 
+<a name="l00132"></a>00132         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#af8024cfd62c23545d3226c1fae26d504" title="implementation of the TTEthernet-API method.">tte_get_bg_input_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
+<a name="l00133"></a>00133                 <span class="keyword">const</span> uint8_t channel,
+<a name="l00134"></a>00134                 tte_buffer_t * <span class="keyword">const</span> buf);
+<a name="l00135"></a>00135 
+<a name="l00141"></a>00141         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a7441ae1141a1993ca486014cb2406ab7" title="implementation of the TTEthernet-API method.">tte_get_ct_input_buf</a>(<span class="keyword">const</span> uint8_t ctrl_id,
+<a name="l00142"></a>00142                 <span class="keyword">const</span> uint16_t ct_id,
+<a name="l00143"></a>00143                 tte_buffer_t * <span class="keyword">const</span> buf);
+<a name="l00144"></a>00144 
+<a name="l00150"></a>00150         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aed85f82bfe571df81436339852f1a7a8" title="implementation of the TTEthernet-API method.">tte_get_var</a>(<span class="keyword">const</span> uint8_t ctrl_id,
+<a name="l00151"></a>00151                 <span class="keyword">const</span> tte_var_id_t var_id,
+<a name="l00152"></a>00152                 <span class="keyword">const</span> uint32_t var_size,
+<a name="l00153"></a>00153                 <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
+<a name="l00154"></a>00154 
+<a name="l00160"></a>00160         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a70ba853e240dc96c91460457c3921657" title="implementation of the TTEthernet-API method.">tte_open_output_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00161"></a>00161                 tte_frame_t * <span class="keyword">const</span> frame);
+<a name="l00162"></a>00162 
+<a name="l00168"></a>00168         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae857de443d19fe185f14cf4d24f61b4b" title="implementation of the TTEthernet-API method.">tte_open_input_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00169"></a>00169                 tte_frame_t * <span class="keyword">const</span> frame,
+<a name="l00170"></a>00170                 tte_buf_status_t * <span class="keyword">const</span> status);
+<a name="l00171"></a>00171 
+<a name="l00177"></a>00177         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ac1a61c340af54c6b06b9e68373b8ef09" title="implementation of the TTEthernet-API method.">tte_close_output_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf);
+<a name="l00178"></a>00178 
+<a name="l00184"></a>00184         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#aa38b602984406d089b81f4676d3114d9" title="implementation of the TTEthernet-API method.">tte_close_input_buf</a>(tte_buffer_t * <span class="keyword">const</span> buf);
+<a name="l00185"></a>00185 
+<a name="l00191"></a>00191         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#ae1cd0a759a9626632cb3f72f219653c6" title="implementation of the TTEthernet-API method.">tte_set_buf_var</a>(tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00192"></a>00192                 <span class="keyword">const</span> tte_buf_var_id_t var_id,
+<a name="l00193"></a>00193                 <span class="keyword">const</span> uint32_t var_size,
+<a name="l00194"></a>00194                 <span class="keyword">const</span> <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
+<a name="l00195"></a>00195 
+<a name="l00201"></a>00201         <span class="keyword">virtual</span> int32_t <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a31069033961d39a5fad323f6e33995f2" title="implementation of the TTEthernet-API method.">tte_get_buf_var</a>(<span class="keyword">const</span> tte_buffer_t * <span class="keyword">const</span> buf,
+<a name="l00202"></a>00202                 <span class="keyword">const</span> tte_buf_var_id_t var_id,
+<a name="l00203"></a>00203                 <span class="keyword">const</span> uint32_t var_size,
+<a name="l00204"></a>00204                 <span class="keywordtype">void</span> * <span class="keyword">const</span> value);
+<a name="l00205"></a>00205 };
+<a name="l00206"></a>00206 
 <a name="l00207"></a>00207 
-<a name="l00208"></a>00208 <span class="preprocessor">#endif</span>
+<a name="l00208"></a>00208 } <span class="comment">//namespace</span>
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

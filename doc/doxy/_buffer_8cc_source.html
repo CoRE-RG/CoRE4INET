@@ -73,11 +73,11 @@
 <a name="l00041"></a>00041 {
 <a name="l00042"></a>00042     <span class="keywordflow">if</span>(stage==0){
 <a name="l00043"></a>00043         ev &lt;&lt; <span class="stringliteral">&quot;Initialize Buffer&quot;</span> &lt;&lt; endl;
-<a name="l00044"></a>00044         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">initializeStatistics</a>();
+<a name="l00044"></a>00044         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="caches ct_mask parameter">initializeStatistics</a>();
 <a name="l00045"></a>00045     }
 <a name="l00046"></a>00046 }
 <a name="l00047"></a>00047 
-<a name="l00048"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd">00048</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">Buffer::initializeStatistics</a>()
+<a name="l00048"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd">00048</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="caches ct_mask parameter">Buffer::initializeStatistics</a>()
 <a name="l00049"></a>00049 {
 <a name="l00050"></a>00050     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a> = registerSignal(<span class="stringliteral">&quot;txPk&quot;</span>);
 <a name="l00051"></a>00051     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a> = registerSignal(<span class="stringliteral">&quot;latency&quot;</span>);
@@ -133,83 +133,63 @@
 <a name="l00101"></a>00101 }
 <a name="l00102"></a>00102 
 <a name="l00103"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e">00103</a>  <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e" title="Wrapper function arround enqueue().">Buffer::putFrame</a>(EtherFrame* frame){
-<a name="l00104"></a>00104     <span class="keywordtype">int</span> priority = par(<span class="stringliteral">&quot;priority&quot;</span>).longValue();
-<a name="l00105"></a>00105     <span class="keywordflow">if</span>(frame &amp;&amp; priority&gt;=0){
-<a name="l00106"></a>00106         frame-&gt;setSchedulingPriority(priority);
-<a name="l00107"></a>00107     }
-<a name="l00108"></a>00108     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(frame);
-<a name="l00109"></a>00109 }
-<a name="l00110"></a>00110 
-<a name="l00111"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8">00111</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(cMessage *msg)
-<a name="l00112"></a>00112 {
-<a name="l00113"></a>00113     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
-<a name="l00114"></a>00114     {
-<a name="l00115"></a>00115         EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);
-<a name="l00116"></a>00116         <span class="comment">//Try to correct destination mac</span>
-<a name="l00117"></a>00117         <span class="keywordflow">if</span>(frame-&gt;getDest().isUnspecified()){
-<a name="l00118"></a>00118             MACAddress mac;
-<a name="l00119"></a>00119             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> maskedMarker= <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a> &amp; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a>;
-<a name="l00120"></a>00120             mac.setAddressByte(0, maskedMarker&gt;&gt;24);
-<a name="l00121"></a>00121             mac.setAddressByte(1, maskedMarker&gt;&gt;16);
-<a name="l00122"></a>00122             mac.setAddressByte(2, maskedMarker&gt;&gt;8);
-<a name="l00123"></a>00123             mac.setAddressByte(3, maskedMarker);
-<a name="l00124"></a>00124             mac.setAddressByte(4, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>&gt;&gt;8);
-<a name="l00125"></a>00125             mac.setAddressByte(5, <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>);
-<a name="l00126"></a>00126             frame-&gt;setDest(mac);
-<a name="l00127"></a>00127         }
-<a name="l00128"></a>00128         emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>, simTime()-msg-&gt;getCreationTime());
-<a name="l00129"></a>00129         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e" title="Wrapper function arround enqueue().">putFrame</a>((EtherFrame*) frame);
-<a name="l00130"></a>00130         <span class="comment">// Now execute callbacks if there are some</span>
-<a name="l00131"></a>00131         <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.begin();
-<a name="l00132"></a>00132                 iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end(); ++iter){
-<a name="l00133"></a>00133             iter-&gt;first-&gt;executeCallback(iter-&gt;second);
-<a name="l00134"></a>00134         }
-<a name="l00135"></a>00135     }
-<a name="l00136"></a>00136 }
-<a name="l00137"></a>00137 
-<a name="l00138"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44">00138</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44" title="Indicates a parameter has changed.">Buffer::handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname){
-<a name="l00139"></a>00139     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();
-<a name="l00140"></a>00140     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();
-<a name="l00141"></a>00141     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a> = (<span class="keywordtype">unsigned</span> long)par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue();
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();
-<a name="l00144"></a>00144     <span class="keywordflow">if</span>(ev.isGUI()){
-<a name="l00145"></a>00145         <span class="comment">//TODO check why this does not work</span>
-<a name="l00146"></a>00146         <span class="comment">//getDisplayString().setTagArg(&quot;i2&quot;, 0, &quot;&quot;);</span>
-<a name="l00147"></a>00147         <span class="comment">//getDisplayString().setTagArg(&quot;tt&quot;, 0, &quot;&quot;);</span>
-<a name="l00148"></a>00148     }
-<a name="l00149"></a>00149     std::string destinationGatesString = par(<span class="stringliteral">&quot;destination_gates&quot;</span>).stdstringValue();
-<a name="l00150"></a>00150     std::vector&lt;std::string&gt; destinationGatePaths;
-<a name="l00151"></a>00151     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);
-<a name="l00152"></a>00152     <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator destinationGatePath = destinationGatePaths.begin();
-<a name="l00153"></a>00153             destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
-<a name="l00154"></a>00154         cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>((*destinationGatePath));
-<a name="l00155"></a>00155         <span class="keywordflow">if</span>(gate){
-<a name="l00156"></a>00156             <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(gate);
-<a name="l00157"></a>00157         }
-<a name="l00158"></a>00158         <span class="keywordflow">else</span>{
-<a name="l00159"></a>00159             <span class="keywordflow">if</span>(ev.isGUI()){
-<a name="l00160"></a>00160                 ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Gate &quot;</span>&lt;&lt;(*destinationGatePath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved!&quot;</span>&lt;&lt;endl;
-<a name="l00161"></a>00161                 getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
-<a name="l00162"></a>00162                 getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem outgoing gate!&quot;</span>);
-<a name="l00163"></a>00163             }
-<a name="l00164"></a>00164         }
-<a name="l00165"></a>00165     }
-<a name="l00166"></a>00166 }
-<a name="l00167"></a>00167 
-<a name="l00168"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57">00168</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">Buffer::enqueue</a>(EtherFrame *newFrame)
-<a name="l00169"></a>00169 {
-<a name="l00170"></a>00170     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;
-<a name="l00171"></a>00171     <span class="keywordflow">throw</span>;
-<a name="l00172"></a>00172 }
-<a name="l00173"></a>00173 
-<a name="l00174"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43">00174</a> EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">Buffer::dequeue</a>()
-<a name="l00175"></a>00175 {
-<a name="l00176"></a>00176     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;
-<a name="l00177"></a>00177     <span class="keywordflow">throw</span>;
-<a name="l00178"></a>00178 }
+<a name="l00104"></a>00104     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(frame);
+<a name="l00105"></a>00105 }
+<a name="l00106"></a>00106 
+<a name="l00107"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8">00107</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(cMessage *msg)
+<a name="l00108"></a>00108 {
+<a name="l00109"></a>00109     <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))
+<a name="l00110"></a>00110     {
+<a name="l00111"></a>00111         EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);
+<a name="l00112"></a>00112         emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>, simTime()-msg-&gt;getCreationTime());
+<a name="l00113"></a>00113         <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e" title="Wrapper function arround enqueue().">putFrame</a>((EtherFrame*) frame);
+<a name="l00114"></a>00114         <span class="comment">// Now execute callbacks if there are some</span>
+<a name="l00115"></a>00115         <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.begin();
+<a name="l00116"></a>00116                 iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end(); ++iter){
+<a name="l00117"></a>00117             iter-&gt;first-&gt;executeCallback(iter-&gt;second);
+<a name="l00118"></a>00118         }
+<a name="l00119"></a>00119     }
+<a name="l00120"></a>00120 }
+<a name="l00121"></a>00121 
+<a name="l00122"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44">00122</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44" title="Indicates a parameter has changed.">Buffer::handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname){
+<a name="l00123"></a>00123     <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();
+<a name="l00124"></a>00124     <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00125"></a>00125         <span class="comment">//TODO check why this does not work</span>
+<a name="l00126"></a>00126         <span class="comment">//getDisplayString().setTagArg(&quot;i2&quot;, 0, &quot;&quot;);</span>
+<a name="l00127"></a>00127         <span class="comment">//getDisplayString().setTagArg(&quot;tt&quot;, 0, &quot;&quot;);</span>
+<a name="l00128"></a>00128     }
+<a name="l00129"></a>00129     std::string destinationGatesString = par(<span class="stringliteral">&quot;destination_gates&quot;</span>).stdstringValue();
+<a name="l00130"></a>00130     std::vector&lt;std::string&gt; destinationGatePaths;
+<a name="l00131"></a>00131     <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator...">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);
+<a name="l00132"></a>00132     <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator destinationGatePath = destinationGatePaths.begin();
+<a name="l00133"></a>00133             destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
+<a name="l00134"></a>00134         cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>((*destinationGatePath));
+<a name="l00135"></a>00135         <span class="keywordflow">if</span>(gate){
+<a name="l00136"></a>00136             <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(gate);
+<a name="l00137"></a>00137         }
+<a name="l00138"></a>00138         <span class="keywordflow">else</span>{
+<a name="l00139"></a>00139             <span class="keywordflow">if</span>(ev.isGUI()){
+<a name="l00140"></a>00140                 ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Gate &quot;</span>&lt;&lt;(*destinationGatePath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved!&quot;</span>&lt;&lt;endl;
+<a name="l00141"></a>00141                 getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);
+<a name="l00142"></a>00142                 getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem outgoing gate!&quot;</span>);
+<a name="l00143"></a>00143             }
+<a name="l00144"></a>00144         }
+<a name="l00145"></a>00145     }
+<a name="l00146"></a>00146 }
+<a name="l00147"></a>00147 
+<a name="l00148"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57">00148</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">Buffer::enqueue</a>(EtherFrame *newFrame)
+<a name="l00149"></a>00149 {
+<a name="l00150"></a>00150     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00151"></a>00151     <span class="keywordflow">throw</span>;
+<a name="l00152"></a>00152 }
+<a name="l00153"></a>00153 
+<a name="l00154"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43">00154</a> EtherFrame * <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">Buffer::dequeue</a>()
+<a name="l00155"></a>00155 {
+<a name="l00156"></a>00156     ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;
+<a name="l00157"></a>00157     <span class="keywordflow">throw</span>;
+<a name="l00158"></a>00158 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

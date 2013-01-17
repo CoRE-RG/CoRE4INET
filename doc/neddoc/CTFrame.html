@@ -94,7 +94,15 @@ containing their common header fields.</p>
 unsigned short</i>
    </td>
    <td>
-<p>Critical traffic ID (for TT and RC messages).</p>
+</td>
+</tr>
+<tr class="local">
+   <td>ctMarker</td>
+   <td>
+      <i>
+unsigned int</i>
+   </td>
+   <td>
 </td>
 </tr>
 <tr class="local">
@@ -143,8 +151,13 @@ int</i>
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">packet</span><span style="color: #000000; "> </span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">
 {
-    </span><span style="color: #808080; font-style: italic; ">// Critical traffic ID (for TT and RC messages). 
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">short</span><span style="color: #000000; "> </span><span style="color: #000000; ">ctID</span><span style="color: #000000; ">;
+    </span><span style="color: #808080; font-style: italic; ">// Critical traffic ID (from MAC) (for TT and RC messages). 
+</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@customize</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+    </span><span style="color: #000080; font-weight: bold; ">abstract</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">short</span><span style="color: #000000; "> </span><span style="color: #000000; ">ctID</span><span style="color: #000000; ">;
+
+    </span><span style="color: #808080; font-style: italic; ">// Critical traffic marker (from MAC) (for TT and RC messages). 
+</span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@customize</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+    </span><span style="color: #000080; font-weight: bold; ">abstract</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ctMarker</span><span style="color: #000000; ">;
 
     </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">displayString</span><span style="color: #000000; "> = </span><span style="color: #008000; ">&quot;b=15,15,rect,black,kind,5&quot;</span><span style="color: #000000; ">;
 }

@@ -72,7 +72,7 @@
 <a name="l00040"></a>00040 
 <a name="l00041"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a019fc44e7ff5ac11f77dbd05fbab3123">00041</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a019fc44e7ff5ac11f77dbd05fbab3123" title="Initializes the SchedulerActionTimeEvent.">TTBuffer::initialize</a>(<span class="keywordtype">int</span> stage)
 <a name="l00042"></a>00042 {
-<a name="l00043"></a>00043     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a019fc44e7ff5ac11f77dbd05fbab3123" title="Initializes the SchedulerActionTimeEvent.">Buffer::initialize</a>(stage);
+<a name="l00043"></a>00043     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a019fc44e7ff5ac11f77dbd05fbab3123" title="Initializes the SchedulerActionTimeEvent.">CTBuffer::initialize</a>(stage);
 <a name="l00044"></a>00044     <span class="keywordflow">if</span>(stage==1)
 <a name="l00045"></a>00045     {
 <a name="l00046"></a>00046         ev &lt;&lt; <span class="stringliteral">&quot;Initialize TTBuffer&quot;</span> &lt;&lt; endl;
@@ -95,7 +95,7 @@
 <a name="l00063"></a>00063 {
 <a name="l00064"></a>00064     <span class="keywordtype">bool</span> arrivedOnSchedulerIn = msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>);
 <a name="l00065"></a>00065 
-<a name="l00066"></a>00066     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="handles the incoming and outgoing messages of the buffer.">Buffer::handleMessage</a>(msg);
+<a name="l00066"></a>00066     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a78eff1b2851f7f86a09377237ea14847" title="handles the incoming and outgoing messages of the buffer.">CTBuffer::handleMessage</a>(msg);
 <a name="l00067"></a>00067 
 <a name="l00068"></a>00068     <span class="keywordflow">if</span> (arrivedOnSchedulerIn &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a> &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size() &gt; 0)
 <a name="l00069"></a>00069     {
@@ -138,13 +138,13 @@
 <a name="l00106"></a>00106 }
 <a name="l00107"></a>00107 
 <a name="l00108"></a><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb">00108</a> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb" title="Indicates a parameter has changed.">TTBuffer::handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname){
-<a name="l00109"></a>00109     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb" title="Indicates a parameter has changed.">Buffer::handleParameterChange</a>(parname);
+<a name="l00109"></a>00109     <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb" title="Indicates a parameter has changed.">CTBuffer::handleParameterChange</a>(parname);
 <a name="l00110"></a>00110 
 <a name="l00111"></a>00111     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a4b75f1f4bde77e1f66506c1dabb9c001" title="Event indicating the actionTime.">actionTimeEvent</a>)
 <a name="l00112"></a>00112         <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a4b75f1f4bde77e1f66506c1dabb9c001" title="Event indicating the actionTime.">actionTimeEvent</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a99401641cb4a1c30ec8392b2ed0d68c8">setAction_time</a>(par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).doubleValue());
 <a name="l00113"></a>00113 }
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

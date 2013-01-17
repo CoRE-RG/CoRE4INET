@@ -34,7 +34,7 @@
 <h1>TTEthernetModel::RCBuffer Class Reference<br/>
 <small>
 [<a class="el" href="group___buffer.html">Buffers</a>]</small>
-</h1><!-- doxytag: class="TTEthernetModel::RCBuffer" --><!-- doxytag: inherits="TTEthernetModel::Buffer" -->
+</h1><!-- doxytag: class="TTEthernetModel::RCBuffer" --><!-- doxytag: inherits="TTEthernetModel::CTBuffer" -->
 <p>Base class for a rate-constrained buffer class.  
 <a href="#_details">More...</a></p>
 
@@ -45,9 +45,10 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
  <div class="center">
   <img src="class_t_t_ethernet_model_1_1_r_c_buffer.png" usemap="#TTEthernetModel::RCBuffer_map" alt=""/>
   <map id="TTEthernetModel::RCBuffer_map" name="TTEthernetModel::RCBuffer_map">
+<area href="class_t_t_ethernet_model_1_1_c_t_buffer.html" alt="TTEthernetModel::CTBuffer" shape="rect" coords="108,56,314,80"/>
 <area href="class_t_t_ethernet_model_1_1_buffer.html" alt="TTEthernetModel::Buffer" shape="rect" coords="108,0,314,24"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" alt="TTEthernetModel::RCDoubleBuffer" shape="rect" coords="0,112,206,136"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" alt="TTEthernetModel::RCQueueBuffer" shape="rect" coords="216,112,422,136"/>
+<area href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" alt="TTEthernetModel::RCDoubleBuffer" shape="rect" coords="0,168,206,192"/>
+<area href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" alt="TTEthernetModel::RCQueueBuffer" shape="rect" coords="216,168,422,192"/>
 </map>
  </div>
 </div>
@@ -82,7 +83,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 <p>Base class for a rate-constrained buffer class. </p>
 <p>The Frame is stored and released immediately when the bag has expired previously. If the bag has not expired yet the frame is stored. The implementation uses a <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> that is registered at the <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>.</p>
 <p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" title="Rate-constrained double buffer class.">RCDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>.</p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" title="Rate-constrained double buffer class.">RCDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_r_c_double_buffer.html" title="Rate-constrained double buffer class.">RCDoubleBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html" title="Base class for all critical traffic buffer classes.">CTBuffer</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8h_source.html#l00038">38</a> of file <a class="el" href="_r_c_buffer_8h_source.html">RCBuffer.h</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -164,12 +165,12 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8">TTEthernetModel::Buffer</a>.</p>
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#a9f63a30295ca896641a180e1a5722c95">TTEthernetModel::CTBuffer</a>.</p>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00052">52</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00057"></a>00057 {
-<a name="l00058"></a>00058     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af" title="handles the incoming and outgoing messages of the buffer.">Buffer::handleMessage</a>(msg);
+<a name="l00058"></a>00058     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a26004d9ecf78c5ef969734abbaeaf6af" title="handles the incoming and outgoing messages of the buffer.">CTBuffer::handleMessage</a>(msg);
 <a name="l00059"></a>00059 
 <a name="l00060"></a>00060     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size() &gt; 0)
 <a name="l00061"></a>00061     {
@@ -241,7 +242,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a0ac6a8e36c3da9a0a54f01d1060f5e44">TTEthernetModel::Buffer</a>.</p>
+<p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#ac71ac70a5cfebd3e20242558e10647ca">TTEthernetModel::CTBuffer</a>.</p>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00103">103</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 
@@ -279,7 +280,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 <p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00041">41</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00046"></a>00046 {
-<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a1f08d040d089ae71cd04ae090dcf168e" title="Initializes the timerMessage.">Buffer::initialize</a>(stage);
+<a name="l00047"></a>00047     <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a1f08d040d089ae71cd04ae090dcf168e" title="Initializes the timerMessage.">CTBuffer::initialize</a>(stage);
 <a name="l00048"></a>00048     <span class="keywordflow">if</span>(stage==0){
 <a name="l00049"></a>00049         <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));
 <a name="l00050"></a>00050 
@@ -310,7 +311,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 <p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00033">33</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00038"></a>00038 {
-<a name="l00039"></a>00039     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">Buffer::numInitStages</a>()&gt;1)
+<a name="l00039"></a>00039     <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">CTBuffer::numInitStages</a>()&gt;1)
 </pre></div></p>
 
 </div>
@@ -335,7 +336,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00109">109</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">TTEthernetModel::TTEOutput::handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00242">TTEthernetModel::TTEOutput::requestPacket()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">TTEthernetModel::TTEOutput::handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00234">TTEthernetModel::TTEOutput::requestPacket()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00114"></a>00114 {
 <a name="l00115"></a>00115     Enter_Method(<span class="stringliteral">&quot;resetBag()&quot;</span>);
@@ -414,7 +415,7 @@ Inheritance diagram for TTEthernetModel::RCBuffer:</div>
 <li><a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

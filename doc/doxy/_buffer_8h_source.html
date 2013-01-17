@@ -70,12 +70,12 @@
 <a name="l00070"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616">00070</a>         std::map&lt;TTEApplicationBase*, Callback*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>;
 <a name="l00074"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f">00074</a>         std::map&lt;TTEApplicationBase*, Callback*&gt; <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>;
 <a name="l00075"></a>00075 
-<a name="l00079"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58">00079</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a3ac6c7b872e596ae1ec4cdc4c7116f58" title="caches ct_mask parameter">ctMask</a>;
-<a name="l00083"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f">00083</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aac4a11fe22c2fabc54e2ec2096e5934f" title="caches ct_marker parameter">ctMarker</a>;
-<a name="l00087"></a><a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c">00087</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a12acfd509fb5a63dbe5dc0ab32b4805c" title="caches ct_id parameter">ctId</a>;
+<a name="l00079"></a>00079 <span class="comment">//        unsigned long ctMask;</span>
+<a name="l00083"></a>00083 <span class="comment"></span><span class="comment">//        unsigned long ctMarker;</span>
+<a name="l00087"></a>00087 <span class="comment"></span><span class="comment">//        unsigned long ctId;</span>
 <a name="l00088"></a>00088 
 <a name="l00089"></a>00089     <span class="keyword">private</span>:
-<a name="l00093"></a>00093         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="Initializes the statistics for the module.">initializeStatistics</a>();
+<a name="l00093"></a>00093         <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="caches ct_mask parameter">initializeStatistics</a>();
 <a name="l00094"></a>00094 
 <a name="l00095"></a>00095     <span class="keyword">protected</span>:
 <a name="l00101"></a>00101         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac606d7037af7ce8e80ee115e15702ac6" title="Initializes the module.">initialize</a>(<span class="keywordtype">int</span> stage);
@@ -115,7 +115,7 @@
 <a name="l00228"></a>00228 
 <a name="l00229"></a>00229 <span class="preprocessor">#endif</span>
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jun 22 14:37:29 2012 for TTEthernet Model for INET Framework by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

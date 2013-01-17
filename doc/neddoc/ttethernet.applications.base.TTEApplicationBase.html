@@ -137,6 +137,13 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <p>Input gate for the incoming <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a> messages</p>
 </td>
 </tr>
+<tr class="local">
+   <td>syncIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming SynchronizationNotification messages</p>
+</td>
+</tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
@@ -154,6 +161,8 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
         </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SynchronizationNotification messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">syncIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

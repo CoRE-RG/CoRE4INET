@@ -31,7 +31,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <img src="ttethernet.buffer.RCBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="92,80,164,107">
 <area shape="rect" href="ttethernet.buffer.RCDoubleBuffer.html" title="Simple Module RCDoubleBuffer" alt="" coords="5,155,117,181">
 <area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="141,155,251,181">
-<area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="92,5,164,32">
+<area shape="rect" href="ttethernet.buffer.CTBuffer.html" title="Simple Module CTBuffer" alt="" coords="92,5,164,32">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -42,14 +42,14 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </tr>
 <tr>
    <td>
-<a href="ttethernet.buffer.Buffer.html">Buffer</a>
+<a href="ttethernet.buffer.CTBuffer.html">CTBuffer</a>
    </td>
    <td>
 <i>simple&nbsp;module</i>
    </td>
    <td>
 
-<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for the various Buffers of TTEthernet.
+<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for critical traffic Buffers of TTEthernet.
 Since this is an abstract module please do not instantiate it</p>
 
    </td>
@@ -100,6 +100,24 @@ gandwidth alocation gap.</p>
       <th class="description">Description</th>
    </tr>
 <tr class="inherited">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr class="inherited">
    <td>priority</td>
    <td>
       <i>int</i>
@@ -137,16 +155,6 @@ gandwidth alocation gap.</p>
    <td>0</td>
    <td>
 <p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr class="inherited">
-   <td>destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr class="local">
@@ -275,7 +283,7 @@ gandwidth alocation gap.</p>
 // </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
 //
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
-</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">Buffer</span><span style="color: #000000; ">
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">CTBuffer</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//RCBuffer is implemented by the RCBuffer C++ Class
