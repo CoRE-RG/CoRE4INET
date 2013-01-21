@@ -308,18 +308,25 @@
       <arglist>(std::string &amp;path)</arglist>
     </member>
     <member kind="function">
-      <type>unsigned int</type>
-      <name>getTotalDelay</name>
+      <type>uint64_t</type>
+      <name>ticksToTransparentClock</name>
       <anchorfile>_helper_functions_8cc.html</anchorfile>
-      <anchor>a95d5bce358502e7292de2da8a5d2217d</anchor>
-      <arglist>(EtherFrame *frame)</arglist>
+      <anchor>a9823413815744d2af8dda9be2ae6cf58</anchor>
+      <arglist>(uint64_t ticks, double tick)</arglist>
     </member>
     <member kind="function">
-      <type>unsigned int</type>
-      <name>getLocalDelay</name>
+      <type>uint64_t</type>
+      <name>secondsToTransparentClock</name>
       <anchorfile>_helper_functions_8cc.html</anchorfile>
-      <anchor>a59b2c19a64a51ad282ece2e9e9b32dfb</anchor>
-      <arglist>(EtherFrame *frame)</arglist>
+      <anchor>ad7b8bc9450552a00c8c8ca340dcd7dcd</anchor>
+      <arglist>(double seconds)</arglist>
+    </member>
+    <member kind="function">
+      <type>uint64_t</type>
+      <name>transparentClockToTicks</name>
+      <anchorfile>_helper_functions_8cc.html</anchorfile>
+      <anchor>ab7c5d9fbc1dfb801bcbb814df0335d73</anchor>
+      <arglist>(uint64_t transparentClock, double tick)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -348,25 +355,32 @@
       <arglist>(cPar &amp;parameter, std::string &amp;pathToAdd)</arglist>
     </member>
     <member kind="function">
-      <type>unsigned int</type>
-      <name>getTotalDelay</name>
-      <anchorfile>_helper_functions_8h.html</anchorfile>
-      <anchor>a95d5bce358502e7292de2da8a5d2217d</anchor>
-      <arglist>(EtherFrame *frame)</arglist>
-    </member>
-    <member kind="function">
-      <type>unsigned int</type>
-      <name>getLocalDelay</name>
-      <anchorfile>_helper_functions_8h.html</anchorfile>
-      <anchor>a59b2c19a64a51ad282ece2e9e9b32dfb</anchor>
-      <arglist>(EtherFrame *frame)</arglist>
-    </member>
-    <member kind="function">
       <type>cGate *</type>
       <name>gateByFullPath</name>
       <anchorfile>_helper_functions_8h.html</anchorfile>
       <anchor>af871fed61f87700e83e5ec4a43cb388b</anchor>
       <arglist>(std::string &amp;path)</arglist>
+    </member>
+    <member kind="function">
+      <type>uint64_t</type>
+      <name>ticksToTransparentClock</name>
+      <anchorfile>_helper_functions_8h.html</anchorfile>
+      <anchor>a9823413815744d2af8dda9be2ae6cf58</anchor>
+      <arglist>(uint64_t ticks, double tick)</arglist>
+    </member>
+    <member kind="function">
+      <type>uint64_t</type>
+      <name>secondsToTransparentClock</name>
+      <anchorfile>_helper_functions_8h.html</anchorfile>
+      <anchor>ad7b8bc9450552a00c8c8ca340dcd7dcd</anchor>
+      <arglist>(double seconds)</arglist>
+    </member>
+    <member kind="function">
+      <type>uint64_t</type>
+      <name>transparentClockToTicks</name>
+      <anchorfile>_helper_functions_8h.html</anchorfile>
+      <anchor>ab7c5d9fbc1dfb801bcbb814df0335d73</anchor>
+      <arglist>(uint64_t transparentClock, double tick)</arglist>
     </member>
   </compound>
   <compound kind="file">

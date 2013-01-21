@@ -94,6 +94,16 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <p>if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)</p>
    </td>
 </tr>
+<tr class="local">
+   <td>static_tx_delay</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>0ns</td>
+   <td>
+<p>Static propagation delay for the port</p>
+   </td>
+</tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
 <table class="propertiestable">
@@ -263,6 +273,8 @@ a generated MAC address in init stage 0.</p>
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=188,180;i=device/port&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">// if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Static propagation delay for the port
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">static_tx_delay</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">ns</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input from the upper layer for best-effort Traffic
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@loose</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">);

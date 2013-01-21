@@ -50,8 +50,30 @@ void addPath(cPar &parameter, std::string &pathToAdd);
  */
 cGate* gateByFullPath(std::string &path);
 
+/**
+ * @brief Converts value in ticks to the transparent clock unit that is ns*0x10000
+ *
+ * @param ticks number of ticks
+ * @param tick length of one tick in seconds
+ * @return transparent clock representation of ticks
+ */
 uint64_t ticksToTransparentClock(uint64_t ticks, double tick);
+
+/**
+ * @brief Converts value in seconds to the transparent clock unit that is ns*0x10000
+ *
+ * @param seconds number of seconds to convert
+ * @return transparent clock representation of seconds
+ */
 uint64_t secondsToTransparentClock(double seconds);
+
+/**
+ * @brief Converts value in the transparent clock unit that is ns*0x10000 to ticks
+ *
+ * @param transparentClock value in transparentClock
+ * @param tick length of one tick in seconds
+ * @return ticks representation of transparent clock value
+ */
 uint64_t transparentClockToTicks(uint64_t transparentClock, double tick);
 
 #endif /* HELPERFUNCTIONS_H_ */

@@ -34,7 +34,6 @@
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &quot;cpar.h&quot;</code><br/>
 <code>#include &quot;cgate.h&quot;</code><br/>
-<code>#include &quot;EtherFrame_m.h&quot;</code><br/>
 
 <p><a href="_helper_functions_8h_source.html">Go to the source code of this file.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
@@ -45,12 +44,14 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Replaces all occurrences of a string by another string.  <a href="#ab9d051a1ba408dea46d399d4692ee145"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8h.html#aa7b454470a0618d9bc176ef18ba6a7c7">addPath</a> (cPar &amp;parameter, std::string &amp;pathToAdd)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds a path to a parameter that contains paths to elements.  <a href="#aa7b454470a0618d9bc176ef18ba6a7c7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8h.html#a95d5bce358502e7292de2da8a5d2217d">getTotalDelay</a> (EtherFrame *frame)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the total delay of a frame.  <a href="#a95d5bce358502e7292de2da8a5d2217d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8h.html#a59b2c19a64a51ad282ece2e9e9b32dfb">getLocalDelay</a> (EtherFrame *frame)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the delay of a frame for the current node.  <a href="#a59b2c19a64a51ad282ece2e9e9b32dfb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">cGate *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8h.html#af871fed61f87700e83e5ec4a43cb388b">gateByFullPath</a> (std::string &amp;path)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the gate defined by an object path.  <a href="#af871fed61f87700e83e5ec4a43cb388b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint64_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8h.html#a9823413815744d2af8dda9be2ae6cf58">ticksToTransparentClock</a> (uint64_t ticks, double tick)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Converts value in ticks to the transparent clock unit that is ns*0x10000.  <a href="#a9823413815744d2af8dda9be2ae6cf58"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint64_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8h.html#ad7b8bc9450552a00c8c8ca340dcd7dcd">secondsToTransparentClock</a> (double seconds)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Converts value in seconds to the transparent clock unit that is ns*0x10000.  <a href="#ad7b8bc9450552a00c8c8ca340dcd7dcd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint64_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8h.html#ab7c5d9fbc1dfb801bcbb814df0335d73">transparentClockToTicks</a> (uint64_t transparentClock, double tick)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Converts value in the transparent clock unit that is ns*0x10000 to ticks.  <a href="#ab7c5d9fbc1dfb801bcbb814df0335d73"></a><br/></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="aa7b454470a0618d9bc176ef18ba6a7c7"></a><!-- doxytag: member="HelperFunctions.h::addPath" ref="aa7b454470a0618d9bc176ef18ba6a7c7" args="(cPar &amp;parameter, std::string &amp;pathToAdd)" -->
@@ -145,120 +146,6 @@
 
 </div>
 </div>
-<a class="anchor" id="a59b2c19a64a51ad282ece2e9e9b32dfb"></a><!-- doxytag: member="HelperFunctions.h::getLocalDelay" ref="a59b2c19a64a51ad282ece2e9e9b32dfb" args="(EtherFrame *frame)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int getLocalDelay </td>
-          <td>(</td>
-          <td class="paramtype">EtherFrame *&nbsp;</td>
-          <td class="paramname"> <em>frame</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the delay of a frame for the current node. </p>
-<p>The local delay is the time a frame was delayed in this node. It should be only invoked after the sent_total parameter was set.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>frame</em>&nbsp;</td><td>the EtherFrame for which the delay should be calculated </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>the delay in ticks (can be translated to real-time using the tick parameter of the scheduler of the current node). Returns 0 if parameters are not present </dd></dl>
-
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00084">84</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00328">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00084"></a>00084                                              {
-<a name="l00085"></a>00085     cArray parlist = frame-&gt;getParList();
-<a name="l00086"></a>00086 
-<a name="l00087"></a>00087     <span class="keywordtype">long</span> start = -1;
-<a name="l00088"></a>00088     <span class="keywordtype">long</span> end = -1;
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
-<a name="l00091"></a>00091         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
-<a name="l00092"></a>00092         <span class="keywordflow">if</span>(parameter){
-<a name="l00093"></a>00093             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
-<a name="l00094"></a>00094                 start = parameter-&gt;longValue();
-<a name="l00095"></a>00095             }
-<a name="l00096"></a>00096             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0){
-<a name="l00097"></a>00097                 end = parameter-&gt;longValue();
-<a name="l00098"></a>00098             }
-<a name="l00099"></a>00099         }
-<a name="l00100"></a>00100     }
-<a name="l00101"></a>00101     <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
-<a name="l00102"></a>00102         <span class="keywordflow">return</span> end-start;
-<a name="l00103"></a>00103     }
-<a name="l00104"></a>00104     <span class="keywordflow">return</span> 0;
-<a name="l00105"></a>00105 }
-</pre></div></p>
-
-</div>
-</div>
-<a class="anchor" id="a95d5bce358502e7292de2da8a5d2217d"></a><!-- doxytag: member="HelperFunctions.h::getTotalDelay" ref="a95d5bce358502e7292de2da8a5d2217d" args="(EtherFrame *frame)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int getTotalDelay </td>
-          <td>(</td>
-          <td class="paramtype">EtherFrame *&nbsp;</td>
-          <td class="paramname"> <em>frame</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the total delay of a frame. </p>
-<p>The total delay is the time a frame was delayed in hosts and switches. It does not include the transmission. The function relies on the sent_total and received_total parameters.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>frame</em>&nbsp;</td><td>the EtherFrame for which the delay should be calculated </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>the delay in ticks (should not be translated to real-time as it relies on the clock speed of different nodes). Returns 0 if parameters are not present </dd></dl>
-
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00057">57</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00057"></a>00057                                              {
-<a name="l00058"></a>00058     cArray parlist = frame-&gt;getParList();
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060     <span class="keywordtype">long</span> start = -1;
-<a name="l00061"></a>00061     <span class="keywordtype">long</span> end = -1;
-<a name="l00062"></a>00062     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> delay = 0;
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){
-<a name="l00065"></a>00065         cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));
-<a name="l00066"></a>00066         <span class="keywordflow">if</span>(parameter){
-<a name="l00067"></a>00067             <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){
-<a name="l00068"></a>00068                 start = parameter-&gt;longValue();
-<a name="l00069"></a>00069             }
-<a name="l00070"></a>00070             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;sent_total&quot;</span>,11)==0 &amp;&amp; start&gt;=0){
-<a name="l00071"></a>00071                 end = parameter-&gt;longValue();
-<a name="l00072"></a>00072             }
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074             <span class="keywordflow">if</span>(start &gt;= 0 &amp;&amp; end &gt;= 0){
-<a name="l00075"></a>00075                 delay += end - start;
-<a name="l00076"></a>00076                 start = -1;
-<a name="l00077"></a>00077                 end = -1;
-<a name="l00078"></a>00078             }
-<a name="l00079"></a>00079         }
-<a name="l00080"></a>00080     }
-<a name="l00081"></a>00081     <span class="keywordflow">return</span> delay;
-<a name="l00082"></a>00082 }
-</pre></div></p>
-
-</div>
-</div>
 <a class="anchor" id="ab9d051a1ba408dea46d399d4692ee145"></a><!-- doxytag: member="HelperFunctions.h::replaceAll" ref="ab9d051a1ba408dea46d399d4692ee145" args="(std::string &amp;string, std::string toFind, std::string replacement)" -->
 <div class="memitem">
 <div class="memproto">
@@ -311,6 +198,42 @@
 <a name="l00032"></a>00032     }
 <a name="l00033"></a>00033     <span class="keywordflow">return</span> string;
 <a name="l00034"></a>00034 }
+</pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="ad7b8bc9450552a00c8c8ca340dcd7dcd"></a><!-- doxytag: member="HelperFunctions.h::secondsToTransparentClock" ref="ad7b8bc9450552a00c8c8ca340dcd7dcd" args="(double seconds)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t secondsToTransparentClock </td>
+          <td>(</td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>seconds</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Converts value in seconds to the transparent clock unit that is ns*0x10000. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>seconds</em>&nbsp;</td><td>number of seconds to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>transparent clock representation of seconds </dd></dl>
+
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00061">61</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00328">TTEthernetModel::TTEOutput::setTransparentClock()</a>, <a class="el" href="_helper_functions_8cc_source.html#l00057">ticksToTransparentClock()</a>, and <a class="el" href="_helper_functions_8cc_source.html#l00065">transparentClockToTicks()</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00061"></a>00061                                                   {
+<a name="l00062"></a>00062     <span class="keywordflow">return</span> (seconds*1000000000*0x10000);
+<a name="l00063"></a>00063 }
 </pre></div></p>
 
 </div>
@@ -377,8 +300,98 @@
 
 </div>
 </div>
+<a class="anchor" id="a9823413815744d2af8dda9be2ae6cf58"></a><!-- doxytag: member="HelperFunctions.h::ticksToTransparentClock" ref="a9823413815744d2af8dda9be2ae6cf58" args="(uint64_t ticks, double tick)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t ticksToTransparentClock </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&nbsp;</td>
+          <td class="paramname"> <em>ticks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>tick</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Thu Jan 17 17:33:03 2013 for TTEthernet Model for INET Framework by&nbsp;
+<div class="memdoc">
+
+<p>Converts value in ticks to the transparent clock unit that is ns*0x10000. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>ticks</em>&nbsp;</td><td>number of ticks </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>tick</em>&nbsp;</td><td>length of one tick in seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>transparent clock representation of ticks </dd></dl>
+
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00057">57</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00328">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00057"></a>00057                                                              {
+<a name="l00058"></a>00058     <span class="keywordflow">return</span> <a class="code" href="_helper_functions_8cc.html#ad7b8bc9450552a00c8c8ca340dcd7dcd" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(ticks*tick);
+<a name="l00059"></a>00059 }
+</pre></div></p>
+
+</div>
+</div>
+<a class="anchor" id="ab7c5d9fbc1dfb801bcbb814df0335d73"></a><!-- doxytag: member="HelperFunctions.h::transparentClockToTicks" ref="ab7c5d9fbc1dfb801bcbb814df0335d73" args="(uint64_t transparentClock, double tick)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t transparentClockToTicks </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&nbsp;</td>
+          <td class="paramname"> <em>transparentClock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>tick</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Converts value in the transparent clock unit that is ns*0x10000 to ticks. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>transparentClock</em>&nbsp;</td><td>value in transparentClock </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>tick</em>&nbsp;</td><td>length of one tick in seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>ticks representation of transparent clock value </dd></dl>
+
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00065">65</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00065"></a>00065                                                                         {
+<a name="l00066"></a>00066     <span class="keywordflow">return</span> transparentClock/<a class="code" href="_helper_functions_8cc.html#ad7b8bc9450552a00c8c8ca340dcd7dcd" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(tick);
+<a name="l00067"></a>00067 }
+</pre></div></p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jan 21 17:11:10 2013 for TTEthernet Model for INET Framework by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
