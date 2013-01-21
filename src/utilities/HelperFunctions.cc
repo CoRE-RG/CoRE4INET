@@ -54,14 +54,14 @@ cGate* gateByFullPath(std::string &path){
     return NULL;
 }
 
-unsigned long ticksToTransparentClock(unsigned long ticks, double tick){
+uint64_t ticksToTransparentClock(uint64_t ticks, double tick){
     return secondsToTransparentClock(ticks*tick);
 }
 
-unsigned long secondsToTransparentClock(double seconds){
-    return (seconds*1000000*0x10000);
+uint64_t secondsToTransparentClock(double seconds){
+    return (seconds*1000000000*0x10000);
 }
 
-unsigned long transparentClockToTicks(unsigned long transparentClock, double tick){
-    return transparentClock/(tick*1000000*0x10000);
+uint64_t transparentClockToTicks(uint64_t transparentClock, double tick){
+    return transparentClock/secondsToTransparentClock(tick);
 }

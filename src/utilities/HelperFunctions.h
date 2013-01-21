@@ -13,7 +13,6 @@
 
 #include "cpar.h"
 #include "cgate.h"
-#include "EtherFrame_m.h"
 
 /**
  * @brief Splits a string into a vector of strings by using the delimiter character as separator.
@@ -51,8 +50,8 @@ void addPath(cPar &parameter, std::string &pathToAdd);
  */
 cGate* gateByFullPath(std::string &path);
 
-unsigned long ticksToTransparentClock(unsigned long ticks, double tick);
-unsigned long secondsToTransparentClock(double seconds);
-unsigned long transparentClockToTicks(unsigned long transparentClock, double tick);
+uint64_t ticksToTransparentClock(uint64_t ticks, double tick);
+uint64_t secondsToTransparentClock(double seconds);
+uint64_t transparentClockToTicks(uint64_t transparentClock, double tick);
 
 #endif /* HELPERFUNCTIONS_H_ */
