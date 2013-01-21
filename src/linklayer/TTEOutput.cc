@@ -327,8 +327,27 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
 
 void TTEOutput::setTransparentClock(PCFrame *pcf){
     unsigned long transparentClock = pcf->getTransparent_clock();
-    TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
-    transparentClock+=getLocalDelay(pcf)*scheduler->par("tick").doubleValue()*1000000*0x10000;
+
+    //Add static delay for this port
+    transparentClock+=secondsToTransparentClock(getParentModule()->par("static_tx_delay").doubleValue());
+
+    //Add dynamic delay for the device
+    cArray parlist = pcf->getParList();
+    unsigned long start = -1;
+    for(int i=0;i<parlist.size();i++){
+        cMsgPar *parameter = dynamic_cast<cMsgPar*>(parlist.get(i));
+        if(parameter){
+            if(strncmp(parameter->getName(),"received_total",15)==0 || strncmp(parameter->getName(),"created_total",15)==0){
+                start = parameter->longValue();
+            }
+        }
+    }
+    if(start >= 0){
+        TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+        transparentClock+=ticksToTransparentClock((scheduler->getTotalTicks()-start),scheduler->par("tick").doubleValue());
+    }
+
+    //Set new transparent clock
     pcf->setTransparent_clock(transparentClock);
 }
 

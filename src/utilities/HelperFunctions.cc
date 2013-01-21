@@ -54,52 +54,14 @@ cGate* gateByFullPath(std::string &path){
     return NULL;
 }
 
-unsigned int getTotalDelay(EtherFrame *frame){
-    cArray parlist = frame->getParList();
-
-    long start = -1;
-    long end = -1;
-    unsigned int delay = 0;
-
-    for(int i=0;i<parlist.size();i++){
-        cMsgPar *parameter = dynamic_cast<cMsgPar*>(parlist.get(i));
-        if(parameter){
-            if(strncmp(parameter->getName(),"received_total",15)==0 || strncmp(parameter->getName(),"created_total",15)==0){
-                start = parameter->longValue();
-            }
-            else if(strncmp(parameter->getName(),"sent_total",11)==0 && start>=0){
-                end = parameter->longValue();
-            }
-
-            if(start >= 0 && end >= 0){
-                delay += end - start;
-                start = -1;
-                end = -1;
-            }
-        }
-    }
-    return delay;
+unsigned long ticksToTransparentClock(unsigned long ticks, double tick){
+    return secondsToTransparentClock(ticks*tick);
 }
 
-unsigned int getLocalDelay(EtherFrame *frame){
-    cArray parlist = frame->getParList();
+unsigned long secondsToTransparentClock(double seconds){
+    return (seconds*1000000*0x10000);
+}
 
-    long start = -1;
-    long end = -1;
-
-    for(int i=0;i<parlist.size();i++){
-        cMsgPar *parameter = dynamic_cast<cMsgPar*>(parlist.get(i));
-        if(parameter){
-            if(strncmp(parameter->getName(),"received_total",15)==0 || strncmp(parameter->getName(),"created_total",15)==0){
-                start = parameter->longValue();
-            }
-            else if(strncmp(parameter->getName(),"sent_total",11)==0){
-                end = parameter->longValue();
-            }
-        }
-    }
-    if(start >= 0 && end >= 0){
-        return end-start;
-    }
-    return 0;
+unsigned long transparentClockToTicks(unsigned long transparentClock, double tick){
+    return transparentClock/(tick*1000000*0x10000);
 }

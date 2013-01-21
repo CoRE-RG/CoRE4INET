@@ -16,6 +16,8 @@ module TTEPHYPort like IPort
         @display("bgb=188,180;i=device/port");
         // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
         bool promiscuous = default(false);
+        //Static propagation delay for the port
+        double static_tx_delay @unit(s) = default(0ns);
     gates:
         //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
