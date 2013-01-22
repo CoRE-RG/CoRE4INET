@@ -37,6 +37,10 @@ class TTEScheduler : public cSimpleModule
          * @brief Simulation time when the last cycle started
          */
         SimTime lastCycleStart;
+        /**
+         * @brief Simulation time when the last newcycle message was seen
+         */
+        SimTime lastNewCycleMessage;
 
         /**
          * @brief Number of ticks since the simulation started

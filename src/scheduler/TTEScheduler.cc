@@ -41,6 +41,7 @@ void TTEScheduler::initialize(int stage)
         scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
 
         lastCycleStart = simTime();
+        lastNewCycleMessage = simTime();
         lastCycleTicks = 0;
     }
 }
@@ -109,6 +110,7 @@ void TTEScheduler::handleMessage(cMessage *msg)
         emit(newCycle, 1L);
         cycles++;
         lastCycleStart = simTime();
+        lastNewCycleMessage = simTime();
         lastCycleTicks += cycleTicks;
         scheduleAt(lastCycleStart + currentTick * cycleTicks, msg);
         newCyclemsg = msg;
@@ -204,7 +206,7 @@ unsigned int TTEScheduler::getTicks()
 
 unsigned long TTEScheduler::getTotalTicks()
 {
-    return lastCycleTicks + getTicks();
+    return lastCycleTicks + round(((simTime() - lastNewCycleMessage) / currentTick).dbl());
 }
 
 unsigned int TTEScheduler::getCycles()
