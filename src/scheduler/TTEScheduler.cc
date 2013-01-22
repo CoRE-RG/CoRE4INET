@@ -197,16 +197,16 @@ void TTEScheduler::clockCorrection(int ticks){
 unsigned int TTEScheduler::getTicks()
 {
     if(simTime() >= lastCycleStart){
-        return round(((simTime() - lastCycleStart) / currentTick).dbl());
+        return floor(((simTime() - lastCycleStart) / currentTick).dbl());
     }
     else{
-        return cycleTicks - round(((lastCycleStart - simTime()) / currentTick).dbl());
+        return cycleTicks - floor(((lastCycleStart - simTime()) / currentTick).dbl());
     }
 }
 
 unsigned long TTEScheduler::getTotalTicks()
 {
-    return lastCycleTicks + round(((simTime() - lastNewCycleMessage) / currentTick).dbl());
+    return lastCycleTicks + floor(((simTime() - lastNewCycleMessage) / currentTick).dbl());
 }
 
 unsigned int TTEScheduler::getCycles()
