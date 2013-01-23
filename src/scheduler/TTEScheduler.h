@@ -20,6 +20,7 @@
 
 #include <SchedulerMessage_m.h>
 #include <SchedulerEvent.h>
+#include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
 
@@ -156,6 +157,20 @@ class TTEScheduler : public cSimpleModule
          * SchedulerTimerEvent
          */
         virtual bool registerEvent(SchedulerEvent *event);
+
+        /**
+         * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
+         *
+         * @param actionTimeEvent Pointer to the Event to be scheduled.
+         * The scheduler will send the event according to the event type
+         * @param forceNextCycle should the event be forced in the next
+         * cycle even if it could be executed in this cycle
+         * @return returns true on success, else false
+         *
+         * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
+         * SchedulerTimerEvent
+         */
+        virtual bool registerEvent(SchedulerActionTimeEvent *actionTimeEvent, bool forceNextCycle);
 
         /**
          * Unregister an event that was previously registered in the scheduler.

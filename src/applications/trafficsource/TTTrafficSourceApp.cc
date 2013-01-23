@@ -46,7 +46,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg){
 
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
-        tteScheduler->registerEvent(event);
+        tteScheduler->registerEvent(event, true);
     }
     else{
         delete msg;

@@ -16,7 +16,6 @@
 #include "TTEScheduler.h"
 
 #include <SchedulerMessage_m.h>
-#include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
 
@@ -46,42 +45,57 @@ void TTEScheduler::initialize(int stage)
     }
 }
 
-bool TTEScheduler::registerEvent(SchedulerEvent *event)
-{
+bool TTEScheduler::registerEvent(SchedulerEvent *event){
 #ifdef DEBUG
     Enter_Method("registerEvent(SchedulerEvent %s)",event->getName());
 #else
     Enter_Method_Silent();
 #endif
-    take(event);
-    registredEvents.push_back(event);
+
     if (event->getKind() == ACTION_TIME_EVENT)
     {
-        SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*) event;
-        //Check whether event is in cycle
-        if(actionTimeEvent->getAction_time()>cycleTicks){
-            bubble("Schedule contains out of cycle events!");
-            return false;
-        }
-
-        if (actionTimeEvent->getAction_time() > getTicks())
-        {
-            scheduleAt(lastCycleStart + currentTick * actionTimeEvent->getAction_time(),
-                    actionTimeEvent);
-        }
-        else
-        {
-            scheduleAt(lastCycleStart
-                    + currentTick
-                    * (actionTimeEvent->getAction_time() + cycleTicks),
-                    actionTimeEvent);
-
-        }
+        return registerEvent(dynamic_cast<SchedulerActionTimeEvent*>(event), false);
     }
     else if (event->getKind() == TIMER_EVENT)
     {
+        take(event);
+        registredEvents.push_back(event);
         SchedulerTimerEvent *timerEvent = (SchedulerTimerEvent*) event;
         scheduleAt(simTime() + currentTick * timerEvent->getTimer(), event);
+    }
+    return true;
+}
+
+
+bool TTEScheduler::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, bool forceNextCycle)
+{
+#ifdef DEBUG
+    Enter_Method("registerEvent(SchedulerEvent %s, forceNextCycle %d)",event->getName(), forceNextCycle);
+#else
+    Enter_Method_Silent();
+#endif
+
+    take(actionTimeEvent);
+    registredEvents.push_back(actionTimeEvent);
+
+    //Check whether event is in cycle
+    if(actionTimeEvent->getAction_time()>cycleTicks){
+        bubble("Schedule contains out of cycle events!");
+        return false;
+    }
+
+    if (actionTimeEvent->getAction_time() <= getTicks() | forceNextCycle)
+    {
+        scheduleAt(lastCycleStart
+                            + currentTick
+                            * (actionTimeEvent->getAction_time() + cycleTicks),
+                            actionTimeEvent);
+    }
+    else
+    {
+
+        scheduleAt(lastCycleStart + currentTick * (actionTimeEvent->getAction_time()),
+                            actionTimeEvent);
     }
     return true;
 }

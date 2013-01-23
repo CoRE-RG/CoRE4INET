@@ -90,7 +90,6 @@ void TTEOutput::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("TTin"))
     {
-        EV << "There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
         if(ttBuffers.size()>0){
             ttBuffersPos = (++ttBuffersPos % ttBuffers.size());
         }
@@ -115,6 +114,7 @@ void TTEOutput::handleMessage(cMessage *msg)
             }
             else
             {
+                EV << "There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
                 ttQueue.insert(msg);
                 notifyListeners();
                 emit(ttQueueLengthSignal, ttQueue.length());

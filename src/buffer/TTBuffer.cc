@@ -101,7 +101,7 @@ void TTBuffer::handleMessage(cMessage *msg)
         }
         //Reregister scheduler
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-        tteScheduler->registerEvent((SchedulerEvent *) msg);
+        tteScheduler->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg), true);
     }
 }
 

@@ -32,6 +32,10 @@ network small_network
         channel cable extends ned.DatarateChannel
         {
             datarate = 100Mbps;
+            //bit error rate (probability (0.0-1.0) per bit)  
+            ber = 0;
+            //packet error rate (probability (0.0-1.0) per packet)  
+            per = 0;
         }
     submodules:
         unit1: Unit1 {
