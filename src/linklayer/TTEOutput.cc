@@ -79,7 +79,12 @@ void TTEOutput::handleMessage(cMessage *msg)
         if (framesRequested)
         {
             framesRequested--;
+            PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
+            if(pcf){
+                setTransparentClock(pcf);
+            }
             send(msg, gateBaseId("out"));
+
         }
         else
         {
