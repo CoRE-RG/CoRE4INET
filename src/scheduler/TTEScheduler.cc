@@ -84,7 +84,7 @@ bool TTEScheduler::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, bool
         return false;
     }
 
-    if (actionTimeEvent->getAction_time() <= getTicks() | forceNextCycle)
+    if ((actionTimeEvent->getAction_time() <= getTicks()) || forceNextCycle)
     {
         scheduleAt(lastCycleStart
                             + currentTick

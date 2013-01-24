@@ -78,7 +78,7 @@ class TTEScheduler : public cSimpleModule
         /**
          * @brief caches cycle_ticks parameter
          */
-        long cycleTicks;
+        unsigned long cycleTicks;
 
         /**
          * @brief Number of cycles since the simulation started

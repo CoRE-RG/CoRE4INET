@@ -69,15 +69,15 @@ void TTBuffer::handleMessage(cMessage *msg)
     {
         cMessage *outgoingMessage = getFrame();
         //Send Message
-        for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+        for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end(); ++destGate)
         {
             if (outgoingMessage)
             {
-                sendDirect(outgoingMessage->dup(), *gate);
+                sendDirect(outgoingMessage->dup(), *destGate);
             }
             else
             {
-                sendDirect(new TTBufferEmpty("TT Buffer Empty"), *gate);
+                sendDirect(new TTBufferEmpty("TT Buffer Empty"), *destGate);
             }
         }
         if(gate("out")->isConnected()){
