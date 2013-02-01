@@ -3,11 +3,20 @@ Test HelperFunctions
 
 %includes:
 #include "HelperFunctions.h"
+#include "simtime.h"
+
+%inifile: test.ini
+[General]
+network = Test
+cmdenv-express-mode = false
+output-vector-file = test.vec
+output-scalar-file = test.sca
+simtime-scale = -12
 
 %global:
-#define S2TC(X)  ev << std::dec << X << "s-->" << "0x" << std::hex<< secondsToTransparentClock(X) << "\n"
-#define T2TC(X,Y)  ev << std::dec << X << "ticks-->"  "0x" << std::hex<< ticksToTransparentClock(X, Y) << "\n"
-#define TC2T(X,Y)  ev << "0x" << std::hex << X << "-->" << std::dec << transparentClockToTicks(X, Y) << "ticks" << "\n"
+#define S2TC(X)  ev << std::dec << X << "s-->" << "0x" << std::hex<< secondsToTransparentClock(X) << std::dec << "\n"
+#define T2TC(X,Y)  ev << std::dec << X << "ticks-->"  "0x" << std::hex<< ticksToTransparentClock(X, Y) << std::dec << "\n"
+#define TC2T(X,Y)  ev << "0x" << std::hex << X << "-->" << std::dec << transparentClockToTicks(X, Y) << "ticks" << std::dec <<"\n"
 
 %activity:
 S2TC(0);

@@ -42,16 +42,16 @@ class TTEInput : public cSimpleModule
         /**
          * @brief Lists of incoming modules for each critical traffic id.
          */
-        std::map<uint16, std::list<Incoming*> > incomings;
+        std::map<uint16_t, std::list<Incoming*> > incomings;
 
         /**
          * @brief caches ct_mask parameter
          */
-        unsigned int ctMask;
+        uint32_t ctMask;
         /**
          * @brief caches ct_marker parameter
          */
-        unsigned int ctMarker;
+        uint32_t ctMarker;
         /**
          * @brief caches promiscuous parameter
          */
@@ -123,7 +123,7 @@ class TTEInput : public cSimpleModule
          *
          * @sa isCT(EtherFrame *frame)
          */
-        virtual uint16 getCTID(EtherFrame *frame);
+        virtual uint16_t getCTID(EtherFrame *frame);
 };
 }
 

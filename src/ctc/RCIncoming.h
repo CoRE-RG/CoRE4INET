@@ -36,12 +36,12 @@ class RCIncoming : public Incoming
         /**
          * Saves the tickcount of the last message
          */
-        unsigned long lastArrived;
+        uint64_t lastArrived;
 
         /**
          * @brief caches bag parameter
          */
-        unsigned long bag;
+        uint64_t bag;
     protected:
         /**
          * @brief Forwards messages arriving on in-gate to out-gate checks

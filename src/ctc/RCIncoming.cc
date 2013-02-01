@@ -56,7 +56,7 @@ void RCIncoming::handleMessage(cMessage *msg)
 }
 
 void RCIncoming::handleParameterChange(const char* parname){
-    bag = (unsigned long)par("bag").longValue();
+    bag = (uint64_t)par("bag").longValue();
 }
 
 } //namespace

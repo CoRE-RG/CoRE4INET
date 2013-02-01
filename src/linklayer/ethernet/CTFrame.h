@@ -34,28 +34,28 @@ class CTFrame : public CTFrame_Base
         *
         * @return critical traffic id from destination mac
         */
-        virtual unsigned short getCtID() const;
+        virtual uint16_t getCtID() const;
 
         /**
         * @brief Implements abstract CtID setter.
         *
         * @param ctID critical traffic id that should be set in destination mac
         */
-        virtual void setCtID(unsigned short ctID);
+        virtual void setCtID(uint16_t ctID);
 
         /**
         * @brief Implements abstract CtMarker getter.
         *
         * @return critical traffic marker from destination mac
         */
-        virtual unsigned int getCtMarker() const;
+        virtual uint32_t getCtMarker() const;
 
         /**
         * @brief Implements abstract CtMarker setter.
         *
         * @param ctID critical traffic marker that should be set in destination mac
         */
-        virtual void setCtMarker(unsigned int ctMarker);
+        virtual void setCtMarker(uint32_t ctMarker);
 };
 
 }

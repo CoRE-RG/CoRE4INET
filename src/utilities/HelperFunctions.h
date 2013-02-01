@@ -57,7 +57,7 @@ cGate* gateByFullPath(std::string &path);
  * @param tick length of one tick in seconds
  * @return transparent clock representation of ticks
  */
-uint64_t ticksToTransparentClock(uint64_t ticks, double tick);
+uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick);
 
 /**
  * @brief Converts value in seconds to the transparent clock unit that is ns*0x10000
@@ -65,7 +65,7 @@ uint64_t ticksToTransparentClock(uint64_t ticks, double tick);
  * @param seconds number of seconds to convert
  * @return transparent clock representation of seconds
  */
-uint64_t secondsToTransparentClock(double seconds);
+uint64_t secondsToTransparentClock(simtime_t seconds);
 
 /**
  * @brief Converts value in the transparent clock unit that is ns*0x10000 to ticks
@@ -74,6 +74,6 @@ uint64_t secondsToTransparentClock(double seconds);
  * @param tick length of one tick in seconds
  * @return ticks representation of transparent clock value
  */
-uint64_t transparentClockToTicks(uint64_t transparentClock, double tick);
+uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
 
 #endif /* HELPERFUNCTIONS_H_ */

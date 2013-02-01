@@ -19,11 +19,11 @@ packet CTFrame extends EtherFrame
 {    
         // Critical traffic ID (from MAC) (for TT and RC messages). 
         @customize(true);
-        abstract unsigned short ctID;
+        abstract uint16_t ctID;
         
         // Critical traffic marker (from MAC) (for TT and RC messages). 
         @customize(true);
-        abstract unsigned int ctMarker;
+        abstract uint32_t ctMarker;
         
         string displayString="b=15,15,rect,black,kind,5";
 }

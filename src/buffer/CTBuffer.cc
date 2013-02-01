@@ -55,9 +55,9 @@ void CTBuffer::handleMessage(cMessage *msg)
 }
 
 void CTBuffer::handleParameterChange(const char* parname){
-    ctMask = (unsigned long)par("ct_mask").longValue();
-    ctMarker = (unsigned long)par("ct_marker").longValue();
-    ctId = (unsigned long)par("ct_id").longValue();
+    ctMask = (uint32_t)par("ct_mask").longValue();
+    ctMarker = (uint32_t)par("ct_marker").longValue();
+    ctId = (uint16_t)par("ct_id").longValue();
 
     Buffer::handleParameterChange(parname);
 }

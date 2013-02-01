@@ -14,13 +14,13 @@ namespace TTEthernetModel {
 
 unsigned short CTFrame::getCtID() const{
     MACAddress mac = getDest();
-    short CtID = 0;
+    uint16_t CtID = 0;
     CtID=(mac.getAddressByte(4)<<8);
     CtID=CtID|mac.getAddressByte(5);
     return CtID;
 }
 
-void CTFrame::setCtID(unsigned short ctID){
+void CTFrame::setCtID(uint16_t ctID){
     MACAddress mac = getDest();
     mac.setAddressByte(4, ctID>>8);
     mac.setAddressByte(5, ctID);
@@ -29,7 +29,7 @@ void CTFrame::setCtID(unsigned short ctID){
 
 unsigned int CTFrame::getCtMarker() const{
     MACAddress mac = getDest();
-    int CtMarker = 0;
+    uint32_t CtMarker = 0;
     CtMarker=(mac.getAddressByte(0)<<24);
     CtMarker=CtMarker|(mac.getAddressByte(1)<<16);
     CtMarker=CtMarker|(mac.getAddressByte(2)<<8);
@@ -37,7 +37,7 @@ unsigned int CTFrame::getCtMarker() const{
     return CtMarker;
 }
 
-void CTFrame::setCtMarker(unsigned int ctMarker){
+void CTFrame::setCtMarker(uint32_t ctMarker){
     MACAddress mac = getDest();
     mac.setAddressByte(0, ctMarker>>24);
     mac.setAddressByte(1, ctMarker>>16);

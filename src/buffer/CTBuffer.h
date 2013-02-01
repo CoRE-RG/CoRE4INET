@@ -60,15 +60,15 @@ class CTBuffer : public virtual Buffer
         /**
          * @brief caches ct_mask parameter
          */
-        unsigned long ctMask;
+        uint32_t ctMask;
         /**
          * @brief caches ct_marker parameter
          */
-        unsigned long ctMarker;
+        uint32_t ctMarker;
         /**
          * @brief caches ct_id parameter
          */
-        unsigned long ctId;
+        uint16_t ctId;
 
 
     protected:

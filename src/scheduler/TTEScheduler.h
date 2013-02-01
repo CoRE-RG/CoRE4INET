@@ -37,17 +37,17 @@ class TTEScheduler : public cSimpleModule
         /**
          * @brief Simulation time when the last cycle started
          */
-        SimTime lastCycleStart;
+        simtime_t lastCycleStart;
         /**
          * @brief Simulation time when the last newcycle message was seen
          */
-        SimTime lastNewCycleMessage;
+        simtime_t lastNewCycleMessage;
 
         /**
          * @brief Number of ticks since the simulation started
          * when the last cycle started
          */
-        unsigned long lastCycleTicks;
+        uint64_t lastCycleTicks;
 
         /**
          * @brief List of registered SchedulerEvents.
@@ -61,29 +61,29 @@ class TTEScheduler : public cSimpleModule
         /**
          * @brief caches max_drift_change parameter
          */
-        double maxDriftChange;
+        simtime_t maxDriftChange;
         /**
          * @brief caches max_drift parameter
          */
-        double maxDrift;
+        simtime_t maxDrift;
 
         /**
          * @brief caches current_tick parameter
          */
-        double currentTick;
+        simtime_t currentTick;
         /**
          * @brief caches tick parameter
          */
-        double tick;
+        simtime_t tick;
         /**
          * @brief caches cycle_ticks parameter
          */
-        unsigned long cycleTicks;
+        uint32_t cycleTicks;
 
         /**
          * @brief Number of cycles since the simulation started
          */
-        unsigned long cycles;
+        uint32_t cycles;
 
     public:
         /**
@@ -123,28 +123,28 @@ class TTEScheduler : public cSimpleModule
          *
          * @return Number of ticks since last cycle start
          */
-        virtual unsigned int getTicks();
+        virtual uint32_t getTicks();
 
         /**
          * @brief Returns the absolute number of ticks
          *
          * @return Number of ticks since simulation start
          */
-        virtual unsigned long getTotalTicks();
+        virtual uint64_t getTotalTicks();
 
         /**
          * @brief Returns the current number of cycles
          *
          * @return Number of cycles since simulation start
          */
-        virtual unsigned int getCycles();
+        virtual uint32_t getCycles();
 
         /**
          * @brief Corrects the clock by the number of ticks
          *
          * @param number of ticks the clock must be corrected
          */
-        virtual void clockCorrection(int ticks);
+        virtual void clockCorrection(int32_t ticks);
 
         /**
          * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule

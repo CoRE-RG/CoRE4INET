@@ -143,14 +143,14 @@ void TTEScheduler::handleMessage(cMessage *msg)
 
 void TTEScheduler::changeDrift(){
 
-    double newDriftChange = uniform(-maxDriftChange,maxDriftChange);
-    double newTick = currentTick+newDriftChange;
+    simtime_t newDriftChange = uniform(-maxDriftChange,maxDriftChange);
+    simtime_t newTick = currentTick+newDriftChange;
     if((newTick-tick)>maxDrift)
-        par("current_tick").setDoubleValue(tick+maxDrift);
+        par("current_tick").setDoubleValue((tick+maxDrift).dbl());
     else if((newTick-tick)<-maxDrift)
-        par("current_tick").setDoubleValue(tick-maxDrift);
+        par("current_tick").setDoubleValue((tick-maxDrift).dbl());
     else
-        par("current_tick").setDoubleValue(newTick);
+        par("current_tick").setDoubleValue(newTick.dbl());
     emit(currentDrift, par("current_tick").doubleValue()-tick);
 }
 
@@ -196,10 +196,10 @@ void TTEScheduler::handleParameterChange(const char* parname){
     cycleTicks = par("cycle_ticks").longValue();
 }
 
-void TTEScheduler::clockCorrection(int ticks){
+void TTEScheduler::clockCorrection(int32_t ticks){
     Enter_Method("clock correction %d ticks",ticks);
 
-    lastCycleStart+=SimTime(ticks*currentTick);
+    lastCycleStart+=ticks*currentTick;
 
     //Now correct the new cylce time
     cancelEvent(newCyclemsg);
@@ -208,22 +208,22 @@ void TTEScheduler::clockCorrection(int ticks){
     correctEvents();
 }
 
-unsigned int TTEScheduler::getTicks()
+uint32_t TTEScheduler::getTicks()
 {
     if(simTime() >= lastCycleStart){
-        return floor(((simTime() - lastCycleStart) / currentTick).dbl());
+        return floor(((simtime_t)((simTime() - lastCycleStart) / currentTick)).dbl());
     }
     else{
-        return cycleTicks - floor(((lastCycleStart - simTime()) / currentTick).dbl());
+        return cycleTicks - floor(((simtime_t)((lastCycleStart - simTime()) / currentTick)).dbl());
     }
 }
 
-unsigned long TTEScheduler::getTotalTicks()
+uint64_t TTEScheduler::getTotalTicks()
 {
-    return lastCycleTicks + floor(((simTime() - lastNewCycleMessage) / currentTick).dbl());
+    return lastCycleTicks + floor(((simtime_t)((simTime() - lastNewCycleMessage) / currentTick)).dbl());
 }
 
-unsigned int TTEScheduler::getCycles()
+uint32_t TTEScheduler::getCycles()
 {
     return cycles;
 }

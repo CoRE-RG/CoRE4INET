@@ -40,7 +40,7 @@ class TTEApplicationBase : public cSimpleModule
          * @brief Map of critical traffic identifies with their
          * corresponding Buffers.
          */
-        std::map<uint16, std::list<Buffer*> > buffers;
+        std::map<uint16_t, std::list<Buffer*> > buffers;
     public:
         /**
          * @brief executes the given Callback in the context of the Application

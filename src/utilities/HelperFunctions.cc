@@ -7,7 +7,6 @@
 
 #include "HelperFunctions.h"
 
-
 #include <sstream>
 #include "cmodule.h"
 
@@ -54,14 +53,14 @@ cGate* gateByFullPath(std::string &path){
     return NULL;
 }
 
-uint64_t ticksToTransparentClock(uint64_t ticks, double tick){
+uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick){
     return secondsToTransparentClock(ticks*tick);
 }
 
-uint64_t secondsToTransparentClock(double seconds){
-    return (seconds*1000000000*0x10000);
+uint64_t secondsToTransparentClock(simtime_t seconds){
+   return ((seconds.raw() *  0x10000) / pow10(SimTime::SCALEEXP_NS-seconds.getScaleExp()));
 }
 
-uint64_t transparentClockToTicks(uint64_t transparentClock, double tick){
+uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick){
     return transparentClock/secondsToTransparentClock(tick);
 }

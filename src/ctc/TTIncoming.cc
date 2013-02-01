@@ -42,7 +42,7 @@ void TTIncoming::handleMessage(cMessage *msg)
     {
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         //get current time in cylce
-        unsigned int currentTicks = tteScheduler->getTicks();
+        uint32_t currentTicks = tteScheduler->getTicks();
         //Now check for correct arrival:
         if (frame != NULL)
         {
@@ -59,7 +59,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             delete msg;
         }
         //Check too early
-        else if (currentTicks < (unsigned int) par("receive_window_start").longValue())
+        else if (currentTicks < (uint32_t) par("receive_window_start").longValue())
         {
             emit(ctDroppedSignal, 1);
             hadError=true;
@@ -76,7 +76,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             delete msg;
         }
         //Check too late
-        else if (currentTicks > (unsigned int) par("receive_window_end").longValue())
+        else if (currentTicks > (uint32_t) par("receive_window_end").longValue())
         {
             emit(ctDroppedSignal, 1);
             hadError=true;
