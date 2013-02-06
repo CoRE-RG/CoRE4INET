@@ -129,14 +129,6 @@ void TTEScheduler::handleMessage(cMessage *msg)
         scheduleAt(lastCycleStart + currentTick * cycleTicks, msg);
         newCyclemsg = msg;
 
-
-        //WARNING: NOW IN DUMMYSYNC MODULE CHECK IF CORRECT!
-        //TODO: Delete this code if simulation works properly
-//        int modticks = (int)(simTime().dbl()/tick)%cycleTicks;
-//        if(modticks>(cycleTicks/2))
-//            modticks=modticks-cycleTicks;
-//        modticks+=uniform(-0.000000250,0.000000250)/tick;
-//        clockCorrection(-modticks);
         correctEvents();
     }
 }
