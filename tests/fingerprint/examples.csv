@@ -1,2 +1,0 @@
-# workingdir,                        args,                                          simtimelimit,    fingerprint
-/examples/small_network/,            -f omnetpp.ini -c General -r 0,                1s,              a039-8175

@@ -1,5 +1,7 @@
-#Thu Jul 28 19:24:26 CEST 2011
+#Wed Jan 23 19:03:58 CET 2013
 eclipse.preferences.version=1
+environment/project/org.omnetpp.cdt.gnu.config.debug.884168226/append=true
+environment/project/org.omnetpp.cdt.gnu.config.debug.884168226/appendContributed=true
 org.eclipse.cdt.core.formatter.alignment_for_arguments_in_method_invocation=16
 org.eclipse.cdt.core.formatter.alignment_for_base_clause_in_type_declaration=80
 org.eclipse.cdt.core.formatter.alignment_for_compact_if=0
