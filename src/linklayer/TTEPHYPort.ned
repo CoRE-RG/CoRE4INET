@@ -37,16 +37,16 @@ module TTEPHYPort like IPort
         }
         //Module for the organisation of inbound traffic
         tteInput: TTEInput {
-			parameters:
-            	@display("p=142,45");
-            	promiscuous = promiscuous;
+            parameters:
+                @display("p=142,45");
+                promiscuous = promiscuous;
         }
         //MAC interface
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true; //MAC must be set promiscuous to allow for CT receiption with all CT-Markers
                 queueModule = "tteOutput";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
-                @display("p=87,139");
+                @display("p=78,142");
         }
     connections:
         upperLayerIn --> tteOutput.in;
@@ -54,7 +54,7 @@ module TTEPHYPort like IPort
         tteOutput.out --> mac.upperLayerIn;
         tteInput.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
-        
+
         TTin --> tteOutput.TTin;
         RCin --> tteOutput.RCin;
         PCFin --> tteOutput.PCFin;
