@@ -1,0 +1,19 @@
+cplusplus {{
+    #include "CTFrame_m.h"
+}}
+
+class TTEthernetModel::CTFrame;
+
+packet CTFrame;
+
+namespace TTEthernetModel;
+//
+// Represents a AVB Frame
+//
+// @see CTFrame
+//
+// @author Philipp Meyer 
+packet AVBFrame extends CTFrame
+{    
+	string displayString="b=15,15,rect,black,blue,5";
+}
