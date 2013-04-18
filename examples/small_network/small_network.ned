@@ -25,6 +25,7 @@ import ttethernet.nodes.ethernet.TTEEtherHost;
 //
 network small_network
 {
+    @display("bgb=,,white");
     types:
         //
         // All links are configured with 100MBit per second and variable delay
@@ -41,7 +42,7 @@ network small_network
         unit1: Unit1 {
             @display("p=39,70");
         }
-        
+
         unit2: Unit2 {
             @display("p=249,30");
         }

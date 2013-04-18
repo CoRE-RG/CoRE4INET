@@ -181,10 +181,10 @@ void TTEScheduler::correctEvents(){
 }
 
 void TTEScheduler::handleParameterChange(const char* parname){
-    maxDriftChange = par("max_drift_change").doubleValue();
-    maxDrift = par("max_drift").doubleValue();
-    currentTick = par("current_tick").doubleValue();
-    tick = par("tick").doubleValue();
+    maxDriftChange = SimTime(par("max_drift_change").doubleValue());
+    maxDrift = SimTime(par("max_drift").doubleValue());
+    currentTick = SimTime(par("current_tick").doubleValue());
+    tick = SimTime(par("tick").doubleValue());
     cycleTicks = par("cycle_ticks").longValue();
 }
 
@@ -203,16 +203,16 @@ void TTEScheduler::clockCorrection(int32_t ticks){
 uint32_t TTEScheduler::getTicks()
 {
     if(simTime() >= lastCycleStart){
-        return floor(((simtime_t)((simTime() - lastCycleStart) / currentTick)).dbl());
+        return floor((simTime() - lastCycleStart) / currentTick);
     }
     else{
-        return cycleTicks - floor(((simtime_t)((lastCycleStart - simTime()) / currentTick)).dbl());
+        return cycleTicks - floor((lastCycleStart - simTime()) / currentTick);
     }
 }
 
 uint64_t TTEScheduler::getTotalTicks()
 {
-    return lastCycleTicks + floor(((simtime_t)((simTime() - lastNewCycleMessage) / currentTick)).dbl());
+    return lastCycleTicks + floor((simTime() - lastNewCycleMessage) / currentTick);
 }
 
 uint32_t TTEScheduler::getCycles()
