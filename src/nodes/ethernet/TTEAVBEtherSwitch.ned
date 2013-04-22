@@ -14,6 +14,7 @@ import inet.linklayer.IMACRelayUnit;
 
 module TTEAVBEtherSwitch
 {
+    //Parameter:
     parameters:
         @node();
         @display("i=block/switch;bgb=1219,312");
