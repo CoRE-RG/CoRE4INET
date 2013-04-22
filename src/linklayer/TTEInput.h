@@ -38,7 +38,7 @@ namespace TTEthernetModel {
  */
 class TTEInput : public cSimpleModule
 {
-    private:
+    protected:
         /**
          * @brief Lists of incoming modules for each critical traffic id.
          */
@@ -56,7 +56,6 @@ class TTEInput : public cSimpleModule
          * @brief caches promiscuous parameter
          */
         bool promiscuous;
-    protected:
         /**
          * @brief set to true if there was an error during runtime
          */
@@ -103,7 +102,7 @@ class TTEInput : public cSimpleModule
          * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname);
-    private:
+    protected:
         /**
          * @brief Helper function checks whether a Frame is critical traffic.
          *

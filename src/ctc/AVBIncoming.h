@@ -17,13 +17,20 @@
 #define AVBINCOMING_H_
 
 #include <omnetpp.h>
-#include <Incoming.h>
 
 namespace TTEthernetModel {
 
-class AVBIncoming : public Incoming
+class AVBIncoming : public cSimpleModule
 {
     protected:
+            /**
+             * @brief set to true if there was an error during runtime
+             */
+            bool hadError;
+            /**
+             * @brief Initialization of the module
+             */
+            virtual void initialize();
             /**
              * @brief Forwards messages arriving on in-gate to out-gate
              *

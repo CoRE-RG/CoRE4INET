@@ -14,7 +14,101 @@
 // 
 
 #include "TTEAVBInput.h"
+#include "TTEScheduler.h"
+#include "Buffer.h"
+
+#include <iostream>
 
 namespace TTEthernetModel {
+
+Define_Module(TTEAVBInput);
+
+TTEAVBInput::TTEAVBInput() : TTEInput::TTEInput()
+{
+
+}
+
+void TTEAVBInput::handleMessage(cMessage *msg)
+{
+    if (msg->arrivedOn("in"))
+    {
+        EtherFrame *frame = (EtherFrame*) msg;
+
+        int i = msg->findPar("received");
+        cMsgPar* par;
+        if( i >=0 )
+            par = &msg->par(i);
+        else
+            par = &msg->addPar("received");
+        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+
+        i = msg->findPar("received_total");
+        if( i >=0 )
+            par = &msg->par(i);
+        else
+            par = &msg->addPar("received_total");
+        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+
+
+        i = msg->findPar("received_port");
+        if( i >=0 )
+            par = &msg->par(i);
+        else
+            par = &msg->addPar("received_port");
+        par->setLongValue(getParentModule()->getIndex());
+
+        //Auf CTCs verteilen oder BE traffic
+        if (isCT(frame))
+        {
+            std::map<uint16, std::list<Incoming *> >::iterator incomingList = incomings.find(getCTID(frame));
+            if (incomingList != incomings.end())
+            {
+                //Send to all CTCs for the CT-ID
+                for (std::list<Incoming*>::iterator incoming = incomingList->second.begin(); incoming
+                        != incomingList->second.end(); incoming++)
+                {
+                    sendDirect(frame->dup(), (*incoming)->gate("in"));
+                }
+                delete frame;
+            }
+            else
+            {
+                emit(ctDroppedSignal, 1);
+                hadError=true;
+                if(ev.isGUI()){
+                    bubble("No matching buffer configured");
+                    getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                    getParentModule()->getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                }
+                delete frame;
+            }
+        }
+        //Sonst BE
+        else
+        {
+            if(promiscuous || frame->getDest().isMulticast())
+            {
+                send(msg, "out");
+            }
+            else
+            {
+                MACAddress address;
+                address.setAddress(frame->getArrivalGate()->getPathStartGate()->getOwnerModule()->par("address"));
+                if(frame->getDest().equals(address))
+                {
+                    send(msg, "out");
+                }
+                else
+                {
+                    delete msg;
+                }
+            }
+        }
+    }
+}
 
 } /* namespace TTEthernetModel */

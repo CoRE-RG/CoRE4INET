@@ -16,10 +16,17 @@
 #ifndef TTEAVBINPUT_H_
 #define TTEAVBINPUT_H_
 
+#include "TTEInput.h"
+#include <SRPFrame_m.h>
+
 namespace TTEthernetModel {
 
-class TTEAVBInput
+class TTEAVBInput: public TTEInput
 {
+    protected:
+        virtual void handleMessage(cMessage *msg);
+    public:
+        TTEAVBInput();
 };
 
 } /* namespace TTEthernetModel */

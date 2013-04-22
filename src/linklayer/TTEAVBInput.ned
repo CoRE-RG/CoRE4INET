@@ -20,5 +20,5 @@ package ttethernet.linklayer;
 //
 simple TTEAVBInput extends TTEInput
 {
-    
+    @class(TTEAVBInput);
 }

@@ -5,7 +5,10 @@ import ttethernet.configuration.base.IConfigurationManager;
 import ttethernet.synchronisation.base.ISync;
 import ttethernet.synchronisation.base.DummySync;
 import ttethernet.linklayer.TTEAVBPHYPort;
+import ttethernet.ctc.AVBIncoming;
 import ttethernet.buffer.AVBQueueBuffer;
+import inet.linklayer.ethernet.EtherLLC;
+import ttethernet.linklayer.BGTrafficHandle;
 
 import inet.linklayer.IMACRelayUnit;
 
@@ -22,10 +25,22 @@ module TTEAVBEtherSwitch
         // Implementation of the best-effort forwarding part
         beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
             parameters:
-                @display("p=141,242");
+                @display("p=141,242");              
             gates:
-                lowerLayerIn[sizeof(ethg)];
-                lowerLayerOut[sizeof(ethg)];
+                lowerLayerIn[sizeof(ethg)+1];
+                lowerLayerOut[sizeof(ethg)+1];
+        }
+
+        llc: EtherLLC {
+            parameters:
+                @display("p=59,169");
+            gates:
+                upperLayerIn[1];
+                upperLayerOut[1];
+        }
+
+        bgTrafficHandle: BGTrafficHandle {
+            @display("p=59,91");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
@@ -35,9 +50,15 @@ module TTEAVBEtherSwitch
                 promiscuous = true;
         }
 
+        avbCTC: AVBIncoming {
+            parameters:
+                @display("p=364,91");
+                NrOfPorts = sizeof(ethg);
+        }
+
         avbBuffer[sizeof(ethg)]: AVBQueueBuffer {
-			parameters:
-            	@display("p=386,169");
+            parameters:
+                @display("p=364,242");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
@@ -57,8 +78,22 @@ module TTEAVBEtherSwitch
     connections:
         for i=0..sizeof(ethg)-1 {
             avbBuffer[i].out --> phy[i].AVBin;
+            avbCTC.AVBout[i] --> avbBuffer[i].in;
             phy[i].phys <--> ethg[i];
             phy[i].upperLayerIn <-- beswitch.lowerLayerOut[i];
             phy[i].upperLayerOut --> beswitch.lowerLayerIn[i];
         }
+        beswitch.lowerLayerOut[sizeof(ethg)] --> llc.lowerLayerIn;
+        beswitch.lowerLayerIn[sizeof(ethg)] <-- llc.lowerLayerOut;
+        
+        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[0];
+        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[0];
+        avbCTC.SRPout --> bgTrafficHandle.in;
+        avbCTC.SRPin <-- bgTrafficHandle.out;
+//        
+//       	llc.upperLayerOut[0] --> avbCTC.SRPin;
+//       	llc.upperLayerIn[0] <-- avbCTC.SRPout;
+        
+//		beswitch.lowerLayerOut[sizeof(ethg)] --> avbCTC.SRPin;
+//		beswitch.lowerLayerIn[sizeof(ethg)] <-- avbCTC.SRPout;
 }

@@ -40,9 +40,9 @@ void BGBuffer::handleMessage(cMessage *msg)
             {
                 sendDirect(outgoingMessage->dup(), *gate);
             }
-            if(gate("out")->isConnected()){
-                send(outgoingMessage->dup(),"out");
-            }
+//            if(gate("out")->isConnected()){
+//                send(outgoingMessage->dup(),"out");
+//            }
             //TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback
             for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
                     iter != transmitCallbacks.end(); ++iter){
@@ -51,6 +51,23 @@ void BGBuffer::handleMessage(cMessage *msg)
             recordPacketSent();
             delete msg;
         }
+    }
+    else if(msg->arrivedOn("in") && gate("out")->isConnected())
+    {
+        cMessage *outgoingMessage = dequeue();
+
+            if(outgoingMessage)
+            {
+                send(outgoingMessage->dup(),"out");
+
+                //TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback
+                for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
+                        iter != transmitCallbacks.end(); ++iter){
+                    iter->first->executeCallback(iter->second);
+                }
+                recordPacketSent();
+                delete msg;
+            }
     }
 }
 

@@ -18,9 +18,18 @@ package ttethernet.ctc;
 //
 // TODO auto-generated type
 //
-simple AVBIncoming extends Incoming
+simple AVBIncoming
 {
     parameters:
     	@class(AVBIncoming);
-    	@display("i=,blue");
+    	@display("i=block/arrival,blue");
+    	int NrOfPorts = default(0);
+    	
+    gates:
+        //input for SRP Frames
+        input SRPin @labels(SRPFrame);
+        output SRPout @labes(SRPFrame);
+        
+        input in @directIn @labels(AVBFrame);
+        output AVBout[NrOfPorts] @labels(AVBFrame);
 }

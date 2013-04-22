@@ -16,8 +16,10 @@
 package ttethernet.applications.trafficsource;
 
 //
-// TODO auto-generated type
 //
+// @see TrafficSourceAppBase
+//
+// @author Philipp Meyer
 simple AVBTrafficSourceApp extends TrafficSourceAppBase
 {
     parameters:
@@ -26,5 +28,7 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase
         
         bool talker = default(false);
         double advertise_time @unit(s) = default(0);
-        
+        double streamID = default(0);
+    gates:
+        input SRPin @directIn @labels(SRPFrame);
 }

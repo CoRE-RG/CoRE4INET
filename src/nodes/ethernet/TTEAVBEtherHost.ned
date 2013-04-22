@@ -42,11 +42,12 @@ module TTEAVBEtherHost
     submodules:
         phy[numPorts]: TTEAVBPHYPort {
             @display("p=235,255,c,50");
+            promiscuous = true;
         }
 
         avbBuffer[numPorts]: AVBQueueBuffer {
             parameters:
-                @display("p=390,169");
+                @display("p=380,256");
         }
 
         llc: EtherLLC {
@@ -62,6 +63,7 @@ module TTEAVBEtherHost
                 registerSAP = true;
                 @display("p=60,256,col");
         }
+
         srv: EtherAppSrv {
             parameters:
                 registerSAP = true;
@@ -79,15 +81,19 @@ module TTEAVBEtherHost
         tteScheduler: TTEScheduler {
             @display("p=235,169");
         }
+
         tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
             @display("p=235,99");
         }
+
         bgIn: BGQueueBuffer {
             @display("p=141,37");
         }
+
         bgOut: BGQueueBuffer {
             @display("p=141,99");
         }
+
         bgTrafficHandle: BGTrafficHandle {
             @display("p=60,99");
         }
@@ -107,7 +113,7 @@ module TTEAVBEtherHost
         bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
         bgTrafficHandle.out --> bgIn.in;
         bgOut.out --> bgTrafficHandle.in;
-        
+
         for i=0..numPorts-1 {
             avbBuffer[i].out --> phy[i].AVBin;
         }

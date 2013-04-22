@@ -29,6 +29,13 @@ void AVBTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
 
     talker = par("talker").boolValue();
+    streamID = par("streamID").longValue();
+
+    Buffer *bgInBuffer = (Buffer*) getParentModule()->getSubmodule("bgIn");
+    bgInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
+
+    bgOutBuffer = (Buffer*) getParentModule()->getSubmodule("bgOut");
+
     if(talker)
     {
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
@@ -37,25 +44,48 @@ void AVBTrafficSourceApp::initialize()
         event->setDestinationGate(gate("schedulerIn"));
         tteScheduler->registerEvent(event);
     }
-
 }
 
 void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
     if(msg->arrivedOn("schedulerIn"))
     {
-        ev.printf("Talker Advertise");
         bubble("Talker Advertise");
 
-        SRPFrame *frame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
+        SRPFrame *outFrame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
+        outFrame->setStreamID(streamID);
+        //outFrame->setDest(*(new MACAddress("FF00FF00FF00")));
 
-        Buffer *bgBuffer = (Buffer*) getParentModule()->getSubmodule("bgOut");
-        bgBuffer->par("destination_gates") = bgBuffer->gate("out")->getFullPath();
-        sendDirect(frame, bgBuffer->gate("in"));
+        sendDirect(outFrame, bgOutBuffer->gate("in"));
     }
-    else
+    else if(msg->arrivedOn("SRPin"))
     {
+        std::string msgClass = msg->getClassName();
+        if(msgClass.compare("TTEthernetModel::SRPFrame") == 0)
+        {
+            SRPFrame *inFrame = (SRPFrame*) msg;
+            std::string srpType = inFrame->getName();
+            bubble(inFrame->getName());
+            if(talker)
+            {
+                //TODO
+            }
+            //Listener:
+            else
+            {
+                if(srpType.compare("Talker Advertise") == 0)
+                {
+                    SRPFrame *outFrame = new SRPFrame("Listener Ready", IEEE802CTRL_DATA);
+                    outFrame->setStreamID(inFrame->getStreamID());
 
+                    sendDirect(outFrame, bgOutBuffer->gate("in"));
+                }
+            }
+        }
+        else
+        {
+            delete msg;
+        }
     }
 
 }
