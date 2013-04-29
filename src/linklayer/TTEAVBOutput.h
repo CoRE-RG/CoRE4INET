@@ -16,10 +16,16 @@
 #ifndef TTEAVBOUTPUT_H_
 #define TTEAVBOUTPUT_H_
 
+#include "TTEOutput.h"
+
 namespace TTEthernetModel {
 
-class TTEAVBOutput
+class TTEAVBOutput : public TTEOutput
 {
+    protected:
+        virtual void handleMessage(cMessage *msg);
+    public:
+        TTEAVBOutput();
 };
 
 } /* namespace TTEthernetModel */

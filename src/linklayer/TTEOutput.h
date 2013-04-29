@@ -44,7 +44,7 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * Implementation of IPassiveQueue::removeListener().
          */
         virtual void removeListener(IPassiveQueueListener *listener);
-    private:
+    protected:
         /**
          * @brief Outgoing Channel used to calculate transmission duration.
          */
@@ -107,7 +107,7 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Signal that is emitted when the queue length of protocol control messages changes.
          */
         static simsignal_t pcfQueueLengthSignal;
-    private:
+    protected:
         /**
          * @brief Helper function to check whether a Messages is allowed to be transmitted.
          *

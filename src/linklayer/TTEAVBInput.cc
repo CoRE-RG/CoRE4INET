@@ -90,6 +90,17 @@ void TTEAVBInput::handleMessage(cMessage *msg)
         //Sonst BE
         else
         {
+            EtherFrame *frame = (EtherFrame*)msg;
+            std::string msgClass = frame->getEncapsulatedPacket()->getClassName();
+            std::string msgName = frame->getEncapsulatedPacket()->getName();
+            if(msgClass.compare("TTEthernetModel::SRPFrame") == 0)
+            {
+                if(msgName.compare("Talker Advertise"))
+                {
+                    frame->setDest(*(new MACAddress("000000000000")));
+                }
+            }
+
             if(promiscuous || frame->getDest().isMulticast())
             {
                 send(msg, "out");

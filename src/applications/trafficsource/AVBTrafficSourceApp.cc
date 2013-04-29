@@ -17,6 +17,7 @@
 #include "HelperFunctions.h"
 #include <CTFrame_m.h>
 #include <SRPFrame_m.h>
+#include <AVBFrame_m.h>
 #include "TTEScheduler.h"
 #include "Buffer.h"
 
@@ -31,10 +32,12 @@ void AVBTrafficSourceApp::initialize()
     talker = par("talker").boolValue();
     streamID = par("streamID").longValue();
 
-    Buffer *bgInBuffer = (Buffer*) getParentModule()->getSubmodule("bgIn");
-    bgInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
+    Buffer *srpInBuffer = (Buffer*) getParentModule()->getSubmodule("srpIn");
+    srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
 
-    bgOutBuffer = (Buffer*) getParentModule()->getSubmodule("bgOut");
+    srpOutBuffer = (Buffer*) getParentModule()->getSubmodule("srpOut");
+
+    avbOutCTC = getParentModule()->getSubmodule("avbCTC");
 
     if(talker)
     {
@@ -54,9 +57,8 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
         SRPFrame *outFrame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
         outFrame->setStreamID(streamID);
-        //outFrame->setDest(*(new MACAddress("FF00FF00FF00")));
 
-        sendDirect(outFrame, bgOutBuffer->gate("in"));
+        sendDirect(outFrame, srpOutBuffer->gate("in"));
     }
     else if(msg->arrivedOn("SRPin"))
     {
@@ -68,7 +70,11 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             bubble(inFrame->getName());
             if(talker)
             {
-                //TODO
+                if(srpType.compare("Listener Ready") == 0)
+                {
+                    AVBFrame *outFrame = new AVBFrame();
+                    sendDirect(outFrame, avbOutCTC->gate("in"));
+                }
             }
             //Listener:
             else
@@ -78,8 +84,9 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                     SRPFrame *outFrame = new SRPFrame("Listener Ready", IEEE802CTRL_DATA);
                     outFrame->setStreamID(inFrame->getStreamID());
 
-                    sendDirect(outFrame, bgOutBuffer->gate("in"));
+                    sendDirect(outFrame, srpOutBuffer->gate("in"));
                 }
+
             }
         }
         else

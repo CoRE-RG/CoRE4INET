@@ -26,7 +26,8 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase
     private:
         bool talker;
         long streamID;
-        Buffer *bgOutBuffer;
+        Buffer *srpOutBuffer;
+        cModule *avbOutCTC;
     protected:
         /**
          * @brief Initialization of the module. Sends activator message

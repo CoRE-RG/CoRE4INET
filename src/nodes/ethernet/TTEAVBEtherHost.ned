@@ -16,13 +16,14 @@
 package ttethernet.nodes.ethernet;
 
 import ttethernet.buffer.BGQueueBuffer;
-import ttethernet.linklayer.BGTrafficHandle;
+import ttethernet.linklayer.SRPTrafficHandle;
 import ttethernet.scheduler.TTEScheduler;
 import ttethernet.configuration.base.IConfigurationManager;
 import ttethernet.linklayer.TTEAVBPHYPort;
 import ttethernet.synchronisation.base.ISync;
 import ttethernet.synchronisation.base.DummySync;
 import ttethernet.applications.base.ITTEApplication;
+import ttethernet.ctc.AVBIncoming;
 import ttethernet.buffer.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
 import inet.applications.ethernet.EtherAppSrv;
@@ -43,6 +44,12 @@ module TTEAVBEtherHost
         phy[numPorts]: TTEAVBPHYPort {
             @display("p=235,255,c,50");
             promiscuous = true;
+        }
+
+        avbCTC: AVBIncoming {
+            parameters:
+                @display("p=380,99");
+                NrOfPorts = numPorts;
         }
 
         avbBuffer[numPorts]: AVBQueueBuffer {
@@ -87,14 +94,22 @@ module TTEAVBEtherHost
         }
 
         bgIn: BGQueueBuffer {
-            @display("p=141,37");
+            @display("p=60,37");
         }
 
         bgOut: BGQueueBuffer {
-            @display("p=141,99");
+            @display("p=109,37");
         }
 
-        bgTrafficHandle: BGTrafficHandle {
+        srpIn: BGQueueBuffer {
+            @display("p=186,37");
+        }
+
+        srpOut: BGQueueBuffer {
+            @display("p=235,37");
+        }
+
+        srpTrafficHandle: SRPTrafficHandle {
             @display("p=60,99");
         }
 
@@ -109,12 +124,14 @@ module TTEAVBEtherHost
         srv.out --> llc.upperLayerIn[1];
         srv.in <-- llc.upperLayerOut[1];
 
-        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
-        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
-        bgTrafficHandle.out --> bgIn.in;
-        bgOut.out --> bgTrafficHandle.in;
+        srpTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
+        srpTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
+        srpTrafficHandle.out --> bgIn.in;
+        bgOut.out --> srpTrafficHandle.in;
+        srpTrafficHandle.SRPout --> srpIn.in;
+        srpTrafficHandle.SRPin <-- srpOut.out;
 
-        for i=0..numPorts-1 {
-            avbBuffer[i].out --> phy[i].AVBin;
-        }
+		avbCTC.SRPout --> avbCTC.SRPin;
+		avbCTC.AVBout[0] --> avbBuffer[0].in;
+        avbBuffer[0].out --> phy[0].AVBin;
 }

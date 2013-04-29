@@ -8,7 +8,7 @@ import ttethernet.linklayer.TTEAVBPHYPort;
 import ttethernet.ctc.AVBIncoming;
 import ttethernet.buffer.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
-import ttethernet.linklayer.BGTrafficHandle;
+import ttethernet.linklayer.SRPTrafficHandle;
 
 import inet.linklayer.IMACRelayUnit;
 
@@ -40,7 +40,7 @@ module TTEAVBEtherSwitch
                 upperLayerOut[1];
         }
 
-        bgTrafficHandle: BGTrafficHandle {
+        srpTrafficHandle: SRPTrafficHandle {
             @display("p=59,91");
         }
         // Physical ports of the switch
@@ -87,10 +87,11 @@ module TTEAVBEtherSwitch
         beswitch.lowerLayerOut[sizeof(ethg)] --> llc.lowerLayerIn;
         beswitch.lowerLayerIn[sizeof(ethg)] <-- llc.lowerLayerOut;
         
-        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[0];
-        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[0];
-        avbCTC.SRPout --> bgTrafficHandle.in;
-        avbCTC.SRPin <-- bgTrafficHandle.out;
+        srpTrafficHandle.lowerLayerOut --> llc.upperLayerIn[0];
+        srpTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[0];
+        avbCTC.SRPout --> srpTrafficHandle.SRPin;
+        avbCTC.SRPin <-- srpTrafficHandle.SRPout;
+        srpTrafficHandle.out --> srpTrafficHandle.in;
 //        
 //       	llc.upperLayerOut[0] --> avbCTC.SRPin;
 //       	llc.upperLayerIn[0] <-- avbCTC.SRPout;

@@ -31,46 +31,37 @@ AVBIncoming::AVBIncoming()
 
 void AVBIncoming::initialize()
 {
-//    EtherFrame *outFrame = new EtherFrame("MAC Register", IEEE802CTRL_DATA);
-//    outFrame->setSrc( *(new MACAddress("FFFFFFFFFFFF")) );
-//    send(outFrame, "SRPout");
+    WATCH_MAP(TalkerAddresses);
 
-//    Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
-//    etherctrl->setDsap(ETHERAPP_BUFFER_SAP);
-//    etherctrl->setSrc(*(new MACAddress("FFFFFFFFFFFF")));
-//    cMessage *msg = new cMessage("register_DSAP", IEEE802CTRL_REGISTER_DSAP);
-//    msg->setControlInfo(etherctrl);
-//
-//    send(msg, "SRPout");
+    EtherFrame *outFrame = new EtherFrame("MAC Register", IEEE802CTRL_DATA);
+    send(outFrame, "SRPout");
 }
 
 void AVBIncoming::handleMessage(cMessage* msg)
 {
     if(msg->arrivedOn("in"))
     {
-        sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out"); //temp
+        sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", 0)); //temp
     }
     else if(msg->arrivedOn("SRPin"))
     {
-        //SRPFrame *inFrame = ((SRPFrame*)((EtherFrameWithLLC*)msg)->decapsulate());
+        SRPFrame *inFrame = ((SRPFrame*)msg);
+        std::string srpType = inFrame->getName();
+        bubble(inFrame->getName());
+        if(srpType.compare("Talker Advertise") == 0)
+        {
+            TalkerAddresses[inFrame->getStreamID()] = inFrame->getSrc();
+        }
 
-        std::string msgClass = msg->getClassName();
-        if(msgClass.compare("TTEthernetModel::SRPFrame") == 0)
+        if(srpType.compare("Listener Ready") == 0)
         {
-            SRPFrame *inFrame = ((SRPFrame*)msg);
-            std::string srpType = inFrame->getName();
-            bubble(inFrame->getName());
-            if(srpType.compare("Talker Advertise") == 0)
-            {
-                SRPFrame *outFrame = new SRPFrame("SRP Test Frame", IEEE802CTRL_DATA);
-                outFrame->setDest(inFrame->getSrc());
-                send(outFrame, this->gate("SRPout"));
-            }
+            inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
+            send(inFrame, "SRPout");
         }
-        else
-        {
-            delete msg;
-        }
+    }
+    else
+    {
+        delete msg;
     }
 }
 

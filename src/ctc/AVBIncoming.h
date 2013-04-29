@@ -17,6 +17,10 @@
 #define AVBINCOMING_H_
 
 #include <omnetpp.h>
+#include <map>
+#include "MACAddress.h"
+
+using namespace std;
 
 namespace TTEthernetModel {
 
@@ -30,6 +34,8 @@ class AVBIncoming : public cSimpleModule
             /**
              * @brief Initialization of the module
              */
+            map<unsigned long, MACAddress> TalkerAddresses;
+
             virtual void initialize();
             /**
              * @brief Forwards messages arriving on in-gate to out-gate
