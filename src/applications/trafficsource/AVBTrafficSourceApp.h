@@ -25,6 +25,7 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase
 {
     private:
         bool talker;
+        bool isStreaming;
         long streamID;
         Buffer *srpOutBuffer;
         cModule *avbOutCTC;
@@ -38,7 +39,7 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase
          */
         virtual void handleMessage(cMessage *msg);
 
-        //virtual void handleParameterChange(const char* parname);
+        void sendAVBFrame();
 };
 
 } /* namespace TTEthernetModel */

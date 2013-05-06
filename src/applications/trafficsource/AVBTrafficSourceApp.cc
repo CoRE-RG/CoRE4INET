@@ -20,6 +20,7 @@
 #include <AVBFrame_m.h>
 #include "TTEScheduler.h"
 #include "Buffer.h"
+#include "AVBIncoming.h"
 
 namespace TTEthernetModel {
 
@@ -31,6 +32,10 @@ void AVBTrafficSourceApp::initialize()
 
     talker = par("talker").boolValue();
     streamID = par("streamID").longValue();
+    isStreaming = false;
+
+    AVBIncoming *avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
+    avbCTC->talker = false;
 
     Buffer *srpInBuffer = (Buffer*) getParentModule()->getSubmodule("srpIn");
     srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
@@ -41,6 +46,7 @@ void AVBTrafficSourceApp::initialize()
 
     if(talker)
     {
+        avbCTC->talker = true;
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
         event->setTimer(par("advertise_time").doubleValue()/tteScheduler->par("tick").doubleValue());
@@ -53,12 +59,19 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
     if(msg->arrivedOn("schedulerIn"))
     {
-        bubble("Talker Advertise");
+        if(isStreaming)
+        {
+            sendAVBFrame();
+        }
+        else
+        {
+            bubble("Talker Advertise");
 
-        SRPFrame *outFrame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
-        outFrame->setStreamID(streamID);
+            SRPFrame *outFrame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
+            outFrame->setStreamID(streamID);
 
-        sendDirect(outFrame, srpOutBuffer->gate("in"));
+            sendDirect(outFrame, srpOutBuffer->gate("in"));
+        }
     }
     else if(msg->arrivedOn("SRPin"))
     {
@@ -70,10 +83,13 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             bubble(inFrame->getName());
             if(talker)
             {
-                if(srpType.compare("Listener Ready") == 0)
+                if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
                 {
-                    AVBFrame *outFrame = new AVBFrame();
-                    sendDirect(outFrame, avbOutCTC->gate("in"));
+                    if(!isStreaming)
+                    {
+                        isStreaming = true;
+                        sendAVBFrame();
+                    }
                 }
             }
             //Listener:
@@ -94,7 +110,20 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             delete msg;
         }
     }
+}
 
+void AVBTrafficSourceApp::sendAVBFrame()
+{
+    AVBFrame *outFrame = new AVBFrame();
+    outFrame->setStreamID(streamID);
+    outFrame->setByteLength(64); //Temp
+    sendDirect(outFrame, avbOutCTC->gate("in"));
+
+    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+    event->setTimer(par("interval").doubleValue()/tteScheduler->par("tick").doubleValue());
+    event->setDestinationGate(gate("schedulerIn"));
+    tteScheduler->registerEvent(event);
 }
 
 } /* namespace TTEthernetModel */

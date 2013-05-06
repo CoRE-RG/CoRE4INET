@@ -31,11 +31,13 @@ class AVBIncoming : public cSimpleModule
              * @brief set to true if there was an error during runtime
              */
             bool hadError;
+
+            map<unsigned long, MACAddress> TalkerAddresses;
+            map<int, list<unsigned long> > ListenerGates;
+
             /**
              * @brief Initialization of the module
              */
-            map<unsigned long, MACAddress> TalkerAddresses;
-
             virtual void initialize();
             /**
              * @brief Forwards messages arriving on in-gate to out-gate
@@ -48,6 +50,7 @@ class AVBIncoming : public cSimpleModule
              * @brief Constructor.
              */
             AVBIncoming();
+            bool talker;
 };
 
 } /* namespace TTEthernetModel */

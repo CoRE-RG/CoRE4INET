@@ -25,6 +25,7 @@ class TTEAVBInput: public TTEInput
 {
     protected:
         virtual void handleMessage(cMessage *msg);
+        bool isAVB(EtherFrame *frame);
     public:
         TTEAVBInput();
 };

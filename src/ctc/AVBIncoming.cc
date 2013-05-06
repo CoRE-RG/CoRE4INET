@@ -16,6 +16,7 @@
 #include "AVBIncoming.h"
 #include <EtherFrame_m.h>
 #include <SRPFrame_m.h>
+#include <AVBFrame_m.h>
 //#include "Ieee802Ctrl_m.h"
 
 //#define ETHERAPP_BUFFER_SAP  0xe0
@@ -32,6 +33,7 @@ AVBIncoming::AVBIncoming()
 void AVBIncoming::initialize()
 {
     WATCH_MAP(TalkerAddresses);
+    //WATCH_MAP(ListenerGates);
 
     EtherFrame *outFrame = new EtherFrame("MAC Register", IEEE802CTRL_DATA);
     send(outFrame, "SRPout");
@@ -41,7 +43,27 @@ void AVBIncoming::handleMessage(cMessage* msg)
 {
     if(msg->arrivedOn("in"))
     {
-        sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", 0)); //temp
+        AVBFrame *inFrame = ((AVBFrame*)msg);
+        if(gateSize("AVBout") > 1)
+        {
+            for(int i=0; i<gateSize("AVBout"); i++)
+            {
+                for(std::list<unsigned long>::iterator sid = ListenerGates[i].begin(); sid != ListenerGates[i].end(); sid++)
+                {
+                    if(*sid == inFrame->getStreamID())
+                    {
+                        sendDelayed(inFrame->dup(), SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", i));
+                    }
+                }
+            }
+        }
+        else
+        {
+            if(talker)
+                sendDelayed(inFrame, SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", 0));
+            else
+                delete inFrame;
+        }
     }
     else if(msg->arrivedOn("SRPin"))
     {
@@ -56,6 +78,21 @@ void AVBIncoming::handleMessage(cMessage* msg)
         if(srpType.compare("Listener Ready") == 0)
         {
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
+            int portIndex = inFrame->getPortIndex();
+
+            bool saveStreamID = true;
+            for(std::list<unsigned long>::iterator sid = ListenerGates[portIndex].begin(); sid != ListenerGates[portIndex].end(); sid++)
+            {
+                if(*sid == inFrame->getStreamID())
+                {
+                    saveStreamID = false;
+                }
+            }
+            if(saveStreamID)
+            {
+                ListenerGates[portIndex].push_back(inFrame->getStreamID());
+            }
+
             send(inFrame, "SRPout");
         }
     }

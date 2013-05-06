@@ -15,6 +15,7 @@
 
 #include "AVBBuffer.h"
 #include <CTFrame_m.h>
+#include <AVBFrame_m.h>
 #include "TTEApplicationBase.h"
 
 namespace TTEthernetModel {
@@ -33,16 +34,13 @@ AVBBuffer::~AVBBuffer()
 
 int AVBBuffer::numInitStages() const
 {
-    if(Buffer::numInitStages() > 1)
-        return Buffer::numInitStages();
-    else
-        return 1;
+    return 2;
 }
 
 void AVBBuffer::initialize(int stage)
 {
     Buffer::initialize(stage);
-    if(stage==0)
+    if(stage==1)
     {
 
     }
@@ -51,6 +49,10 @@ void AVBBuffer::initialize(int stage)
 void AVBBuffer::handleMessage(cMessage *msg)
 {
     Buffer::handleMessage(msg);
+
+    cMessage *outFrame = getFrame();
+    send(outFrame, "out");
+
 }
 
 void AVBBuffer::handleParameterChange(const char* parname)

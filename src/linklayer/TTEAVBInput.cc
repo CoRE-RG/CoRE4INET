@@ -60,31 +60,38 @@ void TTEAVBInput::handleMessage(cMessage *msg)
         //Auf CTCs verteilen oder BE traffic
         if (isCT(frame))
         {
-            std::map<uint16, std::list<Incoming *> >::iterator incomingList = incomings.find(getCTID(frame));
-            if (incomingList != incomings.end())
+            if(isAVB(frame))
             {
-                //Send to all CTCs for the CT-ID
-                for (std::list<Incoming*>::iterator incoming = incomingList->second.begin(); incoming
-                        != incomingList->second.end(); incoming++)
-                {
-                    sendDirect(frame->dup(), (*incoming)->gate("in"));
-                }
-                delete frame;
+                sendDirect(frame->dup(), getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
             }
             else
             {
-                emit(ctDroppedSignal, 1);
-                hadError=true;
-                if(ev.isGUI()){
-                    bubble("No matching buffer configured");
-                    getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
-                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
-                    getParentModule()->getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    getParentModule()->getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                std::map<uint16, std::list<Incoming *> >::iterator incomingList = incomings.find(getCTID(frame));
+                if (incomingList != incomings.end())
+                {
+                    //Send to all CTCs for the CT-ID
+                    for (std::list<Incoming*>::iterator incoming = incomingList->second.begin(); incoming
+                            != incomingList->second.end(); incoming++)
+                    {
+                        sendDirect(frame->dup(), (*incoming)->gate("in"));
+                    }
+                    delete frame;
                 }
-                delete frame;
+                else
+                {
+                    emit(ctDroppedSignal, 1);
+                    hadError=true;
+                    if(ev.isGUI()){
+                        bubble("No matching buffer configured");
+                        getDisplayString().setTagArg("i2", 0, "status/excl3");
+                        getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                        getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                        getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                        getParentModule()->getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                        getParentModule()->getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                    }
+                    delete frame;
+                }
             }
         }
         //Sonst BE
@@ -98,7 +105,10 @@ void TTEAVBInput::handleMessage(cMessage *msg)
                 if(msgName.compare("Talker Advertise"))
                 {
                     frame->setDest(*(new MACAddress("000000000000")));
+
                 }
+                SRPFrame *srpFrame = ((SRPFrame*)frame->getEncapsulatedPacket());
+                srpFrame->setPortIndex(getParentModule()->getIndex());
             }
 
             if(promiscuous || frame->getDest().isMulticast())
@@ -120,6 +130,16 @@ void TTEAVBInput::handleMessage(cMessage *msg)
             }
         }
     }
+}
+
+bool TTEAVBInput::isAVB(EtherFrame *frame)
+{
+    bool result = false;
+    std::string className = frame->getClassName();
+    if(className.compare("TTEthernetModel::AVBFrame") == 0)
+        result = true;
+        bubble(frame->getClassName());
+    return result;
 }
 
 } /* namespace TTEthernetModel */

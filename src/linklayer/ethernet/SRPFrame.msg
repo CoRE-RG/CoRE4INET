@@ -20,6 +20,7 @@ packet SRPFrame extends EtherFrame{
     // 64 Bit Field
 	unsigned long streamID;
 	
+	
 	//
 	//
 	// 64 Bit Field
@@ -46,4 +47,5 @@ packet SRPFrame extends EtherFrame{
 	
 	
 	string displayString="b=15,15,rect,black,black,5";
+	unsigned int portIndex;
 }

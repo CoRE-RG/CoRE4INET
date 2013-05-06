@@ -83,6 +83,13 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
             }
         }
     }
+    else if(msg->arrivedOn("AVBin"))
+    {
+        if(isTransmissionAllowed((EtherFrame*)msg))
+        {
+            send(msg,gateBaseId("out"));
+        }
+    }
     else if (msg->arrivedOn("RCin"))
     {
         if (framesRequested && isTransmissionAllowed((EtherFrame*) msg))
