@@ -2,6 +2,7 @@ package ttethernet.nodes.ethernet;
 
 import ttethernet.buffer.BGQueueBuffer;
 import ttethernet.linklayer.BGTrafficHandle;
+import ttethernet.scheduler.ITTEScheduler;
 import ttethernet.scheduler.TTEScheduler;
 import ttethernet.configuration.base.IConfigurationManager;
 import ttethernet.linklayer.TTEPHYPort;
@@ -70,7 +71,7 @@ module TTEEtherHost
             @display("p=141,169");
         }
         // Scheudler for the device
-        tteScheduler: TTEScheduler {
+        tteScheduler: <default("TTEScheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
         tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {

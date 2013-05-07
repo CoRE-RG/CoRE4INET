@@ -12,7 +12,7 @@ package ttethernet.scheduler;
 // @see SchedulerTimerEvent, SchedulerActionTimeEvent, SchedulerTimerEvent
 //
 // @author Till Steinbach
-simple TTEScheduler
+simple TTEScheduler like ITTEScheduler
 {
     parameters:
         @display("i=block/cogwheel");

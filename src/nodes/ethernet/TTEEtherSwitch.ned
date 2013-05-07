@@ -1,5 +1,6 @@
 package ttethernet.nodes.ethernet;
 
+import ttethernet.scheduler.ITTEScheduler;
 import ttethernet.scheduler.TTEScheduler;
 import ttethernet.configuration.base.IConfigurationManager;
 import ttethernet.synchronisation.base.ISync;
@@ -55,7 +56,7 @@ module TTEEtherSwitch
                 @display("p=999,999");
         }
         // Scheudler for the device
-        tteScheduler: TTEScheduler {
+        tteScheduler: <default("TTEScheduler")> like ITTEScheduler {
             parameters:
                 @display("p=235,169");
         }
