@@ -7,6 +7,23 @@ class TTEthernetModel::RCFrame;
 packet RCFrame;
 
 namespace TTEthernetModel;
+
+//
+// Identifier for different types of Protocol Control Frame (PCF)
+//
+// @see PCFrame
+//
+// @author Till Steinbach
+enum PCFType
+{
+    //Coldstart Frame (CS)
+    CS = 1;
+    //Integrate Frame (IN)
+	IN = 2;
+	//Coldstart Acknowledge (CA)
+	CA = 3;
+};
+
 //
 // Represents a Protocol Control Frame (PCF)
 //
@@ -38,7 +55,7 @@ packet PCFrame extends RCFrame
 	// pcf_type: Defines the frame type of a Protocol Control Frame
 	//
 	// 4 Bit field
-	uint8_t type;
+	uint8_t type @enum(PCFType);
 	
 	// pcf_transparent_clock: stores the accumulated delay of a Protocol Control Frame up to the consumer.
 	//
