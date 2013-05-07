@@ -26,10 +26,12 @@ packet SRPFrame extends EtherFrame{
 	// 64 Bit Field
 	unsigned long DataFrameParameters;
 	
-	//
+	// tSpec
 	//
 	// 32 Bit Field
-	unsigned int tSpec;
+	unsigned int MaxFrameSize;
+	unsigned int MaxIntervalFrames;
+	
 	
 	//
 	//

@@ -17,7 +17,9 @@ package ttethernet.linklayer;
 
 simple TTEAVBOutput extends TTEOutput
 {
- 	@class(TTEAVBOutput);
+    parameters:
+ 		@class(TTEAVBOutput);
+ 		int TTEBandwith = default(0);
 	gates:
 	    input AVBin @labels(CTFrame);
 }

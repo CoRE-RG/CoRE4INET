@@ -17,9 +17,7 @@
 #include <EtherFrame_m.h>
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
-//#include "Ieee802Ctrl_m.h"
-
-//#define ETHERAPP_BUFFER_SAP  0xe0
+#include <TTEAVBOutput.h>
 
 namespace TTEthernetModel {
 
@@ -32,8 +30,16 @@ AVBIncoming::AVBIncoming()
 
 void AVBIncoming::initialize()
 {
+    talker = false;
+
+    for(int i=0; i<gateSize("AVBout"); i++)
+    {
+        PortReservation[i] = calcPortUtilisation(i);
+        WATCH_LIST(ListenerGates[i]);
+    }
     WATCH_MAP(TalkerAddresses);
-    //WATCH_MAP(ListenerGates);
+    WATCH_MAP(PortReservation);
+    WATCH_MAP(PortBandwith);
 
     EtherFrame *outFrame = new EtherFrame("MAC Register", IEEE802CTRL_DATA);
     send(outFrame, "SRPout");
@@ -75,7 +81,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
             TalkerAddresses[inFrame->getStreamID()] = inFrame->getSrc();
         }
 
-        if(srpType.compare("Listener Ready") == 0)
+        if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
         {
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
             int portIndex = inFrame->getPortIndex();
@@ -95,11 +101,25 @@ void AVBIncoming::handleMessage(cMessage* msg)
 
             send(inFrame, "SRPout");
         }
+
+        if(srpType.compare("Listener Failed") == 0)
+        {
+            inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
+
+            send(inFrame, "SRPout");
+        }
     }
     else
     {
         delete msg;
     }
+}
+
+int AVBIncoming::calcPortUtilisation(int port)
+{
+    TTEAVBOutput *tteavbOutput = (TTEAVBOutput*) getParentModule()->getSubmodule("phy",port)->getSubmodule("tteavbOutput");
+    PortBandwith[port] = 100; //Temp TODO
+    return tteavbOutput->par("TTEBandwith").longValue();
 }
 
 } /* namespace TTEthernetModel */

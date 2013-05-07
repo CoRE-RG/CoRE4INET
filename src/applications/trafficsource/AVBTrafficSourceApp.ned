@@ -29,7 +29,8 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase
         bool talker = default(false);
         double advertise_time @unit(s) = default(0);
         double streamID = default(0);
-        double interval @unit(s) = default(125us);
+        int intervalFrames  = default(1);
+        int frameSize = default(80);
     gates:
         input SRPin @directIn @labels(SRPFrame);
 }

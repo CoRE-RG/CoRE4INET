@@ -35,7 +35,6 @@ void AVBTrafficSourceApp::initialize()
     isStreaming = false;
 
     AVBIncoming *avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
-    avbCTC->talker = false;
 
     Buffer *srpInBuffer = (Buffer*) getParentModule()->getSubmodule("srpIn");
     srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
@@ -69,6 +68,8 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
             SRPFrame *outFrame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
             outFrame->setStreamID(streamID);
+            outFrame->setMaxFrameSize(this->par("frameSize").longValue());
+            outFrame->setMaxIntervalFrames(this->par("intervalFrames").longValue());
 
             sendDirect(outFrame, srpOutBuffer->gate("in"));
         }
@@ -116,12 +117,14 @@ void AVBTrafficSourceApp::sendAVBFrame()
 {
     AVBFrame *outFrame = new AVBFrame();
     outFrame->setStreamID(streamID);
-    outFrame->setByteLength(64); //Temp
+    outFrame->setByteLength(this->par("frameSize").longValue());
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
+    //class measurement interval = 125us
+    double interval = (125.00 / this->par("intervalFrames").longValue()) / 1000000.00;
     TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer(par("interval").doubleValue()/tteScheduler->par("tick").doubleValue());
+    event->setTimer(interval/tteScheduler->par("tick").doubleValue());
     event->setDestinationGate(gate("schedulerIn"));
     tteScheduler->registerEvent(event);
 }

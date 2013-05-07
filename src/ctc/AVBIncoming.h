@@ -34,6 +34,8 @@ class AVBIncoming : public cSimpleModule
 
             map<unsigned long, MACAddress> TalkerAddresses;
             map<int, list<unsigned long> > ListenerGates;
+            map<int, int> PortReservation;
+            map<int, int> PortBandwith;
 
             /**
              * @brief Initialization of the module
@@ -45,6 +47,8 @@ class AVBIncoming : public cSimpleModule
              * @param msg the incoming message
              */
             virtual void handleMessage(cMessage *msg);
+
+            int calcPortUtilisation(int port);
     public:
             /**
              * @brief Constructor.
