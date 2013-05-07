@@ -58,7 +58,7 @@ uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick){
 }
 
 uint64_t secondsToTransparentClock(simtime_t seconds){
-   return ((seconds.raw() *  0x10000) / pow10(SimTime::SCALEEXP_NS-seconds.getScaleExp()));
+   return ((seconds.raw() *  0x10000) / pow10(SIMTIME_NS-seconds.getScaleExp()));
 }
 
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick){

@@ -96,7 +96,7 @@ void TTEOutput::handleMessage(cMessage *msg)
     else if (msg->arrivedOn("TTin"))
     {
         if(ttBuffers.size()>0){
-            ttBuffersPos = (++ttBuffersPos % ttBuffers.size());
+            ttBuffersPos = ((ttBuffersPos + 1) % ttBuffers.size());
         }
 
         //If we have an empty message allow other frame to be sent
@@ -182,7 +182,8 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
     uint32_t sendWindowStart = ttBuffer->par("sendWindowStart");
     for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();)
     {
-        if (buffer == ttBuffers.end() || (*buffer)->par("sendWindowStart").longValue() > sendWindowStart)
+        uint32_t buf_sendWindowStart = (*buffer)->par("sendWindowStart").longValue();
+        if (buffer == ttBuffers.end() || buf_sendWindowStart > sendWindowStart)
         {
             ttBuffers.insert(buffer, ttBuffer);
             //Now doublecheck that the schedule is not overlapping for this port
@@ -339,7 +340,7 @@ void TTEOutput::setTransparentClock(PCFrame *pcf){
     //Add dynamic delay for the device
     cArray parlist = pcf->getParList();
     unsigned long start = -1;
-    for(unsigned int i=0;i<parlist.size();i++){
+    for(int i=0;i<parlist.size();i++){
         cMsgPar *parameter = dynamic_cast<cMsgPar*>(parlist.get(i));
         if(parameter){
             if(strncmp(parameter->getName(),"received_total",15)==0 || strncmp(parameter->getName(),"created_total",15)==0){
