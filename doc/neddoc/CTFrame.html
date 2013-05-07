@@ -14,15 +14,15 @@
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="CTFrame-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="CTFrame.html" title="Packet CTFrame" alt="" coords="5,5,80,32">
+<img src="CTFrame-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="CTFrame.html" title="Packet CTFrame" alt="" coords="5,6,83,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="CTFrame-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="CTFrame.html" title="Packet CTFrame" alt="" coords="53,80,128,107">
-<area shape="rect" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,155,80,181">
-<area shape="rect" href="TTFrame.html" title="Packet TTFrame" alt="" coords="104,155,176,181">
-<area shape="rect" href="../../../inet/doc/neddoc/EtherFrame.html" title="Packet EtherFrame" alt="" coords="47,5,135,32">
+<img src="CTFrame-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="CTFrame.html" title="Packet CTFrame" alt="" coords="55,83,132,111">
+<area shape="rect" id="node4" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,161,83,189">
+<area shape="rect" id="node6" href="TTFrame.html" title="Packet TTFrame" alt="" coords="107,161,181,189">
+<area shape="rect" id="node2" href="../../../inet/doc/neddoc/EtherFrame.html" title="Packet EtherFrame" alt="" coords="48,6,139,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -91,7 +91,7 @@ containing their common header fields.</p>
    <td>ctID</td>
    <td>
       <i>
-unsigned short</i>
+uint16_t</i>
    </td>
    <td>
 </td>
@@ -100,7 +100,7 @@ unsigned short</i>
    <td>ctMarker</td>
    <td>
       <i>
-unsigned int</i>
+uint32_t</i>
    </td>
    <td>
 </td>
@@ -153,11 +153,11 @@ int</i>
 {
     </span><span style="color: #808080; font-style: italic; ">// Critical traffic ID (from MAC) (for TT and RC messages). 
 </span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@customize</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
-    </span><span style="color: #000080; font-weight: bold; ">abstract</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">short</span><span style="color: #000000; "> </span><span style="color: #000000; ">ctID</span><span style="color: #000000; ">;
+    </span><span style="color: #000080; font-weight: bold; ">abstract</span><span style="color: #000000; "> </span><span style="color: #000000; ">uint16_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">ctID</span><span style="color: #000000; ">;
 
     </span><span style="color: #808080; font-style: italic; ">// Critical traffic marker (from MAC) (for TT and RC messages). 
 </span><span style="color: #000000; ">    </span><span style="color: #000000; font-weight: bold; ">@customize</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
-    </span><span style="color: #000080; font-weight: bold; ">abstract</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ctMarker</span><span style="color: #000000; ">;
+    </span><span style="color: #000080; font-weight: bold; ">abstract</span><span style="color: #000000; "> </span><span style="color: #000000; ">uint32_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">ctMarker</span><span style="color: #000000; ">;
 
     </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">displayString</span><span style="color: #000000; "> = </span><span style="color: #008000; ">&quot;b=15,15,rect,black,kind,5&quot;</span><span style="color: #000000; ">;
 }

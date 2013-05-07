@@ -58,7 +58,7 @@ Should be created with message kind <a href="SchedulerMessageKind.html">Schedule
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerActionTimeEvent</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerEvent</span><span style="color: #000000; "> {
         </span><span style="color: #808080; font-style: italic; ">// Action time in cycle for the event in number of ticks
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">action_time</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">uint32_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">action_time</span><span style="color: #000000; ">;
 }
 
 </span><span style="color: #808080; font-style: italic; ">//
@@ -70,7 +70,7 @@ Should be created with message kind <a href="SchedulerMessageKind.html">Schedule
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerTimerEvent</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerEvent</span><span style="color: #000000; "> {
         </span><span style="color: #808080; font-style: italic; ">// Time after that the event is triggered in number of ticks
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">timer</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">uint64_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">timer</span><span style="color: #000000; ">;
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

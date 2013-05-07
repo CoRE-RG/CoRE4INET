@@ -1,3 +1,3 @@
-<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="17,80,89,107">
-<area shape="rect" href="ttethernet.synchronisation.base.DummySync.html" title="Simple Module DummySync" alt="" coords="5,155,101,181">
-<area shape="rect" href="ttethernet.linklayer.IPort.html" title="Module Interface IPort" alt="" coords="17,5,89,32">
+<area shape="rect" id="node1" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="19,83,91,111">
+<area shape="rect" id="node4" href="ttethernet.synchronisation.base.DummySync.html" title="Simple Module DummySync" alt="" coords="5,161,104,189">
+<area shape="rect" id="node2" href="ttethernet.linklayer.IPort.html" title="Module Interface IPort" alt="" coords="19,6,91,34">

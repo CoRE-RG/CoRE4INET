@@ -1,4 +1,4 @@
-<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="92,80,164,107">
-<area shape="rect" href="ttethernet.buffer.RCDoubleBuffer.html" title="Simple Module RCDoubleBuffer" alt="" coords="5,155,117,181">
-<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="141,155,251,181">
-<area shape="rect" href="ttethernet.buffer.CTBuffer.html" title="Simple Module CTBuffer" alt="" coords="92,5,164,32">
+<area shape="rect" id="node1" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="95,83,172,111">
+<area shape="rect" id="node4" href="ttethernet.buffer.RCDoubleBuffer.html" title="Simple Module RCDoubleBuffer" alt="" coords="5,161,123,189">
+<area shape="rect" id="node6" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="147,161,261,189">
+<area shape="rect" id="node2" href="ttethernet.buffer.CTBuffer.html" title="Simple Module CTBuffer" alt="" coords="96,6,171,34">

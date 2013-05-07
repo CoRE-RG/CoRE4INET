@@ -46,34 +46,34 @@
     </span><span style="color: #808080; font-style: italic; ">// pcf_integration_cycle: Represents the integration cycle in which the protocol control frame was sent
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 32 Bit field
-</span><span style="color: #000000; ">	</span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">integration_cycle</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint32_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">integration_cycle</span><span style="color: #000000; ">;
 	
 	</span><span style="color: #808080; font-style: italic; ">// pcf_membership_new: Bit vector with a static configured one-to-one relationship from a bit to a Synchronization Master
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">// 32 Bit field
-</span><span style="color: #000000; ">	</span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">membership_new</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint32_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">membership_new</span><span style="color: #000000; ">;
 	
 	</span><span style="color: #808080; font-style: italic; ">// pcf_sync_priority: Static configured value in each Synchronization Master, Synchronization Client, and Compression Master
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">// 8 Bit field
-</span><span style="color: #000000; ">	</span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">char</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_priority</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_priority</span><span style="color: #000000; ">;
 
 	</span><span style="color: #808080; font-style: italic; ">// pcf_sync_domain: Static configured value in each Synchronization Master, Synchronization Client, and Compression Master
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">// 8 Bit field
-</span><span style="color: #000000; ">	</span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">char</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_domain</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_domain</span><span style="color: #000000; ">;
 	
 	</span><span style="color: #808080; font-style: italic; ">// pcf_type: Defines the frame type of a Protocol Control Frame
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">// 4 Bit field
-</span><span style="color: #000000; ">	</span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">char</span><span style="color: #000000; "> </span><span style="color: #000000; ">type</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">type</span><span style="color: #000000; ">;
 	
 	</span><span style="color: #808080; font-style: italic; ">// pcf_transparent_clock: stores the accumulated delay of a Protocol Control Frame up to the consumer.
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">// Time is represented as multiples of picoseconds
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">// 64 Bit field
-</span><span style="color: #000000; ">	</span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">long</span><span style="color: #000000; "> </span><span style="color: #000000; ">transparent_clock</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint64_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">transparent_clock</span><span style="color: #000000; ">;
 	
 	</span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">displayString</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;b=15,15,rect,white,orange,5&quot;</span><span style="color: #000000; ">;
 }</span></pre>

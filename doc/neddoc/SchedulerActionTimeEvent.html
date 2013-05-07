@@ -14,13 +14,13 @@ Should be created with message kind <a href="SchedulerMessageKind.html">Schedule
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="SchedulerActionTimeEvent-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="SchedulerActionTimeEvent.html" title="Message SchedulerActionTimeEvent" alt="" coords="5,5,181,32">
+<img src="SchedulerActionTimeEvent-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="SchedulerActionTimeEvent.html" title="Message SchedulerActionTimeEvent" alt="" coords="5,6,184,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="SchedulerActionTimeEvent-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="SchedulerActionTimeEvent.html" title="Message SchedulerActionTimeEvent" alt="" coords="5,80,181,107">
-<area shape="rect" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="37,5,149,32">
+<img src="SchedulerActionTimeEvent-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="SchedulerActionTimeEvent.html" title="Message SchedulerActionTimeEvent" alt="" coords="5,83,184,111">
+<area shape="rect" id="node2" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="37,6,152,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -54,7 +54,7 @@ Unresolved types are missing from the diagram. Click <a href="full-msg-inheritan
    <td>action_time</td>
    <td>
       <i>
-unsigned int</i>
+uint32_t</i>
    </td>
    <td>
 <p>Action time in cycle for the event in number of ticks</p>
@@ -72,7 +72,7 @@ unsigned int</i>
 </span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerActionTimeEvent</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerEvent</span><span style="color: #000000; ">
 {
     </span><span style="color: #808080; font-style: italic; ">// Action time in cycle for the event in number of ticks
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">action_time</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint32_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">action_time</span><span style="color: #000000; ">;
 }
 
 </span></pre>

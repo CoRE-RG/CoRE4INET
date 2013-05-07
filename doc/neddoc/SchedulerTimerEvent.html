@@ -14,13 +14,13 @@ Should be created with message kind <a href="SchedulerMessageKind.html">Schedule
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="SchedulerTimerEvent-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="5,5,149,32">
+<img src="SchedulerTimerEvent-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="5,6,152,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="SchedulerTimerEvent-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="5,80,149,107">
-<area shape="rect" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="21,5,133,32">
+<img src="SchedulerTimerEvent-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="5,83,152,111">
+<area shape="rect" id="node2" href="SchedulerEvent.html" title="Message SchedulerEvent" alt="" coords="21,6,136,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -54,7 +54,7 @@ Unresolved types are missing from the diagram. Click <a href="full-msg-inheritan
    <td>timer</td>
    <td>
       <i>
-unsigned int</i>
+uint64_t</i>
    </td>
    <td>
 <p>Time after that the event is triggered in number of ticks</p>
@@ -72,7 +72,7 @@ unsigned int</i>
 </span><span style="color: #800000; font-weight: bold; ">message</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerTimerEvent</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">SchedulerEvent</span><span style="color: #000000; ">
 {
     </span><span style="color: #808080; font-style: italic; ">// Time after that the event is triggered in number of ticks
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">timer</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint64_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">timer</span><span style="color: #000000; ">;
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
