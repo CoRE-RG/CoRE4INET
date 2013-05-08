@@ -101,6 +101,11 @@ class TTEScheduler : public cSimpleModule
         virtual void initialize(int stage);
 
         /**
+         * @brief Cleanup method of the module.
+         */
+        virtual void finish();
+
+        /**
          * @brief Handles all scheduler messages
          *
          * Registers self-messages for events sends messages to trigger events in

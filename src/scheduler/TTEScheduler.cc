@@ -37,12 +37,22 @@ void TTEScheduler::initialize(int stage)
         cycles = 0;
 
         //Start Timer
-        scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
+        newCyclemsg = new SchedulerEvent("NEW_CYCLE", NEW_CYCLE);
+        newCyclemsg->setSchedulingPriority(0);
+        scheduleAt(simTime(), newCyclemsg);
 
         lastCycleStart = simTime();
         lastNewCycleMessage = simTime();
         lastCycleTicks = 0;
     }
+}
+
+void TTEScheduler::finish(){
+    for(std::list<SchedulerEvent*>::const_iterator registredEvent = registredEvents.begin(); registredEvent != registredEvents.end(); registredEvent++){
+        SchedulerEvent *event = (SchedulerEvent *)*registredEvent;
+        cancelAndDelete(*registredEvent);
+    }
+    cancelAndDelete(newCyclemsg);
 }
 
 bool TTEScheduler::registerEvent(SchedulerEvent *event){
@@ -93,7 +103,6 @@ bool TTEScheduler::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, bool
     }
     else
     {
-
         scheduleAt(lastCycleStart + currentTick * (actionTimeEvent->getAction_time()),
                             actionTimeEvent);
     }
@@ -105,7 +114,6 @@ void TTEScheduler::unregisterEvent(SchedulerEvent *event){
         cancelEvent(event);
         registredEvents.remove(event);
     }
-
 }
 
 void TTEScheduler::handleMessage(cMessage *msg)
