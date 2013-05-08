@@ -101,11 +101,6 @@ class TTEScheduler : public cSimpleModule
         virtual void initialize(int stage);
 
         /**
-         * @brief Cleanup method of the module.
-         */
-        virtual void finish();
-
-        /**
          * @brief Handles all scheduler messages
          *
          * Registers self-messages for events sends messages to trigger events in
@@ -123,6 +118,10 @@ class TTEScheduler : public cSimpleModule
         virtual void handleParameterChange(const char* parname);
 
     public:
+        /**
+         * @brief Destructor
+         */
+        ~TTEScheduler();
         /**
          * @brief Returns the current number of ticks
          *

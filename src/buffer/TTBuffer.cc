@@ -29,8 +29,7 @@ TTBuffer::TTBuffer()
 
 TTBuffer::~TTBuffer()
 {
-    cancelEvent(actionTimeEvent);
-    delete actionTimeEvent;
+    cancelAndDelete(actionTimeEvent);
 }
 
 int TTBuffer::numInitStages() const

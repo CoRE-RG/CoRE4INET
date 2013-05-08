@@ -30,8 +30,7 @@ RCBuffer::RCBuffer()
 
 RCBuffer::~RCBuffer()
 {
-    cancelEvent(timerMessage);
-    delete timerMessage;
+    cancelAndDelete(timerMessage);
 }
 
 int RCBuffer::numInitStages() const

@@ -46,12 +46,8 @@ void TTEScheduler::initialize(int stage)
         lastCycleTicks = 0;
     }
 }
-
-void TTEScheduler::finish(){
-    for(std::list<SchedulerEvent*>::const_iterator registredEvent = registredEvents.begin(); registredEvent != registredEvents.end(); registredEvent++){
-        SchedulerEvent *event = (SchedulerEvent *)*registredEvent;
-        cancelAndDelete(*registredEvent);
-    }
+TTEScheduler::~TTEScheduler()
+{
     cancelAndDelete(newCyclemsg);
 }
 
