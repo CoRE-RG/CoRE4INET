@@ -1,3 +1,6 @@
-# workingdir,                        args,                                          simtimelimit,    fingerprint
-/examples/small_network/,            -f omnetpp.ini -c General -r 0,                1s,              a039-8175
-/examples/small_network/,            -f omnetpp.ini -c With_Crosstraffic -r 0,      1s,              b32f-3f85
+# workingdir,                                              args,                                          simtimelimit,    fingerprint
+/examples/small_network/,                                  -f omnetpp.ini -c General -r 0,                1s,              0fe0-b6f1
+/examples/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,      1s,              dc40-cd35
+/examples/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0,                1s,              d075-a82e
+/examples/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0,                1s,              4172-c9eb
+/examples/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0,                1s,              8191-4201
