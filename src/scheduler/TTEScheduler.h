@@ -33,7 +33,7 @@ namespace TTEthernetModel {
  */
 class TTEScheduler : public cSimpleModule
 {
-    private:
+    protected:
         /**
          * @brief Simulation time when the last cycle started
          */
