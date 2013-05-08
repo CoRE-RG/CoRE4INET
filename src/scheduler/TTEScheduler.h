@@ -59,10 +59,6 @@ class TTEScheduler : public cSimpleModule
         cMessage* newCyclemsg;
 
         /**
-         * @brief caches max_drift_change parameter
-         */
-        simtime_t maxDriftChange;
-        /**
          * @brief caches max_drift parameter
          */
         simtime_t maxDrift;

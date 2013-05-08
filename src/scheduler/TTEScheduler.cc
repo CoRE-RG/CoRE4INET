@@ -138,9 +138,7 @@ void TTEScheduler::handleMessage(cMessage *msg)
 }
 
 void TTEScheduler::changeDrift(){
-
-    simtime_t newDriftChange = uniform(-maxDriftChange,maxDriftChange);
-    simtime_t newTick = currentTick+newDriftChange;
+    simtime_t newTick = currentTick+SimTime(par("drift_change").doubleValue());
     if((newTick-tick)>maxDrift)
         par("current_tick").setDoubleValue((tick+maxDrift).dbl());
     else if((newTick-tick)<-maxDrift)
@@ -185,7 +183,6 @@ void TTEScheduler::correctEvents(){
 }
 
 void TTEScheduler::handleParameterChange(const char* parname){
-    maxDriftChange = SimTime(par("max_drift_change").doubleValue());
     maxDrift = SimTime(par("max_drift").doubleValue());
     currentTick = SimTime(par("current_tick").doubleValue());
     tick = SimTime(par("tick").doubleValue());

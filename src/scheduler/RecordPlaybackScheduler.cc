@@ -72,7 +72,7 @@ void RecordPlaybackScheduler::changeDrift(){
          newDriftChange = values->at(counter++);
          counter++;
     }else{
-        newDriftChange = uniform(-maxDriftChange,maxDriftChange);
+        newDriftChange = SimTime(par("drift_change").doubleValue());
         if(this->par("write").boolValue()){
             fprintf(fp,"%d ",this->cycles);
             fprintf(fp, " %.40f\n",newDriftChange.dbl());

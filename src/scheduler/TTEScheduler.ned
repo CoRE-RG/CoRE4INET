@@ -24,8 +24,8 @@ simple TTEScheduler like ITTEScheduler
         double tick @unit(s) = default(80ns);
         // Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)
         double max_drift @unit(s) = default(16ps);
-        // Maximum clock drift change per cycle
-        double max_drift_change @unit(s) =default(1ps);
+        // Clock drift change for the next cycle, you are free to use your desired distribution
+        volatile double drift_change @unit(s) = default(uniform(-1ps,1ps));
         // Current length of a tick (with imprecission)
         volatile double current_tick @unit(s) = tick;
         // Number of ticks for one cycle
