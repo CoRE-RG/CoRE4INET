@@ -38,8 +38,11 @@ foreach line {
    {"About..."               "README"               "../doc/index.html"}
 
    {"Examples"}
-   {"Real-Time Tic-Toc"      "rt-tictoc"            "./run"               "run"}
-   {"Small Network"          "small_network"        "./run"               "run"}
+   {"Real-Time Tic-Toc"                                           "rt-tictoc"                                  "./run"               "run"}
+   {"Small Network"                                               "small_network"                              "./run"               "run"}
+   {"AS6802 Synchronization with high integrity (small)"          "synchronization/HighIntegrity_small"        "./run"               "run"}
+   {"AS6802 Synchronization with standard integrity (medium)"     "synchronization/StandardIntegrity_medium"   "./run"               "run"}
+   {"AS6802 Synchronization with standard integrity (large)"      "synchronization/StandardIntegrity_large"    "./run"               "run"}
 } {
    lappend samples $i
    if {[llength $line]==0} {
@@ -81,9 +84,9 @@ proc createWindow {} {
     wm overrideredirect . 0
     wm resizable . 1 1
     wm deiconify .
-    wm title . "OMNeT++ Demo Simulations"
+    wm title . "TTE4INET Demo Simulations"
     wm protocol . WM_DELETE_WINDOW {exit}
-    wm geometry . "650x400"
+    wm geometry . "1000x700"
 
     #################################
     # Menu bar

@@ -1,0 +1,21 @@
+******************
+tick=80ns
+precission 80
+drift 0ps
+frame lenght 72
+hardware delay 0 microsec
+
+
+
+sm cs offset >= +2 *max transmission delay+ compression master delay +frame length =2*609+(80+5+161)+84=1548
+
+sm ca offset >= cm ca timeout
+sm ca offset=3400
+
+
+
+cm ca timeout = num channels *((2 * max transmission delay)+sm cs offset+compression master delay)+drift error= 1*(2*609)+1548+(246)+80=num channels *3092
+
+
+cm in timeout = (2 * max transmission delay) + sm ca offset + compression master delay + drift error= 2*609+3400+(246)+80=4944
+********************
