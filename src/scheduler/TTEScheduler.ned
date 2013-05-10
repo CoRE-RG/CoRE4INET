@@ -29,5 +29,5 @@ simple TTEScheduler like ITTEScheduler
         // Current length of a tick (with imprecission)
         volatile double current_tick @unit(s) = tick;
         // Number of ticks for one cycle
-        int cycle_ticks = default(37500);
+        int cycle_ticks @unit(tick) = default(37500tick);
 }

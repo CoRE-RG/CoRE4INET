@@ -102,7 +102,7 @@ module Switch2 extends TTEEtherSwitch
             //    @display("p=583,60");
         vl_pcf_in_BUFIN1: RCQueueBuffer {
             parameters:
-                @display("p=494,440;is=s");
+                @display("p=487,440;is=s");
         }
         //vl_pcf_out_IN: RCIncoming {
           //  parameters:
@@ -271,7 +271,7 @@ module Switch2 extends TTEEtherSwitch
         }
         vl_pcf_in_BUFIN21: RCQueueBuffer {
             parameters:
-                @display("p=494,317;is=s");
+                @display("p=487,317;is=s");
         }
         //vl_pcf_out_IN: RCIncoming {
           //  parameters:
@@ -307,7 +307,7 @@ module Switch2 extends TTEEtherSwitch
         }
         vl_pcf_in_BUFIN8: RCQueueBuffer {
             parameters:
-                @display("p=494,182;is=s");
+                @display("p=487,182;is=s");
         }
         //vl_pcf_out_IN: RCIncoming {
           //  parameters:
@@ -429,7 +429,7 @@ module Switch2 extends TTEEtherSwitch
             //    @display("p=583,60");
         vl_pcf_in_BUFIN11: RCQueueBuffer {
             parameters:
-                @display("p=494,55;is=s");
+                @display("p=487,55;is=s");
         }
         //vl_pcf_out_IN: RCIncoming {
           //  parameters:

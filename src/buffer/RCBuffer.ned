@@ -23,11 +23,11 @@ simple RCBuffer extends CTBuffer
         @class(RCBuffer);
         @display("i=,orange");
         // Not used
-        int max_dispatch_delay = default(0);
+        int max_dispatch_delay @unit(tick) = default(0tick);
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
-        int bag = default(0);
+        int bag @unit(tick) = default(0tick);
         // Not used
-        int jitter = default(0);
+        int jitter @unit(tick) = default(0tick);
     gates:
         //Input gate for the incoming SchedulerTimerEvent messages
         input schedulerIn @directIn;
