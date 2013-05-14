@@ -23,8 +23,9 @@ import inet.linklayer.IMACRelayUnit;
 module TTEEtherSwitch
 {
     parameters:
-        @node();
         @display("i=block/switch;bgb=1219,312");
+        @node;
+        @labels(node,ethernet-node);
         double hardware_delay @unit(s) = default(8us);
     gates:
         // Physical ports of the switch

@@ -31,6 +31,8 @@ module TTEEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
+        @node;
+        @labels(node,ethernet-node);
         int numApps = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
