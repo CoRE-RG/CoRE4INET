@@ -31,7 +31,14 @@ Define_Module(TTEAVBOutput);
 
 TTEAVBOutput::TTEAVBOutput() : TTEOutput::TTEOutput()
 {
+    credit = 0;
 
+    avbQueue.setName("AVB Messages");
+}
+
+TTEAVBOutput::~TTEAVBOutput()
+{
+    avbQueue.clear();
 }
 
 void TTEAVBOutput::handleMessage(cMessage *msg)
@@ -85,9 +92,13 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     }
     else if(msg->arrivedOn("AVBin"))
     {
-        if(isTransmissionAllowed((EtherFrame*)msg))
+        if(framesRequested && isTransmissionAllowed((EtherFrame*)msg))
         {
             send(msg,gateBaseId("out"));
+        }
+        else
+        {
+            avbQueue.insert(msg);
         }
     }
     else if (msg->arrivedOn("RCin"))
@@ -137,6 +148,68 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
             notifyListeners();
             emit(beQueueLengthSignal, beQueue.length());
         }
+    }
+}
+
+void TTEAVBOutput::requestPacket()
+{
+    Enter_Method("requestPacket()");
+    //Feed the MAC layer with the next frame
+    framesRequested++;
+
+    //TTFrames
+    if (!ttQueue.isEmpty())
+    {
+        framesRequested--;
+        cMessage *msg = (cMessage*) ttQueue.pop();
+        emit(ttQueueLengthSignal, ttQueue.length());
+
+        //TODO Update buffers:
+        if(ttBuffers.size()>0){
+            ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
+        }
+
+        send(msg, gateBaseId("out"));
+        return;
+    }
+
+    //AVBFrames
+    if(!avbQueue.isEmpty())
+    {
+        framesRequested--;
+        cMessage *msg = (cMessage*) avbQueue.pop();
+        send(msg, gateBaseId("out"));
+        return;
+    }
+
+    //RCFrames
+    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    {
+        if (!rcQueue[i].isEmpty() && isTransmissionAllowed((EtherFrame*) rcQueue[i].front()))
+        {
+            framesRequested--;
+            EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
+            //Reset Bag
+            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
+            if (rcBuffer)
+                rcBuffer->resetBag();
+
+            PCFrame *pcf = dynamic_cast<PCFrame*> (message);
+            if(pcf){
+                setTransparentClock(pcf);
+            }
+            send(message, gateBaseId("out"));
+            return;
+        }
+    }
+    //BEFrames
+    if (!beQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) beQueue.front()))
+    {
+        framesRequested--;
+        cMessage* message = (cMessage*) beQueue.pop();
+        send(message, gateBaseId("out"));
+        emit(beQueueLengthSignal, beQueue.length());
+        return;
     }
 }
 

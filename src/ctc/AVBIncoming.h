@@ -33,6 +33,8 @@ class AVBIncoming : public cSimpleModule
             bool hadError;
 
             map<unsigned long, MACAddress> TalkerAddresses;
+            map<unsigned long, int> StreamBandwith;
+            map<unsigned long, bool>StreamIsForwarding;
             map<int, list<unsigned long> > ListenerGates;
             map<int, int> PortReservation;
             map<int, int> PortBandwith;
@@ -49,6 +51,8 @@ class AVBIncoming : public cSimpleModule
             virtual void handleMessage(cMessage *msg);
 
             int calcPortUtilisation(int port);
+
+            int calcBandwith(int FrameSize, int IntervalFrames);
     public:
             /**
              * @brief Constructor.

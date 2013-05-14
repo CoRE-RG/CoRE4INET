@@ -38,6 +38,7 @@ void AVBIncoming::initialize()
         WATCH_LIST(ListenerGates[i]);
     }
     WATCH_MAP(TalkerAddresses);
+    WATCH_MAP(StreamBandwith);
     WATCH_MAP(PortReservation);
     WATCH_MAP(PortBandwith);
 
@@ -79,6 +80,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
         if(srpType.compare("Talker Advertise") == 0)
         {
             TalkerAddresses[inFrame->getStreamID()] = inFrame->getSrc();
+            StreamBandwith[inFrame->getStreamID()] = calcBandwith(inFrame->getMaxFrameSize(), inFrame->getMaxIntervalFrames());
         }
 
         if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
@@ -86,20 +88,37 @@ void AVBIncoming::handleMessage(cMessage* msg)
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
             int portIndex = inFrame->getPortIndex();
 
-            bool saveStreamID = true;
+            bool saveSIDinGate = true;
             for(std::list<unsigned long>::iterator sid = ListenerGates[portIndex].begin(); sid != ListenerGates[portIndex].end(); sid++)
             {
                 if(*sid == inFrame->getStreamID())
                 {
-                    saveStreamID = false;
+                    saveSIDinGate = false;
                 }
             }
-            if(saveStreamID)
+            if(saveSIDinGate)
             {
-                ListenerGates[portIndex].push_back(inFrame->getStreamID());
-            }
+                if( ((PortBandwith[portIndex] - PortReservation[portIndex]) - (PortBandwith[portIndex] * 0.25)) >= StreamBandwith[inFrame->getStreamID()] )
+                {
+                    ListenerGates[portIndex].push_back(inFrame->getStreamID());
+                    PortReservation[portIndex] += StreamBandwith[inFrame->getStreamID()];
+                    StreamIsForwarding[inFrame->getStreamID()] = true;
+                    send(inFrame, "SRPout");
+                }
+                else
+                {
+                    if(StreamIsForwarding[inFrame->getStreamID()])
+                        inFrame->setName("Listener Ready Failed");
+                    else
+                        inFrame->setName("Listener Failed");
+                    send(inFrame, "SRPout");
+                }
 
-            send(inFrame, "SRPout");
+            }
+            else
+            {
+                send(inFrame, "SRPout");
+            }
         }
 
         if(srpType.compare("Listener Failed") == 0)
@@ -120,6 +139,15 @@ int AVBIncoming::calcPortUtilisation(int port)
     TTEAVBOutput *tteavbOutput = (TTEAVBOutput*) getParentModule()->getSubmodule("phy",port)->getSubmodule("tteavbOutput");
     PortBandwith[port] = 100; //Temp TODO
     return tteavbOutput->par("TTEBandwith").longValue();
+}
+
+int AVBIncoming::calcBandwith(int FrameSize, int IntervalFrames)
+{
+    double interval = 125;//us
+    double sFrameSize = IntervalFrames * FrameSize; //Byte
+    double bitFrameSize = sFrameSize * 8; //Bit
+    double BitspSecond = bitFrameSize * 8 * 1000; //pro s
+    return (BitspSecond / 1024) / 1024; //Mbit/s
 }
 
 } /* namespace TTEthernetModel */

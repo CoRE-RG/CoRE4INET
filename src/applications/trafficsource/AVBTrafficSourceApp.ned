@@ -30,7 +30,7 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase
         double advertise_time @unit(s) = default(0);
         double streamID = default(0);
         int intervalFrames  = default(1);
-        int frameSize = default(80);
+        int frameSize = default(80); //Byte
     gates:
         input SRPin @directIn @labels(SRPFrame);
 }

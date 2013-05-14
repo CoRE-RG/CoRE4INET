@@ -23,9 +23,28 @@ namespace TTEthernetModel {
 class TTEAVBOutput : public TTEOutput
 {
     protected:
+        int credit;
+
+        cQueue avbQueue;
+
         virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief this method is invoked when the underlying mac is idle.
+         *
+         * When this method is invoked the module sends a new message when there is
+         * one. Else it saves the state and sends the message immediately when it is
+         * received.
+         */
+        virtual void requestPacket();
     public:
+        /**
+         * @brief Constructor
+         */
         TTEAVBOutput();
+        /**
+         * @brief Destructor
+         */
+        ~TTEAVBOutput();
 };
 
 } /* namespace TTEthernetModel */
