@@ -34,7 +34,7 @@ simple Buffer like IOutputQueue
         string destination_gates = default("");
     gates:
         //The buffers Input
-        input in @loose @labels(CTFrame);
+        input in @loose @labels(EtherFrame);
         //The buffers Output @warning CURRENTLY NOT USED!
-        output out @loose @labels(CTFrame);
+        output out @loose @labels(EtherFrame);
 }

@@ -38,7 +38,7 @@ module TTEEtherHost
         double hardware_delay @unit(s) = default(0us);
     gates:
         // Physical port of the host
-        inout ethg;
+        inout ethg @labels(EtherFrame-conn);
 
     submodules:
         // Physical port of the host

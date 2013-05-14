@@ -29,7 +29,7 @@ module TTEEtherSwitch
         double hardware_delay @unit(s) = default(8us);
     gates:
         // Physical ports of the switch
-        inout ethg[] @loose;
+        inout ethg[] @loose @labels(EtherFrame-conn);
     submodules:
         // Implementation of the best-effort forwarding part
         beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
