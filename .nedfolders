@@ -2,3 +2,6 @@ examples
 simulations
 src
 tests/module/lib
+-ttethernet.examples.synchronization.StandardIntegrity_large
+-ttethernet.examples.synchronization.HighIntegrity_small
+-ttethernet.examples.synchronization.StandardIntegrity_medium
