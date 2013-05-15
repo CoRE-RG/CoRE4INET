@@ -2956,10 +2956,6 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
 								- pf->par("received_total").longValue()));
-		ev << "SI_CM_WAIT_4_IN: permanence_delay:" << permanence_delay << " transparentClockToTicks:"<<transparentClockToTicks(pf->getTransparent_clock(),
-		                        tteScheduler->par("tick").doubleValue()) << "\n";
-		        ev << "pf->getMembership_new():" << pf->getMembership_new() << "\n";
-		        ev << "pf->getTransparent_clock():" << pf->getTransparent_clock() << "\n";
 
 		//CA FRAME ?
 		if (pf->getType() == CA) {
@@ -4660,10 +4656,6 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
 								- pf->par("received_total").longValue()));
-		ev << "SI_CM_ENABLED: permanence_delay:" << permanence_delay << " transparentClockToTicks:"<<transparentClockToTicks(pf->getTransparent_clock(),
-		                tteScheduler->par("tick").doubleValue()) << "\n";
-		ev << "pf->getMembership_new():" << pf->getMembership_new() << "\n";
-		ev << "pf->getTransparent_clock():" << pf->getTransparent_clock() << "\n";
 		//CA FRAME ?
 		if (pf->getType() == CA) {
 			ev << "COMP FNCT SICM ENABLED MEMBER" << (pf)->getMembership_new()
