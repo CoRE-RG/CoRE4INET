@@ -15,7 +15,7 @@
 
 #include "TocApp.h"
 #include "TTEScheduler.h"
-#include "TTFrame_m.h"
+#include "RCFrame_m.h"
 
 namespace TTEthernetModel {
 
@@ -34,19 +34,15 @@ void TocApp::initialize()
 
 void TocApp::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("schedulerIn")){
-        CTFrame *frame = new TTFrame("CT-ID=100");
+    if(msg->arrivedOn("TTin")){
+        CTFrame *frame = new RCFrame("Response");
         MACAddress srcAddr;
-        srcAddr.setAddress("03 04 05 06 00 64");
+        srcAddr.setAddress("03 04 05 06 00 65");
         frame->setDest(srcAddr);
-        frame->setCtID(100);
+        frame->setCtID(101);
         //ENDE TEST
-        if (getParentModule()->getSubmodule("VL_TT_100_CTC"))
-            sendDirect(frame, getParentModule()->getSubmodule("VL_TT_100_CTC")->gate("in"));
-
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
-        tteScheduler->registerEvent(event, true);
+        if (getParentModule()->getSubmodule("vl_101_ctc"))
+            sendDirect(frame, getParentModule()->getSubmodule("vl_101_ctc")->gate("in"));
     }
     else{
         delete msg;

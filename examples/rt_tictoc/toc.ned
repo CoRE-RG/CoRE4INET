@@ -18,6 +18,8 @@ package ttethernet.examples.rt_tictoc;
 import ttethernet.nodes.ethernet.TTEEtherHost;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
+import ttethernet.ctc.RCIncoming;
+import ttethernet.buffer.RCQueueBuffer;
 
 
 //
@@ -27,22 +29,23 @@ import ttethernet.buffer.TTDoubleBuffer;
 //
 module Toc extends TTEEtherHost
 {
+    @display("bgb=512,314");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:
-            	@display("p=350,60");
-            	
+                @display("p=350,60");
+
         }
         vl_100: TTDoubleBuffer {
             parameters:
                 @display("p=450,60");
         }
-        vl_101_ctc: TTIncoming {
+        vl_101_ctc: RCIncoming {
             parameters:
-            	@display("p=350,160");
-            	
+                @display("p=350,160");
+
         }
-        vl_101: TTDoubleBuffer {
+        vl_101: RCQueueBuffer {
             parameters:
                 @display("p=450,160");
         }

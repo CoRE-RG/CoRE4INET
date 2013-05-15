@@ -27,7 +27,7 @@ void TicApp::initialize()
 
     TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-    event->setAction_time(1000);
+    event->setAction_time(12250);
     event->setDestinationGate(gate("schedulerIn"));
     tteScheduler->registerEvent(event);
 }
@@ -35,14 +35,14 @@ void TicApp::initialize()
 void TicApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("schedulerIn")){
-        CTFrame *frame = new TTFrame("CT-ID=100");
+        CTFrame *frame = new TTFrame("Request");
         MACAddress srcAddr;
         srcAddr.setAddress("03 04 05 06 00 64");
         frame->setDest(srcAddr);
         frame->setCtID(100);
         //ENDE TEST
-        if (getParentModule()->getSubmodule("VL_TT_100_CTC"))
-            sendDirect(frame, getParentModule()->getSubmodule("VL_TT_100_CTC")->gate("in"));
+        if (getParentModule()->getSubmodule("vl_100_ctc"))
+            sendDirect(frame, getParentModule()->getSubmodule("vl_100_ctc")->gate("in"));
 
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
