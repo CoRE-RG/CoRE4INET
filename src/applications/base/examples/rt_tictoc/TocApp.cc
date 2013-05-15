@@ -24,12 +24,6 @@ Define_Module(TocApp);
 void TocApp::initialize()
 {
     TTEApplicationBase::initialize();
-
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-    event->setAction_time(1000);
-    event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
 }
 
 void TocApp::handleMessage(cMessage *msg)
