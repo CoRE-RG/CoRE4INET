@@ -10,5 +10,7 @@ var searchData=
   ['rcqueuebuffer_2ecc',['RCQueueBuffer.cc',['../_r_c_queue_buffer_8cc.html',1,'']]],
   ['rcqueuebuffer_2eh',['RCQueueBuffer.h',['../_r_c_queue_buffer_8h.html',1,'']]],
   ['rctrafficsourceapp_2ecc',['RCTrafficSourceApp.cc',['../_r_c_traffic_source_app_8cc.html',1,'']]],
-  ['rctrafficsourceapp_2eh',['RCTrafficSourceApp.h',['../_r_c_traffic_source_app_8h.html',1,'']]]
+  ['rctrafficsourceapp_2eh',['RCTrafficSourceApp.h',['../_r_c_traffic_source_app_8h.html',1,'']]],
+  ['recordplaybackscheduler_2ecc',['RecordPlaybackScheduler.cc',['../_record_playback_scheduler_8cc.html',1,'']]],
+  ['recordplaybackscheduler_2eh',['RecordPlaybackScheduler.h',['../_record_playback_scheduler_8h.html',1,'']]]
 ];

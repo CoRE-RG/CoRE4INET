@@ -21,10 +21,10 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
 <img src="ttethernet.examples.small_network.small_network-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="180,6,287,34">
 <area shape="rect" id="node2" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="5,83,77,111">
-<area shape="rect" id="node4" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="101,83,173,111">
-<area shape="rect" id="node6" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="197,83,269,111">
-<area shape="rect" id="node8" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="293,83,365,111">
-<area shape="rect" id="node10" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="389,83,461,111">
+<area shape="rect" id="node4" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="101,83,173,111">
+<area shape="rect" id="node6" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="197,83,269,111">
+<area shape="rect" id="node8" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,83,365,111">
+<area shape="rect" id="node10" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="389,83,461,111">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -197,46 +197,6 @@ a generated MAC address in init stage 0.</p>
    <td>1KiB</td>
    <td>
 <p>length of response packets</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
    </td>
 </tr>
 <tr>
@@ -418,7 +378,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -428,7 +388,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -573,46 +533,6 @@ a generated MAC address in init stage 0.</p>
    <td>1KiB</td>
    <td>
 <p>length of response packets</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
    </td>
 </tr>
 <tr>
@@ -794,7 +714,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -804,7 +724,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -814,7 +734,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -824,7 +744,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -892,7 +812,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -902,7 +822,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -912,7 +832,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1077,46 +997,6 @@ a generated MAC address in init stage 0.</p>
    <td>1KiB</td>
    <td>
 <p>length of response packets</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
    </td>
 </tr>
 <tr>
@@ -1298,7 +1178,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -1308,7 +1188,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -1318,7 +1198,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1328,7 +1208,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1396,7 +1276,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1406,7 +1286,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1416,7 +1296,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1555,46 +1435,6 @@ a generated MAC address in init stage 0.</p>
    <td>   </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.ctc.TTIncoming.html">vl_100_ctc</a>.receive_window_start</td>
    <td>
       <i>int</i>
@@ -1687,7 +1527,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -1697,7 +1537,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -1707,7 +1547,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1717,7 +1557,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1785,7 +1625,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1795,7 +1635,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1805,7 +1645,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>

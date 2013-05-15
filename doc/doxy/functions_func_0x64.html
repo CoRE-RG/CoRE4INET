@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func_0x63.html#index_c"><span>c</span></a></li>
       <li class="current"><a href="functions_func_0x64.html#index_d"><span>d</span></a></li>
       <li><a href="functions_func_0x65.html#index_e"><span>e</span></a></li>
+      <li><a href="functions_func_0x66.html#index_f"><span>f</span></a></li>
       <li><a href="functions_func_0x67.html#index_g"><span>g</span></a></li>
       <li><a href="functions_func_0x68.html#index_h"><span>h</span></a></li>
       <li><a href="functions_func_0x69.html#index_i"><span>i</span></a></li>
@@ -139,11 +140,16 @@ $(document).ready(function(){initNavTree('functions_func_0x64.html','');});
 , <a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a553b877693bbf07c5f89f014225e9bef">TTEthernetModel::DoubleBuffer</a>
 , <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f">TTEthernetModel::QueueBuffer</a>
 </li>
+<li>DispatchDelay()
+: <a class="el" href="class_t_t_ethernet_model_1_1_dispatch_delay.html#a996c5eb7577598fdff17d038d4adff72">TTEthernetModel::DispatchDelay</a>
+</li>
 <li>DoubleBuffer()
 : <a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a992dcdf53bc3d254bfd7c5bd13f0e8b9">TTEthernetModel::DoubleBuffer</a>
 </li>
 <li>dup()
-: <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html#ac639d29395c621c3b7fd57917b6d505a">TTEthernetModel::SchedulerEvent_Base</a>
+: <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a02d50f61dcb7958beed7b30c43115f0b">TTEthernetModel::SchedulerTimerEvent</a>
+, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a3a2a1b92dc94a5b1dab3d4534e4b6b8c">TTEthernetModel::SchedulerActionTimeEvent</a>
+, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html#ac639d29395c621c3b7fd57917b6d505a">TTEthernetModel::SchedulerEvent_Base</a>
 , <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_message.html#a32ae982ccba2167ddd793564cbffd15b">TTEthernetModel::SchedulerMessage</a>
 , <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a6c143fc32caf9211282a2958b99f419e">TTEthernetModel::SchedulerEvent</a>
 , <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a0fab9929c53b6718d43df8dabacead11">TTEthernetModel::TTFrame</a>
@@ -153,9 +159,11 @@ $(document).ready(function(){initNavTree('functions_func_0x64.html','');});
 , <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#a00029d359f0f54ffb9ab68d9b524eedc">TTEthernetModel::CTFrame</a>
 , <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer_empty.html#a81168ffeefb0c21aa54dfd3293702fe5">TTEthernetModel::TTBufferEmpty</a>
 , <a class="el" href="class_t_t_ethernet_model_1_1_a_p_i_payload.html#a9c1d1941f7e7f921212f864c74369d47">TTEthernetModel::APIPayload</a>
+, <a class="el" href="class_t_t_ethernet_model_1_1_dispatch_delay.html#ad836e312b58b51bb317a3451d32377fa">TTEthernetModel::DispatchDelay</a>
+, <a class="el" href="class_t_t_ethernet_model_1_1_compressed_p_i_t.html#abefb670e3358780f4393463d669efddd">TTEthernetModel::CompressedPIT</a>
 , <a class="el" href="class_t_t_ethernet_model_1_1_sync_notification.html#a22accd26080a110c1091cc1eb0474890">TTEthernetModel::SyncNotification</a>
-, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a02d50f61dcb7958beed7b30c43115f0b">TTEthernetModel::SchedulerTimerEvent</a>
-, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a3a2a1b92dc94a5b1dab3d4534e4b6b8c">TTEthernetModel::SchedulerActionTimeEvent</a>
+, <a class="el" href="class_t_t_ethernet_model_1_1_frame_event.html#aadc9d7c13cc4c4495fa7182d7681031f">TTEthernetModel::FrameEvent</a>
+, <a class="el" href="class_t_t_ethernet_model_1_1_o_w_counter.html#a3f1a3808de591af87b0d691cff57e016">TTEthernetModel::OWCounter</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -163,7 +171,7 @@ $(document).ready(function(){initNavTree('functions_func_0x64.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue May 7 2013 11:17:27 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed May 15 2013 14:16:29 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

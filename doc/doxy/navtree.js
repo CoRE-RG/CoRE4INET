@@ -23,7 +23,7 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", "functions_vars" ]
       ] ]
     ] ],
     [ "Files", null, [
@@ -40,8 +40,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_p_i_payload__m_8h.html",
-"_t_t_traffic_source_app_8cc.html#a9b8e712c9e98f56bb02b359db087f458",
-"class_t_t_ethernet_model_1_1_scheduler_timer_event.html#ad4abaa32d1af246731cdf6a62fdb5c5f"
+"_t_t_e4_i_n_e_t_defs_8h.html#af1aeba82bae190f10e219e04546e8cb7",
+"class_t_t_ethernet_model_1_1_h_i___c_m___i_n_i_t.html#a55a757a2f7651d78e1bed7c58ba3f69c",
+"class_t_t_ethernet_model_1_1_s_c_state.html#a5ad1fdf470bd0e14917c5f6015507f1f",
+"class_t_t_ethernet_model_1_1_scheduler_message.html#ab2077211501f37cd31dff6ee4ee374e5",
+"index.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,0 +1,664 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>SM</i></h2>
+<b>Package:</b> ttethernet.synchronisation.AS6802.SynchronisationMaster<br/><b>File: <a href="src-synchronisation-AS6802-SynchronisationMaster-SM.ned.html">src/synchronisation/AS6802/SynchronisationMaster/SM.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_s_m.html" target="mainframe"><b>C++ definition</b></a></p>
+<p>(no description)</p><img src="ttethernet.synchronisation.AS6802.SynchronisationMaster.SM-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.synchronisation.AS6802.SynchronisationMaster.SM.html" title="SM" alt="SM" coords="0,31,65,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.synchronisation.AS6802.SynchronisationMaster.SM-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.synchronisation.AS6802.SynchronisationMaster.SM.html" title="Simple Module SM" alt="" coords="5,6,77,34">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.synchronisation.AS6802.SynchronisationMaster.SM-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.synchronisation.AS6802.SynchronisationMaster.SM.html" title="Simple Module SM" alt="" coords="5,83,77,111">
+<area shape="rect" id="node2" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="5,6,77,34">
+</map>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>read</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>pseudo_sim</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>precision</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>80</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>hardware_delay</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>int hardware_delay=default(100);</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>clock_corr_delay</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>(2*precision)+1</td>
+   <td>
+<p>typically set to the number of faulty synchronization masters to be tolerated</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>max_transmission_delay</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>635</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>max_integration_cycles</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>10000</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>max_pcf_membership</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>syncDomain</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>2</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>syncPriority</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>4</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>MembershipAcceptanceRange</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>bit_index</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>index of the bit that represent this <a href="ttethernet.synchronisation.AS6802.SynchronisationMaster.SM.html">SM</a> in the "pcf_membership_new"</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>@display("i=block/timer");</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>compression_master_delay</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>246</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>frame_length</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>64</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>sm_coldstart_timeout</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>12500</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>cs_offset</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>(2*max_transmission_delay)+compression_master_delay+frame_length</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>ca_offset</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>6000</td>
+   <td>
+<p>This parameter defines the duration that a synchronization master waits after a CA frame becomes
+permanent before it dispatches the first IN frame.</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>sm_restart_timeout_async</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>12500</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_restart_timeout</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>12500</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_restart_timeout_sync</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>12500</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_listen_timeout</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>25000</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>smc_scheduled_receive_pit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>630</td>
+   <td>
+<p>PoInT</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>smc_sync_eval_pit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>smc_scheduled_receive_pit+precision</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>smc_async_eval_pit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>ca_acceptance_window</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>2*precision</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_dispatch_pit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>smc_clock_corr_pit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>smc_scheduled_receive_pit+2*precision+1</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_scheduled_rcv_pit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>smc_scheduled_receive_pit</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_scheduled_receive_pit</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>smc_scheduled_receive_pit</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>sm_wait_threshold_unsync</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_tentative_sync_threshold_async</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_tentative_sync_threshold_sync</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_tentative_to_sync_thrld</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_integrate_to_wait_thrld</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_integrate_to_sync_thrld</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_stable_threshold_async</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_stable_threshold_sync</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_unsync_to_sync_thrld</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_unsync_to_tentative_thrld</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_sync_threshold_async</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_sync_threshold_sync</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>3</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>acceptance_window</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>2*precision</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>int_cycle_duration</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>12500</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>num_stable_cycles</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>1</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>cv_local_integration_cycle</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>num_unstable_cycles</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>1</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>drift_error</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>precision</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>ca_round_trip</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>2*max_transmission_delay+compression_master_delay+hardware_delay+precision</td>
+   <td>
+   </td>
+</tr>
+<tr class="local">
+   <td>sm_tent_to_stable_enabled</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>true</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>Standart_Integrity_Synchronisation</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>true</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>High_Integrity_Synchronisation</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>sm_sync_to_stable_enabled</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>true</td>
+   <td>   </td>
+</tr>
+<tr class="local">
+   <td>stable_ca_enabled</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>true</td>
+   <td>
+<p>just for test
+int pcf_membership_new=22;
+int pcf_integration_cycle=0;</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>class</td>
+   <td><i>SM</i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/timer</i></td>
+   <td>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Gates:</h3>
+<table class="gatestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Direction</th>
+      <th class="gatesize">Size</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>RCin</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input for rate-constrained traffic</p>
+</td>
+</tr>
+<tr class="local">
+   <td>TTin</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input for time-triggered traffic, not used, required by interface `<a href="ttethernet.linklayer.IPort.html">IPort</a>'</p>
+</td>
+</tr>
+<tr class="local">
+   <td>schedulerIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input for scheduler messages</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">SM</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ISync</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+
+
+        </span><span style="color: #808080; font-style: italic; ">//SCState is implemented by the SCState C++ Class
+</span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">SM</span><span style="color: #000000; ">);
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/timer&quot;</span><span style="color: #000000; ">);
+
+
+
+
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">read</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">pseudo_sim</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">precision</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">80</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//int hardware_delay=default(100);
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">hardware_delay</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">clock_corr_delay</span><span style="color: #000000; "> = (</span><span style="color: #008000; ">2</span><span style="color: #000000; ">*</span><span style="color: #000000; ">precision</span><span style="color: #000000; ">)+</span><span style="color: #008000; ">1</span><span style="color: #000000; ">;
+</span><span style="color: #808080; font-style: italic; ">//typically set to the number of faulty synchronization masters to be tolerated	
+</span><span style="color: #000000; ">
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_transmission_delay</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">635</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_integration_cycles</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">10000</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_pcf_membership</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+
+
+
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">syncDomain</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">2</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">syncPriority</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">4</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">MembershipAcceptanceRange</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//index of the bit that represent this SM in the &quot;pcf_membership_new&quot;   
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bit_index</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">id</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+       </span><span style="color: #808080; font-style: italic; ">// @display(&quot;i=block/timer&quot;);
+</span><span style="color: #000000; ">
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">compression_master_delay</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">246</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">frame_length</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">64</span><span style="color: #000000; ">);
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_coldstart_timeout</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">12500</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">cs_offset</span><span style="color: #000000; "> = (</span><span style="color: #008000; ">2</span><span style="color: #000000; ">*</span><span style="color: #000000; ">max_transmission_delay</span><span style="color: #000000; ">)+</span><span style="color: #000000; ">compression_master_delay</span><span style="color: #000000; ">+</span><span style="color: #000000; ">frame_length</span><span style="color: #000000; ">;
+
+        </span><span style="color: #808080; font-style: italic; ">//This parameter defines the duration that a synchronization master waits after a CA frame becomes
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//permanent before it dispatches the first IN frame.
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ca_offset</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">6000</span><span style="color: #000000; ">);
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_restart_timeout_async</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">12500</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_restart_timeout</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">12500</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_restart_timeout_sync</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">12500</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_listen_timeout</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">25000</span><span style="color: #000000; ">);
+
+
+
+        </span><span style="color: #808080; font-style: italic; ">//PoInT
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">smc_scheduled_receive_pit</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">630</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">smc_sync_eval_pit</span><span style="color: #000000; "> = </span><span style="color: #000000; ">smc_scheduled_receive_pit</span><span style="color: #000000; ">+</span><span style="color: #000000; ">precision</span><span style="color: #000000; ">;
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">smc_async_eval_pit</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ca_acceptance_window</span><span style="color: #000000; "> = </span><span style="color: #008000; ">2</span><span style="color: #000000; ">*</span><span style="color: #000000; ">precision</span><span style="color: #000000; ">;
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_dispatch_pit</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">smc_clock_corr_pit</span><span style="color: #000000; "> = </span><span style="color: #000000; ">smc_scheduled_receive_pit</span><span style="color: #000000; ">+</span><span style="color: #008000; ">2</span><span style="color: #000000; ">*</span><span style="color: #000000; ">precision</span><span style="color: #000000; ">+</span><span style="color: #008000; ">1</span><span style="color: #000000; ">;
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_scheduled_rcv_pit</span><span style="color: #000000; "> = </span><span style="color: #000000; ">smc_scheduled_receive_pit</span><span style="color: #000000; ">;
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_scheduled_receive_pit</span><span style="color: #000000; "> = </span><span style="color: #000000; ">smc_scheduled_receive_pit</span><span style="color: #000000; ">;
+
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_wait_threshold_unsync</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_tentative_sync_threshold_async</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_tentative_sync_threshold_sync</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_tentative_to_sync_thrld</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_integrate_to_wait_thrld</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_integrate_to_sync_thrld</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_stable_threshold_async</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_stable_threshold_sync</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_unsync_to_sync_thrld</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_unsync_to_tentative_thrld</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_sync_threshold_async</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_sync_threshold_sync</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">3</span><span style="color: #000000; ">);
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">acceptance_window</span><span style="color: #000000; "> = </span><span style="color: #008000; ">2</span><span style="color: #000000; ">*</span><span style="color: #000000; ">precision</span><span style="color: #000000; ">;
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">int_cycle_duration</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">12500</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">num_stable_cycles</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">cv_local_integration_cycle</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">num_unstable_cycles</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
+
+
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">drift_error</span><span style="color: #000000; "> = </span><span style="color: #000000; ">precision</span><span style="color: #000000; ">;
+
+        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ca_round_trip</span><span style="color: #000000; "> = </span><span style="color: #008000; ">2</span><span style="color: #000000; ">*</span><span style="color: #000000; ">max_transmission_delay</span><span style="color: #000000; ">+</span><span style="color: #000000; ">compression_master_delay</span><span style="color: #000000; ">+</span><span style="color: #000000; ">hardware_delay</span><span style="color: #000000; ">+</span><span style="color: #000000; ">precision</span><span style="color: #000000; ">;
+
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_tent_to_stable_enabled</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">Standart_Integrity_Synchronisation</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">High_Integrity_Synchronisation</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">sm_sync_to_stable_enabled</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">stable_ca_enabled</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">true</span><span style="color: #000000; ">);
+
+</span><span style="color: #808080; font-style: italic; ">//just for test
+</span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//int pcf_membership_new=22;
+</span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//int pcf_integration_cycle=0;
+</span><span style="color: #000000; ">
+
+
+    </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
+
+        </span><span style="color: #808080; font-style: italic; ">//Input for rate-constrained traffic
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
+
+        </span><span style="color: #808080; font-style: italic; ">//Input for time-triggered traffic, not used, required by interface `ttethernet.linklayer.IPort'
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
+
+        </span><span style="color: #808080; font-style: italic; ">//Input for scheduler messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;
+
+
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

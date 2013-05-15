@@ -130,30 +130,30 @@ $(document).ready(function(){initNavTree('_r_c_incoming_8h_source.html','');});
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>TTEthernetModel {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html" title="Class for the critical traffic conformance check of rate-constrained traffic.">RCIncoming</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a540a1303aa120c1929b9a3334dafd28c">   39</a></span>&#160;        uint64_t <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a540a1303aa120c1929b9a3334dafd28c" title="Saves the tickcount of the last message.">lastArrived</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a032e45132a618de300da57e9e1d3710b">   44</a></span>&#160;        uint64_t <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a032e45132a618de300da57e9e1d3710b" title="caches bag parameter">bag</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9" title="Forwards messages arriving on in-gate to out-gate checks conformance with configured bag...">handleMessage</a>(cMessage *msg);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a1b5ad168546c8989b2612d208b77d1e7" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a2e91469273a2dadc6ddc128765fd37f2" title="Constructor.">RCIncoming</a>();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <span class="comment">//namespace</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html" title="Class for the critical traffic conformance check of rate-constrained traffic.">RCIncoming</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a540a1303aa120c1929b9a3334dafd28c">   41</a></span>&#160;        uint64_t <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a540a1303aa120c1929b9a3334dafd28c" title="Saves the tickcount of the last message.">lastArrived</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a032e45132a618de300da57e9e1d3710b">   46</a></span>&#160;        uint64_t <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a032e45132a618de300da57e9e1d3710b" title="caches bag parameter">bag</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9" title="Forwards messages arriving on in-gate to out-gate checks conformance with configured bag...">handleMessage</a>(cMessage *msg);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a1b5ad168546c8989b2612d208b77d1e7" title="Indicates a parameter has changed.">handleParameterChange</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* parname);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a2e91469273a2dadc6ddc128765fd37f2" title="Constructor.">RCIncoming</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">//namespace</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a></li><li class="navelem"><a class="el" href="dir_70493b844ed7499cbfccf4c5cccc6d42.html">ctc</a></li><li class="navelem"><a class="el" href="_r_c_incoming_8h.html">RCIncoming.h</a></li>
-    <li class="footer">Generated on Tue May 7 2013 11:17:27 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed May 15 2013 14:16:26 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

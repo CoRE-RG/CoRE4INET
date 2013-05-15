@@ -1,5 +1,6 @@
 var class_t_t_ethernet_model_1_1_t_t_e_scheduler =
 [
+    [ "~TTEScheduler", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a30f72f29b15d4e7e43827bfaf8ce1ba1", null ],
     [ "changeDrift", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de", null ],
     [ "clockCorrection", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3", null ],
     [ "correctEvents", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1d44b1afcda7d7fda8dbe9974ca50d59", null ],
@@ -20,7 +21,6 @@ var class_t_t_ethernet_model_1_1_t_t_e_scheduler =
     [ "lastCycleTicks", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a2d87fc1cbd4c25c86d1848bc41303532", null ],
     [ "lastNewCycleMessage", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a4d5242a559cd9b03e414737478fbfed3", null ],
     [ "maxDrift", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705", null ],
-    [ "maxDriftChange", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad491a1c89ad41a27820cfa01a73f7646", null ],
     [ "newCyclemsg", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a2888779973a53b90f45b75572e9a4ff4", null ],
     [ "registredEvents", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a0791fe14690ef7e7d8522bd327b131a4", null ],
     [ "tick", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498", null ]

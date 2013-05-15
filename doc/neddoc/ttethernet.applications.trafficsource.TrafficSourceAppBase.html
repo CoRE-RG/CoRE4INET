@@ -7,7 +7,10 @@
 <h2 class="comptitle">Simple Module <i>TrafficSourceAppBase</i></h2>
 <b>Package:</b> ttethernet.applications.trafficsource<br/><b>File: <a href="src-applications-trafficsource-TrafficSourceAppBase.ned.html">src/applications/trafficsource/TrafficSourceAppBase.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_t_t_e_application_base.html" target="mainframe"><b>C++ definition</b></a></p>
 
-<p>TODO auto-generated module</p>
+<p>Abstract base traffic source application used for various traffic generators.
+Since this is an abstract module please do not instantiate it</p>
+<p><b>See also:</b> <a href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html">TTTrafficSourceApp</a>, <a href="ttethernet.applications.trafficsource.RCTrafficSourceApp.html">RCTrafficSourceApp</a></p>
+<p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.applications.trafficsource.TrafficSourceAppBase-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.applications.trafficsource.TrafficSourceAppBase.html" title="TrafficSourceAppBase" alt="TrafficSourceAppBase" coords="0,31,193,71">
 </map>
@@ -40,7 +43,8 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td>
 
-<p>TODO auto-generated module</p>
+<p>Abstract base application used for various application models.
+Since this is an abstract module please do not instantiate it</p>
 
    </td>
 </tr>
@@ -61,7 +65,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td>
 
-<p>TODO auto-generated module</p>
+<p>Traffic source application used for rate-constrained traffic generators.</p>
 
    </td>
 </tr>
@@ -74,7 +78,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td>
 
-<p>TODO auto-generated module</p>
+<p>Traffic source application used for time-triggered traffic generators.</p>
 
    </td>
 </tr>
@@ -103,7 +107,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>bool</i>
    </td>
    <td>false</td>
-   <td>   </td>
+   <td>
+<p>If true, buffer management is not used. Applications use their own methods to locate buffers</p>
+   </td>
 </tr>
 <tr class="local">
    <td>payload</td>
@@ -111,7 +117,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>int</i>
    </td>
    <td>46Byte</td>
-   <td>   </td>
+   <td>
+<p>Size of the payload of the message that is being generated</p>
+   </td>
 </tr>
 <tr class="local">
    <td>ct_id</td>
@@ -119,7 +127,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>int</i>
    </td>
    <td>-1</td>
-   <td>   </td>
+   <td>
+<p>Critical traffic identifier of the message that is being generated (-1) means don't set ID</p>
+   </td>
 </tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
@@ -132,12 +142,14 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr>
    <td>class</td>
    <td><i>TTEApplicationBase</i></td>
-   <td></td>
+   <td>
+</td>
 </tr>
 <tr>
    <td>display</td>
    <td><i>i=block/source</i></td>
-   <td></td>
+   <td>
+</td>
 </tr>
 </table>
 <h3 class="subtitle">Gates:</h3>
@@ -151,12 +163,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr class="inherited">
    <td>TTin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming time-triggered messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>RCin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming rate-constrained messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>schedulerIn</xsl:if></td>
@@ -175,14 +191,23 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
-// TODO auto-generated module
+// Abstract base traffic source application used for various traffic generators.
+// Since this is an abstract module please do not instantiate it
 //
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTTrafficSourceApp, RCTrafficSourceApp
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TrafficSourceAppBase</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEApplicationBase</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">payload</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">46</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">);
-        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_id</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(-</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/source&quot;</span><span style="color: #000000; ">);
+
+        </span><span style="color: #808080; font-style: italic; ">//Size of the payload of the message that is being generated
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">payload</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">46</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">);
+
+        </span><span style="color: #808080; font-style: italic; ">//Critical traffic identifier of the message that is being generated (-1) means don't set ID
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">ct_id</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(-</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

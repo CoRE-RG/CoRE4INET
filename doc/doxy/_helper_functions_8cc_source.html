@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('_helper_functions_8cc_source.html','')
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="_helper_functions_8h.html#ad17b18302fcd707dc57bb68106c622da">   60</a></span>&#160;uint64_t <a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(simtime_t seconds){</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   <span class="keywordflow">return</span> ((seconds.raw() *  0x10000) / pow10(SIMTIME_NS-seconds.getScaleExp()));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   <span class="keywordflow">return</span> ((seconds.raw() *  0x10000) / pow(10,SIMTIME_NS-seconds.getScaleExp()));</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
 <div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="_helper_functions_8h.html#ab7aebf5462b19bd64206b5ab5ebb3392">   64</a></span>&#160;uint64_t <a class="code" href="_helper_functions_8cc.html#ab7aebf5462b19bd64206b5ab5ebb3392" title="Converts value in the transparent clock unit that is ns*0x10000 to ticks.">transparentClockToTicks</a>(uint64_t transparentClock, simtime_t tick){</div>
@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('_helper_functions_8cc_source.html','')
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a></li><li class="navelem"><a class="el" href="dir_8d204083f9d300dda59a72701f54b154.html">utilities</a></li><li class="navelem"><a class="el" href="_helper_functions_8cc.html">HelperFunctions.cc</a></li>
-    <li class="footer">Generated on Tue May 7 2013 11:17:26 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed May 15 2013 14:16:26 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

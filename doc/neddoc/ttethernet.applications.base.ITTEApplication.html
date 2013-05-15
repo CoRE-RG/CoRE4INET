@@ -5,7 +5,12 @@
    </head>
    <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
 <h2 class="comptitle">Module Interface <i>ITTEApplication</i></h2>
-<b>Package:</b> ttethernet.applications.base<br/><b>File: <a href="src-applications-base-ITTEApplication.ned.html">src/applications/base/ITTEApplication.ned</a></b><br/><p>(no description)</p><img src="ttethernet.applications.base.ITTEApplication-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<b>Package:</b> ttethernet.applications.base<br/><b>File: <a href="src-applications-base-ITTEApplication.ned.html">src/applications/base/ITTEApplication.ned</a></b><br/>
+<p>Interface to be implemented by application models.
+Since this is an abstract module please do not instantiate it</p>
+<p><b>See also:</b> <a href="ttethernet.applications.api.TTEAPIApplicationBase.html">TTEAPIApplicationBase</a></p>
+<p><b>Author:</b> Till Steinbach</p>
+<img src="ttethernet.applications.base.ITTEApplication-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="0,31,224,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
@@ -89,7 +94,15 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 </tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
-<pre class="src"><span style="color: #800000; font-weight: bold; ">moduleinterface</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">IPort</span><span style="color: #000000; ">
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Interface to be implemented by application models.
+// Since this is an abstract module please do not instantiate it
+//
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTEAPIApplicationBase
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">moduleinterface</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">IPort</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of buffer modules the application is allowed to use
@@ -97,6 +110,8 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
          </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SynchronizationNotification messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">syncIn</span><span style="color: #000000; ">;
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

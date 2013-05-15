@@ -23,7 +23,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <area shape="rect" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="EtherAppSrv" alt="EtherAppSrv" coords="42,189,86,250">
 <area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="927,1019,1076,1080">
 <area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="ISync" alt="ISync" coords="123,189,167,250">
-<area shape="rect" href="ttethernet.scheduler.TTEScheduler.html" title="TTEScheduler" alt="TTEScheduler" coords="194,189,280,250">
+<area shape="rect" href="ttethernet.scheduler.ITTEScheduler.html" title="ITTEScheduler" alt="ITTEScheduler" coords="194,189,280,250">
 <area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="176,119,298,180">
 <area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="123,57,167,118">
 <area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="122,119,167,180">
@@ -32,18 +32,18 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="647,6,753,34">
-<area shape="rect" id="node2" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="5,83,96,111">
-<area shape="rect" id="node4" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="120,83,272,111">
-<area shape="rect" id="node6" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="296,83,392,111">
-<area shape="rect" id="node8" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="416,83,531,111">
-<area shape="rect" id="node10" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="555,83,627,111">
-<area shape="rect" id="node12" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="651,83,749,111">
-<area shape="rect" id="node14" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="773,83,888,111">
-<area shape="rect" id="node16" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="912,83,1016,111">
-<area shape="rect" id="node18" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="1040,83,1139,111">
-<area shape="rect" id="node20" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="1163,83,1240,111">
-<area shape="rect" id="node22" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="1264,83,1381,111">
+<img src="ttethernet.nodes.ethernet.TTEEtherHost-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="616,6,723,34">
+<area shape="rect" id="node2" href="ttethernet.linklayer.BGTrafficHandle.html" title="Simple Module BGTrafficHandle" alt="" coords="5,83,123,111">
+<area shape="rect" id="node4" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="147,83,245,111">
+<area shape="rect" id="node6" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="269,83,341,111">
+<area shape="rect" id="node8" href="ttethernet.buffer.BGQueueBuffer.html" title="Simple Module BGQueueBuffer" alt="" coords="365,83,480,111">
+<area shape="rect" id="node10" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppSrv.html" title="Simple Module EtherAppSrv" alt="" coords="504,83,600,111">
+<area shape="rect" id="node12" href="../../../inet/doc/neddoc/inet.applications.ethernet.EtherAppCli.html" title="Simple Module EtherAppCli" alt="" coords="624,83,715,111">
+<area shape="rect" id="node14" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="739,83,891,111">
+<area shape="rect" id="node16" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="915,83,1013,111">
+<area shape="rect" id="node18" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="1037,83,1152,111">
+<area shape="rect" id="node20" href="ttethernet.scheduler.ITTEScheduler.html" title="Module Interface ITTEScheduler" alt="" coords="1176,83,1285,111">
+<area shape="rect" id="node22" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherLLC.html" title="Simple Module EtherLLC" alt="" coords="1309,83,1387,111">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -143,6 +143,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr>
    <td>display</td>
    <td><i>bgb=894,314;i=device/device</i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>node</td>
+   <td><i></i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>labels</td>
+   <td><i>node</i></td>
    <td></td>
 </tr>
 </table>
@@ -313,46 +323,6 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.applications.base.ITTEApplication.html">tteApp</a>.buffers</td>
    <td>
       <i>string</i>
@@ -458,12 +428,14 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=894,314;i=device/device&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #000000; font-weight: bold; ">@node</span><span style="color: #000000; ">;
+        </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">node</span><span style="color: #000000; ">,</span><span style="color: #000000; ">ethernet</span><span style="color: #000000; ">-</span><span style="color: #000000; ">node</span><span style="color: #000000; ">);
         </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">numApps</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
         </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">numPorts</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
         </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">hardware_delay</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">us</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">// Physical port of the host
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">inout</span><span style="color: #000000; "> </span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">inout</span><span style="color: #000000; "> </span><span style="color: #000000; ">ethg</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">EtherFrame</span><span style="color: #000000; ">-</span><span style="color: #000000; ">conn</span><span style="color: #000000; ">);
 
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">// Physical port of the host
@@ -498,7 +470,7 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,169&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// Scheudler for the device
-</span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteScheduler</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; "> {
+</span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteScheduler</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;TTEScheduler&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEScheduler</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,169&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #000000; ">tteApp</span><span style="color: #000000; ">[</span><span style="color: #000000; ">numApps</span><span style="color: #000000; ">]: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;TTEAPITestApplication&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> {

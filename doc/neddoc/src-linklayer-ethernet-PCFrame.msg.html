@@ -13,6 +13,19 @@
    </tr>
 <tr>
    <td>
+<a href="PCFType.html">PCFType</a>
+   </td>
+   <td>
+<i>enum</i>
+   </td>
+   <td>
+
+<p>Identifier for different types of Protocol Control Frame (PCF)</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
 <a href="PCFrame.html">PCFrame</a>
    </td>
    <td>
@@ -35,6 +48,23 @@
 </span><span style="color: #800000; font-weight: bold; ">packet</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCFrame</span><span style="color: #000000; ">;
 
 </span><span style="color: #800000; font-weight: bold; ">namespace</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEthernetModel</span><span style="color: #000000; ">;
+
+</span><span style="color: #808080; font-style: italic; ">//
+// Identifier for different types of Protocol Control Frame (PCF)
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> PCFrame
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">enum</span><span style="color: #000000; "> </span><span style="color: #000000; ">PCFType</span><span style="color: #000000; ">
+{
+    </span><span style="color: #808080; font-style: italic; ">//Coldstart Frame (CS)
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">CS</span><span style="color: #000000; "> = </span><span style="color: #008000; ">1</span><span style="color: #000000; ">;
+    </span><span style="color: #808080; font-style: italic; ">//Integrate Frame (IN)
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">IN</span><span style="color: #000000; "> = </span><span style="color: #008000; ">2</span><span style="color: #000000; ">;
+	</span><span style="color: #808080; font-style: italic; ">//Coldstart Acknowledge (CA)
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">CA</span><span style="color: #000000; "> = </span><span style="color: #008000; ">3</span><span style="color: #000000; ">;
+};
+
 </span><span style="color: #808080; font-style: italic; ">//
 // Represents a Protocol Control Frame (PCF)
 //
@@ -66,7 +96,7 @@
 	</span><span style="color: #808080; font-style: italic; ">// pcf_type: Defines the frame type of a Protocol Control Frame
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">// 4 Bit field
-</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">type</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">type</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@enum</span><span style="color: #000000; ">(</span><span style="color: #000000; ">PCFType</span><span style="color: #000000; ">);
 	
 	</span><span style="color: #808080; font-style: italic; ">// pcf_transparent_clock: stores the accumulated delay of a Protocol Control Frame up to the consumer.
 </span><span style="color: #000000; ">	</span><span style="color: #808080; font-style: italic; ">//

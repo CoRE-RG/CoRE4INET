@@ -7,7 +7,9 @@
 <h2 class="comptitle">Simple Module <i>RCTrafficSourceApp</i></h2>
 <b>Package:</b> ttethernet.applications.trafficsource<br/><b>File: <a href="src-applications-trafficsource-RCTrafficSourceApp.ned.html">src/applications/trafficsource/RCTrafficSourceApp.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html" target="mainframe"><b>C++ definition</b></a></p>
 
-<p>TODO auto-generated module</p>
+<p>Traffic source application used for rate-constrained traffic generators.</p>
+<p><b>See also:</b> <a href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html">TTTrafficSourceApp</a></p>
+<p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.applications.trafficsource.RCTrafficSourceApp-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.applications.trafficsource.RCTrafficSourceApp.html" title="RCTrafficSourceApp" alt="RCTrafficSourceApp" coords="0,31,180,71">
 </map>
@@ -38,7 +40,8 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td>
 
-<p>TODO auto-generated module</p>
+<p>Abstract base traffic source application used for various traffic generators.
+Since this is an abstract module please do not instantiate it</p>
 
    </td>
 </tr>
@@ -67,7 +70,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>bool</i>
    </td>
    <td>false</td>
-   <td>   </td>
+   <td>
+<p>If true, buffer management is not used. Applications use their own methods to locate buffers</p>
+   </td>
 </tr>
 <tr class="inherited">
    <td>payload</td>
@@ -75,7 +80,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>int</i>
    </td>
    <td>46Byte</td>
-   <td>   </td>
+   <td>
+<p>Size of the payload of the message that is being generated</p>
+   </td>
 </tr>
 <tr class="inherited">
    <td>ct_id</td>
@@ -83,7 +90,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>int</i>
    </td>
    <td>-1</td>
-   <td>   </td>
+   <td>
+<p>Critical traffic identifier of the message that is being generated (-1) means don't set ID</p>
+   </td>
 </tr>
 <tr class="local">
    <td>interval</td>
@@ -91,7 +100,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>double</i>
    </td>
    <td></td>
-   <td>   </td>
+   <td>
+<p>Sending interval for the rate constrained messages (any build in disstribution can be used)</p>
+   </td>
 </tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
@@ -109,7 +120,8 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr>
    <td>display</td>
    <td><i>i=,orange</i></td>
-   <td></td>
+   <td>
+</td>
 </tr>
 </table>
 <h3 class="subtitle">Gates:</h3>
@@ -123,12 +135,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr class="inherited">
    <td>TTin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming time-triggered messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>RCin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming rate-constrained messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>schedulerIn</xsl:if></td>
@@ -147,14 +163,19 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
-// TODO auto-generated module
+// Traffic source application used for rate-constrained traffic generators.
 //
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTTrafficSourceApp
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCTrafficSourceApp</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TrafficSourceAppBase</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCTrafficSourceApp</span><span style="color: #000000; ">);
-        </span><span style="color: #000080; font-weight: bold; ">volatile</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">interval</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">);
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=,orange&quot;</span><span style="color: #000000; ">);
+
+        </span><span style="color: #808080; font-style: italic; ">//Sending interval for the rate constrained messages (any build in disstribution can be used)
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">volatile</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">interval</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">);
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

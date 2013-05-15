@@ -124,10 +124,14 @@ Inheritance diagram for TTEthernetModel::SchedulerEvent_Base:</div>
  <div class="center">
   <img src="class_t_t_ethernet_model_1_1_scheduler_event___base.png" usemap="#TTEthernetModel::SchedulerEvent_Base_map" alt=""/>
   <map id="TTEthernetModel::SchedulerEvent_Base_map" name="TTEthernetModel::SchedulerEvent_Base_map">
-<area href="class_t_t_ethernet_model_1_1_scheduler_message.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc." alt="TTEthernetModel::SchedulerMessage" shape="rect" coords="138,56,404,80"/>
-<area href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate." alt="TTEthernetModel::SchedulerEvent" shape="rect" coords="138,168,404,192"/>
+<area href="class_t_t_ethernet_model_1_1_scheduler_message.html" title="Class generated from scheduler/SchedulerMessage.msg by opp_msgc." alt="TTEthernetModel::SchedulerMessage" shape="rect" coords="207,56,473,80"/>
+<area href="class_t_t_ethernet_model_1_1_scheduler_event.html" title="Redefines SchedulerEvent_Base and adds destinationGate." alt="TTEthernetModel::SchedulerEvent" shape="rect" coords="207,168,473,192"/>
 <area href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc." alt="TTEthernetModel::SchedulerActionTimeEvent" shape="rect" coords="0,224,266,248"/>
-<area href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc." alt="TTEthernetModel::SchedulerTimerEvent" shape="rect" coords="276,224,542,248"/>
+<area href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc." alt="TTEthernetModel::SchedulerTimerEvent" shape="rect" coords="414,224,680,248"/>
+<area href="class_t_t_ethernet_model_1_1_compressed_p_i_t.html" title="Class generated from synchronisation/AS6802/SynchronisationEvents.msg by opp_msgc." alt="TTEthernetModel::CompressedPIT" shape="rect" coords="0,280,266,304"/>
+<area href="class_t_t_ethernet_model_1_1_dispatch_delay.html" title="Class generated from synchronisation/AS6802/SynchronisationEvents.msg by opp_msgc." alt="TTEthernetModel::DispatchDelay" shape="rect" coords="276,280,542,304"/>
+<area href="class_t_t_ethernet_model_1_1_frame_event.html" alt="TTEthernetModel::FrameEvent" shape="rect" coords="552,280,818,304"/>
+<area href="class_t_t_ethernet_model_1_1_o_w_counter.html" title="Class generated from synchronisation/AS6802/SynchronisationEvents.msg by opp_msgc." alt="TTEthernetModel::OWCounter" shape="rect" coords="828,280,1094,304"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -323,7 +327,7 @@ class <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html" tit
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_message.html#a32ae982ccba2167ddd793564cbffd15b">TTEthernetModel::SchedulerMessage</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a02d50f61dcb7958beed7b30c43115f0b">TTEthernetModel::SchedulerTimerEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a3a2a1b92dc94a5b1dab3d4534e4b6b8c">TTEthernetModel::SchedulerActionTimeEvent</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a6c143fc32caf9211282a2958b99f419e">TTEthernetModel::SchedulerEvent</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_dispatch_delay.html#ad836e312b58b51bb317a3451d32377fa">TTEthernetModel::DispatchDelay</a>, <a class="el" href="class_t_t_ethernet_model_1_1_compressed_p_i_t.html#abefb670e3358780f4393463d669efddd">TTEthernetModel::CompressedPIT</a>, <a class="el" href="class_t_t_ethernet_model_1_1_o_w_counter.html#a3f1a3808de591af87b0d691cff57e016">TTEthernetModel::OWCounter</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a02d50f61dcb7958beed7b30c43115f0b">TTEthernetModel::SchedulerTimerEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_frame_event.html#aadc9d7c13cc4c4495fa7182d7681031f">TTEthernetModel::FrameEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a3a2a1b92dc94a5b1dab3d4534e4b6b8c">TTEthernetModel::SchedulerActionTimeEvent</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a6c143fc32caf9211282a2958b99f419e">TTEthernetModel::SchedulerEvent</a>.</p>
 
 <p>Definition at line <a class="el" href="_scheduler_message__m_8h_source.html#l00121">121</a> of file <a class="el" href="_scheduler_message__m_8h_source.html">SchedulerMessage_m.h</a>.</p>
 <div class="fragment"><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;{<span class="keywordflow">throw</span> cRuntimeError(<span class="stringliteral">&quot;You forgot to manually add a dup() function to class SchedulerEvent&quot;</span>);}</div>
@@ -404,7 +408,7 @@ class <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html" tit
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_message.html#ac3e28dacbfef78e9d12a827be54b42e7">TTEthernetModel::SchedulerMessage</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#ad4abaa32d1af246731cdf6a62fdb5c5f">TTEthernetModel::SchedulerTimerEvent</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a62172c386badbe7a544cfbd693365930">TTEthernetModel::SchedulerActionTimeEvent</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_dispatch_delay.html#a9fc72298f450e5b6fc7486627b636774">TTEthernetModel::DispatchDelay</a>, <a class="el" href="class_t_t_ethernet_model_1_1_compressed_p_i_t.html#a5d6bd28ed39ebd978ce1ddf9ca5cf7e3">TTEthernetModel::CompressedPIT</a>, <a class="el" href="class_t_t_ethernet_model_1_1_o_w_counter.html#aeb8f3355ea2f9fd14af2120f2b239cc2">TTEthernetModel::OWCounter</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#ad4abaa32d1af246731cdf6a62fdb5c5f">TTEthernetModel::SchedulerTimerEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_frame_event.html#ac34bebd2979bd1b0a709637b428754cd">TTEthernetModel::FrameEvent</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#a62172c386badbe7a544cfbd693365930">TTEthernetModel::SchedulerActionTimeEvent</a>.</p>
 
 </div>
 </div>
@@ -432,7 +436,7 @@ class <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html" tit
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_message.html#a01e4bdf7a65877f11b5ffd82356e1c4b">TTEthernetModel::SchedulerMessage</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a4ba27e5809696d7422e1c962211c7e6c">TTEthernetModel::SchedulerTimerEvent</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ad79cba341615162904aac92db3b12648">TTEthernetModel::SchedulerActionTimeEvent</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_dispatch_delay.html#a2af325638948846c37855f3719fe5dc5">TTEthernetModel::DispatchDelay</a>, <a class="el" href="class_t_t_ethernet_model_1_1_compressed_p_i_t.html#a78a7f4909bb377bbcdfff40ecdee7630">TTEthernetModel::CompressedPIT</a>, <a class="el" href="class_t_t_ethernet_model_1_1_o_w_counter.html#a812bdad2b6215c8a51f07b412689461e">TTEthernetModel::OWCounter</a>, <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a4ba27e5809696d7422e1c962211c7e6c">TTEthernetModel::SchedulerTimerEvent</a>, <a class="el" href="class_t_t_ethernet_model_1_1_frame_event.html#ab5d6aa53e45f79d453236bc9682d6372">TTEthernetModel::FrameEvent</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ad79cba341615162904aac92db3b12648">TTEthernetModel::SchedulerActionTimeEvent</a>.</p>
 
 </div>
 </div>
@@ -445,7 +449,7 @@ class <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event.html" tit
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_scheduler_event___base.html">SchedulerEvent_Base</a></li>
-    <li class="footer">Generated on Tue May 7 2013 11:17:27 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed May 15 2013 14:16:28 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

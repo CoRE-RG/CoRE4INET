@@ -115,9 +115,6 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_p_c_frame
 </div><!--header-->
 <div class="contents">
 
-<p>Class generated from <code>linklayer/ethernet/PCFrame.msg</code> by opp_msgc.  
- <a href="class_t_t_ethernet_model_1_1_p_c_frame.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::PCFrame:</div>
@@ -243,28 +240,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a8845b058d2111858080f922f390ca90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class generated from <code>linklayer/ethernet/PCFrame.msg</code> by opp_msgc. </p>
-<pre>
-packet <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html" title="Class generated from linklayer/ethernet/PCFrame.msg by opp_msgc.">PCFrame</a> extends <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html" title="Class generated from linklayer/ethernet/RCFrame.msg by opp_msgc.">RCFrame</a>
-{   
-</p>
-<pre class="fragment">uint32_t integration_cycle;
-
-uint32_t membership_new;
-
-uint8_t sync_priority;
-
-uint8_t sync_domain;
-
-uint8_t type;
-
-uint64_t transparent_clock;
-
-string displayString="b=15,15,rect,white,orange,5";
-</pre><p>
-}
-</pre> 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00064">64</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00084">84</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4fc14437f6fd6a9846c5a16f63f4b1f2"></a>
 <div class="memitem">
@@ -290,7 +267,7 @@ string displayString="b=15,15,rect,white,orange,5";
       </table>
 </div><div class="memdoc">
 
-<p>Referenced by <a class="el" href="_p_c_frame__m_8h_source.html#l00087">dup()</a>.</p>
+<p>Referenced by <a class="el" href="_p_c_frame__m_8h_source.html#l00107">dup()</a>.</p>
 
 </div>
 </div>
@@ -381,8 +358,10 @@ string displayString="b=15,15,rect,white,orange,5";
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a46f3718b6c8e99bdce957eaa5f3b024c">TTEthernetModel::RCFrame</a>.</p>
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00087">87</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a4fc14437f6fd6a9846c5a16f63f4b1f2">PCFrame</a>(*<span class="keyword">this</span>);}</div>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00107">107</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, and <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{<span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a4fc14437f6fd6a9846c5a16f63f4b1f2">PCFrame</a>(*<span class="keyword">this</span>);}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -432,6 +411,8 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00572">TTEthernetModel::HI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01369">TTEthernetModel::HI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03790">TTEthernetModel::SI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02035">TTEthernetModel::HI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02810">TTEthernetModel::HI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05518">TTEthernetModel::SI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03632">TTEthernetModel::HI_CM_TENTATIVE_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04941">TTEthernetModel::SI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l04362">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03227">TTEthernetModel::SI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04372">TTEthernetModel::SI_CM_ENABLED::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02670">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04064">TTEthernetModel::SI_CM_INTEGRATE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05806">TTEthernetModel::SI_CM_STABLE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05217">TTEthernetModel::SI_CM_UNSYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03502">TTEthernetModel::SI_CM_SYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04644">TTEthernetModel::SI_CM_ENABLED::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02944">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunctionCA()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a0090730a0044d2f39b9a45f35af035dc"></a>
@@ -454,6 +435,8 @@ string displayString="b=15,15,rect,white,orange,5";
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00572">TTEthernetModel::HI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01369">TTEthernetModel::HI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03790">TTEthernetModel::SI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02035">TTEthernetModel::HI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02810">TTEthernetModel::HI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05518">TTEthernetModel::SI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03632">TTEthernetModel::HI_CM_TENTATIVE_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04941">TTEthernetModel::SI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l04362">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03227">TTEthernetModel::SI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04372">TTEthernetModel::SI_CM_ENABLED::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02670">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunction()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>.</p>
 
 </div>
 </div>
@@ -478,6 +461,8 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
+<p>Referenced by <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac341672095bb40dea74b6cca65a6685a"></a>
@@ -500,6 +485,8 @@ string displayString="b=15,15,rect,white,orange,5";
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Referenced by <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>.</p>
 
 </div>
 </div>
@@ -524,7 +511,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00334">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00572">TTEthernetModel::HI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01369">TTEthernetModel::HI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03790">TTEthernetModel::SI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02035">TTEthernetModel::HI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02810">TTEthernetModel::HI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05518">TTEthernetModel::SI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03632">TTEthernetModel::HI_CM_TENTATIVE_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04941">TTEthernetModel::SI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l04362">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03227">TTEthernetModel::SI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04372">TTEthernetModel::SI_CM_ENABLED::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02670">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04064">TTEthernetModel::SI_CM_INTEGRATE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05806">TTEthernetModel::SI_CM_STABLE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05217">TTEthernetModel::SI_CM_UNSYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03502">TTEthernetModel::SI_CM_SYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04644">TTEthernetModel::SI_CM_ENABLED::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02944">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunctionCA()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00334">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
 
 </div>
 </div>
@@ -548,6 +535,8 @@ string displayString="b=15,15,rect,white,orange,5";
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00572">TTEthernetModel::HI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01369">TTEthernetModel::HI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03790">TTEthernetModel::SI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02035">TTEthernetModel::HI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02810">TTEthernetModel::HI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05518">TTEthernetModel::SI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03632">TTEthernetModel::HI_CM_TENTATIVE_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04941">TTEthernetModel::SI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l04362">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03227">TTEthernetModel::SI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04372">TTEthernetModel::SI_CM_ENABLED::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02670">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04064">TTEthernetModel::SI_CM_INTEGRATE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05806">TTEthernetModel::SI_CM_STABLE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05217">TTEthernetModel::SI_CM_UNSYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04644">TTEthernetModel::SI_CM_ENABLED::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02944">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunctionCA()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_p_c_f_incoming_8cc_source.html#l00028">TTEthernetModel::PCFIncoming::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>.</p>
 
 </div>
 </div>
@@ -615,7 +604,7 @@ string displayString="b=15,15,rect,white,orange,5";
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a402750475afd12efc934c8cdfb860db4">TTEthernetModel::RCFrame</a>.</p>
 
-<p>Referenced by <a class="el" href="_p_c_frame__m_8h_source.html#l00108">TTEthernetModel::doPacking()</a>.</p>
+<p>Referenced by <a class="el" href="_p_c_frame__m_8h_source.html#l00128">TTEthernetModel::doPacking()</a>.</p>
 
 </div>
 </div>
@@ -643,7 +632,7 @@ string displayString="b=15,15,rect,white,orange,5";
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a7416e213b40a103a9892593674a235a5">TTEthernetModel::RCFrame</a>.</p>
 
-<p>Referenced by <a class="el" href="_p_c_frame__m_8h_source.html#l00109">TTEthernetModel::doUnpacking()</a>.</p>
+<p>Referenced by <a class="el" href="_p_c_frame__m_8h_source.html#l00129">TTEthernetModel::doUnpacking()</a>.</p>
 
 </div>
 </div>
@@ -671,6 +660,8 @@ string displayString="b=15,15,rect,white,orange,5";
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a9b87c58902e8189c528129125b2eb8c5">TTEthernetModel::RCFrame</a>.</p>
 
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l01098">TTEthernetModel::SM_UNSYNC::SM_UNSYNC()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a40db4a5606b72d5edd31a5cf087d55c4"></a>
@@ -694,6 +685,8 @@ string displayString="b=15,15,rect,white,orange,5";
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l01098">TTEthernetModel::SM_UNSYNC::SM_UNSYNC()</a>.</p>
 
 </div>
 </div>
@@ -719,6 +712,8 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l01098">TTEthernetModel::SM_UNSYNC::SM_UNSYNC()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="adf48954713c4f9f14a80b2fa04c72575"></a>
@@ -742,6 +737,8 @@ string displayString="b=15,15,rect,white,orange,5";
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l01098">TTEthernetModel::SM_UNSYNC::SM_UNSYNC()</a>.</p>
 
 </div>
 </div>
@@ -767,6 +764,8 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l01098">TTEthernetModel::SM_UNSYNC::SM_UNSYNC()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a0d73d91af4fb078b2e625ccef226a434"></a>
@@ -791,7 +790,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00334">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00334">TTEthernetModel::TTEOutput::setTransparentClock()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l01098">TTEthernetModel::SM_UNSYNC::SM_UNSYNC()</a>.</p>
 
 </div>
 </div>
@@ -817,6 +816,8 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l01098">TTEthernetModel::SM_UNSYNC::SM_UNSYNC()</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -838,7 +839,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00073">73</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00093">93</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -860,7 +861,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00067">67</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00087">87</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -882,7 +883,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00068">68</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00088">88</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -904,7 +905,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00070">70</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00090">90</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -926,7 +927,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00069">69</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00089">89</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -948,7 +949,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00072">72</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00092">92</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -970,7 +971,7 @@ string displayString="b=15,15,rect,white,orange,5";
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00071">71</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_p_c_frame__m_8h_source.html#l00091">91</a> of file <a class="el" href="_p_c_frame__m_8h_source.html">PCFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -983,7 +984,7 @@ string displayString="b=15,15,rect,white,orange,5";
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a></li>
-    <li class="footer">Generated on Tue May 7 2013 11:17:27 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed May 15 2013 14:16:27 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
