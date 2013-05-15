@@ -4656,7 +4656,6 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
 								- pf->par("received_total").longValue()));
-
 		//CA FRAME ?
 		if (pf->getType() == CA) {
 			ev << "COMP FNCT SICM ENABLED MEMBER" << (pf)->getMembership_new()
