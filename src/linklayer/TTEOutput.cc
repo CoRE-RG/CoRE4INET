@@ -332,14 +332,14 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
 }
 
 void TTEOutput::setTransparentClock(PCFrame *pcf){
-    unsigned long transparentClock = pcf->getTransparent_clock();
+    uint64_t transparentClock = pcf->getTransparent_clock();
 
     //Add static delay for this port
     transparentClock+=secondsToTransparentClock(getParentModule()->par("static_tx_delay").doubleValue());
 
     //Add dynamic delay for the device
     cArray parlist = pcf->getParList();
-    unsigned long start = -1;
+    long start = -1;
     for(int i=0;i<parlist.size();i++){
         cMsgPar *parameter = dynamic_cast<cMsgPar*>(parlist.get(i));
         if(parameter){
