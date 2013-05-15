@@ -1,2 +1,5 @@
 /out
 *_m.*
+*.vec
+*.sca
+*.anf
