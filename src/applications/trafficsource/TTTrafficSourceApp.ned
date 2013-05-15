@@ -16,16 +16,22 @@
 package ttethernet.applications.trafficsource;
 
 //
-// TODO auto-generated module
+// Traffic source application used for time-triggered traffic generators.
 //
+// @see RCTrafficSourceApp
+//
+// @author Till Steinbach
 simple TTTrafficSourceApp extends TrafficSourceAppBase
 {
     parameters:
         @class(TTTrafficSourceApp);
         @display("i=,red");
         
+        //Time in the cycle at which the message is being send to the connected buffers
         double action_time @unit(s);
-
+        
+        //Modulo cycles: 1 means message is being send in each cycle, 2 means in every second cycle,
+        //and so on. 0 means never
         int modulo = default(1);
 
        

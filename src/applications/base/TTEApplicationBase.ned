@@ -16,18 +16,28 @@
 package ttethernet.applications.base;
 
 //
-// TODO auto-generated module
+// Abstract base application used for various application models.
+// Since this is an abstract module please do not instantiate it
 //
+//
+// @see TTEAPIApplicationBase.ned
+//
+// @author Till Steinbach
 simple TTEApplicationBase like ITTEApplication
 {
         parameters:
             @class(TTEApplicationBase);
+            
         	//Comma seperated list of buffer modules the application is allowed to use
         	string buffers = default("");
+        	
+        	//If true, buffer management is not used. Applications use their own methods to locate buffers
         	bool buffers_manual = default(false);
         gates:
-            input TTin @directIn @labels(CTFrame);
-            input RCin @directIn @labels(CTFrame);
+            //Input gate for the incoming time-triggered messages
+            input TTin @directIn @labels(TTFrame);
+            //Input gate for the incoming rate-constrained messages
+            input RCin @directIn @labels(RCFrame);
             //Input gate for the incoming SchedulerActionTimeEvent messages
             input schedulerIn @directIn;
             //Input gate for the incoming SynchronizationNotification messages
