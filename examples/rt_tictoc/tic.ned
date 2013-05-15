@@ -24,7 +24,7 @@ import ttethernet.buffer.RCQueueBuffer;
 //
 // tic: configuration in tic.ini.
 //
-// - Sends time-triggered messages at 1ms with VL-ID 100, receives VL-ID 101
+// - Sends time-triggered messages at 1ms with VL-ID 100, receives rate-constrained messages with VL-ID 101
 //
 module Tic extends TTEEtherHost
 {

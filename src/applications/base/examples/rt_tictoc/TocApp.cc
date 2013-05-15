@@ -30,10 +30,10 @@ void TocApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("TTin")){
         delete msg;
-        CTFrame *frame = new RCFrame("Response");
+        CTFrame *frame = new RCFrame("Toc");
         frame->setCtID(101);
 
-
+        EV << "Answering Tic Message with Toc Message\n";
         std::list<Buffer*> buffer = buffers[frame->getCtID()];
         for(std::list<Buffer*>::iterator buf = buffer.begin();
                                buf!=buffer.end();buf++){

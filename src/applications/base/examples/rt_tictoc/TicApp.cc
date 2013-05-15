@@ -35,10 +35,10 @@ void TicApp::initialize()
 void TicApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("schedulerIn")){
-        CTFrame *frame = new TTFrame("Request");
+        CTFrame *frame = new TTFrame("Tic");
         frame->setCtID(100);
 
-
+        EV << "Sending Tic Message\n";
         std::list<Buffer*> buffer = buffers[frame->getCtID()];
         for(std::list<Buffer*>::iterator buf = buffer.begin();
                                buf!=buffer.end();buf++){
