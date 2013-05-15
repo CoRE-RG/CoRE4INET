@@ -3,3 +3,5 @@
 *.vec
 *.sca
 *.anf
+*.tkenvrc
+*.tkenvlog
