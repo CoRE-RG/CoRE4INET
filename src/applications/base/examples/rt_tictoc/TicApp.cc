@@ -36,13 +36,16 @@ void TicApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("schedulerIn")){
         CTFrame *frame = new TTFrame("Request");
-        MACAddress srcAddr;
-        srcAddr.setAddress("03 04 05 06 00 64");
-        frame->setDest(srcAddr);
         frame->setCtID(100);
-        //ENDE TEST
-        if (getParentModule()->getSubmodule("vl_100_ctc"))
-            sendDirect(frame, getParentModule()->getSubmodule("vl_100_ctc")->gate("in"));
+
+
+        std::list<Buffer*> buffer = buffers[frame->getCtID()];
+        for(std::list<Buffer*>::iterator buf = buffer.begin();
+                               buf!=buffer.end();buf++){
+            Incoming* in = (Incoming *)(*buf)->gate("in")->getPathStartGate()->getOwner();
+            sendDirect(frame->dup(), in->gate("in"));
+        }
+        delete frame;
 
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;

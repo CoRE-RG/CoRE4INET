@@ -35,14 +35,18 @@ void TocApp::initialize()
 void TocApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("TTin")){
+        delete msg;
         CTFrame *frame = new RCFrame("Response");
-        MACAddress srcAddr;
-        srcAddr.setAddress("03 04 05 06 00 65");
-        frame->setDest(srcAddr);
         frame->setCtID(101);
-        //ENDE TEST
-        if (getParentModule()->getSubmodule("vl_101_ctc"))
-            sendDirect(frame, getParentModule()->getSubmodule("vl_101_ctc")->gate("in"));
+
+
+        std::list<Buffer*> buffer = buffers[frame->getCtID()];
+        for(std::list<Buffer*>::iterator buf = buffer.begin();
+                               buf!=buffer.end();buf++){
+            Incoming* in = (Incoming *)(*buf)->gate("in")->getPathStartGate()->getOwner();
+            sendDirect(frame->dup(), in->gate("in"));
+        }
+        delete frame;
     }
     else{
         delete msg;
