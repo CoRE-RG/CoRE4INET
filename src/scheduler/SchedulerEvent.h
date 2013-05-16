@@ -1,5 +1,5 @@
-#ifndef _SCHEDULEREVENT_M_H_
-#define _SCHEDULEREVENT_M_H_
+#ifndef __TTETHERNETMODELV2_SCHEDULEREVENT_H_
+#define __TTETHERNETMODELV2_SCHEDULEREVENT_H_
 
 #include <SchedulerMessage_m.h>
 
