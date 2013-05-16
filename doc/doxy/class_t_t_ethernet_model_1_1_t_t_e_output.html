@@ -981,14 +981,14 @@ Private Attributes</h2></td></tr>
 
 <p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                                               {</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> transparentClock = pcf-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a080d6a6fa849d7fffd072751c7817b68">getTransparent_clock</a>();</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    uint64_t transparentClock = pcf-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a080d6a6fa849d7fffd072751c7817b68">getTransparent_clock</a>();</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="comment">//Add static delay for this port</span></div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    transparentClock+=<a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(getParentModule()-&gt;par(<span class="stringliteral">&quot;static_tx_delay&quot;</span>).doubleValue());</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;</div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="comment">//Add dynamic delay for the device</span></div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    cArray parlist = pcf-&gt;getParList();</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start = -1;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordtype">long</span> start = -1;</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">if</span>(parameter){</div>
@@ -1334,7 +1334,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html">TTEOutput</a></li>
-    <li class="footer">Generated on Wed May 15 2013 14:16:28 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

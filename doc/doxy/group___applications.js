@@ -21,8 +21,17 @@ var group___applications =
     [ "TTEAPITestApplication", "class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html", [
       [ "startApplication", "class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html#ad9351f7c43a7b6053d953a122e328c3a", null ]
     ] ],
+    [ "TicApp", "class_t_t_ethernet_model_1_1_tic_app.html", [
+      [ "handleMessage", "class_t_t_ethernet_model_1_1_tic_app.html#aaf986893527bfb9aff0d6c636d3e30dc", null ],
+      [ "initialize", "class_t_t_ethernet_model_1_1_tic_app.html#adbe659f1b31a035a57d52753e8cfd189", null ]
+    ] ],
+    [ "TocApp", "class_t_t_ethernet_model_1_1_toc_app.html", [
+      [ "handleMessage", "class_t_t_ethernet_model_1_1_toc_app.html#a04a76e9e0e2f75fab5b4fadc6168b8df", null ],
+      [ "initialize", "class_t_t_ethernet_model_1_1_toc_app.html#ad8d03e910660fb5c47fb3fe382d0b89f", null ]
+    ] ],
     [ "TTEApplicationBase", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html", [
       [ "executeCallback", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e", null ],
+      [ "handleMessage", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html#afb51c02d68bc0e74091f9343c9d685b1", null ],
       [ "handleParameterChange", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a97851409093558c7b7483fd6bde8fcd4", null ],
       [ "buffers", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a3119d9508505d956452d04d89651b720", null ]
     ] ],

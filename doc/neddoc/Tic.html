@@ -1,0 +1,99 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Packet <i>Tic</i></h2>
+<b>File: <a href="src-applications-base-examples-rt_tictoc-TicToc.msg.html">src/applications/base/examples/rt_tictoc/TicToc.msg</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_tic.html" target="mainframe"><b>C++ definition</b></a></p>
+<p>(no description)</p><h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="Tic-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="Tic.html" title="Packet Tic" alt="" coords="5,6,77,34">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="Tic-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="Tic.html" title="Packet Tic" alt="" coords="5,83,77,111">
+<area shape="rect" id="node2" href="TicToc.html" title="Packet TicToc" alt="" coords="5,6,77,34">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="TicToc.html">TicToc</a>
+   </td>
+   <td>
+<i>packet</i>
+   </td>
+   <td>
+
+<p>Messages for the <a href="ttethernet.examples.rt_tictoc.rt_tictoc.html">rt_tictoc</a> Examples</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Fields:</h3>
+<table class="fieldstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="local">
+   <td>request</td>
+   <td>
+      <i>
+string</i>
+   </td>
+   <td>
+<p>Request message</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>byteLength</td>
+   <td>
+      <i>
+</i>
+   </td>
+   <td>
+<p>All messages use minimum size payload</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>count</td>
+   <td>
+      <i>
+unsigned int</i>
+   </td>
+   <td>
+<p>Counter transportet through the network</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>roundtrip_start</td>
+   <td>
+      <i>
+simtime_t</i>
+   </td>
+   <td>
+<p>Start time to calculate roundtrip time</p>
+</td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #800000; font-weight: bold; ">packet</span><span style="color: #000000; "> </span><span style="color: #000000; ">Tic</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TicToc</span><span style="color: #000000; ">
+{
+    </span><span style="color: #808080; font-style: italic; ">//Request message
+</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">request</span><span style="color: #000000; "> = </span><span style="color: #008000; ">&quot;Hello!&quot;</span><span style="color: #000000; ">;
+}
+
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

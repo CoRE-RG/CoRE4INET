@@ -1322,6 +1322,116 @@
     <namespace>TTEthernetModel</namespace>
   </compound>
   <compound kind="file">
+    <name>TicApp.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/examples/rt_tictoc/</path>
+    <filename>_tic_app_8cc</filename>
+    <includes id="_tic_app_8h" name="TicApp.h" local="yes" imported="no">TicApp.h</includes>
+    <includes id="_tic_toc__m_8h" name="TicToc_m.h" local="yes" imported="no">TicToc_m.h</includes>
+    <includes id="_t_t_e_scheduler_8h" name="TTEScheduler.h" local="yes" imported="no">TTEScheduler.h</includes>
+    <includes id="_t_t_frame__m_8h" name="TTFrame_m.h" local="yes" imported="no">TTFrame_m.h</includes>
+    <includes id="_r_c_frame__m_8h" name="RCFrame_m.h" local="yes" imported="no">RCFrame_m.h</includes>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>abe346c443aca1941888f991ef4118a84</anchor>
+      <arglist>(TicApp)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>TicApp.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/examples/rt_tictoc/</path>
+    <filename>_tic_app_8h</filename>
+    <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
+    <class kind="class">TTEthernetModel::TicApp</class>
+    <namespace>TTEthernetModel</namespace>
+  </compound>
+  <compound kind="file">
+    <name>TicToc_m.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/examples/rt_tictoc/</path>
+    <filename>_tic_toc__m_8h</filename>
+    <class kind="class">TTEthernetModel::TicToc</class>
+    <class kind="class">TTEthernetModel::Tic</class>
+    <class kind="class">TTEthernetModel::Toc</class>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="define">
+      <type>#define</type>
+      <name>MSGC_VERSION</name>
+      <anchorfile>_tic_toc__m_8h.html</anchorfile>
+      <anchor>a77f5ea746b531cbdbc322a93741e33a6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a5c0059e7cd379ee40c99cf33ef5282ee</anchor>
+      <arglist>(cCommBuffer *b, TicToc &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a5a8f3f99e7a6a37eafeb97af48d1592b</anchor>
+      <arglist>(cCommBuffer *b, TicToc &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a191f77a0cc0790e8369bcca2381ed16d</anchor>
+      <arglist>(cCommBuffer *b, Tic &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a93bad3a01e1025f791a6b55e6a766445</anchor>
+      <arglist>(cCommBuffer *b, Tic &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doPacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>ae80ee6b5485c1e61bc4c7f8ac75279c1</anchor>
+      <arglist>(cCommBuffer *b, Toc &amp;obj)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>doUnpacking</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a6dad992d750ef7705052ed628c7a030a</anchor>
+      <arglist>(cCommBuffer *b, Toc &amp;obj)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>TocApp.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/examples/rt_tictoc/</path>
+    <filename>_toc_app_8cc</filename>
+    <includes id="_toc_app_8h" name="TocApp.h" local="yes" imported="no">TocApp.h</includes>
+    <includes id="_tic_toc__m_8h" name="TicToc_m.h" local="yes" imported="no">TicToc_m.h</includes>
+    <includes id="_t_t_e_scheduler_8h" name="TTEScheduler.h" local="yes" imported="no">TTEScheduler.h</includes>
+    <includes id="_r_c_frame__m_8h" name="RCFrame_m.h" local="yes" imported="no">RCFrame_m.h</includes>
+    <includes id="_t_t_frame__m_8h" name="TTFrame_m.h" local="yes" imported="no">TTFrame_m.h</includes>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a903c8a39b2688dd0c1b5a661bbf5cb52</anchor>
+      <arglist>(TocApp)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>TocApp.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/examples/rt_tictoc/</path>
+    <filename>_toc_app_8h</filename>
+    <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
+    <class kind="class">TTEthernetModel::TocApp</class>
+    <namespace>TTEthernetModel</namespace>
+  </compound>
+  <compound kind="file">
     <name>TrafficSourceAppBase.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/trafficsource/</path>
     <filename>_traffic_source_app_base_8cc</filename>
@@ -1922,6 +2032,8 @@
     <filename>group___applications.html</filename>
     <class kind="class">TTEthernetModel::TTEAPIApplicationBase</class>
     <class kind="class">TTEthernetModel::TTEAPITestApplication</class>
+    <class kind="class">TTEthernetModel::TicApp</class>
+    <class kind="class">TTEthernetModel::TocApp</class>
     <class kind="class">TTEthernetModel::TTEApplicationBase</class>
     <class kind="class">TTEthernetModel::RCTrafficSourceApp</class>
     <class kind="class">TTEthernetModel::TrafficSourceAppBase</class>
@@ -1961,6 +2073,11 @@
     <class kind="class">TTEthernetModel::TTEAPIPriv</class>
     <class kind="class">TTEthernetModel::TTEAPIApplicationBase</class>
     <class kind="class">TTEthernetModel::TTEAPITestApplication</class>
+    <class kind="class">TTEthernetModel::TicApp</class>
+    <class kind="class">TTEthernetModel::TicToc</class>
+    <class kind="class">TTEthernetModel::Tic</class>
+    <class kind="class">TTEthernetModel::Toc</class>
+    <class kind="class">TTEthernetModel::TocApp</class>
     <class kind="class">TTEthernetModel::TTEApplicationBase</class>
     <class kind="class">TTEthernetModel::RCTrafficSourceApp</class>
     <class kind="class">TTEthernetModel::TrafficSourceAppBase</class>
@@ -2499,8 +2616,354 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>TTEthernetModel::TicApp</name>
+    <filename>class_t_t_ethernet_model_1_1_tic_app.html</filename>
+    <base>TTEthernetModel::TTEApplicationBase</base>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_app.html</anchorfile>
+      <anchor>adbe659f1b31a035a57d52753e8cfd189</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_app.html</anchorfile>
+      <anchor>aaf986893527bfb9aff0d6c636d3e30dc</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
+    <member kind="variable" protection="protected" static="yes">
+      <type>static simsignal_t</type>
+      <name>rxPkSignal</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_app.html</anchorfile>
+      <anchor>aa259f07fe156b6db36bce6c1994b9dab</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected" static="yes">
+      <type>static simsignal_t</type>
+      <name>roundtripSignal</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_app.html</anchorfile>
+      <anchor>a59fa5d43141720dede4d296fc29784fc</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::TicToc</name>
+    <filename>class_t_t_ethernet_model_1_1_tic_toc.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>TicToc</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>af2ffdbeaf5a21007c030f0b4887ea808</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>TicToc</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a57a430e315fbe59226c229a7ec42a1bf</anchor>
+      <arglist>(const TicToc &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~TicToc</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a5db95e3659f4d2e96d08c0ab088c8e79</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>TicToc &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a192907455f42bf526c42e1d309149260</anchor>
+      <arglist>(const TicToc &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual TicToc *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a3607feab8a34f1fc00212f79d5690053</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>aef8367fbe4acc5ebeb379c00122f1ec8</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>acb4aef0605fa3d2bd17944c11eeadb9e</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual unsigned int</type>
+      <name>getCount</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a155850d4af983d115e1995ee0a8cf4a0</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setCount</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a31604df46a50cdfe06959ff1fe222b56</anchor>
+      <arglist>(unsigned int count)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual simtime_t</type>
+      <name>getRoundtrip_start</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>ac1f7d4faba5a685d45eadb5b10964dcd</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setRoundtrip_start</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>ac8aa581e939b1a0f3e385a07c6d3e735</anchor>
+      <arglist>(simtime_t roundtrip_start)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a873229a8c082a1bf84cdcc70dc0cb33a</anchor>
+      <arglist>(const TicToc &amp;)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>unsigned int</type>
+      <name>count_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>ae38d0127ae9d494a28c874337bdc1361</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>simtime_t</type>
+      <name>roundtrip_start_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>a57b39a16e1b1ec28bdb5b93771cbbd20</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic_toc.html</anchorfile>
+      <anchor>af8b879578db3d5687d5577c6c36dff08</anchor>
+      <arglist>(const TicToc &amp;other)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::Tic</name>
+    <filename>class_t_t_ethernet_model_1_1_tic.html</filename>
+    <base>TTEthernetModel::TicToc</base>
+    <member kind="function">
+      <type></type>
+      <name>Tic</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>ad3c6ed015826411c123704952adbb6ce</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Tic</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>af842ac967e7b6c3bd2b0e10189c5e1d1</anchor>
+      <arglist>(const Tic &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~Tic</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>a4957ff187f998b72509f376cdbac1df3</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>Tic &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>a5507f7438bedc9e731b6081b9a65a3bd</anchor>
+      <arglist>(const Tic &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual Tic *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>a4006b32c42ca65ee179004d46fbd12aa</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>a7f655f0dca5f08d6d8fae6680a52ca58</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>a60e9be69bb9506d60cd85fce7e66347c</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const char *</type>
+      <name>getRequest</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>adfca1b48be1c4468a03e609bce286a0e</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setRequest</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>af1cdad82f0d7c5f5860bf49d45d688ab</anchor>
+      <arglist>(const char *request)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>a3eb46551688e94a8de49df97a5750b8b</anchor>
+      <arglist>(const Tic &amp;)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>opp_string</type>
+      <name>request_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>ad821cd508f5eb1d02384ae4a89b3d080</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_tic.html</anchorfile>
+      <anchor>aa985138665aad4f539eba91838478e1f</anchor>
+      <arglist>(const Tic &amp;other)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::Toc</name>
+    <filename>class_t_t_ethernet_model_1_1_toc.html</filename>
+    <base>TTEthernetModel::TicToc</base>
+    <member kind="function">
+      <type></type>
+      <name>Toc</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>a120f93d8f99c63d177a3375d521dbd3a</anchor>
+      <arglist>(const char *name=NULL, int kind=0)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Toc</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>aefe1d716d85c3b7583d50b2d840aa9d3</anchor>
+      <arglist>(const Toc &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~Toc</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>a69299f23aafa655d449e201bcc1649f2</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>Toc &amp;</type>
+      <name>operator=</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>a6b87121d9f62066901f1462739fddeca</anchor>
+      <arglist>(const Toc &amp;other)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual Toc *</type>
+      <name>dup</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>ab404156a5ee4105cbc304e4f54f88e27</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimPack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>af1b4e57d0b6e819833db1c128cd60526</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>parsimUnpack</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>af18384ce71e0fd3629659a03c68491de</anchor>
+      <arglist>(cCommBuffer *b)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual const char *</type>
+      <name>getResponse</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>a3968aef45161fd02f8bf6021a00b9f28</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>setResponse</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>a34ac77014a9546bc90f31622ebe0134f</anchor>
+      <arglist>(const char *response)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>operator==</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>ad666fb8b925aff90c45a1e80d9b22d39</anchor>
+      <arglist>(const Toc &amp;)</arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>opp_string</type>
+      <name>response_var</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>abe8e2b18c8445f18d061783e00a1d8b7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>copy</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc.html</anchorfile>
+      <anchor>a60387cc2c4397f991d6049699a28123e</anchor>
+      <arglist>(const Toc &amp;other)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::TocApp</name>
+    <filename>class_t_t_ethernet_model_1_1_toc_app.html</filename>
+    <base>TTEthernetModel::TTEApplicationBase</base>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc_app.html</anchorfile>
+      <anchor>ad8d03e910660fb5c47fb3fe382d0b89f</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_toc_app.html</anchorfile>
+      <anchor>a04a76e9e0e2f75fab5b4fadc6168b8df</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>TTEthernetModel::TTEApplicationBase</name>
     <filename>class_t_t_ethernet_model_1_1_t_t_e_application_base.html</filename>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_application_base.html</anchorfile>
+      <anchor>afb51c02d68bc0e74091f9343c9d685b1</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>TTEthernetModel::RCTrafficSourceApp</name>
@@ -7838,16 +8301,17 @@
   </compound>
   <compound kind="dir">
     <name>base</name>
-    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/</path>
-    <filename>dir_e1f4d9daf948ca3519fe69fdc6a66cf0.html</filename>
-    <file>TTEApplicationBase.cc</file>
-    <file>TTEApplicationBase.h</file>
-  </compound>
-  <compound kind="dir">
-    <name>base</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/base/</path>
     <filename>dir_dd9cf6547b3daea15d21a54802e373e4.html</filename>
     <file>TTE4INETDefs.h</file>
+  </compound>
+  <compound kind="dir">
+    <name>base</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/</path>
+    <filename>dir_e1f4d9daf948ca3519fe69fdc6a66cf0.html</filename>
+    <dir>examples</dir>
+    <file>TTEApplicationBase.cc</file>
+    <file>TTEApplicationBase.h</file>
   </compound>
   <compound kind="dir">
     <name>base</name>
@@ -7927,6 +8391,12 @@
     <file>TTFrame_m.h</file>
   </compound>
   <compound kind="dir">
+    <name>examples</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/examples/</path>
+    <filename>dir_e64abe416cfc552608dcd9832945385c.html</filename>
+    <dir>rt_tictoc</dir>
+  </compound>
+  <compound kind="dir">
     <name>HICompressionMaster</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/synchronisation/AS6802/HICompressionMaster/</path>
     <filename>dir_eae0ebdfb493e1664e86f689e870be02.html</filename>
@@ -7948,6 +8418,16 @@
     <file>TTEInput.h</file>
     <file>TTEOutput.cc</file>
     <file>TTEOutput.h</file>
+  </compound>
+  <compound kind="dir">
+    <name>rt_tictoc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/base/examples/rt_tictoc/</path>
+    <filename>dir_3bbd4bba1e09542a4c450a5725b77f15.html</filename>
+    <file>TicApp.cc</file>
+    <file>TicApp.h</file>
+    <file>TicToc_m.h</file>
+    <file>TocApp.cc</file>
+    <file>TocApp.h</file>
   </compound>
   <compound kind="dir">
     <name>scheduler</name>

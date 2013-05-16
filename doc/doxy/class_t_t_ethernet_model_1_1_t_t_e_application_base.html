@@ -123,11 +123,13 @@ Inheritance diagram for TTEthernetModel::TTEApplicationBase:</div>
  <div class="center">
   <img src="class_t_t_ethernet_model_1_1_t_t_e_application_base.png" usemap="#TTEthernetModel::TTEApplicationBase_map" alt=""/>
   <map id="TTEthernetModel::TTEApplicationBase_map" name="TTEthernetModel::TTEApplicationBase_map">
-<area href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html" title="Simple Test-Application." alt="TTEthernetModel::TrafficSourceAppBase" shape="rect" coords="128,112,375,136"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html" title="Base class for a TTEthernet-Application based on the TTEthernet-API." alt="TTEthernetModel::TTEAPIApplicationBase" shape="rect" coords="514,112,761,136"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html" title="Simple Test-Application." alt="TTEthernetModel::RCTrafficSourceApp" shape="rect" coords="0,168,247,192"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html" title="Simple Test-Application." alt="TTEthernetModel::TTTrafficSourceApp" shape="rect" coords="257,168,504,192"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html" title="Simple Test-Application based on the TTEthernet-API." alt="TTEthernetModel::TTEAPITestApplication" shape="rect" coords="514,168,761,192"/>
+<area href="class_t_t_ethernet_model_1_1_tic_app.html" title="Tic Application used for the rt_tictoc example." alt="TTEthernetModel::TicApp" shape="rect" coords="0,112,247,136"/>
+<area href="class_t_t_ethernet_model_1_1_toc_app.html" title="Toc Application used for the rt_tictoc example." alt="TTEthernetModel::TocApp" shape="rect" coords="257,112,504,136"/>
+<area href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html" title="Simple Test-Application." alt="TTEthernetModel::TrafficSourceAppBase" shape="rect" coords="514,112,761,136"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html" title="Base class for a TTEthernet-Application based on the TTEthernet-API." alt="TTEthernetModel::TTEAPIApplicationBase" shape="rect" coords="899,112,1146,136"/>
+<area href="class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html" title="Simple Test-Application." alt="TTEthernetModel::RCTrafficSourceApp" shape="rect" coords="385,168,632,192"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html" title="Simple Test-Application." alt="TTEthernetModel::TTTrafficSourceApp" shape="rect" coords="642,168,889,192"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html" title="Simple Test-Application based on the TTEthernet-API." alt="TTEthernetModel::TTEAPITestApplication" shape="rect" coords="899,168,1146,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -136,6 +138,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af1c61841a520d233a320651046f8c63e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#af1c61841a520d233a320651046f8c63e">executeCallback</a> (<a class="el" href="class_t_t_ethernet_model_1_1_callback.html">Callback</a> *cb)</td></tr>
 <tr class="memdesc:af1c61841a520d233a320651046f8c63e"><td class="mdescLeft">&#160;</td><td class="mdescRight">executes the given <a class="el" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> in the context of the Application  <a href="#af1c61841a520d233a320651046f8c63e">More...</a><br/></td></tr>
 <tr class="separator:af1c61841a520d233a320651046f8c63e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb51c02d68bc0e74091f9343c9d685b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#afb51c02d68bc0e74091f9343c9d685b1">handleMessage</a> (cMessage *msg)</td></tr>
+<tr class="memdesc:afb51c02d68bc0e74091f9343c9d685b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the bag on incoming RC-Frames (on RCin)  <a href="#afb51c02d68bc0e74091f9343c9d685b1">More...</a><br/></td></tr>
+<tr class="separator:afb51c02d68bc0e74091f9343c9d685b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97851409093558c7b7483fd6bde8fcd4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a97851409093558c7b7483fd6bde8fcd4">handleParameterChange</a> (const char *parname)</td></tr>
 <tr class="memdesc:a97851409093558c7b7483fd6bde8fcd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates a parameter has changed.  <a href="#a97851409093558c7b7483fd6bde8fcd4">More...</a><br/></td></tr>
 <tr class="separator:a97851409093558c7b7483fd6bde8fcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +197,52 @@ Protected Attributes</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
+<a class="anchor" id="afb51c02d68bc0e74091f9343c9d685b1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TTEthernetModel::TTEApplicationBase::handleMessage </td>
+          <td>(</td>
+          <td class="paramtype">cMessage *&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>resets the bag on incoming RC-Frames (on RCin) </p>
+<p>This method should be called from subclasses unless the module resets the bag on its own.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>parameter must be forwarded from subclass </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a6a91f5372abc6bd1edd29c797c5c087c">TTEthernetModel::TTEAPIApplicationBase</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html#ac619e3780c7d6ae2f1255eec306b49d6">TTEthernetModel::TTTrafficSourceApp</a>, <a class="el" href="class_t_t_ethernet_model_1_1_tic_app.html#aaf986893527bfb9aff0d6c636d3e30dc">TTEthernetModel::TicApp</a>, <a class="el" href="class_t_t_ethernet_model_1_1_toc_app.html#a04a76e9e0e2f75fab5b4fadc6168b8df">TTEthernetModel::TocApp</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html#a17f477a3954c6cea4837568e966d0dbe">TTEthernetModel::RCTrafficSourceApp</a>.</p>
+
+<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">29</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
+
+<p>Referenced by <a class="el" href="_tic_app_8cc_source.html#l00043">TTEthernetModel::TicApp::handleMessage()</a>, and <a class="el" href="_toc_app_8cc_source.html#l00031">TTEthernetModel::TocApp::handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;RCin&quot;</span>)){</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        RCBuffer *rcBuffer = <span class="keyword">dynamic_cast&lt;</span>RCBuffer*<span class="keyword">&gt;</span>(msg-&gt;getSenderModule());</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">if</span> (rcBuffer)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            rcBuffer-&gt;resetBag();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="a97851409093558c7b7483fd6bde8fcd4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -222,35 +273,35 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">29</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                                                                 {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a3119d9508505d956452d04d89651b720" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.clear();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">if</span>(ev.isGUI()){</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">//TODO check why this does not work</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    std::string buffersString = par(<span class="stringliteral">&quot;buffers&quot;</span>).stdstringValue();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::vector&lt;std::string&gt; bufferPaths;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator.">split</a>(buffersString,<span class="charliteral">&#39;,&#39;</span>,bufferPaths);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator bufferPath = bufferPaths.begin();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            bufferPath!=bufferPaths.end();bufferPath++){</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        cModule* module = simulation.getModuleByPath((*bufferPath).c_str());</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">if</span>(module){</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            Buffer *buffer = <span class="keyword">dynamic_cast&lt;</span>Buffer*<span class="keyword">&gt;</span> (module);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">if</span>(buffer &amp;&amp; buffer-&gt;hasPar(<span class="stringliteral">&quot;ct_id&quot;</span>)){</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a3119d9508505d956452d04d89651b720" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[buffer-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue()].push_back(buffer);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">if</span>(ev.isGUI()){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Module &quot;</span>&lt;&lt;(*bufferPath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved or is no CT-Buffer (TT or RC)!&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem Application Buffer!&quot;</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_application_base_8cc_source.html#l00038">38</a> of file <a class="el" href="_t_t_e_application_base_8cc_source.html">TTEApplicationBase.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                                                                 {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a3119d9508505d956452d04d89651b720" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>.clear();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span>(ev.isGUI()){</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">//TODO check why this does not work</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    std::string buffersString = par(<span class="stringliteral">&quot;buffers&quot;</span>).stdstringValue();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    std::vector&lt;std::string&gt; bufferPaths;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator.">split</a>(buffersString,<span class="charliteral">&#39;,&#39;</span>,bufferPaths);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator bufferPath = bufferPaths.begin();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            bufferPath!=bufferPaths.end();bufferPath++){</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        cModule* module = simulation.getModuleByPath((*bufferPath).c_str());</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span>(module){</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            Buffer *buffer = <span class="keyword">dynamic_cast&lt;</span>Buffer*<span class="keyword">&gt;</span> (module);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">if</span>(buffer &amp;&amp; buffer-&gt;hasPar(<span class="stringliteral">&quot;ct_id&quot;</span>)){</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a3119d9508505d956452d04d89651b720" title="Map of critical traffic identifies with their corresponding Buffers.">buffers</a>[buffer-&gt;par(<span class="stringliteral">&quot;ct_id&quot;</span>).longValue()].push_back(buffer);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span>(ev.isGUI()){</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Module &quot;</span>&lt;&lt;(*bufferPath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved or is no CT-Buffer (TT or RC)!&quot;</span>&lt;&lt;endl;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem Application Buffer!&quot;</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -277,7 +328,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_application_base_8h_source.html#l00043">43</a> of file <a class="el" href="_t_t_e_application_base_8h_source.html">TTEApplicationBase.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">handleParameterChange()</a>, <a class="el" href="_traffic_source_app_base_8cc_source.html#l00031">TTEthernetModel::TrafficSourceAppBase::sendMessage()</a>, <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00163">TTEthernetModel::TTEAPIApplicationBase::tte_get_ct_input_buf()</a>, and <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00087">TTEthernetModel::TTEAPIApplicationBase::tte_get_ct_output_buf()</a>.</p>
+<p>Referenced by <a class="el" href="_tic_app_8cc_source.html#l00043">TTEthernetModel::TicApp::handleMessage()</a>, <a class="el" href="_toc_app_8cc_source.html#l00031">TTEthernetModel::TocApp::handleMessage()</a>, <a class="el" href="_t_t_e_application_base_8cc_source.html#l00038">handleParameterChange()</a>, <a class="el" href="_traffic_source_app_base_8cc_source.html#l00031">TTEthernetModel::TrafficSourceAppBase::sendMessage()</a>, <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00163">TTEthernetModel::TTEAPIApplicationBase::tte_get_ct_input_buf()</a>, and <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00087">TTEthernetModel::TTEAPIApplicationBase::tte_get_ct_output_buf()</a>.</p>
 
 </div>
 </div>
@@ -291,7 +342,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html">TTEApplicationBase</a></li>
-    <li class="footer">Generated on Wed May 15 2013 14:16:27 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

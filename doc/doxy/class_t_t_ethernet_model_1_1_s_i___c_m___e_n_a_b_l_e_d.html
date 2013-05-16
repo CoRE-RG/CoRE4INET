@@ -631,287 +631,286 @@ unsigned int &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a c
 <div class="line"><a name="l04656"></a><span class="lineno"> 4656</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue())</div>
 <div class="line"><a name="l04657"></a><span class="lineno"> 4657</span>&#160;                        + (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>()</div>
 <div class="line"><a name="l04658"></a><span class="lineno"> 4658</span>&#160;                                - pf-&gt;par(<span class="stringliteral">&quot;received_total&quot;</span>).longValue()));</div>
-<div class="line"><a name="l04659"></a><span class="lineno"> 4659</span>&#160;</div>
-<div class="line"><a name="l04660"></a><span class="lineno"> 4660</span>&#160;        <span class="comment">//CA FRAME ?</span></div>
-<div class="line"><a name="l04661"></a><span class="lineno"> 4661</span>&#160;        <span class="keywordflow">if</span> (pf-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eadd95599e4fe0d23eef0bb3c80c877d2a">CA</a>) {</div>
-<div class="line"><a name="l04662"></a><span class="lineno"> 4662</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED MEMBER&quot;</span> &lt;&lt; (pf)-&gt;getMembership_new()</div>
-<div class="line"><a name="l04663"></a><span class="lineno"> 4663</span>&#160;                    &lt;&lt; endl;</div>
-<div class="line"><a name="l04664"></a><span class="lineno"> 4664</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED INT CYCL&quot;</span></div>
-<div class="line"><a name="l04665"></a><span class="lineno"> 4665</span>&#160;                    &lt;&lt; (pf)-&gt;getIntegration_cycle() &lt;&lt; endl;</div>
-<div class="line"><a name="l04666"></a><span class="lineno"> 4666</span>&#160;</div>
-<div class="line"><a name="l04667"></a><span class="lineno"> 4667</span>&#160;            FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;CA_FRAME&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l04668"></a><span class="lineno"> 4668</span>&#160;</div>
-<div class="line"><a name="l04669"></a><span class="lineno"> 4669</span>&#160;            f_event-&gt;setMember((pf)-&gt;getMembership_new());</div>
-<div class="line"><a name="l04670"></a><span class="lineno"> 4670</span>&#160;            f_event-&gt;setPcfType((pf)-&gt;getType());</div>
-<div class="line"><a name="l04671"></a><span class="lineno"> 4671</span>&#160;            f_event-&gt;setIntegrationCycle(pf-&gt;getIntegration_cycle());</div>
-<div class="line"><a name="l04672"></a><span class="lineno"> 4672</span>&#160;            <span class="comment">//f_event-&gt;setPit(permanence_pit);</span></div>
-<div class="line"><a name="l04673"></a><span class="lineno"> 4673</span>&#160;            f_event-&gt;setTimer(permanence_delay);</div>
-<div class="line"><a name="l04674"></a><span class="lineno"> 4674</span>&#160;            <span class="comment">//f_event-&gt;setAction_time(permanence_pit);</span></div>
-<div class="line"><a name="l04675"></a><span class="lineno"> 4675</span>&#160;            f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l04676"></a><span class="lineno"> 4676</span>&#160;            f_event-&gt;setSchedulingPriority(2);</div>
-<div class="line"><a name="l04677"></a><span class="lineno"> 4677</span>&#160;</div>
-<div class="line"><a name="l04678"></a><span class="lineno"> 4678</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
-<div class="line"><a name="l04679"></a><span class="lineno"> 4679</span>&#160;</div>
-<div class="line"><a name="l04680"></a><span class="lineno"> 4680</span>&#160;            <span class="keyword">delete</span> pf;</div>
-<div class="line"><a name="l04681"></a><span class="lineno"> 4681</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l04682"></a><span class="lineno"> 4682</span>&#160;</div>
-<div class="line"><a name="l04683"></a><span class="lineno"> 4683</span>&#160;        } <span class="comment">//gate RCin (PCF FRAME)</span></div>
-<div class="line"><a name="l04684"></a><span class="lineno"> 4684</span>&#160;</div>
-<div class="line"><a name="l04685"></a><span class="lineno"> 4685</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;ERROR COMP FUNC CA&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l04686"></a><span class="lineno"> 4686</span>&#160;        <span class="keyword">delete</span> pf;</div>
-<div class="line"><a name="l04687"></a><span class="lineno"> 4687</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l04688"></a><span class="lineno"> 4688</span>&#160;</div>
-<div class="line"><a name="l04689"></a><span class="lineno"> 4689</span>&#160;    }</div>
-<div class="line"><a name="l04690"></a><span class="lineno"> 4690</span>&#160;</div>
-<div class="line"><a name="l04691"></a><span class="lineno"> 4691</span>&#160;    <span class="keywordflow">if</span> ((message)-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>)) {</div>
-<div class="line"><a name="l04692"></a><span class="lineno"> 4692</span>&#160;</div>
-<div class="line"><a name="l04693"></a><span class="lineno"> 4693</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>((message)-&gt;getName()).compare(<span class="stringliteral">&quot;CA_FRAME&quot;</span>) == 0) {</div>
-<div class="line"><a name="l04694"></a><span class="lineno"> 4694</span>&#160;</div>
-<div class="line"><a name="l04695"></a><span class="lineno"> 4695</span>&#160;            FrameEvent *evt = <span class="keyword">dynamic_cast&lt;</span>FrameEvent *<span class="keyword">&gt;</span>(message);</div>
-<div class="line"><a name="l04696"></a><span class="lineno"> 4696</span>&#160;</div>
-<div class="line"><a name="l04697"></a><span class="lineno"> 4697</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED MEMBER(CA EVENT)&quot;</span></div>
-<div class="line"><a name="l04698"></a><span class="lineno"> 4698</span>&#160;                    &lt;&lt; (evt)-&gt;getMember() &lt;&lt; endl;</div>
-<div class="line"><a name="l04699"></a><span class="lineno"> 4699</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED INT CYCL(CA EVENT)&quot;</span></div>
-<div class="line"><a name="l04700"></a><span class="lineno"> 4700</span>&#160;                    &lt;&lt; (evt)-&gt;getPcfType() &lt;&lt; endl;</div>
-<div class="line"><a name="l04701"></a><span class="lineno"> 4701</span>&#160;</div>
-<div class="line"><a name="l04702"></a><span class="lineno"> 4702</span>&#160;            <span class="keywordtype">int</span> int_cycle = evt-&gt;getIntegrationCycle();</div>
-<div class="line"><a name="l04703"></a><span class="lineno"> 4703</span>&#160;</div>
-<div class="line"><a name="l04704"></a><span class="lineno"> 4704</span>&#160;            uint64_t current_ppt = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>();</div>
-<div class="line"><a name="l04705"></a><span class="lineno"> 4705</span>&#160;</div>
-<div class="line"><a name="l04706"></a><span class="lineno"> 4706</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(int_cycle)</div>
-<div class="line"><a name="l04707"></a><span class="lineno"> 4707</span>&#160;                    != <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;end()) {</div>
-<div class="line"><a name="l04708"></a><span class="lineno"> 4708</span>&#160;</div>
-<div class="line"><a name="l04709"></a><span class="lineno"> 4709</span>&#160;                <span class="comment">//there is a compression function with matching integration cycle collecting PCF&#39;s</span></div>
-<div class="line"><a name="l04710"></a><span class="lineno"> 4710</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(int_cycle)-&gt;second-&gt;push_back(</div>
-<div class="line"><a name="l04711"></a><span class="lineno"> 4711</span>&#160;                        pair&lt;unsigned int, unsigned int&gt;(evt-&gt;getMember(),</div>
-<div class="line"><a name="l04712"></a><span class="lineno"> 4712</span>&#160;                                current_ppt));</div>
-<div class="line"><a name="l04713"></a><span class="lineno"> 4713</span>&#160;                ev</div>
-<div class="line"><a name="l04714"></a><span class="lineno"> 4714</span>&#160;                        &lt;&lt; <span class="stringliteral">&quot;there is a compression function with matching integration cycle collecting PCF&#39;s&quot;</span></div>
-<div class="line"><a name="l04715"></a><span class="lineno"> 4715</span>&#160;                        &lt;&lt; endl;</div>
-<div class="line"><a name="l04716"></a><span class="lineno"> 4716</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;cycle_found&quot;</span> &lt;&lt; int_cycle &lt;&lt; endl;</div>
-<div class="line"><a name="l04717"></a><span class="lineno"> 4717</span>&#160;</div>
-<div class="line"><a name="l04718"></a><span class="lineno"> 4718</span>&#160;                <span class="keyword">delete</span> evt;</div>
-<div class="line"><a name="l04719"></a><span class="lineno"> 4719</span>&#160;                <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l04720"></a><span class="lineno"> 4720</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l04721"></a><span class="lineno"> 4721</span>&#160;                <span class="comment">//no compression function with matching integration cycle collecting PCF&#39;s</span></div>
-<div class="line"><a name="l04722"></a><span class="lineno"> 4722</span>&#160;                <span class="comment">//start collecting phase</span></div>
-<div class="line"><a name="l04723"></a><span class="lineno"> 4723</span>&#160;</div>
-<div class="line"><a name="l04724"></a><span class="lineno"> 4724</span>&#160;                vector&lt;pair&lt;unsigned int, unsigned int&gt; &gt; *ppt = <span class="keyword">new</span> vector&lt;</div>
-<div class="line"><a name="l04725"></a><span class="lineno"> 4725</span>&#160;                        pair&lt;unsigned int, unsigned int&gt; &gt;;</div>
-<div class="line"><a name="l04726"></a><span class="lineno"> 4726</span>&#160;</div>
-<div class="line"><a name="l04727"></a><span class="lineno"> 4727</span>&#160;                ppt-&gt;push_back(</div>
-<div class="line"><a name="l04728"></a><span class="lineno"> 4728</span>&#160;                        pair&lt;unsigned int, unsigned int&gt;(evt-&gt;getMember(),</div>
-<div class="line"><a name="l04729"></a><span class="lineno"> 4729</span>&#160;                                current_ppt));</div>
-<div class="line"><a name="l04730"></a><span class="lineno"> 4730</span>&#160;</div>
-<div class="line"><a name="l04731"></a><span class="lineno"> 4731</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;insert(</div>
-<div class="line"><a name="l04732"></a><span class="lineno"> 4732</span>&#160;                        pair&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>,</div>
-<div class="line"><a name="l04733"></a><span class="lineno"> 4733</span>&#160;                                vector&lt;pair&lt;unsigned int, unsigned int&gt; &gt; *&gt;(</div>
-<div class="line"><a name="l04734"></a><span class="lineno"> 4734</span>&#160;                                int_cycle, ppt));</div>
-<div class="line"><a name="l04735"></a><span class="lineno"> 4735</span>&#160;</div>
-<div class="line"><a name="l04736"></a><span class="lineno"> 4736</span>&#160;                OWCounter *ow = <span class="keyword">new</span> OWCounter(<span class="stringliteral">&quot;OW_CA&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l04737"></a><span class="lineno"> 4737</span>&#160;</div>
-<div class="line"><a name="l04738"></a><span class="lineno"> 4738</span>&#160;                ow-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l04739"></a><span class="lineno"> 4739</span>&#160;                ow-&gt;setSchedulingPriority(3);</div>
-<div class="line"><a name="l04740"></a><span class="lineno"> 4740</span>&#160;                ow-&gt;setTimer(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;observation_window_size&quot;</span>).longValue());</div>
-<div class="line"><a name="l04741"></a><span class="lineno"> 4741</span>&#160;</div>
-<div class="line"><a name="l04742"></a><span class="lineno"> 4742</span>&#160;                ow-&gt;setNumberOfObservationWindow(1);</div>
-<div class="line"><a name="l04743"></a><span class="lineno"> 4743</span>&#160;                ow-&gt;setLastNumberOfFrames(1);</div>
-<div class="line"><a name="l04744"></a><span class="lineno"> 4744</span>&#160;                ow-&gt;setIntegrationCycle(int_cycle);</div>
-<div class="line"><a name="l04745"></a><span class="lineno"> 4745</span>&#160;</div>
-<div class="line"><a name="l04746"></a><span class="lineno"> 4746</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(ow);</div>
-<div class="line"><a name="l04747"></a><span class="lineno"> 4747</span>&#160;</div>
-<div class="line"><a name="l04748"></a><span class="lineno"> 4748</span>&#160;                ev</div>
-<div class="line"><a name="l04749"></a><span class="lineno"> 4749</span>&#160;                        &lt;&lt; <span class="stringliteral">&quot;SI_CM_ENABLED Compression Function SI_CM_ENABLED:Collection Phase started&quot;</span></div>
-<div class="line"><a name="l04750"></a><span class="lineno"> 4750</span>&#160;                        &lt;&lt; endl;</div>
-<div class="line"><a name="l04751"></a><span class="lineno"> 4751</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_ENABLED Compression Fuction :(vector size)&quot;</span></div>
-<div class="line"><a name="l04752"></a><span class="lineno"> 4752</span>&#160;                        &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(int_cycle)-&gt;second-&gt;size()</div>
-<div class="line"><a name="l04753"></a><span class="lineno"> 4753</span>&#160;                        &lt;&lt; endl;</div>
-<div class="line"><a name="l04754"></a><span class="lineno"> 4754</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_ENABLED Compression Function : int cycle&quot;</span></div>
-<div class="line"><a name="l04755"></a><span class="lineno"> 4755</span>&#160;                        &lt;&lt; int_cycle &lt;&lt; endl;</div>
-<div class="line"><a name="l04756"></a><span class="lineno"> 4756</span>&#160;</div>
-<div class="line"><a name="l04757"></a><span class="lineno"> 4757</span>&#160;                <span class="keyword">delete</span> evt;</div>
-<div class="line"><a name="l04758"></a><span class="lineno"> 4758</span>&#160;                <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l04759"></a><span class="lineno"> 4759</span>&#160;            }</div>
-<div class="line"><a name="l04760"></a><span class="lineno"> 4760</span>&#160;</div>
-<div class="line"><a name="l04761"></a><span class="lineno"> 4761</span>&#160;        } <span class="comment">//handle FrameEvent</span></div>
-<div class="line"><a name="l04762"></a><span class="lineno"> 4762</span>&#160;</div>
-<div class="line"><a name="l04763"></a><span class="lineno"> 4763</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;OW_CA&quot;</span>) == 0) {</div>
-<div class="line"><a name="l04764"></a><span class="lineno"> 4764</span>&#160;</div>
-<div class="line"><a name="l04765"></a><span class="lineno"> 4765</span>&#160;            OWCounter *owc = <span class="keyword">dynamic_cast&lt;</span>OWCounter *<span class="keyword">&gt;</span>(message);</div>
-<div class="line"><a name="l04766"></a><span class="lineno"> 4766</span>&#160;</div>
-<div class="line"><a name="l04767"></a><span class="lineno"> 4767</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(owc-&gt;getIntegrationCycle())</div>
-<div class="line"><a name="l04768"></a><span class="lineno"> 4768</span>&#160;                    == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;end()) {</div>
-<div class="line"><a name="l04769"></a><span class="lineno"> 4769</span>&#160;</div>
-<div class="line"><a name="l04770"></a><span class="lineno"> 4770</span>&#160;                ev</div>
-<div class="line"><a name="l04771"></a><span class="lineno"> 4771</span>&#160;                        &lt;&lt; <span class="stringliteral">&quot;DEBUG Compression Funktion SI_CM_ENABLED : OW: no such integration cycle: &quot;</span></div>
-<div class="line"><a name="l04772"></a><span class="lineno"> 4772</span>&#160;                        &lt;&lt; owc-&gt;getIntegrationCycle() &lt;&lt; endl;</div>
-<div class="line"><a name="l04773"></a><span class="lineno"> 4773</span>&#160;</div>
-<div class="line"><a name="l04774"></a><span class="lineno"> 4774</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l04775"></a><span class="lineno"> 4775</span>&#160;                <span class="comment">//compression function is active</span></div>
-<div class="line"><a name="l04776"></a><span class="lineno"> 4776</span>&#160;                <span class="comment">//check for frames received during the last observation window</span></div>
-<div class="line"><a name="l04777"></a><span class="lineno"> 4777</span>&#160;                <span class="keywordflow">if</span> (owc-&gt;getLastNumberOfFrames()</div>
-<div class="line"><a name="l04778"></a><span class="lineno"> 4778</span>&#160;                        == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04779"></a><span class="lineno"> 4779</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second-&gt;size()) {</div>
-<div class="line"><a name="l04780"></a><span class="lineno"> 4780</span>&#160;                    <span class="comment">//no new pcf IN frames became permanent during the last observation window</span></div>
-<div class="line"><a name="l04781"></a><span class="lineno"> 4781</span>&#160;                    <span class="comment">// stop collecting</span></div>
-<div class="line"><a name="l04782"></a><span class="lineno"> 4782</span>&#160;                    <span class="comment">//check reaching max_observation_window</span></div>
-<div class="line"><a name="l04783"></a><span class="lineno"> 4783</span>&#160;                    <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
-<div class="line"><a name="l04784"></a><span class="lineno"> 4784</span>&#160;                            &lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
-<div class="line"><a name="l04785"></a><span class="lineno"> 4785</span>&#160;</div>
-<div class="line"><a name="l04786"></a><span class="lineno"> 4786</span>&#160;                        <span class="comment">//calculate the compression_funktion_delay and register the event for compressed pit</span></div>
-<div class="line"><a name="l04787"></a><span class="lineno"> 4787</span>&#160;</div>
-<div class="line"><a name="l04788"></a><span class="lineno"> 4788</span>&#160;                        <span class="keywordtype">int</span> restOW =</div>
-<div class="line"><a name="l04789"></a><span class="lineno"> 4789</span>&#160;                                (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()</div>
-<div class="line"><a name="l04790"></a><span class="lineno"> 4790</span>&#160;                                        - owc-&gt;getNumberOfObservationWindow())</div>
-<div class="line"><a name="l04791"></a><span class="lineno"> 4791</span>&#160;                                        * <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;observation_window_size&quot;</span>).longValue();</div>
-<div class="line"><a name="l04792"></a><span class="lineno"> 4792</span>&#160;</div>
-<div class="line"><a name="l04793"></a><span class="lineno"> 4793</span>&#160;                        <span class="keywordtype">int</span> compression_correction =</div>
-<div class="line"><a name="l04794"></a><span class="lineno"> 4794</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a82348318432501edc630883241bfa3ae">compress</a>(</div>
-<div class="line"><a name="l04795"></a><span class="lineno"> 4795</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04796"></a><span class="lineno"> 4796</span>&#160;                                                owc-&gt;getIntegrationCycle())-&gt;second,</div>
-<div class="line"><a name="l04797"></a><span class="lineno"> 4797</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
-<div class="line"><a name="l04798"></a><span class="lineno"> 4798</span>&#160;                                                <span class="stringliteral">&quot;faulty_synchronisatzation_masters&quot;</span>).longValue());</div>
-<div class="line"><a name="l04799"></a><span class="lineno"> 4799</span>&#160;</div>
-<div class="line"><a name="l04800"></a><span class="lineno"> 4800</span>&#160;                        <span class="keywordtype">int</span> compression_funktion_delay = restOW</div>
-<div class="line"><a name="l04801"></a><span class="lineno"> 4801</span>&#160;                                + <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;calculation_overhead&quot;</span>).longValue()</div>
-<div class="line"><a name="l04802"></a><span class="lineno"> 4802</span>&#160;                                + compression_correction;</div>
-<div class="line"><a name="l04803"></a><span class="lineno"> 4803</span>&#160;</div>
-<div class="line"><a name="l04804"></a><span class="lineno"> 4804</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> roundMember = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a7ecff4894d30876be2c5a1fbfca8afeb">setBits</a>(</div>
-<div class="line"><a name="l04805"></a><span class="lineno"> 4805</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04806"></a><span class="lineno"> 4806</span>&#160;                                        owc-&gt;getIntegrationCycle())-&gt;second);</div>
-<div class="line"><a name="l04807"></a><span class="lineno"> 4807</span>&#160;</div>
-<div class="line"><a name="l04808"></a><span class="lineno"> 4808</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;Compression Function round member&quot;</span> &lt;&lt; roundMember</div>
-<div class="line"><a name="l04809"></a><span class="lineno"> 4809</span>&#160;                                &lt;&lt; endl;</div>
-<div class="line"><a name="l04810"></a><span class="lineno"> 4810</span>&#160;</div>
-<div class="line"><a name="l04811"></a><span class="lineno"> 4811</span>&#160;                        CompressedPIT *cpit = <span class="keyword">new</span> CompressedPIT(<span class="stringliteral">&quot;CPCA&quot;</span>,</div>
-<div class="line"><a name="l04812"></a><span class="lineno"> 4812</span>&#160;                                <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l04813"></a><span class="lineno"> 4813</span>&#160;                        cpit-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l04814"></a><span class="lineno"> 4814</span>&#160;                        cpit-&gt;setTimer(compression_funktion_delay);</div>
-<div class="line"><a name="l04815"></a><span class="lineno"> 4815</span>&#160;                        cpit-&gt;setSchedulingPriority(3);</div>
-<div class="line"><a name="l04816"></a><span class="lineno"> 4816</span>&#160;                        cpit-&gt;setMembership_new(roundMember);</div>
-<div class="line"><a name="l04817"></a><span class="lineno"> 4817</span>&#160;                        <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04818"></a><span class="lineno"> 4818</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second;</div>
-<div class="line"><a name="l04819"></a><span class="lineno"> 4819</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;erase(owc-&gt;getIntegrationCycle());</div>
-<div class="line"><a name="l04820"></a><span class="lineno"> 4820</span>&#160;</div>
-<div class="line"><a name="l04821"></a><span class="lineno"> 4821</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(cpit);</div>
-<div class="line"><a name="l04822"></a><span class="lineno"> 4822</span>&#160;                        <span class="keyword">delete</span> owc;</div>
-<div class="line"><a name="l04823"></a><span class="lineno"> 4823</span>&#160;                        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l04824"></a><span class="lineno"> 4824</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
-<div class="line"><a name="l04825"></a><span class="lineno"> 4825</span>&#160;                            == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
-<div class="line"><a name="l04826"></a><span class="lineno"> 4826</span>&#160;</div>
-<div class="line"><a name="l04827"></a><span class="lineno"> 4827</span>&#160;                        <span class="comment">//calculate the compression_funktion_delay and register the event for compressed pit</span></div>
-<div class="line"><a name="l04828"></a><span class="lineno"> 4828</span>&#160;</div>
-<div class="line"><a name="l04829"></a><span class="lineno"> 4829</span>&#160;                        <span class="keywordtype">int</span> compression_correction =</div>
-<div class="line"><a name="l04830"></a><span class="lineno"> 4830</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a82348318432501edc630883241bfa3ae">compress</a>(</div>
-<div class="line"><a name="l04831"></a><span class="lineno"> 4831</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04832"></a><span class="lineno"> 4832</span>&#160;                                                owc-&gt;getIntegrationCycle())-&gt;second,</div>
-<div class="line"><a name="l04833"></a><span class="lineno"> 4833</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
-<div class="line"><a name="l04834"></a><span class="lineno"> 4834</span>&#160;                                                <span class="stringliteral">&quot;faulty_synchronisatzation_masters&quot;</span>).longValue());</div>
-<div class="line"><a name="l04835"></a><span class="lineno"> 4835</span>&#160;</div>
-<div class="line"><a name="l04836"></a><span class="lineno"> 4836</span>&#160;                        <span class="keywordtype">int</span> compression_funktion_delay = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
-<div class="line"><a name="l04837"></a><span class="lineno"> 4837</span>&#160;                                <span class="stringliteral">&quot;calculation_overhead&quot;</span>).longValue()</div>
-<div class="line"><a name="l04838"></a><span class="lineno"> 4838</span>&#160;                                + compression_correction;</div>
-<div class="line"><a name="l04839"></a><span class="lineno"> 4839</span>&#160;</div>
-<div class="line"><a name="l04840"></a><span class="lineno"> 4840</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> roundMember = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a7ecff4894d30876be2c5a1fbfca8afeb">setBits</a>(</div>
-<div class="line"><a name="l04841"></a><span class="lineno"> 4841</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04842"></a><span class="lineno"> 4842</span>&#160;                                        owc-&gt;getIntegrationCycle())-&gt;second);</div>
-<div class="line"><a name="l04843"></a><span class="lineno"> 4843</span>&#160;</div>
-<div class="line"><a name="l04844"></a><span class="lineno"> 4844</span>&#160;                        CompressedPIT *cpit = <span class="keyword">new</span> CompressedPIT(<span class="stringliteral">&quot;CPCA&quot;</span>,</div>
-<div class="line"><a name="l04845"></a><span class="lineno"> 4845</span>&#160;                                <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l04846"></a><span class="lineno"> 4846</span>&#160;                        cpit-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l04847"></a><span class="lineno"> 4847</span>&#160;                        cpit-&gt;setTimer(compression_funktion_delay);</div>
-<div class="line"><a name="l04848"></a><span class="lineno"> 4848</span>&#160;                        cpit-&gt;setSchedulingPriority(3);</div>
-<div class="line"><a name="l04849"></a><span class="lineno"> 4849</span>&#160;                        cpit-&gt;setMembership_new(roundMember);</div>
-<div class="line"><a name="l04850"></a><span class="lineno"> 4850</span>&#160;</div>
-<div class="line"><a name="l04851"></a><span class="lineno"> 4851</span>&#160;                        <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04852"></a><span class="lineno"> 4852</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second;</div>
-<div class="line"><a name="l04853"></a><span class="lineno"> 4853</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;erase(owc-&gt;getIntegrationCycle());</div>
-<div class="line"><a name="l04854"></a><span class="lineno"> 4854</span>&#160;</div>
-<div class="line"><a name="l04855"></a><span class="lineno"> 4855</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(cpit);</div>
-<div class="line"><a name="l04856"></a><span class="lineno"> 4856</span>&#160;                        <span class="keyword">delete</span> owc;</div>
-<div class="line"><a name="l04857"></a><span class="lineno"> 4857</span>&#160;                        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l04858"></a><span class="lineno"> 4858</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l04859"></a><span class="lineno"> 4859</span>&#160;                        ev</div>
-<div class="line"><a name="l04860"></a><span class="lineno"> 4860</span>&#160;                                &lt;&lt; <span class="stringliteral">&quot;Compression Function: Error END OBSERVATION WINDOW:&quot;</span></div>
-<div class="line"><a name="l04861"></a><span class="lineno"> 4861</span>&#160;                                &lt;&lt; owc-&gt;getNumberOfObservationWindow() &lt;&lt; endl;</div>
-<div class="line"><a name="l04862"></a><span class="lineno"> 4862</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;MAX Observation Window: &quot;</span></div>
-<div class="line"><a name="l04863"></a><span class="lineno"> 4863</span>&#160;                                &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()</div>
-<div class="line"><a name="l04864"></a><span class="lineno"> 4864</span>&#160;                                &lt;&lt; endl;</div>
-<div class="line"><a name="l04865"></a><span class="lineno"> 4865</span>&#160;                    }</div>
-<div class="line"><a name="l04866"></a><span class="lineno"> 4866</span>&#160;</div>
-<div class="line"><a name="l04867"></a><span class="lineno"> 4867</span>&#160;                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (owc-&gt;getLastNumberOfFrames()</div>
-<div class="line"><a name="l04868"></a><span class="lineno"> 4868</span>&#160;                        &lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(owc-&gt;getIntegrationCycle())-&gt;second-&gt;size()) {</div>
-<div class="line"><a name="l04869"></a><span class="lineno"> 4869</span>&#160;                    <span class="comment">//pcf became permanent during the last observation window, check max ow reached</span></div>
-<div class="line"><a name="l04870"></a><span class="lineno"> 4870</span>&#160;                    <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
-<div class="line"><a name="l04871"></a><span class="lineno"> 4871</span>&#160;                            &lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
-<div class="line"><a name="l04872"></a><span class="lineno"> 4872</span>&#160;                        <span class="comment">//open another ow</span></div>
-<div class="line"><a name="l04873"></a><span class="lineno"> 4873</span>&#160;                        <span class="keywordtype">int</span> new_ow = (owc-&gt;getNumberOfObservationWindow()) + 1;</div>
-<div class="line"><a name="l04874"></a><span class="lineno"> 4874</span>&#160;                        <span class="keywordtype">int</span> new_number_frames = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04875"></a><span class="lineno"> 4875</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second-&gt;size();</div>
-<div class="line"><a name="l04876"></a><span class="lineno"> 4876</span>&#160;</div>
-<div class="line"><a name="l04877"></a><span class="lineno"> 4877</span>&#160;                        owc-&gt;setNumberOfObservationWindow(new_ow);</div>
-<div class="line"><a name="l04878"></a><span class="lineno"> 4878</span>&#160;                        owc-&gt;setLastNumberOfFrames(new_number_frames);</div>
-<div class="line"><a name="l04879"></a><span class="lineno"> 4879</span>&#160;</div>
-<div class="line"><a name="l04880"></a><span class="lineno"> 4880</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(owc);</div>
-<div class="line"><a name="l04881"></a><span class="lineno"> 4881</span>&#160;</div>
-<div class="line"><a name="l04882"></a><span class="lineno"> 4882</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
-<div class="line"><a name="l04883"></a><span class="lineno"> 4883</span>&#160;                            == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
-<div class="line"><a name="l04884"></a><span class="lineno"> 4884</span>&#160;                        <span class="comment">//max_ow_reached</span></div>
-<div class="line"><a name="l04885"></a><span class="lineno"> 4885</span>&#160;                        <span class="comment">//stop collecting</span></div>
-<div class="line"><a name="l04886"></a><span class="lineno"> 4886</span>&#160;                        <span class="comment">//calculate the compression_funktion_delay and register the event for compressed pit</span></div>
-<div class="line"><a name="l04887"></a><span class="lineno"> 4887</span>&#160;</div>
-<div class="line"><a name="l04888"></a><span class="lineno"> 4888</span>&#160;                        <span class="keywordtype">int</span> compression_correction =</div>
-<div class="line"><a name="l04889"></a><span class="lineno"> 4889</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a82348318432501edc630883241bfa3ae">compress</a>(</div>
-<div class="line"><a name="l04890"></a><span class="lineno"> 4890</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04891"></a><span class="lineno"> 4891</span>&#160;                                                owc-&gt;getIntegrationCycle())-&gt;second,</div>
-<div class="line"><a name="l04892"></a><span class="lineno"> 4892</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
-<div class="line"><a name="l04893"></a><span class="lineno"> 4893</span>&#160;                                                <span class="stringliteral">&quot;faulty_synchronisatzation_masters&quot;</span>).longValue());</div>
-<div class="line"><a name="l04894"></a><span class="lineno"> 4894</span>&#160;</div>
-<div class="line"><a name="l04895"></a><span class="lineno"> 4895</span>&#160;                        <span class="keywordtype">int</span> compression_funktion_delay = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
-<div class="line"><a name="l04896"></a><span class="lineno"> 4896</span>&#160;                                <span class="stringliteral">&quot;calculation_overhead&quot;</span>).longValue()</div>
-<div class="line"><a name="l04897"></a><span class="lineno"> 4897</span>&#160;                                + compression_correction;</div>
-<div class="line"><a name="l04898"></a><span class="lineno"> 4898</span>&#160;</div>
-<div class="line"><a name="l04899"></a><span class="lineno"> 4899</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> roundMember = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a7ecff4894d30876be2c5a1fbfca8afeb">setBits</a>(</div>
-<div class="line"><a name="l04900"></a><span class="lineno"> 4900</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04901"></a><span class="lineno"> 4901</span>&#160;                                        owc-&gt;getIntegrationCycle())-&gt;second);</div>
-<div class="line"><a name="l04902"></a><span class="lineno"> 4902</span>&#160;</div>
-<div class="line"><a name="l04903"></a><span class="lineno"> 4903</span>&#160;                        CompressedPIT *cpit = <span class="keyword">new</span> CompressedPIT(<span class="stringliteral">&quot;CPCA&quot;</span>,</div>
-<div class="line"><a name="l04904"></a><span class="lineno"> 4904</span>&#160;                                <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l04905"></a><span class="lineno"> 4905</span>&#160;                        cpit-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l04906"></a><span class="lineno"> 4906</span>&#160;                        cpit-&gt;setTimer(compression_funktion_delay);</div>
-<div class="line"><a name="l04907"></a><span class="lineno"> 4907</span>&#160;                        cpit-&gt;setSchedulingPriority(3);</div>
-<div class="line"><a name="l04908"></a><span class="lineno"> 4908</span>&#160;                        cpit-&gt;setMembership_new(roundMember);</div>
-<div class="line"><a name="l04909"></a><span class="lineno"> 4909</span>&#160;</div>
-<div class="line"><a name="l04910"></a><span class="lineno"> 4910</span>&#160;                        <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
-<div class="line"><a name="l04911"></a><span class="lineno"> 4911</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second;</div>
-<div class="line"><a name="l04912"></a><span class="lineno"> 4912</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;erase(owc-&gt;getIntegrationCycle());</div>
-<div class="line"><a name="l04913"></a><span class="lineno"> 4913</span>&#160;</div>
-<div class="line"><a name="l04914"></a><span class="lineno"> 4914</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(cpit);</div>
-<div class="line"><a name="l04915"></a><span class="lineno"> 4915</span>&#160;                        <span class="keyword">delete</span> owc;</div>
-<div class="line"><a name="l04916"></a><span class="lineno"> 4916</span>&#160;                        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l04917"></a><span class="lineno"> 4917</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l04918"></a><span class="lineno"> 4918</span>&#160;                        ev</div>
-<div class="line"><a name="l04919"></a><span class="lineno"> 4919</span>&#160;                                &lt;&lt; <span class="stringliteral">&quot;Compression Function: Error END OBSERVATION WINDOW:&quot;</span></div>
-<div class="line"><a name="l04920"></a><span class="lineno"> 4920</span>&#160;                                &lt;&lt; owc-&gt;getNumberOfObservationWindow() &lt;&lt; endl;</div>
-<div class="line"><a name="l04921"></a><span class="lineno"> 4921</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;MAX Observation Window: &quot;</span></div>
-<div class="line"><a name="l04922"></a><span class="lineno"> 4922</span>&#160;                                &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()</div>
-<div class="line"><a name="l04923"></a><span class="lineno"> 4923</span>&#160;                                &lt;&lt; endl;</div>
-<div class="line"><a name="l04924"></a><span class="lineno"> 4924</span>&#160;</div>
-<div class="line"><a name="l04925"></a><span class="lineno"> 4925</span>&#160;                    }</div>
-<div class="line"><a name="l04926"></a><span class="lineno"> 4926</span>&#160;                    <span class="comment">//pcf became permanent during the last observation window, check max ow reached</span></div>
-<div class="line"><a name="l04927"></a><span class="lineno"> 4927</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l04928"></a><span class="lineno"> 4928</span>&#160;                    ev</div>
-<div class="line"><a name="l04929"></a><span class="lineno"> 4929</span>&#160;                            &lt;&lt; <span class="stringliteral">&quot;Compression Function: Error owc-&gt;getLastNumberOfFrames() &gt; compression_stack-&gt;find(owc-&gt;getIntegrationCycle())-&gt;second-&gt;size()&quot;</span></div>
-<div class="line"><a name="l04930"></a><span class="lineno"> 4930</span>&#160;                            &lt;&lt; owc-&gt;getNumberOfObservationWindow() &lt;&lt; endl;</div>
-<div class="line"><a name="l04931"></a><span class="lineno"> 4931</span>&#160;                }</div>
-<div class="line"><a name="l04932"></a><span class="lineno"> 4932</span>&#160;</div>
-<div class="line"><a name="l04933"></a><span class="lineno"> 4933</span>&#160;            } <span class="comment">//compression Function witch matching integration cycle found</span></div>
-<div class="line"><a name="l04934"></a><span class="lineno"> 4934</span>&#160;</div>
-<div class="line"><a name="l04935"></a><span class="lineno"> 4935</span>&#160;        } <span class="comment">//OW</span></div>
-<div class="line"><a name="l04936"></a><span class="lineno"> 4936</span>&#160;</div>
-<div class="line"><a name="l04937"></a><span class="lineno"> 4937</span>&#160;    } <span class="comment">//schedulerIn</span></div>
-<div class="line"><a name="l04938"></a><span class="lineno"> 4938</span>&#160;</div>
-<div class="line"><a name="l04939"></a><span class="lineno"> 4939</span>&#160;}</div>
+<div class="line"><a name="l04659"></a><span class="lineno"> 4659</span>&#160;        <span class="comment">//CA FRAME ?</span></div>
+<div class="line"><a name="l04660"></a><span class="lineno"> 4660</span>&#160;        <span class="keywordflow">if</span> (pf-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eadd95599e4fe0d23eef0bb3c80c877d2a">CA</a>) {</div>
+<div class="line"><a name="l04661"></a><span class="lineno"> 4661</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED MEMBER&quot;</span> &lt;&lt; (pf)-&gt;getMembership_new()</div>
+<div class="line"><a name="l04662"></a><span class="lineno"> 4662</span>&#160;                    &lt;&lt; endl;</div>
+<div class="line"><a name="l04663"></a><span class="lineno"> 4663</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED INT CYCL&quot;</span></div>
+<div class="line"><a name="l04664"></a><span class="lineno"> 4664</span>&#160;                    &lt;&lt; (pf)-&gt;getIntegration_cycle() &lt;&lt; endl;</div>
+<div class="line"><a name="l04665"></a><span class="lineno"> 4665</span>&#160;</div>
+<div class="line"><a name="l04666"></a><span class="lineno"> 4666</span>&#160;            FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;CA_FRAME&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l04667"></a><span class="lineno"> 4667</span>&#160;</div>
+<div class="line"><a name="l04668"></a><span class="lineno"> 4668</span>&#160;            f_event-&gt;setMember((pf)-&gt;getMembership_new());</div>
+<div class="line"><a name="l04669"></a><span class="lineno"> 4669</span>&#160;            f_event-&gt;setPcfType((pf)-&gt;getType());</div>
+<div class="line"><a name="l04670"></a><span class="lineno"> 4670</span>&#160;            f_event-&gt;setIntegrationCycle(pf-&gt;getIntegration_cycle());</div>
+<div class="line"><a name="l04671"></a><span class="lineno"> 4671</span>&#160;            <span class="comment">//f_event-&gt;setPit(permanence_pit);</span></div>
+<div class="line"><a name="l04672"></a><span class="lineno"> 4672</span>&#160;            f_event-&gt;setTimer(permanence_delay);</div>
+<div class="line"><a name="l04673"></a><span class="lineno"> 4673</span>&#160;            <span class="comment">//f_event-&gt;setAction_time(permanence_pit);</span></div>
+<div class="line"><a name="l04674"></a><span class="lineno"> 4674</span>&#160;            f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l04675"></a><span class="lineno"> 4675</span>&#160;            f_event-&gt;setSchedulingPriority(2);</div>
+<div class="line"><a name="l04676"></a><span class="lineno"> 4676</span>&#160;</div>
+<div class="line"><a name="l04677"></a><span class="lineno"> 4677</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
+<div class="line"><a name="l04678"></a><span class="lineno"> 4678</span>&#160;</div>
+<div class="line"><a name="l04679"></a><span class="lineno"> 4679</span>&#160;            <span class="keyword">delete</span> pf;</div>
+<div class="line"><a name="l04680"></a><span class="lineno"> 4680</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l04681"></a><span class="lineno"> 4681</span>&#160;</div>
+<div class="line"><a name="l04682"></a><span class="lineno"> 4682</span>&#160;        } <span class="comment">//gate RCin (PCF FRAME)</span></div>
+<div class="line"><a name="l04683"></a><span class="lineno"> 4683</span>&#160;</div>
+<div class="line"><a name="l04684"></a><span class="lineno"> 4684</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;ERROR COMP FUNC CA&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l04685"></a><span class="lineno"> 4685</span>&#160;        <span class="keyword">delete</span> pf;</div>
+<div class="line"><a name="l04686"></a><span class="lineno"> 4686</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l04687"></a><span class="lineno"> 4687</span>&#160;</div>
+<div class="line"><a name="l04688"></a><span class="lineno"> 4688</span>&#160;    }</div>
+<div class="line"><a name="l04689"></a><span class="lineno"> 4689</span>&#160;</div>
+<div class="line"><a name="l04690"></a><span class="lineno"> 4690</span>&#160;    <span class="keywordflow">if</span> ((message)-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>)) {</div>
+<div class="line"><a name="l04691"></a><span class="lineno"> 4691</span>&#160;</div>
+<div class="line"><a name="l04692"></a><span class="lineno"> 4692</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>((message)-&gt;getName()).compare(<span class="stringliteral">&quot;CA_FRAME&quot;</span>) == 0) {</div>
+<div class="line"><a name="l04693"></a><span class="lineno"> 4693</span>&#160;</div>
+<div class="line"><a name="l04694"></a><span class="lineno"> 4694</span>&#160;            FrameEvent *evt = <span class="keyword">dynamic_cast&lt;</span>FrameEvent *<span class="keyword">&gt;</span>(message);</div>
+<div class="line"><a name="l04695"></a><span class="lineno"> 4695</span>&#160;</div>
+<div class="line"><a name="l04696"></a><span class="lineno"> 4696</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED MEMBER(CA EVENT)&quot;</span></div>
+<div class="line"><a name="l04697"></a><span class="lineno"> 4697</span>&#160;                    &lt;&lt; (evt)-&gt;getMember() &lt;&lt; endl;</div>
+<div class="line"><a name="l04698"></a><span class="lineno"> 4698</span>&#160;            ev &lt;&lt; <span class="stringliteral">&quot;COMP FNCT SICM ENABLED INT CYCL(CA EVENT)&quot;</span></div>
+<div class="line"><a name="l04699"></a><span class="lineno"> 4699</span>&#160;                    &lt;&lt; (evt)-&gt;getPcfType() &lt;&lt; endl;</div>
+<div class="line"><a name="l04700"></a><span class="lineno"> 4700</span>&#160;</div>
+<div class="line"><a name="l04701"></a><span class="lineno"> 4701</span>&#160;            <span class="keywordtype">int</span> int_cycle = evt-&gt;getIntegrationCycle();</div>
+<div class="line"><a name="l04702"></a><span class="lineno"> 4702</span>&#160;</div>
+<div class="line"><a name="l04703"></a><span class="lineno"> 4703</span>&#160;            uint64_t current_ppt = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>();</div>
+<div class="line"><a name="l04704"></a><span class="lineno"> 4704</span>&#160;</div>
+<div class="line"><a name="l04705"></a><span class="lineno"> 4705</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(int_cycle)</div>
+<div class="line"><a name="l04706"></a><span class="lineno"> 4706</span>&#160;                    != <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;end()) {</div>
+<div class="line"><a name="l04707"></a><span class="lineno"> 4707</span>&#160;</div>
+<div class="line"><a name="l04708"></a><span class="lineno"> 4708</span>&#160;                <span class="comment">//there is a compression function with matching integration cycle collecting PCF&#39;s</span></div>
+<div class="line"><a name="l04709"></a><span class="lineno"> 4709</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(int_cycle)-&gt;second-&gt;push_back(</div>
+<div class="line"><a name="l04710"></a><span class="lineno"> 4710</span>&#160;                        pair&lt;unsigned int, unsigned int&gt;(evt-&gt;getMember(),</div>
+<div class="line"><a name="l04711"></a><span class="lineno"> 4711</span>&#160;                                current_ppt));</div>
+<div class="line"><a name="l04712"></a><span class="lineno"> 4712</span>&#160;                ev</div>
+<div class="line"><a name="l04713"></a><span class="lineno"> 4713</span>&#160;                        &lt;&lt; <span class="stringliteral">&quot;there is a compression function with matching integration cycle collecting PCF&#39;s&quot;</span></div>
+<div class="line"><a name="l04714"></a><span class="lineno"> 4714</span>&#160;                        &lt;&lt; endl;</div>
+<div class="line"><a name="l04715"></a><span class="lineno"> 4715</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;cycle_found&quot;</span> &lt;&lt; int_cycle &lt;&lt; endl;</div>
+<div class="line"><a name="l04716"></a><span class="lineno"> 4716</span>&#160;</div>
+<div class="line"><a name="l04717"></a><span class="lineno"> 4717</span>&#160;                <span class="keyword">delete</span> evt;</div>
+<div class="line"><a name="l04718"></a><span class="lineno"> 4718</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l04719"></a><span class="lineno"> 4719</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l04720"></a><span class="lineno"> 4720</span>&#160;                <span class="comment">//no compression function with matching integration cycle collecting PCF&#39;s</span></div>
+<div class="line"><a name="l04721"></a><span class="lineno"> 4721</span>&#160;                <span class="comment">//start collecting phase</span></div>
+<div class="line"><a name="l04722"></a><span class="lineno"> 4722</span>&#160;</div>
+<div class="line"><a name="l04723"></a><span class="lineno"> 4723</span>&#160;                vector&lt;pair&lt;unsigned int, unsigned int&gt; &gt; *ppt = <span class="keyword">new</span> vector&lt;</div>
+<div class="line"><a name="l04724"></a><span class="lineno"> 4724</span>&#160;                        pair&lt;unsigned int, unsigned int&gt; &gt;;</div>
+<div class="line"><a name="l04725"></a><span class="lineno"> 4725</span>&#160;</div>
+<div class="line"><a name="l04726"></a><span class="lineno"> 4726</span>&#160;                ppt-&gt;push_back(</div>
+<div class="line"><a name="l04727"></a><span class="lineno"> 4727</span>&#160;                        pair&lt;unsigned int, unsigned int&gt;(evt-&gt;getMember(),</div>
+<div class="line"><a name="l04728"></a><span class="lineno"> 4728</span>&#160;                                current_ppt));</div>
+<div class="line"><a name="l04729"></a><span class="lineno"> 4729</span>&#160;</div>
+<div class="line"><a name="l04730"></a><span class="lineno"> 4730</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;insert(</div>
+<div class="line"><a name="l04731"></a><span class="lineno"> 4731</span>&#160;                        pair&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>,</div>
+<div class="line"><a name="l04732"></a><span class="lineno"> 4732</span>&#160;                                vector&lt;pair&lt;unsigned int, unsigned int&gt; &gt; *&gt;(</div>
+<div class="line"><a name="l04733"></a><span class="lineno"> 4733</span>&#160;                                int_cycle, ppt));</div>
+<div class="line"><a name="l04734"></a><span class="lineno"> 4734</span>&#160;</div>
+<div class="line"><a name="l04735"></a><span class="lineno"> 4735</span>&#160;                OWCounter *ow = <span class="keyword">new</span> OWCounter(<span class="stringliteral">&quot;OW_CA&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l04736"></a><span class="lineno"> 4736</span>&#160;</div>
+<div class="line"><a name="l04737"></a><span class="lineno"> 4737</span>&#160;                ow-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l04738"></a><span class="lineno"> 4738</span>&#160;                ow-&gt;setSchedulingPriority(3);</div>
+<div class="line"><a name="l04739"></a><span class="lineno"> 4739</span>&#160;                ow-&gt;setTimer(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;observation_window_size&quot;</span>).longValue());</div>
+<div class="line"><a name="l04740"></a><span class="lineno"> 4740</span>&#160;</div>
+<div class="line"><a name="l04741"></a><span class="lineno"> 4741</span>&#160;                ow-&gt;setNumberOfObservationWindow(1);</div>
+<div class="line"><a name="l04742"></a><span class="lineno"> 4742</span>&#160;                ow-&gt;setLastNumberOfFrames(1);</div>
+<div class="line"><a name="l04743"></a><span class="lineno"> 4743</span>&#160;                ow-&gt;setIntegrationCycle(int_cycle);</div>
+<div class="line"><a name="l04744"></a><span class="lineno"> 4744</span>&#160;</div>
+<div class="line"><a name="l04745"></a><span class="lineno"> 4745</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(ow);</div>
+<div class="line"><a name="l04746"></a><span class="lineno"> 4746</span>&#160;</div>
+<div class="line"><a name="l04747"></a><span class="lineno"> 4747</span>&#160;                ev</div>
+<div class="line"><a name="l04748"></a><span class="lineno"> 4748</span>&#160;                        &lt;&lt; <span class="stringliteral">&quot;SI_CM_ENABLED Compression Function SI_CM_ENABLED:Collection Phase started&quot;</span></div>
+<div class="line"><a name="l04749"></a><span class="lineno"> 4749</span>&#160;                        &lt;&lt; endl;</div>
+<div class="line"><a name="l04750"></a><span class="lineno"> 4750</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_ENABLED Compression Fuction :(vector size)&quot;</span></div>
+<div class="line"><a name="l04751"></a><span class="lineno"> 4751</span>&#160;                        &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(int_cycle)-&gt;second-&gt;size()</div>
+<div class="line"><a name="l04752"></a><span class="lineno"> 4752</span>&#160;                        &lt;&lt; endl;</div>
+<div class="line"><a name="l04753"></a><span class="lineno"> 4753</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_ENABLED Compression Function : int cycle&quot;</span></div>
+<div class="line"><a name="l04754"></a><span class="lineno"> 4754</span>&#160;                        &lt;&lt; int_cycle &lt;&lt; endl;</div>
+<div class="line"><a name="l04755"></a><span class="lineno"> 4755</span>&#160;</div>
+<div class="line"><a name="l04756"></a><span class="lineno"> 4756</span>&#160;                <span class="keyword">delete</span> evt;</div>
+<div class="line"><a name="l04757"></a><span class="lineno"> 4757</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l04758"></a><span class="lineno"> 4758</span>&#160;            }</div>
+<div class="line"><a name="l04759"></a><span class="lineno"> 4759</span>&#160;</div>
+<div class="line"><a name="l04760"></a><span class="lineno"> 4760</span>&#160;        } <span class="comment">//handle FrameEvent</span></div>
+<div class="line"><a name="l04761"></a><span class="lineno"> 4761</span>&#160;</div>
+<div class="line"><a name="l04762"></a><span class="lineno"> 4762</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;OW_CA&quot;</span>) == 0) {</div>
+<div class="line"><a name="l04763"></a><span class="lineno"> 4763</span>&#160;</div>
+<div class="line"><a name="l04764"></a><span class="lineno"> 4764</span>&#160;            OWCounter *owc = <span class="keyword">dynamic_cast&lt;</span>OWCounter *<span class="keyword">&gt;</span>(message);</div>
+<div class="line"><a name="l04765"></a><span class="lineno"> 4765</span>&#160;</div>
+<div class="line"><a name="l04766"></a><span class="lineno"> 4766</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(owc-&gt;getIntegrationCycle())</div>
+<div class="line"><a name="l04767"></a><span class="lineno"> 4767</span>&#160;                    == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;end()) {</div>
+<div class="line"><a name="l04768"></a><span class="lineno"> 4768</span>&#160;</div>
+<div class="line"><a name="l04769"></a><span class="lineno"> 4769</span>&#160;                ev</div>
+<div class="line"><a name="l04770"></a><span class="lineno"> 4770</span>&#160;                        &lt;&lt; <span class="stringliteral">&quot;DEBUG Compression Funktion SI_CM_ENABLED : OW: no such integration cycle: &quot;</span></div>
+<div class="line"><a name="l04771"></a><span class="lineno"> 4771</span>&#160;                        &lt;&lt; owc-&gt;getIntegrationCycle() &lt;&lt; endl;</div>
+<div class="line"><a name="l04772"></a><span class="lineno"> 4772</span>&#160;</div>
+<div class="line"><a name="l04773"></a><span class="lineno"> 4773</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l04774"></a><span class="lineno"> 4774</span>&#160;                <span class="comment">//compression function is active</span></div>
+<div class="line"><a name="l04775"></a><span class="lineno"> 4775</span>&#160;                <span class="comment">//check for frames received during the last observation window</span></div>
+<div class="line"><a name="l04776"></a><span class="lineno"> 4776</span>&#160;                <span class="keywordflow">if</span> (owc-&gt;getLastNumberOfFrames()</div>
+<div class="line"><a name="l04777"></a><span class="lineno"> 4777</span>&#160;                        == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04778"></a><span class="lineno"> 4778</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second-&gt;size()) {</div>
+<div class="line"><a name="l04779"></a><span class="lineno"> 4779</span>&#160;                    <span class="comment">//no new pcf IN frames became permanent during the last observation window</span></div>
+<div class="line"><a name="l04780"></a><span class="lineno"> 4780</span>&#160;                    <span class="comment">// stop collecting</span></div>
+<div class="line"><a name="l04781"></a><span class="lineno"> 4781</span>&#160;                    <span class="comment">//check reaching max_observation_window</span></div>
+<div class="line"><a name="l04782"></a><span class="lineno"> 4782</span>&#160;                    <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
+<div class="line"><a name="l04783"></a><span class="lineno"> 4783</span>&#160;                            &lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
+<div class="line"><a name="l04784"></a><span class="lineno"> 4784</span>&#160;</div>
+<div class="line"><a name="l04785"></a><span class="lineno"> 4785</span>&#160;                        <span class="comment">//calculate the compression_funktion_delay and register the event for compressed pit</span></div>
+<div class="line"><a name="l04786"></a><span class="lineno"> 4786</span>&#160;</div>
+<div class="line"><a name="l04787"></a><span class="lineno"> 4787</span>&#160;                        <span class="keywordtype">int</span> restOW =</div>
+<div class="line"><a name="l04788"></a><span class="lineno"> 4788</span>&#160;                                (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()</div>
+<div class="line"><a name="l04789"></a><span class="lineno"> 4789</span>&#160;                                        - owc-&gt;getNumberOfObservationWindow())</div>
+<div class="line"><a name="l04790"></a><span class="lineno"> 4790</span>&#160;                                        * <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;observation_window_size&quot;</span>).longValue();</div>
+<div class="line"><a name="l04791"></a><span class="lineno"> 4791</span>&#160;</div>
+<div class="line"><a name="l04792"></a><span class="lineno"> 4792</span>&#160;                        <span class="keywordtype">int</span> compression_correction =</div>
+<div class="line"><a name="l04793"></a><span class="lineno"> 4793</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a82348318432501edc630883241bfa3ae">compress</a>(</div>
+<div class="line"><a name="l04794"></a><span class="lineno"> 4794</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04795"></a><span class="lineno"> 4795</span>&#160;                                                owc-&gt;getIntegrationCycle())-&gt;second,</div>
+<div class="line"><a name="l04796"></a><span class="lineno"> 4796</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
+<div class="line"><a name="l04797"></a><span class="lineno"> 4797</span>&#160;                                                <span class="stringliteral">&quot;faulty_synchronisatzation_masters&quot;</span>).longValue());</div>
+<div class="line"><a name="l04798"></a><span class="lineno"> 4798</span>&#160;</div>
+<div class="line"><a name="l04799"></a><span class="lineno"> 4799</span>&#160;                        <span class="keywordtype">int</span> compression_funktion_delay = restOW</div>
+<div class="line"><a name="l04800"></a><span class="lineno"> 4800</span>&#160;                                + <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;calculation_overhead&quot;</span>).longValue()</div>
+<div class="line"><a name="l04801"></a><span class="lineno"> 4801</span>&#160;                                + compression_correction;</div>
+<div class="line"><a name="l04802"></a><span class="lineno"> 4802</span>&#160;</div>
+<div class="line"><a name="l04803"></a><span class="lineno"> 4803</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> roundMember = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a7ecff4894d30876be2c5a1fbfca8afeb">setBits</a>(</div>
+<div class="line"><a name="l04804"></a><span class="lineno"> 4804</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04805"></a><span class="lineno"> 4805</span>&#160;                                        owc-&gt;getIntegrationCycle())-&gt;second);</div>
+<div class="line"><a name="l04806"></a><span class="lineno"> 4806</span>&#160;</div>
+<div class="line"><a name="l04807"></a><span class="lineno"> 4807</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;Compression Function round member&quot;</span> &lt;&lt; roundMember</div>
+<div class="line"><a name="l04808"></a><span class="lineno"> 4808</span>&#160;                                &lt;&lt; endl;</div>
+<div class="line"><a name="l04809"></a><span class="lineno"> 4809</span>&#160;</div>
+<div class="line"><a name="l04810"></a><span class="lineno"> 4810</span>&#160;                        CompressedPIT *cpit = <span class="keyword">new</span> CompressedPIT(<span class="stringliteral">&quot;CPCA&quot;</span>,</div>
+<div class="line"><a name="l04811"></a><span class="lineno"> 4811</span>&#160;                                <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l04812"></a><span class="lineno"> 4812</span>&#160;                        cpit-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l04813"></a><span class="lineno"> 4813</span>&#160;                        cpit-&gt;setTimer(compression_funktion_delay);</div>
+<div class="line"><a name="l04814"></a><span class="lineno"> 4814</span>&#160;                        cpit-&gt;setSchedulingPriority(3);</div>
+<div class="line"><a name="l04815"></a><span class="lineno"> 4815</span>&#160;                        cpit-&gt;setMembership_new(roundMember);</div>
+<div class="line"><a name="l04816"></a><span class="lineno"> 4816</span>&#160;                        <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04817"></a><span class="lineno"> 4817</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second;</div>
+<div class="line"><a name="l04818"></a><span class="lineno"> 4818</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;erase(owc-&gt;getIntegrationCycle());</div>
+<div class="line"><a name="l04819"></a><span class="lineno"> 4819</span>&#160;</div>
+<div class="line"><a name="l04820"></a><span class="lineno"> 4820</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(cpit);</div>
+<div class="line"><a name="l04821"></a><span class="lineno"> 4821</span>&#160;                        <span class="keyword">delete</span> owc;</div>
+<div class="line"><a name="l04822"></a><span class="lineno"> 4822</span>&#160;                        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l04823"></a><span class="lineno"> 4823</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
+<div class="line"><a name="l04824"></a><span class="lineno"> 4824</span>&#160;                            == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
+<div class="line"><a name="l04825"></a><span class="lineno"> 4825</span>&#160;</div>
+<div class="line"><a name="l04826"></a><span class="lineno"> 4826</span>&#160;                        <span class="comment">//calculate the compression_funktion_delay and register the event for compressed pit</span></div>
+<div class="line"><a name="l04827"></a><span class="lineno"> 4827</span>&#160;</div>
+<div class="line"><a name="l04828"></a><span class="lineno"> 4828</span>&#160;                        <span class="keywordtype">int</span> compression_correction =</div>
+<div class="line"><a name="l04829"></a><span class="lineno"> 4829</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a82348318432501edc630883241bfa3ae">compress</a>(</div>
+<div class="line"><a name="l04830"></a><span class="lineno"> 4830</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04831"></a><span class="lineno"> 4831</span>&#160;                                                owc-&gt;getIntegrationCycle())-&gt;second,</div>
+<div class="line"><a name="l04832"></a><span class="lineno"> 4832</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
+<div class="line"><a name="l04833"></a><span class="lineno"> 4833</span>&#160;                                                <span class="stringliteral">&quot;faulty_synchronisatzation_masters&quot;</span>).longValue());</div>
+<div class="line"><a name="l04834"></a><span class="lineno"> 4834</span>&#160;</div>
+<div class="line"><a name="l04835"></a><span class="lineno"> 4835</span>&#160;                        <span class="keywordtype">int</span> compression_funktion_delay = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
+<div class="line"><a name="l04836"></a><span class="lineno"> 4836</span>&#160;                                <span class="stringliteral">&quot;calculation_overhead&quot;</span>).longValue()</div>
+<div class="line"><a name="l04837"></a><span class="lineno"> 4837</span>&#160;                                + compression_correction;</div>
+<div class="line"><a name="l04838"></a><span class="lineno"> 4838</span>&#160;</div>
+<div class="line"><a name="l04839"></a><span class="lineno"> 4839</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> roundMember = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a7ecff4894d30876be2c5a1fbfca8afeb">setBits</a>(</div>
+<div class="line"><a name="l04840"></a><span class="lineno"> 4840</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04841"></a><span class="lineno"> 4841</span>&#160;                                        owc-&gt;getIntegrationCycle())-&gt;second);</div>
+<div class="line"><a name="l04842"></a><span class="lineno"> 4842</span>&#160;</div>
+<div class="line"><a name="l04843"></a><span class="lineno"> 4843</span>&#160;                        CompressedPIT *cpit = <span class="keyword">new</span> CompressedPIT(<span class="stringliteral">&quot;CPCA&quot;</span>,</div>
+<div class="line"><a name="l04844"></a><span class="lineno"> 4844</span>&#160;                                <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l04845"></a><span class="lineno"> 4845</span>&#160;                        cpit-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l04846"></a><span class="lineno"> 4846</span>&#160;                        cpit-&gt;setTimer(compression_funktion_delay);</div>
+<div class="line"><a name="l04847"></a><span class="lineno"> 4847</span>&#160;                        cpit-&gt;setSchedulingPriority(3);</div>
+<div class="line"><a name="l04848"></a><span class="lineno"> 4848</span>&#160;                        cpit-&gt;setMembership_new(roundMember);</div>
+<div class="line"><a name="l04849"></a><span class="lineno"> 4849</span>&#160;</div>
+<div class="line"><a name="l04850"></a><span class="lineno"> 4850</span>&#160;                        <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04851"></a><span class="lineno"> 4851</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second;</div>
+<div class="line"><a name="l04852"></a><span class="lineno"> 4852</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;erase(owc-&gt;getIntegrationCycle());</div>
+<div class="line"><a name="l04853"></a><span class="lineno"> 4853</span>&#160;</div>
+<div class="line"><a name="l04854"></a><span class="lineno"> 4854</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(cpit);</div>
+<div class="line"><a name="l04855"></a><span class="lineno"> 4855</span>&#160;                        <span class="keyword">delete</span> owc;</div>
+<div class="line"><a name="l04856"></a><span class="lineno"> 4856</span>&#160;                        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l04857"></a><span class="lineno"> 4857</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l04858"></a><span class="lineno"> 4858</span>&#160;                        ev</div>
+<div class="line"><a name="l04859"></a><span class="lineno"> 4859</span>&#160;                                &lt;&lt; <span class="stringliteral">&quot;Compression Function: Error END OBSERVATION WINDOW:&quot;</span></div>
+<div class="line"><a name="l04860"></a><span class="lineno"> 4860</span>&#160;                                &lt;&lt; owc-&gt;getNumberOfObservationWindow() &lt;&lt; endl;</div>
+<div class="line"><a name="l04861"></a><span class="lineno"> 4861</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;MAX Observation Window: &quot;</span></div>
+<div class="line"><a name="l04862"></a><span class="lineno"> 4862</span>&#160;                                &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()</div>
+<div class="line"><a name="l04863"></a><span class="lineno"> 4863</span>&#160;                                &lt;&lt; endl;</div>
+<div class="line"><a name="l04864"></a><span class="lineno"> 4864</span>&#160;                    }</div>
+<div class="line"><a name="l04865"></a><span class="lineno"> 4865</span>&#160;</div>
+<div class="line"><a name="l04866"></a><span class="lineno"> 4866</span>&#160;                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (owc-&gt;getLastNumberOfFrames()</div>
+<div class="line"><a name="l04867"></a><span class="lineno"> 4867</span>&#160;                        &lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(owc-&gt;getIntegrationCycle())-&gt;second-&gt;size()) {</div>
+<div class="line"><a name="l04868"></a><span class="lineno"> 4868</span>&#160;                    <span class="comment">//pcf became permanent during the last observation window, check max ow reached</span></div>
+<div class="line"><a name="l04869"></a><span class="lineno"> 4869</span>&#160;                    <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
+<div class="line"><a name="l04870"></a><span class="lineno"> 4870</span>&#160;                            &lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
+<div class="line"><a name="l04871"></a><span class="lineno"> 4871</span>&#160;                        <span class="comment">//open another ow</span></div>
+<div class="line"><a name="l04872"></a><span class="lineno"> 4872</span>&#160;                        <span class="keywordtype">int</span> new_ow = (owc-&gt;getNumberOfObservationWindow()) + 1;</div>
+<div class="line"><a name="l04873"></a><span class="lineno"> 4873</span>&#160;                        <span class="keywordtype">int</span> new_number_frames = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04874"></a><span class="lineno"> 4874</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second-&gt;size();</div>
+<div class="line"><a name="l04875"></a><span class="lineno"> 4875</span>&#160;</div>
+<div class="line"><a name="l04876"></a><span class="lineno"> 4876</span>&#160;                        owc-&gt;setNumberOfObservationWindow(new_ow);</div>
+<div class="line"><a name="l04877"></a><span class="lineno"> 4877</span>&#160;                        owc-&gt;setLastNumberOfFrames(new_number_frames);</div>
+<div class="line"><a name="l04878"></a><span class="lineno"> 4878</span>&#160;</div>
+<div class="line"><a name="l04879"></a><span class="lineno"> 4879</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(owc);</div>
+<div class="line"><a name="l04880"></a><span class="lineno"> 4880</span>&#160;</div>
+<div class="line"><a name="l04881"></a><span class="lineno"> 4881</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (owc-&gt;getNumberOfObservationWindow()</div>
+<div class="line"><a name="l04882"></a><span class="lineno"> 4882</span>&#160;                            == <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()) {</div>
+<div class="line"><a name="l04883"></a><span class="lineno"> 4883</span>&#160;                        <span class="comment">//max_ow_reached</span></div>
+<div class="line"><a name="l04884"></a><span class="lineno"> 4884</span>&#160;                        <span class="comment">//stop collecting</span></div>
+<div class="line"><a name="l04885"></a><span class="lineno"> 4885</span>&#160;                        <span class="comment">//calculate the compression_funktion_delay and register the event for compressed pit</span></div>
+<div class="line"><a name="l04886"></a><span class="lineno"> 4886</span>&#160;</div>
+<div class="line"><a name="l04887"></a><span class="lineno"> 4887</span>&#160;                        <span class="keywordtype">int</span> compression_correction =</div>
+<div class="line"><a name="l04888"></a><span class="lineno"> 4888</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a82348318432501edc630883241bfa3ae">compress</a>(</div>
+<div class="line"><a name="l04889"></a><span class="lineno"> 4889</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04890"></a><span class="lineno"> 4890</span>&#160;                                                owc-&gt;getIntegrationCycle())-&gt;second,</div>
+<div class="line"><a name="l04891"></a><span class="lineno"> 4891</span>&#160;                                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
+<div class="line"><a name="l04892"></a><span class="lineno"> 4892</span>&#160;                                                <span class="stringliteral">&quot;faulty_synchronisatzation_masters&quot;</span>).longValue());</div>
+<div class="line"><a name="l04893"></a><span class="lineno"> 4893</span>&#160;</div>
+<div class="line"><a name="l04894"></a><span class="lineno"> 4894</span>&#160;                        <span class="keywordtype">int</span> compression_funktion_delay = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(</div>
+<div class="line"><a name="l04895"></a><span class="lineno"> 4895</span>&#160;                                <span class="stringliteral">&quot;calculation_overhead&quot;</span>).longValue()</div>
+<div class="line"><a name="l04896"></a><span class="lineno"> 4896</span>&#160;                                + compression_correction;</div>
+<div class="line"><a name="l04897"></a><span class="lineno"> 4897</span>&#160;</div>
+<div class="line"><a name="l04898"></a><span class="lineno"> 4898</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> roundMember = <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a7ecff4894d30876be2c5a1fbfca8afeb">setBits</a>(</div>
+<div class="line"><a name="l04899"></a><span class="lineno"> 4899</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04900"></a><span class="lineno"> 4900</span>&#160;                                        owc-&gt;getIntegrationCycle())-&gt;second);</div>
+<div class="line"><a name="l04901"></a><span class="lineno"> 4901</span>&#160;</div>
+<div class="line"><a name="l04902"></a><span class="lineno"> 4902</span>&#160;                        CompressedPIT *cpit = <span class="keyword">new</span> CompressedPIT(<span class="stringliteral">&quot;CPCA&quot;</span>,</div>
+<div class="line"><a name="l04903"></a><span class="lineno"> 4903</span>&#160;                                <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l04904"></a><span class="lineno"> 4904</span>&#160;                        cpit-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l04905"></a><span class="lineno"> 4905</span>&#160;                        cpit-&gt;setTimer(compression_funktion_delay);</div>
+<div class="line"><a name="l04906"></a><span class="lineno"> 4906</span>&#160;                        cpit-&gt;setSchedulingPriority(3);</div>
+<div class="line"><a name="l04907"></a><span class="lineno"> 4907</span>&#160;                        cpit-&gt;setMembership_new(roundMember);</div>
+<div class="line"><a name="l04908"></a><span class="lineno"> 4908</span>&#160;</div>
+<div class="line"><a name="l04909"></a><span class="lineno"> 4909</span>&#160;                        <span class="keyword">delete</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;find(</div>
+<div class="line"><a name="l04910"></a><span class="lineno"> 4910</span>&#160;                                owc-&gt;getIntegrationCycle())-&gt;second;</div>
+<div class="line"><a name="l04911"></a><span class="lineno"> 4911</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a>-&gt;erase(owc-&gt;getIntegrationCycle());</div>
+<div class="line"><a name="l04912"></a><span class="lineno"> 4912</span>&#160;</div>
+<div class="line"><a name="l04913"></a><span class="lineno"> 4913</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(cpit);</div>
+<div class="line"><a name="l04914"></a><span class="lineno"> 4914</span>&#160;                        <span class="keyword">delete</span> owc;</div>
+<div class="line"><a name="l04915"></a><span class="lineno"> 4915</span>&#160;                        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l04916"></a><span class="lineno"> 4916</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l04917"></a><span class="lineno"> 4917</span>&#160;                        ev</div>
+<div class="line"><a name="l04918"></a><span class="lineno"> 4918</span>&#160;                                &lt;&lt; <span class="stringliteral">&quot;Compression Function: Error END OBSERVATION WINDOW:&quot;</span></div>
+<div class="line"><a name="l04919"></a><span class="lineno"> 4919</span>&#160;                                &lt;&lt; owc-&gt;getNumberOfObservationWindow() &lt;&lt; endl;</div>
+<div class="line"><a name="l04920"></a><span class="lineno"> 4920</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;MAX Observation Window: &quot;</span></div>
+<div class="line"><a name="l04921"></a><span class="lineno"> 4921</span>&#160;                                &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_observation_window&quot;</span>).longValue()</div>
+<div class="line"><a name="l04922"></a><span class="lineno"> 4922</span>&#160;                                &lt;&lt; endl;</div>
+<div class="line"><a name="l04923"></a><span class="lineno"> 4923</span>&#160;</div>
+<div class="line"><a name="l04924"></a><span class="lineno"> 4924</span>&#160;                    }</div>
+<div class="line"><a name="l04925"></a><span class="lineno"> 4925</span>&#160;                    <span class="comment">//pcf became permanent during the last observation window, check max ow reached</span></div>
+<div class="line"><a name="l04926"></a><span class="lineno"> 4926</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l04927"></a><span class="lineno"> 4927</span>&#160;                    ev</div>
+<div class="line"><a name="l04928"></a><span class="lineno"> 4928</span>&#160;                            &lt;&lt; <span class="stringliteral">&quot;Compression Function: Error owc-&gt;getLastNumberOfFrames() &gt; compression_stack-&gt;find(owc-&gt;getIntegrationCycle())-&gt;second-&gt;size()&quot;</span></div>
+<div class="line"><a name="l04929"></a><span class="lineno"> 4929</span>&#160;                            &lt;&lt; owc-&gt;getNumberOfObservationWindow() &lt;&lt; endl;</div>
+<div class="line"><a name="l04930"></a><span class="lineno"> 4930</span>&#160;                }</div>
+<div class="line"><a name="l04931"></a><span class="lineno"> 4931</span>&#160;</div>
+<div class="line"><a name="l04932"></a><span class="lineno"> 4932</span>&#160;            } <span class="comment">//compression Function witch matching integration cycle found</span></div>
+<div class="line"><a name="l04933"></a><span class="lineno"> 4933</span>&#160;</div>
+<div class="line"><a name="l04934"></a><span class="lineno"> 4934</span>&#160;        } <span class="comment">//OW</span></div>
+<div class="line"><a name="l04935"></a><span class="lineno"> 4935</span>&#160;</div>
+<div class="line"><a name="l04936"></a><span class="lineno"> 4936</span>&#160;    } <span class="comment">//schedulerIn</span></div>
+<div class="line"><a name="l04937"></a><span class="lineno"> 4937</span>&#160;</div>
+<div class="line"><a name="l04938"></a><span class="lineno"> 4938</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1210,7 +1209,7 @@ unsigned int &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a c
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_s_i___c_m___e_n_a_b_l_e_d.html">SI_CM_ENABLED</a></li>
-    <li class="footer">Generated on Wed May 15 2013 14:16:28 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Thu May 16 2013 11:25:33 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

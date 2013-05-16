@@ -14,5 +14,8 @@
 <area shape="rect" id="node14" href="SchedulerTimerEvent.html" title="Message SchedulerTimerEvent" alt="" coords="1709,6,1856,34">
 <area shape="rect" id="node15" href="SyncNotification.html" title="Message SyncNotification" alt="" coords="1880,6,1997,34">
 <area shape="rect" id="node16" href="SyncNotificationKind.html" title="Enum SyncNotificationKind" alt="" coords="2021,6,2165,34">
-<area shape="rect" id="node17" href="TTBufferEmpty.html" title="Message TTBufferEmpty" alt="" coords="2189,6,2299,34">
-<area shape="rect" id="node18" href="TTFrame.html" title="Packet TTFrame" alt="" coords="2323,6,2397,34">
+<area shape="rect" id="node17" href="Tic.html" title="Packet Tic" alt="" coords="2189,6,2261,34">
+<area shape="rect" id="node18" href="TicToc.html" title="Packet TicToc" alt="" coords="2285,6,2357,34">
+<area shape="rect" id="node19" href="Toc.html" title="Packet Toc" alt="" coords="2381,6,2453,34">
+<area shape="rect" id="node20" href="TTBufferEmpty.html" title="Message TTBufferEmpty" alt="" coords="2477,6,2587,34">
+<area shape="rect" id="node21" href="TTFrame.html" title="Packet TTFrame" alt="" coords="2611,6,2685,34">

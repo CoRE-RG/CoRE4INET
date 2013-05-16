@@ -180,7 +180,7 @@ Private Member Functions</h2></td></tr>
 <div class="textblock"><p>Class generated from <code>linklayer/ethernet/CTFrame.msg</code> by opp_msgc. </p>
 <pre>
 packet <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Base class for the CTFrame message.">CTFrame</a> extends EtherFrame
-{</pre><pre>        (true);
+{</pre><pre>        byteLength = 18;</pre><pre>        (true);
         abstract uint16_t ctID;</pre><pre>        (true);
         abstract uint32_t ctMarker;</pre><pre>        string displayString="b=15,15,rect,black,kind,5";
 }
@@ -200,7 +200,7 @@ class <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html" title="Ba
 <pre>
 Register_Class(CTFrame);
 </pre> 
-<p>Definition at line <a class="el" href="_c_t_frame__m_8h_source.html#l00064">64</a> of file <a class="el" href="_c_t_frame__m_8h_source.html">CTFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_c_t_frame__m_8h_source.html#l00067">67</a> of file <a class="el" href="_c_t_frame__m_8h_source.html">CTFrame_m.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a21eadc291f0553e50f70d32e073be2c4"></a>
 <div class="memitem">
@@ -331,8 +331,8 @@ Register_Class(CTFrame);
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a1cde6482f24ab3e15b0925333c3aee1a">TTEthernetModel::PCFrame</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_frame.html#a46f3718b6c8e99bdce957eaa5f3b024c">TTEthernetModel::RCFrame</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_frame.html#a0fab9929c53b6718d43df8dabacead11">TTEthernetModel::TTFrame</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame.html#a00029d359f0f54ffb9ab68d9b524eedc">TTEthernetModel::CTFrame</a>.</p>
 
-<p>Definition at line <a class="el" href="_c_t_frame__m_8h_source.html#l00083">83</a> of file <a class="el" href="_c_t_frame__m_8h_source.html">CTFrame_m.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{<span class="keywordflow">throw</span> cRuntimeError(<span class="stringliteral">&quot;You forgot to manually add a dup() function to class CTFrame&quot;</span>);}</div>
+<p>Definition at line <a class="el" href="_c_t_frame__m_8h_source.html#l00086">86</a> of file <a class="el" href="_c_t_frame__m_8h_source.html">CTFrame_m.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{<span class="keywordflow">throw</span> cRuntimeError(<span class="stringliteral">&quot;You forgot to manually add a dup() function to class CTFrame&quot;</span>);}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -610,7 +610,7 @@ Register_Class(CTFrame);
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_c_t_frame__m_8h_source.html#l00067">67</a> of file <a class="el" href="_c_t_frame__m_8h_source.html">CTFrame_m.h</a>.</p>
+<p>Definition at line <a class="el" href="_c_t_frame__m_8h_source.html#l00070">70</a> of file <a class="el" href="_c_t_frame__m_8h_source.html">CTFrame_m.h</a>.</p>
 
 </div>
 </div>
@@ -623,7 +623,7 @@ Register_Class(CTFrame);
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_c_t_frame___base.html">CTFrame_Base</a></li>
-    <li class="footer">Generated on Wed May 15 2013 14:16:27 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

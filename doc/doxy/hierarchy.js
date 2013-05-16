@@ -21,7 +21,11 @@ var hierarchy =
       [ "TTEthernetModel::TTBufferEmpty", "class_t_t_ethernet_model_1_1_t_t_buffer_empty.html", null ]
     ] ],
     [ "cPacket", null, [
-      [ "TTEthernetModel::APIPayload", "class_t_t_ethernet_model_1_1_a_p_i_payload.html", null ]
+      [ "TTEthernetModel::APIPayload", "class_t_t_ethernet_model_1_1_a_p_i_payload.html", null ],
+      [ "TTEthernetModel::TicToc", "class_t_t_ethernet_model_1_1_tic_toc.html", [
+        [ "TTEthernetModel::Tic", "class_t_t_ethernet_model_1_1_tic.html", null ],
+        [ "TTEthernetModel::Toc", "class_t_t_ethernet_model_1_1_toc.html", null ]
+      ] ]
     ] ],
     [ "cSimpleModule", null, [
       [ "TTEthernetModel::BaseConfigurationManager", "class_t_t_ethernet_model_1_1_base_configuration_manager.html", null ],
@@ -63,6 +67,8 @@ var hierarchy =
         [ "TTEthernetModel::DummySync", "class_t_t_ethernet_model_1_1_dummy_sync.html", null ]
       ] ],
       [ "TTEthernetModel::TTEApplicationBase", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html", [
+        [ "TTEthernetModel::TicApp", "class_t_t_ethernet_model_1_1_tic_app.html", null ],
+        [ "TTEthernetModel::TocApp", "class_t_t_ethernet_model_1_1_toc_app.html", null ],
         [ "TTEthernetModel::TrafficSourceAppBase", "class_t_t_ethernet_model_1_1_traffic_source_app_base.html", [
           [ "TTEthernetModel::RCTrafficSourceApp", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html", null ],
           [ "TTEthernetModel::TTTrafficSourceApp", "class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html", null ]
