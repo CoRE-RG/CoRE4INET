@@ -16,17 +16,22 @@
 namespace TTEthernetModel;
 
 //
-// TODO generated message class
+// Messages for the rt_tictoc Examples
 //
 packet TicToc {
+    //All messages use minimum size payload
     byteLength = 46;
+    //Counter transportet through the network
     unsigned int count = 0;
+    //Start time to calculate roundtrip time
     simtime_t roundtrip_start;
 }
 packet Tic extends TicToc{
+    //Request message
     string request = "Hello!";
 }
 
 packet Toc extends TicToc{
+    //Response message
     string response = "World!";
 }

@@ -18,8 +18,14 @@ package ttethernet.applications.base.examples.rt_tictoc;
 import ttethernet.applications.base.TTEApplicationBase;
 
 //
-// TODO auto-generated module
+// Tic Application used for the rt_tictoc example.
+// Sends TT messages with Tic-Request payload and receives
+// RC messages with Toc-Response payload.
 //
+//
+// @see rt_tictoc, TocApp
+//
+// @author Till Steinbach
 simple TicApp extends TTEApplicationBase
 {
     parameters:
@@ -28,7 +34,10 @@ simple TicApp extends TTEApplicationBase
         @statistic[rxPk](title="RX Packets"; record=count,vector);
         //Application Roundtrip Time
         @statistic[roundtrip](title="Roundtrip time"; unit=s; record=stats,histogram,vector);
+        //Counter is increased on incoming Tic messages
         int counter = 0;
+        //CT-ID used for the messages to send
         int ct_id;
-        int action_time;
+        //Time in cycle when the tic message is generated
+        int action_time @unit(tick);
 }

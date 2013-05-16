@@ -18,12 +18,20 @@ package ttethernet.applications.base.examples.rt_tictoc;
 import ttethernet.applications.base.TTEApplicationBase;
 
 //
-// TODO auto-generated module
+// Toc Application used for the rt_tictoc example.
+// Receives TT messages with Tic-Request payload and answers
+// with RC messages with Toc-Response payload.
 //
+//
+// @see rt_tictoc, TicApp
+//
+// @author Till Steinbach
 simple TocApp extends TTEApplicationBase
 {
     parameters:
     	@class(TocApp);
+    	//Counter is increased on incoming Tic messages
     	int counter = 0;
+    	//CT-ID used for the messages to send
     	int ct_id;
 }

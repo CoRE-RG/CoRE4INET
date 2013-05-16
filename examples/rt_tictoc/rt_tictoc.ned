@@ -18,8 +18,9 @@ package ttethernet.examples.rt_tictoc;
 import ttethernet.nodes.ethernet.TTEEtherHost;
 
 //
-// Small sample network with three hosts and one switch that shows how to 
-// configure the TTEthernet Model. Configuration in omnetpp.ini
+// Small sample network with two hosts and one switch that shows how to 
+// build application models for the simulation. The example uses two different
+// applications (TicApp and TocApp) that pass messages to each other
 // - Uses 5ms Cycletime
 // - 80ns Tick length
 //
@@ -39,14 +40,15 @@ network rt_tictoc
             per = 0;
         }
     submodules:
+        //Device hosting the Tic application
         tic: Tic {
             @display("p=39,70");
         }
-
+		//Device hosting the Toc application
         toc: Toc {
             @display("p=247,70");
         }
-
+		//Switch that forwards Tic and Toc messages
         switch1: Switch1 {
             parameters:
                 @display("p=147,70");

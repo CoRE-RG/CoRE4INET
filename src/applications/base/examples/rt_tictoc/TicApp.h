@@ -23,12 +23,22 @@
 namespace TTEthernetModel {
 
 /**
- * TODO - Generated class
+ * @brief Tic Application used for the rt_tictoc example.
+ *
+ *
+ * @sa TTEApplicationBase
+ * @ingroup Applications
  */
 class TicApp : public TTEApplicationBase
 {
   protected:
+    /**
+    * @brief Initialization of the module. Sends activator message
+    */
     virtual void initialize();
+    /**
+     * @brief Handles message generation and reception
+     */
     virtual void handleMessage(cMessage *msg);
   protected:
       /**
