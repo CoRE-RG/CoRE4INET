@@ -38,8 +38,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg)
 void TTEApplicationBase::handleParameterChange(const char* parname){
     buffers.clear();
     if(ev.isGUI()){
-        //TODO check why this does not work
-        getDisplayString().setTagArg("i2", 0, "");
+        getDisplayString().removeTag("i2");
         getDisplayString().setTagArg("tt", 0, "");
     }
     std::string buffersString = par("buffers").stdstringValue();
