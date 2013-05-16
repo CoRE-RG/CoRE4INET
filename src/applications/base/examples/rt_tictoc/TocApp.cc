@@ -14,8 +14,10 @@
 // 
 
 #include "TocApp.h"
+#include "TicToc_m.h"
 #include "TTEScheduler.h"
 #include "RCFrame_m.h"
+#include "TTFrame_m.h"
 
 namespace TTEthernetModel {
 
@@ -28,10 +30,23 @@ void TocApp::initialize()
 
 void TocApp::handleMessage(cMessage *msg)
 {
+    TTEApplicationBase::handleMessage(msg);
+
     if(msg->arrivedOn("TTin")){
+        TTFrame *ttframe = dynamic_cast<TTFrame*>(msg);
+        Tic *tic=dynamic_cast<Tic*>(ttframe->decapsulate());
         delete msg;
+        bubble(tic->getRequest());
+        par("counter").setLongValue(tic->getCount());
+
+        Toc *toc = new Toc();
+        toc->setRoundtrip_start(tic->getRoundtrip_start());
+        toc->setCount(tic->getCount()+1);
+        delete tic;
+
         CTFrame *frame = new RCFrame("Toc");
-        frame->setCtID(101);
+        frame->setCtID(par("ct_id").longValue());
+        frame->encapsulate(toc);
 
         EV << "Answering Tic Message with Toc Message\n";
         std::list<Buffer*> buffer = buffers[frame->getCtID()];

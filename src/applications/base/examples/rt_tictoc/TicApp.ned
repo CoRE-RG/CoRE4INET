@@ -22,5 +22,13 @@ import ttethernet.applications.base.TTEApplicationBase;
 //
 simple TicApp extends TTEApplicationBase
 {
-    @class(TicApp);
+    parameters:
+    	@class(TicApp);
+    	//Statistic of the amount of packets that were received by the application
+        @statistic[rxPk](title="RX Packets"; record=count,vector);
+        //Application Roundtrip Time
+        @statistic[roundtrip](title="Roundtrip time"; unit=s; record=stats,histogram,vector);
+        int counter = 0;
+        int ct_id;
+        int action_time;
 }

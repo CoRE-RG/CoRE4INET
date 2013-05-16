@@ -22,5 +22,8 @@ import ttethernet.applications.base.TTEApplicationBase;
 //
 simple TocApp extends TTEApplicationBase
 {
-    @class(TocApp);
+    parameters:
+    	@class(TocApp);
+    	int counter = 0;
+    	int ct_id;
 }

@@ -26,6 +26,15 @@ void TTEApplicationBase::executeCallback(Callback *cb){
     cb->executeCallback();
 }
 
+void TTEApplicationBase::handleMessage(cMessage *msg)
+{
+    if(msg->arrivedOn("RCin")){
+        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
+        if (rcBuffer)
+            rcBuffer->resetBag();
+    }
+}
+
 void TTEApplicationBase::handleParameterChange(const char* parname){
     buffers.clear();
     if(ev.isGUI()){

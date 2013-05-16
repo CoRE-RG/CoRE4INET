@@ -13,35 +13,20 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODEL_TICAPP_H_
-#define __TTETHERNETMODEL_TICAPP_H_
+namespace TTEthernetModel;
 
-#include <omnetpp.h>
-#include "TTEApplicationBase.h"
-
-
-namespace TTEthernetModel {
-
-/**
- * TODO - Generated class
- */
-class TicApp : public TTEApplicationBase
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-  protected:
-      /**
-       * Signal that is emitted every time a toc was received.
-       */
-      static simsignal_t rxPkSignal;
-
-      /**
-       * Signal that contains the roundtrip time of a request/response.
-       */
-      static simsignal_t roundtripSignal;
-};
-
+//
+// TODO generated message class
+//
+packet TicToc {
+    byteLength = 46;
+    unsigned int count = 0;
+    simtime_t roundtrip_start;
+}
+packet Tic extends TicToc{
+    string request = "Hello!";
 }
 
-#endif
+packet Toc extends TicToc{
+    string response = "World!";
+}
