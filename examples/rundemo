@@ -38,7 +38,7 @@ foreach line {
    {"About..."               "README"               "../doc/index.html"}
 
    {"Examples"}
-   {"Real-Time Tic-Toc"                                           "rt-tictoc"                                  "./run"               "run"}
+   {"Real-Time Tic-Toc"                                           "rt_tictoc"                                  "./run"               "run"}
    {"Small Network"                                               "small_network"                              "./run"               "run"}
    {"AS6802 Synchronization with high integrity (small)"          "synchronization/HighIntegrity_small"        "./run"               "run"}
    {"AS6802 Synchronization with standard integrity (medium)"     "synchronization/StandardIntegrity_medium"   "./run"               "run"}
