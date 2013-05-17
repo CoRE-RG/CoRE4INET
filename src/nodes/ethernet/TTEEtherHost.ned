@@ -77,7 +77,7 @@ module TTEEtherHost
             @display("p=235,169");
         }
         tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
-            @display("p=235,99");
+            @display("p=234,37,row,70");
         }
         bgIn: BGQueueBuffer {
             @display("p=141,37");

@@ -23,7 +23,7 @@ import inet.linklayer.IMACRelayUnit;
 module TTEEtherSwitch
 {
     parameters:
-        @display("i=block/switch;bgb=1219,312");
+        @display("i=block/switch;bgb=514,312");
         @node;
         @labels(node,ethernet-node);
         double hardware_delay @unit(s) = default(8us);
@@ -34,7 +34,7 @@ module TTEEtherSwitch
         // Implementation of the best-effort forwarding part
         beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
             parameters:
-                @display("p=141,242");
+                @display("p=100,50");
             gates:
                 lowerLayerIn[sizeof(ethg)];
                 lowerLayerOut[sizeof(ethg)];
@@ -42,14 +42,14 @@ module TTEEtherSwitch
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEPHYPort {
             parameters:
-                @display("p=235,278,r,50");
+                @display("p=50,100,column,50");
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=141,169");
+                @display("p=170,50");
         }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
@@ -59,7 +59,7 @@ module TTEEtherSwitch
         // Scheudler for the device
         tteScheduler: <default("TTEScheduler")> like ITTEScheduler {
             parameters:
-                @display("p=235,169");
+                @display("p=240,50");
         }
     connections:
         for i=0..sizeof(ethg)-1 {
