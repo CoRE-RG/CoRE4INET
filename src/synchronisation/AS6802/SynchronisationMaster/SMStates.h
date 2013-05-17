@@ -40,6 +40,7 @@ class SM_INIT:public SMState{
     public:
 
     SM_INIT(SM *sm, FILE *fp);
+    virtual ~SM_INIT();
 	void reaction(int message);
 
 };

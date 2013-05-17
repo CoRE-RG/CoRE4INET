@@ -35,6 +35,8 @@
 
 namespace TTEthernetModel {
 
+SI_CM_INIT::~SI_CM_INIT(){}
+
 SI_CM_INIT::SI_CM_INIT(SICM *pointer, FILE *f) {
 	//for statistics purpose only
 	outVector = new cOutVector("CompMaster");
@@ -2391,7 +2393,7 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
 								- pf->par("received_total").longValue()))
-						> sicm->par("max_transmission_delay").longValue()) {
+						> (unsigned int)sicm->par("max_transmission_delay").longValue()) {
 
 					ev
 							<< "WARNING: SI_CM_WAIT_4_IN: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -2786,7 +2788,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -2825,7 +2827,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -2871,7 +2873,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -2883,7 +2885,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3069,7 +3071,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3110,7 +3112,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3155,7 +3157,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -3167,7 +3169,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3341,7 +3343,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 					//stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3381,7 +3383,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3427,7 +3429,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -3439,7 +3441,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3632,7 +3634,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3674,7 +3676,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3718,7 +3720,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -3730,7 +3732,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3905,7 +3907,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3944,7 +3946,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3990,7 +3992,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -4002,7 +4004,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4209,7 +4211,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4253,7 +4255,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4299,7 +4301,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -4311,7 +4313,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4484,7 +4486,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4524,7 +4526,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4570,7 +4572,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -4582,7 +4584,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4780,7 +4782,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4821,7 +4823,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4867,7 +4869,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -4879,7 +4881,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -5056,7 +5058,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5097,7 +5099,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5143,7 +5145,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -5155,7 +5157,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -5352,7 +5354,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5396,7 +5398,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5443,7 +5445,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -5455,7 +5457,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -5633,7 +5635,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5678,7 +5680,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5730,7 +5732,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -5742,7 +5744,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -5938,7 +5940,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5981,7 +5983,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -6027,7 +6029,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -6039,7 +6041,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window").longValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit

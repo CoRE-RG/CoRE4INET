@@ -104,7 +104,7 @@ public:
 	virtual void handleMessage(cMessage *message) {
 	}
 
-	int getValue(uint32_t bitVector, uint32_t length) {
+	uint32_t getValue(uint32_t bitVector, uint32_t length) {
 
 		uint32_t count = 0;
 

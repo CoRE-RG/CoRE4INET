@@ -39,6 +39,7 @@ class HI_CM_INIT : public HICMState
 {
     public:
         HI_CM_INIT(HICM *hicm, FILE *f);
+        virtual ~HI_CM_INIT();
 };
 
 class HI_CM_PSEUDOSYNC : public HICMState

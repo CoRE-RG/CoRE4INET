@@ -32,6 +32,8 @@
 
 namespace TTEthernetModel {
 
+SC_INIT::~SC_INIT(){}
+
 SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 	sc = sc_ref;
 	fp = f;
@@ -390,7 +392,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 				local_async_membership = 0;
 
 				if (local_sync_membership
-						>= sc->par("sc_integrate_to_sync_thrld").longValue()) {
+						>= (unsigned int)sc->par("sc_integrate_to_sync_thrld").longValue()) {
 					//the synchronous clique detection return false and the device has synchronized to the current set of devices
 					//
 					if (!timeOutExpierd) {
@@ -523,8 +525,8 @@ void SC_SYNC::handleMessage(cMessage *message) {
 						sc->par("smc_scheduled_receive_pit").longValue(),
 						sc->par("precision").longValue())) {
 
-					if (getValue(member, 32)
-							>= (sc->par("max_pcf_membership").longValue()
+					if ((unsigned int)getValue(member, 32)
+							>= (unsigned int)(sc->par("max_pcf_membership").longValue()
 									- MembershipAcceptanceRange)
 							&& (getValue(member, 32)
 									<= (sc->par("max_pcf_membership").longValue()))) {
@@ -758,7 +760,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 					<< local_integration_cycle << endl;
 
 			if (local_sync_membership
-					< (sc->par("sc_sync_threshold_sync").longValue())) {
+					< (unsigned int)sc->par("sc_sync_threshold_sync").longValue()) {
 
 				event->setTimer(sc->par("sm_restart_timeout_sync").longValue());
 				event->setDestinationGate(sc->gate("schedulerIn"));
@@ -794,7 +796,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= sc->par("sc_sync_threshold_sync").longValue())
+					>= (unsigned int)sc->par("sc_sync_threshold_sync").longValue())
 					&& (!sc->par("sc_sync_to_stable_enabled").boolValue())) {
 
 				stable_cycle_counter++;
@@ -805,10 +807,10 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= sc->par("sc_sync_threshold_sync").longValue())
+					>= (unsigned int)sc->par("sc_sync_threshold_sync").longValue())
 					&& (sc->par("sc_sync_to_stable_enabled").boolValue())
 					&& (stable_cycle_counter
-							< sc->par("num_stable_cycles").longValue())) {
+							< (unsigned int)sc->par("num_stable_cycles").longValue())) {
 
 				stable_cycle_counter++;
 
@@ -818,10 +820,10 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= sc->par("sc_sync_threshold_sync").longValue())
+					>= (unsigned int)sc->par("sc_sync_threshold_sync").longValue())
 					&& (sc->par("sc_sync_to_stable_enabled").boolValue())
 					&& (stable_cycle_counter
-							>= sc->par("num_stable_cycles").longValue())) {
+							>= (unsigned int)sc->par("num_stable_cycles").longValue())) {
 
 				tteScheduler->registerEvent(event2, true);
 
@@ -850,7 +852,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 				if (!sc->par("read").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %d \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 				//clear for the next cycle
 
@@ -1025,8 +1027,8 @@ void SC_STABLE::handleMessage(cMessage *message) {
 						sc->par("smc_scheduled_receive_pit").longValue(),
 						sc->par("precision").longValue())) {
 
-					if (getValue(member, 32)
-							>= (sc->par("max_pcf_membership").longValue()
+					if ((unsigned int)getValue(member, 32)
+							>= (unsigned int)(sc->par("max_pcf_membership").longValue()
 									- MembershipAcceptanceRange)
 							&& (getValue(member, 32)
 									<= (sc->par("max_pcf_membership").longValue()))) {
@@ -1241,9 +1243,9 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					< sc->par("sc_stable_threshold_sync").longValue())
+					< (unsigned int)sc->par("sc_stable_threshold_sync").longValue())
 					&& (stable_cycle_counter
-							< sc->par("num_unstable_cycles").longValue())) {
+							< (unsigned int)sc->par("num_unstable_cycles").longValue())) {
 
 				stable_cycle_counter++;
 
@@ -1253,9 +1255,9 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					< sc->par("sc_stable_threshold_sync").longValue())
+					< (unsigned int)sc->par("sc_stable_threshold_sync").longValue())
 					&& (stable_cycle_counter
-							>= sc->par("num_unstable_cycles").longValue())) {
+							>= (unsigned int)sc->par("num_unstable_cycles").longValue())) {
 
 				ev << "SC_STABLE:: SYNCHRONUS CLIQUE DETECTION TRUE" << endl;
 
@@ -1296,7 +1298,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if (local_sync_membership
-					>= sc->par("sc_stable_threshold_sync").longValue()) {
+					>= (unsigned int)sc->par("sc_stable_threshold_sync").longValue()) {
 
 				stable_cycle_counter = 0;
 
@@ -1325,7 +1327,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				if (!sc->par("read").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 				//clear for the next cycle
 
@@ -1353,7 +1355,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				if (!sc->par("read").boolValue()) {
 					fprintf(fp, "%d", tteScheduler->getCycles());
-					fprintf(fp, "%ld \n", clock_corr);
+					fprintf(fp, "%lld \n", clock_corr);
 				}
 				tteScheduler->clockCorrection(clock_corr);
 

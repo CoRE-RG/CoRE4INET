@@ -67,10 +67,10 @@ class HICMState{
 	bool closed_window;
 	bool round_completed;
 
-	int local_clock;
-	int local_sync_membership;
-	int local_async_membership;
-	int local_integration_cycle;
+	unsigned int local_clock;
+	unsigned int local_sync_membership;
+	unsigned int local_async_membership;
+	unsigned int local_integration_cycle;
 
 	int clock_corr;
 

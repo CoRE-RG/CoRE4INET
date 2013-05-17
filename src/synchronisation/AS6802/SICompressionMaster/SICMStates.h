@@ -47,8 +47,7 @@ class SI_CM_INIT:public SICMState{
     public:
         //virtual ~SI_CM_INIT();
         SI_CM_INIT(SICM *sicm, FILE *f);
-
-
+        virtual ~SI_CM_INIT();
 };
 
 class SI_CM_PSEUDOSYNC:public SICMState{

@@ -35,6 +35,8 @@
 namespace TTEthernetModel {
 using namespace std;
 
+SM_INIT::~SM_INIT(){}
+
 SM_INIT::SM_INIT(SM *s, FILE *f) {
 
 	outVector = new cOutVector("Name");
@@ -738,11 +740,11 @@ void SM_STABLE::handleMessage(cMessage *message) {
 							sm->par("smc_scheduled_receive_pit").longValue(),
 							sm->par("acceptance_window").longValue())) {
 
-						if (getValue(membership, 32)
-								>= (sm->par("max_pcf_membership").longValue()
+						if ((unsigned int)getValue(membership, 32)
+								>= (unsigned int)(sm->par("max_pcf_membership").longValue()
 										- MembershipAcceptanceRange)
 								&& (getValue(membership, 32)
-										<= (sm->par("max_pcf_membership").longValue()))) {
+										<= (unsigned int)sm->par("max_pcf_membership").longValue())) {
 
 							uint32 key_ = getValue(membership, 32);
 
@@ -841,8 +843,8 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 			//Relative_Clique_Detection(); Async_Clique_Detektion();
 			if ((getValue(local_async_membership, 32)
-					>= sm->par("sm_stable_threshold_async").longValue())
-					|| (getValue(local_async_membership, 32)
+					>= (unsigned int)sm->par("sm_stable_threshold_async").longValue())
+					|| ((unsigned int)getValue(local_async_membership, 32)
 							>= local_sync_membership)) {
 
 				duration = sm->par("sm_restart_timeout").longValue();
@@ -868,8 +870,8 @@ void SM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if (!((getValue(local_async_membership, 32)
-					>= sm->par("sm_stable_threshold_async").longValue())
-					|| (getValue(local_async_membership, 32)
+					>= (unsigned int)sm->par("sm_stable_threshold_async").longValue())
+					|| ((unsigned int)getValue(local_async_membership, 32)
 							>= local_sync_membership))) {
 
 				//send(IN_FRAME);
@@ -962,9 +964,9 @@ void SM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					< sm->par("sm_stable_threshold_sync").longValue())
+					< (unsigned int)sm->par("sm_stable_threshold_sync").longValue())
 					&& (stable_cycle_counter
-							< sm->par("num_unstable_cycles").longValue())) {
+							< (unsigned int)sm->par("num_unstable_cycles").longValue())) {
 
 				stable_cycle_counter++;
 
@@ -972,9 +974,9 @@ void SM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					< sm->par("sm_stable_threshold_sync").longValue())
+					< (unsigned int)sm->par("sm_stable_threshold_sync").longValue())
 					&& (stable_cycle_counter
-							>= sm->par("num_unstable_cycles").longValue())) {
+							>= (unsigned int)sm->par("num_unstable_cycles").longValue())) {
 
 				duration = sm->par("sm_restart_timeout").longValue();
 				//local_clock=0;
@@ -1003,7 +1005,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if (local_sync_membership
-					>= sm->par("sm_stable_threshold_sync").longValue()) {
+					>= (unsigned int)sm->par("sm_stable_threshold_sync").longValue()) {
 
 				stable_cycle_counter = 0;
 
@@ -1379,7 +1381,7 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 				//Master config -> High_Integrity_Synchronisation
 				//the received CS frame stems from a other synchronization master
 				if ((sm->par("High_Integrity_Synchronisation").boolValue())
-						&& ((1 << ownBit) != e->getMember())) {
+						&& (((unsigned int)1 << ownBit) != e->getMember())) {
 
 					duration = sm->par("cs_offset").longValue();
 
@@ -1462,7 +1464,7 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 				local_async_membership = 0;
 
 				if (local_sync_membership
-						>= sm->par("sm_unsync_to_sync_thrld").longValue()) {
+						>= (unsigned int)sm->par("sm_unsync_to_sync_thrld").longValue()) {
 
 					uint32_t tempKey = local_sync_membership;
 
@@ -1491,9 +1493,9 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 					return;
 				}
 				if ((local_sync_membership
-						< sm->par("sm_unsync_to_sync_thrld").longValue())
+						< (unsigned int)sm->par("sm_unsync_to_sync_thrld").longValue())
 						&& (local_sync_membership
-								>= sm->par("sm_unsync_to_tentative_thrld").longValue())) {
+								>= (unsigned int)sm->par("sm_unsync_to_tentative_thrld").longValue())) {
 
 					uint32_t tempKey = local_sync_membership;
 
@@ -1697,11 +1699,11 @@ void SM_SYNC::handleMessage(cMessage *message) {
 							sm->par("smc_scheduled_receive_pit").longValue(),
 							sm->par("acceptance_window").longValue())) {
 
-						if (getValue(membership, 32)
-								>= (sm->par("max_pcf_membership").longValue()
+						if ((unsigned int)getValue(membership, 32)
+								>= (unsigned int)(sm->par("max_pcf_membership").longValue()
 										- MembershipAcceptanceRange)
 								&& (getValue(membership, 32)
-										<= (sm->par("max_pcf_membership").longValue()))) {
+										<= (unsigned int)sm->par("max_pcf_membership").longValue())) {
 
 							uint32_t key_ = getValue(membership, 32);
 
@@ -1803,7 +1805,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((getValue(local_async_membership, 32)
-					>= sm->par("sm_sync_threshold_async").longValue())
+					>= (unsigned int)sm->par("sm_sync_threshold_async").longValue())
 					|| (getValue(local_async_membership, 32)
 							>= local_sync_membership)) {
 
@@ -1834,7 +1836,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if (!((getValue(local_async_membership, 32)
-					>= sm->par("sm_sync_threshold_async").longValue())
+					>= (unsigned int)sm->par("sm_sync_threshold_async").longValue())
 					|| (getValue(local_async_membership, 32)
 							>= local_sync_membership))) {
 
@@ -1933,7 +1935,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 
 			if ((local_sync_membership
-					< sm->par("sm_sync_threshold_sync").longValue())
+					< (unsigned int)sm->par("sm_sync_threshold_sync").longValue())
 					&& (local_sync_membership > 0)) {
 
 				duration = sm->par("sm_restart_timeout_sync").longValue();
@@ -1964,7 +1966,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					< sm->par("sm_sync_threshold_sync").longValue())
+					< (unsigned int)sm->par("sm_sync_threshold_sync").longValue())
 					&& (local_sync_membership == 0)) {
 
 				duration = sm->par("sm_restart_timeout_sync").longValue();
@@ -1993,9 +1995,9 @@ void SM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= sm->par("sm_sync_threshold_sync").longValue())
+					>= (unsigned int)sm->par("sm_sync_threshold_sync").longValue())
 					&& (stable_cycle_counter
-							< sm->par("num_stable_cycles").longValue())
+							< (unsigned int)sm->par("num_stable_cycles").longValue())
 					&& (sm->par("sm_sync_to_stable_enabled").boolValue())) {
 
 				stable_cycle_counter++;
@@ -2006,9 +2008,9 @@ void SM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= sm->par("sm_sync_threshold_sync").longValue())
+					>= (unsigned int)sm->par("sm_sync_threshold_sync").longValue())
 					&& (stable_cycle_counter
-							>= sm->par("num_stable_cycles").longValue())
+							>= (unsigned int)sm->par("num_stable_cycles").longValue())
 					&& (sm->par("sm_sync_to_stable_enabled").boolValue())) {
 
 				stable_cycle_counter = 0;
@@ -2017,7 +2019,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 				return;
 			}
 			if (local_sync_membership
-					>= sm->par("sm_sync_threshold_sync").longValue()) {
+					>= (unsigned int)sm->par("sm_sync_threshold_sync").longValue()) {
 				tteScheduler->registerEvent(event2, true);
 				stable_cycle_counter++;
 
@@ -2767,7 +2769,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 								>= (sm->par("max_pcf_membership").longValue()
 										- MembershipAcceptanceRange)
 								&& (getValue(membership, 32)
-										<= (sm->par("max_pcf_membership").longValue()))) {
+										<= (unsigned int)sm->par("max_pcf_membership").longValue())) {
 
 							uint32_t key_ = getValue(membership, 32);
 
@@ -2866,7 +2868,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((getValue(local_async_membership, 32)
-					>= sm->par("sm_tentative_sync_threshold_async").longValue())
+					>= (unsigned int)sm->par("sm_tentative_sync_threshold_async").longValue())
 					|| (getValue(local_async_membership, 32)
 							>= local_sync_membership)) {
 
@@ -2898,7 +2900,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 			} //smc_async_eval_pit
 
 			if (!((getValue(local_async_membership, 32)
-					>= sm->par("sm_tentative_sync_threshold_async").longValue())
+					>= (unsigned int)sm->par("sm_tentative_sync_threshold_async").longValue())
 					|| (getValue(local_async_membership, 32)
 							>= local_sync_membership))) {
 
@@ -2976,7 +2978,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if (local_sync_membership
-					< sm->par("sm_tentative_sync_threshold_sync").longValue()) {
+					< (unsigned int)sm->par("sm_tentative_sync_threshold_sync").longValue()) {
 
 				duration = sm->par("sm_restart_timeout_async").longValue();
 				event->setSchedulingPriority(3);
@@ -3008,9 +3010,9 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 			tteScheduler->registerEvent(event3);
 
 			if (((local_sync_membership
-					>= sm->par("sm_tentative_sync_threshold_sync").longValue())
+					>= (unsigned int)sm->par("sm_tentative_sync_threshold_sync").longValue())
 					&& (local_sync_membership
-							< sm->par("sm_tentative_to_sync_thrld").longValue()))) {
+							< (unsigned int)sm->par("sm_tentative_to_sync_thrld").longValue()))) {
 
 				stable_cycle_counter++;
 				//stable_cycle_counter+1 ??
@@ -3020,7 +3022,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= sm->par("sm_tentative_sync_threshold_sync").longValue())) {
+					>= (unsigned int)sm->par("sm_tentative_sync_threshold_sync").longValue())) {
 
 				stable_cycle_counter = 0;
 
@@ -3029,11 +3031,11 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if (((local_sync_membership
-					>= sm->par("sm_tentative_sync_threshold_sync").longValue())
+					>= (unsigned int)sm->par("sm_tentative_sync_threshold_sync").longValue())
 					&& (local_sync_membership
-							< sm->par("sm_tentative_to_sync_thrld").longValue()))
+							< (unsigned int)sm->par("sm_tentative_to_sync_thrld").longValue()))
 					&& ((stable_cycle_counter
-							>= sm->par("num_stable_cycles").longValue())
+							>= (unsigned int)sm->par("num_stable_cycles").longValue())
 							&& (sm->par("sm_tent_to_stable_enabled").boolValue()))) {
 
 				stable_cycle_counter = 0;
@@ -3374,7 +3376,7 @@ void SM_WAIT_4_CYCLE_START::handleMessage(cMessage *message) {
 								sm->par("acceptance_window").longValue())))) {
 
 					if (getValue(e->getMember(), 32)
-							>= sm->par("sm_wait_threshold_async").longValue()) {
+							>= (unsigned int)sm->par("sm_wait_threshold_async").longValue()) {
 
 						tteScheduler->unregisterEvent(event);
 
