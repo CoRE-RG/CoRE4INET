@@ -40,7 +40,7 @@ class SM_INIT:public SMState{
     public:
 
     SM_INIT(SM *sm, FILE *fp);
-    virtual ~SM_INIT();
+    //virtual ~SM_INIT();
 	void reaction(int message);
 
 };
@@ -71,6 +71,7 @@ class SM_STABLE:public SMState{
 public:
 
 	SM_STABLE();
+	//virtual ~SM_STABLE();
 	//void reaction(int message);
 	void handleMessage(cMessage *message);
 

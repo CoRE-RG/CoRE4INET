@@ -49,6 +49,11 @@ void TTEScheduler::initialize(int stage)
 TTEScheduler::~TTEScheduler()
 {
     cancelAndDelete(newCyclemsg);
+    for(std::list<SchedulerEvent*>::iterator event = registredEvents.begin();event!=registredEvents.end();event++){
+        if((*event)->getOwner()==this){
+            cancelAndDelete(*event);
+        }
+    }
 }
 
 bool TTEScheduler::registerEvent(SchedulerEvent *event){

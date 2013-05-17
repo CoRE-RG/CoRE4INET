@@ -37,6 +37,7 @@ simple SICM like ISync
         int id=default(0);
         //set true for reading values from previous run
         bool read=default(false);
+        bool write=default(false);
         
         //AS6802: The compression function shall tolerate up to two faulty synchronization masters.
         int faulty_synchronisatzation_masters = default(0);

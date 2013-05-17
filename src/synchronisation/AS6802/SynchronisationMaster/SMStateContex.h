@@ -34,7 +34,9 @@ class SMStateContex{
 	public:
 
 	SMStateContex(){}
-	virtual ~SMStateContex(){}
+	virtual ~SMStateContex(){
+	    delete(pState);
+	}
 
 	virtual  void setState(SMState *firstState){
 		pState=firstState;

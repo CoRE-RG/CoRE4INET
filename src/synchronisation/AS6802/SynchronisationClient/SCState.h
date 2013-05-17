@@ -54,9 +54,7 @@ class SCState{
 
     SC *sc;
 
-    vector<int> *knownCMs;
     const char * CMs;
-    cStringTokenizer *tokenizer;
 
     FILE *fp;
     vector<int> *values;
@@ -101,7 +99,7 @@ class SCState{
 	//template< const std::pair< unsigned int , PCFrame* > >
 
 	//clock readings stack
-	multimap<uint32_t,uint64_t> *container;
+	//multimap<uint32_t,uint64_t> *container;
 	std::map<uint32_t, pair<uint32_t,uint64_t> > *clock_stack;
 	//multimap<unsigned int, PCFrame *> *f_container;
 	//multimap<unsigned int, PCFrame *>  *sync_container;
@@ -113,7 +111,23 @@ class SCState{
 
 	multimap<uint64_t, FrameEvent *> *e_container;
 
+	virtual ~SCState(){
+	    values->clear();
+	    delete(values);
 
+	    delete(event);
+	    delete(event1);
+        delete(event2);
+        delete(event3);
+        delete(event4);
+        delete(event5);
+
+        //container->clear();
+        //delete(container);
+
+        clock_stack->clear();
+        delete(clock_stack);
+	}
 
 	virtual void reaction(int message){
 

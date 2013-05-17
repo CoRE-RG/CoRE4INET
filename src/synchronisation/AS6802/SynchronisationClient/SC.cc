@@ -42,15 +42,13 @@ void SC::initialize(int stage){
         ss<<this->par("id").longValue();
         path+=ss.str();
 
+        fp = NULL;
         if(this->par("read").boolValue()){
-
+            this->par("write").setBoolValue(false);
             fp=fopen(path.c_str(),"r");
 
-        }else{
-
+        }else if(this->par("write").boolValue()){
             fp=fopen(path.c_str(),"w+");
-
-
         }
 
         sc = new StateContex();
@@ -63,17 +61,10 @@ void SC::initialize(int stage){
 void SC::finish(){
     fflush(fp);
     fclose(fp);
-
-
-
 }
 
 SC::~SC(){
-
-	delete(s0);
 	delete(sc);
-
-
 }
 
 void SC::handleMessage(cMessage *m){

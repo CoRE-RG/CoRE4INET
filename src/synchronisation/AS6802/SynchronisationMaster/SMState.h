@@ -101,6 +101,23 @@ public:
 
 	multimap<uint64_t, FrameEvent *> *e_container;
 
+	virtual ~SMState(){
+	    delete(outVector);
+	    delete(event);
+	    delete(event1);
+	    delete(event2);
+	    delete(event3);
+	    delete(event4);
+	    delete(event5);
+	    clock_stack->clear();
+	    delete(clock_stack);
+	    for(std::map<uint64_t, FrameEvent *>::iterator event=e_container->begin();event!=e_container->end();event++){
+	        delete (*event).second;
+	    }
+	    e_container->clear();
+	    delete(e_container);
+	}
+
 	virtual void handleMessage(cMessage *message) {
 	}
 

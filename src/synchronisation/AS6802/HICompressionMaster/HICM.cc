@@ -44,11 +44,12 @@ void HICM::initialize(int stage){
 
         ss<<this->par("id").longValue();
         path+=ss.str();
+        fp = NULL;
         if(this->par("read").boolValue()){
-
+            this->par("write").setBoolValue(false);
             fp=fopen(path.c_str(),"r");
 
-        }else{
+        }else if(this->par("write").boolValue()){
             fp=fopen(path.c_str(),"w+");
         }
 
@@ -67,11 +68,7 @@ void HICM::finish(){
 }
 
 HICM::~HICM(){
-
-	delete(c0);
 	delete(cm);
-
-
 }
 
 void HICM::handleMessage(cMessage *message){

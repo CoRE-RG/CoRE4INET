@@ -32,8 +32,6 @@
 
 namespace TTEthernetModel {
 
-SC_INIT::~SC_INIT(){}
-
 SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 	sc = sc_ref;
 	fp = f;
@@ -90,7 +88,6 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 	event = new SchedulerTimerEvent("ASYNCHRON", TIMER_EVENT);
 	event->setSchedulingPriority(3);
 
-	container = new multimap<uint32_t, uint64_t>;
 	clock_stack = new map<uint32, pair<uint32, uint64> >;
 
 	//NOTE: A Time-Triggered Ethernet synchronization master makes all PCFs permanent before usage.
@@ -562,9 +559,6 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 						} //found
 
-						ev << "SC SYNC:in schedule key" << key_ << endl;
-						ev << "SC SYNC: size container" << container->size()
-								<< endl;
 					} //faulty sync master to be tolerated
 
 				} else { //out of Schedule -> permanence pit out of bounds
@@ -850,7 +844,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 				tteScheduler->clockCorrection(clock_corr);
 				//outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sc->par("read").boolValue()) {
+				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}
@@ -1063,9 +1057,6 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 						} //found
 
-						ev << "SC_STABLE:in schedule key" << key_ << endl;
-						ev << "SC_STABLE: size container" << container->size()
-								<< endl;
 					} //faulty sync master to be tolerated
 
 				} else { //out of Schedule -> permanence pit out of bounds
@@ -1325,7 +1316,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 				tteScheduler->clockCorrection(clock_corr);
 				// outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sc->par("read").boolValue()) {
+				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}
@@ -1353,7 +1344,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				clock_corr = (double) (temp) / (double) (clock_stack->size());
 
-				if (!sc->par("read").boolValue()) {
+				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d", tteScheduler->getCycles());
 					fprintf(fp, "%lld \n", clock_corr);
 				}

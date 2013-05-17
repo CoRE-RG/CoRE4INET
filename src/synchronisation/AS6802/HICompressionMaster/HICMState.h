@@ -110,14 +110,50 @@ class HICMState{
 
 
 
-
     deque<CompressedPIT * > *delay_container;
 
     deque<DispatchDelay *> *dispatch_delay_container;
 
     deque<pair<unsigned int, unsigned int> > *clock_stack;
 
+    virtual ~HICMState(){
+        delete(outVector);
+        values->clear();
+        delete(values);
+        delete(event);
+        delete(event2);
+        delete(event3);
+        delete(event4);
+        delete(event5);
 
+        for(std::map<long, PCFrame * >::iterator frame=compressed_frames->begin();frame!=compressed_frames->end();frame++){
+            delete (*frame).second;
+        }
+        compressed_frames->clear();
+        delete(compressed_frames);
+
+        for(compression_stack_it=compression_stack->begin();compression_stack_it!=compression_stack->end();compression_stack_it++){
+            (*compression_stack_it).second->clear();
+            delete (*compression_stack_it).second;
+        }
+        compression_stack->clear();
+        delete(compression_stack);
+
+        for(std::deque<CompressedPIT *>::iterator event=delay_container->begin();event!=delay_container->end();event++){
+            delete (*event);
+        }
+        delay_container->clear();
+        delete(delay_container);
+
+        for(std::deque<DispatchDelay *>::iterator event=dispatch_delay_container->begin();event!=dispatch_delay_container->end();event++){
+            delete (*event);
+        }
+        dispatch_delay_container->clear();
+        delete(dispatch_delay_container);
+
+        clock_stack->clear();
+        delete(clock_stack);
+    }
 
 
 	virtual void handleMessage(cMessage *message){}
@@ -127,17 +163,16 @@ class HICMState{
 
 
 	 int getValue( unsigned int bitVector,  int length){
+        int count = 0;
 
-	                 int count = 0;
+        for (int ibit = 0; ibit < length; ibit++) {
+          //if (v & 1) c++;
+          count += bitVector & 1;
+          bitVector >>= 1;
+        }
 
-	                for (int ibit = 0; ibit < length; ibit++) {
-	                  //if (v & 1) c++;
-	                  count += bitVector & 1;
-	                  bitVector >>= 1;
-	                }
-
-	                return count;
-	            }
+        return count;
+    }
 
 
     int getBitPosition(unsigned int bitVector){

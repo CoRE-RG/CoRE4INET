@@ -29,7 +29,9 @@ TTBuffer::TTBuffer()
 
 TTBuffer::~TTBuffer()
 {
-    cancelAndDelete(actionTimeEvent);
+    if(actionTimeEvent->getOwner()==this){
+        cancelAndDelete(actionTimeEvent);
+    }
 }
 
 int TTBuffer::numInitStages() const

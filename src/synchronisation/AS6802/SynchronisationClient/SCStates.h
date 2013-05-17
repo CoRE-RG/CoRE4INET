@@ -48,7 +48,7 @@ class SC_INIT:public SCState{
 
 public:
     SC_INIT(SC *sc, FILE *f);
-    virtual ~SC_INIT();
+    //virtual ~SC_INIT();
     //void reaction(int message);
     void handleMessage(cMessage *message);
 

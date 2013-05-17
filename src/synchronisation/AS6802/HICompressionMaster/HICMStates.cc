@@ -37,8 +37,6 @@ class HICM;
 
 namespace TTEthernetModel {
 
-HI_CM_INIT::~HI_CM_INIT(){}
-
 HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 
 	//for statistics purpose only
@@ -1227,7 +1225,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			tteScheduler->clockCorrection(clock_corr);
 
 			outVector->record((double) clock_corr);
-			if (!hicm->par("read").boolValue()) {
+			if (hicm->par("write").boolValue()) {
 				fprintf(fp, "%d ", tteScheduler->getCycles());
 				fprintf(fp, "%d \n", clock_corr);
 			}

@@ -893,7 +893,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 			tteScheduler->clockCorrection(clock_corr);
 
 			outVector->record((double) clock_corr);
-			if (!sicm->par("read").boolValue()) {
+			if (sicm->par("write").boolValue()) {
 				fprintf(fp, "%d ", tteScheduler->getCycles());
 				fprintf(fp, "%d \n", clock_corr);
 			}

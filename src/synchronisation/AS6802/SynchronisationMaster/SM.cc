@@ -41,10 +41,13 @@ void SM::initialize(int stage){
         str = "syncmaster";
         ss<<this->par("bit_index").longValue();
         str+=ss.str();
+        fp = NULL;
         if(this->par("read").boolValue()){
+            this->par("write").setBoolValue(false);
             fp=fopen(str.c_str(),"r");
-        }else{
-            fp=fopen(str.c_str(),"w");
+
+        }else if(this->par("write").boolValue()){
+            fp=fopen(str.c_str(),"w+");
         }
         sm = new SMStateContex();
         s0 = new SM_INIT(this, fp);
@@ -61,11 +64,7 @@ void SM::finish(){
 }
 
 SM::~SM(){
-
-	delete(s0);
 	delete(sm);
-
-
 }
 
 void SM::handleMessage(cMessage *message){

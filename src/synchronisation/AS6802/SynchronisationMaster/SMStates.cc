@@ -35,8 +35,6 @@
 namespace TTEthernetModel {
 using namespace std;
 
-SM_INIT::~SM_INIT(){}
-
 SM_INIT::SM_INIT(SM *s, FILE *f) {
 
 	outVector = new cOutVector("Name");
@@ -1030,7 +1028,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 				tteScheduler->clockCorrection(clock_corr);
 				// outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sm->par("read").boolValue()) {
+				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}
@@ -1065,7 +1063,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 				//outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sm->par("read").boolValue()) {
+				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}
@@ -2043,7 +2041,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 				tteScheduler->clockCorrection(clock_corr);
 				//outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sm->par("read").boolValue()) {
+				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}
@@ -2079,7 +2077,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 				//outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sm->par("read").boolValue()) {
+				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}
@@ -3063,7 +3061,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 				tteScheduler->clockCorrection(clock_corr);
 				//outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sm->par("read").boolValue()) {
+				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}
@@ -3096,7 +3094,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 				//outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
-				if (!sm->par("read").boolValue()) {
+				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
 					fprintf(fp, " %lld \n", clock_corr);
 				}

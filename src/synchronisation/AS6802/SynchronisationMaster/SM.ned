@@ -31,6 +31,7 @@ simple SM like ISync
    
     
     bool read=default(false);
+    bool write=default(false);
     bool pseudo_sim=default(false);
     
     int precision=default(80);

@@ -36,6 +36,7 @@ int syncPriority =default(4);
 int id=default(0);
 
 bool read=default(false);
+bool write=default(false);
 
 int precision =default(80);
 int int_cycle_duration =default(12500);
