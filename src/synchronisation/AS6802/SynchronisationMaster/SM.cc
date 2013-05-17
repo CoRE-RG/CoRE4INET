@@ -58,8 +58,10 @@ void SM::initialize(int stage){
 }
 
 void SM::finish(){
-    fflush(fp);
-    fclose(fp);
+    if(fp){
+        fflush(fp);
+        fclose(fp);
+    }
 
 }
 

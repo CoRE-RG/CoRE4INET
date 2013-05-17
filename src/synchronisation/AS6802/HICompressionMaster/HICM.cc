@@ -62,9 +62,10 @@ void HICM::initialize(int stage){
 }
 
 void HICM::finish(){
-
-    fflush(fp);
-    fclose(fp);
+    if(fp){
+        fflush(fp);
+        fclose(fp);
+    }
 }
 
 HICM::~HICM(){

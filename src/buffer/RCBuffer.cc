@@ -30,7 +30,9 @@ RCBuffer::RCBuffer()
 
 RCBuffer::~RCBuffer()
 {
-    cancelAndDelete(timerMessage);
+    if(timerMessage->getOwner()==this){
+        cancelAndDelete(timerMessage);
+    }
 }
 
 int RCBuffer::numInitStages() const

@@ -59,8 +59,10 @@ void SC::initialize(int stage){
 }
 
 void SC::finish(){
-    fflush(fp);
-    fclose(fp);
+    if(fp){
+        fflush(fp);
+        fclose(fp);
+    }
 }
 
 SC::~SC(){

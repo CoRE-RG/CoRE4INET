@@ -63,9 +63,10 @@ void SICM::initialize(int stage){
 }
 
 void SICM::finish(){
-
-    fflush(fp);
-    fclose(fp);
+    if(fp){
+        fflush(fp);
+        fclose(fp);
+    }
 }
 
 SICM::~SICM(){
