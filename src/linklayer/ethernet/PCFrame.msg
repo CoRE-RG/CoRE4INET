@@ -32,6 +32,9 @@ enum PCFType
 // @author Till Steinbach
 packet PCFrame extends RCFrame
 {   
+    // Set PCF Bytelength
+    byteLength = 64;
+    	
     // pcf_integration_cycle: Represents the integration cycle in which the protocol control frame was sent
     //
     // 32 Bit field
