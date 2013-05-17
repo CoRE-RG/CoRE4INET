@@ -30,7 +30,7 @@ void PCFIncoming::handleMessage(cMessage *msg){
         PCFrame *frame = dynamic_cast<PCFrame *>(msg);
 
         if(frame->getType() != (uint8_t)pcfType){
-            ev<<"FRAME DROPPED, wrong type:"<<frame->getType()<<" should be "<<pcfType<<endl;
+            ev<<"FRAME DROPPED, wrong type:"<<(int)frame->getType()<<" should be "<<pcfType<<endl;
             delete frame;
         }else{
             sendDelayed(frame,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
