@@ -61,6 +61,7 @@ class HI_CM_STABLE : public HICMState
 {
     public:
         HI_CM_STABLE();
+        virtual ~HI_CM_STABLE();
         void compressionFunction(cMessage* message, HICM *hicm);
         void handleMessage(cMessage *message);
 
