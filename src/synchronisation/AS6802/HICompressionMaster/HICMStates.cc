@@ -32,49 +32,14 @@
 #include "SchedulerMessageEvents_m.h"
 #include "cmessage.h"
 #include "PCFrame_m.h"
-
+#include <cobject.h>
 class HICM;
 
 namespace TTEthernetModel {
 
-HI_CM_STABLE::~HI_CM_STABLE(){
-        delete(outVector);
-        values->clear();
-        delete(values);
-        delete(event);
-        delete(event2);
-        delete(event3);
-        delete(event4);
-        delete(event5);
 
-        for(std::map<long, PCFrame * >::iterator frame=compressed_frames->begin();frame!=compressed_frames->end();frame++){
-            delete (*frame).second;
-        }
-        compressed_frames->clear();
-        delete(compressed_frames);
 
-        for(compression_stack_it=compression_stack->begin();compression_stack_it!=compression_stack->end();compression_stack_it++){
-            (*compression_stack_it).second->clear();
-            delete (*compression_stack_it).second;
-        }
-        compression_stack->clear();
-        delete(compression_stack);
 
-        for(std::deque<CompressedPIT *>::iterator event=delay_container->begin();event!=delay_container->end();event++){
-            delete (*event);
-        }
-        delay_container->clear();
-        delete(delay_container);
-
-        for(std::deque<DispatchDelay *>::iterator event=dispatch_delay_container->begin();event!=dispatch_delay_container->end();event++){
-            delete (*event);
-        }
-        dispatch_delay_container->clear();
-        delete(dispatch_delay_container);
-
-        clock_stack->clear();
-        delete(clock_stack);
-    }
 
 HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 
@@ -141,7 +106,7 @@ HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 	compression_stack = new map<unsigned int,
 			vector<pair<unsigned int, unsigned int> > *>;
 
-	compressed_frames = new map<long int, PCFrame *>;
+	compressed_frames = new map<long int, PCFrame * >;
 
 	delay_container = new deque<CompressedPIT *>;
 
@@ -471,6 +436,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 			CompressedPIT *cp = dynamic_cast<CompressedPIT *>(message);
 
 			PCFrame *compressedFrame = new PCFrame("IN_FRAME");
+
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
 			compressedFrame->setType(IN);
@@ -498,7 +464,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 			long int key = compressedFrame->getId();
 
 			compressed_frames->insert(
-					pair<long int, PCFrame *>(key, compressedFrame));
+					make_pair<long int, PCFrame *>(key, compressedFrame));
 
 			local_sync_membership = cp->getMembership_new();
 			local_integration_cycle = cp->getIntegrationCycle();
@@ -577,27 +543,28 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
-			PCFrame *frame = compressed_frames->find(dd->getFrameID())->second;
 
-			cMsgPar *par = &frame->addPar("created_total");
+
+			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
 
 			par->setLongValue(tteScheduler->getTotalTicks());
 
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 							"in"));
 
-			delete frame;
+			//delete frame;
 
+			delete compressed_frames->at(dd->getFrameID());
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -1109,6 +1076,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			CompressedPIT *cp = dynamic_cast<CompressedPIT *>(message);
 
 			PCFrame *compressedFrame = new PCFrame("IN_FRAME");
+
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
 			compressedFrame->setType(IN);
@@ -1136,7 +1104,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			long int key = compressedFrame->getId();
 
 			compressed_frames->insert(
-					pair<long int, PCFrame *>(key, compressedFrame));
+					make_pair<long int, PCFrame *>(key, compressedFrame));
 
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
@@ -1228,27 +1196,28 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
-			PCFrame *frame = compressed_frames->find(dd->getFrameID())->second;
 
-			cMsgPar *par = &frame->addPar("created_total");
+
+			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
 
 			par->setLongValue(tteScheduler->getTotalTicks());
 
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 							"in"));
 
-			delete frame;
+			//delete frame;
 
+			delete compressed_frames->at(dd->getFrameID());
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -1918,6 +1887,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 			CompressedPIT *cp = dynamic_cast<CompressedPIT *>(message);
 
 			PCFrame *compressedFrame = new PCFrame("IN_FRAME");
+
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
 			compressedFrame->setType(IN);
@@ -1946,7 +1916,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 			long int key = compressedFrame->getId();
 
 			compressed_frames->insert(
-					pair<long int, PCFrame *>(key, compressedFrame));
+					make_pair<long int, PCFrame *>(key, compressedFrame));
 
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
@@ -2041,27 +2011,27 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
-			PCFrame *frame = compressed_frames->find(dd->getFrameID())->second;
 
-			cMsgPar *par = &frame->addPar("created_total");
+
+			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
 
 			par->setLongValue(tteScheduler->getTotalTicks());
 
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 							"in"));
 
-			delete frame;
-
+			//delete frame;
+			delete compressed_frames->at(dd->getFrameID());
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -2568,6 +2538,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			CompressedPIT *cp = dynamic_cast<CompressedPIT *>(message);
 
 			PCFrame *compressedFrame = new PCFrame("IN_FRAME");
+
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
 			compressedFrame->setType(IN);
@@ -2595,7 +2566,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			long int key = compressedFrame->getId();
 
 			compressed_frames->insert(
-					pair<long int, PCFrame *>(key, compressedFrame));
+					make_pair<long int, PCFrame *>(key, compressedFrame));
 
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
@@ -2687,27 +2658,27 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
-			PCFrame *frame = compressed_frames->find(dd->getFrameID())->second;
 
-			cMsgPar *par = &frame->addPar("created_total");
+
+			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
 
 			par->setLongValue(tteScheduler->getTotalTicks());
 
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 							"in"));
 
-			delete frame;
-
+			//delete frame;
+			delete compressed_frames->at(dd->getFrameID());
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -3385,6 +3356,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			CompressedPIT *cp = dynamic_cast<CompressedPIT *>(message);
 
 			PCFrame *compressedFrame = new PCFrame("IN_FRAME");
+
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
 			compressedFrame->setType(IN);
@@ -3412,7 +3384,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			long int key = compressedFrame->getId();
 
 			compressed_frames->insert(
-					pair<long int, PCFrame *>(key, compressedFrame));
+					make_pair<long int, PCFrame *>(key, compressedFrame));
 
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
@@ -3504,27 +3476,27 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
-			PCFrame *frame = compressed_frames->find(dd->getFrameID())->second;
 
-			cMsgPar *par = &frame->addPar("created_total");
+
+			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
 
 			par->setLongValue(tteScheduler->getTotalTicks());
 
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 							"in"));
 
-			delete frame;
-
+			//delete frame;
+			delete compressed_frames->at(dd->getFrameID());
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -4252,6 +4224,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 			CompressedPIT *cp = dynamic_cast<CompressedPIT *>(message);
 
 			PCFrame *compressedFrame = new PCFrame("IN_FRAME");
+
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
 			compressedFrame->setType(IN);
@@ -4279,7 +4252,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 			long int key = compressedFrame->getId();
 
 			compressed_frames->insert(
-					pair<long int, PCFrame *>(key, compressedFrame));
+					make_pair<long int, PCFrame *>(key, compressedFrame));
 
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
@@ -4368,27 +4341,27 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
-			PCFrame *frame = compressed_frames->find(dd->getFrameID())->second;
 
-			cMsgPar *par = &frame->addPar("created_total");
+
+			cMsgPar *par = &(compressed_frames->at(dd->getFrameID()))->addPar("created_total");
 
 			par->setLongValue(tteScheduler->getTotalTicks());
 
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
 							"in"));
 			hicm->sendDirect(
-					frame->dup(),
+			        compressed_frames->at(dd->getFrameID())->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 							"in"));
 
-			delete frame;
-
+			//delete frame;
+			delete compressed_frames->at(dd->getFrameID());
 			compressed_frames->erase(dd->getId());
 
 			delete dd;

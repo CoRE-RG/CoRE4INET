@@ -35,10 +35,10 @@ namespace TTEthernetModel{
 
 class SICMStateContex{
 
-	private:
+    public:
 		SICMState *pState;
 
-	public:
+
 
 	SICMStateContex(){}
 	virtual ~SICMStateContex(){}

@@ -14,7 +14,7 @@ namespace TTEthernetModel {
 
 class StateContex{
 
-	private:
+	public:
 		SCState *pState;
 
 	public:

@@ -31,12 +31,15 @@ namespace TTEthernetModel {
 
 class HICMStateContex
 {
-    private:
+    public:
+        //private:
         HICMState *pState;
 
-    public:
+    //public:
         HICMStateContex(){}
-        virtual ~HICMStateContex(){}
+        virtual ~HICMStateContex(){
+            delete pState;
+        }
         virtual void setState(HICMState *firstState)
         {
             pState = firstState;

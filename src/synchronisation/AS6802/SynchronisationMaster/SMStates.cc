@@ -1030,7 +1030,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 
 				clock_stack->clear();
@@ -1065,7 +1065,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 
 				clock_stack->clear();
@@ -2043,7 +2043,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 
 				clock_stack->clear();
@@ -2079,7 +2079,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 
 				//for the next cycle
@@ -3063,7 +3063,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 				//clear for the next cycle
 				// container->clear();
@@ -3096,7 +3096,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 
 				clock_stack->clear();

@@ -63,6 +63,45 @@ void SC::finish(){
         fflush(fp);
         fclose(fp);
     }
+    if (this->par("read").boolValue()||this->par("write").boolValue()){
+           sc->pState->values->clear();
+           delete sc->pState->values;
+
+       }
+           delete sc->pState->outVector;
+
+    if(sc->pState->event){
+           if(sc->pState->event->getOwner()==this){
+        cancelAndDelete(sc->pState->event);
+           }
+    }
+   /* if(sc->pState->event1){
+    if(sc->pState->event1->getOwner()==this){
+               cancelAndDelete(sc->pState->event1);
+                     }}
+    if(sc->pState->event2){
+    if(sc->pState->event2->getOwner()==this){
+               cancelAndDelete(sc->pState->event2);
+                     }}
+    if(sc->pState->event3){
+    if(sc->pState->event3->getOwner()==this){
+               cancelAndDelete(sc->pState->event3);
+                     }}
+    if(sc->pState->event4){
+    if(sc->pState->event4->getOwner()==this){
+               cancelAndDelete(sc->pState->event4);
+                     }}
+    if(sc->pState->event5){
+    if(sc->pState->event5->getOwner()==this){
+               cancelAndDelete(sc->pState->event5);
+                     }}*/
+
+
+
+
+           sc->pState->clock_stack->clear();
+           delete(sc->pState->clock_stack);
+
 }
 
 SC::~SC(){

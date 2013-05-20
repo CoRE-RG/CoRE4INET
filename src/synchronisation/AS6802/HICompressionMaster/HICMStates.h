@@ -40,30 +40,36 @@ class HI_CM_INIT : public HICMState
     public:
         HI_CM_INIT(HICM *hicm, FILE *f);
         //virtual ~HI_CM_INIT();
+
 };
 
 class HI_CM_PSEUDOSYNC : public HICMState
 {
     public:
         HI_CM_PSEUDOSYNC();
+        //virtual ~HI_CM_PSEUDOSYNC();
         void handleMessage(cMessage *message);
+
 };
 
 class HI_CM_INTEGRATE : public HICMState
 {
     public:
         HI_CM_INTEGRATE();
+        //virtual ~HI_CM_INTEGRATE();
         void compressionFunction(cMessage* message, HICM *hicm);
         void handleMessage(cMessage *message);
+
 };
 
 class HI_CM_STABLE : public HICMState
 {
     public:
         HI_CM_STABLE();
-        virtual ~HI_CM_STABLE();
+        //virtual ~HI_CM_STABLE();
         void compressionFunction(cMessage* message, HICM *hicm);
         void handleMessage(cMessage *message);
+
 
 };
 
@@ -71,8 +77,10 @@ class HI_CM_UNSYNC : public HICMState
 {
     public:
         HI_CM_UNSYNC();
+        //virtual ~HI_CM_UNSYNC();
         void compressionFunction(cMessage* message, HICM *hicm);
         void handleMessage(cMessage *message);
+
 
 };
 
@@ -80,24 +88,30 @@ class HI_CM_SYNC : public HICMState
 {
     public:
         HI_CM_SYNC();
+        //virtual ~HI_CM_SYNC();
         void compressionFunction(cMessage* message, HICM *hicm);
         void handleMessage(cMessage *message);
+
 };
 
 class HI_CM_TENTATIVE_SYNC : public HICMState
 {
     public:
         HI_CM_TENTATIVE_SYNC();
+        //virtual ~HI_CM_TENTATIVE_SYNC();
         void compressionFunction(cMessage* message, HICM *hicm);
         void handleMessage(cMessage *message);
+
 };
 
 class HI_CM_WAIT_4_CYCLE_START : public HICMState
 {
     public:
         HI_CM_WAIT_4_CYCLE_START();
+        //virtual ~HI_CM_WAIT_4_CYCLE_START();
         void compressionFunction(cMessage* message, HICM *hicm);
         void handleMessage(cMessage *message);
+
 };
 
 }

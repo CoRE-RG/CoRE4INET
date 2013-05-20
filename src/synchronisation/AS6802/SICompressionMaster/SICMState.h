@@ -99,6 +99,7 @@ public:
 	map<unsigned int, vector<pair<unsigned int, unsigned int> > *>::iterator compression_stack_it;
 
 	map<unsigned int, vector<pair<unsigned int, unsigned int> > *> *ca_compression_stack;
+	map<unsigned int, vector<pair<unsigned int, unsigned int> > *>::iterator ca_compression_stack_it;
 
 	deque<CompressedPIT *> *delay_container;
 	deque<DispatchDelay *> *dispatch_delay_container;

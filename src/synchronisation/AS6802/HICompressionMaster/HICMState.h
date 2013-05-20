@@ -98,10 +98,10 @@ class HICMState{
 
 
 
-       //compression function and clock synchronization service
+    //compression function and clock synchronization service
 
 
-    map<long, PCFrame * > *compressed_frames;
+    map<long int, PCFrame * > *compressed_frames;
 
     //container for PCF that became permanent during the collection phase of the compression function
     //key -> integration_cycle, value=vector<membership_new, permenence_pit>
@@ -116,44 +116,7 @@ class HICMState{
 
     deque<pair<unsigned int, unsigned int> > *clock_stack;
 
-    virtual ~HICMState(){
-        delete(outVector);
-        values->clear();
-        delete(values);
-        delete(event);
-        delete(event2);
-        delete(event3);
-        delete(event4);
-        delete(event5);
 
-        for(std::map<long, PCFrame * >::iterator frame=compressed_frames->begin();frame!=compressed_frames->end();frame++){
-            delete (*frame).second;
-        }
-        compressed_frames->clear();
-        delete(compressed_frames);
-
-        for(compression_stack_it=compression_stack->begin();compression_stack_it!=compression_stack->end();compression_stack_it++){
-            (*compression_stack_it).second->clear();
-            delete (*compression_stack_it).second;
-        }
-        compression_stack->clear();
-        delete(compression_stack);
-
-        for(std::deque<CompressedPIT *>::iterator event=delay_container->begin();event!=delay_container->end();event++){
-            delete (*event);
-        }
-        delay_container->clear();
-        delete(delay_container);
-
-        for(std::deque<DispatchDelay *>::iterator event=dispatch_delay_container->begin();event!=dispatch_delay_container->end();event++){
-            delete (*event);
-        }
-        dispatch_delay_container->clear();
-        delete(dispatch_delay_container);
-
-        clock_stack->clear();
-        delete(clock_stack);
-    }
 
 
 	virtual void handleMessage(cMessage *message){}

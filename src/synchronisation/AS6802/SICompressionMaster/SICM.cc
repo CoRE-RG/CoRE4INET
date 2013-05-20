@@ -67,6 +67,103 @@ void SICM::finish(){
         fflush(fp);
         fclose(fp);
     }
+    delete(cm->pState->outVector);
+
+      if (this->par("read").boolValue() || this->par("write").boolValue() ) {
+          cm->pState->values->clear();
+      delete(cm->pState->values);
+      }
+
+      if(cm->pState->event->getOwner()==this){
+          cancelAndDelete(cm->pState->event);
+      }
+      if(cm->pState->event2->getOwner()==this){
+             cancelAndDelete(cm->pState->event2);
+         }
+      if(cm->pState->event3->getOwner()==this){
+             cancelAndDelete(cm->pState->event3);
+         }
+      if(cm->pState->event4->getOwner()==this){
+                cancelAndDelete(cm->pState->event4);
+            }
+      if(cm->pState->event5->getOwner()==this){
+                    cancelAndDelete(cm->pState->event5);
+                }
+
+
+
+
+
+      /*for(std::map<long int, PCFrame *>::iterator itCompFrames=cm->pState->compressed_frames->begin(); itCompFrames != cm->pState->compressed_frames->end(); itCompFrames++){
+
+
+              cancelAndDelete(itCompFrames->second);
+
+
+
+          }*/
+
+      cm->pState->compressed_frames->clear();
+      cm->pState->caCompressedFrames->clear();
+
+      delete(cm->pState->compressed_frames);
+      delete(cm->pState->caCompressedFrames);
+
+      for(cm->pState->compression_stack_it=cm->pState->compression_stack->begin();cm->pState->compression_stack_it != cm->pState->compression_stack->end(); cm->pState->compression_stack_it++){
+
+          (*cm->pState->compression_stack_it).second->clear();
+
+          delete (*cm->pState->compression_stack_it).second;
+      }
+
+      cm->pState->compression_stack->clear();
+
+      delete(cm->pState->compression_stack);
+
+      for(cm->pState->ca_compression_stack_it=cm->pState->ca_compression_stack->begin();cm->pState->ca_compression_stack_it != cm->pState->ca_compression_stack->end(); cm->pState->ca_compression_stack_it++){
+
+                (*cm->pState->ca_compression_stack_it).second->clear();
+
+                delete (*cm->pState->ca_compression_stack_it).second;
+            }
+
+            cm->pState->ca_compression_stack->clear();
+
+            delete(cm->pState->ca_compression_stack);
+
+
+
+
+      for(std::deque<CompressedPIT *>::iterator event=cm->pState->delay_container->begin();event != cm->pState->delay_container->end(); event++){
+
+          if((*event)->getOwner()==this)
+
+              cancelAndDelete(*event);
+      }
+
+      cm->pState->delay_container->clear();
+
+      delete(cm->pState->delay_container);
+
+      for(std::deque<DispatchDelay *>::iterator event=cm->pState->dispatch_delay_container->begin(); event != cm->pState->dispatch_delay_container->end(); event++){
+
+          if((*event)->getOwner()==this)
+
+             cancelAndDelete(*event);
+
+      }
+
+      cm->pState->dispatch_delay_container->clear();
+
+      delete(cm->pState->dispatch_delay_container);
+
+      cm->pState->clock_stack->clear();
+      delete(cm->pState->clock_stack);
+
+
+
+
+
 }
 
 SICM::~SICM(){

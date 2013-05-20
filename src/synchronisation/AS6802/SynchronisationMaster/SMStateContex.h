@@ -28,10 +28,10 @@ namespace TTEthernetModel{
 
 class SMStateContex{
 
-	private:
+public:
 		SMState *pState;
 
-	public:
+
 
 	SMStateContex(){}
 	virtual ~SMStateContex(){

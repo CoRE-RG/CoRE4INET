@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="org.omnetpp.cdt.gnu.config.debug.884168226">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.omnetpp.cdt.gnu.config.debug.884168226" moduleId="org.eclipse.cdt.core.settings" name="gcc-debug">
@@ -71,29 +69,27 @@
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
+									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="i386"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_MAX__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
+									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
-									<listOptionValue builtIn="false" value="__i386"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_LONG__"/>
 									<listOptionValue builtIn="false" value="__DEPRECATED"/>
@@ -107,7 +103,6 @@
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
-									<listOptionValue builtIn="false" value="__i486__"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX__"/>
@@ -121,11 +116,10 @@
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__i486"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
@@ -137,13 +131,12 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
+									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
-									<listOptionValue builtIn="false" value="__i386__"/>
 									<listOptionValue builtIn="false" value="__DEC128_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SHORT__"/>
@@ -161,11 +154,11 @@
 									<listOptionValue builtIn="false" value="__DEC32_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_DWARF2_CFI_ASM"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
-									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="linux"/>
+									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
@@ -245,29 +238,27 @@
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
+									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="i386"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_MAX__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
+									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
-									<listOptionValue builtIn="false" value="__i386"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_LONG__"/>
 									<listOptionValue builtIn="false" value="__DEPRECATED"/>
@@ -281,7 +272,6 @@
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
-									<listOptionValue builtIn="false" value="__i486__"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX__"/>
@@ -295,11 +285,10 @@
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__i486"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
@@ -311,13 +300,12 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
+									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
-									<listOptionValue builtIn="false" value="__i386__"/>
 									<listOptionValue builtIn="false" value="__DEC128_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SHORT__"/>
@@ -335,11 +323,11 @@
 									<listOptionValue builtIn="false" value="__DEC32_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_DWARF2_CFI_ASM"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
-									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="linux"/>
+									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
@@ -424,8 +412,8 @@
 									<listOptionValue builtIn="false" value="__unix__"/>
 									<listOptionValue builtIn="false" value="__DBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
-									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_PTRDIFF_T__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX__"/>
@@ -437,17 +425,16 @@
 									<listOptionValue builtIn="false" value="__DEC32_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
-									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
+									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="i386"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_MAX__"/>
-									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
+									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
@@ -462,38 +449,35 @@
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__i386"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_LONG__"/>
 									<listOptionValue builtIn="false" value="__DEPRECATED"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GXX_RTTI"/>
-									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SIZE_T__"/>
+									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
-									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
-									<listOptionValue builtIn="false" value="__i486__"/>
-									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
+									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
+									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX__"/>
 									<listOptionValue builtIn="false" value="__BIGGEST_ALIGNMENT__"/>
 									<listOptionValue builtIn="false" value="__gnu_linux__"/>
-									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__FLT_DIG__"/>
+									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_BID_FORMAT__"/>
 									<listOptionValue builtIn="false" value="__INT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__i486"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
@@ -505,13 +489,12 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
+									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
-									<listOptionValue builtIn="false" value="__i386__"/>
 									<listOptionValue builtIn="false" value="__DEC128_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SHORT__"/>
@@ -532,8 +515,8 @@
 									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
@@ -603,8 +586,8 @@
 									<listOptionValue builtIn="false" value="__unix__"/>
 									<listOptionValue builtIn="false" value="__DBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
-									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_PTRDIFF_T__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX__"/>
@@ -616,17 +599,16 @@
 									<listOptionValue builtIn="false" value="__DEC32_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
-									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
+									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="i386"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_MAX__"/>
-									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
+									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
@@ -641,38 +623,35 @@
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__i386"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_LONG__"/>
 									<listOptionValue builtIn="false" value="__DEPRECATED"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GXX_RTTI"/>
-									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SIZE_T__"/>
+									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
-									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
-									<listOptionValue builtIn="false" value="__i486__"/>
-									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
+									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
+									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX__"/>
 									<listOptionValue builtIn="false" value="__BIGGEST_ALIGNMENT__"/>
 									<listOptionValue builtIn="false" value="__gnu_linux__"/>
-									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__FLT_DIG__"/>
+									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_BID_FORMAT__"/>
 									<listOptionValue builtIn="false" value="__INT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__i486"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
@@ -684,13 +663,12 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
+									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
-									<listOptionValue builtIn="false" value="__i386__"/>
 									<listOptionValue builtIn="false" value="__DEC128_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SHORT__"/>
@@ -711,8 +689,8 @@
 									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>

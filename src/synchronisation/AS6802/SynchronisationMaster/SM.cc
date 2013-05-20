@@ -63,6 +63,39 @@ void SM::finish(){
         fclose(fp);
     }
 
+    if (this->par("read").boolValue()||this->par("write").boolValue()){
+        sm->pState->values->clear();
+        delete sm->pState->values;
+
+    }
+
+    delete(sm->pState->outVector);
+
+            if(sm->pState->event->getOwner()==this)
+                cancelAndDelete(sm->pState->event);
+            if(sm->pState->event1->getOwner()==this)
+                cancelAndDelete(sm->pState->event1);
+            if(sm->pState->event2->getOwner()==this)
+                cancelAndDelete(sm->pState->event2);
+            if(sm->pState->event3->getOwner()==this)
+                cancelAndDelete(sm->pState->event3);
+            if(sm->pState->event4->getOwner()==this)
+                cancelAndDelete(sm->pState->event4);
+
+            if(sm->pState->event5->getOwner()==this)
+                cancelAndDelete(sm->pState->event5);
+
+            sm->pState->clock_stack->clear();
+            delete(sm->pState->clock_stack);
+
+            /*for(std::map<uint64_t, FrameEvent *>::iterator event=sm->pState->e_container->begin(); event!=sm->pState->e_container->end(); event++){
+
+                if(event->second->getOwner()==this)
+
+                    delete (*event).second;
+            }*/
+            sm->pState->e_container->clear();
+            delete(sm->pState->e_container);
 }
 
 SM::~SM(){
