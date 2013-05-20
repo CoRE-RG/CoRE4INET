@@ -13,32 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.base.examples.rt_tictoc;
+package ttethernet.applications.trafficsink;
 
 import ttethernet.applications.base.TTEApplicationBase;
 
 //
-// Tic Application used for the rt_tictoc example.
-// Sends TT messages with Tic-Request payload and receives
-// RC messages with Toc-Response payload.
+// Traffic sink application used for statistics collection.
 //
-//
-// @see rt_tictoc, TocApp
+// @see TTEApplicationBase
 //
 // @author Till Steinbach
-simple TicApp extends TTEApplicationBase
+simple TrafficSinkApp extends TTEApplicationBase
 {
     parameters:
-        @class(TicApp);
-        @display("i=block/routing,cyan");
+        @class(TrafficSinkApp);
+        @display("i=block/sink");
+        
         //Statistic of the amount of packets that were received by the application
         @statistic[rxPk](title="RX Packets"; record=count,vector);
-        //Application Roundtrip Time
-        @statistic[roundtrip](title="Roundtrip time"; unit=s; record=stats,histogram,vector);
-        //Counter is increased on incoming Tic messages
-        int counter = 0;
-        //CT-ID used for the messages to send
-        int ct_id;
-        //Time in cycle when the tic message is generated
-        int action_time @unit(tick);
+        //End-to-end latency
+        //Uses encapsulated packet or frame when nothing is encapsulated
+        @statistic[latency](title="End-to-end latency"; unit=s; record=stats,histogram,vector);
 }

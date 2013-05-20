@@ -28,6 +28,7 @@ import ttethernet.linklayer.IPort;
 moduleinterface ITTEApplication extends IPort
 {
     parameters:
+        @display("i=block/app");
         //Comma seperated list of buffer modules the application is allowed to use
         string buffers;
     gates:
