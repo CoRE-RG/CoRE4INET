@@ -249,7 +249,7 @@ void SM_INTEGRATE::handleMessage(cMessage *message) {
 			uint64_t permanence_pit = tteScheduler->getTotalTicks()
 					+ permanence_delay;
 
-			if (pf->getType() == '2') {
+			if (pf->getType() == IN) {
 
 				if (e_container->find(permanence_pit) != e_container->end()) {
 
@@ -2177,24 +2177,117 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 				tteScheduler->registerEvent(f_event);
 
 			} else if (f->getType() == IN) {
-				//create and register the event for the permanence pit
 
-				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
+                if (e_container->find(permanence_pit) != e_container->end()) {
 
-				f_event->setReceivedPort(f->par("received_port").longValue());
-				f_event->setPcfType(f->getType());
-				f_event->setMember(f->getMembership_new());
-				f_event->setIntegrationCycle(f->getIntegration_cycle());
-				f_event->setTimer(permanence_delay);
+                    if (getValue(f->getMembership_new(), 32)
+                            > (getValue(
+                                    e_container->find(permanence_pit)->second->getMember(),
+                                    32))) {
 
-				f_event->setDestinationGate(sm->gate("schedulerIn"));
+                        ev << "DEBUG: SM_FLOOD REPLACE membership new value"
+                                << f->getMembership_new() << endl;
+                        ev << "DEBUG: SM_FLOOD membership new number of SM "
+                                << getValue(f->getMembership_new(), 32)
+                                << endl;
 
-				f_event->setSchedulingPriority(2);
-				e_container->insert(
-						pair<uint64_t, FrameEvent *>(permanence_pit, f_event));
-				tteScheduler->registerEvent(f_event);
+                        tteScheduler->unregisterEvent(
+                                e_container->find(permanence_pit)->second);
+                        sm->cancelAndDelete(
+                                e_container->find(permanence_pit)->second);
+                        e_container->erase(permanence_pit);
 
-			} else {
+                        FrameEvent *f_event = new FrameEvent("IN_FRAME",
+                                TIMER_EVENT);
+                        f_event->setReceivedPort(
+                                f->par("received_port").longValue());
+                        f_event->setMember(f->getMembership_new());
+                        f_event->setPcfType(f->getType());
+
+                        f_event->setTimer(permanence_delay);
+                        f_event->setDestinationGate(sm->gate("schedulerIn"));
+                        f_event->setIntegrationCycle(
+                                f->getIntegration_cycle());
+                        f_event->setSchedulingPriority(2);
+
+                        tteScheduler->registerEvent(f_event);
+
+                        //save the event /we have to cancel and delete the events later/
+                        e_container->insert(make_pair(permanence_pit, f_event));
+
+                    } else if (getValue(f->getMembership_new(), 32)
+                            == (getValue(
+                                    e_container->find(permanence_pit)->second->getMember(),
+                                    32))) {
+
+                        if (f->getIntegration_cycle()
+                                > e_container->find(permanence_pit)->second->getIntegrationCycle()) {
+
+                            ev
+                                    << "DEBUG: SM_FLOOD REPLACE membership new value"
+                                    << f->getMembership_new() << endl;
+                            ev
+                                    << "DEBUG: SM_FLOOD membership new number of SM "
+                                    << getValue(f->getMembership_new(), 32)
+                                    << endl;
+
+                            tteScheduler->unregisterEvent(
+                                    e_container->find(permanence_pit)->second);
+                            sm->cancelAndDelete(
+                                    e_container->find(permanence_pit)->second);
+                            e_container->erase(permanence_pit);
+
+                            FrameEvent *f_event = new FrameEvent("IN_FRAME",
+                                    TIMER_EVENT);
+                            f_event->setReceivedPort(
+                                    f->par("received_port").longValue());
+                            f_event->setMember(f->getMembership_new());
+                            f_event->setPcfType(f->getType());
+                            //f_event->setAction_time(permanence_pit);
+                            f_event->setTimer(permanence_delay);
+                            f_event->setDestinationGate(
+                                    sm->gate("schedulerIn"));
+                            f_event->setIntegrationCycle(
+                                    f->getIntegration_cycle());
+                            f_event->setSchedulingPriority(2);
+
+                            tteScheduler->registerEvent(f_event);
+
+                            //save the event /we have to cancel and delete the events later/
+                            e_container->insert(
+                                    make_pair(permanence_pit, f_event));
+
+                        } //int_cycle
+
+                    } else {
+                        ev << "DEBUG: SM_FLOOD NO REPLACE" << endl;
+                    }
+
+                } else {
+
+                    FrameEvent *f_event = new FrameEvent("IN_FRAME",
+                            TIMER_EVENT);
+                    f_event->setReceivedPort(
+                            f->par("received_port").longValue());
+                    f_event->setMember(f->getMembership_new());
+                    f_event->setPcfType(f->getType());
+
+                    f_event->setTimer(permanence_delay);
+                    f_event->setDestinationGate(sm->gate("schedulerIn"));
+                    f_event->setIntegrationCycle(f->getIntegration_cycle());
+
+                    f_event->setSchedulingPriority(2);
+
+                    tteScheduler->registerEvent(f_event);
+
+                    //save the event /we have to cancel and delete the events later/
+                    e_container->insert(make_pair(permanence_pit, f_event));
+
+                } //frame not found
+
+                delete f;
+
+            } else {
 				ev << "UNKNOWN PCF FRAME->TYPE: " << f->getType() << endl;
 			}
 
@@ -2388,8 +2481,18 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 
 		if (string(message->getName()).compare("IN_FRAME") == 0) {
 
+
+
 		    FrameEvent *e = dynamic_cast<FrameEvent*>(message);
 		    delete e;
+
+		    uint64_t ppt=tteScheduler->getTotalTicks();
+
+		    if (e_container->find(ppt) != e_container->end()) {
+
+		                            e_container->erase(ppt);
+		                        }
+
 		    return;
 		}
 
@@ -2467,24 +2570,116 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 
 			} else if (frame->getType() == IN) {
 
-				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
+                if (e_container->find(permanence_pit) != e_container->end()) {
 
-				f_event->setReceivedPort(
-						frame->par("received_port").longValue());
-				f_event->setPcfType(frame->getType());
-				f_event->setMember(frame->getMembership_new());
-				f_event->setIntegrationCycle(frame->getIntegration_cycle());
+                    if (getValue(frame->getMembership_new(), 32)
+                            > (getValue(
+                                    e_container->find(permanence_pit)->second->getMember(),
+                                    32))) {
 
-				f_event->setTimer(permanence_delay);
-				f_event->setDestinationGate(sm->gate("schedulerIn"));
+                        ev << "DEBUG: SM_WAIT_4_CYCLE_START_CS REPLACE membership new value"
+                                << frame->getMembership_new() << endl;
+                        ev << "DEBUG: SM_WAIT_4_CYCLE_START_CS membership new number of SM "
+                                << getValue(frame->getMembership_new(), 32)
+                                << endl;
 
-				f_event->setSchedulingPriority(2);
+                        tteScheduler->unregisterEvent(
+                                e_container->find(permanence_pit)->second);
+                        sm->cancelAndDelete(
+                                e_container->find(permanence_pit)->second);
+                        e_container->erase(permanence_pit);
 
-				e_container->insert(
-						pair<uint64_t, FrameEvent *>(permanence_pit, f_event));
-				tteScheduler->registerEvent(f_event);
+                        FrameEvent *f_event = new FrameEvent("IN_FRAME",
+                                TIMER_EVENT);
+                        f_event->setReceivedPort(
+                                frame->par("received_port").longValue());
+                        f_event->setMember(frame->getMembership_new());
+                        f_event->setPcfType(frame->getType());
 
-			} else {
+                        f_event->setTimer(permanence_delay);
+                        f_event->setDestinationGate(sm->gate("schedulerIn"));
+                        f_event->setIntegrationCycle(
+                                frame->getIntegration_cycle());
+                        f_event->setSchedulingPriority(2);
+
+                        tteScheduler->registerEvent(f_event);
+
+                        //save the event /we have to cancel and delete the events later/
+                        e_container->insert(make_pair(permanence_pit, f_event));
+
+                    } else if (getValue(frame->getMembership_new(), 32)
+                            == (getValue(
+                                    e_container->find(permanence_pit)->second->getMember(),
+                                    32))) {
+
+                        if (frame->getIntegration_cycle()
+                                > e_container->find(permanence_pit)->second->getIntegrationCycle()) {
+
+                            ev
+                                    << "DEBUG: SM_WAIT_4_CYCLE_START_CS REPLACE membership new value"
+                                    << frame->getMembership_new() << endl;
+                            ev
+                                    << "DEBUG: SM_WAIT_4_CYCLE_START_CS membership new number of SM "
+                                    << getValue(frame->getMembership_new(), 32)
+                                    << endl;
+
+                            tteScheduler->unregisterEvent(
+                                    e_container->find(permanence_pit)->second);
+                            sm->cancelAndDelete(
+                                    e_container->find(permanence_pit)->second);
+                            e_container->erase(permanence_pit);
+
+                            FrameEvent *f_event = new FrameEvent("IN_FRAME",
+                                    TIMER_EVENT);
+                            f_event->setReceivedPort(
+                                    frame->par("received_port").longValue());
+                            f_event->setMember(frame->getMembership_new());
+                            f_event->setPcfType(frame->getType());
+                            //f_event->setAction_time(permanence_pit);
+                            f_event->setTimer(permanence_delay);
+                            f_event->setDestinationGate(
+                                    sm->gate("schedulerIn"));
+                            f_event->setIntegrationCycle(
+                                    frame->getIntegration_cycle());
+                            f_event->setSchedulingPriority(2);
+
+                            tteScheduler->registerEvent(f_event);
+
+                            //save the event /we have to cancel and delete the events later/
+                            e_container->insert(
+                                    make_pair(permanence_pit, f_event));
+
+                        } //int_cycle
+
+                    } else {
+                        ev << "DEBUG: SM_WAIT_4_CYCLE_START_CS NO REPLACE" << endl;
+                    }
+
+                } else {
+
+                    FrameEvent *f_event = new FrameEvent("IN_FRAME",
+                            TIMER_EVENT);
+                    f_event->setReceivedPort(
+                            frame->par("received_port").longValue());
+                    f_event->setMember(frame->getMembership_new());
+                    f_event->setPcfType(frame->getType());
+
+                    f_event->setTimer(permanence_delay);
+                    f_event->setDestinationGate(sm->gate("schedulerIn"));
+                    f_event->setIntegrationCycle(frame->getIntegration_cycle());
+
+                    f_event->setSchedulingPriority(2);
+
+                    tteScheduler->registerEvent(f_event);
+
+                    //save the event /we have to cancel and delete the events later/
+                    e_container->insert(make_pair(permanence_pit, f_event));
+
+                } //frame not found
+
+                delete frame;
+
+            } else {
 				ev << "UNKNOWN PCF FRAME->TYPE: " << frame->getType() << endl;
 			}
 
@@ -2590,8 +2785,18 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 
 		if (string(message->getName()).compare("IN_FRAME") == 0) {
 
-		            FrameEvent *e = dynamic_cast<FrameEvent*>(message);
+
+		    FrameEvent *e = dynamic_cast<FrameEvent*>(message);
 		            delete e;
+
+		   uint64_t ppt=tteScheduler->getTotalTicks();
+
+           if (e_container->find(ppt) != e_container->end()) {
+
+                                   e_container->erase(ppt);
+                               }
+
+
 		            return;
 		        }
 	} //schedulerIn

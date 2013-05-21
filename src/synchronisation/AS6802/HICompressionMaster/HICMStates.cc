@@ -428,7 +428,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 
 			delete et;
 			ev << "DROP CS FRAME" << endl;
-
+			return;
 		}
 
 		if (string(message->getName()).compare("CP") == 0) {
