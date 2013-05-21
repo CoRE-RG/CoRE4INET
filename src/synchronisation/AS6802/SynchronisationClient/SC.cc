@@ -70,31 +70,31 @@ void SC::finish(){
        }
            delete sc->pState->outVector;
 
-    if(sc->pState->event){
+
            if(sc->pState->event->getOwner()==this){
         cancelAndDelete(sc->pState->event);
            }
-    }
-   /* if(sc->pState->event1){
+
+
     if(sc->pState->event1->getOwner()==this){
                cancelAndDelete(sc->pState->event1);
-                     }}
-    if(sc->pState->event2){
+                     }
+
     if(sc->pState->event2->getOwner()==this){
                cancelAndDelete(sc->pState->event2);
-                     }}
-    if(sc->pState->event3){
+                     }
+
     if(sc->pState->event3->getOwner()==this){
                cancelAndDelete(sc->pState->event3);
-                     }}
-    if(sc->pState->event4){
+                     }
+
     if(sc->pState->event4->getOwner()==this){
                cancelAndDelete(sc->pState->event4);
-                     }}
-    if(sc->pState->event5){
+                     }
+
     if(sc->pState->event5->getOwner()==this){
                cancelAndDelete(sc->pState->event5);
-                     }}*/
+                     }
 
 
 

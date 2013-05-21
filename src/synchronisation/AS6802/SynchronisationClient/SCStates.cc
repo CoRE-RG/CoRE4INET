@@ -98,12 +98,51 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 	//container for container for PCF frames delayed for permanence pit in SYNC/STABLE state;  key = membership_new, value = PCFrame *
 	//sync_container = new multimap<unsigned int, PCFrame* >;
 
-	tteScheduler = (TTEScheduler*) sc->getParentModule()->getSubmodule(
-			"tteScheduler");
+	tteScheduler = (TTEScheduler*) sc->getParentModule()->getSubmodule("tteScheduler");
 
-	//register the event's for the current/next cycle, they are used to signal a point's in time in the current/next integration cycle
+        event1 = new SchedulerActionTimeEvent("smc_async_eval_pit",
+                ACTION_TIME_EVENT);
+        //sm_dispatch_pit=smc_async_eval_pit
+        // event1->setAction_time(sc->par("smc_async_eval_pit").longValue() - sc->par("smc_async_eval_pit").longValue());
+        event1->setAction_time(0);
+        event1->setDestinationGate(sc->gate("schedulerIn"));
+        event1->setSchedulingPriority(4);
 
-	if (sc->par("read").boolValue()) {
+        event2 = new SchedulerActionTimeEvent("smc_sync_eval_pit",
+                ACTION_TIME_EVENT);
+
+        event2->setAction_time(
+                sc->par("smc_sync_eval_pit").longValue());
+        event2->setDestinationGate(sc->gate("schedulerIn"));
+        event2->setSchedulingPriority(4);
+
+        event3 = new SchedulerActionTimeEvent("smc_clock_corr_pit",
+                ACTION_TIME_EVENT);
+
+        event3->setAction_time(
+                (unsigned int) sc->par("smc_clock_corr_pit").longValue());
+        event3->setDestinationGate(sc->gate("schedulerIn"));
+        event3->setSchedulingPriority(4);
+
+        //event4 is used to update/increment/ the "local_integration_cycle" value
+        event4 = new SchedulerActionTimeEvent("smc_inc_pit",
+                ACTION_TIME_EVENT);
+        event4->setAction_time(
+                sc->par("smc_scheduled_receive_pit").longValue()
+                        - sc->par("precision").longValue());
+        event4->setDestinationGate(sc->gate("schedulerIn"));
+        event4->setSchedulingPriority(3);
+
+        event5 = new SchedulerActionTimeEvent("smc_async_up",
+                ACTION_TIME_EVENT);
+        event5->setAction_time(
+                (unsigned int) (sc->par("int_cycle_duration").longValue()
+                        - sc->par("acceptance_window").longValue()));
+        event5->setDestinationGate(sc->gate("schedulerIn"));
+        event5->setSchedulingPriority(4);
+
+
+	    if (sc->par("read").boolValue()) {
 
 		event3 = new SchedulerActionTimeEvent("smc_clock_corr_pit",
 				ACTION_TIME_EVENT);
@@ -412,47 +451,6 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 							<< "DEBUG INTEGRATE: inserted value local_sync_membership"
 							<< local_sync_membership << endl;
 
-					//register the event's for the current/next cycle, they are used to signal a point's in time in the current/next integration cycle
-					event1 = new SchedulerActionTimeEvent("smc_async_eval_pit",
-							ACTION_TIME_EVENT);
-					//sm_dispatch_pit=smc_async_eval_pit
-					// event1->setAction_time(sc->par("smc_async_eval_pit").longValue() - sc->par("smc_async_eval_pit").longValue());
-					event1->setAction_time(0);
-					event1->setDestinationGate(sc->gate("schedulerIn"));
-					event1->setSchedulingPriority(4);
-
-					event2 = new SchedulerActionTimeEvent("smc_sync_eval_pit",
-							ACTION_TIME_EVENT);
-
-					event2->setAction_time(
-							sc->par("smc_sync_eval_pit").longValue());
-					event2->setDestinationGate(sc->gate("schedulerIn"));
-					event2->setSchedulingPriority(4);
-
-					event3 = new SchedulerActionTimeEvent("smc_clock_corr_pit",
-							ACTION_TIME_EVENT);
-
-					event3->setAction_time(
-							(unsigned int) sc->par("smc_clock_corr_pit").longValue());
-					event3->setDestinationGate(sc->gate("schedulerIn"));
-					event3->setSchedulingPriority(4);
-
-					//event4 is used to update/increment/ the "local_integration_cycle" value
-					event4 = new SchedulerActionTimeEvent("smc_inc_pit",
-							ACTION_TIME_EVENT);
-					event4->setAction_time(
-							sc->par("smc_scheduled_receive_pit").longValue()
-									- sc->par("precision").longValue());
-					event4->setDestinationGate(sc->gate("schedulerIn"));
-					event4->setSchedulingPriority(3);
-
-					event5 = new SchedulerActionTimeEvent("smc_async_up",
-							ACTION_TIME_EVENT);
-					event5->setAction_time(
-							(unsigned int) (sc->par("int_cycle_duration").longValue()
-									- sc->par("acceptance_window").longValue()));
-					event5->setDestinationGate(sc->gate("schedulerIn"));
-					event5->setSchedulingPriority(4);
 
 					tteScheduler->registerEvent(event1, true);
 
@@ -628,8 +626,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 			}
 
-			ev << "DEBUG SYNC: LOCAL_CLOCK smc_async_eval_pit"
-					<< tteScheduler->getTicks() * 80 << endl;
+
 
 			if ((getValue(local_async_membership, 32)
 					>= sc->par("sm_sync_threshold_async").longValue())) {
@@ -653,7 +650,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 				local_async_membership = 0;
 				stable_cycle_counter = 0;
 
-				//cancel  the events for the synchronus state before enter the INTEGRATE state
+				//cancel  the events for the synchronous state before enter the INTEGRATE state
 				//tteScheduler->cancelAndDelete(event1);
 
 				tteScheduler->unregisterEvent(event4);
@@ -662,13 +659,8 @@ void SC_SYNC::handleMessage(cMessage *message) {
 				tteScheduler->unregisterEvent(event5);
 				tteScheduler->unregisterEvent(event3);
 
-				tteScheduler->cancelAndDelete(event1);
-				tteScheduler->cancelAndDelete(event2);
-				tteScheduler->cancelAndDelete(event3);
-				tteScheduler->cancelAndDelete(event4);
-				tteScheduler->cancelAndDelete(event5);
 
-				//container->clear();
+
 				clock_stack->clear();
 				local_async_membership_r = 0;
 				local_async_membership_f = 0;
@@ -679,12 +671,6 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 			if ((!(getValue(local_async_membership, 32)
 					>= sc->par("sm_sync_threshold_async").longValue()))) {
-
-				//sm_dispatch_pit=smc_async_eval_pit
-				//update local_integration_cycle, must be down before acceptance window
-
-				ev << "DEBUG: SYNC: local_integration_cycle->"
-						<< local_integration_cycle << endl;
 
 				tteScheduler->registerEvent(event1, true);
 
@@ -775,11 +761,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 				tteScheduler->unregisterEvent(event3);
 				tteScheduler->unregisterEvent(event5);
 
-				tteScheduler->cancelAndDelete(event1);
-				tteScheduler->cancelAndDelete(event2);
-				tteScheduler->cancelAndDelete(event3);
-				tteScheduler->cancelAndDelete(event4);
-				tteScheduler->cancelAndDelete(event5);
+
 
 				clock_stack->clear();
 				local_async_membership_r = 0;
@@ -1165,17 +1147,11 @@ void SC_STABLE::handleMessage(cMessage *message) {
 				tteScheduler->unregisterEvent(event1);
 				tteScheduler->unregisterEvent(event2);
 				tteScheduler->unregisterEvent(event5);
-				//sp
 				tteScheduler->unregisterEvent(event3);
 
-				tteScheduler->cancelAndDelete(event1);
-				tteScheduler->cancelAndDelete(event2);
-				tteScheduler->cancelAndDelete(event3);
-				tteScheduler->cancelAndDelete(event4);
-				tteScheduler->cancelAndDelete(event5);
 
 				clock_stack->clear();
-				//container->clear();
+
 
 				new (this) SC_INTEGRATE();
 				return;
@@ -1262,6 +1238,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 				local_integration_cycle = 0;
 				local_sync_membership = 0;
 				local_async_membership = 0;
+
 				stable_cycle_counter = 0;
 
 				//cancel  the events for the synchronus state's before enter the INTEGRATE State
@@ -1273,11 +1250,6 @@ void SC_STABLE::handleMessage(cMessage *message) {
 				tteScheduler->unregisterEvent(event3);
 				tteScheduler->unregisterEvent(event5);
 
-				tteScheduler->cancelAndDelete(event1);
-				tteScheduler->cancelAndDelete(event2);
-				tteScheduler->cancelAndDelete(event3);
-				tteScheduler->cancelAndDelete(event4);
-				tteScheduler->cancelAndDelete(event5);
 
 				clock_stack->clear();
 
