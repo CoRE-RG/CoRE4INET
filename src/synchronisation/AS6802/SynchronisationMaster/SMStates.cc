@@ -525,10 +525,7 @@ void SM_INTEGRATE::handleMessage(cMessage *message) {
 						e_container->erase(ppt);
 					}
 
-					if (e_container->find(ppt) != e_container->end()) {
 
-						e_container->erase(ppt);
-					}
 
 					new (this) SM_SYNC();
 
@@ -1407,7 +1404,8 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 					new (this) SM_FLOOD();
 					return;
 				}
-
+				delete e;
+				return;
 			}
 
 			//receive CA_FRAME
@@ -2327,7 +2325,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 			//PCF Frame becomes permanent
 
 			FrameEvent *e = dynamic_cast<FrameEvent*>(message);
-			ev << "TYPE" << e->getPcfType() << endl;
+			//ev << "TYPE" << e->getPcfType() << endl;
 
 			if (e->getPcfType() == CS) {
 
@@ -2384,7 +2382,17 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 				return;
 			} //CA_FRAME
 
-		} //pcf becomes permanent
+			delete e;
+			return;
+		} //CA, CS frames becomes permanent
+
+		if (string(message->getName()).compare("IN_FRAME") == 0) {
+
+		    FrameEvent *e = dynamic_cast<FrameEvent*>(message);
+		    delete e;
+		    return;
+		}
+
 
 	} //scheduler in
 
@@ -2580,6 +2588,12 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 
 		} //pcf frame becomes permanent
 
+		if (string(message->getName()).compare("IN_FRAME") == 0) {
+
+		            FrameEvent *e = dynamic_cast<FrameEvent*>(message);
+		            delete e;
+		            return;
+		        }
 	} //schedulerIn
 
 }
@@ -2744,6 +2758,10 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 				new (this) SM_WAIT_4_CYCLE_START_CS();
 				return;
 			}
+
+		delete evt;
+		return;
+
 		} //FRAME
 
 		if (string(message->getName()).compare("IN_FRAME") == 0) {
@@ -3422,7 +3440,11 @@ void SM_WAIT_4_CYCLE_START::handleMessage(cMessage *message) {
 			delete e;
 			return;
 		} //pcf becomes permanent
+		if (string(message->getName()).compare("FRAME") == 0){
 
+		    FrameEvent *e = dynamic_cast<FrameEvent*>(message);
+		    delete e;
+		}
 	} //schedulerIn
 }
 
