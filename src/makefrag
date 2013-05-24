@@ -1,1 +1,1 @@
-CFLAGS += -Wall -Werror -Wno-unused
+#CFLAGS += -Wall -Werror -Wno-unused

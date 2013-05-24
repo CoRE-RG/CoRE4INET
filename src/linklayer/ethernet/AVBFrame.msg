@@ -1,5 +1,5 @@
 cplusplus {{
-    #include "CTFrame_m.h"
+    #include "CTFrame.h"
 }}
 
 class TTEthernetModel::CTFrame;
