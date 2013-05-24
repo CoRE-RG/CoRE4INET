@@ -1926,10 +1926,6 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 			}
 
-			uint32_t dummy = sm->par("sm_sync_threshold_sync").longValue();
-
-
-
 			if ((local_sync_membership
 					< (unsigned int)sm->par("sm_sync_threshold_sync").longValue())
 					&& (local_sync_membership > 0)) {
@@ -2041,7 +2037,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 
 				clock_stack->clear();
@@ -2077,7 +2073,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 
 				//for the next cycle
@@ -3286,7 +3282,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 				//clear for the next cycle
 				// container->clear();
@@ -3319,7 +3315,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 
 				clock_stack->clear();
