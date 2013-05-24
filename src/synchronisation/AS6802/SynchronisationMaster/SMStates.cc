@@ -249,7 +249,7 @@ void SM_INTEGRATE::handleMessage(cMessage *message) {
 			uint64_t permanence_pit = tteScheduler->getTotalTicks()
 					+ permanence_delay;
 
-			if (pf->getType() == IN) {
+			if (pf->getType() == IN_FRAME) {
 
 				if (e_container->find(permanence_pit) != e_container->end()) {
 
@@ -360,7 +360,7 @@ void SM_INTEGRATE::handleMessage(cMessage *message) {
 
 			} //IN
 
-			if (pf->getType() == CA) {
+			if (pf->getType() == CA_FRAME) {
 
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
 				f_event->setMember(pf->getMembership_new());
@@ -415,7 +415,7 @@ void SM_INTEGRATE::handleMessage(cMessage *message) {
 
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CA) {
+			if (et->getPcfType() == CA_FRAME) {
 
 				tteScheduler->unregisterEvent(event);
 
@@ -455,7 +455,7 @@ void SM_INTEGRATE::handleMessage(cMessage *message) {
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
 			//receive(IN_FRAME)
-			if (et->getPcfType() == IN) {
+			if (et->getPcfType() == IN_FRAME) {
 
 				uint64_t ppt = tteScheduler->getTotalTicks();
 
@@ -611,7 +611,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 
 			//save the event
-			if (frame->getType() == CA) {
+			if (frame->getType() == CA_FRAME) {
 
 				//create and register the event for the permanence pit
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
@@ -622,11 +622,11 @@ void SM_STABLE::handleMessage(cMessage *message) {
 				f_event->setTimer(permanence_delay);
 				f_event->setDestinationGate(sm->gate("schedulerIn"));
 
-				if (frame->getType() == CS) {
+				if (frame->getType() == CS_FRAME) {
 					f_event->setSchedulingPriority(0);
-				} else if (frame->getType() == CA) {
+				} else if (frame->getType() == CA_FRAME) {
 					f_event->setSchedulingPriority(1);
-				} else if (frame->getType() == IN) {
+				} else if (frame->getType() == IN_FRAME) {
 					f_event->setSchedulingPriority(2);
 				} else {
 					ev << "UNKNOWN PCF FRAME->TYPE: " << frame->getType()
@@ -636,7 +636,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 			} //CA_FRAME
 
-			if (frame->getType() == IN) {
+			if (frame->getType() == IN_FRAME) {
 
 				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -673,9 +673,9 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 			FrameEvent *e = dynamic_cast<FrameEvent *>(message);
 
-			if (e->getPcfType() == CA) {
+			if (e->getPcfType() == CA_FRAME) {
 
-				if ((e->getPcfType() == CA)
+				if ((e->getPcfType() == CA_FRAME)
 						&& (sm->par("stable_ca_enabled").boolValue())) {
 
 					duration = sm->par("ca_offset").longValue();
@@ -721,7 +721,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 			FrameEvent *e = dynamic_cast<FrameEvent *>(message);
 
-			if (e->getPcfType() == IN) {
+			if (e->getPcfType() == IN_FRAME) {
 				uint32_t received_port = e->getReceivedPort();
 				uint64_t int_cycle = e->getIntegrationCycle();
 				uint64_t permanence_pit = tteScheduler->getTicks();
@@ -877,7 +877,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 				cMsgPar *par = &p->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				p->setType(IN);
+				p->setType(IN_FRAME);
 				p->setTransparent_clock(0);
 				p->setMembership_new((1 << ownBit));
 				p->setSync_domain(2);
@@ -1027,7 +1027,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 
 				clock_stack->clear();
@@ -1062,7 +1062,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 
 				if (sm->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %lld \n", clock_corr);
 				}
 
 				clock_stack->clear();
@@ -1106,7 +1106,7 @@ SM_UNSYNC::SM_UNSYNC() {
 	cMsgPar *par = &p->addPar("created_total");
 	par->setLongValue(tteScheduler->getTotalTicks());
 
-	p->setType(CS);
+	p->setType(CS_FRAME);
 	p->setTransparent_clock(0);
 	p->setMembership_new((1 << ownBit));
 	p->setSync_domain(2);
@@ -1173,7 +1173,7 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 			uint64_t permanence_pit = tteScheduler->getTotalTicks()
 					+ permanence_delay;
 
-			if (pf->getType() == IN) {
+			if (pf->getType() == IN_FRAME) {
 
 				if (e_container->find(permanence_pit) != e_container->end()) {
 
@@ -1295,11 +1295,11 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 				f_event->setTimer(permanence_delay);
 				f_event->setDestinationGate(sm->gate("schedulerIn"));
 
-				if (pf->getType() == CS) {
+				if (pf->getType() == CS_FRAME) {
 					f_event->setSchedulingPriority(0);
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 					f_event->setSchedulingPriority(1);
-				} else if (pf->getType() == IN) {
+				} else if (pf->getType() == IN_FRAME) {
 					f_event->setSchedulingPriority(2);
 				} else {
 					ev << "UNKNOWN PCF FRAME->TYPE: " << pf->getType() << endl;
@@ -1342,7 +1342,7 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 
 			FrameEvent *e = dynamic_cast<FrameEvent *>(message);
 
-			if (e->getPcfType() == CS) {
+			if (e->getPcfType() == CS_FRAME) {
 
 				//receive CS_FRAME, Master config ->Standart_Integrity_Synchronisation
 				if (sm->par("Standart_Integrity_Synchronisation").boolValue()) {
@@ -1409,7 +1409,7 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 			}
 
 			//receive CA_FRAME
-			if (e->getPcfType() == CA) {
+			if (e->getPcfType() == CA_FRAME) {
 
 				tteScheduler->unregisterEvent(event);
 
@@ -1443,7 +1443,7 @@ void SM_UNSYNC::handleMessage(cMessage *message) {
 
 			FrameEvent *e = dynamic_cast<FrameEvent *>(message);
 
-			if (e->getPcfType() == IN) {
+			if (e->getPcfType() == IN_FRAME) {
 
 				//duration=0;
 				tteScheduler->unregisterEvent(event);
@@ -1575,7 +1575,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 					+ permanence_delay;
 
 			//save the event
-			if (frame->getType() == CA) {
+			if (frame->getType() == CA_FRAME) {
 
 				//create and register the event for the permanence pit
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
@@ -1587,11 +1587,11 @@ void SM_SYNC::handleMessage(cMessage *message) {
 				f_event->setDestinationGate(sm->gate("schedulerIn"));
 				f_event->setIntegrationCycle(frame->getIntegration_cycle());
 
-				if (frame->getType() == CS) {
+				if (frame->getType() == CS_FRAME) {
 					f_event->setSchedulingPriority(0);
-				} else if (frame->getType() == CA) {
+				} else if (frame->getType() == CA_FRAME) {
 					f_event->setSchedulingPriority(1);
-				} else if (frame->getType() == IN) {
+				} else if (frame->getType() == IN_FRAME) {
 					f_event->setSchedulingPriority(2);
 				} else {
 					ev << "UNKNOWN PCF FRAME->TYPE: " << frame->getType()
@@ -1601,7 +1601,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 			} //CA_FRAME
 
-			if (frame->getType() == IN) {
+			if (frame->getType() == IN_FRAME) {
 
 				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -1638,7 +1638,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 			FrameEvent *evt = dynamic_cast<FrameEvent *>(message);
 
-			if (evt->getPcfType() == CA) {
+			if (evt->getPcfType() == CA_FRAME) {
 
 				duration = sm->par("ca_offset").longValue();
 
@@ -1682,7 +1682,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 
 			FrameEvent *evt = dynamic_cast<FrameEvent *>(message);
 
-			if (evt->getPcfType() == IN) {
+			if (evt->getPcfType() == IN_FRAME) {
 
 				uint32_t received_port = evt->getReceivedPort();
 				uint64_t int_cycle = evt->getIntegrationCycle();
@@ -1843,7 +1843,7 @@ void SM_SYNC::handleMessage(cMessage *message) {
 				cMsgPar *par = &p->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				p->setType(IN);
+				p->setType(IN_FRAME);
 				p->setTransparent_clock(0);
 				p->setMembership_new(1 << ownBit);
 				p->setSync_domain(2);
@@ -2146,7 +2146,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 			uint64_t permanence_pit = tteScheduler->getTotalTicks()
 					+ permanence_delay;
 
-			if (f->getType() == CS) {
+			if (f->getType() == CS_FRAME) {
 				//create and register the event for the permanence pit
 
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
@@ -2161,7 +2161,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 				f_event->setSchedulingPriority(0);
 				tteScheduler->registerEvent(f_event);
 
-			} else if (f->getType() == CA) {
+			} else if (f->getType() == CA_FRAME) {
 				//create and register the event for the permanence pit
 
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
@@ -2176,7 +2176,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 				f_event->setSchedulingPriority(1);
 				tteScheduler->registerEvent(f_event);
 
-			} else if (f->getType() == IN) {
+			} else if (f->getType() == IN_FRAME) {
 
                 if (e_container->find(permanence_pit) != e_container->end()) {
 
@@ -2313,7 +2313,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 				PCFrame *p = new PCFrame("CA_FRAME");
 				cMsgPar *par = &p->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
-				p->setType(CA);
+				p->setType(CA_FRAME);
 				p->setTransparent_clock(0);
 				p->setMembership_new(1 << ownBit);
 				p->setSync_domain(2);
@@ -2420,7 +2420,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 			FrameEvent *e = dynamic_cast<FrameEvent*>(message);
 			//ev << "TYPE" << e->getPcfType() << endl;
 
-			if (e->getPcfType() == CS) {
+			if (e->getPcfType() == CS_FRAME) {
 
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -2448,7 +2448,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 				return;
 			} //CS_FRAME
 
-			if ((e->getPcfType() == CA)
+			if ((e->getPcfType() == CA_FRAME)
 					&& (flood_receive && (!closed_window))) {
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -2540,7 +2540,7 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 
 			//create and register the event for the permanence pit
 
-			if (frame->getType() == CS) {
+			if (frame->getType() == CS_FRAME) {
 
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
 
@@ -2554,7 +2554,7 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 				f_event->setSchedulingPriority(0);
 				tteScheduler->registerEvent(f_event);
 
-			} else if (frame->getType() == CA) {
+			} else if (frame->getType() == CA_FRAME) {
 
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
 
@@ -2568,7 +2568,7 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 				f_event->setSchedulingPriority(1);
 				tteScheduler->registerEvent(f_event);
 
-			} else if (frame->getType() == IN) {
+			} else if (frame->getType() == IN_FRAME) {
 
                 if (e_container->find(permanence_pit) != e_container->end()) {
 
@@ -2726,7 +2726,7 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 			//get the PCF Frame
 			FrameEvent *e = dynamic_cast<FrameEvent*>(message);
 
-			if (e->getPcfType() == CS) {
+			if (e->getPcfType() == CS_FRAME) {
 
 				tteScheduler->unregisterEvent(event);
 
@@ -2750,7 +2750,7 @@ void SM_WAIT_4_CYCLE_START_CS::handleMessage(cMessage* message) {
 				return;
 			} //CS_FRAME
 
-			if (e->getPcfType() == CA) {
+			if (e->getPcfType() == CA_FRAME) {
 
 				tteScheduler->unregisterEvent(event);
 
@@ -2864,7 +2864,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 					+ permanence_delay;
 
 			//save the event
-			if (frame->getType() == CA) {
+			if (frame->getType() == CA_FRAME) {
 
 				//create and register the event for the permanence pit
 				FrameEvent *f_event = new FrameEvent("FRAME", TIMER_EVENT);
@@ -2882,7 +2882,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 			} //CA_FRAME
 
-			if (frame->getType() == IN) {
+			if (frame->getType() == IN_FRAME) {
 
 				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -2920,7 +2920,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 			FrameEvent *evt = dynamic_cast<FrameEvent *>(message);
 
-			if (evt->getPcfType() == CA) {
+			if (evt->getPcfType() == CA_FRAME) {
 
 				//get the PCF Frame
 
@@ -2973,7 +2973,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 
 			FrameEvent *evt = dynamic_cast<FrameEvent *>(message);
 
-			if (evt->getPcfType() == IN) {
+			if (evt->getPcfType() == IN_FRAME) {
 
 				uint32_t received_port = evt->getReceivedPort();
 				uint64_t int_cycle = evt->getIntegrationCycle();
@@ -3132,7 +3132,7 @@ void SM_TENTATIVE_SYNC::handleMessage(cMessage *message) {
 				cMsgPar *par = &p->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				p->setType(IN);
+				p->setType(IN_FRAME);
 				p->setTransparent_clock(0);
 				p->setMembership_new(1 << ownBit);
 				p->setSync_domain(2);
@@ -3403,7 +3403,7 @@ void SM_WAIT_4_CYCLE_START::handleMessage(cMessage *message) {
 			uint64_t permanence_pit = tteScheduler->getTotalTicks()
 					+ permanence_delay;
 
-			if (pf->getType() == IN) {
+			if (pf->getType() == IN_FRAME) {
 
 				if (e_container->find(permanence_pit) != e_container->end()) {
 
@@ -3588,7 +3588,7 @@ void SM_WAIT_4_CYCLE_START::handleMessage(cMessage *message) {
 			FrameEvent *e = dynamic_cast<FrameEvent*>(message);
 			//get the PCF Frame
 
-			if (e->getPcfType() == IN) {
+			if (e->getPcfType() == IN_FRAME) {
 
 				if ((e->getIntegrationCycle() != local_integration_cycle)
 						&& (!(inSchedule(

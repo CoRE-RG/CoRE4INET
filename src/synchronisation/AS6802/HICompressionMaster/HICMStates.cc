@@ -238,12 +238,12 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->hicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 					ev << "HI_CM_INTEGRATE CS Frame Arrived:ctid "
 							<< pf->getCtID() << "getTotalTicks "
@@ -280,7 +280,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 
 					return;
 
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 
 					ev << "HI_CM_INTEGRATE CA Frame Arrived:ctid "
 							<< pf->getCtID() << "getTotalTicks "
@@ -379,7 +379,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("CA_FRAME") == 0) {
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CA) {
+			if (et->getPcfType() == CA_FRAME) {
 
 				PCFrame *frame = new PCFrame("CA_FRAME");
 
@@ -393,7 +393,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CA);
+				frame->setType(CA_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -439,7 +439,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
-			compressedFrame->setType(IN);
+			compressedFrame->setType(IN_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
@@ -589,7 +589,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -903,12 +903,12 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->hicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 					ev << "HI_CM_STABLE CS Frame Arrived:ctid " << pf->getCtID()
 							<< "getTotalTicks " << tteScheduler->getTotalTicks()
@@ -943,7 +943,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 
 					return;
 
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 
 					ev << "HI_CM_STABLE CA Frame Arrived:ctid " << pf->getCtID()
 							<< "getTotalTicks " << tteScheduler->getTotalTicks()
@@ -1019,7 +1019,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("CA_FRAME") == 0) {
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CA) {
+			if (et->getPcfType() == CA_FRAME) {
 
 				PCFrame *frame = new PCFrame("CA_FRAME");
 
@@ -1033,7 +1033,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CA);
+				frame->setType(CA_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -1079,7 +1079,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
-			compressedFrame->setType(IN);
+			compressedFrame->setType(IN_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
@@ -1388,7 +1388,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -1686,12 +1686,12 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->hicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 					ev << "HI_CM_UNSYNC CS Frame Arrived:ctid " << pf->getCtID()
 							<< "getTotalTicks " << tteScheduler->getTotalTicks()
@@ -1723,7 +1723,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 
 					return;
 
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 
 					//calculate permanence pit
 					int permanence_delay =
@@ -1791,7 +1791,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("CA_FRAME") == 0) {
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CA) {
+			if (et->getPcfType() == CA_FRAME) {
 
 				PCFrame *frame = new PCFrame("CA_FRAME");
 
@@ -1805,7 +1805,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CA);
+				frame->setType(CA_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -1838,7 +1838,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CS) {
+			if (et->getPcfType() == CS_FRAME) {
 
 				PCFrame *frame = new PCFrame("CS_FRAME");
 
@@ -1852,7 +1852,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CS);
+				frame->setType(CS_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -1890,7 +1890,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
-			compressedFrame->setType(IN);
+			compressedFrame->setType(IN_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
@@ -2055,7 +2055,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -2365,12 +2365,12 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->hicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 					ev << "HI_CM_SYNC CS Frame Arrived:ctid " << pf->getCtID()
 							<< "getTotalTicks " << tteScheduler->getTotalTicks()
@@ -2405,7 +2405,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 
 					return;
 
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 
 					ev << "HI_CM_SYNC CA Frame Arrived:ctid " << pf->getCtID()
 							<< "getTotalTicks " << tteScheduler->getTotalTicks()
@@ -2481,7 +2481,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("CA_FRAME") == 0) {
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CA) {
+			if (et->getPcfType() == CA_FRAME) {
 
 				PCFrame *frame = new PCFrame("CA_FRAME");
 
@@ -2495,7 +2495,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CA);
+				frame->setType(CA_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -2541,7 +2541,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
-			compressedFrame->setType(IN);
+			compressedFrame->setType(IN_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
@@ -2831,7 +2831,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -3142,12 +3142,12 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->hicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 					ev << "HI_CM_TENTATIVE_SYNC CS Frame Arrived:ctid "
 							<< pf->getCtID() << "getTotalTicks "
@@ -3184,7 +3184,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 
 					return;
 
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 
 					ev << "HI_CM_TENTATIVE_SYNC CA Frame Arrived:ctid "
 							<< pf->getCtID() << "getTotalTicks "
@@ -3261,7 +3261,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("CA_FRAME") == 0) {
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CA) {
+			if (et->getPcfType() == CA_FRAME) {
 
 				PCFrame *frame = new PCFrame("CA_FRAME");
 
@@ -3275,7 +3275,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CA);
+				frame->setType(CA_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -3308,7 +3308,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CS) {
+			if (et->getPcfType() == CS_FRAME) {
 
 				PCFrame *frame = new PCFrame("CS_FRAME");
 
@@ -3322,7 +3322,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CS);
+				frame->setType(CS_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -3359,7 +3359,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
-			compressedFrame->setType(IN);
+			compressedFrame->setType(IN_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
@@ -3654,7 +3654,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			//in_container->insert(pair<unsigned int, PCFrame *>(membership_new, pf->dup()));
 
@@ -3965,12 +3965,12 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->hicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 					ev << "HI_CM_WAIT_4_CYCLE_START CS Frame Arrived:ctid "
 							<< pf->getCtID() << "getTotalTicks "
@@ -4007,7 +4007,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 					return;
 
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 
 					//calculate permanence pit
 					int permanence_delay =
@@ -4127,7 +4127,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("CA_FRAME") == 0) {
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CA) {
+			if (et->getPcfType() == CA_FRAME) {
 
 				PCFrame *frame = new PCFrame("CA_Frame");
 
@@ -4141,7 +4141,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CA);
+				frame->setType(CA_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -4175,7 +4175,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CS) {
+			if (et->getPcfType() == CS_FRAME) {
 
 				PCFrame *frame = new PCFrame("CS_FRAME");
 
@@ -4189,7 +4189,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CS);
+				frame->setType(CS_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -4227,7 +4227,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
-			compressedFrame->setType(IN);
+			compressedFrame->setType(IN_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
@@ -4386,7 +4386,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
