@@ -1,0 +1,7 @@
+# workingdir,                                              args
+/examples/small_network/,                                  -f omnetpp.ini -c General -r 0
+/examples/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0
+/examples/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0
+/examples/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0
+/examples/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0
+/examples/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0

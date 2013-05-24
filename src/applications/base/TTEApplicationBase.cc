@@ -26,11 +26,19 @@ void TTEApplicationBase::executeCallback(Callback *cb){
     cb->executeCallback();
 }
 
+void TTEApplicationBase::handleMessage(cMessage *msg)
+{
+    if(msg->arrivedOn("RCin")){
+        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
+        if (rcBuffer)
+            rcBuffer->resetBag();
+    }
+}
+
 void TTEApplicationBase::handleParameterChange(const char* parname){
     buffers.clear();
     if(ev.isGUI()){
-        //TODO check why this does not work
-        getDisplayString().setTagArg("i2", 0, "");
+        getDisplayString().removeTag("i2");
         getDisplayString().setTagArg("tt", 0, "");
     }
     std::string buffersString = par("buffers").stdstringValue();

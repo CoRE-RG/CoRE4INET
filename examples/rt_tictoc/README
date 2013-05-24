@@ -1,0 +1,7 @@
+Demonstrates a small TicToc Example that uses real-time applications
+
+- An application in the Tic host sends periodicly (tms cycle) Tic messages
+  with the TT message class
+- An application in the Toc host receives the Tic messages and answers with
+  Toc messages (RC message class)
+- Roundtrip time is recorded in the Tic application

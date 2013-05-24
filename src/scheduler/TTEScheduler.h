@@ -20,6 +20,7 @@
 
 #include <SchedulerMessage_m.h>
 #include <SchedulerEvent.h>
+#include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
 
@@ -32,17 +33,21 @@ namespace TTEthernetModel {
  */
 class TTEScheduler : public cSimpleModule
 {
-    private:
+    protected:
         /**
          * @brief Simulation time when the last cycle started
          */
-        SimTime lastCycleStart;
+        simtime_t lastCycleStart;
+        /**
+         * @brief Simulation time when the last newcycle message was seen
+         */
+        simtime_t lastNewCycleMessage;
 
         /**
          * @brief Number of ticks since the simulation started
          * when the last cycle started
          */
-        unsigned long lastCycleTicks;
+        uint64_t lastCycleTicks;
 
         /**
          * @brief List of registered SchedulerEvents.
@@ -54,31 +59,27 @@ class TTEScheduler : public cSimpleModule
         cMessage* newCyclemsg;
 
         /**
-         * @brief caches max_drift_change parameter
-         */
-        double maxDriftChange;
-        /**
          * @brief caches max_drift parameter
          */
-        double maxDrift;
+        simtime_t maxDrift;
 
         /**
          * @brief caches current_tick parameter
          */
-        double currentTick;
+        simtime_t currentTick;
         /**
          * @brief caches tick parameter
          */
-        double tick;
+        simtime_t tick;
         /**
          * @brief caches cycle_ticks parameter
          */
-        long cycleTicks;
+        uint32_t cycleTicks;
 
         /**
          * @brief Number of cycles since the simulation started
          */
-        unsigned long cycles;
+        uint32_t cycles;
 
     public:
         /**
@@ -114,32 +115,36 @@ class TTEScheduler : public cSimpleModule
 
     public:
         /**
+         * @brief Destructor
+         */
+        ~TTEScheduler();
+        /**
          * @brief Returns the current number of ticks
          *
          * @return Number of ticks since last cycle start
          */
-        virtual unsigned int getTicks();
+        virtual uint32_t getTicks();
 
         /**
          * @brief Returns the absolute number of ticks
          *
          * @return Number of ticks since simulation start
          */
-        virtual unsigned long getTotalTicks();
+        virtual uint64_t getTotalTicks();
 
         /**
          * @brief Returns the current number of cycles
          *
          * @return Number of cycles since simulation start
          */
-        virtual unsigned int getCycles();
+        virtual uint32_t getCycles();
 
         /**
          * @brief Corrects the clock by the number of ticks
          *
          * @param number of ticks the clock must be corrected
          */
-        virtual void clockCorrection(int ticks);
+        virtual void clockCorrection(int32_t ticks);
 
         /**
          * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
@@ -152,6 +157,20 @@ class TTEScheduler : public cSimpleModule
          * SchedulerTimerEvent
          */
         virtual bool registerEvent(SchedulerEvent *event);
+
+        /**
+         * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
+         *
+         * @param actionTimeEvent Pointer to the Event to be scheduled.
+         * The scheduler will send the event according to the event type
+         * @param forceNextCycle should the event be forced in the next
+         * cycle even if it could be executed in this cycle
+         * @return returns true on success, else false
+         *
+         * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
+         * SchedulerTimerEvent
+         */
+        virtual bool registerEvent(SchedulerActionTimeEvent *actionTimeEvent, bool forceNextCycle);
 
         /**
          * Unregister an event that was previously registered in the scheduler.

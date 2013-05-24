@@ -24,12 +24,12 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Time-triggeredd double buffer class.
+ * @brief Time-triggered double buffer class.
  *
  * The Frame is stored and released time-triggered using a previously
  * registered SchedulerActionTimeEvent. The Buffer interacts with the TTEScheduler.
  *
- * @sa TTBuffer, TTDoubleBuffer, Buffer
+ * @sa TTBuffer, TTDoubleBuffer, CTBuffer
  *
  * @ingroup Buffer
  */

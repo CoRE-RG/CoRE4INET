@@ -72,7 +72,7 @@ void TTEInput::handleMessage(cMessage *msg)
         //Auf CTCs verteilen oder BE traffic
         if (isCT(frame))
         {
-            std::map<uint16, std::list<Incoming *> >::iterator incomingList = incomings.find(getCTID(frame));
+            std::map<uint16_t, std::list<Incoming *> >::iterator incomingList = incomings.find(getCTID(frame));
             if (incomingList != incomings.end())
             {
                 //Send to all CTCs for the CT-ID
@@ -120,8 +120,8 @@ void TTEInput::handleMessage(cMessage *msg)
 }
 
 void TTEInput::handleParameterChange(const char* parname){
-    ctMask = (unsigned int)par("ct_mask").longValue();
-    ctMarker = (unsigned int)par("ct_marker").longValue();
+    ctMask = (uint32_t)par("ct_mask").longValue();
+    ctMarker = (uint32_t)par("ct_marker").longValue();
     promiscuous = par("promiscuous").boolValue();
 
     incomings.clear();
@@ -165,7 +165,7 @@ bool TTEInput::isCT(EtherFrame *frame)
     return false;
 }
 
-uint16 TTEInput::getCTID(EtherFrame *frame)
+uint16_t TTEInput::getCTID(EtherFrame *frame)
 {
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);

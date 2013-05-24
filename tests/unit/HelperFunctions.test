@@ -1,0 +1,49 @@
+%description:
+Test HelperFunctions
+
+%includes:
+#include "HelperFunctions.h"
+#include "simtime.h"
+
+%inifile: test.ini
+[General]
+network = Test
+cmdenv-express-mode = false
+output-vector-file = test.vec
+output-scalar-file = test.sca
+simtime-scale = -12
+
+%global:
+#define S2TC(X)  ev << std::dec << X << "s-->" << "0x" << std::hex<< secondsToTransparentClock(X) << std::dec << "\n"
+#define T2TC(X,Y)  ev << std::dec << X << "ticks-->"  "0x" << std::hex<< ticksToTransparentClock(X, Y) << std::dec << "\n"
+#define TC2T(X,Y)  ev << "0x" << std::hex << X << "-->" << std::dec << transparentClockToTicks(X, Y) << "ticks" << std::dec <<"\n"
+
+%activity:
+S2TC(0);
+S2TC(0.000000001);
+S2TC(0.0000000025);
+S2TC(1);
+ev << ".\n";
+T2TC(0,0.00000008);
+T2TC(1,0.00000008);
+T2TC(12500,0.00000008);
+ev << ".\n";
+TC2T(0x0,0.00000008);
+TC2T(0x500000,0.00000008);
+TC2T(0xf42400000,0.00000008);
+ev << ".\n";
+
+%contains: stdout
+0s-->0x0
+1e-09s-->0x10000
+2.5e-09s-->0x28000
+1s-->0x3b9aca000000
+.
+0ticks-->0x0
+1ticks-->0x500000
+12500ticks-->0xf42400000
+.
+0x0-->0ticks
+0x500000-->1ticks
+0xf42400000-->12500ticks
+.

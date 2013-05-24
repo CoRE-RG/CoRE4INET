@@ -36,9 +36,9 @@ void BGBuffer::handleMessage(cMessage *msg)
 
         if(outgoingMessage){
             //Send Message
-            for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+            for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end(); ++destGate)
             {
-                sendDirect(outgoingMessage->dup(), *gate);
+                sendDirect(outgoingMessage->dup(), *destGate);
             }
 //            if(gate("out")->isConnected()){
 //                send(outgoingMessage->dup(),"out");

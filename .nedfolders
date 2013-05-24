@@ -1,3 +1,5 @@
 examples
 simulations
 src
+tests/module/lib
+-ttethernet.examples.synchronization.HighIntegrity_small

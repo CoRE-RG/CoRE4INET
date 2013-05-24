@@ -24,7 +24,7 @@ TTEOutput::TTEOutput()
     ttBuffersPos = 0;
 
     ttQueue.setName("TT Messages");
-    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
     {
         char strBuf[64];
         snprintf(strBuf,64,"RC Priority %d Messages", i);
@@ -37,7 +37,7 @@ TTEOutput::TTEOutput()
 TTEOutput::~TTEOutput()
 {
     ttQueue.clear();
-    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
     {
         rcQueue[i].clear();
     }
@@ -79,7 +79,12 @@ void TTEOutput::handleMessage(cMessage *msg)
         if (framesRequested)
         {
             framesRequested--;
+            PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
+            if(pcf){
+                setTransparentClock(pcf);
+            }
             send(msg, gateBaseId("out"));
+
         }
         else
         {
@@ -90,9 +95,8 @@ void TTEOutput::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("TTin"))
     {
-        EV << "There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
         if(ttBuffers.size()>0){
-            ttBuffersPos = (++ttBuffersPos % ttBuffers.size());
+            ttBuffersPos = ((ttBuffersPos + 1) % ttBuffers.size());
         }
 
         //If we have an empty message allow other frame to be sent
@@ -115,6 +119,7 @@ void TTEOutput::handleMessage(cMessage *msg)
             }
             else
             {
+                EV << "There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
                 ttQueue.insert(msg);
                 notifyListeners();
                 emit(ttQueueLengthSignal, ttQueue.length());
@@ -174,10 +179,11 @@ void TTEOutput::handleMessage(cMessage *msg)
 void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
 {
     Enter_Method("registerTTBuffer(%s)", ttBuffer->getName());
-    int sendWindowStart = ttBuffer->par("sendWindowStart");
+    uint32_t sendWindowStart = ttBuffer->par("sendWindowStart");
     for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();)
     {
-        if (buffer == ttBuffers.end() || (*buffer)->par("sendWindowStart").longValue() > sendWindowStart)
+        uint32_t buf_sendWindowStart = (*buffer)->par("sendWindowStart").longValue();
+        if (buffer == ttBuffers.end() || buf_sendWindowStart > sendWindowStart)
         {
             ttBuffers.insert(buffer, ttBuffer);
             //Now doublecheck that the schedule is not overlapping for this port
@@ -253,7 +259,7 @@ void TTEOutput::requestPacket()
         return;
     }
     //RCFrames
-    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
     {
         if (!rcQueue[i].isEmpty() && isTransmissionAllowed((EtherFrame*) rcQueue[i].front()))
         {
@@ -326,9 +332,28 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
 }
 
 void TTEOutput::setTransparentClock(PCFrame *pcf){
-    unsigned long transparentClock = pcf->getTransparent_clock();
-    TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
-    transparentClock+=getLocalDelay(pcf)*scheduler->par("tick").doubleValue()*1000000*0x10000;
+    uint64_t transparentClock = pcf->getTransparent_clock();
+
+    //Add static delay for this port
+    transparentClock+=secondsToTransparentClock(getParentModule()->par("static_tx_delay").doubleValue());
+
+    //Add dynamic delay for the device
+    cArray parlist = pcf->getParList();
+    long start = -1;
+    for(int i=0;i<parlist.size();i++){
+        cMsgPar *parameter = dynamic_cast<cMsgPar*>(parlist.get(i));
+        if(parameter){
+            if(strncmp(parameter->getName(),"received_total",15)==0 || strncmp(parameter->getName(),"created_total",15)==0){
+                start = parameter->longValue();
+            }
+        }
+    }
+    if(start >= 0){
+        TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+        transparentClock+=ticksToTransparentClock((scheduler->getTotalTicks()-start),scheduler->par("tick").doubleValue());
+    }
+
+    //Set new transparent clock
     pcf->setTransparent_clock(transparentClock);
 }
 
@@ -341,7 +366,7 @@ bool TTEOutput::isEmpty()
 {
     bool empty = true;
     empty &= ttQueue.isEmpty();
-    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
     {
         empty &= rcQueue[i].isEmpty();
     }
@@ -351,7 +376,7 @@ bool TTEOutput::isEmpty()
 void TTEOutput::clear()
 {
     beQueue.clear();
-    for (int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
     {
         rcQueue[i].clear();
     }

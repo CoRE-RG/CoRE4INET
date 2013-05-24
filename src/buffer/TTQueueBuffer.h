@@ -31,7 +31,7 @@ namespace TTEthernetModel {
  *
  * The queue is an endless fifo queue
  *
- * @sa TTBuffer, TTQueueBuffer, Buffer
+ * @sa TTBuffer, TTQueueBuffer, CTBuffer
  *
  * @ingroup Buffer
  */

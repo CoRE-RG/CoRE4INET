@@ -18,12 +18,22 @@ package ttethernet.applications.trafficsource;
 import ttethernet.applications.base.TTEApplicationBase;
 
 //
-// TODO auto-generated module
+// Abstract base traffic source application used for various traffic generators.
+// Uses CTFrame with encapsulated cPacket as payload
+// Since this is an abstract module please do not instantiate it
 //
+//
+// @see TTTrafficSourceApp, RCTrafficSourceApp
+//
+// @author Till Steinbach
 simple TrafficSourceAppBase extends TTEApplicationBase
 {
     parameters:
-        int payload @unit(Byte) = default(46Byte);
-        int ct_id = default(-1);
         @display("i=block/source");
+        
+        //Size of the payload of the message (size of encapsulated cPacket) that is being generated
+        int payload @unit(Byte) = default(46Byte);
+        
+        //Critical traffic identifier of the message that is being generated (-1) means don't set ID
+        int ct_id = default(-1);
 }

@@ -1,0 +1,212 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+   </head>
+   <body onload="if (top.frames['componentsframe'] == undefined) { s = window.location.toString(); window.location = 'index.html?p=' + s.substring(s.lastIndexOf('/')+1); }">
+<h2 class="comptitle">Simple Module <i>RecordPlaybackScheduler</i></h2>
+<b>Package:</b> ttethernet.scheduler<br/><b>File: <a href="src-scheduler-RecordPlaybackScheduler.ned.html">src/scheduler/RecordPlaybackScheduler.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_record_playback_scheduler.html" target="mainframe"><b>C++ definition</b></a></p>
+
+<p>Extended Scheduler module. The module allows to record the oscillator behaviour
+when the read variable is set to true. The same behaviour can then be replayed
+when setting write to true. This can speed up the simulation significantly as the
+it makes it unnecessary to simulate complex modules such as synchronisation or
+oscillator behaviour more than once.</p>
+<p><b>See also:</b> <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a></p>
+<p><b>Author:</b> Lazar Todorov, Till Steinbach</p>
+<img src="ttethernet.scheduler.RecordPlaybackScheduler-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
+<area shape="rect" href="ttethernet.scheduler.RecordPlaybackScheduler.html" title="RecordPlaybackScheduler" alt="RecordPlaybackScheduler" coords="0,31,218,71">
+</map>
+<h3 class="subtitle">Usage diagram:</h3>
+<p>The following diagram shows usage relationships between types.
+Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.scheduler.RecordPlaybackScheduler-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.scheduler.RecordPlaybackScheduler.html" title="Simple Module RecordPlaybackScheduler" alt="" coords="5,6,181,34">
+</map>
+<h3 class="subtitle">Inheritance diagram:</h3>
+<p>The following diagram shows inheritance relationships for this type.
+Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
+<img src="ttethernet.scheduler.RecordPlaybackScheduler-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.scheduler.RecordPlaybackScheduler.html" title="Simple Module RecordPlaybackScheduler" alt="" coords="5,83,181,111">
+<area shape="rect" id="node2" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="41,6,145,34">
+</map>
+<h3 class="subtitle">Extends:</h3>
+<table class="typestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>
+<a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>TTEthernet scheduler module. The module allows to register Events using the
+registerEvent(<a href="SchedulerEvent.html">SchedulerEvent</a>) method. Allowed Events are:</p>
+
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Parameters:</h3>
+<table class="paramstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="defaultvalue">Default value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr class="inherited">
+   <td>tick</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>80ns</td>
+   <td>
+<p>Length of a tick</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>max_drift</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>16ps</td>
+   <td>
+<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>drift_change</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>uniform(-1ps,1ps)</td>
+   <td>
+<p>Clock drift change for the next cycle, you are free to use your desired distribution</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>current_tick</td>
+   <td>
+      <i>double</i>
+   </td>
+   <td>tick</td>
+   <td>
+<p>Current length of a tick (with imprecission)</p>
+   </td>
+</tr>
+<tr class="inherited">
+   <td>cycle_ticks</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>37500tick</td>
+   <td>
+<p>Number of ticks for one cycle</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>id</td>
+   <td>
+      <i>int</i>
+   </td>
+   <td>0</td>
+   <td>
+<p>Id for recording/playback</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>read</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+<p>Playback drifts</p>
+   </td>
+</tr>
+<tr class="local">
+   <td>write</td>
+   <td>
+      <i>bool</i>
+   </td>
+   <td>false</td>
+   <td>
+<p>Record drifts</p>
+   </td>
+</tr>
+</table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/cogwheel</i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>class</td>
+   <td><i>RecordPlaybackScheduler</i></td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Statistics:</h3>
+<table class="statisticstable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="title">Title</th>
+      <th class="source">Source</th>
+      <th class="record">Record</th>
+      <th class="unit">Unit</th>
+      <th class="interpolationmode">Interpolation Mode</th>
+   </tr>
+<tr class="local">
+   <td>newCycle</td>
+   <td>Start of cycle</td>
+   <td></td>
+   <td>count, vector</td>
+   <td></td>
+   <td></td>
+</tr>
+<tr class="local">
+   <td>currentDrift</td>
+   <td>Current drift</td>
+   <td></td>
+   <td>vector</td>
+   <td>s</td>
+   <td></td>
+</tr>
+</table>
+<h3 class="subtitle">Source code:</h3>
+<pre class="src"><span style="color: #808080; font-style: italic; ">//
+// Extended Scheduler module. The module allows to record the oscillator behaviour
+// when the read variable is set to true. The same behaviour can then be replayed
+// when setting write to true. This can speed up the simulation significantly as the
+// it makes it unnecessary to simulate complex modules such as synchronisation or
+// oscillator behaviour more than once.
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTEScheduler
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Lazar Todorov, Till Steinbach
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RecordPlaybackScheduler</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEScheduler</span><span style="color: #000000; ">
+{
+    </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RecordPlaybackScheduler</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Id for recording/playback
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">id</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Playback drifts
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">read</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">// Record drifts
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">write</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+}
+</span></pre>
+   <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>
+   </body>
+</html>

@@ -52,7 +52,7 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
         /**
          * @brief Number of frames that were requested from lower layer
          */
-        int framesRequested;
+        unsigned int framesRequested;
 
         /**
          * @brief Queue for TT-Messages. Will be only filled when there is TT shuffling

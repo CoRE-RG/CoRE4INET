@@ -2,6 +2,7 @@ package ttethernet.nodes.ethernet;
 
 import ttethernet.buffer.BGQueueBuffer;
 import ttethernet.linklayer.BGTrafficHandle;
+import ttethernet.scheduler.ITTEScheduler;
 import ttethernet.scheduler.TTEScheduler;
 import ttethernet.configuration.base.IConfigurationManager;
 import ttethernet.linklayer.TTEPHYPort;
@@ -30,12 +31,14 @@ module TTEEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
+        @node;
+        @labels(node,ethernet-node);
         int numApps = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
     gates:
         // Physical port of the host
-        inout ethg;
+        inout ethg @labels(EtherFrame-conn);
 
     submodules:
         // Physical port of the host
@@ -70,11 +73,11 @@ module TTEEtherHost
             @display("p=141,169");
         }
         // Scheudler for the device
-        tteScheduler: TTEScheduler {
+        tteScheduler: <default("TTEScheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
         tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
-            @display("p=235,99");
+            @display("p=234,37,row,70");
         }
         bgIn: BGQueueBuffer {
             @display("p=141,37");

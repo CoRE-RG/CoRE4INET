@@ -1,0 +1,19 @@
+******************
+See AS6802 spec for more details
+
+1 tick=80ns
+precission 80 ticks
+drift 80 ticks
+frame lenght 72 ticks (with InterFrame GAP 12 ticks = 84 ticks)
+hardware delay 0 microsec
+
+sm cs offset >= +2 *max transmission delay+ compression master delay +frame length =2*(87*3)+(80+5+161)+84=522+246+84=852
+
+
+sm ca offset >= cm ca timeout
+sm ca offset=1800
+
+cm ca timeout = num channels *((2 * max transmission delay)+sm cs offset+compression master delay)+drift error= 1*((2*(87*3))+852+(246)+80)=num channels *1700
+
+cm in timeout = (2 * max transmission delay) + sm ca offset + compression master delay + drift error= 522+1800+(246)+80=2648
+********************

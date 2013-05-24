@@ -29,8 +29,9 @@ TTBuffer::TTBuffer()
 
 TTBuffer::~TTBuffer()
 {
-    cancelEvent(actionTimeEvent);
-    delete actionTimeEvent;
+    if(actionTimeEvent->getOwner()==this){
+        cancelAndDelete(actionTimeEvent);
+    }
 }
 
 int TTBuffer::numInitStages() const
@@ -40,7 +41,7 @@ int TTBuffer::numInitStages() const
 
 void TTBuffer::initialize(int stage)
 {
-    Buffer::initialize(stage);
+    CTBuffer::initialize(stage);
     if(stage==1)
     {
         ev << "Initialize TTBuffer" << endl;
@@ -63,21 +64,21 @@ void TTBuffer::handleMessage(cMessage *msg)
 {
     bool arrivedOnSchedulerIn = msg->arrivedOn("schedulerIn");
 
-    Buffer::handleMessage(msg);
+    CTBuffer::handleMessage(msg);
 
     if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT && destinationGates.size() > 0)
     {
         cMessage *outgoingMessage = getFrame();
         //Send Message
-        for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+        for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end(); ++destGate)
         {
             if (outgoingMessage)
             {
-                sendDirect(outgoingMessage->dup(), *gate);
+                sendDirect(outgoingMessage->dup(), *destGate);
             }
             else
             {
-                sendDirect(new TTBufferEmpty("TT Buffer Empty"), *gate);
+                sendDirect(new TTBufferEmpty("TT Buffer Empty"), *destGate);
             }
         }
         if(gate("out")->isConnected()){
@@ -101,12 +102,12 @@ void TTBuffer::handleMessage(cMessage *msg)
         }
         //Reregister scheduler
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
-        tteScheduler->registerEvent((SchedulerEvent *) msg);
+        tteScheduler->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg), true);
     }
 }
 
 void TTBuffer::handleParameterChange(const char* parname){
-    Buffer::handleParameterChange(parname);
+    CTBuffer::handleParameterChange(parname);
 
     if(actionTimeEvent)
         actionTimeEvent->setAction_time(par("sendWindowStart").doubleValue());

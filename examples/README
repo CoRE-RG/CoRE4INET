@@ -9,11 +9,14 @@ Sciences).
 
 Example simulations are grouped into the following subdirectories:
 
-   rt-tictoc/             example that shows the usage of the API
-   small_network/         example that shows a small network with traffic generation
+   rt-tictoc/                                     example that shows the usage of the API
+   small_network/                                 example that shows a small network with traffic generation
+   synchronization/                               examples of AS6802 synchronisation protocol
+   synchronization/HighIntegrity_small            Small network with high integrity configuration
+   synchronization/StandardIntegrity_large        Large network with standard integrity configuration
+   synchronization/StandardIntegrity_medium       Medium network with standard integrity configuration
 
 
-   
 The package's main README file contains links to additional info to help you
 get started with the model.
 

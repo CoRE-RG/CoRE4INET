@@ -14,9 +14,9 @@
 // 
 
 #include "TrafficSourceAppBase.h"
-#include <CTFrame_m.h>
-#include <TTFrame_m.h>
-#include <RCFrame_m.h>
+#include "CTFrame.h"
+#include "TTFrame_m.h"
+#include "RCFrame_m.h"
 #include "TTE4INETDefs.h"
 
 namespace TTEthernetModel {
@@ -56,7 +56,9 @@ void TrafficSourceAppBase::sendMessage(){
                 else{
                     continue;
                 }
-                frame->setByteLength(par("payload").longValue()+ETHER_MAC_FRAME_BYTES);
+                cPacket *payload = new cPacket;
+                payload->setByteLength(par("payload").longValue());
+                frame->encapsulate(payload);
                 //Padding
                 if(frame->getByteLength()<MIN_ETHERNET_FRAME_BYTES){
                     frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);

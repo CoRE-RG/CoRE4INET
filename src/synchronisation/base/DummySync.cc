@@ -49,11 +49,11 @@ void DummySync::handleMessage(cMessage *msg)
     TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
     if(msg->arrivedOn("schedulerIn")){
         if(tteScheduler->getCycles()>1){
-            unsigned int cycleTicks = tteScheduler->par("cycle_ticks").longValue();
-            double tick = tteScheduler->par("tick").doubleValue();
+            uint32_t cycleTicks = tteScheduler->par("cycle_ticks").longValue();
+            simtime_t tick = tteScheduler->par("tick").doubleValue();
 
-            long modticks = ((int)(simTime().dbl()/tick)-par("action_time").longValue())%cycleTicks;
-            if(modticks>(cycleTicks/2))
+            int64_t modticks = ((int64_t)(simTime()/tick)-par("action_time").longValue())%cycleTicks;
+            if(modticks>((int64_t)cycleTicks/2))
                 modticks=modticks-cycleTicks;
             modticks+=uniform(-par("precission").doubleValue()/2, par("precission").doubleValue()/2)/tick;
 

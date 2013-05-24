@@ -22,8 +22,7 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Simple Test-Application.
- *
+ * @brief Base class for a TTEthernet traffic generator application.
  *
  * @sa TTEApplicationBase
  * @ingroup Applications

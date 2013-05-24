@@ -21,7 +21,7 @@ simple Incoming like IOutputQueue
     @statistic[ctDropped](title="CT violation"; record=sum);
     gates:
         //input of the ctc
-        input in @directIn @labels(CTFrame);
+        input in @directIn @labels(EtherFrame);
         //output of the ctc
-        output out @labels(CTFrame);
+        output out @labels(EtherFrame-conn);
 }

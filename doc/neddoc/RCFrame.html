@@ -13,14 +13,14 @@
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="RCFrame-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,5,80,32">
+<img src="RCFrame-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,6,83,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="RCFrame-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,80,80,107">
-<area shape="rect" href="PCFrame.html" title="Packet PCFrame" alt="" coords="5,155,80,181">
-<area shape="rect" href="CTFrame.html" title="Packet CTFrame" alt="" coords="5,5,80,32">
+<img src="RCFrame-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,83,83,111">
+<area shape="rect" id="node4" href="PCFrame.html" title="Packet PCFrame" alt="" coords="5,161,83,189">
+<area shape="rect" id="node2" href="CTFrame.html" title="Packet CTFrame" alt="" coords="5,6,83,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -80,13 +80,31 @@ string</i>
    <td></td>
 </tr>
 <tr class="inherited">
+   <td>byteLength</td>
+   <td>
+      <i>
+</i>
+   </td>
+   <td>
+<p>Set EthernetHeader Bytelength</p>
+</td>
+</tr>
+<tr class="inherited">
    <td>ctID</td>
    <td>
       <i>
-unsigned short</i>
+uint16_t</i>
    </td>
    <td>
-<p>Critical traffic ID (for TT and RC messages).</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>ctMarker</td>
+   <td>
+      <i>
+uint32_t</i>
+   </td>
+   <td>
 </td>
 </tr>
 <tr class="inherited">

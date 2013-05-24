@@ -14,22 +14,24 @@ timer message (<a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent<
 <p><b>See also:</b> <a href="ttethernet.ctc.Incoming.html">Incoming</a>, <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a></p>
 <p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.ctc.TTIncoming-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="0,31,120,71">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="0,31,121,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.ctc.TTIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="141,80,229,107">
-<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,5,77,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="101,5,173,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="197,5,269,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="293,5,365,32">
+<img src="ttethernet.ctc.TTIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="188,83,279,111">
+<area shape="rect" id="node2" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,6,77,34">
+<area shape="rect" id="node5" href="ttethernet.examples.rt_tictoc.Tic.html" title="Compound Module Tic" alt="" coords="101,6,173,34">
+<area shape="rect" id="node7" href="ttethernet.examples.rt_tictoc.Toc.html" title="Compound Module Toc" alt="" coords="197,6,269,34">
+<area shape="rect" id="node9" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,6,365,34">
+<area shape="rect" id="node11" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="389,6,461,34">
+<area shape="rect" id="node13" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="485,6,557,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.ctc.TTIncoming-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="5,80,93,107">
-<area shape="rect" href="ttethernet.ctc.Incoming.html" title="Simple Module Incoming" alt="" coords="13,5,85,32">
+<img src="ttethernet.ctc.TTIncoming-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="5,83,96,111">
+<area shape="rect" id="node2" href="ttethernet.ctc.Incoming.html" title="Simple Module Incoming" alt="" coords="13,6,88,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -61,6 +63,20 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </tr>
 <tr>
    <td>
+<a href="ttethernet.examples.rt_tictoc.Switch1.html">Switch1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>switch1: configuration in switch1.ini
+Forwards time-triggered messages with VL-ID 100 and rc messages with VL-ID 101</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
 <a href="ttethernet.examples.small_network.Switch1.html">Switch1</a>
    </td>
    <td>
@@ -70,6 +86,32 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 
 <p>switch1: configuration in switch1.ini
 Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.rt_tictoc.Tic.html">Tic</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>tic: configuration in tic.ini.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.rt_tictoc.Toc.html">Toc</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>tic: configuration in tic.ini.</p>
 
    </td>
 </tr>
@@ -239,11 +281,11 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
         </span><span style="color: #808080; font-style: italic; ">//TTIncoming is implemented by the TTIncoming C++ Class
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTIncoming</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Beginning of the receive window in number of ticks
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">receive_window_start</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">receive_window_start</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//End of the receive window in number of ticks
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">receive_window_end</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">receive_window_end</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//permanence point in time in number of ticks
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">permanence_pit</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">permanence_pit</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;

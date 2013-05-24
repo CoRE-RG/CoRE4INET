@@ -14,22 +14,22 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 <area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Unit1" alt="Unit1" coords="21,115,65,162">
 <area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Unit2" alt="Unit2" coords="231,75,275,122">
 <area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Unit3" alt="Unit3" coords="231,147,275,194">
-<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Switch1" alt="Switch1" coords="124,108,174,169">
+<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Switch1" alt="Switch1" coords="124,108,175,169">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.small_network-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="181,5,285,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="5,80,77,107">
-<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="101,80,173,107">
-<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="197,80,269,107">
-<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,80,365,107">
-<area shape="rect" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="389,80,461,107">
+<img src="ttethernet.examples.small_network.small_network-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="180,6,287,34">
+<area shape="rect" id="node2" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="5,83,77,111">
+<area shape="rect" id="node4" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="101,83,173,111">
+<area shape="rect" id="node6" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="197,83,269,111">
+<area shape="rect" id="node8" href="ttethernet.examples.small_network.small_network.cable.html" title="Channel cable" alt="" coords="293,83,365,111">
+<area shape="rect" id="node10" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="389,83,461,111">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.small_network-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="5,5,109,32">
+<img src="ttethernet.examples.small_network.small_network-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="5,6,112,34">
 </map>
 <h3 class="subtitle">Properties:</h3>
 <table class="propertiestable">
@@ -41,6 +41,11 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr>
    <td>isNetwork</td>
    <td><i></i></td>
+   <td></td>
+</tr>
+<tr>
+   <td>display</td>
+   <td><i>bgb=,,white</i></td>
    <td></td>
 </tr>
 </table>
@@ -195,46 +200,6 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.applications.base.ITTEApplication.html">tteApp</a>.buffers</td>
    <td>
       <i>string</i>
@@ -245,53 +210,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -315,53 +248,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -415,6 +316,24 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.priority</td>
    <td>
       <i>int</i>
@@ -455,21 +374,11 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit1.html">unit1</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.sendWindowStart</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -479,7 +388,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -627,46 +536,6 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.applications.base.ITTEApplication.html">tteApp</a>.buffers</td>
    <td>
       <i>string</i>
@@ -677,53 +546,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -747,53 +584,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -847,6 +652,24 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.priority</td>
    <td>
       <i>int</i>
@@ -887,21 +710,11 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.sendWindowStart</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -911,7 +724,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -921,7 +734,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -931,9 +744,27 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -977,21 +808,11 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit2.html">unit2</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.max_dispatch_delay</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1001,7 +822,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1011,7 +832,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1179,46 +1000,6 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.applications.base.ITTEApplication.html">tteApp</a>.buffers</td>
    <td>
       <i>string</i>
@@ -1229,53 +1010,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgIn</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -1299,53 +1048,21 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.priority</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>-1</td>
-   <td>
-<p>Priority of the buffer (currently only used for rate-constrained traffic)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_id</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic ID of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_marker</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic marker of the buffer</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.ct_mask</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>0</td>
-   <td>
-<p>Critical traffic mask of the buffer</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.BGQueueBuffer.html">bgOut</a>.destination_gates</td>
    <td>
       <i>string</i>
    </td>
    <td>""</td>
    <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -1399,6 +1116,24 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
+   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.priority</td>
    <td>
       <i>int</i>
@@ -1439,21 +1174,11 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.sendWindowStart</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -1463,7 +1188,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -1473,7 +1198,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1483,9 +1208,27 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -1529,21 +1272,11 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Unit3.html">unit3</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.max_dispatch_delay</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1553,7 +1286,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1563,7 +1296,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1702,46 +1435,6 @@ a generated MAC address in init stage 0.</p>
    <td>   </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.tick</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>80ns</td>
-   <td>
-<p>Length of a tick</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>16ps</td>
-   <td>
-<p>Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.max_drift_change</td>
-   <td>
-      <i>double</i>
-   </td>
-   <td>1ps</td>
-   <td>
-<p>Maximum clock drift change per cycle</p>
-   </td>
-</tr>
-<tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.scheduler.TTEScheduler.html">tteScheduler</a>.cycle_ticks</td>
-   <td>
-      <i>int</i>
-   </td>
-   <td>37500</td>
-   <td>
-<p>Number of ticks for one cycle</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.ctc.TTIncoming.html">vl_100_ctc</a>.receive_window_start</td>
    <td>
       <i>int</i>
@@ -1769,6 +1462,24 @@ a generated MAC address in init stage 0.</p>
    <td></td>
    <td>
 <p>permanence point in time in number of ticks</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -1812,21 +1523,11 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.buffer.TTDoubleBuffer.html">vl_100</a>.sendWindowStart</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -1836,7 +1537,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>
@@ -1846,7 +1547,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1856,9 +1557,27 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
+   </td>
+</tr>
+<tr>
+   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
    </td>
 </tr>
 <tr>
@@ -1902,21 +1621,11 @@ a generated MAC address in init stage 0.</p>
    </td>
 </tr>
 <tr>
-   <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr>
    <td><a href="ttethernet.examples.small_network.Switch1.html">switch1</a>.<a href="ttethernet.buffer.RCQueueBuffer.html">vl_101</a>.max_dispatch_delay</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1926,7 +1635,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -1936,7 +1645,7 @@ a generated MAC address in init stage 0.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -1971,6 +1680,7 @@ a generated MAC address in init stage 0.</p>
 //
 </span><span style="color: #800000; font-weight: bold; ">network</span><span style="color: #000000; "> </span><span style="color: #000000; ">small_network</span><span style="color: #000000; ">
 {
+    </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=,,white&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">types</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">// All links are configured with 100MBit per second and variable delay
@@ -1978,6 +1688,10 @@ a generated MAC address in init stage 0.</p>
 </span><span style="color: #000000; ">        </span><span style="color: #800000; font-weight: bold; ">channel</span><span style="color: #000000; "> </span><span style="color: #000000; ">cable</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">ned</span><span style="color: #000000; ">.</span><span style="color: #000000; ">DatarateChannel</span><span style="color: #000000; ">
         {
             </span><span style="color: #000000; ">datarate</span><span style="color: #000000; "> = </span><span style="color: #008000; ">100</span><span style="color: #000000; ">Mbps</span><span style="color: #000000; ">;
+            </span><span style="color: #808080; font-style: italic; ">//bit error rate (probability (0.0-1.0) per bit)  
+</span><span style="color: #000000; ">            </span><span style="color: #000000; ">ber</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+            </span><span style="color: #808080; font-style: italic; ">//packet error rate (probability (0.0-1.0) per packet)  
+</span><span style="color: #000000; ">            </span><span style="color: #000000; ">per</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
         }
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">unit1</span><span style="color: #000000; ">: </span><span style="color: #000000; ">Unit1</span><span style="color: #000000; "> {

@@ -22,6 +22,20 @@
         linkerFlags = ""
         />
     <feature
+        id="TTE_examples"
+        name="TTEthernet examples"
+        description = "Examples for the TTEthernet implementation"
+        initiallyEnabled = "true"
+        requires = "TTE_common"
+        labels = ""
+        nedPackages = "
+                       ttethernet.examples.rt_tictoc
+                       ttethernet.examples.small_network
+                      "
+        extraSourceFolders = ""
+        linkerFlags = ""
+        />
+    <feature
         id="TTE_api"
         name="TTEthernet API"
         description = "The TTEthernet API support"
@@ -37,6 +51,19 @@
         linkerFlags = ""
         />
     <feature
+        id="TTE_api_examples"
+        name="TTEthernet API examples"
+        description = "Examples for the TTEthernet API support"
+        initiallyEnabled = "true"
+        requires = "TTE_common"
+        labels = ""
+        nedPackages = "
+                       ttethernet.examples.api_rt_tictoc
+                      "
+        extraSourceFolders = ""
+        linkerFlags = ""
+        />
+    <feature
         id="TTE_trafficsource"
         name="TTEthernet Traffic generators"
         description = "Traffic generator applications for RC and TT traffic"
@@ -48,6 +75,33 @@
                       "
         extraSourceFolders = ""
         compileFlags = "-DWITH_TTE_TRAFFICSOURCE"
+        linkerFlags = ""
+        />
+    <feature
+        id="TTE_AS6802_sync"
+        name="TTEthernet AS6802 Synchronisation Protocol"
+        description = "The simulation model for the AS6802 synchronisation protocol"
+        initiallyEnabled = "true"
+        requires = "TTE_common"
+        labels = ""
+        nedPackages = "
+                       ttethernet.synchronisation.AS6802
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_TTE_AS6802SYNC"
+        linkerFlags = ""
+        />
+    <feature
+        id="TTE_AS6802_sync_examples"
+        name="TTEthernet AS6802 Synchronisation Protocol examples"
+        description = "The simulation model for the AS6802 synchronisation protocol"
+        initiallyEnabled = "true"
+        requires = "TTE_common TTE_AS6802_sync"
+        labels = ""
+        nedPackages = "
+                       ttethernet.examples.synchronization
+                      "
+        extraSourceFolders = ""
         linkerFlags = ""
         />
 </features>

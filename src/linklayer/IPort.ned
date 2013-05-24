@@ -14,7 +14,7 @@ moduleinterface IPort
 {
     gates:
         //Input for time-triggered traffic
-        input TTin @directIn @labels(CTFrame);
+        input TTin @directIn @labels(TTFrame);
         //Input for rate-constrained traffic
-        input RCin @directIn @labels(CTFrame);
+        input RCin @directIn @labels(RCFrame);
 }

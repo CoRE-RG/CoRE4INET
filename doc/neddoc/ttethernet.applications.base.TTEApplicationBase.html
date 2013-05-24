@@ -7,23 +7,27 @@
 <h2 class="comptitle">Simple Module <i>TTEApplicationBase</i></h2>
 <b>Package:</b> ttethernet.applications.base<br/><b>File: <a href="src-applications-base-TTEApplicationBase.ned.html">src/applications/base/TTEApplicationBase.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_t_t_e_application_base.html" target="mainframe"><b>C++ definition</b></a></p>
 
-<p>TODO auto-generated module</p>
+<p>Abstract base application used for various application models.
+Since this is an abstract module please do not instantiate it</p>
+<p><b>See also:</b> <a href="ttethernet.applications.api.TTEAPIApplicationBase.html">TTEAPIApplicationBase</a>.ned</p>
+<p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.applications.base.TTEApplicationBase-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.applications.base.TTEApplicationBase.html" title="TTEApplicationBase" alt="TTEApplicationBase" coords="0,31,173,71">
+<area shape="rect" href="ttethernet.applications.base.TTEApplicationBase.html" title="TTEApplicationBase" alt="TTEApplicationBase" coords="0,31,179,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.base.TTEApplicationBase-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.applications.base.TTEApplicationBase.html" title="Simple Module TTEApplicationBase" alt="" coords="5,5,144,32">
+<img src="ttethernet.applications.base.TTEApplicationBase-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.applications.base.TTEApplicationBase.html" title="Simple Module TTEApplicationBase" alt="" coords="5,6,147,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.base.TTEApplicationBase-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.applications.base.TTEApplicationBase.html" title="Simple Module TTEApplicationBase" alt="" coords="189,80,328,107">
-<area shape="rect" href="ttethernet.applications.trafficsource.TrafficSourceAppBase.html" title="Simple Module TrafficSourceAppBase" alt="" coords="5,155,155,181">
-<area shape="rect" href="ttethernet.applications.api.TTEAPIApplicationBase.html" title="Simple Module TTEAPIApplicationBase" alt="" coords="179,155,339,181">
-<area shape="rect" href="ttethernet.applications.base.TTETestApp.html" title="Simple Module TTETestApp" alt="" coords="363,155,453,181">
-<area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="203,5,315,32">
+<img src="ttethernet.applications.base.TTEApplicationBase-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.applications.base.TTEApplicationBase.html" title="Simple Module TTEApplicationBase" alt="" coords="135,83,276,111">
+<area shape="rect" id="node4" href="ttethernet.applications.base.examples.rt_tictoc.TicApp.html" title="Simple Module TicApp" alt="" coords="5,161,77,189">
+<area shape="rect" id="node6" href="ttethernet.applications.base.examples.rt_tictoc.TocApp.html" title="Simple Module TocApp" alt="" coords="101,161,173,189">
+<area shape="rect" id="node8" href="ttethernet.applications.trafficsource.TrafficSourceAppBase.html" title="Simple Module TrafficSourceAppBase" alt="" coords="197,161,349,189">
+<area shape="rect" id="node10" href="ttethernet.applications.api.TTEAPIApplicationBase.html" title="Simple Module TTEAPIApplicationBase" alt="" coords="373,161,536,189">
+<area shape="rect" id="node2" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="148,6,263,34">
 </map>
 <h3 class="subtitle">Known subclasses:</h3>
 <table class="typestable">
@@ -34,6 +38,36 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </tr>
 <tr>
    <td>
+<a href="ttethernet.applications.base.examples.rt_tictoc.TicApp.html">TicApp</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Tic(<a href="ttethernet.examples.rt_tictoc.Tic.html">1</a>,<a href="Tic.html">2</a>) Application used for the <a href="ttethernet.examples.rt_tictoc.rt_tictoc.html">rt_tictoc</a> example.
+Sends TT messages with Tic(<a href="ttethernet.examples.rt_tictoc.Tic.html">1</a>,<a href="Tic.html">2</a>)-Request payload and receives
+RC messages with Toc(<a href="ttethernet.examples.rt_tictoc.Toc.html">1</a>,<a href="Toc.html">2</a>)-Response payload.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.applications.base.examples.rt_tictoc.TocApp.html">TocApp</a>
+   </td>
+   <td>
+<i>simple&nbsp;module</i>
+   </td>
+   <td>
+
+<p>Toc(<a href="ttethernet.examples.rt_tictoc.Toc.html">1</a>,<a href="Toc.html">2</a>) Application used for the <a href="ttethernet.examples.rt_tictoc.rt_tictoc.html">rt_tictoc</a> example.
+Receives TT messages with Tic(<a href="ttethernet.examples.rt_tictoc.Tic.html">1</a>,<a href="Tic.html">2</a>)-Request payload and answers
+with RC messages with Toc(<a href="ttethernet.examples.rt_tictoc.Toc.html">1</a>,<a href="Toc.html">2</a>)-Response payload.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
 <a href="ttethernet.applications.trafficsource.TrafficSourceAppBase.html">TrafficSourceAppBase</a>
    </td>
    <td>
@@ -41,26 +75,14 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td>
 
-<p>TODO auto-generated module</p>
+<p>Abstract base traffic source application used for various traffic generators.
+Since this is an abstract module please do not instantiate it</p>
 
    </td>
 </tr>
 <tr>
    <td>
 <a href="ttethernet.applications.api.TTEAPIApplicationBase.html">TTEAPIApplicationBase</a>
-   </td>
-   <td>
-<i>simple&nbsp;module</i>
-   </td>
-   <td>
-
-<p>TODO auto-generated module</p>
-
-   </td>
-</tr>
-<tr>
-   <td>
-<a href="ttethernet.applications.base.TTETestApp.html">TTETestApp</a>
    </td>
    <td>
 <i>simple&nbsp;module</i>
@@ -96,7 +118,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>bool</i>
    </td>
    <td>false</td>
-   <td>   </td>
+   <td>
+<p>If true, buffer management is not used. Applications use their own methods to locate buffers</p>
+   </td>
 </tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
@@ -109,7 +133,8 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr>
    <td>class</td>
    <td><i>TTEApplicationBase</i></td>
-   <td></td>
+   <td>
+</td>
 </tr>
 </table>
 <h3 class="subtitle">Gates:</h3>
@@ -123,12 +148,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr class="local">
    <td>TTin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming time-triggered messages</p>
+</td>
 </tr>
 <tr class="local">
    <td>RCin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming rate-constrained messages</p>
+</td>
 </tr>
 <tr class="local">
    <td>schedulerIn</xsl:if></td>
@@ -137,23 +166,42 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <p>Input gate for the incoming <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a> messages</p>
 </td>
 </tr>
+<tr class="local">
+   <td>syncIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming SynchronizationNotification messages</p>
+</td>
+</tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
-// TODO auto-generated module
+// Abstract base application used for various application models.
+// Since this is an abstract module please do not instantiate it
 //
+//
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> TTEAPIApplicationBase.ned
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEApplicationBase</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTEApplicationBase</span><span style="color: #000000; ">);
+
         </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of buffer modules the application is allowed to use
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">buffers</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;&quot;</span><span style="color: #000000; ">);
-        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">buffers_manual</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
+
+        </span><span style="color: #808080; font-style: italic; ">//If true, buffer management is not used. Applications use their own methods to locate buffers
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">bool</span><span style="color: #000000; "> </span><span style="color: #000000; ">buffers_manual</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">false</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
-        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
-        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">CTFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming time-triggered messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTFrame</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming rate-constrained messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCin</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCFrame</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;
+        </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SynchronizationNotification messages
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">syncIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;
 }
 </span></pre>
    <hr><p class="footer"><a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top"><img src="by-sa.png"></a> This documentation is released under the <a href="http://creativecommons.org/licenses/by-sa/3.0" target="_top">Creative Commons license</a></p>

@@ -13,13 +13,13 @@
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-msg-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="PCFrame-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="PCFrame.html" title="Packet PCFrame" alt="" coords="5,5,80,32">
+<img src="PCFrame-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="PCFrame.html" title="Packet PCFrame" alt="" coords="5,6,83,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-msg-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="PCFrame-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="PCFrame.html" title="Packet PCFrame" alt="" coords="5,80,80,107">
-<area shape="rect" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,5,80,32">
+<img src="PCFrame-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="PCFrame.html" title="Packet PCFrame" alt="" coords="5,83,83,111">
+<area shape="rect" id="node2" href="RCFrame.html" title="Packet RCFrame" alt="" coords="5,6,83,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -53,7 +53,7 @@ Unresolved types are missing from the diagram. Click <a href="full-msg-inheritan
    <td>integration_cycle</td>
    <td>
       <i>
-unsigned int</i>
+uint32_t</i>
    </td>
    <td>
 <p>pcf_integration_cycle: Represents the integration cycle in which the protocol control frame was sent</p>
@@ -64,7 +64,7 @@ unsigned int</i>
    <td>membership_new</td>
    <td>
       <i>
-unsigned int</i>
+uint32_t</i>
    </td>
    <td>
 <p>pcf_membership_new: Bit vector with a static configured one-to-one relationship from a bit to a Synchronization Master</p>
@@ -75,7 +75,7 @@ unsigned int</i>
    <td>sync_priority</td>
    <td>
       <i>
-unsigned char</i>
+uint8_t</i>
    </td>
    <td>
 <p>pcf_sync_priority: Static configured value in each Synchronization Master, Synchronization Client, and Compression Master</p>
@@ -86,7 +86,7 @@ unsigned char</i>
    <td>sync_domain</td>
    <td>
       <i>
-unsigned char</i>
+uint8_t</i>
    </td>
    <td>
 <p>pcf_sync_domain: Static configured value in each Synchronization Master, Synchronization Client, and Compression Master</p>
@@ -97,7 +97,7 @@ unsigned char</i>
    <td>type</td>
    <td>
       <i>
-unsigned char</i>
+uint8_t</i>
    </td>
    <td>
 <p>pcf_type: Defines the frame type of a Protocol Control Frame</p>
@@ -108,7 +108,7 @@ unsigned char</i>
    <td>transparent_clock</td>
    <td>
       <i>
-unsigned long</i>
+uint64_t</i>
    </td>
    <td>
 <p>pcf_transparent_clock: stores the accumulated delay of a Protocol Control Frame up to the consumer.</p>
@@ -125,13 +125,31 @@ string</i>
    <td></td>
 </tr>
 <tr class="inherited">
+   <td>byteLength</td>
+   <td>
+      <i>
+</i>
+   </td>
+   <td>
+<p>Set EthernetHeader Bytelength</p>
+</td>
+</tr>
+<tr class="inherited">
    <td>ctID</td>
    <td>
       <i>
-unsigned short</i>
+uint16_t</i>
    </td>
    <td>
-<p>Critical traffic ID (for TT and RC messages).</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>ctMarker</td>
+   <td>
+      <i>
+uint32_t</i>
+   </td>
+   <td>
 </td>
 </tr>
 <tr class="inherited">
@@ -173,34 +191,34 @@ int</i>
     </span><span style="color: #808080; font-style: italic; ">// pcf_integration_cycle: Represents the integration cycle in which the protocol control frame was sent
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 32 Bit field
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">integration_cycle</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint32_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">integration_cycle</span><span style="color: #000000; ">;
 
     </span><span style="color: #808080; font-style: italic; ">// pcf_membership_new: Bit vector with a static configured one-to-one relationship from a bit to a Synchronization Master
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 32 Bit field
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">membership_new</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint32_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">membership_new</span><span style="color: #000000; ">;
 
     </span><span style="color: #808080; font-style: italic; ">// pcf_sync_priority: Static configured value in each Synchronization Master, Synchronization Client, and Compression Master
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 8 Bit field
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">char</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_priority</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_priority</span><span style="color: #000000; ">;
 
     </span><span style="color: #808080; font-style: italic; ">// pcf_sync_domain: Static configured value in each Synchronization Master, Synchronization Client, and Compression Master
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 8 Bit field
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">char</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_domain</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">sync_domain</span><span style="color: #000000; ">;
 
     </span><span style="color: #808080; font-style: italic; ">// pcf_type: Defines the frame type of a Protocol Control Frame
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 4 Bit field
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">char</span><span style="color: #000000; "> </span><span style="color: #000000; ">type</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint8_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">type</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@enum</span><span style="color: #000000; ">(</span><span style="color: #000000; ">PCFType</span><span style="color: #000000; ">);
 
     </span><span style="color: #808080; font-style: italic; ">// pcf_transparent_clock: stores the accumulated delay of a Protocol Control Frame up to the consumer.
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// Time is represented as multiples of picoseconds
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 64 Bit field
-</span><span style="color: #000000; ">    </span><span style="color: #000080; font-weight: bold; ">unsigned</span><span style="color: #000000; "> </span><span style="color: #000080; font-weight: bold; ">long</span><span style="color: #000000; "> </span><span style="color: #000000; ">transparent_clock</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">uint64_t</span><span style="color: #000000; "> </span><span style="color: #000000; ">transparent_clock</span><span style="color: #000000; ">;
 
     </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">displayString</span><span style="color: #000000; "> = </span><span style="color: #008000; ">&quot;b=15,15,rect,white,orange,5&quot;</span><span style="color: #000000; ">;
 }

@@ -14,22 +14,24 @@ The buffer sends a copy of the stored frame after each bag.</p>
 <p><b>See also:</b> <a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>, <a href="ttethernet.buffer.Buffer.html">Buffer</a>,</p>
 <p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.buffer.TTDoubleBuffer-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="0,31,145,71">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="0,31,150,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.TTDoubleBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="132,80,239,107">
-<area shape="rect" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,5,77,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="101,5,173,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="197,5,269,32">
-<area shape="rect" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="293,5,365,32">
+<img src="ttethernet.buffer.TTDoubleBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="176,83,291,111">
+<area shape="rect" id="node2" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,6,77,34">
+<area shape="rect" id="node5" href="ttethernet.examples.rt_tictoc.Tic.html" title="Compound Module Tic" alt="" coords="101,6,173,34">
+<area shape="rect" id="node7" href="ttethernet.examples.rt_tictoc.Toc.html" title="Compound Module Toc" alt="" coords="197,6,269,34">
+<area shape="rect" id="node9" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,6,365,34">
+<area shape="rect" id="node11" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="389,6,461,34">
+<area shape="rect" id="node13" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="485,6,557,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.TTDoubleBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="5,80,112,107">
-<area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="23,5,95,32">
+<img src="ttethernet.buffer.TTDoubleBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="5,83,120,111">
+<area shape="rect" id="node2" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="27,6,99,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -62,6 +64,20 @@ send window.</p>
    </tr>
 <tr>
    <td>
+<a href="ttethernet.examples.rt_tictoc.Switch1.html">Switch1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>switch1: configuration in switch1.ini
+Forwards time-triggered messages with VL-ID 100 and rc messages with VL-ID 101</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
 <a href="ttethernet.examples.small_network.Switch1.html">Switch1</a>
    </td>
    <td>
@@ -71,6 +87,32 @@ send window.</p>
 
 <p>switch1: configuration in switch1.ini
 Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.rt_tictoc.Tic.html">Tic</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>tic: configuration in tic.ini.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.rt_tictoc.Toc.html">Toc</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>tic: configuration in tic.ini.</p>
 
    </td>
 </tr>
@@ -123,6 +165,24 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
       <th class="description">Description</th>
    </tr>
 <tr class="inherited">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr class="inherited">
    <td>priority</td>
    <td>
       <i>int</i>
@@ -163,21 +223,11 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
    </td>
 </tr>
 <tr class="inherited">
-   <td>destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr class="inherited">
    <td>sendWindowStart</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -187,7 +237,7 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>

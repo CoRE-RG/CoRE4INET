@@ -15,7 +15,7 @@ class SchedulerEvent;
 // @author Till Steinbach
 message SchedulerActionTimeEvent extends SchedulerEvent {
         // Action time in cycle for the event in number of ticks
-        unsigned int action_time;
+        uint32_t action_time;
 }
 
 //
@@ -27,5 +27,5 @@ message SchedulerActionTimeEvent extends SchedulerEvent {
 // @author Till Steinbach
 message SchedulerTimerEvent extends SchedulerEvent {
         // Time after that the event is triggered in number of ticks
-        unsigned int timer;
+        uint64_t timer;
 }

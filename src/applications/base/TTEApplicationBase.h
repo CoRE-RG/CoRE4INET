@@ -40,7 +40,7 @@ class TTEApplicationBase : public cSimpleModule
          * @brief Map of critical traffic identifies with their
          * corresponding Buffers.
          */
-        std::map<uint16, std::list<Buffer*> > buffers;
+        std::map<uint16_t, std::list<Buffer*> > buffers;
     public:
         /**
          * @brief executes the given Callback in the context of the Application
@@ -48,6 +48,16 @@ class TTEApplicationBase : public cSimpleModule
          * @param cb the Callback to execute
          */
         virtual void executeCallback(Callback *cb);
+
+        /**
+         * @brief resets the bag on incoming RC-Frames (on RCin)
+         *
+         * This method should be called from subclasses unless the module
+         * resets the bag on its own.
+         *
+         * @param msg parameter must be forwarded from subclass
+         */
+        virtual void handleMessage(cMessage *msg);
 
         /**
          * @brief Indicates a parameter has changed.

@@ -27,15 +27,16 @@ import ttethernet.buffer.TTDoubleBuffer;
 //
 module Unit1 extends TTEEtherHost
 {
+    @display("bgb=479,314");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:
-            	@display("p=349,60");
-            	
+                @display("p=350,100");
+
         }
         vl_100: TTDoubleBuffer {
             parameters:
-                @display("p=439,61");
+                @display("p=440,100");
         }
     connections:
         vl_100_ctc.out --> vl_100.in;

@@ -18,20 +18,20 @@ not be used directly in simulation.</p>
 <p><b>See also:</b> <a href="ttethernet.buffer.RCDoubleBuffer.html">RCDoubleBuffer</a>, <a href="ttethernet.buffer.RCQueueBuffer.html">RCQueueBuffer</a>, <a href="ttethernet.buffer.Buffer.html">Buffer</a>, <a href="SchedulerTimerEvent.html">SchedulerTimerEvent</a>, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a></p>
 <p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.buffer.RCBuffer-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="RCBuffer" alt="RCBuffer" coords="0,31,100,71">
+<area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="RCBuffer" alt="RCBuffer" coords="0,31,104,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.RCBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="5,5,77,32">
+<img src="ttethernet.buffer.RCBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="5,6,83,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.RCBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="92,80,164,107">
-<area shape="rect" href="ttethernet.buffer.RCDoubleBuffer.html" title="Simple Module RCDoubleBuffer" alt="" coords="5,155,117,181">
-<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="141,155,251,181">
-<area shape="rect" href="ttethernet.buffer.Buffer.html" title="Simple Module Buffer" alt="" coords="92,5,164,32">
+<img src="ttethernet.buffer.RCBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.buffer.RCBuffer.html" title="Simple Module RCBuffer" alt="" coords="95,83,172,111">
+<area shape="rect" id="node4" href="ttethernet.buffer.RCDoubleBuffer.html" title="Simple Module RCDoubleBuffer" alt="" coords="5,161,123,189">
+<area shape="rect" id="node6" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="147,161,261,189">
+<area shape="rect" id="node2" href="ttethernet.buffer.CTBuffer.html" title="Simple Module CTBuffer" alt="" coords="96,6,171,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -42,14 +42,14 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </tr>
 <tr>
    <td>
-<a href="ttethernet.buffer.Buffer.html">Buffer</a>
+<a href="ttethernet.buffer.CTBuffer.html">CTBuffer</a>
    </td>
    <td>
 <i>simple&nbsp;module</i>
    </td>
    <td>
 
-<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for the various Buffers of TTEthernet.
+<p>Abstract base <a href="ttethernet.buffer.Buffer.html">Buffer</a> used for critical traffic Buffers of TTEthernet.
 Since this is an abstract module please do not instantiate it</p>
 
    </td>
@@ -100,6 +100,24 @@ gandwidth alocation gap.</p>
       <th class="description">Description</th>
    </tr>
 <tr class="inherited">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
+<tr class="inherited">
    <td>priority</td>
    <td>
       <i>int</i>
@@ -139,22 +157,12 @@ gandwidth alocation gap.</p>
 <p>Critical traffic mask of the buffer</p>
    </td>
 </tr>
-<tr class="inherited">
-   <td>destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
 <tr class="local">
    <td>max_dispatch_delay</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -164,7 +172,7 @@ gandwidth alocation gap.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)</p>
    </td>
@@ -174,7 +182,7 @@ gandwidth alocation gap.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Not used</p>
    </td>
@@ -275,18 +283,18 @@ gandwidth alocation gap.</p>
 // </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
 //
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
-</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">Buffer</span><span style="color: #000000; ">
+</span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">CTBuffer</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//RCBuffer is implemented by the RCBuffer C++ Class
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">RCBuffer</span><span style="color: #000000; ">);
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=,orange&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">// Not used
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_dispatch_delay</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">max_dispatch_delay</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">// Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bag</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">bag</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">// Not used
-</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">jitter</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">jitter</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">0</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerTimerEvent messages
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">input</span><span style="color: #000000; "> </span><span style="color: #000000; ">schedulerIn</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@directIn</span><span style="color: #000000; ">;

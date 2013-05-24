@@ -54,6 +54,7 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 //
 </span><span style="color: #800000; font-weight: bold; ">network</span><span style="color: #000000; "> </span><span style="color: #000000; ">small_network</span><span style="color: #000000; ">
 {
+    </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=,,white&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">types</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">// All links are configured with 100MBit per second and variable delay
@@ -61,12 +62,16 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
 </span><span style="color: #000000; ">        </span><span style="color: #800000; font-weight: bold; ">channel</span><span style="color: #000000; "> </span><span style="color: #000000; ">cable</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">ned</span><span style="color: #000000; ">.</span><span style="color: #000000; ">DatarateChannel</span><span style="color: #000000; ">
         {
             </span><span style="color: #000000; ">datarate</span><span style="color: #000000; "> = </span><span style="color: #008000; ">100</span><span style="color: #000000; ">Mbps</span><span style="color: #000000; ">;
+            </span><span style="color: #808080; font-style: italic; ">//bit error rate (probability (0.0-1.0) per bit)  
+</span><span style="color: #000000; ">            </span><span style="color: #000000; ">ber</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
+            </span><span style="color: #808080; font-style: italic; ">//packet error rate (probability (0.0-1.0) per packet)  
+</span><span style="color: #000000; ">            </span><span style="color: #000000; ">per</span><span style="color: #000000; "> = </span><span style="color: #008000; ">0</span><span style="color: #000000; ">;
         }
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">unit1</span><span style="color: #000000; ">: </span><span style="color: #000000; ">Unit1</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=39,70&quot;</span><span style="color: #000000; ">);
         }
-        
+
         </span><span style="color: #000000; ">unit2</span><span style="color: #000000; ">: </span><span style="color: #000000; ">Unit2</span><span style="color: #000000; "> {
             </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=249,30&quot;</span><span style="color: #000000; ">);
         }

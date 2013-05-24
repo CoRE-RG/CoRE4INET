@@ -16,12 +16,17 @@
 package ttethernet.applications.trafficsource;
 
 //
-// TODO auto-generated module
+// Traffic source application used for rate-constrained traffic generators.
 //
+// @see TTTrafficSourceApp
+//
+// @author Till Steinbach
 simple RCTrafficSourceApp extends TrafficSourceAppBase
 {
     parameters:
         @class(RCTrafficSourceApp);
-        volatile double interval @unit(s);
         @display("i=,orange");
+        
+        //Sending interval for the rate constrained messages (any build in disstribution can be used)
+        volatile double interval @unit(s);
 }

@@ -17,13 +17,23 @@ package ttethernet.applications.base;
 
 import ttethernet.linklayer.IPort;
 
-
+//
+// Interface to be implemented by application models.
+// Since this is an abstract module please do not instantiate it
+//
+//
+// @see TTEAPIApplicationBase
+//
+// @author Till Steinbach
 moduleinterface ITTEApplication extends IPort
 {
     parameters:
+        @display("i=block/app");
         //Comma seperated list of buffer modules the application is allowed to use
         string buffers;
     gates:
          //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn;
+        //Input gate for the incoming SynchronizationNotification messages
+        input syncIn;
 }

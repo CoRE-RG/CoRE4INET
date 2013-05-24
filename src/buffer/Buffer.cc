@@ -101,10 +101,6 @@ EtherFrame* Buffer::getFrame(){
 }
 
  void Buffer::putFrame(EtherFrame* frame){
-    int priority = par("priority").longValue();
-    if(frame && priority>=0){
-        frame->setSchedulingPriority(priority);
-    }
     enqueue(frame);
 }
 
@@ -113,18 +109,6 @@ void Buffer::handleMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
-        //Try to correct destination mac
-        if(frame->getDest().isUnspecified()){
-            MACAddress mac;
-            unsigned long maskedMarker= ctMarker & ctMask;
-            mac.setAddressByte(0, maskedMarker>>24);
-            mac.setAddressByte(1, maskedMarker>>16);
-            mac.setAddressByte(2, maskedMarker>>8);
-            mac.setAddressByte(3, maskedMarker);
-            mac.setAddressByte(4, ctId>>8);
-            mac.setAddressByte(5, ctId);
-            frame->setDest(mac);
-        }
         emit(latencySignal, simTime()-msg->getCreationTime());
         putFrame((EtherFrame*) frame);
         // Now execute callbacks if there are some
@@ -136,10 +120,6 @@ void Buffer::handleMessage(cMessage *msg)
 }
 
 void Buffer::handleParameterChange(const char* parname){
-    ctMask = (unsigned long)par("ct_mask").longValue();
-    ctMarker = (unsigned long)par("ct_marker").longValue();
-    ctId = (unsigned long)par("ct_id").longValue();
-
     destinationGates.clear();
     if(ev.isGUI()){
         //TODO check why this does not work

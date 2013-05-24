@@ -30,7 +30,7 @@ namespace TTEthernetModel {
  * If the bag has not expired yet the frame is stored. The implementation uses a
  * SchedulerTimerEvent that is registered at the TTEScheduler.
  *
- * @sa RCBuffer, RCDoubleBuffer, Buffer
+ * @sa RCBuffer, RCDoubleBuffer, CTBuffer
  *
  * @ingroup Buffer
  */

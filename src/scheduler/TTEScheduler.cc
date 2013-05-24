@@ -16,7 +16,6 @@
 #include "TTEScheduler.h"
 
 #include <SchedulerMessage_m.h>
-#include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
 
@@ -38,48 +37,75 @@ void TTEScheduler::initialize(int stage)
         cycles = 0;
 
         //Start Timer
-        scheduleAt(simTime(), new SchedulerEvent("NEW_CYCLE", NEW_CYCLE));
+        newCyclemsg = new SchedulerEvent("NEW_CYCLE", NEW_CYCLE);
+        newCyclemsg->setSchedulingPriority(0);
+        scheduleAt(simTime(), newCyclemsg);
 
         lastCycleStart = simTime();
+        lastNewCycleMessage = simTime();
+        lastCycleTicks = 0;
+    }
+}
+TTEScheduler::~TTEScheduler()
+{
+    cancelAndDelete(newCyclemsg);
+    for(std::list<SchedulerEvent*>::iterator event = registredEvents.begin();event!=registredEvents.end();event++){
+        if((*event)->getOwner()==this){
+            cancelAndDelete(*event);
+        }
     }
 }
 
-bool TTEScheduler::registerEvent(SchedulerEvent *event)
-{
+bool TTEScheduler::registerEvent(SchedulerEvent *event){
 #ifdef DEBUG
     Enter_Method("registerEvent(SchedulerEvent %s)",event->getName());
 #else
     Enter_Method_Silent();
 #endif
-    take(event);
-    registredEvents.push_back(event);
+
     if (event->getKind() == ACTION_TIME_EVENT)
     {
-        SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*) event;
-        //Check whether event is in cycle
-        if(actionTimeEvent->getAction_time()>cycleTicks){
-            bubble("Schedule contains out of cycle events!");
-            return false;
-        }
-
-        if (actionTimeEvent->getAction_time() > getTicks())
-        {
-            scheduleAt(lastCycleStart + currentTick * actionTimeEvent->getAction_time(),
-                    actionTimeEvent);
-        }
-        else
-        {
-            scheduleAt(lastCycleStart
-                    + currentTick
-                    * (actionTimeEvent->getAction_time() + cycleTicks),
-                    actionTimeEvent);
-
-        }
+        return registerEvent(dynamic_cast<SchedulerActionTimeEvent*>(event), false);
     }
     else if (event->getKind() == TIMER_EVENT)
     {
+        take(event);
+        registredEvents.push_back(event);
         SchedulerTimerEvent *timerEvent = (SchedulerTimerEvent*) event;
         scheduleAt(simTime() + currentTick * timerEvent->getTimer(), event);
+    }
+    return true;
+}
+
+
+bool TTEScheduler::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, bool forceNextCycle)
+{
+#ifdef DEBUG
+    Enter_Method("registerEvent(SchedulerEvent %s, forceNextCycle %d)",event->getName(), forceNextCycle);
+#else
+    Enter_Method_Silent();
+#endif
+
+    take(actionTimeEvent);
+    registredEvents.push_back(actionTimeEvent);
+
+    //Check whether event is in cycle
+    if(actionTimeEvent->getAction_time()>cycleTicks){
+        bubble("Schedule contains out of cycle events!");
+        return false;
+    }
+
+    if ((actionTimeEvent->getAction_time() <= getTicks()) || forceNextCycle)
+    {
+        scheduleAt(lastCycleStart
+                            + currentTick
+                            * (actionTimeEvent->getAction_time() + cycleTicks),
+                            actionTimeEvent);
+    }
+    else
+    {
+        scheduleAt(lastCycleStart + currentTick * (actionTimeEvent->getAction_time()),
+                            actionTimeEvent);
     }
     return true;
 }
@@ -89,7 +115,6 @@ void TTEScheduler::unregisterEvent(SchedulerEvent *event){
         cancelEvent(event);
         registredEvents.remove(event);
     }
-
 }
 
 void TTEScheduler::handleMessage(cMessage *msg)
@@ -108,32 +133,23 @@ void TTEScheduler::handleMessage(cMessage *msg)
         emit(newCycle, 1L);
         cycles++;
         lastCycleStart = simTime();
+        lastNewCycleMessage = simTime();
         lastCycleTicks += cycleTicks;
         scheduleAt(lastCycleStart + currentTick * cycleTicks, msg);
         newCyclemsg = msg;
 
-
-        //WARNING: NOW IN DUMMYSYNC MODULE CHECK IF CORRECT!
-        //TODO: Delete this code if simulation works properly
-//        int modticks = (int)(simTime().dbl()/tick)%cycleTicks;
-//        if(modticks>(cycleTicks/2))
-//            modticks=modticks-cycleTicks;
-//        modticks+=uniform(-0.000000250,0.000000250)/tick;
-//        clockCorrection(-modticks);
         correctEvents();
     }
 }
 
 void TTEScheduler::changeDrift(){
-
-    double newDriftChange = uniform(-maxDriftChange,maxDriftChange);
-    double newTick = currentTick+newDriftChange;
+    simtime_t newTick = currentTick+SimTime(par("drift_change").doubleValue());
     if((newTick-tick)>maxDrift)
-        par("current_tick").setDoubleValue(tick+maxDrift);
+        par("current_tick").setDoubleValue((tick+maxDrift).dbl());
     else if((newTick-tick)<-maxDrift)
-        par("current_tick").setDoubleValue(tick-maxDrift);
+        par("current_tick").setDoubleValue((tick-maxDrift).dbl());
     else
-        par("current_tick").setDoubleValue(newTick);
+        par("current_tick").setDoubleValue(newTick.dbl());
     emit(currentDrift, par("current_tick").doubleValue()-tick);
 }
 
@@ -172,17 +188,16 @@ void TTEScheduler::correctEvents(){
 }
 
 void TTEScheduler::handleParameterChange(const char* parname){
-    maxDriftChange = par("max_drift_change").doubleValue();
-    maxDrift = par("max_drift").doubleValue();
-    currentTick = par("current_tick").doubleValue();
-    tick = par("tick").doubleValue();
+    maxDrift = SimTime(par("max_drift").doubleValue());
+    currentTick = SimTime(par("current_tick").doubleValue());
+    tick = SimTime(par("tick").doubleValue());
     cycleTicks = par("cycle_ticks").longValue();
 }
 
-void TTEScheduler::clockCorrection(int ticks){
+void TTEScheduler::clockCorrection(int32_t ticks){
     Enter_Method("clock correction %d ticks",ticks);
 
-    lastCycleStart+=SimTime(ticks*currentTick);
+    lastCycleStart+=ticks*currentTick;
 
     //Now correct the new cylce time
     cancelEvent(newCyclemsg);
@@ -191,22 +206,22 @@ void TTEScheduler::clockCorrection(int ticks){
     correctEvents();
 }
 
-unsigned int TTEScheduler::getTicks()
+uint32_t TTEScheduler::getTicks()
 {
     if(simTime() >= lastCycleStart){
-        return round(((simTime() - lastCycleStart) / currentTick).dbl());
+        return floor((simTime() - lastCycleStart) / currentTick);
     }
     else{
-        return cycleTicks - round(((lastCycleStart - simTime()) / currentTick).dbl());
+        return cycleTicks - floor((lastCycleStart - simTime()) / currentTick);
     }
 }
 
-unsigned long TTEScheduler::getTotalTicks()
+uint64_t TTEScheduler::getTotalTicks()
 {
-    return lastCycleTicks + getTicks();
+    return lastCycleTicks + floor((simTime() - lastNewCycleMessage) / currentTick);
 }
 
-unsigned int TTEScheduler::getCycles()
+uint32_t TTEScheduler::getCycles()
 {
     return cycles;
 }

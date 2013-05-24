@@ -9,18 +9,18 @@
 
 <p>TODO auto-generated module</p>
 <img src="ttethernet.applications.api.TTEAPITestApplication-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.applications.api.TTEAPITestApplication.html" title="TTEAPITestApplication" alt="TTEAPITestApplication" coords="0,31,188,71">
+<area shape="rect" href="ttethernet.applications.api.TTEAPITestApplication.html" title="TTEAPITestApplication" alt="TTEAPITestApplication" coords="0,31,198,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.api.TTEAPITestApplication-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.applications.api.TTEAPITestApplication.html" title="Simple Module TTEAPITestApplication" alt="" coords="5,5,157,32">
+<img src="ttethernet.applications.api.TTEAPITestApplication-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.applications.api.TTEAPITestApplication.html" title="Simple Module TTEAPITestApplication" alt="" coords="5,6,163,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.api.TTEAPITestApplication-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.applications.api.TTEAPITestApplication.html" title="Simple Module TTEAPITestApplication" alt="" coords="9,80,161,107">
-<area shape="rect" href="ttethernet.applications.api.TTEAPIApplicationBase.html" title="Simple Module TTEAPIApplicationBase" alt="" coords="5,5,165,32">
+<img src="ttethernet.applications.api.TTEAPITestApplication-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.applications.api.TTEAPITestApplication.html" title="Simple Module TTEAPITestApplication" alt="" coords="8,83,165,111">
+<area shape="rect" id="node2" href="ttethernet.applications.api.TTEAPIApplicationBase.html" title="Simple Module TTEAPIApplicationBase" alt="" coords="5,6,168,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -67,7 +67,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>bool</i>
    </td>
    <td>false</td>
-   <td>   </td>
+   <td>
+<p>If true, buffer management is not used. Applications use their own methods to locate buffers</p>
+   </td>
 </tr>
 </table>
 <h3 class="subtitle">Properties:</h3>
@@ -94,18 +96,29 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr class="inherited">
    <td>TTin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming time-triggered messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>RCin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming rate-constrained messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>schedulerIn</xsl:if></td>
    <td><i>input</i></td>
    <td></td>   <td>
 <p>Input gate for the incoming <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a> messages</p>
+</td>
+</tr>
+<tr class="inherited">
+   <td>syncIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming SynchronizationNotification messages</p>
 </td>
 </tr>
 </table>

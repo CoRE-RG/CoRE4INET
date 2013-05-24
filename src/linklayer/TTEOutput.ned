@@ -30,9 +30,9 @@ simple TTEOutput like IOutputQueue
         output out @labels(EtherFrame);
 
         //Input for time-triggered frames from the buffers
-        input TTin @labels(CTFrame);
+        input TTin @labels(TTFrame);
         //Input for rate-constrained frames from the buffers
-        input RCin @labels(CTFrame);
+        input RCin @labels(RCFrame);
         //Input for protocol control frames from the buffers
-        input PCFin @labels(CTFrame);
+        input PCFin @labels(PCFrame);
 }

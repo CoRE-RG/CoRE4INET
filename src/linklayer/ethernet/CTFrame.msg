@@ -17,8 +17,16 @@ namespace TTEthernetModel;
 // @author Till Steinbach
 packet CTFrame extends EtherFrame
 {    
-        // Critical traffic ID (for TT and RC messages). 
-        unsigned short ctID;
+    	// Set EthernetHeader Bytelength
+    	byteLength = 18;
+    	
+        // Critical traffic ID (from MAC) (for TT and RC messages). 
+        @customize(true);
+        abstract uint16_t ctID;
+        
+        // Critical traffic marker (from MAC) (for TT and RC messages). 
+        @customize(true);
+        abstract uint32_t ctMarker;
         
         string displayString="b=15,15,rect,black,kind,5";
 }

@@ -14,18 +14,18 @@ The buffer removes and sends the first message in the queue.</p>
 <p><b>See also:</b> <a href="ttethernet.buffer.TTBuffer.html">TTBuffer</a>, <a href="ttethernet.buffer.Buffer.html">Buffer</a>,</p>
 <p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.buffer.TTQueueBuffer-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="TTQueueBuffer" alt="TTQueueBuffer" coords="0,31,141,71">
+<area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="TTQueueBuffer" alt="TTQueueBuffer" coords="0,31,145,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.TTQueueBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="5,5,112,32">
+<img src="ttethernet.buffer.TTQueueBuffer-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="5,6,115,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.buffer.TTQueueBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="5,80,112,107">
-<area shape="rect" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="23,5,95,32">
+<img src="ttethernet.buffer.TTQueueBuffer-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.buffer.TTQueueBuffer.html" title="Simple Module TTQueueBuffer" alt="" coords="5,83,115,111">
+<area shape="rect" id="node2" href="ttethernet.buffer.TTBuffer.html" title="Simple Module TTBuffer" alt="" coords="24,6,96,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -57,6 +57,24 @@ send window.</p>
       <th class="defaultvalue">Default value</th>
       <th class="description">Description</th>
    </tr>
+<tr class="inherited">
+   <td>destination_gates</td>
+   <td>
+      <i>string</i>
+   </td>
+   <td>""</td>
+   <td>
+<p>Priority of the buffer (currently only used for rate-constrained traffic)
+       int priority=default(-1);
+Critical traffic ID of the buffer
+       int ct_id=default(0);
+Critical traffic marker of the buffer
+       int ct_marker=default(0);
+Critical traffic mask of the buffer
+       int ct_mask=default(0);
+Comma seperated list of gates where the frames of the buffer are delivered</p>
+   </td>
+</tr>
 <tr class="inherited">
    <td>priority</td>
    <td>
@@ -98,21 +116,11 @@ send window.</p>
    </td>
 </tr>
 <tr class="inherited">
-   <td>destination_gates</td>
-   <td>
-      <i>string</i>
-   </td>
-   <td>""</td>
-   <td>
-<p>Comma seperated list of gates where the frames of the buffer are delivered</p>
-   </td>
-</tr>
-<tr class="inherited">
    <td>sendWindowStart</td>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)</p>
    </td>
@@ -122,7 +130,7 @@ send window.</p>
    <td>
       <i>int</i>
    </td>
-   <td>0</td>
+   <td>0tick</td>
    <td>
 <p>End of the send window in number of ticks</p>
    </td>

@@ -7,20 +7,22 @@
 <h2 class="comptitle">Simple Module <i>TTTrafficSourceApp</i></h2>
 <b>Package:</b> ttethernet.applications.trafficsource<br/><b>File: <a href="src-applications-trafficsource-TTTrafficSourceApp.ned.html">src/applications/trafficsource/TTTrafficSourceApp.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html" target="mainframe"><b>C++ definition</b></a></p>
 
-<p>TODO auto-generated module</p>
+<p>Traffic source application used for time-triggered traffic generators.</p>
+<p><b>See also:</b> <a href="ttethernet.applications.trafficsource.RCTrafficSourceApp.html">RCTrafficSourceApp</a></p>
+<p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.applications.trafficsource.TTTrafficSourceApp-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html" title="TTTrafficSourceApp" alt="TTTrafficSourceApp" coords="0,31,168,71">
+<area shape="rect" href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html" title="TTTrafficSourceApp" alt="TTTrafficSourceApp" coords="0,31,178,71">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.trafficsource.TTTrafficSourceApp-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html" title="Simple Module TTTrafficSourceApp" alt="" coords="5,5,139,32">
+<img src="ttethernet.applications.trafficsource.TTTrafficSourceApp-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html" title="Simple Module TTTrafficSourceApp" alt="" coords="5,6,144,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.trafficsource.TTTrafficSourceApp-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html" title="Simple Module TTTrafficSourceApp" alt="" coords="13,80,147,107">
-<area shape="rect" href="ttethernet.applications.trafficsource.TrafficSourceAppBase.html" title="Simple Module TrafficSourceAppBase" alt="" coords="5,5,155,32">
+<img src="ttethernet.applications.trafficsource.TTTrafficSourceApp-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html" title="Simple Module TTTrafficSourceApp" alt="" coords="12,83,151,111">
+<area shape="rect" id="node2" href="ttethernet.applications.trafficsource.TrafficSourceAppBase.html" title="Simple Module TrafficSourceAppBase" alt="" coords="5,6,157,34">
 </map>
 <h3 class="subtitle">Extends:</h3>
 <table class="typestable">
@@ -38,7 +40,8 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td>
 
-<p>TODO auto-generated module</p>
+<p>Abstract base traffic source application used for various traffic generators.
+Since this is an abstract module please do not instantiate it</p>
 
    </td>
 </tr>
@@ -67,7 +70,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>bool</i>
    </td>
    <td>false</td>
-   <td>   </td>
+   <td>
+<p>If true, buffer management is not used. Applications use their own methods to locate buffers</p>
+   </td>
 </tr>
 <tr class="inherited">
    <td>payload</td>
@@ -75,7 +80,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>int</i>
    </td>
    <td>46Byte</td>
-   <td>   </td>
+   <td>
+<p>Size of the payload of the message that is being generated</p>
+   </td>
 </tr>
 <tr class="inherited">
    <td>ct_id</td>
@@ -83,7 +90,9 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <i>int</i>
    </td>
    <td>-1</td>
-   <td>   </td>
+   <td>
+<p>Critical traffic identifier of the message that is being generated (-1) means don't set ID</p>
+   </td>
 </tr>
 <tr class="local">
    <td>action_time</td>
@@ -92,6 +101,7 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td></td>
    <td>
+<p>Time in the cycle at which the message is being send to the connected buffers</p>
    </td>
 </tr>
 <tr class="local">
@@ -101,6 +111,8 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
    </td>
    <td>1</td>
    <td>
+<p>Modulo cycles: 1 means message is being send in each cycle, 2 means in every second cycle,
+and so on. 0 means never</p>
    </td>
 </tr>
 </table>
@@ -134,12 +146,16 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <tr class="inherited">
    <td>TTin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming time-triggered messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>RCin</xsl:if></td>
    <td><i>input</i></td>
-   <td></td>   <td></td>
+   <td></td>   <td>
+<p>Input gate for the incoming rate-constrained messages</p>
+</td>
 </tr>
 <tr class="inherited">
    <td>schedulerIn</xsl:if></td>
@@ -148,20 +164,33 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
 <p>Input gate for the incoming <a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent</a> messages</p>
 </td>
 </tr>
+<tr class="inherited">
+   <td>syncIn</xsl:if></td>
+   <td><i>input</i></td>
+   <td></td>   <td>
+<p>Input gate for the incoming SynchronizationNotification messages</p>
+</td>
+</tr>
 </table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
-// TODO auto-generated module
+// Traffic source application used for time-triggered traffic generators.
 //
+// </span><span style="color: #000080; ">@see</span><span style="color: #808080; font-style: italic; "> RCTrafficSourceApp
+//
+// </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">simple</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTTrafficSourceApp</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TrafficSourceAppBase</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTTrafficSourceApp</span><span style="color: #000000; ">);
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=,red&quot;</span><span style="color: #000000; ">);
 
-        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">action_time</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Time in the cycle at which the message is being send to the connected buffers
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">action_time</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">);
 
-        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">modulo</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
+        </span><span style="color: #808080; font-style: italic; ">//Modulo cycles: 1 means message is being send in each cycle, 2 means in every second cycle,
+</span><span style="color: #000000; ">        </span><span style="color: #808080; font-style: italic; ">//and so on. 0 means never
+</span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">modulo</span><span style="color: #000000; "> = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">1</span><span style="color: #000000; ">);
 
 
 }
