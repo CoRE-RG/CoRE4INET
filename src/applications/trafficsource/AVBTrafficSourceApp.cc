@@ -20,7 +20,6 @@
 #include <AVBFrame_m.h>
 #include "TTEScheduler.h"
 #include "Buffer.h"
-#include "AVBIncoming.h"
 
 namespace TTEthernetModel {
 
@@ -34,7 +33,7 @@ void AVBTrafficSourceApp::initialize()
     streamID = par("streamID").longValue();
     isStreaming = false;
 
-    AVBIncoming *avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
+    avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
 
     Buffer *srpInBuffer = (Buffer*) getParentModule()->getSubmodule("srpIn");
     srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
@@ -89,6 +88,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                     if(!isStreaming)
                     {
                         isStreaming = true;
+                        avbCTC->setPortReservation(0, avbCTC->calcBandwith(this->par("frameSize").longValue(), this->par("intervalFrames").longValue()) + avbCTC->getPortReservation(0) );
                         sendAVBFrame();
                     }
                 }

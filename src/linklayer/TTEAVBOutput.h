@@ -17,6 +17,7 @@
 #define TTEAVBOUTPUT_H_
 
 #include "TTEOutput.h"
+#include "AVBIncoming.h"
 
 namespace TTEthernetModel {
 
@@ -24,8 +25,19 @@ class TTEAVBOutput : public TTEOutput
 {
     protected:
         int credit;
+        int portIndex;
+        int portAVBReservation;
 
         cQueue avbQueue;
+        AVBIncoming *avbCTC;
+
+        SimTime newTime;
+        SimTime oldTime;
+        SimTime durationDebug;
+
+        static simsignal_t avbQueueLengthSignal;
+
+        virtual void initialize();
 
         virtual void handleMessage(cMessage *msg);
         /**
@@ -36,6 +48,8 @@ class TTEAVBOutput : public TTEOutput
          * received.
          */
         virtual void requestPacket();
+
+        void calcCredit();
     public:
         /**
          * @brief Constructor

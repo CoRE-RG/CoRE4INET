@@ -147,7 +147,17 @@ int AVBIncoming::calcBandwith(int FrameSize, int IntervalFrames)
     double sFrameSize = IntervalFrames * FrameSize; //Byte
     double bitFrameSize = sFrameSize * 8; //Bit
     double BitspSecond = bitFrameSize * 8 * 1000; //pro s
-    return (BitspSecond / 1024) / 1024; //Mbit/s
+    return ((BitspSecond / 1024) / 1024 ) + 1; //Mbit/s
+}
+
+int AVBIncoming::getPortReservation(int port)
+{
+    return PortReservation[port];
+}
+
+void AVBIncoming::setPortReservation(int port, int reservation)
+{
+    PortReservation[port] = reservation;
 }
 
 } /* namespace TTEthernetModel */

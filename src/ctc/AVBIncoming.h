@@ -52,13 +52,16 @@ class AVBIncoming : public cSimpleModule
 
             int calcPortUtilisation(int port);
 
-            int calcBandwith(int FrameSize, int IntervalFrames);
+
     public:
             /**
              * @brief Constructor.
              */
             AVBIncoming();
             bool talker;
+            int calcBandwith(int FrameSize, int IntervalFrames);
+            int getPortReservation(int port);
+            void setPortReservation(int port, int reservation);
 };
 
 } /* namespace TTEthernetModel */

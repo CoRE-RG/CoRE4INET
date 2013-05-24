@@ -13,36 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef AVBTRAFFICSOURCEAPP_H_
-#define AVBTRAFFICSOURCEAPP_H_
+#ifndef SRPTRAFFICHANDLE_H_
+#define SRPTRAFFICHANDLE_H_
 
-#include <omnetpp.h>
-#include "TrafficSourceAppBase.h"
-#include "AVBIncoming.h"
+#include "BGTrafficHandle.h"
+#include "MACAddress.h"
 
 namespace TTEthernetModel {
 
-class AVBTrafficSourceApp : public TrafficSourceAppBase
+class SRPTrafficHandle : public BGTrafficHandle
 {
-    private:
-        bool talker;
-        bool isStreaming;
-        long streamID;
-        Buffer *srpOutBuffer;
-        AVBIncoming* avbCTC;
-        cModule *avbOutCTC;
     protected:
-        /**
-         * @brief Initialization of the module. Sends activator message
-         */
+        int localSAP;
+        int remoteSAP;
+        MACAddress destMACAddressUnicast;
+        MACAddress destMACAddressBroadcast;
+        MACAddress srcMACAddress;
         virtual void initialize();
-        /**
-         * @brief Handles message generation
-         */
         virtual void handleMessage(cMessage *msg);
-
-        void sendAVBFrame();
 };
 
 } /* namespace TTEthernetModel */
-#endif /* AVBTRAFFICSOURCEAPP_H_ */
+#endif /* SRPTRAFFICHANDLE_H_ */
