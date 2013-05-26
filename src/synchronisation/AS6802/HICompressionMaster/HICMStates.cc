@@ -543,28 +543,28 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
+			PCFrame *frame=compressed_frames->find(dd->getFrameID())->second;
 
-
-			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
+			cMsgPar *par = &frame->addPar("created_total");
 
 			par->setLongValue(tteScheduler->getTotalTicks());
 
 			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
+			        frame->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
 							"in"));
 			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
+			        frame->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
 							"in"));
 			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
+			        frame->dup(),
 					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 							"in"));
 
 			//delete frame;
 
-			delete compressed_frames->at(dd->getFrameID());
+			delete frame;
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -1196,28 +1196,28 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 
 			DispatchDelay *dd = dynamic_cast<DispatchDelay *>(message);
 
+            PCFrame *frame=compressed_frames->find(dd->getFrameID())->second;
 
+            cMsgPar *par = &frame->addPar("created_total");
 
-			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
+            par->setLongValue(tteScheduler->getTotalTicks());
 
-			par->setLongValue(tteScheduler->getTotalTicks());
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
+                            "in"));
 
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
-							"in"));
+            //delete frame;
 
-			//delete frame;
-
-			delete compressed_frames->at(dd->getFrameID());
+            delete frame;
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -2013,25 +2013,28 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 
 
 
-			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
+            PCFrame *frame=compressed_frames->find(dd->getFrameID())->second;
 
-			par->setLongValue(tteScheduler->getTotalTicks());
+            cMsgPar *par = &frame->addPar("created_total");
 
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
-							"in"));
+            par->setLongValue(tteScheduler->getTotalTicks());
 
-			//delete frame;
-			delete compressed_frames->at(dd->getFrameID());
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
+                            "in"));
+
+            //delete frame;
+
+            delete frame;
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -2660,25 +2663,28 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 
 
 
-			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
+            PCFrame *frame=compressed_frames->find(dd->getFrameID())->second;
 
-			par->setLongValue(tteScheduler->getTotalTicks());
+            cMsgPar *par = &frame->addPar("created_total");
 
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
-							"in"));
+            par->setLongValue(tteScheduler->getTotalTicks());
 
-			//delete frame;
-			delete compressed_frames->at(dd->getFrameID());
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
+                            "in"));
+
+            //delete frame;
+
+            delete frame;
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -3478,25 +3484,28 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 
 
 
-			cMsgPar *par = &compressed_frames->at(dd->getFrameID())->addPar("created_total");
+            PCFrame *frame=compressed_frames->find(dd->getFrameID())->second;
 
-			par->setLongValue(tteScheduler->getTotalTicks());
+            cMsgPar *par = &frame->addPar("created_total");
 
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
-							"in"));
+            par->setLongValue(tteScheduler->getTotalTicks());
 
-			//delete frame;
-			delete compressed_frames->at(dd->getFrameID());
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
+                            "in"));
+
+            //delete frame;
+
+            delete frame;
 			compressed_frames->erase(dd->getId());
 
 			delete dd;
@@ -4343,25 +4352,28 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 
 
-			cMsgPar *par = &(compressed_frames->at(dd->getFrameID()))->addPar("created_total");
+            PCFrame *frame=compressed_frames->find(dd->getFrameID())->second;
 
-			par->setLongValue(tteScheduler->getTotalTicks());
+            cMsgPar *par = &frame->addPar("created_total");
 
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
-							"in"));
-			hicm->sendDirect(
-			        compressed_frames->at(dd->getFrameID())->dup(),
-					hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
-							"in"));
+            par->setLongValue(tteScheduler->getTotalTicks());
 
-			//delete frame;
-			delete compressed_frames->at(dd->getFrameID());
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 0)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 1)->gate(
+                            "in"));
+            hicm->sendDirect(
+                    frame->dup(),
+                    hicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
+                            "in"));
+
+            //delete frame;
+
+            delete frame;
 			compressed_frames->erase(dd->getId());
 
 			delete dd;

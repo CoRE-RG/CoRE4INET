@@ -828,7 +828,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 				//clear for the next cycle
 
@@ -1290,7 +1290,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %lld \n", clock_corr);
+					fprintf(fp, " %ld \n", clock_corr);
 				}
 				//clear for the next cycle
 
@@ -1318,7 +1318,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d", tteScheduler->getCycles());
-					fprintf(fp, "%lld \n", clock_corr);
+					fprintf(fp, "%ld \n", clock_corr);
 				}
 				tteScheduler->clockCorrection(clock_corr);
 
