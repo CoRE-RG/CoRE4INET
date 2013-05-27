@@ -33,9 +33,6 @@
 #include <SchedulerMessageEvents_m.h>
 #include <SchedulerEvent.h>
 class SICM;
-#define CA_FRAME '3'
-#define CS_FRAME '1'
-#define IN_FRAME '2'
 
 
 

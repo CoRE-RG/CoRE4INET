@@ -1200,9 +1200,9 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 					compressionFunctionCA(message, this->sicm);
 					return;
 				} else {
-					delete pf;
-					ev << "DEBUG: Error: SI_CM_UNSYNC UNKNOWN PCF TYPE "
+					ev << "DEBUG: Error: SI_CM_UNSYNC UNKNOWN PCF TYPE " << (int)pf->getType()
 							<< endl;
+					delete pf;
 				}
 
 			} else {
