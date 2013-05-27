@@ -117,7 +117,7 @@ class HICMState{
     deque<pair<unsigned int, unsigned int> > *clock_stack;
 
 
-
+    virtual ~HICMState(){}
 
 	virtual void handleMessage(cMessage *message){}
 
