@@ -43,7 +43,11 @@ void RecordPlaybackScheduler::initialize(int stage)
                 while(!feof(fp)){
                     int dummy;
                     double data;
-                    fscanf(fp,"%d %lf", &dummy, &data);
+                    int i = fscanf(fp,"%d %lf", &dummy, &data);
+                    if(i<0)
+                    {
+                        break;
+                    }
                     values->at(counter++)=data;
                 }
             }else{
