@@ -261,7 +261,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 
 			}
 
-			if (pf->getType() == IN) {
+			if (pf->getType() == IN_FRAME) {
 
 				ev << "DEBUG:SC INTEGRATE membership new value"
 						<< pf->getMembership_new() << endl;
@@ -301,7 +301,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 								TIMER_EVENT);
 						f_event->setReceivedPort(
 								pf->par("received_port").longValue());
-						f_event->setPcfType(IN);
+						f_event->setPcfType(IN_FRAME);
 						f_event->setIntegrationCycle(
 								pf->getIntegration_cycle());
 						f_event->setMember(pf->getMembership_new());
@@ -337,7 +337,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 									TIMER_EVENT);
 							f_event->setReceivedPort(
 									pf->par("received_port").longValue());
-							f_event->setPcfType(IN);
+							f_event->setPcfType(IN_FRAME);
 							f_event->setIntegrationCycle(
 									pf->getIntegration_cycle());
 							f_event->setMember(pf->getMembership_new());
@@ -364,7 +364,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 							TIMER_EVENT);
 					f_event->setReceivedPort(
 							pf->par("received_port").longValue());
-					f_event->setPcfType(IN);
+					f_event->setPcfType(IN_FRAME);
 					f_event->setMember(pf->getMembership_new());
 					f_event->setIntegrationCycle(pf->getIntegration_cycle());
 					//f_event->setAction_time(permanence_pit);
@@ -414,7 +414,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 			int64_t ppt = tteScheduler->getTotalTicks();
 
 						//IN Frame?
-			if (frame_->getPcfType() == IN) {
+			if (frame_->getPcfType() == IN_FRAME) {
 
 				int64_t temp =
 						(int64_t)(
@@ -828,7 +828,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %d \n", clock_corr);
 				}
 				//clear for the next cycle
 
@@ -914,7 +914,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 			}
 
-			if (copy_->getType() == IN) {
+			if (copy_->getType() == IN_FRAME) {
 
 				//calculate permanence pit
 				uint64_t permanence_delay =
@@ -930,7 +930,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 				f_event->setReceivedPort(
 						copy_->par("received_port").longValue());
-				f_event->setPcfType(IN);
+				f_event->setPcfType(IN_FRAME);
 				f_event->setIntegrationCycle(copy_->getIntegration_cycle());
 				f_event->setMember(copy_->getMembership_new());
 				f_event->setTimer(permanence_delay);
@@ -1290,7 +1290,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d ", tteScheduler->getCycles());
-					fprintf(fp, " %ld \n", clock_corr);
+					fprintf(fp, " %d \n", clock_corr);
 				}
 				//clear for the next cycle
 
@@ -1318,7 +1318,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				if (sc->par("write").boolValue()) {
 					fprintf(fp, "%d", tteScheduler->getCycles());
-					fprintf(fp, "%ld \n", clock_corr);
+					fprintf(fp, "%d \n", clock_corr);
 				}
 				tteScheduler->clockCorrection(clock_corr);
 
@@ -1391,12 +1391,12 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			uint64_t permanence_pit = tteScheduler->getTotalTicks()
 					+ permanence_delay;
 
-			if (copy_->getType() == IN) {
+			if (copy_->getType() == IN_FRAME) {
 
 				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 				f_event->setReceivedPort(
 						copy_->par("received_port").longValue());
-				f_event->setPcfType(IN);
+				f_event->setPcfType(IN_FRAME);
 				f_event->setIntegrationCycle(copy_->getIntegration_cycle());
 				f_event->setMember(copy_->getMembership_new());
 				f_event->setTimer(permanence_delay);

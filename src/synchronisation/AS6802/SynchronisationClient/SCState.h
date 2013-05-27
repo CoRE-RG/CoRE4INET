@@ -84,7 +84,7 @@ class SCState{
 
 	uint64_t local_integration_cycle;
 
-	int64_t clock_corr;
+	int32_t clock_corr;
 	uint64_t stable_cycle_counter;
 	uint64_t duration;
 	uint64_t max_transmission_delay;

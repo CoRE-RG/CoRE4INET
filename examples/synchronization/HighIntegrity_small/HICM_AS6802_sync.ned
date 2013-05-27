@@ -20,7 +20,7 @@ import ttethernet.nodes.ethernet.TTEEtherHost;
 //
 // Small sample network with three hosts and one switch that shows how to 
 // configure the TTEthernet Model. Configuration in omnetpp.ini
-// - Uses 3ms Cycletime
+// - Uses 1ms Cycletime
 // - 80ns Tick length
 //
 network HICM_AS6802_sync
@@ -63,10 +63,7 @@ network HICM_AS6802_sync
         //
         // The example uses a simple star topology
         //
-        //unit1.ethg <--> cable {  delay = 200ns; } <--> switch1.ethg[0];
-        //unit2.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
-        //unit3.ethg <--> cable {  delay = 50ns; } <--> switch1.ethg[2];
-        //unit4.ethg <--> cable {  delay = 150ns; } <--> switch1.ethg[3];
+      
         unit1.ethg <--> cable {  delay = 240ns; } <--> switch1.ethg[0];
         unit2.ethg <--> cable {  delay = 240ns; } <--> switch1.ethg[1];
         unit3.ethg <--> cable {  delay = 240ns; } <--> switch1.ethg[2];

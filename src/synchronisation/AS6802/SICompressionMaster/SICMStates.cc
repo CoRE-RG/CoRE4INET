@@ -236,12 +236,12 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->sicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 									//calculate permanence pit
 									int permanence_delay =
@@ -264,7 +264,7 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 									f_event->setTimer(permanence_delay);
 									f_event->setDestinationGate(sicm->gate("schedulerIn"));
 
-									if (pf->getType() == CS) {
+									if (pf->getType() == CS_FRAME) {
 										f_event->setSchedulingPriority(0);
 									} else {
 										ev << "ERROR: expect a CS FRAME ! TYPE: "
@@ -277,7 +277,7 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 
 									return;
 
-								} else if (pf->getType() == CA) {
+								} else if (pf->getType() == CA_FRAME) {
 
 									compressionFunctionCA(message, this->sicm);
 									return;
@@ -358,7 +358,7 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 				PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 				compressedFrame->setCtID(0);
 				compressedFrame->setCtMarker(0);
-				compressedFrame->setType(IN);
+				compressedFrame->setType(IN_FRAME);
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
@@ -564,11 +564,11 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 						<< tteScheduler->getTicks() << endl;
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					compressionFunction(message, this->sicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 									//calculate permanence pit
 									int permanence_delay =
@@ -591,7 +591,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 									f_event->setTimer(permanence_delay);
 									f_event->setDestinationGate(sicm->gate("schedulerIn"));
 
-									if (pf->getType() == CS) {
+									if (pf->getType() == CS_FRAME) {
 										f_event->setSchedulingPriority(0);
 									} else {
 										ev << "ERROR: expect a CS FRAME ! TYPE: "
@@ -604,7 +604,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 
 									return;
 
-								} else if (pf->getType() == CA) {
+								} else if (pf->getType() == CA_FRAME) {
 
 									compressionFunctionCA(message, this->sicm);
 									return;
@@ -707,7 +707,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 							PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 							compressedFrame->setCtMarker(0);
 							compressedFrame->setCtID(0);
-							compressedFrame->setType(IN);
+							compressedFrame->setType(IN_FRAME);
 							compressedFrame->setTransparent_clock(0);
 							compressedFrame->setMembership_new(
 									cp->getMembership_new());
@@ -768,7 +768,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 						PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 						compressedFrame->setCtID(0);
 						compressedFrame->setCtMarker(0);
-						compressedFrame->setType(IN);
+						compressedFrame->setType(IN_FRAME);
 						compressedFrame->setTransparent_clock(0);
 						compressedFrame->setMembership_new(
 								cp->getMembership_new());
@@ -810,7 +810,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 					PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 					compressedFrame->setCtID(0);
 					compressedFrame->setCtMarker(0);
-					compressedFrame->setType(IN);
+					compressedFrame->setType(IN_FRAME);
 					compressedFrame->setTransparent_clock(0);
 					compressedFrame->setMembership_new(cp->getMembership_new());
 					compressedFrame->setSync_domain(
@@ -1153,13 +1153,13 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					compressionFunction(message, this->sicm);
 
 					return;
 
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 					//calculate permanence pit
 					int permanence_delay =
@@ -1182,7 +1182,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 					f_event->setTimer(permanence_delay);
 					f_event->setDestinationGate(sicm->gate("schedulerIn"));
 
-					if (pf->getType() == CS) {
+					if (pf->getType() == CS_FRAME) {
 						f_event->setSchedulingPriority(0);
 					} else {
 						ev << "ERROR: expect a CS FRAME ! TYPE: "
@@ -1195,14 +1195,14 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 
 					return;
 
-				} else if (pf->getType() == CA) {
+				} else if (pf->getType() == CA_FRAME) {
 
 					compressionFunctionCA(message, this->sicm);
 					return;
 				} else {
-					delete pf;
-					ev << "DEBUG: Error: SI_CM_UNSYNC UNKNOWN PCF TYPE "
+					ev << "DEBUG: Error: SI_CM_UNSYNC UNKNOWN PCF TYPE " << (int)pf->getType()
 							<< endl;
+					delete pf;
 				}
 
 			} else {
@@ -1247,7 +1247,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 				compressedFrame->setCtID(0);
 				compressedFrame->setCtMarker(0);
-				compressedFrame->setType(IN);
+				compressedFrame->setType(IN_FRAME);
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
@@ -1347,7 +1347,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 
 			FrameEvent *et = dynamic_cast<FrameEvent *>(message);
 
-			if (et->getPcfType() == CS) {
+			if (et->getPcfType() == CS_FRAME) {
 
 				PCFrame *frame = new PCFrame("CS_Frame");
 
@@ -1361,7 +1361,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				frame->setTransparent_clock(0);
 				frame->setCtMarker(0);
 				frame->setCtID(0);
-				frame->setType(CS);
+				frame->setType(CS_FRAME);
 				frame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 
 				//Padding
@@ -1427,7 +1427,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				PCFrame *compressedFrame = new PCFrame("CA_FRAME");
 				compressedFrame->setCtID(0);
 				compressedFrame->setCtMarker(0);
-				compressedFrame->setType(CA);
+				compressedFrame->setType(CA_FRAME);
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
@@ -1540,11 +1540,11 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					compressionFunction(message, this->sicm);
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 									//calculate permanence pit
 									int permanence_delay =
@@ -1567,7 +1567,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 									f_event->setTimer(permanence_delay);
 									f_event->setDestinationGate(sicm->gate("schedulerIn"));
 
-									if (pf->getType() == CS) {
+									if (pf->getType() == CS_FRAME) {
 										f_event->setSchedulingPriority(0);
 									} else {
 										ev << "ERROR: expect a CS FRAME ! TYPE: "
@@ -1580,7 +1580,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 
 									return;
 
-								} else if (pf->getType() == CA) {
+								} else if (pf->getType() == CA_FRAME) {
 
 									compressionFunctionCA(message, this->sicm);
 									return;
@@ -1680,7 +1680,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 							PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 							compressedFrame->setCtID(0);
 							compressedFrame->setCtMarker(0);
-							compressedFrame->setType(IN);
+							compressedFrame->setType(IN_FRAME);
 							compressedFrame->setTransparent_clock(0);
 							compressedFrame->setMembership_new(
 									cp->getMembership_new());
@@ -1741,7 +1741,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 						PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 						compressedFrame->setCtID(0);
 						compressedFrame->setCtMarker(0);
-						compressedFrame->setType(IN);
+						compressedFrame->setType(IN_FRAME);
 						compressedFrame->setTransparent_clock(0);
 						compressedFrame->setMembership_new(
 								cp->getMembership_new());
@@ -1784,7 +1784,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 					PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 					compressedFrame->setCtID(0);
 					compressedFrame->setCtMarker(0);
-					compressedFrame->setType(IN);
+					compressedFrame->setType(IN_FRAME);
 					compressedFrame->setTransparent_clock(0);
 					compressedFrame->setMembership_new(cp->getMembership_new());
 					compressedFrame->setSync_domain(
@@ -2160,7 +2160,7 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 			PCFrame *compressedFrame = new PCFrame("CA_FRAME");
 			compressedFrame->setCtID(0);
 			compressedFrame->setCtMarker(0);
-			compressedFrame->setType(CA);
+			compressedFrame->setType(CA_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(member);
 			compressedFrame->setSync_domain(
@@ -2296,11 +2296,11 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 					ev << "WARNING: TYPE: " << pf->getType() << endl;
 				}
 
-			 if (pf->getType() == IN) {
+			 if (pf->getType() == IN_FRAME) {
 
 					compressionFunction(message, this->sicm);
 					return;
-			 } else if (pf->getType() == CS) {
+			 } else if (pf->getType() == CS_FRAME) {
 
 			 					//calculate permanence pit
 			 					int permanence_delay =
@@ -2323,7 +2323,7 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 			 					f_event->setTimer(permanence_delay);
 			 					f_event->setDestinationGate(sicm->gate("schedulerIn"));
 
-			 					if (pf->getType() == CS) {
+			 					if (pf->getType() == CS_FRAME) {
 			 						f_event->setSchedulingPriority(0);
 			 					} else {
 			 						ev << "ERROR: expect a CS FRAME ! TYPE: "
@@ -2336,7 +2336,7 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 
 			 					return;
 
-			 				} else if (pf->getType() == CA) {
+			 				} else if (pf->getType() == CA_FRAME) {
 
 			 					compressionFunctionCA(message, this->sicm);
 			 					return;
@@ -2411,13 +2411,13 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 				}
 
 				//IN FRAME ?
-				if (pf->getType() == IN) {
+				if (pf->getType() == IN_FRAME) {
 
 					//relay to compression function
 					compressionFunction(message, this->sicm);
 
 					return;
-				} else if (pf->getType() == CS) {
+				} else if (pf->getType() == CS_FRAME) {
 
 									//calculate permanence pit
 									int permanence_delay =
@@ -2440,7 +2440,7 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 									f_event->setTimer(permanence_delay);
 									f_event->setDestinationGate(sicm->gate("schedulerIn"));
 
-									if (pf->getType() == CS) {
+									if (pf->getType() == CS_FRAME) {
 										f_event->setSchedulingPriority(0);
 									} else {
 										ev << "ERROR: expect a CS FRAME ! TYPE: "
@@ -2453,7 +2453,7 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 
 									return;
 
-								} else if (pf->getType() == CA) {
+								} else if (pf->getType() == CA_FRAME) {
 
 									compressionFunctionCA(message, this->sicm);
 									return;
@@ -2535,7 +2535,7 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 				PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 				compressedFrame->setCtID(0);
 				compressedFrame->setCtMarker(0);
-				compressedFrame->setType(IN);
+				compressedFrame->setType(IN_FRAME);
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
@@ -2683,7 +2683,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -2960,7 +2960,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//CA FRAME ?
-		if (pf->getType() == CA) {
+		if (pf->getType() == CA_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("CA_FRAME", TIMER_EVENT);
 
@@ -3240,7 +3240,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -3518,7 +3518,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//CA FRAME ?
-		if ((pf)->getType() == CA) {
+		if ((pf)->getType() == CA_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("CA_FRAME", TIMER_EVENT);
 
@@ -3803,7 +3803,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -4080,7 +4080,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//CA FRAME ?
-		if (pf->getType() == CA) {
+		if (pf->getType() == CA_FRAME) {
 			ev << "COMP FNCT SI_CM_INTEGRATE MEMBER"
 					<< (pf)->getMembership_new() << endl;
 			ev << "COMP FNCT SI_CM_INTEGRATE INT CYCL"
@@ -4385,7 +4385,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -4659,7 +4659,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						+ (tteScheduler->getTotalTicks()
 								- pf->par("received_total").longValue()));
 		//CA FRAME ?
-		if (pf->getType() == CA) {
+		if (pf->getType() == CA_FRAME) {
 			ev << "COMP FNCT SICM ENABLED MEMBER" << (pf)->getMembership_new()
 					<< endl;
 			ev << "COMP FNCT SICM ENABLED INT CYCL"
@@ -4953,7 +4953,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -5232,7 +5232,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//CA FRAME ?
-		if (pf->getType() == CA) {
+		if (pf->getType() == CA_FRAME) {
 			ev << "COMP FNCT SI_CM_UNSYNC MEMBER" << (pf)->getMembership_new()
 					<< endl;
 			ev << "COMP FNCT SI_CM_UNSYNC INT CYCL"
@@ -5534,7 +5534,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 		ev << "CF STABLE CLOCK TOTAL: " << tteScheduler->getTotalTicks()
 				<< endl;
 		//IN FRAME ?
-		if (pf->getType() == IN) {
+		if (pf->getType() == IN_FRAME) {
 
 			FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 
@@ -5821,7 +5821,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								- pf->par("received_total").longValue()));
 
 		//CA FRAME ?
-		if (pf->getType() == CA) {
+		if (pf->getType() == CA_FRAME) {
 			ev << "COMP FNCT CA SI_CM_STABLE MEMBER"
 					<< (pf)->getMembership_new() << endl;
 			ev << "COMP FNCT CA SI_CM_STABLE INT CYCL"

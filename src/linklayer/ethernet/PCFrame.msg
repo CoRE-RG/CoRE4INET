@@ -17,11 +17,11 @@ namespace TTEthernetModel;
 enum PCFType
 {
     //Coldstart Frame (CS)
-    CS = 1;
+    CS_FRAME = 1;
     //Integrate Frame (IN)
-	IN = 2;
+	IN_FRAME = 2;
 	//Coldstart Acknowledge (CA)
-	CA = 3;
+	CA_FRAME = 3;
 };
 
 //
