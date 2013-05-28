@@ -55,7 +55,8 @@ SI_CM_INIT::SI_CM_INIT(SICM *pointer, FILE *f) {
 
 			while (!feof(fp)) {
 
-				fscanf(fp, "%d %d", &dummy, &data);
+				int num = fscanf(fp, "%d %d", &dummy, &data);
+				ASSERT(num==2);
 				values->at(counter++) = data;
 
 			} //while
