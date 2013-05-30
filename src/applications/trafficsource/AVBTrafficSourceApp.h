@@ -27,7 +27,7 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase
     private:
         bool talker;
         bool isStreaming;
-        long streamID;
+        unsigned long streamID;
         Buffer *srpOutBuffer;
         AVBIncoming* avbCTC;
         cModule *avbOutCTC;

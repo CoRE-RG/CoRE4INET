@@ -50,7 +50,9 @@ void TTEAVBOutput::initialize()
 
     portIndex = getParentModule()->getIndex();
     avbCTC = (AVBIncoming*)getParentModule()->getParentModule()->getSubmodule("avbCTC");
-    portAVBReservation = avbCTC->getPortReservation(portIndex) - this->par("TTEBandwith").longValue();
+    avbBuffer = dynamic_cast<AVBBuffer*> (getParentModule()->getParentModule()->getSubmodule("avbBuffer", portIndex));
+    portAVBReservation = 0;
+    wasNotAllowed = false;
 
     newTime = simTime();
     oldTime = simTime();
@@ -68,7 +70,14 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     newTime = simTime();
     portAVBReservation = avbCTC->getPortReservation(portIndex) - this->par("TTEBandwith").longValue();
 
-    if(credit < 0)
+    if(wasNotAllowed)
+    {
+        //credit increment
+        SimTime duration = newTime - oldTime;
+        durationDebug = duration;
+        credit += (portAVBReservation * 1024.00 * 1024.00) * duration.dbl();
+    }
+    else if(credit < 0)
     {
         //credit increment till max 0
         SimTime duration = newTime - oldTime;
@@ -136,12 +145,15 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     {
         if(framesRequested && isTransmissionAllowed((EtherFrame*)msg) && credit >= 0)
         {
+            wasNotAllowed = false;
             send(msg,gateBaseId("out"));
             SimTime duration = outChannel->calculateDuration(msg);
             credit -= ( (100 - portAVBReservation) * 1024.00 * 1024.00) * duration.dbl(); //TODO Temp
         }
         else
         {
+            if(framesRequested && !isTransmissionAllowed((EtherFrame*)msg))
+                wasNotAllowed = true;
             avbQueue.insert(msg);
             notifyListeners();
             emit(avbQueueLengthSignal, avbQueue.length());
@@ -207,20 +219,24 @@ void TTEAVBOutput::requestPacket()
     newTime = simTime();
     portAVBReservation = avbCTC->getPortReservation(portIndex) - this->par("TTEBandwith").longValue();
 
-    if(!avbQueue.isEmpty())
+    if(wasNotAllowed)
     {
+        //credit increment
         SimTime duration = newTime - oldTime;
+        durationDebug = duration;
         credit += (portAVBReservation * 1024.00 * 1024.00) * duration.dbl();
     }
     else if(credit < 0)
     {
         //credit increment till max 0
         SimTime duration = newTime - oldTime;
+        durationDebug = duration;
         credit += (portAVBReservation * 1024.00 * 1024.00) * duration.dbl();
         if(credit > 0) credit = 0;
     }
     else if(credit > 0)
     {
+        //credit set to 0
         credit = 0;
     }
     //Set oldTime
@@ -248,6 +264,7 @@ void TTEAVBOutput::requestPacket()
         framesRequested--;
         cMessage *msg = (cMessage*) avbQueue.pop();
         emit(avbQueueLengthSignal, avbQueue.length());
+        wasNotAllowed = false;
         send(msg, gateBaseId("out"));
         SimTime duration = outChannel->calculateDuration(msg);
         credit -= ( (100 - portAVBReservation) * 1024.00 * 1024.00) * duration.dbl(); //TODO Temp
@@ -255,9 +272,9 @@ void TTEAVBOutput::requestPacket()
     }
     else
     {
-        if(!avbQueue.isEmpty() && ! isTransmissionAllowed((EtherFrame*) avbQueue.front()) && credit >= 0)
+        if(!avbQueue.isEmpty() && ! isTransmissionAllowed((EtherFrame*) avbQueue.front()))
         {
-            //TODO credit increment
+            wasNotAllowed = true;
         }
     }
 

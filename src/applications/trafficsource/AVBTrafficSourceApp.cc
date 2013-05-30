@@ -96,7 +96,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             //Listener:
             else
             {
-                if(srpType.compare("Talker Advertise") == 0)
+                if(srpType.compare("Talker Advertise") == 0 && streamID == inFrame->getStreamID())
                 {
                     SRPFrame *outFrame = new SRPFrame("Listener Ready", IEEE802CTRL_DATA);
                     outFrame->setStreamID(inFrame->getStreamID());

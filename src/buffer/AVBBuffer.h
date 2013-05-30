@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include "Buffer.h"
+#include "TTEScheduler.h"
 
 namespace TTEthernetModel {
 
@@ -27,6 +28,8 @@ class AVBBuffer : public virtual Buffer
         AVBBuffer();
         virtual ~AVBBuffer();
     protected:
+        TTEScheduler *tteScheduler;
+
         virtual void initialize(int stage);
         virtual int numInitStages() const;
         virtual void handleMessage(cMessage *msg);

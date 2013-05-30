@@ -42,7 +42,7 @@ void AVBBuffer::initialize(int stage)
     Buffer::initialize(stage);
     if(stage==1)
     {
-
+        tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
     }
 }
 

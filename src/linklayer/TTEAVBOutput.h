@@ -18,6 +18,7 @@
 
 #include "TTEOutput.h"
 #include "AVBIncoming.h"
+#include "AVBBuffer.h"
 
 namespace TTEthernetModel {
 
@@ -27,9 +28,11 @@ class TTEAVBOutput : public TTEOutput
         int credit;
         int portIndex;
         int portAVBReservation;
+        bool wasNotAllowed;
 
         cQueue avbQueue;
         AVBIncoming *avbCTC;
+        AVBBuffer *avbBuffer;
 
         SimTime newTime;
         SimTime oldTime;
