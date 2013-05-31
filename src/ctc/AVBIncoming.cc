@@ -35,11 +35,13 @@ void AVBIncoming::initialize()
     for(int i=0; i<gateSize("AVBout"); i++)
     {
         PortReservation[i] = calcPortUtilisation(i);
+        AVBPortReservation[i] = 0;
         WATCH_LIST(ListenerGates[i]);
     }
     WATCH_MAP(TalkerAddresses);
     WATCH_MAP(StreamBandwith);
     WATCH_MAP(PortReservation);
+    WATCH_MAP(AVBPortReservation);
     WATCH_MAP(PortBandwith);
 
     EtherFrame *outFrame = new EtherFrame("MAC Register", IEEE802CTRL_DATA);
@@ -63,6 +65,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
                     }
                 }
             }
+            delete inFrame;
         }
         else
         {
@@ -81,6 +84,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
         {
             TalkerAddresses[inFrame->getStreamID()] = inFrame->getSrc();
             StreamBandwith[inFrame->getStreamID()] = calcBandwith(inFrame->getMaxFrameSize(), inFrame->getMaxIntervalFrames());
+            delete msg;
         }
 
         if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
@@ -102,6 +106,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
                 {
                     ListenerGates[portIndex].push_back(inFrame->getStreamID());
                     PortReservation[portIndex] += StreamBandwith[inFrame->getStreamID()];
+                    AVBPortReservation[portIndex] += StreamBandwith[inFrame->getStreamID()];
                     StreamIsForwarding[inFrame->getStreamID()] = true;
                     send(inFrame, "SRPout");
                 }
@@ -137,7 +142,9 @@ void AVBIncoming::handleMessage(cMessage* msg)
 int AVBIncoming::calcPortUtilisation(int port)
 {
     TTEAVBOutput *tteavbOutput = (TTEAVBOutput*) getParentModule()->getSubmodule("phy",port)->getSubmodule("tteavbOutput");
-    PortBandwith[port] = 100; //Temp TODO
+    cGate *physOutGate = getParentModule()->getSubmodule("phy", port)->getSubmodule("mac")->gate("phys$o");
+    cChannel *avbChannel = physOutGate->findTransmissionChannel();
+    PortBandwith[port] = (avbChannel->getNominalDatarate() / 1000000);
     return tteavbOutput->par("TTEBandwith").longValue();
 }
 
@@ -150,14 +157,19 @@ int AVBIncoming::calcBandwith(int FrameSize, int IntervalFrames)
     return ((BitspSecond / 1024) / 1024 ) + 1; //Mbit/s
 }
 
-int AVBIncoming::getPortReservation(int port)
+int AVBIncoming::getAVBPortReservation(int port)
 {
-    return PortReservation[port];
+    return AVBPortReservation[port];
 }
 
-void AVBIncoming::setPortReservation(int port, int reservation)
+void AVBIncoming::setAVBPortReservation(int port, int reservation)
 {
-    PortReservation[port] = reservation;
+    AVBPortReservation[port] = reservation;
+}
+
+int AVBIncoming::getPortBandwith(int port)
+{
+    return PortBandwith[port];
 }
 
 } /* namespace TTEthernetModel */

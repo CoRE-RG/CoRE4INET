@@ -61,6 +61,7 @@ void TTEAVBInput::handleMessage(cMessage *msg)
         if(isAVB(frame))
         {
             sendDirect(frame->dup(), getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
+            delete frame;
         }
         else if (isCT(frame))
         {

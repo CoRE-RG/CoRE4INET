@@ -36,7 +36,11 @@ void AVBTrafficSourceApp::initialize()
     avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
 
     Buffer *srpInBuffer = (Buffer*) getParentModule()->getSubmodule("srpIn");
-    srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
+    std::string dg = srpInBuffer->par("destination_gates");
+    if(dg.empty())
+        srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
+    else
+        srpInBuffer->par("destination_gates") = dg + "," + this->gate("SRPin")->getFullPath();
 
     srpOutBuffer = (Buffer*) getParentModule()->getSubmodule("srpOut");
 
@@ -72,6 +76,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
             sendDirect(outFrame, srpOutBuffer->gate("in"));
         }
+        delete msg;
     }
     else if(msg->arrivedOn("SRPin"))
     {
@@ -88,7 +93,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                     if(!isStreaming)
                     {
                         isStreaming = true;
-                        avbCTC->setPortReservation(0, avbCTC->calcBandwith(this->par("frameSize").longValue(), this->par("intervalFrames").longValue()) + avbCTC->getPortReservation(0) );
+                        avbCTC->setAVBPortReservation(0, avbCTC->calcBandwith(this->par("frameSize").longValue(), this->par("intervalFrames").longValue()) + avbCTC->getAVBPortReservation(0) );
                         sendAVBFrame();
                     }
                 }
@@ -102,6 +107,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                     outFrame->setStreamID(inFrame->getStreamID());
 
                     sendDirect(outFrame, srpOutBuffer->gate("in"));
+                    delete msg;
                 }
 
             }

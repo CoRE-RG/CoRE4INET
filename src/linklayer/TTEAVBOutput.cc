@@ -34,8 +34,6 @@ simsignal_t TTEAVBOutput::avbQueueLengthSignal = SIMSIGNAL_NULL;
 
 TTEAVBOutput::TTEAVBOutput() : TTEOutput::TTEOutput()
 {
-    credit = 0;
-
     avbQueue.setName("AVB Messages");
 }
 
@@ -49,18 +47,13 @@ void TTEAVBOutput::initialize()
     TTEOutput::initialize();
 
     portIndex = getParentModule()->getIndex();
-    avbCTC = (AVBIncoming*)getParentModule()->getParentModule()->getSubmodule("avbCTC");
     avbBuffer = dynamic_cast<AVBBuffer*> (getParentModule()->getParentModule()->getSubmodule("avbBuffer", portIndex));
-    portAVBReservation = 0;
-    wasNotAllowed = false;
 
     newTime = simTime();
     oldTime = simTime();
 
     avbQueueLengthSignal = registerSignal("avbQueueLength");
 
-    WATCH(credit);
-    WATCH(portAVBReservation);
     WATCH(durationDebug);
 }
 
@@ -68,31 +61,6 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
 {
     //Set newTime
     newTime = simTime();
-    portAVBReservation = avbCTC->getPortReservation(portIndex) - this->par("TTEBandwith").longValue();
-
-    if(wasNotAllowed)
-    {
-        //credit increment
-        SimTime duration = newTime - oldTime;
-        durationDebug = duration;
-        credit += (portAVBReservation * 1024.00 * 1024.00) * duration.dbl();
-    }
-    else if(credit < 0)
-    {
-        //credit increment till max 0
-        SimTime duration = newTime - oldTime;
-        durationDebug = duration;
-        credit += (portAVBReservation * 1024.00 * 1024.00) * duration.dbl();
-        if(credit > 0) credit = 0;
-    }
-    else if(avbQueue.isEmpty() && credit > 0)
-    {
-        //credit set to 0
-        credit = 0;
-    }
-    //set oldTime
-    oldTime = simTime();
-
 
     if (msg->arrivedOn("PCFin"))
     {
@@ -143,17 +111,14 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     }
     else if(msg->arrivedOn("AVBin"))
     {
-        if(framesRequested && isTransmissionAllowed((EtherFrame*)msg) && credit >= 0)
+        if(framesRequested && isTransmissionAllowed((EtherFrame*)msg) && avbBuffer->getCredit() >= 0)
         {
-            wasNotAllowed = false;
             send(msg,gateBaseId("out"));
             SimTime duration = outChannel->calculateDuration(msg);
-            credit -= ( (100 - portAVBReservation) * 1024.00 * 1024.00) * duration.dbl(); //TODO Temp
+            avbBuffer->sendSlope(duration);
         }
         else
         {
-            if(framesRequested && !isTransmissionAllowed((EtherFrame*)msg))
-                wasNotAllowed = true;
             avbQueue.insert(msg);
             notifyListeners();
             emit(avbQueueLengthSignal, avbQueue.length());
@@ -161,7 +126,7 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("RCin"))
     {
-        if (framesRequested && isTransmissionAllowed((EtherFrame*) msg) && credit <= 0)
+        if (framesRequested && isTransmissionAllowed((EtherFrame*) msg) && avbBuffer->getCredit() <= 0)
         {
             framesRequested--;
 
@@ -195,7 +160,7 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     else if (msg->arrivedOn("in"))
     {
         // If there are framesRequested the MAC layer is currently idle
-        if (framesRequested && isTransmissionAllowed((EtherFrame*) msg) && credit <= 0)
+        if (framesRequested && isTransmissionAllowed((EtherFrame*) msg) && avbBuffer->getCredit() <= 0)
         {
             framesRequested--;
             send(msg, gateBaseId("out"));
@@ -207,6 +172,8 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
             emit(beQueueLengthSignal, beQueue.length());
         }
     }
+    //set oldTime
+    oldTime = simTime();
 }
 
 void TTEAVBOutput::requestPacket()
@@ -217,30 +184,6 @@ void TTEAVBOutput::requestPacket()
 
     //set newTime
     newTime = simTime();
-    portAVBReservation = avbCTC->getPortReservation(portIndex) - this->par("TTEBandwith").longValue();
-
-    if(wasNotAllowed)
-    {
-        //credit increment
-        SimTime duration = newTime - oldTime;
-        durationDebug = duration;
-        credit += (portAVBReservation * 1024.00 * 1024.00) * duration.dbl();
-    }
-    else if(credit < 0)
-    {
-        //credit increment till max 0
-        SimTime duration = newTime - oldTime;
-        durationDebug = duration;
-        credit += (portAVBReservation * 1024.00 * 1024.00) * duration.dbl();
-        if(credit > 0) credit = 0;
-    }
-    else if(credit > 0)
-    {
-        //credit set to 0
-        credit = 0;
-    }
-    //Set oldTime
-    oldTime = simTime();
 
     //TTFrames
     if (!ttQueue.isEmpty())
@@ -259,29 +202,25 @@ void TTEAVBOutput::requestPacket()
     }
 
     //AVBFrames
-    if(!avbQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) avbQueue.front()) && credit >= 0)
+    if(!avbQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) avbQueue.front()) && avbBuffer->getCredit() >= 0)
     {
         framesRequested--;
         cMessage *msg = (cMessage*) avbQueue.pop();
         emit(avbQueueLengthSignal, avbQueue.length());
-        wasNotAllowed = false;
         send(msg, gateBaseId("out"));
         SimTime duration = outChannel->calculateDuration(msg);
-        credit -= ( (100 - portAVBReservation) * 1024.00 * 1024.00) * duration.dbl(); //TODO Temp
+        avbBuffer->sendSlope(duration);
         return;
     }
     else
     {
-        if(!avbQueue.isEmpty() && ! isTransmissionAllowed((EtherFrame*) avbQueue.front()))
-        {
-            wasNotAllowed = true;
-        }
+
     }
 
     //RCFrames
     for (int i = 0; i < NUM_RC_PRIORITIES; i++)
     {
-        if (!rcQueue[i].isEmpty() && isTransmissionAllowed((EtherFrame*) rcQueue[i].front()) && credit <= 0)
+        if (!rcQueue[i].isEmpty() && isTransmissionAllowed((EtherFrame*) rcQueue[i].front()) && avbBuffer->getCredit() <= 0)
         {
             framesRequested--;
             EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
@@ -299,7 +238,7 @@ void TTEAVBOutput::requestPacket()
         }
     }
     //BEFrames
-    if (!beQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) beQueue.front()) && credit <= 0)
+    if (!beQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) beQueue.front()) && avbBuffer->getCredit() <= 0)
     {
         framesRequested--;
         cMessage* message = (cMessage*) beQueue.pop();
@@ -307,11 +246,8 @@ void TTEAVBOutput::requestPacket()
         emit(beQueueLengthSignal, beQueue.length());
         return;
     }
-}
-
-void TTEAVBOutput::calcCredit()
-{
- //TODO
+    //Set oldTime
+    oldTime = simTime();
 }
 
 } /* namespace TTEthernetModel */

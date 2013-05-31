@@ -37,6 +37,7 @@ class AVBIncoming : public cSimpleModule
             map<unsigned long, bool>StreamIsForwarding;
             map<int, list<unsigned long> > ListenerGates;
             map<int, int> PortReservation;
+            map<int, int> AVBPortReservation;
             map<int, int> PortBandwith;
 
             /**
@@ -60,8 +61,9 @@ class AVBIncoming : public cSimpleModule
             AVBIncoming();
             bool talker;
             int calcBandwith(int FrameSize, int IntervalFrames);
-            int getPortReservation(int port);
-            void setPortReservation(int port, int reservation);
+            int getAVBPortReservation(int port);
+            void setAVBPortReservation(int port, int reservation);
+            int getPortBandwith(int port);
 };
 
 } /* namespace TTEthernetModel */

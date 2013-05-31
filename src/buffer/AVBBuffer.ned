@@ -23,4 +23,6 @@ simple AVBBuffer extends Buffer
     parameters:
         @class(AVBBuffer);
         @display("i=,blue");
+    gates:
+        input schedulerIn @directIn;
 }

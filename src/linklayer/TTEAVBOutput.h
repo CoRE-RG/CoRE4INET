@@ -25,13 +25,9 @@ namespace TTEthernetModel {
 class TTEAVBOutput : public TTEOutput
 {
     protected:
-        int credit;
         int portIndex;
-        int portAVBReservation;
-        bool wasNotAllowed;
 
         cQueue avbQueue;
-        AVBIncoming *avbCTC;
         AVBBuffer *avbBuffer;
 
         SimTime newTime;
@@ -51,8 +47,6 @@ class TTEAVBOutput : public TTEOutput
          * received.
          */
         virtual void requestPacket();
-
-        void calcCredit();
     public:
         /**
          * @brief Constructor

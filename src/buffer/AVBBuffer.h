@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 #include "Buffer.h"
 #include "TTEScheduler.h"
+#include "AVBIncoming.h"
 
 namespace TTEthernetModel {
 
@@ -27,14 +28,28 @@ class AVBBuffer : public virtual Buffer
     public:
         AVBBuffer();
         virtual ~AVBBuffer();
+
+        void idleSlope(SimTime duration);
+        void interferenceSlope(SimTime duration);
+        void sendSlope(SimTime duration);
+        int getCredit();
+        void resetCredit();
     protected:
+        int credit;
+        int maxCredit;
+        int AVBReservation;
+        bool inTransmission;
+        int msgCnt;
+        SimTime newTime;
+        SimTime oldTime;
+
         TTEScheduler *tteScheduler;
+        AVBIncoming * avbCTC;
 
         virtual void initialize(int stage);
         virtual int numInitStages() const;
         virtual void handleMessage(cMessage *msg);
         virtual void handleParameterChange(const char* parname);
-    private:
 };
 
 } /* namespace TTEthernetModel */

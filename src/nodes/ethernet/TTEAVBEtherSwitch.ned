@@ -26,7 +26,7 @@ module TTEAVBEtherSwitch
         // Implementation of the best-effort forwarding part
         beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
             parameters:
-                @display("p=141,242");              
+                @display("p=141,242");
             gates:
                 lowerLayerIn[sizeof(ethg)+1];
                 lowerLayerOut[sizeof(ethg)+1];
@@ -58,8 +58,7 @@ module TTEAVBEtherSwitch
         }
 
         avbBuffer[sizeof(ethg)]: AVBQueueBuffer {
-            parameters:
-                @display("p=364,242");
+            @display("p=364,242");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
@@ -86,7 +85,7 @@ module TTEAVBEtherSwitch
         }
         beswitch.lowerLayerOut[sizeof(ethg)] --> llc.lowerLayerIn;
         beswitch.lowerLayerIn[sizeof(ethg)] <-- llc.lowerLayerOut;
-        
+
         srpTrafficHandle.lowerLayerOut --> llc.upperLayerIn[0];
         srpTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[0];
         avbCTC.SRPout --> srpTrafficHandle.SRPin;
@@ -95,7 +94,5 @@ module TTEAVBEtherSwitch
 //        
 //       	llc.upperLayerOut[0] --> avbCTC.SRPin;
 //       	llc.upperLayerIn[0] <-- avbCTC.SRPout;
-        
-//		beswitch.lowerLayerOut[sizeof(ethg)] --> avbCTC.SRPin;
-//		beswitch.lowerLayerIn[sizeof(ethg)] <-- avbCTC.SRPout;
+
 }
