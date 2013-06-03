@@ -31,6 +31,18 @@ void AVBTrafficSourceApp::initialize()
 
     talker = par("talker").boolValue();
     streamID = par("streamID").longValue();
+    intervalFrames = par("intervalFrames").longValue();
+    payload = par("payload").longValue();
+
+    if(payload <= 46)
+    {
+        frameSize = 64;
+    }
+    else
+    {
+        frameSize = payload + 18;
+    }
+
     isStreaming = false;
 
     avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
@@ -71,8 +83,8 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
             SRPFrame *outFrame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
             outFrame->setStreamID(streamID);
-            outFrame->setMaxFrameSize(this->par("frameSize").longValue());
-            outFrame->setMaxIntervalFrames(this->par("intervalFrames").longValue());
+            outFrame->setMaxFrameSize(frameSize);
+            outFrame->setMaxIntervalFrames(intervalFrames);
 
             sendDirect(outFrame, srpOutBuffer->gate("in"));
         }
@@ -93,7 +105,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                     if(!isStreaming)
                     {
                         isStreaming = true;
-                        avbCTC->setAVBPortReservation(0, avbCTC->calcBandwith(this->par("frameSize").longValue(), this->par("intervalFrames").longValue()) + avbCTC->getAVBPortReservation(0) );
+                        avbCTC->setAVBPortReservation(0, avbCTC->calcBandwith(frameSize, intervalFrames) + avbCTC->getAVBPortReservation(0) );
                         sendAVBFrame();
                     }
                 }
@@ -121,13 +133,21 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
 void AVBTrafficSourceApp::sendAVBFrame()
 {
-    AVBFrame *outFrame = new AVBFrame();
+    AVBFrame *outFrame = new AVBFrame("");
     outFrame->setStreamID(streamID);
-    outFrame->setByteLength(this->par("frameSize").longValue());
+
+    cPacket *payloadPacket = new cPacket;
+    payloadPacket->setByteLength(payload);
+    outFrame->encapsulate(payloadPacket);
+    //Padding
+    if(outFrame->getByteLength()<MIN_ETHERNET_FRAME_BYTES){
+        outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+    }
+    //outFrame->setByteLength(frameSize);
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
     //class measurement interval = 125us
-    double interval = (125.00 / this->par("intervalFrames").longValue()) / 1000000.00;
+    double interval = (125.00 / intervalFrames) / 1000000.00;
     TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
     event->setTimer(interval/tteScheduler->par("tick").doubleValue());

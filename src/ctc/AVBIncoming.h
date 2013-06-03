@@ -35,6 +35,8 @@ class AVBIncoming : public cSimpleModule
             map<unsigned long, MACAddress> TalkerAddresses;
             map<unsigned long, int> StreamBandwith;
             map<unsigned long, bool>StreamIsForwarding;
+            map<unsigned long, SimTime> StreamWorstInterval;
+            map<unsigned long, SimTime> StreamLastIncome;
             map<int, list<unsigned long> > ListenerGates;
             map<int, int> PortReservation;
             map<int, int> AVBPortReservation;

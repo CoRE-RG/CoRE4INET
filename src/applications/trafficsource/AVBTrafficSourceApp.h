@@ -28,6 +28,9 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase
         bool talker;
         bool isStreaming;
         unsigned long streamID;
+        int frameSize;
+        int intervalFrames;
+        int payload;
         Buffer *srpOutBuffer;
         AVBIncoming* avbCTC;
         cModule *avbOutCTC;

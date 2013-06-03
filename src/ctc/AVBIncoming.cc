@@ -40,6 +40,7 @@ void AVBIncoming::initialize()
     }
     WATCH_MAP(TalkerAddresses);
     WATCH_MAP(StreamBandwith);
+    WATCH_MAP(StreamWorstInterval);
     WATCH_MAP(PortReservation);
     WATCH_MAP(AVBPortReservation);
     WATCH_MAP(PortBandwith);
@@ -53,6 +54,17 @@ void AVBIncoming::handleMessage(cMessage* msg)
     if(msg->arrivedOn("in"))
     {
         AVBFrame *inFrame = ((AVBFrame*)msg);
+
+        if(StreamLastIncome[inFrame->getStreamID()] != 0)
+        {
+            SimTime measureInterval = simTime() - StreamLastIncome[inFrame->getStreamID()];
+            if(measureInterval > StreamWorstInterval[inFrame->getStreamID()])
+            {
+                StreamWorstInterval[inFrame->getStreamID()] = measureInterval;
+            }
+        }
+        StreamLastIncome[inFrame->getStreamID()] = simTime();
+
         if(gateSize("AVBout") > 1)
         {
             for(int i=0; i<gateSize("AVBout"); i++)
