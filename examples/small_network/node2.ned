@@ -18,16 +18,18 @@ package ttethernet.examples.small_network;
 import ttethernet.nodes.ethernet.TTEEtherHost;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
+import ttethernet.ctc.RCIncoming;
+import ttethernet.buffer.RCQueueBuffer;
 
-
 //
-// unit1: configuration in unit1.ini.
+// unit2: configuration in unit2.ini.
 //
-// - Sends time-triggered messages at 1ms with VL-ID 100
+// - Receives time-triggered messages with VL-ID 100
+// - Sends rate-constrained messages with VL-ID 101
 //
-module Unit1 extends TTEEtherHost
+module Node2 extends TTEEtherHost
 {
-    @display("bgb=479,314");
+    @display("bgb=484,314");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:
@@ -38,6 +40,16 @@ module Unit1 extends TTEEtherHost
             parameters:
                 @display("p=440,100");
         }
+        vl_101_ctc: RCIncoming {
+            parameters:
+                @display("p=350,160");
+
+        }
+        vl_101: RCQueueBuffer {
+            parameters:
+                @display("p=440,160");
+        }
     connections:
         vl_100_ctc.out --> vl_100.in;
+        vl_101_ctc.out --> vl_101.in;
 }

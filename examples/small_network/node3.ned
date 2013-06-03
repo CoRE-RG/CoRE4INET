@@ -21,15 +21,15 @@ import ttethernet.buffer.TTDoubleBuffer;
 import ttethernet.ctc.RCIncoming;
 import ttethernet.buffer.RCQueueBuffer;
 
+
 //
-// unit2: configuration in unit2.ini.
+// unit3: configuration in unit3.ini.
 //
-// - Receives time-triggered messages with VL-ID 100
-// - Sends rate-constrained messages with VL-ID 101
+// - Receives time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
 //
-module Unit2 extends TTEEtherHost
+module Node3 extends TTEEtherHost
 {
-    @display("bgb=484,314");
+    @display("bgb=487,314");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:
