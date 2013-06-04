@@ -59,7 +59,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             delete msg;
         }
         //Check too early
-        else if (currentTicks < (uint32_t) par("receive_window_start").longValue())
+        else if (par("receive_window_start").longValue() > 0 && currentTicks < (uint32_t) par("receive_window_start").longValue())
         {
             emit(ctDroppedSignal, 1);
             hadError=true;
@@ -76,7 +76,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             delete msg;
         }
         //Check too late
-        else if (currentTicks > (uint32_t) par("receive_window_end").longValue())
+        else if (par("receive_window_end").longValue() > 0 && currentTicks > (uint32_t) par("receive_window_end").longValue())
         {
             emit(ctDroppedSignal, 1);
             hadError=true;
@@ -95,14 +95,19 @@ void TTIncoming::handleMessage(cMessage *msg)
         //Timing ok
         else
         {
-            //delay for permanence_pit
-            if(!hadError && ev.isGUI())
-                getDisplayString().setTagArg("i2", 0, "status/hourglass");
-            frame = (EtherFrame *) msg;
-            SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
-            event->setAction_time(par("permanence_pit").doubleValue());
-            event->setDestinationGate(gate("schedulerIn"));
-            tteScheduler->registerEvent(event);
+            //delay for permanence_pit if set
+            if(par("permanence_pit").doubleValue() > 0){
+                if(!hadError && ev.isGUI())
+                    getDisplayString().setTagArg("i2", 0, "status/hourglass");
+                frame = (EtherFrame *) msg;
+                SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
+                event->setAction_time(par("permanence_pit").doubleValue());
+                event->setDestinationGate(gate("schedulerIn"));
+                tteScheduler->registerEvent(event);
+            }
+            else{
+                send(msg, "out");
+            }
         }
     }
     else if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
