@@ -32,7 +32,6 @@ class TTEAVBOutput : public TTEOutput
 
         SimTime newTime;
         SimTime oldTime;
-        SimTime durationDebug;
 
         static simsignal_t avbQueueLengthSignal;
 

@@ -65,86 +65,87 @@ void AVBBuffer::handleMessage(cMessage *msg)
 {
     Buffer::handleMessage(msg);
 
-    newTime = simTime();
-    if(credit < 0)
+    if(avbCTC->getForwarding())
     {
-        idleSlope(newTime - oldTime);
+        newTime = simTime();
+        if(credit < 0)
+        {
+            idleSlope(newTime - oldTime);
+        }
+
+        if(msg->arrivedOn("in"))
+        {
+            msgCnt++;
+            if(inTransmission)
+            {
+                interferenceSlope(newTime - oldTime);
+                if(credit > maxCredit) maxCredit = credit;
+            }
+            else
+            {
+                if(credit >= 0)
+                {
+                    if(msgCnt > 0)
+                    {
+                        cMessage *outFrame = getFrame();
+                        msgCnt--;
+                        send(outFrame, "out");
+                        inTransmission = true;
+                    }
+                    else
+                    {
+                        credit = 0;
+                    }
+
+                }
+                else if(credit < 0)
+                {
+                    AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
+                    double duration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
+                    SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+                    event->setTimer(duration / tteScheduler->par("tick").doubleValue());
+                    event->setDestinationGate(gate("schedulerIn"));
+                    tteScheduler->registerEvent(event);
+                }
+            }
+        }
+        else if(msg->arrivedOn("schedulerIn"))
+        {
+            if(inTransmission)
+            {
+                interferenceSlope(newTime - oldTime);
+                if(credit > maxCredit) maxCredit = credit;
+            }
+            else
+            {
+                if(credit >= 0)
+                {
+                    if(msgCnt > 0)
+                    {
+                        cMessage *outFrame = getFrame();
+                        msgCnt--;
+                        send(outFrame, "out");
+                        inTransmission = true;
+                    }
+                    else
+                    {
+                        credit = 0;
+                    }
+                }
+                else if(credit < 0)
+                {
+                    AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
+                    double duration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
+                    SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+                    event->setTimer(duration / tteScheduler->par("tick").doubleValue());
+                    event->setDestinationGate(gate("schedulerIn"));
+                    tteScheduler->registerEvent(event);
+                }
+            }
+            delete msg;
+        }
+        oldTime = simTime();
     }
-
-    if(msg->arrivedOn("in"))
-    {
-        msgCnt++;
-        if(inTransmission)
-        {
-            interferenceSlope(newTime - oldTime);
-            if(credit > maxCredit) maxCredit = credit;
-        }
-        else
-        {
-            if(credit >= 0)
-            {
-                if(msgCnt > 0)
-                {
-                    cMessage *outFrame = getFrame();
-                    msgCnt--;
-                    send(outFrame, "out");
-                    inTransmission = true;
-                }
-                else
-                {
-                    credit = 0;
-                }
-
-            }
-            else if(credit < 0)
-            {
-                AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
-                double duration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
-                SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                event->setTimer(duration / tteScheduler->par("tick").doubleValue());
-                event->setDestinationGate(gate("schedulerIn"));
-                tteScheduler->registerEvent(event);
-            }
-        }
-    }
-    else if(msg->arrivedOn("schedulerIn"))
-    {
-        if(inTransmission)
-        {
-            interferenceSlope(newTime - oldTime);
-            if(credit > maxCredit) maxCredit = credit;
-        }
-        else
-        {
-            if(credit >= 0)
-            {
-                if(msgCnt > 0)
-                {
-                    cMessage *outFrame = getFrame();
-                    msgCnt--;
-                    send(outFrame, "out");
-                    inTransmission = true;
-                }
-                else
-                {
-                    credit = 0;
-                }
-            }
-            else if(credit < 0)
-            {
-                AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
-                double duration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
-                SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                event->setTimer(duration / tteScheduler->par("tick").doubleValue());
-                event->setDestinationGate(gate("schedulerIn"));
-                tteScheduler->registerEvent(event);
-            }
-        }
-        delete msg;
-    }
-
-
-    oldTime = simTime();
 }
 
 void AVBBuffer::handleParameterChange(const char* parname)

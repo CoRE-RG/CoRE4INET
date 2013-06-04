@@ -53,8 +53,6 @@ void TTEAVBOutput::initialize()
     oldTime = simTime();
 
     avbQueueLengthSignal = registerSignal("avbQueueLength");
-
-    WATCH(durationDebug);
 }
 
 void TTEAVBOutput::handleMessage(cMessage *msg)

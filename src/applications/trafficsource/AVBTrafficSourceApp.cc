@@ -85,6 +85,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             outFrame->setStreamID(streamID);
             outFrame->setMaxFrameSize(frameSize);
             outFrame->setMaxIntervalFrames(intervalFrames);
+            outFrame->setByteLength(25);
 
             sendDirect(outFrame, srpOutBuffer->gate("in"));
         }
@@ -117,6 +118,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                 {
                     SRPFrame *outFrame = new SRPFrame("Listener Ready", IEEE802CTRL_DATA);
                     outFrame->setStreamID(inFrame->getStreamID());
+                    outFrame->setByteLength(8);
 
                     sendDirect(outFrame, srpOutBuffer->gate("in"));
                     delete msg;

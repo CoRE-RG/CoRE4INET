@@ -35,8 +35,6 @@ class AVBIncoming : public cSimpleModule
             map<unsigned long, MACAddress> TalkerAddresses;
             map<unsigned long, int> StreamBandwith;
             map<unsigned long, bool>StreamIsForwarding;
-            map<unsigned long, SimTime> StreamWorstInterval;
-            map<unsigned long, SimTime> StreamLastIncome;
             map<int, list<unsigned long> > ListenerGates;
             map<int, int> PortReservation;
             map<int, int> AVBPortReservation;
@@ -66,6 +64,7 @@ class AVBIncoming : public cSimpleModule
             int getAVBPortReservation(int port);
             void setAVBPortReservation(int port, int reservation);
             int getPortBandwith(int port);
+            bool getForwarding();
 };
 
 } /* namespace TTEthernetModel */
