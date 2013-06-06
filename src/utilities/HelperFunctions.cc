@@ -10,6 +10,8 @@
 #include <sstream>
 #include "cmodule.h"
 
+#include <ModuleAccess.h>
+
 std::vector<std::string>& split(const std::string &string, char delimiter, std::vector<std::string> &elements){
     std::stringstream stringStream(string);
     std::string item;
@@ -46,6 +48,19 @@ cGate* gateByFullPath(std::string &path){
         std::string modulePath = path.substr(0,pos);
         std::string gateName = path.substr(pos+1);
         cModule* module = cSimulation::getActiveSimulation()->getModuleByPath(modulePath.c_str());
+        if(module){
+            return module->gate(gateName.c_str());
+        }
+    }
+    return NULL;
+}
+
+cGate* gateByShortPath(std::string &nameAndGate, cModule *from){
+    std::size_t pos = nameAndGate.rfind('.');
+    if(pos!=std::string::npos){
+        std::string modulePath = nameAndGate.substr(0,pos);
+        std::string gateName = nameAndGate.substr(pos+1);
+        cModule* module = findModuleWhereverInNode(modulePath.c_str(), from);
         if(module){
             return module->gate(gateName.c_str());
         }

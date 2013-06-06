@@ -51,6 +51,15 @@ void addPath(cPar &parameter, std::string &pathToAdd);
 cGate* gateByFullPath(std::string &path);
 
 /**
+ * @brief Returns the gate of a node defined by: modulename.gatename.
+ *
+ * @param nameAndGate name of the module and gatename in the format: modulename.gatename
+ * @param from a module of the node in which the gate can be found
+ * @return reference to the gate defined by path or NULL if no such gate was found
+ */
+cGate* gateByShortPath(std::string &nameAndGate, cModule *from);
+
+/**
  * @brief Converts value in ticks to the transparent clock unit that is ns*0x10000
  *
  * @param ticks number of ticks

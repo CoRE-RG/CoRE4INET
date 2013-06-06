@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include <ModuleAccess.h>
+
 #include <Buffer.h>
 #include <RCBuffer.h>
 #include <PCFrame_m.h>
@@ -210,29 +212,33 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
 
 void TTEOutput::handleParameterChange(const char* parname){
     ttBuffers.clear();
-    if(ev.isGUI()){
-        //TODO check why this does not work
-        //getDisplayString().setTagArg("i2", 0, "");
-        //getDisplayString().setTagArg("tt", 0, "");
-    }
     std::string ttBuffersString = par("tt_buffers").stdstringValue();
     std::vector<std::string> ttBufferPaths;
     split(ttBuffersString,',',ttBufferPaths);
     for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
             ttBufferPath!=ttBufferPaths.end();ttBufferPath++){
         cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
+        if(!module){
+            module = findModuleWhereverInNode((*ttBufferPath).c_str(),this);
+        }
         if(module){
-            TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (module);
-            if(ttBuffer){
-                registerTTBuffer(ttBuffer);
+            if(findContainingNode(module)!=findContainingNode(this)){
+                opp_error("Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?", (*ttBufferPath).c_str(),
+                        findContainingNode(this)->getFullName());
+            }
+            else
+            {
+                TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (module);
+                if(ttBuffer){
+                    registerTTBuffer(ttBuffer);
+                }
+                else{
+                    opp_error("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!", (*ttBufferPath).c_str());
+                }
             }
         }
         else{
-            if(ev.isGUI()){
-                ev<<"Configuration problem: Module "<<(*ttBufferPath)<<" could not be resolved or is no TT-Buffer!"<<endl;
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem outgoing TT-Buffer!");
-            }
+            opp_error("Configuration problem of tt_buffers: Module: %s could not be resolved!", (*ttBufferPath).c_str());
         }
     }
 }

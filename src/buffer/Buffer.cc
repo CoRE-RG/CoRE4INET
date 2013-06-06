@@ -19,6 +19,8 @@
 
 #include "HelperFunctions.h"
 
+#include <ModuleAccess.h>
+
 using namespace TTEthernetModel;
 
 Define_Module( Buffer);
@@ -121,26 +123,24 @@ void Buffer::handleMessage(cMessage *msg)
 
 void Buffer::handleParameterChange(const char* parname){
     destinationGates.clear();
-    if(ev.isGUI()){
-        //TODO check why this does not work
-        //getDisplayString().setTagArg("i2", 0, "");
-        //getDisplayString().setTagArg("tt", 0, "");
-    }
     std::string destinationGatesString = par("destination_gates").stdstringValue();
     std::vector<std::string> destinationGatePaths;
     split(destinationGatesString,',',destinationGatePaths);
     for(std::vector<std::string>::iterator destinationGatePath = destinationGatePaths.begin();
             destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
         cGate* gate = gateByFullPath((*destinationGatePath));
+        if(!gate){
+            gate = gateByShortPath((*destinationGatePath), this);
+        }
         if(gate){
+            if(findContainingNode(gate->getOwnerModule())!=findContainingNode(this)){
+                opp_error("Configuration problem of destination_gates: Gate: %s is not in node %s! Maybe a copy-paste problem?", (*destinationGatePath).c_str(),
+                        findContainingNode(this)->getFullName());
+            }
             destinationGates.push_back(gate);
         }
         else{
-            if(ev.isGUI()){
-                ev<<"Configuration problem: Gate "<<(*destinationGatePath)<<" could not be resolved!"<<endl;
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem outgoing gate!");
-            }
+            opp_error("Configuration problem of destination_gates: Gate: %s could not be resolved!", (*destinationGatePath).c_str());
         }
     }
 }
