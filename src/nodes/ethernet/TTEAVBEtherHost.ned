@@ -42,24 +42,24 @@ module TTEAVBEtherHost
 
     submodules:
         phy[numPorts]: TTEAVBPHYPort {
-            @display("p=235,255,c,50");
+            @display("p=380,255,c,50");
             promiscuous = true;
         }
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=380,99");
+                @display("p=380,115");
                 NrOfPorts = numPorts;
         }
 
         avbBuffer[numPorts]: AVBQueueBuffer {
             parameters:
-                @display("p=380,256");
+                @display("p=380,193");
         }
 
         llc: EtherLLC {
             parameters:
-                @display("p=141,256");
+                @display("p=141,255");
             gates:
                 upperLayerIn[3];
                 upperLayerOut[3];
@@ -68,7 +68,7 @@ module TTEAVBEtherHost
         cli: EtherAppCli {
             parameters:
                 registerSAP = true;
-                @display("p=60,256,col");
+                @display("p=60,255,col");
         }
 
         srv: EtherAppSrv {
@@ -82,15 +82,15 @@ module TTEAVBEtherHost
         }
          // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
-            @display("p=141,169");
+            @display("p=186,169");
         }
         // Scheudler for the device
         tteScheduler: TTEScheduler {
-            @display("p=235,169");
+            @display("p=274,169");
         }
 
         tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
-            @display("p=235,99");
+            @display("p=380,37");
         }
 
         bgIn: BGQueueBuffer {
@@ -102,11 +102,11 @@ module TTEAVBEtherHost
         }
 
         srpIn: BGQueueBuffer {
-            @display("p=186,37");
+            @display("p=235,37");
         }
 
         srpOut: BGQueueBuffer {
-            @display("p=235,37");
+            @display("p=235,99");
         }
 
         srpTrafficHandle: SRPTrafficHandle {
@@ -131,7 +131,7 @@ module TTEAVBEtherHost
         srpTrafficHandle.SRPout --> srpIn.in;
         srpTrafficHandle.SRPin <-- srpOut.out;
 
-		avbCTC.SRPout --> avbCTC.SRPin;
-		avbCTC.AVBout[0] --> avbBuffer[0].in;
+        avbCTC.SRPout --> avbCTC.SRPin;
+        avbCTC.AVBout[0] --> avbBuffer[0].in;
         avbBuffer[0].out --> phy[0].AVBin;
 }

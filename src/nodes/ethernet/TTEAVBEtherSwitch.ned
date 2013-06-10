@@ -17,7 +17,7 @@ module TTEAVBEtherSwitch
     //Parameter:
     parameters:
         @node();
-        @display("i=block/switch;bgb=1219,312");
+        @display("i=block/switch;bgb=1280,768");
         double hardware_delay @unit(s) = default(8us);
     gates:
         // Physical ports of the switch
@@ -26,7 +26,7 @@ module TTEAVBEtherSwitch
         // Implementation of the best-effort forwarding part
         beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
             parameters:
-                @display("p=141,242");
+                @display("p=101,54");
             gates:
                 lowerLayerIn[sizeof(ethg)+1];
                 lowerLayerOut[sizeof(ethg)+1];
@@ -34,36 +34,36 @@ module TTEAVBEtherSwitch
 
         llc: EtherLLC {
             parameters:
-                @display("p=59,169");
+                @display("p=173,54");
             gates:
                 upperLayerIn[1];
                 upperLayerOut[1];
         }
 
         srpTrafficHandle: SRPTrafficHandle {
-            @display("p=59,91");
+            @display("p=250,54");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
             parameters:
-                @display("p=235,278,r,50");
+                @display("p=42,126,c,70");
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=364,91");
+                @display("p=328,54");
                 NrOfPorts = sizeof(ethg);
         }
 
         avbBuffer[sizeof(ethg)]: AVBQueueBuffer {
-            @display("p=364,242");
+            @display("p=173,126,c,70");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=141,169");
+                @display("p=422,54");
         }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
@@ -73,7 +73,7 @@ module TTEAVBEtherSwitch
         // Scheudler for the device
         tteScheduler: TTEScheduler {
             parameters:
-                @display("p=235,169");
+                @display("p=422,127");
         }
     connections:
         for i=0..sizeof(ethg)-1 {
