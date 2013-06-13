@@ -112,6 +112,8 @@ void Buffer::handleMessage(cMessage *msg)
     {
         EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
         emit(latencySignal, simTime()-msg->getCreationTime());
+        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+            frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
         putFrame((EtherFrame*) frame);
         // Now execute callbacks if there are some
         for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = receiveCallbacks.begin();
