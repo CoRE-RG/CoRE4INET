@@ -46,24 +46,24 @@ module TTEAVBEtherSwitch
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
             parameters:
-                @display("p=42,126,c,70");
+                @display("p=101,126,c,70");
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=328,54");
+                @display("p=379,54");
                 NrOfPorts = sizeof(ethg);
         }
 
         avbBuffer[sizeof(ethg)]: AVBQueueBuffer {
-            @display("p=173,126,c,70");
+            @display("p=250,127,c,70");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=422,54");
+                @display("p=461,54");
         }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
@@ -73,7 +73,7 @@ module TTEAVBEtherSwitch
         // Scheudler for the device
         tteScheduler: TTEScheduler {
             parameters:
-                @display("p=422,127");
+                @display("p=461,127");
         }
     connections:
         for i=0..sizeof(ethg)-1 {
