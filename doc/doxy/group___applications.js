@@ -35,6 +35,10 @@ var group___applications =
       [ "handleParameterChange", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a97851409093558c7b7483fd6bde8fcd4", null ],
       [ "buffers", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html#a3119d9508505d956452d04d89651b720", null ]
     ] ],
+    [ "TrafficSinkApp", "class_t_t_ethernet_model_1_1_traffic_sink_app.html", [
+      [ "handleMessage", "class_t_t_ethernet_model_1_1_traffic_sink_app.html#a306d1928d3a2c99b6ae7fb26925f5f26", null ],
+      [ "initialize", "class_t_t_ethernet_model_1_1_traffic_sink_app.html#adf1ed748b5245792dcd9e934049854ee", null ]
+    ] ],
     [ "RCTrafficSourceApp", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html", [
       [ "handleMessage", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html#a17f477a3954c6cea4837568e966d0dbe", null ],
       [ "initialize", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html#ad898172513d660cb0776c22f39e9a8e7", null ]

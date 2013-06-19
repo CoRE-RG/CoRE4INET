@@ -8,6 +8,7 @@
 <b>Package:</b> ttethernet.applications.trafficsource<br/><b>File: <a href="src-applications-trafficsource-TrafficSourceAppBase.ned.html">src/applications/trafficsource/TrafficSourceAppBase.ned</a></b><br/><p><a href="../doxy/class_t_t_ethernet_model_1_1_t_t_e_application_base.html" target="mainframe"><b>C++ definition</b></a></p>
 
 <p>Abstract base traffic source application used for various traffic generators.
+Uses <a href="CTFrame.html">CTFrame</a> with encapsulated cPacket as payload
 Since this is an abstract module please do not instantiate it</p>
 <p><b>See also:</b> <a href="ttethernet.applications.trafficsource.TTTrafficSourceApp.html">TTTrafficSourceApp</a>, <a href="ttethernet.applications.trafficsource.RCTrafficSourceApp.html">RCTrafficSourceApp</a></p>
 <p><b>Author:</b> Till Steinbach</p>
@@ -118,7 +119,7 @@ Since this is an abstract module please do not instantiate it</p>
    </td>
    <td>46Byte</td>
    <td>
-<p>Size of the payload of the message that is being generated</p>
+<p>Size of the payload of the message (size of encapsulated cPacket) that is being generated</p>
    </td>
 </tr>
 <tr class="local">
@@ -142,8 +143,7 @@ Since this is an abstract module please do not instantiate it</p>
 <tr>
    <td>class</td>
    <td><i>TTEApplicationBase</i></td>
-   <td>
-</td>
+   <td></td>
 </tr>
 <tr>
    <td>display</td>
@@ -192,6 +192,7 @@ Since this is an abstract module please do not instantiate it</p>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
 // Abstract base traffic source application used for various traffic generators.
+// Uses CTFrame with encapsulated cPacket as payload
 // Since this is an abstract module please do not instantiate it
 //
 //
@@ -203,7 +204,7 @@ Since this is an abstract module please do not instantiate it</p>
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/source&quot;</span><span style="color: #000000; ">);
 
-        </span><span style="color: #808080; font-style: italic; ">//Size of the payload of the message that is being generated
+        </span><span style="color: #808080; font-style: italic; ">//Size of the payload of the message (size of encapsulated cPacket) that is being generated
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">payload</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">46</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">);
 
         </span><span style="color: #808080; font-style: italic; ">//Critical traffic identifier of the message that is being generated (-1) means don't set ID

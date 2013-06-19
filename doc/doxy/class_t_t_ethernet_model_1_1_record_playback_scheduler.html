@@ -251,13 +251,13 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p>Definition at line <a class="el" href="_record_playback_scheduler_8cc_source.html#l00059">59</a> of file <a class="el" href="_record_playback_scheduler_8cc_source.html">RecordPlaybackScheduler.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span>(this-&gt;par(<span class="stringliteral">&quot;read&quot;</span>).boolValue() || this-&gt;par(<span class="stringliteral">&quot;write&quot;</span>).boolValue()){</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        fflush(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        fclose(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_record_playback_scheduler_8cc_source.html#l00060">60</a> of file <a class="el" href="_record_playback_scheduler_8cc_source.html">RecordPlaybackScheduler.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span>(this-&gt;par(<span class="stringliteral">&quot;read&quot;</span>).boolValue() || this-&gt;par(<span class="stringliteral">&quot;write&quot;</span>).boolValue()){</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        fflush(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        fclose(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -288,30 +288,30 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a902defa7f993806c5121a8c0099cf3de">TTEthernetModel::TTEScheduler</a>.</p>
 
-<p>Definition at line <a class="el" href="_record_playback_scheduler_8cc_source.html#l00067">67</a> of file <a class="el" href="_record_playback_scheduler_8cc_source.html">RecordPlaybackScheduler.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                         {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    simtime_t newDriftChange=0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span>(this-&gt;par(<span class="stringliteral">&quot;read&quot;</span>).boolValue())</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;         newDriftChange = <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a173be499019e9af0d963c9e1b3d4b1c0">values</a>-&gt;at(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#ab77b0b80012d73b1a54c958d4fb2ec21">counter</a>++);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;         <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#ab77b0b80012d73b1a54c958d4fb2ec21">counter</a>++;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }<span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        newDriftChange = SimTime(par(<span class="stringliteral">&quot;drift_change&quot;</span>).doubleValue());</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">if</span>(this-&gt;par(<span class="stringliteral">&quot;write&quot;</span>).boolValue()){</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            fprintf(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>,<span class="stringliteral">&quot;%d &quot;</span>,this-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af3200fe6d183cc70909a4573817d9fc8" title="Number of cycles since the simulation started.">cycles</a>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            fprintf(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>, <span class="stringliteral">&quot; %.40f\n&quot;</span>,newDriftChange.dbl());</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    simtime_t newTick = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09879c9ecea584f0f9fdf9a6b9ae517b" title="caches current_tick parameter">currentTick</a>+newDriftChange;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span>((newTick-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>)&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>+<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>).dbl());</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span>((newTick-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>)&lt;-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>).dbl());</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue(newTick.dbl());</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual tick length) changes...">currentDrift</a>, par(<span class="stringliteral">&quot;current_tick&quot;</span>).doubleValue()-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_record_playback_scheduler_8cc_source.html#l00068">68</a> of file <a class="el" href="_record_playback_scheduler_8cc_source.html">RecordPlaybackScheduler.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                         {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    simtime_t newDriftChange=0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span>(this-&gt;par(<span class="stringliteral">&quot;read&quot;</span>).boolValue())</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;         newDriftChange = <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a173be499019e9af0d963c9e1b3d4b1c0">values</a>-&gt;at(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#ab77b0b80012d73b1a54c958d4fb2ec21">counter</a>++);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;         <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#ab77b0b80012d73b1a54c958d4fb2ec21">counter</a>++;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }<span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        newDriftChange = SimTime(par(<span class="stringliteral">&quot;drift_change&quot;</span>).doubleValue());</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span>(this-&gt;par(<span class="stringliteral">&quot;write&quot;</span>).boolValue()){</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            fprintf(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>,<span class="stringliteral">&quot;%d &quot;</span>,this-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#af3200fe6d183cc70909a4573817d9fc8" title="Number of cycles since the simulation started.">cycles</a>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            fprintf(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>, <span class="stringliteral">&quot; %.40f\n&quot;</span>,newDriftChange.dbl());</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    simtime_t newTick = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a09879c9ecea584f0f9fdf9a6b9ae517b" title="caches current_tick parameter">currentTick</a>+newDriftChange;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span>((newTick-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>)&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>+<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>).dbl());</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span>((newTick-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>)&lt;-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a1edefaca11211937a0f25bac41c6b705" title="caches max_drift parameter">maxDrift</a>).dbl());</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        par(<span class="stringliteral">&quot;current_tick&quot;</span>).setDoubleValue(newTick.dbl());</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a35b241eb0e43cba370968101f127d8c9" title="Signal that is emitted every time the drift (Difference of configured and actual tick length) changes...">currentDrift</a>, par(<span class="stringliteral">&quot;current_tick&quot;</span>).doubleValue()-<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ad52d22f0ff333c545fdda908ea086498" title="caches tick parameter">tick</a>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -365,19 +365,20 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordflow">while</span>(!feof(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>)){</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    <span class="keywordtype">int</span> dummy;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    <span class="keywordtype">double</span> data;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    fscanf(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>,<span class="stringliteral">&quot;%d %lf&quot;</span>, &amp;dummy, &amp;data);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a173be499019e9af0d963c9e1b3d4b1c0">values</a>-&gt;at(counter++)=data;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            }<span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                perror (<span class="stringliteral">&quot;Error opening file&quot;</span>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            counter = 0;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }<span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;par(<span class="stringliteral">&quot;write&quot;</span>).boolValue())</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>=fopen(ss.str().c_str(),<span class="stringliteral">&quot;w&quot;</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    <span class="keywordtype">int</span> num = fscanf(<a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>,<span class="stringliteral">&quot;%d %lf&quot;</span>, &amp;dummy, &amp;data);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    ASSERT(num==2);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a173be499019e9af0d963c9e1b3d4b1c0">values</a>-&gt;at(counter++)=data;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            }<span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                perror (<span class="stringliteral">&quot;Error opening file&quot;</span>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            counter = 0;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }<span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;par(<span class="stringliteral">&quot;write&quot;</span>).boolValue())</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html#a81d1ae691dd212754315cbbd2f470f5e">fp</a>=fopen(ss.str().c_str(),<span class="stringliteral">&quot;w&quot;</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -435,7 +436,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_record_playback_scheduler_8h_source.html#l00038">38</a> of file <a class="el" href="_record_playback_scheduler_8h_source.html">RecordPlaybackScheduler.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_record_playback_scheduler_8cc_source.html#l00067">changeDrift()</a>, and <a class="el" href="_record_playback_scheduler_8cc_source.html#l00028">initialize()</a>.</p>
+<p>Referenced by <a class="el" href="_record_playback_scheduler_8cc_source.html#l00068">changeDrift()</a>, and <a class="el" href="_record_playback_scheduler_8cc_source.html#l00028">initialize()</a>.</p>
 
 </div>
 </div>
@@ -459,7 +460,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_record_playback_scheduler_8h_source.html#l00037">37</a> of file <a class="el" href="_record_playback_scheduler_8h_source.html">RecordPlaybackScheduler.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_record_playback_scheduler_8cc_source.html#l00067">changeDrift()</a>, <a class="el" href="_record_playback_scheduler_8cc_source.html#l00028">initialize()</a>, and <a class="el" href="_record_playback_scheduler_8cc_source.html#l00059">~RecordPlaybackScheduler()</a>.</p>
+<p>Referenced by <a class="el" href="_record_playback_scheduler_8cc_source.html#l00068">changeDrift()</a>, <a class="el" href="_record_playback_scheduler_8cc_source.html#l00028">initialize()</a>, and <a class="el" href="_record_playback_scheduler_8cc_source.html#l00060">~RecordPlaybackScheduler()</a>.</p>
 
 </div>
 </div>
@@ -483,7 +484,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_record_playback_scheduler_8h_source.html#l00039">39</a> of file <a class="el" href="_record_playback_scheduler_8h_source.html">RecordPlaybackScheduler.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_record_playback_scheduler_8cc_source.html#l00067">changeDrift()</a>, and <a class="el" href="_record_playback_scheduler_8cc_source.html#l00028">initialize()</a>.</p>
+<p>Referenced by <a class="el" href="_record_playback_scheduler_8cc_source.html#l00068">changeDrift()</a>, and <a class="el" href="_record_playback_scheduler_8cc_source.html#l00028">initialize()</a>.</p>
 
 </div>
 </div>
@@ -497,7 +498,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_record_playback_scheduler.html">RecordPlaybackScheduler</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:21 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

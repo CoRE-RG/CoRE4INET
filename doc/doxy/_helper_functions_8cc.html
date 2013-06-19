@@ -112,6 +112,7 @@ $(document).ready(function(){initNavTree('_helper_functions_8cc.html','');});
 <div class="textblock"><code>#include &quot;<a class="el" href="_helper_functions_8h_source.html">HelperFunctions.h</a>&quot;</code><br/>
 <code>#include &lt;sstream&gt;</code><br/>
 <code>#include &quot;cmodule.h&quot;</code><br/>
+<code>#include &quot;ModuleAccess.h&quot;</code><br/>
 </div>
 <p><a href="_helper_functions_8cc_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -129,6 +130,9 @@ Functions</h2></td></tr>
 <tr class="memitem:af871fed61f87700e83e5ec4a43cb388b"><td class="memItemLeft" align="right" valign="top">cGate *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b">gateByFullPath</a> (std::string &amp;path)</td></tr>
 <tr class="memdesc:af871fed61f87700e83e5ec4a43cb388b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the gate defined by an object path.  <a href="#af871fed61f87700e83e5ec4a43cb388b">More...</a><br/></td></tr>
 <tr class="separator:af871fed61f87700e83e5ec4a43cb388b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae77e740a642eb88ef1d7efd0b81edac1"><td class="memItemLeft" align="right" valign="top">cGate *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#ae77e740a642eb88ef1d7efd0b81edac1">gateByShortPath</a> (std::string &amp;nameAndGate, cModule *from)</td></tr>
+<tr class="memdesc:ae77e740a642eb88ef1d7efd0b81edac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the gate of a node defined by: modulename.gatename.  <a href="#ae77e740a642eb88ef1d7efd0b81edac1">More...</a><br/></td></tr>
+<tr class="separator:ae77e740a642eb88ef1d7efd0b81edac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad639e4b71630a76730add8ddf0337d12"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_helper_functions_8cc.html#ad639e4b71630a76730add8ddf0337d12">ticksToTransparentClock</a> (uint64_t ticks, simtime_t tick)</td></tr>
 <tr class="memdesc:ad639e4b71630a76730add8ddf0337d12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts value in ticks to the transparent clock unit that is ns*0x10000.  <a href="#ad639e4b71630a76730add8ddf0337d12">More...</a><br/></td></tr>
 <tr class="separator:ad639e4b71630a76730add8ddf0337d12"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,14 +177,14 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00035">35</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                                   {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    std::string path = parameter.stdstringValue();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span>(path.length()&gt;0)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        path.append(<span class="stringliteral">&quot;,&quot;</span>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    path.append(pathToAdd);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    parameter.setStringValue(path);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00037">37</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                                   {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::string path = parameter.stdstringValue();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span>(path.length()&gt;0)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        path.append(<span class="stringliteral">&quot;,&quot;</span>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    path.append(pathToAdd);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    parameter.setStringValue(path);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -207,21 +211,73 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>reference to the gate defined by path or NULL if no such gate was found </dd></dl>
 
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00043">43</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00045">45</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00122">TTEthernetModel::Buffer::handleParameterChange()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                      {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    std::size_t pos = path.rfind(<span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span>(pos!=std::string::npos){</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        std::string modulePath = path.substr(0,pos);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        std::string gateName = path.substr(pos+1);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        cModule* module = cSimulation::getActiveSimulation()-&gt;getModuleByPath(modulePath.c_str());</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span>(module){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> module-&gt;gate(gateName.c_str());</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00126">TTEthernetModel::Buffer::handleParameterChange()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                      {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    std::size_t pos = path.rfind(<span class="charliteral">&#39;.&#39;</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span>(pos!=std::string::npos){</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        std::string modulePath = path.substr(0,pos);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        std::string gateName = path.substr(pos+1);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        cModule* module = cSimulation::getActiveSimulation()-&gt;getModuleByPath(modulePath.c_str());</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span>(module){</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> module-&gt;gate(gateName.c_str());</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ae77e740a642eb88ef1d7efd0b81edac1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cGate* gateByShortPath </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>nameAndGate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cModule *&#160;</td>
+          <td class="paramname"><em>from</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the gate of a node defined by: modulename.gatename. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nameAndGate</td><td>name of the module and gatename in the format: modulename.gatename </td></tr>
+    <tr><td class="paramname">from</td><td>a module of the node in which the gate can be found </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the gate defined by path or NULL if no such gate was found </dd></dl>
+
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00058">58</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00126">TTEthernetModel::Buffer::handleParameterChange()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                                             {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::size_t pos = nameAndGate.rfind(<span class="charliteral">&#39;.&#39;</span>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span>(pos!=std::string::npos){</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::string modulePath = nameAndGate.substr(0,pos);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::string gateName = nameAndGate.substr(pos+1);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        cModule* module = findModuleWhereverInNode(modulePath.c_str(), from);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span>(module){</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">return</span> module-&gt;gate(gateName.c_str());</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -266,15 +322,15 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>reference to the the modified string </dd></dl>
 
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00026">26</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                                                                 {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">size_t</span> pos = <span class="keywordtype">string</span>.find(toFind);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">while</span>(pos!=std::string::npos){</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">string</span>.replace(pos,toFind.length(),replacement);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        pos = <span class="keywordtype">string</span>.find(toFind);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">return</span> string;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00028">28</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                                                                 {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">size_t</span> pos = <span class="keywordtype">string</span>.find(toFind);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">while</span>(pos!=std::string::npos){</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">string</span>.replace(pos,toFind.length(),replacement);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        pos = <span class="keywordtype">string</span>.find(toFind);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> string;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -301,12 +357,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>transparent clock representation of seconds </dd></dl>
 
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00060">60</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00075">75</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00334">TTEthernetModel::TTEOutput::setTransparentClock()</a>, <a class="el" href="_helper_functions_8cc_source.html#l00056">ticksToTransparentClock()</a>, and <a class="el" href="_helper_functions_8cc_source.html#l00064">transparentClockToTicks()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                                     {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   <span class="keywordflow">return</span> ((seconds.raw() *  0x10000) / pow(10,SIMTIME_NS-seconds.getScaleExp()));</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00340">TTEthernetModel::TTEOutput::setTransparentClock()</a>, <a class="el" href="_helper_functions_8cc_source.html#l00071">ticksToTransparentClock()</a>, and <a class="el" href="_helper_functions_8cc_source.html#l00079">transparentClockToTicks()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                                     {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;   <span class="keywordflow">return</span> ((seconds.raw() *  0x10000) / pow(10,SIMTIME_NS-seconds.getScaleExp()));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -351,21 +407,21 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>reference to the the elements vector </dd></dl>
 
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00013">13</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00015">15</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00211">TTEthernetModel::TTEOutput::handleParameterChange()</a>, <a class="el" href="_buffer_8cc_source.html#l00122">TTEthernetModel::Buffer::handleParameterChange()</a>, <a class="el" href="_t_t_e_application_base_8cc_source.html#l00038">TTEthernetModel::TTEApplicationBase::handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00122">TTEthernetModel::TTEInput::handleParameterChange()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                                                                                                    {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::stringstream stringStream(<span class="keywordtype">string</span>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    std::string item;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">while</span>(std::getline(stringStream, item, delimiter)){</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        std::stringstream trimmer;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        trimmer &lt;&lt; item;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        trimmer &gt;&gt; item;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        elements.push_back(item);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">return</span> elements;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00213">TTEthernetModel::TTEOutput::handleParameterChange()</a>, <a class="el" href="_buffer_8cc_source.html#l00126">TTEthernetModel::Buffer::handleParameterChange()</a>, <a class="el" href="_t_t_e_application_base_8cc_source.html#l00040">TTEthernetModel::TTEApplicationBase::handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00124">TTEthernetModel::TTEInput::handleParameterChange()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                                                                                                    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::stringstream stringStream(<span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::string item;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">while</span>(std::getline(stringStream, item, delimiter)){</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        std::stringstream trimmer;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        trimmer &lt;&lt; item;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        trimmer &gt;&gt; item;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        elements.push_back(item);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">return</span> elements;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -403,12 +459,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>transparent clock representation of ticks </dd></dl>
 
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00056">56</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00071">71</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00334">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                                                                {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(ticks*tick);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00340">TTEthernetModel::TTEOutput::setTransparentClock()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                                                {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(ticks*tick);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -446,12 +502,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ticks representation of transparent clock value </dd></dl>
 
-<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00064">64</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
+<p>Definition at line <a class="el" href="_helper_functions_8cc_source.html#l00079">79</a> of file <a class="el" href="_helper_functions_8cc_source.html">HelperFunctions.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00572">TTEthernetModel::HI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01369">TTEthernetModel::HI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03790">TTEthernetModel::SI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02035">TTEthernetModel::HI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02810">TTEthernetModel::HI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05517">TTEthernetModel::SI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03632">TTEthernetModel::HI_CM_TENTATIVE_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04940">TTEthernetModel::SI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l04362">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03227">TTEthernetModel::SI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04372">TTEthernetModel::SI_CM_ENABLED::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02670">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04064">TTEthernetModel::SI_CM_INTEGRATE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05805">TTEthernetModel::SI_CM_STABLE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05216">TTEthernetModel::SI_CM_UNSYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03502">TTEthernetModel::SI_CM_SYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04644">TTEthernetModel::SI_CM_ENABLED::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02944">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunctionCA()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                                                           {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> transparentClock/<a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(tick);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_h_i_c_m_states_8cc_source.html#l00579">TTEthernetModel::HI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03793">TTEthernetModel::SI_CM_INTEGRATE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01378">TTEthernetModel::HI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05520">TTEthernetModel::SI_CM_STABLE::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02048">TTEthernetModel::HI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04943">TTEthernetModel::SI_CM_UNSYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02827">TTEthernetModel::HI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03653">TTEthernetModel::HI_CM_TENTATIVE_SYNC::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03230">TTEthernetModel::SI_CM_SYNC::compressionFunction()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l04387">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04375">TTEthernetModel::SI_CM_ENABLED::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02673">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunction()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04067">TTEthernetModel::SI_CM_INTEGRATE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05808">TTEthernetModel::SI_CM_STABLE::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l05219">TTEthernetModel::SI_CM_UNSYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l03505">TTEthernetModel::SI_CM_SYNC::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l04647">TTEthernetModel::SI_CM_ENABLED::compressionFunctionCA()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02947">TTEthernetModel::SI_CM_WAIT_4_IN::compressionFunctionCA()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00238">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00208">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00207">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00208">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00873">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00988">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00587">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00535">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00504">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01661">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01134">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01118">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02338">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01553">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01513">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03118">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02119">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03944">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02105">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02511">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02825">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02376">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, and <a class="el" href="_s_m_states_8cc_source.html#l03362">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                                                                           {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> transparentClock/<a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(tick);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -461,7 +517,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a></li><li class="navelem"><a class="el" href="dir_8d204083f9d300dda59a72701f54b154.html">utilities</a></li><li class="navelem"><a class="el" href="_helper_functions_8cc.html">HelperFunctions.cc</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:21 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

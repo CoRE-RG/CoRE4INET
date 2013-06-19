@@ -14,6 +14,7 @@ var namespace_t_t_ethernet_model =
     [ "Toc", "class_t_t_ethernet_model_1_1_toc.html", "class_t_t_ethernet_model_1_1_toc" ],
     [ "TocApp", "class_t_t_ethernet_model_1_1_toc_app.html", "class_t_t_ethernet_model_1_1_toc_app" ],
     [ "TTEApplicationBase", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html", "class_t_t_ethernet_model_1_1_t_t_e_application_base" ],
+    [ "TrafficSinkApp", "class_t_t_ethernet_model_1_1_traffic_sink_app.html", "class_t_t_ethernet_model_1_1_traffic_sink_app" ],
     [ "RCTrafficSourceApp", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app" ],
     [ "TrafficSourceAppBase", "class_t_t_ethernet_model_1_1_traffic_source_app_base.html", "class_t_t_ethernet_model_1_1_traffic_source_app_base" ],
     [ "TTTrafficSourceApp", "class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html", "class_t_t_ethernet_model_1_1_t_t_traffic_source_app" ],

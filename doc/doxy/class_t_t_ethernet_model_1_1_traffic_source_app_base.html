@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_traffic_s
 </div><!--header-->
 <div class="contents">
 
-<p>Simple Test-Application.  
+<p>Base class for a TTEthernet traffic generator application.  
  <a href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_traffic_source_app_base_8h_source.html">TrafficSourceAppBase.h</a>&gt;</code></p>
@@ -156,10 +156,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3119d9508505d956452d04d89651b720 inherit pro_attribs_class_t_t_ethernet_model_1_1_t_t_e_application_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple Test-Application. </p>
+<div class="textblock"><p>Base class for a TTEthernet traffic generator application. </p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_traffic_source_app_base_8h_source.html#l00031">31</a> of file <a class="el" href="_traffic_source_app_base_8h_source.html">TrafficSourceAppBase.h</a>.</p>
+<p>Definition at line <a class="el" href="_traffic_source_app_base_8h_source.html#l00030">30</a> of file <a class="el" href="_traffic_source_app_base_8h_source.html">TrafficSourceAppBase.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a1330bb8aa9fb62d5644028a6a6e70b6a"></a>
 <div class="memitem">
@@ -251,21 +251,23 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordflow">else</span>{</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    <span class="keywordflow">continue</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                frame-&gt;setByteLength(par(<span class="stringliteral">&quot;payload&quot;</span>).longValue()+ETHER_MAC_FRAME_BYTES);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="comment">//Padding</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span>(frame-&gt;getByteLength()&lt;<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#af1aeba82bae190f10e219e04546e8cb7" title="Maintain backwards compatibility MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1...">MIN_ETHERNET_FRAME_BYTES</a>){</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    frame-&gt;setByteLength(<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#af1aeba82bae190f10e219e04546e8cb7" title="Maintain backwards compatibility MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1...">MIN_ETHERNET_FRAME_BYTES</a>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                frame-&gt;setCtID(ctID);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="comment">//TODO Error check</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                Incoming* in = (Incoming *)(*buf)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>)-&gt;getPathStartGate()-&gt;getOwner();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="comment">//TODO Better name for Frame</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                frame-&gt;setName((*buf)-&gt;getName());</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                sendDirect(frame, in-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                cPacket *payload = <span class="keyword">new</span> cPacket;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                payload-&gt;setByteLength(par(<span class="stringliteral">&quot;payload&quot;</span>).longValue());</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                frame-&gt;encapsulate(payload);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="comment">//Padding</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">if</span>(frame-&gt;getByteLength()&lt;<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#af1aeba82bae190f10e219e04546e8cb7" title="Maintain backwards compatibility MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1...">MIN_ETHERNET_FRAME_BYTES</a>){</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    frame-&gt;setByteLength(<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#af1aeba82bae190f10e219e04546e8cb7" title="Maintain backwards compatibility MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1...">MIN_ETHERNET_FRAME_BYTES</a>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                frame-&gt;setCtID(ctID);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="comment">//TODO Error check</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                Incoming* in = (Incoming *)(*buf)-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>)-&gt;getPathStartGate()-&gt;getOwner();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="comment">//TODO Better name for Frame</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                frame-&gt;setName((*buf)-&gt;getName());</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                sendDirect(frame, in-&gt;gate(<span class="stringliteral">&quot;in&quot;</span>));</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -279,7 +281,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_traffic_source_app_base.html">TrafficSourceAppBase</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:21 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -69,6 +69,7 @@ var hierarchy =
       [ "TTEthernetModel::TTEApplicationBase", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html", [
         [ "TTEthernetModel::TicApp", "class_t_t_ethernet_model_1_1_tic_app.html", null ],
         [ "TTEthernetModel::TocApp", "class_t_t_ethernet_model_1_1_toc_app.html", null ],
+        [ "TTEthernetModel::TrafficSinkApp", "class_t_t_ethernet_model_1_1_traffic_sink_app.html", null ],
         [ "TTEthernetModel::TrafficSourceAppBase", "class_t_t_ethernet_model_1_1_traffic_source_app_base.html", [
           [ "TTEthernetModel::RCTrafficSourceApp", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html", null ],
           [ "TTEthernetModel::TTTrafficSourceApp", "class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html", null ]

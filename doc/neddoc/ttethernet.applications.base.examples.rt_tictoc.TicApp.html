@@ -119,6 +119,11 @@ Since this is an abstract module please do not instantiate it</p>
    <td><i>TicApp</i></td>
    <td></td>
 </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/routing,cyan</i></td>
+   <td></td>
+</tr>
 </table>
 <h3 class="subtitle">Gates:</h3>
 <table class="gatestable">
@@ -198,6 +203,7 @@ Since this is an abstract module please do not instantiate it</p>
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TicApp</span><span style="color: #000000; ">);
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/routing,cyan&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Statistic of the amount of packets that were received by the application
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@statistic</span><span style="color: #000000; ">[</span><span style="color: #000000; ">rxPk</span><span style="color: #000000; ">](</span><span style="color: #000000; ">title</span><span style="color: #000000; ">=</span><span style="color: #008000; ">&quot;RX Packets&quot;</span><span style="color: #000000; ">; </span><span style="color: #000000; ">record</span><span style="color: #000000; ">=</span><span style="color: #000000; ">count</span><span style="color: #000000; ">,</span><span style="color: #000000; ">vector</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Application Roundtrip Time

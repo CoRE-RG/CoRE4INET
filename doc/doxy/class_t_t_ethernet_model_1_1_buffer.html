@@ -248,12 +248,12 @@ Private Member Functions</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00029">29</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;               {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.clear();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.clear();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00031">31</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;               {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.clear();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.clear();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -292,12 +292,12 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00075">75</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00077">77</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00423">TTEthernetModel::TTEAPIApplicationBase::tte_set_buf_var()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application]=cb;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application]=cb;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -335,12 +335,12 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00087">87</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00089">89</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00423">TTEthernetModel::TTEAPIApplicationBase::tte_set_buf_var()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application]=cb;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application]=cb;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -371,13 +371,13 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f">TTEthernetModel::QueueBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a553b877693bbf07c5f89f014225e9bef">TTEthernetModel::DoubleBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00154">154</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00156">156</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00099">getFrame()</a>, and <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">throw</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00101">getFrame()</a>, and <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;{</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    ev &lt;&lt; <span class="stringliteral">&quot;Buffer::dequeue not implemented&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">throw</span>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -414,13 +414,13 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918">TTEthernetModel::QueueBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_double_buffer.html#a5efd7fdf739edb648d27b3d73cf7e301">TTEthernetModel::DoubleBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00148">148</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00150">150</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_c_t_buffer_8cc_source.html#l00030">TTEthernetModel::CTBuffer::putFrame()</a>, and <a class="el" href="_buffer_8cc_source.html#l00103">putFrame()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;{</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">throw</span>;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_c_t_buffer_8cc_source.html#l00030">TTEthernetModel::CTBuffer::putFrame()</a>, and <a class="el" href="_buffer_8cc_source.html#l00105">putFrame()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;{</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    ev &lt;&lt; <span class="stringliteral">&quot;Buffer::enqueue not implemented&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">throw</span>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -441,12 +441,12 @@ Private Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>a pointer to the next EtherFrame from the buffer. Returns null if there is no EtherFrame in the buffer</dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue()</a>; </dd></dl>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00099">99</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00101">101</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00061">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00055">TTEthernetModel::RCBuffer::handleMessage()</a>, and <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00340">TTEthernetModel::TTEAPIApplicationBase::tte_open_input_buf()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                            {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00063">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00057">TTEthernetModel::RCBuffer::handleMessage()</a>, and <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00340">TTEthernetModel::TTEAPIApplicationBase::tte_open_input_buf()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                            {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -473,14 +473,14 @@ Private Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The callback that is currently registered. Null if there is no receive callback registered </dd></dl>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00080">80</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00082">82</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00468">TTEthernetModel::TTEAPIApplicationBase::tte_get_buf_var()</a>, and <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00423">TTEthernetModel::TTEAPIApplicationBase::tte_set_buf_var()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end())</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application];</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end())</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>[application];</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -507,14 +507,14 @@ Private Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The callback that is currently registered. Null if there is no transmit callback registered </dd></dl>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00092">92</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00094">94</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00468">TTEthernetModel::TTEAPIApplicationBase::tte_get_buf_var()</a>, and <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00423">TTEthernetModel::TTEAPIApplicationBase::tte_set_buf_var()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end())</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application];</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.find(application) == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end())</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>[application];</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -549,22 +549,24 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00107">107</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00109">109</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>, and <a class="el" href="_c_t_buffer_8cc_source.html#l00038">TTEthernetModel::CTBuffer::handleMessage()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>, simTime()-msg-&gt;getCreationTime());</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e" title="Wrapper function arround enqueue().">putFrame</a>((EtherFrame*) frame);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="comment">// Now execute callbacks if there are some</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.begin();</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end(); ++iter){</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            iter-&gt;first-&gt;executeCallback(iter-&gt;second);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        EtherFrame *frame = check_and_cast&lt;EtherFrame *&gt;(msg);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a>, simTime()-msg-&gt;getCreationTime());</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">if</span> (frame-&gt;getByteLength() &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#af1aeba82bae190f10e219e04546e8cb7" title="Maintain backwards compatibility MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1...">MIN_ETHERNET_FRAME_BYTES</a>)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            frame-&gt;setByteLength(<a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#af1aeba82bae190f10e219e04546e8cb7" title="Maintain backwards compatibility MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1...">MIN_ETHERNET_FRAME_BYTES</a>);  <span class="comment">// &quot;padding&quot;</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a103fcc93e67999af16858940eb4e788e" title="Wrapper function arround enqueue().">putFrame</a>((EtherFrame*) frame);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment">// Now execute callbacks if there are some</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.begin();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a37942f0c1ee909da2bdc29371e45f616" title="Stores the callbacks that are executed when a frame is added to the buffer.">receiveCallbacks</a>.end(); ++iter){</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            iter-&gt;first-&gt;executeCallback(iter-&gt;second);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -600,34 +602,32 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aaf4e100095277446da87f5e705532414">TTEthernetModel::RCBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a6f088c185c9be2ea71150ad04c2c3ccb">TTEthernetModel::TTBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#ac71ac70a5cfebd3e20242558e10647ca">TTEthernetModel::CTBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00122">122</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00126">126</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
 <p>Referenced by <a class="el" href="_c_t_buffer_8cc_source.html#l00057">TTEthernetModel::CTBuffer::handleParameterChange()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                                     {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">if</span>(ev.isGUI()){</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="comment">//TODO check why this does not work</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="comment">//getDisplayString().setTagArg(&quot;i2&quot;, 0, &quot;&quot;);</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="comment">//getDisplayString().setTagArg(&quot;tt&quot;, 0, &quot;&quot;);</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    std::string destinationGatesString = par(<span class="stringliteral">&quot;destination_gates&quot;</span>).stdstringValue();</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    std::vector&lt;std::string&gt; destinationGatePaths;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator.">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator destinationGatePath = destinationGatePaths.begin();</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            destinationGatePath!=destinationGatePaths.end();destinationGatePath++){</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>((*destinationGatePath));</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">if</span>(gate){</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(gate);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">if</span>(ev.isGUI()){</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Gate &quot;</span>&lt;&lt;(*destinationGatePath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved!&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem outgoing gate!&quot;</span>);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                                                     {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.clear();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    std::string destinationGatesString = par(<span class="stringliteral">&quot;destination_gates&quot;</span>).stdstringValue();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    std::vector&lt;std::string&gt; destinationGatePaths;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator.">split</a>(destinationGatesString,<span class="charliteral">&#39;,&#39;</span>,destinationGatePaths);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator destinationGatePath = destinationGatePaths.begin();</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            destinationGatePath!=destinationGatePaths.end();destinationGatePath++){</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        cGate* gate = <a class="code" href="_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b" title="Returns the gate defined by an object path.">gateByFullPath</a>((*destinationGatePath));</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">if</span>(!gate){</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            gate = <a class="code" href="_helper_functions_8cc.html#ae77e740a642eb88ef1d7efd0b81edac1" title="Returns the gate of a node defined by: modulename.gatename.">gateByShortPath</a>((*destinationGatePath), <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        }</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordflow">if</span>(gate){</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">if</span>(findContainingNode(gate-&gt;getOwnerModule())!=findContainingNode(<span class="keyword">this</span>)){</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                opp_error(<span class="stringliteral">&quot;Configuration problem of destination_gates: Gate: %s is not in node %s! Maybe a copy-paste problem?&quot;</span>, (*destinationGatePath).c_str(),</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                        findContainingNode(<span class="keyword">this</span>)-&gt;getFullName());</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            }</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.push_back(gate);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        }</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            opp_error(<span class="stringliteral">&quot;Configuration problem of destination_gates: Gate: %s could not be resolved!&quot;</span>, (*destinationGatePath).c_str());</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -663,15 +663,15 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a1f08d040d089ae71cd04ae090dcf168e">TTEthernetModel::RCBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#a019fc44e7ff5ac11f77dbd05fbab3123">TTEthernetModel::TTBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00040">40</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00042">42</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00040">TTEthernetModel::TTBuffer::initialize()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00044">TTEthernetModel::RCBuffer::initialize()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span>(stage==0){</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;Initialize Buffer&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="caches ct_mask parameter">initializeStatistics</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_buffer_8cc_source.html#l00042">TTEthernetModel::TTBuffer::initialize()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00046">TTEthernetModel::RCBuffer::initialize()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span>(stage==0){</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;Initialize Buffer&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad913ce4432ef7f7f4075be533580acbd" title="caches ct_mask parameter">initializeStatistics</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -699,13 +699,13 @@ Private Member Functions</h2></td></tr>
 <p>caches ct_mask parameter </p>
 <p>caches ct_marker parameter caches ct_id parameter Initializes the statistics for the module </p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00048">48</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00050">50</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00040">initialize()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a> = registerSignal(<span class="stringliteral">&quot;txPk&quot;</span>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a> = registerSignal(<span class="stringliteral">&quot;latency&quot;</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00042">initialize()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a> = registerSignal(<span class="stringliteral">&quot;txPk&quot;</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8dab8020603b4991ff88a6c9e019098d" title="Signal that contains the latency until the frame enters the buffer.">latencySignal</a> = registerSignal(<span class="stringliteral">&quot;latency&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -735,12 +735,12 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae45b6326746540c298c4984ec882a2df">TTEthernetModel::RCBuffer</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_buffer.html#ab218b6f191c2d664696574d519144407">TTEthernetModel::TTBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00035">35</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00037">37</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00036">TTEthernetModel::RCBuffer::numInitStages()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00038">TTEthernetModel::RCBuffer::numInitStages()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -767,12 +767,12 @@ Private Member Functions</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue()</a>; </dd></dl>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00103">103</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00105">105</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00107">handleMessage()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                                       {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(frame);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00109">handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                       {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57" title="Is called to store an EtherFrame in the buffer.">enqueue</a>(frame);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -799,12 +799,12 @@ Private Member Functions</h2></td></tr>
 
 <p>Emits a statistics signal that a frame was sent from the buffer. </p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00054">54</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00056">56</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00061">TTEthernetModel::TTBuffer::handleMessage()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00055">TTEthernetModel::RCBuffer::handleMessage()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a>, 1L);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00063">TTEthernetModel::TTBuffer::handleMessage()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00057">TTEthernetModel::RCBuffer::handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    emit(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1ab8b8b2326252ded43a84e816e6bc5" title="Signal that is emitted every time a frame was sent.">txPkSignal</a>, 1L);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -833,23 +833,23 @@ Private Member Functions</h2></td></tr>
 <p>Sets the status of the <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> to empty or non-empty. </p>
 <p>This method changes the GUI according to the buffer status. </p>
 
-<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00059">59</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_buffer_8cc_source.html#l00061">61</a> of file <a class="el" href="_buffer_8cc_source.html">Buffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00068">TTEthernetModel::QueueBuffer::dequeue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00040">TTEthernetModel::QueueBuffer::enqueue()</a>, <a class="el" href="_b_g_buffer_8cc_source.html#l00023">TTEthernetModel::BGBuffer::initialize()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00040">TTEthernetModel::TTBuffer::initialize()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00044">TTEthernetModel::RCBuffer::initialize()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span>(ev.isGUI()){</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">if</span> (empty)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;black&quot;</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;Buffer is empty&quot;</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00068">TTEthernetModel::QueueBuffer::dequeue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00040">TTEthernetModel::QueueBuffer::enqueue()</a>, <a class="el" href="_b_g_buffer_8cc_source.html#l00023">TTEthernetModel::BGBuffer::initialize()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00042">TTEthernetModel::TTBuffer::initialize()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00046">TTEthernetModel::RCBuffer::initialize()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span>(ev.isGUI()){</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (empty)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;black&quot;</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;Buffer is empty&quot;</span>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -876,7 +876,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00066">66</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00061">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00055">TTEthernetModel::RCBuffer::handleMessage()</a>, <a class="el" href="_buffer_8cc_source.html#l00122">handleParameterChange()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00112">TTEthernetModel::RCBuffer::resetBag()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
+<p>Referenced by <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00063">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00057">TTEthernetModel::RCBuffer::handleMessage()</a>, <a class="el" href="_buffer_8cc_source.html#l00126">handleParameterChange()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00114">TTEthernetModel::RCBuffer::resetBag()</a>, and <a class="el" href="_buffer_8cc_source.html#l00031">~Buffer()</a>.</p>
 
 </div>
 </div>
@@ -902,7 +902,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00224">224</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00107">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00048">initializeStatistics()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00109">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00050">initializeStatistics()</a>.</p>
 
 </div>
 </div>
@@ -928,7 +928,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00070">70</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00075">addReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00080">getReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00107">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00077">addReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00082">getReceiveCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00109">handleMessage()</a>, and <a class="el" href="_buffer_8cc_source.html#l00031">~Buffer()</a>.</p>
 
 </div>
 </div>
@@ -954,7 +954,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00074">74</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00087">addTransmitCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00092">getTransmitCallback()</a>, <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00061">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00112">TTEthernetModel::RCBuffer::resetBag()</a>, and <a class="el" href="_buffer_8cc_source.html#l00029">~Buffer()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00089">addTransmitCallback()</a>, <a class="el" href="_buffer_8cc_source.html#l00094">getTransmitCallback()</a>, <a class="el" href="_b_g_buffer_8cc_source.html#l00029">TTEthernetModel::BGBuffer::handleMessage()</a>, <a class="el" href="_t_t_buffer_8cc_source.html#l00063">TTEthernetModel::TTBuffer::handleMessage()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00114">TTEthernetModel::RCBuffer::resetBag()</a>, and <a class="el" href="_buffer_8cc_source.html#l00031">~Buffer()</a>.</p>
 
 </div>
 </div>
@@ -980,7 +980,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_buffer_8h_source.html#l00219">219</a> of file <a class="el" href="_buffer_8h_source.html">Buffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00048">initializeStatistics()</a>, and <a class="el" href="_buffer_8cc_source.html#l00054">recordPacketSent()</a>.</p>
+<p>Referenced by <a class="el" href="_buffer_8cc_source.html#l00050">initializeStatistics()</a>, and <a class="el" href="_buffer_8cc_source.html#l00056">recordPacketSent()</a>.</p>
 
 </div>
 </div>
@@ -994,7 +994,7 @@ Private Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_buffer.html">Buffer</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:21 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

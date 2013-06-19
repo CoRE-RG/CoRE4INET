@@ -1,7 +1,7 @@
-<area shape="rect" id="node1" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="188,83,279,111">
-<area shape="rect" id="node2" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,6,77,34">
-<area shape="rect" id="node5" href="ttethernet.examples.rt_tictoc.Tic.html" title="Compound Module Tic" alt="" coords="101,6,173,34">
-<area shape="rect" id="node7" href="ttethernet.examples.rt_tictoc.Toc.html" title="Compound Module Toc" alt="" coords="197,6,269,34">
-<area shape="rect" id="node9" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,6,365,34">
-<area shape="rect" id="node11" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="389,6,461,34">
-<area shape="rect" id="node13" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="485,6,557,34">
+<area shape="rect" id="node1" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="284,83,375,111">
+<area shape="rect" id="node2" href="ttethernet.examples.small_network.Node1.html" title="Compound Module Node1" alt="" coords="5,6,77,34">
+<area shape="rect" id="node4" href="ttethernet.examples.small_network.Node2.html" title="Compound Module Node2" alt="" coords="101,6,173,34">
+<area shape="rect" id="node6" href="ttethernet.examples.small_network.Node3.html" title="Compound Module Node3" alt="" coords="197,6,269,34">
+<area shape="rect" id="node8" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="293,6,365,34">
+<area shape="rect" id="node11" href="ttethernet.examples.rt_tictoc.Tic.html" title="Compound Module Tic" alt="" coords="389,6,461,34">
+<area shape="rect" id="node13" href="ttethernet.examples.rt_tictoc.Toc.html" title="Compound Module Toc" alt="" coords="485,6,557,34">

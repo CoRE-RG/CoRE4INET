@@ -299,6 +299,13 @@
       <arglist>(std::string &amp;path)</arglist>
     </member>
     <member kind="function">
+      <type>cGate *</type>
+      <name>gateByShortPath</name>
+      <anchorfile>_helper_functions_8cc.html</anchorfile>
+      <anchor>ae77e740a642eb88ef1d7efd0b81edac1</anchor>
+      <arglist>(std::string &amp;nameAndGate, cModule *from)</arglist>
+    </member>
+    <member kind="function">
       <type>uint64_t</type>
       <name>ticksToTransparentClock</name>
       <anchorfile>_helper_functions_8cc.html</anchorfile>
@@ -351,6 +358,13 @@
       <anchorfile>_helper_functions_8h.html</anchorfile>
       <anchor>af871fed61f87700e83e5ec4a43cb388b</anchor>
       <arglist>(std::string &amp;path)</arglist>
+    </member>
+    <member kind="function">
+      <type>cGate *</type>
+      <name>gateByShortPath</name>
+      <anchorfile>_helper_functions_8h.html</anchorfile>
+      <anchor>ae77e740a642eb88ef1d7efd0b81edac1</anchor>
+      <arglist>(std::string &amp;nameAndGate, cModule *from)</arglist>
     </member>
     <member kind="function">
       <type>uint64_t</type>
@@ -481,6 +495,24 @@
     <filename>index_8h</filename>
   </compound>
   <compound kind="file">
+    <name>NEDFunctions.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/utilities/</path>
+    <filename>_n_e_d_functions_8cc</filename>
+    <includes id="_n_e_d_functions_8h" name="NEDFunctions.h" local="yes" imported="no">NEDFunctions.h</includes>
+    <member kind="function">
+      <type></type>
+      <name>Define_NED_Function</name>
+      <anchorfile>_n_e_d_functions_8cc.html</anchorfile>
+      <anchor>aab743cc1ce08c20e48d1590bdce15922</anchor>
+      <arglist>(ned_sec2tick,&quot;quantity sec2tick(quantity seconds, quantity ticklength?)&quot;)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>NEDFunctions.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/utilities/</path>
+    <filename>_n_e_d_functions_8h</filename>
+  </compound>
+  <compound kind="file">
     <name>PCFIncoming.cc</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/ctc/</path>
     <filename>_p_c_f_incoming_8cc</filename>
@@ -526,42 +558,42 @@
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>CS</name>
+      <name>CS_FRAME</name>
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
-      <anchor>a1ee6d33b2f327407c3f27ead021da60ea69b796dac846487107a8c28c5a5b77d3</anchor>
+      <anchor>a1ee6d33b2f327407c3f27ead021da60ea62759934eee457fe52fb8b246c5aa540</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>IN</name>
+      <name>IN_FRAME</name>
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
-      <anchor>a1ee6d33b2f327407c3f27ead021da60eaaf186ee41615fe8d831c9e1506f4ceca</anchor>
+      <anchor>a1ee6d33b2f327407c3f27ead021da60eab602bf5217b511903f7288f628b0c77d</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>CA</name>
+      <name>CA_FRAME</name>
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
-      <anchor>a1ee6d33b2f327407c3f27ead021da60eadd95599e4fe0d23eef0bb3c80c877d2a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>CS</name>
-      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
-      <anchor>a1ee6d33b2f327407c3f27ead021da60ea69b796dac846487107a8c28c5a5b77d3</anchor>
+      <anchor>a1ee6d33b2f327407c3f27ead021da60eac869b30499d7d077b91e09fa29d87108</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <type>@</type>
-      <name>IN</name>
+      <name>CS_FRAME</name>
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
-      <anchor>a1ee6d33b2f327407c3f27ead021da60eaaf186ee41615fe8d831c9e1506f4ceca</anchor>
+      <anchor>a1ee6d33b2f327407c3f27ead021da60ea62759934eee457fe52fb8b246c5aa540</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <type>@</type>
-      <name>CA</name>
+      <name>IN_FRAME</name>
       <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
-      <anchor>a1ee6d33b2f327407c3f27ead021da60eadd95599e4fe0d23eef0bb3c80c877d2a</anchor>
+      <anchor>a1ee6d33b2f327407c3f27ead021da60eab602bf5217b511903f7288f628b0c77d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <type>@</type>
+      <name>CA_FRAME</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>a1ee6d33b2f327407c3f27ead021da60eac869b30499d7d077b91e09fa29d87108</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -1053,27 +1085,6 @@
     <class kind="class">TTEthernetModel::SI_CM_ENABLED</class>
     <class kind="class">TTEthernetModel::SI_CM_WAIT_4_IN</class>
     <namespace>TTEthernetModel</namespace>
-    <member kind="define">
-      <type>#define</type>
-      <name>CA_FRAME</name>
-      <anchorfile>_s_i_c_m_states_8h.html</anchorfile>
-      <anchor>a08060cfe0e703fcabe73d80ae5468b98</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="define">
-      <type>#define</type>
-      <name>CS_FRAME</name>
-      <anchorfile>_s_i_c_m_states_8h.html</anchorfile>
-      <anchor>a3c118953c98327c5bf70f0818b093d19</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="define">
-      <type>#define</type>
-      <name>IN_FRAME</name>
-      <anchorfile>_s_i_c_m_states_8h.html</anchorfile>
-      <anchor>a82adfea0f3d239282b7e5b9b8d729f6d</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="file">
     <name>SM.cc</name>
@@ -1429,6 +1440,29 @@
     <filename>_toc_app_8h</filename>
     <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
     <class kind="class">TTEthernetModel::TocApp</class>
+    <namespace>TTEthernetModel</namespace>
+  </compound>
+  <compound kind="file">
+    <name>TrafficSinkApp.cc</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/trafficsink/</path>
+    <filename>_traffic_sink_app_8cc</filename>
+    <includes id="_traffic_sink_app_8h" name="TrafficSinkApp.h" local="yes" imported="no">TrafficSinkApp.h</includes>
+    <includes id="_c_t_frame_8h" name="CTFrame.h" local="yes" imported="no">CTFrame.h</includes>
+    <namespace>TTEthernetModel</namespace>
+    <member kind="function">
+      <type></type>
+      <name>Define_Module</name>
+      <anchorfile>namespace_t_t_ethernet_model.html</anchorfile>
+      <anchor>abadefe2c767be2cec75023bd7ddd472b</anchor>
+      <arglist>(TrafficSinkApp)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>TrafficSinkApp.h</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/trafficsink/</path>
+    <filename>_traffic_sink_app_8h</filename>
+    <includes id="_t_t_e_application_base_8h" name="TTEApplicationBase.h" local="yes" imported="no">TTEApplicationBase.h</includes>
+    <class kind="class">TTEthernetModel::TrafficSinkApp</class>
     <namespace>TTEthernetModel</namespace>
   </compound>
   <compound kind="file">
@@ -2035,6 +2069,7 @@
     <class kind="class">TTEthernetModel::TicApp</class>
     <class kind="class">TTEthernetModel::TocApp</class>
     <class kind="class">TTEthernetModel::TTEApplicationBase</class>
+    <class kind="class">TTEthernetModel::TrafficSinkApp</class>
     <class kind="class">TTEthernetModel::RCTrafficSourceApp</class>
     <class kind="class">TTEthernetModel::TrafficSourceAppBase</class>
     <class kind="class">TTEthernetModel::TTTrafficSourceApp</class>
@@ -2079,6 +2114,7 @@
     <class kind="class">TTEthernetModel::Toc</class>
     <class kind="class">TTEthernetModel::TocApp</class>
     <class kind="class">TTEthernetModel::TTEApplicationBase</class>
+    <class kind="class">TTEthernetModel::TrafficSinkApp</class>
     <class kind="class">TTEthernetModel::RCTrafficSourceApp</class>
     <class kind="class">TTEthernetModel::TrafficSourceAppBase</class>
     <class kind="class">TTEthernetModel::TTTrafficSourceApp</class>
@@ -2963,6 +2999,39 @@
       <anchorfile>class_t_t_ethernet_model_1_1_t_t_e_application_base.html</anchorfile>
       <anchor>afb51c02d68bc0e74091f9343c9d685b1</anchor>
       <arglist>(cMessage *msg)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TTEthernetModel::TrafficSinkApp</name>
+    <filename>class_t_t_ethernet_model_1_1_traffic_sink_app.html</filename>
+    <base>TTEthernetModel::TTEApplicationBase</base>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>initialize</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_traffic_sink_app.html</anchorfile>
+      <anchor>adf1ed748b5245792dcd9e934049854ee</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>handleMessage</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_traffic_sink_app.html</anchorfile>
+      <anchor>a306d1928d3a2c99b6ae7fb26925f5f26</anchor>
+      <arglist>(cMessage *msg)</arglist>
+    </member>
+    <member kind="variable" protection="private" static="yes">
+      <type>static simsignal_t</type>
+      <name>rxPkSignal</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_traffic_sink_app.html</anchorfile>
+      <anchor>add636a811e27a05db83b72de1ea76350</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private" static="yes">
+      <type>static simsignal_t</type>
+      <name>latencySignal</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_traffic_sink_app.html</anchorfile>
+      <anchor>ab7b402db52c355f4833e7b89ae600951</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -5325,6 +5394,13 @@
     <name>TTEthernetModel::HICMState</name>
     <filename>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</filename>
     <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~HICMState</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</anchorfile>
+      <anchor>a76b0f1927454d024c1eff0e2d1f58814</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>handleMessage</name>
       <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</anchorfile>
@@ -5458,31 +5534,31 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>int</type>
+      <type>unsigned int</type>
       <name>local_clock</name>
       <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</anchorfile>
-      <anchor>a8d9ddbd364865c759ee33b9745f7d22d</anchor>
+      <anchor>a9500758227833e7c6803d8210a2bd05d</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>int</type>
+      <type>unsigned int</type>
       <name>local_sync_membership</name>
       <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</anchorfile>
-      <anchor>a526e335a4ccde505f9a8d9e2ca8091fb</anchor>
+      <anchor>a171a1cded09576c47b5285bfc6b65de1</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>int</type>
+      <type>unsigned int</type>
       <name>local_async_membership</name>
       <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</anchorfile>
-      <anchor>a850d4445fa5a4c31a6a74bc5b58dc0e4</anchor>
+      <anchor>a8847ac4d10112bb1d47e1cce092a3499</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>int</type>
+      <type>unsigned int</type>
       <name>local_integration_cycle</name>
       <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</anchorfile>
-      <anchor>ae84f75fcf8d3c6adeef2e7910f1ee839</anchor>
+      <anchor>ae9ce0918e24bb444fda8ed489168288b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -5577,10 +5653,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>map&lt; long, PCFrame * &gt; *</type>
+      <type>map&lt; long int, PCFrame * &gt; *</type>
       <name>compressed_frames</name>
       <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state.html</anchorfile>
-      <anchor>a58e76fc5801197fdffbf9b46a92b2c8e</anchor>
+      <anchor>a6b2845ff6f3af65be3578aa3610c99bb</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -5650,7 +5726,7 @@
       <anchor>a346f6b7be7c8f6a652275e412c0a018c</anchor>
       <arglist>(cMessage *message)</arglist>
     </member>
-    <member kind="variable" protection="private">
+    <member kind="variable">
       <type>HICMState *</type>
       <name>pState</name>
       <anchorfile>class_t_t_ethernet_model_1_1_h_i_c_m_state_contex.html</anchorfile>
@@ -6224,6 +6300,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>map&lt; unsigned int, vector&lt; pair&lt; unsigned int, unsigned int &gt; &gt; * &gt;::iterator</type>
+      <name>ca_compression_stack_it</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_s_i_c_m_state.html</anchorfile>
+      <anchor>a265128559b38aabd7b2cb644d044319b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>deque&lt; CompressedPIT * &gt; *</type>
       <name>delay_container</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_i_c_m_state.html</anchorfile>
@@ -6276,7 +6359,7 @@
       <anchor>a6e91ff26c599f6ac36da986416dfd523</anchor>
       <arglist>(cMessage *message)</arglist>
     </member>
-    <member kind="variable" protection="private">
+    <member kind="variable">
       <type>SICMState *</type>
       <name>pState</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_i_c_m_state_contex.html</anchorfile>
@@ -6294,6 +6377,13 @@
       <anchorfile>class_t_t_ethernet_model_1_1_s_i___c_m___i_n_i_t.html</anchorfile>
       <anchor>a064d26bbffa96943ebb895e0242ea765</anchor>
       <arglist>(SICM *sicm, FILE *f)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~SI_CM_INIT</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_s_i___c_m___i_n_i_t.html</anchorfile>
+      <anchor>abe26853a2e04c5b577b8cf2f2f993567</anchor>
+      <arglist>()</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -6598,6 +6688,13 @@
     <name>TTEthernetModel::SCState</name>
     <filename>class_t_t_ethernet_model_1_1_s_c_state.html</filename>
     <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~SCState</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
+      <anchor>a1ce9c77537167d50506e19348e976ec5</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>reaction</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
@@ -6647,24 +6744,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>vector&lt; int &gt; *</type>
-      <name>knownCMs</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
-      <anchor>a0fce4780751ff2642c0b534a23c4eed6</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
       <type>const char *</type>
       <name>CMs</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
       <anchor>a5ad1fdf470bd0e14917c5f6015507f1f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>cStringTokenizer *</type>
-      <name>tokenizer</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
-      <anchor>a079a0c99c3ba2221bcc86c595da22694</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -6815,10 +6898,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>int64_t</type>
+      <type>int32_t</type>
       <name>clock_corr</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
-      <anchor>af8d11dd293f176e5a13d18d7d04e6bd6</anchor>
+      <anchor>a30e094f545ee5479262603920c5d02f7</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -6892,13 +6975,6 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>multimap&lt; uint32_t, uint64_t &gt; *</type>
-      <name>container</name>
-      <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
-      <anchor>af0851f8cebcb531ed6b684b5d8c602b7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
       <type>std::map&lt; uint32_t, pair&lt; uint32_t, uint64_t &gt; &gt; *</type>
       <name>clock_stack</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_c_state.html</anchorfile>
@@ -6944,7 +7020,7 @@
       <anchor>a15c60a44653ce431a69775674d24f463</anchor>
       <arglist>(cMessage *message)</arglist>
     </member>
-    <member kind="variable" protection="private">
+    <member kind="variable">
       <type>SCState *</type>
       <name>pState</name>
       <anchorfile>class_t_t_ethernet_model_1_1_state_contex.html</anchorfile>
@@ -7635,6 +7711,13 @@
     <name>TTEthernetModel::SMState</name>
     <filename>class_t_t_ethernet_model_1_1_s_m_state.html</filename>
     <member kind="function" virtualness="virtual">
+      <type>virtual</type>
+      <name>~SMState</name>
+      <anchorfile>class_t_t_ethernet_model_1_1_s_m_state.html</anchorfile>
+      <anchor>a072676d1f925e0ee6cad2a7e987b3df7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
       <type>virtual void</type>
       <name>handleMessage</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_m_state.html</anchorfile>
@@ -7642,10 +7725,10 @@
       <arglist>(cMessage *message)</arglist>
     </member>
     <member kind="function">
-      <type>int</type>
+      <type>uint32_t</type>
       <name>getValue</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_m_state.html</anchorfile>
-      <anchor>a122b581427980d11a5205c6969a93efb</anchor>
+      <anchor>aba24737a1fe176766bf2daf00909ce25</anchor>
       <arglist>(uint32_t bitVector, uint32_t length)</arglist>
     </member>
     <member kind="function">
@@ -7810,10 +7893,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>int64_t</type>
+      <type>int32_t</type>
       <name>clock_corr</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_m_state.html</anchorfile>
-      <anchor>a3f69ca517a9aca535a1507798c31d974</anchor>
+      <anchor>a640a5f554af439cdc87a5511603838e7</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -7960,7 +8043,7 @@
       <anchor>a2b5bc9a16318ea2a72b825dda52e423c</anchor>
       <arglist>(cMessage *message)</arglist>
     </member>
-    <member kind="variable" protection="private">
+    <member kind="variable">
       <type>SMState *</type>
       <name>pState</name>
       <anchorfile>class_t_t_ethernet_model_1_1_s_m_state_contex.html</anchorfile>
@@ -8287,6 +8370,7 @@
     <filename>dir_d3c648cba0baa191ba5c49bd1b217feb.html</filename>
     <dir>api</dir>
     <dir>base</dir>
+    <dir>trafficsink</dir>
     <dir>trafficsource</dir>
   </compound>
   <compound kind="dir">
@@ -8499,6 +8583,13 @@
     <file>SMStates.h</file>
   </compound>
   <compound kind="dir">
+    <name>trafficsink</name>
+    <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/trafficsink/</path>
+    <filename>dir_dc7080bb72831fddf62dbcde247795b2.html</filename>
+    <file>TrafficSinkApp.cc</file>
+    <file>TrafficSinkApp.h</file>
+  </compound>
+  <compound kind="dir">
     <name>trafficsource</name>
     <path>/home/tillsteinbach/git/TTEthernetModel/src/applications/trafficsource/</path>
     <filename>dir_3ad50fdc357625b44e6f8972c2d997f3.html</filename>
@@ -8515,6 +8606,8 @@
     <filename>dir_8d204083f9d300dda59a72701f54b154.html</filename>
     <file>HelperFunctions.cc</file>
     <file>HelperFunctions.h</file>
+    <file>NEDFunctions.cc</file>
+    <file>NEDFunctions.h</file>
   </compound>
   <compound kind="page">
     <name>index</name>

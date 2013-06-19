@@ -10,6 +10,7 @@ var class_t_t_ethernet_model_1_1_s_i_c_m_state =
     [ "inSchedule2", "class_t_t_ethernet_model_1_1_s_i_c_m_state.html#aecf6d80260647c27c21da24f42e13c13", null ],
     [ "setBits", "class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a7ecff4894d30876be2c5a1fbfca8afeb", null ],
     [ "ca_compression_stack", "class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334", null ],
+    [ "ca_compression_stack_it", "class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a265128559b38aabd7b2cb644d044319b", null ],
     [ "caCompressedFrames", "class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abd434816cb46165a346d9524d6c1937d", null ],
     [ "clock_corr", "class_t_t_ethernet_model_1_1_s_i_c_m_state.html#aaf79714cb661e2627a9605892ae2a53a", null ],
     [ "clock_stack", "class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ae8fa37fe71191a3986acaf7f98cc5fbc", null ],

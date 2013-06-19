@@ -1,0 +1,5 @@
+<area shape="rect" id="node1" href="ttethernet.examples.small_network.Node1.html" title="Compound Module Node1" alt="" coords="149,83,221,111">
+<area shape="rect" id="node2" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="5,161,104,189">
+<area shape="rect" id="node4" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="128,161,243,189">
+<area shape="rect" id="node6" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="267,161,357,189">
+<area shape="rect" id="node8" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="132,6,239,34">

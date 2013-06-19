@@ -137,36 +137,38 @@ $(document).ready(function(){initNavTree('_s_m_state_contex_8h_source.html','');
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html">SMStateContex</a>{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a5fd469611e2d6a4e2f7f7ff7a5cb0c8b">   32</a></span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html">SMState</a> *<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a5fd469611e2d6a4e2f7f7ff7a5cb0c8b">pState</a>;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a942b5b0497b93dd6f87b8fe2ba80b0bd">   36</a></span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a942b5b0497b93dd6f87b8fe2ba80b0bd">SMStateContex</a>(){}</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#aff0f60548771141bbe867454cf44f5cf">   37</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#aff0f60548771141bbe867454cf44f5cf">~SMStateContex</a>(){}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a341ce1ec0878171e39d57acffa5e20da">   39</a></span>&#160;    <span class="keyword">virtual</span>  <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a341ce1ec0878171e39d57acffa5e20da">setState</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html">SMState</a> *firstState){</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a5fd469611e2d6a4e2f7f7ff7a5cb0c8b">pState</a>=firstState;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a2b5bc9a16318ea2a72b825dda52e423c">   43</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a2b5bc9a16318ea2a72b825dda52e423c">parseMessage</a>(cMessage *message){</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#aff0f60548771141bbe867454cf44f5cf">   37</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#aff0f60548771141bbe867454cf44f5cf">~SMStateContex</a>(){</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">delete</span>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a5fd469611e2d6a4e2f7f7ff7a5cb0c8b">pState</a>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a341ce1ec0878171e39d57acffa5e20da">   41</a></span>&#160;    <span class="keyword">virtual</span>  <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a341ce1ec0878171e39d57acffa5e20da">setState</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html">SMState</a> *firstState){</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a5fd469611e2d6a4e2f7f7ff7a5cb0c8b">pState</a>=firstState;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a5fd469611e2d6a4e2f7f7ff7a5cb0c8b">pState</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8d853687d3f2b9e27168bf30c0e1396e">handleMessage</a>(message);</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a2b5bc9a16318ea2a72b825dda52e423c">   45</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a2b5bc9a16318ea2a72b825dda52e423c">parseMessage</a>(cMessage *message){</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state_contex.html#a5fd469611e2d6a4e2f7f7ff7a5cb0c8b">pState</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8d853687d3f2b9e27168bf30c0e1396e">handleMessage</a>(message);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SMSTATECONTEX_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SMSTATECONTEX_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a></li><li class="navelem"><a class="el" href="dir_e91b5cc3279f6efa832a22015b9fa21e.html">synchronisation</a></li><li class="navelem"><a class="el" href="dir_a3d746f5aaea8714bbcad22c8a403a15.html">AS6802</a></li><li class="navelem"><a class="el" href="dir_60d23d85662ea75b9badaabe2765865c.html">SynchronisationMaster</a></li><li class="navelem"><a class="el" href="_s_m_state_contex_8h.html">SMStateContex.h</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:31 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:20 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -245,21 +245,21 @@ Private Attributes</h2></td></tr>
 
 <p>Constructor. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00021">21</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> = 0;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> = 0;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.setName(<span class="stringliteral">&quot;TT Messages&quot;</span>);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">char</span> strBuf[64];</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        snprintf(strBuf,64,<span class="stringliteral">&quot;RC Priority %d Messages&quot;</span>, i);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].setName(strBuf);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.setName(<span class="stringliteral">&quot;BE Messages&quot;</span>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.setName(<span class="stringliteral">&quot;PCF Messages&quot;</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00023">23</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> = 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.setName(<span class="stringliteral">&quot;TT Messages&quot;</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">char</span> strBuf[64];</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        snprintf(strBuf,64,<span class="stringliteral">&quot;RC Priority %d Messages&quot;</span>, i);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].setName(strBuf);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.setName(<span class="stringliteral">&quot;BE Messages&quot;</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.setName(<span class="stringliteral">&quot;PCF Messages&quot;</span>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -278,16 +278,16 @@ Private Attributes</h2></td></tr>
 
 <p>Destructor. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00037">37</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.clear();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00039">39</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.clear();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -316,12 +316,12 @@ Private Attributes</h2></td></tr>
 
 <p>Implementation of IPassiveQueue::addListener(). </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00058">58</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                                          {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::list&lt;IPassiveQueueListener*&gt;::iterator it = find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.begin(), <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end(), listener);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (it == <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end())</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.push_back(listener);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00060">60</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                                          {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::list&lt;IPassiveQueueListener*&gt;::iterator it = find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.begin(), <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end(), listener);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (it == <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end())</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.push_back(listener);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -348,16 +348,16 @@ Private Attributes</h2></td></tr>
 
 <p>Clears all queued packets and stored requests. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00376">376</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;{</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    {</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    }</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> = 0;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00382">382</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;{</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.clear();</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].clear();</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    }</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.clear();</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> = 0;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -384,10 +384,10 @@ Private Attributes</h2></td></tr>
 
 <p>Returns number of requested messages. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00360">360</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;{</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00366">366</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;{</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -422,109 +422,109 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00075">75</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;PCFin&quot;</span>))</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> *pcf = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a>*<span class="keyword">&gt;</span>(msg);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">if</span>(pcf){</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual sending time...">setTransparentClock</a>(pcf);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.insert(msg);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#abb9e957c0df6f82aebbbb3ecbc08446f" title="Signal that is emitted when the queue length of protocol control messages changes.">pcfQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.length());</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>))</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size()&gt;0){</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> = ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> + 1) % <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size());</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">//If we have an empty message allow other frame to be sent</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">if</span> (dynamic_cast&lt;TTBufferEmpty *&gt; (msg))</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>)</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359" title="this method is invoked when the underlying mac is idle.">requestPacket</a>();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keyword">delete</span> msg;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="comment">//Else send frame</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>)</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                EV &lt;&lt; <span class="stringliteral">&quot;There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.insert(msg);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.length());</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;RCin&quot;</span>))</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) msg))</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="comment">//Reset Bag</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a>*<span class="keyword">&gt;</span> (msg-&gt;getSenderModule());</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordflow">if</span> (rcBuffer)</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed" title="resets the bag for a destination gate.">resetBag</a>();</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> *pcf = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a>*<span class="keyword">&gt;</span> (msg);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordflow">if</span>(pcf){</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual sending time...">setTransparentClock</a>(pcf);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            }</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordtype">int</span> priority = msg-&gt;getSenderModule()-&gt;par(<span class="stringliteral">&quot;priority&quot;</span>).longValue();</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">if</span> (priority &gt; 0 &amp;&amp; priority &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>)</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[priority].insert(msg);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            }</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            {</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[0].insert(msg);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;Priority missing!&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            }</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="comment">//Frames arrived on in are best-effort frames</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="comment">// If there are framesRequested the MAC layer is currently idle</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) msg))</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        }</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.insert(msg);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.length());</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00077">77</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;PCFin&quot;</span>))</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> *pcf = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a>*<span class="keyword">&gt;</span>(msg);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span>(pcf){</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual sending time...">setTransparentClock</a>(pcf);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.insert(msg);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#abb9e957c0df6f82aebbbb3ecbc08446f" title="Signal that is emitted when the queue length of protocol control messages changes.">pcfQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa01659c8572a09479b84e4a760a11871" title="Queue for protocol control messages.">pcfQueue</a>.length());</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;TTin&quot;</span>))</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size()&gt;0){</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> = ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> + 1) % <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size());</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">//If we have an empty message allow other frame to be sent</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">if</span> (dynamic_cast&lt;TTBufferEmpty *&gt; (msg))</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a94831b378a881dd1677657884c75d359" title="this method is invoked when the underlying mac is idle.">requestPacket</a>();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keyword">delete</span> msg;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="comment">//Else send frame</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                EV &lt;&lt; <span class="stringliteral">&quot;There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.insert(msg);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.length());</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;RCin&quot;</span>))</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) msg))</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="comment">//Reset Bag</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a>*<span class="keyword">&gt;</span> (msg-&gt;getSenderModule());</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">if</span> (rcBuffer)</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed" title="resets the bag for a destination gate.">resetBag</a>();</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> *pcf = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a>*<span class="keyword">&gt;</span> (msg);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordflow">if</span>(pcf){</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual sending time...">setTransparentClock</a>(pcf);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="keywordtype">int</span> priority = msg-&gt;getSenderModule()-&gt;par(<span class="stringliteral">&quot;priority&quot;</span>).longValue();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <span class="keywordflow">if</span> (priority &gt; 0 &amp;&amp; priority &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>)</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[priority].insert(msg);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            }</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[0].insert(msg);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;Priority missing!&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="comment">//Frames arrived on in are best-effort frames</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="comment">// If there are framesRequested the MAC layer is currently idle</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a> &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) msg))</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.insert(msg);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a137bf29cc9b4914d8a6e896a03b19a6f">notifyListeners</a>();</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.length());</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -558,35 +558,39 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00211">211</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                                                        {</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.clear();</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">if</span>(ev.isGUI()){</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="comment">//TODO check why this does not work</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="comment">//getDisplayString().setTagArg(&quot;i2&quot;, 0, &quot;&quot;);</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="comment">//getDisplayString().setTagArg(&quot;tt&quot;, 0, &quot;&quot;);</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    std::string ttBuffersString = par(<span class="stringliteral">&quot;tt_buffers&quot;</span>).stdstringValue();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    std::vector&lt;std::string&gt; ttBufferPaths;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator.">split</a>(ttBuffersString,<span class="charliteral">&#39;,&#39;</span>,ttBufferPaths);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator ttBufferPath = ttBufferPaths.begin();</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            ttBufferPath!=ttBufferPaths.end();ttBufferPath++){</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00213">213</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                                                        {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.clear();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    std::string ttBuffersString = par(<span class="stringliteral">&quot;tt_buffers&quot;</span>).stdstringValue();</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    std::vector&lt;std::string&gt; ttBufferPaths;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <a class="code" href="_helper_functions_8cc.html#ade13b75125e1abc9b3c64dda41bd991f" title="Splits a string into a vector of strings by using the delimiter character as separator.">split</a>(ttBuffersString,<span class="charliteral">&#39;,&#39;</span>,ttBufferPaths);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;std::string&gt;::iterator ttBufferPath = ttBufferPaths.begin();</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            ttBufferPath!=ttBufferPaths.end();ttBufferPath++){</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">if</span>(!module){</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            module = findModuleWhereverInNode((*ttBufferPath).c_str(),<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        }</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keywordflow">if</span>(module){</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a> *ttBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a>*<span class="keyword">&gt;</span> (module);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">if</span>(ttBuffer){</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa915182c2ca1fa08c42d5bd7778e8049" title="Registers a time-triggered buffer that feeds the module.">registerTTBuffer</a>(ttBuffer);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="keywordflow">if</span>(findContainingNode(module)!=findContainingNode(<span class="keyword">this</span>)){</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                opp_error(<span class="stringliteral">&quot;Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?&quot;</span>, (*ttBufferPath).c_str(),</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                        findContainingNode(<span class="keyword">this</span>)-&gt;getFullName());</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            }</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        }</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="keywordflow">if</span>(ev.isGUI()){</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                ev&lt;&lt;<span class="stringliteral">&quot;Configuration problem: Module &quot;</span>&lt;&lt;(*ttBufferPath)&lt;&lt;<span class="stringliteral">&quot; could not be resolved or is no TT-Buffer!&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/excl3&quot;</span>);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;tt&quot;</span>, 0, <span class="stringliteral">&quot;WARNING: Configuration Problem outgoing TT-Buffer!&quot;</span>);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            }</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        }</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;}</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a> *ttBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_t_t_buffer.html" title="Base class for a time-triggered buffer class.">TTBuffer</a>*<span class="keyword">&gt;</span> (module);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                <span class="keywordflow">if</span>(ttBuffer){</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aa915182c2ca1fa08c42d5bd7778e8049" title="Registers a time-triggered buffer that feeds the module.">registerTTBuffer</a>(ttBuffer);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                    opp_error(<span class="stringliteral">&quot;Configuration problem of tt_buffers: Module: %s is no TT-Buffer!&quot;</span>, (*ttBufferPath).c_str());</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                }</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            }</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            opp_error(<span class="stringliteral">&quot;Configuration problem of tt_buffers: Module: %s could not be resolved!&quot;</span>, (*ttBufferPath).c_str());</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    }</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -613,15 +617,15 @@ Private Attributes</h2></td></tr>
 
 <p>Initialization of the module. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00048">48</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    cGate *physOutGate = getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;mac&quot;</span>)-&gt;gate(<span class="stringliteral">&quot;phys$o&quot;</span>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a> = physOutGate-&gt;findTransmissionChannel();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;ttQueueLength&quot;</span>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;beQueueLength&quot;</span>);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#abb9e957c0df6f82aebbbb3ecbc08446f" title="Signal that is emitted when the queue length of protocol control messages changes.">pcfQueueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;pcfQueueLength&quot;</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00050">50</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    cGate *physOutGate = getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;mac&quot;</span>)-&gt;gate(<span class="stringliteral">&quot;phys$o&quot;</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a> = physOutGate-&gt;findTransmissionChannel();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;ttQueueLength&quot;</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;beQueueLength&quot;</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#abb9e957c0df6f82aebbbb3ecbc08446f" title="Signal that is emitted when the queue length of protocol control messages changes.">pcfQueueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;pcfQueueLength&quot;</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -649,19 +653,19 @@ Private Attributes</h2></td></tr>
 <p>Returns true when there are no pending messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if all queues are empty. </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00365">365</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00371">371</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;{</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordtype">bool</span> empty = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.isEmpty();</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].isEmpty();</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    }</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.isEmpty();</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keywordflow">return</span> empty;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;{</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordtype">bool</span> empty = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.isEmpty();</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    {</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].isEmpty();</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    }</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    empty &amp;= <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.isEmpty();</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordflow">return</span> empty;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -697,49 +701,49 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if transmission is allowed else false </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00292">292</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00298">298</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;{</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>)</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    {</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    }</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="comment">//If there are no ttBuffers everything is fine</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size() == 0)</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    {</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    }</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *scheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="comment">//SimTime sendTime = (message-&gt;getBitLength()+INTERFRAME_GAP_BITS)/txRate;</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    SimTime sendTime = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>-&gt;calculateDuration(message);</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="comment">//Don&#39;t know if that is right, but it works!</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>-&gt;getNominalDatarate();</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sendTicks = ceil((sendTime / scheduler-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>)).dbl());</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> startTicks = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>[<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a>]-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue();</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> endTicks = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>[<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a>]-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>).longValue();</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="comment">//Send Window Start is in next cycle</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keywordflow">if</span> (scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>() &gt; startTicks)</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    {</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordtype">long</span> cycleTicks = scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        startTicks += cycleTicks;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        endTicks += cycleTicks;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    }</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="comment">//Send Window End is in next cycle</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>() &gt; endTicks)</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    {</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        endTicks += scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    }</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="comment">//TODO: Perhaps more complex calculations needed?</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordflow">if</span> ((scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>() + sendTicks) &gt;= startTicks)</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;{</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>)</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    }</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="comment">//If there are no ttBuffers everything is fine</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size() == 0)</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a> *scheduler = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*) getParentModule()-&gt;getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="comment">//SimTime sendTime = (message-&gt;getBitLength()+INTERFRAME_GAP_BITS)/txRate;</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    SimTime sendTime = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>-&gt;calculateDuration(message);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="comment">//Don&#39;t know if that is right, but it works!</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#aee61f7bffa323acc06c45781b3596284" title="Outgoing Channel used to calculate transmission duration.">outChannel</a>-&gt;getNominalDatarate();</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sendTicks = ceil((sendTime / scheduler-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>)).dbl());</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> startTicks = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>[<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a>]-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue();</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> endTicks = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>[<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a>]-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>).longValue();</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="comment">//Send Window Start is in next cycle</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keywordflow">if</span> (scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>() &gt; startTicks)</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    {</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordtype">long</span> cycleTicks = scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        startTicks += cycleTicks;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        endTicks += cycleTicks;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="comment">//Send Window End is in next cycle</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>() &gt; endTicks)</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    {</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;transmission not allowed!&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    }</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;}</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        endTicks += scheduler-&gt;par(<span class="stringliteral">&quot;cycle_ticks&quot;</span>).longValue();</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    }</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="comment">//TODO: Perhaps more complex calculations needed?</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordflow">if</span> ((scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>() + sendTicks) &gt;= startTicks)</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    {</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;transmission not allowed!&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -764,13 +768,13 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00069">69</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00071">71</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">for</span> (std::list&lt;IPassiveQueueListener*&gt;::iterator it = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.begin(); it != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end(); ++it)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        (*it)-&gt;packetEnqueued(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">for</span> (std::list&lt;IPassiveQueueListener*&gt;::iterator it = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.begin(); it != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end(); ++it)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        (*it)-&gt;packetEnqueued(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -798,39 +802,39 @@ Private Attributes</h2></td></tr>
 
 <p>Registers a time-triggered buffer that feeds the module. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00179">179</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00181">181</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00211">handleParameterChange()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;{</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    Enter_Method(<span class="stringliteral">&quot;registerTTBuffer(%s)&quot;</span>, ttBuffer-&gt;getName());</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    uint32_t sendWindowStart = ttBuffer-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">for</span> (std::vector&lt;TTBuffer*&gt;::iterator buffer = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.begin(); buffer != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end();)</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    {</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        uint32_t buf_sendWindowStart = (*buffer)-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue();</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">if</span> (buffer == <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end() || buf_sendWindowStart &gt; sendWindowStart)</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        {</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.insert(buffer, ttBuffer);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="comment">//Now doublecheck that the schedule is not overlapping for this port</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keywordflow">for</span> (std::vector&lt;TTBuffer*&gt;::iterator buffer2 = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.begin(); buffer2 != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end();)</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *tmpBuffer = *buffer2;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                ++buffer2;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <span class="keywordflow">if</span> (buffer2 != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end() &amp;&amp; (tmpBuffer-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>).longValue() &gt; (*buffer2)-&gt;par(</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                        <span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue()))</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                    opp_error(<span class="stringliteral">&quot;Port cannot be scheduled due to overlapping schedules: %s (End: %d) and %s (Start: %d)&quot;</span>, tmpBuffer-&gt;getName(),</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                            tmpBuffer-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>).longValue(),</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                            (*buffer2)-&gt;getName(),</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                            (*buffer2)-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue());</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                }</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            }</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        ++buffer;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="comment">//This should only happen if buffer was empty</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.push_back(ttBuffer);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00213">handleParameterChange()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;{</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    Enter_Method(<span class="stringliteral">&quot;registerTTBuffer(%s)&quot;</span>, ttBuffer-&gt;getName());</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    uint32_t sendWindowStart = ttBuffer-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordflow">for</span> (std::vector&lt;TTBuffer*&gt;::iterator buffer = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.begin(); buffer != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end();)</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        uint32_t buf_sendWindowStart = (*buffer)-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue();</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">if</span> (buffer == <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end() || buf_sendWindowStart &gt; sendWindowStart)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        {</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.insert(buffer, ttBuffer);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            <span class="comment">//Now doublecheck that the schedule is not overlapping for this port</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">for</span> (std::vector&lt;TTBuffer*&gt;::iterator buffer2 = <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.begin(); buffer2 != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end();)</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> *tmpBuffer = *buffer2;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                ++buffer2;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                <span class="keywordflow">if</span> (buffer2 != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.end() &amp;&amp; (tmpBuffer-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>).longValue() &gt; (*buffer2)-&gt;par(</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                        <span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue()))</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    opp_error(<span class="stringliteral">&quot;Port cannot be scheduled due to overlapping schedules: %s (End: %d) and %s (Start: %d)&quot;</span>, tmpBuffer-&gt;getName(),</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                            tmpBuffer-&gt;par(<span class="stringliteral">&quot;sendWindowEnd&quot;</span>).longValue(),</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                            (*buffer2)-&gt;getName(),</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                            (*buffer2)-&gt;par(<span class="stringliteral">&quot;sendWindowStart&quot;</span>).longValue());</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        ++buffer;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="comment">//This should only happen if buffer was empty</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.push_back(ttBuffer);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -858,12 +862,12 @@ Private Attributes</h2></td></tr>
 
 <p>Implementation of IPassiveQueue::removeListener(). </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00063">63</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                                             {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::list&lt;IPassiveQueueListener*&gt;::iterator it = find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.begin(), <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end(), listener);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (it != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end())</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.erase(it);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00065">65</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                                             {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::list&lt;IPassiveQueueListener*&gt;::iterator it = find(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.begin(), <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end(), listener);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (it != <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.end())</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a8b02dfe81ab36f3c2cbf7988f04067cb" title="List of TTBuffers.">listeners</a>.erase(it);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -891,59 +895,59 @@ Private Attributes</h2></td></tr>
 <p>this method is invoked when the underlying mac is idle. </p>
 <p>When this method is invoked the module sends a new message when there is one. Else it saves the state and sends the message immediately when it is received. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00240">240</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00246">246</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;{</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    Enter_Method(<span class="stringliteral">&quot;requestPacket()&quot;</span>);</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="comment">//Feed the MAC layer with the next frame</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>++;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="comment">//TTFrames</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.isEmpty())</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        cMessage *msg = (cMessage*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.pop();</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.length());</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="comment">//TODO Update buffers:</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size()&gt;0){</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> + 1) % <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size();</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="comment">//RCFrames</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Returns true when there are no pending messages.">isEmpty</a>() &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].front()))</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        {</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            EtherFrame *message = (EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].pop();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="comment">//Reset Bag</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a>*<span class="keyword">&gt;</span> (message-&gt;getSenderModule());</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <span class="keywordflow">if</span> (rcBuffer)</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed" title="resets the bag for a destination gate.">resetBag</a>();</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> *pcf = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a>*<span class="keyword">&gt;</span> (message);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">if</span>(pcf){</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual sending time...">setTransparentClock</a>(pcf);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            }</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            send(message, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        }</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    }</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="comment">//BEFrames</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.isEmpty() &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.front()))</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    {</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        cMessage* message = (cMessage*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.pop();</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        send(message, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.length());</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    }</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;{</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    Enter_Method(<span class="stringliteral">&quot;requestPacket()&quot;</span>);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="comment">//Feed the MAC layer with the next frame</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>++;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="comment">//TTFrames</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.isEmpty())</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        cMessage *msg = (cMessage*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.pop();</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a1a9507a65aff479ff4b61888c68270ec" title="Signal that is emitted when the queue length of time-triggered messages changes.">ttQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a42f484692a92cd55ef9c1962f69b1aa7" title="Queue for TT-Messages.">ttQueue</a>.length());</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="comment">//TODO Update buffers:</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size()&gt;0){</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> = (<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a49908d6f6f23066f82ba78702f8dcb63" title="Current position of the next Buffer (action time) in the ttBuffers vector.">ttBuffersPos</a> + 1) % <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a25d691c591e2153d28719e3890898886" title="Vector of TTBuffers.">ttBuffers</a>.size();</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        send(msg, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="comment">//RCFrames</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="_t_t_e4_i_n_e_t_defs_8h.html#a5cb5b8c633a00972c5fe0da72112b2de" title="Maximum number of priorities allowed for rate-constrained messages.">NUM_RC_PRIORITIES</a>; i++)</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    {</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a6d424bc0883c8e7550dc0e796bf0c8cb" title="Returns true when there are no pending messages.">isEmpty</a>() &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].front()))</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            EtherFrame *message = (EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a526c96163c69076a4692e84af2e0dadc" title="Dedicated queue for each priority of rate-constrained messages.">rcQueue</a>[i].pop();</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="comment">//Reset Bag</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a> *rcBuffer = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html" title="Base class for a rate-constrained buffer class.">RCBuffer</a>*<span class="keyword">&gt;</span> (message-&gt;getSenderModule());</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">if</span> (rcBuffer)</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                rcBuffer-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#aa1c315bc29d6e0142ca2083963dfa8ed" title="resets the bag for a destination gate.">resetBag</a>();</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a> *pcf = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html">PCFrame</a>*<span class="keyword">&gt;</span> (message);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordflow">if</span>(pcf){</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a0e77770f63e3aa9304a50c38c7a0f51c" title="Sets the transparent clock field in a protocol control frame according to the actual sending time...">setTransparentClock</a>(pcf);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            send(message, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        }</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    }</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="comment">//BEFrames</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.isEmpty() &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad1c852f0d04c6d14b680f6d7bc76683d" title="Helper function to check whether a Messages is allowed to be transmitted.">isTransmissionAllowed</a>((EtherFrame*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.front()))</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638" title="Number of frames that were requested from lower layer.">framesRequested</a>--;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        cMessage* message = (cMessage*) <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.pop();</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        send(message, gateBaseId(<span class="stringliteral">&quot;out&quot;</span>));</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        emit(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#afa7b69c7f2d89563e55286cf355d41b5" title="Signal that is emitted when the queue length of best-effort messages changes.">beQueueLengthSignal</a>, <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_output.html#a2746167140e2ecf8fdccc72edbc06419" title="Queue for best-effort messages.">beQueue</a>.length());</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -977,34 +981,34 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00334">334</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
+<p>Definition at line <a class="el" href="_t_t_e_output_8cc_source.html#l00340">340</a> of file <a class="el" href="_t_t_e_output_8cc_source.html">TTEOutput.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                                               {</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    uint64_t transparentClock = pcf-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a080d6a6fa849d7fffd072751c7817b68">getTransparent_clock</a>();</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="comment">//Add static delay for this port</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    transparentClock+=<a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(getParentModule()-&gt;par(<span class="stringliteral">&quot;static_tx_delay&quot;</span>).doubleValue());</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="comment">//Add dynamic delay for the device</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    cArray parlist = pcf-&gt;getParList();</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordtype">long</span> start = -1;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">if</span>(parameter){</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                start = parameter-&gt;longValue();</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            }</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        }</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    }</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keywordflow">if</span>(start &gt;= 0){</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>* scheduler = ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*)getParentModule()-&gt;getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>));</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        transparentClock+=<a class="code" href="_helper_functions_8cc.html#ad639e4b71630a76730add8ddf0337d12" title="Converts value in ticks to the transparent clock unit that is ns*0x10000.">ticksToTransparentClock</a>((scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>()-start),scheduler-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    }</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="comment">//Set new transparent clock</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    pcf-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a0d73d91af4fb078b2e625ccef226a434">setTransparent_clock</a>(transparentClock);</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                                               {</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    uint64_t transparentClock = pcf-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a080d6a6fa849d7fffd072751c7817b68">getTransparent_clock</a>();</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="comment">//Add static delay for this port</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    transparentClock+=<a class="code" href="_helper_functions_8cc.html#ad17b18302fcd707dc57bb68106c622da" title="Converts value in seconds to the transparent clock unit that is ns*0x10000.">secondsToTransparentClock</a>(getParentModule()-&gt;par(<span class="stringliteral">&quot;static_tx_delay&quot;</span>).doubleValue());</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="comment">//Add dynamic delay for the device</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    cArray parlist = pcf-&gt;getParList();</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordtype">long</span> start = -1;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;parlist.size();i++){</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        cMsgPar *parameter = <span class="keyword">dynamic_cast&lt;</span>cMsgPar*<span class="keyword">&gt;</span>(parlist.get(i));</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        <span class="keywordflow">if</span>(parameter){</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            <span class="keywordflow">if</span>(strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;received_total&quot;</span>,15)==0 || strncmp(parameter-&gt;getName(),<span class="stringliteral">&quot;created_total&quot;</span>,15)==0){</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                start = parameter-&gt;longValue();</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        }</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    }</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="keywordflow">if</span>(start &gt;= 0){</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>* scheduler = ((<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html" title="Scheduler module.">TTEScheduler</a>*)getParentModule()-&gt;getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>));</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        transparentClock+=<a class="code" href="_helper_functions_8cc.html#ad639e4b71630a76730add8ddf0337d12" title="Converts value in ticks to the transparent clock unit that is ns*0x10000.">ticksToTransparentClock</a>((scheduler-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>()-start),scheduler-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue());</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="comment">//Set new transparent clock</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    pcf-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_frame.html#a0d73d91af4fb078b2e625ccef226a434">setTransparent_clock</a>(transparentClock);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1031,7 +1035,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00071">71</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00376">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00365">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00021">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00037">~TTEOutput()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00382">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00371">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00023">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00039">~TTEOutput()</a>.</p>
 
 </div>
 </div>
@@ -1057,7 +1061,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00105">105</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00048">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00050">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>.</p>
 
 </div>
 </div>
@@ -1083,7 +1087,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00055">55</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00376">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00360">getNumPendingRequests()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00021">TTEOutput()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00382">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00366">getNumPendingRequests()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00023">TTEOutput()</a>.</p>
 
 </div>
 </div>
@@ -1110,7 +1114,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00090">90</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00058">addListener()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00069">notifyListeners()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00063">removeListener()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00060">addListener()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00071">notifyListeners()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00065">removeListener()</a>.</p>
 
 </div>
 </div>
@@ -1136,7 +1140,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00051">51</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00048">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00292">isTransmissionAllowed()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00050">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00298">isTransmissionAllowed()</a>.</p>
 
 </div>
 </div>
@@ -1162,7 +1166,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00076">76</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00021">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00037">~TTEOutput()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00023">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00039">~TTEOutput()</a>.</p>
 
 </div>
 </div>
@@ -1188,7 +1192,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00109">109</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00048">initialize()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00050">initialize()</a>.</p>
 
 </div>
 </div>
@@ -1214,7 +1218,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00066">66</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00376">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00365">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00021">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00037">~TTEOutput()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00382">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00371">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00023">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00039">~TTEOutput()</a>.</p>
 
 </div>
 </div>
@@ -1241,7 +1245,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00083">83</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00211">handleParameterChange()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00292">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00179">registerTTBuffer()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00213">handleParameterChange()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00298">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00181">registerTTBuffer()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>.</p>
 
 </div>
 </div>
@@ -1267,7 +1271,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00095">95</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00292">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00021">TTEOutput()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00298">isTransmissionAllowed()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00023">TTEOutput()</a>.</p>
 
 </div>
 </div>
@@ -1294,7 +1298,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00061">61</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00376">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00365">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00021">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00037">~TTEOutput()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00382">clear()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00371">isEmpty()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00023">TTEOutput()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00039">~TTEOutput()</a>.</p>
 
 </div>
 </div>
@@ -1320,7 +1324,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_t_t_e_output_8h_source.html#l00100">100</a> of file <a class="el" href="_t_t_e_output_8h_source.html">TTEOutput.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00075">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00048">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00240">requestPacket()</a>.</p>
+<p>Referenced by <a class="el" href="_t_t_e_output_8cc_source.html#l00077">handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00050">initialize()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00246">requestPacket()</a>.</p>
 
 </div>
 </div>
@@ -1334,7 +1338,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_output.html">TTEOutput</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:21 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

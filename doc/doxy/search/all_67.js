@@ -1,6 +1,7 @@
 var searchData=
 [
   ['gatebyfullpath',['gateByFullPath',['../_helper_functions_8cc.html#af871fed61f87700e83e5ec4a43cb388b',1,'gateByFullPath(std::string &amp;path):&#160;HelperFunctions.cc'],['../_helper_functions_8h.html#af871fed61f87700e83e5ec4a43cb388b',1,'gateByFullPath(std::string &amp;path):&#160;HelperFunctions.cc']]],
+  ['gatebyshortpath',['gateByShortPath',['../_helper_functions_8cc.html#ae77e740a642eb88ef1d7efd0b81edac1',1,'gateByShortPath(std::string &amp;nameAndGate, cModule *from):&#160;HelperFunctions.cc'],['../_helper_functions_8h.html#ae77e740a642eb88ef1d7efd0b81edac1',1,'gateByShortPath(std::string &amp;nameAndGate, cModule *from):&#160;HelperFunctions.cc']]],
   ['getaction_5ftime',['getAction_time',['../class_t_t_ethernet_model_1_1_scheduler_action_time_event.html#ae1923af8a78544d569484f5d4d63a008',1,'TTEthernetModel::SchedulerActionTimeEvent']]],
   ['getbitposition',['getBitPosition',['../class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a90168898aa701dd5f03ec5d9acf55969',1,'TTEthernetModel::HICMState::getBitPosition()'],['../class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a61696f76b2324100f753c81d1142087b',1,'TTEthernetModel::SICMState::getBitPosition()']]],
   ['getcount',['getCount',['../class_t_t_ethernet_model_1_1_tic_toc.html#a155850d4af983d115e1995ee0a8cf4a0',1,'TTEthernetModel::TicToc']]],
@@ -36,5 +37,5 @@ var searchData=
   ['gettransmitcallback',['getTransmitCallback',['../class_t_t_ethernet_model_1_1_buffer.html#ab8f416aca0c0f61d460896f85b39e252',1,'TTEthernetModel::Buffer']]],
   ['gettransparent_5fclock',['getTransparent_clock',['../class_t_t_ethernet_model_1_1_p_c_frame.html#a080d6a6fa849d7fffd072751c7817b68',1,'TTEthernetModel::PCFrame']]],
   ['gettype',['getType',['../class_t_t_ethernet_model_1_1_p_c_frame.html#a5f200d7348c2a117363c4d85badd5fe7',1,'TTEthernetModel::PCFrame']]],
-  ['getvalue',['getValue',['../class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a539aefc6d5a70e26e1c0b8fce8d3d528',1,'TTEthernetModel::HICMState::getValue()'],['../class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a8f7754347eeb6ddf884ed2efe4b21193',1,'TTEthernetModel::SICMState::getValue()'],['../class_t_t_ethernet_model_1_1_s_c_state.html#ac13511bbcc17a3cf65099dd97ef38858',1,'TTEthernetModel::SCState::getValue()'],['../class_t_t_ethernet_model_1_1_s_m_state.html#a122b581427980d11a5205c6969a93efb',1,'TTEthernetModel::SMState::getValue()']]]
+  ['getvalue',['getValue',['../class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a539aefc6d5a70e26e1c0b8fce8d3d528',1,'TTEthernetModel::HICMState::getValue()'],['../class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a8f7754347eeb6ddf884ed2efe4b21193',1,'TTEthernetModel::SICMState::getValue()'],['../class_t_t_ethernet_model_1_1_s_c_state.html#ac13511bbcc17a3cf65099dd97ef38858',1,'TTEthernetModel::SCState::getValue()'],['../class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25',1,'TTEthernetModel::SMState::getValue()']]]
 ];

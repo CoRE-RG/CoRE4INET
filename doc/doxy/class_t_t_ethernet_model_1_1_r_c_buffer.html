@@ -295,8 +295,10 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00031">31</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    cancelAndDelete(<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;getOwner()==<span class="keyword">this</span>){</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        cancelAndDelete(<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -332,56 +334,56 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00055">55</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#a9f63a30295ca896641a180e1a5722c95" title="Is called when a new Frame is received in the buffer.">CTBuffer::handleMessage</a>(msg);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size() &gt; 0)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a>)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordflow">if</span>(outgoingMessage){</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> = 0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="comment">//Send Message</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator dgate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); dgate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++dgate)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        sendDirect(outgoingMessage-&gt;dup(),0,0, *dgate);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    <span class="keywordflow">if</span>(gate(<span class="stringliteral">&quot;out&quot;</span>)-&gt;isConnected()){</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        send(outgoingMessage-&gt;dup(),<span class="stringliteral">&quot;out&quot;</span>);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    <span class="keyword">delete</span> outgoingMessage;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>) &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span> (outgoingMessage)</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> = 0;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="comment">//Send Message</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++gate)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    sendDirect(outgoingMessage-&gt;dup(), *gate);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="keyword">delete</span> outgoingMessage;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00057">57</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#a9f63a30295ca896641a180e1a5722c95" title="Is called when a new Frame is received in the buffer.">CTBuffer::handleMessage</a>(msg);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size() &gt; 0)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a>)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordflow">if</span>(outgoingMessage){</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> = 0;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    <span class="comment">//Send Message</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator dgate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); dgate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++dgate)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                        sendDirect(outgoingMessage-&gt;dup(),0,0, *dgate);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    <span class="keywordflow">if</span>(gate(<span class="stringliteral">&quot;out&quot;</span>)-&gt;isConnected()){</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        send(outgoingMessage-&gt;dup(),<span class="stringliteral">&quot;out&quot;</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    <span class="keyword">delete</span> outgoingMessage;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>) &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#aa1d4eb4debc0b0769c57f897d5726a55" title="Wrapper function arround dequeue().">getFrame</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">if</span> (outgoingMessage)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> = 0;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="comment">//Send Message</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordflow">for</span> (std::list&lt;cGate*&gt;::iterator gate = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.begin(); gate != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.end(); ++gate)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    sendDirect(outgoingMessage-&gt;dup(), *gate);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keyword">delete</span> outgoingMessage;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a3100b00349614e1133c9dbef3de05ef3" title="Boolean indicating the bag already expired.">bagExpired</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -417,12 +419,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#ac71ac70a5cfebd3e20242558e10647ca">TTEthernetModel::CTBuffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00106">106</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                                                       {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#ac71ac70a5cfebd3e20242558e10647ca" title="Indicates a parameter has changed.">CTBuffer::handleParameterChange</a>(parname);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a745bd5c895c3f8c974e8650fda2b2c15">setTimer</a>(par(<span class="stringliteral">&quot;bag&quot;</span>).doubleValue());</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00108">108</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                                                       {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_c_t_buffer.html#ac71ac70a5cfebd3e20242558e10647ca" title="Indicates a parameter has changed.">CTBuffer::handleParameterChange</a>(parname);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html#a745bd5c895c3f8c974e8650fda2b2c15">setTimer</a>(par(<span class="stringliteral">&quot;bag&quot;</span>).doubleValue());</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -458,16 +460,16 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#ac606d7037af7ce8e80ee115e15702ac6">TTEthernetModel::Buffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00044">44</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac606d7037af7ce8e80ee115e15702ac6" title="Initializes the module.">CTBuffer::initialize</a>(stage);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span>(stage==0){</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a2fb753af35fa839f02e0435cdc496878">setDestinationGate</a>(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">//Update displaystring</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00046">46</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac606d7037af7ce8e80ee115e15702ac6" title="Initializes the module.">CTBuffer::initialize</a>(stage);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span>(stage==0){</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_scheduler_event.html#a2fb753af35fa839f02e0435cdc496878">setDestinationGate</a>(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="comment">//Update displaystring</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -497,13 +499,13 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade">TTEthernetModel::Buffer</a>.</p>
 
-<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00036">36</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">CTBuffer::numInitStages</a>()&gt;1)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">CTBuffer::numInitStages</a>();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00038">38</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
+<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">CTBuffer::numInitStages</a>()&gt;1)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a1d435625f8dd05ea15fde3eb29922ade" title="Returns the numer of initializaiton stages this module needs.">CTBuffer::numInitStages</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -531,28 +533,28 @@ Additional Inherited Members</h2></td></tr>
 <p>resets the bag for a destination gate. </p>
 <p>This method must be invoked only once by each destination gate to indicate the message left the interface. The method executes the transmit callbacks and registers a <a class="el" href="class_t_t_ethernet_model_1_1_scheduler_timer_event.html" title="Class generated from scheduler/SchedulerMessageEvents.msg by opp_msgc.">SchedulerTimerEvent</a> that indicates the beginning of a new bag </p>
 
-<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00112">112</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
+<p>Definition at line <a class="el" href="_r_c_buffer_8cc_source.html#l00114">114</a> of file <a class="el" href="_r_c_buffer_8cc_source.html">RCBuffer.cc</a>.</p>
 
-<p>Referenced by <a class="el" href="_s_c_states_8cc_source.html#l00199">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00203">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_t_t_e_application_base_8cc_source.html#l00029">TTEthernetModel::TTEApplicationBase::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00866">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00207">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00204">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l01009">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01652">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00589">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00506">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00532">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02325">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01136">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03101">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01115">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01554">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03923">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01510">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02124">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02403">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02102">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02609">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02373">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l03142">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00075">TTEthernetModel::TTEOutput::handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00240">TTEthernetModel::TTEOutput::requestPacket()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    Enter_Method(<span class="stringliteral">&quot;resetBag()&quot;</span>);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">//This is the moment when the message was transmitted execute transmit callbacks if there are some</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.begin();</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end(); ++iter){</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        iter-&gt;first-&gt;executeCallback(iter-&gt;second);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">//Set icon:</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/hourglass&quot;</span>);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a>++;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size())</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    {</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="comment">//Reregister scheduler</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        tteScheduler-&gt;registerEvent(<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
+<p>Referenced by <a class="el" href="_s_c_states_8cc_source.html#l00238">TTEthernetModel::SC_INTEGRATE::handleMessage()</a>, <a class="el" href="_t_t_e_application_base_8cc_source.html#l00031">TTEthernetModel::TTEApplicationBase::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00208">TTEthernetModel::HI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00207">TTEthernetModel::SI_CM_INTEGRATE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00208">TTEthernetModel::SM_INTEGRATE::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l00873">TTEthernetModel::HI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00988">TTEthernetModel::SC_STABLE::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l00587">TTEthernetModel::SM_STABLE::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l00535">TTEthernetModel::SI_CM_STABLE::handleMessage()</a>, <a class="el" href="_s_c_states_8cc_source.html#l00504">TTEthernetModel::SC_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l01661">TTEthernetModel::HI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01134">TTEthernetModel::SM_UNSYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01118">TTEthernetModel::SI_CM_UNSYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l02338">TTEthernetModel::HI_CM_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l01553">TTEthernetModel::SM_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l01513">TTEthernetModel::SI_CM_SYNC::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03118">TTEthernetModel::HI_CM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02119">TTEthernetModel::SM_FLOOD::handleMessage()</a>, <a class="el" href="_h_i_c_m_states_8cc_source.html#l03944">TTEthernetModel::HI_CM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02105">TTEthernetModel::SI_CM_ENABLED::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02511">TTEthernetModel::SM_WAIT_4_CYCLE_START_CS::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l02825">TTEthernetModel::SM_TENTATIVE_SYNC::handleMessage()</a>, <a class="el" href="_s_i_c_m_states_8cc_source.html#l02376">TTEthernetModel::SI_CM_WAIT_4_IN::handleMessage()</a>, <a class="el" href="_s_m_states_8cc_source.html#l03362">TTEthernetModel::SM_WAIT_4_CYCLE_START::handleMessage()</a>, <a class="el" href="_t_t_e_output_8cc_source.html#l00077">TTEthernetModel::TTEOutput::handleMessage()</a>, and <a class="el" href="_t_t_e_output_8cc_source.html#l00246">TTEthernetModel::TTEOutput::requestPacket()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    Enter_Method(<span class="stringliteral">&quot;resetBag()&quot;</span>);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="comment">//This is the moment when the message was transmitted execute transmit callbacks if there are some</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.begin();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end(); ++iter){</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        iter-&gt;first-&gt;executeCallback(iter-&gt;second);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="comment">//Set icon:</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/hourglass&quot;</span>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a>++;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#a209f46ba8e8256c356e633926412d29b" title="Number of reset messages by the destination Gates.">numReset</a> == <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ac648d2729e20841d94b3abee8c999462" title="Stores the Gates to that the messages are delivered.">destinationGates</a>.size())</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="comment">//Reregister scheduler</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()-&gt;getSubmodule(<span class="stringliteral">&quot;tteScheduler&quot;</span>);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        tteScheduler-&gt;registerEvent(<a class="code" href="class_t_t_ethernet_model_1_1_r_c_buffer.html#ae4ea236625d88fa133564931fc34ea01" title="The timer Message is stored for reusage purpose.">timerMessage</a>);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -579,7 +581,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8h_source.html#l00044">44</a> of file <a class="el" href="_r_c_buffer_8h_source.html">RCBuffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00055">handleMessage()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00025">RCBuffer()</a>.</p>
+<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00057">handleMessage()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00025">RCBuffer()</a>.</p>
 
 </div>
 </div>
@@ -606,7 +608,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8h_source.html#l00051">51</a> of file <a class="el" href="_r_c_buffer_8h_source.html">RCBuffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00055">handleMessage()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00112">resetBag()</a>.</p>
+<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00057">handleMessage()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00114">resetBag()</a>.</p>
 
 </div>
 </div>
@@ -632,7 +634,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_r_c_buffer_8h_source.html#l00056">56</a> of file <a class="el" href="_r_c_buffer_8h_source.html">RCBuffer.h</a>.</p>
 
-<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00106">handleParameterChange()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00044">initialize()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00025">RCBuffer()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00112">resetBag()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00031">~RCBuffer()</a>.</p>
+<p>Referenced by <a class="el" href="_r_c_buffer_8cc_source.html#l00108">handleParameterChange()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00046">initialize()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00025">RCBuffer()</a>, <a class="el" href="_r_c_buffer_8cc_source.html#l00114">resetBag()</a>, and <a class="el" href="_r_c_buffer_8cc_source.html#l00031">~RCBuffer()</a>.</p>
 
 </div>
 </div>
@@ -646,7 +648,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_r_c_buffer.html">RCBuffer</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:21 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

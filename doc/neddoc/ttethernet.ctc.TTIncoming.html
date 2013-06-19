@@ -19,13 +19,13 @@ timer message (<a href="SchedulerActionTimeEvent.html">SchedulerActionTimeEvent<
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.ctc.TTIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="188,83,279,111">
-<area shape="rect" id="node2" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="5,6,77,34">
-<area shape="rect" id="node5" href="ttethernet.examples.rt_tictoc.Tic.html" title="Compound Module Tic" alt="" coords="101,6,173,34">
-<area shape="rect" id="node7" href="ttethernet.examples.rt_tictoc.Toc.html" title="Compound Module Toc" alt="" coords="197,6,269,34">
-<area shape="rect" id="node9" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="293,6,365,34">
-<area shape="rect" id="node11" href="ttethernet.examples.small_network.Unit2.html" title="Compound Module Unit2" alt="" coords="389,6,461,34">
-<area shape="rect" id="node13" href="ttethernet.examples.small_network.Unit3.html" title="Compound Module Unit3" alt="" coords="485,6,557,34">
+<img src="ttethernet.ctc.TTIncoming-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="284,83,375,111">
+<area shape="rect" id="node2" href="ttethernet.examples.small_network.Node1.html" title="Compound Module Node1" alt="" coords="5,6,77,34">
+<area shape="rect" id="node4" href="ttethernet.examples.small_network.Node2.html" title="Compound Module Node2" alt="" coords="101,6,173,34">
+<area shape="rect" id="node6" href="ttethernet.examples.small_network.Node3.html" title="Compound Module Node3" alt="" coords="197,6,269,34">
+<area shape="rect" id="node8" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="293,6,365,34">
+<area shape="rect" id="node11" href="ttethernet.examples.rt_tictoc.Tic.html" title="Compound Module Tic" alt="" coords="389,6,461,34">
+<area shape="rect" id="node13" href="ttethernet.examples.rt_tictoc.Toc.html" title="Compound Module Toc" alt="" coords="485,6,557,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -61,6 +61,45 @@ Unresolved types are missing from the diagram. Click <a href="full-ned-inheritan
       <th class="type">Type</th>
       <th class="description">Description</th>
    </tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Node1.html">Node1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>unit1: configuration in unit1.ini.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Node2.html">Node2</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>unit2: configuration in unit2.ini.</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.small_network.Node3.html">Node3</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>unit3: configuration in unit3.ini.</p>
+
+   </td>
+</tr>
 <tr>
    <td>
 <a href="ttethernet.examples.rt_tictoc.Switch1.html">Switch1</a>
@@ -115,45 +154,6 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
 
    </td>
 </tr>
-<tr>
-   <td>
-<a href="ttethernet.examples.small_network.Unit1.html">Unit1</a>
-   </td>
-   <td>
-<i>compound&nbsp;module</i>
-   </td>
-   <td>
-
-<p>unit1: configuration in unit1.ini.</p>
-
-   </td>
-</tr>
-<tr>
-   <td>
-<a href="ttethernet.examples.small_network.Unit2.html">Unit2</a>
-   </td>
-   <td>
-<i>compound&nbsp;module</i>
-   </td>
-   <td>
-
-<p>unit2: configuration in unit2.ini.</p>
-
-   </td>
-</tr>
-<tr>
-   <td>
-<a href="ttethernet.examples.small_network.Unit3.html">Unit3</a>
-   </td>
-   <td>
-<i>compound&nbsp;module</i>
-   </td>
-   <td>
-
-<p>unit3: configuration in unit3.ini.</p>
-
-   </td>
-</tr>
 </table>
 <h3 class="subtitle">Parameters:</h3>
 <table class="paramstable">
@@ -170,7 +170,7 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
    </td>
    <td></td>
    <td>
-<p>Beginning of the receive window in number of ticks</p>
+<p>Beginning of the receive window in number of ticks (-1 means no receive window)</p>
    </td>
 </tr>
 <tr class="local">
@@ -180,7 +180,7 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
    </td>
    <td></td>
    <td>
-<p>End of the receive window in number of ticks</p>
+<p>End of the receive window in number of ticks (-1 means no receive window)</p>
    </td>
 </tr>
 <tr class="local">
@@ -190,7 +190,7 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
    </td>
    <td></td>
    <td>
-<p>permanence point in time in number of ticks</p>
+<p>permanence point in time in number of ticks (-1 means no permanence point, frame is relayed immediately)</p>
    </td>
 </tr>
 </table>
@@ -280,11 +280,11 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=,red&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//TTIncoming is implemented by the TTIncoming C++ Class
 </span><span style="color: #000000; ">        </span><span style="color: #000000; font-weight: bold; ">@class</span><span style="color: #000000; ">(</span><span style="color: #000000; ">TTIncoming</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//Beginning of the receive window in number of ticks
+        </span><span style="color: #808080; font-style: italic; ">//Beginning of the receive window in number of ticks (-1 means no receive window)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">receive_window_start</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//End of the receive window in number of ticks
+        </span><span style="color: #808080; font-style: italic; ">//End of the receive window in number of ticks (-1 means no receive window)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">receive_window_end</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
-        </span><span style="color: #808080; font-style: italic; ">//permanence point in time in number of ticks
+        </span><span style="color: #808080; font-style: italic; ">//permanence point in time in number of ticks (-1 means no permanence point, frame is relayed immediately)
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">permanence_pit</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">tick</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
         </span><span style="color: #808080; font-style: italic; ">//Input gate for the incoming SchedulerActionTimeEvent messages

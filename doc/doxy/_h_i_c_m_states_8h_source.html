@@ -148,75 +148,91 @@ $(document).ready(function(){initNavTree('_h_i_c_m_states_8h_source.html','');})
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_i_t.html#a55a757a2f7651d78e1bed7c58ba3f69c">HI_CM_INIT</a>(<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>, FILE *f);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">//virtual ~HI_CM_INIT();</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html">HI_CM_PSEUDOSYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html#a314743ce54d2ea19a02ef3d2eca2fbc2">HI_CM_PSEUDOSYNC</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html#a3eec96f52f00078ed667b70c1cc129b3">handleMessage</a>(cMessage *message);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html">   51</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html">HI_CM_INTEGRATE</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html#a88ea544c9ff07b976a9b62382fdbd04f">HI_CM_INTEGRATE</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html#af24a7ffa485cfb0d61c61c70c701b4ea">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html#ae4227df53af21197f8fcf6e229048355">handleMessage</a>(cMessage *message);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html">   59</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html">HI_CM_STABLE</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html#a0512510b3c600b4288f0103e2afb9477">HI_CM_STABLE</a>();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html#a3bceae8cd4fe419084811d512914a3ab">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html#a2b65c69931761161a95a029d9482c380">handleMessage</a>(cMessage *message);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html">   68</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html">HI_CM_UNSYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html#a32993c673264826061b644a5b6cd62f5">HI_CM_UNSYNC</a>();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html#ae1497f8bc28d72eb0a677b832d6349e7">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html#ab6bed176a07634836d2cfba8b4813d9a">handleMessage</a>(cMessage *message);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html">   77</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html">HI_CM_SYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html#a4c33abd9064a513b5da8a231874db643">HI_CM_SYNC</a>();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html#a789e3e7f0ea3f4594eac34863ec7b59b">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html#a44781b5c3014bf867962d860d8925b97">handleMessage</a>(cMessage *message);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html">   46</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html">HI_CM_PSEUDOSYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html#a314743ce54d2ea19a02ef3d2eca2fbc2">HI_CM_PSEUDOSYNC</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">//virtual ~HI_CM_PSEUDOSYNC();</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___p_s_e_u_d_o_s_y_n_c.html#a3eec96f52f00078ed667b70c1cc129b3">handleMessage</a>(cMessage *message);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html">   55</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html">HI_CM_INTEGRATE</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html#a88ea544c9ff07b976a9b62382fdbd04f">HI_CM_INTEGRATE</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">//virtual ~HI_CM_INTEGRATE();</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html#af24a7ffa485cfb0d61c61c70c701b4ea">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___i_n_t_e_g_r_a_t_e.html#ae4227df53af21197f8fcf6e229048355">handleMessage</a>(cMessage *message);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html">   65</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html">HI_CM_STABLE</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html#a0512510b3c600b4288f0103e2afb9477">HI_CM_STABLE</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="comment">//virtual ~HI_CM_STABLE();</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html#a3bceae8cd4fe419084811d512914a3ab">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_t_a_b_l_e.html#a2b65c69931761161a95a029d9482c380">handleMessage</a>(cMessage *message);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html">   76</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html">HI_CM_UNSYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html#a32993c673264826061b644a5b6cd62f5">HI_CM_UNSYNC</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="comment">//virtual ~HI_CM_UNSYNC();</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html#ae1497f8bc28d72eb0a677b832d6349e7">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___u_n_s_y_n_c.html#ab6bed176a07634836d2cfba8b4813d9a">handleMessage</a>(cMessage *message);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html">   85</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html">HI_CM_TENTATIVE_SYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html#ab60a88760511ad9cb38e1a64046fecca">HI_CM_TENTATIVE_SYNC</a>();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html#af6c5887622fd9e0a1e3c95de36b01dd7">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html#a4e6ec2761e85ced1208679289b2eafba">handleMessage</a>(cMessage *message);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html">   93</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html">HI_CM_WAIT_4_CYCLE_START</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html#a55100a8a64129671ad6b7bbb4ff58f0e">HI_CM_WAIT_4_CYCLE_START</a>();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html#a9784c3581df70d2effe8c2669b514b4e">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html#a73c77a799c20089f9162073229b28948">handleMessage</a>(cMessage *message);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HICMSTATES_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html">   87</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html">HI_CM_SYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html#a4c33abd9064a513b5da8a231874db643">HI_CM_SYNC</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="comment">//virtual ~HI_CM_SYNC();</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html#a789e3e7f0ea3f4594eac34863ec7b59b">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___s_y_n_c.html#a44781b5c3014bf867962d860d8925b97">handleMessage</a>(cMessage *message);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html">   97</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html">HI_CM_TENTATIVE_SYNC</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html#ab60a88760511ad9cb38e1a64046fecca">HI_CM_TENTATIVE_SYNC</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="comment">//virtual ~HI_CM_TENTATIVE_SYNC();</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html#af6c5887622fd9e0a1e3c95de36b01dd7">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___t_e_n_t_a_t_i_v_e___s_y_n_c.html#a4e6ec2761e85ced1208679289b2eafba">handleMessage</a>(cMessage *message);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html">  107</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html">HI_CM_WAIT_4_CYCLE_START</a> : <span class="keyword">public</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html">HICMState</a></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html#a55100a8a64129671ad6b7bbb4ff58f0e">HI_CM_WAIT_4_CYCLE_START</a>();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="comment">//virtual ~HI_CM_WAIT_4_CYCLE_START();</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html#a9784c3581df70d2effe8c2669b514b4e">compressionFunction</a>(cMessage* message, <a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m.html">HICM</a> *<a class="code" href="class_t_t_ethernet_model_1_1_h_i_c_m_state.html#a24c51d1c7b7c7b7cc9c20169451d330c">hicm</a>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_t_t_ethernet_model_1_1_h_i___c_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t.html#a73c77a799c20089f9162073229b28948">handleMessage</a>(cMessage *message);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HICMSTATES_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b83218604b4f51c9d011668b0c42e102.html">src</a></li><li class="navelem"><a class="el" href="dir_e91b5cc3279f6efa832a22015b9fa21e.html">synchronisation</a></li><li class="navelem"><a class="el" href="dir_a3d746f5aaea8714bbcad22c8a403a15.html">AS6802</a></li><li class="navelem"><a class="el" href="dir_eae0ebdfb493e1664e86f689e870be02.html">HICompressionMaster</a></li><li class="navelem"><a class="el" href="_h_i_c_m_states_8h.html">HICMStates.h</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:31 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:20 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

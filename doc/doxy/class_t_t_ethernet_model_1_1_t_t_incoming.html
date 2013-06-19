@@ -289,7 +289,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">delete</span> msg;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="comment">//Check too early</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (currentTicks &lt; (uint32_t) par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue())</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue() &gt; 0 &amp;&amp; currentTicks &lt; (uint32_t) par(<span class="stringliteral">&quot;receive_window_start&quot;</span>).longValue())</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a>=<span class="keyword">true</span>;</div>
@@ -306,7 +306,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">delete</span> msg;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment">//Check too late</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (currentTicks &gt; (uint32_t) par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue())</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue() &gt; 0 &amp;&amp; currentTicks &gt; (uint32_t) par(<span class="stringliteral">&quot;receive_window_end&quot;</span>).longValue())</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            emit(<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a>, 1);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a>=<span class="keyword">true</span>;</div>
@@ -325,27 +325,32 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="comment">//Timing ok</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="comment">//delay for permanence_pit</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">if</span>(!<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a> &amp;&amp; ev.isGUI())</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/hourglass&quot;</span>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a> = (EtherFrame *) msg;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            SchedulerActionTimeEvent *<span class="keyword">event</span> = <span class="keyword">new</span> SchedulerActionTimeEvent(<span class="stringliteral">&quot;PIT Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;permanence_pit&quot;</span>).doubleValue());</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            tteScheduler-&gt;registerEvent(event);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>) &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        ASSERT(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a>);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">delete</span> msg;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">if</span>(!<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a> &amp;&amp; ev.isGUI())</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        send(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a>, <span class="stringliteral">&quot;out&quot;</span>);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a> = NULL;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="comment">//delay for permanence_pit if set</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">if</span>(par(<span class="stringliteral">&quot;permanence_pit&quot;</span>).doubleValue() &gt; 0){</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="keywordflow">if</span>(!<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a> &amp;&amp; ev.isGUI())</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                    getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;status/hourglass&quot;</span>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a> = (EtherFrame *) msg;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                SchedulerActionTimeEvent *<span class="keyword">event</span> = <span class="keyword">new</span> SchedulerActionTimeEvent(<span class="stringliteral">&quot;PIT Event&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <span class="keyword">event</span>-&gt;setAction_time(par(<span class="stringliteral">&quot;permanence_pit&quot;</span>).doubleValue());</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keyword">event</span>-&gt;setDestinationGate(gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                tteScheduler-&gt;registerEvent(event);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                send(msg, <span class="stringliteral">&quot;out&quot;</span>);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>) &amp;&amp; msg-&gt;getKind() == <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499aba53aed0985e6c791aa7b01e73192cd3">ACTION_TIME_EVENT</a>)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        ASSERT(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">delete</span> msg;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordflow">if</span>(!<a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a> &amp;&amp; ev.isGUI())</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            getDisplayString().setTagArg(<span class="stringliteral">&quot;i2&quot;</span>, 0, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        send(<a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a>, <span class="stringliteral">&quot;out&quot;</span>);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#aa29dca1540c001cbf321b4826d21b092" title="Stores the frame until the configured permanence point in time.">frame</a> = NULL;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -386,7 +391,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html">TTIncoming</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Wed Jun 19 2013 14:29:21 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
