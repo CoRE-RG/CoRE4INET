@@ -212,9 +212,7 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
 
 void TTEOutput::handleParameterChange(const char* parname){
     ttBuffers.clear();
-    std::string ttBuffersString = par("tt_buffers").stdstringValue();
-    std::vector<std::string> ttBufferPaths;
-    split(ttBuffersString,',',ttBufferPaths);
+    std::vector<std::string> ttBufferPaths = cStringTokenizer(par("tt_buffers").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
             ttBufferPath!=ttBufferPaths.end();ttBufferPath++){
         cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());

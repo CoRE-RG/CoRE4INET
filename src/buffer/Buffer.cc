@@ -125,9 +125,7 @@ void Buffer::handleMessage(cMessage *msg)
 
 void Buffer::handleParameterChange(const char* parname){
     destinationGates.clear();
-    std::string destinationGatesString = par("destination_gates").stdstringValue();
-    std::vector<std::string> destinationGatePaths;
-    split(destinationGatesString,',',destinationGatePaths);
+    std::vector<std::string> destinationGatePaths = cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator destinationGatePath = destinationGatePaths.begin();
             destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
         cGate* gate = gateByFullPath((*destinationGatePath));

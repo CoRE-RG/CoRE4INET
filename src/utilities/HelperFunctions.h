@@ -23,16 +23,6 @@
 #include "cgate.h"
 
 /**
- * @brief Splits a string into a vector of strings by using the delimiter character as separator.
- *
- * @param string the input string that is splitted
- * @param delimiter the character that is used to split the string
- * @param elements the vector in which the splitted strings are added
- * @return reference to the the elements vector
- */
-std::vector<std::string>& split(const std::string &string, char delimiter, std::vector<std::string> &elements);
-
-/**
  * @brief Replaces all occurrences of a string by another string.
  *
  * @param string the input string where the substrings are replaced

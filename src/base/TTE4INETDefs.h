@@ -20,13 +20,9 @@
  */
 #define NUM_RC_PRIORITIES 10
 
-
 /**
- * Maintain backwards compatibility
- * MIN_ETHERNET_FRAME changed to MIN_ETHERNET_FRAME_BYTES from 1.99.2 to 1.99.3 can be removed if backwards compatibility is not required any more
+ * Delimiters for vectors
  */
-#ifndef MIN_ETHERNET_FRAME_BYTES
-#define MIN_ETHERNET_FRAME_BYTES 64
-#endif
+#define DELIMITERS ",; \t\n\r\f"
 
 #endif

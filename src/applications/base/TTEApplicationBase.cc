@@ -15,6 +15,7 @@
 
 #include "TTEApplicationBase.h"
 
+#include "TTE4INETDefs.h"
 #include "HelperFunctions.h"
 
 #include <ModuleAccess.h>
@@ -39,9 +40,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg)
 
 void TTEApplicationBase::handleParameterChange(const char* parname){
     buffers.clear();
-    std::string buffersString = par("buffers").stdstringValue();
-    std::vector<std::string> bufferPaths;
-    split(buffersString,',',bufferPaths);
+    std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator bufferPath = bufferPaths.begin();
             bufferPath!=bufferPaths.end();bufferPath++){
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());

@@ -12,19 +12,6 @@
 
 #include "ModuleAccess.h"
 
-std::vector<std::string>& split(const std::string &string, char delimiter, std::vector<std::string> &elements){
-    std::stringstream stringStream(string);
-    std::string item;
-
-    while(std::getline(stringStream, item, delimiter)){
-        std::stringstream trimmer;
-        trimmer << item;
-        trimmer >> item;
-        elements.push_back(item);
-    }
-    return elements;
-}
-
 std::string& replaceAll(std::string &string, std::string toFind, std::string replacement){
     size_t pos = string.find(toFind);
     while(pos!=std::string::npos){

@@ -18,6 +18,8 @@
 
 #include "Buffer.h"
 
+#include "TTE4INETDefs.h"
+
 #include <iostream>
 
 #include <ModuleAccess.h>
@@ -128,9 +130,7 @@ void TTEInput::handleParameterChange(const char* parname){
 
     incomings.clear();
 
-    std::string incomingsString = par("incomings").stdstringValue();
-    std::vector<std::string> incomingPaths;
-    split(incomingsString,',',incomingPaths);
+    std::vector<std::string> incomingPaths = cStringTokenizer(par("incomings").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator incomingPath = incomingPaths.begin();
             incomingPath!=incomingPaths.end();incomingPath++){
         cModule* module = simulation.getModuleByPath((*incomingPath).c_str());
