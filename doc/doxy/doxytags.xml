@@ -503,8 +503,8 @@
       <type></type>
       <name>Define_NED_Function</name>
       <anchorfile>_n_e_d_functions_8cc.html</anchorfile>
-      <anchor>aab743cc1ce08c20e48d1590bdce15922</anchor>
-      <arglist>(ned_sec2tick,&quot;quantity sec2tick(quantity seconds, quantity ticklength?)&quot;)</arglist>
+      <anchor>a04091cb41048957b3d4c16f5ed1143dd</anchor>
+      <arglist>(ned_sec_to_tick,&quot;quantity sec_to_tick(quantity seconds, quantity ticklength?)&quot;)</arglist>
     </member>
   </compound>
   <compound kind="file">
