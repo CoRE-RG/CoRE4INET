@@ -18,6 +18,17 @@
 
 #include "cnedvalue.h"
 
+/**
+ * @brief Implementation of NED function "quantity sec2tick(quantity seconds, quantity ticklength?)"
+ *
+ * Implements a NED function that converts seconds to ticks using the length specified.
+ * If nothing is specified it uses the length specified in tteScheduler module of Node
+ *
+ * @param context module of the parameter to be converted
+ * @param argv array of incoming parameters
+ * @param argc number of parameters
+ * @return converted
+ */
 static cNEDValue ned_sec2tick(cComponent *context, cNEDValue argv[], int argc);
 
 #endif
