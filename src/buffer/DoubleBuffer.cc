@@ -15,7 +15,7 @@
 
 #include "DoubleBuffer.h"
 
-using namespace ::TTEthernetModel;
+namespace TTEthernetModel {
 
 DoubleBuffer::DoubleBuffer()
 {
@@ -44,4 +44,6 @@ EtherFrame * DoubleBuffer::dequeue()
         return frame->dup();
     else
         return NULL;
+}
+
 }

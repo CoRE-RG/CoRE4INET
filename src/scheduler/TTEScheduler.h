@@ -142,7 +142,7 @@ class TTEScheduler : public cSimpleModule
         /**
          * @brief Corrects the clock by the number of ticks
          *
-         * @param number of ticks the clock must be corrected
+         * @param ticks number of ticks the clock must be corrected
          */
         virtual void clockCorrection(int32_t ticks);
 

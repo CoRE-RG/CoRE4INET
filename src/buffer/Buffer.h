@@ -73,19 +73,6 @@ class Buffer : public cSimpleModule
          */
         std::map<TTEApplicationBase*, Callback*> transmitCallbacks;
 
-        /**
-         * @brief caches ct_mask parameter
-         */
-//        unsigned long ctMask;
-        /**
-         * @brief caches ct_marker parameter
-         */
-//        unsigned long ctMarker;
-        /**
-         * @brief caches ct_id parameter
-         */
-//        unsigned long ctId;
-
     private:
         /**
          * Initializes the statistics for the module
@@ -96,14 +83,14 @@ class Buffer : public cSimpleModule
         /**
          * Initializes the module
          *
-         * @param stage the stages. Module initializes when stage==0
+         * @param stage The stages. Module initializes when stage==0
          */
         virtual void initialize(int stage);
 
         /**
          * @brief Returns the numer of initializaiton stages this module needs.
          *
-         * @return always returns 1
+         * @return Always returns 1
          */
         virtual int numInitStages() const;
 
@@ -124,7 +111,7 @@ class Buffer : public cSimpleModule
          *
          * This method must be implemented according to the buffer strategy.
          *
-         * @param newFrame a pointer to the new EtherFrame to be saved in the buffer
+         * @param newFrame A pointer to the new EtherFrame to be saved in the buffer
          */
         virtual void enqueue(EtherFrame *newFrame);
 
@@ -133,7 +120,7 @@ class Buffer : public cSimpleModule
          *
          * This method must be implemented according to the buffer strategy.
          *
-         * @return a pointer to the next EtherFrame from the buffer. Returns
+         * @return A pointer to the next EtherFrame from the buffer. Returns
          * null if there is no EtherFrame in the buffer
          */
         virtual EtherFrame* dequeue();
@@ -154,7 +141,7 @@ class Buffer : public cSimpleModule
         /**
          * @brief Wrapper function arround dequeue().
          *
-         * @return a pointer to the next EtherFrame from the buffer. Returns
+         * @return A pointer to the next EtherFrame from the buffer. Returns
          * null if there is no EtherFrame in the buffer
          *
          * @sa dequeue();
@@ -164,7 +151,7 @@ class Buffer : public cSimpleModule
         /**
          * @brief Wrapper function arround enqueue().
          *
-         * @param frame the EtherFrame to put in the buffer.
+         * @param frame The EtherFrame to put in the buffer.
          *
          * @sa enqueue();
          */
@@ -177,15 +164,15 @@ class Buffer : public cSimpleModule
          * allowed to only register one receive callback per buffer. Further calls
          * overwrite the registered callback.
          *
-         * @param cb the receive callback to be added.
-         * @param the corresponding application that registers the callback
+         * @param cb The receive callback to be added.
+         * @param application The corresponding application that registers the callback
          */
         void addReceiveCallback(Callback *cb, TTEApplicationBase *application);
 
         /**
          * @brief Returns the currently registered receive callback for an application.
          *
-         * @param the corresponding application that registered callbacks
+         * @param application The corresponding application that registered callbacks
          * @return The callback that is currently registered. Null if there is no
          * receive callback registered
          */
@@ -198,15 +185,15 @@ class Buffer : public cSimpleModule
          * allowed to only register one transmit callback per buffer. Further calls
          * overwrite the registered callback.
          *
-         * @param cb the transmit callback to be added.
-         * @param the corresponding application that registers the callback
+         * @param cb The transmit callback to be added.
+         * @param application The corresponding application that registers the callback
          */
         void addTransmitCallback(Callback *cb, TTEApplicationBase *application);
 
         /**
          * @brief Returns the currently registered transmit callback for an application.
          *
-         * @param the corresponding application that registered callbacks
+         * @param application The corresponding application that registered callbacks
          * @return The callback that is currently registered. Null if there is no
          * transmit callback registered
          */
