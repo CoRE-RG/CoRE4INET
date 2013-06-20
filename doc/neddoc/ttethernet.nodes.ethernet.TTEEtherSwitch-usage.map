@@ -1,6 +1,0 @@
-<area shape="rect" id="node1" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="263,6,380,34">
-<area shape="rect" id="node2" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="5,83,120,111">
-<area shape="rect" id="node4" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="144,83,243,111">
-<area shape="rect" id="node6" href="ttethernet.scheduler.ITTEScheduler.html" title="Module Interface ITTEScheduler" alt="" coords="267,83,376,111">
-<area shape="rect" id="node8" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="400,83,552,111">
-<area shape="rect" id="node10" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="576,83,648,111">

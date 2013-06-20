@@ -1,6 +1,0 @@
-<area shape="rect" id="node1" href="ttethernet.examples.synchronization.StandardIntegrity_large.Switch2.html" title="Compound Module Switch2" alt="" coords="219,83,291,111">
-<area shape="rect" id="node2" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="5,161,120,189">
-<area shape="rect" id="node4" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="144,161,243,189">
-<area shape="rect" id="node6" href="ttethernet.ctc.PCFIncoming.html" title="Simple Module PCFIncoming" alt="" coords="267,161,368,189">
-<area shape="rect" id="node8" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="392,161,485,189">
-<area shape="rect" id="node10" href="ttethernet.examples.synchronization.StandardIntegrity_large.SICM_AS6802_sync.html" title="Network SICM_AS6802_sync" alt="" coords="183,6,327,34">

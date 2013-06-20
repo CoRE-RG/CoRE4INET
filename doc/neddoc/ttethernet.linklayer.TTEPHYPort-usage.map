@@ -1,7 +1,0 @@
-<area shape="rect" id="node1" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="224,83,323,111">
-<area shape="rect" id="node2" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="Simple Module EtherMACFullDuplex" alt="" coords="5,161,149,189">
-<area shape="rect" id="node4" href="ttethernet.linklayer.TTEOutput.html" title="Simple Module TTEOutput" alt="" coords="173,161,259,189">
-<area shape="rect" id="node6" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="283,161,381,189">
-<area shape="rect" id="node8" href="ttethernet.linklayer.TTEInput.html" title="Simple Module TTEInput" alt="" coords="405,161,480,189">
-<area shape="rect" id="node10" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="152,6,259,34">
-<area shape="rect" id="node12" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="283,6,400,34">
