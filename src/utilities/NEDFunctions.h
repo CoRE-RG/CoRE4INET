@@ -23,6 +23,7 @@
  *
  * Implements a NED function that converts seconds to ticks using the length specified.
  * If nothing is specified it uses the length specified in tteScheduler module of Node
+ * There is also the alias "quantity s2t(quantity seconds, quantity ticklength?)" available
  *
  * @param context module of the parameter to be converted
  * @param argv array of incoming parameters
@@ -30,5 +31,19 @@
  * @return converted
  */
 static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc);
+
+/**
+ * @brief Implementation of NED function "quantity tick_to_sec(quantity ticks, quantity ticklength?)"
+ *
+ * Implements a NED function that converts ticks to seconds using the length specified.
+ * If nothing is specified it uses the length specified in tteScheduler module of Node
+ * There is also the alias "quantity t2s(quantity ticks, quantity ticklength?)" available
+ *
+ * @param context module of the parameter to be converted
+ * @param argv array of incoming parameters
+ * @param argc number of parameters
+ * @return converted
+ */
+static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc);
 
 #endif
