@@ -27,8 +27,8 @@ Define_Module(SRPTrafficHandle);
 
 void SRPTrafficHandle::initialize()
 {
-    localSAP = ETHERAPP_CLI_SAP;
-    remoteSAP = ETHERAPP_CLI_SAP;
+    localSAP = ETHERAPP_BUFFER_SAP;
+    remoteSAP = ETHERAPP_BUFFER_SAP;
     destMACAddressUnicast.setAddress("000000000000");
     destMACAddressBroadcast.setAddress("FFFFFFFFFFFF");
     srcMACAddress.setAddress("000000000000");
@@ -60,7 +60,9 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 send(inFrame, "lowerLayerOut");
             }
 
-            if(srpType.compare("Listener Ready") == 0)
+            if(srpType.compare("Listener Ready") == 0 ||
+               srpType.compare("Listener Ready Failed") == 0 ||
+               srpType.compare("Listener Failed") == 0)
             {
                 Ieee802Ctrl *etherctrl;
                 if(inFrame->getControlInfo() == NULL)
@@ -71,7 +73,6 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 {
                     etherctrl = (Ieee802Ctrl*)inFrame->getControlInfo();
                     etherctrl->setDest(inFrame->getDest());
-
                 }
                 inFrame->removeControlInfo();
                 etherctrl->setSsap(localSAP);

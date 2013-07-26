@@ -48,18 +48,11 @@ void TTEAVBOutput::initialize()
 
     portIndex = getParentModule()->getIndex();
     avbBuffer = dynamic_cast<AVBBuffer*> (getParentModule()->getParentModule()->getSubmodule("avbBuffer", portIndex));
-
-    newTime = simTime();
-    oldTime = simTime();
-
     avbQueueLengthSignal = registerSignal("avbQueueLength");
 }
 
 void TTEAVBOutput::handleMessage(cMessage *msg)
 {
-    //Set newTime
-    newTime = simTime();
-
     if (msg->arrivedOn("PCFin"))
     {
         if (framesRequested)
@@ -170,8 +163,6 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
             emit(beQueueLengthSignal, beQueue.length());
         }
     }
-    //set oldTime
-    oldTime = simTime();
 }
 
 void TTEAVBOutput::requestPacket()
@@ -179,9 +170,6 @@ void TTEAVBOutput::requestPacket()
     Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
     framesRequested++;
-
-    //set newTime
-    newTime = simTime();
 
     //TTFrames
     if (!ttQueue.isEmpty())
@@ -200,6 +188,7 @@ void TTEAVBOutput::requestPacket()
     }
 
     //AVBFrames
+    avbBuffer->refresh();
     if(!avbQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) avbQueue.front()) && avbBuffer->getCredit() >= 0)
     {
         framesRequested--;
@@ -209,10 +198,6 @@ void TTEAVBOutput::requestPacket()
         SimTime duration = outChannel->calculateDuration(msg);
         avbBuffer->sendSlope(duration);
         return;
-    }
-    else
-    {
-
     }
 
     //RCFrames
@@ -244,8 +229,6 @@ void TTEAVBOutput::requestPacket()
         emit(beQueueLengthSignal, beQueue.length());
         return;
     }
-    //Set oldTime
-    oldTime = simTime();
 }
 
 } /* namespace TTEthernetModel */

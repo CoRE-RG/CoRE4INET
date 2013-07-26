@@ -30,9 +30,6 @@ class TTEAVBOutput : public TTEOutput
         cQueue avbQueue;
         AVBBuffer *avbBuffer;
 
-        SimTime newTime;
-        SimTime oldTime;
-
         static simsignal_t avbQueueLengthSignal;
 
         virtual void initialize();

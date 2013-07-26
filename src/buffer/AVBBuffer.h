@@ -32,8 +32,10 @@ class AVBBuffer : public virtual Buffer
         void idleSlope(SimTime duration);
         void interferenceSlope(SimTime duration);
         void sendSlope(SimTime duration);
+        void refresh();
         int getCredit();
         void resetCredit();
+        int getMsgCount();
     protected:
         int credit;
         int maxCredit;
@@ -42,6 +44,7 @@ class AVBBuffer : public virtual Buffer
         int msgCnt;
         SimTime newTime;
         SimTime oldTime;
+        double Wduration;
 
         TTEScheduler *tteScheduler;
         AVBIncoming * avbCTC;
