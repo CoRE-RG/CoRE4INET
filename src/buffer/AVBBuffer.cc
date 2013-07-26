@@ -201,6 +201,10 @@ void AVBBuffer::sendSlope(SimTime duration)
         }
 
     }
+    else
+    {
+        if(credit > 0) credit = 0;
+    }
     oldTime = simTime();
 }
 
