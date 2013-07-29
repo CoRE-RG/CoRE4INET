@@ -41,6 +41,7 @@ class AVBBuffer : public virtual Buffer
         int maxCredit;
         int AVBReservation;
         bool inTransmission;
+        bool inTerference;
         int msgCnt;
         SimTime newTime;
         SimTime oldTime;

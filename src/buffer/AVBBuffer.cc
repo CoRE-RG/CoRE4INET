@@ -46,6 +46,7 @@ void AVBBuffer::initialize(int stage)
         maxCredit = 0;
         AVBReservation = 0;
         inTransmission = false;
+        inTerference = false;
         msgCnt = 0;
         newTime = simTime();
         oldTime = simTime();
@@ -58,6 +59,7 @@ void AVBBuffer::initialize(int stage)
         WATCH(maxCredit);
         WATCH(AVBReservation);
         WATCH(inTransmission);
+        WATCH(inTerference);
         WATCH(msgCnt);
         WATCH(Wduration);
     }
@@ -81,8 +83,11 @@ void AVBBuffer::handleMessage(cMessage *msg)
             msgCnt++;
             if(inTransmission)
             {
-                interferenceSlope(newTime - oldTime);
-                if(credit > maxCredit) maxCredit = credit;
+                if(inTerference)
+                {
+                    interferenceSlope(newTime - oldTime);
+                    if(credit > maxCredit) maxCredit = credit;
+                }
             }
             else
             {
@@ -94,6 +99,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
                         msgCnt--;
                         send(outFrame, "out");
                         inTransmission = true;
+                        inTerference = true;
                     }
                     else
                     {
@@ -116,8 +122,11 @@ void AVBBuffer::handleMessage(cMessage *msg)
         {
             if(inTransmission)
             {
-                interferenceSlope(newTime - oldTime);
-                if(credit > maxCredit) maxCredit = credit;
+                if(inTerference)
+                {
+                    interferenceSlope(newTime - oldTime);
+                    if(credit > maxCredit) maxCredit = credit;
+                }
             }
             else
             {
@@ -129,6 +138,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
                         msgCnt--;
                         send(outFrame, "out");
                         inTransmission = true;
+                        inTerference = true;
                     }
                     else
                     {
@@ -181,6 +191,7 @@ void AVBBuffer::sendSlope(SimTime duration)
     int portBandwith = avbCTC->getPortBandwith(this->getIndex());
     credit -= ( ( (portBandwith - AVBReservation) * 1024.00 * 1024.00) * duration.dbl() ) + 1;
     inTransmission = false;
+    inTerference = false;
     if(msgCnt > 0)
     {
         if(credit < 0)
@@ -219,8 +230,11 @@ void AVBBuffer::refresh()
 
     if(inTransmission)
     {
-        interferenceSlope(newTime - oldTime);
-        if(credit > maxCredit) maxCredit = credit;
+        if(inTerference)
+        {
+            interferenceSlope(newTime - oldTime);
+            if(credit > maxCredit) maxCredit = credit;
+        }
     }
 
     oldTime = simTime();
