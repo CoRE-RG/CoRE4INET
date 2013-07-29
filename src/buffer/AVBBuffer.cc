@@ -210,7 +210,6 @@ void AVBBuffer::sendSlope(SimTime duration)
             send(outFrame, "out");
             inTransmission = true;
         }
-
     }
     else
     {
@@ -238,6 +237,11 @@ void AVBBuffer::refresh()
     }
 
     oldTime = simTime();
+}
+
+void AVBBuffer::reportInterference()
+{
+    inTerference = true;
 }
 
 int AVBBuffer::getCredit()

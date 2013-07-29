@@ -33,6 +33,7 @@ class AVBBuffer : public virtual Buffer
         void interferenceSlope(SimTime duration);
         void sendSlope(SimTime duration);
         void refresh();
+        void reportInterference();
         int getCredit();
         void resetCredit();
         int getMsgCount();
