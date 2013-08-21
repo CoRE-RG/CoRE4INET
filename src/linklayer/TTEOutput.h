@@ -133,6 +133,14 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          */
         virtual void registerTTBuffer(TTBuffer *buffer);
 
+        /**
+         * @brief check whether a time-triggered buffer is registered.
+         *
+         * @param ttBuffer the ttBuffer to check for
+         * @returns true when registered, else false
+         */
+        virtual bool isTTBufferRegistered(TTBuffer *ttBuffer);
+
     protected:
         /**
          * @brief Initialization of the module

@@ -121,6 +121,9 @@ void TTEOutput::handleMessage(cMessage *msg)
             }
             else
             {
+                TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (msg->getSenderModule());
+                ASSERT(ttBuffer);
+                ASSERT(isTTBufferRegistered(ttBuffer)==false);
                 EV << "There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
                 ttQueue.insert(msg);
                 notifyListeners();
@@ -189,6 +192,7 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
         {
             ttBuffers.insert(buffer, ttBuffer);
             //Now doublecheck that the schedule is not overlapping for this port
+            //TODO: Can be improved: only check overlapping for neighbors
             for (std::vector<TTBuffer*>::iterator buffer2 = ttBuffers.begin(); buffer2 != ttBuffers.end();)
             {
                 Buffer *tmpBuffer = *buffer2;
@@ -208,6 +212,16 @@ void TTEOutput::registerTTBuffer(TTBuffer *ttBuffer)
     }
     //This should only happen if buffer was empty
     ttBuffers.push_back(ttBuffer);
+}
+
+bool TTEOutput::isTTBufferRegistered(TTBuffer *ttBuffer){
+    for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();)
+    {
+        if(*buffer==ttBuffer){
+            return true;
+        }
+    }
+    return false;
 }
 
 void TTEOutput::handleParameterChange(const char* parname){
