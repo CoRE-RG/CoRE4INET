@@ -133,6 +133,7 @@ void TTEOutput::handleMessage(cMessage *msg)
             }
             else
             {
+                ASSERT(isTTBufferRegistered(ttBuffer)==false);
                 EV << "shuffling for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
 
                 ttQueue.insert(msg);
