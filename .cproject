@@ -738,8 +738,13 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="TTEthernetModelV2.org.omnetpp.cdt.omnetppProjectType.1512183933" name="OMNeT++ Simulation" projectType="org.omnetpp.cdt.omnetppProjectType"/>
 	</storageModule>
-	<storageModule moduleId="refreshScope" versionNumber="1">
-		<resource resourceType="PROJECT" workspacePath="/TTEthernetModel"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="gcc-release">
+			<resource resourceType="PROJECT" workspacePath="/TTEthernetModel"/>
+		</configuration>
+		<configuration configurationName="gcc-debug">
+			<resource resourceType="PROJECT" workspacePath="/TTEthernetModel"/>
+		</configuration>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
