@@ -1,28 +1,26 @@
-/*
- * HelperFunctions.h
- *
- *  Created on: Dec 7, 2011
- *      Author: tillsteinbach
- */
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+//
 
-#ifndef HELPERFUNCTIONS_H_
-#define HELPERFUNCTIONS_H_
+#ifndef __TTETHERNETMODELV2_HELPERFUNCTIONS_H_
+#define __TTETHERNETMODELV2_HELPERFUNCTIONS_H_
 
 #include <string>
 #include <vector>
 
 #include "cpar.h"
 #include "cgate.h"
-
-/**
- * @brief Splits a string into a vector of strings by using the delimiter character as separator.
- *
- * @param string the input string that is splitted
- * @param delimiter the character that is used to split the string
- * @param elements the vector in which the splitted strings are added
- * @return reference to the the elements vector
- */
-std::vector<std::string>& split(const std::string &string, char delimiter, std::vector<std::string> &elements);
 
 /**
  * @brief Replaces all occurrences of a string by another string.
@@ -49,6 +47,15 @@ void addPath(cPar &parameter, std::string &pathToAdd);
  * @return reference to the gate defined by path or NULL if no such gate was found
  */
 cGate* gateByFullPath(std::string &path);
+
+/**
+ * @brief Returns the gate of a node defined by: modulename.gatename.
+ *
+ * @param nameAndGate name of the module and gatename in the format: modulename.gatename
+ * @param from a module of the node in which the gate can be found
+ * @return reference to the gate defined by path or NULL if no such gate was found
+ */
+cGate* gateByShortPath(std::string &nameAndGate, cModule *from);
 
 /**
  * @brief Converts value in ticks to the transparent clock unit that is ns*0x10000

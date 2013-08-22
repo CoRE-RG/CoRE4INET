@@ -13,37 +13,31 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "DoubleBuffer.h"
+package ttethernet.examples.small_network;
 
-namespace TTEthernetModel {
+import ttethernet.nodes.ethernet.TTEEtherHost;
+import ttethernet.ctc.TTIncoming;
+import ttethernet.buffer.TTDoubleBuffer;
 
-DoubleBuffer::DoubleBuffer()
+
+//
+// unit1: configuration in unit1.ini.
+//
+// - Sends time-triggered messages at 1ms with VL-ID 100
+//
+module Node1 extends TTEEtherHost
 {
-    frame = NULL;
-}
+    @display("bgb=479,314");
+    submodules:
+        vl_100_ctc: TTIncoming {
+            parameters:
+                @display("p=350,100");
 
-DoubleBuffer::~DoubleBuffer()
-{
-    delete frame;
-}
-
-void DoubleBuffer::enqueue(EtherFrame *newFrame)
-{
-    if (frame != NULL)
-        delete frame;
-    else
-    {
-        setIsEmpty(newFrame == NULL);
-    }
-    frame = newFrame;
-}
-
-EtherFrame * DoubleBuffer::dequeue()
-{
-    if (frame)
-        return frame->dup();
-    else
-        return NULL;
-}
-
+        }
+        vl_100: TTDoubleBuffer {
+            parameters:
+                @display("p=440,100");
+        }
+    connections:
+        vl_100_ctc.out --> vl_100.in;
 }

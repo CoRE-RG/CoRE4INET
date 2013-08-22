@@ -44,11 +44,8 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 
 			while (!feof(fp)) {
 
-				int i = fscanf(fp, "%d %d", &dummy, &data);
-				if(i < 0)
-				{
-				    break;
-				}
+				int num = fscanf(fp, "%d %d", &dummy, &data);
+				ASSERT(num==2);
 				values->at(counter++) = data;
 			} //while
 

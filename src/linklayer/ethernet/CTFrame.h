@@ -53,7 +53,7 @@ class CTFrame : public CTFrame_Base
         /**
         * @brief Implements abstract CtMarker setter.
         *
-        * @param ctID critical traffic marker that should be set in destination mac
+        * @param ctMarker critical traffic marker that should be set in destination mac
         */
         virtual void setCtMarker(uint32_t ctMarker);
 };

@@ -15,7 +15,10 @@
 
 #include "TTEApplicationBase.h"
 
+#include "TTE4INETDefs.h"
 #include "HelperFunctions.h"
+
+#include <ModuleAccess.h>
 
 namespace TTEthernetModel {
 
@@ -37,28 +40,28 @@ void TTEApplicationBase::handleMessage(cMessage *msg)
 
 void TTEApplicationBase::handleParameterChange(const char* parname){
     buffers.clear();
-    if(ev.isGUI()){
-        getDisplayString().removeTag("i2");
-        getDisplayString().setTagArg("tt", 0, "");
-    }
-    std::string buffersString = par("buffers").stdstringValue();
-    std::vector<std::string> bufferPaths;
-    split(buffersString,',',bufferPaths);
+    std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator bufferPath = bufferPaths.begin();
             bufferPath!=bufferPaths.end();bufferPath++){
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
+        if(!module){
+            module = findModuleWhereverInNode((*bufferPath).c_str(),this);
+        }
         if(module){
+            if(findContainingNode(module)!=findContainingNode(this)){
+                opp_error("Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?", (*bufferPath).c_str(),
+                        findContainingNode(this)->getFullName());
+            }
             Buffer *buffer = dynamic_cast<Buffer*> (module);
             if(buffer && buffer->hasPar("ct_id")){
                 buffers[buffer->par("ct_id").longValue()].push_back(buffer);
             }
+            else{
+                opp_error("Buffer module %s has no ct_id configured!", (*bufferPath).c_str());
+            }
         }
         else{
-            if(ev.isGUI()){
-                ev<<"Configuration problem: Module "<<(*bufferPath)<<" could not be resolved or is no CT-Buffer (TT or RC)!"<<endl;
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem Application Buffer!");
-            }
+            opp_error("Configuration problem of buffers: Module: %s could not be resolved!", (*bufferPath).c_str());
         }
     }
 }

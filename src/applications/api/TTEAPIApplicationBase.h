@@ -87,7 +87,7 @@ class TTEAPIApplicationBase : public TTEApplicationBase
          * The module receives START_APPLICATION messages that trigger startApplication() or
          * messages via schedulerIn that contain Tasks to be executed.
          *
-         * @param msg the incoming message
+         * @param msg The incoming message
          */
         virtual void handleMessage(cMessage *msg);
     protected:
@@ -101,8 +101,9 @@ class TTEAPIApplicationBase : public TTEApplicationBase
         /**
          * @brief registers a task that is periodically scheduled.
          *
-         * @param actionTime the time in ticks in each cycle the tasks is executed
-         * @param functionPointer the function to execute
+         * @param actionTime The time in ticks in each cycle the tasks is executed
+         * @param functionPointer The function to execute
+         * @param setFunctionArg The arguments related to the function pointer
          */
         virtual void registerTask(unsigned int actionTime, void (*functionPointer)(void*), void *setFunctionArg);
 

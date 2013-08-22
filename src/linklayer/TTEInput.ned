@@ -19,9 +19,9 @@ simple TTEInput like IOutputQueue
         // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
 		bool promiscuous = default(false);
         //Critical traffic marker of the buffer
-        int ct_marker = default(0);
+        int ct_marker;
         //Critical traffic mask of the buffer
-        int ct_mask = default(0);
+        int ct_mask;
         //Comma seperated list of ctc modules the input uses
         string incomings = default("");
     gates:

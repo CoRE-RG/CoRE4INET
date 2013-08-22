@@ -45,7 +45,7 @@ class TTEApplicationBase : public cSimpleModule
         /**
          * @brief executes the given Callback in the context of the Application
          *
-         * @param cb the Callback to execute
+         * @param cb The Callback to execute
          */
         virtual void executeCallback(Callback *cb);
 
@@ -55,7 +55,7 @@ class TTEApplicationBase : public cSimpleModule
          * This method should be called from subclasses unless the module
          * resets the bag on its own.
          *
-         * @param msg parameter must be forwarded from subclass
+         * @param msg Parameter must be forwarded from subclass
          */
         virtual void handleMessage(cMessage *msg);
 

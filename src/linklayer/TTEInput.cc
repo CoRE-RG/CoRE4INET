@@ -18,7 +18,11 @@
 
 #include "Buffer.h"
 
+#include "TTE4INETDefs.h"
+
 #include <iostream>
+
+#include <ModuleAccess.h>
 
 using namespace TTEthernetModel;
 
@@ -126,27 +130,37 @@ void TTEInput::handleParameterChange(const char* parname){
 
     incomings.clear();
 
-    std::string incomingsString = par("incomings").stdstringValue();
-    std::vector<std::string> incomingPaths;
-    split(incomingsString,',',incomingPaths);
+    std::vector<std::string> incomingPaths = cStringTokenizer(par("incomings").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator incomingPath = incomingPaths.begin();
             incomingPath!=incomingPaths.end();incomingPath++){
         cModule* module = simulation.getModuleByPath((*incomingPath).c_str());
+        if(!module){
+            module = findModuleWhereverInNode((*incomingPath).c_str(),this);
+        }
         if(module){
-            Incoming *incoming = dynamic_cast<Incoming*> (module);
-            if(incoming){
-                Buffer *buffer = dynamic_cast<Buffer*> (incoming->gate("out")->getPathEndGate()->getOwner());
-                if(buffer && buffer->hasPar("ct_id")){
-                    incomings[buffer->par("ct_id").longValue()].push_back(incoming);
+            if(findContainingNode(module)!=findContainingNode(this)){
+                opp_error("Configuration problem of incomings: Module: %s is not in node %s! Maybe a copy-paste problem?", (*incomingPath).c_str(),
+                        findContainingNode(this)->getFullName());
+            }
+            else
+            {
+                Incoming *incoming = dynamic_cast<Incoming*> (module);
+                if(incoming){
+                    Buffer *buffer = dynamic_cast<Buffer*> (incoming->gate("out")->getPathEndGate()->getOwner());
+                    if(buffer && buffer->hasPar("ct_id")){
+                        incomings[buffer->par("ct_id").longValue()].push_back(incoming);
+                    }
+                    else{
+                        opp_error("Incoming module %s has no Buffer attached with ct_id configured!", (*incomingPath).c_str());
+                    }
+                }
+                else{
+                    opp_error("Configuration problem of tt_buffers: Module: %s is no Incoming module!", (*incomingPath).c_str());
                 }
             }
         }
         else{
-            if(ev.isGUI()){
-                ev<<"Configuration problem: Module "<<(*incomingPath)<<" could not be resolved or is no Incoming CTC Module, or module is not connected to a buffer!"<<endl;
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getDisplayString().setTagArg("tt", 0, "WARNING: Configuration Problem Input Buffers!");
-            }
+            opp_error("Configuration problem of incomings: Module: %s could not be resolved!", (*incomingPath).c_str());
         }
     }
 }

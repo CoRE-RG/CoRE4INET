@@ -62,11 +62,8 @@ HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 
 			while (!feof(fp)) {
 
-				int i = fscanf(fp, "%d %d", &dummy, &data);
-				if(i < 0)
-				{
-				    break;
-				}
+				int num = fscanf(fp, "%d %d", &dummy, &data);
+				ASSERT(num==2);
 				values->at(counter++) = data;
 
 			} //while

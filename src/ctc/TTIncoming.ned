@@ -16,11 +16,11 @@ simple TTIncoming extends Incoming
         @display("i=,red");
         //TTIncoming is implemented by the TTIncoming C++ Class
         @class(TTIncoming);
-        //Beginning of the receive window in number of ticks
+        //Beginning of the receive window in number of ticks (-1 means no receive window)
         int receive_window_start @unit(tick);
-        //End of the receive window in number of ticks
+        //End of the receive window in number of ticks (-1 means no receive window)
         int receive_window_end @unit(tick);
-        //permanence point in time in number of ticks
+        //permanence point in time in number of ticks (-1 means no permanence point, frame is relayed immediately)
         int permanence_pit @unit(tick);
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages

@@ -39,15 +39,15 @@ network small_network
             per = 0;
         }
     submodules:
-        unit1: Unit1 {
+        node1: Node1 {
             @display("p=39,70");
         }
 
-        unit2: Unit2 {
+        node2: Node2 {
             @display("p=249,30");
         }
 
-        unit3: Unit3 {
+        node3: Node3 {
             @display("p=249,102");
         }
 
@@ -61,7 +61,7 @@ network small_network
         //
         // The example uses a simple star topology
         //
-        unit1.ethg <--> cable {  delay = 200ns; } <--> switch1.ethg[0];
-        unit2.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
-        unit3.ethg <--> cable {  delay = 50ns; } <--> switch1.ethg[2];
+        node1.ethg <--> cable {  delay = 200ns; } <--> switch1.ethg[0];
+        node2.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
+        node3.ethg <--> cable {  delay = 50ns; } <--> switch1.ethg[2];
 }

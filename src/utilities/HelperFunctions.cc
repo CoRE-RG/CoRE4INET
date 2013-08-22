@@ -10,18 +10,7 @@
 #include <sstream>
 #include "cmodule.h"
 
-std::vector<std::string>& split(const std::string &string, char delimiter, std::vector<std::string> &elements){
-    std::stringstream stringStream(string);
-    std::string item;
-
-    while(std::getline(stringStream, item, delimiter)){
-        std::stringstream trimmer;
-        trimmer << item;
-        trimmer >> item;
-        elements.push_back(item);
-    }
-    return elements;
-}
+#include "ModuleAccess.h"
 
 std::string& replaceAll(std::string &string, std::string toFind, std::string replacement){
     size_t pos = string.find(toFind);
@@ -46,6 +35,19 @@ cGate* gateByFullPath(std::string &path){
         std::string modulePath = path.substr(0,pos);
         std::string gateName = path.substr(pos+1);
         cModule* module = cSimulation::getActiveSimulation()->getModuleByPath(modulePath.c_str());
+        if(module){
+            return module->gate(gateName.c_str());
+        }
+    }
+    return NULL;
+}
+
+cGate* gateByShortPath(std::string &nameAndGate, cModule *from){
+    std::size_t pos = nameAndGate.rfind('.');
+    if(pos!=std::string::npos){
+        std::string modulePath = nameAndGate.substr(0,pos);
+        std::string gateName = nameAndGate.substr(pos+1);
+        cModule* module = findModuleWhereverInNode(modulePath.c_str(), from);
         if(module){
             return module->gate(gateName.c_str());
         }

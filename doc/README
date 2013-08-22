@@ -1,0 +1,7 @@
+This release does not contain the doxygen and neddoc documentations.
+Both can be generated from source. After import of the project in the
+OMNeT++ IDE select: "Project" -> "Generate NED documentation", select 
+the project and hit OK. It may take some time to generate the
+documentation.
+You can also access the documentations online at:
+http://tte4inet.realmv6.org/documentation

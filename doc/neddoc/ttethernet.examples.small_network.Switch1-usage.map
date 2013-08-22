@@ -1,7 +1,0 @@
-<area shape="rect" id="node1" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="280,83,352,111">
-<area shape="rect" id="node2" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="5,161,96,189">
-<area shape="rect" id="node4" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="120,161,235,189">
-<area shape="rect" id="node6" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="259,161,373,189">
-<area shape="rect" id="node8" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="397,161,496,189">
-<area shape="rect" id="node10" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="520,161,613,189">
-<area shape="rect" id="node12" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="263,6,369,34">
