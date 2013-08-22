@@ -1,3 +1,5 @@
-<area shape="rect" id="node1" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="51,83,203,111">
-<area shape="rect" id="node2" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="5,6,112,34">
-<area shape="rect" id="node4" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="136,6,253,34">
+<area shape="rect" id="node1" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="233,83,385,111">
+<area shape="rect" id="node2" href="ttethernet.nodes.ethernet.TTEAVBEtherHost.html" title="Compound Module TTEAVBEtherHost" alt="" coords="5,6,139,34">
+<area shape="rect" id="node4" href="ttethernet.nodes.ethernet.TTEAVBEtherSwitch.html" title="Compound Module TTEAVBEtherSwitch" alt="" coords="163,6,307,34">
+<area shape="rect" id="node6" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="331,6,437,34">
+<area shape="rect" id="node8" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="461,6,579,34">

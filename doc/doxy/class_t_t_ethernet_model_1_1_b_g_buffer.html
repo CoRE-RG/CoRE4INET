@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_b_g_buffe
 <p>Base class for a background (best-effort) buffer class.  
  <a href="class_t_t_ethernet_model_1_1_b_g_buffer.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_b_g_buffer_8h_source.html">BGBuffer.h</a>&gt;</code></p>
+<p><code>#include &lt;BGBuffer.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::BGBuffer:</div>
 <div class="dyncontent">
@@ -209,8 +209,6 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>Base class for a background (best-effort) buffer class. </p>
 <p>Use the implementation <a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_b_g_buffer_8h_source.html#l00033">33</a> of file <a class="el" href="_b_g_buffer_8h_source.html">BGBuffer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a91fc44bd17d4f3bf9c4f6c8f6e92b369"></a>
 <div class="memitem">
@@ -242,8 +240,6 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Definition at line <a class="el" href="_b_g_buffer_8cc_source.html#l00029">29</a> of file <a class="el" href="_b_g_buffer_8cc_source.html">BGBuffer.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a8800ad2ee324013175cd231eb69cb0f8" title="Is called when a new Frame is received in the buffer.">Buffer::handleMessage</a>(msg);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
@@ -257,9 +253,9 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                sendDirect(outgoingMessage-&gt;dup(), *destGate);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">if</span>(gate(<span class="stringliteral">&quot;out&quot;</span>)-&gt;isConnected()){</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                send(outgoingMessage-&gt;dup(),<span class="stringliteral">&quot;out&quot;</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//            if(gate(&quot;out&quot;)-&gt;isConnected()){</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//                send(outgoingMessage-&gt;dup(),&quot;out&quot;);</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//            }</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="comment">//TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.begin();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end(); ++iter){</div>
@@ -269,7 +265,24 @@ Additional Inherited Members</h2></td></tr>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keyword">delete</span> msg;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>) &amp;&amp; gate(<span class="stringliteral">&quot;out&quot;</span>)-&gt;isConnected())</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        cMessage *outgoingMessage = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43" title="Is called to get an EtherFrame from the buffer.">dequeue</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">if</span>(outgoingMessage)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                send(outgoingMessage-&gt;dup(),<span class="stringliteral">&quot;out&quot;</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="comment">//TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordflow">for</span>(std::map&lt;TTEApplicationBase*,Callback*&gt;::const_iterator iter = <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.begin();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        iter != <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a43c2174122aab6a6e8727ec2b0ab8c5f" title="Stores the callbacks that are executed when a frame is removed from the buffer.">transmitCallbacks</a>.end(); ++iter){</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    iter-&gt;first-&gt;executeCallback(iter-&gt;second);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#ad89f79667e18913a0761302a7ebd8583" title="Emits a statistics signal that a frame was sent from the buffer.">recordPacketSent</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="keyword">delete</span> msg;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -295,8 +308,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initializes the module. </p>
-
-<p>Definition at line <a class="el" href="_b_g_buffer_8cc_source.html#l00023">23</a> of file <a class="el" href="_b_g_buffer_8cc_source.html">BGBuffer.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">//Update displaystring</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_buffer.html#a2411de966054f13194db1b714d5b0f1d" title="Sets the status of the Buffer to empty or non-empty.">setIsEmpty</a>(<span class="keyword">true</span>);</div>
@@ -305,8 +316,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_b_g_buffer_8h_source.html">BGBuffer.h</a></li>
-<li><a class="el" href="_b_g_buffer_8cc_source.html">BGBuffer.cc</a></li>
+<li><a class="el" href="_b_g_buffer_8h.html">BGBuffer.h</a></li>
+<li><a class="el" href="_b_g_buffer_8cc.html">BGBuffer.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -314,7 +325,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_b_g_buffer.html">BGBuffer</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:37 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

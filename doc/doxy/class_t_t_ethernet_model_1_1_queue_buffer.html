@@ -119,17 +119,18 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_queue_buf
 <p>Base class for a queuing buffer class.  
  <a href="class_t_t_ethernet_model_1_1_queue_buffer.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>&gt;</code></p>
+<p><code>#include &lt;QueueBuffer.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::QueueBuffer:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_t_t_ethernet_model_1_1_queue_buffer.png" usemap="#TTEthernetModel::QueueBuffer_map" alt=""/>
   <map id="TTEthernetModel::QueueBuffer_map" name="TTEthernetModel::QueueBuffer_map">
-<area href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes." alt="TTEthernetModel::Buffer" shape="rect" coords="214,56,418,80"/>
-<area href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class." alt="TTEthernetModel::BGQueueBuffer" shape="rect" coords="0,168,204,192"/>
-<area href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class." alt="TTEthernetModel::RCQueueBuffer" shape="rect" coords="214,168,418,192"/>
-<area href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class." alt="TTEthernetModel::TTQueueBuffer" shape="rect" coords="428,168,632,192"/>
+<area href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes." alt="TTEthernetModel::Buffer" shape="rect" coords="334,56,547,80"/>
+<area href="class_t_t_ethernet_model_1_1_a_v_b_queue_buffer.html" alt="TTEthernetModel::AVBQueueBuffer" shape="rect" coords="0,168,213,192"/>
+<area href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class." alt="TTEthernetModel::BGQueueBuffer" shape="rect" coords="223,168,436,192"/>
+<area href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class." alt="TTEthernetModel::RCQueueBuffer" shape="rect" coords="446,168,659,192"/>
+<area href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class." alt="TTEthernetModel::TTQueueBuffer" shape="rect" coords="669,168,882,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -240,8 +241,6 @@ Additional Inherited Members</h2></td></tr>
 <p>The queue is an endless fifo queue.</p>
 <p>Use the implementations <a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>.</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_b_g_queue_buffer.html" title="Class for a queuing background (best-effort) buffer class.">BGQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_queue_buffer.html" title="Time-triggered queue buffer class.">TTQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_queue_buffer.html" title="Rate-constrained queue buffer class.">RCQueueBuffer</a>, <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00035">35</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aff1e2fd154dee22cbf7b1b3b8faf6e98"></a>
 <div class="memitem">
@@ -259,8 +258,6 @@ Additional Inherited Members</h2></td></tr>
 <p>Constructor for the class. </p>
 <p>executes <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">initializeStatistics()</a></p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">initializeStatistics()</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_queue_buffer_8cc_source.html#l00023">23</a> of file <a class="el" href="_queue_buffer_8cc_source.html">QueueBuffer.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a" title="Initializes the statistics for the Queue.">initializeStatistics</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
@@ -281,8 +278,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Destructor for the class. </p>
-
-<p>Definition at line <a class="el" href="_queue_buffer_8cc_source.html#l00028">28</a> of file <a class="el" href="_queue_buffer_8cc_source.html">QueueBuffer.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.clear();</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
@@ -315,8 +310,6 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Aa pointer to the EtherFrame removed from the queue. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#abd0a3ec42e4b1167cd526e42fb014f43">TTEthernetModel::Buffer</a>.</p>
-
-<p>Definition at line <a class="el" href="_queue_buffer_8cc_source.html#l00068">68</a> of file <a class="el" href="_queue_buffer_8cc_source.html">QueueBuffer.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length() &gt; 0)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
@@ -361,8 +354,6 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html#a7eb775139a8c4b60f4dc02542764be57">TTEthernetModel::Buffer</a>.</p>
-
-<p>Definition at line <a class="el" href="_queue_buffer_8cc_source.html#l00040">40</a> of file <a class="el" href="_queue_buffer_8cc_source.html">QueueBuffer.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">int</span> size = par(<span class="stringliteral">&quot;size&quot;</span>).longValue();</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span>(size&gt;=0 &amp;&amp; <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c" title="Queue for the EtherFrames in the Buffer.">frames</a>.length()&gt;=size){</div>
@@ -415,9 +406,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Initializes the statistics for the Queue. </p>
 
-<p>Definition at line <a class="el" href="_queue_buffer_8cc_source.html#l00033">33</a> of file <a class="el" href="_queue_buffer_8cc_source.html">QueueBuffer.cc</a>.</p>
-
-<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00023">QueueBuffer()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#aff1e2fd154dee22cbf7b1b3b8faf6e98">QueueBuffer()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#af5b562c7fed1ef92a89ae720117379fe" title="Signal containing the queue length, that is emitted every time a frame was inserted or removed...">queueLengthSignal</a> = registerSignal(<span class="stringliteral">&quot;queueLength&quot;</span>);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a8baa087bd3c88b6ff4effaa5b61a0de2" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);</div>
@@ -448,9 +437,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Signal that is emitted when a frame is dropped. </p>
 <p>Frames may be dropped when frame arrives at a full buffer. </p>
 
-<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00088">88</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00040">enqueue()</a>, and <a class="el" href="_queue_buffer_8cc_source.html#l00033">initializeStatistics()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918">enqueue()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a">initializeStatistics()</a>.</p>
 
 </div>
 </div>
@@ -474,9 +461,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Queue for the EtherFrames in the <a class="el" href="class_t_t_ethernet_model_1_1_buffer.html" title="Base class for all buffer classes.">Buffer</a>. </p>
 
-<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00055">55</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00068">dequeue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00040">enqueue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00033">initializeStatistics()</a>, and <a class="el" href="_queue_buffer_8cc_source.html#l00028">~QueueBuffer()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f">dequeue()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918">enqueue()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a">initializeStatistics()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a7f11141bd9474385aeb4503a448411ca">~QueueBuffer()</a>.</p>
 
 </div>
 </div>
@@ -500,15 +485,13 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Signal containing the queue length, that is emitted every time a frame was inserted or removed. </p>
 
-<p>Definition at line <a class="el" href="_queue_buffer_8h_source.html#l00082">82</a> of file <a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_queue_buffer_8cc_source.html#l00068">dequeue()</a>, <a class="el" href="_queue_buffer_8cc_source.html#l00040">enqueue()</a>, and <a class="el" href="_queue_buffer_8cc_source.html#l00033">initializeStatistics()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a3bde0c17cc704204563ddd4420f67a1f">dequeue()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#a2c05233a275aa10a7cd43c7dbacb8918">enqueue()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html#ab4bde61ddadc0f2aa89ab1e0511aa75a">initializeStatistics()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_queue_buffer_8h_source.html">QueueBuffer.h</a></li>
-<li><a class="el" href="_queue_buffer_8cc_source.html">QueueBuffer.cc</a></li>
+<li><a class="el" href="_queue_buffer_8h.html">QueueBuffer.h</a></li>
+<li><a class="el" href="_queue_buffer_8cc.html">QueueBuffer.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -516,7 +499,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_queue_buffer.html">QueueBuffer</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:37 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

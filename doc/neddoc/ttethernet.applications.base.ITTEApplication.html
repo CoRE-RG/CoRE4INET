@@ -16,8 +16,9 @@ Since this is an abstract module please do not instantiate it</p>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.applications.base.ITTEApplication-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="5,83,120,111">
-<area shape="rect" id="node2" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="9,6,116,34">
+<img src="ttethernet.applications.base.ITTEApplication-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.applications.base.ITTEApplication.html" title="Module Interface ITTEApplication" alt="" coords="87,83,201,111">
+<area shape="rect" id="node2" href="ttethernet.nodes.ethernet.TTEAVBEtherHost.html" title="Compound Module TTEAVBEtherHost" alt="" coords="5,6,139,34">
+<area shape="rect" id="node4" href="ttethernet.nodes.ethernet.TTEEtherHost.html" title="Compound Module TTEEtherHost" alt="" coords="163,6,269,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -57,6 +58,17 @@ critical traffic through its gates.</p>
    </tr>
 <tr>
    <td>
+<a href="ttethernet.nodes.ethernet.TTEAVBEtherHost.html">TTEAVBEtherHost</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+<i>(no description)</i>
+   </td>
+</tr>
+<tr>
+   <td>
 <a href="ttethernet.nodes.ethernet.TTEEtherHost.html">TTEEtherHost</a>
    </td>
    <td>
@@ -93,6 +105,19 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
    </td>
 </tr>
 </table>
+<h3 class="subtitle">Properties:</h3>
+<table class="propertiestable">
+   <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="description">Description</th>
+   </tr>
+<tr>
+   <td>display</td>
+   <td><i>i=block/app</i></td>
+   <td></td>
+</tr>
+</table>
 <h3 class="subtitle">Source code:</h3>
 <pre class="src"><span style="color: #808080; font-style: italic; ">//
 // Interface to be implemented by application models.
@@ -105,6 +130,7 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 </span><span style="color: #800000; font-weight: bold; ">moduleinterface</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEApplication</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">IPort</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/app&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #808080; font-style: italic; ">//Comma seperated list of buffer modules the application is allowed to use
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">string</span><span style="color: #000000; "> </span><span style="color: #000000; ">buffers</span><span style="color: #000000; ">;
     </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:

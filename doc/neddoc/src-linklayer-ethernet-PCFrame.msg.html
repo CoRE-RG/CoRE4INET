@@ -58,11 +58,11 @@
 </span><span style="color: #800000; font-weight: bold; ">enum</span><span style="color: #000000; "> </span><span style="color: #000000; ">PCFType</span><span style="color: #000000; ">
 {
     </span><span style="color: #808080; font-style: italic; ">//Coldstart Frame (CS)
-</span><span style="color: #000000; ">    </span><span style="color: #000000; ">CS</span><span style="color: #000000; "> = </span><span style="color: #008000; ">1</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">CS_FRAME</span><span style="color: #000000; "> = </span><span style="color: #008000; ">1</span><span style="color: #000000; ">;
     </span><span style="color: #808080; font-style: italic; ">//Integrate Frame (IN)
-</span><span style="color: #000000; ">	</span><span style="color: #000000; ">IN</span><span style="color: #000000; "> = </span><span style="color: #008000; ">2</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">IN_FRAME</span><span style="color: #000000; "> = </span><span style="color: #008000; ">2</span><span style="color: #000000; ">;
 	</span><span style="color: #808080; font-style: italic; ">//Coldstart Acknowledge (CA)
-</span><span style="color: #000000; ">	</span><span style="color: #000000; ">CA</span><span style="color: #000000; "> = </span><span style="color: #008000; ">3</span><span style="color: #000000; ">;
+</span><span style="color: #000000; ">	</span><span style="color: #000000; ">CA_FRAME</span><span style="color: #000000; "> = </span><span style="color: #008000; ">3</span><span style="color: #000000; ">;
 };
 
 </span><span style="color: #808080; font-style: italic; ">//
@@ -73,6 +73,9 @@
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">packet</span><span style="color: #000000; "> </span><span style="color: #000000; ">PCFrame</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCFrame</span><span style="color: #000000; ">
 {   
+    </span><span style="color: #808080; font-style: italic; ">// Set PCF Bytelength
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">byteLength</span><span style="color: #000000; "> = </span><span style="color: #008000; ">64</span><span style="color: #000000; ">;
+    	
     </span><span style="color: #808080; font-style: italic; ">// pcf_integration_cycle: Represents the integration cycle in which the protocol control frame was sent
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 32 Bit field

@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_p_c_f_inc
 <p>Class for the critical traffic conformance check of pcf traffic.  
  <a href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_p_c_f_incoming_8h_source.html">PCFIncoming.h</a>&gt;</code></p>
+<p><code>#include &lt;PCFIncoming.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::PCFIncoming:</div>
 <div class="dyncontent">
@@ -172,8 +172,6 @@ Additional Inherited Members</h2></td></tr>
 <p>This class checks whether incoming traffic was conform with the configured pcf type. Conform messages are forwarded from in to out</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html" title="Base class for the critical traffic conformance check.">Incoming</a></dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Lazar Todorov, Till Steinbach </dd></dl>
-
-<p>Definition at line <a class="el" href="_p_c_f_incoming_8h_source.html#l00036">36</a> of file <a class="el" href="_p_c_f_incoming_8h_source.html">PCFIncoming.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa39c92ee13f949cbefd2442ac707211b"></a>
 <div class="memitem">
@@ -189,8 +187,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-
-<p>Definition at line <a class="el" href="_p_c_f_incoming_8cc_source.html#l00022">22</a> of file <a class="el" href="_p_c_f_incoming_8cc_source.html">PCFIncoming.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{}</div>
 </div><!-- fragment -->
 </div>
@@ -227,14 +223,12 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a5ac75f71601c607f38b7a96525b5b8e7">TTEthernetModel::Incoming</a>.</p>
-
-<p>Definition at line <a class="el" href="_p_c_f_incoming_8cc_source.html#l00028">28</a> of file <a class="el" href="_p_c_f_incoming_8cc_source.html">PCFIncoming.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                            {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        PCFrame *frame = <span class="keyword">dynamic_cast&lt;</span>PCFrame *<span class="keyword">&gt;</span>(msg);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">if</span>(frame-&gt;getType() != (uint8_t)<a class="code" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a5926cbc4f5a5b08db917d042a73b0054" title="caches pcfType parameter">pcfType</a>){</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            ev&lt;&lt;<span class="stringliteral">&quot;FRAME DROPPED, wrong type:&quot;</span>&lt;&lt;frame-&gt;getType()&lt;&lt;<span class="stringliteral">&quot; should be &quot;</span>&lt;&lt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a5926cbc4f5a5b08db917d042a73b0054" title="caches pcfType parameter">pcfType</a>&lt;&lt;endl;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            ev&lt;&lt;<span class="stringliteral">&quot;FRAME DROPPED, wrong type:&quot;</span>&lt;&lt;(int)frame-&gt;getType()&lt;&lt;<span class="stringliteral">&quot; should be &quot;</span>&lt;&lt;<a class="code" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a5926cbc4f5a5b08db917d042a73b0054" title="caches pcfType parameter">pcfType</a>&lt;&lt;endl;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">delete</span> frame;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }<span class="keywordflow">else</span>{</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            sendDelayed(frame,SimTime(getParentModule()-&gt;par(<span class="stringliteral">&quot;hardware_delay&quot;</span>).doubleValue()),<span class="stringliteral">&quot;out&quot;</span>);</div>
@@ -273,8 +267,6 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Definition at line <a class="el" href="_p_c_f_incoming_8cc_source.html#l00041">41</a> of file <a class="el" href="_p_c_f_incoming_8cc_source.html">PCFIncoming.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                                          {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a5926cbc4f5a5b08db917d042a73b0054" title="caches pcfType parameter">pcfType</a> = (<a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60e" title="Enum generated from linklayer/ethernet/PCFrame.msg by opp_msgc.">PCFType</a>)par(<span class="stringliteral">&quot;pcfType&quot;</span>).longValue();</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
@@ -305,8 +297,6 @@ Additional Inherited Members</h2></td></tr>
 <p>Initialization of the module. </p>
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">TTEthernetModel::Incoming</a>.</p>
-
-<p>Definition at line <a class="el" href="_p_c_f_incoming_8cc_source.html#l00024">24</a> of file <a class="el" href="_p_c_f_incoming_8cc_source.html">PCFIncoming.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                            {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a5926cbc4f5a5b08db917d042a73b0054" title="caches pcfType parameter">pcfType</a>=(<a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60e" title="Enum generated from linklayer/ethernet/PCFrame.msg by opp_msgc.">PCFType</a>)par(<span class="stringliteral">&quot;pcfType&quot;</span>).longValue();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
@@ -334,15 +324,13 @@ Additional Inherited Members</h2></td></tr>
 
 <p>caches pcfType parameter </p>
 
-<p>Definition at line <a class="el" href="_p_c_f_incoming_8h_source.html#l00042">42</a> of file <a class="el" href="_p_c_f_incoming_8h_source.html">PCFIncoming.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_p_c_f_incoming_8cc_source.html#l00028">handleMessage()</a>, <a class="el" href="_p_c_f_incoming_8cc_source.html#l00041">handleParameterChange()</a>, and <a class="el" href="_p_c_f_incoming_8cc_source.html#l00024">initialize()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a17ab6bc16f37d08b32019134c7575bd2">handleMessage()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a38c009d5d097389415ad311017ed9899">handleParameterChange()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#abe59655d5103cc37715908dc1d99688d">initialize()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_p_c_f_incoming_8h_source.html">PCFIncoming.h</a></li>
-<li><a class="el" href="_p_c_f_incoming_8cc_source.html">PCFIncoming.cc</a></li>
+<li><a class="el" href="_p_c_f_incoming_8h.html">PCFIncoming.h</a></li>
+<li><a class="el" href="_p_c_f_incoming_8cc.html">PCFIncoming.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -350,7 +338,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html">PCFIncoming</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:37 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

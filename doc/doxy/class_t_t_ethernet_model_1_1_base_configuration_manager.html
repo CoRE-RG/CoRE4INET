@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_base_conf
 <p>Dummy module for a ConfigurationManager that has no configuration.  
  <a href="class_t_t_ethernet_model_1_1_base_configuration_manager.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_base_configuration_manager_8h_source.html">BaseConfigurationManager.h</a>&gt;</code></p>
+<p><code>#include &lt;BaseConfigurationManager.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::BaseConfigurationManager:</div>
 <div class="dyncontent">
@@ -138,8 +138,6 @@ Protected Member Functions</h2></td></tr>
 <div class="textblock"><p>Dummy module for a ConfigurationManager that has no configuration. </p>
 <p>If you use this <a class="el" href="class_t_t_ethernet_model_1_1_base_configuration_manager.html" title="Dummy module for a ConfigurationManager that has no configuration.">BaseConfigurationManager</a> you must configure the node manually</p>
 <p>The module is deleted after simulation start </p>
-
-<p>Definition at line <a class="el" href="_base_configuration_manager_8h_source.html#l00030">30</a> of file <a class="el" href="_base_configuration_manager_8h_source.html">BaseConfigurationManager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a6fd4995bb7f027a1e53e631a7051889e"></a>
 <div class="memitem">
@@ -164,8 +162,6 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Destroys the module after reception of a message. </p>
-
-<p>Definition at line <a class="el" href="_base_configuration_manager_8cc_source.html#l00028">28</a> of file <a class="el" href="_base_configuration_manager_8cc_source.html">BaseConfigurationManager.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">//delete module on first message, it is not needed anymore;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">delete</span> msg;</div>
@@ -197,8 +193,6 @@ Protected Member Functions</h2></td></tr>
 
 <p>Is called in initialization phase. </p>
 <p>The module creates a message for self destruction </p>
-
-<p>Definition at line <a class="el" href="_base_configuration_manager_8cc_source.html#l00022">22</a> of file <a class="el" href="_base_configuration_manager_8cc_source.html">BaseConfigurationManager.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">//Generate start message to delete module</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    scheduleAt(simTime(), <span class="keyword">new</span> cMessage(<span class="stringliteral">&quot;Delete Module&quot;</span>));</div>
@@ -207,8 +201,8 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_base_configuration_manager_8h_source.html">BaseConfigurationManager.h</a></li>
-<li><a class="el" href="_base_configuration_manager_8cc_source.html">BaseConfigurationManager.cc</a></li>
+<li><a class="el" href="_base_configuration_manager_8h.html">BaseConfigurationManager.h</a></li>
+<li><a class="el" href="_base_configuration_manager_8cc.html">BaseConfigurationManager.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -216,7 +210,7 @@ Protected Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_base_configuration_manager.html">BaseConfigurationManager</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:37 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

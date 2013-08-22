@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_task.html
 <p>Class representing a <a class="el" href="class_t_t_ethernet_model_1_1_task.html" title="Class representing a Task.">Task</a>.  
  <a href="class_t_t_ethernet_model_1_1_task.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_task_8h_source.html">Task.h</a>&gt;</code></p>
+<p><code>#include &lt;Task.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::Task:</div>
 <div class="dyncontent">
@@ -165,8 +165,6 @@ Protected Attributes</h2></td></tr>
 <p>The class stores a funtion pointer and args and invokes the function periodically.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>This may be merged with the <a class="el" href="class_t_t_ethernet_model_1_1_callback.html" title="Class representing a Callback.">Callback</a> class in a joined superclass. The code seems identical.</dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_application_base.html" title="Base class for a TTEthernet-Application.">TTEApplicationBase</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00036">36</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a18c0b610645e9b19b85d49fdf629f07a"></a>
 <div class="memitem">
@@ -190,8 +188,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00055">55</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
 <div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;              {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7" title="Boolean indicating whether args were set.">argSet</a>=<span class="keyword">false</span>;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
@@ -223,9 +219,7 @@ Protected Attributes</h2></td></tr>
 <p>execution of the task. </p>
 <p>If method is called the stored function pointer is invoked. </p>
 
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00101">101</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00042">TTEthernetModel::TTEAPIApplicationBase::handleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a6a91f5372abc6bd1edd29c797c5c087c">TTEthernetModel::TTEAPIApplicationBase::handleMessage()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                                  {</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103" title="Function pointer of the task.">fn</a>(<a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7" title="Pointer to the function args.">arg</a>);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
@@ -255,8 +249,6 @@ Protected Attributes</h2></td></tr>
 
 <p>Getter for the function args. </p>
 <dl class="section return"><dt>Returns</dt><dd>the funtion arg used in the task </dd></dl>
-
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00092">92</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
 <div class="fragment"><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                      {</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7" title="Pointer to the function args.">arg</a>;</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
@@ -286,8 +278,6 @@ Protected Attributes</h2></td></tr>
 
 <p>Getter for the function pointer. </p>
 <dl class="section return"><dt>Returns</dt><dd>the funtion pointer that is invoked in the task </dd></dl>
-
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00073">73</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
 <div class="fragment"><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                           {</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103" title="Function pointer of the task.">fn</a>;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
@@ -324,9 +314,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00082">82</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00071">TTEthernetModel::TTEAPIApplicationBase::registerTask()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9472479b1788c65b84199fdd89eebbc9">TTEthernetModel::TTEAPIApplicationBase::registerTask()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                                                         {</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_task.html#adc0838237866a338b26c2280bb1896e7" title="Pointer to the function args.">arg</a>=<a class="code" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5" title="Setter for the function args.">setFunctionArg</a>;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a79bd20df62f2c8b83420b7b6f4d6f0e7" title="Boolean indicating whether args were set.">argSet</a>=<span class="keyword">true</span>;</div>
@@ -364,9 +352,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00064">64</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_a_p_i_application_base_8cc_source.html#l00071">TTEthernetModel::TTEAPIApplicationBase::registerTask()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_p_i_application_base.html#a9472479b1788c65b84199fdd89eebbc9">TTEthernetModel::TTEAPIApplicationBase::registerTask()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                                                       {</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_task.html#a629616515cb7c427add1c32d478f6103" title="Function pointer of the task.">fn</a>=functionPointer;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
@@ -394,9 +380,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to the function args. </p>
 
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00046">46</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_task_8h_source.html#l00101">executeTask()</a>, <a class="el" href="_task_8h_source.html#l00092">getFunctionArg()</a>, and <a class="el" href="_task_8h_source.html#l00082">setFunctionArg()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_task.html#a6528388c6375cb74a0e9463702573689">executeTask()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_task.html#adffe247a4b5c389ac8263dae059f84b5">getFunctionArg()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5">setFunctionArg()</a>.</p>
 
 </div>
 </div>
@@ -420,9 +404,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Boolean indicating whether args were set. </p>
 
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00050">50</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_task_8h_source.html#l00082">setFunctionArg()</a>, and <a class="el" href="_task_8h_source.html#l00055">Task()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_task.html#aee238f2c43ef560dac2937dc9578dda5">setFunctionArg()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_task.html#a18c0b610645e9b19b85d49fdf629f07a">Task()</a>.</p>
 
 </div>
 </div>
@@ -446,14 +428,12 @@ Protected Attributes</h2></td></tr>
 
 <p>Function pointer of the task. </p>
 
-<p>Definition at line <a class="el" href="_task_8h_source.html#l00042">42</a> of file <a class="el" href="_task_8h_source.html">Task.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_task_8h_source.html#l00101">executeTask()</a>, <a class="el" href="_task_8h_source.html#l00073">getFunctionPointer()</a>, and <a class="el" href="_task_8h_source.html#l00064">setFunctionPointer()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_task.html#a6528388c6375cb74a0e9463702573689">executeTask()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_task.html#a66fd75e65247e9c74761e46a0adbed80">getFunctionPointer()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_task.html#a72955c53dc491d5ad13f9e8412714c24">setFunctionPointer()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_task_8h_source.html">Task.h</a></li>
+<li><a class="el" href="_task_8h.html">Task.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -461,7 +441,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_task.html">Task</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:37 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_s_m___w_a
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_s_m_states_8h_source.html">SMStates.h</a>&gt;</code></p>
+<p><code>#include &lt;SMStates.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::SM_WAIT_4_CYCLE_START_CS:</div>
 <div class="dyncontent">
@@ -130,8 +130,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac482be44e6b2231a53a13b97cc9b0b60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t___c_s.html#ac482be44e6b2231a53a13b97cc9b0b60">handleMessage</a> (cMessage *message)</td></tr>
 <tr class="separator:ac482be44e6b2231a53a13b97cc9b0b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_t_t_ethernet_model_1_1_s_m_state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html">TTEthernetModel::SMState</a></td></tr>
-<tr class="memitem:a122b581427980d11a5205c6969a93efb inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a122b581427980d11a5205c6969a93efb">getValue</a> (uint32_t bitVector, uint32_t length)</td></tr>
-<tr class="separator:a122b581427980d11a5205c6969a93efb inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a072676d1f925e0ee6cad2a7e987b3df7 inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a072676d1f925e0ee6cad2a7e987b3df7">~SMState</a> ()</td></tr>
+<tr class="separator:a072676d1f925e0ee6cad2a7e987b3df7 inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba24737a1fe176766bf2daf00909ce25 inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25">getValue</a> (uint32_t bitVector, uint32_t length)</td></tr>
+<tr class="separator:aba24737a1fe176766bf2daf00909ce25 inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6064207d1cacb649c2d3f418510dca6 inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#ac6064207d1cacb649c2d3f418510dca6">inSchedule</a> (uint64_t permanence_pit, uint64_t sc_receive_pit, uint64_t acceptance_window)</td></tr>
 <tr class="separator:ac6064207d1cacb649c2d3f418510dca6 inherit pub_methods_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -182,8 +184,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:add72f9abeb010a79de47487c73b4b423 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5944afe2bcc5270f8444ac428b88db47 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a5944afe2bcc5270f8444ac428b88db47">local_integration_cycle</a></td></tr>
 <tr class="separator:a5944afe2bcc5270f8444ac428b88db47 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f69ca517a9aca535a1507798c31d974 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a3f69ca517a9aca535a1507798c31d974">clock_corr</a></td></tr>
-<tr class="separator:a3f69ca517a9aca535a1507798c31d974 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a640a5f554af439cdc87a5511603838e7 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a640a5f554af439cdc87a5511603838e7">clock_corr</a></td></tr>
+<tr class="separator:a640a5f554af439cdc87a5511603838e7 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2784659c68df75031d656a640571c308 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a2784659c68df75031d656a640571c308">stable_cycle_counter</a></td></tr>
 <tr class="separator:a2784659c68df75031d656a640571c308 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a544abf6fdbb03d7a3686eb88b6e7ebbb inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a></td></tr>
@@ -218,10 +220,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:acddbde2498689b1c59886a7162b66ccc inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memItemLeft" align="right" valign="top">multimap&lt; uint64_t, <a class="el" href="class_t_t_ethernet_model_1_1_frame_event.html">FrameEvent</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a></td></tr>
 <tr class="separator:acddbde2498689b1c59886a7162b66ccc inherit pub_attribs_class_t_t_ethernet_model_1_1_s_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_s_m_states_8h_source.html#l00109">109</a> of file <a class="el" href="_s_m_states_8h_source.html">SMStates.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac17bd3f232175c99432cc3160f8a61d7"></a>
 <div class="memitem">
 <div class="memproto">
@@ -234,17 +233,15 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_s_m_states_8cc_source.html#l02393">2393</a> of file <a class="el" href="_s_m_states_8cc_source.html">SMStates.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l02393"></a><span class="lineno"> 2393</span>&#160;                                                   {</div>
-<div class="line"><a name="l02394"></a><span class="lineno"> 2394</span>&#160;</div>
-<div class="line"><a name="l02395"></a><span class="lineno"> 2395</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;cyan&quot;</span>);</div>
-<div class="line"><a name="l02396"></a><span class="lineno"> 2396</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;bubble(<span class="stringliteral">&quot;SM_WAIT_4_CYCLE_START_CS&quot;</span>);</div>
-<div class="line"><a name="l02397"></a><span class="lineno"> 2397</span>&#160;    ev &lt;&lt; <span class="stringliteral">&quot;SM_WAIT_4_CYCLE_START_CS MEMBER&quot;</span> &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ada2ddf0f0623fa2678aaa6d6d228c273">ownBit</a> &lt;&lt; endl;</div>
-<div class="line"><a name="l02398"></a><span class="lineno"> 2398</span>&#160;</div>
-<div class="line"><a name="l02399"></a><span class="lineno"> 2399</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aec0f605932532cf757368e63c32a0343">event</a>);</div>
-<div class="line"><a name="l02400"></a><span class="lineno"> 2400</span>&#160;</div>
-<div class="line"><a name="l02401"></a><span class="lineno"> 2401</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l02504"></a><span class="lineno"> 2504</span>&#160;                                                   {</div>
+<div class="line"><a name="l02505"></a><span class="lineno"> 2505</span>&#160;</div>
+<div class="line"><a name="l02506"></a><span class="lineno"> 2506</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;getDisplayString().setTagArg(<span class="stringliteral">&quot;i&quot;</span>, 1, <span class="stringliteral">&quot;cyan&quot;</span>);</div>
+<div class="line"><a name="l02507"></a><span class="lineno"> 2507</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;bubble(<span class="stringliteral">&quot;SM_WAIT_4_CYCLE_START_CS&quot;</span>);</div>
+<div class="line"><a name="l02508"></a><span class="lineno"> 2508</span>&#160;    ev &lt;&lt; <span class="stringliteral">&quot;SM_WAIT_4_CYCLE_START_CS MEMBER&quot;</span> &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ada2ddf0f0623fa2678aaa6d6d228c273">ownBit</a> &lt;&lt; endl;</div>
+<div class="line"><a name="l02509"></a><span class="lineno"> 2509</span>&#160;</div>
+<div class="line"><a name="l02510"></a><span class="lineno"> 2510</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aec0f605932532cf757368e63c32a0343">event</a>);</div>
+<div class="line"><a name="l02511"></a><span class="lineno"> 2511</span>&#160;</div>
+<div class="line"><a name="l02512"></a><span class="lineno"> 2512</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -272,197 +269,303 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8d853687d3f2b9e27168bf30c0e1396e">TTEthernetModel::SMState</a>.</p>
-
-<p>Definition at line <a class="el" href="_s_m_states_8cc_source.html#l02403">2403</a> of file <a class="el" href="_s_m_states_8cc_source.html">SMStates.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l02403"></a><span class="lineno"> 2403</span>&#160;                                                              {</div>
-<div class="line"><a name="l02404"></a><span class="lineno"> 2404</span>&#160;</div>
-<div class="line"><a name="l02405"></a><span class="lineno"> 2405</span>&#160;    <span class="keywordflow">if</span> (message-&gt;arrivedOn(<span class="stringliteral">&quot;RCin&quot;</span>)) {</div>
-<div class="line"><a name="l02406"></a><span class="lineno"> 2406</span>&#160;</div>
-<div class="line"><a name="l02407"></a><span class="lineno"> 2407</span>&#160;        <span class="comment">//ack to the buffer</span></div>
-<div class="line"><a name="l02408"></a><span class="lineno"> 2408</span>&#160;        RCBuffer *rcBuffer = <span class="keyword">dynamic_cast&lt;</span>RCBuffer*<span class="keyword">&gt;</span>(message-&gt;getSenderModule());</div>
-<div class="line"><a name="l02409"></a><span class="lineno"> 2409</span>&#160;        <span class="keywordflow">if</span> (rcBuffer)</div>
-<div class="line"><a name="l02410"></a><span class="lineno"> 2410</span>&#160;            rcBuffer-&gt;resetBag();</div>
-<div class="line"><a name="l02411"></a><span class="lineno"> 2411</span>&#160;</div>
-<div class="line"><a name="l02412"></a><span class="lineno"> 2412</span>&#160;        <span class="comment">//makes all PCF frames permanent</span></div>
-<div class="line"><a name="l02413"></a><span class="lineno"> 2413</span>&#160;</div>
-<div class="line"><a name="l02414"></a><span class="lineno"> 2414</span>&#160;        PCFrame *frame = <span class="keyword">dynamic_cast&lt;</span>PCFrame *<span class="keyword">&gt;</span>(message);</div>
-<div class="line"><a name="l02415"></a><span class="lineno"> 2415</span>&#160;</div>
-<div class="line"><a name="l02416"></a><span class="lineno"> 2416</span>&#160;        <span class="keywordflow">if</span> ((frame-&gt;getSync_domain() == <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a4018e3ce6edb846316e5f4bcab73ceea">syncDomain</a>)</div>
-<div class="line"><a name="l02417"></a><span class="lineno"> 2417</span>&#160;                &amp;&amp; (frame-&gt;getSync_priority() == <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a0310153fce0a9db9ce38c7ad6cc107e3">syncPriority</a>)) {</div>
-<div class="line"><a name="l02418"></a><span class="lineno"> 2418</span>&#160;</div>
-<div class="line"><a name="l02419"></a><span class="lineno"> 2419</span>&#160;            <span class="comment">//calculate permanence pit</span></div>
-<div class="line"><a name="l02420"></a><span class="lineno"> 2420</span>&#160;            uint64_t permanence_delay =</div>
-<div class="line"><a name="l02421"></a><span class="lineno"> 2421</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a624db31004456d988968be4f1707316b">max_transmission_delay</a></div>
-<div class="line"><a name="l02422"></a><span class="lineno"> 2422</span>&#160;                            - (<a class="code" href="_helper_functions_8cc.html#ab7aebf5462b19bd64206b5ab5ebb3392" title="Converts value in the transparent clock unit that is ns*0x10000 to ticks.">transparentClockToTicks</a>(</div>
-<div class="line"><a name="l02423"></a><span class="lineno"> 2423</span>&#160;                                    frame-&gt;getTransparent_clock(),</div>
-<div class="line"><a name="l02424"></a><span class="lineno"> 2424</span>&#160;                                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue())</div>
-<div class="line"><a name="l02425"></a><span class="lineno"> 2425</span>&#160;                                    + (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>()</div>
-<div class="line"><a name="l02426"></a><span class="lineno"> 2426</span>&#160;                                            - frame-&gt;par(<span class="stringliteral">&quot;received_total&quot;</span>).longValue()));</div>
-<div class="line"><a name="l02427"></a><span class="lineno"> 2427</span>&#160;            uint64_t permanence_pit = <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>()</div>
-<div class="line"><a name="l02428"></a><span class="lineno"> 2428</span>&#160;                    + permanence_delay;</div>
-<div class="line"><a name="l02429"></a><span class="lineno"> 2429</span>&#160;</div>
-<div class="line"><a name="l02430"></a><span class="lineno"> 2430</span>&#160;            <span class="comment">//create and register the event for the permanence pit</span></div>
-<div class="line"><a name="l02431"></a><span class="lineno"> 2431</span>&#160;</div>
-<div class="line"><a name="l02432"></a><span class="lineno"> 2432</span>&#160;            <span class="keywordflow">if</span> (frame-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60ea69b796dac846487107a8c28c5a5b77d3">CS</a>) {</div>
-<div class="line"><a name="l02433"></a><span class="lineno"> 2433</span>&#160;</div>
-<div class="line"><a name="l02434"></a><span class="lineno"> 2434</span>&#160;                FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;FRAME&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l02435"></a><span class="lineno"> 2435</span>&#160;</div>
-<div class="line"><a name="l02436"></a><span class="lineno"> 2436</span>&#160;                f_event-&gt;setPcfType(frame-&gt;getType());</div>
-<div class="line"><a name="l02437"></a><span class="lineno"> 2437</span>&#160;                f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
-<div class="line"><a name="l02438"></a><span class="lineno"> 2438</span>&#160;                f_event-&gt;setIntegrationCycle(frame-&gt;getIntegration_cycle());</div>
-<div class="line"><a name="l02439"></a><span class="lineno"> 2439</span>&#160;</div>
-<div class="line"><a name="l02440"></a><span class="lineno"> 2440</span>&#160;                f_event-&gt;setTimer(permanence_delay);</div>
-<div class="line"><a name="l02441"></a><span class="lineno"> 2441</span>&#160;                f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l02442"></a><span class="lineno"> 2442</span>&#160;</div>
-<div class="line"><a name="l02443"></a><span class="lineno"> 2443</span>&#160;                f_event-&gt;setSchedulingPriority(0);</div>
-<div class="line"><a name="l02444"></a><span class="lineno"> 2444</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
-<div class="line"><a name="l02445"></a><span class="lineno"> 2445</span>&#160;</div>
-<div class="line"><a name="l02446"></a><span class="lineno"> 2446</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (frame-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eadd95599e4fe0d23eef0bb3c80c877d2a">CA</a>) {</div>
-<div class="line"><a name="l02447"></a><span class="lineno"> 2447</span>&#160;</div>
-<div class="line"><a name="l02448"></a><span class="lineno"> 2448</span>&#160;                FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;FRAME&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l02449"></a><span class="lineno"> 2449</span>&#160;</div>
-<div class="line"><a name="l02450"></a><span class="lineno"> 2450</span>&#160;                f_event-&gt;setPcfType(frame-&gt;getType());</div>
-<div class="line"><a name="l02451"></a><span class="lineno"> 2451</span>&#160;                f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
-<div class="line"><a name="l02452"></a><span class="lineno"> 2452</span>&#160;                f_event-&gt;setIntegrationCycle(frame-&gt;getIntegration_cycle());</div>
-<div class="line"><a name="l02453"></a><span class="lineno"> 2453</span>&#160;</div>
-<div class="line"><a name="l02454"></a><span class="lineno"> 2454</span>&#160;                f_event-&gt;setTimer(permanence_delay);</div>
-<div class="line"><a name="l02455"></a><span class="lineno"> 2455</span>&#160;                f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l02456"></a><span class="lineno"> 2456</span>&#160;</div>
-<div class="line"><a name="l02457"></a><span class="lineno"> 2457</span>&#160;                f_event-&gt;setSchedulingPriority(1);</div>
-<div class="line"><a name="l02458"></a><span class="lineno"> 2458</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
-<div class="line"><a name="l02459"></a><span class="lineno"> 2459</span>&#160;</div>
-<div class="line"><a name="l02460"></a><span class="lineno"> 2460</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (frame-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eaaf186ee41615fe8d831c9e1506f4ceca">IN</a>) {</div>
-<div class="line"><a name="l02461"></a><span class="lineno"> 2461</span>&#160;</div>
-<div class="line"><a name="l02462"></a><span class="lineno"> 2462</span>&#160;                FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;IN_FRAME&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
-<div class="line"><a name="l02463"></a><span class="lineno"> 2463</span>&#160;</div>
-<div class="line"><a name="l02464"></a><span class="lineno"> 2464</span>&#160;                f_event-&gt;setReceivedPort(</div>
-<div class="line"><a name="l02465"></a><span class="lineno"> 2465</span>&#160;                        frame-&gt;par(<span class="stringliteral">&quot;received_port&quot;</span>).longValue());</div>
-<div class="line"><a name="l02466"></a><span class="lineno"> 2466</span>&#160;                f_event-&gt;setPcfType(frame-&gt;getType());</div>
-<div class="line"><a name="l02467"></a><span class="lineno"> 2467</span>&#160;                f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
-<div class="line"><a name="l02468"></a><span class="lineno"> 2468</span>&#160;                f_event-&gt;setIntegrationCycle(frame-&gt;getIntegration_cycle());</div>
-<div class="line"><a name="l02469"></a><span class="lineno"> 2469</span>&#160;</div>
-<div class="line"><a name="l02470"></a><span class="lineno"> 2470</span>&#160;                f_event-&gt;setTimer(permanence_delay);</div>
-<div class="line"><a name="l02471"></a><span class="lineno"> 2471</span>&#160;                f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l02472"></a><span class="lineno"> 2472</span>&#160;</div>
-<div class="line"><a name="l02473"></a><span class="lineno"> 2473</span>&#160;                f_event-&gt;setSchedulingPriority(2);</div>
-<div class="line"><a name="l02474"></a><span class="lineno"> 2474</span>&#160;</div>
-<div class="line"><a name="l02475"></a><span class="lineno"> 2475</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;insert(</div>
-<div class="line"><a name="l02476"></a><span class="lineno"> 2476</span>&#160;                        pair&lt;uint64_t, FrameEvent *&gt;(permanence_pit, f_event));</div>
-<div class="line"><a name="l02477"></a><span class="lineno"> 2477</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
-<div class="line"><a name="l02478"></a><span class="lineno"> 2478</span>&#160;</div>
-<div class="line"><a name="l02479"></a><span class="lineno"> 2479</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l02480"></a><span class="lineno"> 2480</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;UNKNOWN PCF FRAME-&gt;TYPE: &quot;</span> &lt;&lt; frame-&gt;getType() &lt;&lt; endl;</div>
-<div class="line"><a name="l02481"></a><span class="lineno"> 2481</span>&#160;            }</div>
-<div class="line"><a name="l02482"></a><span class="lineno"> 2482</span>&#160;</div>
-<div class="line"><a name="l02483"></a><span class="lineno"> 2483</span>&#160;            <span class="keyword">delete</span> frame;</div>
-<div class="line"><a name="l02484"></a><span class="lineno"> 2484</span>&#160;</div>
-<div class="line"><a name="l02485"></a><span class="lineno"> 2485</span>&#160;        } <span class="comment">//syncDomain &amp;&amp; syncPriority</span></div>
-<div class="line"><a name="l02486"></a><span class="lineno"> 2486</span>&#160;</div>
-<div class="line"><a name="l02487"></a><span class="lineno"> 2487</span>&#160;    } <span class="comment">//RCin</span></div>
-<div class="line"><a name="l02488"></a><span class="lineno"> 2488</span>&#160;</div>
-<div class="line"><a name="l02489"></a><span class="lineno"> 2489</span>&#160;    <span class="keywordflow">if</span> (message-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>)) {</div>
-<div class="line"><a name="l02490"></a><span class="lineno"> 2490</span>&#160;        <span class="comment">//local timer expired</span></div>
-<div class="line"><a name="l02491"></a><span class="lineno"> 2491</span>&#160;        <span class="comment">//if(local_timer==true){</span></div>
-<div class="line"><a name="l02492"></a><span class="lineno"> 2492</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;ASYNCHRON&quot;</span>) == 0) {</div>
-<div class="line"><a name="l02493"></a><span class="lineno"> 2493</span>&#160;</div>
-<div class="line"><a name="l02494"></a><span class="lineno"> 2494</span>&#160;            <span class="comment">//local_clock=0;</span></div>
-<div class="line"><a name="l02495"></a><span class="lineno"> 2495</span>&#160;</div>
-<div class="line"><a name="l02496"></a><span class="lineno"> 2496</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a5944afe2bcc5270f8444ac428b88db47">local_integration_cycle</a> =</div>
-<div class="line"><a name="l02497"></a><span class="lineno"> 2497</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;par(<span class="stringliteral">&quot;cv_local_integration_cycle&quot;</span>).longValue();</div>
-<div class="line"><a name="l02498"></a><span class="lineno"> 2498</span>&#160;            <span class="comment">//local_sync_membership=1; set the own bit</span></div>
-<div class="line"><a name="l02499"></a><span class="lineno"> 2499</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> = 0;</div>
-<div class="line"><a name="l02500"></a><span class="lineno"> 2500</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> |= (1 &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ada2ddf0f0623fa2678aaa6d6d228c273">ownBit</a>);</div>
-<div class="line"><a name="l02501"></a><span class="lineno"> 2501</span>&#160;</div>
-<div class="line"><a name="l02502"></a><span class="lineno"> 2502</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8665efe73f00d06071e08b8ffaeff892">local_async_membership</a> = 0;</div>
-<div class="line"><a name="l02503"></a><span class="lineno"> 2503</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#add72f9abeb010a79de47487c73b4b423">local_async_membership_r</a> = 0;</div>
-<div class="line"><a name="l02504"></a><span class="lineno"> 2504</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a1d5cee2f40eb01f5779c45780e844d0f">local_async_membership_f</a> = 0;</div>
-<div class="line"><a name="l02505"></a><span class="lineno"> 2505</span>&#160;</div>
-<div class="line"><a name="l02506"></a><span class="lineno"> 2506</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a3d734bf7d943e34931b4427394d077cd">event1</a>);</div>
-<div class="line"><a name="l02507"></a><span class="lineno"> 2507</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aff8d6bd8188f416b67216937806c9a94">event4</a>);</div>
-<div class="line"><a name="l02508"></a><span class="lineno"> 2508</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6e4c64cb57c82d863411bfd4549d89ad">event2</a>);</div>
-<div class="line"><a name="l02509"></a><span class="lineno"> 2509</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a9fff3d27a98061227035da46705f79c6">event5</a>);</div>
-<div class="line"><a name="l02510"></a><span class="lineno"> 2510</span>&#160;</div>
-<div class="line"><a name="l02511"></a><span class="lineno"> 2511</span>&#160;</div>
-<div class="line"><a name="l02512"></a><span class="lineno"> 2512</span>&#160;</div>
-<div class="line"><a name="l02513"></a><span class="lineno"> 2513</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>());</div>
-<div class="line"><a name="l02514"></a><span class="lineno"> 2514</span>&#160;</div>
-<div class="line"><a name="l02515"></a><span class="lineno"> 2515</span>&#160;            <span class="keyword">new</span> (<span class="keyword">this</span>) SM_TENTATIVE_SYNC();</div>
-<div class="line"><a name="l02516"></a><span class="lineno"> 2516</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="fragment"><div class="line"><a name="l02514"></a><span class="lineno"> 2514</span>&#160;                                                              {</div>
+<div class="line"><a name="l02515"></a><span class="lineno"> 2515</span>&#160;</div>
+<div class="line"><a name="l02516"></a><span class="lineno"> 2516</span>&#160;    <span class="keywordflow">if</span> (message-&gt;arrivedOn(<span class="stringliteral">&quot;RCin&quot;</span>)) {</div>
 <div class="line"><a name="l02517"></a><span class="lineno"> 2517</span>&#160;</div>
-<div class="line"><a name="l02518"></a><span class="lineno"> 2518</span>&#160;        }</div>
-<div class="line"><a name="l02519"></a><span class="lineno"> 2519</span>&#160;</div>
-<div class="line"><a name="l02520"></a><span class="lineno"> 2520</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;FRAME&quot;</span>) == 0) {</div>
-<div class="line"><a name="l02521"></a><span class="lineno"> 2521</span>&#160;            <span class="comment">//pcf frame becomes permanent</span></div>
+<div class="line"><a name="l02518"></a><span class="lineno"> 2518</span>&#160;        <span class="comment">//ack to the buffer</span></div>
+<div class="line"><a name="l02519"></a><span class="lineno"> 2519</span>&#160;        RCBuffer *rcBuffer = <span class="keyword">dynamic_cast&lt;</span>RCBuffer*<span class="keyword">&gt;</span>(message-&gt;getSenderModule());</div>
+<div class="line"><a name="l02520"></a><span class="lineno"> 2520</span>&#160;        <span class="keywordflow">if</span> (rcBuffer)</div>
+<div class="line"><a name="l02521"></a><span class="lineno"> 2521</span>&#160;            rcBuffer-&gt;resetBag();</div>
 <div class="line"><a name="l02522"></a><span class="lineno"> 2522</span>&#160;</div>
-<div class="line"><a name="l02523"></a><span class="lineno"> 2523</span>&#160;            <span class="comment">//get the PCF Frame</span></div>
-<div class="line"><a name="l02524"></a><span class="lineno"> 2524</span>&#160;            FrameEvent *e = <span class="keyword">dynamic_cast&lt;</span>FrameEvent*<span class="keyword">&gt;</span>(message);</div>
-<div class="line"><a name="l02525"></a><span class="lineno"> 2525</span>&#160;</div>
-<div class="line"><a name="l02526"></a><span class="lineno"> 2526</span>&#160;            <span class="keywordflow">if</span> (e-&gt;getPcfType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60ea69b796dac846487107a8c28c5a5b77d3">CS</a>) {</div>
-<div class="line"><a name="l02527"></a><span class="lineno"> 2527</span>&#160;</div>
-<div class="line"><a name="l02528"></a><span class="lineno"> 2528</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfeedfdd1219d0ab349663750d1be18a" title="Unregister an event that was previously registered in the scheduler.">unregisterEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aec0f605932532cf757368e63c32a0343">event</a>);</div>
+<div class="line"><a name="l02523"></a><span class="lineno"> 2523</span>&#160;        <span class="comment">//makes all PCF frames permanent</span></div>
+<div class="line"><a name="l02524"></a><span class="lineno"> 2524</span>&#160;</div>
+<div class="line"><a name="l02525"></a><span class="lineno"> 2525</span>&#160;        PCFrame *frame = <span class="keyword">dynamic_cast&lt;</span>PCFrame *<span class="keyword">&gt;</span>(message);</div>
+<div class="line"><a name="l02526"></a><span class="lineno"> 2526</span>&#160;</div>
+<div class="line"><a name="l02527"></a><span class="lineno"> 2527</span>&#160;        <span class="keywordflow">if</span> ((frame-&gt;getSync_domain() == <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a4018e3ce6edb846316e5f4bcab73ceea">syncDomain</a>)</div>
+<div class="line"><a name="l02528"></a><span class="lineno"> 2528</span>&#160;                &amp;&amp; (frame-&gt;getSync_priority() == <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a0310153fce0a9db9ce38c7ad6cc107e3">syncPriority</a>)) {</div>
 <div class="line"><a name="l02529"></a><span class="lineno"> 2529</span>&#160;</div>
-<div class="line"><a name="l02530"></a><span class="lineno"> 2530</span>&#160;                <span class="comment">//event = new SchedulerTimerEvent(&quot;ASYNCHRON&quot;, TIMER_EVENT);</span></div>
-<div class="line"><a name="l02531"></a><span class="lineno"> 2531</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a> = <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;par(<span class="stringliteral">&quot;cs_offset&quot;</span>).longValue();</div>
-<div class="line"><a name="l02532"></a><span class="lineno"> 2532</span>&#160;                <span class="keyword">event</span>-&gt;setSchedulingPriority(3);</div>
-<div class="line"><a name="l02533"></a><span class="lineno"> 2533</span>&#160;                <span class="keyword">event</span>-&gt;setTimer(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a>);</div>
-<div class="line"><a name="l02534"></a><span class="lineno"> 2534</span>&#160;                <span class="keyword">event</span>-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
-<div class="line"><a name="l02535"></a><span class="lineno"> 2535</span>&#160;</div>
-<div class="line"><a name="l02536"></a><span class="lineno"> 2536</span>&#160;                <span class="comment">//local_clock=0;</span></div>
-<div class="line"><a name="l02537"></a><span class="lineno"> 2537</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>());</div>
-<div class="line"><a name="l02538"></a><span class="lineno"> 2538</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a5944afe2bcc5270f8444ac428b88db47">local_integration_cycle</a> = 0;</div>
-<div class="line"><a name="l02539"></a><span class="lineno"> 2539</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> = 0;</div>
-<div class="line"><a name="l02540"></a><span class="lineno"> 2540</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8665efe73f00d06071e08b8ffaeff892">local_async_membership</a> = 0;</div>
-<div class="line"><a name="l02541"></a><span class="lineno"> 2541</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#add72f9abeb010a79de47487c73b4b423">local_async_membership_r</a> = 0;</div>
-<div class="line"><a name="l02542"></a><span class="lineno"> 2542</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a1d5cee2f40eb01f5779c45780e844d0f">local_async_membership_f</a> = 0;</div>
-<div class="line"><a name="l02543"></a><span class="lineno"> 2543</span>&#160;</div>
-<div class="line"><a name="l02544"></a><span class="lineno"> 2544</span>&#160;                <span class="keyword">delete</span> e;</div>
-<div class="line"><a name="l02545"></a><span class="lineno"> 2545</span>&#160;</div>
-<div class="line"><a name="l02546"></a><span class="lineno"> 2546</span>&#160;                <span class="keyword">new</span> (<span class="keyword">this</span>) SM_FLOOD();</div>
-<div class="line"><a name="l02547"></a><span class="lineno"> 2547</span>&#160;                <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l02548"></a><span class="lineno"> 2548</span>&#160;            } <span class="comment">//CS_FRAME</span></div>
-<div class="line"><a name="l02549"></a><span class="lineno"> 2549</span>&#160;</div>
-<div class="line"><a name="l02550"></a><span class="lineno"> 2550</span>&#160;            <span class="keywordflow">if</span> (e-&gt;getPcfType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eadd95599e4fe0d23eef0bb3c80c877d2a">CA</a>) {</div>
-<div class="line"><a name="l02551"></a><span class="lineno"> 2551</span>&#160;</div>
-<div class="line"><a name="l02552"></a><span class="lineno"> 2552</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfeedfdd1219d0ab349663750d1be18a" title="Unregister an event that was previously registered in the scheduler.">unregisterEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aec0f605932532cf757368e63c32a0343">event</a>);</div>
+<div class="line"><a name="l02530"></a><span class="lineno"> 2530</span>&#160;            <span class="comment">//calculate permanence pit</span></div>
+<div class="line"><a name="l02531"></a><span class="lineno"> 2531</span>&#160;            uint64_t permanence_delay =</div>
+<div class="line"><a name="l02532"></a><span class="lineno"> 2532</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a624db31004456d988968be4f1707316b">max_transmission_delay</a></div>
+<div class="line"><a name="l02533"></a><span class="lineno"> 2533</span>&#160;                            - (<a class="code" href="_helper_functions_8cc.html#ab7aebf5462b19bd64206b5ab5ebb3392" title="Converts value in the transparent clock unit that is ns*0x10000 to ticks.">transparentClockToTicks</a>(</div>
+<div class="line"><a name="l02534"></a><span class="lineno"> 2534</span>&#160;                                    frame-&gt;getTransparent_clock(),</div>
+<div class="line"><a name="l02535"></a><span class="lineno"> 2535</span>&#160;                                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;par(<span class="stringliteral">&quot;tick&quot;</span>).doubleValue())</div>
+<div class="line"><a name="l02536"></a><span class="lineno"> 2536</span>&#160;                                    + (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>()</div>
+<div class="line"><a name="l02537"></a><span class="lineno"> 2537</span>&#160;                                            - frame-&gt;par(<span class="stringliteral">&quot;received_total&quot;</span>).longValue()));</div>
+<div class="line"><a name="l02538"></a><span class="lineno"> 2538</span>&#160;            uint64_t permanence_pit = <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>()</div>
+<div class="line"><a name="l02539"></a><span class="lineno"> 2539</span>&#160;                    + permanence_delay;</div>
+<div class="line"><a name="l02540"></a><span class="lineno"> 2540</span>&#160;</div>
+<div class="line"><a name="l02541"></a><span class="lineno"> 2541</span>&#160;            <span class="comment">//create and register the event for the permanence pit</span></div>
+<div class="line"><a name="l02542"></a><span class="lineno"> 2542</span>&#160;</div>
+<div class="line"><a name="l02543"></a><span class="lineno"> 2543</span>&#160;            <span class="keywordflow">if</span> (frame-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60ea62759934eee457fe52fb8b246c5aa540">CS_FRAME</a>) {</div>
+<div class="line"><a name="l02544"></a><span class="lineno"> 2544</span>&#160;</div>
+<div class="line"><a name="l02545"></a><span class="lineno"> 2545</span>&#160;                FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;FRAME&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l02546"></a><span class="lineno"> 2546</span>&#160;</div>
+<div class="line"><a name="l02547"></a><span class="lineno"> 2547</span>&#160;                f_event-&gt;setPcfType(frame-&gt;getType());</div>
+<div class="line"><a name="l02548"></a><span class="lineno"> 2548</span>&#160;                f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
+<div class="line"><a name="l02549"></a><span class="lineno"> 2549</span>&#160;                f_event-&gt;setIntegrationCycle(frame-&gt;getIntegration_cycle());</div>
+<div class="line"><a name="l02550"></a><span class="lineno"> 2550</span>&#160;</div>
+<div class="line"><a name="l02551"></a><span class="lineno"> 2551</span>&#160;                f_event-&gt;setTimer(permanence_delay);</div>
+<div class="line"><a name="l02552"></a><span class="lineno"> 2552</span>&#160;                f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
 <div class="line"><a name="l02553"></a><span class="lineno"> 2553</span>&#160;</div>
-<div class="line"><a name="l02554"></a><span class="lineno"> 2554</span>&#160;                <span class="comment">//event = new SchedulerTimerEvent(&quot;ASYNCHRON&quot;, TIMER_EVENT);</span></div>
-<div class="line"><a name="l02555"></a><span class="lineno"> 2555</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a> = <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;par(<span class="stringliteral">&quot;ca_offset&quot;</span>).longValue();</div>
+<div class="line"><a name="l02554"></a><span class="lineno"> 2554</span>&#160;                f_event-&gt;setSchedulingPriority(0);</div>
+<div class="line"><a name="l02555"></a><span class="lineno"> 2555</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
 <div class="line"><a name="l02556"></a><span class="lineno"> 2556</span>&#160;</div>
-<div class="line"><a name="l02557"></a><span class="lineno"> 2557</span>&#160;                <span class="keyword">event</span>-&gt;setSchedulingPriority(3);</div>
-<div class="line"><a name="l02558"></a><span class="lineno"> 2558</span>&#160;                <span class="keyword">event</span>-&gt;setTimer(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a>);</div>
-<div class="line"><a name="l02559"></a><span class="lineno"> 2559</span>&#160;                <span class="keyword">event</span>-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l02557"></a><span class="lineno"> 2557</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (frame-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eac869b30499d7d077b91e09fa29d87108">CA_FRAME</a>) {</div>
+<div class="line"><a name="l02558"></a><span class="lineno"> 2558</span>&#160;</div>
+<div class="line"><a name="l02559"></a><span class="lineno"> 2559</span>&#160;                FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;FRAME&quot;</span>, <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
 <div class="line"><a name="l02560"></a><span class="lineno"> 2560</span>&#160;</div>
-<div class="line"><a name="l02561"></a><span class="lineno"> 2561</span>&#160;                <span class="comment">//local_clock=0;</span></div>
-<div class="line"><a name="l02562"></a><span class="lineno"> 2562</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>());</div>
-<div class="line"><a name="l02563"></a><span class="lineno"> 2563</span>&#160;</div>
-<div class="line"><a name="l02564"></a><span class="lineno"> 2564</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a5944afe2bcc5270f8444ac428b88db47">local_integration_cycle</a> = 0;</div>
-<div class="line"><a name="l02565"></a><span class="lineno"> 2565</span>&#160;                <span class="comment">//local_sync_membership=1; set the own bit</span></div>
-<div class="line"><a name="l02566"></a><span class="lineno"> 2566</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> = 0;</div>
-<div class="line"><a name="l02567"></a><span class="lineno"> 2567</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> |= (1 &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ada2ddf0f0623fa2678aaa6d6d228c273">ownBit</a>);</div>
-<div class="line"><a name="l02568"></a><span class="lineno"> 2568</span>&#160;</div>
-<div class="line"><a name="l02569"></a><span class="lineno"> 2569</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8665efe73f00d06071e08b8ffaeff892">local_async_membership</a> = 0;</div>
-<div class="line"><a name="l02570"></a><span class="lineno"> 2570</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#add72f9abeb010a79de47487c73b4b423">local_async_membership_r</a> = 0;</div>
-<div class="line"><a name="l02571"></a><span class="lineno"> 2571</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a1d5cee2f40eb01f5779c45780e844d0f">local_async_membership_f</a> = 0;</div>
+<div class="line"><a name="l02561"></a><span class="lineno"> 2561</span>&#160;                f_event-&gt;setPcfType(frame-&gt;getType());</div>
+<div class="line"><a name="l02562"></a><span class="lineno"> 2562</span>&#160;                f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
+<div class="line"><a name="l02563"></a><span class="lineno"> 2563</span>&#160;                f_event-&gt;setIntegrationCycle(frame-&gt;getIntegration_cycle());</div>
+<div class="line"><a name="l02564"></a><span class="lineno"> 2564</span>&#160;</div>
+<div class="line"><a name="l02565"></a><span class="lineno"> 2565</span>&#160;                f_event-&gt;setTimer(permanence_delay);</div>
+<div class="line"><a name="l02566"></a><span class="lineno"> 2566</span>&#160;                f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l02567"></a><span class="lineno"> 2567</span>&#160;</div>
+<div class="line"><a name="l02568"></a><span class="lineno"> 2568</span>&#160;                f_event-&gt;setSchedulingPriority(1);</div>
+<div class="line"><a name="l02569"></a><span class="lineno"> 2569</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
+<div class="line"><a name="l02570"></a><span class="lineno"> 2570</span>&#160;</div>
+<div class="line"><a name="l02571"></a><span class="lineno"> 2571</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (frame-&gt;getType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eab602bf5217b511903f7288f628b0c77d">IN_FRAME</a>) {</div>
 <div class="line"><a name="l02572"></a><span class="lineno"> 2572</span>&#160;</div>
-<div class="line"><a name="l02573"></a><span class="lineno"> 2573</span>&#160;                <span class="keyword">delete</span> e;</div>
+<div class="line"><a name="l02573"></a><span class="lineno"> 2573</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit) != <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;end()) {</div>
 <div class="line"><a name="l02574"></a><span class="lineno"> 2574</span>&#160;</div>
-<div class="line"><a name="l02575"></a><span class="lineno"> 2575</span>&#160;                <span class="keyword">new</span> (<span class="keyword">this</span>) <a class="code" href="class_t_t_ethernet_model_1_1_s_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t___c_s.html#ac17bd3f232175c99432cc3160f8a61d7">SM_WAIT_4_CYCLE_START_CS</a>();</div>
-<div class="line"><a name="l02576"></a><span class="lineno"> 2576</span>&#160;                <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l02577"></a><span class="lineno"> 2577</span>&#160;            }</div>
-<div class="line"><a name="l02578"></a><span class="lineno"> 2578</span>&#160;</div>
-<div class="line"><a name="l02579"></a><span class="lineno"> 2579</span>&#160;            <span class="keyword">delete</span> e;</div>
-<div class="line"><a name="l02580"></a><span class="lineno"> 2580</span>&#160;</div>
-<div class="line"><a name="l02581"></a><span class="lineno"> 2581</span>&#160;        } <span class="comment">//pcf frame becomes permanent</span></div>
-<div class="line"><a name="l02582"></a><span class="lineno"> 2582</span>&#160;</div>
-<div class="line"><a name="l02583"></a><span class="lineno"> 2583</span>&#160;    } <span class="comment">//schedulerIn</span></div>
-<div class="line"><a name="l02584"></a><span class="lineno"> 2584</span>&#160;</div>
-<div class="line"><a name="l02585"></a><span class="lineno"> 2585</span>&#160;}</div>
+<div class="line"><a name="l02575"></a><span class="lineno"> 2575</span>&#160;                    <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25">getValue</a>(frame-&gt;getMembership_new(), 32)</div>
+<div class="line"><a name="l02576"></a><span class="lineno"> 2576</span>&#160;                            &gt; (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25">getValue</a>(</div>
+<div class="line"><a name="l02577"></a><span class="lineno"> 2577</span>&#160;                                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit)-&gt;second-&gt;getMember(),</div>
+<div class="line"><a name="l02578"></a><span class="lineno"> 2578</span>&#160;                                    32))) {</div>
+<div class="line"><a name="l02579"></a><span class="lineno"> 2579</span>&#160;</div>
+<div class="line"><a name="l02580"></a><span class="lineno"> 2580</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;DEBUG: SM_WAIT_4_CYCLE_START_CS REPLACE membership new value&quot;</span></div>
+<div class="line"><a name="l02581"></a><span class="lineno"> 2581</span>&#160;                                &lt;&lt; frame-&gt;getMembership_new() &lt;&lt; endl;</div>
+<div class="line"><a name="l02582"></a><span class="lineno"> 2582</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;DEBUG: SM_WAIT_4_CYCLE_START_CS membership new number of SM &quot;</span></div>
+<div class="line"><a name="l02583"></a><span class="lineno"> 2583</span>&#160;                                &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25">getValue</a>(frame-&gt;getMembership_new(), 32)</div>
+<div class="line"><a name="l02584"></a><span class="lineno"> 2584</span>&#160;                                &lt;&lt; endl;</div>
+<div class="line"><a name="l02585"></a><span class="lineno"> 2585</span>&#160;</div>
+<div class="line"><a name="l02586"></a><span class="lineno"> 2586</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfeedfdd1219d0ab349663750d1be18a" title="Unregister an event that was previously registered in the scheduler.">unregisterEvent</a>(</div>
+<div class="line"><a name="l02587"></a><span class="lineno"> 2587</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit)-&gt;second);</div>
+<div class="line"><a name="l02588"></a><span class="lineno"> 2588</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;cancelAndDelete(</div>
+<div class="line"><a name="l02589"></a><span class="lineno"> 2589</span>&#160;                                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit)-&gt;second);</div>
+<div class="line"><a name="l02590"></a><span class="lineno"> 2590</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;erase(permanence_pit);</div>
+<div class="line"><a name="l02591"></a><span class="lineno"> 2591</span>&#160;</div>
+<div class="line"><a name="l02592"></a><span class="lineno"> 2592</span>&#160;                        FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;IN_FRAME&quot;</span>,</div>
+<div class="line"><a name="l02593"></a><span class="lineno"> 2593</span>&#160;                                <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l02594"></a><span class="lineno"> 2594</span>&#160;                        f_event-&gt;setReceivedPort(</div>
+<div class="line"><a name="l02595"></a><span class="lineno"> 2595</span>&#160;                                frame-&gt;par(<span class="stringliteral">&quot;received_port&quot;</span>).longValue());</div>
+<div class="line"><a name="l02596"></a><span class="lineno"> 2596</span>&#160;                        f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
+<div class="line"><a name="l02597"></a><span class="lineno"> 2597</span>&#160;                        f_event-&gt;setPcfType(frame-&gt;getType());</div>
+<div class="line"><a name="l02598"></a><span class="lineno"> 2598</span>&#160;</div>
+<div class="line"><a name="l02599"></a><span class="lineno"> 2599</span>&#160;                        f_event-&gt;setTimer(permanence_delay);</div>
+<div class="line"><a name="l02600"></a><span class="lineno"> 2600</span>&#160;                        f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l02601"></a><span class="lineno"> 2601</span>&#160;                        f_event-&gt;setIntegrationCycle(</div>
+<div class="line"><a name="l02602"></a><span class="lineno"> 2602</span>&#160;                                frame-&gt;getIntegration_cycle());</div>
+<div class="line"><a name="l02603"></a><span class="lineno"> 2603</span>&#160;                        f_event-&gt;setSchedulingPriority(2);</div>
+<div class="line"><a name="l02604"></a><span class="lineno"> 2604</span>&#160;</div>
+<div class="line"><a name="l02605"></a><span class="lineno"> 2605</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
+<div class="line"><a name="l02606"></a><span class="lineno"> 2606</span>&#160;</div>
+<div class="line"><a name="l02607"></a><span class="lineno"> 2607</span>&#160;                        <span class="comment">//save the event /we have to cancel and delete the events later/</span></div>
+<div class="line"><a name="l02608"></a><span class="lineno"> 2608</span>&#160;                        <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;insert(make_pair(permanence_pit, f_event));</div>
+<div class="line"><a name="l02609"></a><span class="lineno"> 2609</span>&#160;</div>
+<div class="line"><a name="l02610"></a><span class="lineno"> 2610</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25">getValue</a>(frame-&gt;getMembership_new(), 32)</div>
+<div class="line"><a name="l02611"></a><span class="lineno"> 2611</span>&#160;                            == (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25">getValue</a>(</div>
+<div class="line"><a name="l02612"></a><span class="lineno"> 2612</span>&#160;                                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit)-&gt;second-&gt;getMember(),</div>
+<div class="line"><a name="l02613"></a><span class="lineno"> 2613</span>&#160;                                    32))) {</div>
+<div class="line"><a name="l02614"></a><span class="lineno"> 2614</span>&#160;</div>
+<div class="line"><a name="l02615"></a><span class="lineno"> 2615</span>&#160;                        <span class="keywordflow">if</span> (frame-&gt;getIntegration_cycle()</div>
+<div class="line"><a name="l02616"></a><span class="lineno"> 2616</span>&#160;                                &gt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit)-&gt;second-&gt;getIntegrationCycle()) {</div>
+<div class="line"><a name="l02617"></a><span class="lineno"> 2617</span>&#160;</div>
+<div class="line"><a name="l02618"></a><span class="lineno"> 2618</span>&#160;                            ev</div>
+<div class="line"><a name="l02619"></a><span class="lineno"> 2619</span>&#160;                                    &lt;&lt; <span class="stringliteral">&quot;DEBUG: SM_WAIT_4_CYCLE_START_CS REPLACE membership new value&quot;</span></div>
+<div class="line"><a name="l02620"></a><span class="lineno"> 2620</span>&#160;                                    &lt;&lt; frame-&gt;getMembership_new() &lt;&lt; endl;</div>
+<div class="line"><a name="l02621"></a><span class="lineno"> 2621</span>&#160;                            ev</div>
+<div class="line"><a name="l02622"></a><span class="lineno"> 2622</span>&#160;                                    &lt;&lt; <span class="stringliteral">&quot;DEBUG: SM_WAIT_4_CYCLE_START_CS membership new number of SM &quot;</span></div>
+<div class="line"><a name="l02623"></a><span class="lineno"> 2623</span>&#160;                                    &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aba24737a1fe176766bf2daf00909ce25">getValue</a>(frame-&gt;getMembership_new(), 32)</div>
+<div class="line"><a name="l02624"></a><span class="lineno"> 2624</span>&#160;                                    &lt;&lt; endl;</div>
+<div class="line"><a name="l02625"></a><span class="lineno"> 2625</span>&#160;</div>
+<div class="line"><a name="l02626"></a><span class="lineno"> 2626</span>&#160;                            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfeedfdd1219d0ab349663750d1be18a" title="Unregister an event that was previously registered in the scheduler.">unregisterEvent</a>(</div>
+<div class="line"><a name="l02627"></a><span class="lineno"> 2627</span>&#160;                                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit)-&gt;second);</div>
+<div class="line"><a name="l02628"></a><span class="lineno"> 2628</span>&#160;                            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;cancelAndDelete(</div>
+<div class="line"><a name="l02629"></a><span class="lineno"> 2629</span>&#160;                                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(permanence_pit)-&gt;second);</div>
+<div class="line"><a name="l02630"></a><span class="lineno"> 2630</span>&#160;                            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;erase(permanence_pit);</div>
+<div class="line"><a name="l02631"></a><span class="lineno"> 2631</span>&#160;</div>
+<div class="line"><a name="l02632"></a><span class="lineno"> 2632</span>&#160;                            FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;IN_FRAME&quot;</span>,</div>
+<div class="line"><a name="l02633"></a><span class="lineno"> 2633</span>&#160;                                    <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l02634"></a><span class="lineno"> 2634</span>&#160;                            f_event-&gt;setReceivedPort(</div>
+<div class="line"><a name="l02635"></a><span class="lineno"> 2635</span>&#160;                                    frame-&gt;par(<span class="stringliteral">&quot;received_port&quot;</span>).longValue());</div>
+<div class="line"><a name="l02636"></a><span class="lineno"> 2636</span>&#160;                            f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
+<div class="line"><a name="l02637"></a><span class="lineno"> 2637</span>&#160;                            f_event-&gt;setPcfType(frame-&gt;getType());</div>
+<div class="line"><a name="l02638"></a><span class="lineno"> 2638</span>&#160;                            <span class="comment">//f_event-&gt;setAction_time(permanence_pit);</span></div>
+<div class="line"><a name="l02639"></a><span class="lineno"> 2639</span>&#160;                            f_event-&gt;setTimer(permanence_delay);</div>
+<div class="line"><a name="l02640"></a><span class="lineno"> 2640</span>&#160;                            f_event-&gt;setDestinationGate(</div>
+<div class="line"><a name="l02641"></a><span class="lineno"> 2641</span>&#160;                                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l02642"></a><span class="lineno"> 2642</span>&#160;                            f_event-&gt;setIntegrationCycle(</div>
+<div class="line"><a name="l02643"></a><span class="lineno"> 2643</span>&#160;                                    frame-&gt;getIntegration_cycle());</div>
+<div class="line"><a name="l02644"></a><span class="lineno"> 2644</span>&#160;                            f_event-&gt;setSchedulingPriority(2);</div>
+<div class="line"><a name="l02645"></a><span class="lineno"> 2645</span>&#160;</div>
+<div class="line"><a name="l02646"></a><span class="lineno"> 2646</span>&#160;                            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
+<div class="line"><a name="l02647"></a><span class="lineno"> 2647</span>&#160;</div>
+<div class="line"><a name="l02648"></a><span class="lineno"> 2648</span>&#160;                            <span class="comment">//save the event /we have to cancel and delete the events later/</span></div>
+<div class="line"><a name="l02649"></a><span class="lineno"> 2649</span>&#160;                            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;insert(</div>
+<div class="line"><a name="l02650"></a><span class="lineno"> 2650</span>&#160;                                    make_pair(permanence_pit, f_event));</div>
+<div class="line"><a name="l02651"></a><span class="lineno"> 2651</span>&#160;</div>
+<div class="line"><a name="l02652"></a><span class="lineno"> 2652</span>&#160;                        } <span class="comment">//int_cycle</span></div>
+<div class="line"><a name="l02653"></a><span class="lineno"> 2653</span>&#160;</div>
+<div class="line"><a name="l02654"></a><span class="lineno"> 2654</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l02655"></a><span class="lineno"> 2655</span>&#160;                        ev &lt;&lt; <span class="stringliteral">&quot;DEBUG: SM_WAIT_4_CYCLE_START_CS NO REPLACE&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l02656"></a><span class="lineno"> 2656</span>&#160;                    }</div>
+<div class="line"><a name="l02657"></a><span class="lineno"> 2657</span>&#160;</div>
+<div class="line"><a name="l02658"></a><span class="lineno"> 2658</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l02659"></a><span class="lineno"> 2659</span>&#160;</div>
+<div class="line"><a name="l02660"></a><span class="lineno"> 2660</span>&#160;                    FrameEvent *f_event = <span class="keyword">new</span> FrameEvent(<span class="stringliteral">&quot;IN_FRAME&quot;</span>,</div>
+<div class="line"><a name="l02661"></a><span class="lineno"> 2661</span>&#160;                            <a class="code" href="namespace_t_t_ethernet_model.html#a7d0551d60b68ae7bedfd5d3d30f8b499a6cb1ab49053a3b9d013a1fcf4896ac5c">TIMER_EVENT</a>);</div>
+<div class="line"><a name="l02662"></a><span class="lineno"> 2662</span>&#160;                    f_event-&gt;setReceivedPort(</div>
+<div class="line"><a name="l02663"></a><span class="lineno"> 2663</span>&#160;                            frame-&gt;par(<span class="stringliteral">&quot;received_port&quot;</span>).longValue());</div>
+<div class="line"><a name="l02664"></a><span class="lineno"> 2664</span>&#160;                    f_event-&gt;setMember(frame-&gt;getMembership_new());</div>
+<div class="line"><a name="l02665"></a><span class="lineno"> 2665</span>&#160;                    f_event-&gt;setPcfType(frame-&gt;getType());</div>
+<div class="line"><a name="l02666"></a><span class="lineno"> 2666</span>&#160;</div>
+<div class="line"><a name="l02667"></a><span class="lineno"> 2667</span>&#160;                    f_event-&gt;setTimer(permanence_delay);</div>
+<div class="line"><a name="l02668"></a><span class="lineno"> 2668</span>&#160;                    f_event-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l02669"></a><span class="lineno"> 2669</span>&#160;                    f_event-&gt;setIntegrationCycle(frame-&gt;getIntegration_cycle());</div>
+<div class="line"><a name="l02670"></a><span class="lineno"> 2670</span>&#160;</div>
+<div class="line"><a name="l02671"></a><span class="lineno"> 2671</span>&#160;                    f_event-&gt;setSchedulingPriority(2);</div>
+<div class="line"><a name="l02672"></a><span class="lineno"> 2672</span>&#160;</div>
+<div class="line"><a name="l02673"></a><span class="lineno"> 2673</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(f_event);</div>
+<div class="line"><a name="l02674"></a><span class="lineno"> 2674</span>&#160;</div>
+<div class="line"><a name="l02675"></a><span class="lineno"> 2675</span>&#160;                    <span class="comment">//save the event /we have to cancel and delete the events later/</span></div>
+<div class="line"><a name="l02676"></a><span class="lineno"> 2676</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;insert(make_pair(permanence_pit, f_event));</div>
+<div class="line"><a name="l02677"></a><span class="lineno"> 2677</span>&#160;</div>
+<div class="line"><a name="l02678"></a><span class="lineno"> 2678</span>&#160;                } <span class="comment">//frame not found</span></div>
+<div class="line"><a name="l02679"></a><span class="lineno"> 2679</span>&#160;</div>
+<div class="line"><a name="l02680"></a><span class="lineno"> 2680</span>&#160;                <span class="keyword">delete</span> frame;</div>
+<div class="line"><a name="l02681"></a><span class="lineno"> 2681</span>&#160;</div>
+<div class="line"><a name="l02682"></a><span class="lineno"> 2682</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l02683"></a><span class="lineno"> 2683</span>&#160;                ev &lt;&lt; <span class="stringliteral">&quot;UNKNOWN PCF FRAME-&gt;TYPE: &quot;</span> &lt;&lt; frame-&gt;getType() &lt;&lt; endl;</div>
+<div class="line"><a name="l02684"></a><span class="lineno"> 2684</span>&#160;            }</div>
+<div class="line"><a name="l02685"></a><span class="lineno"> 2685</span>&#160;</div>
+<div class="line"><a name="l02686"></a><span class="lineno"> 2686</span>&#160;            <span class="keyword">delete</span> frame;</div>
+<div class="line"><a name="l02687"></a><span class="lineno"> 2687</span>&#160;</div>
+<div class="line"><a name="l02688"></a><span class="lineno"> 2688</span>&#160;        } <span class="comment">//syncDomain &amp;&amp; syncPriority</span></div>
+<div class="line"><a name="l02689"></a><span class="lineno"> 2689</span>&#160;</div>
+<div class="line"><a name="l02690"></a><span class="lineno"> 2690</span>&#160;    } <span class="comment">//RCin</span></div>
+<div class="line"><a name="l02691"></a><span class="lineno"> 2691</span>&#160;</div>
+<div class="line"><a name="l02692"></a><span class="lineno"> 2692</span>&#160;    <span class="keywordflow">if</span> (message-&gt;arrivedOn(<span class="stringliteral">&quot;schedulerIn&quot;</span>)) {</div>
+<div class="line"><a name="l02693"></a><span class="lineno"> 2693</span>&#160;        <span class="comment">//local timer expired</span></div>
+<div class="line"><a name="l02694"></a><span class="lineno"> 2694</span>&#160;        <span class="comment">//if(local_timer==true){</span></div>
+<div class="line"><a name="l02695"></a><span class="lineno"> 2695</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;ASYNCHRON&quot;</span>) == 0) {</div>
+<div class="line"><a name="l02696"></a><span class="lineno"> 2696</span>&#160;</div>
+<div class="line"><a name="l02697"></a><span class="lineno"> 2697</span>&#160;            <span class="comment">//local_clock=0;</span></div>
+<div class="line"><a name="l02698"></a><span class="lineno"> 2698</span>&#160;</div>
+<div class="line"><a name="l02699"></a><span class="lineno"> 2699</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a5944afe2bcc5270f8444ac428b88db47">local_integration_cycle</a> =</div>
+<div class="line"><a name="l02700"></a><span class="lineno"> 2700</span>&#160;                    <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;par(<span class="stringliteral">&quot;cv_local_integration_cycle&quot;</span>).longValue();</div>
+<div class="line"><a name="l02701"></a><span class="lineno"> 2701</span>&#160;            <span class="comment">//local_sync_membership=1; set the own bit</span></div>
+<div class="line"><a name="l02702"></a><span class="lineno"> 2702</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> = 0;</div>
+<div class="line"><a name="l02703"></a><span class="lineno"> 2703</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> |= (1 &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ada2ddf0f0623fa2678aaa6d6d228c273">ownBit</a>);</div>
+<div class="line"><a name="l02704"></a><span class="lineno"> 2704</span>&#160;</div>
+<div class="line"><a name="l02705"></a><span class="lineno"> 2705</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8665efe73f00d06071e08b8ffaeff892">local_async_membership</a> = 0;</div>
+<div class="line"><a name="l02706"></a><span class="lineno"> 2706</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#add72f9abeb010a79de47487c73b4b423">local_async_membership_r</a> = 0;</div>
+<div class="line"><a name="l02707"></a><span class="lineno"> 2707</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a1d5cee2f40eb01f5779c45780e844d0f">local_async_membership_f</a> = 0;</div>
+<div class="line"><a name="l02708"></a><span class="lineno"> 2708</span>&#160;</div>
+<div class="line"><a name="l02709"></a><span class="lineno"> 2709</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a3d734bf7d943e34931b4427394d077cd">event1</a>);</div>
+<div class="line"><a name="l02710"></a><span class="lineno"> 2710</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aff8d6bd8188f416b67216937806c9a94">event4</a>);</div>
+<div class="line"><a name="l02711"></a><span class="lineno"> 2711</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6e4c64cb57c82d863411bfd4549d89ad">event2</a>);</div>
+<div class="line"><a name="l02712"></a><span class="lineno"> 2712</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a9fff3d27a98061227035da46705f79c6">event5</a>);</div>
+<div class="line"><a name="l02713"></a><span class="lineno"> 2713</span>&#160;</div>
+<div class="line"><a name="l02714"></a><span class="lineno"> 2714</span>&#160;</div>
+<div class="line"><a name="l02715"></a><span class="lineno"> 2715</span>&#160;</div>
+<div class="line"><a name="l02716"></a><span class="lineno"> 2716</span>&#160;            <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>());</div>
+<div class="line"><a name="l02717"></a><span class="lineno"> 2717</span>&#160;</div>
+<div class="line"><a name="l02718"></a><span class="lineno"> 2718</span>&#160;            <span class="keyword">new</span> (<span class="keyword">this</span>) SM_TENTATIVE_SYNC();</div>
+<div class="line"><a name="l02719"></a><span class="lineno"> 2719</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l02720"></a><span class="lineno"> 2720</span>&#160;</div>
+<div class="line"><a name="l02721"></a><span class="lineno"> 2721</span>&#160;        }</div>
+<div class="line"><a name="l02722"></a><span class="lineno"> 2722</span>&#160;</div>
+<div class="line"><a name="l02723"></a><span class="lineno"> 2723</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;FRAME&quot;</span>) == 0) {</div>
+<div class="line"><a name="l02724"></a><span class="lineno"> 2724</span>&#160;            <span class="comment">//pcf frame becomes permanent</span></div>
+<div class="line"><a name="l02725"></a><span class="lineno"> 2725</span>&#160;</div>
+<div class="line"><a name="l02726"></a><span class="lineno"> 2726</span>&#160;            <span class="comment">//get the PCF Frame</span></div>
+<div class="line"><a name="l02727"></a><span class="lineno"> 2727</span>&#160;            FrameEvent *e = <span class="keyword">dynamic_cast&lt;</span>FrameEvent*<span class="keyword">&gt;</span>(message);</div>
+<div class="line"><a name="l02728"></a><span class="lineno"> 2728</span>&#160;</div>
+<div class="line"><a name="l02729"></a><span class="lineno"> 2729</span>&#160;            <span class="keywordflow">if</span> (e-&gt;getPcfType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60ea62759934eee457fe52fb8b246c5aa540">CS_FRAME</a>) {</div>
+<div class="line"><a name="l02730"></a><span class="lineno"> 2730</span>&#160;</div>
+<div class="line"><a name="l02731"></a><span class="lineno"> 2731</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfeedfdd1219d0ab349663750d1be18a" title="Unregister an event that was previously registered in the scheduler.">unregisterEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aec0f605932532cf757368e63c32a0343">event</a>);</div>
+<div class="line"><a name="l02732"></a><span class="lineno"> 2732</span>&#160;</div>
+<div class="line"><a name="l02733"></a><span class="lineno"> 2733</span>&#160;                <span class="comment">//event = new SchedulerTimerEvent(&quot;ASYNCHRON&quot;, TIMER_EVENT);</span></div>
+<div class="line"><a name="l02734"></a><span class="lineno"> 2734</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a> = <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;par(<span class="stringliteral">&quot;cs_offset&quot;</span>).longValue();</div>
+<div class="line"><a name="l02735"></a><span class="lineno"> 2735</span>&#160;                <span class="keyword">event</span>-&gt;setSchedulingPriority(3);</div>
+<div class="line"><a name="l02736"></a><span class="lineno"> 2736</span>&#160;                <span class="keyword">event</span>-&gt;setTimer(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a>);</div>
+<div class="line"><a name="l02737"></a><span class="lineno"> 2737</span>&#160;                <span class="keyword">event</span>-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l02738"></a><span class="lineno"> 2738</span>&#160;</div>
+<div class="line"><a name="l02739"></a><span class="lineno"> 2739</span>&#160;                <span class="comment">//local_clock=0;</span></div>
+<div class="line"><a name="l02740"></a><span class="lineno"> 2740</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>());</div>
+<div class="line"><a name="l02741"></a><span class="lineno"> 2741</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a5944afe2bcc5270f8444ac428b88db47">local_integration_cycle</a> = 0;</div>
+<div class="line"><a name="l02742"></a><span class="lineno"> 2742</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> = 0;</div>
+<div class="line"><a name="l02743"></a><span class="lineno"> 2743</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8665efe73f00d06071e08b8ffaeff892">local_async_membership</a> = 0;</div>
+<div class="line"><a name="l02744"></a><span class="lineno"> 2744</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#add72f9abeb010a79de47487c73b4b423">local_async_membership_r</a> = 0;</div>
+<div class="line"><a name="l02745"></a><span class="lineno"> 2745</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a1d5cee2f40eb01f5779c45780e844d0f">local_async_membership_f</a> = 0;</div>
+<div class="line"><a name="l02746"></a><span class="lineno"> 2746</span>&#160;</div>
+<div class="line"><a name="l02747"></a><span class="lineno"> 2747</span>&#160;                <span class="keyword">delete</span> e;</div>
+<div class="line"><a name="l02748"></a><span class="lineno"> 2748</span>&#160;</div>
+<div class="line"><a name="l02749"></a><span class="lineno"> 2749</span>&#160;                <span class="keyword">new</span> (<span class="keyword">this</span>) SM_FLOOD();</div>
+<div class="line"><a name="l02750"></a><span class="lineno"> 2750</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l02751"></a><span class="lineno"> 2751</span>&#160;            } <span class="comment">//CS_FRAME</span></div>
+<div class="line"><a name="l02752"></a><span class="lineno"> 2752</span>&#160;</div>
+<div class="line"><a name="l02753"></a><span class="lineno"> 2753</span>&#160;            <span class="keywordflow">if</span> (e-&gt;getPcfType() == <a class="code" href="namespace_t_t_ethernet_model.html#a1ee6d33b2f327407c3f27ead021da60eac869b30499d7d077b91e09fa29d87108">CA_FRAME</a>) {</div>
+<div class="line"><a name="l02754"></a><span class="lineno"> 2754</span>&#160;</div>
+<div class="line"><a name="l02755"></a><span class="lineno"> 2755</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#acfeedfdd1219d0ab349663750d1be18a" title="Unregister an event that was previously registered in the scheduler.">unregisterEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#aec0f605932532cf757368e63c32a0343">event</a>);</div>
+<div class="line"><a name="l02756"></a><span class="lineno"> 2756</span>&#160;</div>
+<div class="line"><a name="l02757"></a><span class="lineno"> 2757</span>&#160;                <span class="comment">//event = new SchedulerTimerEvent(&quot;ASYNCHRON&quot;, TIMER_EVENT);</span></div>
+<div class="line"><a name="l02758"></a><span class="lineno"> 2758</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a> = <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;par(<span class="stringliteral">&quot;ca_offset&quot;</span>).longValue();</div>
+<div class="line"><a name="l02759"></a><span class="lineno"> 2759</span>&#160;</div>
+<div class="line"><a name="l02760"></a><span class="lineno"> 2760</span>&#160;                <span class="keyword">event</span>-&gt;setSchedulingPriority(3);</div>
+<div class="line"><a name="l02761"></a><span class="lineno"> 2761</span>&#160;                <span class="keyword">event</span>-&gt;setTimer(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a544abf6fdbb03d7a3686eb88b6e7ebbb">duration</a>);</div>
+<div class="line"><a name="l02762"></a><span class="lineno"> 2762</span>&#160;                <span class="keyword">event</span>-&gt;setDestinationGate(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a6784f39e31222902378c42922ea3ec70">sm</a>-&gt;gate(<span class="stringliteral">&quot;schedulerIn&quot;</span>));</div>
+<div class="line"><a name="l02763"></a><span class="lineno"> 2763</span>&#160;</div>
+<div class="line"><a name="l02764"></a><span class="lineno"> 2764</span>&#160;                <span class="comment">//local_clock=0;</span></div>
+<div class="line"><a name="l02765"></a><span class="lineno"> 2765</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a6831234789320df881e83389f49cd773" title="Returns the current number of ticks.">getTicks</a>());</div>
+<div class="line"><a name="l02766"></a><span class="lineno"> 2766</span>&#160;</div>
+<div class="line"><a name="l02767"></a><span class="lineno"> 2767</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a5944afe2bcc5270f8444ac428b88db47">local_integration_cycle</a> = 0;</div>
+<div class="line"><a name="l02768"></a><span class="lineno"> 2768</span>&#160;                <span class="comment">//local_sync_membership=1; set the own bit</span></div>
+<div class="line"><a name="l02769"></a><span class="lineno"> 2769</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> = 0;</div>
+<div class="line"><a name="l02770"></a><span class="lineno"> 2770</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ab9314943c25986586f5039c1044d8226">local_sync_membership</a> |= (1 &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#ada2ddf0f0623fa2678aaa6d6d228c273">ownBit</a>);</div>
+<div class="line"><a name="l02771"></a><span class="lineno"> 2771</span>&#160;</div>
+<div class="line"><a name="l02772"></a><span class="lineno"> 2772</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8665efe73f00d06071e08b8ffaeff892">local_async_membership</a> = 0;</div>
+<div class="line"><a name="l02773"></a><span class="lineno"> 2773</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#add72f9abeb010a79de47487c73b4b423">local_async_membership_r</a> = 0;</div>
+<div class="line"><a name="l02774"></a><span class="lineno"> 2774</span>&#160;                <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a1d5cee2f40eb01f5779c45780e844d0f">local_async_membership_f</a> = 0;</div>
+<div class="line"><a name="l02775"></a><span class="lineno"> 2775</span>&#160;</div>
+<div class="line"><a name="l02776"></a><span class="lineno"> 2776</span>&#160;                <span class="keyword">delete</span> e;</div>
+<div class="line"><a name="l02777"></a><span class="lineno"> 2777</span>&#160;</div>
+<div class="line"><a name="l02778"></a><span class="lineno"> 2778</span>&#160;                <span class="keyword">new</span> (<span class="keyword">this</span>) <a class="code" href="class_t_t_ethernet_model_1_1_s_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t___c_s.html#ac17bd3f232175c99432cc3160f8a61d7">SM_WAIT_4_CYCLE_START_CS</a>();</div>
+<div class="line"><a name="l02779"></a><span class="lineno"> 2779</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l02780"></a><span class="lineno"> 2780</span>&#160;            }</div>
+<div class="line"><a name="l02781"></a><span class="lineno"> 2781</span>&#160;</div>
+<div class="line"><a name="l02782"></a><span class="lineno"> 2782</span>&#160;            <span class="keyword">delete</span> e;</div>
+<div class="line"><a name="l02783"></a><span class="lineno"> 2783</span>&#160;</div>
+<div class="line"><a name="l02784"></a><span class="lineno"> 2784</span>&#160;        } <span class="comment">//pcf frame becomes permanent</span></div>
+<div class="line"><a name="l02785"></a><span class="lineno"> 2785</span>&#160;</div>
+<div class="line"><a name="l02786"></a><span class="lineno"> 2786</span>&#160;        <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;IN_FRAME&quot;</span>) == 0) {</div>
+<div class="line"><a name="l02787"></a><span class="lineno"> 2787</span>&#160;</div>
+<div class="line"><a name="l02788"></a><span class="lineno"> 2788</span>&#160;</div>
+<div class="line"><a name="l02789"></a><span class="lineno"> 2789</span>&#160;            FrameEvent *e = <span class="keyword">dynamic_cast&lt;</span>FrameEvent*<span class="keyword">&gt;</span>(message);</div>
+<div class="line"><a name="l02790"></a><span class="lineno"> 2790</span>&#160;                    <span class="keyword">delete</span> e;</div>
+<div class="line"><a name="l02791"></a><span class="lineno"> 2791</span>&#160;</div>
+<div class="line"><a name="l02792"></a><span class="lineno"> 2792</span>&#160;           uint64_t ppt=<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#a8199c68e0e2ca8f1ff07f3604fae619d">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#ac0ad022871d9c70f81625755d7cdb77e" title="Returns the absolute number of ticks.">getTotalTicks</a>();</div>
+<div class="line"><a name="l02793"></a><span class="lineno"> 2793</span>&#160;</div>
+<div class="line"><a name="l02794"></a><span class="lineno"> 2794</span>&#160;           <span class="keywordflow">if</span> (<a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;find(ppt) != <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;end()) {</div>
+<div class="line"><a name="l02795"></a><span class="lineno"> 2795</span>&#160;</div>
+<div class="line"><a name="l02796"></a><span class="lineno"> 2796</span>&#160;                                   <a class="code" href="class_t_t_ethernet_model_1_1_s_m_state.html#acddbde2498689b1c59886a7162b66ccc">e_container</a>-&gt;erase(ppt);</div>
+<div class="line"><a name="l02797"></a><span class="lineno"> 2797</span>&#160;                               }</div>
+<div class="line"><a name="l02798"></a><span class="lineno"> 2798</span>&#160;</div>
+<div class="line"><a name="l02799"></a><span class="lineno"> 2799</span>&#160;</div>
+<div class="line"><a name="l02800"></a><span class="lineno"> 2800</span>&#160;                    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l02801"></a><span class="lineno"> 2801</span>&#160;                }</div>
+<div class="line"><a name="l02802"></a><span class="lineno"> 2802</span>&#160;    } <span class="comment">//schedulerIn</span></div>
+<div class="line"><a name="l02803"></a><span class="lineno"> 2803</span>&#160;</div>
+<div class="line"><a name="l02804"></a><span class="lineno"> 2804</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_s_m_states_8h_source.html">SMStates.h</a></li>
-<li><a class="el" href="_s_m_states_8cc_source.html">SMStates.cc</a></li>
+<li><a class="el" href="_s_m_states_8h.html">SMStates.h</a></li>
+<li><a class="el" href="_s_m_states_8cc.html">SMStates.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -470,7 +573,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_s_m___w_a_i_t__4___c_y_c_l_e___s_t_a_r_t___c_s.html">SM_WAIT_4_CYCLE_START_CS</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:33 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:38 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

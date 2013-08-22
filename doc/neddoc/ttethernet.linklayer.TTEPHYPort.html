@@ -13,7 +13,7 @@ It represents a physical port for a TTEthernet device (Switch or Host)</p>
 <img src="ttethernet.linklayer.TTEPHYPort-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
 <area shape="rect" href="ttethernet.linklayer.TTEOutput.html" title="TTEOutput" alt="TTEOutput" coords="16,65,84,126">
 <area shape="rect" href="ttethernet.linklayer.TTEInput.html" title="TTEInput" alt="TTEInput" coords="117,65,172,126">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="EtherMACFullDuplex" alt="EtherMACFullDuplex" coords="69,159,113,220">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.ethernet.EtherMACFullDuplex.html" title="EtherMACFullDuplex" alt="EtherMACFullDuplex" coords="60,162,104,223">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
@@ -305,7 +305,7 @@ a generated MAC address in init stage 0.</p>
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
                 </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #008000; ">true</span><span style="color: #000000; ">; </span><span style="color: #808080; font-style: italic; ">//MAC must be set promiscuous to allow for CT receiption with all CT-Markers
 </span><span style="color: #000000; ">                </span><span style="color: #000000; ">queueModule</span><span style="color: #000000; "> = </span><span style="color: #008000; ">&quot;tteOutput&quot;</span><span style="color: #000000; ">;</span><span style="color: #808080; font-style: italic; ">//The tteOutput-Module(TTEOutput) is used as external queue for the interface
-</span><span style="color: #000000; ">                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=87,139&quot;</span><span style="color: #000000; ">);
+</span><span style="color: #000000; ">                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=78,142&quot;</span><span style="color: #000000; ">);
         }
     </span><span style="color: #800000; font-weight: bold; ">connections</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">upperLayerIn</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">tteOutput</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;

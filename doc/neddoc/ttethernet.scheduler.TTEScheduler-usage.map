@@ -1,2 +1,4 @@
-<area shape="rect" id="node1" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="19,83,123,111">
-<area shape="rect" id="node2" href="test.modul.ttescheduler.TTESchedulerTest.html" title="Network TTESchedulerTest" alt="" coords="5,6,136,34">
+<area shape="rect" id="node1" href="ttethernet.scheduler.TTEScheduler.html" title="Simple Module TTEScheduler" alt="" coords="183,83,287,111">
+<area shape="rect" id="node2" href="ttethernet.nodes.ethernet.TTEAVBEtherHost.html" title="Compound Module TTEAVBEtherHost" alt="" coords="5,6,139,34">
+<area shape="rect" id="node4" href="ttethernet.nodes.ethernet.TTEAVBEtherSwitch.html" title="Compound Module TTEAVBEtherSwitch" alt="" coords="163,6,307,34">
+<area shape="rect" id="node6" href="test.modul.ttescheduler.TTESchedulerTest.html" title="Network TTESchedulerTest" alt="" coords="331,6,461,34">

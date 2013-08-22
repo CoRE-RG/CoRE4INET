@@ -31,6 +31,8 @@ var searchData=
   ['tte_5fstart',['tte_start',['../namespace_t_t_ethernet_model.html#a456aa12d87e1467e61dd56836586165a',1,'TTEthernetModel']]],
   ['tte_5fstop',['tte_stop',['../namespace_t_t_ethernet_model.html#a9b9ef527dc031a2cb3149a38a97e1c94',1,'TTEthernetModel']]],
   ['tte_5fwrite_5foutput_5fbuf',['tte_write_output_buf',['../namespace_t_t_ethernet_model.html#a2ea21eedcc3b6b8fcfe3b43d2983aeb4',1,'TTEthernetModel']]],
+  ['tteavbinput',['TTEAVBInput',['../class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#ad93ed1aa7c79ca8eae634b1106423c76',1,'TTEthernetModel::TTEAVBInput']]],
+  ['tteavboutput',['TTEAVBOutput',['../class_t_t_ethernet_model_1_1_t_t_e_a_v_b_output.html#a18cd1a083c355c4386365bcf3a37e703',1,'TTEthernetModel::TTEAVBOutput']]],
   ['tteinput',['TTEInput',['../class_t_t_ethernet_model_1_1_t_t_e_input.html#ae4a93376feb0c86d94bf03a4d1a71e5f',1,'TTEthernetModel::TTEInput']]],
   ['tteoutput',['TTEOutput',['../class_t_t_ethernet_model_1_1_t_t_e_output.html#ab968c58c879864bd9985b5998388a2ab',1,'TTEthernetModel::TTEOutput']]],
   ['ttframe',['TTFrame',['../class_t_t_ethernet_model_1_1_t_t_frame.html#aab16252082ba69af7e5064b60a902de1',1,'TTEthernetModel::TTFrame::TTFrame(const char *name=NULL, int kind=0)'],['../class_t_t_ethernet_model_1_1_t_t_frame.html#a1ac4a4559e41c01b265ec2a17e06e530',1,'TTEthernetModel::TTFrame::TTFrame(const TTFrame &amp;other)']]],

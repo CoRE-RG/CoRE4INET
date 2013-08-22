@@ -28,9 +28,16 @@ var hierarchy =
       ] ]
     ] ],
     [ "cSimpleModule", null, [
+      [ "TTEthernetModel::AVBIncoming", "class_t_t_ethernet_model_1_1_a_v_b_incoming.html", null ],
       [ "TTEthernetModel::BaseConfigurationManager", "class_t_t_ethernet_model_1_1_base_configuration_manager.html", null ],
-      [ "TTEthernetModel::BGTrafficHandle", "class_t_t_ethernet_model_1_1_b_g_traffic_handle.html", null ],
+      [ "TTEthernetModel::BGTrafficHandle", "class_t_t_ethernet_model_1_1_b_g_traffic_handle.html", [
+        [ "TTEthernetModel::SRPTrafficHandle", "class_t_t_ethernet_model_1_1_s_r_p_traffic_handle.html", null ]
+      ] ],
       [ "TTEthernetModel::Buffer", "class_t_t_ethernet_model_1_1_buffer.html", [
+        [ "TTEthernetModel::AVBBuffer", "class_t_t_ethernet_model_1_1_a_v_b_buffer.html", [
+          [ "TTEthernetModel::AVBDoubleBuffer", "class_t_t_ethernet_model_1_1_a_v_b_double_buffer.html", null ],
+          [ "TTEthernetModel::AVBQueueBuffer", "class_t_t_ethernet_model_1_1_a_v_b_queue_buffer.html", null ]
+        ] ],
         [ "TTEthernetModel::BGBuffer", "class_t_t_ethernet_model_1_1_b_g_buffer.html", [
           [ "TTEthernetModel::BGQueueBuffer", "class_t_t_ethernet_model_1_1_b_g_queue_buffer.html", null ]
         ] ],
@@ -45,10 +52,12 @@ var hierarchy =
           ] ]
         ] ],
         [ "TTEthernetModel::DoubleBuffer", "class_t_t_ethernet_model_1_1_double_buffer.html", [
+          [ "TTEthernetModel::AVBDoubleBuffer", "class_t_t_ethernet_model_1_1_a_v_b_double_buffer.html", null ],
           [ "TTEthernetModel::RCDoubleBuffer", "class_t_t_ethernet_model_1_1_r_c_double_buffer.html", null ],
           [ "TTEthernetModel::TTDoubleBuffer", "class_t_t_ethernet_model_1_1_t_t_double_buffer.html", null ]
         ] ],
         [ "TTEthernetModel::QueueBuffer", "class_t_t_ethernet_model_1_1_queue_buffer.html", [
+          [ "TTEthernetModel::AVBQueueBuffer", "class_t_t_ethernet_model_1_1_a_v_b_queue_buffer.html", null ],
           [ "TTEthernetModel::BGQueueBuffer", "class_t_t_ethernet_model_1_1_b_g_queue_buffer.html", null ],
           [ "TTEthernetModel::RCQueueBuffer", "class_t_t_ethernet_model_1_1_r_c_queue_buffer.html", null ],
           [ "TTEthernetModel::TTQueueBuffer", "class_t_t_ethernet_model_1_1_t_t_queue_buffer.html", null ]
@@ -69,7 +78,9 @@ var hierarchy =
       [ "TTEthernetModel::TTEApplicationBase", "class_t_t_ethernet_model_1_1_t_t_e_application_base.html", [
         [ "TTEthernetModel::TicApp", "class_t_t_ethernet_model_1_1_tic_app.html", null ],
         [ "TTEthernetModel::TocApp", "class_t_t_ethernet_model_1_1_toc_app.html", null ],
+        [ "TTEthernetModel::TrafficSinkApp", "class_t_t_ethernet_model_1_1_traffic_sink_app.html", null ],
         [ "TTEthernetModel::TrafficSourceAppBase", "class_t_t_ethernet_model_1_1_traffic_source_app_base.html", [
+          [ "TTEthernetModel::AVBTrafficSourceApp", "class_t_t_ethernet_model_1_1_a_v_b_traffic_source_app.html", null ],
           [ "TTEthernetModel::RCTrafficSourceApp", "class_t_t_ethernet_model_1_1_r_c_traffic_source_app.html", null ],
           [ "TTEthernetModel::TTTrafficSourceApp", "class_t_t_ethernet_model_1_1_t_t_traffic_source_app.html", null ]
         ] ],
@@ -77,8 +88,12 @@ var hierarchy =
           [ "TTEthernetModel::TTEAPITestApplication", "class_t_t_ethernet_model_1_1_t_t_e_a_p_i_test_application.html", null ]
         ] ]
       ] ],
-      [ "TTEthernetModel::TTEInput", "class_t_t_ethernet_model_1_1_t_t_e_input.html", null ],
-      [ "TTEthernetModel::TTEOutput", "class_t_t_ethernet_model_1_1_t_t_e_output.html", null ],
+      [ "TTEthernetModel::TTEInput", "class_t_t_ethernet_model_1_1_t_t_e_input.html", [
+        [ "TTEthernetModel::TTEAVBInput", "class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html", null ]
+      ] ],
+      [ "TTEthernetModel::TTEOutput", "class_t_t_ethernet_model_1_1_t_t_e_output.html", [
+        [ "TTEthernetModel::TTEAVBOutput", "class_t_t_ethernet_model_1_1_t_t_e_a_v_b_output.html", null ]
+      ] ],
       [ "TTEthernetModel::TTEScheduler", "class_t_t_ethernet_model_1_1_t_t_e_scheduler.html", [
         [ "TTEthernetModel::RecordPlaybackScheduler", "class_t_t_ethernet_model_1_1_record_playback_scheduler.html", null ]
       ] ]
@@ -86,12 +101,14 @@ var hierarchy =
     [ "EtherFrame", null, [
       [ "TTEthernetModel::CTFrame_Base", "class_t_t_ethernet_model_1_1_c_t_frame___base.html", [
         [ "TTEthernetModel::CTFrame", "class_t_t_ethernet_model_1_1_c_t_frame.html", [
+          [ "TTEthernetModel::AVBFrame", "class_t_t_ethernet_model_1_1_a_v_b_frame.html", null ],
           [ "TTEthernetModel::RCFrame", "class_t_t_ethernet_model_1_1_r_c_frame.html", [
             [ "TTEthernetModel::PCFrame", "class_t_t_ethernet_model_1_1_p_c_frame.html", null ]
           ] ],
           [ "TTEthernetModel::TTFrame", "class_t_t_ethernet_model_1_1_t_t_frame.html", null ]
         ] ]
-      ] ]
+      ] ],
+      [ "TTEthernetModel::SRPFrame", "class_t_t_ethernet_model_1_1_s_r_p_frame.html", null ]
     ] ],
     [ "TTEthernetModel::HICMState", "class_t_t_ethernet_model_1_1_h_i_c_m_state.html", [
       [ "TTEthernetModel::HI_CM_INIT", "class_t_t_ethernet_model_1_1_h_i___c_m___i_n_i_t.html", null ],

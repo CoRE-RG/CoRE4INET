@@ -21,6 +21,7 @@
    <td>
 
 <p>Abstract base traffic source application used for various traffic generators.
+Uses <a href="CTFrame.html">CTFrame</a> with encapsulated cPacket as payload
 Since this is an abstract module please do not instantiate it</p>
 
    </td>
@@ -48,6 +49,7 @@ Since this is an abstract module please do not instantiate it</p>
 
 </span><span style="color: #808080; font-style: italic; ">//
 // Abstract base traffic source application used for various traffic generators.
+// Uses CTFrame with encapsulated cPacket as payload
 // Since this is an abstract module please do not instantiate it
 //
 //
@@ -59,7 +61,7 @@ Since this is an abstract module please do not instantiate it</p>
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
         </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/source&quot;</span><span style="color: #000000; ">);
         
-        </span><span style="color: #808080; font-style: italic; ">//Size of the payload of the message that is being generated
+        </span><span style="color: #808080; font-style: italic; ">//Size of the payload of the message (size of encapsulated cPacket) that is being generated
 </span><span style="color: #000000; ">        </span><span style="color: #000080; font-weight: bold; ">int</span><span style="color: #000000; "> </span><span style="color: #000000; ">payload</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">46</span><span style="color: #000000; ">Byte</span><span style="color: #000000; ">);
         
         </span><span style="color: #808080; font-style: italic; ">//Critical traffic identifier of the message that is being generated (-1) means don't set ID

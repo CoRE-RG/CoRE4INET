@@ -50,6 +50,16 @@ Unresolved types are missing from the diagram. Click <a href="full-msg-inheritan
       <th class="description">Description</th>
    </tr>
 <tr class="local">
+   <td>byteLength</td>
+   <td>
+      <i>
+</i>
+   </td>
+   <td>
+<p>Set EthernetHeader Bytelength</p>
+</td>
+</tr>
+<tr class="local">
    <td>integration_cycle</td>
    <td>
       <i>
@@ -125,16 +135,6 @@ string</i>
    <td></td>
 </tr>
 <tr class="inherited">
-   <td>byteLength</td>
-   <td>
-      <i>
-</i>
-   </td>
-   <td>
-<p>Set EthernetHeader Bytelength</p>
-</td>
-</tr>
-<tr class="inherited">
    <td>ctID</td>
    <td>
       <i>
@@ -188,6 +188,9 @@ int</i>
 // </span><span style="color: #000080; ">@author</span><span style="color: #808080; font-style: italic; "> Till Steinbach
 </span><span style="color: #800000; font-weight: bold; ">packet</span><span style="color: #000000; "> </span><span style="color: #000000; ">PCFrame</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">RCFrame</span><span style="color: #000000; ">
 {
+    </span><span style="color: #808080; font-style: italic; ">// Set PCF Bytelength
+</span><span style="color: #000000; ">    </span><span style="color: #000000; ">byteLength</span><span style="color: #000000; "> = </span><span style="color: #008000; ">64</span><span style="color: #000000; ">;
+
     </span><span style="color: #808080; font-style: italic; ">// pcf_integration_cycle: Represents the integration cycle in which the protocol control frame was sent
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">//
 </span><span style="color: #000000; ">    </span><span style="color: #808080; font-style: italic; ">// 32 Bit field

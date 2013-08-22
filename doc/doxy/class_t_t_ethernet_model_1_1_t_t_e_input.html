@@ -109,8 +109,6 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_t_t_e_inp
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_t_t_ethernet_model_1_1_t_t_e_input-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">TTEthernetModel::TTEInput Class Reference</div>  </div>
@@ -120,13 +118,14 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_t_t_e_inp
 <p>Represents the part of a port that receives messages (RX)  
  <a href="class_t_t_ethernet_model_1_1_t_t_e_input.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>&gt;</code></p>
+<p><code>#include &lt;TTEInput.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::TTEInput:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_t_t_ethernet_model_1_1_t_t_e_input.png" usemap="#TTEthernetModel::TTEInput_map" alt=""/>
   <map id="TTEthernetModel::TTEInput_map" name="TTEthernetModel::TTEInput_map">
+<area href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html" alt="TTEthernetModel::TTEAVBInput" shape="rect" coords="0,112,189,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -147,21 +146,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a787189dd1096648e01c28fb2ae51d42f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage</a> (cMessage *msg)</td></tr>
 <tr class="memdesc:a787189dd1096648e01c28fb2ae51d42f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forwards frames to the appropriate incoming modules.  <a href="#a787189dd1096648e01c28fb2ae51d42f">More...</a><br/></td></tr>
 <tr class="separator:a787189dd1096648e01c28fb2ae51d42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a17a1091fad15b18d3914a28ab4c56b70"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a17a1091fad15b18d3914a28ab4c56b70">hadError</a></td></tr>
-<tr class="memdesc:a17a1091fad15b18d3914a28ab4c56b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to true if there was an error during runtime  <a href="#a17a1091fad15b18d3914a28ab4c56b70">More...</a><br/></td></tr>
-<tr class="separator:a17a1091fad15b18d3914a28ab4c56b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
-<tr class="memitem:ac3e45a6edb1c107af246b74feb7ecb94"><td class="memItemLeft" align="right" valign="top">static simsignal_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">ctDroppedSignal</a> = SIMSIGNAL_NULL</td></tr>
-<tr class="memdesc:ac3e45a6edb1c107af246b74feb7ecb94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal that is emitted when a frame is dropped.  <a href="#ac3e45a6edb1c107af246b74feb7ecb94">More...</a><br/></td></tr>
-<tr class="separator:ac3e45a6edb1c107af246b74feb7ecb94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
 <tr class="memitem:a3b0e81aeb6f2cafae491db474a097eed"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed">isCT</a> (EtherFrame *frame)</td></tr>
 <tr class="memdesc:a3b0e81aeb6f2cafae491db474a097eed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function checks whether a Frame is critical traffic.  <a href="#a3b0e81aeb6f2cafae491db474a097eed">More...</a><br/></td></tr>
 <tr class="separator:a3b0e81aeb6f2cafae491db474a097eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,8 +153,8 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:af95a545e8b0558f1307c2ad740b24c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the critical traffic id for a given frame.  <a href="#af95a545e8b0558f1307c2ad740b24c43">More...</a><br/></td></tr>
 <tr class="separator:af95a545e8b0558f1307c2ad740b24c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:aaaececd11f6657b3e0ee0df3d97c3059"><td class="memItemLeft" align="right" valign="top">std::map&lt; uint16_t, std::list<br class="typebreak"/>
 &lt; <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#aaaececd11f6657b3e0ee0df3d97c3059">incomings</a></td></tr>
 <tr class="memdesc:aaaececd11f6657b3e0ee0df3d97c3059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lists of incoming modules for each critical traffic id.  <a href="#aaaececd11f6657b3e0ee0df3d97c3059">More...</a><br/></td></tr>
@@ -184,12 +168,19 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:aef2add9ea7abff75f9320e7e5bc5d321"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#aef2add9ea7abff75f9320e7e5bc5d321">promiscuous</a></td></tr>
 <tr class="memdesc:aef2add9ea7abff75f9320e7e5bc5d321"><td class="mdescLeft">&#160;</td><td class="mdescRight">caches promiscuous parameter  <a href="#aef2add9ea7abff75f9320e7e5bc5d321">More...</a><br/></td></tr>
 <tr class="separator:aef2add9ea7abff75f9320e7e5bc5d321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17a1091fad15b18d3914a28ab4c56b70"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a17a1091fad15b18d3914a28ab4c56b70">hadError</a></td></tr>
+<tr class="memdesc:a17a1091fad15b18d3914a28ab4c56b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to true if there was an error during runtime  <a href="#a17a1091fad15b18d3914a28ab4c56b70">More...</a><br/></td></tr>
+<tr class="separator:a17a1091fad15b18d3914a28ab4c56b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:ac3e45a6edb1c107af246b74feb7ecb94"><td class="memItemLeft" align="right" valign="top">static simsignal_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94">ctDroppedSignal</a> = SIMSIGNAL_NULL</td></tr>
+<tr class="memdesc:ac3e45a6edb1c107af246b74feb7ecb94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal that is emitted when a frame is dropped.  <a href="#ac3e45a6edb1c107af246b74feb7ecb94">More...</a><br/></td></tr>
+<tr class="separator:ac3e45a6edb1c107af246b74feb7ecb94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the part of a port that receives messages (RX) </p>
 <p>*Critical traffic arriving on in-gate is forwarded to the incoming modules or dropped if there is no module configured. Best-effort frames are forwarded through the out-gate. </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00039">39</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae4a93376feb0c86d94bf03a4d1a71e5f"></a>
 <div class="memitem">
@@ -205,8 +196,6 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00029">29</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                  {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a17a1091fad15b18d3914a28ab4c56b70" title="set to true if there was an error during runtime">hadError</a>=<span class="keyword">false</span>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
@@ -231,7 +220,7 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -247,9 +236,7 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>critical traffic id</dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed" title="Helper function checks whether a Frame is critical traffic.">isCT(EtherFrame *frame)</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00168">168</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00043">handleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#a94a0618f9987d073381f3f1ceb818557">TTEthernetModel::TTEAVBInput::handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> macBytes[6];</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    frame-&gt;getDest().getAddressBytes(macBytes);</div>
@@ -289,7 +276,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00043">43</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
+<p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#a94a0618f9987d073381f3f1ceb818557">TTEthernetModel::TTEAVBInput</a>.</p>
 <div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span> (msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>))</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
@@ -399,8 +386,6 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00122">122</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                                       {</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a82cf009403203ac2617d8653ae1934cb" title="caches ct_mask parameter">ctMask</a> = (uint32_t)par(<span class="stringliteral">&quot;ct_mask&quot;</span>).longValue();</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac83d02d31255e8347c3312da4e87c82a" title="caches ct_marker parameter">ctMarker</a> = (uint32_t)par(<span class="stringliteral">&quot;ct_marker&quot;</span>).longValue();</div>
@@ -464,8 +449,6 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00033">33</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ac3e45a6edb1c107af246b74feb7ecb94" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
@@ -489,7 +472,7 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -503,9 +486,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if frame is critical, else false </dd></dl>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8cc_source.html#l00154">154</a> of file <a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00043">handleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#a94a0618f9987d073381f3f1ceb818557">TTEthernetModel::TTEAVBInput::handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> macBytes[6];</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    frame-&gt;getDest().getAddressBytes(macBytes);</div>
@@ -543,9 +524,7 @@ Private Attributes</h2></td></tr>
 <p>Signal that is emitted when a frame is dropped. </p>
 <p>Frames may be dropped when no incoming module is configured. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00069">69</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00043">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00033">initialize()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#a94a0618f9987d073381f3f1ceb818557">TTEthernetModel::TTEAVBInput::handleMessage()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a662ebf14464f337aa3a5a21ee2c8451c">initialize()</a>.</p>
 
 </div>
 </div>
@@ -562,16 +541,14 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>caches ct_marker parameter </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00054">54</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00122">handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00154">isCT()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3c9f4c8b21c9f67fe94f1f47d4f116aa">handleParameterChange()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed">isCT()</a>.</p>
 
 </div>
 </div>
@@ -588,16 +565,14 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>caches ct_mask parameter </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00050">50</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00122">handleParameterChange()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00154">isCT()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3c9f4c8b21c9f67fe94f1f47d4f116aa">handleParameterChange()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3b0e81aeb6f2cafae491db474a097eed">isCT()</a>.</p>
 
 </div>
 </div>
@@ -621,9 +596,7 @@ Private Attributes</h2></td></tr>
 
 <p>set to true if there was an error during runtime </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00063">63</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00043">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00029">TTEInput()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#a94a0618f9987d073381f3f1ceb818557">TTEthernetModel::TTEAVBInput::handleMessage()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#ae4a93376feb0c86d94bf03a4d1a71e5f">TTEInput()</a>.</p>
 
 </div>
 </div>
@@ -640,16 +613,14 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Lists of incoming modules for each critical traffic id. </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00045">45</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00043">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00122">handleParameterChange()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#a94a0618f9987d073381f3f1ceb818557">TTEthernetModel::TTEAVBInput::handleMessage()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3c9f4c8b21c9f67fe94f1f47d4f116aa">handleParameterChange()</a>.</p>
 
 </div>
 </div>
@@ -666,22 +637,20 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>caches promiscuous parameter </p>
 
-<p>Definition at line <a class="el" href="_t_t_e_input_8h_source.html#l00058">58</a> of file <a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_e_input_8cc_source.html#l00043">handleMessage()</a>, and <a class="el" href="_t_t_e_input_8cc_source.html#l00122">handleParameterChange()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_a_v_b_input.html#a94a0618f9987d073381f3f1ceb818557">TTEthernetModel::TTEAVBInput::handleMessage()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a787189dd1096648e01c28fb2ae51d42f">handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html#a3c9f4c8b21c9f67fe94f1f47d4f116aa">handleParameterChange()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_t_t_e_input_8h_source.html">TTEInput.h</a></li>
-<li><a class="el" href="_t_t_e_input_8cc_source.html">TTEInput.cc</a></li>
+<li><a class="el" href="_t_t_e_input_8h.html">TTEInput.h</a></li>
+<li><a class="el" href="_t_t_e_input_8cc.html">TTEInput.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -689,7 +658,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_t_t_e_input.html">TTEInput</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:37 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

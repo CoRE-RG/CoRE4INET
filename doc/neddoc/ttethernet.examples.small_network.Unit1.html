@@ -16,21 +16,21 @@
 <area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="927,1019,1076,1080">
 <area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="ISync" alt="ISync" coords="123,189,167,250">
 <area shape="rect" href="ttethernet.scheduler.ITTEScheduler.html" title="ITTEScheduler" alt="ITTEScheduler" coords="194,189,280,250">
-<area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="176,119,298,180">
+<area shape="rect" href="ttethernet.applications.base.ITTEApplication.html" title="ITTEApplication" alt="ITTEApplication" coords="175,57,297,118">
 <area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="123,57,167,118">
 <area shape="rect" href="ttethernet.buffer.BGQueueBuffer.html" title="BGQueueBuffer" alt="BGQueueBuffer" coords="122,119,167,180">
 <area shape="rect" href="ttethernet.linklayer.BGTrafficHandle.html" title="BGTrafficHandle" alt="BGTrafficHandle" coords="9,119,116,180">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="317,80,386,141">
-<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="420,81,465,142">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="318,120,387,181">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="421,120,466,181">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.Unit1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="133,83,205,111">
+<img src="ttethernet.examples.small_network.Unit1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.examples.small_network.Unit1.html" title="Compound Module Unit1" alt="" coords="141,83,213,111">
 <area shape="rect" id="node2" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="5,161,96,189">
-<area shape="rect" id="node4" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="120,161,219,189">
-<area shape="rect" id="node6" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="243,161,357,189">
-<area shape="rect" id="node8" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="116,6,223,34">
+<area shape="rect" id="node4" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="120,161,235,189">
+<area shape="rect" id="node6" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="259,161,357,189">
+<area shape="rect" id="node8" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="124,6,231,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -128,7 +128,7 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
    </tr>
 <tr>
    <td>display</td>
-   <td><i>bgb=894,314;i=device/device</i></td>
+   <td><i>bgb=479,314</i></td>
    <td></td>
 </tr>
 <tr>
@@ -511,15 +511,16 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
 //
 </span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Unit1</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherHost</span><span style="color: #000000; ">
 {
+    </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=479,314&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">vl_100_ctc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTIncoming</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=349,60&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=350,100&quot;</span><span style="color: #000000; ">);
 
         }
         </span><span style="color: #000000; ">vl_100</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTDoubleBuffer</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=439,61&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=440,100&quot;</span><span style="color: #000000; ">);
         }
     </span><span style="color: #800000; font-weight: bold; ">connections</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">vl_100_ctc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">vl_100</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;

@@ -9,26 +9,26 @@
 <p>switch1: configuration in switch1.ini
 Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101</p>
 <img src="ttethernet.examples.small_network.Switch1-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="IMACRelayUnit" alt="IMACRelayUnit" coords="113,262,173,323">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="180,301,294,357">
-<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="ISync" alt="ISync" coords="123,189,167,250">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="IMACRelayUnit" alt="IMACRelayUnit" coords="72,70,132,131">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="-5,123,109,179">
+<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="ISync" alt="ISync" coords="152,70,196,131">
 <area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="927,1019,1076,1080">
-<area shape="rect" href="ttethernet.scheduler.ITTEScheduler.html" title="ITTEScheduler" alt="ITTEScheduler" coords="194,189,280,250">
-<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="317,80,386,141">
-<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="420,81,465,142">
-<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="RCIncoming" alt="RCIncoming" coords="317,160,386,221">
-<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="RCQueueBuffer" alt="RCQueueBuffer" coords="420,161,471,222">
+<area shape="rect" href="ttethernet.scheduler.ITTEScheduler.html" title="ITTEScheduler" alt="ITTEScheduler" coords="199,70,285,131">
+<area shape="rect" href="ttethernet.ctc.TTIncoming.html" title="TTIncoming" alt="TTIncoming" coords="138,150,207,211">
+<area shape="rect" href="ttethernet.buffer.TTDoubleBuffer.html" title="TTDoubleBuffer" alt="TTDoubleBuffer" coords="221,150,266,211">
+<area shape="rect" href="ttethernet.ctc.RCIncoming.html" title="RCIncoming" alt="RCIncoming" coords="138,220,207,281">
+<area shape="rect" href="ttethernet.buffer.RCQueueBuffer.html" title="RCQueueBuffer" alt="RCQueueBuffer" coords="221,220,272,281">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.examples.small_network.Switch1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="269,83,341,111">
+<img src="ttethernet.examples.small_network.Switch1-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="280,83,352,111">
 <area shape="rect" id="node2" href="ttethernet.ctc.TTIncoming.html" title="Simple Module TTIncoming" alt="" coords="5,161,96,189">
 <area shape="rect" id="node4" href="ttethernet.buffer.RCQueueBuffer.html" title="Simple Module RCQueueBuffer" alt="" coords="120,161,235,189">
-<area shape="rect" id="node6" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="259,161,352,189">
-<area shape="rect" id="node8" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="376,161,475,189">
-<area shape="rect" id="node10" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="499,161,613,189">
-<area shape="rect" id="node12" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="252,6,359,34">
+<area shape="rect" id="node6" href="ttethernet.buffer.TTDoubleBuffer.html" title="Simple Module TTDoubleBuffer" alt="" coords="259,161,373,189">
+<area shape="rect" id="node8" href="ned.IdealChannel.html" title="Channel IdealChannel" alt="" coords="397,161,496,189">
+<area shape="rect" id="node10" href="ttethernet.ctc.RCIncoming.html" title="Simple Module RCIncoming" alt="" coords="520,161,613,189">
+<area shape="rect" id="node12" href="ttethernet.examples.small_network.small_network.html" title="Network small_network" alt="" coords="263,6,369,34">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
@@ -110,7 +110,7 @@ configure the TTEthernet Model. Configuration in omnetpp.ini</p>
    </tr>
 <tr>
    <td>display</td>
-   <td><i>i=block/switch;bgb=1219,312</i></td>
+   <td><i>bgb=306,263</i></td>
    <td></td>
 </tr>
 <tr>
@@ -505,22 +505,23 @@ Comma seperated list of gates where the frames of the buffer are delivered</p>
 //
 </span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">Switch1</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">extends</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherSwitch</span><span style="color: #000000; ">
 {
+    </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;bgb=306,263&quot;</span><span style="color: #000000; ">);
     </span><span style="color: #800000; font-weight: bold; ">submodules</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">vl_100_ctc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTIncoming</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=349,60&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=170,130&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #000000; ">vl_100</span><span style="color: #000000; ">: </span><span style="color: #000000; ">TTDoubleBuffer</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=439,61&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=240,130&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #000000; ">vl_101_ctc</span><span style="color: #000000; ">: </span><span style="color: #000000; ">RCIncoming</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=349,140&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=170,200&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #000000; ">vl_101</span><span style="color: #000000; ">: </span><span style="color: #000000; ">RCQueueBuffer</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=439,141&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=240,200&quot;</span><span style="color: #000000; ">);
         }
     </span><span style="color: #800000; font-weight: bold; ">connections</span><span style="color: #000000; ">:
         </span><span style="color: #000000; ">vl_100_ctc</span><span style="color: #000000; ">.</span><span style="color: #000000; ">out</span><span style="color: #000000; "> </span><span style="color: #800000; font-weight: bold; ">--&gt;</span><span style="color: #000000; "> </span><span style="color: #000000; ">vl_100</span><span style="color: #000000; ">.</span><span style="color: #000000; ">in</span><span style="color: #000000; ">;

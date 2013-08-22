@@ -15,27 +15,28 @@ The configuration is done by the BufferManager that deletes itself at runtime.</
 <p><b>See also:</b> IMacRelayUnit, <a href="ttethernet.linklayer.TTEPHYPort.html">TTEPHYPort</a>, Sync, <a href="ttethernet.scheduler.TTEScheduler.html">TTEScheduler</a>, BufferManager</p>
 <p><b>Author:</b> Till Steinbach</p>
 <img src="ttethernet.nodes.ethernet.TTEEtherSwitch-type.png" ismap="yes" usemap="#type-diagram"/><map name="type-diagram">
-<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="IMACRelayUnit" alt="IMACRelayUnit" coords="113,262,173,323">
-<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="180,301,294,357">
-<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="ISync" alt="ISync" coords="123,189,167,250">
+<area shape="rect" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="IMACRelayUnit" alt="IMACRelayUnit" coords="72,70,132,131">
+<area shape="rect" href="ttethernet.linklayer.TTEPHYPort.html" title="TTEPHYPort" alt="TTEPHYPort" coords="-5,123,109,179">
+<area shape="rect" href="ttethernet.synchronisation.base.ISync.html" title="ISync" alt="ISync" coords="152,70,196,131">
 <area shape="rect" href="ttethernet.configuration.base.IConfigurationManager.html" title="IConfigurationManager" alt="IConfigurationManager" coords="927,1019,1076,1080">
-<area shape="rect" href="ttethernet.scheduler.ITTEScheduler.html" title="ITTEScheduler" alt="ITTEScheduler" coords="194,189,280,250">
+<area shape="rect" href="ttethernet.scheduler.ITTEScheduler.html" title="ITTEScheduler" alt="ITTEScheduler" coords="199,70,285,131">
 </map>
 <h3 class="subtitle">Usage diagram:</h3>
 <p>The following diagram shows usage relationships between types.
 Unresolved types are missing from the diagram. Click <a href="full-ned-usage-diagram.html">here</a> to see the full picture.</p>
-<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="281,6,399,34">
-<area shape="rect" id="node2" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="5,83,157,111">
-<area shape="rect" id="node4" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="181,83,280,111">
-<area shape="rect" id="node6" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="304,83,376,111">
-<area shape="rect" id="node8" href="ttethernet.scheduler.ITTEScheduler.html" title="Module Interface ITTEScheduler" alt="" coords="400,83,509,111">
-<area shape="rect" id="node10" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="533,83,648,111">
+<img src="ttethernet.nodes.ethernet.TTEEtherSwitch-usage.png" ismap="yes" usemap="#usage-diagram"/><map name="usage-diagram"><area shape="rect" id="node1" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="260,6,377,34">
+<area shape="rect" id="node2" href="ttethernet.scheduler.ITTEScheduler.html" title="Module Interface ITTEScheduler" alt="" coords="5,83,115,111">
+<area shape="rect" id="node4" href="ttethernet.linklayer.TTEPHYPort.html" title="Compound Module TTEPHYPort" alt="" coords="139,83,237,111">
+<area shape="rect" id="node6" href="../../../inet/doc/neddoc/inet.linklayer.IMACRelayUnit.html" title="Module Interface IMACRelayUnit" alt="" coords="261,83,376,111">
+<area shape="rect" id="node8" href="ttethernet.configuration.base.IConfigurationManager.html" title="Module Interface IConfigurationManager" alt="" coords="400,83,552,111">
+<area shape="rect" id="node10" href="ttethernet.synchronisation.base.ISync.html" title="Module Interface ISync" alt="" coords="576,83,648,111">
 </map>
 <h3 class="subtitle">Inheritance diagram:</h3>
 <p>The following diagram shows inheritance relationships for this type.
 Unresolved types are missing from the diagram. Click <a href="full-ned-inheritance-diagram.html">here</a> to see the full picture.</p>
 <img src="ttethernet.nodes.ethernet.TTEEtherSwitch-inheritance.png" ismap="yes" usemap="#inheritance-diagram"/><map name="inheritance-diagram"><area shape="rect" id="node1" href="ttethernet.nodes.ethernet.TTEEtherSwitch.html" title="Compound Module TTEEtherSwitch" alt="" coords="5,6,123,34">
-<area shape="rect" id="node2" href="ttethernet.examples.small_network.Switch1.html" title="Compound Module Switch1" alt="" coords="28,83,100,111">
+<area shape="rect" id="node2" href="ttethernet.examples.synchronization.StandardIntegrity_medium.Switch1.html" title="Compound Module Switch1" alt="" coords="28,83,100,111">
+<area shape="rect" id="node7" href="ttethernet.examples.synchronization.StandardIntegrity_medium.Switch2.html" title="Compound Module Switch2" alt="" coords="124,83,196,111">
 </map>
 <h3 class="subtitle">Known subclasses:</h3>
 <table class="typestable">
@@ -72,6 +73,62 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
 
    </td>
 </tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.synchronization.StandardIntegrity_large.Switch1.html">Switch1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>switch1: configuration in switch1.ini
+Forwards time-triggered messages with VL-ID 100</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.synchronization.StandardIntegrity_medium.Switch1.html">Switch1</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>switch1: configuration in switch1.ini
+Forwards time-triggered messages with VL-ID 100</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.synchronization.StandardIntegrity_large.Switch2.html">Switch2</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>switch1: configuration in switch1.ini
+Forwards time-triggered messages with VL-ID 100</p>
+
+   </td>
+</tr>
+<tr>
+   <td>
+<a href="ttethernet.examples.synchronization.StandardIntegrity_medium.Switch2.html">Switch2</a>
+   </td>
+   <td>
+<i>compound&nbsp;module</i>
+   </td>
+   <td>
+
+<p>switch1: configuration in switch1.ini
+Forwards time-triggered messages with VL-ID 100</p>
+
+   </td>
+</tr>
 </table>
 <h3 class="subtitle">Parameters:</h3>
 <table class="paramstable">
@@ -99,7 +156,7 @@ Forwards time-triggered messages with VL-ID 100 and rate-constrained messages wi
    </tr>
 <tr>
    <td>display</td>
-   <td><i>i=block/switch;bgb=1219,312</i></td>
+   <td><i>i=block/switch;bgb=514,312</i></td>
    <td></td>
 </tr>
 <tr>
@@ -266,7 +323,7 @@ a generated MAC address in init stage 0.</p>
 </span><span style="color: #800000; font-weight: bold; ">module</span><span style="color: #000000; "> </span><span style="color: #000000; ">TTEEtherSwitch</span><span style="color: #000000; ">
 {
     </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/switch;bgb=1219,312&quot;</span><span style="color: #000000; ">);
+        </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;i=block/switch;bgb=514,312&quot;</span><span style="color: #000000; ">);
         </span><span style="color: #000000; font-weight: bold; ">@node</span><span style="color: #000000; ">;
         </span><span style="color: #000000; font-weight: bold; ">@labels</span><span style="color: #000000; ">(</span><span style="color: #000000; ">node</span><span style="color: #000000; ">,</span><span style="color: #000000; ">ethernet</span><span style="color: #000000; ">-</span><span style="color: #000000; ">node</span><span style="color: #000000; ">);
         </span><span style="color: #000080; font-weight: bold; ">double</span><span style="color: #000000; "> </span><span style="color: #000000; ">hardware_delay</span><span style="color: #000000; "> </span><span style="color: #000000; font-weight: bold; ">@unit</span><span style="color: #000000; ">(</span><span style="color: #000000; ">s</span><span style="color: #000000; ">) = </span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">8</span><span style="color: #000000; ">us</span><span style="color: #000000; ">);
@@ -277,7 +334,7 @@ a generated MAC address in init stage 0.</p>
         </span><span style="color: #808080; font-style: italic; ">// Implementation of the best-effort forwarding part
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">beswitch</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;MACRelayUnitNP&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IMACRelayUnit</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,242&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=100,50&quot;</span><span style="color: #000000; ">);
             </span><span style="color: #800000; font-weight: bold; ">gates</span><span style="color: #000000; ">:
                 </span><span style="color: #000000; ">lowerLayerIn</span><span style="color: #000000; ">[</span><span style="color: #800000; font-weight: bold; ">sizeof</span><span style="color: #000000; ">(</span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">)];
                 </span><span style="color: #000000; ">lowerLayerOut</span><span style="color: #000000; ">[</span><span style="color: #800000; font-weight: bold; ">sizeof</span><span style="color: #000000; ">(</span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">)];
@@ -285,14 +342,14 @@ a generated MAC address in init stage 0.</p>
         </span><span style="color: #808080; font-style: italic; ">// Physical ports of the switch
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">phy</span><span style="color: #000000; ">[</span><span style="color: #800000; font-weight: bold; ">sizeof</span><span style="color: #000000; ">(</span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">)]: </span><span style="color: #000000; ">TTEPHYPort</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,278,r,50&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=50,100,column,50&quot;</span><span style="color: #000000; ">);
                 </span><span style="color: #808080; font-style: italic; ">//For the switch it is necessary to have promiscuous mode enabled
 </span><span style="color: #000000; ">                </span><span style="color: #000000; ">promiscuous</span><span style="color: #000000; "> = </span><span style="color: #008000; ">true</span><span style="color: #000000; ">;
         }
         </span><span style="color: #808080; font-style: italic; ">// Sync module for synchronisation of the scheduler
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">sync</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;DummySync&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ISync</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=141,169&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=170,50&quot;</span><span style="color: #000000; ">);
         }
         </span><span style="color: #808080; font-style: italic; ">// Buffer manager that creates the buffers according to the configuration
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">configurationManager</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;BaseConfigurationManager&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">IConfigurationManager</span><span style="color: #000000; "> {
@@ -302,7 +359,7 @@ a generated MAC address in init stage 0.</p>
         </span><span style="color: #808080; font-style: italic; ">// Scheudler for the device
 </span><span style="color: #000000; ">        </span><span style="color: #000000; ">tteScheduler</span><span style="color: #000000; ">: &lt;</span><span style="color: #800000; font-weight: bold; ">default</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;TTEScheduler&quot;</span><span style="color: #000000; ">)&gt; </span><span style="color: #800000; font-weight: bold; ">like</span><span style="color: #000000; "> </span><span style="color: #000000; ">ITTEScheduler</span><span style="color: #000000; "> {
             </span><span style="color: #800000; font-weight: bold; ">parameters</span><span style="color: #000000; ">:
-                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=235,169&quot;</span><span style="color: #000000; ">);
+                </span><span style="color: #000000; font-weight: bold; ">@display</span><span style="color: #000000; ">(</span><span style="color: #008000; ">&quot;p=240,50&quot;</span><span style="color: #000000; ">);
         }
     </span><span style="color: #800000; font-weight: bold; ">connections</span><span style="color: #000000; ">:
         </span><span style="color: #800000; font-weight: bold; ">for</span><span style="color: #000000; "> </span><span style="color: #000000; ">i</span><span style="color: #000000; ">=</span><span style="color: #008000; ">0</span><span style="color: #000000; ">..</span><span style="color: #800000; font-weight: bold; ">sizeof</span><span style="color: #000000; ">(</span><span style="color: #000000; ">ethg</span><span style="color: #000000; ">)-</span><span style="color: #008000; ">1</span><span style="color: #000000; "> {

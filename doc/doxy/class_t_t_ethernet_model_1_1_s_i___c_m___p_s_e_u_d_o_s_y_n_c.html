@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_s_i___c_m
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_s_i_c_m_states_8h_source.html">SICMStates.h</a>&gt;</code></p>
+<p><code>#include &lt;SICMStates.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::SI_CM_PSEUDOSYNC:</div>
 <div class="dyncontent">
@@ -224,6 +224,10 @@ int &gt; &gt; * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom
 &lt; pair&lt; unsigned int, unsigned <br class="typebreak"/>
 int &gt; &gt; * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ac2c59bf5641a72a14c1279e097106334">ca_compression_stack</a></td></tr>
 <tr class="separator:ac2c59bf5641a72a14c1279e097106334 inherit pub_attribs_class_t_t_ethernet_model_1_1_s_i_c_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a265128559b38aabd7b2cb644d044319b inherit pub_attribs_class_t_t_ethernet_model_1_1_s_i_c_m_state"><td class="memItemLeft" align="right" valign="top">map&lt; unsigned int, vector<br class="typebreak"/>
+&lt; pair&lt; unsigned int, unsigned <br class="typebreak"/>
+int &gt; &gt; * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a265128559b38aabd7b2cb644d044319b">ca_compression_stack_it</a></td></tr>
+<tr class="separator:a265128559b38aabd7b2cb644d044319b inherit pub_attribs_class_t_t_ethernet_model_1_1_s_i_c_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87396c51f7f5607990cc4af7c15c48fa inherit pub_attribs_class_t_t_ethernet_model_1_1_s_i_c_m_state"><td class="memItemLeft" align="right" valign="top">deque&lt; <a class="el" href="class_t_t_ethernet_model_1_1_compressed_p_i_t.html">CompressedPIT</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a87396c51f7f5607990cc4af7c15c48fa">delay_container</a></td></tr>
 <tr class="separator:a87396c51f7f5607990cc4af7c15c48fa inherit pub_attribs_class_t_t_ethernet_model_1_1_s_i_c_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad5f51bb236da36fa60c57ce95b5a11a inherit pub_attribs_class_t_t_ethernet_model_1_1_s_i_c_m_state"><td class="memItemLeft" align="right" valign="top">deque&lt; <a class="el" href="class_t_t_ethernet_model_1_1_dispatch_delay.html">DispatchDelay</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#aad5f51bb236da36fa60c57ce95b5a11a">dispatch_delay_container</a></td></tr>
@@ -232,10 +236,7 @@ int &gt; &gt; * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a cla
 unsigned int &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ae8fa37fe71191a3986acaf7f98cc5fbc">clock_stack</a></td></tr>
 <tr class="separator:ae8fa37fe71191a3986acaf7f98cc5fbc inherit pub_attribs_class_t_t_ethernet_model_1_1_s_i_c_m_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_s_i_c_m_states_8h_source.html#l00054">54</a> of file <a class="el" href="_s_i_c_m_states_8h_source.html">SICMStates.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="abf76cd45ca8bdb02f730a8748cda681f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -248,10 +249,8 @@ unsigned int &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a c
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_s_i_c_m_states_8cc_source.html#l00153">153</a> of file <a class="el" href="_s_i_c_m_states_8cc_source.html">SICMStates.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                                   {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                   {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -279,43 +278,41 @@ unsigned int &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a c
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a2a9d2d417c26303ead099152daecf854">TTEthernetModel::SICMState</a>.</p>
-
-<p>Definition at line <a class="el" href="_s_i_c_m_states_8cc_source.html#l00156">156</a> of file <a class="el" href="_s_i_c_m_states_8cc_source.html">SICMStates.cc</a>.</p>
-<div class="fragment"><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                                                      {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;cm_clock_corr_pit&quot;</span>) == 0) {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_PSEUDOSYNC clock correction&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a12fc957c47c7159e2eb98487a22ff21f">values</a>-&gt;at(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a636e4f32f8ac63724cc0f720e3ea6823">counter</a>++));</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a1ccb46f3c16c98d6b01a3033252a29fa">event3</a>, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="fragment"><div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                                                      {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;cm_clock_corr_pit&quot;</span>) == 0) {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_PSEUDOSYNC clock correction&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#a47d1fbcf833c7f8d6627277a4b8525b3" title="Corrects the clock by the number of ticks.">clockCorrection</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a12fc957c47c7159e2eb98487a22ff21f">values</a>-&gt;at(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a636e4f32f8ac63724cc0f720e3ea6823">counter</a>++));</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;cm_inc_pit&quot;</span>) == 0) {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_PSEUDOSYNC local_integration_cycle&quot;</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a> &lt;&lt; endl;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a1ccb46f3c16c98d6b01a3033252a29fa">event3</a>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a> = (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a> + 1)</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                % (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_integration_cycles&quot;</span>).longValue());</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;local_integration_cycle updated&quot;</span> &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                &lt;&lt; endl;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">if</span> (<span class="keywordtype">string</span>(message-&gt;getName()).compare(<span class="stringliteral">&quot;cm_inc_pit&quot;</span>) == 0) {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;SI_CM_PSEUDOSYNC local_integration_cycle&quot;</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a> &lt;&lt; endl;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ad25ef73f6639daf11e8be2d9c8b639c7">event4</a>, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a> = (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a> + 1)</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                % (<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#abb5b492128ccfcc9d539369acdbc0a08">sicm</a>-&gt;par(<span class="stringliteral">&quot;max_integration_cycles&quot;</span>).longValue());</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        ev &lt;&lt; <span class="stringliteral">&quot;local_integration_cycle updated&quot;</span> &lt;&lt; <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a797dab473665ad86ebd06c1a4fea9922">local_integration_cycle</a></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                &lt;&lt; endl;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#a55fa62fc0a7d2b9a752a73880415eea8">tteScheduler</a>-&gt;<a class="code" href="class_t_t_ethernet_model_1_1_t_t_e_scheduler.html#afc4a5062aeb6488f879e99df6cb35865" title="Register a new event in the scheduler.">registerEvent</a>(<a class="code" href="class_t_t_ethernet_model_1_1_s_i_c_m_state.html#ad25ef73f6639daf11e8be2d9c8b639c7">event4</a>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_s_i_c_m_states_8h_source.html">SICMStates.h</a></li>
-<li><a class="el" href="_s_i_c_m_states_8cc_source.html">SICMStates.cc</a></li>
+<li><a class="el" href="_s_i_c_m_states_8h.html">SICMStates.h</a></li>
+<li><a class="el" href="_s_i_c_m_states_8cc.html">SICMStates.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -323,7 +320,7 @@ unsigned int &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a c
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_s_i___c_m___p_s_e_u_d_o_s_y_n_c.html">SI_CM_PSEUDOSYNC</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:33 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:38 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

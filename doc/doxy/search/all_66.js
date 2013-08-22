@@ -10,5 +10,6 @@ var searchData=
   ['frameevent',['FrameEvent',['../class_t_t_ethernet_model_1_1_frame_event.html#a9eefedfcda8c049c188a727a85df6f04',1,'TTEthernetModel::FrameEvent::FrameEvent(const char *name=NULL, int kind=0)'],['../class_t_t_ethernet_model_1_1_frame_event.html#a80b0c2dcfc23982a8b0b928daf3b72da',1,'TTEthernetModel::FrameEvent::FrameEvent(const FrameEvent &amp;other)']]],
   ['frameid_5fvar',['frameID_var',['../class_t_t_ethernet_model_1_1_dispatch_delay.html#a5b16547c7c17fcfaa8f3dbbdc6923596',1,'TTEthernetModel::DispatchDelay']]],
   ['frames',['frames',['../class_t_t_ethernet_model_1_1_queue_buffer.html#a4ff8a59871277e2dd95c30e47fcae75c',1,'TTEthernetModel::QueueBuffer']]],
+  ['framesize',['frameSize',['../class_t_t_ethernet_model_1_1_a_v_b_traffic_source_app.html#ac9ddaa93f24d6d80dee509288747951d',1,'TTEthernetModel::AVBTrafficSourceApp']]],
   ['framesrequested',['framesRequested',['../class_t_t_ethernet_model_1_1_t_t_e_output.html#ad83090e8780efd64cac05c45a7906638',1,'TTEthernetModel::TTEOutput']]]
 ];

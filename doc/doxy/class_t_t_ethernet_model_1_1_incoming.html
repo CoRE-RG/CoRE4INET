@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('class_t_t_ethernet_model_1_1_incoming.
 <p>Base class for the critical traffic conformance check.  
  <a href="class_t_t_ethernet_model_1_1_incoming.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_incoming_8h_source.html">Incoming.h</a>&gt;</code></p>
+<p><code>#include &lt;Incoming.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TTEthernetModel::Incoming:</div>
 <div class="dyncontent">
@@ -162,8 +162,6 @@ Static Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Base class for the critical traffic conformance check. </p>
 <p>This base class simply forwards messages from in to out</p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html" title="Class for the critical traffic conformance check of rate-constrained traffic.">RCIncoming</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html" title="Class for the critical traffic conformance check of time-triggered traffic.">TTIncoming</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00030">30</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3d8d8f98264c1e8353d7c37af4b4aa94"></a>
 <div class="memitem">
@@ -179,8 +177,6 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-
-<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00024">24</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                  {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a93c9b0218b8b0560152cfa731b70d6a3" title="set to true if there was an error during runtime">hadError</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
@@ -219,8 +215,6 @@ Static Protected Attributes</h2></td></tr>
 </dl>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a957fe196b6e0e5fd38c6bf3af879e14b">TTEthernetModel::TTIncoming</a>, <a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">TTEthernetModel::RCIncoming</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#a17ab6bc16f37d08b32019134c7575bd2">TTEthernetModel::PCFIncoming</a>.</p>
-
-<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00033">33</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span>(msg-&gt;arrivedOn(<span class="stringliteral">&quot;in&quot;</span>)){</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        sendDelayed(msg,SimTime(getParentModule()-&gt;par(<span class="stringliteral">&quot;hardware_delay&quot;</span>).doubleValue()),<span class="stringliteral">&quot;out&quot;</span>);</div>
@@ -254,8 +248,6 @@ Static Protected Attributes</h2></td></tr>
 <p>Initialization of the module. </p>
 
 <p>Reimplemented in <a class="el" href="class_t_t_ethernet_model_1_1_p_c_f_incoming.html#abe59655d5103cc37715908dc1d99688d">TTEthernetModel::PCFIncoming</a>.</p>
-
-<p>Definition at line <a class="el" href="_incoming_8cc_source.html#l00028">28</a> of file <a class="el" href="_incoming_8cc_source.html">Incoming.cc</a>.</p>
 <div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_t_t_ethernet_model_1_1_incoming.html#a7943b1436f1d363536ac89bfbd12d3c5" title="Signal that is emitted when a frame is dropped.">ctDroppedSignal</a> = registerSignal(<span class="stringliteral">&quot;ctDropped&quot;</span>);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
@@ -284,9 +276,7 @@ Static Protected Attributes</h2></td></tr>
 <p>Signal that is emitted when a frame is dropped. </p>
 <p>Frames may be dropped when there was a violation of CT rules. </p>
 
-<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00042">42</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_r_c_incoming_8cc_source.html#l00030">TTEthernetModel::RCIncoming::handleMessage()</a>, <a class="el" href="_t_t_incoming_8cc_source.html#l00038">TTEthernetModel::TTIncoming::handleMessage()</a>, and <a class="el" href="_incoming_8cc_source.html#l00028">initialize()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_r_c_incoming.html#a723830f6e453a9c1bb05cd6b81ac77f9">TTEthernetModel::RCIncoming::handleMessage()</a>, <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a957fe196b6e0e5fd38c6bf3af879e14b">TTEthernetModel::TTIncoming::handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#addb7e0a67350ee855fd2ee12229f5a1a">initialize()</a>.</p>
 
 </div>
 </div>
@@ -310,15 +300,13 @@ Static Protected Attributes</h2></td></tr>
 
 <p>set to true if there was an error during runtime </p>
 
-<p>Definition at line <a class="el" href="_incoming_8h_source.html#l00036">36</a> of file <a class="el" href="_incoming_8h_source.html">Incoming.h</a>.</p>
-
-<p>Referenced by <a class="el" href="_t_t_incoming_8cc_source.html#l00038">TTEthernetModel::TTIncoming::handleMessage()</a>, and <a class="el" href="_incoming_8cc_source.html#l00024">Incoming()</a>.</p>
+<p>Referenced by <a class="el" href="class_t_t_ethernet_model_1_1_t_t_incoming.html#a957fe196b6e0e5fd38c6bf3af879e14b">TTEthernetModel::TTIncoming::handleMessage()</a>, and <a class="el" href="class_t_t_ethernet_model_1_1_incoming.html#a3d8d8f98264c1e8353d7c37af4b4aa94">Incoming()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_incoming_8h_source.html">Incoming.h</a></li>
-<li><a class="el" href="_incoming_8cc_source.html">Incoming.cc</a></li>
+<li><a class="el" href="_incoming_8h.html">Incoming.h</a></li>
+<li><a class="el" href="_incoming_8cc.html">Incoming.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -326,7 +314,7 @@ Static Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_t_t_ethernet_model.html">TTEthernetModel</a></li><li class="navelem"><a class="el" href="class_t_t_ethernet_model_1_1_incoming.html">Incoming</a></li>
-    <li class="footer">Generated on Thu May 16 2013 11:25:32 for TTEthernet Model for INET Framework by
+    <li class="footer">Generated on Tue Aug 13 2013 17:59:37 for TTEthernet Model for INET Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
