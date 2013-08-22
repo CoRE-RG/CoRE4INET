@@ -6,3 +6,4 @@
 *.anf
 *.tkenvrc
 *.tkenvlog
+/doc
