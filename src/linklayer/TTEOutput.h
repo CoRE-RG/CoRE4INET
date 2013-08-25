@@ -6,7 +6,6 @@
 #include <INETDefs.h>
 #include <TTE4INETDefs.h>
 #include <IPassiveQueue.h>
-#include <QueueWithQoS.h>
 #include <EtherFrame_m.h>
 #include <TTBuffer.h>
 #include <PCFrame_m.h>
@@ -188,6 +187,11 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Clears all queued packets and stored requests.
          */
         virtual void clear();
+        /**
+         * Returns a packet directly from the queue, bypassing the primary,
+         * send-on-request mechanism. Returns NULL if the queue is empty.
+         */
+        virtual cMessage *pop();
 
         void notifyListeners();
 };

@@ -36,8 +36,8 @@ module TTEEtherSwitch
             parameters:
                 @display("p=100,50");
             gates:
-                lowerLayerIn[sizeof(ethg)];
-                lowerLayerOut[sizeof(ethg)];
+                ifIn[sizeof(ethg)];
+                ifOut[sizeof(ethg)];
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEPHYPort {
@@ -64,8 +64,8 @@ module TTEEtherSwitch
     connections:
         for i=0..sizeof(ethg)-1 {
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- beswitch.lowerLayerOut[i];
-            phy[i].upperLayerOut --> beswitch.lowerLayerIn[i];
+            phy[i].upperLayerIn <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> beswitch.ifIn[i];
         }
 }
 

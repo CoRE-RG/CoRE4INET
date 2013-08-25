@@ -266,7 +266,7 @@ void TTEOutput::handleParameterChange(const char* parname){
     }
 }
 
-void TTEOutput::requestPacket()
+/*void TTEOutput::requestPacket()
 {
     Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
@@ -317,6 +317,64 @@ void TTEOutput::requestPacket()
         emit(beQueueLengthSignal, beQueue.length());
         return;
     }
+}*/
+
+void TTEOutput::requestPacket()
+{
+    Enter_Method("requestPacket()");
+    //Feed the MAC layer with the next frame
+    framesRequested++;
+
+    //TTFrames
+    if (cMessage *msg = pop())
+    {
+        framesRequested--;
+        send(msg, gateBaseId("out"));
+    }
+}
+
+cMessage* TTEOutput::pop()
+{
+    Enter_Method("pop()");
+    //TTFrames
+    if (!ttQueue.isEmpty())
+    {
+        cMessage *msg = (cMessage*) ttQueue.pop();
+        emit(ttQueueLengthSignal, ttQueue.length());
+
+        //TODO Update buffers:
+        if(ttBuffers.size()>0){
+            ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
+        }
+
+        return msg;
+    }
+    //RCFrames
+    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    {
+        if (!rcQueue[i].isEmpty() && isTransmissionAllowed((EtherFrame*) rcQueue[i].front()))
+        {
+            EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
+            //Reset Bag
+            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
+            if (rcBuffer)
+                rcBuffer->resetBag();
+
+            PCFrame *pcf = dynamic_cast<PCFrame*> (message);
+            if(pcf){
+                setTransparentClock(pcf);
+            }
+            return message;
+        }
+    }
+    //BEFrames
+    if (!beQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) beQueue.front()))
+    {
+        cMessage* message = (cMessage*) beQueue.pop();
+        emit(beQueueLengthSignal, beQueue.length());
+        return message;
+    }
+    return NULL;
 }
 
 bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
