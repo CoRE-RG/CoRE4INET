@@ -99,7 +99,7 @@ void TTEOutput::handleMessage(cMessage *msg)
     {
         TTBuffer *thisttBuffer;
         TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (msg->getSenderModule());
-        ASSERT(ttBuffer);
+        ASSERT2(ttBuffer, "A TTFrame was received that was not sent by a TTBuffer");
 
         if(ttBuffers.size()>0){
             thisttBuffer = ttBuffers[ttBuffersPos];
@@ -109,7 +109,7 @@ void TTEOutput::handleMessage(cMessage *msg)
         }
 
         if(thisttBuffer!=ttBuffer){
-            ASSERT(isTTBufferRegistered(ttBuffer)==false);
+            ASSERT2(isTTBufferRegistered(ttBuffer)==false, "A TTFrame was received that was unexpected");
         }
 
 
@@ -133,8 +133,7 @@ void TTEOutput::handleMessage(cMessage *msg)
             }
             else
             {
-                ASSERT(isTTBufferRegistered(ttBuffer)==false);
-                EV << "shuffling for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
+                ASSERT2(isTTBufferRegistered(ttBuffer)==false, "TTFrame was delayed without permission");
 
                 ttQueue.insert(msg);
                 notifyListeners();
