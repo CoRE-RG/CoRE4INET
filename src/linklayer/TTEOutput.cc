@@ -279,6 +279,7 @@ void TTEOutput::requestPacket()
         cMessage *msg = (cMessage*) ttQueue.pop();
         emit(ttQueueLengthSignal, ttQueue.length());
 
+
         //TODO Update buffers:
         if(ttBuffers.size()>0){
             ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
