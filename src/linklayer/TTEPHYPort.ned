@@ -34,7 +34,7 @@ module TTEPHYPort like IPort
 
     submodules:
         //Module for the organisation of outbound traffic
-        tteOutput: TTEOutput {
+        tteOutput: TT_RC_BE_TrafficConditioner {
             @display("p=48,45");
         }
         //Module for the organisation of inbound traffic
