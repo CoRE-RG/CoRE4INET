@@ -1,12 +1,11 @@
-package ttethernet.linklayer;
+package ttethernet.linklayer.shaper;
 
 import inet.linklayer.IOutputQueue;
-import inet.linklayer.ITrafficConditioner;
 
-simple PCF_RC_BE_TrafficConditioner extends BE_TrafficConditioner
+simple PCF_RC_BE_Shaper extends BE_Shaper
 {
     parameters:
-        @class(RCTrafficConditioner);
+        @class(RCShaper);
         @display("i=block/classifier");
 		//Statistic of the queue length of protocol control frames
         @statistic[pcfQueueLength](title="PCF-Queue Length"; record=vector; interpolationmode=sample-hold);

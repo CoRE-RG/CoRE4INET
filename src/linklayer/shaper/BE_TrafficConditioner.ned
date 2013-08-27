@@ -1,12 +1,11 @@
-package ttethernet.linklayer;
+package ttethernet.linklayer.shaper;
 
 import inet.linklayer.IOutputQueue;
-import inet.linklayer.ITrafficConditioner;
 
-simple BE_TrafficConditioner like IOutputQueue, ITrafficConditioner
+simple BE_Shaper like IOutputQueue
 {
     parameters:
-        @class(BETrafficConditioner);
+        @class(BEShaper);
         @display("i=block/classifier");
         //Statistic of the queue length of best-effort frames
         @statistic[beQueueLength](title="BE-Queue Length"; record=vector; interpolationmode=sample-hold);

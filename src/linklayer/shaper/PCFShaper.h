@@ -1,42 +1,44 @@
-#ifndef __TTE4INET_BETRAFFICCONDITIONER_H
-#define __TTE4INET_BETRAFFICCONDITIONER_H
+#ifndef __TTE4INET_PCFSHAPER_H
+#define __TTE4INET_PCFSHAPER_H
 
 #include <ModuleAccess.h>
+#include <RCBuffer.h>
+#include <PCFrame_m.h>
+#include <TTEScheduler.h>
+#include <HelperFunctions.h>
 
 namespace TTEthernetModel {
 
 /**
- * @brief A TrafficConditioner for BEMessages.
+ * @brief A Shaper for PCFMessages.
  *
- * The BETrafficConditioner only allows lower priorities to transmit when there are no
- * BE messages queued. This class is usually used with BaseTrafficConditioner as template
- * class, as there are usually no lower priority messages than BE messages.
- *
- * @see BaseTrafficConditioner
+ * The PCFShaper only allows lower priorities to transmit when there are no
+ * PCF messages queued.
  *
  */
 template <class TC>
-class BETrafficConditioner : public TC
+class PCFShaper : public TC
 {
     public:
         /**
          * @brief Constructor
          */
-        BETrafficConditioner();
+        PCFShaper();
         /**
          * @brief Destructor
          */
-        ~BETrafficConditioner();
-    protected:
-            /**
-             * @brief Signal that is emitted when the queue length of best-effort messages changes.
-             */
-            static simsignal_t beQueueLengthSignal;
+        ~PCFShaper();
+
     private:
-            /**
-             * @brief Queue for best-effort messages
-             */
-            cQueue beQueue;
+        /**
+         * @brief Queue for protocol control messages
+         */
+        cQueue pcfQueue;
+    protected:
+        /**
+         * @brief Signal that is emitted when the queue length of time-triggered messages changes.
+         */
+        static simsignal_t pcfQueueLengthSignal;
     protected:
         /**
          * @brief Initialization of the module
@@ -44,24 +46,23 @@ class BETrafficConditioner : public TC
         virtual void initialize();
 
 
-       /**
-        * @brief Forwards the messages from the different buffers and LLC
-        * according to the specification for BEMessages.
-        *
-        * Best-effort messages are send immediately, lower priority frames are queued
-        * as long as there are best-effort messages waiting.
-        * If the mac layer is idle, messages are picked from the queues according
-        * to the priorities, using the template class.
-        *
-        * @param msg the incoming message
-        */
+        /**
+         * @brief Forwards the messages from the different buffers and LLC
+         * according to the specification for PCFMessages.
+         *
+         * Protocol control frames are send immediately, lower priority frames are queued
+         * as long as there are pcf messages waiting.
+         * If the mac layer is idle, messages are picked from the queues according
+         * to the priorities, using the template class.
+         *
+         * @param msg the incoming message
+         */
         virtual void handleMessage(cMessage *msg);
-
 
         /**
          * @brief Queues messages in the correct queue
          *
-         * Best-effort messages are queued in this module, other messages are forwarded to the
+         * Protocol control frames are queued in this module, other messages are forwarded to the
          * template classes enqueueMessage method
          *
          * @param msg the incoming message
@@ -111,36 +112,36 @@ class BETrafficConditioner : public TC
         virtual cMessage *front();
 };
 
+template <class TC>
+simsignal_t PCFShaper<TC>::pcfQueueLengthSignal = SIMSIGNAL_NULL;
 
 template <class TC>
-simsignal_t BETrafficConditioner<TC>::beQueueLengthSignal = SIMSIGNAL_NULL;
-
-template <class TC>
-BETrafficConditioner<TC>::BETrafficConditioner(){
-    beQueue.setName("BE Messages");
+PCFShaper<TC>::PCFShaper(){
+    pcfQueue.setName("PCF Messages");
 }
 
 template <class TC>
-BETrafficConditioner<TC>::~BETrafficConditioner(){
-    beQueue.clear();
+PCFShaper<TC>::~PCFShaper(){
 }
 
 template <class TC>
-void BETrafficConditioner<TC>::initialize()
+void PCFShaper<TC>::initialize()
 {
     TC::initialize();
-    beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
+    pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
 }
 
 template <class TC>
-void BETrafficConditioner<TC>::handleMessage(cMessage *msg)
+void PCFShaper<TC>::handleMessage(cMessage *msg)
 {
-    //Frames arrived on in are best-effort frames
-    if (msg->arrivedOn("in"))
+    if (msg->arrivedOn("PCFin"))
     {
-        // If there are framesRequested the MAC layer is currently idle
-        if(TC::getNumPendingRequests())
+        if (TC::getNumPendingRequests())
         {
+            PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
+            if(pcf){
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+            }
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
         }
@@ -149,13 +150,20 @@ void BETrafficConditioner<TC>::handleMessage(cMessage *msg)
             enqueueMessage(msg);
         }
     }
+    else{
+        if(TC::getNumPendingRequests()){
+            TC::handleMessage(msg);
+        }
+        else{
+            TC::enqueueMessage(msg);
+        }
+    }
 }
 
 template <class TC>
-void BETrafficConditioner<TC>::enqueueMessage(cMessage *msg){
-    if(msg->arrivedOn("in")){
-        beQueue.insert(msg);
-        cComponent::emit(beQueueLengthSignal, beQueue.length());
+void PCFShaper<TC>::enqueueMessage(cMessage *msg){
+    if(msg->arrivedOn("PCFin")){
+        pcfQueue.insert(msg);
         TC::notifyListeners();
     }
     else{
@@ -164,7 +172,7 @@ void BETrafficConditioner<TC>::enqueueMessage(cMessage *msg){
 }
 
 template <class TC>
-void BETrafficConditioner<TC>::requestPacket()
+void PCFShaper<TC>::requestPacket()
 {
     Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
@@ -178,45 +186,49 @@ void BETrafficConditioner<TC>::requestPacket()
 }
 
 template <class TC>
-cMessage* BETrafficConditioner<TC>::pop()
+cMessage* PCFShaper<TC>::pop()
 {
     Enter_Method("pop()");
-    //BEFrames
-    if (!beQueue.isEmpty())
+    //RCFrames
+    if (!pcfQueue.isEmpty())
     {
-        cMessage* message = (cMessage*) beQueue.pop();
-        cComponent::emit(beQueueLengthSignal, beQueue.length());
-        return message;
+        cMessage *msg = (cMessage*) pcfQueue.pop();
+        cComponent::emit(pcfQueueLengthSignal, pcfQueue.length());
+
+        PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
+        if(pcf){
+            setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+        }
+        return msg;
     }
     return TC::pop();
 }
 
 template <class TC>
-cMessage* BETrafficConditioner<TC>::front()
+cMessage* PCFShaper<TC>::front()
 {
     Enter_Method("front()");
-    //BEFrames
-    if (!beQueue.isEmpty())
+    //RCFrames
+    if (!pcfQueue.isEmpty())
     {
-        cMessage* message = (cMessage*) beQueue.front();
-        return message;
+        cMessage *msg = (cMessage*) pcfQueue.front();
+        return msg;
     }
     return TC::front();
 }
 
 template <class TC>
-bool BETrafficConditioner<TC>::isEmpty()
+bool PCFShaper<TC>::isEmpty()
 {
-    return beQueue.isEmpty() && TC::isEmpty();
+       return pcfQueue.isEmpty() && TC::isEmpty();
 }
 
 template <class TC>
-void BETrafficConditioner<TC>::clear()
+void PCFShaper<TC>::clear()
 {
     TC::clear();
-    beQueue.clear();
+    pcfQueue.clear();
 }
-
 
 }
 

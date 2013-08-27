@@ -1,5 +1,5 @@
-#ifndef __TTE4INET_RCTRAFFICCONDITIONER_H
-#define __TTE4INET_RCTRAFFICCONDITIONER_H
+#ifndef __TTE4INET_RCSHAPER_H
+#define __TTE4INET_RCSHAPER_H
 
 #include <ModuleAccess.h>
 #include <RCBuffer.h>
@@ -10,24 +10,24 @@
 namespace TTEthernetModel {
 
 /**
- * @brief A TrafficConditioner for RCMessages.
+ * @brief A Shaper for RCMessages.
  *
- * The RCTrafficConditioner only allows lower priorities to transmit when there are no
+ * The RCShaper only allows lower priorities to transmit when there are no
  * RC messages queued.
  *
  */
 template <class TC>
-class RCTrafficConditioner : public TC
+class RCShaper : public TC
 {
     public:
         /**
          * @brief Constructor
          */
-        RCTrafficConditioner();
+        RCShaper();
         /**
          * @brief Destructor
          */
-        ~RCTrafficConditioner();
+        ~RCShaper();
 
     private:
         /**
@@ -108,7 +108,7 @@ class RCTrafficConditioner : public TC
 };
 
 template <class TC>
-RCTrafficConditioner<TC>::RCTrafficConditioner(){
+RCShaper<TC>::RCShaper(){
     for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
     {
         char strBuf[64];
@@ -118,17 +118,17 @@ RCTrafficConditioner<TC>::RCTrafficConditioner(){
 }
 
 template <class TC>
-RCTrafficConditioner<TC>::~RCTrafficConditioner(){
+RCShaper<TC>::~RCShaper(){
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::initialize()
+void RCShaper<TC>::initialize()
 {
     TC::initialize();
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::handleMessage(cMessage *msg)
+void RCShaper<TC>::handleMessage(cMessage *msg)
 {
     //Frames arrived on in are rate-constreind frames
     if (msg->arrivedOn("RCin"))
@@ -163,7 +163,7 @@ void RCTrafficConditioner<TC>::handleMessage(cMessage *msg)
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::enqueueMessage(cMessage *msg){
+void RCShaper<TC>::enqueueMessage(cMessage *msg){
     if(msg->arrivedOn("RCin")){
        int priority = msg->getSenderModule()->par("priority").longValue();
        if (priority > 0 && priority < NUM_RC_PRIORITIES)
@@ -184,7 +184,7 @@ void RCTrafficConditioner<TC>::enqueueMessage(cMessage *msg){
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::requestPacket()
+void RCShaper<TC>::requestPacket()
 {
     Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
@@ -198,7 +198,7 @@ void RCTrafficConditioner<TC>::requestPacket()
 }
 
 template <class TC>
-cMessage* RCTrafficConditioner<TC>::pop()
+cMessage* RCShaper<TC>::pop()
 {
     Enter_Method("pop()");
     //RCFrames
@@ -223,7 +223,7 @@ cMessage* RCTrafficConditioner<TC>::pop()
 }
 
 template <class TC>
-cMessage* RCTrafficConditioner<TC>::front()
+cMessage* RCShaper<TC>::front()
 {
     Enter_Method("front()");
     //RCFrames
@@ -239,7 +239,7 @@ cMessage* RCTrafficConditioner<TC>::front()
 }
 
 template <class TC>
-bool RCTrafficConditioner<TC>::isEmpty()
+bool RCShaper<TC>::isEmpty()
 {
     bool empty = true;
     for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
@@ -251,7 +251,7 @@ bool RCTrafficConditioner<TC>::isEmpty()
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::clear()
+void RCShaper<TC>::clear()
 {
     TC::clear();
     for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)

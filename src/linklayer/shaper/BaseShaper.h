@@ -1,5 +1,5 @@
-#ifndef __TTE4INET_BASETRAFFICCONDITIONER_H
-#define __TTE4INET_BASETRAFFICCONDITIONER_H
+#ifndef __TTE4INET_BASESHAPER_H
+#define __TTE4INET_BASESHAPER_H
 
 #include <omnetpp.h>
 #include <csimplemodule.h>
@@ -11,20 +11,20 @@
 namespace TTEthernetModel {
 
 /**
- * @brief An abstract base TrafficConditioner.
+ * @brief An abstract base Shaper.
  *
  * Should be used as template class in other Traffic conditioners. Provides
- * base infrastructure for the TrafficConditioners
+ * base infrastructure for the Shapers
  *
  *
  */
-class BaseTrafficConditioner : public cSimpleModule, public IPassiveQueue
+class BaseShaper : public cSimpleModule, public IPassiveQueue
 {
     public:
         /**
          * @brief Constructor
          */
-        BaseTrafficConditioner(){framesRequested = 0;}
+        BaseShaper(){framesRequested = 0;}
 
         /**
          * Implementation of IPassiveQueue::addListener().

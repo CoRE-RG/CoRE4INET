@@ -2,13 +2,14 @@ package ttethernet.linklayer;
 
 
 import inet.linklayer.IEtherMAC;
-import inet.linklayer.ITrafficConditioner;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-// The TTEPHYPort is a compund module that contains the input TrafficConditioner, output TrafficConditioner and MAC (EtherMACFullDuplex)
+import ttethernet.linklayer.shaper.TT_PCF_RC_BE_Shaper;
+
+// The TTEPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a real-time Ethernet device (Switch or Host)
 //
-// @see IPort, EtherMACFullDuplex, TTEInput, TT_PCF_RC_BE_TrafficConditioner, PCF_RC_BE_TrafficConditioner, BE_TrafficConditioner
+// @see IPort, EtherMACFullDuplex, TTEInput, TT_PCF_RC_BE_Shaper, PCF_RC_BE_Shaper, BE_Shaper
 //
 // @author Till Steinbach
 module TTEPHYPort like IPort
@@ -35,11 +36,11 @@ module TTEPHYPort like IPort
 
     submodules:
         //Module for the organisation of outbound traffic
-        egressTC: TT_PCF_RC_BE_TrafficConditioner{
+        shaper: TT_PCF_RC_BE_Shaper{
             @display("p=48,45");
         }
         //Module for the organisation of inbound traffic
-        ingressTC: TTEInput {
+        inControl: TTEInput {
 			parameters:
             	@display("p=142,45");
             	promiscuous = promiscuous;
@@ -48,18 +49,18 @@ module TTEPHYPort like IPort
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true; //MAC must be set promiscuous to allow for CT receiption with all CT-Markers
-                queueModule = "egressTC";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
+                queueModule = "shaper";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
                 @display("p=87,139");
         }
     connections:
-        upperLayerIn --> egressTC.in;
-        upperLayerOut <-- ingressTC.out;
-        egressTC.out --> mac.upperLayerIn;
-        ingressTC.in <-- mac.upperLayerOut;
+        upperLayerIn --> shaper.in;
+        upperLayerOut <-- inControl.out;
+        shaper.out --> mac.upperLayerIn;
+        inControl.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
         
         
-        TTin --> egressTC.TTin;
-        RCin --> egressTC.RCin;
-        PCFin --> egressTC.PCFin;
+        TTin --> shaper.TTin;
+        RCin --> shaper.RCin;
+        PCFin --> shaper.PCFin;
 }

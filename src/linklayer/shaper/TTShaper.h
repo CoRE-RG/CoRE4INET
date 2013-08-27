@@ -1,5 +1,5 @@
-#ifndef __TTE4INET_TTTRAFFICCONDITIONER_H
-#define __TTE4INET_TTTRAFFICCONDITIONER_H
+#ifndef __TTE4INET_TTSHAPER_H
+#define __TTE4INET_TTSHAPER_H
 
 #include <ModuleAccess.h>
 #include <TTEScheduler.h>
@@ -10,24 +10,24 @@
 namespace TTEthernetModel {
 
 /**
- * @brief A TrafficConditioner for TTMessages.
+ * @brief A Shaper for TTMessages.
  *
- * The TTTrafficConditioner only allows lower priorities to transmit when their frames wont
+ * The TTShaper only allows lower priorities to transmit when their frames wont
  * collide with TTFrames
  *
  */
 template <class TC>
-class TTTrafficConditioner : public TC
+class TTShaper : public TC
 {
     public:
         /**
          * @brief Constructor
          */
-        TTTrafficConditioner();
+        TTShaper();
         /**
          * @brief Destructor
          */
-        ~TTTrafficConditioner();
+        ~TTShaper();
 
         /**
          * @brief Indicates a parameter has changed.
@@ -163,28 +163,28 @@ class TTTrafficConditioner : public TC
 };
 
 template <class TC>
-simsignal_t TTTrafficConditioner<TC>::ttQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t TTShaper<TC>::ttQueueLengthSignal = SIMSIGNAL_NULL;
 
 template <class TC>
-TTTrafficConditioner<TC>::TTTrafficConditioner(){
+TTShaper<TC>::TTShaper(){
     ttBuffersPos = 0;
     ttQueue.setName("TT Messages");
 }
 
 template <class TC>
-TTTrafficConditioner<TC>::~TTTrafficConditioner(){
+TTShaper<TC>::~TTShaper(){
     ttQueue.clear();
 }
 
 template <class TC>
-void TTTrafficConditioner<TC>::initialize()
+void TTShaper<TC>::initialize()
 {
     TC::initialize();
     ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
 }
 
 template <class TC>
-void TTTrafficConditioner<TC>::handleMessage(cMessage *msg)
+void TTShaper<TC>::handleMessage(cMessage *msg)
 {
     //Frames arrived on in are rate-constrained frames
     if (msg->arrivedOn("TTin"))
@@ -243,7 +243,7 @@ void TTTrafficConditioner<TC>::handleMessage(cMessage *msg)
 }
 
 template <class TC>
-void TTTrafficConditioner<TC>::enqueueMessage(cMessage *msg){
+void TTShaper<TC>::enqueueMessage(cMessage *msg){
     if(msg->arrivedOn("TTin")){
         ttQueue.insert(msg);
         cComponent::emit(ttQueueLengthSignal, ttQueue.length());
@@ -255,7 +255,7 @@ void TTTrafficConditioner<TC>::enqueueMessage(cMessage *msg){
 }
 
 template <class TC>
-void TTTrafficConditioner<TC>::requestPacket()
+void TTShaper<TC>::requestPacket()
 {
     Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
@@ -269,7 +269,7 @@ void TTTrafficConditioner<TC>::requestPacket()
 }
 
 template <class TC>
-cMessage* TTTrafficConditioner<TC>::pop()
+cMessage* TTShaper<TC>::pop()
 {
     Enter_Method("pop()");
     //TTFrames
@@ -295,7 +295,7 @@ cMessage* TTTrafficConditioner<TC>::pop()
 }
 
 template <class TC>
-cMessage* TTTrafficConditioner<TC>::front()
+cMessage* TTShaper<TC>::front()
 {
     Enter_Method("front()");
     //TTFrames
@@ -308,20 +308,20 @@ cMessage* TTTrafficConditioner<TC>::front()
 }
 
 template <class TC>
-bool TTTrafficConditioner<TC>::isEmpty()
+bool TTShaper<TC>::isEmpty()
 {
         return ttQueue.isEmpty() && TC::isEmpty();
 }
 
 template <class TC>
-void TTTrafficConditioner<TC>::clear()
+void TTShaper<TC>::clear()
 {
         TC::clear();
         ttQueue.clear();
 }
 
 template <class TC>
-void TTTrafficConditioner<TC>::registerTTBuffer(TTBuffer *ttBuffer)
+void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
 {
     Enter_Method("registerTTBuffer(%s)", ttBuffer->getName());
     uint32_t sendWindowStart = ttBuffer->par("sendWindowStart");
@@ -355,7 +355,7 @@ void TTTrafficConditioner<TC>::registerTTBuffer(TTBuffer *ttBuffer)
 }
 
 template <class TC>
-bool TTTrafficConditioner<TC>::isTTBufferRegistered(TTBuffer *ttBuffer){
+bool TTShaper<TC>::isTTBufferRegistered(TTBuffer *ttBuffer){
     for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();++buffer)
     {
         if(*buffer==ttBuffer){
@@ -366,7 +366,7 @@ bool TTTrafficConditioner<TC>::isTTBufferRegistered(TTBuffer *ttBuffer){
 }
 
 template <class TC>
-void TTTrafficConditioner<TC>::handleParameterChange(const char* parname){
+void TTShaper<TC>::handleParameterChange(const char* parname){
     ttBuffers.clear();
     std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
@@ -398,7 +398,7 @@ void TTTrafficConditioner<TC>::handleParameterChange(const char* parname){
 }
 
 template <class TC>
-bool TTTrafficConditioner<TC>::isTransmissionAllowed(EtherFrame *message)
+bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
 {
     if (!message || !TC::outChannel)
     {
