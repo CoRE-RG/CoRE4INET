@@ -35,6 +35,9 @@ namespace TTEthernetModel {
  *Critical traffic arriving on in-gate is forwarded to the incoming modules
  * or dropped if there is no module configured. Best-effort frames are
  * forwarded through the out-gate.
+ *
+ * @deprecated This module is deprecated and was replaced by the
+ * CT_BE_InControl module.
  */
 class TTEInput : public cSimpleModule
 {
