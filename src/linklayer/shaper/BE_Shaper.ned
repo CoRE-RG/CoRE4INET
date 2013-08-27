@@ -1,11 +1,12 @@
 package ttethernet.linklayer.shaper;
 
-import inet.linklayer.IOutputQueue;
-
-simple BE_Shaper like IOutputQueue
+//A Shaper for best-effort messages.
+//
+//The BE_Shaper only handles best-effort traffic
+simple BE_Shaper like IShaper
 {
     parameters:
-        @class(BEShaper);
+        @class(BE_Shaper);
         @display("i=block/classifier");
         //Statistic of the queue length of best-effort frames
         @statistic[beQueueLength](title="BE-Queue Length"; record=vector; interpolationmode=sample-hold);

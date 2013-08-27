@@ -5,6 +5,7 @@ import inet.linklayer.IEtherMAC;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 import ttethernet.linklayer.shaper.TT_PCF_RC_BE_Shaper;
+import ttethernet.linklayer.inControl.CT_BE_InControl;
 
 // The TTEPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a real-time Ethernet device (Switch or Host)
@@ -40,7 +41,7 @@ module TTEPHYPort like IPort
             @display("p=48,45");
         }
         //Module for the organisation of inbound traffic
-        inControl: TTEInput {
+        inControl: CT_BE_InControl {
 			parameters:
             	@display("p=142,45");
             	promiscuous = promiscuous;
