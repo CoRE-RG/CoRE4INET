@@ -6,7 +6,13 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Represents the part of a port that sends messages (TX)
+ * @brief A TrafficConditioner for BEMessages.
+ *
+ * The BETrafficConditioner only allows lower priorities to transmit when there are no
+ * BE messages queued. This class is usually used with BaseTrafficConditioner as template
+ * class, as there are usually no lower priority messages than BE messages.
+ *
+ * @see BaseTrafficConditioner
  *
  */
 template <class TC>
@@ -38,30 +44,39 @@ class BETrafficConditioner : public TC
         virtual void initialize();
 
 
+       /**
+        * @brief Forwards the messages from the different buffers and LLC
+        * according to the specification for BEMessages.
+        *
+        * Best-effort messages are send immediately, lower priority frames are queued
+        * as long as there are best-effort messages waiting.
+        * If the mac layer is idle, messages are picked from the queues according
+        * to the priorities, using the template class.
+        *
+        * @param msg the incoming message
+        */
+        virtual void handleMessage(cMessage *msg);
+
+
         /**
-         * @brief Forwards the messages from the different buffers and LLC
-         * according to the TTEthernet specification.
+         * @brief Queues messages in the correct queue
          *
-         * Time-triggered messages are send immediately, rate-constrained and best-effort
-         * messages are delayed if they do not fit in the gap until the next time-triggered
-         * message. If the lower layer is idle messages are picked from the queues according
-         * to the priorities.
-         * Time-triggered buffers can free the bandwidth reservation mechanism by sending
-         * a TTBufferEmpty message.
+         * Best-effort messages are queued in this module, other messages are forwarded to the
+         * template classes enqueueMessage method
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
-
         virtual void enqueueMessage(cMessage *msg);
 
         /**
-         * @brief this method is invoked when the underlying mac is idle.
-         *
-         * When this method is invoked the module sends a new message when there is
-         * one. Else it saves the state and sends the message immediately when it is
-         * received.
-         */
+        * @brief this method is invoked when the underlying mac is idle.
+        *
+        * When this method is invoked the module sends a new message when there is
+        * one. Else it saves the state and sends the message immediately when it is
+        * received.
+        *
+        * @param msg the message to be queued
+        */
         virtual void requestPacket();
 
         /**
@@ -75,12 +90,24 @@ class BETrafficConditioner : public TC
          * @brief Clears all queued packets and stored requests.
          */
         virtual void clear();
+
         /**
-         * Returns a packet directly from the queue, bypassing the primary,
+         * @brief Returns a frame directly from the queues, bypassing the primary,
          * send-on-request mechanism. Returns NULL if the queue is empty.
+         *
+         * @return the message with the highest priority from any queue. NULL if the
+         * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop();
 
+        /**
+        * @brief Returns a pointer to a frame directly from the queues.
+        *
+        * front must return a pointer to the same message pop() would return.
+        *
+        * @return pointer to the message with the highest priority from any queue. NULL if the
+        * queues are empty
+        */
         virtual cMessage *front();
 };
 

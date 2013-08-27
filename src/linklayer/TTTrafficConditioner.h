@@ -10,7 +10,10 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Represents the part of a port that sends messages (TX)
+ * @brief A TrafficConditioner for TTMessages.
+ *
+ * The TTTrafficConditioner only allows lower priorities to transmit when their frames wont
+ * collide with TTFrames
  *
  */
 template <class TC>
@@ -67,12 +70,12 @@ class TTTrafficConditioner : public TC
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
-         * according to the TTEthernet specification.
+         * according to the specification for TTMessages.
          *
-         * Time-triggered messages are send immediately, rate-constrained and best-effort
-         * messages are delayed if they do not fit in the gap until the next time-triggered
-         * message. If the lower layer is idle messages are picked from the queues according
-         * to the priorities.
+         * Time-triggered messages are send immediately, lower priority frames are delayed
+         * if they do not fit in the gap until the next time-triggered message.
+         * If the mac layer is idle, messages are picked from the queues according
+         * to the priorities, using the template class.
          * Time-triggered buffers can free the bandwidth reservation mechanism by sending
          * a TTBufferEmpty message.
          *
@@ -80,6 +83,14 @@ class TTTrafficConditioner : public TC
          */
         virtual void handleMessage(cMessage *msg);
 
+        /**
+         * @brief Queues messages in the correct queue
+         *
+         * Time-triggered messages are queued in this module, other messages are forwarded to the
+         * template classes enqueueMessage method
+         *
+         * @param msg the incoming message
+         */
         virtual void enqueueMessage(cMessage *msg);
 
         /**
@@ -88,6 +99,8 @@ class TTTrafficConditioner : public TC
          * When this method is invoked the module sends a new message when there is
          * one. Else it saves the state and sends the message immediately when it is
          * received.
+         *
+         * @param msg the message to be queued
          */
         virtual void requestPacket();
 
@@ -102,12 +115,24 @@ class TTTrafficConditioner : public TC
          * @brief Clears all queued packets and stored requests.
          */
         virtual void clear();
+
         /**
-         * Returns a packet directly from the queue, bypassing the primary,
+         * @brief Returns a frame directly from the queues, bypassing the primary,
          * send-on-request mechanism. Returns NULL if the queue is empty.
+         *
+         * @return the message with the highest priority from any queue. NULL if the
+         * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop();
 
+        /**
+         * @brief Returns a pointer to a frame directly from the queues.
+         *
+         * front must return a pointer to the same message pop() would return.
+         *
+         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * queues are empty
+         */
         virtual cMessage *front();
 
     private:
@@ -161,7 +186,7 @@ void TTTrafficConditioner<TC>::initialize()
 template <class TC>
 void TTTrafficConditioner<TC>::handleMessage(cMessage *msg)
 {
-    //Frames arrived on in are rate-constreind frames
+    //Frames arrived on in are rate-constrained frames
     if (msg->arrivedOn("TTin"))
     {
         TTBuffer *thisttBuffer;

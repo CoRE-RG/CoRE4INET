@@ -39,3 +39,8 @@ void BaseTrafficConditioner::handleMessage(cMessage *msg)
 {
     delete msg;
 }
+
+void BaseTrafficConditioner::enqueueMessage(cMessage *msg)
+{
+    delete msg;
+}

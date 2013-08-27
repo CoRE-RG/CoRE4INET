@@ -11,7 +11,11 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Represents the part of a port that sends messages (TX). This is the abstract base class
+ * @brief An abstract base TrafficConditioner.
+ *
+ * Should be used as template class in other Traffic conditioners. Provides
+ * base infrastructure for the TrafficConditioners
+ *
  *
  */
 class BaseTrafficConditioner : public cSimpleModule, public IPassiveQueue
@@ -63,21 +67,24 @@ class BaseTrafficConditioner : public cSimpleModule, public IPassiveQueue
 
 
         /**
-         * @brief Forwards the messages from the different buffers and LLC
-         * according to the TTEthernet specification.
+         * @brief Deletes the incoming message
          *
-         * Time-triggered messages are send immediately, rate-constrained and best-effort
-         * messages are delayed if they do not fit in the gap until the next time-triggered
-         * message. If the lower layer is idle messages are picked from the queues according
-         * to the priorities.
-         * Time-triggered buffers can free the bandwidth reservation mechanism by sending
-         * a TTBufferEmpty message.
+         * Should be overwritten by template classes. and called when there are no other
+         * traffic conditioners responsible
          *
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
 
-        virtual void enqueueMessage(cMessage *msg){}
+        /**
+         * @brief Deletes the incoming message
+         *
+         * Should be overwritten by template classes. and called when there are no other
+         * traffic conditioners responsible
+         *
+         * @param msg the incoming message
+         */
+        virtual void enqueueMessage(cMessage *msg);
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -104,14 +111,29 @@ class BaseTrafficConditioner : public cSimpleModule, public IPassiveQueue
          * @brief Clears all queued packets and stored requests.
          */
         virtual void clear(){}
+
         /**
-         * Returns a packet directly from the queue, bypassing the primary,
+         * @brief Returns a frame directly from the queues, bypassing the primary,
          * send-on-request mechanism. Returns NULL if the queue is empty.
+         *
+         * @return the message with the highest priority from any queue. NULL if the
+         * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop(){return NULL;}
+        virtual cMessage *pop();
 
-        virtual cMessage *front(){return NULL;}
+        /**
+        * @brief Returns a pointer to a frame directly from the queues.
+        *
+        * front must return a pointer to the same message pop() would return.
+        *
+        * @return pointer to the message with the highest priority from any queue. NULL if the
+        * queues are empty
+        */
+        virtual cMessage *front();
 
+        /**
+        * @brief Notifies registered listeners about changes.
+        */
         void notifyListeners();
 };
 }

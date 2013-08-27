@@ -10,7 +10,10 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Represents the part of a port that sends messages (TX)
+ * @brief A TrafficConditioner for RCMessages.
+ *
+ * The RCTrafficConditioner only allows lower priorities to transmit when there are no
+ * RC messages queued.
  *
  */
 template <class TC>
@@ -40,28 +43,36 @@ class RCTrafficConditioner : public TC
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
-         * according to the TTEthernet specification.
+         * according to the specification for RCMessages.
          *
-         * Time-triggered messages are send immediately, rate-constrained and best-effort
-         * messages are delayed if they do not fit in the gap until the next time-triggered
-         * message. If the lower layer is idle messages are picked from the queues according
-         * to the priorities.
-         * Time-triggered buffers can free the bandwidth reservation mechanism by sending
-         * a TTBufferEmpty message.
+         * Rate-constrained messages are send immediately, lower priority frames are queued
+         * as long as there are rate-constrained messages waiting.
+         * If the mac layer is idle, messages are picked from the queues according
+         * to the priorities, using the template class.
          *
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
 
+        /**
+         * @brief Queues messages in the correct queue
+         *
+         * Rate-constrained messages are queued in this module, other messages are forwarded to the
+         * template classes enqueueMessage method
+         *
+         * @param msg the incoming message
+         */
         virtual void enqueueMessage(cMessage *msg);
 
         /**
-         * @brief this method is invoked when the underlying mac is idle.
-         *
-         * When this method is invoked the module sends a new message when there is
-         * one. Else it saves the state and sends the message immediately when it is
-         * received.
-         */
+        * @brief this method is invoked when the underlying mac is idle.
+        *
+        * When this method is invoked the module sends a new message when there is
+        * one. Else it saves the state and sends the message immediately when it is
+        * received.
+        *
+        * @param msg the message to be queued
+        */
         virtual void requestPacket();
 
         /**
@@ -75,12 +86,24 @@ class RCTrafficConditioner : public TC
          * @brief Clears all queued packets and stored requests.
          */
         virtual void clear();
+
         /**
-         * Returns a packet directly from the queue, bypassing the primary,
+         * @brief Returns a frame directly from the queues, bypassing the primary,
          * send-on-request mechanism. Returns NULL if the queue is empty.
+         *
+         * @return the message with the highest priority from any queue. NULL if the
+         * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop();
 
+        /**
+         * @brief Returns a pointer to a frame directly from the queues.
+         *
+         * front must return a pointer to the same message pop() would return.
+         *
+         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * queues are empty
+         */
         virtual cMessage *front();
 
     private:

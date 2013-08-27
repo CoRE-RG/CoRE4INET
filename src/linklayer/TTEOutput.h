@@ -14,7 +14,10 @@ namespace TTEthernetModel {
 
 /**
  * @brief Represents the part of a port that sends messages (TX)
- * @deprecated
+ * @deprecated This module is deprecated and was replaced by the
+ * TT_PCF_RC_BE_TrafficConditioner module.
+ *
+ * @see TT_PCF_RC_BE_TrafficConditioner
  *
  */
 class TTEOutput : public cSimpleModule, public IPassiveQueue
