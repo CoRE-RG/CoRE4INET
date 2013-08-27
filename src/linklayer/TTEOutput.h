@@ -14,6 +14,7 @@ namespace TTEthernetModel {
 
 /**
  * @brief Represents the part of a port that sends messages (TX)
+ * @deprecated
  *
  */
 class TTEOutput : public cSimpleModule, public IPassiveQueue

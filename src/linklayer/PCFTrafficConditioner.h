@@ -1,5 +1,5 @@
-#ifndef __TTE4INET_RCTRAFFICCONDITIONER_H
-#define __TTE4INET_RCTRAFFICCONDITIONER_H
+#ifndef __TTE4INET_PCFTRAFFICCONDITIONER_H
+#define __TTE4INET_PCFTRAFFICCONDITIONER_H
 
 #include <ModuleAccess.h>
 #include <RCBuffer.h>
@@ -14,23 +14,28 @@ namespace TTEthernetModel {
  *
  */
 template <class TC>
-class RCTrafficConditioner : public TC
+class PCFTrafficConditioner : public TC
 {
     public:
         /**
          * @brief Constructor
          */
-        RCTrafficConditioner();
+        PCFTrafficConditioner();
         /**
          * @brief Destructor
          */
-        ~RCTrafficConditioner();
+        ~PCFTrafficConditioner();
 
     private:
         /**
-         * @brief Dedicated queue for each priority of rate-constrained messages
+         * @brief Queue for protocol control messages
          */
-        cQueue rcQueue[NUM_RC_PRIORITIES];
+        cQueue pcfQueue;
+    protected:
+        /**
+         * @brief Signal that is emitted when the queue length of time-triggered messages changes.
+         */
+        static simsignal_t pcfQueueLengthSignal;
     protected:
         /**
          * @brief Initialization of the module
@@ -94,39 +99,32 @@ class RCTrafficConditioner : public TC
 };
 
 template <class TC>
-RCTrafficConditioner<TC>::RCTrafficConditioner(){
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
-    {
-        char strBuf[64];
-        snprintf(strBuf,64,"RC Priority %d Messages", i);
-        rcQueue[i].setName(strBuf);
-    }
+simsignal_t PCFTrafficConditioner<TC>::pcfQueueLengthSignal = SIMSIGNAL_NULL;
+
+template <class TC>
+PCFTrafficConditioner<TC>::PCFTrafficConditioner(){
+    pcfQueue.setName("PCF Messages");
 }
 
 template <class TC>
-RCTrafficConditioner<TC>::~RCTrafficConditioner(){
+PCFTrafficConditioner<TC>::~PCFTrafficConditioner(){
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::initialize()
+void PCFTrafficConditioner<TC>::initialize()
 {
     TC::initialize();
+    pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::handleMessage(cMessage *msg)
+void PCFTrafficConditioner<TC>::handleMessage(cMessage *msg)
 {
-    //Frames arrived on in are rate-constreind frames
-    if (msg->arrivedOn("RCin"))
+    if (msg->arrivedOn("PCFin"))
     {
         if (TC::getNumPendingRequests())
         {
-            //Reset Bag
-            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (msg->getSenderModule());
-            if (rcBuffer)
-                rcBuffer->resetBag();
-            //Set Transparent clock when frame is PCF
-            PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
+            PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if(pcf){
                 setTransparentClock(pcf);
             }
@@ -149,20 +147,10 @@ void RCTrafficConditioner<TC>::handleMessage(cMessage *msg)
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::enqueueMessage(cMessage *msg){
-    if(msg->arrivedOn("RCin")){
-       int priority = msg->getSenderModule()->par("priority").longValue();
-       if (priority > 0 && priority < NUM_RC_PRIORITIES)
-       {
-           rcQueue[priority].insert(msg);
-           TC::notifyListeners();
-       }
-       else
-       {
-           rcQueue[0].insert(msg);
-           TC::notifyListeners();
-           ev << "Priority missing!" << endl;
-       }
+void PCFTrafficConditioner<TC>::enqueueMessage(cMessage *msg){
+    if(msg->arrivedOn("PCFin")){
+        pcfQueue.insert(msg);
+        TC::notifyListeners();
     }
     else{
         TC::enqueueMessage(msg);
@@ -170,7 +158,7 @@ void RCTrafficConditioner<TC>::enqueueMessage(cMessage *msg){
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::requestPacket()
+void PCFTrafficConditioner<TC>::requestPacket()
 {
     Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
@@ -184,71 +172,48 @@ void RCTrafficConditioner<TC>::requestPacket()
 }
 
 template <class TC>
-cMessage* RCTrafficConditioner<TC>::pop()
+cMessage* PCFTrafficConditioner<TC>::pop()
 {
     Enter_Method("pop()");
     //RCFrames
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    if (!pcfQueue.isEmpty())
     {
-        if (!rcQueue[i].isEmpty())
-        {
-            EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
-            //Reset Bag
-            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
-            if (rcBuffer)
-                rcBuffer->resetBag();
+        cMessage *msg = (cMessage*) pcfQueue.pop();
+        cComponent::emit(pcfQueueLengthSignal, pcfQueue.length());
 
-            PCFrame *pcf = dynamic_cast<PCFrame*> (message);
-            if(pcf){
-                setTransparentClock(pcf);
-            }
-            return message;
-        }
+        return msg;
     }
     return TC::pop();
 }
 
 template <class TC>
-cMessage* RCTrafficConditioner<TC>::front()
+cMessage* PCFTrafficConditioner<TC>::front()
 {
     Enter_Method("front()");
     //RCFrames
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    if (!pcfQueue.isEmpty())
     {
-        if (!rcQueue[i].isEmpty())
-        {
-            EtherFrame *message = (EtherFrame*) rcQueue[i].front();
-            return message;
-        }
+        cMessage *msg = (cMessage*) pcfQueue.front();
+        return msg;
     }
     return TC::front();
 }
 
 template <class TC>
-bool RCTrafficConditioner<TC>::isEmpty()
+bool PCFTrafficConditioner<TC>::isEmpty()
 {
-    bool empty = true;
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
-    {
-        empty &= rcQueue[i].isEmpty();
-    }
-    empty &= TC::isEmpty();
-    return empty;
+       return pcfQueue.isEmpty() && TC::isEmpty();
 }
 
 template <class TC>
-void RCTrafficConditioner<TC>::clear()
+void PCFTrafficConditioner<TC>::clear()
 {
     TC::clear();
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
-    {
-        rcQueue[i].clear();
-    }
+    pcfQueue.clear();
 }
 
-//TODO: share method with RC-Module
 template <class TC>
-void RCTrafficConditioner<TC>::setTransparentClock(PCFrame *pcf){
+void PCFTrafficConditioner<TC>::setTransparentClock(PCFrame *pcf){
     uint64_t transparentClock = pcf->getTransparent_clock();
 
     //Add static delay for this port

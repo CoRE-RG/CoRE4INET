@@ -3,10 +3,10 @@ package ttethernet.linklayer;
 import inet.linklayer.IOutputQueue;
 import inet.linklayer.ITrafficConditioner;
 
-simple TT_RC_BE_TrafficConditioner extends RC_BE_TrafficConditioner
+simple TT_PCF_RC_BE_TrafficConditioner extends PCF_RC_BE_TrafficConditioner
 {
     parameters:
-        @class(TT_RC_BE_TrafficConditioner);
+        @class(TT_PCF_RC_BE_TrafficConditioner);
         @display("i=block/classifier");
         //Statistic of the queue length of time-triggered frames
         @statistic[ttQueueLength](title="TT-Queue Length"; record=vector; interpolationmode=sample-hold);

@@ -3,7 +3,7 @@ package ttethernet.linklayer;
 import inet.linklayer.IOutputQueue;
 import inet.linklayer.ITrafficConditioner;
 
-simple RC_BE_TrafficConditioner extends BE_TrafficConditioner
+simple PCF_RC_BE_TrafficConditioner extends BE_TrafficConditioner
 {
     parameters:
         @class(RCTrafficConditioner);

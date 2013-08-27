@@ -11,7 +11,7 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Represents the part of a port that sends messages (TX)
+ * @brief Represents the part of a port that sends messages (TX). This is the abstract base class
  *
  */
 class BaseTrafficConditioner : public cSimpleModule, public IPassiveQueue

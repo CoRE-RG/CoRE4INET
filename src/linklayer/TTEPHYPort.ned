@@ -2,12 +2,13 @@ package ttethernet.linklayer;
 
 
 import inet.linklayer.IEtherMAC;
+import inet.linklayer.ITrafficConditioner;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-// The TTEPHYPort is a compund module that contains the TTEOutput, TTEInput and MAC (EtherMACFullDuplex)
-// It represents a physical port for a TTEthernet device (Switch or Host)
+// The TTEPHYPort is a compund module that contains the input TrafficConditioner, output TrafficConditioner and MAC (EtherMACFullDuplex)
+// It represents a physical port for a real-time Ethernet device (Switch or Host)
 //
-// @see IPort, TTEOutput, TTEInput, EtherMACFullDuplex
+// @see IPort, EtherMACFullDuplex, TTEInput, TT_PCF_RC_BE_TrafficConditioner, PCF_RC_BE_TrafficConditioner, BE_TrafficConditioner
 //
 // @author Till Steinbach
 module TTEPHYPort like IPort
@@ -34,11 +35,11 @@ module TTEPHYPort like IPort
 
     submodules:
         //Module for the organisation of outbound traffic
-        tteOutput: TT_RC_BE_TrafficConditioner {
+        egressTC: TT_PCF_RC_BE_TrafficConditioner{
             @display("p=48,45");
         }
         //Module for the organisation of inbound traffic
-        tteInput: TTEInput {
+        ingressTC: TTEInput {
 			parameters:
             	@display("p=142,45");
             	promiscuous = promiscuous;
@@ -47,17 +48,18 @@ module TTEPHYPort like IPort
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true; //MAC must be set promiscuous to allow for CT receiption with all CT-Markers
-                queueModule = "tteOutput";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
+                queueModule = "egressTC";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
                 @display("p=87,139");
         }
     connections:
-        upperLayerIn --> tteOutput.in;
-        upperLayerOut <-- tteInput.out;
-        tteOutput.out --> mac.upperLayerIn;
-        tteInput.in <-- mac.upperLayerOut;
+        upperLayerIn --> egressTC.in;
+        upperLayerOut <-- ingressTC.out;
+        egressTC.out --> mac.upperLayerIn;
+        ingressTC.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
         
-        TTin --> tteOutput.TTin;
-        RCin --> tteOutput.RCin;
-        PCFin --> tteOutput.PCFin;
+        
+        TTin --> egressTC.TTin;
+        RCin --> egressTC.RCin;
+        PCFin --> egressTC.PCFin;
 }
