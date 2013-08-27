@@ -38,6 +38,16 @@ module Node1 extends TTEEtherHost
             parameters:
                 @display("p=440,100");
         }
+        vl_102_ctc: TTIncoming {
+            parameters:
+                @display("p=350,160");
+
+        }
+        vl_102: TTDoubleBuffer {
+            parameters:
+                @display("p=440,160");
+        }
     connections:
         vl_100_ctc.out --> vl_100.in;
+        vl_102_ctc.out --> vl_102.in;
 }
