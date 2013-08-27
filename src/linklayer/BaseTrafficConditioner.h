@@ -119,7 +119,7 @@ class BaseTrafficConditioner : public cSimpleModule, public IPassiveQueue
          * @return the message with the highest priority from any queue. NULL if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop(){return NULL;}
 
         /**
         * @brief Returns a pointer to a frame directly from the queues.
@@ -129,7 +129,7 @@ class BaseTrafficConditioner : public cSimpleModule, public IPassiveQueue
         * @return pointer to the message with the highest priority from any queue. NULL if the
         * queues are empty
         */
-        virtual cMessage *front();
+        virtual cMessage *front(){return NULL;}
 
         /**
         * @brief Notifies registered listeners about changes.
