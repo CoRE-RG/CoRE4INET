@@ -110,15 +110,6 @@ class PCFTrafficConditioner : public TC
         * queues are empty
         */
         virtual cMessage *front();
-
-    private:
-        /**
-         * @brief Sets the transparent clock field in a protocol control frame
-         * according to the actual sending time
-         *
-         * @param pcf the protocol control frame
-         */
-        virtual void setTransparentClock(PCFrame *pcf);
 };
 
 template <class TC>
@@ -149,7 +140,7 @@ void PCFTrafficConditioner<TC>::handleMessage(cMessage *msg)
         {
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if(pcf){
-                setTransparentClock(pcf);
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
             }
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
@@ -204,6 +195,10 @@ cMessage* PCFTrafficConditioner<TC>::pop()
         cMessage *msg = (cMessage*) pcfQueue.pop();
         cComponent::emit(pcfQueueLengthSignal, pcfQueue.length());
 
+        PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
+        if(pcf){
+            setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+        }
         return msg;
     }
     return TC::pop();
@@ -233,33 +228,6 @@ void PCFTrafficConditioner<TC>::clear()
 {
     TC::clear();
     pcfQueue.clear();
-}
-
-template <class TC>
-void PCFTrafficConditioner<TC>::setTransparentClock(PCFrame *pcf){
-    uint64_t transparentClock = pcf->getTransparent_clock();
-
-    //Add static delay for this port
-    transparentClock+=secondsToTransparentClock(cModule::getParentModule()->par("static_tx_delay").doubleValue());
-
-    //Add dynamic delay for the device
-    cArray parlist = pcf->getParList();
-    long start = -1;
-    for(int i=0;i<parlist.size();i++){
-        cMsgPar *parameter = dynamic_cast<cMsgPar*>(parlist.get(i));
-        if(parameter){
-            if(strncmp(parameter->getName(),"received_total",15)==0 || strncmp(parameter->getName(),"created_total",15)==0){
-                start = parameter->longValue();
-            }
-        }
-    }
-    if(start >= 0){
-        TTEScheduler* scheduler = ((TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
-        transparentClock+=ticksToTransparentClock((scheduler->getTotalTicks()-start),scheduler->par("tick").doubleValue());
-    }
-
-    //Set new transparent clock
-    pcf->setTransparent_clock(transparentClock);
 }
 
 }
