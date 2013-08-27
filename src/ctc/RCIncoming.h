@@ -17,7 +17,7 @@
 #define __TTETHERNETMODELV2_RCINCOMING_H_
 
 #include <omnetpp.h>
-#include <Incoming.h>
+#include <CTIncoming.h>
 
 namespace TTEthernetModel {
 
@@ -32,7 +32,7 @@ namespace TTEthernetModel {
  *
  * @author Till Steinbach
  */
-class RCIncoming : public Incoming
+class RCIncoming : public CTIncoming
 {
     private:
         /**

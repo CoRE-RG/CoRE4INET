@@ -21,7 +21,7 @@
 #include <EtherFrame_m.h>
 #include <ModuleAccess.h>
 
-#include <ctc/Incoming.h>
+#include <CTIncoming.h>
 #include <Buffer.h>
 
 #include "TTE4INETDefs.h"
@@ -47,7 +47,7 @@ class CTInControl : public IC
         /**
          * @brief Lists of incoming modules for each critical traffic id.
          */
-        std::map<uint16_t, std::list<Incoming*> > ct_incomings;
+        std::map<uint16_t, std::list<CTIncoming*> > ct_incomings;
 
         /**
          * @brief caches ct_mask parameter
@@ -131,11 +131,11 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
         //Auf CTCs verteilen oder BE traffic
         if (isCT(frame))
         {
-            std::map<uint16_t, std::list<Incoming *> >::iterator ct_incomingList = ct_incomings.find(getCTID(frame));
+            std::map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(getCTID(frame));
             if (ct_incomingList != ct_incomings.end())
             {
                 //Send to all CTCs for the CT-ID
-                for (std::list<Incoming*>::iterator ct_incoming = ct_incomingList->second.begin(); ct_incoming
+                for (std::list<CTIncoming*>::iterator ct_incoming = ct_incomingList->second.begin(); ct_incoming
                         != ct_incomingList->second.end(); ct_incoming++)
                 {
                     IC::setParameters(frame);
@@ -190,18 +190,18 @@ void CTInControl<IC>::handleParameterChange(const char* parname){
             }
             else
             {
-                Incoming *ct_incoming = dynamic_cast<Incoming*> (module);
+                CTIncoming *ct_incoming = dynamic_cast<CTIncoming*> (module);
                 if(ct_incoming){
                     Buffer *buffer = dynamic_cast<Buffer*> (ct_incoming->gate("out")->getPathEndGate()->getOwner());
                     if(buffer && buffer->hasPar("ct_id")){
                         ct_incomings[buffer->par("ct_id").longValue()].push_back(ct_incoming);
                     }
                     else{
-                        opp_error("Incoming module %s has no Buffer attached with ct_id configured!", (*ct_incomingPath).c_str());
+                        opp_error("CTIncoming module %s has no Buffer attached with ct_id configured!", (*ct_incomingPath).c_str());
                     }
                 }
                 else{
-                    opp_error("Configuration problem of tt_buffers: Module: %s is no Incoming module!", (*ct_incomingPath).c_str());
+                    opp_error("Configuration problem of ct_incomings: Module: %s is no CTIncoming module!", (*ct_incomingPath).c_str());
                 }
             }
         }

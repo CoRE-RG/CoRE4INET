@@ -18,7 +18,7 @@
 
 #include <omnetpp.h>
 
-#include <Incoming.h>
+#include <CTIncoming.h>
 #include <EtherFrame_m.h>
 
 namespace TTEthernetModel {
@@ -32,7 +32,7 @@ namespace TTEthernetModel {
  *
  * @sa Incoming
  */
-class TTIncoming : public Incoming
+class TTIncoming : public CTIncoming
 {
     private:
         /**

@@ -16,7 +16,7 @@
 #define __TTETHERNETMODELV2_PCFINCOMING_H_
 
 #include <omnetpp.h>
-#include <Incoming.h>
+#include <CTIncoming.h>
 
 #include "PCFrame_m.h"
 
@@ -33,7 +33,7 @@ namespace TTEthernetModel {
  *
  * @author Lazar Todorov, Till Steinbach
  */
-class PCFIncoming:public Incoming
+class PCFIncoming: public CTIncoming
 {
     private:
         /**
