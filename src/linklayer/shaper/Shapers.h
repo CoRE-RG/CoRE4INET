@@ -7,6 +7,7 @@
 #include <RCShaper.h>
 #include <PCFShaper.h>
 #include <TTShaper.h>
+#include <AVBClassAShaper.h>
 
 namespace TTEthernetModel{
 
@@ -43,6 +44,20 @@ class PCF_RC_BE_Shaper: public PCFShaper<RCShaper<BEShaper<BaseShaper> > >{};
 * @see TTShaper, PCFShaper, RCShaper, BEShaper, BaseShaper
 */
 class TT_PCF_RC_BE_Shaper: public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > >{};
+
+/**
+* @brief Class representing the TT_AVBClassA_PCF_RC_BE_Shaper module
+*
+* This shaper handles traffic in the following order (highest to lowest priority):
+* - time-triggered
+* - AVB
+* - PCF
+* - rate-constrained
+* - best-effort
+*
+* @see TTShaper, PCFShaper, RCShaper, BEShaper, BaseShaper
+*/
+class TT_AVBClassA_PCF_RC_BE_Shaper: public TTShaper<AVBClassAShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >{};
 
 }
 
