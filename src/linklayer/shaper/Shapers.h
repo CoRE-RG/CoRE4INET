@@ -55,7 +55,7 @@ class TT_PCF_RC_BE_Shaper: public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShape
 * - rate-constrained
 * - best-effort
 *
-* @see TTShaper, PCFShaper, RCShaper, BEShaper, BaseShaper
+* @see TTShaper, AVBClassAShaper, PCFShaper, RCShaper, BEShaper, BaseShaper
 */
 class TT_AVBClassA_PCF_RC_BE_Shaper: public TTShaper<AVBClassAShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >{};
 
