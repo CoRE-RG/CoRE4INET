@@ -99,7 +99,7 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 	//container for container for PCF frames delayed for permanence pit in SYNC/STABLE state;  key = membership_new, value = PCFrame *
 	//sync_container = new multimap<unsigned int, PCFrame* >;
 
-	tteScheduler = (TTEScheduler*) sc->getParentModule()->getSubmodule("tteScheduler");
+	tteScheduler = (TTEScheduler*) sc->getParentModule()->getSubmodule("scheduler");
 
         event1 = new SchedulerActionTimeEvent("smc_async_eval_pit",
                 ACTION_TIME_EVENT);

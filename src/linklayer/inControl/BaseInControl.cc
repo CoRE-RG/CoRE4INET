@@ -7,14 +7,14 @@ void BaseInControl::setParameters(EtherFrame *frame){
         par = &frame->par(i);
     else
         par = &frame->addPar("received");
-    par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+    par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("scheduler"))->getTicks());
 
     i = frame->findPar("received_total");
     if( i >=0 )
         par = &frame->par(i);
     else
         par = &frame->addPar("received_total");
-    par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+    par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("scheduler"))->getTotalTicks());
 
 
     i = frame->findPar("received_port");

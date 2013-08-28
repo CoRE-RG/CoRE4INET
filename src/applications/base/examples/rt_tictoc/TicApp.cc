@@ -33,7 +33,7 @@ void TicApp::initialize()
     rxPkSignal = registerSignal("rxPk");
     roundtripSignal = registerSignal("roundtrip");
 
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
     event->setAction_time(par("action_time").longValue());
     event->setDestinationGate(gate("schedulerIn"));
@@ -61,7 +61,7 @@ void TicApp::handleMessage(cMessage *msg)
         }
         delete frame;
 
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
         tteScheduler->registerEvent(event, true);
     }

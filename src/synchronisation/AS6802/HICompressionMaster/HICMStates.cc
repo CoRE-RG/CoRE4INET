@@ -95,7 +95,7 @@ HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 	max_transmision_delay = hicm->par("max_transmission_delay").longValue();
 
 	tteScheduler = (TTEScheduler*) hicm->getParentModule()->getSubmodule(
-			"tteScheduler");
+			"scheduler");
 
 	event = new SchedulerTimerEvent("ASYNCHRON", TIMER_EVENT);
 	event->setSchedulingPriority(3);

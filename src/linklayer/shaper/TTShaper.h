@@ -409,7 +409,7 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
     {
         return true;
     }
-    TTEScheduler *scheduler = (TTEScheduler*) cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *scheduler = (TTEScheduler*) cModule::getParentModule()->getParentModule()->getSubmodule("scheduler");
     //SimTime sendTime = (message->getBitLength()+INTERFRAME_GAP_BITS)/txRate;
     SimTime sendTime = TC::outChannel->calculateDuration(message);
     //Don't know if that is right, but it works!

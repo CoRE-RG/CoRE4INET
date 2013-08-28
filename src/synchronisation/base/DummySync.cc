@@ -31,7 +31,7 @@ void DummySync::initialize(int stage)
 {
     if(stage==1)
     {
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
         event->setAction_time(par("action_time").longValue());
         event->setDestinationGate(gate("schedulerIn"));
@@ -46,7 +46,7 @@ void DummySync::initialize(int stage)
 
 void DummySync::handleMessage(cMessage *msg)
 {
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     if(msg->arrivedOn("schedulerIn")){
         if(tteScheduler->getCycles()>1){
             uint32_t cycleTicks = tteScheduler->par("cycle_ticks").longValue();

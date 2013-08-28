@@ -140,7 +140,7 @@ void PCFShaper<TC>::handleMessage(cMessage *msg)
         {
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if(pcf){
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("scheduler"));
             }
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
@@ -197,7 +197,7 @@ cMessage* PCFShaper<TC>::pop()
 
         PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
         if(pcf){
-            setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+            setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("scheduler"));
         }
         return msg;
     }

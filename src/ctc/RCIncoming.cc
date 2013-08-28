@@ -30,7 +30,7 @@ RCIncoming::RCIncoming() : CTIncoming::CTIncoming()
 void RCIncoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
-        TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("scheduler");
         unsigned long currentTotalTicks = tteScheduler->getTotalTicks();
         //Now check for correct arrival:
         //TODO what todo with JITTER?

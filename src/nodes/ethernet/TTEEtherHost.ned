@@ -73,10 +73,10 @@ module TTEEtherHost
             @display("p=141,169");
         }
         // Scheudler for the device
-        tteScheduler: <default("TTEScheduler")> like ITTEScheduler {
+        scheduler: <default("TTEScheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
-        tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
+        app[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
             @display("p=234,37,row,70");
         }
         bgIn: BGQueueBuffer {

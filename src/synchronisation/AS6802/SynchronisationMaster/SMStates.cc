@@ -104,7 +104,7 @@ SM_INIT::SM_INIT(SM *s, FILE *f) {
 	e_container = new multimap<uint64_t, FrameEvent *>;
 
 	tteScheduler = (TTEScheduler*) sm->getParentModule()->getSubmodule(
-			"tteScheduler");
+			"scheduler");
 
 	event1 = new SchedulerActionTimeEvent("smc_async_eval_pit",
 			ACTION_TIME_EVENT);

@@ -387,7 +387,7 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
     {
         return true;
     }
-    TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getParentModule()->getSubmodule("scheduler");
     //SimTime sendTime = (message->getBitLength()+INTERFRAME_GAP_BITS)/txRate;
     SimTime sendTime = outChannel->calculateDuration(message);
     //Don't know if that is right, but it works!
@@ -436,7 +436,7 @@ void TTEOutput::setTransparentClock(PCFrame *pcf){
         }
     }
     if(start >= 0){
-        TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+        TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("scheduler"));
         transparentClock+=ticksToTransparentClock((scheduler->getTotalTicks()-start),scheduler->par("tick").doubleValue());
     }
 

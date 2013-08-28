@@ -47,7 +47,7 @@ void TTBuffer::initialize(int stage)
         ev << "Initialize TTBuffer" << endl;
 
         //Register Event
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         //Dirty FIX
         //TODO find out what is wrong here!
         if(actionTimeEvent->isScheduled())
@@ -101,7 +101,7 @@ void TTBuffer::handleMessage(cMessage *msg)
             }
         }
         //Reregister scheduler
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         tteScheduler->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg), true);
     }
 }

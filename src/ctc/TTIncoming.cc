@@ -40,7 +40,7 @@ void TTIncoming::handleMessage(cMessage *msg)
     //Incoming Message
     if (msg->arrivedOn("in"))
     {
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         //get current time in cylce
         uint32_t currentTicks = tteScheduler->getTicks();
         //Now check for correct arrival:

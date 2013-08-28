@@ -49,7 +49,7 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
         Task *task = (Task*)msg->par("task").pointerValue();
         task->executeTask();
         //Reregister scheduler
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         tteScheduler->registerEvent((SchedulerEvent *) msg);
     }
     if(msg->arrivedOn("syncIn")){
@@ -74,7 +74,7 @@ void TTEAPIApplicationBase::registerTask(unsigned int actionTime, void (*functio
     task->setFunctionArg(setFunctionArg);
 
     //Register Event
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
 
     event->addPar("task").setPointerValue(task);
@@ -244,7 +244,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
             break;
         }
         case TTE_VAR_TIME_RESOLUTION:{
-            cModule *scheduler = getParentModule()->getSubmodule("tteScheduler", -1);
+            cModule *scheduler = getParentModule()->getSubmodule("scheduler", -1);
             if(scheduler){
                 *((tte_time_t*)value) = scheduler->par("tick").doubleValue();
             }

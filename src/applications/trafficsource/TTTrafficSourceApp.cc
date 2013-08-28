@@ -28,7 +28,7 @@ void TTTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
 
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
     event->setAction_time(par("action_time").doubleValue()/tteScheduler->par("tick").doubleValue());
     event->setDestinationGate(gate("schedulerIn"));
@@ -44,7 +44,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg){
             moduloCycle=0;
         }
 
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
         tteScheduler->registerEvent(event, true);
     }
