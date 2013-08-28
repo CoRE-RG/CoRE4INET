@@ -367,6 +367,7 @@ bool TTShaper<TC>::isTTBufferRegistered(TTBuffer *ttBuffer){
 
 template <class TC>
 void TTShaper<TC>::handleParameterChange(const char* parname){
+    TC::handleParameterChange(parname);
     ttBuffers.clear();
     std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
