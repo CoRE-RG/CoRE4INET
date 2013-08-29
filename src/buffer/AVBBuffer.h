@@ -48,7 +48,7 @@ class AVBBuffer : public virtual Buffer
         SimTime oldTime;
         double Wduration;
 
-        TTEScheduler *tteScheduler;
+        TTEScheduler *scheduler;
         AVBIncoming * avbCTC;
 
         virtual void initialize(int stage);

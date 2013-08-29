@@ -28,8 +28,8 @@ module TTEAVBEtherSwitch
             parameters:
                 @display("p=101,54");
             gates:
-                lowerLayerIn[sizeof(ethg)+1];
-                lowerLayerOut[sizeof(ethg)+1];
+                ifIn[sizeof(ethg)+1];
+                ifOut[sizeof(ethg)+1];
         }
 
         llc: EtherLLC {
@@ -70,8 +70,8 @@ module TTEAVBEtherSwitch
             parameters:
                 @display("p=999,999");
         }
-        // Scheudler for the device
-        tteScheduler: TTEScheduler {
+        // Scheduler for the device
+        scheduler: TTEScheduler {
             parameters:
                 @display("p=461,127");
         }
@@ -80,11 +80,11 @@ module TTEAVBEtherSwitch
             avbBuffer[i].out --> phy[i].AVBin;
             avbCTC.AVBout[i] --> avbBuffer[i].in;
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- beswitch.lowerLayerOut[i];
-            phy[i].upperLayerOut --> beswitch.lowerLayerIn[i];
+            phy[i].upperLayerIn <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> beswitch.ifIn[i];
         }
-        beswitch.lowerLayerOut[sizeof(ethg)] --> llc.lowerLayerIn;
-        beswitch.lowerLayerIn[sizeof(ethg)] <-- llc.lowerLayerOut;
+        beswitch.ifOut[sizeof(ethg)] --> llc.lowerLayerIn;
+        beswitch.ifIn[sizeof(ethg)] <-- llc.lowerLayerOut;
 
         srpTrafficHandle.lowerLayerOut --> llc.upperLayerIn[0];
         srpTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[0];

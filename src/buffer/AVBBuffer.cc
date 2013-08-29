@@ -52,7 +52,7 @@ void AVBBuffer::initialize(int stage)
         oldTime = simTime();
         Wduration = 0;
 
-        tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         avbCTC = (AVBIncoming*)getParentModule()->getSubmodule("avbCTC");
 
         WATCH(credit);
@@ -112,9 +112,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
                     AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
                     Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer(Wduration / tteScheduler->par("tick").doubleValue());
+                    event->setTimer(Wduration / scheduler->par("tick").doubleValue());
                     event->setDestinationGate(gate("schedulerIn"));
-                    tteScheduler->registerEvent(event);
+                    scheduler->registerEvent(event);
                 }
             }
         }
@@ -150,9 +150,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
                     AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
                     Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer(Wduration / tteScheduler->par("tick").doubleValue());
+                    event->setTimer(Wduration / scheduler->par("tick").doubleValue());
                     event->setDestinationGate(gate("schedulerIn"));
-                    tteScheduler->registerEvent(event);
+                    scheduler->registerEvent(event);
                 }
             }
             delete msg;
@@ -199,9 +199,9 @@ void AVBBuffer::sendSlope(SimTime duration)
             AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
             Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer(Wduration / tteScheduler->par("tick").doubleValue());
+            event->setTimer(Wduration / scheduler->par("tick").doubleValue());
             event->setDestinationGate(gate("schedulerIn"));
-            tteScheduler->registerEvent(event);
+            scheduler->registerEvent(event);
         }
         else
         {

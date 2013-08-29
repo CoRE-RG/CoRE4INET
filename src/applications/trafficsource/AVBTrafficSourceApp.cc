@@ -61,11 +61,11 @@ void AVBTrafficSourceApp::initialize()
     if(talker)
     {
         avbCTC->talker = true;
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(par("advertise_time").doubleValue()/tteScheduler->par("tick").doubleValue());
+        event->setTimer(par("advertise_time").doubleValue()/scheduler->par("tick").doubleValue());
         event->setDestinationGate(gate("schedulerIn"));
-        tteScheduler->registerEvent(event);
+        scheduler->registerEvent(event);
     }
 }
 
@@ -150,11 +150,11 @@ void AVBTrafficSourceApp::sendAVBFrame()
 
     //class measurement interval = 125us
     double interval = (125.00 / intervalFrames) / 1000000.00;
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer(interval/tteScheduler->par("tick").doubleValue());
+    event->setTimer(interval/scheduler->par("tick").doubleValue());
     event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
+    scheduler->registerEvent(event);
 }
 
 } /* namespace TTEthernetModel */

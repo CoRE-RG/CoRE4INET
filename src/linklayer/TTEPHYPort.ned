@@ -4,10 +4,13 @@ package ttethernet.linklayer;
 import inet.linklayer.IEtherMAC;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-// The TTEPHYPort is a compund module that contains the TTEOutput, TTEInput and MAC (EtherMACFullDuplex)
-// It represents a physical port for a TTEthernet device (Switch or Host)
+import ttethernet.linklayer.shaper.TT_PCF_RC_BE_Shaper;
+import ttethernet.linklayer.inControl.CT_BE_InControl;
+
+// The TTEPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
+// It represents a physical port for a real-time Ethernet device (Switch or Host)
 //
-// @see IPort, TTEOutput, TTEInput, EtherMACFullDuplex
+// @see IPort, EtherMACFullDuplex, TTEInput, TT_PCF_RC_BE_Shaper, PCF_RC_BE_Shaper, BE_Shaper
 //
 // @author Till Steinbach
 module TTEPHYPort like IPort

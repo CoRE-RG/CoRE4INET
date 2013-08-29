@@ -85,11 +85,11 @@ module TTEAVBEtherHost
             @display("p=186,169");
         }
         // Scheudler for the device
-        tteScheduler: TTEScheduler {
+        scheduler: TTEScheduler {
             @display("p=274,169");
         }
 
-        tteApp[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
+        app[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {
             @display("p=380,37");
         }
 
