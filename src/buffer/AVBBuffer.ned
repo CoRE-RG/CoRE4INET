@@ -23,6 +23,8 @@ simple AVBBuffer extends Buffer
     parameters:
         @class(AVBBuffer);
         @display("i=,blue");
+        
+        @statistic[credit](title="Credit"; record=vector);
     gates:
         input schedulerIn @directIn;
 }

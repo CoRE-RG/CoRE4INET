@@ -25,12 +25,6 @@ class AVBClassAShaper : public TC
          */
         ~AVBClassAShaper();
 
-        /**
-         * @brief Indicates a parameter has changed.
-         *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
-         */
-        virtual void handleParameterChange(const char* parname);
 
     private:
         /**
@@ -153,6 +147,7 @@ void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
             SimTime duration = TC::outChannel->calculateDuration(msg);
+            duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
             avbBuffer->sendSlope(duration);
         }
         else

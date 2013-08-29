@@ -205,11 +205,7 @@ void TTEAVBOutput::requestPacket()
     }
 
     //AVBFrames
-    if(!avbQueue.isEmpty() && !isTransmissionAllowed((EtherFrame*) avbQueue.front()))
-    {
-        avbBuffer->reportInterference();
-    }
-    avbBuffer->refresh();
+    if(avbBuffer->initialized()) avbBuffer->refresh();
     if(!avbQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) avbQueue.front()) && avbBuffer->getCredit() >= 0)
     {
         framesRequested--;

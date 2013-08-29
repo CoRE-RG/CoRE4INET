@@ -36,11 +36,11 @@ void AVBTrafficSourceApp::initialize()
 
     if(payload <= 46)
     {
-        frameSize = 64;
+        frameSize = 88;
     }
     else
     {
-        frameSize = payload + 18;
+        frameSize = payload + 42;
     }
 
     isStreaming = false;

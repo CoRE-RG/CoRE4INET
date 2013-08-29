@@ -33,7 +33,6 @@ class AVBBuffer : public virtual Buffer
         void interferenceSlope(SimTime duration);
         void sendSlope(SimTime duration);
         void refresh();
-        void reportInterference();
         int getCredit();
         void resetCredit();
         int getMsgCount();
@@ -42,7 +41,6 @@ class AVBBuffer : public virtual Buffer
         int maxCredit;
         int AVBReservation;
         bool inTransmission;
-        bool inTerference;
         int msgCnt;
         SimTime newTime;
         SimTime oldTime;
@@ -50,6 +48,8 @@ class AVBBuffer : public virtual Buffer
 
         TTEScheduler *scheduler;
         AVBIncoming * avbCTC;
+
+        static simsignal_t creditSignal;
 
         virtual void initialize(int stage);
         virtual int numInitStages() const;
