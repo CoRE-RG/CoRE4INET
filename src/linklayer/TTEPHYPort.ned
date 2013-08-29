@@ -34,30 +34,31 @@ module TTEPHYPort like IPort
 
     submodules:
         //Module for the organisation of outbound traffic
-        tteOutput: TTEOutput {
+        shaper: TT_PCF_RC_BE_Shaper{
             @display("p=48,45");
         }
         //Module for the organisation of inbound traffic
-        tteInput: TTEInput {
-            parameters:
-                @display("p=142,45");
-                promiscuous = promiscuous;
+        inControl: CT_BE_InControl {
+			parameters:
+            	@display("p=142,45");
+            	promiscuous = promiscuous;
         }
         //MAC interface
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true; //MAC must be set promiscuous to allow for CT receiption with all CT-Markers
-                queueModule = "tteOutput";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
-                @display("p=78,142");
+                queueModule = "shaper";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
+                @display("p=87,139");
         }
     connections:
-        upperLayerIn --> tteOutput.in;
-        upperLayerOut <-- tteInput.out;
-        tteOutput.out --> mac.upperLayerIn;
-        tteInput.in <-- mac.upperLayerOut;
+        upperLayerIn --> shaper.in;
+        upperLayerOut <-- inControl.out;
+        shaper.out --> mac.upperLayerIn;
+        inControl.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
-
-        TTin --> tteOutput.TTin;
-        RCin --> tteOutput.RCin;
-        PCFin --> tteOutput.PCFin;
+        
+        
+        TTin --> shaper.TTin;
+        RCin --> shaper.RCin;
+        PCFin --> shaper.PCFin;
 }

@@ -6,7 +6,6 @@
 #include <INETDefs.h>
 #include <TTE4INETDefs.h>
 #include <IPassiveQueue.h>
-#include <QueueWithQoS.h>
 #include <EtherFrame_m.h>
 #include <TTBuffer.h>
 #include <PCFrame_m.h>
@@ -15,6 +14,10 @@ namespace TTEthernetModel {
 
 /**
  * @brief Represents the part of a port that sends messages (TX)
+ * @deprecated This module is deprecated and was replaced by the
+ * TT_PCF_RC_BE_Shaper module.
+ *
+ * @see TT_PCF_RC_BE_Shaper
  *
  */
 class TTEOutput : public cSimpleModule, public IPassiveQueue
@@ -188,6 +191,11 @@ class TTEOutput : public cSimpleModule, public IPassiveQueue
          * @brief Clears all queued packets and stored requests.
          */
         virtual void clear();
+        /**
+         * Returns a packet directly from the queue, bypassing the primary,
+         * send-on-request mechanism. Returns NULL if the queue is empty.
+         */
+        virtual cMessage *pop();
 
         void notifyListeners();
 };

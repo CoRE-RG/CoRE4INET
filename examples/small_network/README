@@ -9,6 +9,9 @@ Demonstrates a small TTEthernet Network. Traffic generators send Ethernet frames
 
 - Via virtual link vl101 unit2 sends rate constrained (RC) messages to unit3.
   Queued buffers will be used.
+  
+  - Via virtual link vl102 unit1 sends time triggered (TT) messages to unit2.
+  Double buffers will be used.
 
 - Cross traffic may be send via the corresponding functionality of inet framework.
   For more details take a look at unit*.ini. Use the configuration With_Crosstraffic.

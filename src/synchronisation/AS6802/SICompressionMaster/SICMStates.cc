@@ -88,7 +88,7 @@ SI_CM_INIT::SI_CM_INIT(SICM *pointer, FILE *f) {
 	max_transmision_delay = sicm->par("max_transmission_delay").longValue();
 
 	tteScheduler = (TTEScheduler*) sicm->getParentModule()->getSubmodule(
-			"tteScheduler");
+			"scheduler");
 
 	event = new SchedulerTimerEvent("ASYNCHRON", TIMER_EVENT);
 	event->setSchedulingPriority(3);

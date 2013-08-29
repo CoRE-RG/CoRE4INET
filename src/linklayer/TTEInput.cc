@@ -56,14 +56,14 @@ void TTEInput::handleMessage(cMessage *msg)
             par = &msg->par(i);
         else
             par = &msg->addPar("received");
-        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTicks());
+        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("scheduler"))->getTicks());
 
         i = msg->findPar("received_total");
         if( i >=0 )
             par = &msg->par(i);
         else
             par = &msg->addPar("received_total");
-        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"))->getTotalTicks());
+        par->setLongValue(((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("scheduler"))->getTotalTicks());
 
 
         i = msg->findPar("received_port");

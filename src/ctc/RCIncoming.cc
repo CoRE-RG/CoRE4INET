@@ -22,7 +22,7 @@ namespace TTEthernetModel {
 Define_Module(RCIncoming);
 
 
-RCIncoming::RCIncoming() : Incoming::Incoming()
+RCIncoming::RCIncoming() : CTIncoming::CTIncoming()
 {
     lastArrived=0;
 }
@@ -30,7 +30,7 @@ RCIncoming::RCIncoming() : Incoming::Incoming()
 void RCIncoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
-        TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*)getParentModule()->getSubmodule("scheduler");
         unsigned long currentTotalTicks = tteScheduler->getTotalTicks();
         //Now check for correct arrival:
         //TODO what todo with JITTER?

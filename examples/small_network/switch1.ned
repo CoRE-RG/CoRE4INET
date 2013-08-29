@@ -27,7 +27,7 @@ import ttethernet.buffer.RCQueueBuffer;
 //
 module Switch1 extends TTEEtherSwitch
 {
-    @display("bgb=306,263");
+    @display("bgb=306,311");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:
@@ -45,7 +45,16 @@ module Switch1 extends TTEEtherSwitch
             parameters:
                 @display("p=240,200");
         }
+        vl_102_ctc: TTIncoming {
+            parameters:
+                @display("p=170,270");
+        }
+        vl_102: TTDoubleBuffer {
+            parameters:
+                @display("p=240,270");
+        }
     connections:
         vl_100_ctc.out --> vl_100.in;
         vl_101_ctc.out --> vl_101.in;
+        vl_102_ctc.out --> vl_102.in;
 }

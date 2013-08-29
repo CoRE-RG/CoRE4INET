@@ -21,10 +21,10 @@ using namespace TTEthernetModel;
 
 void SyncBase::notify(SyncNotificationKind kind){
     SyncNotification *notification = new SyncNotification("SyncNotification", kind);
-    cModule* tteApps = getParentModule()->getSubmodule("tteApp",0);
+    cModule* tteApps = getParentModule()->getSubmodule("app",0);
     if(tteApps){
         for(int i=0; i<tteApps->size();i++){
-            sendDirect(notification->dup(),getParentModule()->getSubmodule("tteApp",i)->gate("syncIn"));
+            sendDirect(notification->dup(),getParentModule()->getSubmodule("app",i)->gate("syncIn"));
         }
     }
     delete notification;

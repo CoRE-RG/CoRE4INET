@@ -127,7 +127,7 @@ void RCBuffer::resetBag()
     if (numReset == destinationGates.size())
     {
         //Reregister scheduler
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("tteScheduler");
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         tteScheduler->registerEvent(timerMessage);
     }
 }

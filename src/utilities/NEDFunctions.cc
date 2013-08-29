@@ -8,7 +8,7 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
     double seconds = argv[0].doubleValueInUnit("s");
     if (argc <= 1)
     {
-        cModule* module = findModuleWhereverInNode("tteScheduler", context->getParentModule());
+        cModule* module = findModuleWhereverInNode("scheduler", context->getParentModule());
         if (!module)
             throw cRuntimeError("ned_sec_to_tick(): cannot determine tick length, you should specify it!");
         ticklength = module->par("tick").doubleValue();
@@ -23,7 +23,7 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
     return argv[0];
 }
 Define_NED_Function2(ned_sec_to_tick, "quantity sec_to_tick(quantity seconds, quantity ticklength?)", "units",
-        "Converts seconds to ticks. Uses ticklength specified in tteScheduler or ticklength parameter if specified");
+        "Converts seconds to ticks. Uses ticklength specified in scheduler or ticklength parameter if specified");
 Define_NED_Function2(ned_sec_to_tick, "quantity s2t(quantity seconds, quantity ticklength?)", "units",
         "Alias for sec_to_tick");
 
@@ -33,7 +33,7 @@ static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc
     long ticks = argv[0].longValue();
     if (argc <= 1)
     {
-        cModule* module = findModuleWhereverInNode("tteScheduler", context->getParentModule());
+        cModule* module = findModuleWhereverInNode("scheduler", context->getParentModule());
         if (!module)
             throw cRuntimeError("ned_sec_to_tick(): cannot determine tick length, you should specify it!");
         ticklength = module->par("tick").doubleValue();
@@ -48,7 +48,7 @@ static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc
     return argv[0];
 }
 Define_NED_Function2(ned_tick_to_sec, "quantity tick_to_sec(quantity ticks, quantity ticklength?)", "units",
-        "Converts ticks to seconds. Uses ticklength specified in tteScheduler or ticklength parameter if specified");
+        "Converts ticks to seconds. Uses ticklength specified in scheduler or ticklength parameter if specified");
 Define_NED_Function2(ned_tick_to_sec, "quantity t2s(quantity ticks, quantity ticklength?)", "units",
         "Alias for tick_to_sec");
 

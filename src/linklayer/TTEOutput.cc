@@ -99,7 +99,7 @@ void TTEOutput::handleMessage(cMessage *msg)
     {
         TTBuffer *thisttBuffer;
         TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (msg->getSenderModule());
-        ASSERT(ttBuffer);
+        ASSERT2(ttBuffer, "A TTFrame was received that was not sent by a TTBuffer");
 
         if(ttBuffers.size()>0){
             thisttBuffer = ttBuffers[ttBuffersPos];
@@ -109,7 +109,7 @@ void TTEOutput::handleMessage(cMessage *msg)
         }
 
         if(thisttBuffer!=ttBuffer){
-            ASSERT(isTTBufferRegistered(ttBuffer)==false);
+            ASSERT2(isTTBufferRegistered(ttBuffer)==false, "A TTFrame was received that was unexpected");
         }
 
 
@@ -133,8 +133,7 @@ void TTEOutput::handleMessage(cMessage *msg)
             }
             else
             {
-                ASSERT(isTTBufferRegistered(ttBuffer)==false);
-                EV << "shuffling for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
+                ASSERT2(isTTBufferRegistered(ttBuffer)==false, "TTFrame was delayed without permission");
 
                 ttQueue.insert(msg);
                 notifyListeners();
@@ -266,7 +265,7 @@ void TTEOutput::handleParameterChange(const char* parname){
     }
 }
 
-void TTEOutput::requestPacket()
+/*void TTEOutput::requestPacket()
 {
     Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
@@ -278,6 +277,7 @@ void TTEOutput::requestPacket()
         framesRequested--;
         cMessage *msg = (cMessage*) ttQueue.pop();
         emit(ttQueueLengthSignal, ttQueue.length());
+
 
         //TODO Update buffers:
         if(ttBuffers.size()>0){
@@ -316,6 +316,64 @@ void TTEOutput::requestPacket()
         emit(beQueueLengthSignal, beQueue.length());
         return;
     }
+}*/
+
+void TTEOutput::requestPacket()
+{
+    Enter_Method("requestPacket()");
+    //Feed the MAC layer with the next frame
+    framesRequested++;
+
+    //TTFrames
+    if (cMessage *msg = pop())
+    {
+        framesRequested--;
+        send(msg, gateBaseId("out"));
+    }
+}
+
+cMessage* TTEOutput::pop()
+{
+    Enter_Method("pop()");
+    //TTFrames
+    if (!ttQueue.isEmpty())
+    {
+        cMessage *msg = (cMessage*) ttQueue.pop();
+        emit(ttQueueLengthSignal, ttQueue.length());
+
+        //TODO Update buffers:
+        if(ttBuffers.size()>0){
+            ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
+        }
+
+        return msg;
+    }
+    //RCFrames
+    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    {
+        if (!rcQueue[i].isEmpty() && isTransmissionAllowed((EtherFrame*) rcQueue[i].front()))
+        {
+            EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
+            //Reset Bag
+            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
+            if (rcBuffer)
+                rcBuffer->resetBag();
+
+            PCFrame *pcf = dynamic_cast<PCFrame*> (message);
+            if(pcf){
+                setTransparentClock(pcf);
+            }
+            return message;
+        }
+    }
+    //BEFrames
+    if (!beQueue.isEmpty() && isTransmissionAllowed((EtherFrame*) beQueue.front()))
+    {
+        cMessage* message = (cMessage*) beQueue.pop();
+        emit(beQueueLengthSignal, beQueue.length());
+        return message;
+    }
+    return NULL;
 }
 
 bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
@@ -329,7 +387,7 @@ bool TTEOutput::isTransmissionAllowed(EtherFrame *message)
     {
         return true;
     }
-    TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getParentModule()->getSubmodule("tteScheduler");
+    TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getParentModule()->getSubmodule("scheduler");
     //SimTime sendTime = (message->getBitLength()+INTERFRAME_GAP_BITS)/txRate;
     SimTime sendTime = outChannel->calculateDuration(message);
     //Don't know if that is right, but it works!
@@ -378,7 +436,7 @@ void TTEOutput::setTransparentClock(PCFrame *pcf){
         }
     }
     if(start >= 0){
-        TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("tteScheduler"));
+        TTEScheduler* scheduler = ((TTEScheduler*)getParentModule()->getParentModule()->getSubmodule("scheduler"));
         transparentClock+=ticksToTransparentClock((scheduler->getTotalTicks()-start),scheduler->par("tick").doubleValue());
     }
 
