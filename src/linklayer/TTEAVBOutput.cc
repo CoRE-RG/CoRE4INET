@@ -69,8 +69,23 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("TTin"))
     {
+        TTBuffer *thisttBuffer;
+        TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (msg->getSenderModule());
+        ASSERT(ttBuffer);
+
         if(ttBuffers.size()>0){
+            thisttBuffer = ttBuffers[ttBuffersPos];
             ttBuffersPos = ((ttBuffersPos + 1) % ttBuffers.size());
+        }else{
+            thisttBuffer = NULL;
+        }
+
+        EV << "ttBuffers.size(): " << ttBuffers.size() << endl;
+        EV << "ttBuffers[pos]: " << ttBuffers[ttBuffersPos] << endl;
+        EV << "thisttBuffer ModuleName: "<< thisttBuffer->getFullName() << endl;
+
+        if(thisttBuffer!=ttBuffer){
+            ASSERT(isTTBufferRegistered(ttBuffer)==false);
         }
 
         //If we have an empty message allow other frame to be sent
@@ -93,6 +108,7 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
             }
             else
             {
+                ASSERT(isTTBufferRegistered(ttBuffer)==false);
                 EV << "There might be a configuration issue (TTBuffer not registered in Output module), or shuffling was enabled for a TTBuffer or a TTFrame was delayed by a PCF" << endl;
                 ttQueue.insert(msg);
                 notifyListeners();
@@ -104,6 +120,7 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
     {
         if(framesRequested && isTransmissionAllowed((EtherFrame*)msg) && avbBuffer->getCredit() >= 0)
         {
+            framesRequested--;
             send(msg,gateBaseId("out"));
             SimTime duration = outChannel->calculateDuration(msg);
             avbBuffer->sendSlope(duration);
