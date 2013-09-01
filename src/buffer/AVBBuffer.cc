@@ -192,8 +192,8 @@ void AVBBuffer::sendSlope(SimTime duration)
 
     AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
     int portBandwith = avbCTC->getPortBandwith(this->getIndex());
+    emit(creditSignal, credit);
     credit -= ceil( ( (portBandwith - AVBReservation) * 1024.00 * 1024.00) * duration.dbl() );
-    //emit(creditSignal, credit);
     inTransmission = false;
     if(msgCnt > 0)
     {
