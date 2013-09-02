@@ -17,6 +17,9 @@ package ttethernet.linklayer;
 
 import inet.linklayer.IEtherMAC;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
+
+import ttethernet.linklayer.shaper.TT_AVBClassA_PCF_RC_BE_Shaper;
+import ttethernet.linklayer.inControl.CT_AVB_BE_InControl;
 //
 // TODO auto-generated type
 //
@@ -44,12 +47,12 @@ module TTEAVBPHYPort like IPort
 
     //input SRP?
     submodules:
-        tteavbOutput: TTEAVBOutput {
+        shaper: TT_AVBClassA_PCF_RC_BE_Shaper {
             @diplay("p=48,45");
             @display("p=222,142");
         }
 
-        tteavbInput: TTEAVBInput {
+        inControl: CT_AVB_BE_InControl {
             parameters:
                 @display("p=142,45");
                 promiscuous = promiscuous;
@@ -58,18 +61,18 @@ module TTEAVBPHYPort like IPort
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true;
-                queueModule = "tteavbOutput";
+                queueModule = "shaper";
                 @display("p=78,142");
         }
     connections:
-        upperLayerIn --> tteavbOutput.in;
-        upperLayerOut <-- tteavbInput.out;
-        tteavbOutput.out --> mac.upperLayerIn;
-        tteavbInput.in <-- mac.upperLayerOut;
+        upperLayerIn --> shaper.in;
+        upperLayerOut <-- inControl.out;
+        shaper.out --> mac.upperLayerIn;
+        inControl.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
 
-        TTin --> tteavbOutput.TTin;
-        RCin --> tteavbOutput.RCin;
-        PCFin --> tteavbOutput.PCFin;
-        AVBin --> tteavbOutput.AVBin;
+        TTin --> shaper.TTin;
+        RCin --> shaper.RCin;
+        PCFin --> shaper.PCFin;
+        AVBin --> shaper.AVBin;
 }

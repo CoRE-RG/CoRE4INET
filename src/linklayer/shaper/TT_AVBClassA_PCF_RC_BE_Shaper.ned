@@ -16,6 +16,8 @@ simple TT_AVBClassA_PCF_RC_BE_Shaper extends TT_PCF_RC_BE_Shaper
         @class(TT_AVBClassA_PCF_RC_BE_Shaper);
         //Statistic of the queue length of time-triggered frames
         @statistic[avbQueueLength](title="AVB-Queue Length"; record=vector; interpolationmode=sample-hold);
+        
+        int TTEBandwith = default(0);
     gates:        
         //Input for AVB class A frames from the buffers
         input AVBin @labels(TTFrame);

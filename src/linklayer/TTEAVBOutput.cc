@@ -123,6 +123,7 @@ void TTEAVBOutput::handleMessage(cMessage *msg)
             framesRequested--;
             send(msg,gateBaseId("out"));
             SimTime duration = outChannel->calculateDuration(msg);
+            duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / outChannel->getNominalDatarate();
             avbBuffer->sendSlope(duration);
         }
         else
@@ -213,6 +214,7 @@ void TTEAVBOutput::requestPacket()
         emit(avbQueueLengthSignal, avbQueue.length());
         send(msg, gateBaseId("out"));
         SimTime duration = outChannel->calculateDuration(msg);
+        duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / outChannel->getNominalDatarate();
         avbBuffer->sendSlope(duration);
         return;
     }

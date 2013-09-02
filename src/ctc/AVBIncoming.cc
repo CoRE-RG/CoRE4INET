@@ -139,11 +139,11 @@ void AVBIncoming::handleMessage(cMessage* msg)
 
 int AVBIncoming::calcPortUtilisation(int port)
 {
-    TTEAVBOutput *tteavbOutput = (TTEAVBOutput*) getParentModule()->getSubmodule("phy",port)->getSubmodule("tteavbOutput");
+    TTEAVBOutput *shaper = (TTEAVBOutput*) getParentModule()->getSubmodule("phy",port)->getSubmodule("shaper");
     cGate *physOutGate = getParentModule()->getSubmodule("phy", port)->getSubmodule("mac")->gate("phys$o");
     cChannel *avbChannel = physOutGate->findTransmissionChannel();
     PortBandwith[port] = (avbChannel->getNominalDatarate() / 1000000);
-    return tteavbOutput->par("TTEBandwith").longValue();
+    return shaper->par("TTEBandwith").longValue();
 }
 
 int AVBIncoming::calcBandwith(int FrameSize, int IntervalFrames)

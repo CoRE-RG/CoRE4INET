@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 
 #include <EtherFrame_m.h>
+#include <SRPFrame_m.h>
 #include <ModuleAccess.h>
 
 #include <AVBIncoming.h>
@@ -76,6 +77,19 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         {
             cSimpleModule::sendDirect(frame, cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
         }else{
+            std::string msgClass = frame->getEncapsulatedPacket()->getClassName();
+            std::string msgName = frame->getEncapsulatedPacket()->getName();
+            if(msgClass.compare("TTEthernetModel::SRPFrame") == 0)
+            {
+                if(msgName.compare("Talker Advertise"))
+                {
+                    frame->setDest(*(new MACAddress("000000000000")));
+
+                }
+                SRPFrame *srpFrame = ((SRPFrame*)frame->getEncapsulatedPacket());
+                srpFrame->setPortIndex(cModule::getParentModule()->getIndex());
+            }
+
             IC::handleMessage(msg);
         }
     }

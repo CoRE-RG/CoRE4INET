@@ -139,7 +139,6 @@ void AVBClassAShaper<TC>::initialize()
 template <class TC>
 void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
 {
-    //Frames arrived on in are rate-constrained frames
     if(msg->arrivedOn("AVBin"))
     {
         if(TC::getNumPendingRequests() && avbBuffer->getCredit() >= 0)
@@ -195,12 +194,14 @@ cMessage* AVBClassAShaper<TC>::pop()
 {
     Enter_Method("pop()");
     //AVBFrames
-    avbBuffer->refresh();//TODO refresh required?
+    if(avbBuffer->initialized()) avbBuffer->refresh(); //TODO refresh required?
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
         cMessage *msg = (cMessage*) avbQueue.pop();
         cComponent::emit(avbQueueLengthSignal, avbQueue.length());
-
+        SimTime duration = TC::outChannel->calculateDuration(msg);
+        duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
+        avbBuffer->sendSlope(duration);
         return msg;
     }
     else if(avbBuffer->getCredit() <= 0){
