@@ -31,6 +31,9 @@ simple TrafficSourceAppBase extends TTEApplicationBase
     parameters:
         @display("i=block/source");
         
+        // Trafficsource enabled or disabled
+        bool enabled = default(true);
+        
         //Size of the payload of the message (size of encapsulated cPacket) that is being generated
         int payload @unit(Byte) = default(46Byte);
         

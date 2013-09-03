@@ -25,11 +25,13 @@ void RCTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
 
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
-    SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer(par("interval").doubleValue()/tteScheduler->par("tick").doubleValue());
-    event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
+    if(par("enabled").boolValue()){
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
+        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+        event->setTimer(par("interval").doubleValue()/tteScheduler->par("tick").doubleValue());
+        event->setDestinationGate(gate("schedulerIn"));
+        tteScheduler->registerEvent(event);
+    }
 }
 
 void RCTrafficSourceApp::handleMessage(cMessage *msg){
