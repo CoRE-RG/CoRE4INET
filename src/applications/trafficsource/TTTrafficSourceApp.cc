@@ -28,11 +28,13 @@ void TTTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
 
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
-    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-    event->setAction_time(par("action_time").doubleValue()/tteScheduler->par("tick").doubleValue());
-    event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
+    if(par("enabled").boolValue()){
+        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
+        SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
+        event->setAction_time(par("action_time").doubleValue()/tteScheduler->par("tick").doubleValue());
+        event->setDestinationGate(gate("schedulerIn"));
+        tteScheduler->registerEvent(event);
+    }
 }
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg){

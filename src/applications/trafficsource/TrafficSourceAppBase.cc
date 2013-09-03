@@ -25,7 +25,9 @@ Define_Module( TrafficSourceAppBase);
 
 void TrafficSourceAppBase::initialize()
 {
-    scheduleAt(simTime(), new cMessage("ACTIVATOR!"));
+    if(par("enabled").boolValue()){
+        scheduleAt(simTime(), new cMessage("ACTIVATOR!"));
+    }
 }
 
 void TrafficSourceAppBase::sendMessage(){
