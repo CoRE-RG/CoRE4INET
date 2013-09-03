@@ -172,7 +172,7 @@ void AVBBuffer::idleSlope(SimTime duration)
         AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
         credit += ceil( (AVBReservation * 1024.00 * 1024.00) * duration.dbl() );
         emit(creditSignal, credit);
-        if(credit > 0 && msgCnt == 0) resetCredit();
+        if(credit > 0 && msgCnt == 0 && !inTransmission) resetCredit();
     }
 }
 

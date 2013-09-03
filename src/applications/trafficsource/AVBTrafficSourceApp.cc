@@ -152,7 +152,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     double interval = (125.00 / intervalFrames) / 1000000.00;
     TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer(interval/scheduler->par("tick").doubleValue());
+    event->setTimer(ceil(interval/scheduler->par("tick").doubleValue()));
     event->setDestinationGate(gate("schedulerIn"));
     scheduler->registerEvent(event);
 }

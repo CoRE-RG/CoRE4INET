@@ -146,7 +146,7 @@ void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
             SimTime duration = TC::outChannel->calculateDuration(msg);
-            duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
+            //duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
             avbBuffer->sendSlope(duration);
         }
         else
@@ -200,7 +200,7 @@ cMessage* AVBClassAShaper<TC>::pop()
         cMessage *msg = (cMessage*) avbQueue.pop();
         cComponent::emit(avbQueueLengthSignal, avbQueue.length());
         SimTime duration = TC::outChannel->calculateDuration(msg);
-        duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
+        //duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
         avbBuffer->sendSlope(duration);
         return msg;
     }
