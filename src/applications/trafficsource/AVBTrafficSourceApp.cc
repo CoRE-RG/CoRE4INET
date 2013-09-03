@@ -89,7 +89,6 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
             sendDirect(outFrame, srpOutBuffer->gate("in"));
         }
-        delete msg;
     }
     else if(msg->arrivedOn("SRPin"))
     {
@@ -121,16 +120,11 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                     outFrame->setByteLength(8);
 
                     sendDirect(outFrame, srpOutBuffer->gate("in"));
-                    delete msg;
                 }
-
             }
         }
-        else
-        {
-            delete msg;
-        }
     }
+    delete msg;
 }
 
 void AVBTrafficSourceApp::sendAVBFrame()

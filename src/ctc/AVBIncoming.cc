@@ -84,8 +84,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
             StreamBandwith[inFrame->getStreamID()] = calcBandwith(inFrame->getMaxFrameSize(), inFrame->getMaxIntervalFrames());
             delete msg;
         }
-
-        if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
+        else if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
         {
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
             int portIndex = inFrame->getPortIndex();
@@ -123,12 +122,14 @@ void AVBIncoming::handleMessage(cMessage* msg)
                 send(inFrame, "SRPout");
             }
         }
-
-        if(srpType.compare("Listener Failed") == 0)
+        else if(srpType.compare("Listener Failed") == 0)
         {
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
 
             send(inFrame, "SRPout");
+        }
+        else{
+            delete msg;
         }
     }
     else
