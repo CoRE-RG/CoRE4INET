@@ -1,4 +1,4 @@
-Demonstrates a small TTEthernet Network. Traffic generators send Ethernet frames directly.
+Demonstrates a small TTEthernet with AVB Network. Traffic generators send Ethernet frames directly.
 
 - The small network contains three hosts (node1, node2, node3) and a switch, which 
   connects these hosts.
@@ -7,8 +7,7 @@ Demonstrates a small TTEthernet Network. Traffic generators send Ethernet frames
 - Via virtual link vl100 node1 sends time triggered (TT) messages to node2 and node3.
   Double buffers will be used.
 
-- Via virtual link vl101 node2 sends rate constrained (RC) messages to node3.
-  Queued buffers will be used.
+- The nodes 1 and 2 are AVB Talkers. node3 is a AVB Listener and tries to reserve both Streams.
   
   - Via virtual link vl102 node1 sends time triggered (TT) messages to node2.
   Double buffers will be used.
