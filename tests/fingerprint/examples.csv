@@ -6,4 +6,5 @@
 /examples/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0,                1s,              da3e-3e7b
 /examples/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0,                1s,              b23c-ebb5
 /examples/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0,                1s,              e040-f0be
-/examples/small_network_avb/,                              -f omnetpp.ini -c General -r 0,                1s,              2731-2e48
+/examples/small_network_avb/,                              -f omnetpp.ini -c General -r 0,                1s,              64a3-33a8
+/examples/small_network_avb/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,      1s,              02d9-c54a
