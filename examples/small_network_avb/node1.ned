@@ -19,9 +19,8 @@ import ttethernet.nodes.ethernet.TTEAVBEtherHost;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
 
-
 //
-// unit1: configuration in unit1.ini.
+// node1: configuration in node1.ini.
 //
 // - Sends time-triggered messages at 1ms with VL-ID 100
 //
@@ -38,16 +37,6 @@ module Node1 extends TTEAVBEtherHost
             parameters:
                 @display("p=440,100");
         }
-        vl_102_ctc: TTIncoming {
-            parameters:
-                @display("p=350,160");
-
-        }
-        vl_102: TTDoubleBuffer {
-            parameters:
-                @display("p=440,160");
-        }
     connections:
         vl_100_ctc.out --> vl_100.in;
-        vl_102_ctc.out --> vl_102.in;
 }

@@ -15,8 +15,6 @@
 
 package ttethernet.examples.small_network_avb;
 
-import ttethernet.nodes.ethernet.TTEEtherHost;
-
 //
 // Small sample network with three hosts and one switch that shows how to 
 // configure the TTEthernet Model. Configuration in omnetpp.ini

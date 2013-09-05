@@ -8,9 +8,6 @@ Demonstrates a small TTEthernet with AVB Network. Traffic generators send Ethern
   Double buffers will be used.
 
 - The nodes 1 and 2 are AVB Talkers. node3 is a AVB Listener and tries to reserve both Streams.
-  
-  - Via virtual link vl102 node1 sends time triggered (TT) messages to node2.
-  Double buffers will be used.
 
 - Cross traffic may be send via the corresponding functionality of inet framework.
   For more details take a look at unit*.ini. Use the configuration With_Crosstraffic.

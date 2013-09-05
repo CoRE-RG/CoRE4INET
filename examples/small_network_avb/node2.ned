@@ -18,14 +18,11 @@ package ttethernet.examples.small_network_avb;
 import ttethernet.nodes.ethernet.TTEAVBEtherHost;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
-import ttethernet.ctc.RCIncoming;
-import ttethernet.buffer.RCQueueBuffer;
 
 //
-// unit2: configuration in unit2.ini.
+// node2: configuration in node2.ini.
 //
 // - Receives time-triggered messages with VL-ID 100
-// - Sends rate-constrained messages with VL-ID 101
 //
 module Node2 extends TTEAVBEtherHost
 {
@@ -40,16 +37,6 @@ module Node2 extends TTEAVBEtherHost
             parameters:
                 @display("p=440,100");
         }
-        vl_102_ctc: TTIncoming {
-            parameters:
-                @display("p=350,220");
-
-        }
-        vl_102: TTDoubleBuffer {
-            parameters:
-                @display("p=440,220");
-        }
     connections:
         vl_100_ctc.out --> vl_100.in;
-        vl_102_ctc.out --> vl_102.in;
 }

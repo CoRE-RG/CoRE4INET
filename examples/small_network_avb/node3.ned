@@ -18,14 +18,11 @@ package ttethernet.examples.small_network_avb;
 import ttethernet.nodes.ethernet.TTEAVBEtherHost;
 import ttethernet.ctc.TTIncoming;
 import ttethernet.buffer.TTDoubleBuffer;
-import ttethernet.ctc.RCIncoming;
-import ttethernet.buffer.RCQueueBuffer;
-
 
 //
-// unit3: configuration in unit3.ini.
+// node3: configuration in node3.ini.
 //
-// - Receives time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
+// - Receives time-triggered messages with VL-ID 100
 //
 module Node3 extends TTEAVBEtherHost
 {
