@@ -21,6 +21,13 @@
 #include "TTEScheduler.h"
 #include "Buffer.h"
 
+#define AVB_MINPAYLOADSIZE 46
+#define AVB_MINPACKETSIZE 88
+#define AVB_OVERHEADSIZE 42
+#define AVB_SRP_ADVERTISESIZE 25
+#define AVB_SRP_READYSIZE 8
+#define AVB_CLASSMEASUREMENTINTERVAL_US 125.00
+
 namespace TTEthernetModel {
 
 Define_Module(AVBTrafficSourceApp);
@@ -34,13 +41,13 @@ void AVBTrafficSourceApp::initialize()
     intervalFrames = par("intervalFrames").longValue();
     payload = par("payload").longValue();
 
-    if(payload <= 46)
+    if(payload <= AVB_MINPACKETSIZE)
     {
-        frameSize = 88;
+        frameSize = AVB_MINPACKETSIZE;
     }
     else
     {
-        frameSize = payload + 42;
+        frameSize = payload + AVB_OVERHEADSIZE;
     }
 
     isStreaming = false;
@@ -85,7 +92,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             outFrame->setStreamID(streamID);
             outFrame->setMaxFrameSize(frameSize);
             outFrame->setMaxIntervalFrames(intervalFrames);
-            outFrame->setByteLength(25);
+            outFrame->setByteLength(AVB_SRP_ADVERTISESIZE);
 
             sendDirect(outFrame, srpOutBuffer->gate("in"));
         }
@@ -117,7 +124,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
                 {
                     SRPFrame *outFrame = new SRPFrame("Listener Ready", IEEE802CTRL_DATA);
                     outFrame->setStreamID(inFrame->getStreamID());
-                    outFrame->setByteLength(8);
+                    outFrame->setByteLength(AVB_SRP_READYSIZE);
 
                     sendDirect(outFrame, srpOutBuffer->gate("in"));
                 }
@@ -139,11 +146,10 @@ void AVBTrafficSourceApp::sendAVBFrame()
     if(outFrame->getByteLength()<MIN_ETHERNET_FRAME_BYTES){
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
-    //outFrame->setByteLength(frameSize);
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
     //class measurement interval = 125us
-    double interval = (125.00 / intervalFrames) / 1000000.00;
+    double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
     event->setTimer(ceil(interval/scheduler->par("tick").doubleValue()));

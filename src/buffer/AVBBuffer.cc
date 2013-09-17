@@ -201,7 +201,7 @@ void AVBBuffer::sendSlope(SimTime duration)
         if(credit < 0)
         {
             AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
-            Wduration = duration.dbl();//((double)-credit)/(AVBReservation * 1024.00 * 1024.00) +
+            Wduration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
             event->setTimer(ceil(Wduration / scheduler->par("tick").doubleValue()));
             event->setDestinationGate(gate("schedulerIn"));
@@ -248,8 +248,6 @@ void AVBBuffer::refresh()
 
 int AVBBuffer::getCredit()
 {
-   //Enter_Method("getCredit()");
-
    return credit;
 }
 

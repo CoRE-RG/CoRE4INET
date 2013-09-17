@@ -16,8 +16,14 @@
 package ttethernet.buffer;
 
 //
-// TODO auto-generated type
+// Represents a queue buffer for time-triggered traffic. Messages are sent using the Credit Based Shaper Algorithm.
 //
+// The buffer stores infinit messages in a fifo queue.
+// The buffer removes and sends the first message in the queue.
+//
+// @see AVBBuffer, Buffer,
+//
+// @author Philipp Meyer
 simple AVBQueueBuffer extends AVBBuffer
 {
     parameters:
@@ -27,5 +33,6 @@ simple AVBQueueBuffer extends AVBBuffer
         //Statistic of the queue length of the buffer
         @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
         
+        //Size of the buffer negative means infinite
         int size = default(-1);
 }

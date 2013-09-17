@@ -24,6 +24,10 @@ using namespace std;
 
 namespace TTEthernetModel {
 
+/**
+ * @brief Class for the critical traffic conformance check of
+ * audio-video bridging traffic.
+ */
 class AVBIncoming : public cSimpleModule
 {
     protected:
@@ -41,16 +45,24 @@ class AVBIncoming : public cSimpleModule
             map<int, int> PortBandwith;
 
             /**
-             * @brief Initialization of the module
+             * @brief Initialization of the module.
              */
             virtual void initialize();
+
             /**
-             * @brief Forwards messages arriving on in-gate to out-gate
+             * @brief Forwards messages arriving on in-gate to out-gate.
              *
-             * @param msg the incoming message
+             * @param msg the incoming message.
              */
             virtual void handleMessage(cMessage *msg);
 
+            /**
+             * @brief initializes the port bandwith and gets the TT bandwith.
+             *
+             * @param port number.
+             *
+             * @return returns the TT bandwith on the port in Mbit/s.
+             */
             int calcPortUtilisation(int port);
 
 
@@ -60,10 +72,46 @@ class AVBIncoming : public cSimpleModule
              */
             AVBIncoming();
             bool talker;
+
+            /**
+             * @brief calculates the bandwith.
+             *
+             * @param Size of the frame.
+             * @param Sending interval of the frame.
+             *
+             * @return returns bandwith in Mbit/s.
+             */
             int calcBandwith(int FrameSize, int IntervalFrames);
+
+            /**
+             * @brief get AVB port reservation.
+             *
+             * @param port number.
+             *
+             * @return returns the AVB bandwith on one port in Mbit/s.
+             */
             int getAVBPortReservation(int port);
+
+            /**
+             * @brief set the AVB port reservation.
+             *
+             * @param port number.
+             * @param reservation bandwith in Mbit/s.
+             */
             void setAVBPortReservation(int port, int reservation);
+
+            /**
+             * @brief get port bandwith.
+             *
+             * @return returns the bandwith of the physical port in Mbit/s.
+             */
             int getPortBandwith(int port);
+
+            /**
+             * @brief get forwarding policy.
+             *
+             * @return returns true if AVB forwarding is active.
+             */
             bool getForwarding();
 };
 

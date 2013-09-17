@@ -16,9 +16,16 @@
 package ttethernet.buffer;
 
 //
-// TODO auto-generated type
+// Represents a double buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper Algorithm.
 //
+// The buffer stores only one message at a time that is overwritten on each insert.
+// The buffer sends a copy of the stored frame after each bag.
+//
+// @see AVBBuffer, Buffer,
+//
+// @author Philipp Meyer
 simple AVBDoubleBuffer extends AVBBuffer
 {
+    //AVBDoubleBuffer is implemented by the AVBDoubleBuffer C++ Class
     @class(AVBDoubleBuffer);
 }

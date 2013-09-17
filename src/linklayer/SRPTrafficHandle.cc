@@ -54,7 +54,6 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
                 etherctrl->setSsap(localSAP);
                 etherctrl->setDsap(remoteSAP);
-                //etherctrl->setSrc(srcMACAddress);
                 etherctrl->setDest(destMACAddressBroadcast);
                 inFrame->setControlInfo(etherctrl);
                 send(inFrame, "lowerLayerOut");
@@ -77,7 +76,6 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 inFrame->removeControlInfo();
                 etherctrl->setSsap(localSAP);
                 etherctrl->setDsap(remoteSAP);
-                //etherctrl->setSrc(srcMACAddress);
                 inFrame->setControlInfo(etherctrl);
 
                 send(inFrame, "lowerLayerOut");

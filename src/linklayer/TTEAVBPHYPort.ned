@@ -20,9 +20,13 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 import ttethernet.linklayer.shaper.TT_AVBClassA_PCF_RC_BE_Shaper;
 import ttethernet.linklayer.inControl.CT_AVB_BE_InControl;
+
+// The TTEAVBPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
+// It represents a physical port for a real-time Ethernet device (Switch or Host)
 //
-// TODO auto-generated type
+// @see IPort, EtherMACFullDuplex, TTEInput, TT_AVBClassA_PCF_RC_BE_Shaper, TT_PCF_RC_BE_Shaper, PCF_RC_BE_Shaper, BE_Shaper
 //
+// @author Philipp Meyer
 module TTEAVBPHYPort like IPort
 {
     parameters:
@@ -42,10 +46,9 @@ module TTEAVBPHYPort like IPort
         input RCin @directIn @labels(RCFrame);
         //Input from the upper layer for rate-constrained traffic
         input PCFin @directIn @labels(PCFrame);
-
+		//Input from the upper layer for audio-video bridging traffic
         input AVBin @directIn @labels(AVBFrame);
 
-    //input SRP?
     submodules:
         shaper: TT_AVBClassA_PCF_RC_BE_Shaper {
             @diplay("p=48,45");
