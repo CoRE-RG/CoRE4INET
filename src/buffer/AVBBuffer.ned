@@ -16,15 +16,22 @@
 package ttethernet.buffer;
 
 //
-// TODO auto-generated type
+// Represents an abstract Buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper Algorithm.
 //
+// @warning Do not instantiate the module. Use AVBDoubleBuffer or AVBQueueBuffer instead!
+//
+// @see AVBDoubleBuffer, AVBQueueBuffer, Buffer, SchedulerActionTimeEvent, Scheduler
+//
+// @author Philipp Meyer
 simple AVBBuffer extends Buffer
 {
     parameters:
         @class(AVBBuffer);
         @display("i=,blue");
         
+        //Statistic of the credit of the CBS algorithm
         @statistic[credit](title="Credit"; record=vector);
     gates:
+        //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;
 }

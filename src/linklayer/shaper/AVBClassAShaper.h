@@ -194,13 +194,12 @@ cMessage* AVBClassAShaper<TC>::pop()
 {
     Enter_Method("pop()");
     //AVBFrames
-    if(avbBuffer->initialized()) avbBuffer->refresh(); //TODO refresh required?
+    if(avbBuffer->initialized()) avbBuffer->refresh();
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
         cMessage *msg = (cMessage*) avbQueue.pop();
         cComponent::emit(avbQueueLengthSignal, avbQueue.length());
         SimTime duration = TC::outChannel->calculateDuration(msg);
-        //duration += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
         avbBuffer->sendSlope(duration);
         return msg;
     }

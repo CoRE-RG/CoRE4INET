@@ -22,6 +22,14 @@
 
 namespace TTEthernetModel {
 
+/**
+ * @brief Simple Test-Application.
+ *
+ *
+ * @sa TTEApplicationBase
+ * @ingroup Applications
+ */
+
 class AVBTrafficSourceApp : public TrafficSourceAppBase
 {
     private:

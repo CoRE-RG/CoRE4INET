@@ -29,6 +29,13 @@ import inet.linklayer.ethernet.EtherLLC;
 import inet.applications.ethernet.EtherAppSrv;
 import inet.applications.ethernet.EtherAppCli;
 
+//
+// Module for a TTEAVBEthernet Host.
+// Contains handler for TT, AVB, RC and BE Messages.
+//
+// @see EtherLLC, TTEAVBPHYPort, Sync, Scheduler
+//
+// @author Philipp Meyer
 module TTEAVBEtherHost
 {
     parameters:
@@ -84,7 +91,7 @@ module TTEAVBEtherHost
         sync: <default("DummySync")> like ISync {
             @display("p=186,169");
         }
-        // Scheudler for the device
+        // Scheduler for the device
         scheduler: TTEScheduler {
             @display("p=274,169");
         }

@@ -15,7 +15,7 @@ namespace TTEthernetModel;
 // @author Philipp Meyer 
 packet AVBFrame extends CTFrame
 {    
-    //
+    // ID of the AVB Stream
     //
     // 64 Bit Field
     unsigned long streamID;

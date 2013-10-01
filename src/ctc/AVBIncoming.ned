@@ -16,20 +16,29 @@
 package ttethernet.ctc;
 
 //
-// TODO auto-generated type
+// Module for the conformance checks of incoming audio-video bridging traffic.
 //
+// @author Philipp Meyer
 simple AVBIncoming
 {
     parameters:
+        //AVBIncoming is implemented by the AVBIncoming C++ Class
     	@class(AVBIncoming);
     	@display("i=block/arrival,blue");
+    	
+    	//number of out ports the parent module has.
     	int NrOfPorts = default(0);
     	
     gates:
         //input for SRP Frames
         input SRPin @labels(SRPFrame);
+        
+        //output for SRP Frames
         output SRPout @labes(SRPFrame);
         
+        //input for AVB Frames
         input in @directIn @labels(AVBFrame);
+        
+        //outputs for AVB Frames
         output AVBout[NrOfPorts] @labels(AVBFrame);
 }

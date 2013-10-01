@@ -12,6 +12,13 @@ import ttethernet.linklayer.SRPTrafficHandle;
 
 import inet.linklayer.IMACRelayUnit;
 
+//
+// Module for a TTEAVBEthernet Switch.
+// Contains handler for TT, AVB, RC and BE Messages.
+//
+// @see IMacRelayUnit, TTEAVBPHYPort, Sync, Scheduler
+//
+// @author Philipp Meyer
 module TTEAVBEtherSwitch
 {
     //Parameter:

@@ -16,13 +16,19 @@
 package ttethernet.linklayer;
 
 //
-// TODO auto-generated type
+// Module for identifing and forwarding SRP and BE frames.  
 //
+// @see BGTrafficHandle
+//
+// @author Philipp Meyer
 simple SRPTrafficHandle extends BGTrafficHandle
 {
     @display("i=,blue");
     @class(SRPTrafficHandle);
     gates:
+        //input for SRP frames
         input SRPin @labels(SRPFrame);
+        
+        //output for SRP frames
         output SRPout @labels(SRPFrame);
 }

@@ -13,19 +13,30 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.buffer;
+package ttethernet.examples.small_network_avb;
+
+import ttethernet.nodes.ethernet.TTEAVBEtherHost;
+import ttethernet.ctc.TTIncoming;
+import ttethernet.buffer.TTDoubleBuffer;
 
 //
-// Represents a double buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper Algorithm.
+// node1: configuration in node1.ini.
 //
-// The buffer stores only one message at a time that is overwritten on each insert.
-// The buffer sends a copy of the stored frame after each bag.
+// - Sends time-triggered messages at 1ms with VL-ID 100
 //
-// @see AVBBuffer, Buffer,
-//
-// @author Philipp Meyer
-simple AVBDoubleBuffer extends AVBBuffer
+module Node1 extends TTEAVBEtherHost
 {
-    //AVBDoubleBuffer is implemented by the AVBDoubleBuffer C++ Class
-    @class(AVBDoubleBuffer);
+    @display("bgb=479,314");
+    submodules:
+        vl_100_ctc: TTIncoming {
+            parameters:
+                @display("p=350,100");
+
+        }
+        vl_100: TTDoubleBuffer {
+            parameters:
+                @display("p=440,100");
+        }
+    connections:
+        vl_100_ctc.out --> vl_100.in;
 }

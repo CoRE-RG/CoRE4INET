@@ -150,10 +150,10 @@ int AVBIncoming::calcPortUtilisation(int port)
 int AVBIncoming::calcBandwith(int FrameSize, int IntervalFrames)
 {
     //interval = 125us
-    double sFrameSize = ((double)IntervalFrames) * ((double)FrameSize); //Byte
-    double bitFrameSize = sFrameSize * 8; //Bit
-    double BitspSecond = bitFrameSize * 8 * 1000; //pro s
-    return ceil((BitspSecond / 1024.00) / 1024.00 ); //Mbit/s
+    double sFrameSize = ((double)IntervalFrames) * ((double)FrameSize); // in byte
+    double bitFrameSize = sFrameSize * 8; //in bit
+    double BitspSecond = bitFrameSize * 8 * 1000; // in per second
+    return ceil((BitspSecond / 1024.00) / 1024.00 ); //in Mbit/s
 }
 
 int AVBIncoming::getAVBPortReservation(int port)

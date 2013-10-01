@@ -21,6 +21,12 @@
 
 namespace TTEthernetModel {
 
+/**
+ * @brief Implements a standard ETHERAPP that sends and receives
+ * best-effort Ethernet frames and identifies SRP frames for seperate queueing.
+ *
+ * @sa BGTrafficHandle
+ */
 class SRPTrafficHandle : public BGTrafficHandle
 {
     protected:
@@ -29,7 +35,20 @@ class SRPTrafficHandle : public BGTrafficHandle
         MACAddress destMACAddressUnicast;
         MACAddress destMACAddressBroadcast;
         MACAddress srcMACAddress;
+
+        /**
+         * @brief In initialization the handle sends a register_DSAP message
+         * to register itself at the LLC
+         */
         virtual void initialize();
+
+        /**
+         * @brief Messages are transferred between lower and upper layer.
+         *
+         * For outgoing messages Ssap and Dsap are set.
+         *
+         * @param msg incoming messages
+         */
         virtual void handleMessage(cMessage *msg);
 };
 
