@@ -72,8 +72,8 @@ module TTEEtherHost
         sync: <default("DummySync")> like ISync {
             @display("p=141,169");
         }
-        // Scheudler for the device
-        scheduler: <default("TTEScheduler")> like ITTEScheduler {
+        // Scheduler for the device
+        scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
         app[numApps]: <default("TTEAPITestApplication")> like ITTEApplication {

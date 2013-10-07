@@ -56,8 +56,8 @@ module TTEEtherSwitch
             parameters:
                 @display("p=999,999");
         }
-        // Scheudler for the device
-        scheduler: <default("TTEScheduler")> like ITTEScheduler {
+        // Scheduler for the device
+        scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
                 @display("p=240,50");
         }
