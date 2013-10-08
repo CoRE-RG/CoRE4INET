@@ -62,14 +62,14 @@ void Timer::handleMessage(cMessage *msg)
 
 void Timer::recalculate(){
     if(simTime()!=lastRecalculation){
-        ticks+=floor((simTime()-lastRecalculation)/ SimTime(oscillator->par("current_tick").doubleValue()));
+        ticks+=floor((simTime()-lastRecalculation) / oscillator->getTick());
         lastRecalculation=simTime();
     }
 }
 
 void Timer::reschedule(){
     recalculate();
-    simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->par("current_tick").doubleValue();
+    simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
     cancelEvent(selfMessage);
     if(registredEvents.size()>0){
         scheduleAt(simTime()+next_action, selfMessage);

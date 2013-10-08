@@ -29,4 +29,9 @@ void SimpleOscillator::handleMessage(cMessage *msg)
     // TODO - Generated method body
 }
 
+
+simtime_t SimpleOscillator::getTick(){
+    return SimTime(par("current_tick").doubleValue());
+}
+
 } //namespace

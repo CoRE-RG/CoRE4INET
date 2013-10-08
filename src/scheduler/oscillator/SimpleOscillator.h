@@ -30,6 +30,8 @@ class SimpleOscillator : public Oscillator
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+  public:
+    virtual simtime_t getTick();
 };
 
 } //namespace

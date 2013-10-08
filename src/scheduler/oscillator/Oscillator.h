@@ -28,6 +28,8 @@ class Oscillator : public cSimpleModule
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+  public:
+    virtual simtime_t getTick();
 };
 
 } //namespace
