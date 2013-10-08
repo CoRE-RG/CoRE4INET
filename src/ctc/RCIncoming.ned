@@ -1,5 +1,6 @@
 package ttethernet.ctc;
 
+import ttethernet.utilities.classes.ITimed;
 //
 // Module for the conformance checks of incoming rate-constrained traffic.
 //
@@ -10,7 +11,7 @@ package ttethernet.ctc;
 // @see Incoming,
 //
 // @author Till Steinbach
-simple RCIncoming extends Incoming
+simple RCIncoming extends Incoming like ITimed
 {
     parameters:
         @display("i=,orange");
@@ -20,4 +21,7 @@ simple RCIncoming extends Incoming
         int bag @unit(tick) = default(0tick);
         //Not used
         int jitter @unit(tick) = default(0tick);
+        
+        string oscillator = default("oscillator");
+        string timer = default("timer");
 }

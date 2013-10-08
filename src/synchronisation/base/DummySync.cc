@@ -18,6 +18,8 @@
 #include "SchedulerMessageEvents_m.h"
 #include "SyncNotification_m.h"
 
+#include <ModuleAccess.h>
+
 using namespace TTEthernetModel;
 
 Define_Module( DummySync);
@@ -31,11 +33,12 @@ void DummySync::initialize(int stage)
 {
     if(stage==1)
     {
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
+        Scheduled::initialize();
+
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
         event->setAction_time(par("action_time").longValue());
         event->setDestinationGate(gate("schedulerIn"));
-        tteScheduler->registerEvent(event);
+        period->registerEvent(event);
     }
     if(stage==2)
     {
@@ -46,21 +49,21 @@ void DummySync::initialize(int stage)
 
 void DummySync::handleMessage(cMessage *msg)
 {
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     if(msg->arrivedOn("schedulerIn")){
-        if(tteScheduler->getCycles()>1){
-            uint32_t cycleTicks = tteScheduler->par("cycle_ticks").longValue();
-            simtime_t tick = tteScheduler->par("tick").doubleValue();
+        if(period->getCycles()>1){
+            uint32_t cycleTicks = period->par("cycle_ticks").longValue();
+            simtime_t tick = oscillator->par("tick").doubleValue();
 
             int64_t modticks = ((int64_t)(simTime()/tick)-par("action_time").longValue())%cycleTicks;
             if(modticks>((int64_t)cycleTicks/2))
                 modticks=modticks-cycleTicks;
             modticks+=uniform(-par("precission").doubleValue()/2, par("precission").doubleValue()/2)/tick;
 
-            tteScheduler->clockCorrection(-modticks);
+            timer->clockCorrection(-modticks);
         }
 
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
-        tteScheduler->registerEvent(event);
+        event->setNext_cycle(true);
+        period->registerEvent(event);
     }
 }

@@ -1,5 +1,6 @@
 package ttethernet.buffer;
 
+import ttethernet.utilities.classes.ITimed;
 //
 // Represents an abstract Buffer for rate-constrained traffic. Messages are sent using the configured
 // bandwidth allocation gap.
@@ -16,7 +17,7 @@ package ttethernet.buffer;
 // @see RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
 //
 // @author Till Steinbach
-simple RCBuffer extends CTBuffer
+simple RCBuffer extends CTBuffer like ITimed
 {
     parameters:
         //RCBuffer is implemented by the RCBuffer C++ Class
@@ -28,6 +29,9 @@ simple RCBuffer extends CTBuffer
         int bag @unit(tick) = default(0tick);
         // Not used
         int jitter @unit(tick) = default(0tick);
+        
+        string oscillator = default("oscillator");
+        string timer = default("timer");
     gates:
         //Input gate for the incoming SchedulerTimerEvent messages
         input schedulerIn @directIn;

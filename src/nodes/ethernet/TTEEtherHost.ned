@@ -4,6 +4,7 @@ import ttethernet.buffer.BGQueueBuffer;
 import ttethernet.linklayer.BGTrafficHandle;
 import ttethernet.scheduler.ITTEScheduler;
 import ttethernet.scheduler.TTEScheduler;
+import ttethernet.scheduler.Scheduler;
 import ttethernet.configuration.base.IConfigurationManager;
 import ttethernet.linklayer.TTEPHYPort;
 import ttethernet.synchronisation.base.ISync;

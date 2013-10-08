@@ -2,10 +2,10 @@
 #define __TTE4INET_TTSHAPER_H
 
 #include <ModuleAccess.h>
-#include <TTEScheduler.h>
 #include <TTBuffer.h>
 #include <TTBufferEmpty_m.h>
 #include <HelperFunctions.h>
+#include <Timed.h>
 
 namespace TTEthernetModel {
 
@@ -17,7 +17,7 @@ namespace TTEthernetModel {
  *
  */
 template <class TC>
-class TTShaper : public TC
+class TTShaper : public TC, public Timed
 {
     public:
         /**
@@ -180,6 +180,7 @@ template <class TC>
 void TTShaper<TC>::initialize()
 {
     TC::initialize();
+    Timed::initialize();
     ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
 }
 
@@ -410,30 +411,29 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
     {
         return true;
     }
-    TTEScheduler *scheduler = (TTEScheduler*) cModule::getParentModule()->getParentModule()->getSubmodule("scheduler");
     //SimTime sendTime = (message->getBitLength()+INTERFRAME_GAP_BITS)/txRate;
     SimTime sendTime = TC::outChannel->calculateDuration(message);
     //Don't know if that is right, but it works!
     sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
-    unsigned long sendTicks = ceil((sendTime / scheduler->par("tick")).dbl());
+    unsigned long sendTicks = ceil((sendTime / oscillator->par("tick")).dbl());
     unsigned long startTicks = ttBuffers[ttBuffersPos]->par("sendWindowStart").longValue();
     unsigned long endTicks = ttBuffers[ttBuffersPos]->par("sendWindowEnd").longValue();
 
     //Send Window Start is in next cycle
-    if (scheduler->getTicks() > startTicks)
+    if (ttBuffers[ttBuffersPos]->getPeriod()->getTicks() > startTicks)
     {
-        long cycleTicks = scheduler->par("cycle_ticks").longValue();
+        long cycleTicks = ttBuffers[ttBuffersPos]->getPeriod()->par("cycle_ticks").longValue();
         startTicks += cycleTicks;
         endTicks += cycleTicks;
     }
     //Send Window End is in next cycle
-    else if (scheduler->getTicks() > endTicks)
+    else if (ttBuffers[ttBuffersPos]->getPeriod()->getTicks() > endTicks)
     {
-        endTicks += scheduler->par("cycle_ticks").longValue();
+        endTicks += ttBuffers[ttBuffersPos]->getPeriod()->par("cycle_ticks").longValue();
     }
 
     //TODO: Perhaps more complex calculations needed?
-    if ((scheduler->getTicks() + sendTicks) >= startTicks)
+    if ((ttBuffers[ttBuffersPos]->getPeriod()->getTicks() + sendTicks) >= startTicks)
     {
         ev << "transmission not allowed!" << endl;
         return false;

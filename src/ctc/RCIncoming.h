@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include <CTIncoming.h>
+#include <Timed.h>
 
 namespace TTEthernetModel {
 
@@ -32,7 +33,7 @@ namespace TTEthernetModel {
  *
  * @author Till Steinbach
  */
-class RCIncoming : public CTIncoming
+class RCIncoming : public CTIncoming, public Timed
 {
     private:
         /**
@@ -45,6 +46,11 @@ class RCIncoming : public CTIncoming
          */
         uint64_t bag;
     protected:
+        /**
+         * @brief Initialization of the module
+         */
+        virtual void initialize();
+
         /**
          * @brief Forwards messages arriving on in-gate to out-gate checks
          * conformance with configured bag.

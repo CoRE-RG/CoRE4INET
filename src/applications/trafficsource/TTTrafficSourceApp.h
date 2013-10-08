@@ -19,6 +19,8 @@
 #include <omnetpp.h>
 #include "TrafficSourceAppBase.h"
 
+#include <Scheduled.h>
+
 namespace TTEthernetModel {
 
 /**
@@ -28,7 +30,7 @@ namespace TTEthernetModel {
  * @sa TTEApplicationBase
  * @ingroup Applications
  */
-class TTTrafficSourceApp : public TrafficSourceAppBase
+class TTTrafficSourceApp : public TrafficSourceAppBase, public Scheduled
 {
     private:
         unsigned int moduloCycle;

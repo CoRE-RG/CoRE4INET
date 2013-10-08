@@ -15,7 +15,8 @@
 
 #include "RCTrafficSourceApp.h"
 #include <CTFrame_m.h>
-#include "TTEScheduler.h"
+#include <Timer.h>
+#include <ModuleAccess.h>
 
 namespace TTEthernetModel {
 
@@ -26,11 +27,13 @@ void RCTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
 
     if(par("enabled").boolValue()){
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
+        Timer *timer = dynamic_cast<Timer*>(findModuleWhereverInNode("timer", getParentModule()));
+        ASSERT(timer);
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(par("interval").doubleValue()/tteScheduler->par("tick").doubleValue());
+        tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
+        event->setTimer(par("interval").doubleValue()/tick);
         event->setDestinationGate(gate("schedulerIn"));
-        tteScheduler->registerEvent(event);
+        timer->registerEvent(event);
     }
 }
 
@@ -39,10 +42,11 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg){
     if(msg->arrivedOn("schedulerIn")){
         sendMessage();
 
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
+        Timer *timer = dynamic_cast<Timer*>(msg->getSenderModule());
+        ASSERT(timer);
         SchedulerTimerEvent *event = (SchedulerTimerEvent *)msg;
-        event->setTimer(par("interval").doubleValue()/tteScheduler->par("tick").doubleValue());
-        tteScheduler->registerEvent(event);
+        event->setTimer(par("interval").doubleValue()/tick);
+        timer->registerEvent(event);
     }
     else{
         delete msg;

@@ -23,11 +23,17 @@ Define_Module(Period);
 void Period::initialize()
 {
     ASSERT(par("cycle_ticks").longValue()>par("offset_ticks").longValue());
+    timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
+    ASSERT(timer);
 }
 
 void Period::handleMessage(cMessage *msg)
 {
     // TODO - Generated method body
+}
+
+bool Period::registerEvent(SchedulerEvent *event){
+    return timer->registerEvent(event, this);
 }
 
 uint32_t Period::getTicks()
@@ -39,6 +45,10 @@ uint32_t Period::getTicks()
 uint64_t Period::getTotalTicks()
 {
     return timer->getTotalTicks();
+}
+
+uint32_t Period::getCycles(){
+    return timer->getTotalTicks()/par("cycle_ticks").longValue();
 }
 
 } //namespace

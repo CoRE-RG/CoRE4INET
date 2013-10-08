@@ -22,13 +22,28 @@ Define_Module(Timer);
 void Timer::initialize()
 {
     ticks=0;
+    oscillator = dynamic_cast<Oscillator*>(gate("oscillator_in")->getPathStartGate()->getOwnerModule());
+    ASSERT2(oscillator, "cannot find oscillator!");
+    selfMessage = new cMessage("Scheduler Message");
+}
+
+Timer::~Timer()
+{
+    cancelAndDelete(selfMessage);
+    for(std::map<uint64_t, std::list<SchedulerEvent*> >::iterator it = registredEvents.begin(); it!=registredEvents.end();++it){
+        for(std::list<SchedulerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+            cancelAndDelete(*it2);
+        }
+    }
 }
 
 void Timer::handleMessage(cMessage *msg)
 {
     if(msg->isSelfMessage()){
         recalculate();
+        EV << "now is:" << ticks << " size is:"<< registredEvents.size()<< std::endl;
         for(std::map<uint64_t, std::list<SchedulerEvent*> >::iterator it = registredEvents.begin(); it!=registredEvents.end();++it){
+            EV << "check:" << (*it).first << std::endl;
             if((*it).first <= ticks){
                 for(std::list<SchedulerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
                     sendDirect((*it2), (*it2)->getDestinationGate());
@@ -39,6 +54,7 @@ void Timer::handleMessage(cMessage *msg)
                 break;
             }
         }
+        EV << "changed size is:"<< registredEvents.size()<< std::endl;
     }
 }
 
@@ -53,11 +69,17 @@ void Timer::reschedule(){
     recalculate();
     simtime_t actiontime = nextAction() * oscillator->par("current_tick").doubleValue();
     cancelEvent(selfMessage);
-    scheduleAt(actiontime, selfMessage);
+    if(registredEvents.size()>0){
+        scheduleAt(actiontime, selfMessage);
+    }
 }
 
 uint32_t Timer::nextAction(){
     return registredEvents.begin()->first;
+}
+
+bool Timer::registerEvent(SchedulerTimerEvent *event){
+    return registerEvent(event, NULL);
 }
 
 bool Timer::registerEvent(SchedulerEvent *event, Period *period){
@@ -72,6 +94,7 @@ bool Timer::registerEvent(SchedulerEvent *event, Period *period){
     uint64_t actionpoint = 0;
     if (event->getKind() == ACTION_TIME_EVENT)
     {
+        ASSERT(period);
         SchedulerActionTimeEvent *actionTimeEvent = dynamic_cast<SchedulerActionTimeEvent*>(event);
         //Check whether event is in cycle
         if(actionTimeEvent->getAction_time() > (uint32_t)period->par("cycle_ticks").longValue()){
@@ -79,7 +102,7 @@ bool Timer::registerEvent(SchedulerEvent *event, Period *period){
             return false;
         }
         int32_t distance = actionTimeEvent->getAction_time()-period->getTicks();
-        if(distance<0){
+        if(distance<0 || actionTimeEvent->getNext_cycle()){
             actionpoint = getTotalTicks() + ((uint32_t)period->par("cycle_ticks").longValue() + distance);
         }
         else{
@@ -91,10 +114,21 @@ bool Timer::registerEvent(SchedulerEvent *event, Period *period){
         SchedulerTimerEvent *timerEvent = dynamic_cast<SchedulerTimerEvent*>(event);
         actionpoint = getTotalTicks() + timerEvent->getTimer();
     }
-    registredEvents[actionpoint].push_back(event);
-    //TODO: Overflow -> must regard ticks here!
-    if(actionpoint<nextAction()){
-        reschedule();
+    else{
+        return false;
+    }
+    //We do not have to schedule anything if the point is now!
+    if(actionpoint==getTotalTicks()){
+        sendDirect(event, event->getDestinationGate());
+    }
+    else{
+        ASSERT2(actionpoint>=getTotalTicks(), "Cannot schedule past Events");
+        uint64_t old_actionpoint = nextAction();
+        registredEvents[actionpoint].push_back(event);
+        //TODO: Overflow -> must regard ticks here!
+        if(!selfMessage->isScheduled() || actionpoint<old_actionpoint){
+            reschedule();
+        }
     }
     return true;
 }
@@ -103,6 +137,11 @@ uint64_t Timer::getTotalTicks()
 {
     recalculate();
     return ticks;
+}
+
+void Timer::clockCorrection(int32_t ticks){
+    this->ticks+ticks;
+    reschedule();
 }
 
 } //namespace

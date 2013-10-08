@@ -23,5 +23,6 @@ simple Timer
     parameters:
         @display("i=block/timer");
     gates:
-        input in[];
+        input period_in[];
+        input oscillator_in;
 }

@@ -13,16 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.scheduler.oscillator;
+package ttethernet.utilities.classes;
 
-
-moduleinterface IOscillator{
-	parameters:
-	    @display("i=block/mac");
-	    // Length of a tick
-        double tick @unit(s);
-        // Current length of a tick (with imprecission)
-        volatile double current_tick @unit(s);
-    gates:
-        output out;    
+//
+// TODO auto-generated module
+//
+moduleinterface ITimed
+{
 }

@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 #include "CTBuffer.h"
 #include <SchedulerMessageEvents_m.h>
+#include <Timed.h>
 
 namespace TTEthernetModel {
 
@@ -35,7 +36,7 @@ namespace TTEthernetModel {
  *
  * @ingroup Buffer
  */
-class RCBuffer : public virtual CTBuffer
+class RCBuffer : public virtual CTBuffer, public Timed
 {
     private:
         /**

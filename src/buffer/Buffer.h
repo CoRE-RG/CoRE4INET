@@ -44,7 +44,7 @@ class Callback;
  *
  * @ingroup Buffer
  */
-class Buffer : public cSimpleModule
+class Buffer : public virtual cSimpleModule
 {
     public:
         /**

@@ -47,6 +47,7 @@ void RCBuffer::initialize(int stage)
 {
     CTBuffer::initialize(stage);
     if(stage==0){
+        Timed::initialize();
         timerMessage->setDestinationGate(gate("schedulerIn"));
 
         //Update displaystring
@@ -127,8 +128,7 @@ void RCBuffer::resetBag()
     if (numReset == destinationGates.size())
     {
         //Reregister scheduler
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
-        tteScheduler->registerEvent(timerMessage);
+        timer->registerEvent(timerMessage);
     }
 }
 

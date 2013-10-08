@@ -17,6 +17,7 @@
 #define __TTETHERNETMODEL_PERIOD_H_
 
 #include <omnetpp.h>
+#include <SchedulerEvent.h>
 
 namespace TTEthernetModel {
 
@@ -34,6 +35,18 @@ class Period : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
   public:
     /**
+     * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
+     *
+     * @param event Pointer to the Event to be scheduled.
+     * The scheduler will send the event according to the event type
+     * @return returns true on success, else false
+     *
+     * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
+     * SchedulerTimerEvent
+     */
+    virtual bool registerEvent(SchedulerEvent *event);
+
+    /**
      * @brief Returns the current number of ticks
      *
      * @return Number of ticks since cycle start
@@ -45,6 +58,12 @@ class Period : public cSimpleModule
      * @return Number of ticks since simulation start
      */
     virtual uint64_t getTotalTicks();
+    /**
+     * @brief Returns the current number of cycles
+     *
+     * @return Number of cycles since simulation start
+     */
+    virtual uint32_t getCycles();
 };
 
 } //namespace

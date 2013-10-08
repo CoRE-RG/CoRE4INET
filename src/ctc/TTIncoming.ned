@@ -22,6 +22,8 @@ simple TTIncoming extends Incoming
         int receive_window_end @unit(tick);
         //permanence point in time in number of ticks (-1 means no permanence point, frame is relayed immediately)
         int permanence_pit @unit(tick);
+        //Period of Scheduler this ctc is assigned to
+        string period = default("");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

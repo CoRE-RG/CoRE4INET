@@ -21,15 +21,14 @@ import ttethernet.synchronisation.base.ISync;
 simple SM like ISync
 {
     parameters:
-       
+    	//SCState is implemented by the SCState C++ Class
+    	@class(SM);
+    	@display("i=block/timer");
+    	
+    //Period of Scheduler this sync module is assigned to
+    string period = default("");
       
-        //SCState is implemented by the SCState C++ Class
-    @class(SM);
-    @display("i=block/timer");
-    
-    
-   
-    
+      
     bool read=default(false);
     bool write=default(false);
     bool pseudo_sim=default(false);

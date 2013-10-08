@@ -18,7 +18,7 @@ namespace TTEthernetModel {
  *
  *
  */
-class BaseShaper : public cSimpleModule, public IPassiveQueue
+class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
 {
     public:
         /**

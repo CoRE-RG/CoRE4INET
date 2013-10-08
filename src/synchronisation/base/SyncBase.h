@@ -19,6 +19,8 @@
 #include <omnetpp.h>
 #include "SyncNotification_m.h"
 
+#include <Scheduled.h>
+
 namespace TTEthernetModel {
 
 /**
@@ -26,7 +28,7 @@ namespace TTEthernetModel {
  *
  *
  */
-class SyncBase : public cSimpleModule
+class SyncBase : public Scheduled
 {
     protected:
         void notify(SyncNotificationKind kind);

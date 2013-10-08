@@ -22,20 +22,25 @@ module Scheduler like ITTEScheduler
     parameters:
         @display("i=block/cogwheel;bgb=293,141");
         int numPeriods = default(1);
+        // Length of a tick
+        double tick @unit(s) = default(80ns);
     submodules:
         timer: Timer {
             @display("p=85,87");
             gates:
-                in[numPeriods];
+                period_in[numPeriods];
         }
         oscillator: <default("SimpleOscillator")> like IOscillator {
-            @display("p=87,25");
+            parameters:
+            	@display("p=87,25");
+            	tick=tick;
         }
-        periods[numPeriods]: Period {
-            @display("p=202,87");
+        period[numPeriods]: Period {
+            @display("p=202,87,col,70");
         }
     connections:
-        for i=0..sizeof(periods)-1 {
-            periods[i].out --> timer.in[i];
+        for i=0..sizeof(period)-1 {
+            period[i].out --> timer.period_in[i];
         }
+        oscillator.out --> timer.oscillator_in;
 }

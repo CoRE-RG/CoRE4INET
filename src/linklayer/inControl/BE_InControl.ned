@@ -1,7 +1,7 @@
 package ttethernet.linklayer.inControl;
 
 import inet.linklayer.IOutputQueue;
-
+import ttethernet.utilities.classes.Timed;
 //
 // Module for incoming traffic from MAC layer. The traffic is checked for
 // critical traffic ID and then forwarded either as best-effort traffic to
@@ -10,7 +10,7 @@ import inet.linklayer.IOutputQueue;
 // @see EtherLLC, IMacRelayUnit, IOutputQueue
 //
 // @author Till Steinbach
-simple BE_InControl like IInControl
+simple BE_InControl extends Timed like IInControl
 {
     parameters:
         @display("i=block/classifier");

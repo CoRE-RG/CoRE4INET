@@ -19,6 +19,8 @@
 #include <omnetpp.h>
 #include "SyncBase.h"
 
+#include <Period.h>
+
 namespace TTEthernetModel {
 
 /**
@@ -30,6 +32,7 @@ namespace TTEthernetModel {
  */
 class DummySync : public SyncBase
 {
+    private:
     protected:
         /**
          * @brief Initializes the dummy synchronization module.

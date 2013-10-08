@@ -15,13 +15,15 @@
 
 package ttethernet.applications.trafficsource;
 
+import ttethernet.utilities.classes.IScheduled;
+
 //
 // Traffic source application used for time-triggered traffic generators.
 //
 // @see RCTrafficSourceApp
 //
 // @author Till Steinbach
-simple TTTrafficSourceApp extends TrafficSourceAppBase
+simple TTTrafficSourceApp extends TrafficSourceAppBase like IScheduled
 {
     parameters:
         @class(TTTrafficSourceApp);
@@ -33,6 +35,11 @@ simple TTTrafficSourceApp extends TrafficSourceAppBase
         //Modulo cycles: 1 means message is being send in each cycle, 2 means in every second cycle,
         //and so on. 0 means never
         int modulo = default(1);
+        
+        //Period of Scheduler this app is assigned to
+        string period = default("period[0]");
+        string oscillator = default("oscillator");
+        string timer = default("timer");
 
        
 }

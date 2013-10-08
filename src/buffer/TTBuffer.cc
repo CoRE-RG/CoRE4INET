@@ -18,6 +18,8 @@
 #include <TTBufferEmpty_m.h>
 #include "TTEApplicationBase.h"
 
+#include <ModuleAccess.h>
+
 using namespace TTEthernetModel;
 
 Define_Module( TTBuffer);
@@ -47,13 +49,14 @@ void TTBuffer::initialize(int stage)
         ev << "Initialize TTBuffer" << endl;
 
         //Register Event
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
+        Scheduled::initialize();
+
         //Dirty FIX
         //TODO find out what is wrong here!
         if(actionTimeEvent->isScheduled())
             cancelEvent(actionTimeEvent);
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
-        tteScheduler->registerEvent(actionTimeEvent);
+        period->registerEvent(actionTimeEvent);
 
         setIsEmpty(true);
         return;
@@ -101,8 +104,8 @@ void TTBuffer::handleMessage(cMessage *msg)
             }
         }
         //Reregister scheduler
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
-        tteScheduler->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg), true);
+        static_cast<SchedulerActionTimeEvent *>(msg)->setNext_cycle(true);
+        period->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
     }
 }
 

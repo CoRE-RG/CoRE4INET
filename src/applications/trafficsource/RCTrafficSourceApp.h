@@ -30,6 +30,8 @@ namespace TTEthernetModel {
  */
 class RCTrafficSourceApp : public TrafficSourceAppBase
 {
+    private:
+        double tick;
     protected:
         /**
          * @brief Initialization of the module. Sends activator message

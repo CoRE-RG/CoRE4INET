@@ -20,6 +20,8 @@
 
 #include <EtherFrame_m.h>
 
+#include <Timed.h>
+
 #include "HelperFunctions.h"
 
 #include <map>
@@ -35,7 +37,7 @@ namespace TTEthernetModel {
  * or dropped if there is no module configured. Best-effort frames are
  * forwarded through the out-gate.
  */
-class BaseInControl : public cSimpleModule
+class BaseInControl : public virtual cSimpleModule, public Timed
 {
     private:
         /**
@@ -52,6 +54,11 @@ class BaseInControl : public cSimpleModule
          * @brief Constructor
          */
         BaseInControl(){promiscuous=false; hadError=false;}
+
+        /**
+         * @brief Initializes the module
+         */
+        virtual void initialize();
 
         virtual void handleMessage(cMessage *msg){delete msg;}
 

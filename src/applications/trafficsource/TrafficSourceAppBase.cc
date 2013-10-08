@@ -67,7 +67,7 @@ void TrafficSourceAppBase::sendMessage(){
                 }
                 frame->setCtID(ctID);
                 //TODO Error check
-                Incoming* in = (Incoming *)(*buf)->gate("in")->getPathStartGate()->getOwner();
+                Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
                 //TODO Better name for Frame
                 frame->setName((*buf)->getName());
                 sendDirect(frame, in->gate("in"));

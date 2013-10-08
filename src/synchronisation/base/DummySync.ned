@@ -1,6 +1,7 @@
 package ttethernet.synchronisation.base;
 
 import ttethernet.linklayer.IPort;
+import ttethernet.utilities.classes.Scheduled;
 
 //
 // Dummy synchronisation module that corrects the clock with a certain imprecission.
@@ -9,9 +10,10 @@ import ttethernet.linklayer.IPort;
 // @see IPort
 //
 // @author Till Steinbach
-simple DummySync like ISync
+simple DummySync extends Scheduled like ISync
 {
     parameters:
+        @class(DummySync);
         @display("i=block/timer");
         
         // The time in the cycle (in ticks) when the synchronisation is triggered

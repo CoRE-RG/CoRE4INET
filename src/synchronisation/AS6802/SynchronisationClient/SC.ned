@@ -26,6 +26,9 @@ simple SC like ISync
     @class(SC);
     @display("i=block/timer");
 
+	//Period of Scheduler this sync module is assigned to
+    string period = default("");
+
 int syncDomain =default(2);
 int syncPriority =default(4);	
 

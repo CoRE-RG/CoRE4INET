@@ -21,10 +21,13 @@ package ttethernet.scheduler.oscillator;
 simple Oscillator like IOscillator
 {
     parameters:
+	    @display("i=block/mac");
         //Statistic of the current drift (Difference of configured and actual tick length)
         @statistic[currentDrift](title="Current drift"; unit=s; record=vector);
         // Length of a tick
         double tick @unit(s) = default(80ns);
         // Current length of a tick (with imprecission)
         volatile double current_tick @unit(s) = tick;
+    gates:
+        output out; 
 }

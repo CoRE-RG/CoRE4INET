@@ -15,6 +15,7 @@
 
 #include "TTIncoming.h"
 
+#include <ModuleAccess.h>
 #include <TTEScheduler.h>
 #include <SchedulerMessageEvents_m.h>
 
@@ -35,14 +36,23 @@ TTIncoming::~TTIncoming()
     }
 }
 
+void TTIncoming::initialize()
+{
+    Incoming::initialize();
+    if(par("period").stdstringValue().length()==0){
+        par("period").setStringValue("period[0]");
+    }
+    period = dynamic_cast<Period*>(findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
+    ASSERT2(period, "cannot find period, you should specify it!");
+}
+
 void TTIncoming::handleMessage(cMessage *msg)
 {
     //Incoming Message
     if (msg->arrivedOn("in"))
     {
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         //get current time in cylce
-        uint32_t currentTicks = tteScheduler->getTicks();
+        uint32_t currentTicks = period->getTicks();
         //Now check for correct arrival:
         if (frame != NULL)
         {
@@ -103,7 +113,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                 SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
                 event->setAction_time(par("permanence_pit").doubleValue());
                 event->setDestinationGate(gate("schedulerIn"));
-                tteScheduler->registerEvent(event);
+                period->registerEvent(event);
             }
             else{
                 send(msg, "out");

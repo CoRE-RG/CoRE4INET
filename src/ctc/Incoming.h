@@ -27,7 +27,7 @@ namespace TTEthernetModel {
  *
  * @sa RCIncoming, TTIncoming
  */
-class Incoming : public cSimpleModule
+class Incoming : public virtual cSimpleModule
 {
     protected:
         /**

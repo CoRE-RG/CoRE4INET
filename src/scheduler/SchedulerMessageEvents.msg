@@ -16,6 +16,8 @@ class SchedulerEvent;
 message SchedulerActionTimeEvent extends SchedulerEvent {
         // Action time in cycle for the event in number of ticks
         uint32_t action_time;
+        //force execution in next cycle at the earliest
+        bool next_cycle;
 }
 
 //

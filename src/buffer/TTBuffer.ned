@@ -1,5 +1,7 @@
 package ttethernet.buffer;
 
+import ttethernet.utilities.classes.IScheduled;
+
 //
 // Represents an abstract Buffer for time-triggerd traffic. Messages are sent using the configured
 // send window.
@@ -15,7 +17,7 @@ package ttethernet.buffer;
 // @see TTDoubleBuffer, TTQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
 //
 // @author Till Steinbach
-simple TTBuffer extends CTBuffer
+simple TTBuffer extends CTBuffer like IScheduled
 {
     parameters:
         //TTBuffer is implemented by the TTBuffer C++ Class
@@ -25,6 +27,11 @@ simple TTBuffer extends CTBuffer
         int sendWindowStart @unit(tick);
         //End of the send window in number of ticks
         int sendWindowEnd @unit(tick) = default(0tick);
+        
+        //Period of Scheduler this buffer is assigned to
+        string period = default("period[0]");
+        string oscillator = default("oscillator");
+        string timer = default("timer");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

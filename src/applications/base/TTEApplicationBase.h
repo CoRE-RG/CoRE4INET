@@ -33,7 +33,7 @@ class Buffer;
  *
  * @ingroup Applications
  */
-class TTEApplicationBase : public cSimpleModule
+class TTEApplicationBase : public virtual cSimpleModule
 {
     protected:
         /**

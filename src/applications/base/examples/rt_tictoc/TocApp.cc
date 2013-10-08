@@ -52,7 +52,7 @@ void TocApp::handleMessage(cMessage *msg)
         std::list<Buffer*> buffer = buffers[frame->getCtID()];
         for(std::list<Buffer*>::iterator buf = buffer.begin();
                                buf!=buffer.end();buf++){
-            Incoming* in = (Incoming *)(*buf)->gate("in")->getPathStartGate()->getOwner();
+            Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(frame->dup(), in->gate("in"));
         }
         delete frame;

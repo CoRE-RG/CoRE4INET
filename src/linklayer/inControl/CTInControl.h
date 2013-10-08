@@ -118,6 +118,7 @@ simsignal_t CTInControl<IC>::ctDroppedSignal = SIMSIGNAL_NULL;
 template <class IC>
 void CTInControl<IC>::initialize()
 {
+    BaseInControl::initialize();
     ctDroppedSignal = cComponent::registerSignal("ctDropped");
 }
 

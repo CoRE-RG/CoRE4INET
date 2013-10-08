@@ -17,6 +17,8 @@
 #include <CTFrame_m.h>
 #include "TTEScheduler.h"
 
+#include <ModuleAccess.h>
+
 namespace TTEthernetModel {
 
 Define_Module( TTTrafficSourceApp);
@@ -29,11 +31,12 @@ void TTTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
 
     if(par("enabled").boolValue()){
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
+        Scheduled::initialize();
+
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-        event->setAction_time(par("action_time").doubleValue()/tteScheduler->par("tick").doubleValue());
+        event->setAction_time(par("action_time").doubleValue()/findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue());
         event->setDestinationGate(gate("schedulerIn"));
-        tteScheduler->registerEvent(event);
+        period->registerEvent(event);
     }
 }
 
@@ -48,7 +51,8 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg){
 
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
-        tteScheduler->registerEvent(event, true);
+        event->setNext_cycle(true);
+        period->registerEvent(event);
     }
     else{
         delete msg;

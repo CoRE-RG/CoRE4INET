@@ -57,6 +57,7 @@ class Timer : public cSimpleModule
     virtual void reschedule();
     virtual uint32_t nextAction();
   public:
+    ~Timer();
     virtual void recalculate();
 
     /**
@@ -71,12 +72,21 @@ class Timer : public cSimpleModule
      */
     virtual bool registerEvent(SchedulerEvent *event, Period *period);
 
+    virtual bool registerEvent(SchedulerTimerEvent *event);
+
     /**
      * @brief Returns the absolute number of ticks
      *
      * @return Number of ticks since simulation start
      */
     virtual uint64_t getTotalTicks();
+
+    /**
+     * @brief Corrects the clock by the number of ticks
+     *
+     * @param ticks number of ticks the clock must be corrected
+     */
+    virtual void clockCorrection(int32_t ticks);
 };
 
 } //namespace

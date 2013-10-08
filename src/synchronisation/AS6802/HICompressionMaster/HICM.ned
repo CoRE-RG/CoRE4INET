@@ -28,6 +28,8 @@ simple HICM like ISync
     @class(HICM);
     @display("i=block/timer");
         
+        //Period of Scheduler this sync module is assigned to
+        string period = default("");
         
         //Each CM should have a unique ID
         int id=default(0);

@@ -20,6 +20,7 @@
 
 #include <CTIncoming.h>
 #include <EtherFrame_m.h>
+#include <Scheduled.h>
 
 namespace TTEthernetModel {
 
@@ -32,7 +33,7 @@ namespace TTEthernetModel {
  *
  * @sa Incoming
  */
-class TTIncoming : public CTIncoming
+class TTIncoming : public CTIncoming, Scheduled
 {
     private:
         /**
@@ -49,6 +50,11 @@ class TTIncoming : public CTIncoming
          * @brief Destructor
          */
         virtual ~TTIncoming();
+
+        /**
+         * @brief Initialization of the module
+         */
+        void initialize();
     protected:
         /**
          * @brief Forwards messages arriving on in-gate to out-gate checks
