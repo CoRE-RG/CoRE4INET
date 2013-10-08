@@ -34,6 +34,7 @@ Timer::~Timer()
         for(std::list<SchedulerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
             cancelAndDelete(*it2);
         }
+        registredEvents.erase(it);
     }
 }
 
@@ -54,6 +55,7 @@ void Timer::handleMessage(cMessage *msg)
                 break;
             }
         }
+        reschedule();
         EV << "changed size is:"<< registredEvents.size()<< std::endl;
     }
 }
@@ -67,10 +69,10 @@ void Timer::recalculate(){
 
 void Timer::reschedule(){
     recalculate();
-    simtime_t actiontime = nextAction() * oscillator->par("current_tick").doubleValue();
+    simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->par("current_tick").doubleValue();
     cancelEvent(selfMessage);
     if(registredEvents.size()>0){
-        scheduleAt(actiontime, selfMessage);
+        scheduleAt(simTime()+next_action, selfMessage);
     }
 }
 
@@ -108,6 +110,7 @@ bool Timer::registerEvent(SchedulerEvent *event, Period *period){
         else{
             actionpoint = getTotalTicks() + distance;
         }
+        ev << "actime:" << actionTimeEvent->getAction_time() << " distance:" << distance << " acpoint:"<< actionpoint << "name: "<<actionTimeEvent->getName()<<std::endl;
     }
     else if (event->getKind() == TIMER_EVENT)
     {
@@ -140,6 +143,8 @@ uint64_t Timer::getTotalTicks()
 }
 
 void Timer::clockCorrection(int32_t ticks){
+    Enter_Method("clock correction %d ticks",ticks);
+
     this->ticks+ticks;
     reschedule();
 }

@@ -31,9 +31,6 @@ TTBuffer::TTBuffer()
 
 TTBuffer::~TTBuffer()
 {
-    if(actionTimeEvent->getOwner()==this){
-        cancelAndDelete(actionTimeEvent);
-    }
 }
 
 int TTBuffer::numInitStages() const
@@ -55,6 +52,7 @@ void TTBuffer::initialize(int stage)
         //TODO find out what is wrong here!
         if(actionTimeEvent->isScheduled())
             cancelEvent(actionTimeEvent);
+        actionTimeEvent->setAction_time(par("sendWindowStart").longValue());
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
         period->registerEvent(actionTimeEvent);
 
@@ -113,5 +111,5 @@ void TTBuffer::handleParameterChange(const char* parname){
     CTBuffer::handleParameterChange(parname);
 
     if(actionTimeEvent)
-        actionTimeEvent->setAction_time(par("sendWindowStart").doubleValue());
+        actionTimeEvent->setAction_time(par("sendWindowStart").longValue());
 }

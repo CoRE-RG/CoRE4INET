@@ -30,4 +30,6 @@ simple Period
         @display("i=block/table2");
     gates:
         output out;
+        //Input gate for the incoming SchedulerActionTimeEvent messages
+        input schedulerIn @directIn;
 }

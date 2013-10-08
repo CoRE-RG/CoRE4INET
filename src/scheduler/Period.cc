@@ -22,15 +22,28 @@ Define_Module(Period);
 
 void Period::initialize()
 {
+    cycles=0;
+    WATCH(cycles);
     ASSERT(par("cycle_ticks").longValue()>par("offset_ticks").longValue());
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
+    newCycleEvent = new SchedulerActionTimeEvent("Period New Cycle Event", ACTION_TIME_EVENT);
+    newCycleEvent->setDestinationGate(gate("schedulerIn"));
+    newCycleEvent->setNext_cycle(true);
+    timer->registerEvent(newCycleEvent, this);
 }
 
 void Period::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT){
+        cycles++;
+        timer->registerEvent(newCycleEvent, this);
+    }
+    else{
+        delete msg;
+    }
 }
+
 
 bool Period::registerEvent(SchedulerEvent *event){
     return timer->registerEvent(event, this);
@@ -48,7 +61,7 @@ uint64_t Period::getTotalTicks()
 }
 
 uint32_t Period::getCycles(){
-    return timer->getTotalTicks()/par("cycle_ticks").longValue();
+    return cycles;
 }
 
 } //namespace

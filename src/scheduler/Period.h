@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include <SchedulerEvent.h>
+#include <SchedulerMessageEvents_m.h>
 
 namespace TTEthernetModel {
 
@@ -30,6 +31,16 @@ class Period : public cSimpleModule
 {
     private:
         Timer *timer;
+        /**
+         * @brief Event indicating a new cycle start
+         *
+         */
+        SchedulerActionTimeEvent* newCycleEvent;
+
+        /**
+         * @brief Number of cycles since the simulation started
+         */
+        uint32_t cycles;
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);

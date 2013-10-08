@@ -30,7 +30,7 @@ RCBuffer::RCBuffer()
 
 RCBuffer::~RCBuffer()
 {
-    if(timerMessage->getOwner()==this){
+    if(timerMessage && timerMessage->getOwner()==this){
         cancelAndDelete(timerMessage);
     }
 }
