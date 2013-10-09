@@ -20,10 +20,14 @@ namespace TTEthernetModel {
 
 Define_Module(Period);
 
+simsignal_t Period::newCycle = SIMSIGNAL_NULL;
+
 void Period::initialize()
 {
     cycles=0;
     WATCH(cycles);
+    newCycle = registerSignal("newCycle");
+
     ASSERT(par("cycle_ticks").longValue()>par("offset_ticks").longValue());
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
@@ -37,6 +41,7 @@ void Period::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT){
         cycles++;
+        emit(newCycle, 1L);
         timer->registerEvent(newCycleEvent, this);
     }
     else{

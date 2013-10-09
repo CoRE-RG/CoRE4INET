@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 
 #include <Oscillator.h>
+#include <Scheduled.h>
 
 namespace TTEthernetModel {
 
@@ -27,8 +28,22 @@ namespace TTEthernetModel {
  */
 class SimpleOscillator : public Oscillator
 {
+    private:
+        /**
+         * TODO
+         */
+        Period *period;
+
+        simtime_t lastCorrection;
   protected:
-    virtual void initialize();
+    virtual void initialize(int stage);
+    /**
+     * @brief Returns the number of initialization stages this module needs.
+     *
+     * @return Always returns 2
+     */
+    virtual int numInitStages() const;
+
     virtual void handleMessage(cMessage *msg);
   public:
     virtual simtime_t getTick();

@@ -15,6 +15,7 @@
 
 package ttethernet.scheduler.oscillator;
 
+import ttethernet.utilities.classes.IScheduled;
 //
 // TODO auto-generated module
 //
@@ -22,8 +23,13 @@ simple SimpleOscillator extends Oscillator
 {
     parameters:
         @class(SimpleOscillator);
-        // Maximum clock drift (e.g 16ps for 200ppm at 80ns per tick)
-        double max_drift @unit(s) = default(16ps);
-        // Clock drift change for the next cycle, you are free to use your desired distribution
-        volatile double drift_change @unit(s) = default(uniform(-1ps,1ps));
+        // Maximum clock drift
+        double max_drift @unit(ppm) = default(200ppm);
+        // Clock drift change intensity
+        volatile double drift_change @unit(ppm) = default(uniform(12.5ppm,12.5ppm));
+        
+        string period = default("period[0]");
+    gates:
+        //Input gate for the incoming SchedulerActionTimeEvent messages
+        input schedulerIn @directIn;
 }

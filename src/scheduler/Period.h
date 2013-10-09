@@ -75,6 +75,11 @@ class Period : public cSimpleModule
      * @return Number of cycles since simulation start
      */
     virtual uint32_t getCycles();
+  protected:
+      /**
+       * Signal that is emitted at the beginning of a new cycle
+       */
+      static simsignal_t newCycle;
 };
 
 } //namespace

@@ -23,7 +23,7 @@ namespace TTEthernetModel {
 /**
  * TODO - Generated class
  */
-class Oscillator : public cSimpleModule
+class Oscillator : public virtual cSimpleModule
 {
   protected:
     virtual void initialize();
