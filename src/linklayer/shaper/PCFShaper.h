@@ -41,9 +41,18 @@ class PCFShaper : public TC
         static simsignal_t pcfQueueLengthSignal;
     protected:
         /**
-         * @brief Initialization of the module
+         * Initializes the module
+         *
+         * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
+
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return returns 1 or more depending on inheritance
+         */
+        virtual int numInitStages() const;
 
 
         /**
@@ -125,10 +134,22 @@ PCFShaper<TC>::~PCFShaper(){
 }
 
 template <class TC>
-void PCFShaper<TC>::initialize()
+void PCFShaper<TC>::initialize(int stage)
 {
-    TC::initialize();
-    pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
+    TC::initialize(stage);
+    if(stage==0){
+        pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
+    }
+}
+
+template <class TC>
+int PCFShaper<TC>::numInitStages() const{
+    if(TC::numInitStages()>1){
+        return TC::numInitStages();
+    }
+    else{
+        return 1;
+    }
 }
 
 template <class TC>

@@ -44,6 +44,8 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          */
         SchedulerActionTimeEvent* actionTimeEvent;
 
+        uint64_t nextAction;
+
     protected:
         /**
          * @brief Initializes the SchedulerActionTimeEvent
@@ -91,6 +93,8 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          * @brief Destructor
          */
         ~TTBuffer();
+
+        uint64_t nextSendWindowStart();
 };
 }
 

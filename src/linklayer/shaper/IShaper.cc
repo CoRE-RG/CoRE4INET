@@ -19,9 +19,13 @@ namespace TTEthernetModel {
 
 Define_Module(IShaper);
 
-void IShaper::initialize()
+void IShaper::initialize(int stage)
 {
     // TODO - Generated method body
+}
+
+int IShaper::numInitStages() const{
+    return 1;
 }
 
 void IShaper::handleMessage(cMessage *msg)

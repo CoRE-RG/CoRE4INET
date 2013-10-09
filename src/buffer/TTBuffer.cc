@@ -54,7 +54,7 @@ void TTBuffer::initialize(int stage)
             cancelEvent(actionTimeEvent);
         actionTimeEvent->setAction_time(par("sendWindowStart").longValue());
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
-        period->registerEvent(actionTimeEvent);
+        nextAction = period->registerEvent(actionTimeEvent);
 
         setIsEmpty(true);
         return;
@@ -103,7 +103,7 @@ void TTBuffer::handleMessage(cMessage *msg)
         }
         //Reregister scheduler
         static_cast<SchedulerActionTimeEvent *>(msg)->setNext_cycle(true);
-        period->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
+        nextAction = period->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
     }
 }
 
@@ -112,4 +112,8 @@ void TTBuffer::handleParameterChange(const char* parname){
 
     if(actionTimeEvent)
         actionTimeEvent->setAction_time(par("sendWindowStart").longValue());
+}
+
+uint64_t TTBuffer::nextSendWindowStart(){
+    return nextAction;
 }

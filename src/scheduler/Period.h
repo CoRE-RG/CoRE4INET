@@ -55,7 +55,7 @@ class Period : public cSimpleModule
      * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
      * SchedulerTimerEvent
      */
-    virtual bool registerEvent(SchedulerEvent *event);
+    virtual uint64_t registerEvent(SchedulerEvent *event);
 
     /**
      * @brief Returns the current number of ticks

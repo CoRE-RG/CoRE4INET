@@ -65,14 +65,14 @@ class Timer : public cSimpleModule
      *
      * @param event Pointer to the Event to be scheduled.
      * The scheduler will send the event according to the event type
-     * @return returns true on success, else false
+     * @return returns registered event time
      *
      * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
      * SchedulerTimerEvent
      */
-    virtual bool registerEvent(SchedulerEvent *event, Period *period);
+    virtual uint64_t registerEvent(SchedulerEvent *event, Period *period);
 
-    virtual bool registerEvent(SchedulerTimerEvent *event);
+    virtual uint64_t registerEvent(SchedulerTimerEvent *event);
 
     /**
      * @brief Returns the absolute number of ticks

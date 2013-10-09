@@ -62,8 +62,11 @@ void Timer::handleMessage(cMessage *msg)
 
 void Timer::recalculate(){
     if(simTime()!=lastRecalculation){
-        ticks+=floor((simTime()-lastRecalculation) / oscillator->getTick());
-        lastRecalculation=simTime();
+        simtime_t current_tick = oscillator->getTick();
+        uint64_t elapsed_ticks=floor((simTime()-lastRecalculation) / current_tick);
+        ticks+=elapsed_ticks;
+        //this is required to avoid rounding errors
+        lastRecalculation += elapsed_ticks*current_tick;
     }
 }
 
@@ -80,11 +83,11 @@ uint32_t Timer::nextAction(){
     return registredEvents.begin()->first;
 }
 
-bool Timer::registerEvent(SchedulerTimerEvent *event){
+uint64_t Timer::registerEvent(SchedulerTimerEvent *event){
     return registerEvent(event, NULL);
 }
 
-bool Timer::registerEvent(SchedulerEvent *event, Period *period){
+uint64_t Timer::registerEvent(SchedulerEvent *event, Period *period){
 #ifdef DEBUG
     Enter_Method("registerEvent(SchedulerEvent %s)",event->getName());
 #else
@@ -118,7 +121,8 @@ bool Timer::registerEvent(SchedulerEvent *event, Period *period){
         actionpoint = getTotalTicks() + timerEvent->getTimer();
     }
     else{
-        return false;
+        //TODO throw
+        return 0;
     }
     //We do not have to schedule anything if the point is now!
     if(actionpoint==getTotalTicks()){
@@ -133,7 +137,7 @@ bool Timer::registerEvent(SchedulerEvent *event, Period *period){
             reschedule();
         }
     }
-    return true;
+    return actionpoint;
 }
 
 uint64_t Timer::getTotalTicks()

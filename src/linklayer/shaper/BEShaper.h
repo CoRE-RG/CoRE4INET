@@ -38,10 +38,19 @@ class BEShaper : public TC
              */
             cQueue beQueue;
     protected:
-        /**
-         * @brief Initialization of the module
-         */
-        virtual void initialize();
+            /**
+             * Initializes the module
+             *
+             * @param stage The stages. Module initializes when stage==0
+             */
+            virtual void initialize(int stage);
+
+            /**
+             * @brief Returns the number of initialization stages this module needs.
+             *
+             * @return returns 1 or more depending on inheritance
+             */
+            virtual int numInitStages() const;
 
 
        /**
@@ -126,10 +135,22 @@ BEShaper<TC>::~BEShaper(){
 }
 
 template <class TC>
-void BEShaper<TC>::initialize()
+void BEShaper<TC>::initialize(int stage)
 {
-    TC::initialize();
-    beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
+    TC::initialize(stage);
+    if(stage==0){
+        beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
+    }
+}
+
+template <class TC>
+int BEShaper<TC>::numInitStages() const{
+    if(TC::numInitStages()>1){
+        return TC::numInitStages();
+    }
+    else{
+        return 1;
+    }
 }
 
 template <class TC>

@@ -61,9 +61,18 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
 
     protected:
         /**
-         * @brief Initialization of the module
+         * Initializes the module
+         *
+         * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
+
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return Always returns 1
+         */
+        virtual int numInitStages() const;
 
 
         /**

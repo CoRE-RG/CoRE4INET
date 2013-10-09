@@ -26,7 +26,8 @@ namespace TTEthernetModel {
 class IShaper : public cSimpleModule
 {
   protected:
-    virtual void initialize();
+    virtual void initialize(int stage);
+    virtual int numInitStages() const;
     virtual void handleMessage(cMessage *msg);
 };
 

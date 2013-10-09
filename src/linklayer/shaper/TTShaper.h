@@ -44,11 +44,12 @@ class TTShaper : public TC, public Timed
         cQueue ttQueue;
 
         /**
-         * @brief Vector of TTBuffers.
+         * @brief Map of TTBuffers.
          *
-         * The vector is ordered by action time
+         * The map is ordered by sendwindow
          */
-        std::vector < TTBuffer * > ttBuffers;
+        std::map <uint64_t, TTBuffer * > ttBuffers;
+        bool initialize_ttBuffers;
 
         /**
          * @brief Current position of the next Buffer (action time) in the ttBuffers vector
@@ -63,10 +64,18 @@ class TTShaper : public TC, public Timed
 
     protected:
         /**
-         * @brief Initialization of the module
+         * Initializes the module
+         *
+         * @param stage The stages. Module initializes when stage==0 && stage==1
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
 
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return returns 3 or more depending on inheritance
+         */
+        virtual int numInitStages() const;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -169,6 +178,7 @@ template <class TC>
 TTShaper<TC>::TTShaper(){
     ttBuffersPos = 0;
     ttQueue.setName("TT Messages");
+    initialize_ttBuffers=false;
 }
 
 template <class TC>
@@ -177,11 +187,27 @@ TTShaper<TC>::~TTShaper(){
 }
 
 template <class TC>
-void TTShaper<TC>::initialize()
+void TTShaper<TC>::initialize(int stage)
 {
-    TC::initialize();
-    Timed::initialize();
-    ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
+    TC::initialize(stage);
+    if(stage==0){
+        Timed::initialize();
+        ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
+    }
+    else if(stage==2){
+        //Now the ttBuffers can be initialized as all TTBuffers should have registred their events
+        initialize_ttBuffers=true;
+        handleParameterChange("tt_buffers");
+    }
+}
+template <class TC>
+int TTShaper<TC>::numInitStages() const{
+    if(TC::numInitStages()>3){
+        return TC::numInitStages();
+    }
+    else{
+        return 3;
+    }
 }
 
 template <class TC>
@@ -192,18 +218,21 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
     {
         TTBuffer *thisttBuffer;
         TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (msg->getSenderModule());
+        ASSERT(isTTBufferRegistered(ttBuffer)==true);//No shuffeling at the moment
         ASSERT2(ttBuffer, "A TTFrame was received that was not sent by a TTBuffer");
 
         if(ttBuffers.size()>0){
-            thisttBuffer = ttBuffers[ttBuffersPos];
-            ttBuffersPos = ((ttBuffersPos + 1) % ttBuffers.size());
+            thisttBuffer = ttBuffers.begin()->second;
         }else{
             thisttBuffer = NULL;
         }
-
+        ASSERT(thisttBuffer==ttBuffer);
         if(thisttBuffer!=ttBuffer){
             ASSERT2(isTTBufferRegistered(ttBuffer)==false, "A TTFrame was received that was unexpected");
         }
+        //Now reregister the same TTBuffer
+        ttBuffers.erase(ttBuffers.begin());
+        registerTTBuffer(ttBuffer);
 
         //If we have an empty message allow lower priority frame to be sent
         if (dynamic_cast<TTBufferEmpty *> (msg))
@@ -325,41 +354,26 @@ template <class TC>
 void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
 {
     Enter_Method("registerTTBuffer(%s)", ttBuffer->getName());
-    uint32_t sendWindowStart = ttBuffer->par("sendWindowStart");
-    for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();)
-    {
-        uint32_t buf_sendWindowStart = (*buffer)->par("sendWindowStart").longValue();
-        if (buffer == ttBuffers.end() || buf_sendWindowStart > sendWindowStart)
-        {
-            ttBuffers.insert(buffer, ttBuffer);
-            //Now doublecheck that the schedule is not overlapping for this port
-            //TODO: Can be improved: only check overlapping for neighbors
-            for (std::vector<TTBuffer*>::iterator buffer2 = ttBuffers.begin(); buffer2 != ttBuffers.end();)
-            {
-                Buffer *tmpBuffer = *buffer2;
-                ++buffer2;
-                if (buffer2 != ttBuffers.end() && (tmpBuffer->par("sendWindowEnd").longValue() > (*buffer2)->par(
-                        "sendWindowStart").longValue()))
-                {
-                    opp_error("Port cannot be scheduled due to overlapping schedules: %s (End: %d) and %s (Start: %d)", tmpBuffer->getName(),
-                            tmpBuffer->par("sendWindowEnd").longValue(),
-                            (*buffer2)->getName(),
-                            (*buffer2)->par("sendWindowStart").longValue());
-                }
-            }
-            return;
-        }
-        ++buffer;
+    uint64_t sendWindowStart = ttBuffer->nextSendWindowStart();
+    ev << "sendWindowStart:  "<< sendWindowStart << " Buffer:"<< ttBuffer->getName() <<std::endl;
+
+    std::map<uint64_t, TTBuffer*>::iterator buf = ttBuffers.find(sendWindowStart);
+    if(buf!=ttBuffers.end()){
+        //TODO ERROR
+        opp_error("ERROR!");
     }
-    //This should only happen if buffer was empty
-    ttBuffers.push_back(ttBuffer);
+    else{
+        //TODO check overlapping
+        ttBuffers[sendWindowStart] = ttBuffer;
+    }
+
 }
 
 template <class TC>
 bool TTShaper<TC>::isTTBufferRegistered(TTBuffer *ttBuffer){
-    for (std::vector<TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();++buffer)
+    for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();++buffer)
     {
-        if(*buffer==ttBuffer){
+        if((*buffer).second==ttBuffer){
             return true;
         }
     }
@@ -369,32 +383,34 @@ bool TTShaper<TC>::isTTBufferRegistered(TTBuffer *ttBuffer){
 template <class TC>
 void TTShaper<TC>::handleParameterChange(const char* parname){
     TC::handleParameterChange(parname);
-    ttBuffers.clear();
-    std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(), DELIMITERS).asVector();
-    for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
-            ttBufferPath!=ttBufferPaths.end();ttBufferPath++){
-        cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
-        if(!module){
-            module = findModuleWhereverInNode((*ttBufferPath).c_str(),this);
-        }
-        if(module){
-            if(findContainingNode(module)!=findContainingNode(this)){
-                opp_error("Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?", (*ttBufferPath).c_str(),
-                        findContainingNode(this)->getFullName());
+    if(initialize_ttBuffers){
+        ttBuffers.clear();
+        std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(), DELIMITERS).asVector();
+        for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
+                ttBufferPath!=ttBufferPaths.end();ttBufferPath++){
+            cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
+            if(!module){
+                module = findModuleWhereverInNode((*ttBufferPath).c_str(),this);
             }
-            else
-            {
-                TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (module);
-                if(ttBuffer){
-                    registerTTBuffer(ttBuffer);
+            if(module){
+                if(findContainingNode(module)!=findContainingNode(this)){
+                    opp_error("Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?", (*ttBufferPath).c_str(),
+                            findContainingNode(this)->getFullName());
                 }
-                else{
-                    opp_error("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!", (*ttBufferPath).c_str());
+                else
+                {
+                    TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (module);
+                    if(ttBuffer){
+                        registerTTBuffer(ttBuffer);
+                    }
+                    else{
+                        opp_error("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!", (*ttBufferPath).c_str());
+                    }
                 }
             }
-        }
-        else{
-            opp_error("Configuration problem of tt_buffers: Module: %s could not be resolved!", (*ttBufferPath).c_str());
+            else{
+                opp_error("Configuration problem of tt_buffers: Module: %s could not be resolved!", (*ttBufferPath).c_str());
+            }
         }
     }
 }
@@ -416,26 +432,12 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
     //Don't know if that is right, but it works!
     sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
     unsigned long sendTicks = ceil((sendTime / oscillator->par("tick")).dbl());
-    unsigned long startTicks = ttBuffers[ttBuffersPos]->par("sendWindowStart").longValue();
-    unsigned long endTicks = ttBuffers[ttBuffersPos]->par("sendWindowEnd").longValue();
-
-    //Send Window Start is in next cycle
-    if (ttBuffers[ttBuffersPos]->getPeriod()->getTicks() > startTicks)
-    {
-        long cycleTicks = ttBuffers[ttBuffersPos]->getPeriod()->par("cycle_ticks").longValue();
-        startTicks += cycleTicks;
-        endTicks += cycleTicks;
-    }
-    //Send Window End is in next cycle
-    else if (ttBuffers[ttBuffersPos]->getPeriod()->getTicks() > endTicks)
-    {
-        endTicks += ttBuffers[ttBuffersPos]->getPeriod()->par("cycle_ticks").longValue();
-    }
+    unsigned long startTicks = ttBuffers.begin()->first;
 
     //TODO: Perhaps more complex calculations needed?
-    if ((ttBuffers[ttBuffersPos]->getPeriod()->getTicks() + sendTicks) >= startTicks)
+    if ((timer->getTotalTicks() + sendTicks) >= startTicks)
     {
-        ev << "transmission not allowed!" << endl;
+        ev << "transmission not allowed! Send time would be from " << timer->getTotalTicks() << " to " << timer->getTotalTicks() + sendTicks << " tt_window starts at: " << startTicks << endl;
         return false;
     }
     return true;

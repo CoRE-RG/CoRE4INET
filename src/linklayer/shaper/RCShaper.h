@@ -36,9 +36,18 @@ class RCShaper : public TC
         cQueue rcQueue[NUM_RC_PRIORITIES];
     protected:
         /**
-         * @brief Initialization of the module
+         * Initializes the module
+         *
+         * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
+
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return returns 1 or more depending on inheritance
+         */
+        virtual int numInitStages() const;
 
 
         /**
@@ -122,9 +131,19 @@ RCShaper<TC>::~RCShaper(){
 }
 
 template <class TC>
-void RCShaper<TC>::initialize()
+void RCShaper<TC>::initialize(int stage)
 {
-    TC::initialize();
+    TC::initialize(stage);
+}
+
+template <class TC>
+int RCShaper<TC>::numInitStages() const{
+    if(TC::numInitStages()>1){
+        return TC::numInitStages();
+    }
+    else{
+        return 1;
+    }
 }
 
 template <class TC>

@@ -10,12 +10,16 @@
 using namespace TTEthernetModel;
 
 
-void BaseShaper::initialize()
+void BaseShaper::initialize(int stage)
 {
     cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
     outChannel = physOutGate->findTransmissionChannel();
 
     WATCH(framesRequested);
+}
+
+int BaseShaper::numInitStages() const{
+    return 1;
 }
 
 void BaseShaper::addListener(IPassiveQueueListener *listener){

@@ -45,7 +45,7 @@ void Period::handleMessage(cMessage *msg)
 }
 
 
-bool Period::registerEvent(SchedulerEvent *event){
+uint64_t Period::registerEvent(SchedulerEvent *event){
     return timer->registerEvent(event, this);
 }
 
