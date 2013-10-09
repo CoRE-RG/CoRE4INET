@@ -19,9 +19,17 @@ namespace TTEthernetModel {
 
 Define_Module(Oscillator);
 
-void Oscillator::initialize()
+simsignal_t Oscillator::currentDrift = SIMSIGNAL_NULL;
+
+void Oscillator::initialize(int stage)
 {
-    // TODO - Generated method body
+    if(stage==0){
+        currentDrift = registerSignal("currentDrift");
+    }
+}
+
+int Oscillator::numInitStages() const{
+    return 1;
 }
 
 void Oscillator::handleMessage(cMessage *msg)

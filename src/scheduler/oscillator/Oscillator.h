@@ -25,8 +25,20 @@ namespace TTEthernetModel {
  */
 class Oscillator : public virtual cSimpleModule
 {
+    protected:
+        /**
+         * Signal that is emitted every time the drift (Difference of configured and actual tick length) changes
+         */
+        static simsignal_t currentDrift;
   protected:
-    virtual void initialize();
+    virtual void initialize(int stage);
+    /**
+     * @brief Returns the number of initialization stages this module needs.
+     *
+     * @return Always returns 1
+     */
+    virtual int numInitStages() const;
+
     virtual void handleMessage(cMessage *msg);
   public:
     virtual simtime_t getTick();

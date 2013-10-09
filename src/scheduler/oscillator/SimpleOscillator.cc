@@ -23,6 +23,7 @@ Define_Module(SimpleOscillator);
 
 void SimpleOscillator::initialize(int stage)
 {
+    Oscillator::initialize(stage);
     if(stage==0){
         if(par("period").stdstringValue().length()==0){
             par("period").setStringValue("period[0]");
@@ -33,7 +34,7 @@ void SimpleOscillator::initialize(int stage)
         lastCorrection = simTime();
     }
     else if(stage==1){
-        SchedulerActionTimeEvent *actionTimeEvent = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
+        SchedulerActionTimeEvent *actionTimeEvent = new SchedulerActionTimeEvent("SimpleOscillator Scheduler Event", ACTION_TIME_EVENT);
         actionTimeEvent->setAction_time(0);
         actionTimeEvent->setNext_cycle(true);
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
@@ -49,20 +50,25 @@ void SimpleOscillator::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT){
         //change drift
-        simtime_t drift_change = (simTime()-lastCorrection)*(par("drift_change").doubleValue()/1000000)/period->par("cycle_ticks");
+        double reference_time = ((simTime()-lastCorrection).dbl() / period->par("cycle_ticks").doubleValue());
+        double drift_change = reference_time*(par("drift_change").doubleValue()/1000000);
 
-        simtime_t current_tick = SimTime(par("current_tick").doubleValue());
-        simtime_t tick = SimTime(par("tick").doubleValue());
-        simtime_t max_drift = SimTime(par("max_drift").doubleValue());
 
-        simtime_t newTick = current_tick+drift_change;
+        double current_tick = par("current_tick").doubleValue();
+        double tick = par("tick").doubleValue();
+        double max_drift = (par("max_drift").doubleValue()*par("tick").doubleValue()/1000000);
+
+        double newTick = current_tick+drift_change;
+
+        ev << "reference_time:"<<drift_change<<" time gone ppm: "<<(par("drift_change").doubleValue()/1000000)<<std::endl;
+
         if((newTick-tick)>max_drift)
-            par("current_tick").setDoubleValue((tick+max_drift).dbl());
+            par("current_tick").setDoubleValue(tick+max_drift);
         else if((newTick-tick)<-max_drift)
-            par("current_tick").setDoubleValue((tick-max_drift).dbl());
+            par("current_tick").setDoubleValue(tick-max_drift);
         else
-            par("current_tick").setDoubleValue(newTick.dbl());
-        //emit(currentDrift, par("current_tick").doubleValue()-tick);
+            par("current_tick").setDoubleValue(newTick);
+        emit(currentDrift, (par("current_tick").doubleValue()-tick));
 
 
         lastCorrection = simTime();
