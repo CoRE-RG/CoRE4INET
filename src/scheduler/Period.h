@@ -45,6 +45,7 @@ class Period : public cSimpleModule
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
   public:
+    Period();
     /**
      * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
      *

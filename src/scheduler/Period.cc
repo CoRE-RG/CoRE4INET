@@ -22,15 +22,19 @@ Define_Module(Period);
 
 simsignal_t Period::newCycle = SIMSIGNAL_NULL;
 
+Period::Period(){
+    cycles=0;
+}
+
 void Period::initialize()
 {
-    cycles=0;
     WATCH(cycles);
     newCycle = registerSignal("newCycle");
 
     ASSERT(par("cycle_ticks").longValue()>par("offset_ticks").longValue());
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
+
     newCycleEvent = new SchedulerActionTimeEvent("Period New Cycle Event", ACTION_TIME_EVENT);
     newCycleEvent->setDestinationGate(gate("schedulerIn"));
     newCycleEvent->setNext_cycle(true);
@@ -54,14 +58,12 @@ uint64_t Period::registerEvent(SchedulerEvent *event){
     return timer->registerEvent(event, this);
 }
 
-uint32_t Period::getTicks()
-{
+uint32_t Period::getTicks(){
     //cycle_ticks is added to assure a positive return value
     return (par("cycle_ticks").longValue() + timer->getTotalTicks() - par("offset_ticks").longValue()) % par("cycle_ticks").longValue();
 }
 
-uint64_t Period::getTotalTicks()
-{
+uint64_t Period::getTotalTicks(){
     return timer->getTotalTicks();
 }
 

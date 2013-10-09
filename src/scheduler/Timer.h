@@ -57,6 +57,7 @@ class Timer : public cSimpleModule
     virtual void reschedule();
     virtual uint32_t nextAction();
   public:
+    Timer();
     ~Timer();
     virtual void recalculate();
 

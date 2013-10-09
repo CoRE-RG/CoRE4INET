@@ -15,16 +15,21 @@
 
 #include "Timer.h"
 
+#include <exception>
+
 namespace TTEthernetModel {
 
 Define_Module(Timer);
 
+Timer::Timer(){
+    ticks=0;
+    selfMessage = new cMessage("Scheduler Message");
+}
+
 void Timer::initialize()
 {
-    ticks=0;
     oscillator = dynamic_cast<Oscillator*>(gate("oscillator_in")->getPathStartGate()->getOwnerModule());
     ASSERT2(oscillator, "cannot find oscillator!");
-    selfMessage = new cMessage("Scheduler Message");
 }
 
 Timer::~Timer()
@@ -80,6 +85,9 @@ void Timer::reschedule(){
 }
 
 uint32_t Timer::nextAction(){
+    if(registredEvents.size()==0){
+        throw std::range_error("no events registered");
+    }
     return registredEvents.begin()->first;
 }
 
@@ -121,8 +129,7 @@ uint64_t Timer::registerEvent(SchedulerEvent *event, Period *period){
         actionpoint = getTotalTicks() + timerEvent->getTimer();
     }
     else{
-        //TODO throw
-        return 0;
+        throw std::invalid_argument("Allowed event Kinds are: ACTION_TIME_EVENT or TIMER_EVENT");
     }
     //We do not have to schedule anything if the point is now!
     if(actionpoint==getTotalTicks()){
@@ -130,12 +137,19 @@ uint64_t Timer::registerEvent(SchedulerEvent *event, Period *period){
     }
     else{
         ASSERT2(actionpoint>=getTotalTicks(), "Cannot schedule past Events");
-        uint64_t old_actionpoint = nextAction();
-        registredEvents[actionpoint].push_back(event);
-        //TODO: Overflow -> must regard ticks here!
-        if(!selfMessage->isScheduled() || actionpoint<old_actionpoint){
+        try{
+            uint64_t old_actionpoint = nextAction();
+            registredEvents[actionpoint].push_back(event);
+            //TODO: Overflow -> must regard ticks here!
+            if(!selfMessage->isScheduled() || actionpoint<old_actionpoint){
+                reschedule();
+            }
+        }
+        catch(const std::range_error& re){
+            registredEvents[actionpoint].push_back(event);
             reschedule();
         }
+
     }
     return actionpoint;
 }
