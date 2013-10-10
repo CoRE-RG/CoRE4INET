@@ -24,6 +24,7 @@ Define_Module(Timer);
 Timer::Timer(){
     ticks=0;
     selfMessage = new cMessage("Scheduler Message");
+    oscillator = NULL;
 }
 
 void Timer::initialize()
@@ -66,6 +67,9 @@ void Timer::handleMessage(cMessage *msg)
 }
 
 void Timer::recalculate(){
+    if(!oscillator){
+        throw std::runtime_error("Timer was not yet initialized");
+    }
     if(simTime()!=lastRecalculation){
         simtime_t current_tick = oscillator->getTick();
         uint64_t elapsed_ticks=floor((simTime()-lastRecalculation) / current_tick);
@@ -76,6 +80,9 @@ void Timer::recalculate(){
 }
 
 void Timer::reschedule(){
+    if(!oscillator){
+        throw std::runtime_error("Timer was not yet initialized");
+    }
     recalculate();
     simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
     cancelEvent(selfMessage);

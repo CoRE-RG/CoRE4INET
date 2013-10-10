@@ -51,11 +51,6 @@ class RCBuffer : public virtual CTBuffer, public Timed
          */
         unsigned int numReset;
 
-        /**
-         * @brief The timer Message is stored for reusage purpose.
-         */
-        SchedulerTimerEvent *timerMessage;
-
     public:
         /**
          * @brief Constructor

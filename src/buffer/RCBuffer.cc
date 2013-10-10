@@ -25,14 +25,10 @@ Define_Module( RCBuffer);
 RCBuffer::RCBuffer()
 {
     bagExpired = true;
-    timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
 }
 
 RCBuffer::~RCBuffer()
 {
-    if(timerMessage && timerMessage->getOwner()==this){
-        cancelAndDelete(timerMessage);
-    }
 }
 
 int RCBuffer::numInitStages() const
@@ -48,7 +44,6 @@ void RCBuffer::initialize(int stage)
     CTBuffer::initialize(stage);
     if(stage==0){
         Timed::initialize();
-        timerMessage->setDestinationGate(gate("schedulerIn"));
 
         //Update displaystring
         setIsEmpty(true);
@@ -100,16 +95,18 @@ void RCBuffer::handleMessage(cMessage *msg)
             else
             {
                 bagExpired = true;
-                getDisplayString().setTagArg("i2", 0, "");
+                if(ev.isGUI()){
+                    getDisplayString().setTagArg("i2", 0, "");
+                }
             }
+            delete msg;
         }
     }
+
 }
 
 void RCBuffer::handleParameterChange(const char* parname){
     CTBuffer::handleParameterChange(parname);
-
-    timerMessage->setTimer(par("bag").doubleValue());
 }
 
 void RCBuffer::resetBag()
@@ -122,12 +119,17 @@ void RCBuffer::resetBag()
     }
 
     //Set icon:
-    getDisplayString().setTagArg("i2", 0, "status/hourglass");
+    if(ev.isGUI()){
+        getDisplayString().setTagArg("i2", 0, "status/hourglass");
+    }
 
     numReset++;
     if (numReset == destinationGates.size())
     {
-        //Reregister scheduler
+        //Register scheduler
+        SchedulerTimerEvent *timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
+        timerMessage->setTimer(par("bag").doubleValue());
+        timerMessage->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(timerMessage);
     }
 }

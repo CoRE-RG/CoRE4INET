@@ -15,6 +15,7 @@
 
 #include "Period.h"
 #include "Timer.h"
+#include <exception>
 
 namespace TTEthernetModel {
 
@@ -24,6 +25,8 @@ simsignal_t Period::newCycle = SIMSIGNAL_NULL;
 
 Period::Period(){
     cycles=0;
+    newCycleEvent=NULL;
+    timer=NULL;
 }
 
 void Period::initialize()
@@ -55,15 +58,24 @@ void Period::handleMessage(cMessage *msg)
 
 
 uint64_t Period::registerEvent(SchedulerEvent *event){
+    if(!timer){
+        throw std::runtime_error("Period was not yet initialized");
+    }
     return timer->registerEvent(event, this);
 }
 
 uint32_t Period::getTicks(){
+    if(!timer){
+        throw std::runtime_error("Period was not yet initialized");
+    }
     //cycle_ticks is added to assure a positive return value
     return (par("cycle_ticks").longValue() + timer->getTotalTicks() - par("offset_ticks").longValue()) % par("cycle_ticks").longValue();
 }
 
 uint64_t Period::getTotalTicks(){
+    if(!timer){
+        throw std::runtime_error("Period was not yet initialized");
+    }
     return timer->getTotalTicks();
 }
 
