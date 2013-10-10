@@ -17,7 +17,7 @@
 #define __TTETHERNETMODEL_TICAPP_H_
 
 #include <omnetpp.h>
-#include "TTEApplicationBase.h"
+#include "ApplicationBase.h"
 
 #include <Scheduled.h>
 
@@ -27,10 +27,10 @@ namespace TTEthernetModel {
  * @brief Tic Application used for the rt_tictoc example.
  *
  *
- * @sa TTEApplicationBase
+ * @sa ApplicationBase
  * @ingroup Applications
  */
-class TicApp : public TTEApplicationBase, public virtual Scheduled
+class TicApp : public ApplicationBase, public virtual Scheduled
 {
   protected:
     /**

@@ -16,12 +16,12 @@
 
 package ttethernet.examples.synchronization.StandardIntegrity_large;
 
-import ttethernet.nodes.ethernet.TTEEtherSwitch;
-import ttethernet.ctc.TTIncoming;
-import ttethernet.buffer.TTDoubleBuffer;
-import ttethernet.ctc.RCIncoming;
-import ttethernet.buffer.RCQueueBuffer;
-import ttethernet.ctc.PCFIncoming;
+import ttethernet.nodes.ethernet.AS6802.TTEEtherSwitch;
+import ttethernet.incoming.AS6802.TTIncoming;
+import ttethernet.buffer.AS6802.TTDoubleBuffer;
+import ttethernet.incoming.AS6802.RCIncoming;
+import ttethernet.buffer.AS6802.RCQueueBuffer;
+import ttethernet.incoming.AS6802.PCFIncoming;
 
 //
 // switch1: configuration in switch1.ini

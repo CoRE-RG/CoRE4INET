@@ -25,12 +25,12 @@ Define_Module(TocApp);
 
 void TocApp::initialize()
 {
-    TTEApplicationBase::initialize();
+    ApplicationBase::initialize();
 }
 
 void TocApp::handleMessage(cMessage *msg)
 {
-    TTEApplicationBase::handleMessage(msg);
+    ApplicationBase::handleMessage(msg);
 
     if(msg->arrivedOn("TTin")){
         TTFrame *ttframe = dynamic_cast<TTFrame*>(msg);

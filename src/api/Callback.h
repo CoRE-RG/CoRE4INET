@@ -25,7 +25,7 @@ typedef void(*cbFunc)(void *);
  * @todo This may be merged with the Task class in a joined superclass. The
  * code seems identical.
  *
- * @sa TTEApplicationBase
+ * @sa ApplicationBase
  */
 class Callback
 {

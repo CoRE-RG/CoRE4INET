@@ -15,7 +15,7 @@
 
 package ttethernet.applications.base.examples.rt_tictoc;
 
-import ttethernet.applications.base.TTEApplicationBase;
+import ttethernet.applications.base.ApplicationBase;
 
 //
 // Toc Application used for the rt_tictoc example.
@@ -26,7 +26,7 @@ import ttethernet.applications.base.TTEApplicationBase;
 // @see rt_tictoc, TicApp
 //
 // @author Till Steinbach
-simple TocApp extends TTEApplicationBase
+simple TocApp extends ApplicationBase
 {
     parameters:
     	@class(TocApp);

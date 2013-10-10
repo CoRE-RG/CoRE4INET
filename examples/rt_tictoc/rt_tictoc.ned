@@ -15,7 +15,7 @@
 
 package ttethernet.examples.rt_tictoc;
 
-import ttethernet.nodes.ethernet.TTEEtherHost;
+import ttethernet.nodes.ethernet.AS6802.TTEEtherHost;
 
 //
 // Small sample network with two hosts and one switch that shows how to 

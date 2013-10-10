@@ -15,7 +15,7 @@
 
 package ttethernet.applications.base.examples.rt_tictoc;
 
-import ttethernet.applications.base.TTEApplicationBase;
+import ttethernet.applications.base.ApplicationBase;
 import ttethernet.utilities.classes.IScheduled;
 
 //
@@ -27,7 +27,7 @@ import ttethernet.utilities.classes.IScheduled;
 // @see rt_tictoc, TocApp
 //
 // @author Till Steinbach
-simple TicApp extends TTEApplicationBase like IScheduled
+simple TicApp extends ApplicationBase like IScheduled
 {
     parameters:
         @class(TicApp);

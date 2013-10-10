@@ -17,7 +17,7 @@
 #define __TTETHERNETMODEL_TICAPP_H_
 
 #include <omnetpp.h>
-#include "TTEApplicationBase.h"
+#include "ApplicationBase.h"
 
 namespace TTEthernetModel {
 
@@ -25,10 +25,10 @@ namespace TTEthernetModel {
  * @brief Toc Application used for the rt_tictoc example.
  *
  *
- * @sa TTEApplicationBase
+ * @sa ApplicationBase
  * @ingroup Applications
  */
-class TocApp : public TTEApplicationBase
+class TocApp : public ApplicationBase
 {
   protected:
     /**

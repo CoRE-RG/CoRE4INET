@@ -1,5 +1,6 @@
 package ttethernet.linklayer.inControl;
 
+import ttethernet.linklayer.inControl.base.BE_InControl;
 import inet.linklayer.IOutputQueue;
 
 //

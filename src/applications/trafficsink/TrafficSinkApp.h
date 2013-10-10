@@ -17,7 +17,7 @@
 #define __TTETHERNETMODELV2_TRAFFICSINK_H_
 
 #include <omnetpp.h>
-#include "TTEApplicationBase.h"
+#include "ApplicationBase.h"
 
 namespace TTEthernetModel {
 
@@ -25,10 +25,10 @@ namespace TTEthernetModel {
  * @brief Traffic sink application used for statistics collection.
  *
  *
- * @sa TTEApplicationBase
+ * @sa ApplicationBase
  * @ingroup Applications
  */
-class TrafficSinkApp : public TTEApplicationBase
+class TrafficSinkApp : public ApplicationBase
 {
     private:
         /**

@@ -15,9 +15,9 @@
 
 package ttethernet.examples.small_network;
 
-import ttethernet.nodes.ethernet.TTEEtherHost;
-import ttethernet.ctc.TTIncoming;
-import ttethernet.buffer.TTDoubleBuffer;
+import ttethernet.nodes.ethernet.AS6802.TTEEtherHost;
+import ttethernet.incoming.AS6802.TTIncoming;
+import ttethernet.buffer.AS6802.TTDoubleBuffer;
 
 
 //

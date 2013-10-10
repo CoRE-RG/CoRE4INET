@@ -27,7 +27,7 @@ simsignal_t TicApp::roundtripSignal = SIMSIGNAL_NULL;
 
 void TicApp::initialize()
 {
-    TTEApplicationBase::initialize();
+    ApplicationBase::initialize();
     Scheduled::initialize();
 
     rxPkSignal = registerSignal("rxPk");
@@ -41,7 +41,7 @@ void TicApp::initialize()
 
 void TicApp::handleMessage(cMessage *msg)
 {
-    TTEApplicationBase::handleMessage(msg);
+    ApplicationBase::handleMessage(msg);
 
     if(msg->arrivedOn("schedulerIn")){
         Tic *tic = new Tic();

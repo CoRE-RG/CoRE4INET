@@ -15,15 +15,15 @@
 
 package ttethernet.applications.trafficsink;
 
-import ttethernet.applications.base.TTEApplicationBase;
+import ttethernet.applications.base.ApplicationBase;
 
 //
 // Traffic sink application used for statistics collection.
 //
-// @see TTEApplicationBase
+// @see ApplicationBase
 //
 // @author Till Steinbach
-simple TrafficSinkApp extends TTEApplicationBase
+simple TrafficSinkApp extends ApplicationBase
 {
     parameters:
         @class(TrafficSinkApp);

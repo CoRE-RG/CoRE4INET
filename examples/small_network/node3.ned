@@ -15,11 +15,11 @@
 
 package ttethernet.examples.small_network;
 
-import ttethernet.nodes.ethernet.TTEEtherHost;
-import ttethernet.ctc.TTIncoming;
-import ttethernet.buffer.TTDoubleBuffer;
-import ttethernet.ctc.RCIncoming;
-import ttethernet.buffer.RCQueueBuffer;
+import ttethernet.nodes.ethernet.AS6802.TTEEtherHost;
+import ttethernet.incoming.AS6802.TTIncoming;
+import ttethernet.buffer.AS6802.TTDoubleBuffer;
+import ttethernet.incoming.AS6802.RCIncoming;
+import ttethernet.buffer.AS6802.RCQueueBuffer;
 
 
 //

@@ -7,7 +7,7 @@ package ttethernet.linklayer;
 //
 // Modules implementing IPort are not necessarily physical ports.
 //
-// @see TTEPHYPort, Sync, ITTEApplication
+// @see TTEPHYPort, Sync, IApplication
 //
 // @author Till Steinbach
 moduleinterface IPort

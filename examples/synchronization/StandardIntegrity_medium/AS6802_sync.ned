@@ -15,7 +15,7 @@
 
 package ttethernet.examples.synchronization.StandardIntegrity_medium;
 
-import ttethernet.nodes.ethernet.TTEEtherHost;
+import ttethernet.nodes.ethernet.AS6802.TTEEtherHost;
 
 //
 // Small sample network with three hosts and one switch that shows how to 

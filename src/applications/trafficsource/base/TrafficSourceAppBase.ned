@@ -1,0 +1,42 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package ttethernet.applications.trafficsource.base;
+
+import ttethernet.applications.base.ApplicationBase;
+
+//
+// Abstract base traffic source application used for various traffic generators.
+// Uses CTFrame with encapsulated cPacket as payload
+// Since this is an abstract module please do not instantiate it
+//
+//
+// @see TTTrafficSourceApp, RCTrafficSourceApp
+//
+// @author Till Steinbach
+simple TrafficSourceAppBase extends ApplicationBase
+{
+    parameters:
+        @display("i=block/source");
+        
+        // Trafficsource enabled or disabled
+        bool enabled = default(true);
+        
+        //Size of the payload of the message (size of encapsulated cPacket) that is being generated
+        int payload @unit(Byte) = default(46Byte);
+        
+        //Critical traffic identifier of the message that is being generated (-1) means don't set ID
+        int ct_id = default(-1);
+}

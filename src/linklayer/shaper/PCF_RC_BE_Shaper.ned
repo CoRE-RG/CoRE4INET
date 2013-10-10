@@ -1,5 +1,6 @@
 package ttethernet.linklayer.shaper;
 
+import ttethernet.linklayer.shaper.base.BE_Shaper;
 import inet.linklayer.IOutputQueue;
 
 //A Shaper that handles PCF, RC and BE traffic

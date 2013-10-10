@@ -1,0 +1,46 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package ttethernet.applications.trafficsource.AS6802;
+
+import ttethernet.utilities.classes.IScheduled;
+import ttethernet.applications.trafficsource.base.TrafficSourceAppBase;
+
+//
+// Traffic source application used for time-triggered traffic generators.
+//
+// @see RCTrafficSourceApp
+//
+// @author Till Steinbach
+simple TTTrafficSourceApp extends TrafficSourceAppBase like IScheduled
+{
+    parameters:
+        @class(TTTrafficSourceApp);
+        @display("i=,red");
+        
+        //Time in the cycle at which the message is being send to the connected buffers
+        double action_time @unit(s);
+        
+        //Modulo cycles: 1 means message is being send in each cycle, 2 means in every second cycle,
+        //and so on. 0 means never
+        int modulo = default(1);
+        
+        //Period of Scheduler this app is assigned to
+        string period = default("period[0]");
+        string oscillator = default("oscillator");
+        string timer = default("timer");
+
+       
+}
