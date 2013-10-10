@@ -16,6 +16,7 @@
 package ttethernet.applications.base.examples.rt_tictoc;
 
 import ttethernet.applications.base.TTEApplicationBase;
+import ttethernet.utilities.classes.IScheduled;
 
 //
 // Tic Application used for the rt_tictoc example.
@@ -26,7 +27,7 @@ import ttethernet.applications.base.TTEApplicationBase;
 // @see rt_tictoc, TocApp
 //
 // @author Till Steinbach
-simple TicApp extends TTEApplicationBase
+simple TicApp extends TTEApplicationBase like IScheduled
 {
     parameters:
         @class(TicApp);
@@ -41,4 +42,11 @@ simple TicApp extends TTEApplicationBase
         int ct_id;
         //Time in cycle when the tic message is generated
         int action_time @unit(tick);
+		
+		//Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator @see IScheduled
+        string oscillator = default("oscillator");
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer @see IScheduled
+        string timer = default("timer");
+        //Period of the scheduled module (must be set to the name of a period module in the Node) when left empty: period[0] @see IScheduled
+        string period = default("");
 }

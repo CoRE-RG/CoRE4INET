@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 #include "TTEApplicationBase.h"
 
+#include <Scheduled.h>
 
 namespace TTEthernetModel {
 
@@ -29,7 +30,7 @@ namespace TTEthernetModel {
  * @sa TTEApplicationBase
  * @ingroup Applications
  */
-class TicApp : public TTEApplicationBase
+class TicApp : public TTEApplicationBase, public virtual Scheduled
 {
   protected:
     /**

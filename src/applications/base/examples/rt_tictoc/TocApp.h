@@ -19,7 +19,6 @@
 #include <omnetpp.h>
 #include "TTEApplicationBase.h"
 
-
 namespace TTEthernetModel {
 
 /**

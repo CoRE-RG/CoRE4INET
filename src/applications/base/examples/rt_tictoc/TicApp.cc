@@ -15,7 +15,6 @@
 
 #include "TicApp.h"
 #include "TicToc_m.h"
-#include "TTEScheduler.h"
 #include "TTFrame_m.h"
 #include "RCFrame_m.h"
 
@@ -29,15 +28,15 @@ simsignal_t TicApp::roundtripSignal = SIMSIGNAL_NULL;
 void TicApp::initialize()
 {
     TTEApplicationBase::initialize();
+    Scheduled::initialize();
 
     rxPkSignal = registerSignal("rxPk");
     roundtripSignal = registerSignal("roundtrip");
 
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
     event->setAction_time(par("action_time").longValue());
     event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
+    period->registerEvent(event);
 }
 
 void TicApp::handleMessage(cMessage *msg)
@@ -61,9 +60,9 @@ void TicApp::handleMessage(cMessage *msg)
         }
         delete frame;
 
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
-        tteScheduler->registerEvent(event, true);
+        event->setNext_cycle(true);
+        period->registerEvent(event);
     }
     else if(msg->arrivedOn("RCin")){
         RCFrame *rcframe = dynamic_cast<RCFrame*>(msg);
