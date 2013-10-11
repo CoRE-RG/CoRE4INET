@@ -2,13 +2,13 @@
 Test Scheduler
 
 %file: package.ned
-package test.modul.ttescheduler;
+package test.modul.scheduler;
 
 %inifile: test.ini
 [General]
 ned-path = .;../../../../src;../../../../../inet/src;../../lib/
 
-network = TTESchedulerTest
+network = SchedulerTest
 
 sim-time-limit = 1s
 
@@ -20,6 +20,6 @@ cmdenv-express-mode=false
 
 
 %contains: stdout
-REGISTRED: ACTION_TIME_EVENT: action_time:1000 NOW [simtime:0; ticks:0; total_ticks:37500]
-EXECUTED: ACTION_TIME_EVENT: action_time:1000 NOW [simtime:0.00008; ticks:1000; total_ticks:38500]
+REGISTRED: ACTION_TIME_EVENT: action_time:1000 NOW [simtime:0; ticks:0; total_ticks:0]
+EXECUTED: ACTION_TIME_EVENT: action_time:1000 NOW [simtime:0.00008; ticks:1000; total_ticks:1000]
 

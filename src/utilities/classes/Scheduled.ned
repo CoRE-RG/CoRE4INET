@@ -21,6 +21,7 @@ package ttethernet.utilities.classes;
 simple Scheduled extends Timed like IScheduled
 {
     parameters:
+        @class(Scheduled);
         //Period of the scheduled module (must be set to the name of a period module in the Node) when left empty: period[0]
         string period = default("");
 }

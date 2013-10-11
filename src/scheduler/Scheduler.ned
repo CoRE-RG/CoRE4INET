@@ -28,17 +28,17 @@ module Scheduler like ITTEScheduler
         double tick @unit(s) = default(80ns);
     submodules:
         timer: Timer {
-            @display("p=85,87");
+            @display("p=160,40");
             gates:
                 period_in[numPeriods];
         }
         oscillator: <default("SimpleOscillator")> like IOscillator {
             parameters:
-            	@display("p=87,25");
-            	tick=tick;
+                @display("p=70,40");
+                tick = tick;
         }
         period[numPeriods]: Period {
-            @display("p=202,87,col,70");
+            @display("p=70,100,row,60");
         }
     connections:
         for i=0..sizeof(period)-1 {

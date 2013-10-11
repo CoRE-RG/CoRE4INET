@@ -17,7 +17,7 @@ namespace TTEthernetModel {
  *
  */
 template <class TC>
-class TTShaper : public TC, public Timed
+class TTShaper : public TC, public virtual Timed
 {
     public:
         /**

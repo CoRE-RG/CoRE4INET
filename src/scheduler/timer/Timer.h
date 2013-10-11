@@ -94,6 +94,8 @@ class Timer : public cSimpleModule
      */
     virtual uint64_t getTotalTicks();
 
+    virtual Oscillator* getOscillator();
+
     /**
      * @brief Corrects the clock by the number of ticks
      *

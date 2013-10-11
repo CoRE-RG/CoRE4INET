@@ -13,13 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package test.modul.ttescheduler;
+package test.modul.scheduler;
+
+import ttethernet.utilities.classes.Scheduled;
 
 //
 // TODO auto-generated module
 //
-simple TTESchedulerTester
+simple SchedulerTester extends Scheduled
 {
+    parameters:
+        @class(SchedulerTester);
     gates:
         input schedulerIn @directIn;
 }

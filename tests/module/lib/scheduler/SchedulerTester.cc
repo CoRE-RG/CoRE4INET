@@ -13,33 +13,31 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "TTESchedulerTester.h"
+#include "SchedulerTester.h"
 
-#include "TTEScheduler.h"
 
 using namespace TTEthernetModel;
 
-Define_Module(TTESchedulerTester);
+Define_Module(SchedulerTester);
 
-void TTESchedulerTester::initialize()
+void SchedulerTester::initialize()
 {
+    Scheduled::initialize();
     scheduleAt(simTime(), new cMessage("ACTIVATOR!"));
 }
 
-void TTESchedulerTester::handleMessage(cMessage *msg)
+void SchedulerTester::handleMessage(cMessage *msg)
 {
     if(msg->isSelfMessage()){
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
         event->setAction_time(1000);
         event->setDestinationGate(gate("schedulerIn"));
-        tteScheduler->registerEvent(event);
-        ev << "REGISTRED: ACTION_TIME_EVENT: action_time:" << event->getAction_time() << " NOW [simtime:" << simTime() << "; ticks:" << tteScheduler->getTicks() << "; total_ticks:" << tteScheduler->getTotalTicks() << "]" << endl;
+        period->registerEvent(event);
+        ev << "REGISTRED: ACTION_TIME_EVENT: action_time:" << event->getAction_time() << " NOW [simtime:" << simTime() << "; ticks:" << period->getTicks() << "; total_ticks:" << period->getTotalTicks() << "]" << endl;
     }
     else if(msg->arrivedOn("schedulerIn")){
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
-        ev << "EXECUTED: ACTION_TIME_EVENT: action_time:" << event->getAction_time() << " NOW [simtime:" << simTime() << "; ticks:" << tteScheduler->getTicks() << "; total_ticks:" << tteScheduler->getTotalTicks() << "]" << endl;
+        ev << "EXECUTED: ACTION_TIME_EVENT: action_time:" << event->getAction_time() << " NOW [simtime:" << simTime() << "; ticks:" << period->getTicks() << "; total_ticks:" << period->getTotalTicks() << "]" << endl;
     }
-
+    delete msg;
 }

@@ -22,7 +22,7 @@
 #include "cpar.h"
 #include "cgate.h"
 
-#include "TTEScheduler.h"
+#include "Timer.h"
 #include "PCFrame_m.h"
 
 using namespace TTEthernetModel;
@@ -95,6 +95,6 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
  * @param static_tx_delay A static TX-delay to be added
  * @param scheduler The scheduler of the current node
  */
-void setTransparentClock(PCFrame *pcf, double static_tx_delay, TTEScheduler* scheduler);
+void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler);
 
 #endif /* HELPERFUNCTIONS_H_ */

@@ -6,6 +6,7 @@
 #include <PCFrame_m.h>
 #include <TTEScheduler.h>
 #include <HelperFunctions.h>
+#include <Timed.h>
 
 namespace TTEthernetModel {
 
@@ -17,7 +18,7 @@ namespace TTEthernetModel {
  *
  */
 template <class TC>
-class RCShaper : public TC
+class RCShaper : public TC, public virtual Timed
 {
     public:
         /**
@@ -134,6 +135,9 @@ template <class TC>
 void RCShaper<TC>::initialize(int stage)
 {
     TC::initialize(stage);
+    if(stage==0){
+        Timed::initialize();
+    }
 }
 
 template <class TC>
@@ -161,7 +165,7 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
             //Set Transparent clock when frame is PCF
             PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
             if(pcf){
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("scheduler"));
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
             }
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
@@ -233,7 +237,7 @@ cMessage* RCShaper<TC>::pop()
 
             PCFrame *pcf = dynamic_cast<PCFrame*> (message);
             if(pcf){
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), (TTEScheduler*)cModule::getParentModule()->getParentModule()->getSubmodule("scheduler"));
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
             }
             return message;
         }

@@ -13,19 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODEL_TTESCHEDULERTESTER_H_
-#define __TTETHERNETMODEL_TTESCHEDULERTESTER_H_
+package test.modul.scheduler;
 
-#include <omnetpp.h>
+import ttethernet.scheduler.Scheduler;
 
-/**
- * TODO - Generated class
- */
-class TTESchedulerTester : public cSimpleModule
+network SchedulerTest
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-#endif
+    submodules:
+        scheduler: Scheduler{
+        }
+        
+        schedulerTester: SchedulerTester{
+        }
+}

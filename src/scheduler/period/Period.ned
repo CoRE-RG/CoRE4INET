@@ -27,7 +27,7 @@ simple Period
         int cycle_ticks @unit(tick) = default(37500tick);
         // Number of ticks offset
         int offset_ticks @unit(tick) = default(0tick);
-        @display("i=block/table2");
+        @display("i=block/table");
     gates:
         output out;
         //Input gate for the incoming SchedulerActionTimeEvent messages

@@ -40,5 +40,8 @@ void Oscillator::handleMessage(cMessage *msg)
 simtime_t Oscillator::getTick(){
     return SimTime(par("current_tick").doubleValue());
 }
+simtime_t Oscillator::getPreciseTick(){
+    return SimTime(par("tick").doubleValue());
+}
 
 } //namespace

@@ -67,7 +67,7 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick){
     return transparentClock/secondsToTransparentClock(tick);
 }
 
-void setTransparentClock(PCFrame *pcf, double static_tx_delay, TTEScheduler* scheduler){
+void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer){
     uint64_t transparentClock = pcf->getTransparent_clock();
 
     //Add static delay for this port
@@ -85,7 +85,7 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, TTEScheduler* sch
         }
     }
     if(start >= 0){
-        transparentClock+=ticksToTransparentClock((scheduler->getTotalTicks()-start),scheduler->par("tick").doubleValue());
+        transparentClock+=ticksToTransparentClock((timer->getTotalTicks()-start),timer->getOscillator()->getPreciseTick());
     }
 
     //Set new transparent clock
