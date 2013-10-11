@@ -38,11 +38,11 @@ foreach line {
    {"About..."               "README"               "../doc/index.html"}
 
    {"Examples"}
-   {"Real-Time Tic-Toc"                                           "rt_tictoc"                                  "./run"               "run"}
-   {"Small Network"                                               "small_network"                              "./run"               "run"}
-   {"AS6802 Synchronization with high integrity (small)"          "synchronization/HighIntegrity_small"        "./run"               "run"}
-   {"AS6802 Synchronization with standard integrity (medium)"     "synchronization/StandardIntegrity_medium"   "./run"               "run"}
-   {"AS6802 Synchronization with standard integrity (large)"      "synchronization/StandardIntegrity_large"    "./run"               "run"}
+   {"AS6802 Real-Time Tic-Toc"                                    "AS6802/rt_tictoc"                                  "./run"               "run"}
+   {"AS6802 Small Network"                                        "AS6802/small_network"                              "./run"               "run"}
+   {"AS6802 Synchronization with high integrity (small)"          "AS6802/synchronization/HighIntegrity_small"        "./run"               "run"}
+   {"AS6802 Synchronization with standard integrity (medium)"     "AS6802/synchronization/StandardIntegrity_medium"   "./run"               "run"}
+   {"AS6802 Synchronization with standard integrity (large)"      "AS6802/synchronization/StandardIntegrity_large"    "./run"               "run"}
 } {
    lappend samples $i
    if {[llength $line]==0} {
