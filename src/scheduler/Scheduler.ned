@@ -15,7 +15,9 @@
 
 package ttethernet.scheduler;
 
+import ttethernet.scheduler.timer.Timer;
 import ttethernet.scheduler.oscillator.IOscillator;
+import ttethernet.scheduler.period.Period;
 
 module Scheduler like ITTEScheduler
 {
