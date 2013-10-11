@@ -128,8 +128,6 @@ void Timer::reschedule(){
     recalculate();
     cancelEvent(selfMessage);
     try{
-        uint64_t lala = nextAction();
-        uint64_t dede = getTotalTicks();
         simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
         scheduleAt(simTime()+next_action, selfMessage);
     }
