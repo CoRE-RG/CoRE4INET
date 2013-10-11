@@ -13,34 +13,38 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODEL_TICAPP_H_
-#define __TTETHERNETMODEL_TICAPP_H_
+namespace TTEthernetModel;
 
-#include <omnetpp.h>
-#include "ApplicationBase.h"
-
-namespace TTEthernetModel {
-
-/**
- * @brief Toc Application used for the rt_tictoc example.
- *
- *
- * @sa ApplicationBase
- * @ingroup Applications
- */
-class TocApp : public ApplicationBase
-{
-  protected:
-    /**
-     * @brief Initialization of the module. Sends activator message
-     */
-    virtual void initialize();
-    /**
-     * @brief Handles message generation and reception
-     */
-    virtual void handleMessage(cMessage *msg);
-};
-
+//
+// Messages for the rt_tictoc Examples
+//
+// @author Till Steinbach
+//
+packet TicToc {
+    //All messages use minimum size payload
+    byteLength = 46;
+    //Counter transportet through the network
+    unsigned int count = 0;
+    //Start time to calculate roundtrip time
+    simtime_t roundtrip_start;
 }
 
-#endif
+//
+// Tic-Message for the rt_tictoc Examples
+//
+// @author Till Steinbach
+//
+packet Tic extends TicToc{
+    //Request message
+    string request = "Hello!";
+}
+
+//
+// Toc-Message for the rt_tictoc Examples
+//
+// @author Till Steinbach
+//
+packet Toc extends TicToc{
+    //Response message
+    string response = "World!";
+}

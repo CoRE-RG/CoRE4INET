@@ -31,9 +31,7 @@ namespace TTEthernetModel {
 /**
  * @brief Represents the part of a port that receives messages (RX)
  *
- *Critical traffic arriving on in-gate is forwarded to the incoming modules
- * or dropped if there is no module configured. Best-effort frames are
- * forwarded through the out-gate.
+ * @author Till Steinbach
  */
 template <class IC>
 class BEInControl : public IC

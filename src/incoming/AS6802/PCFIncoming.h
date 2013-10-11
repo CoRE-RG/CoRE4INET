@@ -31,6 +31,8 @@ namespace TTEthernetModel {
  *
  * @sa Incoming
  *
+ * @ingroup AS6802
+ *
  * @author Lazar Todorov, Till Steinbach
  */
 class PCFIncoming: public CTIncoming

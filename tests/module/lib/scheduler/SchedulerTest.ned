@@ -17,6 +17,10 @@ package test.modul.scheduler;
 
 import ttethernet.scheduler.Scheduler;
 
+// TODO documentation
+//
+// @author Till Steinbach
+//
 network SchedulerTest
 {
     submodules:

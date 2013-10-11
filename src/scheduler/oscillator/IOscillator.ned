@@ -15,7 +15,11 @@
 
 package ttethernet.scheduler.oscillator;
 
-
+//
+// TODO Documentation
+//
+// @author Till Steinbach
+//
 moduleinterface IOscillator{
 	parameters:
 	    @display("i=block/mac");

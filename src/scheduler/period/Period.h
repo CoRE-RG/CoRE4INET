@@ -26,6 +26,8 @@ class Timer;
 
 /**
  * TODO - Generated class
+ *
+ * @author Till Steinbach
  */
 class Period : public cSimpleModule
 {

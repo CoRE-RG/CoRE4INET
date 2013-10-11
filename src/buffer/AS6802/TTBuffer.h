@@ -33,7 +33,9 @@ namespace TTEthernetModel {
  *
  * @sa TTDoubleBuffer, TTQueueBuffer, CTBuffer
  *
- * @ingroup Buffer
+ * @ingroup Buffer AS6802
+ *
+ * @author Till Steinbach
  */
 class TTBuffer : public virtual CTBuffer, public Scheduled
 {

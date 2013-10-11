@@ -25,6 +25,8 @@ namespace TTEthernetModel {
 
 /**
  * TODO - Generated class
+ *
+ * @author Till Steinbach
  */
 class SimpleOscillator : public Oscillator
 {

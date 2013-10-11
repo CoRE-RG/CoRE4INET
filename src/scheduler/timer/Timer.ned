@@ -18,6 +18,8 @@ package ttethernet.scheduler.timer;
 //
 // TODO auto-generated module
 //
+// @author Till Steinbach
+//
 simple Timer
 {
     parameters:

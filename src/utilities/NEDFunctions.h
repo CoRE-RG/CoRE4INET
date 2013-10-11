@@ -29,6 +29,8 @@
  * @param argv array of incoming parameters
  * @param argc number of parameters
  * @return converted
+ *
+ * @author Till Steinbach
  */
 static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc);
 
@@ -43,6 +45,8 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
  * @param argv array of incoming parameters
  * @param argc number of parameters
  * @return converted
+ *
+ * @author Till Steinbach
  */
 static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc);
 

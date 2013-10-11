@@ -32,6 +32,8 @@ typedef void(*cbFunc)(void *);
  * code seems identical.
  *
  * @sa ApplicationBase
+ *
+ *  @author Till Steinbach
  */
 class Task
 {

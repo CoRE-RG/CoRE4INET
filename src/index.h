@@ -5,6 +5,10 @@
  */
 
 /**
+ * @defgroup AS6802 AS6802
+ */
+
+/**
  * @defgroup Buffer Buffers
  */
 
@@ -12,6 +16,13 @@
  * @defgroup Configuration Configuration
  */
 
+/**
+ * @defgroup Shapers Shapers
+ */
+
+/**
+ * @defgroup Tests Tests
+ */
 
 /**
  * @page whatsnew What's New

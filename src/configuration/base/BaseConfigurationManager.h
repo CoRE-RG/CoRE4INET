@@ -26,6 +26,7 @@ namespace TTEthernetModel {
  *
  * The module is deleted after simulation start
  *
+ * @author Till Steinbach
  */
 class BaseConfigurationManager : public cSimpleModule
 {

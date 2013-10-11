@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.base.examples.rt_tictoc;
+package ttethernet.applications.examples.rt_tictoc;
 
 import ttethernet.applications.base.ApplicationBase;
 import ttethernet.utilities.classes.IScheduled;

@@ -29,7 +29,7 @@ namespace TTEthernetModel {
  * This class checks whether incoming traffic was conform with the configured bag.
  * Conform messages are forwarded from in to out
  *
- * @sa Incoming
+ * @sa AS6802
  *
  * @author Till Steinbach
  */

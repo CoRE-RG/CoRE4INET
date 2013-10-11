@@ -43,6 +43,8 @@ class Callback;
  * dequeue() is called to get a frame from the buffer.
  *
  * @ingroup Buffer
+ *
+ * @author Till Steinbach
  */
 class Buffer : public virtual cSimpleModule
 {

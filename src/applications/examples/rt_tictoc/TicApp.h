@@ -13,38 +13,48 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_TRAFFICSOURCEBASE_H_
-#define __TTETHERNETMODELV2_TRAFFICSOURCEBASE_H_
+#ifndef __TTETHERNETMODEL_TICAPP_H_
+#define __TTETHERNETMODEL_TICAPP_H_
 
 #include <omnetpp.h>
 #include "ApplicationBase.h"
 
+#include <Scheduled.h>
+
 namespace TTEthernetModel {
 
 /**
- * @brief Base class for a TTEthernet traffic generator application.
+ * @brief Tic Application used for the rt_tictoc example.
+ *
  *
  * @sa ApplicationBase
- * @ingroup Applications
+ * @ingroup Applications AS6802
+ *
+ * @author Till Steinbach
  */
-class TrafficSourceAppBase : public ApplicationBase
+class TicApp : public ApplicationBase, public virtual Scheduled
 {
-    protected:
-        /**
-         * @brief Initialization of the module. Sends activator message
-         */
-        virtual void initialize();
+  protected:
+    /**
+    * @brief Initialization of the module. Sends activator message
+    */
+    virtual void initialize();
+    /**
+     * @brief Handles message generation and reception
+     */
+    virtual void handleMessage(cMessage *msg);
+  protected:
+      /**
+       * Signal that is emitted every time a toc was received.
+       */
+      static simsignal_t rxPkSignal;
 
-        /**
-         * @brief Generates and sends a new Message.
-         *
-         * The message is sent to the buffer with the ct_id defined in parameter ct_id of the module.
-         * The message kind is defined by the buffer-type (RC/TT) of the buffer the message is sent to.
-         * The size is defined by the payload parameter of the module.
-         */
-        virtual void sendMessage();
+      /**
+       * Signal that contains the roundtrip time of a request/response.
+       */
+      static simsignal_t roundtripSignal;
 };
 
-} //namespace
+}
 
 #endif

@@ -23,6 +23,10 @@ namespace TTEthernetModel {
 
 /**
  * TODO - Generated class
+ *
+ * @ingroup Tests
+ *
+ * @author Till Steinbach
  */
 class SchedulerTester : public virtual cSimpleModule, public Scheduled
 {

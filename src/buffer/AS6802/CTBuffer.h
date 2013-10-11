@@ -39,7 +39,9 @@ namespace TTEthernetModel {
  *
  * dequeue() is called to get a frame from the buffer.
  *
- * @ingroup Buffer
+ * @ingroup Buffer AS6802
+ *
+ * @author Till Steinbach
  */
 class CTBuffer : public virtual Buffer
 {

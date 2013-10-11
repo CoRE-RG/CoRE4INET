@@ -30,6 +30,8 @@ namespace TTEthernetModel {
 
 /**
  * TODO - Generated class
+ *
+ * @author Till Steinbach
  */
 class Timer : public cSimpleModule
 {

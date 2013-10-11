@@ -27,7 +27,9 @@ namespace TTEthernetModel {
  * Containes main() and callback
  *
  * @sa TTEAPITestApplication, ApplicationBase
- * @ingroup Applications
+ * @ingroup Applications AS6802
+ *
+ * @author Till Steinbach
  */
 class TTEAPITestApplication : public TTEAPIApplicationBase
 {

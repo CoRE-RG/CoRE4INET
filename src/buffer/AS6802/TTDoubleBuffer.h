@@ -31,7 +31,9 @@ namespace TTEthernetModel {
  *
  * @sa TTBuffer, TTDoubleBuffer, CTBuffer
  *
- * @ingroup Buffer
+ * @ingroup Buffer AS6802
+ *
+ * @author Till Steinbach
  */
 class TTDoubleBuffer : public TTBuffer, public DoubleBuffer
 {

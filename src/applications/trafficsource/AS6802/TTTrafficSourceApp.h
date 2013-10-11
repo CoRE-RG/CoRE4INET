@@ -24,11 +24,13 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Simple Test-Application.
+ * @brief Traffic-Generator for TT-Traffic.
  *
  *
  * @sa ApplicationBase
- * @ingroup Applications
+ * @ingroup Applications AS6802
+ *
+ * @author Till Steinbach
  */
 class TTTrafficSourceApp : public TrafficSourceAppBase, public Scheduled
 {

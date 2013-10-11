@@ -34,7 +34,9 @@ namespace TTEthernetModel {
  *
  * @sa RCBuffer, RCQueueBuffer, CTBuffer
  *
- * @ingroup Buffer
+ * @ingroup Buffer AS6802
+ *
+ * @author Till Steinbach
  */
 class RCQueueBuffer : public RCBuffer, public QueueBuffer
 {

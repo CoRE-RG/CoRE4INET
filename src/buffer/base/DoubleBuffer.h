@@ -30,6 +30,8 @@ namespace TTEthernetModel {
  * @sa BGDoubleBuffer, TTDoubleBuffer, RCDoubleBuffer, Buffer
  *
  * @ingroup Buffer
+ *
+ * @author Till Steinbach
  */
 class DoubleBuffer : public virtual Buffer
 {

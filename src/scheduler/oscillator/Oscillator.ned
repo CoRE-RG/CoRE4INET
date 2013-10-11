@@ -18,6 +18,8 @@ package ttethernet.scheduler.oscillator;
 //
 // TODO auto-generated module
 //
+// @author Till Steinbach
+//
 simple Oscillator like IOscillator
 {
     parameters:

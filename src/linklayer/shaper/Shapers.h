@@ -1,3 +1,18 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+//
+
 #ifndef __TTE4INET_SHAPERS_H_
 #define __TTE4INET_SHAPERS_H_
 
@@ -16,6 +31,10 @@ namespace TTEthernetModel{
 * This shaper only handles best-effort traffic.
 *
 * @see BEShaper, BaseShaper
+*
+* @ingroup Shapers
+*
+* @author Till Steinbach
 */
 class BE_Shaper: public BEShaper<BaseShaper>{};
 
@@ -28,6 +47,10 @@ class BE_Shaper: public BEShaper<BaseShaper>{};
 * - best-effort
 *
 * @see PCFShaper, RCShaper, BEShaper, BaseShaper
+*
+* @ingroup Shapers AS6802
+*
+* @author Till Steinbach
 */
 class PCF_RC_BE_Shaper: public PCFShaper<RCShaper<BEShaper<BaseShaper> > >{};
 
@@ -41,6 +64,10 @@ class PCF_RC_BE_Shaper: public PCFShaper<RCShaper<BEShaper<BaseShaper> > >{};
 * - best-effort
 *
 * @see TTShaper, PCFShaper, RCShaper, BEShaper, BaseShaper
+*
+* @ingroup Shapers AS6802
+*
+* @author Till Steinbach
 */
 class TT_PCF_RC_BE_Shaper: public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > >{};
 

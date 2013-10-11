@@ -27,6 +27,8 @@ namespace TTEthernetModel {
  *
  * @sa ApplicationBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach
  */
 class TrafficSinkApp : public ApplicationBase
 {

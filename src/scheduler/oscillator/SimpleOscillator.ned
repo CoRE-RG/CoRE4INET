@@ -16,8 +16,11 @@
 package ttethernet.scheduler.oscillator;
 
 import ttethernet.utilities.classes.IScheduled;
+
 //
 // TODO auto-generated module
+//
+// @author Till Steinbach
 //
 simple SimpleOscillator extends Oscillator
 {

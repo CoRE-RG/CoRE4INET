@@ -18,6 +18,8 @@ package ttethernet.scheduler.period;
 //
 // TODO auto-generated module
 //
+// @author Till Steinbach
+//
 simple Period
 {
     parameters:

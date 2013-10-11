@@ -32,7 +32,9 @@ namespace TTEthernetModel {
  *
  * @sa RCBuffer, RCDoubleBuffer, CTBuffer
  *
- * @ingroup Buffer
+ * @ingroup Buffer AS6802
+ *
+ * @author Till Steinbach
  */
 class RCDoubleBuffer : public RCBuffer, DoubleBuffer
 {

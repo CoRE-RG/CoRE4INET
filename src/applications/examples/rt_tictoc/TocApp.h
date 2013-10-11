@@ -13,24 +13,36 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "IShaper.h"
+#ifndef __TTETHERNETMODEL_TICAPP_H_
+#define __TTETHERNETMODEL_TICAPP_H_
+
+#include <omnetpp.h>
+#include "ApplicationBase.h"
 
 namespace TTEthernetModel {
 
-Define_Module(IShaper);
-
-void IShaper::initialize(int stage)
+/**
+ * @brief Toc Application used for the rt_tictoc example.
+ *
+ *
+ * @sa ApplicationBase
+ * @ingroup Applications AS6802
+ *
+ * @author Till Steinbach
+ */
+class TocApp : public ApplicationBase
 {
-    // TODO - Generated method body
+  protected:
+    /**
+     * @brief Initialization of the module. Sends activator message
+     */
+    virtual void initialize();
+    /**
+     * @brief Handles message generation and reception
+     */
+    virtual void handleMessage(cMessage *msg);
+};
+
 }
 
-int IShaper::numInitStages() const{
-    return 1;
-}
-
-void IShaper::handleMessage(cMessage *msg)
-{
-    // TODO - Generated method body
-}
-
-} //namespace
+#endif

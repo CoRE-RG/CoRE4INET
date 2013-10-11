@@ -26,6 +26,8 @@ namespace TTEthernetModel {
  *
  * To allow the sending of best-effort Ethernet frames through the
  * TTEthernet API this BGTrafficHandle forwards messages.
+ *
+ * @author Till Steinbach
  */
 class BGTrafficHandle : public cSimpleModule
 {

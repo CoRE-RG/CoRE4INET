@@ -28,6 +28,10 @@ namespace TTEthernetModel {
 
 /**
  * @brief Message kinds for application control messages
+ *
+ * @ingroup Applications AS6802
+ *
+ * @author Till Steinbach
  */
 enum TTEAPIApplicationMessageKind{
     /**
@@ -38,6 +42,8 @@ enum TTEAPIApplicationMessageKind{
 
 /**
  * @brief Class that contains different pointers. Internally used for TTEthernet-API
+ *
+ * @author Till Steinbach
  */
 class TTEAPIPriv
 {
@@ -66,7 +72,9 @@ class TTEAPIPriv
  * completely implemented
  *
  * @sa TTEAPITestApplication, ApplicationBase
- * @ingroup Applications
+ * @ingroup Applications, AS6802
+ *
+ * @author Till Steinbach
  */
 class TTEAPIApplicationBase : public ApplicationBase
 {

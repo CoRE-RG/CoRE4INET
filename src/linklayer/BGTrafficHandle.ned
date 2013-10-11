@@ -18,6 +18,8 @@ package ttethernet.linklayer;
 //
 // TODO auto-generated module
 //
+// @author Till Steinbach
+//
 simple BGTrafficHandle
 {
     @display("i=block/layer,green");

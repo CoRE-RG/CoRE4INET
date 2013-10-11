@@ -28,7 +28,7 @@ namespace TTEthernetModel {
  *
  * This module corrects the time of a node by using the simulation time
  *
- * @warning Currently only dummy
+ * @author Till Steinbach
  */
 class DummySync : public SyncBase
 {
@@ -44,7 +44,7 @@ class DummySync : public SyncBase
         virtual void initialize(int stage);
 
         /**
-         * @brief Returns the numer of initializaiton stages this module needs.
+         * @brief Returns the number of initialization stages this module needs.
          *
          * @return always returns 2
          */

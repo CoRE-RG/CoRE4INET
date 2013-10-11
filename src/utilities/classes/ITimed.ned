@@ -18,6 +18,8 @@ package ttethernet.utilities.classes;
 //
 // TODO auto-generated module
 //
+// @author Till Steinbach
+//
 moduleinterface ITimed
 {
 }

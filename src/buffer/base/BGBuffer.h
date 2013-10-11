@@ -29,6 +29,8 @@ namespace TTEthernetModel {
  * @sa BGQueueBuffer, Buffer
  *
  * @ingroup Buffer
+ *
+ * @author Till Steinbach
  */
 class BGBuffer : public virtual Buffer
 {

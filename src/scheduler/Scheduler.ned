@@ -19,6 +19,11 @@ import ttethernet.scheduler.timer.Timer;
 import ttethernet.scheduler.oscillator.IOscillator;
 import ttethernet.scheduler.period.Period;
 
+//
+// TODO auto-generated module
+//
+// @author Till Steinbach
+//
 module Scheduler like ITTEScheduler
 {
     parameters:

@@ -34,6 +34,8 @@ using namespace TTEthernetModel;
  * @param toFind the substring that should be replaced
  * @param replacement the string that replaces the toFind string
  * @return reference to the the modified string
+ *
+ * @author Till Steinbach
  */
 std::string& replaceAll(std::string &string, std::string toFind, std::string replacement);
 
@@ -42,6 +44,8 @@ std::string& replaceAll(std::string &string, std::string toFind, std::string rep
  *
  * @param parameter the parameter object that contains the paths
  * @param pathToAdd a string with the path that should be added to the parameter
+ *
+ * @author Till Steinbach
  */
 void addPath(cPar &parameter, std::string &pathToAdd);
 
@@ -50,6 +54,8 @@ void addPath(cPar &parameter, std::string &pathToAdd);
  *
  * @param path the path to the gate
  * @return reference to the gate defined by path or NULL if no such gate was found
+ *
+ * @author Till Steinbach
  */
 cGate* gateByFullPath(std::string &path);
 
@@ -59,6 +65,8 @@ cGate* gateByFullPath(std::string &path);
  * @param nameAndGate name of the module and gatename in the format: modulename.gatename
  * @param from a module of the node in which the gate can be found
  * @return reference to the gate defined by path or NULL if no such gate was found
+ *
+ * @author Till Steinbach
  */
 cGate* gateByShortPath(std::string &nameAndGate, cModule *from);
 
@@ -68,6 +76,8 @@ cGate* gateByShortPath(std::string &nameAndGate, cModule *from);
  * @param ticks number of ticks
  * @param tick length of one tick in seconds
  * @return transparent clock representation of ticks
+ *
+ * @author Till Steinbach
  */
 uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick);
 
@@ -85,6 +95,8 @@ uint64_t secondsToTransparentClock(simtime_t seconds);
  * @param transparentClock value in transparentClock
  * @param tick length of one tick in seconds
  * @return ticks representation of transparent clock value
+ *
+ * @author Till Steinbach
  */
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
 
@@ -94,6 +106,8 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
  * @param pcf Protocol control Frame to change transparent clock information
  * @param static_tx_delay A static TX-delay to be added
  * @param scheduler The scheduler of the current node
+ *
+ * @author Till Steinbach
  */
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler);
 

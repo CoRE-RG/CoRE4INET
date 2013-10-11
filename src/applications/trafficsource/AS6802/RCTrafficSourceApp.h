@@ -22,11 +22,13 @@
 namespace TTEthernetModel {
 
 /**
- * @brief Simple Test-Application.
+ * @brief Traffic-Generator for RC-Traffic.
  *
  *
  * @sa ApplicationBase
- * @ingroup Applications
+ * @ingroup Applications AS6802
+ *
+ * @author Till Steinbach
  */
 class RCTrafficSourceApp : public TrafficSourceAppBase
 {

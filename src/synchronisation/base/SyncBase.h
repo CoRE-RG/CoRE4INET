@@ -26,7 +26,7 @@ namespace TTEthernetModel {
 /**
  * @brief Base for sync modules.
  *
- *
+ * @author Till Steinbach
  */
 class SyncBase : public Scheduled
 {

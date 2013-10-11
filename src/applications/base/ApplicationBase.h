@@ -32,6 +32,8 @@ class Buffer;
  * @sa Buffer, Callback
  *
  * @ingroup Applications
+ *
+ * @author Till Steinbach
  */
 class ApplicationBase : public virtual cSimpleModule
 {

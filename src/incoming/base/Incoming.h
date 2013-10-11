@@ -26,6 +26,8 @@ namespace TTEthernetModel {
  * This base class simply forwards messages from in to out
  *
  * @sa RCIncoming, TTIncoming
+ *
+ * @author Till Steinbach
  */
 class Incoming : public virtual cSimpleModule
 {

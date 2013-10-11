@@ -31,7 +31,9 @@ namespace TTEthernetModel {
  * This class checks whether incoming traffic arrived in the configured receive window.
  * Messages are delayed until the configured permanence point in time.
  *
- * @sa Incoming
+ * @sa AS6802
+ *
+ * @author Till Steinbach
  */
 class TTIncoming : public CTIncoming, Scheduled
 {
