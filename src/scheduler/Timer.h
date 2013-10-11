@@ -50,17 +50,24 @@ class Timer : public cSimpleModule
         simtime_t recalculationTime;
 
         /**
-         * @brief List of registered SchedulerEvents.
+         * @brief List of registered SchedulerActionTimeEvent.
          *
          * Used to reregister after clock tick changes.
          */
-        std::map<uint64_t, std::list<SchedulerEvent*> > registredEvents;
+        std::map<uint64_t, std::list<SchedulerActionTimeEvent*> > registredActionTimeEvents;
+        /**
+         * @brief List of registered SchedulerActionTimeEvent.
+         *
+         * Used to reregister after clock tick changes.
+         */
+        std::map<uint64_t, std::list<SchedulerTimerEvent*> > registredTimerEvents;
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
   private:
     virtual void reschedule();
     virtual uint32_t nextAction();
+    virtual void sendOutEvents();
   public:
     Timer();
     ~Timer();
@@ -76,7 +83,7 @@ class Timer : public cSimpleModule
      * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
      * SchedulerTimerEvent
      */
-    virtual uint64_t registerEvent(SchedulerEvent *event, Period *period);
+    virtual uint64_t registerEvent(SchedulerActionTimeEvent *event, Period *period);
 
     virtual uint64_t registerEvent(SchedulerTimerEvent *event);
 

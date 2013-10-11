@@ -61,7 +61,15 @@ uint64_t Period::registerEvent(SchedulerEvent *event){
     if(!timer){
         throw std::runtime_error("Period was not yet initialized");
     }
-    return timer->registerEvent(event, this);
+    if(dynamic_cast<SchedulerActionTimeEvent*>(event)){
+        return timer->registerEvent(dynamic_cast<SchedulerActionTimeEvent*>(event), this);
+    }
+    else if(dynamic_cast<SchedulerTimerEvent*>(event)){
+        return timer->registerEvent(dynamic_cast<SchedulerTimerEvent*>(event));
+    }
+    else{
+        throw std::invalid_argument("Unknown event Kind");
+    }
 }
 
 uint32_t Period::getTicks(){

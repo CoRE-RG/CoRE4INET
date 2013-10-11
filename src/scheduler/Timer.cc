@@ -42,31 +42,62 @@ void Timer::initialize()
 Timer::~Timer()
 {
     cancelAndDelete(selfMessage);
-    for(std::map<uint64_t, std::list<SchedulerEvent*> >::iterator it = registredEvents.begin(); it!=registredEvents.end();++it){
-        for(std::list<SchedulerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end();++it){
+        for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
             cancelAndDelete(*it2);
         }
-        registredEvents.erase(it);
+        registredActionTimeEvents.erase(it);
+    }
+    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();++it){
+        for(std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+            cancelAndDelete(*it2);
+        }
+        registredTimerEvents.erase(it);
     }
 }
 
 void Timer::handleMessage(cMessage *msg)
 {
     if(msg->isSelfMessage()){
-        recalculate();
-        for(std::map<uint64_t, std::list<SchedulerEvent*> >::iterator it = registredEvents.begin(); it!=registredEvents.end();++it){
-            if((*it).first <= ticks){
-                for(std::list<SchedulerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
-                    sendDirect((*it2), (*it2)->getDestinationGate());
-                }
-                registredEvents.erase(it);
-            }
-            else{
-                break;
-            }
-        }
-        reschedule();
+        sendOutEvents();
     }
+}
+
+void Timer::sendOutEvents(){
+    recalculate();
+    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end();++it){
+        if((*it).first <= ticks){
+            if((*it).first < ticks){
+                EV << "WARNING: A message was delayed by the scheduler. The event(s) affected is (are): ";
+                for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+                    EV << (*it2)->getName() << " by " << (*it2)->getDestinationGate()->getOwner()->getName() << "; ";
+                }
+                EV << "The delay was " << (ticks-(*it).first) << "ticks. This may happen for events in the clock correction interval." << std::endl;
+            }
+            for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+                sendDirect((*it2), (*it2)->getDestinationGate());
+            }
+            registredActionTimeEvents.erase(it);
+        }
+        else{
+            break;
+        }
+    }
+    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();++it){
+        if((*it).first <= ticks){
+            if((*it).first < ticks){
+                opp_error("THIS SHOULD NOT HAPPEN!");
+            }
+            for(std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+                sendDirect((*it2), (*it2)->getDestinationGate());
+            }
+            registredTimerEvents.erase(it);
+        }
+        else{
+            break;
+        }
+    }
+    reschedule();
 }
 
 void Timer::recalculate(){
@@ -88,75 +119,103 @@ void Timer::reschedule(){
         throw std::runtime_error("Timer was not yet initialized");
     }
     recalculate();
-    simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
+    ev << "DEBUG3 nextAction():"<<nextAction()<<" getTotalTicks():"<<getTotalTicks()<<std::endl;
     cancelEvent(selfMessage);
-    if(registredEvents.size()>0){
+    try{
+        simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
         scheduleAt(simTime()+next_action, selfMessage);
+    }
+    catch(std::range_error re){
+        //No message should be scheduled as there are no messages registred
     }
 }
 
 uint32_t Timer::nextAction(){
-    if(registredEvents.size()==0){
+    if(registredActionTimeEvents.size()==0 && registredTimerEvents.size()==0){
         throw std::range_error("no events registered");
     }
-    return registredEvents.begin()->first;
+    else if(registredTimerEvents.size()==0 || registredActionTimeEvents.begin()->first < registredTimerEvents.begin()->first){
+        return registredActionTimeEvents.begin()->first;
+    }
+    else{
+        return registredTimerEvents.begin()->first;
+    }
 }
 
 uint64_t Timer::registerEvent(SchedulerTimerEvent *event){
-    return registerEvent(event, NULL);
-}
-
-uint64_t Timer::registerEvent(SchedulerEvent *event, Period *period){
 #ifdef DEBUG
-    Enter_Method("registerEvent(SchedulerEvent %s)",event->getName());
+    Enter_Method("registerEvent(SchedulerTimerEvent %s)",event->getName());
 #else
     Enter_Method_Silent();
 #endif
 
     take(event);
-
-    uint64_t actionpoint = 0;
-    if (event->getKind() == ACTION_TIME_EVENT)
-    {
-        ASSERT(period);
-        SchedulerActionTimeEvent *actionTimeEvent = dynamic_cast<SchedulerActionTimeEvent*>(event);
-        //Check whether event is in cycle
-        if(actionTimeEvent->getAction_time() > (uint32_t)period->par("cycle_ticks").longValue()){
-            bubble("Schedule contains out of cycle events!");
-            return false;
-        }
-        int32_t distance = actionTimeEvent->getAction_time()-period->getTicks();
-        if(distance<0 || (distance == 0 && actionTimeEvent->getNext_cycle())){
-            actionpoint = getTotalTicks() + ((uint32_t)period->par("cycle_ticks").longValue() + distance);
-        }
-        else{
-            actionpoint = getTotalTicks() + distance;
-        }
-    }
-    else if (event->getKind() == TIMER_EVENT)
-    {
-        SchedulerTimerEvent *timerEvent = dynamic_cast<SchedulerTimerEvent*>(event);
-        actionpoint = getTotalTicks() + timerEvent->getTimer();
-    }
-    else{
-        throw std::invalid_argument("Allowed event Kinds are: ACTION_TIME_EVENT or TIMER_EVENT");
-    }
     //We do not have to schedule anything if the point is now!
-    if(actionpoint==getTotalTicks()){
+    if(event->getTimer()==0){
         sendDirect(event, event->getDestinationGate());
+        return getTotalTicks();
     }
     else{
-        ASSERT2(actionpoint>=getTotalTicks(), "Cannot schedule past Events");
+        uint64_t actionpoint = getTotalTicks() + event->getTimer();
+        EV << "actionpoint "<<actionpoint<<std::endl;
         try{
             uint64_t old_actionpoint = nextAction();
-            registredEvents[actionpoint].push_back(event);
+            registredTimerEvents[actionpoint].push_back(event);
             //TODO: Overflow -> must regard ticks here!
             if(!selfMessage->isScheduled() || actionpoint<old_actionpoint){
                 reschedule();
             }
         }
         catch(const std::range_error& re){
-            registredEvents[actionpoint].push_back(event);
+            registredTimerEvents[actionpoint].push_back(event);
+            reschedule();
+        }
+        return actionpoint;
+    }
+}
+
+uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period *period){
+#ifdef DEBUG
+    Enter_Method("registerEvent(SchedulerActionTimeEvent %s, %s)",event->getName(), period->getName());
+#else
+    Enter_Method_Silent();
+#endif
+
+    take(actionTimeEvent);
+
+    uint64_t actionpoint = 0;
+
+    ASSERT(period);
+    //Check whether event is in cycle
+    if(actionTimeEvent->getAction_time() > (uint32_t)period->par("cycle_ticks").longValue()){
+        bubble("Schedule contains out of cycle events!");
+        return false;
+    }
+    int32_t distance = actionTimeEvent->getAction_time()-period->getTicks();
+    if(distance<0 || (distance == 0 && actionTimeEvent->getNext_cycle())){
+        actionpoint = getTotalTicks() + ((uint32_t)period->par("cycle_ticks").longValue() + distance);
+    }
+    else{
+        actionpoint = getTotalTicks() + distance;
+    }
+
+
+    //We do not have to schedule anything if the point is now!
+    if(actionpoint==getTotalTicks()){
+        sendDirect(actionTimeEvent, actionTimeEvent->getDestinationGate());
+    }
+    else{
+        ASSERT2(actionpoint>getTotalTicks(), "Cannot schedule past or present Events");
+        try{
+            uint64_t old_actionpoint = nextAction();
+            registredActionTimeEvents[actionpoint].push_back(actionTimeEvent);
+            //TODO: Overflow -> must regard ticks here!
+            if(!selfMessage->isScheduled() || actionpoint<old_actionpoint){
+                reschedule();
+            }
+        }
+        catch(const std::range_error& re){
+            registredActionTimeEvents[actionpoint].push_back(actionTimeEvent);
             reschedule();
         }
 
@@ -172,9 +231,17 @@ uint64_t Timer::getTotalTicks()
 
 void Timer::clockCorrection(int32_t ticks){
     Enter_Method("clock correction %d ticks",ticks);
+    ev << "DEBUG2 correction:"<<ticks<<" was:"<<this->ticks<<" now:"<<this->ticks+ticks<<std::endl;
     emit(clockCorrectionSignal, ticks);
     this->ticks+=ticks;
-    reschedule();
+    //Now correct the timer events that must be independent of clockCorrection
+    std::map<uint64_t, std::list<SchedulerTimerEvent*> > correctedTimerEvents;
+    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();++it){
+        correctedTimerEvents[(*it).first+ticks] = (*it).second;
+    }
+    registredTimerEvents = correctedTimerEvents;
+    sendOutEvents();
+    ev << "DEBUG2 correction:"<<ticks<<" was:"<<this->ticks<<" now:"<<this->ticks+ticks<<std::endl;
 }
 
 } //namespace

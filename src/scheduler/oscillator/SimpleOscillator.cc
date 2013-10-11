@@ -60,7 +60,7 @@ void SimpleOscillator::handleMessage(cMessage *msg)
 
         double newTick = current_tick+drift_change;
 
-        ev << "reference_time:"<<drift_change<<" time gone ppm: "<<(par("drift_change").doubleValue()/1000000)<<std::endl;
+        ev << "reference_time:"<< reference_time <<" drift_change:"<<drift_change<<" time gone ppm: "<<(par("drift_change").doubleValue()/1000000)<<std::endl;
 
         if((newTick-tick)>max_drift)
             par("current_tick").setDoubleValue(tick+max_drift);
