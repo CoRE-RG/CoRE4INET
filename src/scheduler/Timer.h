@@ -45,6 +45,11 @@ class Timer : public cSimpleModule
         simtime_t lastRecalculation;
 
         /**
+         * @brief Simulation time when the timer was last recalculated
+         */
+        simtime_t recalculationTime;
+
+        /**
          * @brief List of registered SchedulerEvents.
          *
          * Used to reregister after clock tick changes.
@@ -88,6 +93,12 @@ class Timer : public cSimpleModule
      * @param ticks number of ticks the clock must be corrected
      */
     virtual void clockCorrection(int32_t ticks);
+
+  protected:
+      /**
+       * Signal that is emitted every time the clock is corrected
+       */
+      static simsignal_t clockCorrectionSignal;
 };
 
 } //namespace

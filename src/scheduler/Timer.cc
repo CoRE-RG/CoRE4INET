@@ -21,6 +21,8 @@ namespace TTEthernetModel {
 
 Define_Module(Timer);
 
+simsignal_t Timer::clockCorrectionSignal = SIMSIGNAL_NULL;
+
 Timer::Timer(){
     ticks=0;
     selfMessage = new cMessage("Scheduler Message");
@@ -31,6 +33,10 @@ void Timer::initialize()
 {
     oscillator = dynamic_cast<Oscillator*>(gate("oscillator_in")->getPathStartGate()->getOwnerModule());
     ASSERT2(oscillator, "cannot find oscillator!");
+
+    clockCorrectionSignal = registerSignal("clockCorrection");
+
+    recalculationTime = lastRecalculation = simTime();
 }
 
 Timer::~Timer()
@@ -48,9 +54,7 @@ void Timer::handleMessage(cMessage *msg)
 {
     if(msg->isSelfMessage()){
         recalculate();
-        EV << "now is:" << ticks << " size is:"<< registredEvents.size()<< std::endl;
         for(std::map<uint64_t, std::list<SchedulerEvent*> >::iterator it = registredEvents.begin(); it!=registredEvents.end();++it){
-            EV << "check:" << (*it).first << std::endl;
             if((*it).first <= ticks){
                 for(std::list<SchedulerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
                     sendDirect((*it2), (*it2)->getDestinationGate());
@@ -62,7 +66,6 @@ void Timer::handleMessage(cMessage *msg)
             }
         }
         reschedule();
-        EV << "changed size is:"<< registredEvents.size()<< std::endl;
     }
 }
 
@@ -70,12 +73,13 @@ void Timer::recalculate(){
     if(!oscillator){
         throw std::runtime_error("Timer was not yet initialized");
     }
-    if(simTime()!=lastRecalculation){
+    if(simTime()!=recalculationTime){//simTime()!=lastRecalculation has no effect due to rounding avoidance
         simtime_t current_tick = oscillator->getTick();
         uint64_t elapsed_ticks=floor((simTime()-lastRecalculation) / current_tick);
         ticks+=elapsed_ticks;
         //this is required to avoid rounding errors
         lastRecalculation += elapsed_ticks*current_tick;
+        recalculationTime = simTime();
     }
 }
 
@@ -122,13 +126,12 @@ uint64_t Timer::registerEvent(SchedulerEvent *event, Period *period){
             return false;
         }
         int32_t distance = actionTimeEvent->getAction_time()-period->getTicks();
-        if(distance<0 || actionTimeEvent->getNext_cycle()){
+        if(distance<0 || (distance == 0 && actionTimeEvent->getNext_cycle())){
             actionpoint = getTotalTicks() + ((uint32_t)period->par("cycle_ticks").longValue() + distance);
         }
         else{
             actionpoint = getTotalTicks() + distance;
         }
-        ev << "actime:" << actionTimeEvent->getAction_time() << " distance:" << distance << " acpoint:"<< actionpoint << "name: "<<actionTimeEvent->getName()<<std::endl;
     }
     else if (event->getKind() == TIMER_EVENT)
     {
@@ -169,8 +172,8 @@ uint64_t Timer::getTotalTicks()
 
 void Timer::clockCorrection(int32_t ticks){
     Enter_Method("clock correction %d ticks",ticks);
-
-    this->ticks+ticks;
+    emit(clockCorrectionSignal, ticks);
+    this->ticks+=ticks;
     reschedule();
 }
 

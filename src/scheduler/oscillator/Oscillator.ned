@@ -22,7 +22,7 @@ simple Oscillator like IOscillator
 {
     parameters:
 	    @display("i=block/mac");
-        //Statistic of the current drift (Difference of configured and actual tick length)
+        //Statistic of the current drift (Difference of configured and actual tick length in seconds)
         @statistic[currentDrift](title="Current drift"; unit=s; record=vector);
         // Length of a tick
         double tick @unit(s) = default(80ns);

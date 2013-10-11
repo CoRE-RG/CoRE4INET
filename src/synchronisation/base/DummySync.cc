@@ -50,7 +50,11 @@ void DummySync::initialize(int stage)
 void DummySync::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("schedulerIn")){
-        if(period->getCycles()>1){
+        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
+        event->setNext_cycle(true);
+        period->registerEvent(event);
+
+        if(period->getCycles()>0){
             uint32_t cycleTicks = period->par("cycle_ticks").longValue();
             simtime_t tick = oscillator->par("tick").doubleValue();
 
@@ -59,11 +63,7 @@ void DummySync::handleMessage(cMessage *msg)
                 modticks=modticks-cycleTicks;
             modticks+=uniform(-par("precission").doubleValue()/2, par("precission").doubleValue()/2)/tick;
 
-            timer->clockCorrection(-modticks);
+            timer->clockCorrection(modticks);
         }
-
-        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
-        event->setNext_cycle(true);
-        period->registerEvent(event);
     }
 }

@@ -22,6 +22,8 @@ simple Timer
 {
     parameters:
         @display("i=block/timer");
+        //Statistic of the clock correction in ticks
+        @statistic[clockCorrection](title="Clock correction"; unit=s; record=vector);
     gates:
         input period_in[];
         input oscillator_in;
