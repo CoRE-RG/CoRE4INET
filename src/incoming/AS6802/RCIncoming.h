@@ -40,6 +40,10 @@ class RCIncoming : public CTIncoming, public Timed
          * Saves the tickcount of the last message
          */
         uint64_t lastArrived;
+        /**
+         * Checks weather this is the first message. The first message is always allowed to pass
+         */
+        bool firstMessage;
 
         /**
          * @brief caches bag parameter

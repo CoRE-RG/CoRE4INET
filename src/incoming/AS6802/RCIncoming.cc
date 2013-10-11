@@ -25,6 +25,7 @@ Define_Module(RCIncoming);
 RCIncoming::RCIncoming() : CTIncoming::CTIncoming()
 {
     lastArrived=0;
+    firstMessage=true;
 }
 
 void RCIncoming::initialize()
@@ -40,7 +41,7 @@ void RCIncoming::handleMessage(cMessage *msg)
         //Now check for correct arrival:
         //TODO what todo with JITTER?
         //Check too early
-        if(currentTotalTicks-lastArrived < bag){
+        if(!firstMessage && currentTotalTicks-lastArrived < bag){
             emit(ctDroppedSignal, 1);
             if(ev.isGUI()){
                 ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n", getName(), currentTotalTicks-lastArrived,par("bag").longValue());

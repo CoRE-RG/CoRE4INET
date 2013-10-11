@@ -41,6 +41,9 @@ int TTBuffer::numInitStages() const
 void TTBuffer::initialize(int stage)
 {
     CTBuffer::initialize(stage);
+    if(stage==0){
+        nextAction = par("sendWindowStart").longValue();
+    }
     if(stage==1)
     {
         ev << "Initialize TTBuffer" << endl;

@@ -419,7 +419,12 @@ void TTShaper<TC>::handleParameterChange(const char* parname){
                 {
                     TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (module);
                     if(ttBuffer){
-                        registerTTBuffer(ttBuffer);
+                        if(!isTTBufferRegistered(ttBuffer)){
+                            registerTTBuffer(ttBuffer);
+                        }
+                        else{
+                            opp_error("Configuration problem of tt_buffers: Module: %s is in the list more than once!", (*ttBufferPath).c_str());
+                        }
                     }
                     else{
                         opp_error("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!", (*ttBufferPath).c_str());

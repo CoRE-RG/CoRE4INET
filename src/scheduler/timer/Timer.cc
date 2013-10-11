@@ -128,11 +128,13 @@ void Timer::reschedule(){
     recalculate();
     cancelEvent(selfMessage);
     try{
+        uint64_t lala = nextAction();
+        uint64_t dede = getTotalTicks();
         simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
         scheduleAt(simTime()+next_action, selfMessage);
     }
     catch(std::range_error re){
-        //No message should be scheduled as there are no messages registred
+        //No message should be scheduled as there are no messages registered
     }
 }
 
@@ -140,7 +142,7 @@ uint32_t Timer::nextAction(){
     if(registredActionTimeEvents.size()==0 && registredTimerEvents.size()==0){
         throw std::range_error("no events registered");
     }
-    else if(registredTimerEvents.size()==0 || registredActionTimeEvents.begin()->first < registredTimerEvents.begin()->first){
+    else if(registredTimerEvents.size()==0 || (registredActionTimeEvents.size()!=0 && registredActionTimeEvents.begin()->first < registredTimerEvents.begin()->first)){
         return registredActionTimeEvents.begin()->first;
     }
     else{
