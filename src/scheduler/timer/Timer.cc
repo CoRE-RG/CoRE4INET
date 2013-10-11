@@ -119,7 +119,6 @@ void Timer::reschedule(){
         throw std::runtime_error("Timer was not yet initialized");
     }
     recalculate();
-    ev << "DEBUG3 nextAction():"<<nextAction()<<" getTotalTicks():"<<getTotalTicks()<<std::endl;
     cancelEvent(selfMessage);
     try{
         simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
@@ -157,7 +156,6 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event){
     }
     else{
         uint64_t actionpoint = getTotalTicks() + event->getTimer();
-        EV << "actionpoint "<<actionpoint<<std::endl;
         try{
             uint64_t old_actionpoint = nextAction();
             registredTimerEvents[actionpoint].push_back(event);
@@ -231,7 +229,6 @@ uint64_t Timer::getTotalTicks()
 
 void Timer::clockCorrection(int32_t ticks){
     Enter_Method("clock correction %d ticks",ticks);
-    ev << "DEBUG2 correction:"<<ticks<<" was:"<<this->ticks<<" now:"<<this->ticks+ticks<<std::endl;
     emit(clockCorrectionSignal, ticks);
     this->ticks+=ticks;
     //Now correct the timer events that must be independent of clockCorrection
@@ -241,7 +238,6 @@ void Timer::clockCorrection(int32_t ticks){
     }
     registredTimerEvents = correctedTimerEvents;
     sendOutEvents();
-    ev << "DEBUG2 correction:"<<ticks<<" was:"<<this->ticks<<" now:"<<this->ticks+ticks<<std::endl;
 }
 
 } //namespace
