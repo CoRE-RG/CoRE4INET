@@ -108,10 +108,10 @@ void Timer::sendOutEvents(){
 }
 
 void Timer::recalculate(){
-    if(!oscillator){
-        throw std::runtime_error("Timer was not yet initialized");
-    }
     if(simTime()!=recalculationTime){//simTime()!=lastRecalculation has no effect due to rounding avoidance
+        if(!oscillator){
+            throw std::runtime_error("Timer was not yet initialized");
+        }
         simtime_t current_tick = oscillator->getTick();
         uint64_t elapsed_ticks=floor((simTime()-lastRecalculation) / current_tick);
         ticks+=elapsed_ticks;
@@ -125,8 +125,8 @@ void Timer::reschedule(){
     if(!oscillator){
         throw std::runtime_error("Timer was not yet initialized");
     }
-    recalculate();
     cancelEvent(selfMessage);
+    recalculate();
     try{
         simtime_t next_action = (nextAction()-getTotalTicks()) * oscillator->getTick();
         scheduleAt(simTime()+next_action, selfMessage);
@@ -247,8 +247,15 @@ void Timer::clockCorrection(int32_t ticks){
     this->ticks+=ticks;
     //Now correct the timer events that must be independent of clockCorrection
     std::map<uint64_t, std::list<SchedulerTimerEvent*> > correctedTimerEvents;
-    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();++it){
-        correctedTimerEvents[(*it).first+ticks] = (*it).second;
+    std::map<uint64_t,std::list<SchedulerTimerEvent*> >::iterator it = correctedTimerEvents.begin();
+    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it2 = registredTimerEvents.begin(); it2!=registredTimerEvents.end();++it2){
+        if(correctedTimerEvents.size()==0){
+            correctedTimerEvents[(*it2).first+ticks] = (*it2).second;
+            it=correctedTimerEvents.begin();
+        }else{
+            //Better version with hint?
+            it = correctedTimerEvents.insert(it,  std::pair<uint64_t,std::list<SchedulerTimerEvent*> >(((*it2).first+ticks),(*it2).second));
+        }
     }
     registredTimerEvents = correctedTimerEvents;
     sendOutEvents();
