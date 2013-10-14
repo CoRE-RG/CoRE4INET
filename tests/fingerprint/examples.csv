@@ -1,8 +1,8 @@
 #note that the fingerprints provided may not match your architecture. Thus the test may fail although everything is ok
 # workingdir,                                                     args,                                          simtimelimit,    fingerprint
-/examples/AS6802/small_network/,                                  -f omnetpp.ini -c General -r 0,                1s,              2731-2e48
-/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,      1s,              ee8f-0fc7
-/examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0,                1s,              e8ed-4c58
+/examples/AS6802/small_network/,                                  -f omnetpp.ini -c General -r 0,                1s,              fc4a-8e45
+/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,      1s,              4441-9776
+/examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0,                1s,              d299-e616
 /examples/AS6802/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0,                1s,              da3e-3e7b
 /examples/AS6802/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0,                1s,              b23c-ebb5
 /examples/AS6802/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0,                1s,              e040-f0be

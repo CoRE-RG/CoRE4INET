@@ -67,12 +67,12 @@ void TicApp::handleMessage(cMessage *msg)
     else if(msg->arrivedOn("RCin")){
         RCFrame *rcframe = dynamic_cast<RCFrame*>(msg);
         Toc *toc=dynamic_cast<Toc*>(rcframe->decapsulate());
-        delete msg;
         bubble(toc->getResponse());
         par("counter").setLongValue(toc->getCount());
-        emit(rxPkSignal, 1L);
+        emit(rxPkSignal, rcframe);
         emit(roundtripSignal, toc->getRoundtrip_start()-simTime());
         delete toc;
+        delete msg;
     }
     else{
         delete msg;
