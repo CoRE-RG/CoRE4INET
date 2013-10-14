@@ -31,7 +31,7 @@ simple TrafficSinkApp extends ApplicationBase
         
         //Statistic of the amount of packets that were received by the application
         @signal[rxPk](type=EtherFrame);
-        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interval=1s; interpolationmode=none);
+        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interval=1s; interpolationmode=none);
         //End-to-end latency
         //Uses encapsulated packet or frame when nothing is encapsulated
         //@statistic[latency](title="End-to-end latency"; unit=s; record=stats,histogram,vector);
