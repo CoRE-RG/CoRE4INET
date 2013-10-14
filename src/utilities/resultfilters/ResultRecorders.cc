@@ -19,7 +19,7 @@
 using namespace TTEthernetModel;
 
 FloatingIntervalVectorRecorder::FloatingIntervalVectorRecorder(){
-    interval = SimTime(1);
+    interval = SimTime(-1);
     handle = NULL;
     lastTime = 0;
 }
@@ -38,6 +38,17 @@ void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
         if(opp_strcmp(it->first.c_str(), "interval")==0){
             interval = SimTime::parse(it->second.c_str());
         }
+    }
+    if(interval<SimTime(0)){
+        cComponent *comp = getComponent();
+        do{
+            if(comp->hasPar("interval")){
+                interval = SimTime(comp->par("interval").doubleValue());
+            }
+        }while((comp=(cComponent*)comp->getParentModule()));
+    }
+    if(interval<SimTime(0)){
+        interval = SimTime(1);
     }
 }
 

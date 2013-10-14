@@ -25,7 +25,10 @@ import ttethernet.nodes.ethernet.AS6802.TTEEtherHost;
 //
 network small_network
 {
-    @display("bgb=,,white");
+    parameters:
+        @display("bgb=,,white");
+        double interval @unit(s) = default(1s);
+    
     types:
         //
         // All links are configured with 100MBit per second and variable delay
