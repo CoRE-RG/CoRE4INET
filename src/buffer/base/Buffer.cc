@@ -26,7 +26,7 @@ using namespace TTEthernetModel;
 Define_Module( Buffer);
 
 simsignal_t Buffer::txPkSignal = SIMSIGNAL_NULL;
-simsignal_t Buffer::latencySignal = SIMSIGNAL_NULL;
+simsignal_t Buffer::rxPkSignal = SIMSIGNAL_NULL;
 
 Buffer::~Buffer(){
     destinationGates.clear();
@@ -50,12 +50,17 @@ void Buffer::initialize(int stage)
 void Buffer::initializeStatistics()
 {
     txPkSignal = registerSignal("txPk");
-    latencySignal = registerSignal("latency");
+    rxPkSignal = registerSignal("rxPk");
 }
 
-void Buffer::recordPacketSent()
+void Buffer::recordPacketSent(EtherFrame *frame)
 {
-    emit(txPkSignal, 1L);
+    emit(txPkSignal, frame);
+}
+
+void Buffer::recordPacketReceived(EtherFrame *frame)
+{
+    emit(rxPkSignal, frame);
 }
 
 void Buffer::setIsEmpty(bool empty)
@@ -111,7 +116,8 @@ void Buffer::handleMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
-        emit(latencySignal, simTime()-msg->getCreationTime());
+        recordPacketReceived(frame);
+
         if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
             frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
         putFrame((EtherFrame*) frame);

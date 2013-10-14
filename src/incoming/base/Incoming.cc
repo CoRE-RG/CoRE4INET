@@ -19,7 +19,8 @@ namespace TTEthernetModel {
 
 Define_Module(Incoming);
 
-simsignal_t Incoming::ctDroppedSignal = SIMSIGNAL_NULL;
+simsignal_t Incoming::droppedSignal = SIMSIGNAL_NULL;
+simsignal_t Incoming::rxPkSignal = SIMSIGNAL_NULL;
 
 Incoming::Incoming(){
     hadError = false;
@@ -27,12 +28,19 @@ Incoming::Incoming(){
 
 void Incoming::initialize()
 {
-    ctDroppedSignal = registerSignal("ctDropped");
+    droppedSignal = registerSignal("droppedPk");
+    rxPkSignal = registerSignal("rxPk");
+}
+
+void Incoming::recordPacketReceived(EtherFrame *frame)
+{
+    emit(rxPkSignal, frame);
 }
 
 void Incoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
+        recordPacketReceived((EtherFrame*)msg);
         sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
         //send(msg,"out");
     }

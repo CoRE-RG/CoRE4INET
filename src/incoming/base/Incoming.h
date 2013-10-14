@@ -17,6 +17,7 @@
 #define __TTETHERNETMODELV2_INCOMING_H_
 
 #include <omnetpp.h>
+#include <EtherFrame_m.h>
 
 namespace TTEthernetModel {
 
@@ -39,9 +40,13 @@ class Incoming : public virtual cSimpleModule
         /**
          * @brief Signal that is emitted when a frame is dropped.
          *
-         * Frames may be dropped when there was a violation of CT rules.
+         * Frames may be dropped when there was a violation of rules.
          */
-        static simsignal_t ctDroppedSignal;
+        static simsignal_t droppedSignal;
+        /**
+         * Signal that is emitted every time a frame was received.
+         */
+        static simsignal_t rxPkSignal;
     public:
         /**
          * @brief Constructor
@@ -58,6 +63,12 @@ class Incoming : public virtual cSimpleModule
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief Emits a statistics signal that a frame was received in the buffer
+         *
+         * @param frame the frame that was received
+         */
+        void recordPacketReceived(EtherFrame *frame);
 };
 
 } //namespace

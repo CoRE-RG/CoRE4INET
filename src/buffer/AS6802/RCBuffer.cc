@@ -60,7 +60,7 @@ void RCBuffer::handleMessage(cMessage *msg)
         {
             if (bagExpired)
             {
-                cMessage *outgoingMessage = getFrame();
+                EtherFrame *outgoingMessage = getFrame();
                 if(outgoingMessage){
                     bagExpired = false;
                     numReset = 0;
@@ -72,14 +72,14 @@ void RCBuffer::handleMessage(cMessage *msg)
                     if(gate("out")->isConnected()){
                         send(outgoingMessage->dup(),"out");
                     }
-                    recordPacketSent();
+                    recordPacketSent(outgoingMessage);
                     delete outgoingMessage;
                 }
             }
         }
         else if (msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT)
         {
-            cMessage *outgoingMessage = getFrame();
+            EtherFrame *outgoingMessage = getFrame();
             if (outgoingMessage)
             {
                 bagExpired = false;
@@ -89,7 +89,7 @@ void RCBuffer::handleMessage(cMessage *msg)
                 {
                     sendDirect(outgoingMessage->dup(), *gate);
                 }
-                recordPacketSent();
+                recordPacketSent(outgoingMessage);
                 delete outgoingMessage;
             }
             else

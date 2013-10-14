@@ -150,7 +150,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
             }
             else
             {
-                cComponent::emit(ctDroppedSignal, 1);
+                cComponent::emit(ctDroppedSignal, frame);
                 IC::hadError=true;
                 if(ev.isGUI()){
                     cComponent::bubble("No matching buffer configured");

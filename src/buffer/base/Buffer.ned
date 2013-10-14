@@ -32,10 +32,17 @@ simple Buffer like IOutputQueue
 {
     parameters:
         @display("i=block/buffer");
-        //Statistic of the amount of packets that were sent by the buffer
-        @statistic[txPk](title="TX Packets"; record=count,vector);
+        
+         //Statistic of the amount of packets that were received by the buffer
+        @signal[rxPk](type=EtherFrame);
+        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
         //End-to-end latency
-        @statistic[latency](title="End-to-end latency"; unit=s; record=stats,histogram,vector);
+    	@statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+        
+        //Statistic of the amount of packets that were sent by the buffer
+        @signal[txPk](type=EtherFrame);
+        @statistic[txPk](title="TX Packets"; source=txPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+
 
         //Comma seperated list of gates where the frames of the buffer are delivered
         string destination_gates = default("");

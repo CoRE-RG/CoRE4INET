@@ -32,7 +32,7 @@ void BGBuffer::handleMessage(cMessage *msg)
 
     if (msg->arrivedOn("in") && destinationGates.size() > 0)
     {
-        cMessage *outgoingMessage = dequeue();
+        EtherFrame *outgoingMessage = dequeue();
 
         if(outgoingMessage){
             //Send Message
@@ -48,7 +48,7 @@ void BGBuffer::handleMessage(cMessage *msg)
                     iter != transmitCallbacks.end(); ++iter){
                 iter->first->executeCallback(iter->second);
             }
-            recordPacketSent();
+            recordPacketSent(outgoingMessage);
             delete msg;
         }
     }

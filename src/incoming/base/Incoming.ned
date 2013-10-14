@@ -31,8 +31,16 @@ simple Incoming like IOutputQueue
     //Incoming is implemented by the Incoming C++ Class
     @class(Incoming);
     @display("i=block/arrival");
-    //Statistic of the amount of packets that were dropped due to no ct violations
-    @statistic[ctDropped](title="CT violation"; record=sum);
+    
+    @signal[droppedPk](type=EtherFrame);
+    @statistic[droppedPk](title="Packets Dropped"; source=droppedPk; record=count; interpolationmode=none);
+    
+    //Statistic of the amount of packets that were received by the buffer
+    @signal[rxPk](type=EtherFrame);
+    @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+    //End-to-end latency
+    @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+    
     gates:
         //input of the ctc
         input in @directIn @labels(EtherFrame);

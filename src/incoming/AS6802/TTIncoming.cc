@@ -51,12 +51,14 @@ void TTIncoming::handleMessage(cMessage *msg)
     //Incoming Message
     if (msg->arrivedOn("in"))
     {
+        recordPacketReceived((EtherFrame*)msg);
+
         //get current time in cylce
         uint32_t currentTicks = period->getTicks();
         //Now check for correct arrival:
         if (frame != NULL)
         {
-            emit(ctDroppedSignal, 1);
+            emit(droppedSignal, (EtherFrame*)msg);
             hadError=true;
             if(ev.isGUI()){
                 ev.printf("Received frame before permanence point of previous frame \n");
@@ -71,7 +73,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         //Check too early
         else if (par("receive_window_start").longValue() > 0 && currentTicks < (uint32_t) par("receive_window_start").longValue())
         {
-            emit(ctDroppedSignal, 1);
+            emit(droppedSignal, (EtherFrame*)msg);
             hadError=true;
             if(ev.isGUI()){
                 ev.printf("Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
@@ -88,7 +90,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         //Check too late
         else if (par("receive_window_end").longValue() > 0 && currentTicks > (uint32_t) par("receive_window_end").longValue())
         {
-            emit(ctDroppedSignal, 1);
+            emit(droppedSignal, (EtherFrame*)msg);
             hadError=true;
             if(ev.isGUI()){
                 ev.printf("Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n",

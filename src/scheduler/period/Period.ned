@@ -24,7 +24,7 @@ simple Period
 {
     parameters:
         //Statistic of the beginning of a new cycle
-        @statistic[newCycle](title="Start of cycle"; record=count,vector);
+        @statistic[newCycle](title="Start of cycle"; record=count,vector; interpolationmode=none);
         // Number of ticks for one cycle
         int cycle_ticks @unit(tick) = default(37500tick);
         // Number of ticks offset

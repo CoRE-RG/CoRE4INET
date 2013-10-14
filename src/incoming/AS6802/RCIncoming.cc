@@ -16,6 +16,7 @@
 #include "RCIncoming.h"
 
 #include <TTEScheduler.h>
+#include <EtherFrame_m.h>
 
 namespace TTEthernetModel {
 
@@ -37,12 +38,14 @@ void RCIncoming::initialize()
 void RCIncoming::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
+        recordPacketReceived((EtherFrame*)msg);
+
         unsigned long currentTotalTicks = timer->getTotalTicks();
         //Now check for correct arrival:
         //TODO what todo with JITTER?
         //Check too early
         if(!firstMessage && currentTotalTicks-lastArrived < bag){
-            emit(ctDroppedSignal, 1);
+            emit(droppedSignal, (EtherFrame*)msg);
             if(ev.isGUI()){
                 ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n", getName(), currentTotalTicks-lastArrived,par("bag").longValue());
                 bubble("Frame to early");

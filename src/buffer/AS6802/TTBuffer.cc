@@ -72,7 +72,7 @@ void TTBuffer::handleMessage(cMessage *msg)
 
     if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT && destinationGates.size() > 0)
     {
-        cMessage *outgoingMessage = getFrame();
+        EtherFrame *outgoingMessage = getFrame();
         //Send Message
         for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end(); ++destGate)
         {
@@ -95,7 +95,7 @@ void TTBuffer::handleMessage(cMessage *msg)
         }
         if (outgoingMessage)
         {
-            recordPacketSent();
+            recordPacketSent(outgoingMessage);
             delete outgoingMessage;
 
             // Now execute transmit callbacks if there are some

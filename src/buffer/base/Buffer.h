@@ -129,8 +129,17 @@ class Buffer : public virtual cSimpleModule
 
         /**
          * @brief Emits a statistics signal that a frame was sent from the buffer
+         *
+         * @param frame the frame that was sent
          */
-        void recordPacketSent();
+        void recordPacketSent(EtherFrame *frame);
+
+        /**
+         * @brief Emits a statistics signal that a frame was received in the buffer
+         *
+         * @param frame the frame that was received
+         */
+        void recordPacketReceived(EtherFrame *frame);
 
         /**
          * @brief Sets the status of the Buffer to empty or non-empty.
@@ -206,11 +215,10 @@ class Buffer : public virtual cSimpleModule
          * Signal that is emitted every time a frame was sent.
          */
         static simsignal_t txPkSignal;
-
         /**
-         * Signal that contains the latency until the frame enters the buffer.
+         * Signal that is emitted every time a frame was received.
          */
-        static simsignal_t latencySignal;
+        static simsignal_t rxPkSignal;
 
 };
 }

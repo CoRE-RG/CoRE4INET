@@ -28,9 +28,11 @@ void PCFIncoming::initialize(){
 void PCFIncoming::handleMessage(cMessage *msg){
     if(msg->arrivedOn("in")){
         PCFrame *frame = dynamic_cast<PCFrame *>(msg);
+        recordPacketReceived(frame);
 
         if(frame->getType() != (uint8_t)pcfType){
             ev<<"FRAME DROPPED, wrong type:"<<(int)frame->getType()<<" should be "<<pcfType<<endl;
+            emit(droppedSignal, frame);
             delete frame;
         }else{
             sendDelayed(frame,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
