@@ -38,25 +38,9 @@ void TrafficSinkApp::handleMessage(cMessage *msg)
         CTFrame *ctframe = dynamic_cast<CTFrame*>(msg);
         if(ctframe){
             emit(rxPkSignal, ctframe);
-            //Get most inner encapsulated packet for end-to-end latency
-            cPacket *innerPacket = ctframe;
-            cPacket *tmpPacket;
-            while((tmpPacket = innerPacket->decapsulate()) != NULL){
-                //delete the packet that contained the encapsulated
-                delete innerPacket;
-                innerPacket = tmpPacket;
-            }
-            emit(latencySignal, simTime()-innerPacket->getCreationTime());
-            delete innerPacket;
-        }
-        else{
-            delete msg;
         }
     }
-    else
-    {
-        delete msg;
-    }
+    delete msg;
 }
 
 } //namespace

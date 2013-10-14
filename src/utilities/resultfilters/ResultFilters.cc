@@ -10,12 +10,12 @@ void InnerMessageFilter::receiveSignal(cResultFilter *prev, simtime_t_cref t, cO
 {
     if (dynamic_cast<cMessage *>(object))
     {
-        cMessage *msg = (cMessage *)object;
-        cPacket *innerPacket = (cPacket *)msg;
+        cPacket *innerPacket = (cPacket *)object;
         cPacket *tmpPacket;
         while((tmpPacket = innerPacket->decapsulate()) != NULL){
             innerPacket = tmpPacket;
         }
         fire(this, t, innerPacket);
+        delete(innerPacket);
     }
 }
