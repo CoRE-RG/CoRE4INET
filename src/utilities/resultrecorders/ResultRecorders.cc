@@ -15,6 +15,7 @@
 #include "ResultRecorders.h"
 
 #include <cmessage.h>
+#include <limits>
 
 using namespace TTEthernetModel;
 
@@ -100,4 +101,47 @@ void FloatingIntervalAvgVectorRecorder::collect(simtime_t_cref t, double value){
         sumValue += (*it).second;
     }
     ev.recordInOutputVector(handle, t, (sumValue/inInterval.size()));
+}
+
+Register_ResultRecorder("floatingIntervalMinVector", FloatingIntervalMinVectorRecorder);
+
+void FloatingIntervalMinVectorRecorder::collect(simtime_t_cref t, double value){
+    FloatingIntervalVectorRecorder::collect(t, value);
+    double minValue = std::numeric_limits<double>::max();
+    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+        if((*it).second< minValue){
+            minValue = (*it).second;
+        }
+    }
+    ev.recordInOutputVector(handle, t, minValue);
+}
+
+Register_ResultRecorder("floatingIntervalMaxVector", FloatingIntervalMaxVectorRecorder);
+
+void FloatingIntervalMaxVectorRecorder::collect(simtime_t_cref t, double value){
+    FloatingIntervalVectorRecorder::collect(t, value);
+    double maxValue = std::numeric_limits<double>::min();
+    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+        if((*it).second > maxValue){
+            maxValue = (*it).second;
+        }
+    }
+    ev.recordInOutputVector(handle, t, maxValue);
+}
+
+Register_ResultRecorder("floatingIntervalVarianceVector", FloatingIntervalVarianceVectorRecorder);
+
+void FloatingIntervalVarianceVectorRecorder::collect(simtime_t_cref t, double value){
+    FloatingIntervalVectorRecorder::collect(t, value);
+    double minValue = std::numeric_limits<double>::max();
+    double maxValue = std::numeric_limits<double>::min();
+    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+        if((*it).second< minValue){
+            minValue = (*it).second;
+        }
+        if((*it).second > maxValue){
+            maxValue = (*it).second;
+        }
+    }
+    ev.recordInOutputVector(handle, t, (maxValue-minValue));
 }

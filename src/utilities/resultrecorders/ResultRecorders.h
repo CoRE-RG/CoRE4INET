@@ -19,6 +19,24 @@
 
 namespace TTEthernetModel{
 
+/**
+ * @brief BaseClass for floating interval vector recorders
+ *
+ * Floating interval vectors use the values collected in an interval
+ * together with a grouping function
+ *
+ * To configure the interval the following parameters are chosen in the given order:
+ * - 1. Look for an "interval" parameter in the @statistics definition e.g.:
+ * @statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
+ * - 2. Look for an "interval" parameter in all modules from this module until the root (the network) e.g.:
+ * parameters:
+ *     double interval @unit(s) = default(1s);
+ * - 3. default (1s) is chosen
+ *
+ * @ingroup ResultRecorders
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalVectorRecorder: public cNumericResultRecorder
 {
     protected:
@@ -33,19 +51,91 @@ class FloatingIntervalVectorRecorder: public cNumericResultRecorder
         virtual void subscribedTo(cResultFilter *prev);
 };
 
+/**
+ * @brief floating interval count vector recorder "floatingIntervalCountVector"
+ *
+ * On every incoming value the values over the past interval are counted and recorded
+ *
+ * @ingroup ResultRecorders
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalCountVectorRecorder: public FloatingIntervalVectorRecorder
 {
     protected:
         virtual void collect(simtime_t_cref t, double value);
 };
 
+/**
+ * @brief floating interval sum vector recorder "floatingIntervalSumVector"
+ *
+ * On every incoming value the values over the past interval are summed and recorded
+ *
+ * @ingroup ResultRecorders
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalSumVectorRecorder: public FloatingIntervalVectorRecorder
 {
     protected:
         virtual void collect(simtime_t_cref t, double value);
 };
 
+/**
+ * @brief floating interval avg vector recorder "floatingIntervalAvgVector"
+ *
+ * On every incoming value the values over the past interval are averaged and recorded
+ *
+ * @ingroup ResultRecorders
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalAvgVectorRecorder: public FloatingIntervalVectorRecorder
+{
+    protected:
+        virtual void collect(simtime_t_cref t, double value);
+};
+
+/**
+ * @brief floating interval min vector recorder "floatingIntervalMinVector"
+ *
+ * On every incoming value the minimum of the past interval is recorded
+ *
+ * @ingroup ResultRecorders
+ *
+ * @author Till Steinbach
+ */
+class FloatingIntervalMinVectorRecorder: public FloatingIntervalVectorRecorder
+{
+    protected:
+        virtual void collect(simtime_t_cref t, double value);
+};
+
+/**
+ * @brief floating interval max vector recorder "floatingIntervalMaxVector"
+ *
+ * On every incoming value the maximum of the past interval is recorded
+ *
+ * @ingroup ResultRecorders
+ *
+ * @author Till Steinbach
+ */
+class FloatingIntervalMaxVectorRecorder: public FloatingIntervalVectorRecorder
+{
+    protected:
+        virtual void collect(simtime_t_cref t, double value);
+};
+
+/**
+ * @brief floating interval variance vector recorder "floatingIntervalVarianceVector"
+ *
+ * On every incoming value the variance (maximum-minimum) of the past interval is recorded
+ *
+ * @ingroup ResultRecorders
+ *
+ * @author Till Steinbach
+ */
+class FloatingIntervalVarianceVectorRecorder: public FloatingIntervalVectorRecorder
 {
     protected:
         virtual void collect(simtime_t_cref t, double value);

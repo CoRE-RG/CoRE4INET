@@ -17,6 +17,14 @@
  */
 
 /**
+ * @defgroup ResultFilters ResultFilters
+ */
+
+/**
+ * @defgroup ResultRecorders ResultRecorders
+ */
+
+/**
  * @defgroup Shapers Shapers
  */
 

@@ -20,7 +20,11 @@
 namespace TTEthernetModel{
 
 /**
- * Filter that expects a cPacket and outputs its encapsulated cPacket
+ * @brief Filter that expects a cPacket and outputs its encapsulated cPacket
+ *
+ * @ingroup ResultFilters
+ *
+ * @author Till Steinbach
  */
 class InnerMessageFilter : public cObjectResultFilter
 {
@@ -28,6 +32,13 @@ class InnerMessageFilter : public cObjectResultFilter
         virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object);
 };
 
+/**
+ * @brief Experimental (use ResultRecorder instead)
+ *
+ * @ingroup ResultFilters
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalFilter : public cNumericResultFilter{
     protected:
         simtime_t interval;
@@ -38,18 +49,39 @@ class FloatingIntervalFilter : public cNumericResultFilter{
         FloatingIntervalFilter();
 };
 
+/**
+ * @brief Experimental (use ResultRecorder instead)
+ *
+ * @ingroup ResultFilters
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalCountFilter : public FloatingIntervalFilter
 {
     protected:
         virtual bool process(simtime_t &t, double& value);
 };
 
+/**
+ * @brief Experimental (use ResultRecorder instead)
+ *
+ * @ingroup ResultFilters
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalSumFilter : public FloatingIntervalFilter
 {
     protected:
         virtual bool process(simtime_t &t, double& value);
 };
 
+/**
+ * @brief Experimental (use ResultRecorder instead)
+ *
+ * @ingroup ResultFilters
+ *
+ * @author Till Steinbach
+ */
 class FloatingIntervalAvgFilter : public FloatingIntervalFilter
 {
     protected:
