@@ -35,7 +35,7 @@ simple CT_BE_InControl extends BE_InControl
         @statistic[ctDropped](title="Unconfigured CT dropped"; source=droppedPk; record=count; interpolationmode=none);
         
         //Bandwidthstatistic
-        @statistic[intervalBandwidth](title= "Bandwidth per Second"; source=intervalBandwidth; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: interval=50ms; for floatingIntervalRecorders
+        @statistic[intervalBandwidth](title="Bandwidth per Second"; source=intervalBandwidth; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: interval=50ms; for floatingIntervalRecorders
             
 		//Critical traffic marker of the buffer
         int ct_marker;

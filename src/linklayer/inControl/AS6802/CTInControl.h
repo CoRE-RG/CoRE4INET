@@ -69,7 +69,7 @@ class CTInControl : public IC
          */
         static simsignal_t ctDroppedSignal;
 
-        static simsignal_t intervalBandwidth;
+        static simsignal_t intervalBandwidthSignal;
 
     protected:
         /**
@@ -122,14 +122,14 @@ template <class IC>
 simsignal_t CTInControl<IC>::ctDroppedSignal = SIMSIGNAL_NULL;
 
 template <class IC>
-simsignal_t CTInControl<IC>::intervalBandwidth = SIMSIGNAL_NULL;
+simsignal_t CTInControl<IC>::intervalBandwidthSignal = SIMSIGNAL_NULL;
 
 template <class IC>
 void CTInControl<IC>::initialize()
 {
     BaseInControl::initialize();
     ctDroppedSignal = cComponent::registerSignal("ctDropped");
-    intervalBandwidth = cComponent::registerSignal("Bandwidth");
+    intervalBandwidthSignal = cComponent::registerSignal("intervalBandwidth");
 }
 
 template <class IC>
@@ -139,7 +139,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
     {
         EtherFrame *frame = (EtherFrame*) msg;
 
-        cComponent::emit(intervalBandwidth, frame);
+        cComponent::emit(intervalBandwidthSignal, frame);
         //Auf CTCs verteilen oder BE traffic
         if (isCT(frame))
         {
