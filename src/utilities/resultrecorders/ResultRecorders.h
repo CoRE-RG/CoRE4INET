@@ -27,7 +27,7 @@ namespace TTEthernetModel{
  *
  * To configure the interval the following parameters are chosen in the given order:
  * - 1. Look for an "interval" parameter in the @statistics definition e.g.:
- * @statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
+ * \@statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
  * - 2. Look for an "interval" parameter in all modules from this module until the root (the network) e.g.:
  * parameters:
  *     double interval @unit(s) = default(1s);
@@ -71,6 +71,14 @@ class FloatingIntervalCountVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * On every incoming value the values over the past interval are summed and recorded
  *
+ * To configure the interval the following parameters are chosen in the given order:
+ * - 1. Look for an "interval" parameter in the @statistics definition e.g.:
+ * \@statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
+ * - 2. Look for an "interval" parameter in all modules from this module until the root (the network) e.g.:
+ * parameters:
+ *     double interval @unit(s) = default(1s);
+ * - 3. default (1s) is chosen
+ *
  * @ingroup ResultRecorders
  *
  * @author Till Steinbach
@@ -85,6 +93,14 @@ class FloatingIntervalSumVectorRecorder: public FloatingIntervalVectorRecorder
  * @brief floating interval avg vector recorder "floatingIntervalAvgVector"
  *
  * On every incoming value the values over the past interval are averaged and recorded
+ *
+ * To configure the interval the following parameters are chosen in the given order:
+ * - 1. Look for an "interval" parameter in the @statistics definition e.g.:
+ * \@statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
+ * - 2. Look for an "interval" parameter in all modules from this module until the root (the network) e.g.:
+ * parameters:
+ *     double interval @unit(s) = default(1s);
+ * - 3. default (1s) is chosen
  *
  * @ingroup ResultRecorders
  *
@@ -101,6 +117,14 @@ class FloatingIntervalAvgVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * On every incoming value the minimum of the past interval is recorded
  *
+ * To configure the interval the following parameters are chosen in the given order:
+ * - 1. Look for an "interval" parameter in the @statistics definition e.g.:
+ * \@statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
+ * - 2. Look for an "interval" parameter in all modules from this module until the root (the network) e.g.:
+ * parameters:
+ *     double interval @unit(s) = default(1s);
+ * - 3. default (1s) is chosen
+ *
  * @ingroup ResultRecorders
  *
  * @author Till Steinbach
@@ -116,6 +140,14 @@ class FloatingIntervalMinVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * On every incoming value the maximum of the past interval is recorded
  *
+ * To configure the interval the following parameters are chosen in the given order:
+ * - 1. Look for an "interval" parameter in the @statistics definition e.g.:
+ * \@statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
+ * - 2. Look for an "interval" parameter in all modules from this module until the root (the network) e.g.:
+ * parameters:
+ *     double interval @unit(s) = default(1s);
+ * - 3. default (1s) is chosen
+ *
  * @ingroup ResultRecorders
  *
  * @author Till Steinbach
@@ -130,6 +162,14 @@ class FloatingIntervalMaxVectorRecorder: public FloatingIntervalVectorRecorder
  * @brief floating interval variance vector recorder "floatingIntervalVarianceVector"
  *
  * On every incoming value the variance (maximum-minimum) of the past interval is recorded
+ *
+ * To configure the interval the following parameters are chosen in the given order:
+ * - 1. Look for an "interval" parameter in the @statistics definition e.g.:
+ * \@statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; interval=50ms);
+ * - 2. Look for an "interval" parameter in all modules from this module until the root (the network) e.g.:
+ * parameters:
+ *     double interval @unit(s) = default(1s);
+ * - 3. default (1s) is chosen
  *
  * @ingroup ResultRecorders
  *
