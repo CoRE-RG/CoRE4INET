@@ -27,7 +27,7 @@ network small_network
 {
     parameters:
         @display("bgb=,,white");
-        double interval @unit(s) = default(1s);
+        double measure_interval @unit(s) = default(1s);
     
     types:
         //
