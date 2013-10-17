@@ -1,8 +1,10 @@
 #include "BaseInControl.h"
 
+simsignal_t BaseInControl::rxPkSignal = SIMSIGNAL_NULL;
 
 void BaseInControl::initialize(){
     Timed::initialize();
+    rxPkSignal = registerSignal("rxPk");
 }
 
 void BaseInControl::setParameters(EtherFrame *frame){
@@ -23,5 +25,8 @@ void BaseInControl::setParameters(EtherFrame *frame){
     par->setLongValue(getParentModule()->getIndex());
 }
 
-
+void BaseInControl::recordPacketReceived(EtherFrame *frame)
+{
+    emit(rxPkSignal, frame);
+}
 

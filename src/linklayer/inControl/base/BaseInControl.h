@@ -47,6 +47,11 @@ class BaseInControl : public virtual cSimpleModule, public Timed
          * @brief set to true if there was an error during runtime
          */
         bool hadError;
+
+        /**
+         * Signal that is emitted every time a frame was received.
+         */
+        static simsignal_t rxPkSignal;
     public:
         /**
          * @brief Constructor
@@ -69,7 +74,19 @@ class BaseInControl : public virtual cSimpleModule, public Timed
 
         bool isPromiscuous(){return promiscuous;}
     protected:
+        /**
+         * @brief Sets parameters in the frame such as received_port and times
+         *
+         * @param frame the frame that was received
+         */
         void setParameters(EtherFrame *frame);
+
+        /**
+         * @brief Emits a statistics signal that a frame was received in the buffer
+         *
+         * @param frame the frame that was received
+         */
+        void recordPacketReceived(EtherFrame *frame);
 };
 }
 
