@@ -56,6 +56,7 @@ void BEInControl<IC>::handleMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         EtherFrame *frame = (EtherFrame*) msg;
+        this->recordPacketReceived(frame);
 
         if(IC::isPromiscuous() || frame->getDest().isMulticast()){
             cSimpleModule::send(msg, "out");
