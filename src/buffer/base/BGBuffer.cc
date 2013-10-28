@@ -14,7 +14,7 @@
 // 
 
 #include "BGBuffer.h"
-#include "ApplicationBase.h"
+#include "TTEApplicationBase.h"
 
 namespace TTEthernetModel {
 
@@ -32,7 +32,7 @@ void BGBuffer::handleMessage(cMessage *msg)
 
     if (msg->arrivedOn("in") && destinationGates.size() > 0)
     {
-        EtherFrame *outgoingMessage = dequeue();
+        cMessage *outgoingMessage = dequeue();
 
         if(outgoingMessage){
             //Send Message
@@ -44,13 +44,30 @@ void BGBuffer::handleMessage(cMessage *msg)
                 send(outgoingMessage->dup(),"out");
             }
             //TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback
-            for(std::map<ApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
+            for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
                     iter != transmitCallbacks.end(); ++iter){
                 iter->first->executeCallback(iter->second);
             }
-            recordPacketSent(outgoingMessage);
+            recordPacketSent();
             delete msg;
         }
+    }
+    else if(msg->arrivedOn("in") && gate("out")->isConnected())
+    {
+        cMessage *outgoingMessage = dequeue();
+
+            if(outgoingMessage)
+            {
+                send(outgoingMessage->dup(),"out");
+
+                //TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback
+                for(std::map<TTEApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
+                        iter != transmitCallbacks.end(); ++iter){
+                    iter->first->executeCallback(iter->second);
+                }
+                recordPacketSent();
+                delete msg;
+            }
     }
 }
 
