@@ -18,8 +18,9 @@
 #include <CTFrame_m.h>
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
-#include "TTEScheduler.h"
 #include "Buffer.h"
+#include <Timer.h>
+#include <ModuleAccess.h>
 
 #define AVB_MINPAYLOADSIZE 46
 #define AVB_MINPACKETSIZE 88
@@ -35,6 +36,7 @@ Define_Module(AVBTrafficSourceApp);
 void AVBTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
+    Timed::initialize();
 
     talker = par("talker").boolValue();
     streamID = par("streamID").longValue();
@@ -54,25 +56,25 @@ void AVBTrafficSourceApp::initialize()
 
     avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
 
-    Buffer *srpInBuffer = (Buffer*) getParentModule()->getSubmodule("srpIn");
+    Buffer *srpInBuffer = dynamic_cast<Buffer*>(getParentModule()->getSubmodule("srpIn"));
     std::string dg = srpInBuffer->par("destination_gates");
     if(dg.empty())
         srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
     else
         srpInBuffer->par("destination_gates") = dg + "," + this->gate("SRPin")->getFullPath();
 
-    srpOutBuffer = (Buffer*) getParentModule()->getSubmodule("srpOut");
+    srpOutBuffer = dynamic_cast<Buffer*>(getParentModule()->getSubmodule("srpOut"));
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
 
     if(talker && par("enabled").boolValue())
     {
         avbCTC->talker = true;
-        TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(par("advertise_time").doubleValue()/scheduler->par("tick").doubleValue());
+        tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
+        event->setTimer(par("advertise_time").doubleValue()/tick);
         event->setDestinationGate(gate("schedulerIn"));
-        scheduler->registerEvent(event);
+        getTimer()->registerEvent(event);
     }
 }
 
@@ -150,11 +152,10 @@ void AVBTrafficSourceApp::sendAVBFrame()
 
     //class measurement interval = 125us
     double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
-    TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer(ceil(interval/scheduler->par("tick").doubleValue()));
+    event->setTimer(ceil(interval/tick));
     event->setDestinationGate(gate("schedulerIn"));
-    scheduler->registerEvent(event);
+    getTimer()->registerEvent(event);
 }
 
 } /* namespace TTEthernetModel */

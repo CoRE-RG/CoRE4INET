@@ -22,4 +22,9 @@ package ttethernet.utilities.classes;
 //
 moduleinterface ITimed
 {
+    parameters:
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        string oscillator;
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        string timer;
 }

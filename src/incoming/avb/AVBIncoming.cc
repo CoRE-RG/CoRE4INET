@@ -17,7 +17,7 @@
 #include <EtherFrame_m.h>
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
-#include <TTEAVBOutput.h>
+#include <BaseShaper.h>
 
 namespace TTEthernetModel {
 
@@ -140,7 +140,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
 
 int AVBIncoming::calcPortUtilisation(int port)
 {
-    TTEAVBOutput *shaper = (TTEAVBOutput*) getParentModule()->getSubmodule("phy",port)->getSubmodule("shaper");
+    BaseShaper *shaper = dynamic_cast<BaseShaper*>(getParentModule()->getSubmodule("phy",port)->getSubmodule("shaper"));
     cGate *physOutGate = getParentModule()->getSubmodule("phy", port)->getSubmodule("mac")->gate("phys$o");
     cChannel *avbChannel = physOutGate->findTransmissionChannel();
     PortBandwith[port] = (avbChannel->getNominalDatarate() / 1000000);

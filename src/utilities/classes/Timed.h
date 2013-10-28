@@ -48,6 +48,11 @@ class Timed: public virtual cSimpleModule
          * TODO
          */
         Timer* getTimer();
+
+        /**
+         * TODO
+         */
+        Oscillator* getOscillator();
 };
 
 }

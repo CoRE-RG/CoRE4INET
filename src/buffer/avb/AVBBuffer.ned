@@ -14,6 +14,7 @@
 // 
 
 package ttethernet.buffer.avb;
+import ttethernet.utilities.classes.ITimed;
 
 import ttethernet.buffer.base.Buffer;
 
@@ -25,7 +26,7 @@ import ttethernet.buffer.base.Buffer;
 // @see AVBDoubleBuffer, AVBQueueBuffer, Buffer, SchedulerActionTimeEvent, Scheduler
 //
 // @author Philipp Meyer
-simple AVBBuffer extends Buffer
+simple AVBBuffer extends Buffer like ITimed
 {
     parameters:
         @class(AVBBuffer);
@@ -33,6 +34,11 @@ simple AVBBuffer extends Buffer
         
         //Statistic of the credit of the CBS algorithm
         @statistic[credit](title="Credit"; record=vector);
+        
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        string oscillator = default("oscillator");
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        string timer = default("timer");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

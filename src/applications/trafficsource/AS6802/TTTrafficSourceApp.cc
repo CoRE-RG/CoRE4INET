@@ -49,7 +49,6 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg){
             moduloCycle=0;
         }
 
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
         event->setNext_cycle(true);
         period->registerEvent(event);

@@ -16,7 +16,8 @@
 #include "AVBBuffer.h"
 #include <CTFrame_m.h>
 #include <AVBFrame_m.h>
-#include "TTEApplicationBase.h"
+#include "ApplicationBase.h"
+#include <ModuleAccess.h>
 
 namespace TTEthernetModel {
 
@@ -45,6 +46,10 @@ void AVBBuffer::initialize(int stage)
 
     if(stage==0)
     {
+        Timed::initialize();
+
+        tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
+
         credit = 0;
         maxCredit = 0;
         AVBReservation = 0;
@@ -54,7 +59,6 @@ void AVBBuffer::initialize(int stage)
         oldTime = simTime();
         Wduration = 0;
 
-        scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         avbCTC = (AVBIncoming*)getParentModule()->getSubmodule("avbCTC");
 
         creditSignal = registerSignal("credit");
@@ -111,9 +115,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
                     AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
                     Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer(ceil(Wduration / scheduler->par("tick").doubleValue()));
+                    event->setTimer(ceil(Wduration /tick));
                     event->setDestinationGate(gate("schedulerIn"));
-                    scheduler->registerEvent(event);
+                    getTimer()->registerEvent(event);
                 }
             }
         }
@@ -146,9 +150,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
                     AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
                     Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer(ceil(Wduration / scheduler->par("tick").doubleValue()));
+                    event->setTimer(ceil(Wduration / tick));
                     event->setDestinationGate(gate("schedulerIn"));
-                    scheduler->registerEvent(event);
+                    getTimer()->registerEvent(event);
                 }
             }
             delete msg;
@@ -203,9 +207,9 @@ void AVBBuffer::sendSlope(SimTime duration)
             AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
             Wduration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer(ceil(Wduration / scheduler->par("tick").doubleValue()));
+            event->setTimer(ceil(Wduration / tick));
             event->setDestinationGate(gate("schedulerIn"));
-            scheduler->registerEvent(event);
+            getTimer()->registerEvent(event);
         }
         else
         {

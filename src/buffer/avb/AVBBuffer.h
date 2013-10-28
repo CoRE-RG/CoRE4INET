@@ -18,8 +18,8 @@
 
 #include <omnetpp.h>
 #include "Buffer.h"
-#include "TTEScheduler.h"
 #include "AVBIncoming.h"
+#include "Timed.h"
 
 namespace TTEthernetModel {
 
@@ -36,7 +36,7 @@ namespace TTEthernetModel {
  *
  * @ingroup Buffer
  */
-class AVBBuffer : public virtual Buffer
+class AVBBuffer : public virtual Buffer, public Timed
 {
     public:
         AVBBuffer();
@@ -95,8 +95,8 @@ class AVBBuffer : public virtual Buffer
         SimTime newTime;
         SimTime oldTime;
         double Wduration;
+        double tick;
 
-        TTEScheduler *scheduler;
         AVBIncoming * avbCTC;
 
         static simsignal_t creditSignal;

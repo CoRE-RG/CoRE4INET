@@ -34,7 +34,7 @@ namespace TTEthernetModel {
  * TODO Documentation
  */
 
-class AVBTrafficSourceApp : public TrafficSourceAppBase
+class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed
 {
     private:
         bool talker;
@@ -46,6 +46,7 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase
         Buffer *srpOutBuffer;
         AVBIncoming* avbCTC;
         cModule *avbOutCTC;
+        double tick;
     protected:
         /**
          * @brief Initialization of the module. Sends activator message

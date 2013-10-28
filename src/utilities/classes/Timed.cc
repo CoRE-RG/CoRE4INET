@@ -11,6 +11,10 @@ void Timed::initialize()
     ASSERT2(oscillator, "cannot find oscillator!");
 }
 
+Oscillator* Timed::getOscillator(){
+    return oscillator;
+}
+
 Timer* Timed::getTimer(){
     return timer;
 }

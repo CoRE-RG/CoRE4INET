@@ -43,8 +43,10 @@ class AVBClassAShaper : public TC
     protected:
         /**
          * @brief Initialization of the module
+         *
+         * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize();
+        virtual void initialize(int stage);
 
 
         /**
@@ -127,13 +129,15 @@ AVBClassAShaper<TC>::~AVBClassAShaper(){
 }
 
 template <class TC>
-void AVBClassAShaper<TC>::initialize()
+void AVBClassAShaper<TC>::initialize(int stage)
 {
-    TC::initialize();
-    avbQueueLengthSignal = cComponent::registerSignal("avbQueueLength");
+    TC::initialize(stage);
+    if(stage==0){
+        avbQueueLengthSignal = cComponent::registerSignal("avbQueueLength");
 
-    int portIndex = cModule::getParentModule()->getIndex();
-    avbBuffer = dynamic_cast<AVBBuffer*> (cModule::getParentModule()->getParentModule()->getSubmodule("avbBuffer", portIndex));
+        int portIndex = cModule::getParentModule()->getIndex();
+        avbBuffer = dynamic_cast<AVBBuffer*> (cModule::getParentModule()->getParentModule()->getSubmodule("avbBuffer", portIndex));
+    }
 }
 
 template <class TC>

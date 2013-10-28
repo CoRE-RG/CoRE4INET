@@ -16,6 +16,7 @@
 package ttethernet.applications.trafficsource.avb;
 
 import ttethernet.applications.trafficsource.base.TrafficSourceAppBase;
+import ttethernet.utilities.classes.ITimed;
 
 //
 // Traffic source application used for audio-video bridging traffic generators.
@@ -23,7 +24,7 @@ import ttethernet.applications.trafficsource.base.TrafficSourceAppBase;
 // @see TrafficSourceAppBase
 //
 // @author Philipp Meyer
-simple AVBTrafficSourceApp extends TrafficSourceAppBase
+simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
 {
     parameters:
         @class(AVBTrafficSourceApp);
@@ -40,6 +41,11 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase
         
         // Count of send Frames per 125us interval
         int intervalFrames  = default(1);
+        
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        string oscillator = default("oscillator");
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        string timer = default("timer");
     gates:
         input SRPin @directIn @labels(SRPFrame);
 }
