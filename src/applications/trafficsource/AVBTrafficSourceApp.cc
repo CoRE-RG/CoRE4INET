@@ -65,7 +65,7 @@ void AVBTrafficSourceApp::initialize()
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
 
-    if(talker)
+    if(talker && par("enabled").boolValue())
     {
         avbCTC->talker = true;
         TTEScheduler *scheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");

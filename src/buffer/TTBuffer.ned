@@ -22,7 +22,7 @@ simple TTBuffer extends CTBuffer
         @class(TTBuffer);
         @display("i=,red");
         //Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)
-        int sendWindowStart @unit(tick);
+        int sendWindowStart @unit(tick) = default(0tick);
         //End of the send window in number of ticks
         int sendWindowEnd @unit(tick) = default(0tick);
     gates:
