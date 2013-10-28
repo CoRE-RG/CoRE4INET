@@ -6,10 +6,9 @@
 namespace TTEthernetModel {
 
 /**
- * @brief A Shaper for TTMessages.
+ * @brief A Shaper for AVB-Messages.
  *
- * The TTShaper only allows lower priorities to transmit when their frames wont
- * collide with TTFrames
+ * The TTShaper only allows lower priorities to transmit when the credit is <= 0.
  *
  */
 template <class TC>
