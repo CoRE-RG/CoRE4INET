@@ -43,6 +43,7 @@ foreach line {
    {"AS6802 Synchronization with high integrity (small)"          "AS6802/synchronization/HighIntegrity_small"        "./run"               "run"}
    {"AS6802 Synchronization with standard integrity (medium)"     "AS6802/synchronization/StandardIntegrity_medium"   "./run"               "run"}
    {"AS6802 Synchronization with standard integrity (large)"      "AS6802/synchronization/StandardIntegrity_large"    "./run"               "run"}
+   {"AVB with AS6802 (time-triggered traffic) Small Network"      "avb/small_network"                                 "./run"               "run"}
 } {
    lappend samples $i
    if {[llength $line]==0} {
