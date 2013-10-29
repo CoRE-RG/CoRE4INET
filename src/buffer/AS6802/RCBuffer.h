@@ -75,6 +75,7 @@ class RCBuffer : public virtual CTBuffer, public Timed
         virtual void resetBag();
 
     protected:
+        using Timed::initialize;
         /**
          * @brief Initializes the timerMessage
          *

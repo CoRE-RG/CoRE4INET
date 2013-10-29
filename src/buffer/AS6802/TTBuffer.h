@@ -49,6 +49,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
         uint64_t nextAction;
 
     protected:
+        using Scheduled::initialize;
         /**
          * @brief Initializes the SchedulerActionTimeEvent
          *
