@@ -19,7 +19,7 @@
 #include "RCFrame_m.h"
 #include "TTFrame_m.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(TocApp);
 

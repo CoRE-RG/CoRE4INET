@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.scheduler;
+package core4inet.scheduler;
 
 //
 // TTEthernet scheduler module. The module allows to register Events using the

@@ -13,15 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_RCDOUBLEBUFFER_H_
-#define __TTETHERNETMODELV2_RCDOUBLEBUFFER_H_
+#ifndef __CORE4INET_RCDOUBLEBUFFER_H_
+#define __CORE4INET_RCDOUBLEBUFFER_H_
 
 #include <omnetpp.h>
 #include <RCBuffer.h>
 #include <DoubleBuffer.h>
 #include <EtherFrame_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Rate-constrained double buffer class.

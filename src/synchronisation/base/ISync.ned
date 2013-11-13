@@ -12,10 +12,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.synchronisation.base;
+package core4inet.synchronisation.base;
 
-import ttethernet.linklayer.IPort;
-import ttethernet.utilities.classes.IScheduled;
+import core4inet.linklayer.IPort;
+import core4inet.utilities.classes.IScheduled;
 
 //
 // Synchronisation module interface

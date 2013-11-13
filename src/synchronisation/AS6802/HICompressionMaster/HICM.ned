@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.synchronisation.AS6802.HICompressionMaster;
-import ttethernet.linklayer.IPort;
-import ttethernet.synchronisation.base.ISync;
+package core4inet.synchronisation.AS6802.HICompressionMaster;
+import core4inet.linklayer.IPort;
+import core4inet.synchronisation.base.ISync;
 
 
 

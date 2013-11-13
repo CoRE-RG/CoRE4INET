@@ -1,4 +1,4 @@
-package ttethernet.linklayer.shaper;
+package core4inet.linklayer.shaper;
 
 import inet.linklayer.IOutputQueue;
 

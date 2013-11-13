@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTETHERNETMODELV2_TIMED_H_
-#define __TTETHERNETMODELV2_TIMED_H_
+#ifndef __CORE4INET_TIMED_H_
+#define __CORE4INET_TIMED_H_
 
 #include <Oscillator.h>
 #include <Timer.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 
 /**
@@ -56,4 +56,4 @@ class Timed: public virtual cSimpleModule
 };
 
 }
-#endif /* __TTETHERNETMODELV2_TIMED_H_ */
+#endif /* __CORE4INET_TIMED_H_ */

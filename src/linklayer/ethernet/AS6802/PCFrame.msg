@@ -16,11 +16,11 @@ cplusplus {{
 #include "RCFrame_m.h"
 }}
 
-class TTEthernetModel::RCFrame;
+class CoRE4INET::RCFrame;
 
 packet RCFrame;
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 //
 // Identifier for different types of Protocol Control Frame (PCF)

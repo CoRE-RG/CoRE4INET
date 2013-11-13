@@ -18,7 +18,7 @@
 #include <TTEScheduler.h>
 #include <EtherFrame_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(RCIncoming);
 

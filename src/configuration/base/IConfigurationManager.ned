@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.configuration.base;
+package core4inet.configuration.base;
 
 //
 // Interface for a ConfigurationManager that configures a node according to its

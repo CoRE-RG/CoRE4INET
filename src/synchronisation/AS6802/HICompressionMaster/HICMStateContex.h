@@ -27,7 +27,7 @@
 //???
 #include "HICM.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class HICMStateContex
 {

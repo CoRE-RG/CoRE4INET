@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTE4INET_TTE4INETDEFS_H
-#define __TTE4INET_TTE4INETDEFS_H
+#ifndef __CoRE4INET_CoRE4INETDEFS_H
+#define __CoRE4INET_CoRE4INETDEFS_H
 
 #include <omnetpp.h>
 
@@ -26,9 +26,9 @@
 #endif
 
 /**
- * Definition of TTEthernetModel version
+ * Definition of CORE4INET version
  */
-#define TTE4INET_VERSION 0x0200
+#define CoRE4INET_VERSION 0x0200
 
 /**
  * Maximum number of priorities allowed for rate-constrained messages

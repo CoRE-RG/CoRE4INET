@@ -16,18 +16,18 @@ General
 
 If you are building from command line:
 --------------------------------------
-3. Change to the TTE4INET directory.
+3. Change to the CoRE4INET directory.
 
 4. Type "make makefiles". This should generate the makefiles for you automatically.
 
-5. Type "make" to build the tte4inet executable (debug version). Use "make MODE=release"
+5. Type "make" to build the core4inet executable (debug version). Use "make MODE=release"
    to build release version.
 
 6. you can run specific examples by changing into the example's directory and executing "./run"
 
 If you are using the IDE:
 -------------------------
-3. Open the OMNeT++ IDE and choose the workspace where you have extracted the TTE4INET directory.
+3. Open the OMNeT++ IDE and choose the workspace where you have extracted the CoRE4INET directory.
    The extracted directory must be a subdirectory of the workspace dir.
 
 4. Import the project using: File | Import | General | Existing projects into Workspace.
@@ -47,9 +47,9 @@ Change into examples/ and type "./rundemo".
 
 Note:
 -----
-- by default TTE4INET is creating a shared library (libTTEthernetModel.so etc.)
+- by default CoRE4INET is creating a shared library (libCoRE4INET.so etc.)
   in the "src" directory. To use the shared library you can use the "opp_run"
-  command to load it dynamically. Open the "src/run_tte4inet" script to see how
+  command to load it dynamically. Open the "src/run_core4inet" script to see how
   to do it.
 - If you add/remove files/directories later in the src directory, you MUST
   re-create your makefile. Run "make makefiles" again if you are building

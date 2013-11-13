@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.buffer.avb;
+package core4inet.buffer.avb;
 
 //
 // Represents a double buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper Algorithm.

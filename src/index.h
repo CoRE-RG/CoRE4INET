@@ -44,9 +44,9 @@
  */
 
 /**
- * @mainpage Sourcecode Documentation - TTEthernet Model for INET Framework (TTE4INET)
+ * @mainpage Sourcecode Documentation - Communication over Realtime Ethernet for INET Framework (CoRE4INET)
  *
- * This is the sourcecode documentation for the TTE4INET model.
+ * This is the sourcecode documentation for the CoRE4INET model.
  *
  * If you are looking for more general information please refere to the <a href="../neddoc/index.html" target="_top">NED documentation</a>
  */

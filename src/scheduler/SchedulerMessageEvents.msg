@@ -16,7 +16,7 @@ cplusplus {{
         #include "SchedulerEvent.h"
 }}
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 class SchedulerEvent;
 

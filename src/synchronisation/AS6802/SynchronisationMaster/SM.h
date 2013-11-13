@@ -29,7 +29,7 @@
 
 
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 
 class SM: public cSimpleModule{

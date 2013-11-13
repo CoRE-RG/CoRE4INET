@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.trafficsink;
+package core4inet.applications.trafficsink;
 
-import ttethernet.applications.base.ApplicationBase;
+import core4inet.applications.base.ApplicationBase;
 
 //
 // Traffic sink application used for statistics collection.

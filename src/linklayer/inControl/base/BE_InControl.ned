@@ -12,10 +12,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.linklayer.inControl.base;
+package core4inet.linklayer.inControl.base;
 
 import inet.linklayer.IOutputQueue;
-import ttethernet.utilities.classes.Timed;
+import core4inet.utilities.classes.Timed;
 //
 // Module for incoming traffic from MAC layer. The traffic is checked for
 // critical traffic ID and then forwarded either as best-effort traffic to

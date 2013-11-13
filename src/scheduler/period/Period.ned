@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.scheduler.period;
+package core4inet.scheduler.period;
 
 //
 // TODO auto-generated module

@@ -13,11 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.scheduler;
+package core4inet.scheduler;
 
-import ttethernet.scheduler.timer.Timer;
-import ttethernet.scheduler.oscillator.IOscillator;
-import ttethernet.scheduler.period.Period;
+import core4inet.scheduler.timer.Timer;
+import core4inet.scheduler.oscillator.IOscillator;
+import core4inet.scheduler.period.Period;
 
 //
 // TODO auto-generated module

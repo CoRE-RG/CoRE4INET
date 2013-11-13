@@ -26,14 +26,14 @@
 #include "omnetpp.h"
 #include "RCBuffer.h"
 #include "SynchronisationEvents_m.h"
-#include "TTE4INETDefs.h"
+#include "CoRE4INETDefs.h"
 #include <algorithm>
 #include "HelperFunctions.h"
 #include "SchedulerMessageEvents_m.h"
 #include "cmessage.h"
 #include "PCFrame_m.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 SI_CM_INIT::~SI_CM_INIT(){}
 

@@ -12,9 +12,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.linklayer.shaper;
+package core4inet.linklayer.shaper;
 
-import ttethernet.linklayer.shaper.base.BE_Shaper;
+import core4inet.linklayer.shaper.base.BE_Shaper;
 import inet.linklayer.IOutputQueue;
 
 //A Shaper that handles PCF, RC and BE traffic

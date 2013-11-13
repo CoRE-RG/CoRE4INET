@@ -1,0 +1,8 @@
+#! /bin/sh
+DIR=`dirname $0`
+
+if [ -x $DIR/CoRE4INET -o -x $DIR/CoRE4INET.exe ]; then
+  $DIR/CoRE4INET -n $DIR/../examples:$DIR $*
+else
+  opp_run -l $DIR/CoRE4INET -n $DIR/../examples:$DIR:$INETPATH/src $*
+fi

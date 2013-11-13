@@ -9,7 +9,7 @@
 #include "CTFrame.h"
 #include "EtherFrame_m.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 
 unsigned short CTFrame::getCtID() const{

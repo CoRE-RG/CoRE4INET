@@ -16,7 +16,7 @@
 #include "BGBuffer.h"
 #include "ApplicationBase.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(BGBuffer);
 

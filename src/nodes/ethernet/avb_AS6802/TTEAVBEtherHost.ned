@@ -13,18 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.nodes.ethernet.avb_AS6802;
+package core4inet.nodes.ethernet.avb_AS6802;
 
-import ttethernet.buffer.base.BGQueueBuffer;
-import ttethernet.linklayer.SRPTrafficHandle;
-import ttethernet.scheduler.ITTEScheduler;
-import ttethernet.configuration.base.IConfigurationManager;
-import ttethernet.linklayer.TTEAVBPHYPort;
-import ttethernet.synchronisation.base.ISync;
-import ttethernet.synchronisation.base.DummySync;
-import ttethernet.applications.base.IApplication;
-import ttethernet.incoming.avb.AVBIncoming;
-import ttethernet.buffer.avb.AVBQueueBuffer;
+import core4inet.buffer.base.BGQueueBuffer;
+import core4inet.linklayer.SRPTrafficHandle;
+import core4inet.scheduler.ITTEScheduler;
+import core4inet.configuration.base.IConfigurationManager;
+import core4inet.linklayer.TTEAVBPHYPort;
+import core4inet.synchronisation.base.ISync;
+import core4inet.synchronisation.base.DummySync;
+import core4inet.applications.base.IApplication;
+import core4inet.incoming.avb.AVBIncoming;
+import core4inet.buffer.avb.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
 import inet.applications.ethernet.EtherAppSrv;
 import inet.applications.ethernet.EtherAppCli;

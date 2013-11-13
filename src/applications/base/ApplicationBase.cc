@@ -15,12 +15,12 @@
 
 #include "ApplicationBase.h"
 
-#include "TTE4INETDefs.h"
+#include "CoRE4INETDefs.h"
 #include "HelperFunctions.h"
 
 #include <ModuleAccess.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(ApplicationBase);
 

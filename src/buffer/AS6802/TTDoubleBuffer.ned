@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.buffer.AS6802;
+package core4inet.buffer.AS6802;
 
 //
 // Represents a double buffer for time-triggered traffic. Messages are sent using the configured

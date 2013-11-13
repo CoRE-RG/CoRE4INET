@@ -1,6 +1,6 @@
 #include "Shapers.h"
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 Define_Module(BE_Shaper);
 

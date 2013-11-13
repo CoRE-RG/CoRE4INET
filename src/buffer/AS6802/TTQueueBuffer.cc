@@ -15,6 +15,6 @@
 
 #include "TTQueueBuffer.h"
 
-using namespace ::TTEthernetModel;
+using namespace ::CoRE4INET;
 
 Define_Module( TTQueueBuffer);

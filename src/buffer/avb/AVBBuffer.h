@@ -13,15 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef AVBBUFFER_H_
-#define AVBBUFFER_H_
+#ifndef __CORE4INET_AVBBUFFER_H_
+#define __CORE4INET_AVBBUFFER_H_
 
 #include <omnetpp.h>
 #include "Buffer.h"
 #include "AVBIncoming.h"
 #include "Timed.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Base class for a audio-video bridging buffer class.
@@ -130,5 +130,5 @@ class AVBBuffer : public virtual Buffer, public Timed
         virtual void handleParameterChange(const char* parname);
 };
 
-} /* namespace TTEthernetModel */
-#endif /* AVBBUFFER_H_ */
+} /* namespace CoRE4INET */
+#endif /* __CORE4INET_AVBBUFFER_H_ */

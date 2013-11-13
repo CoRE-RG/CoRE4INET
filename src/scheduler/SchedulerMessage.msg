@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 //
 // abstract base message for TTEScheduler.

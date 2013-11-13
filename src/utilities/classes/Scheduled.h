@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTETHERNETMODELV2_SCHEDULED_H_
-#define __TTETHERNETMODELV2_SCHEDULED_H_
+#ifndef __CORE4INET_SCHEDULED_H_
+#define __CORE4INET_SCHEDULED_H_
 
 #include <Timed.h>
 #include <Period.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief TODO
@@ -46,4 +46,4 @@ class Scheduled: public Timed
 };
 
 }
-#endif /* __TTETHERNETMODELV2_SCHEDULED_H_ */
+#endif /* __CORE4INET_SCHEDULED_H_ */

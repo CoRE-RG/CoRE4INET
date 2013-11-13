@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 //
 // Messages for the rt_tictoc Examples

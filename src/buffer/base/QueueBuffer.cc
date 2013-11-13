@@ -15,7 +15,7 @@
 
 #include "QueueBuffer.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 simsignal_t QueueBuffer::queueLengthSignal = SIMSIGNAL_NULL;
 simsignal_t QueueBuffer::ctDroppedSignal = SIMSIGNAL_NULL;

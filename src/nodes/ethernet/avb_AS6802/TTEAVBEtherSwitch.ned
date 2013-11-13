@@ -1,15 +1,15 @@
-package ttethernet.nodes.ethernet.avb_AS6802;
+package core4inet.nodes.ethernet.avb_AS6802;
 
-import ttethernet.scheduler.Scheduler;
-import ttethernet.scheduler.ITTEScheduler;
-import ttethernet.configuration.base.IConfigurationManager;
-import ttethernet.synchronisation.base.ISync;
-import ttethernet.synchronisation.base.DummySync;
-import ttethernet.linklayer.TTEAVBPHYPort;
-import ttethernet.incoming.avb.AVBIncoming;
-import ttethernet.buffer.avb.AVBQueueBuffer;
+import core4inet.scheduler.Scheduler;
+import core4inet.scheduler.ITTEScheduler;
+import core4inet.configuration.base.IConfigurationManager;
+import core4inet.synchronisation.base.ISync;
+import core4inet.synchronisation.base.DummySync;
+import core4inet.linklayer.TTEAVBPHYPort;
+import core4inet.incoming.avb.AVBIncoming;
+import core4inet.buffer.avb.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
-import ttethernet.linklayer.SRPTrafficHandle;
+import core4inet.linklayer.SRPTrafficHandle;
 
 import inet.linklayer.IMACRelayUnit;
 

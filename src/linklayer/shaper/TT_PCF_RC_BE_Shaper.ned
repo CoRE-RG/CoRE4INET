@@ -12,10 +12,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.linklayer.shaper;
+package core4inet.linklayer.shaper;
 
 import inet.linklayer.IOutputQueue;
-import ttethernet.utilities.classes.ITimed;
+import core4inet.utilities.classes.ITimed;
 
 //A Shaper that handles TT, PCF, RC and BE traffic
 // This shaper handles traffic in the following order (highest to lowest priority):

@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTE4INET_PCFSHAPER_H
-#define __TTE4INET_PCFSHAPER_H
+#ifndef __CoRE4INET_PCFSHAPER_H
+#define __CoRE4INET_PCFSHAPER_H
 
 #include <ModuleAccess.h>
 #include <RCBuffer.h>
@@ -22,7 +22,7 @@
 #include <Timed.h>
 #include <HelperFunctions.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief A Shaper for PCFMessages.

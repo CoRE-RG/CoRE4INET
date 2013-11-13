@@ -15,6 +15,6 @@
 
 #include "AVBQueueBuffer.h"
 
-using namespace ::TTEthernetModel;
+using namespace ::CoRE4INET;
 
 Define_Module(AVBQueueBuffer);

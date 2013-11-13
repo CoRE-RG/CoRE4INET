@@ -13,14 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODEL_PERIOD_H_
-#define __TTETHERNETMODEL_PERIOD_H_
+#ifndef __CORE4INET_PERIOD_H_
+#define __CORE4INET_PERIOD_H_
 
 #include <omnetpp.h>
 #include <SchedulerEvent.h>
 #include <SchedulerMessageEvents_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class Timer;
 

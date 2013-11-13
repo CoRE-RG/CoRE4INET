@@ -22,7 +22,7 @@
 #include "SC.h"
 
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(SC);
 

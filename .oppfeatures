@@ -1,36 +1,36 @@
 <features cppSourceRoots="src">
     <feature
-        id="TTE_common"
-        name="TTEthernet Common"
-        description = "The common part of TTEthernet implementations"
+        id="AS6802_common"
+        name="AS6802 Common"
+        description = "The common part of AS6802 implementation"
         initiallyEnabled = "true"
         requires = ""
         labels = ""
         nedPackages = "
-                       ttethernet.applications.base
-                       ttethernet.base
-                       ttethernet.buffer
-                       ttethernet.configuration.base
-                       ttethernet.ctc
-                       ttethernet.linklayer
-                       ttethernet.nodes
-                       ttethernet.scheduler
-                       ttethernet.synchronisation.base
+                       core4inet.applications.trafficsource.AS6802
+                       core4inet.buffer.AS6802
+                       core4inet.configuration.base
+                       core4inet.incoming.AS6802
+                       core4inet.linklayer.ethernet.AS6802
+                       core4inet.linklayer.inControl.AS6802
+                       core4inet.linklayer.shaper.AS6802
+                       core4inet.nodes.ethernet.AS6802
                       "
         extraSourceFolders = ""
-        compileFlags = "-DWITH_TTE_COMMON"
+        compileFlags = "-DWITH_AS6802_COMMON"
         linkerFlags = ""
         />
     <feature
-        id="TTE_examples"
-        name="TTEthernet examples"
-        description = "Examples for the TTEthernet implementation"
+        id="AS6802_examples"
+        name="AS6802 examples"
+        description = "Examples for the AS6802 implementation"
         initiallyEnabled = "true"
-        requires = "TTE_common"
+        requires = "AS6802_common"
         labels = ""
         nedPackages = "
-                       ttethernet.examples.rt_tictoc
-                       ttethernet.examples.small_network
+                       core4inet.applications.examples.rt_tictoc
+                       core4inet.examples.AS6802.rt_tictoc
+                       core4inet.examples.AS6802.small_network
                       "
         extraSourceFolders = ""
         linkerFlags = ""
@@ -40,11 +40,11 @@
         name="TTEthernet API"
         description = "The TTEthernet API support"
         initiallyEnabled = "true"
-        requires = "TTE_common"
+        requires = "AS6802_common"
         labels = ""
         nedPackages = "
-                       ttethernet.api
-                       ttethernet.applications.api
+                       core4inet.api
+                       core4inet.applications.api.AS6802
                       "
         extraSourceFolders = ""
         compileFlags = "-DWITH_TTE_API"
@@ -55,51 +55,37 @@
         name="TTEthernet API examples"
         description = "Examples for the TTEthernet API support"
         initiallyEnabled = "true"
-        requires = "TTE_common"
+        requires = "AS6802_common"
         labels = ""
         nedPackages = "
-                       ttethernet.examples.api_rt_tictoc
+                       core4inet.examples.AS6802.api_rt_tictoc
                       "
         extraSourceFolders = ""
         linkerFlags = ""
         />
     <feature
-        id="TTE_trafficsource"
-        name="TTEthernet Traffic generators"
-        description = "Traffic generator applications for RC and TT traffic"
-        initiallyEnabled = "true"
-        requires = "TTE_common"
-        labels = ""
-        nedPackages = "
-                       ttethernet.applications.trafficsource
-                      "
-        extraSourceFolders = ""
-        compileFlags = "-DWITH_TTE_TRAFFICSOURCE"
-        linkerFlags = ""
-        />
-    <feature
-        id="TTE_AS6802_sync"
-        name="TTEthernet AS6802 Synchronisation Protocol"
+        id="AS6802_sync"
+        name="AS6802 Synchronisation Protocol"
         description = "The simulation model for the AS6802 synchronisation protocol"
-        initiallyEnabled = "true"
-        requires = "TTE_common"
+        initiallyEnabled = "false"
+        requires = "AS6802_common"
         labels = ""
         nedPackages = "
-                       ttethernet.synchronisation.AS6802
+                       core4inet.synchronisation.AS6802
                       "
         extraSourceFolders = ""
-        compileFlags = "-DWITH_TTE_AS6802SYNC"
+        compileFlags = "-DWITH_AS6802_SYNC"
         linkerFlags = ""
         />
     <feature
-        id="TTE_AS6802_sync_examples"
-        name="TTEthernet AS6802 Synchronisation Protocol examples"
+        id="AS6802_sync_examples"
+        name="AS6802 Synchronisation Protocol examples"
         description = "The simulation model for the AS6802 synchronisation protocol"
-        initiallyEnabled = "true"
-        requires = "TTE_common TTE_AS6802_sync"
+        initiallyEnabled = "false"
+        requires = "AS6802_common AS6802_sync"
         labels = ""
         nedPackages = "
-                       ttethernet.examples.synchronization
+                       core4inet.examples.AS6802.synchronization
                       "
         extraSourceFolders = ""
         linkerFlags = ""

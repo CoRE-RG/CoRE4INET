@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.api.AS6802;
+package core4inet.applications.api.AS6802;
 
 //
 // TODO auto-generated module

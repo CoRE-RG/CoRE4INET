@@ -18,7 +18,7 @@
 #include "TTFrame_m.h"
 #include "RCFrame_m.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(TicApp);
 

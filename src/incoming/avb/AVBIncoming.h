@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef AVBINCOMING_H_
-#define AVBINCOMING_H_
+#ifndef __CORE4INET_AVBINCOMING_H_
+#define __CORE4INET_AVBINCOMING_H_
 
 #include <omnetpp.h>
 #include <map>
@@ -22,7 +22,7 @@
 
 using namespace std;
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Class for the critical traffic conformance check of
@@ -117,5 +117,5 @@ class AVBIncoming : public cSimpleModule
             bool getForwarding();
 };
 
-} /* namespace TTEthernetModel */
-#endif /* AVBINCOMING_H_ */
+} /* namespace CoRE4INET */
+#endif /* __CORE4INET_AVBINCOMING_H_ */

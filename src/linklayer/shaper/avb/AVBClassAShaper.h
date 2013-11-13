@@ -1,9 +1,9 @@
-#ifndef __TTE4INET_AVBCLASSASHAPER_H
-#define __TTE4INET_AVBCLASSASHAPER_H
+#ifndef __CoRE4INET_AVBCLASSASHAPER_H
+#define __CoRE4INET_AVBCLASSASHAPER_H
 
 #include <AVBBuffer.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief A Shaper for AVB-Messages.

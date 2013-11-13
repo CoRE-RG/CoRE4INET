@@ -31,7 +31,7 @@
 //???
 #include "SICM.h"
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 class SICMStateContex{
 

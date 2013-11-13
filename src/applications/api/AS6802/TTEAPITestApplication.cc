@@ -18,7 +18,7 @@
 
 #include "tte_api.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(TTEAPITestApplication);
 

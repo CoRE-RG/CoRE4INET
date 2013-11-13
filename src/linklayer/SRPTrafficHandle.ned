@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.linklayer;
+package core4inet.linklayer;
 
 //
 // Module for identifing and forwarding SRP and BE frames.  

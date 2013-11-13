@@ -19,7 +19,7 @@
 #include <AVBFrame_m.h>
 #include <BaseShaper.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(AVBIncoming);
 
@@ -176,4 +176,4 @@ bool AVBIncoming::getForwarding()
     return  ( (gateSize("AVBout") > 1) || talker);
 }
 
-} /* namespace TTEthernetModel */
+} /* namespace CoRE4INET */

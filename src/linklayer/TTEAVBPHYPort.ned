@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.linklayer;
+package core4inet.linklayer;
 
 import inet.linklayer.IEtherMAC;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-import ttethernet.linklayer.shaper.TT_AVBClassA_PCF_RC_BE_Shaper;
-import ttethernet.linklayer.inControl.CT_AVB_BE_InControl;
+import core4inet.linklayer.shaper.TT_AVBClassA_PCF_RC_BE_Shaper;
+import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 
 // The TTEAVBPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a real-time Ethernet device (Switch or Host)

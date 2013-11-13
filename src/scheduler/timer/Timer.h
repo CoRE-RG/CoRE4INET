@@ -26,7 +26,7 @@
 #include <SchedulerMessageEvents_m.h>
 
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * TODO - Generated class

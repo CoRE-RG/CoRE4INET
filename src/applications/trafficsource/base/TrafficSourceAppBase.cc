@@ -17,9 +17,9 @@
 #include "CTFrame.h"
 #include "TTFrame_m.h"
 #include "RCFrame_m.h"
-#include "TTE4INETDefs.h"
+#include "CoRE4INETDefs.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module( TrafficSourceAppBase);
 

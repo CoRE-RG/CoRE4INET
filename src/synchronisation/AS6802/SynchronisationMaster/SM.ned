@@ -13,10 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.synchronisation.AS6802.SynchronisationMaster;
+package core4inet.synchronisation.AS6802.SynchronisationMaster;
 
-import ttethernet.linklayer.IPort;
-import ttethernet.synchronisation.base.ISync;
+import core4inet.linklayer.IPort;
+import core4inet.synchronisation.base.ISync;
 
 simple SM like ISync
 {

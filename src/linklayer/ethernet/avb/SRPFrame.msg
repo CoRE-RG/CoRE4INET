@@ -4,7 +4,7 @@ cplusplus {{
 
 class ::EtherFrame;
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 //
 // Represents a Stream Reservation Protokol Frame (SRP)

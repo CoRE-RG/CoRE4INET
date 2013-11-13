@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_QUEUEBUFFER_H_
-#define __TTETHERNETMODELV2_QUEUEBUFFER_H_
+#ifndef __CORE4INET_QUEUEBUFFER_H_
+#define __CORE4INET_QUEUEBUFFER_H_
 
 #include <omnetpp.h>
 #include <TTBuffer.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Base class for a queuing buffer class.

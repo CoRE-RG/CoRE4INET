@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.utilities.classes;
+package core4inet.utilities.classes;
 
 //
 // TODO auto-generated module

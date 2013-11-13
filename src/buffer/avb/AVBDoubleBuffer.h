@@ -13,19 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef AVBDOUBLEBUFFER_H_
-#define AVBDOUBLEBUFFER_H_
+#ifndef __CORE4INET_AVBDOUBLEBUFFER_H_
+#define __CORE4INET_AVBDOUBLEBUFFER_H_
 
 #include <omnetpp.h>
 #include <AVBBuffer.h>
 #include <DoubleBuffer.h>
 #include <EtherFrame_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class AVBDoubleBuffer : public AVBBuffer, DoubleBuffer
 {
 };
 
-} /* namespace TTEthernetModel */
-#endif /* AVBDOUBLEBUFFER_H_ */
+} /* namespace CoRE4INET */
+#endif /* __CORE4INET_AVBDOUBLEBUFFER_H_ */

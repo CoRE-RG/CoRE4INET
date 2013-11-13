@@ -19,7 +19,7 @@
 #include "BGTrafficHandle.h"
 #include "MACAddress.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Implements a standard ETHERAPP that sends and receives
@@ -52,5 +52,5 @@ class SRPTrafficHandle : public BGTrafficHandle
         virtual void handleMessage(cMessage *msg);
 };
 
-} /* namespace TTEthernetModel */
+} /* namespace CoRE4INET */
 #endif /* SRPTRAFFICHANDLE_H_ */

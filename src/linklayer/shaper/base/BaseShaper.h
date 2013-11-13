@@ -13,17 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTE4INET_BASESHAPER_H
-#define __TTE4INET_BASESHAPER_H
+#ifndef __CoRE4INET_BASESHAPER_H
+#define __CoRE4INET_BASESHAPER_H
 
 #include <omnetpp.h>
 #include <csimplemodule.h>
 #include <INETDefs.h>
-#include <TTE4INETDefs.h>
+#include <CoRE4INETDefs.h>
 #include <IPassiveQueue.h>
 #include <EtherFrame_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief An abstract base Shaper.

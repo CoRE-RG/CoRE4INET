@@ -13,10 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.examples.rt_tictoc;
+package core4inet.applications.examples.rt_tictoc;
 
-import ttethernet.applications.base.ApplicationBase;
-import ttethernet.utilities.classes.IScheduled;
+import core4inet.applications.base.ApplicationBase;
+import core4inet.utilities.classes.IScheduled;
 
 //
 // Tic Application used for the rt_tictoc example.

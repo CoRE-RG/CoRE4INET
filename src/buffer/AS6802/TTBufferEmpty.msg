@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 //
 // The message is sent by an empty TTBuffer instead of a time-triggered message, to inform

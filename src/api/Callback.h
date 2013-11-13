@@ -13,15 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef CALLBACK_H_
-#define CALLBACK_H_
+#ifndef __CORE4INET_CALLBACK_H_
+#define __CORE4INET_CALLBACK_H_
 
 #include "tte_api.h"
 #include "Buffer.h"
 #include "TTBuffer.h"
 #include "RCBuffer.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 typedef void(*cbFunc)(void *);
 
@@ -140,4 +140,4 @@ class APICallback: public Callback
 
 }
 
-#endif /* CALLBACK_H_ */
+#endif /* __CORE4INET_CALLBACK_H_ */

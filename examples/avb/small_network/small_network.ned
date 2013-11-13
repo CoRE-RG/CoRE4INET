@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.examples.avb.small_network;
+package core4inet.examples.avb.small_network;
 
 //
 // Small sample network with three hosts and one switch that shows how to 

@@ -12,7 +12,7 @@
 #include "Callback.h"
 #include "TTEAPIApplicationBase.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
  void APICallback::executeCallback(){
     if(argSet){

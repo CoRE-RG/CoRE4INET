@@ -13,12 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTE4INET_BESHAPER_H
-#define __TTE4INET_BESHAPER_H
+#ifndef __CoRE4INET_BESHAPER_H
+#define __CoRE4INET_BESHAPER_H
 
 #include <ModuleAccess.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief A Shaper for BEMessages.

@@ -13,12 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTETHERNETMODELV2_CTINCOMING_H_
-#define __TTETHERNETMODELV2_CTINCOMING_H_
+#ifndef __CORE4INET_CTINCOMING_H_
+#define __CORE4INET_CTINCOMING_H_
 
 #include <Incoming.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Base-Class for the critical traffic conformance check of traffic.

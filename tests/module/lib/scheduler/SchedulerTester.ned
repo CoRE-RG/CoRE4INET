@@ -15,7 +15,7 @@
 
 package test.modul.scheduler;
 
-import ttethernet.utilities.classes.Scheduled;
+import core4inet.utilities.classes.Scheduled;
 
 //
 // TODO auto-generated module

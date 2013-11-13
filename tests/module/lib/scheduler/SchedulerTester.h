@@ -19,7 +19,7 @@
 #include <omnetpp.h>
 #include <Scheduled.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * TODO - Generated class

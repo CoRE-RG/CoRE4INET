@@ -12,9 +12,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.linklayer.inControl;
+package core4inet.linklayer.inControl;
 
-import ttethernet.linklayer.inControl.base.BE_InControl;
+import core4inet.linklayer.inControl.base.BE_InControl;
 import inet.linklayer.IOutputQueue;
 
 //

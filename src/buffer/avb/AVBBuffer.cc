@@ -19,7 +19,7 @@
 #include "ApplicationBase.h"
 #include <ModuleAccess.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(AVBBuffer);
 
@@ -271,4 +271,4 @@ int AVBBuffer::getMsgCount()
     return msgCnt;
 }
 
-} /* namespace TTEthernetModel */
+} /* namespace CoRE4INET */

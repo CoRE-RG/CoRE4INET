@@ -30,7 +30,7 @@
 #include "HelperFunctions.h"
 #include "PCFrame_m.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 	sc = sc_ref;

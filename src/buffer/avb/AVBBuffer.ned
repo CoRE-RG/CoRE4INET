@@ -13,10 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.buffer.avb;
-import ttethernet.utilities.classes.ITimed;
+package core4inet.buffer.avb;
+import core4inet.utilities.classes.ITimed;
 
-import ttethernet.buffer.base.Buffer;
+import core4inet.buffer.base.Buffer;
 
 //
 // Represents an abstract Buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper Algorithm.

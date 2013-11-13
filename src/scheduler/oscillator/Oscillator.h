@@ -13,12 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODEL_OSCILLATOR_H_
-#define __TTETHERNETMODEL_OSCILLATOR_H_
+#ifndef __CORE4INET_OSCILLATOR_H_
+#define __CORE4INET_OSCILLATOR_H_
 
 #include <omnetpp.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * TODO - Generated class

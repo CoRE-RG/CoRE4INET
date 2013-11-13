@@ -1,6 +1,6 @@
 #include "SchedulerEvent.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Register_Class( SchedulerEvent);
 

@@ -15,6 +15,6 @@
 
 #include "Task.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 }

@@ -16,11 +16,11 @@ cplusplus {{
 #include "CTFrame.h"
 }}
 
-class TTEthernetModel::CTFrame;
+class CoRE4INET::CTFrame;
 
 packet CTFrame;
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 //
 // Represents a TT frame
 //

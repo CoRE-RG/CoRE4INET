@@ -12,14 +12,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.nodes.ethernet.AS6802;
+package core4inet.nodes.ethernet.AS6802;
 
-import ttethernet.scheduler.ITTEScheduler;
-import ttethernet.scheduler.TTEScheduler;
-import ttethernet.configuration.base.IConfigurationManager;
-import ttethernet.synchronisation.base.ISync;
-import ttethernet.synchronisation.base.DummySync;
-import ttethernet.linklayer.TTEPHYPort;
+import core4inet.scheduler.ITTEScheduler;
+import core4inet.scheduler.TTEScheduler;
+import core4inet.configuration.base.IConfigurationManager;
+import core4inet.synchronisation.base.ISync;
+import core4inet.synchronisation.base.DummySync;
+import core4inet.linklayer.TTEPHYPort;
 
 import inet.linklayer.IMACRelayUnit;
 

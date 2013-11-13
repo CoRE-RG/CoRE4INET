@@ -17,7 +17,7 @@
 #include "Timer.h"
 #include <exception>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(Period);
 

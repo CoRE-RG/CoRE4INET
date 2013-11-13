@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.scheduler.timer;
+package core4inet.scheduler.timer;
 
 //
 // TODO auto-generated module

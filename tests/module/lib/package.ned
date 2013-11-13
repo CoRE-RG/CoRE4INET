@@ -15,4 +15,4 @@
 package test.modul;
 
 @license(LGPL);
-@namespace(TTEthernetModel);
+@namespace(CoRE4INET);

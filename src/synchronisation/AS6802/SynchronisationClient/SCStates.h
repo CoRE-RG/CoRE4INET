@@ -29,7 +29,7 @@
 #include <SchedulerMessage_m.h>
 #include <SchedulerMessageEvents_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class SC;
 

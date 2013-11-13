@@ -15,12 +15,12 @@
 
 #include "Buffer.h"
 #include "CTBuffer.h"
-#include "TTE4INETDefs.h"
+#include "CoRE4INETDefs.h"
 #include "CTFrame.h"
 
 #include "HelperFunctions.h"
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 Define_Module( CTBuffer);
 

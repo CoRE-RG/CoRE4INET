@@ -13,15 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_DUMMYSYNC_H_
-#define __TTETHERNETMODELV2_DUMMYSYNC_H_
+#ifndef __CORE4INET_DUMMYSYNC_H_
+#define __CORE4INET_DUMMYSYNC_H_
 
 #include <omnetpp.h>
 #include "SyncBase.h"
 
 #include <Period.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Dummy sync module.

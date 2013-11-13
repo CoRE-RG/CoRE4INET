@@ -12,11 +12,11 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.linklayer.inControl.base;
+package core4inet.linklayer.inControl.base;
 
 
 import inet.linklayer.IOutputQueue;
-import ttethernet.utilities.classes.ITimed;
+import core4inet.utilities.classes.ITimed;
 
 //
 // Interface for a module that controls incoming real-time Ethernet traffic

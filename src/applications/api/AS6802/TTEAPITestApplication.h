@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_TTEAPITESTAPPLICATION_H_
-#define __TTETHERNETMODELV2_TTEAPITESTAPPLICATION_H_
+#ifndef __CORE4INET_TTEAPITESTAPPLICATION_H_
+#define __CORE4INET_TTEAPITESTAPPLICATION_H_
 
 #include <omnetpp.h>
 #include "TTEAPIApplicationBase.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Simple Test-Application based on the TTEthernet-API.

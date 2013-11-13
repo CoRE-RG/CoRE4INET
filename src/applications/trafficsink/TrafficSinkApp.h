@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_TRAFFICSINK_H_
-#define __TTETHERNETMODELV2_TRAFFICSINK_H_
+#ifndef __CORE4INET_TRAFFICSINK_H_
+#define __CORE4INET_TRAFFICSINK_H_
 
 #include <omnetpp.h>
 #include "ApplicationBase.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Traffic sink application used for statistics collection.

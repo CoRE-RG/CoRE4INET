@@ -13,10 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.trafficsource.AS6802;
+package core4inet.applications.trafficsource.AS6802;
 
-import ttethernet.utilities.classes.IScheduled;
-import ttethernet.applications.trafficsource.base.TrafficSourceAppBase;
+import core4inet.utilities.classes.IScheduled;
+import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 
 //
 // Traffic source application used for time-triggered traffic generators.

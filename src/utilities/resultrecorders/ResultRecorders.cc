@@ -17,7 +17,7 @@
 #include <cmessage.h>
 #include <limits>
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 FloatingIntervalVectorRecorder::FloatingIntervalVectorRecorder(){
     interval = SimTime(-1);

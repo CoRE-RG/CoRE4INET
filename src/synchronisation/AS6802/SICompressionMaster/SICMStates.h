@@ -37,7 +37,7 @@ class SICM;
 
 
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 class SI_CM_INIT:public SICMState{
 

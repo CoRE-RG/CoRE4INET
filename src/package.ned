@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet;
+package core4inet;
 
 @license(LGPL);
-@namespace(TTEthernetModel);
+@namespace(CoRE4INET);

@@ -15,7 +15,7 @@
 #include "PCFIncoming.h"
 #include "PCFrame_m.h"
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 Define_Module(PCFIncoming);
 

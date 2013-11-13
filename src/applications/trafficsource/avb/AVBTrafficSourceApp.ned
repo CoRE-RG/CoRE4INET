@@ -13,10 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.trafficsource.avb;
+package core4inet.applications.trafficsource.avb;
 
-import ttethernet.applications.trafficsource.base.TrafficSourceAppBase;
-import ttethernet.utilities.classes.ITimed;
+import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
+import core4inet.utilities.classes.ITimed;
 
 //
 // Traffic source application used for audio-video bridging traffic generators.

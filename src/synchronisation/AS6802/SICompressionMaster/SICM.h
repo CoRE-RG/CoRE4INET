@@ -29,7 +29,7 @@
 #include "SICMStateContex.h"
 #include "SICMStates.h"
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 class SICM:public cSimpleModule{
 

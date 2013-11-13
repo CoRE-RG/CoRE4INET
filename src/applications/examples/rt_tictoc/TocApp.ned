@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.examples.rt_tictoc;
+package core4inet.applications.examples.rt_tictoc;
 
-import ttethernet.applications.base.ApplicationBase;
+import core4inet.applications.base.ApplicationBase;
 
 //
 // Toc Application used for the rt_tictoc example.

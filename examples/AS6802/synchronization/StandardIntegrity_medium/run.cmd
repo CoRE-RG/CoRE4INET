@@ -1,1 +1,1 @@
-..\..\..\src\run_tte4inet %*
+..\..\..\src\run_core4inet %*

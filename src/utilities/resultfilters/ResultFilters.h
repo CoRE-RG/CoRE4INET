@@ -12,12 +12,12 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __TTE4INET_RESULTFILTERS_H
-#define __TTE4INET_RESULTFILTERS_H
+#ifndef __CoRE4INET_RESULTFILTERS_H
+#define __CoRE4INET_RESULTFILTERS_H
 
 #include <cresultfilter.h>
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 /**
  * @brief Filter that expects a cPacket and outputs its encapsulated cPacket

@@ -13,11 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.examples.avb.small_network;
+package core4inet.examples.avb.small_network;
 
-import ttethernet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
-import ttethernet.incoming.AS6802.TTIncoming;
-import ttethernet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
+import core4inet.incoming.AS6802.TTIncoming;
+import core4inet.buffer.AS6802.TTDoubleBuffer;
 
 //
 // node3: configuration in node3.ini.

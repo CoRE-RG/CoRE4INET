@@ -18,7 +18,7 @@
 #include <Timer.h>
 #include <ModuleAccess.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module( RCTrafficSourceApp);
 

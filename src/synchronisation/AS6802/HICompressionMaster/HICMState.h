@@ -37,14 +37,14 @@
 #include <map>
 #include <list>
 #include <deque>
-#include "TTE4INETDefs.h"
+#include "CoRE4INETDefs.h"
 #include "RCBuffer.h"
 
 
 using namespace std;
 
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 class HICM;
 

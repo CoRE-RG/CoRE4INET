@@ -24,7 +24,7 @@
 #include "SMState.h"
 #include "SM.h"
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 class SMStateContex{
 

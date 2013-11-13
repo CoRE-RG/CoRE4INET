@@ -12,8 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __TTE4INET_INCONTROLS_H_
-#define __TTE4INET_INCONTROLS_H_
+#ifndef __CoRE4INET_INCONTROLS_H_
+#define __CoRE4INET_INCONTROLS_H_
 
 
 #include <BaseInControl.h>
@@ -21,7 +21,7 @@
 #include <CTInControl.h>
 #include <AVBClassAInControl.h>
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 /**
 * @brief Class representing the BE_InControl module

@@ -15,7 +15,7 @@
 
 package test.modul.scheduler;
 
-import ttethernet.scheduler.Scheduler;
+import core4inet.scheduler.Scheduler;
 
 // TODO documentation
 //

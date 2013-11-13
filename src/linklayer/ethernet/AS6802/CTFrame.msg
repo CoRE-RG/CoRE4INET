@@ -18,7 +18,7 @@ cplusplus {{
 
 class ::EtherFrame;
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 
 //

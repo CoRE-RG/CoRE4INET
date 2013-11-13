@@ -31,7 +31,7 @@
 #include <SchedulerEvent.h>
 class SM;
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 
 

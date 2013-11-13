@@ -3,7 +3,7 @@ cplusplus {{
         #include "PCFrame_m.h"
 }}
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 class SchedulerActionTimeEvent;
 class SchedulerTimerEvent;

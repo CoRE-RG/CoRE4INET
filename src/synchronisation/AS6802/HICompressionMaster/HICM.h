@@ -30,7 +30,7 @@
 #include "HICMStates.h"
 
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 class HICM:public cSimpleModule{
 

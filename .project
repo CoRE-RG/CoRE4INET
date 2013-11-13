@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TTEthernetModel</name>
+	<name>CoRE4INET</name>
 	<comment></comment>
 	<projects>
 		<project>inet</project>

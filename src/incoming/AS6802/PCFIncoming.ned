@@ -12,9 +12,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.incoming.AS6802;
+package core4inet.incoming.AS6802;
 
-import ttethernet.incoming.base.Incoming;
+import core4inet.incoming.base.Incoming;
 
 //
 // Module for the conformance checks of incoming protocol control frames.

@@ -20,7 +20,7 @@
  */
 #include "SM.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 
 Define_Module(SM);

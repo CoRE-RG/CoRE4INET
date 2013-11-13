@@ -16,7 +16,7 @@
 
 #include <cmessage.h>
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 Register_ResultFilter("innerMessage", InnerMessageFilter);
 

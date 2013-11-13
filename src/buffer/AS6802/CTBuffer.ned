@@ -12,9 +12,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.buffer.AS6802;
+package core4inet.buffer.AS6802;
 
-import ttethernet.buffer.base.Buffer;
+import core4inet.buffer.base.Buffer;
 import inet.linklayer.IOutputQueue;
 //
 // Abstract base Buffer used for critical traffic Buffers of TTEthernet.

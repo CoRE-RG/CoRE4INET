@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.trafficsource.base;
+package core4inet.applications.trafficsource.base;
 
-import ttethernet.applications.base.ApplicationBase;
+import core4inet.applications.base.ApplicationBase;
 
 //
 // Abstract base traffic source application used for various traffic generators.

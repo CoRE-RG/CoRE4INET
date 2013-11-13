@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.incoming.avb;
+package core4inet.incoming.avb;
 
 //
 // Module for the conformance checks of incoming audio-video bridging traffic.

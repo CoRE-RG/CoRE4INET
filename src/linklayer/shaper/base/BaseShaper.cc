@@ -7,7 +7,7 @@
 
 #include <HelperFunctions.h>
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 
 void BaseShaper::initialize(int stage)

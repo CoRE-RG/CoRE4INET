@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTE4INET_TTSHAPER_H
-#define __TTE4INET_TTSHAPER_H
+#ifndef __CoRE4INET_TTSHAPER_H
+#define __CoRE4INET_TTSHAPER_H
 
 #include <ModuleAccess.h>
 #include <TTBuffer.h>
@@ -22,7 +22,7 @@
 #include <HelperFunctions.h>
 #include <Timed.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief A Shaper for TTMessages.

@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODEL_TICAPP_H_
-#define __TTETHERNETMODEL_TICAPP_H_
+#ifndef __CORE4INET_TOCAPP_H_
+#define __CORE4INET_TOCAPP_H_
 
 #include <omnetpp.h>
 #include "ApplicationBase.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Toc Application used for the rt_tictoc example.

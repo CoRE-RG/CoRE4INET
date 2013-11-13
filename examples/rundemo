@@ -34,7 +34,7 @@ set unixbrowser "firefox"
 set i 0
 set first ""
 foreach line {
-   {"TTEthernet Model for INET Framework (TTE4INET)"}
+   {"Communication over Realtime Ethernet for INET Framework (CoRE4INET)"}
    {"About..."               "README"               "../doc/index.html"}
 
    {"Examples"}
@@ -85,7 +85,7 @@ proc createWindow {} {
     wm overrideredirect . 0
     wm resizable . 1 1
     wm deiconify .
-    wm title . "TTE4INET Demo Simulations"
+    wm title . "CoRE4INET Demo Simulations"
     wm protocol . WM_DELETE_WINDOW {exit}
     wm geometry . "1000x700"
 

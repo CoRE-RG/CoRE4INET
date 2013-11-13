@@ -5,8 +5,8 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.omnetpp.cdt.gnu.config.debug.884168226" moduleId="org.eclipse.cdt.core.settings" name="gcc-debug">
 				<externalSettings>
 					<externalSetting>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="libraryPath" name="/TTEthernetModelV2/emf4cpp-0.0.2/lib"/>
-						<entry flags="RESOLVED" kind="libraryFile" name="/home/tillsteinbach/workspaces/omnet4.2/TTEthernetModelV2/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so" srcPrefixMapping="" srcRootPath=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="libraryPath" name="/CORE4INET/emf4cpp-0.0.2/lib"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>
 				<extensions>
@@ -37,7 +37,7 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
@@ -69,8 +69,8 @@
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
+									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
@@ -81,12 +81,12 @@
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4"/>
-									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
+									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
@@ -116,8 +116,8 @@
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
@@ -131,8 +131,8 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
@@ -154,11 +154,11 @@
 									<listOptionValue builtIn="false" value="__DEC32_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_DWARF2_CFI_ASM"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
-									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
+									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
@@ -177,7 +177,7 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.1282023526" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1006037084" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -207,7 +207,7 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.525932788" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
@@ -238,8 +238,8 @@
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
 									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
+									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
@@ -250,12 +250,12 @@
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4"/>
-									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
+									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"/>
 									<listOptionValue builtIn="false" value="__EXCEPTIONS"/>
@@ -285,8 +285,8 @@
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
@@ -300,8 +300,8 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
@@ -323,11 +323,11 @@
 									<listOptionValue builtIn="false" value="__DEC32_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_DWARF2_CFI_ASM"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
-									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
+									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
@@ -346,7 +346,7 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1556009094" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -358,7 +358,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -395,7 +395,7 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.2016080485" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
@@ -412,8 +412,8 @@
 									<listOptionValue builtIn="false" value="__unix__"/>
 									<listOptionValue builtIn="false" value="__DBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
-									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
+									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_PTRDIFF_T__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX__"/>
@@ -425,16 +425,16 @@
 									<listOptionValue builtIn="false" value="__DEC32_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
-									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
+									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
+									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_MAX__"/>
-									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
@@ -455,29 +455,29 @@
 									<listOptionValue builtIn="false" value="__FLT_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GXX_RTTI"/>
+									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SIZE_T__"/>
-									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
-									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
+									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
+									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX__"/>
 									<listOptionValue builtIn="false" value="__BIGGEST_ALIGNMENT__"/>
 									<listOptionValue builtIn="false" value="__gnu_linux__"/>
-									<listOptionValue builtIn="false" value="__FLT_DIG__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
+									<listOptionValue builtIn="false" value="__FLT_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_BID_FORMAT__"/>
 									<listOptionValue builtIn="false" value="__INT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
-									<listOptionValue builtIn="false" value="__STDC__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
@@ -489,8 +489,8 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
@@ -515,8 +515,8 @@
 									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
@@ -541,7 +541,7 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.111423297" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.298017280" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -570,7 +570,7 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1534915787" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
@@ -586,8 +586,8 @@
 									<listOptionValue builtIn="false" value="__unix__"/>
 									<listOptionValue builtIn="false" value="__DBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
-									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
+									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_PTRDIFF_T__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MAX__"/>
@@ -599,16 +599,16 @@
 									<listOptionValue builtIn="false" value="__DEC32_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__CHAR32_TYPE__"/>
-									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
+									<listOptionValue builtIn="false" value="__ELF__"/>
 									<listOptionValue builtIn="false" value="__DEC32_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
+									<listOptionValue builtIn="false" value="__DEC128_MAX__"/>
 									<listOptionValue builtIn="false" value="_GNU_SOURCE"/>
 									<listOptionValue builtIn="false" value="__FLT_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_MAX__"/>
-									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__DEC32_SUBNORMAL_MIN__"/>
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
@@ -629,29 +629,29 @@
 									<listOptionValue builtIn="false" value="__FLT_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__GXX_RTTI"/>
+									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_SIZE_T__"/>
-									<listOptionValue builtIn="false" value="__LDBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE"/>
-									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
+									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__FLT_RADIX__"/>
+									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MAX__"/>
 									<listOptionValue builtIn="false" value="__BIGGEST_ALIGNMENT__"/>
 									<listOptionValue builtIn="false" value="__gnu_linux__"/>
-									<listOptionValue builtIn="false" value="__FLT_DIG__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
+									<listOptionValue builtIn="false" value="__FLT_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_BID_FORMAT__"/>
 									<listOptionValue builtIn="false" value="__INT_MAX__"/>
 									<listOptionValue builtIn="false" value="__DEC64_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_QUIET_NAN__"/>
-									<listOptionValue builtIn="false" value="__STDC__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DEC128_EPSILON__"/>
@@ -663,8 +663,8 @@
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__DEC128_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__USER_LABEL_PREFIX__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__SSP__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
@@ -689,8 +689,8 @@
 									<listOptionValue builtIn="false" value="linux"/>
 									<listOptionValue builtIn="false" value="__DECIMAL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__GXX_WEAK__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
@@ -714,7 +714,7 @@
 									<listOptionValue builtIn="false" value="_FILE_OFFSET_BITS=64"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_AS6802SYNC"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1331833399" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -726,7 +726,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+						<entry excluding="synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -736,7 +736,7 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="TTEthernetModelV2.org.omnetpp.cdt.omnetppProjectType.1512183933" name="OMNeT++ Simulation" projectType="org.omnetpp.cdt.omnetppProjectType"/>
+		<project id="CORE4INET.org.omnetpp.cdt.omnetppProjectType.1512183933" name="OMNeT++ Simulation" projectType="org.omnetpp.cdt.omnetppProjectType"/>
 	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="gcc-release">

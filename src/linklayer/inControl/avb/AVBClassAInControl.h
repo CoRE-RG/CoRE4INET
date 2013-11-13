@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_AVBCLASSAINCONTROL_H_
-#define __TTETHERNETMODELV2_AVBCLASSAINCONTROL_H_
+#ifndef __CORE4INET_AVBCLASSAINCONTROL_H_
+#define __CORE4INET_AVBCLASSAINCONTROL_H_
 
 #include <omnetpp.h>
 
@@ -25,14 +25,14 @@
 #include <AVBIncoming.h>
 #include <Buffer.h>
 
-#include "TTE4INETDefs.h"
+#include "CoRE4INETDefs.h"
 #include "HelperFunctions.h"
 
 #include <map>
 #include <list>
 
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Represents the part of a port that receives messages (RX)
@@ -82,7 +82,7 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         }else{
             std::string msgClass = frame->getEncapsulatedPacket()->getClassName();
             std::string msgName = frame->getEncapsulatedPacket()->getName();
-            if(msgClass.compare("TTEthernetModel::SRPFrame") == 0)
+            if(msgClass.compare("CoRE4INET::SRPFrame") == 0)
             {
                 if(msgName.compare("Talker Advertise"))
                 {
@@ -106,7 +106,7 @@ bool AVBClassAInControl<IC>::isAVB(EtherFrame *frame)
 {
     bool result = false;
     std::string className = frame->getClassName();
-    if(className.compare("TTEthernetModel::AVBFrame") == 0)
+    if(className.compare("CoRE4INET::AVBFrame") == 0)
         result = true;
     cComponent::bubble(frame->getClassName());
     return result;

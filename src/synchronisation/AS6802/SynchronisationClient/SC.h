@@ -27,7 +27,7 @@
 #include "SCStates.h"
 #include "omnetpp.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class SC: public cSimpleModule{
 

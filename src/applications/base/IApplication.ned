@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.base;
+package core4inet.applications.base;
 
-import ttethernet.linklayer.IPort;
+import core4inet.linklayer.IPort;
 
 //
 // Interface to be implemented by application models.

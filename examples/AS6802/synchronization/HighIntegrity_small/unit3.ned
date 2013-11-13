@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.examples.AS6802.synchronization.HighIntegrity_small;
+package core4inet.examples.AS6802.synchronization.HighIntegrity_small;
 
-import ttethernet.nodes.ethernet.AS6802.TTEEtherHost;
-import ttethernet.incoming.AS6802.TTIncoming;
-import ttethernet.buffer.AS6802.TTDoubleBuffer;
-import ttethernet.incoming.AS6802.RCIncoming;
-import ttethernet.buffer.AS6802.RCQueueBuffer;
+import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import core4inet.incoming.AS6802.TTIncoming;
+import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.RCQueueBuffer;
 
 
 //

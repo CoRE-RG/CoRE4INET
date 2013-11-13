@@ -33,7 +33,7 @@
 
 class HICM;
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class HI_CM_INIT : public HICMState
 {

@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.synchronisation.AS6802.SynchronisationClient;
+package core4inet.synchronisation.AS6802.SynchronisationClient;
  
-import ttethernet.synchronisation.base.ISync;
+import core4inet.synchronisation.base.ISync;
 //
 // TODO auto-generated type
 //

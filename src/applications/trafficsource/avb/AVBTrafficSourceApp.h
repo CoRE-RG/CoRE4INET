@@ -13,14 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef AVBTRAFFICSOURCEAPP_H_
-#define AVBTRAFFICSOURCEAPP_H_
+#ifndef __CORE4INET_AVBTRAFFICSOURCEAPP_H_
+#define __CORE4INET_AVBTRAFFICSOURCEAPP_H_
 
 #include <omnetpp.h>
 #include "TrafficSourceAppBase.h"
 #include "AVBIncoming.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Simple AVB Traffic Source-Application.
@@ -60,5 +60,5 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed
         void sendAVBFrame();
 };
 
-} /* namespace TTEthernetModel */
-#endif /* AVBTRAFFICSOURCEAPP_H_ */
+} /* namespace CoRE4INET */
+#endif /* __CORE4INET_AVBTRAFFICSOURCEAPP_H_ */

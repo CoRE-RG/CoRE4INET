@@ -16,7 +16,7 @@
 #include "SyncBase.h"
 
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 
 void SyncBase::notify(SyncNotificationKind kind){

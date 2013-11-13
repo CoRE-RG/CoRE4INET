@@ -27,12 +27,12 @@ import sys
 import time
 import unittest
 
-tte4inetRoot = os.path.abspath("../..")
+core4inetRoot = os.path.abspath("../..")
 #TODO: Make test read paths from somewhere else
 inetRoot = os.path.abspath("../../../inet")
 sep = ";" if sys.platform == 'win32' else ':'
-nedPath = inetRoot + "/src" + sep + tte4inetRoot + "/src" + sep + tte4inetRoot + "/examples" + sep + tte4inetRoot + "/tests/smoke"
-tte4inetLib = tte4inetRoot + "/src/TTEthernetModel"
+nedPath = inetRoot + "/src" + sep + core4inetRoot + "/src" + sep + core4inetRoot + "/examples" + sep + core4inetRoot + "/tests/smoke"
+core4inetLib = core4inetRoot + "/src/CoRE4INET"
 opp_run = "opp_run"
 cpuTimeLimit = "3s"
 logFile = "test.out"
@@ -144,11 +144,11 @@ class SmokeTestCase(SimulationTestCase):
         self.args = args
 
     def runTest(self):
-        global tte4inetRoot, opp_run, nedPath, cpuTimeLimit
+        global core4inetRoot, opp_run, nedPath, cpuTimeLimit
 
         # run the simulation
-        workingdir = _iif(self.wd.startswith('/'), tte4inetRoot + "/" + self.wd, self.wd)
-        command = opp_run + " -n " + nedPath + " -l " + tte4inetLib + " -u Cmdenv " + self.args + \
+        workingdir = _iif(self.wd.startswith('/'), core4inetRoot + "/" + self.wd, self.wd)
+        command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -u Cmdenv " + self.args + \
             " --cpu-time-limit=" + cpuTimeLimit + \
             " --vector-recording=false --scalar-recording=false"
 

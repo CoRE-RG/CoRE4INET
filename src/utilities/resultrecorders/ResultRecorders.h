@@ -12,12 +12,12 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __TTE4INET_RESULTRECORDERS_H
-#define __TTE4INET_RESULTRECORDERS_H
+#ifndef __CoRE4INET_RESULTRECORDERS_H
+#define __CoRE4INET_RESULTRECORDERS_H
 
 #include <cresultrecorder.h>
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 /**
  * @brief BaseClass for floating interval vector recorders

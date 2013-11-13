@@ -29,7 +29,7 @@
 #define AVB_SRP_READYSIZE 8
 #define AVB_CLASSMEASUREMENTINTERVAL_US 125.00
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(AVBTrafficSourceApp);
 
@@ -102,7 +102,8 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
     else if(msg->arrivedOn("SRPin"))
     {
         std::string msgClass = msg->getClassName();
-        if(msgClass.compare("TTEthernetModel::SRPFrame") == 0)
+        //TODO fix that
+        if(msgClass.compare("CoRE4INET::SRPFrame") == 0)
         {
             SRPFrame *inFrame = (SRPFrame*) msg;
             std::string srpType = inFrame->getName();
@@ -158,4 +159,4 @@ void AVBTrafficSourceApp::sendAVBFrame()
     getTimer()->registerEvent(event);
 }
 
-} /* namespace TTEthernetModel */
+} /* namespace CoRE4INET */

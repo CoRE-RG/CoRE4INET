@@ -1,16 +1,16 @@
-#ifndef __TTETHERNETMODELV2_SCHEDULEREVENT_H_
-#define __TTETHERNETMODELV2_SCHEDULEREVENT_H_
+#ifndef __CORE4INET_SCHEDULEREVENT_H_
+#define __CORE4INET_SCHEDULEREVENT_H_
 
 #include <SchedulerMessage_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Redefines SchedulerEvent_Base and adds destinationGate
  *
  * @author Till Steinbach
  */
-class SchedulerEvent : public TTEthernetModel::SchedulerEvent_Base
+class SchedulerEvent : public CoRE4INET::SchedulerEvent_Base
 {
     private:
         cGate *destinationGate_var;

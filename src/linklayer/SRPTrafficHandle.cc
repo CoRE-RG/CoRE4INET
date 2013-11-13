@@ -21,7 +21,7 @@
 #define ETHERAPP_SRV_SAP  0xf1
 #define ETHERAPP_BUFFER_SAP  0xe0
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(SRPTrafficHandle);
 
@@ -43,7 +43,8 @@ void SRPTrafficHandle::initialize()
 void SRPTrafficHandle::handleMessage(cMessage *msg)
 {
     std::string msgClass = msg->getClassName();
-    if(msgClass.compare("TTEthernetModel::SRPFrame") == 0)
+    //TODO fix that
+    if(msgClass.compare("CoRE4INET::SRPFrame") == 0)
     {
         SRPFrame *inFrame = (SRPFrame*) msg;
         if(msg->arrivedOn("SRPin"))
@@ -108,4 +109,4 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
     }
 }
 
-} /* namespace TTEthernetModel */
+} /* namespace CoRE4INET */

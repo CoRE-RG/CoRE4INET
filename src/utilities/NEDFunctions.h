@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTETHERNETMODELV2_HELPERFUNCTIONS_H_
-#define __TTETHERNETMODELV2_HELPERFUNCTIONS_H_
+#ifndef __CORE4INET_HELPERFUNCTIONS_H_
+#define __CORE4INET_HELPERFUNCTIONS_H_
 
 #include "cnedvalue.h"
 

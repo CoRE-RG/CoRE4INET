@@ -1,7 +1,7 @@
 #include <Scheduled.h>
 #include <ModuleAccess.h>
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 void Scheduled::initialize()
 {

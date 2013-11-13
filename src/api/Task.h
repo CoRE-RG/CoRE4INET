@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef TASK_H_
-#define TASK_H_
+#ifndef __CORE4INET_TASK_H_
+#define __CORE4INET_TASK_H_
 
 #include <cobject.h>
 
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 typedef void(*cbFunc)(void *);
 
@@ -116,4 +116,4 @@ class APITask : public Task
 
 }
 
-#endif /* TASK_H_ */
+#endif /* __CORE4INET_TASK_H_ */

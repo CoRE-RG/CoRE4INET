@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.applications.trafficsource.AS6802;
-import ttethernet.applications.trafficsource.base.TrafficSourceAppBase;
+package core4inet.applications.trafficsource.AS6802;
+import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 
 //
 // Traffic source application used for rate-constrained traffic generators.

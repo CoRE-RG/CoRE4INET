@@ -15,7 +15,7 @@
 
 #include "DoubleBuffer.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 DoubleBuffer::DoubleBuffer()
 {

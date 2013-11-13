@@ -13,19 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef AVBQUEUEBUFFER_H_
-#define AVBQUEUEBUFFER_H_
+#ifndef __CORE4INET_AVBQUEUEBUFFER_H_
+#define __CORE4INET_AVBQUEUEBUFFER_H_
 
 #include <omnetpp.h>
 #include <AVBBuffer.h>
 #include <QueueBuffer.h>
 #include <EtherFrame_m.h>
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class AVBQueueBuffer : public AVBBuffer, public QueueBuffer
 {
 };
 
-} /* namespace TTEthernetModel */
-#endif /* AVBQUEUEBUFFER_H_ */
+} /* namespace CoRE4INET */
+#endif /* __CORE4INET_AVBQUEUEBUFFER_H_ */

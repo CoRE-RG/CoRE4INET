@@ -25,14 +25,14 @@
 #include "RCBuffer.h"
 #include "SynchronisationEvents_m.h"
 
-#include "TTE4INETDefs.h"
+#include "CoRE4INETDefs.h"
 #include "algorithm"
 #include "HelperFunctions.h"
 #include "TTEScheduler.h"
 #include "SchedulerMessageEvents_m.h"
 #include "PCFrame_m.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 using namespace std;
 
 SM_INIT::SM_INIT(SM *s, FILE *f) {

@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_TTEAPIAPPLICATIONBASE_H_
-#define __TTETHERNETMODELV2_TTEAPIAPPLICATIONBASE_H_
+#ifndef __CORE4INET_TTEAPIAPPLICATIONBASE_H_
+#define __CORE4INET_TTEAPIAPPLICATIONBASE_H_
 
 #include <omnetpp.h>
 #include "tte_api.h"
@@ -24,7 +24,7 @@
 
 #define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Message kinds for application control messages

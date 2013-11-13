@@ -37,7 +37,7 @@
 
 using namespace std;
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 class SC;
 

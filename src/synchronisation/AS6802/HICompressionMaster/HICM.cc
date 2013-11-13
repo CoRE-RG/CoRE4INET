@@ -23,7 +23,7 @@
  */
 #include "HICM.h"
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 Define_Module(HICM);
 

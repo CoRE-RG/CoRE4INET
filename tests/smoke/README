@@ -1,4 +1,4 @@
-This folder contains smoke tests for the TTE4INET Framework. The "runallexamples"
+This folder contains smoke tests for the CoRE4INET Framework. The "runallexamples"
 script runs all example simulations for a while, and they must not crash
 or stop with an error.
 

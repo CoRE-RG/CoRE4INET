@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __TTE4INET_SHAPERS_H_
-#define __TTE4INET_SHAPERS_H_
+#ifndef __CoRE4INET_SHAPERS_H_
+#define __CoRE4INET_SHAPERS_H_
 
 
 #include <BaseShaper.h>
@@ -24,7 +24,7 @@
 #include <TTShaper.h>
 #include <AVBClassAShaper.h>
 
-namespace TTEthernetModel{
+namespace CoRE4INET{
 
 /**
 * @brief Class representing the BE_Shaper module

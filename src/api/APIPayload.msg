@@ -17,7 +17,7 @@ cplusplus {{
 #include "INETDefs.h"
 }}
 
-namespace TTEthernetModel;
+namespace CoRE4INET;
 
 //
 // Represents payload in an TTEthernet-Message sent over API

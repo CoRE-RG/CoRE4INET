@@ -1,4 +1,4 @@
-package ttethernet.linklayer.inControl;
+package core4inet.linklayer.inControl;
 
 import inet.linklayer.IOutputQueue;
 

@@ -13,14 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODELV2_RECORDPLAYBACKSCHEDULER_H_
-#define __TTETHERNETMODELV2_RECORDPLAYBACKSCHEDULER_H_
+#ifndef __CORE4INET_RECORDPLAYBACKSCHEDULER_H_
+#define __CORE4INET_RECORDPLAYBACKSCHEDULER_H_
 
 #include <omnetpp.h>
 
 #include "TTEScheduler.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Extended Scheduler module with record and playback feature.

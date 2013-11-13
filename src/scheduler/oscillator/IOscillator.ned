@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package ttethernet.scheduler.oscillator;
+package core4inet.scheduler.oscillator;
 
 //
 // TODO Documentation

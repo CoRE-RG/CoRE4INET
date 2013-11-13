@@ -13,12 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef CT_FRAME_H_
-#define CT_FRAME_H_
+#ifndef __CORE4INET_CT_FRAME_H_
+#define __CORE4INET_CT_FRAME_H_
 
 #include "CTFrame_m.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 /**
  * @brief Base class for the CTFrame message
@@ -70,4 +70,4 @@ class CTFrame : public CTFrame_Base
 
 }
 
-#endif /* CT_FRAME_CC_ */
+#endif /* __CORE4INET_CT_FRAME_CC_ */

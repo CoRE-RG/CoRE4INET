@@ -18,7 +18,7 @@
 
 #define ETHERAPP_BUFFER_SAP  0xe0
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
 
 Define_Module(BGTrafficHandle);
 

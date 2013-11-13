@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package ttethernet.buffer.base;
+package core4inet.buffer.base;
 
 //
 // Represents a queue buffer for background traffic. Messages are sent immediatly to LLC
