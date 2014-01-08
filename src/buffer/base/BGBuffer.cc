@@ -23,7 +23,7 @@ Define_Module(BGBuffer);
 void BGBuffer::initialize()
 {
     //Update displaystring
-    setIsEmpty(true);
+    setFilled(0);
 }
 
 void BGBuffer::handleMessage(cMessage *msg)

@@ -63,18 +63,21 @@ void Buffer::recordPacketReceived(EtherFrame *frame)
     emit(rxPkSignal, frame);
 }
 
-void Buffer::setIsEmpty(bool empty)
+void Buffer::setFilled(unsigned int fillLevel)
 {
     if(ev.isGUI()){
-        if (empty)
-        {
-            getDisplayString().setTagArg("i", 1, "black");
-            getDisplayString().setTagArg("tt", 0, "Buffer is empty");
-        }
-        else
-        {
-            getDisplayString().setTagArg("i", 1, "");
-            getDisplayString().setTagArg("tt", 0, "");
+        switch(fillLevel){
+            case 0: getDisplayString().setTagArg("i", 0, "buffer/emptybuffer");
+                    break;
+            case 1: getDisplayString().setTagArg("i", 0, "buffer/buffer1");
+                    break;
+            case 2: getDisplayString().setTagArg("i", 0, "buffer/buffer2");
+                    break;
+            case 3: getDisplayString().setTagArg("i", 0, "buffer/buffer3");
+                    break;
+            case 4: getDisplayString().setTagArg("i", 0, "buffer/buffer4");
+                    break;
+            default:getDisplayString().setTagArg("i", 0, "buffer/buffer4plus");
         }
     }
 }

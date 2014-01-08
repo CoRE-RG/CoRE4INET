@@ -142,11 +142,13 @@ class Buffer : public virtual cSimpleModule
         void recordPacketReceived(EtherFrame *frame);
 
         /**
-         * @brief Sets the status of the Buffer to empty or non-empty.
+         * @brief Sets the status of the Buffer to the given fill level.
          *
-         * This method changes the GUI according to the buffer status.
+         * This method changes the GUI according to the buffers fill level .
+         *
+         * @param fillLevel the level the buffer is filled in number of frames
          */
-        void setIsEmpty(bool empty);
+        void setFilled(unsigned int fillLevel);
 
     public:
         /**

@@ -46,7 +46,7 @@ void RCBuffer::initialize(int stage)
         Timed::initialize();
 
         //Update displaystring
-        setIsEmpty(true);
+        setFilled(0);
     }
 }
 

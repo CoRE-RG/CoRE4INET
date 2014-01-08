@@ -59,7 +59,7 @@ void TTBuffer::initialize(int stage)
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
         nextAction = period->registerEvent(actionTimeEvent);
 
-        setIsEmpty(true);
+        setFilled(0);
         return;
     }
 }

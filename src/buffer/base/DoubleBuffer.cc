@@ -33,7 +33,7 @@ void DoubleBuffer::enqueue(EtherFrame *newFrame)
         delete frame;
     else
     {
-        setIsEmpty(newFrame == NULL);
+        setFilled((newFrame==NULL)?0:1);
     }
     frame = newFrame;
 }
