@@ -38,7 +38,13 @@ class BGBuffer : public virtual Buffer
     /**
      * Initializes the module
      */
-    virtual void initialize();
+    virtual void initialize(int stage);
+    /**
+     * @brief Returns the number of initialization stages this module needs.
+     *
+     * @return returns 1 or if higher the number of stages the Buffer module requires
+     */
+    virtual int numInitStages() const;
 
     /**
      * @brief Is called when a new Frame is received in the buffer.

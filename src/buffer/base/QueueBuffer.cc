@@ -77,4 +77,21 @@ EtherFrame * QueueBuffer::dequeue()
         return NULL;
 }
 
+void QueueBuffer::setFilled(unsigned int fillLevel)
+{
+    if(ev.isGUI()){
+        switch(fillLevel){
+            case 0: getDisplayString().setTagArg("i", 0, "buffer/empty");
+                    break;
+            case 1: getDisplayString().setTagArg("i", 0, "buffer/buffer1");
+                    break;
+            case 2: getDisplayString().setTagArg("i", 0, "buffer/buffer2");
+                    break;
+            case 3: getDisplayString().setTagArg("i", 0, "buffer/buffer3");
+                    break;
+            default:getDisplayString().setTagArg("i", 0, "buffer/buffer3plus");
+        }
+    }
+}
+
 } //namespace

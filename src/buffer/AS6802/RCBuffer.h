@@ -83,9 +83,9 @@ class RCBuffer : public virtual CTBuffer, public Timed
          */
         virtual void initialize(int stage);
         /**
-         * @brief Returns the numer of initializaiton stages this module needs.
+         * @brief Returns the number of initialization stages this module needs.
          *
-         * @return always returns 1
+         * @return  returns 1 or if higher the number of stages the CTBuffer module requires
          */
         virtual int numInitStages() const;
 

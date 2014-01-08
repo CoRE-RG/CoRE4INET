@@ -33,7 +33,12 @@ void DoubleBuffer::enqueue(EtherFrame *newFrame)
         delete frame;
     else
     {
-        setFilled((newFrame==NULL)?0:1);
+        if(ev.isGUI()){
+            //Update displaystring
+            if(newFrame!=NULL){
+                getDisplayString().setTagArg("i", 0, "buffer/full");
+            }
+        }
     }
     frame = newFrame;
 }

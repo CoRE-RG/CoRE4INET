@@ -59,7 +59,10 @@ void TTBuffer::initialize(int stage)
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
         nextAction = period->registerEvent(actionTimeEvent);
 
-        setFilled(0);
+        if(ev.isGUI()){
+            //Update displaystring
+            getDisplayString().setTagArg("i", 0, "buffer/empty");
+        }
         return;
     }
 }

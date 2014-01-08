@@ -63,25 +63,6 @@ void Buffer::recordPacketReceived(EtherFrame *frame)
     emit(rxPkSignal, frame);
 }
 
-void Buffer::setFilled(unsigned int fillLevel)
-{
-    if(ev.isGUI()){
-        switch(fillLevel){
-            case 0: getDisplayString().setTagArg("i", 0, "buffer/emptybuffer");
-                    break;
-            case 1: getDisplayString().setTagArg("i", 0, "buffer/buffer1");
-                    break;
-            case 2: getDisplayString().setTagArg("i", 0, "buffer/buffer2");
-                    break;
-            case 3: getDisplayString().setTagArg("i", 0, "buffer/buffer3");
-                    break;
-            case 4: getDisplayString().setTagArg("i", 0, "buffer/buffer4");
-                    break;
-            default:getDisplayString().setTagArg("i", 0, "buffer/buffer4plus");
-        }
-    }
-}
-
 void Buffer::addReceiveCallback(Callback *cb, ApplicationBase *application)
 {
     receiveCallbacks[application]=cb;

@@ -20,10 +20,23 @@ namespace CoRE4INET {
 
 Define_Module(BGBuffer);
 
-void BGBuffer::initialize()
+int BGBuffer::numInitStages() const
 {
-    //Update displaystring
-    setFilled(0);
+    if(Buffer::numInitStages()>1)
+            return Buffer::numInitStages();
+        else
+            return 1;
+}
+
+void BGBuffer::initialize(int stage)
+{
+    Buffer::initialize(stage);
+    if(stage==0){
+        if(ev.isGUI()){
+            //Update displaystring
+            getDisplayString().setTagArg("i", 0, "buffer/empty");
+        }
+    }
 }
 
 void BGBuffer::handleMessage(cMessage *msg)
