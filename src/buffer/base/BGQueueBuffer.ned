@@ -31,11 +31,11 @@ simple BGQueueBuffer extends BGBuffer
         //Signal emitted when queuelength changes, contains new length
         @signal[queueLength](type=unsigned long);
         //Signal emitted when frame is dropped due to buffer overflow, contains dropped EtherFrame
-        @signal[ctDropped](type=EtherFrame);
+        @signal[dropped](type=EtherFrame);
         //Statistic of the queue length of the buffer
         @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
         //Statistic of the amount of packets that were dropped due to buffer overflows
-        @statistic[ctDropped](title="Dropped"; record=sum);
+        @statistic[dropped](title="Dropped"; record=sum);
         //Size of the buffer negative means infinite
         int size = default(-1);
         //Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)

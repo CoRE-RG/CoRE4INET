@@ -18,7 +18,7 @@
 namespace CoRE4INET {
 
 simsignal_t QueueBuffer::queueLengthSignal = SIMSIGNAL_NULL;
-simsignal_t QueueBuffer::ctDroppedSignal = SIMSIGNAL_NULL;
+simsignal_t QueueBuffer::droppedSignal = SIMSIGNAL_NULL;
 
 QueueBuffer::QueueBuffer()
 {
@@ -33,7 +33,7 @@ QueueBuffer::~QueueBuffer()
 void QueueBuffer::initializeStatistics()
 {
     queueLengthSignal = registerSignal("queueLength");
-    ctDroppedSignal = registerSignal("ctDropped");
+    droppedSignal = registerSignal("dropped");
     frames.setName("frames");
 }
 
@@ -41,7 +41,7 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
 {
     int size = par("size").longValue();
     if(size>=0 && frames.length()>=size){
-        emit(ctDroppedSignal, newFrame);
+        emit(droppedSignal, newFrame);
         if(ev.isGUI()){
             bubble("buffer overflow - dropping frame");
             getDisplayString().setTagArg("i2", 0, "status/excl3");

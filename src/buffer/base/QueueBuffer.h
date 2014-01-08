@@ -96,7 +96,7 @@ class QueueBuffer : public virtual Buffer
          *
          * Frames may be dropped when frame arrives at a full buffer.
          */
-        static simsignal_t ctDroppedSignal;
+        static simsignal_t droppedSignal;
 };
 
 } //namespace
