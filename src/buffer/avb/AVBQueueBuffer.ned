@@ -29,7 +29,8 @@ simple AVBQueueBuffer extends AVBBuffer
     parameters:
         @class(AVBQueueBuffer);
         @display("q=frames");
-        
+        //Signal emitted when queuelength changes, contains new length
+        @signal[queueLength](type=unsigned long);
         //Statistic of the queue length of the buffer
         @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
         

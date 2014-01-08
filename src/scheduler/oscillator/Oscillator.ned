@@ -24,6 +24,8 @@ simple Oscillator like IOscillator
 {
     parameters:
 	    @display("i=block/mac");
+	    //Signal emitted when drift changes, contains new drift
+        @signal[currentDrift](type=double);
         //Statistic of the current drift (Difference of configured and actual tick length in seconds)
         @statistic[currentDrift](title="Current drift"; unit=s; record=vector);
         // Length of a tick

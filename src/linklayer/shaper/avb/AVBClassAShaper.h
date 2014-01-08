@@ -171,7 +171,7 @@ template <class TC>
 void AVBClassAShaper<TC>::enqueueMessage(cMessage *msg){
     if(msg->arrivedOn("AVBin")){
         avbQueue.insert(msg);
-        cComponent::emit(avbQueueLengthSignal, avbQueue.length());
+        cComponent::emit(avbQueueLengthSignal, (unsigned int)avbQueue.length());
         TC::notifyListeners();
     }
     else{
@@ -202,7 +202,7 @@ cMessage* AVBClassAShaper<TC>::pop()
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
         cMessage *msg = (cMessage*) avbQueue.pop();
-        cComponent::emit(avbQueueLengthSignal, avbQueue.length());
+        cComponent::emit(avbQueueLengthSignal, (unsigned int)avbQueue.length());
         SimTime duration = TC::outChannel->calculateDuration(msg);
         avbBuffer->sendSlope(duration);
         return msg;

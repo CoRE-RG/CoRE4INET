@@ -27,6 +27,8 @@ simple BE_Shaper like IShaper
     parameters:
         @class(BE_Shaper);
         @display("i=block/classifier");
+        //Signal emitted when queue length of the be queue changes, contains new queue length
+        @signal[beQueueLength](type=unsigned long);
         //Statistic of the queue length of best-effort frames
         @statistic[beQueueLength](title="BE-Queue Length"; record=vector; interpolationmode=sample-hold);
 

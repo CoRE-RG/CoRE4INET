@@ -23,6 +23,8 @@ package core4inet.scheduler.period;
 simple Period
 {
     parameters:
+        //Signal emitted when a new cycle starts
+        @signal[newCycle]();
         //Statistic of the beginning of a new cycle
         @statistic[newCycle](title="Start of cycle"; record=count,vector; interpolationmode=none);
         // Number of ticks for one cycle

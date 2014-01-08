@@ -14,7 +14,8 @@ simple TT_AVBClassA_PCF_RC_BE_Shaper extends TT_PCF_RC_BE_Shaper
     parameters:
         @display("i=block/classifier");
         @class(TT_AVBClassA_PCF_RC_BE_Shaper);
-        
+        //Signal emitted when queue length of the avb queue changes, contains new queue length
+        @signal[avbQueueLength](type=unsigned long);
         //Statistic of the queue length of time-triggered frames
         @statistic[avbQueueLength](title="AVB-Queue Length"; record=vector; interpolationmode=sample-hold);
         

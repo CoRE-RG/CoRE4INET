@@ -33,6 +33,8 @@ simple TT_PCF_RC_BE_Shaper extends PCF_RC_BE_Shaper like ITimed
     parameters:
         @display("i=block/classifier");
         @class(TT_PCF_RC_BE_Shaper);
+        //Signal emitted when queue length of the tt queue changes, contains new queue length
+        @signal[ttQueueLength](type=unsigned long);
         //Statistic of the queue length of time-triggered frames
         @statistic[ttQueueLength](title="TT-Queue Length"; record=vector; interpolationmode=sample-hold);
         //Comma seperated list of TTBuffers that send messages to this port

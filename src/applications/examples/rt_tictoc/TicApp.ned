@@ -32,11 +32,13 @@ simple TicApp extends ApplicationBase like IScheduled
     parameters:
         @class(TicApp);
         @display("i=block/routing,cyan");
-        //Statistic of the amount of packets that were received by the application
-        
+		//Signal emitted when a frame is received, contains received EtherFrame
         @signal[rxPk](type=EtherFrame);
+        //Signal emitted when a frame is received, contains roundtrip time
+        @signal[roundtrip](type=simtime_t);
+		//Statistic of the amount of packets that were received by the application
         @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interval=1s; interpolationmode=none);
-        //Application Roundtrip Time
+        //Statistic of the applications roundtrip time
         @statistic[roundtrip](title="Roundtrip time"; unit=s; record=stats,histogram,vector);
         //Counter is increased on incoming Tic messages
         int counter = 0;

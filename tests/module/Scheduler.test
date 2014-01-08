@@ -6,6 +6,7 @@ package test.modul.scheduler;
 
 %inifile: test.ini
 [General]
+check-signals = true
 ned-path = .;../../../../src;../../../../../inet/src;../../lib/
 
 network = SchedulerTest

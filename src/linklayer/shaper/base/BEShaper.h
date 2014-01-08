@@ -192,7 +192,7 @@ template <class TC>
 void BEShaper<TC>::enqueueMessage(cMessage *msg){
     if(msg->arrivedOn("in")){
         beQueue.insert(msg);
-        cComponent::emit(beQueueLengthSignal, beQueue.length());
+        cComponent::emit(beQueueLengthSignal, (unsigned int) beQueue.length());
         TC::notifyListeners();
     }
     else{
@@ -222,7 +222,7 @@ cMessage* BEShaper<TC>::pop()
     if (!beQueue.isEmpty())
     {
         cMessage* message = (cMessage*) beQueue.pop();
-        cComponent::emit(beQueueLengthSignal, beQueue.length());
+        cComponent::emit(beQueueLengthSignal, (unsigned int) beQueue.length());
         return message;
     }
     return TC::pop();

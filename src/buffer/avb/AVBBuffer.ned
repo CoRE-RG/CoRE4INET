@@ -31,7 +31,8 @@ simple AVBBuffer extends Buffer like ITimed
     parameters:
         @class(AVBBuffer);
         @display("i=,blue");
-        
+        //Signal emitted when the credit of the CBS algorithm changes
+        @signal[credit](type=long);
         //Statistic of the credit of the CBS algorithm
         @statistic[credit](title="Credit"; record=vector);
         

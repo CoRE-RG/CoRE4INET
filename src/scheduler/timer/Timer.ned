@@ -24,6 +24,8 @@ simple Timer
 {
     parameters:
         @display("i=block/timer");
+        //Signal emitted when the clock is corrected, contains the signed number of ticks that is added to the clock
+        @signal[clockCorrection](type=long);
         //Statistic of the clock correction in ticks
         @statistic[clockCorrection](title="Clock correction"; unit=s; record=vector);
     gates:

@@ -41,7 +41,7 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
 {
     int size = par("size").longValue();
     if(size>=0 && frames.length()>=size){
-        emit(ctDroppedSignal, 1);
+        emit(ctDroppedSignal, newFrame);
         if(ev.isGUI()){
             bubble("buffer overflow - dropping frame");
             getDisplayString().setTagArg("i2", 0, "status/excl3");
@@ -62,7 +62,7 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
     }
     frames.insert(newFrame);
     setIsEmpty(frames.length() == 0);
-    emit(queueLengthSignal, frames.length());
+    emit(queueLengthSignal, (unsigned int)frames.length());
 }
 
 EtherFrame * QueueBuffer::dequeue()
@@ -70,7 +70,7 @@ EtherFrame * QueueBuffer::dequeue()
     if (frames.length() > 0)
     {
         setIsEmpty(frames.length() - 1 == 0);
-        emit(queueLengthSignal, frames.length() - 1);
+        emit(queueLengthSignal, (unsigned int)(frames.length() - 1));
         return (EtherFrame*) frames.pop();
     }
     else

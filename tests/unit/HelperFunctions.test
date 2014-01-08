@@ -7,6 +7,7 @@ Test HelperFunctions
 
 %inifile: test.ini
 [General]
+check-signals = true
 network = Test
 cmdenv-express-mode = false
 output-vector-file = test.vec
