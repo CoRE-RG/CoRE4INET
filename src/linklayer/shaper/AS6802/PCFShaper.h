@@ -37,6 +37,7 @@ namespace CoRE4INET {
 template <class TC>
 class PCFShaper : public TC, public virtual Timed
 {
+    using Timed::initialize;
     public:
         /**
          * @brief Constructor

@@ -38,6 +38,7 @@ namespace CoRE4INET {
 template <class TC>
 class RCShaper : public TC, public virtual Timed
 {
+    using Timed::initialize;
     public:
         /**
          * @brief Constructor

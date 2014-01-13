@@ -28,6 +28,7 @@ namespace CoRE4INET{
  */
 class InnerMessageFilter : public cObjectResultFilter
 {
+    using cObjectResultFilter::receiveSignal;
     public:
         virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object);
 };

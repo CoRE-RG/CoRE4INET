@@ -38,6 +38,7 @@ namespace CoRE4INET {
  */
 class AVBBuffer : public virtual Buffer, public Timed
 {
+    using Timed::initialize;
     public:
         AVBBuffer();
         virtual ~AVBBuffer();
