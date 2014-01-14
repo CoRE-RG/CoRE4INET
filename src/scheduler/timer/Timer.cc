@@ -42,17 +42,17 @@ void Timer::initialize()
 Timer::~Timer()
 {
     cancelAndDelete(selfMessage);
-    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end();++it){
+    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end();){
         for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
             cancelAndDelete(*it2);
         }
-        registredActionTimeEvents.erase(it);
+        registredActionTimeEvents.erase(it++);
     }
-    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();++it){
+    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();){
         for(std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
             cancelAndDelete(*it2);
         }
-        registredTimerEvents.erase(it);
+        registredTimerEvents.erase(it++);
     }
 }
 
@@ -65,7 +65,7 @@ void Timer::handleMessage(cMessage *msg)
 
 void Timer::sendOutEvents(){
     recalculate();
-    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end();++it){
+    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end();){
         if((*it).first <= ticks){
             if((*it).first < ticks){
                 EV << "WARNING: Message(s) (was/were) delayed by the scheduler. The event(s) affected (is/are): ";
@@ -83,13 +83,14 @@ void Timer::sendOutEvents(){
             for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
                 sendDirect((*it2), (*it2)->getDestinationGate());
             }
-            registredActionTimeEvents.erase(it);
+            registredActionTimeEvents.erase(it++);
         }
         else{
+            ++it;
             break;
         }
     }
-    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();++it){
+    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();){
         if((*it).first <= ticks){
             if((ticks - (*it).first) > 1){
                 EV<<"misscheduled: "<<(ticks - (*it).first)<<std::endl;
@@ -98,9 +99,10 @@ void Timer::sendOutEvents(){
             for(std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
                 sendDirect((*it2), (*it2)->getDestinationGate());
             }
-            registredTimerEvents.erase(it);
+            registredTimerEvents.erase(it++);
         }
         else{
+            ++it;
             break;
         }
     }
