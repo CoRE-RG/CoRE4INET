@@ -65,44 +65,34 @@ void Timer::handleMessage(cMessage *msg)
 
 void Timer::sendOutEvents(){
     recalculate();
-    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end();){
-        if((*it).first <= ticks){
-            if((*it).first < ticks){
-                EV << "WARNING: Message(s) (was/were) delayed by the scheduler. The event(s) affected (is/are): ";
-                for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
-                    EV << (*it2)->getName() << " by " << (*it2)->getDestinationGate()->getOwner()->getName() << "; ";
-                }
-                EV << "The delay was " << (ticks-(*it).first) << "ticks. This may happen for events in the clock correction interval." << std::endl;
-                if(ev.isGUI()){
-                    getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    getDisplayString().setTagArg("tt", 0, "WARNING: ActionTimeEvent was delayed (probably due to clock correction)");
-                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    getParentModule()->getDisplayString().setTagArg("tt", 0, "Problem with Timer");
-                }
-            }
+    for(std::map<uint64_t, std::list<SchedulerActionTimeEvent*> >::iterator it = registredActionTimeEvents.begin(); it!=registredActionTimeEvents.end() && (*it).first <= ticks;){
+        if((*it).first < ticks){
+            EV << "WARNING: Message(s) (was/were) delayed by the scheduler. The event(s) affected (is/are): ";
             for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
-                sendDirect((*it2), (*it2)->getDestinationGate());
+                EV << (*it2)->getName() << " by " << (*it2)->getDestinationGate()->getOwner()->getName() << "; ";
             }
-            registredActionTimeEvents.erase(it++);
+            EV << "The delay was " << (ticks-(*it).first) << "ticks. This may happen for events in the clock correction interval." << std::endl;
+            if(ev.isGUI()){
+                getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getDisplayString().setTagArg("tt", 0, "WARNING: ActionTimeEvent was delayed (probably due to clock correction)");
+                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                getParentModule()->getDisplayString().setTagArg("tt", 0, "Problem with Timer");
+            }
         }
-        else{
-            break;
+        for(std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+            sendDirect((*it2), (*it2)->getDestinationGate());
         }
+        registredActionTimeEvents.erase(it++);
     }
-    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end();){
-        if((*it).first <= ticks){
-            if((ticks - (*it).first) > 1){
-                EV<<"misscheduled: "<<(ticks - (*it).first)<<std::endl;
-                opp_error("THIS SHOULD NOT HAPPEN!");
-            }
-            for(std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
-                sendDirect((*it2), (*it2)->getDestinationGate());
-            }
-            registredTimerEvents.erase(it++);
+    for(std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin(); it!=registredTimerEvents.end() && (*it).first <= ticks;){
+        if((ticks - (*it).first) > 1){
+            EV<<"misscheduled: "<<(ticks - (*it).first)<<std::endl;
+            opp_error("THIS SHOULD NOT HAPPEN!");
         }
-        else{
-            break;
+        for(std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2){
+            sendDirect((*it2), (*it2)->getDestinationGate());
         }
+        registredTimerEvents.erase(it++);
     }
     reschedule();
 }
