@@ -20,9 +20,10 @@
 #include <map>
 #include "MACAddress.h"
 
-using namespace std;
-
 namespace CoRE4INET {
+
+//This disables the padding warning for this class! please recheck when adding new members!
+#pragma GCC diagnostic ignored "-Wpadded"
 
 /**
  * @brief Class for the critical traffic conformance check of
@@ -38,13 +39,13 @@ class AVBIncoming : public cSimpleModule
              */
             bool hadError;
 
-            map<unsigned long, MACAddress> TalkerAddresses;
-            map<unsigned long, int> StreamBandwith;
-            map<unsigned long, bool>StreamIsForwarding;
-            map<int, list<unsigned long> > ListenerGates;
-            map<int, int> PortReservation;
-            map<int, int> AVBPortReservation;
-            map<int, int> PortBandwith;
+            std::map<unsigned long, MACAddress> TalkerAddresses;
+            std::map<unsigned long, unsigned int> StreamBandwith;
+            std::map<unsigned long, bool>StreamIsForwarding;
+            std::map<unsigned int, std::list<unsigned long> > ListenerGates;
+            std::map<unsigned int, unsigned int> PortReservation;
+            std::map<unsigned int, unsigned int> AVBPortReservation;
+            std::map<unsigned int, unsigned int> PortBandwith;
 
             /**
              * @brief Initialization of the module.
@@ -65,7 +66,7 @@ class AVBIncoming : public cSimpleModule
              *
              * @return returns the TT bandwith on the port in Mbit/s.
              */
-            int calcPortUtilisation(int port);
+            unsigned int calcPortUtilisation(unsigned int port);
 
 
     public:
@@ -78,21 +79,21 @@ class AVBIncoming : public cSimpleModule
             /**
              * @brief calculates the bandwith.
              *
-             * @param Size of the frame.
-             * @param Sending interval of the frame.
+             * @param FrameSize Size of the frame.
+             * @param IntervalFrames Sending interval of the frame.
              *
              * @return returns bandwith in Mbit/s.
              */
-            int calcBandwith(int FrameSize, int IntervalFrames);
+            unsigned int calcBandwith(unsigned int FrameSize, unsigned int IntervalFrames);
 
             /**
              * @brief get AVB port reservation.
              *
-             * @param port number.
+             * @param port index of port.
              *
              * @return returns the AVB bandwith on one port in Mbit/s.
              */
-            int getAVBPortReservation(int port);
+            unsigned int getAVBPortReservation(unsigned int port);
 
             /**
              * @brief set the AVB port reservation.
@@ -100,14 +101,14 @@ class AVBIncoming : public cSimpleModule
              * @param port number.
              * @param reservation bandwith in Mbit/s.
              */
-            void setAVBPortReservation(int port, int reservation);
+            void setAVBPortReservation(unsigned int port, unsigned int reservation);
 
             /**
              * @brief get port bandwith.
              *
              * @return returns the bandwith of the physical port in Mbit/s.
              */
-            int getPortBandwith(int port);
+            unsigned int getPortBandwith(unsigned int port);
 
             /**
              * @brief get forwarding policy.

@@ -35,7 +35,7 @@ class RecordPlaybackScheduler : public TTEScheduler
 {
     private:
         FILE *fp;
-        int counter;
+        unsigned int counter;
         std::vector<double> *values;
     public:
         /**

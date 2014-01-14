@@ -76,8 +76,9 @@ uint32_t Period::getTicks(){
     if(!timer){
         throw std::runtime_error("Period was not yet initialized");
     }
+    uint32_t cycle_ticks = (uint32_t)par("cycle_ticks").longValue();
     //cycle_ticks is added to assure a positive return value
-    return (par("cycle_ticks").longValue() + timer->getTotalTicks() - par("offset_ticks").longValue()) % par("cycle_ticks").longValue();
+    return (cycle_ticks + timer->getTotalTicks() - (uint32_t)par("offset_ticks").longValue()) % cycle_ticks;
 }
 
 uint64_t Period::getTotalTicks(){

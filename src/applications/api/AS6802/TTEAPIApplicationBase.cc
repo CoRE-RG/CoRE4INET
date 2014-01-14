@@ -210,9 +210,9 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
                 for(int i=0;i<phy->getVectorSize();i++){
                     EtherMACFullDuplex *mac = (EtherMACFullDuplex*)getParentModule()->getSubmodule("phy", i)->getSubmodule("mac");
                     if(mac->gate("phys")->isConnected())
-                        *((uint8_t*)value) = *((uint8_t*)value)<<1 | 1;
+                        *((uint8_t*)value) = (uint8_t)(*((uint8_t*)value)<<(uint8_t)1) | (uint8_t)1;
                     else
-                        *((uint8_t*)value) = *((uint8_t*)value)<<1;
+                        *((uint8_t*)value) = (uint8_t)(*((uint8_t*)value)<<(uint8_t)1);
                 }
             }
             else{
@@ -235,7 +235,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
         case TTE_VAR_CHANNEL_COUNT:{
             cModule *phy = getParentModule()->getSubmodule("phy", 0);
             if(phy){
-                *((uint8_t*)value) = phy->getVectorSize();
+                *((uint8_t*)value) = (uint8_t)phy->getVectorSize();
             }
             else{
                 *((uint8_t*)value) = 0;
@@ -244,15 +244,16 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
             break;
         }
         case TTE_VAR_TIME_RESOLUTION:{
-            cModule *scheduler = getParentModule()->getSubmodule("scheduler", -1);
-            if(scheduler){
-                *((tte_time_t*)value) = scheduler->par("tick").doubleValue();
-            }
-            else{
-                *((tte_time_t*)value) = 0;
+            //TODO: Needs to be implemented
+            //cModule *scheduler = getParentModule()->getSubmodule("scheduler", -1);
+            //if(scheduler){
+            //    *((tte_time_t*)value) = scheduler->par("tick").doubleValue();
+            //}
+            //else{
+            //    *((tte_time_t*)value) = 0;
                 return ETT_NULLPTR;
-            }
-            break;
+            //}
+            //break;
         }
         case TTE_VAR_API_VERSION:{
             *((uint32_t*)value) = TTE_API_VER;
@@ -283,8 +284,8 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id,
             }
             break;
         }
-        default:
-            return ETT_NOTSUPPORTED;
+        //default:
+        //    return ETT_NOTSUPPORTED;
     }
     return ETT_SUCCESS;
 }
@@ -349,8 +350,8 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf,
     if(buf->traffic_type==TTE_CT_TRAFFIC){
         frame->ct_id = dynamic_cast<CTFrame*>(msg)->getCtID();
     }
-    frame->length = payload->getByteLength();
-    frame->data = (uint8_t*)malloc(payload->getByteLength());
+    frame->length = (uint16_t)payload->getByteLength();
+    frame->data = (uint8_t*)malloc((size_t)payload->getByteLength());
     priv->data = frame->data;
     MACAddress dest= msg->getDest();
     frame->eth_hdr.dst_mac[0] = dest.getAddressByte(5);
@@ -459,7 +460,8 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
             }
             break;
         }
-        default:
+        case TTE_BUFVAR_DMA_OUTPUT:
+        case TTE_BUFVAR_DMA_INPUT:
             return ETT_NOTSUPPORTED;
     }
     return ETT_SUCCESS;
@@ -506,7 +508,8 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
             }
             break;
         }
-        default:
+        case TTE_BUFVAR_DMA_OUTPUT:
+        case TTE_BUFVAR_DMA_INPUT:
             return ETT_NOTSUPPORTED;
     }
     return ETT_SUCCESS;

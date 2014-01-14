@@ -22,7 +22,6 @@
 #include <Timer.h>
 #include <ModuleAccess.h>
 
-#define AVB_MINPAYLOADSIZE 46
 #define AVB_MINPACKETSIZE 88
 #define AVB_OVERHEADSIZE 42
 #define AVB_SRP_ADVERTISESIZE 25
@@ -39,9 +38,9 @@ void AVBTrafficSourceApp::initialize()
     Timed::initialize();
 
     talker = par("talker").boolValue();
-    streamID = par("streamID").longValue();
-    intervalFrames = par("intervalFrames").longValue();
-    payload = par("payload").longValue();
+    streamID = (unsigned long)par("streamID").longValue();
+    intervalFrames = (unsigned int) par("intervalFrames").longValue();
+    payload = (unsigned int) par("payload").longValue();
 
     if(payload <= AVB_MINPACKETSIZE)
     {
@@ -72,7 +71,7 @@ void AVBTrafficSourceApp::initialize()
         avbCTC->talker = true;
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
         tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
-        event->setTimer(par("advertise_time").doubleValue()/tick);
+        event->setTimer((uint64_t)(par("advertise_time").doubleValue()/tick));
         event->setDestinationGate(gate("schedulerIn"));
         getTimer()->registerEvent(event);
     }
@@ -154,7 +153,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     //class measurement interval = 125us
     double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer(ceil(interval/tick));
+    event->setTimer((uint64_t)ceil(interval/tick));
     event->setDestinationGate(gate("schedulerIn"));
     getTimer()->registerEvent(event);
 }

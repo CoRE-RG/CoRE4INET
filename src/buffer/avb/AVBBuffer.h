@@ -60,7 +60,7 @@ class AVBBuffer : public virtual Buffer, public Timed
         /**
          * @brief caculates new credit for the duration an AVB frame is sending.
          *
-         * @param AVB frame sending duration.
+         * @param duration AVB frame sending duration.
          */
         void sendSlope(SimTime duration);
 
@@ -90,7 +90,7 @@ class AVBBuffer : public virtual Buffer, public Timed
     protected:
         int credit;
         int maxCredit;
-        int AVBReservation;
+        unsigned int AVBReservation;
         bool inTransmission;
         int msgCnt;
         SimTime newTime;

@@ -15,6 +15,9 @@
 
 cplusplus {{
 #include "INETDefs.h"
+
+//This disables warnings for this class!
+#pragma GCC system_header
 }}
 
 namespace CoRE4INET;

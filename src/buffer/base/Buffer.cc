@@ -113,7 +113,7 @@ void Buffer::handleMessage(cMessage *msg)
     }
 }
 
-void Buffer::handleParameterChange(const char* parname){
+void Buffer::handleParameterChange(__attribute((unused)) const char* parname){
     destinationGates.clear();
     std::vector<std::string> destinationGatePaths = cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator destinationGatePath = destinationGatePaths.begin();
@@ -135,7 +135,7 @@ void Buffer::handleParameterChange(const char* parname){
     }
 }
 
-void Buffer::enqueue(EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused)) EtherFrame *newFrame)
 {
     ev << "Buffer::enqueue not implemented" << endl;
     throw;

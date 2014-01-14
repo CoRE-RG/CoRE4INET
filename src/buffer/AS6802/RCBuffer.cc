@@ -130,7 +130,7 @@ void RCBuffer::resetBag()
     {
         //Register scheduler
         SchedulerTimerEvent *timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
-        timerMessage->setTimer(par("bag").doubleValue());
+        timerMessage->setTimer((uint64_t)par("bag").longValue());
         timerMessage->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(timerMessage);
     }

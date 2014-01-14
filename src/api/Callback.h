@@ -25,6 +25,9 @@ namespace CoRE4INET {
 
 typedef void(*cbFunc)(void *);
 
+//This disables the padding warning for this class!
+#pragma GCC diagnostic ignored "-Wpadded"
+
 /**
  * @brief Class representing a Callback.
  *
@@ -46,6 +49,11 @@ class Callback
         void (*fn)(void *);
 
         /**
+         * @brief Pointer to the Buffer that issues the Callback.
+         */
+        Buffer *buffer;
+
+        /**
          * @brief Pointer to the function args.
          */
         void *arg;
@@ -54,10 +62,6 @@ class Callback
          */
         bool argSet;
 
-        /**
-         * @brief Pointer to the Buffer that issues the Callback.
-         */
-        Buffer *buffer;
     public:
         /**
          * @brief Constructor
@@ -66,6 +70,10 @@ class Callback
             argSet=false;
             this->buffer=buffer;
         }
+        /**
+         * @brief Destructor
+         */
+        virtual ~Callback(){}
 
         /**
          * @brief Setter for the function pointer.

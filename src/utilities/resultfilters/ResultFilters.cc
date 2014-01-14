@@ -20,7 +20,7 @@ using namespace CoRE4INET;
 
 Register_ResultFilter("innerMessage", InnerMessageFilter);
 
-void InnerMessageFilter::receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object)
+void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
 {
     if (dynamic_cast<cPacket *>(object))
     {

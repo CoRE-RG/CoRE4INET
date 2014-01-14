@@ -42,7 +42,7 @@ void TTBuffer::initialize(int stage)
 {
     CTBuffer::initialize(stage);
     if(stage==0){
-        nextAction = par("sendWindowStart").longValue();
+        nextAction = (uint64_t)par("sendWindowStart").longValue();
     }
     if(stage==1)
     {
@@ -55,7 +55,7 @@ void TTBuffer::initialize(int stage)
         //TODO find out what is wrong here!
         if(actionTimeEvent->isScheduled())
             cancelEvent(actionTimeEvent);
-        actionTimeEvent->setAction_time(par("sendWindowStart").longValue());
+        actionTimeEvent->setAction_time((uint32_t)par("sendWindowStart").longValue());
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
         nextAction = period->registerEvent(actionTimeEvent);
 
@@ -117,7 +117,7 @@ void TTBuffer::handleParameterChange(const char* parname){
     CTBuffer::handleParameterChange(parname);
 
     if(actionTimeEvent)
-        actionTimeEvent->setAction_time(par("sendWindowStart").longValue());
+        actionTimeEvent->setAction_time((uint32_t)par("sendWindowStart").longValue());
 }
 
 uint64_t TTBuffer::nextSendWindowStart(){

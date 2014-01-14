@@ -30,7 +30,7 @@ namespace CoRE4INET {
             buf.traffic_type= TTE_BG_TRAFFIC;
         }
         buf.channel=0;
-        buf.ct_id=buffer->par("ct_id").longValue();
+        buf.ct_id=(uint16_t)buffer->par("ct_id").longValue();
         buf.shared=0;
 
         TTEAPIPriv *priv = new TTEAPIPriv();

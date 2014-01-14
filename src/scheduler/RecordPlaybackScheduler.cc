@@ -45,7 +45,7 @@ void RecordPlaybackScheduler::initialize(int stage)
                     double data;
                     int num = fscanf(fp,"%d %lf", &dummy, &data);
                     ASSERT(num==2);
-                    values->at(counter++)=data;
+                    values->at((size_t)(counter++))=data;
                 }
             }else{
                 perror ("Error opening file");
@@ -70,7 +70,7 @@ void RecordPlaybackScheduler::changeDrift(){
 
     if(this->par("read").boolValue())
     {
-         newDriftChange = values->at(counter++);
+         newDriftChange = values->at((size_t)(counter++));
          counter++;
     }else{
         newDriftChange = SimTime(par("drift_change").doubleValue());

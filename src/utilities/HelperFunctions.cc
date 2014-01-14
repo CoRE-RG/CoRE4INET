@@ -12,6 +12,8 @@
 
 #include "ModuleAccess.h"
 
+namespace CoRE4INET {
+
 std::string& replaceAll(std::string &string, std::string toFind, std::string replacement){
     size_t pos = string.find(toFind);
     while(pos!=std::string::npos){
@@ -60,7 +62,7 @@ uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick){
 }
 
 uint64_t secondsToTransparentClock(simtime_t seconds){
-   return ((seconds.raw() *  0x10000) / pow(10,SIMTIME_NS-seconds.getScaleExp()));
+   return (uint64_t)((seconds.raw() *  0x10000) / pow(10,SIMTIME_NS-seconds.getScaleExp()));
 }
 
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick){
@@ -85,9 +87,11 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer){
         }
     }
     if(start >= 0){
-        transparentClock+=ticksToTransparentClock((timer->getTotalTicks()-start),timer->getOscillator()->getPreciseTick());
+        transparentClock+=ticksToTransparentClock((timer->getTotalTicks()-(uint64_t)start),timer->getOscillator()->getPreciseTick());
     }
 
     //Set new transparent clock
     pcf->setTransparent_clock(transparentClock);
+}
+
 }

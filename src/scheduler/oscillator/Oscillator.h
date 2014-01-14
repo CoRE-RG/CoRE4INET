@@ -41,7 +41,6 @@ class Oscillator : public virtual cSimpleModule
      */
     virtual int numInitStages() const;
 
-    virtual void handleMessage(cMessage *msg);
   public:
     virtual simtime_t getTick();
     virtual simtime_t getPreciseTick();

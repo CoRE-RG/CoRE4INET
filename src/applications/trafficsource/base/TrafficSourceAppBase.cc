@@ -31,12 +31,10 @@ void TrafficSourceAppBase::initialize()
 }
 
 void TrafficSourceAppBase::sendMessage(){
-    int ctID = par("ct_id").longValue();
-    if(ctID == -1){
 
-    }
-    else{
-        std::list<Buffer*> buffer = buffers[ctID];
+    if(par("ct_id").longValue() != -1){
+        uint16_t ctID = (uint16_t)par("ct_id").longValue();
+        std::list<Buffer*> buffer = buffers[(uint16_t)ctID];
         if(buffer.size()==0){
             ev.printf("No buffer with such CT \n");
             bubble("No buffer with such CT");

@@ -17,8 +17,6 @@
 #include "Ieee802Ctrl_m.h"
 #include "SRPFrame_m.h"
 
-#define ETHERAPP_CLI_SAP  0xf0
-#define ETHERAPP_SRV_SAP  0xf1
 #define ETHERAPP_BUFFER_SAP  0xe0
 
 namespace CoRE4INET {
