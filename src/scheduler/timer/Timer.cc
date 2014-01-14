@@ -86,7 +86,6 @@ void Timer::sendOutEvents(){
             registredActionTimeEvents.erase(it++);
         }
         else{
-            ++it;
             break;
         }
     }
@@ -102,7 +101,6 @@ void Timer::sendOutEvents(){
             registredTimerEvents.erase(it++);
         }
         else{
-            ++it;
             break;
         }
     }
