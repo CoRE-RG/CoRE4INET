@@ -41,6 +41,4 @@ simple ApplicationBase like IApplication
         input RCin @directIn @labels(RCFrame);
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;
-        //Input gate for the incoming SynchronizationNotification messages
-        input syncIn @directIn;
 }

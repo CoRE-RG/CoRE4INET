@@ -34,6 +34,4 @@ moduleinterface IApplication extends IPort
     gates:
          //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn;
-        //Input gate for the incoming SynchronizationNotification messages
-        input syncIn;
 }

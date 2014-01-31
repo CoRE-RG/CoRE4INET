@@ -76,7 +76,7 @@ class TTEAPIPriv
  *
  * @author Till Steinbach
  */
-class TTEAPIApplicationBase : public ApplicationBase
+class TTEAPIApplicationBase : public ApplicationBase, public cListener
 {
     private:
         bool synchronized;
@@ -98,6 +98,11 @@ class TTEAPIApplicationBase : public ApplicationBase
          * @param msg The incoming message
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @ Receives signal from sync module
+         */
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
     protected:
         /**
          * @brief Does nothing in this application. Must be overwritten with actual

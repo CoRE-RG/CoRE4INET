@@ -26,6 +26,7 @@
 #include "TTEScheduler.h"
 #include "SyncNotification_m.h"
 #include "CTFrame.h"
+#include "ModuleAccess.h"
 
 #include "Ethernet.h"
 
@@ -37,6 +38,7 @@ Define_Module(TTEAPIApplicationBase);
 void TTEAPIApplicationBase::initialize()
 {
     scheduleAt(simTime(), new cMessage("Start Application", START_APPLICATION));
+    findContainingNode(this)->subscribe("syncStatus", this);
 }
 
 void TTEAPIApplicationBase::handleMessage(cMessage *msg)
@@ -52,8 +54,13 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
         TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
         tteScheduler->registerEvent((SchedulerEvent *) msg);
     }
-    if(msg->arrivedOn("syncIn")){
-        SyncNotification *notification = (SyncNotification*)msg;
+}
+
+void TTEAPIApplicationBase::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+{
+    if (dynamic_cast<SyncNotification *>(obj))
+    {
+        SyncNotification *notification = (SyncNotification *)obj;
         if(notification->getKind()==SYNC){
             synchronized=true;
         }
@@ -61,6 +68,7 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
             synchronized=false;
         }
     }
+    delete obj;
 }
 
 void TTEAPIApplicationBase::startApplication(){

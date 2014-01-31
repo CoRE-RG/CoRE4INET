@@ -27,6 +27,9 @@ moduleinterface ISync extends IPort, IScheduled
 {
     parameters:
         @display("i=block/timer");
+        
+        //Signal emited when sync state changes (e.g. SYNC, ASYNC, ...)
+        @signal[syncStatus](type=CoRE4INET::SyncNotification);
     gates:
         //Input for scheduler messages
         input schedulerIn @directIn;

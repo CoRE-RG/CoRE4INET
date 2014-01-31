@@ -83,14 +83,14 @@ class Buffer : public virtual cSimpleModule
 
     protected:
         /**
-         * Initializes the module
+         * @brief Initializes the module
          *
          * @param stage The stages. Module initializes when stage==0
          */
         virtual void initialize(int stage);
 
         /**
-         * @brief Returns the numer of initializaiton stages this module needs.
+         * @brief Returns the number of initialization stages this module needs.
          *
          * @return Always returns 1
          */

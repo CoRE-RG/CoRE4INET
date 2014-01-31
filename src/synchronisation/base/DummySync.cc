@@ -26,11 +26,17 @@ Define_Module( DummySync);
 
 int DummySync::numInitStages() const
 {
-    return 3;
+    if(SyncBase::numInitStages()>3){
+        return SyncBase::numInitStages();
+    }
+    else{
+        return 3;
+    }
 }
 
 void DummySync::initialize(int stage)
 {
+    SyncBase::initialize(stage);
     if(stage==1)
     {
         Scheduled::initialize();

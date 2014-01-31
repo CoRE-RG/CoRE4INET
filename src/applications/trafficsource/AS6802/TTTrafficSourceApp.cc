@@ -14,10 +14,10 @@
 // 
 
 #include "TTTrafficSourceApp.h"
-#include <CTFrame_m.h>
-#include "TTEScheduler.h"
+#include "TTFrame_m.h"
+#include "SyncNotification_m.h"
 
-#include <ModuleAccess.h>
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -38,13 +38,15 @@ void TTTrafficSourceApp::initialize()
         event->setDestinationGate(gate("schedulerIn"));
         period->registerEvent(event);
     }
+    synchronized = false;
+    findContainingNode(this)->subscribe("syncStatus", this);
 }
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg){
 
     if(msg->arrivedOn("schedulerIn")){
         moduloCycle++;
-        if(moduloCycle==(unsigned int)par("modulo").longValue()){
+        if(synchronized && moduloCycle==(unsigned int)par("modulo").longValue()){
             sendMessage();
             moduloCycle=0;
         }
@@ -58,5 +60,19 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg){
     }
 }
 
+void TTTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+{
+    Enter_Method_Silent();
+    if (dynamic_cast<SyncNotification *>(obj))
+    {
+        SyncNotification *notification = (SyncNotification *)obj;
+        if(notification->getKind()==SYNC){
+            synchronized=true;
+        }
+        else{
+            synchronized=false;
+        }
+    }
+}
 
 } //namespace
