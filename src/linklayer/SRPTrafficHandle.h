@@ -32,9 +32,6 @@ class SRPTrafficHandle : public BGTrafficHandle
     protected:
         int localSAP;
         int remoteSAP;
-        MACAddress destMACAddressUnicast;
-        MACAddress destMACAddressBroadcast;
-        MACAddress srcMACAddress;
 
         /**
          * @brief In initialization the handle sends a register_DSAP message

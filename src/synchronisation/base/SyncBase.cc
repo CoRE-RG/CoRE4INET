@@ -14,11 +14,9 @@
 // 
 
 #include "SyncBase.h"
-
+#include "../../base/NotifierConsts.h"
 
 using namespace CoRE4INET;
-
-simsignal_t SyncBase::statusSignal = SIMSIGNAL_NULL;
 
 int SyncBase::numInitStages() const
 {
@@ -28,13 +26,12 @@ int SyncBase::numInitStages() const
 void SyncBase::initialize(int stage)
 {
     if(stage==0){
-        statusSignal = registerSignal("syncStatus");
     }
 }
 
 void SyncBase::notify(SyncNotificationKind kind){
-    if(mayHaveListeners(statusSignal)){
+    if(mayHaveListeners(NF_SYNC_STATE_CHANGE)){
         SyncNotification notification("SyncNotification", kind);
-        emit(statusSignal, &notification);
+        emit(NF_SYNC_STATE_CHANGE, &notification);
     }
 }

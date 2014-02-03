@@ -27,9 +27,6 @@ void SRPTrafficHandle::initialize()
 {
     localSAP = ETHERAPP_BUFFER_SAP;
     remoteSAP = ETHERAPP_BUFFER_SAP;
-    destMACAddressUnicast.setAddress("000000000000");
-    destMACAddressBroadcast.setAddress("FFFFFFFFFFFF");
-    srcMACAddress.setAddress("000000000000");
 
     Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
     etherctrl->setDsap(localSAP);
@@ -40,11 +37,8 @@ void SRPTrafficHandle::initialize()
 
 void SRPTrafficHandle::handleMessage(cMessage *msg)
 {
-    std::string msgClass = msg->getClassName();
-    //TODO fix that
-    if(msgClass.compare("CoRE4INET::SRPFrame") == 0)
+    if(SRPFrame *inFrame = dynamic_cast<SRPFrame*>(msg))
     {
-        SRPFrame *inFrame = (SRPFrame*) msg;
         if(msg->arrivedOn("SRPin"))
         {
             std::string srpType = inFrame->getName();
@@ -53,7 +47,7 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
                 etherctrl->setSsap(localSAP);
                 etherctrl->setDsap(remoteSAP);
-                etherctrl->setDest(destMACAddressBroadcast);
+                etherctrl->setDest(MACAddress::BROADCAST_ADDRESS);
                 inFrame->setControlInfo(etherctrl);
                 send(inFrame, "lowerLayerOut");
             }

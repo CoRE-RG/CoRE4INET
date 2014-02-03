@@ -18,6 +18,7 @@
 #include "SyncNotification_m.h"
 
 #include "ModuleAccess.h"
+#include "../../../base/NotifierConsts.h"
 
 namespace CoRE4INET {
 
@@ -39,7 +40,8 @@ void TTTrafficSourceApp::initialize()
         period->registerEvent(event);
     }
     synchronized = false;
-    findContainingNode(this)->subscribe("syncStatus", this);
+    ASSERT2(findContainingNode(this)!=NULL, "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
+    findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
 }
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg){

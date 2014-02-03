@@ -40,6 +40,7 @@ module TTEAVBEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
+        @node;
         int numApps = default(0); //default(1) ? ListenerApp
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
