@@ -20,6 +20,7 @@ import core4inet.configuration.base.IConfigurationManager;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;
 import core4inet.linklayer.TTEPHYPort;
+import core4inet.utilities.modules.CheckedBuffer;
 
 import inet.linklayer.IMACRelayUnit;
 
@@ -41,6 +42,7 @@ module TTEEtherSwitch
         @node;
         @labels(node,ethernet-node);
         double hardware_delay @unit(s) = default(8us);
+        int numBuffer = default(0);
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
@@ -74,6 +76,9 @@ module TTEEtherSwitch
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
                 @display("p=240,50");
+        }
+        checkedBuffer[numBuffer]: CheckedBuffer {
+            @display("p=170,130");
         }
     connections:
         for i=0..sizeof(ethg)-1 {

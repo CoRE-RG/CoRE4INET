@@ -14,7 +14,6 @@
 // 
 package core4inet.buffer.base;
 
-import inet.linklayer.IOutputQueue;
 //
 // Abstract base Buffer used for the various Buffers of TTEthernet.
 // Since this is an abstract module please do not instantiate it
@@ -25,10 +24,10 @@ import inet.linklayer.IOutputQueue;
 // @todo The Buffer module should be converted to an interface since it should
 // not be used directly in simulation.
 //
-// @see IOutputQueue
+// @see IBuffer
 //
 // @author Till Steinbach
-simple Buffer like IOutputQueue
+simple Buffer like IBuffer
 {
     parameters:
         @display("i=block/buffer");
