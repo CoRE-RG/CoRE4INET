@@ -66,14 +66,6 @@ class Buffer : public virtual cSimpleModule
          * Stores the Gates to that the messages are delivered
          */
         std::list<cGate*> destinationGates;
-        /**
-         * Stores the callbacks that are executed when a frame is added to the buffer
-         */
-        std::map<ApplicationBase*, Callback*> receiveCallbacks;
-        /**
-         * Stores the callbacks that are executed when a frame is removed from the buffer
-         */
-        std::map<ApplicationBase*, Callback*> transmitCallbacks;
 
     private:
         /**
@@ -83,14 +75,14 @@ class Buffer : public virtual cSimpleModule
 
     protected:
         /**
-         * Initializes the module
+         * @brief Initializes the module
          *
          * @param stage The stages. Module initializes when stage==0
          */
         virtual void initialize(int stage);
 
         /**
-         * @brief Returns the numer of initializaiton stages this module needs.
+         * @brief Returns the number of initialization stages this module needs.
          *
          * @return Always returns 1
          */
@@ -160,48 +152,6 @@ class Buffer : public virtual cSimpleModule
          * @sa enqueue();
          */
         void putFrame(EtherFrame* frame);
-
-        /**
-         * @brief Adds a receive callback for an application to the buffer.
-         *
-         * The callback is registered for a specific application. Each application is
-         * allowed to only register one receive callback per buffer. Further calls
-         * overwrite the registered callback.
-         *
-         * @param cb The receive callback to be added.
-         * @param application The corresponding application that registers the callback
-         */
-        void addReceiveCallback(Callback *cb, ApplicationBase *application);
-
-        /**
-         * @brief Returns the currently registered receive callback for an application.
-         *
-         * @param application The corresponding application that registered callbacks
-         * @return The callback that is currently registered. Null if there is no
-         * receive callback registered
-         */
-        Callback* getReceiveCallback(ApplicationBase *application);
-
-        /**
-         * @brief Adds a transmit callback for an application to the buffer.
-         *
-         * The callback is registered for a specific application. Each application is
-         * allowed to only register one transmit callback per buffer. Further calls
-         * overwrite the registered callback.
-         *
-         * @param cb The transmit callback to be added.
-         * @param application The corresponding application that registers the callback
-         */
-        void addTransmitCallback(Callback *cb, ApplicationBase *application);
-
-        /**
-         * @brief Returns the currently registered transmit callback for an application.
-         *
-         * @param application The corresponding application that registered callbacks
-         * @return The callback that is currently registered. Null if there is no
-         * transmit callback registered
-         */
-        Callback* getTransmitCallback(ApplicationBase *application);
 
     protected:
         /**

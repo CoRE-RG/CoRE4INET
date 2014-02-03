@@ -1,5 +1,7 @@
 #include "BaseInControl.h"
 
+namespace CoRE4INET {
+
 simsignal_t BaseInControl::rxPkSignal = SIMSIGNAL_NULL;
 
 void BaseInControl::initialize(){
@@ -14,7 +16,7 @@ void BaseInControl::setParameters(EtherFrame *frame){
         par = &frame->par(i);
     else
         par = &frame->addPar("received_total");
-    par->setLongValue(timer->getTotalTicks());
+    par->setLongValue((long)timer->getTotalTicks());
 
 
     i = frame->findPar("received_port");
@@ -30,3 +32,4 @@ void BaseInControl::recordPacketReceived(EtherFrame *frame)
     emit(rxPkSignal, frame);
 }
 
+}

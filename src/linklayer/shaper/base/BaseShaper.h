@@ -117,12 +117,12 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          * one. Else it saves the state and sends the message immediately when it is
          * received.
          */
-        virtual void requestPacket(){};
+        virtual void requestPacket(){}
 
         /**
          * @brief Returns number of requested messages.
          */
-        virtual int getNumPendingRequests(){return framesRequested;}
+        virtual int getNumPendingRequests(){return (int)framesRequested;}
 
         /**
          * @brief Returns true when there are no pending messages.

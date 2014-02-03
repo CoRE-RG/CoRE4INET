@@ -32,7 +32,7 @@ void AVBIncoming::initialize()
 {
     talker = false;
 
-    for(int i=0; i<gateSize("AVBout"); i++)
+    for(unsigned int i=0; i<(unsigned int)gateSize("AVBout"); i++)
     {
         PortReservation[i] = calcPortUtilisation(i);
         AVBPortReservation[i] = 0;
@@ -56,13 +56,13 @@ void AVBIncoming::handleMessage(cMessage* msg)
 
         if(gateSize("AVBout") > 1)
         {
-            for(int i=0; i<gateSize("AVBout"); i++)
+            for(unsigned int i=0; i<(unsigned int)gateSize("AVBout"); i++)
             {
                 for(std::list<unsigned long>::iterator sid = ListenerGates[i].begin(); sid != ListenerGates[i].end(); sid++)
                 {
                     if(*sid == inFrame->getStreamID())
                     {
-                        sendDelayed(inFrame->dup(), SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", i));
+                        sendDelayed(inFrame->dup(), SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", (int)i));
                     }
                 }
             }
@@ -87,7 +87,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
         else if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
         {
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
-            int portIndex = inFrame->getPortIndex();
+            unsigned int portIndex = inFrame->getPortIndex();
 
             bool saveSIDinGate = true;
             for(std::list<unsigned long>::iterator sid = ListenerGates[portIndex].begin(); sid != ListenerGates[portIndex].end(); sid++)
@@ -138,35 +138,35 @@ void AVBIncoming::handleMessage(cMessage* msg)
     }
 }
 
-int AVBIncoming::calcPortUtilisation(int port)
+unsigned int AVBIncoming::calcPortUtilisation(unsigned int port)
 {
-    BaseShaper *shaper = dynamic_cast<BaseShaper*>(getParentModule()->getSubmodule("phy",port)->getSubmodule("shaper"));
-    cGate *physOutGate = getParentModule()->getSubmodule("phy", port)->getSubmodule("mac")->gate("phys$o");
+    BaseShaper *shaper = dynamic_cast<BaseShaper*>(getParentModule()->getSubmodule("phy",(int)port)->getSubmodule("shaper"));
+    cGate *physOutGate = getParentModule()->getSubmodule("phy", (int)port)->getSubmodule("mac")->gate("phys$o");
     cChannel *avbChannel = physOutGate->findTransmissionChannel();
-    PortBandwith[port] = (avbChannel->getNominalDatarate() / 1000000);
-    return shaper->par("TTEBandwith").longValue();
+    PortBandwith[port] = (unsigned int)(avbChannel->getNominalDatarate() / 1000000);
+    return (unsigned int)shaper->par("TTEBandwith").longValue();
 }
 
-int AVBIncoming::calcBandwith(int FrameSize, int IntervalFrames)
+unsigned int AVBIncoming::calcBandwith(unsigned int FrameSize, unsigned int IntervalFrames)
 {
     //interval = 125us
     double sFrameSize = ((double)IntervalFrames) * ((double)FrameSize); // in byte
     double bitFrameSize = sFrameSize * 8; //in bit
     double BitspSecond = bitFrameSize * 8 * 1000; // in per second
-    return ceil((BitspSecond / 1024.00) / 1024.00 ); //in Mbit/s
+    return (unsigned int)ceil((BitspSecond / 1024.00) / 1024.00 ); //in Mbit/s
 }
 
-int AVBIncoming::getAVBPortReservation(int port)
+unsigned int AVBIncoming::getAVBPortReservation(unsigned int port)
 {
     return AVBPortReservation[port];
 }
 
-void AVBIncoming::setAVBPortReservation(int port, int reservation)
+void AVBIncoming::setAVBPortReservation(unsigned int port, unsigned int reservation)
 {
     AVBPortReservation[port] = reservation;
 }
 
-int AVBIncoming::getPortBandwith(int port)
+unsigned int AVBIncoming::getPortBandwith(unsigned int port)
 {
     return PortBandwith[port];
 }

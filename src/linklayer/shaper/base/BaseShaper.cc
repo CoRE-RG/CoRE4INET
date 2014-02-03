@@ -12,10 +12,12 @@ using namespace CoRE4INET;
 
 void BaseShaper::initialize(int stage)
 {
-    cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
-    outChannel = physOutGate->findTransmissionChannel();
+    if(stage == 0){
+        cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
+        outChannel = physOutGate->findTransmissionChannel();
 
-    WATCH(framesRequested);
+        WATCH(framesRequested);
+    }
 }
 
 int BaseShaper::numInitStages() const{

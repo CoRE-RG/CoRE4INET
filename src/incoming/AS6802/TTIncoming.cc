@@ -113,7 +113,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                     getDisplayString().setTagArg("i2", 0, "status/hourglass");
                 frame = (EtherFrame *) msg;
                 SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
-                event->setAction_time(par("permanence_pit").doubleValue());
+                event->setAction_time((uint32_t)par("permanence_pit").longValue());
                 event->setDestinationGate(gate("schedulerIn"));
                 period->registerEvent(event);
             }

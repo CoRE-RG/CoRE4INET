@@ -114,11 +114,6 @@ void RCBuffer::handleParameterChange(const char* parname){
 void RCBuffer::resetBag()
 {
     Enter_Method("resetBag()");
-    //This is the moment when the message was transmitted execute transmit callbacks if there are some
-    for(std::map<ApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
-            iter != transmitCallbacks.end(); ++iter){
-        iter->first->executeCallback(iter->second);
-    }
 
     //Set icon:
     if(ev.isGUI()){
@@ -130,7 +125,7 @@ void RCBuffer::resetBag()
     {
         //Register scheduler
         SchedulerTimerEvent *timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
-        timerMessage->setTimer(par("bag").doubleValue());
+        timerMessage->setTimer((uint64_t)par("bag").longValue());
         timerMessage->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(timerMessage);
     }

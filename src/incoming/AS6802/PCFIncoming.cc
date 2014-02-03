@@ -40,7 +40,7 @@ void PCFIncoming::handleMessage(cMessage *msg){
     }
 }
 
-void PCFIncoming::handleParameterChange(const char* parname){
+void PCFIncoming::handleParameterChange(__attribute((unused)) const char* parname){
     pcfType = (PCFType)par("pcfType").longValue();
 }
 

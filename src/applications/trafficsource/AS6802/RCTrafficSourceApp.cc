@@ -31,7 +31,7 @@ void RCTrafficSourceApp::initialize()
         ASSERT(timer);
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
         tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
-        event->setTimer(par("interval").doubleValue()/tick);
+        event->setTimer((uint64_t)(par("interval").doubleValue()/tick));
         event->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(event);
     }
@@ -45,7 +45,7 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg){
         Timer *timer = dynamic_cast<Timer*>(msg->getSenderModule());
         ASSERT(timer);
         SchedulerTimerEvent *event = (SchedulerTimerEvent *)msg;
-        event->setTimer(par("interval").doubleValue()/tick);
+        event->setTimer((uint64_t)(par("interval").doubleValue()/tick));
         timer->registerEvent(event);
     }
     else{

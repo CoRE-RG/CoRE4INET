@@ -14,18 +14,24 @@
 // 
 
 #include "SyncBase.h"
-
+#include "../../base/NotifierConsts.h"
 
 using namespace CoRE4INET;
 
+int SyncBase::numInitStages() const
+{
+    return 1;
+}
+
+void SyncBase::initialize(int stage)
+{
+    if(stage==0){
+    }
+}
 
 void SyncBase::notify(SyncNotificationKind kind){
-    SyncNotification *notification = new SyncNotification("SyncNotification", kind);
-    cModule* tteApps = getParentModule()->getSubmodule("app",0);
-    if(tteApps){
-        for(int i=0; i<tteApps->size();i++){
-            sendDirect(notification->dup(),getParentModule()->getSubmodule("app",i)->gate("syncIn"));
-        }
+    if(mayHaveListeners(NF_SYNC_STATE_CHANGE)){
+        SyncNotification notification("SyncNotification", kind);
+        emit(NF_SYNC_STATE_CHANGE, &notification);
     }
-    delete notification;
 }

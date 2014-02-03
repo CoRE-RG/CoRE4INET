@@ -30,6 +30,9 @@ simple DummySync extends Scheduled like ISync
         @class(DummySync);
         @display("i=block/timer");
         
+        //Signal emited when sync state changes (e.g. SYNC, ASYNC, ...)
+        @signal[NF_SYNC_STATE_CHANGE](type=CoRE4INET::SyncNotification);
+        
         // The time in the cycle (in ticks) when the synchronisation is triggered
         int action_time = default(0);
         

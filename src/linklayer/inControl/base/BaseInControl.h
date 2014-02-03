@@ -70,7 +70,7 @@ class BaseInControl : public virtual cSimpleModule, public Timed
          *
          * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname){promiscuous = par("promiscuous").boolValue();}
+        virtual void handleParameterChange(__attribute((unused)) const char* parname){promiscuous = par("promiscuous").boolValue();}
 
         bool isPromiscuous(){return promiscuous;}
     protected:

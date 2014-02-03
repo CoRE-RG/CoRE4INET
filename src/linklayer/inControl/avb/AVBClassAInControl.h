@@ -20,6 +20,7 @@
 
 #include <EtherFrame_m.h>
 #include <SRPFrame_m.h>
+#include <AVBFrame_m.h>
 #include <ModuleAccess.h>
 
 #include <AVBIncoming.h>
@@ -82,11 +83,11 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         }else{
             std::string msgClass = frame->getEncapsulatedPacket()->getClassName();
             std::string msgName = frame->getEncapsulatedPacket()->getName();
-            if(msgClass.compare("CoRE4INET::SRPFrame") == 0)
+            if(dynamic_cast<SRPFrame*>(frame))
             {
                 if(msgName.compare("Talker Advertise"))
                 {
-                    frame->setDest(*(new MACAddress("000000000000")));
+                    frame->setDest(MACAddress::BROADCAST_ADDRESS);
 
                 }
                 SRPFrame *srpFrame = ((SRPFrame*)frame->getEncapsulatedPacket());
@@ -104,12 +105,12 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
 template <class IC>
 bool AVBClassAInControl<IC>::isAVB(EtherFrame *frame)
 {
-    bool result = false;
-    std::string className = frame->getClassName();
-    if(className.compare("CoRE4INET::AVBFrame") == 0)
-        result = true;
-    cComponent::bubble(frame->getClassName());
-    return result;
+    if(dynamic_cast<AVBFrame*>(frame)){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 }

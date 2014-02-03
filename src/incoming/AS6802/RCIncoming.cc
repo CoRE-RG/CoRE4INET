@@ -40,7 +40,7 @@ void RCIncoming::handleMessage(cMessage *msg)
     if(msg->arrivedOn("in")){
         recordPacketReceived((EtherFrame*)msg);
 
-        unsigned long currentTotalTicks = timer->getTotalTicks();
+        uint64_t currentTotalTicks = timer->getTotalTicks();
         //Now check for correct arrival:
         //TODO what todo with JITTER?
         //Check too early
@@ -64,7 +64,7 @@ void RCIncoming::handleMessage(cMessage *msg)
     }
 }
 
-void RCIncoming::handleParameterChange(const char* parname){
+void RCIncoming::handleParameterChange(__attribute((unused)) const char* parname){
     bag = (uint64_t)par("bag").longValue();
 }
 

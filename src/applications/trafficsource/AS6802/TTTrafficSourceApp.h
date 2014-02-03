@@ -32,20 +32,39 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TTTrafficSourceApp : public TrafficSourceAppBase, public Scheduled
+class TTTrafficSourceApp : public TrafficSourceAppBase, public Scheduled, public cListener
 {
     private:
+        /**
+         * @brief frame is only sent every modulo cycle
+         */
         unsigned int moduloCycle;
+
+        /**
+         * @brief true when node is synchronized (Frames will be only sent when node runs synchronous)
+         */
+        bool synchronized;
 
     protected:
         /**
          * @brief Initialization of the module. Sends activator message
          */
         virtual void initialize();
+
         /**
          * @brief Handles message generation
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @ Receives signal from sync module
+         *
+         * @param source signal emitting  component
+         * @param signalID ID of the signal
+         * @param obj representation of the signal
+         */
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
+
     public:
         TTTrafficSourceApp();
 };

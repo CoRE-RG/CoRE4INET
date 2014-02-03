@@ -24,10 +24,10 @@ namespace CoRE4INET {
 
 Define_Module(ApplicationBase);
 
-void ApplicationBase::executeCallback(Callback *cb){
-    Enter_Method("executeCallback(cb)");
-    cb->executeCallback();
-}
+//void ApplicationBase::executeCallback(Callback *cb){
+//    Enter_Method("executeCallback(cb)");
+//    cb->executeCallback();
+//}
 
 void ApplicationBase::handleMessage(cMessage *msg)
 {
@@ -38,7 +38,7 @@ void ApplicationBase::handleMessage(cMessage *msg)
     }
 }
 
-void ApplicationBase::handleParameterChange(const char* parname){
+void ApplicationBase::handleParameterChange(__attribute__((unused)) const char* parname){
     buffers.clear();
     std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator bufferPath = bufferPaths.begin();
@@ -54,7 +54,7 @@ void ApplicationBase::handleParameterChange(const char* parname){
             }
             Buffer *buffer = dynamic_cast<Buffer*> (module);
             if(buffer && buffer->hasPar("ct_id")){
-                buffers[buffer->par("ct_id").longValue()].push_back(buffer);
+                buffers[(uint16_t)buffer->par("ct_id").longValue()].push_back(buffer);
             }
             else{
                 opp_error("Buffer module %s has no ct_id configured!", (*bufferPath).c_str());

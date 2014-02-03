@@ -37,7 +37,7 @@ void TocApp::handleMessage(cMessage *msg)
         Tic *tic=dynamic_cast<Tic*>(ttframe->decapsulate());
         delete msg;
         bubble(tic->getRequest());
-        par("counter").setLongValue(tic->getCount());
+        par("counter").setLongValue((long)tic->getCount());
 
         Toc *toc = new Toc();
         toc->setRoundtrip_start(tic->getRoundtrip_start());
@@ -45,7 +45,7 @@ void TocApp::handleMessage(cMessage *msg)
         delete tic;
 
         CTFrame *frame = new RCFrame("Toc");
-        frame->setCtID(par("ct_id").longValue());
+        frame->setCtID((uint16_t)par("ct_id").longValue());
         frame->encapsulate(toc);
 
         EV << "Answering Tic Message with Toc Message\n";

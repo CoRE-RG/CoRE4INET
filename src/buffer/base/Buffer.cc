@@ -30,8 +30,6 @@ simsignal_t Buffer::rxPkSignal = SIMSIGNAL_NULL;
 
 Buffer::~Buffer(){
     destinationGates.clear();
-    receiveCallbacks.clear();
-    transmitCallbacks.clear();
 }
 
 int Buffer::numInitStages() const
@@ -63,30 +61,6 @@ void Buffer::recordPacketReceived(EtherFrame *frame)
     emit(rxPkSignal, frame);
 }
 
-void Buffer::addReceiveCallback(Callback *cb, ApplicationBase *application)
-{
-    receiveCallbacks[application]=cb;
-}
-
-Callback* Buffer::getReceiveCallback(ApplicationBase *application)
-{
-    if(receiveCallbacks.find(application) == receiveCallbacks.end())
-        return NULL;
-    return receiveCallbacks[application];
-}
-
-void Buffer::addTransmitCallback(Callback *cb, ApplicationBase *application)
-{
-    transmitCallbacks[application]=cb;
-}
-
-Callback* Buffer::getTransmitCallback(ApplicationBase *application)
-{
-    if(transmitCallbacks.find(application) == transmitCallbacks.end())
-        return NULL;
-    return transmitCallbacks[application];
-}
-
 EtherFrame* Buffer::getFrame(){
     return dequeue();
 }
@@ -102,18 +76,14 @@ void Buffer::handleMessage(cMessage *msg)
         EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
         recordPacketReceived(frame);
 
-        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES){
             frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
-        putFrame((EtherFrame*) frame);
-        // Now execute callbacks if there are some
-        for(std::map<ApplicationBase*,Callback*>::const_iterator iter = receiveCallbacks.begin();
-                iter != receiveCallbacks.end(); ++iter){
-            iter->first->executeCallback(iter->second);
         }
+        putFrame((EtherFrame*) frame);
     }
 }
 
-void Buffer::handleParameterChange(const char* parname){
+void Buffer::handleParameterChange(__attribute((unused)) const char* parname){
     destinationGates.clear();
     std::vector<std::string> destinationGatePaths = cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
     for(std::vector<std::string>::iterator destinationGatePath = destinationGatePaths.begin();
@@ -135,7 +105,7 @@ void Buffer::handleParameterChange(const char* parname){
     }
 }
 
-void Buffer::enqueue(EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused)) EtherFrame *newFrame)
 {
     ev << "Buffer::enqueue not implemented" << endl;
     throw;

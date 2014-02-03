@@ -112,10 +112,10 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 }
                 else if(credit < 0)
                 {
-                    AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
+                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
                     Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer(ceil(Wduration /tick));
+                    event->setTimer((uint64_t)ceil(Wduration /tick));
                     event->setDestinationGate(gate("schedulerIn"));
                     getTimer()->registerEvent(event);
                 }
@@ -147,10 +147,10 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 else if(credit < 0)
                 {
                     emit(creditSignal, credit);
-                    AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
+                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
                     Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer(ceil(Wduration / tick));
+                    event->setTimer((uint64_t)ceil(Wduration / tick));
                     event->setDestinationGate(gate("schedulerIn"));
                     getTimer()->registerEvent(event);
                 }
@@ -173,7 +173,7 @@ void AVBBuffer::idleSlope(SimTime duration)
     if(duration >= 0)
     {
         Enter_Method("idleSlope()");
-        AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
+        AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
         credit += ceil( (AVBReservation * 1024.00 * 1024.00) * duration.dbl() );
         emit(creditSignal, credit);
         if(credit > 0 && msgCnt == 0 && !inTransmission) resetCredit();
@@ -185,7 +185,7 @@ void AVBBuffer::interferenceSlope(SimTime duration)
     if(duration >= 0)
     {
         Enter_Method("interferenceSlope()");
-        AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
+        AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
         credit +=ceil( (AVBReservation * 1024.00 * 1024.00) * duration.dbl() );
         emit(creditSignal, credit);
     }
@@ -195,8 +195,8 @@ void AVBBuffer::sendSlope(SimTime duration)
 {
     Enter_Method("sendSlope()");
 
-    AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
-    int portBandwith = avbCTC->getPortBandwith(this->getIndex());
+    AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
+    unsigned int portBandwith = avbCTC->getPortBandwith((unsigned int)this->getIndex());
     emit(creditSignal, credit);
     credit -= ceil( ( (portBandwith - AVBReservation) * 1024.00 * 1024.00) * duration.dbl() );
     inTransmission = false;
@@ -204,10 +204,10 @@ void AVBBuffer::sendSlope(SimTime duration)
     {
         if(credit < 0)
         {
-            AVBReservation = avbCTC->getAVBPortReservation(this->getIndex());
+            AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
             Wduration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer(ceil(Wduration / tick));
+            event->setTimer((uint64_t)ceil(Wduration / tick));
             event->setDestinationGate(gate("schedulerIn"));
             getTimer()->registerEvent(event);
         }

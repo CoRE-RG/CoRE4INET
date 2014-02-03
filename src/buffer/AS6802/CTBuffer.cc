@@ -28,7 +28,7 @@ CTBuffer::~CTBuffer(){
 }
 
  void CTBuffer::putFrame(EtherFrame* frame){
-    int priority = par("priority").longValue();
+    short priority = (short) par("priority").longValue();
     if(frame && priority>=0){
         frame->setSchedulingPriority(priority);
     }

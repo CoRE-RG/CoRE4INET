@@ -31,7 +31,31 @@ namespace CoRE4INET {
 class SyncBase : public Scheduled
 {
     protected:
+        /**
+         * @brief Initializes the module
+         *
+         * @param stage The stages. Module initializes when stage==0
+         */
+        virtual void initialize(int stage);
+
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return Always returns 1
+         */
+        virtual int numInitStages() const;
+
+        /**
+         * @brief Helper function to notify attached listeners about status change
+         *
+         * @param kind kind of status change
+         */
         void notify(SyncNotificationKind kind);
+
+        /**
+         * Signal that is emitted every time a frame was sent.
+         */
+        static simsignal_t statusSignal;
 };
 }
 

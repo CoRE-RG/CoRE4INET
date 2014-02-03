@@ -59,6 +59,11 @@ class Task
         }
 
         /**
+         * @brief Destructor
+         */
+        virtual ~Task(){}
+
+        /**
          * @brief Setter for the function pointer.
          *
          * @param functionPointer the funtion pointer to be invoked in the task

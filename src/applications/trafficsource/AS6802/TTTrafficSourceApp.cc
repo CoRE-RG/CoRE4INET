@@ -14,10 +14,11 @@
 // 
 
 #include "TTTrafficSourceApp.h"
-#include <CTFrame_m.h>
-#include "TTEScheduler.h"
+#include "TTFrame_m.h"
+#include "SyncNotification_m.h"
 
-#include <ModuleAccess.h>
+#include "ModuleAccess.h"
+#include "../../../base/NotifierConsts.h"
 
 namespace CoRE4INET {
 
@@ -34,17 +35,20 @@ void TTTrafficSourceApp::initialize()
         Scheduled::initialize();
 
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-        event->setAction_time(par("action_time").doubleValue()/findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue());
+        event->setAction_time((uint32_t)(par("action_time").doubleValue()/findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue()));
         event->setDestinationGate(gate("schedulerIn"));
         period->registerEvent(event);
     }
+    synchronized = false;
+    ASSERT2(findContainingNode(this)!=NULL, "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
+    findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
 }
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg){
 
     if(msg->arrivedOn("schedulerIn")){
         moduloCycle++;
-        if(moduloCycle==(unsigned int)par("modulo").longValue()){
+        if(synchronized && moduloCycle==(unsigned int)par("modulo").longValue()){
             sendMessage();
             moduloCycle=0;
         }
@@ -58,5 +62,19 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg){
     }
 }
 
+void TTTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+{
+    Enter_Method_Silent();
+    if (dynamic_cast<SyncNotification *>(obj))
+    {
+        SyncNotification *notification = (SyncNotification *)obj;
+        if(notification->getKind()==SYNC){
+            synchronized=true;
+        }
+        else{
+            synchronized=false;
+        }
+    }
+}
 
 } //namespace

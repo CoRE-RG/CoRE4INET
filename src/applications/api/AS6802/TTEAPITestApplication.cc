@@ -27,7 +27,7 @@ void testCallback(void* arg){
     ev << "CALLBACK EXECUTED! " << teststring << endl << endl;
 }
 
-unsigned int main(){
+int main(){
     //tte_init();
     tte_buffer_t testbuffer;
     if(tte_get_ct_output_buf(0, 100, &testbuffer) != ETT_SUCCESS){

@@ -25,7 +25,7 @@
 #include "Timer.h"
 #include "PCFrame_m.h"
 
-using namespace CoRE4INET;
+namespace CoRE4INET {
 
 /**
  * @brief Replaces all occurrences of a string by another string.
@@ -110,5 +110,8 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
  * @author Till Steinbach
  */
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler);
+
+}
+
 
 #endif /* HELPERFUNCTIONS_H_ */

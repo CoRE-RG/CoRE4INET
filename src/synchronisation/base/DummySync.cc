@@ -26,17 +26,23 @@ Define_Module( DummySync);
 
 int DummySync::numInitStages() const
 {
-    return 3;
+    if(SyncBase::numInitStages()>3){
+        return SyncBase::numInitStages();
+    }
+    else{
+        return 3;
+    }
 }
 
 void DummySync::initialize(int stage)
 {
+    SyncBase::initialize(stage);
     if(stage==1)
     {
         Scheduled::initialize();
 
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
-        event->setAction_time(par("action_time").longValue());
+        event->setAction_time((uint32_t)par("action_time").longValue());
         event->setDestinationGate(gate("schedulerIn"));
         period->registerEvent(event);
     }
@@ -55,7 +61,7 @@ void DummySync::handleMessage(cMessage *msg)
         period->registerEvent(event);
 
         if(period->getCycles()>0){
-            uint32_t cycleTicks = period->par("cycle_ticks").longValue();
+            uint32_t cycleTicks = (uint32_t)period->par("cycle_ticks").longValue();
             simtime_t tick = oscillator->par("tick").doubleValue();
 
             int64_t modticks = ((int64_t)(simTime()/tick)-par("action_time").longValue())%cycleTicks;
@@ -63,7 +69,7 @@ void DummySync::handleMessage(cMessage *msg)
                 modticks=modticks-cycleTicks;
             modticks+=uniform(-par("precission").doubleValue()/2, par("precission").doubleValue()/2)/tick;
 
-            timer->clockCorrection(modticks);
+            timer->clockCorrection((int32_t)modticks);
         }
     }
 }

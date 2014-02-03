@@ -61,7 +61,7 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
         }
     }
     frames.insert(newFrame);
-    setFilled(frames.length());
+    setFilled((unsigned int)frames.length());
     emit(queueLengthSignal, (unsigned int)frames.length());
 }
 
@@ -69,7 +69,7 @@ EtherFrame * QueueBuffer::dequeue()
 {
     if (frames.length() > 0)
     {
-        setFilled(frames.length() - 1);
+        setFilled((unsigned int)(frames.length() - 1));
         emit(queueLengthSignal, (unsigned int)(frames.length() - 1));
         return (EtherFrame*) frames.pop();
     }
