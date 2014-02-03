@@ -24,10 +24,10 @@ namespace CoRE4INET {
 
 Define_Module(ApplicationBase);
 
-void ApplicationBase::executeCallback(Callback *cb){
-    Enter_Method("executeCallback(cb)");
-    cb->executeCallback();
-}
+//void ApplicationBase::executeCallback(Callback *cb){
+//    Enter_Method("executeCallback(cb)");
+//    cb->executeCallback();
+//}
 
 void ApplicationBase::handleMessage(cMessage *msg)
 {

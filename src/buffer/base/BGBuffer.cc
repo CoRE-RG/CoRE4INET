@@ -56,11 +56,6 @@ void BGBuffer::handleMessage(cMessage *msg)
             if(gate("out")->isConnected()){
                 send(outgoingMessage->dup(),"out");
             }
-            //TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback
-            for(std::map<ApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
-                    iter != transmitCallbacks.end(); ++iter){
-                iter->first->executeCallback(iter->second);
-            }
             recordPacketSent(outgoingMessage);
             delete msg;
         }
@@ -73,11 +68,6 @@ void BGBuffer::handleMessage(cMessage *msg)
             {
                 send(outgoingMessage->dup(),"out");
 
-                //TODO: Message was not really transmitted! Maybe we find a better moment to execute the callback
-                for(std::map<ApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
-                        iter != transmitCallbacks.end(); ++iter){
-                    iter->first->executeCallback(iter->second);
-                }
                 recordPacketSent(outgoingMessage);
                 delete msg;
             }

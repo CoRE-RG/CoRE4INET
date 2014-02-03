@@ -40,18 +40,13 @@ typedef void(*cbFunc)(void *);
  *
  * @author Till Steinbach
  */
-class Callback
+class Callback: public cListener
 {
     protected:
         /**
          * @brief Function pointer of the callback.
          */
         void (*fn)(void *);
-
-        /**
-         * @brief Pointer to the Buffer that issues the Callback.
-         */
-        Buffer *buffer;
 
         /**
          * @brief Pointer to the function args.
@@ -66,9 +61,9 @@ class Callback
         /**
          * @brief Constructor
          */
-        Callback(Buffer *buffer){
+        Callback(Buffer *buffer, simsignal_t signal){
             argSet=false;
-            this->buffer=buffer;
+            buffer->subscribe(signal,this);
         }
         /**
          * @brief Destructor
@@ -118,7 +113,7 @@ class Callback
          *
          * If method is called the stored function pointer is invoked.
          */
-        virtual void executeCallback(){
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj){
             fn(arg);
         }
 };
@@ -135,7 +130,7 @@ class APICallback: public Callback
         /**
          * @brief Constructor
          */
-        APICallback(Buffer *buffer) : Callback(buffer){
+        APICallback(Buffer *buffer, simsignal_t signal) : Callback(buffer, signal){
         }
 
         /**
@@ -143,7 +138,7 @@ class APICallback: public Callback
          *
          * If method is called the stored function pointer is invoked.
          */
-        virtual void executeCallback();
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
 };
 
 }

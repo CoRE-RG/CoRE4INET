@@ -100,12 +100,6 @@ void TTBuffer::handleMessage(cMessage *msg)
         {
             recordPacketSent(outgoingMessage);
             delete outgoingMessage;
-
-            // Now execute transmit callbacks if there are some
-            for(std::map<ApplicationBase*,Callback*>::const_iterator iter = transmitCallbacks.begin();
-                    iter != transmitCallbacks.end(); ++iter){
-                iter->first->executeCallback(iter->second);
-            }
         }
         //Reregister scheduler
         static_cast<SchedulerActionTimeEvent *>(msg)->setNext_cycle(true);

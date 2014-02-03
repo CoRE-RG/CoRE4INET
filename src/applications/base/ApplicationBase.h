@@ -49,7 +49,7 @@ class ApplicationBase : public virtual cSimpleModule
          *
          * @param cb The Callback to execute
          */
-        virtual void executeCallback(Callback *cb);
+        //virtual void executeCallback(Callback *cb);
 
         /**
          * @brief resets the bag on incoming RC-Frames (on RCin)

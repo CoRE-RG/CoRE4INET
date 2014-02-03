@@ -80,6 +80,8 @@ class TTEAPIApplicationBase : public ApplicationBase, public cListener
 {
     private:
         bool synchronized;
+        std::map<Buffer*, APICallback*>receiveCallbacks;
+        std::map<Buffer*, APICallback*>transmitCallbacks;
     private:
         /**
          * @brief initializes the module.

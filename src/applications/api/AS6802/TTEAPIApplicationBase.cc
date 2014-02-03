@@ -437,27 +437,27 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf,
     TTEAPIPriv *priv = (TTEAPIPriv*)buf->priv;
     switch(var_id){
         case TTE_BUFVAR_RECEIVE_CB:{
-            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
+            APICallback *cb = receiveCallbacks[priv->buffer];
             if(cb == NULL){
-                cb = new APICallback(priv->buffer);
-                priv->buffer->addReceiveCallback(cb, this);
+                cb = new APICallback(priv->buffer, registerSignal("rxPk"));
+                receiveCallbacks[priv->buffer] = cb;
             }
             cb->setFunctionPointer((void(*)(void *))value);
             break;
         }
         case TTE_BUFVAR_TRANSMIT_CB:{
-            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
+            APICallback *cb = transmitCallbacks[priv->buffer];
             if(cb == NULL){
-                cb = new APICallback(priv->buffer);
-                priv->buffer->addTransmitCallback(cb, this);
+                cb = new APICallback(priv->buffer, registerSignal("rxPk"));
+                transmitCallbacks[priv->buffer] = cb;
             }
             cb->setFunctionPointer((void(*)(void *))value);
             break;
         }
         case TTE_BUFVAR_CB_ARG:{
-            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
+            APICallback *cb = receiveCallbacks[priv->buffer];
             if(cb == NULL){
-                cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
+                APICallback *cb = transmitCallbacks[priv->buffer];
                 if(cb == NULL){
                     return ETT_NULLPTR;
                 }
@@ -483,7 +483,7 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
     TTEAPIPriv *priv = (TTEAPIPriv*)buf->priv;
     switch(var_id){
         case TTE_BUFVAR_RECEIVE_CB:{
-            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
+            APICallback *cb = receiveCallbacks[priv->buffer];
             if(cb == NULL){
                 return ETT_NULLPTR;
             }
@@ -492,7 +492,7 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
             break;
         }
         case TTE_BUFVAR_TRANSMIT_CB:{
-            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
+            APICallback *cb = transmitCallbacks[priv->buffer];
             if(cb == NULL){
                 return ETT_NULLPTR;
             }
@@ -501,9 +501,9 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf,
             break;
         }
         case TTE_BUFVAR_CB_ARG:{
-            APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getReceiveCallback(this));
+            APICallback *cb = receiveCallbacks[priv->buffer];
             if(cb == NULL){
-                APICallback *cb = dynamic_cast<APICallback*>(priv->buffer->getTransmitCallback(this));
+                APICallback *cb = transmitCallbacks[priv->buffer];
                 if(cb == NULL){
                     return ETT_NULLPTR;
                 }
