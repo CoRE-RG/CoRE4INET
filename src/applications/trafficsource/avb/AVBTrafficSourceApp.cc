@@ -100,11 +100,8 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
     }
     else if(msg->arrivedOn("SRPin"))
     {
-        std::string msgClass = msg->getClassName();
-        //TODO fix that
-        if(msgClass.compare("CoRE4INET::SRPFrame") == 0)
+        if(SRPFrame *inFrame = dynamic_cast<SRPFrame*>(msg))
         {
-            SRPFrame *inFrame = (SRPFrame*) msg;
             std::string srpType = inFrame->getName();
             bubble(inFrame->getName());
             if(talker)
