@@ -53,7 +53,17 @@ class RCShaper : public TC, public virtual Timed
         /**
          * @brief Dedicated queue for each priority of rate-constrained messages
          */
-        cQueue rcQueue[NUM_RC_PRIORITIES];
+        std::vector<cQueue> rcQueue;
+
+        /**
+         * @brief caches numRCpriority parameter for faster execution
+         */
+        size_t numRcPriority;
+    protected:
+        /**
+         * @brief Signal that is emitted when the queue length of time-triggered messages changes.
+         */
+        std::vector<simsignal_t>rcQueueLengthSignals;
     protected:
         /**
          * Initializes the module
@@ -138,12 +148,6 @@ class RCShaper : public TC, public virtual Timed
 
 template <class TC>
 RCShaper<TC>::RCShaper(){
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
-    {
-        char strBuf[64];
-        snprintf(strBuf,64,"RC Priority %d Messages", i);
-        rcQueue[i].setName(strBuf);
-    }
 }
 
 template <class TC>
@@ -156,6 +160,26 @@ void RCShaper<TC>::initialize(int stage)
     TC::initialize(stage);
     if(stage==0){
         Timed::initialize();
+
+        numRcPriority = par("numRCpriority").longValue();
+        for (unsigned int i = 0; i < numRcPriority; i++)
+        {
+            char strBuf[32];
+            cQueue queue;
+            snprintf(strBuf,32,"RC Priority %d Messages", i);
+            queue.setName(strBuf);
+            rcQueue.push_back(queue);
+
+            snprintf(strBuf,32,"rc%dQueueLength", i);
+            simsignal_t signal = registerSignal(strBuf);
+
+            cProperty *statisticTemplate = getProperties()->get("statisticTemplate","rcQueueLength");
+            ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
+
+            rcQueueLengthSignals.push_back(signal);
+            //Send initial signal to create statistic
+            cComponent::emit(signal, (unsigned long)queue.length());
+        }
     }
 }
 
@@ -208,9 +232,10 @@ template <class TC>
 void RCShaper<TC>::enqueueMessage(cMessage *msg){
     if(msg->arrivedOn("RCin")){
        int priority = msg->getSenderModule()->par("priority").longValue();
-       if (priority > 0 && priority < NUM_RC_PRIORITIES)
+       if (priority > 0 && (unsigned int)priority < numRcPriority)
        {
            rcQueue[priority].insert(msg);
+           cComponent::emit(rcQueueLengthSignals[priority], (unsigned long)rcQueue[priority].length());
            TC::notifyListeners();
        }
        else
@@ -244,11 +269,12 @@ cMessage* RCShaper<TC>::pop()
 {
     Enter_Method("pop()");
     //RCFrames
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < numRcPriority; i++)
     {
         if (!rcQueue[i].isEmpty())
         {
             EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
+            cComponent::emit(rcQueueLengthSignals[i], (unsigned long)rcQueue[i].length());
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
             if (rcBuffer)
@@ -269,7 +295,7 @@ cMessage* RCShaper<TC>::front()
 {
     Enter_Method("front()");
     //RCFrames
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < numRcPriority; i++)
     {
         if (!rcQueue[i].isEmpty())
         {
@@ -284,7 +310,7 @@ template <class TC>
 bool RCShaper<TC>::isEmpty()
 {
     bool empty = true;
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < numRcPriority; i++)
     {
         empty &= rcQueue[i].isEmpty();
     }
@@ -296,7 +322,7 @@ template <class TC>
 void RCShaper<TC>::clear()
 {
     TC::clear();
-    for (unsigned int i = 0; i < NUM_RC_PRIORITIES; i++)
+    for (unsigned int i = 0; i < numRcPriority; i++)
     {
         rcQueue[i].clear();
     }

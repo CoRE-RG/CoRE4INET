@@ -21,19 +21,14 @@
 /**
  * Check for minimal OMNeT++ Version requirements
  */
-#if OMNETPP_VERSION < 0x0402
-#  error At least OMNeT++/OMNEST version 4.2 required
+#if OMNETPP_VERSION < 0x0404
+#  error At least OMNeT++/OMNEST version 4.4 required
 #endif
 
 /**
  * Definition of CORE4INET version
  */
 #define CoRE4INET_VERSION 0x0200
-
-/**
- * Maximum number of priorities allowed for rate-constrained messages
- */
-#define NUM_RC_PRIORITIES 10
 
 /**
  * Delimiters for vectors

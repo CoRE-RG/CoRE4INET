@@ -156,6 +156,8 @@ void BEShaper<TC>::initialize(int stage)
     TC::initialize(stage);
     if(stage==0){
         beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
+        //Send initial signal to create statistic
+        cComponent::emit(beQueueLengthSignal, (unsigned long)beQueue.length());
     }
 }
 

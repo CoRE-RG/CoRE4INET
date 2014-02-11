@@ -212,6 +212,8 @@ void TTShaper<TC>::initialize(int stage)
     if(stage==0){
         Timed::initialize();
         ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
+        //Send initial signal to create statistic
+        cComponent::emit(ttQueueLengthSignal, (unsigned long)ttQueue.length());
     }
     else if(stage==2){
         //Now the ttBuffers can be initialized as all TTBuffers should have registred their events

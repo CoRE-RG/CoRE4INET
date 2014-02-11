@@ -159,6 +159,8 @@ void PCFShaper<TC>::initialize(int stage)
     if(stage==0){
         Timed::initialize();
         pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
+        //Send initial signal to create statistic
+        cComponent::emit(pcfQueueLengthSignal, (unsigned long)pcfQueue.length());
     }
 }
 
