@@ -23,6 +23,7 @@ import core4inet.linklayer.TTEPHYPort;
 import core4inet.utilities.modules.CheckedBuffer;
 
 import inet.linklayer.IMACRelayUnit;
+import inet.linklayer.ethernet.switch.IMACAddressTable;
 
 //
 // Module for a TTEthernet Switch with variable number of ports.
@@ -48,12 +49,16 @@ module TTEEtherSwitch
         inout ethg[] @loose @labels(EtherFrame-conn);
     submodules:
         // Implementation of the best-effort forwarding part
-        beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
+        beswitch: <default("MACRelayUnit")> like IMACRelayUnit {
             parameters:
                 @display("p=100,50");
             gates:
                 ifIn[sizeof(ethg)];
                 ifOut[sizeof(ethg)];
+        }
+        //The mac table associated with the be switch
+        macTable: <default("MACAddressTable")> like IMACAddressTable {
+            @display("p=170,50");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEPHYPort {
@@ -65,7 +70,7 @@ module TTEEtherSwitch
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=170,50");
+                @display("p=240,50");
         }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
@@ -75,7 +80,7 @@ module TTEEtherSwitch
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
-                @display("p=240,50");
+                @display("p=310,50");
         }
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=170,130");
