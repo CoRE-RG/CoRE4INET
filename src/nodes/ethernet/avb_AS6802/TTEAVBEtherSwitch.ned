@@ -29,6 +29,7 @@ module TTEAVBEtherSwitch
         @node();
         @display("i=block/switch;bgb=1280,768");
         double hardware_delay @unit(s) = default(8us);
+        int numBuffer = default(0);
     gates:
         // Physical ports of the switch
         inout ethg[] @loose;
