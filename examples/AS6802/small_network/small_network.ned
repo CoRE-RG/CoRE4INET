@@ -15,7 +15,7 @@
 
 package core4inet.examples.AS6802.small_network;
 
-import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import inet.nodes.ethernet.Eth100M;
 
 //
 // Small sample network with three hosts and one switch that shows how to 
@@ -28,19 +28,6 @@ network small_network
     parameters:
         @display("bgb=,,white");
         double measure_interval @unit(s) = default(1s);
-    
-    types:
-        //
-        // All links are configured with 100MBit per second and variable delay
-        //
-        channel cable extends ned.DatarateChannel
-        {
-            datarate = 100Mbps;
-            //bit error rate (probability (0.0-1.0) per bit)  
-            ber = 0;
-            //packet error rate (probability (0.0-1.0) per packet)  
-            per = 0;
-        }
     submodules:
         node1: Node1 {
             @display("p=39,70");
@@ -64,7 +51,7 @@ network small_network
         //
         // The example uses a simple star topology
         //
-        node1.ethg <--> cable {  delay = 200ns; } <--> switch1.ethg[0];
-        node2.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
-        node3.ethg <--> cable {  delay = 50ns; } <--> switch1.ethg[2];
+        node1.ethg <--> Eth100M {  length = 20m; } <--> switch1.ethg[0];
+        node2.ethg <--> Eth100M {  length = 10m; } <--> switch1.ethg[1];
+        node3.ethg <--> Eth100M {  length = 5m; } <--> switch1.ethg[2];
 }
