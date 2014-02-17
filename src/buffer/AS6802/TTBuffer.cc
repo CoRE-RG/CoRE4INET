@@ -26,7 +26,7 @@ Define_Module( TTBuffer);
 
 TTBuffer::TTBuffer()
 {
-    actionTimeEvent = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
+    actionTimeEvent = NULL;
 }
 
 TTBuffer::~TTBuffer()
@@ -51,10 +51,11 @@ void TTBuffer::initialize(int stage)
         //Register Event
         Scheduled::initialize();
 
+        actionTimeEvent = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
         //Dirty FIX
         //TODO find out what is wrong here!
-        if(actionTimeEvent->isScheduled())
-            cancelEvent(actionTimeEvent);
+        //if(actionTimeEvent->isScheduled())
+        //    cancelEvent(actionTimeEvent);
         actionTimeEvent->setAction_time((uint32_t)par("sendWindowStart").longValue());
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
         nextAction = period->registerEvent(actionTimeEvent);
