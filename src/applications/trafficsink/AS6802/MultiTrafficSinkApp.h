@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TRAFFICSINK_H_
-#define __CORE4INET_TRAFFICSINK_H_
+#ifndef __CORE4INET_MULTITRAFFICSINK_H_
+#define __CORE4INET_MULTITRAFFICSINK_H_
 
 #include <omnetpp.h>
 #include "ApplicationBase.h"
@@ -30,20 +30,15 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TrafficSinkApp : public ApplicationBase
+class MultiTrafficSinkApp : public ApplicationBase
 {
     private:
         /**
-         * Signal that is emitted every time a frame was sent.
+         * Map of Signals that are emitted every time a frame with a specific CT-ID was sent.
          */
-        static simsignal_t rxPkSignal;
+        static std::map<uint16_t,simsignal_t> rxPkSignal;
 
     protected:
-        /**
-         * @brief Initialization of the module.
-         */
-        virtual void initialize();
-
         /**
          * @brief collects incoming message and writes statistics.
          *

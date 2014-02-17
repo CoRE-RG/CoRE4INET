@@ -15,18 +15,14 @@
 
 #include "TrafficSinkApp.h"
 
-#include "CTFrame.h"
-
 namespace CoRE4INET {
 
 Define_Module(TrafficSinkApp);
 
 simsignal_t TrafficSinkApp::rxPkSignal = SIMSIGNAL_NULL;
-simsignal_t TrafficSinkApp::latencySignal = SIMSIGNAL_NULL;
 
 void TrafficSinkApp::initialize(){
     rxPkSignal = registerSignal("rxPk");
-    latencySignal = registerSignal("latency");
 }
 
 void TrafficSinkApp::handleMessage(cMessage *msg)
@@ -35,9 +31,9 @@ void TrafficSinkApp::handleMessage(cMessage *msg)
 
     if(msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
     {
-        CTFrame *ctframe = dynamic_cast<CTFrame*>(msg);
-        if(ctframe){
-            emit(rxPkSignal, ctframe);
+        EtherFrame *frame = dynamic_cast<EtherFrame*>(msg);
+        if(frame){
+            emit(rxPkSignal, frame);
         }
     }
     delete msg;
