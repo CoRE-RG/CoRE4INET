@@ -66,7 +66,6 @@ SM_INIT::SM_INIT(SM *s, FILE *f) {
 
 	clock_stack = new map<uint32, pair<uint32, uint64> >;
 
-	ctid = sm->par("id").longValue();
 
 	//after Power ON  and Initialization READY
 	//duration=sm_listen_timeout;
@@ -2323,7 +2322,7 @@ void SM_FLOOD::handleMessage(cMessage *message) {
 				}
 
 				p->setDisplayString("b=15,15,rect,white,blue,5");
-				//p->setCtID(ctid);
+
 				sm->sendDirect(
 						p,
 						sm->getParentModule()->getSubmodule("vl_pcf_out_CA")->gate(
