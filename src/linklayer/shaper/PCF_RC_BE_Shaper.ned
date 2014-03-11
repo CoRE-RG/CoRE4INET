@@ -36,8 +36,7 @@ simple PCF_RC_BE_Shaper extends BE_Shaper
 		//Statistic of the queue length of protocol control frames
         @statistic[pcfQueueLength](title="PCF-Queue Length"; record=vector; interpolationmode=sample-hold);
         //Signal emitted when queue length of the rc queue changes, contains new queue length
-        //TODO: Add wildcard in 4.4.1! @signal[rc*QueueLength](type=unsigned long);
-        @signal[rcQueueLength](type=unsigned long);
+        @signal[rc*QueueLength](type=unsigned long);
         //Statistic of the queue length of rate-constrained frames
         @statisticTemplate[rcQueueLength](title="RC-Queue Length ($name)"; record=vector; interpolationmode=sample-hold);
         
