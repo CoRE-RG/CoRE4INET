@@ -41,12 +41,15 @@ simple SM like ISync
     //network.
     int precision=default(80);
 	
-	//Hardware delay for the device /Endsystem or Switch/, set this variable to null for simplicity
+	//Hardware delay of the device /Endsystem or Switch/, which has been configured as CM in the cluster
+	//This parameter is used for the calculation of ca_round_trip.
 	int hardware_delay=default(0);
 	
 	//The synchronization master/client shall wait for a duration of clock_corr_delay before it modifies its local clock
 	//(local_clock) using the value of the calculated clock correction term (clock_corr).
 	//(Eq. 20), Page 46 of 108 SAE AS6802, clock _ correction_ delay > acceptance _ window
+	//single FT - clock_corr_delay=(2*precision)+1;
+	//double FT - clock_corr_delay=(3*precision)+1;
 	int clock_corr_delay=(2*precision)+1;
 
 	//The max_transmission_delay is a single cluster-wide parameter.This means that any two
@@ -75,7 +78,8 @@ simple SM like ISync
     int bit_index=default(0);  
   	
 	//The compression_master_delay is the cumulative static delay through the compression master, imposed by the
-    //compression function and the dispatch delay. See Eq. 26, Page 47 of 108 , SAE AS6802
+    //compression function and the dispatch delay. See Eq. 26, Page 47 of 108 , SAE AS6802.
+    //NOTE: The hardware_delay of the device that has been configured as a CM, must be added also to the compression_master_delay
 	int compression_master_delay=default(246);
 	
 	//Length of PCF Frame
@@ -111,6 +115,7 @@ simple SM like ISync
 	int smc_scheduled_receive_pit =default(630);
 	
 	//The synchronous clique detection function will be executed upon reaching the smc_sync_eval_pit
+	//NOTE: double FT :smc_sync_eval_pit = smc_scheduled_receive_pit+((3 * precision) / 2);
 	int smc_sync_eval_pit=smc_scheduled_receive_pit+precision;
 	
 	//The asynchronous clique detection function will be executed upon reaching the smc_async_eval_pit
@@ -126,6 +131,8 @@ simple SM like ISync
 	int sm_dispatch_pit=default(0);
 	
 	//See Figure 24, Page 44 of 108 , SAE AS6802
+	//single FT -smc_clock_corr_pit=smc_scheduled_receive_pit+2*precision+1;
+	//double FT -smc_clock_corr_pit=smc_scheduled_receive_pit+3*precision+1;
 	int smc_clock_corr_pit=smc_scheduled_receive_pit+2*precision+1;
 	
 	// See smc_scheduled_receive_pit, not used
