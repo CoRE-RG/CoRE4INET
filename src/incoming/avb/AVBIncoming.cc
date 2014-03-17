@@ -143,7 +143,12 @@ unsigned int AVBIncoming::calcPortUtilisation(unsigned int port)
     BaseShaper *shaper = dynamic_cast<BaseShaper*>(getParentModule()->getSubmodule("phy",(int)port)->getSubmodule("shaper"));
     cGate *physOutGate = getParentModule()->getSubmodule("phy", (int)port)->getSubmodule("mac")->gate("phys$o");
     cChannel *avbChannel = physOutGate->findTransmissionChannel();
-    PortBandwith[port] = (unsigned int)(avbChannel->getNominalDatarate() / 1000000);
+    if(avbChannel){
+        PortBandwith[port] = (unsigned int)(avbChannel->getNominalDatarate() / 1000000);
+    }
+    else{
+        PortBandwith[port] = 0;
+    }
     return (unsigned int)shaper->par("TTEBandwith").longValue();
 }
 
