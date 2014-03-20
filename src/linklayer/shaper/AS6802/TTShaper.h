@@ -380,8 +380,7 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
 
     std::map<uint64_t, TTBuffer*>::iterator buf = ttBuffers.find(sendWindowStart);
     if(buf!=ttBuffers.end()){
-        //TODO ERROR
-        opp_error("ERROR!");
+        opp_error("ERROR! You cannot schedule two messages with the same send window!");
     }
     else{
         //TODO check overlapping
