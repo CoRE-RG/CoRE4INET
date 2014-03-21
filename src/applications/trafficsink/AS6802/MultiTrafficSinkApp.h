@@ -16,8 +16,7 @@
 #ifndef __CORE4INET_MULTITRAFFICSINK_H_
 #define __CORE4INET_MULTITRAFFICSINK_H_
 
-#include <omnetpp.h>
-#include "ApplicationBase.h"
+#include "base/ApplicationBase.h"
 
 namespace CoRE4INET {
 
