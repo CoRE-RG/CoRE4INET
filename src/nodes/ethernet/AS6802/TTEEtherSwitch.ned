@@ -23,7 +23,7 @@ import core4inet.linklayer.TTEPHYPort;
 import core4inet.utilities.modules.CheckedBuffer;
 
 import inet.linklayer.IMACRelayUnit;
-import inet.linklayer.ethernet.switch.IMACAddressTable;
+import inet.linklayer.IMACAddressTable;
 
 //
 // Module for a TTEthernet Switch with variable number of ports.

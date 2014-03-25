@@ -13,7 +13,7 @@ import core4inet.linklayer.SRPTrafficHandle;
 import core4inet.utilities.modules.CheckedBuffer;
 
 import inet.linklayer.IMACRelayUnit;
-import inet.linklayer.ethernet.switch.IMACAddressTable;
+import inet.linklayer.IMACAddressTable;
 
 //
 // Module for a TTEAVBEthernet Switch.
