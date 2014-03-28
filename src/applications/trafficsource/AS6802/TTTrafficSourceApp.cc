@@ -37,6 +37,11 @@ void TTTrafficSourceApp::initialize()
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
         event->setAction_time((uint32_t)(par("action_time").doubleValue()/findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue()));
         event->setDestinationGate(gate("schedulerIn"));
+
+        if(event->getAction_time() >= (uint32_t)period->par("cycle_ticks").longValue()){
+            opp_error("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(), period->par("cycle_ticks").longValue());
+        }
+
         period->registerEvent(event);
     }
     synchronized = false;

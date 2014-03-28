@@ -15,7 +15,7 @@
 
 package core4inet.examples.AS6802.rt_tictoc;
 
-import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import inet.nodes.ethernet.Eth100M;
 
 //
 // Small sample network with two hosts and one switch that shows how to 
@@ -27,18 +27,6 @@ import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
 network rt_tictoc
 {
     @display("bgb=,,white");
-    types:
-        //
-        // All links are configured with 100MBit per second and variable delay
-        //
-        channel cable extends ned.DatarateChannel
-        {
-            datarate = 100Mbps;
-            //bit error rate (probability (0.0-1.0) per bit)  
-            ber = 0;
-            //packet error rate (probability (0.0-1.0) per packet)  
-            per = 0;
-        }
     submodules:
         //Device hosting the Tic application
         tic: Tic {
@@ -59,6 +47,6 @@ network rt_tictoc
         //
         // The example uses a simple star topology
         //
-        tic.ethg <--> cable {  delay = 200ns; } <--> switch1.ethg[0];
-        toc.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
+        tic.ethg <--> Eth100M {  length = 20m; } <--> switch1.ethg[0];
+        toc.ethg <--> Eth100M {  length = 20m; } <--> switch1.ethg[1];
 }

@@ -17,7 +17,7 @@
 #define __CORE4INET_TOCAPP_H_
 
 #include <omnetpp.h>
-#include "ApplicationBase.h"
+#include "base/ApplicationBase.h"
 
 namespace CoRE4INET {
 

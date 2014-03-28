@@ -17,7 +17,7 @@
 #define __CORE4INET_TICAPP_H_
 
 #include <omnetpp.h>
-#include "ApplicationBase.h"
+#include "base/ApplicationBase.h"
 
 #include <Scheduled.h>
 

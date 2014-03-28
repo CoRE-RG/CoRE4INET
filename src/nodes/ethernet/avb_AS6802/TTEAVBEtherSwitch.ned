@@ -10,8 +10,10 @@ import core4inet.incoming.avb.AVBIncoming;
 import core4inet.buffer.avb.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
 import core4inet.linklayer.SRPTrafficHandle;
+import core4inet.utilities.modules.CheckedBuffer;
 
 import inet.linklayer.IMACRelayUnit;
+import inet.linklayer.IMACAddressTable;
 
 //
 // Module for a TTEAVBEthernet Switch.
@@ -27,51 +29,55 @@ module TTEAVBEtherSwitch
         @node();
         @display("i=block/switch;bgb=1280,768");
         double hardware_delay @unit(s) = default(8us);
+        int numBuffer = default(0);
     gates:
         // Physical ports of the switch
         inout ethg[] @loose;
     submodules:
         // Implementation of the best-effort forwarding part
-        beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
+        beswitch: <default("MACRelayUnit")> like IMACRelayUnit {
             parameters:
-                @display("p=101,54");
+                @display("p=100,50");
             gates:
                 ifIn[sizeof(ethg)+1];
                 ifOut[sizeof(ethg)+1];
         }
-
+		//The mac table associated with the be switch
+        macTable: <default("MACAddressTable")> like IMACAddressTable {
+            @display("p=170,50");
+        }
         llc: EtherLLC {
             parameters:
-                @display("p=173,54");
+                @display("p=170,110");
             gates:
                 upperLayerIn[1];
                 upperLayerOut[1];
         }
 
         srpTrafficHandle: SRPTrafficHandle {
-            @display("p=250,54");
+            @display("p=170,170");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
             parameters:
-                @display("p=101,126,c,70");
+                @display("p=50,110,column,50");
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=379,54");
+                @display("p=170,240");
                 NrOfPorts = sizeof(ethg);
         }
 
         avbBuffer[sizeof(ethg)]: AVBQueueBuffer {
-            @display("p=250,127,c,70");
+            @display("p=100,240,c,70");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=461,54");
+                @display("p=240,50");
         }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
@@ -81,7 +87,10 @@ module TTEAVBEtherSwitch
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
-                @display("p=461,127");
+                @display("p=310,50");
+        }
+        checkedBuffer[numBuffer]: CheckedBuffer {
+            @display("p=310,130");
         }
     connections:
         for i=0..sizeof(ethg)-1 {
