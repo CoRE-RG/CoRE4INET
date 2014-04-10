@@ -51,3 +51,12 @@ packet SRPFrame extends EtherFrame{
 	string displayString="b=15,15,rect,black,black,5";
 	unsigned int portIndex;
 }
+
+packet TalkerAdvertise extends SRPFrame{
+}
+
+packet ListenerReady extends SRPFrame{
+}
+
+packet ListenerReadyFailed extends SRPFrame{
+}

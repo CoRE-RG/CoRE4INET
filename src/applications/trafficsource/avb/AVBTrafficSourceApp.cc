@@ -89,7 +89,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
         {
             bubble("Talker Advertise");
 
-            SRPFrame *outFrame = new SRPFrame("Talker Advertise", IEEE802CTRL_DATA);
+            SRPFrame *outFrame = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
             outFrame->setStreamID(streamID);
             outFrame->setMaxFrameSize(frameSize);
             outFrame->setMaxIntervalFrames(intervalFrames);
@@ -106,7 +106,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             bubble(inFrame->getName());
             if(talker)
             {
-                if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
+                if(dynamic_cast<ListenerReady*>(inFrame) || dynamic_cast<ListenerReadyFailed*>(inFrame))
                 {
                     if(!isStreaming)
                     {
@@ -119,9 +119,9 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             //Listener:
             else
             {
-                if(srpType.compare("Talker Advertise") == 0 && streamID == inFrame->getStreamID())
+                if(dynamic_cast<TalkerAdvertise*>(inFrame) && streamID == inFrame->getStreamID())
                 {
-                    SRPFrame *outFrame = new SRPFrame("Listener Ready", IEEE802CTRL_DATA);
+                    SRPFrame *outFrame = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
                     outFrame->setStreamID(inFrame->getStreamID());
                     outFrame->setByteLength(AVB_SRP_READYSIZE);
 

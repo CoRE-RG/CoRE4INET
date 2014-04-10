@@ -54,6 +54,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
     {
         AVBFrame *inFrame = ((AVBFrame*)msg);
 
+        //TODO error when gatesize==0? is this case even relevant? better >0 and delete else?
         if(gateSize("AVBout") > 1)
         {
             for(unsigned int i=0; i<(unsigned int)gateSize("AVBout"); i++)
@@ -76,15 +77,14 @@ void AVBIncoming::handleMessage(cMessage* msg)
     else if(msg->arrivedOn("SRPin"))
     {
         SRPFrame *inFrame = ((SRPFrame*)msg);
-        std::string srpType = inFrame->getName();
         bubble(inFrame->getName());
-        if(srpType.compare("Talker Advertise") == 0)
+        if(dynamic_cast<TalkerAdvertise*>(inFrame))
         {
             TalkerAddresses[inFrame->getStreamID()] = inFrame->getSrc();
             StreamBandwith[inFrame->getStreamID()] = calcBandwith(inFrame->getMaxFrameSize(), inFrame->getMaxIntervalFrames());
             delete msg;
         }
-        else if(srpType.compare("Listener Ready") == 0 || srpType.compare("Listener Ready Failed") == 0)
+        else if(dynamic_cast<ListenerReady*>(inFrame) || dynamic_cast<ListenerReadyFailed*>(inFrame))
         {
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
             unsigned int portIndex = inFrame->getPortIndex();
@@ -122,7 +122,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
                 send(inFrame, "SRPout");
             }
         }
-        else if(srpType.compare("Listener Failed") == 0)
+        else if(dynamic_cast<ListenerReadyFailed*>(inFrame))
         {
             inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
 

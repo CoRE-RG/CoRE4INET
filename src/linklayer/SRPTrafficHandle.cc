@@ -41,8 +41,7 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
     {
         if(msg->arrivedOn("SRPin"))
         {
-            std::string srpType = inFrame->getName();
-            if(srpType.compare("Talker Advertise") == 0)
+            if(dynamic_cast<TalkerAdvertise*>(inFrame))
             {
                 Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
                 etherctrl->setSsap(localSAP);
@@ -52,9 +51,8 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 send(inFrame, "lowerLayerOut");
             }
 
-            if(srpType.compare("Listener Ready") == 0 ||
-               srpType.compare("Listener Ready Failed") == 0 ||
-               srpType.compare("Listener Failed") == 0)
+            if(dynamic_cast<ListenerReady*>(inFrame) ||
+               dynamic_cast<ListenerReadyFailed*>(inFrame))
             {
                 Ieee802Ctrl *etherctrl;
                 if(inFrame->getControlInfo() == NULL)

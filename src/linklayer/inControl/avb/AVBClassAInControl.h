@@ -81,16 +81,13 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         {
             cSimpleModule::sendDirect(frame, cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
         }else{
-            std::string msgClass = frame->getEncapsulatedPacket()->getClassName();
-            std::string msgName = frame->getEncapsulatedPacket()->getName();
-            if(dynamic_cast<SRPFrame*>(frame))
+            if(SRPFrame *srpFrame = dynamic_cast<SRPFrame*>(frame->getEncapsulatedPacket()))
             {
-                if(msgName.compare("Talker Advertise"))
+                if(dynamic_cast<TalkerAdvertise*>(srpFrame))
                 {
                     frame->setDest(MACAddress::BROADCAST_ADDRESS);
 
                 }
-                SRPFrame *srpFrame = ((SRPFrame*)frame->getEncapsulatedPacket());
                 srpFrame->setPortIndex(cModule::getParentModule()->getIndex());
             }
 
