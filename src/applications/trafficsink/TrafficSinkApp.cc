@@ -21,7 +21,8 @@ Define_Module(TrafficSinkApp);
 
 simsignal_t TrafficSinkApp::rxPkSignal = SIMSIGNAL_NULL;
 
-void TrafficSinkApp::initialize(){
+void TrafficSinkApp::initialize()
+{
     rxPkSignal = registerSignal("rxPk");
 }
 
@@ -29,10 +30,11 @@ void TrafficSinkApp::handleMessage(cMessage *msg)
 {
     ApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
+    if (msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
     {
         EtherFrame *frame = dynamic_cast<EtherFrame*>(msg);
-        if(frame){
+        if (frame)
+        {
             emit(rxPkSignal, frame);
         }
     }

@@ -17,5 +17,5 @@
 
 using namespace ::CoRE4INET;
 
-Define_Module( RCDoubleBuffer);
+Define_Module(RCDoubleBuffer);
 

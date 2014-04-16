@@ -34,7 +34,7 @@ simple CTBuffer extends Buffer
     parameters:
         @display("i=block/buffer");
         //Priority of the buffer (currently only used for rate-constrained traffic)
-        int priority=default(-1);
+        int priority = default(-1);
         //Critical traffic ID of the buffer
         int ct_id;
         //Critical traffic marker of the buffer

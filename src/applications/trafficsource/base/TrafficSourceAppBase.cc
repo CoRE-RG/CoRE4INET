@@ -21,21 +21,25 @@
 
 namespace CoRE4INET {
 
-Define_Module( TrafficSourceAppBase);
+Define_Module(TrafficSourceAppBase);
 
 void TrafficSourceAppBase::initialize()
 {
-    if(par("enabled").boolValue()){
+    if (par("enabled").boolValue())
+    {
         scheduleAt(simTime(), new cMessage("ACTIVATOR!"));
     }
 }
 
-void TrafficSourceAppBase::sendMessage(){
+void TrafficSourceAppBase::sendMessage()
+{
 
-    if(par("ct_id").longValue() != -1){
-        uint16_t ctID = (uint16_t)par("ct_id").longValue();
-        std::list<Buffer*> buffer = buffers[(uint16_t)ctID];
-        if(buffer.size()==0){
+    if (par("ct_id").longValue() != -1)
+    {
+        uint16_t ctID = (uint16_t) par("ct_id").longValue();
+        std::list<Buffer*> buffer = buffers[(uint16_t) ctID];
+        if (buffer.size() == 0)
+        {
             ev.printf("No buffer with such CT \n");
             bubble("No buffer with such CT");
             getDisplayString().setTagArg("i2", 0, "status/excl3");
@@ -43,24 +47,29 @@ void TrafficSourceAppBase::sendMessage(){
             getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
             getParentModule()->getDisplayString().setTagArg("tt", 0, "No buffer with such CT");
         }
-        else{
-            for(std::list<Buffer*>::iterator buf = buffer.begin();
-                       buf!=buffer.end();buf++){
+        else
+        {
+            for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+            {
                 CTFrame *frame;
-                if(dynamic_cast<TTBuffer*>(*buf)){
+                if (dynamic_cast<TTBuffer*>(*buf))
+                {
                     frame = new TTFrame("");
                 }
-                else if(dynamic_cast<RCBuffer*>(*buf)){
+                else if (dynamic_cast<RCBuffer*>(*buf))
+                {
                     frame = new RCFrame("");
                 }
-                else{
+                else
+                {
                     continue;
                 }
                 cPacket *payload = new cPacket;
                 payload->setByteLength(par("payload").longValue());
                 frame->encapsulate(payload);
                 //Padding
-                if(frame->getByteLength()<MIN_ETHERNET_FRAME_BYTES){
+                if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+                {
                     frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
                 }
                 frame->setCtID(ctID);
@@ -73,6 +82,5 @@ void TrafficSourceAppBase::sendMessage(){
         }
     }
 }
-
 
 } //namespace

@@ -44,11 +44,11 @@ void AVBBuffer::initialize(int stage)
 {
     Buffer::initialize(stage);
 
-    if(stage==0)
+    if (stage == 0)
     {
         Timed::initialize();
 
-        tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
+        tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
 
         credit = 0;
         maxCredit = 0;
@@ -59,7 +59,7 @@ void AVBBuffer::initialize(int stage)
         oldTime = simTime();
         Wduration = 0;
 
-        avbCTC = (AVBIncoming*)getParentModule()->getSubmodule("avbCTC");
+        avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
 
         creditSignal = registerSignal("credit");
 
@@ -76,28 +76,29 @@ void AVBBuffer::handleMessage(cMessage *msg)
 {
     Buffer::handleMessage(msg);
 
-    if(avbCTC->getForwarding())
+    if (avbCTC->getForwarding())
     {
         newTime = simTime();
 
-        if(credit < 0)
+        if (credit < 0)
         {
             idleSlope(newTime - oldTime);
         }
 
-        if(msg->arrivedOn("in"))
+        if (msg->arrivedOn("in"))
         {
             msgCnt++;
-            if(inTransmission)
+            if (inTransmission)
             {
                 interferenceSlope(newTime - oldTime);
-                if(credit > maxCredit) maxCredit = credit;
+                if (credit > maxCredit)
+                    maxCredit = credit;
             }
             else
             {
-                if(credit >= 0)
+                if (credit >= 0)
                 {
-                    if(msgCnt > 0)
+                    if (msgCnt > 0)
                     {
                         cMessage *outFrame = getFrame();
                         msgCnt--;
@@ -110,29 +111,30 @@ void AVBBuffer::handleMessage(cMessage *msg)
                     }
 
                 }
-                else if(credit < 0)
+                else if (credit < 0)
                 {
-                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
-                    Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
+                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
+                    Wduration = ((double) -credit) / (AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer((uint64_t)ceil(Wduration /tick));
+                    event->setTimer((uint64_t) ceil(Wduration / tick));
                     event->setDestinationGate(gate("schedulerIn"));
                     getTimer()->registerEvent(event);
                 }
             }
         }
-        else if(msg->arrivedOn("schedulerIn"))
+        else if (msg->arrivedOn("schedulerIn"))
         {
-            if(inTransmission)
+            if (inTransmission)
             {
                 interferenceSlope(newTime - oldTime);
-                if(credit > maxCredit) maxCredit = credit;
+                if (credit > maxCredit)
+                    maxCredit = credit;
             }
             else
             {
-                if(credit >= 0)
+                if (credit >= 0)
                 {
-                    if(msgCnt > 0)
+                    if (msgCnt > 0)
                     {
                         cMessage *outFrame = getFrame();
                         msgCnt--;
@@ -144,13 +146,13 @@ void AVBBuffer::handleMessage(cMessage *msg)
                         resetCredit();
                     }
                 }
-                else if(credit < 0)
+                else if (credit < 0)
                 {
                     emit(creditSignal, credit);
-                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
-                    Wduration = ((double)-credit)/(AVBReservation * 1024.00 * 1024.00);
+                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
+                    Wduration = ((double) -credit) / (AVBReservation * 1024.00 * 1024.00);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer((uint64_t)ceil(Wduration / tick));
+                    event->setTimer((uint64_t) ceil(Wduration / tick));
                     event->setDestinationGate(gate("schedulerIn"));
                     getTimer()->registerEvent(event);
                 }
@@ -158,7 +160,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
             delete msg;
         }
 
-        if(newTime >= oldTime)
+        if (newTime >= oldTime)
             oldTime = simTime();
     }
 }
@@ -170,44 +172,48 @@ void AVBBuffer::handleParameterChange(const char* parname)
 
 void AVBBuffer::idleSlope(SimTime duration)
 {
-    if(duration >= 0)
+    if (duration >= 0)
     {
-        Enter_Method("idleSlope()");
-        AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
-        credit += ceil( (AVBReservation * 1024.00 * 1024.00) * duration.dbl() );
+        Enter_Method
+        ("idleSlope()");
+        AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
+        credit += ceil((AVBReservation * 1024.00 * 1024.00) * duration.dbl());
         emit(creditSignal, credit);
-        if(credit > 0 && msgCnt == 0 && !inTransmission) resetCredit();
+        if (credit > 0 && msgCnt == 0 && !inTransmission)
+            resetCredit();
     }
 }
 
 void AVBBuffer::interferenceSlope(SimTime duration)
 {
-    if(duration >= 0)
+    if (duration >= 0)
     {
-        Enter_Method("interferenceSlope()");
-        AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
-        credit +=ceil( (AVBReservation * 1024.00 * 1024.00) * duration.dbl() );
+        Enter_Method
+        ("interferenceSlope()");
+        AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
+        credit += ceil((AVBReservation * 1024.00 * 1024.00) * duration.dbl());
         emit(creditSignal, credit);
     }
 }
 
 void AVBBuffer::sendSlope(SimTime duration)
 {
-    Enter_Method("sendSlope()");
+    Enter_Method
+    ("sendSlope()");
 
-    AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
-    unsigned int portBandwith = avbCTC->getPortBandwith((unsigned int)this->getIndex());
+    AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
+    unsigned int portBandwith = avbCTC->getPortBandwith((unsigned int) this->getIndex());
     emit(creditSignal, credit);
-    credit -= ceil( ( (portBandwith - AVBReservation) * 1024.00 * 1024.00) * duration.dbl() );
+    credit -= ceil(((portBandwith - AVBReservation) * 1024.00 * 1024.00) * duration.dbl());
     inTransmission = false;
-    if(msgCnt > 0)
+    if (msgCnt > 0)
     {
-        if(credit < 0)
+        if (credit < 0)
         {
-            AVBReservation = avbCTC->getAVBPortReservation((unsigned int)this->getIndex());
+            AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
             Wduration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer((uint64_t)ceil(Wduration / tick));
+            event->setTimer((uint64_t) ceil(Wduration / tick));
             event->setDestinationGate(gate("schedulerIn"));
             getTimer()->registerEvent(event);
         }
@@ -219,12 +225,12 @@ void AVBBuffer::sendSlope(SimTime duration)
             inTransmission = true;
         }
     }
-    else if(credit > 0)
+    else if (credit > 0)
     {
         resetCredit();
     }
 
-    if(oldTime <= simTime())
+    if (oldTime <= simTime())
         oldTime = simTime() + duration;
     else
         oldTime = oldTime + duration;
@@ -234,32 +240,33 @@ void AVBBuffer::refresh()
 {
     newTime = simTime();
 
-
-    if(credit < 0)
+    if (credit < 0)
     {
         idleSlope(newTime - oldTime);
     }
 
-    if(inTransmission)
+    if (inTransmission)
     {
         interferenceSlope(newTime - oldTime);
-        if(credit > maxCredit) maxCredit = credit;
+        if (credit > maxCredit)
+            maxCredit = credit;
     }
 
-    if(newTime >= oldTime)
+    if (newTime >= oldTime)
         oldTime = simTime();
 }
 
 int AVBBuffer::getCredit()
 {
-   return credit;
+    return credit;
 }
 
 void AVBBuffer::resetCredit()
 {
-    Enter_Method("resetCredit");
+    Enter_Method
+    ("resetCredit");
 
-    if(newTime >= oldTime)
+    if (newTime >= oldTime)
     {
         credit = 0;
         emit(creditSignal, credit);

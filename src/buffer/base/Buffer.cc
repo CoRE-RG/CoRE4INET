@@ -23,12 +23,13 @@
 
 using namespace CoRE4INET;
 
-Define_Module( Buffer);
+Define_Module(Buffer);
 
 simsignal_t Buffer::txPkSignal = SIMSIGNAL_NULL;
 simsignal_t Buffer::rxPkSignal = SIMSIGNAL_NULL;
 
-Buffer::~Buffer(){
+Buffer::~Buffer()
+{
     destinationGates.clear();
 }
 
@@ -39,7 +40,8 @@ int Buffer::numInitStages() const
 
 void Buffer::initialize(int stage)
 {
-    if(stage==0){
+    if (stage == 0)
+    {
         ev << "Initialize Buffer" << endl;
         initializeStatistics();
     }
@@ -61,11 +63,13 @@ void Buffer::recordPacketReceived(EtherFrame *frame)
     emit(rxPkSignal, frame);
 }
 
-EtherFrame* Buffer::getFrame(){
+EtherFrame* Buffer::getFrame()
+{
     return dequeue();
 }
 
- void Buffer::putFrame(EtherFrame* frame){
+void Buffer::putFrame(EtherFrame* frame)
+{
     enqueue(frame);
 }
 
@@ -76,36 +80,46 @@ void Buffer::handleMessage(cMessage *msg)
         EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
         recordPacketReceived(frame);
 
-        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES){
+        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+        {
             frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
         }
         putFrame((EtherFrame*) frame);
     }
 }
 
-void Buffer::handleParameterChange(__attribute((unused)) const char* parname){
+void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
+{
     destinationGates.clear();
-    std::vector<std::string> destinationGatePaths = cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
-    for(std::vector<std::string>::iterator destinationGatePath = destinationGatePaths.begin();
-            destinationGatePath!=destinationGatePaths.end();destinationGatePath++){
+    std::vector<std::string> destinationGatePaths =
+            cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
+    for (std::vector<std::string>::iterator destinationGatePath = destinationGatePaths.begin();
+            destinationGatePath != destinationGatePaths.end(); destinationGatePath++)
+    {
         cGate* gate = gateByFullPath((*destinationGatePath));
-        if(!gate){
+        if (!gate)
+        {
             gate = gateByShortPath((*destinationGatePath), this);
         }
-        if(gate){
-            if(findContainingNode(gate->getOwnerModule())!=findContainingNode(this)){
-                opp_error("Configuration problem of destination_gates: Gate: %s is not in node %s! Maybe a copy-paste problem?", (*destinationGatePath).c_str(),
-                        findContainingNode(this)->getFullName());
+        if (gate)
+        {
+            if (findContainingNode(gate->getOwnerModule()) != findContainingNode(this))
+            {
+                opp_error(
+                        "Configuration problem of destination_gates: Gate: %s is not in node %s! Maybe a copy-paste problem?",
+                        (*destinationGatePath).c_str(), findContainingNode(this)->getFullName());
             }
             destinationGates.push_back(gate);
         }
-        else{
-            opp_error("Configuration problem of destination_gates: Gate: %s could not be resolved!", (*destinationGatePath).c_str());
+        else
+        {
+            opp_error("Configuration problem of destination_gates: Gate: %s could not be resolved!",
+                    (*destinationGatePath).c_str());
         }
     }
 }
 
-void Buffer::enqueue(__attribute((unused)) EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused))  EtherFrame *newFrame)
 {
     ev << "Buffer::enqueue not implemented" << endl;
     throw;

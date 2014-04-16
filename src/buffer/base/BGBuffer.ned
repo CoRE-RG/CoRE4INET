@@ -28,7 +28,7 @@ package core4inet.buffer.base;
 // @author Till Steinbach
 simple BGBuffer extends Buffer
 {
-        parameters:
+    parameters:
         //BGBuffer is implemented by the BGBuffer C++ Class
         @class(BGBuffer);
         @display("i=,green");

@@ -46,7 +46,7 @@ simple TicApp extends ApplicationBase like IScheduled
         int ct_id;
         //Time in cycle when the tic message is generated
         int action_time @unit(tick);
-		
+
 		//Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator @see IScheduled
         string oscillator = default("oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer @see IScheduled

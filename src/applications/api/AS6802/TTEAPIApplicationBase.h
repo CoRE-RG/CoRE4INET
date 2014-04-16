@@ -21,7 +21,6 @@
 #include "base/ApplicationBase.h"
 #include "CTFrame_m.h"
 
-
 #define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
 
 namespace CoRE4INET {
@@ -33,7 +32,8 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-enum TTEAPIApplicationMessageKind{
+enum TTEAPIApplicationMessageKind
+{
     /**
      * @brief Message to trigger the application start.
      */
@@ -80,8 +80,8 @@ class TTEAPIApplicationBase : public ApplicationBase, public cListener
 {
     private:
         bool synchronized;
-        std::map<Buffer*, APICallback*>receiveCallbacks;
-        std::map<Buffer*, APICallback*>transmitCallbacks;
+        std::map<Buffer*, APICallback*> receiveCallbacks;
+        std::map<Buffer*, APICallback*> transmitCallbacks;
     private:
         /**
          * @brief initializes the module.
@@ -127,45 +127,35 @@ class TTEAPIApplicationBase : public ApplicationBase, public cListener
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_get_ct_output_buf(const uint8_t ctrl_id,
-                const uint16_t ct_id,
-                tte_buffer_t * const buf);
+        virtual int32_t tte_get_ct_output_buf(const uint8_t ctrl_id, const uint16_t ct_id, tte_buffer_t * const buf);
 
         /**
          * @brief implementation of the TTEthernet-API method.
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_get_bg_output_buf(const uint8_t ctrl_id,
-                const uint8_t channel,
-                tte_buffer_t * const buf);
+        virtual int32_t tte_get_bg_output_buf(const uint8_t ctrl_id, const uint8_t channel, tte_buffer_t * const buf);
 
         /**
          * @brief implementation of the TTEthernet-API method.
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_get_bg_input_buf(const uint8_t ctrl_id,
-                const uint8_t channel,
-                tte_buffer_t * const buf);
+        virtual int32_t tte_get_bg_input_buf(const uint8_t ctrl_id, const uint8_t channel, tte_buffer_t * const buf);
 
         /**
          * @brief implementation of the TTEthernet-API method.
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_get_ct_input_buf(const uint8_t ctrl_id,
-                const uint16_t ct_id,
-                tte_buffer_t * const buf);
+        virtual int32_t tte_get_ct_input_buf(const uint8_t ctrl_id, const uint16_t ct_id, tte_buffer_t * const buf);
 
         /**
          * @brief implementation of the TTEthernet-API method.
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_get_var(const uint8_t ctrl_id,
-                const tte_var_id_t var_id,
-                const uint32_t var_size,
+        virtual int32_t tte_get_var(const uint8_t ctrl_id, const tte_var_id_t var_id, const uint32_t var_size,
                 void * const value);
 
         /**
@@ -173,16 +163,14 @@ class TTEAPIApplicationBase : public ApplicationBase, public cListener
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_open_output_buf(tte_buffer_t * const buf,
-                tte_frame_t * const frame);
+        virtual int32_t tte_open_output_buf(tte_buffer_t * const buf, tte_frame_t * const frame);
 
         /**
          * @brief implementation of the TTEthernet-API method.
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_open_input_buf(tte_buffer_t * const buf,
-                tte_frame_t * const frame,
+        virtual int32_t tte_open_input_buf(tte_buffer_t * const buf, tte_frame_t * const frame,
                 tte_buf_status_t * const status);
 
         /**
@@ -204,22 +192,17 @@ class TTEAPIApplicationBase : public ApplicationBase, public cListener
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_set_buf_var(tte_buffer_t * const buf,
-                const tte_buf_var_id_t var_id,
-                const uint32_t var_size,
-                const void * const value);
+        virtual int32_t tte_set_buf_var(tte_buffer_t * const buf, const tte_buf_var_id_t var_id,
+                const uint32_t var_size, const void * const value);
 
         /**
          * @brief implementation of the TTEthernet-API method.
          *
          * see TTEthernet-API documentation for further information
          */
-        virtual int32_t tte_get_buf_var(const tte_buffer_t * const buf,
-                const tte_buf_var_id_t var_id,
-                const uint32_t var_size,
-                void * const value);
+        virtual int32_t tte_get_buf_var(const tte_buffer_t * const buf, const tte_buf_var_id_t var_id,
+                const uint32_t var_size, void * const value);
 };
-
 
 } //namespace
 

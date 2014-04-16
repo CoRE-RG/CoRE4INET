@@ -22,14 +22,17 @@
 
 using namespace CoRE4INET;
 
-Define_Module( CTBuffer);
+Define_Module(CTBuffer);
 
-CTBuffer::~CTBuffer(){
+CTBuffer::~CTBuffer()
+{
 }
 
- void CTBuffer::putFrame(EtherFrame* frame){
+void CTBuffer::putFrame(EtherFrame* frame)
+{
     short priority = (short) par("priority").longValue();
-    if(frame && priority>=0){
+    if (frame && priority >= 0)
+    {
         frame->setSchedulingPriority(priority);
     }
     enqueue(frame);
@@ -41,12 +44,15 @@ void CTBuffer::handleMessage(cMessage *msg)
     {
         CTFrame *ctframe = dynamic_cast<CTFrame *>(msg);
         //Try to correct destination mac
-        if(ctframe != NULL){
-            if(ctframe->getDest().isUnspecified()){
+        if (ctframe != NULL)
+        {
+            if (ctframe->getDest().isUnspecified())
+            {
                 ctframe->setCtID(ctId);
                 ctframe->setCtMarker(ctMarker & ctMask);
             }
-            else if(ctframe->getCtMarker()==0){
+            else if (ctframe->getCtMarker() == 0)
+            {
                 ctframe->setCtMarker(ctMarker & ctMask);
             }
         }
@@ -54,10 +60,11 @@ void CTBuffer::handleMessage(cMessage *msg)
     }
 }
 
-void CTBuffer::handleParameterChange(const char* parname){
-    ctMask = (uint32_t)par("ct_mask").longValue();
-    ctMarker = (uint32_t)par("ct_marker").longValue();
-    ctId = (uint16_t)par("ct_id").longValue();
+void CTBuffer::handleParameterChange(const char* parname)
+{
+    ctMask = (uint32_t) par("ct_mask").longValue();
+    ctMarker = (uint32_t) par("ct_marker").longValue();
+    ctId = (uint16_t) par("ct_id").longValue();
 
     Buffer::handleParameterChange(parname);
 }

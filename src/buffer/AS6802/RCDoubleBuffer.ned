@@ -28,5 +28,5 @@ simple RCDoubleBuffer extends RCBuffer
 {
     //RCDoubleBuffer is implemented by the RCDoubleBuffer C++ Class
     @class(RCDoubleBuffer);
-    
+
 }

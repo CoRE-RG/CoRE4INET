@@ -34,25 +34,25 @@ namespace CoRE4INET {
  */
 class TicApp : public ApplicationBase, public virtual Scheduled
 {
-  protected:
-    /**
-    * @brief Initialization of the module. Sends activator message
-    */
-    virtual void initialize();
-    /**
-     * @brief Handles message generation and reception
-     */
-    virtual void handleMessage(cMessage *msg);
-  protected:
-      /**
-       * Signal that is emitted every time a toc was received.
-       */
-      static simsignal_t rxPkSignal;
+    protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize();
+        /**
+         * @brief Handles message generation and reception
+         */
+        virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * Signal that is emitted every time a toc was received.
+         */
+        static simsignal_t rxPkSignal;
 
-      /**
-       * Signal that contains the roundtrip time of a request/response.
-       */
-      static simsignal_t roundtripSignal;
+        /**
+         * Signal that contains the roundtrip time of a request/response.
+         */
+        static simsignal_t roundtripSignal;
 };
 
 }

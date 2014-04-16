@@ -28,5 +28,5 @@ simple TTDoubleBuffer extends TTBuffer
 {
     //TTDoubleBuffer is implemented by the TTDoubleBuffer C++ Class
     @class(TTDoubleBuffer);
-    
+
 }

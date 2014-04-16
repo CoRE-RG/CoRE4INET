@@ -41,7 +41,7 @@ simple TTBuffer extends CTBuffer like IScheduled
         int sendWindowStart @unit(tick);
         //End of the send window in number of ticks
         int sendWindowEnd @unit(tick) = default(0tick);
-        
+
         //Period of Scheduler this buffer is assigned to
         string period = default("period[0]");
         string oscillator = default("oscillator");

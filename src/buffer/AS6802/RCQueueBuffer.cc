@@ -17,4 +17,4 @@
 
 using namespace ::CoRE4INET;
 
-Define_Module( RCQueueBuffer);
+Define_Module(RCQueueBuffer);
