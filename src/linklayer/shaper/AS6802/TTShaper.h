@@ -401,7 +401,6 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
     Enter_Method
     ("registerTTBuffer(%s)", ttBuffer->getName());
     uint64_t sendWindowStart = ttBuffer->nextSendWindowStart();
-    ev << "sendWindowStart:  " << sendWindowStart << " Buffer:" << ttBuffer->getName() << std::endl;
 
     std::map<uint64_t, TTBuffer*>::iterator buf = ttBuffers.find(sendWindowStart);
     if (buf != ttBuffers.end())
@@ -410,7 +409,52 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
     }
     else
     {
-        //TODO Major: check overlapping
+        //The following tests are only trivial. A complex check of the windows should be done with a suitable scheduling
+        //tool. as it is takes too much computation time for a runtime check!
+
+        //Check for overlapping windows only when new buffer has a sendWindowEnd set
+        if (ttBuffer->par("sendWindowEnd").longValue())
+        {
+            for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();
+                    ++buffer)
+            {
+                //Check for overlapping windows only when other buffer has a sendWindowEnd set
+                if ((*buffer).second->par("sendWindowEnd").longValue())
+                {
+                    uint64_t other_offset = (*buffer).second->getPeriod()->par("offset_ticks").longValue();
+                    uint64_t other_sendWindowStart = (uint64_t) (*buffer).second->par("sendWindowStart").longValue()
+                            + other_offset;
+                    uint64_t other_sendWindowEnd = (uint64_t) (*buffer).second->par("sendWindowEnd").longValue()
+                            + other_offset;
+                    uint64_t this_offset = ttBuffer->getPeriod()->par("offset_ticks").longValue();
+                    uint64_t this_sendWindowStart = (uint64_t) ttBuffer->par("sendWindowStart").longValue()
+                            + this_offset;
+                    uint64_t this_sendWindowEnd = (uint64_t) ttBuffer->par("sendWindowEnd").longValue() + this_offset;
+                    //For simplification one cycle is added to the WindowEnd if it is in the next cycle
+                    if (other_sendWindowEnd < other_sendWindowStart)
+                    {
+                        other_sendWindowEnd += (*buffer).second->getPeriod()->par("cycle_ticks").longValue();
+                    }
+                    if (this_sendWindowEnd < this_sendWindowStart)
+                    {
+                        this_sendWindowEnd += ttBuffer->getPeriod()->par("cycle_ticks").longValue();
+                    }
+                    //Now that we have everything together do the check!
+                    if (other_sendWindowStart < this_sendWindowStart && other_sendWindowEnd > this_sendWindowStart)
+                    {
+                        opp_error(
+                                "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
+                                ttBuffer->getFullPath().c_str(), (*buffer).second->getFullPath().c_str());
+                    }
+                    if (this_sendWindowStart < other_sendWindowStart && this_sendWindowEnd > other_sendWindowStart)
+                    {
+                        opp_error(
+                                "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
+                                (*buffer).second->getFullPath().c_str(), ttBuffer->getFullPath().c_str());
+                    }
+                }
+            }
+        }
         ttBuffers[sendWindowStart] = ttBuffer;
     }
 

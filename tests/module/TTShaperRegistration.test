@@ -80,18 +80,18 @@ cmdenv-event-banners=false
 cmdenv-express-mode=false
 
 #[Parameters]
-repeat = 4
+repeat = 6
 
 **.scheduler.numPeriods = 2
 **.scheduler.period[0].cycle_ticks = sec_to_tick(5ms)
 **.scheduler.period[1].cycle_ticks = sec_to_tick(10ms)
-**.scheduler.period[1].offset_ticks = ${sec_to_tick(1ms),sec_to_tick(0ms),sec_to_tick(0ms),sec_to_tick(0ms) ! repetition}
+**.scheduler.period[1].offset_ticks = ${sec_to_tick(1ms), sec_to_tick(0ms), sec_to_tick(0ms), sec_to_tick(0ms), sec_to_tick(0ms), sec_to_tick(0ms) ! repetition}
 
 **.tt1.sendWindowStart = sec_to_tick(1us)
-**.tt1.sendWindowEnd = sec_to_tick(10us)
+**.tt1.sendWindowEnd = ${sec_to_tick(10us), sec_to_tick(10us), sec_to_tick(10us), sec_to_tick(10us), sec_to_tick(0us), sec_to_tick(10us) ! repetition}
 
-**.tt2.sendWindowStart = ${sec_to_tick(1us),sec_to_tick(1us),sec_to_tick(11us),sec_to_tick(5us) ! repetition}
-**.tt2.sendWindowEnd = sec_to_tick(15us)
+**.tt2.sendWindowStart = ${sec_to_tick(1us), sec_to_tick(1us), sec_to_tick(11us), sec_to_tick(5us), sec_to_tick(5us), sec_to_tick(9999us) ! repetition}
+**.tt2.sendWindowEnd = ${sec_to_tick(15us), sec_to_tick(15us), sec_to_tick(15us), sec_to_tick(15us), sec_to_tick(15us), sec_to_tick(2us) ! repetition}
 %#--------------------------------------------------------------------------------------------------------------
 %ignore-exitcode: true
 %contains-regex: stdout
@@ -110,5 +110,13 @@ Calling finish\(\) at end of Run #2...
 .*
 Preparing for running configuration General, run #3...
 .*
-Calling finish\(\) at end of Run #3...
+.*Model error: ERROR! You cannot schedule two messages with overlapping send windows.*
+.*
+Preparing for running configuration General, run #4...
+.*
+Calling finish\(\) at end of Run #4...
+.*
+Preparing for running configuration General, run #5...
+.*
+Calling finish\(\) at end of Run #5...
 .*
