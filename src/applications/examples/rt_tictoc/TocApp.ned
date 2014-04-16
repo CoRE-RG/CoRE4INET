@@ -29,10 +29,10 @@ import core4inet.applications.base.ApplicationBase;
 simple TocApp extends ApplicationBase
 {
     parameters:
-    	@class(TocApp);
-    	@display("i=block/routing,gold");
-    	//Counter is increased on incoming Tic messages
-    	int counter = 0;
-    	//CT-ID used for the messages to send
-    	int ct_id;
+        @class(TocApp);
+        @display("i=block/routing,gold");
+        //Counter is increased on incoming Tic messages
+        int counter = 0;
+        //CT-ID used for the messages to send
+        int ct_id;
 }

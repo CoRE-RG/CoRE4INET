@@ -24,43 +24,47 @@ namespace CoRE4INET {
 
 Define_Module(ApplicationBase);
 
-//void ApplicationBase::executeCallback(Callback *cb){
-//    Enter_Method("executeCallback(cb)");
-//    cb->executeCallback();
-//}
-
 void ApplicationBase::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("RCin")){
+    if (msg->arrivedOn("RCin"))
+    {
         RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
         if (rcBuffer)
             rcBuffer->resetBag();
     }
 }
 
-void ApplicationBase::handleParameterChange(__attribute__((unused)) const char* parname){
+void ApplicationBase::handleParameterChange(__attribute__((unused)) const char* parname)
+{
     buffers.clear();
     std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
-    for(std::vector<std::string>::iterator bufferPath = bufferPaths.begin();
-            bufferPath!=bufferPaths.end();bufferPath++){
+    for (std::vector<std::string>::iterator bufferPath = bufferPaths.begin(); bufferPath != bufferPaths.end();
+            bufferPath++)
+    {
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
-        if(!module){
-            module = findModuleWhereverInNode((*bufferPath).c_str(),this);
+        if (!module)
+        {
+            module = findModuleWhereverInNode((*bufferPath).c_str(), this);
         }
-        if(module){
-            if(findContainingNode(module)!=findContainingNode(this)){
-                opp_error("Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?", (*bufferPath).c_str(),
-                        findContainingNode(this)->getFullName());
+        if (module)
+        {
+            if (findContainingNode(module) != findContainingNode(this))
+            {
+                opp_error("Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                        (*bufferPath).c_str(), findContainingNode(this)->getFullName());
             }
-            Buffer *buffer = dynamic_cast<Buffer*> (module);
-            if(buffer && buffer->hasPar("ct_id")){
-                buffers[(uint16_t)buffer->par("ct_id").longValue()].push_back(buffer);
+            Buffer *buffer = dynamic_cast<Buffer*>(module);
+            if (buffer && buffer->hasPar("ct_id"))
+            {
+                buffers[(uint16_t) buffer->par("ct_id").longValue()].push_back(buffer);
             }
-            else{
+            else
+            {
                 opp_error("Buffer module %s has no ct_id configured!", (*bufferPath).c_str());
             }
         }
-        else{
+        else
+        {
             opp_error("Configuration problem of buffers: Module: %s could not be resolved!", (*bufferPath).c_str());
         }
     }

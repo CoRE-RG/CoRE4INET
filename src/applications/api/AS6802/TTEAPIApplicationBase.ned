@@ -22,5 +22,4 @@ import core4inet.applications.base.ApplicationBase;
 //
 simple TTEAPIApplicationBase extends ApplicationBase
 {
-
 }

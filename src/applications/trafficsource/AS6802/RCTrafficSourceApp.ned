@@ -27,7 +27,7 @@ simple RCTrafficSourceApp extends TrafficSourceAppBase
     parameters:
         @class(RCTrafficSourceApp);
         @display("i=,orange");
-        
+
         //Sending interval for the rate constrained messages (any build in disstribution can be used)
         volatile double interval @unit(s);
 }

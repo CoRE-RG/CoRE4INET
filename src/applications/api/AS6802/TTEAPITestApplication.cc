@@ -15,22 +15,24 @@
 
 #include "TTEAPITestApplication.h"
 
-
 #include "tte_api.h"
 
 namespace CoRE4INET {
 
 Define_Module(TTEAPITestApplication);
 
-void testCallback(void* arg){
-    std::string teststring = (const char *)arg;
+void testCallback(void* arg)
+{
+    std::string teststring = (const char *) arg;
     ev << "CALLBACK EXECUTED! " << teststring << endl << endl;
 }
 
-int main(){
+int main()
+{
     //tte_init();
     tte_buffer_t testbuffer;
-    if(tte_get_ct_output_buf(0, 100, &testbuffer) != ETT_SUCCESS){
+    if (tte_get_ct_output_buf(0, 100, &testbuffer) != ETT_SUCCESS)
+    {
         ev << "MIST1!" << endl << endl;
         return -1;
     }
@@ -39,21 +41,23 @@ int main(){
 
     uint8_t mac[6];
 
-    tte_get_var(0, TTE_VAR_MAC_ADDRESS,sizeof(mac), mac);
+    tte_get_var(0, TTE_VAR_MAC_ADDRESS, sizeof(mac), mac);
 
     ev.printf("TTE_VAR_MAC_ADDRESS: %02x:%02x:%02x:%02x:%02x:%02x\n\n", mac[5], mac[4], mac[3], mac[2], mac[1], mac[0]);
 
-    if(tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void(*)(void*)), (void*)&testCallback) != ETT_SUCCESS){
+    if (tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void (*)(void*)), (void*)&testCallback) != ETT_SUCCESS)
+    {
         ev << "MIST21!" << endl << endl;
         return -1;
     }
-    if(tte_set_buf_var(&testbuffer, TTE_BUFVAR_CB_ARG, 5, "SENT") != ETT_SUCCESS){
+    if (tte_set_buf_var(&testbuffer, TTE_BUFVAR_CB_ARG, 5, "SENT") != ETT_SUCCESS)
+    {
         ev << "MIST22!" << endl << endl;
         return -1;
     }
 
     tte_frame_t frame;
-    frame.length=46;
+    frame.length = 46;
 
     frame.eth_hdr.src_mac[0] = 0x00;
     frame.eth_hdr.src_mac[1] = 0x00;
@@ -69,25 +73,30 @@ int main(){
     frame.eth_hdr.dst_mac[4] = 0x00;
     frame.eth_hdr.dst_mac[5] = 0x00;
 
-    if(tte_open_output_buf(&testbuffer, &frame) != ETT_SUCCESS){
+    if (tte_open_output_buf(&testbuffer, &frame) != ETT_SUCCESS)
+    {
         ev << "MIST2!" << endl << endl;
         return -1;
     }
-    if(tte_close_output_buf(&testbuffer) != ETT_SUCCESS){
+    if (tte_close_output_buf(&testbuffer) != ETT_SUCCESS)
+    {
         ev << "MIST3!" << endl << endl;
         return -1;
     }
 
     tte_buffer_t testbuffer2;
-    if(tte_get_ct_output_buf(0, 100, &testbuffer2) != ETT_SUCCESS){
+    if (tte_get_ct_output_buf(0, 100, &testbuffer2) != ETT_SUCCESS)
+    {
         ev << "MIST4!" << endl << endl;
         return -1;
     }
-    if(tte_set_buf_var(&testbuffer2, TTE_BUFVAR_RECEIVE_CB, sizeof(void(*)(void*)), (void*)&testCallback) != ETT_SUCCESS){
+    if (tte_set_buf_var(&testbuffer2, TTE_BUFVAR_RECEIVE_CB, sizeof(void (*)(void*)), (void*)&testCallback) != ETT_SUCCESS)
+    {
         ev << "MIST41!" << endl << endl;
         return -1;
     }
-    if(tte_set_buf_var(&testbuffer2, TTE_BUFVAR_CB_ARG, 9, "RECEIVED") != ETT_SUCCESS){
+    if (tte_set_buf_var(&testbuffer2, TTE_BUFVAR_CB_ARG, 9, "RECEIVED") != ETT_SUCCESS)
+    {
         ev << "MIST42!" << endl << endl;
         return -1;
     }
@@ -95,10 +104,9 @@ int main(){
     return 0;
 }
 
-void TTEAPITestApplication::startApplication(){
+void TTEAPITestApplication::startApplication()
+{
     main();
 }
-
-
 
 } //namespace

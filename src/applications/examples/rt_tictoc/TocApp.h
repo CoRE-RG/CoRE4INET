@@ -32,15 +32,15 @@ namespace CoRE4INET {
  */
 class TocApp : public ApplicationBase
 {
-  protected:
-    /**
-     * @brief Initialization of the module. Sends activator message
-     */
-    virtual void initialize();
-    /**
-     * @brief Handles message generation and reception
-     */
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize();
+        /**
+         * @brief Handles message generation and reception
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 }

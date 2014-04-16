@@ -38,11 +38,11 @@ void AVBTrafficSourceApp::initialize()
     Timed::initialize();
 
     talker = par("talker").boolValue();
-    streamID = (unsigned long)par("streamID").longValue();
+    streamID = (unsigned long) par("streamID").longValue();
     intervalFrames = (unsigned int) par("intervalFrames").longValue();
     payload = (unsigned int) par("payload").longValue();
 
-    if(payload <= AVB_MINPACKETSIZE)
+    if (payload <= AVB_MINPACKETSIZE)
     {
         frameSize = AVB_MINPACKETSIZE;
     }
@@ -57,7 +57,7 @@ void AVBTrafficSourceApp::initialize()
 
     Buffer *srpInBuffer = dynamic_cast<Buffer*>(getParentModule()->getSubmodule("srpIn"));
     std::string dg = srpInBuffer->par("destination_gates");
-    if(dg.empty())
+    if (dg.empty())
         srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
     else
         srpInBuffer->par("destination_gates") = dg + "," + this->gate("SRPin")->getFullPath();
@@ -66,12 +66,12 @@ void AVBTrafficSourceApp::initialize()
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
 
-    if(talker && par("enabled").boolValue())
+    if (talker && par("enabled").boolValue())
     {
         avbCTC->talker = true;
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
-        event->setTimer((uint64_t)(par("advertise_time").doubleValue()/tick));
+        tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
+        event->setTimer((uint64_t) (par("advertise_time").doubleValue() / tick));
         event->setDestinationGate(gate("schedulerIn"));
         getTimer()->registerEvent(event);
     }
@@ -79,9 +79,9 @@ void AVBTrafficSourceApp::initialize()
 
 void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
-    if(msg->arrivedOn("schedulerIn"))
+    if (msg->arrivedOn("schedulerIn"))
     {
-        if(isStreaming)
+        if (isStreaming)
         {
             sendAVBFrame();
         }
@@ -98,20 +98,21 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             sendDirect(outFrame, srpOutBuffer->gate("in"));
         }
     }
-    else if(msg->arrivedOn("SRPin"))
+    else if (msg->arrivedOn("SRPin"))
     {
-        if(SRPFrame *inFrame = dynamic_cast<SRPFrame*>(msg))
+        if (SRPFrame *inFrame = dynamic_cast<SRPFrame*>(msg))
         {
             std::string srpType = inFrame->getName();
             bubble(inFrame->getName());
-            if(talker)
+            if (talker)
             {
-                if(dynamic_cast<ListenerReady*>(inFrame) || dynamic_cast<ListenerReadyFailed*>(inFrame))
+                if (dynamic_cast<ListenerReady*>(inFrame) || dynamic_cast<ListenerReadyFailed*>(inFrame))
                 {
-                    if(!isStreaming)
+                    if (!isStreaming)
                     {
                         isStreaming = true;
-                        avbCTC->setAVBPortReservation(0, avbCTC->calcBandwith(frameSize, intervalFrames) + avbCTC->getAVBPortReservation(0) );
+                        avbCTC->setAVBPortReservation(0,
+                                avbCTC->calcBandwith(frameSize, intervalFrames) + avbCTC->getAVBPortReservation(0));
                         sendAVBFrame();
                     }
                 }
@@ -119,7 +120,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             //Listener:
             else
             {
-                if(dynamic_cast<TalkerAdvertise*>(inFrame) && streamID == inFrame->getStreamID())
+                if (dynamic_cast<TalkerAdvertise*>(inFrame) && streamID == inFrame->getStreamID())
                 {
                     SRPFrame *outFrame = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
                     outFrame->setStreamID(inFrame->getStreamID());
@@ -142,7 +143,8 @@ void AVBTrafficSourceApp::sendAVBFrame()
     payloadPacket->setByteLength(payload);
     outFrame->encapsulate(payloadPacket);
     //Padding
-    if(outFrame->getByteLength()<MIN_ETHERNET_FRAME_BYTES){
+    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+    {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
     sendDirect(outFrame, avbOutCTC->gate("in"));
@@ -150,7 +152,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     //class measurement interval = 125us
     double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer((uint64_t)ceil(interval/tick));
+    event->setTimer((uint64_t) ceil(interval / tick));
     event->setDestinationGate(gate("schedulerIn"));
     getTimer()->registerEvent(event);
 }
