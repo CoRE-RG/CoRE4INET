@@ -16,7 +16,7 @@
 package core4inet.utilities.classes;
 
 //
-// TODO auto-generated module
+// abstract base for a module that uses a scheduler to schedule actions at action points
 //
 // @author Till Steinbach
 //

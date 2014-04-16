@@ -16,7 +16,7 @@
 package core4inet.utilities.classes;
 
 //
-// TODO auto-generated module
+// Base class for a module that uses a scheduler to set timers
 //
 // @author Till Steinbach
 //

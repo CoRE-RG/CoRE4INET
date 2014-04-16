@@ -22,7 +22,9 @@
 namespace CoRE4INET {
 
 /**
- * @brief TODO
+ * @brief Base class for a module that uses a scheduler to schedule actions at action points
+ *
+ * @sa Timed
  *
  * @author Till Steinbach
  */
@@ -30,17 +32,18 @@ class Scheduled : public Timed
 {
     protected:
         /**
-         * TODO
+         * The period related to the actions of this module default is period[0]
          */
         Period *period;
 
     public:
         /**
-         * @brief Initialization of the module
+         * @brief Initialization of the module sets period[0] when parameter period is empty
          */
         void initialize();
+
         /**
-         * TODO
+         * returns pointer to the configured period
          */
         Period* getPeriod();
 };

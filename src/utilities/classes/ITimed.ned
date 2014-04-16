@@ -16,15 +16,15 @@
 package core4inet.utilities.classes;
 
 //
-// TODO auto-generated module
+// Base class for a module that uses a scheduler to set timers
 //
 // @author Till Steinbach
 //
 moduleinterface ITimed
 {
     parameters:
-        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node)
         string oscillator;
-        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        //Timer of the timed module (must be set to the name of an timer module in the Node)
         string timer;
 }
