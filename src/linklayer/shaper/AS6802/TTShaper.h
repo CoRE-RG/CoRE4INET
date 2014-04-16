@@ -548,7 +548,6 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
     unsigned long sendTicks = ceil((sendTime / oscillator->par("tick")).dbl());
     unsigned long startTicks = ttBuffers.begin()->first;
 
-    //TODO: Major: Perhaps more complex calculations needed?
     if ((timer->getTotalTicks() + sendTicks) >= startTicks)
     {
         ev << "transmission not allowed! Send time would be from " << timer->getTotalTicks() << " to "
