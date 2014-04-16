@@ -9,7 +9,6 @@
         nedPackages = "
                        core4inet.applications.trafficsource.AS6802
                        core4inet.buffer.AS6802
-                       core4inet.configuration.base
                        core4inet.incoming.AS6802
                        core4inet.linklayer.ethernet.AS6802
                        core4inet.linklayer.inControl.AS6802
@@ -88,6 +87,20 @@
                        core4inet.examples.AS6802.synchronization
                       "
         extraSourceFolders = ""
+        linkerFlags = ""
+        />
+    <feature
+        id="ConfigurationManager"
+        name="Configuration Managers"
+        description = "Configuration Managers can read a Network Configuration in a specific file-format to configure the simulation"
+        initiallyEnabled = "false"
+        requires = ""
+        labels = ""
+        nedPackages = "
+                       core4inet.configuration.base
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_CONFIGURATION_MANAGER"
         linkerFlags = ""
         />
 </features>
