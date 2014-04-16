@@ -44,6 +44,7 @@ module TTEEtherSwitch
         @labels(node,ethernet-node);
         double hardware_delay @unit(s) = default(8us);
         int numBuffer = default(0);
+        string configurationManagerType = default("");
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
@@ -73,7 +74,7 @@ module TTEEtherSwitch
                 @display("p=240,50");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
             parameters:
                 @display("p=999,999");
         }

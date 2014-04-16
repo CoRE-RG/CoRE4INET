@@ -332,7 +332,6 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
     TTEAPIPriv *priv = (TTEAPIPriv*) buf->priv;
 
     //Now we create a frame that can be accessed later
-    //TODO Divide TT and RC frames in separate types?
     if (buf->traffic_type == TTE_BG_TRAFFIC)
     {
         priv->frame = new EtherFrame("BG-Traffic Ethernet Frame", IEEE802CTRL_DATA);
@@ -342,6 +341,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
         std::stringstream frameNameStream;
         frameNameStream << "CT-ID: " << buf->ct_id;
         std::string frameName = frameNameStream.str();
+        //TODO Divide TT and RC frames in separate types?
         priv->frame = new CTFrame(frameName.c_str(), IEEE802CTRL_DATA);
     }
     priv->frame->setByteLength(ETHER_MAC_FRAME_BYTES);

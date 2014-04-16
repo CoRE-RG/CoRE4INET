@@ -45,7 +45,7 @@ module TTEAVBEtherHost
         int numBuffer = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
-
+		string configurationManagerType = default("");
     gates:
         inout ethg;
 
@@ -86,7 +86,7 @@ module TTEAVBEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler

@@ -53,6 +53,7 @@ module TTEEtherHost
         int numBuffer = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
+        string configurationManagerType = default("");
     gates:
         // Physical port of the host
         inout ethg @labels(EtherFrame-conn);
@@ -82,7 +83,7 @@ module TTEEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler
