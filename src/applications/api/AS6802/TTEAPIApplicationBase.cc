@@ -277,7 +277,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id, const tte_var_
             break;
         }
         case TTE_VAR_TIME_RESOLUTION: {
-            //TODO: Needs to be implemented
+            //TODO: Minor: Needs to be implemented
             //cModule *scheduler = getParentModule()->getSubmodule("scheduler", -1);
             //if(scheduler){
             //    *((tte_time_t*)value) = scheduler->par("tick").doubleValue();
@@ -293,7 +293,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id, const tte_var_
             break;
         }
         case TTE_VAR_THREAD_SAFE: {
-            //TODO: CHECK WHETHER IT IS POSSIBLE TO SET TO TRUE (1)
+            //TODO: Minor CHECK WHETHER IT IS POSSIBLE TO SET TO TRUE (1)
             *((uint8_t*) value) = 0;
             break;
         }
@@ -341,7 +341,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
         std::stringstream frameNameStream;
         frameNameStream << "CT-ID: " << buf->ct_id;
         std::string frameName = frameNameStream.str();
-        //TODO Divide TT and RC frames in separate types?
+        //TODO Minor: Divide TT and RC frames in separate types?
         priv->frame = new CTFrame(frameName.c_str(), IEEE802CTRL_DATA);
     }
     priv->frame->setByteLength(ETHER_MAC_FRAME_BYTES);
@@ -653,14 +653,14 @@ extern "C" int32_t tte_get_bg_output_buf(const uint8_t ctrl_id, const uint8_t ch
 
 extern "C" int32_t tte_write_output_buf(tte_buffer_t * const buf, tte_frame_t * const frame)
 {
-    //TODO High prio
+    //TODO Minor: High prio
     return ETT_NOTSUPPORTED;
 }
 
 extern "C" int32_t tte_read_input_buf(tte_buffer_t * const buf, tte_frame_t * const frame,
         tte_buf_status_t * const status)
 {
-    //TODO High prio
+    //TODO Minor: High prio
     return ETT_NOTSUPPORTED;
 }
 

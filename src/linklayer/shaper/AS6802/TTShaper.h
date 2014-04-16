@@ -349,7 +349,7 @@ cMessage* TTShaper<TC>::pop()
         cMessage *msg = (cMessage*) ttQueue.pop();
         cComponent::emit(ttQueueLengthSignal, ttQueue.length());
 
-        //TODO Update buffers:
+        //TODO Major: Update buffers:
         if (ttBuffers.size() > 0)
         {
             ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
@@ -410,7 +410,7 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
     }
     else
     {
-        //TODO check overlapping
+        //TODO Major: check overlapping
         ttBuffers[sendWindowStart] = ttBuffer;
     }
 
@@ -504,7 +504,7 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
     unsigned long sendTicks = ceil((sendTime / oscillator->par("tick")).dbl());
     unsigned long startTicks = ttBuffers.begin()->first;
 
-    //TODO: Perhaps more complex calculations needed?
+    //TODO: Major: Perhaps more complex calculations needed?
     if ((timer->getTotalTicks() + sendTicks) >= startTicks)
     {
         ev << "transmission not allowed! Send time would be from " << timer->getTotalTicks() << " to "

@@ -28,15 +28,27 @@
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * Timer Module:  Implements a timer with an attached oscillator with adjustable precision that may be synchronized by a
+ * synchronization module
  *
  * @author Till Steinbach
  */
 class Timer : public cSimpleModule
 {
     private:
+        /**
+         * @brief Ticks since simulation start
+         */
         uint64_t ticks;
+
+        /**
+         * @brief The attached oscillator driving the clock
+         */
         Oscillator *oscillator;
+
+        /**
+         * @brief Selfmessage for the simulation core to trigger scheduling of an event
+         */
         cMessage *selfMessage;
 
         /**
@@ -62,22 +74,49 @@ class Timer : public cSimpleModule
          */
         std::map<uint64_t, std::list<SchedulerTimerEvent*> > registredTimerEvents;
     protected:
+        /**
+         * Initialization of the module. Sets oscillator and registeres signals
+         */
         virtual void initialize();
+        /**
+         * Incoming self message triggers sendOutEvents()
+         */
         virtual void handleMessage(cMessage *msg);
     private:
+        /**
+         * @brief Method must be called after a clock drift change in the oscillator to reschedule messages with the new
+         * drift
+         */
         virtual void reschedule();
+        /**
+         * Calculates the point in ticks when the next action must be scheduled
+         * @return
+         */
         virtual uint32_t nextAction();
+        /**
+         * Trigger the sending of all events that are due at this moment
+         */
         virtual void sendOutEvents();
     public:
+        /**
+         * Constructor initializes members
+         */
         Timer();
+
+        /**
+         * Destructor cleans up
+         */
         ~Timer();
+        /**
+         * @brief When called, the ticks since simulation start are recalculated using current simulation time
+         */
         virtual void recalculate();
 
         /**
-         * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
+         * Register a new action time event in the scheduler. May fail if ActionTimeEvent is out of schedule
          *
          * @param event Pointer to the Event to be scheduled.
-         * The scheduler will send the event according to the event type
+         * @param period the period in which the event should be scheduled
          * @return returns registered event time
          *
          * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
@@ -85,6 +124,15 @@ class Timer : public cSimpleModule
          */
         virtual uint64_t registerEvent(SchedulerActionTimeEvent *event, Period *period);
 
+        /**
+         * Register a new timer event in the scheduler.
+         *
+         * @param event Pointer to the Event to be scheduled.
+         * @return returns registered event time
+         *
+         * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
+         * SchedulerTimerEvent
+         */
         virtual uint64_t registerEvent(SchedulerTimerEvent *event);
 
         /**
@@ -94,6 +142,9 @@ class Timer : public cSimpleModule
          */
         virtual uint64_t getTotalTicks();
 
+        /**
+         * @brief Returns a pointer to the attached oscillator
+         */
         virtual Oscillator* getOscillator();
 
         /**

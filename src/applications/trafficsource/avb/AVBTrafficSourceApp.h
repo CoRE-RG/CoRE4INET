@@ -31,7 +31,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  *
- * TODO Documentation
+ * TODO Normal: Documentation
  */
 
 class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed

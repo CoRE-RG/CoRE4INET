@@ -16,7 +16,9 @@
 package core4inet.scheduler.oscillator;
 
 //
-// TODO Documentation
+// Interface for a Module representing an oscillator.
+//
+// @see IOscillator, SimpleOscillator
 //
 // @author Till Steinbach
 //
@@ -33,5 +35,6 @@ moduleinterface IOscillator
         // Current length of a tick (with imprecission)
         volatile double current_tick @unit(s);
     gates:
+        //Output to the timer module (currently unused)
         output out;
 }

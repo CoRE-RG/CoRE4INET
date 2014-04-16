@@ -27,6 +27,9 @@ namespace CoRE4INET {
 /**
  * @brief Scheduler module.
  *
+ * @warning DEPRICATED MODULE, Please use Scheduler Module instead!
+ * @sa Scheduler
+ *
  * Implements a scheduler with a dedicated local clock with
  * adjustable precision that may be synchronized by a synchronization
  * module

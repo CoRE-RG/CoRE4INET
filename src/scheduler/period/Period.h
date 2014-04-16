@@ -25,13 +25,17 @@ namespace CoRE4INET {
 class Timer;
 
 /**
- * TODO - Generated class
+ * Period Module: Periods define the cycles for events
  *
  * @author Till Steinbach
  */
 class Period : public cSimpleModule
 {
     private:
+        /**
+         * @brief Connected timer module
+         *
+         */
         Timer *timer;
         /**
          * @brief Event indicating a new cycle start
@@ -44,9 +48,19 @@ class Period : public cSimpleModule
          */
         uint32_t cycles;
     protected:
+        /**
+         * Initialization of module, schedules new cycle message at timer
+         */
         virtual void initialize();
+        /**
+         * Received new cycle message to count cycles
+         * @param msg incoming new cycle message
+         */
         virtual void handleMessage(cMessage *msg);
     public:
+        /**
+         * Constructor, Initialization of members
+         */
         Period();
         /**
          * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule

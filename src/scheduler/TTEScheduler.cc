@@ -167,7 +167,7 @@ void TTEScheduler::correctEvents()
         {
             SchedulerActionTimeEvent *actionTimeEvent = (SchedulerActionTimeEvent*) *registredEvent;
             cancelEvent(actionTimeEvent);
-            //TODO lots of improvements!
+            //TODO Minor: lots of improvements!
             if (actionTimeEvent->getAction_time() > getTicks())
             {
                 scheduleAt(lastCycleStart + currentTick * actionTimeEvent->getAction_time(), actionTimeEvent);

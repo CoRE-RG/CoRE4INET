@@ -54,7 +54,7 @@ void TTBuffer::initialize(int stage)
 
         actionTimeEvent = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
         //Dirty FIX
-        //TODO find out what is wrong here!
+        //TODO Major: find out what is wrong here!
         //if(actionTimeEvent->isScheduled())
         //    cancelEvent(actionTimeEvent);
         actionTimeEvent->setAction_time((uint32_t) par("sendWindowStart").longValue());

@@ -54,7 +54,7 @@ void AVBIncoming::handleMessage(cMessage* msg)
     {
         AVBFrame *inFrame = ((AVBFrame*) msg);
 
-        //TODO error when gatesize==0? is this case even relevant? better >0 and delete else?
+        //TODO Major: error when gatesize==0? is this case even relevant? better >0 and delete else?
         if (gateSize("AVBout") > 1)
         {
             for (unsigned int i = 0; i < (unsigned int) gateSize("AVBout"); i++)

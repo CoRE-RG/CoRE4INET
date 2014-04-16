@@ -33,7 +33,7 @@ typedef void(*cbFunc)(void *);
  *
  * The class stores a funtion pointer and args and executes the function on demand.
  *
- * @todo This may be merged with the Task class in a joined superclass. The
+ * @todo Minor: This may be merged with the Task class in a joined superclass. The
  * code seems identical.
  *
  * @sa ApplicationBase

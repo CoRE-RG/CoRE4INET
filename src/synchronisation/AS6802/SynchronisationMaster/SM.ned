@@ -27,6 +27,8 @@ simple SM like ISync
     	
     //Period of Scheduler this sync module is assigned to
     string period = default("");
+    string oscillator = default("oscillator");
+    string timer = default("timer");
       
     //this variable is not part of AS6802 Spec, this parameter is used if the results have to be read from previous runs
     bool read=default(false);

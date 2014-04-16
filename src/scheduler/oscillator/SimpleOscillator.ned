@@ -18,7 +18,11 @@ package core4inet.scheduler.oscillator;
 import core4inet.utilities.classes.IScheduled;
 
 //
-// TODO auto-generated module
+// Module representing an oscillator with a simple clock drift behavior.
+// The module schedules a message for every cycle at action_point 0 and then changes the drift by using the drift_change
+// parameter.
+//
+// @see IOscillator, Oscillator
 //
 // @author Till Steinbach
 //
@@ -30,7 +34,7 @@ simple SimpleOscillator extends Oscillator
         double max_drift @unit(ppm) = default(200ppm);
         // Clock drift change intensity
         volatile double drift_change @unit(ppm) = default(uniform(12.5ppm,12.5ppm));
-
+        // Period related to the clock drift update
         string period = default("period[0]");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages

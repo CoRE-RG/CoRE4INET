@@ -24,7 +24,10 @@
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * Module representing an oscillator with a simple clock drift behavior.
+ *
+ * The module schedules a message for every cycle at action_point 0 and then changes the drift by using the drift_change
+ * parameter.
  *
  * @author Till Steinbach
  */
@@ -32,12 +35,19 @@ class SimpleOscillator : public Oscillator
 {
     private:
         /**
-         * TODO
+         * Period related to the oscillator updates
          */
         Period *period;
 
+        /**
+         * Simulation time when the oscillator was recalculated the last time
+         */
         simtime_t lastCorrection;
     protected:
+
+        /**
+         * @brief Initializes the module and registers the event for the recalculation of the drift
+         */
         virtual void initialize(int stage);
         /**
          * @brief Returns the number of initialization stages this module needs.
@@ -46,9 +56,11 @@ class SimpleOscillator : public Oscillator
          */
         virtual int numInitStages() const;
 
+        /**
+         * @brief On incoming scheduler messages the drift is recalculated
+         */
         virtual void handleMessage(cMessage *msg);
     public:
-        virtual simtime_t getTick();
 };
 
 } //namespace

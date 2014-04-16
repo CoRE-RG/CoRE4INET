@@ -20,7 +20,7 @@ package core4inet.utilities.classes;
 //
 // @author Till Steinbach
 //
-moduleinterface IScheduled
+moduleinterface IScheduled extends ITimed
 {
     parameters:
         //Period of the scheduled module (must be set to the name of a period module in the Node)

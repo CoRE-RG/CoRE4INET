@@ -30,7 +30,9 @@ simple SICM like ISync
     @display("i=block/timer");
         
         //Period of Scheduler this sync module is assigned to
-        string period = default("");     
+        string period = default("");  
+        string oscillator = default("oscillator");
+        string timer = default("timer");   
         
         //This variable is not part of AS6802 Spec, this parameter is used if the results have to be read/saved from/for previous/next runs
         //Each CM should have a unique ID

@@ -198,7 +198,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
         {
             uint64_t old_actionpoint = nextAction();
             registredTimerEvents[actionpoint].push_back(event);
-            //TODO: Overflow -> must regard ticks here!
+            //TODO: Major: Overflow -> must regard ticks here!
             if (!selfMessage->isScheduled() || actionpoint < old_actionpoint)
             {
                 reschedule();
@@ -256,7 +256,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
         {
             uint64_t old_actionpoint = nextAction();
             registredActionTimeEvents[actionpoint].push_back(actionTimeEvent);
-            //TODO: Overflow -> must regard ticks here!
+            //TODO: Major: Overflow -> must regard ticks here!
             if (!selfMessage->isScheduled() || actionpoint < old_actionpoint)
             {
                 reschedule();

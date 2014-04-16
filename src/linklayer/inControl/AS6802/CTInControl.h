@@ -251,7 +251,7 @@ bool CTInControl<IC>::isCT(EtherFrame *frame)
     {
         return true;
     }
-    //TODO More checking ?
+    //TODO Major: More checking ?
     return false;
 }
 

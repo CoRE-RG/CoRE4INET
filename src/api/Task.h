@@ -28,7 +28,7 @@ typedef void(*cbFunc)(void *);
  *
  * The class stores a funtion pointer and args and invokes the function periodically.
  *
- * @todo This may be merged with the Callback class in a joined superclass. The
+ * @todo Minor: This may be merged with the Callback class in a joined superclass. The
  * code seems identical.
  *
  * @sa ApplicationBase

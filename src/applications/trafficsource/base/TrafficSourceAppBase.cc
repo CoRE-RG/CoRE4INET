@@ -73,9 +73,9 @@ void TrafficSourceAppBase::sendMessage()
                     frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
                 }
                 frame->setCtID(ctID);
-                //TODO Error check
+                //TODO Major: Error check
                 Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
-                //TODO Better name for Frame
+                //TODO Minor: Better name for Frame
                 frame->setName((*buf)->getName());
                 sendDirect(frame, in->gate("in"));
             }

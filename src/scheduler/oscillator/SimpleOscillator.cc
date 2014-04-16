@@ -79,9 +79,4 @@ void SimpleOscillator::handleMessage(cMessage *msg)
     }
 }
 
-simtime_t SimpleOscillator::getTick()
-{
-    return SimTime(par("current_tick").doubleValue());
-}
-
 } //namespace

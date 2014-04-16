@@ -23,7 +23,9 @@ package core4inet.scheduler;
 // The Scheduler can be asked for the current time with the getTicks() method.
 // The cycle is configured by the parameters tick and cycle_ticks.
 //
-// @see SchedulerTimerEvent, SchedulerActionTimeEvent, SchedulerTimerEvent
+// @warning DEPRICATED MODULE, Please use Scheduler Module instead!
+// 
+// @see Scheduler
 //
 // @author Till Steinbach
 simple TTEScheduler like ITTEScheduler
