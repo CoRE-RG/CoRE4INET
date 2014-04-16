@@ -16,10 +16,10 @@
 package core4inet.nodes.ethernet.avb_AS6802;
 
 import core4inet.buffer.base.BGQueueBuffer;
-import core4inet.linklayer.SRPTrafficHandle;
+import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
 import core4inet.scheduler.ITTEScheduler;
-import core4inet.configuration.base.IConfigurationManager;
-import core4inet.linklayer.TTEAVBPHYPort;
+import core4inet.configuration.IConfigurationManager;
+import core4inet.linklayer.port.TTEAVBPHYPort;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;
 import core4inet.applications.base.IApplication;

@@ -13,7 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer;
+package core4inet.linklayer.port;
+
+import core4inet.linklayer.port.IPort;
 
 import inet.linklayer.IEtherMAC;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
@@ -27,10 +29,10 @@ import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 // @see IPort, EtherMACFullDuplex, TTEInput, TT_AVBClassA_PCF_RC_BE_Shaper, TT_PCF_RC_BE_Shaper, PCF_RC_BE_Shaper, BE_Shaper
 //
 // @author Philipp Meyer
-module TTEAVBPHYPort like IPort
+module TTEAVBPHYPort ext IPort
 {
     parameters:
-        @display("bgb=326,188;i=device/port");
+        @display("bgb=188,180;i=device/port");
         // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
         bool promiscuous = default(false);
     gates:

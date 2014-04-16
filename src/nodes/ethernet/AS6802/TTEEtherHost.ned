@@ -21,7 +21,7 @@ import core4inet.scheduler.ITTEScheduler;
 import core4inet.scheduler.TTEScheduler;
 import core4inet.scheduler.Scheduler;
 import core4inet.configuration.IConfigurationManager;
-import core4inet.linklayer.TTEPHYPort;
+import core4inet.linklayer.port.TTEPHYPort;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;
 import core4inet.applications.base.IApplication;

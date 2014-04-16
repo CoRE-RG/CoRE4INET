@@ -2,14 +2,14 @@ package core4inet.nodes.ethernet.avb_AS6802;
 
 import core4inet.scheduler.Scheduler;
 import core4inet.scheduler.ITTEScheduler;
-import core4inet.configuration.base.IConfigurationManager;
+import core4inet.configuration.IConfigurationManager;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;
-import core4inet.linklayer.TTEAVBPHYPort;
+import core4inet.linklayer.port.TTEAVBPHYPort;
 import core4inet.incoming.avb.AVBIncoming;
 import core4inet.buffer.avb.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
-import core4inet.linklayer.SRPTrafficHandle;
+import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
 import core4inet.utilities.modules.CheckedBuffer;
 
 import inet.linklayer.IMACRelayUnit;

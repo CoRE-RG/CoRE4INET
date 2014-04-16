@@ -12,8 +12,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package core4inet.linklayer;
+package core4inet.linklayer.port;
 
+import core4inet.linklayer.port.IPort;
 
 import inet.linklayer.IEtherMAC;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
@@ -51,14 +52,14 @@ module TTEPHYPort like IPort
 
     submodules:
         //Module for the organisation of outbound traffic
-        shaper: TT_PCF_RC_BE_Shaper{
+        shaper: TT_PCF_RC_BE_Shaper {
             @display("p=48,45");
         }
         //Module for the organisation of inbound traffic
         inControl: CT_BE_InControl {
-			parameters:
-            	@display("p=142,45");
-            	promiscuous = promiscuous;
+            parameters:
+                @display("p=142,45");
+                promiscuous = promiscuous;
         }
         //MAC interface
         mac: EtherMACFullDuplex {
@@ -73,8 +74,8 @@ module TTEPHYPort like IPort
         shaper.out --> mac.upperLayerIn;
         inControl.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
-        
-        
+
+
         TTin --> shaper.TTin;
         RCin --> shaper.RCin;
         PCFin --> shaper.PCFin;
