@@ -73,11 +73,26 @@ void TrafficSourceAppBase::sendMessage()
                     frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
                 }
                 frame->setCtID(ctID);
-                //TODO Major: Error check
-                Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
                 //TODO Minor: Better name for Frame
                 frame->setName((*buf)->getName());
-                sendDirect(frame, in->gate("in"));
+                if ((*buf)->gate("in")->getPathStartGate())
+                {
+                    Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
+                    if (in)
+                    {
+                        sendDirect(frame, in->gate("in"));
+                    }
+                    else
+                    {
+                        opp_error("You can only connect an Incoming module to a Buffer (Buffer:%s, Attached Module:%s)",
+                                (*buf)->getFullPath().c_str(),
+                                (*buf)->gate("in")->getPathStartGate()->getOwner()->getFullPath().c_str());
+                    }
+                }
+                else //It is ok to directly send a frame to a buffer if no incoming is attached!
+                {
+                    sendDirect(frame, (*buf)->gate("in"));
+                }
             }
         }
     }

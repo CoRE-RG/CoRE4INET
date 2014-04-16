@@ -192,7 +192,7 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
     ct_incomings.clear();
 
     std::vector<std::string> ct_incomingPaths = cStringTokenizer(cComponent::par("ct_incomings").stringValue(),
-            DELIMITERS).asVector();
+    DELIMITERS).asVector();
     for (std::vector<std::string>::iterator ct_incomingPath = ct_incomingPaths.begin();
             ct_incomingPath != ct_incomingPaths.end(); ct_incomingPath++)
     {
@@ -243,6 +243,12 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
 template<class IC>
 bool CTInControl<IC>::isCT(EtherFrame *frame)
 {
+    if (EthernetIIFrame *e2f = dynamic_cast<EthernetIIFrame*>(frame))
+    {
+        if(e2f->getEtherType()!=0x891d){
+            return false;
+        }
+    }
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);
     //Check for ct
@@ -251,7 +257,6 @@ bool CTInControl<IC>::isCT(EtherFrame *frame)
     {
         return true;
     }
-    //TODO Major: More checking ?
     return false;
 }
 

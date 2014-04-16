@@ -16,7 +16,7 @@ cplusplus {{
         #include "EtherFrame_m.h"
 }}
 
-class ::EtherFrame;
+class ::EthernetIIFrame;
 
 namespace CoRE4INET;
 
@@ -29,10 +29,12 @@ namespace CoRE4INET;
 // @see EtherFrame
 //
 // @author Till Steinbach
-packet CTFrame extends EtherFrame
+packet CTFrame extends EthernetIIFrame
 {    
     	// Set EthernetHeader Bytelength
     	byteLength = 18;
+    	
+    	etherType = 0x891d;
     	
         // Critical traffic ID (from MAC) (for TT and RC messages). 
         @customize(true);
