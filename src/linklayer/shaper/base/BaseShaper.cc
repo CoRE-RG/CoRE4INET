@@ -12,9 +12,15 @@ void BaseShaper::initialize(int stage)
 {
     if (stage == 0)
     {
-        cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
-        outChannel = physOutGate->findTransmissionChannel();
-
+        if (getParentModule() && getParentModule()->getSubmodule("mac")
+                && getParentModule()->getSubmodule("mac")->gate("phys$o"))
+        {
+            cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
+            outChannel = physOutGate->findTransmissionChannel();
+        }
+        else{
+            opp_error("A shaper can only be used within a port module with an attached EtherMac");
+        }
         WATCH(framesRequested);
     }
 }
