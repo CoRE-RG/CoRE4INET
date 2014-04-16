@@ -1,0 +1,114 @@
+%description:
+Test TTShaperRegistration
+%#--------------------------------------------------------------------------------------------------------------
+%file: TTShaperRegistrationTest.ned
+
+import inet.nodes.ethernet.Eth100M;
+
+network TTShaperRegistrationTest
+{
+    parameters:
+        @display("bgb=,,white");
+        double measure_interval @unit(s) = default(1s);
+    submodules:
+        node1: Node1 {
+            @display("p=39,70");
+        }
+    connections:
+}
+%#--------------------------------------------------------------------------------------------------------------
+%file: Node1.ned
+
+import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import core4inet.incoming.AS6802.TTIncoming;
+import core4inet.buffer.AS6802.TTDoubleBuffer;
+
+module Node1 extends TTEEtherHost
+{
+    parameters:
+    @display("bgb=479,314");
+    
+    **.ct_marker = 0x03040506;
+    **.ct_mask = -1;
+    
+    **.scheduler.numPeriods = 2;
+    
+    phy[0].shaper.tt_buffers = "tt1, tt2";
+    submodules:
+        tt1_ctc: TTIncoming {
+            parameters:
+                @display("p=350,100");
+				receive_window_start = sec_to_tick(1us);
+				receive_window_end = sec_to_tick(2us);
+				permanence_pit = sec_to_tick(3us);
+        }
+        tt1: TTDoubleBuffer {
+            parameters:
+                @display("p=440,100");
+                ct_id = 1;
+                period = "period[0]";
+        }
+        tt2_ctc: TTIncoming {
+            parameters:
+                @display("p=350,160");
+				receive_window_start = sec_to_tick(1us);
+				receive_window_end = sec_to_tick(2us);
+				permanence_pit = sec_to_tick(3us);
+        }
+        tt2: TTDoubleBuffer {
+            parameters:
+                @display("p=440,160");
+                ct_id = 2;
+                period = "period[1]";
+        }
+    connections:
+        tt1_ctc.out --> tt1.in;
+        tt2_ctc.out --> tt2.in;
+}
+%#--------------------------------------------------------------------------------------------------------------
+%inifile: test.ini
+[General]
+check-signals = true
+ned-path = .;../../../../src;../../../../../inet/src;../../lib/
+
+network = TTShaperRegistrationTest
+
+sim-time-limit = 1s
+
+#[Cmdenv]
+cmdenv-event-banners=false
+cmdenv-express-mode=false
+
+#[Parameters]
+repeat = 4
+
+**.scheduler.numPeriods = 2
+**.scheduler.period[0].cycle_ticks = sec_to_tick(5ms)
+**.scheduler.period[1].cycle_ticks = sec_to_tick(10ms)
+**.scheduler.period[1].offset_ticks = ${sec_to_tick(1ms),sec_to_tick(0ms),sec_to_tick(0ms),sec_to_tick(0ms) ! repetition}
+
+**.tt1.sendWindowStart = sec_to_tick(1us)
+**.tt1.sendWindowEnd = sec_to_tick(10us)
+
+**.tt2.sendWindowStart = ${sec_to_tick(1us),sec_to_tick(1us),sec_to_tick(11us),sec_to_tick(5us) ! repetition}
+**.tt2.sendWindowEnd = sec_to_tick(15us)
+%#--------------------------------------------------------------------------------------------------------------
+%ignore-exitcode: true
+%contains-regex: stdout
+.*
+Preparing for running configuration General, run #0...
+.*
+Calling finish\(\) at end of Run #0...
+.*
+Preparing for running configuration General, run #1...
+.*
+.*Model error: ERROR! You cannot schedule two messages with the same send window!.*
+.*
+Preparing for running configuration General, run #2...
+.*
+Calling finish\(\) at end of Run #2...
+.*
+Preparing for running configuration General, run #3...
+.*
+Calling finish\(\) at end of Run #3...
+.*
