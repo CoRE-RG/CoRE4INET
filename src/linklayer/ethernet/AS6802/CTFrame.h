@@ -33,38 +33,54 @@ namespace CoRE4INET {
 class CTFrame : public CTFrame_Base
 {
     public:
-        CTFrame() : CTFrame_Base() {}
-        CTFrame(const CTFrame& other) : CTFrame_Base(other) {}
-        CTFrame(const char *name=NULL, int kind=0) : CTFrame_Base(name,kind) {}
-        CTFrame& operator=(const CTFrame& other) {CTFrame_Base::operator=(other); return *this;}
-        virtual CTFrame *dup() const {return new CTFrame(*this);}
+        CTFrame() :
+                CTFrame_Base()
+        {
+        }
+        CTFrame(const CTFrame& other) :
+                CTFrame_Base(other)
+        {
+        }
+        CTFrame(const char *name = NULL, int kind = 0) :
+                CTFrame_Base(name, kind)
+        {
+        }
+        CTFrame& operator=(const CTFrame& other)
+        {
+            CTFrame_Base::operator=(other);
+            return *this;
+        }
+        virtual CTFrame *dup() const
+        {
+            return new CTFrame(*this);
+        }
 
         /**
-        * @brief Implements abstract CtID getter.
-        *
-        * @return critical traffic id from destination mac
-        */
+         * @brief Implements abstract CtID getter.
+         *
+         * @return critical traffic id from destination mac
+         */
         virtual uint16_t getCtID() const;
 
         /**
-        * @brief Implements abstract CtID setter.
-        *
-        * @param ctID critical traffic id that should be set in destination mac
-        */
+         * @brief Implements abstract CtID setter.
+         *
+         * @param ctID critical traffic id that should be set in destination mac
+         */
         virtual void setCtID(uint16_t ctID);
 
         /**
-        * @brief Implements abstract CtMarker getter.
-        *
-        * @return critical traffic marker from destination mac
-        */
+         * @brief Implements abstract CtMarker getter.
+         *
+         * @return critical traffic marker from destination mac
+         */
         virtual uint32_t getCtMarker() const;
 
         /**
-        * @brief Implements abstract CtMarker setter.
-        *
-        * @param ctMarker critical traffic marker that should be set in destination mac
-        */
+         * @brief Implements abstract CtMarker setter.
+         *
+         * @param ctMarker critical traffic marker that should be set in destination mac
+         */
         virtual void setCtMarker(uint32_t ctMarker);
 };
 

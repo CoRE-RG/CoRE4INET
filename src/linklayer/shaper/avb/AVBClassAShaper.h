@@ -12,7 +12,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-template <class TC>
+template<class TC>
 class AVBClassAShaper : public TC
 {
     public:
@@ -24,7 +24,6 @@ class AVBClassAShaper : public TC
          * @brief Destructor
          */
         ~AVBClassAShaper();
-
 
     private:
         /**
@@ -47,7 +46,6 @@ class AVBClassAShaper : public TC
          * @param stage The stages. Module initializes when stage==0
          */
         virtual void initialize(int stage);
-
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -115,37 +113,41 @@ class AVBClassAShaper : public TC
         virtual cMessage *front();
 };
 
-template <class TC>
+template<class TC>
 simsignal_t AVBClassAShaper<TC>::avbQueueLengthSignal = SIMSIGNAL_NULL;
 
-template <class TC>
-AVBClassAShaper<TC>::AVBClassAShaper(){
+template<class TC>
+AVBClassAShaper<TC>::AVBClassAShaper()
+{
     avbQueue.setName("AVB Messages");
 }
 
-template <class TC>
-AVBClassAShaper<TC>::~AVBClassAShaper(){
+template<class TC>
+AVBClassAShaper<TC>::~AVBClassAShaper()
+{
     avbQueue.clear();
 }
 
-template <class TC>
+template<class TC>
 void AVBClassAShaper<TC>::initialize(int stage)
 {
     TC::initialize(stage);
-    if(stage==0){
+    if (stage == 0)
+    {
         avbQueueLengthSignal = cComponent::registerSignal("avbQueueLength");
 
         int portIndex = cModule::getParentModule()->getIndex();
-        avbBuffer = dynamic_cast<AVBBuffer*> (cModule::getParentModule()->getParentModule()->getSubmodule("avbBuffer", portIndex));
+        avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbBuffer",
+                portIndex));
     }
 }
 
-template <class TC>
+template<class TC>
 void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("AVBin"))
+    if (msg->arrivedOn("AVBin"))
     {
-        if(TC::getNumPendingRequests() && avbBuffer->getCredit() >= 0)
+        if (TC::getNumPendingRequests() && avbBuffer->getCredit() >= 0)
         {
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
@@ -158,31 +160,39 @@ void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
             enqueueMessage(msg);
         }
     }
-    else{
-        if(avbBuffer->getCredit() <= 0){
+    else
+    {
+        if (avbBuffer->getCredit() <= 0)
+        {
             TC::handleMessage(msg);
-        }else{
+        }
+        else
+        {
             TC::enqueueMessage(msg);
         }
     }
 }
 
-template <class TC>
-void AVBClassAShaper<TC>::enqueueMessage(cMessage *msg){
-    if(msg->arrivedOn("AVBin")){
+template<class TC>
+void AVBClassAShaper<TC>::enqueueMessage(cMessage *msg)
+{
+    if (msg->arrivedOn("AVBin"))
+    {
         avbQueue.insert(msg);
-        cComponent::emit(avbQueueLengthSignal, (unsigned int)avbQueue.length());
+        cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());
         TC::notifyListeners();
     }
-    else{
+    else
+    {
         TC::enqueueMessage(msg);
     }
 }
 
-template <class TC>
+template<class TC>
 void AVBClassAShaper<TC>::requestPacket()
 {
-    Enter_Method("requestPacket()");
+    Enter_Method
+    ("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -193,30 +203,34 @@ void AVBClassAShaper<TC>::requestPacket()
     }
 }
 
-template <class TC>
+template<class TC>
 cMessage* AVBClassAShaper<TC>::pop()
 {
-    Enter_Method("pop()");
+    Enter_Method
+    ("pop()");
     //AVBFrames
-    if(avbBuffer->initialized()) avbBuffer->refresh();
+    if (avbBuffer->initialized())
+        avbBuffer->refresh();
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
         cMessage *msg = (cMessage*) avbQueue.pop();
-        cComponent::emit(avbQueueLengthSignal, (unsigned int)avbQueue.length());
+        cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());
         SimTime duration = TC::outChannel->calculateDuration(msg);
         avbBuffer->sendSlope(duration);
         return msg;
     }
-    else if(avbBuffer->getCredit() <= 0){
+    else if (avbBuffer->getCredit() <= 0)
+    {
         return TC::pop();
     }
     return NULL;
 }
 
-template <class TC>
+template<class TC>
 cMessage* AVBClassAShaper<TC>::front()
 {
-    Enter_Method("front()");
+    Enter_Method
+    ("front()");
     //AVBFrames
     if (!avbQueue.isEmpty())
     {
@@ -226,17 +240,17 @@ cMessage* AVBClassAShaper<TC>::front()
     return TC::front();
 }
 
-template <class TC>
+template<class TC>
 bool AVBClassAShaper<TC>::isEmpty()
 {
-        return avbQueue.isEmpty() && TC::isEmpty();
+    return avbQueue.isEmpty() && TC::isEmpty();
 }
 
-template <class TC>
+template<class TC>
 void AVBClassAShaper<TC>::clear()
 {
-        TC::clear();
-        avbQueue.clear();
+    TC::clear();
+    avbQueue.clear();
 }
 
 }

@@ -31,21 +31,21 @@ namespace CoRE4INET {
  */
 class BGTrafficHandle : public cSimpleModule
 {
-  protected:
-    /**
-     * @brief In initialization the handle sends a register_DSAP message
-     * to register itself at the LLC
-     */
-    virtual void initialize();
+    protected:
+        /**
+         * @brief In initialization the handle sends a register_DSAP message
+         * to register itself at the LLC
+         */
+        virtual void initialize();
 
-    /**
-     * @brief Messages are transferred between lower and upper layer.
-     *
-     * For outgoing messages Ssap and Dsap are set.
-     *
-     * @param msg incoming messages
-     */
-    virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief Messages are transferred between lower and upper layer.
+         *
+         * For outgoing messages Ssap and Dsap are set.
+         *
+         * @param msg incoming messages
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

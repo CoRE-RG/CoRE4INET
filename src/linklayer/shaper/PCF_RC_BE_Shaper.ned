@@ -39,9 +39,9 @@ simple PCF_RC_BE_Shaper extends BE_Shaper
         @signal[rc*QueueLength](type=unsigned long);
         //Statistic of the queue length of rate-constrained frames
         @statisticTemplate[rcQueueLength](title="RC-Queue Length ($name)"; record=vector; interpolationmode=sample-hold);
-        
+
         int numRCpriority = default(10);
-    gates:        
+    gates:
         //Input for rate-constrained frames from the buffers
         input RCin @labels(RCFrame);
         //Input for protocol control frames from the buffers

@@ -27,7 +27,6 @@
 #include <map>
 #include <list>
 
-
 namespace CoRE4INET {
 
 /**
@@ -56,23 +55,36 @@ class BaseInControl : public virtual cSimpleModule, public Timed
         /**
          * @brief Constructor
          */
-        BaseInControl(){promiscuous=false; hadError=false;}
+        BaseInControl()
+        {
+            promiscuous = false;
+            hadError = false;
+        }
 
         /**
          * @brief Initializes the module
          */
         virtual void initialize();
 
-        virtual void handleMessage(cMessage *msg){delete msg;}
+        virtual void handleMessage(cMessage *msg)
+        {
+            delete msg;
+        }
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
-        virtual void handleParameterChange(__attribute((unused)) const char* parname){promiscuous = par("promiscuous").boolValue();}
+        virtual void handleParameterChange(__attribute((unused)) const char* parname)
+        {
+            promiscuous = par("promiscuous").boolValue();
+        }
 
-        bool isPromiscuous(){return promiscuous;}
+        bool isPromiscuous()
+        {
+            return promiscuous;
+        }
     protected:
         /**
          * @brief Sets parameters in the frame such as received_port and times

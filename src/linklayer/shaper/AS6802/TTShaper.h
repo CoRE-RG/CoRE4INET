@@ -34,10 +34,10 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-template <class TC>
+template<class TC>
 class TTShaper : public TC, public virtual Timed
 {
-    using Timed::initialize;
+        using Timed::initialize;
     public:
         /**
          * @brief Constructor
@@ -67,7 +67,7 @@ class TTShaper : public TC, public virtual Timed
          *
          * The map is ordered by sendwindow
          */
-        std::map <uint64_t, TTBuffer * > ttBuffers;
+        std::map<uint64_t, TTBuffer *> ttBuffers;
         bool initialize_ttBuffers;
 
         /**
@@ -190,78 +190,90 @@ class TTShaper : public TC, public virtual Timed
         virtual bool isTTBufferRegistered(TTBuffer *ttBuffer);
 };
 
-template <class TC>
+template<class TC>
 simsignal_t TTShaper<TC>::ttQueueLengthSignal = SIMSIGNAL_NULL;
 
-template <class TC>
-TTShaper<TC>::TTShaper(){
+template<class TC>
+TTShaper<TC>::TTShaper()
+{
     ttBuffersPos = 0;
     ttQueue.setName("TT Messages");
-    initialize_ttBuffers=false;
+    initialize_ttBuffers = false;
 }
 
-template <class TC>
-TTShaper<TC>::~TTShaper(){
+template<class TC>
+TTShaper<TC>::~TTShaper()
+{
     ttQueue.clear();
 }
 
-template <class TC>
+template<class TC>
 void TTShaper<TC>::initialize(int stage)
 {
     TC::initialize(stage);
-    if(stage==0){
+    if (stage == 0)
+    {
         Timed::initialize();
         ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
         //Send initial signal to create statistic
-        cComponent::emit(ttQueueLengthSignal, (unsigned long)ttQueue.length());
+        cComponent::emit(ttQueueLengthSignal, (unsigned long) ttQueue.length());
     }
-    else if(stage==2){
+    else if (stage == 2)
+    {
         //Now the ttBuffers can be initialized as all TTBuffers should have registred their events
-        initialize_ttBuffers=true;
+        initialize_ttBuffers = true;
         handleParameterChange("tt_buffers");
     }
 }
-template <class TC>
-int TTShaper<TC>::numInitStages() const{
-    if(TC::numInitStages()>3){
+template<class TC>
+int TTShaper<TC>::numInitStages() const
+{
+    if (TC::numInitStages() > 3)
+    {
         return TC::numInitStages();
     }
-    else{
+    else
+    {
         return 3;
     }
 }
 
-template <class TC>
+template<class TC>
 void TTShaper<TC>::handleMessage(cMessage *msg)
 {
     //Frames arrived on in are rate-constrained frames
     if (msg->arrivedOn("TTin"))
     {
         TTBuffer *thisttBuffer;
-        TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (msg->getSenderModule());
-        ASSERT(isTTBufferRegistered(ttBuffer)==true);//No shuffeling at the moment
+        TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(msg->getSenderModule());
+        ASSERT(isTTBufferRegistered(ttBuffer) == true); //No shuffeling at the moment
         ASSERT2(ttBuffer, "A TTFrame was received that was not sent by a TTBuffer");
 
-        if(ttBuffers.size()>0){
+        if (ttBuffers.size() > 0)
+        {
             thisttBuffer = ttBuffers.begin()->second;
-        }else{
+        }
+        else
+        {
             thisttBuffer = NULL;
         }
-        ASSERT(thisttBuffer==ttBuffer);
-        if(thisttBuffer!=ttBuffer){
-            ASSERT2(isTTBufferRegistered(ttBuffer)==false, "A TTFrame was received that was unexpected");
+        ASSERT(thisttBuffer == ttBuffer);
+        if (thisttBuffer != ttBuffer)
+        {
+            ASSERT2(isTTBufferRegistered(ttBuffer) == false, "A TTFrame was received that was unexpected");
         }
         //Now reregister the same TTBuffer
         ttBuffers.erase(ttBuffers.begin());
         registerTTBuffer(ttBuffer);
 
         //If we have an empty message allow lower priority frame to be sent
-        if (dynamic_cast<TTBufferEmpty *> (msg))
+        if (dynamic_cast<TTBufferEmpty *>(msg))
         {
             if (TC::getNumPendingRequests())
             {
                 cMessage* lowPrioFrame = TC::pop();
-                if(lowPrioFrame){
+                if (lowPrioFrame)
+                {
                     TC::framesRequested--;
                     cSimpleModule::send(lowPrioFrame, cModule::gateBaseId("out"));
                 }
@@ -278,37 +290,44 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
             }
             else
             {
-                ASSERT2(isTTBufferRegistered(ttBuffer)==false, "TTFrame was delayed without permission");
+                ASSERT2(isTTBufferRegistered(ttBuffer) == false, "TTFrame was delayed without permission");
                 enqueueMessage(msg);
             }
         }
     }
-    else{
-        if(TC::getNumPendingRequests() && isTransmissionAllowed((EtherFrame*) msg)){
+    else
+    {
+        if (TC::getNumPendingRequests() && isTransmissionAllowed((EtherFrame*) msg))
+        {
             TC::handleMessage(msg);
         }
-        else{
+        else
+        {
             TC::enqueueMessage(msg);
         }
     }
 }
 
-template <class TC>
-void TTShaper<TC>::enqueueMessage(cMessage *msg){
-    if(msg->arrivedOn("TTin")){
+template<class TC>
+void TTShaper<TC>::enqueueMessage(cMessage *msg)
+{
+    if (msg->arrivedOn("TTin"))
+    {
         ttQueue.insert(msg);
         cComponent::emit(ttQueueLengthSignal, ttQueue.length());
         TC::notifyListeners();
     }
-    else{
+    else
+    {
         TC::enqueueMessage(msg);
     }
 }
 
-template <class TC>
+template<class TC>
 void TTShaper<TC>::requestPacket()
 {
-    Enter_Method("requestPacket()");
+    Enter_Method
+    ("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -319,10 +338,11 @@ void TTShaper<TC>::requestPacket()
     }
 }
 
-template <class TC>
+template<class TC>
 cMessage* TTShaper<TC>::pop()
 {
-    Enter_Method("pop()");
+    Enter_Method
+    ("pop()");
     //TTFrames
     if (!ttQueue.isEmpty())
     {
@@ -330,25 +350,29 @@ cMessage* TTShaper<TC>::pop()
         cComponent::emit(ttQueueLengthSignal, ttQueue.length());
 
         //TODO Update buffers:
-        if(ttBuffers.size()>0){
+        if (ttBuffers.size() > 0)
+        {
             ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
         }
 
         return msg;
     }
-    else{
+    else
+    {
         EtherFrame *frontMsg = (EtherFrame*) front();
-        if(isTransmissionAllowed(frontMsg)){
+        if (isTransmissionAllowed(frontMsg))
+        {
             return TC::pop();
         }
     }
     return NULL;
 }
 
-template <class TC>
+template<class TC>
 cMessage* TTShaper<TC>::front()
 {
-    Enter_Method("front()");
+    Enter_Method
+    ("front()");
     //TTFrames
     if (!ttQueue.isEmpty())
     {
@@ -358,89 +382,110 @@ cMessage* TTShaper<TC>::front()
     return TC::front();
 }
 
-template <class TC>
+template<class TC>
 bool TTShaper<TC>::isEmpty()
 {
-        return ttQueue.isEmpty() && TC::isEmpty();
+    return ttQueue.isEmpty() && TC::isEmpty();
 }
 
-template <class TC>
+template<class TC>
 void TTShaper<TC>::clear()
 {
-        TC::clear();
-        ttQueue.clear();
+    TC::clear();
+    ttQueue.clear();
 }
 
-template <class TC>
+template<class TC>
 void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
 {
-    Enter_Method("registerTTBuffer(%s)", ttBuffer->getName());
+    Enter_Method
+    ("registerTTBuffer(%s)", ttBuffer->getName());
     uint64_t sendWindowStart = ttBuffer->nextSendWindowStart();
-    ev << "sendWindowStart:  "<< sendWindowStart << " Buffer:"<< ttBuffer->getName() <<std::endl;
+    ev << "sendWindowStart:  " << sendWindowStart << " Buffer:" << ttBuffer->getName() << std::endl;
 
     std::map<uint64_t, TTBuffer*>::iterator buf = ttBuffers.find(sendWindowStart);
-    if(buf!=ttBuffers.end()){
+    if (buf != ttBuffers.end())
+    {
         opp_error("ERROR! You cannot schedule two messages with the same send window!");
     }
-    else{
+    else
+    {
         //TODO check overlapping
         ttBuffers[sendWindowStart] = ttBuffer;
     }
 
 }
 
-template <class TC>
-bool TTShaper<TC>::isTTBufferRegistered(TTBuffer *ttBuffer){
-    for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();++buffer)
+template<class TC>
+bool TTShaper<TC>::isTTBufferRegistered(TTBuffer *ttBuffer)
+{
+    for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end(); ++buffer)
     {
-        if((*buffer).second==ttBuffer){
+        if ((*buffer).second == ttBuffer)
+        {
             return true;
         }
     }
     return false;
 }
 
-template <class TC>
-void TTShaper<TC>::handleParameterChange(const char* parname){
+template<class TC>
+void TTShaper<TC>::handleParameterChange(const char* parname)
+{
     TC::handleParameterChange(parname);
-    if(initialize_ttBuffers){
+    if (initialize_ttBuffers)
+    {
         ttBuffers.clear();
-        std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(), DELIMITERS).asVector();
-        for(std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
-                ttBufferPath!=ttBufferPaths.end();ttBufferPath++){
+        std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(),
+                DELIMITERS).asVector();
+        for (std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
+                ttBufferPath != ttBufferPaths.end(); ttBufferPath++)
+        {
             cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
-            if(!module){
-                module = findModuleWhereverInNode((*ttBufferPath).c_str(),this);
+            if (!module)
+            {
+                module = findModuleWhereverInNode((*ttBufferPath).c_str(), this);
             }
-            if(module){
-                if(findContainingNode(module)!=findContainingNode(this)){
-                    opp_error("Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?", (*ttBufferPath).c_str(),
-                            findContainingNode(this)->getFullName());
+            if (module)
+            {
+                if (findContainingNode(module) != findContainingNode(this))
+                {
+                    opp_error(
+                            "Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                            (*ttBufferPath).c_str(), findContainingNode(this)->getFullName());
                 }
                 else
                 {
-                    TTBuffer *ttBuffer = dynamic_cast<TTBuffer*> (module);
-                    if(ttBuffer){
-                        if(!isTTBufferRegistered(ttBuffer)){
+                    TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(module);
+                    if (ttBuffer)
+                    {
+                        if (!isTTBufferRegistered(ttBuffer))
+                        {
                             registerTTBuffer(ttBuffer);
                         }
-                        else{
-                            opp_error("Configuration problem of tt_buffers: Module: %s is in the list more than once!", (*ttBufferPath).c_str());
+                        else
+                        {
+                            opp_error("Configuration problem of tt_buffers: Module: %s is in the list more than once!",
+                                    (*ttBufferPath).c_str());
                         }
                     }
-                    else{
-                        opp_error("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!", (*ttBufferPath).c_str());
+                    else
+                    {
+                        opp_error("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!",
+                                (*ttBufferPath).c_str());
                     }
                 }
             }
-            else{
-                opp_error("Configuration problem of tt_buffers: Module: %s could not be resolved!", (*ttBufferPath).c_str());
+            else
+            {
+                opp_error("Configuration problem of tt_buffers: Module: %s could not be resolved!",
+                        (*ttBufferPath).c_str());
             }
         }
     }
 }
 
-template <class TC>
+template<class TC>
 bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
 {
     if (!message || !TC::outChannel)
@@ -462,7 +507,8 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
     //TODO: Perhaps more complex calculations needed?
     if ((timer->getTotalTicks() + sendTicks) >= startTicks)
     {
-        ev << "transmission not allowed! Send time would be from " << timer->getTotalTicks() << " to " << timer->getTotalTicks() + sendTicks << " tt_window starts at: " << startTicks << endl;
+        ev << "transmission not allowed! Send time would be from " << timer->getTotalTicks() << " to "
+                << timer->getTotalTicks() + sendTicks << " tt_window starts at: " << startTicks << endl;
         return false;
     }
     return true;

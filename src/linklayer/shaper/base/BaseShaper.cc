@@ -4,15 +4,14 @@
 
 #include <ModuleAccess.h>
 
-
 #include <HelperFunctions.h>
 
 using namespace CoRE4INET;
 
-
 void BaseShaper::initialize(int stage)
 {
-    if(stage == 0){
+    if (stage == 0)
+    {
         cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
         outChannel = physOutGate->findTransmissionChannel();
 
@@ -20,16 +19,19 @@ void BaseShaper::initialize(int stage)
     }
 }
 
-int BaseShaper::numInitStages() const{
+int BaseShaper::numInitStages() const
+{
     return 1;
 }
 
-void BaseShaper::addListener(IPassiveQueueListener *listener){
+void BaseShaper::addListener(IPassiveQueueListener *listener)
+{
     std::list<IPassiveQueueListener*>::iterator it = find(listeners.begin(), listeners.end(), listener);
     if (it == listeners.end())
         listeners.push_back(listener);
 }
-void BaseShaper::removeListener(IPassiveQueueListener *listener){
+void BaseShaper::removeListener(IPassiveQueueListener *listener)
+{
     std::list<IPassiveQueueListener*>::iterator it = find(listeners.begin(), listeners.end(), listener);
     if (it != listeners.end())
         listeners.erase(it);

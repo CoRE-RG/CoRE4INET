@@ -35,10 +35,10 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-template <class TC>
+template<class TC>
 class RCShaper : public TC, public virtual Timed
 {
-    using Timed::initialize;
+        using Timed::initialize;
     public:
         /**
          * @brief Constructor
@@ -63,7 +63,7 @@ class RCShaper : public TC, public virtual Timed
         /**
          * @brief Signal that is emitted when the queue length of time-triggered messages changes.
          */
-        std::vector<simsignal_t>rcQueueLengthSignals;
+        std::vector<simsignal_t> rcQueueLengthSignals;
     protected:
         /**
          * Initializes the module
@@ -78,7 +78,6 @@ class RCShaper : public TC, public virtual Timed
          * @return returns 1 or more depending on inheritance
          */
         virtual int numInitStages() const;
-
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -104,14 +103,14 @@ class RCShaper : public TC, public virtual Timed
         virtual void enqueueMessage(cMessage *msg);
 
         /**
-        * @brief this method is invoked when the underlying mac is idle.
-        *
-        * When this method is invoked the module sends a new message when there is
-        * one. Else it saves the state and sends the message immediately when it is
-        * received.
-        *
-        * @param msg the message to be queued
-        */
+         * @brief this method is invoked when the underlying mac is idle.
+         *
+         * When this method is invoked the module sends a new message when there is
+         * one. Else it saves the state and sends the message immediately when it is
+         * received.
+         *
+         * @param msg the message to be queued
+         */
         virtual void requestPacket();
 
         /**
@@ -146,19 +145,22 @@ class RCShaper : public TC, public virtual Timed
         virtual cMessage *front();
 };
 
-template <class TC>
-RCShaper<TC>::RCShaper(){
+template<class TC>
+RCShaper<TC>::RCShaper()
+{
 }
 
-template <class TC>
-RCShaper<TC>::~RCShaper(){
+template<class TC>
+RCShaper<TC>::~RCShaper()
+{
 }
 
-template <class TC>
+template<class TC>
 void RCShaper<TC>::initialize(int stage)
 {
     TC::initialize(stage);
-    if(stage==0){
+    if (stage == 0)
+    {
         Timed::initialize();
 
         numRcPriority = par("numRCpriority").longValue();
@@ -166,34 +168,37 @@ void RCShaper<TC>::initialize(int stage)
         {
             char strBuf[32];
             cQueue queue;
-            snprintf(strBuf,32,"RC Priority %d Messages", i);
+            snprintf(strBuf, 32, "RC Priority %d Messages", i);
             queue.setName(strBuf);
             rcQueue.push_back(queue);
 
-            snprintf(strBuf,32,"rc%dQueueLength", i);
+            snprintf(strBuf, 32, "rc%dQueueLength", i);
             simsignal_t signal = registerSignal(strBuf);
 
-            cProperty *statisticTemplate = getProperties()->get("statisticTemplate","rcQueueLength");
+            cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "rcQueueLength");
             ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
 
             rcQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
-            cComponent::emit(signal, (unsigned long)queue.length());
+            cComponent::emit(signal, (unsigned long) queue.length());
         }
     }
 }
 
-template <class TC>
-int RCShaper<TC>::numInitStages() const{
-    if(TC::numInitStages()>1){
+template<class TC>
+int RCShaper<TC>::numInitStages() const
+{
+    if (TC::numInitStages() > 1)
+    {
         return TC::numInitStages();
     }
-    else{
+    else
+    {
         return 1;
     }
 }
 
-template <class TC>
+template<class TC>
 void RCShaper<TC>::handleMessage(cMessage *msg)
 {
     //Frames arrived on in are rate-constreind frames
@@ -202,12 +207,13 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
         if (TC::getNumPendingRequests())
         {
             //Reset Bag
-            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (msg->getSenderModule());
+            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
             if (rcBuffer)
                 rcBuffer->resetBag();
             //Set Transparent clock when frame is PCF
-            PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
-            if(pcf){
+            PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
+            if (pcf)
+            {
                 setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
             }
             TC::framesRequested--;
@@ -218,42 +224,49 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
             enqueueMessage(msg);
         }
     }
-    else{
-        if(TC::getNumPendingRequests()){
+    else
+    {
+        if (TC::getNumPendingRequests())
+        {
             TC::handleMessage(msg);
         }
-        else{
+        else
+        {
             TC::enqueueMessage(msg);
         }
     }
 }
 
-template <class TC>
-void RCShaper<TC>::enqueueMessage(cMessage *msg){
-    if(msg->arrivedOn("RCin")){
-       int priority = msg->getSenderModule()->par("priority").longValue();
-       if (priority > 0 && (unsigned int)priority < numRcPriority)
-       {
-           rcQueue[priority].insert(msg);
-           cComponent::emit(rcQueueLengthSignals[priority], (unsigned long)rcQueue[priority].length());
-           TC::notifyListeners();
-       }
-       else
-       {
-           rcQueue[0].insert(msg);
-           TC::notifyListeners();
-           ev << "Priority missing!" << endl;
-       }
+template<class TC>
+void RCShaper<TC>::enqueueMessage(cMessage *msg)
+{
+    if (msg->arrivedOn("RCin"))
+    {
+        int priority = msg->getSenderModule()->par("priority").longValue();
+        if (priority > 0 && (unsigned int) priority < numRcPriority)
+        {
+            rcQueue[priority].insert(msg);
+            cComponent::emit(rcQueueLengthSignals[priority], (unsigned long) rcQueue[priority].length());
+            TC::notifyListeners();
+        }
+        else
+        {
+            rcQueue[0].insert(msg);
+            TC::notifyListeners();
+            ev << "Priority missing!" << endl;
+        }
     }
-    else{
+    else
+    {
         TC::enqueueMessage(msg);
     }
 }
 
-template <class TC>
+template<class TC>
 void RCShaper<TC>::requestPacket()
 {
-    Enter_Method("requestPacket()");
+    Enter_Method
+    ("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -264,24 +277,26 @@ void RCShaper<TC>::requestPacket()
     }
 }
 
-template <class TC>
+template<class TC>
 cMessage* RCShaper<TC>::pop()
 {
-    Enter_Method("pop()");
+    Enter_Method
+    ("pop()");
     //RCFrames
     for (unsigned int i = 0; i < numRcPriority; i++)
     {
         if (!rcQueue[i].isEmpty())
         {
             EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
-            cComponent::emit(rcQueueLengthSignals[i], (unsigned long)rcQueue[i].length());
+            cComponent::emit(rcQueueLengthSignals[i], (unsigned long) rcQueue[i].length());
             //Reset Bag
-            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*> (message->getSenderModule());
+            RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
             if (rcBuffer)
                 rcBuffer->resetBag();
 
-            PCFrame *pcf = dynamic_cast<PCFrame*> (message);
-            if(pcf){
+            PCFrame *pcf = dynamic_cast<PCFrame*>(message);
+            if (pcf)
+            {
                 setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
             }
             return message;
@@ -290,10 +305,11 @@ cMessage* RCShaper<TC>::pop()
     return TC::pop();
 }
 
-template <class TC>
+template<class TC>
 cMessage* RCShaper<TC>::front()
 {
-    Enter_Method("front()");
+    Enter_Method
+    ("front()");
     //RCFrames
     for (unsigned int i = 0; i < numRcPriority; i++)
     {
@@ -306,7 +322,7 @@ cMessage* RCShaper<TC>::front()
     return TC::front();
 }
 
-template <class TC>
+template<class TC>
 bool RCShaper<TC>::isEmpty()
 {
     bool empty = true;
@@ -318,7 +334,7 @@ bool RCShaper<TC>::isEmpty()
     return empty;
 }
 
-template <class TC>
+template<class TC>
 void RCShaper<TC>::clear()
 {
     TC::clear();

@@ -42,7 +42,7 @@ simple TT_PCF_RC_BE_Shaper extends PCF_RC_BE_Shaper like ITimed
         //
         string oscillator = default("oscillator");
         string timer = default("timer");
-    gates:        
+    gates:
         //Input for time-triggered frames from the buffers
         input TTin @labels(TTFrame);
 }

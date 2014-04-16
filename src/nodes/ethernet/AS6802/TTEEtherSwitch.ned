@@ -16,7 +16,7 @@ package core4inet.nodes.ethernet.AS6802;
 
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.scheduler.TTEScheduler;
-import core4inet.configuration.base.IConfigurationManager;
+import core4inet.configuration.IConfigurationManager;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;
 import core4inet.linklayer.TTEPHYPort;

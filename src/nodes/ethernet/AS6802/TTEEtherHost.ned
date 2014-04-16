@@ -16,11 +16,11 @@ package core4inet.nodes.ethernet.AS6802;
 
 import core4inet.buffer.base.BGQueueBuffer;
 import core4inet.utilities.modules.CheckedBuffer;
-import core4inet.linklayer.BGTrafficHandle;
+import core4inet.linklayer.beHandling.base.BGTrafficHandle;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.scheduler.TTEScheduler;
 import core4inet.scheduler.Scheduler;
-import core4inet.configuration.base.IConfigurationManager;
+import core4inet.configuration.IConfigurationManager;
 import core4inet.linklayer.TTEPHYPort;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;

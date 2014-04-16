@@ -39,7 +39,10 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
         /**
          * @brief Constructor
          */
-        BaseShaper(){framesRequested = 0;}
+        BaseShaper()
+        {
+            framesRequested = 0;
+        }
 
         /**
          * Implementation of IPassiveQueue::addListener().
@@ -56,8 +59,7 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          *
          * The vector is ordered by action time
          */
-        std::list < IPassiveQueueListener * > listeners;
-
+        std::list<IPassiveQueueListener *> listeners;
 
     protected:
         /**
@@ -73,7 +75,6 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          */
         static simsignal_t beQueueLengthSignal;
 
-
     protected:
         /**
          * Initializes the module
@@ -88,7 +89,6 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          * @return Always returns 1
          */
         virtual int numInitStages() const;
-
 
         /**
          * @brief Deletes the incoming message
@@ -117,24 +117,34 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          * one. Else it saves the state and sends the message immediately when it is
          * received.
          */
-        virtual void requestPacket(){}
+        virtual void requestPacket()
+        {
+        }
 
         /**
          * @brief Returns number of requested messages.
          */
-        virtual int getNumPendingRequests(){return (int)framesRequested;}
+        virtual int getNumPendingRequests()
+        {
+            return (int) framesRequested;
+        }
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty(){return true;}
+        virtual bool isEmpty()
+        {
+            return true;
+        }
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear(){}
+        virtual void clear()
+        {
+        }
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
@@ -143,21 +153,27 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          * @return the message with the highest priority from any queue. NULL if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop(){return NULL;}
+        virtual cMessage *pop()
+        {
+            return NULL;
+        }
 
         /**
-        * @brief Returns a pointer to a frame directly from the queues.
-        *
-        * front must return a pointer to the same message pop() would return.
-        *
-        * @return pointer to the message with the highest priority from any queue. NULL if the
-        * queues are empty
-        */
-        virtual cMessage *front(){return NULL;}
+         * @brief Returns a pointer to a frame directly from the queues.
+         *
+         * front must return a pointer to the same message pop() would return.
+         *
+         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * queues are empty
+         */
+        virtual cMessage *front()
+        {
+            return NULL;
+        }
 
         /**
-        * @brief Notifies registered listeners about changes.
-        */
+         * @brief Notifies registered listeners about changes.
+         */
         void notifyListeners();
 };
 }

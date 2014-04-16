@@ -30,7 +30,6 @@
 #include <map>
 #include <list>
 
-
 namespace CoRE4INET {
 
 /**
@@ -44,7 +43,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-template <class IC>
+template<class IC>
 class CTInControl : public IC
 {
     private:
@@ -116,17 +115,17 @@ class CTInControl : public IC
         virtual uint16_t getCTID(EtherFrame *frame);
 };
 
-template <class IC>
+template<class IC>
 simsignal_t CTInControl<IC>::ctDroppedSignal = SIMSIGNAL_NULL;
 
-template <class IC>
+template<class IC>
 void CTInControl<IC>::initialize()
 {
     BaseInControl::initialize();
     ctDroppedSignal = cComponent::registerSignal("ctDropped");
 }
 
-template <class IC>
+template<class IC>
 void CTInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
@@ -142,8 +141,8 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
             if (ct_incomingList != ct_incomings.end())
             {
                 //Send to all CTCs for the CT-ID
-                for (std::list<CTIncoming*>::iterator ct_incoming = ct_incomingList->second.begin(); ct_incoming
-                        != ct_incomingList->second.end(); ct_incoming++)
+                for (std::list<CTIncoming*>::iterator ct_incoming = ct_incomingList->second.begin();
+                        ct_incoming != ct_incomingList->second.end(); ct_incoming++)
                 {
                     IC::setParameters(frame);
                     cSimpleModule::sendDirect(frame->dup(), (*ct_incoming)->gate("in"));
@@ -153,79 +152,102 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
             else
             {
                 cComponent::emit(ctDroppedSignal, frame);
-                IC::hadError=true;
-                if(ev.isGUI()){
+                IC::hadError = true;
+                if (ev.isGUI())
+                {
                     cComponent::bubble("No matching buffer configured");
                     cComponent::getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    cComponent::getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                    cComponent::getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Input configuration problem - No matching buffer configured");
                     cModule::getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    cModule::getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
-                    cModule::getParentModule()->getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                    cModule::getParentModule()->getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: Input configuration problem - No matching buffer configured");
+                    cModule::getParentModule()->getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Input configuration problem - No matching buffer configured");
+                    cModule::getParentModule()->getParentModule()->getDisplayString().setTagArg("i2", 0,
+                            "status/excl3");
+                    cModule::getParentModule()->getParentModule()->getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Input configuration problem - No matching buffer configured");
                 }
                 delete frame;
             }
-        }else{
+        }
+        else
+        {
             IC::handleMessage(msg);
         }
     }
-    else{
+    else
+    {
         IC::handleMessage(msg);
     }
 }
 
-template <class IC>
-void CTInControl<IC>::handleParameterChange(const char* parname){
+template<class IC>
+void CTInControl<IC>::handleParameterChange(const char* parname)
+{
     IC::handleParameterChange(parname);
 
-    ctMask = (uint32_t)cComponent::par("ct_mask").longValue();
-    ctMarker = (uint32_t)cComponent::par("ct_marker").longValue();
+    ctMask = (uint32_t) cComponent::par("ct_mask").longValue();
+    ctMarker = (uint32_t) cComponent::par("ct_marker").longValue();
 
     ct_incomings.clear();
 
-    std::vector<std::string> ct_incomingPaths = cStringTokenizer(cComponent::par("ct_incomings").stringValue(), DELIMITERS).asVector();
-    for(std::vector<std::string>::iterator ct_incomingPath = ct_incomingPaths.begin();
-            ct_incomingPath!=ct_incomingPaths.end();ct_incomingPath++){
+    std::vector<std::string> ct_incomingPaths = cStringTokenizer(cComponent::par("ct_incomings").stringValue(),
+            DELIMITERS).asVector();
+    for (std::vector<std::string>::iterator ct_incomingPath = ct_incomingPaths.begin();
+            ct_incomingPath != ct_incomingPaths.end(); ct_incomingPath++)
+    {
         cModule* module = simulation.getModuleByPath((*ct_incomingPath).c_str());
-        if(!module){
-            module = findModuleWhereverInNode((*ct_incomingPath).c_str(),this);
+        if (!module)
+        {
+            module = findModuleWhereverInNode((*ct_incomingPath).c_str(), this);
         }
-        if(module){
-            if(findContainingNode(module)!=findContainingNode(this)){
-                opp_error("Configuration problem of ct_incomings: Module: %s is not in node %s! Maybe a copy-paste problem?", (*ct_incomingPath).c_str(),
-                        findContainingNode(this)->getFullName());
+        if (module)
+        {
+            if (findContainingNode(module) != findContainingNode(this))
+            {
+                opp_error(
+                        "Configuration problem of ct_incomings: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                        (*ct_incomingPath).c_str(), findContainingNode(this)->getFullName());
             }
             else
             {
-                CTIncoming *ct_incoming = dynamic_cast<CTIncoming*> (module);
-                if(ct_incoming){
-                    Buffer *buffer = dynamic_cast<Buffer*> (ct_incoming->gate("out")->getPathEndGate()->getOwner());
-                    if(buffer && buffer->hasPar("ct_id")){
+                CTIncoming *ct_incoming = dynamic_cast<CTIncoming*>(module);
+                if (ct_incoming)
+                {
+                    Buffer *buffer = dynamic_cast<Buffer*>(ct_incoming->gate("out")->getPathEndGate()->getOwner());
+                    if (buffer && buffer->hasPar("ct_id"))
+                    {
                         ct_incomings[buffer->par("ct_id").longValue()].push_back(ct_incoming);
                     }
-                    else{
-                        opp_error("CTIncoming module %s has no Buffer attached with ct_id configured!", (*ct_incomingPath).c_str());
+                    else
+                    {
+                        opp_error("CTIncoming module %s has no Buffer attached with ct_id configured!",
+                                (*ct_incomingPath).c_str());
                     }
                 }
-                else{
-                    opp_error("Configuration problem of ct_incomings: Module: %s is no CTIncoming module!", (*ct_incomingPath).c_str());
+                else
+                {
+                    opp_error("Configuration problem of ct_incomings: Module: %s is no CTIncoming module!",
+                            (*ct_incomingPath).c_str());
                 }
             }
         }
-        else{
-            opp_error("Configuration problem of ct_incomings: Module: %s could not be resolved!", (*ct_incomingPath).c_str());
+        else
+        {
+            opp_error("Configuration problem of ct_incomings: Module: %s could not be resolved!",
+                    (*ct_incomingPath).c_str());
         }
     }
 }
 
-template <class IC>
+template<class IC>
 bool CTInControl<IC>::isCT(EtherFrame *frame)
 {
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);
     //Check for ct
-    if ((((macBytes[0] << 24) | (macBytes[1] << 16) | (macBytes[2] << 8) | (macBytes[3])) & ctMask) == (ctMarker
-            & ctMask))
+    if ((((macBytes[0] << 24) | (macBytes[1] << 16) | (macBytes[2] << 8) | (macBytes[3])) & ctMask)
+            == (ctMarker & ctMask))
     {
         return true;
     }
@@ -233,7 +255,7 @@ bool CTInControl<IC>::isCT(EtherFrame *frame)
     return false;
 }
 
-template <class IC>
+template<class IC>
 uint16_t CTInControl<IC>::getCTID(EtherFrame *frame)
 {
     unsigned char macBytes[6];

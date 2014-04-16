@@ -33,5 +33,5 @@ simple PCFIncoming extends Incoming
         //PCFIncoming is implemented by the PCFIncoming C++ Class
         @class(PCFIncoming);
         //Allowed PCF-Type for this CTC (CS = 1; IN = 2; CA = 3)
-        int pcfType=default(0);
+        int pcfType = default(0);
 }

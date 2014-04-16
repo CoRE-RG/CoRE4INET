@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer;
+package core4inet.linklayer.beHandling.base;
 
 //
 // TODO auto-generated module

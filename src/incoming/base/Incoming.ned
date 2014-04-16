@@ -34,14 +34,14 @@ simple Incoming like IOutputQueue
     //Signal emitted when frame is received, contains received EtherFrame
     @signal[rxPk](type=EtherFrame);
     //Signal emitted when frame is dropped due to implemented policy, contains dropped EtherFrame
-    @signal[droppedPk](type=EtherFrame);    
+    @signal[droppedPk](type=EtherFrame);
     //Statistic of the amount of packets that were dropped by the incoming module
     @statistic[droppedPk](title="Packets Dropped"; source=droppedPk; record=count; interpolationmode=none);
     //Statistic of the amount of packets that were received by the incoming module
     @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
     //Statistic of the end-to-end latency
     @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
-    
+
     gates:
         //input of the ctc
         input in @directIn @labels(EtherFrame);

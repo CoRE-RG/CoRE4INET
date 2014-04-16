@@ -439,8 +439,8 @@
 									<listOptionValue builtIn="false" value="__GXX_ABI_VERSION"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_INFINITY__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DEC64_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4"/>
 									<listOptionValue builtIn="false" value="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1"/>

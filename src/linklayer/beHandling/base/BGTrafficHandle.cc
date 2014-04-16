@@ -34,10 +34,12 @@ void BGTrafficHandle::initialize()
 
 void BGTrafficHandle::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("lowerLayerIn")){
+    if (msg->arrivedOn("lowerLayerIn"))
+    {
         send(msg, "out");
     }
-    else if(msg->arrivedOn("in")){
+    else if (msg->arrivedOn("in"))
+    {
         Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
         etherctrl->setSsap(ETHERAPP_BUFFER_SAP);
         etherctrl->setDsap(ETHERAPP_BUFFER_SAP);

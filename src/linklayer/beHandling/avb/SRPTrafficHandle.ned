@@ -13,7 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer;
+package core4inet.linklayer.beHandling.avb;
+
+import core4inet.linklayer.beHandling.base.BGTrafficHandle;
 
 //
 // Module for identifing and forwarding SRP and BE frames.  

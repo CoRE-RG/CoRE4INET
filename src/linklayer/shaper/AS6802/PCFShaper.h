@@ -34,10 +34,10 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-template <class TC>
+template<class TC>
 class PCFShaper : public TC, public virtual Timed
 {
-    using Timed::initialize;
+        using Timed::initialize;
     public:
         /**
          * @brief Constructor
@@ -73,7 +73,6 @@ class PCFShaper : public TC, public virtual Timed
          */
         virtual int numInitStages() const;
 
-
         /**
          * @brief Forwards the messages from the different buffers and LLC
          * according to the specification for PCFMessages.
@@ -98,14 +97,14 @@ class PCFShaper : public TC, public virtual Timed
         virtual void enqueueMessage(cMessage *msg);
 
         /**
-        * @brief this method is invoked when the underlying mac is idle.
-        *
-        * When this method is invoked the module sends a new message when there is
-        * one. Else it saves the state and sends the message immediately when it is
-        * received.
-        *
-        * @param msg the message to be queued
-        */
+         * @brief this method is invoked when the underlying mac is idle.
+         *
+         * When this method is invoked the module sends a new message when there is
+         * one. Else it saves the state and sends the message immediately when it is
+         * received.
+         *
+         * @param msg the message to be queued
+         */
         virtual void requestPacket();
 
         /**
@@ -130,51 +129,57 @@ class PCFShaper : public TC, public virtual Timed
         virtual cMessage *pop();
 
         /**
-        * @brief Returns a pointer to a frame directly from the queues.
-        *
-        * front must return a pointer to the same message pop() would return.
-        *
-        * @return pointer to the message with the highest priority from any queue. NULL if the
-        * queues are empty
-        */
+         * @brief Returns a pointer to a frame directly from the queues.
+         *
+         * front must return a pointer to the same message pop() would return.
+         *
+         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * queues are empty
+         */
         virtual cMessage *front();
 };
 
-template <class TC>
+template<class TC>
 simsignal_t PCFShaper<TC>::pcfQueueLengthSignal = SIMSIGNAL_NULL;
 
-template <class TC>
-PCFShaper<TC>::PCFShaper(){
+template<class TC>
+PCFShaper<TC>::PCFShaper()
+{
     pcfQueue.setName("PCF Messages");
 }
 
-template <class TC>
-PCFShaper<TC>::~PCFShaper(){
+template<class TC>
+PCFShaper<TC>::~PCFShaper()
+{
 }
 
-template <class TC>
+template<class TC>
 void PCFShaper<TC>::initialize(int stage)
 {
     TC::initialize(stage);
-    if(stage==0){
+    if (stage == 0)
+    {
         Timed::initialize();
         pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
         //Send initial signal to create statistic
-        cComponent::emit(pcfQueueLengthSignal, (unsigned long)pcfQueue.length());
+        cComponent::emit(pcfQueueLengthSignal, (unsigned long) pcfQueue.length());
     }
 }
 
-template <class TC>
-int PCFShaper<TC>::numInitStages() const{
-    if(TC::numInitStages()>1){
+template<class TC>
+int PCFShaper<TC>::numInitStages() const
+{
+    if (TC::numInitStages() > 1)
+    {
         return TC::numInitStages();
     }
-    else{
+    else
+    {
         return 1;
     }
 }
 
-template <class TC>
+template<class TC>
 void PCFShaper<TC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("PCFin"))
@@ -182,7 +187,8 @@ void PCFShaper<TC>::handleMessage(cMessage *msg)
         if (TC::getNumPendingRequests())
         {
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
-            if(pcf){
+            if (pcf)
+            {
                 setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
             }
             TC::framesRequested--;
@@ -193,31 +199,38 @@ void PCFShaper<TC>::handleMessage(cMessage *msg)
             enqueueMessage(msg);
         }
     }
-    else{
-        if(TC::getNumPendingRequests()){
+    else
+    {
+        if (TC::getNumPendingRequests())
+        {
             TC::handleMessage(msg);
         }
-        else{
+        else
+        {
             TC::enqueueMessage(msg);
         }
     }
 }
 
-template <class TC>
-void PCFShaper<TC>::enqueueMessage(cMessage *msg){
-    if(msg->arrivedOn("PCFin")){
+template<class TC>
+void PCFShaper<TC>::enqueueMessage(cMessage *msg)
+{
+    if (msg->arrivedOn("PCFin"))
+    {
         pcfQueue.insert(msg);
         TC::notifyListeners();
     }
-    else{
+    else
+    {
         TC::enqueueMessage(msg);
     }
 }
 
-template <class TC>
+template<class TC>
 void PCFShaper<TC>::requestPacket()
 {
-    Enter_Method("requestPacket()");
+    Enter_Method
+    ("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -228,18 +241,20 @@ void PCFShaper<TC>::requestPacket()
     }
 }
 
-template <class TC>
+template<class TC>
 cMessage* PCFShaper<TC>::pop()
 {
-    Enter_Method("pop()");
+    Enter_Method
+    ("pop()");
     //RCFrames
     if (!pcfQueue.isEmpty())
     {
         cMessage *msg = (cMessage*) pcfQueue.pop();
         cComponent::emit(pcfQueueLengthSignal, pcfQueue.length());
 
-        PCFrame *pcf = dynamic_cast<PCFrame*> (msg);
-        if(pcf){
+        PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
+        if (pcf)
+        {
             setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
         }
         return msg;
@@ -247,10 +262,11 @@ cMessage* PCFShaper<TC>::pop()
     return TC::pop();
 }
 
-template <class TC>
+template<class TC>
 cMessage* PCFShaper<TC>::front()
 {
-    Enter_Method("front()");
+    Enter_Method
+    ("front()");
     //RCFrames
     if (!pcfQueue.isEmpty())
     {
@@ -260,13 +276,13 @@ cMessage* PCFShaper<TC>::front()
     return TC::front();
 }
 
-template <class TC>
+template<class TC>
 bool PCFShaper<TC>::isEmpty()
 {
-       return pcfQueue.isEmpty() && TC::isEmpty();
+    return pcfQueue.isEmpty() && TC::isEmpty();
 }
 
-template <class TC>
+template<class TC>
 void PCFShaper<TC>::clear()
 {
     TC::clear();

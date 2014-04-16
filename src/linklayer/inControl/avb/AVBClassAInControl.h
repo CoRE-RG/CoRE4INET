@@ -32,7 +32,6 @@
 #include <map>
 #include <list>
 
-
 namespace CoRE4INET {
 
 /**
@@ -45,7 +44,7 @@ namespace CoRE4INET {
  * @author Philipp Meyer
  *
  */
-template <class IC>
+template<class IC>
 class AVBClassAInControl : public IC
 {
     protected:
@@ -69,7 +68,7 @@ class AVBClassAInControl : public IC
         virtual bool isAVB(EtherFrame *frame);
 };
 
-template <class IC>
+template<class IC>
 void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
@@ -77,13 +76,16 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         EtherFrame *frame = (EtherFrame*) msg;
 
         //Is AVB Frame?
-        if(isAVB(frame))
+        if (isAVB(frame))
         {
-            cSimpleModule::sendDirect(frame, cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
-        }else{
-            if(SRPFrame *srpFrame = dynamic_cast<SRPFrame*>(frame->getEncapsulatedPacket()))
+            cSimpleModule::sendDirect(frame,
+                    cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
+        }
+        else
+        {
+            if (SRPFrame *srpFrame = dynamic_cast<SRPFrame*>(frame->getEncapsulatedPacket()))
             {
-                if(dynamic_cast<TalkerAdvertise*>(srpFrame))
+                if (dynamic_cast<TalkerAdvertise*>(srpFrame))
                 {
                     frame->setDest(MACAddress::BROADCAST_ADDRESS);
 
@@ -94,18 +96,21 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
             IC::handleMessage(msg);
         }
     }
-    else{
+    else
+    {
         IC::handleMessage(msg);
     }
 }
 
-template <class IC>
+template<class IC>
 bool AVBClassAInControl<IC>::isAVB(EtherFrame *frame)
 {
-    if(dynamic_cast<AVBFrame*>(frame)){
+    if (dynamic_cast<AVBFrame*>(frame))
+    {
         return true;
     }
-    else{
+    else
+    {
         return false;
     }
 }
