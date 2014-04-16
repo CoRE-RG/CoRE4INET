@@ -56,7 +56,7 @@ module TTEEtherHost
         string configurationManagerType = default("");
     gates:
         // Physical port of the host
-        inout ethg @labels(EtherFrame-conn);
+        inout ethg @loose @labels(EtherFrame-conn);
 
     submodules:
         // Physical port of the host
