@@ -32,18 +32,18 @@ class Oscillator : public virtual cSimpleModule
          * Signal that is emitted every time the drift (Difference of configured and actual tick length) changes
          */
         static simsignal_t currentDrift;
-  protected:
-    virtual void initialize(int stage);
-    /**
-     * @brief Returns the number of initialization stages this module needs.
-     *
-     * @return Always returns 1
-     */
-    virtual int numInitStages() const;
+    protected:
+        virtual void initialize(int stage);
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return Always returns 1
+         */
+        virtual int numInitStages() const;
 
-  public:
-    virtual simtime_t getTick();
-    virtual simtime_t getPreciseTick();
+    public:
+        virtual simtime_t getTick();
+        virtual simtime_t getPreciseTick();
 };
 
 } //namespace

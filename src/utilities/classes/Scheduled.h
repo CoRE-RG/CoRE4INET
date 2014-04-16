@@ -26,7 +26,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class Scheduled: public Timed
+class Scheduled : public Timed
 {
     protected:
         /**

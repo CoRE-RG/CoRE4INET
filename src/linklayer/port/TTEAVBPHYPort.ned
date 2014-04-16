@@ -29,7 +29,7 @@ import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 // @see IPort, EtherMACFullDuplex, TTEInput, TT_AVBClassA_PCF_RC_BE_Shaper, TT_PCF_RC_BE_Shaper, PCF_RC_BE_Shaper, BE_Shaper
 //
 // @author Philipp Meyer
-module TTEAVBPHYPort ext IPort
+module TTEAVBPHYPort like IPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
@@ -53,8 +53,7 @@ module TTEAVBPHYPort ext IPort
 
     submodules:
         shaper: TT_AVBClassA_PCF_RC_BE_Shaper {
-            @diplay("p=48,45");
-            @display("p=222,142");
+            @display("p=48,45");
         }
 
         inControl: CT_AVB_BE_InControl {
@@ -67,7 +66,7 @@ module TTEAVBPHYPort ext IPort
             parameters:
                 promiscuous = true;
                 queueModule = "shaper";
-                @display("p=78,142");
+                @display("p=87,139");
         }
     connections:
         upperLayerIn --> shaper.in;

@@ -16,12 +16,12 @@ class SchedulerEvent : public CoRE4INET::SchedulerEvent_Base
         cGate *destinationGate_var;
     public:
         SchedulerEvent(const char *name = NULL, int kind = 0) :
-            SchedulerEvent_Base(name, kind)
+                SchedulerEvent_Base(name, kind)
         {
             destinationGate_var = NULL;
         }
         SchedulerEvent(const SchedulerEvent& other) :
-            SchedulerEvent_Base(other.getName())
+                SchedulerEvent_Base(other.getName())
         {
             operator=(other);
         }

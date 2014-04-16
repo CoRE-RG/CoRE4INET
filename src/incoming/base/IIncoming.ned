@@ -16,17 +16,13 @@ package core4inet.incoming.base;
 import inet.linklayer.IOutputQueue;
 
 //
-// Abstract module for the conformance checks of incoming traffic.
+// Interface for modules implementing the conformance checks of incoming traffic.
 //
-// @warning Since this is an abstract module do not instantiate it! Use RCIncoming or
-// TTIncoming instead!
 //
-// @todo Since this is an abstract module it might be better to make an interface 
-//
-// @see RCIncoming, TTIncoming,
+// @see Incoming,
 //
 // @author Till Steinbach
-simple Incoming like IIncoming
+moduleinterface IIncoming extends IOutputQueue
 {
     //Incoming is implemented by the Incoming C++ Class
     @class(Incoming);
@@ -43,8 +39,4 @@ simple Incoming like IIncoming
     @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
 
     gates:
-        //input of the ctc
-        input in @directIn @labels(EtherFrame);
-        //output of the ctc
-        output out @labels(EtherFrame-conn);
 }

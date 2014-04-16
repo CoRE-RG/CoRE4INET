@@ -113,5 +113,4 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler)
 
 }
 
-
 #endif /* HELPERFUNCTIONS_H_ */

@@ -1,3 +1,17 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+//
 #include "NEDFunctions.h"
 
 #include "ModuleAccess.h"
@@ -18,7 +32,7 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
         ticklength = argv[1].doubleValueInUnit("s");
     }
 
-    long ticks = (long)round(seconds / ticklength);
+    long ticks = (long) round(seconds / ticklength);
     argv[0].set(ticks, "tick");
     return argv[0];
 }

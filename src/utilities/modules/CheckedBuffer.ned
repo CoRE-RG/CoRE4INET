@@ -16,11 +16,12 @@
 package core4inet.utilities.modules;
 
 import core4inet.buffer.base.IBuffer;
+import core4inet.incoming.base.IIncoming;
 
 module CheckedBuffer
 {
     submodules:
-        incoming: <default("Buffer")> like IBuffer {
+        incoming: <default("Incoming")> like IIncoming {
             @display("p=34,30");
         }
         buffer: <default("Buffer")> like IBuffer {

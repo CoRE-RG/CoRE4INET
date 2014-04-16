@@ -23,10 +23,11 @@ Define_Module(Period);
 
 simsignal_t Period::newCycle = SIMSIGNAL_NULL;
 
-Period::Period(){
-    cycles=0;
-    newCycleEvent=NULL;
-    timer=NULL;
+Period::Period()
+{
+    cycles = 0;
+    newCycleEvent = NULL;
+    timer = NULL;
 }
 
 void Period::initialize()
@@ -34,7 +35,7 @@ void Period::initialize()
     WATCH(cycles);
     newCycle = registerSignal("newCycle");
 
-    ASSERT(par("cycle_ticks").longValue()>par("offset_ticks").longValue());
+    ASSERT(par("cycle_ticks").longValue() > par("offset_ticks").longValue());
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
 
@@ -46,49 +47,60 @@ void Period::initialize()
 
 void Period::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT){
+    if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
+    {
         cycles++;
         emit(newCycle, 1L);
         timer->registerEvent(newCycleEvent, this);
     }
-    else{
+    else
+    {
         delete msg;
     }
 }
 
-
-uint64_t Period::registerEvent(SchedulerEvent *event){
-    if(!timer){
+uint64_t Period::registerEvent(SchedulerEvent *event)
+{
+    if (!timer)
+    {
         throw std::runtime_error("Period was not yet initialized");
     }
-    if(dynamic_cast<SchedulerActionTimeEvent*>(event)){
+    if (dynamic_cast<SchedulerActionTimeEvent*>(event))
+    {
         return timer->registerEvent(dynamic_cast<SchedulerActionTimeEvent*>(event), this);
     }
-    else if(dynamic_cast<SchedulerTimerEvent*>(event)){
+    else if (dynamic_cast<SchedulerTimerEvent*>(event))
+    {
         return timer->registerEvent(dynamic_cast<SchedulerTimerEvent*>(event));
     }
-    else{
+    else
+    {
         throw std::invalid_argument("Unknown event Kind");
     }
 }
 
-uint32_t Period::getTicks(){
-    if(!timer){
+uint32_t Period::getTicks()
+{
+    if (!timer)
+    {
         throw std::runtime_error("Period was not yet initialized");
     }
-    uint32_t cycle_ticks = (uint32_t)par("cycle_ticks").longValue();
+    uint32_t cycle_ticks = (uint32_t) par("cycle_ticks").longValue();
     //cycle_ticks is added to assure a positive return value
-    return (cycle_ticks + timer->getTotalTicks() - (uint32_t)par("offset_ticks").longValue()) % cycle_ticks;
+    return (cycle_ticks + timer->getTotalTicks() - (uint32_t) par("offset_ticks").longValue()) % cycle_ticks;
 }
 
-uint64_t Period::getTotalTicks(){
-    if(!timer){
+uint64_t Period::getTotalTicks()
+{
+    if (!timer)
+    {
         throw std::runtime_error("Period was not yet initialized");
     }
     return timer->getTotalTicks();
 }
 
-uint32_t Period::getCycles(){
+uint32_t Period::getCycles()
+{
     return cycles;
 }
 

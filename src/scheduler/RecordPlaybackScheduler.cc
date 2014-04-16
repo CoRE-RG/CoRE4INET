@@ -15,10 +15,9 @@
 
 #include "RecordPlaybackScheduler.h"
 
-
 namespace CoRE4INET {
 
-Define_Module( RecordPlaybackScheduler);
+Define_Module(RecordPlaybackScheduler);
 
 int RecordPlaybackScheduler::numInitStages() const
 {
@@ -28,65 +27,76 @@ int RecordPlaybackScheduler::numInitStages() const
 void RecordPlaybackScheduler::initialize(int stage)
 {
     TTEScheduler::initialize(stage);
-    if(stage==0){
+    if (stage == 0)
+    {
         std::stringstream ss;
         ss << "scheduler";
         ss << this->par("id").longValue();
 
-        if(this->par("read").boolValue())
+        if (this->par("read").boolValue())
         {
-            fp=fopen(ss.str().c_str(),"r");
-            counter=0;
+            fp = fopen(ss.str().c_str(), "r");
+            counter = 0;
             values = new std::vector<double>(1200000);
 
-            if(NULL != fp){
-                while(!feof(fp)){
+            if (NULL != fp)
+            {
+                while (!feof(fp))
+                {
                     int dummy;
                     double data;
-                    int num = fscanf(fp,"%d %lf", &dummy, &data);
-                    ASSERT(num==2);
-                    values->at((size_t)(counter++))=data;
+                    int num = fscanf(fp, "%d %lf", &dummy, &data);
+                    ASSERT(num == 2);
+                    values->at((size_t) (counter++)) = data;
                 }
-            }else{
-                perror ("Error opening file");
+            }
+            else
+            {
+                perror("Error opening file");
             }
             counter = 0;
-        }else if (this->par("write").boolValue())
+        }
+        else if (this->par("write").boolValue())
         {
-            fp=fopen(ss.str().c_str(),"w");
+            fp = fopen(ss.str().c_str(), "w");
         }
     }
 }
 RecordPlaybackScheduler::~RecordPlaybackScheduler()
 {
-    if(this->par("read").boolValue() || this->par("write").boolValue()){
+    if (this->par("read").boolValue() || this->par("write").boolValue())
+    {
         fflush(fp);
         fclose(fp);
     }
 }
 
-void RecordPlaybackScheduler::changeDrift(){
-    simtime_t newDriftChange=0;
+void RecordPlaybackScheduler::changeDrift()
+{
+    simtime_t newDriftChange = 0;
 
-    if(this->par("read").boolValue())
+    if (this->par("read").boolValue())
     {
-         newDriftChange = values->at((size_t)(counter++));
-         counter++;
-    }else{
+        newDriftChange = values->at((size_t) (counter++));
+        counter++;
+    }
+    else
+    {
         newDriftChange = SimTime(par("drift_change").doubleValue());
-        if(this->par("write").boolValue()){
-            fprintf(fp,"%d ",this->cycles);
-            fprintf(fp, " %.40f\n",newDriftChange.dbl());
+        if (this->par("write").boolValue())
+        {
+            fprintf(fp, "%d ", this->cycles);
+            fprintf(fp, " %.40f\n", newDriftChange.dbl());
         }
     }
-    simtime_t newTick = currentTick+newDriftChange;
-    if((newTick-tick)>maxDrift)
-        par("current_tick").setDoubleValue((tick+maxDrift).dbl());
-    else if((newTick-tick)<-maxDrift)
-        par("current_tick").setDoubleValue((tick-maxDrift).dbl());
+    simtime_t newTick = currentTick + newDriftChange;
+    if ((newTick - tick) > maxDrift)
+        par("current_tick").setDoubleValue((tick + maxDrift).dbl());
+    else if ((newTick - tick) < -maxDrift)
+        par("current_tick").setDoubleValue((tick - maxDrift).dbl());
     else
         par("current_tick").setDoubleValue(newTick.dbl());
-    emit(currentDrift, par("current_tick").doubleValue()-tick);
+    emit(currentDrift, par("current_tick").doubleValue() - tick);
 }
 
 } //namespace

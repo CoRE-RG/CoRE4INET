@@ -14,14 +14,13 @@
 // 
 package core4inet.synchronisation.base;
 
-import core4inet.linklayer.IPort;
 import core4inet.utilities.classes.Scheduled;
 
 //
 // Dummy synchronisation module that corrects the clock with a certain imprecission.
 // It uses the simulation time as basis.
 //
-// @see IPort
+// @see ISync
 //
 // @author Till Steinbach
 simple DummySync extends Scheduled like ISync
@@ -29,16 +28,16 @@ simple DummySync extends Scheduled like ISync
     parameters:
         @class(DummySync);
         @display("i=block/timer");
-        
+
         //Signal emited when sync state changes (e.g. SYNC, ASYNC, ...)
         @signal[NF_SYNC_STATE_CHANGE](type=CoRE4INET::SyncNotification);
-        
+
         // The time in the cycle (in ticks) when the synchronisation is triggered
         int action_time = default(0);
-        
+
         // The precission of the synchronisation
         double precission @unit(s) = default(500ns);
-        
+
     gates:
         //Input for time-triggered traffic
         input TTin @directIn @labels(CTFrame);

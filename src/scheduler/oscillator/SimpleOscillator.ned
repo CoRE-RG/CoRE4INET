@@ -30,7 +30,7 @@ simple SimpleOscillator extends Oscillator
         double max_drift @unit(ppm) = default(200ppm);
         // Clock drift change intensity
         volatile double drift_change @unit(ppm) = default(uniform(12.5ppm,12.5ppm));
-        
+
         string period = default("period[0]");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages

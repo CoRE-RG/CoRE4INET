@@ -25,12 +25,12 @@ int SyncBase::numInitStages() const
 
 void SyncBase::initialize(int stage)
 {
-    if(stage==0){
-    }
 }
 
-void SyncBase::notify(SyncNotificationKind kind){
-    if(mayHaveListeners(NF_SYNC_STATE_CHANGE)){
+void SyncBase::notify(SyncNotificationKind kind)
+{
+    if (mayHaveListeners(NF_SYNC_STATE_CHANGE))
+    {
         SyncNotification notification("SyncNotification", kind);
         emit(NF_SYNC_STATE_CHANGE, &notification);
     }

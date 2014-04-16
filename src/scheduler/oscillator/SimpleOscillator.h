@@ -37,18 +37,18 @@ class SimpleOscillator : public Oscillator
         Period *period;
 
         simtime_t lastCorrection;
-  protected:
-    virtual void initialize(int stage);
-    /**
-     * @brief Returns the number of initialization stages this module needs.
-     *
-     * @return Always returns 2
-     */
-    virtual int numInitStages() const;
+    protected:
+        virtual void initialize(int stage);
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return Always returns 2
+         */
+        virtual int numInitStages() const;
 
-    virtual void handleMessage(cMessage *msg);
-  public:
-    virtual simtime_t getTick();
+        virtual void handleMessage(cMessage *msg);
+    public:
+        virtual simtime_t getTick();
 };
 
 } //namespace

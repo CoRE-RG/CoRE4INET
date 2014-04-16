@@ -20,9 +20,10 @@ package core4inet.scheduler.oscillator;
 //
 // @author Till Steinbach
 //
-moduleinterface IOscillator{
-	parameters:
-	    @display("i=block/mac");
+moduleinterface IOscillator
+{
+    parameters:
+        @display("i=block/mac");
 	    //Signal emitted when drift changes, contains new drift
         @signal[currentDrift](type=double);
 	    //Statistic of the current drift (Difference of configured and actual tick length in seconds)
@@ -32,5 +33,5 @@ moduleinterface IOscillator{
         // Current length of a tick (with imprecission)
         volatile double current_tick @unit(s);
     gates:
-        output out;    
+        output out;
 }

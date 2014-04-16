@@ -21,13 +21,12 @@
 
 namespace CoRE4INET {
 
-
 /**
  * @brief TODO
  *
  * @author Till Steinbach
  */
-class Timed: public virtual cSimpleModule
+class Timed : public virtual cSimpleModule
 {
     protected:
         /**

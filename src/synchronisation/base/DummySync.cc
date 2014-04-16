@@ -22,14 +22,16 @@
 
 using namespace CoRE4INET;
 
-Define_Module( DummySync);
+Define_Module(DummySync);
 
 int DummySync::numInitStages() const
 {
-    if(SyncBase::numInitStages()>3){
+    if (SyncBase::numInitStages() > 3)
+    {
         return SyncBase::numInitStages();
     }
-    else{
+    else
+    {
         return 3;
     }
 }
@@ -37,16 +39,16 @@ int DummySync::numInitStages() const
 void DummySync::initialize(int stage)
 {
     SyncBase::initialize(stage);
-    if(stage==1)
+    if (stage == 1)
     {
         Scheduled::initialize();
 
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
-        event->setAction_time((uint32_t)par("action_time").longValue());
+        event->setAction_time((uint32_t) par("action_time").longValue());
         event->setDestinationGate(gate("schedulerIn"));
         period->registerEvent(event);
     }
-    if(stage==2)
+    if (stage == 2)
     {
         notify(SYNC);
         getDisplayString().setTagArg("i", 1, "green");
@@ -55,21 +57,23 @@ void DummySync::initialize(int stage)
 
 void DummySync::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("schedulerIn")){
-        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
+    if (msg->arrivedOn("schedulerIn"))
+    {
+        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *) msg;
         event->setNext_cycle(true);
         period->registerEvent(event);
 
-        if(period->getCycles()>0){
-            uint32_t cycleTicks = (uint32_t)period->par("cycle_ticks").longValue();
+        if (period->getCycles() > 0)
+        {
+            uint32_t cycleTicks = (uint32_t) period->par("cycle_ticks").longValue();
             simtime_t tick = oscillator->par("tick").doubleValue();
 
-            int64_t modticks = ((int64_t)(simTime()/tick)-par("action_time").longValue())%cycleTicks;
-            if(modticks>((int64_t)cycleTicks/2))
-                modticks=modticks-cycleTicks;
-            modticks+=uniform(-par("precission").doubleValue()/2, par("precission").doubleValue()/2)/tick;
+            int64_t modticks = ((int64_t) (simTime() / tick) - par("action_time").longValue()) % cycleTicks;
+            if (modticks > ((int64_t) cycleTicks / 2))
+                modticks = modticks - cycleTicks;
+            modticks += uniform(-par("precission").doubleValue() / 2, par("precission").doubleValue() / 2) / tick;
 
-            timer->clockCorrection((int32_t)modticks);
+            timer->clockCorrection((int32_t) modticks);
         }
     }
 }
