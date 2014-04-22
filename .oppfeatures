@@ -1,8 +1,41 @@
 <features cppSourceRoots="src">
     <feature
+        id="AVB_common"
+        name="AVB Common"
+        description = "The common part of the AVB implementation"
+        initiallyEnabled = "true"
+        requires = ""
+        labels = ""
+        nedPackages = "
+                       core4inet.applications.trafficsource.avb
+                       core4inet.buffer.avb
+                       core4inet.incoming.avb
+                       core4inet.linklayer.beHandling.avb
+                       core4inet.linklayer.ethernet.avb
+                       core4inet.linklayer.inControl.avb
+                       core4inet.linklayer.shaper.avb
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_AVB_COMMON"
+        linkerFlags = ""
+        />
+    <feature
+        id="AVB_examples"
+        name="AVB examples"
+        description = "Examples for the AVB implementation"
+        initiallyEnabled = "true"
+        requires = "AVB_common"
+        labels = ""
+        nedPackages = "
+                       core4inet.examples.avb.small_network
+                      "
+        extraSourceFolders = ""
+        linkerFlags = ""
+        />
+    <feature
         id="AS6802_common"
         name="AS6802 Common"
-        description = "The common part of AS6802 implementation"
+        description = "The common part of the AS6802 implementation"
         initiallyEnabled = "true"
         requires = ""
         labels = ""
@@ -35,10 +68,24 @@
         linkerFlags = ""
         />
     <feature
+        id="AVB_AS6802_nodes"
+        name="AVB with AS6802 nodes"
+        description = "Nodes with combined AVB and AS6802 functionallity"
+        initiallyEnabled = "true"
+        requires = "AVB_common AS6802_common"
+        labels = ""
+        nedPackages = "
+                       core4inet.nodes.ethernet.avb_AS6802
+                      "
+        extraSourceFolders = ""
+        compileFlags = ""
+        linkerFlags = ""
+        />
+    <feature
         id="TTE_api"
         name="TTEthernet API"
         description = "The TTEthernet API support"
-        initiallyEnabled = "true"
+        initiallyEnabled = "false"
         requires = "AS6802_common"
         labels = ""
         nedPackages = "
@@ -53,8 +100,8 @@
         id="TTE_api_examples"
         name="TTEthernet API examples"
         description = "Examples for the TTEthernet API support"
-        initiallyEnabled = "true"
-        requires = "AS6802_common"
+        initiallyEnabled = "false"
+        requires = "AS6802_common TTE_api"
         labels = ""
         nedPackages = "
                        core4inet.examples.AS6802.api_rt_tictoc
