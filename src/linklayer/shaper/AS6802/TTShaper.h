@@ -349,7 +349,6 @@ cMessage* TTShaper<TC>::pop()
         cMessage *msg = (cMessage*) ttQueue.pop();
         cComponent::emit(ttQueueLengthSignal, ttQueue.length());
 
-        //TODO Major: Update buffers:
         if (ttBuffers.size() > 0)
         {
             ttBuffersPos = (ttBuffersPos + 1) % ttBuffers.size();
