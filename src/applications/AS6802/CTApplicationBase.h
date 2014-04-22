@@ -13,42 +13,38 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TRAFFICSINK_H_
-#define __CORE4INET_TRAFFICSINK_H_
+#ifndef __CORE4INET_CTAPPLICATIONBASE_H_
+#define __CORE4INET_CTAPPLICATIONBASE_H_
 
-#include "CTApplicationBase.h"
+#include <omnetpp.h>
+#include "base/ApplicationBase.h"
 
 namespace CoRE4INET {
 
 /**
- * @brief Traffic sink application used for statistics collection.
+ * @brief Base class for a real-time Ethernet-Application.
  *
+ * Containes the mapping to Buffers and the ability to execute Callbacks
  *
- * @sa ApplicationBase
+ * @sa Buffer, Callback
+ *
  * @ingroup Applications
  *
  * @author Till Steinbach
  */
-class TrafficSinkApp : public CTApplicationBase
+class CTApplicationBase : public virtual ApplicationBase
 {
-    private:
+    public:
         /**
-         * Signal that is emitted every time a frame was sent.
-         */
-        static simsignal_t rxPkSignal;
-
-    protected:
-        /**
-         * @brief Initialization of the module.
-         */
-        virtual void initialize();
-
-        /**
-         * @brief collects incoming message and writes statistics.
+         * @brief resets the bag on incoming RC-Frames (on RCin)
          *
-         * @param msg incoming frame
+         * This method should be called from subclasses unless the module
+         * resets the bag on its own.
+         *
+         * @param msg Parameter must be forwarded from subclass
          */
         virtual void handleMessage(cMessage *msg);
+
 };
 
 } //namespace

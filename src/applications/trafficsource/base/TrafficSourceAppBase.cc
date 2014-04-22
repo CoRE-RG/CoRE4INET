@@ -16,7 +16,9 @@
 #include "TrafficSourceAppBase.h"
 #include "CTFrame.h"
 #include "TTFrame_m.h"
+#include "TTBuffer.h"
 #include "RCFrame_m.h"
+#include "RCBuffer.h"
 #include "CoRE4INETDefs.h"
 
 namespace CoRE4INET {

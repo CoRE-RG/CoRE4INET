@@ -16,10 +16,7 @@
 #ifndef __CORE4INET_CALLBACK_H_
 #define __CORE4INET_CALLBACK_H_
 
-#include "tte_api.h"
 #include "Buffer.h"
-#include "TTBuffer.h"
-#include "RCBuffer.h"
 
 namespace CoRE4INET {
 
@@ -116,29 +113,6 @@ class Callback: public cListener
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj){
             fn(arg);
         }
-};
-
-
-/**
- * @brief Class representing a Callback especially for API callbacks.
- *
- * @sa Callback
- */
-class APICallback: public Callback
-{
-    public:
-        /**
-         * @brief Constructor
-         */
-        APICallback(Buffer *buffer, simsignal_t signal) : Callback(buffer, signal){
-        }
-
-        /**
-         * @brief execution of the callback.
-         *
-         * If method is called the stored function pointer is invoked.
-         */
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
 };
 
 }

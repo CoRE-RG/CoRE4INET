@@ -15,7 +15,7 @@
 
 package core4inet.applications.trafficsink;
 
-import core4inet.applications.base.ApplicationBase;
+import core4inet.applications.AS6802.CTApplicationBase;
 
 //
 // Traffic sink application used for statistics collection.
@@ -23,7 +23,7 @@ import core4inet.applications.base.ApplicationBase;
 // @see ApplicationBase
 //
 // @author Till Steinbach
-simple TrafficSinkApp extends ApplicationBase
+simple TrafficSinkApp extends CTApplicationBase
 {
     parameters:
         @class(TrafficSinkApp);

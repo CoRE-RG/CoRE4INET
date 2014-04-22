@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include "TrafficSourceAppBase.h"
+#include "Timed.h"
 #include "AVBIncoming.h"
 
 namespace CoRE4INET {

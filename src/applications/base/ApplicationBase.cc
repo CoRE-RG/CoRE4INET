@@ -26,12 +26,6 @@ Define_Module(ApplicationBase);
 
 void ApplicationBase::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("RCin"))
-    {
-        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
-        if (rcBuffer)
-            rcBuffer->resetBag();
-    }
 }
 
 void ApplicationBase::handleParameterChange(__attribute__((unused)) const char* parname)

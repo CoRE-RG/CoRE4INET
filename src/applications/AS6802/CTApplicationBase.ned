@@ -13,11 +13,27 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.api;
+package core4inet.applications.AS6802;
+
+import core4inet.applications.base.ApplicationBase;
 
 //
-// TODO auto-generated module
+// Abstract base application used for various application models.
+// Since this is an abstract module please do not instantiate it
 //
-simple TTEthAPI
+//
+// @see TTEAPIApplicationBase.ned
+//
+// @author Till Steinbach
+simple CTApplicationBase extends ApplicationBase
 {
+    parameters:
+        @class(CTApplicationBase);
+        @display("i=block/app");
+        
+    gates:
+        //Input gate for the incoming time-triggered messages
+        input TTin @directIn @labels(TTFrame);
+        //Input gate for the incoming rate-constrained messages
+        input RCin @directIn @labels(RCFrame);
 }

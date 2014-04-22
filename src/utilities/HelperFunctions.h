@@ -23,7 +23,10 @@
 #include "cgate.h"
 
 #include "Timer.h"
+
+#ifdef WITH_AS6802_COMMON
 #include "PCFrame_m.h"
+#endif
 
 namespace CoRE4INET {
 
@@ -100,6 +103,7 @@ uint64_t secondsToTransparentClock(simtime_t seconds);
  */
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
 
+#ifdef WITH_AS6802_COMMON
 /**
  * @brief Sets the transparent clock information in the pcf
  *
@@ -110,6 +114,7 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
  * @author Till Steinbach
  */
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler);
+#endif
 
 }
 

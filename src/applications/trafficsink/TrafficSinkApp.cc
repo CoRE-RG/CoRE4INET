@@ -28,7 +28,7 @@ void TrafficSinkApp::initialize()
 
 void TrafficSinkApp::handleMessage(cMessage *msg)
 {
-    ApplicationBase::handleMessage(msg);
+    CTApplicationBase::handleMessage(msg);
 
     if (msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
     {

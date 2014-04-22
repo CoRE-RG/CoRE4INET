@@ -6,10 +6,12 @@
  */
 
 #include <stdint.h>
+
+#include "APICallback.h"
+
 #include "tte_api.h"
 #include "TTBuffer.h"
 #include "RCBuffer.h"
-#include "Callback.h"
 #include "TTEAPIApplicationBase.h"
 
 namespace CoRE4INET {

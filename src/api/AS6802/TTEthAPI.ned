@@ -13,25 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.applications.base;
-
-import core4inet.linklayer.port.IPort;
+package core4inet.api.AS6802;
 
 //
-// Interface to be implemented by application models.
-// Since this is an abstract module please do not instantiate it
+// TODO auto-generated module
 //
-//
-// @see TTEAPIApplicationBase
-//
-// @author Till Steinbach
-moduleinterface IApplication
+simple TTEthAPI
 {
-    parameters:
-        @display("i=block/app");
-        //Comma seperated list of buffer modules the application is allowed to use
-        string buffers;
-    gates:
-         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn;
 }

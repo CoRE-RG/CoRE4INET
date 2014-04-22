@@ -20,6 +20,7 @@
 #include "tte_api.h"
 #include "base/ApplicationBase.h"
 #include "CTFrame_m.h"
+#include "APICallback.h"
 
 #define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
 

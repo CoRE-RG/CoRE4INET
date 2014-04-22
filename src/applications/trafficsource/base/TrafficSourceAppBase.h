@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_TRAFFICSOURCEBASE_H_
 #define __CORE4INET_TRAFFICSOURCEBASE_H_
 
-#include "base/ApplicationBase.h"
+#include "CTApplicationBase.h"
 
 namespace CoRE4INET {
 
@@ -26,7 +26,7 @@ namespace CoRE4INET {
  * @sa ApplicationBase
  * @ingroup Applications
  */
-class TrafficSourceAppBase : public ApplicationBase
+class TrafficSourceAppBase : public CTApplicationBase
 {
     protected:
         /**

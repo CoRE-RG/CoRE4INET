@@ -13,25 +13,28 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.applications.base;
+#include "CTApplicationBase.h"
 
-import core4inet.linklayer.port.IPort;
+#include "CoRE4INETDefs.h"
+#include "HelperFunctions.h"
 
-//
-// Interface to be implemented by application models.
-// Since this is an abstract module please do not instantiate it
-//
-//
-// @see TTEAPIApplicationBase
-//
-// @author Till Steinbach
-moduleinterface IApplication
+#include "RCBuffer.h"
+
+#include <ModuleAccess.h>
+
+namespace CoRE4INET {
+
+Define_Module(CTApplicationBase);
+
+void CTApplicationBase::handleMessage(cMessage *msg)
 {
-    parameters:
-        @display("i=block/app");
-        //Comma seperated list of buffer modules the application is allowed to use
-        string buffers;
-    gates:
-         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn;
+    if (msg->arrivedOn("RCin"))
+    {
+        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
+        if (rcBuffer)
+            rcBuffer->resetBag();
+    }
+    ApplicationBase::handleMessage(msg);
 }
+
+} //namespace
