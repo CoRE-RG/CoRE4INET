@@ -15,7 +15,6 @@
 
 #include "AVBTrafficSourceApp.h"
 #include "HelperFunctions.h"
-#include <CTFrame_m.h>
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
 #include "Buffer.h"

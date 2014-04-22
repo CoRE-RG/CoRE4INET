@@ -17,8 +17,14 @@
 
 #include <BaseInControl.h>
 #include <BEInControl.h>
+
+#ifdef WITH_AS6802_COMMON
 #include <CTInControl.h>
+#endif
+
+#ifdef WITH_AVB_COMMON
 #include <AVBClassAInControl.h>
+#endif
 
 namespace CoRE4INET {
 
@@ -35,6 +41,8 @@ class BE_InControl : public BEInControl<BaseInControl>
 {
 };
 
+
+#ifdef WITH_AS6802_COMMON
 /**
  * @brief Class representing the CT_BE_InControl module
  *
@@ -49,7 +57,10 @@ class BE_InControl : public BEInControl<BaseInControl>
 class CT_BE_InControl : public CTInControl<BEInControl<BaseInControl> >
 {
 };
+#endif
 
+
+#if defined(WITH_AVB_COMMON) && defined(WITH_AS6802_COMMON)
 /**
  * @brief Class representing the CT_AVB_BE_InControl module
  *
@@ -62,6 +73,7 @@ class CT_BE_InControl : public CTInControl<BEInControl<BaseInControl> >
 class CT_AVB_BE_InControl : public CTInControl<AVBClassAInControl<BEInControl<BaseInControl> > >
 {
 };
+#endif
 
 }
 

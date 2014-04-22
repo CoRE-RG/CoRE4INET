@@ -23,7 +23,7 @@ import core4inet.applications.base.ApplicationBase;
 // @see ApplicationBase
 //
 // @author Till Steinbach
-simple MultiTrafficSinkApp extends ApplicationBase
+simple MultiCTTrafficSinkApp extends ApplicationBase
 {
     parameters:
         @class(MultiTrafficSinkApp);

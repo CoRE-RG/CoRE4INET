@@ -18,10 +18,16 @@
 
 #include <BaseShaper.h>
 #include <BEShaper.h>
+
+#ifdef WITH_AS6802_COMMON
 #include <RCShaper.h>
 #include <PCFShaper.h>
 #include <TTShaper.h>
+#endif
+
+#ifdef WITH_AVB_COMMON
 #include <AVBClassAShaper.h>
+#endif
 
 namespace CoRE4INET {
 
@@ -40,6 +46,7 @@ class BE_Shaper : public BEShaper<BaseShaper>
 {
 };
 
+#ifdef WITH_AS6802_COMMON
 /**
  * @brief Class representing the PCF_RC_BE_Shaper module
  *
@@ -76,7 +83,10 @@ class PCF_RC_BE_Shaper : public PCFShaper<RCShaper<BEShaper<BaseShaper> > >
 class TT_PCF_RC_BE_Shaper : public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > >
 {
 };
+#endif
 
+
+#if defined(WITH_AVB_COMMON) && defined(WITH_AS6802_COMMON)
 /**
  * @brief Class representing the TT_AVBClassA_PCF_RC_BE_Shaper module
  *
@@ -94,6 +104,7 @@ class TT_PCF_RC_BE_Shaper : public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShap
 class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBClassAShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >
 {
 };
+#endif
 
 }
 

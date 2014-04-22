@@ -13,9 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TRAFFICSINK_H_
-#define __CORE4INET_TRAFFICSINK_H_
+#ifndef __CORE4INET_CTTRAFFICSINK_H_
+#define __CORE4INET_CTTRAFFICSINK_H_
 
+#include "TrafficSinkApp.h"
 #include "CTApplicationBase.h"
 
 namespace CoRE4INET {
@@ -24,24 +25,13 @@ namespace CoRE4INET {
  * @brief Traffic sink application used for statistics collection.
  *
  *
- * @sa ApplicationBase
+ * @sa TrafficSinkApp
  * @ingroup Applications
  *
  * @author Till Steinbach
  */
-class TrafficSinkApp : public CTApplicationBase
+class CTTrafficSinkApp : public TrafficSinkApp, public virtual CTApplicationBase
 {
-    private:
-        /**
-         * Signal that is emitted every time a frame was sent.
-         */
-        static simsignal_t rxPkSignal;
-
-    protected:
-        /**
-         * @brief Initialization of the module.
-         */
-        virtual void initialize();
 
         /**
          * @brief collects incoming message and writes statistics.
@@ -49,6 +39,8 @@ class TrafficSinkApp : public CTApplicationBase
          * @param msg incoming frame
          */
         virtual void handleMessage(cMessage *msg);
+    public:
+        using TrafficSinkApp::handleParameterChange;
 };
 
 } //namespace

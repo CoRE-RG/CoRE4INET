@@ -88,6 +88,7 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
     return transparentClock / secondsToTransparentClock(tick);
 }
 
+#ifdef WITH_AS6802_COMMON
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
 {
     uint64_t transparentClock = pcf->getTransparent_clock();
@@ -119,5 +120,6 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
     //Set new transparent clock
     pcf->setTransparent_clock(transparentClock);
 }
+#endif
 
 }

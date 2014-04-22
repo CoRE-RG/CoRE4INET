@@ -17,8 +17,8 @@
 #define __CORE4INET_DOUBLEBUFFER_H_
 
 #include <omnetpp.h>
-#include <EtherFrame_m.h>
-#include "CTBuffer.h"
+#include "EtherFrame_m.h"
+#include "Buffer.h"
 
 namespace CoRE4INET {
 

@@ -13,29 +13,31 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TRAFFICSOURCEBASE_H_
-#define __CORE4INET_TRAFFICSOURCEBASE_H_
-
-#include "base/ApplicationBase.h"
+#include "TrafficSinkApp.h"
 
 namespace CoRE4INET {
 
-/**
- * @brief Base class for a traffic generator application.
- *
- * @sa ApplicationBase
- * @ingroup Applications
- */
-class TrafficSourceAppBase : public virtual ApplicationBase
-{
-    protected:
-        /**
-         * @brief Initialization of the module. Sends activator message
-         */
-        virtual void initialize();
+Define_Module(TrafficSinkApp);
 
-};
+simsignal_t TrafficSinkApp::rxPkSignal = SIMSIGNAL_NULL;
+
+void TrafficSinkApp::initialize()
+{
+    rxPkSignal = registerSignal("rxPk");
+}
+
+void TrafficSinkApp::handleMessage(cMessage *msg)
+{
+    ApplicationBase::handleMessage(msg);
+
+    if (EtherFrame *frame = dynamic_cast<EtherFrame*>(msg))
+    {
+        if (frame)
+        {
+            emit(rxPkSignal, frame);
+        }
+    }
+    delete msg;
+}
 
 } //namespace
-
-#endif

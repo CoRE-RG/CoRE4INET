@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.applications.trafficsink;
+package core4inet.applications.trafficsink.base;
 
-import core4inet.applications.AS6802.CTApplicationBase;
+import core4inet.applications.base.ApplicationBase;
 
 //
 // Traffic sink application used for statistics collection.
@@ -23,7 +23,7 @@ import core4inet.applications.AS6802.CTApplicationBase;
 // @see ApplicationBase
 //
 // @author Till Steinbach
-simple TrafficSinkApp extends CTApplicationBase
+simple TrafficSinkApp extends ApplicationBase
 {
     parameters:
         @class(TrafficSinkApp);

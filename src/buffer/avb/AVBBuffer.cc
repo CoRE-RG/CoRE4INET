@@ -14,10 +14,9 @@
 // 
 
 #include "AVBBuffer.h"
-#include <CTFrame_m.h>
-#include <AVBFrame_m.h>
+#include "AVBFrame_m.h"
 #include "ApplicationBase.h"
-#include <ModuleAccess.h>
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 

@@ -40,7 +40,9 @@
         requires = ""
         labels = ""
         nedPackages = "
+                       core4inet.applications.AS6802
                        core4inet.applications.trafficsource.AS6802
+                       core4inet.applications.trafficsink.AS6802
                        core4inet.buffer.AS6802
                        core4inet.incoming.AS6802
                        core4inet.linklayer.ethernet.AS6802

@@ -16,7 +16,6 @@
 package core4inet.applications.trafficsource.AS6802;
 
 import core4inet.utilities.classes.IScheduled;
-import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 
 //
 // Traffic source application used for time-triggered traffic generators.
@@ -24,7 +23,7 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 // @see RCTrafficSourceApp
 //
 // @author Till Steinbach
-simple TTTrafficSourceApp extends TrafficSourceAppBase like IScheduled
+simple TTTrafficSourceApp extends CTTrafficSourceAppBase like IScheduled
 {
     parameters:
         @class(TTTrafficSourceApp);

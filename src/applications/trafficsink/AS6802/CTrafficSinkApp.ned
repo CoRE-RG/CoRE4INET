@@ -13,32 +13,23 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "TrafficSinkApp.h"
+package core4inet.applications.trafficsink.AS6802;
 
-namespace CoRE4INET {
+import core4inet.applications.trafficsink.base.TrafficSinkApp;
 
-Define_Module(TrafficSinkApp);
-
-simsignal_t TrafficSinkApp::rxPkSignal = SIMSIGNAL_NULL;
-
-void TrafficSinkApp::initialize()
+//
+// Traffic sink application used for statistics collection of critical traffic.
+//
+// @see ApplicationBase
+//
+// @author Till Steinbach
+simple CTTrafficSinkApp extends TrafficSinkApp
 {
-    rxPkSignal = registerSignal("rxPk");
+    parameters:
+        @class(CTTrafficSinkApp);
+    gates:
+        //Input gate for the incoming time-triggered messages
+        input TTin @directIn @labels(TTFrame);
+        //Input gate for the incoming rate-constrained messages
+        input RCin @directIn @labels(RCFrame);
 }
-
-void TrafficSinkApp::handleMessage(cMessage *msg)
-{
-    CTApplicationBase::handleMessage(msg);
-
-    if (msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
-    {
-        EtherFrame *frame = dynamic_cast<EtherFrame*>(msg);
-        if (frame)
-        {
-            emit(rxPkSignal, frame);
-        }
-    }
-    delete msg;
-}
-
-} //namespace

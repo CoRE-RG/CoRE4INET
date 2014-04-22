@@ -13,10 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TRAFFICSOURCEBASE_H_
-#define __CORE4INET_TRAFFICSOURCEBASE_H_
+#ifndef __CORE4INET_CTTRAFFICSOURCEBASE_H_
+#define __CORE4INET_CTTRAFFICSOURCEBASE_H_
 
-#include "base/ApplicationBase.h"
+#include "TrafficSourceAppBase.h"
 
 namespace CoRE4INET {
 
@@ -26,14 +26,18 @@ namespace CoRE4INET {
  * @sa ApplicationBase
  * @ingroup Applications
  */
-class TrafficSourceAppBase : public virtual ApplicationBase
+class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase
 {
     protected:
-        /**
-         * @brief Initialization of the module. Sends activator message
-         */
-        virtual void initialize();
 
+        /**
+         * @brief Generates and sends a new Message.
+         *
+         * The message is sent to the buffer with the ct_id defined in parameter ct_id of the module.
+         * The message kind is defined by the buffer-type (RC/TT) of the buffer the message is sent to.
+         * The size is defined by the payload parameter of the module.
+         */
+        virtual void sendMessage();
 };
 
 } //namespace

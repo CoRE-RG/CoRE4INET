@@ -13,27 +13,42 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TRAFFICSOURCEBASE_H_
-#define __CORE4INET_TRAFFICSOURCEBASE_H_
+#ifndef __CORE4INET_TRAFFICSINK_H_
+#define __CORE4INET_TRAFFICSINK_H_
 
 #include "base/ApplicationBase.h"
 
 namespace CoRE4INET {
 
 /**
- * @brief Base class for a traffic generator application.
+ * @brief Traffic sink application used for statistics collection.
+ *
  *
  * @sa ApplicationBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach
  */
-class TrafficSourceAppBase : public virtual ApplicationBase
+class TrafficSinkApp : public virtual ApplicationBase
 {
+    private:
+        /**
+         * Signal that is emitted every time a frame was sent.
+         */
+        static simsignal_t rxPkSignal;
+
     protected:
         /**
-         * @brief Initialization of the module. Sends activator message
+         * @brief Initialization of the module.
          */
         virtual void initialize();
 
+        /**
+         * @brief collects incoming message and writes statistics.
+         *
+         * @param msg incoming frame
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

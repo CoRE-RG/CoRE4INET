@@ -41,6 +41,7 @@ void RCTrafficSourceApp::initialize()
 void RCTrafficSourceApp::handleMessage(cMessage *msg)
 {
 
+    CTApplicationBase::handleMessage(msg);
     if (msg->arrivedOn("schedulerIn"))
     {
         sendMessage();

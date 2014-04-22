@@ -13,9 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.applications.trafficsource.base;
+package core4inet.applications.trafficsource.AS6802;
 
-import core4inet.applications.base.ApplicationBase;
+import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 
 //
 // Abstract base traffic source application used for various traffic generators.
@@ -26,14 +26,12 @@ import core4inet.applications.base.ApplicationBase;
 // @see TTTrafficSourceApp, RCTrafficSourceApp
 //
 // @author Till Steinbach
-simple TrafficSourceAppBase extends ApplicationBase
+simple CTTrafficSourceAppBase extends TrafficSourceAppBase
 {
     parameters:
+        @class(CTTrafficSourceAppBase);
         @display("i=block/source");
 
-        // Trafficsource enabled or disabled
-        bool enabled = default(true);
-
-        //Size of the payload of the message (size of encapsulated cPacket) that is being generated
-        int payload @unit(Byte) = default(46Byte);
+        //Critical traffic identifier of the message that is being generated (-1) means don't set ID
+        int ct_id = default(-1);
 }

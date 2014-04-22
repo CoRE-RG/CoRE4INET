@@ -14,7 +14,6 @@
 // 
 
 package core4inet.applications.trafficsource.AS6802;
-import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 
 //
 // Traffic source application used for rate-constrained traffic generators.
@@ -22,7 +21,7 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 // @see TTTrafficSourceApp
 //
 // @author Till Steinbach
-simple RCTrafficSourceApp extends TrafficSourceAppBase
+simple RCTrafficSourceApp extends CTTrafficSourceAppBase
 {
     parameters:
         @class(RCTrafficSourceApp);
