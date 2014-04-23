@@ -58,7 +58,7 @@ void TTBuffer::initialize(int stage)
 
         if ((uint32_t) par("sendWindowStart").longValue() >= (uint32_t) period->par("cycle_ticks").longValue())
         {
-            opp_error("The send window (%d ticks) starts outside of the period (%d ticks)",
+            throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
                     par("sendWindowStart").longValue(), period->par("cycle_ticks").longValue());
         }
 

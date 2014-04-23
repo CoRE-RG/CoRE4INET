@@ -79,7 +79,7 @@ void CTTrafficSourceAppBase::sendMessage()
                     }
                     else
                     {
-                        opp_error("You can only connect an Incoming module to a Buffer (Buffer:%s, Attached Module:%s)",
+                        throw cRuntimeError("You can only connect an Incoming module to a Buffer (Buffer:%s, Attached Module:%s)",
                                 (*buf)->getFullPath().c_str(),
                                 (*buf)->gate("in")->getPathStartGate()->getOwner()->getFullPath().c_str());
                     }

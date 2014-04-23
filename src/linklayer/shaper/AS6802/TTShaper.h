@@ -404,7 +404,7 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
     std::map<uint64_t, TTBuffer*>::iterator buf = ttBuffers.find(sendWindowStart);
     if (buf != ttBuffers.end())
     {
-        opp_error("ERROR! You cannot schedule two messages with the same send window!");
+        throw cRuntimeError("ERROR! You cannot schedule two messages with the same send window!");
     }
     else
     {
@@ -441,13 +441,13 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
                     //Now that we have everything together do the check!
                     if (other_sendWindowStart < this_sendWindowStart && other_sendWindowEnd > this_sendWindowStart)
                     {
-                        opp_error(
+                        throw cRuntimeError(
                                 "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
                                 ttBuffer->getFullPath().c_str(), (*buffer).second->getFullPath().c_str());
                     }
                     if (this_sendWindowStart < other_sendWindowStart && this_sendWindowEnd > other_sendWindowStart)
                     {
-                        opp_error(
+                        throw cRuntimeError(
                                 "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
                                 (*buffer).second->getFullPath().c_str(), ttBuffer->getFullPath().c_str());
                     }
@@ -508,20 +508,20 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
                         }
                         else
                         {
-                            opp_error("Configuration problem of tt_buffers: Module: %s is in the list more than once!",
+                            throw cRuntimeError("Configuration problem of tt_buffers: Module: %s is in the list more than once!",
                                     (*ttBufferPath).c_str());
                         }
                     }
                     else
                     {
-                        opp_error("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!",
+                        throw cRuntimeError("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!",
                                 (*ttBufferPath).c_str());
                     }
                 }
             }
             else
             {
-                opp_error("Configuration problem of tt_buffers: Module: %s could not be resolved!",
+                throw cRuntimeError("Configuration problem of tt_buffers: Module: %s could not be resolved!",
                         (*ttBufferPath).c_str());
             }
         }

@@ -105,7 +105,7 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
         {
             if (findContainingNode(gate->getOwnerModule()) != findContainingNode(this))
             {
-                opp_error(
+                throw cRuntimeError(
                         "Configuration problem of destination_gates: Gate: %s is not in node %s! Maybe a copy-paste problem?",
                         (*destinationGatePath).c_str(), findContainingNode(this)->getFullName());
             }
@@ -113,7 +113,7 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
         }
         else
         {
-            opp_error("Configuration problem of destination_gates: Gate: %s could not be resolved!",
+            throw cRuntimeError("Configuration problem of destination_gates: Gate: %s could not be resolved!",
                     (*destinationGatePath).c_str());
         }
     }
