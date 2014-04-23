@@ -3,6 +3,7 @@
 
 #include <map>
 #include <list>
+#include "MACAddress.h"
 
 #include "csimplemodule.h"
 
@@ -14,20 +15,21 @@ class SRPTable : public cSimpleModule
     protected:
         struct TalkerEntry
         {
-                int portno;                 // Input port
-                unsigned long bandwidth;    //Bandwidth in bps
+                MACAddress *address;        // The talkers address
+                cModule *module;            // Input port or module
+                unsigned long bandwidth;    // Bandwidth in bps
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 TalkerEntry()
                 {
-                    portno = 0;
+                    module = NULL;
                     bandwidth = 0;
                 }
-                TalkerEntry(int portno, unsigned long bandwidth, simtime_t insertionTime) :
-                        portno(portno), bandwidth(bandwidth), insertionTime(insertionTime)
+                TalkerEntry(MACAddress *address, cModule *module, unsigned long bandwidth, simtime_t insertionTime) :
+                        address(address), module(module), bandwidth(bandwidth), insertionTime(insertionTime)
                 {
                 }
         };
-        //friend std::ostream& operator<<(std::ostream& os, const SRPEntry& entry);
+
         struct ListenerEntry
         {
                 simtime_t insertionTime;    // Arrival time of SRP entry
@@ -41,7 +43,7 @@ class SRPTable : public cSimpleModule
         };
 
         typedef std::map<uint64_t, TalkerEntry> TalkerTable;
-        typedef std::map<unsigned int, ListenerEntry> ListenerList;
+        typedef std::map<cModule*, ListenerEntry> ListenerList;
         typedef std::map<uint64_t, ListenerList> ListenerTable;
 
         std::map<unsigned int, TalkerTable> talkerTables;      // Talker Lookup Table
@@ -66,27 +68,29 @@ class SRPTable : public cSimpleModule
          * @param vid VLAN ID
          * @return Output port for address, or -1 if unknown.
          */
-        virtual std::list<unsigned int> getPortsForStreamId(uint64_t streamId, unsigned int vid = 0);
+        virtual std::list<cModule*> getModulesForStreamId(uint64_t streamId, unsigned int vid = 0);
 
-        virtual unsigned long getBandwidthForPort(unsigned int portno);
+        virtual unsigned long getBandwidthForModule(cModule *module);
+        virtual unsigned long getBandwidthForStream(uint64_t streamId, unsigned int vid = 0);
 
         /**
          * @brief Register a new streamId at talkerTable.
          * @return True if refreshed. False if it is new.
          */
-        virtual bool updateTalkerWithStreamId(int portno, uint64_t streamId, unsigned int bandwidth = 0, unsigned int vid = 0);
+        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL, unsigned int bandwidth = 0,
+                unsigned int vid = 0);
 
         /**
          * @brief Unregister a streamId at talkerTable.
          * @return True if removed. False if not registred.
          */
-        virtual bool removeTalkerWithStreamId(int portno, uint64_t streamId, unsigned int vid = 0);
+        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL, unsigned int vid = 0);
 
         /**
          * @brief Register a new streamId at listenerTable.
          * @return True if refreshed. False if it is new.
          */
-        virtual bool updateListenerWithStreamId(int portno, uint64_t streamId, unsigned int vid = 0);
+        virtual bool updateListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid = 0);
 
         /**
          *  @brief Prints cached data

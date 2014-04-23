@@ -1,13 +1,9 @@
 #include <map>
+#include <stdexcept>
+
 #include "SRPTable.h"
 
 Define_Module(SRPTable);
-
-//std::ostream& operator<<(std::ostream& os, const MACAddressTable::AddressEntry& entry)
-//{
-//    os << "{VID=" << entry.vid << ", port=" << entry.portno << ", insertionTime=" << entry.insertionTime << "}";
-//    return os;
-//}
 
 SRPTable::SRPTable()
 {
@@ -23,12 +19,12 @@ void SRPTable::handleMessage(cMessage *)
     throw cRuntimeError("This module doesn't process messages");
 }
 
-std::list<unsigned int> SRPTable::getPortsForStreamId(uint64_t streamId, unsigned int vid)
+std::list<cModule*> SRPTable::getModulesForStreamId(uint64_t streamId, unsigned int vid)
 {
     Enter_Method
-    ("SRPTable::getPortsForStreamId()");
+    ("SRPTable::getModulesForStreamId()");
 
-    std::list<unsigned int> ports;
+    std::list<cModule*> modules;
 
     ListenerTable listenerTable = listenerTables[vid];
 
@@ -38,13 +34,21 @@ std::list<unsigned int> SRPTable::getPortsForStreamId(uint64_t streamId, unsigne
     {
         for (ListenerList::iterator entry = (*iter).second.begin(); entry != (*iter).second.end(); entry++)
         {
-            ports.push_back((*entry).first);
+            modules.push_back((*entry).first);
         }
     }
-    return ports;
+    return modules;
 }
 
-unsigned long SRPTable::getBandwidthForPort(unsigned int portno)
+unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, unsigned int vid)
+{
+    //get Talkers for this VLAN
+    TalkerTable ttable = talkerTables[vid];
+    TalkerEntry tentry = ttable[streamId];
+    return tentry.bandwidth;
+}
+
+unsigned long SRPTable::getBandwidthForModule(cModule *module)
 {
     unsigned long bandwidth = 0;
 
@@ -56,7 +60,7 @@ unsigned long SRPTable::getBandwidthForPort(unsigned int portno)
             ListenerList llist = (*j).second;
             for (ListenerList::iterator k = llist.begin(); k != llist.end(); k++)
             {
-                if ((*k).first == portno)
+                if ((*k).first == module)
                 {
                     //get Talkers for this VLAN
                     TalkerTable ttable = talkerTables[(*i).first];
@@ -70,7 +74,8 @@ unsigned long SRPTable::getBandwidthForPort(unsigned int portno)
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(int portno, uint64_t streamId, unsigned int bandwidth, unsigned int vid)
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address, unsigned int bandwidth,
+        unsigned int vid)
 {
     Enter_Method
     ("SRPTable::updateTalkerWithStreamId()");
@@ -81,30 +86,43 @@ bool SRPTable::updateTalkerWithStreamId(int portno, uint64_t streamId, unsigned 
 
     if (talkerTable.find(streamId) == talkerTable.end())
     {
+        if (bandwidth == 0)
+        {
+            throw std::invalid_argument("cannot register talker with zero bandwidth");
+        }
+        if (address == NULL)
+        {
+            throw std::invalid_argument("cannot register talker without address");
+        }
+        if (module == NULL)
+        {
+            throw std::invalid_argument("cannot register talker without module");
+        }
         updated = false;
     }
     else
     {
-        if (talkerTable[streamId].portno != portno)
+        if (talkerTable[streamId].module != module)
         {
-            throw cRuntimeError("trying to update talker from wrong port");
-        }
-        if (bandwidth == 0){
-            throw cRuntimeError("cannot register talker with zero bandwidth");
+            throw std::invalid_argument("trying to update talker from wrong module");
         }
     }
 
-    talkerTable[streamId].portno = portno;
+    talkerTable[streamId].module = module;
     if (bandwidth > 0)
     {
         talkerTable[streamId].bandwidth = bandwidth;
+    }
+    if (address != NULL)
+    {
+        talkerTable[streamId].address = address;
     }
     talkerTable[streamId].insertionTime = simTime();
 
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(int portno, uint64_t streamId, unsigned int vid)
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address, unsigned int vid)
 {
 
     TalkerTable &talkerTable = talkerTables[vid];
@@ -113,9 +131,9 @@ bool SRPTable::removeTalkerWithStreamId(int portno, uint64_t streamId, unsigned 
 
     if (talker != talkerTable.end())
     {
-        if (talkerTable[streamId].portno != portno)
+        if (talkerTable[streamId].module != module)
         {
-            throw cRuntimeError("trying to unregister talker from wrong port");
+            throw std::invalid_argument("trying to unregister talker from wrong module");
         }
         talkerTable.erase(talker);
         return true;
@@ -123,41 +141,55 @@ bool SRPTable::removeTalkerWithStreamId(int portno, uint64_t streamId, unsigned 
     return false;
 }
 
-bool SRPTable::updateListenerWithStreamId(int portno, uint64_t streamId, unsigned int vid)
+bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid)
 {
     Enter_Method
     ("SRPTable::updateListenerWithStreamId()");
+
+    TalkerTable ttable = talkerTables[vid];
+    if (ttable.find(streamId) == ttable.end())
+    {
+        std::ostringstream oss;
+        oss << "no talker for stream with id " << streamId << " in vlan " << vid;
+        throw std::invalid_argument(oss.str());
+    }
 
     bool updated = true;
 
     ListenerTable &listenerTable = listenerTables[vid];
     ListenerList &llist = listenerTable[streamId];
-    ListenerList::iterator listener = llist.find(portno);
+    ListenerList::iterator listener = llist.find(module);
     if (listener == llist.end())
     {
+        if (module == NULL)
+        {
+            throw std::invalid_argument("cannot register listener without module");
+        }
         updated = false;
     }
 
-    llist[portno].insertionTime = simTime();
+    llist[module].insertionTime = simTime();
 
     return updated;
 }
 
 void SRPTable::printState()
 {
-    EV << "VLAN ID    StreamID    Port    Bandwidth(Mbps)    Inserted" << endl;
     EV << "Talker Table" << endl;
+    EV << "VLAN ID    StreamID    Port    Address    Bandwidth(Mbps)    Inserted" << endl;
     for (std::map<unsigned int, TalkerTable>::iterator i = talkerTables.begin(); i != talkerTables.end(); i++)
     {
         TalkerTable table = i->second;
         for (TalkerTable::iterator j = table.begin(); j != table.end(); j++)
         {
-            EV << (*i).first << "   " << (*j).first << "   " << (*j).second.portno << "   "
-                    << (*j).second.bandwidth / 1000000 << "   " << (*j).second.insertionTime << endl;
+            EV << (*i).first << "   " << (*j).first << "   " << (*j).second.module->getName() << "   "
+                    << (*j).second.address->str() << "   " << (*j).second.bandwidth / 1000000 << "   "
+                    << (*j).second.insertionTime << endl;
         }
     }
 
     EV << "Listener Table" << endl;
+    EV << "VLAN ID    StreamID    Port    Inserted" << endl;
     for (std::map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end(); i++)
     {
         ListenerTable table = i->second;
@@ -166,8 +198,8 @@ void SRPTable::printState()
             ListenerList llist = (*j).second;
             for (ListenerList::iterator k = llist.begin(); k != llist.end(); k++)
             {
-                EV << (*i).first << "   " << (*j).first << "   " << (*k).first << "   " << (*k).second.insertionTime
-                        << endl;
+                EV << (*i).first << "   " << (*j).first << "   " << (*k).first->getName() << "   "
+                        << (*k).second.insertionTime << endl;
             }
         }
     }
