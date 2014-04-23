@@ -15,8 +15,6 @@
 
 package core4inet.services.avb.SRP;
 
-import inet.linklayer.IMACAddressTable;
-
 //
 // This module handles the mapping between ports and streams.
 //

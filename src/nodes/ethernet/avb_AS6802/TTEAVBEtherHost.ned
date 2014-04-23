@@ -15,19 +15,19 @@
 
 package core4inet.nodes.ethernet.avb_AS6802;
 
-import core4inet.buffer.base.BGQueueBuffer;
-import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
-import core4inet.scheduler.ITTEScheduler;
-import core4inet.configuration.IConfigurationManager;
-import core4inet.linklayer.port.TTEAVBPHYPort;
-import core4inet.synchronisation.base.ISync;
-import core4inet.synchronisation.base.DummySync;
 import core4inet.applications.base.IApplication;
-import core4inet.incoming.avb.AVBIncoming;
 import core4inet.buffer.avb.AVBQueueBuffer;
-import inet.linklayer.ethernet.EtherLLC;
-import inet.applications.ethernet.EtherAppSrv;
+import core4inet.buffer.base.BGQueueBuffer;
+import core4inet.configuration.IConfigurationManager;
+import core4inet.incoming.avb.AVBIncoming;
+import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
+import core4inet.linklayer.port.TTEAVBPHYPort;
+import core4inet.scheduler.ITTEScheduler;
+import core4inet.synchronisation.base.ISync;
 import inet.applications.ethernet.EtherAppCli;
+import inet.applications.ethernet.EtherAppSrv;
+import inet.linklayer.ethernet.EtherLLC;
+
 
 //
 // Module for a TTEAVBEthernet Host.
@@ -45,7 +45,7 @@ module TTEAVBEtherHost
         int numBuffer = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
-		string configurationManagerType = default("");
+        string configurationManagerType = default("");
     gates:
         inout ethg;
 
@@ -86,7 +86,7 @@ module TTEAVBEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler
