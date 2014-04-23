@@ -3,7 +3,22 @@
 
 #include "SRPTable.h"
 
+namespace CoRE4INET {
+
 Define_Module(SRPTable);
+
+std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
+{
+    os << "{TalkerAddress=" << entry.address->str() << ", Module=" << entry.module->getName() << ", Bandwidth="
+            << entry.bandwidth/10000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
+    return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const SRPTable::ListenerEntry& entry)
+{
+    os << "{InsertionTime=" << entry.insertionTime << "}";
+    return os;
+}
 
 SRPTable::SRPTable()
 {
@@ -214,4 +229,6 @@ void SRPTable::clear()
 
 SRPTable::~SRPTable()
 {
+}
+
 }

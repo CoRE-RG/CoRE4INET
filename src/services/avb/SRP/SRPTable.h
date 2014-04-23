@@ -7,6 +7,8 @@
 
 #include "csimplemodule.h"
 
+namespace CoRE4INET {
+
 /**
  * This module handles the mapping between ports and MAC addresses. See the NED definition for details.
  */
@@ -29,6 +31,22 @@ class SRPTable : public cSimpleModule
                 {
                 }
         };
+        friend std::ostream& operator<<(std::ostream& os, const TalkerEntry& entry);
+
+        struct StreamId_compare
+        {
+                bool operator()(const uint64_t u1, const uint64_t u2) const
+                {
+                    return u1 > u2;
+                }
+        };
+        struct Module_compare
+        {
+                bool operator()(const cModule *u1, const cModule *u2) const
+                {
+                    return strcmp(u1->getName(), u2->getName());
+                }
+        };
 
         struct ListenerEntry
         {
@@ -41,10 +59,11 @@ class SRPTable : public cSimpleModule
                 {
                 }
         };
+        friend std::ostream& operator<<(std::ostream& os, const ListenerEntry& entry);
 
-        typedef std::map<uint64_t, TalkerEntry> TalkerTable;
-        typedef std::map<cModule*, ListenerEntry> ListenerList;
-        typedef std::map<uint64_t, ListenerList> ListenerTable;
+        typedef std::map<uint64_t, TalkerEntry, StreamId_compare> TalkerTable;
+        typedef std::map<cModule*, ListenerEntry, Module_compare> ListenerList;
+        typedef std::map<uint64_t, ListenerList, StreamId_compare> ListenerTable;
 
         std::map<unsigned int, TalkerTable> talkerTables;      // Talker Lookup Table
         std::map<unsigned int, ListenerTable> listenerTables;  // Listener Lookup Table
@@ -77,14 +96,15 @@ class SRPTable : public cSimpleModule
          * @brief Register a new streamId at talkerTable.
          * @return True if refreshed. False if it is new.
          */
-        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL, unsigned int bandwidth = 0,
-                unsigned int vid = 0);
+        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL,
+                unsigned int bandwidth = 0, unsigned int vid = 0);
 
         /**
          * @brief Unregister a streamId at talkerTable.
          * @return True if removed. False if not registred.
          */
-        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL, unsigned int vid = 0);
+        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL,
+                unsigned int vid = 0);
 
         /**
          * @brief Register a new streamId at listenerTable.
@@ -104,4 +124,5 @@ class SRPTable : public cSimpleModule
 
 };
 
+}
 #endif

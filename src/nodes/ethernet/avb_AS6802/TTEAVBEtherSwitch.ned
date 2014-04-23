@@ -11,6 +11,7 @@ import core4inet.buffer.avb.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
 import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
 import core4inet.utilities.modules.CheckedBuffer;
+import core4inet.services.avb.SRP.SRPTable;
 
 import inet.linklayer.IMACRelayUnit;
 import inet.linklayer.IMACAddressTable;
@@ -55,6 +56,10 @@ module TTEAVBEtherSwitch
                 upperLayerOut[1];
         }
 
+
+        srpTable: SRPTable {
+            @display("p=321,282");
+        }
         srpTrafficHandle: SRPTrafficHandle {
             @display("p=170,170");
         }
@@ -81,7 +86,7 @@ module TTEAVBEtherSwitch
                 @display("p=240,50");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             parameters:
                 @display("p=999,999");
         }

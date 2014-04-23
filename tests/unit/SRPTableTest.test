@@ -33,7 +33,7 @@ cSimpleModule application2;
 application2.setName("application2");
 
 
-SRPTable table;
+CoRE4INET::SRPTable table;
 table.clear();
 std::list<cModule*> ports = table.getModulesForStreamId(0);
 ev << "Ports:{";
