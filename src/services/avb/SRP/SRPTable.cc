@@ -20,7 +20,7 @@ void SRPTable::initialize()
 
 void SRPTable::handleMessage(cMessage *)
 {
-    opp_error("This module doesn't process messages");
+    throw cRuntimeError("This module doesn't process messages");
 }
 
 std::list<unsigned int> SRPTable::getPortsForStreamId(uint64_t streamId, unsigned int vid)
@@ -87,7 +87,10 @@ bool SRPTable::updateTalkerWithStreamId(int portno, uint64_t streamId, unsigned 
     {
         if (talkerTable[streamId].portno != portno)
         {
-            opp_error("trying to update talker from wrong port");
+            throw cRuntimeError("trying to update talker from wrong port");
+        }
+        if (bandwidth == 0){
+            throw cRuntimeError("cannot register talker with zero bandwidth");
         }
     }
 
@@ -112,7 +115,7 @@ bool SRPTable::removeTalkerWithStreamId(int portno, uint64_t streamId, unsigned 
     {
         if (talkerTable[streamId].portno != portno)
         {
-            opp_error("trying to unregister talker from wrong port");
+            throw cRuntimeError("trying to unregister talker from wrong port");
         }
         talkerTable.erase(talker);
         return true;
