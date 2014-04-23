@@ -38,6 +38,8 @@ void TTEAPIApplicationBase::initialize()
 {
     scheduleAt(simTime(), new cMessage("Start Application", START_APPLICATION));
     findContainingNode(this)->subscribe("syncStatus", this);
+    WATCH_MAP(receiveCallbacks);
+    WATCH_MAP(transmitCallbacks);
 }
 
 void TTEAPIApplicationBase::handleMessage(cMessage *msg)

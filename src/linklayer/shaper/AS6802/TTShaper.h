@@ -223,6 +223,7 @@ void TTShaper<TC>::initialize(int stage)
         //Now the ttBuffers can be initialized as all TTBuffers should have registred their events
         initialize_ttBuffers = true;
         handleParameterChange("tt_buffers");
+        WATCH_MAP(ttBuffers);
     }
 }
 template<class TC>
@@ -508,7 +509,8 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
                         }
                         else
                         {
-                            throw cRuntimeError("Configuration problem of tt_buffers: Module: %s is in the list more than once!",
+                            throw cRuntimeError(
+                                    "Configuration problem of tt_buffers: Module: %s is in the list more than once!",
                                     (*ttBufferPath).c_str());
                         }
                     }
