@@ -1,0 +1,45 @@
+%description:
+Test SRPTable
+
+%includes:
+#include "SRPTable.h"
+
+%inifile: test.ini
+[General]
+check-signals = true
+network = Test
+cmdenv-express-mode = false
+output-vector-file = test.vec
+output-scalar-file = test.sca
+simtime-scale = -12
+
+%global:
+#define PrintPortlist(X)  for (std::list<unsigned int>::iterator port = X.begin(); port!=X.end();port++){ev<<(*port)<< " ";}
+
+%activity:
+SRPTable table;
+table.clear();
+std::list<unsigned int> ports = table.getPortsForStreamId(0);
+ev << "Ports:{";
+PrintPortlist(ports);
+ev << "}" << std::endl;
+table.updateTalkerWithStreamId(0, 0, 50000000, 0);
+table.updateTalkerWithStreamId(0, 0);
+table.updateTalkerWithStreamId(0, 1, 25000000, 1);
+table.updateTalkerWithStreamId(2, 3, 25000000, 2);
+table.printState();
+table.updateListenerWithStreamId(0, 0, 0);
+table.updateListenerWithStreamId(2, 1, 1);
+table.updateListenerWithStreamId(3, 1, 2);
+table.printState();
+ev << "Bandwidth for Port 0 is " << table.getBandwidthForPort(0) << "Bps" << std::endl;
+table.updateListenerWithStreamId(0, 1, 1);
+table.printState();
+ev << "Bandwidth for Port 0 is " << table.getBandwidthForPort(0) << "Bps" << std::endl;
+ports = table.getPortsForStreamId(1);
+ev << "Ports:{";
+PrintPortlist(ports);
+ev << "}" << std::endl;
+
+%contains: stdout
+Ports:{}

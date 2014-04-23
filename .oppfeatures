@@ -14,6 +14,7 @@
                        core4inet.linklayer.ethernet.avb
                        core4inet.linklayer.inControl.avb
                        core4inet.linklayer.shaper.avb
+                       core4inet.services.avb
                       "
         extraSourceFolders = ""
         compileFlags = "-DWITH_AVB_COMMON"
