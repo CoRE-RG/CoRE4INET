@@ -45,7 +45,7 @@ void TTTrafficSourceApp::initialize()
 
         if (event->getAction_time() >= (uint32_t) period->par("cycle_ticks").longValue())
         {
-            opp_error("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(),
+            throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(),
                     period->par("cycle_ticks").longValue());
         }
 

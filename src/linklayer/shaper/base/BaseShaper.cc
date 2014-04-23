@@ -19,7 +19,7 @@ void BaseShaper::initialize(int stage)
             outChannel = physOutGate->findTransmissionChannel();
         }
         else{
-            opp_error("A shaper can only be used within a port module with an attached EtherMac");
+            throw cRuntimeError("A shaper can only be used within a port module with an attached EtherMac");
         }
         WATCH(framesRequested);
     }

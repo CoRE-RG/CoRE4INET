@@ -110,7 +110,7 @@ void Timer::sendOutEvents()
         if ((ticks - (*it).first) > 1)
         {
             EV << "misscheduled: " << (ticks - (*it).first) << std::endl;
-            opp_error("THIS SHOULD NOT HAPPEN!");
+            throw cRuntimeError("THIS SHOULD NOT HAPPEN!");
         }
         for (std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
         {

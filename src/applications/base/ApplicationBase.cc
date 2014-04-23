@@ -44,7 +44,7 @@ void ApplicationBase::handleParameterChange(__attribute__((unused)) const char* 
         {
             if (findContainingNode(module) != findContainingNode(this))
             {
-                opp_error("Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                throw cRuntimeError("Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
                         (*bufferPath).c_str(), findContainingNode(this)->getFullName());
             }
             Buffer *buffer = dynamic_cast<Buffer*>(module);
@@ -54,12 +54,12 @@ void ApplicationBase::handleParameterChange(__attribute__((unused)) const char* 
             }
             else
             {
-                opp_error("Buffer module %s has no ct_id configured!", (*bufferPath).c_str());
+                throw cRuntimeError("Buffer module %s has no ct_id configured!", (*bufferPath).c_str());
             }
         }
         else
         {
-            opp_error("Configuration problem of buffers: Module: %s could not be resolved!", (*bufferPath).c_str());
+            throw cRuntimeError("Configuration problem of buffers: Module: %s could not be resolved!", (*bufferPath).c_str());
         }
     }
 }

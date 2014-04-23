@@ -221,20 +221,20 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
                     }
                     else
                     {
-                        opp_error("CTIncoming module %s has no Buffer attached with ct_id configured!",
+                        throw cRuntimeError("CTIncoming module %s has no Buffer attached with ct_id configured!",
                                 (*ct_incomingPath).c_str());
                     }
                 }
                 else
                 {
-                    opp_error("Configuration problem of ct_incomings: Module: %s is no CTIncoming module!",
+                    throw cRuntimeError("Configuration problem of ct_incomings: Module: %s is no CTIncoming module!",
                             (*ct_incomingPath).c_str());
                 }
             }
         }
         else
         {
-            opp_error("Configuration problem of ct_incomings: Module: %s could not be resolved!",
+            throw cRuntimeError("Configuration problem of ct_incomings: Module: %s could not be resolved!",
                     (*ct_incomingPath).c_str());
         }
     }
