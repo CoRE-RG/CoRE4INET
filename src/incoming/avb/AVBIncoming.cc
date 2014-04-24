@@ -19,6 +19,8 @@
 #include <AVBFrame_m.h>
 #include <BaseShaper.h>
 
+#include "customWatch.h"
+
 namespace CoRE4INET {
 
 Define_Module(AVBIncoming);
@@ -36,13 +38,13 @@ void AVBIncoming::initialize()
     {
         PortReservation[i] = calcPortUtilisation(i);
         AVBPortReservation[i] = 0;
-        WATCH_LIST(ListenerGates[i]);
     }
     WATCH_MAP(TalkerAddresses);
     WATCH_MAP(StreamBandwith);
     WATCH_MAP(PortReservation);
     WATCH_MAP(AVBPortReservation);
     WATCH_MAP(PortBandwith);
+    WATCH_LISTMAP(ListenerGates);
 
     EtherFrame *outFrame = new EtherFrame("MAC Register", IEEE802CTRL_DATA);
     send(outFrame, "SRPout");

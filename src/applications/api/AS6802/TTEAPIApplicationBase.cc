@@ -36,6 +36,7 @@ Define_Module(TTEAPIApplicationBase);
 
 void TTEAPIApplicationBase::initialize()
 {
+    ApplicationBase::initialize();
     scheduleAt(simTime(), new cMessage("Start Application", START_APPLICATION));
     findContainingNode(this)->subscribe("syncStatus", this);
     WATCH_MAP(receiveCallbacks);

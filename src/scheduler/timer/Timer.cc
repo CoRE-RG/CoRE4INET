@@ -15,6 +15,8 @@
 
 #include "Timer.h"
 
+#include "customWatch.h"
+
 #include <exception>
 
 namespace CoRE4INET {
@@ -38,6 +40,9 @@ void Timer::initialize()
     clockCorrectionSignal = registerSignal("clockCorrection");
 
     recalculationTime = lastRecalculation = simTime();
+
+    WATCH_LISTMAP(registredActionTimeEvents);
+    WATCH_LISTMAP(registredTimerEvents);
 }
 
 Timer::~Timer()
