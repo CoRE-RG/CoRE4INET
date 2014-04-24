@@ -45,6 +45,11 @@ class ApplicationBase : public virtual cSimpleModule
         std::map<uint16_t, std::list<Buffer*> > buffers;
     public:
         /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
+
+        /**
          * @brief executes the given Callback in the context of the Application
          *
          * @param cb The Callback to execute

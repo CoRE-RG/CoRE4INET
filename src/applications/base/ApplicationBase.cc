@@ -17,12 +17,18 @@
 
 #include "CoRE4INETDefs.h"
 #include "HelperFunctions.h"
+#include "customWatch.h"
 
 #include <ModuleAccess.h>
 
 namespace CoRE4INET {
 
 Define_Module(ApplicationBase);
+
+void ApplicationBase::initialize()
+{
+    WATCH_LISTMAP(buffers);
+}
 
 void ApplicationBase::handleMessage(cMessage *msg)
 {

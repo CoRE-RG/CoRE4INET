@@ -26,6 +26,8 @@
 
 #include "CoRE4INETDefs.h"
 #include "HelperFunctions.h"
+#include "customWatch.h"
+
 
 #include <map>
 #include <list>
@@ -123,6 +125,7 @@ void CTInControl<IC>::initialize()
 {
     BaseInControl::initialize();
     ctDroppedSignal = cComponent::registerSignal("ctDropped");
+    WATCH_LISTMAP(ct_incomings);
 }
 
 template<class IC>

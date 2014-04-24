@@ -23,6 +23,7 @@ simsignal_t TrafficSinkApp::rxPkSignal = SIMSIGNAL_NULL;
 
 void TrafficSinkApp::initialize()
 {
+    ApplicationBase::initialize();
     rxPkSignal = registerSignal("rxPk");
 }
 

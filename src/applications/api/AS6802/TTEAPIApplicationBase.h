@@ -18,7 +18,7 @@
 
 #include <omnetpp.h>
 #include "tte_api.h"
-#include "base/ApplicationBase.h"
+#include "CTApplicationBase.h"
 #include "CTFrame_m.h"
 #include "APICallback.h"
 
@@ -77,7 +77,7 @@ class TTEAPIPriv
  *
  * @author Till Steinbach
  */
-class TTEAPIApplicationBase : public ApplicationBase, public cListener
+class TTEAPIApplicationBase : public CTApplicationBase, public cListener
 {
     private:
         bool synchronized;
