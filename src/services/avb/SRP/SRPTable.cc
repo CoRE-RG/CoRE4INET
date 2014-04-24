@@ -1,6 +1,8 @@
 #include <map>
 #include <stdexcept>
 
+#include "customWatch.h"
+
 #include "SRPTable.h"
 
 namespace CoRE4INET {
@@ -27,6 +29,7 @@ SRPTable::SRPTable()
 void SRPTable::initialize()
 {
     //TODO minor: WATCH ENTRIES
+    WATCH_MAPMAP(talkerTables);
 }
 
 void SRPTable::handleMessage(cMessage *)
