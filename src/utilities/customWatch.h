@@ -20,7 +20,7 @@
 #include "cstlwatch.h"
 
 template<class KeyT, class ValueT, class CmpT>
-class cStdListMapWatcher : public cStdVectorWatcherBase
+class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
 {
     protected:
         std::map<KeyT, ValueT, CmpT>& m;
@@ -28,7 +28,7 @@ class cStdListMapWatcher : public cStdVectorWatcherBase
         mutable int itPos;
         std::string classname;
     public:
-        cStdListMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
+        cStdCollectionMapWatcherBase(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
                 cStdVectorWatcherBase(name), m(var)
 
         {
@@ -39,10 +39,6 @@ class cStdListMapWatcher : public cStdVectorWatcherBase
         const char *getClassName() const
         {
             return classname.c_str();
-        }
-        virtual const char *getElemTypeName() const
-        {
-            return "struct pair<*, list<*> >";
         }
         virtual int size() const
         {
@@ -76,12 +72,29 @@ class cStdListMapWatcher : public cStdVectorWatcherBase
             }
             return atIt();
         }
+        virtual std::string atIt() const = 0;
+};
+
+template<class KeyT, class ValueT, class CmpT>
+class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
+{
+    public:
+        cStdListMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
+            cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>(name, var)
+
+        {
+        }
+        virtual const char *getElemTypeName() const
+        {
+            return "struct pair<*, list<*> >";
+        }
+
         virtual std::string atIt() const
         {
             std::stringstream out;
-            out << it->first << " ==> ";
-            for(typename ValueT::iterator it2 = it->second.begin(); it2!=it->second.end();it2++){
-                if(it2!=it->second.begin()){
+            out << this->it->first << " ==> ";
+            for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
+                if(it2!=this->it->second.begin()){
                     out << ", ";
                 }
                 out << (*it2);
@@ -96,17 +109,58 @@ void createStdListMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& 
     new cStdListMapWatcher<KeyT, ValueT, CmpT>(varname, m);
 }
 
+template<class KeyT, class ValueT, class CmpT>
+class cStdMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
+{
+    public:
+        cStdMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
+            cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>(name, var)
+
+        {
+        }
+        virtual const char *getElemTypeName() const
+        {
+            return "struct pair<*, map<*> >";
+        }
+
+        virtual std::string atIt() const
+        {
+            std::stringstream out;
+            out << this->it->first << " ==> ";
+            for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
+                if(it2!=this->it->second.begin()){
+                    out << ", ";
+                }
+                out << (*it2).first << " => " << (*it2).second;
+            }
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT, class CmpT>
+void createStdMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
+{
+    new cStdMapMapWatcher<KeyT, ValueT, CmpT>(varname, m);
+}
+
 /**
  * @ingroup Macros
  * @defgroup MacrosWatch WATCH macros
  */
 //@{
 /**
- * Makes std::maps storing lists inspectable in Tkenv. See also WATCH_MAP() and WATCH_PTRMAP().
+ * Makes std::maps storing lists inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP() and WATCH_MAPMAP().
  *
  * @hideinitializer
  */
 #define WATCH_LISTMAP(m)      createStdListMapWatcher(#m,(m))
+
+/**
+ * Makes std::maps storing maps inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP() and WATCH_LISTMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_MAPMAP(m)      createStdMapMapWatcher(#m,(m))
 //@}
 
 #endif /* CUSTOMWATCH_H_ */
