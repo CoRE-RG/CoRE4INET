@@ -44,10 +44,8 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
         unsigned int frameSize;
         unsigned int intervalFrames;
         unsigned int payload;
-        Buffer *srpOutBuffer;
         AVBIncoming* avbCTC;
         cModule *avbOutCTC;
-        double tick;
     protected:
         /**
          * @brief Initialization of the module. Sends activator message

@@ -106,7 +106,9 @@ class SRPTable : public cSimpleModule
          * @param vid VLAN ID
          * @return Output port for address, or -1 if unknown.
          */
-        virtual std::list<cModule*> getModulesForStreamId(uint64_t streamId, unsigned int vid = 0);
+        virtual std::list<cModule*> getListenersForStreamId(uint64_t streamId, unsigned int vid = 0);
+
+        virtual cModule* getTalkerForStreamId(uint64_t streamId, unsigned int vid = 0);
 
         virtual unsigned long getBandwidthForModule(cModule *module);
         virtual unsigned long getBandwidthForStream(uint64_t streamId, unsigned int vid = 0);

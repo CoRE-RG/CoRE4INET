@@ -76,6 +76,9 @@ void SRPEtherLLC::dispatchSRP(SRPFrame * srp)
                 EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = " << portNum
                         << endl;
     }
+    else{
+        delete frame;
+    }
 }
 
 void SRPEtherLLC::deliverSRP(EtherFrame * frame)

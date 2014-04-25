@@ -17,7 +17,7 @@ package core4inet.services.avb.SRP;
 
 simple SRProtocol
 {
-    @display("i=,blue");
+    @display("i=block/network2,blue");
     @class(SRProtocol);
     gates:
         input in @labels(EtherFrame);

@@ -48,7 +48,7 @@ void SRPTable::handleMessage(cMessage *)
     throw cRuntimeError("This module doesn't process messages");
 }
 
-std::list<cModule*> SRPTable::getModulesForStreamId(uint64_t streamId, unsigned int vid)
+std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, unsigned int vid)
 {
     Enter_Method
     ("SRPTable::getModulesForStreamId()");
@@ -67,6 +67,17 @@ std::list<cModule*> SRPTable::getModulesForStreamId(uint64_t streamId, unsigned 
         }
     }
     return modules;
+}
+
+cModule* SRPTable::getTalkerForStreamId(uint64_t streamId, unsigned int vid)
+{
+    TalkerTable talkerTable = talkerTables[vid];
+    TalkerTable::iterator entry = talkerTable.find(streamId);
+    if (entry != talkerTable.end())
+    {
+        return (*entry).second.module;
+    }
+    return NULL;
 }
 
 unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, unsigned int vid)

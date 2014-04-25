@@ -75,15 +75,6 @@ class AVBIncoming : public cSimpleModule
         AVBIncoming();
         bool talker;
 
-        /**
-         * @brief calculates the bandwith.
-         *
-         * @param FrameSize Size of the frame.
-         * @param IntervalFrames Sending interval of the frame.
-         *
-         * @return returns bandwith in Mbit/s.
-         */
-        unsigned int calcBandwith(unsigned int FrameSize, unsigned int IntervalFrames);
 
         /**
          * @brief get AVB port reservation.

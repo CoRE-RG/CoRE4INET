@@ -12,7 +12,7 @@ namespace CoRE4INET;
 // @see EtherFrame
 //
 // @author Philipp Meyer
-packet SRPFrame extends EtherFrame{
+packet SRPFrame{
     
     
     // ID of the AVB Stream

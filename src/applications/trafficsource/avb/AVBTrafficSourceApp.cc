@@ -56,38 +56,23 @@ void AVBTrafficSourceApp::initialize()
 
     avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
 
-    Buffer *srpInBuffer = dynamic_cast<Buffer*>(getParentModule()->getSubmodule("srpIn"));
-    std::string dg = srpInBuffer->par("destination_gates");
-    if (dg.empty())
-        srpInBuffer->par("destination_gates") = this->gate("SRPin")->getFullPath();
-    else
-        srpInBuffer->par("destination_gates") = dg + "," + this->gate("SRPin")->getFullPath();
-
-    srpOutBuffer = dynamic_cast<Buffer*>(getParentModule()->getSubmodule("srpOut"));
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
 
-    if (talker && par("enabled").boolValue())
-    {
-        avbCTC->talker = true;
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
-        event->setTimer((uint64_t) (par("advertise_time").doubleValue() / tick));
-        event->setDestinationGate(gate("schedulerIn"));
-        getTimer()->registerEvent(event);
-    }
 }
 
 void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
     //TEST ONLY:
-    if(msg->isSelfMessage() && talker){
+    if (msg->isSelfMessage() && talker)
+    {
         SRPTable *srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
         if (srpTable)
         {
-            EV << "Register Talker in node"<< std::endl;
+            EV << "Register Talker in node" << std::endl;
             srpTable->subscribe("listenerRegistered", this);
-            srpTable->updateTalkerWithStreamId(streamID, this, new MACAddress("00:00:00:00:00:00"), SR_CLASS_A, frameSize, intervalFrames);
+            srpTable->updateTalkerWithStreamId(streamID, this, new MACAddress("00:00:00:00:00:00"), SR_CLASS_A,
+                    frameSize, intervalFrames);
         }
         else
         {
@@ -100,51 +85,6 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
         if (isStreaming)
         {
             sendAVBFrame();
-        }
-        else
-        {
-            bubble("Talker Advertise");
-
-            SRPFrame *outFrame = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
-            outFrame->setStreamID(streamID);
-            outFrame->setMaxFrameSize(frameSize);
-            outFrame->setMaxIntervalFrames(intervalFrames);
-            outFrame->setByteLength(AVB_SRP_ADVERTISESIZE);
-
-            sendDirect(outFrame, srpOutBuffer->gate("in"));
-        }
-    }
-    else if (msg->arrivedOn("SRPin"))
-    {
-        if (SRPFrame *inFrame = dynamic_cast<SRPFrame*>(msg))
-        {
-            std::string srpType = inFrame->getName();
-            bubble(inFrame->getName());
-            if (talker)
-            {
-                if (dynamic_cast<ListenerReady*>(inFrame) || dynamic_cast<ListenerReadyFailed*>(inFrame))
-                {
-                    if (!isStreaming)
-                    {
-                        isStreaming = true;
-                        avbCTC->setAVBPortReservation(0,
-                                avbCTC->calcBandwith(frameSize, intervalFrames) + avbCTC->getAVBPortReservation(0));
-                        sendAVBFrame();
-                    }
-                }
-            }
-            //Listener:
-            else
-            {
-                if (dynamic_cast<TalkerAdvertise*>(inFrame) && streamID == inFrame->getStreamID())
-                {
-                    SRPFrame *outFrame = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
-                    outFrame->setStreamID(inFrame->getStreamID());
-                    outFrame->setByteLength(AVB_SRP_READYSIZE);
-
-                    sendDirect(outFrame, srpOutBuffer->gate("in"));
-                }
-            }
         }
     }
     delete msg;
@@ -166,8 +106,12 @@ void AVBTrafficSourceApp::sendAVBFrame()
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
     //class measurement interval = 125us
-    double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
+    simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
+    simtime_t interval = SR_CLASS_A_INTERVAL / intervalFrames;
+
+    //double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+
     event->setTimer((uint64_t) ceil(interval / tick));
     event->setDestinationGate(gate("schedulerIn"));
     getTimer()->registerEvent(event);
@@ -175,7 +119,28 @@ void AVBTrafficSourceApp::sendAVBFrame()
 
 void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 {
-    ev << "Listener for stream "<< obj << " registered!"<< std::endl;
+    Enter_Method_Silent
+    ();
+    if (id == registerSignal("listenerRegistered"))
+    {
+        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+
+        //If talker for the desired stream, register Listener
+        if (lentry->streamId == streamID)
+        {
+            ev << "Listener for stream " << lentry->streamId << " registered!" << std::endl;
+
+            if (par("enabled").boolValue())
+            {
+                bubble("Listener registred, start streaming!");
+                isStreaming = true;
+                avbCTC->talker = true;
+                avbCTC->setAVBPortReservation(0,
+                        avbCTC->calcBandwith(frameSize, intervalFrames) + avbCTC->getAVBPortReservation(0));
+                sendAVBFrame();
+            }
+        }
+    }
 }
 
 } /* namespace CoRE4INET */

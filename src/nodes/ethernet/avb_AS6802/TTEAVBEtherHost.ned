@@ -20,7 +20,7 @@ import core4inet.buffer.avb.AVBQueueBuffer;
 import core4inet.buffer.base.BGQueueBuffer;
 import core4inet.configuration.IConfigurationManager;
 import core4inet.incoming.avb.AVBIncoming;
-import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
+import core4inet.linklayer.beHandling.base.BGTrafficHandle;
 import core4inet.linklayer.port.TTEAVBPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
@@ -93,7 +93,7 @@ module TTEAVBEtherHost
         }
          // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
-            @display("p=186,169");
+            @display("p=208,169");
         }
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
@@ -112,23 +112,15 @@ module TTEAVBEtherHost
             @display("p=109,37");
         }
 
-        srpIn: BGQueueBuffer {
-            @display("p=235,37");
-        }
-
-        srpOut: BGQueueBuffer {
-            @display("p=235,99");
-        }
-
-        srpTrafficHandle: SRPTrafficHandle {
+        bgTrafficHandle: BGTrafficHandle {
             @display("p=60,99");
         }
         srpTable: SRPTable {
-            @display("p=321,282");
+            @display("p=141,99");
         }
 
         srpProtocol: SRProtocol {
-            @display("p=255,282");
+            @display("p=141,169");
         }
 
     connections:
@@ -142,17 +134,15 @@ module TTEAVBEtherHost
         srv.out --> llc.upperLayerIn[1];
         srv.in <-- llc.upperLayerOut[1];
 
-        srpTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
-        srpTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
-        srpTrafficHandle.out --> bgIn.in;
-        bgOut.out --> srpTrafficHandle.in;
-        srpTrafficHandle.SRPout --> srpIn.in;
-        srpTrafficHandle.SRPin <-- srpOut.out;
+        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
+        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
+        bgTrafficHandle.out --> bgIn.in;
+        bgOut.out --> bgTrafficHandle.in;
 
         avbCTC.SRPout --> avbCTC.SRPin;
         avbCTC.AVBout[0] --> avbBuffer[0].in;
         avbBuffer[0].out --> phy[0].AVBin;
-        
+
         srpProtocol.out --> llc.srpIn;
         srpProtocol.in <-- llc.srpOut;
 }

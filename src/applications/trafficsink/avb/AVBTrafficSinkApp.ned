@@ -21,6 +21,6 @@ simple AVBTrafficSinkApp extends ApplicationBase
 {
     parameters:
         @class(AVBTrafficSinkApp);
-        @display("i=block/sink");
+        @display("i=block/sink,blue");
         int streamID;
 }

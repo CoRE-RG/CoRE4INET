@@ -63,7 +63,7 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 else
                 {
                     etherctrl = (Ieee802Ctrl*) inFrame->getControlInfo();
-                    etherctrl->setDest(inFrame->getDest());
+                    //etherctrl->setDest(inFrame->getDest());
                 }
                 inFrame->removeControlInfo();
                 etherctrl->setSsap(localSAP);
@@ -78,7 +78,7 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
             if (inFrame->getControlInfo() != NULL)
             {
                 Ieee802Ctrl *etherctrl = (Ieee802Ctrl*) inFrame->getControlInfo();
-                inFrame->setSrc(etherctrl->getSrc());
+                //inFrame->setSrc(etherctrl->getSrc());
             }
             send(inFrame, "SRPout");
         }

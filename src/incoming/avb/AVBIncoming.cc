@@ -78,68 +78,6 @@ void AVBIncoming::handleMessage(cMessage* msg)
             sendDelayed(inFrame, SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", 0));
         }
     }
-    else if (msg->arrivedOn("SRPin"))
-    {
-        SRPFrame *inFrame = ((SRPFrame*) msg);
-        bubble(inFrame->getName());
-        if (dynamic_cast<TalkerAdvertise*>(inFrame))
-        {
-            TalkerAddresses[inFrame->getStreamID()] = inFrame->getSrc();
-            StreamBandwith[inFrame->getStreamID()] = calcBandwith(inFrame->getMaxFrameSize(),
-                    inFrame->getMaxIntervalFrames());
-            delete msg;
-        }
-        else if (dynamic_cast<ListenerReady*>(inFrame) || dynamic_cast<ListenerReadyFailed*>(inFrame))
-        {
-            inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
-            unsigned int portIndex = inFrame->getPortIndex();
-
-            bool saveSIDinGate = true;
-            for (std::list<unsigned long>::iterator sid = ListenerGates[portIndex].begin();
-                    sid != ListenerGates[portIndex].end(); sid++)
-            {
-                if (*sid == inFrame->getStreamID())
-                {
-                    saveSIDinGate = false;
-                }
-            }
-            if (saveSIDinGate)
-            {
-                if (((PortBandwith[portIndex] - PortReservation[portIndex]) - (PortBandwith[portIndex] * 0.25))
-                        >= StreamBandwith[inFrame->getStreamID()])
-                {
-                    ListenerGates[portIndex].push_back(inFrame->getStreamID());
-                    PortReservation[portIndex] += StreamBandwith[inFrame->getStreamID()];
-                    AVBPortReservation[portIndex] += StreamBandwith[inFrame->getStreamID()];
-                    StreamIsForwarding[inFrame->getStreamID()] = true;
-                    send(inFrame, "SRPout");
-                }
-                else
-                {
-                    if (StreamIsForwarding[inFrame->getStreamID()])
-                        inFrame->setName("Listener Ready Failed");
-                    else
-                        inFrame->setName("Listener Failed");
-                    send(inFrame, "SRPout");
-                }
-
-            }
-            else
-            {
-                send(inFrame, "SRPout");
-            }
-        }
-        else if (dynamic_cast<ListenerReadyFailed*>(inFrame))
-        {
-            inFrame->setDest(TalkerAddresses[inFrame->getStreamID()]);
-
-            send(inFrame, "SRPout");
-        }
-        else
-        {
-            delete msg;
-        }
-    }
     else
     {
         delete msg;
@@ -161,15 +99,6 @@ unsigned int AVBIncoming::calcPortUtilisation(unsigned int port)
         PortBandwith[port] = 0;
     }
     return (unsigned int) shaper->par("TTEBandwith").longValue();
-}
-
-unsigned int AVBIncoming::calcBandwith(unsigned int FrameSize, unsigned int IntervalFrames)
-{
-    //interval = 125us
-    double sFrameSize = ((double) IntervalFrames) * ((double) FrameSize); // in byte
-    double bitFrameSize = sFrameSize * 8; //in bit
-    double BitspSecond = bitFrameSize * 8 * 1000; // in per second
-    return (unsigned int) ceil((BitspSecond / 1024.00) / 1024.00); //in Mbit/s
 }
 
 unsigned int AVBIncoming::getAVBPortReservation(unsigned int port)
