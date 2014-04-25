@@ -2,17 +2,22 @@
 #include <stdexcept>
 
 #include "customWatch.h"
+#include "HelperFunctions.h"
 
 #include "SRPTable.h"
 
 namespace CoRE4INET {
 
 Define_Module(SRPTable);
+Register_Class(SRPTable::TalkerEntry);
+Register_Class(SRPTable::ListenerEntry);
 
 std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
-    os << "{TalkerAddress=" << entry.address->str() << ", Module=" << entry.module->getName() << ", Bandwidth="
-            << entry.bandwidth/10000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
+    os << "{TalkerAddress=" << entry.address->str() << ", Module=" << entry.module->getFullName() << ", SRClass="
+            << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
+            << bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames, getIntervalForClass(entry.srClass))
+                    / (double) 10000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
     return os;
 }
 
@@ -22,14 +27,20 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::ListenerEntry& entry)
     return os;
 }
 
+simsignal_t SRPTable::talkerRegisteredSignal = registerSignal("talkerRegistered");
+simsignal_t SRPTable::talkerUpdatedSignal = registerSignal("talkerUpdated");
+simsignal_t SRPTable::listenerRegisteredSignal = registerSignal("listenerRegistered");
+simsignal_t SRPTable::listenerUpdatedSignal = registerSignal("listenerUpdated");
+
 SRPTable::SRPTable()
 {
 }
 
 void SRPTable::initialize()
 {
-    //TODO minor: WATCH ENTRIES
+
     WATCH_MAPMAP(talkerTables);
+    WATCH_LISTMAPMAP(listenerTables);
 }
 
 void SRPTable::handleMessage(cMessage *)
@@ -63,7 +74,7 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, unsigned int vi
     //get Talkers for this VLAN
     TalkerTable ttable = talkerTables[vid];
     TalkerEntry tentry = ttable[streamId];
-    return tentry.bandwidth;
+    return bandwidthFromSizeAndInterval(tentry.framesize, tentry.intervalFrames, getIntervalForClass(tentry.srClass));
 }
 
 unsigned long SRPTable::getBandwidthForModule(cModule *module)
@@ -83,7 +94,8 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
                     //get Talkers for this VLAN
                     TalkerTable ttable = talkerTables[(*i).first];
                     TalkerEntry tentry = ttable[(*j).first];
-                    bandwidth += tentry.bandwidth;
+                    bandwidth += bandwidthFromSizeAndInterval(tentry.framesize, tentry.intervalFrames,
+                            getIntervalForClass(tentry.srClass));
                 }
             }
         }
@@ -92,21 +104,24 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address, unsigned int bandwidth,
-        unsigned int vid)
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address, SR_CLASS srClass,
+        unsigned int framesize, unsigned int intervalFrames, unsigned int vid)
 {
     Enter_Method
     ("SRPTable::updateTalkerWithStreamId()");
 
     bool updated = true;
-
     TalkerTable &talkerTable = talkerTables[vid];
 
     if (talkerTable.find(streamId) == talkerTable.end())
     {
-        if (bandwidth == 0)
+        if (framesize == 0)
         {
-            throw std::invalid_argument("cannot register talker with zero bandwidth");
+            throw std::invalid_argument("cannot register talker with zero framesize");
+        }
+        if (intervalFrames == 0)
+        {
+            throw std::invalid_argument("cannot register talker with zero frameInterval");
         }
         if (address == NULL)
         {
@@ -125,17 +140,30 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
             throw std::invalid_argument("trying to update talker from wrong module");
         }
     }
-
+    talkerTable[streamId].streamId = streamId;
     talkerTable[streamId].module = module;
-    if (bandwidth > 0)
+    talkerTable[streamId].srClass = srClass;
+    if (framesize > 0)
     {
-        talkerTable[streamId].bandwidth = bandwidth;
+        talkerTable[streamId].framesize = framesize;
+    }
+    if (intervalFrames > 0)
+    {
+        talkerTable[streamId].intervalFrames = intervalFrames;
     }
     if (address != NULL)
     {
         talkerTable[streamId].address = address;
     }
     talkerTable[streamId].insertionTime = simTime();
+    if (updated)
+    {
+        emit(talkerUpdatedSignal, &talkerTable[streamId]);
+    }
+    else
+    {
+        emit(talkerRegisteredSignal, &talkerTable[streamId]);
+    }
 
     return updated;
 }
@@ -188,20 +216,32 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, un
 
     llist[module].insertionTime = simTime();
 
+    if (updated)
+    {
+        emit(listenerUpdatedSignal, &llist[module]);
+    }
+    else
+    {
+        emit(listenerRegisteredSignal, &llist[module]);
+    }
+
     return updated;
 }
 
 void SRPTable::printState()
 {
     EV << "Talker Table" << endl;
-    EV << "VLAN ID    StreamID    Port    Address    Bandwidth(Mbps)    Inserted" << endl;
+    EV << "VLAN ID    StreamID    Port    Address    SRClass    Bandwidth(Mbps)    Inserted" << endl;
     for (std::map<unsigned int, TalkerTable>::iterator i = talkerTables.begin(); i != talkerTables.end(); i++)
     {
         TalkerTable table = i->second;
         for (TalkerTable::iterator j = table.begin(); j != table.end(); j++)
         {
             EV << (*i).first << "   " << (*j).first << "   " << (*j).second.module->getName() << "   "
-                    << (*j).second.address->str() << "   " << (*j).second.bandwidth / 1000000 << "   "
+                    << (*j).second.address->str() << "   "
+                    << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second.srClass) << "    "
+                    << bandwidthFromSizeAndInterval((*j).second.framesize, (*j).second.intervalFrames,
+                            getIntervalForClass((*j).second.srClass)) / (double) 1000000 << "   "
                     << (*j).second.insertionTime << endl;
         }
     }

@@ -35,7 +35,7 @@ namespace CoRE4INET {
  * TODO Normal: Documentation
  */
 
-class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed
+class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cListener
 {
     private:
         bool talker;
@@ -59,6 +59,8 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed
         virtual void handleMessage(cMessage *msg);
 
         void sendAVBFrame();
+
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
 };
 
 } /* namespace CoRE4INET */

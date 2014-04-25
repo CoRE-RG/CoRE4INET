@@ -122,4 +122,26 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
 }
 #endif
 
+#ifdef WITH_AVB_COMMON
+
+const_simtime_t second = 1;
+
+unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval)
+{
+    return (second/interval) * intervalFrames * (framesize * 8);
+}
+
+
+const simtime_t getIntervalForClass(SR_CLASS srClass)
+{
+    switch (srClass)
+    {
+        case SR_CLASS_B:
+            return SR_CLASS_B_INTERVAL;
+        default:
+            return SR_CLASS_A_INTERVAL;
+    }
+}
+#endif
+
 }

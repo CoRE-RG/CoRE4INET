@@ -5,6 +5,8 @@
 #include <list>
 #include "MACAddress.h"
 
+#include "AVBDefs_m.h"
+
 #include "csimplemodule.h"
 
 namespace CoRE4INET {
@@ -14,20 +16,29 @@ namespace CoRE4INET {
  */
 class SRPTable : public cSimpleModule
 {
-    protected:
-        struct TalkerEntry
+    public:
+        class TalkerEntry : public cObject
         {
+            public:
+            uint64_t streamId;
+                SR_CLASS srClass;           // Stream Reservation Class
                 MACAddress *address;        // The talkers address
                 cModule *module;            // Input port or module
-                unsigned long bandwidth;    // Bandwidth in bps
+                unsigned int framesize;     // framesize in byte
+                unsigned int intervalFrames;     // interval frames
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 TalkerEntry()
                 {
+                    streamId = 0;
+                    srClass = SR_CLASS_A;
                     module = NULL;
-                    bandwidth = 0;
+                    framesize = 0;
+                    intervalFrames = 0;
                 }
-                TalkerEntry(MACAddress *address, cModule *module, unsigned long bandwidth, simtime_t insertionTime) :
-                        address(address), module(module), bandwidth(bandwidth), insertionTime(insertionTime)
+                TalkerEntry(uint64_t streamId, SR_CLASS srClass, MACAddress *address, cModule *module,
+                        unsigned int framesize, unsigned int intervalFrames, simtime_t insertionTime) :
+                        streamId(streamId), srClass(srClass), address(address), module(module), framesize(framesize), intervalFrames(
+                                intervalFrames), insertionTime(insertionTime)
                 {
                 }
         };
@@ -48,8 +59,9 @@ class SRPTable : public cSimpleModule
                 }
         };
 
-        struct ListenerEntry
+        class ListenerEntry : public cObject
         {
+            public:
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 ListenerEntry()
                 {
@@ -72,6 +84,11 @@ class SRPTable : public cSimpleModule
 
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
+
+        static simsignal_t talkerRegisteredSignal;
+        static simsignal_t talkerUpdatedSignal;
+        static simsignal_t listenerRegisteredSignal;
+        static simsignal_t listenerUpdatedSignal;
 
     public:
 
@@ -97,7 +114,8 @@ class SRPTable : public cSimpleModule
          * @return True if refreshed. False if it is new.
          */
         virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL,
-                unsigned int bandwidth = 0, unsigned int vid = 0);
+                SR_CLASS srClass = SR_CLASS_A, unsigned int framesize = 0, unsigned int intervalFrames = 0,
+                unsigned int vid = 0);
 
         /**
          * @brief Unregister a streamId at talkerTable.

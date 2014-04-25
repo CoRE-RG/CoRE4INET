@@ -17,6 +17,8 @@
 #include "Ieee802Ctrl_m.h"
 #include "SRPFrame_m.h"
 
+#include "SRPTable.h"
+
 #define ETHERAPP_BUFFER_SAP  0xe0
 
 namespace CoRE4INET {
@@ -37,11 +39,11 @@ void SRPTrafficHandle::initialize()
 
 void SRPTrafficHandle::handleMessage(cMessage *msg)
 {
-    if(SRPFrame *inFrame = dynamic_cast<SRPFrame*>(msg))
+    if (SRPFrame *inFrame = dynamic_cast<SRPFrame*>(msg))
     {
-        if(msg->arrivedOn("SRPin"))
+        if (msg->arrivedOn("SRPin"))
         {
-            if(dynamic_cast<TalkerAdvertise*>(inFrame))
+            if (dynamic_cast<TalkerAdvertise*>(inFrame))
             {
                 Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
                 etherctrl->setSsap(localSAP);
@@ -51,17 +53,16 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
                 send(inFrame, "lowerLayerOut");
             }
 
-            if(dynamic_cast<ListenerReady*>(inFrame) ||
-               dynamic_cast<ListenerReadyFailed*>(inFrame))
+            if (dynamic_cast<ListenerReady*>(inFrame) || dynamic_cast<ListenerReadyFailed*>(inFrame))
             {
                 Ieee802Ctrl *etherctrl;
-                if(inFrame->getControlInfo() == NULL)
+                if (inFrame->getControlInfo() == NULL)
                 {
                     etherctrl = new Ieee802Ctrl();
                 }
                 else
                 {
-                    etherctrl = (Ieee802Ctrl*)inFrame->getControlInfo();
+                    etherctrl = (Ieee802Ctrl*) inFrame->getControlInfo();
                     etherctrl->setDest(inFrame->getDest());
                 }
                 inFrame->removeControlInfo();
@@ -74,17 +75,17 @@ void SRPTrafficHandle::handleMessage(cMessage *msg)
         }
         else
         {
-            if(inFrame->getControlInfo() != NULL)
+            if (inFrame->getControlInfo() != NULL)
             {
-                Ieee802Ctrl *etherctrl = (Ieee802Ctrl*)inFrame->getControlInfo();
+                Ieee802Ctrl *etherctrl = (Ieee802Ctrl*) inFrame->getControlInfo();
                 inFrame->setSrc(etherctrl->getSrc());
             }
-            send(inFrame,"SRPout");
+            send(inFrame, "SRPout");
         }
     }
     else
     {
-        if(msg->arrivedOn("SRPin"))
+        if (msg->arrivedOn("SRPin"))
         {
             Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
             etherctrl->setSsap(localSAP);

@@ -26,5 +26,15 @@ simple SRPTable
 {
     parameters:
         @display("i=block/table2");
+        
+        //Signal emitted when talker is registered, contains streamID
+        @signal[talkerRegistered](type=SRPTable::TalkerEntry);
+        //Signal emitted when talker is updated, contains streamID
+        @signal[talkerUpdated](type=SRPTable::TalkerEntry);
+        //Signal emitted when listener is registered, contains streamID
+        @signal[listenerRegistered](type=SRPTable::ListenerEntry);
+        //Signal emitted when listener is updated, contains streamID
+        @signal[listenerUpdated](type=SRPTable::ListenerEntry);
+        
         string srpTableFile = default("");
 }

@@ -16,6 +16,8 @@
 #ifndef CUSTOMWATCH_H_
 #define CUSTOMWATCH_H_
 
+#include <map>
+
 #include "omnetpp.h"
 #include "cstlwatch.h"
 
@@ -86,7 +88,7 @@ class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
         }
         virtual const char *getElemTypeName() const
         {
-            return "struct pair<*, list<*> >";
+            return "struct pair<*, list<*>>";
         }
 
         virtual std::string atIt() const
@@ -95,7 +97,7 @@ class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
             out << this->it->first << " ==> ";
             for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
                 if(it2!=this->it->second.begin()){
-                    out << ", ";
+                    out << "; ";
                 }
                 out << (*it2);
             }
@@ -120,7 +122,7 @@ class cStdMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
         }
         virtual const char *getElemTypeName() const
         {
-            return "struct pair<*, map<*> >";
+            return "struct pair<*, map<*>>";
         }
 
         virtual std::string atIt() const
@@ -129,7 +131,7 @@ class cStdMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
             out << this->it->first << " ==> ";
             for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
                 if(it2!=this->it->second.begin()){
-                    out << ", ";
+                    out << "; ";
                 }
                 out << (*it2).first << " => " << (*it2).second;
             }
@@ -141,6 +143,40 @@ template<class KeyT, class ValueT, class CmpT>
 void createStdMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
 {
     new cStdMapMapWatcher<KeyT, ValueT, CmpT>(varname, m);
+}
+
+template<class KeyT, class ValueT, class CmpT>
+class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
+{
+    public:
+        cStdListMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
+            cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>(name, var)
+
+        {
+        }
+        virtual const char *getElemTypeName() const
+        {
+            return "struct pair<*, map<list<*>>>";
+        }
+
+        virtual std::string atIt() const
+        {
+            std::stringstream out;
+            out << this->it->first << " ==> ";
+            for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
+                if(it2!=this->it->second.begin()){
+                    out << "; ";
+                }
+                out << (*it2).first << " => contains " << (*it2).second.size() << "elements";
+            }
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT, class CmpT>
+void createStdListMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
+{
+    new cStdListMapMapWatcher<KeyT, ValueT, CmpT>(varname, m);
 }
 
 /**
@@ -161,6 +197,13 @@ void createStdMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m
  * @hideinitializer
  */
 #define WATCH_MAPMAP(m)      createStdMapMapWatcher(#m,(m))
+
+/**
+ * Makes std::maps storing maps storing lits inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP()WATCH_LISTMAP and WATCH_MAPMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_LISTMAPMAP(m)      createStdListMapMapWatcher(#m,(m))
 //@}
 
 #endif /* CUSTOMWATCH_H_ */

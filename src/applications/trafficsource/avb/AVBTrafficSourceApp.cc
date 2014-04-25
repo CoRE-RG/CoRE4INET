@@ -21,6 +21,8 @@
 #include <Timer.h>
 #include <ModuleAccess.h>
 
+#include "SRPTable.h"
+
 #define AVB_MINPACKETSIZE 88
 #define AVB_OVERHEADSIZE 42
 #define AVB_SRP_ADVERTISESIZE 25
@@ -78,6 +80,21 @@ void AVBTrafficSourceApp::initialize()
 
 void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
+    //TEST ONLY:
+    if(msg->isSelfMessage() && talker){
+        SRPTable *srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
+        if (srpTable)
+        {
+            EV << "Register Talker in node"<< std::endl;
+            srpTable->subscribe("listenerRegistered", this);
+            srpTable->updateTalkerWithStreamId(streamID, this, new MACAddress("00:00:00:00:00:00"), SR_CLASS_A, frameSize, intervalFrames);
+        }
+        else
+        {
+            throw cRuntimeError("srpTable module required for stream reservation");
+        }
+    }
+
     if (msg->arrivedOn("schedulerIn"))
     {
         if (isStreaming)
@@ -154,6 +171,11 @@ void AVBTrafficSourceApp::sendAVBFrame()
     event->setTimer((uint64_t) ceil(interval / tick));
     event->setDestinationGate(gate("schedulerIn"));
     getTimer()->registerEvent(event);
+}
+
+void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+{
+    ev << "Listener for stream "<< obj << " registered!"<< std::endl;
 }
 
 } /* namespace CoRE4INET */
