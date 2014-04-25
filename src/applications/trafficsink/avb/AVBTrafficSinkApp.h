@@ -3,29 +3,44 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-//
+// 
 
-#ifndef __CORE4INET_AVBDEFS_H_
-#define __CORE4INET_AVBDEFS_H_
+#ifndef __CORE4INET_AVBTRAFFICSINK_H_
+#define __CORE4INET_AVBTRAFFICSINK_H_
 
-#include "simtime.h"
+#include "TrafficSinkApp.h"
+#include "clistener.h"
 
 namespace CoRE4INET {
 
-#define MSRP_ETHERTYPE 0x22EA
+/**
+ * @brief Traffic sink application used for statistics collection.
+ *
+ *
+ * @sa ApplicationBase
+ * @ingroup Applications
+ *
+ * @author Till Steinbach
+ */
+class AVBTrafficSinkApp : public TrafficSinkApp, public cListener
+{
+    protected:
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
 
-const MACAddress SRP_ADDRESS = MACAddress("01:80:C2:00:00:0E");
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+};
 
-const_simtime_t SR_CLASS_A_INTERVAL = 0.000125;
-const_simtime_t SR_CLASS_B_INTERVAL = 0.000250;
+} //namespace
 
-}
-#endif /* AVBDEFS_H_ */
+#endif

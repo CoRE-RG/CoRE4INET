@@ -13,19 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_AVBDEFS_H_
-#define __CORE4INET_AVBDEFS_H_
+#ifndef __CORE4INET_SRPETHERLLC_H
+#define __CORE4INET_SRPETHERLLC_H
 
-#include "simtime.h"
+#include "EtherLLC.h"
+
+#include "SRPFrame_m.h"
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
-#define MSRP_ETHERTYPE 0x22EA
+class SRPEtherLLC : public EtherLLC
+{
+  protected:
+    virtual void handleMessage(cMessage *msg);
 
-const MACAddress SRP_ADDRESS = MACAddress("01:80:C2:00:00:0E");
+    void dispatchSRP(SRPFrame * srp);
+    void deliverSRP(EtherFrame * frame);
 
-const_simtime_t SR_CLASS_A_INTERVAL = 0.000125;
-const_simtime_t SR_CLASS_B_INTERVAL = 0.000250;
+};
 
 }
-#endif /* AVBDEFS_H_ */
+#endif

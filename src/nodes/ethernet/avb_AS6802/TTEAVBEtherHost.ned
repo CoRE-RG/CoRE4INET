@@ -26,7 +26,7 @@ import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import inet.applications.ethernet.EtherAppCli;
 import inet.applications.ethernet.EtherAppSrv;
-import inet.linklayer.ethernet.EtherLLC;
+import core4inet.linklayer.ethernet.avb.SRPEtherLLC;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 
@@ -68,12 +68,12 @@ module TTEAVBEtherHost
                 @display("p=380,193");
         }
 
-        llc: EtherLLC {
+        llc: SRPEtherLLC {
             parameters:
                 @display("p=141,255");
             gates:
-                upperLayerIn[4];
-                upperLayerOut[4];
+                upperLayerIn[3];
+                upperLayerOut[3];
         }
 
         cli: EtherAppCli {
@@ -153,6 +153,6 @@ module TTEAVBEtherHost
         avbCTC.AVBout[0] --> avbBuffer[0].in;
         avbBuffer[0].out --> phy[0].AVBin;
         
-        srpProtocol.out --> llc.upperLayerIn[3];
-        srpProtocol.in <-- llc.upperLayerOut[3];
+        srpProtocol.out --> llc.srpIn;
+        srpProtocol.in <-- llc.srpOut;
 }

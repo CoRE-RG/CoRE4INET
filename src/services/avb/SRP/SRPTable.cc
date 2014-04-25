@@ -213,7 +213,7 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, un
         }
         updated = false;
     }
-
+    llist[module].streamId = streamId;
     llist[module].insertionTime = simTime();
 
     if (updated)

@@ -17,7 +17,10 @@
 
 #include "SRPFrame_m.h"
 
-#include "Ieee802Ctrl_m.h"
+#include "AVBDefs.h"
+
+#include "ExtendedIeee802Ctrl_m.h"
+#include "EtherLLC.h"
 
 #define ETHERAPP_BUFFER_SAP  0xe1
 
@@ -30,18 +33,13 @@ void SRProtocol::initialize()
     localSAP = ETHERAPP_BUFFER_SAP;
     remoteSAP = ETHERAPP_BUFFER_SAP;
 
-    Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
-    etherctrl->setDsap(localSAP);
-    cMessage *msg = new cMessage("register_DSAP", IEEE802CTRL_REGISTER_DSAP);
-    msg->setControlInfo(etherctrl);
-    send(msg, "out");
-
     srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
     if (!srpTable)
     {
         throw cRuntimeError("srpTable module required for stream reservation");
     }
     srpTable->subscribe("talkerRegistered", this);
+    srpTable->subscribe("listenerRegistered", this);
 }
 
 void SRProtocol::handleMessage(cMessage *msg)
@@ -51,13 +49,35 @@ void SRProtocol::handleMessage(cMessage *msg)
         if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
         {
             Ieee802Ctrl *etherctrl = dynamic_cast<Ieee802Ctrl *>(msg->removeControlInfo());
-                if (!etherctrl)
-                    error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
+            if (!etherctrl)
+            {
+                error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
+            }
+            int arrivedOn = etherctrl->getSwitchPort();
+            //TODO Major: Work around, this can be removed when we have an Extended LLC!
+            if (arrivedOn < 0)
+            {
+                arrivedOn = 0;
+            }
+            cModule *port = getParentModule()->getSubmodule("phy", arrivedOn);
             //TODO Minor: try to get VLAN
-            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), this, &etherctrl->getSrc(),
-                    SR_CLASS_A, talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), 0);
+            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, &etherctrl->getSrc(), SR_CLASS_A,
+                    talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), 0);
+            delete etherctrl;
+        }
+        else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
+        {
+            Ieee802Ctrl *etherctrl = dynamic_cast<Ieee802Ctrl *>(msg->removeControlInfo());
+            if (!etherctrl)
+                error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
+            //TODO Minor: try to get VLAN
+            //srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), this, &etherctrl->getSrc(),
+            //        SR_CLASS_A, talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), 0);
+            //TODO: Update Table if enough bandwidth
+            delete etherctrl;
         }
     }
+    delete msg;
 }
 
 void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
@@ -68,22 +88,46 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
     {
         SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
 
-        //Only send Talker Advertise for Streams that are from this node
-        if(tentry->address->isUnspecified()){
+        TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
+        talkerAdvertise->setStreamID(tentry->streamId);
+        talkerAdvertise->setMaxFrameSize(tentry->framesize);
+        talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
 
-            TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
-            talkerAdvertise->setStreamID(tentry->streamId);
-            talkerAdvertise->setMaxFrameSize(tentry->framesize);
-            talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
+        ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
+        etherctrl->setSsap(localSAP);
+        etherctrl->setDsap(remoteSAP);
+        etherctrl->setEtherType(MSRP_ETHERTYPE);
+        etherctrl->setDest(SRP_ADDRESS);
+        talkerAdvertise->setControlInfo(etherctrl);
 
-            Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
-            etherctrl->setSsap(localSAP);
-            etherctrl->setDsap(remoteSAP);
-            //etherctrl->setDest(destMACAddress);
-            talkerAdvertise->setControlInfo(etherctrl);
-
-            send(talkerAdvertise, gate("out"));
+        etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
+        //If talker was received from phy we have to exclude the incoming
+        if (strcmp(tentry->module->getName(), "phy") == 0)
+        {
+            etherctrl->setNotSwitchPort(tentry->module->getIndex());
         }
+
+        send(talkerAdvertise, gate("out"));
+    }
+    else if (id == registerSignal("listenerRegistered"))
+    {
+        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+
+        SRPFrame *listenerReady = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
+        listenerReady->setStreamID(lentry->streamId);
+
+        ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
+        etherctrl->setSsap(localSAP);
+        etherctrl->setDsap(remoteSAP);
+        etherctrl->setEtherType(MSRP_ETHERTYPE);
+        etherctrl->setDest(SRP_ADDRESS);
+        listenerReady->setControlInfo(etherctrl);
+
+        //Get Talker Port
+        SRPTable *srpTable = (SRPTable *) src;
+        srpTable->
+
+        etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
     }
 }
 

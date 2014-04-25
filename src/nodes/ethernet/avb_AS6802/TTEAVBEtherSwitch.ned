@@ -12,9 +12,13 @@ import inet.linklayer.ethernet.EtherLLC;
 import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
 import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.services.avb.SRP.SRPTable;
+import core4inet.services.avb.SRP.SRProtocol;
+import core4inet.linklayer.beHandling.avb.relay.SRPRelay;
 
 import inet.linklayer.IMACRelayUnit;
 import inet.linklayer.IMACAddressTable;
+import inet.networklayer.common.InterfaceTable;
+import inet.base.NotificationBoard;
 
 //
 // Module for a TTEAVBEthernet Switch.
@@ -37,7 +41,7 @@ module TTEAVBEtherSwitch
         inout ethg[] @loose;
     submodules:
         // Implementation of the best-effort forwarding part
-        beswitch: <default("MACRelayUnit")> like IMACRelayUnit {
+        beswitch: SRPRelay {
             parameters:
                 @display("p=100,50");
             gates:
@@ -47,6 +51,13 @@ module TTEAVBEtherSwitch
 		//The mac table associated with the be switch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
             @display("p=170,50");
+        }
+        interfaceTable: InterfaceTable {
+            @display("p=389,285");
+        }
+        notificationBoard: NotificationBoard {
+            parameters:
+                @display("p=452,285");
         }
         llc: EtherLLC {
             parameters:
@@ -98,6 +109,9 @@ module TTEAVBEtherSwitch
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=310,130");
         }
+        srpProtocol: SRProtocol {
+            @display("p=255,282");
+        }
     connections:
         for i=0..sizeof(ethg)-1 {
             avbBuffer[i].out --> phy[i].AVBin;
@@ -117,5 +131,7 @@ module TTEAVBEtherSwitch
 //        
 //       	llc.upperLayerOut[0] --> avbCTC.SRPin;
 //       	llc.upperLayerIn[0] <-- avbCTC.SRPout;
+		srpProtocol.out --> beswitch.srpIn;
+        srpProtocol.in <-- beswitch.srpOut;
 
 }

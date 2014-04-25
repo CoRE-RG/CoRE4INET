@@ -20,7 +20,7 @@ class SRPTable : public cSimpleModule
         class TalkerEntry : public cObject
         {
             public:
-            uint64_t streamId;
+                uint64_t streamId;
                 SR_CLASS srClass;           // Stream Reservation Class
                 MACAddress *address;        // The talkers address
                 cModule *module;            // Input port or module
@@ -62,12 +62,14 @@ class SRPTable : public cSimpleModule
         class ListenerEntry : public cObject
         {
             public:
+                uint64_t streamId;
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 ListenerEntry()
                 {
+                    streamId = 0;
                 }
                 ListenerEntry(simtime_t insertionTime) :
-                        insertionTime(insertionTime)
+                    streamId(streamId), insertionTime(insertionTime)
                 {
                 }
         };

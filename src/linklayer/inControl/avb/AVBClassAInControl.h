@@ -83,7 +83,8 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         }
         else
         {
-            if (SRPFrame *srpFrame = dynamic_cast<SRPFrame*>(frame->getEncapsulatedPacket()))
+            //TODO Minor: REMOVE SRP is Handled in BE-Part of Switch only!
+            /*if (SRPFrame *srpFrame = dynamic_cast<SRPFrame*>(frame->getEncapsulatedPacket()))
             {
                 if (dynamic_cast<TalkerAdvertise*>(srpFrame))
                 {
@@ -91,7 +92,7 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
 
                 }
                 srpFrame->setPortIndex(cModule::getParentModule()->getIndex());
-            }
+            }*/
 
             IC::handleMessage(msg);
         }
