@@ -39,13 +39,7 @@ class AVBIncoming : public cSimpleModule
          */
         bool hadError;
 
-        std::map<unsigned long, MACAddress> TalkerAddresses;
-        std::map<unsigned long, unsigned int> StreamBandwith;
         std::map<unsigned long, bool> StreamIsForwarding;
-        std::map<unsigned int, std::list<unsigned long> > ListenerGates;
-        std::map<unsigned int, unsigned int> PortReservation;
-        std::map<unsigned int, unsigned int> AVBPortReservation;
-        std::map<unsigned int, unsigned int> PortBandwith;
 
         /**
          * @brief Initialization of the module.
@@ -59,46 +53,12 @@ class AVBIncoming : public cSimpleModule
          */
         virtual void handleMessage(cMessage *msg);
 
-        /**
-         * @brief initializes the port bandwith and gets the TT bandwith.
-         *
-         * @param port number.
-         *
-         * @return returns the TT bandwith on the port in Mbit/s.
-         */
-        unsigned int calcPortUtilisation(unsigned int port);
-
     public:
         /**
          * @brief Constructor.
          */
         AVBIncoming();
         bool talker;
-
-
-        /**
-         * @brief get AVB port reservation.
-         *
-         * @param port index of port.
-         *
-         * @return returns the AVB bandwith on one port in Mbit/s.
-         */
-        unsigned int getAVBPortReservation(unsigned int port);
-
-        /**
-         * @brief set the AVB port reservation.
-         *
-         * @param port number.
-         * @param reservation bandwith in Mbit/s.
-         */
-        void setAVBPortReservation(unsigned int port, unsigned int reservation);
-
-        /**
-         * @brief get port bandwith.
-         *
-         * @return returns the bandwith of the physical port in Mbit/s.
-         */
-        unsigned int getPortBandwith(unsigned int port);
 
         /**
          * @brief get forwarding policy.

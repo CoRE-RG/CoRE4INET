@@ -19,6 +19,8 @@
 #include <AVBFrame_m.h>
 #include <BaseShaper.h>
 
+#include "SRPTable.h"
+
 #include "customWatch.h"
 
 namespace CoRE4INET {
@@ -33,21 +35,6 @@ AVBIncoming::AVBIncoming()
 void AVBIncoming::initialize()
 {
     talker = false;
-
-    for (unsigned int i = 0; i < (unsigned int) gateSize("AVBout"); i++)
-    {
-        PortReservation[i] = calcPortUtilisation(i);
-        AVBPortReservation[i] = 0;
-    }
-    WATCH_MAP(TalkerAddresses);
-    WATCH_MAP(StreamBandwith);
-    WATCH_MAP(PortReservation);
-    WATCH_MAP(AVBPortReservation);
-    WATCH_MAP(PortBandwith);
-    WATCH_LISTMAP(ListenerGates);
-
-    EtherFrame *outFrame = new EtherFrame("MAC Register", IEEE802CTRL_DATA);
-    send(outFrame, "SRPout");
 }
 
 void AVBIncoming::handleMessage(cMessage* msg)
@@ -56,64 +43,28 @@ void AVBIncoming::handleMessage(cMessage* msg)
     {
         AVBFrame *inFrame = ((AVBFrame*) msg);
 
-        //TODO Major: error when gatesize==0? is this case even relevant? better >0 and delete else?
-        if (gateSize("AVBout") > 1)
+        SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+        std::list<cModule*> listeners = srptable->getListenersForStreamId(inFrame->getStreamID());
+
+        for (std::list<cModule*>::iterator listener = listeners.begin(); listener != listeners.end(); listener++)
         {
-            for (unsigned int i = 0; i < (unsigned int) gateSize("AVBout"); i++)
+            if (strcmp((*listener)->getName(), "phy") == 0)
             {
-                for (std::list<unsigned long>::iterator sid = ListenerGates[i].begin(); sid != ListenerGates[i].end();
-                        sid++)
-                {
-                    if (*sid == inFrame->getStreamID())
-                    {
-                        sendDelayed(inFrame->dup(), SimTime(getParentModule()->par("hardware_delay").doubleValue()),
-                                gate("AVBout", (int) i));
-                    }
+                sendDelayed(inFrame->dup(), SimTime(getParentModule()->par("hardware_delay").doubleValue()),
+                        gate("AVBout", (*listener)->getIndex()));
+            }
+            else{
+                if((*listener)->hasGate("AVBin")){
+                    sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
                 }
             }
-            delete inFrame;
         }
-        else
-        {
-            sendDelayed(inFrame, SimTime(getParentModule()->par("hardware_delay").doubleValue()), gate("AVBout", 0));
-        }
+        delete inFrame;
     }
     else
     {
         delete msg;
     }
-}
-
-unsigned int AVBIncoming::calcPortUtilisation(unsigned int port)
-{
-    BaseShaper *shaper = dynamic_cast<BaseShaper*>(getParentModule()->getSubmodule("phy", (int) port)->getSubmodule(
-            "shaper"));
-    cGate *physOutGate = getParentModule()->getSubmodule("phy", (int) port)->getSubmodule("mac")->gate("phys$o");
-    cChannel *avbChannel = physOutGate->findTransmissionChannel();
-    if (avbChannel)
-    {
-        PortBandwith[port] = (unsigned int) (avbChannel->getNominalDatarate() / 1000000);
-    }
-    else
-    {
-        PortBandwith[port] = 0;
-    }
-    return (unsigned int) shaper->par("TTEBandwith").longValue();
-}
-
-unsigned int AVBIncoming::getAVBPortReservation(unsigned int port)
-{
-    return AVBPortReservation[port];
-}
-
-void AVBIncoming::setAVBPortReservation(unsigned int port, unsigned int reservation)
-{
-    AVBPortReservation[port] = reservation;
-}
-
-unsigned int AVBIncoming::getPortBandwith(unsigned int port)
-{
-    return PortBandwith[port];
 }
 
 bool AVBIncoming::getForwarding()

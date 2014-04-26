@@ -135,8 +135,6 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
                 bubble("Listener registred, start streaming!");
                 isStreaming = true;
                 avbCTC->talker = true;
-                avbCTC->setAVBPortReservation(0,
-                        avbCTC->calcBandwith(frameSize, intervalFrames) + avbCTC->getAVBPortReservation(0));
                 sendAVBFrame();
             }
         }

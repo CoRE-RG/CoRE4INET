@@ -45,8 +45,8 @@ module TTEAVBEtherSwitch
             parameters:
                 @display("p=100,50");
             gates:
-                ifIn[sizeof(ethg)+1];
-                ifOut[sizeof(ethg)+1];
+                ifIn[sizeof(ethg)];
+                ifOut[sizeof(ethg)];
         }
 		//The mac table associated with the be switch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
@@ -59,20 +59,9 @@ module TTEAVBEtherSwitch
             parameters:
                 @display("p=452,285");
         }
-        llc: EtherLLC {
-            parameters:
-                @display("p=170,110");
-            gates:
-                upperLayerIn[1];
-                upperLayerOut[1];
-        }
-
 
         srpTable: SRPTable {
             @display("p=321,282");
-        }
-        srpTrafficHandle: SRPTrafficHandle {
-            @display("p=170,170");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
@@ -120,17 +109,7 @@ module TTEAVBEtherSwitch
             phy[i].upperLayerIn <-- beswitch.ifOut[i];
             phy[i].upperLayerOut --> beswitch.ifIn[i];
         }
-        beswitch.ifOut[sizeof(ethg)] --> llc.lowerLayerIn;
-        beswitch.ifIn[sizeof(ethg)] <-- llc.lowerLayerOut;
 
-        srpTrafficHandle.lowerLayerOut --> llc.upperLayerIn[0];
-        srpTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[0];
-        avbCTC.SRPout --> srpTrafficHandle.SRPin;
-        avbCTC.SRPin <-- srpTrafficHandle.SRPout;
-        srpTrafficHandle.out --> srpTrafficHandle.in;
-//        
-//       	llc.upperLayerOut[0] --> avbCTC.SRPin;
-//       	llc.upperLayerIn[0] <-- avbCTC.SRPout;
 		srpProtocol.out --> beswitch.srpIn;
         srpProtocol.in <-- beswitch.srpOut;
 

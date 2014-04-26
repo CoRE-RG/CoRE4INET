@@ -15,12 +15,14 @@
 
 package core4inet.applications.trafficsink.avb;
 
-import core4inet.applications.base.ApplicationBase;
+import core4inet.applications.trafficsink.base.TrafficSinkApp;
 
-simple AVBTrafficSinkApp extends ApplicationBase
+simple AVBTrafficSinkApp extends TrafficSinkApp
 {
     parameters:
         @class(AVBTrafficSinkApp);
         @display("i=block/sink,blue");
         int streamID;
+    gates:
+        input AVBin @directIn;
 }

@@ -30,12 +30,6 @@ simple AVBIncoming
         int NrOfPorts = default(0);
 
     gates:
-        //input for SRP Frames
-        input SRPin @labels(SRPFrame);
-
-        //output for SRP Frames
-        output SRPout @labes(SRPFrame);
-
         //input for AVB Frames
         input in @directIn @labels(AVBFrame);
 

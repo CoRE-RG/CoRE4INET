@@ -101,7 +101,7 @@ module TTEAVBEtherHost
         }
 
         app[numApps]: <default("TTEAPITestApplication")> like IApplication {
-            @display("p=380,37");
+            @display("p=380,37,row,70");
         }
 
         bgIn: BGQueueBuffer {
@@ -139,7 +139,6 @@ module TTEAVBEtherHost
         bgTrafficHandle.out --> bgIn.in;
         bgOut.out --> bgTrafficHandle.in;
 
-        avbCTC.SRPout --> avbCTC.SRPin;
         avbCTC.AVBout[0] --> avbBuffer[0].in;
         avbBuffer[0].out --> phy[0].AVBin;
 

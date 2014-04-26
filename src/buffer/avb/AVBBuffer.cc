@@ -18,6 +18,8 @@
 #include "ApplicationBase.h"
 #include "ModuleAccess.h"
 
+#include "SRPTable.h"
+
 namespace CoRE4INET {
 
 Define_Module(AVBBuffer);
@@ -112,8 +114,10 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 }
                 else if (credit < 0)
                 {
-                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
-                    Wduration = ((double) -credit) / (AVBReservation * 1024.00 * 1024.00);
+                    SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+                    unsigned long reservedBandwith = srptable->getBandwidthForModule(
+                            getParentModule()->getSubmodule("phy", getIndex()));
+                    Wduration = ((double) -credit) / reservedBandwith;
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
                     event->setTimer((uint64_t) ceil(Wduration / tick));
                     event->setDestinationGate(gate("schedulerIn"));
@@ -148,8 +152,10 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 else if (credit < 0)
                 {
                     emit(creditSignal, credit);
-                    AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
-                    Wduration = ((double) -credit) / (AVBReservation * 1024.00 * 1024.00);
+                    SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+                    unsigned long reservedBandwith = srptable->getBandwidthForModule(
+                            getParentModule()->getSubmodule("phy", getIndex()));
+                    Wduration = ((double) -credit) / reservedBandwith;
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
                     event->setTimer((uint64_t) ceil(Wduration / tick));
                     event->setDestinationGate(gate("schedulerIn"));
@@ -175,8 +181,11 @@ void AVBBuffer::idleSlope(SimTime duration)
     {
         Enter_Method
         ("idleSlope()");
-        AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
-        credit += ceil((AVBReservation * 1024.00 * 1024.00) * duration.dbl());
+        SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+        unsigned long reservedBandwith = srptable->getBandwidthForModule(
+                getParentModule()->getSubmodule("phy", getIndex()));
+
+        credit += ceil(reservedBandwith * duration.dbl());
         emit(creditSignal, credit);
         if (credit > 0 && msgCnt == 0 && !inTransmission)
             resetCredit();
@@ -189,8 +198,11 @@ void AVBBuffer::interferenceSlope(SimTime duration)
     {
         Enter_Method
         ("interferenceSlope()");
-        AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
-        credit += ceil((AVBReservation * 1024.00 * 1024.00) * duration.dbl());
+        SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+        unsigned long reservedBandwith = srptable->getBandwidthForModule(
+                getParentModule()->getSubmodule("phy", getIndex()));
+
+        credit += ceil(reservedBandwith * duration.dbl());
         emit(creditSignal, credit);
     }
 }
@@ -199,17 +211,21 @@ void AVBBuffer::sendSlope(SimTime duration)
 {
     Enter_Method
     ("sendSlope()");
+    SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+    unsigned long reservedBandwith = srptable->getBandwidthForModule(
+            getParentModule()->getSubmodule("phy", getIndex()));
 
-    AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
-    unsigned int portBandwith = avbCTC->getPortBandwith((unsigned int) this->getIndex());
+    cGate *physOutGate = getParentModule()->getSubmodule("phy", getIndex())->getSubmodule("mac")->gate("phys$o");
+    cChannel *outChannel; outChannel = physOutGate->findTransmissionChannel();
+
+    unsigned int portBandwith = outChannel->getNominalDatarate();
     emit(creditSignal, credit);
-    credit -= ceil(((portBandwith - AVBReservation) * 1024.00 * 1024.00) * duration.dbl());
+    credit -= ceil((portBandwith - reservedBandwith) * duration.dbl());
     inTransmission = false;
     if (msgCnt > 0)
     {
         if (credit < 0)
         {
-            AVBReservation = avbCTC->getAVBPortReservation((unsigned int) this->getIndex());
             Wduration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
             event->setTimer((uint64_t) ceil(Wduration / tick));
