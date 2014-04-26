@@ -50,18 +50,18 @@ module TTEAVBEtherSwitch
         }
 		//The mac table associated with the be switch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
-            @display("p=170,50");
+            @display("p=170,276");
         }
         interfaceTable: InterfaceTable {
-            @display("p=389,285");
+            @display("p=304,276");
         }
         notificationBoard: NotificationBoard {
             parameters:
-                @display("p=452,285");
+                @display("p=376,276");
         }
 
         srpTable: SRPTable {
-            @display("p=321,282");
+            @display("p=235,276");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
@@ -73,12 +73,12 @@ module TTEAVBEtherSwitch
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=170,240");
+                @display("p=170,111");
                 NrOfPorts = sizeof(ethg);
         }
 
         avbBuffer[sizeof(ethg)]: AVBQueueBuffer {
-            @display("p=100,240,c,70");
+            @display("p=100,111,c,70");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
@@ -99,7 +99,7 @@ module TTEAVBEtherSwitch
             @display("p=310,130");
         }
         srpProtocol: SRProtocol {
-            @display("p=255,282");
+            @display("p=170,50");
         }
     connections:
         for i=0..sizeof(ethg)-1 {
@@ -110,7 +110,7 @@ module TTEAVBEtherSwitch
             phy[i].upperLayerOut --> beswitch.ifIn[i];
         }
 
-		srpProtocol.out --> beswitch.srpIn;
+        srpProtocol.out --> beswitch.srpIn;
         srpProtocol.in <-- beswitch.srpOut;
 
 }
