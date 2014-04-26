@@ -28,7 +28,9 @@ void AVBTrafficSinkApp::initialize()
     if (srpTable)
     {
         srpTable->subscribe("talkerRegistered", this);
+        srpTable->subscribe("listenerRegistrationFailed", this);
     }
+    getDisplayString().setTagArg("i2", 0, "status/hourglass");
 }
 
 void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
@@ -40,12 +42,25 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
         SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
 
         //If talker for the desired stream, register Listener
-        if (tentry->streamId == (unsigned int)par("streamID").longValue())
+        if (tentry->streamId == (unsigned int) par("streamID").longValue())
         {
             SRPTable *srpTable = (SRPTable *) src;
 
             //TODO Minor: try to get VLAN
             srpTable->updateListenerWithStreamId(tentry->streamId, this, 0);
+            getDisplayString().setTagArg("i2", 0, "status/active");
+        }
+    }
+    else if (id == registerSignal("listenerRegistrationFailed"))
+    {
+        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+        if (lentry->streamId == (unsigned int) par("streamID").longValue())
+        {
+            if (lentry->module == this)
+            {
+                getDisplayString().setTagArg("i2", 0, "status/cross");
+                //TODO Minor: Implement retry
+            }
         }
     }
 }

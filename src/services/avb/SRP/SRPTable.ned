@@ -27,14 +27,18 @@ simple SRPTable
     parameters:
         @display("i=block/table2");
         
-        //Signal emitted when talker is registered, contains streamID
+        //Signal emitted when talker is registered, contains TalkerEntry
         @signal[talkerRegistered](type=SRPTable::TalkerEntry);
-        //Signal emitted when talker is updated, contains streamID
+        //Signal emitted when talker is updated, contains TalkerEntry
         @signal[talkerUpdated](type=SRPTable::TalkerEntry);
-        //Signal emitted when listener is registered, contains streamID
+        //Signal emitted when listener is registered, contains ListenerEntry
         @signal[listenerRegistered](type=SRPTable::ListenerEntry);
-        //Signal emitted when listener is updated, contains streamID
+        //Signal emitted when listener is updated, contains ListenerEntry
         @signal[listenerUpdated](type=SRPTable::ListenerEntry);
+        //Signal emitted when listener is unregistered, contains ListenerEntry
+        @signal[listenerUnregistered](type=SRPTable::ListenerEntry);
+        //Signal emitted when listener registration failed, contains ListenerEntry
+        @signal[listenerRegistrationFailed](type=SRPTable::ListenerEntry);
         
         string srpTableFile = default("");
 }

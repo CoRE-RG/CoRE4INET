@@ -66,6 +66,9 @@ void SRPRelay::handleMessage(cMessage * msg)
 void SRPRelay::dispatchSRP(SRPFrame * srp)
 {
     ExtendedIeee802Ctrl * controlInfo = dynamic_cast<ExtendedIeee802Ctrl *>(srp->removeControlInfo());
+    if(!controlInfo){
+        throw cRuntimeError("SRP is missing ControlInfo");
+    }
     int portNum = controlInfo->getSwitchPort();
     int notPortNum = controlInfo->getNotSwitchPort();
     MACAddress address = controlInfo->getDest();

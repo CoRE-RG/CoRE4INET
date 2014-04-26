@@ -30,9 +30,6 @@ Define_Module(SRProtocol);
 
 void SRProtocol::initialize()
 {
-    localSAP = ETHERAPP_BUFFER_SAP;
-    remoteSAP = ETHERAPP_BUFFER_SAP;
-
     srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
     if (!srpTable)
     {
@@ -52,11 +49,6 @@ void SRProtocol::handleMessage(cMessage *msg)
             error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
         }
         int arrivedOn = etherctrl->getSwitchPort();
-        //TODO Major: Work around, this can be removed when we have an Extended LLC!
-        if (arrivedOn < 0)
-        {
-            arrivedOn = 0;
-        }
         cModule *port = getParentModule()->getSubmodule("phy", arrivedOn);
 
         if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
@@ -67,9 +59,55 @@ void SRProtocol::handleMessage(cMessage *msg)
         }
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
         {
+            unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
+            //Add Higher Priority Bandwidth
+            utilizedBandwidth += port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
             //TODO Minor: try to get VLAN
-            srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, 0);
-            //TODO: Update Table if enough bandwidth
+            unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), 0);
+
+            cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
+            cChannel *outChannel = physOutGate->findTransmissionChannel();
+
+            unsigned long totalBandwidth = outChannel->getNominalDatarate();
+
+            double reservableBandwidth = par("reservableBandwidth").doubleValue();
+
+            if ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth))
+            {
+                //TODO Minor: try to get VLAN
+                srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, 0);
+                //TODO: Update Table if enough bandwidth
+                EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
+                        << port->getFullName() << ". Utilized Bandwidth: "
+                        << (utilizedBandwidth + requiredBandwidth) / (double) 1000000 << " of "
+                        << (totalBandwidth * reservableBandwidth) / (double) 1000000 << " reservable Bandwidth of "
+                        << totalBandwidth / (double) 1000000 << " MBit/s.";
+            }
+            else
+            {
+                bubble("ListenerReady Failed!");
+                EV_DETAIL << "Listener for stream " << listenerReady->getStreamID()
+                        << " could not be registered on port " << port->getFullName() << ". Required bandwidth: "
+                        << requiredBandwidth / (double) 1000000 << "MBit/s, remaining bandwidth "
+                        << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth) / (double) 1000000 << "MBit/s.";
+                SRPFrame *listenerReadyFailed = new ListenerReadyFailed("Listener Ready Failed", IEEE802CTRL_DATA);
+                listenerReadyFailed->setStreamID(listenerReady->getStreamID());
+
+                ExtendedIeee802Ctrl *answerEtherctrl = new ExtendedIeee802Ctrl();
+                answerEtherctrl->setEtherType(MSRP_ETHERTYPE);
+                answerEtherctrl->setDest(SRP_ADDRESS);
+                answerEtherctrl->setSwitchPort(port->getIndex());
+                listenerReadyFailed->setControlInfo(answerEtherctrl);
+                send(listenerReadyFailed, gate("out"));
+            }
+        }
+        else if (ListenerReadyFailed* listenerReadyFailed = dynamic_cast<ListenerReadyFailed*>(msg))
+        {
+            bubble("ListenerReady Failed!");
+            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReadyFailed->getStreamID() ,0);
+            for(std::list<cModule*>::iterator listener = listeners.begin(); listener != listeners.end(); listener++){
+                srpTable->removeListenerWithStreamId(listenerReadyFailed->getStreamID(), (*listener), 0, true);
+            }
         }
         delete etherctrl;
     }
@@ -90,13 +128,11 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
 
         ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-        etherctrl->setSsap(localSAP);
-        etherctrl->setDsap(remoteSAP);
         etherctrl->setEtherType(MSRP_ETHERTYPE);
         etherctrl->setDest(SRP_ADDRESS);
+        etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
         talkerAdvertise->setControlInfo(etherctrl);
 
-        etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
         //If talker was received from phy we have to exclude the incoming port
         if (strcmp(tentry->module->getName(), "phy") == 0)
         {
@@ -120,12 +156,11 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
             listenerReady->setStreamID(lentry->streamId);
 
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-            etherctrl->setSsap(localSAP);
-            etherctrl->setDsap(remoteSAP);
             etherctrl->setEtherType(MSRP_ETHERTYPE);
             etherctrl->setDest(SRP_ADDRESS);
-            listenerReady->setControlInfo(etherctrl);
             etherctrl->setSwitchPort(talker->getIndex());
+            listenerReady->setControlInfo(etherctrl);
+
             send(listenerReady, gate("out"));
         }
 

@@ -24,7 +24,7 @@ void TrafficSourceAppBase::initialize()
     ApplicationBase::initialize();
     if (par("enabled").boolValue())
     {
-        scheduleAt(simTime(), new cMessage("ACTIVATOR!"));
+        scheduleAt(simTime()+par("start_time").doubleValue(), new cMessage(START_MSG_NAME));
     }
 }
 

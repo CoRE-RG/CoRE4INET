@@ -38,14 +38,14 @@ namespace CoRE4INET {
 class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cListener
 {
     private:
-        bool talker;
         bool isStreaming;
         unsigned long streamID;
         unsigned int frameSize;
         unsigned int intervalFrames;
         unsigned int payload;
-        AVBIncoming* avbCTC;
         cModule *avbOutCTC;
+    public:
+        AVBTrafficSourceApp();
     protected:
         /**
          * @brief Initialization of the module. Sends activator message

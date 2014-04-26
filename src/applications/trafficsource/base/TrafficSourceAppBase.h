@@ -20,6 +20,8 @@
 
 namespace CoRE4INET {
 
+#define START_MSG_NAME "Start Message"
+
 /**
  * @brief Base class for a traffic generator application.
  *

@@ -27,22 +27,26 @@
 #define AVB_OVERHEADSIZE 42
 #define AVB_SRP_ADVERTISESIZE 25
 #define AVB_SRP_READYSIZE 8
-#define AVB_CLASSMEASUREMENTINTERVAL_US 125.00
 
 namespace CoRE4INET {
 
 Define_Module(AVBTrafficSourceApp);
+
+AVBTrafficSourceApp::AVBTrafficSourceApp()
+{
+    isStreaming = false;
+}
 
 void AVBTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
     Timed::initialize();
 
-    talker = par("talker").boolValue();
     streamID = (unsigned long) par("streamID").longValue();
     intervalFrames = (unsigned int) par("intervalFrames").longValue();
     payload = (unsigned int) par("payload").longValue();
 
+    //TODO: Minor: Check these values
     if (payload <= AVB_MINPACKETSIZE)
     {
         frameSize = AVB_MINPACKETSIZE;
@@ -52,19 +56,15 @@ void AVBTrafficSourceApp::initialize()
         frameSize = payload + AVB_OVERHEADSIZE;
     }
 
-    isStreaming = false;
-
-    avbCTC = (AVBIncoming*) getParentModule()->getSubmodule("avbCTC");
-
-
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
+
+    getDisplayString().setTagArg("i2", 0, "status/asleep");
 
 }
 
 void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
-    //TEST ONLY:
-    if (msg->isSelfMessage() && talker)
+    if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
     {
         SRPTable *srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
         if (srpTable)
@@ -73,6 +73,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             srpTable->subscribe("listenerRegistered", this);
             srpTable->updateTalkerWithStreamId(streamID, this, new MACAddress("00:00:00:00:00:00"), SR_CLASS_A,
                     frameSize, intervalFrames);
+            getDisplayString().setTagArg("i2", 0, "status/hourglass");
         }
         else
         {
@@ -130,13 +131,10 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
         {
             ev << "Listener for stream " << lentry->streamId << " registered!" << std::endl;
 
-            if (par("enabled").boolValue())
-            {
-                bubble("Listener registred, start streaming!");
-                isStreaming = true;
-                avbCTC->talker = true;
-                sendAVBFrame();
-            }
+            bubble("Listener registered, start streaming!");
+            getDisplayString().setTagArg("i2", 0, "status/active");
+            isStreaming = true;
+            sendAVBFrame();
         }
     }
 }

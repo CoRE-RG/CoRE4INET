@@ -39,8 +39,6 @@ class AVBIncoming : public cSimpleModule
          */
         bool hadError;
 
-        std::map<unsigned long, bool> StreamIsForwarding;
-
         /**
          * @brief Initialization of the module.
          */
@@ -58,14 +56,6 @@ class AVBIncoming : public cSimpleModule
          * @brief Constructor.
          */
         AVBIncoming();
-        bool talker;
-
-        /**
-         * @brief get forwarding policy.
-         *
-         * @return returns true if AVB forwarding is active.
-         */
-        bool getForwarding();
 };
 
 } /* namespace CoRE4INET */

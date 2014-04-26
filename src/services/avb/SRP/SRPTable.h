@@ -63,13 +63,15 @@ class SRPTable : public cSimpleModule
         {
             public:
                 uint64_t streamId;
+                cModule *module;            // Listener port or module
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 ListenerEntry()
                 {
                     streamId = 0;
+                    module = NULL;
                 }
-                ListenerEntry(simtime_t insertionTime) :
-                    streamId(streamId), insertionTime(insertionTime)
+                ListenerEntry(uint64_t streamId, cModule *module, simtime_t insertionTime) :
+                    streamId(streamId), module(module), insertionTime(insertionTime)
                 {
                 }
         };
@@ -91,6 +93,8 @@ class SRPTable : public cSimpleModule
         static simsignal_t talkerUpdatedSignal;
         static simsignal_t listenerRegisteredSignal;
         static simsignal_t listenerUpdatedSignal;
+        static simsignal_t listenerUnregisteredSignal;
+        static simsignal_t listenerRegistrationFailedSignal;
 
     public:
 
@@ -123,7 +127,7 @@ class SRPTable : public cSimpleModule
 
         /**
          * @brief Unregister a streamId at talkerTable.
-         * @return True if removed. False if not registred.
+         * @return True if removed. False if not registered.
          */
         virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL,
                 unsigned int vid = 0);
@@ -133,6 +137,12 @@ class SRPTable : public cSimpleModule
          * @return True if refreshed. False if it is new.
          */
         virtual bool updateListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid = 0);
+
+        /**
+         * @brief Unregister a streamId at listenerTable.
+         * @return True if removed. False if not registered.
+         */
+        virtual bool removeListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid = 0, bool failedSignal = false);
 
         /**
          *  @brief Prints cached data

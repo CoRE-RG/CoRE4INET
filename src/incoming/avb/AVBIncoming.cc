@@ -34,7 +34,6 @@ AVBIncoming::AVBIncoming()
 
 void AVBIncoming::initialize()
 {
-    talker = false;
 }
 
 void AVBIncoming::handleMessage(cMessage* msg)
@@ -65,11 +64,6 @@ void AVBIncoming::handleMessage(cMessage* msg)
     {
         delete msg;
     }
-}
-
-bool AVBIncoming::getForwarding()
-{
-    return ((gateSize("AVBout") > 1) || talker);
 }
 
 } /* namespace CoRE4INET */

@@ -31,6 +31,8 @@ simsignal_t SRPTable::talkerRegisteredSignal = registerSignal("talkerRegistered"
 simsignal_t SRPTable::talkerUpdatedSignal = registerSignal("talkerUpdated");
 simsignal_t SRPTable::listenerRegisteredSignal = registerSignal("listenerRegistered");
 simsignal_t SRPTable::listenerUpdatedSignal = registerSignal("listenerUpdated");
+simsignal_t SRPTable::listenerUnregisteredSignal = registerSignal("listenerUnregistered");
+simsignal_t SRPTable::listenerRegistrationFailedSignal = registerSignal("listenerRegistrationFailed");
 
 SRPTable::SRPTable()
 {
@@ -225,6 +227,7 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, un
         updated = false;
     }
     llist[module].streamId = streamId;
+    llist[module].module = module;
     llist[module].insertionTime = simTime();
 
     if (updated)
@@ -237,6 +240,35 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, un
     }
 
     return updated;
+}
+
+bool SRPTable::removeListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid, bool failedSignal)
+{
+    Enter_Method
+    ("SRPTable::removeListenerWithStreamId()");
+    ListenerTable &listenerTable = listenerTables[vid];
+
+    ListenerTable::iterator listeners = listenerTable.find(streamId);
+
+    if (listeners != listenerTable.end())
+    {
+        ListenerList::iterator listener = (*listeners).second.find(module);
+        if (listener != (*listeners).second.end())
+        {
+            ListenerEntry lentry = (*listener).second;
+            if (failedSignal)
+            {
+                emit(listenerRegistrationFailedSignal, &lentry);
+            }
+            else
+            {
+                emit(listenerUnregisteredSignal, &lentry);
+            }
+            (*listeners).second.erase(listener);
+            return true;
+        }
+    }
+    return false;
 }
 
 void SRPTable::printState()

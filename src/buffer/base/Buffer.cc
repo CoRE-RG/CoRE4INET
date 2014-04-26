@@ -44,6 +44,11 @@ void Buffer::initialize(int stage)
     {
         ev << "Initialize Buffer" << endl;
         initializeStatistics();
+        if (ev.isGUI())
+        {
+            //Update displaystring
+            getDisplayString().setTagArg("i", 0, "buffer/empty");
+        }
     }
 }
 
@@ -119,7 +124,7 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
     }
 }
 
-void Buffer::enqueue(__attribute((unused))  EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused))   EtherFrame *newFrame)
 {
     ev << "Buffer::enqueue not implemented" << endl;
     throw;

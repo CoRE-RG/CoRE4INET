@@ -26,8 +26,6 @@ namespace CoRE4INET {
 class SRProtocol : public cSimpleModule, public cListener
 {
     protected:
-        int localSAP;
-        int remoteSAP;
         SRPTable *srpTable;
 
         virtual void initialize();

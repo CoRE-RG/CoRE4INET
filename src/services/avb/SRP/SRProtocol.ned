@@ -17,8 +17,10 @@ package core4inet.services.avb.SRP;
 
 simple SRProtocol
 {
+    parameters:
     @display("i=block/network2,blue");
     @class(SRProtocol);
+    	double reservableBandwidth = default(0.7); //Amount of total bandwidth that is reservable (0-1) default: 0.7 representing 70% 
     gates:
         input in @labels(EtherFrame);
         output out @labels(EtherFrame);

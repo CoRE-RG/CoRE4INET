@@ -30,12 +30,6 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         @class(AVBTrafficSourceApp);
         @display("i=,blue");
 
-        // True => AVB Talker / Default False => AVB Listener
-        bool talker = default(false);
-
-        // Countdown till first Talker Advertise
-        double advertise_time @unit(s) = default(0);
-
         // ID of the AVB Stream
         double streamID = default(0);
 

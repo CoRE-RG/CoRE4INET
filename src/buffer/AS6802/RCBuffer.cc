@@ -45,12 +45,6 @@ void RCBuffer::initialize(int stage)
     if (stage == 0)
     {
         Timed::initialize();
-
-        if (ev.isGUI())
-        {
-            //Update displaystring
-            getDisplayString().setTagArg("i", 0, "buffer/empty");
-        }
     }
 }
 

@@ -64,11 +64,6 @@ void TTBuffer::initialize(int stage)
 
         nextAction = period->registerEvent(actionTimeEvent);
 
-        if (ev.isGUI())
-        {
-            //Update displaystring
-            getDisplayString().setTagArg("i", 0, "buffer/empty");
-        }
         return;
     }
 }
