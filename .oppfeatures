@@ -64,7 +64,6 @@
         labels = ""
         nedPackages = "
                        core4inet.applications.examples.rt_tictoc
-                       core4inet.examples.AS6802.rt_tictoc
                        core4inet.examples.AS6802.small_network
                       "
         extraSourceFolders = ""
@@ -107,7 +106,7 @@
         requires = "AS6802_common TTE_api"
         labels = ""
         nedPackages = "
-                       core4inet.examples.AS6802.api_rt_tictoc
+                       core4inet.examples.AS6802.rt_tictoc
                       "
         extraSourceFolders = ""
         linkerFlags = ""
