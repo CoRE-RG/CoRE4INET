@@ -47,7 +47,7 @@ void TTBuffer::initialize(int stage)
     }
     if (stage == 1)
     {
-        ev << "Initialize TTBuffer" << endl;
+        EV_DETAIL << "Initialize TTBuffer" << endl;
 
         //Register Event
         Scheduled::initialize();

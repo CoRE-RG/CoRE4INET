@@ -79,8 +79,7 @@ void TTEAPIApplicationBase::receiveSignal(cComponent *src, simsignal_t id, cObje
 
 void TTEAPIApplicationBase::startApplication()
 {
-    ev << "TTEAPIApplicationBase::startApplication() not implemented" << endl;
-    throw;
+    throw cRuntimeError("TTEAPIApplicationBase::startApplication() not implemented");
 }
 
 void TTEAPIApplicationBase::registerTask(unsigned int actionTime, void (*functionPointer)(void*), void *setFunctionArg)

@@ -14,6 +14,7 @@
 // 
 
 #include "Timer.h"
+#include "INETDefs.h"
 
 #include "customWatch.h"
 
@@ -85,13 +86,13 @@ void Timer::sendOutEvents()
     {
         if ((*it).first < ticks)
         {
-            EV << "WARNING: Message(s) (was/were) delayed by the scheduler. The event(s) affected (is/are): ";
+            EV_WARN << "WARNING: Message(s) (was/were) delayed by the scheduler. The event(s) affected (is/are): ";
             for (std::list<SchedulerActionTimeEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end();
                     ++it2)
             {
-                EV << (*it2)->getName() << " by " << (*it2)->getDestinationGate()->getOwner()->getName() << "; ";
+                EV_WARN << (*it2)->getName() << " by " << (*it2)->getDestinationGate()->getOwner()->getName() << "; ";
             }
-            EV << "The delay was " << (ticks - (*it).first)
+            EV_WARN << "The delay was " << (ticks - (*it).first)
                     << "ticks. This may happen for events in the clock correction interval." << std::endl;
             if (ev.isGUI())
             {
@@ -114,7 +115,7 @@ void Timer::sendOutEvents()
     {
         if ((ticks - (*it).first) > 1)
         {
-            EV << "misscheduled: " << (ticks - (*it).first) << std::endl;
+            EV_FATAL << "misscheduled: " << (ticks - (*it).first) << std::endl;
             throw cRuntimeError("THIS SHOULD NOT HAPPEN!");
         }
         for (std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)

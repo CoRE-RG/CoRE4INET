@@ -42,7 +42,7 @@ void Buffer::initialize(int stage)
 {
     if (stage == 0)
     {
-        ev << "Initialize Buffer" << endl;
+        EV_DETAIL << "Initialize Buffer" << endl;
         initializeStatistics();
     }
 }
@@ -121,12 +121,10 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
 
 void Buffer::enqueue(__attribute((unused))  EtherFrame *newFrame)
 {
-    ev << "Buffer::enqueue not implemented" << endl;
-    throw;
+    throw cRuntimeError("Buffer::enqueue not implemented");
 }
 
 EtherFrame * Buffer::dequeue()
 {
-    ev << "Buffer::dequeue not implemented" << endl;
-    throw;
+    throw cRuntimeError("Buffer::dequeue not implemented");
 }
