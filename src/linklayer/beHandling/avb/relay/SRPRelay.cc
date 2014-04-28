@@ -24,7 +24,7 @@ Define_Module(SRPRelay);
 
 void SRPRelay::initialize(int stage)
 {
-    Ieee8021dRelay::initialize(stage);
+    ::Ieee8021dRelay::initialize(stage);
 }
 
 void SRPRelay::handleMessage(cMessage * msg)
@@ -55,7 +55,7 @@ void SRPRelay::handleMessage(cMessage * msg)
             }
             else
             {
-                Ieee8021dRelay::handleMessage(msg);
+                ::Ieee8021dRelay::handleMessage(msg);
             }
         }
     }

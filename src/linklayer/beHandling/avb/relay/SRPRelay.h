@@ -21,12 +21,12 @@
 
 namespace CoRE4INET {
 
-class SRPRelay : public Ieee8021dRelay
+class SRPRelay : public ::Ieee8021dRelay
 {
 
     protected:
         virtual void initialize(int stage);
-        virtual int numInitStages() const { return 1>Ieee8021dRelay::numInitStages()?1:Ieee8021dRelay::numInitStages(); }
+        virtual int numInitStages() const { return 1>::Ieee8021dRelay::numInitStages()?1: ::Ieee8021dRelay::numInitStages(); }
         virtual void handleMessage(cMessage * msg);
 
         void dispatchSRP(SRPFrame * srp);
