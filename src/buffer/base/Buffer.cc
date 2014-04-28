@@ -101,11 +101,7 @@ void Buffer::handleMessage(cMessage *msg)
         }
         else{
             EV_ERROR << "Buffer received message with larger size than maxMessageSize" << endl;
-            delete msg;
         }
-    }
-    else{
-        delete msg;
     }
 }
 

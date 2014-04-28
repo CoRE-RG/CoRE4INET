@@ -28,6 +28,8 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
         std::map<KeyT, ValueT, CmpT>& m;
         mutable typename std::map<KeyT, ValueT, CmpT>::iterator it;
         mutable int itPos;
+        mutable typename ValueT::iterator it2;
+        mutable int it2Pos;
         std::string classname;
     public:
         cStdCollectionMapWatcherBase(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
@@ -44,45 +46,52 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual int size() const
         {
-            return m.size();
+            size_t size = 0;
+            for (typename std::map<KeyT, ValueT, CmpT>::iterator i = m.begin(); i != m.end(); i++)
+            {
+                size += (*i).second.size();
+            }
+            return size;
         }
         virtual std::string at(int i) const
         {
-            // std::map doesn't support random access iterator and iteration is slow,
-            // so we have to use a trick, knowing that Tkenv will call this function with
-            // i=0, i=1, etc...
-            if (i == 0)
+            unsigned int index = 0;
+            it = m.begin();
+            it2 = (*it).second.begin();
+            while (index <= i)
             {
-                it = m.begin();
-                itPos = 0;
-            }
-            else if (i == itPos + 1 && it != m.end())
-            {
-                ++it;
-                ++itPos;
-            }
-            else
-            {
-                it = m.begin();
-                for (int k = 0; k < i && it != m.end(); k++)
+                if (i > (index + (*it).second.size()))
+                {
+                    index += (*it).second.size();
                     ++it;
-                itPos = i;
+                    it2 = (*it).second.begin();
+                }
+                else
+                {
+                    for (int k = 0; k < (i - index); k++)
+                    {
+                        ++it2;
+                    }
+                    return atIt2();
+                }
             }
-            if (it == m.end())
-            {
-                return std::string("out of bounds");
-            }
-            return atIt();
+            return std::string("out of bounds");
         }
-        virtual std::string atIt() const = 0;
+        virtual std::string atIt() const
+        {
+            std::stringstream out;
+            out << this->it->first << " ==> ";
+            return out.str();
+        }
+        virtual std::string atIt2() const = 0;
 };
 
 template<class KeyT, class ValueT, class CmpT>
-class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
+class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
 {
     public:
         cStdListMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
-            cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>(name, var)
+                cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>(name, var)
 
         {
         }
@@ -91,16 +100,10 @@ class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
             return "struct pair<*, list<*>>";
         }
 
-        virtual std::string atIt() const
+        virtual std::string atIt2() const
         {
             std::stringstream out;
-            out << this->it->first << " ==> ";
-            for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
-                if(it2!=this->it->second.begin()){
-                    out << "; ";
-                }
-                out << (*it2);
-            }
+            out << this->atIt() << (*this->it2);
             return out.str();
         }
 };
@@ -112,11 +115,11 @@ void createStdListMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& 
 }
 
 template<class KeyT, class ValueT, class CmpT>
-class cStdMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
+class cStdMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
 {
     public:
         cStdMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
-            cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>(name, var)
+                cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>(name, var)
 
         {
         }
@@ -125,16 +128,10 @@ class cStdMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
             return "struct pair<*, map<*>>";
         }
 
-        virtual std::string atIt() const
+        virtual std::string atIt2() const
         {
             std::stringstream out;
-            out << this->it->first << " ==> ";
-            for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
-                if(it2!=this->it->second.begin()){
-                    out << "; ";
-                }
-                out << (*it2).first << " => " << (*it2).second;
-            }
+            out << this->atIt() << this->it2->first << " ==> " << this->it2->second;
             return out.str();
         }
 };
@@ -146,11 +143,11 @@ void createStdMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m
 }
 
 template<class KeyT, class ValueT, class CmpT>
-class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>
+class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
 {
     public:
         cStdListMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
-            cStdCollectionMapWatcherBase<KeyT,ValueT,CmpT>(name, var)
+                cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>(name, var)
 
         {
         }
@@ -159,16 +156,10 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT,ValueT,Cm
             return "struct pair<*, map<list<*>>>";
         }
 
-        virtual std::string atIt() const
+        virtual std::string atIt2() const
         {
             std::stringstream out;
-            out << this->it->first << " ==> ";
-            for(typename ValueT::iterator it2 = this->it->second.begin(); it2!=this->it->second.end();it2++){
-                if(it2!=this->it->second.begin()){
-                    out << "; ";
-                }
-                out << (*it2).first << " => contains " << (*it2).second.size() << "elements";
-            }
+            out << this->atIt() << this->it2->first << " ==> " << this->it2->second.size() << " elements";
             return out.str();
         }
 };
