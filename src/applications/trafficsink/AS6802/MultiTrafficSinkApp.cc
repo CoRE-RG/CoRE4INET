@@ -58,7 +58,7 @@ void MultiTrafficSinkApp::handleMessage(cMessage *msg)
         }
         else
         {
-            ev << "only ct frames will collect statistics" << std::endl;
+            EV_ERROR << "only ct frames will collect statistics" << std::endl;
         }
     }
     delete msg;

@@ -37,7 +37,7 @@ void PCFIncoming::handleMessage(cMessage *msg)
 
         if (frame->getType() != (uint8_t) pcfType)
         {
-            ev << "FRAME DROPPED, wrong type:" << (int) frame->getType() << " should be " << pcfType << endl;
+            EV_ERROR << "FRAME DROPPED, wrong type:" << (int) frame->getType() << " should be " << pcfType << endl;
             emit(droppedSignal, frame);
             delete frame;
         }

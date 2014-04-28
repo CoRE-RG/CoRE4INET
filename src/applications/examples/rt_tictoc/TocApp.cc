@@ -49,7 +49,7 @@ void TocApp::handleMessage(cMessage *msg)
         frame->setCtID((uint16_t) par("ct_id").longValue());
         frame->encapsulate(toc);
 
-        EV << "Answering Tic Message with Toc Message\n";
+        EV_DETAIL << "Answering Tic Message with Toc Message\n";
         std::list<Buffer*> buffer = buffers[frame->getCtID()];
         for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
         {

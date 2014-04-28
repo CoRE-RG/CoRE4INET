@@ -144,14 +144,12 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
 
 void Buffer::enqueue(__attribute((unused))   EtherFrame *newFrame)
 {
-    EV_FATAL << "Buffer::enqueue not implemented" << endl;
-    throw;
+    throw cRuntimeError("Buffer::enqueue not implemented");
 }
 
 EtherFrame * Buffer::dequeue()
 {
-    EV_FATAL << "Buffer::dequeue not implemented" << endl;
-    throw;
+    throw cRuntimeError("Buffer::dequeue not implemented");
 }
 
 long Buffer::getRequiredBandwidth(){

@@ -24,7 +24,7 @@ Define_Module(TTEAPITestApplication);
 void testCallback(void* arg)
 {
     std::string teststring = (const char *) arg;
-    ev << "CALLBACK EXECUTED! " << teststring << endl << endl;
+    EV_INFO << "CALLBACK EXECUTED! " << teststring << endl << endl;
 }
 
 int main()
@@ -33,11 +33,11 @@ int main()
     tte_buffer_t testbuffer;
     if (tte_get_ct_output_buf(0, 100, &testbuffer) != ETT_SUCCESS)
     {
-        ev << "MIST1!" << endl << endl;
+        EV_TRACE << "Error!" << endl << endl;
         return -1;
     }
 
-    ev << "tte_get_channel_cnt(): " << tte_get_controller_cnt() << endl << endl;
+    EV_TRACE << "tte_get_channel_cnt(): " << tte_get_controller_cnt() << endl << endl;
 
     uint8_t mac[6];
 
@@ -47,12 +47,12 @@ int main()
 
     if (tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void (*)(void*)), (void*)&testCallback) != ETT_SUCCESS)
     {
-        ev << "MIST21!" << endl << endl;
+        EV_TRACE << "Error!" << endl << endl;
         return -1;
     }
     if (tte_set_buf_var(&testbuffer, TTE_BUFVAR_CB_ARG, 5, "SENT") != ETT_SUCCESS)
     {
-        ev << "MIST22!" << endl << endl;
+        EV_TRACE << "Error!" << endl << endl;
         return -1;
     }
 
@@ -75,29 +75,29 @@ int main()
 
     if (tte_open_output_buf(&testbuffer, &frame) != ETT_SUCCESS)
     {
-        ev << "MIST2!" << endl << endl;
+        EV_TRACE << "Error!" << endl << endl;
         return -1;
     }
     if (tte_close_output_buf(&testbuffer) != ETT_SUCCESS)
     {
-        ev << "MIST3!" << endl << endl;
+        EV_TRACE << "Error!" << endl << endl;
         return -1;
     }
 
     tte_buffer_t testbuffer2;
     if (tte_get_ct_output_buf(0, 100, &testbuffer2) != ETT_SUCCESS)
     {
-        ev << "MIST4!" << endl << endl;
+        EV_TRACE << "Error!" << endl << endl;
         return -1;
     }
     if (tte_set_buf_var(&testbuffer2, TTE_BUFVAR_RECEIVE_CB, sizeof(void (*)(void*)), (void*)&testCallback) != ETT_SUCCESS)
     {
-        ev << "MIST41!" << endl << endl;
+        EV_TRACE << "Error!" << endl << endl;
         return -1;
     }
     if (tte_set_buf_var(&testbuffer2, TTE_BUFVAR_CB_ARG, 9, "RECEIVED") != ETT_SUCCESS)
     {
-        ev << "MIST42!" << endl << endl;
+        EV_TRACE << "MIST42!" << endl << endl;
         return -1;
     }
 

@@ -52,7 +52,7 @@ void TicApp::handleMessage(cMessage *msg)
         frame->setCtID((uint16_t) par("ct_id").longValue());
         frame->encapsulate(tic);
 
-        EV << "Sending Tic Message\n";
+        EV_DETAIL << "Sending Tic Message\n";
         std::list<Buffer*> buffer = buffers[frame->getCtID()];
         for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
         {
