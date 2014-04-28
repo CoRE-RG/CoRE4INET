@@ -154,6 +154,10 @@ class SRPTable : public cSimpleModule
          */
         virtual void clear();
 
+    protected:
+        void updateDisplayString();
+        unsigned int getNumTalkerEntries();
+        unsigned int getNumListenerEntries();
 };
 
 }

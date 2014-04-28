@@ -43,6 +43,7 @@ void SRPTable::initialize()
 
     WATCH_MAPMAP(talkerTables);
     WATCH_LISTMAPMAP(listenerTables);
+    updateDisplayString();
 }
 
 void SRPTable::handleMessage(cMessage *)
@@ -177,7 +178,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     {
         emit(talkerRegisteredSignal, &talkerTable[streamId]);
     }
-
+    updateDisplayString();
     return updated;
 }
 
@@ -195,6 +196,7 @@ bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
             throw std::invalid_argument("trying to unregister talker from wrong module");
         }
         talkerTable.erase(talker);
+        updateDisplayString();
         return true;
     }
     return false;
@@ -238,7 +240,7 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, un
     {
         emit(listenerRegisteredSignal, &llist[module]);
     }
-
+    updateDisplayString();
     return updated;
 }
 
@@ -265,6 +267,7 @@ bool SRPTable::removeListenerWithStreamId(uint64_t streamId, cModule *module, un
                 emit(listenerUnregisteredSignal, &lentry);
             }
             (*listeners).second.erase(listener);
+            updateDisplayString();
             return true;
         }
     }
@@ -311,6 +314,38 @@ void SRPTable::clear()
 {
     for (std::map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin(); iter != talkerTables.end(); iter++)
         (*iter).second.clear();
+}
+
+unsigned int SRPTable::getNumTalkerEntries()
+{
+    unsigned int entries = 0;
+    for (std::map<unsigned int, TalkerTable>::iterator i = talkerTables.begin(); i != talkerTables.end(); ++i)
+    {
+        entries += (*i).second.size();
+    }
+    return entries;
+}
+unsigned int SRPTable::getNumListenerEntries()
+{
+    unsigned int entries = 0;
+    for (std::map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end(); ++i)
+    {
+        for (ListenerTable::iterator j = (*i).second.begin(); j != (*i).second.end(); ++j)
+        {
+            entries += (*j).second.size();
+        }
+    }
+    return entries;
+}
+
+void SRPTable::updateDisplayString()
+{
+    if (!ev.isGUI())
+        return;
+
+    char buf[80];
+    sprintf(buf, "%d talkers\n%d listeners", getNumTalkerEntries(), getNumListenerEntries());
+    getDisplayString().setTagArg("t", 0, buf);
 }
 
 SRPTable::~SRPTable()

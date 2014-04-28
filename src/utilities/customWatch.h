@@ -27,16 +27,13 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
     protected:
         std::map<KeyT, ValueT, CmpT>& m;
         mutable typename std::map<KeyT, ValueT, CmpT>::iterator it;
-        mutable int itPos;
         mutable typename ValueT::iterator it2;
-        mutable int it2Pos;
         std::string classname;
     public:
         cStdCollectionMapWatcherBase(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
                 cStdVectorWatcherBase(name), m(var)
 
         {
-            itPos = -1;
             classname = std::string("std::map<") + opp_typename(typeid(KeyT)) + "," + opp_typename(typeid(ValueT))
                     + ">";
         }
@@ -145,7 +142,10 @@ void createStdMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m
 template<class KeyT, class ValueT, class CmpT>
 class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
 {
+    protected:
+        mutable typename ValueT::mapped_type::iterator it3;
     public:
+
         cStdListMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
                 cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>(name, var)
 
@@ -155,11 +155,58 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
         {
             return "struct pair<*, map<list<*>>>";
         }
-
+        virtual int size() const
+        {
+            size_t size = 0;
+            for (typename std::map<KeyT, ValueT, CmpT>::iterator i = this->m.begin(); i != this->m.end(); i++)
+            {
+                for (typename ValueT::iterator j = (*i).second.begin(); j != (*i).second.end(); j++)
+                {
+                    size += (*j).second.size();
+                }
+            }
+            return size;
+        }
+        virtual std::string at(int i) const
+        {
+            unsigned int index = 0;
+            this->it = this->m.begin();
+            this->it2 = (*this->it).second.begin();
+            it3 = (*this->it2).second.begin();
+            while (index <= i)
+            {
+                if (i > (index + (*this->it2).second.size()))
+                {
+                    index += (*this->it2).second.size();
+                    ++this->it2;
+                    if (this->it2 == (*this->it).second.end())
+                    {
+                        ++this->it;
+                        this->it2 = (*this->it).second.begin();
+                    }
+                    it3 = (*this->it2).second.begin();
+                }
+                else
+                {
+                    for (int k = 0; k < (i - index); k++)
+                    {
+                        ++this->it2;
+                    }
+                    return atIt3();
+                }
+            }
+            return std::string("out of bounds");
+        }
         virtual std::string atIt2() const
         {
             std::stringstream out;
-            out << this->atIt() << this->it2->first << " ==> " << this->it2->second.size() << " elements";
+            out << this->atIt() << this->it2->first << " ==> ";
+            return out.str();
+        }
+        virtual std::string atIt3() const
+        {
+            std::stringstream out;
+            out << this->atIt2() << this->it3->first << " ==> " << this->it3->second;
             return out.str();
         }
 };
