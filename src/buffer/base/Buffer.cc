@@ -28,6 +28,10 @@ Define_Module(Buffer);
 simsignal_t Buffer::txPkSignal = SIMSIGNAL_NULL;
 simsignal_t Buffer::rxPkSignal = SIMSIGNAL_NULL;
 
+Buffer::Buffer(){
+    maxMessageSize = 0;
+}
+
 Buffer::~Buffer()
 {
     destinationGates.clear();
@@ -42,7 +46,10 @@ void Buffer::initialize(int stage)
 {
     if (stage == 0)
     {
-        ev << "Initialize Buffer" << endl;
+        EV_DETAIL << "Initialize Buffer" << endl;
+
+        maxMessageSize = par("maxMessageSize").longValue();
+
         initializeStatistics();
         if (ev.isGUI())
         {
@@ -89,12 +96,23 @@ void Buffer::handleMessage(cMessage *msg)
         {
             frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
         }
-        putFrame((EtherFrame*) frame);
+        if(frame->getByteLength()<=maxMessageSize){
+            putFrame((EtherFrame*) frame);
+        }
+        else{
+            EV_ERROR << "Buffer received message with larger size than maxMessageSize" << endl;
+            delete msg;
+        }
+    }
+    else{
+        delete msg;
     }
 }
 
 void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
 {
+    maxMessageSize = par("maxMessageSize").longValue();
+
     destinationGates.clear();
     std::vector<std::string> destinationGatePaths =
             cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
@@ -126,13 +144,13 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
 
 void Buffer::enqueue(__attribute((unused))   EtherFrame *newFrame)
 {
-    ev << "Buffer::enqueue not implemented" << endl;
+    EV_FATAL << "Buffer::enqueue not implemented" << endl;
     throw;
 }
 
 EtherFrame * Buffer::dequeue()
 {
-    ev << "Buffer::dequeue not implemented" << endl;
+    EV_FATAL << "Buffer::dequeue not implemented" << endl;
     throw;
 }
 

@@ -50,6 +50,10 @@ class Buffer : public virtual cSimpleModule
 {
     public:
         /**
+         * @brief Constructor
+         */
+        Buffer();
+        /**
          * @brief Destructor
          */
         ~Buffer();
@@ -66,6 +70,11 @@ class Buffer : public virtual cSimpleModule
          * Stores the Gates to that the messages are delivered
          */
         std::list<cGate*> destinationGates;
+
+        /**
+         * Chaches the maximum message size
+         */
+        unsigned int maxMessageSize;
 
     private:
         /**
