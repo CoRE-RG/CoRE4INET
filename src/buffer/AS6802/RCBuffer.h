@@ -108,6 +108,15 @@ class RCBuffer : public virtual CTBuffer, public Timed
          * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname);
+
+        /**
+         * @brief Calculates the bandwidth this module requires for transmission.
+         *
+         * @return Bandwidth in bps, or -1 is unknown.
+         *
+         * @sa enqueue();
+         */
+        virtual long getRequiredBandwidth();
 };
 
 } //namespace

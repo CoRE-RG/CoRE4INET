@@ -153,6 +153,15 @@ class Buffer : public virtual cSimpleModule
          */
         void putFrame(EtherFrame* frame);
 
+        /**
+         * @brief Calculates the bandwidth this module requires for transmission.
+         *
+         * @return Bandwidth in bps, or -1 is unknown.
+         *
+         * @sa enqueue();
+         */
+        virtual long getRequiredBandwidth();
+
     protected:
         /**
          * Signal that is emitted every time a frame was sent.

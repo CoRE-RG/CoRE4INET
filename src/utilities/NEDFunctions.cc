@@ -15,6 +15,8 @@
 #include "NEDFunctions.h"
 
 #include "ModuleAccess.h"
+#include "TTBuffer.h"
+#include "RCBuffer.h"
 
 static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc)
 {
@@ -65,4 +67,3 @@ Define_NED_Function2(ned_tick_to_sec, "quantity tick_to_sec(quantity ticks, quan
         "Converts ticks to seconds. Uses ticklength specified in oscillator or ticklength parameter if specified");
 Define_NED_Function2(ned_tick_to_sec, "quantity t2s(quantity ticks, quantity ticklength?)", "units",
         "Alias for tick_to_sec");
-

@@ -45,6 +45,8 @@ simple Buffer like IBuffer
 
         //Comma seperated list of gates where the frames of the buffer are delivered
         string destination_gates = default("");
+        
+        int maxMessageSize @unit(B) = default(1518B);
     gates:
         //The buffers Input
         input in @loose @labels(EtherFrame);

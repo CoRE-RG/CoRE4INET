@@ -98,6 +98,15 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
         ~TTBuffer();
 
         uint64_t nextSendWindowStart();
+
+        /**
+         * @brief Calculates the bandwidth this module requires for transmission.
+         *
+         * @return Bandwidth in bps, or -1 is unknown.
+         *
+         * @sa enqueue();
+         */
+        virtual long getRequiredBandwidth();
 };
 }
 

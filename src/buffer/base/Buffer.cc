@@ -135,3 +135,7 @@ EtherFrame * Buffer::dequeue()
     ev << "Buffer::dequeue not implemented" << endl;
     throw;
 }
+
+long Buffer::getRequiredBandwidth(){
+    return -1;
+}
