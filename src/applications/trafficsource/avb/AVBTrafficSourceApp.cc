@@ -93,7 +93,9 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
 void AVBTrafficSourceApp::sendAVBFrame()
 {
-    AVBFrame *outFrame = new AVBFrame("");
+    char name[10];
+    sprintf(name,"Stream %ld",streamID);
+    AVBFrame *outFrame = new AVBFrame(name);
     outFrame->setStreamID(streamID);
 
     cPacket *payloadPacket = new cPacket;
