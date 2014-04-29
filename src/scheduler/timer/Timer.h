@@ -66,7 +66,7 @@ class Timer : public cSimpleModule
          *
          * Used to reregister after clock tick changes.
          */
-        std::map<uint64_t, std::list<SchedulerActionTimeEvent*> > registredActionTimeEvents;
+        std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > > registredActionTimeEvents;
         /**
          * @brief List of registered SchedulerActionTimeEvent.
          *
