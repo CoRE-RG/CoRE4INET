@@ -12,9 +12,7 @@
 
 namespace CoRE4INET {
 
-extern simsignal_t
-    //Sync
-    NF_SYNC_STATE_CHANGE;
+extern simsignal_t NF_SYNC_STATE_CHANGE; //Sync
 
 }
 

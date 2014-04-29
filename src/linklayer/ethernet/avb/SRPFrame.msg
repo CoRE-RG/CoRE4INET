@@ -12,7 +12,7 @@ namespace CoRE4INET;
 // @see EtherFrame
 //
 // @author Philipp Meyer
-packet SRPFrame extends EtherFrame{
+packet SRPFrame{
     
     
     // ID of the AVB Stream
@@ -50,4 +50,13 @@ packet SRPFrame extends EtherFrame{
 	// for internal implementation:
 	string displayString="b=15,15,rect,black,black,5";
 	unsigned int portIndex;
+}
+
+packet TalkerAdvertise extends SRPFrame{
+}
+
+packet ListenerReady extends SRPFrame{
+}
+
+packet ListenerReadyFailed extends SRPFrame{
 }

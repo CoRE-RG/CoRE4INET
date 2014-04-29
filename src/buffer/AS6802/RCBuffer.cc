@@ -20,7 +20,7 @@
 
 namespace CoRE4INET {
 
-Define_Module( RCBuffer);
+Define_Module(RCBuffer);
 
 RCBuffer::RCBuffer()
 {
@@ -33,7 +33,7 @@ RCBuffer::~RCBuffer()
 
 int RCBuffer::numInitStages() const
 {
-    if(CTBuffer::numInitStages()>1)
+    if (CTBuffer::numInitStages() > 1)
         return CTBuffer::numInitStages();
     else
         return 1;
@@ -42,13 +42,9 @@ int RCBuffer::numInitStages() const
 void RCBuffer::initialize(int stage)
 {
     CTBuffer::initialize(stage);
-    if(stage==0){
+    if (stage == 0)
+    {
         Timed::initialize();
-
-        if(ev.isGUI()){
-            //Update displaystring
-            getDisplayString().setTagArg("i", 0, "buffer/empty");
-        }
     }
 }
 
@@ -56,23 +52,26 @@ void RCBuffer::handleMessage(cMessage *msg)
 {
     CTBuffer::handleMessage(msg);
 
-    if(destinationGates.size() > 0)
+    if (destinationGates.size() > 0)
     {
         if (msg->arrivedOn("in"))
         {
             if (bagExpired)
             {
                 EtherFrame *outgoingMessage = getFrame();
-                if(outgoingMessage){
+                if (outgoingMessage)
+                {
                     bagExpired = false;
                     numReset = 0;
                     //Send Message
-                    for (std::list<cGate*>::iterator dgate = destinationGates.begin(); dgate != destinationGates.end(); ++dgate)
+                    for (std::list<cGate*>::iterator dgate = destinationGates.begin(); dgate != destinationGates.end();
+                            ++dgate)
                     {
-                        sendDirect(outgoingMessage->dup(),0,0, *dgate);
+                        sendDirect(outgoingMessage->dup(), 0, 0, *dgate);
                     }
-                    if(gate("out")->isConnected()){
-                        send(outgoingMessage->dup(),"out");
+                    if (gate("out")->isConnected())
+                    {
+                        send(outgoingMessage->dup(), "out");
                     }
                     recordPacketSent(outgoingMessage);
                     delete outgoingMessage;
@@ -87,7 +86,8 @@ void RCBuffer::handleMessage(cMessage *msg)
                 bagExpired = false;
                 numReset = 0;
                 //Send Message
-                for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end(); ++gate)
+                for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end();
+                        ++gate)
                 {
                     sendDirect(outgoingMessage->dup(), *gate);
                 }
@@ -97,7 +97,8 @@ void RCBuffer::handleMessage(cMessage *msg)
             else
             {
                 bagExpired = true;
-                if(ev.isGUI()){
+                if (ev.isGUI())
+                {
                     getDisplayString().setTagArg("i2", 0, "");
                 }
             }
@@ -107,16 +108,19 @@ void RCBuffer::handleMessage(cMessage *msg)
 
 }
 
-void RCBuffer::handleParameterChange(const char* parname){
+void RCBuffer::handleParameterChange(const char* parname)
+{
     CTBuffer::handleParameterChange(parname);
 }
 
 void RCBuffer::resetBag()
 {
-    Enter_Method("resetBag()");
+    Enter_Method
+    ("resetBag()");
 
     //Set icon:
-    if(ev.isGUI()){
+    if (ev.isGUI())
+    {
         getDisplayString().setTagArg("i2", 0, "status/hourglass");
     }
 
@@ -125,10 +129,16 @@ void RCBuffer::resetBag()
     {
         //Register scheduler
         SchedulerTimerEvent *timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
-        timerMessage->setTimer((uint64_t)par("bag").longValue());
+        timerMessage->setTimer((uint64_t) par("bag").longValue());
         timerMessage->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(timerMessage);
     }
+}
+
+long RCBuffer::getRequiredBandwidth()
+{
+    return (par("maxMessageSize").longValue() * 8)
+            * (1 / ((uint64_t) par("bag").longValue() * oscillator->par("tick").doubleValue()));
 }
 
 } //namespace

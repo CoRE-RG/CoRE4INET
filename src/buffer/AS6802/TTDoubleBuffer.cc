@@ -17,4 +17,4 @@
 
 using namespace ::CoRE4INET;
 
-Define_Module( TTDoubleBuffer);
+Define_Module(TTDoubleBuffer);

@@ -16,7 +16,7 @@
 package core4inet.scheduler.period;
 
 //
-// TODO auto-generated module
+// Period Module: Periods define the cycles for events
 //
 // @author Till Steinbach
 //
@@ -33,6 +33,7 @@ simple Period
         int offset_ticks @unit(tick) = default(0tick);
         @display("i=block/table");
     gates:
+        //Output to the timer module (currently unused)
         output out;
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

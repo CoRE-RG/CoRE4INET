@@ -33,11 +33,11 @@ namespace CoRE4INET {
  */
 class TTEAPITestApplication : public TTEAPIApplicationBase
 {
-  protected:
-    /**
-     * @brief Implementation of startApplication() that starts the main()
-     */
-    virtual void startApplication();
+    protected:
+        /**
+         * @brief Implementation of startApplication() that starts the main()
+         */
+        virtual void startApplication();
 };
 
 } //namespace

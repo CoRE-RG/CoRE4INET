@@ -33,7 +33,7 @@ simple AVBQueueBuffer extends AVBBuffer
         @signal[queueLength](type=unsigned long);
         //Statistic of the queue length of the buffer
         @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
-        
+
         //Size of the buffer negative means infinite
         int size = default(-1);
 }

@@ -16,8 +16,7 @@
 #ifndef __CORE4INET_MULTITRAFFICSINK_H_
 #define __CORE4INET_MULTITRAFFICSINK_H_
 
-#include <omnetpp.h>
-#include "ApplicationBase.h"
+#include "base/ApplicationBase.h"
 
 namespace CoRE4INET {
 
@@ -36,7 +35,7 @@ class MultiTrafficSinkApp : public ApplicationBase
         /**
          * Map of Signals that are emitted every time a frame with a specific CT-ID was sent.
          */
-        static std::map<uint16_t,simsignal_t> rxPkSignal;
+        static std::map<uint16_t, simsignal_t> rxPkSignal;
 
     protected:
         /**

@@ -17,7 +17,7 @@
 #define __CORE4INET_QUEUEBUFFER_H_
 
 #include <omnetpp.h>
-#include <TTBuffer.h>
+#include "Buffer.h"
 
 namespace CoRE4INET {
 

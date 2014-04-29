@@ -29,19 +29,13 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
     parameters:
         @class(AVBTrafficSourceApp);
         @display("i=,blue");
-        
-        // True => AVB Talker / Default False => AVB Listener
-        bool talker = default(false);
-        
-        // Countdown till first Talker Advertise
-        double advertise_time @unit(s) = default(0);
-        
+
         // ID of the AVB Stream
         double streamID = default(0);
-        
+
         // Count of send Frames per 125us interval
-        int intervalFrames  = default(1);
-        
+        int intervalFrames = default(1);
+
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer

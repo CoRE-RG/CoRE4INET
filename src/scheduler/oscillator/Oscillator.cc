@@ -23,19 +23,23 @@ simsignal_t Oscillator::currentDrift = SIMSIGNAL_NULL;
 
 void Oscillator::initialize(int stage)
 {
-    if(stage==0){
+    if (stage == 0)
+    {
         currentDrift = registerSignal("currentDrift");
     }
 }
 
-int Oscillator::numInitStages() const{
+int Oscillator::numInitStages() const
+{
     return 1;
 }
 
-simtime_t Oscillator::getTick(){
+simtime_t Oscillator::getTick()
+{
     return SimTime(par("current_tick").doubleValue());
 }
-simtime_t Oscillator::getPreciseTick(){
+simtime_t Oscillator::getPreciseTick()
+{
     return SimTime(par("tick").doubleValue());
 }
 

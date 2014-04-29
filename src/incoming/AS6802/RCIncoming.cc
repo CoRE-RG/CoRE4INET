@@ -22,11 +22,11 @@ namespace CoRE4INET {
 
 Define_Module(RCIncoming);
 
-
-RCIncoming::RCIncoming() : CTIncoming::CTIncoming()
+RCIncoming::RCIncoming() :
+        CTIncoming::CTIncoming()
 {
-    lastArrived=0;
-    firstMessage=true;
+    lastArrived = 0;
+    firstMessage = true;
 }
 
 void RCIncoming::initialize()
@@ -37,17 +37,21 @@ void RCIncoming::initialize()
 
 void RCIncoming::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("in")){
-        recordPacketReceived((EtherFrame*)msg);
+    if (msg->arrivedOn("in"))
+    {
+        recordPacketReceived((EtherFrame*) msg);
 
         uint64_t currentTotalTicks = timer->getTotalTicks();
         //Now check for correct arrival:
-        //TODO what todo with JITTER?
+        //TODO Normal: what to do with JITTER?
         //Check too early
-        if(!firstMessage && currentTotalTicks-lastArrived < bag){
-            emit(droppedSignal, (EtherFrame*)msg);
-            if(ev.isGUI()){
-                ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n", getName(), currentTotalTicks-lastArrived,par("bag").longValue());
+        if (!firstMessage && currentTotalTicks - lastArrived < bag)
+        {
+            emit(droppedSignal, (EtherFrame*) msg);
+            if (ev.isGUI())
+            {
+                ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n",
+                        getName(), currentTotalTicks - lastArrived, par("bag").longValue());
                 bubble("Frame to early");
                 getDisplayString().setTagArg("i2", 0, "status/excl3");
                 getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
@@ -56,16 +60,18 @@ void RCIncoming::handleMessage(cMessage *msg)
             delete msg;
         }
         //Timing ok
-        else{
-            lastArrived=currentTotalTicks;
-            sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
+        else
+        {
+            lastArrived = currentTotalTicks;
+            sendDelayed(msg, SimTime(getParentModule()->par("hardware_delay").doubleValue()), "out");
             //send(msg,"out");
         }
     }
 }
 
-void RCIncoming::handleParameterChange(__attribute((unused)) const char* parname){
-    bag = (uint64_t)par("bag").longValue();
+void RCIncoming::handleParameterChange(__attribute((unused)) const char* parname)
+{
+    bag = (uint64_t) par("bag").longValue();
 }
 
 } //namespace

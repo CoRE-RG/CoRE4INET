@@ -27,7 +27,7 @@ import core4inet.buffer.AS6802.RCQueueBuffer;
 //
 module Switch1 extends TTEEtherSwitch
 {
-    @display("bgb=306,311");
+    @display("bgb=351,311");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:

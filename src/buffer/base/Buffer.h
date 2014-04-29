@@ -50,6 +50,10 @@ class Buffer : public virtual cSimpleModule
 {
     public:
         /**
+         * @brief Constructor
+         */
+        Buffer();
+        /**
          * @brief Destructor
          */
         ~Buffer();
@@ -66,6 +70,11 @@ class Buffer : public virtual cSimpleModule
          * Stores the Gates to that the messages are delivered
          */
         std::list<cGate*> destinationGates;
+
+        /**
+         * Chaches the maximum message size
+         */
+        unsigned int maxMessageSize;
 
     private:
         /**
@@ -152,6 +161,15 @@ class Buffer : public virtual cSimpleModule
          * @sa enqueue();
          */
         void putFrame(EtherFrame* frame);
+
+        /**
+         * @brief Calculates the bandwidth this module requires for transmission.
+         *
+         * @return Bandwidth in bps, or -1 is unknown.
+         *
+         * @sa enqueue();
+         */
+        virtual long getRequiredBandwidth();
 
     protected:
         /**

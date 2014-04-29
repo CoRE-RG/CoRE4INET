@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include "TrafficSourceAppBase.h"
+#include "Timed.h"
 #include "AVBIncoming.h"
 
 namespace CoRE4INET {
@@ -31,22 +32,20 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  *
- * TODO Documentation
+ * TODO Normal: Documentation
  */
 
-class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed
+class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cListener
 {
     private:
-        bool talker;
         bool isStreaming;
         unsigned long streamID;
         unsigned int frameSize;
         unsigned int intervalFrames;
         unsigned int payload;
-        Buffer *srpOutBuffer;
-        AVBIncoming* avbCTC;
         cModule *avbOutCTC;
-        double tick;
+    public:
+        AVBTrafficSourceApp();
     protected:
         /**
          * @brief Initialization of the module. Sends activator message
@@ -58,6 +57,8 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed
         virtual void handleMessage(cMessage *msg);
 
         void sendAVBFrame();
+
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
 };
 
 } /* namespace CoRE4INET */

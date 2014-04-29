@@ -15,33 +15,42 @@
 #include "PCFIncoming.h"
 #include "PCFrame_m.h"
 
-namespace CoRE4INET{
+namespace CoRE4INET {
 
 Define_Module(PCFIncoming);
 
-PCFIncoming::PCFIncoming(){}
-
-void PCFIncoming::initialize(){
-    pcfType=(PCFType)par("pcfType").longValue();
+PCFIncoming::PCFIncoming()
+{
 }
 
-void PCFIncoming::handleMessage(cMessage *msg){
-    if(msg->arrivedOn("in")){
+void PCFIncoming::initialize()
+{
+    pcfType = (PCFType) par("pcfType").longValue();
+}
+
+void PCFIncoming::handleMessage(cMessage *msg)
+{
+    if (msg->arrivedOn("in"))
+    {
         PCFrame *frame = dynamic_cast<PCFrame *>(msg);
         recordPacketReceived(frame);
 
-        if(frame->getType() != (uint8_t)pcfType){
-            ev<<"FRAME DROPPED, wrong type:"<<(int)frame->getType()<<" should be "<<pcfType<<endl;
+        if (frame->getType() != (uint8_t) pcfType)
+        {
+            EV_ERROR << "FRAME DROPPED, wrong type:" << (int) frame->getType() << " should be " << pcfType << endl;
             emit(droppedSignal, frame);
             delete frame;
-        }else{
-            sendDelayed(frame,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
+        }
+        else
+        {
+            sendDelayed(frame, SimTime(getParentModule()->par("hardware_delay").doubleValue()), "out");
         }
     }
 }
 
-void PCFIncoming::handleParameterChange(__attribute((unused)) const char* parname){
-    pcfType = (PCFType)par("pcfType").longValue();
+void PCFIncoming::handleParameterChange(__attribute((unused)) const char* parname)
+{
+    pcfType = (PCFType) par("pcfType").longValue();
 }
 
 }

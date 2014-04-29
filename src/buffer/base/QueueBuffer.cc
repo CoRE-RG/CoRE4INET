@@ -40,37 +40,39 @@ void QueueBuffer::initializeStatistics()
 void QueueBuffer::enqueue(EtherFrame *newFrame)
 {
     int size = par("size").longValue();
-    if(size>=0 && frames.length()>=size){
+    if (size >= 0 && frames.length() >= size)
+    {
         emit(droppedSignal, newFrame);
-        if(ev.isGUI()){
+        if (ev.isGUI())
+        {
             bubble("buffer overflow - dropping frame");
             getDisplayString().setTagArg("i2", 0, "status/excl3");
             getDisplayString().setTagArg("tt", 0, "WARNING: buffer overflow");
             getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
             getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: buffer overflow");
         }
-        if(par("drop_new").boolValue())
+        if (par("drop_new").boolValue())
         {
             delete newFrame;
             return;
         }
         else
         {
-            EtherFrame *oldFrame = (EtherFrame *)frames.pop();
+            EtherFrame *oldFrame = (EtherFrame *) frames.pop();
             delete oldFrame;
         }
     }
     frames.insert(newFrame);
-    setFilled((unsigned int)frames.length());
-    emit(queueLengthSignal, (unsigned int)frames.length());
+    setFilled((unsigned int) frames.length());
+    emit(queueLengthSignal, (unsigned int) frames.length());
 }
 
 EtherFrame * QueueBuffer::dequeue()
 {
     if (frames.length() > 0)
     {
-        setFilled((unsigned int)(frames.length() - 1));
-        emit(queueLengthSignal, (unsigned int)(frames.length() - 1));
+        setFilled((unsigned int) (frames.length() - 1));
+        emit(queueLengthSignal, (unsigned int) (frames.length() - 1));
         return (EtherFrame*) frames.pop();
     }
     else
@@ -79,17 +81,24 @@ EtherFrame * QueueBuffer::dequeue()
 
 void QueueBuffer::setFilled(unsigned int fillLevel)
 {
-    if(ev.isGUI()){
-        switch(fillLevel){
-            case 0: getDisplayString().setTagArg("i", 0, "buffer/empty");
-                    break;
-            case 1: getDisplayString().setTagArg("i", 0, "buffer/buffer1");
-                    break;
-            case 2: getDisplayString().setTagArg("i", 0, "buffer/buffer2");
-                    break;
-            case 3: getDisplayString().setTagArg("i", 0, "buffer/buffer3");
-                    break;
-            default:getDisplayString().setTagArg("i", 0, "buffer/buffer3plus");
+    if (ev.isGUI())
+    {
+        switch (fillLevel)
+        {
+            case 0:
+                getDisplayString().setTagArg("i", 0, "buffer/empty");
+                break;
+            case 1:
+                getDisplayString().setTagArg("i", 0, "buffer/buffer1");
+                break;
+            case 2:
+                getDisplayString().setTagArg("i", 0, "buffer/buffer2");
+                break;
+            case 3:
+                getDisplayString().setTagArg("i", 0, "buffer/buffer3");
+                break;
+            default:
+                getDisplayString().setTagArg("i", 0, "buffer/buffer3plus");
         }
     }
 }

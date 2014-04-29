@@ -15,19 +15,21 @@
 
 package core4inet.nodes.ethernet.avb_AS6802;
 
-import core4inet.buffer.base.BGQueueBuffer;
-import core4inet.linklayer.SRPTrafficHandle;
-import core4inet.scheduler.ITTEScheduler;
-import core4inet.configuration.base.IConfigurationManager;
-import core4inet.linklayer.TTEAVBPHYPort;
-import core4inet.synchronisation.base.ISync;
-import core4inet.synchronisation.base.DummySync;
 import core4inet.applications.base.IApplication;
-import core4inet.incoming.avb.AVBIncoming;
 import core4inet.buffer.avb.AVBQueueBuffer;
-import inet.linklayer.ethernet.EtherLLC;
-import inet.applications.ethernet.EtherAppSrv;
+import core4inet.buffer.base.BGQueueBuffer;
+import core4inet.configuration.IConfigurationManager;
+import core4inet.incoming.avb.AVBIncoming;
+import core4inet.linklayer.beHandling.base.BGTrafficHandle;
+import core4inet.linklayer.port.TTEAVBPHYPort;
+import core4inet.scheduler.ITTEScheduler;
+import core4inet.synchronisation.base.ISync;
 import inet.applications.ethernet.EtherAppCli;
+import inet.applications.ethernet.EtherAppSrv;
+import core4inet.linklayer.ethernet.avb.SRPEtherLLC;
+import core4inet.services.avb.SRP.SRPTable;
+import core4inet.services.avb.SRP.SRProtocol;
+
 
 //
 // Module for a TTEAVBEthernet Host.
@@ -42,9 +44,10 @@ module TTEAVBEtherHost
         @display("bgb=894,314;i=device/device");
         @node;
         int numApps = default(0); //default(1) ? ListenerApp
+        int numBuffer = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
-
+        string configurationManagerType = default("");
     gates:
         inout ethg;
 
@@ -65,7 +68,7 @@ module TTEAVBEtherHost
                 @display("p=380,193");
         }
 
-        llc: EtherLLC {
+        llc: SRPEtherLLC {
             parameters:
                 @display("p=141,255");
             gates:
@@ -85,12 +88,12 @@ module TTEAVBEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
-            @display("p=186,169");
+            @display("p=208,169");
         }
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
@@ -98,7 +101,7 @@ module TTEAVBEtherHost
         }
 
         app[numApps]: <default("TTEAPITestApplication")> like IApplication {
-            @display("p=380,37");
+            @display("p=380,37,row,70");
         }
 
         bgIn: BGQueueBuffer {
@@ -109,16 +112,15 @@ module TTEAVBEtherHost
             @display("p=109,37");
         }
 
-        srpIn: BGQueueBuffer {
-            @display("p=235,37");
-        }
-
-        srpOut: BGQueueBuffer {
-            @display("p=235,99");
-        }
-
-        srpTrafficHandle: SRPTrafficHandle {
+        bgTrafficHandle: BGTrafficHandle {
             @display("p=60,99");
+        }
+        srpTable: SRPTable {
+            @display("p=141,99");
+        }
+
+        srpProtocol: SRProtocol {
+            @display("p=141,169");
         }
 
     connections:
@@ -132,14 +134,14 @@ module TTEAVBEtherHost
         srv.out --> llc.upperLayerIn[1];
         srv.in <-- llc.upperLayerOut[1];
 
-        srpTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
-        srpTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
-        srpTrafficHandle.out --> bgIn.in;
-        bgOut.out --> srpTrafficHandle.in;
-        srpTrafficHandle.SRPout --> srpIn.in;
-        srpTrafficHandle.SRPin <-- srpOut.out;
+        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
+        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
+        bgTrafficHandle.out --> bgIn.in;
+        bgOut.out --> bgTrafficHandle.in;
 
-        avbCTC.SRPout --> avbCTC.SRPin;
         avbCTC.AVBout[0] --> avbBuffer[0].in;
         avbBuffer[0].out --> phy[0].AVBin;
+
+        srpProtocol.out --> llc.srpIn;
+        srpProtocol.in <-- llc.srpOut;
 }

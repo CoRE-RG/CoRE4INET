@@ -30,7 +30,9 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class CTIncoming : public Incoming{};
+class CTIncoming : public Incoming
+{
+};
 
 }
 

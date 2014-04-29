@@ -30,15 +30,15 @@ namespace CoRE4INET {
  */
 class BaseConfigurationManager : public cSimpleModule
 {
-  protected:
-    /**
-     * @brief Is called in initialization phase. The module creates a message for self destruction
-     */
-    virtual void initialize();
-    /**
-     * @brief Destroys the module after reception of a message
-     */
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * @brief Is called in initialization phase. The module creates a message for self destruction
+         */
+        virtual void initialize();
+        /**
+         * @brief Destroys the module after reception of a message
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

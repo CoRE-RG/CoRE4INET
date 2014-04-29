@@ -17,7 +17,7 @@
 
 #include <cresultrecorder.h>
 
-namespace CoRE4INET{
+namespace CoRE4INET {
 
 /**
  * @brief BaseClass for floating interval vector recorders
@@ -37,7 +37,7 @@ namespace CoRE4INET{
  *
  * @author Till Steinbach
  */
-class FloatingIntervalVectorRecorder: public cNumericResultRecorder
+class FloatingIntervalVectorRecorder : public cNumericResultRecorder
 {
     protected:
         simtime_t interval;
@@ -69,7 +69,7 @@ class FloatingIntervalVectorRecorder: public cNumericResultRecorder
  *
  * @author Till Steinbach
  */
-class FloatingIntervalCountVectorRecorder: public FloatingIntervalVectorRecorder
+class FloatingIntervalCountVectorRecorder : public FloatingIntervalVectorRecorder
 {
     protected:
         virtual double calculate();
@@ -92,7 +92,7 @@ class FloatingIntervalCountVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * @author Till Steinbach
  */
-class FloatingIntervalSumVectorRecorder: public FloatingIntervalVectorRecorder
+class FloatingIntervalSumVectorRecorder : public FloatingIntervalVectorRecorder
 {
     protected:
         virtual double calculate();
@@ -115,7 +115,7 @@ class FloatingIntervalSumVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * @author Till Steinbach
  */
-class FloatingIntervalAvgVectorRecorder: public FloatingIntervalVectorRecorder
+class FloatingIntervalAvgVectorRecorder : public FloatingIntervalVectorRecorder
 {
     protected:
         virtual double calculate();
@@ -138,7 +138,7 @@ class FloatingIntervalAvgVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * @author Till Steinbach
  */
-class FloatingIntervalMinVectorRecorder: public FloatingIntervalVectorRecorder
+class FloatingIntervalMinVectorRecorder : public FloatingIntervalVectorRecorder
 {
     protected:
         virtual double calculate();
@@ -161,7 +161,7 @@ class FloatingIntervalMinVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * @author Till Steinbach
  */
-class FloatingIntervalMaxVectorRecorder: public FloatingIntervalVectorRecorder
+class FloatingIntervalMaxVectorRecorder : public FloatingIntervalVectorRecorder
 {
     protected:
         virtual double calculate();
@@ -184,7 +184,7 @@ class FloatingIntervalMaxVectorRecorder: public FloatingIntervalVectorRecorder
  *
  * @author Till Steinbach
  */
-class FloatingIntervalVarianceVectorRecorder: public FloatingIntervalVectorRecorder
+class FloatingIntervalVarianceVectorRecorder : public FloatingIntervalVectorRecorder
 {
     protected:
         virtual double calculate();

@@ -25,7 +25,6 @@
 #include <map>
 #include <list>
 
-
 namespace CoRE4INET {
 
 /**
@@ -33,7 +32,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-template <class IC>
+template<class IC>
 class BEInControl : public IC
 {
     protected:
@@ -50,7 +49,7 @@ class BEInControl : public IC
         virtual void handleMessage(cMessage *msg);
 };
 
-template <class IC>
+template<class IC>
 void BEInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
@@ -58,21 +57,26 @@ void BEInControl<IC>::handleMessage(cMessage *msg)
         EtherFrame *frame = (EtherFrame*) msg;
         this->recordPacketReceived(frame);
 
-        if(IC::isPromiscuous() || frame->getDest().isMulticast()){
+        if (IC::isPromiscuous() || frame->getDest().isMulticast())
+        {
             cSimpleModule::send(msg, "out");
         }
-        else{
+        else
+        {
             MACAddress address;
             address.setAddress(frame->getArrivalGate()->getPathStartGate()->getOwnerModule()->par("address"));
-            if(frame->getDest().equals(address)){
+            if (frame->getDest().equals(address))
+            {
                 cSimpleModule::send(msg, "out");
             }
-            else{
+            else
+            {
                 IC::handleMessage(msg);
             }
         }
     }
-    else{
+    else
+    {
         IC::handleMessage(msg);
     }
 }

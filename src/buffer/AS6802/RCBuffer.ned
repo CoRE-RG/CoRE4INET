@@ -43,7 +43,7 @@ simple RCBuffer extends CTBuffer like ITimed
         int bag @unit(tick) = default(0tick);
         // Not used
         int jitter @unit(tick) = default(0tick);
-        
+
         string oscillator = default("oscillator");
         string timer = default("timer");
     gates:

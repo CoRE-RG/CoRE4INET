@@ -20,38 +20,42 @@
 
 namespace CoRE4INET {
 
-Define_Module( RCTrafficSourceApp);
+Define_Module(RCTrafficSourceApp);
 
 void RCTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
 
-    if(par("enabled").boolValue()){
+    if (par("enabled").boolValue())
+    {
         Timer *timer = dynamic_cast<Timer*>(findModuleWhereverInNode("timer", getParentModule()));
         ASSERT(timer);
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        tick = findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue();
-        event->setTimer((uint64_t)(par("interval").doubleValue()/tick));
+        tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
+        event->setTimer((uint64_t) (par("interval").doubleValue() / tick));
         event->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(event);
     }
 }
 
-void RCTrafficSourceApp::handleMessage(cMessage *msg){
+void RCTrafficSourceApp::handleMessage(cMessage *msg)
+{
 
-    if(msg->arrivedOn("schedulerIn")){
+    CTApplicationBase::handleMessage(msg);
+    if (msg->arrivedOn("schedulerIn"))
+    {
         sendMessage();
 
         Timer *timer = dynamic_cast<Timer*>(msg->getSenderModule());
         ASSERT(timer);
-        SchedulerTimerEvent *event = (SchedulerTimerEvent *)msg;
-        event->setTimer((uint64_t)(par("interval").doubleValue()/tick));
+        SchedulerTimerEvent *event = (SchedulerTimerEvent *) msg;
+        event->setTimer((uint64_t) (par("interval").doubleValue() / tick));
         timer->registerEvent(event);
     }
-    else{
+    else
+    {
         delete msg;
     }
 }
-
 
 } //namespace

@@ -32,7 +32,7 @@ namespace CoRE4INET {
  */
 class DummySync : public SyncBase
 {
-    using Scheduled::initialize;
+        using Scheduled::initialize;
     private:
     protected:
         /**

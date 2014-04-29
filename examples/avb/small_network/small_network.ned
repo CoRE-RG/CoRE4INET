@@ -15,6 +15,8 @@
 
 package core4inet.examples.avb.small_network;
 
+import inet.nodes.ethernet.Eth100M;
+
 //
 // Small sample network with three hosts and one switch that shows how to 
 // configure the TTEthernet Model. Configuration in omnetpp.ini
@@ -24,18 +26,6 @@ package core4inet.examples.avb.small_network;
 network small_network
 {
     @display("bgb=,,white");
-    types:
-        //
-        // All links are configured with 100MBit per second and variable delay
-        //
-        channel cable extends ned.DatarateChannel
-        {
-            datarate = 100Mbps;
-            //bit error rate (probability (0.0-1.0) per bit)  
-            ber = 0;
-            //packet error rate (probability (0.0-1.0) per packet)  
-            per = 0;
-        }
     submodules:
         node1: Node1 {
             @display("p=39,70");
@@ -59,7 +49,7 @@ network small_network
         //
         // The example uses a simple star topology
         //
-        node1.ethg <--> cable {  delay = 200ns; } <--> switch1.ethg[0];
-        node2.ethg <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
-        node3.ethg <--> cable {  delay = 50ns; } <--> switch1.ethg[2];
+        node1.ethg <--> Eth100M {  length = 20m; } <--> switch1.ethg[0];
+        node2.ethg <--> Eth100M {  length = 10m; } <--> switch1.ethg[1];
+        node3.ethg <--> Eth100M {  length = 5m; } <--> switch1.ethg[2];
 }

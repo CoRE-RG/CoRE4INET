@@ -22,57 +22,77 @@
 
 namespace CoRE4INET {
 
-Define_Module( TTTrafficSourceApp);
+Define_Module(TTTrafficSourceApp);
 
-TTTrafficSourceApp::TTTrafficSourceApp():moduloCycle(0){
+TTTrafficSourceApp::TTTrafficSourceApp() :
+        moduloCycle(0)
+{
 }
 
 void TTTrafficSourceApp::initialize()
 {
     TrafficSourceAppBase::initialize();
 
-    if(par("enabled").boolValue()){
+    if (par("enabled").boolValue())
+    {
         Scheduled::initialize();
 
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-        event->setAction_time((uint32_t)(par("action_time").doubleValue()/findModuleWhereverInNode("oscillator",getParentModule())->par("tick").doubleValue()));
+        event->setAction_time(
+                (uint32_t) (par("action_time").doubleValue()
+                        / findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue()));
         event->setDestinationGate(gate("schedulerIn"));
+
+        if (event->getAction_time() >= (uint32_t) period->par("cycle_ticks").longValue())
+        {
+            throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(),
+                    period->par("cycle_ticks").longValue());
+        }
+
         period->registerEvent(event);
     }
     synchronized = false;
-    ASSERT2(findContainingNode(this)!=NULL, "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
+    ASSERT2(findContainingNode(this)!=NULL,
+            "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
     findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
 }
 
-void TTTrafficSourceApp::handleMessage(cMessage *msg){
+void TTTrafficSourceApp::handleMessage(cMessage *msg)
+{
 
-    if(msg->arrivedOn("schedulerIn")){
+    if (msg->arrivedOn("schedulerIn"))
+    {
         moduloCycle++;
-        if(synchronized && moduloCycle==(unsigned int)par("modulo").longValue()){
+        if (synchronized && moduloCycle == (unsigned int) par("modulo").longValue())
+        {
             sendMessage();
-            moduloCycle=0;
+            moduloCycle = 0;
         }
 
-        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
+        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *) msg;
         event->setNext_cycle(true);
         period->registerEvent(event);
     }
-    else{
+    else
+    {
         delete msg;
     }
 }
 
 void TTTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 {
-    Enter_Method_Silent();
+    Enter_Method_Silent
+    ();
     if (dynamic_cast<SyncNotification *>(obj))
     {
-        SyncNotification *notification = (SyncNotification *)obj;
-        if(notification->getKind()==SYNC){
-            synchronized=true;
+        SyncNotification *notification = (SyncNotification *) obj;
+        if (notification->getKind() == SYNC)
+        {
+            synchronized = true;
         }
-        else{
-            synchronized=false;
+        else
+        {
+            synchronized = false;
         }
     }
 }

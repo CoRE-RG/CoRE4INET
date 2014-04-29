@@ -25,21 +25,31 @@
 #include <SchedulerEvent.h>
 #include <SchedulerMessageEvents_m.h>
 
-
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * Timer Module:  Implements a timer with an attached oscillator with adjustable precision that may be synchronized by a
+ * synchronization module
  *
  * @author Till Steinbach
  */
 class Timer : public cSimpleModule
 {
     private:
+        /**
+         * @brief Ticks since simulation start
+         */
         uint64_t ticks;
-        Oscillator *oscillator;
-        cMessage *selfMessage;
 
+        /**
+         * @brief The attached oscillator driving the clock
+         */
+        Oscillator *oscillator;
+
+        /**
+         * @brief Selfmessage for the simulation core to trigger scheduling of an event
+         */
+        cMessage *selfMessage;
 
         /**
          * @brief Simulation time when the timer was last recalculated
@@ -63,53 +73,92 @@ class Timer : public cSimpleModule
          * Used to reregister after clock tick changes.
          */
         std::map<uint64_t, std::list<SchedulerTimerEvent*> > registredTimerEvents;
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-  private:
-    virtual void reschedule();
-    virtual uint32_t nextAction();
-    virtual void sendOutEvents();
-  public:
-    Timer();
-    ~Timer();
-    virtual void recalculate();
+    protected:
+        /**
+         * Initialization of the module. Sets oscillator and registeres signals
+         */
+        virtual void initialize();
+        /**
+         * Incoming self message triggers sendOutEvents()
+         */
+        virtual void handleMessage(cMessage *msg);
+    private:
+        /**
+         * @brief Method must be called after a clock drift change in the oscillator to reschedule messages with the new
+         * drift
+         */
+        virtual void reschedule();
+        /**
+         * Calculates the point in ticks when the next action must be scheduled
+         * @return
+         */
+        virtual uint32_t nextAction();
+        /**
+         * Trigger the sending of all events that are due at this moment
+         */
+        virtual void sendOutEvents();
+    public:
+        /**
+         * Constructor initializes members
+         */
+        Timer();
 
-    /**
-     * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
-     *
-     * @param event Pointer to the Event to be scheduled.
-     * The scheduler will send the event according to the event type
-     * @return returns registered event time
-     *
-     * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
-     * SchedulerTimerEvent
-     */
-    virtual uint64_t registerEvent(SchedulerActionTimeEvent *event, Period *period);
+        /**
+         * Destructor cleans up
+         */
+        ~Timer();
+        /**
+         * @brief When called, the ticks since simulation start are recalculated using current simulation time
+         */
+        virtual void recalculate();
 
-    virtual uint64_t registerEvent(SchedulerTimerEvent *event);
+        /**
+         * Register a new action time event in the scheduler. May fail if ActionTimeEvent is out of schedule
+         *
+         * @param event Pointer to the Event to be scheduled.
+         * @param period the period in which the event should be scheduled
+         * @return returns registered event time
+         *
+         * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
+         * SchedulerTimerEvent
+         */
+        virtual uint64_t registerEvent(SchedulerActionTimeEvent *event, Period *period);
 
-    /**
-     * @brief Returns the absolute number of ticks
-     *
-     * @return Number of ticks since simulation start
-     */
-    virtual uint64_t getTotalTicks();
+        /**
+         * Register a new timer event in the scheduler.
+         *
+         * @param event Pointer to the Event to be scheduled.
+         * @return returns registered event time
+         *
+         * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
+         * SchedulerTimerEvent
+         */
+        virtual uint64_t registerEvent(SchedulerTimerEvent *event);
 
-    virtual Oscillator* getOscillator();
+        /**
+         * @brief Returns the absolute number of ticks
+         *
+         * @return Number of ticks since simulation start
+         */
+        virtual uint64_t getTotalTicks();
 
-    /**
-     * @brief Corrects the clock by the number of ticks
-     *
-     * @param ticks number of ticks the clock must be corrected
-     */
-    virtual void clockCorrection(int32_t ticks);
+        /**
+         * @brief Returns a pointer to the attached oscillator
+         */
+        virtual Oscillator* getOscillator();
 
-  protected:
-      /**
-       * Signal that is emitted every time the clock is corrected
-       */
-      static simsignal_t clockCorrectionSignal;
+        /**
+         * @brief Corrects the clock by the number of ticks
+         *
+         * @param ticks number of ticks the clock must be corrected
+         */
+        virtual void clockCorrection(int32_t ticks);
+
+    protected:
+        /**
+         * Signal that is emitted every time the clock is corrected
+         */
+        static simsignal_t clockCorrectionSignal;
 };
 
 } //namespace

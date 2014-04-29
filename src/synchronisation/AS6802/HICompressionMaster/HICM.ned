@@ -30,6 +30,8 @@ simple HICM like ISync
         
         //Period of Scheduler this sync module is assigned to
         string period = default("");
+        string oscillator = default("oscillator");
+        string timer = default("timer");
         
         //Each CM should have a unique ID
         int id=default(0);

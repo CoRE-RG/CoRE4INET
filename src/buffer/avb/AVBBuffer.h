@@ -38,7 +38,7 @@ namespace CoRE4INET {
  */
 class AVBBuffer : public virtual Buffer, public Timed
 {
-    using Timed::initialize;
+        using Timed::initialize;
     public:
         AVBBuffer();
         virtual ~AVBBuffer();
@@ -90,15 +90,12 @@ class AVBBuffer : public virtual Buffer, public Timed
     protected:
         int credit;
         int maxCredit;
-        unsigned int AVBReservation;
         bool inTransmission;
         int msgCnt;
         SimTime newTime;
         SimTime oldTime;
         double Wduration;
         double tick;
-
-        AVBIncoming * avbCTC;
 
         static simsignal_t creditSignal;
 

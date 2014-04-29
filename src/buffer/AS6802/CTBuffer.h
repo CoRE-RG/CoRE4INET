@@ -22,7 +22,6 @@
 
 namespace CoRE4INET {
 
-
 /**
  * @brief Base class for all critical traffic buffer classes.
  *
@@ -71,7 +70,6 @@ class CTBuffer : public virtual Buffer
          * @brief caches ct_id parameter
          */
         uint16_t ctId;
-
 
     protected:
         /**

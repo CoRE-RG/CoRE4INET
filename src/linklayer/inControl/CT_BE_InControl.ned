@@ -33,11 +33,11 @@ simple CT_BE_InControl extends BE_InControl
         //Statistic of the amount of packets that were dropped due to no configured buffer/ctc
         @signal[ctDropped](type=EtherFrame);
         @statistic[ctDropped](title="Unconfigured CT dropped"; source=droppedPk; record=count; interpolationmode=none);
-        
+
         @signal[rxPk](type=EtherFrame);
         //Bandwidthstatistic
         @statistic[intervalBandwidth](title="Bandwidth per Second"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: interval=50ms; for floatingIntervalRecorders
-            
+
 		//Critical traffic marker of the buffer
         int ct_marker;
         //Critical traffic mask of the buffer

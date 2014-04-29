@@ -32,7 +32,6 @@
 #include <map>
 #include <list>
 
-
 namespace CoRE4INET {
 
 /**
@@ -45,7 +44,7 @@ namespace CoRE4INET {
  * @author Philipp Meyer
  *
  */
-template <class IC>
+template<class IC>
 class AVBClassAInControl : public IC
 {
     protected:
@@ -69,7 +68,7 @@ class AVBClassAInControl : public IC
         virtual bool isAVB(EtherFrame *frame);
 };
 
-template <class IC>
+template<class IC>
 void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
@@ -77,38 +76,42 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         EtherFrame *frame = (EtherFrame*) msg;
 
         //Is AVB Frame?
-        if(isAVB(frame))
+        if (isAVB(frame))
         {
-            cSimpleModule::sendDirect(frame, cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
-        }else{
-            std::string msgClass = frame->getEncapsulatedPacket()->getClassName();
-            std::string msgName = frame->getEncapsulatedPacket()->getName();
-            if(dynamic_cast<SRPFrame*>(frame))
+            cSimpleModule::sendDirect(frame,
+                    cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
+        }
+        else
+        {
+            //TODO Minor: REMOVE SRP is Handled in BE-Part of Switch only!
+            /*if (SRPFrame *srpFrame = dynamic_cast<SRPFrame*>(frame->getEncapsulatedPacket()))
             {
-                if(msgName.compare("Talker Advertise"))
+                if (dynamic_cast<TalkerAdvertise*>(srpFrame))
                 {
                     frame->setDest(MACAddress::BROADCAST_ADDRESS);
 
                 }
-                SRPFrame *srpFrame = ((SRPFrame*)frame->getEncapsulatedPacket());
                 srpFrame->setPortIndex(cModule::getParentModule()->getIndex());
-            }
+            }*/
 
             IC::handleMessage(msg);
         }
     }
-    else{
+    else
+    {
         IC::handleMessage(msg);
     }
 }
 
-template <class IC>
+template<class IC>
 bool AVBClassAInControl<IC>::isAVB(EtherFrame *frame)
 {
-    if(dynamic_cast<AVBFrame*>(frame)){
+    if (dynamic_cast<AVBFrame*>(frame))
+    {
         return true;
     }
-    else{
+    else
+    {
         return false;
     }
 }

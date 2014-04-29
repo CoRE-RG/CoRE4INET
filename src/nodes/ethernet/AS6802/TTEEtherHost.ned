@@ -16,12 +16,12 @@ package core4inet.nodes.ethernet.AS6802;
 
 import core4inet.buffer.base.BGQueueBuffer;
 import core4inet.utilities.modules.CheckedBuffer;
-import core4inet.linklayer.BGTrafficHandle;
+import core4inet.linklayer.beHandling.base.BGTrafficHandle;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.scheduler.TTEScheduler;
 import core4inet.scheduler.Scheduler;
-import core4inet.configuration.base.IConfigurationManager;
-import core4inet.linklayer.TTEPHYPort;
+import core4inet.configuration.IConfigurationManager;
+import core4inet.linklayer.port.TTEPHYPort;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;
 import core4inet.applications.base.IApplication;
@@ -53,9 +53,10 @@ module TTEEtherHost
         int numBuffer = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
+        string configurationManagerType = default("");
     gates:
         // Physical port of the host
-        inout ethg @labels(EtherFrame-conn);
+        inout ethg @loose @labels(EtherFrame-conn);
 
     submodules:
         // Physical port of the host
@@ -82,7 +83,7 @@ module TTEEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler

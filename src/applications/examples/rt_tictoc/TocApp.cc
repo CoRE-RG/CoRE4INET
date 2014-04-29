@@ -32,32 +32,34 @@ void TocApp::handleMessage(cMessage *msg)
 {
     ApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("TTin")){
+    if (msg->arrivedOn("TTin"))
+    {
         TTFrame *ttframe = dynamic_cast<TTFrame*>(msg);
-        Tic *tic=dynamic_cast<Tic*>(ttframe->decapsulate());
+        Tic *tic = dynamic_cast<Tic*>(ttframe->decapsulate());
         delete msg;
         bubble(tic->getRequest());
-        par("counter").setLongValue((long)tic->getCount());
+        par("counter").setLongValue((long) tic->getCount());
 
         Toc *toc = new Toc();
         toc->setRoundtrip_start(tic->getRoundtrip_start());
-        toc->setCount(tic->getCount()+1);
+        toc->setCount(tic->getCount() + 1);
         delete tic;
 
         CTFrame *frame = new RCFrame("Toc");
-        frame->setCtID((uint16_t)par("ct_id").longValue());
+        frame->setCtID((uint16_t) par("ct_id").longValue());
         frame->encapsulate(toc);
 
-        EV << "Answering Tic Message with Toc Message\n";
+        EV_DETAIL << "Answering Tic Message with Toc Message\n";
         std::list<Buffer*> buffer = buffers[frame->getCtID()];
-        for(std::list<Buffer*>::iterator buf = buffer.begin();
-                               buf!=buffer.end();buf++){
+        for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+        {
             Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(frame->dup(), in->gate("in"));
         }
         delete frame;
     }
-    else{
+    else
+    {
         delete msg;
     }
 }

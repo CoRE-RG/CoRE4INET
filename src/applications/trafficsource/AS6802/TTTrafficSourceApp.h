@@ -17,7 +17,8 @@
 #define __CORE4INET_TTTRAFFICSOURCEAPP_H_
 
 #include <omnetpp.h>
-#include "TrafficSourceAppBase.h"
+#include "CTTrafficSourceAppBase.h"
+#include "CTApplicationBase.h"
 
 #include <Scheduled.h>
 
@@ -32,7 +33,10 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TTTrafficSourceApp : public TrafficSourceAppBase, public Scheduled, public cListener
+class TTTrafficSourceApp : public CTTrafficSourceAppBase,
+        public virtual CTApplicationBase,
+        public Scheduled,
+        public cListener
 {
     private:
         /**
@@ -67,6 +71,8 @@ class TTTrafficSourceApp : public TrafficSourceAppBase, public Scheduled, public
 
     public:
         TTTrafficSourceApp();
+    public:
+        using TrafficSourceAppBase::handleParameterChange;
 };
 
 } //namespace

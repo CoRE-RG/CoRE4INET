@@ -14,7 +14,7 @@
 // 
 package core4inet.synchronisation.base;
 
-import core4inet.linklayer.IPort;
+import core4inet.linklayer.port.IPort;
 import core4inet.utilities.classes.IScheduled;
 
 //
@@ -27,7 +27,7 @@ moduleinterface ISync extends IPort, IScheduled
 {
     parameters:
         @display("i=block/timer");
-        
+
         //Signal emited when sync state changes (e.g. SYNC, ASYNC, ...)
         @signal[syncStatus](type=CoRE4INET::SyncNotification);
     gates:

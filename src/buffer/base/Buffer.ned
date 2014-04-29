@@ -15,7 +15,7 @@
 package core4inet.buffer.base;
 
 //
-// Abstract base Buffer used for the various Buffers of TTEthernet.
+// Abstract base Buffer used for the various Buffers of (real-time) Ethernet.
 // Since this is an abstract module please do not instantiate it
 //
 // @warning Currently the out gate is not used. Instead the buffer sends its
@@ -31,13 +31,13 @@ simple Buffer like IBuffer
 {
     parameters:
         @display("i=block/buffer");
-        
+
          //Statistic of the amount of packets that were received by the buffer
         @signal[rxPk](type=EtherFrame);
         @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
         //End-to-end latency
-    	@statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
-        
+        @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+
         //Statistic of the amount of packets that were sent by the buffer
         @signal[txPk](type=EtherFrame);
         @statistic[txPk](title="TX Packets"; source=txPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
@@ -45,6 +45,8 @@ simple Buffer like IBuffer
 
         //Comma seperated list of gates where the frames of the buffer are delivered
         string destination_gates = default("");
+        
+        int maxMessageSize @unit(B) = default(1518B);
     gates:
         //The buffers Input
         input in @loose @labels(EtherFrame);

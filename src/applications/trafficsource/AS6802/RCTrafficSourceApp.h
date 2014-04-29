@@ -17,7 +17,8 @@
 #define __CORE4INET_RCTRAFFICSOURCEAPP_H_
 
 #include <omnetpp.h>
-#include "TrafficSourceAppBase.h"
+#include "CTTrafficSourceAppBase.h"
+#include "CTApplicationBase.h"
 
 namespace CoRE4INET {
 
@@ -30,7 +31,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class RCTrafficSourceApp : public TrafficSourceAppBase
+class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase, public virtual CTApplicationBase
 {
     private:
         double tick;
@@ -43,6 +44,8 @@ class RCTrafficSourceApp : public TrafficSourceAppBase
          * @brief Handles message generation
          */
         virtual void handleMessage(cMessage *msg);
+    public:
+        using TrafficSourceAppBase::handleParameterChange;
 };
 
 } //namespace

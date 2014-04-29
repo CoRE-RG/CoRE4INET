@@ -30,13 +30,12 @@ simple TrafficSourceAppBase extends ApplicationBase
 {
     parameters:
         @display("i=block/source");
-        
+
         // Trafficsource enabled or disabled
         bool enabled = default(true);
-        
+        // Start time
+        double start_time @unit(s) = default(0s);
+
         //Size of the payload of the message (size of encapsulated cPacket) that is being generated
         int payload @unit(Byte) = default(46Byte);
-        
-        //Critical traffic identifier of the message that is being generated (-1) means don't set ID
-        int ct_id = default(-1);
 }

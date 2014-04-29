@@ -7,3 +7,4 @@
 *.tkenvrc
 *.tkenvlog
 /doc
+/FeatureBuildTest

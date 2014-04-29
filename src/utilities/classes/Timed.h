@@ -21,36 +21,37 @@
 
 namespace CoRE4INET {
 
-
 /**
- * @brief TODO
+ * @brief Base class for a module that uses a scheduler to set timers
  *
  * @author Till Steinbach
  */
-class Timed: public virtual cSimpleModule
+class Timed : public virtual cSimpleModule
 {
     protected:
         /**
-         * TODO
+         * The oscillator module related to the this module
          */
         Oscillator *oscillator;
+
         /**
-         * TODO
+         * The timer module related to the this module
          */
         Timer *timer;
 
     public:
         /**
-         * @brief Initialization of the module
+         * @brief Initialization of the timer and oscillator
          */
         void initialize();
+
         /**
-         * TODO
+         * returns pointer to the configured timer
          */
         Timer* getTimer();
 
         /**
-         * TODO
+         * returns pointer to the configured oscillator
          */
         Oscillator* getOscillator();
 };

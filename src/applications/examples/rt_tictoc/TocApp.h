@@ -17,7 +17,7 @@
 #define __CORE4INET_TOCAPP_H_
 
 #include <omnetpp.h>
-#include "ApplicationBase.h"
+#include "base/ApplicationBase.h"
 
 namespace CoRE4INET {
 
@@ -32,15 +32,15 @@ namespace CoRE4INET {
  */
 class TocApp : public ApplicationBase
 {
-  protected:
-    /**
-     * @brief Initialization of the module. Sends activator message
-     */
-    virtual void initialize();
-    /**
-     * @brief Handles message generation and reception
-     */
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize();
+        /**
+         * @brief Handles message generation and reception
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 }

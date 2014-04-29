@@ -15,7 +15,7 @@
 
 package core4inet.applications.base;
 
-import core4inet.linklayer.IPort;
+import core4inet.linklayer.port.IPort;
 
 //
 // Interface to be implemented by application models.
@@ -25,7 +25,7 @@ import core4inet.linklayer.IPort;
 // @see TTEAPIApplicationBase
 //
 // @author Till Steinbach
-moduleinterface IApplication extends IPort
+moduleinterface IApplication
 {
     parameters:
         @display("i=block/app");

@@ -20,40 +20,46 @@ using namespace CoRE4INET;
 
 Register_ResultFilter("innerMessage", InnerMessageFilter);
 
-void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
+void InnerMessageFilter::receiveSignal(__attribute((unused))  cResultFilter *prev, simtime_t_cref t, cObject *object)
 {
     if (dynamic_cast<cPacket *>(object))
     {
-        cPacket *innerPacket = (cPacket *)object;
+        cPacket *innerPacket = (cPacket *) object;
         cPacket *tmpPacket;
-        while((tmpPacket = innerPacket->decapsulate()) != NULL){
+        while ((tmpPacket = innerPacket->decapsulate()) != NULL)
+        {
             innerPacket = tmpPacket;
         }
         fire(this, t, innerPacket);
-        delete(innerPacket);
+        delete (innerPacket);
     }
 }
 
-FloatingIntervalFilter::FloatingIntervalFilter(){
+FloatingIntervalFilter::FloatingIntervalFilter()
+{
     interval = SimTime(1);
 }
 
-bool FloatingIntervalFilter::process(simtime_t &t, double &value){
+bool FloatingIntervalFilter::process(simtime_t &t, double &value)
+{
     //first add new value to interval, give hint for faster execution
-    if(inInterval.size()>0){
+    if (inInterval.size() > 0)
+    {
         inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
     }
-    else{
-        inInterval[t]=value;
+    else
+    {
+        inInterval[t] = value;
     }
     //erase old values
-    inInterval.erase(inInterval.begin(), inInterval.lower_bound((t-interval)));
+    inInterval.erase(inInterval.begin(), inInterval.lower_bound((t - interval)));
     return true;
 }
 
 Register_ResultFilter("floatingIntervalCount", FloatingIntervalCountFilter);
 
-bool FloatingIntervalCountFilter::process(simtime_t &t, double &value){
+bool FloatingIntervalCountFilter::process(simtime_t &t, double &value)
+{
     FloatingIntervalFilter::process(t, value);
     //return size
     value = inInterval.size();
@@ -62,12 +68,14 @@ bool FloatingIntervalCountFilter::process(simtime_t &t, double &value){
 
 Register_ResultFilter("floatingIntervalSum", FloatingIntervalSumFilter);
 
-bool FloatingIntervalSumFilter::process(simtime_t &t, double &value){
+bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
+{
     FloatingIntervalFilter::process(t, value);
     //build sum
     double newValue = 0;
-    for(std::map<simtime_t, double>::iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2){
-        newValue+=(*it2).second;
+    for (std::map<simtime_t, double>::iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)
+    {
+        newValue += (*it2).second;
     }
     value = newValue;
     return true;
@@ -75,12 +83,14 @@ bool FloatingIntervalSumFilter::process(simtime_t &t, double &value){
 
 Register_ResultFilter("floatingIntervalAvg", FloatingIntervalAvgFilter);
 
-bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value){
+bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value)
+{
     FloatingIntervalFilter::process(t, value);
     //build average
     double newValue = 0;
-    for(std::map<simtime_t, double>::iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2){
-        newValue+=(*it2).second;
+    for (std::map<simtime_t, double>::iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)
+    {
+        newValue += (*it2).second;
     }
     value = (newValue / inInterval.size());
     return true;

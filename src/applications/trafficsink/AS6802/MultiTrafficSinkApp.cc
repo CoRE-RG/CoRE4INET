@@ -22,39 +22,43 @@ namespace CoRE4INET {
 
 Define_Module(MultiTrafficSinkApp);
 
-std::map<uint16_t,simsignal_t> MultiTrafficSinkApp::rxPkSignal;
+std::map<uint16_t, simsignal_t> MultiTrafficSinkApp::rxPkSignal;
 
 void MultiTrafficSinkApp::handleMessage(cMessage *msg)
 {
     ApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
+    if (msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
     {
         CTFrame *ctframe = dynamic_cast<CTFrame*>(msg);
-        if(ctframe){
+        if (ctframe)
+        {
             uint16_t ctID = ctframe->getCtID();
             std::map<uint16_t, simsignal_t>::iterator entry = rxPkSignal.find(ctID);
             simsignal_t signal;
-            if(entry != rxPkSignal.end()){
+            if (entry != rxPkSignal.end())
+            {
                 signal = entry->second;
             }
-            else{
+            else
+            {
                 char strBuf[16];
-                snprintf(strBuf,32,"rxPk:%d", ctID);
+                snprintf(strBuf, 32, "rxPk:%d", ctID);
                 signal = registerSignal(strBuf);
-                cProperty *statisticTemplate = getProperties()->get("statisticTemplate","rxPk");
+                cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "rxPk");
                 ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
-                statisticTemplate = getProperties()->get("statisticTemplate","latency");
+                statisticTemplate = getProperties()->get("statisticTemplate", "latency");
                 cResultFilter *messageAgeFilter = cResultFilterDescriptor::get("messageAge")->create();
                 subscribe(signal, messageAgeFilter);
                 //ev.addResultRecorders(this, messageAgeFilter, strBuf, statisticTemplate);
 
-                rxPkSignal[ctID]=signal;
+                rxPkSignal[ctID] = signal;
             }
             emit(signal, ctframe);
         }
-        else{
-            ev<<"only ct frames will collect statistics"<<std::endl;
+        else
+        {
+            EV_ERROR << "only ct frames will collect statistics" << std::endl;
         }
     }
     delete msg;

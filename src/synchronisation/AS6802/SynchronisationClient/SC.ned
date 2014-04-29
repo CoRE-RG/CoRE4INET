@@ -28,6 +28,8 @@ simple SC like ISync
 
 	//Period of Scheduler this sync module is assigned to
     string period = default("");
+    string oscillator = default("oscillator");
+    string timer = default("timer");
 	
 	//Synchronization domain:All devices configured to belong to the same synchronization domain may eventually
     //synchronize to each other. Devices configured to different synchronization domains will never synchronize to each other.

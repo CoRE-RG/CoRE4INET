@@ -18,10 +18,10 @@ simple TT_AVBClassA_PCF_RC_BE_Shaper extends TT_PCF_RC_BE_Shaper
         @signal[avbQueueLength](type=unsigned long);
         //Statistic of the queue length of time-triggered frames
         @statistic[avbQueueLength](title="AVB-Queue Length"; record=vector; interpolationmode=sample-hold);
-        
-        // Bandwith of the TT bandwith on this port
-        int TTEBandwith = default(0);
-    gates:        
+
+        // Bandwidth of the TT bandwith on this port
+        int AVBHigherPriorityBandwidth @unit(bps) = default(0bps);
+    gates:
         //Input for AVB class A frames from the buffers
         input AVBin @labels(TTFrame);
 }

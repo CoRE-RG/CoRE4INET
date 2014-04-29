@@ -1,10 +1,8 @@
 cplusplus {{
-    #include "CTFrame.h"
+    #include "EtherFrame_m.h"
 }}
 
-class CoRE4INET::CTFrame;
-
-packet CTFrame;
+class ::EtherFrame;
 
 namespace CoRE4INET;
 //
@@ -13,7 +11,7 @@ namespace CoRE4INET;
 // @see CTFrame
 //
 // @author Philipp Meyer 
-packet AVBFrame extends CTFrame
+packet AVBFrame extends EtherFrame
 {    
     // ID of the AVB Stream
     //

@@ -16,7 +16,6 @@
 package core4inet.applications.trafficsource.AS6802;
 
 import core4inet.utilities.classes.IScheduled;
-import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 
 //
 // Traffic source application used for time-triggered traffic generators.
@@ -24,23 +23,23 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 // @see RCTrafficSourceApp
 //
 // @author Till Steinbach
-simple TTTrafficSourceApp extends TrafficSourceAppBase like IScheduled
+simple TTTrafficSourceApp extends CTTrafficSourceAppBase like IScheduled
 {
     parameters:
         @class(TTTrafficSourceApp);
         @display("i=,red");
-        
+
         //Time in the cycle at which the message is being send to the connected buffers
         double action_time @unit(s);
-        
+
         //Modulo cycles: 1 means message is being send in each cycle, 2 means in every second cycle,
         //and so on. 0 means never
         int modulo = default(1);
-        
+
         //Period of Scheduler this app is assigned to
         string period = default("period[0]");
         string oscillator = default("oscillator");
         string timer = default("timer");
 
-       
+
 }

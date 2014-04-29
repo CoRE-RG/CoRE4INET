@@ -16,13 +16,16 @@
 package core4inet.scheduler.oscillator;
 
 //
-// TODO Documentation
+// Interface for a Module representing an oscillator.
+//
+// @see IOscillator, SimpleOscillator
 //
 // @author Till Steinbach
 //
-moduleinterface IOscillator{
-	parameters:
-	    @display("i=block/mac");
+moduleinterface IOscillator
+{
+    parameters:
+        @display("i=block/mac");
 	    //Signal emitted when drift changes, contains new drift
         @signal[currentDrift](type=double);
 	    //Statistic of the current drift (Difference of configured and actual tick length in seconds)
@@ -32,5 +35,6 @@ moduleinterface IOscillator{
         // Current length of a tick (with imprecission)
         volatile double current_tick @unit(s);
     gates:
-        output out;    
+        //Output to the timer module (currently unused)
+        output out;
 }

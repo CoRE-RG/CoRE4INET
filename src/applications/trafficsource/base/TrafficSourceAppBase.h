@@ -16,10 +16,11 @@
 #ifndef __CORE4INET_TRAFFICSOURCEBASE_H_
 #define __CORE4INET_TRAFFICSOURCEBASE_H_
 
-#include <omnetpp.h>
-#include "ApplicationBase.h"
+#include "base/ApplicationBase.h"
 
 namespace CoRE4INET {
+
+#define START_MSG_NAME "Start Message"
 
 /**
  * @brief Base class for a traffic generator application.
@@ -27,7 +28,7 @@ namespace CoRE4INET {
  * @sa ApplicationBase
  * @ingroup Applications
  */
-class TrafficSourceAppBase : public ApplicationBase
+class TrafficSourceAppBase : public virtual ApplicationBase
 {
     protected:
         /**
@@ -35,14 +36,6 @@ class TrafficSourceAppBase : public ApplicationBase
          */
         virtual void initialize();
 
-        /**
-         * @brief Generates and sends a new Message.
-         *
-         * The message is sent to the buffer with the ct_id defined in parameter ct_id of the module.
-         * The message kind is defined by the buffer-type (RC/TT) of the buffer the message is sent to.
-         * The size is defined by the payload parameter of the module.
-         */
-        virtual void sendMessage();
 };
 
 } //namespace

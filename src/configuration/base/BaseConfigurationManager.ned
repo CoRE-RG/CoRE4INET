@@ -15,6 +15,8 @@
 
 package core4inet.configuration.base;
 
+import core4inet.configuration.IConfigurationManager;
+
 //
 // Dummy module for a ConfigurationManager that has no configuration.
 // If you use this BaseConfigurationManager you must configure the

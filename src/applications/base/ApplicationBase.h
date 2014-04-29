@@ -45,12 +45,16 @@ class ApplicationBase : public virtual cSimpleModule
         std::map<uint16_t, std::list<Buffer*> > buffers;
     public:
         /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
+
+        /**
          * @brief executes the given Callback in the context of the Application
          *
          * @param cb The Callback to execute
          */
         //virtual void executeCallback(Callback *cb);
-
         /**
          * @brief resets the bag on incoming RC-Frames (on RCin)
          *

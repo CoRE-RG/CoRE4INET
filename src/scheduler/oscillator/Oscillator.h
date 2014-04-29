@@ -21,7 +21,7 @@
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * Abstract Base For a Module representing an oscillator.
  *
  * @author Till Steinbach
  */
@@ -32,18 +32,29 @@ class Oscillator : public virtual cSimpleModule
          * Signal that is emitted every time the drift (Difference of configured and actual tick length) changes
          */
         static simsignal_t currentDrift;
-  protected:
-    virtual void initialize(int stage);
-    /**
-     * @brief Returns the number of initialization stages this module needs.
-     *
-     * @return Always returns 1
-     */
-    virtual int numInitStages() const;
 
-  public:
-    virtual simtime_t getTick();
-    virtual simtime_t getPreciseTick();
+    protected:
+        virtual void initialize(int stage);
+        /**
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return Always returns 1
+         */
+        virtual int numInitStages() const;
+
+    public:
+        /**
+         * @brief Returns the current length of a tick
+         *
+         * @return current length of a tick
+         */
+        virtual simtime_t getTick();
+        /**
+         * @brief Returns the precise length of a tick (without drift)
+         *
+         * @return length of tick without drift
+         */
+        virtual simtime_t getPreciseTick();
 };
 
 } //namespace

@@ -35,10 +35,6 @@ simple ApplicationBase like IApplication
         //If true, buffer management is not used. Applications use their own methods to locate buffers
         bool buffers_manual = default(false);
     gates:
-        //Input gate for the incoming time-triggered messages
-        input TTin @directIn @labels(TTFrame);
-        //Input gate for the incoming rate-constrained messages
-        input RCin @directIn @labels(RCFrame);
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;
 }

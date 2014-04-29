@@ -2,7 +2,7 @@
 
 namespace CoRE4INET {
 
-Register_Class( SchedulerEvent);
+Register_Class(SchedulerEvent);
 
 cGate* SchedulerEvent::getDestinationGate() const
 {

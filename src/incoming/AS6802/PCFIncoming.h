@@ -35,7 +35,7 @@ namespace CoRE4INET {
  *
  * @author Lazar Todorov, Till Steinbach
  */
-class PCFIncoming: public CTIncoming
+class PCFIncoming : public CTIncoming
 {
     private:
         /**
@@ -72,6 +72,6 @@ class PCFIncoming: public CTIncoming
 
 };
 
-}//namespace
+} //namespace
 
 #endif

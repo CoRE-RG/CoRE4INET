@@ -16,13 +16,14 @@ package core4inet.nodes.ethernet.AS6802;
 
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.scheduler.TTEScheduler;
-import core4inet.configuration.base.IConfigurationManager;
+import core4inet.configuration.IConfigurationManager;
 import core4inet.synchronisation.base.ISync;
 import core4inet.synchronisation.base.DummySync;
-import core4inet.linklayer.TTEPHYPort;
+import core4inet.linklayer.port.TTEPHYPort;
 import core4inet.utilities.modules.CheckedBuffer;
 
 import inet.linklayer.IMACRelayUnit;
+import inet.linklayer.IMACAddressTable;
 
 //
 // Module for a TTEthernet Switch with variable number of ports.
@@ -43,17 +44,22 @@ module TTEEtherSwitch
         @labels(node,ethernet-node);
         double hardware_delay @unit(s) = default(8us);
         int numBuffer = default(0);
+        string configurationManagerType = default("");
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
     submodules:
         // Implementation of the best-effort forwarding part
-        beswitch: <default("MACRelayUnitNP")> like IMACRelayUnit {
+        beswitch: <default("MACRelayUnit")> like IMACRelayUnit {
             parameters:
                 @display("p=100,50");
             gates:
                 ifIn[sizeof(ethg)];
                 ifOut[sizeof(ethg)];
+        }
+        //The mac table associated with the be switch
+        macTable: <default("MACAddressTable")> like IMACAddressTable {
+            @display("p=170,50");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEPHYPort {
@@ -65,17 +71,17 @@ module TTEEtherSwitch
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=170,50");
+                @display("p=240,50");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <default("BaseConfigurationManager")> like IConfigurationManager {
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
             parameters:
                 @display("p=999,999");
         }
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
-                @display("p=240,50");
+                @display("p=310,50");
         }
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=170,130");

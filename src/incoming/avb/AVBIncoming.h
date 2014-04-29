@@ -34,88 +34,28 @@ namespace CoRE4INET {
 class AVBIncoming : public cSimpleModule
 {
     protected:
-            /**
-             * @brief set to true if there was an error during runtime
-             */
-            bool hadError;
+        /**
+         * @brief set to true if there was an error during runtime
+         */
+        bool hadError;
 
-            std::map<unsigned long, MACAddress> TalkerAddresses;
-            std::map<unsigned long, unsigned int> StreamBandwith;
-            std::map<unsigned long, bool>StreamIsForwarding;
-            std::map<unsigned int, std::list<unsigned long> > ListenerGates;
-            std::map<unsigned int, unsigned int> PortReservation;
-            std::map<unsigned int, unsigned int> AVBPortReservation;
-            std::map<unsigned int, unsigned int> PortBandwith;
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
 
-            /**
-             * @brief Initialization of the module.
-             */
-            virtual void initialize();
-
-            /**
-             * @brief Forwards messages arriving on in-gate to out-gate.
-             *
-             * @param msg the incoming message.
-             */
-            virtual void handleMessage(cMessage *msg);
-
-            /**
-             * @brief initializes the port bandwith and gets the TT bandwith.
-             *
-             * @param port number.
-             *
-             * @return returns the TT bandwith on the port in Mbit/s.
-             */
-            unsigned int calcPortUtilisation(unsigned int port);
-
+        /**
+         * @brief Forwards messages arriving on in-gate to out-gate.
+         *
+         * @param msg the incoming message.
+         */
+        virtual void handleMessage(cMessage *msg);
 
     public:
-            /**
-             * @brief Constructor.
-             */
-            AVBIncoming();
-            bool talker;
-
-            /**
-             * @brief calculates the bandwith.
-             *
-             * @param FrameSize Size of the frame.
-             * @param IntervalFrames Sending interval of the frame.
-             *
-             * @return returns bandwith in Mbit/s.
-             */
-            unsigned int calcBandwith(unsigned int FrameSize, unsigned int IntervalFrames);
-
-            /**
-             * @brief get AVB port reservation.
-             *
-             * @param port index of port.
-             *
-             * @return returns the AVB bandwith on one port in Mbit/s.
-             */
-            unsigned int getAVBPortReservation(unsigned int port);
-
-            /**
-             * @brief set the AVB port reservation.
-             *
-             * @param port number.
-             * @param reservation bandwith in Mbit/s.
-             */
-            void setAVBPortReservation(unsigned int port, unsigned int reservation);
-
-            /**
-             * @brief get port bandwith.
-             *
-             * @return returns the bandwith of the physical port in Mbit/s.
-             */
-            unsigned int getPortBandwith(unsigned int port);
-
-            /**
-             * @brief get forwarding policy.
-             *
-             * @return returns true if AVB forwarding is active.
-             */
-            bool getForwarding();
+        /**
+         * @brief Constructor.
+         */
+        AVBIncoming();
 };
 
 } /* namespace CoRE4INET */

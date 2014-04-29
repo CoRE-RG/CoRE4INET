@@ -34,7 +34,7 @@ void TicApp::initialize()
     roundtripSignal = registerSignal("roundtrip");
 
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-    event->setAction_time((uint32_t)par("action_time").longValue());
+    event->setAction_time((uint32_t) par("action_time").longValue());
     event->setDestinationGate(gate("schedulerIn"));
     period->registerEvent(event);
 }
@@ -43,38 +43,41 @@ void TicApp::handleMessage(cMessage *msg)
 {
     ApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("schedulerIn")){
+    if (msg->arrivedOn("schedulerIn"))
+    {
         Tic *tic = new Tic();
         tic->setRoundtrip_start(simTime());
-        tic->setCount((unsigned int)par("counter").longValue());
+        tic->setCount((unsigned int) par("counter").longValue());
         CTFrame *frame = new TTFrame("Tic");
-        frame->setCtID((uint16_t)par("ct_id").longValue());
+        frame->setCtID((uint16_t) par("ct_id").longValue());
         frame->encapsulate(tic);
 
-        EV << "Sending Tic Message\n";
+        EV_DETAIL << "Sending Tic Message\n";
         std::list<Buffer*> buffer = buffers[frame->getCtID()];
-        for(std::list<Buffer*>::iterator buf = buffer.begin();
-                               buf!=buffer.end();buf++){
+        for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+        {
             Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(frame->dup(), in->gate("in"));
         }
         delete frame;
 
-        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *)msg;
+        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *) msg;
         event->setNext_cycle(true);
         period->registerEvent(event);
     }
-    else if(msg->arrivedOn("RCin")){
+    else if (msg->arrivedOn("RCin"))
+    {
         RCFrame *rcframe = dynamic_cast<RCFrame*>(msg);
-        Toc *toc=dynamic_cast<Toc*>(rcframe->decapsulate());
+        Toc *toc = dynamic_cast<Toc*>(rcframe->decapsulate());
         bubble(toc->getResponse());
-        par("counter").setLongValue((long)toc->getCount());
+        par("counter").setLongValue((long) toc->getCount());
         emit(rxPkSignal, rcframe);
-        emit(roundtripSignal, toc->getRoundtrip_start()-simTime());
+        emit(roundtripSignal, toc->getRoundtrip_start() - simTime());
         delete toc;
         delete msg;
     }
-    else{
+    else
+    {
         delete msg;
     }
 }

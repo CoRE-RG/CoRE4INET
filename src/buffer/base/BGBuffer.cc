@@ -22,17 +22,19 @@ Define_Module(BGBuffer);
 
 int BGBuffer::numInitStages() const
 {
-    if(Buffer::numInitStages()>1)
-            return Buffer::numInitStages();
-        else
-            return 1;
+    if (Buffer::numInitStages() > 1)
+        return Buffer::numInitStages();
+    else
+        return 1;
 }
 
 void BGBuffer::initialize(int stage)
 {
     Buffer::initialize(stage);
-    if(stage==0){
-        if(ev.isGUI()){
+    if (stage == 0)
+    {
+        if (ev.isGUI())
+        {
             //Update displaystring
             getDisplayString().setTagArg("i", 0, "buffer/empty");
         }
@@ -47,30 +49,33 @@ void BGBuffer::handleMessage(cMessage *msg)
     {
         EtherFrame *outgoingMessage = dequeue();
 
-        if(outgoingMessage){
+        if (outgoingMessage)
+        {
             //Send Message
-            for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end(); ++destGate)
+            for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
+                    ++destGate)
             {
                 sendDirect(outgoingMessage->dup(), *destGate);
             }
-            if(gate("out")->isConnected()){
-                send(outgoingMessage->dup(),"out");
+            if (gate("out")->isConnected())
+            {
+                send(outgoingMessage->dup(), "out");
             }
             recordPacketSent(outgoingMessage);
             delete msg;
         }
     }
-    else if(msg->arrivedOn("in") && gate("out")->isConnected())
+    else if (msg->arrivedOn("in") && gate("out")->isConnected())
     {
         EtherFrame *outgoingMessage = dequeue();
 
-            if(outgoingMessage)
-            {
-                send(outgoingMessage->dup(),"out");
+        if (outgoingMessage)
+        {
+            send(outgoingMessage->dup(), "out");
 
-                recordPacketSent(outgoingMessage);
-                delete msg;
-            }
+            recordPacketSent(outgoingMessage);
+            delete msg;
+        }
     }
 }
 

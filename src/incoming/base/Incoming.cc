@@ -22,7 +22,8 @@ Define_Module(Incoming);
 simsignal_t Incoming::droppedSignal = SIMSIGNAL_NULL;
 simsignal_t Incoming::rxPkSignal = SIMSIGNAL_NULL;
 
-Incoming::Incoming(){
+Incoming::Incoming()
+{
     hadError = false;
 }
 
@@ -39,9 +40,10 @@ void Incoming::recordPacketReceived(EtherFrame *frame)
 
 void Incoming::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("in")){
-        recordPacketReceived((EtherFrame*)msg);
-        sendDelayed(msg,SimTime(getParentModule()->par("hardware_delay").doubleValue()),"out");
+    if (msg->arrivedOn("in"))
+    {
+        recordPacketReceived((EtherFrame*) msg);
+        sendDelayed(msg, SimTime(getParentModule()->par("hardware_delay").doubleValue()), "out");
         //send(msg,"out");
     }
 }
