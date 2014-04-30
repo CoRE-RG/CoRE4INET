@@ -51,3 +51,9 @@
  * If you are looking for more general information please refere to the <a href="../neddoc/index.html" target="_top">NED documentation</a>
  */
 
+/**
+ * @brief Base namespace for the simulation model
+ */
+namespace CoRE4INET{
+}
+}
