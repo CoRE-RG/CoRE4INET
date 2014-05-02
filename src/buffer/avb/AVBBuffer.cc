@@ -15,7 +15,6 @@
 
 #include "AVBBuffer.h"
 #include "AVBFrame_m.h"
-#include "ApplicationBase.h"
 #include "ModuleAccess.h"
 
 #include "SRPTable.h"

@@ -14,7 +14,6 @@
 // 
 
 #include "Buffer.h"
-#include "ApplicationBase.h"
 #include "CoRE4INETDefs.h"
 
 #include "HelperFunctions.h"

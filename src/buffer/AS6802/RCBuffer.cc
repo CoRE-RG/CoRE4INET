@@ -16,7 +16,6 @@
 #include "RCBuffer.h"
 #include <CTFrame_m.h>
 #include <TTEScheduler.h>
-#include "ApplicationBase.h"
 
 namespace CoRE4INET {
 

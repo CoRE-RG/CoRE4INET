@@ -14,9 +14,7 @@
 // 
 
 #include "TTBuffer.h"
-#include <TTEScheduler.h>
-#include <TTBufferEmpty_m.h>
-#include "ApplicationBase.h"
+#include "TTBufferEmpty_m.h"
 
 #include <ModuleAccess.h>
 

@@ -9,7 +9,6 @@ import core4inet.linklayer.port.TTEAVBPHYPort;
 import core4inet.incoming.avb.AVBIncoming;
 import core4inet.buffer.avb.AVBQueueBuffer;
 import inet.linklayer.ethernet.EtherLLC;
-import core4inet.linklayer.beHandling.avb.SRPTrafficHandle;
 import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;

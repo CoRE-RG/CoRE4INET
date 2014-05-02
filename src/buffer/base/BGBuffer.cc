@@ -14,7 +14,6 @@
 // 
 
 #include "BGBuffer.h"
-#include "ApplicationBase.h"
 
 namespace CoRE4INET {
 
