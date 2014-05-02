@@ -21,14 +21,14 @@ import core4inet.buffer.base.BGQueueBuffer;
 import core4inet.configuration.IConfigurationManager;
 import core4inet.incoming.avb.AVBIncoming;
 import core4inet.linklayer.beHandling.base.BGTrafficHandle;
+import core4inet.linklayer.ethernet.avb.SRPEtherLLC;
 import core4inet.linklayer.port.TTEAVBPHYPort;
 import core4inet.scheduler.ITTEScheduler;
+import core4inet.services.avb.SRP.SRPTable;
+import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.synchronisation.base.ISync;
 import inet.applications.ethernet.EtherAppCli;
 import inet.applications.ethernet.EtherAppSrv;
-import core4inet.linklayer.ethernet.avb.SRPEtherLLC;
-import core4inet.services.avb.SRP.SRPTable;
-import core4inet.services.avb.SRP.SRProtocol;
 
 
 //

@@ -14,16 +14,14 @@
 // 
 package core4inet.nodes.ethernet.AS6802;
 
-import core4inet.scheduler.ITTEScheduler;
-import core4inet.scheduler.TTEScheduler;
 import core4inet.configuration.IConfigurationManager;
-import core4inet.synchronisation.base.ISync;
-import core4inet.synchronisation.base.DummySync;
 import core4inet.linklayer.port.TTEPHYPort;
+import core4inet.scheduler.ITTEScheduler;
+import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
-
-import inet.linklayer.IMACRelayUnit;
 import inet.linklayer.IMACAddressTable;
+import inet.linklayer.IMACRelayUnit;
+
 
 //
 // Module for a TTEthernet Switch with variable number of ports.
@@ -74,7 +72,7 @@ module TTEEtherSwitch
                 @display("p=240,50");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             parameters:
                 @display("p=999,999");
         }

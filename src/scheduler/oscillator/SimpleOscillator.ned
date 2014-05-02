@@ -15,8 +15,6 @@
 
 package core4inet.scheduler.oscillator;
 
-import core4inet.utilities.classes.IScheduled;
-
 //
 // Module representing an oscillator with a simple clock drift behavior.
 // The module schedules a message for every cycle at action_point 0 and then changes the drift by using the drift_change

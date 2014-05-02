@@ -14,8 +14,9 @@
 // 
 package core4inet.linklayer.inControl.base;
 
-import inet.linklayer.IOutputQueue;
 import core4inet.utilities.classes.Timed;
+
+
 //
 // Module for incoming traffic from MAC layer. The traffic is checked for
 // critical traffic ID and then forwarded either as best-effort traffic to

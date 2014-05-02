@@ -15,7 +15,8 @@
 package core4inet.buffer.AS6802;
 
 import core4inet.buffer.base.Buffer;
-import inet.linklayer.IOutputQueue;
+
+
 //
 // Abstract base Buffer used for critical traffic Buffers of TTEthernet.
 // Since this is an abstract module please do not instantiate it

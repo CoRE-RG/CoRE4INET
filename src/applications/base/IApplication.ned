@@ -15,8 +15,6 @@
 
 package core4inet.applications.base;
 
-import core4inet.linklayer.port.IPort;
-
 //
 // Interface to be implemented by application models.
 // Since this is an abstract module please do not instantiate it

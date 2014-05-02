@@ -1,7 +1,5 @@
 package core4inet.linklayer.shaper;
 
-import inet.linklayer.IOutputQueue;
-
 //A Shaper that handles TT, PCF, RC and BE traffic
 // This shaper handles traffic in the following order (highest to lowest priority):
 // - time-triggered

@@ -15,7 +15,7 @@
 package core4inet.linklayer.inControl;
 
 import core4inet.linklayer.inControl.base.BE_InControl;
-import inet.linklayer.IOutputQueue;
+
 
 //
 // Module for incoming traffic from MAC layer. The traffic is checked for

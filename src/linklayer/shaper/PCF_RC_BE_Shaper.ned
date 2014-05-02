@@ -15,7 +15,7 @@
 package core4inet.linklayer.shaper;
 
 import core4inet.linklayer.shaper.base.BE_Shaper;
-import inet.linklayer.IOutputQueue;
+
 
 //A Shaper that handles PCF, RC and BE traffic
 // This shaper handles traffic in the following order (highest to lowest priority):
