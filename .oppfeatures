@@ -113,7 +113,7 @@
         />
     <feature
         id="AS6802_sync"
-        name="AS6802 Synchronisation Protocol"
+        name="[CURRENTLY NOT FUNCTIONAL] AS6802 Synchronisation Protocol"
         description = "The simulation model for the AS6802 synchronisation protocol"
         initiallyEnabled = "false"
         requires = "AS6802_common"
