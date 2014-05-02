@@ -191,7 +191,15 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
     Enter_Method_Silent
     ();
 #endif
-
+    if (event->getTimer() > (SimTime::getMaxTime() / oscillator->getTick()))
+    {
+        std::ostringstream oss;
+        oss << "Cannot register timer event that is more than ";
+        oss << (SimTime::getMaxTime() / oscillator->getTick());
+        oss << "ticks from now. Your timer registered for ";
+        oss << event->getTimer() << " ticks. Is your timer negative?";
+        throw std::invalid_argument(oss.str());
+    }
     take(event);
     //We do not have to schedule anything if the point is now!
     if (event->getTimer() == 0)
@@ -211,7 +219,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
                 reschedule();
             }
         }
-        catch (__attribute((unused))      const std::range_error& re)
+        catch (__attribute((unused))       const std::range_error& re)
         {
             registredTimerEvents[actionpoint].push_back(event);
             reschedule();
@@ -269,7 +277,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
                 reschedule();
             }
         }
-        catch (__attribute((unused))      const std::range_error& re)
+        catch (__attribute((unused))       const std::range_error& re)
         {
             registredActionTimeEvents[actionpoint].push_back(
                     std::pair<SchedulerActionTimeEvent*, Period*>(actionTimeEvent, period));
@@ -342,7 +350,8 @@ void Timer::clockCorrection(int32_t ticks)
                 }
                 correctedActionTimeEvents[corrected_tick].push_back(*it4);
             }
-            else{
+            else
+            {
                 correctedActionTimeEvents[(*it2).first].push_back(*it4);
             }
         }
