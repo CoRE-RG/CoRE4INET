@@ -17,7 +17,7 @@
 
 #include <cresultfilter.h>
 
-namespace CoRE4INET {
+namespace CoRE4INET{
 
 /**
  * @brief Filter that expects a cPacket and outputs its encapsulated cPacket
@@ -28,9 +28,23 @@ namespace CoRE4INET {
  */
 class InnerMessageFilter : public cObjectResultFilter
 {
-        using cObjectResultFilter::receiveSignal;
+    using cObjectResultFilter::receiveSignal;
     public:
         virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object);
+};
+
+class InnerMessagePacketBytesFilter : public cObjectResultFilter{
+    public:
+        virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object);
+};
+
+class SubtractActualFromLastFilter : public cNumericResultFilter{
+    protected :
+        double difference;
+    public:
+        double lastValue;
+        virtual bool process(simtime_t &t, double& value);
+        SubtractActualFromLastFilter() {difference = 0;}
 };
 
 /**
@@ -40,8 +54,7 @@ class InnerMessageFilter : public cObjectResultFilter
  *
  * @author Till Steinbach
  */
-class FloatingIntervalFilter : public cNumericResultFilter
-{
+class FloatingIntervalFilter : public cNumericResultFilter{
     protected:
         simtime_t interval;
         std::map<simtime_t, double> inInterval;
