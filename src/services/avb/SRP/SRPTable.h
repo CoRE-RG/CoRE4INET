@@ -1,3 +1,17 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+//
 #ifndef __CoRE4INET_SRPTABLE_H_
 #define __CoRE4INET_SRPTABLE_H_
 
@@ -12,11 +26,16 @@
 namespace CoRE4INET {
 
 /**
- * This module handles the mapping between ports and MAC addresses. See the NED definition for details.
+ * @brief This module handles the mapping between ports and MAC addresses.
+ *
+ * See the NED definition for details.
  */
 class SRPTable : public cSimpleModule
 {
     public:
+        /**
+         * @brief Entry for Talker
+         */
         class TalkerEntry : public cObject
         {
             public:
@@ -59,6 +78,9 @@ class SRPTable : public cSimpleModule
                 }
         };
 
+        /**
+         * @brief Entry for Listener
+         */
         class ListenerEntry : public cObject
         {
             public:
@@ -71,7 +93,7 @@ class SRPTable : public cSimpleModule
                     module = NULL;
                 }
                 ListenerEntry(uint64_t streamId, cModule *module, simtime_t insertionTime) :
-                    streamId(streamId), module(module), insertionTime(insertionTime)
+                        streamId(streamId), module(module), insertionTime(insertionTime)
                 {
                 }
         };
@@ -81,40 +103,96 @@ class SRPTable : public cSimpleModule
         typedef std::map<cModule*, ListenerEntry, Module_compare> ListenerList;
         typedef std::map<uint64_t, ListenerList, StreamId_compare> ListenerTable;
 
-        std::map<unsigned int, TalkerTable> talkerTables;      // Talker Lookup Table
-        std::map<unsigned int, ListenerTable> listenerTables;  // Listener Lookup Table
+        /**
+         * map of talker entries for stream id
+         */
+        std::map<unsigned int, TalkerTable> talkerTables;
+        /**
+         * map of listener entries for stream id
+         */
+        std::map<unsigned int, ListenerTable> listenerTables;
 
     protected:
 
+        /**
+         *  @brief Initialization, registers WATCH and updates display string
+         */
         virtual void initialize();
+
+        /**
+         *  @brief Table does not receive messages, throws cRuntimeError when handleMessage is called
+         */
         virtual void handleMessage(cMessage *msg);
 
+        /**
+         *  signal emitted when a talker registers
+         */
         static simsignal_t talkerRegisteredSignal;
+        /**
+         *  signal emitted when a talker updates
+         */
         static simsignal_t talkerUpdatedSignal;
+        /**
+         *  signal emitted when a listener registers
+         */
         static simsignal_t listenerRegisteredSignal;
+        /**
+         *  signal emitted when a listener updates
+         */
         static simsignal_t listenerUpdatedSignal;
+        /**
+         *  signal emitted when a listener unregisters
+         */
         static simsignal_t listenerUnregisteredSignal;
+        /**
+         *  signal emitted when a listeners registration failed
+         */
         static simsignal_t listenerRegistrationFailedSignal;
 
     public:
-
+        /**
+         *  @brief Constructor
+         */
         SRPTable();
+        /**
+         *  @brief Destructor
+         */
         ~SRPTable();
 
     public:
-        // Table management
-
         /**
          * @brief For a known arriving port, V-TAG and destination MAC. It finds out the port where relay component should deliver the message
+         *
          * @param address MAC destination
          * @param vid VLAN ID
          * @return Output port for address, or -1 if unknown.
          */
         virtual std::list<cModule*> getListenersForStreamId(uint64_t streamId, unsigned int vid = 0);
 
+        /**
+         * @brief Retrieve the module a message with a given streamId will come from (required for listener ready messages)
+         *
+         * @param streamId the streams id
+         * @param vid VLAN ID
+         * @return Output port for address, or -1 if unknown.
+         */
         virtual cModule* getTalkerForStreamId(uint64_t streamId, unsigned int vid = 0);
 
+        /**
+         * @brief Retrieve the required bandwidth for a module with registered listeners
+         *
+         * @param module the module registered as listener
+         * @return bandwidth in bps
+         */
         virtual unsigned long getBandwidthForModule(cModule *module);
+
+        /**
+         * @brief Retrieve the required bandwidth for a stream
+         *
+         * @param streamId the streams id
+         * @param vid VLAN ID
+         * @return bandwidth in bps
+         */
         virtual unsigned long getBandwidthForStream(uint64_t streamId, unsigned int vid = 0);
 
         /**
@@ -142,7 +220,8 @@ class SRPTable : public cSimpleModule
          * @brief Unregister a streamId at listenerTable.
          * @return True if removed. False if not registered.
          */
-        virtual bool removeListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid = 0, bool failedSignal = false);
+        virtual bool removeListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid = 0,
+                bool failedSignal = false);
 
         /**
          *  @brief Prints cached data
@@ -150,13 +229,27 @@ class SRPTable : public cSimpleModule
         virtual void printState();
 
         /**
-         * For lifecycle: clears all entries from the vlanAddressTable.
+         * @brief For lifecycle: clears all entries from the table.
          */
         virtual void clear();
 
     protected:
+        /**
+         * @brief updates the displaystring of talkers and listeners
+         */
         void updateDisplayString();
+        /**
+         * @brief get the number of registered talkers
+         *
+         * @return number of talkers
+         */
         unsigned int getNumTalkerEntries();
+
+        /**
+         * @brief get the number of registered listeners
+         *
+         * @return number of listeners
+         */
         unsigned int getNumListenerEntries();
 };
 

@@ -122,7 +122,23 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler)
 #endif
 
 #ifdef WITH_AVB_COMMON
+/**
+ * @brief Calculates required bandwidth from given interval and framesize
+ *
+ * @param framesize the size of the frames of the stream
+ * @param intervalFrames number of frames in an interval
+ * @param interval interval time (usually 125us or 250us)
+ *
+ * @return bandwidth in bps
+ */
 unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval);
+/**
+ * @brief Returns the default interval for given SR classes
+ *
+ * @param srClass the SR class from the enum
+ *
+ * @return the default SR class interval
+ */
 const simtime_t getIntervalForClass(SR_CLASS srClass);
 #endif
 }

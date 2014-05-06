@@ -69,7 +69,8 @@ module TTEAVBEtherSwitch
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=170,111");
-                NrOfPorts = sizeof(ethg);
+            gates:
+               AVBout[sizeof(ethg)];
         }
 
         avbBuffer[sizeof(ethg)]: AVBQueueBuffer {

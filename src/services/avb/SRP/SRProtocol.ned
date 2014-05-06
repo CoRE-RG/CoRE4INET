@@ -15,13 +15,25 @@
 
 package core4inet.services.avb.SRP;
 
+//
+// This module handles the Stream Reservation Protocol
+//
+// SRP messages are sent and received through SRPEtherLLC and SRPRelay
+//
+// @see SRPEtherLLC, SRPRelay
+//
+// @author Till Steinbach
+//
 simple SRProtocol
 {
     parameters:
-    @display("i=block/network2,blue");
-    @class(SRProtocol);
-    	double reservableBandwidth = default(0.7); //Amount of total bandwidth that is reservable (0-1) default: 0.7 representing 70% 
+        @display("i=block/network2,blue");
+        @class(SRProtocol);
+        //Amount of total bandwidth that is reservable (0-1) default: 0.7 representing 70% 
+        double reservableBandwidth = default(0.7); 
     gates:
+        //Gate for incoming SRP messages
         input in @labels(EtherFrame);
+        //Gate for outgoing SRP messages
         output out @labels(EtherFrame);
 }

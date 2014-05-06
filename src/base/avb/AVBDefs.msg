@@ -15,6 +15,7 @@
 
 namespace CoRE4INET;
 
+//Service clases of AVB
 enum SR_CLASS
 {
    SR_CLASS_A = 0;

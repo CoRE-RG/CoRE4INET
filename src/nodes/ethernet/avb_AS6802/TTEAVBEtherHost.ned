@@ -60,7 +60,8 @@ module TTEAVBEtherHost
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=380,115");
-                NrOfPorts = numPorts;
+            gates:
+               AVBout[numPorts];
         }
 
         avbBuffer[numPorts]: AVBQueueBuffer {

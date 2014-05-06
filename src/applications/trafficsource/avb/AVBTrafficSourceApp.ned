@@ -23,7 +23,7 @@ import core4inet.utilities.classes.ITimed;
 //
 // @see TrafficSourceAppBase
 //
-// @author Philipp Meyer
+// @author Philipp Meyer, Till Steinbach
 simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
 {
     parameters:
@@ -33,13 +33,11 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         // ID of the AVB Stream
         double streamID = default(0);
 
-        // Count of send Frames per 125us interval
+        // Number of frames per interval
         int intervalFrames = default(1);
 
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("timer");
-    gates:
-        input SRPin @directIn @labels(SRPFrame);
 }

@@ -19,8 +19,10 @@ package core4inet.services.avb.SRP;
 // This module handles the mapping between ports and streams.
 //
 //
-// If needed, srp tables can be pre-loaded from text files at the beginning
+// @todo If needed, srp tables can be pre-loaded from text files at the beginning
 // of the simulation; this controlled by the srpTableFile module parameter.
+//
+// @author Till Steinbach
 //
 simple SRPTable
 {
@@ -40,5 +42,5 @@ simple SRPTable
         //Signal emitted when listener registration failed, contains ListenerEntry
         @signal[listenerRegistrationFailed](type=SRPTable::ListenerEntry);
         
-        string srpTableFile = default("");
+        //string srpTableFile = default("");
 }

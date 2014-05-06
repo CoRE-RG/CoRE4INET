@@ -20,11 +20,15 @@
 
 namespace CoRE4INET {
 
+//Ethertype for MSRP Protocol
 #define MSRP_ETHERTYPE 0x22EA
 
+//Destination Multicast MAC for SRP Protocol (01:80:C2:00:00:0E)
 const MACAddress SRP_ADDRESS = MACAddress("01:80:C2:00:00:0E");
 
+//Service class A interval is 125us
 const_simtime_t SR_CLASS_A_INTERVAL = 0.000125;
+//Service class A interval is 250us
 const_simtime_t SR_CLASS_B_INTERVAL = 0.000250;
 
 }
