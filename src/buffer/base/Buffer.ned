@@ -36,12 +36,26 @@ simple Buffer like IBuffer
         @signal[rxPk](type=EtherFrame);
         @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
         //End-to-end latency
-        @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+//        @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
 
         //Statistic of the amount of packets that were sent by the buffer
         @signal[txPk](type=EtherFrame);
         @statistic[txPk](title="TX Packets"; source=txPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
 
+		@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+        
+        @statistic[jitterReceive](title="Jitter for received Packets"; source="SubtractActualFromLast(messageAge(rxPk))"; unit=s; record=count,min,max,vector; interpolationmode=none);
+        @statistic[jitterTransmit](title="Jitter for transmitted Packets"; source="SubtractActualFromLast(messageAge(txPk))"; unit=s; record=count,min,max,vector; interpolationmode=none);
+        
+        //Statistic of the amount of packets that were receive for each interval
+        @statistic[bandwidthInterval](title="Bandwidth for each Interval"; source=rxPk; record=count, "IntervalCountVector(packetBytes)", "IntervalSumVector(packetBytes)", "IntervalAvgVector(packetBytes)", "IntervalMinVector(packetBytes)", "IntervalMaxVector(packetBytes)", "IntervalVarianceVector(packetBytes)"; interpolationmode=none);
+        @statistic[capacityInterval](title="Capacity for each Interval"; source=rxPk; record=count,"IntervalCapacityRecorder(packetBytes(innerMessage))","IntervalCountVector(packetBytes(innerMessage))","IntervalSumVector(packetBytes(innerMessage))","IntervalAvgVector(packetBytes(innerMessage))","IntervalMinVector(packetBytes(innerMessage))","IntervalMaxVector(packetBytes(innerMessage))","IntervalVarianceVector(packetBytes(innerMessage))"; interpolationmode=none);
+        
+        //Floating Statistics (Slower)
+        @statistic[bandwidthIntervalFloating](title="Fbaloating Bandwidth for each Interval"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)","floatingIntervalSumVector(packetBytes)","floatingIntervalAvgVector(packetBytes)"; interpolationmode=sample-hold);
+        @statistic[capacityIntervalFloating](title="Floating Capacity for each Interval"; source=rxPk; record=count,"floatingIntervalCapacityRecorder(innerMessagePacketBytes)","sum(innerMessagePacketBytes)","vector(innerMessagePacketBytes)","floatingIntervalCountVector(innerMessagePacketBytes)","floatingIntervalSumVector(innerMessagePacketBytes)","floatingIntervalAvgVector(innerMessagePacketBytes)"; interpolationmode=sample-hold);
+        
 
         //Comma seperated list of gates where the frames of the buffer are delivered
         string destination_gates = default("");
