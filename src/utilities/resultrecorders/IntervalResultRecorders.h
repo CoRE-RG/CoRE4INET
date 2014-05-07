@@ -22,7 +22,7 @@ namespace TTEthernetModel {
 class IntervalVectorRecorder : public cNumericResultRecorder
 {
     protected:
-        bool uninitialized = true;
+        bool uninitialized;
         simtime_t interval;
         std::map<simtime_t, double> inInterval;
         void *handle;        // identifies output vector for the output vector manager

@@ -16,13 +16,14 @@
 
 #include <cmessage.h>
 #include <limits>
-#include <cModule.h>
-#include <cChannel.h>
+#include <cmodule.h>
+#include <cchannel.h>
 
 using namespace TTEthernetModel;
 
 IntervalVectorRecorder::IntervalVectorRecorder()
 {
+    uninitialized = true;
     interval = SimTime(-1);
     handle = NULL;
     lastTime = 0;

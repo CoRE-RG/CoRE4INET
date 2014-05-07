@@ -16,8 +16,8 @@
 
 #include <cmessage.h>
 #include <limits>
-#include <cModule.h>
-#include <cChannel.h>
+#include <cmodule.h>
+#include <cchannel.h>
 
 
 using namespace CoRE4INET;

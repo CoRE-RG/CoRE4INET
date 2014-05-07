@@ -16,8 +16,8 @@
 
 #include <cmessage.h>
 #include <limits>
-#include <cModule.h>
-#include <cChannel.h>
+#include <cmodule.h>
+#include <cchannel.h>
 
 using namespace TTEthernetModel;
 
@@ -67,4 +67,6 @@ double SubtractActualFromLastRecorderMax::calculate()
 {
     if ((thisValue - lastValue )> max)
     return thisValue - lastValue;
+    //FIXME: is that correct?
+    return 0;
 }
