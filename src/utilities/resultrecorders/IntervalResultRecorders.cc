@@ -39,7 +39,6 @@ void IntervalVectorRecorder::initialize(){
         {
             interval = SimTime(comp->par("measure_interval").doubleValue());
             notSet = false;
-            EV<< "Interval: " <<interval << comp->getFullName()<<"\n";
         }
     } while ((comp = (cComponent*) comp->getParentModule()));
 }
@@ -54,12 +53,12 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
            //Attributes are title->interpolationmode ...
            for (opp_string_map::iterator it = attributes.begin(); it != attributes.end(); ++it)
            {
-               EV<<it->first.c_str()  <<"\n";
+//               EV<<it->first.c_str()  <<"\n";
                ev.setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
                if(opp_strcmp(it->first.c_str(), "measure_interval")==0)
                {
                    interval = SimTime::parse(it->second.c_str());
-                   EV << "Interval: " <<interval << "\n";
+//                   EV << "Interval: " <<interval << "\n";
                }
            }
            if (interval < SimTime(0))
@@ -72,7 +71,7 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
                    {
                        interval = SimTime(comp->par("measure_interval").doubleValue());
                        notSet = false;
-                       EV << "Interval: " <<interval << comp->getFullName()<<"\n";
+//                       EV << "Interval: " <<interval << comp->getFullName()<<"\n";
                    }
                } while ((comp = (cComponent*) comp->getParentModule()));
            }
