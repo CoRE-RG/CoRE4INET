@@ -13,24 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_SRPETHERLLC_H
-#define __CORE4INET_SRPETHERLLC_H
+#ifndef __CORE4INET_BGETHERLLC_H
+#define __CORE4INET_BGETHERLLC_H
 
-#include "BGEtherLLC.h"
+#include "EtherLLC.h"
 
-#include "SRPFrame_m.h"
 #include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
-class SRPEtherLLC : public BGEtherLLC
+class BGEtherLLC : public EtherLLC
 {
   protected:
     virtual void handleMessage(cMessage *msg);
-
-    void dispatchSRP(SRPFrame * srp);
-    void deliverSRP(EtherFrame * frame);
-
 };
 
 }

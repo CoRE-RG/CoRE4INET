@@ -18,6 +18,7 @@
 
 #include <omnetpp.h>
 #include "base/ApplicationBase.h"
+#include "CTBuffer.h"
 
 namespace CoRE4INET {
 
@@ -34,7 +35,17 @@ namespace CoRE4INET {
  */
 class CTApplicationBase : public virtual ApplicationBase
 {
+    protected:
+        /**
+         * @brief Map of critical traffic identifies with their
+         * corresponding Buffers.
+         */
+        std::map<uint16_t, std::list<CTBuffer*> > ctbuffers;
     public:
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
         /**
          * @brief resets the bag on incoming RC-Frames (on RCin)
          *
@@ -44,6 +55,12 @@ class CTApplicationBase : public virtual ApplicationBase
          * @param msg Parameter must be forwarded from subclass
          */
         virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 
 };
 

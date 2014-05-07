@@ -40,12 +40,12 @@ void SRPEtherLLC::handleMessage(cMessage *msg)
         }
         else
         {
-            EtherLLC::handleMessage(msg);
+            BGEtherLLC::handleMessage(msg);
         }
     }
     else
     {
-        EtherLLC::handleMessage(msg);
+        BGEtherLLC::handleMessage(msg);
     }
 }
 

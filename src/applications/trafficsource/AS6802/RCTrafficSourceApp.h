@@ -31,7 +31,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase, public virtual CTApplicationBase
+class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase
 {
     private:
         double tick;

@@ -13,25 +13,31 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_SRPETHERLLC_H
-#define __CORE4INET_SRPETHERLLC_H
-
 #include "BGEtherLLC.h"
 
-#include "SRPFrame_m.h"
-#include "EtherFrame_m.h"
+#include "AVBDefs.h"
+#include "ExtendedIeee802Ctrl_m.h"
+
 
 namespace CoRE4INET {
 
-class SRPEtherLLC : public BGEtherLLC
+Define_Module(BGEtherLLC);
+
+void BGEtherLLC::handleMessage(cMessage *msg)
 {
-  protected:
-    virtual void handleMessage(cMessage *msg);
-
-    void dispatchSRP(SRPFrame * srp);
-    void deliverSRP(EtherFrame * frame);
-
-};
+    if (msg->arrivedOn("bgIn"))
+    {
+        send(msg, gate("lowerLayerOut"));
+    }
+    else if (msg->arrivedOn("lowerLayerIn"))
+    {
+        send(msg->dup(), gate("bgOut"));
+        EtherLLC::handleMessage(msg);
+    }
+    else
+    {
+        EtherLLC::handleMessage(msg);
+    }
+}
 
 }
-#endif

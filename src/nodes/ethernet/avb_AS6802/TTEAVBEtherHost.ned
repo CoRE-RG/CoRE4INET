@@ -20,7 +20,6 @@ import core4inet.buffer.avb.AVBQueueBuffer;
 import core4inet.buffer.base.BGQueueBuffer;
 import core4inet.configuration.IConfigurationManager;
 import core4inet.incoming.avb.AVBIncoming;
-import core4inet.linklayer.beHandling.base.BGTrafficHandle;
 import core4inet.linklayer.ethernet.avb.SRPEtherLLC;
 import core4inet.linklayer.port.TTEAVBPHYPort;
 import core4inet.scheduler.ITTEScheduler;
@@ -73,8 +72,8 @@ module TTEAVBEtherHost
             parameters:
                 @display("p=141,255");
             gates:
-                upperLayerIn[3];
-                upperLayerOut[3];
+                upperLayerIn[2];
+                upperLayerOut[2];
         }
 
         cli: EtherAppCli {
@@ -113,9 +112,6 @@ module TTEAVBEtherHost
             @display("p=109,37");
         }
 
-        bgTrafficHandle: BGTrafficHandle {
-            @display("p=60,99");
-        }
         srpTable: SRPTable {
             @display("p=141,99");
         }
@@ -135,10 +131,8 @@ module TTEAVBEtherHost
         srv.out --> llc.upperLayerIn[1];
         srv.in <-- llc.upperLayerOut[1];
 
-        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
-        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
-        bgTrafficHandle.out --> bgIn.in;
-        bgOut.out --> bgTrafficHandle.in;
+        llc.bgOut --> bgIn.in;
+        bgOut.out --> llc.bgIn;
 
         avbCTC.AVBout[0] --> avbBuffer[0].in;
         avbBuffer[0].out --> phy[0].AVBin;

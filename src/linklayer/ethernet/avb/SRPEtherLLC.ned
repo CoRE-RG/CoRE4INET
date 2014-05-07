@@ -14,7 +14,7 @@
 //
 package core4inet.linklayer.ethernet.avb;
 
-import inet.linklayer.ethernet.EtherLLC;
+import core4inet.linklayer.ethernet.base.BGEtherLLC;
 
 //
 // This module forwards frames (~EtherFrame) based on their destination MAC addresses to appropriate ports.
@@ -23,11 +23,11 @@ import inet.linklayer.ethernet.EtherLLC;
 // Incoming SRP frames are forwarded as SRP messages through srpOut to the SRProtocol module.
 // Outgoing SRP messages coming through srpIn gate are forwarded according to the controlInfo as EtherFrame
 //
-// @see EtherLLC, SRProtocol
+// @see BGEtherLLC, SRProtocol
 // 
 // @author Till Steinbach
 //
-simple SRPEtherLLC extends EtherLLC
+simple SRPEtherLLC extends BGEtherLLC
 {
     parameters:
         @class(SRPEtherLLC);

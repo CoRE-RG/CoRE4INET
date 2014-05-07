@@ -3,35 +3,33 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package core4inet.applications.trafficsink.base;
+
 //
-
-#ifndef __CORE4INET_SRPETHERLLC_H
-#define __CORE4INET_SRPETHERLLC_H
-
-#include "BGEtherLLC.h"
-
-#include "SRPFrame_m.h"
-#include "EtherFrame_m.h"
-
-namespace CoRE4INET {
-
-class SRPEtherLLC : public BGEtherLLC
+// Traffic sink application used for statistics collection of best-effort traffic.
+//
+// @see TrafficSinkApp
+//
+// @author Till Steinbach
+simple BGTrafficSinkApp extends TrafficSinkApp
 {
-  protected:
-    virtual void handleMessage(cMessage *msg);
+    parameters:
+        @class(BGTrafficSinkApp);
+        @display("i=block/sink,green");
 
-    void dispatchSRP(SRPFrame * srp);
-    void deliverSRP(EtherFrame * frame);
-
-};
-
+        // source MAC address empty or 00:00:00:00:00:00 means all
+        string srcAddress = default("00:00:00:00:00:00");
+    gates:
+        //Input gate for the incoming best-effort messages
+        input in @directIn @labels(EtherFrame);
 }
-#endif

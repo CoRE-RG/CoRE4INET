@@ -13,22 +13,41 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CTTrafficSinkApp.h"
+#include "BGTrafficSinkApp.h"
 
 namespace CoRE4INET {
 
-Define_Module(CTTrafficSinkApp);
+Define_Module(BGTrafficSinkApp);
 
-void CTTrafficSinkApp::initialize()
+void BGTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
-    CTApplicationBase::initialize();
+
+    if (par("srcAddress").stdstringValue() == "auto")
+    {
+        // change module parameter from "auto" to concrete address
+        par("srcAddress").setStringValue(MACAddress::UNSPECIFIED_ADDRESS.str());
+    }
+    address = MACAddress(par("srcAddress").stringValue());
 }
 
-void CTTrafficSinkApp::handleMessage(cMessage *msg)
+void BGTrafficSinkApp::handleMessage(cMessage *msg)
 {
-    CTApplicationBase::handleMessage(msg);
-    TrafficSinkApp::handleMessage(msg);
+    if (EtherFrame *frame = dynamic_cast<EtherFrame*>(msg))
+    {
+        if (frame && (address.isUnspecified() || frame->getSrc() == address))
+        {
+            TrafficSinkApp::handleMessage(msg);
+        }
+        else
+        {
+            delete msg;
+        }
+    }
+    else
+    {
+        delete msg;
+    }
 }
 
 } //namespace

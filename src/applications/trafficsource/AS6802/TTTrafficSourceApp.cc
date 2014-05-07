@@ -31,7 +31,7 @@ TTTrafficSourceApp::TTTrafficSourceApp() :
 
 void TTTrafficSourceApp::initialize()
 {
-    TrafficSourceAppBase::initialize();
+    CTTrafficSourceAppBase::initialize();
 
     if (par("enabled").boolValue())
     {

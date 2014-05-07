@@ -22,7 +22,7 @@
 
 namespace CoRE4INET {
 
-class Buffer;
+class BGBuffer;
 
 /**
  * @brief Base class for a real-time Ethernet-Application.
@@ -35,42 +35,40 @@ class Buffer;
  *
  * @author Till Steinbach
  */
-class ApplicationBase : public virtual cSimpleModule
-{
-    protected:
-        /**
-         * @brief Map of critical traffic identifies with their
-         * corresponding Buffers.
-         */
-        std::map<uint16_t, std::list<Buffer*> > buffers;
-    public:
-        /**
-         * @brief Initialization of the module.
-         */
-        virtual void initialize();
+class ApplicationBase: public virtual cSimpleModule {
+protected:
+    /**
+     * @brief List of Buffers for best-effor messages
+     */
+    std::list<BGBuffer*> bgbuffers;
+public:
+    /**
+     * @brief Initialization of the module.
+     */
+    virtual void initialize();
 
-        /**
-         * @brief executes the given Callback in the context of the Application
-         *
-         * @param cb The Callback to execute
-         */
-        //virtual void executeCallback(Callback *cb);
-        /**
-         * @brief resets the bag on incoming RC-Frames (on RCin)
-         *
-         * This method should be called from subclasses unless the module
-         * resets the bag on its own.
-         *
-         * @param msg Parameter must be forwarded from subclass
-         */
-        virtual void handleMessage(cMessage *msg);
+    /**
+     * @brief executes the given Callback in the context of the Application
+     *
+     * @param cb The Callback to execute
+     */
+    //virtual void executeCallback(Callback *cb);
+    /**
+     * @brief resets the bag on incoming RC-Frames (on RCin)
+     *
+     * This method should be called from subclasses unless the module
+     * resets the bag on its own.
+     *
+     * @param msg Parameter must be forwarded from subclass
+     */
+    virtual void handleMessage(cMessage *msg);
 
-        /**
-         * @brief Indicates a parameter has changed.
-         *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
-         */
-        virtual void handleParameterChange(const char* parname);
+    /**
+     * @brief Indicates a parameter has changed.
+     *
+     * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+     */
+    virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

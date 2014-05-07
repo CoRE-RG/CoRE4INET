@@ -25,6 +25,11 @@ namespace CoRE4INET {
 
 Define_Module(CTTrafficSourceAppBase);
 
+void CTTrafficSourceAppBase::initialize()
+{
+    TrafficSourceAppBase::initialize();
+    CTApplicationBase::initialize();
+}
 
 void CTTrafficSourceAppBase::sendMessage()
 {
@@ -32,7 +37,7 @@ void CTTrafficSourceAppBase::sendMessage()
     if (par("ct_id").longValue() != -1)
     {
         uint16_t ctID = (uint16_t) par("ct_id").longValue();
-        std::list<Buffer*> buffer = buffers[(uint16_t) ctID];
+        std::list<CTBuffer*> buffer = ctbuffers[(uint16_t) ctID];
         if (buffer.size() == 0)
         {
             ev.printf("No buffer with such CT \n");
@@ -44,7 +49,7 @@ void CTTrafficSourceAppBase::sendMessage()
         }
         else
         {
-            for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+            for (std::list<CTBuffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
             {
                 CTFrame *frame;
                 if (dynamic_cast<TTBuffer*>(*buf))
