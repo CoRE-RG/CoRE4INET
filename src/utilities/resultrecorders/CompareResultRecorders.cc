@@ -65,8 +65,7 @@ Register_ResultRecorder("subtractActualFromLastMax", SubtractActualFromLastRecor
 
 double SubtractActualFromLastRecorderMax::calculate()
 {
-    if ((thisValue - lastValue )> max)
-    return thisValue - lastValue;
-    //FIXME: is that correct?
-    return 0;
+    if ((thisValue - lastValue ) > max){
+        return thisValue - lastValue;
+    } else return 0;
 }

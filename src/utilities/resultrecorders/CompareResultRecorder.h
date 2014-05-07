@@ -40,14 +40,12 @@ class SubtractActualFromLastRecorder : public cNumericResultRecorder
 class SubtractActualFromLastRecorderMin : public SubtractActualFromLastRecorder
 {
     protected:
-        double min;
         virtual double calculate();
 };
 
 class SubtractActualFromLastRecorderMax : public SubtractActualFromLastRecorder
 {
     protected:
-        double max;
         virtual double calculate();
 };
 
