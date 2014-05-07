@@ -37,7 +37,7 @@ application2.setName("application2");
 cModuleType *moduleType = cModuleType::get("core4inet.services.avb.SRP.SRPTable");
 CoRE4INET::SRPTable *table = (CoRE4INET::SRPTable*)moduleType->create("srpTable", this);
 table->clear();
-std::list<cModule*> ports = table->getModulesForStreamId(0);
+std::list<cModule*> ports = table->getListenersForStreamId(0);
 ev << "Ports:{";
 PrintModulelist(ports);
 ev << "}" << std::endl;
@@ -54,7 +54,7 @@ ev << "Bandwidth for "<< port3.getName() <<" is " << table->getBandwidthForModul
 table->updateListenerWithStreamId(1, &port3, 1);
 table->printState();
 ev << "Bandwidth for "<< port3.getName() <<" is " << table->getBandwidthForModule(&port3) << "Bps" << std::endl;
-ports = table->getModulesForStreamId(1);
+ports = table->getListenersForStreamId(1);
 ev << "Ports:{";
 PrintModulelist(ports);
 ev << "}" << std::endl;
