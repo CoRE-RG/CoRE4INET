@@ -24,7 +24,7 @@ Define_Module(AVBTrafficSinkApp);
 void AVBTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
-    SRPTable *srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
+    SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (srpTable)
     {
         srpTable->subscribe("talkerRegistered", this);
@@ -39,12 +39,12 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
     ();
     if (id == registerSignal("talkerRegistered"))
     {
-        SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
+        SRPTable::TalkerEntry *tentry = check_and_cast<SRPTable::TalkerEntry*>(obj);
 
         //If talker for the desired stream, register Listener
         if (tentry->streamId == (unsigned int) par("streamID").longValue())
         {
-            SRPTable *srpTable = (SRPTable *) src;
+            SRPTable *srpTable = check_and_cast<SRPTable *>(src);
 
             //TODO Minor: try to get VLAN
             srpTable->updateListenerWithStreamId(tentry->streamId, this, 0);
@@ -53,7 +53,7 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
     }
     else if (id == registerSignal("listenerRegistrationFailed"))
     {
-        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+        SRPTable::ListenerEntry *lentry = check_and_cast<SRPTable::ListenerEntry*>(obj);
         if (lentry->streamId == (unsigned int) par("streamID").longValue())
         {
             if (lentry->module == this)
