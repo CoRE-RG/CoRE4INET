@@ -58,8 +58,7 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
         }
         else
         {
-            EtherFrame *oldFrame = (EtherFrame *) frames.pop();
-            delete oldFrame;
+            delete frames.pop();
         }
     }
     frames.insert(newFrame);

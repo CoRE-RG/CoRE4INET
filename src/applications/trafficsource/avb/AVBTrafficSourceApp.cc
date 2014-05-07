@@ -66,7 +66,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
     if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
     {
-        SRPTable *srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
+        SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
         if (srpTable)
         {
             EV << "Register Talker in node" << std::endl;
