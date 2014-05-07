@@ -25,6 +25,7 @@ import core4inet.utilities.modules.CheckedBuffer;
 import inet.applications.ethernet.EtherAppCli;
 import inet.applications.ethernet.EtherAppSrv;
 import inet.linklayer.ethernet.EtherLLC;
+import inet.status.NodeStatus;
 
 
 //
@@ -57,6 +58,9 @@ module TTEEtherHost
         inout ethg @loose @labels(EtherFrame-conn);
 
     submodules:
+        status: NodeStatus {
+            @display("p=60,37;is=n");
+        }
         // Physical port of the host
         phy[numPorts]: TTEPHYPort {
             @display("p=235,255,c,50");
