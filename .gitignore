@@ -1,10 +1,39 @@
-/out
-*_m.*
+# ignore generated files
+.settings/
+*_m.h
+*_m.cc
+/src/Makefile
+/src/Makefile.vc
+/doc/doxy
+/doc/neddoc
+/doc/index.html
+
+# settings
+*.tkenvrc
+*.tkenvlog
+*.cmdenv-log
+
+#results
+/examples/*/results/
+/examples/*/*/results/
+/examples/*/*/*/results/
 *.vci
 *.vec
 *.sca
 *.anf
-*.tkenvrc
-*.tkenvlog
-/doc
+
+#tests
+/tests/*/work/
+
+# ignore binary files
+/out
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.exe
+*.o
+*.obj
+
 /FeatureBuildTest
