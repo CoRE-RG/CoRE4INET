@@ -28,7 +28,10 @@ simple ApplicationBase like IApplication
     parameters:
         @class(ApplicationBase);
         @display("i=block/app");
-
+        
+        //Name shown above the module
+        string displayName = default("");
+        
         //Comma seperated list of buffer modules the application is allowed to use
         string buffers = default("");
 

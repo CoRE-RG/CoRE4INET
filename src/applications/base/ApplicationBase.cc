@@ -28,6 +28,11 @@ Define_Module(ApplicationBase);
 void ApplicationBase::initialize()
 {
     WATCH_LISTMAP(buffers);
+
+    std::string displayName = par("displayName").stdstringValue();
+    if(displayName.length()){
+        getDisplayString().setTagArg("t",0,displayName.c_str());
+    }
 }
 
 void ApplicationBase::handleMessage(cMessage *msg)
