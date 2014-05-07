@@ -111,7 +111,6 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value)
         int i = 1;
         for (i = 1; i < ((t-lastTime)/interval)-1;i++)
         {
-            printf("Record i: %d", i);
             ev.recordInOutputVector(handle, lastTime+interval*(i+1), 0);
         }
         lastTime = lastTime+interval*i;
