@@ -15,7 +15,7 @@
 
 package core4inet.applications.examples.rt_tictoc;
 
-import core4inet.applications.base.ApplicationBase;
+import core4inet.applications.AS6802.CTApplicationBase;
 
 //
 // Toc Application used for the rt_tictoc example.
@@ -26,7 +26,7 @@ import core4inet.applications.base.ApplicationBase;
 // @see rt_tictoc, TicApp
 //
 // @author Till Steinbach
-simple TocApp extends ApplicationBase
+simple TocApp extends CTApplicationBase
 {
     parameters:
         @class(TocApp);
