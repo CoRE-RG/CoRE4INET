@@ -29,6 +29,14 @@ simple BGTrafficSinkApp extends TrafficSinkApp
 
         // source MAC address empty or 00:00:00:00:00:00 means all
         string srcAddress = default("00:00:00:00:00:00");
+        
+        //Replay each frame;
+        bool reply = default(false);
+        //Replay first frame to update tables in switches;
+        bool replyFirst = default(true);    
+        
+        //Default bgOut is best-effort buffer
+        buffers = default("bgOut");
     gates:
         //Input gate for the incoming best-effort messages
         input in @directIn @labels(EtherFrame);

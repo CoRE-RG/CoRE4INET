@@ -29,21 +29,25 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class BGTrafficSinkApp: public virtual TrafficSinkApp {
-private:
-    MACAddress address;
-protected:
-    /**
-     * @brief Initialization of the module.
-     */
-    virtual void initialize();
+class BGTrafficSinkApp : public virtual TrafficSinkApp
+{
+    private:
+        MACAddress address;
+        unsigned int received;
+    public:
+        BGTrafficSinkApp();
+    protected:
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
 
-    /**
-     * @brief collects incoming message and writes statistics.
-     *
-     * @param msg incoming frame
-     */
-    virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief collects incoming message and writes statistics.
+         *
+         * @param msg incoming frame
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

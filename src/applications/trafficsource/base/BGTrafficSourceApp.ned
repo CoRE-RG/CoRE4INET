@@ -38,6 +38,7 @@ simple BGTrafficSourceApp extends TrafficSourceAppBase
         // interval between sending requests
         volatile double sendInterval @unit(s) = default(uniform(0s,1s));
         
+        //Default bgOut is best-effort buffer
         buffers = default("bgOut");
 
 }

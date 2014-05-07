@@ -14,10 +14,15 @@
 // 
 
 #include "BGTrafficSinkApp.h"
+#include "BGBuffer.h"
 
 namespace CoRE4INET {
 
 Define_Module(BGTrafficSinkApp);
+
+BGTrafficSinkApp::BGTrafficSinkApp(){
+    received = 0;
+}
 
 void BGTrafficSinkApp::initialize()
 {
@@ -37,6 +42,17 @@ void BGTrafficSinkApp::handleMessage(cMessage *msg)
     {
         if (frame && (address.isUnspecified() || frame->getSrc() == address))
         {
+            if((!received && par("replyFirst").boolValue()) || par("reply").boolValue()){
+                EtherFrame *reply = new EthernetIIFrame("Reply");
+                reply->setDest(frame->getSrc());
+                reply->setByteLength(frame->getByteLength());
+                for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin();
+                            buf != bgbuffers.end(); buf++) {
+                    sendDirect(reply->dup(), (*buf)->gate("in"));
+                }
+                delete reply;
+            }
+            received++;
             TrafficSinkApp::handleMessage(msg);
         }
         else
