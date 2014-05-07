@@ -42,9 +42,8 @@ void CTBuffer::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        CTFrame *ctframe = dynamic_cast<CTFrame *>(msg);
         //Try to correct destination mac
-        if (ctframe != NULL)
+        if (CTFrame *ctframe = dynamic_cast<CTFrame *>(msg))
         {
             if (ctframe->getDest().isUnspecified())
             {
