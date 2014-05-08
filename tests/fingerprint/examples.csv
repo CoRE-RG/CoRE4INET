@@ -3,8 +3,8 @@
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c General -r 0,                1s,              fc4a-8e45
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,      1s,              4441-9776
 /examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0,                1s,              d299-e616
-/examples/AS6802/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0,                1s,              da3e-3e7b
-/examples/AS6802/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0,                1s,              b23c-ebb5
-/examples/AS6802/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0,                1s,              e040-f0be
+#/examples/AS6802/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0,                1s,              da3e-3e7b
+#/examples/AS6802/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0,                1s,              b23c-ebb5
+#/examples/AS6802/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0,                1s,              e040-f0be
 /examples/avb/small_network/,                           	      -f omnetpp.ini -c General -r 0,                1s,              ad5a-9f24
 /examples/avb/small_network/,                            	      -f omnetpp.ini -c With_Crosstraffic -r 0,      1s,              f5fa-558e
