@@ -17,8 +17,6 @@
 #define __CORE4INET_APPLICATIONBASE_H_
 
 #include <omnetpp.h>
-#include "Incoming.h"
-#include "Callback.h"
 
 namespace CoRE4INET {
 

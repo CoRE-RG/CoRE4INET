@@ -20,6 +20,7 @@
 #include "RCFrame_m.h"
 #include "RCBuffer.h"
 #include "CoRE4INETDefs.h"
+#include "Incoming.h"
 
 namespace CoRE4INET {
 

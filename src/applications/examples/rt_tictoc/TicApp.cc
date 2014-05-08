@@ -17,6 +17,7 @@
 #include "TicToc_m.h"
 #include "TTFrame_m.h"
 #include "RCFrame_m.h"
+#include "Incoming.h"
 
 namespace CoRE4INET {
 
