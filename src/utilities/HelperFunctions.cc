@@ -128,7 +128,7 @@ const_simtime_t second = 1;
 
 unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval)
 {
-    return (second/interval) * intervalFrames * (framesize * 8);
+    return (second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS);
 }
 
 

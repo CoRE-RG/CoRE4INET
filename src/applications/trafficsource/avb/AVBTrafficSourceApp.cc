@@ -17,16 +17,14 @@
 #include "HelperFunctions.h"
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
-#include "Buffer.h"
 #include <Timer.h>
 #include <ModuleAccess.h>
+#include "CoRE4INETDefs.h"
 
 #include "SRPTable.h"
 
 #define AVB_MINPACKETSIZE 88
 #define AVB_OVERHEADSIZE 42
-#define AVB_SRP_ADVERTISESIZE 25
-#define AVB_SRP_READYSIZE 8
 
 namespace CoRE4INET {
 
@@ -47,13 +45,13 @@ void AVBTrafficSourceApp::initialize()
     payload = (unsigned int) par("payload").longValue();
 
     //TODO: Minor: Check these values
-    if (payload <= AVB_MINPACKETSIZE)
+    if (payload <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
     {
-        frameSize = AVB_MINPACKETSIZE;
+        frameSize = MIN_ETHERNET_FRAME_BYTES;
     }
     else
     {
-        frameSize = payload + AVB_OVERHEADSIZE;
+        frameSize = payload + ETHER_MAC_FRAME_BYTES + ETHER_8021Q_TAG_BYTES;
     }
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");

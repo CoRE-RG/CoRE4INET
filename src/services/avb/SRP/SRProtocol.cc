@@ -85,28 +85,49 @@ void SRProtocol::handleMessage(cMessage *msg)
             }
             else
             {
-                bubble("ListenerReady Failed!");
                 EV_DETAIL << "Listener for stream " << listenerReady->getStreamID()
                         << " could not be registered on port " << port->getFullName() << ". Required bandwidth: "
                         << requiredBandwidth / (double) 1000000 << "MBit/s, remaining bandwidth "
                         << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth) / (double) 1000000 << "MBit/s.";
-                SRPFrame *listenerReadyFailed = new ListenerReadyFailed("Listener Ready Failed", IEEE802CTRL_DATA);
-                listenerReadyFailed->setStreamID(listenerReady->getStreamID());
+                SRPFrame *srp;
+                if (srpTable->getListenersForStreamId(listenerReady->getStreamID(), 0).size() > 0)
+                {
+                    bubble("Listener Ready Failed!");
+                    srp = new ListenerReadyFailed("Listener Ready Failed", IEEE802CTRL_DATA);
+                }
+                else
+                {
+                    bubble("Listener Failed!");
+                    srp = new ListenerFailed("Listener Failed", IEEE802CTRL_DATA);
+                }
+                srp->setStreamID(listenerReady->getStreamID());
 
-                ExtendedIeee802Ctrl *answerEtherctrl = new ExtendedIeee802Ctrl();
-                answerEtherctrl->setEtherType(MSRP_ETHERTYPE);
-                answerEtherctrl->setDest(SRP_ADDRESS);
-                answerEtherctrl->setSwitchPort(port->getIndex());
-                listenerReadyFailed->setControlInfo(answerEtherctrl);
-                send(listenerReadyFailed, gate("out"));
+                ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
+                etherctrl->setEtherType(MSRP_ETHERTYPE);
+                etherctrl->setDest(SRP_ADDRESS);
+                cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), 0);
+                if (talker && talker->isName("phy"))
+                {
+                    etherctrl->setSwitchPort(talker->getIndex());
+                    srp->setControlInfo(etherctrl);
+                    send(srp, gate("out"));
+                }
             }
         }
-        else if (ListenerReadyFailed* listenerReadyFailed = dynamic_cast<ListenerReadyFailed*>(msg))
+        else if (ListenerFailed* listenerFailed = dynamic_cast<ListenerFailed*>(msg))
         {
-            bubble("ListenerReady Failed!");
-            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReadyFailed->getStreamID() ,0);
-            for(std::list<cModule*>::iterator listener = listeners.begin(); listener != listeners.end(); listener++){
-                srpTable->removeListenerWithStreamId(listenerReadyFailed->getStreamID(), (*listener), 0, true);
+            bubble("Listener Failed!");
+            ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
+            etherctrl->setEtherType(MSRP_ETHERTYPE);
+            etherctrl->setDest(SRP_ADDRESS);
+            cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), 0);
+            if (talker && talker->isName("phy"))
+            {
+                etherctrl->setSwitchPort(talker->getIndex());
+                //Necessary because controlInfo is not duplicated
+                ListenerFailed* listenerFailedCopy = listenerFailed->dup();
+                listenerFailedCopy->setControlInfo(etherctrl);
+                send(listenerFailedCopy, gate("out"));
             }
         }
         delete etherctrl;

@@ -13,10 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 cplusplus {{
-        #include "EtherFrame_m.h"
 }}
-
-class ::EtherFrame;
 
 namespace CoRE4INET;
 
@@ -28,49 +25,47 @@ namespace CoRE4INET;
 // @author Philipp Meyer
 packet SRPFrame{
     
-    
     // ID of the AVB Stream
-    //
     // 64 Bit Field
 	unsigned long streamID;
 	
-	
-	// notused
-	//
+	// for internal implementation:
+	string displayString="b=15,15,rect,black,black,5";
+}
+
+packet TalkerAdvertise extends SRPFrame{
+    byteLength = 25;
+    // notused
 	// 64 Bit Field
 	unsigned long DataFrameParameters;
 	
 	// tSpec => Max frame size and sending interval of an AVB stream
-	//
 	// 32 Bit Field
 	unsigned int MaxFrameSize;
 	unsigned int MaxIntervalFrames;
 	
 	
 	// notused
-	//
 	// 8 Bit Field
 	unsigned char priorityAndRank;
 	
 	// notused
-	//
 	// 32 Bit Field
 	unsigned int accumulatedLatency;
-	
-	// FailureInformation
-	//
-	// 72 Bit Field
-	
-	// for internal implementation:
-	string displayString="b=15,15,rect,black,black,5";
-	unsigned int portIndex;
-}
-
-packet TalkerAdvertise extends SRPFrame{
 }
 
 packet ListenerReady extends SRPFrame{
+	byteLength = 8;
 }
 
-packet ListenerReadyFailed extends SRPFrame{
+packet ListenerFailed extends SRPFrame{
+    // FailureInformation
+	//
+	// 72 Bit Field
+}
+
+packet ListenerReadyFailed extends ListenerReady{
+    // FailureInformation
+	//
+	// 72 Bit Field
 }

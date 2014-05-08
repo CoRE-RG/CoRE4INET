@@ -17,7 +17,7 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
     os << "{TalkerAddress=" << entry.address->str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
             << bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames, getIntervalForClass(entry.srClass))
-                    / (double) 10000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
+                    / (double) 1000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
     return os;
 }
 

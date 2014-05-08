@@ -29,8 +29,8 @@ simple SRProtocol
     parameters:
         @display("i=block/network2,blue");
         @class(SRProtocol);
-        //Amount of total bandwidth that is reservable (0-1) default: 0.7 representing 70% 
-        double reservableBandwidth = default(0.7); 
+        //Amount of total bandwidth that is reservable (0-1) default: 0.75 representing 75% 
+        double reservableBandwidth = default(0.75); 
     gates:
         //Gate for incoming SRP messages
         input in @labels(EtherFrame);
