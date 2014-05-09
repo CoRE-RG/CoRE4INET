@@ -41,7 +41,7 @@ class SRPTable : public cSimpleModule
             public:
                 uint64_t streamId;
                 SR_CLASS srClass;           // Stream Reservation Class
-                MACAddress *address;        // The talkers address
+                MACAddress address;        // The talkers address
                 cModule *module;            // Input port or module
                 unsigned int framesize;     // framesize in byte
                 unsigned int intervalFrames;     // interval frames
@@ -54,7 +54,7 @@ class SRPTable : public cSimpleModule
                     framesize = 0;
                     intervalFrames = 0;
                 }
-                TalkerEntry(uint64_t streamId, SR_CLASS srClass, MACAddress *address, cModule *module,
+                TalkerEntry(uint64_t streamId, SR_CLASS srClass, MACAddress address, cModule *module,
                         unsigned int framesize, unsigned int intervalFrames, simtime_t insertionTime) :
                         streamId(streamId), srClass(srClass), address(address), module(module), framesize(framesize), intervalFrames(
                                 intervalFrames), insertionTime(insertionTime)
@@ -203,7 +203,7 @@ class SRPTable : public cSimpleModule
          * @brief Register a new streamId at talkerTable.
          * @return True if refreshed. False if it is new.
          */
-        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL,
+        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address,
                 SR_CLASS srClass = SR_CLASS_A, unsigned int framesize = 0, unsigned int intervalFrames = 0,
                 unsigned int vid = 0);
 
@@ -211,7 +211,7 @@ class SRPTable : public cSimpleModule
          * @brief Unregister a streamId at talkerTable.
          * @return True if removed. False if not registered.
          */
-        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address = NULL,
+        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address,
                 unsigned int vid = 0);
 
         /**

@@ -14,7 +14,7 @@ Register_Class(SRPTable::ListenerEntry);
 
 std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
-    os << "{TalkerAddress=" << entry.address->str() << ", Module=" << entry.module->getFullName() << ", SRClass="
+    os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
             << bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames, getIntervalForClass(entry.srClass))
                     / (double) 1000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
@@ -127,7 +127,7 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address, SR_CLASS srClass,
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, SR_CLASS srClass,
         unsigned int framesize, unsigned int intervalFrames, unsigned int vid)
 {
     Enter_Method
@@ -145,10 +145,6 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
         if (intervalFrames == 0)
         {
             throw std::invalid_argument("cannot register talker with zero frameInterval");
-        }
-        if (address == NULL)
-        {
-            throw std::invalid_argument("cannot register talker without address");
         }
         if (module == NULL)
         {
@@ -175,10 +171,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     {
         talkerTable[streamId]->intervalFrames = intervalFrames;
     }
-    if (address != NULL)
-    {
-        talkerTable[streamId]->address = address;
-    }
+    talkerTable[streamId]->address = address;
     talkerTable[streamId]->insertionTime = simTime();
     if (updated)
     {
@@ -192,7 +185,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress *address, unsigned int vid)
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, unsigned int vid)
 {
 
     TalkerTable &talkerTable = talkerTables[vid];
@@ -294,7 +287,7 @@ void SRPTable::printState()
         for (TalkerTable::iterator j = table.begin(); j != table.end(); j++)
         {
             EV << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
-                    << (*j).second->address->str() << "   "
+                    << (*j).second->address.str() << "   "
                     << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
                     << bandwidthFromSizeAndInterval((*j).second->framesize, (*j).second->intervalFrames,
                             getIntervalForClass((*j).second->srClass)) / (double) 1000000 << "   "

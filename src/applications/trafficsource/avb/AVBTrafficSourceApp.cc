@@ -33,6 +33,9 @@ Define_Module(AVBTrafficSourceApp);
 AVBTrafficSourceApp::AVBTrafficSourceApp()
 {
     isStreaming = false;
+    //Make multicast MAC
+    uint64 intAddr = 0x010000000000ULL | MACAddress::generateAutoAddress().getInt();
+    multicastMAC = MACAddress(intAddr);
 }
 
 void AVBTrafficSourceApp::initialize()
@@ -44,7 +47,7 @@ void AVBTrafficSourceApp::initialize()
     intervalFrames = (unsigned int) par("intervalFrames").longValue();
     payload = (unsigned int) par("payload").longValue();
 
-    //TODO: Minor: Check these values
+//TODO: Minor: Check these values
     if (payload <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
     {
         frameSize = MIN_ETHERNET_FRAME_BYTES;
@@ -71,8 +74,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             srpTable->subscribe("listenerRegistered", this);
             srpTable->subscribe("listenerUnregistered", this);
             srpTable->subscribe("listenerRegistrationTimeout", this);
-            srpTable->updateTalkerWithStreamId(streamID, this, new MACAddress("00:00:00:00:00:00"), SR_CLASS_A,
-                    frameSize, intervalFrames);
+            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, SR_CLASS_A, frameSize, intervalFrames);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
         }
         else
@@ -97,22 +99,23 @@ void AVBTrafficSourceApp::sendAVBFrame()
     sprintf(name, "Stream %ld", streamID);
     AVBFrame *outFrame = new AVBFrame(name);
     outFrame->setStreamID(streamID);
+    outFrame->setDest(multicastMAC);
 
     cPacket *payloadPacket = new cPacket;
     payloadPacket->setByteLength(payload);
     outFrame->encapsulate(payloadPacket);
-    //Padding
+//Padding
     if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
     {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
-    //class measurement interval = 125us
+//class measurement interval = 125us
     simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
     simtime_t interval = SR_CLASS_A_INTERVAL / intervalFrames;
 
-    //double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
+//double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
 
     event->setTimer((uint64_t) ceil(interval / tick));

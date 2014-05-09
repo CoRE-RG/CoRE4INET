@@ -61,6 +61,7 @@ void SRPEtherLLC::dispatchSRP(SRPFrame * srp)
 
     EthernetIIFrame * frame = new EthernetIIFrame(srp->getName());
     frame->setDest(address);
+    frame->setSrc(controlInfo->getSrc());
     frame->setByteLength(ETHER_MAC_FRAME_BYTES);
     frame->setEtherType(MSRP_ETHERTYPE);
     frame->encapsulate(srp);

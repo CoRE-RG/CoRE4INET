@@ -44,6 +44,7 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
         unsigned int intervalFrames;
         unsigned int payload;
         cModule *avbOutCTC;
+        MACAddress multicastMAC;
     public:
         AVBTrafficSourceApp();
     protected:
