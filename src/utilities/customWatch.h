@@ -140,6 +140,29 @@ void createStdMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m
 }
 
 template<class KeyT, class ValueT, class CmpT>
+class cStdPtrMapMapWatcher : public cStdMapMapWatcher<KeyT, ValueT, CmpT>
+{
+    public:
+        cStdPtrMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
+                cStdMapMapWatcher<KeyT, ValueT, CmpT>(name, var)
+
+        {
+        }
+        virtual std::string atIt2() const
+        {
+            std::stringstream out;
+            out << this->atIt() << this->it2->first << " ==> " << *(this->it2->second);
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT, class CmpT>
+void createStdPtrMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
+{
+    new cStdPtrMapMapWatcher<KeyT, ValueT, CmpT>(varname, m);
+}
+
+template<class KeyT, class ValueT, class CmpT>
 class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
 {
     protected:
@@ -217,6 +240,30 @@ void createStdListMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT
     new cStdListMapMapWatcher<KeyT, ValueT, CmpT>(varname, m);
 }
 
+template<class KeyT, class ValueT, class CmpT>
+class cStdPtrListMapMapWatcher : public cStdListMapMapWatcher<KeyT, ValueT, CmpT>
+{
+    public:
+
+        cStdPtrListMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
+            cStdListMapMapWatcher<KeyT, ValueT, CmpT>(name, var)
+
+        {
+        }
+        virtual std::string atIt3() const
+        {
+            std::stringstream out;
+            out << this->atIt2() << this->it3->first << " ==> " << *(this->it3->second);
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT, class CmpT>
+void createStdPtrListMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
+{
+    new cStdPtrListMapMapWatcher<KeyT, ValueT, CmpT>(varname, m);
+}
+
 /**
  * @ingroup Macros
  * @defgroup MacrosWatch WATCH macros
@@ -237,11 +284,27 @@ void createStdListMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT
 #define WATCH_MAPMAP(m)      createStdMapMapWatcher(#m,(m))
 
 /**
+ * Makes std::maps storing maps with pointers inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP() and
+ * WATCH_LISTMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_PTRMAPMAP(m)      createStdPtrMapMapWatcher(#m,(m))
+
+/**
  * Makes std::maps storing maps storing lits inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP()WATCH_LISTMAP and WATCH_MAPMAP().
  *
  * @hideinitializer
  */
 #define WATCH_LISTMAPMAP(m)      createStdListMapMapWatcher(#m,(m))
+
+/**
+ * Makes std::maps storing maps storing lits of pointers inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP()WATCH_LISTMAP and WATCH_MAPMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_PTRLISTMAPMAP(m)      createStdPtrListMapMapWatcher(#m,(m))
+
 //@}
 
 #endif /* CUSTOMWATCH_H_ */

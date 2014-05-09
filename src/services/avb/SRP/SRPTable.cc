@@ -42,8 +42,8 @@ SRPTable::SRPTable()
 void SRPTable::initialize()
 {
     WATCH(nextAging);
-    WATCH_MAPMAP(talkerTables);
-    WATCH_LISTMAPMAP(listenerTables);
+    WATCH_PTRMAPMAP(talkerTables);
+    WATCH_PTRLISTMAPMAP(listenerTables);
     updateDisplayString();
 }
 
