@@ -20,6 +20,9 @@ package core4inet.services.avb.SRP;
 //
 // SRP messages are sent and received through SRPEtherLLC and SRPRelay
 //
+// @warning This is a simplified implementation of the Stream Reservation Protocol that does not use the original
+// message format
+//
 // @see SRPEtherLLC, SRPRelay
 //
 // @author Till Steinbach
