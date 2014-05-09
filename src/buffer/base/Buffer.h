@@ -167,9 +167,23 @@ class Buffer : public virtual cSimpleModule
          *
          * @return Bandwidth in bps, or -1 is unknown.
          *
-         * @sa enqueue();
          */
         virtual long getRequiredBandwidth();
+
+        /**
+         * @brief Returns the used size of the buffer
+         *
+         * @return number of messages in the buffer
+         *
+         */
+        virtual unsigned int size() = 0;
+
+        /**
+         * @brief Resets the buffer, deletes all messages
+         *
+         *
+         */
+        virtual void clear() = 0;
 
     protected:
         /**

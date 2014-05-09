@@ -18,7 +18,7 @@
 
 #include <omnetpp.h>
 #include "EtherFrame_m.h"
-#include "Buffer.h"
+#include "base/Buffer.h"
 
 namespace CoRE4INET {
 
@@ -69,6 +69,21 @@ class DoubleBuffer : public virtual Buffer
          * @return Pointer to the copied frame or NULL if no frame is stored.
          */
         virtual EtherFrame* dequeue();
+
+        /**
+         * @brief Returns the used size of the buffer
+         *
+         * @return number of messages in the buffer
+         *
+         */
+        virtual unsigned int size();
+
+        /**
+         * @brief Resets the buffer, deletes all messages
+         *
+         *
+         */
+        virtual void clear();
 };
 }
 #endif

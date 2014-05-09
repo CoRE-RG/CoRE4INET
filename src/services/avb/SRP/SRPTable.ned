@@ -27,7 +27,7 @@ package core4inet.services.avb.SRP;
 simple SRPTable
 {
     parameters:
-        @display("i=block/table2");
+        @display("i=block/table2,blue");
         
         //Signal emitted when talker is registered, contains TalkerEntry
         @signal[talkerRegistered](type=SRPTable::TalkerEntry);
@@ -40,7 +40,10 @@ simple SRPTable
         //Signal emitted when listener is unregistered, contains ListenerEntry
         @signal[listenerUnregistered](type=SRPTable::ListenerEntry);
         //Signal emitted when listener registration failed, contains ListenerEntry
-        @signal[listenerRegistrationFailed](type=SRPTable::ListenerEntry);
+        @signal[listenerRegistrationTimeout](type=SRPTable::ListenerEntry);
+        
+        //Entries not updated are deleted after agingTime (0 means disabled)
+        double agingTime @unit("s") = default(7s);
         
         //string srpTableFile = default("");
 }

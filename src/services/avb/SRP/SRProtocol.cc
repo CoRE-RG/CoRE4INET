@@ -13,6 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
+#include <algorithm>
+
 #include "SRProtocol.h"
 
 #include "SRPFrame_m.h"
@@ -37,6 +39,7 @@ void SRProtocol::initialize()
     }
     srpTable->subscribe("talkerRegistered", this);
     srpTable->subscribe("listenerRegistered", this);
+    srpTable->subscribe("listenerUpdated", this);
 }
 
 void SRProtocol::handleMessage(cMessage *msg)
@@ -59,6 +62,14 @@ void SRProtocol::handleMessage(cMessage *msg)
         }
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
         {
+            bool update = false;
+            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), 0);
+            //Is this a new or updated stream
+            if (std::find(listeners.begin(), listeners.end(), port) != listeners.end())
+            {
+                update = true;
+            }
+
             unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
             //Add Higher Priority Bandwidth
             utilizedBandwidth += port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
@@ -72,16 +83,18 @@ void SRProtocol::handleMessage(cMessage *msg)
 
             double reservableBandwidth = par("reservableBandwidth").doubleValue();
 
-            if ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth))
+            if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
             {
                 //TODO Minor: try to get VLAN
                 srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, 0);
-                //TODO: Update Table if enough bandwidth
-                EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
-                        << port->getFullName() << ". Utilized Bandwidth: "
-                        << (utilizedBandwidth + requiredBandwidth) / (double) 1000000 << " of "
-                        << (totalBandwidth * reservableBandwidth) / (double) 1000000 << " reservable Bandwidth of "
-                        << totalBandwidth / (double) 1000000 << " MBit/s.";
+                if(!update)
+                {
+                    EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
+                            << port->getFullName() << ". Utilized Bandwidth: "
+                            << (utilizedBandwidth + requiredBandwidth) / (double) 1000000 << " of "
+                            << (totalBandwidth * reservableBandwidth) / (double) 1000000 << " reservable Bandwidth of "
+                            << totalBandwidth / (double) 1000000 << " MBit/s.";
+                }
             }
             else
             {
@@ -162,7 +175,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 
         send(talkerAdvertise, gate("out"));
     }
-    else if (id == registerSignal("listenerRegistered"))
+    else if (id == registerSignal("listenerRegistered") || id == registerSignal("listenerUpdated"))
     {
         SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
 
@@ -170,8 +183,8 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         SRPTable *srpTable = (SRPTable *) src;
         //TODO Minor: try to get VLAN
         cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, 0);
-        //Send listener ready ony when talker is not a local application
-        if (strcmp(talker->getName(), "phy") == 0)
+        //Send listener ready only when talker is not a local application
+        if (talker && talker->isName("phy"))
         {
             SRPFrame *listenerReady = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
             listenerReady->setStreamID(lentry->streamId);

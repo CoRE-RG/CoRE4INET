@@ -19,7 +19,7 @@
 
 namespace CoRE4INET {
 
-Define_Module(RCBuffer);
+//Define_Module(RCBuffer);
 
 RCBuffer::RCBuffer()
 {

@@ -17,7 +17,7 @@
 
 namespace CoRE4INET {
 
-Define_Module(BGBuffer);
+//Define_Module(BGBuffer);
 
 int BGBuffer::numInitStages() const
 {

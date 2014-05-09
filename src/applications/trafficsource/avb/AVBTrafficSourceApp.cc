@@ -69,6 +69,8 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
         {
             EV << "Register Talker in node" << std::endl;
             srpTable->subscribe("listenerRegistered", this);
+            srpTable->subscribe("listenerUnregistered", this);
+            srpTable->subscribe("listenerRegistrationTimeout", this);
             srpTable->updateTalkerWithStreamId(streamID, this, new MACAddress("00:00:00:00:00:00"), SR_CLASS_A,
                     frameSize, intervalFrames);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
@@ -92,7 +94,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 void AVBTrafficSourceApp::sendAVBFrame()
 {
     char name[10];
-    sprintf(name,"Stream %ld",streamID);
+    sprintf(name, "Stream %ld", streamID);
     AVBFrame *outFrame = new AVBFrame(name);
     outFrame->setStreamID(streamID);
 
@@ -135,6 +137,23 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
             getDisplayString().setTagArg("i2", 0, "status/active");
             isStreaming = true;
             sendAVBFrame();
+        }
+    }
+    else if ((id == registerSignal("listenerRegistrationTimeout")) || id == registerSignal("listenerUnregistered"))
+    {
+        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+
+        //If talker for the desired stream, unregister Listener
+        if (lentry->streamId == streamID)
+        {
+            //check whether there are listeners left
+            SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+            if (srpTable->getListenersForStreamId(streamID, 0).size() == 0)
+            {
+                isStreaming = false;
+                bubble("Last listener unregistered, stop streaming!");
+                getDisplayString().setTagArg("i2", 0, "status/hourglass");
+            }
         }
     }
 }

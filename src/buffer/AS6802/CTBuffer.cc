@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Buffer.h"
+#include "base/Buffer.h"
 #include "CTBuffer.h"
 #include "CoRE4INETDefs.h"
 #include "CTFrame.h"
@@ -22,7 +22,7 @@
 
 using namespace CoRE4INET;
 
-Define_Module(CTBuffer);
+//Define_Module(CTBuffer);
 
 CTBuffer::~CTBuffer()
 {

@@ -99,8 +99,8 @@ class SRPTable : public cSimpleModule
         };
         friend std::ostream& operator<<(std::ostream& os, const ListenerEntry& entry);
 
-        typedef std::map<uint64_t, TalkerEntry, StreamId_compare> TalkerTable;
-        typedef std::map<cModule*, ListenerEntry, Module_compare> ListenerList;
+        typedef std::map<uint64_t, TalkerEntry*, StreamId_compare> TalkerTable;
+        typedef std::map<cModule*, ListenerEntry*, Module_compare> ListenerList;
         typedef std::map<uint64_t, ListenerList, StreamId_compare> ListenerTable;
 
         /**
@@ -112,6 +112,10 @@ class SRPTable : public cSimpleModule
          */
         std::map<unsigned int, ListenerTable> listenerTables;
 
+        /**
+         * Time when next entry is aging
+         */
+        simtime_t nextAging;
     protected:
 
         /**
@@ -147,7 +151,7 @@ class SRPTable : public cSimpleModule
         /**
          *  signal emitted when a listeners registration failed
          */
-        static simsignal_t listenerRegistrationFailedSignal;
+        static simsignal_t listenerRegistrationTimeoutSignal;
 
     public:
         /**
@@ -220,8 +224,7 @@ class SRPTable : public cSimpleModule
          * @brief Unregister a streamId at listenerTable.
          * @return True if removed. False if not registered.
          */
-        virtual bool removeListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid = 0,
-                bool failedSignal = false);
+        virtual bool removeListenerWithStreamId(uint64_t streamId, cModule *module, unsigned int vid = 0);
 
         /**
          *  @brief Prints cached data
@@ -233,7 +236,17 @@ class SRPTable : public cSimpleModule
          */
         virtual void clear();
 
+        /**
+         * @brief Remove entries that were not updated during agingTime if necessary
+         */
+        void removeAgedEntriesIfNeeded();
+
     protected:
+        /**
+         * @brief Remove entries that were not updated during agingTime
+         */
+        void removeAgedEntries();
+
         /**
          * @brief updates the displaystring of talkers and listeners
          */

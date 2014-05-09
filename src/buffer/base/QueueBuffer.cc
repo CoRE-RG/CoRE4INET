@@ -102,4 +102,13 @@ void QueueBuffer::setFilled(unsigned int fillLevel)
     }
 }
 
+unsigned int QueueBuffer::size(){
+    return frames.length();
+}
+
+void QueueBuffer::clear(){
+    frames.clear();
+    setFilled(0);
+}
+
 } //namespace

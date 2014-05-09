@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Buffer.h"
+#include "base/Buffer.h"
 #include "CoRE4INETDefs.h"
 
 #include "HelperFunctions.h"
@@ -22,7 +22,7 @@
 
 using namespace CoRE4INET;
 
-Define_Module(Buffer);
+//Define_Module(Buffer);
 
 simsignal_t Buffer::txPkSignal = SIMSIGNAL_NULL;
 simsignal_t Buffer::rxPkSignal = SIMSIGNAL_NULL;

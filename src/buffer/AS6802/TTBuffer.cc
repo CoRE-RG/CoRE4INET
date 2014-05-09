@@ -20,7 +20,7 @@
 
 using namespace CoRE4INET;
 
-Define_Module(TTBuffer);
+//Define_Module(TTBuffer);
 
 TTBuffer::TTBuffer()
 {

@@ -33,6 +33,10 @@ simple AVBTrafficSinkApp extends TrafficSinkApp
         @display("i=block/sink,blue");
         // ID of the AVB Stream
         int streamID;
+        //Interval in which a subscription is updated
+        double updateInterval @unit("s") = default(6s);
+        //Interval in which a subscription is reregistered after a timeout
+        double retryInterval @unit("s") = default(1s);
     gates:
         // Gate for incoming AVB frames
         input AVBin @directIn;

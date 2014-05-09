@@ -28,7 +28,8 @@
         requires = "AVB_common"
         labels = ""
         nedPackages = "
-                       core4inet.examples.avb.small_network
+                       core4inet.examples.avb_AS6802.small_network
+                       core4inet.examples.avb_AS6802.large_network
                       "
         extraSourceFolders = ""
         linkerFlags = ""

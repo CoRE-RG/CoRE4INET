@@ -17,7 +17,7 @@
 #define __CORE4INET_AVBBUFFER_H_
 
 #include <omnetpp.h>
-#include "Buffer.h"
+#include "base/Buffer.h"
 #include "AVBIncoming.h"
 #include "Timed.h"
 
@@ -81,17 +81,11 @@ class AVBBuffer : public virtual Buffer, public Timed
          */
         void resetCredit();
 
-        /**
-         * @brief get Message count.
-         *
-         * @return returns number of queued frames.
-         */
-        int getMsgCount();
     protected:
         int credit;
         int maxCredit;
         bool inTransmission;
-        int msgCnt;
+        //int msgCnt;
         SimTime newTime;
         SimTime oldTime;
         double Wduration;
