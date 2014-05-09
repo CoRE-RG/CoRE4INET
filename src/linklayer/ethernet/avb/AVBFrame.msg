@@ -13,19 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 cplusplus {{
-    #include "EtherFrame_m.h"
+    #include "EtherFrameWithQTag_m.h"
 }}
 
-class ::EtherFrame;
-
 namespace CoRE4INET;
+
+class EthernetIIFrameWithQTag;
 //
 // Represents a AVB Frame
 //
 // @see CTFrame
 //
 // @author Philipp Meyer 
-packet AVBFrame extends EtherFrame
+packet AVBFrame extends EthernetIIFrameWithQTag
 {    
     // ID of the AVB Stream
     //
