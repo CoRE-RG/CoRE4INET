@@ -100,7 +100,7 @@ module TTEAVBEtherHost
             @display("p=274,169");
         }
 
-        app[numApps]: <default("TTEAPITestApplication")> like IApplication {
+        app[numApps]: < > like IApplication {
             @display("p=380,37,row,70");
         }
 

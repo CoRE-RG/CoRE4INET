@@ -95,7 +95,7 @@ module TTEEtherHost
         scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
-        app[numApps]: <default("TTEAPITestApplication")> like IApplication {
+        app[numApps]: < > like IApplication {
             @display("p=234,37,row,70");
         }
         bgIn: BGQueueBuffer {
