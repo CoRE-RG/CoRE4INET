@@ -5,5 +5,9 @@
 #/examples/AS6802/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0
 #/examples/AS6802/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0
 #/examples/AS6802/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0
-/examples/avb/small_network/,                                     -f omnetpp.ini -c General -r 0
-/examples/avb/small_network/,                                     -f omnetpp.ini -c With_Crosstraffic -r 0
+/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c General -r 0
+/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r 6,

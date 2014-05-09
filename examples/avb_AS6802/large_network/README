@@ -1,0 +1,21 @@
+Demonstrates a larger TTEthernet with AVB Network.
+
+You can find a detailed analysis of this network in:
+P. Meyer, T. Steinbach, F. Korf, and T. C. Schmidt. Extending IEEE 802.1 AVB with Time-triggered Scheduling: A
+Simulation Study of the Coexistence of Synchronous and Asynchronous Traffic. In 2013 IEEE Vehicular Networking
+Conference (VNC), pages 47-54, Piscataway, New Jersey, Dec. 2013. IEEE Press.
+http://core.informatik.haw-hamburg.de/images/publications/papers/msks-eatts-13a.pdf
+
+The evaluations are based on a network that generates worst-case scenarios. It consists of ten nodes interconnected via
+three switches to produce a bottleneck with high probability of interference. For all traffic classes, the longest path
+between sender and receiver is four switching hops. In the network all links are configured with a bandwidth of 100
+Mbit/s. The AVB configuration uses nodes 1 and 2 as talkers, while node 8 is the listener for both streams. Each stream
+is configured to use 350B payload in a 125μs class measurement interval, resulting in a total bandwidth of approx.
+50Mbit/s (2 times 25Mbit/s). The time-triggered messages use a cycle time of 4ms and full size frames to generate
+maximum interference. For each route, two messages are configured, resulting in a total bandwidth of 25 Mbit/s for
+time-triggered traffic. Node 10 broadcasts full size best-effort cross-traffic in a 2ms to 3ms interval. All nodes also
+reply with full size best-effort messages to generate traffic bursts.
+
+The case study uses different parameters for time-triggered and best-effort traffic, while the configuration for AVB
+remains the same. This allows to uphold the comparability of the AVB results through the whole evaluation.
+

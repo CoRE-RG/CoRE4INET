@@ -15,7 +15,8 @@ Example simulations are grouped into the following subdirectories:
    AS6802/synchronization/HighIntegrity_small            Small network with high integrity configuration
    AS6802/synchronization/StandardIntegrity_large        Large network with standard integrity configuration
    AS6802/synchronization/StandardIntegrity_medium       Medium network with standard integrity configuration
-   avb/small_network/                                    example that shows a small network with avb and AS6802 traffic generation
+   avb_AS6802/small_network/                             example that shows a small network with avb and AS6802 traffic
+   avb_AS6802/large_network/                             example that shows a larger network with avb and AS6802 traffic
 
 
 The package's main README file contains links to additional info to help you
