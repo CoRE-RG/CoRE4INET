@@ -108,6 +108,14 @@ uint64_t secondsToTransparentClock(simtime_t seconds);
  */
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
 
+/**
+ * @brief generates an auto multicast addess by using generateAutoAddress and changing the least significant bit of the
+ * first byte
+ *
+ * @return unique multicast address
+ */
+MACAddress generateAutoMulticastAddress();
+
 #ifdef WITH_AS6802_COMMON
 /**
  * @brief Sets the transparent clock information in the pcf

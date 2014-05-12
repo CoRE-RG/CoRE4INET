@@ -33,9 +33,7 @@ Define_Module(AVBTrafficSourceApp);
 AVBTrafficSourceApp::AVBTrafficSourceApp()
 {
     isStreaming = false;
-    //Make multicast MAC
-    uint64 intAddr = 0x010000000000ULL | MACAddress::generateAutoAddress().getInt();
-    multicastMAC = MACAddress(intAddr);
+    multicastMAC = generateAutoMulticastAddress();
 }
 
 void AVBTrafficSourceApp::initialize()

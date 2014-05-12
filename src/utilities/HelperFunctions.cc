@@ -88,6 +88,12 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
     return transparentClock / secondsToTransparentClock(tick);
 }
 
+MACAddress generateAutoMulticastAddress(){
+    MACAddress multicastMAC = MACAddress::generateAutoAddress();
+    multicastMAC.setAddressByte(1,(multicastMAC.getAddressByte(1)|0x01));
+    return multicastMAC;
+}
+
 #ifdef WITH_AS6802_COMMON
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
 {
