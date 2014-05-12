@@ -14,7 +14,6 @@
 // 
 
 #include "AVBBuffer.h"
-#include "AVBFrame_m.h"
 #include "ModuleAccess.h"
 
 #include "SRPTable.h"
@@ -53,7 +52,6 @@ void AVBBuffer::initialize(int stage)
         credit = 0;
         maxCredit = 0;
         inTransmission = false;
-        //msgCnt = 0;
         newTime = simTime();
         oldTime = simTime();
         Wduration = 0;
@@ -63,7 +61,6 @@ void AVBBuffer::initialize(int stage)
         WATCH(credit);
         WATCH(maxCredit);
         WATCH(inTransmission);
-        //WATCH(msgCnt);
         WATCH(Wduration);
     }
 }
@@ -81,7 +78,6 @@ void AVBBuffer::handleMessage(cMessage *msg)
 
     if (msg->arrivedOn("in"))
     {
-        //msgCnt++;
         if (inTransmission)
         {
             interferenceSlope(newTime - oldTime);
@@ -92,11 +88,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
         {
             if (credit >= 0)
             {
-                //if (msgCnt > 0)
                 if (size() > 0)
                 {
                     cMessage *outFrame = getFrame();
-                    //msgCnt--;
                     send(outFrame, "out");
                     inTransmission = true;
                 }
@@ -135,7 +129,6 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 if (size() > 0)
                 {
                     cMessage *outFrame = getFrame();
-                    //msgCnt--;
                     send(outFrame, "out");
                     inTransmission = true;
                 }
@@ -154,10 +147,6 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 if (reservedBandwith == 0)
                 {
                     resetCredit();
-                    //while(msgCnt>0){
-                    //    delete dequeue();
-                    //    msgCnt--;
-                    //}
                     clear();
                 }
                 else
@@ -194,7 +183,6 @@ void AVBBuffer::idleSlope(SimTime duration)
 
         credit += ceil(reservedBandwith * duration.dbl());
         emit(creditSignal, credit);
-        //if (credit > 0 && msgCnt == 0 && !inTransmission)
         if (credit > 0 && size() == 0 && !inTransmission)
             resetCredit();
     }
@@ -230,7 +218,6 @@ void AVBBuffer::sendSlope(SimTime duration)
     emit(creditSignal, credit);
     credit -= ceil((portBandwith - reservedBandwith) * duration.dbl());
     inTransmission = false;
-    //if (msgCnt > 0)
     if (size() > 0)
     {
         if (credit < 0)
@@ -244,7 +231,6 @@ void AVBBuffer::sendSlope(SimTime duration)
         else
         {
             cMessage *outFrame = getFrame();
-            //msgCnt--;
             send(outFrame, "out");
             inTransmission = true;
         }
