@@ -57,7 +57,7 @@ void SRProtocol::handleMessage(cMessage *msg)
         if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
         {
             //TODO Minor: try to get VLAN
-            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, etherctrl->getSrc(), SR_CLASS_A,
+            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, talkerAdvertise->getStreamDA(), SR_CLASS_A,
                     talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), 0);
         }
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
@@ -160,11 +160,11 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         talkerAdvertise->setStreamID(tentry->streamId);
         talkerAdvertise->setMaxFrameSize(tentry->framesize);
         talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
+        talkerAdvertise->setStreamDA(tentry->address);
 
         ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
         etherctrl->setEtherType(MSRP_ETHERTYPE);
         etherctrl->setDest(SRP_ADDRESS);
-        etherctrl->setSrc(tentry->address);
         etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
         talkerAdvertise->setControlInfo(etherctrl);
 

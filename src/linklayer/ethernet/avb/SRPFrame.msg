@@ -13,7 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 cplusplus {{
+    #include "MACAddress.h"
 }}
+
+class noncobject MACAddress;
 
 namespace CoRE4INET;
 
@@ -26,8 +29,10 @@ namespace CoRE4INET;
 packet SRPFrame{
     
     // ID of the AVB Stream
-    // 64 Bit Field
+    // 64 Bit Field (48bit MAC + 16bit UniqueID)
 	unsigned long streamID;
+	
+	MACAddress streamDA;
 	
 	// for internal implementation:
 	string displayString="b=15,15,rect,black,black,5";
@@ -54,8 +59,17 @@ packet TalkerAdvertise extends SRPFrame{
 	unsigned int accumulatedLatency;
 }
 
+packet TalkerFailed extends SRPFrame{
+}
+
 packet ListenerReady extends SRPFrame{
 	byteLength = 8;
+}
+
+packet AskingFailed extends SRPFrame{
+    // FailureInformation
+	//
+	// 72 Bit Field
 }
 
 packet ListenerFailed extends SRPFrame{

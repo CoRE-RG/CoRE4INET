@@ -165,13 +165,31 @@ class SRPTable : public cSimpleModule
 
     public:
         /**
-         * @brief For a known arriving port, V-TAG and destination MAC. It finds out the port where relay component should deliver the message
+         * @brief For a known talker address and V-TAG it finds out the streamId
          *
-         * @param address MAC destination
+         * @param talkerAddress address
          * @param vid VLAN ID
-         * @return Output port for address, or -1 if unknown.
+         * @return streamId related to talkerAddress
+         */
+        virtual uint64_t getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsigned int vid = 0);
+
+        /**
+         * @brief For a known streamId and V-TAG it finds out the port where relay component should deliver the message
+         *
+         * @param streamId streamId
+         * @param vid VLAN ID
+         * @return listeners for the stream
          */
         virtual std::list<cModule*> getListenersForStreamId(uint64_t streamId, unsigned int vid = 0);
+
+        /**
+         * @brief For a known talker address and V-TAG it finds out the port where relay component should deliver the message
+         *
+         * @param talkerAddress address
+         * @param vid VLAN ID
+         * @return listeners for the stream
+         */
+        virtual std::list<cModule*> getListenersForTalkerAddress(MACAddress &talkerAddress, unsigned int vid = 0);
 
         /**
          * @brief Retrieve the module a message with a given streamId will come from (required for listener ready messages)
@@ -203,16 +221,15 @@ class SRPTable : public cSimpleModule
          * @brief Register a new streamId at talkerTable.
          * @return True if refreshed. False if it is new.
          */
-        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address,
-                SR_CLASS srClass = SR_CLASS_A, unsigned int framesize = 0, unsigned int intervalFrames = 0,
-                unsigned int vid = 0);
+        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, SR_CLASS srClass =
+                SR_CLASS_A, unsigned int framesize = 0, unsigned int intervalFrames = 0, unsigned int vid = 0);
 
         /**
          * @brief Unregister a streamId at talkerTable.
          * @return True if removed. False if not registered.
          */
-        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address,
-                unsigned int vid = 0);
+        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, unsigned int vid =
+                0);
 
         /**
          * @brief Register a new streamId at listenerTable.
