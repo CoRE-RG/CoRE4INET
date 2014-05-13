@@ -24,14 +24,16 @@
 
 #include "Timer.h"
 
-#ifdef WITH_AS6802_COMMON
+//FIXME: Can be used when opp_makedep is able to use defines
+//#ifdef WITH_AS6802_COMMON
 #include "PCFrame_m.h"
-#endif
+//#endif
 
-#ifdef WITH_AVB_COMMON
+//FIXME: Can be used when opp_makedep is able to use defines
+//#ifdef WITH_AVB_COMMON
 #include "AVBDefs.h"
 #include "AVBDefs_m.h"
-#endif
+//#endif
 
 namespace CoRE4INET {
 
