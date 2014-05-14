@@ -21,8 +21,8 @@
 #include <EtherFrame_m.h>
 #include <ModuleAccess.h>
 
-#include <CTIncoming.h>
-#include <Buffer.h>
+#include "CTIncoming.h"
+#include "CTBuffer.h"
 
 #include "CoRE4INETDefs.h"
 #include "HelperFunctions.h"
@@ -217,14 +217,14 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
                 CTIncoming *ct_incoming = dynamic_cast<CTIncoming*>(module);
                 if (ct_incoming)
                 {
-                    Buffer *buffer = dynamic_cast<Buffer*>(ct_incoming->gate("out")->getPathEndGate()->getOwner());
+                    CTBuffer *buffer = dynamic_cast<CTBuffer*>(ct_incoming->gate("out")->getPathEndGate()->getOwner());
                     if (buffer && buffer->hasPar("ct_id"))
                     {
                         ct_incomings[buffer->par("ct_id").longValue()].push_back(ct_incoming);
                     }
                     else
                     {
-                        throw cRuntimeError("CTIncoming module %s has no Buffer attached with ct_id configured!",
+                        throw cRuntimeError("CTIncoming module %s has no CTBuffer attached with ct_id configured!",
                                 (*ct_incomingPath).c_str());
                     }
                 }

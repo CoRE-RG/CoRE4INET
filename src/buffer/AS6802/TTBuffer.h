@@ -16,10 +16,10 @@
 #ifndef __CORE4INET_TTBUFFER_H_
 #define __CORE4INET_TTBUFFER_H_
 
-#include <omnetpp.h>
-#include <CTBuffer.h>
-#include <SchedulerMessageEvents_m.h>
-#include <Scheduled.h>
+#include "omnetpp.h"
+#include "CTBuffer.h"
+#include "scheduler/SchedulerMessageEvents_m.h"
+#include "Scheduled.h"
 
 namespace CoRE4INET {
 

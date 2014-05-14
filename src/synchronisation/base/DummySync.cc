@@ -15,7 +15,7 @@
 
 #include "DummySync.h"
 #include "TTEScheduler.h"
-#include "SchedulerMessageEvents_m.h"
+#include "scheduler/SchedulerMessageEvents_m.h"
 #include "SyncNotification_m.h"
 
 #include <ModuleAccess.h>
