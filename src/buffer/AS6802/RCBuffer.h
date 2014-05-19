@@ -16,10 +16,10 @@
 #ifndef __CORE4INET_RCBUFFER_H_
 #define __CORE4INET_RCBUFFER_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include "CTBuffer.h"
-#include <SchedulerMessageEvents_m.h>
-#include <Timed.h>
+#include "scheduler/SchedulerMessageEvents_m.h"
+#include "Timed.h"
 
 namespace CoRE4INET {
 

@@ -18,7 +18,7 @@
 
 #include "Callback.h"
 #include "tte_api.h"
-#include "Buffer.h"
+#include "base/Buffer.h"
 #include "TTBuffer.h"
 #include "RCBuffer.h"
 

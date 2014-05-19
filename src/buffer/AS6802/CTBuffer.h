@@ -18,7 +18,7 @@
 
 #include <omnetpp.h>
 #include "EtherFrame_m.h"
-#include "Buffer.h"
+#include "base/Buffer.h"
 
 namespace CoRE4INET {
 

@@ -37,6 +37,4 @@ moduleinterface IIncoming extends IOutputQueue
     @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
     //Statistic of the end-to-end latency
     @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
-
-    gates:
 }

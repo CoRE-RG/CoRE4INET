@@ -17,12 +17,27 @@ package core4inet.applications.trafficsink.avb;
 
 import core4inet.applications.trafficsink.base.TrafficSinkApp;
 
+//
+// Traffic sink application used for statistics collection of AVB traffic.
+//
+// The module waits until a talker with the specified stream id was registered at the srpTable, then
+// registeres itself as a listener for the stream and waits for incoming frames to record statistics
+//
+// @see TrafficSinkApp
+//
+// @author Till Steinbach
 simple AVBTrafficSinkApp extends TrafficSinkApp
 {
     parameters:
         @class(AVBTrafficSinkApp);
         @display("i=block/sink,blue");
+        // ID of the AVB Stream
         int streamID;
+        //Interval in which a subscription is updated
+        double updateInterval @unit("s") = default(6s);
+        //Interval in which a subscription is reregistered after a timeout
+        double retryInterval @unit("s") = default(1s);
     gates:
+        // Gate for incoming AVB frames
         input AVBin @directIn;
 }

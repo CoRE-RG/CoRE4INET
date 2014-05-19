@@ -12,26 +12,59 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#include "ResultFilters.h"
+#include "resultfilters/ResultFilters.h"
+
+#include "cgate.h"
+#include "cchannel.h"
+#include "cmodule.h"
 
 #include <cmessage.h>
 
 using namespace CoRE4INET;
 
-Register_ResultFilter("innerMessage", InnerMessageFilter);
+Register_ResultFilter("innerMessage", InnerMessageFilter)
+;
 
-void InnerMessageFilter::receiveSignal(__attribute((unused))  cResultFilter *prev, simtime_t_cref t, cObject *object)
+void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
 {
     if (dynamic_cast<cPacket *>(object))
     {
         cPacket *innerPacket = (cPacket *) object;
-        cPacket *tmpPacket;
-        while ((tmpPacket = innerPacket->decapsulate()) != NULL)
+        while (innerPacket->getEncapsulatedPacket() != NULL)
         {
-            innerPacket = tmpPacket;
+            innerPacket = innerPacket->getEncapsulatedPacket();
         }
         fire(this, t, innerPacket);
-        delete (innerPacket);
+    }
+}
+
+/*
+ * Filter that subtracts the last value from the current value
+ */
+Register_ResultFilter("SubtractActualFromLast", SubtractActualFromLastFilter)
+;
+
+bool SubtractActualFromLastFilter::process(simtime_t& t, double& value)
+{
+    difference = value - lastValue;
+    lastValue = value;
+    value = difference;
+    return true;
+}
+
+Register_ResultFilter("innerMessagePacketBytes", InnerMessagePacketBytesFilter)
+;
+
+void InnerMessagePacketBytesFilter::receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object)
+{
+    if (dynamic_cast<cPacket *>(object))
+    {
+        cPacket *innerPacket = (cPacket *) object;
+        while (innerPacket->getEncapsulatedPacket() != NULL)
+        {
+            innerPacket = innerPacket->getEncapsulatedPacket();
+        }
+        fire(this, t, (double) innerPacket->getByteLength());
     }
 }
 
@@ -56,7 +89,8 @@ bool FloatingIntervalFilter::process(simtime_t &t, double &value)
     return true;
 }
 
-Register_ResultFilter("floatingIntervalCount", FloatingIntervalCountFilter);
+Register_ResultFilter("floatingIntervalCount", FloatingIntervalCountFilter)
+;
 
 bool FloatingIntervalCountFilter::process(simtime_t &t, double &value)
 {
@@ -66,7 +100,8 @@ bool FloatingIntervalCountFilter::process(simtime_t &t, double &value)
     return true;
 }
 
-Register_ResultFilter("floatingIntervalSum", FloatingIntervalSumFilter);
+Register_ResultFilter("floatingIntervalSum", FloatingIntervalSumFilter)
+;
 
 bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
 {
@@ -81,7 +116,8 @@ bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
     return true;
 }
 
-Register_ResultFilter("floatingIntervalAvg", FloatingIntervalAvgFilter);
+Register_ResultFilter("floatingIntervalAvg", FloatingIntervalAvgFilter)
+;
 
 bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value)
 {

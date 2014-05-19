@@ -53,4 +53,20 @@ EtherFrame * DoubleBuffer::dequeue()
         return NULL;
 }
 
+unsigned int DoubleBuffer::size()
+{
+    return frame ? 1 : 0;
+}
+
+void DoubleBuffer::clear()
+{
+    delete frame;
+    frame = NULL;
+    if (ev.isGUI())
+    {
+        //Update displaystring
+        getDisplayString().setTagArg("i", 0, "buffer/empty");
+    }
+}
+
 }

@@ -15,8 +15,6 @@
 
 package core4inet.applications.base;
 
-import core4inet.linklayer.port.IPort;
-
 //
 // Interface to be implemented by application models.
 // Since this is an abstract module please do not instantiate it
@@ -31,6 +29,8 @@ moduleinterface IApplication
         @display("i=block/app");
         //Comma seperated list of buffer modules the application is allowed to use
         string buffers;
+        //Name shown above the module
+        string displayName;
     gates:
          //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn;

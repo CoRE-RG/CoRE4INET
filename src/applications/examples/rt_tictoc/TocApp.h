@@ -17,7 +17,7 @@
 #define __CORE4INET_TOCAPP_H_
 
 #include <omnetpp.h>
-#include "base/ApplicationBase.h"
+#include "CTApplicationBase.h"
 
 namespace CoRE4INET {
 
@@ -30,7 +30,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TocApp : public ApplicationBase
+class TocApp : public CTApplicationBase
 {
     protected:
         /**

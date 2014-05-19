@@ -15,9 +15,8 @@
 
 #include "TTIncoming.h"
 
-#include <ModuleAccess.h>
-#include <TTEScheduler.h>
-#include <SchedulerMessageEvents_m.h>
+#include "ModuleAccess.h"
+#include "scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
 

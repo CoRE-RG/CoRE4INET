@@ -16,14 +16,14 @@
 #ifndef __CORE4INET_SRPETHERLLC_H
 #define __CORE4INET_SRPETHERLLC_H
 
-#include "EtherLLC.h"
+#include "BGEtherLLC.h"
 
 #include "SRPFrame_m.h"
 #include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
-class SRPEtherLLC : public EtherLLC
+class SRPEtherLLC : public BGEtherLLC
 {
   protected:
     virtual void handleMessage(cMessage *msg);

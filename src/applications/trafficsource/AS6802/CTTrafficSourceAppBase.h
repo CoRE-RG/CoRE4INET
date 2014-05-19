@@ -17,6 +17,7 @@
 #define __CORE4INET_CTTRAFFICSOURCEBASE_H_
 
 #include "TrafficSourceAppBase.h"
+#include "CTApplicationBase.h"
 
 namespace CoRE4INET {
 
@@ -26,8 +27,13 @@ namespace CoRE4INET {
  * @sa ApplicationBase
  * @ingroup Applications
  */
-class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase
+class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtual CTApplicationBase
 {
+    public:
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
     protected:
 
         /**

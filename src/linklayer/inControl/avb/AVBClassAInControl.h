@@ -19,12 +19,9 @@
 #include <omnetpp.h>
 
 #include <EtherFrame_m.h>
-#include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
 #include <ModuleAccess.h>
-
-#include <AVBIncoming.h>
-#include <Buffer.h>
+#include "EtherFrameWithQTag_m.h"
 
 #include "CoRE4INETDefs.h"
 #include "HelperFunctions.h"
@@ -83,17 +80,6 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
         }
         else
         {
-            //TODO Minor: REMOVE SRP is Handled in BE-Part of Switch only!
-            /*if (SRPFrame *srpFrame = dynamic_cast<SRPFrame*>(frame->getEncapsulatedPacket()))
-            {
-                if (dynamic_cast<TalkerAdvertise*>(srpFrame))
-                {
-                    frame->setDest(MACAddress::BROADCAST_ADDRESS);
-
-                }
-                srpFrame->setPortIndex(cModule::getParentModule()->getIndex());
-            }*/
-
             IC::handleMessage(msg);
         }
     }
@@ -106,14 +92,15 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
 template<class IC>
 bool AVBClassAInControl<IC>::isAVB(EtherFrame *frame)
 {
-    if (dynamic_cast<AVBFrame*>(frame))
+    //TODO: Major: Detect AVB frame only using priority
+    if (dynamic_cast<EthernetIIFrameWithQTag*>(frame))
     {
-        return true;
+        if (dynamic_cast<AVBFrame*>(frame))
+        {
+            return true;
+        }
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 }

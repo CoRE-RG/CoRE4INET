@@ -14,7 +14,6 @@
 // 
 
 package core4inet.synchronisation.AS6802.HICompressionMaster;
-import core4inet.linklayer.IPort;
 import core4inet.synchronisation.base.ISync;
 
 

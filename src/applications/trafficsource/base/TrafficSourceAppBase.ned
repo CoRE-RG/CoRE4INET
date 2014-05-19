@@ -37,5 +37,5 @@ simple TrafficSourceAppBase extends ApplicationBase
         double start_time @unit(s) = default(0s);
 
         //Size of the payload of the message (size of encapsulated cPacket) that is being generated
-        int payload @unit(Byte) = default(46Byte);
+        volatile int payload @unit(Byte) = default(46Byte);
 }

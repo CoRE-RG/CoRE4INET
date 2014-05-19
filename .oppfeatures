@@ -28,7 +28,8 @@
         requires = "AVB_common"
         labels = ""
         nedPackages = "
-                       core4inet.examples.avb.small_network
+                       core4inet.examples.avb_AS6802.small_network
+                       core4inet.examples.avb_AS6802.large_network
                       "
         extraSourceFolders = ""
         linkerFlags = ""
@@ -113,7 +114,7 @@
         />
     <feature
         id="AS6802_sync"
-        name="AS6802 Synchronisation Protocol"
+        name="[CURRENTLY NOT FUNCTIONAL] AS6802 Synchronisation Protocol"
         description = "The simulation model for the AS6802 synchronisation protocol"
         initiallyEnabled = "false"
         requires = "AS6802_common"

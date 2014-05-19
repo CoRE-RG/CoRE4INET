@@ -16,11 +16,10 @@
 #include "RCBuffer.h"
 #include <CTFrame_m.h>
 #include <TTEScheduler.h>
-#include "ApplicationBase.h"
 
 namespace CoRE4INET {
 
-Define_Module(RCBuffer);
+//Define_Module(RCBuffer);
 
 RCBuffer::RCBuffer()
 {
@@ -58,8 +57,7 @@ void RCBuffer::handleMessage(cMessage *msg)
         {
             if (bagExpired)
             {
-                EtherFrame *outgoingMessage = getFrame();
-                if (outgoingMessage)
+                if (EtherFrame *outgoingMessage = getFrame())
                 {
                     bagExpired = false;
                     numReset = 0;
@@ -80,8 +78,7 @@ void RCBuffer::handleMessage(cMessage *msg)
         }
         else if (msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT)
         {
-            EtherFrame *outgoingMessage = getFrame();
-            if (outgoingMessage)
+            if (EtherFrame *outgoingMessage = getFrame())
             {
                 bagExpired = false;
                 numReset = 0;

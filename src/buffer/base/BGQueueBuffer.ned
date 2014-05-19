@@ -26,6 +26,7 @@ package core4inet.buffer.base;
 simple BGQueueBuffer extends BGBuffer
 {
     parameters:
+        @display("q=frames");
         //BGQueueBuffer is implemented by the BGQueueBuffer C++ Class
         @class(BGQueueBuffer);
         //Signal emitted when queuelength changes, contains new length

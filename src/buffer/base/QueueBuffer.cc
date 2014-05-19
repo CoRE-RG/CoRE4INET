@@ -58,8 +58,7 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
         }
         else
         {
-            EtherFrame *oldFrame = (EtherFrame *) frames.pop();
-            delete oldFrame;
+            delete frames.pop();
         }
     }
     frames.insert(newFrame);
@@ -101,6 +100,15 @@ void QueueBuffer::setFilled(unsigned int fillLevel)
                 getDisplayString().setTagArg("i", 0, "buffer/buffer3plus");
         }
     }
+}
+
+unsigned int QueueBuffer::size(){
+    return frames.length();
+}
+
+void QueueBuffer::clear(){
+    frames.clear();
+    setFilled(0);
 }
 
 } //namespace

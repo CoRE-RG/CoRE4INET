@@ -17,7 +17,7 @@
 #define __CORE4INET_TICAPP_H_
 
 #include <omnetpp.h>
-#include "base/ApplicationBase.h"
+#include "CTApplicationBase.h"
 
 #include <Scheduled.h>
 
@@ -32,7 +32,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TicApp : public ApplicationBase, public virtual Scheduled
+class TicApp : public CTApplicationBase, public virtual Scheduled
 {
     protected:
         /**

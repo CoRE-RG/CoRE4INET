@@ -19,6 +19,11 @@ namespace CoRE4INET {
 
 Define_Module(CTTrafficSinkApp);
 
+void CTTrafficSinkApp::initialize()
+{
+    TrafficSinkApp::initialize();
+    CTApplicationBase::initialize();
+}
 
 void CTTrafficSinkApp::handleMessage(cMessage *msg)
 {

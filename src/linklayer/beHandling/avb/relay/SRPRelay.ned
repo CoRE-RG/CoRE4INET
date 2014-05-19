@@ -19,17 +19,15 @@ import inet.linklayer.ieee8021d.relay.Ieee8021dRelay;
 
 
 //
-// This modul forwards frames (~EtherFrame) based on their destination MAC addresses to appropriate ports.
+// This module forwards frames (~EtherFrame) based on their destination MAC addresses to appropriate ports.
 //
-// It can work in two mode:
-// - STP unaware mode (If no module connected to its STP gate):
-//     Looks up the frames destination address in the ~MACAddressTable, if it found the address, sends through
-//	   that port, or otherwise broadcasts it.
-// - STP aware mode (If an ~STP or ~RSTP module connected to its STP gate):
-//     Handles BPDU frames.
-//     If relaying a message also checks the port's status in the InterfaceTable.
+// It can handle: AVBs SRP frames.
+// Incoming SRP frames are forwarded as SRP messages through srpOut to the SRProtocol module.
+// Outgoing SRP messages coming through srpIn gate are forwarded according to the controlInfo as EtherFrame
 //
-// @see EtherFrame, MACAddressTable, STP, RSTP
+// @see Ieee8021dRelay, SRProtocol
+// 
+// @author Till Steinbach
 //
 simple SRPRelay extends Ieee8021dRelay
 {
@@ -37,6 +35,8 @@ simple SRPRelay extends Ieee8021dRelay
         @class(SRPRelay);
         @display("i=block/broadcast;bgb=425,114");
     gates:
+        //SRP message in from SRP protocol module
         input srpIn @loose;
+        //SRP message out to SRP protocol module
         output srpOut @loose;
 }

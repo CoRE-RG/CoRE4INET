@@ -20,7 +20,7 @@ import core4inet.applications.trafficsink.base.TrafficSinkApp;
 //
 // Traffic sink application used for statistics collection of critical traffic.
 //
-// @see ApplicationBase
+// @see TrafficSinkApp
 //
 // @author Till Steinbach
 simple CTTrafficSinkApp extends TrafficSinkApp

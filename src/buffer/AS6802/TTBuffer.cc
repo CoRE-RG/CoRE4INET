@@ -14,15 +14,13 @@
 // 
 
 #include "TTBuffer.h"
-#include <TTEScheduler.h>
-#include <TTBufferEmpty_m.h>
-#include "ApplicationBase.h"
+#include "TTBufferEmpty_m.h"
 
 #include <ModuleAccess.h>
 
 using namespace CoRE4INET;
 
-Define_Module(TTBuffer);
+//Define_Module(TTBuffer);
 
 TTBuffer::TTBuffer()
 {

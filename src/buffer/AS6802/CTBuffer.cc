@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Buffer.h"
+#include "base/Buffer.h"
 #include "CTBuffer.h"
 #include "CoRE4INETDefs.h"
 #include "CTFrame.h"
@@ -22,7 +22,7 @@
 
 using namespace CoRE4INET;
 
-Define_Module(CTBuffer);
+//Define_Module(CTBuffer);
 
 CTBuffer::~CTBuffer()
 {
@@ -42,9 +42,8 @@ void CTBuffer::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        CTFrame *ctframe = dynamic_cast<CTFrame *>(msg);
         //Try to correct destination mac
-        if (ctframe != NULL)
+        if (CTFrame *ctframe = dynamic_cast<CTFrame *>(msg))
         {
             if (ctframe->getDest().isUnspecified())
             {

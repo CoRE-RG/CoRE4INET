@@ -17,6 +17,7 @@
 #include "TicToc_m.h"
 #include "TTFrame_m.h"
 #include "RCFrame_m.h"
+#include "Incoming.h"
 
 namespace CoRE4INET {
 
@@ -53,8 +54,8 @@ void TicApp::handleMessage(cMessage *msg)
         frame->encapsulate(tic);
 
         EV_DETAIL << "Sending Tic Message\n";
-        std::list<Buffer*> buffer = buffers[frame->getCtID()];
-        for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+        std::list<CTBuffer*> buffer = ctbuffers[frame->getCtID()];
+        for (std::list<CTBuffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
         {
             Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(frame->dup(), in->gate("in"));

@@ -14,6 +14,7 @@
 // 
 
 #include "AVBTrafficSinkApp.h"
+#include "EtherFrame_m.h"
 
 #include "SRPTable.h"
 
@@ -24,11 +25,11 @@ Define_Module(AVBTrafficSinkApp);
 void AVBTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
-    SRPTable *srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
+    SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (srpTable)
     {
         srpTable->subscribe("talkerRegistered", this);
-        srpTable->subscribe("listenerRegistrationFailed", this);
+        srpTable->subscribe("listenerRegistrationTimeout", this);
     }
     getDisplayString().setTagArg("i2", 0, "status/hourglass");
 }
@@ -39,29 +40,61 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
     ();
     if (id == registerSignal("talkerRegistered"))
     {
-        SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
+        SRPTable::TalkerEntry *tentry = check_and_cast<SRPTable::TalkerEntry*>(obj);
 
         //If talker for the desired stream, register Listener
         if (tentry->streamId == (unsigned int) par("streamID").longValue())
         {
-            SRPTable *srpTable = (SRPTable *) src;
+            SRPTable *srpTable = check_and_cast<SRPTable *>(src);
 
             //TODO Minor: try to get VLAN
             srpTable->updateListenerWithStreamId(tentry->streamId, this, 0);
-            getDisplayString().setTagArg("i2", 0, "status/active");
+            getDisplayString().setTagArg("i2", 0, "status/hourglass");
+            simtime_t updateInterval = par("updateInterval").doubleValue();
+            if (updateInterval != 0)
+            {
+                scheduleAt(simTime() + updateInterval, new cMessage("updateSubscription"));
+            }
         }
     }
-    else if (id == registerSignal("listenerRegistrationFailed"))
+    else if (id == registerSignal("listenerRegistrationTimeout"))
     {
-        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+        SRPTable::ListenerEntry *lentry = check_and_cast<SRPTable::ListenerEntry*>(obj);
         if (lentry->streamId == (unsigned int) par("streamID").longValue())
         {
             if (lentry->module == this)
             {
-                getDisplayString().setTagArg("i2", 0, "status/cross");
-                //TODO Minor: Implement retry
+                getDisplayString().setTagArg("i2", 0, "status/hourglass");
+                simtime_t retryInterval = par("retryInterval").doubleValue();
+                if (retryInterval != 0)
+                {
+                    scheduleAt(simTime() + retryInterval, new cMessage("retrySubscription"));
+                }
             }
         }
+    }
+}
+
+void AVBTrafficSinkApp::handleMessage(cMessage *msg)
+{
+    if (msg->isSelfMessage())
+    {
+        SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+        srpTable->updateListenerWithStreamId((unsigned int) par("streamID").longValue(), this, 0);
+        getDisplayString().setTagArg("i2", 0, "status/active");
+        simtime_t updateInterval = par("updateInterval").doubleValue();
+        if (updateInterval != 0)
+        {
+            scheduleAt(simTime() + updateInterval, msg);
+        }
+    }
+    else
+    {
+        if (dynamic_cast<EtherFrame*>(msg))
+        {
+            getDisplayString().setTagArg("i2", 0, "status/active");
+        }
+        TrafficSinkApp::handleMessage(msg);
     }
 }
 

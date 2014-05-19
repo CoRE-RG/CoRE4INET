@@ -15,7 +15,7 @@
 
 package core4inet.applications.examples.rt_tictoc;
 
-import core4inet.applications.base.ApplicationBase;
+import core4inet.applications.AS6802.CTApplicationBase;
 import core4inet.utilities.classes.IScheduled;
 
 //
@@ -27,7 +27,7 @@ import core4inet.utilities.classes.IScheduled;
 // @see rt_tictoc, TocApp
 //
 // @author Till Steinbach
-simple TicApp extends ApplicationBase like IScheduled
+simple TicApp extends CTApplicationBase like IScheduled
 {
     parameters:
         @class(TicApp);

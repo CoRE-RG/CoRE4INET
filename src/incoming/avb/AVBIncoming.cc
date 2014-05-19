@@ -15,8 +15,6 @@
 
 #include "AVBIncoming.h"
 #include <EtherFrame_m.h>
-#include <SRPFrame_m.h>
-#include <AVBFrame_m.h>
 #include <BaseShaper.h>
 
 #include "SRPTable.h"
@@ -40,10 +38,11 @@ void AVBIncoming::handleMessage(cMessage* msg)
 {
     if (msg->arrivedOn("in"))
     {
-        AVBFrame *inFrame = ((AVBFrame*) msg);
+        EtherFrame *inFrame = check_and_cast<EtherFrame*>(msg);
 
         SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
-        std::list<cModule*> listeners = srptable->getListenersForStreamId(inFrame->getStreamID());
+        //TODO: Minor enable VLANs
+        std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(inFrame->getDest(), 0);
 
         for (std::list<cModule*>::iterator listener = listeners.begin(); listener != listeners.end(); listener++)
         {

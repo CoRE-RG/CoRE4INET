@@ -18,6 +18,7 @@
 #include "TTEScheduler.h"
 #include "RCFrame_m.h"
 #include "TTFrame_m.h"
+#include "Incoming.h"
 
 namespace CoRE4INET {
 
@@ -50,8 +51,8 @@ void TocApp::handleMessage(cMessage *msg)
         frame->encapsulate(toc);
 
         EV_DETAIL << "Answering Tic Message with Toc Message\n";
-        std::list<Buffer*> buffer = buffers[frame->getCtID()];
-        for (std::list<Buffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+        std::list<CTBuffer*> buffer = ctbuffers[frame->getCtID()];
+        for (std::list<CTBuffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
         {
             Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(frame->dup(), in->gate("in"));

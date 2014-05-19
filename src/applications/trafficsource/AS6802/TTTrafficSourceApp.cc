@@ -31,7 +31,7 @@ TTTrafficSourceApp::TTTrafficSourceApp() :
 
 void TTTrafficSourceApp::initialize()
 {
-    TrafficSourceAppBase::initialize();
+    CTTrafficSourceAppBase::initialize();
 
     if (par("enabled").boolValue())
     {
@@ -69,7 +69,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
             moduloCycle = 0;
         }
 
-        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *) msg;
+        SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
         event->setNext_cycle(true);
         period->registerEvent(event);
     }
@@ -83,9 +83,8 @@ void TTTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject 
 {
     Enter_Method_Silent
     ();
-    if (dynamic_cast<SyncNotification *>(obj))
+    if (SyncNotification *notification = dynamic_cast<SyncNotification *>(obj))
     {
-        SyncNotification *notification = (SyncNotification *) obj;
         if (notification->getKind() == SYNC)
         {
             synchronized = true;

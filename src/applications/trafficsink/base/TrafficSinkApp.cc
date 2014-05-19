@@ -14,6 +14,7 @@
 // 
 
 #include "TrafficSinkApp.h"
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

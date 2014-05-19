@@ -88,6 +88,12 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
     return transparentClock / secondsToTransparentClock(tick);
 }
 
+MACAddress generateAutoMulticastAddress(){
+    MACAddress multicastMAC = MACAddress::generateAutoAddress();
+    multicastMAC.setAddressByte(1,(multicastMAC.getAddressByte(1)|0x01));
+    return multicastMAC;
+}
+
 #ifdef WITH_AS6802_COMMON
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
 {
@@ -128,7 +134,7 @@ const_simtime_t second = 1;
 
 unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval)
 {
-    return (second/interval) * intervalFrames * (framesize * 8);
+    return (second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS);
 }
 
 

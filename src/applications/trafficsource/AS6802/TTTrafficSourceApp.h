@@ -34,7 +34,6 @@ namespace CoRE4INET {
  * @author Till Steinbach
  */
 class TTTrafficSourceApp : public CTTrafficSourceAppBase,
-        public virtual CTApplicationBase,
         public Scheduled,
         public cListener
 {

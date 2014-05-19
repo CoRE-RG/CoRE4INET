@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_CALLBACK_H_
 #define __CORE4INET_CALLBACK_H_
 
-#include "Buffer.h"
+#include "base/Buffer.h"
 
 namespace CoRE4INET {
 

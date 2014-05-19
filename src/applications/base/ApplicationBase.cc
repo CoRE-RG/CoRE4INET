@@ -13,11 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "ApplicationBase.h"
+#include "base/ApplicationBase.h"
 
 #include "CoRE4INETDefs.h"
 #include "HelperFunctions.h"
-#include "customWatch.h"
+#include "BGBuffer.h"
 
 #include <ModuleAccess.h>
 
@@ -25,47 +25,43 @@ namespace CoRE4INET {
 
 Define_Module(ApplicationBase);
 
-void ApplicationBase::initialize()
-{
-    WATCH_LISTMAP(buffers);
+void ApplicationBase::initialize() {
+    WATCH_LIST(bgbuffers);
+
+    std::string displayName = par("displayName").stdstringValue();
+    if (displayName.length()) {
+        getDisplayString().setTagArg("t", 0, displayName.c_str());
+    }
 }
 
-void ApplicationBase::handleMessage(cMessage *msg)
-{
+void ApplicationBase::handleMessage(cMessage *msg) {
 }
 
-void ApplicationBase::handleParameterChange(__attribute__((unused)) const char* parname)
-{
-    buffers.clear();
-    std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
-    for (std::vector<std::string>::iterator bufferPath = bufferPaths.begin(); bufferPath != bufferPaths.end();
-            bufferPath++)
-    {
+void ApplicationBase::handleParameterChange(
+        __attribute__((unused)) const char* parname) {
+    bgbuffers.clear();
+    std::vector<std::string> bufferPaths = cStringTokenizer(
+            par("buffers").stringValue(), DELIMITERS).asVector();
+    for (std::vector<std::string>::iterator bufferPath = bufferPaths.begin();
+            bufferPath != bufferPaths.end(); bufferPath++) {
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
-        if (!module)
-        {
+        if (!module) {
             module = findModuleWhereverInNode((*bufferPath).c_str(), this);
         }
-        if (module)
-        {
-            if (findContainingNode(module) != findContainingNode(this))
-            {
-                throw cRuntimeError("Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*bufferPath).c_str(), findContainingNode(this)->getFullName());
+        if (module) {
+            if (findContainingNode(module) != findContainingNode(this)) {
+                throw cRuntimeError(
+                        "Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                        (*bufferPath).c_str(),
+                        findContainingNode(this)->getFullName());
             }
-            Buffer *buffer = dynamic_cast<Buffer*>(module);
-            if (buffer && buffer->hasPar("ct_id"))
-            {
-                buffers[(uint16_t) buffer->par("ct_id").longValue()].push_back(buffer);
+            if (BGBuffer *buffer = dynamic_cast<BGBuffer*>(module)) {
+                bgbuffers.push_back(buffer);
             }
-            else
-            {
-                throw cRuntimeError("Buffer module %s has no ct_id configured!", (*bufferPath).c_str());
-            }
-        }
-        else
-        {
-            throw cRuntimeError("Configuration problem of buffers: Module: %s could not be resolved!", (*bufferPath).c_str());
+        } else {
+            throw cRuntimeError(
+                    "Configuration problem of buffers: Module: %s could not be resolved!",
+                    (*bufferPath).c_str());
         }
     }
 }

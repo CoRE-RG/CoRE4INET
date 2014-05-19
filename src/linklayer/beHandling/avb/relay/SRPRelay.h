@@ -21,12 +21,35 @@
 
 namespace CoRE4INET {
 
+/**
+ * @brief This module forwards frames (~EtherFrame) based on their destination MAC addresses to appropriate ports.
+ *
+ * It can handle: AVBs SRP frames.
+ * Incoming SRP frames are forwarded as SRP messages through srpOut to the SRProtocol module.
+ * Outgoing SRP messages coming through srpIn gate are forwarded according to the controlInfo as EtherFrame
+ *
+ * @see Ieee8021dRelay, SRProtocol
+ *
+ * @author Till Steinbach
+ */
 class SRPRelay : public ::Ieee8021dRelay
 {
 
     protected:
+        /**
+         * Module initialization, only requires 1 stage
+         */
         virtual void initialize(int stage);
+        /**
+         * @brief Number of initialization stages, at least 1!
+         *
+         * @return at least 1, more when parent moduile requires more stages.
+         */
         virtual int numInitStages() const { return 1>::Ieee8021dRelay::numInitStages()?1: ::Ieee8021dRelay::numInitStages(); }
+
+        /**
+         *
+         */
         virtual void handleMessage(cMessage * msg);
 
         void dispatchSRP(SRPFrame * srp);

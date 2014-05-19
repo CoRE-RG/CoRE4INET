@@ -15,7 +15,6 @@
 
 package core4inet.synchronisation.AS6802.SynchronisationMaster;
 
-import core4inet.linklayer.IPort;
 import core4inet.synchronisation.base.ISync;
 
 simple SM like ISync

@@ -24,7 +24,7 @@ Define_Module(RCTrafficSourceApp);
 
 void RCTrafficSourceApp::initialize()
 {
-    TrafficSourceAppBase::initialize();
+    CTTrafficSourceAppBase::initialize();
 
     if (par("enabled").boolValue())
     {

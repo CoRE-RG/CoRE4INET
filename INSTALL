@@ -6,6 +6,10 @@ PREREQUISITES
 You should have a working OMNeT++ installation, version 4.4.1 or later with the
 INET-Framework 2.3.0
 
+In INET you have to enable at least the following features:
+- Ethernet
+- IEEE 802.1d
+
 General
 -------
 1. Make sure your OMNeT++ installation works OK (e.g. try running the samples)

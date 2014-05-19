@@ -24,14 +24,16 @@
 
 #include "Timer.h"
 
-#ifdef WITH_AS6802_COMMON
+//FIXME: Can be used when opp_makedep is able to use defines
+//#ifdef WITH_AS6802_COMMON
 #include "PCFrame_m.h"
-#endif
+//#endif
 
-#ifdef WITH_AVB_COMMON
+//FIXME: Can be used when opp_makedep is able to use defines
+//#ifdef WITH_AVB_COMMON
 #include "AVBDefs.h"
 #include "AVBDefs_m.h"
-#endif
+//#endif
 
 namespace CoRE4INET {
 
@@ -108,6 +110,14 @@ uint64_t secondsToTransparentClock(simtime_t seconds);
  */
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
 
+/**
+ * @brief generates an auto multicast addess by using generateAutoAddress and changing the least significant bit of the
+ * first byte
+ *
+ * @return unique multicast address
+ */
+MACAddress generateAutoMulticastAddress();
+
 #ifdef WITH_AS6802_COMMON
 /**
  * @brief Sets the transparent clock information in the pcf
@@ -122,7 +132,23 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler)
 #endif
 
 #ifdef WITH_AVB_COMMON
+/**
+ * @brief Calculates required bandwidth from given interval and framesize
+ *
+ * @param framesize the size of the frames of the stream
+ * @param intervalFrames number of frames in an interval
+ * @param interval interval time (usually 125us or 250us)
+ *
+ * @return bandwidth in bps
+ */
 unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval);
+/**
+ * @brief Returns the default interval for given SR classes
+ *
+ * @param srClass the SR class from the enum
+ *
+ * @return the default SR class interval
+ */
 const simtime_t getIntervalForClass(SR_CLASS srClass);
 #endif
 }

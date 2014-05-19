@@ -14,11 +14,10 @@
 // 
 
 #include "BGBuffer.h"
-#include "ApplicationBase.h"
 
 namespace CoRE4INET {
 
-Define_Module(BGBuffer);
+//Define_Module(BGBuffer);
 
 int BGBuffer::numInitStages() const
 {
@@ -47,9 +46,7 @@ void BGBuffer::handleMessage(cMessage *msg)
 
     if (msg->arrivedOn("in") && destinationGates.size() > 0)
     {
-        EtherFrame *outgoingMessage = dequeue();
-
-        if (outgoingMessage)
+        if (EtherFrame *outgoingMessage = dequeue())
         {
             //Send Message
             for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
@@ -67,9 +64,7 @@ void BGBuffer::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("in") && gate("out")->isConnected())
     {
-        EtherFrame *outgoingMessage = dequeue();
-
-        if (outgoingMessage)
+        if (EtherFrame *outgoingMessage = dequeue())
         {
             send(outgoingMessage->dup(), "out");
 

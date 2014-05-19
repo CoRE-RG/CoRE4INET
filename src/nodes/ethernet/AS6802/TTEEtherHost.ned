@@ -14,20 +14,18 @@
 // 
 package core4inet.nodes.ethernet.AS6802;
 
+import core4inet.applications.base.IApplication;
 import core4inet.buffer.base.BGQueueBuffer;
-import core4inet.utilities.modules.CheckedBuffer;
-import core4inet.linklayer.beHandling.base.BGTrafficHandle;
-import core4inet.scheduler.ITTEScheduler;
-import core4inet.scheduler.TTEScheduler;
-import core4inet.scheduler.Scheduler;
 import core4inet.configuration.IConfigurationManager;
 import core4inet.linklayer.port.TTEPHYPort;
+import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
-import core4inet.synchronisation.base.DummySync;
-import core4inet.applications.base.IApplication;
-import inet.linklayer.ethernet.EtherLLC;
-import inet.applications.ethernet.EtherAppSrv;
+import core4inet.utilities.modules.CheckedBuffer;
 import inet.applications.ethernet.EtherAppCli;
+import inet.applications.ethernet.EtherAppSrv;
+import core4inet.linklayer.ethernet.base.BGEtherLLC;
+import inet.status.NodeStatus;
+
 
 //
 // Module for a TTEthernet Host.
@@ -59,17 +57,20 @@ module TTEEtherHost
         inout ethg @loose @labels(EtherFrame-conn);
 
     submodules:
+        status: NodeStatus {
+            @display("p=60,37;is=n");
+        }
         // Physical port of the host
         phy[numPorts]: TTEPHYPort {
             @display("p=235,255,c,50");
         }
         // LLC for best-effort traffic
-        llc: EtherLLC {
+        llc: BGEtherLLC {
             parameters:
                 @display("p=141,256");
             gates:
-                upperLayerIn[3];
-                upperLayerOut[3];
+                upperLayerIn[2];
+                upperLayerOut[2];
         }
 
         cli: EtherAppCli {
@@ -83,7 +84,7 @@ module TTEEtherHost
                 @display("p=60,169,col");
         }
         // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != ""{
+        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             @display("p=999,999");
         }
          // Sync module for synchronisation of the scheduler
@@ -94,7 +95,7 @@ module TTEEtherHost
         scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
-        app[numApps]: <default("TTEAPITestApplication")> like IApplication {
+        app[numApps]: < > like IApplication {
             @display("p=234,37,row,70");
         }
         bgIn: BGQueueBuffer {
@@ -102,9 +103,6 @@ module TTEEtherHost
         }
         bgOut: BGQueueBuffer {
             @display("p=141,99");
-        }
-        bgTrafficHandle: BGTrafficHandle {
-            @display("p=60,99");
         }
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
@@ -120,9 +118,7 @@ module TTEEtherHost
         srv.out --> llc.upperLayerIn[1];
         srv.in <-- llc.upperLayerOut[1];
 
-        bgTrafficHandle.lowerLayerOut --> llc.upperLayerIn[2];
-        bgTrafficHandle.lowerLayerIn <-- llc.upperLayerOut[2];
-        bgTrafficHandle.out --> bgIn.in;
-        bgOut.out --> bgTrafficHandle.in;
+        llc.bgOut --> bgIn.in;
+        bgOut.out --> llc.bgIn;
 }
 

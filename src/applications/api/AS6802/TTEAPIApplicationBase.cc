@@ -104,11 +104,11 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id, cons
 {
     Enter_Method_Silent
     ();
-    std::map<uint16, std::list<Buffer *> >::iterator bufferList = buffers.find(ct_id);
-    if (bufferList != buffers.end())
+    std::map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
+    if (bufferList != ctbuffers.end())
     {
         //Currently we use only the first entry!
-        std::list<Buffer*>::iterator buffer = bufferList->second.begin();
+        std::list<CTBuffer*>::iterator buffer = bufferList->second.begin();
 
         buf->ctrl_id = 0;
         buf->direction = TTE_DIR_OUTPUT;
@@ -188,11 +188,11 @@ int32_t TTEAPIApplicationBase::tte_get_ct_input_buf(const uint8_t ctrl_id, const
 {
     Enter_Method_Silent
     ();
-    std::map<uint16, std::list<Buffer *> >::iterator bufferList = buffers.find(ct_id);
-    if (bufferList != buffers.end())
+    std::map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
+    if (bufferList != ctbuffers.end())
     {
         //Currently we use only the first entry!
-        std::list<Buffer*>::iterator buffer = bufferList->second.begin();
+        std::list<CTBuffer*>::iterator buffer = bufferList->second.begin();
 
         buf->ctrl_id = 0;
         buf->direction = TTE_DIR_INPUT;
@@ -717,17 +717,17 @@ extern "C" int32_t tte_set_buf_var(tte_buffer_t * const buf, const tte_buf_var_i
     return ETT_NULLPTR;
 }
 
-extern "C" int32_t tte_flush_buffers(const uint8_t ctrl_id)
+extern "C" int32_t tte_flush_ctbuffers(const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_flush_tt_buffers(const uint8_t ctrl_id)
+extern "C" int32_t tte_flush_tt_ctbuffers(const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_flush_bg_buffers(const uint8_t ctrl_id, const uint8_t channel)
+extern "C" int32_t tte_flush_bg_ctbuffers(const uint8_t ctrl_id, const uint8_t channel)
 {
     return ETT_NOTSUPPORTED;
 }

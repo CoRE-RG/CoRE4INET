@@ -39,6 +39,12 @@ class AVBTrafficSinkApp : public TrafficSinkApp, public cListener
         virtual void initialize();
 
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+        /**
+         * @brief handles self message for srp registration updates
+         *
+         * @param msg incoming message
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

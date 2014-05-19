@@ -32,7 +32,11 @@ namespace CoRE4INET {
  */
 class CTTrafficSinkApp : public TrafficSinkApp, public virtual CTApplicationBase
 {
-
+    public:
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
         /**
          * @brief collects incoming message and writes statistics.
          *

@@ -17,16 +17,14 @@
 #include "HelperFunctions.h"
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
-#include "Buffer.h"
 #include <Timer.h>
 #include <ModuleAccess.h>
+#include "CoRE4INETDefs.h"
 
 #include "SRPTable.h"
 
 #define AVB_MINPACKETSIZE 88
 #define AVB_OVERHEADSIZE 42
-#define AVB_SRP_ADVERTISESIZE 25
-#define AVB_SRP_READYSIZE 8
 
 namespace CoRE4INET {
 
@@ -35,6 +33,7 @@ Define_Module(AVBTrafficSourceApp);
 AVBTrafficSourceApp::AVBTrafficSourceApp()
 {
     isStreaming = false;
+    multicastMAC = generateAutoMulticastAddress();
 }
 
 void AVBTrafficSourceApp::initialize()
@@ -46,14 +45,14 @@ void AVBTrafficSourceApp::initialize()
     intervalFrames = (unsigned int) par("intervalFrames").longValue();
     payload = (unsigned int) par("payload").longValue();
 
-    //TODO: Minor: Check these values
-    if (payload <= AVB_MINPACKETSIZE)
+//TODO: Minor: Check these values
+    if (payload <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
     {
-        frameSize = AVB_MINPACKETSIZE;
+        frameSize = MIN_ETHERNET_FRAME_BYTES;
     }
     else
     {
-        frameSize = payload + AVB_OVERHEADSIZE;
+        frameSize = payload + ETHER_MAC_FRAME_BYTES + ETHER_8021Q_TAG_BYTES;
     }
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
@@ -66,13 +65,14 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
     if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
     {
-        SRPTable *srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
+        SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
         if (srpTable)
         {
             EV << "Register Talker in node" << std::endl;
             srpTable->subscribe("listenerRegistered", this);
-            srpTable->updateTalkerWithStreamId(streamID, this, new MACAddress("00:00:00:00:00:00"), SR_CLASS_A,
-                    frameSize, intervalFrames);
+            srpTable->subscribe("listenerUnregistered", this);
+            srpTable->subscribe("listenerRegistrationTimeout", this);
+            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, SR_CLASS_A, frameSize, intervalFrames);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
         }
         else
@@ -93,24 +93,27 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
 void AVBTrafficSourceApp::sendAVBFrame()
 {
-    AVBFrame *outFrame = new AVBFrame("");
+    char name[10];
+    sprintf(name, "Stream %ld", streamID);
+    AVBFrame *outFrame = new AVBFrame(name);
     outFrame->setStreamID(streamID);
+    outFrame->setDest(multicastMAC);
 
     cPacket *payloadPacket = new cPacket;
     payloadPacket->setByteLength(payload);
     outFrame->encapsulate(payloadPacket);
-    //Padding
+//Padding
     if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
     {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
-    //class measurement interval = 125us
+//class measurement interval = 125us
     simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
     simtime_t interval = SR_CLASS_A_INTERVAL / intervalFrames;
 
-    //double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
+//double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
 
     event->setTimer((uint64_t) ceil(interval / tick));
@@ -135,6 +138,23 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
             getDisplayString().setTagArg("i2", 0, "status/active");
             isStreaming = true;
             sendAVBFrame();
+        }
+    }
+    else if ((id == registerSignal("listenerRegistrationTimeout")) || id == registerSignal("listenerUnregistered"))
+    {
+        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+
+        //If talker for the desired stream, unregister Listener
+        if (lentry->streamId == streamID)
+        {
+            //check whether there are listeners left
+            SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+            if (srpTable->getListenersForStreamId(streamID, 0).size() == 0)
+            {
+                isStreaming = false;
+                bubble("Last listener unregistered, stop streaming!");
+                getDisplayString().setTagArg("i2", 0, "status/hourglass");
+            }
         }
     }
 }

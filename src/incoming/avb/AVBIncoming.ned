@@ -26,13 +26,10 @@ simple AVBIncoming
         @class(AVBIncoming);
         @display("i=block/arrival,blue");
 
-        //number of out ports the parent module has.
-        int NrOfPorts = default(0);
-
     gates:
         //input for AVB Frames
         input in @directIn @labels(AVBFrame);
 
         //outputs for AVB Frames
-        output AVBout[NrOfPorts] @labels(AVBFrame);
+        output AVBout[] @labels(AVBFrame);
 }

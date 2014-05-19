@@ -13,17 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TTETHERNETMODEL_TIMER_H_
-#define __TTETHERNETMODEL_TIMER_H_
+#ifndef __CORE4INET_TIMER_H_
+#define __CORE4INET_TIMER_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 
-#include <Oscillator.h>
-#include <Period.h>
+#include "Oscillator.h"
+#include "Period.h"
 
-#include <SchedulerMessage_m.h>
-#include <SchedulerEvent.h>
-#include <SchedulerMessageEvents_m.h>
+#include "scheduler/SchedulerMessage_m.h"
+#include "scheduler/SchedulerEvent.h"
+#include "scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
 
@@ -66,7 +66,7 @@ class Timer : public cSimpleModule
          *
          * Used to reregister after clock tick changes.
          */
-        std::map<uint64_t, std::list<SchedulerActionTimeEvent*> > registredActionTimeEvents;
+        std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > > registredActionTimeEvents;
         /**
          * @brief List of registered SchedulerActionTimeEvent.
          *

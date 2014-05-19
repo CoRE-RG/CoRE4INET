@@ -20,11 +20,18 @@
 
 #include "RCBuffer.h"
 
+#include "customWatch.h"
 #include <ModuleAccess.h>
 
 namespace CoRE4INET {
 
 Define_Module(CTApplicationBase);
+
+void CTApplicationBase::initialize()
+{
+    WATCH_LISTMAP(ctbuffers);
+    ApplicationBase::initialize();
+}
 
 void CTApplicationBase::handleMessage(cMessage *msg)
 {
@@ -35,6 +42,40 @@ void CTApplicationBase::handleMessage(cMessage *msg)
             rcBuffer->resetBag();
     }
     ApplicationBase::handleMessage(msg);
+}
+
+void CTApplicationBase::handleParameterChange(const char* parname)
+{
+    ApplicationBase::handleParameterChange(parname);
+    ctbuffers.clear();
+    std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
+    for (std::vector<std::string>::iterator bufferPath = bufferPaths.begin(); bufferPath != bufferPaths.end();
+            bufferPath++)
+    {
+        cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
+        if (!module)
+        {
+            module = findModuleWhereverInNode((*bufferPath).c_str(), this);
+        }
+        if (module)
+        {
+            if (findContainingNode(module) != findContainingNode(this))
+            {
+                throw cRuntimeError(
+                        "Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                        (*bufferPath).c_str(), findContainingNode(this)->getFullName());
+            }
+            if (CTBuffer *buffer = dynamic_cast<CTBuffer*>(module))
+            {
+                ctbuffers[(uint16_t) buffer->par("ct_id").longValue()].push_back(buffer);
+            }
+        }
+        else
+        {
+            throw cRuntimeError("Configuration problem of buffers: Module: %s could not be resolved!",
+                    (*bufferPath).c_str());
+        }
+    }
 }
 
 } //namespace

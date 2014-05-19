@@ -35,4 +35,11 @@
  */
 #define DELIMITERS ",; \t\n\r\f"
 
+
+/**
+ * Ethernet 802.1Q Header
+ */
+#define ETHER_8021Q_TAG_BYTES 4
+
+
 #endif
