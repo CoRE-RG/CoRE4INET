@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_AVBBUFFER_H_
 #define __CORE4INET_AVBBUFFER_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include "base/Buffer.h"
 #include "AVBIncoming.h"
 #include "Timed.h"

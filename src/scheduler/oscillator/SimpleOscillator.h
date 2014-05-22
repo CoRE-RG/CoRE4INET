@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_SIMPLEOSCILLATOR_H_
 #define __CORE4INET_SIMPLEOSCILLATOR_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 
 #include <Oscillator.h>
 #include <Scheduled.h>

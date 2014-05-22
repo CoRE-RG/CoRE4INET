@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_CTAPPLICATIONBASE_H_
 #define __CORE4INET_CTAPPLICATIONBASE_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include "base/ApplicationBase.h"
 #include "CTBuffer.h"
 

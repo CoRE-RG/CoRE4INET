@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_TASK_H_
 #define __CORE4INET_TASK_H_
 
-#include <cobject.h>
+#include "cobject.h"
 
 
 namespace CoRE4INET {

@@ -19,7 +19,7 @@
 #include "HelperFunctions.h"
 #include "BGBuffer.h"
 
-#include <ModuleAccess.h>
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 

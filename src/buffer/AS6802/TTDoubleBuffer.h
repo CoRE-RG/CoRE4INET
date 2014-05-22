@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_TTDOUBLEBUFFER_H_
 #define __CORE4INET_TTDOUBLEBUFFER_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include <TTBuffer.h>
 #include <DoubleBuffer.h>
 #include <EtherFrame_m.h>

@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_TTTRAFFICSOURCEAPP_H_
 #define __CORE4INET_TTTRAFFICSOURCEAPP_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include "CTTrafficSourceAppBase.h"
 #include "CTApplicationBase.h"
 

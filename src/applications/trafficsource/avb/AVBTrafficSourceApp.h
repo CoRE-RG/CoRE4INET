@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_AVBTRAFFICSOURCEAPP_H_
 #define __CORE4INET_AVBTRAFFICSOURCEAPP_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include "TrafficSourceAppBase.h"
 #include "Timed.h"
 #include "AVBIncoming.h"

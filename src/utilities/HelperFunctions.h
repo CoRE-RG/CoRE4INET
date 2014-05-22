@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_HELPERFUNCTIONS_H_
 #define __CORE4INET_HELPERFUNCTIONS_H_
 
-#include <string>
+#include <cstring>
 #include <vector>
 
 #include "cpar.h"

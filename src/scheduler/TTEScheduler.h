@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_TTESCHEDULER_H_
 #define __CORE4INET_TTESCHEDULER_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 
 #include <SchedulerMessage_m.h>
 #include <SchedulerEvent.h>

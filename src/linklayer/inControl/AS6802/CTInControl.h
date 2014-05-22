@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_CTINCONTROL_H_
 #define __CORE4INET_CTINCONTROL_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 
 #include <EtherFrame_m.h>
 #include <ModuleAccess.h>

@@ -16,7 +16,7 @@
 #ifndef __CoRE4INET_BASESHAPER_H
 #define __CoRE4INET_BASESHAPER_H
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include <csimplemodule.h>
 #include <INETDefs.h>
 #include <CoRE4INETDefs.h>

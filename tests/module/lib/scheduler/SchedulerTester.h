@@ -16,7 +16,7 @@
 #ifndef __TTETHERNETMODEL_SCHEDULERTESTER_H_
 #define __TTETHERNETMODEL_SCHEDULERTESTER_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include <Scheduled.h>
 
 namespace CoRE4INET {

@@ -16,7 +16,7 @@
 #ifndef __CoRE4INET_CoRE4INETDEFS_H
 #define __CoRE4INET_CoRE4INETDEFS_H
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 
 /**
  * Check for minimal OMNeT++ Version requirements

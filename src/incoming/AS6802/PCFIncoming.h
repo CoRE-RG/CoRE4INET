@@ -15,7 +15,7 @@
 #ifndef __CORE4INET_PCFINCOMING_H_
 #define __CORE4INET_PCFINCOMING_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include <CTIncoming.h>
 
 #include "PCFrame_m.h"

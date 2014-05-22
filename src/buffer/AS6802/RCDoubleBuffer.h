@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_RCDOUBLEBUFFER_H_
 #define __CORE4INET_RCDOUBLEBUFFER_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include <RCBuffer.h>
 #include <DoubleBuffer.h>
 #include <EtherFrame_m.h>

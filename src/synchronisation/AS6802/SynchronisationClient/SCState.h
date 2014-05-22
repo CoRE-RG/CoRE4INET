@@ -23,7 +23,7 @@
 #define SCSTATE_H_
 #include <iostream>
 #include <stdio.h>
-//#include <omnetpp.h>
+//#include "omnetpp.h"
 #include <cmessage.h>
 #include <csimplemodule.h>
 #include <SchedulerEvent.h>

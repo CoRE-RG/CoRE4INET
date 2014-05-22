@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_DUMMYSYNC_H_
 #define __CORE4INET_DUMMYSYNC_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include "SyncBase.h"
 
 #include <Period.h>

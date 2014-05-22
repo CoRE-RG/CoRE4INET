@@ -21,7 +21,7 @@
 #include "SMStates.h"
 #include "SM.h"
 #include <string>
-#include <omnetpp.h>
+#include "omnetpp.h"
 #include "RCBuffer.h"
 #include "SynchronisationEvents_m.h"
 

@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_AVBCLASSAINCONTROL_H_
 #define __CORE4INET_AVBCLASSAINCONTROL_H_
 
-#include <omnetpp.h>
+#include "omnetpp.h"
 
 #include <EtherFrame_m.h>
 #include <AVBFrame_m.h>
