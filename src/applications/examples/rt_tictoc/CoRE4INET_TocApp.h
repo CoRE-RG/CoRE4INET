@@ -13,26 +13,34 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_TOCAPP_H_
+#define __CORE4INET_TOCAPP_H_
 
 #include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_CTApplicationBase.h"
 
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Toc Application used for the rt_tictoc example.
  *
- * @ingroup Tests
+ *
+ * @sa ApplicationBase
+ * @ingroup Applications AS6802
  *
  * @author Till Steinbach
  */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class TocApp : public CTApplicationBase
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize();
+        /**
+         * @brief Handles message generation and reception
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
 }

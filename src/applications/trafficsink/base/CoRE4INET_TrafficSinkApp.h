@@ -13,28 +13,44 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_TRAFFICSINKAPP_H_
+#define __CORE4INET_TRAFFICSINKAPP_H_
 
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_ApplicationBase.h"
 
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Traffic sink application used for statistics collection.
  *
- * @ingroup Tests
+ *
+ * @sa ApplicationBase
+ * @ingroup Applications
  *
  * @author Till Steinbach
  */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class TrafficSinkApp : public virtual ApplicationBase
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    private:
+        /**
+         * Signal that is emitted every time a frame was sent.
+         */
+        static simsignal_t rxPkSignal;
+
+    protected:
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize();
+
+        /**
+         * @brief collects incoming message and writes statistics.
+         *
+         * @param msg incoming frame
+         */
+        virtual void handleMessage(cMessage *msg);
 };
 
-}
+} //namespace
 
 #endif

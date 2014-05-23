@@ -13,28 +13,34 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
-
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_Oscillator.h"
 
 namespace CoRE4INET {
 
-/**
- * TODO - Generated class
- *
- * @ingroup Tests
- *
- * @author Till Steinbach
- */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
+Define_Module(Oscillator);
 
+simsignal_t Oscillator::currentDrift = SIMSIGNAL_NULL;
+
+void Oscillator::initialize(int stage)
+{
+    if (stage == 0)
+    {
+        currentDrift = registerSignal("currentDrift");
+    }
 }
 
-#endif
+int Oscillator::numInitStages() const
+{
+    return 1;
+}
+
+simtime_t Oscillator::getTick()
+{
+    return SimTime(par("current_tick").doubleValue());
+}
+simtime_t Oscillator::getPreciseTick()
+{
+    return SimTime(par("tick").doubleValue());
+}
+
+} //namespace

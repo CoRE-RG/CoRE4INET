@@ -13,28 +13,27 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_BGQUEUEBUFFER_H_
+#define __CORE4INET_BGQUEUEBUFFER_H_
 
 #include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_BGBuffer.h"
+#include "CoRE4INET_QueueBuffer.h"
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Class for a queuing background (best-effort) buffer class.
  *
- * @ingroup Tests
+ * @sa BGBuffer, QueueBuffer, Buffer
+ *
+ * @ingroup Buffer
  *
  * @author Till Steinbach
  */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class BGQueueBuffer : public BGBuffer, public QueueBuffer
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
 };
-
 }
-
 #endif

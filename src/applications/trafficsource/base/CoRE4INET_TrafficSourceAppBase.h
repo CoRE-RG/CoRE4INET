@@ -13,28 +13,31 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_TRAFFICSOURCEAPPBASE_H_
+#define __CORE4INET_TRAFFICSOURCEAPPBASE_H_
 
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_ApplicationBase.h"
 
 namespace CoRE4INET {
 
+#define START_MSG_NAME "Start Message"
+
 /**
- * TODO - Generated class
+ * @brief Base class for a traffic generator application.
  *
- * @ingroup Tests
- *
- * @author Till Steinbach
+ * @sa ApplicationBase
+ * @ingroup Applications
  */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class TrafficSourceAppBase : public virtual ApplicationBase
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize();
+
 };
 
-}
+} //namespace
 
 #endif

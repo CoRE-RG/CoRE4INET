@@ -13,28 +13,32 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_TTDOUBLEBUFFER_H_
+#define __CORE4INET_TTDOUBLEBUFFER_H_
 
 #include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_TTBuffer.h"
+#include "CoRE4INET_QueueBuffer.h"
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Time-triggered queue buffer class.
  *
- * @ingroup Tests
+ * The Frame is stored and released time-triggered using a previously
+ * registered SchedulerActionTimeEvent. The Buffer interacts with the TTEScheduler.
+ *
+ * The queue is an endless fifo queue
+ *
+ * @sa TTBuffer, TTQueueBuffer, CTBuffer
+ *
+ * @ingroup Buffer AS6802
  *
  * @author Till Steinbach
  */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class TTQueueBuffer : public TTBuffer, public QueueBuffer
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
 };
-
 }
-
 #endif

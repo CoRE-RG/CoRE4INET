@@ -13,28 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#include "CoRE4INET_SyncBase.h"
+#include "CoRE4INET_NotifierConsts.h"
 
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+using namespace CoRE4INET;
 
-namespace CoRE4INET {
-
-/**
- * TODO - Generated class
- *
- * @ingroup Tests
- *
- * @author Till Steinbach
- */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+int SyncBase::numInitStages() const
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
+    return 1;
 }
 
-#endif
+void SyncBase::initialize(int stage)
+{
+}
+
+void SyncBase::notify(SyncNotificationKind kind)
+{
+    if (mayHaveListeners(NF_SYNC_STATE_CHANGE))
+    {
+        SyncNotification notification("SyncNotification", kind);
+        emit(NF_SYNC_STATE_CHANGE, &notification);
+    }
+}

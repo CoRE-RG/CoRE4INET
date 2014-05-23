@@ -13,28 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
-
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_CTTrafficSinkApp.h"
 
 namespace CoRE4INET {
 
-/**
- * TODO - Generated class
- *
- * @ingroup Tests
- *
- * @author Till Steinbach
- */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
+Define_Module(CTTrafficSinkApp);
 
+void CTTrafficSinkApp::initialize()
+{
+    TrafficSinkApp::initialize();
+    CTApplicationBase::initialize();
 }
 
-#endif
+void CTTrafficSinkApp::handleMessage(cMessage *msg)
+{
+    CTApplicationBase::handleMessage(msg);
+    TrafficSinkApp::handleMessage(msg);
+}
+
+} //namespace
