@@ -13,28 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#include "CoRE4INET_RCDoubleBuffer.h"
 
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+using namespace ::CoRE4INET;
 
-namespace CoRE4INET {
+Define_Module(RCDoubleBuffer);
 
-/**
- * TODO - Generated class
- *
- * @ingroup Tests
- *
- * @author Till Steinbach
- */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-}
-
-#endif

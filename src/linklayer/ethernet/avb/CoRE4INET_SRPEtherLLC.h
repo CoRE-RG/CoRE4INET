@@ -3,38 +3,35 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_SRPETHERLLC_H
+#define __CORE4INET_SRPETHERLLC_H
 
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_BGEtherLLC.h"
+
+#include "SRPFrame_m.h"
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
-/**
- * TODO - Generated class
- *
- * @ingroup Tests
- *
- * @author Till Steinbach
- */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class SRPEtherLLC : public BGEtherLLC
 {
   protected:
-    virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+
+    void dispatchSRP(SRPFrame * srp);
+    void deliverSRP(EtherFrame * frame);
+
 };
 
 }
-
 #endif

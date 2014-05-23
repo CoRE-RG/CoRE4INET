@@ -3,38 +3,56 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+/*
+ * StateContex.h
+ *
+ *  Created on: Mar 5, 2012
+ *      Author: Lazar Todorov
+ */
 
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#ifndef HICMSTATECONTEX_H_
+#define HICMSTATECONTEX_H_
+
+#include "CoRE4INET_HICMState.h"
+//???
+#include "CoRE4INET_HICM.h"
 
 namespace CoRE4INET {
 
-/**
- * TODO - Generated class
- *
- * @ingroup Tests
- *
- * @author Till Steinbach
- */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class HICMStateContex
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    public:
+        //private:
+        HICMState *pState;
+
+    //public:
+        HICMStateContex(){}
+        virtual ~HICMStateContex(){
+            delete pState;
+        }
+        virtual void setState(HICMState *firstState)
+        {
+            pState = firstState;
+        }
+
+        virtual void parseMessage(cMessage *message)
+        {
+
+            pState->handleMessage(message);
+
+        }
 };
 
 }
 
-#endif
+#endif /* HICMSTATECONTEX_H_ */

@@ -13,28 +13,33 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_TTEAPITESTAPPLICATION_H_
+#define __CORE4INET_TTEAPITESTAPPLICATION_H_
 
 #include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_TTEAPIApplicationBase.h"
 
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Simple Test-Application based on the TTEthernet-API.
  *
- * @ingroup Tests
+ * Containes main() and callback
+ *
+ * @sa TTEAPITestApplication, ApplicationBase
+ * @ingroup Applications AS6802
  *
  * @author Till Steinbach
  */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class TTEAPITestApplication : public TTEAPIApplicationBase
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    protected:
+        /**
+         * @brief Implementation of startApplication() that starts the main()
+         */
+        virtual void startApplication();
 };
 
-}
+} //namespace
 
 #endif

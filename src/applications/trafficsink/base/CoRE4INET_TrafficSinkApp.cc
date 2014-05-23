@@ -13,28 +13,33 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
-
-#include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_TrafficSinkApp.h"
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
-/**
- * TODO - Generated class
- *
- * @ingroup Tests
- *
- * @author Till Steinbach
- */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
+Define_Module(TrafficSinkApp);
 
+simsignal_t TrafficSinkApp::rxPkSignal = SIMSIGNAL_NULL;
+
+void TrafficSinkApp::initialize()
+{
+    ApplicationBase::initialize();
+    rxPkSignal = registerSignal("rxPk");
 }
 
-#endif
+void TrafficSinkApp::handleMessage(cMessage *msg)
+{
+    ApplicationBase::handleMessage(msg);
+
+    if (EtherFrame *frame = dynamic_cast<EtherFrame*>(msg))
+    {
+        if (frame)
+        {
+            emit(rxPkSignal, frame);
+        }
+    }
+    delete msg;
+}
+
+} //namespace

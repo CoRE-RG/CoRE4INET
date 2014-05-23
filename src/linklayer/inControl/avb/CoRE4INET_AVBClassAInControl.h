@@ -1,0 +1,108 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+#ifndef __CORE4INET_AVBCLASSAINCONTROL_H_
+#define __CORE4INET_AVBCLASSAINCONTROL_H_
+
+#include "omnetpp.h"
+
+#include <EtherFrame_m.h>
+#include <AVBFrame_m.h>
+#include <ModuleAccess.h>
+#include "EtherFrameWithQTag_m.h"
+
+#include "CoRE4INET_Defs.h"
+#include "CoRE4INET_HelperFunctions.h"
+
+#include <map>
+#include <list>
+
+namespace CoRE4INET {
+
+/**
+ * @brief Represents the part of a port that receives messages (RX)
+ *
+ *Critical traffic arriving on in-gate is forwarded to the incoming modules
+ * or dropped if there is no module configured. Best-effort frames are
+ * forwarded through the out-gate.
+ *
+ * @author Philipp Meyer
+ *
+ */
+template<class IC>
+class AVBClassAInControl : public IC
+{
+    protected:
+        /**
+         * @brief Forwards frames to the appropriate incoming modules
+         *
+         * An AVB frame arriving on in-gate is forwarded to the AVBctc module
+         * or dropped if there is no module configured.
+         *
+         * @param msg incoming message
+         */
+        virtual void handleMessage(cMessage *msg);
+
+    private:
+        /**
+         * @brief Helper function checks whether a Frame is AVB traffic.
+         *
+         * @param frame Pointer to the frame to check.
+         * @return true if frame is critical, else false
+         */
+        virtual bool isAVB(EtherFrame *frame);
+};
+
+template<class IC>
+void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
+{
+    if (msg->arrivedOn("in"))
+    {
+        EtherFrame *frame = (EtherFrame*) msg;
+
+        //Is AVB Frame?
+        if (isAVB(frame))
+        {
+            cSimpleModule::sendDirect(frame,
+                    cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
+        }
+        else
+        {
+            IC::handleMessage(msg);
+        }
+    }
+    else
+    {
+        IC::handleMessage(msg);
+    }
+}
+
+template<class IC>
+bool AVBClassAInControl<IC>::isAVB(EtherFrame *frame)
+{
+    //TODO: Major: Detect AVB frame only using priority
+    if (dynamic_cast<EthernetIIFrameWithQTag*>(frame))
+    {
+        if (dynamic_cast<AVBFrame*>(frame))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+}
+
+#endif

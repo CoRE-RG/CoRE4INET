@@ -13,28 +13,33 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef __CORE4INET_TTDOUBLEBUFFER_H_
+#define __CORE4INET_TTDOUBLEBUFFER_H_
 
 #include "omnetpp.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_RCBuffer.h"
+#include "CoRE4INET_QueueBuffer.h"
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Rate-constrained queue buffer class.
  *
- * @ingroup Tests
+ * The Frame is stored and released immediately when the bag has expired previously.
+ * If the bag has not expired yet the frame is stored. The implementation uses a
+ * SchedulerTimerEvent that is registered at the TTEScheduler.
+ *
+ * The queue is an endless fifo queue
+ *
+ * @sa RCBuffer, RCQueueBuffer, CTBuffer
+ *
+ * @ingroup Buffer AS6802
  *
  * @author Till Steinbach
  */
-class SchedulerTester : public virtual cSimpleModule, public Scheduled
+class RCQueueBuffer : public RCBuffer, public QueueBuffer
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
 };
-
 }
-
 #endif
