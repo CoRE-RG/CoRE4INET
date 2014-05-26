@@ -28,8 +28,6 @@
         requires = "AVB_common"
         labels = ""
         nedPackages = "
-                       core4inet.examples.avb_AS6802.small_network
-                       core4inet.examples.avb_AS6802.large_network
                       "
         extraSourceFolders = ""
         linkerFlags = ""
@@ -82,6 +80,20 @@
                       "
         extraSourceFolders = ""
         compileFlags = ""
+        linkerFlags = ""
+        />
+    <feature
+        id="AVB_AS6802_examples"
+        name="AVB with AS6802 examples"
+        description = "Examples for networks using AVB with AS6802"
+        initiallyEnabled = "true"
+        requires = "AVB_AS6802_nodes"
+        labels = ""
+        nedPackages = "
+                       core4inet.examples.avb_AS6802.small_network
+                       core4inet.examples.avb_AS6802.large_network
+                      "
+        extraSourceFolders = ""
         linkerFlags = ""
         />
     <feature
