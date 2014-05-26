@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-        #include "scheduler/SchedulerEvent.h"
+        #include "CoRE4INET_SchedulerEvent.h"
 }}
 
 namespace CoRE4INET;
