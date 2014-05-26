@@ -18,7 +18,7 @@
 
 #include "CoRE4INET_Callback.h"
 #include "tte_api.h"
-#include "base/Buffer.h"
+#include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_TTBuffer.h"
 #include "CoRE4INET_RCBuffer.h"
 

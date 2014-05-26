@@ -26,13 +26,13 @@
 #include "omnetpp.h"
 #include "CoRE4INET_RCBuffer.h"
 #include "SynchronisationEvents_m.h"
-#include "CoRE4INET_CoRE4INETDefs.h"
+#include "CoRE4INET_Defs.h"
 #include <algorithm>
 #include "CoRE4INET_HelperFunctions.h"
 #include "SchedulerMessageEvents_m.h"
 #include "cmessage.h"
 #include "PCFrame_m.h"
-#include <cobject.h>
+#include "cobject.h"
 class HICM;
 
 namespace CoRE4INET {
