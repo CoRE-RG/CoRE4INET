@@ -27,14 +27,14 @@
 // It was created by the <a href="http://www.informatik.haw-hamburg.de/core.html" target="_top">CoRE (Communication over Realtime Ethernet)</a> research group
 // at the <a href="http://www.informatik.haw-hamburg.de/core.html" target="_top">HAW-Hamburg (Hamburg University of Applied Sciences) </a>.
 //
-// There are several bugfixes and improvements; see the <tt><a href="../doxy/whatsnew.html">WHATSNEW</a></tt> file.
+// There are several bugfixes and improvements; see the <tt><a href="whatsnew.html">WHATSNEW</a></tt> file.
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.4.1)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a>  (minimum version 2.3.0)
+// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a> (minimum version 2.3.0)
 //
 // <h2>Introductory material</h2>
-//  - For help with the installation see the <tt><a href="../doxy/install.html">INSTALL</a></tt> page.
+//  - For help with the installation see the <tt><a href="install.html">INSTALL</a></tt> page.
 //
 // A few useful starting points for browsing the documentation:
 //  - 
@@ -88,5 +88,21 @@
 //
 //
 // <a href="http://www.ttethernet.com" target="_top">TTEthernet</a> is a registred trademark of  <a href="http://www.tttech.com" target="_top">TTTech Computertechnik AG (Vienna)</a>
+
+// @page whatsnew.html, What's New
+// <pre>
+// @include ../WHATSNEW
+// </pre>
+// 
+// @page install.html, Install Help
+// <pre>
+// @include ../INSTALL
+// </pre>
+//
+// @page license.html, License
+// <pre>
+// @include ../License
+// </pre>
+
 
 package core4inet;

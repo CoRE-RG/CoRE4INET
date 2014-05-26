@@ -4,4 +4,4 @@ OMNeT++ IDE select: "Project" -> "Generate NED documentation", select
 the project and hit OK. It may take some time to generate the
 documentation.
 You can also access the documentations online at:
-http://tte4inet.realmv6.org/documentation
+http://core4inet.realmv6.org/core4inet_documentation
