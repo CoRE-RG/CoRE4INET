@@ -36,6 +36,7 @@ class InnerMessageFilter : public cObjectResultFilter
 
 class InnerMessagePacketBytesFilter : public cObjectResultFilter{
     public:
+        using cObjectResultFilter::receiveSignal;
         virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object);
 };
 

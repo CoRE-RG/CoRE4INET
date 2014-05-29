@@ -333,8 +333,6 @@ void Timer::clockCorrection(int32_t ticks)
 
     //Now correct the actiontime events that must be recalculated after clock correction
     std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > > correctedActionTimeEvents;
-    std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::iterator it3 =
-            correctedActionTimeEvents.begin();
     for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::iterator it2 =
             registredActionTimeEvents.begin(); it2 != registredActionTimeEvents.end(); ++it2)
     {

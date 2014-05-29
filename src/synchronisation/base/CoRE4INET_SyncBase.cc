@@ -25,6 +25,9 @@ int SyncBase::numInitStages() const
 
 void SyncBase::initialize(int stage)
 {
+    if(stage==0){
+        Scheduled::initialize();
+    }
 }
 
 void SyncBase::notify(SyncNotificationKind kind)

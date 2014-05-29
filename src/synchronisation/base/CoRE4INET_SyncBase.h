@@ -31,6 +31,7 @@ namespace CoRE4INET {
 class SyncBase : public Scheduled
 {
     protected:
+        using Scheduled::initialize;
         /**
          * @brief Initializes the module
          *
