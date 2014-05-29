@@ -14,17 +14,20 @@
 // 
 
 #include "CoRE4INET_Timer.h"
+
+//Std
+#include <exception>
+//CoRE4INET
+#include "CoRE4INET_customWatch.h"
+//INET
 #include "INETDefs.h"
 
-#include "CoRE4INET_customWatch.h"
-
-#include <exception>
 
 namespace CoRE4INET {
 
 Define_Module(Timer);
 
-simsignal_t Timer::clockCorrectionSignal = SIMSIGNAL_NULL;
+simsignal_t Timer::clockCorrectionSignal = registerSignal("clockCorrection");
 
 Timer::Timer()
 {
@@ -37,8 +40,6 @@ void Timer::initialize()
 {
     oscillator = dynamic_cast<Oscillator*>(gate("oscillator_in")->getPathStartGate()->getOwnerModule());
     ASSERT2(oscillator, "cannot find oscillator!");
-
-    clockCorrectionSignal = registerSignal("clockCorrection");
 
     recalculationTime = lastRecalculation = simTime();
 

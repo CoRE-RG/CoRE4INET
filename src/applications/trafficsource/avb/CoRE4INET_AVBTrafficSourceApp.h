@@ -16,10 +16,13 @@
 #ifndef __CORE4INET_AVBTRAFFICSOURCEAPP_H_
 #define __CORE4INET_AVBTRAFFICSOURCEAPP_H_
 
-#include "omnetpp.h"
+//OMNeT++
+#include "clistener.h"
+//CoRE4INET
 #include "CoRE4INET_TrafficSourceAppBase.h"
 #include "CoRE4INET_Timed.h"
-#include "CoRE4INET_AVBIncoming.h"
+//INET
+#include "MACAddress.h"
 
 namespace CoRE4INET {
 

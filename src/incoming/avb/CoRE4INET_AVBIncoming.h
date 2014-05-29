@@ -16,9 +16,8 @@
 #ifndef __CORE4INET_AVBINCOMING_H_
 #define __CORE4INET_AVBINCOMING_H_
 
-#include "omnetpp.h"
-#include <map>
-#include "MACAddress.h"
+//CoRE4INET
+#include "CoRE4INET_Incoming.h"
 
 namespace CoRE4INET {
 
@@ -31,18 +30,13 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class AVBIncoming : public cSimpleModule
+class AVBIncoming : public Incoming
 {
     protected:
         /**
          * @brief set to true if there was an error during runtime
          */
         bool hadError;
-
-        /**
-         * @brief Initialization of the module.
-         */
-        virtual void initialize();
 
         /**
          * @brief Forwards messages arriving on in-gate to out-gate.

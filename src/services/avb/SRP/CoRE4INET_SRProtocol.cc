@@ -13,16 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <algorithm>
-
 #include "CoRE4INET_SRProtocol.h"
 
-#include "SRPFrame_m.h"
-
+//CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
-
 #include "ExtendedIeee802Ctrl_m.h"
-#include "EtherLLC.h"
+//Auto-generated Messages
+#include "SRPFrame_m.h"
 
 #define ETHERAPP_BUFFER_SAP  0xe1
 

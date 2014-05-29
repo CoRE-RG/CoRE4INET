@@ -13,7 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-#include "RCFrame_m.h"
+    //Auto-generated Messages
+	#include "RCFrame_m.h"
 }}
 
 class CoRE4INET::RCFrame;

@@ -14,9 +14,11 @@
 //
 
 #include "CoRE4INET_SRPRelay.h"
-#include "Ieee8021dInterfaceData.h"
-#include "ExtendedIeee802Ctrl_m.h"
+
+//CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
+//Auto-generated Messages
+#include "ExtendedIeee802Ctrl_m.h"
 
 namespace CoRE4INET {
 

@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_TRAFFICSINKAPP_H_
 #define __CORE4INET_TRAFFICSINKAPP_H_
 
+//CoRE4INET
 #include "CoRE4INET_ApplicationBase.h"
 
 namespace CoRE4INET {
@@ -38,11 +39,6 @@ class TrafficSinkApp : public virtual ApplicationBase
         static simsignal_t rxPkSignal;
 
     protected:
-        /**
-         * @brief Initialization of the module.
-         */
-        virtual void initialize();
-
         /**
          * @brief collects incoming message and writes statistics.
          *

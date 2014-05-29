@@ -15,14 +15,17 @@
 #ifndef __CoRE4INET_INCONTROLS_H_
 #define __CoRE4INET_INCONTROLS_H_
 
+//CoRE4INET
 #include "CoRE4INET_BaseInControl.h"
 #include "CoRE4INET_BEInControl.h"
 
 #ifdef WITH_AS6802_COMMON
+//CoRE4INET
 #include "CoRE4INET_CTInControl.h"
 #endif
 
 #ifdef WITH_AVB_COMMON
+//CoRE4INET
 #include "CoRE4INET_AVBClassAInControl.h"
 #endif
 

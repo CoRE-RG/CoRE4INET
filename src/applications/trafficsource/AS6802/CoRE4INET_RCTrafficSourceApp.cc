@@ -14,8 +14,10 @@
 // 
 
 #include "CoRE4INET_RCTrafficSourceApp.h"
-#include "CTFrame_m.h"
+
+//CoRE4INET
 #include "CoRE4INET_Timer.h"
+//INET
 #include "ModuleAccess.h"
 
 namespace CoRE4INET {

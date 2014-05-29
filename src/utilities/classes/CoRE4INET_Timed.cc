@@ -13,7 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_Timed.h"
+
+//INET
 #include "ModuleAccess.h"
 
 using namespace CoRE4INET;

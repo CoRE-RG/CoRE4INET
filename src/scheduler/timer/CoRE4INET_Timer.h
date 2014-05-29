@@ -16,14 +16,11 @@
 #ifndef __CORE4INET_TIMER_H_
 #define __CORE4INET_TIMER_H_
 
-#include "omnetpp.h"
-
+//OMNeT++
+#include "csimplemodule.h"
+//CoRE4INET
 #include "CoRE4INET_Oscillator.h"
 #include "CoRE4INET_Period.h"
-
-#include "scheduler/SchedulerMessage_m.h"
-#include "CoRE4INET_SchedulerEvent.h"
-#include "scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
 

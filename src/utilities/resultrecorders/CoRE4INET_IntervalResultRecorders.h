@@ -15,7 +15,8 @@
 #ifndef __TTE4INET_INTERVALRESULTRECORDERS_H
 #define __TTE4INET_INTERVALRESULTRECORDERS_H
 
-#include <cresultrecorder.h>
+//OMNeT++
+#include "cresultrecorder.h"
 
 namespace TTEthernetModel {
 

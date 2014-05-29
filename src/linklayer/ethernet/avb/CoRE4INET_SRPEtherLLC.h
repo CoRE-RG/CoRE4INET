@@ -16,9 +16,11 @@
 #ifndef __CORE4INET_SRPETHERLLC_H
 #define __CORE4INET_SRPETHERLLC_H
 
+//CoRE4INET
 #include "CoRE4INET_BGEtherLLC.h"
-
+//Auto-generated Messages
 #include "SRPFrame_m.h"
+//INET Auto-generated Messages
 #include "EtherFrame_m.h"
 
 namespace CoRE4INET {

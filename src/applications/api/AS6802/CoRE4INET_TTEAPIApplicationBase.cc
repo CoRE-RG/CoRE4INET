@@ -14,21 +14,20 @@
 // 
 
 #include "CoRE4INET_TTEAPIApplicationBase.h"
-#include "EtherMACFullDuplex.h"
-#include "CoRE4INET_Incoming.h"
-#include "CoRE4INET_TTIncoming.h"
-#include "CoRE4INET_RCIncoming.h"
+
+//CoRE4INET
+#include "CoRE4INET_Task.h"
 #include "CoRE4INET_TTBuffer.h"
 #include "CoRE4INET_RCBuffer.h"
-#include "CoRE4INET_BGBuffer.h"
-#include "APIPayload_m.h"
-#include "CoRE4INET_Task.h"
-#include "CoRE4INET_TTEScheduler.h"
-#include "SyncNotification_m.h"
 #include "CoRE4INET_CTFrame.h"
-#include "ModuleAccess.h"
 
-#include "Ethernet.h"
+//INET
+#include "ModuleAccess.h"
+#include "EtherMACFullDuplex.h"
+
+//Auto-generated
+#include "APIPayload_m.h"
+#include "SyncNotification_m.h"
 
 namespace CoRE4INET {
 
@@ -37,6 +36,7 @@ Define_Module(TTEAPIApplicationBase);
 void TTEAPIApplicationBase::initialize()
 {
     ApplicationBase::initialize();
+    Scheduled::initialize();
     scheduleAt(simTime(), new cMessage("Start Application", START_APPLICATION));
     findContainingNode(this)->subscribe("syncStatus", this);
     WATCH_MAP(receiveCallbacks);
@@ -55,8 +55,7 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
         Task *task = (Task*) msg->par("task").pointerValue();
         task->executeTask();
         //Reregister scheduler
-        TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
-        tteScheduler->registerEvent((SchedulerEvent *) msg);
+        period->registerEvent((SchedulerEvent *) msg);
     }
 }
 
@@ -89,14 +88,13 @@ void TTEAPIApplicationBase::registerTask(unsigned int actionTime, void (*functio
     task->setFunctionArg(setFunctionArg);
 
     //Register Event
-    TTEScheduler *tteScheduler = (TTEScheduler*) getParentModule()->getSubmodule("scheduler");
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
 
     event->addPar("task").setPointerValue(task);
 
     event->setAction_time(actionTime);
     event->setDestinationGate(gate("schedulerIn"));
-    tteScheduler->registerEvent(event);
+    period->registerEvent(event);
 }
 
 int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id, const uint16_t ct_id,

@@ -14,11 +14,13 @@
 // 
 
 #include "CoRE4INET_TTTrafficSourceApp.h"
-#include "TTFrame_m.h"
-#include "SyncNotification_m.h"
 
-#include "ModuleAccess.h"
+//CoRE4INET
 #include "CoRE4INET_NotifierConsts.h"
+//INET
+#include "ModuleAccess.h"
+//Auto-generated Messages
+#include "SyncNotification_m.h"
 
 namespace CoRE4INET {
 

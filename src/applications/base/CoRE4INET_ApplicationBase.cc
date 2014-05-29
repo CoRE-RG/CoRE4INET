@@ -15,10 +15,11 @@
 
 #include "CoRE4INET_ApplicationBase.h"
 
+//CoRE4INET
 #include "CoRE4INET_Defs.h"
-#include "CoRE4INET_HelperFunctions.h"
 #include "CoRE4INET_BGBuffer.h"
 
+//INET
 #include "ModuleAccess.h"
 
 namespace CoRE4INET {

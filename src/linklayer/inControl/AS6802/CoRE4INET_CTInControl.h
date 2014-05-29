@@ -16,21 +16,18 @@
 #ifndef __CORE4INET_CTINCONTROL_H_
 #define __CORE4INET_CTINCONTROL_H_
 
-#include "omnetpp.h"
-
-#include <EtherFrame_m.h>
-#include <ModuleAccess.h>
-
-#include "CoRE4INET_CTIncoming.h"
-#include "CoRE4INET_CTBuffer.h"
-
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_HelperFunctions.h"
-#include "CoRE4INET_customWatch.h"
-
-
+//Std
 #include <map>
 #include <list>
+//CoRE4INET
+#include "CoRE4INET_Defs.h"
+#include "CoRE4INET_CTIncoming.h"
+#include "CoRE4INET_CTBuffer.h"
+#include "CoRE4INET_customWatch.h"
+//INET
+#include <ModuleAccess.h>
+//INET Auto-generated Messages
+#include <EtherFrame_m.h>
 
 namespace CoRE4INET {
 

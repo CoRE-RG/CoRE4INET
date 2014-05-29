@@ -16,16 +16,19 @@
 #ifndef __CoRE4INET_SHAPERS_H_
 #define __CoRE4INET_SHAPERS_H_
 
+//CoRE4INET
 #include "CoRE4INET_BaseShaper.h"
 #include "CoRE4INET_BEShaper.h"
 
 #ifdef WITH_AS6802_COMMON
+//CoRE4INET
 #include "CoRE4INET_RCShaper.h"
 #include "CoRE4INET_PCFShaper.h"
 #include "CoRE4INET_TTShaper.h"
 #endif
 
 #ifdef WITH_AVB_COMMON
+//CoRE4INET
 #include "CoRE4INET_AVBClassAShaper.h"
 #endif
 

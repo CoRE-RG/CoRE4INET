@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-#include "EtherFrame_m.h"
-
+    //INET Auto-generated Messages
+	#include "EtherFrame_m.h"
 }}
 
 class ::EthernetIIFrame;

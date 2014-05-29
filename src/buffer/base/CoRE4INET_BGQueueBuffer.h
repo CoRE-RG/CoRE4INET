@@ -16,10 +16,9 @@
 #ifndef __CORE4INET_BGQUEUEBUFFER_H_
 #define __CORE4INET_BGQUEUEBUFFER_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_BGBuffer.h"
 #include "CoRE4INET_QueueBuffer.h"
-#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

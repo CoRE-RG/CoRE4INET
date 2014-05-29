@@ -16,7 +16,9 @@
 #ifndef __CORE4INET_BGTRAFFICSINKAPP_H_
 #define __CORE4INET_BGTRAFFICSINKAPP_H_
 
+//CoRE4INET
 #include "CoRE4INET_TrafficSinkApp.h"
+//INET
 #include "MACAddress.h"
 
 namespace CoRE4INET {

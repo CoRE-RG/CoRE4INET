@@ -15,6 +15,7 @@
 #ifndef __CORE4INET_SCHEDULEREVENT_H_
 #define __CORE4INET_SCHEDULEREVENT_H_
 
+//Auto-generated Messages
 #include "scheduler/SchedulerMessage_m.h"
 
 namespace CoRE4INET {
@@ -24,7 +25,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class SchedulerEvent : public CoRE4INET::SchedulerEvent_Base
+class SchedulerEvent : public SchedulerEvent_Base
 {
     private:
         cGate *destinationGate_var;

@@ -16,10 +16,10 @@
 #ifndef __CORE4INET_TTTRAFFICSOURCEAPP_H_
 #define __CORE4INET_TTTRAFFICSOURCEAPP_H_
 
-#include "omnetpp.h"
+//OMNeT++
+#include "clistener.h"
+//CoRE4INET
 #include "CoRE4INET_CTTrafficSourceAppBase.h"
-#include "CoRE4INET_CTApplicationBase.h"
-
 #include "CoRE4INET_Scheduled.h"
 
 namespace CoRE4INET {

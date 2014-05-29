@@ -15,13 +15,14 @@
 #ifndef __CoRE4INET_SRPTABLE_H_
 #define __CoRE4INET_SRPTABLE_H_
 
+//Std
 #include <map>
-#include <list>
-#include "MACAddress.h"
-
-#include "AVBDefs_m.h"
-
+//OMNeT++
 #include "csimplemodule.h"
+//INET
+#include "MACAddress.h"
+//Auto-generated Messages
+#include "AVBDefs_m.h"
 
 namespace CoRE4INET {
 

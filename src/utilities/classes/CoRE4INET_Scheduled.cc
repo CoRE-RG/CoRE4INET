@@ -14,6 +14,8 @@
 //
 
 #include "CoRE4INET_Scheduled.h"
+
+//INET
 #include "ModuleAccess.h"
 
 using namespace CoRE4INET;

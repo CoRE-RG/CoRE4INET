@@ -12,12 +12,12 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
+
 #include "CoRE4INET_IntervalResultRecorders.h"
 
-#include <cmessage.h>
-#include <limits>
-#include <cmodule.h>
-#include <cchannel.h>
+//OMNeT++
+#include "cmodule.h"
+#include "cchannel.h"
 
 using namespace TTEthernetModel;
 

@@ -14,11 +14,14 @@
 // 
 
 #include "CoRE4INET_TocApp.h"
+
+//CoRE4INET
+#include "CoRE4INET_Incoming.h"
+//Autp-generated Messages
 #include "TicToc_m.h"
-#include "CoRE4INET_TTEScheduler.h"
 #include "RCFrame_m.h"
 #include "TTFrame_m.h"
-#include "CoRE4INET_Incoming.h"
+
 
 namespace CoRE4INET {
 

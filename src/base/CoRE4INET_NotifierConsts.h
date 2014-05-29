@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CoRE4INET_NOTIFIERCONSTS_H_
-#define __CoRE4INET_NOTIFIERCONSTS_H_
+#ifndef __CORE4INET_NOTIFIERCONSTS_H_
+#define __CORE4INET_NOTIFIERCONSTS_H_
 
 #include "clistener.h"
 
@@ -25,4 +25,4 @@ extern simsignal_t NF_SYNC_STATE_CHANGE; //Sync
 
 }
 
-#endif /* __CoRE4INET_NOTIFIERCONSTS_H_ */
+#endif /* __CORE4INET_NOTIFIERCONSTS_H_ */

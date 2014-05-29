@@ -13,7 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-#include "CoRE4INET_CTFrame.h"
+    //CoRE4INET
+	#include "CoRE4INET_CTFrame.h"
 }}
 
 class CoRE4INET::CTFrame;

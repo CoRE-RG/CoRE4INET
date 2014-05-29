@@ -16,7 +16,10 @@
 #ifndef __CORE4INET_SRPRELAY_H_
 #define __CORE4INET_SRPRELAY_H_
 
+//INET
 #include "Ieee8021dRelay.h"
+#include "EtherFrame.h"
+//Auto-generated Messages
 #include "SRPFrame_m.h"
 
 namespace CoRE4INET {

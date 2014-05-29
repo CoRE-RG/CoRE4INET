@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_CT_FRAME_H_
 #define __CORE4INET_CT_FRAME_H_
 
+//Auto-generated Messages
 #include "CTFrame_m.h"
 
 namespace CoRE4INET {

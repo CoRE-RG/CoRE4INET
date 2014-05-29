@@ -14,10 +14,9 @@
 // 
 
 #include "CoRE4INET_CTBuffer.h"
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_CTFrame.h"
 
-#include "CoRE4INET_HelperFunctions.h"
+//CoRE4INET
+#include "CoRE4INET_CTFrame.h"
 
 using namespace CoRE4INET;
 

@@ -16,11 +16,9 @@
 #ifndef __CoRE4INET_BASESHAPER_H
 #define __CoRE4INET_BASESHAPER_H
 
-#include "omnetpp.h"
-#include "INETDefs.h"
-#include "CoRE4INET_Defs.h"
+//OMNeT++
+#include "csimplemodule.h"
 #include "IPassiveQueue.h"
-#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

@@ -15,12 +15,12 @@
 
 #include "CoRE4INET_CTApplicationBase.h"
 
+//CoRE4INET
 #include "CoRE4INET_Defs.h"
-#include "CoRE4INET_HelperFunctions.h"
-
 #include "CoRE4INET_RCBuffer.h"
-
 #include "CoRE4INET_customWatch.h"
+
+//INET
 #include "ModuleAccess.h"
 
 namespace CoRE4INET {

@@ -16,11 +16,14 @@
 #ifndef __CoRE4INET_TTSHAPER_H
 #define __CoRE4INET_TTSHAPER_H
 
-#include "ModuleAccess.h"
-#include "CoRE4INET_TTBuffer.h"
-#include "TTBufferEmpty_m.h"
-#include "CoRE4INET_HelperFunctions.h"
+//CoRE4INET
+#include "CoRE4INET_Defs.h"
 #include "CoRE4INET_Timed.h"
+#include "CoRE4INET_TTBuffer.h"
+//INET
+#include "ModuleAccess.h"
+//Auto-generated Messages
+#include "TTBufferEmpty_m.h"
 
 namespace CoRE4INET {
 

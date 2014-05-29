@@ -15,8 +15,8 @@
 
 #include "CoRE4INET_MultiTrafficSinkApp.h"
 
+//CoRE4INET
 #include "CoRE4INET_CTFrame.h"
-#include "CoRE4INET_HelperFunctions.h"
 
 namespace CoRE4INET {
 

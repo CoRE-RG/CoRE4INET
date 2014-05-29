@@ -14,7 +14,8 @@
 // 
 
 #include "CoRE4INET_BGTrafficSourceApp.h"
-#include "CoRE4INET_Defs.h"
+
+//CoRE4INET
 #include "CoRE4INET_BGBuffer.h"
 
 namespace CoRE4INET {

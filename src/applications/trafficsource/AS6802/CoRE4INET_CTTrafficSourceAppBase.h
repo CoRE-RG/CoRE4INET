@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_CTTRAFFICSOURCEBASE_H_
 #define __CORE4INET_CTTRAFFICSOURCEBASE_H_
 
+//CoRE4INET
 #include "CoRE4INET_TrafficSourceAppBase.h"
 #include "CoRE4INET_CTApplicationBase.h"
 

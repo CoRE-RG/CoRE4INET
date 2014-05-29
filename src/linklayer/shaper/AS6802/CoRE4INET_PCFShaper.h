@@ -16,11 +16,11 @@
 #ifndef __CoRE4INET_PCFSHAPER_H
 #define __CoRE4INET_PCFSHAPER_H
 
-#include "ModuleAccess.h"
-#include "CoRE4INET_RCBuffer.h"
-#include "PCFrame_m.h"
+//CoRE4INET
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_HelperFunctions.h"
+//Auto-generated Messages
+#include "PCFrame_m.h"
 
 namespace CoRE4INET {
 

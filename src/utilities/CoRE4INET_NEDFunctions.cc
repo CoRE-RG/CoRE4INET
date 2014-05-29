@@ -14,9 +14,8 @@
 //
 #include "CoRE4INET_NEDFunctions.h"
 
+//INET
 #include "ModuleAccess.h"
-#include "CoRE4INET_TTBuffer.h"
-#include "CoRE4INET_RCBuffer.h"
 
 static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc)
 {

@@ -16,18 +16,10 @@
 #ifndef __CORE4INET_AVBCLASSAINCONTROL_H_
 #define __CORE4INET_AVBCLASSAINCONTROL_H_
 
-#include "omnetpp.h"
-
-#include <EtherFrame_m.h>
-#include <AVBFrame_m.h>
-#include <ModuleAccess.h>
-#include "EtherFrameWithQTag_m.h"
-
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_HelperFunctions.h"
-
-#include <map>
-#include <list>
+//CoRE4INET Auto-generated Messages
+#include "AVBFrame_m.h"
+//INET Auto-generated Messages
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

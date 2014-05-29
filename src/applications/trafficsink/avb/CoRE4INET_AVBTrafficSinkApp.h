@@ -16,8 +16,11 @@
 #ifndef __CORE4INET_AVBTRAFFICSINK_H_
 #define __CORE4INET_AVBTRAFFICSINK_H_
 
-#include "CoRE4INET_TrafficSinkApp.h"
+//OMNeT++
 #include "clistener.h"
+//CoRE4INET
+#include "CoRE4INET_TrafficSinkApp.h"
+
 
 namespace CoRE4INET {
 

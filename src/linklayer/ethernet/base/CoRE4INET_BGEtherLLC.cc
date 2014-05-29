@@ -15,10 +15,6 @@
 
 #include "CoRE4INET_BGEtherLLC.h"
 
-#include "CoRE4INET_AVBDefs.h"
-#include "ExtendedIeee802Ctrl_m.h"
-
-
 namespace CoRE4INET {
 
 Define_Module(BGEtherLLC);

@@ -16,8 +16,10 @@
 #ifndef __CORE4INET_QUEUEBUFFER_H_
 #define __CORE4INET_QUEUEBUFFER_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_Buffer.h"
+//INET
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

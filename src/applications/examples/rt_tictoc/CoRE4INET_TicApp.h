@@ -16,9 +16,8 @@
 #ifndef __CORE4INET_TICAPP_H_
 #define __CORE4INET_TICAPP_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_CTApplicationBase.h"
-
 #include "CoRE4INET_Scheduled.h"
 
 namespace CoRE4INET {

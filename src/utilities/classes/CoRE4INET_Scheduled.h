@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_SCHEDULED_H_
 #define __CORE4INET_SCHEDULED_H_
 
+//CoRE4INET
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_Period.h"
 

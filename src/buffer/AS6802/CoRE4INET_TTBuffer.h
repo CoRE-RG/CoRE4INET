@@ -16,9 +16,8 @@
 #ifndef __CORE4INET_TTBUFFER_H_
 #define __CORE4INET_TTBUFFER_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_CTBuffer.h"
-#include "scheduler/SchedulerMessageEvents_m.h"
 #include "CoRE4INET_Scheduled.h"
 
 namespace CoRE4INET {

@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_BGBUFFER_H_
 #define __CORE4INET_BGBUFFER_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_Buffer.h"
 
 namespace CoRE4INET {

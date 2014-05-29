@@ -15,7 +15,8 @@
 #ifndef __TTE4INET_COMPARERESULTRECORDERS_H
 #define __TTE4INET_COMPARERESULTRECORDERS_H
 
-#include <cresultrecorder.h>
+//OMNeT++
+#include "cresultrecorder.h"
 
 namespace TTEthernetModel {
 

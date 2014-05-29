@@ -16,10 +16,8 @@
 #ifndef __CORE4INET_DUMMYSYNC_H_
 #define __CORE4INET_DUMMYSYNC_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_SyncBase.h"
-
-#include "CoRE4INET_Period.h"
 
 namespace CoRE4INET {
 

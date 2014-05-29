@@ -16,16 +16,12 @@
 #ifndef __CORE4INET_BASEINCONTROL_H_
 #define __CORE4INET_BASEINCONTROL_H_
 
-#include "omnetpp.h"
-
-#include "EtherFrame_m.h"
-
+//OMNeT++
+#include "csimplemodule.h"
+//CoRE4INET
 #include "CoRE4INET_Timed.h"
-
-#include "CoRE4INET_HelperFunctions.h"
-
-#include <map>
-#include <list>
+//INET Auto-generated Messages
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

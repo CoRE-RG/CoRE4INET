@@ -14,53 +14,50 @@
 // 
 
 #include "CoRE4INET_AVBIncoming.h"
-#include "EtherFrame_m.h"
-#include "CoRE4INET_BaseShaper.h"
 
+//CoRE4INET
 #include "CoRE4INET_SRPTable.h"
-
-#include "CoRE4INET_customWatch.h"
+//INET
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
 Define_Module(AVBIncoming);
 
-AVBIncoming::AVBIncoming()
-{
+AVBIncoming::AVBIncoming() {
     hadError = false;
 }
 
-void AVBIncoming::initialize()
-{
-}
-
-void AVBIncoming::handleMessage(cMessage* msg)
-{
-    if (msg->arrivedOn("in"))
-    {
+void AVBIncoming::handleMessage(cMessage* msg) {
+    if (msg->arrivedOn("in")) {
         EtherFrame *inFrame = check_and_cast<EtherFrame*>(msg);
 
-        SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+        SRPTable *srptable = check_and_cast<SRPTable*>(
+                getParentModule()->getSubmodule("srpTable"));
         //TODO: Minor enable VLANs
-        std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(inFrame->getDest(), 0);
-
-        for (std::list<cModule*>::iterator listener = listeners.begin(); listener != listeners.end(); listener++)
-        {
-            if (strcmp((*listener)->getName(), "phy") == 0)
-            {
-                sendDelayed(inFrame->dup(), SimTime(getParentModule()->par("hardware_delay").doubleValue()),
-                        gate("AVBout", (*listener)->getIndex()));
-            }
-            else{
-                if((*listener)->hasGate("AVBin")){
-                    sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
+        std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(
+                inFrame->getDest(), 0);
+        if (listeners.size() == 0) {
+            emit(droppedSignal, inFrame);
+        } else {
+            for (std::list<cModule*>::iterator listener = listeners.begin();
+                    listener != listeners.end(); listener++) {
+                if (strcmp((*listener)->getName(), "phy") == 0) {
+                    sendDelayed(inFrame->dup(),
+                            SimTime(
+                                    getParentModule()->par("hardware_delay").doubleValue()),
+                            gate("AVBout", (*listener)->getIndex()));
+                    emit(rxPkSignal, inFrame);
+                } else {
+                    if ((*listener)->hasGate("AVBin")) {
+                        sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
+                        emit(rxPkSignal, inFrame);
+                    }
                 }
             }
         }
         delete inFrame;
-    }
-    else
-    {
+    } else {
         delete msg;
     }
 }

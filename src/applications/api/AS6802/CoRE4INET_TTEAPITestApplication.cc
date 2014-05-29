@@ -15,6 +15,7 @@
 
 #include "CoRE4INET_TTEAPITestApplication.h"
 
+//TTE-API
 #include "tte_api.h"
 
 namespace CoRE4INET {

@@ -15,6 +15,7 @@
 
 #include "CoRE4INET_RCIncoming.h"
 
+//INET
 #include "EtherFrame_m.h"
 
 namespace CoRE4INET {
@@ -31,7 +32,6 @@ RCIncoming::RCIncoming() :
 void RCIncoming::initialize()
 {
     Timed::initialize();
-    Incoming::initialize();
 }
 
 void RCIncoming::handleMessage(cMessage *msg)
@@ -63,7 +63,6 @@ void RCIncoming::handleMessage(cMessage *msg)
         {
             lastArrived = currentTotalTicks;
             sendDelayed(msg, SimTime(getParentModule()->par("hardware_delay").doubleValue()), "out");
-            //send(msg,"out");
         }
     }
 }

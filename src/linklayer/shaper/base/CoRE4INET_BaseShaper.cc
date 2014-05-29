@@ -1,11 +1,5 @@
 #include "CoRE4INET_BaseShaper.h"
 
-#include <algorithm>
-
-#include "ModuleAccess.h"
-
-#include "CoRE4INET_HelperFunctions.h"
-
 using namespace CoRE4INET;
 
 void BaseShaper::initialize(int stage)

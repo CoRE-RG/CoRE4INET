@@ -14,6 +14,8 @@
 //
 
 #include "CoRE4INET_NotifierConsts.h"
+
+//OMNeT++
 #include "ccomponent.h"
 
 namespace CoRE4INET {

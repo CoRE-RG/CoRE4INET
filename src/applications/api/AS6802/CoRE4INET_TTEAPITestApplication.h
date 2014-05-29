@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_TTEAPITESTAPPLICATION_H_
 #define __CORE4INET_TTEAPITESTAPPLICATION_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_TTEAPIApplicationBase.h"
 
 namespace CoRE4INET {
@@ -24,7 +24,7 @@ namespace CoRE4INET {
 /**
  * @brief Simple Test-Application based on the TTEthernet-API.
  *
- * Containes main() and callback
+ * Contains main() and callback
  *
  * @sa TTEAPITestApplication, ApplicationBase
  * @ingroup Applications AS6802

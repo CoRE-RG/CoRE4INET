@@ -16,9 +16,8 @@
 #ifndef __CORE4INET_RCTRAFFICSOURCEAPP_H_
 #define __CORE4INET_RCTRAFFICSOURCEAPP_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_CTTrafficSourceAppBase.h"
-#include "CoRE4INET_CTApplicationBase.h"
 
 namespace CoRE4INET {
 

@@ -15,7 +15,8 @@
 
 #include "CoRE4INET_SimpleOscillator.h"
 
-#include <ModuleAccess.h>
+//INET
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 

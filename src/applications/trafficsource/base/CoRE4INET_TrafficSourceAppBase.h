@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_TRAFFICSOURCEAPPBASE_H_
 #define __CORE4INET_TRAFFICSOURCEAPPBASE_H_
 
+//CoRE4INET
 #include "CoRE4INET_ApplicationBase.h"
 
 namespace CoRE4INET {

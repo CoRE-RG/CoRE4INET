@@ -16,9 +16,8 @@
 #ifndef __CORE4INET_RCBUFFER_H_
 #define __CORE4INET_RCBUFFER_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_CTBuffer.h"
-#include "scheduler/SchedulerMessageEvents_m.h"
 #include "CoRE4INET_Timed.h"
 
 namespace CoRE4INET {

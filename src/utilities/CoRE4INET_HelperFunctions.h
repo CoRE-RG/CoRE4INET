@@ -16,21 +16,20 @@
 #ifndef __CORE4INET_HELPERFUNCTIONS_H_
 #define __CORE4INET_HELPERFUNCTIONS_H_
 
-#include <cstring>
+//Std
 #include <vector>
-
-#include "cpar.h"
-#include "cgate.h"
-
+//CoRE4INET
 #include "CoRE4INET_Timer.h"
 
 //FIXME: Can be used when opp_makedep is able to use defines
 //#ifdef WITH_AS6802_COMMON
+//CoRE4INET
 #include "PCFrame_m.h"
 //#endif
 
 //FIXME: Can be used when opp_makedep is able to use defines
 //#ifdef WITH_AVB_COMMON
+//CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
 #include "AVBDefs_m.h"
 //#endif

@@ -16,10 +16,9 @@
 #ifndef __CORE4INET_SIMPLEOSCILLATOR_H_
 #define __CORE4INET_SIMPLEOSCILLATOR_H_
 
-#include "omnetpp.h"
-
+//CoRE4INET
 #include "CoRE4INET_Oscillator.h"
-#include "CoRE4INET_Scheduled.h"
+#include "CoRE4INET_Period.h"
 
 namespace CoRE4INET {
 

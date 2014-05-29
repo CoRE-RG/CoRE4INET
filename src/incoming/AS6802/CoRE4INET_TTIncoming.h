@@ -16,11 +16,11 @@
 #ifndef __CORE4INET_TTINCOMING_H_
 #define __CORE4INET_TTINCOMING_H_
 
-#include "omnetpp.h"
-
+//CoRE4INET
 #include "CoRE4INET_CTIncoming.h"
-#include "EtherFrame_m.h"
 #include "CoRE4INET_Scheduled.h"
+//INET
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

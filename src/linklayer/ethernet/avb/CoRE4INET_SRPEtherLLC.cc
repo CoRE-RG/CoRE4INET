@@ -15,7 +15,9 @@
 
 #include "CoRE4INET_SRPEtherLLC.h"
 
+//CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
+//INET Auto-generated Messages
 #include "ExtendedIeee802Ctrl_m.h"
 
 

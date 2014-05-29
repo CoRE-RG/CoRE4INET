@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_HELPERFUNCTIONS_H_
 #define __CORE4INET_HELPERFUNCTIONS_H_
 
+//OMNeT++
 #include "cnedvalue.h"
 
 /**

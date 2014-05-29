@@ -16,9 +16,13 @@
 #ifndef __CORE4INET_BUFFER_H_
 #define __CORE4INET_BUFFER_H_
 
-#include "omnetpp.h"
-#include <EtherFrame_m.h>
+//Std
 #include <list>
+//OMNeT++
+#include "csimplemodule.h"
+//INET Auto-generated Messages
+#include "EtherFrame_m.h"
+
 
 namespace CoRE4INET {
 

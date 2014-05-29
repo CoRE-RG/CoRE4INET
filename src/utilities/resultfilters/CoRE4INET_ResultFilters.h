@@ -15,7 +15,8 @@
 #ifndef __CoRE4INET_RESULTFILTERS_H
 #define __CoRE4INET_RESULTFILTERS_H
 
-#include <cresultfilter.h>
+//OMNeT++
+#include "cresultfilter.h"
 
 namespace CoRE4INET{
 

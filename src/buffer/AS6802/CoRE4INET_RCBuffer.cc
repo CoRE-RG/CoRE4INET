@@ -14,7 +14,10 @@
 // 
 
 #include "CoRE4INET_RCBuffer.h"
+
+//Auto-generated Messages
 #include "CTFrame_m.h"
+#include "scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
 

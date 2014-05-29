@@ -16,9 +16,9 @@
 #ifndef CUSTOMWATCH_H_
 #define CUSTOMWATCH_H_
 
+//Std
 #include <map>
-
-#include "omnetpp.h"
+//OMNeT++
 #include "cstlwatch.h"
 
 template<class KeyT, class ValueT, class CmpT>

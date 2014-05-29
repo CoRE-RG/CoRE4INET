@@ -15,7 +15,9 @@
 
 #include "CoRE4INET_TTIncoming.h"
 
+//INET
 #include "ModuleAccess.h"
+//Auto-generated Messages
 #include "scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
@@ -38,7 +40,6 @@ TTIncoming::~TTIncoming()
 
 void TTIncoming::initialize()
 {
-    Incoming::initialize();
     if (par("period").stdstringValue().length() == 0)
     {
         par("period").setStringValue("period[0]");
@@ -143,7 +144,6 @@ void TTIncoming::handleMessage(cMessage *msg)
         delete msg;
         if (!hadError && ev.isGUI())
             getDisplayString().setTagArg("i2", 0, "");
-        send(frame, "out");
         frame = NULL;
     }
 

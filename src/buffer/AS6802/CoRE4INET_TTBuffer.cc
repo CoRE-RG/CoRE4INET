@@ -14,9 +14,10 @@
 // 
 
 #include "CoRE4INET_TTBuffer.h"
-#include "TTBufferEmpty_m.h"
 
-#include <ModuleAccess.h>
+//Auto-generated MEssages
+#include "TTBufferEmpty_m.h"
+#include "scheduler/SchedulerMessageEvents_m.h"
 
 using namespace CoRE4INET;
 

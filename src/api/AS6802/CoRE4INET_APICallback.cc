@@ -5,11 +5,13 @@
  *      Author: tillsteinbach
  */
 
-#include <stdint.h>
+//#include <stdint.h>
 
 #include "CoRE4INET_APICallback.h"
 
+//TTE-API
 #include "tte_api.h"
+//CoRE4INET
 #include "CoRE4INET_TTBuffer.h"
 #include "CoRE4INET_RCBuffer.h"
 #include "CoRE4INET_TTEAPIApplicationBase.h"

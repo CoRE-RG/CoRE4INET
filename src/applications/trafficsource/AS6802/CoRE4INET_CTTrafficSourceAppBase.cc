@@ -14,13 +14,15 @@
 // 
 
 #include "CoRE4INET_CTTrafficSourceAppBase.h"
+
+//CoRE4INET
 #include "CoRE4INET_CTFrame.h"
-#include "TTFrame_m.h"
 #include "CoRE4INET_TTBuffer.h"
-#include "RCFrame_m.h"
 #include "CoRE4INET_RCBuffer.h"
-#include "CoRE4INET_Defs.h"
 #include "CoRE4INET_Incoming.h"
+//Auto-generated Messages
+#include "TTFrame_m.h"
+#include "RCFrame_m.h"
 
 namespace CoRE4INET {
 

@@ -1,23 +1,20 @@
 //
 // This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+// GNU Lesser General Public License for more details.
 // 
-// You should have received a copy of the GNU General Public License
+// You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
 #ifndef __CORE4INET_TASK_H_
 #define __CORE4INET_TASK_H_
-
-#include "cobject.h"
-
 
 namespace CoRE4INET {
 
@@ -26,7 +23,7 @@ typedef void(*cbFunc)(void *);
 /**
  * @brief Class representing a Task.
  *
- * The class stores a funtion pointer and args and invokes the function periodically.
+ * The class stores a function pointer and args and invokes the function periodically.
  *
  * @todo Minor: This may be merged with the Callback class in a joined superclass. The
  * code seems identical.

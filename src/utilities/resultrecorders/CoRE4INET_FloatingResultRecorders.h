@@ -15,7 +15,8 @@
 #ifndef __CoRE4INET_FLOATINGRESULTRECORDERS_H
 #define __CoRE4INET_FLOATINGRESULTRECORDERS_H
 
-#include <cresultrecorder.h>
+//OMNeT++
+#include "cresultrecorder.h"
 
 namespace CoRE4INET{
 

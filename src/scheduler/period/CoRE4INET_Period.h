@@ -16,9 +16,12 @@
 #ifndef __CORE4INET_PERIOD_H_
 #define __CORE4INET_PERIOD_H_
 
-#include "omnetpp.h"
+//OMNeT++
+#include "csimplemodule.h"
+//CoRE4INET
 #include "CoRE4INET_SchedulerEvent.h"
-#include "SchedulerMessageEvents_m.h"
+//Auto-generated Messages
+#include "scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
 

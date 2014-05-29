@@ -16,11 +16,14 @@
 #ifndef __CORE4INET_TTEAPIAPPLICATIONBASE_H_
 #define __CORE4INET_TTEAPIAPPLICATIONBASE_H_
 
-#include "omnetpp.h"
+//Std
+#include <stdint.h>
+//TTE-API
 #include "tte_api.h"
-#include "CoRE4INET_CTApplicationBase.h"
-#include "CTFrame_m.h"
+//CoRE4INET
 #include "CoRE4INET_APICallback.h"
+#include "CoRE4INET_CTApplicationBase.h"
+#include "CoRE4INET_Scheduled.h"
 
 #define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
 
@@ -77,7 +80,7 @@ class TTEAPIPriv
  *
  * @author Till Steinbach
  */
-class TTEAPIApplicationBase : public CTApplicationBase, public cListener
+class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public cListener
 {
     private:
         bool synchronized;

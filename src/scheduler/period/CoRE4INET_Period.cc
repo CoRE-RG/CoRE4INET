@@ -14,8 +14,11 @@
 // 
 
 #include "CoRE4INET_Period.h"
-#include "CoRE4INET_Timer.h"
+
+//Std
 #include <exception>
+//CoRE4INET
+#include "CoRE4INET_Timer.h"
 
 namespace CoRE4INET {
 

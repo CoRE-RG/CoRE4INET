@@ -14,9 +14,11 @@
 // 
 
 #include "CoRE4INET_AVBTrafficSinkApp.h"
-#include "EtherFrame_m.h"
 
+//CoRE4INET
 #include "CoRE4INET_SRPTable.h"
+//INET Auto-Generated Messages
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

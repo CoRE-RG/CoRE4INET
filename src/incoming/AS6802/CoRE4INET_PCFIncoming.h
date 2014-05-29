@@ -15,9 +15,9 @@
 #ifndef __CORE4INET_PCFINCOMING_H_
 #define __CORE4INET_PCFINCOMING_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_CTIncoming.h"
-
+//Auto-Generated Messages
 #include "PCFrame_m.h"
 
 namespace CoRE4INET {

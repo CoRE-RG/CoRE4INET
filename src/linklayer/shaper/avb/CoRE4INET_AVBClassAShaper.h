@@ -1,6 +1,7 @@
 #ifndef __CoRE4INET_AVBCLASSASHAPER_H
 #define __CoRE4INET_AVBCLASSASHAPER_H
 
+//CoRE4INET
 #include "CoRE4INET_AVBBuffer.h"
 
 namespace CoRE4INET {

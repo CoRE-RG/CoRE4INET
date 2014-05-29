@@ -14,15 +14,17 @@
 // 
 
 #include "CoRE4INET_AVBBuffer.h"
-#include "ModuleAccess.h"
 
+//CoRE4INET
 #include "CoRE4INET_SRPTable.h"
+//INET
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 
 //Define_Module(AVBBuffer);
 
-simsignal_t AVBBuffer::creditSignal = SIMSIGNAL_NULL;
+simsignal_t AVBBuffer::creditSignal = registerSignal("credit");
 
 AVBBuffer::AVBBuffer()
 {
@@ -55,8 +57,6 @@ void AVBBuffer::initialize(int stage)
         newTime = simTime();
         oldTime = simTime();
         Wduration = 0;
-
-        creditSignal = registerSignal("credit");
 
         WATCH(credit);
         WATCH(maxCredit);

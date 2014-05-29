@@ -19,18 +19,12 @@ namespace CoRE4INET {
 
 Define_Module(Incoming);
 
-simsignal_t Incoming::droppedSignal = SIMSIGNAL_NULL;
-simsignal_t Incoming::rxPkSignal = SIMSIGNAL_NULL;
+simsignal_t Incoming::droppedSignal = registerSignal("droppedPk");
+simsignal_t Incoming::rxPkSignal = registerSignal("rxPk");
 
 Incoming::Incoming()
 {
     hadError = false;
-}
-
-void Incoming::initialize()
-{
-    droppedSignal = registerSignal("droppedPk");
-    rxPkSignal = registerSignal("rxPk");
 }
 
 void Incoming::recordPacketReceived(EtherFrame *frame)

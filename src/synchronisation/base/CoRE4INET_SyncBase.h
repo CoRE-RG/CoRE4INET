@@ -16,10 +16,10 @@
 #ifndef __CORE4INET_SYNCBASE_H_
 #define __CORE4INET_SYNCBASE_H_
 
-#include "omnetpp.h"
-#include "SyncNotification_m.h"
-
+//CoRE4INET
 #include "CoRE4INET_Scheduled.h"
+//Auto-generated Messages
+#include "SyncNotification_m.h"
 
 namespace CoRE4INET {
 

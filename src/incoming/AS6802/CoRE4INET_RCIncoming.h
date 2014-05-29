@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_RCINCOMING_H_
 #define __CORE4INET_RCINCOMING_H_
 
-#include "omnetpp.h"
+//CoRE4INET
 #include "CoRE4INET_CTIncoming.h"
 #include "CoRE4INET_Timed.h"
 

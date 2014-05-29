@@ -16,8 +16,6 @@
 #ifndef __CoRE4INET_BESHAPER_H
 #define __CoRE4INET_BESHAPER_H
 
-#include <ModuleAccess.h>
-
 namespace CoRE4INET {
 
 /**

@@ -14,9 +14,7 @@
 //
 #include "CoRE4INET_HelperFunctions.h"
 
-#include <sstream>
-#include "cmodule.h"
-
+//INET
 #include "ModuleAccess.h"
 
 namespace CoRE4INET {

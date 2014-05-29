@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_CTINCOMING_H_
 #define __CORE4INET_CTINCOMING_H_
 
+//CoRE4INET
 #include "CoRE4INET_Incoming.h"
 
 namespace CoRE4INET {

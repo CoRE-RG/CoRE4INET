@@ -16,7 +16,8 @@
 #ifndef __CORE4INET_OSCILLATOR_H_
 #define __CORE4INET_OSCILLATOR_H_
 
-#include "omnetpp.h"
+//OMNeT++
+#include "csimplemodule.h"
 
 namespace CoRE4INET {
 

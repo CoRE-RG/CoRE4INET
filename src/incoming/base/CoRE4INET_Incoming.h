@@ -16,8 +16,10 @@
 #ifndef __CORE4INET_INCOMING_H_
 #define __CORE4INET_INCOMING_H_
 
-#include "omnetpp.h"
-#include <EtherFrame_m.h>
+//OMNeT++
+#include "csimplemodule.h"
+//INET
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
@@ -53,10 +55,6 @@ class Incoming : public virtual cSimpleModule
          */
         Incoming();
     protected:
-        /**
-         * @brief Initialization of the module
-         */
-        virtual void initialize();
         /**
          * @brief Forwards messages arriving on in-gate to out-gate
          *

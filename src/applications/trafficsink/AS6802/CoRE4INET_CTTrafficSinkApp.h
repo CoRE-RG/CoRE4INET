@@ -16,6 +16,7 @@
 #ifndef __CORE4INET_CTTRAFFICSINK_H_
 #define __CORE4INET_CTTRAFFICSINK_H_
 
+//CoRE4INET
 #include "CoRE4INET_TrafficSinkApp.h"
 #include "CoRE4INET_CTApplicationBase.h"
 

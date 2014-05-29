@@ -14,7 +14,6 @@
 //
 
 #include "CoRE4INET_CTFrame.h"
-#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

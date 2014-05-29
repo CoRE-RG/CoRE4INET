@@ -14,11 +14,10 @@
 // 
 
 #include "CoRE4INET_DummySync.h"
-#include "CoRE4INET_TTEScheduler.h"
+
+//Auto-generated Messages
 #include "scheduler/SchedulerMessageEvents_m.h"
 #include "SyncNotification_m.h"
-
-#include <ModuleAccess.h>
 
 using namespace CoRE4INET;
 

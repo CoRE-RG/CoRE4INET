@@ -16,14 +16,8 @@
 #ifndef __CORE4INET_BEINCONTROL_H_
 #define __CORE4INET_BEINCONTROL_H_
 
-#include "omnetpp.h"
-
-#include <EtherFrame_m.h>
-
-#include "CoRE4INET_HelperFunctions.h"
-
-#include <map>
-#include <list>
+//INET Auto-generated Messages
+#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

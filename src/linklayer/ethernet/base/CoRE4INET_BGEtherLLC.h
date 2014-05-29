@@ -16,9 +16,8 @@
 #ifndef __CORE4INET_BGETHERLLC_H
 #define __CORE4INET_BGETHERLLC_H
 
+//INET
 #include "EtherLLC.h"
-
-#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 

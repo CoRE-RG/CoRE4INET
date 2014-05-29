@@ -16,7 +16,10 @@
 #ifndef __CORE4INET_APPLICATIONBASE_H_
 #define __CORE4INET_APPLICATIONBASE_H_
 
-#include "omnetpp.h"
+//Std
+#include <list>
+//OMNeT++
+#include "cSimpleModule.h"
 
 namespace CoRE4INET {
 

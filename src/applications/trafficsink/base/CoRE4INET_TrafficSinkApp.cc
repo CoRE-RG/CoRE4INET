@@ -14,19 +14,15 @@
 // 
 
 #include "CoRE4INET_TrafficSinkApp.h"
+
+//INET Auto-Generated Messages
 #include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
 Define_Module(TrafficSinkApp);
 
-simsignal_t TrafficSinkApp::rxPkSignal = SIMSIGNAL_NULL;
-
-void TrafficSinkApp::initialize()
-{
-    ApplicationBase::initialize();
-    rxPkSignal = registerSignal("rxPk");
-}
+simsignal_t TrafficSinkApp::rxPkSignal = registerSignal("rxPk");
 
 void TrafficSinkApp::handleMessage(cMessage *msg)
 {
