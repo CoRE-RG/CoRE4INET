@@ -49,12 +49,12 @@ class Timed : public virtual cSimpleModule
         /**
          * returns pointer to the configured timer
          */
-        Timer* getTimer();
+        Timer* getTimer() const;
 
         /**
          * returns pointer to the configured oscillator
          */
-        Oscillator* getOscillator();
+        Oscillator* getOscillator() const;
 };
 
 }

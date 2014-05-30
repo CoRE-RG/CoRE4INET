@@ -46,7 +46,7 @@ class Scheduled : public Timed
         /**
          * returns pointer to the configured period
          */
-        Period* getPeriod();
+        Period* getPeriod() const;
 };
 
 }

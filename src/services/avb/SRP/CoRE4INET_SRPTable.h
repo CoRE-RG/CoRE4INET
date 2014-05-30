@@ -65,14 +65,6 @@ class SRPTable : public cSimpleModule
         };
         friend std::ostream& operator<<(std::ostream& os, const TalkerEntry& entry);
 
-        struct StreamId_compare
-        {
-                bool operator()(const uint64_t u1, const uint64_t u2) const
-                {
-                    return u1 > u2;
-                }
-        };
-
         /**
          * @brief Entry for Listener
          */
@@ -94,9 +86,9 @@ class SRPTable : public cSimpleModule
         };
         friend std::ostream& operator<<(std::ostream& os, const ListenerEntry& entry);
 
-        typedef std::unordered_map<uint64_t, TalkerEntry*, StreamId_compare> TalkerTable;
+        typedef std::unordered_map<uint64_t, TalkerEntry*> TalkerTable;
         typedef std::unordered_map<cModule*, ListenerEntry*> ListenerList;
-        typedef std::unordered_map<uint64_t, ListenerList, StreamId_compare> ListenerTable;
+        typedef std::unordered_map<uint64_t, ListenerList> ListenerTable;
 
         /**
          * map of talker entries for stream id

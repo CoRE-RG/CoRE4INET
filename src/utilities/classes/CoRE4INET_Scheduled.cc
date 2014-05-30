@@ -31,7 +31,7 @@ void Scheduled::initialize()
     ASSERT2(period, "cannot find period, you should specify it!");
 }
 
-Period* Scheduled::getPeriod()
+Period* Scheduled::getPeriod() const
 {
     return period;
 }
