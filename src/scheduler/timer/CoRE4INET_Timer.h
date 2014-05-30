@@ -89,7 +89,7 @@ class Timer : public cSimpleModule
          * Calculates the point in ticks when the next action must be scheduled
          * @return
          */
-        virtual uint32_t nextAction();
+        virtual uint32_t nextAction() const;
         /**
          * Trigger the sending of all events that are due at this moment
          */
@@ -142,7 +142,7 @@ class Timer : public cSimpleModule
         /**
          * @brief Returns a pointer to the attached oscillator
          */
-        virtual Oscillator* getOscillator();
+        virtual Oscillator* getOscillator() const;
 
         /**
          * @brief Corrects the clock by the number of ticks

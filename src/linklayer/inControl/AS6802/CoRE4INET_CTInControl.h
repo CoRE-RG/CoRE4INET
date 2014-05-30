@@ -17,7 +17,7 @@
 #define __CORE4INET_CTINCONTROL_H_
 
 //Std
-#include <map>
+#include <unordered_map>
 #include <list>
 //CoRE4INET
 #include "CoRE4INET_Defs.h"
@@ -49,7 +49,7 @@ class CTInControl : public IC
         /**
          * @brief Lists of incoming modules for each critical traffic id.
          */
-        std::map<uint16_t, std::list<CTIncoming*> > ct_incomings;
+        std::unordered_map<uint16_t, std::list<CTIncoming*> > ct_incomings;
 
         /**
          * @brief caches ct_mask parameter
@@ -122,7 +122,7 @@ void CTInControl<IC>::initialize()
 {
     BaseInControl::initialize();
     ctDroppedSignal = cComponent::registerSignal("ctDropped");
-    WATCH_LISTMAP(ct_incomings);
+    //WATCH_LISTMAP(ct_incomings);
 }
 
 template<class IC>
@@ -137,7 +137,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
         {
             this->recordPacketReceived(frame);
 
-            std::map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(getCTID(frame));
+            std::unordered_map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(getCTID(frame));
             if (ct_incomingList != ct_incomings.end())
             {
                 //Send to all CTCs for the CT-ID

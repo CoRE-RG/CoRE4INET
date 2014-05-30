@@ -16,6 +16,8 @@
 #ifndef __CoRE4INET_TTSHAPER_H
 #define __CoRE4INET_TTSHAPER_H
 
+//Std
+#include <map>
 //CoRE4INET
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_Timed.h"

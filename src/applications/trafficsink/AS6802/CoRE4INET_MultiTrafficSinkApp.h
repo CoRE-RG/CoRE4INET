@@ -16,6 +16,8 @@
 #ifndef __CORE4INET_MULTITRAFFICSINKAPP_H_
 #define __CORE4INET_MULTITRAFFICSINKAPP_H_
 
+//Std
+#include <unordered_map>
 //CoRE4INET
 #include "CoRE4INET_ApplicationBase.h"
 
@@ -36,7 +38,7 @@ class MultiTrafficSinkApp : public ApplicationBase
         /**
          * Map of Signals that are emitted every time a frame with a specific CT-ID was sent.
          */
-        static std::map<uint16_t, simsignal_t> rxPkSignal;
+        static std::unordered_map<uint16_t, simsignal_t> rxPkSignal;
 
     protected:
         /**

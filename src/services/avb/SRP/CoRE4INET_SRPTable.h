@@ -17,6 +17,7 @@
 
 //Std
 #include <map>
+#include <unordered_map>
 //OMNeT++
 #include "csimplemodule.h"
 //INET
@@ -71,13 +72,6 @@ class SRPTable : public cSimpleModule
                     return u1 > u2;
                 }
         };
-        struct Module_compare
-        {
-                bool operator()(const cModule *u1, const cModule *u2) const
-                {
-                    return strcmp(u1->getName(), u2->getName());
-                }
-        };
 
         /**
          * @brief Entry for Listener
@@ -100,18 +94,18 @@ class SRPTable : public cSimpleModule
         };
         friend std::ostream& operator<<(std::ostream& os, const ListenerEntry& entry);
 
-        typedef std::map<uint64_t, TalkerEntry*, StreamId_compare> TalkerTable;
-        typedef std::map<cModule*, ListenerEntry*, Module_compare> ListenerList;
-        typedef std::map<uint64_t, ListenerList, StreamId_compare> ListenerTable;
+        typedef std::unordered_map<uint64_t, TalkerEntry*, StreamId_compare> TalkerTable;
+        typedef std::unordered_map<cModule*, ListenerEntry*> ListenerList;
+        typedef std::unordered_map<uint64_t, ListenerList, StreamId_compare> ListenerTable;
 
         /**
          * map of talker entries for stream id
          */
-        std::map<unsigned int, TalkerTable> talkerTables;
+        std::unordered_map<unsigned int, TalkerTable> talkerTables;
         /**
          * map of listener entries for stream id
          */
-        std::map<unsigned int, ListenerTable> listenerTables;
+        std::unordered_map<unsigned int, ListenerTable> listenerTables;
 
         /**
          * Time when next entry is aging

@@ -19,7 +19,7 @@
 
 namespace CoRE4INET {
 
-std::string& replaceAll(std::string &string, std::string toFind, std::string replacement)
+std::string& replaceAll(std::string &string, const std::string &toFind, const std::string &replacement)
 {
     size_t pos = string.find(toFind);
     while (pos != std::string::npos)
@@ -30,7 +30,7 @@ std::string& replaceAll(std::string &string, std::string toFind, std::string rep
     return string;
 }
 
-void addPath(cPar &parameter, std::string &pathToAdd)
+void addPath(cPar &parameter, const std::string &pathToAdd)
 {
     std::string path = parameter.stdstringValue();
     if (path.length() > 0)

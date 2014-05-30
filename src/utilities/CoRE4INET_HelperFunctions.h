@@ -46,7 +46,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-std::string& replaceAll(std::string &string, std::string toFind, std::string replacement);
+std::string& replaceAll(std::string &string, const std::string &toFind, const std::string &replacement);
 
 /**
  * @brief Adds a path to a parameter that contains paths to elements.
@@ -56,7 +56,7 @@ std::string& replaceAll(std::string &string, std::string toFind, std::string rep
  *
  * @author Till Steinbach
  */
-void addPath(cPar &parameter, std::string &pathToAdd);
+void addPath(cPar &parameter, const std::string &pathToAdd);
 
 /**
  * @brief Returns the gate defined by an object path.

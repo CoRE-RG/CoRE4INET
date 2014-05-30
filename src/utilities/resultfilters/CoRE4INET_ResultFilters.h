@@ -59,7 +59,7 @@ class SubtractActualFromLastFilter : public cNumericResultFilter{
 class FloatingIntervalFilter : public cNumericResultFilter{
     protected:
         simtime_t interval;
-        std::map<simtime_t, double> inInterval;
+        std::unordered_map<simtime_t, double> inInterval;
     protected:
         virtual bool process(simtime_t &t, double& value);
     public:

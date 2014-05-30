@@ -166,7 +166,7 @@ void Timer::reschedule()
     }
 }
 
-uint32_t Timer::nextAction()
+uint32_t Timer::nextAction() const
 {
     if (registredActionTimeEvents.size() == 0 && registredTimerEvents.size() == 0)
     {
@@ -295,7 +295,7 @@ uint64_t Timer::getTotalTicks()
     return ticks;
 }
 
-Oscillator* Timer::getOscillator()
+Oscillator* Timer::getOscillator() const
 {
     if (!oscillator)
     {
