@@ -167,12 +167,13 @@ Register_ResultRecorder("IntervalCapacityRecorder", IntervalCapacityRecorder);
 
 double IntervalCapacityRecorder::calculate()
 {
+    static int ETHERNETHEADERSIZE = 38;
     double sumValue = 0;
     double frameUsedSumValue = 0;
     for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
-        frameUsedSumValue += (*it).second + 38;
+        frameUsedSumValue += (*it).second + ETHERNETHEADERSIZE;
     }
     return sumValue / frameUsedSumValue * 100;
 }
@@ -266,7 +267,7 @@ double IntervalSumVectorRecorderPercent::calculate()
     }
     cComponent *comp = getComponent();
     double nominalDatarate = comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return sumValue /((interval / SimTime(1))* nominalDatarate / 100); // TODO Linkgeschwindigkeit
+    return sumValue /((interval / SimTime(1))* nominalDatarate / 100);
 }
 
 
