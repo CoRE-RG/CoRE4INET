@@ -73,7 +73,7 @@ class AVBBuffer : public virtual Buffer, public Timed
          *
          * @return returns the credit.
          */
-        int getCredit();
+        int getCredit() const;
 
         /**
          * @brief resets credit to 0.

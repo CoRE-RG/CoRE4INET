@@ -24,8 +24,8 @@ using namespace CoRE4INET;
 
 //Define_Module(Buffer);
 
-simsignal_t Buffer::txPkSignal = SIMSIGNAL_NULL;
-simsignal_t Buffer::rxPkSignal = SIMSIGNAL_NULL;
+simsignal_t Buffer::txPkSignal = registerSignal("txPk");
+simsignal_t Buffer::rxPkSignal = registerSignal("rxPk");
 
 Buffer::Buffer(){
     maxMessageSize = 0;
@@ -49,19 +49,12 @@ void Buffer::initialize(int stage)
 
         maxMessageSize = par("maxMessageSize").longValue();
 
-        initializeStatistics();
         if (ev.isGUI())
         {
             //Update displaystring
             getDisplayString().setTagArg("i", 0, "buffer/empty");
         }
     }
-}
-
-void Buffer::initializeStatistics()
-{
-    txPkSignal = registerSignal("txPk");
-    rxPkSignal = registerSignal("rxPk");
 }
 
 void Buffer::recordPacketSent(EtherFrame *frame)

@@ -115,7 +115,7 @@ class RCBuffer : public virtual CTBuffer, public Timed
          *
          * @sa enqueue();
          */
-        virtual long getRequiredBandwidth();
+        virtual long getRequiredBandwidth() const;
 };
 
 } //namespace

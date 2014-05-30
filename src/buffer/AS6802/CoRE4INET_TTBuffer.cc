@@ -119,12 +119,12 @@ void TTBuffer::handleParameterChange(const char* parname)
         actionTimeEvent->setAction_time((uint32_t) par("sendWindowStart").longValue());
 }
 
-uint64_t TTBuffer::nextSendWindowStart()
+uint64_t TTBuffer::nextSendWindowStart() const
 {
     return nextAction;
 }
 
-long TTBuffer::getRequiredBandwidth()
+long TTBuffer::getRequiredBandwidth() const
 {
     return (par("maxMessageSize").longValue() * 8)
             * (1 / ((uint32_t) period->par("cycle_ticks").longValue() * oscillator->par("tick").doubleValue()));

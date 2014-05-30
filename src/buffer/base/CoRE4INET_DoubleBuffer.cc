@@ -53,7 +53,7 @@ EtherFrame * DoubleBuffer::dequeue()
         return NULL;
 }
 
-unsigned int DoubleBuffer::size()
+unsigned int DoubleBuffer::size() const
 {
     return frame ? 1 : 0;
 }

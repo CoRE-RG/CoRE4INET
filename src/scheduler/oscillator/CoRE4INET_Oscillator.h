@@ -49,13 +49,13 @@ class Oscillator : public virtual cSimpleModule
          *
          * @return current length of a tick
          */
-        virtual simtime_t getTick();
+        virtual simtime_t getTick() const;
         /**
          * @brief Returns the precise length of a tick (without drift)
          *
          * @return length of tick without drift
          */
-        virtual simtime_t getPreciseTick();
+        virtual simtime_t getPreciseTick() const;
 };
 
 } //namespace

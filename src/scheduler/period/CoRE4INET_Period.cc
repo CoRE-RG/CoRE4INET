@@ -102,7 +102,7 @@ uint64_t Period::getTotalTicks()
     return timer->getTotalTicks();
 }
 
-uint32_t Period::getCycles()
+uint32_t Period::getCycles() const
 {
     return cycles;
 }

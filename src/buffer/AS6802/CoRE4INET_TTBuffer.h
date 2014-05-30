@@ -96,7 +96,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          */
         ~TTBuffer();
 
-        uint64_t nextSendWindowStart();
+        uint64_t nextSendWindowStart() const;
 
         /**
          * @brief Calculates the bandwidth this module requires for transmission.
@@ -105,7 +105,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          *
          * @sa enqueue();
          */
-        virtual long getRequiredBandwidth();
+        virtual long getRequiredBandwidth() const;
 };
 }
 

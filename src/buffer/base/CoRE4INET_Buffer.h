@@ -80,12 +80,6 @@ class Buffer : public virtual cSimpleModule
          */
         unsigned int maxMessageSize;
 
-    private:
-        /**
-         * Initializes the statistics for the module
-         */
-        void initializeStatistics();
-
     protected:
         /**
          * @brief Initializes the module
@@ -180,7 +174,7 @@ class Buffer : public virtual cSimpleModule
          * @return number of messages in the buffer
          *
          */
-        virtual unsigned int size() = 0;
+        virtual unsigned int size() const = 0;
 
         /**
          * @brief Resets the buffer, deletes all messages

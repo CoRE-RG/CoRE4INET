@@ -34,11 +34,11 @@ int Oscillator::numInitStages() const
     return 1;
 }
 
-simtime_t Oscillator::getTick()
+simtime_t Oscillator::getTick() const
 {
     return SimTime(par("current_tick").doubleValue());
 }
-simtime_t Oscillator::getPreciseTick()
+simtime_t Oscillator::getPreciseTick() const
 {
     return SimTime(par("tick").doubleValue());
 }

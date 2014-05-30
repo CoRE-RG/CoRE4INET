@@ -179,7 +179,7 @@ class TTShaper : public TC, public virtual Timed
          * @param message The message that should be transmitted
          * @returns true if transmission is allowed else false
          */
-        virtual bool isTransmissionAllowed(EtherFrame *message);
+        virtual bool isTransmissionAllowed(EtherFrame *message) const;
 
         /**
          * @brief Registers a time-triggered buffer that feeds the module.
@@ -192,7 +192,7 @@ class TTShaper : public TC, public virtual Timed
          * @param ttBuffer the ttBuffer to check for
          * @returns true when registered, else false
          */
-        virtual bool isTTBufferRegistered(TTBuffer *ttBuffer);
+        virtual bool isTTBufferRegistered(const TTBuffer *ttBuffer) const;
 };
 
 template<class TC>
@@ -466,9 +466,9 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
 }
 
 template<class TC>
-bool TTShaper<TC>::isTTBufferRegistered(TTBuffer *ttBuffer)
+bool TTShaper<TC>::isTTBufferRegistered(const TTBuffer *ttBuffer) const
 {
-    for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end(); ++buffer)
+    for (std::map<uint64_t, TTBuffer*>::const_iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end(); ++buffer)
     {
         if ((*buffer).second == ttBuffer)
         {
@@ -536,7 +536,7 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
 }
 
 template<class TC>
-bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
+bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message) const
 {
     if (!message || !TC::outChannel)
     {

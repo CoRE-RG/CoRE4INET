@@ -266,7 +266,7 @@ void AVBBuffer::refresh()
         oldTime = simTime();
 }
 
-int AVBBuffer::getCredit()
+int AVBBuffer::getCredit() const
 {
     return credit;
 }

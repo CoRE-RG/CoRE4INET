@@ -77,7 +77,7 @@ class DoubleBuffer : public virtual Buffer
          * @return number of messages in the buffer
          *
          */
-        virtual unsigned int size();
+        virtual unsigned int size() const;
 
         /**
          * @brief Resets the buffer, deletes all messages
