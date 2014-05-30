@@ -33,7 +33,7 @@ void BGTrafficSourceApp::handleMessage(cMessage *msg) {
 }
 
 void BGTrafficSourceApp::sendMessage() {
-    for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin();
+    for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();
             buf != bgbuffers.end(); buf++) {
         EthernetIIFrame *frame = new EthernetIIFrame("Best-Effort Traffic");
 

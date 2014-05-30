@@ -49,7 +49,7 @@ void CTApplicationBase::handleParameterChange(const char* parname)
     ApplicationBase::handleParameterChange(parname);
     ctbuffers.clear();
     std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
-    for (std::vector<std::string>::iterator bufferPath = bufferPaths.begin(); bufferPath != bufferPaths.end();
+    for (std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin(); bufferPath != bufferPaths.end();
             bufferPath++)
     {
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());

@@ -43,7 +43,7 @@ void ApplicationBase::handleParameterChange(
     bgbuffers.clear();
     std::vector<std::string> bufferPaths = cStringTokenizer(
             par("buffers").stringValue(), DELIMITERS).asVector();
-    for (std::vector<std::string>::iterator bufferPath = bufferPaths.begin();
+    for (std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
             bufferPath != bufferPaths.end(); bufferPath++) {
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
         if (!module) {

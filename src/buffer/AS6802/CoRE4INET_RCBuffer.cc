@@ -64,7 +64,7 @@ void RCBuffer::handleMessage(cMessage *msg)
                     bagExpired = false;
                     numReset = 0;
                     //Send Message
-                    for (std::list<cGate*>::iterator dgate = destinationGates.begin(); dgate != destinationGates.end();
+                    for (std::list<cGate*>::const_iterator dgate = destinationGates.begin(); dgate != destinationGates.end();
                             ++dgate)
                     {
                         sendDirect(outgoingMessage->dup(), 0, 0, *dgate);
@@ -85,7 +85,7 @@ void RCBuffer::handleMessage(cMessage *msg)
                 bagExpired = false;
                 numReset = 0;
                 //Send Message
-                for (std::list<cGate*>::iterator gate = destinationGates.begin(); gate != destinationGates.end();
+                for (std::list<cGate*>::const_iterator gate = destinationGates.begin(); gate != destinationGates.end();
                         ++gate)
                 {
                     sendDirect(outgoingMessage->dup(), *gate);

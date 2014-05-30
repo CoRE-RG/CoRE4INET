@@ -105,7 +105,7 @@ bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
     FloatingIntervalFilter::process(t, value);
     //build sum
     double newValue = 0;
-    for (std::map<simtime_t, double>::iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)
+    for (std::map<simtime_t, double>::const_iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)
     {
         newValue += (*it2).second;
     }
@@ -121,7 +121,7 @@ bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value)
     FloatingIntervalFilter::process(t, value);
     //build average
     double newValue = 0;
-    for (std::map<simtime_t, double>::iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)
+    for (std::map<simtime_t, double>::const_iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)
     {
         newValue += (*it2).second;
     }

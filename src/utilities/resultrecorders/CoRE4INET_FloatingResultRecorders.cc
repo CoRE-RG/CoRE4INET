@@ -37,7 +37,7 @@ void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
 
     handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
     ASSERT(handle != NULL);
-    for (opp_string_map::iterator it = attributes.begin(); it != attributes.end(); ++it){
+    for (opp_string_map::const_iterator it = attributes.begin(); it != attributes.end(); ++it){
         ev.setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
         if(opp_strcmp(it->first.c_str(), "measure_interval")==0){
             interval = SimTime::parse(it->second.c_str());
@@ -64,7 +64,7 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
                             getClassName(), SIMTIME_STR(t), SIMTIME_STR(lastTime));
     }
 
-    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.lower_bound((t-interval));){
+    for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.lower_bound((t-interval));){
         simtime_t time = SimTime(it->first);
         inInterval.erase(it++);
         ev.recordInOutputVector(handle, time+interval, calculate());
@@ -99,7 +99,7 @@ Register_ResultRecorder("floatingIntervalSumVector", FloatingIntervalSumVectorRe
 
 double FloatingIntervalSumVectorRecorder::calculate(){
     double sumValue = 0;
-    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+    for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
         sumValue += (*it).second;
     }
     return sumValue;
@@ -109,7 +109,7 @@ Register_ResultRecorder("floatingIntervalCapacityRecorder", FloatingIntervalCapa
 double FloatingIntervalCapacityRecorder::calculate(){
     double sumValue = 0;
        double frameUsedSumValue = 0;
-       for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+       for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
        {
            sumValue += (*it).second;
            frameUsedSumValue += (*it).second + 38;
@@ -121,7 +121,7 @@ Register_ResultRecorder("floatingIntervalSumVectorPercent", FloatingIntervalSumV
 
 double FloatingIntervalSumVectorRecorderPercent::calculate(){
     double sumValue = 0;
-    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+    for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
         sumValue += (*it).second;
     }
     cComponent *comp = getComponent();
@@ -134,7 +134,7 @@ double FloatingIntervalSumVectorRecorderPercent::calculate(){
 //
 //double FloatingIntervalSumVectorRecorderPercent::calculate(){
 //    double sumValue = 0;
-//    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+//    for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
 //        sumValue += (*it).second;
 //    }
 //    return sumValue /((interval / SimTime(1))* 100 * 1024 * 1024 / 100);;
@@ -144,7 +144,7 @@ Register_ResultRecorder("floatingIntervalAvgVector", FloatingIntervalAvgVectorRe
 
 double FloatingIntervalAvgVectorRecorder::calculate(){
     double sumValue = 0;
-    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+    for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
         sumValue += (*it).second;
     }
     return sumValue/inInterval.size();
@@ -154,7 +154,7 @@ Register_ResultRecorder("floatingIntervalMinVector", FloatingIntervalMinVectorRe
 
 double FloatingIntervalMinVectorRecorder::calculate(){
     double minValue = std::numeric_limits<double>::max();
-    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+    for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
         if((*it).second< minValue){
             minValue = (*it).second;
         }
@@ -166,7 +166,7 @@ Register_ResultRecorder("floatingIntervalMaxVector", FloatingIntervalMaxVectorRe
 
 double FloatingIntervalMaxVectorRecorder::calculate(){
     double maxValue = std::numeric_limits<double>::min();
-        for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+        for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
             if((*it).second > maxValue){
                 maxValue = (*it).second;
             }
@@ -179,7 +179,7 @@ Register_ResultRecorder("floatingIntervalVarianceVectorRecorder", FloatingInterv
 double FloatingIntervalVarianceVectorRecorder::calculate(){
     double minValue = std::numeric_limits<double>::max();
     double maxValue = std::numeric_limits<double>::min();
-        for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.end();++it){
+        for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
             if((*it).second< minValue){
                 minValue = (*it).second;
             }
@@ -199,7 +199,7 @@ double FloatingIntervalAvailableBandwidthPercent::calculate()
 {
     //  Byte / ( (20 / 1000) * 1024 * 1024)
     double sumValue = 0;
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }

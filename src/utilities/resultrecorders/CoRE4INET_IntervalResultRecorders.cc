@@ -53,7 +53,7 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
            handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
            ASSERT(handle != NULL);
            //Attributes are title->interpolationmode ...
-           for (opp_string_map::iterator it = attributes.begin(); it != attributes.end(); ++it)
+           for (opp_string_map::const_iterator it = attributes.begin(); it != attributes.end(); ++it)
            {
 //               EV<<it->first.c_str()  <<"\n";
                ev.setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
@@ -153,7 +153,7 @@ Register_ResultRecorder("IntervalSumVector", IntervalSumVectorRecorder);
 double IntervalSumVectorRecorder::calculate()
 {
     double sumValue = 0;
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }
@@ -169,7 +169,7 @@ double IntervalCapacityRecorder::calculate()
 {
     double sumValue = 0;
     double frameUsedSumValue = 0;
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
         frameUsedSumValue += (*it).second + 38;
@@ -186,7 +186,7 @@ Register_ResultRecorder("IntervalAvgVector", IntervalAvgVectorRecorder)
 double IntervalAvgVectorRecorder::calculate()
 {
     double sumValue = 0;
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }
@@ -201,7 +201,7 @@ Register_ResultRecorder("IntervalMinVector", IntervalMinVectorRecorder);
 double IntervalMinVectorRecorder::calculate()
 {
     double minValue = std::numeric_limits<double>::max();
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         if ((*it).second < minValue)
         {
@@ -219,7 +219,7 @@ Register_ResultRecorder("IntervalMaxVector", IntervalMaxVectorRecorder);
 double IntervalMaxVectorRecorder::calculate()
 {
     double maxValue = std::numeric_limits<double>::min();
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         if ((*it).second > maxValue)
         {
@@ -238,7 +238,7 @@ double IntervalVarianceVectorRecorder::calculate()
 {
     double minValue = std::numeric_limits<double>::max();
     double maxValue = std::numeric_limits<double>::min();
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         if ((*it).second < minValue)
         {
@@ -260,7 +260,7 @@ double IntervalSumVectorRecorderPercent::calculate()
 {
     //  Byte / ( (20 / 1000) * 1024 * 1024)
     double sumValue = 0;
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }
@@ -279,7 +279,7 @@ double IntervalAvailableBandwidthPercent::calculate()
 {
     //  Byte / ( (20 / 1000) * 1024 * 1024)
     double sumValue = 0;
-    for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }

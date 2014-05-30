@@ -34,7 +34,7 @@ void MultiTrafficSinkApp::handleMessage(cMessage *msg)
         if (ctframe)
         {
             uint16_t ctID = ctframe->getCtID();
-            std::map<uint16_t, simsignal_t>::iterator entry = rxPkSignal.find(ctID);
+            std::map<uint16_t, simsignal_t>::const_iterator entry = rxPkSignal.find(ctID);
             simsignal_t signal;
             if (entry != rxPkSignal.end())
             {

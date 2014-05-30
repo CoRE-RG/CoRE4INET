@@ -39,7 +39,7 @@ void addPath(cPar &parameter, std::string &pathToAdd)
     parameter.setStringValue(path);
 }
 
-cGate* gateByFullPath(std::string &path)
+cGate* gateByFullPath(const std::string &path)
 {
     std::size_t pos = path.rfind('.');
     if (pos != std::string::npos)
@@ -55,7 +55,7 @@ cGate* gateByFullPath(std::string &path)
     return NULL;
 }
 
-cGate* gateByShortPath(std::string &nameAndGate, cModule *from)
+cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
 {
     std::size_t pos = nameAndGate.rfind('.');
     if (pos != std::string::npos)

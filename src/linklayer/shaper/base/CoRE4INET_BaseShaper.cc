@@ -29,7 +29,7 @@ int BaseShaper::numInitStages() const
 
 void BaseShaper::addListener(IPassiveQueueListener *listener)
 {
-    std::list<IPassiveQueueListener*>::iterator it = find(listeners.begin(), listeners.end(), listener);
+    std::list<IPassiveQueueListener*>::const_iterator it = find(listeners.begin(), listeners.end(), listener);
     if (it == listeners.end())
         listeners.push_back(listener);
 }
@@ -42,7 +42,7 @@ void BaseShaper::removeListener(IPassiveQueueListener *listener)
 
 void BaseShaper::notifyListeners()
 {
-    for (std::list<IPassiveQueueListener*>::iterator it = listeners.begin(); it != listeners.end(); ++it)
+    for (std::list<IPassiveQueueListener*>::const_iterator it = listeners.begin(); it != listeners.end(); ++it)
         (*it)->packetEnqueued(this);
 }
 

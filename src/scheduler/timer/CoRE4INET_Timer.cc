@@ -51,20 +51,20 @@ void Timer::initialize()
 Timer::~Timer()
 {
     cancelAndDelete(selfMessage);
-    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::iterator it =
+    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::const_iterator it =
             registredActionTimeEvents.begin(); it != registredActionTimeEvents.end();)
     {
-        for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::iterator it2 = (*it).second.begin();
+        for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it2 = (*it).second.begin();
                 it2 != (*it).second.end(); ++it2)
         {
             cancelAndDelete((*it2).first);
         }
         registredActionTimeEvents.erase(it++);
     }
-    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin();
+    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it = registredTimerEvents.begin();
             it != registredTimerEvents.end();)
     {
-        for (std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
+        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
         {
             cancelAndDelete(*it2);
         }
@@ -83,13 +83,13 @@ void Timer::handleMessage(cMessage *msg)
 void Timer::sendOutEvents()
 {
     recalculate();
-    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::iterator it =
+    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::const_iterator it =
             registredActionTimeEvents.begin(); it != registredActionTimeEvents.end() && (*it).first <= ticks;)
     {
         if ((*it).first < ticks)
         {
             EV_WARN << "WARNING: Message(s) (was/were) delayed by the scheduler. The event(s) affected (is/are): ";
-            for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::iterator it2 = (*it).second.begin();
+            for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it2 = (*it).second.begin();
                     it2 != (*it).second.end(); ++it2)
             {
                 EV_WARN << (*it2).first->getName() << " by "
@@ -106,14 +106,14 @@ void Timer::sendOutEvents()
                 getParentModule()->getDisplayString().setTagArg("tt", 0, "Problem with Timer");
             }
         }
-        for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::iterator it2 = (*it).second.begin();
+        for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it2 = (*it).second.begin();
                 it2 != (*it).second.end(); ++it2)
         {
             sendDirect((*it2).first, (*it2).first->getDestinationGate());
         }
         registredActionTimeEvents.erase(it++);
     }
-    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin();
+    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it = registredTimerEvents.begin();
             it != registredTimerEvents.end() && (*it).first <= ticks;)
     {
         if ((ticks - (*it).first) > 1)
@@ -121,7 +121,7 @@ void Timer::sendOutEvents()
             EV_FATAL << "misscheduled: " << (ticks - (*it).first) << std::endl;
             throw cRuntimeError("THIS SHOULD NOT HAPPEN!");
         }
-        for (std::list<SchedulerTimerEvent*>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
+        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
         {
             sendDirect((*it2), (*it2)->getDestinationGate());
         }
@@ -312,8 +312,8 @@ void Timer::clockCorrection(int32_t ticks)
     this->ticks = (uint64_t) ((int64_t) this->ticks + ticks);
     //Now correct the timer events that must be independent of clockCorrection
     std::map<uint64_t, std::list<SchedulerTimerEvent*> > correctedTimerEvents;
-    std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = correctedTimerEvents.begin();
-    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it2 = registredTimerEvents.begin();
+    std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it = correctedTimerEvents.begin();
+    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it2 = registredTimerEvents.begin();
             it2 != registredTimerEvents.end(); ++it2)
     {
         if (correctedTimerEvents.size() == 0)
@@ -333,11 +333,11 @@ void Timer::clockCorrection(int32_t ticks)
 
     //Now correct the actiontime events that must be recalculated after clock correction
     std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > > correctedActionTimeEvents;
-    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::iterator it2 =
+    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::const_iterator it2 =
             registredActionTimeEvents.begin(); it2 != registredActionTimeEvents.end(); ++it2)
     {
 
-        for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::iterator it4 = (*it2).second.begin();
+        for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it4 = (*it2).second.begin();
                 it4 != (*it2).second.end(); ++it4)
         {
             if ((*it2).first < this->ticks)

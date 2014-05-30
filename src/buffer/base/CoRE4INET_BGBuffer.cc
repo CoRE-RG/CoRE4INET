@@ -49,7 +49,7 @@ void BGBuffer::handleMessage(cMessage *msg)
         if (EtherFrame *outgoingMessage = dequeue())
         {
             //Send Message
-            for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
+            for (std::list<cGate*>::const_iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
                     ++destGate)
             {
                 sendDirect(outgoingMessage->dup(), *destGate);

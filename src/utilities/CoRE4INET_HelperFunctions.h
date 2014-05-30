@@ -66,7 +66,7 @@ void addPath(cPar &parameter, std::string &pathToAdd);
  *
  * @author Till Steinbach
  */
-cGate* gateByFullPath(std::string &path);
+cGate* gateByFullPath(const std::string &path);
 
 /**
  * @brief Returns the gate of a node defined by: modulename.gatename.
@@ -77,7 +77,7 @@ cGate* gateByFullPath(std::string &path);
  *
  * @author Till Steinbach
  */
-cGate* gateByShortPath(std::string &nameAndGate, cModule *from);
+cGate* gateByShortPath(const std::string &nameAndGate, cModule *from);
 
 /**
  * @brief Converts value in ticks to the transparent clock unit that is ns*0x10000

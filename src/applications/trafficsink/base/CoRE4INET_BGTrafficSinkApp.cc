@@ -48,7 +48,7 @@ void BGTrafficSinkApp::handleMessage(cMessage *msg)
                 EtherFrame *reply = new EthernetIIFrame("Reply");
                 reply->setDest(frame->getSrc());
                 reply->setByteLength(frame->getByteLength());
-                for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin();
+                for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();
                             buf != bgbuffers.end(); buf++) {
                     sendDirect(reply->dup(), (*buf)->gate("in"));
                 }

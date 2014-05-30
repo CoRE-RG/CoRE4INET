@@ -77,7 +77,7 @@ void TTBuffer::handleMessage(cMessage *msg)
     {
         EtherFrame *outgoingMessage = getFrame();
         //Send Message
-        for (std::list<cGate*>::iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
+        for (std::list<cGate*>::const_iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
                 ++destGate)
         {
             if (outgoingMessage)

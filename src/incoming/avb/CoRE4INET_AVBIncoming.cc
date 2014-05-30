@@ -40,7 +40,7 @@ void AVBIncoming::handleMessage(cMessage* msg) {
         if (listeners.size() == 0) {
             emit(droppedSignal, inFrame);
         } else {
-            for (std::list<cModule*>::iterator listener = listeners.begin();
+            for (std::list<cModule*>::const_iterator listener = listeners.begin();
                     listener != listeners.end(); listener++) {
                 if (strcmp((*listener)->getName(), "phy") == 0) {
                     sendDelayed(inFrame->dup(),
