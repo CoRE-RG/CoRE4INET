@@ -19,7 +19,7 @@
 //Std
 #include <list>
 //OMNeT++
-#include "cSimpleModule.h"
+#include "csimplemodule.h"
 
 namespace CoRE4INET {
 

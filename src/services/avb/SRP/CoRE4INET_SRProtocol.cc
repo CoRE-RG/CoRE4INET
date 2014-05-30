@@ -15,6 +15,8 @@
 
 #include "CoRE4INET_SRProtocol.h"
 
+//Std
+#include <algorithm>
 //CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
 #include "ExtendedIeee802Ctrl_m.h"

@@ -15,6 +15,8 @@
 
 #include "CoRE4INET_IntervalResultRecorders.h"
 
+//Std
+#include <limits>
 //OMNeT++
 #include "cmodule.h"
 #include "cchannel.h"

@@ -1,5 +1,8 @@
 #include "CoRE4INET_BaseShaper.h"
 
+//Std
+#include <algorithm>
+
 using namespace CoRE4INET;
 
 void BaseShaper::initialize(int stage)
