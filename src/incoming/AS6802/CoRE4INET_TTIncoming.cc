@@ -144,6 +144,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         delete msg;
         if (!hadError && ev.isGUI())
             getDisplayString().setTagArg("i2", 0, "");
+        send(frame, "out");
         frame = NULL;
     }
 

@@ -22,7 +22,6 @@
 #include "RCFrame_m.h"
 #include "TTFrame_m.h"
 
-
 namespace CoRE4INET {
 
 Define_Module(TocApp);
@@ -39,28 +38,34 @@ void TocApp::handleMessage(cMessage *msg)
     if (msg->arrivedOn("TTin"))
     {
         TTFrame *ttframe = dynamic_cast<TTFrame*>(msg);
-        Tic *tic = dynamic_cast<Tic*>(ttframe->decapsulate());
-        delete msg;
-        bubble(tic->getRequest());
-        par("counter").setLongValue((long) tic->getCount());
-
-        Toc *toc = new Toc();
-        toc->setRoundtrip_start(tic->getRoundtrip_start());
-        toc->setCount(tic->getCount() + 1);
-        delete tic;
-
-        CTFrame *frame = new RCFrame("Toc");
-        frame->setCtID((uint16_t) par("ct_id").longValue());
-        frame->encapsulate(toc);
-
-        EV_DETAIL << "Answering Tic Message with Toc Message\n";
-        std::list<CTBuffer*> buffer = ctbuffers[frame->getCtID()];
-        for (std::list<CTBuffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+        if (ttframe)
         {
-            Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
-            sendDirect(frame->dup(), in->gate("in"));
+            Tic *tic = dynamic_cast<Tic*>(ttframe->decapsulate());
+            delete msg;
+            bubble(tic->getRequest());
+            par("counter").setLongValue((long) tic->getCount());
+
+            Toc *toc = new Toc();
+            toc->setRoundtrip_start(tic->getRoundtrip_start());
+            toc->setCount(tic->getCount() + 1);
+            delete tic;
+
+            CTFrame *frame = new RCFrame("Toc");
+            frame->setCtID((uint16_t) par("ct_id").longValue());
+            frame->encapsulate(toc);
+
+            EV_DETAIL << "Answering Tic Message with Toc Message\n";
+            std::list<CTBuffer*> buffer = ctbuffers[frame->getCtID()];
+            for (std::list<CTBuffer*>::iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+            {
+                Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
+                sendDirect(frame->dup(), in->gate("in"));
+            }
+            delete frame;
         }
-        delete frame;
+        else{
+            delete msg;
+        }
     }
     else
     {
