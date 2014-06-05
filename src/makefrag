@@ -1,4 +1,5 @@
-CFLAGS += -Wall -Wunused
+CFLAGS += -std=c++11
+#CFLAGS += -Wall -Wunused
 #CFLAGS += -Wall -Werror -Wunused -Wdocumentation
 #CFLAGS += -Wall -Werror -Wunused -Weverything -Wno-c++11-long-long -Wno-c++11-extra-semi -Wno-weak-vtables -Wno-shadow -Wno-global-constructors -Wno-exit-time-destructors -Wno-pedantic -Wno-missing-prototypes -Wno-used-but-marked-unused
 #COPTS := $(subst -isystem .,-I.,$(subst -I,-isystem ,$(COPTS)))
