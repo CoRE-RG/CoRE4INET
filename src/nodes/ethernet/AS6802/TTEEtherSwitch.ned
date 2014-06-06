@@ -31,7 +31,7 @@ import inet.status.NodeStatus;
 // (network_configuration parameter) and uses the device_name parameter to find its config.
 // The configuration is done by the BufferManager that deletes itself at runtime.
 //
-// @see IMacRelayUnit, TTEPHYPort, Sync, TTEScheduler, BufferManager
+// @see IMacRelayUnit, TTEPHYPort, Sync, Scheduler, BufferManager
 //
 // @author Till Steinbach
 module TTEEtherSwitch

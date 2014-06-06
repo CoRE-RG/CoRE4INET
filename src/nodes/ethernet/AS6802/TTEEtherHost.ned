@@ -38,7 +38,7 @@ import inet.status.NodeStatus;
 // @todo Ports for redundancy!
 // @todo Documentation for Applications!
 //
-// @see EtherLLC, TTEPHYPort, Sync, TTEScheduler, BufferManager
+// @see EtherLLC, TTEPHYPort, Sync, Scheduler, BufferManager
 //
 // @author Till Steinbach
 module TTEEtherHost
