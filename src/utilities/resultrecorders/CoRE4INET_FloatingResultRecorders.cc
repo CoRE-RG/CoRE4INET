@@ -64,7 +64,7 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
                             getClassName(), SIMTIME_STR(t), SIMTIME_STR(lastTime));
     }
 
-    for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.lower_bound((t-interval));){
+    for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.lower_bound((t-interval));){
         simtime_t time = SimTime(it->first);
         inInterval.erase(it++);
         ev.recordInOutputVector(handle, time+interval, calculate());
