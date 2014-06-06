@@ -17,7 +17,13 @@
 
 //Std
 #include <map>
+#if __cplusplus >= 201103L
 #include <unordered_map>
+using namespace std;
+#else
+#include <tr1/unordered_map>
+using namespace std::tr1;
+#endif
 //OMNeT++
 #include "csimplemodule.h"
 //INET
@@ -86,18 +92,18 @@ class SRPTable : public cSimpleModule
         };
         friend std::ostream& operator<<(std::ostream& os, const ListenerEntry& entry);
 
-        typedef std::unordered_map<uint64_t, TalkerEntry*> TalkerTable;
-        typedef std::unordered_map<cModule*, ListenerEntry*> ListenerList;
-        typedef std::unordered_map<uint64_t, ListenerList> ListenerTable;
+        typedef unordered_map<uint64_t, TalkerEntry*> TalkerTable;
+        typedef unordered_map<cModule*, ListenerEntry*> ListenerList;
+        typedef unordered_map<uint64_t, ListenerList> ListenerTable;
 
         /**
          * map of talker entries for stream id
          */
-        std::unordered_map<unsigned int, TalkerTable> talkerTables;
+        unordered_map<unsigned int, TalkerTable> talkerTables;
         /**
          * map of listener entries for stream id
          */
-        std::unordered_map<unsigned int, ListenerTable> listenerTables;
+        unordered_map<unsigned int, ListenerTable> listenerTables;
 
         /**
          * Time when next entry is aging

@@ -17,7 +17,14 @@
 #define __CORE4INET_CTAPPLICATIONBASE_H_
 
 //Std
+#if __cplusplus >= 201103L
 #include <unordered_map>
+using namespace std;
+#else
+#include <tr1/unordered_map>
+using namespace std::tr1;
+#endif
+
 //CoRE4INET
 #include "CoRE4INET_ApplicationBase.h"
 #include "CoRE4INET_CTBuffer.h"
@@ -42,7 +49,7 @@ class CTApplicationBase : public virtual ApplicationBase
          * @brief Map of critical traffic identifies with their
          * corresponding Buffers.
          */
-        std::unordered_map<uint16_t, std::list<CTBuffer*> > ctbuffers;
+        unordered_map<uint16_t, std::list<CTBuffer*> > ctbuffers;
     public:
         /**
          * @brief Initialization of the module.

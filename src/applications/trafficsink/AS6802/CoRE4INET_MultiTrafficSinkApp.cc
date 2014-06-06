@@ -22,7 +22,7 @@ namespace CoRE4INET {
 
 Define_Module(MultiTrafficSinkApp);
 
-std::unordered_map<uint16_t, simsignal_t> MultiTrafficSinkApp::rxPkSignal;
+unordered_map<uint16_t, simsignal_t> MultiTrafficSinkApp::rxPkSignal;
 
 void MultiTrafficSinkApp::handleMessage(cMessage *msg)
 {
@@ -34,7 +34,7 @@ void MultiTrafficSinkApp::handleMessage(cMessage *msg)
         if (ctframe)
         {
             uint16_t ctID = ctframe->getCtID();
-            std::unordered_map<uint16_t, simsignal_t>::const_iterator entry = rxPkSignal.find(ctID);
+            unordered_map<uint16_t, simsignal_t>::const_iterator entry = rxPkSignal.find(ctID);
             simsignal_t signal;
             if (entry != rxPkSignal.end())
             {
