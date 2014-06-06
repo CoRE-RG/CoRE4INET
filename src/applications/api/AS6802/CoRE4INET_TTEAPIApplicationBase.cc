@@ -102,7 +102,7 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id, cons
 {
     Enter_Method_Silent
     ();
-    std::map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
+    unordered_map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
     if (bufferList != ctbuffers.end())
     {
         //Currently we use only the first entry!
@@ -186,7 +186,7 @@ int32_t TTEAPIApplicationBase::tte_get_ct_input_buf(const uint8_t ctrl_id, const
 {
     Enter_Method_Silent
     ();
-    std::map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
+    unordered_map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
     if (bufferList != ctbuffers.end())
     {
         //Currently we use only the first entry!
