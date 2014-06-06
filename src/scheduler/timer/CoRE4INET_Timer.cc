@@ -312,8 +312,8 @@ void Timer::clockCorrection(int32_t ticks)
     this->ticks = (uint64_t) ((int64_t) this->ticks + ticks);
     //Now correct the timer events that must be independent of clockCorrection
     std::map<uint64_t, std::list<SchedulerTimerEvent*> > correctedTimerEvents;
-    std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it = correctedTimerEvents.begin();
-    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it2 = registredTimerEvents.begin();
+    std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = correctedTimerEvents.begin();
+    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it2 = registredTimerEvents.begin();
             it2 != registredTimerEvents.end(); ++it2)
     {
         if (correctedTimerEvents.size() == 0)
