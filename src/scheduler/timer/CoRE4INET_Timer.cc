@@ -51,7 +51,7 @@ void Timer::initialize()
 Timer::~Timer()
 {
     cancelAndDelete(selfMessage);
-    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::const_iterator it =
+    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::iterator it =
             registredActionTimeEvents.begin(); it != registredActionTimeEvents.end();)
     {
         for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it2 = (*it).second.begin();
@@ -61,7 +61,7 @@ Timer::~Timer()
         }
         registredActionTimeEvents.erase(it++);
     }
-    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it = registredTimerEvents.begin();
+    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin();
             it != registredTimerEvents.end();)
     {
         for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
@@ -83,7 +83,7 @@ void Timer::handleMessage(cMessage *msg)
 void Timer::sendOutEvents()
 {
     recalculate();
-    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::const_iterator it =
+    for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::iterator it =
             registredActionTimeEvents.begin(); it != registredActionTimeEvents.end() && (*it).first <= ticks;)
     {
         if ((*it).first < ticks)
@@ -113,7 +113,7 @@ void Timer::sendOutEvents()
         }
         registredActionTimeEvents.erase(it++);
     }
-    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::const_iterator it = registredTimerEvents.begin();
+    for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin();
             it != registredTimerEvents.end() && (*it).first <= ticks;)
     {
         if ((ticks - (*it).first) > 1)
