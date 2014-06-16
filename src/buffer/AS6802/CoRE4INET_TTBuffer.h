@@ -105,7 +105,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          *
          * @sa enqueue();
          */
-        virtual long getRequiredBandwidth() const;
+        virtual long getRequiredBandwidth();
 };
 }
 
