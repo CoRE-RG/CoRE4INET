@@ -252,6 +252,9 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
     {
         TTBuffer *thisttBuffer;
         TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(msg->getSenderModule());
+        if(!ttBuffer){
+            throw cRuntimeError("Only Messages from TTBuffer are allowed to be sent to TTin");
+        }
         ASSERT(isTTBufferRegistered(ttBuffer) == true); //No shuffeling at the moment
         ASSERT2(ttBuffer, "A TTFrame was received that was not sent by a TTBuffer");
 
