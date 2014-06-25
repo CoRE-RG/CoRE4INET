@@ -14,7 +14,6 @@ cmdenv-express-mode = false
 output-vector-file = test.vec
 output-scalar-file = test.sca
 simtime-scale = -12
-ned-path = .:../../../../src:../../../../../inet/src
 
 %global:
 #define PrintModulelist(X)  for (std::list<cModule*>::iterator module = X.begin(); module!=X.end();module++){ev<<(*module)->getName()<< " ";}
