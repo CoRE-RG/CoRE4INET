@@ -34,10 +34,10 @@ TC2T(0x500000,0.00000008);
 TC2T(0xf42400000,0.00000008);
 ev << ".\n";
 
-%contains: stdout
+%contains-regex: stdout
 0s-->0x0
-1e-09s-->0x10000
-2.5e-09s-->0x28000
+1e-0+9s-->0x10000
+2.5e-0+9s-->0x28000
 1s-->0x3b9aca000000
 .
 0ticks-->0x0
