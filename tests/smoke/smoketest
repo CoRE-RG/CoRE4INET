@@ -33,6 +33,7 @@ inetRoot = os.path.abspath("../../../inet")
 sep = ";" if sys.platform == 'win32' else ':'
 nedPath = inetRoot + "/src" + sep + core4inetRoot + "/src" + sep + core4inetRoot + "/examples" + sep + core4inetRoot + "/tests/smoke"
 core4inetLib = core4inetRoot + "/src/CoRE4INET"
+inetLib = inetRoot + "/src/inet"
 opp_run = "opp_run"
 cpuTimeLimit = "3s"
 logFile = "test.out"
@@ -148,7 +149,7 @@ class SmokeTestCase(SimulationTestCase):
 
         # run the simulation
         workingdir = _iif(self.wd.startswith('/'), core4inetRoot + "/" + self.wd, self.wd)
-        command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -u Cmdenv " + self.args + \
+        command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + inetLib + " -u Cmdenv " + self.args + \
             " --cpu-time-limit=" + cpuTimeLimit + \
             " --vector-recording=false --scalar-recording=false"
 
