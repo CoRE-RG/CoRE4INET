@@ -20,21 +20,19 @@ import core4inet.buffer.avb.AVBQueueBuffer;
 import core4inet.buffer.base.BGQueueBuffer;
 import core4inet.configuration.IConfigurationManager;
 import core4inet.incoming.avb.AVBIncoming;
-import core4inet.linklayer.ethernet.avb.SRPEtherLLC;
+import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.port.TTEAVBPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.synchronisation.base.ISync;
-import inet.applications.ethernet.EtherAppCli;
-import inet.applications.ethernet.EtherAppSrv;
 
 
 //
 // Module for a TTEAVBEthernet Host.
 // Contains handler for TT, AVB, RC and BE Messages.
 //
-// @see EtherLLC, TTEAVBPHYPort, Sync, Scheduler
+// @see SRPEtherEncap, TTEAVBPHYPort, Sync, Scheduler
 //
 // @author Philipp Meyer
 module TTEAVBEtherHost
@@ -68,25 +66,11 @@ module TTEAVBEtherHost
                 @display("p=380,193");
         }
 
-        llc: SRPEtherLLC {
+        encap: SRPEtherEncap {
             parameters:
                 @display("p=141,255");
-            gates:
-                upperLayerIn[2];
-                upperLayerOut[2];
         }
 
-        cli: EtherAppCli {
-            parameters:
-                registerSAP = true;
-                @display("p=60,255,col");
-        }
-
-        srv: EtherAppSrv {
-            parameters:
-                registerSAP = true;
-                @display("p=60,169,col");
-        }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             @display("p=999,999");
@@ -120,23 +104,17 @@ module TTEAVBEtherHost
             @display("p=141,169");
         }
 
-    connections:
+    connections allowunconnected:
         phy[0].phys <--> ethg;
-        llc.lowerLayerOut --> phy[0].upperLayerIn;
-        phy[0].upperLayerOut --> llc.lowerLayerIn;
+        encap.lowerLayerOut --> phy[0].upperLayerIn;
+        phy[0].upperLayerOut --> encap.lowerLayerIn;
 
-        cli.out --> llc.upperLayerIn[0];
-        cli.in <-- llc.upperLayerOut[0];
-
-        srv.out --> llc.upperLayerIn[1];
-        srv.in <-- llc.upperLayerOut[1];
-
-        llc.bgOut --> bgIn.in;
-        bgOut.out --> llc.bgIn;
+        encap.bgOut --> bgIn.in;
+        bgOut.out --> encap.bgIn;
 
         avbCTC.AVBout[0] --> avbBuffer[0].in;
         avbBuffer[0].out --> phy[0].AVBin;
 
-        srpProtocol.out --> llc.srpIn;
-        srpProtocol.in <-- llc.srpOut;
+        srpProtocol.out --> encap.srpIn;
+        srpProtocol.in <-- encap.srpOut;
 }
