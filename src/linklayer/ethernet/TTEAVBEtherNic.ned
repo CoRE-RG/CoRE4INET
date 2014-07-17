@@ -15,17 +15,10 @@
 
 package core4inet.linklayer.ethernet;
 
-import core4inet.applications.base.IApplication;
-import core4inet.buffer.avb.AVBQueueBuffer;
-import core4inet.buffer.base.BGQueueBuffer;
-import core4inet.configuration.IConfigurationManager;
-import core4inet.incoming.avb.AVBIncoming;
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
-import core4inet.linklayer.port.TTEAVBPHYPort;
-import core4inet.scheduler.ITTEScheduler;
-import core4inet.services.avb.SRP.SRPTable;
-import core4inet.services.avb.SRP.SRProtocol;
-import core4inet.synchronisation.base.ISync;
+import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
+import core4inet.linklayer.shaper.TT_AVBClassA_PCF_RC_BE_Shaper;
+import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 import inet.linklayer.INic;
 
@@ -34,93 +27,96 @@ import inet.linklayer.INic;
 // Module for a TTE AVB BE Ethernet NIC
 // Contains handler for TT, AVB, RC and BE Messages.
 //
+// @todo Kommentar
+//
 // @see SRPEtherEncap, TTEAVBPHYPort, Sync, Scheduler
 //
 // @author Kai-Uwe von Deylen
 module TTEAVBEtherNic like INic
 {
     parameters:
-        @display("bgb=577,314;i=block/ifcard");
-        int numApps = default(0); //default(1) ? ListenerApp
-        int numBuffer = default(0);
-        int numPorts = default(1);
+        @display("i=block/ifcard");
         double hardware_delay @unit(s) = default(0us);
-        string configurationManagerType = default("");
+        bool promiscuous = default(true); // TODO: sinnvoller default
     gates:
+
+        // Connection to the physical ethernet gate
         inout ethg;
+
+        // best effort input from upper layer 
         input upperLayerIn;
+
+        // best effort output to upper layer
         output upperLayerOut;
+        
+        // background (BE) traffic input
+        input bgIn;
+        
+        // background (BE) traffic out
+        output bgOut;
+
+        // time-triggered traffic input from upper layer
+        input TTin @directIn @labels(TTFrame);
+
+        // rate-constrained traffic input from upper layer
+        input RCin @directIn @labels(RCFrame);
+
+		// audio-video bridging traffic from upper layer
+        input AVBin @directIn @labels(AVBFrame);
+
+        // rate-constrained Protocol-Control-Frame traffic from upper layer
+        input PCFin @directIn @labels(PCFrame);
+        
+        // stream reservation protocol input
+        input srpIn;
+        
+        // stream reservation protocol output
+        output srpOut;
 
     submodules:
-        phy[numPorts]: TTEAVBPHYPort {
-            @display("p=254,235,c,50");
-            promiscuous = true;
+
+        shaper: TT_AVBClassA_PCF_RC_BE_Shaper {
+            @display("p=88,75");
         }
 
-        avbCTC: AVBIncoming {
+        inControl: CT_AVB_BE_InControl {
             parameters:
-                @display("p=487,236");
-            gates:
-                AVBout[numPorts];
+                @display("p=166,144");
+                promiscuous = promiscuous;
         }
 
-        avbBuffer[numPorts]: AVBQueueBuffer {
+        mac: EtherMACFullDuplex {
             parameters:
-                @display("p=355,236");
+                promiscuous = true;
+                queueModule = "shaper";
+                @display("p=127,227");
         }
 
         encap: SRPEtherEncap {
             parameters:
-                @display("p=254,118");
+                @display("p=166,75");
         }
 
-        // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
-            @display("p=87,265");
-        }
-         // Sync module for synchronisation of the scheduler
-        sync: <default("DummySync")> like ISync {
-            @display("p=87,118");
-        }
-        // Scheduler for the device
-        scheduler: <default("Scheduler")> like ITTEScheduler {
-            @display("p=87,194");
-        }
+    connections:
 
-        app[numApps]: <> like IApplication {
-            @display("p=355,40,row,70");
-        }
+        mac.phys <--> ethg;
 
-        bgIn: BGQueueBuffer {
-            @display("p=355,118");
-        }
+        mac.upperLayerIn <-- shaper.out;
+        mac.upperLayerOut --> inControl.in;
 
-        bgOut: BGQueueBuffer {
-            @display("p=355,177");
-        }
+        inControl.out --> encap.lowerLayerIn;
 
-        srpTable: SRPTable {
-            @display("p=87,42");
-        }
+        shaper.in <-- encap.lowerLayerOut;
+        shaper.AVBin <-- AVBin;
+        shaper.PCFin <-- PCFin;
+        shaper.RCin <-- RCin;
+        shaper.TTin <-- TTin;
 
-        srpProtocol: SRProtocol {
-            @display("p=161,118");
-        }
-
-    connections allowunconnected:
-        phy[0].phys <--> ethg;
-        encap.lowerLayerOut --> phy[0].upperLayerIn;
-        phy[0].upperLayerOut --> encap.lowerLayerIn;
-
-        encap.bgOut --> bgIn.in;
-        bgOut.out --> encap.bgIn;
-
-        avbCTC.AVBout[0] --> avbBuffer[0].in;
-        avbBuffer[0].out --> phy[0].AVBin;
-
-        srpProtocol.out --> encap.srpIn;
-        srpProtocol.in <-- encap.srpOut;
+        srpIn --> encap.srpIn;
+        srpOut <-- encap.srpOut;
 
         encap.upperLayerOut --> upperLayerOut;
         upperLayerIn --> encap.upperLayerIn;
+        encap.bgOut --> bgOut;
+        bgIn --> encap.bgIn;
 }
