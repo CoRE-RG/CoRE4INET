@@ -92,11 +92,11 @@ module TTEAVBEtherNic like INic
         }
 
         bgIn: BGQueueBuffer {
-            @display("p=355,177");
+            @display("p=355,118");
         }
 
         bgOut: BGQueueBuffer {
-            @display("p=355,118");
+            @display("p=355,177");
         }
 
         srpTable: SRPTable {
