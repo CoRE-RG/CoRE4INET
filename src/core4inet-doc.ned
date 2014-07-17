@@ -30,7 +30,7 @@
 // There are several bugfixes and improvements; see the <tt><a href="whatsnew.html">WHATSNEW</a></tt> file.
 //
 // <h2>Requirements</h2>
-// - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.4.1)
+// - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.5)
 // - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a> (minimum version 2.4.0)
 //
 // <h2>Introductory material</h2>
