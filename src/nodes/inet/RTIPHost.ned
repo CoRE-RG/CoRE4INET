@@ -30,8 +30,13 @@ import inet.linklayer.loopback.LoopbackInterface;
 import inet.networklayer.common.InterfaceTable;
 import inet.networklayer.ipv4.RoutingTable;
 import inet.nodes.inet.NetworkLayer;
+import inet.applications.IPingApp;
+import inet.applications.ISCTPApp;
 import inet.applications.ITCPApp;
+import inet.applications.IUDPApp;
+import inet.transport.ISCTP;
 import inet.transport.ITCP;
+import inet.transport.IUDP;
 
 
 //
@@ -52,8 +57,15 @@ module RTIPHost
         bool IPForward = default(true);
         bool forwardMulticast = default(false);
         int numTcpApps = default(0);  // no of TCP apps. Specify the app types in INI file with tcpApp[0..1].typename="TCPEchoApp" syntax
+        int numUdpApps = default(0);  // no of UDP apps. Specify the app types in INI file with udpApp[0..1].typename="UDPVideoStreamCli" syntax
+        int numSctpApps = default(0); // no of SCTP apps. Specify the app types in INI file with sctpApp[0..1].typename="SCTPServer" syntax
+        int numPingApps = default(0);  // no of PING apps. Specify the app types in INI file with pingApp[0..1].typename="PingApp" syntax
         bool hasTcp = default(numTcpApps>0);
+        bool hasUdp = default(numUdpApps>0);
+        bool hasSctp = default(numSctpApps>0);
         string tcpType = default(firstAvailable("TCP", "TCP_lwIP", "TCP_NSC", "TCP_None"));  // tcp implementation (e.g. ~TCP, ~TCP_lwIP, ~TCP_NSC) or ~TCPSpoof
+        string udpType = default(firstAvailable("UDP","UDP_None"));
+        string sctpType = default(firstAvailable("SCTP","SCTP_None"));
         int numApps = default(0); //default(1) ? ListenerApp
         double hardware_delay @unit(s) = default(0us);
     gates:
@@ -68,23 +80,47 @@ module RTIPHost
         // application Layer
         tcpApp[numTcpApps]: <> like ITCPApp {
             parameters:
-                @display("p=229,65,row,60");
+                @display("p=498,65,row,60");
         }
 
         app[numApps]: <> like IApplication {
-            @display("p=380,65,row,70");
+            @display("p=849,232,row,70");
+        }
+
+        udpApp[numUdpApps]: <> like IUDPApp {
+            parameters:
+                @display("p=615,65,row,60");
+        }
+
+        sctpApp[numSctpApps]: <> like ISCTPApp {
+            parameters:
+                @display("p=732,65,row,60");
+        }
+
+        pingApp[numPingApps]: <default("PingApp")> like IPingApp {
+            parameters:
+                @display("p=849,141,row,60");
         }
 
         // transport Layer
         tcp: <tcpType> like ITCP if hasTcp {
             parameters:
-                @display("p=229,150");
+                @display("p=498,150");
+        }
+
+        udp: <udpType> like IUDP if hasUdp {
+            parameters:
+                @display("p=615,150");
+        }
+
+        sctp: <sctpType> like ISCTP if hasSctp {
+            @display("p=732,141");
         }
 
         // network layer
         networkLayer: NetworkLayer {
             parameters:
-                @display("p=229,232;q=queue");
+                @display("p=498,232;q=queue");
         }
 
         routingTable: RoutingTable {
@@ -107,32 +143,32 @@ module RTIPHost
 
 		// Buffers
         bgIn: BGQueueBuffer {
-            @display("p=385,232");
+            @display("p=264,232");
         }
 
         bgOut: BGQueueBuffer {
-            @display("p=307,232");
+            @display("p=342,232");
         }
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=463,150");
+                @display("p=186,150");
             gates:
                 AVBout[1];
         }
 
         avbBuffer: AVBQueueBuffer {
             parameters:
-                @display("p=463,232");
+                @display("p=186,232");
         }
 
         // linklayer
         srpTable: SRPTable {
-            @display("p=151,150");
+            @display("p=420,150");
         }
 
         srpProtocol: SRProtocol {
-            @display("p=151,232");
+            @display("p=420,232");
         }
 
         interfaceTable: InterfaceTable {
@@ -142,7 +178,7 @@ module RTIPHost
 
         phy[1]: TTEAVBEtherNic {
 
-            @display("p=229,315");
+            @display("p=498,315");
         }
     connections allowunconnected:
 
@@ -150,6 +186,26 @@ module RTIPHost
         for i=0..numTcpApps-1 {
             tcpApp[i].tcpOut --> tcp.appIn++;
             tcpApp[i].tcpIn <-- tcp.appOut++;
+        }
+
+        for i=0..numUdpApps-1 {
+            udpApp[i].udpOut --> udp.appIn++;
+            udpApp[i].udpIn <-- udp.appOut++;
+        }
+
+        udp.ipOut --> networkLayer.transportIn++ if hasUdp;
+        udp.ipIn <-- networkLayer.transportOut++ if hasUdp;
+
+        for i=0..numSctpApps-1 {
+            sctpApp[i].sctpOut --> sctp.from_appl++;
+            sctp.to_appl++ --> sctpApp[i].sctpIn;
+        }
+        sctp.to_ip --> networkLayer.transportIn++ if hasSctp;
+        networkLayer.transportOut++ --> sctp.from_ip if hasSctp;
+
+        for i=0..numPingApps-1 {
+            networkLayer.pingOut++ --> pingApp[i].pingIn;
+            networkLayer.pingIn++ <-- pingApp[i].pingOut;
         }
 
 		// transport Layer <--> network Layer
