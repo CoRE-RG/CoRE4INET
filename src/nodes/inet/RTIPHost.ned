@@ -128,13 +128,13 @@ module RTIPHost
 
         // linklayer
         srpTable: SRPTable {
-            @display("p=244,144");
+            @display("p=151,150");
         }
 
         srpProtocol: SRProtocol {
-            @display("p=244,75");
+            @display("p=151,232");
         }
-        
+
         interfaceTable: InterfaceTable {
             parameters:
                 @display("p=63,166;is=s");
