@@ -49,7 +49,7 @@ void BGEtherEncap::handleMessage(cMessage *msg)
     else if (msg->arrivedOn("lowerLayerIn"))
     {
         send(msg->dup(), gate("bgOut"));
-        if (gate("upperLayerOut")->getChannel()) {
+        if (gate("upperLayerOut")->getPathEndGate()) {
             EtherEncap::handleMessage(msg);
         }
     }
