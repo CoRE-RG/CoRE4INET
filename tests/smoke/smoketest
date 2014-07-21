@@ -31,9 +31,10 @@ core4inetRoot = os.path.abspath("../..")
 #TODO: Make test read paths from somewhere else
 inetRoot = os.path.abspath("../../../inet")
 sep = ";" if sys.platform == 'win32' else ':'
-nedPath = inetRoot + "/src" + sep + core4inetRoot + "/src" + sep + core4inetRoot + "/examples" + sep + core4inetRoot + "/tests/smoke"
-core4inetLib = core4inetRoot + "/src/CoRE4INET"
-inetLib = inetRoot + "/src/inet"
+nedPath = inetRoot + os.path.realpath("/src") + sep + core4inetRoot + os.path.realpath("/src") + sep \
+    + core4inetRoot + os.path.realpath("/examples") + sep + core4inetRoot + os.path.realpath("/tests/smoke")
+core4inetLib = core4inetRoot + os.path.realpath("/src/CoRE4INET")
+inetLib = inetRoot + os.path.realpath("/src/inet")
 opp_run = "opp_run"
 cpuTimeLimit = "3s"
 logFile = "test.out"
@@ -152,6 +153,7 @@ class SmokeTestCase(SimulationTestCase):
         command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + inetLib + " -u Cmdenv " + self.args + \
             " --cpu-time-limit=" + cpuTimeLimit + \
             " --vector-recording=false --scalar-recording=false"
+        
 
         result = self.runSimulation(self.title, command, workingdir)
 
