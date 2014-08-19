@@ -159,6 +159,8 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         talkerAdvertise->setStreamID(tentry->streamId);
         talkerAdvertise->setMaxFrameSize(tentry->framesize);
         talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
+        if(tentry->srClass == SR_CLASS_A) talkerAdvertise->setPriorityAndRank(0b11010000);
+        if(tentry->srClass == SR_CLASS_B) talkerAdvertise->setPriorityAndRank(0b10110000);
         talkerAdvertise->setStreamDA(tentry->address);
 
         ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();

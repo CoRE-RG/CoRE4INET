@@ -32,6 +32,9 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
 
         // ID of the AVB Stream
         double streamID = default(0);
+        
+        // Stream Reservation Class of the AVB Stream
+        string srClass = default("A");
 
         // Number of frames per interval
         int intervalFrames = default(1);

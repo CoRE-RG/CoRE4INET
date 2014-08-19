@@ -45,14 +45,14 @@ packet TalkerAdvertise extends SRPFrame{
 	// 64 Bit Field
 	unsigned long DataFrameParameters;
 	
-	// tSpec => Max frame size and sending interval of an AVB stream
+	// TSpec => Max frame size and sending interval of an AVB stream
 	// 32 Bit Field
 	unsigned int MaxFrameSize;
 	unsigned int MaxIntervalFrames;
 	
 	
-	// notused
-	// 8 Bit Field
+	// PriorityAndRank => Data Frame Priority: 6 = SRClass A & 5 = SRClass B
+	// 8 Bit Field (3 Bit Data Frame Priority | 1 Bit Rank | 4 Bit Reserved (Zero filled))
 	unsigned char priorityAndRank;
 	
 	// notused
@@ -61,6 +61,9 @@ packet TalkerAdvertise extends SRPFrame{
 }
 
 packet TalkerFailed extends SRPFrame{
+    // FailureInformation
+	//
+	// 72 Bit Field
 }
 
 packet ListenerReady extends SRPFrame{
