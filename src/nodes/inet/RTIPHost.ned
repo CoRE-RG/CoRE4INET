@@ -24,6 +24,7 @@ import core4inet.incoming.avb.AVBIncoming;
 import core4inet.buffer.avb.AVBQueueBuffer;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
+import core4inet.nodes.inet.RTNetworkLayer;
 
 import inet.base.NotificationBoard;
 import inet.linklayer.loopback.LoopbackInterface;
@@ -118,7 +119,7 @@ module RTIPHost
         }
 
         // network layer
-        networkLayer: NetworkLayer {
+        networkLayer: RTNetworkLayer {
             parameters:
                 @display("p=498,232;q=queue");
         }
