@@ -19,6 +19,7 @@
 #include "IPv4.h"
 
 #include "CoRE4INET_Buffer.h"
+#include "CoRE4INET_AVBIncoming.h"
 #include "IPvXAddress.h"
 
 #include "csimplemodule.h"
@@ -26,10 +27,20 @@
 namespace CoRE4INET {
 
 class IPv4oRE : public IPv4 {
-    protected:
-        struct Filter {
-            CoRE4INET::Buffer* destBuffer;
+
+    public:
+        enum DestinationType {
+            DestType_invalid = 0,
+            DestType_AVB
+        };
+
+        struct AVBInfo {
+            CoRE4INET::AVBIncoming* destModule;
             MACAddress destMAC;
+            uint64_t streamId;
+        };
+
+        struct Filter {
             IPvXAddress srcAddr;
             int srcPrefixLength;
             IPvXAddress destAddr;
@@ -42,22 +53,36 @@ class IPv4oRE : public IPv4 {
             int destPortMin;
             int destPortMax;
 
+            DestinationType destType;
+            AVBInfo avbDestInfo;
+            bool alsoBE;
+
             bool matches(cPacket *packet);
         };
+
     public:
         IPv4oRE();
         virtual ~IPv4oRE();
+
     protected:
         virtual void initialize(int stage);
         virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
         virtual void addFilter(const Filter &filter);
         virtual void configureFilters(cXMLElement *config);
+        virtual void registerTalker(const std::list<Filter> filters);
+        virtual void registerTalker(const Filter* filter);
 
         /**
          * Encapsulates packet in Ethernet II frame and sends to each destination buffers.
          * Destination MAC address and destination buffer is taken from filter.
          */
         virtual void sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<Filter*> &filters);
+
+        /**
+         * Encapsulates packet in AVB Frame and sends to destination AVB Buffer.
+         * StreamID, Name, DestMAC, DestBuffer is taken from filter.
+         */
+        void sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, const Filter* filter);
 
         /**
          * Returns true, if the string is empty (NULL or "");
@@ -92,6 +117,7 @@ class IPv4oRE : public IPv4 {
     protected:
         std::list<Filter> m_filterList;
         cEnum *m_protocolEnum;
+        cEnum *destTypeEnum;
 };
 
 } /* namespace CoRE4INET */

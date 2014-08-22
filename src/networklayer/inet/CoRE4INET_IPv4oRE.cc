@@ -21,6 +21,8 @@
 
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_Buffer.h"
+#include "CoRE4INET_SRPTable.h"
+#include "AVBFrame_m.h"
 #include "IPvXAddress.h"
 #include "IPvXAddressResolver.h"
 #include "DiffservUtil.h"
@@ -38,47 +40,59 @@ Define_Module(IPv4oRE);
 
 //==============================================================================
 
-IPv4oRE::IPv4oRE() {
+Register_Enum(DestinationType,
+        (IPv4oRE::DestType_invalid,
+        IPv4oRE::DestType_AVB));
+
+//==============================================================================
+
+IPv4oRE::IPv4oRE()
+{
     // TODO Auto-generated constructor stub
 
 }
 
 //==============================================================================
 
-IPv4oRE::~IPv4oRE() {
+IPv4oRE::~IPv4oRE()
+{
     // TODO Auto-generated destructor stub
 }
 
 //==============================================================================
 
-void IPv4oRE::initialize(int stage) {
+void IPv4oRE::initialize(int stage)
+{
     IPv4::initialize(stage);
     if (stage == 3)
     {
         cXMLElement *config = par("filters").xmlValue();
         configureFilters(config);
+        //TODO: register Talker for each AVB Filter
     }
 }
 
 //==============================================================================
 
-void IPv4oRE::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie) {
-    bool packetIsBE = true;
-
-    // TODO: check for matching filters
+void IPv4oRE::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
+{
+    // Check for matching filters
+    bool filterMatch = true;
     std::list<Filter*> matchingFilters;
-    packetIsBE = !getMatchingFilters(packet, matchingFilters);
+    filterMatch = getMatchingFilters(packet, matchingFilters);
 
-    if(packetIsBE) {
-        IPv4::sendPacketToNIC(packet, ie);
-    } else {
+    // send to corresponding modules
+    if(filterMatch) {
         sendPacketToBuffers(packet, ie, matchingFilters);
+    } else {
+        IPv4::sendPacketToNIC(packet, ie);
     }
 }
 
 //==============================================================================
 
-void IPv4oRE::addFilter(const Filter &filter) {
+void IPv4oRE::addFilter(const Filter &filter)
+{
     if (!filter.srcAddr.isUnspecified() && ((filter.srcAddr.isIPv6() && filter.srcPrefixLength > 128) ||
                                             (!filter.srcAddr.isIPv6() && filter.srcPrefixLength > 32)))
         throw cRuntimeError("srcPrefixLength is invalid");
@@ -109,7 +123,8 @@ void IPv4oRE::addFilter(const Filter &filter) {
 
 //==============================================================================
 
-void IPv4oRE::configureFilters(cXMLElement *config) {
+void IPv4oRE::configureFilters(cXMLElement *config)
+{
     IPvXAddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
     for (int i = 0; i < (int)filterElements.size(); i++)
@@ -117,8 +132,11 @@ void IPv4oRE::configureFilters(cXMLElement *config) {
         cXMLElement *filterElement = filterElements[i];
         try
         {
-            const char *destBuf = getRequiredAttribute(filterElement, "destBuffer");
+            const char *destType = getRequiredAttribute(filterElement, "destType");
+            const char *destModule = getRequiredAttribute(filterElement, "destModule");
             const char *destMAC = getRequiredAttribute(filterElement, "destMAC");
+            const char *alsoBE = getRequiredAttribute(filterElement, "alsoBE");
+            const char *streamId = filterElement->getAttribute("streamId");
             const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
             const char *srcPrefixLengthAttr = filterElement->getAttribute("srcPrefixLength");
             const char *destAddrAttr = filterElement->getAttribute("destAddress");
@@ -133,57 +151,74 @@ void IPv4oRE::configureFilters(cXMLElement *config) {
             const char *destPortMinAttr = filterElement->getAttribute("destPortMin");
             const char *destPortMaxAttr = filterElement->getAttribute("destPortMax");
 
-            Filter filter;
+            Filter* filter = new Filter();
 
+            if (!this->destTypeEnum) {
+                this->destTypeEnum = cEnum::get("DestinationType");
+            }
 
-            cModule* module = simulation.getModuleByPath(destBuf);
-            if (!module) {
-               module = findModuleWhereverInNode(destBuf, this);
+            if (destType)
+                filter->destType = IPv4oRE::DestinationType(this->destTypeEnum->lookup(destType));
+            switch (filter->destType) {
+                case DestType_AVB:
+                    {
+                        cModule* module = simulation.getModuleByPath(destModule);
+                        if (!module) {
+                           module = findModuleWhereverInNode(destModule, this);
+                        }
+                        if (!module) {
+                           throw cRuntimeError("destModule \"%s\" could not be resolved!", destModule);
+                        }
+                        if (AVBIncoming *avbCtc = dynamic_cast<AVBIncoming*>(module)) {
+                           filter->avbDestInfo.destModule = avbCtc;
+                        } else {
+                            throw cRuntimeError("destModule: %s is not a AVBIncoming!", destModule);
+                        }
+                        if (destMAC)
+                            filter->avbDestInfo.destMAC.setAddress(destMAC);
+                        else
+                             throw cRuntimeError("destMAC not specified!");
+                        filter->avbDestInfo.streamId = parseIntAttribute(streamId, "streamId", false);
+                    }
+                    break;
+                default :
+                    throw cRuntimeError("Invalid destType: %s", destType);
+                    break;
             }
-            if (!module) {
-               throw cRuntimeError("Configuration problem of buffers: Module: %s could not be resolved!", destBuf);
-            }
-            if (Buffer *buffer = dynamic_cast<Buffer*>(module)) {
-               filter.destBuffer = buffer;
-            } else {
-                throw cRuntimeError("Configuration problem of buffers: Module: %s is not a buffer!", destBuf);
-            }
-            if (destMAC)
-                filter.destMAC.setAddress(destMAC);
-            else
-                throw cRuntimeError("Configuration problem: destMAC not specified!");
+            if (alsoBE)
+                filter->alsoBE = parseIntAttribute(alsoBE, "alsoBE", false) != 0;
             if (srcAddrAttr)
-                filter.srcAddr = addressResolver.resolve(srcAddrAttr);
+                filter->srcAddr = addressResolver.resolve(srcAddrAttr);
             if (srcPrefixLengthAttr)
-                filter.srcPrefixLength = parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength");
+                filter->srcPrefixLength = parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength");
             else if (srcAddrAttr)
-                filter.srcPrefixLength = filter.srcAddr.isIPv6() ? 128 : 32;
+                filter->srcPrefixLength = filter->srcAddr.isIPv6() ? 128 : 32;
             if (destAddrAttr)
-                filter.destAddr = addressResolver.resolve(destAddrAttr);
+                filter->destAddr = addressResolver.resolve(destAddrAttr);
             if (destPrefixLengthAttr)
-                filter.destPrefixLength = parseIntAttribute(destPrefixLengthAttr, "destPrefixLength");
+                filter->destPrefixLength = parseIntAttribute(destPrefixLengthAttr, "destPrefixLength");
             else if (destAddrAttr)
-                filter.destPrefixLength = filter.destAddr.isIPv6() ? 128 : 32;
+                filter->destPrefixLength = filter->destAddr.isIPv6() ? 128 : 32;
             if (protocolAttr)
-                filter.protocol = parseProtocol(protocolAttr, "protocol");
+                filter->protocol = parseProtocol(protocolAttr, "protocol");
             if (tosAttr)
-                filter.tos = parseIntAttribute(tosAttr, "tos");
+                filter->tos = parseIntAttribute(tosAttr, "tos");
             if (tosMaskAttr)
-                filter.tosMask = parseIntAttribute(tosAttr, "tosMask");
+                filter->tosMask = parseIntAttribute(tosAttr, "tosMask");
             if (srcPortAttr)
-                filter.srcPortMin = filter.srcPortMax = parseIntAttribute(srcPortAttr, "srcPort");
+                filter->srcPortMin = filter->srcPortMax = parseIntAttribute(srcPortAttr, "srcPort");
             if (srcPortMinAttr)
-                filter.srcPortMin = parseIntAttribute(srcPortMinAttr, "srcPortMin");
+                filter->srcPortMin = parseIntAttribute(srcPortMinAttr, "srcPortMin");
             if (srcPortMaxAttr)
-                filter.srcPortMax = parseIntAttribute(srcPortMaxAttr, "srcPortMax");
+                filter->srcPortMax = parseIntAttribute(srcPortMaxAttr, "srcPortMax");
             if (destPortAttr)
-                filter.destPortMin = filter.destPortMax = parseIntAttribute(destPortAttr, "destPort");
+                filter->destPortMin = filter->destPortMax = parseIntAttribute(destPortAttr, "destPort");
             if (destPortMinAttr)
-                filter.destPortMin = parseIntAttribute(destPortMinAttr, "destPortMin");
+                filter->destPortMin = parseIntAttribute(destPortMinAttr, "destPortMin");
             if (destPortMaxAttr)
-                filter.destPortMax = parseIntAttribute(destPortMaxAttr, "destPortMax");
+                filter->destPortMax = parseIntAttribute(destPortMaxAttr, "destPortMax");
 
-            addFilter(filter);
+            addFilter(*filter);
         }
         catch (std::exception& e)
         {
@@ -194,36 +229,84 @@ void IPv4oRE::configureFilters(cXMLElement *config) {
 
 //==============================================================================
 
-void IPv4oRE::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<Filter*> &filters) {
+void IPv4oRE::registerTalker(const std::list<Filter> filters)
+{
+    std::list<Filter>::const_iterator filter = filters.begin();
+    for ( ; filter != filters.end(); ++filter) {
+        if (filter->destType == DestType_AVB) {
+            registerTalker(&(*filter));
+        }
+    }
+}
 
+//==============================================================================
+
+void IPv4oRE::registerTalker(const Filter* filter)
+{
+    SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(findModuleWhereverInNode("srpTable", this));
+    if (srpTable)
+    {
+        EV << "Register Talker in node" << std::endl;
+        srpTable->subscribe("listenerRegistered", this);
+        srpTable->subscribe("listenerUnregistered", this);
+        srpTable->subscribe("listenerRegistrationTimeout", this);
+        // TODO: für diese events noch einen handler
+        // TODO: Class, framesize, intervallframes, vid(?) im filter hinzufügen
+        srpTable->updateTalkerWithStreamId(filter->avbDestInfo.streamId, this, filter->avbDestInfo.destMAC, SR_CLASS_A, MAX_ETHERNET_FRAME_BYTES, 1);
+        getDisplayString().setTagArg("i2", 0, "status/hourglass");
+    }
+    else
+    {
+        throw cRuntimeError("srpTable module required for stream reservation");
+    }
+}
+
+//==============================================================================
+
+void IPv4oRE::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<Filter*> &filters)
+{
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
-
-    // create Ethernet II frame, fill it in from Ieee802Ctrl and encapsulate msg in it
-    EV << "Encapsulating higher layer packet `" << packet->getName() <<"' for MAC\n";
-
-    Ieee802Ctrl *etherctrl = check_and_cast<Ieee802Ctrl*>(packet->removeControlInfo());
-    EthernetIIFrame *frame = new EthernetIIFrame(packet->getName());
-
-    frame->setSrc(etherctrl->getSrc());  // if blank, will be filled in by MAC
-    frame->setDest(etherctrl->getDest());
-    frame->setEtherType(etherctrl->getEtherType());
-    frame->setByteLength(ETHER_MAC_FRAME_BYTES);
-    delete etherctrl;
-
-    frame->encapsulate(packet);
-    if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
-        frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
-
     std::list<Filter*>::iterator filter = filters.begin();
-    EthernetIIFrame *sendFrame;
-    for( ; filter != filters.end(); ++filter) {
-        sendFrame = frame->dup();
-        sendFrame->setDest((*filter)->destMAC);
-        sendDirect(sendFrame, (*filter)->destBuffer->gate("in"));
+    for ( ; filter != filters.end(); ++filter) {
+        switch ((*filter)->destType) {
+        case DestType_AVB:
+            {
+                sendAVBFrame(packet->dup(), ie, (*filter));
+                break;
+            }
+        default:
+            {
+                break;
+            }
+        }
+        if ((*filter)->alsoBE) {
+            IPv4::sendPacketToNIC(packet->dup(), ie);
+        }
     }
-    delete frame;
+
+    delete packet;
+}
+
+//==============================================================================
+
+void IPv4oRE::sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, const Filter* filter)
+{
+    std::stringstream name;
+    name << "Stream " << filter->avbDestInfo.streamId;
+    AVBFrame *outFrame = new AVBFrame(name.str().c_str());
+    outFrame->setStreamID(filter->avbDestInfo.streamId);
+    outFrame->setDest(filter->avbDestInfo.destMAC);
+
+    outFrame->encapsulate(packet);
+
+    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+    {
+        outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+    }
+    sendDirect(outFrame, filter->avbDestInfo.destModule->gate("in"));
+
 }
 
 //==============================================================================
@@ -286,7 +369,8 @@ int IPv4oRE::parseProtocol(const char *attrValue, const char *attrName)
 
 //==============================================================================
 
-bool IPv4oRE::getMatchingFilters(cPacket *packet, std::list<Filter*> &filters) {
+bool IPv4oRE::getMatchingFilters(cPacket *packet, std::list<Filter*> &filters)
+{
     bool foundMatch = false;
     std::list<Filter>::iterator filter = m_filterList.begin();
     while(filter != m_filterList.end()) {
@@ -301,8 +385,8 @@ bool IPv4oRE::getMatchingFilters(cPacket *packet, std::list<Filter*> &filters) {
 
 //==============================================================================
 
-bool IPv4oRE::Filter::matches(cPacket *packet) {
-
+bool IPv4oRE::Filter::matches(cPacket *packet)
+{
     IPv4Datagram *datagram = check_and_cast<IPv4Datagram*>(packet);
 
     if (srcPrefixLength > 0 && (srcAddr.isIPv6() || !datagram->getSrcAddress().prefixMatches(srcAddr.get4(), srcPrefixLength)))
