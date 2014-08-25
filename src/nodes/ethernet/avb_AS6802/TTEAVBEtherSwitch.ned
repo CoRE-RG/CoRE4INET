@@ -70,10 +70,11 @@ module TTEAVBEtherSwitch
             parameters:
                 @display("p=170,111");
             gates:
-               AVBout[sizeof(ethg)];
+               AVBAout[sizeof(ethg)];
+               AVBBout[sizeof(ethg)];
         }
 
-        avbBuffer[sizeof(ethg)]: AVBQueueBuffer {
+        avbABuffer[sizeof(ethg)]: AVBQueueBuffer {
             @display("p=100,111,c,70");
         }
         // Sync module for synchronisation of the scheduler
@@ -98,9 +99,10 @@ module TTEAVBEtherSwitch
             @display("p=170,50");
         }
     connections:
-        for i=0..sizeof(ethg)-1 {
-            avbBuffer[i].out --> phy[i].AVBin;
-            avbCTC.AVBout[i] --> avbBuffer[i].in;
+        for i=0..sizeof(ethg)-1 {         
+            avbCTC.AVBAout[i] --> avbABuffer[i].in;
+            //avbCTC.AVBBout[i] --> avbABuffer[i].in; //TODO: avbBBuffer
+            avbABuffer[i].out --> phy[i].AVBin; //TODO: ?
             phy[i].phys <--> ethg[i];
             phy[i].upperLayerIn <-- beswitch.ifOut[i];
             phy[i].upperLayerOut --> beswitch.ifIn[i];

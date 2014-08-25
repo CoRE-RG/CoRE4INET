@@ -113,6 +113,21 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsign
     throw std::invalid_argument("no stream for this talker address registered");
 }
 
+SR_CLASS SRPTable::getSrClassForTalkerAddress(MACAddress &talkerAddress, unsigned int vid)
+{
+    Enter_Method
+    ("SRPTable::getSrClassForTalkerAddress()");
+    TalkerTable talkerTable = talkerTables[vid];
+        for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); talkerEntry++)
+        {
+            if ((*talkerEntry).second->address == talkerAddress)
+            {
+                return (*talkerEntry).second->srClass;
+            }
+        }
+        throw std::invalid_argument("no stream for this talker address registered");
+}
+
 cModule* SRPTable::getTalkerForStreamId(uint64_t streamId, unsigned int vid)
 {
     removeAgedEntriesIfNeeded();

@@ -60,10 +60,11 @@ module TTEAVBEtherHost
             parameters:
                 @display("p=380,115");
             gates:
-               AVBout[numPorts];
+               AVBAout[numPorts];
+               AVBBout[numPorts];
         }
 
-        avbBuffer[numPorts]: AVBQueueBuffer {
+        avbABuffer[numPorts]: AVBQueueBuffer {
             parameters:
                 @display("p=380,193");
         }
@@ -134,8 +135,9 @@ module TTEAVBEtherHost
         llc.bgOut --> bgIn.in;
         bgOut.out --> llc.bgIn;
 
-        avbCTC.AVBout[0] --> avbBuffer[0].in;
-        avbBuffer[0].out --> phy[0].AVBin;
+        avbCTC.AVBAout[0] --> avbABuffer[0].in;
+        //avbCTC.AVBBout[0] --> avbABuffer[0].in; //TODO: avbBBuffer 
+        avbABuffer[0].out --> phy[0].AVBin; //TODO: ?
 
         srpProtocol.out --> llc.srpIn;
         srpProtocol.in <-- llc.srpOut;

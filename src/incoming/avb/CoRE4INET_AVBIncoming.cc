@@ -37,16 +37,24 @@ void AVBIncoming::handleMessage(cMessage* msg) {
         //TODO: Minor enable VLANs
         std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(
                 inFrame->getDest(), 0);
+        SR_CLASS srClass = srptable->getSrClassForTalkerAddress(inFrame->getDest(), 0);
         if (listeners.size() == 0) {
             emit(droppedSignal, inFrame);
         } else {
             for (std::list<cModule*>::const_iterator listener = listeners.begin();
                     listener != listeners.end(); listener++) {
                 if (strcmp((*listener)->getName(), "phy") == 0) {
-                    sendDelayed(inFrame->dup(),
-                            SimTime(
-                                    getParentModule()->par("hardware_delay").doubleValue()),
-                            gate("AVBout", (*listener)->getIndex()));
+                    if(srClass == SR_CLASS_A){
+                        sendDelayed(inFrame->dup(),
+                                                    SimTime(
+                                                            getParentModule()->par("hardware_delay").doubleValue()),
+                                                    gate("AVBAout", (*listener)->getIndex()));
+                    }else if(srClass == SR_CLASS_B){
+                        sendDelayed(inFrame->dup(),
+                                                    SimTime(
+                                                            getParentModule()->par("hardware_delay").doubleValue()),
+                                                    gate("AVBBout", (*listener)->getIndex()));
+                    }
                     emit(rxPkSignal, inFrame);
                 } else {
                     if ((*listener)->hasGate("AVBin")) {

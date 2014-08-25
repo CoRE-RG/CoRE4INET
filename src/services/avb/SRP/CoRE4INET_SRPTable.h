@@ -167,6 +167,15 @@ class SRPTable : public cSimpleModule
         virtual uint64_t getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsigned int vid = 0);
 
         /**
+         * @brief For a known talker address and V-TAG it finds out the SR-Class of the Stream
+         *
+         * @param talkerAdress address
+         * @param vid VLAN ID
+         * @return SR-Class related to the Stream of the talkerAddress
+         */
+        virtual SR_CLASS getSrClassForTalkerAddress(MACAddress &talkerAddress, unsigned int vid = 0);
+
+        /**
          * @brief For a known streamId and V-TAG it finds out the port where relay component should deliver the message
          *
          * @param streamId streamId
