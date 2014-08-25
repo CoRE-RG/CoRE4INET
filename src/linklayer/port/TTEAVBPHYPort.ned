@@ -75,5 +75,5 @@ module TTEAVBPHYPort like IPort
         TTin --> shaper.TTin;
         RCin --> shaper.RCin;
         PCFin --> shaper.PCFin;
-        AVBin --> shaper.AVBin;
+        AVBin --> shaper.AVBAin;
 }

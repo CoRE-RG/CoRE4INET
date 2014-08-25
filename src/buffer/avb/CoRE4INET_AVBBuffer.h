@@ -27,11 +27,11 @@ namespace CoRE4INET {
  *
  * The Frame is stored and released in dependency of the Credit of the CBS Algorithm. The Buffer interacts with the Scheduler.
  *
- * Use the implementations AVBDoubleBuffer, AVBQueueBuffer.
+ * Use the implementations AVBQueueBuffer.
  *
  * @author Philipp Meyer
  *
- * @sa AVBDoubleBuffer, AVBQueueBuffer, Buffer
+ * @sa AVBQueueBuffer, Buffer
  *
  * @ingroup Buffer
  */

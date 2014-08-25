@@ -30,6 +30,7 @@
 #ifdef WITH_AVB_COMMON
 //CoRE4INET
 #include "CoRE4INET_AVBClassAShaper.h"
+#include "CoRE4INET_AVBClassBShaper.h"
 #endif
 
 namespace CoRE4INET {
@@ -105,6 +106,24 @@ class TT_PCF_RC_BE_Shaper : public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShap
  * @author Philipp Meyer
  */
 class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBClassAShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >
+{
+};
+
+/**
+ * @brief Class representing the TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper module
+ *
+ * This shaper handles traffic in the following order (highest to lowest priority):
+ * - time-triggered
+ * - AVB
+ * - PCF
+ * - rate-constrained
+ * - best-effort
+ *
+ * @see TTShaper, AVBClassAShaper, AVBClassBShaper, PCFShaper, RCShaper, BEShaper, BaseShaper
+ *
+ * @author Philipp Meyer
+ */
+class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBClassAShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >//TODO
 {
 };
 #endif

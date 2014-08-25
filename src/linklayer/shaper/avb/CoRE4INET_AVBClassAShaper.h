@@ -135,7 +135,7 @@ void AVBClassAShaper<TC>::initialize(int stage)
     TC::initialize(stage);
     if (stage == 0)
     {
-        avbQueueLengthSignal = cComponent::registerSignal("avbQueueLength");
+        avbQueueLengthSignal = cComponent::registerSignal("avbAQueueLength");
 
         int portIndex = cModule::getParentModule()->getIndex();
         avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbBuffer",
@@ -146,7 +146,7 @@ void AVBClassAShaper<TC>::initialize(int stage)
 template<class TC>
 void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("AVBin"))
+    if (msg->arrivedOn("AVBAin"))
     {
         if (TC::getNumPendingRequests() && avbBuffer->getCredit() >= 0)
         {
@@ -177,7 +177,7 @@ void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
 template<class TC>
 void AVBClassAShaper<TC>::enqueueMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("AVBin"))
+    if (msg->arrivedOn("AVBAin"))
     {
         avbQueue.insert(msg);
         cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());

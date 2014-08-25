@@ -41,9 +41,9 @@ void AVBTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
     Timed::initialize();
 
-    if     (par("srClass").str().compare("A") == 0) srClass = SR_CLASS_A;
-    else if(par("srClass").str().compare("B") == 0) srClass = SR_CLASS_B;
-    else                                            srClass = SR_CLASS_A;
+    if     (strcmp(par("srClass").stringValue(),"A") == 0)  srClass = SR_CLASS_A;
+    else if(strcmp(par("srClass").stringValue(),"B") == 0)  srClass = SR_CLASS_B;
+    else                                                    srClass = SR_CLASS_A;
 
     streamID = (unsigned long) par("streamID").longValue();
     //EtherMACFullDuplex *mac = (EtherMACFullDuplex*)getParentModule()->getSubmodule("phy",0)->getSubmodule("mac");
@@ -119,9 +119,9 @@ void AVBTrafficSourceApp::sendAVBFrame()
     }
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
-//class measurement interval = 125us
+//class measurement interval A=125us B=250us
     simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
-    simtime_t interval = SR_CLASS_A_INTERVAL / intervalFrames;
+    simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
 //double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);

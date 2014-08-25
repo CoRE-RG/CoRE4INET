@@ -31,10 +31,10 @@ packet SRPFrame{
     
     // ID of the AVB Stream
     // 64 Bit Field (48bit MAC + 16bit UniqueID)
+    MACAddress streamDA;
 	unsigned long streamID;
 	
-	MACAddress streamDA;
-	
+		
 	// for internal implementation:
 	string displayString="b=15,15,rect,black,black,5";
 }
