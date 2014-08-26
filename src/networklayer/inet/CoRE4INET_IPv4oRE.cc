@@ -30,6 +30,8 @@
 #include "TCPSegment.h"
 #include "cstringtokenizer.h"
 
+#include <algorithm>
+
 //==============================================================================
 
 namespace CoRE4INET {
@@ -49,7 +51,7 @@ Register_Enum(DestinationType,
 IPv4oRE::IPv4oRE()
 {
     // TODO Auto-generated constructor stub
-
+    this->filterValid = false;
 }
 
 //==============================================================================
@@ -64,12 +66,24 @@ IPv4oRE::~IPv4oRE()
 void IPv4oRE::initialize(int stage)
 {
     IPv4::initialize(stage);
-    if (stage == 3)
+    if (!this->filterValid)
     {
-        cXMLElement *config = par("filters").xmlValue();
-        configureFilters(config);
-        //TODO: register Talker for each AVB Filter
+        cXMLElement *filters = par("filters").xmlValue();
+        configureFilters(filters);
+        configureSubscriptions(filters);
+        SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
+        registerSrpCallbacks(srpTable);
+        scheduleAt(simTime(), new cMessage("blablub"));
     }
+}
+
+//==============================================================================
+
+void IPv4oRE::registerSrpCallbacks(SRPTable *srpTable) {
+    srpTable->subscribe("talkerRegistered", this);
+    srpTable->subscribe("listenerRegistered", this);
+    srpTable->subscribe("listenerUnregistered", this);
+    srpTable->subscribe("listenerRegistrationTimeout", this);
 }
 
 //==============================================================================
@@ -86,6 +100,83 @@ void IPv4oRE::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
         sendPacketToBuffers(packet, ie, matchingFilters);
     } else {
         IPv4::sendPacketToNIC(packet, ie);
+    }
+}
+
+//==============================================================================
+
+void IPv4oRE::handleMessage(cMessage* msg)
+{
+    if (msg->isSelfMessage() && (strcmp(msg->getName(), "blablub") == 0))
+    {
+        SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
+        registerTalker(this->m_filterList, srpTable);
+        delete msg;
+    }
+    else if (dynamic_cast<AVBFrame*>(msg)) {
+        AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg);
+        cPacket* ipPacket = avbFrame->decapsulate();
+
+        Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
+        etherctrl->setSrc(avbFrame->getSrc());
+        etherctrl->setDest(avbFrame->getDest());
+        etherctrl->setEtherType(avbFrame->getEtherType());
+        ipPacket->setControlInfo(etherctrl);
+
+        ipPacket->setArrival(this, gate("AVBin")->getId());
+
+        IPv4::handleMessage(ipPacket);
+    }
+    else {
+        IPv4::handleMessage(msg);
+    }
+}
+
+//==============================================================================
+
+void IPv4oRE::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+{
+    Enter_Method_Silent();
+    if (id == registerSignal("talkerRegistered"))
+    {
+        SRPTable::TalkerEntry *tentry = check_and_cast<SRPTable::TalkerEntry*>(obj);
+
+        //TODO: only register if RTConfig matches
+        if (std::find(m_subscribeList.begin(), m_subscribeList.end(), tentry->streamId) != m_subscribeList.end())
+        {
+            SRPTable *srpTable = check_and_cast<SRPTable *>(src);
+
+            //TODO Minor: try to get VLAN
+            srpTable->updateListenerWithStreamId(tentry->streamId, this, 0);
+            // TODO: update timer???
+        }
+    }
+    else if (id == registerSignal("listenerRegistrationTimeout"))
+    {
+        // TODO
+//        SRPTable::ListenerEntry *lentry = check_and_cast<SRPTable::ListenerEntry*>(obj);
+//        if (lentry->streamId == (unsigned int) par("streamID").longValue())
+//        {
+//            if (lentry->module == this)
+//            {
+//                getDisplayString().setTagArg("i2", 0, "status/hourglass");
+//                simtime_t retryInterval = par("retryInterval").doubleValue();
+//                if (retryInterval != 0)
+//                {
+//                    scheduleAt(simTime() + retryInterval, new cMessage("retrySubscription"));
+//                }
+//            }
+//        }
+    }
+    else if (id == registerSignal("listenerRegistered"))
+    {
+    }
+    else if (id == registerSignal("listenerUnregistered"))
+    {
+    }
+    else
+    {
+        IPv4::receiveSignal(src, id, obj);
     }
 }
 
@@ -225,34 +316,58 @@ void IPv4oRE::configureFilters(cXMLElement *config)
             throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(), e.what());
         }
     }
+
+    this->filterValid = true;
 }
 
 //==============================================================================
 
-void IPv4oRE::registerTalker(const std::list<Filter> filters)
+void IPv4oRE::configureSubscriptions(cXMLElement *config)
+{
+    cXMLElementList filterElements = config->getChildrenByTagName("subscribe");
+    for (int i = 0; i < (int)filterElements.size(); i++)
+    {
+        cXMLElement *filterElement = filterElements[i];
+        try
+        {
+            const char *streamId = getRequiredAttribute(filterElement, "streamId");
+
+            if (streamId) {
+                int id = parseIntAttribute(streamId, "streamId");
+                m_subscribeList.push_back(id);
+            }
+        }
+        catch (std::exception& e)
+        {
+            throw cRuntimeError("Error in XML <subscribe> element at %s: %s", filterElement->getSourceLocation(), e.what());
+        }
+    }
+
+    this->filterValid = true;
+}
+
+//==============================================================================
+
+void IPv4oRE::registerTalker(const std::list<Filter> filters, SRPTable *srpTable)
 {
     std::list<Filter>::const_iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
         if (filter->destType == DestType_AVB) {
-            registerTalker(&(*filter));
+            registerTalker(&(*filter), srpTable);
         }
     }
 }
 
 //==============================================================================
 
-void IPv4oRE::registerTalker(const Filter* filter)
+void IPv4oRE::registerTalker(const Filter* filter, SRPTable *srpTable)
 {
-    SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(findModuleWhereverInNode("srpTable", this));
     if (srpTable)
     {
         EV << "Register Talker in node" << std::endl;
-        srpTable->subscribe("listenerRegistered", this);
-        srpTable->subscribe("listenerUnregistered", this);
-        srpTable->subscribe("listenerRegistrationTimeout", this);
         // TODO: für diese events noch einen handler
         // TODO: Class, framesize, intervallframes, vid(?) im filter hinzufügen
-        srpTable->updateTalkerWithStreamId(filter->avbDestInfo.streamId, this, filter->avbDestInfo.destMAC, SR_CLASS_A, MAX_ETHERNET_FRAME_BYTES, 1);
+        srpTable->updateTalkerWithStreamId(filter->avbDestInfo.streamId, this, filter->avbDestInfo.destMAC, SR_CLASS_A, 300, 1);
         getDisplayString().setTagArg("i2", 0, "status/hourglass");
     }
     else
@@ -298,6 +413,7 @@ void IPv4oRE::sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, const Filt
     AVBFrame *outFrame = new AVBFrame(name.str().c_str());
     outFrame->setStreamID(filter->avbDestInfo.streamId);
     outFrame->setDest(filter->avbDestInfo.destMAC);
+    outFrame->setEtherType(ETHERTYPE_IPv4);
 
     outFrame->encapsulate(packet);
 
@@ -387,7 +503,9 @@ bool IPv4oRE::getMatchingFilters(cPacket *packet, std::list<Filter*> &filters)
 
 bool IPv4oRE::Filter::matches(cPacket *packet)
 {
-    IPv4Datagram *datagram = check_and_cast<IPv4Datagram*>(packet);
+    IPv4Datagram *datagram = dynamic_cast<IPv4Datagram*>(packet);
+    if (!datagram)
+        return false;
 
     if (srcPrefixLength > 0 && (srcAddr.isIPv6() || !datagram->getSrcAddress().prefixMatches(srcAddr.get4(), srcPrefixLength)))
         return false;

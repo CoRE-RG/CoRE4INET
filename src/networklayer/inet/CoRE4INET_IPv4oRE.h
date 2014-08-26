@@ -20,6 +20,7 @@
 
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_AVBIncoming.h"
+#include "CoRE4INET_SRPTable.h"
 #include "IPvXAddress.h"
 
 #include "csimplemodule.h"
@@ -34,7 +35,7 @@ class IPv4oRE : public IPv4 {
             DestType_AVB
         };
 
-        struct AVBInfo {
+        struct AVBOutInfo {
             CoRE4INET::AVBIncoming* destModule;
             MACAddress destMAC;
             uint64_t streamId;
@@ -54,10 +55,22 @@ class IPv4oRE : public IPv4 {
             int destPortMax;
 
             DestinationType destType;
-            AVBInfo avbDestInfo;
+            AVBOutInfo avbDestInfo;
             bool alsoBE;
 
             bool matches(cPacket *packet);
+
+            Filter() {
+                srcPrefixLength = -1;
+                destPrefixLength = -1;
+                protocol = -1;
+                tos = -1;
+                tosMask = 0;
+                srcPortMin = -1;
+                srcPortMax = -1;
+                destPortMin = -1;
+                destPortMax = -1;
+            }
         };
 
     public:
@@ -69,8 +82,12 @@ class IPv4oRE : public IPv4 {
         virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
         virtual void addFilter(const Filter &filter);
         virtual void configureFilters(cXMLElement *config);
-        virtual void registerTalker(const std::list<Filter> filters);
-        virtual void registerTalker(const Filter* filter);
+        virtual void configureSubscriptions(cXMLElement *config);
+        virtual void registerSrpCallbacks(SRPTable *srpTable);
+        virtual void registerTalker(const std::list<Filter> filters, SRPTable *srpTable);
+        virtual void registerTalker(const Filter* filter, SRPTable *srpTable);
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+        virtual void handleMessage(cMessage* msg);
 
         /**
          * Encapsulates packet in Ethernet II frame and sends to each destination buffers.
@@ -116,8 +133,10 @@ class IPv4oRE : public IPv4 {
 
     protected:
         std::list<Filter> m_filterList;
+        std::list<int> m_subscribeList;
         cEnum *m_protocolEnum;
         cEnum *destTypeEnum;
+        bool filterValid;
 };
 
 } /* namespace CoRE4INET */

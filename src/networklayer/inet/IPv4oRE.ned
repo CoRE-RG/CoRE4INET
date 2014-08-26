@@ -22,7 +22,8 @@ simple IPv4oRE extends IPv4 {
     
     parameters:
         @class("IPv4oRE");
-        xml filters = default(xml("<filters/>"));
+        xml filters = default(xmldoc("filters.xml"));
     gates:
+        input AVBin;
         input ctIn;
 }
