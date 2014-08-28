@@ -123,7 +123,7 @@ class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBClassAShaper<PCFShaper<
  *
  * @author Philipp Meyer
  */
-class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBClassAShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >//TODO
+class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBClassAShaper<AVBClassBShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > > >
 {
 };
 #endif

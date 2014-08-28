@@ -16,7 +16,7 @@
 package core4inet.linklayer.port;
 
 import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
-import core4inet.linklayer.shaper.TT_AVBClassA_PCF_RC_BE_Shaper;
+import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 
@@ -45,11 +45,13 @@ module TTEAVBPHYPort like IPort
         input RCin @directIn @labels(RCFrame);
         //Input from the upper layer for rate-constrained traffic
         input PCFin @directIn @labels(PCFrame);
-		//Input from the upper layer for audio-video bridging traffic
-        input AVBin @directIn @labels(AVBFrame);
+		//Input from the upper layer for audio-video bridging SR-Class A traffic
+        input AVBAin @directIn @labels(AVBFrame);
+        //Input from the upper layer for audio-video bridging SR-Class B traffic
+        input AVBBin @directIn @labels(AVBFrame);
 
     submodules:
-        shaper: TT_AVBClassA_PCF_RC_BE_Shaper {
+        shaper: TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper {
             @display("p=48,45");
         }
 
@@ -75,5 +77,6 @@ module TTEAVBPHYPort like IPort
         TTin --> shaper.TTin;
         RCin --> shaper.RCin;
         PCFin --> shaper.PCFin;
-        AVBin --> shaper.AVBAin;
+        AVBAin --> shaper.AVBAin;
+        AVBBin --> shaper.AVBBin;
 }

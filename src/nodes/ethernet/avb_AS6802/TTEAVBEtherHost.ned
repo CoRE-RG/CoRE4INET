@@ -58,15 +58,22 @@ module TTEAVBEtherHost
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=380,115");
+                @display("p=380,118");
             gates:
-               AVBAout[numPorts];
-               AVBBout[numPorts];
+                AVBAout[numPorts];
+                AVBBout[numPorts];
         }
 
         avbABuffer[numPorts]: AVBQueueBuffer {
             parameters:
-                @display("p=380,193");
+                srClass = "A";
+                @display("p=341,193");
+        }
+
+        avbBBuffer[numPorts]: AVBQueueBuffer {
+            parameters:
+                srClass = "B";
+                @display("p=419,193");
         }
 
         llc: SRPEtherLLC {
@@ -101,7 +108,7 @@ module TTEAVBEtherHost
             @display("p=274,169");
         }
 
-        app[numApps]: < > like IApplication {
+        app[numApps]: <> like IApplication {
             @display("p=380,37,row,70");
         }
 
@@ -136,8 +143,9 @@ module TTEAVBEtherHost
         bgOut.out --> llc.bgIn;
 
         avbCTC.AVBAout[0] --> avbABuffer[0].in;
-        //avbCTC.AVBBout[0] --> avbABuffer[0].in; //TODO: avbBBuffer 
-        avbABuffer[0].out --> phy[0].AVBin; //TODO: ?
+        avbCTC.AVBBout[0] --> avbBBuffer[0].in;
+        avbABuffer[0].out --> phy[0].AVBAin;
+        avbBBuffer[0].out --> phy[0].AVBBin;
 
         srpProtocol.out --> llc.srpIn;
         srpProtocol.in <-- llc.srpOut;

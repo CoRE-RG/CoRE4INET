@@ -180,6 +180,38 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
     return bandwidth;
 }
 
+unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLASS srClass)
+{
+    removeAgedEntriesIfNeeded();
+
+    unsigned long bandwidth = 0;
+
+    for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end(); i++)
+    {
+        ListenerTable table = i->second;
+        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); j++)
+        {
+            ListenerList llist = (*j).second;
+            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); k++)
+            {
+                if ((*k).first == module)
+                {
+                    //get Talkers for this VLAN
+                    TalkerTable ttable = talkerTables[(*i).first];
+                    TalkerEntry *tentry = ttable[(*j).first];
+                    if(tentry->srClass == srClass)
+                    {
+                        bandwidth += bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames,
+                                                    getIntervalForClass(tentry->srClass));
+                    }
+                }
+            }
+        }
+    }
+
+    return bandwidth;
+}
+
 bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, SR_CLASS srClass,
         unsigned int framesize, unsigned int intervalFrames, unsigned int vid)
 {

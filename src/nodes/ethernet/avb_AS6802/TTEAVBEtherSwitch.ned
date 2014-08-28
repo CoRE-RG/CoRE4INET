@@ -45,18 +45,18 @@ module TTEAVBEtherSwitch
         }
 		//The mac table associated with the be switch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
-            @display("p=170,276");
+            @display("p=240,241");
         }
         interfaceTable: InterfaceTable {
-            @display("p=304,276");
+            @display("p=374,241");
         }
         notificationBoard: NotificationBoard {
             parameters:
-                @display("p=376,276");
+                @display("p=446,241");
         }
 
         srpTable: SRPTable {
-            @display("p=235,276");
+            @display("p=305,241");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
@@ -68,19 +68,27 @@ module TTEAVBEtherSwitch
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=170,111");
+                @display("p=240,111");
             gates:
-               AVBAout[sizeof(ethg)];
-               AVBBout[sizeof(ethg)];
+                AVBAout[sizeof(ethg)];
+                AVBBout[sizeof(ethg)];
         }
 
         avbABuffer[sizeof(ethg)]: AVBQueueBuffer {
-            @display("p=100,111,c,70");
+            parameters:
+                srClass = "A";
+            	@display("p=100,111,c,70");
+        }
+
+        avbBBuffer[sizeof(ethg)]: AVBQueueBuffer {
+            parameters:
+                srClass = "B";
+           		@display("p=170,111,c,70");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=240,50");
+                @display("p=310,50");
         }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
@@ -90,19 +98,21 @@ module TTEAVBEtherSwitch
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
-                @display("p=310,50");
+                @display("p=380,50");
         }
         checkedBuffer[numBuffer]: CheckedBuffer {
-            @display("p=310,130");
+            @display("p=380,128");
         }
         srpProtocol: SRProtocol {
-            @display("p=170,50");
+            @display("p=240,50");
         }
     connections:
-        for i=0..sizeof(ethg)-1 {         
+        for i=0..sizeof(ethg)-1 {
             avbCTC.AVBAout[i] --> avbABuffer[i].in;
-            //avbCTC.AVBBout[i] --> avbABuffer[i].in; //TODO: avbBBuffer
-            avbABuffer[i].out --> phy[i].AVBin; //TODO: ?
+            avbCTC.AVBBout[i] --> avbBBuffer[i].in;
+            avbABuffer[i].out --> phy[i].AVBAin;
+            avbBBuffer[i].out --> phy[i].AVBBin;
+            
             phy[i].phys <--> ethg[i];
             phy[i].upperLayerIn <-- beswitch.ifOut[i];
             phy[i].upperLayerOut --> beswitch.ifIn[i];

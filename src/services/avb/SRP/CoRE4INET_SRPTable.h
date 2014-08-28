@@ -211,6 +211,15 @@ class SRPTable : public cSimpleModule
         virtual unsigned long getBandwidthForModule(cModule *module);
 
         /**
+         * @brief Retrieve the required bandwidth for a module with registered listeners per SR-Class
+         *
+         * @param module the module registered as listener
+         * @param srClass the SR-Class (A or B)
+         * @return bandwidth in bps
+         */
+        virtual unsigned long getBandwidthForModuleAndSRClass(cModule *module, SR_CLASS srClass);
+
+        /**
          * @brief Retrieve the required bandwidth for a stream
          *
          * @param streamId the streams id

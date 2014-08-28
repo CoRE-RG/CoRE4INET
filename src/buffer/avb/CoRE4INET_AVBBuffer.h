@@ -19,6 +19,7 @@
 //CoRE4INET
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_Timed.h"
+#include "AVBDefs_m.h"
 
 namespace CoRE4INET {
 
@@ -81,6 +82,7 @@ class AVBBuffer : public virtual Buffer, public Timed
         void resetCredit();
 
     protected:
+        SR_CLASS srClass;
         int credit;
         int maxCredit;
         bool inTransmission;

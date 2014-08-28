@@ -138,7 +138,7 @@ void AVBClassAShaper<TC>::initialize(int stage)
         avbQueueLengthSignal = cComponent::registerSignal("avbAQueueLength");
 
         int portIndex = cModule::getParentModule()->getIndex();
-        avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbBuffer",
+        avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbABuffer",
                 portIndex));
     }
 }
