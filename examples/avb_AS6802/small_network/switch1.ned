@@ -25,15 +25,15 @@ import core4inet.buffer.AS6802.TTDoubleBuffer;
 //
 module Switch1 extends TTEAVBEtherSwitch
 {
-    @display("bgb=420,311");
+    @display("bgb=990,547");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:
-                @display("p=170,130");
+                @display("p=534,111");
         }
         vl_100: TTDoubleBuffer {
             parameters:
-                @display("p=240,130");
+                @display("p=604,111");
         }
     connections:
         vl_100_ctc.out --> vl_100.in;

@@ -57,9 +57,8 @@ SRPTable::SRPTable()
 void SRPTable::initialize()
 {
     WATCH(nextAging);
-    //TODO Minor: Add custom watch for unordered maps
-    //WATCH_PTRMAPMAP(talkerTables);
-    //WATCH_PTRLISTMAPMAP(listenerTables);
+    WATCH_PTRUMAPUMAP(talkerTables);
+    WATCH_PTRLISTUMAPUMAP(listenerTables);
     updateDisplayString();
 }
 

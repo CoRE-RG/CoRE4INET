@@ -26,16 +26,16 @@ import core4inet.buffer.AS6802.TTDoubleBuffer;
 //
 module Node2 extends TTEAVBEtherHost
 {
-    @display("bgb=484,314");
+    @display("bgb=678,314");
     submodules:
         vl_100_ctc: TTIncoming {
             parameters:
-                @display("p=350,100");
+                @display("p=530,118");
 
         }
         vl_100: TTDoubleBuffer {
             parameters:
-                @display("p=440,100");
+                @display("p=620,118");
         }
     connections:
         vl_100_ctc.out --> vl_100.in;

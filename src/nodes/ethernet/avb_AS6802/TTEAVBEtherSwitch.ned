@@ -38,37 +38,37 @@ module TTEAVBEtherSwitch
         // Implementation of the best-effort forwarding part
         beswitch: SRPRelay {
             parameters:
-                @display("p=100,50");
+                @display("p=141,50");
             gates:
                 ifIn[sizeof(ethg)];
                 ifOut[sizeof(ethg)];
         }
 		//The mac table associated with the be switch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
-            @display("p=240,241");
+            @display("p=346,313");
         }
         interfaceTable: InterfaceTable {
-            @display("p=374,241");
+            @display("p=447,313");
         }
         notificationBoard: NotificationBoard {
             parameters:
-                @display("p=446,241");
+                @display("p=552,313");
         }
 
         srpTable: SRPTable {
-            @display("p=305,241");
+            @display("p=346,238");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEAVBPHYPort {
             parameters:
-                @display("p=50,110,column,50");
+                @display("p=90,110,c,130");
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
 
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=240,111");
+                @display("p=346,111");
             gates:
                 AVBAout[sizeof(ethg)];
                 AVBBout[sizeof(ethg)];
@@ -77,34 +77,34 @@ module TTEAVBEtherSwitch
         avbABuffer[sizeof(ethg)]: AVBQueueBuffer {
             parameters:
                 srClass = "A";
-            	@display("p=100,111,c,70");
+                @display("p=209,80,c,130");
         }
 
         avbBBuffer[sizeof(ethg)]: AVBQueueBuffer {
             parameters:
                 srClass = "B";
-           		@display("p=170,111,c,70");
+                @display("p=209,139,c,130");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=310,50");
+                @display("p=416,50");
         }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             parameters:
-                @display("p=999,999");
+                @display("p=1039,999");
         }
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
-                @display("p=380,50");
+                @display("p=486,50");
         }
         checkedBuffer[numBuffer]: CheckedBuffer {
-            @display("p=380,128");
+            @display("p=486,128");
         }
         srpProtocol: SRProtocol {
-            @display("p=240,50");
+            @display("p=346,50");
         }
     connections:
         for i=0..sizeof(ethg)-1 {
@@ -112,7 +112,7 @@ module TTEAVBEtherSwitch
             avbCTC.AVBBout[i] --> avbBBuffer[i].in;
             avbABuffer[i].out --> phy[i].AVBAin;
             avbBBuffer[i].out --> phy[i].AVBBin;
-            
+
             phy[i].phys <--> ethg[i];
             phy[i].upperLayerIn <-- beswitch.ifOut[i];
             phy[i].upperLayerOut --> beswitch.ifIn[i];
