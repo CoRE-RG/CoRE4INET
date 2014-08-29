@@ -26,7 +26,7 @@
 
 #ifdef WITH_AVB_COMMON
 //CoRE4INET
-#include "CoRE4INET_AVBClassAInControl.h"
+#include "CoRE4INET_AVBInControl.h"
 #endif
 
 namespace CoRE4INET {
@@ -73,7 +73,7 @@ class CT_BE_InControl : public CTInControl<BEInControl<BaseInControl> >
  *
  * @author Philipp Meyer
  */
-class CT_AVB_BE_InControl : public CTInControl<AVBClassAInControl<BEInControl<BaseInControl> > >
+class CT_AVB_BE_InControl : public CTInControl<AVBInControl<BEInControl<BaseInControl> > >
 {
 };
 #endif

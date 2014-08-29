@@ -15,6 +15,9 @@
 
 #include "CoRE4INET_AVBIncoming.h"
 
+//Std
+#include <string>
+using namespace std;
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
 //INET
@@ -44,17 +47,14 @@ void AVBIncoming::handleMessage(cMessage* msg) {
             for (std::list<cModule*>::const_iterator listener = listeners.begin();
                     listener != listeners.end(); listener++) {
                 if (strcmp((*listener)->getName(), "phy") == 0) {
-                    if(srClass == SR_CLASS_A){
-                        sendDelayed(inFrame->dup(),
-                                                    SimTime(
-                                                            getParentModule()->par("hardware_delay").doubleValue()),
-                                                    gate("AVBAout", (*listener)->getIndex()));
-                    }else if(srClass == SR_CLASS_B){
-                        sendDelayed(inFrame->dup(),
-                                                    SimTime(
-                                                            getParentModule()->par("hardware_delay").doubleValue()),
-                                                    gate("AVBBout", (*listener)->getIndex()));
-                    }
+                    string outputStr;
+                    if(srClass == SR_CLASS_A)       outputStr = "AVBAout";
+                    else if(srClass == SR_CLASS_B)  outputStr = "AVBBout";
+                    sendDelayed(inFrame->dup(),
+                        SimTime(
+                                getParentModule()->par("hardware_delay").doubleValue()),
+                        gate(outputStr.c_str(), (*listener)->getIndex())
+                        );
                     emit(rxPkSignal, inFrame);
                 } else {
                     if ((*listener)->hasGate("AVBin")) {
