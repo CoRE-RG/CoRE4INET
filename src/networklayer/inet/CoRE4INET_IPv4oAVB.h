@@ -27,7 +27,8 @@
 
 namespace CoRE4INET {
 
-class IPv4oRE : public IPv4 {
+template<class base>
+class IPv4oAVB : public base {
 
     public:
         enum DestinationType {
@@ -74,8 +75,8 @@ class IPv4oRE : public IPv4 {
         };
 
     public:
-        IPv4oRE();
-        virtual ~IPv4oRE();
+        IPv4oAVB();
+        virtual ~IPv4oAVB();
 
     protected:
         virtual void initialize(int stage);

@@ -13,17 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.networklayer.inet;
+#include <CoRE4INET_IPoRE.h>
 
-import inet.networklayer.ipv4.IPv4;
+namespace CoRE4INET {
 
+Define_Module(AVB_IPv4);
 
-simple IPv4oRE extends IPv4 {
-    
-    parameters:
-        @class("AVB_IPv4");
-        xml filters = default(xmldoc("filters.xml"));
-    gates:
-        input AVBin;
-        input ctIn;
-}
+} /* namespace CoRE4INET */
