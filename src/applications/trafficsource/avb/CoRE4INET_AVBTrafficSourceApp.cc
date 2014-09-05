@@ -53,6 +53,7 @@ void AVBTrafficSourceApp::initialize()
     //streamID = (macAdress << 16) + uniqueID;
 
     intervalFrames = (unsigned int) par("intervalFrames").longValue();
+    vlan_id = (unsigned short) par("vlan_id").longValue();
     payload = (unsigned int) par("payload").longValue();
 
 //TODO: Minor: Check these values
@@ -82,7 +83,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             srpTable->subscribe("listenerRegistered", this);
             srpTable->subscribe("listenerUnregistered", this);
             srpTable->subscribe("listenerRegistrationTimeout", this);
-            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, srClass, frameSize, intervalFrames);
+            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, srClass, frameSize, intervalFrames, vlan_id);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
         }
         else

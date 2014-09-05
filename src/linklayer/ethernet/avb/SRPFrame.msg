@@ -41,9 +41,11 @@ packet SRPFrame{
 
 packet TalkerAdvertise extends SRPFrame{
     byteLength = 25;
-    // notused
+    
+    // DataFrameParameters => destination adress and vlan identifier
 	// 64 Bit Field
-	unsigned long DataFrameParameters;
+	MACAddress destination_address; //only one Talker allowed per destination_address
+	unsigned short vlan_identifier;
 	
 	// TSpec => Max frame size and sending interval of an AVB stream
 	// 32 Bit Field
