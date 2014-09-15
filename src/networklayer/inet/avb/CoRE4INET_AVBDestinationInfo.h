@@ -17,6 +17,7 @@
 #define CORE4INET_AVBDESTINATIONINFO_H_
 
 
+#include "CoRE4INET_DestinationInfo.h"
 #include "CoRE4INET_AVBIncoming.h"
 #include "MACAddress.h"
 #include "AVBDefs_m.h"
@@ -24,7 +25,7 @@
 
 namespace CoRE4INET {
 
-class AVBDestinationInfo {
+class AVBDestinationInfo : public DestinationInfo {
 
 
 public:

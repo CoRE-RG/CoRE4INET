@@ -24,16 +24,19 @@ namespace CoRE4INET {
 
 //==============================================================================
 
-TrafficPattern::TrafficPattern() {
-    this->srcPrefixLength = -1;
-    this->destPrefixLength = -1;
-    this->protocol = -1;
-    this->tos = -1;
-    this->tosMask = 0;
-    this->srcPortMin = -1;
-    this->srcPortMax = -1;
-    this->destPortMin = -1;
-    this->destPortMax = -1;
+TrafficPattern::TrafficPattern()
+  : srcAddr(),
+    srcPrefixLength(-1),
+    destAddr(),
+    destPrefixLength(-1),
+    protocol(-1),
+    tos(-1),
+    tosMask(-1),
+    srcPortMin(-1),
+    srcPortMax(-1),
+    destPortMin(-1),
+    destPortMax(-1)
+{
 }
 
 //==============================================================================

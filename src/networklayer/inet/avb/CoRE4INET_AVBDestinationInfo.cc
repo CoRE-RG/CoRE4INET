@@ -17,14 +17,15 @@
 
 namespace CoRE4INET {
 
-AVBDestinationInfo::AVBDestinationInfo() {
-    // TODO Auto-generated constructor stub
-
+AVBDestinationInfo::AVBDestinationInfo()
+  : destModule(NULL),
+    destMAC(NULL),
+    streamId(0),
+    srClass(SR_CLASS_A)
+{
 }
 
 AVBDestinationInfo::~AVBDestinationInfo() {
-    if (this->destModule)
-        delete this->destModule;
     if (this->destMAC)
         delete this->destMAC;
 }

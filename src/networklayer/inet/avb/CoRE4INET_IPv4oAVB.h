@@ -21,6 +21,7 @@
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_AVBIncoming.h"
 #include "CoRE4INET_SRPTable.h"
+#include "CoRE4INET_IPoREFilter.h"
 #include "IPvXAddress.h"
 #include "IPoREDefs_m.h"
 
@@ -32,58 +33,18 @@ template<class base>
 class IPv4oAVB : public base {
 
     public:
-
-        struct AVBOutInfo {
-            CoRE4INET::AVBIncoming* destModule;
-            MACAddress destMAC;
-            uint64_t streamId;
-        };
-
-        struct Filter {
-            IPvXAddress srcAddr;
-            int srcPrefixLength;
-            IPvXAddress destAddr;
-            int destPrefixLength;
-            int protocol;
-            int tos;
-            int tosMask;
-            int srcPortMin;
-            int srcPortMax;
-            int destPortMin;
-            int destPortMax;
-
-            DestinationType destType;
-            AVBOutInfo avbDestInfo;
-            bool alsoBE;
-
-            bool matches(cPacket *packet);
-
-            Filter() {
-                srcPrefixLength = -1;
-                destPrefixLength = -1;
-                protocol = -1;
-                tos = -1;
-                tosMask = 0;
-                srcPortMin = -1;
-                srcPortMax = -1;
-                destPortMin = -1;
-                destPortMax = -1;
-            }
-        };
-
-    public:
         IPv4oAVB();
         virtual ~IPv4oAVB();
 
     protected:
         virtual void initialize(int stage);
         virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
-        virtual void addFilter(const Filter &filter);
+        virtual void addFilter(const IPoREFilter &filter);
         virtual void configureFilters(cXMLElement *config);
         virtual void configureSubscriptions(cXMLElement *config);
         virtual void registerSrpCallbacks(SRPTable *srpTable);
-        virtual void registerTalker(const std::list<Filter> filters, SRPTable *srpTable);
-        virtual void registerTalker(const Filter* filter, SRPTable *srpTable);
+        virtual void registerTalker(const std::list<IPoREFilter> filters, SRPTable *srpTable);
+        virtual void registerTalker(const IPoREFilter* filter, SRPTable *srpTable);
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
         virtual void handleMessage(cMessage* msg);
 
@@ -91,13 +52,13 @@ class IPv4oAVB : public base {
          * Encapsulates packet in Ethernet II frame and sends to each destination buffers.
          * Destination MAC address and destination buffer is taken from filter.
          */
-        virtual void sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<Filter*> &filters);
+        virtual void sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
 
         /**
          * Encapsulates packet in AVB Frame and sends to destination AVB Buffer.
          * StreamID, Name, DestMAC, DestBuffer is taken from filter.
          */
-        void sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, const Filter* filter);
+        void sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, const IPoREFilter* filter);
 
         /**
          * Returns true, if the string is empty (NULL or "");
@@ -127,15 +88,21 @@ class IPv4oAVB : public base {
          * Gets matching filters for given packet.
          * Multiple filters can be returned in case of multiple matching filters.
          */
-        bool getMatchingFilters(cPacket *packet, std::list<Filter*> &filters);
+        bool getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters);
 
     protected:
-        std::list<Filter> m_filterList;
+        std::list<IPoREFilter> m_filterList;
         std::list<int> m_subscribeList;
         cEnum *m_protocolEnum;
         cEnum *destTypeEnum;
         bool filterValid;
 };
+
+
+
+
+
+
 
 } /* namespace CoRE4INET */
 
