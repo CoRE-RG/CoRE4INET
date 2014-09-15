@@ -22,6 +22,7 @@
 #include "CoRE4INET_AVBIncoming.h"
 #include "CoRE4INET_SRPTable.h"
 #include "IPvXAddress.h"
+#include "IPoREDefs_m.h"
 
 #include "csimplemodule.h"
 
@@ -31,10 +32,6 @@ template<class base>
 class IPv4oAVB : public base {
 
     public:
-        enum DestinationType {
-            DestType_invalid = 0,
-            DestType_AVB
-        };
 
         struct AVBOutInfo {
             CoRE4INET::AVBIncoming* destModule;
@@ -141,5 +138,7 @@ class IPv4oAVB : public base {
 };
 
 } /* namespace CoRE4INET */
+
+#include "CoRE4INET_IPv4oAVB.impl"
 
 #endif /* CORE4INET_IPV4RTADAPTER_H_ */

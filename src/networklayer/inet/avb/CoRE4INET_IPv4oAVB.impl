@@ -3,19 +3,19 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
 
 //==============================================================================
 
-#include "networklayer/inet/CoRE4INET_IPv4oAVB.h"
+#include "CoRE4INET_IPv4oAVB.h"
 
 //==============================================================================
 
@@ -25,7 +25,6 @@
 #include "AVBFrame_m.h"
 #include "IPvXAddress.h"
 #include "IPvXAddressResolver.h"
-#include "DiffservUtil.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
 #include "cstringtokenizer.h"
@@ -39,12 +38,6 @@ namespace CoRE4INET {
 //==============================================================================
 
 Define_Module(IPv4oAVB<IPv4>);
-
-//==============================================================================
-
-Register_Enum(DestinationType,
-        (IPv4oAVB<IPv4>::DestType_invalid,
-        IPv4oAVB<IPv4>::DestType_AVB));
 
 //==============================================================================
 
@@ -259,9 +252,9 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
             }
 
             if (destType)
-                filter->destType = IPv4oAVB::DestinationType(this->destTypeEnum->lookup(destType));
+                filter->destType = DestinationType(this->destTypeEnum->lookup(destType));
             switch (filter->destType) {
-                case DestType_AVB:
+                case DestinationType_AVB:
                     {
                         cModule* module = simulation.getModuleByPath(destModule);
                         if (!module) {
@@ -364,7 +357,7 @@ void IPv4oAVB<base>::registerTalker(const std::list<IPv4oAVB<base>::Filter> filt
 {
     typename std::list<IPv4oAVB<base>::Filter>::const_iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
-        if (filter->destType == DestType_AVB) {
+        if (filter->destType == DestinationType_AVB) {
             registerTalker(&(*filter), srpTable);
         }
     }
@@ -399,7 +392,7 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *
     typename std::list<Filter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
         switch ((*filter)->destType) {
-        case DestType_AVB:
+        case DestinationType_AVB:
             {
                 sendAVBFrame(packet->dup(), ie, (*filter));
                 break;
