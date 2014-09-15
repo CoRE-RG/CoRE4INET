@@ -25,7 +25,7 @@ namespace CoRE4INET {
 class DestinationInfo {
 
 public:
-    ~DestinationInfo() = 0;
+    DestinationInfo();
     virtual ~DestinationInfo();
 
 
