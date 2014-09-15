@@ -39,11 +39,11 @@ class IPv4oAVB : public base {
     protected:
         virtual void initialize(int stage);
         virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
-        virtual void addFilter(const IPoREFilter &filter);
+        virtual void addFilter(IPoREFilter *filter);
         virtual void configureFilters(cXMLElement *config);
         virtual void configureSubscriptions(cXMLElement *config);
         virtual void registerSrpCallbacks(SRPTable *srpTable);
-        virtual void registerTalker(const std::list<IPoREFilter> filters, SRPTable *srpTable);
+        virtual void registerTalker(const std::list<IPoREFilter*> filters, SRPTable *srpTable);
         virtual void registerTalker(const IPoREFilter* filter, SRPTable *srpTable);
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
         virtual void handleMessage(cMessage* msg);
@@ -91,7 +91,7 @@ class IPv4oAVB : public base {
         bool getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters);
 
     protected:
-        std::list<IPoREFilter> m_filterList;
+        std::list<IPoREFilter*> m_filterList;
         std::list<int> m_subscribeList;
         cEnum *m_protocolEnum;
         cEnum *destTypeEnum;
@@ -106,6 +106,6 @@ class IPv4oAVB : public base {
 
 } /* namespace CoRE4INET */
 
-#include "CoRE4INET_IPv4oAVB.impl"
+#include "CoRE4INET_IPv4oAVB.cc"
 
 #endif /* CORE4INET_IPV4RTADAPTER_H_ */

@@ -13,6 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
+#ifndef CORE4INET_IPV4RTADAPTER_CC_
+#define CORE4INET_IPV4RTADAPTER_CC_
+
 //==============================================================================
 
 #include "CoRE4INET_IPv4oAVB.h"
@@ -183,9 +186,9 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::addFilter(const IPoREFilter &filter)
+void IPv4oAVB<base>::addFilter(IPoREFilter *filter)
 {
-    TrafficPattern *tp = filter.getTrafficPattern();
+    TrafficPattern *tp = filter->getTrafficPattern();
     if (!tp->getSrcAddr().isUnspecified() && ((tp->getSrcAddr().isIPv6() && tp->getSrcPrefixLength() > 128) ||
                                             (!tp->getSrcAddr().isIPv6() && tp->getSrcPrefixLength() > 32)))
         throw cRuntimeError("srcPrefixLength is invalid");
@@ -244,8 +247,6 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
             const char *destPortAttr = filterElement->getAttribute("destPort");
             const char *destPortMinAttr = filterElement->getAttribute("destPortMin");
             const char *destPortMaxAttr = filterElement->getAttribute("destPortMax");
-
-
 
 
             if (!this->destTypeEnum) {
@@ -321,7 +322,7 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 IPoREFilter *filter = new IPoREFilter();
                 filter->setDestInfo(avbDestInfo);
                 filter->setTrafficPattern(tp);
-                addFilter(*filter);
+                addFilter(filter);
             }
             
 
@@ -365,12 +366,12 @@ void IPv4oAVB<base>::configureSubscriptions(cXMLElement *config)
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::registerTalker(const std::list<IPoREFilter> filters, SRPTable *srpTable)
+void IPv4oAVB<base>::registerTalker(const std::list<IPoREFilter*> filters, SRPTable *srpTable)
 {
-    typename std::list<IPoREFilter>::const_iterator filter = filters.begin();
+    typename std::list<IPoREFilter*>::const_iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
-        if (filter->getDestInfo()->getDestType() == DestinationType_AVB) {
-            registerTalker(&(*filter), srpTable);
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_AVB) {
+            registerTalker((*filter), srpTable);
         }
     }
 }
@@ -512,10 +513,10 @@ template<class base>
 bool IPv4oAVB<base>::getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters)
 {
     bool foundMatch = false;
-    typename std::list<IPoREFilter>::iterator filter = m_filterList.begin();
+    typename std::list<IPoREFilter*>::iterator filter = m_filterList.begin();
     while(filter != m_filterList.end()) {
-        if (filter->getTrafficPattern()->matches(packet)) {
-            filters.push_back(&(*filter));
+        if ((*filter)->getTrafficPattern()->matches(packet)) {
+            filters.push_back((*filter));
             foundMatch = true;
         }
         ++filter;
@@ -526,3 +527,5 @@ bool IPv4oAVB<base>::getMatchingFilters(cPacket *packet, std::list<IPoREFilter*>
 //==============================================================================
 
 } /* namespace CoRE4INET */
+
+#endif // CORE4INET_IPV4RTADAPTER_CC_

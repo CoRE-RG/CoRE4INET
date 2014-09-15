@@ -31,7 +31,7 @@ TrafficPattern::TrafficPattern()
     destPrefixLength(-1),
     protocol(-1),
     tos(-1),
-    tosMask(-1),
+    tosMask(0),
     srcPortMin(-1),
     srcPortMax(-1),
     destPortMin(-1),
@@ -51,6 +51,7 @@ bool TrafficPattern::matches(const cPacket *packet)
     const IPv4Datagram *datagram = dynamic_cast<const IPv4Datagram*>(packet);
     if (!datagram)
         return false;
+
 
     if (srcPrefixLength > 0 && (srcAddr.isIPv6() || !datagram->getSrcAddress().prefixMatches(srcAddr.get4(), srcPrefixLength)))
         return false;
