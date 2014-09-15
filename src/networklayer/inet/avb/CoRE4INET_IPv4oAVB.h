@@ -32,6 +32,10 @@ namespace CoRE4INET {
 template<class base>
 class IPv4oAVB : public base {
 
+    protected:
+        enum MsgKind { MSGKIND_START = 0xBEEF, MSGKIND_INVALID = 0xDEAD};
+
+
     public:
         IPv4oAVB();
         virtual ~IPv4oAVB();

@@ -71,7 +71,7 @@ void IPv4oAVB<base>::initialize(int stage)
         configureSubscriptions(filters);
         SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
         registerSrpCallbacks(srpTable);
-        base::scheduleAt(simTime(), new cMessage("blablub"));  // TODO: change from "blablub" to STARTMSG or similar
+        base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", MSGKIND_START));
     }
 }
 
@@ -108,7 +108,7 @@ void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 template<class base>
 void IPv4oAVB<base>::handleMessage(cMessage* msg)
 {
-    if (msg->isSelfMessage() && (strcmp(msg->getName(), "blablub") == 0))
+    if (msg->isSelfMessage() && (strcmp(msg->getName(), "IPv4oAVB registerTalker") == 0))
     {
         SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
         registerTalker(this->m_filterList, srpTable);
@@ -234,6 +234,10 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
             const char *destMAC = getRequiredAttribute(filterElement, "destMAC");
             const char *alsoBE = getRequiredAttribute(filterElement, "alsoBE");
             const char *streamId = filterElement->getAttribute("streamId");
+            const char *srClass = filterElement->getAttribute("trafficClass");
+            const char *frameSize = filterElement->getAttribute("frameSize");
+            const char *intFrames = filterElement->getAttribute("intervallFrames");
+            const char *vlanId = filterElement->getAttribute("vlanId");
             const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
             const char *srcPrefixLengthAttr = filterElement->getAttribute("srcPrefixLength");
             const char *destAddrAttr = filterElement->getAttribute("destAddress");
@@ -277,7 +281,10 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 else
                      throw cRuntimeError("destMAC not specified!");
                 avbDestInfo->setStreamId(parseIntAttribute(streamId, "streamId", false));
-                avbDestInfo->setSrClass(SR_CLASS_A); // TODO: make parameter
+                avbDestInfo->setSrClass(SR_CLASS(parseIntAttribute(srClass, "trafficClass", false)));
+                avbDestInfo->setFrameSize(parseIntAttribute(frameSize, "frameSize", false));
+                avbDestInfo->setIntervallFrames(parseIntAttribute(intFrames, "intervallFrames", false));
+                avbDestInfo->setVlanId(parseIntAttribute(vlanId, "vlanId", false));
                 if (alsoBE)
                     avbDestInfo->setAlsoBe(parseIntAttribute(alsoBE, "alsoBE", false) != 0);
 
@@ -359,8 +366,6 @@ void IPv4oAVB<base>::configureSubscriptions(cXMLElement *config)
             throw cRuntimeError("Error in XML <subscribe> element at %s: %s", filterElement->getSourceLocation(), e.what());
         }
     }
-
-    this->filterValid = true; // todo: eigentlich nicht filter
 }
 
 //==============================================================================
@@ -384,9 +389,15 @@ void IPv4oAVB<base>::registerTalker(const IPoREFilter* filter, SRPTable *srpTabl
     if (srpTable)
     {
         EV << "Register Talker in node" << std::endl;
-        // TODO: Class, framesize, intervallframes, vid(?) im filter hinzufügen
         AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
-        srpTable->updateTalkerWithStreamId(avbDestInfo->getStreamId(), this, *(avbDestInfo->getDestMac()), avbDestInfo->getSrClass(), 300, 1);
+        srpTable->updateTalkerWithStreamId(
+                avbDestInfo->getStreamId(),
+                this,
+                *(avbDestInfo->getDestMac()),
+                avbDestInfo->getSrClass(),
+                avbDestInfo->getFrameSize(),
+                avbDestInfo->getIntervallFrames(),
+                avbDestInfo->getVlanId());
     }
     else
     {

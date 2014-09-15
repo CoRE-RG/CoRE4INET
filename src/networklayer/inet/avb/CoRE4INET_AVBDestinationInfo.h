@@ -50,12 +50,26 @@ public:
 
     void setStreamId(uint64_t streamId) { this->streamId = streamId; }
 
+    uint32_t getFrameSize() const { return frameSize; }
+
+    void setFrameSize(uint32_t frameSize) { this->frameSize = frameSize; }
+
+    uint32_t getIntervallFrames() const { return intervallFrames; }
+
+    void setIntervallFrames(uint32_t intervallFrames) { this->intervallFrames = intervallFrames; }
+
+    uint32_t getVlanId() const { return vlanId; }
+
+    void setVlanId(uint32_t vlanId) { this->vlanId = vlanId; }
 
 private:
     AVBIncoming *destModule;
     MACAddress  *destMAC;
     uint64_t    streamId;
     SR_CLASS    srClass;
+    uint32_t    frameSize;
+    uint32_t    intervallFrames;
+    uint32_t    vlanId;
 
 
 };
