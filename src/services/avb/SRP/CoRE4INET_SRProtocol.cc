@@ -58,7 +58,7 @@ void SRProtocol::handleMessage(cMessage *msg)
             SR_CLASS srClass;
             if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSA) srClass = SR_CLASS_A;
             if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSB) srClass = SR_CLASS_B;
-            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, talkerAdvertise->getStreamDA(), srClass,
+            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, talkerAdvertise->getDestination_address(), srClass,
                     talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), talkerAdvertise->getVlan_identifier());
         }
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
@@ -87,7 +87,7 @@ void SRProtocol::handleMessage(cMessage *msg)
 
             if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
             {
-                //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+                //TODO Minor: try to get VLAN.
                 srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, VLAN_ID_DEFAULT);
                 if(!update)
                 {
@@ -120,7 +120,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                 ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
                 etherctrl->setEtherType(MSRP_ETHERTYPE);
                 etherctrl->setDest(SRP_ADDRESS);
-                //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+                //TODO Minor: try to get VLAN.
                 cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
                 if (talker && talker->isName("phy"))
                 {
@@ -136,7 +136,7 @@ void SRProtocol::handleMessage(cMessage *msg)
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);
             etherctrl->setDest(SRP_ADDRESS);
-            //TODO Minor: try to get VLAN. Maybe listenerfailed without VID.
+            //TODO Minor: try to get VLAN.
             cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), VLAN_ID_DEFAULT);
             if (talker && talker->isName("phy"))
             {
@@ -161,10 +161,11 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
 
         TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
-        talkerAdvertise->setStreamDA(tentry->address);
+        //talkerAdvertise->setStreamDA(tentry->address);
         talkerAdvertise->setStreamID(tentry->streamId);
         talkerAdvertise->setMaxFrameSize(tentry->framesize);
         talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
+        talkerAdvertise->setDestination_address(tentry->address);
         talkerAdvertise->setVlan_identifier(tentry->vlan_id);
         if(tentry->srClass == SR_CLASS_A) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
         if(tentry->srClass == SR_CLASS_B) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);

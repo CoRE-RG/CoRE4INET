@@ -31,7 +31,6 @@ packet SRPFrame{
     
     // ID of the AVB Stream
     // 64 Bit Field (48bit MAC + 16bit UniqueID)
-    MACAddress streamDA;
 	unsigned long streamID;
 	
 		
@@ -49,8 +48,8 @@ packet TalkerAdvertise extends SRPFrame{
 	
 	// TSpec => Max frame size and sending interval of an AVB stream
 	// 32 Bit Field
-	unsigned int MaxFrameSize;
-	unsigned int MaxIntervalFrames;
+	unsigned short MaxFrameSize;
+	unsigned short MaxIntervalFrames;
 	
 	
 	// PriorityAndRank => Data Frame Priority: 6 = SRClass A & 5 = SRClass B
