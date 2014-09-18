@@ -46,11 +46,13 @@ void AVBTrafficSourceApp::initialize()
     else                                                    srClass = SR_CLASS_A;
 
     streamID = (unsigned long) par("streamID").longValue();
-    //EtherMACFullDuplex *mac = (EtherMACFullDuplex*)getParentModule()->getSubmodule("phy",0)->getSubmodule("mac");
-    //unsigned long macAdress = mac->getMACAddress().getInt();
-    //static unsigned short uniqueID = 0;
-    //uniqueID++;
-    //streamID = (macAdress << 16) + uniqueID;
+    /*
+    EtherMACFullDuplex *mac = (EtherMACFullDuplex*)getParentModule()->getSubmodule("phy",0)->getSubmodule("mac");
+    unsigned long macAdress = mac->getMACAddress().getInt();
+    static unsigned short uniqueID = 0;
+    uniqueID++;
+    streamID = (macAdress << 16) + uniqueID;
+    */
 
     intervalFrames = (unsigned int) par("intervalFrames").longValue();
     vlan_id = (unsigned short) par("vlan_id").longValue();
@@ -109,6 +111,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     AVBFrame *outFrame = new AVBFrame(name);
     outFrame->setStreamID(streamID);
     outFrame->setDest(multicastMAC);
+    outFrame->setVID(vlan_id);
 
     cPacket *payloadPacket = new cPacket;
     payloadPacket->setByteLength(payload);
@@ -124,9 +127,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
     simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
-//double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-
     event->setTimer((uint64_t) ceil(interval / tick));
     event->setDestinationGate(gate("schedulerIn"));
     getTimer()->registerEvent(event);
@@ -160,7 +161,7 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
         {
             //check whether there are listeners left
             SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
-            if (srpTable->getListenersForStreamId(streamID, 0).size() == 0)
+            if (srpTable->getListenersForStreamId(streamID, vlan_id).size() == 0)
             {
                 isStreaming = false;
                 bubble("Last listener unregistered, stop streaming!");

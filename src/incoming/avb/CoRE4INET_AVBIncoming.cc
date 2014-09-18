@@ -20,8 +20,9 @@
 using namespace std;
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
+#include "AVBFrame_m.h"
 //INET
-#include "EtherFrame_m.h"
+//#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
@@ -33,14 +34,14 @@ AVBIncoming::AVBIncoming() {
 
 void AVBIncoming::handleMessage(cMessage* msg) {
     if (msg->arrivedOn("in")) {
-        EtherFrame *inFrame = check_and_cast<EtherFrame*>(msg);
+        //EtherFrame *inFrame = check_and_cast<EtherFrame*>(msg);
+        AVBFrame *inFrame = check_and_cast<AVBFrame*>(msg);
 
         SRPTable *srptable = check_and_cast<SRPTable*>(
                 getParentModule()->getSubmodule("srpTable"));
-        //TODO: Minor enable VLANs
         std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(
-                inFrame->getDest(), 0);
-        SR_CLASS srClass = srptable->getSrClassForTalkerAddress(inFrame->getDest(), 0);
+                inFrame->getDest(), inFrame->getVID());
+        SR_CLASS srClass = srptable->getSrClassForTalkerAddress(inFrame->getDest(), inFrame->getVID());
         if (listeners.size() == 0) {
             emit(droppedSignal, inFrame);
         } else {

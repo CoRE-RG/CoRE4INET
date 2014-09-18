@@ -31,6 +31,8 @@ const_simtime_t SR_CLASS_A_INTERVAL = 0.000125;
 //Service class B interval is 250us
 const_simtime_t SR_CLASS_B_INTERVAL = 0.000250;
 
+const unsigned short VLAN_ID_DEFAULT = 2;
+
 const unsigned char PRIOANDRANK_SRCLASSA = 0b11010000; //For more details see SRPFrame.msg
 const unsigned char PRIOANDRANK_SRCLASSB = 0b10110000;
 

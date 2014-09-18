@@ -55,17 +55,17 @@ void SRProtocol::handleMessage(cMessage *msg)
 
         if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
         {
-            //TODO Minor: try to get VLAN
             SR_CLASS srClass;
             if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSA) srClass = SR_CLASS_A;
             if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSB) srClass = SR_CLASS_B;
             srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, talkerAdvertise->getStreamDA(), srClass,
-                    talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), 0);
+                    talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), talkerAdvertise->getVlan_identifier());
         }
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
         {
             bool update = false;
-            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), 0);
+            //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
             //Is this a new or updated stream
             if (std::find(listeners.begin(), listeners.end(), port) != listeners.end())
             {
@@ -75,8 +75,8 @@ void SRProtocol::handleMessage(cMessage *msg)
             unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
             //Add Higher Priority Bandwidth
             utilizedBandwidth += port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
-            //TODO Minor: try to get VLAN
-            unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), 0);
+            //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+            unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
 
             cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
             cChannel *outChannel = physOutGate->findTransmissionChannel();
@@ -87,8 +87,8 @@ void SRProtocol::handleMessage(cMessage *msg)
 
             if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
             {
-                //TODO Minor: try to get VLAN
-                srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, 0);
+                //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+                srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, VLAN_ID_DEFAULT);
                 if(!update)
                 {
                     EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
@@ -120,7 +120,8 @@ void SRProtocol::handleMessage(cMessage *msg)
                 ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
                 etherctrl->setEtherType(MSRP_ETHERTYPE);
                 etherctrl->setDest(SRP_ADDRESS);
-                cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), 0);
+                //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+                cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
                 if (talker && talker->isName("phy"))
                 {
                     etherctrl->setSwitchPort(talker->getIndex());
@@ -135,7 +136,8 @@ void SRProtocol::handleMessage(cMessage *msg)
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);
             etherctrl->setDest(SRP_ADDRESS);
-            cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), 0);
+            //TODO Minor: try to get VLAN. Maybe listenerfailed without VID.
+            cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), VLAN_ID_DEFAULT);
             if (talker && talker->isName("phy"))
             {
                 etherctrl->setSwitchPort(talker->getIndex());
@@ -163,6 +165,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         talkerAdvertise->setStreamID(tentry->streamId);
         talkerAdvertise->setMaxFrameSize(tentry->framesize);
         talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
+        talkerAdvertise->setVlan_identifier(tentry->vlan_id);
         if(tentry->srClass == SR_CLASS_A) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
         if(tentry->srClass == SR_CLASS_B) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
 
@@ -187,7 +190,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         //Get Talker Port
         SRPTable *srpTable = (SRPTable *) src;
         //TODO Minor: try to get VLAN
-        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, 0);
+        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, VLAN_ID_DEFAULT);
         //Send listener ready only when talker is not a local application
         if (talker && talker->isName("phy"))
         {

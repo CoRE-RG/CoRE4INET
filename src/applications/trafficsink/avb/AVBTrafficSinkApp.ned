@@ -33,6 +33,8 @@ simple AVBTrafficSinkApp extends TrafficSinkApp
         @display("i=block/sink,blue");
         // ID of the AVB Stream
         int streamID;
+        // VLAN identifier of the AVB Stream
+        int vlan_id = default(2); //Do not Change this! (IN WORK)
         //Interval in which a subscription is updated
         double updateInterval @unit("s") = default(6s);
         //Interval in which a subscription is reregistered after a timeout

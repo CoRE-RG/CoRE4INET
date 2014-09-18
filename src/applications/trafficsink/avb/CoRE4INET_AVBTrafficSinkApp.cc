@@ -27,6 +27,9 @@ Define_Module(AVBTrafficSinkApp);
 void AVBTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
+
+    vlan_id = (unsigned short) par("vlan_id").longValue();
+
     SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (srpTable)
     {
@@ -49,8 +52,7 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
         {
             SRPTable *srpTable = check_and_cast<SRPTable *>(src);
 
-            //TODO Minor: try to get VLAN
-            srpTable->updateListenerWithStreamId(tentry->streamId, this, 0);
+            srpTable->updateListenerWithStreamId(tentry->streamId, this, vlan_id);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
             simtime_t updateInterval = par("updateInterval").doubleValue();
             if (updateInterval != 0)
@@ -82,7 +84,7 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
     if (msg->isSelfMessage())
     {
         SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
-        srpTable->updateListenerWithStreamId((unsigned int) par("streamID").longValue(), this, 0);
+        srpTable->updateListenerWithStreamId((unsigned int) par("streamID").longValue(), this, vlan_id);
         getDisplayString().setTagArg("i2", 0, "status/active");
         simtime_t updateInterval = par("updateInterval").doubleValue();
         if (updateInterval != 0)
