@@ -190,7 +190,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 
         //Get Talker Port
         SRPTable *srpTable = (SRPTable *) src;
-        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
+        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, VLAN_ID_DEFAULT);
         //Send listener ready only when talker is not a local application
         if (talker && talker->isName("phy"))
         {

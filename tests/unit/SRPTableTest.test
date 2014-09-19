@@ -41,7 +41,7 @@ ev << "Ports:{";
 PrintModulelist(ports);
 ev << "}" << std::endl;
 table->updateTalkerWithStreamId(0, &port1, MACAddress("01:02:03:04:05:06"), CoRE4INET::SR_CLASS_A, 500, 1, 0);
-table->updateTalkerWithStreamId(0, &port1, MACAddress("01:02:03:04:05:06"));
+//table->updateTalkerWithStreamId(0, &port1, MACAddress("01:02:03:04:05:06"));
 table->updateTalkerWithStreamId(1, &port2, MACAddress("01:02:03:04:05:07"), CoRE4INET::SR_CLASS_A, 252, 1, 1);
 table->updateTalkerWithStreamId(3, &application1, MACAddress("01:02:03:04:05:08"), CoRE4INET::SR_CLASS_A, 252, 1, 2);
 table->printState();
