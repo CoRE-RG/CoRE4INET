@@ -6,7 +6,7 @@ Test AVBBuffer
 %includes:
 
 #include "CoRE4INET_SRPTable.h"
-#include "CoRE4INET_AVBBuffer.h"
+#include "CoRE4INET_AVBQueueBuffer.h"
 #include "CoRE4INET_AVBDefs.h"
 
 
@@ -24,6 +24,7 @@ simtime-scale = -12
 %global:
 
 #define PrintModulelist(X)  for (std::list<cModule*>::iterator module = X.begin(); module!=X.end();module++){ev<<(*module)->getName()<< " ";}
+#define PrintCredit(x) ev << "Credit = " << x << std::endl
 
 %activity:
 
@@ -32,18 +33,24 @@ port1.setName("port1");
 cSimpleModule port2;
 port2.setName("port2");
 
-cModuleType *moduleTypeBuffer = cModuleType::get("core4inet.services.avb.SRP.SRPTable");
-CoRE4INET::SRPTable *table = (CoRE4INET::SRPTable*)moduleTypeBuffer->create("srpTable", this);
+cModuleType *moduleTypeTable = cModuleType::get("core4inet.services.avb.SRP.SRPTable");
+CoRE4INET::SRPTable *table = (CoRE4INET::SRPTable*)moduleTypeTable->create("srpTable", this);
 table->clear();
 std::list<cModule*> ports = table->getListenersForStreamId(0);
 ev << "Ports:{";
 PrintModulelist(ports);
 ev << "}" << std::endl;
-table->updateTalkerWithStreamId(0, &port1, MACAddress("01:02:03:04:05:06"), CoRE4INET::SR_CLASS_A, 350, 1, 0);
+table->updateTalkerWithStreamId(0, &port1, MACAddress("01:02:03:04:05:06"), CoRE4INET::SR_CLASS_A, 350, 1, 2);
 table->printState();
-table->updateListenerWithStreamId(0, &port2, 0);
+table->updateListenerWithStreamId(0, &port2, 2);
 table->printState();
 ev << "Bandwidth for "<< port2.getName() <<" is " << table->getBandwidthForModule(&port2) << "Bps" << std::endl;
 
-//cModuleType *moduleTypeBuffer = cModuleType::get("core4inet.buffer.avb.AVBBuffer");
-//CoRE4INET::AVBBuffer *buffer = (CoRE4INET::AVBBuffer*)moduleTypeBuffer->create("avbBuffer", this);
+CoRE4INET::AVBQueueBuffer *avbBuffer = new CoRE4INET::AVBQueueBuffer();
+PrintCredit(avbBuffer->getCredit());
+SimTime interval = 1;
+
+//avbBuffer->resetCredit();
+//avbBuffer->idleSlope(interval);
+PrintCredit(avbBuffer->getCredit());
+
