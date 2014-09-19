@@ -26,6 +26,7 @@ simtime-scale = -12
 #define PrintModulelist(X)  for (std::list<cModule*>::iterator module = X.begin(); module!=X.end();module++){ev<<(*module)->getName()<< " ";}
 #define PrintCredit(x) ev << "Credit = " << x << std::endl
 
+
 %activity:
 
 cSimpleModule port1;
