@@ -183,7 +183,7 @@ void AVBBuffer::idleSlope(SimTime duration)
         ("idleSlope()");
         SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
-                getParentModule()->getSubmodule("phy", getIndex()),srClass);
+                getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
         credit += ceil(reservedBandwith * duration.dbl());
         emit(creditSignal, credit);
