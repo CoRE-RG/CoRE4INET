@@ -144,7 +144,7 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, unsigned int vi
 {
     removeAgedEntriesIfNeeded();
 
-//get Talkers for this VLAN
+    //get Talkers for this VLAN
     TalkerTable ttable = talkerTables[vid];
     TalkerEntry *tentry = ttable[streamId];
     return bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames, getIntervalForClass(tentry->srClass));

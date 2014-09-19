@@ -64,7 +64,7 @@ void SRProtocol::handleMessage(cMessage *msg)
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
         {
             bool update = false;
-            //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+            //TODO Minor: try to get VLAN.
             std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
             //Is this a new or updated stream
             if (std::find(listeners.begin(), listeners.end(), port) != listeners.end())
@@ -75,7 +75,7 @@ void SRProtocol::handleMessage(cMessage *msg)
             unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
             //Add Higher Priority Bandwidth
             utilizedBandwidth += port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
-            //TODO Minor: try to get VLAN. Maybe listenerready without VID.
+            //TODO Minor: try to get VLAN.
             unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
 
             cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
@@ -190,8 +190,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 
         //Get Talker Port
         SRPTable *srpTable = (SRPTable *) src;
-        //TODO Minor: try to get VLAN
-        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, VLAN_ID_DEFAULT);
+        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
         //Send listener ready only when talker is not a local application
         if (talker && talker->isName("phy"))
         {

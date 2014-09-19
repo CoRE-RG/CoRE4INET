@@ -53,8 +53,8 @@ class SRPTable : public cSimpleModule
                 SR_CLASS srClass;               // Stream Reservation Class
                 MACAddress address;             // The talkers address
                 cModule *module;                // Input port or module
-                unsigned int framesize;         // framesize in byte
-                unsigned int intervalFrames;    // interval frames
+                unsigned short framesize;         // framesize in byte
+                unsigned short intervalFrames;    // interval frames
                 unsigned short vlan_id;         // VLAN identifier
                 simtime_t insertionTime;        // Arrival time of SRP entry
                 TalkerEntry()
@@ -67,7 +67,7 @@ class SRPTable : public cSimpleModule
                     vlan_id = VLAN_ID_DEFAULT;
                 }
                 TalkerEntry(uint64_t streamId, SR_CLASS srClass, MACAddress address, cModule *module,
-                        unsigned int framesize, unsigned int intervalFrames, unsigned short vlan_id, simtime_t insertionTime) :
+                        unsigned short framesize, unsigned short intervalFrames, unsigned short vlan_id, simtime_t insertionTime) :
                         streamId(streamId), srClass(srClass), address(address), module(module), framesize(framesize), intervalFrames(
                                 intervalFrames), vlan_id(vlan_id),insertionTime(insertionTime)
                 {
@@ -82,17 +82,15 @@ class SRPTable : public cSimpleModule
         {
             public:
                 uint64_t streamId;
-                unsigned short vlan_id;     // VLAN identifier
                 cModule *module;            // Listener port or module
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 ListenerEntry()
                 {
                     streamId = 0;
-                    vlan_id = VLAN_ID_DEFAULT;
                     module = NULL;
                 }
                 ListenerEntry(uint64_t streamId, unsigned short vlan_id, cModule *module, simtime_t insertionTime) :
-                        streamId(streamId), vlan_id(vlan_id), module(module), insertionTime(insertionTime)
+                        streamId(streamId), module(module), insertionTime(insertionTime)
                 {
                 }
         };
