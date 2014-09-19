@@ -45,5 +45,5 @@ table->updateListenerWithStreamId(0, &port2, 0);
 table->printState();
 ev << "Bandwidth for "<< port2.getName() <<" is " << table->getBandwidthForModule(&port2) << "Bps" << std::endl;
 
-cModuleType *moduleTypeBuffer = cModuleType::get("core4inet.buffer.avb.AVBBuffer");
-CoRE4INET::AVBBuffer *buffer = (CoRE4INET::AVBBuffer*)moduleTypeBuffer->create("avbBuffer", this);
+//cModuleType *moduleTypeBuffer = cModuleType::get("core4inet.buffer.avb.AVBBuffer");
+//CoRE4INET::AVBBuffer *buffer = (CoRE4INET::AVBBuffer*)moduleTypeBuffer->create("avbBuffer", this);
