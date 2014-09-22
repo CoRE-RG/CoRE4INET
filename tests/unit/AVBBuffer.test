@@ -47,11 +47,23 @@ table->updateListenerWithStreamId(0, &port2, 2);
 table->printState();
 ev << "Bandwidth for "<< port2.getName() <<" is " << table->getBandwidthForModule(&port2) << "Bps" << std::endl;
 
-CoRE4INET::AVBQueueBuffer *avbBuffer = new CoRE4INET::AVBQueueBuffer();
+cModuleType *moduleTypeBuffer = cModuleType::get("core4inet.buffer.avb.AVBQueueBuffer");
+CoRE4INET::AVBQueueBuffer *avbBuffer = dynamic_cast<CoRE4INET::AVBQueueBuffer*>(moduleTypeBuffer->create("avbBuffer", this));
+avbBuffer->resetCredit();
+ev << "Init:" << std::endl;
 PrintCredit(avbBuffer->getCredit());
-SimTime interval = 1;
+SimTime interval = 0.000125;
 
-//avbBuffer->resetCredit();
-//avbBuffer->idleSlope(interval);
+ev << "IdleSlope:" << std::endl;
+avbBuffer->idleSlope(interval);
 PrintCredit(avbBuffer->getCredit());
+
+ev << "InterferenzSlope:" << std::endl;
+avbBuffer->interferenceSlope(interval);
+PrintCredit(avbBuffer->getCredit());
+
+//ev << "SendSlope:" << std::endl;
+//avbBuffer->sendSlope(interval);
+//PrintCredit(avbBuffer->getCredit());
+
 
