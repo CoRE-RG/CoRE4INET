@@ -25,5 +25,5 @@ simple IPv4oRE extends IPv4 {
         xml filters = default(xmldoc("filters.xml"));
     gates:
         input AVBin;
-        input ctIn;
+        input RCIn;
 }
