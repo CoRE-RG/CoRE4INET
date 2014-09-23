@@ -13,8 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef CORE4INET_IPV4RTADAPTER_CC_
-#define CORE4INET_IPV4RTADAPTER_CC_
+//==============================================================================
+
+#ifndef CORE4INET_IPV4OAVB_CC_
+#define CORE4INET_IPV4OAVB_CC_
 
 //==============================================================================
 
@@ -181,40 +183,6 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
     {
         base::receiveSignal(src, id, obj);
     }
-}
-
-//==============================================================================
-
-template<class base>
-void IPv4oAVB<base>::addFilter(IPoREFilter *filter)
-{
-    TrafficPattern *tp = filter->getTrafficPattern();
-    if (!tp->getSrcAddr().isUnspecified() && ((tp->getSrcAddr().isIPv6() && tp->getSrcPrefixLength() > 128) ||
-                                            (!tp->getSrcAddr().isIPv6() && tp->getSrcPrefixLength() > 32)))
-        throw cRuntimeError("srcPrefixLength is invalid");
-    if (!tp->getDestAddr().isUnspecified() && ((tp->getDestAddr().isIPv6() && tp->getDestPrefixLength() > 128) ||
-                                             (!tp->getDestAddr().isIPv6() && tp->getDestPrefixLength() > 32)))
-        throw cRuntimeError("srcPrefixLength is invalid");
-    if (tp->getProtocol() != -1 && (tp->getProtocol() < 0 || tp->getProtocol() > 0xff))
-        throw cRuntimeError("protocol is not a valid protocol number");
-    if (tp->getTos() != -1 && (tp->getTos() < 0 || tp->getTos() > 0xff))
-        throw cRuntimeError("tos is not valid");
-    if (tp->getTosMask() < 0 || tp->getTosMask() > 0xff)
-        throw cRuntimeError("tosMask is not valid");
-    if (tp->getSrcPortMin() != -1 && (tp->getSrcPortMin() < 0 || tp->getSrcPortMin() > 0xffff))
-        throw cRuntimeError("srcPortMin is not a valid port number");
-    if (tp->getSrcPortMax() != -1 && (tp->getSrcPortMax() < 0 || tp->getSrcPortMax() > 0xffff))
-        throw cRuntimeError("srcPortMax is not a valid port number");
-    if (tp->getSrcPortMin() != -1 && tp->getSrcPortMin() > tp->getSrcPortMax())
-        throw cRuntimeError("srcPortMin > srcPortMax");
-    if (tp->getDestPortMin() != -1 && (tp->getDestPortMin() < 0 || tp->getDestPortMin() > 0xffff))
-        throw cRuntimeError("destPortMin is not a valid port number");
-    if (tp->getDestPortMax() != -1 && (tp->getDestPortMax() < 0 || tp->getDestPortMax() > 0xffff))
-        throw cRuntimeError("destPortMax is not a valid port number");
-    if (tp->getDestPortMin() != -1 && tp->getDestPortMin() > tp->getDestPortMax())
-        throw cRuntimeError("destPortMin > destPortMax");
-
-    m_filterList.push_back(filter);
 }
 
 //==============================================================================
@@ -459,84 +427,9 @@ void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, con
 
 //==============================================================================
 
-template<class base>
-const char *IPv4oAVB<base>::getRequiredAttribute(cXMLElement *element, const char *attrName)
-{
-    const char *attrValue = element->getAttribute(attrName);
-    if (!attrValue)
-        throw cRuntimeError("missing attribute '%s' from <%s> element", attrName, element->getTagName());
-    return attrValue;
-}
-
-//==============================================================================
-
-template<class base>
-int IPv4oAVB<base>::parseIntAttribute(const char *attrValue, const char *attrName, bool isOptional)
-{
-    if (isEmpty(attrValue))
-    {
-        if (isOptional)
-            return -1;
-        else
-            throw cRuntimeError("missing %s attribute", attrName);
-    }
-
-    unsigned long num;
-    char *endp;
-    if (*attrValue == '0' && *(attrValue+1) == 'b') // 0b prefix for binary
-        num = strtoul(attrValue+2, &endp, 2);
-    else
-        num = strtoul(attrValue, &endp, 0); // will handle hex/octal/decimal
-
-    if (*endp != '\0')
-        throw cRuntimeError("malformed %s attribute: %s", attrName, attrValue);
-
-    if (num > INT_MAX)
-        throw cRuntimeError("attribute %s is too large: %s", attrName, attrValue);
-
-    return (int)num;
-}
-
-//==============================================================================
-
-template<class base>
-int IPv4oAVB<base>::parseProtocol(const char *attrValue, const char *attrName)
-{
-    if (isEmpty(attrValue))
-        return -1;
-    if (isdigit(*attrValue))
-        return parseIntAttribute(attrValue, attrName);
-    if (!m_protocolEnum)
-        m_protocolEnum = cEnum::get("IPProtocolId");
-    char name[20];
-    strcpy(name, "IP_PROT_");
-    char *dest;
-    for (dest = name+8; *attrValue; ++dest, ++attrValue)
-        *dest = toupper(*attrValue);
-    *dest = '\0';
-
-    return m_protocolEnum->lookup(name);
-}
-
-//==============================================================================
-
-template<class base>
-bool IPv4oAVB<base>::getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters)
-{
-    bool foundMatch = false;
-    typename std::list<IPoREFilter*>::iterator filter = m_filterList.begin();
-    while(filter != m_filterList.end()) {
-        if ((*filter)->getTrafficPattern()->matches(packet)) {
-            filters.push_back((*filter));
-            foundMatch = true;
-        }
-        ++filter;
-    }
-    return foundMatch;
-}
-
-//==============================================================================
-
 } /* namespace CoRE4INET */
 
-#endif // CORE4INET_IPV4RTADAPTER_CC_
+//==============================================================================
+
+#endif // CORE4INET_IPV4OAVB_CC_
+
