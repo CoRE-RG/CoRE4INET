@@ -146,12 +146,12 @@ int IPv4oREBase::parseProtocol(const char *attrValue, const char *attrName)
 
 //==============================================================================
 
-bool IPv4oREBase::getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters)
+bool IPv4oREBase::getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters, DestinationType dt)
 {
     bool foundMatch = false;
     typename std::list<IPoREFilter*>::iterator filter = m_filterList.begin();
     while(filter != m_filterList.end()) {
-        if ((*filter)->getTrafficPattern()->matches(packet)) {
+        if ((*filter)->getTrafficPattern()->matches(packet)  &&  ((*filter)->getDestInfo()->getDestType() == dt)) {
             filters.push_back((*filter));
             foundMatch = true;
         }

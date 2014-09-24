@@ -55,7 +55,7 @@ class IPv4oAVB : public base {
          * Encapsulates packet in Ethernet II frame and sends to each destination buffers.
          * Destination MAC address and destination buffer is taken from filter.
          */
-        virtual int sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
+        virtual void sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
 
         /**
          * Encapsulates packet in AVB Frame and sends to destination AVB Buffer.

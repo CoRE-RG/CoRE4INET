@@ -94,11 +94,11 @@ void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
     // Check for matching filters
     bool filterMatch = true;
     std::list<IPoREFilter*> matchingFilters;
-    filterMatch = base::getMatchingFilters(packet, matchingFilters);
+    filterMatch = base::getMatchingFilters(packet, matchingFilters, DestinationType_AVB);
 
     // send to corresponding modules
     if(filterMatch) {
-        IPv4oAVB<base>::sendPacketToBuffers(packet->dup(), ie, matchingFilters);
+        IPv4oAVB<base>::sendPacketToBuffers(packet, ie, matchingFilters);
     } else {
         base::sendPacketToNIC(packet, ie);
     }
@@ -211,7 +211,6 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
 
                 const char *destModule = base::getRequiredAttribute(filterElement, "destModule");
                 const char *destMAC = base::getRequiredAttribute(filterElement, "destMAC");
-                const char *alsoBE = base::getRequiredAttribute(filterElement, "alsoBE");
                 const char *streamId = filterElement->getAttribute("streamId");
                 const char *srClass = filterElement->getAttribute("trafficClass");
                 const char *frameSize = filterElement->getAttribute("frameSize");
@@ -256,8 +255,6 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 avbDestInfo->setFrameSize(base::parseIntAttribute(frameSize, "frameSize", false));
                 avbDestInfo->setIntervallFrames(base::parseIntAttribute(intFrames, "intervallFrames", false));
                 avbDestInfo->setVlanId(base::parseIntAttribute(vlanId, "vlanId", false));
-                if (alsoBE)
-                    avbDestInfo->setAlsoBe(base::parseIntAttribute(alsoBE, "alsoBE", false) != 0);
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -378,34 +375,20 @@ void IPv4oAVB<base>::registerTalker(const IPoREFilter* filter, SRPTable *srpTabl
 //==============================================================================
 
 template<class base>
-int IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
-    int matchingFilters = 0;
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
-        switch ((*filter)->getDestInfo()->getDestType()) {
-        case DestinationType_AVB:
-            {
-                sendAVBFrame(packet->dup(), ie, (*filter));
-                matchingFilters++;
-                break;
-            }
-        default:
-            {
-                break;
-            }
-        }
-        if ((*filter)->getDestInfo()->isAlsoBe()) {
-            base::sendPacketToNIC(packet->dup(), ie);
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_AVB) {
+            sendAVBFrame(packet->dup(), ie, (*filter));
+            break;
         }
     }
 
     delete packet;
-
-    return matchingFilters;
 }
 
 //==============================================================================

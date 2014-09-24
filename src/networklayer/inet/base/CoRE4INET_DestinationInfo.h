@@ -30,15 +30,12 @@ public:
 
 
 public:
-    bool isAlsoBe() const { return alsoBE; }
-    void setAlsoBe(bool alsoBe) { alsoBE = alsoBe; }
     DestinationType getDestType() const { return destType; }
     void setDestType(DestinationType destType) { this->destType = destType; }
     
 
 private:
     DestinationType destType;
-    bool alsoBE;
 
 };
 

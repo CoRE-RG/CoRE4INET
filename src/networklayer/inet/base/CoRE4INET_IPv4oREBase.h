@@ -68,7 +68,7 @@ class IPv4oREBase : public IPv4 {
          * Gets matching filters for given packet.
          * Multiple filters can be returned in case of multiple matching filters.
          */
-        bool getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters);
+        bool getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters, DestinationType dt);
 
     protected:
         std::list<IPoREFilter*> m_filterList;

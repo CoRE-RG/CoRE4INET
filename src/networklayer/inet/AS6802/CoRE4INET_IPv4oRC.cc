@@ -74,15 +74,11 @@ void IPv4oRC<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
     // Check for matching filters
     bool filterMatch = true;
     std::list<IPoREFilter*> matchingFilters;
-    filterMatch = Base::getMatchingFilters(packet, matchingFilters);
+    filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_RC);
 
     // send to corresponding modules
     if(filterMatch) {
-        int actualMatchingFilters =  IPv4oRC<Base>::sendPacketToBuffers(packet->dup(), ie, matchingFilters);
-        if (actualMatchingFilters < int(Base::m_filterList.size()))
-            Base::sendPacketToNIC(packet, ie);
-        else
-            delete packet;
+        IPv4oRC<Base>::sendPacketToBuffers(packet, ie, matchingFilters);
     } else {
         Base::sendPacketToNIC(packet, ie);
     }
@@ -115,7 +111,6 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                 // Destination Info
                 const char *destModules = Base::getRequiredAttribute(filterElement, "destModules");
                 const char *ctId = Base::getRequiredAttribute(filterElement, "ctId");
-                const char *alsoBE = Base::getRequiredAttribute(filterElement, "alsoBE");
 
                 // Traffic Pattern
                 const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
@@ -155,8 +150,6 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                 }
                 rcDestInfo->setDestModules(destCtBuffers);
                 rcDestInfo->setCtId(Base::parseIntAttribute(ctId, "ctId", false));
-                if (alsoBE)
-                    rcDestInfo->setAlsoBe(Base::parseIntAttribute(alsoBE, "alsoBE", false) != 0);
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -245,26 +238,20 @@ void IPv4oRC<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-int IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+void IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
-    int numMatchingFilters = 0;
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
         if ((*filter)->getDestInfo()->getDestType() == DestinationType_RC) {
             sendRCFrame(packet->dup(), ie, (*filter));
-            numMatchingFilters++;
-        }
-        if ((*filter)->getDestInfo()->isAlsoBe()) {
-            Base::sendPacketToNIC(packet->dup(), ie);
         }
     }
 
     delete packet;
 
-    return numMatchingFilters;
 }
 
 //==============================================================================
