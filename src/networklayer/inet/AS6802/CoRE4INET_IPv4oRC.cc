@@ -79,7 +79,7 @@ void IPv4oRC<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
     // send to corresponding modules
     if(filterMatch) {
         int actualMatchingFilters =  IPv4oRC<Base>::sendPacketToBuffers(packet->dup(), ie, matchingFilters);
-        if (0 == actualMatchingFilters)
+        if (actualMatchingFilters < int(Base::m_filterList.size()))
             Base::sendPacketToNIC(packet, ie);
         else
             delete packet;
@@ -219,15 +219,21 @@ void IPv4oRC<Base>::handleMessage(cMessage* msg)
 {
     if (dynamic_cast<RCFrame*>(msg)) {
         RCFrame* rcFrame = dynamic_cast<RCFrame*>(msg);
-        cPacket* ipPacket = rcFrame->decapsulate();
 
+        //Reset Bag
+        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
+        if (rcBuffer)
+            rcBuffer->resetBag();
+
+        // decapsulate and send up
+        cPacket* ipPacket = rcFrame->decapsulate();
         Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
         etherctrl->setSrc(rcFrame->getSrc());
         etherctrl->setDest(rcFrame->getDest());
         etherctrl->setEtherType(rcFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
 
-        ipPacket->setArrival(this, Base::gate("RCin")->getId());
+        ipPacket->setArrival(this, Base::gate("RCIn")->getId());
 
         Base::handleMessage(ipPacket);
     }
