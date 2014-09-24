@@ -26,6 +26,9 @@ namespace CoRE4INET {
 RCBuffer::RCBuffer()
 {
     bagExpired = true;
+    lastSent = 0;
+    bag = 0;
+    jitter = 0;
 }
 
 RCBuffer::~RCBuffer()
@@ -91,6 +94,7 @@ void RCBuffer::handleMessage(cMessage *msg)
                     sendDirect(outgoingMessage->dup(), *gate);
                 }
                 recordPacketSent(outgoingMessage);
+                lastSent = timer->getTotalTicks();
                 delete outgoingMessage;
             }
             else
@@ -110,6 +114,8 @@ void RCBuffer::handleMessage(cMessage *msg)
 void RCBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
+    bag = (uint64_t) par("bag").longValue();
+    jitter = (uint64_t) par("jitter").longValue();
 }
 
 void RCBuffer::resetBag()
@@ -126,9 +132,22 @@ void RCBuffer::resetBag()
     numReset++;
     if (numReset == destinationGates.size())
     {
+        //Jitter calculations: fo frame delay
+        uint64_t delay = timer->getTotalTicks()-lastSent;
+        //If last frame was delayed more than jitter parameter set delay to jitter
+        if(delay>jitter){
+            delay = jitter;
+        }
+
         //Register scheduler
         SchedulerTimerEvent *timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
-        timerMessage->setTimer((uint64_t) par("bag").longValue());
+        //Subtract delay from bag to allow frames to keep up their bandwidth
+        if(bag<delay){
+            timerMessage->setTimer(0);
+        }
+        else{
+            timerMessage->setTimer(bag-delay);
+        }
         timerMessage->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(timerMessage);
     }
