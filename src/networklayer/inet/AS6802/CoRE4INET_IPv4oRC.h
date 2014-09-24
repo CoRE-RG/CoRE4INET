@@ -51,7 +51,7 @@ public:
     /**
      * Encapsulates packet in RC frame and sends to each destination buffers.
      */
-    virtual void sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
+    virtual int sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
 
     /**
      * Encapsulates packet in RC Frame and sends to destination Buffers.

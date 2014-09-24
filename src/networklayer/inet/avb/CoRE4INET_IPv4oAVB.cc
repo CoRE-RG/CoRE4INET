@@ -68,10 +68,10 @@ void IPv4oAVB<base>::initialize(int stage)
     if (stage==0)
     {
         cXMLElement *filters = base::par("filters").xmlValue();
-        configureFilters(filters);
-        configureSubscriptions(filters);
+        IPv4oAVB<base>::configureFilters(filters);
+        IPv4oAVB<base>::configureSubscriptions(filters);
         SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
-        registerSrpCallbacks(srpTable);
+        IPv4oAVB<base>::registerSrpCallbacks(srpTable);
         base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", MSGKIND_START));
     }
 }
@@ -98,7 +98,11 @@ void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 
     // send to corresponding modules
     if(filterMatch) {
-        sendPacketToBuffers(packet, ie, matchingFilters);
+        int actualMatchingFilters = IPv4oAVB<base>::sendPacketToBuffers(packet->dup(), ie, matchingFilters);
+        if (0 == actualMatchingFilters)
+            base::sendPacketToNIC(packet, ie);
+        else
+            delete packet;
     } else {
         base::sendPacketToNIC(packet, ie);
     }
@@ -378,17 +382,19 @@ void IPv4oAVB<base>::registerTalker(const IPoREFilter* filter, SRPTable *srpTabl
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+int IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
+    int matchingFilters = 0;
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
         switch ((*filter)->getDestInfo()->getDestType()) {
         case DestinationType_AVB:
             {
                 sendAVBFrame(packet->dup(), ie, (*filter));
+                matchingFilters++;
                 break;
             }
         default:
@@ -402,6 +408,8 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *
     }
 
     delete packet;
+
+    return matchingFilters;
 }
 
 //==============================================================================

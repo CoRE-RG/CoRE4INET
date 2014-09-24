@@ -19,6 +19,6 @@ namespace CoRE4INET {
 
 Define_Module(AVB_IPv4);
 
-//Define_Module(RC_AVB_IPv4);
+Define_Module(RC_AVB_IPv4);
 
 } /* namespace CoRE4INET */

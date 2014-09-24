@@ -62,7 +62,7 @@ void IPv4oRC<Base>::initialize(int stage)
     if (stage == 0)
     {
         cXMLElement *filters = Base::par("filters").xmlValue();
-        configureFilters(filters);
+        IPv4oRC<Base>::configureFilters(filters);
     }
 }
 
@@ -78,7 +78,11 @@ void IPv4oRC<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 
     // send to corresponding modules
     if(filterMatch) {
-        sendPacketToBuffers(packet, ie, matchingFilters);
+        int actualMatchingFilters =  IPv4oRC<Base>::sendPacketToBuffers(packet->dup(), ie, matchingFilters);
+        if (0 == actualMatchingFilters)
+            Base::sendPacketToNIC(packet, ie);
+        else
+            delete packet;
     } else {
         Base::sendPacketToNIC(packet, ie);
     }
@@ -235,15 +239,17 @@ void IPv4oRC<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+int IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
+    int numMatchingFilters = 0;
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
         if ((*filter)->getDestInfo()->getDestType() == DestinationType_RC) {
             sendRCFrame(packet->dup(), ie, (*filter));
+            numMatchingFilters++;
         }
         if ((*filter)->getDestInfo()->isAlsoBe()) {
             Base::sendPacketToNIC(packet->dup(), ie);
@@ -251,6 +257,8 @@ void IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *i
     }
 
     delete packet;
+
+    return numMatchingFilters;
 }
 
 //==============================================================================

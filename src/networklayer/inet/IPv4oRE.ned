@@ -21,7 +21,7 @@ import inet.networklayer.ipv4.IPv4;
 simple IPv4oRE extends IPv4 {
     
     parameters:
-        @class("AVB_IPv4");
+        @class("RC_AVB_IPv4");
         xml filters = default(xmldoc("filters.xml"));
     gates:
         input AVBin;

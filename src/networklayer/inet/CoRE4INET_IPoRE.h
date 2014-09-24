@@ -25,9 +25,9 @@ class AVB_IPv4 : public IPv4oAVB<IPv4oREBase>
 {
 };
 
-//class RC_AVB_IPv4 : public IPv4oRC<AVB_IPv4>
-//{
-//};
+class RC_AVB_IPv4 : public IPv4oRC<AVB_IPv4>
+{
+};
 
 } /* namespace CoRE4INET */
 
