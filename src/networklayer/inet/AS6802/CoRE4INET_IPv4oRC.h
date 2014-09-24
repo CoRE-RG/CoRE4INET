@@ -35,7 +35,7 @@ namespace CoRE4INET {
 //==============================================================================
 
 template<class Base>
-class IPv4oRC : public IPv4oREBase, public Base {
+class IPv4oRC : public Base {
 
 
 public:
@@ -57,12 +57,6 @@ public:
      * Encapsulates packet in RC Frame and sends to destination Buffers.
      */
     void sendRCFrame(cPacket* packet, const InterfaceEntry* ie, const IPoREFilter* filter);
-
-
-private:
-
-    bool        filterValid;  ///< true if traffic filters are valid
-    cEnum       destTypeEnum; ///< enumeration of filter destination types
 
 
 };

@@ -22,7 +22,7 @@
 
 //==============================================================================
 
-#include "CoRE4INET_CTBuffer.h"
+#include "CoRE4INET_RCBuffer.h"
 
 //==============================================================================
 
@@ -41,12 +41,12 @@ public:
 public:
     uint16_t getCtId() const { return ctId; }
     void setCtId(uint16_t ctId) { this->ctId = ctId; }
-    std::list<CTBuffer*>& getDestModules() { return destModules; }
-    void setDestModules(std::list<CTBuffer*>& destModules) { this->destModules = destModules; }
+    std::list<RCBuffer*>& getDestModules() { return destModules; }
+    void setDestModules(std::list<RCBuffer*>& destModules) { this->destModules = destModules; }
 
 
 private:
-    std::list<CTBuffer*> destModules;
+    std::list<RCBuffer*> destModules;
     uint16_t             ctId;
 
 };

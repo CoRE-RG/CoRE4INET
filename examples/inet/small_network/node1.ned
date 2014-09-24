@@ -13,22 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef CORE4INET_IPORE_H_
-#define CORE4INET_IPORE_H_
+package core4inet.examples.inet.small_network;
 
-#include "CoRE4INET_IPv4oAVB.h"
-#include "CoRE4INET_IPv4oRC.h"
 
-namespace CoRE4INET {
+import core4inet.nodes.inet.RTIPHost;
+import core4inet.buffer.AS6802.RCDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
 
-class AVB_IPv4 : public IPv4oAVB<IPv4oREBase>
+module Node1 extends RTIPHost
 {
-};
+    submodules:
+        vl_100_ctc: RCIncoming {
+            parameters:
+                @display("p=350,100");
 
-//class RC_AVB_IPv4 : public IPv4oRC<AVB_IPv4>
-//{
-//};
-
-} /* namespace CoRE4INET */
-
-#endif /* CORE4INET_IPORE_H_ */
+        }
+        vl_100: RCDoubleBuffer {
+            parameters:
+                @display("p=440,100");
+        }
+    connections:
+        vl_100_ctc.out --> vl_100.in;
+}

@@ -30,7 +30,7 @@
 namespace CoRE4INET {
 
 template<class base>
-class IPv4oAVB : public base, public IPv4oREBase {
+class IPv4oAVB : public base {
 
     protected:
         enum MsgKind { MSGKIND_START = 0xBEEF };
@@ -65,8 +65,6 @@ class IPv4oAVB : public base, public IPv4oREBase {
 
     protected:
         std::list<int> m_subscribeList;
-        cEnum *destTypeEnum;
-        bool filterValid;
 };
 
 

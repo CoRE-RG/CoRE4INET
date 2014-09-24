@@ -27,13 +27,13 @@
 
 namespace CoRE4INET {
 
-class IPv4oREBase {
+class IPv4oREBase : public IPv4 {
 
     public:
         IPv4oREBase();
         virtual ~IPv4oREBase();
 
-    protected:
+    public:
 
         /**
          * Adds the filter to the internal filter list if filter is valid.

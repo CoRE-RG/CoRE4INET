@@ -49,7 +49,6 @@ template<class base>
 IPv4oAVB<base>::IPv4oAVB()
 {
     // TODO Auto-generated constructor stub
-    this->filterValid = false;
 }
 
 //==============================================================================
@@ -66,7 +65,7 @@ template<class base>
 void IPv4oAVB<base>::initialize(int stage)
 {
     base::initialize(stage);
-    if (!this->filterValid)
+    if (stage==0)
     {
         cXMLElement *filters = base::par("filters").xmlValue();
         configureFilters(filters);
@@ -95,7 +94,7 @@ void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
     // Check for matching filters
     bool filterMatch = true;
     std::list<IPoREFilter*> matchingFilters;
-    filterMatch = getMatchingFilters(packet, matchingFilters);
+    filterMatch = base::getMatchingFilters(packet, matchingFilters);
 
     // send to corresponding modules
     if(filterMatch) {
@@ -197,37 +196,41 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
         cXMLElement *filterElement = filterElements[i];
         try
         {
-            const char *destType = getRequiredAttribute(filterElement, "destType");
-            const char *destModule = getRequiredAttribute(filterElement, "destModule");
-            const char *destMAC = getRequiredAttribute(filterElement, "destMAC");
-            const char *alsoBE = getRequiredAttribute(filterElement, "alsoBE");
-            const char *streamId = filterElement->getAttribute("streamId");
-            const char *srClass = filterElement->getAttribute("trafficClass");
-            const char *frameSize = filterElement->getAttribute("frameSize");
-            const char *intFrames = filterElement->getAttribute("intervallFrames");
-            const char *vlanId = filterElement->getAttribute("vlanId");
-            const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
-            const char *srcPrefixLengthAttr = filterElement->getAttribute("srcPrefixLength");
-            const char *destAddrAttr = filterElement->getAttribute("destAddress");
-            const char *destPrefixLengthAttr = filterElement->getAttribute("destPrefixLength");
-            const char *protocolAttr = filterElement->getAttribute("protocol");
-            const char *tosAttr = filterElement->getAttribute("tos");
-            const char *tosMaskAttr = filterElement->getAttribute("tosMask");
-            const char *srcPortAttr = filterElement->getAttribute("srcPort");
-            const char *srcPortMinAttr = filterElement->getAttribute("srcPortMin");
-            const char *srcPortMaxAttr = filterElement->getAttribute("srcPortMax");
-            const char *destPortAttr = filterElement->getAttribute("destPort");
-            const char *destPortMinAttr = filterElement->getAttribute("destPortMin");
-            const char *destPortMaxAttr = filterElement->getAttribute("destPortMax");
+            const char *destType = base::getRequiredAttribute(filterElement, "destType");
 
 
-            if (!this->destTypeEnum) {
-                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
-            }
-
-            DestinationType dt = DestinationType(this->destTypeEnum->lookup(destType));
+//            if (!this->destTypeEnum) {
+//                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
+//            }
+//
+//            DestinationType dt = DestinationType(this->destTypeEnum->lookup(destType));
+            cEnum *destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
+            DestinationType dt = DestinationType(destTypeEnum->lookup(destType));
 
             if (dt == DestinationType_AVB) {
+
+                const char *destModule = base::getRequiredAttribute(filterElement, "destModule");
+                const char *destMAC = base::getRequiredAttribute(filterElement, "destMAC");
+                const char *alsoBE = base::getRequiredAttribute(filterElement, "alsoBE");
+                const char *streamId = filterElement->getAttribute("streamId");
+                const char *srClass = filterElement->getAttribute("trafficClass");
+                const char *frameSize = filterElement->getAttribute("frameSize");
+                const char *intFrames = filterElement->getAttribute("intervallFrames");
+                const char *vlanId = filterElement->getAttribute("vlanId");
+                const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
+                const char *srcPrefixLengthAttr = filterElement->getAttribute("srcPrefixLength");
+                const char *destAddrAttr = filterElement->getAttribute("destAddress");
+                const char *destPrefixLengthAttr = filterElement->getAttribute("destPrefixLength");
+                const char *protocolAttr = filterElement->getAttribute("protocol");
+                const char *tosAttr = filterElement->getAttribute("tos");
+                const char *tosMaskAttr = filterElement->getAttribute("tosMask");
+                const char *srcPortAttr = filterElement->getAttribute("srcPort");
+                const char *srcPortMinAttr = filterElement->getAttribute("srcPortMin");
+                const char *srcPortMaxAttr = filterElement->getAttribute("srcPortMax");
+                const char *destPortAttr = filterElement->getAttribute("destPort");
+                const char *destPortMinAttr = filterElement->getAttribute("destPortMin");
+                const char *destPortMaxAttr = filterElement->getAttribute("destPortMax");
+
                 // Fill destination info
                 AVBDestinationInfo *avbDestInfo = new AVBDestinationInfo();
                 avbDestInfo->setDestType(DestinationType_AVB);
@@ -248,56 +251,56 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                     avbDestInfo->setDestMac(new MACAddress(destMAC));
                 else
                      throw cRuntimeError("destMAC not specified!");
-                avbDestInfo->setStreamId(parseIntAttribute(streamId, "streamId", false));
-                avbDestInfo->setSrClass(SR_CLASS(parseIntAttribute(srClass, "trafficClass", false)));
-                avbDestInfo->setFrameSize(parseIntAttribute(frameSize, "frameSize", false));
-                avbDestInfo->setIntervallFrames(parseIntAttribute(intFrames, "intervallFrames", false));
-                avbDestInfo->setVlanId(parseIntAttribute(vlanId, "vlanId", false));
+                avbDestInfo->setStreamId(base::parseIntAttribute(streamId, "streamId", false));
+                avbDestInfo->setSrClass(SR_CLASS(base::parseIntAttribute(srClass, "trafficClass", false)));
+                avbDestInfo->setFrameSize(base::parseIntAttribute(frameSize, "frameSize", false));
+                avbDestInfo->setIntervallFrames(base::parseIntAttribute(intFrames, "intervallFrames", false));
+                avbDestInfo->setVlanId(base::parseIntAttribute(vlanId, "vlanId", false));
                 if (alsoBE)
-                    avbDestInfo->setAlsoBe(parseIntAttribute(alsoBE, "alsoBE", false) != 0);
+                    avbDestInfo->setAlsoBe(base::parseIntAttribute(alsoBE, "alsoBE", false) != 0);
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
                 if (srcAddrAttr)
                     tp->setSrcAddr(addressResolver.resolve(srcAddrAttr));
                 if (srcPrefixLengthAttr)
-                    tp->setSrcPrefixLength(parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
+                    tp->setSrcPrefixLength(base::parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
                 else if (srcAddrAttr)
                     tp->setSrcPrefixLength(tp->getSrcAddr().isIPv6() ? 128 : 32);
                 if (destAddrAttr)
                     tp->setDestAddr(addressResolver.resolve(destAddrAttr));
                 if (destPrefixLengthAttr)
-                    tp->setDestPrefixLength(parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
+                    tp->setDestPrefixLength(base::parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
                 else if (destAddrAttr)
                     tp->setDestPrefixLength(tp->getDestAddr().isIPv6() ? 128 : 32);
                 if (protocolAttr)
-                    tp->setProtocol(parseProtocol(protocolAttr, "protocol"));
+                    tp->setProtocol(base::parseProtocol(protocolAttr, "protocol"));
                 if (tosAttr)
-                    tp->setTos(parseIntAttribute(tosAttr, "tos"));
+                    tp->setTos(base::parseIntAttribute(tosAttr, "tos"));
                 if (tosMaskAttr)
-                    tp->setTosMask(parseIntAttribute(tosAttr, "tosMask"));
+                    tp->setTosMask(base::parseIntAttribute(tosAttr, "tosMask"));
                 if (srcPortAttr) {
-                    tp->setSrcPortMin(parseIntAttribute(srcPortAttr, "srcPort"));
+                    tp->setSrcPortMin(base::parseIntAttribute(srcPortAttr, "srcPort"));
                     tp->setSrcPortMax(tp->getSrcPortMin());
                 }
                 if (srcPortMinAttr)
-                    tp->setSrcPortMin(parseIntAttribute(srcPortMinAttr, "srcPortMin"));
+                    tp->setSrcPortMin(base::parseIntAttribute(srcPortMinAttr, "srcPortMin"));
                 if (srcPortMaxAttr)
-                    tp->setSrcPortMax(parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
+                    tp->setSrcPortMax(base::parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
                 if (destPortAttr) {
-                    tp->setDestPortMin(parseIntAttribute(destPortAttr, "destPort"));
+                    tp->setDestPortMin(base::parseIntAttribute(destPortAttr, "destPort"));
                     tp->setDestPortMax(tp->getDestPortMin());
                 }
                 if (destPortMinAttr)
-                    tp->setDestPortMin(parseIntAttribute(destPortMinAttr, "destPortMin"));
+                    tp->setDestPortMin(base::parseIntAttribute(destPortMinAttr, "destPortMin"));
                 if (destPortMaxAttr)
-                    tp->setDestPortMax(parseIntAttribute(destPortMaxAttr, "destPortMax"));
+                    tp->setDestPortMax(base::parseIntAttribute(destPortMaxAttr, "destPortMax"));
 
                 // Add filter
                 IPoREFilter *filter = new IPoREFilter();
                 filter->setDestInfo(avbDestInfo);
                 filter->setTrafficPattern(tp);
-                addFilter(filter);
+                base::addFilter(filter);
             }
             
 
@@ -308,7 +311,6 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
         }
     }
 
-    this->filterValid = true;
 }
 
 //==============================================================================
@@ -322,10 +324,10 @@ void IPv4oAVB<base>::configureSubscriptions(cXMLElement *config)
         cXMLElement *filterElement = filterElements[i];
         try
         {
-            const char *streamId = getRequiredAttribute(filterElement, "streamId");
+            const char *streamId = base::getRequiredAttribute(filterElement, "streamId");
 
             if (streamId) {
-                int id = parseIntAttribute(streamId, "streamId");
+                int id = base::parseIntAttribute(streamId, "streamId");
                 m_subscribeList.push_back(id);
             }
         }

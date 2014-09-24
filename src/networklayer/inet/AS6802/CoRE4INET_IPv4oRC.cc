@@ -43,7 +43,6 @@ namespace CoRE4INET {
 template<class Base>
 IPv4oRC<Base>::IPv4oRC() {
     // TODO Auto-generated constructor stub
-    this->filterValid = false;
 
 }
 
@@ -60,7 +59,7 @@ template<class Base>
 void IPv4oRC<Base>::initialize(int stage)
 {
     Base::initialize(stage);
-    if (!this->filterValid)
+    if (stage == 0)
     {
         cXMLElement *filters = Base::par("filters").xmlValue();
         configureFilters(filters);
@@ -75,7 +74,7 @@ void IPv4oRC<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
     // Check for matching filters
     bool filterMatch = true;
     std::list<IPoREFilter*> matchingFilters;
-    filterMatch = getMatchingFilters(packet, matchingFilters);
+    filterMatch = Base::getMatchingFilters(packet, matchingFilters);
 
     // send to corresponding modules
     if(filterMatch) {
@@ -97,41 +96,44 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
         cXMLElement *filterElement = filterElements[i];
         try
         {
-            // Destination Info
-            const char *destType = getRequiredAttribute(filterElement, "destType");
-            const char *destModules = getRequiredAttribute(filterElement, "destModules");
-            const char *ctId = getRequiredAttribute(filterElement, "ctId");
-            const char *alsoBE = getRequiredAttribute(filterElement, "alsoBE");
-
-            // Traffic Pattern
-            const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
-            const char *srcPrefixLengthAttr = filterElement->getAttribute("srcPrefixLength");
-            const char *destAddrAttr = filterElement->getAttribute("destAddress");
-            const char *destPrefixLengthAttr = filterElement->getAttribute("destPrefixLength");
-            const char *protocolAttr = filterElement->getAttribute("protocol");
-            const char *tosAttr = filterElement->getAttribute("tos");
-            const char *tosMaskAttr = filterElement->getAttribute("tosMask");
-            const char *srcPortAttr = filterElement->getAttribute("srcPort");
-            const char *srcPortMinAttr = filterElement->getAttribute("srcPortMin");
-            const char *srcPortMaxAttr = filterElement->getAttribute("srcPortMax");
-            const char *destPortAttr = filterElement->getAttribute("destPort");
-            const char *destPortMinAttr = filterElement->getAttribute("destPortMin");
-            const char *destPortMaxAttr = filterElement->getAttribute("destPortMax");
+            const char *destType = Base::getRequiredAttribute(filterElement, "destType");
 
 
-            if (!this->destTypeEnum) {
-                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
-            }
-
-            DestinationType dt = DestinationType(this->destTypeEnum->lookup(destType));
+//            if (!this->destTypeEnum) {
+//                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
+//            }
+//
+//            DestinationType dt = DestinationType(this->destTypeEnum->lookup(destType));
+            cEnum *destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
+            DestinationType dt = DestinationType(destTypeEnum->lookup(destType));
 
             if (dt == DestinationType_RC) {
+                // Destination Info
+                const char *destModules = Base::getRequiredAttribute(filterElement, "destModules");
+                const char *ctId = Base::getRequiredAttribute(filterElement, "ctId");
+                const char *alsoBE = Base::getRequiredAttribute(filterElement, "alsoBE");
+
+                // Traffic Pattern
+                const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
+                const char *srcPrefixLengthAttr = filterElement->getAttribute("srcPrefixLength");
+                const char *destAddrAttr = filterElement->getAttribute("destAddress");
+                const char *destPrefixLengthAttr = filterElement->getAttribute("destPrefixLength");
+                const char *protocolAttr = filterElement->getAttribute("protocol");
+                const char *tosAttr = filterElement->getAttribute("tos");
+                const char *tosMaskAttr = filterElement->getAttribute("tosMask");
+                const char *srcPortAttr = filterElement->getAttribute("srcPort");
+                const char *srcPortMinAttr = filterElement->getAttribute("srcPortMin");
+                const char *srcPortMaxAttr = filterElement->getAttribute("srcPortMax");
+                const char *destPortAttr = filterElement->getAttribute("destPort");
+                const char *destPortMinAttr = filterElement->getAttribute("destPortMin");
+                const char *destPortMaxAttr = filterElement->getAttribute("destPortMax");
+
                 // Fill destination info
                 RCDestinationInfo *rcDestInfo = new RCDestinationInfo();
                 rcDestInfo->setDestType(DestinationType_RC);
                 std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
                 std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
-                std::list<CTBuffer*> destCtBuffers;
+                std::list<RCBuffer*> destCtBuffers;
                 for (  ; bufferPath != bufferPaths.end(); bufferPath++)
                 {
                     cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
@@ -148,52 +150,52 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                     }
                 }
                 rcDestInfo->setDestModules(destCtBuffers);
-                rcDestInfo->setCtId(parseIntAttribute(ctId, "ctId", false));
+                rcDestInfo->setCtId(Base::parseIntAttribute(ctId, "ctId", false));
                 if (alsoBE)
-                    rcDestInfo->setAlsoBe(parseIntAttribute(alsoBE, "alsoBE", false) != 0);
+                    rcDestInfo->setAlsoBe(Base::parseIntAttribute(alsoBE, "alsoBE", false) != 0);
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
                 if (srcAddrAttr)
                     tp->setSrcAddr(addressResolver.resolve(srcAddrAttr));
                 if (srcPrefixLengthAttr)
-                    tp->setSrcPrefixLength(parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
+                    tp->setSrcPrefixLength(Base::parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
                 else if (srcAddrAttr)
                     tp->setSrcPrefixLength(tp->getSrcAddr().isIPv6() ? 128 : 32);
                 if (destAddrAttr)
                     tp->setDestAddr(addressResolver.resolve(destAddrAttr));
                 if (destPrefixLengthAttr)
-                    tp->setDestPrefixLength(parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
+                    tp->setDestPrefixLength(Base::parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
                 else if (destAddrAttr)
                     tp->setDestPrefixLength(tp->getDestAddr().isIPv6() ? 128 : 32);
                 if (protocolAttr)
-                    tp->setProtocol(parseProtocol(protocolAttr, "protocol"));
+                    tp->setProtocol(Base::parseProtocol(protocolAttr, "protocol"));
                 if (tosAttr)
-                    tp->setTos(parseIntAttribute(tosAttr, "tos"));
+                    tp->setTos(Base::parseIntAttribute(tosAttr, "tos"));
                 if (tosMaskAttr)
-                    tp->setTosMask(parseIntAttribute(tosAttr, "tosMask"));
+                    tp->setTosMask(Base::parseIntAttribute(tosAttr, "tosMask"));
                 if (srcPortAttr) {
-                    tp->setSrcPortMin(parseIntAttribute(srcPortAttr, "srcPort"));
+                    tp->setSrcPortMin(Base::parseIntAttribute(srcPortAttr, "srcPort"));
                     tp->setSrcPortMax(tp->getSrcPortMin());
                 }
                 if (srcPortMinAttr)
-                    tp->setSrcPortMin(parseIntAttribute(srcPortMinAttr, "srcPortMin"));
+                    tp->setSrcPortMin(Base::parseIntAttribute(srcPortMinAttr, "srcPortMin"));
                 if (srcPortMaxAttr)
-                    tp->setSrcPortMax(parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
+                    tp->setSrcPortMax(Base::parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
                 if (destPortAttr) {
-                    tp->setDestPortMin(parseIntAttribute(destPortAttr, "destPort"));
+                    tp->setDestPortMin(Base::parseIntAttribute(destPortAttr, "destPort"));
                     tp->setDestPortMax(tp->getDestPortMin());
                 }
                 if (destPortMinAttr)
-                    tp->setDestPortMin(parseIntAttribute(destPortMinAttr, "destPortMin"));
+                    tp->setDestPortMin(Base::parseIntAttribute(destPortMinAttr, "destPortMin"));
                 if (destPortMaxAttr)
-                    tp->setDestPortMax(parseIntAttribute(destPortMaxAttr, "destPortMax"));
+                    tp->setDestPortMax(Base::parseIntAttribute(destPortMaxAttr, "destPortMax"));
 
                 // Add filter
                 IPoREFilter *filter = new IPoREFilter();
                 filter->setDestInfo(rcDestInfo);
                 filter->setTrafficPattern(tp);
-                addFilter(filter);
+                Base::addFilter(filter);
             }
 
 
@@ -204,7 +206,6 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
         }
     }
 
-    this->filterValid = true;
 }
 
 //==============================================================================
