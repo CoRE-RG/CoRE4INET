@@ -26,6 +26,8 @@ RCIncoming::RCIncoming() :
         CTIncoming::CTIncoming()
 {
     lastArrived = 0;
+    bag = 0;
+    jitter = 0;
     firstMessage = true;
 }
 
@@ -44,7 +46,7 @@ void RCIncoming::handleMessage(cMessage *msg)
         //Now check for correct arrival:
         //TODO Normal: what to do with JITTER?
         //Check too early
-        if (!firstMessage && currentTotalTicks - lastArrived < bag)
+        if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))
         {
             emit(droppedSignal, (EtherFrame*) msg);
             if (ev.isGUI())
@@ -70,6 +72,7 @@ void RCIncoming::handleMessage(cMessage *msg)
 void RCIncoming::handleParameterChange(__attribute((unused)) const char* parname)
 {
     bag = (uint64_t) par("bag").longValue();
+    jitter = (uint64_t) par("jitter").longValue();
 }
 
 } //namespace
