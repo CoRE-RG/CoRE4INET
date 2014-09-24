@@ -98,11 +98,7 @@ void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 
     // send to corresponding modules
     if(filterMatch) {
-        int actualMatchingFilters = IPv4oAVB<base>::sendPacketToBuffers(packet->dup(), ie, matchingFilters);
-        if (0 == actualMatchingFilters)
-            base::sendPacketToNIC(packet, ie);
-        else
-            delete packet;
+        IPv4oAVB<base>::sendPacketToBuffers(packet->dup(), ie, matchingFilters);
     } else {
         base::sendPacketToNIC(packet, ie);
     }
