@@ -142,7 +142,12 @@ void RCBuffer::resetBag()
         //Register scheduler
         SchedulerTimerEvent *timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
         //Subtract delay from bag to allow frames to keep up their bandwidth
-        timerMessage->setTimer(bag-delay);
+        if(bag<delay){
+            timerMessage->setTimer(0);
+        }
+        else{
+            timerMessage->setTimer(bag-delay);
+        }
         timerMessage->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(timerMessage);
     }
