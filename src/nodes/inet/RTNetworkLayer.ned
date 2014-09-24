@@ -48,6 +48,8 @@ module RTNetworkLayer
         output pingOut[] @labels(PingPayload/up);
         input igmpIn;
         output igmpOut;
+        
+        input RCin;
 
     submodules:
         configurator: IPv4NodeConfigurator {
@@ -114,5 +116,7 @@ module RTNetworkLayer
         for i=0..sizeof(ifOut)-1 {
             ip.queueOut[i] --> { @display("m=s"); } --> ifOut[i];
         }
+        
+        RCin --> ip.RCIn;
 }
 

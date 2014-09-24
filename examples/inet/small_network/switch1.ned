@@ -16,8 +16,8 @@
 package core4inet.examples.inet.small_network;
 
 import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherSwitch;
-import core4inet.incoming.AS6802.TTIncoming;
-import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.RCQueueBuffer;
 
 //
 // switch1: configuration in switch1.ini
@@ -27,11 +27,11 @@ module Switch1 extends TTEAVBEtherSwitch
 {
     @display("bgb=420,311");
     submodules:
-        vl_100_ctc: TTIncoming {
+        vl_100_ctc: RCIncoming {
             parameters:
                 @display("p=170,130");
         }
-        vl_100: TTDoubleBuffer {
+        vl_100: RCQueueBuffer {
             parameters:
                 @display("p=240,130");
         }

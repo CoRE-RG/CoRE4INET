@@ -16,6 +16,8 @@
 package core4inet.examples.inet.small_network;
 
 import core4inet.nodes.inet.RTIPHost;
+import core4inet.examples.inet.small_network.Node1;
+import core4inet.examples.inet.small_network.Node3;
 
 import inet.nodes.ethernet.Eth100M;
 import inet.networklayer.autorouting.ipv4.IPv4NetworkConfigurator;
@@ -30,7 +32,7 @@ network small_network
 {
     @display("bgb=,,white");
     submodules:
-        node1: RTIPHost {
+        node1: Node1 {
             @display("p=39,70");
         }
 
@@ -38,7 +40,7 @@ network small_network
             @display("p=249,30");
         }
 
-        node3: RTIPHost {
+        node3: Node3 {
             @display("p=249,102");
         }
 
