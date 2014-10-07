@@ -18,6 +18,7 @@
 
 #include "CoRE4INET_IPv4oAVB.h"
 #include "CoRE4INET_IPv4oRC.h"
+#include "CoRE4INET_IPv4oTT.h"
 
 namespace CoRE4INET {
 
@@ -26,6 +27,10 @@ class AVB_IPv4 : public IPv4oAVB<IPv4oREBase>
 };
 
 class RC_AVB_IPv4 : public IPv4oRC<AVB_IPv4>
+{
+};
+
+class TT_RC_AVB_IPv4 : public IPv4oTT<RC_AVB_IPv4>
 {
 };
 
