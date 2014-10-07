@@ -26,4 +26,5 @@ simple IPv4oRE extends IPv4 {
     gates:
         input AVBin;
         input RCIn;
+        input TTIn;
 }
