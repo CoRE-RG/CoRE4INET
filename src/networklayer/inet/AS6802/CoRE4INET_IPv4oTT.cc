@@ -63,6 +63,9 @@ void IPv4oTT<Base>::initialize(int stage)
     {
         cXMLElement *filters = Base::par("filters").xmlValue();
         IPv4oTT<Base>::configureFilters(filters);
+
+        std::list<IPoREFilter*> ttFilters = Base::getFilters(DestinationType_TT);
+        registerSendTimingEvents(ttFilters);
     }
 }
 
@@ -109,7 +112,7 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
 
             if (dt == DestinationType_TT) {
                 // Destination Info
-                const char *destModules = Base::getRequiredAttribute(filterElement, "destModules");
+                const char *destModule = Base::getRequiredAttribute(filterElement, "destModule");
                 const char *ctId = Base::getRequiredAttribute(filterElement, "ctId");
                 const char *period = Base::getRequiredAttribute(filterElement, "period");
                 const char *actionTime = Base::getRequiredAttribute(filterElement, "actionTime");
@@ -133,29 +136,35 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 // Fill destination info
                 TTDestinationInfo *ttDestInfo = new TTDestinationInfo();
                 ttDestInfo->setDestType(DestinationType_TT);
-                std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
-                std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
-                std::list<TTBuffer*> destCtBuffers;
-                for (  ; bufferPath != bufferPaths.end(); bufferPath++)
-                {
-                    cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
-                    if (!module) {
-                       module = findModuleWhereverInNode((*bufferPath).c_str(), this);
-                    }
-                    if (!module) {
-                       throw cRuntimeError("destModule \"%s\" could not be resolved!", (*bufferPath).c_str());
-                    }
-                    if (TTBuffer *ttBuf = dynamic_cast<TTBuffer*>(module)) {
-                        destCtBuffers.push_back(ttBuf);
-                    } else {
-                        throw cRuntimeError("destModule: %s is not a TTBuffer!", (*bufferPath).c_str());
-                    }
+                cModule* module = simulation.getModuleByPath(destModule);
+                if (!module) {
+                   module = findModuleWhereverInNode(destModule, this);
                 }
-                ttDestInfo->setDestModules(destCtBuffers);
+                if (!module) {
+                   throw cRuntimeError("destModule \"%s\" could not be resolved!", destModule);
+                }
+                if (TTBuffer *ttBuf = dynamic_cast<TTBuffer*>(module)) {
+                    ttDestInfo->setDestModule(ttBuf);
+                } else {
+                    throw cRuntimeError("destModule: %s is not a TTBuffer!", destModule);
+                }
                 ttDestInfo->setCtId(Base::parseIntAttribute(ctId, "ctId", false));
-                // TODO: period
+
+                Period *periodModule = dynamic_cast<Period*>(findModuleWhereverInNode(period, this));
+                if (periodModule) {
+                    ttDestInfo->setPeriod(periodModule);
+                } else {
+                    throw cRuntimeError("period module \"%s\" not found or is not of type Period!", period);
+                }
+
                 ttDestInfo->setActionTime(Base::parseIntAttribute(actionTime, "actionTime", false) / 1000000);
-                // TODO: oscillator
+
+                Oscillator *osc = dynamic_cast<Oscillator*>(findModuleWhereverInNode(oscillator, this));
+                if (osc) {
+                    ttDestInfo->setOscillator(osc);
+                } else {
+                    throw cRuntimeError("oscillator module \"%s\" not found or is not of type Oscillator!", oscillator);
+                }
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -216,14 +225,21 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
 template<class Base>
 void IPv4oTT<Base>::handleMessage(cMessage* msg)
 {
-    if (dynamic_cast<TTFrame*>(msg)) {
-        TTFrame* ttFrame = dynamic_cast<TTFrame*>(msg);
+    if (msg->arrivedOn("schedulerIn")) {
 
-        // TODO: ist das auch bei TT nötig?? siehe TT sink app
-//        //Reset Bag
-//        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
-//        if (rcBuffer)
-//            rcBuffer->resetBag();
+        if (ttPackets[msg->getName()].size() > 0) {
+            QueuedPacket *toSend = ttPackets[msg->getName()].front();
+            ttPackets[msg->getName()].pop_front();
+            sendTTFrame(toSend->getPacket(), toSend->getFilter());
+            delete toSend;
+        }
+
+        SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
+        event->setNext_cycle(true);
+        periods[msg->getName()]->registerEvent(event);
+
+    } else if (dynamic_cast<TTFrame*>(msg)) {
+        TTFrame* ttFrame = dynamic_cast<TTFrame*>(msg);
 
         // decapsulate and send up
         cPacket* ipPacket = ttFrame->decapsulate();
@@ -253,7 +269,8 @@ void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *i
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
         if ((*filter)->getDestInfo()->getDestType() == DestinationType_TT) {
-            sendTTFrame(packet->dup(), ie, (*filter));
+            ttPackets[static_cast<TTDestinationInfo*>((*filter)->getDestInfo())->getDestModule()->getFullPath().c_str()].push_back(
+                    new QueuedPacket((*filter), packet));
         }
     }
 
@@ -264,7 +281,7 @@ void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *i
 //==============================================================================
 
 template<class Base>
-void IPv4oTT<Base>::sendTTFrame(cPacket* packet, const InterfaceEntry* ie, const IPoREFilter* filter)
+void IPv4oTT<Base>::sendTTFrame(cPacket* packet, const IPoREFilter* filter)
 {
     TTDestinationInfo *destInfo = dynamic_cast<TTDestinationInfo*>(filter->getDestInfo());
     if (!destInfo)
@@ -278,32 +295,61 @@ void IPv4oTT<Base>::sendTTFrame(cPacket* packet, const InterfaceEntry* ie, const
     outFrame->setCtID(destInfo->getCtId());
     outFrame->setName(packet->getName());
 
-    std::list<TTBuffer*> destBuffers = destInfo->getDestModules();
-    std::list<TTBuffer*>::iterator destBuf = destBuffers.begin();
-    for (  ; destBuf != destBuffers.end(); ++destBuf) {
-        if ((*destBuf)->gate("in")->getPathStartGate())
+    TTBuffer *destBuf = destInfo->getDestModule();
+
+    if (destBuf->gate("in")->getPathStartGate())
+    {
+        Incoming* in = dynamic_cast<Incoming *>(destBuf->gate("in")->getPathStartGate()->getOwner());
+        if (in)
         {
-            Incoming* in = dynamic_cast<Incoming *>((*destBuf)->gate("in")->getPathStartGate()->getOwner());
-            if (in)
-            {
-                Base::sendDirect(outFrame, in->gate("in"));
-            }
-            else
-            {
-                throw cRuntimeError("You can only connect an Incoming module to a Buffer (Buffer:%s, Attached Module:%s)",
-                        (*destBuf)->getFullPath().c_str(),
-                        (*destBuf)->gate("in")->getPathStartGate()->getOwner()->getFullPath().c_str());
-            }
+            Base::sendDirect(outFrame, in->gate("in"));
         }
-        else //It is ok to directly send a frame to a buffer if no incoming is attached!
+        else
         {
-            Base::sendDirect(outFrame, (*destBuf)->gate("in"));
+            throw cRuntimeError("You can only connect an Incoming module to a Buffer (Buffer:%s, Attached Module:%s)",
+                    destBuf->getFullPath().c_str(),
+                    destBuf->gate("in")->getPathStartGate()->getOwner()->getFullPath().c_str());
         }
+    }
+    else //It is ok to directly send a frame to a buffer if no incoming is attached!
+    {
+        Base::sendDirect(outFrame, destBuf->gate("in"));
     }
 
 }
 
 //==============================================================================
+
+template<class Base>
+void IPv4oTT<Base>::registerSendTimingEvents(std::list<IPoREFilter*> &filters)
+{
+    std::list<IPoREFilter*>::iterator f = filters.begin();
+    for (  ; f!=filters.end(); f++) {
+        registerSendTimingEvent(check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
+    }
+}
+
+//==============================================================================
+
+template<class Base>
+void IPv4oTT<Base>::registerSendTimingEvent(TTDestinationInfo *destInfo)
+{
+    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent(destInfo->getDestModule()->getFullPath().c_str(), ACTION_TIME_EVENT);
+    event->setAction_time( (uint32_t) (destInfo->getActionTime() / destInfo->getOscillator()->par("tick").doubleValue()));
+    event->setDestinationGate(Base::gate("schedulerIn"));
+
+    if (event->getAction_time() >= (uint32_t) destInfo->getPeriod()->par("cycle_ticks").longValue())
+    {
+        throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(),
+                destInfo->getPeriod()->par("cycle_ticks").longValue());
+    }
+
+    destInfo->getPeriod()->registerEvent(event);
+    periods[destInfo->getDestModule()->getFullPath().c_str()] = destInfo->getPeriod();
+}
+
+//==============================================================================
+
 
 } /* namespace CoRE4INET */
 

@@ -40,21 +40,23 @@ public:
 
 
 public:
-    std::list<TTBuffer*>& getDestModules() { return destModules; }
-    void setDestModules(std::list<TTBuffer*>& destModules) { this->destModules = destModules; }
+    TTBuffer* getDestModule() { return destModule; }
+    void setDestModule(TTBuffer* destModules) { this->destModule = destModules; }
     uint16_t getCtId() const { return ctId; }
     void setCtId(uint16_t ctId) { this->ctId = ctId; }
     Period* getPeriod() const { return period; }
     void setPeriod(Period* period) { this->period = period; }
     double getActionTime() const { return actionTime; }
     void setActionTime(double actionTime) { this->actionTime = actionTime; }
+    Oscillator* getOscillator() { return oscillator; }
+    void setOscillator(Oscillator* oscillator) { this->oscillator = oscillator; }
 
 private:
-    std::list<TTBuffer*> destModules;  ///< Modules to which packets will be sent
-    uint16_t             ctId;         ///< Critical Traffic Identifier as defined in AS6802
-    Period*              period;       ///< Period module, defining the AS6802 period in which the packets will be send
-    double               actionTime;   ///< time offset since period start at which a packet will be sent
-    Oscillator*          oscillator;   ///< oscillator used for calculating ticks out of actionTime
+    TTBuffer*   destModule;  ///< Modules to which packets will be sent
+    uint16_t    ctId;         ///< Critical Traffic Identifier as defined in AS6802
+    Period*     period;       ///< Period module, defining the AS6802 period in which the packets will be send
+    double      actionTime;   ///< time offset since period start at which a packet will be sent
+    Oscillator* oscillator;   ///< oscillator used for calculating ticks out of actionTime
 
 
 };

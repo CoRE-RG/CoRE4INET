@@ -13,34 +13,30 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-//==============================================================================
+#ifndef CORE4INET_QUEUEDPACKET_H_
+#define CORE4INET_QUEUEDPACKET_H_
 
-#include <AS6802/CoRE4INET_TTDestinationInfo.h>
-
-//==============================================================================
+#include "CoRE4INET_IPoREFilter.h"
+#include "InterfaceEntry.h"
 
 namespace CoRE4INET {
 
-//==============================================================================
+class QueuedPacket {
+public:
+    QueuedPacket();
+    QueuedPacket(IPoREFilter *filter, cPacket *packet);
+    virtual ~QueuedPacket();
 
-TTDestinationInfo::TTDestinationInfo()
-  : destModule(NULL),
-    ctId(0),
-    period(NULL),
-    actionTime(0),
-    oscillator(NULL)
-{
-}
+    IPoREFilter* getFilter() { return filter; }
+    void setFilter(IPoREFilter* filter) { this->filter = filter; }
+    cPacket* getPacket() { return packet; }
+    void setPacket(cPacket* packet) { this->packet = packet; }
 
-//==============================================================================
-
-TTDestinationInfo::~TTDestinationInfo()
-{
-}
-
-//==============================================================================
+protected:
+    IPoREFilter    *filter;
+    cPacket        *packet;
+};
 
 } /* namespace CoRE4INET */
 
-//==============================================================================
-//EOF
+#endif /* CORE4INET_QUEUEDPACKET_H_ */

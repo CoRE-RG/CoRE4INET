@@ -27,6 +27,8 @@ using namespace std;
 using namespace std::tr1;
 #endif
 #include "CoRE4INET_CTBuffer.h"
+#include "CoRE4INET_TTDestinationInfo.h"
+#include "CoRE4INET_QueuedPacket.h"
 
 //==============================================================================
 
@@ -56,8 +58,23 @@ public:
     /**
      * Encapsulates packet in TT Frame and sends to destination Buffers.
      */
-    void sendTTFrame(cPacket* packet, const InterfaceEntry* ie, const IPoREFilter* filter);
+    void sendTTFrame(cPacket* packet, const IPoREFilter* filter);
 
+    /**
+     * Registers Timing events at the periods with the given actionTime for each filter.
+     */
+    virtual void registerSendTimingEvents(std::list<IPoREFilter*> &filters);
+
+    /**
+     * Registers a single timing event at the period with the given actionTime
+     */
+    virtual void registerSendTimingEvent(TTDestinationInfo *destInfo);
+
+
+protected:
+
+    unordered_map<const char *, std::list<QueuedPacket*> > ttPackets;
+    unordered_map<const char *, Period *>                  periods;
 
 };
 

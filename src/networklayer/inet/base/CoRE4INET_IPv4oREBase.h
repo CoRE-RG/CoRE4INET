@@ -70,6 +70,11 @@ class IPv4oREBase : public IPv4 {
          */
         bool getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &filters, DestinationType dt);
 
+        /**
+         * Returns a list of all filters for a given destination type.
+         */
+        std::list<IPoREFilter*> getFilters(DestinationType destType);
+
     protected:
         std::list<IPoREFilter*> m_filterList;
         cEnum *m_protocolEnum;

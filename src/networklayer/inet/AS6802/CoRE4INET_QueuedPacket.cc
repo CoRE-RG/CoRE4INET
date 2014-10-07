@@ -13,34 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-//==============================================================================
-
-#include <AS6802/CoRE4INET_TTDestinationInfo.h>
-
-//==============================================================================
+#include <CoRE4INET_QueuedPacket.h>
 
 namespace CoRE4INET {
 
-//==============================================================================
-
-TTDestinationInfo::TTDestinationInfo()
-  : destModule(NULL),
-    ctId(0),
-    period(NULL),
-    actionTime(0),
-    oscillator(NULL)
+QueuedPacket::QueuedPacket()
+  : filter(NULL),
+    packet(NULL)
 {
 }
 
-//==============================================================================
 
-TTDestinationInfo::~TTDestinationInfo()
+QueuedPacket::QueuedPacket(IPoREFilter *filter, cPacket *packet)
 {
+    this->filter = filter;
+    this->packet = packet;
 }
 
-//==============================================================================
+QueuedPacket::~QueuedPacket()
+{
+}
 
 } /* namespace CoRE4INET */
-
-//==============================================================================
-//EOF

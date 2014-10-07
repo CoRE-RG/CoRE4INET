@@ -162,6 +162,19 @@ bool IPv4oREBase::getMatchingFilters(cPacket *packet, std::list<IPoREFilter*> &f
 
 //==============================================================================
 
+std::list<IPoREFilter*> IPv4oREBase::getFilters(DestinationType destType)
+{
+    std::list<IPoREFilter*> result;
+    std::list<IPoREFilter*>::iterator f = m_filterList.begin();
+    for (  ; f != m_filterList.end(); f++) {
+        if ((*f)->getDestInfo()->getDestType() == destType)
+            result.push_back(*f);
+    }
+    return result;
+}
+
+//==============================================================================
+
 } /* namespace CoRE4INET */
 
 //==============================================================================
