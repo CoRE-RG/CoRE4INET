@@ -19,6 +19,8 @@ package core4inet.examples.inet.small_network;
 import core4inet.nodes.inet.RTIPHost;
 import core4inet.buffer.AS6802.RCQueueBuffer;
 import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.TTQueueBuffer;
+import core4inet.incoming.AS6802.TTIncoming;
 
 module Node3 extends RTIPHost
 {
@@ -32,6 +34,9 @@ module Node3 extends RTIPHost
             parameters:
                 @display("p=440,100");
         }
+        vl_101_ctc: TTIncoming;
+        vl_101: TTQueueBuffer;
     connections:
         vl_100_ctc.out --> vl_100.in;
+        vl_101_ctc.out --> vl_101.in;
 }
