@@ -50,6 +50,7 @@ module RTNetworkLayer
         output igmpOut;
         
         input RCin;
+        input TTin;
 
     submodules:
         configurator: IPv4NodeConfigurator {
@@ -118,5 +119,6 @@ module RTNetworkLayer
         }
         
         RCin --> ip.RCIn;
+        TTin --> ip.TTIn;
 }
 

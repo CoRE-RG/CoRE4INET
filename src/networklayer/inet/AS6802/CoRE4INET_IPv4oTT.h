@@ -39,6 +39,8 @@ namespace CoRE4INET {
 template<class Base>
 class IPv4oTT : public Base {
 
+protected:
+    enum MsgKind { MSGKIND_START = 0xBEEF };
 
 public:
 
@@ -73,8 +75,8 @@ public:
 
 protected:
 
-    unordered_map<const char *, std::list<QueuedPacket*> > ttPackets;
-    unordered_map<const char *, Period *>                  periods;
+    unordered_map<std::string, std::list<QueuedPacket*> > ttPackets;
+    unordered_map<std::string, Period *>                  periods;
 
 };
 

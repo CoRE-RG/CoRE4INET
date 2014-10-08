@@ -64,8 +64,7 @@ void IPv4oTT<Base>::initialize(int stage)
         cXMLElement *filters = Base::par("filters").xmlValue();
         IPv4oTT<Base>::configureFilters(filters);
 
-        std::list<IPoREFilter*> ttFilters = Base::getFilters(DestinationType_TT);
-        registerSendTimingEvents(ttFilters);
+        Base::scheduleAt(simTime(), new cMessage("IPv4oTT register action time events", MSGKIND_START));
     }
 }
 
@@ -157,7 +156,7 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                     throw cRuntimeError("period module \"%s\" not found or is not of type Period!", period);
                 }
 
-                ttDestInfo->setActionTime(Base::parseIntAttribute(actionTime, "actionTime", false) / 1000000);
+                ttDestInfo->setActionTime(Base::parseIntAttribute(actionTime, "actionTime", false) / 1000000.f);
 
                 Oscillator *osc = dynamic_cast<Oscillator*>(findModuleWhereverInNode(oscillator, this));
                 if (osc) {
@@ -225,20 +224,37 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
 template<class Base>
 void IPv4oTT<Base>::handleMessage(cMessage* msg)
 {
-    if (msg->arrivedOn("schedulerIn")) {
 
-        if (ttPackets[msg->getName()].size() > 0) {
-            QueuedPacket *toSend = ttPackets[msg->getName()].front();
-            ttPackets[msg->getName()].pop_front();
-            sendTTFrame(toSend->getPacket(), toSend->getFilter());
-            delete toSend;
+    if (msg->isSelfMessage() && (strcmp(msg->getName(), "IPv4oTT register action time events") == 0))
+    {
+        EV << "JOJOJO DAS IST MEINE SELFMSG" << std::endl;
+        std::list<IPoREFilter*> ttFilters = Base::getFilters(DestinationType_TT);
+        registerSendTimingEvents(ttFilters);
+        delete msg;
+    }
+    else if (msg->arrivedOn("schedulerIn"))
+    {
+        std::string msgName(msg->getName());
+        EV << "JOJOJO DAS IST MEINE SCHEDULERMSG mit namen " << msg->getName() << " und count ist " << periods.count(msgName) << std::endl;
+
+        if (periods.count(msgName) > 0) {
+            std::string msgName(msg->getName());
+            if (ttPackets[msgName].size() > 0) {
+                QueuedPacket *toSend = ttPackets[msgName].front();
+                ttPackets[msgName].pop_front();
+                sendTTFrame(toSend->getPacket(), toSend->getFilter());
+            }
+
+            SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
+            event->setNext_cycle(true);
+            const char * hiMyNameIs = msg->getName();
+            EV << "HI, MY NAME IS:" << hiMyNameIs << std::endl;
+            periods[msgName]->registerEvent(event);
         }
 
-        SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
-        event->setNext_cycle(true);
-        periods[msg->getName()]->registerEvent(event);
-
-    } else if (dynamic_cast<TTFrame*>(msg)) {
+    }
+    else if (dynamic_cast<TTFrame*>(msg))
+    {
         TTFrame* ttFrame = dynamic_cast<TTFrame*>(msg);
 
         // decapsulate and send up
@@ -253,7 +269,13 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 
         Base::handleMessage(ipPacket);
     }
-    else {
+    else if (msg->arrivedOn("TTIn"))
+    {
+        // discard msg on TTIn, if not TTFrame
+        delete msg;
+    }
+    else
+    {
         Base::handleMessage(msg);
     }
 }
@@ -269,8 +291,8 @@ void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *i
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
         if ((*filter)->getDestInfo()->getDestType() == DestinationType_TT) {
-            ttPackets[static_cast<TTDestinationInfo*>((*filter)->getDestInfo())->getDestModule()->getFullPath().c_str()].push_back(
-                    new QueuedPacket((*filter), packet));
+            ttPackets[static_cast<TTDestinationInfo*>((*filter)->getDestInfo())->getDestModule()->getFullPath()].push_back(
+                    new QueuedPacket((*filter), packet->dup()));
         }
     }
 
@@ -345,7 +367,7 @@ void IPv4oTT<Base>::registerSendTimingEvent(TTDestinationInfo *destInfo)
     }
 
     destInfo->getPeriod()->registerEvent(event);
-    periods[destInfo->getDestModule()->getFullPath().c_str()] = destInfo->getPeriod();
+    periods[destInfo->getDestModule()->getFullPath()] = destInfo->getPeriod();
 }
 
 //==============================================================================
