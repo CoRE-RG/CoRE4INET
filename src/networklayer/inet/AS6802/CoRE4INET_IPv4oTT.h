@@ -72,11 +72,17 @@ public:
      */
     virtual void registerSendTimingEvent(TTDestinationInfo *destInfo);
 
+    /**
+     * Handles synchronized events
+     */
+    virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+
 
 protected:
 
-    unordered_map<std::string, std::list<QueuedPacket*> > ttPackets;
-    unordered_map<std::string, Period *>                  periods;
+    unordered_map<std::string, std::list<QueuedPacket*> > ttPackets;    ///< buffered outgoing packets for each TT filter
+    unordered_map<std::string, Period *>                  periods;      ///< period module for each TT filter (period module is used for timing)
+    bool                                                  synchronized; ///< node is synchronized with other TT nodes
 
 };
 

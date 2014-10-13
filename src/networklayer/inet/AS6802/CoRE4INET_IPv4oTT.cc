@@ -28,6 +28,8 @@
 #include "CoRE4INET_TTBuffer.h"
 #include "CoRE4INET_IPoREFilter.h"
 #include "CoRE4INET_Incoming.h"
+#include "CoRE4INET_NotifierConsts.h"
+#include "SyncNotification_m.h"
 #include "IPvXAddress.h"
 #include "IPvXAddressResolver.h"
 #include "UDPPacket.h"
@@ -42,8 +44,6 @@ namespace CoRE4INET {
 
 template<class Base>
 IPv4oTT<Base>::IPv4oTT() {
-    // TODO Auto-generated constructor stub
-
 }
 
 //==============================================================================
@@ -61,10 +61,16 @@ void IPv4oTT<Base>::initialize(int stage)
     Base::initialize(stage);
     if (stage == 0)
     {
+        synchronized = false;
+
         cXMLElement *filters = Base::par("filters").xmlValue();
         IPv4oTT<Base>::configureFilters(filters);
 
         Base::scheduleAt(simTime(), new cMessage("IPv4oTT register action time events", MSGKIND_START));
+
+        ASSERT2(findContainingNode(this)!=NULL,
+                "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
+        findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
     }
 }
 
@@ -227,7 +233,6 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 
     if (msg->isSelfMessage() && (strcmp(msg->getName(), "IPv4oTT register action time events") == 0))
     {
-        EV << "JOJOJO DAS IST MEINE SELFMSG" << std::endl;
         std::list<IPoREFilter*> ttFilters = Base::getFilters(DestinationType_TT);
         registerSendTimingEvents(ttFilters);
         delete msg;
@@ -235,11 +240,10 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
     else if (msg->arrivedOn("schedulerIn"))
     {
         std::string msgName(msg->getName());
-        EV << "JOJOJO DAS IST MEINE SCHEDULERMSG mit namen " << msg->getName() << " und count ist " << periods.count(msgName) << std::endl;
 
         if (periods.count(msgName) > 0) {
             std::string msgName(msg->getName());
-            if (ttPackets[msgName].size() > 0) {
+            if (synchronized  &&  ttPackets[msgName].size() > 0) {
                 QueuedPacket *toSend = ttPackets[msgName].front();
                 ttPackets[msgName].pop_front();
                 sendTTFrame(toSend->getPacket(), toSend->getFilter());
@@ -371,6 +375,25 @@ void IPv4oTT<Base>::registerSendTimingEvent(TTDestinationInfo *destInfo)
 }
 
 //==============================================================================
+
+template<class Base>
+void IPv4oTT<Base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+{
+
+    if (SyncNotification *notification = dynamic_cast<SyncNotification *>(obj))
+    {
+        if (notification->getKind() == SYNC)
+        {
+            synchronized = true;
+        }
+        else
+        {
+            synchronized = false;
+        }
+    } else {
+        Base::receiveSignal(src, id, obj);
+    }
+}
 
 
 } /* namespace CoRE4INET */
