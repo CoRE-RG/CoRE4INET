@@ -1,0 +1,11 @@
+The IPoRE feature allows for transmission of IPv4 Packets over AS6802 as well as AVB.
+
+Usage:
+Use the core4inet.nodes.inet.RTIPHost as Node in your RT Ethernet Network.
+For AS6802 communication this Node has to be extended with the required TT and RC buffers.
+Connect an Application (e.g. an TCPApp) from the INET Framework or your own Application to the transport layer (e.g. TCP) within RTIPHost.
+
+Each RTIPHost has an "filters" parameter, which is an xml based configuration for the IPoRE Module.
+See IPv4oRE for documentation of the xml configuration.
+
+An example of this feature is available in examples/inet/small_network

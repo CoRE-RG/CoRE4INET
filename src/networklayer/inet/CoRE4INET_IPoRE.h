@@ -30,6 +30,57 @@ class RC_AVB_IPv4 : public IPv4oRC<AVB_IPv4>
 {
 };
 
+/*!
+this parameter defines which traffic is sent via TT, RC or AVB
+The config consists of "filter" elements and "subscribe" elements
+
+Each filter consists of several attributes.
+Each attribute either is used to define the pattern to check if outgoing packets are matching them or is used to define how to send the matching packets:
+The pattern attributes are always the same, no matter what kind of outgoing packet should be sent.
+The other attributes, which are defining how to send the packet, vary, depending on which kind of packet should be sent (i.e. TT or RC or AVB)
+
+Pattern attributes:
+- srcAddress       (optional)
+- srcPrefixLength  (optional)
+- destAddress      (optional)
+- destPrefixLength (optional)
+- protocol         (optional)
+- tos              (optional)
+- tosMask          (optional)
+- srcPort          (optional)
+- srcPortMin       (optional)
+- srcPortMax       (optional)
+- destPort         (optional)
+- destPortMin      (optional)
+- destPortMax      (optional)
+
+Destination Type (value of the "destType" attribute, which defines the Layer2)
+- destType="DestinationType_TT"
+- destType="DestinationType_RC"
+- destType="DestinationType_AVB"
+
+TT send attributes:
+- destModule (mandatory)
+- ctId       (mandatory)
+- actionTime (mandatory)
+- period     (optional, defaults to "period[0]")
+- oscillator (optional, defaults to "oscillator")
+
+RC send attributes:
+- destModules (mandatory)
+- ctId        (mandatory)
+
+AVB send attributes:
+- destModule      (mandatory)
+- destMAC         (mandatory)
+- streamId        (mandatory)
+- trafficClass    (mandatory)
+- frameSize       (mandatory)
+- intervallFrames (mandatory)
+- vlanId          (mandatory)
+
+ Each subscribe element has one single "streamId" attribute which defines the stream Id to subscribe to.
+ */
 class TT_RC_AVB_IPv4 : public IPv4oTT<RC_AVB_IPv4>
 {
 };

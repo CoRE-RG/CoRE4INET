@@ -84,6 +84,7 @@ void IPv4oTT<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
     std::list<IPoREFilter*> matchingFilters;
     filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_TT);
 
+    // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
     if(filterMatch) {
         IPv4oTT<Base>::sendPacketToBuffers(packet, ie, matchingFilters);
@@ -119,9 +120,9 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 // Destination Info
                 const char *destModule = Base::getRequiredAttribute(filterElement, "destModule");
                 const char *ctId = Base::getRequiredAttribute(filterElement, "ctId");
-                const char *period = Base::getRequiredAttribute(filterElement, "period");
+                const char *period = filterElement->getAttribute("period");
                 const char *actionTime = Base::getRequiredAttribute(filterElement, "actionTime");
-                const char *oscillator = Base::getRequiredAttribute(filterElement, "oscillator");
+                const char *oscillator = filterElement->getAttribute("oscillator");
 
                 // Traffic Pattern
                 const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
@@ -155,7 +156,12 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 }
                 ttDestInfo->setCtId(Base::parseIntAttribute(ctId, "ctId", false));
 
-                Period *periodModule = dynamic_cast<Period*>(findModuleWhereverInNode(period, this));
+                Period *periodModule;
+                if (period) {
+                    periodModule = dynamic_cast<Period*>(findModuleWhereverInNode(period, this));
+                } else {
+                    periodModule = dynamic_cast<Period*>(findModuleWhereverInNode("period[0]", this));
+                }
                 if (periodModule) {
                     ttDestInfo->setPeriod(periodModule);
                 } else {
@@ -164,12 +170,18 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
 
                 ttDestInfo->setActionTime(Base::parseIntAttribute(actionTime, "actionTime", false) / 1000000.f);
 
-                Oscillator *osc = dynamic_cast<Oscillator*>(findModuleWhereverInNode(oscillator, this));
+                Oscillator *osc;
+                if (oscillator) {
+                    osc = dynamic_cast<Oscillator*>(findModuleWhereverInNode(oscillator, this));
+                } else {
+                    osc = dynamic_cast<Oscillator*>(findModuleWhereverInNode("oscillator", this));
+                }
                 if (osc) {
                     ttDestInfo->setOscillator(osc);
                 } else {
                     throw cRuntimeError("oscillator module \"%s\" not found or is not of type Oscillator!", oscillator);
                 }
+
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
