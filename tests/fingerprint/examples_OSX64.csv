@@ -12,5 +12,6 @@
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      1s,              71db-8253
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       1s,              3ce3-cec6
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            860c-1e34
+/examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              0
 
 #fingerprints generated with commit d5445e26a4b26adb3fc4fe1cd6b71ed890b55642 at Date:   Fri Jun 6 10:41:14 2014 +0200 by Till Steinbach on OS X 10.9 64Bit
