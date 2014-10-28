@@ -44,7 +44,7 @@
          - destModule      (mandatory)
          - destMAC         (mandatory)
          - streamId        (mandatory)
-         - trafficClass    (mandatory)
+         - trafficClass    (optional, defaults to "A")
          - frameSize       (mandatory)
          - intervallFrames (mandatory)
          - vlanId          (mandatory)
@@ -62,7 +62,7 @@
 		<filter srcAddress="10.0.0.1" destAddress="10.0.0.3" destPort="1000" protocol="TCP"
 		        destType="DestinationType_RC" ctId="100" destModules="vl_100" alsoBE="0" />
 		<filter srcAddress="10.0.0.1" destAddress="10.0.0.2" destPort="1000" protocol="TCP"
-		        destType="DestinationType_AVB" destModule="avbCTC" destMAC="010203040506" alsoBE="0" streamId="27" trafficClass="0" frameSize="300" intervallFrames="1" vlanId="0" />
+		        destType="DestinationType_AVB" destModule="avbCTC" destMAC="010203040506" alsoBE="0" streamId="27" trafficClass="B" frameSize="300" intervallFrames="1" vlanId="0" />
 	</node>
 	
 	

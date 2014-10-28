@@ -17,7 +17,7 @@ package core4inet.linklayer.ethernet;
 
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
-import core4inet.linklayer.shaper.TT_AVBClassA_PCF_RC_BE_Shaper;
+import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 import inet.linklayer.INic;
@@ -61,8 +61,11 @@ module TTEAVBEtherNic like INic
         // rate-constrained traffic input from upper layer
         input RCin @directIn @labels(RCFrame);
 
-		// audio-video bridging traffic from upper layer
-        input AVBin @directIn @labels(AVBFrame);
+		// audio-video bridging class A traffic from upper layer
+        input AVBAin @directIn @labels(AVBFrame);
+
+		// audio-video bridging class B traffic from upper layer
+        input AVBBin @directIn @labels(AVBFrame);
 
         // rate-constrained Protocol-Control-Frame traffic from upper layer
         input PCFin @directIn @labels(PCFrame);
@@ -75,7 +78,7 @@ module TTEAVBEtherNic like INic
 
     submodules:
 
-        shaper: TT_AVBClassA_PCF_RC_BE_Shaper {
+        shaper: TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper {
             @display("p=88,75");
         }
 
@@ -107,7 +110,8 @@ module TTEAVBEtherNic like INic
         inControl.out --> encap.lowerLayerIn;
 
         shaper.in <-- encap.lowerLayerOut;
-        shaper.AVBin <-- AVBin;
+        shaper.AVBAin <-- AVBAin;
+        shaper.AVBBin <-- AVBBin;
         shaper.PCFin <-- PCFin;
         shaper.RCin <-- RCin;
         shaper.TTin <-- TTin;

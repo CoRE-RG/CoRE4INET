@@ -70,7 +70,7 @@ simple IPv4oRE extends IPv4 {
         // - destModule      (mandatory)
         // - destMAC         (mandatory)
         // - streamId        (mandatory)
-        // - trafficClass    (mandatory)
+        // - trafficClass    (optional, defaults to "A")
         // - frameSize       (mandatory)
         // - intervallFrames (mandatory)
         // - vlanId          (mandatory)

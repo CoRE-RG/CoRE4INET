@@ -155,12 +155,20 @@ module RTIPHost
             parameters:
                 @display("p=186,150");
             gates:
-                AVBout[1];
+                AVBAout[1];
+                AVBBout[1];
         }
 
-        avbBuffer: AVBQueueBuffer {
+        avbABuffer: AVBQueueBuffer {
             parameters:
-                @display("p=186,232");
+                srClass = "A";
+                @display("p=201,232");
+        }
+
+        avbBBuffer: AVBQueueBuffer {
+            parameters:
+                srClass = "B";
+                @display("p=135,232");
         }
 
         // linklayer
@@ -218,8 +226,10 @@ module RTIPHost
         phy[0].upperLayerOut --> networkLayer.ifIn++;
         bgOut.out --> phy[0].bgIn;
         phy[0].bgOut --> bgIn.in;
-        avbBuffer.out --> phy[0].AVBin;
-        avbCTC.AVBout[0] --> avbBuffer.in;
+        avbABuffer.out --> phy[0].AVBAin;
+        avbBBuffer.out --> phy[0].AVBBin;
+        avbCTC.AVBAout[0] --> avbABuffer.in;
+        avbCTC.AVBBout[0] --> avbBBuffer.in;
         srpProtocol.out --> phy[0].srpIn;
         phy[0].srpOut --> srpProtocol.in;
 

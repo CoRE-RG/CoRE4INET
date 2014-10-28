@@ -252,7 +252,11 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 else
                      throw cRuntimeError("destMAC not specified!");
                 avbDestInfo->setStreamId(base::parseIntAttribute(streamId, "streamId", false));
-                avbDestInfo->setSrClass(SR_CLASS(base::parseIntAttribute(srClass, "trafficClass", false)));
+                if (strcmp(srClass,"B") == 0) {
+                    avbDestInfo->setSrClass(SR_CLASS_B);
+                } else {
+                    avbDestInfo->setSrClass(SR_CLASS_A);
+                }
                 avbDestInfo->setFrameSize(base::parseIntAttribute(frameSize, "frameSize", false));
                 avbDestInfo->setIntervallFrames(base::parseIntAttribute(intFrames, "intervallFrames", false));
                 avbDestInfo->setVlanId(base::parseIntAttribute(vlanId, "vlanId", false));

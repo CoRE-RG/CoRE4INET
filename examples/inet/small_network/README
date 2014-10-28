@@ -6,7 +6,7 @@ Also TCP apps communicate over AS6802 and avb.
   The cycle time is 5 ms (see omnetpp.ini)
 
 - Via virtual link vl101 node1 sends tcp frames as time triggered (TT) messages to node3.
-- Via avb stream 27 node 1 sends tcp frames as avb class A messages to node2.
+- Via avb stream 27 node 1 sends tcp frames as avb class B messages to node2.
 - Both, node2 and node3 answers the tcp packets from node1 over best effort (BE) messages.
 
 - additional AVB traffic is sent as background traffic:
