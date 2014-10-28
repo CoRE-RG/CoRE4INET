@@ -31,5 +31,6 @@ simple AVBIncoming
         input in @directIn @labels(AVBFrame);
 
         //outputs for AVB Frames
-        output AVBout[] @labels(AVBFrame);
+        output AVBAout[] @labels(AVBFrame);
+        output AVBBout[] @labels(AVBFrame);
 }

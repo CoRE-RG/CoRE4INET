@@ -49,6 +49,10 @@ class RCIncoming : public CTIncoming, public Timed
          * @brief caches bag parameter
          */
         uint64_t bag;
+        /**
+         * @brief caches jitter parameter
+         */
+        uint64_t jitter;
     protected:
         /**
          * @brief Initialization of the module

@@ -15,6 +15,9 @@
 
 #include "CoRE4INET_AVBIncoming.h"
 
+//Std
+#include <string>
+using namespace std;
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
 //INET
@@ -37,16 +40,21 @@ void AVBIncoming::handleMessage(cMessage* msg) {
         //TODO: Minor enable VLANs
         std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(
                 inFrame->getDest(), 0);
+        SR_CLASS srClass = srptable->getSrClassForTalkerAddress(inFrame->getDest(), 0);
         if (listeners.size() == 0) {
             emit(droppedSignal, inFrame);
         } else {
             for (std::list<cModule*>::const_iterator listener = listeners.begin();
                     listener != listeners.end(); listener++) {
                 if (strcmp((*listener)->getName(), "phy") == 0) {
+                    string outputStr;
+                    if(srClass == SR_CLASS_A)       outputStr = "AVBAout";
+                    else if(srClass == SR_CLASS_B)  outputStr = "AVBBout";
                     sendDelayed(inFrame->dup(),
-                            SimTime(
-                                    getParentModule()->par("hardware_delay").doubleValue()),
-                            gate("AVBout", (*listener)->getIndex()));
+                        SimTime(
+                                getParentModule()->par("hardware_delay").doubleValue()),
+                        gate(outputStr.c_str(), (*listener)->getIndex())
+                        );
                     emit(rxPkSignal, inFrame);
                 } else {
                     if ((*listener)->hasGate("AVBin")) {

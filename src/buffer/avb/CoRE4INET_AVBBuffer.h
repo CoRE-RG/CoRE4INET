@@ -19,6 +19,7 @@
 //CoRE4INET
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_Timed.h"
+#include "AVBDefs_m.h"
 
 namespace CoRE4INET {
 
@@ -27,11 +28,11 @@ namespace CoRE4INET {
  *
  * The Frame is stored and released in dependency of the Credit of the CBS Algorithm. The Buffer interacts with the Scheduler.
  *
- * Use the implementations AVBDoubleBuffer, AVBQueueBuffer.
+ * Use the implementations AVBQueueBuffer.
  *
  * @author Philipp Meyer
  *
- * @sa AVBDoubleBuffer, AVBQueueBuffer, Buffer
+ * @sa AVBQueueBuffer, Buffer
  *
  * @ingroup Buffer
  */
@@ -81,6 +82,7 @@ class AVBBuffer : public virtual Buffer, public Timed
         void resetCredit();
 
     protected:
+        SR_CLASS srClass;
         int credit;
         int maxCredit;
         bool inTransmission;

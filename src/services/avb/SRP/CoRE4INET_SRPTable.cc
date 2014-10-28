@@ -57,9 +57,8 @@ SRPTable::SRPTable()
 void SRPTable::initialize()
 {
     WATCH(nextAging);
-    //TODO Minor: Add custom watch for unordered maps
-    //WATCH_PTRMAPMAP(talkerTables);
-    //WATCH_PTRLISTMAPMAP(listenerTables);
+    WATCH_PTRUMAPUMAP(talkerTables);
+    WATCH_PTRLISTUMAPUMAP(listenerTables);
     updateDisplayString();
 }
 
@@ -113,6 +112,21 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsign
     throw std::invalid_argument("no stream for this talker address registered");
 }
 
+SR_CLASS SRPTable::getSrClassForTalkerAddress(MACAddress &talkerAddress, unsigned int vid)
+{
+    Enter_Method
+    ("SRPTable::getSrClassForTalkerAddress()");
+    TalkerTable talkerTable = talkerTables[vid];
+        for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); talkerEntry++)
+        {
+            if ((*talkerEntry).second->address == talkerAddress)
+            {
+                return (*talkerEntry).second->srClass;
+            }
+        }
+        throw std::invalid_argument("no stream for this talker address registered");
+}
+
 cModule* SRPTable::getTalkerForStreamId(uint64_t streamId, unsigned int vid)
 {
     removeAgedEntriesIfNeeded();
@@ -157,6 +171,38 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
                     TalkerEntry *tentry = ttable[(*j).first];
                     bandwidth += bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames,
                             getIntervalForClass(tentry->srClass));
+                }
+            }
+        }
+    }
+
+    return bandwidth;
+}
+
+unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLASS srClass)
+{
+    removeAgedEntriesIfNeeded();
+
+    unsigned long bandwidth = 0;
+
+    for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end(); i++)
+    {
+        ListenerTable table = i->second;
+        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); j++)
+        {
+            ListenerList llist = (*j).second;
+            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); k++)
+            {
+                if ((*k).first == module)
+                {
+                    //get Talkers for this VLAN
+                    TalkerTable ttable = talkerTables[(*i).first];
+                    TalkerEntry *tentry = ttable[(*j).first];
+                    if(tentry->srClass == srClass)
+                    {
+                        bandwidth += bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames,
+                                                    getIntervalForClass(tentry->srClass));
+                    }
                 }
             }
         }

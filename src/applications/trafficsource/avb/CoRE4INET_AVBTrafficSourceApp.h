@@ -21,6 +21,7 @@
 //CoRE4INET
 #include "CoRE4INET_TrafficSourceAppBase.h"
 #include "CoRE4INET_Timed.h"
+#include "AVBDefs_m.h"
 //INET
 #include "MACAddress.h"
 
@@ -42,6 +43,7 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
 {
     private:
         bool isStreaming;
+        enum SR_CLASS srClass;
         unsigned long streamID;
         unsigned int frameSize;
         unsigned int intervalFrames;

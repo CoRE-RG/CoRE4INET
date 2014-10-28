@@ -56,7 +56,10 @@ void SRProtocol::handleMessage(cMessage *msg)
         if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
         {
             //TODO Minor: try to get VLAN
-            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, talkerAdvertise->getStreamDA(), SR_CLASS_A,
+            SR_CLASS srClass;
+            if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSA) srClass = SR_CLASS_A;
+            if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSB) srClass = SR_CLASS_B;
+            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, talkerAdvertise->getStreamDA(), srClass,
                     talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), 0);
         }
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
@@ -156,10 +159,12 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
 
         TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
+        talkerAdvertise->setStreamDA(tentry->address);
         talkerAdvertise->setStreamID(tentry->streamId);
         talkerAdvertise->setMaxFrameSize(tentry->framesize);
         talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
-        talkerAdvertise->setStreamDA(tentry->address);
+        if(tentry->srClass == SR_CLASS_A) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
+        if(tentry->srClass == SR_CLASS_B) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
 
         ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
         etherctrl->setEtherType(MSRP_ETHERTYPE);

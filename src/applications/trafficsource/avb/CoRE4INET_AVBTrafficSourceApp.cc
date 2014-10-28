@@ -22,6 +22,7 @@
 //INET
 #include "Ethernet.h"
 #include "ModuleAccess.h"
+#include "EtherMACFullDuplex.h"
 //Auto-generated Messages
 #include "AVBFrame_m.h"
 
@@ -40,7 +41,17 @@ void AVBTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
     Timed::initialize();
 
+    if     (strcmp(par("srClass").stringValue(),"A") == 0)  srClass = SR_CLASS_A;
+    else if(strcmp(par("srClass").stringValue(),"B") == 0)  srClass = SR_CLASS_B;
+    else                                                    srClass = SR_CLASS_A;
+
     streamID = (unsigned long) par("streamID").longValue();
+    //EtherMACFullDuplex *mac = (EtherMACFullDuplex*)getParentModule()->getSubmodule("phy",0)->getSubmodule("mac");
+    //unsigned long macAdress = mac->getMACAddress().getInt();
+    //static unsigned short uniqueID = 0;
+    //uniqueID++;
+    //streamID = (macAdress << 16) + uniqueID;
+
     intervalFrames = (unsigned int) par("intervalFrames").longValue();
     payload = (unsigned int) par("payload").longValue();
 
@@ -71,7 +82,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             srpTable->subscribe("listenerRegistered", this);
             srpTable->subscribe("listenerUnregistered", this);
             srpTable->subscribe("listenerRegistrationTimeout", this);
-            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, SR_CLASS_A, frameSize, intervalFrames);
+            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, srClass, frameSize, intervalFrames);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
         }
         else
@@ -108,9 +119,9 @@ void AVBTrafficSourceApp::sendAVBFrame()
     }
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
-//class measurement interval = 125us
+//class measurement interval A=125us B=250us
     simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
-    simtime_t interval = SR_CLASS_A_INTERVAL / intervalFrames;
+    simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
 //double interval = (AVB_CLASSMEASUREMENTINTERVAL_US / intervalFrames) / 1000000.00;
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);

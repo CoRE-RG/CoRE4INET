@@ -1,5 +1,5 @@
-#ifndef __CoRE4INET_AVBCLASSASHAPER_H
-#define __CoRE4INET_AVBCLASSASHAPER_H
+#ifndef __CoRE4INET_AVBCLASSBSHAPER_H
+#define __CoRE4INET_AVBCLASSBSHAPER_H
 
 //CoRE4INET
 #include "CoRE4INET_AVBBuffer.h"
@@ -14,17 +14,17 @@ namespace CoRE4INET {
  * @author Philipp Meyer
  */
 template<class TC>
-class AVBClassAShaper : public TC
+class AVBClassBShaper : public TC
 {
     public:
         /**
          * @brief Constructor
          */
-        AVBClassAShaper();
+        AVBClassBShaper();
         /**
          * @brief Destructor
          */
-        ~AVBClassAShaper();
+        ~AVBClassBShaper();
 
     private:
         /**
@@ -115,38 +115,38 @@ class AVBClassAShaper : public TC
 };
 
 template<class TC>
-simsignal_t AVBClassAShaper<TC>::avbQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t AVBClassBShaper<TC>::avbQueueLengthSignal = SIMSIGNAL_NULL;
 
 template<class TC>
-AVBClassAShaper<TC>::AVBClassAShaper()
+AVBClassBShaper<TC>::AVBClassBShaper()
 {
     avbQueue.setName("AVB Messages");
 }
 
 template<class TC>
-AVBClassAShaper<TC>::~AVBClassAShaper()
+AVBClassBShaper<TC>::~AVBClassBShaper()
 {
     avbQueue.clear();
 }
 
 template<class TC>
-void AVBClassAShaper<TC>::initialize(int stage)
+void AVBClassBShaper<TC>::initialize(int stage)
 {
     TC::initialize(stage);
     if (stage == 0)
     {
-        avbQueueLengthSignal = cComponent::registerSignal("avbAQueueLength");
+        avbQueueLengthSignal = cComponent::registerSignal("avbBQueueLength");
 
         int portIndex = cModule::getParentModule()->getIndex();
-        avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbABuffer",
+        avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbBBuffer",
                 portIndex));
     }
 }
 
 template<class TC>
-void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
+void AVBClassBShaper<TC>::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("AVBAin"))
+    if (msg->arrivedOn("AVBBin"))
     {
         if (TC::getNumPendingRequests() && avbBuffer->getCredit() >= 0)
         {
@@ -175,9 +175,9 @@ void AVBClassAShaper<TC>::handleMessage(cMessage *msg)
 }
 
 template<class TC>
-void AVBClassAShaper<TC>::enqueueMessage(cMessage *msg)
+void AVBClassBShaper<TC>::enqueueMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("AVBAin"))
+    if (msg->arrivedOn("AVBBin"))
     {
         avbQueue.insert(msg);
         cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());
@@ -190,7 +190,7 @@ void AVBClassAShaper<TC>::enqueueMessage(cMessage *msg)
 }
 
 template<class TC>
-void AVBClassAShaper<TC>::requestPacket()
+void AVBClassBShaper<TC>::requestPacket()
 {
     Enter_Method
     ("requestPacket()");
@@ -205,7 +205,7 @@ void AVBClassAShaper<TC>::requestPacket()
 }
 
 template<class TC>
-cMessage* AVBClassAShaper<TC>::pop()
+cMessage* AVBClassBShaper<TC>::pop()
 {
     Enter_Method
     ("pop()");
@@ -228,7 +228,7 @@ cMessage* AVBClassAShaper<TC>::pop()
 }
 
 template<class TC>
-cMessage* AVBClassAShaper<TC>::front()
+cMessage* AVBClassBShaper<TC>::front()
 {
     Enter_Method
     ("front()");
@@ -242,13 +242,13 @@ cMessage* AVBClassAShaper<TC>::front()
 }
 
 template<class TC>
-bool AVBClassAShaper<TC>::isEmpty()
+bool AVBClassBShaper<TC>::isEmpty()
 {
     return avbQueue.isEmpty() && TC::isEmpty();
 }
 
 template<class TC>
-void AVBClassAShaper<TC>::clear()
+void AVBClassBShaper<TC>::clear()
 {
     TC::clear();
     avbQueue.clear();

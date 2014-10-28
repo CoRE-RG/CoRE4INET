@@ -167,6 +167,15 @@ class SRPTable : public cSimpleModule
         virtual uint64_t getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsigned int vid = 0);
 
         /**
+         * @brief For a known talker address and V-TAG it finds out the SR-Class of the Stream
+         *
+         * @param talkerAdress address
+         * @param vid VLAN ID
+         * @return SR-Class related to the Stream of the talkerAddress
+         */
+        virtual SR_CLASS getSrClassForTalkerAddress(MACAddress &talkerAddress, unsigned int vid = 0);
+
+        /**
          * @brief For a known streamId and V-TAG it finds out the port where relay component should deliver the message
          *
          * @param streamId streamId
@@ -200,6 +209,15 @@ class SRPTable : public cSimpleModule
          * @return bandwidth in bps
          */
         virtual unsigned long getBandwidthForModule(cModule *module);
+
+        /**
+         * @brief Retrieve the required bandwidth for a module with registered listeners per SR-Class
+         *
+         * @param module the module registered as listener
+         * @param srClass the SR-Class (A or B)
+         * @return bandwidth in bps
+         */
+        virtual unsigned long getBandwidthForModuleAndSRClass(cModule *module, SR_CLASS srClass);
 
         /**
          * @brief Retrieve the required bandwidth for a stream

@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBCLASSAINCONTROL_H_
-#define __CORE4INET_AVBCLASSAINCONTROL_H_
+#ifndef __CORE4INET_AVBINCONTROL_H_
+#define __CORE4INET_AVBINCONTROL_H_
 
 //CoRE4INET Auto-generated Messages
 #include "AVBFrame_m.h"
@@ -34,7 +34,7 @@ namespace CoRE4INET {
  *
  */
 template<class IC>
-class AVBClassAInControl : public IC
+class AVBInControl : public IC
 {
     protected:
         /**
@@ -58,7 +58,7 @@ class AVBClassAInControl : public IC
 };
 
 template<class IC>
-void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
+void AVBInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
@@ -82,7 +82,7 @@ void AVBClassAInControl<IC>::handleMessage(cMessage *msg)
 }
 
 template<class IC>
-bool AVBClassAInControl<IC>::isAVB(EtherFrame *frame)
+bool AVBInControl<IC>::isAVB(EtherFrame *frame)
 {
     //TODO: Major: Detect AVB frame only using priority
     if (dynamic_cast<EthernetIIFrameWithQTag*>(frame))

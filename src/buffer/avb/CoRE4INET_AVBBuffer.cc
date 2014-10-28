@@ -51,6 +51,10 @@ void AVBBuffer::initialize(int stage)
 
         tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
 
+        if     (strcmp(par("srClass").stringValue(),"A") == 0)  srClass = SR_CLASS_A;
+        else if(strcmp(par("srClass").stringValue(),"B") == 0)  srClass = SR_CLASS_B;
+        else                                                    srClass = SR_CLASS_A;
+
         credit = 0;
         maxCredit = 0;
         inTransmission = false;
@@ -103,8 +107,8 @@ void AVBBuffer::handleMessage(cMessage *msg)
             else if (credit < 0)
             {
                 SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
-                unsigned long reservedBandwith = srptable->getBandwidthForModule(
-                        getParentModule()->getSubmodule("phy", getIndex()));
+                unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
+                        getParentModule()->getSubmodule("phy", getIndex()),srClass);
                 Wduration = ((double) -credit) / reservedBandwith;
                 SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
                 event->setTimer((uint64_t) ceil(Wduration / tick));
@@ -141,8 +145,8 @@ void AVBBuffer::handleMessage(cMessage *msg)
             {
                 emit(creditSignal, credit);
                 SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
-                unsigned long reservedBandwith = srptable->getBandwidthForModule(
-                        getParentModule()->getSubmodule("phy", getIndex()));
+                unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
+                        getParentModule()->getSubmodule("phy", getIndex()),srClass);
                 //When there is no bandwidth reserved reset credit and delete all messages
                 if (reservedBandwith == 0)
                 {
@@ -178,8 +182,8 @@ void AVBBuffer::idleSlope(SimTime duration)
         Enter_Method
         ("idleSlope()");
         SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
-        unsigned long reservedBandwith = srptable->getBandwidthForModule(
-                getParentModule()->getSubmodule("phy", getIndex()));
+        unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
+                getParentModule()->getSubmodule("phy", getIndex()),srClass);
 
         credit += ceil(reservedBandwith * duration.dbl());
         emit(creditSignal, credit);
@@ -195,8 +199,8 @@ void AVBBuffer::interferenceSlope(SimTime duration)
         Enter_Method
         ("interferenceSlope()");
         SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
-        unsigned long reservedBandwith = srptable->getBandwidthForModule(
-                getParentModule()->getSubmodule("phy", getIndex()));
+        unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
+                getParentModule()->getSubmodule("phy", getIndex()),srClass);
 
         credit += ceil(reservedBandwith * duration.dbl());
         emit(creditSignal, credit);
@@ -208,8 +212,8 @@ void AVBBuffer::sendSlope(SimTime duration)
     Enter_Method
     ("sendSlope()");
     SRPTable *srptable = check_and_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
-    unsigned long reservedBandwith = srptable->getBandwidthForModule(
-            getParentModule()->getSubmodule("phy", getIndex()));
+    unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
+            getParentModule()->getSubmodule("phy", getIndex()),srClass);
 
     cGate *physOutGate = getParentModule()->getSubmodule("phy", getIndex())->getSubmodule("mac")->gate("phys$o");
     cChannel *outChannel = physOutGate->findTransmissionChannel();
