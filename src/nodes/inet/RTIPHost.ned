@@ -143,14 +143,6 @@ module RTIPHost
         }
 
 		// Buffers
-        bgIn: BGQueueBuffer {
-            @display("p=264,232");
-        }
-
-        bgOut: BGQueueBuffer {
-            @display("p=342,232");
-        }
-
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=186,150");
@@ -224,8 +216,6 @@ module RTIPHost
         // network Layer <--> link Layer
         networkLayer.ifOut++ --> phy[0].upperLayerIn;
         phy[0].upperLayerOut --> networkLayer.ifIn++;
-        bgOut.out --> phy[0].bgIn;
-        phy[0].bgOut --> bgIn.in;
         avbABuffer.out --> phy[0].AVBAin;
         avbBBuffer.out --> phy[0].AVBBin;
         avbCTC.AVBAout[0] --> avbABuffer.in;

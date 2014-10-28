@@ -48,8 +48,10 @@ void BGEtherEncap::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("lowerLayerIn"))
     {
-        send(msg->dup(), gate("bgOut"));
-        if (gate("upperLayerOut")->getPathEndGate()) {
+        if (gate("bgOut")->isConnected() && gate("bgOut")->isPathOK()) {
+            send(msg->dup(), gate("bgOut"));
+        }
+        if (gate("upperLayerOut")->isConnected() && gate("upperLayerOut")->isPathOK()) {
             EtherEncap::handleMessage(msg);
         }
     }
