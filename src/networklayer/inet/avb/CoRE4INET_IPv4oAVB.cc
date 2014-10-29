@@ -150,7 +150,7 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
             SRPTable *srpTable = check_and_cast<SRPTable *>(src);
 
             //TODO Minor: try to get VLAN
-            srpTable->updateListenerWithStreamId(tentry->streamId, this, 0);
+            srpTable->updateListenerWithStreamId(tentry->streamId, this, tentry->vlan_id);
             // TODO: update timer???
         }
     }
