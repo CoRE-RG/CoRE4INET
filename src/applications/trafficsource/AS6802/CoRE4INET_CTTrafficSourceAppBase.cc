@@ -67,7 +67,9 @@ void CTTrafficSourceAppBase::sendMessage()
                 {
                     continue;
                 }
+                frame->setTimestamp();
                 cPacket *payload = new cPacket;
+                payload->setTimestamp();
                 payload->setByteLength(par("payload").longValue());
                 frame->encapsulate(payload);
                 //Padding
