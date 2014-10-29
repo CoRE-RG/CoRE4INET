@@ -256,6 +256,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
         talkerTable[streamId]->intervalFrames = intervalFrames;
     }
     talkerTable[streamId]->address = address;
+    talkerTable[streamId]->vlan_id = vid;
     talkerTable[streamId]->insertionTime = simTime();
     if (updated)
     {
@@ -318,6 +319,7 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, un
     }
     llist[module]->streamId = streamId;
     llist[module]->module = module;
+    llist[module]->vlan_id = vid;
     llist[module]->insertionTime = simTime();
 
     if (updated)

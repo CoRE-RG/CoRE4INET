@@ -65,7 +65,7 @@ void SRProtocol::handleMessage(cMessage *msg)
         {
             bool update = false;
             //TODO Minor: try to get VLAN.
-            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
+            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
             //Is this a new or updated stream
             if (std::find(listeners.begin(), listeners.end(), port) != listeners.end())
             {
@@ -76,7 +76,7 @@ void SRProtocol::handleMessage(cMessage *msg)
             //Add Higher Priority Bandwidth
             utilizedBandwidth += port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
             //TODO Minor: try to get VLAN.
-            unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
+            unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
 
             cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
             cChannel *outChannel = physOutGate->findTransmissionChannel();
@@ -88,7 +88,7 @@ void SRProtocol::handleMessage(cMessage *msg)
             if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
             {
                 //TODO Minor: try to get VLAN.
-                srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, VLAN_ID_DEFAULT);
+                srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, listenerReady->getVlan_identifier());
                 if(!update)
                 {
                     EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
@@ -113,7 +113,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                 else
                 {
                     bubble("Listener Failed!");
-                    srp = new ListenerFailed("Listener Failed", IEEE802CTRL_DATA);
+                    srp = new ListenerAskingFailed("Listener Failed", IEEE802CTRL_DATA);
                 }
                 srp->setStreamID(listenerReady->getStreamID());
 
@@ -121,7 +121,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                 etherctrl->setEtherType(MSRP_ETHERTYPE);
                 etherctrl->setDest(SRP_ADDRESS);
                 //TODO Minor: try to get VLAN.
-                cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), VLAN_ID_DEFAULT);
+                cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
                 if (talker && talker->isName("phy"))
                 {
                     etherctrl->setSwitchPort(talker->getIndex());
@@ -130,19 +130,19 @@ void SRProtocol::handleMessage(cMessage *msg)
                 }
             }
         }
-        else if (ListenerFailed* listenerFailed = dynamic_cast<ListenerFailed*>(msg))
+        else if (ListenerAskingFailed* listenerFailed = dynamic_cast<ListenerAskingFailed*>(msg))
         {
             bubble("Listener Failed!");
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);
             etherctrl->setDest(SRP_ADDRESS);
             //TODO Minor: try to get VLAN.
-            cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), VLAN_ID_DEFAULT);
+            cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), listenerFailed->getVlan_identifier());
             if (talker && talker->isName("phy"))
             {
                 etherctrl->setSwitchPort(talker->getIndex());
                 //Necessary because controlInfo is not duplicated
-                ListenerFailed* listenerFailedCopy = listenerFailed->dup();
+                ListenerAskingFailed* listenerFailedCopy = listenerFailed->dup();
                 listenerFailedCopy->setControlInfo(etherctrl);
                 send(listenerFailedCopy, gate("out"));
             }
@@ -190,12 +190,13 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 
         //Get Talker Port
         SRPTable *srpTable = (SRPTable *) src;
-        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, VLAN_ID_DEFAULT);
+        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
         //Send listener ready only when talker is not a local application
         if (talker && talker->isName("phy"))
         {
-            SRPFrame *listenerReady = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
+            ListenerReady *listenerReady = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
             listenerReady->setStreamID(lentry->streamId);
+            listenerReady->setVlan_identifier(lentry->vlan_id);
 
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);

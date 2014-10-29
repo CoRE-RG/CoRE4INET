@@ -52,8 +52,9 @@ void BGEtherEncap::handleMessage(cMessage *msg)
             send(msg->dup(), gate("bgOut"));
         }
         if (gate("upperLayerOut")->isConnected() && gate("upperLayerOut")->isPathOK()) {
-            EtherEncap::handleMessage(msg);
+            EtherEncap::handleMessage(msg->dup());
         }
+        delete msg;
     }
     else
     {

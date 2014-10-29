@@ -61,7 +61,8 @@ packet TalkerAdvertise extends SRPFrame{
 	unsigned int accumulatedLatency;
 }
 
-packet TalkerFailed extends SRPFrame{
+packet TalkerFailed extends TalkerAdvertise{
+    byteLength = 34;
     // FailureInformation
 	//
 	// 72 Bit Field
@@ -69,21 +70,21 @@ packet TalkerFailed extends SRPFrame{
 
 packet ListenerReady extends SRPFrame{
 	byteLength = 8;
+	
+	unsigned short vlan_identifier;
 }
 
-packet AskingFailed extends SRPFrame{
+packet ListenerAskingFailed extends SRPFrame{
+    byteLength = 17;
     // FailureInformation
 	//
 	// 72 Bit Field
-}
-
-packet ListenerFailed extends SRPFrame{
-    // FailureInformation
-	//
-	// 72 Bit Field
+	
+	unsigned short vlan_identifier;
 }
 
 packet ListenerReadyFailed extends ListenerReady{
+    byteLength = 17;
     // FailureInformation
 	//
 	// 72 Bit Field

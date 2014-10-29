@@ -83,14 +83,16 @@ class SRPTable : public cSimpleModule
             public:
                 uint64_t streamId;
                 cModule *module;            // Listener port or module
+                unsigned short vlan_id;     // VLAN identifier
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 ListenerEntry()
                 {
                     streamId = 0;
                     module = NULL;
+                    vlan_id = VLAN_ID_DEFAULT;
                 }
                 ListenerEntry(uint64_t streamId, unsigned short vlan_id, cModule *module, simtime_t insertionTime) :
-                        streamId(streamId), module(module), insertionTime(insertionTime)
+                        streamId(streamId), module(module), vlan_id(vlan_id), insertionTime(insertionTime)
                 {
                 }
         };
