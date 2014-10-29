@@ -165,4 +165,31 @@
         compileFlags = "-DWITH_CONFIGURATION_MANAGER"
         linkerFlags = ""
         />
+    <feature
+        id="IPoRE"
+        name="IP over realtime ethernet"
+        description = "The implementation of IPv4 over realtime ethernet (AS6802, avb)"
+        initiallyEnabled = "true"
+        requires = ""
+        labels = ""
+        nedPackages = "
+                       core4inet.networklayer.inet
+                       core4inet.nodes.inet
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_IPORE"
+        linkerFlags = ""
+        />
+    <feature
+        id="IPoRE_examples"
+        name="IPoRE examples"
+        description = "Examples for the IPoRE implementation"
+        initiallyEnabled = "true"
+        requires = "IPoRE"
+        labels = ""
+        nedPackages = "
+                      "
+        extraSourceFolders = ""
+        linkerFlags = ""
+        />
 </features>
