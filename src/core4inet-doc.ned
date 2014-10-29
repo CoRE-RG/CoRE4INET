@@ -74,6 +74,7 @@
 // - Fabian Kempf (HAW-Hamburg)
 // - Lazar Todorov (HAW Hamburg)
 // - Philipp Meyer (HAW Hamburg)
+// - Kai-Uwe von Deylen (HAW Hamburg)
 //
 // <h3>Acknowledgements</h3>
 // - Giancarlo Vasta for finding and reporting bugs 
@@ -102,6 +103,11 @@
 // @page license.html, License
 // <pre>
 // @include ../License
+// </pre>
+//
+// @page feature_ipore.html, IP over Realtime Ethernet
+// <pre>
+// @include nodes/inet/README
 // </pre>
 
 

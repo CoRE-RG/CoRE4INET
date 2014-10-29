@@ -21,15 +21,13 @@ import core4inet.linklayer.port.TTEPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
-import inet.applications.ethernet.EtherAppCli;
-import inet.applications.ethernet.EtherAppSrv;
-import core4inet.linklayer.ethernet.base.BGEtherLLC;
+import core4inet.linklayer.ethernet.base.BGEtherEncap;
 import inet.status.NodeStatus;
 
 
 //
 // Module for a TTEthernet Host.
-// Contains a EtherLLC for best-effort traffic, a TTEPHYPort module as physical port,
+// Contains a EtherEncap for best-effort traffic, a TTEPHYPort module as physical port,
 // sync module (Sync) and a TTEScheduler module.
 // The Host is configured by the provided TTEthernet XML network configuration
 // (network_configuration parameter) and uses the device_name parameter to find its config.
@@ -38,7 +36,7 @@ import inet.status.NodeStatus;
 // @todo Ports for redundancy!
 // @todo Documentation for Applications!
 //
-// @see EtherLLC, TTEPHYPort, Sync, Scheduler, BufferManager
+// @see EtherEncap, TTEPHYPort, Sync, Scheduler, BufferManager
 //
 // @author Till Steinbach
 module TTEEtherHost
@@ -64,25 +62,12 @@ module TTEEtherHost
         phy[numPorts]: TTEPHYPort {
             @display("p=235,255,c,50");
         }
-        // LLC for best-effort traffic
-        llc: BGEtherLLC {
+        // Encap for best-effort traffic
+        encap: BGEtherEncap {
             parameters:
                 @display("p=141,256");
-            gates:
-                upperLayerIn[2];
-                upperLayerOut[2];
         }
 
-        cli: EtherAppCli {
-            parameters:
-                registerSAP = true;
-                @display("p=60,256,col");
-        }
-        srv: EtherAppSrv {
-            parameters:
-                registerSAP = true;
-                @display("p=60,169,col");
-        }
         // Buffer manager that creates the buffers according to the configuration
         configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
             @display("p=999,999");
@@ -107,18 +92,12 @@ module TTEEtherHost
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
         }
-    connections:
+    connections allowunconnected:
         phy[0].phys <--> ethg;
-        llc.lowerLayerOut --> phy[0].upperLayerIn;
-        phy[0].upperLayerOut --> llc.lowerLayerIn;
+        encap.lowerLayerOut --> phy[0].upperLayerIn;
+        phy[0].upperLayerOut --> encap.lowerLayerIn;
 
-        cli.out --> llc.upperLayerIn[0];
-        cli.in <-- llc.upperLayerOut[0];
-
-        srv.out --> llc.upperLayerIn[1];
-        srv.in <-- llc.upperLayerOut[1];
-
-        llc.bgOut --> bgIn.in;
-        bgOut.out --> llc.bgIn;
+        encap.bgOut --> bgIn.in;
+        bgOut.out --> encap.bgIn;
 }
 

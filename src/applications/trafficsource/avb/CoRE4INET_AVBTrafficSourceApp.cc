@@ -109,11 +109,13 @@ void AVBTrafficSourceApp::sendAVBFrame()
     char name[10];
     sprintf(name, "Stream %ld", streamID);
     AVBFrame *outFrame = new AVBFrame(name);
+    outFrame->setTimestamp();
     outFrame->setStreamID(streamID);
     outFrame->setDest(multicastMAC);
     outFrame->setVID(vlan_id);
 
     cPacket *payloadPacket = new cPacket;
+    payloadPacket->setTimestamp();
     payloadPacket->setByteLength(payload);
     outFrame->encapsulate(payloadPacket);
 //Padding

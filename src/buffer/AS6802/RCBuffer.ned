@@ -41,7 +41,7 @@ simple RCBuffer extends CTBuffer like ITimed
         int max_dispatch_delay @unit(tick) = default(0tick);
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
         int bag @unit(tick) = default(0tick);
-        // Not used
+        // Maximum jitter for the bandwidth allocation gap in number of ticks
         int jitter @unit(tick) = default(0tick);
 
         string oscillator = default("oscillator");

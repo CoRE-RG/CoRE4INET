@@ -31,18 +31,17 @@ namespace CoRE4INET;
 //
 // @author Till Steinbach
 packet CTFrame extends EthernetIIFrame
-{    
+{
+    @customize(true);    
     	// Set EthernetHeader Bytelength
     	byteLength = 18;
     	
     	etherType = 0x891d;
     	
         // Critical traffic ID (from MAC) (for TT and RC messages). 
-        @customize(true);
         abstract uint16_t ctID;
         
         // Critical traffic marker (from MAC) (for TT and RC messages). 
-        @customize(true);
         abstract uint32_t ctMarker;
         
         string displayString="b=15,15,rect,black,kind,5";

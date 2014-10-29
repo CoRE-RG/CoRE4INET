@@ -51,9 +51,11 @@ void TicApp::handleMessage(cMessage *msg)
     if (msg->arrivedOn("schedulerIn"))
     {
         Tic *tic = new Tic();
+        tic->setTimestamp();
         tic->setRoundtrip_start(simTime());
         tic->setCount((unsigned int) par("counter").longValue());
         CTFrame *frame = new TTFrame("Tic");
+        frame->setTimestamp();
         frame->setCtID((uint16_t) par("ct_id").longValue());
         frame->encapsulate(tic);
 

@@ -46,11 +46,13 @@ void TocApp::handleMessage(cMessage *msg)
             par("counter").setLongValue((long) tic->getCount());
 
             Toc *toc = new Toc();
+            toc->setTimestamp();
             toc->setRoundtrip_start(tic->getRoundtrip_start());
             toc->setCount(tic->getCount() + 1);
             delete tic;
 
             CTFrame *frame = new RCFrame("Toc");
+            frame->setTimestamp();
             frame->setCtID((uint16_t) par("ct_id").longValue());
             frame->encapsulate(toc);
 

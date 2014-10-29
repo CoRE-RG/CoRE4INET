@@ -1,0 +1,13 @@
+Demonstrates a small TTEthernet with AVB Network. Traffic generators send Ethernet frames directly.
+Also TCP apps communicate over AS6802 and avb.
+
+- The small network contains three hosts (node1, node2, node3) and a switch, which 
+  connects these hosts.
+  The cycle time is 5 ms (see omnetpp.ini)
+
+- Via virtual link vl101 node1 sends tcp frames as time triggered (TT) messages to node3.
+- Via avb stream 27 node 1 sends tcp frames as avb class B messages to node2.
+- Both, node2 and node3 answers the tcp packets from node1 over best effort (BE) messages.
+
+- additional AVB traffic is sent as background traffic:
+- The nodes 1 and 2 are AVB Talkers. node3 is a AVB Listener and tries to reserve both Streams.

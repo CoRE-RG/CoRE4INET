@@ -21,8 +21,6 @@ import core4inet.utilities.classes.ITimed;
 //
 // The traffic is checked for conformance with the bag.
 //
-// @warning Only the bag parameter is used!
-//
 // @see Incoming,
 //
 // @author Till Steinbach
@@ -34,7 +32,7 @@ simple RCIncoming extends Incoming like ITimed
         @class(RCIncoming);
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
         int bag @unit(tick) = default(0tick);
-        //Not used
+        // Maximum jitter for the bandwidth allocation gap in number of ticks
         int jitter @unit(tick) = default(0tick);
 
         string oscillator = default("oscillator");

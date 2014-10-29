@@ -51,7 +51,18 @@ class RCBuffer : public virtual CTBuffer, public Timed
          * The bag is only reseted when all gates invoked resetBag().
          */
         unsigned int numReset;
-
+        /**
+         * Saves the tickcount of the last message
+         */
+        uint64_t lastSent;
+        /**
+         * @brief caches bag parameter
+         */
+        uint64_t bag;
+        /**
+         * @brief caches jitter parameter
+         */
+        uint64_t jitter;
     public:
         /**
          * @brief Constructor

@@ -1,0 +1,78 @@
+<rtIpConfig>
+
+	<!--
+		The config consists of "filter" elements and "subscribe" elements
+	-->
+
+	<!-- Each filter consists of several attributes.
+	     Each attribute either is used to define the pattern to check if outgoing packets are matching them or is used to define how to send the matching packets:
+	     The pattern attributes are always the same, no matter what kind of outgoing packet should be sent.
+	     The other attributes, which are defining how to send the packet, vary, depending on which kind of packet should be sent (i.e. TT or RC or AVB)
+	     
+	     Pattern attributes:
+	     - srcAddress       (optional)
+         - srcPrefixLength  (optional)
+         - destAddress      (optional)
+         - destPrefixLength (optional)
+         - protocol         (optional)
+         - tos              (optional)
+         - tosMask          (optional)
+         - srcPort          (optional)
+         - srcPortMin       (optional)
+         - srcPortMax       (optional)
+         - destPort         (optional)
+         - destPortMin      (optional)
+         - destPortMax      (optional)
+         
+         Destination Type (value of the "destType" attribute, which defines the Layer2)
+         - destType="DestinationType_TT"
+         - destType="DestinationType_RC"
+         - destType="DestinationType_AVB"
+         
+         TT send attributes:
+         - destModule (mandatory)
+         - ctId       (mandatory)
+         - actionTime (mandatory)
+         - period     (optional, defaults to "period[0]")
+         - oscillator (optional, defaults to "oscillator")
+         
+         RC send attributes:
+         - destModules (mandatory)
+         - ctId        (mandatory)
+         
+         AVB send attributes:
+         - destModule      (mandatory)
+         - destMAC         (mandatory)
+         - streamId        (mandatory)
+         - trafficClass    (optional, defaults to "A")
+         - frameSize       (mandatory)
+         - intervallFrames (mandatory)
+         - vlanId          (mandatory)
+         
+	     -->
+	     
+	     <!--
+	     	Each subscribe element has one single "streamId" attribute which defines the stream Id to subscribe to.
+	     -->
+	     
+	     
+	<node id="node1">
+		<filter srcAddress="10.0.0.1" destAddress="10.0.0.3" destPort="1000" protocol="TCP"
+		        destType="DestinationType_TT" ctId="101" destModule="vl_101" actionTime="980" alsoBE="0" />
+		<filter srcAddress="10.0.0.1" destAddress="10.0.0.3" destPort="1000" protocol="TCP"
+		        destType="DestinationType_RC" ctId="100" destModules="vl_100" alsoBE="0" />
+		<filter srcAddress="10.0.0.1" destAddress="10.0.0.2" destPort="1000" protocol="TCP"
+		        destType="DestinationType_AVB" destModule="avbCTC" destMAC="010203040506" alsoBE="0" streamId="27" trafficClass="B" frameSize="300" intervallFrames="1" vlanId="0" />
+	</node>
+	
+	
+	<node id="node2">
+		<subscribe streamId="27" />
+	</node>
+	
+	
+	<node id="node3">
+	</node>
+	
+	
+</rtIpConfig>
