@@ -144,7 +144,7 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
         SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
 
         //If talker for the desired stream, register Listener
-        if (lentry->streamId == streamID)
+        if (lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
             ev << "Listener for stream " << lentry->streamId << " registered!" << std::endl;
 
@@ -159,7 +159,7 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
         SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
 
         //If talker for the desired stream, unregister Listener
-        if (lentry->streamId == streamID)
+        if (lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
             //check whether there are listeners left
             SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));

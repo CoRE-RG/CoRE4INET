@@ -35,8 +35,6 @@ namespace CoRE4INET {
  */
 class AVBTrafficSinkApp : public TrafficSinkApp, public cListener
 {
-    private:
-        unsigned short vlan_id;
     protected:
         /**
          * @brief Initialization of the module.

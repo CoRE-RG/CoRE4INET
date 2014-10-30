@@ -69,7 +69,7 @@ class SRPTable : public cSimpleModule
                 TalkerEntry(uint64_t streamId, SR_CLASS srClass, MACAddress address, cModule *module,
                         unsigned short framesize, unsigned short intervalFrames, unsigned short vlan_id, simtime_t insertionTime) :
                         streamId(streamId), srClass(srClass), address(address), module(module), framesize(framesize), intervalFrames(
-                                intervalFrames), vlan_id(vlan_id),insertionTime(insertionTime)
+                                intervalFrames), vlan_id(vlan_id), insertionTime(insertionTime)
                 {
                 }
         };
@@ -91,7 +91,7 @@ class SRPTable : public cSimpleModule
                     module = NULL;
                     vlan_id = VLAN_ID_DEFAULT;
                 }
-                ListenerEntry(uint64_t streamId, unsigned short vlan_id, cModule *module, simtime_t insertionTime) :
+                ListenerEntry(uint64_t streamId, cModule *module, unsigned short vlan_id, simtime_t insertionTime) :
                         streamId(streamId), module(module), vlan_id(vlan_id), insertionTime(insertionTime)
                 {
                 }

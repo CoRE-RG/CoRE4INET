@@ -105,7 +105,8 @@ void SRProtocol::handleMessage(cMessage *msg)
                         << requiredBandwidth / (double) 1000000 << "MBit/s, remaining bandwidth "
                         << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth) / (double) 1000000 << "MBit/s.";
                 SRPFrame *srp;
-                if (srpTable->getListenersForStreamId(listenerReady->getStreamID(), 0).size() > 0)
+                //TODO Minor: try to get VLAN.
+                if (srpTable->getListenersForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier()).size() > 0)
                 {
                     bubble("Listener Ready Failed!");
                     srp = new ListenerReadyFailed("Listener Ready Failed", IEEE802CTRL_DATA);
