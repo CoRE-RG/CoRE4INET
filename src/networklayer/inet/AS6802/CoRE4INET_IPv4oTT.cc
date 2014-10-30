@@ -50,7 +50,20 @@ IPv4oTT<Base>::IPv4oTT() {
 
 template<class Base>
 IPv4oTT<Base>::~IPv4oTT() {
-    // TODO Auto-generated destructor stub
+    unordered_map<std::string, std::list<QueuedPacket*> >::iterator i = ttPackets.begin();
+    while (i != ttPackets.end()) {
+        std::list<QueuedPacket*>::iterator j = i->second.begin();
+        while (j != i->second.end()) {
+            QueuedPacket *qp = (*j);
+            cPacket *p = qp->getPacket();
+            delete p;
+            delete qp;
+            ++j;
+        }
+        i->second.clear();
+        ++i;
+    }
+    ttPackets.clear();
 }
 
 //==============================================================================
@@ -259,12 +272,11 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
                 QueuedPacket *toSend = ttPackets[msgName].front();
                 ttPackets[msgName].pop_front();
                 sendTTFrame(toSend->getPacket(), toSend->getFilter());
+                delete toSend;
             }
 
             SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
             event->setNext_cycle(true);
-            const char * hiMyNameIs = msg->getName();
-            EV << "HI, MY NAME IS:" << hiMyNameIs << std::endl;
             periods[msgName]->registerEvent(event);
         }
 
@@ -283,6 +295,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 
         ipPacket->setArrival(this, Base::gate("TTIn")->getId());
 
+        delete ttFrame;
         Base::handleMessage(ipPacket);
     }
     else if (msg->arrivedOn("TTIn"))
