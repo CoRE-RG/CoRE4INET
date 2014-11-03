@@ -40,7 +40,7 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         int intervalFrames = default(1);
         
         // VLAN identifier of the AVB Stream
-        int vlan_id = default(2); //Do not Change this! (IN WORK)
+        int vlan_id = default(2);
 
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("oscillator");

@@ -64,7 +64,6 @@ void SRProtocol::handleMessage(cMessage *msg)
         else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
         {
             bool update = false;
-            //TODO Minor: try to get VLAN.
             std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
             //Is this a new or updated stream
             if (std::find(listeners.begin(), listeners.end(), port) != listeners.end())
@@ -75,7 +74,6 @@ void SRProtocol::handleMessage(cMessage *msg)
             unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
             //Add Higher Priority Bandwidth
             utilizedBandwidth += port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
-            //TODO Minor: try to get VLAN.
             unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
 
             cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
@@ -87,7 +85,6 @@ void SRProtocol::handleMessage(cMessage *msg)
 
             if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
             {
-                //TODO Minor: try to get VLAN.
                 srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, listenerReady->getVlan_identifier());
                 if(!update)
                 {
@@ -105,7 +102,6 @@ void SRProtocol::handleMessage(cMessage *msg)
                         << requiredBandwidth / (double) 1000000 << "MBit/s, remaining bandwidth "
                         << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth) / (double) 1000000 << "MBit/s.";
                 SRPFrame *srp;
-                //TODO Minor: try to get VLAN.
                 if (srpTable->getListenersForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier()).size() > 0)
                 {
                     bubble("Listener Ready Failed!");
@@ -121,7 +117,6 @@ void SRProtocol::handleMessage(cMessage *msg)
                 ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
                 etherctrl->setEtherType(MSRP_ETHERTYPE);
                 etherctrl->setDest(SRP_ADDRESS);
-                //TODO Minor: try to get VLAN.
                 cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
                 if (talker && talker->isName("phy"))
                 {
@@ -137,7 +132,6 @@ void SRProtocol::handleMessage(cMessage *msg)
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);
             etherctrl->setDest(SRP_ADDRESS);
-            //TODO Minor: try to get VLAN.
             cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), listenerFailed->getVlan_identifier());
             if (talker && talker->isName("phy"))
             {
