@@ -94,7 +94,7 @@ std::list<cModule*> SRPTable::getListenersForTalkerAddress(MACAddress &talkerAdd
 {
     Enter_Method
     ("SRPTable::getListenersForTalkerAddress()");
-    return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress), vid);
+    return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
 }
 
 uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsigned int vid)
