@@ -229,6 +229,7 @@ void IPv4oRC<Base>::handleMessage(cMessage* msg)
 
         ipPacket->setArrival(this, Base::gate("RCIn")->getId());
 
+        delete rcFrame;
         Base::handleMessage(ipPacket);
     }
     else {
