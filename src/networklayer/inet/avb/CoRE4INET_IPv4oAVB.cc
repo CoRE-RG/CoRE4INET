@@ -128,6 +128,7 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
 
         ipPacket->setArrival(this, base::gate("AVBin")->getId());
 
+        delete avbFrame;
         base::handleMessage(ipPacket);
     }
     else {
