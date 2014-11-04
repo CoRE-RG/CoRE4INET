@@ -3,12 +3,17 @@ INSTALLATION INSTRUCTIONS
 
 PREREQUISITES
 
-You should have a working OMNeT++ installation, version 4.5 or later with the
-INET-Framework 2.4.0
+You should have a working OMNeT++ installation, version 4.6 or later with the
+INET-Framework 2.5.0
 
 In INET you have to enable at least the following features:
 - Ethernet
 - IEEE 802.1d
+If you require IP and Transport (otherwise disable the feature - IP over realtime Ethernet -  in CoRE4INET):
+- IPv4
+- IPv6
+- TCP
+- UDP
 
 General
 -------
