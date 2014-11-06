@@ -121,7 +121,7 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             it = m.begin();
             it2 = (*it).second.begin();
             while (index <= i)
@@ -394,11 +394,11 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
                     size += (*j).second.size();
                 }
             }
-            return size;
+            return (int)size;
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             this->it = this->m.begin();
             this->it2 = (*this->it).second.begin();
             it3 = (*this->it2).second.begin();
