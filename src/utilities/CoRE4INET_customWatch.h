@@ -349,7 +349,15 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << this->it3->second;
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first << " ==> " << this->it3->second;
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };
@@ -427,7 +435,15 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << this->it3->second;
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first << " ==> " << this->it3->second;
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };
@@ -451,7 +467,15 @@ class cStdPtrListMapMapWatcher : public cStdListMapMapWatcher<KeyT, ValueT, CmpT
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << *(this->it3->second);
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first << " ==> " << *(this->it3->second);
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };
@@ -475,7 +499,16 @@ class cStdPtrListUMapUMapWatcher : public cStdListUMapUMapWatcher<KeyT, ValueT>
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << *(this->it3->second);
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first;
+                out << " ==> " << *(this->it3->second);
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };
