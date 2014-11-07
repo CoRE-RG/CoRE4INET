@@ -431,6 +431,7 @@ void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, con
     name << "Stream " << avbDestInfo->getStreamId();
     AVBFrame *outFrame = new AVBFrame(name.str().c_str());
     outFrame->setStreamID(avbDestInfo->getStreamId());
+    outFrame->setVID(avbDestInfo->getVlanId());
     outFrame->setDest(*(avbDestInfo->getDestMac()));
     outFrame->setEtherType(ETHERTYPE_IPv4);
 
