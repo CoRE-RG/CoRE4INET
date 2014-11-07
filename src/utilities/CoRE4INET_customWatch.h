@@ -121,12 +121,12 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             it = m.begin();
             it2 = (*it).second.begin();
             while (index <= i)
             {
-                if (i > (index + (*it).second.size()))
+                if (i > (index + (int)(*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -349,7 +349,15 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << this->it3->second;
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first << " ==> " << this->it3->second;
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };
@@ -386,17 +394,17 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
                     size += (*j).second.size();
                 }
             }
-            return size;
+            return (int)size;
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             this->it = this->m.begin();
             this->it2 = (*this->it).second.begin();
             it3 = (*this->it2).second.begin();
             while (index <= i)
             {
-                if (i > (index + (*this->it2).second.size()))
+                if (i > (index + (int)(*this->it2).second.size()))
                 {
                     index += (*this->it2).second.size();
                     ++this->it2;
@@ -427,7 +435,15 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << this->it3->second;
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first << " ==> " << this->it3->second;
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };
@@ -451,7 +467,15 @@ class cStdPtrListMapMapWatcher : public cStdListMapMapWatcher<KeyT, ValueT, CmpT
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << *(this->it3->second);
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first << " ==> " << *(this->it3->second);
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };
@@ -475,7 +499,16 @@ class cStdPtrListUMapUMapWatcher : public cStdListUMapUMapWatcher<KeyT, ValueT>
         virtual std::string atIt3() const
         {
             std::stringstream out;
-            out << this->atIt2() << this->it3->first << " ==> " << *(this->it3->second);
+            out << this->atIt2();
+            if(this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first;
+                out << " ==> " << *(this->it3->second);
+            }
+            else
+            {
+                out << "(empty)";
+            }
             return out.str();
         }
 };

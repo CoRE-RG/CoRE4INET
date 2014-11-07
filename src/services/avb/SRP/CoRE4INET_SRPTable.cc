@@ -354,6 +354,9 @@ bool SRPTable::removeListenerWithStreamId(uint64_t streamId, cModule *module, un
             ListenerEntry *lentry = (*listener).second;
             emit(listenerUnregisteredSignal, lentry);
             (*listeners).second.erase(listener);
+            if((*listeners).second.size()==0){
+                listenerTable.erase(listeners);
+            }
             updateDisplayString();
             return true;
         }
@@ -454,7 +457,7 @@ void SRPTable::removeAgedEntries()
             listenerTable != listenerTables.end(); ++listenerTable)
     {
         for (ListenerTable::iterator listenerList = (*listenerTable).second.begin();
-                listenerList != (*listenerTable).second.end(); ++listenerList)
+                listenerList != (*listenerTable).second.end();)
         {
             for (ListenerList::iterator listenerEntry = (*listenerList).second.begin();
                     listenerEntry != (*listenerList).second.end();)
@@ -476,6 +479,14 @@ void SRPTable::removeAgedEntries()
                         nextAging = entryAging;
                     }
                 }
+            }
+            if((*listenerList).second.size()==0)
+            {
+                (*listenerTable).second.erase(listenerList++);
+            }
+            else
+            {
+                ++listenerList;
             }
         }
     }
