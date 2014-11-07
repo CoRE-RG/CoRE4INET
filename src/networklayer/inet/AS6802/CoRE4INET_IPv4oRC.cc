@@ -42,15 +42,12 @@ namespace CoRE4INET {
 
 template<class Base>
 IPv4oRC<Base>::IPv4oRC() {
-    // TODO Auto-generated constructor stub
-
 }
 
 //==============================================================================
 
 template<class Base>
 IPv4oRC<Base>::~IPv4oRC() {
-    // TODO Auto-generated destructor stub
 }
 
 //==============================================================================

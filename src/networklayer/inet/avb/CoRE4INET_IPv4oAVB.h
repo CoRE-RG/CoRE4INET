@@ -32,6 +32,19 @@ namespace CoRE4INET {
 template<class base>
 class IPv4oAVB : public base {
 
+    private:
+        class UpdateListenerMsg : public cMessage {
+            public:
+                UpdateListenerMsg(const char *name=NULL, short kind=0)
+                : cMessage(name, kind)
+                {
+                }
+            public:
+                uint64_t streamId;
+                unsigned short vlanId;
+        };
+
+
     protected:
         enum MsgKind { MSGKIND_START = 0xBEEF };
 

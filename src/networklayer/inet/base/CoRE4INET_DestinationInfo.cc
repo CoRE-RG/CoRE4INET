@@ -18,12 +18,10 @@
 namespace CoRE4INET {
 
 DestinationInfo::DestinationInfo() {
-    // TODO Auto-generated constructor stub
 
 }
 
 DestinationInfo::~DestinationInfo() {
-    // TODO Auto-generated destructor stub
 }
 
 } /* namespace CoRE4INET */

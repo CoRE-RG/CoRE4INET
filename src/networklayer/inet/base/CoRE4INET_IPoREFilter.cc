@@ -18,7 +18,6 @@
 namespace CoRE4INET {
 
 IPoREFilter::IPoREFilter() {
-    // TODO Auto-generated constructor stub
 
 }
 

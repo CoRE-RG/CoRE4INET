@@ -44,14 +44,12 @@ namespace CoRE4INET {
 
 IPv4oREBase::IPv4oREBase()
 {
-    // TODO Auto-generated constructor stub
 }
 
 //==============================================================================
 
 IPv4oREBase::~IPv4oREBase()
 {
-    // TODO Auto-generated destructor stub
 }
 
 //==============================================================================

@@ -28,14 +28,12 @@ Define_Module(BGEtherEncap);
 //==============================================================================
 
 BGEtherEncap::BGEtherEncap() {
-    // TODO Auto-generated constructor stub
 
 }
 
 //==============================================================================
 
 BGEtherEncap::~BGEtherEncap() {
-    // TODO Auto-generated destructor stub
 }
 
 //==============================================================================

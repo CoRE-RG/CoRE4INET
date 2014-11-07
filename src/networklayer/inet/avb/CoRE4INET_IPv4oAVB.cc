@@ -48,7 +48,6 @@ namespace CoRE4INET {
 template<class base>
 IPv4oAVB<base>::IPv4oAVB()
 {
-    // TODO Auto-generated constructor stub
 }
 
 //==============================================================================
@@ -56,7 +55,6 @@ IPv4oAVB<base>::IPv4oAVB()
 template<class base>
 IPv4oAVB<base>::~IPv4oAVB()
 {
-    // TODO Auto-generated destructor stub
 }
 
 //==============================================================================
@@ -116,6 +114,22 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
         registerTalker(this->m_filterList, srpTable);
         delete msg;
     }
+    else if (msg->isSelfMessage() &&
+            ((strcmp(msg->getName(), "updateAvbSubscription") == 0)  ||  (strcmp(msg->getName(), "retryAvbSubscription") == 0)))
+    {
+        UpdateListenerMsg *updateMsg = check_and_cast<UpdateListenerMsg *>(msg);
+        SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
+        srpTable->updateListenerWithStreamId(updateMsg->streamId, this, updateMsg->vlanId);
+        simtime_t updateInterval = base::par("avbUpdateInterval").doubleValue();
+        if (updateInterval != 0)
+        {
+            UpdateListenerMsg *newUpdateMsg = new UpdateListenerMsg("updateAvbSubscription");
+            newUpdateMsg->streamId = updateMsg->streamId;
+            newUpdateMsg->vlanId = updateMsg->vlanId;
+            base::scheduleAt(simTime() + updateInterval, newUpdateMsg);
+        }
+        delete updateMsg;
+    }
     else if (dynamic_cast<AVBFrame*>(msg)) {
         AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg);
         cPacket* ipPacket = avbFrame->decapsulate();
@@ -151,33 +165,44 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
             SRPTable *srpTable = check_and_cast<SRPTable *>(src);
 
             srpTable->updateListenerWithStreamId(tentry->streamId, this, tentry->vlan_id);
-            // TODO: update timer???
+
+            // set update timer
+            simtime_t updateInterval = base::par("avbUpdateInterval").doubleValue();
+            if (updateInterval != 0)
+            {
+                UpdateListenerMsg *updateMsg = new UpdateListenerMsg("updateAvbSubscription");
+                updateMsg->streamId = tentry->streamId;
+                updateMsg->vlanId = tentry->vlan_id;
+                base::scheduleAt(simTime() + updateInterval, updateMsg);
+            }
         }
     }
     else if (id == base::registerSignal("listenerRegistrationTimeout"))
     {
-        // TODO
-//        SRPTable::ListenerEntry *lentry = check_and_cast<SRPTable::ListenerEntry*>(obj);
-//        if (lentry->streamId == (unsigned int) par("streamID").longValue())
-//        {
-//            if (lentry->module == this)
-//            {
-//                getDisplayString().setTagArg("i2", 0, "status/hourglass");
-//                simtime_t retryInterval = par("retryInterval").doubleValue();
-//                if (retryInterval != 0)
-//                {
-//                    scheduleAt(simTime() + retryInterval, new cMessage("retrySubscription"));
-//                }
-//            }
-//        }
+        // set retry timer
+        SRPTable::ListenerEntry *lentry = check_and_cast<SRPTable::ListenerEntry*>(obj);
+        if (std::find(m_subscribeList.begin(), m_subscribeList.end(), lentry->streamId) != m_subscribeList.end())
+        {
+            if (lentry->module == this)
+            {
+                simtime_t retryInterval = base::par("avbRetryInterval").doubleValue();
+                if (retryInterval != 0)
+                {
+                    UpdateListenerMsg *updateMsg = new UpdateListenerMsg("retryAvbSubscription");
+                    updateMsg->streamId = lentry->streamId;
+                    updateMsg->vlanId = lentry->vlan_id;
+                    base::scheduleAt(simTime() + retryInterval, updateMsg);
+                }
+            }
+        }
     }
     else if (id == base::registerSignal("listenerRegistered"))
     {
-        // TODO
+        // nothing
     }
     else if (id == base::registerSignal("listenerUnregistered"))
     {
-        //TODO
+        // nothing
     }
     else
     {

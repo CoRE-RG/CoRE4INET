@@ -31,14 +31,12 @@ Define_Module(SRPEtherEncap);
 //==============================================================================
 
 SRPEtherEncap::SRPEtherEncap() {
-    // TODO Auto-generated constructor stub
 
 }
 
 //==============================================================================
 
 SRPEtherEncap::~SRPEtherEncap() {
-    // TODO Auto-generated destructor stub
 }
 
 //==============================================================================
