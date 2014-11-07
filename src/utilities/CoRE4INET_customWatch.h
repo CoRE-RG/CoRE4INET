@@ -126,7 +126,7 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
             it2 = (*it).second.begin();
             while (index <= i)
             {
-                if (i > (index + (*it).second.size()))
+                if (i > (index + (int)(*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -404,7 +404,7 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
             it3 = (*this->it2).second.begin();
             while (index <= i)
             {
-                if (i > (index + (*this->it2).second.size()))
+                if (i > (index + (int)(*this->it2).second.size()))
                 {
                     index += (*this->it2).second.size();
                     ++this->it2;
