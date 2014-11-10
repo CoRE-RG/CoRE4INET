@@ -46,7 +46,7 @@ void BGBuffer::handleMessage(cMessage *msg)
 
     if (msg->arrivedOn("in") && destinationGates.size() > 0)
     {
-        if (EtherFrame *outgoingMessage = dequeue())
+        if (inet::EtherFrame *outgoingMessage = dequeue())
         {
             //Send Message
             for (std::list<cGate*>::const_iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
@@ -64,7 +64,7 @@ void BGBuffer::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("in") && gate("out")->isConnected())
     {
-        if (EtherFrame *outgoingMessage = dequeue())
+        if (inet::EtherFrame *outgoingMessage = dequeue())
         {
             send(outgoingMessage->dup(), "out");
 

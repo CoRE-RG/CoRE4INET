@@ -37,7 +37,7 @@ class SRPEtherEncap : public BGEtherEncap{
     protected:
       virtual void handleMessage(cMessage *msg);
       void dispatchSRP(SRPFrame * srp);
-      void deliverSRP(EtherFrame * frame);
+      void deliverSRP(inet::EtherFrame * frame);
 
 };
 

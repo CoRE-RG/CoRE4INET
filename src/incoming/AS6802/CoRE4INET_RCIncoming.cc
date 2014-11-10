@@ -40,7 +40,7 @@ void RCIncoming::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        recordPacketReceived((EtherFrame*) msg);
+        recordPacketReceived((inet::EtherFrame*) msg);
 
         uint64_t currentTotalTicks = timer->getTotalTicks();
         //Now check for correct arrival:
@@ -48,7 +48,7 @@ void RCIncoming::handleMessage(cMessage *msg)
         //Check too early
         if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))
         {
-            emit(droppedSignal, (EtherFrame*) msg);
+            emit(droppedSignal, (inet::EtherFrame*) msg);
             if (ev.isGUI())
             {
                 ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n",

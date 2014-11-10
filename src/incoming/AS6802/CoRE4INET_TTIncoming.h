@@ -41,7 +41,7 @@ class TTIncoming : public CTIncoming, Scheduled
         /**
          * @brief Stores the frame until the configured permanence point in time.
          */
-        EtherFrame *frame;
+        inet::EtherFrame *frame;
 
     public:
         /**

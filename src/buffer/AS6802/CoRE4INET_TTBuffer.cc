@@ -75,7 +75,7 @@ void TTBuffer::handleMessage(cMessage *msg)
 
     if (arrivedOnSchedulerIn && msg->getKind() == ACTION_TIME_EVENT && destinationGates.size() > 0)
     {
-        EtherFrame *outgoingMessage = getFrame();
+        inet::EtherFrame *outgoingMessage = getFrame();
         //Send Message
         for (std::list<cGate*>::const_iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
                 ++destGate)

@@ -34,7 +34,7 @@ void SRPEtherLLC::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("lowerLayerIn"))
     {
-        EtherFrame * frame = check_and_cast<EtherFrame*>(msg);
+        inet::EtherFrame * frame = check_and_cast<inet::EtherFrame*>(msg);
         if (frame->getDest() == SRP_ADDRESS)
         {
             EV_DETAIL << "Deliver SRPFrame to the SRP module" << endl;
@@ -84,7 +84,7 @@ void SRPEtherLLC::dispatchSRP(SRPFrame * srp)
     }
 }
 
-void SRPEtherLLC::deliverSRP(EtherFrame * frame)
+void SRPEtherLLC::deliverSRP(inet::EtherFrame * frame)
 {
     SRPFrame * srp = check_and_cast<SRPFrame *>(frame->decapsulate());
 

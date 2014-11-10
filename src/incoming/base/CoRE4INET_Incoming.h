@@ -66,7 +66,7 @@ class Incoming : public virtual cSimpleModule
          *
          * @param frame the frame that was received
          */
-        void recordPacketReceived(EtherFrame *frame);
+        void recordPacketReceived(inet::EtherFrame *frame);
 };
 
 } //namespace

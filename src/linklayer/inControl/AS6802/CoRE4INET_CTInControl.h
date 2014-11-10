@@ -33,7 +33,7 @@ using namespace std::tr1;
 //INET
 #include <ModuleAccess.h>
 //INET Auto-generated Messages
-#include <EtherFrame_m.h>
+#include <inet::EtherFrame_m.h>
 
 namespace CoRE4INET {
 
@@ -104,20 +104,20 @@ class CTInControl : public IC
          * @param frame Pointer to the frame to check.
          * @return true if frame is critical, else false
          */
-        virtual bool isCT(EtherFrame *frame);
+        virtual bool isCT(inet::EtherFrame *frame);
 
         /**
          * @brief Returns the critical traffic id for a given frame.
          *
          * @warning does not check if it is really critical traffic.
-         * If you need to be sure use isCT(EtherFrame *frame)
+         * If you need to be sure use isCT(inet::EtherFrame *frame)
          *
          * @param frame Pointer to the frame to get critical traffic id from.
          * @return critical traffic id
          *
-         * @sa isCT(EtherFrame *frame)
+         * @sa isCT(inet::EtherFrame *frame)
          */
-        virtual uint16_t getCTID(EtherFrame *frame);
+        virtual uint16_t getCTID(inet::EtherFrame *frame);
 };
 
 template<class IC>
@@ -136,7 +136,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        EtherFrame *frame = (EtherFrame*) msg;
+        inet::EtherFrame *frame = (inet::EtherFrame*) msg;
 
         //Auf CTCs verteilen oder BE traffic
         if (isCT(frame))
@@ -247,7 +247,7 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
 }
 
 template<class IC>
-bool CTInControl<IC>::isCT(EtherFrame *frame)
+bool CTInControl<IC>::isCT(inet::EtherFrame *frame)
 {
     if (EthernetIIFrame *e2f = dynamic_cast<EthernetIIFrame*>(frame))
     {
@@ -267,7 +267,7 @@ bool CTInControl<IC>::isCT(EtherFrame *frame)
 }
 
 template<class IC>
-uint16_t CTInControl<IC>::getCTID(EtherFrame *frame)
+uint16_t CTInControl<IC>::getCTID(inet::EtherFrame *frame)
 {
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);

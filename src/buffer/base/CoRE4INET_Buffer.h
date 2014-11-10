@@ -38,10 +38,10 @@ class Callback;
  * or more virtual member functions to make it do useful work. These
  * functions are:
  *
- *    - void enqueue(EtherFrame *newFrame)
- *    - EtherFrame* dequeue()
+ *    - void enqueue(inet::EtherFrame *newFrame)
+ *    - inet::EtherFrame* dequeue()
  *
- * enqueue(EtherFrame *newFrame) is called to queue a message in the buffer.
+ * enqueue(inet::EtherFrame *newFrame) is called to queue a message in the buffer.
  * It must be implemented according to the correct buffer behaviour.
  *
  * dequeue() is called to get a frame from the buffer.
@@ -100,7 +100,7 @@ class Buffer : public virtual cSimpleModule
          *
          * When a frame is received on the in-Gate it is processed. If the destination
          * address is unspecified it is set according to the ct marker of the buffer.
-         * Afterwards it is enqueued using the buffer specific enqueue(EtherFrame *newFrame)
+         * Afterwards it is enqueued using the buffer specific enqueue(inet::EtherFrame *newFrame)
          * method. In the end all registered receive callbacks are executed.
          *
          * @param msg The incoming message
@@ -108,57 +108,57 @@ class Buffer : public virtual cSimpleModule
         void handleMessage(cMessage *msg);
 
         /**
-         * @brief Is called to store an EtherFrame in the buffer.
+         * @brief Is called to store an inet::EtherFrame in the buffer.
          *
          * This method must be implemented according to the buffer strategy.
          *
-         * @param newFrame A pointer to the new EtherFrame to be saved in the buffer
+         * @param newFrame A pointer to the new inet::EtherFrame to be saved in the buffer
          */
-        virtual void enqueue(EtherFrame *newFrame);
+        virtual void enqueue(inet::EtherFrame *newFrame);
 
         /**
-         * @brief Is called to get an EtherFrame from the buffer.
+         * @brief Is called to get an inet::EtherFrame from the buffer.
          *
          * This method must be implemented according to the buffer strategy.
          *
-         * @return A pointer to the next EtherFrame from the buffer. Returns
-         * null if there is no EtherFrame in the buffer
+         * @return A pointer to the next inet::EtherFrame from the buffer. Returns
+         * null if there is no inet::EtherFrame in the buffer
          */
-        virtual EtherFrame* dequeue();
+        virtual inet::EtherFrame* dequeue();
 
         /**
          * @brief Emits a statistics signal that a frame was sent from the buffer
          *
          * @param frame the frame that was sent
          */
-        void recordPacketSent(EtherFrame *frame);
+        void recordPacketSent(inet::EtherFrame *frame);
 
         /**
          * @brief Emits a statistics signal that a frame was received in the buffer
          *
          * @param frame the frame that was received
          */
-        void recordPacketReceived(EtherFrame *frame);
+        void recordPacketReceived(inet::EtherFrame *frame);
 
     public:
         /**
          * @brief Wrapper function arround dequeue().
          *
-         * @return A pointer to the next EtherFrame from the buffer. Returns
-         * null if there is no EtherFrame in the buffer
+         * @return A pointer to the next inet::EtherFrame from the buffer. Returns
+         * null if there is no inet::EtherFrame in the buffer
          *
          * @sa dequeue();
          */
-        EtherFrame* getFrame();
+        inet::EtherFrame* getFrame();
 
         /**
          * @brief Wrapper function arround enqueue().
          *
-         * @param frame The EtherFrame to put in the buffer.
+         * @param frame The inet::EtherFrame to put in the buffer.
          *
          * @sa enqueue();
          */
-        void putFrame(EtherFrame* frame);
+        void putFrame(inet::EtherFrame* frame);
 
         /**
          * @brief Calculates the bandwidth this module requires for transmission.

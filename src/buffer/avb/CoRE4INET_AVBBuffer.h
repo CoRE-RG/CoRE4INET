@@ -111,7 +111,7 @@ class AVBBuffer : public virtual Buffer, public Timed
         /**
          * @brief handles the incoming and outgoing messages of the buffer.
          *
-         * @param msg incoming EtherFrame for the Buffer or SchedulerActionTimeEvent message.
+         * @param msg incoming inet::EtherFrame for the Buffer or SchedulerActionTimeEvent message.
          */
         virtual void handleMessage(cMessage *msg);
 

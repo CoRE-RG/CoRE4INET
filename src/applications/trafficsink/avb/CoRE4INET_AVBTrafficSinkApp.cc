@@ -28,7 +28,7 @@ void AVBTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
 
-    SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+    SRPTable *srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (srpTable)
     {
         srpTable->subscribe("talkerRegistered", this);
@@ -81,7 +81,7 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage())
     {
-        SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+        SRPTable *srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
         srpTable->updateListenerWithStreamId((unsigned int) par("streamID").longValue(), this, (unsigned int) par("vlan_id").longValue());
         getDisplayString().setTagArg("i2", 0, "status/active");
         simtime_t updateInterval = par("updateInterval").doubleValue();
@@ -92,7 +92,7 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
     }
     else
     {
-        if (dynamic_cast<EtherFrame*>(msg))
+        if (dynamic_cast<inet::EtherFrame*>(msg))
         {
             getDisplayString().setTagArg("i2", 0, "status/active");
         }

@@ -37,7 +37,7 @@ void QueueBuffer::initializeStatistics()
     frames.setName("frames");
 }
 
-void QueueBuffer::enqueue(EtherFrame *newFrame)
+void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
 {
     int size = par("size").longValue();
     if (size >= 0 && frames.length() >= size)
@@ -66,13 +66,13 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
     emit(queueLengthSignal, (unsigned int) frames.length());
 }
 
-EtherFrame * QueueBuffer::dequeue()
+inet::EtherFrame * QueueBuffer::dequeue()
 {
     if (frames.length() > 0)
     {
         setFilled((unsigned int) (frames.length() - 1));
         emit(queueLengthSignal, (unsigned int) (frames.length() - 1));
-        return (EtherFrame*) frames.pop();
+        return (inet::EtherFrame*) frames.pop();
     }
     else
         return NULL;

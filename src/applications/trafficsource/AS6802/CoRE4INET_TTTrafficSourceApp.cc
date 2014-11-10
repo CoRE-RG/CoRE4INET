@@ -42,7 +42,7 @@ void TTTrafficSourceApp::initialize()
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
         event->setAction_time(
                 (uint32_t) (par("action_time").doubleValue()
-                        / findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue()));
+                        / inet::findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue()));
         event->setDestinationGate(gate("schedulerIn"));
 
         if (event->getAction_time() >= (uint32_t) period->par("cycle_ticks").longValue())
@@ -54,9 +54,9 @@ void TTTrafficSourceApp::initialize()
         period->registerEvent(event);
     }
     synchronized = false;
-    ASSERT2(findContainingNode(this)!=NULL,
+    ASSERT2(inet::findContainingNode(this)!=NULL,
             "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
-    findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
+    inet::findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
 }
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg)

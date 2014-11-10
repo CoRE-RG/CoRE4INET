@@ -44,7 +44,7 @@ void TTIncoming::initialize()
     {
         par("period").setStringValue("period[0]");
     }
-    period = dynamic_cast<Period*>(findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
+    period = dynamic_cast<Period*>(inet::findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
     ASSERT2(period, "cannot find period, you should specify it!");
 }
 
@@ -53,14 +53,14 @@ void TTIncoming::handleMessage(cMessage *msg)
     //Incoming Message
     if (msg->arrivedOn("in"))
     {
-        recordPacketReceived((EtherFrame*) msg);
+        recordPacketReceived((inet::EtherFrame*) msg);
 
         //get current time in cylce
         uint32_t currentTicks = period->getTicks();
         //Now check for correct arrival:
         if (frame != NULL)
         {
-            emit(droppedSignal, (EtherFrame*) msg);
+            emit(droppedSignal, (inet::EtherFrame*) msg);
             hadError = true;
             if (ev.isGUI())
             {
@@ -78,7 +78,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         else if (par("receive_window_start").longValue() > 0
                 && currentTicks < (uint32_t) par("receive_window_start").longValue())
         {
-            emit(droppedSignal, (EtherFrame*) msg);
+            emit(droppedSignal, (inet::EtherFrame*) msg);
             hadError = true;
             if (ev.isGUI())
             {
@@ -100,7 +100,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         else if (par("receive_window_end").longValue() > 0
                 && currentTicks > (uint32_t) par("receive_window_end").longValue())
         {
-            emit(droppedSignal, (EtherFrame*) msg);
+            emit(droppedSignal, (inet::EtherFrame*) msg);
             hadError = true;
             if (ev.isGUI())
             {
@@ -126,7 +126,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             {
                 if (!hadError && ev.isGUI())
                     getDisplayString().setTagArg("i2", 0, "status/hourglass");
-                frame = (EtherFrame *) msg;
+                frame = (inet::EtherFrame *) msg;
                 SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
                 event->setAction_time((uint32_t) par("permanence_pit").longValue());
                 event->setDestinationGate(gate("schedulerIn"));

@@ -28,7 +28,7 @@ void TrafficSinkApp::handleMessage(cMessage *msg)
 {
     ApplicationBase::handleMessage(msg);
 
-    if (EtherFrame *frame = dynamic_cast<EtherFrame*>(msg))
+    if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(msg))
     {
         if (frame)
         {

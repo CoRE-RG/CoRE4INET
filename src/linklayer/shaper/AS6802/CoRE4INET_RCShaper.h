@@ -287,7 +287,7 @@ cMessage* RCShaper<TC>::pop()
     {
         if (!rcQueue[i].isEmpty())
         {
-            EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
+            inet::EtherFrame *message = (inet::EtherFrame*) rcQueue[i].pop();
             cComponent::emit(rcQueueLengthSignals[i], (unsigned long) rcQueue[i].length());
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
@@ -315,7 +315,7 @@ cMessage* RCShaper<TC>::front()
     {
         if (!rcQueue[i].isEmpty())
         {
-            EtherFrame *message = (EtherFrame*) rcQueue[i].front();
+            inet::EtherFrame *message = (inet::EtherFrame*) rcQueue[i].front();
             return message;
         }
     }

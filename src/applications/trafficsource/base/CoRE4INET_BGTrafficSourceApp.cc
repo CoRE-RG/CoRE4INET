@@ -35,12 +35,12 @@ void BGTrafficSourceApp::handleMessage(cMessage *msg) {
 void BGTrafficSourceApp::sendMessage() {
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();
             buf != bgbuffers.end(); buf++) {
-        EthernetIIFrame *frame = new EthernetIIFrame("Best-Effort Traffic");
+        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic");
 
-        MACAddress address;
+        inet::MACAddress address;
         if (par("destAddress").stdstringValue() == "auto") {
             // assign automatic address
-            address = MACAddress::generateAutoAddress();
+            address = inet::MACAddress::generateAutoAddress();
 
             // change module parameter from "auto" to concrete address
             par("destAddress").setStringValue(address.str());

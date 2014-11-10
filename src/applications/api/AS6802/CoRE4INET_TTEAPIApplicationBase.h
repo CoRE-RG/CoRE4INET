@@ -58,9 +58,9 @@ class TTEAPIPriv
         Buffer *buffer;
 
         /**
-         * @brief Pointer to an EtherFrame for the current application request
+         * @brief Pointer to an inet::EtherFrame for the current application request
          */
-        EtherFrame *frame;
+        inet::EtherFrame *frame;
 
         /**
          * @brief Pointer to the raw data

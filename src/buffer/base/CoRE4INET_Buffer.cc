@@ -57,22 +57,22 @@ void Buffer::initialize(int stage)
     }
 }
 
-void Buffer::recordPacketSent(EtherFrame *frame)
+void Buffer::recordPacketSent(inet::EtherFrame *frame)
 {
     emit(txPkSignal, frame);
 }
 
-void Buffer::recordPacketReceived(EtherFrame *frame)
+void Buffer::recordPacketReceived(inet::EtherFrame *frame)
 {
     emit(rxPkSignal, frame);
 }
 
-EtherFrame* Buffer::getFrame()
+inet::EtherFrame* Buffer::getFrame()
 {
     return dequeue();
 }
 
-void Buffer::putFrame(EtherFrame* frame)
+void Buffer::putFrame(inet::EtherFrame* frame)
 {
     enqueue(frame);
 }
@@ -81,7 +81,7 @@ void Buffer::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
+        inet::EtherFrame *frame = check_and_cast<inet::EtherFrame *>(msg);
         recordPacketReceived(frame);
 
         if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
@@ -89,7 +89,7 @@ void Buffer::handleMessage(cMessage *msg)
             frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
         }
         if(frame->getByteLength()<=maxMessageSize){
-            putFrame((EtherFrame*) frame);
+            putFrame((inet::EtherFrame*) frame);
         }
         else{
             EV_ERROR << "Buffer received message with larger size than maxMessageSize" << endl;
@@ -114,11 +114,11 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
         }
         if (gate)
         {
-            if (findContainingNode(gate->getOwnerModule()) != findContainingNode(this))
+            if (inet::findContainingNode(gate->getOwnerModule()) != inet::findContainingNode(this))
             {
                 throw cRuntimeError(
                         "Configuration problem of destination_gates: Gate: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*destinationGatePath).c_str(), findContainingNode(this)->getFullName());
+                        (*destinationGatePath).c_str(), inet::findContainingNode(this)->getFullName());
             }
             destinationGates.push_back(gate);
         }
@@ -130,12 +130,12 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
     }
 }
 
-void Buffer::enqueue(__attribute((unused))   EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused))   inet::EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }
 
-EtherFrame * Buffer::dequeue()
+inet::EtherFrame * Buffer::dequeue()
 {
     throw cRuntimeError("Buffer::dequeue not implemented");
 }

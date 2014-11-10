@@ -62,7 +62,7 @@ void RCBuffer::handleMessage(cMessage *msg)
         {
             if (bagExpired)
             {
-                if (EtherFrame *outgoingMessage = getFrame())
+                if (inet::EtherFrame *outgoingMessage = getFrame())
                 {
                     bagExpired = false;
                     numReset = 0;
@@ -83,7 +83,7 @@ void RCBuffer::handleMessage(cMessage *msg)
         }
         else if (msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT)
         {
-            if (EtherFrame *outgoingMessage = getFrame())
+            if (inet::EtherFrame *outgoingMessage = getFrame())
             {
                 bagExpired = false;
                 numReset = 0;

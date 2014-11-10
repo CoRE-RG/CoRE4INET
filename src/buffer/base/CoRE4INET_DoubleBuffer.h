@@ -48,28 +48,28 @@ class DoubleBuffer : public virtual Buffer
 
     private:
         /**
-         * The EtherFrame pointer is stored here
+         * The inet::EtherFrame pointer is stored here
          */
-        EtherFrame *frame;
+        inet::EtherFrame *frame;
 
     protected:
         /**
          * @brief Stores a new frame.
          *
-         * The incoming EtherFrame pointer is stored. A previously stored frame is deleted
-         * @param newFrame the new EtherFrame to store.
+         * The incoming inet::EtherFrame pointer is stored. A previously stored frame is deleted
+         * @param newFrame the new inet::EtherFrame to store.
          */
-        virtual void enqueue(EtherFrame *newFrame);
+        virtual void enqueue(inet::EtherFrame *newFrame);
 
         /**
          * @brief Returns the frame that is stored in the buffer
          *
-         * The stored frame is copied and the copy is being returned. If there is no EtherFrame
+         * The stored frame is copied and the copy is being returned. If there is no inet::EtherFrame
          * stored NULL is returned.
          *
          * @return Pointer to the copied frame or NULL if no frame is stored.
          */
-        virtual EtherFrame* dequeue();
+        virtual inet::EtherFrame* dequeue();
 
         /**
          * @brief Returns the used size of the buffer

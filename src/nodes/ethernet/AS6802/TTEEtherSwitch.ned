@@ -21,7 +21,7 @@ import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
 import inet.linklayer.IMACAddressTable;
 import inet.linklayer.IMACRelayUnit;
-import inet.status.NodeStatus;
+import inet.common.lifecycle.NodeStatus;
 
 //
 // Module for a TTEthernet Switch with variable number of ports.

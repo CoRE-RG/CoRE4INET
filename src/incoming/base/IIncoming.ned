@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 package core4inet.incoming.base;
-import inet.linklayer.IOutputQueue;
+import inet.common.queue.IOutputQueue;
 
 //
 // Interface for modules implementing the conformance checks of incoming traffic.

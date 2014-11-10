@@ -30,10 +30,10 @@ void RCTrafficSourceApp::initialize()
 
     if (par("enabled").boolValue())
     {
-        Timer *timer = dynamic_cast<Timer*>(findModuleWhereverInNode("timer", getParentModule()));
+        Timer *timer = dynamic_cast<Timer*>(inet::findModuleWhereverInNode("timer", getParentModule()));
         ASSERT(timer);
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
+        tick = inet::findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
         event->setTimer((uint64_t) (par("interval").doubleValue() / tick));
         event->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(event);

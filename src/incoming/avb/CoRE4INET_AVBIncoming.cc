@@ -34,7 +34,7 @@ AVBIncoming::AVBIncoming() {
 
 void AVBIncoming::handleMessage(cMessage* msg) {
     if (msg->arrivedOn("in")) {
-        //EtherFrame *inFrame = check_and_cast<EtherFrame*>(msg);
+        //inet::EtherFrame *inFrame = check_and_cast<inet::EtherFrame*>(msg);
         AVBFrame *inFrame = check_and_cast<AVBFrame*>(msg);
 
         SRPTable *srptable = check_and_cast<SRPTable*>(

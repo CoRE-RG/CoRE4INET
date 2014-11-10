@@ -26,7 +26,7 @@ CTBuffer::~CTBuffer()
 {
 }
 
-void CTBuffer::putFrame(EtherFrame* frame)
+void CTBuffer::putFrame(inet::EtherFrame* frame)
 {
     short priority = (short) par("priority").longValue();
     if (frame && priority >= 0)

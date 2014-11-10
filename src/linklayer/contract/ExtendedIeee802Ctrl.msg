@@ -24,7 +24,7 @@ cplusplus {{
 }}
 
 
-class noncobject ::Ieee802Ctrl;
+class noncobject inet::Ieee802Ctrl;
 
 namespace CoRE4INET;
 

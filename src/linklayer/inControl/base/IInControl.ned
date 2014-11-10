@@ -15,7 +15,7 @@
 package core4inet.linklayer.inControl.base;
 
 
-import inet.linklayer.IOutputQueue;
+import inet.common.queue.IOutputQueue;
 import core4inet.utilities.classes.ITimed;
 
 //

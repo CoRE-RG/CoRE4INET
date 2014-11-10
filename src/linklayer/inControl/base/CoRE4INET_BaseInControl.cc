@@ -25,7 +25,7 @@ void BaseInControl::initialize()
     rxPkSignal = registerSignal("rxPk");
 }
 
-void BaseInControl::setParameters(EtherFrame *frame)
+void BaseInControl::setParameters(inet::EtherFrame *frame)
 {
     int i = frame->findPar("received_total");
     cMsgPar* par;
@@ -43,7 +43,7 @@ void BaseInControl::setParameters(EtherFrame *frame)
     par->setLongValue(getParentModule()->getIndex());
 }
 
-void BaseInControl::recordPacketReceived(EtherFrame *frame)
+void BaseInControl::recordPacketReceived(inet::EtherFrame *frame)
 {
     emit(rxPkSignal, frame);
 }

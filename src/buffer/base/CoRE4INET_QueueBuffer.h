@@ -54,7 +54,7 @@ class QueueBuffer : public virtual Buffer
 
     private:
         /**
-         * @brief Queue for the EtherFrames in the Buffer.
+         * @brief Queue for the inet::EtherFrames in the Buffer.
          */
         cQueue frames;
 
@@ -74,18 +74,18 @@ class QueueBuffer : public virtual Buffer
         void setFilled(unsigned int fillLevel);
     protected:
         /**
-         * @brief Inserts EtherFrame in the Queue and emits the queue length.
+         * @brief Inserts inet::EtherFrame in the Queue and emits the queue length.
          *
-         * @param newFrame a pointer to the EtherFrame to insert in the queue.
+         * @param newFrame a pointer to the inet::EtherFrame to insert in the queue.
          */
-        virtual void enqueue(EtherFrame *newFrame);
+        virtual void enqueue(inet::EtherFrame *newFrame);
 
         /**
-         * @brief Removes and returns an EtherFrame from the Queue and emits the queue length.
+         * @brief Removes and returns an inet::EtherFrame from the Queue and emits the queue length.
          *
-         * @return Aa pointer to the EtherFrame removed from the queue.
+         * @return Aa pointer to the inet::EtherFrame removed from the queue.
          */
-        virtual EtherFrame* dequeue();
+        virtual inet::EtherFrame* dequeue();
 
         /**
          * @brief Returns the used size of the buffer

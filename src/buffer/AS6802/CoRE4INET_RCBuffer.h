@@ -108,7 +108,7 @@ class RCBuffer : public virtual CTBuffer, public Timed
          * a pending message is transferred. If there is no message waiting the bagExpired
          * state is saved.
          *
-         * @param msg incoming EtherFrame for the Buffer or SchedulerTimerEvent message.
+         * @param msg incoming inet::EtherFrame for the Buffer or SchedulerTimerEvent message.
          */
         virtual void handleMessage(cMessage *msg);
 

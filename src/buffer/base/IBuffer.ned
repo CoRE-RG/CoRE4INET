@@ -14,7 +14,7 @@
 // 
 package core4inet.buffer.base;
 
-import inet.linklayer.IOutputQueue;
+import inet.common.queue.IOutputQueue;
 
 //
 // Interface representing a buffer module.

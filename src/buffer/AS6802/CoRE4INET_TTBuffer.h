@@ -74,7 +74,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          * a TTBufferEmpty message is transmitted. This allowes the receiving application to
          * use the bandwidth for other messages.
          *
-         * @param msg incoming EtherFrame for the Buffer or SchedulerActionTimeEvent message.
+         * @param msg incoming inet::EtherFrame for the Buffer or SchedulerActionTimeEvent message.
          */
         virtual void handleMessage(cMessage *msg);
 

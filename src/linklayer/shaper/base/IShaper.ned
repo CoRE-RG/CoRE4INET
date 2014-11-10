@@ -15,7 +15,7 @@
 package core4inet.linklayer.shaper.base;
 
 
-import inet.linklayer.IOutputQueue;
+import inet.common.queue.IOutputQueue;
 
 //
 // Interface for real-time Ethernet traffic shapers

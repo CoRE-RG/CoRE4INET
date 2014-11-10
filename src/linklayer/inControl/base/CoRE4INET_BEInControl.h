@@ -48,7 +48,7 @@ void BEInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        EtherFrame *frame = (EtherFrame*) msg;
+        inet::EtherFrame *frame = (inet::EtherFrame*) msg;
         this->recordPacketReceived(frame);
 
         if (IC::isPromiscuous() || frame->getDest().isMulticast())

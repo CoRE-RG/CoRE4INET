@@ -334,7 +334,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
     //Now we create a frame that can be accessed later
     if (buf->traffic_type == TTE_BG_TRAFFIC)
     {
-        priv->frame = new EtherFrame("BG-Traffic Ethernet Frame", IEEE802CTRL_DATA);
+        priv->frame = new inet::EtherFrame("BG-Traffic Ethernet Frame", IEEE802CTRL_DATA);
     }
     else
     {
@@ -382,7 +382,7 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf, tte_
     ();
     TTEAPIPriv *priv = (TTEAPIPriv*) buf->priv;
 
-    EtherFrame *msg = priv->buffer->getFrame();
+    inet::EtherFrame *msg = priv->buffer->getFrame();
     APIPayload *payload = dynamic_cast<APIPayload*>(msg->decapsulate());
     if (buf->traffic_type == TTE_CT_TRAFFIC)
     {

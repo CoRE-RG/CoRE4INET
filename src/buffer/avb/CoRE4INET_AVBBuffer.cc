@@ -49,7 +49,7 @@ void AVBBuffer::initialize(int stage)
     {
         Timed::initialize();
 
-        tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
+        tick = inet::findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
 
         if     (strcmp(par("srClass").stringValue(),"A") == 0)  srClass = SR_CLASS_A;
         else if(strcmp(par("srClass").stringValue(),"B") == 0)  srClass = SR_CLASS_B;

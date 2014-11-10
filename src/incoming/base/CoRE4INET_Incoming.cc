@@ -27,7 +27,7 @@ Incoming::Incoming()
     hadError = false;
 }
 
-void Incoming::recordPacketReceived(EtherFrame *frame)
+void Incoming::recordPacketReceived(inet::EtherFrame *frame)
 {
     emit(rxPkSignal, frame);
 }
@@ -36,7 +36,7 @@ void Incoming::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        recordPacketReceived((EtherFrame*) msg);
+        recordPacketReceived((inet::EtherFrame*) msg);
         sendDelayed(msg, SimTime(getParentModule()->par("hardware_delay").doubleValue()), "out");
         //send(msg,"out");
     }

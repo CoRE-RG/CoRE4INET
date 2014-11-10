@@ -22,7 +22,7 @@ import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.linklayer.ethernet.base.BGEtherEncap;
-import inet.status.NodeStatus;
+import inet.common.lifecycle.NodeStatus;
 
 
 //

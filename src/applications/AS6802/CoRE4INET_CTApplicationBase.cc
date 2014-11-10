@@ -56,15 +56,15 @@ void CTApplicationBase::handleParameterChange(const char* parname)
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
         if (!module)
         {
-            module = findModuleWhereverInNode((*bufferPath).c_str(), this);
+            module = inet::findModuleWhereverInNode((*bufferPath).c_str(), this);
         }
         if (module)
         {
-            if (findContainingNode(module) != findContainingNode(this))
+            if (inet::findContainingNode(module) != inet::findContainingNode(this))
             {
                 throw cRuntimeError(
                         "Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*bufferPath).c_str(), findContainingNode(this)->getFullName());
+                        (*bufferPath).c_str(), inet::findContainingNode(this)->getFullName());
             }
             if (CTBuffer *buffer = dynamic_cast<CTBuffer*>(module))
             {

@@ -87,14 +87,14 @@ class BaseInControl : public virtual cSimpleModule, public Timed
          *
          * @param frame the frame that was received
          */
-        void setParameters(EtherFrame *frame);
+        void setParameters(inet::EtherFrame *frame);
 
         /**
          * @brief Emits a statistics signal that a frame was received in the buffer
          *
          * @param frame the frame that was received
          */
-        void recordPacketReceived(EtherFrame *frame);
+        void recordPacketReceived(inet::EtherFrame *frame);
 };
 }
 

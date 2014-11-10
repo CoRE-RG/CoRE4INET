@@ -78,7 +78,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
     if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
     {
-        SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+        SRPTable *srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
         if (srpTable)
         {
             EV << "Register Talker in node" << std::endl;
@@ -126,7 +126,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
 //class measurement interval A=125us B=250us
-    simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
+    simtime_t tick = check_and_cast<Oscillator*>(inet::findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
     simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
@@ -162,7 +162,7 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
         if (lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
             //check whether there are listeners left
-            SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+            SRPTable *srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
             if (srpTable->getListenersForStreamId(streamID, vlan_id).size() == 0)
             {
                 isStreaming = false;

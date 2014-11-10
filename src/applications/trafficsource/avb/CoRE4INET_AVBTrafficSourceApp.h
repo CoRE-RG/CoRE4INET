@@ -50,7 +50,7 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
         unsigned short vlan_id;
         unsigned int payload;
         cModule *avbOutCTC;
-        MACAddress multicastMAC;
+        inet::MACAddress multicastMAC;
     public:
         AVBTrafficSourceApp();
     protected:
