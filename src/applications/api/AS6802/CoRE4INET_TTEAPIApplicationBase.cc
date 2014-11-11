@@ -38,7 +38,7 @@ void TTEAPIApplicationBase::initialize()
     ApplicationBase::initialize();
     Scheduled::initialize();
     scheduleAt(simTime(), new cMessage("Start Application", START_APPLICATION));
-    findContainingNode(this)->subscribe("syncStatus", this);
+    inet::findContainingNode(this)->subscribe("syncStatus", this);
     WATCH_MAP(receiveCallbacks);
     WATCH_MAP(transmitCallbacks);
 }
@@ -236,8 +236,8 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id, const tte_var_
             {
                 for (int i = 0; i < phy->getVectorSize(); i++)
                 {
-                    EtherMACFullDuplex *mac =
-                            (EtherMACFullDuplex*) getParentModule()->getSubmodule("phy", i)->getSubmodule("mac");
+                    inet::EtherMACFullDuplex *mac =
+                            (inet::EtherMACFullDuplex*) getParentModule()->getSubmodule("phy", i)->getSubmodule("mac");
                     if (mac->gate("phys")->isConnected())
                         *((uint8_t*) value) = (uint8_t) (*((uint8_t*) value) << (uint8_t) 1) | (uint8_t) 1;
                     else
@@ -302,8 +302,8 @@ int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id, const tte_var_
             cModule *phy = getParentModule()->getSubmodule("phy", 0);
             if (phy)
             {
-                EtherMACFullDuplex *mac = (EtherMACFullDuplex*) phy->getSubmodule("mac");
-                MACAddress macAddress = mac->getMACAddress();
+                inet::EtherMACFullDuplex *mac = (inet::EtherMACFullDuplex*) phy->getSubmodule("mac");
+                inet::MACAddress macAddress = mac->getMACAddress();
                 //Change order
                 valueArr[5] = macAddress.getAddressByte(0);
                 valueArr[4] = macAddress.getAddressByte(1);
@@ -334,7 +334,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
     //Now we create a frame that can be accessed later
     if (buf->traffic_type == TTE_BG_TRAFFIC)
     {
-        priv->frame = new inet::EtherFrame("BG-Traffic Ethernet Frame", IEEE802CTRL_DATA);
+        priv->frame = new inet::EtherFrame("BG-Traffic Ethernet Frame", inet::IEEE802CTRL_DATA);
     }
     else
     {
@@ -342,11 +342,11 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
         frameNameStream << "CT-ID: " << buf->ct_id;
         std::string frameName = frameNameStream.str();
         //TODO Minor: Divide TT and RC frames in separate types?
-        priv->frame = new CTFrame(frameName.c_str(), IEEE802CTRL_DATA);
+        priv->frame = new CTFrame(frameName.c_str(), inet::IEEE802CTRL_DATA);
     }
     priv->frame->setByteLength(ETHER_MAC_FRAME_BYTES);
 
-    MACAddress dest;
+    inet::MACAddress dest;
     dest.setAddressByte(5, frame->eth_hdr.dst_mac[0]);
     dest.setAddressByte(4, frame->eth_hdr.dst_mac[1]);
     dest.setAddressByte(3, frame->eth_hdr.dst_mac[2]);
@@ -354,7 +354,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
     dest.setAddressByte(1, frame->eth_hdr.dst_mac[4]);
     dest.setAddressByte(0, frame->eth_hdr.dst_mac[5]);
     priv->frame->setDest(dest);
-    MACAddress src;
+    inet::MACAddress src;
     src.setAddressByte(5, frame->eth_hdr.src_mac[0]);
     src.setAddressByte(4, frame->eth_hdr.src_mac[1]);
     src.setAddressByte(3, frame->eth_hdr.src_mac[2]);
@@ -391,14 +391,14 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf, tte_
     frame->length = (uint16_t) payload->getByteLength();
     frame->data = (uint8_t*) malloc((size_t) payload->getByteLength());
     priv->data = frame->data;
-    MACAddress dest = msg->getDest();
+    inet::MACAddress dest = msg->getDest();
     frame->eth_hdr.dst_mac[0] = dest.getAddressByte(5);
     frame->eth_hdr.dst_mac[1] = dest.getAddressByte(4);
     frame->eth_hdr.dst_mac[2] = dest.getAddressByte(3);
     frame->eth_hdr.dst_mac[3] = dest.getAddressByte(2);
     frame->eth_hdr.dst_mac[4] = dest.getAddressByte(1);
     frame->eth_hdr.dst_mac[5] = dest.getAddressByte(0);
-    MACAddress src = msg->getSrc();
+    inet::MACAddress src = msg->getSrc();
     frame->eth_hdr.src_mac[0] = src.getAddressByte(5);
     frame->eth_hdr.src_mac[1] = src.getAddressByte(4);
     frame->eth_hdr.src_mac[2] = src.getAddressByte(3);

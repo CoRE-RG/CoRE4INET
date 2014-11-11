@@ -25,7 +25,7 @@ namespace CoRE4INET {
 
 
 
-class BGEtherEncap : public EtherEncap {
+class BGEtherEncap : public inet::EtherEncap {
 
 
     public:

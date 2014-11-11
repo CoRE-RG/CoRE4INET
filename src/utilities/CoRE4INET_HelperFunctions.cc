@@ -62,7 +62,7 @@ cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
     {
         std::string modulePath = nameAndGate.substr(0, pos);
         std::string gateName = nameAndGate.substr(pos + 1);
-        cModule* module = findModuleWhereverInNode(modulePath.c_str(), from);
+        cModule* module = inet::findModuleWhereverInNode(modulePath.c_str(), from);
         if (module)
         {
             return module->gate(gateName.c_str());
@@ -90,8 +90,8 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
     return transparentClock / secondsToTransparentClock(tick);
 }
 
-MACAddress generateAutoMulticastAddress(){
-    MACAddress multicastMAC = MACAddress::generateAutoAddress();
+inet::MACAddress generateAutoMulticastAddress(){
+    inet::MACAddress multicastMAC = inet::MACAddress::generateAutoAddress();
     multicastMAC.setAddressByte(1,(multicastMAC.getAddressByte(1)|0x01));
     return multicastMAC;
 }

@@ -90,14 +90,14 @@ std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, unsigne
     return modules;
 }
 
-std::list<cModule*> SRPTable::getListenersForTalkerAddress(MACAddress &talkerAddress, unsigned int vid)
+std::list<cModule*> SRPTable::getListenersForTalkerAddress(inet::MACAddress &talkerAddress, unsigned int vid)
 {
     Enter_Method
     ("SRPTable::getListenersForTalkerAddress()");
     return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
 }
 
-uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsigned int vid)
+uint64_t SRPTable::getStreamIdForTalkerAddress(inet::MACAddress &talkerAddress, unsigned int vid)
 {
     Enter_Method
     ("SRPTable::getStreamIdForTalkerAddress()");
@@ -112,7 +112,7 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, unsign
     throw std::invalid_argument("no stream for this talker address registered");
 }
 
-SR_CLASS SRPTable::getSrClassForTalkerAddress(MACAddress &talkerAddress, unsigned int vid)
+SR_CLASS SRPTable::getSrClassForTalkerAddress(inet::MACAddress &talkerAddress, unsigned int vid)
 {
     Enter_Method
     ("SRPTable::getSrClassForTalkerAddress()");
@@ -211,7 +211,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLAS
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, SR_CLASS srClass,
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, inet::MACAddress address, SR_CLASS srClass,
         unsigned int framesize, unsigned int intervalFrames, unsigned int vid)
 {
     Enter_Method
@@ -270,7 +270,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, unsigned int vid)
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, inet::MACAddress address, unsigned int vid)
 {
 
     TalkerTable &talkerTable = talkerTables[vid];

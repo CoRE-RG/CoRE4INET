@@ -17,7 +17,7 @@ cplusplus {{
     #include "MACAddress.h"
 }}
 
-class noncobject MACAddress;
+class noncobject inet::MACAddress;
 
 namespace CoRE4INET;
 
@@ -43,7 +43,7 @@ packet TalkerAdvertise extends SRPFrame{
     
     // DataFrameParameters => destination adress and vlan identifier
 	// 64 Bit Field
-	MACAddress destination_address; //only one Talker allowed per destination_address
+	inet::MACAddress destination_address; //only one Talker allowed per destination_address
 	unsigned short vlan_identifier;
 	
 	// TSpec => Max frame size and sending interval of an AVB stream

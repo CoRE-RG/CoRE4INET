@@ -28,8 +28,8 @@
 #include "CoRE4INET_AVBDestinationInfo.h"
 #include "IPoREDefs_m.h"
 #include "AVBFrame_m.h"
-#include "IPvXAddress.h"
-#include "IPvXAddressResolver.h"
+#include "L3Address.h"
+#include "L3AddressResolver.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
 #include "cstringtokenizer.h"
@@ -57,11 +57,11 @@ IPv4oREBase::~IPv4oREBase()
 void IPv4oREBase::addFilter(IPoREFilter *filter)
 {
     TrafficPattern *tp = filter->getTrafficPattern();
-    if (!tp->getSrcAddr().isUnspecified() && ((tp->getSrcAddr().isIPv6() && tp->getSrcPrefixLength() > 128) ||
-                                            (!tp->getSrcAddr().isIPv6() && tp->getSrcPrefixLength() > 32)))
+    if (!tp->getSrcAddr().isUnspecified() && (((tp->getSrcAddr().getType()==inet::L3Address::IPv6) && tp->getSrcPrefixLength() > 128) ||
+                                            ((tp->getSrcAddr().getType()!=inet::L3Address::IPv6) && tp->getSrcPrefixLength() > 32)))
         throw cRuntimeError("srcPrefixLength is invalid");
-    if (!tp->getDestAddr().isUnspecified() && ((tp->getDestAddr().isIPv6() && tp->getDestPrefixLength() > 128) ||
-                                             (!tp->getDestAddr().isIPv6() && tp->getDestPrefixLength() > 32)))
+    if (!tp->getDestAddr().isUnspecified() && (((tp->getDestAddr().getType()==inet::L3Address::IPv6) && tp->getDestPrefixLength() > 128) ||
+                                             ((tp->getDestAddr().getType()!=inet::L3Address::IPv6) && tp->getDestPrefixLength() > 32)))
         throw cRuntimeError("srcPrefixLength is invalid");
     if (tp->getProtocol() != -1 && (tp->getProtocol() < 0 || tp->getProtocol() > 0xff))
         throw cRuntimeError("protocol is not a valid protocol number");

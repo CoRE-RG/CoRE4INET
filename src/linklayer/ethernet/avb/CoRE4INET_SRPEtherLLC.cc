@@ -56,12 +56,12 @@ void SRPEtherLLC::dispatchSRP(SRPFrame * srp)
     ExtendedIeee802Ctrl * controlInfo = dynamic_cast<ExtendedIeee802Ctrl *>(srp->removeControlInfo());
     int portNum = controlInfo->getSwitchPort();
     int notPortNum = controlInfo->getNotSwitchPort();
-    MACAddress address = controlInfo->getDest();
+    inet::MACAddress address = controlInfo->getDest();
 
     if (portNum >= 1)
         throw cRuntimeError("Output port %d doesn't exist!", portNum);
 
-    EthernetIIFrame * frame = new EthernetIIFrame(srp->getName());
+    inet::EthernetIIFrame * frame = new inet::EthernetIIFrame(srp->getName());
     frame->setDest(address);
     frame->setSrc(controlInfo->getSrc());
     frame->setByteLength(ETHER_MAC_FRAME_BYTES);
@@ -88,7 +88,7 @@ void SRPEtherLLC::deliverSRP(inet::EtherFrame * frame)
 {
     SRPFrame * srp = check_and_cast<SRPFrame *>(frame->decapsulate());
 
-    Ieee802Ctrl * controlInfo = new Ieee802Ctrl();
+    inet::Ieee802Ctrl * controlInfo = new inet::Ieee802Ctrl();
     controlInfo->setSrc(frame->getSrc());
     controlInfo->setSwitchPort(0);
     controlInfo->setDest(frame->getDest());

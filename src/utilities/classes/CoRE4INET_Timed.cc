@@ -22,10 +22,10 @@ using namespace CoRE4INET;
 
 void Timed::initialize()
 {
-    timer = dynamic_cast<Timer*>(findModuleWhereverInNode(par("timer").stringValue(), getParentModule()));
+    timer = dynamic_cast<Timer*>(inet::findModuleWhereverInNode(par("timer").stringValue(), getParentModule()));
     ASSERT2(timer, "cannot find timer!");
     oscillator =
-            dynamic_cast<Oscillator*>(findModuleWhereverInNode(par("oscillator").stringValue(), getParentModule()));
+            dynamic_cast<Oscillator*>(inet::findModuleWhereverInNode(par("oscillator").stringValue(), getParentModule()));
     ASSERT2(oscillator, "cannot find oscillator!");
 }
 

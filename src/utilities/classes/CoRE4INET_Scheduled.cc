@@ -27,7 +27,7 @@ void Scheduled::initialize()
     {
         par("period").setStringValue("period[0]");
     }
-    period = dynamic_cast<Period*>(findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
+    period = dynamic_cast<Period*>(inet::findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
     ASSERT2(period, "cannot find period, you should specify it!");
 }
 

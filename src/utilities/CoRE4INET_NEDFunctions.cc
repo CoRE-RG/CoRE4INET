@@ -23,7 +23,7 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
     double seconds = argv[0].doubleValueInUnit("s");
     if (argc <= 1)
     {
-        cModule* module = findModuleWhereverInNode("scheduler", context->getParentModule());
+        cModule* module = inet::findModuleWhereverInNode("scheduler", context->getParentModule());
         if (!module)
             throw cRuntimeError("ned_sec_to_tick(): cannot determine tick length, you should specify it!");
         ticklength = module->par("tick").doubleValue();
@@ -48,7 +48,7 @@ static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc
     long ticks = argv[0].longValue();
     if (argc <= 1)
     {
-        cModule* module = findModuleWhereverInNode("scheduler", context->getParentModule());
+        cModule* module = inet::findModuleWhereverInNode("scheduler", context->getParentModule());
         if (!module)
             throw cRuntimeError("ned_sec_to_tick(): cannot determine tick length, you should specify it!");
         ticklength = module->par("tick").doubleValue();

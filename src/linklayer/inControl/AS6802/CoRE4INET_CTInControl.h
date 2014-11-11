@@ -33,7 +33,7 @@ using namespace std::tr1;
 //INET
 #include <ModuleAccess.h>
 //INET Auto-generated Messages
-#include <inet::EtherFrame_m.h>
+#include <EtherFrame_m.h>
 
 namespace CoRE4INET {
 
@@ -205,15 +205,15 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
         cModule* module = simulation.getModuleByPath((*ct_incomingPath).c_str());
         if (!module)
         {
-            module = findModuleWhereverInNode((*ct_incomingPath).c_str(), this);
+            module = inet::findModuleWhereverInNode((*ct_incomingPath).c_str(), this);
         }
         if (module)
         {
-            if (findContainingNode(module) != findContainingNode(this))
+            if (inet::findContainingNode(module) != inet::findContainingNode(this))
             {
                 opp_error(
                         "Configuration problem of ct_incomings: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*ct_incomingPath).c_str(), findContainingNode(this)->getFullName());
+                        (*ct_incomingPath).c_str(), inet::findContainingNode(this)->getFullName());
             }
             else
             {
@@ -249,7 +249,7 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
 template<class IC>
 bool CTInControl<IC>::isCT(inet::EtherFrame *frame)
 {
-    if (EthernetIIFrame *e2f = dynamic_cast<EthernetIIFrame*>(frame))
+    if (inet::EthernetIIFrame *e2f = dynamic_cast<inet::EthernetIIFrame*>(frame))
     {
         if(e2f->getEtherType()!=0x891d){
             return false;

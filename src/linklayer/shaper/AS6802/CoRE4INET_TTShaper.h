@@ -500,7 +500,7 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
             }
             if (module)
             {
-                if (findContainingNode(module) != findContainingNode(this))
+                if (inet::findContainingNode(module) != inet::findContainingNode(this))
                 {
                     opp_error(
                             "Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",

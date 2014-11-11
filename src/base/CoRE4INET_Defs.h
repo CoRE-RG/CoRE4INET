@@ -22,8 +22,8 @@
 /**
  * Check for minimal OMNeT++ Version requirements
  */
-#if OMNETPP_VERSION < 0x0404
-#  error At least OMNeT++/OMNEST version 4.4.1 required
+#if OMNETPP_VERSION < 0x0406
+#  error At least OMNeT++/OMNEST version 4.6 required
 #endif
 
 /**

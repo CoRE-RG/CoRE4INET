@@ -57,7 +57,7 @@ void BEInControl<IC>::handleMessage(cMessage *msg)
         }
         else
         {
-            MACAddress address;
+            inet::MACAddress address;
             address.setAddress(frame->getArrivalGate()->getPathStartGate()->getOwnerModule()->par("address"));
             if (frame->getDest().equals(address))
             {

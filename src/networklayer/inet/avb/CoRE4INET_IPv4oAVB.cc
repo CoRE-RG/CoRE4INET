@@ -31,11 +31,11 @@
 #include "CoRE4INET_AVBDestinationInfo.h"
 #include "IPoREDefs_m.h"
 #include "AVBFrame_m.h"
-#include "IPvXAddress.h"
-#include "IPvXAddressResolver.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
 #include "cstringtokenizer.h"
+#include "L3AddressResolver.h"
+#include "Ieee802Ctrl.h"
 
 #include <algorithm>
 
@@ -87,7 +87,7 @@ void IPv4oAVB<base>::registerSrpCallbacks(SRPTable *srpTable) {
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
+void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie)
 {
     // Check for matching filters
     bool filterMatch = true;
@@ -134,7 +134,7 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
         AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg);
         cPacket* ipPacket = avbFrame->decapsulate();
 
-        Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
+        inet::Ieee802Ctrl *etherctrl = new inet::Ieee802Ctrl();
         etherctrl->setSrc(avbFrame->getSrc());
         etherctrl->setDest(avbFrame->getDest());
         etherctrl->setEtherType(avbFrame->getEtherType());
@@ -215,7 +215,7 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
 template<class base>
 void IPv4oAVB<base>::configureFilters(cXMLElement *config)
 {
-    IPvXAddressResolver addressResolver;
+        inet::L3AddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
     for (int i = 0; i < (int)filterElements.size(); i++)
     {
@@ -273,7 +273,7 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                     throw cRuntimeError("destModule: %s is not a AVBIncoming!", destModule);
                 }
                 if (destMAC)
-                    avbDestInfo->setDestMac(new MACAddress(destMAC));
+                    avbDestInfo->setDestMac(new inet::MACAddress(destMAC));
                 else
                      throw cRuntimeError("destMAC not specified!");
                 avbDestInfo->setStreamId(base::parseIntAttribute(streamId, "streamId", false));
@@ -293,13 +293,13 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 if (srcPrefixLengthAttr)
                     tp->setSrcPrefixLength(base::parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
                 else if (srcAddrAttr)
-                    tp->setSrcPrefixLength(tp->getSrcAddr().isIPv6() ? 128 : 32);
+                    tp->setSrcPrefixLength(tp->getSrcAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
                 if (destAddrAttr)
                     tp->setDestAddr(addressResolver.resolve(destAddrAttr));
                 if (destPrefixLengthAttr)
                     tp->setDestPrefixLength(base::parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
                 else if (destAddrAttr)
-                    tp->setDestPrefixLength(tp->getDestAddr().isIPv6() ? 128 : 32);
+                    tp->setDestPrefixLength(tp->getDestAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
                 if (protocolAttr)
                     tp->setProtocol(base::parseProtocol(protocolAttr, "protocol"));
                 if (tosAttr)
@@ -405,7 +405,7 @@ void IPv4oAVB<base>::registerTalker(const IPoREFilter* filter, SRPTable *srpTabl
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
@@ -424,7 +424,7 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, const IPoREFilter* filter)
+void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, const inet::InterfaceEntry* ie, const IPoREFilter* filter)
 {
 	AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
     std::stringstream name;
@@ -433,7 +433,7 @@ void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, con
     outFrame->setStreamID(avbDestInfo->getStreamId());
     outFrame->setVID(avbDestInfo->getVlanId());
     outFrame->setDest(*(avbDestInfo->getDestMac()));
-    outFrame->setEtherType(ETHERTYPE_IPv4);
+    outFrame->setEtherType(inet::ETHERTYPE_IPv4);
 
     outFrame->encapsulate(packet);
 

@@ -9,7 +9,7 @@
 #define CORE4INET_TRAFFICPATTERN_H_
 
 
-#include "IPvXAddress.h"
+#include "L3Address.h"
 #include "csimplemodule.h"
 
 namespace CoRE4INET {
@@ -24,8 +24,8 @@ public:
     bool matches(const cPacket *packet);
 
 public:
-    const IPvXAddress& getDestAddr() const { return destAddr; }
-    void setDestAddr(const IPvXAddress& destAddr) { this->destAddr = destAddr; }
+    const inet::L3Address& getDestAddr() const { return destAddr; }
+    void setDestAddr(const inet::L3Address& destAddr) { this->destAddr = destAddr; }
     int getDestPortMax() const { return destPortMax; }
     void setDestPortMax(int destPortMax) { this->destPortMax = destPortMax; }
     int getDestPortMin() const { return destPortMin; }
@@ -34,8 +34,8 @@ public:
     void setDestPrefixLength(int destPrefixLength) { this->destPrefixLength = destPrefixLength; }
     int getProtocol() const { return protocol; }
     void setProtocol(int protocol) { this->protocol = protocol; }
-    const IPvXAddress& getSrcAddr() const { return srcAddr; }
-    void setSrcAddr(const IPvXAddress& srcAddr) { this->srcAddr = srcAddr; }
+    const inet::L3Address& getSrcAddr() const { return srcAddr; }
+    void setSrcAddr(const inet::L3Address& srcAddr) { this->srcAddr = srcAddr; }
     int getSrcPortMax() const { return srcPortMax; }
     void setSrcPortMax(int srcPortMax) { this->srcPortMax = srcPortMax; }
     int getSrcPortMin() const { return srcPortMin; }
@@ -48,9 +48,9 @@ public:
     void setTosMask(int tosMask) { this->tosMask = tosMask; }
 
 private:
-    IPvXAddress srcAddr;
+    inet::L3Address srcAddr;
     int srcPrefixLength;
-    IPvXAddress destAddr;
+    inet::L3Address destAddr;
     int destPrefixLength;
     int protocol;
     int tos;
