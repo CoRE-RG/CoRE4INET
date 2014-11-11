@@ -61,6 +61,7 @@ module TTEPHYPort like IPort
         //MAC interface
         mac: EtherMACFullDuplex {
             parameters:
+                interfaceTableModule = ""; //Not used at the moment
                 promiscuous = true; //MAC must be set promiscuous to allow for CT receiption with all CT-Markers
                 queueModule = "shaper";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
                 @display("p=87,139");

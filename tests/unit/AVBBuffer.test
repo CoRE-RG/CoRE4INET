@@ -41,7 +41,7 @@ std::list<cModule*> ports = table->getListenersForStreamId(0);
 ev << "Ports:{";
 PrintModulelist(ports);
 ev << "}" << std::endl;
-table->updateTalkerWithStreamId(0, &port1, MACAddress("01:02:03:04:05:06"), CoRE4INET::SR_CLASS_A, 350, 1, 2);
+table->updateTalkerWithStreamId(0, &port1, inet::MACAddress("01:02:03:04:05:06"), CoRE4INET::SR_CLASS_A, 350, 1, 2);
 table->printState();
 table->updateListenerWithStreamId(0, &port2, 2);
 table->printState();

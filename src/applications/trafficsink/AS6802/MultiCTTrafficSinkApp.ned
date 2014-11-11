@@ -29,7 +29,7 @@ simple MultiCTTrafficSinkApp extends ApplicationBase
         @class(MultiTrafficSinkApp);
         @display("i=block/sink");
         //Signal emitted when a frame is received, contains received EtherFrame
-        @signal[rxPk:*](type=EtherFrame);
+        @signal[rxPk:*](type=inet::EtherFrame);
         //Statistic of the amount of packets that were received by the application
         @statisticTemplate[rxPk](title="RX Packets"; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=linear); //possible parameter e.g.: measure_interval=50ms; for floatingIntervalRecorders
         //End-to-end latency

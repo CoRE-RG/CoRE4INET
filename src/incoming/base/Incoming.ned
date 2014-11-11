@@ -30,9 +30,9 @@ simple Incoming like IIncoming
     @class(Incoming);
     @display("i=block/arrival");
     //Signal emitted when frame is received, contains received EtherFrame
-    @signal[rxPk](type=EtherFrame);
+    @signal[rxPk](type=inet::EtherFrame);
     //Signal emitted when frame is dropped due to implemented policy, contains dropped EtherFrame
-    @signal[droppedPk](type=EtherFrame);
+    @signal[droppedPk](type=inet::EtherFrame);
     //Statistic of the amount of packets that were dropped by the incoming module
     @statistic[droppedPk](title="Packets Dropped"; source=droppedPk; record=count; interpolationmode=none);
     //Statistic of the amount of packets that were received by the incoming module

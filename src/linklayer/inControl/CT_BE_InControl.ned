@@ -31,10 +31,10 @@ simple CT_BE_InControl extends BE_InControl
         @display("i=block/classifier");
         @class(CT_BE_InControl);
         //Statistic of the amount of packets that were dropped due to no configured buffer/ctc
-        @signal[ctDropped](type=EtherFrame);
+        @signal[ctDropped](type=inet::EtherFrame);
         @statistic[ctDropped](title="Unconfigured CT dropped"; source=droppedPk; record=count; interpolationmode=none);
 
-        @signal[rxPk](type=EtherFrame);
+        @signal[rxPk](type=inet::EtherFrame);
        
        //Statistic of the End-to-end latency for each packet that is received by the buffer
        	@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
