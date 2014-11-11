@@ -15,8 +15,8 @@
 
 package core4inet.nodes.inet;
 
-import inet.networklayer.arp.ARP;
-import inet.networklayer.autorouting.ipv4.IPv4NodeConfigurator;
+import inet.networklayer.arp.ipv4.ARP;
+import inet.networklayer.configurator.ipv4.IPv4NodeConfigurator;
 import inet.networklayer.ipv4.ErrorHandling;
 import inet.networklayer.ipv4.ICMP;
 import inet.networklayer.ipv4.IIGMP;

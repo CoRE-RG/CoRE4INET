@@ -20,6 +20,7 @@ import core4inet.examples.inet.small_network.Node1;
 import core4inet.examples.inet.small_network.Node3;
 
 import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
+import inet.node.ethernet.Eth100M;
 
 //
 // Small sample network with three hosts and one switch that shows how to 
@@ -57,7 +58,7 @@ network small_network
         //
         // The example uses a simple star topology
         //
-        node1.ethg <--> {  delay = 0.2us; datarate = 100Mbps; } <--> switch1.ethg[0];
-        node2.ethg <--> {  delay = 0.1us; datarate = 100Mbps; } <--> switch1.ethg[1];
-        node3.ethg <--> {  delay = 0.05us; datarate = 100Mbps; } <--> switch1.ethg[2];
+        node1.ethg <--> Eth100M {  length = 20m; } <--> switch1.ethg[0];
+        node2.ethg <--> Eth100M {  length = 10m; } <--> switch1.ethg[1];
+        node3.ethg <--> Eth100M {  length = 5m; } <--> switch1.ethg[2];
 }
