@@ -33,6 +33,8 @@ module TTEPHYPort like IPort
         bool promiscuous = default(false);
         //Static propagation delay for the port
         double static_tx_delay @unit(s) = default(0ns);
+        string interfaceTableModule;
+        *.interfaceTableModule = default(absPath(interfaceTableModule));
     gates:
         //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
@@ -61,7 +63,6 @@ module TTEPHYPort like IPort
         //MAC interface
         mac: EtherMACFullDuplex {
             parameters:
-                interfaceTableModule = ""; //Not used at the moment
                 promiscuous = true; //MAC must be set promiscuous to allow for CT receiption with all CT-Markers
                 queueModule = "shaper";//The tteOutput-Module(TTEOutput) is used as external queue for the interface
                 @display("p=87,139");

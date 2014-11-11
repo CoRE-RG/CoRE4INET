@@ -22,6 +22,7 @@ import core4inet.utilities.modules.CheckedBuffer;
 import inet.linklayer.IMACAddressTable;
 import inet.linklayer.IMACRelayUnit;
 import inet.common.lifecycle.NodeStatus;
+import inet.networklayer.common.InterfaceTable;
 
 //
 // Module for a TTEthernet Switch with variable number of ports.
@@ -43,6 +44,7 @@ module TTEEtherSwitch
         double hardware_delay @unit(s) = default(8us);
         int numBuffer = default(0);
         string configurationManagerType = default("");
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
@@ -61,6 +63,9 @@ module TTEEtherSwitch
         //The mac table associated with the be switch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
             @display("p=170,50");
+        }
+        interfaceTable: InterfaceTable {
+            @display("p=447,313");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: TTEPHYPort {

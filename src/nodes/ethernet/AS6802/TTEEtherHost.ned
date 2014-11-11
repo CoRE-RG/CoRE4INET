@@ -23,6 +23,7 @@ import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.linklayer.ethernet.base.BGEtherEncap;
 import inet.common.lifecycle.NodeStatus;
+import inet.networklayer.common.InterfaceTable;
 
 
 //
@@ -50,6 +51,7 @@ module TTEEtherHost
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
         string configurationManagerType = default("");
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
     gates:
         // Physical port of the host
         inout ethg @loose @labels(EtherFrame-conn);
@@ -91,6 +93,10 @@ module TTEEtherHost
         }
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
+        }
+        
+        interfaceTable: InterfaceTable {
+            @display("p=447,313");
         }
     connections allowunconnected:
         phy[0].phys <--> ethg;

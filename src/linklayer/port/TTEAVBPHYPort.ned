@@ -32,6 +32,8 @@ module TTEAVBPHYPort like IPort
         @display("bgb=188,180;i=device/port");
         // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
         bool promiscuous = default(false);
+        string interfaceTableModule;
+        *.interfaceTableModule = default(absPath(interfaceTableModule));
     gates:
         //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
@@ -63,7 +65,6 @@ module TTEAVBPHYPort like IPort
 
         mac: EtherMACFullDuplex {
             parameters:
-                interfaceTableModule = ""; //Not used at the moment
                 promiscuous = true;
                 queueModule = "shaper";
                 @display("p=87,139");
