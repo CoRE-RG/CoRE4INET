@@ -131,7 +131,7 @@ int IPv4oREBase::parseProtocol(const char *attrValue, const char *attrName)
         return -1;
     if (isdigit(*attrValue))
         return parseIntAttribute(attrValue, attrName);
-    m_protocolEnum = cEnum::get("IPProtocolId");
+    m_protocolEnum = cEnum::get("inet::IPProtocolId");
     char name[20];
     strcpy(name, "IP_PROT_");
     char *dest;

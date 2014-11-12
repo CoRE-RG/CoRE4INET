@@ -67,6 +67,8 @@ module RTIPHost
         string sctpType = default(firstAvailable("SCTP","SCTP_None"));
         int numApps = default(0); //default(1) ? ListenerApp
         double hardware_delay @unit(s) = default(0us);
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
+        *.routingTableModule = default(absPath(".routingTable"));
     gates:
         inout ethg @labels(EtherFrame-conn);
     submodules:

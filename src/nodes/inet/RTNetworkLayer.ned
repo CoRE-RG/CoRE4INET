@@ -37,7 +37,13 @@ module RTNetworkLayer
     parameters:
         bool proxyARP = default(true);
         string igmpType = default("IGMPv2");
-        *.routingTableModule = default("^.^.routingTable");
+        string interfaceTableModule;
+        string routingTableModule;
+        *.interfaceTableModule = default(absPath(interfaceTableModule));
+        *.routingTableModule = default(absPath(routingTableModule));
+        *.arpModule = default(absPath(".arp"));
+        *.icmpModule = default(absPath(".icmp"));
+        arp.respondToProxyARP = proxyARP;
         @display("i=block/fork");
     gates:
         input ifIn[] @labels(IPv4Datagram);
@@ -66,7 +72,6 @@ module RTNetworkLayer
         }
         arp: ARP {
             parameters:
-                respondToProxyARP = proxyARP;
                 @display("p=202,142;q=pendingQueue");
         }
         icmp: ICMP {
