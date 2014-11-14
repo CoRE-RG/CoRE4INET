@@ -180,6 +180,34 @@ void createStdListMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& 
     new cStdListMapWatcher<KeyT, ValueT, CmpT>(varname, m);
 }
 
+template<class KeyT, class ValueT>
+class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
+{
+    public:
+        cStdListUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
+            cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
+
+        {
+        }
+        virtual const char *getElemTypeName() const
+        {
+            return "struct map<*, list<*>>";
+        }
+
+        virtual std::string atIt2() const
+        {
+            std::stringstream out;
+            out << this->atIt() << (*this->it2);
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT>
+void createStdListUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
+{
+    new cStdListUMapWatcher<KeyT, ValueT>(varname, m);
+}
+
 template<class KeyT, class ValueT, class CmpT>
 class cStdPairListMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
 {
@@ -582,6 +610,13 @@ void createStdPtrListUMapUMapWatcher(const char *varname, unordered_map<KeyT, Va
  * @hideinitializer
  */
 #define WATCH_LISTMAP(m)      createStdListMapWatcher(#m,(m))
+
+/**
+ * Makes std::unordered_maps storing lists inspectable in Tkenv. See also WATCH_LISTMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_LISTUMAP(m)      createStdListUMapWatcher(#m,(m))
 
 /**
  * Makes std::maps storing lists of pairs inspectable in Tkenv. See also WATCH_LISTMAP().

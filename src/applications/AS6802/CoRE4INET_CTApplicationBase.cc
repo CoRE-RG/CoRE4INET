@@ -29,8 +29,7 @@ Define_Module(CTApplicationBase);
 
 void CTApplicationBase::initialize()
 {
-    //TODO: Minor watch unordered maps
-    //WATCH_LISTMAP(ctbuffers);
+    WATCH_LISTUMAP(ctbuffers);
     ApplicationBase::initialize();
 }
 
