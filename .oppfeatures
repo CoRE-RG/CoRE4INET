@@ -188,6 +188,7 @@
         requires = "IPoRE"
         labels = ""
         nedPackages = "
+                       core4inet.examples.inet
                       "
         extraSourceFolders = ""
         linkerFlags = ""
