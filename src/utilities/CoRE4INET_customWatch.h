@@ -126,7 +126,7 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
             it2 = (*it).second.begin();
             while (index <= i)
             {
-                if (i > (index + (int)(*it).second.size()))
+                if (i > (index + (int) (*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -163,7 +163,7 @@ class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, Cmp
         }
         virtual const char *getElemTypeName() const
         {
-            return "struct pair<*, list<*>>";
+            return "struct map<*, list<*>>";
         }
 
         virtual std::string atIt2() const
@@ -178,6 +178,86 @@ template<class KeyT, class ValueT, class CmpT>
 void createStdListMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
 {
     new cStdListMapWatcher<KeyT, ValueT, CmpT>(varname, m);
+}
+
+template<class KeyT, class ValueT>
+class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
+{
+    public:
+        cStdListUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
+            cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
+
+        {
+        }
+        virtual const char *getElemTypeName() const
+        {
+            return "struct map<*, list<*>>";
+        }
+
+        virtual std::string atIt2() const
+        {
+            std::stringstream out;
+            out << this->atIt() << (*this->it2);
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT>
+void createStdListUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
+{
+    new cStdListUMapWatcher<KeyT, ValueT>(varname, m);
+}
+
+template<class KeyT, class ValueT, class CmpT>
+class cStdPairListMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
+{
+    public:
+        cStdPairListMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
+                cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>(name, var)
+
+        {
+        }
+        virtual const char *getElemTypeName() const
+        {
+            return "struct map<*, list<pair<*,*>>>";
+        }
+
+        virtual std::string atIt2() const
+        {
+            std::stringstream out;
+            out << this->atIt();
+            if (this->it2 != (*this->it).second.end())
+            {
+                if ((*this->it2).first)
+                {
+                    out << (*this->it2).first;
+                }
+                else
+                {
+                    out << "NULL";
+                }
+                out << ", ";
+                if ((*this->it2).second)
+                {
+                    out << (*this->it2).second;
+                }
+                else
+                {
+                    out << "NULL";
+                }
+            }
+            else
+            {
+                out << "(empty)";
+            }
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT, class CmpT>
+void createStdPairListMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
+{
+    new cStdPairListMapWatcher<KeyT, ValueT, CmpT>(varname, m);
 }
 
 template<class KeyT, class ValueT, class CmpT>
@@ -350,7 +430,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
         {
             std::stringstream out;
             out << this->atIt2();
-            if(this->it3 != (*this->it2).second.end())
+            if (this->it3 != (*this->it2).second.end())
             {
                 out << this->it3->first << " ==> " << this->it3->second;
             }
@@ -394,7 +474,7 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
                     size += (*j).second.size();
                 }
             }
-            return (int)size;
+            return (int) size;
         }
         virtual std::string at(int i) const
         {
@@ -404,7 +484,7 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
             it3 = (*this->it2).second.begin();
             while (index <= i)
             {
-                if (i > (index + (int)(*this->it2).second.size()))
+                if (i > (index + (int) (*this->it2).second.size()))
                 {
                     index += (*this->it2).second.size();
                     ++this->it2;
@@ -436,7 +516,7 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
         {
             std::stringstream out;
             out << this->atIt2();
-            if(this->it3 != (*this->it2).second.end())
+            if (this->it3 != (*this->it2).second.end())
             {
                 out << this->it3->first << " ==> " << this->it3->second;
             }
@@ -460,7 +540,7 @@ class cStdPtrListMapMapWatcher : public cStdListMapMapWatcher<KeyT, ValueT, CmpT
     public:
 
         cStdPtrListMapMapWatcher(const char *name, std::map<KeyT, ValueT, CmpT>& var) :
-            cStdListMapMapWatcher<KeyT, ValueT, CmpT>(name, var)
+                cStdListMapMapWatcher<KeyT, ValueT, CmpT>(name, var)
 
         {
         }
@@ -468,7 +548,7 @@ class cStdPtrListMapMapWatcher : public cStdListMapMapWatcher<KeyT, ValueT, CmpT
         {
             std::stringstream out;
             out << this->atIt2();
-            if(this->it3 != (*this->it2).second.end())
+            if (this->it3 != (*this->it2).second.end())
             {
                 out << this->it3->first << " ==> " << *(this->it3->second);
             }
@@ -492,7 +572,7 @@ class cStdPtrListUMapUMapWatcher : public cStdListUMapUMapWatcher<KeyT, ValueT>
     public:
 
         cStdPtrListUMapUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
-            cStdListUMapUMapWatcher<KeyT, ValueT>(name, var)
+                cStdListUMapUMapWatcher<KeyT, ValueT>(name, var)
 
         {
         }
@@ -500,7 +580,7 @@ class cStdPtrListUMapUMapWatcher : public cStdListUMapUMapWatcher<KeyT, ValueT>
         {
             std::stringstream out;
             out << this->atIt2();
-            if(this->it3 != (*this->it2).second.end())
+            if (this->it3 != (*this->it2).second.end())
             {
                 out << this->it3->first;
                 out << " ==> " << *(this->it3->second);
@@ -530,6 +610,20 @@ void createStdPtrListUMapUMapWatcher(const char *varname, unordered_map<KeyT, Va
  * @hideinitializer
  */
 #define WATCH_LISTMAP(m)      createStdListMapWatcher(#m,(m))
+
+/**
+ * Makes std::unordered_maps storing lists inspectable in Tkenv. See also WATCH_LISTMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_LISTUMAP(m)      createStdListUMapWatcher(#m,(m))
+
+/**
+ * Makes std::maps storing lists of pairs inspectable in Tkenv. See also WATCH_LISTMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_PAIRLISTMAP(m)      createStdPairListMapWatcher(#m,(m))
 
 /**
  * Makes std::maps storing maps inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP() and WATCH_LISTMAP().

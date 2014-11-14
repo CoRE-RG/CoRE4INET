@@ -44,7 +44,6 @@ void RCIncoming::handleMessage(cMessage *msg)
 
         uint64_t currentTotalTicks = timer->getTotalTicks();
         //Now check for correct arrival:
-        //TODO Normal: what to do with JITTER?
         //Check too early
         if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))
         {
