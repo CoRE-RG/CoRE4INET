@@ -43,9 +43,8 @@ void Timer::initialize()
 
     recalculationTime = lastRecalculation = simTime();
 
-    //TODO Minor: Add Watch for pair list map
-    //WATCH_LISTMAP(registredActionTimeEvents);
-    //WATCH_LISTMAP(registredTimerEvents);
+    WATCH_PAIRLISTMAP(registredActionTimeEvents);
+    WATCH_LISTMAP(registredTimerEvents);
 }
 
 Timer::~Timer()
