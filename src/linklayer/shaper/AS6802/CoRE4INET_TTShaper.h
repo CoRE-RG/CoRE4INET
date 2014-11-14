@@ -252,12 +252,12 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
     {
         TTBuffer *thisttBuffer;
         TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(msg->getSenderModule());
-        if(!ttBuffer){
-            throw cRuntimeError("Only Messages from TTBuffer are allowed to be sent to TTin");
+        if (!ttBuffer)
+        {
+            throw cRuntimeError("A TTFrame was received that was not sent by a TTBuffer! %s is not a TTBuffer",
+                    msg->getSenderModule()->getFullName());
         }
         ASSERT(isTTBufferRegistered(ttBuffer) == true); //No shuffeling at the moment
-        ASSERT2(ttBuffer, "A TTFrame was received that was not sent by a TTBuffer");
-
         if (ttBuffers.size() > 0)
         {
             thisttBuffer = ttBuffers.begin()->second;
@@ -266,10 +266,20 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
         {
             thisttBuffer = NULL;
         }
-        ASSERT(thisttBuffer == ttBuffer);
         if (thisttBuffer != ttBuffer)
         {
-            ASSERT2(isTTBufferRegistered(ttBuffer) == false, "A TTFrame was received that was unexpected");
+            if (isTTBufferRegistered(ttBuffer) != false)
+            {
+                throw cRuntimeError(
+                        "A TTFrame was received that was unexpected. Expected Frame from Buffer: %s, received Frame from Buffer %s",
+                        thisttBuffer->getFullName(), ttBuffer->getFullName());
+            }
+            else
+            {
+                throw cRuntimeError(
+                        "Warning! Frame shuffling is not yet implemented! You must register all TTBuffers in the shaper! %s was not registered",
+                        ttBuffer->getFullName());
+            }
         }
         //Now reregister the same TTBuffer
         ttBuffers.erase(ttBuffers.begin());
@@ -489,7 +499,7 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
     {
         ttBuffers.clear();
         std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(),
-                DELIMITERS).asVector();
+        DELIMITERS).asVector();
         for (std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
                 ttBufferPath != ttBufferPaths.end(); ttBufferPath++)
         {
