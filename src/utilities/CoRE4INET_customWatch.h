@@ -59,7 +59,7 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             it = m.begin();
             it2 = (*it).second.begin();
             while (index <= i)
