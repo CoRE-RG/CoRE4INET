@@ -64,7 +64,7 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
             it2 = (*it).second.begin();
             while (index <= i)
             {
-                if (i > (index + (*it).second.size()))
+                if (i > (index + (int)(*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
