@@ -81,7 +81,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
     }
 }
 
-void TTTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void TTTrafficSourceApp::receiveSignal(__attribute__((unused)) cComponent *src, __attribute__((unused)) simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent
     ();

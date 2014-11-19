@@ -35,7 +35,7 @@ void ApplicationBase::initialize() {
     }
 }
 
-void ApplicationBase::handleMessage(cMessage *msg) {
+void ApplicationBase::handleMessage(__attribute__((unused)) cMessage *msg) {
 }
 
 void ApplicationBase::handleParameterChange(

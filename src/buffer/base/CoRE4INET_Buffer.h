@@ -78,7 +78,7 @@ class Buffer : public virtual cSimpleModule
         /**
          * Chaches the maximum message size
          */
-        unsigned int maxMessageSize;
+        size_t maxMessageSize;
 
     protected:
         /**

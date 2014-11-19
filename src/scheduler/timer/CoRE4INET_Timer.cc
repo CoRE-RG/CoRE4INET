@@ -344,7 +344,7 @@ void Timer::clockCorrection(int32_t ticks)
                 uint64_t corrected_tick = (uint64_t) (*it2).first;
                 while (corrected_tick < this->ticks)
                 {
-                    corrected_tick += (*it4).second->par("cycle_ticks").longValue();
+                    corrected_tick += (uint64_t)(*it4).second->par("cycle_ticks").longValue();
                 }
                 correctedActionTimeEvents[corrected_tick].push_back(*it4);
             }

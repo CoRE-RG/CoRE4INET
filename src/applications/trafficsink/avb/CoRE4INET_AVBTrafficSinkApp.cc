@@ -82,7 +82,7 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
     if (msg->isSelfMessage())
     {
         SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
-        srpTable->updateListenerWithStreamId((unsigned int) par("streamID").longValue(), this, (unsigned int) par("vlan_id").longValue());
+        srpTable->updateListenerWithStreamId((unsigned int) par("streamID").longValue(), this, (uint16_t) par("vlan_id").longValue());
         getDisplayString().setTagArg("i2", 0, "status/active");
         simtime_t updateInterval = par("updateInterval").doubleValue();
         if (updateInterval != 0)

@@ -133,7 +133,6 @@ class TTShaper : public TC, public virtual Timed
          * one. Else it saves the state and sends the message immediately when it is
          * received.
          *
-         * @param msg the message to be queued
          */
         virtual void requestPacket();
 
@@ -439,23 +438,23 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
                 //Check for overlapping windows only when other buffer has a sendWindowEnd set
                 if ((*buffer).second->par("sendWindowEnd").longValue())
                 {
-                    uint64_t other_offset = (*buffer).second->getPeriod()->par("offset_ticks").longValue();
+                    uint64_t other_offset = (uint64_t)(*buffer).second->getPeriod()->par("offset_ticks").longValue();
                     uint64_t other_sendWindowStart = (uint64_t) (*buffer).second->par("sendWindowStart").longValue()
                             + other_offset;
                     uint64_t other_sendWindowEnd = (uint64_t) (*buffer).second->par("sendWindowEnd").longValue()
                             + other_offset;
-                    uint64_t this_offset = ttBuffer->getPeriod()->par("offset_ticks").longValue();
+                    uint64_t this_offset = (uint64_t)ttBuffer->getPeriod()->par("offset_ticks").longValue();
                     uint64_t this_sendWindowStart = (uint64_t) ttBuffer->par("sendWindowStart").longValue()
                             + this_offset;
                     uint64_t this_sendWindowEnd = (uint64_t) ttBuffer->par("sendWindowEnd").longValue() + this_offset;
                     //For simplification one cycle is added to the WindowEnd if it is in the next cycle
                     if (other_sendWindowEnd < other_sendWindowStart)
                     {
-                        other_sendWindowEnd += (*buffer).second->getPeriod()->par("cycle_ticks").longValue();
+                        other_sendWindowEnd += (uint64_t)(*buffer).second->getPeriod()->par("cycle_ticks").longValue();
                     }
                     if (this_sendWindowEnd < this_sendWindowStart)
                     {
-                        this_sendWindowEnd += ttBuffer->getPeriod()->par("cycle_ticks").longValue();
+                        this_sendWindowEnd += (uint64_t)ttBuffer->getPeriod()->par("cycle_ticks").longValue();
                     }
                     //Now that we have everything together do the check!
                     if (other_sendWindowStart < this_sendWindowStart && other_sendWindowEnd > this_sendWindowStart)

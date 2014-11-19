@@ -21,7 +21,7 @@
 
 namespace CoRE4INET {
 
-typedef void(*cbFunc)(void *);
+typedef void (*cbFunc)(void *);
 
 //This disables the padding warning for this class!
 #pragma GCC diagnostic ignored "-Wpadded"
@@ -38,7 +38,7 @@ typedef void(*cbFunc)(void *);
  *
  * @author Till Steinbach
  */
-class Callback: public cListener
+class Callback : public cListener
 {
     protected:
         /**
@@ -59,22 +59,26 @@ class Callback: public cListener
         /**
          * @brief Constructor
          */
-        Callback(Buffer *buffer, simsignal_t signal){
-            argSet=false;
-            buffer->subscribe(signal,this);
+        Callback(Buffer *buffer, simsignal_t signal)
+        {
+            argSet = false;
+            buffer->subscribe(signal, this);
         }
         /**
          * @brief Destructor
          */
-        virtual ~Callback(){}
+        virtual ~Callback()
+        {
+        }
 
         /**
          * @brief Setter for the function pointer.
          *
          * @param functionPointer the funtion pointer to be invoked in the callback
          */
-        virtual void setFunctionPointer(void (*functionPointer)(void*)){
-            fn=functionPointer;
+        virtual void setFunctionPointer(void (*functionPointer)(void*))
+        {
+            fn = functionPointer;
         }
 
         /**
@@ -82,7 +86,8 @@ class Callback: public cListener
          *
          * @return the funtion pointer that is invoked in the callback
          */
-        virtual cbFunc getFunctionPointer(){
+        virtual cbFunc getFunctionPointer()
+        {
             return fn;
         }
 
@@ -91,18 +96,19 @@ class Callback: public cListener
          *
          * @param setFunctionArg the funtion arg to be used in the callback
          */
-        virtual void setFunctionArg(void *setFunctionArg){
-            arg=setFunctionArg;
-            argSet=true;
+        virtual void setFunctionArg(void *setFunctionArg)
+        {
+            arg = setFunctionArg;
+            argSet = true;
         }
-
 
         /**
          * @brief Getter for the function args.
          *
          * @return the funtion arg used in the callback
          */
-        virtual void* getFunctionArg(){
+        virtual void* getFunctionArg()
+        {
             return arg;
         }
 
@@ -111,7 +117,9 @@ class Callback: public cListener
          *
          * If method is called the stored function pointer is invoked.
          */
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj){
+        virtual void receiveSignal(__attribute__((unused))  cComponent *src, __attribute__((unused))  simsignal_t id,
+                __attribute__((unused))  cObject *obj)
+        {
             fn(arg);
         }
 };

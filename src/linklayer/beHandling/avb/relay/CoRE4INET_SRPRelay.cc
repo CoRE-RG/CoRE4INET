@@ -94,7 +94,7 @@ void SRPRelay::dispatchSRP(SRPFrame * srp)
     //Broadcast
     if (portNum < 0)
     {
-        for(unsigned int i = 0; i< portCount; ++i){
+        for(size_t i = 0; i< portCount; ++i){
             if((int)i!=notPortNum){
                 send(frame->dup(), "ifOut", i);
                 EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = " << i

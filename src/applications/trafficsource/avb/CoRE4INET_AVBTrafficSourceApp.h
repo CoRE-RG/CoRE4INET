@@ -45,9 +45,9 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
         bool isStreaming;
         enum SR_CLASS srClass;
         unsigned long streamID;
-        unsigned int frameSize;
-        unsigned int intervalFrames;
-        unsigned short vlan_id;
+        size_t frameSize;
+        uint16_t intervalFrames;
+        uint16_t vlan_id;
         unsigned int payload;
         cModule *avbOutCTC;
         MACAddress multicastMAC;

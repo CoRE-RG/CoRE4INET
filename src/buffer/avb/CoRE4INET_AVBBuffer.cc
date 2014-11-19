@@ -218,7 +218,7 @@ void AVBBuffer::sendSlope(SimTime duration)
     cGate *physOutGate = getParentModule()->getSubmodule("phy", getIndex())->getSubmodule("mac")->gate("phys$o");
     cChannel *outChannel = physOutGate->findTransmissionChannel();
 
-    unsigned int portBandwith = outChannel->getNominalDatarate();
+    unsigned int portBandwith = (unsigned int)ceil(outChannel->getNominalDatarate());
     emit(creditSignal, credit);
     credit -= ceil((portBandwith - reservedBandwith) * duration.dbl());
     inTransmission = false;

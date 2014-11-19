@@ -47,7 +47,7 @@ void Buffer::initialize(int stage)
     {
         EV_DETAIL << "Initialize Buffer" << endl;
 
-        maxMessageSize = par("maxMessageSize").longValue();
+        maxMessageSize = (size_t)par("maxMessageSize").longValue();
 
         if (ev.isGUI())
         {
@@ -99,7 +99,7 @@ void Buffer::handleMessage(cMessage *msg)
 
 void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
 {
-    maxMessageSize = par("maxMessageSize").longValue();
+    maxMessageSize = (size_t)par("maxMessageSize").longValue();
 
     destinationGates.clear();
     std::vector<std::string> destinationGatePaths =

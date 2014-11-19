@@ -135,7 +135,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     getTimer()->registerEvent(event);
 }
 
-void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void AVBTrafficSourceApp::receiveSignal(__attribute__((unused)) cComponent *src, simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent
     ();

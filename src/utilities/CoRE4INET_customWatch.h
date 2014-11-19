@@ -392,7 +392,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             this->it = this->m.begin();
             this->it2 = (*this->it).second.begin();
             it3 = (*this->it2).second.begin();

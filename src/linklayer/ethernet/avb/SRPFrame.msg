@@ -31,7 +31,7 @@ packet SRPFrame{
     
     // ID of the AVB Stream
     // 64 Bit Field (48bit MAC + 16bit UniqueID)
-	unsigned long streamID;
+	uint64_t streamID;
 	
 		
 	// for internal implementation:
@@ -44,21 +44,21 @@ packet TalkerAdvertise extends SRPFrame{
     // DataFrameParameters => destination adress and vlan identifier
 	// 64 Bit Field
 	MACAddress destination_address; //only one Talker allowed per destination_address
-	unsigned short vlan_identifier;
+	uint16_t vlan_identifier;
 	
 	// TSpec => Max frame size and sending interval of an AVB stream
 	// 32 Bit Field
-	unsigned short MaxFrameSize;
-	unsigned short MaxIntervalFrames;
+	uint16_t MaxFrameSize;
+	uint16_t MaxIntervalFrames;
 	
 	
 	// PriorityAndRank => Data Frame Priority: 6 = SRClass A & 5 = SRClass B
 	// 8 Bit Field (3 Bit Data Frame Priority | 1 Bit Rank | 4 Bit Reserved (Zero filled))
-	unsigned char priorityAndRank;
+	uint8_t priorityAndRank;
 	
 	// notused
 	// 32 Bit Field
-	unsigned int accumulatedLatency;
+	uint32_t accumulatedLatency;
 }
 
 packet TalkerFailed extends TalkerAdvertise{
@@ -71,7 +71,7 @@ packet TalkerFailed extends TalkerAdvertise{
 packet ListenerReady extends SRPFrame{
 	byteLength = 8;
 	
-	unsigned short vlan_identifier;
+	uint16_t vlan_identifier;
 }
 
 packet ListenerAskingFailed extends SRPFrame{
@@ -80,7 +80,7 @@ packet ListenerAskingFailed extends SRPFrame{
 	//
 	// 72 Bit Field
 	
-	unsigned short vlan_identifier;
+	uint16_t vlan_identifier;
 }
 
 packet ListenerReadyFailed extends ListenerReady{

@@ -126,6 +126,6 @@ uint64_t TTBuffer::nextSendWindowStart() const
 
 long TTBuffer::getRequiredBandwidth()
 {
-    return (par("maxMessageSize").longValue() * 8)
-            * (1 / ((uint32_t) period->par("cycle_ticks").longValue() * oscillator->par("tick").doubleValue()));
+    return (long)ceil((par("maxMessageSize").longValue() * 8)
+            * (1 / ((uint32_t) period->par("cycle_ticks").longValue() * oscillator->par("tick").doubleValue())));
 }

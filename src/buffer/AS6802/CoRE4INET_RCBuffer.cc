@@ -155,8 +155,8 @@ void RCBuffer::resetBag()
 
 long RCBuffer::getRequiredBandwidth()
 {
-    return (par("maxMessageSize").longValue() * 8)
-            * (1 / ((uint64_t) par("bag").longValue() * oscillator->par("tick").doubleValue()));
+    return (long)ceil((par("maxMessageSize").longValue() * 8)
+            * (1 / ((uint64_t) par("bag").longValue() * oscillator->par("tick").doubleValue())));
 }
 
 } //namespace

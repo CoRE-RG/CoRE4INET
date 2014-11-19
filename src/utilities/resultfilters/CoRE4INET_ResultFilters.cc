@@ -41,7 +41,7 @@ void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev
 Register_ResultFilter("SubtractActualFromLast", SubtractActualFromLastFilter)
 ;
 
-bool SubtractActualFromLastFilter::process(simtime_t& t, double& value)
+bool SubtractActualFromLastFilter::process(__attribute__((unused)) simtime_t& t, double& value)
 {
     difference = value - lastValue;
     lastValue = value;
@@ -52,7 +52,7 @@ bool SubtractActualFromLastFilter::process(simtime_t& t, double& value)
 Register_ResultFilter("innerMessagePacketBytes", InnerMessagePacketBytesFilter)
 ;
 
-void InnerMessagePacketBytesFilter::receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object)
+void InnerMessagePacketBytesFilter::receiveSignal(__attribute__((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
 {
     if (dynamic_cast<cPacket *>(object))
     {
