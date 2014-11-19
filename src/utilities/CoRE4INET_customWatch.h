@@ -184,7 +184,7 @@ template<class KeyT, class ValueT>
 class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 {
     public:
-        cStdListUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
+        cStdListUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
             cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
 
         {
@@ -203,7 +203,7 @@ class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 };
 
 template<class KeyT, class ValueT>
-void createStdListUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
+void createStdListUMapWatcher(const char *varname, unordered_map<KeyT, ValueT>& m)
 {
     new cStdListUMapWatcher<KeyT, ValueT>(varname, m);
 }
