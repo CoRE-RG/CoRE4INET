@@ -43,7 +43,7 @@ void MultiTrafficSinkApp::handleMessage(cMessage *msg)
             else
             {
                 char strBuf[16];
-                snprintf(strBuf, 32, "rxPk:%d", ctID);
+                snprintf(strBuf, sizeof(strBuf), "rxPk:%d", ctID);
                 signal = registerSignal(strBuf);
                 cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "rxPk");
                 ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
