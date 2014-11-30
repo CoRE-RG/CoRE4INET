@@ -44,6 +44,11 @@ class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase
          */
         virtual void handleMessage(cMessage *msg);
     public:
+        /**
+         * @brief constructor for RCTrafficSourceApp
+         */
+        RCTrafficSourceApp();
+
         using TrafficSourceAppBase::handleParameterChange;
 };
 

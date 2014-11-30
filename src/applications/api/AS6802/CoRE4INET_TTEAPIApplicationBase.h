@@ -118,6 +118,11 @@ class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public
 
     public:
         /**
+         * @brief Constructor for TTEAPIApplicationBase
+         */
+        TTEAPIApplicationBase();
+
+        /**
          * @brief registers a task that is periodically scheduled.
          *
          * @param actionTime The time in ticks in each cycle the tasks is executed

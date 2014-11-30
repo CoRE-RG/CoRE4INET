@@ -33,6 +33,11 @@ namespace CoRE4INET {
 
 Define_Module(TTEAPIApplicationBase);
 
+TTEAPIApplicationBase::TTEAPIApplicationBase()
+{
+    this->synchronized=false;
+}
+
 void TTEAPIApplicationBase::initialize()
 {
     ApplicationBase::initialize();
