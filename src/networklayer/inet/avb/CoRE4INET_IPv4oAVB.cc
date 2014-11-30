@@ -90,9 +90,8 @@ template<class base>
 void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 {
     // Check for matching filters
-    bool filterMatch = true;
     std::list<IPoREFilter*> matchingFilters;
-    filterMatch = base::getMatchingFilters(packet, matchingFilters, DestinationType_AVB);
+    bool filterMatch = base::getMatchingFilters(packet, matchingFilters, DestinationType_AVB);
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules

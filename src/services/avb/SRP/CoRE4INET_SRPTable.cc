@@ -187,7 +187,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLAS
     unsigned long bandwidth = 0;
 
     for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end();
-            i++)
+            ++i)
     {
         ListenerTable table = i->second;
         for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
