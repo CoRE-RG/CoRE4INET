@@ -42,7 +42,7 @@ void AVBIncoming::handleMessage(cMessage* msg) {
         std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(
                 inFrame->getDest(), inFrame->getVID());
         SR_CLASS srClass = srptable->getSrClassForTalkerAddress(inFrame->getDest(), inFrame->getVID());
-        if (listeners.size() == 0) {
+        if (listeners.empty()) {
             emit(droppedSignal, inFrame);
         } else {
             for (std::list<cModule*>::const_iterator listener = listeners.begin();

@@ -25,7 +25,8 @@ using namespace CoRE4INET;
 
 TTBuffer::TTBuffer()
 {
-    actionTimeEvent = NULL;
+    this->actionTimeEvent = NULL;
+    this->nextAction = 0;
 }
 
 TTBuffer::~TTBuffer()

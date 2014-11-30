@@ -16,6 +16,8 @@
 #ifndef __CORE4INET_TASK_H_
 #define __CORE4INET_TASK_H_
 
+#include <stddef.h>
+
 namespace CoRE4INET {
 
 typedef void(*cbFunc)(void *);
@@ -52,7 +54,9 @@ class Task
          * @brief Constructor
          */
         Task(){
-            argSet=false;
+            this->argSet = false;
+            this->arg = NULL;
+            this->fn = NULL;
         }
 
         /**

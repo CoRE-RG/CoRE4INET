@@ -449,7 +449,7 @@ void SRPTable::updateDisplayString()
         return;
 
     char buf[80];
-    sprintf(buf, "%d talkers\n%d listeners", getNumTalkerEntries(), getNumListenerEntries());
+    sprintf(buf, "%u talkers\n%u listeners", getNumTalkerEntries(), getNumListenerEntries());
     getDisplayString().setTagArg("t", 0, buf);
 }
 

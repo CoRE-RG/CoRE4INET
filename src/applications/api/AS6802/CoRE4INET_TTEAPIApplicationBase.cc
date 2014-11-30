@@ -329,7 +329,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
 {
     Enter_Method_Silent
     ();
-    TTEAPIPriv *priv = (TTEAPIPriv*) buf->priv;
+    TTEAPIPriv *priv = static_cast<TTEAPIPriv*>(buf->priv);
 
     //Now we create a frame that can be accessed later
     if (buf->traffic_type == TTE_BG_TRAFFIC)
@@ -380,7 +380,7 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf, tte_
 {
     Enter_Method_Silent
     ();
-    TTEAPIPriv *priv = (TTEAPIPriv*) buf->priv;
+    TTEAPIPriv *priv = static_cast<TTEAPIPriv*>(buf->priv);
 
     EtherFrame *msg = priv->buffer->getFrame();
     APIPayload *payload = dynamic_cast<APIPayload*>(msg->decapsulate());
@@ -421,7 +421,7 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf)
 {
     Enter_Method_Silent
     ();
-    TTEAPIPriv *priv = (TTEAPIPriv *) buf->priv;
+    TTEAPIPriv *priv = static_cast<TTEAPIPriv *>(buf->priv);
     //Copy frame data and free memory
     APIPayload *payload = (APIPayload*) priv->frame->getEncapsulatedPacket();
     for (unsigned int i = 0; i < payload->getDataArraySize(); i++)
@@ -456,7 +456,7 @@ int32_t TTEAPIApplicationBase::tte_close_input_buf(tte_buffer_t * const buf)
 {
     Enter_Method_Silent
     ();
-    TTEAPIPriv *priv = (TTEAPIPriv *) buf->priv;
+    TTEAPIPriv *priv = static_cast<TTEAPIPriv *>(buf->priv);
     //Free memory
     if (priv->data)
     {
@@ -476,7 +476,7 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
 {
     Enter_Method_Silent
     ();
-    TTEAPIPriv *priv = (TTEAPIPriv*) buf->priv;
+    TTEAPIPriv *priv = static_cast<TTEAPIPriv*>(buf->priv);
     switch (var_id)
     {
         case TTE_BUFVAR_RECEIVE_CB: {
@@ -529,7 +529,7 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf, c
 {
     Enter_Method_Silent
     ();
-    TTEAPIPriv *priv = (TTEAPIPriv*) buf->priv;
+    TTEAPIPriv *priv = static_cast<TTEAPIPriv*>(buf->priv);
     switch (var_id)
     {
         case TTE_BUFVAR_RECEIVE_CB: {

@@ -32,8 +32,15 @@ Define_Module(AVBTrafficSourceApp);
 
 AVBTrafficSourceApp::AVBTrafficSourceApp()
 {
-    isStreaming = false;
-    multicastMAC = generateAutoMulticastAddress();
+    this->isStreaming = false;
+    this->srClass = SR_CLASS_A;
+    this->streamID = 0;
+    this->frameSize = 0;
+    this->intervalFrames = 0;
+    this->vlan_id = 0;
+    this->payload = 0;
+    this->avbOutCTC = NULL;
+    this->multicastMAC = generateAutoMulticastAddress();
 }
 
 void AVBTrafficSourceApp::initialize()
@@ -107,7 +114,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 void AVBTrafficSourceApp::sendAVBFrame()
 {
     char name[10];
-    sprintf(name, "Stream %ld", streamID);
+    sprintf(name, "Stream %lu", streamID);
     AVBFrame *outFrame = new AVBFrame(name);
     outFrame->setTimestamp();
     outFrame->setStreamID(streamID);

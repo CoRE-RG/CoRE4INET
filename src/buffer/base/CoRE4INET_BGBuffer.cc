@@ -44,7 +44,7 @@ void BGBuffer::handleMessage(cMessage *msg)
 {
     Buffer::handleMessage(msg);
 
-    if (msg->arrivedOn("in") && destinationGates.size() > 0)
+    if (msg->arrivedOn("in") && !destinationGates.empty())
     {
         if (EtherFrame *outgoingMessage = dequeue())
         {

@@ -28,6 +28,14 @@ simsignal_t AVBBuffer::creditSignal = registerSignal("credit");
 
 AVBBuffer::AVBBuffer()
 {
+    this->srClass = SR_CLASS_A;
+    this->credit = -1;
+    this->maxCredit = -1;
+    this->inTransmission = false;
+    this->newTime = simTime();
+    this->oldTime = simTime();
+    this->Wduration = -1;
+    this->tick = -1;
 
 }
 

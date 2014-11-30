@@ -125,13 +125,13 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value)
 
 void IntervalVectorRecorder::addValueToInterval(simtime_t_cref t, double value)
 {
-    if (inInterval.size() > 0)
+    if (inInterval.empty())
     {
-        inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
+        inInterval[t] = value;
     }
     else
     {
-        inInterval[t] = value;
+        inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
     }
 }
 
