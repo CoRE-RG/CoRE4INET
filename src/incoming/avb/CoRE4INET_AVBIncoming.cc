@@ -46,7 +46,7 @@ void AVBIncoming::handleMessage(cMessage* msg) {
             emit(droppedSignal, inFrame);
         } else {
             for (std::list<cModule*>::const_iterator listener = listeners.begin();
-                    listener != listeners.end(); listener++) {
+                    listener != listeners.end(); ++listener) {
                 if (strcmp((*listener)->getName(), "phy") == 0) {
                     string outputStr;
                     if(srClass == SR_CLASS_A)       outputStr = "AVBAout";

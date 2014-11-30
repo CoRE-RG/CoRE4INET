@@ -52,7 +52,7 @@ void CTTrafficSourceAppBase::sendMessage()
         }
         else
         {
-            for (std::list<CTBuffer*>::const_iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+            for (std::list<CTBuffer*>::const_iterator buf = buffer.begin(); buf != buffer.end(); ++buf)
             {
                 CTFrame *frame;
                 if (dynamic_cast<TTBuffer*>(*buf))

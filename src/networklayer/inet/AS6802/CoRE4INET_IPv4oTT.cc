@@ -375,7 +375,7 @@ template<class Base>
 void IPv4oTT<Base>::registerSendTimingEvents(std::list<IPoREFilter*> &filters)
 {
     std::list<IPoREFilter*>::iterator f = filters.begin();
-    for (  ; f!=filters.end(); f++) {
+    for (  ; f!=filters.end(); ++f) {
         registerSendTimingEvent(check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
     }
 }

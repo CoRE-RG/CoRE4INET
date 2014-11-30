@@ -131,7 +131,7 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                 std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
                 std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
                 std::list<RCBuffer*> destCtBuffers;
-                for (  ; bufferPath != bufferPaths.end(); bufferPath++)
+                for (  ; bufferPath != bufferPaths.end(); ++bufferPath)
                 {
                     cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
                     if (!module) {
