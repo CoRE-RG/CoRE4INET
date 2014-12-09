@@ -46,8 +46,8 @@ void SRProtocol::handleMessage(cMessage *msg)
         Ieee802Ctrl *etherctrl = dynamic_cast<Ieee802Ctrl *>(msg->removeControlInfo());
         if (!etherctrl)
         {
-            delete msg;
             error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
+            delete msg;
         }
         else
         {

@@ -31,7 +31,10 @@ void RCTrafficSourceApp::initialize()
     if (par("enabled").boolValue())
     {
         Timer *timer = dynamic_cast<Timer*>(findModuleWhereverInNode("timer", getParentModule()));
-        ASSERT(timer);
+        if(!timer)
+        {
+            throw cRuntimeError("Cannot find timer module. Timer is required to run RCTrafficSourceApp");
+        }
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
         tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
         event->setTimer((uint64_t) (par("interval").doubleValue() / tick));

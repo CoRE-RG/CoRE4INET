@@ -241,7 +241,10 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
 
     uint64_t actionpoint = 0;
 
-    ASSERT(period);
+    if(!period)
+    {
+        throw cRuntimeError("Period not set in Timer");
+    }
     //Check whether event is in cycle
     if (actionTimeEvent->getAction_time() > (uint32_t) period->par("cycle_ticks").longValue())
     {
