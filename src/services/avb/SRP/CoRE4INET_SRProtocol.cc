@@ -47,7 +47,6 @@ void SRProtocol::handleMessage(cMessage *msg)
         if (!etherctrl)
         {
             error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
-            delete msg;
         }
         else
         {
