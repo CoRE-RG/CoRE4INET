@@ -41,7 +41,7 @@ void CTTrafficSourceAppBase::sendMessage()
     {
         uint16_t ctID = (uint16_t) par("ct_id").longValue();
         std::list<CTBuffer*> buffer = ctbuffers[(uint16_t) ctID];
-        if (buffer.size() == 0)
+        if (buffer.empty())
         {
             ev.printf("No buffer with such CT \n");
             bubble("No buffer with such CT");
@@ -52,7 +52,7 @@ void CTTrafficSourceAppBase::sendMessage()
         }
         else
         {
-            for (std::list<CTBuffer*>::const_iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+            for (std::list<CTBuffer*>::const_iterator buf = buffer.begin(); buf != buffer.end(); ++buf)
             {
                 CTFrame *frame;
                 if (dynamic_cast<TTBuffer*>(*buf))

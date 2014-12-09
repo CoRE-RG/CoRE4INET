@@ -29,6 +29,7 @@ Define_Module(TTTrafficSourceApp);
 TTTrafficSourceApp::TTTrafficSourceApp() :
         moduloCycle(0)
 {
+    this->synchronized = false;
 }
 
 void TTTrafficSourceApp::initialize()

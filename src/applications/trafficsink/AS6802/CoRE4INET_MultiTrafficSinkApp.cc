@@ -47,9 +47,9 @@ void MultiTrafficSinkApp::handleMessage(cMessage *msg)
                 signal = registerSignal(strBuf);
                 cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "rxPk");
                 ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
-                statisticTemplate = getProperties()->get("statisticTemplate", "latency");
-                cResultFilter *messageAgeFilter = cResultFilterDescriptor::get("messageAge")->create();
-                subscribe(signal, messageAgeFilter);
+                //statisticTemplate = getProperties()->get("statisticTemplate", "latency");
+                //cResultFilter *messageAgeFilter = cResultFilterDescriptor::get("messageAge")->create();
+                //subscribe(signal, messageAgeFilter);
                 //ev.addResultRecorders(this, messageAgeFilter, strBuf, statisticTemplate);
 
                 rxPkSignal[ctID] = signal;

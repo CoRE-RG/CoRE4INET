@@ -19,8 +19,11 @@ using namespace TTEthernetModel;
 
 SubtractActualFromLastRecorder::SubtractActualFromLastRecorder()
 {
-    lastValue = 0;
-    thisValue = 0;
+    this->min = 0;
+    this->max = 0;
+    this->lastValue = 0;
+    this->thisValue = 0;
+    this->handle = NULL;
 }
 
 void SubtractActualFromLastRecorder::initialize(){

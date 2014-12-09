@@ -159,7 +159,7 @@ void Timer::reschedule()
         simtime_t next_action = (nextAction() - getTotalTicks()) * oscillator->getTick();
         scheduleAt(simTime() + next_action, selfMessage);
     }
-    catch (std::range_error re)
+    catch (const std::range_error& re)
     {
         //No message should be scheduled as there are no messages registered
     }
@@ -167,12 +167,12 @@ void Timer::reschedule()
 
 uint32_t Timer::nextAction() const
 {
-    if (registredActionTimeEvents.size() == 0 && registredTimerEvents.size() == 0)
+    if (registredActionTimeEvents.empty() && registredTimerEvents.empty())
     {
         throw std::range_error("no events registered");
     }
-    else if (registredTimerEvents.size() == 0
-            || (registredActionTimeEvents.size() != 0
+    else if (registredTimerEvents.empty()
+            || (!registredActionTimeEvents.empty()
                     && registredActionTimeEvents.begin()->first < registredTimerEvents.begin()->first))
     {
         return (uint32_t) registredActionTimeEvents.begin()->first;
@@ -318,7 +318,7 @@ void Timer::clockCorrection(int32_t ticks)
     for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it2 = registredTimerEvents.begin();
             it2 != registredTimerEvents.end(); ++it2)
     {
-        if (correctedTimerEvents.size() == 0)
+        if (correctedTimerEvents.empty())
         {
             correctedTimerEvents[(uint64_t) ((int64_t) (*it2).first + ticks)] = (*it2).second;
             it = correctedTimerEvents.begin();

@@ -82,7 +82,7 @@ std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, uint16_
 
     if (iter != listenerTable.end())
     {
-        for (ListenerList::const_iterator entry = (*iter).second.begin(); entry != (*iter).second.end(); entry++)
+        for (ListenerList::const_iterator entry = (*iter).second.begin(); entry != (*iter).second.end(); ++entry)
         {
             modules.push_back((*entry).first);
         }
@@ -102,7 +102,7 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, uint16
     Enter_Method
     ("SRPTable::getStreamIdForTalkerAddress()");
     TalkerTable talkerTable = talkerTables[vid];
-    for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); talkerEntry++)
+    for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); ++talkerEntry)
     {
         if ((*talkerEntry).second->address == talkerAddress)
         {
@@ -117,7 +117,7 @@ SR_CLASS SRPTable::getSrClassForTalkerAddress(MACAddress &talkerAddress, uint16_
     Enter_Method
     ("SRPTable::getSrClassForTalkerAddress()");
     TalkerTable talkerTable = talkerTables[vid];
-    for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); talkerEntry++)
+    for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); ++talkerEntry)
     {
         if ((*talkerEntry).second->address == talkerAddress)
         {
@@ -157,13 +157,13 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
     unsigned long bandwidth = 0;
 
     for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end();
-            i++)
+            ++i)
     {
         ListenerTable table = i->second;
-        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); j++)
+        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
         {
             ListenerList llist = (*j).second;
-            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); k++)
+            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); ++k)
             {
                 if ((*k).first == module)
                 {
@@ -187,13 +187,13 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLAS
     unsigned long bandwidth = 0;
 
     for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end();
-            i++)
+            ++i)
     {
         ListenerTable table = i->second;
-        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); j++)
+        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
         {
             ListenerList llist = (*j).second;
-            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); k++)
+            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); ++k)
             {
                 if ((*k).first == module)
                 {
@@ -375,10 +375,10 @@ void SRPTable::printState()
     EV << "Talker Table" << endl;
     EV << "VLAN ID    StreamID    Port    Address    SRClass    Bandwidth(Mbps)    Inserted" << endl;
     for (unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin(); i != talkerTables.end();
-            i++)
+            ++i)
     {
         TalkerTable table = i->second;
-        for (TalkerTable::const_iterator j = table.begin(); j != table.end(); j++)
+        for (TalkerTable::const_iterator j = table.begin(); j != table.end(); ++j)
         {
             EV << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
                     << (*j).second->address.str() << "   "
@@ -392,13 +392,13 @@ void SRPTable::printState()
     EV << "Listener Table" << endl;
     EV << "VLAN ID    StreamID    Port    Inserted" << endl;
     for (unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
-            i != listenerTables.end(); i++)
+            i != listenerTables.end(); ++i)
     {
         ListenerTable table = i->second;
-        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); j++)
+        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
         {
             ListenerList llist = (*j).second;
-            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); k++)
+            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); ++k)
             {
                 EV << (*i).first << "   " << (*j).first << "   " << (*k).first->getName() << "   "
                         << (*k).second->insertionTime << endl;
@@ -411,7 +411,7 @@ void SRPTable::printState()
 void SRPTable::clear()
 {
     for (unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin(); iter != talkerTables.end();
-            iter++)
+            ++iter)
         (*iter).second.clear();
 }
 
@@ -449,7 +449,7 @@ void SRPTable::updateDisplayString()
         return;
 
     char buf[80];
-    sprintf(buf, "%d talkers\n%d listeners", getNumTalkerEntries(), getNumListenerEntries());
+    sprintf(buf, "%u talkers\n%u listeners", getNumTalkerEntries(), getNumListenerEntries());
     getDisplayString().setTagArg("t", 0, buf);
 }
 

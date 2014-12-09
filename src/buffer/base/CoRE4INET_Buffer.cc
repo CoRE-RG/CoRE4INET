@@ -105,7 +105,7 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
     std::vector<std::string> destinationGatePaths =
             cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
     for (std::vector<std::string>::const_iterator destinationGatePath = destinationGatePaths.begin();
-            destinationGatePath != destinationGatePaths.end(); destinationGatePath++)
+            destinationGatePath != destinationGatePaths.end(); ++destinationGatePath)
     {
         cGate* gate = gateByFullPath((*destinationGatePath));
         if (!gate)

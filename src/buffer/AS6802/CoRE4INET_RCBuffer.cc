@@ -25,10 +25,11 @@ namespace CoRE4INET {
 
 RCBuffer::RCBuffer()
 {
-    bagExpired = true;
-    lastSent = 0;
-    bag = 0;
-    jitter = 0;
+    this->bagExpired = true;
+    this->lastSent = 0;
+    this->bag = 0;
+    this->jitter = 0;
+    this->numReset = 0;
 }
 
 RCBuffer::~RCBuffer()

@@ -23,7 +23,7 @@ simtime-scale = -12
 
 %global:
 
-#define PrintModulelist(X)  for (std::list<cModule*>::iterator module = X.begin(); module!=X.end();module++){ev<<(*module)->getName()<< " ";}
+#define PrintModulelist(X)  for (std::list<cModule*>::iterator module = X.begin(); module!=X.end();++module){ev<<(*module)->getName()<< " ";}
 #define PrintCredit(x) ev << "Credit = " << x << std::endl
 
 

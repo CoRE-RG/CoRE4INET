@@ -61,7 +61,7 @@ void TicApp::handleMessage(cMessage *msg)
 
         EV_DETAIL << "Sending Tic Message\n";
         std::list<CTBuffer*> buffer = ctbuffers[frame->getCtID()];
-        for (std::list<CTBuffer*>::const_iterator buf = buffer.begin(); buf != buffer.end(); buf++)
+        for (std::list<CTBuffer*>::const_iterator buf = buffer.begin(); buf != buffer.end(); ++buf)
         {
             Incoming* in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(frame->dup(), in->gate("in"));

@@ -38,7 +38,8 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          */
         BaseShaper()
         {
-            framesRequested = 0;
+            this->framesRequested = 0;
+            this->outChannel = NULL;
         }
 
         /**

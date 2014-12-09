@@ -75,11 +75,11 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
     }
 
     //add value to interval, give hint for faster execution
-    if(inInterval.size()>0){
-        inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
+    if(inInterval.empty()){
+        inInterval[t]=value;
     }
     else{
-        inInterval[t]=value;
+        inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
     }
     //erase old values
     //inInterval.erase(inInterval.begin(), inInterval.lower_bound((t-interval)));

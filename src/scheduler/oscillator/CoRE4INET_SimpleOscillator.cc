@@ -22,6 +22,11 @@ namespace CoRE4INET {
 
 Define_Module(SimpleOscillator);
 
+SimpleOscillator::SimpleOscillator(){
+    this->period = NULL;
+    this->lastCorrection = simTime();
+}
+
 void SimpleOscillator::initialize(int stage)
 {
     Oscillator::initialize(stage);

@@ -60,6 +60,10 @@ class SimpleOscillator : public Oscillator
          */
         virtual void handleMessage(cMessage *msg);
     public:
+        /**
+         * @brief constructor for SimpleOscillator
+         */
+        SimpleOscillator();
 };
 
 } //namespace

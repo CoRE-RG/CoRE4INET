@@ -24,6 +24,11 @@ namespace CoRE4INET {
 
 Define_Module(RCTrafficSourceApp);
 
+RCTrafficSourceApp::RCTrafficSourceApp()
+{
+    this->tick = 0;
+}
+
 void RCTrafficSourceApp::initialize()
 {
     CTTrafficSourceAppBase::initialize();

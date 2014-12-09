@@ -93,9 +93,8 @@ template<class Base>
 void IPv4oTT<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 {
     // Check for matching filters
-    bool filterMatch = true;
     std::list<IPoREFilter*> matchingFilters;
-    filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_TT);
+    bool filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_TT);
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
@@ -375,7 +374,7 @@ template<class Base>
 void IPv4oTT<Base>::registerSendTimingEvents(std::list<IPoREFilter*> &filters)
 {
     std::list<IPoREFilter*>::iterator f = filters.begin();
-    for (  ; f!=filters.end(); f++) {
+    for (  ; f!=filters.end(); ++f) {
         registerSendTimingEvent(check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
     }
 }

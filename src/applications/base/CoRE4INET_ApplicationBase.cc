@@ -44,7 +44,7 @@ void ApplicationBase::handleParameterChange(
     std::vector<std::string> bufferPaths = cStringTokenizer(
             par("buffers").stringValue(), DELIMITERS).asVector();
     for (std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
-            bufferPath != bufferPaths.end(); bufferPath++) {
+            bufferPath != bufferPaths.end(); ++bufferPath) {
         cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
         if (!module) {
             module = findModuleWhereverInNode((*bufferPath).c_str(), this);

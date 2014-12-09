@@ -44,6 +44,7 @@ namespace CoRE4INET {
 
 IPv4oREBase::IPv4oREBase()
 {
+    this->m_protocolEnum = cEnum::get("IPProtocolId");
 }
 
 //==============================================================================
@@ -164,7 +165,7 @@ std::list<IPoREFilter*> IPv4oREBase::getFilters(DestinationType destType)
 {
     std::list<IPoREFilter*> result;
     std::list<IPoREFilter*>::iterator f = m_filterList.begin();
-    for (  ; f != m_filterList.end(); f++) {
+    for (  ; f != m_filterList.end(); ++f) {
         if ((*f)->getDestInfo()->getDestType() == destType)
             result.push_back(*f);
     }
