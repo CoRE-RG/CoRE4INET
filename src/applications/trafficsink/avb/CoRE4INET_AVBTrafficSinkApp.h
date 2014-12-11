@@ -20,7 +20,7 @@
 #include "clistener.h"
 //CoRE4INET
 #include "CoRE4INET_TrafficSinkApp.h"
-
+#include "CoRE4INET_SRPTable.h"
 
 namespace CoRE4INET {
 
@@ -35,6 +35,36 @@ namespace CoRE4INET {
  */
 class AVBTrafficSinkApp : public TrafficSinkApp, public cListener
 {
+    private:
+        /**
+         * @brief Caches srpTable module
+         */
+        SRPTable *srpTable;
+
+        /**
+         * @brief Caches vlan_id parameter
+         */
+        unsigned short vlan_id;
+
+        /**
+         * @brief Caches streamID parameter
+         */
+        uint64_t streamID;
+
+        /**
+         * @brief Caches updateInterval parameter
+         */
+        simtime_t updateInterval;
+
+        /**
+         * @brief Caches retryInterval parameter
+         */
+        simtime_t retryInterval;
+    public:
+        /**
+         * @brief Constructor of AVBTrafficSinkApp
+         */
+        AVBTrafficSinkApp();
     protected:
         /**
          * @brief Initialization of the module.
@@ -42,12 +72,20 @@ class AVBTrafficSinkApp : public TrafficSinkApp, public cListener
         virtual void initialize();
 
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+
         /**
          * @brief handles self message for srp registration updates
          *
          * @param msg incoming message
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

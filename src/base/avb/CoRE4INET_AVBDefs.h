@@ -36,5 +36,10 @@ const unsigned short VLAN_ID_DEFAULT = 2;
 const unsigned char PRIOANDRANK_SRCLASSA = 0b11010000; //For more details see SRPFrame.msg
 const unsigned char PRIOANDRANK_SRCLASSB = 0b10110000;
 
+/**
+ * Defines for range checks
+ */
+#define MAX_STREAM_ID (uint64_t)0xFFFFFFFFFFFFFFFFl
+
 }
 #endif /* AVBDEFS_H_ */

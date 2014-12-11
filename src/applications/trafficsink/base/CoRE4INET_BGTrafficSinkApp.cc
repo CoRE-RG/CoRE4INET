@@ -42,7 +42,7 @@ void BGTrafficSinkApp::handleMessage(cMessage *msg)
 {
     if (EtherFrame *frame = dynamic_cast<EtherFrame*>(msg))
     {
-        if (frame && (address.isUnspecified() || frame->getSrc() == address))
+        if (address.isUnspecified() || frame->getSrc() == address)
         {
             if((!received && par("replyFirst").boolValue()) || par("reply").boolValue()){
                 EtherFrame *reply = new EthernetIIFrame("Reply");
