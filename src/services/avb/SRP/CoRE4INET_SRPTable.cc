@@ -20,6 +20,7 @@
 //CoRE4INET
 #include "CoRE4INET_customWatch.h"
 #include "CoRE4INET_HelperFunctions.h"
+#include "CoRE4INET_NotifierConsts.h"
 
 namespace CoRE4INET {
 
@@ -41,13 +42,6 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::ListenerEntry& entry)
     os << "{InsertionTime=" << entry.insertionTime << "}";
     return os;
 }
-
-simsignal_t SRPTable::talkerRegisteredSignal = registerSignal("talkerRegistered");
-simsignal_t SRPTable::talkerUpdatedSignal = registerSignal("talkerUpdated");
-simsignal_t SRPTable::listenerRegisteredSignal = registerSignal("listenerRegistered");
-simsignal_t SRPTable::listenerUpdatedSignal = registerSignal("listenerUpdated");
-simsignal_t SRPTable::listenerUnregisteredSignal = registerSignal("listenerUnregistered");
-simsignal_t SRPTable::listenerRegistrationTimeoutSignal = registerSignal("listenerRegistrationTimeout");
 
 SRPTable::SRPTable()
 {
@@ -262,11 +256,11 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     talkerTable[streamId]->insertionTime = simTime();
     if (updated)
     {
-        emit(talkerUpdatedSignal, talkerTable[streamId]);
+        emit(NF_AVB_TALKER_UPDATED, talkerTable[streamId]);
     }
     else
     {
-        emit(talkerRegisteredSignal, talkerTable[streamId]);
+        emit(NF_AVB_TALKER_REGISTERED, talkerTable[streamId]);
     }
     updateDisplayString();
     return updated;
@@ -327,11 +321,11 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
 
     if (updated)
     {
-        emit(listenerUpdatedSignal, llist[module]);
+        emit(NF_AVB_LISTENER_UPDATED, llist[module]);
     }
     else
     {
-        emit(listenerRegisteredSignal, llist[module]);
+        emit(NF_AVB_LISTENER_REGISTERED, llist[module]);
     }
     updateDisplayString();
     if (nextAging == 0)
@@ -355,7 +349,7 @@ bool SRPTable::removeListenerWithStreamId(uint64_t streamId, cModule *module, ui
         if (listener != (*listeners).second.end())
         {
             ListenerEntry *lentry = (*listener).second;
-            emit(listenerUnregisteredSignal, lentry);
+            emit(NF_AVB_LISTENER_UNREGISTERED, lentry);
             (*listeners).second.erase(listener);
             if ((*listeners).second.size() == 0)
             {
@@ -476,7 +470,7 @@ void SRPTable::removeAgedEntries()
                 {
                     ListenerEntry *lentry = (*listenerEntry).second;
                     (*listenerList).second.erase(listenerEntry++);
-                    emit(listenerRegistrationTimeoutSignal, lentry);
+                    emit(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, lentry);
                     delete lentry;
                     updateDisplayString();
                 }

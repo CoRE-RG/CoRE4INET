@@ -107,4 +107,8 @@ uint32_t Period::getCycles() const
     return cycles;
 }
 
+Timer* Period::getTimer(){
+    return timer;
+}
+
 } //namespace

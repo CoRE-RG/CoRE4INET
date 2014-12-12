@@ -127,31 +127,6 @@ class SRPTable : public cSimpleModule
          */
         virtual void handleMessage(cMessage *msg);
 
-        /**
-         *  signal emitted when a talker registers
-         */
-        static simsignal_t talkerRegisteredSignal;
-        /**
-         *  signal emitted when a talker updates
-         */
-        static simsignal_t talkerUpdatedSignal;
-        /**
-         *  signal emitted when a listener registers
-         */
-        static simsignal_t listenerRegisteredSignal;
-        /**
-         *  signal emitted when a listener updates
-         */
-        static simsignal_t listenerUpdatedSignal;
-        /**
-         *  signal emitted when a listener unregisters
-         */
-        static simsignal_t listenerUnregisteredSignal;
-        /**
-         *  signal emitted when a listeners registration failed
-         */
-        static simsignal_t listenerRegistrationTimeoutSignal;
-
     public:
         /**
          *  @brief Constructor

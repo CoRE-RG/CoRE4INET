@@ -15,6 +15,12 @@
 
 #include "CoRE4INET_TrafficSourceAppBase.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
+//INET
+#include "Ethernet.h"
+
 //OMNeT++
 #include "cmessage.h"
 
@@ -22,14 +28,48 @@ namespace CoRE4INET {
 
 Define_Module(TrafficSourceAppBase);
 
+TrafficSourceAppBase::TrafficSourceAppBase()
+{
+    this->enabled = false;
+    this->payload = 0;
+}
+bool TrafficSourceAppBase::isEnabled()
+{
+    return this->enabled;
+}
+
+size_t TrafficSourceAppBase::getPayloadBytes(){
+    return this->payload;
+}
+
 void TrafficSourceAppBase::initialize()
 {
     ApplicationBase::initialize();
-    if (par("enabled").boolValue())
+    handleParameterChange(NULL);
+    if (isEnabled())
     {
-        scheduleAt(simTime()+par("start_time").doubleValue(), new cMessage(START_MSG_NAME));
+        scheduleAt(simTime() + par("start_time").doubleValue(), new cMessage(START_MSG_NAME));
     }
 }
 
+void TrafficSourceAppBase::handleParameterChange(const char* parname)
+{
+    ApplicationBase::handleParameterChange(parname);
 
-} //namespace
+    if (!parname || !strcmp(parname, "enabled"))
+    {
+        this->enabled = par("enabled").boolValue();
+    }
+    if (!parname || !strcmp(parname, "start_time"))
+    {
+        parameterDoubleCheckRange(par("start_time"), 0, MAXTIME.dbl());
+    }
+    if (!parname || !strcmp(parname, "payload"))
+    {
+        this->payload = parameterULongCheckRange(par("payload"), (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES),
+                MAX_ETHERNET_DATA_BYTES);
+    }
+}
+
+}
+//namespace

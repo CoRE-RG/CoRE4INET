@@ -17,6 +17,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_Defs.h"
+#include "CoRE4INET_NotifierConsts.h"
 #include "CoRE4INET_SRPTable.h"
 #include "CoRE4INET_ConfigFunctions.h"
 
@@ -45,8 +46,8 @@ void AVBTrafficSinkApp::initialize()
     {
         throw cRuntimeError("Parent module does not contain a srpTable module");
     }
-    srpTable->subscribe("talkerRegistered", this);
-    srpTable->subscribe("listenerRegistrationTimeout", this);
+    srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
 
     getDisplayString().setTagArg("i2", 0, "status/hourglass");
 }
@@ -56,7 +57,7 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
     Enter_Method_Silent
     ();
 
-    if (id == registerSignal("talkerRegistered"))
+    if (id == NF_AVB_TALKER_REGISTERED)
     {
         SRPTable::TalkerEntry *tentry = check_and_cast<SRPTable::TalkerEntry*>(obj);
 
@@ -75,7 +76,7 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
             }
         }
     }
-    else if (id == registerSignal("listenerRegistrationTimeout"))
+    else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT)
     {
         SRPTable::ListenerEntry *lentry = check_and_cast<SRPTable::ListenerEntry*>(obj);
         if (lentry->streamId == (unsigned int) par("streamID").longValue()

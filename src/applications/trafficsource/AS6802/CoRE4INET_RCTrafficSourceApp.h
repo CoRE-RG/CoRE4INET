@@ -32,7 +32,13 @@ namespace CoRE4INET {
  */
 class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase
 {
-    private:
+        /**
+         * @brief Caches interval parameter
+         */
+        double interval;
+        /**
+         * @brief Caches tick parameter
+         */
         double tick;
     protected:
         /**
@@ -49,7 +55,7 @@ class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase
          */
         RCTrafficSourceApp();
 
-        using TrafficSourceAppBase::handleParameterChange;
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

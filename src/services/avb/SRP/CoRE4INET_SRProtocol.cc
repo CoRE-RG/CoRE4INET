@@ -20,6 +20,7 @@
 //CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
 #include "ExtendedIeee802Ctrl_m.h"
+#include "CoRE4INET_NotifierConsts.h"
 //Auto-generated Messages
 #include "SRPFrame_m.h"
 
@@ -34,9 +35,9 @@ void SRProtocol::initialize()
     {
         throw cRuntimeError("srpTable module required for stream reservation");
     }
-    srpTable->subscribe("talkerRegistered", this);
-    srpTable->subscribe("listenerRegistered", this);
-    srpTable->subscribe("listenerUpdated", this);
+    srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_UPDATED, this);
 }
 
 void SRProtocol::handleMessage(cMessage *msg)
@@ -171,7 +172,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent
     ();
-    if (id == registerSignal("talkerRegistered"))
+    if (id == NF_AVB_TALKER_REGISTERED)
     {
         SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
 
@@ -201,7 +202,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 
         send(talkerAdvertise, gate("out"));
     }
-    else if (id == registerSignal("listenerRegistered") || id == registerSignal("listenerUpdated"))
+    else if (id == NF_AVB_LISTENER_REGISTERED || id == NF_AVB_LISTENER_UPDATED)
     {
         SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
 

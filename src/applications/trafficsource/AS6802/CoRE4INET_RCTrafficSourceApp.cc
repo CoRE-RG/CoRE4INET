@@ -17,6 +17,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_Timer.h"
+#include "CoRE4INET_ConfigFunctions.h"
 //INET
 #include "ModuleAccess.h"
 
@@ -27,21 +28,32 @@ Define_Module(RCTrafficSourceApp);
 RCTrafficSourceApp::RCTrafficSourceApp()
 {
     this->tick = 0;
+    this->interval = 0;
 }
 
 void RCTrafficSourceApp::initialize()
 {
     CTTrafficSourceAppBase::initialize();
 
-    if (par("enabled").boolValue())
+    handleParameterChange(NULL);
+    if (isEnabled())
     {
+        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+
         Timer *timer = dynamic_cast<Timer*>(findModuleWhereverInNode("timer", getParentModule()));
-        if(!timer)
+        if (!timer)
         {
             throw cRuntimeError("Cannot find timer module. Timer is required to run RCTrafficSourceApp");
         }
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        tick = findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
+
+        Oscillator* oscillator = dynamic_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()));
+        if (!oscillator)
+        {
+            throw cRuntimeError(
+                    "Cannot find oscillator module in Node. Oscillator is required to calculate action time");
+        }
+
+        tick = oscillator->par("tick").doubleValue();
         event->setTimer((uint64_t) (par("interval").doubleValue() / tick));
         event->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(event);
@@ -51,20 +63,34 @@ void RCTrafficSourceApp::initialize()
 void RCTrafficSourceApp::handleMessage(cMessage *msg)
 {
 
-    CTApplicationBase::handleMessage(msg);
+    CTTrafficSourceAppBase::handleMessage(msg);
     if (msg->arrivedOn("schedulerIn"))
     {
         sendMessage();
 
         Timer *timer = dynamic_cast<Timer*>(msg->getSenderModule());
-        ASSERT(timer);
-        SchedulerTimerEvent *event = (SchedulerTimerEvent *) msg;
-        event->setTimer((uint64_t) (par("interval").doubleValue() / tick));
-        timer->registerEvent(event);
+        if(!timer){
+            throw cRuntimeError("Message arrived at schedulerIn, but is no message from a timer module");
+        }
+        else{
+            SchedulerTimerEvent *event = (SchedulerTimerEvent *) msg;
+            event->setTimer((uint64_t) (this->interval / tick));
+            timer->registerEvent(event);
+        }
     }
     else
     {
         delete msg;
+    }
+}
+
+void RCTrafficSourceApp::handleParameterChange(const char* parname)
+{
+    CTTrafficSourceAppBase::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "interval"))
+    {
+        this->interval = parameterDoubleCheckRange(par("interval"), 0, MAXTIME.dbl(), true);
     }
 }
 

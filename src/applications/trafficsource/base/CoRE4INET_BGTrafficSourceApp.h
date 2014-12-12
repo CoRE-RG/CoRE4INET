@@ -19,6 +19,9 @@
 //CoRE4INET
 #include "CoRE4INET_TrafficSourceAppBase.h"
 
+//INET
+#include "MACAddress.h"
+
 namespace CoRE4INET {
 
 /**
@@ -27,25 +30,48 @@ namespace CoRE4INET {
  * @sa TrafficSourceAppBase
  * @ingroup Applications
  */
-class BGTrafficSourceApp: public virtual TrafficSourceAppBase {
-protected:
+class BGTrafficSourceApp : public virtual TrafficSourceAppBase
+{
+    private:
+        /**
+         * @brief caches sendInterval parameter
+         */
+        simtime_t sendInterval;
 
-    /**
-     * @brief handle self messages to send frames
-     *
-     *
-     * @param msg incoming self messages
-     */
-    virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief caches destAddress parameter
+         */
+        MACAddress destAddress;
+    public:
+        /**
+         * @brief Constructor of BGTrafficSourceApp
+         */
+        BGTrafficSourceApp();
+    protected:
 
-    /**
-     * @brief Generates and sends a new Message.
-     *
-     * The message is sent to the buffer with the ct_id defined in parameter ct_id of the module.
-     * The message kind is defined by the buffer-type (RC/TT) of the buffer the message is sent to.
-     * The size is defined by the payload parameter of the module.
-     */
-    virtual void sendMessage();
+        /**
+         * @brief handle self messages to send frames
+         *
+         *
+         * @param msg incoming self messages
+         */
+        virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Generates and sends a new Message.
+         *
+         * The message is sent to the buffer with the ct_id defined in parameter ct_id of the module.
+         * The message kind is defined by the buffer-type (RC/TT) of the buffer the message is sent to.
+         * The size is defined by the payload parameter of the module.
+         */
+        virtual void sendMessage();
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         *         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

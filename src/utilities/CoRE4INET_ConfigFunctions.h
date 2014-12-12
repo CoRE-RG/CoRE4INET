@@ -44,13 +44,16 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
  * @param parameter A parameter containing long value
  * @param min minimum value
  * @param max maximum value
+ * @param exclude_min If false, range includes min value, else value must be above min
+ * @param exclude_max If false, range includes max value, else value must be below max
  * @return checked value in correct type
  *
  * @throws cRuntimeError When parameter is not within range
  *
  * @author Till Steinbach
  */
-unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min, unsigned long max);
+unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min, unsigned long max, bool exclude_min =
+        false, bool exclude_max = false);
 
 /**
  * @brief Checks a given parameter with a given range
@@ -58,13 +61,16 @@ unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min,
  * @param parameter A parameter containing long value
  * @param min minimum value
  * @param max maximum value
+ * @param exclude_min If false, range includes min value, else value must be above min
+ * @param exclude_max If false, range includes max value, else value must be below max
  * @return checked value in correct type
  *
  * @throws cRuntimeError When parameter is not within range
  *
  * @author Till Steinbach
  */
-long parameterLongCheckRange(const cPar &parameter, long min, long max);
+long parameterLongCheckRange(const cPar &parameter, long min, long max, bool exclude_min = false, bool exclude_max =
+        false);
 
 /**
  * @brief Checks a given parameter with a given range
@@ -72,13 +78,16 @@ long parameterLongCheckRange(const cPar &parameter, long min, long max);
  * @param parameter A parameter containing long value
  * @param min minimum value
  * @param max maximum value
+ * @param exclude_min If false, range includes min value, else value must be above min
+ * @param exclude_max If false, range includes max value, else value must be below max
  * @return checked value in correct type
  *
  * @throws cRuntimeError When parameter is not within range
  *
  * @author Till Steinbach
  */
-double parameterDoubleCheckRange(const cPar &parameter, double min, double max);
+double parameterDoubleCheckRange(const cPar &parameter, double min, double max, bool exclude_min = false,
+        bool exclude_max = false);
 
 }
 

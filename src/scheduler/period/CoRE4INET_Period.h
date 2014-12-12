@@ -95,6 +95,13 @@ class Period : public cSimpleModule
          * @return Number of cycles since simulation start
          */
         virtual uint32_t getCycles() const;
+
+        /**
+         * @brief Returns a pointer to the Timer module driving this period
+         *
+         * @return Timer driving the period
+         */
+        virtual Timer* getTimer();
     protected:
         /**
          * Signal that is emitted at the beginning of a new cycle

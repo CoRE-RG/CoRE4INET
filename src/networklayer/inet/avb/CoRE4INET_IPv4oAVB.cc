@@ -25,6 +25,7 @@
 //==============================================================================
 
 #include "CoRE4INET_Defs.h"
+#include "CoRE4INET_NotifierConsts.h"
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_SRPTable.h"
 #include "CoRE4INET_IPoREFilter.h"
@@ -78,10 +79,10 @@ void IPv4oAVB<base>::initialize(int stage)
 
 template<class base>
 void IPv4oAVB<base>::registerSrpCallbacks(SRPTable *srpTable) {
-    srpTable->subscribe("talkerRegistered", this);
-    srpTable->subscribe("listenerRegistered", this);
-    srpTable->subscribe("listenerUnregistered", this);
-    srpTable->subscribe("listenerRegistrationTimeout", this);
+    srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_UNREGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
 }
 
 //==============================================================================
@@ -155,7 +156,7 @@ template<class base>
 void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent();
-    if (id == base::registerSignal("talkerRegistered"))
+    if (id == NF_AVB_TALKER_REGISTERED)
     {
         SRPTable::TalkerEntry *tentry = check_and_cast<SRPTable::TalkerEntry*>(obj);
 
@@ -176,7 +177,7 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
             }
         }
     }
-    else if (id == base::registerSignal("listenerRegistrationTimeout"))
+    else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT)
     {
         // set retry timer
         SRPTable::ListenerEntry *lentry = check_and_cast<SRPTable::ListenerEntry*>(obj);
@@ -195,11 +196,11 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
             }
         }
     }
-    else if (id == base::registerSignal("listenerRegistered"))
+    else if (id == NF_AVB_LISTENER_REGISTERED)
     {
         // nothing
     }
-    else if (id == base::registerSignal("listenerUnregistered"))
+    else if (id == NF_AVB_LISTENER_UNREGISTERED)
     {
         // nothing
     }

@@ -26,7 +26,7 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
 {
     std::vector<cModule*> modules;
     cModule *owner = dynamic_cast<cModule*>(parameter.getOwner());
-    if(!owner)
+    if (!owner)
     {
         throw cRuntimeError("parameterToModuleList can be only used for module parameters");
     }
@@ -46,45 +46,50 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
         {
             throw cRuntimeError(
                     "Configuration problem of parameter %s in module %s: The requested module: %s could not be resolved!",
-                    owner->getFullName(), parameter.getName(), (*path).c_str());
+                    owner->getFullPath().c_str(), parameter.getName(), (*path).c_str());
         }
     }
     return modules;
 }
 
-
-long parameterLongCheckRange(const cPar &parameter, long min, long max)
+long parameterLongCheckRange(const cPar &parameter, long min, long max, bool exclude_min, bool exclude_max)
 {
     long value = parameter.longValue();
-    if (value < min || value > max)
+    if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
+            || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
     {
-        throw cRuntimeError("Parameter %s of %s is not within the allowed range of %d to %d",
-                parameter.getFullName(), parameter.getOwner()->getFullName(), min, max);
+        throw cRuntimeError("Parameter %s of %s is %d and not within the allowed range of %s%d to %s%d",
+                parameter.getFullName(), parameter.getOwner()->getFullPath().c_str(), value,
+                (exclude_min ? "larger than " : ""), min, (exclude_max ? "smaller than " : ""), max);
     }
     return value;
 }
 
-unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min, unsigned long max)
+unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min, unsigned long max, bool exclude_min,
+        bool exclude_max)
 {
     unsigned long value = (unsigned long) parameter.longValue();
-    if (value < min || value > max)
+    if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
+            || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
     {
-        throw cRuntimeError("Parameter %s of %s is not within the allowed range of %d to %d",
-                parameter.getFullName(), parameter.getOwner()->getFullName(), min, max);
+        throw cRuntimeError("Parameter %s of %s is %d and not within the allowed range of %s%d to %s%d",
+                parameter.getFullName(), parameter.getOwner()->getFullPath().c_str(), value,
+                (exclude_min ? "larger than " : ""), min, (exclude_max ? "smaller than " : ""), max);
     }
     return value;
 }
 
-double parameterDoubleCheckRange(const cPar &parameter, double min, double max)
+double parameterDoubleCheckRange(const cPar &parameter, double min, double max, bool exclude_min, bool exclude_max)
 {
-    long value = parameter.longValue();
-    if (value < min || value > max)
+    double value = parameter.doubleValue();
+    if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
+            || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
     {
-        throw cRuntimeError("Parameter %s of %s is not within the allowed range of %f to %f",
-                parameter.getFullName(), parameter.getOwner()->getFullName(), min, max);
+        throw cRuntimeError("Parameter %s of %s is %d and not within the allowed range of %s%f to %s%f",
+                parameter.getFullName(), parameter.getOwner()->getFullPath().c_str(), value,
+                (exclude_min ? "larger than " : ""), min, (exclude_max ? "smaller than " : ""), max);
     }
     return value;
 }
-
 
 }

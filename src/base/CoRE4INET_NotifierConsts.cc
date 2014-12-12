@@ -20,6 +20,16 @@
 
 namespace CoRE4INET {
 
+#ifdef WITH_AS6802_COMMON
 simsignal_t NF_SYNC_STATE_CHANGE = cComponent::registerSignal("NF_SYNC_STATE_CHANGE");
+#endif
 
+#ifdef WITH_AVB_COMMON
+simsignal_t NF_AVB_TALKER_REGISTERED = cComponent::registerSignal("NF_AVB_TALKER_REGISTERED");
+simsignal_t NF_AVB_TALKER_UPDATED = cComponent::registerSignal("NF_AVB_TALKER_UPDATED");
+simsignal_t NF_AVB_LISTENER_REGISTERED = cComponent::registerSignal("NF_AVB_LISTENER_REGISTERED");
+simsignal_t NF_AVB_LISTENER_UPDATED = cComponent::registerSignal("NF_AVB_LISTENER_UPDATED");
+simsignal_t NF_AVB_LISTENER_UNREGISTERED = cComponent::registerSignal("NF_AVB_LISTENER_UNREGISTERED");
+simsignal_t NF_AVB_LISTENER_REGISTRATION_TIMEOUT = cComponent::registerSignal("NF_AVB_LISTENER_REGISTRATION_TIMEOUT");
+#endif
 }

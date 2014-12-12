@@ -17,6 +17,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_NotifierConsts.h"
+#include "CoRE4INET_ConfigFunctions.h"
 //INET
 #include "ModuleAccess.h"
 //Auto-generated Messages
@@ -30,43 +31,57 @@ TTTrafficSourceApp::TTTrafficSourceApp() :
         moduloCycle(0)
 {
     this->synchronized = false;
+    this->modulo = 1;
+    this->moduloCycle = 0;
 }
 
 void TTTrafficSourceApp::initialize()
 {
     CTTrafficSourceAppBase::initialize();
 
-    if (par("enabled").boolValue())
+    handleParameterChange(NULL);
+    if (isEnabled())
     {
         Scheduled::initialize();
 
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-        event->setAction_time(
-                (uint32_t) (par("action_time").doubleValue()
-                        / findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue()));
+
+        if (findContainingNode(this) == NULL)
+        {
+            throw cRuntimeError(
+                    "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
+        }
+
+        Oscillator* oscillator = dynamic_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()));
+        if (!oscillator)
+        {
+            throw cRuntimeError(
+                    "Cannot find oscillator module in Node. Oscillator is required to calculate action time");
+        }
+
+        event->setAction_time((uint32_t) (par("action_time").doubleValue() / oscillator->par("tick").doubleValue()));
         event->setDestinationGate(gate("schedulerIn"));
 
         if (event->getAction_time() >= (uint32_t) period->par("cycle_ticks").longValue())
         {
-            throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(),
-                    period->par("cycle_ticks").longValue());
+            throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)",
+                    event->getAction_time(), period->par("cycle_ticks").longValue());
         }
 
         period->registerEvent(event);
     }
     synchronized = false;
-    ASSERT2(findContainingNode(this)!=NULL,
-            "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
+
     findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
 }
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg)
 {
 
-    if (msg->arrivedOn("schedulerIn"))
+    if (msg && msg->arrivedOn("schedulerIn"))
     {
         moduloCycle++;
-        if (synchronized && moduloCycle == (unsigned int) par("modulo").longValue())
+        if (synchronized && moduloCycle == this->modulo)
         {
             sendMessage();
             moduloCycle = 0;
@@ -82,7 +97,8 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
     }
 }
 
-void TTTrafficSourceApp::receiveSignal(__attribute__((unused)) cComponent *src, __attribute__((unused)) simsignal_t id, cObject *obj)
+void TTTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent *src, __attribute__((unused))      simsignal_t id,
+        cObject *obj)
 {
     Enter_Method_Silent
     ();
@@ -99,4 +115,15 @@ void TTTrafficSourceApp::receiveSignal(__attribute__((unused)) cComponent *src, 
     }
 }
 
-} //namespace
+void TTTrafficSourceApp::handleParameterChange(const char* parname)
+{
+    CTTrafficSourceAppBase::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "modulo"))
+    {
+        this->modulo = (unsigned int) parameterULongCheckRange(par("modulo"), 0, ULONG_MAX);
+    }
+}
+
+}
+//namespace
