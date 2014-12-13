@@ -35,7 +35,7 @@ cSimpleModule port2;
 port2.setName("port2");
 
 cModuleType *moduleTypeTable = cModuleType::get("core4inet.services.avb.SRP.SRPTable");
-CoRE4INET::SRPTable *table = (CoRE4INET::SRPTable*)moduleTypeTable->create("srpTable", this);
+CoRE4INET::SRPTable *table = (CoRE4INET::SRPTable*)moduleTypeTable->createScheduleInit("srpTable", this);
 table->clear();
 std::list<cModule*> ports = table->getListenersForStreamId(0);
 ev << "Ports:{";
