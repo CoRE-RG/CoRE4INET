@@ -24,6 +24,7 @@ namespace CoRE4INET {
  * Defines for range checks
  */
 #define MAX_CT_ID (uint16_t)0xFFFF
+#define MAX_PRIORITY 10
 
 }
 #endif /* AVBDEFS_H_ */

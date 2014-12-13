@@ -29,7 +29,7 @@ namespace CoRE4INET {
  * @brief Retrieves a vector of modules from a given parameter that contains a string with delimiters
  *
  * @param parameter A string parameter that must be owned by a cModule object
- * @param delimiters STring of possible delimiters, usually DELIMITERS macro is used
+ * @param delimiters String of possible delimiters, usually DELIMITERS macro is used
  * @return vector of cModule* containing the referenced modules.
  *
  * @throws cRuntimeError When owner of parameter is not a cModule or a module in the string could not be resolved
@@ -37,6 +37,19 @@ namespace CoRE4INET {
  * @author Till Steinbach
  */
 std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::string &delimiters);
+
+/**
+ * @brief Retrieves a vector of gates from a given parameter that contains a string with delimiters
+ *
+ * @param parameter A string parameter that must be owned by a cModule object
+ * @param delimiters String of possible delimiters, usually DELIMITERS macro is used
+ * @return vector of Gate* containing the referenced gates.
+ *
+ * @throws cRuntimeError When owner of parameter is not a cModule or a gate in the string could not be resolved
+ *
+ * @author Till Steinbach
+ */
+std::vector<cGate*> parameterToGateList(const cPar &parameter, const std::string &delimiters);
 
 /**
  * @brief Checks a given parameter with a given range

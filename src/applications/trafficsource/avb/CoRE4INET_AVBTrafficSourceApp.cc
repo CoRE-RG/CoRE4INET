@@ -173,11 +173,11 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     {
         if (strcmp(par("srClass").stringValue(), "A") == 0)
         {
-            srClass = SR_CLASS_A;
+            this->srClass = SR_CLASS_A;
         }
         else if (strcmp(par("srClass").stringValue(), "B") == 0)
         {
-            srClass = SR_CLASS_B;
+            this->srClass = SR_CLASS_B;
         }
         else
         {

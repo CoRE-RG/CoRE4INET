@@ -71,6 +71,10 @@ class CTBuffer : public virtual Buffer
          * @brief caches ct_id parameter
          */
         uint16_t ctId;
+        /**
+         * @brief caches priority parameter
+         */
+        short priority;
 
     protected:
         /**

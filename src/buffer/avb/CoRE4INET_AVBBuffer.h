@@ -20,6 +20,7 @@
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_Timed.h"
 #include "AVBDefs_m.h"
+#include "CoRE4INET_SRPTable.h"
 
 namespace CoRE4INET {
 
@@ -87,10 +88,12 @@ class AVBBuffer : public virtual Buffer, public Timed
         int maxCredit;
         bool inTransmission;
         //int msgCnt;
-        SimTime newTime;
-        SimTime oldTime;
-        double Wduration;
-        double tick;
+        simtime_t newTime;
+        simtime_t oldTime;
+        simtime_t Wduration;
+        simtime_t tick;
+        SRPTable *srptable;
+        unsigned int portBandwith;
 
         static simsignal_t creditSignal;
 

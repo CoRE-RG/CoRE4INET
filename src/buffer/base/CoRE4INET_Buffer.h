@@ -76,7 +76,7 @@ class Buffer : public virtual cSimpleModule
         std::list<cGate*> destinationGates;
 
         /**
-         * Chaches the maximum message size
+         * Caches the maximum message size
          */
         size_t maxMessageSize;
 
@@ -174,7 +174,7 @@ class Buffer : public virtual cSimpleModule
          * @return number of messages in the buffer
          *
          */
-        virtual unsigned int size() const = 0;
+        virtual size_t size() const = 0;
 
         /**
          * @brief Resets the buffer, deletes all messages

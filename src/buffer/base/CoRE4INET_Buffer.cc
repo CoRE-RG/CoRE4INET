@@ -14,9 +14,10 @@
 // 
 
 #include "CoRE4INET_Buffer.h"
-#include "CoRE4INET_Defs.h"
 
-#include "CoRE4INET_HelperFunctions.h"
+//CORE4INET
+#include "CoRE4INET_Defs.h"
+#include "CoRE4INET_ConfigFunctions.h"
 
 #include "ModuleAccess.h"
 
@@ -27,7 +28,8 @@ using namespace CoRE4INET;
 simsignal_t Buffer::txPkSignal = registerSignal("txPk");
 simsignal_t Buffer::rxPkSignal = registerSignal("rxPk");
 
-Buffer::Buffer(){
+Buffer::Buffer()
+{
     maxMessageSize = 0;
 }
 
@@ -46,8 +48,6 @@ void Buffer::initialize(int stage)
     if (stage == 0)
     {
         EV_DETAIL << "Initialize Buffer" << endl;
-
-        maxMessageSize = (size_t)par("maxMessageSize").longValue();
 
         if (ev.isGUI())
         {
@@ -79,58 +79,57 @@ void Buffer::putFrame(EtherFrame* frame)
 
 void Buffer::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("in"))
+    if (msg && msg->arrivedOn("in"))
     {
-        EtherFrame *frame = check_and_cast<EtherFrame *>(msg);
-        recordPacketReceived(frame);
-
-        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+        if (EtherFrame *frame = dynamic_cast<EtherFrame *>(msg))
         {
-            frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
+            recordPacketReceived(frame);
+
+            if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+            {
+                frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
+            }
+            if (frame->getByteLength() <= maxMessageSize)
+            {
+                putFrame((EtherFrame*) frame);
+            }
+            else
+            {
+                EV_ERROR << "Buffer received message with larger size than maxMessageSize" << endl;
+            }
         }
-        if(frame->getByteLength()<=maxMessageSize){
-            putFrame((EtherFrame*) frame);
-        }
-        else{
-            EV_ERROR << "Buffer received message with larger size than maxMessageSize" << endl;
+        else
+        {
+            throw cRuntimeError("received Message on gate in that is no EtherFrame");
         }
     }
 }
 
 void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
 {
-    maxMessageSize = (size_t)par("maxMessageSize").longValue();
-
-    destinationGates.clear();
-    std::vector<std::string> destinationGatePaths =
-            cStringTokenizer(par("destination_gates").stringValue(), DELIMITERS).asVector();
-    for (std::vector<std::string>::const_iterator destinationGatePath = destinationGatePaths.begin();
-            destinationGatePath != destinationGatePaths.end(); ++destinationGatePath)
+    if (!parname || !strcmp(parname, "maxMessageSize"))
     {
-        cGate* gate = gateByFullPath((*destinationGatePath));
-        if (!gate)
+        this->maxMessageSize = (size_t) parameterULongCheckRange(par("maxMessageSize"), MIN_ETHERNET_FRAME_BYTES,
+        MAX_ETHERNET_FRAME_BYTES);
+    }
+    if (!parname || !strcmp(parname, "destination_gates"))
+    {
+        destinationGates.clear();
+        std::vector<cGate*> gates = parameterToGateList(par("destination_gates"), DELIMITERS);
+        for (std::vector<cGate*>::const_iterator gate = gates.begin(); gate != gates.end(); ++gate)
         {
-            gate = gateByShortPath((*destinationGatePath), this);
-        }
-        if (gate)
-        {
-            if (findContainingNode(gate->getOwnerModule()) != findContainingNode(this))
+            if (findContainingNode((*gate)->getOwnerModule()) != findContainingNode(this))
             {
                 throw cRuntimeError(
-                        "Configuration problem of destination_gates: Gate: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*destinationGatePath).c_str(), findContainingNode(this)->getFullName());
+                        "Configuration problem of parameter destination_gates in module %s: Gate: %s is not in node %s! Maybe a copy-paste problem?",
+                        this->getFullName(), (*gate)->getFullName(), findContainingNode(this)->getFullName());
             }
-            destinationGates.push_back(gate);
-        }
-        else
-        {
-            throw cRuntimeError("Configuration problem of destination_gates: Gate: %s could not be resolved!",
-                    (*destinationGatePath).c_str());
+            destinationGates.push_back(*gate);
         }
     }
 }
 
-void Buffer::enqueue(__attribute((unused))   EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused))      EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }
@@ -140,6 +139,7 @@ EtherFrame * Buffer::dequeue()
     throw cRuntimeError("Buffer::dequeue not implemented");
 }
 
-long Buffer::getRequiredBandwidth(){
+long Buffer::getRequiredBandwidth()
+{
     return -1;
 }

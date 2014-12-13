@@ -102,7 +102,7 @@ void QueueBuffer::setFilled(unsigned int fillLevel)
     }
 }
 
-unsigned int QueueBuffer::size() const
+size_t QueueBuffer::size() const
 {
     return (unsigned int)frames.length();
 }

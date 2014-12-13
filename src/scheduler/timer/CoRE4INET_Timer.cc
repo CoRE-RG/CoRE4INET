@@ -22,7 +22,6 @@
 //INET
 #include "INETDefs.h"
 
-
 namespace CoRE4INET {
 
 Define_Module(Timer);
@@ -63,7 +62,8 @@ Timer::~Timer()
     for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin();
             it != registredTimerEvents.end();)
     {
-        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
+        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end();
+                ++it2)
         {
             cancelAndDelete(*it2);
         }
@@ -120,7 +120,8 @@ void Timer::sendOutEvents()
             EV_FATAL << "misscheduled: " << (ticks - (*it).first) << std::endl;
             throw cRuntimeError("THIS SHOULD NOT HAPPEN!");
         }
-        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
+        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end();
+                ++it2)
         {
             sendDirect((*it2), (*it2)->getDestinationGate());
         }
@@ -219,7 +220,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
                 reschedule();
             }
         }
-        catch (__attribute((unused))       const std::range_error& re)
+        catch (__attribute((unused))         const std::range_error& re)
         {
             registredTimerEvents[actionpoint].push_back(event);
             reschedule();
@@ -230,8 +231,13 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
 
 uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period *period)
 {
+    if (!period)
+    {
+        throw cRuntimeError("Period not set in Timer");
+    }
+
 #ifdef DEBUG
-    Enter_Method("registerEvent(SchedulerActionTimeEvent %s, %s)",event->getName(), period->getName());
+    Enter_Method("registerEvent(SchedulerActionTimeEvent %s, %s)",actionTimeEvent->getName(), period->getName());
 #else
     Enter_Method_Silent
     ();
@@ -241,10 +247,6 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
 
     uint64_t actionpoint = 0;
 
-    if(!period)
-    {
-        throw cRuntimeError("Period not set in Timer");
-    }
     //Check whether event is in cycle
     if (actionTimeEvent->getAction_time() > (uint32_t) period->par("cycle_ticks").longValue())
     {
@@ -280,7 +282,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
                 reschedule();
             }
         }
-        catch (__attribute((unused))       const std::range_error& re)
+        catch (__attribute((unused))         const std::range_error& re)
         {
             registredActionTimeEvents[actionpoint].push_back(
                     std::pair<SchedulerActionTimeEvent*, Period*>(actionTimeEvent, period));
@@ -347,7 +349,7 @@ void Timer::clockCorrection(int32_t ticks)
                 uint64_t corrected_tick = (uint64_t) (*it2).first;
                 while (corrected_tick < this->ticks)
                 {
-                    corrected_tick += (uint64_t)(*it4).second->par("cycle_ticks").longValue();
+                    corrected_tick += (uint64_t) (*it4).second->par("cycle_ticks").longValue();
                 }
                 correctedActionTimeEvents[corrected_tick].push_back(*it4);
             }

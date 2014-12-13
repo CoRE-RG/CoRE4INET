@@ -14,6 +14,9 @@
 //
 #include "CoRE4INET_ConfigFunctions.h"
 
+//CoRE4INET
+#include "CoRE4INET_HelperFunctions.h"
+
 //OMNeT++
 #include "cstringtokenizer.h"
 
@@ -52,6 +55,37 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
     return modules;
 }
 
+std::vector<cGate*> parameterToGateList(const cPar &parameter, const std::string &delimiters)
+{
+    std::vector<cGate*> gates;
+    cModule *owner = dynamic_cast<cModule*>(parameter.getOwner());
+    if (!owner)
+    {
+        throw cRuntimeError("parameterToGateList can be only used for module parameters");
+    }
+    std::vector<std::string> paths = cStringTokenizer(parameter, delimiters.c_str()).asVector();
+    for (std::vector<std::string>::const_iterator path = paths.begin(); path != paths.end(); ++path)
+    {
+        cGate* gate = gateByFullPath((*path));
+        if (!gate)
+        {
+            gate = gateByShortPath((*path), owner);
+        }
+        if (gate)
+        {
+            gates.push_back(gate);
+        }
+        else
+        {
+            throw cRuntimeError(
+                    "Configuration problem of parameter %s in module %s: The requested gate: %s could not be resolved!",
+                    owner->getFullPath().c_str(), parameter.getName(), (*path).c_str());
+        }
+    }
+    return gates;
+}
+
+
 long parameterLongCheckRange(const cPar &parameter, long min, long max, bool exclude_min, bool exclude_max)
 {
     long value = parameter.longValue();
@@ -72,7 +106,7 @@ unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min,
     if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
             || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
     {
-        throw cRuntimeError("Parameter %s of %s is %d and not within the allowed range of %s%d to %s%d",
+        throw cRuntimeError("Parameter %s of %s is %u and not within the allowed range of %s%u to %s%u",
                 parameter.getFullName(), parameter.getOwner()->getFullPath().c_str(), value,
                 (exclude_min ? "larger than " : ""), min, (exclude_max ? "smaller than " : ""), max);
     }
