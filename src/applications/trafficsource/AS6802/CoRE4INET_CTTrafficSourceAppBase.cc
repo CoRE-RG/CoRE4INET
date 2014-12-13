@@ -51,7 +51,7 @@ void CTTrafficSourceAppBase::sendMessage()
     }
     else
     {
-        for (std::unordered_map<uint16_t, std::list<CTBuffer*> >::iterator bufmap = ctbuffers.begin();
+        for (unordered_map<uint16_t, std::list<CTBuffer*> >::iterator bufmap = ctbuffers.begin();
                 bufmap != ctbuffers.end(); ++bufmap)
         {
             buffer.merge(bufmap->second);
@@ -129,7 +129,7 @@ void CTTrafficSourceAppBase::handleParameterChange(const char* parname)
     CTApplicationBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "ct_id"))
     {
-        this->ct_id = (uint16_t) parameterLongCheckRange(par("ct_id"), -1, MAX_CT_ID);
+        this->ct_id = (int) parameterLongCheckRange(par("ct_id"), -1, MAX_CT_ID);
     }
 }
 

@@ -34,7 +34,7 @@ class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtu
         /*
          * @brief caches ct_id parameter
          */
-        uint16_t ct_id;
+        int ct_id;
     public:
         /**
          * @brief Constructor of CTTrafficSourceAppBase
