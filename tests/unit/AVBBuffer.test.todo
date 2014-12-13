@@ -8,6 +8,7 @@ Test AVBBuffer
 #include "CoRE4INET_SRPTable.h"
 #include "CoRE4INET_AVBQueueBuffer.h"
 #include "CoRE4INET_AVBDefs.h"
+#include "CoRE4INET_SimpleOscillator.h"
 
 
 %inifile: test.ini
@@ -34,7 +35,10 @@ port1.setName("port1");
 cSimpleModule port2;
 port2.setName("port2");
 
-cModuleType *moduleTypeTable = cModuleType::get("core4inet.services.avb.SRP.SRPTable");
+cModuleType *moduleTypeTable = cModuleType::get("core4inet.scheduler.oscillator.SimpleOscillator");
+CoRE4INET::Oscillator *oscillator = (CoRE4INET::Oscillator*)moduleTypeTable->createScheduleInit("oscillator", this);
+
+moduleTypeTable = cModuleType::get("core4inet.services.avb.SRP.SRPTable");
 CoRE4INET::SRPTable *table = (CoRE4INET::SRPTable*)moduleTypeTable->createScheduleInit("srpTable", this);
 table->clear();
 std::list<cModule*> ports = table->getListenersForStreamId(0);
@@ -48,7 +52,7 @@ table->printState();
 ev << "Bandwidth for "<< port2.getName() <<" is " << table->getBandwidthForModule(&port2) << "Bps" << std::endl;
 
 cModuleType *moduleTypeBuffer = cModuleType::get("core4inet.buffer.avb.AVBQueueBuffer");
-CoRE4INET::AVBQueueBuffer *avbBuffer = dynamic_cast<CoRE4INET::AVBQueueBuffer*>(moduleTypeBuffer->create("avbBuffer", this));
+CoRE4INET::AVBQueueBuffer *avbBuffer = dynamic_cast<CoRE4INET::AVBQueueBuffer*>(moduleTypeBuffer->createScheduleInit("avbBuffer", this));
 avbBuffer->resetCredit();
 ev << "Init:" << std::endl;
 PrintCredit(avbBuffer->getCredit());
