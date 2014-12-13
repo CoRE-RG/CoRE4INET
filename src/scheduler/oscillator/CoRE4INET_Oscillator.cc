@@ -34,7 +34,7 @@ int Oscillator::numInitStages() const
     return 1;
 }
 
-simtime_t Oscillator::getTick() const
+simtime_t Oscillator::getCurrentTick() const
 {
     return SimTime(par("current_tick").doubleValue());
 }

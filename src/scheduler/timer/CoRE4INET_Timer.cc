@@ -137,7 +137,7 @@ void Timer::recalculate()
         {
             throw std::runtime_error("Timer was not yet initialized");
         }
-        simtime_t current_tick = oscillator->getTick();
+        simtime_t current_tick = oscillator->getCurrentTick();
         uint64_t elapsed_ticks = (uint64_t) floor((simTime() - lastRecalculation) / current_tick);
         ticks += elapsed_ticks;
         //this is required to avoid rounding errors
@@ -156,7 +156,7 @@ void Timer::reschedule()
     recalculate();
     try
     {
-        simtime_t next_action = (nextAction() - getTotalTicks()) * oscillator->getTick();
+        simtime_t next_action = (nextAction() - getTotalTicks()) * oscillator->getCurrentTick();
         scheduleAt(simTime() + next_action, selfMessage);
     }
     catch (const std::range_error& re)
@@ -191,11 +191,11 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
     Enter_Method_Silent
     ();
 #endif
-    if (event->getTimer() > (SimTime::getMaxTime() / oscillator->getTick()))
+    if (event->getTimer() > (SimTime::getMaxTime() / oscillator->getCurrentTick()))
     {
         std::ostringstream oss;
         oss << "Cannot register timer event that is more than ";
-        oss << (SimTime::getMaxTime() / oscillator->getTick());
+        oss << (SimTime::getMaxTime() / oscillator->getCurrentTick());
         oss << "ticks from now. Your timer registered for ";
         oss << event->getTimer() << " ticks. Is your timer negative?";
         throw std::invalid_argument(oss.str());
