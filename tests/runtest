@@ -1,4 +1,3 @@
-set -e
 echo "Running smoke tests"
 cd smoke
 ./smoketest

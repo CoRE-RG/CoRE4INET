@@ -306,8 +306,13 @@ if __name__ == "__main__":
 
     testRunner = unittest.TextTestRunner(stream=sys.stdout, verbosity=9, resultclass=SimulationTextTestResult)
 
-    testRunner.run(testSuite)
+    result = testRunner.run(testSuite)
 
     print
     print "Log has been saved to %s" % logFile
+    
+    if (len(result.errors)+len(result.failures)) > 0 :
+        sys.exit(1)
+    else :
+        sys.exit(0)
 
