@@ -60,12 +60,12 @@ class AVBInControl : public IC
 template<class IC>
 void AVBInControl<IC>::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("in"))
+    if (msg && msg->arrivedOn("in"))
     {
-        EtherFrame *frame = (EtherFrame*) msg;
+        EtherFrame *frame = dynamic_cast<EtherFrame*>(msg);
 
         //Is AVB Frame?
-        if (isAVB(frame))
+        if (frame && isAVB(frame))
         {
             cSimpleModule::sendDirect(frame,
                     cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));

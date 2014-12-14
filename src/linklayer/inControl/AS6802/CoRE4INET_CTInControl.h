@@ -30,6 +30,7 @@ using namespace std::tr1;
 #include "CoRE4INET_CTIncoming.h"
 #include "CoRE4INET_CTBuffer.h"
 #include "CoRE4INET_customWatch.h"
+#include "CoRE4INET_ConfigFunctions.h"
 //INET
 #include <ModuleAccess.h>
 //INET Auto-generated Messages
@@ -134,16 +135,17 @@ void CTInControl<IC>::initialize()
 template<class IC>
 void CTInControl<IC>::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("in"))
+    if (msg && msg->arrivedOn("in"))
     {
-        EtherFrame *frame = (EtherFrame*) msg;
+        EtherFrame *frame = dynamic_cast<EtherFrame *>(msg);
 
         //Auf CTCs verteilen oder BE traffic
-        if (isCT(frame))
+        if (frame && isCT(frame))
         {
             this->recordPacketReceived(frame);
 
-            unordered_map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(getCTID(frame));
+            unordered_map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(
+                    getCTID(frame));
             if (ct_incomingList != ct_incomings.end())
             {
                 //Send to all CTCs for the CT-ID
@@ -192,56 +194,44 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
 {
     IC::handleParameterChange(parname);
 
-    ctMask = (uint32_t) cComponent::par("ct_mask").longValue();
-    ctMarker = (uint32_t) cComponent::par("ct_marker").longValue();
-
-    ct_incomings.clear();
-
-    std::vector<std::string> ct_incomingPaths = cStringTokenizer(cComponent::par("ct_incomings").stringValue(),
-    DELIMITERS).asVector();
-    for (std::vector<std::string>::iterator ct_incomingPath = ct_incomingPaths.begin();
-            ct_incomingPath != ct_incomingPaths.end(); ct_incomingPath++)
+    if (!parname || !strcmp(parname, "ct_mask"))
     {
-        cModule* module = simulation.getModuleByPath((*ct_incomingPath).c_str());
-        if (!module)
+        this->ctMask = (uint32_t) cComponent::par("ct_mask").longValue();
+    }
+    if (!parname || !strcmp(parname, "ct_marker"))
+    {
+        this->ctMarker = (uint32_t) cComponent::par("ct_marker").longValue();
+    }
+    if (!parname || !strcmp(parname, "ct_incomings"))
+    {
+        ct_incomings.clear();
+        std::vector<cModule*> modules = parameterToModuleList(cComponent::par("ct_incomings"), DELIMITERS);
+        for (std::vector<cModule*>::const_iterator module = modules.begin(); module != modules.end(); ++module)
         {
-            module = findModuleWhereverInNode((*ct_incomingPath).c_str(), this);
-        }
-        if (module)
-        {
-            if (findContainingNode(module) != findContainingNode(this))
+            if (findContainingNode(*module) != findContainingNode(this))
             {
-                opp_error(
-                        "Configuration problem of ct_incomings: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*ct_incomingPath).c_str(), findContainingNode(this)->getFullName());
+                throw cRuntimeError(
+                        "Configuration problem of parameter ct_incomings in module %s: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                        this->getFullName(), (*module)->getFullName(), findContainingNode(this)->getFullName());
             }
-            else
+            if (CTIncoming *ct_incoming = dynamic_cast<CTIncoming*>(*module))
             {
-                CTIncoming *ct_incoming = dynamic_cast<CTIncoming*>(module);
-                if (ct_incoming)
+                if (CTBuffer *buffer = dynamic_cast<CTBuffer*>(ct_incoming->gate("out")->getPathEndGate()->getOwner()))
                 {
-                    CTBuffer *buffer = dynamic_cast<CTBuffer*>(ct_incoming->gate("out")->getPathEndGate()->getOwner());
-                    if (buffer && buffer->hasPar("ct_id"))
-                    {
-                        ct_incomings[buffer->par("ct_id").longValue()].push_back(ct_incoming);
-                    }
-                    else
-                    {
-                        throw cRuntimeError("CTIncoming module %s has no CTBuffer attached with ct_id configured!",
-                                (*ct_incomingPath).c_str());
-                    }
+                    ct_incomings[buffer->getCTID()].push_back(ct_incoming);
                 }
                 else
                 {
-                    throw cRuntimeError("Configuration problem of ct_incomings: Module: %s is no CTIncoming module!",
-                            (*ct_incomingPath).c_str());
+                    throw cRuntimeError("CTIncoming module %s has no CTBuffer attached!",
+                            ct_incoming->getFullName());
                 }
             }
-        }
-        else
-        {
-            throw cRuntimeError("Configuration problem of ct_incomings: Module: %s could not be resolved!",
-                    (*ct_incomingPath).c_str());
+            else
+            {
+                throw cRuntimeError(
+                        "Configuration problem of parameter ct_incomings in module %s: Module: %s is no CTIncoming module!",
+                        this->getFullName(), (*module)->getFullName());
+            }
         }
     }
 }
@@ -251,7 +241,8 @@ bool CTInControl<IC>::isCT(EtherFrame *frame)
 {
     if (EthernetIIFrame *e2f = dynamic_cast<EthernetIIFrame*>(frame))
     {
-        if(e2f->getEtherType()!=0x891d){
+        if (e2f->getEtherType() != 0x891d)
+        {
             return false;
         }
     }

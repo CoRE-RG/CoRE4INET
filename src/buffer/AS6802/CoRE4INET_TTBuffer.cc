@@ -123,7 +123,9 @@ void TTBuffer::handleParameterChange(const char* parname)
         uint32_t sendWindowStart = (uint32_t) parameterULongCheckRange(par("sendWindowStart"), 0,
                 getPeriod()->getCycleTicks());
         if (actionTimeEvent)
+        {
             actionTimeEvent->setAction_time(sendWindowStart);
+        }
     }
 
 }

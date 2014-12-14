@@ -45,7 +45,17 @@ namespace CoRE4INET {
  */
 class CTBuffer : public virtual Buffer
 {
+    private:
+        /**
+         * @brief True if parameters were initialized
+         */
+        bool parametersInitialized;
     public:
+        /**
+         * @brief Consstructor
+         */
+        CTBuffer();
+
         /**
          * @brief Destructor
          */
@@ -98,6 +108,8 @@ class CTBuffer : public virtual Buffer
          * @sa enqueue();
          */
         void putFrame(EtherFrame* frame);
+
+        uint16_t getCTID();
 
 };
 }

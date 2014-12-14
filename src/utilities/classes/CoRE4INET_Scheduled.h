@@ -39,6 +39,11 @@ class Scheduled : public Timed
 
     public:
         /**
+         * @brief Constructor of Scheduled
+         */
+        Scheduled();
+
+        /**
          * @brief Initialization of the module sets period[0] when parameter period is empty
          */
         void initialize();
@@ -46,7 +51,7 @@ class Scheduled : public Timed
         /**
          * returns pointer to the configured period
          */
-        Period* getPeriod() const;
+        Period* getPeriod();
 };
 
 }

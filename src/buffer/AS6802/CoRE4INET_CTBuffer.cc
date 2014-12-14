@@ -24,6 +24,11 @@ using namespace CoRE4INET;
 
 //Define_Module(CTBuffer);
 
+CTBuffer::CTBuffer()
+{
+    this->parametersInitialized = false;
+}
+
 CTBuffer::~CTBuffer()
 {
 }
@@ -62,6 +67,11 @@ void CTBuffer::handleParameterChange(const char* parname)
 {
     Buffer::handleParameterChange(parname);
 
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+
     if (!parname || !strcmp(parname, "ct_id"))
     {
         this->ctId = (uint16_t) parameterULongCheckRange(par("ct_id"), 0, MAX_CT_ID);
@@ -75,7 +85,16 @@ void CTBuffer::handleParameterChange(const char* parname)
         this->ctMarker = (uint32_t) par("ct_marker").longValue();
     }
     if (!parname || !strcmp(parname, "priority"))
-     {
-         this->priority = (short) parameterLongCheckRange(par("priority"), -1, MAX_PRIORITY);
-     }
+    {
+        this->priority = (short) parameterLongCheckRange(par("priority"), -1, MAX_PRIORITY);
+    }
+}
+
+uint16_t CTBuffer::getCTID()
+{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->ctId;
 }

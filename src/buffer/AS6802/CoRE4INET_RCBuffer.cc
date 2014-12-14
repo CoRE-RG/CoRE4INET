@@ -119,6 +119,7 @@ void RCBuffer::handleMessage(cMessage *msg)
 void RCBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
+
     if (!parname || !strcmp(parname, "bag"))
     {
         this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG);

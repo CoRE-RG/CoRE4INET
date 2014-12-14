@@ -20,6 +20,10 @@
 
 using namespace CoRE4INET;
 
+Scheduled::Scheduled(){
+    this->period = NULL;
+}
+
 void Scheduled::initialize()
 {
     Timed::initialize();
@@ -31,7 +35,15 @@ void Scheduled::initialize()
     ASSERT2(period, "cannot find period, you should specify it!");
 }
 
-Period* Scheduled::getPeriod() const
+Period* Scheduled::getPeriod()
 {
-    return period;
+    if (!this->period)
+    {
+        if (par("period").stdstringValue().length() == 0)
+        {
+            par("period").setStringValue("period[0]");
+        }
+        this->period = dynamic_cast<Period*>(findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
+    }
+    return this->period;
 }
