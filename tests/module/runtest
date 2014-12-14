@@ -18,6 +18,13 @@ opp_test gen $OPT -v $TESTFILES || exit 1
 echo
 (cd work; opp_makemake -f --deep -lCoRE4INET -linet -L../../../../inet/src -L../../../src -P . --no-deep-includes $EXTRA_INCLUDES; $MAKE -e cleanall; $MAKE -e) || exit 1
 echo
-opp_test run $OPT -v $TESTFILES || exit 1
-echo
-echo Results can be found in ./work
+opp_test run $OPT -v $TESTFILES
+if [ $? -eq 0 ]
+then
+  echo Test ok, results can be found in ./work
+  exit 0
+else
+  echo Test failed, results can be found in ./work
+  exit 1
+
+fi
