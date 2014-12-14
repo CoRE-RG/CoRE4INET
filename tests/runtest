@@ -1,0 +1,22 @@
+set -e
+echo "Running smoke tests"
+cd smoke
+./smoketest
+cd ..
+
+echo "Running fingerprint tests"
+cd fingerprint
+./fingerprints
+cd ..
+
+echo "Running unit tests"
+cd unit
+./runtest
+cd ..
+
+echo "Running module tests"
+cd module
+./runtest
+cd ..
+
+echo "All tests successful!"
