@@ -25,6 +25,8 @@ namespace CoRE4INET {
  */
 #define MAX_CT_ID (uint16_t)0xFFFF
 #define MAX_PRIORITY 10
+#define MAX_BAG UINT64_MAX
+#define MAX_JITTER UINT64_MAX
 
 }
 #endif /* AVBDEFS_H_ */

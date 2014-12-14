@@ -19,6 +19,10 @@
 #include "CTFrame_m.h"
 #include "scheduler/SchedulerMessageEvents_m.h"
 
+//CoRE4INET
+#include "CoRE4INET_AS6802Defs.h"
+#include "CoRE4INET_ConfigFunctions.h"
+
 namespace CoRE4INET {
 
 //Define_Module(RCBuffer);
@@ -115,8 +119,14 @@ void RCBuffer::handleMessage(cMessage *msg)
 void RCBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
-    bag = (uint64_t) par("bag").longValue();
-    jitter = (uint64_t) par("jitter").longValue();
+    if (!parname || !strcmp(parname, "bag"))
+        {
+            this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG);
+        }
+    if (!parname || !strcmp(parname, "jitter"))
+        {
+            this->jitter = (uint64_t) parameterULongCheckRange(par("jitter"), 0, MAX_JITTER);
+        }
 }
 
 void RCBuffer::resetBag()
