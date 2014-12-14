@@ -19,6 +19,9 @@
 #include "TTBufferEmpty_m.h"
 #include "scheduler/SchedulerMessageEvents_m.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 using namespace CoRE4INET;
 
 //Define_Module(TTBuffer);
@@ -115,9 +118,14 @@ void TTBuffer::handleMessage(cMessage *msg)
 void TTBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "sendWindowStart"))
+    {
+        uint32_t sendWindowStart = (uint32_t) parameterULongCheckRange(par("sendWindowStart"), 0,
+                getPeriod()->getCycleTicks());
+        if (actionTimeEvent)
+            actionTimeEvent->setAction_time(sendWindowStart);
+    }
 
-    if (actionTimeEvent)
-        actionTimeEvent->setAction_time((uint32_t) par("sendWindowStart").longValue());
 }
 
 uint64_t TTBuffer::nextSendWindowStart() const
@@ -127,6 +135,5 @@ uint64_t TTBuffer::nextSendWindowStart() const
 
 long TTBuffer::getRequiredBandwidth()
 {
-    return (long)ceil((par("maxMessageSize").longValue() * 8)
-            * (1 / ((uint32_t) period->par("cycle_ticks").longValue() * oscillator->par("tick").doubleValue())));
+    return (long) ceil((getMaxMessageSize() * 8) * (1 / (period->getCycleLength().dbl())));
 }
