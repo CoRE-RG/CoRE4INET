@@ -15,6 +15,7 @@
 package core4inet.incoming.AS6802;
 
 import core4inet.incoming.base.Incoming;
+import core4inet.utilities.classes.IScheduled;
 
 //
 // Module for the conformance checks of incoming time-triggered traffic.
@@ -26,7 +27,7 @@ import core4inet.incoming.base.Incoming;
 // @see Incoming, SchedulerActionTimeEvent, TTEScheduler
 //
 // @author Till Steinbach
-simple TTIncoming extends Incoming
+simple TTIncoming extends Incoming like IScheduled
 {
     parameters:
         @display("i=,red");
@@ -39,7 +40,13 @@ simple TTIncoming extends Incoming
         //permanence point in time in number of ticks (-1 means no permanence point, frame is relayed immediately)
         int permanence_pit @unit(tick);
         //Period of Scheduler this ctc is assigned to
-        string period = default("");
+        string period = default("period[0]");
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        string oscillator = default("oscillator");
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        string timer = default("timer");
+        //Hardware delay is set to 0s as the forwarding is scheduled (permanence_pit)
+        hardware_delay = 0s;
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

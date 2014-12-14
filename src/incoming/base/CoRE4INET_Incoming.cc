@@ -15,6 +15,9 @@
 
 #include "CoRE4INET_Incoming.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 namespace CoRE4INET {
 
 Define_Module(Incoming);
@@ -25,6 +28,8 @@ simsignal_t Incoming::rxPkSignal = registerSignal("rxPk");
 Incoming::Incoming()
 {
     hadError = false;
+    this->hardware_delay = 0;
+    parametersInitialized = false;
 }
 
 void Incoming::recordPacketReceived(EtherFrame *frame)
@@ -34,12 +39,33 @@ void Incoming::recordPacketReceived(EtherFrame *frame)
 
 void Incoming::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("in"))
+    if (msg && msg->arrivedOn("in"))
     {
         recordPacketReceived((EtherFrame*) msg);
-        sendDelayed(msg, SimTime(getParentModule()->par("hardware_delay").doubleValue()), "out");
-        //send(msg,"out");
+        sendDelayed(msg, this->hardware_delay, "out");
     }
+}
+
+simtime_t Incoming::getHardwareDelay()
+{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->hardware_delay;
+}
+
+void Incoming::handleParameterChange(const char* parname)
+{
+    if (!parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "hardware_delay"))
+    {
+        this->hardware_delay = SimTime(parameterDoubleCheckRange(par("hardware_delay"), 0, DBL_MAX));
+    }
+
 }
 
 } //namespace

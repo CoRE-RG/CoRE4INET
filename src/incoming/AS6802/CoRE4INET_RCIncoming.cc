@@ -15,6 +15,10 @@
 
 #include "CoRE4INET_RCIncoming.h"
 
+//CoRE4INET
+#include "CoRE4INET_AS6802Defs.h"
+#include "CoRE4INET_ConfigFunctions.h"
+
 //INET
 #include "EtherFrame_m.h"
 
@@ -40,38 +44,52 @@ void RCIncoming::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        recordPacketReceived((EtherFrame*) msg);
-
-        uint64_t currentTotalTicks = timer->getTotalTicks();
-        //Now check for correct arrival:
-        //Check too early
-        if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))
+        if (EtherFrame *etherframe = dynamic_cast<EtherFrame *>(msg))
         {
-            emit(droppedSignal, (EtherFrame*) msg);
-            if (ev.isGUI())
+            recordPacketReceived(etherframe);
+
+            uint64_t currentTotalTicks = timer->getTotalTicks();
+            //Now check for correct arrival:
+            //Check too early
+            if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))
             {
-                ev.printf("Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n",
-                        getName(), currentTotalTicks - lastArrived, par("bag").longValue());
-                bubble("Frame to early");
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-            }
+                emit(droppedSignal, etherframe);
+                if (ev.isGUI())
+                {
+                    ev.printf(
+                            "Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n",
+                            getName(), currentTotalTicks - lastArrived, bag);
+                    bubble("Frame to early");
+                    getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                }
 
-            delete msg;
+                delete etherframe;
+            }
+            //Timing ok
+            else
+            {
+                lastArrived = currentTotalTicks;
+                sendDelayed(etherframe, getHardwareDelay(), "out");
+            }
         }
-        //Timing ok
-        else
-        {
-            lastArrived = currentTotalTicks;
-            sendDelayed(msg, SimTime(getParentModule()->par("hardware_delay").doubleValue()), "out");
-        }
+    }
+    else
+    {
+        throw cRuntimeError("Received non-Ethernet frame");
     }
 }
 
 void RCIncoming::handleParameterChange(__attribute((unused)) const char* parname)
 {
-    bag = (uint64_t) par("bag").longValue();
-    jitter = (uint64_t) par("jitter").longValue();
+    if (!parname || !strcmp(parname, "bag"))
+    {
+        this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG_TICKS);
+    }
+    if (!parname || !strcmp(parname, "jitter"))
+    {
+        this->jitter = (uint64_t) parameterULongCheckRange(par("jitter"), 0, MAX_JITTER_TICKS);
+    }
 }
 
 } //namespace
