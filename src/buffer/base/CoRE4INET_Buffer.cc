@@ -143,3 +143,7 @@ long Buffer::getRequiredBandwidth()
 {
     return -1;
 }
+
+size_t Buffer::getMaxMessageSize(){
+    return this->maxMessageSize;
+}

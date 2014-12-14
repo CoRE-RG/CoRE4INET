@@ -23,7 +23,6 @@
 //INET Auto-generated Messages
 #include "EtherFrame_m.h"
 
-
 namespace CoRE4INET {
 
 class ApplicationBase;
@@ -182,6 +181,13 @@ class Buffer : public virtual cSimpleModule
          *
          */
         virtual void clear() = 0;
+
+        /**
+         * @brief Returns the maximum message size allowed in the buffer
+         *
+         * @return Maximum message size allowed in the buffer
+         */
+        virtual size_t getMaxMessageSize();
 
     protected:
         /**
