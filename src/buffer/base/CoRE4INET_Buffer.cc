@@ -129,7 +129,7 @@ void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
     }
 }
 
-void Buffer::enqueue(__attribute((unused)) EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused))  EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }
