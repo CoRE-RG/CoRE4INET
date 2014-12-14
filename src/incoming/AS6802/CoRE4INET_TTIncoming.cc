@@ -159,6 +159,8 @@ void TTIncoming::handleMessage(cMessage *msg)
 
 void TTIncoming::handleParameterChange(const char* parname)
 {
+    CTIncoming::handleParameterChange(parname);
+
     if (!parname || !strcmp(parname, "receive_window_start"))
     {
         this->receive_window_start = parameterLongCheckRange(par("receive_window_start"), -1, period->getCycleTicks());

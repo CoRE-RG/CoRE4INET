@@ -40,6 +40,7 @@ module Switch1 extends TTEEtherSwitch
         vl_101_ctc: RCIncoming {
             parameters:
                 @display("p=170,200");
+                hardware_delay = hardware_delay;
         }
         vl_101: RCQueueBuffer {
             parameters:

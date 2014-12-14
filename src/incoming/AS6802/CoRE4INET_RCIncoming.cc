@@ -82,6 +82,8 @@ void RCIncoming::handleMessage(cMessage *msg)
 
 void RCIncoming::handleParameterChange(__attribute((unused)) const char* parname)
 {
+    CTIncoming::handleParameterChange(parname);
+
     if (!parname || !strcmp(parname, "bag"))
     {
         this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG_TICKS);

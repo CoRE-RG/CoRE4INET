@@ -58,6 +58,8 @@ void PCFIncoming::handleMessage(cMessage *msg)
 
 void PCFIncoming::handleParameterChange(__attribute((unused)) const char* parname)
 {
+    CTIncoming::handleParameterChange(parname);
+
     if (!parname || !strcmp(parname, "pcfType"))
     {
         pcfType = (PCFType) parameterULongCheckRange(par("pcfType"), 1, 3);
