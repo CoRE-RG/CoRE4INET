@@ -15,11 +15,22 @@
 
 #include "CoRE4INET_Oscillator.h"
 
+//CoRE4INET
+#include "CoRE4INET_Defs.h"
+#include "CoRE4INET_ConfigFunctions.h"
+
+
 namespace CoRE4INET {
 
 Define_Module(Oscillator);
 
 simsignal_t Oscillator::currentDrift = SIMSIGNAL_NULL;
+
+Oscillator::Oscillator()
+{
+    this->tick = 0;
+    this->parametersInitialized = false;
+}
 
 void Oscillator::initialize(int stage)
 {
@@ -34,13 +45,30 @@ int Oscillator::numInitStages() const
     return 1;
 }
 
+void Oscillator::handleParameterChange(const char* parname)
+{
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "tick"))
+    {
+        this->tick = SimTime(parameterDoubleCheckRange(par("tick"), 0, MAX_TICK_LENGTH));
+    }
+
+}
+
 simtime_t Oscillator::getCurrentTick() const
 {
     return SimTime(par("current_tick").doubleValue());
 }
-simtime_t Oscillator::getPreciseTick() const
+simtime_t Oscillator::getPreciseTick()
 {
-    return SimTime(par("tick").doubleValue());
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->tick;
 }
 
 } //namespace
