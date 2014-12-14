@@ -41,13 +41,13 @@ void SRPRelay::handleMessage(cMessage * msg)
     if (!msg->isSelfMessage())
     {
         // messages from STP process
-        if (strcmp(msg->getArrivalGate()->getName(), "srpIn") == 0)
+        if (msg->arrivedOn("srpIn"))
         {
             SRPFrame * srpFrame = check_and_cast<SRPFrame*>(msg);
             dispatchSRP(srpFrame);
 
         }
-        else if (strcmp(msg->getArrivalGate()->getName(), "ifIn") == 0)
+        else if (msg->arrivedOn( "ifIn"))
         {
             EtherFrame * frame = check_and_cast<EtherFrame*>(msg);
             if ((frame->getDest() == SRP_ADDRESS || frame->getDest() == bridgeAddress))
