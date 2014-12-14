@@ -58,6 +58,7 @@ module TTEAVBEtherHost
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=380,118");
+                hardware_delay = hardware_delay;
             gates:
                 AVBAout[numPorts];
                 AVBBout[numPorts];

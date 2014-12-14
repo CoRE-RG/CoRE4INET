@@ -18,6 +18,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_Incoming.h"
+#include "CoRE4INET_SRPTable.h"
 
 namespace CoRE4INET {
 
@@ -32,11 +33,16 @@ namespace CoRE4INET {
  */
 class AVBIncoming : public Incoming
 {
+    private:
+        /**
+         * @brief Caches srpTable module
+         */
+        SRPTable *srptable;
     protected:
         /**
-         * @brief set to true if there was an error during runtime
+         * @brief Initialization of the module
          */
-        bool hadError;
+        virtual void initialize();
 
         /**
          * @brief Forwards messages arriving on in-gate to out-gate.
