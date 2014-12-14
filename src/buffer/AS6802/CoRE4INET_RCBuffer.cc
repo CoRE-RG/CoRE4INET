@@ -63,7 +63,7 @@ void RCBuffer::handleMessage(cMessage *msg)
 
     if (destinationGates.size() > 0)
     {
-        if (msg->arrivedOn("in"))
+        if (msg && msg->arrivedOn("in"))
         {
             if (bagExpired)
             {
@@ -72,8 +72,8 @@ void RCBuffer::handleMessage(cMessage *msg)
                     bagExpired = false;
                     numReset = 0;
                     //Send Message
-                    for (std::list<cGate*>::const_iterator dgate = destinationGates.begin(); dgate != destinationGates.end();
-                            ++dgate)
+                    for (std::list<cGate*>::const_iterator dgate = destinationGates.begin();
+                            dgate != destinationGates.end(); ++dgate)
                     {
                         sendDirect(outgoingMessage->dup(), 0, 0, *dgate);
                     }
@@ -86,7 +86,7 @@ void RCBuffer::handleMessage(cMessage *msg)
                 }
             }
         }
-        else if (msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT)
+        else if (msg && msg->arrivedOn("schedulerIn") && msg->getKind() == TIMER_EVENT)
         {
             if (EtherFrame *outgoingMessage = getFrame())
             {
@@ -120,13 +120,13 @@ void RCBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "bag"))
-        {
-            this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG);
-        }
+    {
+        this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG);
+    }
     if (!parname || !strcmp(parname, "jitter"))
-        {
-            this->jitter = (uint64_t) parameterULongCheckRange(par("jitter"), 0, MAX_JITTER);
-        }
+    {
+        this->jitter = (uint64_t) parameterULongCheckRange(par("jitter"), 0, MAX_JITTER);
+    }
 }
 
 void RCBuffer::resetBag()
@@ -144,20 +144,23 @@ void RCBuffer::resetBag()
     if (numReset == destinationGates.size())
     {
         //Jitter calculations: fo frame delay
-        uint64_t delay = timer->getTotalTicks()-lastSent;
+        uint64_t delay = timer->getTotalTicks() - lastSent;
         //If last frame was delayed more than jitter parameter set delay to jitter
-        if(delay>jitter){
+        if (delay > jitter)
+        {
             delay = jitter;
         }
 
         //Register scheduler
         SchedulerTimerEvent *timerMessage = new SchedulerTimerEvent("RCBuffer Scheduler Event", TIMER_EVENT);
         //Subtract delay from bag to allow frames to keep up their bandwidth
-        if(bag<delay){
+        if (bag < delay)
+        {
             timerMessage->setTimer(0);
         }
-        else{
-            timerMessage->setTimer(bag-delay);
+        else
+        {
+            timerMessage->setTimer(bag - delay);
         }
         timerMessage->setDestinationGate(gate("schedulerIn"));
         timer->registerEvent(timerMessage);
@@ -166,8 +169,7 @@ void RCBuffer::resetBag()
 
 long RCBuffer::getRequiredBandwidth()
 {
-    return (long)ceil((par("maxMessageSize").longValue() * 8)
-            * (1 / ((uint64_t) par("bag").longValue() * oscillator->par("tick").doubleValue())));
+    return (long) ceil((getMaxMessageSize() * 8) * (1 / (this->bag * oscillator->getPreciseTick())));
 }
 
 } //namespace
