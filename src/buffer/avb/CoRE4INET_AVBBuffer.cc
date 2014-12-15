@@ -84,7 +84,7 @@ void AVBBuffer::initialize(int stage)
                     }
                     else
                     {
-                        throw cRuntimeError("phys$o gate of mac module of phy[%d] has no transmission channel", getIndex());
+                        this->portBandwith = 0;
                     }
                 }
                 else
