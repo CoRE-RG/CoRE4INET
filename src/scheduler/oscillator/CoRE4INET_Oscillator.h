@@ -39,6 +39,11 @@ class Oscillator : public virtual cSimpleModule
          */
         simtime_t tick;
 
+        /**
+         * @brief Caches current_tick parameter
+         */
+        simtime_t current_tick;
+
     protected:
         /**
          * Signal that is emitted every time the drift (Difference of configured and actual tick length) changes
@@ -72,6 +77,13 @@ class Oscillator : public virtual cSimpleModule
          * @return current length of a tick
          */
         virtual simtime_t getCurrentTick() const;
+
+        /**
+         * @brief Sets the current length of a tick
+         *
+         * @param tick_length new length of a tick
+         */
+        void setCurrentTick(simtime_t tick_length);
         /**
          * @brief Returns the precise length of a tick (without drift)
          *

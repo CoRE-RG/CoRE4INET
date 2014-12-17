@@ -19,6 +19,8 @@
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_ConfigFunctions.h"
 
+//INET
+#include "Compat.h"
 
 namespace CoRE4INET {
 
@@ -55,12 +57,23 @@ void Oscillator::handleParameterChange(const char* parname)
     {
         this->tick = SimTime(parameterDoubleCheckRange(par("tick"), 0, MAX_TICK_LENGTH));
     }
+    if (!parname || !strcmp(parname, "current_tick"))
+    {
+        EV_WARN << "parameter current_tick is depricated and not used anymore" << endl;
+        //this->current_tick = SimTime(parameterDoubleCheckRange(par("current_tick"), 0, MAX_TICK_LENGTH));
+    }
 
+}
+
+void Oscillator::setCurrentTick(simtime_t tick_length)
+{
+    this->current_tick = tick_length;
+    par("current_tick").setDoubleValue(tick_length.dbl());
 }
 
 simtime_t Oscillator::getCurrentTick() const
 {
-    return SimTime(par("current_tick").doubleValue());
+    return this->current_tick;
 }
 simtime_t Oscillator::getPreciseTick()
 {

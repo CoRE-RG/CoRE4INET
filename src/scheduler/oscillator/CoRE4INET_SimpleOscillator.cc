@@ -62,22 +62,23 @@ void SimpleOscillator::handleMessage(cMessage *msg)
     if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
         //change drift
-        double reference_time = ((simTime() - lastCorrection).dbl() / period->par("cycle_ticks").doubleValue());
-        double drift_change = reference_time * (par("drift_change").doubleValue() / 1000000);
+        simtime_t reference_time = ((simTime() - lastCorrection) / period->getCycleTicks());
+        ev << "ACHTUNG!!!!!!"<< endl << reference_time << "ACHTUNG!!!!!!" << endl;
+        simtime_t drift_change = reference_time * (par("drift_change").doubleValue() / 1000000);
 
-        double current_tick = par("current_tick").doubleValue();
-        double tick = par("tick").doubleValue();
-        double max_drift = (par("max_drift").doubleValue() * par("tick").doubleValue() / 1000000);
+        simtime_t current_tick = getCurrentTick();
+        simtime_t tick = getPreciseTick();
+        simtime_t max_drift = ((par("max_drift").doubleValue()/ 1000000) * tick);
 
-        double newTick = current_tick + drift_change;
+        simtime_t newTick = current_tick + drift_change;
 
         if ((newTick - tick) > max_drift)
-            par("current_tick").setDoubleValue(tick + max_drift);
+            setCurrentTick(tick + max_drift);
         else if ((newTick - tick) < -max_drift)
-            par("current_tick").setDoubleValue(tick - max_drift);
+            setCurrentTick(tick - max_drift);
         else
-            par("current_tick").setDoubleValue(newTick);
-        emit(currentDrift, (par("current_tick").doubleValue() - tick));
+            setCurrentTick(newTick);
+        emit(currentDrift, (getCurrentTick() - tick));
 
         lastCorrection = simTime();
         //Reregister scheduler
