@@ -88,7 +88,7 @@ class Timer : public cSimpleModule
         /**
          * Calculates the point in ticks when the next action must be scheduled
          */
-        virtual uint32_t nextAction() const;
+        virtual uint64_t nextAction() const;
         /**
          * Trigger the sending of all events that are due at this moment
          */

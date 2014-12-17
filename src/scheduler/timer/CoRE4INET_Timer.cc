@@ -157,16 +157,27 @@ void Timer::reschedule()
     recalculate();
     try
     {
-        simtime_t next_action = (nextAction() - getTotalTicks()) * oscillator->getCurrentTick();
+        uint64_t next_action_ticks = nextAction();
+        uint64_t total_ticks = getTotalTicks();
+        if(total_ticks > next_action_ticks){
+            throw cRuntimeError("There must have been an overflow in the timer module");
+        }
+        simtime_t next_action = (next_action_ticks - total_ticks) * oscillator->getCurrentTick();
         scheduleAt(simTime() + next_action, selfMessage);
     }
     catch (const std::range_error& re)
     {
         //No message should be scheduled as there are no messages registered
     }
+    catch (const cRuntimeError& re)
+    {
+        throw cRuntimeError("%s: nextAction() %d getTotalTicks() %llu oscillator->getCurrentTick() %s",
+                re.getFormattedMessage().c_str(), nextAction(), getTotalTicks(),oscillator->getCurrentTick().str().c_str());
+        //No message should be scheduled as there are no messages registered
+    }
 }
 
-uint32_t Timer::nextAction() const
+uint64_t Timer::nextAction() const
 {
     if (registredActionTimeEvents.empty() && registredTimerEvents.empty())
     {
@@ -176,11 +187,11 @@ uint32_t Timer::nextAction() const
             || (!registredActionTimeEvents.empty()
                     && registredActionTimeEvents.begin()->first < registredTimerEvents.begin()->first))
     {
-        return (uint32_t) registredActionTimeEvents.begin()->first;
+        return registredActionTimeEvents.begin()->first;
     }
     else
     {
-        return (uint32_t) registredTimerEvents.begin()->first;
+        return registredTimerEvents.begin()->first;
     }
 }
 
@@ -220,7 +231,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
                 reschedule();
             }
         }
-        catch (__attribute((unused))         const std::range_error& re)
+        catch (__attribute((unused))           const std::range_error& re)
         {
             registredTimerEvents[actionpoint].push_back(event);
             reschedule();
@@ -282,7 +293,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
                 reschedule();
             }
         }
-        catch (__attribute((unused))         const std::range_error& re)
+        catch (__attribute((unused))           const std::range_error& re)
         {
             registredActionTimeEvents[actionpoint].push_back(
                     std::pair<SchedulerActionTimeEvent*, Period*>(actionTimeEvent, period));
