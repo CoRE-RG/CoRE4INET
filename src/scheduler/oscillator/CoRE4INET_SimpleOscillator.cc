@@ -63,7 +63,6 @@ void SimpleOscillator::handleMessage(cMessage *msg)
     {
         //change drift
         simtime_t reference_time = ((simTime() - lastCorrection) / period->getCycleTicks());
-        ev << "ACHTUNG!!!!!!"<< endl << reference_time << "ACHTUNG!!!!!!" << endl;
         simtime_t drift_change = reference_time * (par("drift_change").doubleValue() / 1000000);
 
         simtime_t current_tick = getCurrentTick();

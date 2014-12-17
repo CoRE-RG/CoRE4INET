@@ -31,6 +31,7 @@ simsignal_t Oscillator::currentDrift = SIMSIGNAL_NULL;
 Oscillator::Oscillator()
 {
     this->tick = 0;
+    this->current_tick = 0;
     this->parametersInitialized = false;
 }
 
@@ -39,6 +40,7 @@ void Oscillator::initialize(int stage)
     if (stage == 0)
     {
         currentDrift = registerSignal("currentDrift");
+        WATCH(this->current_tick);
     }
 }
 
@@ -56,19 +58,13 @@ void Oscillator::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "tick"))
     {
         this->tick = SimTime(parameterDoubleCheckRange(par("tick"), 0, MAX_TICK_LENGTH));
+        this->current_tick = this->tick;
     }
-    if (!parname || !strcmp(parname, "current_tick"))
-    {
-        EV_WARN << "parameter current_tick is depricated and not used anymore" << endl;
-        //this->current_tick = SimTime(parameterDoubleCheckRange(par("current_tick"), 0, MAX_TICK_LENGTH));
-    }
-
 }
 
 void Oscillator::setCurrentTick(simtime_t tick_length)
 {
     this->current_tick = tick_length;
-    par("current_tick").setDoubleValue(tick_length.dbl());
 }
 
 simtime_t Oscillator::getCurrentTick() const
