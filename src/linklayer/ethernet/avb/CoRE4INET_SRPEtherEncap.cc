@@ -30,25 +30,27 @@ Define_Module(SRPEtherEncap);
 
 //==============================================================================
 
-SRPEtherEncap::SRPEtherEncap() {
+SRPEtherEncap::SRPEtherEncap()
+{
 
 }
 
 //==============================================================================
 
-SRPEtherEncap::~SRPEtherEncap() {
+SRPEtherEncap::~SRPEtherEncap()
+{
 }
 
 //==============================================================================
 
 void SRPEtherEncap::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("srpIn"))
+    if (msg && msg->arrivedOn("srpIn"))
     {
         SRPFrame * srpFrame = check_and_cast<SRPFrame*>(msg);
         dispatchSRP(srpFrame);
     }
-    else if (msg->arrivedOn("lowerLayerIn"))
+    else if (msg && msg->arrivedOn("lowerLayerIn"))
     {
         EtherFrame * frame = check_and_cast<EtherFrame*>(msg);
         if (frame->getDest() == SRP_ADDRESS)
@@ -94,10 +96,11 @@ void SRPEtherEncap::dispatchSRP(SRPFrame * srp)
     if (notPortNum != 0)
     {
         send(frame, "lowerLayerOut");
-                EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = " << portNum
-                        << endl;
+        EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = " << portNum
+                << endl;
     }
-    else{
+    else
+    {
         delete frame;
     }
 }

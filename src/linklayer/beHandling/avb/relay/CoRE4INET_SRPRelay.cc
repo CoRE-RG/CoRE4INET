@@ -38,7 +38,7 @@ void SRPRelay::handleMessage(cMessage * msg)
         return;
     }
 
-    if (!msg->isSelfMessage())
+    if (msg && !msg->isSelfMessage())
     {
         // messages from STP process
         if (msg->arrivedOn("srpIn"))
@@ -47,7 +47,7 @@ void SRPRelay::handleMessage(cMessage * msg)
             dispatchSRP(srpFrame);
 
         }
-        else if (msg->arrivedOn( "ifIn"))
+        else if (msg->arrivedOn("ifIn"))
         {
             EtherFrame * frame = check_and_cast<EtherFrame*>(msg);
             if ((frame->getDest() == SRP_ADDRESS || frame->getDest() == bridgeAddress))
@@ -68,13 +68,13 @@ void SRPRelay::handleMessage(cMessage * msg)
 void SRPRelay::dispatchSRP(SRPFrame * srp)
 {
     ExtendedIeee802Ctrl * controlInfo = dynamic_cast<ExtendedIeee802Ctrl *>(srp->removeControlInfo());
-    if(!controlInfo){
+    if (!controlInfo)
+    {
         throw cRuntimeError("SRP is missing ControlInfo");
     }
     int portNum = controlInfo->getSwitchPort();
     int notPortNum = controlInfo->getNotSwitchPort();
     MACAddress address = controlInfo->getDest();
-
 
     if (portNum >= (int) portCount)
         throw cRuntimeError("Output port %d doesn't exist!", portNum);
@@ -94,11 +94,13 @@ void SRPRelay::dispatchSRP(SRPFrame * srp)
     //Broadcast
     if (portNum < 0)
     {
-        for(size_t i = 0; i< portCount; ++i){
-            if((int)i!=notPortNum){
+        for (size_t i = 0; i < portCount; ++i)
+        {
+            if ((int) i != notPortNum)
+            {
                 send(frame->dup(), "ifOut", i);
-                EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = " << i
-                            << endl;
+                EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = "
+                        << i << endl;
             }
         }
         delete frame;
@@ -107,7 +109,7 @@ void SRPRelay::dispatchSRP(SRPFrame * srp)
     {
         send(frame, "ifOut", portNum);
         EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = " << portNum
-                    << endl;
+                << endl;
     }
 }
 
