@@ -231,6 +231,8 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
             throw std::invalid_argument("cannot register talker without module");
         }
         updated = false;
+        if (talkerTable[streamId])
+            throw cRuntimeError("talkerTable already contained entry");
         talkerTable[streamId] = new SRPTable::TalkerEntry();
     }
     else
@@ -266,7 +268,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))    MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))       MACAddress address,
         uint16_t vid)
 {
 
@@ -407,12 +409,29 @@ void SRPTable::clear()
     for (unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin(); iter != talkerTables.end();
             ++iter)
     {
-        (*iter).second.clear();
+        TalkerTable table = (*iter).second;
+        for (TalkerTable::const_iterator j = table.begin(); j != table.end(); ++j)
+        {
+            TalkerEntry *entry = (*j).second;
+            delete entry;
+        }
+        table.clear();
     }
     for (unordered_map<unsigned int, ListenerTable>::iterator iter = listenerTables.begin();
             iter != listenerTables.end(); ++iter)
     {
-        (*iter).second.clear();
+        ListenerTable table = (*iter).second;
+        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
+        {
+            ListenerList llist = (*j).second;
+            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); ++k)
+            {
+                ListenerEntry *entry = (*k).second;
+                delete entry;
+            }
+            llist.clear();
+        }
+        table.clear();
     }
 }
 
