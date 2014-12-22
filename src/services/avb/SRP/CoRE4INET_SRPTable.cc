@@ -266,7 +266,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))  MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))    MACAddress address,
         uint16_t vid)
 {
 
@@ -406,7 +406,14 @@ void SRPTable::clear()
 {
     for (unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin(); iter != talkerTables.end();
             ++iter)
+    {
         (*iter).second.clear();
+    }
+    for (unordered_map<unsigned int, ListenerTable>::iterator iter = listenerTables.begin();
+            iter != listenerTables.end(); ++iter)
+    {
+        (*iter).second.clear();
+    }
 }
 
 unsigned int SRPTable::getNumTalkerEntries()
@@ -505,6 +512,7 @@ void SRPTable::removeAgedEntriesIfNeeded()
 
 SRPTable::~SRPTable()
 {
+    clear();
 }
 
 }
