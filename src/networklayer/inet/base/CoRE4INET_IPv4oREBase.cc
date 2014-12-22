@@ -51,6 +51,11 @@ IPv4oREBase::IPv4oREBase()
 
 IPv4oREBase::~IPv4oREBase()
 {
+    for(std::list<IPoREFilter*>::iterator i = m_filterList.begin(); i != m_filterList.end(); ++i){
+        IPoREFilter * filter = (*i);
+        delete filter;
+    }
+    m_filterList.clear();
 }
 
 //==============================================================================
