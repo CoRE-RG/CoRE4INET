@@ -25,10 +25,6 @@ Define_Module(MessageNumProfiler);
 
 MessageNumProfiler::MessageNumProfiler()
 {
-    this->level = 0;
-    this->calculate = false;
-    this->childmsg = 0;
-    this->over_modules = 0;
 }
 
 void MessageNumProfiler::initialize()
@@ -40,36 +36,24 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
 {
     cModule *sysmod = cSimulation::getActiveSimulation()->getSystemModule();
 
-    int i = 0;
-    this->level = 0;
-    this->childmsg = 0;
-    this->calculate = false;
-    this->out_stream.str("");
-    this->over_modules = 0;
     if (par("print_cerr").boolValue())
     {
         std::cerr << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-    }
-    else
-    {
-        EV_INFO << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-    }
-    sysmod->forEachChild(this);
-    if (par("print_cerr").boolValue())
-    {
-        std::cerr << out_stream.str() << endl;
+        std::cerr << printMessages(sysmod);
         std::cerr << "Profiling done!" << endl;
     }
     else
     {
-        EV_INFO << out_stream.str() << endl;
-        EV_INFO << "Profiling done!" << endl;
+        EV << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
+        EV << printMessages(sysmod);
+        EV << "Profiling done!" << endl;
     }
-    if (par("throw_error").boolValue() && this->over_modules)
+
+    if (par("throw_error").boolValue() && overModules(sysmod, par("max_messages").longValue()))
     {
         delete msg;
         throw cRuntimeError("Profiler found %d modules with more than the configured maximum of %d messages",
-                this->over_modules, par("max_messages").longValue());
+                overModules(sysmod, par("max_messages").longValue()), par("max_messages").longValue());
     }
 
     if (par("max_live_messages").longValue() > 0 && msg->getLiveMessageCount() > par("max_live_messages").longValue())
@@ -86,84 +70,99 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
         }
     }
     /*if (par("max_scheduled_messages").longValue() > 0 &&  > par("max_scheduled_messages").longValue())
-    {
-        if (par("throw_error").boolValue())
-        {
-            delete msg;
-            throw cRuntimeError("Profiler found %d live messages, more than the configured maximum of %d messages",
-                    msg->getLiveMessageCount(), par("max_live_messages").longValue());
-        }
-        else
-        {
-            //TODO
-        }
-    }*/
+     {
+     if (par("throw_error").boolValue())
+     {
+     delete msg;
+     throw cRuntimeError("Profiler found %d live messages, more than the configured maximum of %d messages",
+     msg->getLiveMessageCount(), par("max_live_messages").longValue());
+     }
+     else
+     {
+     //TODO
+     }
+     }*/
 
     scheduleAt(simTime() + SimTime(par("interval").doubleValue()), msg);
 }
 
-void MessageNumProfiler::visit(cObject *obj)
+size_t MessageNumProfiler::sumRecursiveMessages(cModule *root, bool onlyChild)
 {
-    if (cModule* mod = dynamic_cast<cModule*>(obj))
+    size_t sumMsg = 0;
+    if (!onlyChild)
     {
-        size_t children = 0;
-        bool tmp_calculate = this->calculate;
-        this->calculate = true;
-        mod->forEachChild(this);
-        this->calculate = tmp_calculate;
-        if (this->childmsg)
-        {
-            children = this->childmsg;
-        }
+        sumMsg += numMessages(root);
+    }
+    for (cModule::SubmoduleIterator i(root); !i.end(); i++)
+    {
+        cModule *submod = i();
+        sumMsg += sumRecursiveMessages(submod, false);
+    }
+    return sumMsg;
+}
 
-        int numMsg = 0;
-        for (int i = 0; i < mod->defaultListSize(); i++)
+size_t MessageNumProfiler::maxRecursiveMessages(cModule *root, bool onlyChild)
+{
+    size_t maxMsg = 0;
+    if (!onlyChild)
+    {
+        maxMsg = numMessages(root);
+    }
+    for (cModule::SubmoduleIterator i(root); !i.end(); i++)
+    {
+        cModule *submod = i();
+        int childMax = maxRecursiveMessages(submod, false);
+        if (childMax > maxMsg)
         {
-            cOwnedObject *owned = mod->defaultListGet(i);
-            if (dynamic_cast<cMessage*>(owned))
-            {
-                numMsg++;
-            }
-        }
-        if (this->calculate)
-        {
-            this->childmsg += numMsg;
-        }
-        else
-        {
-            if (numMsg > par("max_messages").longValue())
-            {
-                this->over_modules++;
-            }
-            if (children > par("max_messages").longValue() || numMsg > par("max_messages").longValue())
-            {
-                out_stream << std::string(this->level * 4, ' ') << obj->getFullName() << ": " << numMsg;
-                if (children)
-                {
-                    out_stream << " (" << children << " in children)";
-                }
-                out_stream << endl;
-                if (par("print_msgs").boolValue())
-                {
-                    for (int i = 0; i < mod->defaultListSize(); i++)
-                    {
-                        cOwnedObject *owned = mod->defaultListGet(i);
-                        if (cMessage * msg = dynamic_cast<cMessage*>(owned))
-                        {
-                            out_stream << std::string(this->level * 4, ' ') << "->" << msg->getClassName() << "("
-                                    << msg->getName() << ")" << endl;
-                            ;
-                        }
-                    }
-
-                }
-            }
-            this->level++;
-            this->childmsg = 0;
-            mod->forEachChild(this);
-            this->level--;
+            maxMsg = childMax;
         }
     }
+    return maxMsg;
+}
+
+size_t MessageNumProfiler::numMessages(cModule *module)
+{
+    size_t numMsg = 0;
+    for (int i = 0; i < module->defaultListSize(); i++)
+    {
+        cOwnedObject *owned = module->defaultListGet(i);
+        if (dynamic_cast<cMessage*>(owned))
+        {
+            numMsg++;
+        }
+    }
+    return numMsg;
+}
+
+size_t MessageNumProfiler::overModules(cModule *module, size_t limit)
+{
+    size_t over_modules = 0;
+    if (numMessages(module) > limit)
+    {
+        over_modules++;
+    }
+    for (cModule::SubmoduleIterator i(module); !i.end(); i++)
+    {
+        cModule *submod = i();
+        over_modules += overModules(submod, limit);
+    }
+    return over_modules;
+}
+
+std::string MessageNumProfiler::printMessages(cModule *root, size_t level)
+{
+    std::ostringstream oss;
+    if (maxRecursiveMessages(root, false) > par("max_messages").longValue())
+    {
+        oss << std::string(level * 4, ' ') << root->getFullName() << ": " << numMessages(root) << " ("
+                << sumRecursiveMessages(root, true) << " in children)" << endl;
+        for (cModule::SubmoduleIterator i(root); !i.end(); i++)
+        {
+            cModule *submod = i();
+            oss << printMessages(submod, level + 1);
+        }
+    }
+    return oss.str();
 }
 
 } //namespace

@@ -23,20 +23,22 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class MessageNumProfiler : public cSimpleModule, cVisitor
+class MessageNumProfiler : public cSimpleModule
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-  private:
-    size_t level;
-    bool calculate;
-    size_t childmsg;
-    std::ostringstream out_stream;
-    size_t over_modules;
-  public:
-    MessageNumProfiler();
-    virtual void visit(cObject *obj);
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+    private:
+        std::ostringstream out_stream;
+    private:
+
+        size_t sumRecursiveMessages(cModule *root, bool onlyChild=false);
+        size_t maxRecursiveMessages(cModule *root, bool onlyChild=false);
+        size_t numMessages(cModule *module);
+        size_t overModules(cModule *module, size_t limit);
+        std::string printMessages(cModule *root, size_t level = 0);
+    public:
+        MessageNumProfiler();
 };
 
 } //namespace
