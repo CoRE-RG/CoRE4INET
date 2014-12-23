@@ -39,13 +39,13 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
     if (par("print_cerr").boolValue())
     {
         std::cerr << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-        std::cerr << printMessages(sysmod);
+        std::cerr << printMessages(sysmod, par("max_messages").longValue(), par("print_msgs").boolValue());
         std::cerr << "Profiling done!" << endl;
     }
     else
     {
         EV << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-        EV << printMessages(sysmod);
+        EV << printMessages(sysmod, par("max_messages").longValue(), par("print_msgs").boolValue());
         EV << "Profiling done!" << endl;
     }
 
@@ -134,7 +134,7 @@ size_t MessageNumProfiler::numMessages(cModule *module)
     return numMsg;
 }
 
-size_t MessageNumProfiler::overModules(cModule *module, size_t limit)
+size_t MessageNumProfiler::overModules(cModule *root, size_t limit)
 {
     size_t over_modules = 0;
     if (numMessages(module) > limit)
@@ -149,17 +149,28 @@ size_t MessageNumProfiler::overModules(cModule *module, size_t limit)
     return over_modules;
 }
 
-std::string MessageNumProfiler::printMessages(cModule *root, size_t level)
+std::string MessageNumProfiler::printMessages(cModule *root, size_t limit, bool print_msgs, size_t level)
 {
     std::ostringstream oss;
-    if (maxRecursiveMessages(root, false) > par("max_messages").longValue())
+    if (maxRecursiveMessages(root, false) > limit)
     {
         oss << std::string(level * 4, ' ') << root->getFullName() << ": " << numMessages(root) << " ("
                 << sumRecursiveMessages(root, true) << " in children)" << endl;
+        if (print_msgs)
+        {
+            for (int i = 0; i < root->defaultListSize(); i++)
+            {
+                cOwnedObject *owned = root->defaultListGet(i);
+                if (cMessage *msg = dynamic_cast<cMessage*>(owned))
+                {
+                    oss << "***" << msg->getClassName() << "(" << msg->getFullName() << ")"<< endl;
+                }
+            }
+        }
         for (cModule::SubmoduleIterator i(root); !i.end(); i++)
         {
             cModule *submod = i();
-            oss << printMessages(submod, level + 1);
+            oss << printMessages(submod, print_msgs, level + 1);
         }
     }
     return oss.str();
