@@ -100,4 +100,3 @@ class MessageNumProfiler : public cSimpleModule
 } //namespace
 
 #endif
-O

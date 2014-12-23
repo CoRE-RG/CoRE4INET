@@ -137,11 +137,11 @@ size_t MessageNumProfiler::numMessages(cModule *module)
 size_t MessageNumProfiler::overModules(cModule *root, size_t limit)
 {
     size_t over_modules = 0;
-    if (numMessages(module) > limit)
+    if (numMessages(root) > limit)
     {
         over_modules++;
     }
-    for (cModule::SubmoduleIterator i(module); !i.end(); i++)
+    for (cModule::SubmoduleIterator i(root); !i.end(); i++)
     {
         cModule *submod = i();
         over_modules += overModules(submod, limit);
