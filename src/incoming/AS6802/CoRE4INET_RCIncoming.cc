@@ -48,7 +48,7 @@ void RCIncoming::handleMessage(cMessage *msg)
         {
             recordPacketReceived(etherframe);
 
-            uint64_t currentTotalTicks = timer->getTotalTicks();
+            uint64_t currentTotalTicks = getTimer()->getTotalTicks();
             //Now check for correct arrival:
             //Check too early
             if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))

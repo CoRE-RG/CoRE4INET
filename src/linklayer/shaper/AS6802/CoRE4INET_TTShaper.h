@@ -178,7 +178,7 @@ class TTShaper : public TC, public virtual Timed
          * @param message The message that should be transmitted
          * @returns true if transmission is allowed else false
          */
-        virtual bool isTransmissionAllowed(EtherFrame *message) const;
+        virtual bool isTransmissionAllowed(EtherFrame *message);
 
         /**
          * @brief Registers a time-triggered buffer that feeds the module.
@@ -247,7 +247,7 @@ template<class TC>
 void TTShaper<TC>::handleMessage(cMessage *msg)
 {
     //Frames arrived on in are rate-constrained frames
-    if (msg->arrivedOn("TTin"))
+    if (msg && msg->arrivedOn("TTin"))
     {
         TTBuffer *thisttBuffer;
         TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(msg->getSenderModule());
@@ -548,7 +548,7 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
 }
 
 template<class TC>
-bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message) const
+bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
 {
     if (!message || !TC::outChannel)
     {
@@ -563,13 +563,13 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message) const
     SimTime sendTime = TC::outChannel->calculateDuration(message);
     //Don't know if that is right, but it works!
     sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
-    unsigned long sendTicks = ceil((sendTime / oscillator->par("tick")).dbl());
+    unsigned long sendTicks = ceil((sendTime / getOscillator()->par("tick")).dbl());
     unsigned long startTicks = ttBuffers.begin()->first;
 
-    if ((timer->getTotalTicks() + sendTicks) >= startTicks)
+    if ((getTimer()->getTotalTicks() + sendTicks) >= startTicks)
     {
-        ev << "transmission not allowed! Send time would be from " << timer->getTotalTicks() << " to "
-                << timer->getTotalTicks() + sendTicks << " tt_window starts at: " << startTicks << endl;
+        ev << "transmission not allowed! Send time would be from " << getTimer()->getTotalTicks() << " to "
+                << getTimer()->getTotalTicks() + sendTicks << " tt_window starts at: " << startTicks << endl;
         return false;
     }
     return true;

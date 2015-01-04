@@ -59,7 +59,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             recordPacketReceived(etherframe);
 
             //get current time in cylce
-            uint32_t currentTicks = period->getTicks();
+            uint32_t currentTicks = getPeriod()->getTicks();
             //Now check for correct arrival:
             if (frame != NULL)
             {
@@ -129,7 +129,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
                     event->setAction_time((uint32_t) permanence_pit);
                     event->setDestinationGate(gate("schedulerIn"));
-                    period->registerEvent(event);
+                    getPeriod()->registerEvent(event);
                 }
                 else
                 {
@@ -163,15 +163,15 @@ void TTIncoming::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "receive_window_start"))
     {
-        this->receive_window_start = parameterLongCheckRange(par("receive_window_start"), -1, period->getCycleTicks());
+        this->receive_window_start = parameterLongCheckRange(par("receive_window_start"), -1, getPeriod()->getCycleTicks());
     }
     if (!parname || !strcmp(parname, "receive_window_end"))
     {
-        this->receive_window_end = parameterLongCheckRange(par("receive_window_end"), -1, period->getCycleTicks());
+        this->receive_window_end = parameterLongCheckRange(par("receive_window_end"), -1, getPeriod()->getCycleTicks());
     }
     if (!parname || !strcmp(parname, "permanence_pit"))
     {
-        this->permanence_pit = parameterLongCheckRange(par("permanence_pit"), -1, period->getCycleTicks());
+        this->permanence_pit = parameterLongCheckRange(par("permanence_pit"), -1, getPeriod()->getCycleTicks());
     }
 
 }

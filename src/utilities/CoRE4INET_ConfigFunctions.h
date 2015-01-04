@@ -26,6 +26,26 @@
 namespace CoRE4INET {
 
 /**
+ * @brief Extended version of inets findModuleWhereverInNode
+ *
+ * Find a module with given name, and "closest" to module "from".
+ *
+ * Operation: gradually rises in the module hierarchy up to the @node
+ * module, and searches recursively among all submodules at every level.
+ *
+ * @param name Module name to find. Also allowed: "this" if caller is not NULL and "auto" if type is not NULL
+ * @param from Module to start search
+ * @param caller If name is "this" and caller is not NULL; caller is returned
+ * @param type If name is "auto" and type is not NULL; the first module with type is returned
+ * @return cModule* containing the found module or NULL.
+ *
+ * @throws cRuntimeError When name is this and caller is NULL or when name is "auto" and type is NULL
+ *
+ * @author Till Steinbach
+ */
+cModule *extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *caller = NULL, cModuleType *type = NULL);
+
+/**
  * @brief Retrieves a vector of modules from a given parameter that contains a string with delimiters
  *
  * @param parameter A string parameter that must be owned by a cModule object

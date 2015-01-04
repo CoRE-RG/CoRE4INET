@@ -25,6 +25,30 @@
 
 namespace CoRE4INET {
 
+cModule *extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *caller, cModuleType *type)
+{
+    if (strcmp(name, "this") == 0)
+    {
+        if (!caller)
+        {
+            throw cRuntimeError("this parameter cannot be used in this module");
+        }
+        return caller;
+    }
+    else if (type && strcmp(name, "auto") == 0)
+    {
+        if (!type)
+        {
+            throw cRuntimeError("auto parameter cannot be used in this module");
+        }
+        return NULL;
+    }
+    else
+    {
+        return findModuleWhereverInNode(name, from);
+    }
+}
+
 std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::string &delimiters)
 {
     std::vector<cModule*> modules;
@@ -49,7 +73,7 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
         {
             throw cRuntimeError(
                     "Configuration problem of parameter %s in module %s: The requested module: %s could not be resolved!",
-                    owner->getFullPath().c_str(), parameter.getName(), (*path).c_str());
+                    parameter.getName(), owner->getFullPath().c_str(), (*path).c_str());
         }
     }
     return modules;
@@ -79,12 +103,11 @@ std::vector<cGate*> parameterToGateList(const cPar &parameter, const std::string
         {
             throw cRuntimeError(
                     "Configuration problem of parameter %s in module %s: The requested gate: %s could not be resolved!",
-                    owner->getFullPath().c_str(), parameter.getName(), (*path).c_str());
+                    parameter.getName(), owner->getFullPath().c_str(), (*path).c_str());
         }
     }
     return gates;
 }
-
 
 long parameterLongCheckRange(const cPar &parameter, long min, long max, bool exclude_min, bool exclude_max)
 {

@@ -27,7 +27,7 @@ void BaseInControl::initialize()
 
 void BaseInControl::setParameters(EtherFrame *frame)
 {
-    if (frame && timer)
+    if (frame)
     {
         int i = frame->findPar("received_total");
         cMsgPar* par;
@@ -35,7 +35,7 @@ void BaseInControl::setParameters(EtherFrame *frame)
             par = &frame->par(i);
         else
             par = &frame->addPar("received_total");
-        par->setLongValue((long) timer->getTotalTicks());
+        par->setLongValue((long) getTimer()->getTotalTicks());
 
         i = frame->findPar("received_port");
         if (i >= 0)

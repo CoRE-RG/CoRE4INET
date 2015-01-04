@@ -41,7 +41,7 @@ void TicApp::initialize()
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
     event->setAction_time((uint32_t) par("action_time").longValue());
     event->setDestinationGate(gate("schedulerIn"));
-    period->registerEvent(event);
+    getPeriod()->registerEvent(event);
 }
 
 void TicApp::handleMessage(cMessage *msg)
@@ -70,7 +70,7 @@ void TicApp::handleMessage(cMessage *msg)
 
         SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *) msg;
         event->setNext_cycle(true);
-        period->registerEvent(event);
+        getPeriod()->registerEvent(event);
     }
     else if (msg->arrivedOn("RCin"))
     {
@@ -87,6 +87,11 @@ void TicApp::handleMessage(cMessage *msg)
     {
         delete msg;
     }
+}
+
+void TicApp::handleParameterChange(const char* parname){
+    CTApplicationBase::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
 }
 
 }

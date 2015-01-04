@@ -62,13 +62,13 @@ void TTTrafficSourceApp::initialize()
         event->setAction_time((uint32_t) (par("action_time").doubleValue() / oscillator->par("tick").doubleValue()));
         event->setDestinationGate(gate("schedulerIn"));
 
-        if (event->getAction_time() >= (uint32_t) period->par("cycle_ticks").longValue())
+        if (event->getAction_time() >= getPeriod()->getCycleTicks())
         {
             throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)",
-                    event->getAction_time(), period->par("cycle_ticks").longValue());
+                    event->getAction_time(), getPeriod()->getCycleTicks());
         }
 
-        period->registerEvent(event);
+        getPeriod()->registerEvent(event);
     }
     synchronized = false;
 
@@ -89,7 +89,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
 
         SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
         event->setNext_cycle(true);
-        period->registerEvent(event);
+        getPeriod()->registerEvent(event);
     }
     else
     {

@@ -59,13 +59,13 @@ void TTBuffer::initialize(int stage)
         actionTimeEvent->setAction_time((uint32_t) par("sendWindowStart").longValue());
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
 
-        if ((uint32_t) par("sendWindowStart").longValue() >= (uint32_t) period->par("cycle_ticks").longValue())
+        if ((uint32_t) par("sendWindowStart").longValue() >= getPeriod()->getCycleTicks())
         {
             throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
-                    par("sendWindowStart").longValue(), period->par("cycle_ticks").longValue());
+                    par("sendWindowStart").longValue(), getPeriod()->getCycleTicks());
         }
 
-        nextAction = period->registerEvent(actionTimeEvent);
+        nextAction = getPeriod()->registerEvent(actionTimeEvent);
 
         return;
     }
@@ -111,7 +111,7 @@ void TTBuffer::handleMessage(cMessage *msg)
         }
         //Reregister scheduler
         static_cast<SchedulerActionTimeEvent *>(msg)->setNext_cycle(true);
-        nextAction = period->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
+        nextAction = getPeriod()->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
     }
 }
 
@@ -137,5 +137,5 @@ uint64_t TTBuffer::nextSendWindowStart() const
 
 long TTBuffer::getRequiredBandwidth()
 {
-    return (long) ceil((getMaxMessageSize() * 8) * (1 / (period->getCycleLength().dbl())));
+    return (long) ceil((getMaxMessageSize() * 8) * (1 / (getPeriod()->getCycleLength().dbl())));
 }

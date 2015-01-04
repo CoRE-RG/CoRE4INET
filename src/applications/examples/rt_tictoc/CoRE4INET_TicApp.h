@@ -42,6 +42,12 @@ class TicApp : public CTApplicationBase, public virtual Scheduled
          * @brief Handles message generation and reception
          */
         virtual void handleMessage(cMessage *msg);
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
     protected:
         /**
          * Signal that is emitted every time a toc was received.

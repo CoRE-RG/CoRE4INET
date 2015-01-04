@@ -15,6 +15,8 @@
 
 package core4inet.scheduler.oscillator;
 
+import core4inet.utilities.classes.IScheduled;
+
 //
 // Module representing an oscillator with a simple clock drift behavior.
 // The module schedules a message for every cycle at action_point 0 and then changes the drift by using the drift_change
@@ -24,7 +26,7 @@ package core4inet.scheduler.oscillator;
 //
 // @author Till Steinbach
 //
-simple SimpleOscillator extends Oscillator
+simple SimpleOscillator extends Oscillator like IScheduled
 {
     parameters:
         @class(SimpleOscillator);
@@ -34,6 +36,10 @@ simple SimpleOscillator extends Oscillator
         volatile double drift_change @unit(ppm) = default(uniform(12.5ppm,12.5ppm));
         // Period related to the clock drift update
         string period = default("period[0]");
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node)
+        string oscillator = "this";
+        //Timer of the timed module (must be set to the name of an timer module in the Node)
+        string timer = default("timer");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

@@ -15,26 +15,58 @@
 
 #include "CoRE4INET_Timed.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 //INET
 #include "ModuleAccess.h"
 
 using namespace CoRE4INET;
 
-void Timed::initialize()
+Oscillator* Timed::getOscillator()
 {
-    timer = dynamic_cast<Timer*>(findModuleWhereverInNode(par("timer").stringValue(), getParentModule()));
-    ASSERT2(timer, "cannot find timer!");
-    oscillator =
-            dynamic_cast<Oscillator*>(findModuleWhereverInNode(par("oscillator").stringValue(), getParentModule()));
-    ASSERT2(oscillator, "cannot find oscillator!");
-}
-
-Oscillator* Timed::getOscillator() const
-{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
     return oscillator;
 }
 
-Timer* Timed::getTimer() const
+Timer* Timed::getTimer()
 {
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
     return timer;
+}
+
+void Timed::handleParameterChange(const char* parname)
+{
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "timer"))
+    {
+        this->timer = dynamic_cast<Timer*>(extendedFindModuleWhereverInNode(par("timer").stringValue(),
+                getParentModule(), this, cModuleType::get("core4inet.scheduler.timer")));
+        if (!this->timer)
+        {
+            throw cRuntimeError(
+                    "Configuration problem of parameter %s in module %s: The requested timer module: %s could not be found!",
+                    parname, this->getFullPath().c_str(), par("period").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "oscillator"))
+    {
+        this->oscillator = dynamic_cast<Oscillator*>(extendedFindModuleWhereverInNode(par("oscillator").stringValue(),
+                getParentModule(), this, cModuleType::get("core4inet.scheduler.oscillator")));
+        if (!this->oscillator)
+        {
+            throw cRuntimeError(
+                    "Configuration problem of parameter %s in module %s: The requested oscillator module: %s could not be found!",
+                    parname, this->getFullPath().c_str(), par("period").stringValue());
+        }
+    }
 }

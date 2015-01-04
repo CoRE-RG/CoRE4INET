@@ -213,7 +213,7 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if (pcf)
             {
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), getTimer());
             }
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
@@ -296,7 +296,7 @@ cMessage* RCShaper<TC>::pop()
             PCFrame *pcf = dynamic_cast<PCFrame*>(message);
             if (pcf)
             {
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), getTimer());
             }
             return message;
         }

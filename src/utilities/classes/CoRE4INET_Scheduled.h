@@ -31,22 +31,29 @@ namespace CoRE4INET {
  */
 class Scheduled : public Timed
 {
-    protected:
+    private:
+        /**
+         * Checks whether the parameters were already initialized
+         */
+        bool parametersInitialized;
+
         /**
          * The period related to the actions of this module default is period[0]
          */
         Period *period;
 
+    protected:
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
     public:
         /**
          * @brief Constructor of Scheduled
          */
         Scheduled();
-
-        /**
-         * @brief Initialization of the module sets period[0] when parameter period is empty
-         */
-        void initialize();
 
         /**
          * returns pointer to the configured period

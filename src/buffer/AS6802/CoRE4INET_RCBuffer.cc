@@ -99,7 +99,7 @@ void RCBuffer::handleMessage(cMessage *msg)
                     sendDirect(outgoingMessage->dup(), *gate);
                 }
                 recordPacketSent(outgoingMessage);
-                lastSent = timer->getTotalTicks();
+                lastSent = getTimer()->getTotalTicks();
                 delete outgoingMessage;
             }
             else
@@ -145,7 +145,7 @@ void RCBuffer::resetBag()
     if (numReset == destinationGates.size())
     {
         //Jitter calculations: fo frame delay
-        uint64_t delay = timer->getTotalTicks() - lastSent;
+        uint64_t delay = getTimer()->getTotalTicks() - lastSent;
         //If last frame was delayed more than jitter parameter set delay to jitter
         if (delay > jitter)
         {
@@ -164,13 +164,13 @@ void RCBuffer::resetBag()
             timerMessage->setTimer(bag - delay);
         }
         timerMessage->setDestinationGate(gate("schedulerIn"));
-        timer->registerEvent(timerMessage);
+        getTimer()->registerEvent(timerMessage);
     }
 }
 
 long RCBuffer::getRequiredBandwidth()
 {
-    return (long) ceil((getMaxMessageSize() * 8) * (1 / (this->bag * oscillator->getPreciseTick())));
+    return (long) ceil((getMaxMessageSize() * 8) * (1 / (this->bag * getOscillator()->getPreciseTick())));
 }
 
 } //namespace
