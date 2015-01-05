@@ -25,11 +25,11 @@ ifeq ($(CC),clang)
     CFLAGS += -Wall -Wunused -Wextra -Wdocumentation
 else ifeq ($(CC),gcc)
 	#gcc
-    CFLAGS += -Wall -Wunused -Wextra
+    CFLAGS += -Wall -Wunused -Wextra -Wno-error=unused-parameter
 endif
 
 #Warnings generate errors
-#CFLAGS += -Werror
+CFLAGS += -Werror
 
 
 
