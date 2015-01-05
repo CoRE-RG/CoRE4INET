@@ -34,6 +34,10 @@ class BaseInControl : public virtual cSimpleModule, public Timed
 {
     private:
         /**
+         * @brief True if parameters were initialized
+         */
+        bool parametersInitialized;
+        /**
          * @brief caches promiscuous parameter
          */
         bool promiscuous;
@@ -53,6 +57,7 @@ class BaseInControl : public virtual cSimpleModule, public Timed
          */
         BaseInControl()
         {
+            parametersInitialized = false;
             promiscuous = false;
             hadError = false;
         }
@@ -72,13 +77,26 @@ class BaseInControl : public virtual cSimpleModule, public Timed
          *
          * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
-        virtual void handleParameterChange(__attribute((unused)) const char* parname)
+        virtual void handleParameterChange(const char* parname)
         {
-            promiscuous = par("promiscuous").boolValue();
+            Timed::handleParameterChange(parname);
+
+            if (!parametersInitialized)
+            {
+                parametersInitialized = true;
+            }
+            if (!parname || !strcmp(parname, "promiscuous"))
+            {
+                this->promiscuous = par("promiscuous").boolValue();
+            }
         }
 
         bool isPromiscuous()
         {
+            if (!parametersInitialized)
+            {
+                handleParameterChange(NULL);
+            }
             return promiscuous;
         }
     protected:

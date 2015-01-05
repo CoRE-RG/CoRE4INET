@@ -31,12 +31,49 @@ namespace CoRE4INET {
  */
 class TrafficSourceAppBase : public virtual ApplicationBase
 {
+    private:
+        /**
+         * Caches enabled parameter
+         */
+        bool enabled;
+        /**
+         * Caches payload parameter
+         */
+        size_t payload;
+    public:
+        /**
+         * @brief Constructor of TrafficSourceAppBase
+
+         */
+        TrafficSourceAppBase();
+
+        /**
+         * @brief Indicated that TrafficSource is enabled
+         *
+         * @return true when enabled, otherwise false
+         */
+        bool isEnabled();
+
+        /**
+         * @brief Returns the number of bytes of the payload desired
+         *
+         * @return Size of payload in bytes
+         */
+        size_t getPayloadBytes();
+
     protected:
+
         /**
          * @brief Initialization of the module. Sends activator message
          */
         virtual void initialize();
 
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         *         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

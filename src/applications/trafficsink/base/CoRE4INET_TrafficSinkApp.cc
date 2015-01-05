@@ -30,10 +30,7 @@ void TrafficSinkApp::handleMessage(cMessage *msg)
 
     if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(msg))
     {
-        if (frame)
-        {
-            emit(rxPkSignal, frame);
-        }
+        emit(rxPkSignal, frame);
     }
     delete msg;
 }

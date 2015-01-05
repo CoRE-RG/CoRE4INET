@@ -70,9 +70,8 @@ template<class Base>
 void IPv4oRC<Base>::sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie)
 {
     // Check for matching filters
-    bool filterMatch = true;
     std::list<IPoREFilter*> matchingFilters;
-    filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_RC);
+    bool filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_RC);
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
@@ -132,7 +131,7 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                 std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
                 std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
                 std::list<RCBuffer*> destCtBuffers;
-                for (  ; bufferPath != bufferPaths.end(); bufferPath++)
+                for (  ; bufferPath != bufferPaths.end(); ++bufferPath)
                 {
                     cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
                     if (!module) {

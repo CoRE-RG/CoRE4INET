@@ -23,7 +23,6 @@
 //INET Auto-generated Messages
 #include "EtherFrame_m.h"
 
-
 namespace CoRE4INET {
 
 class ApplicationBase;
@@ -76,9 +75,9 @@ class Buffer : public virtual cSimpleModule
         std::list<cGate*> destinationGates;
 
         /**
-         * Chaches the maximum message size
+         * Caches the maximum message size
          */
-        unsigned int maxMessageSize;
+        size_t maxMessageSize;
 
     protected:
         /**
@@ -174,7 +173,7 @@ class Buffer : public virtual cSimpleModule
          * @return number of messages in the buffer
          *
          */
-        virtual unsigned int size() const = 0;
+        virtual size_t size() const = 0;
 
         /**
          * @brief Resets the buffer, deletes all messages
@@ -182,6 +181,13 @@ class Buffer : public virtual cSimpleModule
          *
          */
         virtual void clear() = 0;
+
+        /**
+         * @brief Returns the maximum message size allowed in the buffer
+         *
+         * @return Maximum message size allowed in the buffer
+         */
+        virtual size_t getMaxMessageSize();
 
     protected:
         /**

@@ -43,11 +43,24 @@ class TTIncoming : public CTIncoming, Scheduled
          */
         inet::EtherFrame *frame;
 
+        /**
+         * @brief Caches receive_window_start parameter
+         */
+        long receive_window_start;
+        /**
+         * @brief Caches receive_window_end parameter
+         */
+        long receive_window_end;
+        /**
+         * @brief Caches permanence_pit parameter
+         */
+        long permanence_pit;
     public:
         /**
          * @brief Constructor
          */
         TTIncoming();
+
         /**
          * @brief Destructor
          */
@@ -69,6 +82,13 @@ class TTIncoming : public CTIncoming, Scheduled
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

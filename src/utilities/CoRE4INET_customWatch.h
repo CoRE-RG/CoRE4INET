@@ -59,12 +59,12 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             it = m.begin();
             it2 = (*it).second.begin();
             while (index <= i)
             {
-                if (i > (index + (*it).second.size()))
+                if (i > (index + (int)(*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -184,7 +184,7 @@ template<class KeyT, class ValueT>
 class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 {
     public:
-        cStdListUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
+        cStdListUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
             cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
 
         {
@@ -203,7 +203,7 @@ class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 };
 
 template<class KeyT, class ValueT>
-void createStdListUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
+void createStdListUMapWatcher(const char *varname, unordered_map<KeyT, ValueT>& m)
 {
     new cStdListUMapWatcher<KeyT, ValueT>(varname, m);
 }
@@ -392,7 +392,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
         }
         virtual std::string at(int i) const
         {
-            unsigned int index = 0;
+            int index = 0;
             this->it = this->m.begin();
             this->it2 = (*this->it).second.begin();
             it3 = (*this->it2).second.begin();

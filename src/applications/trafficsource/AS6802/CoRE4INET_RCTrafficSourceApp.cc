@@ -17,6 +17,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_Timer.h"
+#include "CoRE4INET_ConfigFunctions.h"
 //INET
 #include "ModuleAccess.h"
 
@@ -24,35 +25,37 @@ namespace CoRE4INET {
 
 Define_Module(RCTrafficSourceApp);
 
+RCTrafficSourceApp::RCTrafficSourceApp()
+{
+    this->interval = 0;
+}
+
 void RCTrafficSourceApp::initialize()
 {
     CTTrafficSourceAppBase::initialize();
 
-    if (par("enabled").boolValue())
+    handleParameterChange(NULL);
+    if (isEnabled())
     {
-        Timer *timer = dynamic_cast<Timer*>(inet::findModuleWhereverInNode("timer", getParentModule()));
-        ASSERT(timer);
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        tick = inet::findModuleWhereverInNode("oscillator", getParentModule())->par("tick").doubleValue();
-        event->setTimer((uint64_t) (par("interval").doubleValue() / tick));
+
+        event->setTimer((uint64_t) (this->interval / getOscillator()->getPreciseTick()));
         event->setDestinationGate(gate("schedulerIn"));
-        timer->registerEvent(event);
+        getTimer()->registerEvent(event);
     }
 }
 
 void RCTrafficSourceApp::handleMessage(cMessage *msg)
 {
 
-    CTApplicationBase::handleMessage(msg);
+    CTTrafficSourceAppBase::handleMessage(msg);
     if (msg->arrivedOn("schedulerIn"))
     {
         sendMessage();
 
-        Timer *timer = dynamic_cast<Timer*>(msg->getSenderModule());
-        ASSERT(timer);
         SchedulerTimerEvent *event = (SchedulerTimerEvent *) msg;
-        event->setTimer((uint64_t) (par("interval").doubleValue() / tick));
-        timer->registerEvent(event);
+        event->setTimer((uint64_t) (this->interval / getOscillator()->getPreciseTick()));
+        getTimer()->registerEvent(event);
     }
     else
     {
@@ -60,4 +63,16 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg)
     }
 }
 
-} //namespace
+void RCTrafficSourceApp::handleParameterChange(const char* parname)
+{
+    CTTrafficSourceAppBase::handleParameterChange(parname);
+    Timed::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "interval"))
+    {
+        this->interval = parameterDoubleCheckRange(par("interval"), 0, MAXTIME.dbl(), true);
+    }
+}
+
+}
+ //namespace

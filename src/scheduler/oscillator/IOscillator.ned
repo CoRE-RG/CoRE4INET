@@ -27,13 +27,11 @@ moduleinterface IOscillator
     parameters:
         @display("i=block/mac");
 	    //Signal emitted when drift changes, contains new drift
-        @signal[currentDrift](type=double);
+        @signal[currentDrift](type=simtime_t);
 	    //Statistic of the current drift (Difference of configured and actual tick length in seconds)
         @statistic[currentDrift](title="Current drift"; unit=s; record=vector);
 	    // Length of a tick
         double tick @unit(s);
-        // Current length of a tick (with imprecission)
-        volatile double current_tick @unit(s);
     gates:
         //Output to the timer module (currently unused)
         output out;

@@ -15,17 +15,35 @@
 
 #include "CoRE4INET_Oscillator.h"
 
+//CoRE4INET
+#include "CoRE4INET_Defs.h"
+#include "CoRE4INET_ConfigFunctions.h"
+
+//INET
+#include "Compat.h"
+
+//OMNeT
+#include "cwatch.h"
+
 namespace CoRE4INET {
 
 Define_Module(Oscillator);
 
 simsignal_t Oscillator::currentDrift = SIMSIGNAL_NULL;
 
+Oscillator::Oscillator()
+{
+    this->tick = 0;
+    this->current_tick = 0;
+    this->parametersInitialized = false;
+}
+
 void Oscillator::initialize(int stage)
 {
     if (stage == 0)
     {
         currentDrift = registerSignal("currentDrift");
+        WATCH(this->current_tick);
     }
 }
 
@@ -34,13 +52,35 @@ int Oscillator::numInitStages() const
     return 1;
 }
 
-simtime_t Oscillator::getTick() const
+void Oscillator::handleParameterChange(const char* parname)
 {
-    return SimTime(par("current_tick").doubleValue());
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "tick"))
+    {
+        this->tick = SimTime(parameterDoubleCheckRange(par("tick"), 0, MAX_TICK_LENGTH));
+        this->current_tick = this->tick;
+    }
 }
-simtime_t Oscillator::getPreciseTick() const
+
+void Oscillator::setCurrentTick(simtime_t tick_length)
 {
-    return SimTime(par("tick").doubleValue());
+    this->current_tick = tick_length;
+}
+
+simtime_t Oscillator::getCurrentTick() const
+{
+    return this->current_tick;
+}
+simtime_t Oscillator::getPreciseTick()
+{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->tick;
 }
 
 } //namespace

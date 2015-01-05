@@ -18,6 +18,7 @@
 //CoRE4INET
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_BGBuffer.h"
+#include "CoRE4INET_ConfigFunctions.h"
 
 //INET
 #include "ModuleAccess.h"
@@ -26,43 +27,39 @@ namespace CoRE4INET {
 
 Define_Module(ApplicationBase);
 
-void ApplicationBase::initialize() {
+void ApplicationBase::initialize()
+{
     WATCH_LIST(bgbuffers);
 
     std::string displayName = par("displayName").stdstringValue();
-    if (displayName.length()) {
+    if (displayName.length())
+    {
         getDisplayString().setTagArg("t", 0, displayName.c_str());
     }
 }
 
-void ApplicationBase::handleMessage(cMessage *msg) {
+void ApplicationBase::handleMessage(__attribute__((unused))  cMessage *msg)
+{
 }
 
-void ApplicationBase::handleParameterChange(
-        __attribute__((unused)) const char* parname) {
-    bgbuffers.clear();
-    std::vector<std::string> bufferPaths = cStringTokenizer(
-            par("buffers").stringValue(), DELIMITERS).asVector();
-    for (std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
-            bufferPath != bufferPaths.end(); bufferPath++) {
-        cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
-        if (!module) {
-            module = inet::findModuleWhereverInNode((*bufferPath).c_str(), this);
-        }
-        if (module) {
-            if (inet::findContainingNode(module) != inet::findContainingNode(this)) {
+void ApplicationBase::handleParameterChange(const char* parname)
+{
+    if (!parname || !strcmp(parname, "buffers"))
+    {
+        bgbuffers.clear();
+        std::vector<cModule*> modules = parameterToModuleList(par("buffers"), DELIMITERS);
+        for (std::vector<cModule*>::const_iterator module = modules.begin(); module != modules.end(); ++module)
+        {
+            if (findContainingNode(*module) != findContainingNode(this))
+            {
                 throw cRuntimeError(
-                        "Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*bufferPath).c_str(),
-                        inet::findContainingNode(this)->getFullName());
+                        "Configuration problem of parameter buffers in module %s: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                        this->getFullName(), (*module)->getFullName(), findContainingNode(this)->getFullName());
             }
-            if (BGBuffer *buffer = dynamic_cast<BGBuffer*>(module)) {
+            if (BGBuffer *buffer = dynamic_cast<BGBuffer*>(*module))
+            {
                 bgbuffers.push_back(buffer);
             }
-        } else {
-            throw cRuntimeError(
-                    "Configuration problem of buffers: Module: %s could not be resolved!",
-                    (*bufferPath).c_str());
         }
     }
 }

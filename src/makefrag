@@ -3,5 +3,12 @@
 #CFLAGS += -Wall -Werror -Wunused -Wdocumentation
 #CFLAGS += -Wall -Werror -Wunused -Weverything -Wno-c++11-long-long -Wno-c++11-extra-semi -Wno-weak-vtables -Wno-shadow -Wno-global-constructors -Wno-exit-time-destructors -Wno-pedantic -Wno-missing-prototypes -Wno-used-but-marked-unused
 #COPTS := $(subst -isystem .,-I.,$(subst -I,-isystem ,$(COPTS)))
+#INCLUDE_PATH := $(subst -isystem ../../inet .,-I../../inet.,$(subst -I../../inet,-isystem ../../inet,$(INCLUDE_PATH)))
 #CC = clang
 #CXX = clang++
+
+UNAME_S := $(shell uname -s)
+#For OS X
+ifeq ($(UNAME_S),Darwin)
+    LDFLAGS += -headerpad_max_install_names 
+endif

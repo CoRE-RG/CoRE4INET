@@ -15,23 +15,48 @@
 
 #include "CoRE4INET_Scheduled.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 //INET
 #include "ModuleAccess.h"
 
 using namespace CoRE4INET;
 
-void Scheduled::initialize()
+Scheduled::Scheduled()
 {
-    Timed::initialize();
-    if (par("period").stdstringValue().length() == 0)
-    {
-        par("period").setStringValue("period[0]");
-    }
-    period = dynamic_cast<Period*>(inet::findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
-    ASSERT2(period, "cannot find period, you should specify it!");
+    this->period = NULL;
+    this->parametersInitialized = false;
 }
 
-Period* Scheduled::getPeriod() const
+Period* Scheduled::getPeriod()
 {
-    return period;
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->period;
+}
+
+void Scheduled::handleParameterChange(const char* parname)
+{
+    Timed::handleParameterChange(parname);
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "period"))
+    {
+        if (par("period").stdstringValue().length() == 0)
+        {
+            par("period").setStringValue("period[0]");
+        }
+        this->period = extendedFindModuleWhereverInNode<Period*>(par("period").stringValue(), getParentModule(), this);
+        if (!this->period)
+        {
+            throw cRuntimeError(
+                    "Configuration problem of parameter period in module %s: The requested period module: %s could not be found!",
+                    this->getFullPath().c_str(), par("period").stringValue());
+        }
+    }
 }

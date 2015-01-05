@@ -18,6 +18,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_CTTrafficSourceAppBase.h"
+#include "CoRE4INET_Timed.h"
 
 namespace CoRE4INET {
 
@@ -30,10 +31,13 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase
+class RCTrafficSourceApp : public CTTrafficSourceAppBase, public Timed
 {
-    private:
-        double tick;
+        /**
+         * @brief Caches interval parameter
+         */
+        double interval;
+
     protected:
         /**
          * @brief Initialization of the module. Sends activator message
@@ -44,7 +48,12 @@ class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase
          */
         virtual void handleMessage(cMessage *msg);
     public:
-        using TrafficSourceAppBase::handleParameterChange;
+        /**
+         * @brief constructor for RCTrafficSourceApp
+         */
+        RCTrafficSourceApp();
+
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

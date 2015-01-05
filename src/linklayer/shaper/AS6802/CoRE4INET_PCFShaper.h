@@ -103,7 +103,6 @@ class PCFShaper : public TC, public virtual Timed
          * one. Else it saves the state and sends the message immediately when it is
          * received.
          *
-         * @param msg the message to be queued
          */
         virtual void requestPacket();
 
@@ -189,7 +188,7 @@ void PCFShaper<TC>::handleMessage(cMessage *msg)
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if (pcf)
             {
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), getTimer());
             }
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
@@ -255,7 +254,7 @@ cMessage* PCFShaper<TC>::pop()
         PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
         if (pcf)
         {
-            setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
+            setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), getTimer());
         }
         return msg;
     }

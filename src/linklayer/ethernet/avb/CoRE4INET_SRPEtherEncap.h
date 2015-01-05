@@ -16,28 +16,25 @@
 #ifndef CORE4INET_SRPETHERENCAP_H_
 #define CORE4INET_SRPETHERENCAP_H_
 
-
 #include "CoRE4INET_BGEtherEncap.h"
 
 #include "SRPFrame_m.h"
 #include "EtherFrame_m.h"
 
-
 namespace CoRE4INET {
 
-
-class SRPEtherEncap : public BGEtherEncap{
-
+class SRPEtherEncap : public BGEtherEncap
+{
 
     public:
         SRPEtherEncap();
         virtual ~SRPEtherEncap();
 
-
     protected:
-      virtual void handleMessage(cMessage *msg);
-      void dispatchSRP(SRPFrame * srp);
-      void deliverSRP(inet::EtherFrame * frame);
+        virtual void handleMessage(cMessage *msg);
+    private:
+        void dispatchSRP(SRPFrame * srp);
+        void deliverSRP(EtherFrame * frame);
 
 };
 

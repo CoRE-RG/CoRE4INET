@@ -44,7 +44,7 @@ void BGBuffer::handleMessage(cMessage *msg)
 {
     Buffer::handleMessage(msg);
 
-    if (msg->arrivedOn("in") && destinationGates.size() > 0)
+    if (msg && msg->arrivedOn("in") && !destinationGates.empty())
     {
         if (inet::EtherFrame *outgoingMessage = dequeue())
         {
@@ -59,18 +59,18 @@ void BGBuffer::handleMessage(cMessage *msg)
                 send(outgoingMessage->dup(), "out");
             }
             recordPacketSent(outgoingMessage);
-            delete msg;
         }
+        delete msg;
     }
-    else if (msg->arrivedOn("in") && gate("out")->isConnected())
+    else if (msg && msg->arrivedOn("in") && gate("out")->isConnected())
     {
         if (inet::EtherFrame *outgoingMessage = dequeue())
         {
             send(outgoingMessage->dup(), "out");
 
             recordPacketSent(outgoingMessage);
-            delete msg;
         }
+        delete msg;
     }
 }
 

@@ -33,11 +33,14 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TTTrafficSourceApp : public CTTrafficSourceAppBase,
-        public Scheduled,
-        public cListener
+class TTTrafficSourceApp : public CTTrafficSourceAppBase, public Scheduled, public cListener
 {
     private:
+        /**
+         * @brief Caches modulo parameter
+         */
+        unsigned int modulo;
+
         /**
          * @brief frame is only sent every modulo cycle
          */
@@ -68,10 +71,15 @@ class TTTrafficSourceApp : public CTTrafficSourceAppBase,
          */
         virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
 
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
+
     public:
         TTTrafficSourceApp();
-    public:
-        using TrafficSourceAppBase::handleParameterChange;
 };
 
 } //namespace

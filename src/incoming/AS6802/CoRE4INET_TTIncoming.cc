@@ -15,6 +15,9 @@
 
 #include "CoRE4INET_TTIncoming.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 //INET
 #include "ModuleAccess.h"
 //Auto-generated Messages
@@ -27,7 +30,10 @@ Define_Module(TTIncoming);
 TTIncoming::TTIncoming() :
         CTIncoming::CTIncoming()
 {
-    frame = NULL;
+    this->frame = NULL;
+    this->receive_window_start = 0;
+    this->receive_window_end = 0;
+    this->permanence_pit = 0;
 }
 
 TTIncoming::~TTIncoming()
@@ -40,112 +46,133 @@ TTIncoming::~TTIncoming()
 
 void TTIncoming::initialize()
 {
-    if (par("period").stdstringValue().length() == 0)
-    {
-        par("period").setStringValue("period[0]");
-    }
-    period = dynamic_cast<Period*>(inet::findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
-    ASSERT2(period, "cannot find period, you should specify it!");
+    Scheduled::initialize();
 }
 
 void TTIncoming::handleMessage(cMessage *msg)
 {
     //Incoming Message
-    if (msg->arrivedOn("in"))
+    if (msg && msg->arrivedOn("in"))
     {
-        recordPacketReceived((inet::EtherFrame*) msg);
+        if (EtherFrame *etherframe = dynamic_cast<EtherFrame *>(msg))
+        {
+            recordPacketReceived(etherframe);
 
-        //get current time in cylce
-        uint32_t currentTicks = period->getTicks();
-        //Now check for correct arrival:
-        if (frame != NULL)
-        {
-            emit(droppedSignal, (inet::EtherFrame*) msg);
-            hadError = true;
-            if (ev.isGUI())
+            //get current time in cylce
+            uint32_t currentTicks = getPeriod()->getTicks();
+            //Now check for correct arrival:
+            if (frame != NULL)
             {
-                ev.printf("Received frame before permanence point of previous frame \n");
-                bubble("Received frame before permanence point of previous frame");
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getDisplayString().setTagArg("tt", 0,
-                        "WARNING: Received frame before permanence point of previous frame");
-                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getParentModule()->getDisplayString().setTagArg("tt", 0, "Problem with Buffer");
+                emit(droppedSignal, etherframe);
+                hadError = true;
+                if (ev.isGUI())
+                {
+                    ev.printf("Received frame before permanence point of previous frame \n");
+                    bubble("Received frame before permanence point of previous frame");
+                    getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Received frame before permanence point of previous frame");
+                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getDisplayString().setTagArg("tt", 0, "Problem with Buffer");
+                }
+                delete etherframe;
             }
-            delete msg;
-        }
-        //Check too early
-        else if (par("receive_window_start").longValue() > 0
-                && currentTicks < (uint32_t) par("receive_window_start").longValue())
-        {
-            emit(droppedSignal, (inet::EtherFrame*) msg);
-            hadError = true;
-            if (ev.isGUI())
+            //Check too early
+            else if (receive_window_start > 0 && currentTicks < (uint32_t) receive_window_start)
             {
-                ev.printf(
-                        "Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
-                        getName(), currentTicks, par("receive_window_start").longValue(),
-                        par("receive_window_end").longValue());
-                bubble("Frame to early");
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getDisplayString().setTagArg("tt", 0,
-                        "WARNING: Buffer configuration problem - Received frame too early");
-                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getParentModule()->getDisplayString().setTagArg("tt", 0,
-                        "WARNING: Buffer configuration problem - Received frame too early");
+                emit(droppedSignal, etherframe);
+                hadError = true;
+                if (ev.isGUI())
+                {
+                    ev.printf(
+                            "Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
+                            getName(), currentTicks, receive_window_start, receive_window_end);
+                    bubble("Frame to early");
+                    getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Buffer configuration problem - Received frame too early");
+                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Buffer configuration problem - Received frame too early");
+                }
+                delete etherframe;
             }
-            delete msg;
-        }
-        //Check too late
-        else if (par("receive_window_end").longValue() > 0
-                && currentTicks > (uint32_t) par("receive_window_end").longValue())
-        {
-            emit(droppedSignal, (inet::EtherFrame*) msg);
-            hadError = true;
-            if (ev.isGUI())
+            //Check too late
+            else if (receive_window_end > 0 && currentTicks > (uint32_t) receive_window_end)
             {
-                ev.printf(
-                        "Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n",
-                        getName(), currentTicks, par("receive_window_start").longValue(),
-                        par("receive_window_end").longValue());
-                bubble("Frame to late");
-                getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getDisplayString().setTagArg("tt", 0,
-                        "WARNING: Buffer configuration problem - Received frame too late");
-                getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-                getParentModule()->getDisplayString().setTagArg("tt", 0,
-                        "WARNING: Buffer configuration problem - Received frame too late");
+                emit(droppedSignal, etherframe);
+                hadError = true;
+                if (ev.isGUI())
+                {
+                    ev.printf(
+                            "Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n",
+                            getName(), currentTicks, receive_window_start, receive_window_end);
+                    bubble("Frame to late");
+                    getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Buffer configuration problem - Received frame too late");
+                    getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+                    getParentModule()->getDisplayString().setTagArg("tt", 0,
+                            "WARNING: Buffer configuration problem - Received frame too late");
+                }
+                delete etherframe;
             }
-            delete msg;
-        }
-        //Timing ok
-        else
-        {
-            //delay for permanence_pit if set
-            if (par("permanence_pit").doubleValue() > 0)
-            {
-                if (!hadError && ev.isGUI())
-                    getDisplayString().setTagArg("i2", 0, "status/hourglass");
-                frame = (inet::EtherFrame *) msg;
-                SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
-                event->setAction_time((uint32_t) par("permanence_pit").longValue());
-                event->setDestinationGate(gate("schedulerIn"));
-                period->registerEvent(event);
-            }
+            //Timing ok
             else
             {
-                send(msg, "out");
+                //delay for permanence_pit if set
+                if (permanence_pit > 0)
+                {
+                    if (!hadError && ev.isGUI())
+                        getDisplayString().setTagArg("i2", 0, "status/hourglass");
+                    frame = etherframe;
+                    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
+                    event->setAction_time((uint32_t) permanence_pit);
+                    event->setDestinationGate(gate("schedulerIn"));
+                    getPeriod()->registerEvent(event);
+                }
+                else
+                {
+                    sendDelayed(etherframe, getHardwareDelay(), "out");
+                }
             }
+        }
+        else
+        {
+            throw cRuntimeError("Received non-Ethernet frame");
         }
     }
     else if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
-        ASSERT(frame);
+        if(!frame)
+        {
+            throw cRuntimeError("Received schedule event for a non-existing frame");
+        }
         delete msg;
         if (!hadError && ev.isGUI())
             getDisplayString().setTagArg("i2", 0, "");
-        send(frame, "out");
+        sendDelayed(frame, getHardwareDelay(), "out");
         frame = NULL;
+    }
+
+}
+
+void TTIncoming::handleParameterChange(const char* parname)
+{
+    CTIncoming::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "receive_window_start"))
+    {
+        this->receive_window_start = parameterLongCheckRange(par("receive_window_start"), -1, getPeriod()->getCycleTicks());
+    }
+    if (!parname || !strcmp(parname, "receive_window_end"))
+    {
+        this->receive_window_end = parameterLongCheckRange(par("receive_window_end"), -1, getPeriod()->getCycleTicks());
+    }
+    if (!parname || !strcmp(parname, "permanence_pit"))
+    {
+        this->permanence_pit = parameterLongCheckRange(par("permanence_pit"), -1, getPeriod()->getCycleTicks());
     }
 
 }

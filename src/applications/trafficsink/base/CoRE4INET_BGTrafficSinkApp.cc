@@ -42,14 +42,14 @@ void BGTrafficSinkApp::handleMessage(cMessage *msg)
 {
     if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(msg))
     {
-        if (frame && (address.isUnspecified() || frame->getSrc() == address))
+        if (address.isUnspecified() || frame->getSrc() == address)
         {
             if((!received && par("replyFirst").boolValue()) || par("reply").boolValue()){
                 inet::EtherFrame *reply = new inet::EthernetIIFrame("Reply");
                 reply->setDest(frame->getSrc());
                 reply->setByteLength(frame->getByteLength());
                 for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();
-                            buf != bgbuffers.end(); buf++) {
+                            buf != bgbuffers.end(); ++buf) {
                     sendDirect(reply->dup(), (*buf)->gate("in"));
                 }
                 delete reply;

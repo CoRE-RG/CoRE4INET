@@ -65,6 +65,7 @@ module TTEAVBEtherSwitch
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=346,111");
+                hardware_delay = hardware_delay;
             gates:
                 AVBAout[sizeof(ethg)];
                 AVBBout[sizeof(ethg)];

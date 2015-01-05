@@ -22,7 +22,6 @@
 //INET
 #include "INETDefs.h"
 
-
 namespace CoRE4INET {
 
 Define_Module(Timer);
@@ -63,7 +62,8 @@ Timer::~Timer()
     for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = registredTimerEvents.begin();
             it != registredTimerEvents.end();)
     {
-        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
+        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end();
+                ++it2)
         {
             cancelAndDelete(*it2);
         }
@@ -120,7 +120,8 @@ void Timer::sendOutEvents()
             EV_FATAL << "misscheduled: " << (ticks - (*it).first) << std::endl;
             throw cRuntimeError("THIS SHOULD NOT HAPPEN!");
         }
-        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); ++it2)
+        for (std::list<SchedulerTimerEvent*>::const_iterator it2 = (*it).second.begin(); it2 != (*it).second.end();
+                ++it2)
         {
             sendDirect((*it2), (*it2)->getDestinationGate());
         }
@@ -137,7 +138,7 @@ void Timer::recalculate()
         {
             throw std::runtime_error("Timer was not yet initialized");
         }
-        simtime_t current_tick = oscillator->getTick();
+        simtime_t current_tick = oscillator->getCurrentTick();
         uint64_t elapsed_ticks = (uint64_t) floor((simTime() - lastRecalculation) / current_tick);
         ticks += elapsed_ticks;
         //this is required to avoid rounding errors
@@ -156,30 +157,41 @@ void Timer::reschedule()
     recalculate();
     try
     {
-        simtime_t next_action = (nextAction() - getTotalTicks()) * oscillator->getTick();
+        uint64_t next_action_ticks = nextAction();
+        uint64_t total_ticks = getTotalTicks();
+        if(total_ticks > next_action_ticks){
+            throw cRuntimeError("There must have been an overflow in the timer module");
+        }
+        simtime_t next_action = (next_action_ticks - total_ticks) * oscillator->getCurrentTick();
         scheduleAt(simTime() + next_action, selfMessage);
     }
-    catch (std::range_error re)
+    catch (const std::range_error& re)
     {
+        //No message should be scheduled as there are no messages registered
+    }
+    catch (const cRuntimeError& re)
+    {
+        throw cRuntimeError("%s: nextAction() %d getTotalTicks() %llu oscillator->getCurrentTick() %s",
+                re.getFormattedMessage().c_str(), nextAction(), getTotalTicks(),oscillator->getCurrentTick().str().c_str());
         //No message should be scheduled as there are no messages registered
     }
 }
 
-uint32_t Timer::nextAction() const
+uint64_t Timer::nextAction() const
 {
-    if (registredActionTimeEvents.size() == 0 && registredTimerEvents.size() == 0)
+    if (registredActionTimeEvents.empty() && registredTimerEvents.empty())
     {
         throw std::range_error("no events registered");
     }
-    else if (registredTimerEvents.size() == 0
-            || (registredActionTimeEvents.size() != 0
+    else if (registredTimerEvents.empty()
+            || (!registredActionTimeEvents.empty()
                     && registredActionTimeEvents.begin()->first < registredTimerEvents.begin()->first))
     {
-        return (uint32_t) registredActionTimeEvents.begin()->first;
+        return registredActionTimeEvents.begin()->first;
     }
     else
     {
-        return (uint32_t) registredTimerEvents.begin()->first;
+        return registredTimerEvents.begin()->first;
     }
 }
 
@@ -191,11 +203,11 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
     Enter_Method_Silent
     ();
 #endif
-    if (event->getTimer() > (SimTime::getMaxTime() / oscillator->getTick()))
+    if (event->getTimer() > (SimTime::getMaxTime() / oscillator->getCurrentTick()))
     {
         std::ostringstream oss;
         oss << "Cannot register timer event that is more than ";
-        oss << (SimTime::getMaxTime() / oscillator->getTick());
+        oss << (SimTime::getMaxTime() / oscillator->getCurrentTick());
         oss << "ticks from now. Your timer registered for ";
         oss << event->getTimer() << " ticks. Is your timer negative?";
         throw std::invalid_argument(oss.str());
@@ -219,7 +231,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
                 reschedule();
             }
         }
-        catch (__attribute((unused))       const std::range_error& re)
+        catch (__attribute((unused))           const std::range_error& re)
         {
             registredTimerEvents[actionpoint].push_back(event);
             reschedule();
@@ -230,8 +242,13 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
 
 uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period *period)
 {
+    if (!period)
+    {
+        throw cRuntimeError("Period not set in Timer");
+    }
+
 #ifdef DEBUG
-    Enter_Method("registerEvent(SchedulerActionTimeEvent %s, %s)",event->getName(), period->getName());
+    Enter_Method("registerEvent(SchedulerActionTimeEvent %s, %s)",actionTimeEvent->getName(), period->getName());
 #else
     Enter_Method_Silent
     ();
@@ -241,9 +258,8 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
 
     uint64_t actionpoint = 0;
 
-    ASSERT(period);
     //Check whether event is in cycle
-    if (actionTimeEvent->getAction_time() > (uint32_t) period->par("cycle_ticks").longValue())
+    if (actionTimeEvent->getAction_time() > period->getCycleTicks())
     {
         bubble("Schedule contains out of cycle events!");
         return false;
@@ -252,7 +268,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
     if (distance < 0 || (distance == 0 && actionTimeEvent->getNext_cycle()))
     {
         actionpoint = (uint64_t) ((int64_t) getTotalTicks()
-                + ((int64_t) period->par("cycle_ticks").longValue() + distance));
+                + ((int64_t) period->getCycleTicks() + distance));
     }
     else
     {
@@ -277,7 +293,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
                 reschedule();
             }
         }
-        catch (__attribute((unused))       const std::range_error& re)
+        catch (__attribute((unused))           const std::range_error& re)
         {
             registredActionTimeEvents[actionpoint].push_back(
                     std::pair<SchedulerActionTimeEvent*, Period*>(actionTimeEvent, period));
@@ -315,7 +331,7 @@ void Timer::clockCorrection(int32_t ticks)
     for (std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it2 = registredTimerEvents.begin();
             it2 != registredTimerEvents.end(); ++it2)
     {
-        if (correctedTimerEvents.size() == 0)
+        if (correctedTimerEvents.empty())
         {
             correctedTimerEvents[(uint64_t) ((int64_t) (*it2).first + ticks)] = (*it2).second;
             it = correctedTimerEvents.begin();
@@ -344,7 +360,7 @@ void Timer::clockCorrection(int32_t ticks)
                 uint64_t corrected_tick = (uint64_t) (*it2).first;
                 while (corrected_tick < this->ticks)
                 {
-                    corrected_tick += (*it4).second->par("cycle_ticks").longValue();
+                    corrected_tick += (uint64_t) (*it4).second->getCycleTicks();
                 }
                 correctedActionTimeEvents[corrected_tick].push_back(*it4);
             }

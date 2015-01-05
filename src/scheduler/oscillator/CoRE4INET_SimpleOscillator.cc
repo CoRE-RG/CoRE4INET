@@ -15,6 +15,9 @@
 
 #include "CoRE4INET_SimpleOscillator.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 //INET
 #include "ModuleAccess.h"
 
@@ -22,18 +25,18 @@ namespace CoRE4INET {
 
 Define_Module(SimpleOscillator);
 
+SimpleOscillator::SimpleOscillator()
+{
+    this->max_drift = 0;
+    this->lastCorrection = simTime();
+}
+
 void SimpleOscillator::initialize(int stage)
 {
     Oscillator::initialize(stage);
+
     if (stage == 0)
     {
-        if (par("period").stdstringValue().length() == 0)
-        {
-            par("period").setStringValue("period[0]");
-        }
-        period = dynamic_cast<Period*>(inet::findModuleWhereverInNode(par("period").stringValue(), getParentModule()));
-        ASSERT2(period, "cannot find period, you should specify it!");
-
         lastCorrection = simTime();
     }
     else if (stage == 1)
@@ -43,7 +46,7 @@ void SimpleOscillator::initialize(int stage)
         actionTimeEvent->setAction_time(0);
         actionTimeEvent->setNext_cycle(true);
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
-        period->registerEvent(actionTimeEvent);
+        getPeriod()->registerEvent(actionTimeEvent);
     }
 }
 
@@ -57,26 +60,39 @@ void SimpleOscillator::handleMessage(cMessage *msg)
     if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
         //change drift
-        double reference_time = ((simTime() - lastCorrection).dbl() / period->par("cycle_ticks").doubleValue());
-        double drift_change = reference_time * (par("drift_change").doubleValue() / 1000000);
+        simtime_t reference_time = ((simTime() - lastCorrection) / getPeriod()->getCycleTicks());
+        simtime_t drift_change = reference_time * (par("drift_change").doubleValue() / 1000000);
 
-        double current_tick = par("current_tick").doubleValue();
-        double tick = par("tick").doubleValue();
-        double max_drift = (par("max_drift").doubleValue() * par("tick").doubleValue() / 1000000);
+        simtime_t current_tick = getCurrentTick();
+        simtime_t tick = getPreciseTick();
 
-        double newTick = current_tick + drift_change;
+        simtime_t newTick = current_tick + drift_change;
 
-        if ((newTick - tick) > max_drift)
-            par("current_tick").setDoubleValue(tick + max_drift);
-        else if ((newTick - tick) < -max_drift)
-            par("current_tick").setDoubleValue(tick - max_drift);
+        if ((newTick - tick) > this->max_drift)
+            setCurrentTick(tick + this->max_drift);
+        else if ((newTick - tick) < -this->max_drift)
+            setCurrentTick(tick - this->max_drift);
         else
-            par("current_tick").setDoubleValue(newTick);
-        emit(currentDrift, (par("current_tick").doubleValue() - tick));
+            setCurrentTick(newTick);
+        emit(currentDrift, (getCurrentTick() - tick));
 
         lastCorrection = simTime();
         //Reregister scheduler
-        period->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
+        getPeriod()->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
+    }
+}
+
+void SimpleOscillator::handleParameterChange(const char* parname)
+{
+    Oscillator::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "max_drift"))
+    {
+        this->max_drift = SimTime((parameterDoubleCheckRange(par("max_drift"), 0, DBL_MAX) / 1000000) * getPreciseTick());
     }
 }
 

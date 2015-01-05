@@ -48,12 +48,12 @@ int main()
 
     if (tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void (*)(void*)), (void*)&testCallback) != ETT_SUCCESS)
     {
-        EV_TRACE << "Error!" << endl << endl;
+        EV_TRACE << "Error in tte_set_buf_var()" << endl << endl;
         return -1;
     }
     if (tte_set_buf_var(&testbuffer, TTE_BUFVAR_CB_ARG, 5, "SENT") != ETT_SUCCESS)
     {
-        EV_TRACE << "Error!" << endl << endl;
+        EV_TRACE << "Error in tte_set_buf_var()" << endl << endl;
         return -1;
     }
 
@@ -76,29 +76,29 @@ int main()
 
     if (tte_open_output_buf(&testbuffer, &frame) != ETT_SUCCESS)
     {
-        EV_TRACE << "Error!" << endl << endl;
+        EV_TRACE << "Error in tte_open_output_buf" << endl << endl;
         return -1;
     }
     if (tte_close_output_buf(&testbuffer) != ETT_SUCCESS)
     {
-        EV_TRACE << "Error!" << endl << endl;
+        EV_TRACE << "Error in tte_close_output_buf" << endl << endl;
         return -1;
     }
 
     tte_buffer_t testbuffer2;
     if (tte_get_ct_output_buf(0, 100, &testbuffer2) != ETT_SUCCESS)
     {
-        EV_TRACE << "Error!" << endl << endl;
+        EV_TRACE << "Error in tte_get_ct_output_buf" << endl << endl;
         return -1;
     }
     if (tte_set_buf_var(&testbuffer2, TTE_BUFVAR_RECEIVE_CB, sizeof(void (*)(void*)), (void*)&testCallback) != ETT_SUCCESS)
     {
-        EV_TRACE << "Error!" << endl << endl;
+        EV_TRACE << "Error in tte_set_buf_var" << endl << endl;
         return -1;
     }
     if (tte_set_buf_var(&testbuffer2, TTE_BUFVAR_CB_ARG, 9, "RECEIVED") != ETT_SUCCESS)
     {
-        EV_TRACE << "MIST42!" << endl << endl;
+        EV_TRACE << "Error in tte_set_buf_var" << endl << endl;
         return -1;
     }
 

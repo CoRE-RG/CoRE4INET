@@ -30,17 +30,17 @@ simple SRPTable
         @display("i=block/table2,blue");
         
         //Signal emitted when talker is registered, contains TalkerEntry
-        @signal[talkerRegistered](type=SRPTable::TalkerEntry);
+        @signal[NF_AVB_TALKER_REGISTERED](type=SRPTable::TalkerEntry);
         //Signal emitted when talker is updated, contains TalkerEntry
-        @signal[talkerUpdated](type=SRPTable::TalkerEntry);
+        @signal[NF_AVB_TALKER_UPDATED](type=SRPTable::TalkerEntry);
         //Signal emitted when listener is registered, contains ListenerEntry
-        @signal[listenerRegistered](type=SRPTable::ListenerEntry);
+        @signal[NF_AVB_LISTENER_REGISTERED](type=SRPTable::ListenerEntry);
         //Signal emitted when listener is updated, contains ListenerEntry
-        @signal[listenerUpdated](type=SRPTable::ListenerEntry);
+        @signal[NF_AVB_LISTENER_UPDATED](type=SRPTable::ListenerEntry);
         //Signal emitted when listener is unregistered, contains ListenerEntry
-        @signal[listenerUnregistered](type=SRPTable::ListenerEntry);
+        @signal[NF_AVB_LISTENER_UNREGISTERED](type=SRPTable::ListenerEntry);
         //Signal emitted when listener registration failed, contains ListenerEntry
-        @signal[listenerRegistrationTimeout](type=SRPTable::ListenerEntry);
+        @signal[NF_AVB_LISTENER_REGISTRATION_TIMEOUT](type=SRPTable::ListenerEntry);
         
         //Entries not updated are deleted after agingTime (0 means disabled)
         double agingTime @unit("s") = default(7s);

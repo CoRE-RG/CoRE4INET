@@ -45,7 +45,17 @@ namespace CoRE4INET {
  */
 class CTBuffer : public virtual Buffer
 {
+    private:
+        /**
+         * @brief True if parameters were initialized
+         */
+        bool parametersInitialized;
     public:
+        /**
+         * @brief Consstructor
+         */
+        CTBuffer();
+
         /**
          * @brief Destructor
          */
@@ -71,6 +81,10 @@ class CTBuffer : public virtual Buffer
          * @brief caches ct_id parameter
          */
         uint16_t ctId;
+        /**
+         * @brief caches priority parameter
+         */
+        short priority;
 
     protected:
         /**
@@ -94,6 +108,8 @@ class CTBuffer : public virtual Buffer
          * @sa enqueue();
          */
         void putFrame(inet::EtherFrame* frame);
+
+        uint16_t getCTID();
 
 };
 }

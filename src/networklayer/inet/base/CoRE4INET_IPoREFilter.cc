@@ -18,7 +18,8 @@
 namespace CoRE4INET {
 
 IPoREFilter::IPoREFilter() {
-
+    this->trafficPattern = NULL;
+    this->destInfo = NULL;
 }
 
 IPoREFilter::~IPoREFilter() {

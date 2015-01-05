@@ -18,7 +18,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_Oscillator.h"
-#include "CoRE4INET_Period.h"
+#include "CoRE4INET_Scheduled.h"
 
 namespace CoRE4INET {
 
@@ -30,20 +30,24 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class SimpleOscillator : public Oscillator
+class SimpleOscillator : public Oscillator, Scheduled
 {
     private:
         /**
-         * Period related to the oscillator updates
+         * @brief True if parameters were initialized
          */
-        Period *period;
+        bool parametersInitialized;
+
+        /**
+         * @brief Caches max_drift parameter in simtime;
+         */
+        simtime_t max_drift;
 
         /**
          * Simulation time when the oscillator was recalculated the last time
          */
         simtime_t lastCorrection;
     protected:
-
         /**
          * @brief Initializes the module and registers the event for the recalculation of the drift
          */
@@ -59,7 +63,18 @@ class SimpleOscillator : public Oscillator
          * @brief On incoming scheduler messages the drift is recalculated
          */
         virtual void handleMessage(cMessage *msg);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
     public:
+        /**
+         * @brief constructor for SimpleOscillator
+         */
+        SimpleOscillator();
 };
 
 } //namespace

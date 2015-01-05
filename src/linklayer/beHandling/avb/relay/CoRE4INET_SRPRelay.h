@@ -48,13 +48,16 @@ class SRPRelay : public inet::Ieee8021dRelay
          *
          * @return at least 1, more when parent moduile requires more stages.
          */
-        virtual int numInitStages() const { return 1>inet::Ieee8021dRelay::numInitStages()?1: inet::Ieee8021dRelay::numInitStages(); }
+        virtual int numInitStages() const
+        {
+            return 1 > ::Ieee8021dRelay::numInitStages() ? 1 : ::Ieee8021dRelay::numInitStages();
+        }
 
         /**
          *
          */
         virtual void handleMessage(cMessage * msg);
-
+    private:
         void dispatchSRP(SRPFrame * srp);
 
         void deliverSRP(inet::EtherFrame * frame);

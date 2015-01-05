@@ -109,7 +109,6 @@ class RCShaper : public TC, public virtual Timed
          * one. Else it saves the state and sends the message immediately when it is
          * received.
          *
-         * @param msg the message to be queued
          */
         virtual void requestPacket();
 
@@ -163,7 +162,7 @@ void RCShaper<TC>::initialize(int stage)
     {
         Timed::initialize();
 
-        numRcPriority = par("numRCpriority").longValue();
+        numRcPriority = (size_t)par("numRCpriority").longValue();
         for (unsigned int i = 0; i < numRcPriority; i++)
         {
             char strBuf[32];
@@ -214,7 +213,7 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if (pcf)
             {
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), getTimer());
             }
             TC::framesRequested--;
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
@@ -245,8 +244,8 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
         int priority = msg->getSenderModule()->par("priority").longValue();
         if (priority > 0 && (unsigned int) priority < numRcPriority)
         {
-            rcQueue[priority].insert(msg);
-            cComponent::emit(rcQueueLengthSignals[priority], (unsigned long) rcQueue[priority].length());
+            rcQueue[(size_t)priority].insert(msg);
+            cComponent::emit(rcQueueLengthSignals[priority], (unsigned long) rcQueue[(size_t)priority].length());
             TC::notifyListeners();
         }
         else
@@ -297,7 +296,7 @@ cMessage* RCShaper<TC>::pop()
             PCFrame *pcf = dynamic_cast<PCFrame*>(message);
             if (pcf)
             {
-                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), timer);
+                setTransparentClock(pcf, cModule::getParentModule()->par("static_tx_delay").doubleValue(), getTimer());
             }
             return message;
         }

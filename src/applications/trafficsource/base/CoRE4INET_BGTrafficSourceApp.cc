@@ -17,45 +17,46 @@
 
 //CoRE4INET
 #include "CoRE4INET_BGBuffer.h"
+#include "CoRE4INET_ConfigFunctions.h"
 
 namespace CoRE4INET {
 
 Define_Module(BGTrafficSourceApp);
 
-void BGTrafficSourceApp::handleMessage(cMessage *msg) {
+BGTrafficSourceApp::BGTrafficSourceApp()
+{
+    this->sendInterval = 0;
+}
 
-    if (msg->isSelfMessage()) {
+void BGTrafficSourceApp::handleMessage(cMessage *msg)
+{
+
+    if (msg->isSelfMessage())
+    {
         sendMessage();
-        scheduleAt(simTime() + par("sendInterval").doubleValue(), msg);
-    } else {
+        scheduleAt(simTime() + this->sendInterval, msg);
+    }
+    else
+    {
         delete msg;
     }
 }
 
-void BGTrafficSourceApp::sendMessage() {
-    for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();
-            buf != bgbuffers.end(); buf++) {
-        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic");
+void BGTrafficSourceApp::sendMessage()
+{
+    for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
+    {
+        EthernetIIFrame *frame = new EthernetIIFrame("Best-Effort Traffic");
 
-        inet::MACAddress address;
-        if (par("destAddress").stdstringValue() == "auto") {
-            // assign automatic address
-            address = inet::MACAddress::generateAutoAddress();
-
-            // change module parameter from "auto" to concrete address
-            par("destAddress").setStringValue(address.str());
-        } else {
-            address.setAddress(par("destAddress").stringValue());
-        }
-
-        frame->setDest(address);
+        frame->setDest(this->destAddress);
 
         cPacket *payload = new cPacket;
-        payload->setByteLength(par("payload").longValue());
+        payload->setByteLength(getPayloadBytes());
         frame->setByteLength(ETHER_MAC_FRAME_BYTES);
         frame->encapsulate(payload);
         //Padding
-        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES) {
+        if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+        {
             frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
         }
         sendDirect(frame, (*buf)->gate("in"));
@@ -63,4 +64,30 @@ void BGTrafficSourceApp::sendMessage() {
 
 }
 
-} //namespace
+void BGTrafficSourceApp::handleParameterChange(const char* parname)
+{
+    TrafficSourceAppBase::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "sendInterval"))
+    {
+        this->sendInterval = parameterDoubleCheckRange(par("sendInterval"), 0, MAXTIME.dbl(), true);
+    }
+    if (!parname || !strcmp(parname, "destAddress"))
+    {
+        if (par("destAddress").stdstringValue() == "auto")
+        {
+            // assign automatic address
+            this->destAddress = MACAddress::generateAutoAddress();
+
+            // change module parameter from "auto" to concrete address
+            par("destAddress").setStringValue(this->destAddress.str());
+        }
+        else
+        {
+            this->destAddress.setAddress(par("destAddress").stringValue());
+        }
+    }
+}
+
+}
+//namespace

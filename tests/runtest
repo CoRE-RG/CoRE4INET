@@ -1,0 +1,49 @@
+echo "Running smoke tests"
+cd smoke
+./smoketest
+if [ $? -eq 0 ]
+then
+  echo -e "\033[0;32mSmoke test successful\033[0m"
+else
+  echo -e "\033[0;31mSmoke test failed\033[0m" >&2
+  exit 1
+fi
+cd ..
+
+echo "Running fingerprint tests"
+cd fingerprint
+./fingerprints
+if [ $? -eq 0 ]
+then
+  echo -e "\033[0;32mFingerprint test successful\033[0m"
+else
+  echo -e "\033[0;31mFingerprint test failed\033[0m" >&2
+  exit 1
+fi
+cd ..
+
+echo "Running unit tests"
+cd unit
+./runtest
+if [ $? -eq 0 ]
+then
+  echo -e "\033[0;32mUnit test successful\033[0m"
+else
+  echo -e "\033[0;31mUnit test failed\033[0m" >&2
+  exit 1
+fi
+cd ..
+
+echo "Running module tests"
+cd module
+./runtest
+if [ $? -eq 0 ]
+then
+  echo -e "\033[0;32mModule test successful\033[0m"
+else
+  echo -e "\033[0;31mModule test failed\033[0m" >&2
+  exit 1
+fi
+cd ..
+
+echo -e "\033[0;32mAll tests successful!\033[0m"

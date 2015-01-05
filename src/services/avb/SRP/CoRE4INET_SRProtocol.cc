@@ -20,10 +20,9 @@
 //CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
 #include "ExtendedIeee802Ctrl_m.h"
+#include "CoRE4INET_NotifierConsts.h"
 //Auto-generated Messages
 #include "SRPFrame_m.h"
-
-#define ETHERAPP_BUFFER_SAP  0xe1
 
 namespace CoRE4INET {
 
@@ -31,14 +30,14 @@ Define_Module(SRProtocol);
 
 void SRProtocol::initialize()
 {
-    srpTable = (SRPTable *) getParentModule()->getSubmodule("srpTable");
+    srpTable = dynamic_cast<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (!srpTable)
     {
         throw cRuntimeError("srpTable module required for stream reservation");
     }
-    srpTable->subscribe("talkerRegistered", this);
-    srpTable->subscribe("listenerRegistered", this);
-    srpTable->subscribe("listenerUpdated", this);
+    srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
+    srpTable->subscribe(NF_AVB_LISTENER_UPDATED, this);
 }
 
 void SRProtocol::handleMessage(cMessage *msg)
@@ -50,99 +49,121 @@ void SRProtocol::handleMessage(cMessage *msg)
         {
             error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
         }
-        int arrivedOn = etherctrl->getSwitchPort();
-        cModule *port = getParentModule()->getSubmodule("phy", arrivedOn);
-
-        if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
+        else
         {
-            SR_CLASS srClass;
-            if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSA) srClass = SR_CLASS_A;
-            if(talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSB) srClass = SR_CLASS_B;
-            srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port, talkerAdvertise->getDestination_address(), srClass,
-                    talkerAdvertise->getMaxFrameSize(), talkerAdvertise->getMaxIntervalFrames(), talkerAdvertise->getVlan_identifier());
-        }
-        else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
-        {
-            bool update = false;
-            std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
-            //Is this a new or updated stream
-            if (std::find(listeners.begin(), listeners.end(), port) != listeners.end())
+            int arrivedOn = etherctrl->getSwitchPort();
+            cModule *port = getParentModule()->getSubmodule("phy", arrivedOn);
+
+            if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
             {
-                update = true;
-            }
-
-            unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
-            //Add Higher Priority Bandwidth
-            utilizedBandwidth += port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
-            unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
-
-            cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
-            cChannel *outChannel = physOutGate->findTransmissionChannel();
-
-            unsigned long totalBandwidth = outChannel->getNominalDatarate();
-
-            double reservableBandwidth = par("reservableBandwidth").doubleValue();
-
-            if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
-            {
-                srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port, listenerReady->getVlan_identifier());
-                if(!update)
+                SR_CLASS srClass;
+                if (talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSA)
                 {
-                    EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
-                            << port->getFullName() << ". Utilized Bandwidth: "
-                            << (utilizedBandwidth + requiredBandwidth) / (double) 1000000 << " of "
-                            << (totalBandwidth * reservableBandwidth) / (double) 1000000 << " reservable Bandwidth of "
-                            << totalBandwidth / (double) 1000000 << " MBit/s.";
+                    srClass = SR_CLASS_A;
                 }
-            }
-            else
-            {
-                EV_DETAIL << "Listener for stream " << listenerReady->getStreamID()
-                        << " could not be registered on port " << port->getFullName() << ". Required bandwidth: "
-                        << requiredBandwidth / (double) 1000000 << "MBit/s, remaining bandwidth "
-                        << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth) / (double) 1000000 << "MBit/s.";
-                SRPFrame *srp;
-                if (srpTable->getListenersForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier()).size() > 0)
+                else if (talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSB)
                 {
-                    bubble("Listener Ready Failed!");
-                    srp = new ListenerReadyFailed("Listener Ready Failed", inet::IEEE802CTRL_DATA);
+                    srClass = SR_CLASS_B;
                 }
                 else
                 {
-                    bubble("Listener Failed!");
-                    srp = new ListenerAskingFailed("Listener Failed", inet::IEEE802CTRL_DATA);
+                    srClass = SR_CLASS_A;
                 }
-                srp->setStreamID(listenerReady->getStreamID());
+                srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port,
+                        talkerAdvertise->getDestination_address(), srClass, talkerAdvertise->getMaxFrameSize(),
+                        talkerAdvertise->getMaxIntervalFrames(), talkerAdvertise->getVlan_identifier());
+            }
+            else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
+            {
+                bool update = false;
+                std::list<cModule*> listeners = srpTable->getListenersForStreamId(listenerReady->getStreamID(),
+                        listenerReady->getVlan_identifier());
+                //Is this a new or updated stream
+                if (std::find(listeners.begin(), listeners.end(), port) != listeners.end())
+                {
+                    update = true;
+                }
 
+                unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
+                //Add Higher Priority Bandwidth
+                utilizedBandwidth +=
+                        (unsigned long) port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
+                unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(),
+                        listenerReady->getVlan_identifier());
+
+                cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
+                cChannel *outChannel = physOutGate->findTransmissionChannel();
+
+                unsigned long totalBandwidth = (unsigned long) outChannel->getNominalDatarate();
+
+                double reservableBandwidth = par("reservableBandwidth").doubleValue();
+
+                if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
+                {
+                    srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port,
+                            listenerReady->getVlan_identifier());
+                    if (!update)
+                    {
+                        EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
+                                << port->getFullName() << ". Utilized Bandwidth: "
+                                << (utilizedBandwidth + requiredBandwidth) / (double) 1000000 << " of "
+                                << (totalBandwidth * reservableBandwidth) / (double) 1000000
+                                << " reservable Bandwidth of " << totalBandwidth / (double) 1000000 << " MBit/s.";
+                    }
+                }
+                else
+                {
+                    EV_DETAIL << "Listener for stream " << listenerReady->getStreamID()
+                            << " could not be registered on port " << port->getFullName() << ". Required bandwidth: "
+                            << requiredBandwidth / (double) 1000000 << "MBit/s, remaining bandwidth "
+                            << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth) / (double) 1000000
+                            << "MBit/s.";
+                    SRPFrame *srp;
+                    if (srpTable->getListenersForStreamId(listenerReady->getStreamID(),
+                            listenerReady->getVlan_identifier()).size() > 0)
+                    {
+                        bubble("Listener Ready Failed!");
+                        srp = new ListenerReadyFailed("Listener Ready Failed", IEEE802CTRL_DATA);
+                    }
+                    else
+                    {
+                        bubble("Listener Failed!");
+                        srp = new ListenerAskingFailed("Listener Failed", IEEE802CTRL_DATA);
+                    }
+                    srp->setStreamID(listenerReady->getStreamID());
+
+                    ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
+                    etherctrl->setEtherType(MSRP_ETHERTYPE);
+                    etherctrl->setDest(SRP_ADDRESS);
+                    cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(),
+                            listenerReady->getVlan_identifier());
+                    if (talker && talker->isName("phy"))
+                    {
+                        etherctrl->setSwitchPort(talker->getIndex());
+                        srp->setControlInfo(etherctrl);
+                        send(srp, gate("out"));
+                    }
+                }
+            }
+            else if (ListenerAskingFailed* listenerFailed = dynamic_cast<ListenerAskingFailed*>(msg))
+            {
+                bubble("Listener Failed!");
                 ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
                 etherctrl->setEtherType(MSRP_ETHERTYPE);
                 etherctrl->setDest(SRP_ADDRESS);
-                cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(), listenerReady->getVlan_identifier());
+                cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(),
+                        listenerFailed->getVlan_identifier());
                 if (talker && talker->isName("phy"))
                 {
                     etherctrl->setSwitchPort(talker->getIndex());
-                    srp->setControlInfo(etherctrl);
-                    send(srp, gate("out"));
+                    //Necessary because controlInfo is not duplicated
+                    ListenerAskingFailed* listenerFailedCopy = listenerFailed->dup();
+                    listenerFailedCopy->setControlInfo(etherctrl);
+                    send(listenerFailedCopy, gate("out"));
                 }
             }
+            delete etherctrl;
         }
-        else if (ListenerAskingFailed* listenerFailed = dynamic_cast<ListenerAskingFailed*>(msg))
-        {
-            bubble("Listener Failed!");
-            ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-            etherctrl->setEtherType(MSRP_ETHERTYPE);
-            etherctrl->setDest(SRP_ADDRESS);
-            cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(), listenerFailed->getVlan_identifier());
-            if (talker && talker->isName("phy"))
-            {
-                etherctrl->setSwitchPort(talker->getIndex());
-                //Necessary because controlInfo is not duplicated
-                ListenerAskingFailed* listenerFailedCopy = listenerFailed->dup();
-                listenerFailedCopy->setControlInfo(etherctrl);
-                send(listenerFailedCopy, gate("out"));
-            }
-        }
-        delete etherctrl;
     }
     delete msg;
 }
@@ -151,19 +172,21 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent
     ();
-    if (id == registerSignal("talkerRegistered"))
+    if (id == NF_AVB_TALKER_REGISTERED)
     {
         SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
 
         TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", inet::IEEE802CTRL_DATA);
         //talkerAdvertise->setStreamDA(tentry->address);
         talkerAdvertise->setStreamID(tentry->streamId);
-        talkerAdvertise->setMaxFrameSize(tentry->framesize);
+        talkerAdvertise->setMaxFrameSize((uint16_t) tentry->framesize);
         talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
         talkerAdvertise->setDestination_address(tentry->address);
         talkerAdvertise->setVlan_identifier(tentry->vlan_id);
-        if(tentry->srClass == SR_CLASS_A) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
-        if(tentry->srClass == SR_CLASS_B) talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
+        if (tentry->srClass == SR_CLASS_A)
+            talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
+        if (tentry->srClass == SR_CLASS_B)
+            talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
 
         ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
         etherctrl->setEtherType(MSRP_ETHERTYPE);
@@ -179,12 +202,17 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 
         send(talkerAdvertise, gate("out"));
     }
-    else if (id == registerSignal("listenerRegistered") || id == registerSignal("listenerUpdated"))
+    else if (id == NF_AVB_LISTENER_REGISTERED || id == NF_AVB_LISTENER_UPDATED)
     {
         SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
 
         //Get Talker Port
-        SRPTable *srpTable = (SRPTable *) src;
+        SRPTable *srpTable = dynamic_cast<SRPTable *>(src);
+        if (!srpTable)
+        {
+            throw cRuntimeError(
+                    "listenerRegistered or listenerUpdated signal received, from module that is not a SRPTable");
+        }
         cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
         //Send listener ready only when talker is not a local application
         if (talker && talker->isName("phy"))

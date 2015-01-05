@@ -45,10 +45,9 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
         bool isStreaming;
         enum SR_CLASS srClass;
         unsigned long streamID;
-        unsigned int frameSize;
-        unsigned int intervalFrames;
-        unsigned short vlan_id;
-        unsigned int payload;
+        size_t frameSize;
+        uint16_t intervalFrames;
+        uint16_t vlan_id;
         cModule *avbOutCTC;
         inet::MACAddress multicastMAC;
     public:
@@ -66,6 +65,13 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
         void sendAVBFrame();
 
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } /* namespace CoRE4INET */

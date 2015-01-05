@@ -17,10 +17,17 @@
 
 //CoRE4INET
 #include "CoRE4INET_CTFrame.h"
+#include "CoRE4INET_AS6802Defs.h"
+#include "CoRE4INET_ConfigFunctions.h"
 
 using namespace CoRE4INET;
 
 //Define_Module(CTBuffer);
+
+CTBuffer::CTBuffer()
+{
+    this->parametersInitialized = false;
+}
 
 CTBuffer::~CTBuffer()
 {
@@ -28,7 +35,6 @@ CTBuffer::~CTBuffer()
 
 void CTBuffer::putFrame(inet::EtherFrame* frame)
 {
-    short priority = (short) par("priority").longValue();
     if (frame && priority >= 0)
     {
         frame->setSchedulingPriority(priority);
@@ -38,7 +44,7 @@ void CTBuffer::putFrame(inet::EtherFrame* frame)
 
 void CTBuffer::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("in"))
+    if (msg && msg->arrivedOn("in"))
     {
         //Try to correct destination mac
         if (CTFrame *ctframe = dynamic_cast<CTFrame *>(msg))
@@ -59,9 +65,36 @@ void CTBuffer::handleMessage(cMessage *msg)
 
 void CTBuffer::handleParameterChange(const char* parname)
 {
-    ctMask = (uint32_t) par("ct_mask").longValue();
-    ctMarker = (uint32_t) par("ct_marker").longValue();
-    ctId = (uint16_t) par("ct_id").longValue();
-
     Buffer::handleParameterChange(parname);
+
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+
+    if (!parname || !strcmp(parname, "ct_id"))
+    {
+        this->ctId = (uint16_t) parameterULongCheckRange(par("ct_id"), 0, MAX_CT_ID);
+    }
+    if (!parname || !strcmp(parname, "ct_mask"))
+    {
+        this->ctMask = (uint32_t) par("ct_mask").longValue();
+    }
+    if (!parname || !strcmp(parname, "ct_marker"))
+    {
+        this->ctMarker = (uint32_t) par("ct_marker").longValue();
+    }
+    if (!parname || !strcmp(parname, "priority"))
+    {
+        this->priority = (short) parameterLongCheckRange(par("priority"), -1, MAX_PRIORITY);
+    }
+}
+
+uint16_t CTBuffer::getCTID()
+{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->ctId;
 }

@@ -36,8 +36,12 @@ class Period : public cSimpleModule
 {
     private:
         /**
+         * @brief True if parameters were initialized
+         */
+        bool parametersInitialized;
+
+        /**
          * @brief Connected timer module
-         *
          */
         Timer *timer;
         /**
@@ -50,6 +54,16 @@ class Period : public cSimpleModule
          * @brief Number of cycles since the simulation started
          */
         uint32_t cycles;
+
+        /**
+         * @brief Caches cycle_ticks parameter
+         */
+        uint32_t cycle_ticks;
+
+        /**
+         * @brief Caches offset_ticks parameter
+         */
+        uint32_t offset_ticks;
     protected:
         /**
          * Initialization of module, schedules new cycle message at timer
@@ -95,11 +109,46 @@ class Period : public cSimpleModule
          * @return Number of cycles since simulation start
          */
         virtual uint32_t getCycles() const;
+
+        /**
+         * @brief Returns a pointer to the Timer module driving this period
+         *
+         * @return Timer driving the period
+         */
+        virtual Timer* getTimer();
+
+        /**
+         * @brief Returns the cycle length of this period
+         *
+         * @return Number of ticks of one cycle
+         */
+        virtual uint32_t getCycleTicks();
+
+        /**
+         * @brief Returns the cycle length of this period
+         *
+         * @return Length of one cycle in simtime
+         */
+        virtual simtime_t getCycleLength();
+
+        /**
+         * @brief Returns the offset of this period
+         *
+         * @return Offset of the period in number of ticks
+         */
+        virtual uint32_t getOffsetTicks();
     protected:
         /**
          * Signal that is emitted at the beginning of a new cycle
          */
         static simsignal_t newCycle;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

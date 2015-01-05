@@ -34,6 +34,16 @@ namespace CoRE4INET {
  */
 class Incoming : public virtual cSimpleModule
 {
+    private:
+        /**
+         * @brief True if parameters were initialized
+         */
+        bool parametersInitialized;
+
+        /**
+         * @brief Caches hardware_delay parameter
+         */
+        simtime_t hardware_delay;
     protected:
         /**
          * @brief set to true if there was an error during runtime
@@ -54,6 +64,13 @@ class Incoming : public virtual cSimpleModule
          * @brief Constructor
          */
         Incoming();
+
+        /**
+         * @brief returns the configured hardware delay
+         *
+         * return Hardware delay in simtime
+         */
+        simtime_t getHardwareDelay();
     protected:
         /**
          * @brief Forwards messages arriving on in-gate to out-gate
@@ -61,12 +78,20 @@ class Incoming : public virtual cSimpleModule
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg);
+
         /**
          * @brief Emits a statistics signal that a frame was received in the buffer
          *
          * @param frame the frame that was received
          */
-        void recordPacketReceived(inet::EtherFrame *frame);
+        void recordPacketReceived(EtherFrame *frame);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

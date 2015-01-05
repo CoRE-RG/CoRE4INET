@@ -28,6 +28,22 @@ namespace CoRE4INET {
  */
 class Oscillator : public virtual cSimpleModule
 {
+    private:
+        /**
+         * @brief True if parameters were initialized
+         */
+        bool parametersInitialized;
+
+        /**
+         * @brief Caches tick parameter
+         */
+        simtime_t tick;
+
+        /**
+         * @brief Caches current_tick parameter
+         */
+        simtime_t current_tick;
+
     protected:
         /**
          * Signal that is emitted every time the drift (Difference of configured and actual tick length) changes
@@ -43,19 +59,37 @@ class Oscillator : public virtual cSimpleModule
          */
         virtual int numInitStages() const;
 
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
+
     public:
+        /**
+         * @brief Constructor of Oscillator
+         */
+        Oscillator();
         /**
          * @brief Returns the current length of a tick
          *
          * @return current length of a tick
          */
-        virtual simtime_t getTick() const;
+        virtual simtime_t getCurrentTick() const;
+
+        /**
+         * @brief Sets the current length of a tick
+         *
+         * @param tick_length new length of a tick
+         */
+        void setCurrentTick(simtime_t tick_length);
         /**
          * @brief Returns the precise length of a tick (without drift)
          *
          * @return length of tick without drift
          */
-        virtual simtime_t getPreciseTick() const;
+        virtual simtime_t getPreciseTick();
 };
 
 } //namespace

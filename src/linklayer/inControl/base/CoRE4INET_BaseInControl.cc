@@ -27,20 +27,23 @@ void BaseInControl::initialize()
 
 void BaseInControl::setParameters(inet::EtherFrame *frame)
 {
-    int i = frame->findPar("received_total");
-    cMsgPar* par;
-    if (i >= 0)
-        par = &frame->par(i);
-    else
-        par = &frame->addPar("received_total");
-    par->setLongValue((long) timer->getTotalTicks());
+    if (frame)
+    {
+        int i = frame->findPar("received_total");
+        cMsgPar* par;
+        if (i >= 0)
+            par = &frame->par(i);
+        else
+            par = &frame->addPar("received_total");
+        par->setLongValue((long) getTimer()->getTotalTicks());
 
-    i = frame->findPar("received_port");
-    if (i >= 0)
-        par = &frame->par(i);
-    else
-        par = &frame->addPar("received_port");
-    par->setLongValue(getParentModule()->getIndex());
+        i = frame->findPar("received_port");
+        if (i >= 0)
+            par = &frame->par(i);
+        else
+            par = &frame->addPar("received_port");
+        par->setLongValue(getParentModule()->getIndex());
+    }
 }
 
 void BaseInControl::recordPacketReceived(inet::EtherFrame *frame)

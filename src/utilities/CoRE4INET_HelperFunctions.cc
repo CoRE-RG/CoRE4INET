@@ -136,7 +136,7 @@ const_simtime_t second = 1;
 
 unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval)
 {
-    return (second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS);
+    return (unsigned long)ceil((second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS));
 }
 
 
@@ -144,6 +144,8 @@ const simtime_t getIntervalForClass(SR_CLASS srClass)
 {
     switch (srClass)
     {
+        case SR_CLASS_A:
+            return SR_CLASS_A_INTERVAL;
         case SR_CLASS_B:
             return SR_CLASS_B_INTERVAL;
         default:

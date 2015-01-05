@@ -19,6 +19,8 @@
 #include <exception>
 //CoRE4INET
 #include "CoRE4INET_Timer.h"
+#include "CoRE4INET_AS6802Defs.h"
+#include "CoRE4INET_ConfigFunctions.h"
 
 namespace CoRE4INET {
 
@@ -31,6 +33,7 @@ Period::Period()
     cycles = 0;
     newCycleEvent = NULL;
     timer = NULL;
+    parametersInitialized = false;
 }
 
 void Period::initialize()
@@ -38,7 +41,6 @@ void Period::initialize()
     WATCH(cycles);
     newCycle = registerSignal("newCycle");
 
-    ASSERT(par("cycle_ticks").longValue() > par("offset_ticks").longValue());
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
 
@@ -84,13 +86,16 @@ uint64_t Period::registerEvent(SchedulerEvent *event)
 
 uint32_t Period::getTicks()
 {
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
     if (!timer)
     {
         throw std::runtime_error("Period was not yet initialized");
     }
-    uint32_t cycle_ticks = (uint32_t) par("cycle_ticks").longValue();
     //cycle_ticks is added to assure a positive return value
-    return (cycle_ticks + timer->getTotalTicks() - (uint32_t) par("offset_ticks").longValue()) % cycle_ticks;
+    return (cycle_ticks + timer->getTotalTicks() - offset_ticks) % cycle_ticks;
 }
 
 uint64_t Period::getTotalTicks()
@@ -105,6 +110,56 @@ uint64_t Period::getTotalTicks()
 uint32_t Period::getCycles() const
 {
     return cycles;
+}
+
+Timer* Period::getTimer()
+{
+    return timer;
+}
+
+uint32_t Period::getCycleTicks()
+{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->cycle_ticks;
+}
+
+simtime_t Period::getCycleLength()
+{
+    if (!timer)
+    {
+        throw std::runtime_error("Period was not yet initialized");
+    }
+    return getCycleTicks() * timer->getOscillator()->getPreciseTick();
+}
+
+uint32_t Period::getOffsetTicks()
+{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
+    return this->offset_ticks;
+}
+
+void Period::handleParameterChange(const char* parname)
+{
+    if (!parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "cycle_ticks"))
+    {
+        this->cycle_ticks = (uint32_t) parameterULongCheckRange(par("cycle_ticks"), 0, MAX_CYCLE_TICKS);
+    }
+    if (!parname || !strcmp(parname, "offset_ticks"))
+    {
+        this->offset_ticks = (uint32_t) parameterULongCheckRange(par("offset_ticks"), 0,
+                par("cycle_ticks").longValue());
+    }
+
 }
 
 } //namespace

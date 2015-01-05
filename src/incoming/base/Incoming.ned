@@ -26,6 +26,7 @@ package core4inet.incoming.base;
 // @author Till Steinbach
 simple Incoming like IIncoming
 {
+    parameters:
     //Incoming is implemented by the Incoming C++ Class
     @class(Incoming);
     @display("i=block/arrival");
@@ -39,6 +40,8 @@ simple Incoming like IIncoming
     @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
     //Statistic of the end-to-end latency
     @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+	//Hardware delay between incoming and outgoing buffer
+	double hardware_delay @unit(s) = default(0s);
 
     gates:
         //input of the ctc

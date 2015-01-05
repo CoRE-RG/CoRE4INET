@@ -19,6 +19,7 @@
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_RCBuffer.h"
 #include "CoRE4INET_customWatch.h"
+#include "CoRE4INET_ConfigFunctions.h"
 
 //INET
 #include "ModuleAccess.h"
@@ -35,10 +36,9 @@ void CTApplicationBase::initialize()
 
 void CTApplicationBase::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("RCin"))
+    if (msg && msg->arrivedOn("RCin"))
     {
-        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
-        if (rcBuffer)
+        if (RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule()))
             rcBuffer->resetBag();
     }
     ApplicationBase::handleMessage(msg);
@@ -47,33 +47,22 @@ void CTApplicationBase::handleMessage(cMessage *msg)
 void CTApplicationBase::handleParameterChange(const char* parname)
 {
     ApplicationBase::handleParameterChange(parname);
-    ctbuffers.clear();
-    std::vector<std::string> bufferPaths = cStringTokenizer(par("buffers").stringValue(), DELIMITERS).asVector();
-    for (std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin(); bufferPath != bufferPaths.end();
-            bufferPath++)
+    if (!parname || !strcmp(parname, "buffers"))
     {
-        cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
-        if (!module)
+        ctbuffers.clear();
+        std::vector<cModule*> modules = parameterToModuleList(par("buffers"), DELIMITERS);
+        for (std::vector<cModule*>::const_iterator module = modules.begin(); module != modules.end(); ++module)
         {
-            module = inet::findModuleWhereverInNode((*bufferPath).c_str(), this);
-        }
-        if (module)
-        {
-            if (inet::findContainingNode(module) != inet::findContainingNode(this))
+            if (findContainingNode(*module) != findContainingNode(this))
             {
                 throw cRuntimeError(
-                        "Configuration problem of buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*bufferPath).c_str(), inet::findContainingNode(this)->getFullName());
+                        "Configuration problem of parameter buffers in module %s: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                        this->getFullName(), (*module)->getFullName(), findContainingNode(this)->getFullName());
             }
-            if (CTBuffer *buffer = dynamic_cast<CTBuffer*>(module))
+            if (CTBuffer *buffer = dynamic_cast<CTBuffer*>(*module))
             {
                 ctbuffers[(uint16_t) buffer->par("ct_id").longValue()].push_back(buffer);
             }
-        }
-        else
-        {
-            throw cRuntimeError("Configuration problem of buffers: Module: %s could not be resolved!",
-                    (*bufferPath).c_str());
         }
     }
 }

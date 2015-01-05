@@ -93,7 +93,6 @@ class AVBClassAShaper : public TC
          * one. Else it saves the state and sends the message immediately when it is
          * received.
          *
-         * @param msg the message to be queued
          */
         virtual void requestPacket();
 

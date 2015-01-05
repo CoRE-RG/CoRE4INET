@@ -42,5 +42,10 @@
  */
 #define ETHER_8021Q_TAG_BYTES 4
 
+/**
+ * Defines for range checks
+ */
+#define MAX_VLAN_ID 4094
+#define MAX_TICK_LENGTH DBL_MAX
 
 #endif

@@ -41,7 +41,7 @@ void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev
 Register_ResultFilter("SubtractActualFromLast", SubtractActualFromLastFilter)
 ;
 
-bool SubtractActualFromLastFilter::process(simtime_t& t, double& value)
+bool SubtractActualFromLastFilter::process(__attribute__((unused)) simtime_t& t, double& value)
 {
     difference = value - lastValue;
     lastValue = value;
@@ -52,7 +52,7 @@ bool SubtractActualFromLastFilter::process(simtime_t& t, double& value)
 Register_ResultFilter("innerMessagePacketBytes", InnerMessagePacketBytesFilter)
 ;
 
-void InnerMessagePacketBytesFilter::receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object)
+void InnerMessagePacketBytesFilter::receiveSignal(__attribute__((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
 {
     if (dynamic_cast<cPacket *>(object))
     {
@@ -73,13 +73,13 @@ FloatingIntervalFilter::FloatingIntervalFilter()
 bool FloatingIntervalFilter::process(simtime_t &t, double &value)
 {
     //first add new value to interval, give hint for faster execution
-    if (inInterval.size() > 0)
+    if (inInterval.empty())
     {
-        inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
+        inInterval[t] = value;
     }
     else
     {
-        inInterval[t] = value;
+        inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
     }
     //erase old values
     inInterval.erase(inInterval.begin(), inInterval.lower_bound((t - interval)));

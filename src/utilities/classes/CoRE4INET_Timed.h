@@ -29,7 +29,12 @@ namespace CoRE4INET {
  */
 class Timed : public virtual cSimpleModule
 {
-    protected:
+    private:
+        /**
+         * Checks whether the parameters were already initialized
+         */
+        bool parametersInitialized;
+
         /**
          * The oscillator module related to the this module
          */
@@ -42,19 +47,27 @@ class Timed : public virtual cSimpleModule
 
     public:
         /**
-         * @brief Initialization of the timer and oscillator
+         * Default Constructor for Timed
          */
-        void initialize();
+        Timed();
 
         /**
          * returns pointer to the configured timer
          */
-        Timer* getTimer() const;
+        Timer* getTimer();
 
         /**
          * returns pointer to the configured oscillator
          */
-        Oscillator* getOscillator() const;
+        Oscillator* getOscillator();
+
+    protected:
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname);
 };
 
 }

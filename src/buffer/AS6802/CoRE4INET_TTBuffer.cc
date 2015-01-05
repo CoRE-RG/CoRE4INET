@@ -19,13 +19,17 @@
 #include "TTBufferEmpty_m.h"
 #include "scheduler/SchedulerMessageEvents_m.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 using namespace CoRE4INET;
 
 //Define_Module(TTBuffer);
 
 TTBuffer::TTBuffer()
 {
-    actionTimeEvent = NULL;
+    this->actionTimeEvent = NULL;
+    this->nextAction = 0;
 }
 
 TTBuffer::~TTBuffer()
@@ -55,13 +59,13 @@ void TTBuffer::initialize(int stage)
         actionTimeEvent->setAction_time((uint32_t) par("sendWindowStart").longValue());
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
 
-        if ((uint32_t) par("sendWindowStart").longValue() >= (uint32_t) period->par("cycle_ticks").longValue())
+        if ((uint32_t) par("sendWindowStart").longValue() >= getPeriod()->getCycleTicks())
         {
             throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
-                    par("sendWindowStart").longValue(), period->par("cycle_ticks").longValue());
+                    par("sendWindowStart").longValue(), getPeriod()->getCycleTicks());
         }
 
-        nextAction = period->registerEvent(actionTimeEvent);
+        nextAction = getPeriod()->registerEvent(actionTimeEvent);
 
         return;
     }
@@ -107,16 +111,25 @@ void TTBuffer::handleMessage(cMessage *msg)
         }
         //Reregister scheduler
         static_cast<SchedulerActionTimeEvent *>(msg)->setNext_cycle(true);
-        nextAction = period->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
+        nextAction = getPeriod()->registerEvent(static_cast<SchedulerActionTimeEvent *>(msg));
     }
 }
 
 void TTBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
 
-    if (actionTimeEvent)
-        actionTimeEvent->setAction_time((uint32_t) par("sendWindowStart").longValue());
+    if (!parname || !strcmp(parname, "sendWindowStart"))
+    {
+        uint32_t sendWindowStart = (uint32_t) parameterULongCheckRange(par("sendWindowStart"), 0,
+                getPeriod()->getCycleTicks());
+        if (actionTimeEvent)
+        {
+            actionTimeEvent->setAction_time(sendWindowStart);
+        }
+    }
+
 }
 
 uint64_t TTBuffer::nextSendWindowStart() const
@@ -126,6 +139,5 @@ uint64_t TTBuffer::nextSendWindowStart() const
 
 long TTBuffer::getRequiredBandwidth()
 {
-    return (par("maxMessageSize").longValue() * 8)
-            * (1 / ((uint32_t) period->par("cycle_ticks").longValue() * oscillator->par("tick").doubleValue()));
+    return (long) ceil((getMaxMessageSize() * 8) * (1 / (getPeriod()->getCycleLength().dbl())));
 }

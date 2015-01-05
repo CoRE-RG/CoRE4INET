@@ -15,26 +15,64 @@
 
 #include "CoRE4INET_Timed.h"
 
+//CoRE4INET
+#include "CoRE4INET_ConfigFunctions.h"
+
 //INET
 #include "ModuleAccess.h"
 
 using namespace CoRE4INET;
 
-void Timed::initialize()
+Timed::Timed()
 {
-    timer = dynamic_cast<Timer*>(inet::findModuleWhereverInNode(par("timer").stringValue(), getParentModule()));
-    ASSERT2(timer, "cannot find timer!");
-    oscillator =
-            dynamic_cast<Oscillator*>(inet::findModuleWhereverInNode(par("oscillator").stringValue(), getParentModule()));
-    ASSERT2(oscillator, "cannot find oscillator!");
+    this->parametersInitialized = false;
+    this->oscillator = NULL;
+    this->timer = NULL;
 }
 
-Oscillator* Timed::getOscillator() const
+Oscillator* Timed::getOscillator()
 {
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
     return oscillator;
 }
 
-Timer* Timed::getTimer() const
+Timer* Timed::getTimer()
 {
+    if (!parametersInitialized)
+    {
+        handleParameterChange(NULL);
+    }
     return timer;
+}
+
+void Timed::handleParameterChange(const char* parname)
+{
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+    if (!parname || !strcmp(parname, "timer"))
+    {
+        this->timer = extendedFindModuleWhereverInNode<Timer*>(par("timer").stringValue(), getParentModule(), this);
+        if (!this->timer)
+        {
+            throw cRuntimeError(
+                    "Configuration problem of parameter timer in module %s: The requested timer module: %s could not be found!",
+                    this->getFullPath().c_str(), par("period").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "oscillator"))
+    {
+        this->oscillator = extendedFindModuleWhereverInNode<Oscillator*>(par("oscillator").stringValue(), getParentModule(),
+                this);
+        if (!this->oscillator)
+        {
+            throw cRuntimeError(
+                    "Configuration problem of parameter %s in module %s: The requested oscillator module: %s could not be found!",
+                    parname, this->getFullPath().c_str(), par("period").stringValue());
+        }
+    }
 }

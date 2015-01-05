@@ -18,8 +18,7 @@
 //Std
 #include <string>
 using namespace std;
-//CoRE4INET
-#include "CoRE4INET_SRPTable.h"
+
 #include "AVBFrame_m.h"
 //INET
 //#include "EtherFrame_m.h"
@@ -28,45 +27,66 @@ namespace CoRE4INET {
 
 Define_Module(AVBIncoming);
 
-AVBIncoming::AVBIncoming() {
-    hadError = false;
+AVBIncoming::AVBIncoming()
+{
 }
 
-void AVBIncoming::handleMessage(cMessage* msg) {
-    if (msg->arrivedOn("in")) {
-        //inet::EtherFrame *inFrame = check_and_cast<inet::EtherFrame*>(msg);
-        AVBFrame *inFrame = check_and_cast<AVBFrame*>(msg);
+void AVBIncoming::initialize()
+{
+    this->srptable = dynamic_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+    if(!srptable){
+        throw cRuntimeError("Cannot find module srpTable in node. srpTable is required");
+    }
+}
 
-        SRPTable *srptable = check_and_cast<SRPTable*>(
-                getParentModule()->getSubmodule("srpTable"));
-        std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(
-                inFrame->getDest(), inFrame->getVID());
-        SR_CLASS srClass = srptable->getSrClassForTalkerAddress(inFrame->getDest(), inFrame->getVID());
-        if (listeners.size() == 0) {
-            emit(droppedSignal, inFrame);
-        } else {
-            for (std::list<cModule*>::const_iterator listener = listeners.begin();
-                    listener != listeners.end(); listener++) {
-                if (strcmp((*listener)->getName(), "phy") == 0) {
-                    string outputStr;
-                    if(srClass == SR_CLASS_A)       outputStr = "AVBAout";
-                    else if(srClass == SR_CLASS_B)  outputStr = "AVBBout";
-                    sendDelayed(inFrame->dup(),
-                        SimTime(
-                                getParentModule()->par("hardware_delay").doubleValue()),
-                        gate(outputStr.c_str(), (*listener)->getIndex())
-                        );
-                    emit(rxPkSignal, inFrame);
-                } else {
-                    if ((*listener)->hasGate("AVBin")) {
-                        sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
+void AVBIncoming::handleMessage(cMessage* msg)
+{
+    if (msg && msg->arrivedOn("in"))
+    {
+        if (AVBFrame *inFrame = dynamic_cast<AVBFrame*>(msg))
+        {
+            std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(inFrame->getDest(),
+                    inFrame->getVID());
+            SR_CLASS srClass = srptable->getSrClassForTalkerAddress(inFrame->getDest(), inFrame->getVID());
+            if (listeners.empty())
+            {
+                emit(droppedSignal, inFrame);
+            }
+            else
+            {
+                for (std::list<cModule*>::const_iterator listener = listeners.begin(); listener != listeners.end();
+                        ++listener)
+                {
+                    if (strcmp((*listener)->getName(), "phy") == 0)
+                    {
+                        string outputStr;
+                        if (srClass == SR_CLASS_A)
+                            outputStr = "AVBAout";
+                        else if (srClass == SR_CLASS_B)
+                            outputStr = "AVBBout";
+                        sendDelayed(inFrame->dup(), getHardwareDelay(),
+                                gate(outputStr.c_str(), (*listener)->getIndex()));
                         emit(rxPkSignal, inFrame);
+                    }
+                    else
+                    {
+                        if ((*listener)->hasGate("AVBin"))
+                        {
+                            sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
+                            emit(rxPkSignal, inFrame);
+                        }
                     }
                 }
             }
+            delete inFrame;
         }
-        delete inFrame;
-    } else {
+        else
+        {
+            throw cRuntimeError("Received non-AVBFrame frame");
+        }
+    }
+    else
+    {
         delete msg;
     }
 }

@@ -15,13 +15,15 @@
 
 package core4inet.applications.trafficsource.AS6802;
 
+import core4inet.utilities.classes.ITimed;
+
 //
 // Traffic source application used for rate-constrained traffic generators.
 //
 // @see TTTrafficSourceApp
 //
 // @author Till Steinbach
-simple RCTrafficSourceApp extends CTTrafficSourceAppBase
+simple RCTrafficSourceApp extends CTTrafficSourceAppBase like ITimed
 {
     parameters:
         @class(RCTrafficSourceApp);
@@ -29,4 +31,9 @@ simple RCTrafficSourceApp extends CTTrafficSourceAppBase
 
         //Sending interval for the rate constrained messages (any build in disstribution can be used)
         volatile double interval @unit(s);
+
+        //Oscillator of Scheduler this app is assigned to
+        string oscillator = default("oscillator");
+        //Timer of Scheduler this app is assigned to
+        string timer = default("timer");
 }

@@ -19,6 +19,8 @@
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_HelperFunctions.h"
 #include "CoRE4INET_SRPTable.h"
+#include "CoRE4INET_NotifierConsts.h"
+#include "CoRE4INET_ConfigFunctions.h"
 //INET
 #include "Ethernet.h"
 #include "ModuleAccess.h"
@@ -32,8 +34,14 @@ Define_Module(AVBTrafficSourceApp);
 
 AVBTrafficSourceApp::AVBTrafficSourceApp()
 {
-    isStreaming = false;
-    multicastMAC = generateAutoMulticastAddress();
+    this->isStreaming = false;
+    this->srClass = SR_CLASS_A;
+    this->streamID = 0;
+    this->frameSize = 0;
+    this->intervalFrames = 0;
+    this->vlan_id = 0;
+    this->avbOutCTC = NULL;
+    this->multicastMAC = generateAutoMulticastAddress();
 }
 
 void AVBTrafficSourceApp::initialize()
@@ -41,31 +49,14 @@ void AVBTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
     Timed::initialize();
 
-    if     (strcmp(par("srClass").stringValue(),"A") == 0)  srClass = SR_CLASS_A;
-    else if(strcmp(par("srClass").stringValue(),"B") == 0)  srClass = SR_CLASS_B;
-    else                                                    srClass = SR_CLASS_A;
-
-    streamID = (unsigned long) par("streamID").longValue();
-    /*
-    EtherMACFullDuplex *mac = (EtherMACFullDuplex*)getParentModule()->getSubmodule("phy",0)->getSubmodule("mac");
-    unsigned long macAdress = mac->getMACAddress().getInt();
-    static unsigned short uniqueID = 0;
-    uniqueID++;
-    streamID = (macAdress << 16) + uniqueID;
-    */
-
-    intervalFrames = (unsigned int) par("intervalFrames").longValue();
-    vlan_id = (unsigned short) par("vlan_id").longValue();
-    payload = (unsigned int) par("payload").longValue();
-
-//TODO: Minor: Check these values
-    if (payload <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
+    //TODO: Minor: Check these values
+    if (getPayloadBytes() <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
     {
         frameSize = MIN_ETHERNET_FRAME_BYTES;
     }
     else
     {
-        frameSize = payload + ETHER_MAC_FRAME_BYTES + ETHER_8021Q_TAG_BYTES;
+        frameSize = getPayloadBytes() + ETHER_MAC_FRAME_BYTES + ETHER_8021Q_TAG_BYTES;
     }
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
@@ -82,10 +73,11 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
         if (srpTable)
         {
             EV << "Register Talker in node" << std::endl;
-            srpTable->subscribe("listenerRegistered", this);
-            srpTable->subscribe("listenerUnregistered", this);
-            srpTable->subscribe("listenerRegistrationTimeout", this);
-            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, srClass, frameSize, intervalFrames, vlan_id);
+            srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
+            srpTable->subscribe(NF_AVB_LISTENER_UNREGISTERED, this);
+            srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
+            srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, srClass, frameSize, intervalFrames,
+                    vlan_id);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
         }
         else
@@ -107,7 +99,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 void AVBTrafficSourceApp::sendAVBFrame()
 {
     char name[10];
-    sprintf(name, "Stream %ld", streamID);
+    sprintf(name, "Stream %lu", streamID);
     AVBFrame *outFrame = new AVBFrame(name);
     outFrame->setTimestamp();
     outFrame->setStreamID(streamID);
@@ -116,7 +108,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
 
     cPacket *payloadPacket = new cPacket;
     payloadPacket->setTimestamp();
-    payloadPacket->setByteLength(payload);
+    payloadPacket->setByteLength(getPayloadBytes());
     outFrame->encapsulate(payloadPacket);
 //Padding
     if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
@@ -126,7 +118,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
 //class measurement interval A=125us B=250us
-    simtime_t tick = check_and_cast<Oscillator*>(inet::findModuleWhereverInNode("oscillator", getParentModule()))->getTick();
+    simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
     simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
@@ -135,11 +127,11 @@ void AVBTrafficSourceApp::sendAVBFrame()
     getTimer()->registerEvent(event);
 }
 
-void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))     cComponent *src, simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent
     ();
-    if (id == registerSignal("listenerRegistered"))
+    if (id == NF_AVB_LISTENER_REGISTERED)
     {
         SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
 
@@ -154,7 +146,7 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
             sendAVBFrame();
         }
     }
-    else if ((id == registerSignal("listenerRegistrationTimeout")) || id == registerSignal("listenerUnregistered"))
+    else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT || id == NF_AVB_LISTENER_UNREGISTERED)
     {
         SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
 
@@ -171,6 +163,42 @@ void AVBTrafficSourceApp::receiveSignal(cComponent *src, simsignal_t id, cObject
             }
         }
     }
+}
+
+void AVBTrafficSourceApp::handleParameterChange(const char* parname)
+{
+    TrafficSourceAppBase::handleParameterChange(parname);
+    Timed::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "srClass"))
+    {
+        if (strcmp(par("srClass").stringValue(), "A") == 0)
+        {
+            this->srClass = SR_CLASS_A;
+        }
+        else if (strcmp(par("srClass").stringValue(), "B") == 0)
+        {
+            this->srClass = SR_CLASS_B;
+        }
+        else
+        {
+            throw cRuntimeError("Parameter srClass of %s is %s and is only allowed to be A or B", getFullPath().c_str(),
+                    par("srClass").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "streamID"))
+    {
+        this->streamID = parameterULongCheckRange(par("streamID"), 0, (unsigned long)MAX_STREAM_ID);
+    }
+    if (!parname || !strcmp(parname, "intervalFrames"))
+    {
+        this->intervalFrames = (unsigned int) parameterULongCheckRange(par("intervalFrames"), 1, MAX_INTERVAL_FRAMES);
+    }
+    if (!parname || !strcmp(parname, "vlan_id"))
+    {
+        this->vlan_id = (unsigned short) parameterULongCheckRange(par("vlan_id"), 0, MAX_VLAN_ID);
+    }
+
 }
 
 } /* namespace CoRE4INET */

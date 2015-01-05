@@ -30,7 +30,17 @@ namespace CoRE4INET {
  */
 class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtual CTApplicationBase
 {
+    private:
+        /*
+         * @brief caches ct_id parameter
+         */
+        int ct_id;
     public:
+        /**
+         * @brief Constructor of CTTrafficSourceAppBase
+         *
+         */
+        CTTrafficSourceAppBase();
         /**
          * @brief Initialization of the module.
          */
@@ -45,6 +55,8 @@ class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtu
          * The size is defined by the payload parameter of the module.
          */
         virtual void sendMessage();
+
+        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace
