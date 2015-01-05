@@ -1,6 +1,6 @@
 #Force your desired compiler
-#CC = clang
-#CXX = clang++
+CC = clang
+CXX = clang++
 
 #CFLAGS += -std=c++11
 #CFLAGS += -Wall -Wunused
@@ -22,12 +22,12 @@ endif
 #Warnings in clang and gcc:
 ifeq ($(CC),clang)
 	#clang
-    CFLAGS += -Wall -Wunused -Wextra -Wdocumentation
-else ifeq ($(CC),gcc)
-	#gcc
     CFLAGS += -Wall -Wunused -Wextra -Weverything
     CFLAGS += -Wno-documentation-unknown-command -Wno-padded
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene
+else ifeq ($(CC),gcc)
+	#gcc
+    CFLAGS += -Wall -Wunused -Wextra -ansi -pedantic-errors
 endif
 
 #Warnings generate errors
