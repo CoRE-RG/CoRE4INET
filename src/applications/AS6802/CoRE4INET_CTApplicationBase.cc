@@ -30,7 +30,9 @@ Define_Module(CTApplicationBase)
 
 CTApplicationBase::CTApplicationBase(){}
 
-CTApplicationBase::~CTApplicationBase(){}
+CTApplicationBase::~CTApplicationBase(){
+    ctbuffers.clear();
+}
 
 void CTApplicationBase::initialize()
 {

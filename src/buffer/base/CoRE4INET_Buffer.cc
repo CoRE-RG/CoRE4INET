@@ -105,7 +105,7 @@ void Buffer::handleMessage(cMessage *msg)
     }
 }
 
-void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
+void Buffer::handleParameterChange(const char* parname)
 {
     if (!parname || !strcmp(parname, "maxMessageSize"))
     {

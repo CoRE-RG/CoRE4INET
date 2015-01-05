@@ -80,7 +80,7 @@ void RCIncoming::handleMessage(cMessage *msg)
     }
 }
 
-void RCIncoming::handleParameterChange(__attribute((unused)) const char* parname)
+void RCIncoming::handleParameterChange(const char* parname)
 {
     CTIncoming::handleParameterChange(parname);
     Timed::handleParameterChange(parname);

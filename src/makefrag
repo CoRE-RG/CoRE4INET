@@ -25,7 +25,7 @@ endif
 ifeq ($(CC),clang)
 	#clang
     CFLAGS += -Wall -Wunused -Wextra -Weverything
-    CFLAGS += -Wno-documentation-unknown-command -Wno-padded
+    CFLAGS += -Wno-documentation-unknown-command -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene
 else ifeq ($(CC),gcc)
 	#gcc
@@ -34,7 +34,7 @@ else ifeq ($(CC),gcc)
 endif
 
 #Warnings generate errors
-#CFLAGS += -Werror
+CFLAGS += -Werror
 
 
 
