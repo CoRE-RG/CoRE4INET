@@ -60,7 +60,7 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
         Task *task = (Task*) msg->par("task").pointerValue();
         task->executeTask();
         //Reregister scheduler
-        period->registerEvent((SchedulerEvent *) msg);
+        getPeriod()->registerEvent((SchedulerEvent *) msg);
     }
 }
 
@@ -81,6 +81,11 @@ void TTEAPIApplicationBase::receiveSignal(cComponent *src, simsignal_t id, cObje
     delete obj;
 }
 
+void TTEAPIApplicationBase::handleParameterChange(const char* parname){
+    CTApplicationBase::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
+}
+
 void TTEAPIApplicationBase::startApplication()
 {
     throw cRuntimeError("TTEAPIApplicationBase::startApplication() not implemented");
@@ -99,7 +104,7 @@ void TTEAPIApplicationBase::registerTask(unsigned int actionTime, void (*functio
 
     event->setAction_time(actionTime);
     event->setDestinationGate(gate("schedulerIn"));
-    period->registerEvent(event);
+    getPeriod()->registerEvent(event);
 }
 
 int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id, const uint16_t ct_id,

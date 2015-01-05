@@ -214,6 +214,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
 void AVBBuffer::handleParameterChange(const char* parname)
 {
     Buffer::handleParameterChange(parname);
+    Timed::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "srClass"))
     {
         if (strcmp(par("srClass").stringValue(), "A") == 0)

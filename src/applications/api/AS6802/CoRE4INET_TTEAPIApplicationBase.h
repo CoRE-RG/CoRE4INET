@@ -86,7 +86,7 @@ class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public
         bool synchronized;
         std::map<Buffer*, APICallback*> receiveCallbacks;
         std::map<Buffer*, APICallback*> transmitCallbacks;
-    private:
+    protected:
         /**
          * @brief initializes the module.
          *
@@ -109,6 +109,15 @@ class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public
          * @ Receives signal from sync module
          */
         virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         *
+         * @throws cRuntimeError When buffer module and application module do not have the same parent module
+         */
+        virtual void handleParameterChange(const char* parname);
     protected:
         /**
          * @brief Does nothing in this application. Must be overwritten with actual

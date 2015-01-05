@@ -168,6 +168,7 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))     cComponent *
 void AVBTrafficSourceApp::handleParameterChange(const char* parname)
 {
     TrafficSourceAppBase::handleParameterChange(parname);
+    Timed::handleParameterChange(parname);
 
     if (!parname || !strcmp(parname, "srClass"))
     {

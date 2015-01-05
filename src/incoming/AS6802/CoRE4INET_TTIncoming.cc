@@ -160,6 +160,7 @@ void TTIncoming::handleMessage(cMessage *msg)
 void TTIncoming::handleParameterChange(const char* parname)
 {
     CTIncoming::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
 
     if (!parname || !strcmp(parname, "receive_window_start"))
     {

@@ -119,6 +119,7 @@ void RCBuffer::handleMessage(cMessage *msg)
 void RCBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
+    Timed::handleParameterChange(parname);
 
     if (!parname || !strcmp(parname, "bag"))
     {

@@ -84,6 +84,8 @@ void SimpleOscillator::handleMessage(cMessage *msg)
 
 void SimpleOscillator::handleParameterChange(const char* parname)
 {
+    Oscillator::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
     if (!parname && !parametersInitialized)
     {
         parametersInitialized = true;

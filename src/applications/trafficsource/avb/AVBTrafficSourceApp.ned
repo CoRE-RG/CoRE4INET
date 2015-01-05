@@ -31,7 +31,7 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         @display("i=,blue");
 
         // ID of the AVB Stream
-        double streamID = default(0);
+        int streamID = default(0);
         
         // Stream Reservation Class of the AVB Stream
         string srClass = default("A");

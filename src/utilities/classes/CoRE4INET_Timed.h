@@ -46,6 +46,10 @@ class Timed : public virtual cSimpleModule
         Timer *timer;
 
     public:
+        /**
+         * Default Constructor for Timed
+         */
+        Timed();
 
         /**
          * returns pointer to the configured timer

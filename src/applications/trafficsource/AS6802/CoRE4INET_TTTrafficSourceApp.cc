@@ -42,24 +42,8 @@ void TTTrafficSourceApp::initialize()
     handleParameterChange(NULL);
     if (isEnabled())
     {
-        Scheduled::initialize();
-
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-
-        if (findContainingNode(this) == NULL)
-        {
-            throw cRuntimeError(
-                    "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
-        }
-
-        Oscillator* oscillator = dynamic_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()));
-        if (!oscillator)
-        {
-            throw cRuntimeError(
-                    "Cannot find oscillator module in Node. Oscillator is required to calculate action time");
-        }
-
-        event->setAction_time((uint32_t) (par("action_time").doubleValue() / oscillator->par("tick").doubleValue()));
+        event->setAction_time((uint32_t) (par("action_time").doubleValue() / getOscillator()->getPreciseTick()));
         event->setDestinationGate(gate("schedulerIn"));
 
         if (event->getAction_time() >= getPeriod()->getCycleTicks())
@@ -118,6 +102,7 @@ void TTTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent *
 void TTTrafficSourceApp::handleParameterChange(const char* parname)
 {
     CTTrafficSourceAppBase::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
 
     if (!parname || !strcmp(parname, "modulo"))
     {

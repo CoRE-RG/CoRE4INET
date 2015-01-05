@@ -118,6 +118,8 @@ void TTBuffer::handleMessage(cMessage *msg)
 void TTBuffer::handleParameterChange(const char* parname)
 {
     CTBuffer::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
+
     if (!parname || !strcmp(parname, "sendWindowStart"))
     {
         uint32_t sendWindowStart = (uint32_t) parameterULongCheckRange(par("sendWindowStart"), 0,

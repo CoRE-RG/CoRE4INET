@@ -494,6 +494,8 @@ template<class TC>
 void TTShaper<TC>::handleParameterChange(const char* parname)
 {
     TC::handleParameterChange(parname);
+    Timed::handleParameterChange(parname);
+
     if (initialize_ttBuffers)
     {
         ttBuffers.clear();

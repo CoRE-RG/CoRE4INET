@@ -45,12 +45,21 @@ cModule *extendedFindModuleWhereverInNode(const char *name, cModule *from, cModu
     }
     else
     {
+        if (findContainingNode(from) == NULL)
+        {
+            throw cRuntimeError("Module is not inside a Node (Node must be marked by @node property in ned module)");
+        }
         return findModuleWhereverInNode(name, from);
     }
 }
 
 std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::string &delimiters)
 {
+    if (parameter.getType() != cPar::STRING)
+    {
+        throw cRuntimeError("Parameter %s of %s is not of type string", parameter.getFullName(),
+                parameter.getOwner()->getFullPath().c_str());
+    }
     std::vector<cModule*> modules;
     cModule *owner = dynamic_cast<cModule*>(parameter.getOwner());
     if (!owner)
@@ -81,6 +90,15 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
 
 std::vector<cGate*> parameterToGateList(const cPar &parameter, const std::string &delimiters)
 {
+    if (!parameter.isSet())
+    {
+        throw cRuntimeError("parameter was not yet set");
+    }
+    if (parameter.getType() != cPar::STRING)
+    {
+        throw cRuntimeError("Parameter %s of %s is not of type string", parameter.getFullName(),
+                parameter.getOwner()->getFullPath().c_str());
+    }
     std::vector<cGate*> gates;
     cModule *owner = dynamic_cast<cModule*>(parameter.getOwner());
     if (!owner)
@@ -111,6 +129,15 @@ std::vector<cGate*> parameterToGateList(const cPar &parameter, const std::string
 
 long parameterLongCheckRange(const cPar &parameter, long min, long max, bool exclude_min, bool exclude_max)
 {
+    if (!parameter.isSet())
+    {
+        throw cRuntimeError("parameter was not yet set");
+    }
+    if (parameter.getType() != cPar::LONG)
+    {
+        throw cRuntimeError("Parameter %s of %s is not of type long", parameter.getFullName(),
+                parameter.getOwner()->getFullPath().c_str());
+    }
     long value = parameter.longValue();
     if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
             || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
@@ -125,6 +152,15 @@ long parameterLongCheckRange(const cPar &parameter, long min, long max, bool exc
 unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min, unsigned long max, bool exclude_min,
         bool exclude_max)
 {
+    if (!parameter.isSet())
+    {
+        throw cRuntimeError("parameter was not yet set");
+    }
+    if (parameter.getType() != cPar::LONG)
+    {
+        throw cRuntimeError("Parameter %s of %s is not of type long", parameter.getFullName(),
+                parameter.getOwner()->getFullPath().c_str());
+    }
     unsigned long value = (unsigned long) parameter.longValue();
     if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
             || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
@@ -138,6 +174,15 @@ unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min,
 
 double parameterDoubleCheckRange(const cPar &parameter, double min, double max, bool exclude_min, bool exclude_max)
 {
+    if (!parameter.isSet())
+    {
+        throw cRuntimeError("parameter was not yet set");
+    }
+    if (parameter.getType() != cPar::DOUBLE)
+    {
+        throw cRuntimeError("Parameter %s of %s is not of type double", parameter.getFullName(),
+                parameter.getOwner()->getFullPath().c_str());
+    }
     double value = parameter.doubleValue();
     if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
             || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))

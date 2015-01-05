@@ -77,8 +77,10 @@ class BaseInControl : public virtual cSimpleModule, public Timed
          *
          * @param parname Name of the changed parameter or NULL if multiple parameter changed.
          */
-        virtual void handleParameterChange(__attribute((unused)) const char* parname)
+        virtual void handleParameterChange(const char* parname)
         {
+            Timed::handleParameterChange(parname);
+
             if (!parametersInitialized)
             {
                 parametersInitialized = true;

@@ -23,6 +23,12 @@
 
 using namespace CoRE4INET;
 
+Timed::Timed(){
+    this->parametersInitialized = false;
+    this->oscillator = NULL;
+    this->timer = NULL;
+}
+
 Oscillator* Timed::getOscillator()
 {
     if (!parametersInitialized)
@@ -50,18 +56,18 @@ void Timed::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "timer"))
     {
         this->timer = dynamic_cast<Timer*>(extendedFindModuleWhereverInNode(par("timer").stringValue(),
-                getParentModule(), this, cModuleType::get("core4inet.scheduler.timer")));
+                getParentModule(), this, cModuleType::get("core4inet.scheduler.timer.Timer")));
         if (!this->timer)
         {
             throw cRuntimeError(
-                    "Configuration problem of parameter %s in module %s: The requested timer module: %s could not be found!",
-                    parname, this->getFullPath().c_str(), par("period").stringValue());
+                    "Configuration problem of parameter timer in module %s: The requested timer module: %s could not be found!",
+                    this->getFullPath().c_str(), par("period").stringValue());
         }
     }
     if (!parname || !strcmp(parname, "oscillator"))
     {
         this->oscillator = dynamic_cast<Oscillator*>(extendedFindModuleWhereverInNode(par("oscillator").stringValue(),
-                getParentModule(), this, cModuleType::get("core4inet.scheduler.oscillator")));
+                getParentModule(), this, cModuleType::get("core4inet.scheduler.oscillator.Oscillator")));
         if (!this->oscillator)
         {
             throw cRuntimeError(

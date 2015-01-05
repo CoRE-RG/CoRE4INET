@@ -40,19 +40,24 @@ Period* Scheduled::getPeriod()
 
 void Scheduled::handleParameterChange(const char* parname)
 {
+    Timed::handleParameterChange(parname);
     if (!parname && !parametersInitialized)
     {
         parametersInitialized = true;
     }
     if (!parname || !strcmp(parname, "period"))
     {
+        if(par("period").stdstringValue().length() == 0)
+        {
+            par("period").setStringValue("period[0]");
+        }
         this->period = dynamic_cast<Period*>(extendedFindModuleWhereverInNode(par("period").stringValue(),
-                getParentModule(), this, cModuleType::get("core4inet.scheduler.period")));
+                getParentModule(), this, cModuleType::get("core4inet.scheduler.period.Period")));
         if (!this->period)
         {
             throw cRuntimeError(
-                                "Configuration problem of parameter %s in module %s: The requested period module: %s could not be found!",
-                                parname, this->getFullPath().c_str(), par("period").stringValue());
+                                "Configuration problem of parameter period in module %s: The requested period module: %s could not be found!",
+                                this->getFullPath().c_str(), par("period").stringValue());
         }
     }
 }
