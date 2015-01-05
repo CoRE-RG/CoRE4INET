@@ -59,12 +59,16 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual std::string at(int i) const
         {
-            int index = 0;
+            if (i < 0)
+            {
+                throw std::invalid_argument("i must be positive");
+            }
+            size_t index = 0;
             it = m.begin();
             it2 = (*it).second.begin();
             while (index <= i)
             {
-                if (i > (index + (int)(*it).second.size()))
+                if (i > (index + (*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -72,7 +76,7 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
                 }
                 else
                 {
-                    for (int k = 0; k < (i - index); k++)
+                    for (size_t k = 0; k < (static_cast<size_t>(i) - index); k++)
                     {
                         ++it2;
                     }
@@ -117,16 +121,20 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
             {
                 size += (*i).second.size();
             }
-            return size;
+            return static_cast<int>(size);
         }
         virtual std::string at(int i) const
         {
-            int index = 0;
+            if (i < 0)
+            {
+                throw std::invalid_argument("i must be positive");
+            }
+            size_t index = 0;
             it = m.begin();
             it2 = (*it).second.begin();
-            while (index <= i)
+            while (index <= static_cast<size_t>(i))
             {
-                if (i > (index + (int) (*it).second.size()))
+                if (static_cast<size_t>(i) > (index + (*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -134,7 +142,7 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
                 }
                 else
                 {
-                    for (int k = 0; k < (i - index); k++)
+                    for (size_t k = 0; k < (static_cast<size_t>(i) - index); k++)
                     {
                         ++it2;
                     }
@@ -185,7 +193,7 @@ class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 {
     public:
         cStdListUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
-            cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
+                cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
 
         {
         }
@@ -474,17 +482,17 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
                     size += (*j).second.size();
                 }
             }
-            return (int) size;
+            return static_cast<int>(size);
         }
         virtual std::string at(int i) const
         {
-            int index = 0;
+            size_t index = 0;
             this->it = this->m.begin();
             this->it2 = (*this->it).second.begin();
             it3 = (*this->it2).second.begin();
             while (index <= i)
             {
-                if (i > (index + (int) (*this->it2).second.size()))
+                if (static_cast<size_t>(i) > (index + (*this->it2).second.size()))
                 {
                     index += (*this->it2).second.size();
                     ++this->it2;
@@ -497,7 +505,7 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
                 }
                 else
                 {
-                    for (int k = 0; k < (i - index); k++)
+                    for (size_t k = 0; k < (static_cast<size_t>(i) - index); k++)
                     {
                         ++this->it2;
                     }
