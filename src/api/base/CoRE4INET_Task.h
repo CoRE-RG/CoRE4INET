@@ -22,6 +22,9 @@ namespace CoRE4INET {
 
 typedef void(*cbFunc)(void *);
 
+//This disables the padding warning for this class!
+#pragma GCC diagnostic ignored "-Wpadded"
+
 /**
  * @brief Class representing a Task.
  *
@@ -53,23 +56,14 @@ class Task
         /**
          * @brief Constructor
          */
-        Task(){
-            this->argSet = false;
-            this->arg = NULL;
-            this->fn = NULL;
-        }
-
-        /**
-         * @brief Destructor
-         */
-        virtual ~Task(){}
+        Task();
 
         /**
          * @brief Setter for the function pointer.
          *
          * @param functionPointer the funtion pointer to be invoked in the task
          */
-        virtual void setFunctionPointer(void (*functionPointer)(void*)){
+        void setFunctionPointer(void (*functionPointer)(void*)){
             fn=functionPointer;
         }
 
@@ -78,7 +72,7 @@ class Task
          *
          * @return the funtion pointer that is invoked in the task
          */
-        virtual cbFunc getFunctionPointer(){
+        cbFunc getFunctionPointer(){
             return fn;
         }
 
@@ -87,7 +81,7 @@ class Task
          *
          * @param setFunctionArg the funtion arg to be used in the task
          */
-        virtual void setFunctionArg(void *setFunctionArg){
+        void setFunctionArg(void *setFunctionArg){
             arg=setFunctionArg;
             argSet=true;
         }
@@ -97,7 +91,7 @@ class Task
          *
          * @return the funtion arg used in the task
          */
-        virtual void* getFunctionArg(){
+        void* getFunctionArg(){
             return arg;
         }
 
@@ -106,7 +100,7 @@ class Task
          *
          * If method is called the stored function pointer is invoked.
          */
-        virtual void executeTask(){
+        void executeTask(){
             fn(arg);
         }
 };

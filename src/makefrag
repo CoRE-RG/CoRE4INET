@@ -1,6 +1,6 @@
 #Force your desired compiler
-#CC = clang
-#CXX = clang++
+CC = clang
+CXX = clang++
 
 #CFLAGS += -std=c++11
 #CFLAGS += -Wall -Wunused
@@ -25,11 +25,11 @@ ifeq ($(CC),clang)
     CFLAGS += -Wall -Wunused -Wextra -Wdocumentation
 else ifeq ($(CC),gcc)
 	#gcc
-    CFLAGS += -Wall -Wunused -Wextra
+    CFLAGS += -Wall -Wunused -Wextra -Weverything
 endif
 
 #Warnings generate errors
-#CFLAGS += -Werror
+CFLAGS += -Werror
 
 
 

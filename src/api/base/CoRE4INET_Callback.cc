@@ -18,4 +18,21 @@
 
 namespace CoRE4INET {
 
+Callback::Callback(Buffer *buffer, simsignal_t signal)
+{
+    argSet = false;
+    buffer->subscribe(signal, this);
+}
+
+void Callback::setFunctionPointer(void (*functionPointer)(void*))
+{
+    fn = functionPointer;
+}
+
+void Callback::receiveSignal(__attribute__((unused))   cComponent *src, __attribute__((unused))   simsignal_t id,
+        __attribute__((unused))   cObject *obj)
+{
+    fn(arg);
+}
+
 }

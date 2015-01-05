@@ -59,34 +59,21 @@ class Callback : public cListener
         /**
          * @brief Constructor
          */
-        Callback(Buffer *buffer, simsignal_t signal)
-        {
-            argSet = false;
-            buffer->subscribe(signal, this);
-        }
-        /**
-         * @brief Destructor
-         */
-        virtual ~Callback()
-        {
-        }
+        Callback(Buffer *buffer, simsignal_t signal);
 
         /**
          * @brief Setter for the function pointer.
          *
          * @param functionPointer the funtion pointer to be invoked in the callback
          */
-        virtual void setFunctionPointer(void (*functionPointer)(void*))
-        {
-            fn = functionPointer;
-        }
+        void setFunctionPointer(void (*functionPointer)(void*));
 
         /**
          * @brief Getter for the function pointer.
          *
          * @return the funtion pointer that is invoked in the callback
          */
-        virtual cbFunc getFunctionPointer()
+        cbFunc getFunctionPointer()
         {
             return fn;
         }
@@ -96,7 +83,7 @@ class Callback : public cListener
          *
          * @param setFunctionArg the funtion arg to be used in the callback
          */
-        virtual void setFunctionArg(void *setFunctionArg)
+        void setFunctionArg(void *setFunctionArg)
         {
             arg = setFunctionArg;
             argSet = true;
@@ -107,7 +94,7 @@ class Callback : public cListener
          *
          * @return the funtion arg used in the callback
          */
-        virtual void* getFunctionArg()
+        void* getFunctionArg()
         {
             return arg;
         }
@@ -117,11 +104,7 @@ class Callback : public cListener
          *
          * If method is called the stored function pointer is invoked.
          */
-        virtual void receiveSignal(__attribute__((unused))  cComponent *src, __attribute__((unused))  simsignal_t id,
-                __attribute__((unused))  cObject *obj)
-        {
-            fn(arg);
-        }
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
 };
 
 }

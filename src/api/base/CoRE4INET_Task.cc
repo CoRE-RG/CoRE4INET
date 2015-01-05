@@ -18,4 +18,11 @@
 
 namespace CoRE4INET {
 
+Task::Task()
+{
+    this->argSet = false;
+    this->arg = NULL;
+    this->fn = NULL;
+}
+
 }
