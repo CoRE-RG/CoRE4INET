@@ -8,4 +8,6 @@
 #CXX = clang++
 
 #For OS X
-LDFLAGS += -headerpad_max_install_names
+ifeq ($(CC),clang)
+	LDFLAGS += -headerpad_max_install_names 
+endif
