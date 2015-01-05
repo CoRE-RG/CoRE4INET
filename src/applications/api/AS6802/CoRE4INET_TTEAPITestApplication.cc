@@ -20,7 +20,7 @@
 
 namespace CoRE4INET {
 
-Define_Module(TTEAPITestApplication);
+Define_Module(TTEAPITestApplication)
 
 void testCallback(void* arg)
 {
