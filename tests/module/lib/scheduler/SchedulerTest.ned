@@ -23,6 +23,8 @@ import core4inet.scheduler.Scheduler;
 //
 network SchedulerTest
 {
+    parameters:
+        @node;
     submodules:
         scheduler: Scheduler{
         }
