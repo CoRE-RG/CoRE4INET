@@ -83,7 +83,7 @@ typedef uint64_t tte_time_t;
 typedef enum {
     TTE_DIR_INPUT  = 1,   /**< Receive buffer */
     TTE_DIR_OUTPUT = 2,   /**< Transmit buffer */
-    TTE_DIR_INOUT  = 3,   /**< Bidirectional buffer */
+    TTE_DIR_INOUT  = 3    /**< Bidirectional buffer */
 } tte_direction_t;
 
 
@@ -335,7 +335,7 @@ typedef enum {
      * @note Type: <tt>uint8_t[6]</tt>.
      * @note Mandatory read support.
      * @note Optional write support. */
-    TTE_VAR_MAC_ADDRESS,
+    TTE_VAR_MAC_ADDRESS
 } tte_var_id_t;
 
 
@@ -413,7 +413,7 @@ typedef enum {
      *   a DMA read. Writing `0' will disable DMA access for this buffer.
      *   It is not possible to disable the DMA access if a transfer
      *   is pending. */
-    TTE_BUFVAR_DMA_INPUT,
+    TTE_BUFVAR_DMA_INPUT
 } tte_buf_var_id_t;
 
 

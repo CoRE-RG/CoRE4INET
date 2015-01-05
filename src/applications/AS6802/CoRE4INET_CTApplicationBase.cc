@@ -26,7 +26,7 @@
 
 namespace CoRE4INET {
 
-Define_Module(CTApplicationBase);
+Define_Module(CTApplicationBase)
 
 void CTApplicationBase::initialize()
 {
