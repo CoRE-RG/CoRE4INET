@@ -111,7 +111,7 @@ size_t MessageNumProfiler::maxRecursiveMessages(cModule *root, bool onlyChild)
     for (cModule::SubmoduleIterator i(root); !i.end(); i++)
     {
         cModule *submod = i();
-        int childMax = maxRecursiveMessages(submod, false);
+        size_t childMax = maxRecursiveMessages(submod, false);
         if (childMax > maxMsg)
         {
             maxMsg = childMax;

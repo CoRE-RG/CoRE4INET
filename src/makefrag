@@ -29,7 +29,7 @@ else ifeq ($(CC),gcc)
 endif
 
 #Warnings generate errors
-CFLAGS += -Werror
+#CFLAGS += -Werror
 
 
 

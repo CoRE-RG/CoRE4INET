@@ -311,7 +311,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused)) const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
