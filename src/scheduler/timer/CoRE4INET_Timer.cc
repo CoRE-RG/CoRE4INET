@@ -259,7 +259,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
     uint64_t actionpoint = 0;
 
     //Check whether event is in cycle
-    if (actionTimeEvent->getAction_time() > (uint32_t) period->par("cycle_ticks").longValue())
+    if (actionTimeEvent->getAction_time() > period->getCycleTicks())
     {
         bubble("Schedule contains out of cycle events!");
         return false;
@@ -268,7 +268,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
     if (distance < 0 || (distance == 0 && actionTimeEvent->getNext_cycle()))
     {
         actionpoint = (uint64_t) ((int64_t) getTotalTicks()
-                + ((int64_t) period->par("cycle_ticks").longValue() + distance));
+                + ((int64_t) period->getCycleTicks() + distance));
     }
     else
     {
@@ -360,7 +360,7 @@ void Timer::clockCorrection(int32_t ticks)
                 uint64_t corrected_tick = (uint64_t) (*it2).first;
                 while (corrected_tick < this->ticks)
                 {
-                    corrected_tick += (uint64_t) (*it4).second->par("cycle_ticks").longValue();
+                    corrected_tick += (uint64_t) (*it4).second->getCycleTicks();
                 }
                 correctedActionTimeEvents[corrected_tick].push_back(*it4);
             }
