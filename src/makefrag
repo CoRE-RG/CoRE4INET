@@ -7,7 +7,8 @@
 #CC = clang
 #CXX = clang++
 
+UNAME_S := $(shell uname -s)
 #For OS X
-ifeq ($(CC),clang)
-	LDFLAGS += -headerpad_max_install_names 
+ifeq ($(UNAME_S),Darwin)
+    LDFLAGS += -headerpad_max_install_names 
 endif
