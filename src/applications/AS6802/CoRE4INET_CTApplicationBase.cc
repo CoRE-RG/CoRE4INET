@@ -26,7 +26,11 @@
 
 namespace CoRE4INET {
 
-Define_Module(CTApplicationBase);
+Define_Module(CTApplicationBase)
+
+CTApplicationBase::CTApplicationBase(){}
+
+CTApplicationBase::~CTApplicationBase(){}
 
 void CTApplicationBase::initialize()
 {
@@ -61,7 +65,7 @@ void CTApplicationBase::handleParameterChange(const char* parname)
             }
             if (CTBuffer *buffer = dynamic_cast<CTBuffer*>(*module))
             {
-                ctbuffers[(uint16_t) buffer->par("ct_id").longValue()].push_back(buffer);
+                ctbuffers[buffer->getCTID()].push_back(buffer);
             }
         }
     }
