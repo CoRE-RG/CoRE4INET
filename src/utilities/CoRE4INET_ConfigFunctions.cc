@@ -20,38 +20,7 @@
 //OMNeT++
 #include "cstringtokenizer.h"
 
-//INET
-#include "ModuleAccess.h"
-
 namespace CoRE4INET {
-
-cModule *extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *caller, cModuleType *type)
-{
-    if (strcmp(name, "this") == 0)
-    {
-        if (!caller)
-        {
-            throw cRuntimeError("this parameter cannot be used in this module");
-        }
-        return caller;
-    }
-    else if (type && strcmp(name, "auto") == 0)
-    {
-        if (!type)
-        {
-            throw cRuntimeError("auto parameter cannot be used in this module");
-        }
-        return NULL;
-    }
-    else
-    {
-        if (findContainingNode(from) == NULL)
-        {
-            throw cRuntimeError("Module is not inside a Node (Node must be marked by @node property in ned module)");
-        }
-        return findModuleWhereverInNode(name, from);
-    }
-}
 
 std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::string &delimiters)
 {

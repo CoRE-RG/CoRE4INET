@@ -23,7 +23,8 @@
 
 using namespace CoRE4INET;
 
-Timed::Timed(){
+Timed::Timed()
+{
     this->parametersInitialized = false;
     this->oscillator = NULL;
     this->timer = NULL;
@@ -55,8 +56,7 @@ void Timed::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "timer"))
     {
-        this->timer = dynamic_cast<Timer*>(extendedFindModuleWhereverInNode(par("timer").stringValue(),
-                getParentModule(), this, cModuleType::get("core4inet.scheduler.timer.Timer")));
+        this->timer = extendedFindModuleWhereverInNode<Timer*>(par("timer").stringValue(), getParentModule(), this);
         if (!this->timer)
         {
             throw cRuntimeError(
@@ -66,8 +66,8 @@ void Timed::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "oscillator"))
     {
-        this->oscillator = dynamic_cast<Oscillator*>(extendedFindModuleWhereverInNode(par("oscillator").stringValue(),
-                getParentModule(), this, cModuleType::get("core4inet.scheduler.oscillator.Oscillator")));
+        this->oscillator = extendedFindModuleWhereverInNode<Oscillator*>(par("oscillator").stringValue(), getParentModule(),
+                this);
         if (!this->oscillator)
         {
             throw cRuntimeError(
