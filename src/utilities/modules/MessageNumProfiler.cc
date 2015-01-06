@@ -39,21 +39,22 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
     if (par("print_cerr").boolValue())
     {
         std::cerr << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-        std::cerr << printMessages(sysmod, par("max_messages").longValue(), par("print_msgs").boolValue());
+        std::cerr
+                << printMessages(sysmod, static_cast<size_t>(par("max_messages").longValue()), par("print_msgs").boolValue());
         std::cerr << "Profiling done!" << endl;
     }
     else
     {
         EV << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-        EV << printMessages(sysmod, par("max_messages").longValue(), par("print_msgs").boolValue());
+        EV << printMessages(sysmod, static_cast<size_t>(par("max_messages").longValue()), par("print_msgs").boolValue());
         EV << "Profiling done!" << endl;
     }
 
-    if (par("throw_error").boolValue() && overModules(sysmod, par("max_messages").longValue()))
+    if (par("throw_error").boolValue() && overModules(sysmod, static_cast<size_t>(par("max_messages").longValue())))
     {
         delete msg;
         throw cRuntimeError("Profiler found %d modules with more than the configured maximum of %d messages",
-                overModules(sysmod, par("max_messages").longValue()), par("max_messages").longValue());
+                overModules(sysmod, static_cast<size_t>(par("max_messages").longValue())), par("max_messages").longValue());
     }
 
     if (par("max_live_messages").longValue() > 0 && msg->getLiveMessageCount() > par("max_live_messages").longValue())
