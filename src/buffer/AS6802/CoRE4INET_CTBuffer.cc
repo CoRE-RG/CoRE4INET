@@ -74,19 +74,19 @@ void CTBuffer::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "ct_id"))
     {
-        this->ctId = (uint16_t) parameterULongCheckRange(par("ct_id"), 0, MAX_CT_ID);
+        this->ctId = static_cast<uint16_t>(parameterULongCheckRange(par("ct_id"), 0, MAX_CT_ID));
     }
     if (!parname || !strcmp(parname, "ct_mask"))
     {
-        this->ctMask = (uint32_t) par("ct_mask").longValue();
+        this->ctMask = static_cast<uint32_t>(par("ct_mask").longValue());
     }
     if (!parname || !strcmp(parname, "ct_marker"))
     {
-        this->ctMarker = (uint32_t) par("ct_marker").longValue();
+        this->ctMarker = static_cast<uint32_t>(par("ct_marker").longValue());
     }
     if (!parname || !strcmp(parname, "priority"))
     {
-        this->priority = (short) parameterLongCheckRange(par("priority"), -1, MAX_PRIORITY);
+        this->priority = static_cast<short>(parameterLongCheckRange(par("priority"), -1, MAX_PRIORITY));
     }
 }
 

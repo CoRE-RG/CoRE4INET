@@ -89,7 +89,7 @@ void Buffer::handleMessage(cMessage *msg)
             {
                 frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
             }
-            if (frame->getByteLength() <= maxMessageSize)
+            if (static_cast<size_t>(frame->getByteLength()) <= maxMessageSize)
             {
                 putFrame(frame);
             }
@@ -109,8 +109,8 @@ void Buffer::handleParameterChange(const char* parname)
 {
     if (!parname || !strcmp(parname, "maxMessageSize"))
     {
-        this->maxMessageSize = (size_t) parameterULongCheckRange(par("maxMessageSize"), MIN_ETHERNET_FRAME_BYTES,
-        MAX_ETHERNET_FRAME_BYTES);
+        this->maxMessageSize = static_cast<size_t>(parameterULongCheckRange(par("maxMessageSize"),
+                MIN_ETHERNET_FRAME_BYTES, MAX_ETHERNET_FRAME_BYTES));
     }
     if (!parname || !strcmp(parname, "destination_gates"))
     {
@@ -129,7 +129,7 @@ void Buffer::handleParameterChange(const char* parname)
     }
 }
 
-void Buffer::enqueue(__attribute((unused))  EtherFrame *newFrame)
+void Buffer::enqueue(__attribute((unused))         EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }

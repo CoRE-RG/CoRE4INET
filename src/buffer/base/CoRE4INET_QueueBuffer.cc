@@ -39,7 +39,7 @@ void QueueBuffer::initializeStatistics()
 
 void QueueBuffer::enqueue(EtherFrame *newFrame)
 {
-    int size = par("size").longValue();
+    int size = static_cast<int>(par("size").longValue());
     if (size >= 0 && frames.length() >= size)
     {
         emit(droppedSignal, newFrame);
@@ -62,23 +62,23 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
         }
     }
     frames.insert(newFrame);
-    setFilled((unsigned int) frames.length());
-    emit(queueLengthSignal, (unsigned int) frames.length());
+    setFilled(static_cast<size_t>(frames.length()));
+    emit(queueLengthSignal, static_cast<unsigned long>(frames.length()));
 }
 
 EtherFrame * QueueBuffer::dequeue()
 {
     if (frames.length() > 0)
     {
-        setFilled((unsigned int) (frames.length() - 1));
-        emit(queueLengthSignal, (unsigned int) (frames.length() - 1));
-        return (EtherFrame*) frames.pop();
+        setFilled(static_cast<size_t>(frames.length() - 1));
+        emit(queueLengthSignal, static_cast<unsigned long>(frames.length() - 1));
+        return static_cast<EtherFrame*>(frames.pop());
     }
     else
         return NULL;
 }
 
-void QueueBuffer::setFilled(unsigned int fillLevel)
+void QueueBuffer::setFilled(size_t fillLevel)
 {
     if (ev.isGUI())
     {
@@ -104,7 +104,7 @@ void QueueBuffer::setFilled(unsigned int fillLevel)
 
 size_t QueueBuffer::size() const
 {
-    return (unsigned int)frames.length();
+    return static_cast<size_t>(frames.length());
 }
 
 void QueueBuffer::clear(){

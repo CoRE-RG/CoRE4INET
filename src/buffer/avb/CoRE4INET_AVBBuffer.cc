@@ -80,7 +80,7 @@ void AVBBuffer::initialize(int stage)
                 {
                     if (cChannel *outChannel = macOutGate->findTransmissionChannel())
                     {
-                        this->portBandwith = (unsigned int) ceil(outChannel->getNominalDatarate());
+                        this->portBandwith = static_cast<unsigned int>(ceil(outChannel->getNominalDatarate()));
                     }
                     else
                     {
@@ -151,9 +151,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
             {
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                         getParentModule()->getSubmodule("phy", getIndex()), srClass);
-                Wduration = ((double) -credit) / reservedBandwith;
+                Wduration = static_cast<double>(-credit) / reservedBandwith;
                 SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                event->setTimer((uint64_t) ceil(Wduration / tick));
+                event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
                 event->setDestinationGate(gate("schedulerIn"));
                 getTimer()->registerEvent(event);
             }
@@ -196,9 +196,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 }
                 else
                 {
-                    Wduration = ((double) -credit) / reservedBandwith;
+                    Wduration = static_cast<double>(-credit) / reservedBandwith;
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer((uint64_t) ceil(Wduration / tick));
+                    event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
                     event->setDestinationGate(gate("schedulerIn"));
                     getTimer()->registerEvent(event);
                 }
@@ -285,7 +285,7 @@ void AVBBuffer::sendSlope(SimTime duration)
         {
             Wduration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer((uint64_t) ceil(Wduration / tick));
+            event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
             event->setDestinationGate(gate("schedulerIn"));
             getTimer()->registerEvent(event);
         }

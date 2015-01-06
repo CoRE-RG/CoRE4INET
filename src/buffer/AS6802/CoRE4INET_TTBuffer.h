@@ -40,12 +40,27 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
 {
     private:
         /**
+         * Checks whether the parameters were already initialized
+         */
+        bool parametersInitialized;
+
+        /**
          * @brief Event indicating the actionTime
          *
          */
         SchedulerActionTimeEvent* actionTimeEvent;
 
         uint64_t nextAction;
+
+        /**
+         * @brief Caches sendWindowStart parameter
+         */
+        uint32_t sendWindowStart;
+
+        /**
+         * @brief Caches sendWindowEnd parameter
+         */
+        uint32_t sendWindowEnd;
 
     protected:
         using Scheduled::initialize;
@@ -106,6 +121,20 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          * @sa enqueue();
          */
         virtual long getRequiredBandwidth();
+
+        /**
+         * @brief Returns the Start of the Send Window in Ticks
+         *
+         * @return send window start in ticks
+         */
+        uint32_t getSendWindowStart();
+
+        /**
+         * @brief Returns the End of the Send Window in Ticks
+         *
+         * @return send window end in ticks
+         */
+        uint32_t getSendWindowEnd();
 };
 }
 

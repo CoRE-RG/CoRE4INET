@@ -123,11 +123,11 @@ void RCBuffer::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "bag"))
     {
-        this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG);
+        this->bag = static_cast<uint64_t>(parameterULongCheckRange(par("bag"), 0, MAX_BAG));
     }
     if (!parname || !strcmp(parname, "jitter"))
     {
-        this->jitter = (uint64_t) parameterULongCheckRange(par("jitter"), 0, MAX_JITTER);
+        this->jitter = static_cast<uint64_t>(parameterULongCheckRange(par("jitter"), 0, MAX_JITTER));
     }
 }
 
@@ -171,7 +171,8 @@ void RCBuffer::resetBag()
 
 long RCBuffer::getRequiredBandwidth()
 {
-    return (long) ceil((getMaxMessageSize() * 8) * (1 / (static_cast<double>(this->bag) * getOscillator()->getPreciseTick())));
+    return static_cast<long>(ceil(
+            (getMaxMessageSize() * 8) * (1 / (static_cast<double>(this->bag) * getOscillator()->getPreciseTick()))));
 }
 
 } //namespace

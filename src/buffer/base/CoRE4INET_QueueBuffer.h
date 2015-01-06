@@ -71,7 +71,7 @@ class QueueBuffer : public virtual Buffer
          *
          * @param fillLevel the level the buffer is filled in number of frames
          */
-        void setFilled(unsigned int fillLevel);
+        void setFilled(size_t fillLevel);
     protected:
         /**
          * @brief Inserts EtherFrame in the Queue and emits the queue length.
