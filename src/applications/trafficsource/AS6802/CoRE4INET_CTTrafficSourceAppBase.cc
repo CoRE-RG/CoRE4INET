@@ -86,7 +86,7 @@ void CTTrafficSourceAppBase::sendMessage()
             frame->setTimestamp();
             cPacket *payload = new cPacket;
             payload->setTimestamp();
-            payload->setByteLength(getPayloadBytes());
+            payload->setByteLength(static_cast<int64_t>(getPayloadBytes()));
             frame->encapsulate(payload);
             //Padding
             if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
@@ -129,7 +129,7 @@ void CTTrafficSourceAppBase::handleParameterChange(const char* parname)
     CTApplicationBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "ct_id"))
     {
-        this->ct_id = (int) parameterLongCheckRange(par("ct_id"), -1, MAX_CT_ID);
+        this->ct_id = static_cast<int>(parameterLongCheckRange(par("ct_id"), -1, MAX_CT_ID));
     }
 }
 

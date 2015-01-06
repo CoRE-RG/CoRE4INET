@@ -51,7 +51,7 @@ void BGTrafficSourceApp::sendMessage()
         frame->setDest(this->destAddress);
 
         cPacket *payload = new cPacket;
-        payload->setByteLength(getPayloadBytes());
+        payload->setByteLength(static_cast<int64_t>(getPayloadBytes()));
         frame->setByteLength(ETHER_MAC_FRAME_BYTES);
         frame->encapsulate(payload);
         //Padding
