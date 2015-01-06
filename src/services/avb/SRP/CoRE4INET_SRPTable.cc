@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
             << bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames, getIntervalForClass(entry.srClass))
-                    / (double) 1000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
+                    / static_cast<double>(1000000) << "Mbps, insertionTime=" << entry.insertionTime << "}";
     return os;
 }
 
@@ -380,7 +380,7 @@ void SRPTable::printState()
                     << (*j).second->address.str() << "   "
                     << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
                     << bandwidthFromSizeAndInterval((*j).second->framesize, (*j).second->intervalFrames,
-                            getIntervalForClass((*j).second->srClass)) / (double) 1000000 << "   "
+                            getIntervalForClass((*j).second->srClass)) / static_cast<double>(1000000) << "   "
                     << (*j).second->insertionTime << endl;
         }
     }

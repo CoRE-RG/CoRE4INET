@@ -76,7 +76,7 @@ void SRPRelay::dispatchSRP(SRPFrame * srp)
     int notPortNum = controlInfo->getNotSwitchPort();
     MACAddress address = controlInfo->getDest();
 
-    if (portNum >= (int) portCount)
+    if (portNum >= static_cast<int>(portCount))
         throw cRuntimeError("Output port %d doesn't exist!", portNum);
 
     EthernetIIFrame * frame = new EthernetIIFrame(srp->getName());
@@ -96,9 +96,9 @@ void SRPRelay::dispatchSRP(SRPFrame * srp)
     {
         for (size_t i = 0; i < portCount; ++i)
         {
-            if ((int) i != notPortNum)
+            if (static_cast<int>(i) != notPortNum)
             {
-                send(frame->dup(), "ifOut", i);
+                send(frame->dup(), "ifOut", static_cast<int>(i));
                 EV_INFO << "Sending SRP frame " << frame << " with destination = " << frame->getDest() << ", port = "
                         << i << endl;
             }
