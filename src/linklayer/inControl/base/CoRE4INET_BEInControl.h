@@ -48,25 +48,31 @@ void BEInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        EtherFrame *frame = (EtherFrame*) msg;
-        this->recordPacketReceived(frame);
+        if (EtherFrame *frame = dynamic_cast<EtherFrame*>(msg))
+        {
+            this->recordPacketReceived(frame);
 
-        if (IC::isPromiscuous() || frame->getDest().isMulticast())
-        {
-            cSimpleModule::send(msg, "out");
-        }
-        else
-        {
-            MACAddress address;
-            address.setAddress(frame->getArrivalGate()->getPathStartGate()->getOwnerModule()->par("address"));
-            if (frame->getDest().equals(address))
+            if (IC::isPromiscuous() || frame->getDest().isMulticast())
             {
                 cSimpleModule::send(msg, "out");
             }
             else
             {
-                IC::handleMessage(msg);
+                MACAddress address;
+                address.setAddress(frame->getArrivalGate()->getPathStartGate()->getOwnerModule()->par("address"));
+                if (frame->getDest().equals(address))
+                {
+                    cSimpleModule::send(msg, "out");
+                }
+                else
+                {
+                    IC::handleMessage(msg);
+                }
             }
+        }
+        else
+        {
+            throw cRuntimeError("Received message on port in that is no EtherFrame");
         }
     }
     else

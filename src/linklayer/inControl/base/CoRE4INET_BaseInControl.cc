@@ -35,7 +35,7 @@ void BaseInControl::setParameters(EtherFrame *frame)
             par = &frame->par(i);
         else
             par = &frame->addPar("received_total");
-        par->setLongValue((long) getTimer()->getTotalTicks());
+        par->setLongValue(static_cast<long>(getTimer()->getTotalTicks()));
 
         i = frame->findPar("received_port");
         if (i >= 0)

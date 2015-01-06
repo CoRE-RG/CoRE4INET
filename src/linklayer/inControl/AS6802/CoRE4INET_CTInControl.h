@@ -196,11 +196,11 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "ct_mask"))
     {
-        this->ctMask = (uint32_t) cComponent::par("ct_mask").longValue();
+        this->ctMask = static_cast<uint32_t>(cComponent::par("ct_mask").longValue());
     }
     if (!parname || !strcmp(parname, "ct_marker"))
     {
-        this->ctMarker = (uint32_t) cComponent::par("ct_marker").longValue();
+        this->ctMarker = static_cast<uint32_t>(cComponent::par("ct_marker").longValue());
     }
     if (!parname || !strcmp(parname, "ct_incomings"))
     {
@@ -222,8 +222,7 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
                 }
                 else
                 {
-                    throw cRuntimeError("CTIncoming module %s has no CTBuffer attached!",
-                            ct_incoming->getFullName());
+                    throw cRuntimeError("CTIncoming module %s has no CTBuffer attached!", ct_incoming->getFullName());
                 }
             }
             else
@@ -249,7 +248,8 @@ bool CTInControl<IC>::isCT(EtherFrame *frame)
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);
     //Check for ct
-    if ((((macBytes[0] << 24) | (macBytes[1] << 16) | (macBytes[2] << 8) | (macBytes[3])) & ctMask)
+    if (((static_cast<uint32_t>(macBytes[0] << 24) | static_cast<uint32_t>(macBytes[1] << 16)
+            | static_cast<uint32_t>(macBytes[2] << 8) | static_cast<uint32_t>(macBytes[3])) & ctMask)
             == (ctMarker & ctMask))
     {
         return true;
@@ -262,7 +262,7 @@ uint16_t CTInControl<IC>::getCTID(EtherFrame *frame)
 {
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);
-    return (uint16_t)((macBytes[4] << 8) | macBytes[5]);
+    return static_cast<uint16_t>((macBytes[4] << 8) | macBytes[5]);
 }
 
 }
