@@ -269,7 +269,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))         MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))          MACAddress address,
         uint16_t vid)
 {
 
@@ -470,7 +470,8 @@ void SRPTable::updateDisplayString()
         return;
 
     char buf[80];
-    sprintf(buf, "%u talkers\n%u listeners", getNumTalkerEntries(), getNumListenerEntries());
+    sprintf(buf, "%u talkers\n%u listeners", static_cast<unsigned int>(getNumTalkerEntries()),
+            static_cast<unsigned int>(getNumListenerEntries()));
     getDisplayString().setTagArg("t", 0, buf);
 }
 
