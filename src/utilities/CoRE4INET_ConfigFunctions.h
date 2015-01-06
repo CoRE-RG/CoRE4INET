@@ -57,7 +57,7 @@ T recursiveFindByType(cModule *root)
  * Find a module with given name, and "closest" to module "from". if name is "this" caller is returned
  * If name is "auto" first module of type t is returned
  *
- * Operation: gradually rises in the module hierarchy up to the @node
+ * Operation: gradually rises in the module hierarchy up to the \@node
  * module, and searches recursively among all submodules at every level.
  *
  * @param name Module name to find. Also allowed: "this" if caller is not NULL and "auto"

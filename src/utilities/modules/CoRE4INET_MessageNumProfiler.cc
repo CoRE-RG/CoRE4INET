@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "MessageNumProfiler.h"
+#include "CoRE4INET_MessageNumProfiler.h"
 
 #include "Compat.h"
 
