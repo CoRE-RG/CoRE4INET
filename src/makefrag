@@ -34,6 +34,7 @@ ifeq ($(CC),clang)
 else ifeq ($(CC),gcc)
 	#gcc
     CFLAGS += -Wall -Wunused -Wextra
+    CFLAGS += -Wno-error=unused-parameter
     #CFLAGS += -ansi -pedantic-errors
 endif
 	
