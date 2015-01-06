@@ -82,7 +82,7 @@ uint64_t secondsToTransparentClock(simtime_t seconds)
     for(int i=1;i<(SIMTIME_NS - seconds.getScaleExp());++i){
         div*=10;
     }
-    return ((uint64_t)seconds.raw() * (uint64_t)0x10000) / div;
+    return (static_cast<uint64_t>(seconds.raw()) * static_cast<uint64_t>(0x10000)) / div;
 }
 
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
@@ -121,7 +121,7 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
     }
     if (start >= 0)
     {
-        transparentClock += ticksToTransparentClock((timer->getTotalTicks() - (uint64_t) start),
+        transparentClock += ticksToTransparentClock((timer->getTotalTicks() - static_cast<uint64_t>(start)),
                 timer->getOscillator()->getPreciseTick());
     }
 
@@ -134,9 +134,9 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
 
 const_simtime_t second = 1;
 
-unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval)
+unsigned long bandwidthFromSizeAndInterval(size_t framesize, size_t intervalFrames, simtime_t interval)
 {
-    return (unsigned long)ceil((second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS));
+    return static_cast<unsigned long>(ceil((second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS)));
 }
 
 
@@ -148,8 +148,6 @@ const simtime_t getIntervalForClass(SR_CLASS srClass)
             return SR_CLASS_A_INTERVAL;
         case SR_CLASS_B:
             return SR_CLASS_B_INTERVAL;
-        default:
-            return SR_CLASS_A_INTERVAL;
     }
 }
 #endif

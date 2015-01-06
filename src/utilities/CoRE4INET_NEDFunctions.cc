@@ -33,7 +33,7 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
         ticklength = argv[1].doubleValueInUnit("s");
     }
 
-    long ticks = (long) round(seconds / ticklength);
+    long ticks = static_cast<long>(round(seconds / ticklength));
     argv[0].set(ticks, "tick");
     return argv[0];
 }

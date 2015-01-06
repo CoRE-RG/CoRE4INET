@@ -140,7 +140,7 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler)
  *
  * @return bandwidth in bps
  */
-unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval);
+unsigned long bandwidthFromSizeAndInterval(size_t framesize, size_t intervalFrames, simtime_t interval);
 /**
  * @brief Returns the default interval for given SR classes
  *
