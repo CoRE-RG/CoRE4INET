@@ -104,7 +104,7 @@ class Buffer : public virtual cSimpleModule
          *
          * @param msg The incoming message
          */
-        void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg);
 
         /**
          * @brief Is called to store an EtherFrame in the buffer.
@@ -113,7 +113,7 @@ class Buffer : public virtual cSimpleModule
          *
          * @param newFrame A pointer to the new EtherFrame to be saved in the buffer
          */
-        virtual void enqueue(EtherFrame *newFrame) __attribute__ ((noreturn));
+        virtual void enqueue(EtherFrame *newFrame);
 
         /**
          * @brief Is called to get an EtherFrame from the buffer.
@@ -123,7 +123,7 @@ class Buffer : public virtual cSimpleModule
          * @return A pointer to the next EtherFrame from the buffer. Returns
          * null if there is no EtherFrame in the buffer
          */
-        virtual EtherFrame* dequeue() __attribute__ ((noreturn));
+        virtual EtherFrame* dequeue();
 
         /**
          * @brief Emits a statistics signal that a frame was sent from the buffer
