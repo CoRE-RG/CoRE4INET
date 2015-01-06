@@ -79,7 +79,7 @@ void IPv4oTT<Base>::initialize(int stage)
         cXMLElement *filters = Base::par("filters").xmlValue();
         IPv4oTT<Base>::configureFilters(filters);
 
-        Base::scheduleAt(simTime(), new cMessage("IPv4oTT register action time events", MSGKIND_START));
+        Base::scheduleAt(simTime(), new cMessage("IPv4oTT register action time events", static_cast<short>(MSGKIND_START)));
 
         ASSERT2(findContainingNode(this)!=NULL,
                 "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
@@ -112,7 +112,7 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
 {
     IPvXAddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
-    for (int i = 0; i < (int)filterElements.size(); i++)
+    for (size_t i = 0; i < filterElements.size(); i++)
     {
         cXMLElement *filterElement = filterElements[i];
         try
@@ -314,7 +314,7 @@ template<class Base>
 void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused)) const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
-        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
+        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
@@ -385,10 +385,10 @@ template<class Base>
 void IPv4oTT<Base>::registerSendTimingEvent(TTDestinationInfo *destInfo)
 {
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent(destInfo->getDestModule()->getFullPath().c_str(), ACTION_TIME_EVENT);
-    event->setAction_time( (uint32_t) (destInfo->getActionTime() / destInfo->getOscillator()->par("tick").doubleValue()));
+    event->setAction_time( static_cast<uint32_t>(destInfo->getActionTime() / destInfo->getOscillator()->par("tick").doubleValue()));
     event->setDestinationGate(Base::gate("schedulerIn"));
 
-    if (event->getAction_time() >= (uint32_t) destInfo->getPeriod()->par("cycle_ticks").longValue())
+    if (event->getAction_time() >= static_cast<uint32_t>(destInfo->getPeriod()->par("cycle_ticks").longValue()))
     {
         throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(),
                 destInfo->getPeriod()->par("cycle_ticks").longValue());

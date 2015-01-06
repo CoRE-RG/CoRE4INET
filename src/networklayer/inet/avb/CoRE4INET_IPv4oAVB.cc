@@ -71,7 +71,7 @@ void IPv4oAVB<base>::initialize(int stage)
         IPv4oAVB<base>::configureSubscriptions(filters);
         SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
         IPv4oAVB<base>::registerSrpCallbacks(srpTable);
-        base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", MSGKIND_START));
+        base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", static_cast<short>(MSGKIND_START)));
     }
 }
 
@@ -225,7 +225,7 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
 {
     IPvXAddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
-    for (int i = 0; i < (int) filterElements.size(); i++)
+    for (size_t i = 0; i < filterElements.size(); i++)
     {
         cXMLElement *filterElement = filterElements[i];
         try
@@ -289,7 +289,7 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                     avbDestInfo->setDestMac(new MACAddress(destMAC));
                 else
                     throw cRuntimeError("destMAC not specified!");
-                avbDestInfo->setStreamId(base::parseIntAttribute(streamId, "streamId", false));
+                avbDestInfo->setStreamId(static_cast<uint64_t>(base::parseIntAttribute(streamId, "streamId", false)));
                 if (strcmp(srClass, "B") == 0)
                 {
                     avbDestInfo->setSrClass(SR_CLASS_B);
@@ -298,7 +298,8 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 {
                     avbDestInfo->setSrClass(SR_CLASS_A);
                 }
-                avbDestInfo->setFrameSize(base::parseIntAttribute(frameSize, "frameSize", false));
+                avbDestInfo->setFrameSize(
+                        static_cast<uint32_t>(base::parseIntAttribute(frameSize, "frameSize", false)));
                 avbDestInfo->setIntervallFrames(
                         static_cast<uint16_t>(base::parseIntAttribute(intFrames, "intervallFrames", false)));
                 avbDestInfo->setVlanId(static_cast<uint16_t>(base::parseIntAttribute(vlanId, "vlanId", false)));
@@ -365,7 +366,7 @@ template<class base>
 void IPv4oAVB<base>::configureSubscriptions(cXMLElement *config)
 {
     cXMLElementList filterElements = config->getChildrenByTagName("subscribe");
-    for (int i = 0; i < (int) filterElements.size(); i++)
+    for (size_t i = 0; i < filterElements.size(); i++)
     {
         cXMLElement *filterElement = filterElements[i];
         try
@@ -427,7 +428,7 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
         base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)",
-                (int) packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
+                packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for (; filter != filters.end(); ++filter)
@@ -445,7 +446,7 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))   const InterfaceEntry* ie,
+void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))     const InterfaceEntry* ie,
         const IPoREFilter* filter)
 {
     AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());

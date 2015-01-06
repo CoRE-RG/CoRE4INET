@@ -13,9 +13,6 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef CORE4INET_IPV4OREBASE_CC_
-#define CORE4INET_IPV4OREBASE_CC_
-
 //==============================================================================
 
 #include "CoRE4INET_IPv4oREBase.h"
@@ -126,7 +123,7 @@ int IPv4oREBase::parseIntAttribute(const char *attrValue, const char *attrName, 
     if (num > INT_MAX)
         throw cRuntimeError("attribute %s is too large: %s", attrName, attrValue);
 
-    return (int)num;
+    return static_cast<int>(num);
 }
 
 //==============================================================================
@@ -142,7 +139,7 @@ int IPv4oREBase::parseProtocol(const char *attrValue, const char *attrName)
     strcpy(name, "IP_PROT_");
     char *dest;
     for (dest = name+8; *attrValue; ++dest, ++attrValue)
-        *dest = (char)toupper(*attrValue);
+        *dest = static_cast<char>(toupper(*attrValue));
     *dest = '\0';
 
     return m_protocolEnum->lookup(name);
@@ -182,5 +179,3 @@ std::list<IPoREFilter*> IPv4oREBase::getFilters(DestinationType destType)
 } /* namespace CoRE4INET */
 
 //==============================================================================
-
-#endif // CORE4INET_IPV4OREBASE_CC_
