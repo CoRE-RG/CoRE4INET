@@ -131,11 +131,12 @@ void AVBTrafficSinkApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "streamID"))
     {
-        this->streamID = parameterULongCheckRange(par("streamID"), 0, (unsigned long)MAX_STREAM_ID);
+        this->streamID = parameterULongCheckRange(par("streamID"), 0, (unsigned long) MAX_STREAM_ID);
     }
     if (!parname || !strcmp(parname, "vlan_id"))
     {
-        this->vlan_id = parameterLongCheckRange(par("vlan_id"), 0, MAX_VLAN_ID);
+        this->vlan_id = static_cast<unsigned short>(parameterULongCheckRange(par("vlan_id"), 0,
+                (unsigned long) MAX_VLAN_ID));
     }
 }
 

@@ -166,7 +166,7 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 } else {
                     throw cRuntimeError("destModule: %s is not a TTBuffer!", destModule);
                 }
-                ttDestInfo->setCtId(Base::parseIntAttribute(ctId, "ctId", false));
+                ttDestInfo->setCtId(static_cast<uint16_t>(Base::parseIntAttribute(ctId, "ctId", false)));
 
                 Period *periodModule;
                 if (period) {

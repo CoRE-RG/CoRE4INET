@@ -22,7 +22,7 @@ unsigned short CTFrame::getCtID() const
     MACAddress mac = getDest();
     uint16_t CtID = 0;
     CtID = (uint16_t) (mac.getAddressByte(4) << 8);
-    CtID = CtID | (uint16_t) mac.getAddressByte(5);
+    CtID = (uint16_t) (CtID | (uint16_t) mac.getAddressByte(5));
     return CtID;
 }
 

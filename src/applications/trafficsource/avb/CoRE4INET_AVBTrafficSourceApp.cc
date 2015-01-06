@@ -118,7 +118,8 @@ void AVBTrafficSourceApp::sendAVBFrame()
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
 //class measurement interval A=125us B=250us
-    simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
+    simtime_t tick =
+            check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
     simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
@@ -127,7 +128,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     getTimer()->registerEvent(event);
 }
 
-void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))     cComponent *src, simsignal_t id, cObject *obj)
+void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent *src, simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent
     ();
@@ -188,11 +189,12 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "streamID"))
     {
-        this->streamID = parameterULongCheckRange(par("streamID"), 0, (unsigned long)MAX_STREAM_ID);
+        this->streamID = parameterULongCheckRange(par("streamID"), 0, (unsigned long) MAX_STREAM_ID);
     }
     if (!parname || !strcmp(parname, "intervalFrames"))
     {
-        this->intervalFrames = (unsigned int) parameterULongCheckRange(par("intervalFrames"), 1, MAX_INTERVAL_FRAMES);
+        this->intervalFrames = static_cast<uint16_t>(parameterULongCheckRange(par("intervalFrames"), 1,
+                MAX_INTERVAL_FRAMES));
     }
     if (!parname || !strcmp(parname, "vlan_id"))
     {

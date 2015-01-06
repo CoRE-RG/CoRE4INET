@@ -142,7 +142,7 @@ void Timer::recalculate()
         uint64_t elapsed_ticks = (uint64_t) floor((simTime() - lastRecalculation) / current_tick);
         ticks += elapsed_ticks;
         //this is required to avoid rounding errors
-        lastRecalculation += elapsed_ticks * current_tick;
+        lastRecalculation += static_cast<double>(elapsed_ticks) * current_tick;
         recalculationTime = simTime();
     }
 }
@@ -162,7 +162,7 @@ void Timer::reschedule()
         if(total_ticks > next_action_ticks){
             throw cRuntimeError("There must have been an overflow in the timer module");
         }
-        simtime_t next_action = (next_action_ticks - total_ticks) * oscillator->getCurrentTick();
+        simtime_t next_action = static_cast<double>(next_action_ticks - total_ticks) * oscillator->getCurrentTick();
         scheduleAt(simTime() + next_action, selfMessage);
     }
     catch (const std::range_error& re)

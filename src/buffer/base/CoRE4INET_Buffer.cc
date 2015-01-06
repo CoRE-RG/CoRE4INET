@@ -91,7 +91,7 @@ void Buffer::handleMessage(cMessage *msg)
             }
             if (frame->getByteLength() <= maxMessageSize)
             {
-                putFrame((EtherFrame*) frame);
+                putFrame(frame);
             }
             else
             {

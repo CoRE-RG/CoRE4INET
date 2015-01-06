@@ -22,6 +22,8 @@
 #ifndef _TTE_API_H_
 #define _TTE_API_H_
 
+#pragma GCC diagnostic ignored "-Wconversion"
+
 /* This is needed when the API is linked with C++ programs. It guarantees
  * that the linker always handles the functions with C semantics. */
 #ifdef __cplusplus

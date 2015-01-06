@@ -242,7 +242,7 @@ void AVBBuffer::idleSlope(SimTime duration)
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
-        credit += ceil(reservedBandwith * duration.dbl());
+        credit += static_cast<int>(ceil(reservedBandwith * duration.dbl()));
         emit(creditSignal, credit);
         if (credit > 0 && size() == 0 && !inTransmission)
             resetCredit();
@@ -258,7 +258,7 @@ void AVBBuffer::interferenceSlope(SimTime duration)
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
-        credit += ceil(reservedBandwith * duration.dbl());
+        credit += static_cast<int>(ceil(reservedBandwith * duration.dbl()));
         emit(creditSignal, credit);
     }
 }
@@ -277,7 +277,7 @@ void AVBBuffer::sendSlope(SimTime duration)
             getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
     emit(creditSignal, credit);
-    credit -= ceil((portBandwith - reservedBandwith) * duration.dbl());
+    credit -= static_cast<int>(ceil((portBandwith - reservedBandwith) * duration.dbl()));
     inTransmission = false;
     if (size() > 0)
     {

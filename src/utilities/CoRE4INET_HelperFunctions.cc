@@ -73,7 +73,7 @@ cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
 
 uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick)
 {
-    return secondsToTransparentClock(ticks * tick);
+    return secondsToTransparentClock(static_cast<double>(ticks) * tick);
 }
 
 uint64_t secondsToTransparentClock(simtime_t seconds)
@@ -82,7 +82,7 @@ uint64_t secondsToTransparentClock(simtime_t seconds)
     for(int i=1;i<(SIMTIME_NS - seconds.getScaleExp());++i){
         div*=10;
     }
-    return (uint64_t) (((uint64_t)seconds.raw() * (uint64_t)0x10000) / div);
+    return ((uint64_t)seconds.raw() * (uint64_t)0x10000) / div;
 }
 
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)

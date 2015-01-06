@@ -70,7 +70,8 @@ void DummySync::handleMessage(cMessage *msg)
             int64_t modticks = ((int64_t) (simTime() / tick) - par("action_time").longValue()) % cycleTicks;
             if (modticks > ((int64_t) cycleTicks / 2))
                 modticks = modticks - cycleTicks;
-            modticks += uniform(-par("precission").doubleValue() / 2, par("precission").doubleValue() / 2) / tick;
+            modticks += static_cast<int64_t>(round(
+                    uniform(-par("precission").doubleValue() / 2, par("precission").doubleValue() / 2) / tick));
 
             getTimer()->clockCorrection((int32_t) modticks);
         }

@@ -54,13 +54,13 @@ public:
 
     void setFrameSize(uint32_t frameSize) { this->frameSize = frameSize; }
 
-    uint32_t getIntervallFrames() const { return intervallFrames; }
+    uint16_t getIntervallFrames() const { return intervallFrames; }
 
-    void setIntervallFrames(uint32_t intervallFrames) { this->intervallFrames = intervallFrames; }
+    void setIntervallFrames(uint16_t intervallFrames) { this->intervallFrames = intervallFrames; }
 
-    uint32_t getVlanId() const { return vlanId; }
+    uint16_t getVlanId() const { return vlanId; }
 
-    void setVlanId(uint32_t vlanId) { this->vlanId = vlanId; }
+    void setVlanId(uint16_t vlanId) { this->vlanId = vlanId; }
 
 private:
     AVBIncoming *destModule;
@@ -68,8 +68,8 @@ private:
     uint64_t    streamId;
     SR_CLASS    srClass;
     uint32_t    frameSize;
-    uint32_t    intervallFrames;
-    uint32_t    vlanId;
+    uint16_t    intervallFrames;
+    uint16_t    vlanId;
 
 
 };

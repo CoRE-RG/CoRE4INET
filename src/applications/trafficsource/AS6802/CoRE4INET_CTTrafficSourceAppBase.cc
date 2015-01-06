@@ -45,9 +45,9 @@ void CTTrafficSourceAppBase::sendMessage()
 {
 
     std::list<CTBuffer*> buffer;
-    if (this->ct_id != -1)
+    if (this->ct_id >= 0)
     {
-        buffer = ctbuffers[this->ct_id];
+        buffer = ctbuffers[static_cast<uint16_t>(this->ct_id)];
     }
     else
     {
@@ -93,9 +93,9 @@ void CTTrafficSourceAppBase::sendMessage()
             {
                 frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
             }
-            if (this->ct_id != -1)
+            if (this->ct_id > 0)
             {
-                frame->setCtID(ct_id);
+                frame->setCtID(static_cast<uint16_t>(this->ct_id));
             }
             //TODO Minor: Better name for Frame
             frame->setName((*buf)->getName());
