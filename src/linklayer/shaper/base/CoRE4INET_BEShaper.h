@@ -154,7 +154,7 @@ void BEShaper<TC>::initialize(int stage)
     {
         beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
         //Send initial signal to create statistic
-        cComponent::emit(beQueueLengthSignal, (unsigned long) beQueue.length());
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
     }
 }
 
@@ -196,7 +196,7 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         beQueue.insert(msg);
-        cComponent::emit(beQueueLengthSignal, (unsigned int) beQueue.length());
+        cComponent::emit(beQueueLengthSignal, beQueue.length());
         TC::notifyListeners();
     }
     else
@@ -228,8 +228,8 @@ cMessage* BEShaper<TC>::pop()
     //BEFrames
     if (!beQueue.isEmpty())
     {
-        cMessage* message = (cMessage*) beQueue.pop();
-        cComponent::emit(beQueueLengthSignal, (unsigned int) beQueue.length());
+        cMessage* message = static_cast<cMessage*>(beQueue.pop());
+        cComponent::emit(beQueueLengthSignal, beQueue.length());
         return message;
     }
     return TC::pop();
@@ -243,7 +243,7 @@ cMessage* BEShaper<TC>::front()
     //BEFrames
     if (!beQueue.isEmpty())
     {
-        cMessage* message = (cMessage*) beQueue.front();
+        cMessage* message = static_cast<cMessage*>(beQueue.front());
         return message;
     }
     return TC::front();

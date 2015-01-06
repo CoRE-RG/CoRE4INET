@@ -162,7 +162,7 @@ void RCShaper<TC>::initialize(int stage)
     {
         Timed::initialize();
 
-        numRcPriority = (size_t)par("numRCpriority").longValue();
+        numRcPriority = static_cast<size_t>(par("numRCpriority").longValue());
         for (unsigned int i = 0; i < numRcPriority; i++)
         {
             char strBuf[32];
@@ -179,7 +179,7 @@ void RCShaper<TC>::initialize(int stage)
 
             rcQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
-            cComponent::emit(signal, (unsigned long) queue.length());
+            cComponent::emit(signal, static_cast<unsigned long>(queue.length()));
         }
     }
 }
@@ -241,11 +241,12 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
 {
     if (msg->arrivedOn("RCin"))
     {
-        int priority = msg->getSenderModule()->par("priority").longValue();
-        if (priority > 0 && (unsigned int) priority < numRcPriority)
+        long priority = msg->getSenderModule()->par("priority").longValue();
+        if (priority > 0 && static_cast<size_t>(priority) < numRcPriority)
         {
-            rcQueue[(size_t)priority].insert(msg);
-            cComponent::emit(rcQueueLengthSignals[priority], (unsigned long) rcQueue[(size_t)priority].length());
+            rcQueue[static_cast<size_t>(priority)].insert(msg);
+            cComponent::emit(rcQueueLengthSignals[static_cast<size_t>(priority)],
+                    static_cast<unsigned long>(rcQueue[static_cast<size_t>(priority)].length()));
             TC::notifyListeners();
         }
         else
@@ -286,8 +287,8 @@ cMessage* RCShaper<TC>::pop()
     {
         if (!rcQueue[i].isEmpty())
         {
-            EtherFrame *message = (EtherFrame*) rcQueue[i].pop();
-            cComponent::emit(rcQueueLengthSignals[i], (unsigned long) rcQueue[i].length());
+            EtherFrame *message = static_cast<EtherFrame*>(rcQueue[i].pop());
+            cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].length()));
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
             if (rcBuffer)
@@ -314,7 +315,7 @@ cMessage* RCShaper<TC>::front()
     {
         if (!rcQueue[i].isEmpty())
         {
-            EtherFrame *message = (EtherFrame*) rcQueue[i].front();
+            EtherFrame *message = static_cast<EtherFrame*>(rcQueue[i].front());
             return message;
         }
     }

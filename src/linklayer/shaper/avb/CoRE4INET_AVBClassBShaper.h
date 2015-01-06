@@ -194,7 +194,7 @@ void AVBClassBShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("AVBBin"))
     {
         avbQueue.insert(msg);
-        cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());
+        cComponent::emit(avbQueueLengthSignal, avbQueue.length());
         TC::notifyListeners();
     }
     else
@@ -228,8 +228,8 @@ cMessage* AVBClassBShaper<TC>::pop()
         avbBuffer->refresh();
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
-        cMessage *msg = (cMessage*) avbQueue.pop();
-        cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());
+        cMessage *msg = static_cast<cMessage*>(avbQueue.pop());
+        cComponent::emit(avbQueueLengthSignal, avbQueue.length());
         SimTime duration = TC::outChannel->calculateDuration(msg);
         avbBuffer->sendSlope(duration);
         return msg;
@@ -249,7 +249,7 @@ cMessage* AVBClassBShaper<TC>::front()
     //AVBFrames
     if (!avbQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) avbQueue.front();
+        cMessage *msg = static_cast<cMessage*>(avbQueue.front());
         return msg;
     }
     return TC::front();

@@ -63,7 +63,7 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
         /**
          * @brief Number of frames that were requested from lower layer
          */
-        unsigned int framesRequested;
+        size_t framesRequested;
         /**
          * @brief Outgoing Channel used to calculate transmission duration.
          */
@@ -124,7 +124,7 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          */
         virtual int getNumPendingRequests()
         {
-            return (int) framesRequested;
+            return static_cast<int>(framesRequested);
         }
 
         /**

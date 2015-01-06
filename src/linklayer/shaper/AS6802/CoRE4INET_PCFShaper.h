@@ -161,7 +161,7 @@ void PCFShaper<TC>::initialize(int stage)
         Timed::initialize();
         pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
         //Send initial signal to create statistic
-        cComponent::emit(pcfQueueLengthSignal, (unsigned long) pcfQueue.length());
+        cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.length()));
     }
 }
 
@@ -248,8 +248,8 @@ cMessage* PCFShaper<TC>::pop()
     //RCFrames
     if (!pcfQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) pcfQueue.pop();
-        cComponent::emit(pcfQueueLengthSignal, pcfQueue.length());
+        cMessage *msg = static_cast<cMessage*>(pcfQueue.pop());
+        cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.length()));
 
         PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
         if (pcf)
@@ -269,7 +269,7 @@ cMessage* PCFShaper<TC>::front()
     //RCFrames
     if (!pcfQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) pcfQueue.front();
+        cMessage *msg = static_cast<cMessage*>(pcfQueue.front());
         return msg;
     }
     return TC::front();
