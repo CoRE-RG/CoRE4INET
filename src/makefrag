@@ -1,6 +1,6 @@
 EXTENDED_WARNINGS=1
 WARNINGS_ERROR=1
-#CFLAGS += -std=c++11
+CFLAGS += -std=c++11
 #CFLAGS += -Wall -Wunused
 #CFLAGS += -Wall -Werror -Wunused -Wdocumentation
 #CFLAGS += -Wall -Werror -Wunused -Weverything -Wno-c++11-long-long -Wno-c++11-extra-semi -Wno-weak-vtables -Wno-shadow -Wno-global-constructors -Wno-exit-time-destructors -Wno-pedantic -Wno-missing-prototypes -Wno-used-but-marked-unused
@@ -30,7 +30,7 @@ ifeq ($(CC),clang)
 	#clang
     CFLAGS += -Wall -Wunused -Wextra -Weverything
     CFLAGS += -Wno-documentation-unknown-command -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors
-    CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene
+    CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
 else ifeq ($(CC),gcc)
 	#gcc
     CFLAGS += -Wall -Wunused -Wextra
