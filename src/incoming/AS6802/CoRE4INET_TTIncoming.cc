@@ -78,7 +78,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                 delete etherframe;
             }
             //Check too early
-            else if (receive_window_start > 0 && currentTicks < (uint32_t) receive_window_start)
+            else if (receive_window_start > 0 && currentTicks < static_cast<uint32_t>(receive_window_start))
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
@@ -98,7 +98,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                 delete etherframe;
             }
             //Check too late
-            else if (receive_window_end > 0 && currentTicks > (uint32_t) receive_window_end)
+            else if (receive_window_end > 0 && currentTicks > static_cast<uint32_t>(receive_window_end))
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
@@ -127,7 +127,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                         getDisplayString().setTagArg("i2", 0, "status/hourglass");
                     frame = etherframe;
                     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
-                    event->setAction_time((uint32_t) permanence_pit);
+                    event->setAction_time(static_cast<uint32_t>(permanence_pit));
                     event->setDestinationGate(gate("schedulerIn"));
                     getPeriod()->registerEvent(event);
                 }
