@@ -150,8 +150,8 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
 
     unsigned long bandwidth = 0;
 
-    for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end();
-            ++i)
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin();
+            i != listenerTables.end(); ++i)
     {
         ListenerTable table = i->second;
         for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -180,8 +180,8 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLAS
 
     unsigned long bandwidth = 0;
 
-    for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end();
-            ++i)
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin();
+            i != listenerTables.end(); ++i)
     {
         ListenerTable table = i->second;
         for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -268,7 +268,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))       MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))        MACAddress address,
         uint16_t vid)
 {
 
@@ -370,8 +370,8 @@ void SRPTable::printState()
 
     EV << "Talker Table" << endl;
     EV << "VLAN ID    StreamID    Port    Address    SRClass    Bandwidth(Mbps)    Inserted" << endl;
-    for (unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin(); i != talkerTables.end();
-            ++i)
+    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin();
+            i != talkerTables.end(); ++i)
     {
         TalkerTable table = i->second;
         for (TalkerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -387,7 +387,7 @@ void SRPTable::printState()
 
     EV << "Listener Table" << endl;
     EV << "VLAN ID    StreamID    Port    Inserted" << endl;
-    for (unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
+    for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
             i != listenerTables.end(); ++i)
     {
         ListenerTable table = i->second;
@@ -406,8 +406,8 @@ void SRPTable::printState()
 
 void SRPTable::clear()
 {
-    for (unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin(); iter != talkerTables.end();
-            ++iter)
+    for (std::unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin();
+            iter != talkerTables.end(); ++iter)
     {
         TalkerTable table = (*iter).second;
         for (TalkerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -417,7 +417,7 @@ void SRPTable::clear()
         }
         table.clear();
     }
-    for (unordered_map<unsigned int, ListenerTable>::iterator iter = listenerTables.begin();
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator iter = listenerTables.begin();
             iter != listenerTables.end(); ++iter)
     {
         ListenerTable table = (*iter).second;
@@ -440,7 +440,7 @@ unsigned int SRPTable::getNumTalkerEntries()
     removeAgedEntriesIfNeeded();
 
     unsigned int entries = 0;
-    for (unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin(); i != talkerTables.end();
+    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin(); i != talkerTables.end();
             ++i)
     {
         entries += (*i).second.size();
@@ -452,7 +452,7 @@ unsigned int SRPTable::getNumListenerEntries()
     removeAgedEntriesIfNeeded();
 
     unsigned int entries = 0;
-    for (unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
+    for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
             i != listenerTables.end(); ++i)
     {
         for (ListenerTable::const_iterator j = (*i).second.begin(); j != (*i).second.end(); ++j)
@@ -482,7 +482,7 @@ void SRPTable::removeAgedEntries()
     }
     simtime_t now = simTime();
     nextAging = 0;
-    for (unordered_map<unsigned int, ListenerTable>::iterator listenerTable = listenerTables.begin();
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator listenerTable = listenerTables.begin();
             listenerTable != listenerTables.end(); ++listenerTable)
     {
         for (ListenerTable::iterator listenerList = (*listenerTable).second.begin();

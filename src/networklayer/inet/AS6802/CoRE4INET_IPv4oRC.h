@@ -19,13 +19,7 @@
 //==============================================================================
 
 #include "CoRE4INET_IPv4oREBase.h"
-#if __cplusplus >= 201103L
-#include <unordered_map>
-using namespace std;
-#else
-#include <tr1/unordered_map>
-using namespace std::tr1;
-#endif
+
 #include "CoRE4INET_CTBuffer.h"
 
 //==============================================================================

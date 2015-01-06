@@ -50,7 +50,7 @@ IPv4oTT<Base>::IPv4oTT() {
 
 template<class Base>
 IPv4oTT<Base>::~IPv4oTT() {
-    unordered_map<std::string, std::list<QueuedPacket*> >::iterator i = ttPackets.begin();
+    std::unordered_map<std::string, std::list<QueuedPacket*> >::iterator i = ttPackets.begin();
     while (i != ttPackets.end()) {
         std::list<QueuedPacket*>::iterator j = i->second.begin();
         while (j != i->second.end()) {

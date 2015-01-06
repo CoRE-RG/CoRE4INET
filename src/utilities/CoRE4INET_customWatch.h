@@ -18,13 +18,8 @@
 
 //Std
 #include <map>
-#if __cplusplus >= 201103L
 #include <unordered_map>
-using namespace std;
-#else
-#include <tr1/unordered_map>
-using namespace std::tr1;
-#endif
+
 //OMNeT++
 #include "cstlwatch.h"
 
@@ -98,16 +93,16 @@ template<class KeyT, class ValueT>
 class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
 {
     protected:
-        unordered_map<KeyT, ValueT>& m;
-        mutable typename unordered_map<KeyT, ValueT>::iterator it;
+        std::unordered_map<KeyT, ValueT>& m;
+        mutable typename std::unordered_map<KeyT, ValueT>::iterator it;
         mutable typename ValueT::iterator it2;
         std::string classname;
     public:
-        cStdCollectionUMapWatcherBase(const char *name, unordered_map<KeyT, ValueT>& var) :
+        cStdCollectionUMapWatcherBase(const char *name, std::unordered_map<KeyT, ValueT>& var) :
                 cStdVectorWatcherBase(name), m(var)
 
         {
-            classname = std::string("unordered_map<") + opp_typename(typeid(KeyT)) + "," + opp_typename(typeid(ValueT))
+            classname = std::string("std::unordered_map<") + opp_typename(typeid(KeyT)) + "," + opp_typename(typeid(ValueT))
                     + ">";
         }
         const char *getClassName() const
@@ -117,7 +112,7 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
         virtual int size() const
         {
             size_t size = 0;
-            for (typename unordered_map<KeyT, ValueT>::iterator i = m.begin(); i != m.end(); i++)
+            for (typename std::unordered_map<KeyT, ValueT>::iterator i = m.begin(); i != m.end(); i++)
             {
                 size += (*i).second.size();
             }
@@ -192,7 +187,7 @@ template<class KeyT, class ValueT>
 class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 {
     public:
-        cStdListUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
+        cStdListUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
                 cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
 
         {
@@ -211,7 +206,7 @@ class cStdListUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 };
 
 template<class KeyT, class ValueT>
-void createStdListUMapWatcher(const char *varname, unordered_map<KeyT, ValueT>& m)
+void createStdListUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
 {
     new cStdListUMapWatcher<KeyT, ValueT>(varname, m);
 }
@@ -300,14 +295,14 @@ template<class KeyT, class ValueT>
 class cStdUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 {
     public:
-        cStdUMapUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
+        cStdUMapUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
                 cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
 
         {
         }
         virtual const char *getElemTypeName() const
         {
-            return "struct pair<*, unordered_map<*>>";
+            return "struct pair<*, std::unordered_map<*>>";
         }
 
         virtual std::string atIt2() const
@@ -319,7 +314,7 @@ class cStdUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, ValueT>
 };
 
 template<class KeyT, class ValueT>
-void createStdUMapUMapWatcher(const char *varname, unordered_map<KeyT, ValueT>& m)
+void createStdUMapUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
 {
     new cStdUMapUMapWatcher<KeyT, ValueT>(varname, m);
 }
@@ -351,7 +346,7 @@ template<class KeyT, class ValueT>
 class cStdPtrUMapUMapWatcher : public cStdUMapUMapWatcher<KeyT, ValueT>
 {
     public:
-        cStdPtrUMapUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
+        cStdPtrUMapUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
                 cStdUMapUMapWatcher<KeyT, ValueT>(name, var)
 
         {
@@ -365,7 +360,7 @@ class cStdPtrUMapUMapWatcher : public cStdUMapUMapWatcher<KeyT, ValueT>
 };
 
 template<class KeyT, class ValueT>
-void createStdPtrUMapUMapWatcher(const char *varname, unordered_map<KeyT, ValueT>& m)
+void createStdPtrUMapUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
 {
     new cStdPtrUMapUMapWatcher<KeyT, ValueT>(varname, m);
 }
@@ -467,19 +462,19 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
         mutable typename ValueT::mapped_type::iterator it3;
     public:
 
-        cStdListUMapUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
+        cStdListUMapUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
                 cStdCollectionUMapWatcherBase<KeyT, ValueT>(name, var)
 
         {
         }
         virtual const char *getElemTypeName() const
         {
-            return "struct pair<*, unordered_map<list<*>>>";
+            return "struct pair<*, std::unordered_map<list<*>>>";
         }
         virtual int size() const
         {
             size_t size = 0;
-            for (typename unordered_map<KeyT, ValueT>::iterator i = this->m.begin(); i != this->m.end(); i++)
+            for (typename std::unordered_map<KeyT, ValueT>::iterator i = this->m.begin(); i != this->m.end(); i++)
             {
                 for (typename ValueT::iterator j = (*i).second.begin(); j != (*i).second.end(); j++)
                 {
@@ -587,7 +582,7 @@ class cStdPtrListUMapUMapWatcher : public cStdListUMapUMapWatcher<KeyT, ValueT>
 {
     public:
 
-        cStdPtrListUMapUMapWatcher(const char *name, unordered_map<KeyT, ValueT>& var) :
+        cStdPtrListUMapUMapWatcher(const char *name, std::unordered_map<KeyT, ValueT>& var) :
                 cStdListUMapUMapWatcher<KeyT, ValueT>(name, var)
 
         {
@@ -610,7 +605,7 @@ class cStdPtrListUMapUMapWatcher : public cStdListUMapUMapWatcher<KeyT, ValueT>
 };
 
 template<class KeyT, class ValueT>
-void createStdPtrListUMapUMapWatcher(const char *varname, unordered_map<KeyT, ValueT>& m)
+void createStdPtrListUMapUMapWatcher(const char *varname, std::unordered_map<KeyT, ValueT>& m)
 {
     new cStdPtrListUMapUMapWatcher<KeyT, ValueT>(varname, m);
 }

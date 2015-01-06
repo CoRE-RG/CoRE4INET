@@ -17,13 +17,8 @@
 #define __CORE4INET_CTINCONTROL_H_
 
 //Std
-#if __cplusplus >= 201103L
 #include <unordered_map>
-using namespace std;
-#else
-#include <tr1/unordered_map>
-using namespace std::tr1;
-#endif
+
 #include <list>
 //CoRE4INET
 #include "CoRE4INET_Defs.h"
@@ -56,7 +51,7 @@ class CTInControl : public IC
         /**
          * @brief Lists of incoming modules for each critical traffic id.
          */
-        unordered_map<uint16_t, std::list<CTIncoming*> > ct_incomings;
+        std::unordered_map<uint16_t, std::list<CTIncoming*> > ct_incomings;
 
         /**
          * @brief caches ct_mask parameter
@@ -144,7 +139,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
         {
             this->recordPacketReceived(frame);
 
-            unordered_map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(
+            std::unordered_map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(
                     getCTID(frame));
             if (ct_incomingList != ct_incomings.end())
             {

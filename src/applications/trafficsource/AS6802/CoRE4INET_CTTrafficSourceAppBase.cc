@@ -51,7 +51,7 @@ void CTTrafficSourceAppBase::sendMessage()
     }
     else
     {
-        for (unordered_map<uint16_t, std::list<CTBuffer*> >::iterator bufmap = ctbuffers.begin();
+        for (std::unordered_map<uint16_t, std::list<CTBuffer*> >::iterator bufmap = ctbuffers.begin();
                 bufmap != ctbuffers.end(); ++bufmap)
         {
             buffer.merge(bufmap->second);
