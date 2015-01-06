@@ -262,7 +262,7 @@ uint16_t CTInControl<IC>::getCTID(EtherFrame *frame)
 {
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);
-    return (macBytes[4] << 8) | macBytes[5];
+    return (uint16_t)((macBytes[4] << 8) | macBytes[5]);
 }
 
 }

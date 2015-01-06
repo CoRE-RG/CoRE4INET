@@ -33,8 +33,10 @@ ifeq ($(CC),clang)
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene
 else ifeq ($(CC),gcc)
 	#gcc
-    CFLAGS += -Wall -Wunused -Wextra
-    CFLAGS += -Wno-error=unused-parameter
+    CFLAGS += -Wall -Wunused -Wextra -Winit-self -Wswitch-enum -Wuninitialized -Wfloat-equal -Wsuggest-attribute=pure
+    CFLAGS += -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wconversion
+    CFLAGS += -Wuseless-cast
+    CFLAGS += -Wno-error=unused-parameter -Wno-error=conversion -Wno-error=suggest-attribute=noreturn
     #CFLAGS += -ansi -pedantic-errors
 endif
 	

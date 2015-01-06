@@ -142,7 +142,7 @@ int IPv4oREBase::parseProtocol(const char *attrValue, const char *attrName)
     strcpy(name, "IP_PROT_");
     char *dest;
     for (dest = name+8; *attrValue; ++dest, ++attrValue)
-        *dest = toupper(*attrValue);
+        *dest = (char)toupper(*attrValue);
     *dest = '\0';
 
     return m_protocolEnum->lookup(name);

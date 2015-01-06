@@ -25,7 +25,7 @@
 #include "CoRE4INET_CTApplicationBase.h"
 #include "CoRE4INET_Scheduled.h"
 
-#define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
+#define TTE_API_VER (0x02<<16 | 0x0000)
 
 namespace CoRE4INET {
 
@@ -123,7 +123,7 @@ class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public
          * @brief Does nothing in this application. Must be overwritten with actual
          * application behavior.
          */
-        virtual void startApplication();
+        virtual void startApplication() __attribute__ ((noreturn));
 
     public:
         /**

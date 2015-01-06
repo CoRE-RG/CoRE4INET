@@ -146,7 +146,7 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                     }
                 }
                 rcDestInfo->setDestModules(destCtBuffers);
-                rcDestInfo->setCtId(Base::parseIntAttribute(ctId, "ctId", false));
+                rcDestInfo->setCtId(static_cast<uint16_t>(Base::parseIntAttribute(ctId, "ctId", false)));
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();

@@ -299,8 +299,9 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                     avbDestInfo->setSrClass(SR_CLASS_A);
                 }
                 avbDestInfo->setFrameSize(base::parseIntAttribute(frameSize, "frameSize", false));
-                avbDestInfo->setIntervallFrames(base::parseIntAttribute(intFrames, "intervallFrames", false));
-                avbDestInfo->setVlanId(base::parseIntAttribute(vlanId, "vlanId", false));
+                avbDestInfo->setIntervallFrames(
+                        static_cast<uint16_t>(base::parseIntAttribute(intFrames, "intervallFrames", false)));
+                avbDestInfo->setVlanId(static_cast<uint16_t>(base::parseIntAttribute(vlanId, "vlanId", false)));
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -444,14 +445,14 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const InterfaceEntry *
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))  const InterfaceEntry* ie,
+void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))   const InterfaceEntry* ie,
         const IPoREFilter* filter)
 {
     AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
     std::stringstream name;
     name << "Stream " << avbDestInfo->getStreamId();
     AVBFrame *outFrame = new AVBFrame(name.str().c_str());
-    outFrame->setStreamID(avbDestInfo->getStreamId());
+    outFrame->setStreamID(static_cast<unsigned long>(avbDestInfo->getStreamId()));
     outFrame->setVID(avbDestInfo->getVlanId());
     outFrame->setDest(*(avbDestInfo->getDestMac()));
     outFrame->setEtherType(ETHERTYPE_IPv4);

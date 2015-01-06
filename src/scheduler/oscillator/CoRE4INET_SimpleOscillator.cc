@@ -92,7 +92,7 @@ void SimpleOscillator::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "max_drift"))
     {
-        this->max_drift = SimTime((parameterDoubleCheckRange(par("max_drift"), 0, DBL_MAX) / 1000000) * getPreciseTick());
+        this->max_drift = ((parameterDoubleCheckRange(par("max_drift"), 0, DBL_MAX) / 1000000) * getPreciseTick());
     }
 }
 

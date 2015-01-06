@@ -125,7 +125,7 @@ class SRPTable : public cSimpleModule
         /**
          *  @brief Table does not receive messages, throws cRuntimeError when handleMessage is called
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) __attribute__ ((noreturn));
 
     public:
         /**

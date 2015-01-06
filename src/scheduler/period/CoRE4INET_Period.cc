@@ -95,7 +95,7 @@ uint32_t Period::getTicks()
         throw std::runtime_error("Period was not yet initialized");
     }
     //cycle_ticks is added to assure a positive return value
-    return (cycle_ticks + timer->getTotalTicks() - offset_ticks) % cycle_ticks;
+    return static_cast<uint32_t>((cycle_ticks + timer->getTotalTicks() - offset_ticks) % cycle_ticks);
 }
 
 uint64_t Period::getTotalTicks()
