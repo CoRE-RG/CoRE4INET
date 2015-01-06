@@ -138,15 +138,15 @@ void SRProtocol::handleMessage(cMessage *msg)
                     }
                     srp->setStreamID(listenerReady->getStreamID());
 
-                    ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-                    etherctrl->setEtherType(MSRP_ETHERTYPE);
-                    etherctrl->setDest(SRP_ADDRESS);
+                    ExtendedIeee802Ctrl *new_etherctrl = new ExtendedIeee802Ctrl();
+                    new_etherctrl->setEtherType(MSRP_ETHERTYPE);
+                    new_etherctrl->setDest(SRP_ADDRESS);
                     cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(),
                             listenerReady->getVlan_identifier());
                     if (talker && talker->isName("phy"))
                     {
-                        etherctrl->setSwitchPort(talker->getIndex());
-                        srp->setControlInfo(etherctrl);
+                        new_etherctrl->setSwitchPort(talker->getIndex());
+                        srp->setControlInfo(new_etherctrl);
                         send(srp, gate("out"));
                     }
                 }
@@ -154,17 +154,17 @@ void SRProtocol::handleMessage(cMessage *msg)
             else if (ListenerAskingFailed* listenerFailed = dynamic_cast<ListenerAskingFailed*>(msg))
             {
                 bubble("Listener Failed!");
-                ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-                etherctrl->setEtherType(MSRP_ETHERTYPE);
-                etherctrl->setDest(SRP_ADDRESS);
+                ExtendedIeee802Ctrl *new_etherctrl = new ExtendedIeee802Ctrl();
+                new_etherctrl->setEtherType(MSRP_ETHERTYPE);
+                new_etherctrl->setDest(SRP_ADDRESS);
                 cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(),
                         listenerFailed->getVlan_identifier());
                 if (talker && talker->isName("phy"))
                 {
-                    etherctrl->setSwitchPort(talker->getIndex());
+                    new_etherctrl->setSwitchPort(talker->getIndex());
                     //Necessary because controlInfo is not duplicated
                     ListenerAskingFailed* listenerFailedCopy = listenerFailed->dup();
-                    listenerFailedCopy->setControlInfo(etherctrl);
+                    listenerFailedCopy->setControlInfo(new_etherctrl);
                     send(listenerFailedCopy, gate("out"));
                 }
             }
@@ -219,13 +219,13 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         {
 
             //Get Talker Port
-            SRPTable *srpTable = dynamic_cast<SRPTable *>(src);
-            if (!srpTable)
+            SRPTable *signal_srpTable = dynamic_cast<SRPTable *>(src);
+            if (!signal_srpTable)
             {
                 throw cRuntimeError(
                         "listenerRegistered or listenerUpdated signal received, from module that is not a SRPTable");
             }
-            cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
+            cModule* talker = signal_srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
             //Send listener ready only when talker is not a local application
             if (talker && talker->isName("phy"))
             {
