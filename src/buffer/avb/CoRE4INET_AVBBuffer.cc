@@ -56,15 +56,8 @@ void AVBBuffer::initialize(int stage)
     {
         Timed::initialize();
 
-        if (Oscillator *oscillator =
-                dynamic_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule())))
-        {
-            this->tick = oscillator->getPreciseTick();
-        }
-        else
-        {
-            throw cRuntimeError("Cannot find oscillator to get tick length");
-        }
+
+        this->tick = getOscillator()->getPreciseTick();
 
         this->srptable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", getParentModule()));
         if (!this->srptable)

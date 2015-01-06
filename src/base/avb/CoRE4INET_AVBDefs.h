@@ -39,8 +39,8 @@ const unsigned char PRIOANDRANK_SRCLASSB = 0xB0; //0b10110000;
 /**
  * Defines for range checks
  */
-#define MAX_STREAM_ID 0xFFFFFFFFFFFFFFFFl
-#define MAX_INTERVAL_FRAMES 0xFFFFFFFF
+#define MAX_STREAM_ID UINT64_MAX
+#define MAX_INTERVAL_FRAMES UINT32_MAX
 
 }
 #endif /* AVBDEFS_H_ */

@@ -65,11 +65,10 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
         if (tentry->streamId == static_cast<uint64_t>(par("streamID").longValue())
                 && tentry->vlan_id == static_cast<uint16_t>(par("vlan_id").longValue()))
         {
-            SRPTable *srpTable = check_and_cast<SRPTable *>(src);
+            SRPTable *signal_srpTable = check_and_cast<SRPTable *>(src);
 
-            srpTable->updateListenerWithStreamId(tentry->streamId, this, tentry->vlan_id);
+            signal_srpTable->updateListenerWithStreamId(tentry->streamId, this, tentry->vlan_id);
             getDisplayString().setTagArg("i2", 0, "status/hourglass");
-            simtime_t updateInterval = par("updateInterval").doubleValue();
             if (updateInterval != 0)
             {
                 scheduleAt(simTime() + updateInterval, new cMessage("updateSubscription"));
@@ -85,7 +84,6 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
             if (lentry->module == this)
             {
                 getDisplayString().setTagArg("i2", 0, "status/hourglass");
-                simtime_t retryInterval = par("retryInterval").doubleValue();
                 if (retryInterval != 0)
                 {
                     scheduleAt(simTime() + retryInterval, new cMessage("retrySubscription"));
@@ -102,7 +100,6 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
         srpTable->updateListenerWithStreamId(static_cast<uint64_t>(par("streamID").longValue()), this,
                 static_cast<uint16_t>(par("vlan_id").longValue()));
         getDisplayString().setTagArg("i2", 0, "status/active");
-        simtime_t updateInterval = par("updateInterval").doubleValue();
         if (updateInterval > 0)
         {
             scheduleAt(simTime() + updateInterval, msg);

@@ -61,10 +61,12 @@ class SRPTable : public cSimpleModule
                     intervalFrames = 0;
                     vlan_id = VLAN_ID_DEFAULT;
                 }
-                TalkerEntry(uint64_t streamId, SR_CLASS srClass, MACAddress address, cModule *module,
-                        size_t framesize, unsigned short intervalFrames, unsigned short vlan_id, simtime_t insertionTime) :
-                        streamId(streamId), srClass(srClass), address(address), module(module), framesize(framesize), intervalFrames(
-                                intervalFrames), vlan_id(vlan_id), insertionTime(insertionTime)
+                TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, MACAddress new_address, cModule *new_module,
+                        size_t new_framesize, unsigned short new_intervalFrames, unsigned short new_vlan_id,
+                        simtime_t new_insertionTime) :
+                        streamId(new_streamId), srClass(new_srClass), address(new_address), module(new_module), framesize(
+                                new_framesize), intervalFrames(new_intervalFrames), vlan_id(new_vlan_id), insertionTime(
+                                new_insertionTime)
                 {
                 }
         };
@@ -86,8 +88,10 @@ class SRPTable : public cSimpleModule
                     module = NULL;
                     vlan_id = VLAN_ID_DEFAULT;
                 }
-                ListenerEntry(uint64_t streamId, cModule *module, unsigned short vlan_id, simtime_t insertionTime) :
-                        streamId(streamId), module(module), vlan_id(vlan_id), insertionTime(insertionTime)
+                ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,
+                        simtime_t new_insertionTime) :
+                        streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
+                                new_insertionTime)
                 {
                 }
         };
@@ -167,7 +171,8 @@ class SRPTable : public cSimpleModule
          * @param vid VLAN ID
          * @return listeners for the stream
          */
-        virtual std::list<cModule*> getListenersForTalkerAddress(MACAddress &talkerAddress, uint16_t vid = VLAN_ID_DEFAULT);
+        virtual std::list<cModule*> getListenersForTalkerAddress(MACAddress &talkerAddress, uint16_t vid =
+                VLAN_ID_DEFAULT);
 
         /**
          * @brief Retrieve the module a message with a given streamId will come from (required for listener ready messages)
