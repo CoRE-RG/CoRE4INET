@@ -49,7 +49,7 @@ void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
             if(comp->hasPar("measure_interval")){
                 interval = SimTime(comp->par("measure_interval").doubleValue());
             }
-        }while((comp=(cComponent*)comp->getParentModule()));
+        }while((comp=comp->getParentModule()));
     }
     if(interval<SimTime(0)){
         interval = SimTime(1);
@@ -89,13 +89,13 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
     lastTime = t;
 }
 
-Register_ResultRecorder("floatingIntervalCountVector", FloatingIntervalCountVectorRecorder);
+Register_ResultRecorder("floatingIntervalCountVector", FloatingIntervalCountVectorRecorder)
 
 double FloatingIntervalCountVectorRecorder::calculate(){
     return inInterval.size();
 }
 
-Register_ResultRecorder("floatingIntervalSumVector", FloatingIntervalSumVectorRecorder);
+Register_ResultRecorder("floatingIntervalSumVector", FloatingIntervalSumVectorRecorder)
 
 double FloatingIntervalSumVectorRecorder::calculate(){
     double sumValue = 0;
@@ -105,7 +105,7 @@ double FloatingIntervalSumVectorRecorder::calculate(){
     return sumValue;
 }
 
-Register_ResultRecorder("floatingIntervalCapacityRecorder", FloatingIntervalCapacityRecorder);
+Register_ResultRecorder("floatingIntervalCapacityRecorder", FloatingIntervalCapacityRecorder)
 double FloatingIntervalCapacityRecorder::calculate(){
     double sumValue = 0;
        double frameUsedSumValue = 0;
@@ -117,7 +117,7 @@ double FloatingIntervalCapacityRecorder::calculate(){
        return sumValue / frameUsedSumValue * 100;
 }
 
-Register_ResultRecorder("floatingIntervalSumVectorPercent", FloatingIntervalSumVectorRecorderPercent);
+Register_ResultRecorder("floatingIntervalSumVectorPercent", FloatingIntervalSumVectorRecorderPercent)
 
 double FloatingIntervalSumVectorRecorderPercent::calculate(){
     double sumValue = 0;
@@ -140,7 +140,7 @@ double FloatingIntervalSumVectorRecorderPercent::calculate(){
 //    return sumValue /((interval / SimTime(1))* 100 * 1024 * 1024 / 100);;
 //}
 
-Register_ResultRecorder("floatingIntervalAvgVector", FloatingIntervalAvgVectorRecorder);
+Register_ResultRecorder("floatingIntervalAvgVector", FloatingIntervalAvgVectorRecorder)
 
 double FloatingIntervalAvgVectorRecorder::calculate(){
     double sumValue = 0;
@@ -150,7 +150,7 @@ double FloatingIntervalAvgVectorRecorder::calculate(){
     return sumValue/inInterval.size();
 }
 
-Register_ResultRecorder("floatingIntervalMinVector", FloatingIntervalMinVectorRecorder);
+Register_ResultRecorder("floatingIntervalMinVector", FloatingIntervalMinVectorRecorder)
 
 double FloatingIntervalMinVectorRecorder::calculate(){
     double minValue = std::numeric_limits<double>::max();
@@ -162,7 +162,7 @@ double FloatingIntervalMinVectorRecorder::calculate(){
     return minValue;
 }
 
-Register_ResultRecorder("floatingIntervalMaxVector", FloatingIntervalMaxVectorRecorder);
+Register_ResultRecorder("floatingIntervalMaxVector", FloatingIntervalMaxVectorRecorder)
 
 double FloatingIntervalMaxVectorRecorder::calculate(){
     double maxValue = std::numeric_limits<double>::min();
@@ -174,7 +174,7 @@ double FloatingIntervalMaxVectorRecorder::calculate(){
     return maxValue;
 }
 
-Register_ResultRecorder("floatingIntervalVarianceVectorRecorder", FloatingIntervalVarianceVectorRecorder);
+Register_ResultRecorder("floatingIntervalVarianceVectorRecorder", FloatingIntervalVarianceVectorRecorder)
 
 double FloatingIntervalVarianceVectorRecorder::calculate(){
     double minValue = std::numeric_limits<double>::max();
@@ -193,7 +193,7 @@ double FloatingIntervalVarianceVectorRecorder::calculate(){
 /*
  * Sums the values up received for each interval
  */
-Register_ResultRecorder("floatingIntervalAvailableBandwidthPercent", FloatingIntervalAvailableBandwidthPercent);
+Register_ResultRecorder("floatingIntervalAvailableBandwidthPercent", FloatingIntervalAvailableBandwidthPercent)
 
 double FloatingIntervalAvailableBandwidthPercent::calculate()
 {

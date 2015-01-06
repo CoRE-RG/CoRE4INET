@@ -42,7 +42,7 @@ void IntervalVectorRecorder::initialize(){
             interval = SimTime(comp->par("measure_interval").doubleValue());
             notSet = false;
         }
-    } while ((comp = (cComponent*) comp->getParentModule()));
+    } while ((comp = comp->getParentModule()));
 }
 
 void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
@@ -75,7 +75,7 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
                        notSet = false;
 //                       EV << "Interval: " <<interval << comp->getFullName()<<"\n";
                    }
-               } while ((comp = (cComponent*) comp->getParentModule()));
+               } while ((comp = comp->getParentModule()));
            }
            if (interval < SimTime(0))
            {
@@ -138,7 +138,7 @@ void IntervalVectorRecorder::addValueToInterval(simtime_t_cref t, double value)
 /*
  * Counts the values received for each interval
  */
-Register_ResultRecorder("IntervalCountVector", IntervalCountVectorRecorder);
+Register_ResultRecorder("IntervalCountVector", IntervalCountVectorRecorder)
 
 double IntervalCountVectorRecorder::calculate()
 {
@@ -148,7 +148,7 @@ double IntervalCountVectorRecorder::calculate()
 /*
  * Sums the values up received for each interval
  */
-Register_ResultRecorder("IntervalSumVector", IntervalSumVectorRecorder);
+Register_ResultRecorder("IntervalSumVector", IntervalSumVectorRecorder)
 
 double IntervalSumVectorRecorder::calculate()
 {
@@ -163,7 +163,7 @@ double IntervalSumVectorRecorder::calculate()
 /*
  * Sums the values up received for each interval
  */
-Register_ResultRecorder("IntervalCapacityRecorder", IntervalCapacityRecorder);
+Register_ResultRecorder("IntervalCapacityRecorder", IntervalCapacityRecorder)
 
 double IntervalCapacityRecorder::calculate()
 {
@@ -182,7 +182,6 @@ double IntervalCapacityRecorder::calculate()
  * Gives the average value for each interval
  */
 Register_ResultRecorder("IntervalAvgVector", IntervalAvgVectorRecorder)
-;
 
 double IntervalAvgVectorRecorder::calculate()
 {
@@ -197,7 +196,7 @@ double IntervalAvgVectorRecorder::calculate()
 /*
  * Gives the minimal value for each interval
  */
-Register_ResultRecorder("IntervalMinVector", IntervalMinVectorRecorder);
+Register_ResultRecorder("IntervalMinVector", IntervalMinVectorRecorder)
 
 double IntervalMinVectorRecorder::calculate()
 {
@@ -215,7 +214,7 @@ double IntervalMinVectorRecorder::calculate()
 /*
  * Gives the maximal value for each interval
  */
-Register_ResultRecorder("IntervalMaxVector", IntervalMaxVectorRecorder);
+Register_ResultRecorder("IntervalMaxVector", IntervalMaxVectorRecorder)
 
 double IntervalMaxVectorRecorder::calculate()
 {
@@ -233,7 +232,7 @@ double IntervalMaxVectorRecorder::calculate()
 /*
  * Gives the variance for each interval
  */
-Register_ResultRecorder("IntervalVarianceVector", IntervalVarianceVectorRecorder);
+Register_ResultRecorder("IntervalVarianceVector", IntervalVarianceVectorRecorder)
 
 double IntervalVarianceVectorRecorder::calculate()
 {
@@ -255,7 +254,7 @@ double IntervalVarianceVectorRecorder::calculate()
 
 /*
  */
-Register_ResultRecorder("IntervalSumVectorPercent", IntervalSumVectorRecorderPercent);
+Register_ResultRecorder("IntervalSumVectorPercent", IntervalSumVectorRecorderPercent)
 
 double IntervalSumVectorRecorderPercent::calculate()
 {
@@ -274,7 +273,7 @@ double IntervalSumVectorRecorderPercent::calculate()
 /*
  * Sums the values up received for each interval
  */
-Register_ResultRecorder("IntervalAvailableBandwidthPercent", IntervalAvailableBandwidthPercent);
+Register_ResultRecorder("IntervalAvailableBandwidthPercent", IntervalAvailableBandwidthPercent)
 
 double IntervalAvailableBandwidthPercent::calculate()
 {
