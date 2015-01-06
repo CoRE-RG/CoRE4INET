@@ -32,7 +32,8 @@ ifeq ($(CC),clang)
 	#clang
     CFLAGS += -Wall -Wunused -Wextra -Weverything
     CFLAGS += -Wno-documentation-unknown-command -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-vtables
-    CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
+    CFLAGS += -Wno-c++98-compat-pedantic
+    CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation
     CFLAGS +=  -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast
     CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break
 else ifeq ($(CC),gcc)
@@ -46,7 +47,7 @@ endif
 	
 # use -isystem instead of -I flag, to hide warnings in these files
 RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))
-ifneq (,$(findstring MINGW,$(shell uname -s)))
+ifneq (,$(findstring MSYS,$(shell uname -s)))
     # on windows we need this hack for pathes like -Id:/...
     override COPTS := $(shell echo '$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(COPTS))' |sed -e 's/-I\($(subst \| ,\|,$(addsuffix \|,$(filter %:,$(subst :,: ,$(patsubst -I%,%,$(COPTS))))) \/)\)/-isystem \1/g')
 else
