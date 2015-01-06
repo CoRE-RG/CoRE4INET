@@ -470,8 +470,7 @@ void SRPTable::updateDisplayString()
         return;
 
     char buf[80];
-    sprintf(buf, "%u talkers\n%u listeners", static_cast<unsigned int>(getNumTalkerEntries()),
-            static_cast<unsigned int>(getNumListenerEntries()));
+    sprintf(buf, "%zu talkers\n%zu listeners", getNumTalkerEntries(), getNumListenerEntries());
     getDisplayString().setTagArg("t", 0, buf);
 }
 
