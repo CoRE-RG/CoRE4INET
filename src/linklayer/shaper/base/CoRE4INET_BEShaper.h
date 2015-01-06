@@ -196,7 +196,7 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         beQueue.insert(msg);
-        cComponent::emit(beQueueLengthSignal, beQueue.length());
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
         TC::notifyListeners();
     }
     else
@@ -229,7 +229,7 @@ cMessage* BEShaper<TC>::pop()
     if (!beQueue.isEmpty())
     {
         cMessage* message = static_cast<cMessage*>(beQueue.pop());
-        cComponent::emit(beQueueLengthSignal, beQueue.length());
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
         return message;
     }
     return TC::pop();
