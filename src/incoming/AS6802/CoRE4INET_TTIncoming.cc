@@ -142,7 +142,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             throw cRuntimeError("Received non-Ethernet frame");
         }
     }
-    else if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
+    else if (msg && msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
         if(!frame)
         {

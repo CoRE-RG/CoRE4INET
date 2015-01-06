@@ -47,7 +47,7 @@ endif
 	
 # use -isystem instead of -I flag, to hide warnings in these files
 RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))
-ifneq (,$(findstring MINGW,$(shell uname -s)))
+ifneq (,$(findstring MSYS,$(shell uname -s)))
     # on windows we need this hack for pathes like -Id:/...
     override COPTS := $(shell echo '$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(COPTS))' |sed -e 's/-I\($(subst \| ,\|,$(addsuffix \|,$(filter %:,$(subst :,: ,$(patsubst -I%,%,$(COPTS))))) \/)\)/-isystem \1/g')
 else

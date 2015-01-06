@@ -27,6 +27,7 @@ Define_Module(SimpleOscillator);
 
 SimpleOscillator::SimpleOscillator()
 {
+    this->parametersInitialized = false;
     this->max_drift = 0;
     this->lastCorrection = simTime();
 }
