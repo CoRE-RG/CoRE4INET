@@ -32,8 +32,9 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
-            << bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames, getIntervalForClass(entry.srClass))
-                    / static_cast<double>(1000000) << "Mbps, insertionTime=" << entry.insertionTime << "}";
+            << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames,
+                    getIntervalForClass(entry.srClass))) / static_cast<double>(1000000) << "Mbps, insertionTime="
+            << entry.insertionTime << "}";
     return os;
 }
 
@@ -268,7 +269,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))        MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))         MACAddress address,
         uint16_t vid)
 {
 
@@ -379,9 +380,9 @@ void SRPTable::printState()
             EV << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
                     << (*j).second->address.str() << "   "
                     << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
-                    << bandwidthFromSizeAndInterval((*j).second->framesize, (*j).second->intervalFrames,
-                            getIntervalForClass((*j).second->srClass)) / static_cast<double>(1000000) << "   "
-                    << (*j).second->insertionTime << endl;
+                    << static_cast<double>(bandwidthFromSizeAndInterval((*j).second->framesize,
+                            (*j).second->intervalFrames, getIntervalForClass((*j).second->srClass)))
+                            / static_cast<double>(1000000) << "   " << (*j).second->insertionTime << endl;
         }
     }
 
@@ -435,23 +436,23 @@ void SRPTable::clear()
     }
 }
 
-unsigned int SRPTable::getNumTalkerEntries()
+size_t SRPTable::getNumTalkerEntries()
 {
     removeAgedEntriesIfNeeded();
 
-    unsigned int entries = 0;
-    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin(); i != talkerTables.end();
-            ++i)
+    size_t entries = 0;
+    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin();
+            i != talkerTables.end(); ++i)
     {
         entries += (*i).second.size();
     }
     return entries;
 }
-unsigned int SRPTable::getNumListenerEntries()
+size_t SRPTable::getNumListenerEntries()
 {
     removeAgedEntriesIfNeeded();
 
-    unsigned int entries = 0;
+    size_t entries = 0;
     for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
             i != listenerTables.end(); ++i)
     {

@@ -13,7 +13,6 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-
 #ifndef CORE4INET_IPV4OTT_CC_
 #define CORE4INET_IPV4OTT_CC_
 
@@ -43,17 +42,21 @@ namespace CoRE4INET {
 //==============================================================================
 
 template<class Base>
-IPv4oTT<Base>::IPv4oTT() {
+IPv4oTT<Base>::IPv4oTT()
+{
 }
 
 //==============================================================================
 
 template<class Base>
-IPv4oTT<Base>::~IPv4oTT() {
+IPv4oTT<Base>::~IPv4oTT()
+{
     std::unordered_map<std::string, std::list<QueuedPacket*> >::iterator i = ttPackets.begin();
-    while (i != ttPackets.end()) {
+    while (i != ttPackets.end())
+    {
         std::list<QueuedPacket*>::iterator j = i->second.begin();
-        while (j != i->second.end()) {
+        while (j != i->second.end())
+        {
             QueuedPacket *qp = (*j);
             cPacket *p = qp->getPacket();
             delete p;
@@ -79,7 +82,8 @@ void IPv4oTT<Base>::initialize(int stage)
         cXMLElement *filters = Base::par("filters").xmlValue();
         IPv4oTT<Base>::configureFilters(filters);
 
-        Base::scheduleAt(simTime(), new cMessage("IPv4oTT register action time events", static_cast<short>(MSGKIND_START)));
+        Base::scheduleAt(simTime(),
+                new cMessage("IPv4oTT register action time events", static_cast<short>(MSGKIND_START)));
 
         ASSERT2(findContainingNode(this)!=NULL,
                 "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");
@@ -98,9 +102,12 @@ void IPv4oTT<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
-    if(filterMatch) {
+    if (filterMatch)
+    {
         IPv4oTT<Base>::sendPacketToBuffers(packet, ie, matchingFilters);
-    } else {
+    }
+    else
+    {
         Base::sendPacketToNIC(packet, ie);
     }
 }
@@ -119,7 +126,6 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
         {
             const char *destType = Base::getRequiredAttribute(filterElement, "destType");
 
-
 //            if (!this->destTypeEnum) {
 //                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
 //            }
@@ -128,7 +134,8 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
             cEnum *destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
             DestinationType dt = DestinationType(destTypeEnum->lookup(destType));
 
-            if (dt == DestinationType_TT) {
+            if (dt == DestinationType_TT)
+            {
                 // Destination Info
                 const char *destModule = Base::getRequiredAttribute(filterElement, "destModule");
                 const char *ctId = Base::getRequiredAttribute(filterElement, "ctId");
@@ -155,45 +162,63 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 TTDestinationInfo *ttDestInfo = new TTDestinationInfo();
                 ttDestInfo->setDestType(DestinationType_TT);
                 cModule* module = simulation.getModuleByPath(destModule);
-                if (!module) {
-                   module = findModuleWhereverInNode(destModule, this);
+                if (!module)
+                {
+                    module = findModuleWhereverInNode(destModule, this);
                 }
-                if (!module) {
-                   throw cRuntimeError("destModule \"%s\" could not be resolved!", destModule);
+                if (!module)
+                {
+                    throw cRuntimeError("destModule \"%s\" could not be resolved!", destModule);
                 }
-                if (TTBuffer *ttBuf = dynamic_cast<TTBuffer*>(module)) {
+                if (TTBuffer *ttBuf = dynamic_cast<TTBuffer*>(module))
+                {
                     ttDestInfo->setDestModule(ttBuf);
-                } else {
+                }
+                else
+                {
                     throw cRuntimeError("destModule: %s is not a TTBuffer!", destModule);
                 }
                 ttDestInfo->setCtId(static_cast<uint16_t>(Base::parseIntAttribute(ctId, "ctId", false)));
 
                 Period *periodModule;
-                if (period) {
+                if (period)
+                {
                     periodModule = dynamic_cast<Period*>(findModuleWhereverInNode(period, this));
-                } else {
+                }
+                else
+                {
                     periodModule = dynamic_cast<Period*>(findModuleWhereverInNode("period[0]", this));
                 }
-                if (periodModule) {
+                if (periodModule)
+                {
                     ttDestInfo->setPeriod(periodModule);
-                } else {
+                }
+                else
+                {
                     throw cRuntimeError("period module \"%s\" not found or is not of type Period!", period);
                 }
 
-                ttDestInfo->setActionTime(Base::parseIntAttribute(actionTime, "actionTime", false) / 1000000.f);
+                ttDestInfo->setActionTime(
+                        static_cast<double>(Base::parseIntAttribute(actionTime, "actionTime", false))
+                                / static_cast<double>(1000000));
 
                 Oscillator *osc;
-                if (oscillator) {
+                if (oscillator)
+                {
                     osc = dynamic_cast<Oscillator*>(findModuleWhereverInNode(oscillator, this));
-                } else {
+                }
+                else
+                {
                     osc = dynamic_cast<Oscillator*>(findModuleWhereverInNode("oscillator", this));
                 }
-                if (osc) {
+                if (osc)
+                {
                     ttDestInfo->setOscillator(osc);
-                } else {
+                }
+                else
+                {
                     throw cRuntimeError("oscillator module \"%s\" not found or is not of type Oscillator!", oscillator);
                 }
-
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -215,7 +240,8 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                     tp->setTos(Base::parseIntAttribute(tosAttr, "tos"));
                 if (tosMaskAttr)
                     tp->setTosMask(Base::parseIntAttribute(tosAttr, "tosMask"));
-                if (srcPortAttr) {
+                if (srcPortAttr)
+                {
                     tp->setSrcPortMin(Base::parseIntAttribute(srcPortAttr, "srcPort"));
                     tp->setSrcPortMax(tp->getSrcPortMin());
                 }
@@ -223,7 +249,8 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                     tp->setSrcPortMin(Base::parseIntAttribute(srcPortMinAttr, "srcPortMin"));
                 if (srcPortMaxAttr)
                     tp->setSrcPortMax(Base::parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
-                if (destPortAttr) {
+                if (destPortAttr)
+                {
                     tp->setDestPortMin(Base::parseIntAttribute(destPortAttr, "destPort"));
                     tp->setDestPortMax(tp->getDestPortMin());
                 }
@@ -239,11 +266,11 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 Base::addFilter(filter);
             }
 
-
         }
         catch (std::exception& e)
         {
-            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(), e.what());
+            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(),
+                    e.what());
         }
     }
 
@@ -265,9 +292,11 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
     {
         std::string msgName(msg->getName());
 
-        if (periods.count(msgName) > 0) {
+        if (periods.count(msgName) > 0)
+        {
             std::string msgName(msg->getName());
-            if (synchronized  &&  ttPackets[msgName].size() > 0) {
+            if (synchronized && ttPackets[msgName].size() > 0)
+            {
                 QueuedPacket *toSend = ttPackets[msgName].front();
                 ttPackets[msgName].pop_front();
                 sendTTFrame(toSend->getPacket(), toSend->getFilter());
@@ -311,14 +340,18 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused)) const InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused))  const InterfaceEntry *ie,
+        std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
-        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
+        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)",
+                packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
-    for ( ; filter != filters.end(); ++filter) {
-        if ((*filter)->getDestInfo()->getDestType() == DestinationType_TT) {
+    for (; filter != filters.end(); ++filter)
+    {
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_TT)
+        {
             ttPackets[static_cast<TTDestinationInfo*>((*filter)->getDestInfo())->getDestModule()->getFullPath()].push_back(
                     new QueuedPacket((*filter), packet->dup()));
         }
@@ -339,7 +372,8 @@ void IPv4oTT<Base>::sendTTFrame(cPacket* packet, const IPoREFilter* filter)
 
     TTFrame *outFrame = new TTFrame();
     outFrame->encapsulate(packet);
-    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES) {
+    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+    {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
     outFrame->setCtID(destInfo->getCtId());
@@ -374,7 +408,8 @@ template<class Base>
 void IPv4oTT<Base>::registerSendTimingEvents(std::list<IPoREFilter*> &filters)
 {
     std::list<IPoREFilter*>::iterator f = filters.begin();
-    for (  ; f!=filters.end(); ++f) {
+    for (; f != filters.end(); ++f)
+    {
         registerSendTimingEvent(check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
     }
 }
@@ -384,14 +419,16 @@ void IPv4oTT<Base>::registerSendTimingEvents(std::list<IPoREFilter*> &filters)
 template<class Base>
 void IPv4oTT<Base>::registerSendTimingEvent(TTDestinationInfo *destInfo)
 {
-    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent(destInfo->getDestModule()->getFullPath().c_str(), ACTION_TIME_EVENT);
-    event->setAction_time( static_cast<uint32_t>(destInfo->getActionTime() / destInfo->getOscillator()->par("tick").doubleValue()));
+    SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent(destInfo->getDestModule()->getFullPath().c_str(),
+            ACTION_TIME_EVENT);
+    event->setAction_time(
+            static_cast<uint32_t>(destInfo->getActionTime() / destInfo->getOscillator()->par("tick").doubleValue()));
     event->setDestinationGate(Base::gate("schedulerIn"));
 
     if (event->getAction_time() >= static_cast<uint32_t>(destInfo->getPeriod()->par("cycle_ticks").longValue()))
     {
-        throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)", event->getAction_time(),
-                destInfo->getPeriod()->par("cycle_ticks").longValue());
+        throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)",
+                event->getAction_time(), destInfo->getPeriod()->par("cycle_ticks").longValue());
     }
 
     destInfo->getPeriod()->registerEvent(event);
@@ -414,11 +451,12 @@ void IPv4oTT<Base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
         {
             synchronized = false;
         }
-    } else {
+    }
+    else
+    {
         Base::receiveSignal(src, id, obj);
     }
 }
-
 
 } /* namespace CoRE4INET */
 

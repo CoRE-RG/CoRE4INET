@@ -151,7 +151,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
             {
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                         getParentModule()->getSubmodule("phy", getIndex()), srClass);
-                Wduration = static_cast<double>(-credit) / reservedBandwith;
+                Wduration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
                 SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
                 event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
                 event->setDestinationGate(gate("schedulerIn"));
@@ -196,7 +196,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 }
                 else
                 {
-                    Wduration = static_cast<double>(-credit) / reservedBandwith;
+                    Wduration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
                     event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
                     event->setDestinationGate(gate("schedulerIn"));
@@ -242,7 +242,7 @@ void AVBBuffer::idleSlope(SimTime duration)
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
-        credit += static_cast<int>(ceil(reservedBandwith * duration.dbl()));
+        credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
         emit(creditSignal, credit);
         if (credit > 0 && size() == 0 && !inTransmission)
             resetCredit();
@@ -258,7 +258,7 @@ void AVBBuffer::interferenceSlope(SimTime duration)
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
-        credit += static_cast<int>(ceil(reservedBandwith * duration.dbl()));
+        credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
         emit(creditSignal, credit);
     }
 }
@@ -277,7 +277,7 @@ void AVBBuffer::sendSlope(SimTime duration)
             getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
     emit(creditSignal, credit);
-    credit -= static_cast<int>(ceil((portBandwith - reservedBandwith) * duration.dbl()));
+    credit -= static_cast<int>(ceil(static_cast<double>(portBandwith - reservedBandwith) * duration.dbl()));
     inTransmission = false;
     if (size() > 0)
     {

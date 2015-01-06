@@ -98,7 +98,9 @@ void SRProtocol::handleMessage(cMessage *msg)
 
                 double reservableBandwidth = par("reservableBandwidth").doubleValue();
 
-                if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
+                if (update
+                        || ((utilizedBandwidth + requiredBandwidth)
+                                <= (static_cast<double>(totalBandwidth) * reservableBandwidth)))
                 {
                     srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port,
                             listenerReady->getVlan_identifier());
@@ -106,19 +108,22 @@ void SRProtocol::handleMessage(cMessage *msg)
                     {
                         EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
                                 << port->getFullName() << ". Utilized Bandwidth: "
-                                << (utilizedBandwidth + requiredBandwidth) / static_cast<double>(1000000) << " of "
-                                << (totalBandwidth * reservableBandwidth) / static_cast<double>(1000000)
-                                << " reservable Bandwidth of " << totalBandwidth / static_cast<double>(1000000)
-                                << " MBit/s.";
+                                << static_cast<double>(utilizedBandwidth + requiredBandwidth)
+                                        / static_cast<double>(1000000) << " of "
+                                << (static_cast<double>(totalBandwidth) * reservableBandwidth)
+                                        / static_cast<double>(1000000) << " reservable Bandwidth of "
+                                << static_cast<double>(totalBandwidth) / static_cast<double>(1000000) << " MBit/s.";
                     }
                 }
                 else
                 {
                     EV_DETAIL << "Listener for stream " << listenerReady->getStreamID()
                             << " could not be registered on port " << port->getFullName() << ". Required bandwidth: "
-                            << requiredBandwidth / static_cast<double>(1000000) << "MBit/s, remaining bandwidth "
-                            << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth)
-                                    / static_cast<double>(1000000) << "MBit/s.";
+                            << static_cast<double>(requiredBandwidth) / static_cast<double>(1000000)
+                            << "MBit/s, remaining bandwidth "
+                            << ((static_cast<double>(totalBandwidth) * reservableBandwidth)
+                                    - static_cast<double>(utilizedBandwidth)) / static_cast<double>(1000000)
+                            << "MBit/s.";
                     SRPFrame *srp;
                     if (srpTable->getListenersForStreamId(listenerReady->getStreamID(),
                             listenerReady->getVlan_identifier()).size() > 0)

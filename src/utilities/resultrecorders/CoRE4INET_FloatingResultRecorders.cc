@@ -92,7 +92,7 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
 Register_ResultRecorder("floatingIntervalCountVector", FloatingIntervalCountVectorRecorder)
 
 double FloatingIntervalCountVectorRecorder::calculate(){
-    return inInterval.size();
+    return static_cast<double>(inInterval.size());
 }
 
 Register_ResultRecorder("floatingIntervalSumVector", FloatingIntervalSumVectorRecorder)
@@ -147,7 +147,7 @@ double FloatingIntervalAvgVectorRecorder::calculate(){
     for(std::map<simtime_t, double>::const_iterator it= inInterval.begin(); it!=inInterval.end();++it){
         sumValue += (*it).second;
     }
-    return sumValue/inInterval.size();
+    return sumValue / static_cast<double>(inInterval.size());
 }
 
 Register_ResultRecorder("floatingIntervalMinVector", FloatingIntervalMinVectorRecorder)

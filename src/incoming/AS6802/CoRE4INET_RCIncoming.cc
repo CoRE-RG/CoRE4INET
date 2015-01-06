@@ -80,6 +80,9 @@ void RCIncoming::handleMessage(cMessage *msg)
     }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wuseless-cast"
+
 void RCIncoming::handleParameterChange(const char* parname)
 {
     CTIncoming::handleParameterChange(parname);
@@ -94,5 +97,7 @@ void RCIncoming::handleParameterChange(const char* parname)
         this->jitter = static_cast<uint64_t>(parameterULongCheckRange(par("jitter"), 0, MAX_JITTER_TICKS));
     }
 }
+
+#pragma GCC diagnostic pop
 
 } //namespace

@@ -153,7 +153,8 @@ uint64_t TTBuffer::nextSendWindowStart() const
 
 long TTBuffer::getRequiredBandwidth()
 {
-    return static_cast<long>(ceil((getMaxMessageSize() * 8) * (1 / (getPeriod()->getCycleLength().dbl()))));
+    return static_cast<long>(ceil(
+            static_cast<double>(getMaxMessageSize() * 8) * (1 / (getPeriod()->getCycleLength().dbl()))));
 }
 
 uint32_t TTBuffer::getSendWindowStart()

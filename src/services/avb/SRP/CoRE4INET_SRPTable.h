@@ -260,14 +260,14 @@ class SRPTable : public cSimpleModule
          *
          * @return number of talkers
          */
-        unsigned int getNumTalkerEntries();
+        size_t getNumTalkerEntries();
 
         /**
          * @brief get the number of registered listeners
          *
          * @return number of listeners
          */
-        unsigned int getNumListenerEntries();
+        size_t getNumListenerEntries();
 };
 
 }

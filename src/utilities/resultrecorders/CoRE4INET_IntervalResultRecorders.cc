@@ -142,7 +142,7 @@ Register_ResultRecorder("IntervalCountVector", IntervalCountVectorRecorder)
 
 double IntervalCountVectorRecorder::calculate()
 {
-    return inInterval.size();
+    return static_cast<double>(inInterval.size());
 }
 
 /*
@@ -190,7 +190,7 @@ double IntervalAvgVectorRecorder::calculate()
     {
         sumValue += (*it).second;
     }
-    return sumValue / inInterval.size();
+    return sumValue / static_cast<double>(inInterval.size());
 }
 
 /*

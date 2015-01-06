@@ -87,7 +87,7 @@ bool FloatingIntervalCountFilter::process(simtime_t &t, double &value)
 {
     FloatingIntervalFilter::process(t, value);
     //return size
-    value = inInterval.size();
+    value = static_cast<double>(inInterval.size());
     return true;
 }
 
@@ -117,6 +117,6 @@ bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value)
     {
         newValue += (*it2).second;
     }
-    value = (newValue / inInterval.size());
+    value = (newValue / static_cast<double>(inInterval.size()));
     return true;
 }

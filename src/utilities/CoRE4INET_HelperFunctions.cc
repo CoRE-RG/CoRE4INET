@@ -79,8 +79,9 @@ uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick)
 uint64_t secondsToTransparentClock(simtime_t seconds)
 {
     uint64_t div = 10;
-    for(int i=1;i<(SIMTIME_NS - seconds.getScaleExp());++i){
-        div*=10;
+    for (int i = 1; i < (SIMTIME_NS - seconds.getScaleExp()); ++i)
+    {
+        div *= 10;
     }
     return (static_cast<uint64_t>(seconds.raw()) * static_cast<uint64_t>(0x10000)) / div;
 }
@@ -90,9 +91,10 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
     return transparentClock / secondsToTransparentClock(tick);
 }
 
-MACAddress generateAutoMulticastAddress(){
+MACAddress generateAutoMulticastAddress()
+{
     MACAddress multicastMAC = MACAddress::generateAutoAddress();
-    multicastMAC.setAddressByte(1,(multicastMAC.getAddressByte(1)|0x01));
+    multicastMAC.setAddressByte(1, (multicastMAC.getAddressByte(1) | 0x01));
     return multicastMAC;
 }
 
@@ -136,9 +138,10 @@ const_simtime_t second = 1;
 
 unsigned long bandwidthFromSizeAndInterval(size_t framesize, size_t intervalFrames, simtime_t interval)
 {
-    return static_cast<unsigned long>(ceil((second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS)));
+    return static_cast<unsigned long>(ceil(
+            (second / interval) * static_cast<double>(intervalFrames)
+                    * static_cast<double>(((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS)));
 }
-
 
 const simtime_t getIntervalForClass(SR_CLASS srClass)
 {

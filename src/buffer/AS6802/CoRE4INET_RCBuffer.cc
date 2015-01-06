@@ -172,7 +172,7 @@ void RCBuffer::resetBag()
 long RCBuffer::getRequiredBandwidth()
 {
     return static_cast<long>(ceil(
-            (getMaxMessageSize() * 8) * (1 / (static_cast<double>(this->bag) * getOscillator()->getPreciseTick()))));
+            static_cast<double>(getMaxMessageSize() * 8) * (1 / (static_cast<double>(this->bag) * getOscillator()->getPreciseTick()))));
 }
 
 } //namespace
