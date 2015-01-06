@@ -149,6 +149,7 @@ const simtime_t getIntervalForClass(SR_CLASS srClass)
         case SR_CLASS_B:
             return SR_CLASS_B_INTERVAL;
     }
+    return SR_CLASS_B_INTERVAL;
 }
 #endif
 
