@@ -152,12 +152,12 @@ void Period::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "cycle_ticks"))
     {
-        this->cycle_ticks = (uint32_t) parameterULongCheckRange(par("cycle_ticks"), 0, MAX_CYCLE_TICKS);
+        this->cycle_ticks = static_cast<uint32_t>(parameterULongCheckRange(par("cycle_ticks"), 0, MAX_CYCLE_TICKS));
     }
     if (!parname || !strcmp(parname, "offset_ticks"))
     {
-        this->offset_ticks = (uint32_t) parameterULongCheckRange(par("offset_ticks"), 0,
-                par("cycle_ticks").longValue());
+        this->offset_ticks = static_cast<uint32_t>(parameterULongCheckRange(par("offset_ticks"), 0,
+                static_cast<unsigned long>(par("cycle_ticks").longValue())));
     }
 
 }
