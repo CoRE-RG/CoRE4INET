@@ -1,11 +1,9 @@
+EXTENDED_WARNINGS=1
+WARNINGS_ERROR=1
 #CFLAGS += -std=c++11
 #CFLAGS += -Wall -Wunused
 #CFLAGS += -Wall -Werror -Wunused -Wdocumentation
 #CFLAGS += -Wall -Werror -Wunused -Weverything -Wno-c++11-long-long -Wno-c++11-extra-semi -Wno-weak-vtables -Wno-shadow -Wno-global-constructors -Wno-exit-time-destructors -Wno-pedantic -Wno-missing-prototypes -Wno-used-but-marked-unused
-
-#replace include of external sources to suppress warnings in omnet and inet
-#COPTS := $(subst -I../../inet,-isystem ../../inet,$(COPTS))
-#COPTS := $(subst -I$(OMNETPP_INCL_DIR),-isystem $(OMNETPP_INCL_DIR) ,$(COPTS))
 
 
 UNAME_S := $(shell uname -s)
@@ -21,6 +19,12 @@ ifeq ($(UNAME_S),Darwin)
     LDFLAGS += -headerpad_max_install_names 
 endif
 
+#Warnings generate errors
+ifdef WARNINGS_ERROR
+	CFLAGS += -Werror
+endif
+
+ifdef EXTENDED_WARNINGS
 #Warnings in clang and gcc:
 ifeq ($(CC),clang)
 	#clang
@@ -32,12 +36,7 @@ else ifeq ($(CC),gcc)
     CFLAGS += -Wall -Wunused -Wextra
     #CFLAGS += -ansi -pedantic-errors
 endif
-
-#Warnings generate errors
-CFLAGS += -Werror
-
-
-
+	
 # use -isystem instead of -I flag, to hide warnings in these files
 RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))
 ifneq (,$(findstring MINGW,$(shell uname -s)))
@@ -48,3 +47,8 @@ else
     override COPTS := $(subst -I/,-isystem /,$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(COPTS)))
 endif
 $(info Replaced COPTS -I directives with -isystem directive: $(COPTS))
+endif
+
+
+
+
