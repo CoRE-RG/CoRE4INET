@@ -1,14 +1,16 @@
-EXTENDED_WARNINGS=1
-WARNINGS_ERROR=1
-CFLAGS += -std=c++11
-#CFLAGS += -Wall -Wunused
-#CFLAGS += -Wall -Werror -Wunused -Wdocumentation
-#CFLAGS += -Wall -Werror -Wunused -Weverything -Wno-c++11-long-long -Wno-c++11-extra-semi -Wno-weak-vtables -Wno-shadow -Wno-global-constructors -Wno-exit-time-destructors -Wno-pedantic -Wno-missing-prototypes -Wno-used-but-marked-unused
+# USAGE:
+# Set Environment Variables:
+# EXTENDED_WARNINGS=1
+# for stricter warnings and
+#
+# WARNINGS_ERROR=1
+# for -Werror
 
+CFLAGS += -std=c++11
 
 UNAME_S := $(shell uname -s)
 
-#Currently forcing clang interface on OS X!
+#Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
 ifeq ($(UNAME_S),Darwin)
 	CC = clang
 	CXX = clang++
@@ -25,7 +27,7 @@ ifdef WARNINGS_ERROR
 endif
 
 ifdef EXTENDED_WARNINGS
-#Warnings in clang and gcc:
+#Stricter warnings in clang and gcc:
 ifeq ($(CC),clang)
 	#clang
     CFLAGS += -Wall -Wunused -Wextra -Weverything
