@@ -516,7 +516,7 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
             APICallback *cb = receiveCallbacks[priv->buffer];
             if(cb == nullptr)
             {
-                APICallback *cb = transmitCallbacks[priv->buffer];
+                cb = transmitCallbacks[priv->buffer];
                 if(cb == nullptr)
                 {
                     return ETT_NULLPTR;
@@ -569,7 +569,7 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf, c
             APICallback *cb = receiveCallbacks[priv->buffer];
             if(cb == nullptr)
             {
-                APICallback *cb = transmitCallbacks[priv->buffer];
+                cb = transmitCallbacks[priv->buffer];
                 if(cb == nullptr)
                 {
                     return ETT_NULLPTR;

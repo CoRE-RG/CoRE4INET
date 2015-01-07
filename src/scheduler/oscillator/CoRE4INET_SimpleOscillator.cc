@@ -64,18 +64,16 @@ void SimpleOscillator::handleMessage(cMessage *msg)
         simtime_t reference_time = ((simTime() - lastCorrection) / getPeriod()->getCycleTicks());
         simtime_t drift_change = reference_time * (par("drift_change").doubleValue() / 1000000);
 
-        simtime_t current_tick = getCurrentTick();
-        simtime_t tick = getPreciseTick();
+        simtime_t precise_tick = getPreciseTick();
+        simtime_t newTick = getCurrentTick() + drift_change;
 
-        simtime_t newTick = current_tick + drift_change;
-
-        if ((newTick - tick) > this->max_drift)
-            setCurrentTick(tick + this->max_drift);
-        else if ((newTick - tick) < -this->max_drift)
-            setCurrentTick(tick - this->max_drift);
+        if ((newTick - precise_tick) > this->max_drift)
+            setCurrentTick(precise_tick + this->max_drift);
+        else if ((newTick - precise_tick) < -this->max_drift)
+            setCurrentTick(precise_tick - this->max_drift);
         else
             setCurrentTick(newTick);
-        emit(currentDrift, (getCurrentTick() - tick));
+        emit(currentDrift, (getCurrentTick() - precise_tick));
 
         lastCorrection = simTime();
         //Reregister scheduler

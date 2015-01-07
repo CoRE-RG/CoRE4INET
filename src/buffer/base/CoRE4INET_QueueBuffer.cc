@@ -37,8 +37,8 @@ void QueueBuffer::initializeStatistics()
 
 void QueueBuffer::enqueue(EtherFrame *newFrame)
 {
-    int size = static_cast<int>(par("size").longValue());
-    if (size >= 0 && frames.length() >= size)
+    int max_size = static_cast<int>(par("size").longValue());
+    if (max_size >= 0 && frames.length() >= max_size)
     {
         emit(droppedSignal, newFrame);
         if (ev.isGUI())

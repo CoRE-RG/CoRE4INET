@@ -116,15 +116,15 @@ void Buffer::handleParameterChange(const char* parname)
     {
         destinationGates.clear();
         std::vector<cGate*> gates = parameterToGateList(par("destination_gates"), DELIMITERS);
-        for (std::vector<cGate*>::const_iterator gate = gates.begin(); gate != gates.end(); ++gate)
+        for (std::vector<cGate*>::const_iterator gate_it = gates.begin(); gate_it != gates.end(); ++gate_it)
         {
-            if (findContainingNode((*gate)->getOwnerModule()) != findContainingNode(this))
+            if (findContainingNode((*gate_it)->getOwnerModule()) != findContainingNode(this))
             {
                 throw cRuntimeError(
                         "Configuration problem of parameter destination_gates in module %s: Gate: %s is not in node %s! Maybe a copy-paste problem?",
-                        this->getFullName(), (*gate)->getFullName(), findContainingNode(this)->getFullName());
+                        this->getFullName(), (*gate_it)->getFullName(), findContainingNode(this)->getFullName());
             }
-            destinationGates.push_back(*gate);
+            destinationGates.push_back(*gate_it);
         }
     }
 }

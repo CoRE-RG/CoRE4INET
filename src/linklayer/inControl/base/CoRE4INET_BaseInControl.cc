@@ -29,19 +29,19 @@ void BaseInControl::setParameters(EtherFrame *frame)
     if (frame)
     {
         int i = frame->findPar("received_total");
-        cMsgPar* par;
+        cMsgPar* parameter;
         if (i >= 0)
-            par = &frame->par(i);
+            parameter = &frame->par(i);
         else
-            par = &frame->addPar("received_total");
-        par->setLongValue(static_cast<long>(getTimer()->getTotalTicks()));
+            parameter = &frame->addPar("received_total");
+        parameter->setLongValue(static_cast<long>(getTimer()->getTotalTicks()));
 
         i = frame->findPar("received_port");
         if (i >= 0)
-            par = &frame->par(i);
+            parameter = &frame->par(i);
         else
-            par = &frame->addPar("received_port");
-        par->setLongValue(getParentModule()->getIndex());
+            parameter = &frame->addPar("received_port");
+        parameter->setLongValue(getParentModule()->getIndex());
     }
 }
 

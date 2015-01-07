@@ -83,9 +83,9 @@ class Callback : public cListener
          *
          * @param setFunctionArg the funtion arg to be used in the callback
          */
-        void setFunctionArg(void *setFunctionArg)
+        void setFunctionArg(void *functionArg)
         {
-            arg = setFunctionArg;
+            arg = functionArg;
             argSet = true;
         }
 

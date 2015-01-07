@@ -24,10 +24,10 @@ QueuedPacket::QueuedPacket()
 }
 
 
-QueuedPacket::QueuedPacket(IPoREFilter *filter, cPacket *packet)
+QueuedPacket::QueuedPacket(IPoREFilter *new_filter, cPacket *new_packet)
 {
-    this->filter = filter;
-    this->packet = packet;
+    this->filter = new_filter;
+    this->packet = new_packet;
 }
 
 QueuedPacket::~QueuedPacket()

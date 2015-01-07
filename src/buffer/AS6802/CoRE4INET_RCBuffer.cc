@@ -93,10 +93,10 @@ void RCBuffer::handleMessage(cMessage *msg)
                 bagExpired = false;
                 numReset = 0;
                 //Send Message
-                for (std::list<cGate*>::const_iterator gate = destinationGates.begin(); gate != destinationGates.end();
-                        ++gate)
+                for (std::list<cGate*>::const_iterator gate_it = destinationGates.begin(); gate_it != destinationGates.end();
+                        ++gate_it)
                 {
-                    sendDirect(outgoingMessage->dup(), *gate);
+                    sendDirect(outgoingMessage->dup(), *gate_it);
                 }
                 recordPacketSent(outgoingMessage);
                 lastSent = getTimer()->getTotalTicks();

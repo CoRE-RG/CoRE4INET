@@ -322,12 +322,12 @@ Oscillator* Timer::getOscillator() const
     return oscillator;
 }
 
-void Timer::clockCorrection(int32_t ticks)
+void Timer::clockCorrection(int32_t correction_ticks)
 {
     Enter_Method
-    ("clock correction %d ticks", ticks);
-    emit(clockCorrectionSignal, ticks);
-    this->ticks = static_cast<uint64_t>(static_cast<int64_t>(this->ticks) + ticks);
+    ("clock correction %d ticks", correction_ticks);
+    emit(clockCorrectionSignal, correction_ticks);
+    this->ticks = static_cast<uint64_t>(static_cast<int64_t>(this->ticks) + correction_ticks);
     //Now correct the timer events that must be independent of clockCorrection
     std::map<uint64_t, std::list<SchedulerTimerEvent*> > correctedTimerEvents;
     std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = correctedTimerEvents.begin();
@@ -336,7 +336,7 @@ void Timer::clockCorrection(int32_t ticks)
     {
         if (correctedTimerEvents.empty())
         {
-            correctedTimerEvents[static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + ticks)] = (*it2).second;
+            correctedTimerEvents[static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)] = (*it2).second;
             it = correctedTimerEvents.begin();
         }
         else
@@ -344,7 +344,7 @@ void Timer::clockCorrection(int32_t ticks)
             //Better version with hint?
             it = correctedTimerEvents.insert(it,
                     std::pair<uint64_t, std::list<SchedulerTimerEvent*> >(
-                            (static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + ticks)), (*it2).second));
+                            (static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)), (*it2).second));
         }
     }
     registredTimerEvents = correctedTimerEvents;

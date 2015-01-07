@@ -51,7 +51,7 @@ class SchedulerEvent : public SchedulerEvent_Base
         }
         // ADD CODE HERE to redefine and implement pure virtual functions from SchedulerEvent_Base
         virtual cGate* getDestinationGate() const;
-        virtual void setDestinationGate(cGate *destinationGate);
+        virtual void setDestinationGate(cGate *new_destinationGate_var);
 };
 }
 

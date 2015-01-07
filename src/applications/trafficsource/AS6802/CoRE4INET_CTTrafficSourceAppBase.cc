@@ -84,10 +84,10 @@ void CTTrafficSourceAppBase::sendMessage()
                 continue;
             }
             frame->setTimestamp();
-            cPacket *payload = new cPacket;
-            payload->setTimestamp();
-            payload->setByteLength(static_cast<int64_t>(getPayloadBytes()));
-            frame->encapsulate(payload);
+            cPacket *payload_packet = new cPacket;
+            payload_packet->setTimestamp();
+            payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
+            frame->encapsulate(payload_packet);
             //Padding
             if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
             {

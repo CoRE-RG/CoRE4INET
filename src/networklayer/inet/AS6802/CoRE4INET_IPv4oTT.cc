@@ -294,7 +294,6 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 
         if (periods.count(msgName) > 0)
         {
-            std::string msgName(msg->getName());
             if (synchronized && ttPackets[msgName].size() > 0)
             {
                 QueuedPacket *toSend = ttPackets[msgName].front();

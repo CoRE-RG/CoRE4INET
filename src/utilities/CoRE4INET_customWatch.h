@@ -45,12 +45,12 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual int size() const
         {
-            size_t size = 0;
+            size_t return_size = 0;
             for (typename std::map<KeyT, ValueT, CmpT>::iterator i = m.begin(); i != m.end(); i++)
             {
-                size += (*i).second.size();
+                return_size += (*i).second.size();
             }
-            return static_cast<int>(size);
+            return static_cast<int>(return_size);
         }
         virtual std::string at(int i) const
         {
@@ -111,12 +111,12 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
         }
         virtual int size() const
         {
-            size_t size = 0;
+            size_t return_size = 0;
             for (typename std::unordered_map<KeyT, ValueT>::iterator i = m.begin(); i != m.end(); i++)
             {
-                size += (*i).second.size();
+                return_size += (*i).second.size();
             }
-            return static_cast<int>(size);
+            return static_cast<int>(return_size);
         }
         virtual std::string at(int i) const
         {
@@ -383,15 +383,15 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
         }
         virtual int size() const
         {
-            size_t size = 0;
+            size_t return_size = 0;
             for (typename std::map<KeyT, ValueT, CmpT>::iterator i = this->m.begin(); i != this->m.end(); i++)
             {
                 for (typename ValueT::iterator j = (*i).second.begin(); j != (*i).second.end(); j++)
                 {
-                    size += (*j).second.size();
+                    return_size += (*j).second.size();
                 }
             }
-            return size;
+            return return_size;
         }
         virtual std::string at(int i) const
         {
@@ -473,15 +473,15 @@ class cStdListUMapUMapWatcher : public cStdCollectionUMapWatcherBase<KeyT, Value
         }
         virtual int size() const
         {
-            size_t size = 0;
+            size_t return_size = 0;
             for (typename std::unordered_map<KeyT, ValueT>::iterator i = this->m.begin(); i != this->m.end(); i++)
             {
                 for (typename ValueT::iterator j = (*i).second.begin(); j != (*i).second.end(); j++)
                 {
-                    size += (*j).second.size();
+                    return_size += (*j).second.size();
                 }
             }
-            return static_cast<int>(size);
+            return static_cast<int>(return_size);
         }
         virtual std::string at(int i) const
         {

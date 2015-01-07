@@ -146,9 +146,9 @@ class Timer : public virtual cSimpleModule
         /**
          * @brief Corrects the clock by the number of ticks
          *
-         * @param ticks number of ticks the clock must be corrected
+         * @param correction_ticks number of ticks the clock must be corrected
          */
-        void clockCorrection(int32_t ticks);
+        void clockCorrection(int32_t correction_ticks);
 
     protected:
         /**

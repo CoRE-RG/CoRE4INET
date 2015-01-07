@@ -81,8 +81,8 @@ class Task
          *
          * @param setFunctionArg the funtion arg to be used in the task
          */
-        void setFunctionArg(void *setFunctionArg){
-            arg=setFunctionArg;
+        void setFunctionArg(void *functionArg){
+            arg=functionArg;
             argSet=true;
         }
 
