@@ -34,7 +34,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TTDoubleBuffer : public TTBuffer, public DoubleBuffer
+class TTDoubleBuffer : public virtual TTBuffer, public virtual DoubleBuffer
 {
 };
 }

@@ -31,7 +31,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class RCTrafficSourceApp : public CTTrafficSourceAppBase, public Timed
+class RCTrafficSourceApp : public virtual CTTrafficSourceAppBase, public virtual Timed
 {
         /**
          * @brief Caches interval parameter
@@ -42,18 +42,24 @@ class RCTrafficSourceApp : public CTTrafficSourceAppBase, public Timed
         /**
          * @brief Initialization of the module. Sends activator message
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief Handles message generation
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
     public:
         /**
          * @brief constructor for RCTrafficSourceApp
          */
         RCTrafficSourceApp();
 
-        virtual void handleParameterChange(const char* parname);
 };
 
 } //namespace

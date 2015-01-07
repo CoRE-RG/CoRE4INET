@@ -25,6 +25,7 @@
 #include "CoRE4INET_CTIncoming.h"
 #include "CoRE4INET_CTBuffer.h"
 #include "CoRE4INET_customWatch.h"
+#include "CoRE4INET_HelperFunctions.h"
 #include "CoRE4INET_ConfigFunctions.h"
 //INET
 #include <ModuleAccess.h>
@@ -73,7 +74,7 @@ class CTInControl : public IC
         /**
          * @brief Initialization of the module
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Forwards frames to the appropriate incoming modules
@@ -85,35 +86,14 @@ class CTInControl : public IC
          *
          * @param msg incoming message
          */
-        virtual void handleMessage(cMessage *msg);
-    public:
+        virtual void handleMessage(cMessage *msg) override;
+
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
-    private:
-        /**
-         * @brief Helper function checks whether a Frame is critical traffic.
-         *
-         * @param frame Pointer to the frame to check.
-         * @return true if frame is critical, else false
-         */
-        virtual bool isCT(EtherFrame *frame);
-
-        /**
-         * @brief Returns the critical traffic id for a given frame.
-         *
-         * @warning does not check if it is really critical traffic.
-         * If you need to be sure use isCT(EtherFrame *frame)
-         *
-         * @param frame Pointer to the frame to get critical traffic id from.
-         * @return critical traffic id
-         *
-         * @sa isCT(EtherFrame *frame)
-         */
-        virtual uint16_t getCTID(EtherFrame *frame);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 template<class IC>
@@ -134,7 +114,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
         EtherFrame *frame = dynamic_cast<EtherFrame *>(msg);
 
         //Auf CTCs verteilen oder BE traffic
-        if (frame && isCT(frame))
+        if (frame && isCT(frame, ctMarker, ctMask))
         {
             this->recordPacketReceived(frame);
 
@@ -227,36 +207,6 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
             }
         }
     }
-}
-
-template<class IC>
-bool CTInControl<IC>::isCT(EtherFrame *frame)
-{
-    if (EthernetIIFrame *e2f = dynamic_cast<EthernetIIFrame*>(frame))
-    {
-        if (e2f->getEtherType() != 0x891d)
-        {
-            return false;
-        }
-    }
-    unsigned char macBytes[6];
-    frame->getDest().getAddressBytes(macBytes);
-    //Check for ct
-    if (((static_cast<uint32_t>(macBytes[0] << 24) | static_cast<uint32_t>(macBytes[1] << 16)
-            | static_cast<uint32_t>(macBytes[2] << 8) | static_cast<uint32_t>(macBytes[3])) & ctMask)
-            == (ctMarker & ctMask))
-    {
-        return true;
-    }
-    return false;
-}
-
-template<class IC>
-uint16_t CTInControl<IC>::getCTID(EtherFrame *frame)
-{
-    unsigned char macBytes[6];
-    frame->getDest().getAddressBytes(macBytes);
-    return static_cast<uint16_t>((macBytes[4] << 8) | macBytes[5]);
 }
 
 }

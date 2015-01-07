@@ -37,7 +37,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class RCBuffer : public virtual CTBuffer, public Timed
+class RCBuffer : public virtual CTBuffer, public virtual Timed
 {
     private:
         /**
@@ -82,7 +82,7 @@ class RCBuffer : public virtual CTBuffer, public Timed
          * The method executes the transmit callbacks and registers a
          * SchedulerTimerEvent that indicates the beginning of a new bag
          */
-        virtual void resetBag();
+        void resetBag();
 
     protected:
         using Timed::initialize;
@@ -91,13 +91,13 @@ class RCBuffer : public virtual CTBuffer, public Timed
          *
          * @param stage the stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return  returns 1 or if higher the number of stages the CTBuffer module requires
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief handles the incoming and outgoing messages of the buffer.
@@ -110,14 +110,14 @@ class RCBuffer : public virtual CTBuffer, public Timed
          *
          * @param msg incoming EtherFrame for the Buffer or SchedulerTimerEvent message.
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 
         /**
          * @brief Calculates the bandwidth this module requires for transmission.
@@ -126,7 +126,7 @@ class RCBuffer : public virtual CTBuffer, public Timed
          *
          * @sa enqueue();
          */
-        virtual long getRequiredBandwidth();
+        virtual long getRequiredBandwidth() override;
 };
 
 } //namespace

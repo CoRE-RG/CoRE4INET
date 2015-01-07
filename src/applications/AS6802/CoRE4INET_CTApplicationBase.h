@@ -53,12 +53,13 @@ class CTApplicationBase : public virtual ApplicationBase
         /**
          * @Destructor for CTApplicationBase
          */
-        ~CTApplicationBase();
+        virtual ~CTApplicationBase();
 
+    protected:
         /**
          * @brief Initialization of the module.
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief resets the bag on incoming RC-Frames (on RCin)
          *
@@ -67,7 +68,7 @@ class CTApplicationBase : public virtual ApplicationBase
          *
          * @param msg Parameter must be forwarded from subclass
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
         /**
          * @brief Indicates a parameter has changed.
          *
@@ -75,7 +76,7 @@ class CTApplicationBase : public virtual ApplicationBase
          *
          * @throws cRuntimeError When buffer module and application module do not have the same parent module
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 
 };
 

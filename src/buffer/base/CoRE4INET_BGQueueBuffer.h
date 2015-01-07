@@ -31,7 +31,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class BGQueueBuffer : public BGBuffer, public QueueBuffer
+class BGQueueBuffer : public virtual BGBuffer, public virtual QueueBuffer
 {
 };
 }

@@ -28,7 +28,7 @@ namespace CoRE4INET {
 class SRPEtherLLC : public BGEtherLLC
 {
     protected:
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
     private:
         void dispatchSRP(SRPFrame * srp);
         void deliverSRP(EtherFrame * frame);

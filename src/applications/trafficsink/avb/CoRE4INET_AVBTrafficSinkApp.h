@@ -33,7 +33,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class AVBTrafficSinkApp : public TrafficSinkApp, public cListener
+class AVBTrafficSinkApp : public virtual TrafficSinkApp, public virtual cListener
 {
     private:
         /**
@@ -69,23 +69,23 @@ class AVBTrafficSinkApp : public TrafficSinkApp, public cListener
         /**
          * @brief Initialization of the module.
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
 
         /**
          * @brief handles self message for srp registration updates
          *
          * @param msg incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

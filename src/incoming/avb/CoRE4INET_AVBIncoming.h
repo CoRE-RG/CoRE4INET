@@ -42,14 +42,14 @@ class AVBIncoming : public Incoming
         /**
          * @brief Initialization of the module
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Forwards messages arriving on in-gate to out-gate.
          *
          * @param msg the incoming message.
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
     public:
         /**

@@ -28,9 +28,9 @@ public:
     virtual ~QueuedPacket();
 
     IPoREFilter* getFilter() { return filter; }
-    void setFilter(IPoREFilter* filter) { this->filter = filter; }
+    void setFilter(IPoREFilter* new_filter) { this->filter = new_filter; }
     cPacket* getPacket() { return packet; }
-    void setPacket(cPacket* packet) { this->packet = packet; }
+    void setPacket(cPacket* new_packet) { this->packet = new_packet; }
 
 protected:
     IPoREFilter    *filter;

@@ -33,7 +33,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TTTrafficSourceApp : public CTTrafficSourceAppBase, public Scheduled, public cListener
+class TTTrafficSourceApp : public virtual CTTrafficSourceAppBase, public virtual Scheduled, public virtual cListener
 {
     private:
         /**
@@ -55,12 +55,12 @@ class TTTrafficSourceApp : public CTTrafficSourceAppBase, public Scheduled, publ
         /**
          * @brief Initialization of the module. Sends activator message
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Handles message generation
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @ Receives signal from sync module
@@ -69,14 +69,14 @@ class TTTrafficSourceApp : public CTTrafficSourceAppBase, public Scheduled, publ
          * @param signalID ID of the signal
          * @param obj representation of the signal
          */
-        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 
     public:
         TTTrafficSourceApp();

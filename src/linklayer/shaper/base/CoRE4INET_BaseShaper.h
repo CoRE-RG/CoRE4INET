@@ -30,7 +30,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
+class BaseShaper : public virtual cSimpleModule, public virtual IPassiveQueue
 {
     public:
         /**
@@ -45,12 +45,12 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
         /**
          * Implementation of IPassiveQueue::addListener().
          */
-        virtual void addListener(IPassiveQueueListener *listener);
+        virtual void addListener(IPassiveQueueListener *listener) override;
 
         /**
          * Implementation of IPassiveQueue::removeListener().
          */
-        virtual void removeListener(IPassiveQueueListener *listener);
+        virtual void removeListener(IPassiveQueueListener *listener) override;
     private:
         /**
          * @brief List of TTBuffers.
@@ -79,14 +79,14 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return Always returns 1
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Deletes the incoming message
@@ -96,7 +96,7 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Deletes the incoming message

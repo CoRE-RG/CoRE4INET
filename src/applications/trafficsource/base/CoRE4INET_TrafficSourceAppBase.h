@@ -66,14 +66,14 @@ class TrafficSourceAppBase : public virtual ApplicationBase
         /**
          * @brief Initialization of the module. Sends activator message
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          *         */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

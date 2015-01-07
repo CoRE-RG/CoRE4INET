@@ -25,7 +25,7 @@ namespace CoRE4INET {
 
 
 
-class BGEtherEncap : public EtherEncap {
+class BGEtherEncap : public virtual EtherEncap {
 
 
     public:
@@ -34,7 +34,7 @@ class BGEtherEncap : public EtherEncap {
 
 
     protected:
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
 
 }; // class BGEtherEncap

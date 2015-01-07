@@ -23,7 +23,7 @@
 
 namespace CoRE4INET {
 
-class SRPEtherEncap : public BGEtherEncap
+class SRPEtherEncap : public virtual BGEtherEncap
 {
 
     public:
@@ -31,7 +31,7 @@ class SRPEtherEncap : public BGEtherEncap
         virtual ~SRPEtherEncap();
 
     protected:
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
     private:
         void dispatchSRP(SRPFrame * srp);
         void deliverSRP(EtherFrame * frame);

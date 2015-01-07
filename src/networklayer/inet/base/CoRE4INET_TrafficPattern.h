@@ -25,27 +25,27 @@ public:
 
 public:
     const IPvXAddress& getDestAddr() const { return destAddr; }
-    void setDestAddr(const IPvXAddress& destAddr) { this->destAddr = destAddr; }
+    void setDestAddr(const IPvXAddress& new_destAddr) { this->destAddr = new_destAddr; }
     int getDestPortMax() const { return destPortMax; }
-    void setDestPortMax(int destPortMax) { this->destPortMax = destPortMax; }
+    void setDestPortMax(int new_destPortMax) { this->destPortMax = new_destPortMax; }
     int getDestPortMin() const { return destPortMin; }
-    void setDestPortMin(int destPortMin) { this->destPortMin = destPortMin; }
+    void setDestPortMin(int new_destPortMin) { this->destPortMin = new_destPortMin; }
     int getDestPrefixLength() const { return destPrefixLength; }
-    void setDestPrefixLength(int destPrefixLength) { this->destPrefixLength = destPrefixLength; }
+    void setDestPrefixLength(int new_destPrefixLength) { this->destPrefixLength = new_destPrefixLength; }
     int getProtocol() const { return protocol; }
-    void setProtocol(int protocol) { this->protocol = protocol; }
+    void setProtocol(int new_protocol) { this->protocol = new_protocol; }
     const IPvXAddress& getSrcAddr() const { return srcAddr; }
-    void setSrcAddr(const IPvXAddress& srcAddr) { this->srcAddr = srcAddr; }
+    void setSrcAddr(const IPvXAddress& new_srcAddr) { this->srcAddr = new_srcAddr; }
     int getSrcPortMax() const { return srcPortMax; }
-    void setSrcPortMax(int srcPortMax) { this->srcPortMax = srcPortMax; }
+    void setSrcPortMax(int new_srcPortMax) { this->srcPortMax = new_srcPortMax; }
     int getSrcPortMin() const { return srcPortMin; }
-    void setSrcPortMin(int srcPortMin) { this->srcPortMin = srcPortMin; }
+    void setSrcPortMin(int new_srcPortMin) { this->srcPortMin = new_srcPortMin; }
     int getSrcPrefixLength() const { return srcPrefixLength; }
-    void setSrcPrefixLength(int srcPrefixLength) { this->srcPrefixLength = srcPrefixLength; }
+    void setSrcPrefixLength(int new_srcPrefixLength) { this->srcPrefixLength = new_srcPrefixLength; }
     int getTos() const { return tos; }
-    void setTos(int tos) { this->tos = tos; }
+    void setTos(int new_tos) { this->tos = new_tos; }
     int getTosMask() const { return tosMask; }
-    void setTosMask(int tosMask) { this->tosMask = tosMask; }
+    void setTosMask(int new_tosMask) { this->tosMask = new_tosMask; }
 
 private:
     IPvXAddress srcAddr;

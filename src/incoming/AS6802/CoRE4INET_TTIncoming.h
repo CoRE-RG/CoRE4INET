@@ -35,7 +35,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TTIncoming : public CTIncoming, Scheduled
+class TTIncoming : public virtual CTIncoming, public virtual Scheduled
 {
     private:
         /**
@@ -66,11 +66,13 @@ class TTIncoming : public CTIncoming, Scheduled
          */
         virtual ~TTIncoming();
 
+    protected:
+
         /**
          * @brief Initialization of the module
          */
-        void initialize();
-    protected:
+        void initialize() override;
+
         /**
          * @brief Forwards messages arriving on in-gate to out-gate checks
          * conformance with receive window, delays messages until permanence pit.
@@ -81,14 +83,14 @@ class TTIncoming : public CTIncoming, Scheduled
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

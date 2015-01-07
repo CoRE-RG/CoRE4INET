@@ -77,7 +77,7 @@ class Incoming : public virtual cSimpleModule
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Emits a statistics signal that a frame was received in the buffer
@@ -91,7 +91,7 @@ class Incoming : public virtual cSimpleModule
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

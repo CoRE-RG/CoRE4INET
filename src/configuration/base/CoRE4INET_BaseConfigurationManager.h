@@ -29,17 +29,17 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class BaseConfigurationManager : public cSimpleModule
+class BaseConfigurationManager : public virtual cSimpleModule
 {
     protected:
         /**
          * @brief Is called in initialization phase. The module creates a message for self destruction
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief Destroys the module after reception of a message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

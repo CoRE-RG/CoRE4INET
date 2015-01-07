@@ -35,7 +35,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class RCDoubleBuffer : public RCBuffer, DoubleBuffer
+class RCDoubleBuffer : public virtual RCBuffer, public virtual DoubleBuffer
 {
 
 };

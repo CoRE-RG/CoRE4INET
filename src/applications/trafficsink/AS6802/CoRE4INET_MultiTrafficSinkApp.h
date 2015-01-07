@@ -33,7 +33,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class MultiTrafficSinkApp : public ApplicationBase
+class MultiTrafficSinkApp : public virtual ApplicationBase
 {
     private:
         /**
@@ -47,7 +47,7 @@ class MultiTrafficSinkApp : public ApplicationBase
          *
          * @param msg incoming frame
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

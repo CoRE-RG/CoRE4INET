@@ -85,14 +85,14 @@ std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, uint16_
     return modules;
 }
 
-std::list<cModule*> SRPTable::getListenersForTalkerAddress(MACAddress &talkerAddress, uint16_t vid)
+std::list<cModule*> SRPTable::getListenersForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getListenersForTalkerAddress()");
     return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
 }
 
-uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, uint16_t vid)
+uint64_t SRPTable::getStreamIdForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getStreamIdForTalkerAddress()");
@@ -107,7 +107,7 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, uint16
     throw std::invalid_argument("no stream for this talker address registered");
 }
 
-SR_CLASS SRPTable::getSrClassForTalkerAddress(MACAddress &talkerAddress, uint16_t vid)
+SR_CLASS SRPTable::getSrClassForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getSrClassForTalkerAddress()");
@@ -145,7 +145,7 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
     return bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames, getIntervalForClass(tentry->srClass));
 }
 
-unsigned long SRPTable::getBandwidthForModule(cModule *module)
+unsigned long SRPTable::getBandwidthForModule(const cModule *module)
 {
     removeAgedEntriesIfNeeded();
 
@@ -175,7 +175,7 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
     return bandwidth;
 }
 
-unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLASS srClass)
+unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, SR_CLASS srClass)
 {
     removeAgedEntriesIfNeeded();
 
@@ -208,7 +208,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLAS
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, SR_CLASS srClass,
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const MACAddress address, SR_CLASS srClass,
         size_t framesize, uint16_t intervalFrames, uint16_t vid)
 {
     Enter_Method
@@ -269,7 +269,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))          MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused)) const MACAddress address,
         uint16_t vid)
 {
 

@@ -44,10 +44,10 @@ public:
     IPv4oTT();
     virtual ~IPv4oTT();
 
-    virtual void initialize(int stage);
+    virtual void initialize(int stage) override;
     virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
     virtual void configureFilters(cXMLElement *config);
-    virtual void handleMessage(cMessage* msg);
+    virtual void handleMessage(cMessage* msg) override;
 
     /**
      * Encapsulates packet in RC frame and sends to each destination buffers.
@@ -72,7 +72,7 @@ public:
     /**
      * Handles synchronized events
      */
-    virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+    virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
 
 
 protected:

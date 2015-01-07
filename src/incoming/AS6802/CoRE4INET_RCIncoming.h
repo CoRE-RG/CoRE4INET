@@ -33,7 +33,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class RCIncoming : public CTIncoming, public Timed
+class RCIncoming : public virtual CTIncoming, public virtual Timed
 {
     private:
         /**
@@ -57,7 +57,7 @@ class RCIncoming : public CTIncoming, public Timed
         /**
          * @brief Initialization of the module
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Forwards messages arriving on in-gate to out-gate checks
@@ -65,14 +65,14 @@ class RCIncoming : public CTIncoming, public Timed
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
     public:
         /**
          * @brief Constructor.

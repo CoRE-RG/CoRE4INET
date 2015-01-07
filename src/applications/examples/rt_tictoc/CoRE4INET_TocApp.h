@@ -30,17 +30,17 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TocApp : public CTApplicationBase
+class TocApp : public virtual CTApplicationBase
 {
     protected:
         /**
          * @brief Initialization of the module. Sends activator message
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief Handles message generation and reception
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 }

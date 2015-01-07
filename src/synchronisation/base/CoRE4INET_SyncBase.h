@@ -28,7 +28,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class SyncBase : public Scheduled
+class SyncBase : public virtual Scheduled
 {
     protected:
         using Scheduled::initialize;
@@ -37,14 +37,14 @@ class SyncBase : public Scheduled
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return Always returns 1
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Helper function to notify attached listeners about status change

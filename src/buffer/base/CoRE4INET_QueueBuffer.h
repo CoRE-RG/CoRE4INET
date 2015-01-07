@@ -50,7 +50,7 @@ class QueueBuffer : public virtual Buffer
         /**
          * @brief Destructor for the class.
          */
-        ~QueueBuffer();
+        virtual ~QueueBuffer();
 
     private:
         /**
@@ -78,14 +78,14 @@ class QueueBuffer : public virtual Buffer
          *
          * @param newFrame a pointer to the EtherFrame to insert in the queue.
          */
-        virtual void enqueue(EtherFrame *newFrame);
+        virtual void enqueue(EtherFrame *newFrame) override;
 
         /**
          * @brief Removes and returns an EtherFrame from the Queue and emits the queue length.
          *
          * @return Aa pointer to the EtherFrame removed from the queue.
          */
-        virtual EtherFrame* dequeue();
+        virtual EtherFrame* dequeue() override;
 
         /**
          * @brief Returns the used size of the buffer
@@ -93,14 +93,14 @@ class QueueBuffer : public virtual Buffer
          * @return number of messages in the buffer
          *
          */
-        virtual size_t size() const;
+        virtual size_t size() const override;
 
         /**
          * @brief Resets the buffer, deletes all messages
          *
          *
          */
-        virtual void clear();
+        virtual void clear() override;
 
     protected:
         /**

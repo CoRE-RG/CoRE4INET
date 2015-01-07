@@ -34,14 +34,14 @@ class MessageNumProfiler : public cSimpleModule
         /**
          * @brief Initializes the module
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Called by self message to trigger profiler
          *
          * @param msg Incoming self message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
     private:
         /**
          * @brief Calculates the sum of messages of the given module and its

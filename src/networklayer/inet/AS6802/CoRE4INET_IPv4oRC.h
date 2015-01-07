@@ -37,10 +37,10 @@ public:
     IPv4oRC();
     virtual ~IPv4oRC();
 
-    virtual void initialize(int stage);
+    virtual void initialize(int stage) override;
     virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
     virtual void configureFilters(cXMLElement *config);
-    virtual void handleMessage(cMessage* msg);
+    virtual void handleMessage(cMessage* msg) override;
 
     /**
      * Encapsulates packet in RC frame and sends to each destination buffers.

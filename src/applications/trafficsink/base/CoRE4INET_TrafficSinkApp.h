@@ -44,7 +44,7 @@ class TrafficSinkApp : public virtual ApplicationBase
          *
          * @param msg incoming frame
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

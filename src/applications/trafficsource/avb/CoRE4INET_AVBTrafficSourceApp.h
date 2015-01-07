@@ -39,7 +39,7 @@ namespace CoRE4INET {
  * TODO Normal: Documentation
  */
 
-class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cListener
+class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual Timed, public virtual cListener
 {
     private:
         bool isStreaming;
@@ -56,22 +56,22 @@ class AVBTrafficSourceApp : public TrafficSourceAppBase, public Timed, public cL
         /**
          * @brief Initialization of the module. Sends activator message
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief Handles message generation
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         void sendAVBFrame();
 
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } /* namespace CoRE4INET */

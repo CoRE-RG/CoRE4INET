@@ -28,10 +28,8 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class DummySync : public SyncBase
+class DummySync : public virtual SyncBase
 {
-        using Scheduled::initialize;
-    private:
     protected:
         /**
          * @brief Initializes the dummy synchronization module.
@@ -40,21 +38,21 @@ class DummySync : public SyncBase
          *
          * @param stage the stages. Module registers events when stage==1
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return always returns 2
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief dummy synchronization function.
          *
          * @param msg Event of the scheduler that triggers the synchronization
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 }
 

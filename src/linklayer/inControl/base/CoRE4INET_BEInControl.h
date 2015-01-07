@@ -40,7 +40,7 @@ class BEInControl : public IC
          *
          * @param msg incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 template<class IC>

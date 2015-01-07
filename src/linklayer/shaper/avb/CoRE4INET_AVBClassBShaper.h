@@ -39,7 +39,7 @@ class AVBClassBShaper : public TC
         /**
          * @brief Destructor
          */
-        ~AVBClassBShaper();
+        virtual ~AVBClassBShaper();
 
     private:
         /**
@@ -61,7 +61,7 @@ class AVBClassBShaper : public TC
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -74,7 +74,7 @@ class AVBClassBShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Queues messages in the correct queue
@@ -84,7 +84,7 @@ class AVBClassBShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void enqueueMessage(cMessage *msg);
+        virtual void enqueueMessage(cMessage *msg) override;
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -94,19 +94,19 @@ class AVBClassBShaper : public TC
          * received.
          *
          */
-        virtual void requestPacket();
+        virtual void requestPacket() override;
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty();
+        virtual bool isEmpty() override;
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear();
+        virtual void clear() override;
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
@@ -115,7 +115,7 @@ class AVBClassBShaper : public TC
          * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop() override;
 
         /**
          * @brief Returns a pointer to a frame directly from the queues.
@@ -125,7 +125,7 @@ class AVBClassBShaper : public TC
          * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
-        virtual cMessage *front();
+        virtual cMessage *front() override;
 };
 
 template<class TC>

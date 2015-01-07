@@ -40,27 +40,27 @@ public:
 
     AVBIncoming* getDestModule() const { return destModule; }
 
-    void setDestModule(AVBIncoming* destModule) { this->destModule = destModule; }
+    void setDestModule(AVBIncoming* new_destModule) { this->destModule = new_destModule; }
 
     SR_CLASS getSrClass() const { return srClass; }
 
-    void setSrClass(SR_CLASS srClass) { this->srClass = srClass; }
+    void setSrClass(SR_CLASS new_srClass) { this->srClass = new_srClass; }
 
     uint64_t getStreamId() const { return streamId; }
 
-    void setStreamId(uint64_t streamId) { this->streamId = streamId; }
+    void setStreamId(uint64_t new_streamId) { this->streamId = new_streamId; }
 
     uint32_t getFrameSize() const { return frameSize; }
 
-    void setFrameSize(uint32_t frameSize) { this->frameSize = frameSize; }
+    void setFrameSize(uint32_t new_frameSize) { this->frameSize = new_frameSize; }
 
     uint16_t getIntervallFrames() const { return intervallFrames; }
 
-    void setIntervallFrames(uint16_t intervallFrames) { this->intervallFrames = intervallFrames; }
+    void setIntervallFrames(uint16_t new_intervallFrames) { this->intervallFrames = new_intervallFrames; }
 
     uint16_t getVlanId() const { return vlanId; }
 
-    void setVlanId(uint16_t vlanId) { this->vlanId = vlanId; }
+    void setVlanId(uint16_t new_vlanId) { this->vlanId = new_vlanId; }
 
 private:
     AVBIncoming *destModule;

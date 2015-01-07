@@ -35,20 +35,20 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class SRPRelay : public ::Ieee8021dRelay
+class SRPRelay : public virtual ::Ieee8021dRelay
 {
 
     protected:
         /**
          * Module initialization, only requires 1 stage
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
         /**
          * @brief Number of initialization stages, at least 1!
          *
          * @return at least 1, more when parent moduile requires more stages.
          */
-        virtual int numInitStages() const
+        virtual int numInitStages() const override
         {
             return 1 > ::Ieee8021dRelay::numInitStages() ? 1 : ::Ieee8021dRelay::numInitStages();
         }
@@ -56,7 +56,7 @@ class SRPRelay : public ::Ieee8021dRelay
         /**
          *
          */
-        virtual void handleMessage(cMessage * msg);
+        virtual void handleMessage(cMessage * msg) override;
     private:
         void dispatchSRP(SRPFrame * srp);
 

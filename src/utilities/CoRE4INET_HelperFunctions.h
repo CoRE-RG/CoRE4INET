@@ -128,6 +128,27 @@ MACAddress generateAutoMulticastAddress();
  * @author Till Steinbach
  */
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler);
+
+/**
+ * @brief Helper function checks whether a Frame is critical traffic.
+ *
+ * @param frame Pointer to the frame to check.
+ * @return true if frame is critical, else false
+ */
+bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask);
+
+/**
+ * @brief Returns the critical traffic id for a given frame.
+ *
+ * @warning does not check if it is really critical traffic.
+ * If you need to be sure use isCT(EtherFrame *frame)
+ *
+ * @param frame Pointer to the frame to get critical traffic id from.
+ * @return critical traffic id
+ *
+ * @sa isCT(EtherFrame *frame)
+ */
+uint16_t getCTID(const EtherFrame *frame);
 #endif
 
 #ifdef WITH_AVB_COMMON

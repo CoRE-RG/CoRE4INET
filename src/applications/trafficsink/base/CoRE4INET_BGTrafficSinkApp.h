@@ -43,14 +43,14 @@ class BGTrafficSinkApp : public virtual TrafficSinkApp
         /**
          * @brief Initialization of the module.
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief collects incoming message and writes statistics.
          *
          * @param msg incoming frame
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

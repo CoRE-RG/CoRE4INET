@@ -130,6 +130,35 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
     //Set new transparent clock
     pcf->setTransparent_clock(transparentClock);
 }
+
+bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask)
+{
+    if (const EthernetIIFrame *e2f = dynamic_cast<const EthernetIIFrame*>(frame))
+    {
+        if (e2f->getEtherType() != 0x891d)
+        {
+            return false;
+        }
+    }
+    unsigned char macBytes[6];
+    frame->getDest().getAddressBytes(macBytes);
+    //Check for ct
+    if (((static_cast<uint32_t>(macBytes[0] << 24) | static_cast<uint32_t>(macBytes[1] << 16)
+            | static_cast<uint32_t>(macBytes[2] << 8) | static_cast<uint32_t>(macBytes[3])) & ctMask)
+            == (ctMarker & ctMask))
+    {
+        return true;
+    }
+    return false;
+}
+
+uint16_t getCTID(const EtherFrame *frame)
+{
+    unsigned char macBytes[6];
+    frame->getDest().getAddressBytes(macBytes);
+    return static_cast<uint16_t>((macBytes[4] << 8) | macBytes[5]);
+}
+
 #endif
 
 #ifdef WITH_AVB_COMMON
