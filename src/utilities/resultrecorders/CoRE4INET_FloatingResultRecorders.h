@@ -59,11 +59,11 @@ class FloatingIntervalVectorRecorder: public cNumericResultRecorder
  * On every incoming value the values over the past interval are counted and recorded
  *
  * To configure the interval the following parameters are chosen in the given order:
- * - 1. Look for an "measure_interval" parameter in the @statistics definition e.g.:
+ * - 1. Look for an "measure_interval" parameter in the \@statistics definition e.g.:
  * \@statistic[rxPk](title="RX Packets"; source=rxPk; record="floatingIntervalAvgVector(packetBytes)"; measure_interval=50ms);
  * - 2. Look for an "measure_interval" parameter in all modules from this module until the root (the network) e.g.:
  * parameters:
- *     double measure_interval @unit(s) = default(1s);
+ *     double measure_interval \@unit(s) = default(1s);
  * - 3. default (1s) is chosen
  *
  * @ingroup ResultRecorders
