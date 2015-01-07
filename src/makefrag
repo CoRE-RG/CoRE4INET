@@ -26,25 +26,31 @@ ifdef WARNINGS_ERROR
 	CFLAGS += -Werror
 endif
 
-ifdef EXTENDED_WARNINGS
+
 #Stricter warnings in clang and gcc:
 ifeq ($(CC),clang)
 	#clang
+	ifdef EXTENDED_WARNINGS
     CFLAGS += -Wall -Wunused -Wextra -Weverything
+    endif
     CFLAGS += -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-vtables
     CFLAGS += -Wno-c++98-compat-pedantic -Wno-unknown-pragmas
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
     CFLAGS += -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast
-    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command 
+    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command
 else ifeq ($(CC),gcc)
 	#gcc
+	ifdef EXTENDED_WARNINGS
     CFLAGS += -Wall -Wunused -Wextra -Winit-self -Wswitch-enum -Wuninitialized -Wfloat-equal -Wsuggest-attribute=pure
-    CFLAGS += -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wconversion
-    CFLAGS += -Wuseless-cast -Wshadow -Wno-unknown-pragmas
-    CFLAGS += -Wno-error=unused-parameter -Wno-error=conversion -Wno-error=suggest-attribute=noreturn -Wno-error=shadow
+    CFLAGS += -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wconversion -Wuseless-cast
+    CFLAGS += -Wshadow
     #CFLAGS += -ansi -pedantic-errors
+    endif
+    CFLAGS += -Wno-unknown-pragmas -Wno-error=unused-parameter -Wno-error=conversion -Wno-error=suggest-attribute=noreturn
+    CFLAGS += -Wno-error=shadow
 endif
-	
+
+ifdef EXTENDED_WARNINGS
 # use -isystem instead of -I flag, to hide warnings in these files
 RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))
 ifneq (,$(findstring MSYS,$(shell uname -s)))
@@ -56,7 +62,3 @@ else
 endif
 $(info Replaced COPTS -I directives with -isystem directive: $(COPTS))
 endif
-
-
-
-
