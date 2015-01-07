@@ -31,11 +31,11 @@ ifdef EXTENDED_WARNINGS
 ifeq ($(CC),clang)
 	#clang
     CFLAGS += -Wall -Wunused -Wextra -Weverything
-    CFLAGS += -Wno-documentation-unknown-command -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-vtables
+    CFLAGS += -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-vtables
     CFLAGS += -Wno-c++98-compat-pedantic -Wno-unknown-pragmas
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
-    CFLAGS +=  -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast
-    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break
+    CFLAGS += -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast
+    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command 
 else ifeq ($(CC),gcc)
 	#gcc
     CFLAGS += -Wall -Wunused -Wextra -Winit-self -Wswitch-enum -Wuninitialized -Wfloat-equal -Wsuggest-attribute=pure

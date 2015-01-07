@@ -46,12 +46,12 @@ class CTApplicationBase : public virtual ApplicationBase
         std::unordered_map<uint16_t, std::list<CTBuffer*> > ctbuffers;
     public:
         /**
-         * @Constructor for CTApplicationBase
+         * @brief Constructor for CTApplicationBase
          */
         CTApplicationBase();
 
         /**
-         * @Destructor for CTApplicationBase
+         * @brief Destructor for CTApplicationBase
          */
         virtual ~CTApplicationBase();
 

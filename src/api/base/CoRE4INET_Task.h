@@ -79,7 +79,7 @@ class Task
         /**
          * @brief Setter for the function args.
          *
-         * @param setFunctionArg the funtion arg to be used in the task
+         * @param functionArg the funtion arg to be used in the task
          */
         void setFunctionArg(void *functionArg){
             arg=functionArg;
