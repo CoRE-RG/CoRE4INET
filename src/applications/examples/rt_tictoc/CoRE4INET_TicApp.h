@@ -45,7 +45,7 @@ class TicApp : public CTApplicationBase, public virtual Scheduled
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname);
     protected:

@@ -94,7 +94,7 @@ uint16_t CTBuffer::getCTID()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->ctId;
 }

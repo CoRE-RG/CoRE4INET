@@ -62,7 +62,7 @@ void addPath(cPar &parameter, const std::string &pathToAdd);
  * @brief Returns the gate defined by an object path.
  *
  * @param path the path to the gate
- * @return reference to the gate defined by path or NULL if no such gate was found
+ * @return reference to the gate defined by path or nullptr if no such gate was found
  *
  * @author Till Steinbach
  */
@@ -73,7 +73,7 @@ cGate* gateByFullPath(const std::string &path);
  *
  * @param nameAndGate name of the module and gatename in the format: modulename.gatename
  * @param from a module of the node in which the gate can be found
- * @return reference to the gate defined by path or NULL if no such gate was found
+ * @return reference to the gate defined by path or nullptr if no such gate was found
  *
  * @author Till Steinbach
  */

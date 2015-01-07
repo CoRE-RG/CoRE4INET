@@ -39,7 +39,7 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
         BaseShaper()
         {
             this->framesRequested = 0;
-            this->outChannel = NULL;
+            this->outChannel = nullptr;
         }
 
         /**
@@ -146,14 +146,14 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop()
         {
-            return NULL;
+            return nullptr;
         }
 
         /**
@@ -161,12 +161,12 @@ class BaseShaper : public virtual cSimpleModule, public IPassiveQueue
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
         virtual cMessage *front()
         {
-            return NULL;
+            return nullptr;
         }
 
         /**

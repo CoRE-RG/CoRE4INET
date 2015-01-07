@@ -17,12 +17,11 @@
 
 namespace CoRE4INET {
 
-simsignal_t BaseInControl::rxPkSignal = SIMSIGNAL_NULL;
+simsignal_t BaseInControl::rxPkSignal = registerSignal("rxPk");
 
 void BaseInControl::initialize()
 {
     Timed::initialize();
-    rxPkSignal = registerSignal("rxPk");
 }
 
 void BaseInControl::setParameters(EtherFrame *frame)

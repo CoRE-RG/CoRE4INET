@@ -64,7 +64,7 @@ class Buffer : public virtual cSimpleModule
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname);
 
@@ -121,7 +121,7 @@ class Buffer : public virtual cSimpleModule
          * This method must be implemented according to the buffer strategy.
          *
          * @return A pointer to the next EtherFrame from the buffer. Returns
-         * null if there is no EtherFrame in the buffer
+         * nullptr if there is no EtherFrame in the buffer
          */
         virtual EtherFrame* dequeue();
 
@@ -144,7 +144,7 @@ class Buffer : public virtual cSimpleModule
          * @brief Wrapper function arround dequeue().
          *
          * @return A pointer to the next EtherFrame from the buffer. Returns
-         * null if there is no EtherFrame in the buffer
+         * nullptr if there is no EtherFrame in the buffer
          *
          * @sa dequeue();
          */

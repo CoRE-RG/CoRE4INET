@@ -132,7 +132,7 @@ cModule* SRPTable::getTalkerForStreamId(uint64_t streamId, uint16_t vid)
     {
         return (*entry).second->module;
     }
-    return NULL;
+    return nullptr;
 }
 
 unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
@@ -227,7 +227,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
         {
             throw std::invalid_argument("cannot register talker with zero frameInterval");
         }
-        if (module == NULL)
+        if (module == nullptr)
         {
             throw std::invalid_argument("cannot register talker without module");
         }
@@ -310,7 +310,7 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
     ListenerList::const_iterator listener = llist.find(module);
     if (listener == llist.end())
     {
-        if (module == NULL)
+        if (module == nullptr)
         {
             throw std::invalid_argument("cannot register listener without module");
         }

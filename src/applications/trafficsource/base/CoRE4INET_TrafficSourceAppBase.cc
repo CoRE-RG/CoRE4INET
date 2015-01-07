@@ -45,7 +45,7 @@ size_t TrafficSourceAppBase::getPayloadBytes(){
 void TrafficSourceAppBase::initialize()
 {
     ApplicationBase::initialize();
-    handleParameterChange(NULL);
+    handleParameterChange(nullptr);
     if (isEnabled())
     {
         scheduleAt(simTime() + par("start_time").doubleValue(), new cMessage(START_MSG_NAME));

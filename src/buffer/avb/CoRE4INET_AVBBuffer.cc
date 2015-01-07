@@ -34,7 +34,7 @@ AVBBuffer::AVBBuffer()
     this->oldTime = 0;
     this->Wduration = 0;
     this->tick = -1;
-    this->srptable = NULL;
+    this->srptable = nullptr;
     this->portBandwith = 0;
 }
 

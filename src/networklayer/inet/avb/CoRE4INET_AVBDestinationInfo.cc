@@ -18,8 +18,8 @@
 namespace CoRE4INET {
 
 AVBDestinationInfo::AVBDestinationInfo()
-  : destModule(NULL),
-    destMAC(NULL),
+  : destModule(nullptr),
+    destMAC(nullptr),
     streamId(0),
     srClass(SR_CLASS_A),
     frameSize(0),

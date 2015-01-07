@@ -24,7 +24,7 @@ using namespace CoRE4INET;
 
 FloatingIntervalVectorRecorder::FloatingIntervalVectorRecorder(){
     interval = SimTime(-1);
-    handle = NULL;
+    handle = nullptr;
     lastTime = 0;
 }
 
@@ -36,7 +36,7 @@ void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
     opp_string_map attributes = getStatisticAttributes();
 
     handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
-    ASSERT(handle != NULL);
+    ASSERT(handle != nullptr);
     for (opp_string_map::const_iterator it = attributes.begin(); it != attributes.end(); ++it){
         ev.setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
         if(opp_strcmp(it->first.c_str(), "measure_interval")==0){

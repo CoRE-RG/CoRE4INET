@@ -56,7 +56,7 @@ class SRPTable : public cSimpleModule
                 {
                     streamId = 0;
                     srClass = SR_CLASS_A;
-                    module = NULL;
+                    module = nullptr;
                     framesize = 0;
                     intervalFrames = 0;
                     vlan_id = VLAN_ID_DEFAULT;
@@ -85,7 +85,7 @@ class SRPTable : public cSimpleModule
                 ListenerEntry()
                 {
                     streamId = 0;
-                    module = NULL;
+                    module = nullptr;
                     vlan_id = VLAN_ID_DEFAULT;
                 }
                 ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,

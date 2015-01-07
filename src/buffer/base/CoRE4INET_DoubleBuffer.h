@@ -65,9 +65,9 @@ class DoubleBuffer : public virtual Buffer
          * @brief Returns the frame that is stored in the buffer
          *
          * The stored frame is copied and the copy is being returned. If there is no EtherFrame
-         * stored NULL is returned.
+         * stored nullptr is returned.
          *
-         * @return Pointer to the copied frame or NULL if no frame is stored.
+         * @return Pointer to the copied frame or nullptr if no frame is stored.
          */
         virtual EtherFrame* dequeue();
 

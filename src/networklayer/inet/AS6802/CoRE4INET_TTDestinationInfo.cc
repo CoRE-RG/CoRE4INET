@@ -24,11 +24,11 @@ namespace CoRE4INET {
 //==============================================================================
 
 TTDestinationInfo::TTDestinationInfo()
-  : destModule(NULL),
+  : destModule(nullptr),
     ctId(0),
-    period(NULL),
+    period(nullptr),
     actionTime(0),
-    oscillator(NULL)
+    oscillator(nullptr)
 {
 }
 

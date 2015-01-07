@@ -32,7 +32,7 @@ Timer::Timer()
 {
     ticks = 0;
     selfMessage = new cMessage("Scheduler Message");
-    oscillator = NULL;
+    oscillator = nullptr;
 }
 
 void Timer::initialize()

@@ -52,7 +52,7 @@ cGate* gateByFullPath(const std::string &path)
             return module->gate(gateName.c_str());
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
@@ -68,7 +68,7 @@ cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
             return module->gate(gateName.c_str());
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick)

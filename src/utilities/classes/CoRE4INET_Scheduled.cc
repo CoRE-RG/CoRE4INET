@@ -25,7 +25,7 @@ using namespace CoRE4INET;
 
 Scheduled::Scheduled()
 {
-    this->period = NULL;
+    this->period = nullptr;
     this->parametersInitialized = false;
 }
 
@@ -33,7 +33,7 @@ Period* Scheduled::getPeriod()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->period;
 }

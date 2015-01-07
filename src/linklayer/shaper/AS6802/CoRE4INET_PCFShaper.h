@@ -120,9 +120,9 @@ class PCFShaper : public TC, public virtual Timed
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop();
@@ -132,14 +132,14 @@ class PCFShaper : public TC, public virtual Timed
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
         virtual cMessage *front();
 };
 
 template<class TC>
-simsignal_t PCFShaper<TC>::pcfQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t PCFShaper<TC>::pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
 
 template<class TC>
 PCFShaper<TC>::PCFShaper()
@@ -159,7 +159,6 @@ void PCFShaper<TC>::initialize(int stage)
     if (stage == 0)
     {
         Timed::initialize();
-        pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
         //Send initial signal to create statistic
         cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.length()));
     }

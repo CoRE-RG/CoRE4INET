@@ -110,9 +110,9 @@ class AVBClassBShaper : public TC
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop();
@@ -122,14 +122,14 @@ class AVBClassBShaper : public TC
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
         virtual cMessage *front();
 };
 
 template<class TC>
-simsignal_t AVBClassBShaper<TC>::avbQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t AVBClassBShaper<TC>::avbQueueLengthSignal = cComponent::registerSignal("avbBQueueLength");
 
 template<class TC>
 AVBClassBShaper<TC>::AVBClassBShaper()
@@ -149,8 +149,6 @@ void AVBClassBShaper<TC>::initialize(int stage)
     TC::initialize(stage);
     if (stage == 0)
     {
-        avbQueueLengthSignal = cComponent::registerSignal("avbBQueueLength");
-
         int portIndex = cModule::getParentModule()->getIndex();
         avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbBBuffer",
                 portIndex));
@@ -238,7 +236,7 @@ cMessage* AVBClassBShaper<TC>::pop()
     {
         return TC::pop();
     }
-    return NULL;
+    return nullptr;
 }
 
 template<class TC>

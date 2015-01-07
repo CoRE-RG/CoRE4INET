@@ -57,7 +57,7 @@ simtime_t Incoming::getHardwareDelay()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->hardware_delay;
 }

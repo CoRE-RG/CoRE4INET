@@ -113,7 +113,7 @@ class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          *
          * @throws cRuntimeError When buffer module and application module do not have the same parent module
          */

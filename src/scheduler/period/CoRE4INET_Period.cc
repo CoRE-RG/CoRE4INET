@@ -26,20 +26,19 @@ namespace CoRE4INET {
 
 Define_Module(Period);
 
-simsignal_t Period::newCycle = SIMSIGNAL_NULL;
+simsignal_t Period::newCycle = registerSignal("newCycle");
 
 Period::Period()
 {
     cycles = 0;
-    newCycleEvent = NULL;
-    timer = NULL;
+    newCycleEvent = nullptr;
+    timer = nullptr;
     parametersInitialized = false;
 }
 
 void Period::initialize()
 {
     WATCH(cycles);
-    newCycle = registerSignal("newCycle");
 
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
@@ -88,7 +87,7 @@ uint32_t Period::getTicks()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     if (!timer)
     {
@@ -121,7 +120,7 @@ uint32_t Period::getCycleTicks()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->cycle_ticks;
 }
@@ -139,7 +138,7 @@ uint32_t Period::getOffsetTicks()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->offset_ticks;
 }

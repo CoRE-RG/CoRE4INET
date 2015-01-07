@@ -30,7 +30,7 @@ Define_Module(AVBTrafficSinkApp);
 
 AVBTrafficSinkApp::AVBTrafficSinkApp()
 {
-    this->srpTable = NULL;
+    this->srpTable = nullptr;
     this->vlan_id = 0;
     this->streamID = 0;
     updateInterval = 0;

@@ -25,7 +25,7 @@ void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev
 {
     if (cPacket *innerPacket = dynamic_cast<cPacket *>(object))
     {
-        while (innerPacket->getEncapsulatedPacket() != NULL)
+        while (innerPacket->getEncapsulatedPacket() != nullptr)
         {
             innerPacket = innerPacket->getEncapsulatedPacket();
         }
@@ -52,7 +52,7 @@ void InnerMessagePacketBytesFilter::receiveSignal(__attribute__((unused)) cResul
 {
     if (cPacket *innerPacket = dynamic_cast<cPacket *>(object))
     {
-        while (innerPacket->getEncapsulatedPacket() != NULL)
+        while (innerPacket->getEncapsulatedPacket() != nullptr)
         {
             innerPacket = innerPacket->getEncapsulatedPacket();
         }

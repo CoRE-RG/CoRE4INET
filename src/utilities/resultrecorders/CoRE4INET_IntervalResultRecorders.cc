@@ -27,7 +27,7 @@ IntervalVectorRecorder::IntervalVectorRecorder()
 {
     uninitialized = true;
     interval = SimTime(-1);
-    handle = NULL;
+    handle = nullptr;
     lastTime = 0;
 
 }
@@ -51,7 +51,7 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
     // we can register the vector here, because base class ensures we are subscribed only at once place
            opp_string_map attributes = getStatisticAttributes();
            handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
-           ASSERT(handle != NULL);
+           ASSERT(handle != nullptr);
            //Attributes are title->interpolationmode ...
            for (opp_string_map::const_iterator it = attributes.begin(); it != attributes.end(); ++it)
            {

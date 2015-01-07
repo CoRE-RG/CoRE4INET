@@ -237,7 +237,7 @@ class cStdPairListMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT,
                 }
                 else
                 {
-                    out << "NULL";
+                    out << "nullptr";
                 }
                 out << ", ";
                 if ((*this->it2).second)
@@ -246,7 +246,7 @@ class cStdPairListMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT,
                 }
                 else
                 {
-                    out << "NULL";
+                    out << "nullptr";
                 }
             }
             else

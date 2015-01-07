@@ -34,7 +34,7 @@ void RCTrafficSourceApp::initialize()
 {
     CTTrafficSourceAppBase::initialize();
 
-    handleParameterChange(NULL);
+    handleParameterChange(nullptr);
     if (isEnabled())
     {
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);

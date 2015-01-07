@@ -17,8 +17,8 @@
 
 namespace CoRE4INET {
 
-simsignal_t QueueBuffer::queueLengthSignal = SIMSIGNAL_NULL;
-simsignal_t QueueBuffer::droppedSignal = SIMSIGNAL_NULL;
+simsignal_t QueueBuffer::queueLengthSignal = registerSignal("queueLength");
+simsignal_t QueueBuffer::droppedSignal = registerSignal("dropped");
 
 QueueBuffer::QueueBuffer()
 {
@@ -32,8 +32,6 @@ QueueBuffer::~QueueBuffer()
 
 void QueueBuffer::initializeStatistics()
 {
-    queueLengthSignal = registerSignal("queueLength");
-    droppedSignal = registerSignal("dropped");
     frames.setName("frames");
 }
 
@@ -75,7 +73,7 @@ EtherFrame * QueueBuffer::dequeue()
         return static_cast<EtherFrame*>(frames.pop());
     }
     else
-        return NULL;
+        return nullptr;
 }
 
 void QueueBuffer::setFilled(size_t fillLevel)

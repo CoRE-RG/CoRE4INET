@@ -30,7 +30,7 @@ TTBuffer::TTBuffer()
 {
     this->parametersInitialized = false;
 
-    this->actionTimeEvent = NULL;
+    this->actionTimeEvent = nullptr;
     this->nextAction = 0;
 
     this->sendWindowStart = 0;
@@ -161,7 +161,7 @@ uint32_t TTBuffer::getSendWindowStart()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->sendWindowStart;
 }
@@ -170,7 +170,7 @@ uint32_t TTBuffer::getSendWindowEnd()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->sendWindowEnd;
 }

@@ -27,16 +27,13 @@ namespace CoRE4INET {
 
 Define_Module(TicApp);
 
-simsignal_t TicApp::rxPkSignal = SIMSIGNAL_NULL;
-simsignal_t TicApp::roundtripSignal = SIMSIGNAL_NULL;
+simsignal_t TicApp::rxPkSignal = registerSignal("rxPk");
+simsignal_t TicApp::roundtripSignal = registerSignal("roundtrip");
 
 void TicApp::initialize()
 {
     ApplicationBase::initialize();
     Scheduled::initialize();
-
-    rxPkSignal = registerSignal("rxPk");
-    roundtripSignal = registerSignal("roundtrip");
 
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
     event->setAction_time(static_cast<uint32_t>(par("action_time").longValue()));

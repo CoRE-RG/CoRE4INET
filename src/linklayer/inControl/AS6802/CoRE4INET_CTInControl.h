@@ -90,7 +90,7 @@ class CTInControl : public IC
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname);
     private:
@@ -117,14 +117,13 @@ class CTInControl : public IC
 };
 
 template<class IC>
-simsignal_t CTInControl<IC>::ctDroppedSignal = SIMSIGNAL_NULL;
+simsignal_t CTInControl<IC>::ctDroppedSignal = cComponent::registerSignal("ctDropped");
 
 template<class IC>
 void CTInControl<IC>::initialize()
 {
     BaseInControl::initialize();
-    ctDroppedSignal = cComponent::registerSignal("ctDropped");
-    //WATCH_LISTMAP(ct_incomings);
+    WATCH_LISTUMAP(ct_incomings);
 }
 
 template<class IC>

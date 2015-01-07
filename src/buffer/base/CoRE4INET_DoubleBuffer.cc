@@ -19,7 +19,7 @@ namespace CoRE4INET {
 
 DoubleBuffer::DoubleBuffer()
 {
-    frame = NULL;
+    frame = nullptr;
 }
 
 DoubleBuffer::~DoubleBuffer()
@@ -29,14 +29,14 @@ DoubleBuffer::~DoubleBuffer()
 
 void DoubleBuffer::enqueue(EtherFrame *newFrame)
 {
-    if (frame != NULL)
+    if (frame != nullptr)
         delete frame;
     else
     {
         if (ev.isGUI())
         {
             //Update displaystring
-            if (newFrame != NULL)
+            if (newFrame != nullptr)
             {
                 getDisplayString().setTagArg("i", 0, "buffer/full");
             }
@@ -50,7 +50,7 @@ EtherFrame * DoubleBuffer::dequeue()
     if (frame)
         return frame->dup();
     else
-        return NULL;
+        return nullptr;
 }
 
 size_t DoubleBuffer::size() const
@@ -61,7 +61,7 @@ size_t DoubleBuffer::size() const
 void DoubleBuffer::clear()
 {
     delete frame;
-    frame = NULL;
+    frame = nullptr;
     if (ev.isGUI())
     {
         //Update displaystring

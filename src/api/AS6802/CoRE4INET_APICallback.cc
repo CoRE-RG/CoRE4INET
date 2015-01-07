@@ -24,10 +24,10 @@ namespace CoRE4INET {
     }
     else{
         tte_buffer_t buf;
-        if(dynamic_cast<TTBuffer*>(src) != NULL){
+        if(dynamic_cast<TTBuffer*>(src) != nullptr){
             buf.traffic_type= TTE_TT_TRAFFIC;
         }
-        else if(dynamic_cast<RCBuffer*>(src) != NULL){
+        else if(dynamic_cast<RCBuffer*>(src) != nullptr){
             buf.traffic_type= TTE_CT_TRAFFIC;
         }
         else{

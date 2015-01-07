@@ -113,9 +113,9 @@ class BEShaper : public TC
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop();
@@ -125,14 +125,14 @@ class BEShaper : public TC
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
         virtual cMessage *front();
 };
 
 template<class TC>
-simsignal_t BEShaper<TC>::beQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t BEShaper<TC>::beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
 
 template<class TC>
 BEShaper<TC>::BEShaper()
@@ -152,7 +152,6 @@ void BEShaper<TC>::initialize(int stage)
     TC::initialize(stage);
     if (stage == 0)
     {
-        beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
         //Send initial signal to create statistic
         cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
     }

@@ -18,8 +18,8 @@
 namespace CoRE4INET {
 
 QueuedPacket::QueuedPacket()
-  : filter(NULL),
-    packet(NULL)
+  : filter(nullptr),
+    packet(nullptr)
 {
 }
 

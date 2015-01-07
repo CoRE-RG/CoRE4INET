@@ -30,7 +30,7 @@ Define_Module(TTIncoming);
 TTIncoming::TTIncoming() :
         CTIncoming::CTIncoming()
 {
-    this->frame = NULL;
+    this->frame = nullptr;
     this->receive_window_start = 0;
     this->receive_window_end = 0;
     this->permanence_pit = 0;
@@ -38,7 +38,7 @@ TTIncoming::TTIncoming() :
 
 TTIncoming::~TTIncoming()
 {
-    if (frame != NULL)
+    if (frame != nullptr)
     {
         delete frame;
     }
@@ -61,7 +61,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             //get current time in cylce
             uint32_t currentTicks = getPeriod()->getTicks();
             //Now check for correct arrival:
-            if (frame != NULL)
+            if (frame != nullptr)
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
@@ -152,7 +152,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         if (!hadError && ev.isGUI())
             getDisplayString().setTagArg("i2", 0, "");
         sendDelayed(frame, getHardwareDelay(), "out");
-        frame = NULL;
+        frame = nullptr;
     }
 
 }

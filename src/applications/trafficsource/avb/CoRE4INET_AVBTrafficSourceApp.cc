@@ -40,7 +40,7 @@ AVBTrafficSourceApp::AVBTrafficSourceApp()
     this->frameSize = 0;
     this->intervalFrames = 0;
     this->vlan_id = 0;
-    this->avbOutCTC = NULL;
+    this->avbOutCTC = nullptr;
     this->multicastMAC = generateAutoMulticastAddress();
 }
 

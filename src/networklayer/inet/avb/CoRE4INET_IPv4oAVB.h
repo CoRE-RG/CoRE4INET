@@ -35,7 +35,7 @@ class IPv4oAVB : public base {
     private:
         class UpdateListenerMsg : public cMessage {
             public:
-                UpdateListenerMsg(const char *name=NULL, short kind=0)
+                UpdateListenerMsg(const char *name=nullptr, short kind=0)
                 : cMessage(name, kind)
                 {
                     this->streamId = 0;

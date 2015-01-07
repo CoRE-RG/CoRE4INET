@@ -39,7 +39,7 @@ void TTTrafficSourceApp::initialize()
 {
     CTTrafficSourceAppBase::initialize();
 
-    handleParameterChange(NULL);
+    handleParameterChange(nullptr);
     if (isEnabled())
     {
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
