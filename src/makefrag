@@ -47,7 +47,7 @@ else ifeq ($(CC),gcc)
     #CFLAGS += -ansi -pedantic-errors
     endif
     CFLAGS += -Wno-unknown-pragmas -Wno-error=unused-parameter -Wno-error=conversion -Wno-error=suggest-attribute=noreturn
-    CFLAGS += -Wno-error=shadow
+    CFLAGS += -Wno-error=shadow -Wno-error=useless-cast
 endif
 
 ifdef EXTENDED_WARNINGS
