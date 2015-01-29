@@ -24,8 +24,8 @@ public:
     bool matches(const cPacket *packet);
 
 public:
-    const IPvXAddress& getDestAddr() const { return destAddr; }
-    void setDestAddr(const IPvXAddress& new_destAddr) { this->destAddr = new_destAddr; }
+    const inet::L3Address& getDestAddr() const { return destAddr; }
+    void setDestAddr(const inet::L3Address& new_destAddr) { this->destAddr = new_destAddr; }
     int getDestPortMax() const { return destPortMax; }
     void setDestPortMax(int new_destPortMax) { this->destPortMax = new_destPortMax; }
     int getDestPortMin() const { return destPortMin; }
@@ -34,8 +34,8 @@ public:
     void setDestPrefixLength(int new_destPrefixLength) { this->destPrefixLength = new_destPrefixLength; }
     int getProtocol() const { return protocol; }
     void setProtocol(int new_protocol) { this->protocol = new_protocol; }
-    const IPvXAddress& getSrcAddr() const { return srcAddr; }
-    void setSrcAddr(const IPvXAddress& new_srcAddr) { this->srcAddr = new_srcAddr; }
+    const inet::L3Address& getSrcAddr() const { return srcAddr; }
+    void setSrcAddr(const inet::L3Address& new_srcAddr) { this->srcAddr = new_srcAddr; }
     int getSrcPortMax() const { return srcPortMax; }
     void setSrcPortMax(int new_srcPortMax) { this->srcPortMax = new_srcPortMax; }
     int getSrcPortMin() const { return srcPortMin; }

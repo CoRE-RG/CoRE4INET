@@ -45,7 +45,7 @@ public:
     virtual ~IPv4oTT();
 
     virtual void initialize(int stage) override;
-    virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
+    virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie);
     virtual void configureFilters(cXMLElement *config);
     virtual void handleMessage(cMessage* msg) override;
 

@@ -340,7 +340,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused))  const InterfaceEntry *ie,
+void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused))  const inet::InterfaceEntry *ie,
         std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
@@ -410,7 +410,7 @@ void IPv4oTT<Base>::registerSendTimingEvents(std::list<IPoREFilter*> &filters)
     std::list<IPoREFilter*>::iterator f = filters.begin();
     for (; f != filters.end(); ++f)
     {
-        registerSendTimingEvent(check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
+        registerSendTimingEvent(inet::check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
     }
 }
 

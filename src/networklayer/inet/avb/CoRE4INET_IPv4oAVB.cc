@@ -446,7 +446,7 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceE
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))     const InterfaceEntry* ie,
+void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))     const inet::InterfaceEntry* ie,
         const IPoREFilter* filter)
 {
     AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());

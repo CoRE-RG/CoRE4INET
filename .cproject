@@ -38,7 +38,6 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
@@ -140,7 +139,6 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.1282023526" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1006037084" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -171,7 +169,6 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.525932788" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
@@ -272,7 +269,6 @@
 									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1556009094" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -284,7 +280,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="applications/api/AS6802|api/AS6802|configuration/base|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="nodes/inet|networklayer/inet|applications/api/AS6802|api/AS6802|configuration/base|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
