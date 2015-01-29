@@ -59,14 +59,7 @@ class Buffer : public virtual cSimpleModule
         /**
          * @brief Destructor
          */
-        ~Buffer();
-
-        /**
-         * @brief Indicates a parameter has changed.
-         *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
-         */
-        virtual void handleParameterChange(const char* parname);
+        virtual ~Buffer();
 
     protected:
         /**
@@ -85,14 +78,14 @@ class Buffer : public virtual cSimpleModule
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return Always returns 1
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Is called when a new Frame is received in the buffer.
@@ -104,7 +97,14 @@ class Buffer : public virtual cSimpleModule
          *
          * @param msg The incoming message
          */
-        void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
 
         /**
          * @brief Is called to store an inet::EtherFrame in the buffer.
@@ -120,8 +120,8 @@ class Buffer : public virtual cSimpleModule
          *
          * This method must be implemented according to the buffer strategy.
          *
-         * @return A pointer to the next inet::EtherFrame from the buffer. Returns
-         * null if there is no inet::EtherFrame in the buffer
+         * @return A pointer to the next EtherFrame from the buffer. Returns
+         * nullptr if there is no EtherFrame in the buffer
          */
         virtual inet::EtherFrame* dequeue();
 
@@ -143,8 +143,8 @@ class Buffer : public virtual cSimpleModule
         /**
          * @brief Wrapper function arround dequeue().
          *
-         * @return A pointer to the next inet::EtherFrame from the buffer. Returns
-         * null if there is no inet::EtherFrame in the buffer
+         * @return A pointer to the next EtherFrame from the buffer. Returns
+         * nullptr if there is no EtherFrame in the buffer
          *
          * @sa dequeue();
          */

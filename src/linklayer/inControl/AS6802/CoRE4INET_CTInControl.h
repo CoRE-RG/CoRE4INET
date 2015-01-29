@@ -17,19 +17,15 @@
 #define __CORE4INET_CTINCONTROL_H_
 
 //Std
-#if __cplusplus >= 201103L
 #include <unordered_map>
-using namespace std;
-#else
-#include <tr1/unordered_map>
-using namespace std::tr1;
-#endif
+
 #include <list>
 //CoRE4INET
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_CTIncoming.h"
 #include "CoRE4INET_CTBuffer.h"
 #include "CoRE4INET_customWatch.h"
+#include "CoRE4INET_HelperFunctions.h"
 #include "CoRE4INET_ConfigFunctions.h"
 //INET
 #include <ModuleAccess.h>
@@ -56,7 +52,7 @@ class CTInControl : public IC
         /**
          * @brief Lists of incoming modules for each critical traffic id.
          */
-        unordered_map<uint16_t, std::list<CTIncoming*> > ct_incomings;
+        std::unordered_map<uint16_t, std::list<CTIncoming*> > ct_incomings;
 
         /**
          * @brief caches ct_mask parameter
@@ -78,7 +74,7 @@ class CTInControl : public IC
         /**
          * @brief Initialization of the module
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Forwards frames to the appropriate incoming modules
@@ -90,46 +86,24 @@ class CTInControl : public IC
          *
          * @param msg incoming message
          */
-        virtual void handleMessage(cMessage *msg);
-    public:
+        virtual void handleMessage(cMessage *msg) override;
+
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
-    private:
-        /**
-         * @brief Helper function checks whether a Frame is critical traffic.
-         *
-         * @param frame Pointer to the frame to check.
-         * @return true if frame is critical, else false
-         */
-        virtual bool isCT(inet::EtherFrame *frame);
-
-        /**
-         * @brief Returns the critical traffic id for a given frame.
-         *
-         * @warning does not check if it is really critical traffic.
-         * If you need to be sure use isCT(inet::EtherFrame *frame)
-         *
-         * @param frame Pointer to the frame to get critical traffic id from.
-         * @return critical traffic id
-         *
-         * @sa isCT(inet::EtherFrame *frame)
-         */
-        virtual uint16_t getCTID(inet::EtherFrame *frame);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 template<class IC>
-simsignal_t CTInControl<IC>::ctDroppedSignal = SIMSIGNAL_NULL;
+simsignal_t CTInControl<IC>::ctDroppedSignal = cComponent::registerSignal("ctDropped");
 
 template<class IC>
 void CTInControl<IC>::initialize()
 {
     BaseInControl::initialize();
-    ctDroppedSignal = cComponent::registerSignal("ctDropped");
-    //WATCH_LISTMAP(ct_incomings);
+    WATCH_LISTUMAP(ct_incomings);
 }
 
 template<class IC>
@@ -140,11 +114,11 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
         EtherFrame *frame = dynamic_cast<EtherFrame *>(msg);
 
         //Auf CTCs verteilen oder BE traffic
-        if (frame && isCT(frame))
+        if (frame && isCT(frame, ctMarker, ctMask))
         {
             this->recordPacketReceived(frame);
 
-            unordered_map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(
+            std::unordered_map<uint16_t, std::list<CTIncoming *> >::iterator ct_incomingList = ct_incomings.find(
                     getCTID(frame));
             if (ct_incomingList != ct_incomings.end())
             {
@@ -196,11 +170,11 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "ct_mask"))
     {
-        this->ctMask = (uint32_t) cComponent::par("ct_mask").longValue();
+        this->ctMask = static_cast<uint32_t>(cComponent::par("ct_mask").longValue());
     }
     if (!parname || !strcmp(parname, "ct_marker"))
     {
-        this->ctMarker = (uint32_t) cComponent::par("ct_marker").longValue();
+        this->ctMarker = static_cast<uint32_t>(cComponent::par("ct_marker").longValue());
     }
     if (!parname || !strcmp(parname, "ct_incomings"))
     {
@@ -222,8 +196,7 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
                 }
                 else
                 {
-                    throw cRuntimeError("CTIncoming module %s has no CTBuffer attached!",
-                            ct_incoming->getFullName());
+                    throw cRuntimeError("CTIncoming module %s has no CTBuffer attached!", ct_incoming->getFullName());
                 }
             }
             else
@@ -234,35 +207,6 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
             }
         }
     }
-}
-
-template<class IC>
-bool CTInControl<IC>::isCT(inet::EtherFrame *frame)
-{
-    if (inet::EthernetIIFrame *e2f = dynamic_cast<inet::EthernetIIFrame*>(frame))
-    {
-        if (e2f->getEtherType() != 0x891d)
-        {
-            return false;
-        }
-    }
-    unsigned char macBytes[6];
-    frame->getDest().getAddressBytes(macBytes);
-    //Check for ct
-    if ((((macBytes[0] << 24) | (macBytes[1] << 16) | (macBytes[2] << 8) | (macBytes[3])) & ctMask)
-            == (ctMarker & ctMask))
-    {
-        return true;
-    }
-    return false;
-}
-
-template<class IC>
-uint16_t CTInControl<IC>::getCTID(inet::EtherFrame *frame)
-{
-    unsigned char macBytes[6];
-    frame->getDest().getAddressBytes(macBytes);
-    return (macBytes[4] << 8) | macBytes[5];
 }
 
 }

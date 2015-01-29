@@ -40,9 +40,9 @@ public:
 
 public:
     uint16_t getCtId() const { return ctId; }
-    void setCtId(uint16_t ctId) { this->ctId = ctId; }
+    void setCtId(uint16_t new_ctId) { this->ctId = new_ctId; }
     std::list<RCBuffer*>& getDestModules() { return destModules; }
-    void setDestModules(std::list<RCBuffer*>& destModules) { this->destModules = destModules; }
+    void setDestModules(std::list<RCBuffer*>& new_destModules) { this->destModules = new_destModules; }
 
 
 private:

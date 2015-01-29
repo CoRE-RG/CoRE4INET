@@ -72,11 +72,7 @@ Run the example simulations to check everything works fine.
 
 Known Problems:
 -------------------------
-- If you experience problems building CoRE4INET under OS X (e.g. "fatal error: 'tr1/unordered_map' file not found")
-  add the following to src/makefrag:
-  
-  CC = clang
-  CXX = clang++
-  CFLAGS += -std=c++11
+
+
 ---
 Till

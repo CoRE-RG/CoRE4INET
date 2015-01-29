@@ -31,23 +31,23 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TicApp : public CTApplicationBase, public virtual Scheduled
+class TicApp : public virtual CTApplicationBase, public virtual Scheduled
 {
     protected:
         /**
          * @brief Initialization of the module. Sends activator message
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief Handles message generation and reception
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
     protected:
         /**
          * Signal that is emitted every time a toc was received.

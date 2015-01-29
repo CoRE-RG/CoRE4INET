@@ -22,7 +22,7 @@
 
 namespace CoRE4INET {
 
-class AVBQueueBuffer : public AVBBuffer, public QueueBuffer
+class AVBQueueBuffer : public virtual AVBBuffer, public virtual QueueBuffer
 {
 };
 

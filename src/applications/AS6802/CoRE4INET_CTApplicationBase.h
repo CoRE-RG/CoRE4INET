@@ -17,13 +17,7 @@
 #define __CORE4INET_CTAPPLICATIONBASE_H_
 
 //Std
-#if __cplusplus >= 201103L
 #include <unordered_map>
-using namespace std;
-#else
-#include <tr1/unordered_map>
-using namespace std::tr1;
-#endif
 
 //CoRE4INET
 #include "CoRE4INET_ApplicationBase.h"
@@ -49,12 +43,23 @@ class CTApplicationBase : public virtual ApplicationBase
          * @brief Map of critical traffic identifies with their
          * corresponding Buffers.
          */
-        unordered_map<uint16_t, std::list<CTBuffer*> > ctbuffers;
+        std::unordered_map<uint16_t, std::list<CTBuffer*> > ctbuffers;
     public:
+        /**
+         * @brief Constructor for CTApplicationBase
+         */
+        CTApplicationBase();
+
+        /**
+         * @brief Destructor for CTApplicationBase
+         */
+        virtual ~CTApplicationBase();
+
+    protected:
         /**
          * @brief Initialization of the module.
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief resets the bag on incoming RC-Frames (on RCin)
          *
@@ -63,15 +68,15 @@ class CTApplicationBase : public virtual ApplicationBase
          *
          * @param msg Parameter must be forwarded from subclass
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          *
          * @throws cRuntimeError When buffer module and application module do not have the same parent module
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 
 };
 

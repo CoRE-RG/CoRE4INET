@@ -31,7 +31,7 @@ public:
 
 public:
     DestinationType getDestType() const { return destType; }
-    void setDestType(DestinationType destType) { this->destType = destType; }
+    void setDestType(DestinationType new_destType) { this->destType = new_destType; }
     
 
 private:

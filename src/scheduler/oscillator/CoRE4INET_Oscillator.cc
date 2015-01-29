@@ -29,7 +29,7 @@ namespace CoRE4INET {
 
 Define_Module(Oscillator);
 
-simsignal_t Oscillator::currentDrift = SIMSIGNAL_NULL;
+simsignal_t Oscillator::currentDrift = registerSignal("currentDrift");
 
 Oscillator::Oscillator()
 {
@@ -42,7 +42,6 @@ void Oscillator::initialize(int stage)
 {
     if (stage == 0)
     {
-        currentDrift = registerSignal("currentDrift");
         WATCH(this->current_tick);
     }
 }
@@ -78,7 +77,7 @@ simtime_t Oscillator::getPreciseTick()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->tick;
 }

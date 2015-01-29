@@ -89,9 +89,9 @@ void Buffer::handleMessage(cMessage *msg)
             {
                 frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);  // "padding"
             }
-            if (frame->getByteLength() <= maxMessageSize)
+            if (static_cast<size_t>(frame->getByteLength()) <= maxMessageSize)
             {
-                putFrame((EtherFrame*) frame);
+                putFrame(frame);
             }
             else
             {
@@ -105,31 +105,34 @@ void Buffer::handleMessage(cMessage *msg)
     }
 }
 
-void Buffer::handleParameterChange(__attribute((unused)) const char* parname)
+void Buffer::handleParameterChange(const char* parname)
 {
     if (!parname || !strcmp(parname, "maxMessageSize"))
     {
-        this->maxMessageSize = (size_t) parameterULongCheckRange(par("maxMessageSize"), MIN_ETHERNET_FRAME_BYTES,
-        MAX_ETHERNET_FRAME_BYTES);
+        this->maxMessageSize = static_cast<size_t>(parameterULongCheckRange(par("maxMessageSize"),
+                MIN_ETHERNET_FRAME_BYTES, MAX_ETHERNET_FRAME_BYTES));
     }
     if (!parname || !strcmp(parname, "destination_gates"))
     {
         destinationGates.clear();
         std::vector<cGate*> gates = parameterToGateList(par("destination_gates"), DELIMITERS);
-        for (std::vector<cGate*>::const_iterator gate = gates.begin(); gate != gates.end(); ++gate)
+        for (std::vector<cGate*>::const_iterator gate_it = gates.begin(); gate_it != gates.end(); ++gate_it)
         {
-            if (findContainingNode((*gate)->getOwnerModule()) != findContainingNode(this))
+            if (findContainingNode((*gate_it)->getOwnerModule()) != findContainingNode(this))
             {
                 throw cRuntimeError(
                         "Configuration problem of parameter destination_gates in module %s: Gate: %s is not in node %s! Maybe a copy-paste problem?",
-                        this->getFullName(), (*gate)->getFullName(), findContainingNode(this)->getFullName());
+                        this->getFullName(), (*gate_it)->getFullName(), findContainingNode(this)->getFullName());
             }
-            destinationGates.push_back(*gate);
+            destinationGates.push_back(*gate_it);
         }
     }
 }
 
-void Buffer::enqueue(__attribute((unused))  EtherFrame *newFrame)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
+
+void Buffer::enqueue(__attribute__((unused)) EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }
@@ -138,6 +141,8 @@ inet::EtherFrame * Buffer::dequeue()
 {
     throw cRuntimeError("Buffer::dequeue not implemented");
 }
+
+#pragma GCC diagnostic pop
 
 long Buffer::getRequiredBandwidth()
 {

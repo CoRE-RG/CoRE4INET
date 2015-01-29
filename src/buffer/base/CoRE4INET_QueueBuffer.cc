@@ -17,8 +17,8 @@
 
 namespace CoRE4INET {
 
-simsignal_t QueueBuffer::queueLengthSignal = SIMSIGNAL_NULL;
-simsignal_t QueueBuffer::droppedSignal = SIMSIGNAL_NULL;
+simsignal_t QueueBuffer::queueLengthSignal = registerSignal("queueLength");
+simsignal_t QueueBuffer::droppedSignal = registerSignal("dropped");
 
 QueueBuffer::QueueBuffer()
 {
@@ -32,15 +32,13 @@ QueueBuffer::~QueueBuffer()
 
 void QueueBuffer::initializeStatistics()
 {
-    queueLengthSignal = registerSignal("queueLength");
-    droppedSignal = registerSignal("dropped");
     frames.setName("frames");
 }
 
 void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
 {
-    int size = par("size").longValue();
-    if (size >= 0 && frames.length() >= size)
+    int max_size = static_cast<int>(par("size").longValue());
+    if (max_size >= 0 && frames.length() >= max_size)
     {
         emit(droppedSignal, newFrame);
         if (ev.isGUI())
@@ -62,23 +60,23 @@ void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
         }
     }
     frames.insert(newFrame);
-    setFilled((unsigned int) frames.length());
-    emit(queueLengthSignal, (unsigned int) frames.length());
+    setFilled(static_cast<size_t>(frames.length()));
+    emit(queueLengthSignal, static_cast<unsigned long>(frames.length()));
 }
 
 inet::EtherFrame * QueueBuffer::dequeue()
 {
     if (frames.length() > 0)
     {
-        setFilled((unsigned int) (frames.length() - 1));
-        emit(queueLengthSignal, (unsigned int) (frames.length() - 1));
-        return (inet::EtherFrame*) frames.pop();
+        setFilled(static_cast<size_t>(frames.length() - 1));
+        emit(queueLengthSignal, static_cast<unsigned long>(frames.length() - 1));
+        return static_cast<EtherFrame*>(frames.pop());
     }
     else
-        return NULL;
+        return nullptr;
 }
 
-void QueueBuffer::setFilled(unsigned int fillLevel)
+void QueueBuffer::setFilled(size_t fillLevel)
 {
     if (ev.isGUI())
     {
@@ -104,7 +102,7 @@ void QueueBuffer::setFilled(unsigned int fillLevel)
 
 size_t QueueBuffer::size() const
 {
-    return (unsigned int)frames.length();
+    return static_cast<size_t>(frames.length());
 }
 
 void QueueBuffer::clear(){

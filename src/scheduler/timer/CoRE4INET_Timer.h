@@ -30,7 +30,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class Timer : public cSimpleModule
+class Timer : public virtual cSimpleModule
 {
     private:
         /**
@@ -74,11 +74,11 @@ class Timer : public cSimpleModule
         /**
          * Initialization of the module. Sets oscillator and registeres signals
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * Incoming self message triggers sendOutEvents()
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
     private:
         /**
          * @brief Method must be called after a clock drift change in the oscillator to reschedule messages with the new
@@ -102,11 +102,11 @@ class Timer : public cSimpleModule
         /**
          * Destructor cleans up
          */
-        ~Timer();
+        virtual ~Timer();
         /**
          * @brief When called, the ticks since simulation start are recalculated using current simulation time
          */
-        virtual void recalculate();
+        void recalculate();
 
         /**
          * Register a new action time event in the scheduler. May fail if ActionTimeEvent is out of schedule
@@ -118,7 +118,7 @@ class Timer : public cSimpleModule
          * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
          * SchedulerTimerEvent
          */
-        virtual uint64_t registerEvent(SchedulerActionTimeEvent *event, Period *period);
+        uint64_t registerEvent(SchedulerActionTimeEvent *event, Period *period);
 
         /**
          * Register a new timer event in the scheduler.
@@ -129,26 +129,26 @@ class Timer : public cSimpleModule
          * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
          * SchedulerTimerEvent
          */
-        virtual uint64_t registerEvent(SchedulerTimerEvent *event);
+        uint64_t registerEvent(SchedulerTimerEvent *event);
 
         /**
          * @brief Returns the absolute number of ticks
          *
          * @return Number of ticks since simulation start
          */
-        virtual uint64_t getTotalTicks();
+        uint64_t getTotalTicks();
 
         /**
          * @brief Returns a pointer to the attached oscillator
          */
-        virtual Oscillator* getOscillator() const;
+        Oscillator* getOscillator() const;
 
         /**
          * @brief Corrects the clock by the number of ticks
          *
-         * @param ticks number of ticks the clock must be corrected
+         * @param correction_ticks number of ticks the clock must be corrected
          */
-        virtual void clockCorrection(int32_t ticks);
+        void clockCorrection(int32_t correction_ticks);
 
     protected:
         /**

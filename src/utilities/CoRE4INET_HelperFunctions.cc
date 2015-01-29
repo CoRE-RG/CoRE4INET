@@ -52,7 +52,7 @@ cGate* gateByFullPath(const std::string &path)
             return module->gate(gateName.c_str());
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
@@ -68,21 +68,22 @@ cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
             return module->gate(gateName.c_str());
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 uint64_t ticksToTransparentClock(uint64_t ticks, simtime_t tick)
 {
-    return secondsToTransparentClock(ticks * tick);
+    return secondsToTransparentClock(static_cast<double>(ticks) * tick);
 }
 
 uint64_t secondsToTransparentClock(simtime_t seconds)
 {
     uint64_t div = 10;
-    for(int i=1;i<(SIMTIME_NS - seconds.getScaleExp());++i){
-        div*=10;
+    for (int i = 1; i < (SIMTIME_NS - seconds.getScaleExp()); ++i)
+    {
+        div *= 10;
     }
-    return (uint64_t) (((uint64_t)seconds.raw() * (uint64_t)0x10000) / div);
+    return (static_cast<uint64_t>(seconds.raw()) * static_cast<uint64_t>(0x10000)) / div;
 }
 
 uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
@@ -90,9 +91,10 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
     return transparentClock / secondsToTransparentClock(tick);
 }
 
-inet::MACAddress generateAutoMulticastAddress(){
-    inet::MACAddress multicastMAC = inet::MACAddress::generateAutoAddress();
-    multicastMAC.setAddressByte(1,(multicastMAC.getAddressByte(1)|0x01));
+MACAddress generateAutoMulticastAddress()
+{
+    MACAddress multicastMAC = MACAddress::generateAutoAddress();
+    multicastMAC.setAddressByte(1, (multicastMAC.getAddressByte(1) | 0x01));
     return multicastMAC;
 }
 
@@ -121,24 +123,54 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
     }
     if (start >= 0)
     {
-        transparentClock += ticksToTransparentClock((timer->getTotalTicks() - (uint64_t) start),
+        transparentClock += ticksToTransparentClock((timer->getTotalTicks() - static_cast<uint64_t>(start)),
                 timer->getOscillator()->getPreciseTick());
     }
 
     //Set new transparent clock
     pcf->setTransparent_clock(transparentClock);
 }
+
+bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask)
+{
+    if (const EthernetIIFrame *e2f = dynamic_cast<const EthernetIIFrame*>(frame))
+    {
+        if (e2f->getEtherType() != 0x891d)
+        {
+            return false;
+        }
+    }
+    unsigned char macBytes[6];
+    frame->getDest().getAddressBytes(macBytes);
+    //Check for ct
+    if (((static_cast<uint32_t>(macBytes[0] << 24) | static_cast<uint32_t>(macBytes[1] << 16)
+            | static_cast<uint32_t>(macBytes[2] << 8) | static_cast<uint32_t>(macBytes[3])) & ctMask)
+            == (ctMarker & ctMask))
+    {
+        return true;
+    }
+    return false;
+}
+
+uint16_t getCTID(const EtherFrame *frame)
+{
+    unsigned char macBytes[6];
+    frame->getDest().getAddressBytes(macBytes);
+    return static_cast<uint16_t>((macBytes[4] << 8) | macBytes[5]);
+}
+
 #endif
 
 #ifdef WITH_AVB_COMMON
 
 const_simtime_t second = 1;
 
-unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval)
+unsigned long bandwidthFromSizeAndInterval(size_t framesize, size_t intervalFrames, simtime_t interval)
 {
-    return (unsigned long)ceil((second/interval) * intervalFrames * (((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS));
+    return static_cast<unsigned long>(ceil(
+            (second / interval) * static_cast<double>(intervalFrames)
+                    * static_cast<double>(((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS)));
 }
-
 
 const simtime_t getIntervalForClass(SR_CLASS srClass)
 {
@@ -148,9 +180,8 @@ const simtime_t getIntervalForClass(SR_CLASS srClass)
             return SR_CLASS_A_INTERVAL;
         case SR_CLASS_B:
             return SR_CLASS_B_INTERVAL;
-        default:
-            return SR_CLASS_A_INTERVAL;
     }
+    return SR_CLASS_B_INTERVAL;
 }
 #endif
 

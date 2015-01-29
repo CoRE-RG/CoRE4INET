@@ -37,13 +37,14 @@ namespace CoRE4INET {
  *
  * @ingroup Buffer
  */
-class AVBBuffer : public virtual Buffer, public Timed
+class AVBBuffer : public virtual Buffer, public virtual Timed
 {
         using Timed::initialize;
     public:
         AVBBuffer();
         virtual ~AVBBuffer();
 
+    public:
         /**
          * @brief caculates new credit for idleslope time.
          *
@@ -102,28 +103,28 @@ class AVBBuffer : public virtual Buffer, public Timed
          *
          * @param stage the stages. In this Case only stage 0.
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return returns 1
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief handles the incoming and outgoing messages of the buffer.
          *
          * @param msg incoming inet::EtherFrame for the Buffer or SchedulerActionTimeEvent message.
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } /* namespace CoRE4INET */

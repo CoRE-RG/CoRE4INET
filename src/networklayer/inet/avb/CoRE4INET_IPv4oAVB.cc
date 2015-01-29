@@ -64,21 +64,22 @@ template<class base>
 void IPv4oAVB<base>::initialize(int stage)
 {
     base::initialize(stage);
-    if (stage==0)
+    if (stage == 0)
     {
         cXMLElement *filters = base::par("filters").xmlValue();
         IPv4oAVB<base>::configureFilters(filters);
         IPv4oAVB<base>::configureSubscriptions(filters);
         SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
         IPv4oAVB<base>::registerSrpCallbacks(srpTable);
-        base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", MSGKIND_START));
+        base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", static_cast<short>(MSGKIND_START)));
     }
 }
 
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::registerSrpCallbacks(SRPTable *srpTable) {
+void IPv4oAVB<base>::registerSrpCallbacks(SRPTable *srpTable)
+{
     srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_UNREGISTERED, this);
@@ -96,9 +97,12 @@ void IPv4oAVB<base>::sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
-    if(filterMatch) {
+    if (filterMatch)
+    {
         IPv4oAVB<base>::sendPacketToBuffers(packet, ie, matchingFilters);
-    } else {
+    }
+    else
+    {
         base::sendPacketToNIC(packet, ie);
     }
 }
@@ -114,8 +118,9 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
         registerTalker(this->m_filterList, srpTable);
         delete msg;
     }
-    else if (msg->isSelfMessage() &&
-            ((strcmp(msg->getName(), "updateAvbSubscription") == 0)  ||  (strcmp(msg->getName(), "retryAvbSubscription") == 0)))
+    else if (msg->isSelfMessage()
+            && ((strcmp(msg->getName(), "updateAvbSubscription") == 0)
+                    || (strcmp(msg->getName(), "retryAvbSubscription") == 0)))
     {
         UpdateListenerMsg *updateMsg = check_and_cast<UpdateListenerMsg *>(msg);
         SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
@@ -130,7 +135,8 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
         }
         delete updateMsg;
     }
-    else if (dynamic_cast<AVBFrame*>(msg)) {
+    else if (dynamic_cast<AVBFrame*>(msg))
+    {
         AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg);
         cPacket* ipPacket = avbFrame->decapsulate();
 
@@ -145,7 +151,8 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
         delete avbFrame;
         base::handleMessage(ipPacket);
     }
-    else {
+    else
+    {
         base::handleMessage(msg);
     }
 }
@@ -155,7 +162,8 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
 template<class base>
 void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
 {
-    Enter_Method_Silent();
+    Enter_Method_Silent
+    ();
     if (id == NF_AVB_TALKER_REGISTERED)
     {
         SRPTable::TalkerEntry *tentry = check_and_cast<SRPTable::TalkerEntry*>(obj);
@@ -217,13 +225,12 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
 {
         inet::L3AddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
-    for (int i = 0; i < (int)filterElements.size(); i++)
+    for (size_t i = 0; i < filterElements.size(); i++)
     {
         cXMLElement *filterElement = filterElements[i];
         try
         {
             const char *destType = base::getRequiredAttribute(filterElement, "destType");
-
 
 //            if (!this->destTypeEnum) {
 //                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
@@ -233,7 +240,8 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
             cEnum *destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
             DestinationType dt = DestinationType(destTypeEnum->lookup(destType));
 
-            if (dt == DestinationType_AVB) {
+            if (dt == DestinationType_AVB)
+            {
 
                 const char *destModule = base::getRequiredAttribute(filterElement, "destModule");
                 const char *destMAC = base::getRequiredAttribute(filterElement, "destMAC");
@@ -261,30 +269,40 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 avbDestInfo->setDestType(DestinationType_AVB);
 
                 cModule* module = simulation.getModuleByPath(destModule);
-                if (!module) {
-                   module = findModuleWhereverInNode(destModule, this);
+                if (!module)
+                {
+                    module = findModuleWhereverInNode(destModule, this);
                 }
-                if (!module) {
-                   throw cRuntimeError("destModule \"%s\" could not be resolved!", destModule);
+                if (!module)
+                {
+                    throw cRuntimeError("destModule \"%s\" could not be resolved!", destModule);
                 }
-                if (AVBIncoming *avbCtc = dynamic_cast<AVBIncoming*>(module)) {
-                   avbDestInfo->setDestModule(avbCtc);
-                } else {
+                if (AVBIncoming *avbCtc = dynamic_cast<AVBIncoming*>(module))
+                {
+                    avbDestInfo->setDestModule(avbCtc);
+                }
+                else
+                {
                     throw cRuntimeError("destModule: %s is not a AVBIncoming!", destModule);
                 }
                 if (destMAC)
                     avbDestInfo->setDestMac(new inet::MACAddress(destMAC));
                 else
-                     throw cRuntimeError("destMAC not specified!");
-                avbDestInfo->setStreamId(base::parseIntAttribute(streamId, "streamId", false));
-                if (strcmp(srClass,"B") == 0) {
+                    throw cRuntimeError("destMAC not specified!");
+                avbDestInfo->setStreamId(static_cast<uint64_t>(base::parseIntAttribute(streamId, "streamId", false)));
+                if (strcmp(srClass, "B") == 0)
+                {
                     avbDestInfo->setSrClass(SR_CLASS_B);
-                } else {
+                }
+                else
+                {
                     avbDestInfo->setSrClass(SR_CLASS_A);
                 }
-                avbDestInfo->setFrameSize(base::parseIntAttribute(frameSize, "frameSize", false));
-                avbDestInfo->setIntervallFrames(base::parseIntAttribute(intFrames, "intervallFrames", false));
-                avbDestInfo->setVlanId(base::parseIntAttribute(vlanId, "vlanId", false));
+                avbDestInfo->setFrameSize(
+                        static_cast<uint32_t>(base::parseIntAttribute(frameSize, "frameSize", false)));
+                avbDestInfo->setIntervallFrames(
+                        static_cast<uint16_t>(base::parseIntAttribute(intFrames, "intervallFrames", false)));
+                avbDestInfo->setVlanId(static_cast<uint16_t>(base::parseIntAttribute(vlanId, "vlanId", false)));
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -306,7 +324,8 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                     tp->setTos(base::parseIntAttribute(tosAttr, "tos"));
                 if (tosMaskAttr)
                     tp->setTosMask(base::parseIntAttribute(tosAttr, "tosMask"));
-                if (srcPortAttr) {
+                if (srcPortAttr)
+                {
                     tp->setSrcPortMin(base::parseIntAttribute(srcPortAttr, "srcPort"));
                     tp->setSrcPortMax(tp->getSrcPortMin());
                 }
@@ -314,7 +333,8 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                     tp->setSrcPortMin(base::parseIntAttribute(srcPortMinAttr, "srcPortMin"));
                 if (srcPortMaxAttr)
                     tp->setSrcPortMax(base::parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
-                if (destPortAttr) {
+                if (destPortAttr)
+                {
                     tp->setDestPortMin(base::parseIntAttribute(destPortAttr, "destPort"));
                     tp->setDestPortMax(tp->getDestPortMin());
                 }
@@ -329,12 +349,12 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 filter->setTrafficPattern(tp);
                 base::addFilter(filter);
             }
-            
 
         }
         catch (std::exception& e)
         {
-            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(), e.what());
+            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(),
+                    e.what());
         }
     }
 
@@ -346,21 +366,23 @@ template<class base>
 void IPv4oAVB<base>::configureSubscriptions(cXMLElement *config)
 {
     cXMLElementList filterElements = config->getChildrenByTagName("subscribe");
-    for (int i = 0; i < (int)filterElements.size(); i++)
+    for (size_t i = 0; i < filterElements.size(); i++)
     {
         cXMLElement *filterElement = filterElements[i];
         try
         {
             const char *streamId = base::getRequiredAttribute(filterElement, "streamId");
 
-            if (streamId) {
+            if (streamId)
+            {
                 int id = base::parseIntAttribute(streamId, "streamId");
                 m_subscribeList.push_back(id);
             }
         }
         catch (std::exception& e)
         {
-            throw cRuntimeError("Error in XML <subscribe> element at %s: %s", filterElement->getSourceLocation(), e.what());
+            throw cRuntimeError("Error in XML <subscribe> element at %s: %s", filterElement->getSourceLocation(),
+                    e.what());
         }
     }
 }
@@ -371,8 +393,10 @@ template<class base>
 void IPv4oAVB<base>::registerTalker(const std::list<IPoREFilter*> filters, SRPTable *srpTable)
 {
     typename std::list<IPoREFilter*>::const_iterator filter = filters.begin();
-    for ( ; filter != filters.end(); ++filter) {
-        if ((*filter)->getDestInfo()->getDestType() == DestinationType_AVB) {
+    for (; filter != filters.end(); ++filter)
+    {
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_AVB)
+        {
             registerTalker((*filter), srpTable);
         }
     }
@@ -387,13 +411,8 @@ void IPv4oAVB<base>::registerTalker(const IPoREFilter* filter, SRPTable *srpTabl
     {
         EV << "Register Talker in node" << std::endl;
         AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
-        srpTable->updateTalkerWithStreamId(
-                avbDestInfo->getStreamId(),
-                this,
-                *(avbDestInfo->getDestMac()),
-                avbDestInfo->getSrClass(),
-                avbDestInfo->getFrameSize(),
-                avbDestInfo->getIntervallFrames(),
+        srpTable->updateTalkerWithStreamId(avbDestInfo->getStreamId(), this, *(avbDestInfo->getDestMac()),
+                avbDestInfo->getSrClass(), avbDestInfo->getFrameSize(), avbDestInfo->getIntervallFrames(),
                 avbDestInfo->getVlanId());
     }
     else
@@ -408,11 +427,14 @@ template<class base>
 void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
-        base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
+        base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)",
+                packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
-    for ( ; filter != filters.end(); ++filter) {
-        if ((*filter)->getDestInfo()->getDestType() == DestinationType_AVB) {
+    for (; filter != filters.end(); ++filter)
+    {
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_AVB)
+        {
             sendAVBFrame(packet->dup(), ie, (*filter));
             break;
         }
@@ -424,13 +446,14 @@ void IPv4oAVB<base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceE
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, const inet::InterfaceEntry* ie, const IPoREFilter* filter)
+void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))     const InterfaceEntry* ie,
+        const IPoREFilter* filter)
 {
-	AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
+    AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
     std::stringstream name;
     name << "Stream " << avbDestInfo->getStreamId();
     AVBFrame *outFrame = new AVBFrame(name.str().c_str());
-    outFrame->setStreamID(avbDestInfo->getStreamId());
+    outFrame->setStreamID(static_cast<unsigned long>(avbDestInfo->getStreamId()));
     outFrame->setVID(avbDestInfo->getVlanId());
     outFrame->setDest(*(avbDestInfo->getDestMac()));
     outFrame->setEtherType(inet::ETHERTYPE_IPv4);

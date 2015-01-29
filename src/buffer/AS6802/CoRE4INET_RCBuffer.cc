@@ -93,10 +93,10 @@ void RCBuffer::handleMessage(cMessage *msg)
                 bagExpired = false;
                 numReset = 0;
                 //Send Message
-                for (std::list<cGate*>::const_iterator gate = destinationGates.begin(); gate != destinationGates.end();
-                        ++gate)
+                for (std::list<cGate*>::const_iterator gate_it = destinationGates.begin(); gate_it != destinationGates.end();
+                        ++gate_it)
                 {
-                    sendDirect(outgoingMessage->dup(), *gate);
+                    sendDirect(outgoingMessage->dup(), *gate_it);
                 }
                 recordPacketSent(outgoingMessage);
                 lastSent = getTimer()->getTotalTicks();
@@ -123,11 +123,11 @@ void RCBuffer::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "bag"))
     {
-        this->bag = (uint64_t) parameterULongCheckRange(par("bag"), 0, MAX_BAG);
+        this->bag = static_cast<uint64_t>(parameterULongCheckRange(par("bag"), 0, MAX_BAG));
     }
     if (!parname || !strcmp(parname, "jitter"))
     {
-        this->jitter = (uint64_t) parameterULongCheckRange(par("jitter"), 0, MAX_JITTER);
+        this->jitter = static_cast<uint64_t>(parameterULongCheckRange(par("jitter"), 0, MAX_JITTER));
     }
 }
 
@@ -171,7 +171,8 @@ void RCBuffer::resetBag()
 
 long RCBuffer::getRequiredBandwidth()
 {
-    return (long) ceil((getMaxMessageSize() * 8) * (1 / (this->bag * getOscillator()->getPreciseTick())));
+    return static_cast<long>(ceil(
+            static_cast<double>(getMaxMessageSize() * 8) * (1 / (static_cast<double>(this->bag) * getOscillator()->getPreciseTick()))));
 }
 
 } //namespace

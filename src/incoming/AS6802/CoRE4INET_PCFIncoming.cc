@@ -38,9 +38,9 @@ void PCFIncoming::handleMessage(cMessage *msg)
         {
             recordPacketReceived(frame);
 
-            if (frame->getType() != (uint8_t) pcfType)
+            if (frame->getType() != static_cast<uint8_t>(pcfType))
             {
-                EV_ERROR << "FRAME DROPPED, wrong type:" << (int) frame->getType() << " should be " << pcfType << endl;
+                EV_ERROR << "FRAME DROPPED, wrong type:" << static_cast<int>(frame->getType()) << " should be " << pcfType << endl;
                 emit(droppedSignal, frame);
                 delete frame;
             }
@@ -56,13 +56,13 @@ void PCFIncoming::handleMessage(cMessage *msg)
     }
 }
 
-void PCFIncoming::handleParameterChange(__attribute((unused)) const char* parname)
+void PCFIncoming::handleParameterChange(const char* parname)
 {
     CTIncoming::handleParameterChange(parname);
 
     if (!parname || !strcmp(parname, "pcfType"))
     {
-        pcfType = (PCFType) parameterULongCheckRange(par("pcfType"), 1, 3);
+        pcfType = static_cast<PCFType>(parameterULongCheckRange(par("pcfType"), 1, 3));
     }
 }
 

@@ -26,15 +26,15 @@ using namespace CoRE4INET;
 Timed::Timed()
 {
     this->parametersInitialized = false;
-    this->oscillator = NULL;
-    this->timer = NULL;
+    this->oscillator = nullptr;
+    this->timer = nullptr;
 }
 
 Oscillator* Timed::getOscillator()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return oscillator;
 }
@@ -43,7 +43,7 @@ Timer* Timed::getTimer()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return timer;
 }

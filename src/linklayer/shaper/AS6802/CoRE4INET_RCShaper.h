@@ -47,7 +47,7 @@ class RCShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        ~RCShaper();
+        virtual ~RCShaper();
 
     private:
         /**
@@ -70,14 +70,14 @@ class RCShaper : public TC, public virtual Timed
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return returns 1 or more depending on inheritance
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -90,7 +90,7 @@ class RCShaper : public TC, public virtual Timed
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Queues messages in the correct queue
@@ -100,7 +100,7 @@ class RCShaper : public TC, public virtual Timed
          *
          * @param msg the incoming message
          */
-        virtual void enqueueMessage(cMessage *msg);
+        virtual void enqueueMessage(cMessage *msg) override;
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -110,38 +110,38 @@ class RCShaper : public TC, public virtual Timed
          * received.
          *
          */
-        virtual void requestPacket();
+        virtual void requestPacket() override;
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty();
+        virtual bool isEmpty() override;
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear();
+        virtual void clear() override;
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop() override;
 
         /**
          * @brief Returns a pointer to a frame directly from the queues.
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
-        virtual cMessage *front();
+        virtual cMessage *front() override;
 };
 
 template<class TC>
@@ -162,7 +162,7 @@ void RCShaper<TC>::initialize(int stage)
     {
         Timed::initialize();
 
-        numRcPriority = (size_t)par("numRCpriority").longValue();
+        numRcPriority = static_cast<size_t>(par("numRCpriority").longValue());
         for (unsigned int i = 0; i < numRcPriority; i++)
         {
             char strBuf[32];
@@ -179,7 +179,7 @@ void RCShaper<TC>::initialize(int stage)
 
             rcQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
-            cComponent::emit(signal, (unsigned long) queue.length());
+            cComponent::emit(signal, static_cast<unsigned long>(queue.length()));
         }
     }
 }
@@ -241,11 +241,12 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
 {
     if (msg->arrivedOn("RCin"))
     {
-        int priority = msg->getSenderModule()->par("priority").longValue();
-        if (priority > 0 && (unsigned int) priority < numRcPriority)
+        long priority = msg->getSenderModule()->par("priority").longValue();
+        if (priority > 0 && static_cast<size_t>(priority) < numRcPriority)
         {
-            rcQueue[(size_t)priority].insert(msg);
-            cComponent::emit(rcQueueLengthSignals[priority], (unsigned long) rcQueue[(size_t)priority].length());
+            rcQueue[static_cast<size_t>(priority)].insert(msg);
+            cComponent::emit(rcQueueLengthSignals[static_cast<size_t>(priority)],
+                    static_cast<unsigned long>(rcQueue[static_cast<size_t>(priority)].length()));
             TC::notifyListeners();
         }
         else
@@ -286,8 +287,8 @@ cMessage* RCShaper<TC>::pop()
     {
         if (!rcQueue[i].isEmpty())
         {
-            inet::EtherFrame *message = (inet::EtherFrame*) rcQueue[i].pop();
-            cComponent::emit(rcQueueLengthSignals[i], (unsigned long) rcQueue[i].length());
+            EtherFrame *message = static_cast<EtherFrame*>(rcQueue[i].pop());
+            cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].length()));
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
             if (rcBuffer)
@@ -314,7 +315,7 @@ cMessage* RCShaper<TC>::front()
     {
         if (!rcQueue[i].isEmpty())
         {
-            inet::EtherFrame *message = (inet::EtherFrame*) rcQueue[i].front();
+            EtherFrame *message = static_cast<EtherFrame*>(rcQueue[i].front());
             return message;
         }
     }

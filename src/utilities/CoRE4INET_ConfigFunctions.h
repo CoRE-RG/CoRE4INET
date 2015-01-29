@@ -34,7 +34,7 @@ T recursiveFindByType(cModule *root);
 template<typename T>
 T recursiveFindByType(cModule *root)
 {
-    T module = NULL;
+    T module = nullptr;
     module = dynamic_cast<T>(root);
     if (!module)
     {
@@ -57,25 +57,25 @@ T recursiveFindByType(cModule *root)
  * Find a module with given name, and "closest" to module "from". if name is "this" caller is returned
  * If name is "auto" first module of type t is returned
  *
- * Operation: gradually rises in the module hierarchy up to the @node
+ * Operation: gradually rises in the module hierarchy up to the \@node
  * module, and searches recursively among all submodules at every level.
  *
- * @param name Module name to find. Also allowed: "this" if caller is not NULL and "auto"
+ * @param name Module name to find. Also allowed: "this" if caller is not nullptr and "auto"
  * @param from Module to start search
- * @param caller If name is "this" and caller is not NULL; caller is returned
- * @return cModule* containing the found module or NULL.
+ * @param caller If name is "this" and caller is not nullptr; caller is returned
+ * @return cModule* containing the found module or nullptr.
  *
- * @throws cRuntimeError When name is this and caller is NULL or when name is "auto" and type is NULL
+ * @throws cRuntimeError When name is this and caller is nullptr or when name is "auto" and type is nullptr
  *
  * @author Till Steinbach
  */
 template<typename T>
-T extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *caller = NULL);
+T extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *caller = nullptr);
 
 template<typename T>
 T extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *caller)
 {
-    T module = NULL;
+    T module = nullptr;
     if (strcmp(name, "this") == 0)
     {
         if (!caller)
@@ -94,7 +94,7 @@ T extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *cal
     }
     else
     {
-        if (findContainingNode(from) == NULL)
+        if (findContainingNode(from) == nullptr)
         {
             throw cRuntimeError("Module is not inside a Node (Node must be marked by @node property in ned module)");
         }

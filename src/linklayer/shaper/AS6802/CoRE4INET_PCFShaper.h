@@ -46,7 +46,7 @@ class PCFShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        ~PCFShaper();
+        virtual ~PCFShaper();
 
     private:
         /**
@@ -64,14 +64,14 @@ class PCFShaper : public TC, public virtual Timed
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return returns 1 or more depending on inheritance
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -84,7 +84,7 @@ class PCFShaper : public TC, public virtual Timed
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Queues messages in the correct queue
@@ -94,7 +94,7 @@ class PCFShaper : public TC, public virtual Timed
          *
          * @param msg the incoming message
          */
-        virtual void enqueueMessage(cMessage *msg);
+        virtual void enqueueMessage(cMessage *msg) override;
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -104,42 +104,42 @@ class PCFShaper : public TC, public virtual Timed
          * received.
          *
          */
-        virtual void requestPacket();
+        virtual void requestPacket() override;
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty();
+        virtual bool isEmpty() override;
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear();
+        virtual void clear() override;
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop() override;
 
         /**
          * @brief Returns a pointer to a frame directly from the queues.
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
-        virtual cMessage *front();
+        virtual cMessage *front() override;
 };
 
 template<class TC>
-simsignal_t PCFShaper<TC>::pcfQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t PCFShaper<TC>::pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
 
 template<class TC>
 PCFShaper<TC>::PCFShaper()
@@ -159,9 +159,8 @@ void PCFShaper<TC>::initialize(int stage)
     if (stage == 0)
     {
         Timed::initialize();
-        pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
         //Send initial signal to create statistic
-        cComponent::emit(pcfQueueLengthSignal, (unsigned long) pcfQueue.length());
+        cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.length()));
     }
 }
 
@@ -248,8 +247,8 @@ cMessage* PCFShaper<TC>::pop()
     //RCFrames
     if (!pcfQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) pcfQueue.pop();
-        cComponent::emit(pcfQueueLengthSignal, pcfQueue.length());
+        cMessage *msg = static_cast<cMessage*>(pcfQueue.pop());
+        cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.length()));
 
         PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
         if (pcf)
@@ -269,7 +268,7 @@ cMessage* PCFShaper<TC>::front()
     //RCFrames
     if (!pcfQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) pcfQueue.front();
+        cMessage *msg = static_cast<cMessage*>(pcfQueue.front());
         return msg;
     }
     return TC::front();

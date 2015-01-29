@@ -32,16 +32,16 @@ public:
         return destInfo;
     }
 
-    void setDestInfo(DestinationInfo* destInfo) {
-        this->destInfo = destInfo;
+    void setDestInfo(DestinationInfo* new_destInfo) {
+        this->destInfo = new_destInfo;
     }
 
     TrafficPattern* getTrafficPattern() const {
         return trafficPattern;
     }
 
-    void setTrafficPattern(TrafficPattern* trafficPattern) {
-        this->trafficPattern = trafficPattern;
+    void setTrafficPattern(TrafficPattern* new_trafficPattern) {
+        this->trafficPattern = new_trafficPattern;
     }
 
 private:

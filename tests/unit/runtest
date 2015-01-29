@@ -21,7 +21,7 @@ EXTRA_INCLUDES="$EXTRA_INCLUDES -I../../../../inet/src/inet/common "
 EXTRA_INCLUDES="$EXTRA_INCLUDES -I../../../../inet/src/ "
 opp_test gen $OPT -v $TESTFILES || exit 1
 echo
-(cd work; opp_makemake -f --deep -lCoRE4INET -linet -L../../../../inet/src -L../../../src -P . $EXTRA_INCLUDES; $MAKE -e cleanall; $MAKE -e) || exit 1
+(cd work; opp_makemake -f --deep -lCoRE4INET -linet -L../../../../inet/src -L../../../src -P . $EXTRA_INCLUDES -i ../makefrag; $MAKE -e cleanall; $MAKE -e) || exit 1
 echo
 export NEDPATH=$NEDPATH:.:../../../../src:../../../../../inet/src
 opp_test run $OPT -v $TESTFILES

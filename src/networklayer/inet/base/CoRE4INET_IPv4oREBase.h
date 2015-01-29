@@ -40,7 +40,7 @@ class IPv4oREBase : public inet::IPv4 {
         virtual void addFilter(IPoREFilter *filter);
 
         /**
-         * Returns true, if the string is empty (NULL or "");
+         * Returns true, if the string is empty (nullptr or "");
          */
         inline bool isEmpty(const char *str) { return !str || !(*str); }
 

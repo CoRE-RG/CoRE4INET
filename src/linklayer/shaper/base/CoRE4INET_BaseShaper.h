@@ -30,7 +30,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
+class BaseShaper : public virtual cSimpleModule, public virtual IPassiveQueue
 {
     public:
         /**
@@ -39,18 +39,18 @@ class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
         BaseShaper()
         {
             this->framesRequested = 0;
-            this->outChannel = NULL;
+            this->outChannel = nullptr;
         }
 
         /**
          * Implementation of IPassiveQueue::addListener().
          */
-        virtual void addListener(inet::IPassiveQueueListener *listener);
+        virtual void addListener(IPassiveQueueListener *listener) override;
 
         /**
          * Implementation of IPassiveQueue::removeListener().
          */
-        virtual void removeListener(inet::IPassiveQueueListener *listener);
+        virtual void removeListener(IPassiveQueueListener *listener) override;
     private:
         /**
          * @brief List of TTBuffers.
@@ -63,7 +63,7 @@ class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
         /**
          * @brief Number of frames that were requested from lower layer
          */
-        unsigned int framesRequested;
+        size_t framesRequested;
         /**
          * @brief Outgoing Channel used to calculate transmission duration.
          */
@@ -79,14 +79,14 @@ class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return Always returns 1
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Deletes the incoming message
@@ -96,7 +96,7 @@ class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Deletes the incoming message
@@ -124,7 +124,7 @@ class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
          */
         virtual int getNumPendingRequests()
         {
-            return (int) framesRequested;
+            return static_cast<int>(framesRequested);
         }
 
         /**
@@ -146,14 +146,14 @@ class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
         virtual cMessage *pop()
         {
-            return NULL;
+            return nullptr;
         }
 
         /**
@@ -161,12 +161,12 @@ class BaseShaper : public virtual cSimpleModule, public inet::IPassiveQueue
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
         virtual cMessage *front()
         {
-            return NULL;
+            return nullptr;
         }
 
         /**

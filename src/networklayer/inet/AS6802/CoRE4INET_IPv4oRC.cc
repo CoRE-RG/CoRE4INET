@@ -89,7 +89,7 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
 {
     inet::L3AddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
-    for (int i = 0; i < (int)filterElements.size(); i++)
+    for (size_t i = 0; i < filterElements.size(); i++)
     {
         cXMLElement *filterElement = filterElements[i];
         try
@@ -147,7 +147,7 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                     }
                 }
                 rcDestInfo->setDestModules(destCtBuffers);
-                rcDestInfo->setCtId(Base::parseIntAttribute(ctId, "ctId", false));
+                rcDestInfo->setCtId(static_cast<uint16_t>(Base::parseIntAttribute(ctId, "ctId", false)));
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -240,7 +240,7 @@ template<class Base>
 void IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
-        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", (int)packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
+        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
@@ -256,7 +256,7 @@ void IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEn
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::sendRCFrame(cPacket* packet, const inet::InterfaceEntry* ie, const IPoREFilter* filter)
+void IPv4oRC<Base>::sendRCFrame(cPacket* packet, __attribute__((unused)) const InterfaceEntry* ie, const IPoREFilter* filter)
 {
     RCDestinationInfo *destInfo = dynamic_cast<RCDestinationInfo*>(filter->getDestInfo());
     if (!destInfo)

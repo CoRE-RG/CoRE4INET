@@ -23,7 +23,7 @@ SubtractActualFromLastRecorder::SubtractActualFromLastRecorder()
     this->max = 0;
     this->lastValue = 0;
     this->thisValue = 0;
-    this->handle = NULL;
+    this->handle = nullptr;
 }
 
 void SubtractActualFromLastRecorder::initialize(){
@@ -36,7 +36,7 @@ void SubtractActualFromLastRecorder::subscribedTo(cResultFilter *prev)
     cNumericResultRecorder::subscribedTo(prev);
     opp_string_map attributes = getStatisticAttributes();
     handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
-    ASSERT(handle != NULL);
+    ASSERT(handle != nullptr);
 }
 
 void SubtractActualFromLastRecorder::collect(simtime_t_cref t, double value)

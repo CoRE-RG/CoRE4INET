@@ -35,7 +35,7 @@ namespace CoRE4INET {
  *
  * @author Lazar Todorov, Till Steinbach
  */
-class PCFIncoming : public CTIncoming
+class PCFIncoming : public virtual CTIncoming
 {
     private:
         /**
@@ -50,19 +50,19 @@ class PCFIncoming : public CTIncoming
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 
         /**
          * @brief Initialization of the module
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
     public:
         /**

@@ -41,11 +41,12 @@ class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtu
          *
          */
         CTTrafficSourceAppBase();
+
+    protected:
         /**
          * @brief Initialization of the module.
          */
-        virtual void initialize();
-    protected:
+        virtual void initialize() override;
 
         /**
          * @brief Generates and sends a new Message.
@@ -56,7 +57,7 @@ class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtu
          */
         virtual void sendMessage();
 
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

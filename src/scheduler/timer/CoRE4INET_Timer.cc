@@ -32,7 +32,7 @@ Timer::Timer()
 {
     ticks = 0;
     selfMessage = new cMessage("Scheduler Message");
-    oscillator = NULL;
+    oscillator = nullptr;
 }
 
 void Timer::initialize()
@@ -139,10 +139,10 @@ void Timer::recalculate()
             throw std::runtime_error("Timer was not yet initialized");
         }
         simtime_t current_tick = oscillator->getCurrentTick();
-        uint64_t elapsed_ticks = (uint64_t) floor((simTime() - lastRecalculation) / current_tick);
+        uint64_t elapsed_ticks = static_cast<uint64_t>(floor((simTime() - lastRecalculation) / current_tick));
         ticks += elapsed_ticks;
         //this is required to avoid rounding errors
-        lastRecalculation += elapsed_ticks * current_tick;
+        lastRecalculation += static_cast<double>(elapsed_ticks) * current_tick;
         recalculationTime = simTime();
     }
 }
@@ -159,20 +159,22 @@ void Timer::reschedule()
     {
         uint64_t next_action_ticks = nextAction();
         uint64_t total_ticks = getTotalTicks();
-        if(total_ticks > next_action_ticks){
+        if (total_ticks > next_action_ticks)
+        {
             throw cRuntimeError("There must have been an overflow in the timer module");
         }
-        simtime_t next_action = (next_action_ticks - total_ticks) * oscillator->getCurrentTick();
+        simtime_t next_action = static_cast<double>(next_action_ticks - total_ticks) * oscillator->getCurrentTick();
         scheduleAt(simTime() + next_action, selfMessage);
     }
-    catch (const std::range_error& re)
+    catch (__attribute__((unused))   const std::range_error& re)
     {
         //No message should be scheduled as there are no messages registered
     }
     catch (const cRuntimeError& re)
     {
         throw cRuntimeError("%s: nextAction() %d getTotalTicks() %llu oscillator->getCurrentTick() %s",
-                re.getFormattedMessage().c_str(), nextAction(), getTotalTicks(),oscillator->getCurrentTick().str().c_str());
+                re.getFormattedMessage().c_str(), nextAction(), getTotalTicks(),
+                oscillator->getCurrentTick().str().c_str());
         //No message should be scheduled as there are no messages registered
     }
 }
@@ -231,7 +233,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
                 reschedule();
             }
         }
-        catch (__attribute((unused))           const std::range_error& re)
+        catch (__attribute((unused))             const std::range_error& re)
         {
             registredTimerEvents[actionpoint].push_back(event);
             reschedule();
@@ -264,15 +266,16 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
         bubble("Schedule contains out of cycle events!");
         return false;
     }
-    int32_t distance = (int32_t) ((int64_t) actionTimeEvent->getAction_time() - (int64_t) period->getTicks());
+    int32_t distance = static_cast<int32_t>(static_cast<int64_t>(actionTimeEvent->getAction_time())
+            - static_cast<int64_t>(period->getTicks()));
     if (distance < 0 || (distance == 0 && actionTimeEvent->getNext_cycle()))
     {
-        actionpoint = (uint64_t) ((int64_t) getTotalTicks()
-                + ((int64_t) period->getCycleTicks() + distance));
+        actionpoint = static_cast<uint64_t>(static_cast<int64_t>(getTotalTicks())
+                + (static_cast<int64_t>(period->getCycleTicks()) + distance));
     }
     else
     {
-        actionpoint = (uint64_t) ((int64_t) getTotalTicks() + distance);
+        actionpoint = static_cast<uint64_t>(static_cast<int64_t>(getTotalTicks()) + distance);
     }
 
     //We do not have to schedule anything if the point is now!
@@ -293,7 +296,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
                 reschedule();
             }
         }
-        catch (__attribute((unused))           const std::range_error& re)
+        catch (__attribute((unused))             const std::range_error& re)
         {
             registredActionTimeEvents[actionpoint].push_back(
                     std::pair<SchedulerActionTimeEvent*, Period*>(actionTimeEvent, period));
@@ -319,12 +322,12 @@ Oscillator* Timer::getOscillator() const
     return oscillator;
 }
 
-void Timer::clockCorrection(int32_t ticks)
+void Timer::clockCorrection(int32_t correction_ticks)
 {
     Enter_Method
-    ("clock correction %d ticks", ticks);
-    emit(clockCorrectionSignal, ticks);
-    this->ticks = (uint64_t) ((int64_t) this->ticks + ticks);
+    ("clock correction %d ticks", correction_ticks);
+    emit(clockCorrectionSignal, correction_ticks);
+    this->ticks = static_cast<uint64_t>(static_cast<int64_t>(this->ticks) + correction_ticks);
     //Now correct the timer events that must be independent of clockCorrection
     std::map<uint64_t, std::list<SchedulerTimerEvent*> > correctedTimerEvents;
     std::map<uint64_t, std::list<SchedulerTimerEvent*> >::iterator it = correctedTimerEvents.begin();
@@ -333,15 +336,15 @@ void Timer::clockCorrection(int32_t ticks)
     {
         if (correctedTimerEvents.empty())
         {
-            correctedTimerEvents[(uint64_t) ((int64_t) (*it2).first + ticks)] = (*it2).second;
+            correctedTimerEvents[static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)] = (*it2).second;
             it = correctedTimerEvents.begin();
         }
         else
         {
             //Better version with hint?
             it = correctedTimerEvents.insert(it,
-                    std::pair<uint64_t, std::list<SchedulerTimerEvent*> >(((uint64_t) ((int64_t) (*it2).first + ticks)),
-                            (*it2).second));
+                    std::pair<uint64_t, std::list<SchedulerTimerEvent*> >(
+                            (static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)), (*it2).second));
         }
     }
     registredTimerEvents = correctedTimerEvents;
@@ -357,10 +360,10 @@ void Timer::clockCorrection(int32_t ticks)
         {
             if ((*it2).first < this->ticks)
             {
-                uint64_t corrected_tick = (uint64_t) (*it2).first;
+                uint64_t corrected_tick = (*it2).first;
                 while (corrected_tick < this->ticks)
                 {
-                    corrected_tick += (uint64_t) (*it4).second->getCycleTicks();
+                    corrected_tick += (*it4).second->getCycleTicks();
                 }
                 correctedActionTimeEvents[corrected_tick].push_back(*it4);
             }

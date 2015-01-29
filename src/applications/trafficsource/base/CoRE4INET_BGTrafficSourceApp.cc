@@ -50,10 +50,10 @@ void BGTrafficSourceApp::sendMessage()
 
         frame->setDest(this->destAddress);
 
-        cPacket *payload = new cPacket;
-        payload->setByteLength(getPayloadBytes());
+        cPacket *payload_packet = new cPacket();
+        payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
         frame->setByteLength(ETHER_MAC_FRAME_BYTES);
-        frame->encapsulate(payload);
+        frame->encapsulate(payload_packet);
         //Padding
         if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
         {

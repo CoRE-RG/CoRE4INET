@@ -39,11 +39,11 @@ void TTTrafficSourceApp::initialize()
 {
     CTTrafficSourceAppBase::initialize();
 
-    handleParameterChange(NULL);
+    handleParameterChange(nullptr);
     if (isEnabled())
     {
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-        event->setAction_time((uint32_t) (par("action_time").doubleValue() / getOscillator()->getPreciseTick()));
+        event->setAction_time(static_cast<uint32_t>(par("action_time").doubleValue() / getOscillator()->getPreciseTick()));
         event->setDestinationGate(gate("schedulerIn"));
 
         if (event->getAction_time() >= getPeriod()->getCycleTicks())
@@ -106,7 +106,7 @@ void TTTrafficSourceApp::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "modulo"))
     {
-        this->modulo = (unsigned int) parameterULongCheckRange(par("modulo"), 0, ULONG_MAX);
+        this->modulo = static_cast<unsigned int>(parameterULongCheckRange(par("modulo"), 0, ULONG_MAX));
     }
 }
 

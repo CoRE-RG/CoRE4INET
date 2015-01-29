@@ -30,10 +30,10 @@ class SchedulerEvent : public SchedulerEvent_Base
     private:
         cGate *destinationGate_var;
     public:
-        SchedulerEvent(const char *name = NULL, int kind = 0) :
+        SchedulerEvent(const char *name = nullptr, int kind = 0) :
                 SchedulerEvent_Base(name, kind)
         {
-            destinationGate_var = NULL;
+            destinationGate_var = nullptr;
         }
         SchedulerEvent(const SchedulerEvent& other) :
                 SchedulerEvent_Base(other.getName())
@@ -51,7 +51,7 @@ class SchedulerEvent : public SchedulerEvent_Base
         }
         // ADD CODE HERE to redefine and implement pure virtual functions from SchedulerEvent_Base
         virtual cGate* getDestinationGate() const;
-        virtual void setDestinationGate(cGate *destinationGate);
+        virtual void setDestinationGate(cGate *new_destinationGate_var);
 };
 }
 

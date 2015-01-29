@@ -33,8 +33,8 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
         ticklength = argv[1].doubleValueInUnit("s");
     }
 
-    long ticks = (long) round(seconds / ticklength);
-    argv[0].set(ticks, "tick");
+    long ticks = static_cast<long>(round(seconds / ticklength));
+    argv[0].set(static_cast<double>(ticks), "tick");
     return argv[0];
 }
 Define_NED_Function2(ned_sec_to_tick, "quantity sec_to_tick(quantity seconds, quantity ticklength?)", "units",
@@ -58,7 +58,7 @@ static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc
         ticklength = argv[1].doubleValueInUnit("s");
     }
 
-    double seconds = ticks * ticklength;
+    double seconds = static_cast<double>(ticks) * ticklength;
     argv[0].set(seconds, "s");
     return argv[0];
 }

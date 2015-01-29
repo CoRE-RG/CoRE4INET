@@ -86,19 +86,21 @@ void SRProtocol::handleMessage(cMessage *msg)
 
                 unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
                 //Add Higher Priority Bandwidth
-                utilizedBandwidth +=
-                        (unsigned long) port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth").longValue();
+                utilizedBandwidth += static_cast<unsigned long>(port->getSubmodule("shaper")->par(
+                        "AVBHigherPriorityBandwidth").longValue());
                 unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(),
                         listenerReady->getVlan_identifier());
 
                 cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
                 cChannel *outChannel = physOutGate->findTransmissionChannel();
 
-                unsigned long totalBandwidth = (unsigned long) outChannel->getNominalDatarate();
+                unsigned long totalBandwidth = static_cast<unsigned long>(outChannel->getNominalDatarate());
 
                 double reservableBandwidth = par("reservableBandwidth").doubleValue();
 
-                if (update || ((utilizedBandwidth + requiredBandwidth) <= (totalBandwidth * reservableBandwidth)))
+                if (update
+                        || ((utilizedBandwidth + requiredBandwidth)
+                                <= (static_cast<double>(totalBandwidth) * reservableBandwidth)))
                 {
                     srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port,
                             listenerReady->getVlan_identifier());
@@ -106,17 +108,21 @@ void SRProtocol::handleMessage(cMessage *msg)
                     {
                         EV_DETAIL << "Listener for stream " << listenerReady->getStreamID() << " registered on port "
                                 << port->getFullName() << ". Utilized Bandwidth: "
-                                << (utilizedBandwidth + requiredBandwidth) / (double) 1000000 << " of "
-                                << (totalBandwidth * reservableBandwidth) / (double) 1000000
-                                << " reservable Bandwidth of " << totalBandwidth / (double) 1000000 << " MBit/s.";
+                                << static_cast<double>(utilizedBandwidth + requiredBandwidth)
+                                        / static_cast<double>(1000000) << " of "
+                                << (static_cast<double>(totalBandwidth) * reservableBandwidth)
+                                        / static_cast<double>(1000000) << " reservable Bandwidth of "
+                                << static_cast<double>(totalBandwidth) / static_cast<double>(1000000) << " MBit/s.";
                     }
                 }
                 else
                 {
                     EV_DETAIL << "Listener for stream " << listenerReady->getStreamID()
                             << " could not be registered on port " << port->getFullName() << ". Required bandwidth: "
-                            << requiredBandwidth / (double) 1000000 << "MBit/s, remaining bandwidth "
-                            << ((totalBandwidth * reservableBandwidth) - utilizedBandwidth) / (double) 1000000
+                            << static_cast<double>(requiredBandwidth) / static_cast<double>(1000000)
+                            << "MBit/s, remaining bandwidth "
+                            << ((static_cast<double>(totalBandwidth) * reservableBandwidth)
+                                    - static_cast<double>(utilizedBandwidth)) / static_cast<double>(1000000)
                             << "MBit/s.";
                     SRPFrame *srp;
                     if (srpTable->getListenersForStreamId(listenerReady->getStreamID(),
@@ -132,15 +138,15 @@ void SRProtocol::handleMessage(cMessage *msg)
                     }
                     srp->setStreamID(listenerReady->getStreamID());
 
-                    ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-                    etherctrl->setEtherType(MSRP_ETHERTYPE);
-                    etherctrl->setDest(SRP_ADDRESS);
+                    ExtendedIeee802Ctrl *new_etherctrl = new ExtendedIeee802Ctrl();
+                    new_etherctrl->setEtherType(MSRP_ETHERTYPE);
+                    new_etherctrl->setDest(SRP_ADDRESS);
                     cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(),
                             listenerReady->getVlan_identifier());
                     if (talker && talker->isName("phy"))
                     {
-                        etherctrl->setSwitchPort(talker->getIndex());
-                        srp->setControlInfo(etherctrl);
+                        new_etherctrl->setSwitchPort(talker->getIndex());
+                        srp->setControlInfo(new_etherctrl);
                         send(srp, gate("out"));
                     }
                 }
@@ -148,17 +154,17 @@ void SRProtocol::handleMessage(cMessage *msg)
             else if (ListenerAskingFailed* listenerFailed = dynamic_cast<ListenerAskingFailed*>(msg))
             {
                 bubble("Listener Failed!");
-                ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-                etherctrl->setEtherType(MSRP_ETHERTYPE);
-                etherctrl->setDest(SRP_ADDRESS);
+                ExtendedIeee802Ctrl *new_etherctrl = new ExtendedIeee802Ctrl();
+                new_etherctrl->setEtherType(MSRP_ETHERTYPE);
+                new_etherctrl->setDest(SRP_ADDRESS);
                 cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(),
                         listenerFailed->getVlan_identifier());
                 if (talker && talker->isName("phy"))
                 {
-                    etherctrl->setSwitchPort(talker->getIndex());
+                    new_etherctrl->setSwitchPort(talker->getIndex());
                     //Necessary because controlInfo is not duplicated
                     ListenerAskingFailed* listenerFailedCopy = listenerFailed->dup();
-                    listenerFailedCopy->setControlInfo(etherctrl);
+                    listenerFailedCopy->setControlInfo(new_etherctrl);
                     send(listenerFailedCopy, gate("out"));
                 }
             }
@@ -174,60 +180,71 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
     ();
     if (id == NF_AVB_TALKER_REGISTERED)
     {
-        SRPTable::TalkerEntry *tentry = (SRPTable::TalkerEntry*) obj;
-
-        TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", inet::IEEE802CTRL_DATA);
-        //talkerAdvertise->setStreamDA(tentry->address);
-        talkerAdvertise->setStreamID(tentry->streamId);
-        talkerAdvertise->setMaxFrameSize((uint16_t) tentry->framesize);
-        talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
-        talkerAdvertise->setDestination_address(tentry->address);
-        talkerAdvertise->setVlan_identifier(tentry->vlan_id);
-        if (tentry->srClass == SR_CLASS_A)
-            talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
-        if (tentry->srClass == SR_CLASS_B)
-            talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
-
-        ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
-        etherctrl->setEtherType(MSRP_ETHERTYPE);
-        etherctrl->setDest(SRP_ADDRESS);
-        etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
-        talkerAdvertise->setControlInfo(etherctrl);
-
-        //If talker was received from phy we have to exclude the incoming port
-        if (strcmp(tentry->module->getName(), "phy") == 0)
+        if (SRPTable::TalkerEntry *tentry = dynamic_cast<SRPTable::TalkerEntry*>(obj))
         {
-            etherctrl->setNotSwitchPort(tentry->module->getIndex());
-        }
-
-        send(talkerAdvertise, gate("out"));
-    }
-    else if (id == NF_AVB_LISTENER_REGISTERED || id == NF_AVB_LISTENER_UPDATED)
-    {
-        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
-
-        //Get Talker Port
-        SRPTable *srpTable = dynamic_cast<SRPTable *>(src);
-        if (!srpTable)
-        {
-            throw cRuntimeError(
-                    "listenerRegistered or listenerUpdated signal received, from module that is not a SRPTable");
-        }
-        cModule* talker = srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
-        //Send listener ready only when talker is not a local application
-        if (talker && talker->isName("phy"))
-        {
-            ListenerReady *listenerReady = new ListenerReady("Listener Ready", inet::IEEE802CTRL_DATA);
-            listenerReady->setStreamID(lentry->streamId);
-            listenerReady->setVlan_identifier(lentry->vlan_id);
+            TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
+            //talkerAdvertise->setStreamDA(tentry->address);
+            talkerAdvertise->setStreamID(tentry->streamId);
+            talkerAdvertise->setMaxFrameSize(static_cast<uint16_t>(tentry->framesize));
+            talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
+            talkerAdvertise->setDestination_address(tentry->address);
+            talkerAdvertise->setVlan_identifier(tentry->vlan_id);
+            if (tentry->srClass == SR_CLASS_A)
+                talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
+            if (tentry->srClass == SR_CLASS_B)
+                talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
 
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);
             etherctrl->setDest(SRP_ADDRESS);
-            etherctrl->setSwitchPort(talker->getIndex());
-            listenerReady->setControlInfo(etherctrl);
+            etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
+            talkerAdvertise->setControlInfo(etherctrl);
 
-            send(listenerReady, gate("out"));
+            //If talker was received from phy we have to exclude the incoming port
+            if (strcmp(tentry->module->getName(), "phy") == 0)
+            {
+                etherctrl->setNotSwitchPort(tentry->module->getIndex());
+            }
+
+            send(talkerAdvertise, gate("out"));
+        }
+        else
+        {
+            throw cRuntimeError("Received signal with wrong object type");
+        }
+    }
+    else if (id == NF_AVB_LISTENER_REGISTERED || id == NF_AVB_LISTENER_UPDATED)
+    {
+        if (SRPTable::ListenerEntry *lentry = dynamic_cast<SRPTable::ListenerEntry*>(obj))
+        {
+
+            //Get Talker Port
+            SRPTable *signal_srpTable = dynamic_cast<SRPTable *>(src);
+            if (!signal_srpTable)
+            {
+                throw cRuntimeError(
+                        "listenerRegistered or listenerUpdated signal received, from module that is not a SRPTable");
+            }
+            cModule* talker = signal_srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
+            //Send listener ready only when talker is not a local application
+            if (talker && talker->isName("phy"))
+            {
+                ListenerReady *listenerReady = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
+                listenerReady->setStreamID(lentry->streamId);
+                listenerReady->setVlan_identifier(lentry->vlan_id);
+
+                ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
+                etherctrl->setEtherType(MSRP_ETHERTYPE);
+                etherctrl->setDest(SRP_ADDRESS);
+                etherctrl->setSwitchPort(talker->getIndex());
+                listenerReady->setControlInfo(etherctrl);
+
+                send(listenerReady, gate("out"));
+            }
+        }
+        else
+        {
+            throw cRuntimeError("Received signal with wrong object type");
         }
 
     }

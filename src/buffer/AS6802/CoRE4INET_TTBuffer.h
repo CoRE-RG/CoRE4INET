@@ -36,9 +36,14 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class TTBuffer : public virtual CTBuffer, public Scheduled
+class TTBuffer : public virtual CTBuffer, public virtual Scheduled
 {
     private:
+        /**
+         * Checks whether the parameters were already initialized
+         */
+        bool parametersInitialized;
+
         /**
          * @brief Event indicating the actionTime
          *
@@ -47,6 +52,16 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
 
         uint64_t nextAction;
 
+        /**
+         * @brief Caches sendWindowStart parameter
+         */
+        uint32_t sendWindowStart;
+
+        /**
+         * @brief Caches sendWindowEnd parameter
+         */
+        uint32_t sendWindowEnd;
+
     protected:
         using Scheduled::initialize;
         /**
@@ -54,7 +69,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          *
          * @param stage the stages. Module registers events when stage==1
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the numer of initializaiton stages this module needs.
@@ -62,7 +77,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          * @return returns TTEScheduler::numInitStages()+1 or Buffer::numInitStages()
          * (depending on which is higher)
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief handles the incoming and outgoing messages of the buffer.
@@ -76,14 +91,14 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          *
          * @param msg incoming inet::EtherFrame for the Buffer or SchedulerActionTimeEvent message.
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 
     public:
         /**
@@ -94,7 +109,7 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
         /**
          * @brief Destructor
          */
-        ~TTBuffer();
+        virtual ~TTBuffer();
 
         uint64_t nextSendWindowStart() const;
 
@@ -105,7 +120,21 @@ class TTBuffer : public virtual CTBuffer, public Scheduled
          *
          * @sa enqueue();
          */
-        virtual long getRequiredBandwidth();
+        virtual long getRequiredBandwidth() override;
+
+        /**
+         * @brief Returns the Start of the Send Window in Ticks
+         *
+         * @return send window start in ticks
+         */
+        uint32_t getSendWindowStart();
+
+        /**
+         * @brief Returns the End of the Send Window in Ticks
+         *
+         * @return send window end in ticks
+         */
+        uint32_t getSendWindowEnd();
 };
 }
 

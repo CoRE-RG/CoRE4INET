@@ -43,13 +43,13 @@ public:
     TTBuffer* getDestModule() { return destModule; }
     void setDestModule(TTBuffer* destModules) { this->destModule = destModules; }
     uint16_t getCtId() const { return ctId; }
-    void setCtId(uint16_t ctId) { this->ctId = ctId; }
+    void setCtId(uint16_t new_ctId) { this->ctId = new_ctId; }
     Period* getPeriod() const { return period; }
-    void setPeriod(Period* period) { this->period = period; }
+    void setPeriod(Period* new_period) { this->period = new_period; }
     double getActionTime() const { return actionTime; }
-    void setActionTime(double actionTime) { this->actionTime = actionTime; }
+    void setActionTime(double new_actionTime) { this->actionTime = new_actionTime; }
     Oscillator* getOscillator() { return oscillator; }
-    void setOscillator(Oscillator* oscillator) { this->oscillator = oscillator; }
+    void setOscillator(Oscillator* new_oscillator) { this->oscillator = new_oscillator; }
 
 private:
     TTBuffer*   destModule;  ///< Modules to which packets will be sent

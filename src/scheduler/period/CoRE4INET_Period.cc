@@ -26,20 +26,19 @@ namespace CoRE4INET {
 
 Define_Module(Period);
 
-simsignal_t Period::newCycle = SIMSIGNAL_NULL;
+simsignal_t Period::newCycle = registerSignal("newCycle");
 
 Period::Period()
 {
     cycles = 0;
-    newCycleEvent = NULL;
-    timer = NULL;
+    newCycleEvent = nullptr;
+    timer = nullptr;
     parametersInitialized = false;
 }
 
 void Period::initialize()
 {
     WATCH(cycles);
-    newCycle = registerSignal("newCycle");
 
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
@@ -88,14 +87,14 @@ uint32_t Period::getTicks()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     if (!timer)
     {
         throw std::runtime_error("Period was not yet initialized");
     }
     //cycle_ticks is added to assure a positive return value
-    return (cycle_ticks + timer->getTotalTicks() - offset_ticks) % cycle_ticks;
+    return static_cast<uint32_t>((cycle_ticks + timer->getTotalTicks() - offset_ticks) % cycle_ticks);
 }
 
 uint64_t Period::getTotalTicks()
@@ -121,7 +120,7 @@ uint32_t Period::getCycleTicks()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->cycle_ticks;
 }
@@ -139,7 +138,7 @@ uint32_t Period::getOffsetTicks()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->offset_ticks;
 }
@@ -152,12 +151,12 @@ void Period::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "cycle_ticks"))
     {
-        this->cycle_ticks = (uint32_t) parameterULongCheckRange(par("cycle_ticks"), 0, MAX_CYCLE_TICKS);
+        this->cycle_ticks = static_cast<uint32_t>(parameterULongCheckRange(par("cycle_ticks"), 0, MAX_CYCLE_TICKS));
     }
     if (!parname || !strcmp(parname, "offset_ticks"))
     {
-        this->offset_ticks = (uint32_t) parameterULongCheckRange(par("offset_ticks"), 0,
-                par("cycle_ticks").longValue());
+        this->offset_ticks = static_cast<uint32_t>(parameterULongCheckRange(par("offset_ticks"), 0,
+                static_cast<unsigned long>(par("cycle_ticks").longValue())));
     }
 
 }

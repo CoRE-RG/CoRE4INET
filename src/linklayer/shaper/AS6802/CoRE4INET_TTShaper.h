@@ -51,14 +51,7 @@ class TTShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        ~TTShaper();
-
-        /**
-         * @brief Indicates a parameter has changed.
-         *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
-         */
-        virtual void handleParameterChange(const char* parname);
+        virtual ~TTShaper();
 
     private:
         /**
@@ -92,14 +85,14 @@ class TTShaper : public TC, public virtual Timed
          *
          * @param stage The stages. Module initializes when stage==0 && stage==1
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return returns 3 or more depending on inheritance
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -114,7 +107,7 @@ class TTShaper : public TC, public virtual Timed
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Queues messages in the correct queue
@@ -124,7 +117,7 @@ class TTShaper : public TC, public virtual Timed
          *
          * @param msg the incoming message
          */
-        virtual void enqueueMessage(cMessage *msg);
+        virtual void enqueueMessage(cMessage *msg) override;
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -134,38 +127,45 @@ class TTShaper : public TC, public virtual Timed
          * received.
          *
          */
-        virtual void requestPacket();
+        virtual void requestPacket() override;
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty();
+        virtual bool isEmpty() override;
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear();
+        virtual void clear() override;
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop() override;
 
         /**
          * @brief Returns a pointer to a frame directly from the queues.
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
-        virtual cMessage *front();
+        virtual cMessage *front() override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
 
     private:
         /**
@@ -195,7 +195,7 @@ class TTShaper : public TC, public virtual Timed
 };
 
 template<class TC>
-simsignal_t TTShaper<TC>::ttQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t TTShaper<TC>::ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
 
 template<class TC>
 TTShaper<TC>::TTShaper()
@@ -218,9 +218,8 @@ void TTShaper<TC>::initialize(int stage)
     if (stage == 0)
     {
         Timed::initialize();
-        ttQueueLengthSignal = cComponent::registerSignal("ttQueueLength");
         //Send initial signal to create statistic
-        cComponent::emit(ttQueueLengthSignal, (unsigned long) ttQueue.length());
+        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.length()));
     }
     else if (stage == 2)
     {
@@ -263,7 +262,7 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
         }
         else
         {
-            thisttBuffer = NULL;
+            thisttBuffer = nullptr;
         }
         if (thisttBuffer != ttBuffer)
         {
@@ -315,7 +314,7 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
     }
     else
     {
-        if (TC::getNumPendingRequests() && isTransmissionAllowed((inet::EtherFrame*) msg))
+        if (TC::getNumPendingRequests() && isTransmissionAllowed(dynamic_cast<EtherFrame*>(msg)))
         {
             TC::handleMessage(msg);
         }
@@ -332,7 +331,7 @@ void TTShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("TTin"))
     {
         ttQueue.insert(msg);
-        cComponent::emit(ttQueueLengthSignal, ttQueue.length());
+        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.length()));
         TC::notifyListeners();
     }
     else
@@ -364,8 +363,8 @@ cMessage* TTShaper<TC>::pop()
     //TTFrames
     if (!ttQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) ttQueue.pop();
-        cComponent::emit(ttQueueLengthSignal, ttQueue.length());
+        cMessage *msg = static_cast<cMessage*>(ttQueue.pop());
+        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.length()));
 
         if (ttBuffers.size() > 0)
         {
@@ -376,13 +375,13 @@ cMessage* TTShaper<TC>::pop()
     }
     else
     {
-        inet::EtherFrame *frontMsg = (inet::EtherFrame*) front();
+        EtherFrame *frontMsg = static_cast<EtherFrame*>(front());
         if (isTransmissionAllowed(frontMsg))
         {
             return TC::pop();
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 template<class TC>
@@ -393,7 +392,7 @@ cMessage* TTShaper<TC>::front()
     //TTFrames
     if (!ttQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) ttQueue.front();
+        cMessage *msg = static_cast<cMessage*>(ttQueue.front());
         return msg;
     }
     return TC::front();
@@ -438,23 +437,20 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
                 //Check for overlapping windows only when other buffer has a sendWindowEnd set
                 if ((*buffer).second->par("sendWindowEnd").longValue())
                 {
-                    uint64_t other_offset = (uint64_t)(*buffer).second->getPeriod()->par("offset_ticks").longValue();
-                    uint64_t other_sendWindowStart = (uint64_t) (*buffer).second->par("sendWindowStart").longValue()
-                            + other_offset;
-                    uint64_t other_sendWindowEnd = (uint64_t) (*buffer).second->par("sendWindowEnd").longValue()
-                            + other_offset;
-                    uint64_t this_offset = (uint64_t)ttBuffer->getPeriod()->par("offset_ticks").longValue();
-                    uint64_t this_sendWindowStart = (uint64_t) ttBuffer->par("sendWindowStart").longValue()
-                            + this_offset;
-                    uint64_t this_sendWindowEnd = (uint64_t) ttBuffer->par("sendWindowEnd").longValue() + this_offset;
+                    uint64_t other_offset = (*buffer).second->getPeriod()->getOffsetTicks();
+                    uint64_t other_sendWindowStart = (*buffer).second->getSendWindowStart() + other_offset;
+                    uint64_t other_sendWindowEnd = (*buffer).second->getSendWindowEnd() + other_offset;
+                    uint64_t this_offset = ttBuffer->getPeriod()->getOffsetTicks();
+                    uint64_t this_sendWindowStart = ttBuffer->getSendWindowStart() + this_offset;
+                    uint64_t this_sendWindowEnd = ttBuffer->getSendWindowEnd() + this_offset;
                     //For simplification one cycle is added to the WindowEnd if it is in the next cycle
                     if (other_sendWindowEnd < other_sendWindowStart)
                     {
-                        other_sendWindowEnd += (uint64_t)(*buffer).second->getPeriod()->par("cycle_ticks").longValue();
+                        other_sendWindowEnd += (*buffer).second->getPeriod()->getCycleTicks();
                     }
                     if (this_sendWindowEnd < this_sendWindowStart)
                     {
-                        this_sendWindowEnd += (uint64_t)ttBuffer->getPeriod()->par("cycle_ticks").longValue();
+                        this_sendWindowEnd += ttBuffer->getPeriod()->getCycleTicks();
                     }
                     //Now that we have everything together do the check!
                     if (other_sendWindowStart < this_sendWindowStart && other_sendWindowEnd > this_sendWindowStart)
@@ -565,8 +561,8 @@ bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
     SimTime sendTime = TC::outChannel->calculateDuration(message);
     //Don't know if that is right, but it works!
     sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
-    unsigned long sendTicks = ceil((sendTime / getOscillator()->par("tick")).dbl());
-    unsigned long startTicks = ttBuffers.begin()->first;
+    uint64_t sendTicks = static_cast<uint64_t>(ceil((sendTime / getOscillator()->par("tick")).dbl()));
+    uint64_t startTicks = ttBuffers.begin()->first;
 
     if ((getTimer()->getTotalTicks() + sendTicks) >= startTicks)
     {

@@ -41,8 +41,15 @@ void Incoming::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
-        recordPacketReceived((EtherFrame*) msg);
-        sendDelayed(msg, this->hardware_delay, "out");
+        if(EtherFrame* ef = dynamic_cast<EtherFrame*>(msg))
+        {
+            recordPacketReceived(ef);
+            sendDelayed(msg, this->hardware_delay, "out");
+        }
+        else
+        {
+            throw cRuntimeError("Message that is no EtherFrame arrived on in");
+        }
     }
 }
 
@@ -50,7 +57,7 @@ simtime_t Incoming::getHardwareDelay()
 {
     if (!parametersInitialized)
     {
-        handleParameterChange(NULL);
+        handleParameterChange(nullptr);
     }
     return this->hardware_delay;
 }

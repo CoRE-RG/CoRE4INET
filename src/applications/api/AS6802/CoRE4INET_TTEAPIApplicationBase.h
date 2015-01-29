@@ -25,7 +25,7 @@
 #include "CoRE4INET_CTApplicationBase.h"
 #include "CoRE4INET_Scheduled.h"
 
-#define TTE_API_VER ( (int32_t) (0x02<<16 | 0x0000) )
+#define TTE_API_VER (0x02<<16 | 0x0000)
 
 namespace CoRE4INET {
 
@@ -80,7 +80,7 @@ class TTEAPIPriv
  *
  * @author Till Steinbach
  */
-class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public cListener
+class TTEAPIApplicationBase : public virtual CTApplicationBase, public virtual Scheduled, public cListener
 {
     private:
         bool synchronized;
@@ -93,7 +93,7 @@ class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public
          * Registeres a START_APPLICATION self-message that triggers the application
          * start
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief Handles incoming START_APPLICATION or Scheduler messages.
@@ -103,27 +103,27 @@ class TTEAPIApplicationBase : public CTApplicationBase, public Scheduled, public
          *
          * @param msg The incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @ Receives signal from sync module
          */
-        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj);
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj) override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          *
          * @throws cRuntimeError When buffer module and application module do not have the same parent module
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
     protected:
         /**
          * @brief Does nothing in this application. Must be overwritten with actual
          * application behavior.
          */
-        virtual void startApplication();
+        virtual void startApplication() __attribute__ ((noreturn));
 
     public:
         /**

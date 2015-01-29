@@ -17,13 +17,8 @@
 #define __CORE4INET_MULTITRAFFICSINKAPP_H_
 
 //Std
-#if __cplusplus >= 201103L
 #include <unordered_map>
-using namespace std;
-#else
-#include <tr1/unordered_map>
-using namespace std::tr1;
-#endif
+
 //CoRE4INET
 #include "CoRE4INET_ApplicationBase.h"
 
@@ -38,13 +33,13 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class MultiTrafficSinkApp : public ApplicationBase
+class MultiTrafficSinkApp : public virtual ApplicationBase
 {
     private:
         /**
          * Map of Signals that are emitted every time a frame with a specific CT-ID was sent.
          */
-        static unordered_map<uint16_t, simsignal_t> rxPkSignal;
+        static std::unordered_map<uint16_t, simsignal_t> rxPkSignal;
 
     protected:
         /**
@@ -52,7 +47,7 @@ class MultiTrafficSinkApp : public ApplicationBase
          *
          * @param msg incoming frame
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

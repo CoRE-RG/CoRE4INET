@@ -39,7 +39,7 @@ class AVBClassBShaper : public TC
         /**
          * @brief Destructor
          */
-        ~AVBClassBShaper();
+        virtual ~AVBClassBShaper();
 
     private:
         /**
@@ -61,7 +61,7 @@ class AVBClassBShaper : public TC
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -74,7 +74,7 @@ class AVBClassBShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Queues messages in the correct queue
@@ -84,7 +84,7 @@ class AVBClassBShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void enqueueMessage(cMessage *msg);
+        virtual void enqueueMessage(cMessage *msg) override;
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -94,42 +94,42 @@ class AVBClassBShaper : public TC
          * received.
          *
          */
-        virtual void requestPacket();
+        virtual void requestPacket() override;
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty();
+        virtual bool isEmpty() override;
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear();
+        virtual void clear() override;
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop() override;
 
         /**
          * @brief Returns a pointer to a frame directly from the queues.
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
-        virtual cMessage *front();
+        virtual cMessage *front() override;
 };
 
 template<class TC>
-simsignal_t AVBClassBShaper<TC>::avbQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t AVBClassBShaper<TC>::avbQueueLengthSignal = cComponent::registerSignal("avbBQueueLength");
 
 template<class TC>
 AVBClassBShaper<TC>::AVBClassBShaper()
@@ -149,8 +149,6 @@ void AVBClassBShaper<TC>::initialize(int stage)
     TC::initialize(stage);
     if (stage == 0)
     {
-        avbQueueLengthSignal = cComponent::registerSignal("avbBQueueLength");
-
         int portIndex = cModule::getParentModule()->getIndex();
         avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule("avbBBuffer",
                 portIndex));
@@ -194,7 +192,7 @@ void AVBClassBShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("AVBBin"))
     {
         avbQueue.insert(msg);
-        cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());
+        cComponent::emit(avbQueueLengthSignal, avbQueue.length());
         TC::notifyListeners();
     }
     else
@@ -228,8 +226,8 @@ cMessage* AVBClassBShaper<TC>::pop()
         avbBuffer->refresh();
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
-        cMessage *msg = (cMessage*) avbQueue.pop();
-        cComponent::emit(avbQueueLengthSignal, (unsigned int) avbQueue.length());
+        cMessage *msg = static_cast<cMessage*>(avbQueue.pop());
+        cComponent::emit(avbQueueLengthSignal, avbQueue.length());
         SimTime duration = TC::outChannel->calculateDuration(msg);
         avbBuffer->sendSlope(duration);
         return msg;
@@ -238,7 +236,7 @@ cMessage* AVBClassBShaper<TC>::pop()
     {
         return TC::pop();
     }
-    return NULL;
+    return nullptr;
 }
 
 template<class TC>
@@ -249,7 +247,7 @@ cMessage* AVBClassBShaper<TC>::front()
     //AVBFrames
     if (!avbQueue.isEmpty())
     {
-        cMessage *msg = (cMessage*) avbQueue.front();
+        cMessage *msg = static_cast<cMessage*>(avbQueue.front());
         return msg;
     }
     return TC::front();

@@ -35,7 +35,7 @@ Define_Module(TTEAPIApplicationBase);
 
 TTEAPIApplicationBase::TTEAPIApplicationBase()
 {
-    this->synchronized=false;
+    this->synchronized = false;
 }
 
 void TTEAPIApplicationBase::initialize()
@@ -64,7 +64,8 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
     }
 }
 
-void TTEAPIApplicationBase::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void TTEAPIApplicationBase::receiveSignal(__attribute__((unused))      cComponent *src, __attribute__((unused))      simsignal_t id,
+        cObject *obj)
 {
     if (dynamic_cast<SyncNotification *>(obj))
     {
@@ -81,7 +82,8 @@ void TTEAPIApplicationBase::receiveSignal(cComponent *src, simsignal_t id, cObje
     delete obj;
 }
 
-void TTEAPIApplicationBase::handleParameterChange(const char* parname){
+void TTEAPIApplicationBase::handleParameterChange(const char* parname)
+{
     CTApplicationBase::handleParameterChange(parname);
     Scheduled::handleParameterChange(parname);
 }
@@ -107,12 +109,12 @@ void TTEAPIApplicationBase::registerTask(unsigned int actionTime, void (*functio
     getPeriod()->registerEvent(event);
 }
 
-int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id, const uint16_t ct_id,
+int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(__attribute__((unused))      const uint8_t ctrl_id, const uint16_t ct_id,
         tte_buffer_t * const buf)
 {
     Enter_Method_Silent
     ();
-    unordered_map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
+    std::unordered_map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
     if (bufferList != ctbuffers.end())
     {
         //Currently we use only the first entry!
@@ -120,11 +122,11 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id, cons
 
         buf->ctrl_id = 0;
         buf->direction = TTE_DIR_OUTPUT;
-        if (dynamic_cast<TTBuffer*>(*buffer) != NULL)
+        if (dynamic_cast<TTBuffer*>(*buffer) != nullptr)
         {
             buf->traffic_type = TTE_TT_TRAFFIC;
         }
-        else if (dynamic_cast<RCBuffer*>(*buffer) != NULL)
+        else if (dynamic_cast<RCBuffer*>(*buffer) != nullptr)
         {
             buf->traffic_type = TTE_CT_TRAFFIC;
         }
@@ -149,8 +151,8 @@ int32_t TTEAPIApplicationBase::tte_get_ct_output_buf(const uint8_t ctrl_id, cons
     }
 }
 
-int32_t TTEAPIApplicationBase::tte_get_bg_output_buf(const uint8_t ctrl_id, const uint8_t channel,
-        tte_buffer_t * const buf)
+int32_t TTEAPIApplicationBase::tte_get_bg_output_buf(__attribute__((unused))      const uint8_t ctrl_id,
+        __attribute__((unused))      const uint8_t channel, tte_buffer_t * const buf)
 {
     Enter_Method_Silent
     ();
@@ -170,8 +172,8 @@ int32_t TTEAPIApplicationBase::tte_get_bg_output_buf(const uint8_t ctrl_id, cons
     return ETT_SUCCESS;
 }
 
-int32_t TTEAPIApplicationBase::tte_get_bg_input_buf(const uint8_t ctrl_id, const uint8_t channel,
-        tte_buffer_t * const buf)
+int32_t TTEAPIApplicationBase::tte_get_bg_input_buf(__attribute__((unused))      const uint8_t ctrl_id,
+        __attribute__((unused))      const uint8_t channel, tte_buffer_t * const buf)
 {
     Enter_Method_Silent
     ();
@@ -191,12 +193,12 @@ int32_t TTEAPIApplicationBase::tte_get_bg_input_buf(const uint8_t ctrl_id, const
     return ETT_SUCCESS;
 }
 
-int32_t TTEAPIApplicationBase::tte_get_ct_input_buf(const uint8_t ctrl_id, const uint16_t ct_id,
+int32_t TTEAPIApplicationBase::tte_get_ct_input_buf(__attribute__((unused))     const uint8_t ctrl_id, const uint16_t ct_id,
         tte_buffer_t * const buf)
 {
     Enter_Method_Silent
     ();
-    unordered_map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
+    std::unordered_map<uint16, std::list<CTBuffer *> >::iterator bufferList = ctbuffers.find(ct_id);
     if (bufferList != ctbuffers.end())
     {
         //Currently we use only the first entry!
@@ -204,11 +206,11 @@ int32_t TTEAPIApplicationBase::tte_get_ct_input_buf(const uint8_t ctrl_id, const
 
         buf->ctrl_id = 0;
         buf->direction = TTE_DIR_INPUT;
-        if (dynamic_cast<TTBuffer*>(*buffer) != NULL)
+        if (dynamic_cast<TTBuffer*>(*buffer) != nullptr)
         {
             buf->traffic_type = TTE_TT_TRAFFIC;
         }
-        else if (dynamic_cast<RCBuffer*>(*buffer) != NULL)
+        else if (dynamic_cast<RCBuffer*>(*buffer) != nullptr)
         {
             buf->traffic_type = TTE_CT_TRAFFIC;
         }
@@ -233,8 +235,8 @@ int32_t TTEAPIApplicationBase::tte_get_ct_input_buf(const uint8_t ctrl_id, const
     }
 }
 
-int32_t TTEAPIApplicationBase::tte_get_var(const uint8_t ctrl_id, const tte_var_id_t var_id, const uint32_t var_size,
-        void * const value)
+int32_t TTEAPIApplicationBase::tte_get_var(__attribute__((unused))     const uint8_t ctrl_id, const tte_var_id_t var_id,
+        __attribute__((unused))     const uint32_t var_size, void * const value)
 {
     Enter_Method_Silent
     ();
@@ -386,7 +388,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
 }
 
 int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf, tte_frame_t * const frame,
-        tte_buf_status_t * const status)
+        __attribute__((unused))    tte_buf_status_t * const status)
 {
     Enter_Method_Silent
     ();
@@ -452,12 +454,12 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf)
     if (priv->data)
     {
         free(priv->data);
-        priv->data = NULL;
+        priv->data = nullptr;
     }
     if (priv)
     {
         delete priv;
-        buf->priv = NULL;
+        buf->priv = nullptr;
     }
     return ETT_SUCCESS;
 }
@@ -471,18 +473,18 @@ int32_t TTEAPIApplicationBase::tte_close_input_buf(tte_buffer_t * const buf)
     if (priv->data)
     {
         //free(priv->data);
-        priv->data = NULL;
+        priv->data = nullptr;
     }
     if (priv)
     {
         delete priv;
-        buf->priv = NULL;
+        buf->priv = nullptr;
     }
     return ETT_SUCCESS;
 }
 
 int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const tte_buf_var_id_t var_id,
-        const uint32_t var_size, const void * const value)
+        __attribute__((unused))    const uint32_t var_size, const void * const value)
 {
     Enter_Method_Silent
     ();
@@ -491,7 +493,7 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
     {
         case TTE_BUFVAR_RECEIVE_CB: {
             APICallback *cb = receiveCallbacks[priv->buffer];
-            if (cb == NULL)
+            if (cb == nullptr)
             {
                 cb = new APICallback(priv->buffer, registerSignal("rxPk"));
                 receiveCallbacks[priv->buffer] = cb;
@@ -501,7 +503,7 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
         case TTE_BUFVAR_TRANSMIT_CB:
         {
             APICallback *cb = transmitCallbacks[priv->buffer];
-            if(cb == NULL)
+            if(cb == nullptr)
             {
                 cb = new APICallback(priv->buffer, registerSignal("rxPk"));
                 transmitCallbacks[priv->buffer] = cb;
@@ -512,10 +514,10 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
         case TTE_BUFVAR_CB_ARG:
         {
             APICallback *cb = receiveCallbacks[priv->buffer];
-            if(cb == NULL)
+            if(cb == nullptr)
             {
-                APICallback *cb = transmitCallbacks[priv->buffer];
-                if(cb == NULL)
+                cb = transmitCallbacks[priv->buffer];
+                if(cb == nullptr)
                 {
                     return ETT_NULLPTR;
                 }
@@ -535,7 +537,7 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
 }
 
 int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf, const tte_buf_var_id_t var_id,
-        const uint32_t var_size, void * const value)
+        __attribute__((unused))    const uint32_t var_size, void * const value)
 {
     Enter_Method_Silent
     ();
@@ -544,7 +546,7 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf, c
     {
         case TTE_BUFVAR_RECEIVE_CB: {
             APICallback *cb = receiveCallbacks[priv->buffer];
-            if (cb == NULL)
+            if (cb == nullptr)
             {
                 return ETT_NULLPTR;
             }
@@ -554,7 +556,7 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf, c
         case TTE_BUFVAR_TRANSMIT_CB:
         {
             APICallback *cb = transmitCallbacks[priv->buffer];
-            if(cb == NULL)
+            if(cb == nullptr)
             {
                 return ETT_NULLPTR;
             }
@@ -565,10 +567,10 @@ int32_t TTEAPIApplicationBase::tte_get_buf_var(const tte_buffer_t * const buf, c
         case TTE_BUFVAR_CB_ARG:
         {
             APICallback *cb = receiveCallbacks[priv->buffer];
-            if(cb == NULL)
+            if(cb == nullptr)
             {
-                APICallback *cb = transmitCallbacks[priv->buffer];
-                if(cb == NULL)
+                cb = transmitCallbacks[priv->buffer];
+                if(cb == nullptr)
                 {
                     return ETT_NULLPTR;
                 }
@@ -594,12 +596,12 @@ extern "C" int32_t tte_init(void)
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_start(const uint8_t ctrl_id)
+extern "C" int32_t tte_start(__attribute__((unused))    const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_stop(const uint8_t ctrl_id)
+extern "C" int32_t tte_stop(__attribute__((unused))    const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
@@ -609,13 +611,15 @@ extern "C" int32_t tte_exit(void)
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_configure(const uint8_t ctrl_id, const tte_conf_t * const conf)
+extern "C" int32_t tte_configure(__attribute__((unused))    const uint8_t ctrl_id,
+        __attribute__((unused))    const tte_conf_t * const conf)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_set_var(const uint8_t ctrl_id, const tte_var_id_t var_id, const uint32_t var_size,
-        const void * const value)
+extern "C" int32_t tte_set_var(__attribute__((unused))    const uint8_t ctrl_id,
+        __attribute__((unused))    const tte_var_id_t var_id, __attribute__((unused))    const uint32_t var_size,
+        __attribute__((unused)) const void * const value)
 {
     return ETT_NOTSUPPORTED;
 }
@@ -624,7 +628,7 @@ extern "C" int32_t tte_get_var(const uint8_t ctrl_id, const tte_var_id_t var_id,
         void * const value)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_get_var(ctrl_id, var_id, var_size, value);
     return ETT_NULLPTR;
 }
@@ -632,7 +636,7 @@ extern "C" int32_t tte_get_var(const uint8_t ctrl_id, const tte_var_id_t var_id,
 extern "C" int32_t tte_get_ct_input_buf(const uint8_t ctrl_id, const uint16_t ct_id, tte_buffer_t * const buf)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_get_ct_input_buf(ctrl_id, ct_id, buf);
     return ETT_NULLPTR;
 }
@@ -640,7 +644,7 @@ extern "C" int32_t tte_get_ct_input_buf(const uint8_t ctrl_id, const uint16_t ct
 extern "C" int32_t tte_get_ct_output_buf(const uint8_t ctrl_id, const uint16_t ct_id, tte_buffer_t * const buf)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_get_ct_output_buf(ctrl_id, ct_id, buf);
     return ETT_NULLPTR;
 }
@@ -648,7 +652,7 @@ extern "C" int32_t tte_get_ct_output_buf(const uint8_t ctrl_id, const uint16_t c
 extern "C" int32_t tte_get_bg_input_buf(const uint8_t ctrl_id, const uint8_t channel, tte_buffer_t * const buf)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_get_bg_input_buf(ctrl_id, channel, buf);
     return ETT_NULLPTR;
 }
@@ -656,19 +660,20 @@ extern "C" int32_t tte_get_bg_input_buf(const uint8_t ctrl_id, const uint8_t cha
 extern "C" int32_t tte_get_bg_output_buf(const uint8_t ctrl_id, const uint8_t channel, tte_buffer_t * const buf)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_get_bg_output_buf(ctrl_id, channel, buf);
     return ETT_NULLPTR;
 }
 
-extern "C" int32_t tte_write_output_buf(tte_buffer_t * const buf, tte_frame_t * const frame)
+extern "C" int32_t tte_write_output_buf(__attribute__((unused))   tte_buffer_t * const buf,
+        __attribute__((unused))   tte_frame_t * const frame)
 {
     //TODO Minor: High prio
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_read_input_buf(tte_buffer_t * const buf, tte_frame_t * const frame,
-        tte_buf_status_t * const status)
+extern "C" int32_t tte_read_input_buf(__attribute__((unused))   tte_buffer_t * const buf,
+        __attribute__((unused))   tte_frame_t * const frame, __attribute__((unused))   tte_buf_status_t * const status)
 {
     //TODO Minor: High prio
     return ETT_NOTSUPPORTED;
@@ -678,7 +683,7 @@ extern "C" int32_t tte_open_input_buf(tte_buffer_t * const buf, tte_frame_t * co
         tte_buf_status_t * const status)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_open_input_buf(buf, frame, status);
     return ETT_NULLPTR;
 }
@@ -686,7 +691,7 @@ extern "C" int32_t tte_open_input_buf(tte_buffer_t * const buf, tte_frame_t * co
 extern "C" int32_t tte_close_input_buf(tte_buffer_t * const buf)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_close_input_buf(buf);
     return ETT_NULLPTR;
 }
@@ -694,7 +699,7 @@ extern "C" int32_t tte_close_input_buf(tte_buffer_t * const buf)
 extern "C" int32_t tte_open_output_buf(tte_buffer_t * const buf, tte_frame_t * const frame)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_open_output_buf(buf, frame);
     return ETT_NULLPTR;
 }
@@ -702,7 +707,7 @@ extern "C" int32_t tte_open_output_buf(tte_buffer_t * const buf, tte_frame_t * c
 extern "C" int32_t tte_close_output_buf(tte_buffer_t * const buf)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_close_output_buf(buf);
     return ETT_NULLPTR;
 }
@@ -711,7 +716,7 @@ extern "C" int32_t tte_get_buf_var(const tte_buffer_t * const buf, const tte_buf
         const uint32_t var_size, void * const value)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_get_buf_var(buf, var_id, var_size, value);
     return ETT_NULLPTR;
 }
@@ -720,22 +725,23 @@ extern "C" int32_t tte_set_buf_var(tte_buffer_t * const buf, const tte_buf_var_i
         const void * const value)
 {
     TTEAPIApplicationBase *app = dynamic_cast<TTEAPIApplicationBase*>(cSimulation::getActiveSimulation()->getContext());
-    if (app != NULL)
+    if (app != nullptr)
         return app->tte_set_buf_var(buf, var_id, var_size, value);
     return ETT_NULLPTR;
 }
 
-extern "C" int32_t tte_flush_ctbuffers(const uint8_t ctrl_id)
+extern "C" int32_t tte_flush_ctbuffers(__attribute__((unused))  const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_flush_tt_ctbuffers(const uint8_t ctrl_id)
+extern "C" int32_t tte_flush_tt_ctbuffers(__attribute__((unused))  const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_flush_bg_ctbuffers(const uint8_t ctrl_id, const uint8_t channel)
+extern "C" int32_t tte_flush_bg_ctbuffers(__attribute__((unused))  const uint8_t ctrl_id,
+        __attribute__((unused))  const uint8_t channel)
 {
     return ETT_NOTSUPPORTED;
 }

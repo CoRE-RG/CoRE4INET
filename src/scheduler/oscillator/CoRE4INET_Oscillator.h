@@ -51,20 +51,20 @@ class Oscillator : public virtual cSimpleModule
         static simsignal_t currentDrift;
 
     protected:
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return Always returns 1
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 
     public:
         /**
@@ -76,7 +76,7 @@ class Oscillator : public virtual cSimpleModule
          *
          * @return current length of a tick
          */
-        virtual simtime_t getCurrentTick() const;
+        simtime_t getCurrentTick() const;
 
         /**
          * @brief Sets the current length of a tick
@@ -89,7 +89,7 @@ class Oscillator : public virtual cSimpleModule
          *
          * @return length of tick without drift
          */
-        virtual simtime_t getPreciseTick();
+        simtime_t getPreciseTick();
 };
 
 } //namespace

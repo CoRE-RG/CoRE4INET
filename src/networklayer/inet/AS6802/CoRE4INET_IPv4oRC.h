@@ -19,13 +19,7 @@
 //==============================================================================
 
 #include "CoRE4INET_IPv4oREBase.h"
-#if __cplusplus >= 201103L
-#include <unordered_map>
-using namespace std;
-#else
-#include <tr1/unordered_map>
-using namespace std::tr1;
-#endif
+
 #include "CoRE4INET_CTBuffer.h"
 
 //==============================================================================
@@ -43,10 +37,10 @@ public:
     IPv4oRC();
     virtual ~IPv4oRC();
 
-    virtual void initialize(int stage);
-    virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie);
+    virtual void initialize(int stage) override;
+    virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
     virtual void configureFilters(cXMLElement *config);
-    virtual void handleMessage(cMessage* msg);
+    virtual void handleMessage(cMessage* msg) override;
 
     /**
      * Encapsulates packet in RC frame and sends to each destination buffers.

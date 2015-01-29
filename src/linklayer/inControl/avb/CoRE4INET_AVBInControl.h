@@ -45,7 +45,7 @@ class AVBInControl : public IC
          *
          * @param msg incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
     private:
         /**
@@ -54,7 +54,7 @@ class AVBInControl : public IC
          * @param frame Pointer to the frame to check.
          * @return true if frame is critical, else false
          */
-        virtual bool isAVB(inet::EtherFrame *frame);
+        virtual bool isAVB(const EtherFrame *frame) const;
 };
 
 template<class IC>
@@ -82,12 +82,12 @@ void AVBInControl<IC>::handleMessage(cMessage *msg)
 }
 
 template<class IC>
-bool AVBInControl<IC>::isAVB(inet::EtherFrame *frame)
+bool AVBInControl<IC>::isAVB(const EtherFrame *frame) const
 {
     //TODO: Major: Detect AVB frame only using priority
-    if (dynamic_cast<EthernetIIFrameWithQTag*>(frame))
+    if (dynamic_cast<const EthernetIIFrameWithQTag*>(frame))
     {
-        if (dynamic_cast<AVBFrame*>(frame))
+        if (dynamic_cast<const AVBFrame*>(frame))
         {
             return true;
         }

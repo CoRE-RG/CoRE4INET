@@ -40,7 +40,7 @@ AVBTrafficSourceApp::AVBTrafficSourceApp()
     this->frameSize = 0;
     this->intervalFrames = 0;
     this->vlan_id = 0;
-    this->avbOutCTC = NULL;
+    this->avbOutCTC = nullptr;
     this->multicastMAC = generateAutoMulticastAddress();
 }
 
@@ -108,7 +108,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
 
     cPacket *payloadPacket = new cPacket;
     payloadPacket->setTimestamp();
-    payloadPacket->setByteLength(getPayloadBytes());
+    payloadPacket->setByteLength(static_cast<int64_t>(getPayloadBytes()));
     outFrame->encapsulate(payloadPacket);
 //Padding
     if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
@@ -118,25 +118,26 @@ void AVBTrafficSourceApp::sendAVBFrame()
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
 //class measurement interval A=125us B=250us
-    simtime_t tick = check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
+    simtime_t tick =
+            check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
     simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-    event->setTimer((uint64_t) ceil(interval / tick));
+    event->setTimer(static_cast<uint64_t>(ceil(interval / tick)));
     event->setDestinationGate(gate("schedulerIn"));
     getTimer()->registerEvent(event);
 }
 
-void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))     cComponent *src, simsignal_t id, cObject *obj)
+void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent *src, simsignal_t id, cObject *obj)
 {
     Enter_Method_Silent
     ();
     if (id == NF_AVB_LISTENER_REGISTERED)
     {
-        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+        SRPTable::ListenerEntry *lentry = dynamic_cast<SRPTable::ListenerEntry*>(obj);
 
         //If talker for the desired stream, register Listener
-        if (lentry->streamId == streamID && lentry->vlan_id == vlan_id)
+        if (lentry && lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
             ev << "Listener for stream " << lentry->streamId << " registered!" << std::endl;
 
@@ -148,10 +149,10 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))     cComponent *
     }
     else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT || id == NF_AVB_LISTENER_UNREGISTERED)
     {
-        SRPTable::ListenerEntry *lentry = (SRPTable::ListenerEntry*) obj;
+        SRPTable::ListenerEntry *lentry = dynamic_cast<SRPTable::ListenerEntry*>(obj);
 
         //If talker for the desired stream, unregister Listener
-        if (lentry->streamId == streamID && lentry->vlan_id == vlan_id)
+        if (lentry && lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
             //check whether there are listeners left
             SRPTable *srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
@@ -188,15 +189,16 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "streamID"))
     {
-        this->streamID = parameterULongCheckRange(par("streamID"), 0, (unsigned long)MAX_STREAM_ID);
+        this->streamID = parameterULongCheckRange(par("streamID"), 0, static_cast<unsigned long>(MAX_STREAM_ID));
     }
     if (!parname || !strcmp(parname, "intervalFrames"))
     {
-        this->intervalFrames = (unsigned int) parameterULongCheckRange(par("intervalFrames"), 1, MAX_INTERVAL_FRAMES);
+        this->intervalFrames = static_cast<uint16_t>(parameterULongCheckRange(par("intervalFrames"), 1,
+                MAX_INTERVAL_FRAMES));
     }
     if (!parname || !strcmp(parname, "vlan_id"))
     {
-        this->vlan_id = (unsigned short) parameterULongCheckRange(par("vlan_id"), 0, MAX_VLAN_ID);
+        this->vlan_id = static_cast<uint16_t>(parameterULongCheckRange(par("vlan_id"), 0, MAX_VLAN_ID));
     }
 
 }

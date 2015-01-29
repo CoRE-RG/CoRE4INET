@@ -32,7 +32,7 @@ class Timer;
  *
  * @author Till Steinbach
  */
-class Period : public cSimpleModule
+class Period : public virtual cSimpleModule
 {
     private:
         /**
@@ -64,16 +64,30 @@ class Period : public cSimpleModule
          * @brief Caches offset_ticks parameter
          */
         uint32_t offset_ticks;
+
+    protected:
+        /**
+         * Signal that is emitted at the beginning of a new cycle
+         */
+        static simsignal_t newCycle;
+
     protected:
         /**
          * Initialization of module, schedules new cycle message at timer
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * Received new cycle message to count cycles
          * @param msg incoming new cycle message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
     public:
         /**
          * Constructor, Initialization of members
@@ -89,66 +103,54 @@ class Period : public cSimpleModule
          * @sa SchedulerEvent_Base, SchedulerEvent, SchedulerActionTimeEvent,
          * SchedulerTimerEvent
          */
-        virtual uint64_t registerEvent(SchedulerEvent *event);
+        uint64_t registerEvent(SchedulerEvent *event);
 
         /**
          * @brief Returns the current number of ticks
          *
          * @return Number of ticks since cycle start
          */
-        virtual uint32_t getTicks();
+        uint32_t getTicks();
         /**
          * @brief Returns the absolute number of ticks
          *
          * @return Number of ticks since simulation start
          */
-        virtual uint64_t getTotalTicks();
+        uint64_t getTotalTicks();
         /**
          * @brief Returns the current number of cycles
          *
          * @return Number of cycles since simulation start
          */
-        virtual uint32_t getCycles() const;
+        uint32_t getCycles() const;
 
         /**
          * @brief Returns a pointer to the Timer module driving this period
          *
          * @return Timer driving the period
          */
-        virtual Timer* getTimer();
+        Timer* getTimer();
 
         /**
          * @brief Returns the cycle length of this period
          *
          * @return Number of ticks of one cycle
          */
-        virtual uint32_t getCycleTicks();
+        uint32_t getCycleTicks();
 
         /**
          * @brief Returns the cycle length of this period
          *
          * @return Length of one cycle in simtime
          */
-        virtual simtime_t getCycleLength();
+        simtime_t getCycleLength();
 
         /**
          * @brief Returns the offset of this period
          *
          * @return Offset of the period in number of ticks
          */
-        virtual uint32_t getOffsetTicks();
-    protected:
-        /**
-         * Signal that is emitted at the beginning of a new cycle
-         */
-        static simsignal_t newCycle;
-
-        /**
-         * @brief Indicates a parameter has changed.
-         *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
-         */
-        virtual void handleParameterChange(const char* parname);
+        uint32_t getOffsetTicks();
 };
 
 } //namespace

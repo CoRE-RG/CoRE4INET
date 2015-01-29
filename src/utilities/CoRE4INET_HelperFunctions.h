@@ -62,7 +62,7 @@ void addPath(cPar &parameter, const std::string &pathToAdd);
  * @brief Returns the gate defined by an object path.
  *
  * @param path the path to the gate
- * @return reference to the gate defined by path or NULL if no such gate was found
+ * @return reference to the gate defined by path or nullptr if no such gate was found
  *
  * @author Till Steinbach
  */
@@ -73,7 +73,7 @@ cGate* gateByFullPath(const std::string &path);
  *
  * @param nameAndGate name of the module and gatename in the format: modulename.gatename
  * @param from a module of the node in which the gate can be found
- * @return reference to the gate defined by path or NULL if no such gate was found
+ * @return reference to the gate defined by path or nullptr if no such gate was found
  *
  * @author Till Steinbach
  */
@@ -128,6 +128,27 @@ inet::MACAddress generateAutoMulticastAddress();
  * @author Till Steinbach
  */
 void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler);
+
+/**
+ * @brief Helper function checks whether a Frame is critical traffic.
+ *
+ * @param frame Pointer to the frame to check.
+ * @return true if frame is critical, else false
+ */
+bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask);
+
+/**
+ * @brief Returns the critical traffic id for a given frame.
+ *
+ * @warning does not check if it is really critical traffic.
+ * If you need to be sure use isCT(EtherFrame *frame)
+ *
+ * @param frame Pointer to the frame to get critical traffic id from.
+ * @return critical traffic id
+ *
+ * @sa isCT(EtherFrame *frame)
+ */
+uint16_t getCTID(const EtherFrame *frame);
 #endif
 
 #ifdef WITH_AVB_COMMON
@@ -140,7 +161,7 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler)
  *
  * @return bandwidth in bps
  */
-unsigned long bandwidthFromSizeAndInterval(unsigned int framesize, unsigned int intervalFrames, simtime_t interval);
+unsigned long bandwidthFromSizeAndInterval(size_t framesize, size_t intervalFrames, simtime_t interval);
 /**
  * @brief Returns the default interval for given SR classes
  *

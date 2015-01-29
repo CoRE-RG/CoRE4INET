@@ -32,8 +32,9 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
-            << bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames, getIntervalForClass(entry.srClass))
-                    / (double) 1000000 << "Mbps, insertionTime=" << entry.insertionTime << "}";
+            << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames,
+                    getIntervalForClass(entry.srClass))) / static_cast<double>(1000000) << "Mbps, insertionTime="
+            << entry.insertionTime << "}";
     return os;
 }
 
@@ -84,14 +85,14 @@ std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, uint16_
     return modules;
 }
 
-std::list<cModule*> SRPTable::getListenersForTalkerAddress(MACAddress &talkerAddress, uint16_t vid)
+std::list<cModule*> SRPTable::getListenersForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getListenersForTalkerAddress()");
     return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
 }
 
-uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, uint16_t vid)
+uint64_t SRPTable::getStreamIdForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getStreamIdForTalkerAddress()");
@@ -106,7 +107,7 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(MACAddress &talkerAddress, uint16
     throw std::invalid_argument("no stream for this talker address registered");
 }
 
-SR_CLASS SRPTable::getSrClassForTalkerAddress(MACAddress &talkerAddress, uint16_t vid)
+SR_CLASS SRPTable::getSrClassForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getSrClassForTalkerAddress()");
@@ -131,7 +132,7 @@ cModule* SRPTable::getTalkerForStreamId(uint64_t streamId, uint16_t vid)
     {
         return (*entry).second->module;
     }
-    return NULL;
+    return nullptr;
 }
 
 unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
@@ -144,14 +145,14 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
     return bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames, getIntervalForClass(tentry->srClass));
 }
 
-unsigned long SRPTable::getBandwidthForModule(cModule *module)
+unsigned long SRPTable::getBandwidthForModule(const cModule *module)
 {
     removeAgedEntriesIfNeeded();
 
     unsigned long bandwidth = 0;
 
-    for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end();
-            ++i)
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin();
+            i != listenerTables.end(); ++i)
     {
         ListenerTable table = i->second;
         for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -174,14 +175,14 @@ unsigned long SRPTable::getBandwidthForModule(cModule *module)
     return bandwidth;
 }
 
-unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLASS srClass)
+unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, SR_CLASS srClass)
 {
     removeAgedEntriesIfNeeded();
 
     unsigned long bandwidth = 0;
 
-    for (unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin(); i != listenerTables.end();
-            ++i)
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin();
+            i != listenerTables.end(); ++i)
     {
         ListenerTable table = i->second;
         for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -207,7 +208,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(cModule *module, SR_CLAS
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACAddress address, SR_CLASS srClass,
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const MACAddress address, SR_CLASS srClass,
         size_t framesize, uint16_t intervalFrames, uint16_t vid)
 {
     Enter_Method
@@ -226,7 +227,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
         {
             throw std::invalid_argument("cannot register talker with zero frameInterval");
         }
-        if (module == NULL)
+        if (module == nullptr)
         {
             throw std::invalid_argument("cannot register talker without module");
         }
@@ -268,7 +269,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, MACA
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused))       MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused)) const MACAddress address,
         uint16_t vid)
 {
 
@@ -309,7 +310,7 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
     ListenerList::const_iterator listener = llist.find(module);
     if (listener == llist.end())
     {
-        if (module == NULL)
+        if (module == nullptr)
         {
             throw std::invalid_argument("cannot register listener without module");
         }
@@ -370,8 +371,8 @@ void SRPTable::printState()
 
     EV << "Talker Table" << endl;
     EV << "VLAN ID    StreamID    Port    Address    SRClass    Bandwidth(Mbps)    Inserted" << endl;
-    for (unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin(); i != talkerTables.end();
-            ++i)
+    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin();
+            i != talkerTables.end(); ++i)
     {
         TalkerTable table = i->second;
         for (TalkerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -379,15 +380,15 @@ void SRPTable::printState()
             EV << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
                     << (*j).second->address.str() << "   "
                     << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
-                    << bandwidthFromSizeAndInterval((*j).second->framesize, (*j).second->intervalFrames,
-                            getIntervalForClass((*j).second->srClass)) / (double) 1000000 << "   "
-                    << (*j).second->insertionTime << endl;
+                    << static_cast<double>(bandwidthFromSizeAndInterval((*j).second->framesize,
+                            (*j).second->intervalFrames, getIntervalForClass((*j).second->srClass)))
+                            / static_cast<double>(1000000) << "   " << (*j).second->insertionTime << endl;
         }
     }
 
     EV << "Listener Table" << endl;
     EV << "VLAN ID    StreamID    Port    Inserted" << endl;
-    for (unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
+    for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
             i != listenerTables.end(); ++i)
     {
         ListenerTable table = i->second;
@@ -406,8 +407,8 @@ void SRPTable::printState()
 
 void SRPTable::clear()
 {
-    for (unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin(); iter != talkerTables.end();
-            ++iter)
+    for (std::unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin();
+            iter != talkerTables.end(); ++iter)
     {
         TalkerTable table = (*iter).second;
         for (TalkerTable::const_iterator j = table.begin(); j != table.end(); ++j)
@@ -417,7 +418,7 @@ void SRPTable::clear()
         }
         table.clear();
     }
-    for (unordered_map<unsigned int, ListenerTable>::iterator iter = listenerTables.begin();
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator iter = listenerTables.begin();
             iter != listenerTables.end(); ++iter)
     {
         ListenerTable table = (*iter).second;
@@ -435,24 +436,24 @@ void SRPTable::clear()
     }
 }
 
-unsigned int SRPTable::getNumTalkerEntries()
+size_t SRPTable::getNumTalkerEntries()
 {
     removeAgedEntriesIfNeeded();
 
-    unsigned int entries = 0;
-    for (unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin(); i != talkerTables.end();
-            ++i)
+    size_t entries = 0;
+    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin();
+            i != talkerTables.end(); ++i)
     {
         entries += (*i).second.size();
     }
     return entries;
 }
-unsigned int SRPTable::getNumListenerEntries()
+size_t SRPTable::getNumListenerEntries()
 {
     removeAgedEntriesIfNeeded();
 
-    unsigned int entries = 0;
-    for (unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
+    size_t entries = 0;
+    for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
             i != listenerTables.end(); ++i)
     {
         for (ListenerTable::const_iterator j = (*i).second.begin(); j != (*i).second.end(); ++j)
@@ -469,7 +470,7 @@ void SRPTable::updateDisplayString()
         return;
 
     char buf[80];
-    sprintf(buf, "%u talkers\n%u listeners", getNumTalkerEntries(), getNumListenerEntries());
+    sprintf(buf, "%zu talkers\n%zu listeners", getNumTalkerEntries(), getNumListenerEntries());
     getDisplayString().setTagArg("t", 0, buf);
 }
 
@@ -482,7 +483,7 @@ void SRPTable::removeAgedEntries()
     }
     simtime_t now = simTime();
     nextAging = 0;
-    for (unordered_map<unsigned int, ListenerTable>::iterator listenerTable = listenerTables.begin();
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator listenerTable = listenerTables.begin();
             listenerTable != listenerTables.end(); ++listenerTable)
     {
         for (ListenerTable::iterator listenerList = (*listenerTable).second.begin();

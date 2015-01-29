@@ -29,25 +29,25 @@ namespace CoRE4INET {
  *
  * See the NED definition for details.
  */
-class SRProtocol : public cSimpleModule, public cListener
+class SRProtocol : public virtual cSimpleModule, public cListener
 {
-    protected:
+    private:
         /**
          * Module representing the srpTable
          */
         SRPTable *srpTable;
-
+    protected:
         /**
          * @brief Initialization, retrieves srpTable module and registers for signals
          */
-        virtual void initialize();
+        virtual void initialize() override;
 
         /**
          * @brief handles incoming SRP Messages
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief handles signals containing srpTable changes
@@ -56,7 +56,7 @@ class SRProtocol : public cSimpleModule, public cListener
          * @param id signal id
          * @param obj the related entry in the table
          */
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
 };
 
 } /* namespace CoRE4INET */

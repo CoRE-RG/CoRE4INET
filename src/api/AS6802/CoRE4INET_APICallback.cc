@@ -18,16 +18,16 @@
 
 namespace CoRE4INET {
 
- void APICallback::receiveSignal(cComponent *src, simsignal_t id, cObject *obj){
+ void APICallback::receiveSignal(__attribute__((unused)) cComponent *src, __attribute__((unused))  simsignal_t id, __attribute__((unused))  cObject *obj){
     if(argSet){
         fn(arg);
     }
     else{
         tte_buffer_t buf;
-        if(dynamic_cast<TTBuffer*>(src) != NULL){
+        if(dynamic_cast<TTBuffer*>(src) != nullptr){
             buf.traffic_type= TTE_TT_TRAFFIC;
         }
-        else if(dynamic_cast<RCBuffer*>(src) != NULL){
+        else if(dynamic_cast<RCBuffer*>(src) != nullptr){
             buf.traffic_type= TTE_CT_TRAFFIC;
         }
         else{

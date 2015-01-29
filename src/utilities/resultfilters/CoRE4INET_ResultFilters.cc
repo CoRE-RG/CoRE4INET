@@ -20,14 +20,12 @@
 using namespace CoRE4INET;
 
 Register_ResultFilter("innerMessage", InnerMessageFilter)
-;
 
 void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
 {
-    if (dynamic_cast<cPacket *>(object))
+    if (cPacket *innerPacket = dynamic_cast<cPacket *>(object))
     {
-        cPacket *innerPacket = (cPacket *) object;
-        while (innerPacket->getEncapsulatedPacket() != NULL)
+        while (innerPacket->getEncapsulatedPacket() != nullptr)
         {
             innerPacket = innerPacket->getEncapsulatedPacket();
         }
@@ -39,7 +37,6 @@ void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev
  * Filter that subtracts the last value from the current value
  */
 Register_ResultFilter("SubtractActualFromLast", SubtractActualFromLastFilter)
-;
 
 bool SubtractActualFromLastFilter::process(__attribute__((unused)) simtime_t& t, double& value)
 {
@@ -50,18 +47,16 @@ bool SubtractActualFromLastFilter::process(__attribute__((unused)) simtime_t& t,
 }
 
 Register_ResultFilter("innerMessagePacketBytes", InnerMessagePacketBytesFilter)
-;
 
 void InnerMessagePacketBytesFilter::receiveSignal(__attribute__((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
 {
-    if (dynamic_cast<cPacket *>(object))
+    if (cPacket *innerPacket = dynamic_cast<cPacket *>(object))
     {
-        cPacket *innerPacket = (cPacket *) object;
-        while (innerPacket->getEncapsulatedPacket() != NULL)
+        while (innerPacket->getEncapsulatedPacket() != nullptr)
         {
             innerPacket = innerPacket->getEncapsulatedPacket();
         }
-        fire(this, t, (double) innerPacket->getByteLength());
+        fire(this, t, static_cast<double>(innerPacket->getByteLength()));
     }
 }
 
@@ -87,18 +82,16 @@ bool FloatingIntervalFilter::process(simtime_t &t, double &value)
 }
 
 Register_ResultFilter("floatingIntervalCount", FloatingIntervalCountFilter)
-;
 
 bool FloatingIntervalCountFilter::process(simtime_t &t, double &value)
 {
     FloatingIntervalFilter::process(t, value);
     //return size
-    value = inInterval.size();
+    value = static_cast<double>(inInterval.size());
     return true;
 }
 
 Register_ResultFilter("floatingIntervalSum", FloatingIntervalSumFilter)
-;
 
 bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
 {
@@ -114,7 +107,6 @@ bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
 }
 
 Register_ResultFilter("floatingIntervalAvg", FloatingIntervalAvgFilter)
-;
 
 bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value)
 {
@@ -125,6 +117,6 @@ bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value)
     {
         newValue += (*it2).second;
     }
-    value = (newValue / inInterval.size());
+    value = (newValue / static_cast<double>(inInterval.size()));
     return true;
 }

@@ -45,13 +45,13 @@ void CTTrafficSourceAppBase::sendMessage()
 {
 
     std::list<CTBuffer*> buffer;
-    if (this->ct_id != -1)
+    if (this->ct_id >= 0)
     {
-        buffer = ctbuffers[this->ct_id];
+        buffer = ctbuffers[static_cast<uint16_t>(this->ct_id)];
     }
     else
     {
-        for (unordered_map<uint16_t, std::list<CTBuffer*> >::iterator bufmap = ctbuffers.begin();
+        for (std::unordered_map<uint16_t, std::list<CTBuffer*> >::iterator bufmap = ctbuffers.begin();
                 bufmap != ctbuffers.end(); ++bufmap)
         {
             buffer.merge(bufmap->second);
@@ -84,18 +84,18 @@ void CTTrafficSourceAppBase::sendMessage()
                 continue;
             }
             frame->setTimestamp();
-            cPacket *payload = new cPacket;
-            payload->setTimestamp();
-            payload->setByteLength(getPayloadBytes());
-            frame->encapsulate(payload);
+            cPacket *payload_packet = new cPacket;
+            payload_packet->setTimestamp();
+            payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
+            frame->encapsulate(payload_packet);
             //Padding
             if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
             {
                 frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
             }
-            if (this->ct_id != -1)
+            if (this->ct_id > 0)
             {
-                frame->setCtID(ct_id);
+                frame->setCtID(static_cast<uint16_t>(this->ct_id));
             }
             //TODO Minor: Better name for Frame
             frame->setName((*buf)->getName());
@@ -129,7 +129,7 @@ void CTTrafficSourceAppBase::handleParameterChange(const char* parname)
     CTApplicationBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "ct_id"))
     {
-        this->ct_id = (int) parameterLongCheckRange(par("ct_id"), -1, MAX_CT_ID);
+        this->ct_id = static_cast<int>(parameterLongCheckRange(par("ct_id"), -1, MAX_CT_ID));
     }
 }
 

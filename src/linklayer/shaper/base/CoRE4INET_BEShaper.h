@@ -40,7 +40,7 @@ class BEShaper : public TC
         /**
          * @brief Destructor
          */
-        ~BEShaper();
+        virtual ~BEShaper();
     protected:
         /**
          * @brief Signal that is emitted when the queue length of best-effort messages changes.
@@ -57,14 +57,14 @@ class BEShaper : public TC
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return returns 1 or more depending on inheritance
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -77,7 +77,7 @@ class BEShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Queues messages in the correct queue
@@ -87,7 +87,7 @@ class BEShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void enqueueMessage(cMessage *msg);
+        virtual void enqueueMessage(cMessage *msg) override;
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -97,42 +97,42 @@ class BEShaper : public TC
          * received.
          *
          */
-        virtual void requestPacket();
+        virtual void requestPacket() override;
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty();
+        virtual bool isEmpty() override;
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear();
+        virtual void clear() override;
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
-         * send-on-request mechanism. Returns NULL if the queue is empty.
+         * send-on-request mechanism. Returns nullptr if the queue is empty.
          *
-         * @return the message with the highest priority from any queue. NULL if the
+         * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop() override;
 
         /**
          * @brief Returns a pointer to a frame directly from the queues.
          *
          * front must return a pointer to the same message pop() would return.
          *
-         * @return pointer to the message with the highest priority from any queue. NULL if the
+         * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
-        virtual cMessage *front();
+        virtual cMessage *front() override;
 };
 
 template<class TC>
-simsignal_t BEShaper<TC>::beQueueLengthSignal = SIMSIGNAL_NULL;
+simsignal_t BEShaper<TC>::beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
 
 template<class TC>
 BEShaper<TC>::BEShaper()
@@ -152,9 +152,8 @@ void BEShaper<TC>::initialize(int stage)
     TC::initialize(stage);
     if (stage == 0)
     {
-        beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
         //Send initial signal to create statistic
-        cComponent::emit(beQueueLengthSignal, (unsigned long) beQueue.length());
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
     }
 }
 
@@ -196,7 +195,7 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         beQueue.insert(msg);
-        cComponent::emit(beQueueLengthSignal, (unsigned int) beQueue.length());
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
         TC::notifyListeners();
     }
     else
@@ -228,8 +227,8 @@ cMessage* BEShaper<TC>::pop()
     //BEFrames
     if (!beQueue.isEmpty())
     {
-        cMessage* message = (cMessage*) beQueue.pop();
-        cComponent::emit(beQueueLengthSignal, (unsigned int) beQueue.length());
+        cMessage* message = static_cast<cMessage*>(beQueue.pop());
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
         return message;
     }
     return TC::pop();
@@ -243,7 +242,7 @@ cMessage* BEShaper<TC>::front()
     //BEFrames
     if (!beQueue.isEmpty())
     {
-        cMessage* message = (cMessage*) beQueue.front();
+        cMessage* message = static_cast<cMessage*>(beQueue.front());
         return message;
     }
     return TC::front();

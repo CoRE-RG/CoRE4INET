@@ -38,13 +38,13 @@ class BGBuffer : public virtual Buffer
         /**
          * Initializes the module
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
          * @return returns 1 or if higher the number of stages the Buffer module requires
          */
-        virtual int numInitStages() const;
+        virtual int numInitStages() const override;
 
         /**
          * @brief Is called when a new Frame is received in the buffer.
@@ -54,7 +54,7 @@ class BGBuffer : public virtual Buffer
          *
          * @param msg The incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

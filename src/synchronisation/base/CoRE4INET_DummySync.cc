@@ -43,7 +43,7 @@ void DummySync::initialize(int stage)
         Scheduled::initialize();
 
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
-        event->setAction_time((uint32_t) par("action_time").longValue());
+        event->setAction_time(static_cast<uint32_t>(par("action_time").longValue()));
         event->setDestinationGate(gate("schedulerIn"));
         getPeriod()->registerEvent(event);
     }
@@ -58,21 +58,27 @@ void DummySync::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("schedulerIn"))
     {
-        SchedulerActionTimeEvent *event = (SchedulerActionTimeEvent *) msg;
-        event->setNext_cycle(true);
-        getPeriod()->registerEvent(event);
-
-        if (getPeriod()->getCycles() > 0)
+        if (SchedulerActionTimeEvent *event = dynamic_cast<SchedulerActionTimeEvent *>(msg))
         {
-            uint32_t cycleTicks = getPeriod()->getCycleTicks();
-            simtime_t tick = getOscillator()->par("tick").doubleValue();
+            event->setNext_cycle(true);
+            getPeriod()->registerEvent(event);
 
-            int64_t modticks = ((int64_t) (simTime() / tick) - par("action_time").longValue()) % cycleTicks;
-            if (modticks > ((int64_t) cycleTicks / 2))
-                modticks = modticks - cycleTicks;
-            modticks += uniform(-par("precission").doubleValue() / 2, par("precission").doubleValue() / 2) / tick;
+            if (getPeriod()->getCycles() > 0)
+            {
+                uint32_t cycleTicks = getPeriod()->getCycleTicks();
+                simtime_t tick = getOscillator()->par("tick").doubleValue();
 
-            getTimer()->clockCorrection((int32_t) modticks);
+                int64_t modticks = (static_cast<int64_t>(simTime() / tick) - par("action_time").longValue()) % cycleTicks;
+                if (modticks > (static_cast<int64_t>(cycleTicks) / 2))
+                    modticks = modticks - cycleTicks;
+                modticks += static_cast<int64_t>(round(
+                        uniform(-par("precission").doubleValue() / 2, par("precission").doubleValue() / 2) / tick));
+
+                getTimer()->clockCorrection(static_cast<int32_t>(modticks));
+            }
+        }
+        else{
+            throw cRuntimeError("Received message from port schedulerIn that is no scheduler event");
         }
     }
 }

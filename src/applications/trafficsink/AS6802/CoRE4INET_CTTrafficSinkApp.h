@@ -31,19 +31,19 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class CTTrafficSinkApp : public TrafficSinkApp, public virtual CTApplicationBase
+class CTTrafficSinkApp : public virtual TrafficSinkApp, public virtual CTApplicationBase
 {
-    public:
+    protected:
         /**
          * @brief Initialization of the module.
          */
-        virtual void initialize();
+        virtual void initialize() override;
         /**
          * @brief collects incoming message and writes statistics.
          *
          * @param msg incoming frame
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
     public:
         using TrafficSinkApp::handleParameterChange;
 };

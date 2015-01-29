@@ -55,7 +55,7 @@ class BGTrafficSourceApp : public virtual TrafficSourceAppBase
          *
          * @param msg incoming self messages
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Generates and sends a new Message.
@@ -69,9 +69,9 @@ class BGTrafficSourceApp : public virtual TrafficSourceAppBase
         /**
          * @brief Indicates a parameter has changed.
          *
-         * @param parname Name of the changed parameter or NULL if multiple parameter changed.
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          *         */
-        virtual void handleParameterChange(const char* parname);
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

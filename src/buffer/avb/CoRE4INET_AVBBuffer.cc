@@ -34,7 +34,7 @@ AVBBuffer::AVBBuffer()
     this->oldTime = 0;
     this->Wduration = 0;
     this->tick = -1;
-    this->srptable = NULL;
+    this->srptable = nullptr;
     this->portBandwith = 0;
 }
 
@@ -56,15 +56,8 @@ void AVBBuffer::initialize(int stage)
     {
         Timed::initialize();
 
-        if (Oscillator *oscillator =
-                dynamic_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule())))
-        {
-            this->tick = oscillator->getPreciseTick();
-        }
-        else
-        {
-            throw cRuntimeError("Cannot find oscillator to get tick length");
-        }
+
+        this->tick = getOscillator()->getPreciseTick();
 
         this->srptable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", getParentModule()));
         if (!this->srptable)
@@ -80,7 +73,7 @@ void AVBBuffer::initialize(int stage)
                 {
                     if (cChannel *outChannel = macOutGate->findTransmissionChannel())
                     {
-                        this->portBandwith = (unsigned int) ceil(outChannel->getNominalDatarate());
+                        this->portBandwith = static_cast<unsigned int>(ceil(outChannel->getNominalDatarate()));
                     }
                     else
                     {
@@ -151,9 +144,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
             {
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                         getParentModule()->getSubmodule("phy", getIndex()), srClass);
-                Wduration = ((double) -credit) / reservedBandwith;
+                Wduration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
                 SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                event->setTimer((uint64_t) ceil(Wduration / tick));
+                event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
                 event->setDestinationGate(gate("schedulerIn"));
                 getTimer()->registerEvent(event);
             }
@@ -196,9 +189,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 }
                 else
                 {
-                    Wduration = ((double) -credit) / reservedBandwith;
+                    Wduration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer((uint64_t) ceil(Wduration / tick));
+                    event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
                     event->setDestinationGate(gate("schedulerIn"));
                     getTimer()->registerEvent(event);
                 }
@@ -242,7 +235,7 @@ void AVBBuffer::idleSlope(SimTime duration)
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
-        credit += ceil(reservedBandwith * duration.dbl());
+        credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
         emit(creditSignal, credit);
         if (credit > 0 && size() == 0 && !inTransmission)
             resetCredit();
@@ -258,7 +251,7 @@ void AVBBuffer::interferenceSlope(SimTime duration)
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
-        credit += ceil(reservedBandwith * duration.dbl());
+        credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
         emit(creditSignal, credit);
     }
 }
@@ -277,7 +270,7 @@ void AVBBuffer::sendSlope(SimTime duration)
             getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
     emit(creditSignal, credit);
-    credit -= ceil((portBandwith - reservedBandwith) * duration.dbl());
+    credit -= static_cast<int>(ceil(static_cast<double>(portBandwith - reservedBandwith) * duration.dbl()));
     inTransmission = false;
     if (size() > 0)
     {
@@ -285,7 +278,7 @@ void AVBBuffer::sendSlope(SimTime duration)
         {
             Wduration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer((uint64_t) ceil(Wduration / tick));
+            event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
             event->setDestinationGate(gate("schedulerIn"));
             getTimer()->registerEvent(event);
         }
