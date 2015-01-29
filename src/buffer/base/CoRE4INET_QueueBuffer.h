@@ -78,14 +78,14 @@ class QueueBuffer : public virtual Buffer
          *
          * @param newFrame a pointer to the inet::EtherFrame to insert in the queue.
          */
-        virtual void enqueue(EtherFrame *newFrame) override;
+        virtual void enqueue(inet::EtherFrame *newFrame) override;
 
         /**
          * @brief Removes and returns an inet::EtherFrame from the Queue and emits the queue length.
          *
          * @return Aa pointer to the inet::EtherFrame removed from the queue.
          */
-        virtual EtherFrame* dequeue() override;
+        virtual inet::EtherFrame* dequeue() override;
 
         /**
          * @brief Returns the used size of the buffer

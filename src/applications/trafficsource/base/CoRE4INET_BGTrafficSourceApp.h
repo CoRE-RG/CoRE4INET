@@ -41,7 +41,7 @@ class BGTrafficSourceApp : public virtual TrafficSourceAppBase
         /**
          * @brief caches destAddress parameter
          */
-        MACAddress destAddress;
+        inet::MACAddress destAddress;
     public:
         /**
          * @brief Constructor of BGTrafficSourceApp

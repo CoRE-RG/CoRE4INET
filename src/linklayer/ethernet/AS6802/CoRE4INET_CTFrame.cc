@@ -28,7 +28,7 @@ unsigned short CTFrame::getCtID() const
 
 void CTFrame::setCtID(uint16_t ctID)
 {
-    MACAddress mac = getDest();
+    inet::MACAddress mac = getDest();
     mac.setAddressByte(4, static_cast<unsigned char>(ctID >> 8));
     mac.setAddressByte(5, static_cast<unsigned char>(ctID));
     setDest(mac);
@@ -47,7 +47,7 @@ unsigned int CTFrame::getCtMarker() const
 
 void CTFrame::setCtMarker(uint32_t ctMarker)
 {
-    MACAddress mac = getDest();
+    inet::MACAddress mac = getDest();
     mac.setAddressByte(0, static_cast<unsigned char>(ctMarker >> 24));
     mac.setAddressByte(1, static_cast<unsigned char>(ctMarker >> 16));
     mac.setAddressByte(2, static_cast<unsigned char>(ctMarker >> 8));

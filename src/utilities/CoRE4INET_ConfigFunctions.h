@@ -90,15 +90,15 @@ T extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *cal
     }
     else if (strcmp(name, "auto") == 0)
     {
-        module = recursiveFindByType<T>(getContainingNode(from));
+        module = recursiveFindByType<T>(inet::getContainingNode(from));
     }
     else
     {
-        if (findContainingNode(from) == nullptr)
+        if (inet::findContainingNode(from) == nullptr)
         {
             throw cRuntimeError("Module is not inside a Node (Node must be marked by @node property in ned module)");
         }
-        cModule * cmod = findModuleWhereverInNode(name, from);
+        cModule * cmod = inet::findModuleWhereverInNode(name, from);
         if (!cmod)
         {
             throw cRuntimeError("Cannot find a module with name %s", name);

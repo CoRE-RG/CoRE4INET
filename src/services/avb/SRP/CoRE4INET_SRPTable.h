@@ -61,7 +61,7 @@ class SRPTable : public virtual cSimpleModule
                     intervalFrames = 0;
                     vlan_id = VLAN_ID_DEFAULT;
                 }
-                TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, MACAddress new_address, cModule *new_module,
+                TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address, cModule *new_module,
                         size_t new_framesize, unsigned short new_intervalFrames, unsigned short new_vlan_id,
                         simtime_t new_insertionTime) :
                         streamId(new_streamId), srClass(new_srClass), address(new_address), module(new_module), framesize(
@@ -145,7 +145,7 @@ class SRPTable : public virtual cSimpleModule
          * @param vid VLAN ID
          * @return streamId related to talkerAddress
          */
-        virtual uint64_t getStreamIdForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid = VLAN_ID_DEFAULT);
+        virtual uint64_t getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid = VLAN_ID_DEFAULT);
 
         /**
          * @brief For a known talker address and V-TAG it finds out the SR-Class of the Stream
@@ -154,7 +154,7 @@ class SRPTable : public virtual cSimpleModule
          * @param vid VLAN ID
          * @return SR-Class related to the Stream of the talkerAddress
          */
-        virtual SR_CLASS getSrClassForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid = VLAN_ID_DEFAULT);
+        virtual SR_CLASS getSrClassForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid = VLAN_ID_DEFAULT);
 
         /**
          * @brief For a known streamId and V-TAG it finds out the port where relay component should deliver the message
@@ -172,7 +172,7 @@ class SRPTable : public virtual cSimpleModule
          * @param vid VLAN ID
          * @return listeners for the stream
          */
-        virtual std::list<cModule*> getListenersForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid =
+        virtual std::list<cModule*> getListenersForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid =
                 VLAN_ID_DEFAULT);
 
         /**
@@ -214,7 +214,7 @@ class SRPTable : public virtual cSimpleModule
          * @brief Register a new streamId at talkerTable.
          * @return True if refreshed. False if it is new.
          */
-        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, const MACAddress address,
+        virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
                 SR_CLASS srClass = SR_CLASS_A, size_t framesize = 0, uint16_t intervalFrames = 0, uint16_t vid =
                         VLAN_ID_DEFAULT);
 
@@ -222,7 +222,7 @@ class SRPTable : public virtual cSimpleModule
          * @brief Unregister a streamId at talkerTable.
          * @return True if removed. False if not registered.
          */
-        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, const MACAddress address,
+        virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
                 uint16_t vid = VLAN_ID_DEFAULT);
 
         /**

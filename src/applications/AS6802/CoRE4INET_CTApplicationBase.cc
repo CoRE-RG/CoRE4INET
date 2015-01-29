@@ -59,11 +59,11 @@ void CTApplicationBase::handleParameterChange(const char* parname)
         std::vector<cModule*> modules = parameterToModuleList(par("buffers"), DELIMITERS);
         for (std::vector<cModule*>::const_iterator module = modules.begin(); module != modules.end(); ++module)
         {
-            if (findContainingNode(*module) != findContainingNode(this))
+            if (inet::findContainingNode(*module) != inet::findContainingNode(this))
             {
                 throw cRuntimeError(
                         "Configuration problem of parameter buffers in module %s: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        this->getFullName(), (*module)->getFullName(), findContainingNode(this)->getFullName());
+                        this->getFullName(), (*module)->getFullName(), inet::findContainingNode(this)->getFullName());
             }
             if (CTBuffer *buffer = dynamic_cast<CTBuffer*>(*module))
             {

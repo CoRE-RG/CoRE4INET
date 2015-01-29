@@ -41,7 +41,7 @@ void AVBTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
 
-    srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+    srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (!srpTable)
     {
         throw cRuntimeError("Parent module does not contain a srpTable module");
@@ -108,7 +108,7 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
     else
     {
         //Received an EtherFrame so the source seems to be active
-        if (dynamic_cast<EtherFrame*>(msg))
+        if (dynamic_cast<inet::EtherFrame*>(msg))
         {
             getDisplayString().setTagArg("i2", 0, "status/active");
         }

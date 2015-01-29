@@ -35,7 +35,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class SRPRelay : public virtual ::Ieee8021dRelay
+class SRPRelay : public virtual inet::Ieee8021dRelay
 {
 
     protected:
@@ -50,7 +50,7 @@ class SRPRelay : public virtual ::Ieee8021dRelay
          */
         virtual int numInitStages() const override
         {
-            return 1 > ::Ieee8021dRelay::numInitStages() ? 1 : ::Ieee8021dRelay::numInitStages();
+            return 1 > inet::Ieee8021dRelay::numInitStages() ? 1 : inet::Ieee8021dRelay::numInitStages();
         }
 
         /**

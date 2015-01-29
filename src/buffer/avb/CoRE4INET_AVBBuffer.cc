@@ -59,7 +59,7 @@ void AVBBuffer::initialize(int stage)
 
         this->tick = getOscillator()->getPreciseTick();
 
-        this->srptable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", getParentModule()));
+        this->srptable = dynamic_cast<SRPTable*>(inet::findModuleWhereverInNode("srpTable", getParentModule()));
         if (!this->srptable)
         {
             throw cRuntimeError("Cannot find srpTable");

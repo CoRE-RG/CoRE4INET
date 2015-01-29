@@ -31,7 +31,7 @@ class SRPEtherLLC : public BGEtherLLC
         virtual void handleMessage(cMessage *msg) override;
     private:
         void dispatchSRP(SRPFrame * srp);
-        void deliverSRP(EtherFrame * frame);
+        void deliverSRP(inet::EtherFrame * frame);
 
 };
 

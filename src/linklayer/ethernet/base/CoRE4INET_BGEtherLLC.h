@@ -21,7 +21,7 @@
 
 namespace CoRE4INET {
 
-class BGEtherLLC : public virtual EtherLLC
+class BGEtherLLC : public virtual inet::EtherLLC
 {
   protected:
     virtual void handleMessage(cMessage *msg) override;

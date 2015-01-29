@@ -85,14 +85,14 @@ std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, uint16_
     return modules;
 }
 
-std::list<cModule*> SRPTable::getListenersForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
+std::list<cModule*> SRPTable::getListenersForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getListenersForTalkerAddress()");
     return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
 }
 
-uint64_t SRPTable::getStreamIdForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
+uint64_t SRPTable::getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getStreamIdForTalkerAddress()");
@@ -107,7 +107,7 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(const MACAddress &talkerAddress, 
     throw std::invalid_argument("no stream for this talker address registered");
 }
 
-SR_CLASS SRPTable::getSrClassForTalkerAddress(const MACAddress &talkerAddress, uint16_t vid)
+SR_CLASS SRPTable::getSrClassForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method
     ("SRPTable::getSrClassForTalkerAddress()");
@@ -208,7 +208,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const MACAddress address, SR_CLASS srClass,
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address, SR_CLASS srClass,
         size_t framesize, uint16_t intervalFrames, uint16_t vid)
 {
     Enter_Method
@@ -269,7 +269,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused)) const MACAddress address,
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused)) const inet::MACAddress address,
         uint16_t vid)
 {
 

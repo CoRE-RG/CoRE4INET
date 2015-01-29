@@ -43,7 +43,7 @@ packet TalkerAdvertise extends SRPFrame{
     
     // DataFrameParameters => destination adress and vlan identifier
 	// 64 Bit Field
-	MACAddress destination_address; //only one Talker allowed per destination_address
+	inet::MACAddress destination_address; //only one Talker allowed per destination_address
 	uint16_t vlan_identifier;
 	
 	// TSpec => Max frame size and sending interval of an AVB stream

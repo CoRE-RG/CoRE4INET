@@ -70,7 +70,7 @@ inet::EtherFrame * QueueBuffer::dequeue()
     {
         setFilled(static_cast<size_t>(frames.length() - 1));
         emit(queueLengthSignal, static_cast<unsigned long>(frames.length() - 1));
-        return static_cast<EtherFrame*>(frames.pop());
+        return static_cast<inet::EtherFrame*>(frames.pop());
     }
     else
         return nullptr;

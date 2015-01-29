@@ -46,7 +46,7 @@ void BGTrafficSourceApp::sendMessage()
 {
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
-        EthernetIIFrame *frame = new EthernetIIFrame("Best-Effort Traffic");
+        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic");
 
         frame->setDest(this->destAddress);
 
@@ -77,7 +77,7 @@ void BGTrafficSourceApp::handleParameterChange(const char* parname)
         if (par("destAddress").stdstringValue() == "auto")
         {
             // assign automatic address
-            this->destAddress = MACAddress::generateAutoAddress();
+            this->destAddress = inet::MACAddress::generateAutoAddress();
 
             // change module parameter from "auto" to concrete address
             par("destAddress").setStringValue(this->destAddress.str());
