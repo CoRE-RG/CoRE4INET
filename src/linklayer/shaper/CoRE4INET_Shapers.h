@@ -30,8 +30,6 @@
 #ifdef WITH_AVB_COMMON
 //CoRE4INET
 #include "CoRE4INET_AVBShaper.h"
-#include "CoRE4INET_AVBClassAShaper.h"
-#include "CoRE4INET_AVBClassBShaper.h"
 #endif
 
 namespace CoRE4INET {
@@ -106,7 +104,7 @@ class TT_PCF_RC_BE_Shaper : public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShap
  *
  * @author Philipp Meyer
  */
-class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBClassAShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >
+class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >
 {
 };
 
