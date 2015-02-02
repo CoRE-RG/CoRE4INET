@@ -46,6 +46,7 @@ module TTEAVBEtherHost
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
         string configurationManagerType = default("");
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
         bool be_promiscuous = default(true);
     gates:
         inout ethg;
