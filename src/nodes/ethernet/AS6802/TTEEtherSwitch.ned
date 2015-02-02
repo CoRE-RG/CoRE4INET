@@ -19,8 +19,8 @@ import core4inet.linklayer.port.TTEPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
-import inet.linklayer.IMACAddressTable;
-import inet.linklayer.IMACRelayUnit;
+import inet.linklayer.contract.IMACAddressTable;
+import inet.linklayer.contract.IMACRelayUnit;
 import inet.common.lifecycle.NodeStatus;
 import inet.networklayer.common.InterfaceTable;
 

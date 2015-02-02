@@ -30,6 +30,7 @@
 #include "CoRE4INET_SRPTable.h"
 #include "CoRE4INET_IPoREFilter.h"
 #include "CoRE4INET_AVBDestinationInfo.h"
+#include "CoRE4INET_ModuleAccess.h"
 #include "IPoREDefs_m.h"
 #include "AVBFrame_m.h"
 #include "UDPPacket.h"

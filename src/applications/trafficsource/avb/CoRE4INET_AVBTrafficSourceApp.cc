@@ -119,7 +119,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
 
 //class measurement interval A=125us B=250us
     simtime_t tick =
-            check_and_cast<Oscillator*>(inet::findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
+            check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
     simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
 
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);

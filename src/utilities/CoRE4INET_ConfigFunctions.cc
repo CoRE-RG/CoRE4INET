@@ -41,7 +41,7 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
         cModule* module = simulation.getModuleByPath((*path).c_str());
         if (!module)
         {
-            module = inet::findModuleWhereverInNode((*path).c_str(), owner);
+            module = findModuleWhereverInNode((*path).c_str(), owner);
         }
         if (module)
         {

@@ -20,7 +20,7 @@ import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-import inet.linklayer.INic;
+import inet.linklayer.contract.INic;
 
 
 //

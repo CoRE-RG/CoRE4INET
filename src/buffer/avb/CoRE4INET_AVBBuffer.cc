@@ -15,8 +15,8 @@
 
 #include "CoRE4INET_AVBBuffer.h"
 
-//INET
-#include "ModuleAccess.h"
+//CoRE4INET
+#include "CoRE4INET_ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -59,7 +59,7 @@ void AVBBuffer::initialize(int stage)
 
         this->tick = getOscillator()->getPreciseTick();
 
-        this->srptable = dynamic_cast<SRPTable*>(inet::findModuleWhereverInNode("srpTable", getParentModule()));
+        this->srptable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", getParentModule()));
         if (!this->srptable)
         {
             throw cRuntimeError("Cannot find srpTable");

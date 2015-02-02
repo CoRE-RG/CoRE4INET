@@ -22,8 +22,7 @@
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_TTBuffer.h"
-//INET
-#include "ModuleAccess.h"
+#include "CoRE4INET_ModuleAccess.h"
 //Auto-generated Messages
 #include "TTBufferEmpty_m.h"
 

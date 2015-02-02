@@ -10,7 +10,7 @@ import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
-import inet.linklayer.IMACAddressTable;
+import inet.linklayer.contract.IMACAddressTable;
 import inet.networklayer.common.InterfaceTable;
 
 

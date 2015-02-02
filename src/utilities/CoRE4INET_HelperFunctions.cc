@@ -14,8 +14,8 @@
 //
 #include "CoRE4INET_HelperFunctions.h"
 
-//INET
-#include "ModuleAccess.h"
+//CoRE4INET
+#include "CoRE4INET_ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -62,7 +62,7 @@ cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
     {
         std::string modulePath = nameAndGate.substr(0, pos);
         std::string gateName = nameAndGate.substr(pos + 1);
-        cModule* module = inet::findModuleWhereverInNode(modulePath.c_str(), from);
+        cModule* module = findModuleWhereverInNode(modulePath.c_str(), from);
         if (module)
         {
             return module->gate(gateName.c_str());
