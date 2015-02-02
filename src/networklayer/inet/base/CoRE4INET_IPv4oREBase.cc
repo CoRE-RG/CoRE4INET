@@ -41,7 +41,7 @@ namespace CoRE4INET {
 
 IPv4oREBase::IPv4oREBase()
 {
-    this->m_protocolEnum = cEnum::get("IPProtocolId");
+    this->m_protocolEnum = cEnum::get("inet::IPProtocolId");
 }
 
 //==============================================================================
