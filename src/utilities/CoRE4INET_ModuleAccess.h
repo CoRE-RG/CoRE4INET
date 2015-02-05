@@ -32,7 +32,7 @@ cModule *findModuleWherever(const char *name, cModule *from);
 /**
  * Find a module with given name, and "closest" to module "from".
  *
- * Operation: gradually rises in the module hierarchy up to the @node
+ * Operation: gradually rises in the module hierarchy up to the \@node
  * module, and searches recursively among all submodules at every level.
  */
 cModule *findModuleWhereverInNode(const char *name, cModule *from);
