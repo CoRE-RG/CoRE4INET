@@ -30,7 +30,7 @@ class SchedulerEvent : public SchedulerEvent_Base
     private:
         cGate *destinationGate_var;
     public:
-        SchedulerEvent(const char *name = nullptr, int kind = 0) :
+        SchedulerEvent(const char *name = nullptr, short kind = 0) :
                 SchedulerEvent_Base(name, kind)
         {
             destinationGate_var = nullptr;

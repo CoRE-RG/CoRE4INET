@@ -12,8 +12,6 @@
 #include "AVBDefs_m.h"
 #include "CoRE4INET_AVBBuffer.h"
 
-using namespace std;
-
 namespace CoRE4INET {
 
 /**
@@ -44,9 +42,9 @@ class AVBShaper : public TC
 
         AVBBuffer *avbBuffer;
 
-        string avbQueueLengthSignalName;
-        string avbBufferName;
-        string avbInName;
+        std::string avbQueueLengthSignalName;
+        std::string avbBufferName;
+        std::string avbInName;
 
     protected:
         /**
