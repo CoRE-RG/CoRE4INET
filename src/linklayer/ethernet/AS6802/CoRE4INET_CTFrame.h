@@ -42,7 +42,7 @@ class CTFrame : public CTFrame_Base
                 CTFrame_Base(other)
         {
         }
-        CTFrame(const char *name = nullptr, int kind = 0) :
+        CTFrame(const char *name = nullptr, short kind = 0) :
                 CTFrame_Base(name, kind)
         {
         }

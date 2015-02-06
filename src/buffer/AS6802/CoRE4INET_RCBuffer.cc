@@ -123,11 +123,19 @@ void RCBuffer::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "bag"))
     {
+#if LONG_BIT == 32
         this->bag = static_cast<uint64_t>(parameterULongCheckRange(par("bag"), 0, MAX_BAG));
+#else
+        this->bag = parameterULongCheckRange(par("bag"), 0, MAX_BAG);
+#endif
     }
     if (!parname || !strcmp(parname, "jitter"))
     {
+#if LONG_BIT == 32
         this->jitter = static_cast<uint64_t>(parameterULongCheckRange(par("jitter"), 0, MAX_JITTER));
+#else
+        this->jitter = parameterULongCheckRange(par("jitter"), 0, MAX_JITTER);
+#endif
     }
 }
 

@@ -90,11 +90,19 @@ void RCIncoming::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "bag"))
     {
+#if LONG_BIT == 32
         this->bag = static_cast<uint64_t>(parameterULongCheckRange(par("bag"), 0, MAX_BAG_TICKS));
+#else
+        this->bag = parameterULongCheckRange(par("bag"), 0, MAX_BAG_TICKS);
+#endif
     }
     if (!parname || !strcmp(parname, "jitter"))
     {
+#if LONG_BIT == 32
         this->jitter = static_cast<uint64_t>(parameterULongCheckRange(par("jitter"), 0, MAX_JITTER_TICKS));
+#else
+        this->jitter = parameterULongCheckRange(par("jitter"), 0, MAX_JITTER_TICKS);
+#endif
     }
 }
 

@@ -109,8 +109,8 @@ void Buffer::handleParameterChange(const char* parname)
 {
     if (!parname || !strcmp(parname, "maxMessageSize"))
     {
-        this->maxMessageSize = static_cast<size_t>(parameterULongCheckRange(par("maxMessageSize"),
-                MIN_ETHERNET_FRAME_BYTES, MAX_ETHERNET_FRAME_BYTES));
+        this->maxMessageSize = parameterULongCheckRange(par("maxMessageSize"),
+                MIN_ETHERNET_FRAME_BYTES, MAX_ETHERNET_FRAME_BYTES);
     }
     if (!parname || !strcmp(parname, "destination_gates"))
     {
