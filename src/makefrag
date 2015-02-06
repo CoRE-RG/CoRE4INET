@@ -21,6 +21,10 @@ ifeq ($(UNAME_S),Darwin)
     LDFLAGS += -headerpad_max_install_names 
 endif
 
+#detect 64/32bit
+LBITS := $(shell getconf LONG_BIT)
+CFLAGS += -DLONG_BIT=$(LBITS)
+
 #Warnings generate errors
 ifdef WARNINGS_ERROR
 	CFLAGS += -Werror
