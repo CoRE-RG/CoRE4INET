@@ -518,7 +518,7 @@ if (initialize_ttBuffers)
                 TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(module);
                 if (ttBuffer)
                 {
-                    if (!isTTBufferRegistered(ttBuffer))
+                    if (!isTTBufferRegistered(ttBuffer) && ttBuffer->par("enabled").boolValue())
                     {
                         registerTTBuffer(ttBuffer);
                     }

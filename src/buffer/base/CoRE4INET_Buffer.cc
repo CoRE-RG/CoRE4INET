@@ -69,7 +69,14 @@ void Buffer::recordPacketReceived(EtherFrame *frame)
 
 EtherFrame* Buffer::getFrame()
 {
-    return dequeue();
+    if(par("enabled").boolValue())
+    {
+        return dequeue();
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 void Buffer::putFrame(EtherFrame* frame)
