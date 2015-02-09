@@ -30,7 +30,8 @@ simsignal_t Buffer::rxPkSignal = registerSignal("rxPk");
 
 Buffer::Buffer()
 {
-    maxMessageSize = 0;
+    this->maxMessageSize = 0;
+    this->enabled = false;
 }
 
 Buffer::~Buffer()
@@ -118,11 +119,20 @@ void Buffer::handleMessage(cMessage *msg)
 
 bool Buffer::isEnabled()
 {
+    if (!parametersInitialized)
+    {
+        handleParameterChange(nullptr);
+    }
     return this->enabled;
 }
 
 void Buffer::handleParameterChange(const char* parname)
 {
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+
     if (!parname || !strcmp(parname, "maxMessageSize"))
     {
         this->maxMessageSize = parameterULongCheckRange(par("maxMessageSize"),
