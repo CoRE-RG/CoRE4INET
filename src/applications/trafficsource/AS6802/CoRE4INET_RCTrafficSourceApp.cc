@@ -51,6 +51,7 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg)
     CTTrafficSourceAppBase::handleMessage(msg);
     if (msg->arrivedOn("schedulerIn"))
     {
+        getDisplayString().setTagArg("i2", 0, "");
         sendMessage();
 
         if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))

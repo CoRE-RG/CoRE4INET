@@ -51,6 +51,11 @@ class Callback;
  */
 class Buffer : public virtual cSimpleModule
 {
+    private:
+        /**
+         * Caches enabled parameter
+         */
+        bool enabled;
     public:
         /**
          * @brief Constructor
@@ -61,6 +66,12 @@ class Buffer : public virtual cSimpleModule
          */
         virtual ~Buffer();
 
+        /**
+         * @brief Indicated that TrafficSource is enabled
+         *
+         * @return true when enabled, otherwise false
+         */
+        bool isEnabled();
     protected:
         /**
          * Stores the Gates to that the messages are delivered

@@ -53,6 +53,10 @@ void Buffer::initialize(int stage)
         {
             //Update displaystring
             getDisplayString().setTagArg("i", 0, "buffer/empty");
+            if (!isEnabled())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
         }
     }
 }
@@ -69,7 +73,7 @@ void Buffer::recordPacketReceived(EtherFrame *frame)
 
 EtherFrame* Buffer::getFrame()
 {
-    if(par("enabled").boolValue())
+    if (par("enabled").boolValue())
     {
         return dequeue();
     }
@@ -112,12 +116,17 @@ void Buffer::handleMessage(cMessage *msg)
     }
 }
 
+bool Buffer::isEnabled()
+{
+    return this->enabled;
+}
+
 void Buffer::handleParameterChange(const char* parname)
 {
     if (!parname || !strcmp(parname, "maxMessageSize"))
     {
         this->maxMessageSize = parameterULongCheckRange(par("maxMessageSize"),
-                MIN_ETHERNET_FRAME_BYTES, MAX_ETHERNET_FRAME_BYTES);
+        MIN_ETHERNET_FRAME_BYTES, MAX_ETHERNET_FRAME_BYTES);
     }
     if (!parname || !strcmp(parname, "destination_gates"))
     {
@@ -134,12 +143,16 @@ void Buffer::handleParameterChange(const char* parname)
             destinationGates.push_back(*gate_it);
         }
     }
+    if (!parname || !strcmp(parname, "enabled"))
+    {
+        this->enabled = par("enabled").boolValue();
+    }
 }
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
 
-void Buffer::enqueue(__attribute__((unused)) EtherFrame *newFrame)
+void Buffer::enqueue(__attribute__((unused))  EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }

@@ -64,6 +64,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
 
     if (msg && msg->arrivedOn("schedulerIn"))
     {
+        getDisplayString().setTagArg("i2", 0, "");
         moduloCycle++;
         if (synchronized && moduloCycle == this->modulo)
         {

@@ -61,8 +61,6 @@ void AVBTrafficSourceApp::initialize()
 
     avbOutCTC = getParentModule()->getSubmodule("avbCTC");
 
-    getDisplayString().setTagArg("i2", 0, "status/asleep");
-
 }
 
 void AVBTrafficSourceApp::handleMessage(cMessage* msg)
