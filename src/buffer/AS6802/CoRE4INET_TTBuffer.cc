@@ -89,13 +89,16 @@ void TTBuffer::handleMessage(cMessage *msg)
         for (std::list<cGate*>::const_iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
                 ++destGate)
         {
-            if (outgoingMessage)
+            if(isEnabled())
             {
-                sendDirect(outgoingMessage->dup(), *destGate);
-            }
-            else
-            {
-                sendDirect(new TTBufferEmpty("TT Buffer Empty"), *destGate);
+                if (outgoingMessage)
+                {
+                    sendDirect(outgoingMessage->dup(), *destGate);
+                }
+                else
+                {
+                    sendDirect(new TTBufferEmpty("TT Buffer Empty"), *destGate);
+                }
             }
         }
         if (gate("out")->isConnected())
