@@ -517,15 +517,22 @@ if (initialize_ttBuffers)
                 TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(module);
                 if (ttBuffer)
                 {
-                    if (!isTTBufferRegistered(ttBuffer) && ttBuffer->par("enabled").boolValue())
+                    if(ttBuffer->par("enabled").boolValue())
                     {
-                        registerTTBuffer(ttBuffer);
+                        if (!isTTBufferRegistered(ttBuffer))
+                        {
+                            registerTTBuffer(ttBuffer);
+                        }
+                        else
+                        {
+                            throw cRuntimeError(
+                                    "Configuration problem of tt_buffers: Module: %s is in the list more than once!",
+                                    (*ttBufferPath).c_str());
+                        }
                     }
                     else
                     {
-                        throw cRuntimeError(
-                                "Configuration problem of tt_buffers: Module: %s is in the list more than once!",
-                                (*ttBufferPath).c_str());
+                        EV_INFO << "Buffer "<< ttBuffer->getName() << "is disabled and not added to shaper!" << endl;
                     }
                 }
                 else
