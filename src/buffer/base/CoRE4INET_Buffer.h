@@ -53,6 +53,10 @@ class Buffer : public virtual cSimpleModule
 {
     private:
         /**
+         * Checks whether the parameters were already initialized
+         */
+        bool parametersInitialized;
+        /**
          * Caches enabled parameter
          */
         bool enabled;
