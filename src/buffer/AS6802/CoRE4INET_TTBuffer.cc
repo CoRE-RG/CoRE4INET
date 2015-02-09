@@ -100,13 +100,16 @@ void TTBuffer::handleMessage(cMessage *msg)
         }
         if (gate("out")->isConnected())
         {
-            if (outgoingMessage)
+            if(isEnabled())
             {
-                send(outgoingMessage->dup(), "out");
-            }
-            else
-            {
-                send(new TTBufferEmpty("TT Buffer Empty"), "out");
+                if (outgoingMessage)
+                {
+                    send(outgoingMessage->dup(), "out");
+                }
+                else
+                {
+                    send(new TTBufferEmpty("TT Buffer Empty"), "out");
+                }
             }
         }
         if (outgoingMessage)
