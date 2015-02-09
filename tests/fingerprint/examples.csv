@@ -1,15 +1,15 @@
 #note that the fingerprints provided may not match your architecture. Thus the test may fail although everything is ok
 # workingdir,                                                     args,                                                  simtimelimit,    fingerprint
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c General -r 0,                        1s,              bed1-3931
-/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              12e3-e53
+/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              12e3-e531
 /examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0,                        1s,              439a-2bb7
 #/examples/AS6802/synchronization/HighIntegrity_small/,           -f omnetpp.ini -c General -r 0,                        1s,              da3e-3e7b
 #/examples/AS6802/synchronization/StandardIntegrity_large/,       -f omnetpp.ini -c General -r 0,                        1s,              b23c-ebb5
 #/examples/AS6802/synchronization/StandardIntegrity_medium/,      -f omnetpp.ini -c General -r 0,                        1s,              e040-f0be
 /examples/avb_AS6802/small_network/,                           	  -f omnetpp.ini -c General -r 0,                        1s,              907f-130a
-/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              0f4f-58ad
+/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              dce9-ede7
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,      1s,              0f4f-58ad
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      1s,              481c-1018
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      1s,              3ff8-a1dc
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       1s,              481c-1018
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            6488-63c0
 /examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              a193-1fd5
