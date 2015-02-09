@@ -31,7 +31,7 @@ inetRoot = os.path.abspath("../../../inet")
 sep = ";" if sys.platform == 'win32' else ':'
 nedPath = inetRoot + "/src" + sep + core4inetRoot + "/src" + sep + core4inetRoot + "/examples" + sep + core4inetRoot + "/tests/smoke"
 core4inetLib = core4inetRoot + "/src/CoRE4INET"
-inetLib = inetRoot + "/src/INET"
+inetLib = inetRoot + "/src/inet"
 opp_run = "opp_run"
 cpuTimeLimit = "30s"
 logFile = "test.out"

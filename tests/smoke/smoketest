@@ -34,7 +34,7 @@ sep = ";" if sys.platform == 'win32' else ':'
 nedPath = inetRoot + os.sep + "src" + sep + core4inetRoot + os.sep + "src" + sep \
     + core4inetRoot + os.sep + "examples" + sep + core4inetRoot + os.sep + "tests" + os.sep + "smoke"
 core4inetLib = core4inetRoot + os.sep + "src" + os.sep + "CoRE4INET"
-inetLib = inetRoot + os.sep + "src" + os.sep + "INET"
+inetLib = inetRoot + os.sep + "src" + os.sep + "inet"
 opp_run = "opp_run"
 cpuTimeLimit = "3s"
 logFile = "test.out"
