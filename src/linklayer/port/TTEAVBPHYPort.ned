@@ -66,7 +66,7 @@ module TTEAVBPHYPort like IPort
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true;
-                queueModule = "shaper";
+                queueModule = "^.shaper";
                 @display("p=87,139");
         }
     connections:
