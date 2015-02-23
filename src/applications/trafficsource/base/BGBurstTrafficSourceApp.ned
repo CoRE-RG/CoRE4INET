@@ -15,30 +15,21 @@
 
 package core4inet.applications.trafficsource.base;
 
-import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
-
 //
-// Background traffic source application.
-// Uses EtherFrame with encapsulated cPacket as payload
-// This generator generates frames with sendInterval distance
+// Background burst traffic source application.
+// Uses multiple EtherFrame with encapsulated cPacket as payload to generate bursts
+// This generator generates bursts with sendInterval distance
 //
 //
-// @see TTTrafficSourceApp, RCTrafficSourceApp
+// @see BGTrafficSourceApp
 //
 // @author Till Steinbach
-simple BGTrafficSourceApp extends TrafficSourceAppBase
+simple BGBurstTrafficSourceApp extends BGTrafficSourceApp
 {
     parameters:
-        @class(BGTrafficSourceApp);
+        @class(BGBurstTrafficSourceApp);
         @display("i=block/source,green");
 
-        // destination MAC address
-        string destAddress = default("auto");
-
-        // interval between sending requests
-        volatile double sendInterval @unit(s) = default(uniform(0s,1s));
-        
-        //Default bgOut is best-effort buffer
-        buffers = default("bgOut");
-
+        // total size of the burst
+        int burstSize @unit(byte) = default(1MiB);
 }

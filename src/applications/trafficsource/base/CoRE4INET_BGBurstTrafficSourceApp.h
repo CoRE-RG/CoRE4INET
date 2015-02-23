@@ -13,14 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_BGTRAFFICSOURCEAPP_H_
-#define __CORE4INET_BGTRAFFICSOURCEAPP_H_
+#ifndef __CORE4INET_BGBURSTTRAFFICSOURCEAPP_H_
+#define __CORE4INET_BGBURSTTRAFFICSOURCEAPP_H_
 
 //CoRE4INET
-#include "CoRE4INET_TrafficSourceAppBase.h"
-
-//INET
-#include "MACAddress.h"
+#include "CoRE4INET_BGTrafficSourceApp.h"
 
 namespace CoRE4INET {
 
@@ -30,37 +27,20 @@ namespace CoRE4INET {
  * @sa TrafficSourceAppBase
  * @ingroup Applications
  */
-class BGTrafficSourceApp : public virtual TrafficSourceAppBase
+class BGBurstTrafficSourceApp : public virtual BGTrafficSourceApp
 {
     private:
         /**
-         * Checks whether the parameters were already initialized
+         * @brief caches burstSize parameter
          */
-        bool parametersInitialized;
+        unsigned long burstSize;
 
-        /**
-         * @brief caches sendInterval parameter
-         */
-        simtime_t sendInterval;
-
-        /**
-         * @brief caches destAddress parameter
-         */
-        inet::MACAddress destAddress;
     public:
         /**
          * @brief Constructor of BGTrafficSourceApp
          */
-        BGTrafficSourceApp();
+        BGBurstTrafficSourceApp();
     protected:
-
-        /**
-         * @brief handle self messages to send frames
-         *
-         *
-         * @param msg incoming self messages
-         */
-        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Generates and sends a new Message.
@@ -78,7 +58,6 @@ class BGTrafficSourceApp : public virtual TrafficSourceAppBase
          *         */
         virtual void handleParameterChange(const char* parname) override;
 
-        inet::MACAddress getDestAddress();
 };
 
 } //namespace

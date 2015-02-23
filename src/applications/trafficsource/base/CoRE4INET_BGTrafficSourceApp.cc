@@ -69,6 +69,11 @@ void BGTrafficSourceApp::handleParameterChange(const char* parname)
 {
     TrafficSourceAppBase::handleParameterChange(parname);
 
+    if (!parname && !parametersInitialized)
+    {
+        parametersInitialized = true;
+    }
+
     if (!parname || !strcmp(parname, "sendInterval"))
     {
         this->sendInterval = parameterDoubleCheckRange(par("sendInterval"), 0, MAXTIME.dbl(), true);
@@ -88,6 +93,15 @@ void BGTrafficSourceApp::handleParameterChange(const char* parname)
             this->destAddress.setAddress(par("destAddress").stringValue());
         }
     }
+}
+
+inet::MACAddress BGTrafficSourceApp::getDestAddress()
+{
+    if (!parametersInitialized)
+    {
+        handleParameterChange(nullptr);
+    }
+    return this->destAddress;
 }
 
 }
