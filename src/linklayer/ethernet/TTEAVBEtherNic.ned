@@ -93,7 +93,7 @@ module TTEAVBEtherNic like INic
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true;
-                queueModule = "shaper";
+                queueModule = "^.shaper";
                 @display("p=127,227");
         }
 
