@@ -59,12 +59,15 @@ void CTTrafficSourceAppBase::sendMessage()
     }
     if (buffer.empty())
     {
-        ev.printf("No buffer with such CT \n");
-        bubble("No buffer with such CT");
-        getDisplayString().setTagArg("i2", 0, "status/excl3");
-        getDisplayString().setTagArg("tt", 0, "WARNING: No buffer with such CT");
-        getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
-        getParentModule()->getDisplayString().setTagArg("tt", 0, "No buffer with such CT");
+        EV_ERROR << "No buffer with such CT " << endl;
+        if (ev.isGUI())
+        {
+            bubble("No buffer with such CT");
+            getDisplayString().setTagArg("i2", 0, "status/excl3");
+            getDisplayString().setTagArg("tt", 0, "WARNING: No buffer with such CT");
+            getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
+            getParentModule()->getDisplayString().setTagArg("tt", 0, "No buffer with such CT");
+        }
     }
     else
     {

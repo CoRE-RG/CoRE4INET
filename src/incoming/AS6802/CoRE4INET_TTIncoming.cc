@@ -65,9 +65,10 @@ void TTIncoming::handleMessage(cMessage *msg)
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
+                ev.printf("Received frame before permanence point of previous frame \n");
                 if (ev.isGUI())
                 {
-                    ev.printf("Received frame before permanence point of previous frame \n");
+
                     bubble("Received frame before permanence point of previous frame");
                     getDisplayString().setTagArg("i2", 0, "status/excl3");
                     getDisplayString().setTagArg("tt", 0,
@@ -82,11 +83,12 @@ void TTIncoming::handleMessage(cMessage *msg)
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
-                if (ev.isGUI())
-                {
-                    ev.printf(
+                ev.printf(
                             "Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
                             getName(), currentTicks, receive_window_start, receive_window_end);
+                if (ev.isGUI())
+                {
+
                     bubble("Frame to early");
                     getDisplayString().setTagArg("i2", 0, "status/excl3");
                     getDisplayString().setTagArg("tt", 0,
@@ -102,11 +104,12 @@ void TTIncoming::handleMessage(cMessage *msg)
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
-                if (ev.isGUI())
-                {
-                    ev.printf(
+                ev.printf(
                             "Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n",
                             getName(), currentTicks, receive_window_start, receive_window_end);
+                if (ev.isGUI())
+                {
+
                     bubble("Frame to late");
                     getDisplayString().setTagArg("i2", 0, "status/excl3");
                     getDisplayString().setTagArg("tt", 0,
@@ -150,7 +153,7 @@ void TTIncoming::handleMessage(cMessage *msg)
         }
         delete msg;
         if (!hadError && ev.isGUI())
-            getDisplayString().setTagArg("i2", 0, "");
+            getDisplayString().removeTag("i2");
         sendDelayed(frame, getHardwareDelay(), "out");
         frame = nullptr;
     }

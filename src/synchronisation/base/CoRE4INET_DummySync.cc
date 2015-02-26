@@ -50,7 +50,10 @@ void DummySync::initialize(int stage)
     if (stage == 2)
     {
         notify(SYNC);
-        getDisplayString().setTagArg("i", 1, "green");
+        if (ev.isGUI())
+        {
+            getDisplayString().setTagArg("i", 1, "green");
+        }
     }
 }
 

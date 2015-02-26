@@ -107,7 +107,7 @@ void RCBuffer::handleMessage(cMessage *msg)
                 bagExpired = true;
                 if (ev.isGUI())
                 {
-                    getDisplayString().setTagArg("i2", 0, "");
+                    getDisplayString().removeTag("i2");
                 }
             }
             delete msg;
