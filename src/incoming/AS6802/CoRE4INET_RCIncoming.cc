@@ -54,9 +54,7 @@ void RCIncoming::handleMessage(cMessage *msg)
             if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))
             {
                 emit(droppedSignal, etherframe);
-                ev.printf(
-                            "Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n",
-                            getName(), currentTotalTicks - lastArrived, bag);
+                EV_ERROR << "Received frame in " << getName() << " too early! Gap was " << (currentTotalTicks - lastArrived) << " Ticks, should have been between minimum " << bag << "!" << endl;
                 if (ev.isGUI())
                 {
 

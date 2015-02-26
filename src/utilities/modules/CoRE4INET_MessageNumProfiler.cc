@@ -45,9 +45,9 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
     }
     else
     {
-        EV << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-        EV << printMessages(sysmod, static_cast<size_t>(par("max_messages").longValue()), par("print_msgs").boolValue());
-        EV << "Profiling done!" << endl;
+        EV_TRACE << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
+        EV_TRACE << printMessages(sysmod, static_cast<size_t>(par("max_messages").longValue()), par("print_msgs").boolValue());
+        EV_TRACE << "Profiling done!" << endl;
     }
 
     if (par("throw_error").boolValue() && overModules(sysmod, static_cast<size_t>(par("max_messages").longValue())))

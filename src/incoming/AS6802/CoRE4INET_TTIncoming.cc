@@ -65,7 +65,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
-                ev.printf("Received frame before permanence point of previous frame \n");
+                EV_ERROR << "Received frame before permanence point of previous frame" << endl;
                 if (ev.isGUI())
                 {
 
@@ -83,9 +83,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
-                ev.printf(
-                            "Received frame in %s too early! Receive Time was %d Ticks, should have been between %d and %d! \n",
-                            getName(), currentTicks, receive_window_start, receive_window_end);
+                EV_ERROR << "Received frame in " << getName() << " too early! Receive Time was " << currentTicks << " Ticks, should have been between " << receive_window_start << " and " << receive_window_end << "!" << endl;
                 if (ev.isGUI())
                 {
 
@@ -104,9 +102,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             {
                 emit(droppedSignal, etherframe);
                 hadError = true;
-                ev.printf(
-                            "Received frame in %s too late! Receive Time was %d Ticks, should have been between %d and %d! \n",
-                            getName(), currentTicks, receive_window_start, receive_window_end);
+                EV_ERROR <<"Received frame in " << getName() << " too late! Receive Time was " << currentTicks << " Ticks, should have been between " << receive_window_start << " and " << receive_window_end << "!" << endl;
                 if (ev.isGUI())
                 {
 
