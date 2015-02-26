@@ -33,7 +33,10 @@ void BGTrafficSourceApp::handleMessage(cMessage *msg)
 
     if (msg->isSelfMessage())
     {
-        getDisplayString().setTagArg("i2", 0, "");
+        if (ev.isGUI())
+        {
+            getDisplayString().removeTag("i2");
+        }
         sendMessage();
         scheduleAt(simTime() + this->sendInterval, msg);
     }

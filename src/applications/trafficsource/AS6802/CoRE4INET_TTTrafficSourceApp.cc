@@ -64,7 +64,10 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
 
     if (msg && msg->arrivedOn("schedulerIn"))
     {
-        getDisplayString().removeTag("i2");
+        if (ev.isGUI())
+        {
+            getDisplayString().removeTag("i2");
+        }
         moduloCycle++;
         if (synchronized && moduloCycle == this->modulo)
         {

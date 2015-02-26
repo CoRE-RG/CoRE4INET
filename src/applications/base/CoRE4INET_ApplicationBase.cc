@@ -32,7 +32,7 @@ void ApplicationBase::initialize()
     WATCH_LIST(bgbuffers);
 
     std::string displayName = par("displayName").stdstringValue();
-    if (displayName.length())
+    if (ev.isGUI() && displayName.length())
     {
         getDisplayString().setTagArg("t", 0, displayName.c_str());
     }

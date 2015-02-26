@@ -54,11 +54,12 @@ void RCIncoming::handleMessage(cMessage *msg)
             if (!firstMessage && ((currentTotalTicks - lastArrived) < (bag - jitter)))
             {
                 emit(droppedSignal, etherframe);
-                if (ev.isGUI())
-                {
-                    ev.printf(
+                ev.printf(
                             "Received frame in %s too early! Gap was %d Ticks, should have been between minimum %d! \n",
                             getName(), currentTotalTicks - lastArrived, bag);
+                if (ev.isGUI())
+                {
+
                     bubble("Frame to early");
                     getDisplayString().setTagArg("i2", 0, "status/excl3");
                     getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");

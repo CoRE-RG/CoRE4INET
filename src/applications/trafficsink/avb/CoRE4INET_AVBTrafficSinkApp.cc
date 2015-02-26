@@ -49,7 +49,10 @@ void AVBTrafficSinkApp::initialize()
     srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
 
-    getDisplayString().setTagArg("i2", 0, "status/hourglass");
+    if (ev.isGUI())
+    {
+        getDisplayString().setTagArg("i2", 0, "status/hourglass");
+    }
 }
 
 void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
@@ -68,7 +71,10 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
             SRPTable *signal_srpTable = check_and_cast<SRPTable *>(src);
 
             signal_srpTable->updateListenerWithStreamId(tentry->streamId, this, tentry->vlan_id);
-            getDisplayString().setTagArg("i2", 0, "status/hourglass");
+            if (ev.isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/hourglass");
+            }
             if (updateInterval != 0)
             {
                 scheduleAt(simTime() + updateInterval, new cMessage("updateSubscription"));
@@ -83,7 +89,10 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
         {
             if (lentry->module == this)
             {
-                getDisplayString().setTagArg("i2", 0, "status/hourglass");
+                if (ev.isGUI())
+                {
+                    getDisplayString().setTagArg("i2", 0, "status/hourglass");
+                }
                 if (retryInterval != 0)
                 {
                     scheduleAt(simTime() + retryInterval, new cMessage("retrySubscription"));
@@ -99,7 +108,10 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
     {
         srpTable->updateListenerWithStreamId(static_cast<uint64_t>(par("streamID").longValue()), this,
                 static_cast<uint16_t>(par("vlan_id").longValue()));
-        getDisplayString().setTagArg("i2", 0, "status/active");
+        if (ev.isGUI())
+        {
+            getDisplayString().setTagArg("i2", 0, "status/active");
+        }
         if (updateInterval > 0)
         {
             scheduleAt(simTime() + updateInterval, msg);
@@ -108,7 +120,7 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
     else
     {
         //Received an EtherFrame so the source seems to be active
-        if (dynamic_cast<inet::EtherFrame*>(msg))
+        if (ev.isGUI() && dynamic_cast<inet::EtherFrame*>(msg))
         {
             getDisplayString().setTagArg("i2", 0, "status/active");
         }
