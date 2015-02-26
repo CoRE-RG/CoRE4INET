@@ -409,7 +409,7 @@ void IPv4oAVB<base>::registerTalker(const IPoREFilter* filter, SRPTable *srpTabl
 {
     if (srpTable)
     {
-        EV << "Register Talker in node" << std::endl;
+        EV_INFO << "Register Talker in node" << std::endl;
         AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
         srpTable->updateTalkerWithStreamId(avbDestInfo->getStreamId(), this, *(avbDestInfo->getDestMac()),
                 avbDestInfo->getSrClass(), avbDestInfo->getFrameSize(), avbDestInfo->getIntervallFrames(),

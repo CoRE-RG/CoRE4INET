@@ -369,15 +369,15 @@ void SRPTable::printState()
 {
     removeAgedEntriesIfNeeded();
 
-    EV << "Talker Table" << endl;
-    EV << "VLAN ID    StreamID    Port    Address    SRClass    Bandwidth(Mbps)    Inserted" << endl;
+    EV_DETAIL << "Talker Table" << endl;
+    EV_DETAIL << "VLAN ID    StreamID    Port    Address    SRClass    Bandwidth(Mbps)    Inserted" << endl;
     for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin();
             i != talkerTables.end(); ++i)
     {
         TalkerTable table = i->second;
         for (TalkerTable::const_iterator j = table.begin(); j != table.end(); ++j)
         {
-            EV << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
+            EV_DETAIL << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
                     << (*j).second->address.str() << "   "
                     << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
                     << static_cast<double>(bandwidthFromSizeAndInterval((*j).second->framesize,
@@ -386,8 +386,8 @@ void SRPTable::printState()
         }
     }
 
-    EV << "Listener Table" << endl;
-    EV << "VLAN ID    StreamID    Port    Inserted" << endl;
+    EV_DETAIL << "Listener Table" << endl;
+    EV_DETAIL << "VLAN ID    StreamID    Port    Inserted" << endl;
     for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
             i != listenerTables.end(); ++i)
     {
@@ -397,7 +397,7 @@ void SRPTable::printState()
             ListenerList llist = (*j).second;
             for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); ++k)
             {
-                EV << (*i).first << "   " << (*j).first << "   " << (*k).first->getName() << "   "
+                EV_DETAIL << (*i).first << "   " << (*j).first << "   " << (*k).first->getName() << "   "
                         << (*k).second->insertionTime << endl;
             }
         }

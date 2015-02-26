@@ -70,7 +70,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
         SRPTable *srpTable = check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
         if (srpTable)
         {
-            EV << "Register Talker in node" << std::endl;
+            EV_INFO << "Register Talker in node" << std::endl;
             srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
             srpTable->subscribe(NF_AVB_LISTENER_UNREGISTERED, this);
             srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
@@ -140,7 +140,7 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent 
         //If talker for the desired stream, register Listener
         if (lentry && lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
-            EV_TRACE << "Listener for stream " << lentry->streamId << " registered!" << std::endl;
+            EV_INFO << "Listener for stream " << lentry->streamId << " registered!" << std::endl;
 
             if (ev.isGUI())
             {
