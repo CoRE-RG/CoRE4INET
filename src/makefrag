@@ -14,6 +14,7 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 	CC = clang
 	CXX = clang++
+	SHLIB_LD = clang++ -shared -fPIC
 endif
 
 #Special Flags for OS X
