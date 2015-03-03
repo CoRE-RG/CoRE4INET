@@ -27,6 +27,10 @@ using namespace CoRE4INET;
 CTBuffer::CTBuffer()
 {
     this->parametersInitialized = false;
+    this->ctMask = 0;
+    this->ctMarker = 0;
+    this->ctId = 0;
+    this->priority = 0;
 }
 
 CTBuffer::~CTBuffer()

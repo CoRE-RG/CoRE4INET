@@ -29,6 +29,7 @@ Define_Module(AVBIncoming);
 
 AVBIncoming::AVBIncoming()
 {
+    this->srptable = nullptr;
 }
 
 void AVBIncoming::initialize()

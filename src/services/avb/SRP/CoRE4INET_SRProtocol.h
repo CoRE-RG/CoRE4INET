@@ -36,6 +36,8 @@ class SRProtocol : public virtual cSimpleModule, public cListener
          * Module representing the srpTable
          */
         SRPTable *srpTable;
+    public:
+        SRProtocol();
     protected:
         /**
          * @brief Initialization, retrieves srpTable module and registers for signals

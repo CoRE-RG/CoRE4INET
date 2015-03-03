@@ -441,7 +441,7 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf)
         payload->setData(i, ((unsigned char *) priv->data)[i]);
     }
     //Send to CTC
-    if (priv->buffer)
+    if (priv && priv->buffer)
         if (priv->buffer->gate("in"))
             if (priv->buffer->gate("in")->getPathStartGate())
                 if ((cModule *) priv->buffer->gate("in")->getPathStartGate()->getOwner())
@@ -451,7 +451,7 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf)
                                 ((cModule *) priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"));
                     }
 
-    if (priv->data)
+    if (priv && priv->data)
     {
         free(priv->data);
         priv->data = nullptr;
