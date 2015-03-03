@@ -258,8 +258,10 @@ template<class Base>
 void IPv4oRC<Base>::sendRCFrame(cPacket* packet, __attribute__((unused)) const InterfaceEntry* ie, const IPoREFilter* filter)
 {
     RCDestinationInfo *destInfo = dynamic_cast<RCDestinationInfo*>(filter->getDestInfo());
-    if (!destInfo)
+    if (!destInfo){
         Base::error("Wrong Destination Info Type. Filter invalid!");
+        return;
+    }
 
     RCFrame *outFrame = new RCFrame();
     outFrame->encapsulate(packet);

@@ -32,6 +32,7 @@ Buffer::Buffer()
 {
     this->maxMessageSize = 0;
     this->enabled = false;
+    this->parametersInitialized = false;
 }
 
 Buffer::~Buffer()

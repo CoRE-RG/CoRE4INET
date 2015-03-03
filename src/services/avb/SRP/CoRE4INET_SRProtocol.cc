@@ -28,6 +28,10 @@ namespace CoRE4INET {
 
 Define_Module(SRProtocol);
 
+SRProtocol::SRProtocol(){
+    this->srpTable = nullptr;
+}
+
 void SRProtocol::initialize()
 {
     srpTable = dynamic_cast<SRPTable *>(getParentModule()->getSubmodule("srpTable"));

@@ -34,6 +34,8 @@ Period::Period()
     newCycleEvent = nullptr;
     timer = nullptr;
     parametersInitialized = false;
+    this->cycle_ticks = 0;
+    this->offset_ticks = 0;
 }
 
 void Period::initialize()
