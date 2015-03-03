@@ -70,7 +70,7 @@ void BGBurstTrafficSourceApp::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "burstSize"))
     {
-        this->burstSize = parameterULongCheckRange(par("burstSize"), 1, UINTMAX_MAX, true);
+        this->burstSize = parameterULongCheckRange(par("burstSize"), 1, ULONG_MAX, true);
     }
 }
 
