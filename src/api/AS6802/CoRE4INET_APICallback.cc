@@ -18,7 +18,7 @@
 
 namespace CoRE4INET {
 
- void APICallback::receiveSignal(__attribute__((unused)) cComponent *src, __attribute__((unused))  simsignal_t id, __attribute__((unused))  cObject *obj){
+ void APICallback::receiveSignal(cComponent *src, __attribute__((unused))  simsignal_t id, __attribute__((unused))  cObject *obj){
     if(argSet){
         fn(arg);
     }
@@ -34,13 +34,13 @@ namespace CoRE4INET {
             buf.traffic_type= TTE_BG_TRAFFIC;
         }
         buf.channel=0;
-        buf.ct_id=(uint16_t)src->par("ct_id").longValue();
+        buf.ct_id=static_cast<uint16_t>(src->par("ct_id").longValue());
         buf.shared=0;
 
         TTEAPIPriv *priv = new TTEAPIPriv();
         buf.priv = priv;
         priv->buffer = dynamic_cast<Buffer*>(src);
-        fn((void*)&buf);
+        fn(static_cast<void*>(&buf));
         if(buf.priv){
             delete priv;
             buf.priv=0;

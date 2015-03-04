@@ -18,6 +18,12 @@
 //TTE-API
 #include "tte_api.h"
 
+//Disable some warnings, so that we can use c-style code
+#if defined(__clang__)
+# pragma clang diagnostic push
+# pragma clang diagnostic ignored "-Wold-style-cast"
+#endif
+
 namespace CoRE4INET {
 
 Define_Module(TTEAPITestApplication)
@@ -111,3 +117,7 @@ void TTEAPITestApplication::startApplication()
 }
 
 } //namespace
+
+#if defined(__clang__)
+# pragma clang diagnostic pop
+#endif

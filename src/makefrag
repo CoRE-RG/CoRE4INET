@@ -66,4 +66,6 @@ else
     override COPTS := $(subst -I/,-isystem /,$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(COPTS)))
 endif
 $(info Replaced COPTS -I directives with -isystem directive: $(COPTS))
+
+override COPTS := $(subst -I/,-isystem /,$(subst -Iapi/AS6802/tte_api,-isystem api/AS6802/tte_api,$(COPTS)))
 endif

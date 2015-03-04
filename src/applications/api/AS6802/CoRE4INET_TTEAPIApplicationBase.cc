@@ -57,19 +57,18 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
     }
     if (msg->arrivedOn("schedulerIn"))
     {
-        Task *task = (Task*) msg->par("task").pointerValue();
+        Task *task = static_cast<Task*>(msg->par("task").pointerValue());
         task->executeTask();
         //Reregister scheduler
-        getPeriod()->registerEvent((SchedulerEvent *) msg);
+        getPeriod()->registerEvent(dynamic_cast<SchedulerEvent *>(msg));
     }
 }
 
 void TTEAPIApplicationBase::receiveSignal(__attribute__((unused))      cComponent *src, __attribute__((unused))      simsignal_t id,
         cObject *obj)
 {
-    if (dynamic_cast<SyncNotification *>(obj))
+    if (SyncNotification *notification = dynamic_cast<SyncNotification *>(obj))
     {
-        SyncNotification *notification = (SyncNotification *) obj;
         if (notification->getKind() == SYNC)
         {
             synchronized = true;
@@ -249,41 +248,41 @@ int32_t TTEAPIApplicationBase::tte_get_var(__attribute__((unused))     const uin
                 for (int i = 0; i < phy->getVectorSize(); i++)
                 {
                     EtherMACFullDuplex *mac =
-                            (EtherMACFullDuplex*) getParentModule()->getSubmodule("phy", i)->getSubmodule("mac");
+                            dynamic_cast<EtherMACFullDuplex*>(getParentModule()->getSubmodule("phy", i)->getSubmodule("mac"));
                     if (mac->gate("phys")->isConnected())
-                        *((uint8_t*) value) = (uint8_t) (*((uint8_t*) value) << (uint8_t) 1) | (uint8_t) 1;
+                        *static_cast<uint8_t*>(value) = static_cast<uint8_t>(*static_cast<uint8_t*>(value) << static_cast<uint8_t>(1)) | static_cast<uint8_t>(1);
                     else
-                        *((uint8_t*) value) = (uint8_t) (*((uint8_t*) value) << (uint8_t) 1);
+                        *static_cast<uint8_t*>(value) = static_cast<uint8_t>(*static_cast<uint8_t*>(value) << static_cast<uint8_t>(1));
                 }
             }
             else
             {
-                *((uint8_t*) value) = 0;
+                *static_cast<uint8_t*>(value) = 0;
                 return ETT_NULLPTR;
             }
             break;
         }
         case TTE_VAR_CTRL_STATUS: {
-            *((uint32_t*) value) = TTE_STAT_CONFIGURED | TTE_STAT_RUNNING;
+            *static_cast<uint32_t*>(value) = TTE_STAT_CONFIGURED | TTE_STAT_RUNNING;
             if (synchronized)
             {
-                *((uint32_t*) value) |= TTE_STAT_SYNCHRONIZED;
+                *static_cast<uint32_t*>(value) |= TTE_STAT_SYNCHRONIZED;
             }
             break;
         }
         case TTE_VAR_CTRL_COUNT: {
-            *((uint8_t*) value) = 1;
+            *static_cast<uint8_t*>(value) = 1;
             break;
         }
         case TTE_VAR_CHANNEL_COUNT: {
             cModule *phy = getParentModule()->getSubmodule("phy", 0);
             if (phy)
             {
-                *((uint8_t*) value) = (uint8_t) phy->getVectorSize();
+                *static_cast<uint8_t*>(value) = static_cast<uint8_t>(phy->getVectorSize());
             }
             else
             {
-                *((uint8_t*) value) = 0;
+                *static_cast<uint8_t*>(value) = 0;
                 return ETT_NULLPTR;
             }
             break;
@@ -301,20 +300,20 @@ int32_t TTEAPIApplicationBase::tte_get_var(__attribute__((unused))     const uin
             //break;
         }
         case TTE_VAR_API_VERSION: {
-            *((uint32_t*) value) = TTE_API_VER;
+            *static_cast<uint32_t*>(value) = TTE_API_VER;
             break;
         }
         case TTE_VAR_THREAD_SAFE: {
             //TODO: Minor CHECK WHETHER IT IS POSSIBLE TO SET TO TRUE (1)
-            *((uint8_t*) value) = 0;
+            *static_cast<uint8_t*>(value) = 0;
             break;
         }
         case TTE_VAR_MAC_ADDRESS: {
-            uint8_t *valueArr = (uint8_t *) value;
+            uint8_t *valueArr = static_cast<uint8_t*>(value);
             cModule *phy = getParentModule()->getSubmodule("phy", 0);
             if (phy)
             {
-                EtherMACFullDuplex *mac = (EtherMACFullDuplex*) phy->getSubmodule("mac");
+                EtherMACFullDuplex *mac = dynamic_cast<EtherMACFullDuplex*>(phy->getSubmodule("mac"));
                 MACAddress macAddress = mac->getMACAddress();
                 //Change order
                 valueArr[5] = macAddress.getAddressByte(0);
@@ -380,7 +379,7 @@ int32_t TTEAPIApplicationBase::tte_open_output_buf(tte_buffer_t * const buf, tte
     payload->setDataArraySize(frame->length);
     priv->frame->encapsulate(payload);
 
-    frame->data = (uint8_t*) malloc(frame->length);
+    frame->data = static_cast<uint8_t*>(malloc(frame->length));
     if (!frame->data)
         return ETT_NOMEM;
     priv->data = frame->data;
@@ -400,8 +399,8 @@ int32_t TTEAPIApplicationBase::tte_open_input_buf(tte_buffer_t * const buf, tte_
     {
         frame->ct_id = dynamic_cast<CTFrame*>(msg)->getCtID();
     }
-    frame->length = (uint16_t) payload->getByteLength();
-    frame->data = (uint8_t*) malloc((size_t) payload->getByteLength());
+    frame->length = static_cast<uint16_t>(payload->getByteLength());
+    frame->data = static_cast<uint8_t*>(malloc(static_cast<size_t>(payload->getByteLength())));
     priv->data = frame->data;
     MACAddress dest = msg->getDest();
     frame->eth_hdr.dst_mac[0] = dest.getAddressByte(5);
@@ -435,20 +434,20 @@ int32_t TTEAPIApplicationBase::tte_close_output_buf(tte_buffer_t * const buf)
     ();
     TTEAPIPriv *priv = static_cast<TTEAPIPriv *>(buf->priv);
     //Copy frame data and free memory
-    APIPayload *payload = (APIPayload*) priv->frame->getEncapsulatedPacket();
+    APIPayload *payload = dynamic_cast<APIPayload*>(priv->frame->getEncapsulatedPacket());
     for (unsigned int i = 0; i < payload->getDataArraySize(); i++)
     {
-        payload->setData(i, ((unsigned char *) priv->data)[i]);
+        payload->setData(i, static_cast<unsigned char *>(priv->data)[i]);
     }
     //Send to CTC
     if (priv && priv->buffer)
         if (priv->buffer->gate("in"))
             if (priv->buffer->gate("in")->getPathStartGate())
-                if ((cModule *) priv->buffer->gate("in")->getPathStartGate()->getOwner())
-                    if (((cModule *) priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"))
+                if (dynamic_cast<cModule *>(priv->buffer->gate("in")->getPathStartGate()->getOwner()))
+                    if (dynamic_cast<cModule *>(priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"))
                     {
                         sendDirect(priv->frame,
-                                ((cModule *) priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"));
+                                dynamic_cast<cModule *>(priv->buffer->gate("in")->getPathStartGate()->getOwner())->gate("in"));
                     }
 
     if (priv && priv->data)
@@ -498,7 +497,8 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
                 cb = new APICallback(priv->buffer, registerSignal("rxPk"));
                 receiveCallbacks[priv->buffer] = cb;
             }
-            cb->setFunctionPointer((void (*)(void *))value);break
+            cb->setFunctionPointer(reinterpret_cast<void (*)(void *)>(const_cast<void*>(value)));
+            break;
 ;        }
         case TTE_BUFVAR_TRANSMIT_CB:
         {
@@ -508,7 +508,7 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
                 cb = new APICallback(priv->buffer, registerSignal("rxPk"));
                 transmitCallbacks[priv->buffer] = cb;
             }
-            cb->setFunctionPointer((void(*)(void *))value);
+            cb->setFunctionPointer(reinterpret_cast<void (*)(void *)>(const_cast<void*>(value)));
             break;
         }
         case TTE_BUFVAR_CB_ARG:
@@ -521,11 +521,11 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
                 {
                     return ETT_NULLPTR;
                 }
-                cb->setFunctionArg((void*)value);
+                cb->setFunctionArg(static_cast<void*>(const_cast<void*>(value)));
             }
             else
             {
-                cb->setFunctionArg((void*)value);
+                cb->setFunctionArg(static_cast<void*>(const_cast<void*>(value)));
             }
             break;
         }
@@ -730,17 +730,17 @@ extern "C" int32_t tte_set_buf_var(tte_buffer_t * const buf, const tte_buf_var_i
     return ETT_NULLPTR;
 }
 
-extern "C" int32_t tte_flush_ctbuffers(__attribute__((unused))  const uint8_t ctrl_id)
+extern "C" int32_t tte_flush_buffers(__attribute__((unused))  const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_flush_tt_ctbuffers(__attribute__((unused))  const uint8_t ctrl_id)
+extern "C" int32_t tte_flush_tt_buffers(__attribute__((unused))  const uint8_t ctrl_id)
 {
     return ETT_NOTSUPPORTED;
 }
 
-extern "C" int32_t tte_flush_bg_ctbuffers(__attribute__((unused))  const uint8_t ctrl_id,
+extern "C" int32_t tte_flush_bg_buffers(__attribute__((unused))  const uint8_t ctrl_id,
         __attribute__((unused))  const uint8_t channel)
 {
     return ETT_NOTSUPPORTED;
