@@ -40,6 +40,10 @@ class TTEAPITestApplication : public TTEAPIApplicationBase
         virtual void startApplication();
 };
 
+void testCallback(void* arg);
+int main();
+
+
 } //namespace
 
 #endif

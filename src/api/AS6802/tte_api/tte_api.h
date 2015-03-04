@@ -648,7 +648,6 @@ static TTE_INLINE uint32_t tte_get_api_version(void)
  *
  * @retval ::ETT_NOINIT  The API is not initialized.
  * @retval 0..127  Number of available controllers. */
-__attribute__((__unused__))
 static TTE_INLINE int32_t tte_get_controller_cnt(void)
 {
     uint8_t cnt;
