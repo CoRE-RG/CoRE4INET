@@ -247,7 +247,7 @@ int32_t TTEAPIApplicationBase::tte_get_var(__attribute__((unused))     const uin
             {
                 for (int i = 0; i < phy->getVectorSize(); i++)
                 {
-                            dynamic_cast<inet::EtherMACFullDuplex*>(getParentModule()->getSubmodule("phy", i)->getSubmodule("mac"));
+                    inet::EtherMACFullDuplex* mac = dynamic_cast<inet::EtherMACFullDuplex*>(getParentModule()->getSubmodule("phy", i)->getSubmodule("mac"));
                     if (mac->gate("phys")->isConnected())
                         *static_cast<uint8_t*>(value) = static_cast<uint8_t>(*static_cast<uint8_t*>(value) << static_cast<uint8_t>(1)) | static_cast<uint8_t>(1);
                     else
