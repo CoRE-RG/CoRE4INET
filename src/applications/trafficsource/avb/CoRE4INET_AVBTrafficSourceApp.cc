@@ -67,7 +67,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 {
     if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
     {
-        SRPTable *srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+        SRPTable *srpTable = check_and_cast<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
         if (srpTable)
         {
             EV_INFO << "Register Talker in node" << std::endl;
@@ -159,7 +159,7 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent 
         if (lentry && lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
             //check whether there are listeners left
-            SRPTable *srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+            SRPTable *srpTable = check_and_cast<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
             if (srpTable->getListenersForStreamId(streamID, vlan_id).size() == 0)
             {
                 isStreaming = false;

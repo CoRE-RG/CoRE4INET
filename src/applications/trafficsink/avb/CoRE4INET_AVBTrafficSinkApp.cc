@@ -41,7 +41,7 @@ void AVBTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
 
-    srpTable = inet::check_and_cast_nullable<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
+    srpTable = check_and_cast<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (!srpTable)
     {
         throw cRuntimeError("Parent module does not contain a srpTable module");

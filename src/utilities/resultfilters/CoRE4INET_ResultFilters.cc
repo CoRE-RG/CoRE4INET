@@ -15,7 +15,7 @@
 #include "CoRE4INET_ResultFilters.h"
 
 //OMNeT++
-#include "cmessage.h"
+#include "cpacket.h"
 
 using namespace CoRE4INET;
 

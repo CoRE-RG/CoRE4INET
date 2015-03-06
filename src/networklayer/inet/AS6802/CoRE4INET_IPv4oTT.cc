@@ -321,7 +321,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
         etherctrl->setEtherType(ttFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
 
-        ipPacket->setArrival(this, Base::gate("TTIn")->getId());
+        ipPacket->setArrival(this->getId(), Base::gate("TTIn")->getId());
 
         delete ttFrame;
         Base::handleMessage(ipPacket);
@@ -410,7 +410,7 @@ void IPv4oTT<Base>::registerSendTimingEvents(std::list<IPoREFilter*> &filters)
     std::list<IPoREFilter*>::iterator f = filters.begin();
     for (; f != filters.end(); ++f)
     {
-        registerSendTimingEvent(inet::check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
+        registerSendTimingEvent(check_and_cast<TTDestinationInfo *>((*f)->getDestInfo()));
     }
 }
 
