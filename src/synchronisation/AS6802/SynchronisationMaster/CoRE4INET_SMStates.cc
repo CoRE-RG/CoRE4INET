@@ -741,7 +741,7 @@ void SM_STABLE::handleMessage(cMessage *message) {
 								&& (getValue(membership, 32)
 										<= (unsigned int)sm->par("max_pcf_membership").longValue())) {
 
-							uint32 key_ = getValue(membership, 32);
+							uint32_t key_ = getValue(membership, 32);
 
 							map<uint32_t, pair<uint32_t, uint64_t> >::iterator itr =
 									clock_stack->find(received_port);
