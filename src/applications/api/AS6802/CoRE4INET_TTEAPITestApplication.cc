@@ -50,7 +50,8 @@ int main()
 
     tte_get_var(0, TTE_VAR_MAC_ADDRESS, sizeof(mac), mac);
 
-    ev.printf("TTE_VAR_MAC_ADDRESS: %02x:%02x:%02x:%02x:%02x:%02x\n\n", mac[5], mac[4], mac[3], mac[2], mac[1], mac[0]);
+    EV_TRACE << "TTE_VAR_MAC_ADDRESS: " << std::hex << mac[5] << ":" << mac[4] << ":" << mac[3] << ":" << mac[2] << ":"
+            << mac[1] << ":" << mac[0] << std::dec << endl;
 
     if (tte_set_buf_var(&testbuffer, TTE_BUFVAR_TRANSMIT_CB, sizeof(void (*)(void*)), (void*)&testCallback) != ETT_SUCCESS)
     {
