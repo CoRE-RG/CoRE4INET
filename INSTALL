@@ -4,7 +4,7 @@ INSTALLATION INSTRUCTIONS
 PREREQUISITES
 
 You should have a working OMNeT++ installation, version 4.6 or later with the
-INET-Framework 2.5.0
+INET-Framework 2.6.0
 
 In INET you have to enable at least the following features:
 - Ethernet

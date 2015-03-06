@@ -19,11 +19,21 @@
 //OMNeT++
 #include "simkerneldefs.h"
 
+//INET
+#include "INETDefs.h"
+
 /**
  * Check for minimal OMNeT++ Version requirements
  */
 #if OMNETPP_VERSION < 0x0406
 #  error At least OMNeT++/OMNEST version 4.6 required
+#endif
+
+/**
+ * Check for minimal INET Version requirements
+ */
+#if INET_VERSION < 0x0206
+#  error At least INET version 2.6 required
 #endif
 
 /**
