@@ -47,5 +47,5 @@ simple Incoming like IIncoming
         //input of the ctc
         input in @directIn @labels(EtherFrame);
         //output of the ctc
-        output out @labels(EtherFrame-conn);
+        output out @loose @labels(EtherFrame-conn);
 }

@@ -15,25 +15,22 @@
 
 package core4inet.incoming.avb;
 
+import core4inet.incoming.base.Incoming;
+
 //
 // Module for the conformance checks of incoming audio-video bridging traffic.
 //
 // TODO: Inheritance: PArent should be base.Incoming
 //
 // @author Philipp Meyer
-simple AVBIncoming
+simple AVBIncoming extends Incoming
 {
     parameters:
         //AVBIncoming is implemented by the AVBIncoming C++ Class
         @class(AVBIncoming);
         @display("i=block/arrival,blue");
         
-        //Hardware delay between incoming and outgoing buffer
-        double hardware_delay @unit(s) = default(0s);
     gates:
-        //input for AVB Frames
-        input in @directIn @labels(AVBFrame);
-
         //outputs for AVB Frames
         output AVBAout[] @labels(AVBFrame);
         output AVBBout[] @labels(AVBFrame);
