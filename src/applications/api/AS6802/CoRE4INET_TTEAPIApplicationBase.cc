@@ -520,11 +520,11 @@ int32_t TTEAPIApplicationBase::tte_set_buf_var(tte_buffer_t * const buf, const t
                 {
                     return ETT_NULLPTR;
                 }
-                cb->setFunctionArg(static_cast<void*>(const_cast<void*>(value)));
+                cb->setFunctionArg(const_cast<void*>(value));
             }
             else
             {
-                cb->setFunctionArg(static_cast<void*>(const_cast<void*>(value)));
+                cb->setFunctionArg(const_cast<void*>(value));
             }
             break;
         }
