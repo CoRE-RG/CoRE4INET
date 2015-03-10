@@ -242,7 +242,7 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("RCin"))
     {
         long priority = msg->getSenderModule()->par("priority").longValue();
-        if (priority > 0 && static_cast<size_t>(priority) < numRcPriority)
+        if (priority >= 0 && static_cast<size_t>(priority) < numRcPriority)
         {
             rcQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(rcQueueLengthSignals[static_cast<size_t>(priority)],
@@ -253,7 +253,7 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
         {
             rcQueue[0].insert(msg);
             TC::notifyListeners();
-            EV_WARN << "Priority of message "<< msg->getFullName() <<" missing, using default priority 0!" << endl;
+            EV_WARN << "Priority of message "<< msg->getFullName() <<" missing or not within range, using default priority 0!" << endl;
         }
     }
     else
