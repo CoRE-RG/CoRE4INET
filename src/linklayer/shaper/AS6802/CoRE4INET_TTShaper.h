@@ -572,7 +572,7 @@ uint64_t startTicks = ttBuffers.begin()->first;
 
 if ((getTimer()->getTotalTicks() + sendTicks) >= startTicks)
 {
-    EV_ERROR << "transmission not allowed! Send time would be from " << getTimer()->getTotalTicks() << " to "
+    EV_DETAIL << "transmission not allowed! Send time would be from " << getTimer()->getTotalTicks() << " to "
             << getTimer()->getTotalTicks() + sendTicks << " tt_window starts at: " << startTicks << endl;
     return false;
 }

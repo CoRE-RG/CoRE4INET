@@ -253,7 +253,7 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
         {
             rcQueue[0].insert(msg);
             TC::notifyListeners();
-            EV_ERROR << "Priority missing!" << endl;
+            EV_WARN << "Priority of message "<< msg->getFullName() <<" missing, using default priority 0!" << endl;
         }
     }
     else
