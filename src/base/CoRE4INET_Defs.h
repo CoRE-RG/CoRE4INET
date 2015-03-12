@@ -32,7 +32,7 @@
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0206
+#if INET_VERSION < 0x0264
 #  error At least INET version 2.99 required
 #endif
 
