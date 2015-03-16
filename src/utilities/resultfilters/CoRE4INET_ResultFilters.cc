@@ -17,7 +17,7 @@
 //OMNeT++
 #include "cmessage.h"
 #if OMNETPP_VERSION >= 0x500
-#include "cPacket.h"
+#include "cpacket.h"
 #endif
 
 using namespace CoRE4INET;

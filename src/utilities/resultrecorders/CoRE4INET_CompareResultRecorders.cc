@@ -17,7 +17,7 @@
 
 //OMNeT++
 #if OMNETPP_VERSION >= 0x500
-#include "cSimulation.h"
+#include "csimulation.h"
 #endif
 
 using namespace TTEthernetModel;
