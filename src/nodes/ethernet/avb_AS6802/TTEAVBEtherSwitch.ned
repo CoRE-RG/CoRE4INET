@@ -34,6 +34,10 @@ module TTEAVBEtherSwitch
     gates:
         // Physical ports of the switch
         inout ethg[] @loose;
+    types:
+        channel ProcessingDelay extends ned.DelayChannel
+        {
+        }
     submodules:
         // Implementation of the best-effort forwarding part
         beswitch: SRPRelay {
@@ -111,8 +115,8 @@ module TTEAVBEtherSwitch
             avbBBuffer[i].out --> phy[i].AVBBin;
 
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- beswitch.ifOut[i];
-            phy[i].upperLayerOut --> beswitch.ifIn[i];
+            phy[i].upperLayerIn <-- ProcessingDelay{ delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> ProcessingDelay{ delay = (hardware_delay/2); } --> beswitch.ifIn[i];
         }
 
         srpProtocol.out --> beswitch.srpIn;
