@@ -16,8 +16,9 @@
 #include "CoRE4INET_CompareResultRecorders.h"
 
 //OMNeT++
-//FIXME This should be removed when fixed in OMNeT (include added to cenvir.h")
+#if OMNETPP_VERSION >= 0x500
 #include "csimulation.h"
+#endif
 
 using namespace TTEthernetModel;
 
