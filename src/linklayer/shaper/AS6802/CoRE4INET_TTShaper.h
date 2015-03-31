@@ -568,7 +568,7 @@ if (ttBuffers.size() == 0)
 SimTime sendTime = TC::outChannel->calculateDuration(message);
 //Don't know if that is right, but it works!
 sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
-uint64_t sendTicks = static_cast<uint64_t>(ceil((sendTime / getOscillator()->par("tick")).dbl()));
+uint64_t sendTicks = static_cast<uint64_t>(ceil((sendTime.dbl() / getOscillator()->par("tick").doubleValue())));
 uint64_t startTicks = ttBuffers.begin()->first;
 
 if ((getTimer()->getTotalTicks() + sendTicks) >= startTicks)
