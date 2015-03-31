@@ -46,6 +46,10 @@ module TTEEtherSwitch
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
+    types:
+        channel ProcessingDelay extends ned.DelayChannel
+        {
+        }
     submodules:
         status: NodeStatus {
             @display("p=47,50;is=n");
@@ -90,8 +94,8 @@ module TTEEtherSwitch
     connections:
         for i=0..sizeof(ethg)-1 {
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- beswitch.ifOut[i];
-            phy[i].upperLayerOut --> beswitch.ifIn[i];
+            phy[i].upperLayerIn <-- ProcessingDelay{ delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> ProcessingDelay{ delay = (hardware_delay/2); } --> beswitch.ifIn[i];
         }
 }
 
