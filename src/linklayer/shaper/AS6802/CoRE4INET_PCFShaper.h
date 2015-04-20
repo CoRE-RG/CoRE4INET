@@ -217,6 +217,7 @@ void PCFShaper<TC>::enqueueMessage(cMessage *msg)
     {
         pcfQueue.insert(msg);
         TC::notifyListeners();
+        EV_TRACE << "Interface not idle queuing PCF" << endl;
     }
     else
     {

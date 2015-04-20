@@ -255,6 +255,7 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
             TC::notifyListeners();
             EV_WARN << "Priority of message "<< msg->getFullName() <<" missing or not within range, using default priority 0!" << endl;
         }
+        EV_TRACE << "Interface not idle queuing RC frame" << endl;
     }
     else
     {

@@ -39,6 +39,8 @@ simple TT_PCF_RC_BE_Shaper extends PCF_RC_BE_Shaper like ITimed
         @statistic[ttQueueLength](title="TT-Queue Length"; record=vector; interpolationmode=sample-hold);
         //Comma seperated list of TTBuffers that send messages to this port
         string tt_buffers = default("");
+        //Safety margin for TT-Messages in ticks (musst be set according to maximum clock correction!)
+        int safety_margin = default(5);
         //
         string oscillator = default("oscillator");
         string timer = default("timer");

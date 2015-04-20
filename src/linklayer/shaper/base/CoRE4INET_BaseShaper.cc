@@ -48,10 +48,12 @@ void BaseShaper::notifyListeners()
 
 void BaseShaper::handleMessage(cMessage *msg)
 {
+    EV_WARN << "Shaper has no method to handle frametype. Dropping frame" << endl;
     delete msg;
 }
 
 void BaseShaper::enqueueMessage(cMessage *msg)
 {
+    EV_WARN << "Shaper has no method to enqueue frametype. Dropping frame" << endl;
     delete msg;
 }
