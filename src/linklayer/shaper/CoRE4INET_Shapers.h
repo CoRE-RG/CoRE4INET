@@ -19,6 +19,7 @@
 //CoRE4INET
 #include "CoRE4INET_BaseShaper.h"
 #include "CoRE4INET_BEShaper.h"
+#include "CoRE4INET_IEEE8021QShaper.h"
 
 #ifdef WITH_AS6802_COMMON
 //CoRE4INET
@@ -46,6 +47,21 @@ namespace CoRE4INET {
  * @author Till Steinbach
  */
 class BE_Shaper : public BEShaper<BaseShaper>
+{
+};
+
+/**
+* @brief Class representing the IEEE8021Q_Shaper module
+ *
+ * This shaper handles Q-tagged and best-effort traffic.
+ *
+ * @see IEEE8021QShaper, BaseShaper
+ *
+ * @ingroup Shapers
+ *
+ * @author Philipp Meyer
+ */
+class IEEE8021Q_Shaper : public IEEE8021QShaper<BaseShaper>
 {
 };
 
