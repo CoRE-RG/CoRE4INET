@@ -3,33 +3,33 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package core4inet.applications.trafficsource.AS6802;
+
+import core4inet.applications.trafficsource.AS6802.RCTrafficSourceApp;
+
 //
-
-#ifndef __CORE4INET_AS6802DEFS_H_
-#define __CORE4INET_AS6802DEFS_H_
-
-namespace CoRE4INET {
-
-/**
- * Defines for range checks
- */
-#define MAX_CT_ID 0xFFFF
-#define MAX_PRIORITY 10
-#define MAX_BAG UINT32_MAX
-#define MAX_JITTER UINT32_MAX
-#define MAX_SEND_WINDOW UINT32_MAX
-#define MAX_CYCLE_TICKS UINT32_MAX
-#define MAX_OFFSET_TICKS UINT32_MAX
-#define MAX_BAG_TICKS UINT32_MAX
-#define MAX_JITTER_TICKS UINT32_MAX
-
+// Traffic source application used for rate-constrained traffic generators with burst behavior.
+//
+// @see RCTrafficSourceApp
+//
+// @author Philipp Meyer
+simple RCBurstTrafficSourceApp extends RCTrafficSourceApp
+{
+    parameters:
+        @class(RCBurstTrafficSourceApp);
+        
+        //Burst interval for the rate constrained messages
+        volatile double burstInterval @unit(s);
+        //Number of frames to be send in one burstinterval
+        int nrOfFramesInOneBurst = default(1);
 }
-#endif /* AVBDEFS_H_ */

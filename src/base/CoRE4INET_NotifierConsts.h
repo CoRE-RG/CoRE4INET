@@ -16,7 +16,7 @@
 #ifndef __CORE4INET_NOTIFIERCONSTS_H_
 #define __CORE4INET_NOTIFIERCONSTS_H_
 
-#include "clistener.h"
+#include "omnetpp.h"
 
 namespace CoRE4INET {
 

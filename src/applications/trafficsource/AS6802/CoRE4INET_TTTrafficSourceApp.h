@@ -17,7 +17,7 @@
 #define __CORE4INET_TTTRAFFICSOURCEAPP_H_
 
 //OMNeT++
-#include "clistener.h"
+#include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_CTTrafficSourceAppBase.h"
 #include "CoRE4INET_Scheduled.h"

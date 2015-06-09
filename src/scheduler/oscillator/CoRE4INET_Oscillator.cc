@@ -22,9 +22,6 @@
 //INET
 #include "Compat.h"
 
-//OMNeT
-#include "cwatch.h"
-
 namespace CoRE4INET {
 
 Define_Module(Oscillator);

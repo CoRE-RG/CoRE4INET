@@ -17,8 +17,7 @@
 #define __CORE4INET_SRPROTOCOL_H_
 
 //OMNeT++
-#include "clistener.h"
-#include "csimplemodule.h"
+#include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
 

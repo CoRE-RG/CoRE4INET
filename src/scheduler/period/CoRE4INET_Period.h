@@ -17,7 +17,7 @@
 #define __CORE4INET_PERIOD_H_
 
 //OMNeT++
-#include "csimplemodule.h"
+#include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_SchedulerEvent.h"
 //Auto-generated Messages

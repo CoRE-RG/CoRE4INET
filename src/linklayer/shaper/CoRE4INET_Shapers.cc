@@ -3,6 +3,7 @@
 using namespace CoRE4INET;
 
 Define_Module(BE_Shaper);
+Define_Module(IEEE8021Q_Shaper);
 
 #ifdef WITH_AS6802_COMMON
 Define_Module(PCF_RC_BE_Shaper);

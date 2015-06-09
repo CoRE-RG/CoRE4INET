@@ -14,10 +14,11 @@
 //
 #include "CoRE4INET_FloatingResultRecorders.h"
 
-#include <cmessage.h>
+//OMNeT++
+#include "omnetpp.h"
+
+//Std
 #include <limits>
-#include <cmodule.h>
-#include <cchannel.h>
 
 
 using namespace CoRE4INET;

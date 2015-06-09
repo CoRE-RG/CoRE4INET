@@ -21,9 +21,6 @@
 //INET
 #include "Ethernet.h"
 
-//OMNeT++
-#include "cmessage.h"
-
 namespace CoRE4INET {
 
 Define_Module(TrafficSourceAppBase);

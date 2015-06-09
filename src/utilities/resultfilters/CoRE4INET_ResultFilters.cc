@@ -15,10 +15,7 @@
 #include "CoRE4INET_ResultFilters.h"
 
 //OMNeT++
-#include "cmessage.h"
-#if OMNETPP_VERSION >= 0x500
-#include "cpacket.h"
-#endif
+#include "omnetpp.h"
 
 using namespace CoRE4INET;
 

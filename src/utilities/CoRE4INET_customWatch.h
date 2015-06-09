@@ -21,7 +21,7 @@
 #include <unordered_map>
 
 //OMNeT++
-#include "cstlwatch.h"
+#include "omnetpp.h"
 
 template<class KeyT, class ValueT, class CmpT>
 class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase

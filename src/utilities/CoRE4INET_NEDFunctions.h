@@ -17,7 +17,7 @@
 #define __CORE4INET_HELPERFUNCTIONS_H_
 
 //OMNeT++
-#include "cnedvalue.h"
+#include "omnetpp.h"
 
 /**
  * @brief Implementation of NED function "quantity sec_to_tick(quantity seconds, quantity ticklength?)"

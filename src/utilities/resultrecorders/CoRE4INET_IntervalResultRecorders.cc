@@ -18,8 +18,7 @@
 //Std
 #include <limits>
 //OMNeT++
-#include "cmodule.h"
-#include "cchannel.h"
+#include "omnetpp.h"
 
 using namespace TTEthernetModel;
 

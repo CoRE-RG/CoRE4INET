@@ -17,7 +17,9 @@
 #define __CoRE4INET_BASESHAPER_H
 
 //OMNeT++
-#include "csimplemodule.h"
+#include "omnetpp.h"
+
+//INET
 #include "IPassiveQueue.h"
 
 namespace CoRE4INET {

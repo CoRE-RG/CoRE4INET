@@ -21,7 +21,7 @@
 #include <string>
 
 //OMNeT++
-#include "cmodule.h"
+#include "omnetpp.h"
 
 //INET
 #include "CoRE4INET_ModuleAccess.h"
