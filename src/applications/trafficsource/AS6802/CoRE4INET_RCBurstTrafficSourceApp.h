@@ -33,19 +33,19 @@ namespace CoRE4INET {
  */
 class RCBurstTrafficSourceApp : public virtual CoRE4INET::CTTrafficSourceAppBase, public virtual CoRE4INET::Timed
 {
-    /**
-     * @brief Caches interval parameter
-     */
-    double interval;
-    /**
-     * @brief Caches burstInterval parameter
-     */
-    double burstInterval;
-    /**
-     * @brief Counts the number of frames that are send until now
-     */
-    unsigned int framesBurstedCnt;
-
+    private:
+        /**
+         * @brief Caches interval parameter
+         */
+        double interval;
+        /**
+         * @brief Caches burstInterval parameter
+         */
+        double burstInterval;
+        /**
+         * @brief Counts the number of frames that are sent until now
+         */
+        unsigned int framesBurstedCnt;
 
     protected:
         /**
