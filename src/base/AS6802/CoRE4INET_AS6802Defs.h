@@ -16,8 +16,6 @@
 #ifndef __CORE4INET_AS6802DEFS_H_
 #define __CORE4INET_AS6802DEFS_H_
 
-#include "simtime.h"
-
 namespace CoRE4INET {
 
 /**

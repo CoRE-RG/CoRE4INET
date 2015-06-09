@@ -17,7 +17,7 @@
 #define __CORE4INET_TIMER_H_
 
 //OMNeT++
-#include "csimplemodule.h"
+#include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_Oscillator.h"
 #include "CoRE4INET_Period.h"

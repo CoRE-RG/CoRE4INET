@@ -17,7 +17,7 @@
 #define __CORE4INET_DEFS_H
 
 //OMNeT++
-#include "simkerneldefs.h"
+#include "omnetpp.h"
 
 //INET
 #include "INETDefs.h"

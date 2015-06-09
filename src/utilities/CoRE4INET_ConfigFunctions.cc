@@ -18,7 +18,7 @@
 #include "CoRE4INET_HelperFunctions.h"
 
 //OMNeT++
-#include "cstringtokenizer.h"
+#include "omnetpp.h"
 
 namespace CoRE4INET {
 

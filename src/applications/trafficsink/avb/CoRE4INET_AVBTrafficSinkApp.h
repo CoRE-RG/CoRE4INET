@@ -17,7 +17,7 @@
 #define __CORE4INET_AVBTRAFFICSINK_H_
 
 //OMNeT++
-#include "clistener.h"
+#include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_TrafficSinkApp.h"
 #include "CoRE4INET_SRPTable.h"

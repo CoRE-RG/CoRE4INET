@@ -16,9 +16,7 @@
 #include "CoRE4INET_CompareResultRecorders.h"
 
 //OMNeT++
-#if OMNETPP_VERSION >= 0x500
-#include "csimulation.h"
-#endif
+#include "omnetpp.h"
 
 using namespace TTEthernetModel;
 

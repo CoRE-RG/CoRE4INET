@@ -13,10 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
+//CoRE4INET
 #include "CoRE4INET_MessageNumProfiler.h"
 
+//INET
 #include "Compat.h"
 
+//Std
 #include <ostream>
 
 namespace CoRE4INET {

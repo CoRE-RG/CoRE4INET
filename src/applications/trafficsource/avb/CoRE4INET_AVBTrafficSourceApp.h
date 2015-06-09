@@ -17,7 +17,7 @@
 #define __CORE4INET_AVBTRAFFICSOURCEAPP_H_
 
 //OMNeT++
-#include "clistener.h"
+#include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_TrafficSourceAppBase.h"
 #include "CoRE4INET_Timed.h"

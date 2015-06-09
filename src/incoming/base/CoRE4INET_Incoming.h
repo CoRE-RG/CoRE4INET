@@ -17,7 +17,7 @@
 #define __CORE4INET_INCOMING_H_
 
 //OMNeT++
-#include "csimplemodule.h"
+#include "omnetpp.h"
 //INET
 #include "EtherFrame_m.h"
 

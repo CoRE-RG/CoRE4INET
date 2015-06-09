@@ -20,7 +20,7 @@
 #include <unordered_map>
 
 //OMNeT++
-#include "csimplemodule.h"
+#include "omnetpp.h"
 //INET
 #include "MACAddress.h"
 //CoRE4INET
