@@ -33,7 +33,7 @@ simple SimpleOscillator extends Oscillator like IScheduled
         // Maximum clock drift
         double max_drift @unit(ppm) = default(200ppm);
         // Clock drift change intensity
-        volatile double drift_change @unit(ppm) = default(uniform(12.5ppm,12.5ppm));
+        volatile double drift_change @unit(ppm) = default(uniform(-12.5ppm,12.5ppm));
         // Period related to the clock drift update
         string period = default("period[0]");
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node)
