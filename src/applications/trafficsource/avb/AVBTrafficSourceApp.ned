@@ -40,7 +40,7 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         int intervalFrames = default(1);
         
         // Variation of frame forwarding interval
-        double intervalInaccurracy @unit(s) = default(0s);
+        volatile double intervalInaccurracy @unit(s) = default(0s);
         
         // VLAN identifier of the AVB Stream
         int vlan_id = default(2);
