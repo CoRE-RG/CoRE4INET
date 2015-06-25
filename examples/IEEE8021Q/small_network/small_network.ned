@@ -19,8 +19,7 @@ import inet.nodes.ethernet.Eth100M;
 
 //
 // Small sample network with three hosts and one switch that shows how to 
-// configure the TTEthernet Model. Configuration in omnetpp.ini
-// - Uses 5ms Cycletime
+// configure the IEEE 802.1Q Model. Configuration in omnetpp.ini
 // - 80ns Tick length
 //
 network small_network
