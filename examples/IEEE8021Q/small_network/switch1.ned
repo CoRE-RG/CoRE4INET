@@ -15,47 +15,12 @@
 
 package core4inet.examples.IEEE8021Q.small_network;
 
-import core4inet.nodes.ethernet.AS6802.TTEEtherSwitch;
-import core4inet.incoming.AS6802.TTIncoming;
-import core4inet.buffer.AS6802.TTDoubleBuffer;
-import core4inet.incoming.AS6802.RCIncoming;
-import core4inet.buffer.AS6802.RCQueueBuffer;
+import core4inet.nodes.ethernet.IEEE8021Q.IEEE8021QEtherSwitch;
 
 //
-// switch1: configuration in switch1.ini
-// Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
+// Switch1: configuration in switch1.ini
 //
-module Switch1 extends TTEEtherSwitch
+module Switch1 extends IEEE8021QEtherSwitch
 {
     @display("bgb=351,311");
-    submodules:
-        vl_100_ctc: TTIncoming {
-            parameters:
-                @display("p=170,130");
-        }
-        vl_100: TTDoubleBuffer {
-            parameters:
-                @display("p=240,130");
-        }
-        vl_101_ctc: RCIncoming {
-            parameters:
-                @display("p=170,200");
-                hardware_delay = hardware_delay;
-        }
-        vl_101: RCQueueBuffer {
-            parameters:
-                @display("p=240,200");
-        }
-        vl_102_ctc: TTIncoming {
-            parameters:
-                @display("p=170,270");
-        }
-        vl_102: TTDoubleBuffer {
-            parameters:
-                @display("p=240,270");
-        }
-    connections:
-        vl_100_ctc.out --> vl_100.in;
-        vl_101_ctc.out --> vl_101.in;
-        vl_102_ctc.out --> vl_102.in;
 }

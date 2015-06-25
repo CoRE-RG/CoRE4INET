@@ -37,7 +37,7 @@ import inet.status.NodeStatus;
 // @author Till Steinbach
 // @author Philipp Meyer
 //
-module TTEEtherHost
+module IEEE8021QEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
