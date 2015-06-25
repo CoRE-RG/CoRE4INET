@@ -30,6 +30,7 @@ namespace CoRE4INET {
  * *
  * @ingroup IEEE8021Q
  *
+ * @author Till Steinbach
  * @author Philipp Meyer
  */
 template<class TC>

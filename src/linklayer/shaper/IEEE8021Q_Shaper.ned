@@ -22,11 +22,13 @@ import core4inet.linklayer.shaper.base.IShaper;
 //
 // @see IShaper
 //
+// @author Till Steinbach
 // @author Philipp Meyer
 //
 simple IEEE8021Q_Shaper like IShaper
 {
     parameters:
+        @display("i=block/classifier");
         @class(IEEE8021Q_Shaper);
         //Signal emitted when queue length of the rc queue changes, contains new queue length
         @signal[q*QueueLength](type=unsigned long);
