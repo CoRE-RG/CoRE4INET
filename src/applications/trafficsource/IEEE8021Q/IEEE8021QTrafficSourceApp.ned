@@ -15,7 +15,7 @@
 
 package core4inet.applications.trafficsource.IEEE8021Q;
 
-import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
+import core4inet.applications.trafficsource.base.BGTrafficSourceApp;
 
 //
 // Traffic source application used for IEEE 802.1Q traffic.
@@ -26,17 +26,11 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 // @author Till Steinbach
 // @author Philipp Meyer
 //
-simple IEEE8021QTrafficSourceApp extends TrafficSourceAppBase
+simple IEEE8021QTrafficSourceApp extends BGTrafficSourceApp
 {
     parameters:
-        @class(BGTrafficSourceApp);
-        @display("i=block/source,green");
-
-        // destination MAC address
-        string destAddress = default("auto");
-
-        // interval between sending requests
-        volatile double sendInterval @unit(s) = default(uniform(0s,1s));
+        @class(IEEE8021QTrafficSourceApp);
+        @display("i=block/source,darkgreen");
         
         // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
     	int priority = default(0);
