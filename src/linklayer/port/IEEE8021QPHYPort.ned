@@ -22,10 +22,10 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 // The IEEE8021QPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a IEEE 802.1Q Ethernet device (Switch or Host)
 //
-// @see IPort, EtherMACFullDuplex, IEEE8021Q_Shaper, BE_Shaper, BE_InControl
+// @see EtherMACFullDuplex, IEEE8021Q_Shaper, BE_Shaper, BE_InControl
 //
 // @author Philipp Meyer
-module IEEE8021QPHYPort like IPort
+module IEEE8021QPHYPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
