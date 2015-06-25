@@ -1,0 +1,17 @@
+Demonstrates a small TTEthernet Network. Traffic generators send Ethernet frames directly.
+
+- The small network contains three hosts (node1, node2, node3) and a switch, which 
+  connects these hosts.
+  The cycle time is 5 ms (see omnetpp.ini)
+
+- Via virtual link vl100 node1 sends time triggered (TT) messages to node2 and node3.
+  Double buffers will be used.
+
+- Via virtual link vl101 node2 sends rate constrained (RC) messages to node3.
+  Queued buffers will be used.
+  
+  - Via virtual link vl102 node1 sends time triggered (TT) messages to node2.
+  Double buffers will be used.
+
+- Cross traffic may be send via the corresponding functionality of inet framework.
+  For more details take a look at unit*.ini. Use the configuration With_Crosstraffic.

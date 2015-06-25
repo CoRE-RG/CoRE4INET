@@ -178,6 +178,7 @@
         requires = "IEEE8021Q_common"
         labels = ""
         nedPackages = "
+                       core4inet.examples.IEEE8021Q.small_network
                       "
         extraSourceFolders = ""
         linkerFlags = ""
