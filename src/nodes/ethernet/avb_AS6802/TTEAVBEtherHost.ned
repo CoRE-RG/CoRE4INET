@@ -40,7 +40,7 @@ module TTEAVBEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
-        @node;
+        @networkNode;
         int numApps = default(0); //default(1) ? ListenerApp
         int numBuffer = default(0);
         int numPorts = default(1);

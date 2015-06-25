@@ -50,7 +50,7 @@ import inet.transportlayer.contract.IUDP;
 module RTIPHost
 {
     parameters:
-        @node;
+        @networkNode;
         @labels(node,ethernet-node,wireless-node);
         string routingFile = default("");
         bool forwarding = default(true);

@@ -25,15 +25,15 @@
 /**
  * Check for minimal OMNeT++ Version requirements
  */
-#if OMNETPP_VERSION < 0x0500
-#  error At least OMNeT++/OMNEST version 5.0 required
+#if OMNETPP_VERSION < 0x0406
+#  error At least OMNeT++/OMNEST version 4.6 required
 #endif
 
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0263
-#  error At least INET version 2.99 required
+#if INET_VERSION < 0x0300
+#  error At least INET version 3.00 required
 #endif
 
 /**

@@ -13,6 +13,7 @@ If you require IP and Transport (otherwise disable the feature - IP over realtim
 - IPv6
 - TCP
 - UDP
+- SCTP
 
 General
 -------

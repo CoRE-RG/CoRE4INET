@@ -19,6 +19,9 @@
 #include "scheduler/SchedulerMessageEvents_m.h"
 #include "SyncNotification_m.h"
 
+//INET
+#include "Compat.h"
+
 using namespace CoRE4INET;
 
 Define_Module(DummySync);

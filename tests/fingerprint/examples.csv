@@ -1,18 +1,18 @@
 #note that the fingerprints provided may not match your architecture. Thus the test may fail although everything is ok
 # workingdir,                                                     args,                                                  simtimelimit,    fingerprint
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c General -r 0,                        1s,              bed1-3931
-/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              12e3-e531
-/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crossbursts -r 0,               1s,              2911-891f
-/examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0,                        1s,              439a-2bb7
+/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              b9d9-d0ae
+/examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crossbursts -r 0,               1s,              9c6c-6e84
+/examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0,                        1s,              e100-f1c9
 #/examples/AS6802/synchronization/HighIntegrity_small/,           -f omnetpp.ini -c General -r 0,                        1s,              da3e-3e7b
 #/examples/AS6802/synchronization/StandardIntegrity_large/,       -f omnetpp.ini -c General -r 0,                        1s,              b23c-ebb5
 #/examples/AS6802/synchronization/StandardIntegrity_medium/,      -f omnetpp.ini -c General -r 0,                        1s,              e040-f0be
-/examples/avb_AS6802/small_network/,                           	  -f omnetpp.ini -c General -r 0,                        1s,              907f-130a
-/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              dce9-ede7
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,      1s,              0f4f-58ad
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      1s,              3ff8-a1dc
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       1s,              481c-1018
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            6488-63c0
-/examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              a193-1fd5
+/examples/avb_AS6802/small_network/,                           	  -f omnetpp.ini -c General -r 0,                        1s,              0e0e-40fe
+/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              3d1d-b152
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,      1s,              ceb6-a79c
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      1s,              0f5a-4421
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       1s,              f5c9-af47
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            970a-a540
+/examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              ebce-b928
 
 #fingerprints generated with commit TBD at Date:   Tue Jan 6 2015 10:36:09  by Till Steinbach on Linux 32Bit

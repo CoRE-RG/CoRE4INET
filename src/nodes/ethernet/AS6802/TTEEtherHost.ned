@@ -44,7 +44,7 @@ module TTEEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
-        @node;
+        @networkNode;
         @labels(node,ethernet-node);
         int numApps = default(0);
         int numBuffer = default(0);

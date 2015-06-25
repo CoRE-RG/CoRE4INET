@@ -321,7 +321,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
         etherctrl->setEtherType(ttFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
 
-        ipPacket->setArrival(this->getId(), Base::gate("TTIn")->getId());
+        ipPacket->setArrival(this, Base::gate("TTIn")->getId());
 
         delete ttFrame;
         Base::handleMessage(ipPacket);

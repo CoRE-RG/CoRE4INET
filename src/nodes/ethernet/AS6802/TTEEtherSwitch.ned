@@ -39,7 +39,7 @@ module TTEEtherSwitch
 {
     parameters:
         @display("i=block/switch;bgb=514,312");
-        @node;
+        @networkNode;
         @labels(node,ethernet-node);
         double hardware_delay @unit(s) = default(8us);
         int numBuffer = default(0);
