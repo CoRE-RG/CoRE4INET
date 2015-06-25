@@ -164,6 +164,7 @@
         nedPackages = "
                        core4inet.linklayer.shaper.IEEE8021Q
                        core4inet.nodes.ethernet.IEEE8021Q
+                       core4inet.applications.trafficsource.IEEE8021Q
                       "
         extraSourceFolders = ""
         compileFlags = "-DWITH_IEEE8021Q_COMMON"
