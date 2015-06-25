@@ -37,7 +37,7 @@ simple AVBTrafficSinkApp extends TrafficSinkApp
         int vlan_id = default(2);
         //Interval in which a subscription is updated
         double updateInterval @unit("s") = default(6s);
-        //Interval in which a subscription is reregistered after a timeout
+        //Interval in which a subscription is reregistered after a registration failed
         double retryInterval @unit("s") = default(1s);
     gates:
         // Gate for incoming AVB frames

@@ -111,17 +111,18 @@ void AVBTrafficSourceApp::sendAVBFrame()
     payloadPacket->setTimestamp();
     payloadPacket->setByteLength(static_cast<int64_t>(getPayloadBytes()));
     outFrame->encapsulate(payloadPacket);
-//Padding
+    //Padding
     if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
     {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
-//class measurement interval A=125us B=250us
+    //class measurement interval A=125us B=250us
     simtime_t tick =
             check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
-    simtime_t interval = getIntervalForClass(srClass) / intervalFrames;
+    simtime_t interval = (getIntervalForClass(srClass) / intervalFrames) + par("intervalInaccurracy").doubleValue();
+    if(interval < 0) interval = 0;
 
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
     event->setTimer(static_cast<uint64_t>(ceil(interval / tick)));
