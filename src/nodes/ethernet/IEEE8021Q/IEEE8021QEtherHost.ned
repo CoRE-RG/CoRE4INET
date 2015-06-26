@@ -49,6 +49,7 @@ module IEEE8021QEtherHost
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
         string configurationManagerType = default("");
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
     gates:
         // Physical port of the host
         inout ethg @loose @labels(EtherFrame-conn);

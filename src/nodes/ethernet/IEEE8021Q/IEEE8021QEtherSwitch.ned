@@ -41,6 +41,7 @@ module IEEE8021QEtherSwitch
         double hardware_delay @unit(s) = default(8us);
         int numBuffer = default(0);
         string configurationManagerType = default("");
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
