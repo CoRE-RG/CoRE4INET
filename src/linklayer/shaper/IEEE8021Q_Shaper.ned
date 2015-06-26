@@ -34,7 +34,9 @@ simple IEEE8021Q_Shaper like IShaper
         @signal[q*QueueLength](type=unsigned long);
         //Statistic of the queue length of rate-constrained frames
         @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; record=vector; interpolationmode=sample-hold);
-
+		
+		string oscillator = default("oscillator");
+        string timer = default("timer");
     gates:
         //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)
         input in @labels(EtherFrame);
