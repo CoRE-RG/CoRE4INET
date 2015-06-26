@@ -22,7 +22,7 @@
 #include "CoRE4INET_CTFrame.h"
 
 //INET
-#include "ModuleAccess.h"
+#include "FixedModuleAccess.h"
 #include "EtherMACFullDuplex.h"
 
 //Auto-generated
