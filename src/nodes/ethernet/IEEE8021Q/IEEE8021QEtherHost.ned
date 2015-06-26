@@ -22,7 +22,8 @@ import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.linklayer.ethernet.base.BGEtherEncap;
-import inet.status.NodeStatus;
+import inet.common.lifecycle.NodeStatus;
+import inet.networklayer.common.InterfaceTable;
 
 
 //
@@ -41,7 +42,7 @@ module IEEE8021QEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
-        @node;
+        @networkNode;
         @labels(node,ethernet-node);
         int numApps = default(0);
         int numBuffer = default(0);
@@ -89,6 +90,9 @@ module IEEE8021QEtherHost
         }
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
+        }
+        interfaceTable: InterfaceTable {
+            @display("p=447,313");
         }
     connections allowunconnected:
         phy[0].phys <--> ethg;

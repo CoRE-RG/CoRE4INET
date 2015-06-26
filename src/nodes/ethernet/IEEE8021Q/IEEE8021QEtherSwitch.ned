@@ -19,9 +19,10 @@ import core4inet.linklayer.port.IEEE8021QPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
-import inet.linklayer.IMACAddressTable;
-import inet.linklayer.IMACRelayUnit;
-import inet.status.NodeStatus;
+import inet.linklayer.contract.IMACAddressTable;
+import inet.linklayer.contract.IMACRelayUnit;
+import inet.common.lifecycle.NodeStatus;
+import inet.networklayer.common.InterfaceTable;
 
 //
 // Module for a IEEE 802.1Q Ethernet Switch with variable number of ports.
@@ -35,7 +36,7 @@ module IEEE8021QEtherSwitch
 {
     parameters:
         @display("i=block/switch;bgb=514,312");
-        @node;
+        @networkNode;
         @labels(node,ethernet-node);
         double hardware_delay @unit(s) = default(8us);
         int numBuffer = default(0);
@@ -62,6 +63,9 @@ module IEEE8021QEtherSwitch
         //The mac table associated with the beswitch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
             @display("p=170,50");
+        }
+        interfaceTable: InterfaceTable {
+            @display("p=447,313");
         }
         // Physical ports of the switch
         phy[sizeof(ethg)]: IEEE8021QPHYPort {

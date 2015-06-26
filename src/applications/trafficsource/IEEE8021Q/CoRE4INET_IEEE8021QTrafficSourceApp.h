@@ -41,7 +41,7 @@ class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
         /**
          * @brief caches destAddress parameter
          */
-        MACAddress destAddress;
+        inet::MACAddress destAddress;
 
         /**
          * @brief caches priority parameter
