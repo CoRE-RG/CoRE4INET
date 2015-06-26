@@ -16,13 +16,13 @@
 #ifndef CORE4INET_IPV4OAVB_H_
 #define CORE4INET_IPV4OAVB_H_
 
+#include "FixedModuleAccess.h"
 #include "IPv4.h"
 #include "CoRE4INET_IPv4oREBase.h"
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_AVBIncoming.h"
 #include "CoRE4INET_SRPTable.h"
 #include "CoRE4INET_IPoREFilter.h"
-#include "IPvXAddress.h"
 #include "IPoREDefs_m.h"
 
 #include "csimplemodule.h"
@@ -57,7 +57,7 @@ class IPv4oAVB : public base {
 
     protected:
         virtual void initialize(int stage);
-        virtual void sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie);
+        virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie);
         virtual void configureFilters(cXMLElement *config);
         virtual void configureSubscriptions(cXMLElement *config);
         virtual void registerSrpCallbacks(SRPTable *srpTable);
@@ -70,13 +70,13 @@ class IPv4oAVB : public base {
          * Encapsulates packet in Ethernet II frame and sends to each destination buffers.
          * Destination MAC address and destination buffer is taken from filter.
          */
-        virtual void sendPacketToBuffers(cPacket *packet, const InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
+        virtual void sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
 
         /**
          * Encapsulates packet in AVB Frame and sends to destination AVB Buffer.
          * StreamID, Name, DestMAC, DestBuffer is taken from filter.
          */
-        void sendAVBFrame(cPacket* packet, const InterfaceEntry* ie, const IPoREFilter* filter);
+        void sendAVBFrame(cPacket* packet, const inet::InterfaceEntry* ie, const IPoREFilter* filter);
 
     protected:
         std::list<int> m_subscribeList;

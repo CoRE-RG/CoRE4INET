@@ -32,7 +32,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class BaseShaper : public virtual cSimpleModule, public virtual IPassiveQueue
+class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQueue
 {
     public:
         /**
@@ -47,19 +47,19 @@ class BaseShaper : public virtual cSimpleModule, public virtual IPassiveQueue
         /**
          * Implementation of IPassiveQueue::addListener().
          */
-        virtual void addListener(IPassiveQueueListener *listener) override;
+        virtual void addListener(inet::IPassiveQueueListener *listener) override;
 
         /**
          * Implementation of IPassiveQueue::removeListener().
          */
-        virtual void removeListener(IPassiveQueueListener *listener) override;
+        virtual void removeListener(inet::IPassiveQueueListener *listener) override;
     private:
         /**
          * @brief List of TTBuffers.
          *
          * The vector is ordered by action time
          */
-        std::list<IPassiveQueueListener *> listeners;
+        std::list<inet::IPassiveQueueListener *> listeners;
 
     protected:
         /**

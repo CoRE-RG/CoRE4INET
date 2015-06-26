@@ -49,7 +49,7 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
         uint16_t intervalFrames;
         uint16_t vlan_id;
         cModule *avbOutCTC;
-        MACAddress multicastMAC;
+        inet::MACAddress multicastMAC;
     public:
         AVBTrafficSourceApp();
     protected:

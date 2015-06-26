@@ -14,8 +14,8 @@
 //
 #include "CoRE4INET_HelperFunctions.h"
 
-//INET
-#include "ModuleAccess.h"
+//CoRE4INET
+#include "CoRE4INET_ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -91,9 +91,9 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
     return transparentClock / secondsToTransparentClock(tick);
 }
 
-MACAddress generateAutoMulticastAddress()
+inet::MACAddress generateAutoMulticastAddress()
 {
-    MACAddress multicastMAC = MACAddress::generateAutoAddress();
+    inet::MACAddress multicastMAC = inet::MACAddress::generateAutoAddress();
     multicastMAC.setAddressByte(1, (multicastMAC.getAddressByte(1) | 0x01));
     return multicastMAC;
 }
@@ -131,9 +131,9 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
     pcf->setTransparent_clock(transparentClock);
 }
 
-bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask)
+bool isCT(const inet::EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask)
 {
-    if (const EthernetIIFrame *e2f = dynamic_cast<const EthernetIIFrame*>(frame))
+    if (const inet::EthernetIIFrame *e2f = dynamic_cast<const inet::EthernetIIFrame*>(frame))
     {
         if (e2f->getEtherType() != 0x891d)
         {
@@ -152,7 +152,7 @@ bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask)
     return false;
 }
 
-uint16_t getCTID(const EtherFrame *frame)
+uint16_t getCTID(const inet::EtherFrame *frame)
 {
     unsigned char macBytes[6];
     frame->getDest().getAddressBytes(macBytes);

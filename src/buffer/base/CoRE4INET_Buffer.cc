@@ -63,17 +63,17 @@ void Buffer::initialize(int stage)
     }
 }
 
-void Buffer::recordPacketSent(EtherFrame *frame)
+void Buffer::recordPacketSent(inet::EtherFrame *frame)
 {
     emit(txPkSignal, frame);
 }
 
-void Buffer::recordPacketReceived(EtherFrame *frame)
+void Buffer::recordPacketReceived(inet::EtherFrame *frame)
 {
     emit(rxPkSignal, frame);
 }
 
-EtherFrame* Buffer::getFrame()
+inet::EtherFrame* Buffer::getFrame()
 {
     if (par("enabled").boolValue())
     {
@@ -85,7 +85,7 @@ EtherFrame* Buffer::getFrame()
     }
 }
 
-void Buffer::putFrame(EtherFrame* frame)
+void Buffer::putFrame(inet::EtherFrame* frame)
 {
     enqueue(frame);
 }
@@ -94,7 +94,7 @@ void Buffer::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
-        if (EtherFrame *frame = dynamic_cast<EtherFrame *>(msg))
+        if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame *>(msg))
         {
             recordPacketReceived(frame);
 
@@ -145,11 +145,11 @@ void Buffer::handleParameterChange(const char* parname)
         std::vector<cGate*> gates = parameterToGateList(par("destination_gates"), DELIMITERS);
         for (std::vector<cGate*>::const_iterator gate_it = gates.begin(); gate_it != gates.end(); ++gate_it)
         {
-            if (findContainingNode((*gate_it)->getOwnerModule()) != findContainingNode(this))
+            if (inet::findContainingNode((*gate_it)->getOwnerModule()) != inet::findContainingNode(this))
             {
                 throw cRuntimeError(
                         "Configuration problem of parameter destination_gates in module %s: Gate: %s is not in node %s! Maybe a copy-paste problem?",
-                        this->getFullName(), (*gate_it)->getFullName(), findContainingNode(this)->getFullName());
+                        this->getFullName(), (*gate_it)->getFullName(), inet::findContainingNode(this)->getFullName());
             }
             destinationGates.push_back(*gate_it);
         }
@@ -163,12 +163,12 @@ void Buffer::handleParameterChange(const char* parname)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
 
-void Buffer::enqueue(__attribute__((unused))    EtherFrame *newFrame)
+void Buffer::enqueue(__attribute__((unused)) inet::EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }
 
-EtherFrame * Buffer::dequeue()
+inet::EtherFrame * Buffer::dequeue()
 {
     throw cRuntimeError("Buffer::dequeue not implemented");
 }

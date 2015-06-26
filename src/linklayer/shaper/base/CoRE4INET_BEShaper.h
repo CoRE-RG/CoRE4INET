@@ -197,6 +197,7 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
         beQueue.insert(msg);
         cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
         TC::notifyListeners();
+        EV_TRACE << "Interface not idle queuing BE frame" << endl;
     }
     else
     {

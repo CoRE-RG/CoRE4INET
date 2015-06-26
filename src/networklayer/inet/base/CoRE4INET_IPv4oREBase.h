@@ -16,18 +16,18 @@
 #ifndef CORE4INET_IPV4OREBASE_H_
 #define CORE4INET_IPV4OREBASE_H_
 
+#include "FixedModuleAccess.h"
 #include "IPv4.h"
 
 #include "CoRE4INET_Buffer.h"
 #include "CoRE4INET_IPoREFilter.h"
-#include "IPvXAddress.h"
 #include "IPoREDefs_m.h"
 
 #include "csimplemodule.h"
 
 namespace CoRE4INET {
 
-class IPv4oREBase : public IPv4 {
+class IPv4oREBase : public inet::IPv4 {
 
     public:
         IPv4oREBase();

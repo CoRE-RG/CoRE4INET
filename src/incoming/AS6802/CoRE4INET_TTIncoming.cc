@@ -54,7 +54,7 @@ void TTIncoming::handleMessage(cMessage *msg)
     //Incoming Message
     if (msg && msg->arrivedOn("in"))
     {
-        if (EtherFrame *etherframe = dynamic_cast<EtherFrame *>(msg))
+        if (inet::EtherFrame *etherframe = dynamic_cast<inet::EtherFrame *>(msg))
         {
             recordPacketReceived(etherframe);
 

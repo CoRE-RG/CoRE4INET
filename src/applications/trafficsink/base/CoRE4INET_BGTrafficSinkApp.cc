@@ -33,19 +33,19 @@ void BGTrafficSinkApp::initialize()
     if (par("srcAddress").stdstringValue() == "auto")
     {
         // change module parameter from "auto" to concrete address
-        par("srcAddress").setStringValue(MACAddress::UNSPECIFIED_ADDRESS.str());
+        par("srcAddress").setStringValue(inet::MACAddress::UNSPECIFIED_ADDRESS.str());
     }
-    address = MACAddress(par("srcAddress").stringValue());
+    address = inet::MACAddress(par("srcAddress").stringValue());
 }
 
 void BGTrafficSinkApp::handleMessage(cMessage *msg)
 {
-    if (EtherFrame *frame = dynamic_cast<EtherFrame*>(msg))
+    if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(msg))
     {
         if (address.isUnspecified() || frame->getSrc() == address)
         {
             if((!received && par("replyFirst").boolValue()) || par("reply").boolValue()){
-                EtherFrame *reply = new EthernetIIFrame("Reply");
+                inet::EtherFrame *reply = new inet::EthernetIIFrame("Reply");
                 reply->setDest(frame->getSrc());
                 reply->setByteLength(frame->getByteLength());
                 for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();

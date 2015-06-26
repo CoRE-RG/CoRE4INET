@@ -31,10 +31,10 @@ namespace CoRE4INET {
  * or more virtual member functions to make it do useful work. These
  * functions are:
  *
- *    - void enqueue(EtherFrame *newFrame)
- *    - EtherFrame* dequeue()
+ *    - void enqueue(inet::EtherFrame *newFrame)
+ *    - inet::EtherFrame* dequeue()
  *
- * enqueue(EtherFrame *newFrame) is called to queue a message in the buffer.
+ * enqueue(inet::EtherFrame *newFrame) is called to queue a message in the buffer.
  * It must be implemented according to the correct buffer behaviour.
  *
  * dequeue() is called to get a frame from the buffer.
@@ -92,7 +92,7 @@ class CTBuffer : public virtual Buffer
          *
          * When a frame is received on the in-Gate it is processed. If the destination
          * address is unspecified it is set according to the ct marker of the buffer.
-         * Afterwards it is enqueued using the buffer specific enqueue(EtherFrame *newFrame)
+         * Afterwards it is enqueued using the buffer specific enqueue(inet::EtherFrame *newFrame)
          * method. In the end all registered receive callbacks are executed.
          *
          * @param msg The incoming message
@@ -103,11 +103,11 @@ class CTBuffer : public virtual Buffer
         /**
          * @brief Wrapper function arround enqueue().
          *
-         * @param frame the EtherFrame to put in the buffer.
+         * @param frame the inet::EtherFrame to put in the buffer.
          *
          * @sa enqueue();
          */
-        void putFrame(EtherFrame* frame);
+        void putFrame(inet::EtherFrame* frame);
 
         uint16_t getCTID();
 

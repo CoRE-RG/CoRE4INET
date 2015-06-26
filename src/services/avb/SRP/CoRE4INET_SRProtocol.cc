@@ -48,7 +48,7 @@ void SRProtocol::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        Ieee802Ctrl *etherctrl = dynamic_cast<Ieee802Ctrl *>(msg->removeControlInfo());
+        inet::Ieee802Ctrl *etherctrl = dynamic_cast<inet::Ieee802Ctrl *>(msg->removeControlInfo());
         if (!etherctrl)
         {
             error("packet `%s' from lower layer received without Ieee802Ctrl", msg->getName());
@@ -133,12 +133,12 @@ void SRProtocol::handleMessage(cMessage *msg)
                             listenerReady->getVlan_identifier()).size() > 0)
                     {
                         bubble("Listener Ready Failed!");
-                        srp = new ListenerReadyFailed("Listener Ready Failed", IEEE802CTRL_DATA);
+                        srp = new ListenerReadyFailed("Listener Ready Failed", inet::IEEE802CTRL_DATA);
                     }
                     else
                     {
                         bubble("Listener Failed!");
-                        srp = new ListenerAskingFailed("Listener Failed", IEEE802CTRL_DATA);
+                        srp = new ListenerAskingFailed("Listener Failed", inet::IEEE802CTRL_DATA);
                     }
                     srp->setStreamID(listenerReady->getStreamID());
 
@@ -186,7 +186,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
     {
         if (SRPTable::TalkerEntry *tentry = dynamic_cast<SRPTable::TalkerEntry*>(obj))
         {
-            TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", IEEE802CTRL_DATA);
+            TalkerAdvertise *talkerAdvertise = new TalkerAdvertise("Talker Advertise", inet::IEEE802CTRL_DATA);
             //talkerAdvertise->setStreamDA(tentry->address);
             talkerAdvertise->setStreamID(tentry->streamId);
             talkerAdvertise->setMaxFrameSize(static_cast<uint16_t>(tentry->framesize));
@@ -233,7 +233,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
             //Send listener ready only when talker is not a local application
             if (talker && talker->isName("phy"))
             {
-                ListenerReady *listenerReady = new ListenerReady("Listener Ready", IEEE802CTRL_DATA);
+                ListenerReady *listenerReady = new ListenerReady("Listener Ready", inet::IEEE802CTRL_DATA);
                 listenerReady->setStreamID(lentry->streamId);
                 listenerReady->setVlan_identifier(lentry->vlan_id);
 

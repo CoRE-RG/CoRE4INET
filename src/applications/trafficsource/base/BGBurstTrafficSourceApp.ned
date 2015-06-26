@@ -3,29 +3,33 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package core4inet.applications.trafficsource.base;
+
 //
-
-#ifndef __CORE4INET_BGETHERLLC_H
-#define __CORE4INET_BGETHERLLC_H
-
-//INET
-#include "EtherLLC.h"
-
-namespace CoRE4INET {
-
-class BGEtherLLC : public virtual inet::EtherLLC
+// Background burst traffic source application.
+// Uses multiple EtherFrame with encapsulated cPacket as payload to generate bursts
+// This generator generates bursts with sendInterval distance
+//
+//
+// @see BGTrafficSourceApp
+//
+// @author Till Steinbach
+simple BGBurstTrafficSourceApp extends BGTrafficSourceApp
 {
-  protected:
-    virtual void handleMessage(cMessage *msg) override;
-};
+    parameters:
+        @class(BGBurstTrafficSourceApp);
+        @display("i=block/source,green");
 
+        // total size of the burst
+        int burstSize @unit(byte) = default(1MiB);
 }
-#endif

@@ -19,6 +19,9 @@
 #include "scheduler/SchedulerMessageEvents_m.h"
 #include "SyncNotification_m.h"
 
+//INET
+#include "Compat.h"
+
 using namespace CoRE4INET;
 
 Define_Module(DummySync);
@@ -78,6 +81,7 @@ void DummySync::handleMessage(cMessage *msg)
                         uniform(-par("precission").doubleValue() / 2, par("precission").doubleValue() / 2) / tick));
 
                 getTimer()->clockCorrection(static_cast<int32_t>(modticks));
+                EV_TRACE << "Clock correction of " << static_cast<int32_t>(modticks) << "ticks" << endl;
             }
         }
         else{

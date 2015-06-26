@@ -26,7 +26,7 @@ Define_Module(SRPRelay);
 
 void SRPRelay::initialize(int stage)
 {
-    ::Ieee8021dRelay::initialize(stage);
+    inet::Ieee8021dRelay::initialize(stage);
 }
 
 void SRPRelay::handleMessage(cMessage * msg)
@@ -49,7 +49,7 @@ void SRPRelay::handleMessage(cMessage * msg)
         }
         else if (msg->arrivedOn("ifIn"))
         {
-            EtherFrame * frame = check_and_cast<EtherFrame*>(msg);
+            inet::EtherFrame * frame = check_and_cast<inet::EtherFrame*>(msg);
             if ((frame->getDest() == SRP_ADDRESS || frame->getDest() == bridgeAddress))
             {
                 EV_DETAIL << "Deliver SRPFrame to the SRP module" << endl;
@@ -57,7 +57,7 @@ void SRPRelay::handleMessage(cMessage * msg)
             }
             else
             {
-                ::Ieee8021dRelay::handleMessage(msg);
+                inet::Ieee8021dRelay::handleMessage(msg);
             }
         }
     }
@@ -74,12 +74,12 @@ void SRPRelay::dispatchSRP(SRPFrame * srp)
     }
     int portNum = controlInfo->getSwitchPort();
     int notPortNum = controlInfo->getNotSwitchPort();
-    MACAddress address = controlInfo->getDest();
+    inet::MACAddress address = controlInfo->getDest();
 
     if (portNum >= static_cast<int>(portCount))
         throw cRuntimeError("Output port %d doesn't exist!", portNum);
 
-    EthernetIIFrame * frame = new EthernetIIFrame(srp->getName());
+    inet::EthernetIIFrame * frame = new inet::EthernetIIFrame(srp->getName());
     frame->setSrc(bridgeAddress);
     frame->setDest(address);
     frame->setByteLength(ETHER_MAC_FRAME_BYTES);
@@ -113,11 +113,11 @@ void SRPRelay::dispatchSRP(SRPFrame * srp)
     }
 }
 
-void SRPRelay::deliverSRP(EtherFrame * frame)
+void SRPRelay::deliverSRP(inet::EtherFrame * frame)
 {
     SRPFrame * srp = check_and_cast<SRPFrame *>(frame->decapsulate());
 
-    Ieee802Ctrl * controlInfo = new Ieee802Ctrl();
+    inet::Ieee802Ctrl * controlInfo = new inet::Ieee802Ctrl();
     controlInfo->setSrc(frame->getSrc());
     controlInfo->setSwitchPort(frame->getArrivalGate()->getIndex());
     controlInfo->setDest(frame->getDest());

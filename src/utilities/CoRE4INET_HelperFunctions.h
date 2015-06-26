@@ -115,7 +115,7 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick);
  *
  * @return unique multicast address
  */
-MACAddress generateAutoMulticastAddress();
+inet::MACAddress generateAutoMulticastAddress();
 
 #ifdef WITH_AS6802_COMMON
 /**
@@ -135,7 +135,7 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* scheduler)
  * @param frame Pointer to the frame to check.
  * @return true if frame is critical, else false
  */
-bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask);
+bool isCT(const inet::EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask);
 
 /**
  * @brief Returns the critical traffic id for a given frame.
@@ -148,7 +148,7 @@ bool isCT(const EtherFrame *frame, uint32_t ctMarker, uint32_t ctMask);
  *
  * @sa isCT(EtherFrame *frame)
  */
-uint16_t getCTID(const EtherFrame *frame);
+uint16_t getCTID(const inet::EtherFrame *frame);
 #endif
 
 #ifdef WITH_AVB_COMMON

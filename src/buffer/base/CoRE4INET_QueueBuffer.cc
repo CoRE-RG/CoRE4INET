@@ -35,7 +35,7 @@ void QueueBuffer::initializeStatistics()
     frames.setName("frames");
 }
 
-void QueueBuffer::enqueue(EtherFrame *newFrame)
+void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
 {
     int max_size = static_cast<int>(par("size").longValue());
     if (max_size >= 0 && frames.length() >= max_size)
@@ -64,13 +64,13 @@ void QueueBuffer::enqueue(EtherFrame *newFrame)
     emit(queueLengthSignal, static_cast<unsigned long>(frames.length()));
 }
 
-EtherFrame * QueueBuffer::dequeue()
+inet::EtherFrame * QueueBuffer::dequeue()
 {
     if (frames.length() > 0)
     {
         setFilled(static_cast<size_t>(frames.length() - 1));
         emit(queueLengthSignal, static_cast<unsigned long>(frames.length() - 1));
-        return static_cast<EtherFrame*>(frames.pop());
+        return static_cast<inet::EtherFrame*>(frames.pop());
     }
     else
         return nullptr;

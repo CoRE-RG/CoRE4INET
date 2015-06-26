@@ -277,7 +277,7 @@ cMessage* IEEE8021QShaper<TC>::pop()
     {
         if (!qQueue[i].isEmpty())
         {
-            EtherFrame *message = static_cast<EtherFrame*>(qQueue[i].pop());
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i].pop());
             cComponent::emit(qQueueLengthSignals[i], static_cast<unsigned long>(qQueue[i].length()));
             return message;
         }
@@ -295,7 +295,7 @@ cMessage* IEEE8021QShaper<TC>::front()
     {
         if (!qQueue[i].isEmpty())
         {
-            EtherFrame *message = static_cast<EtherFrame*>(qQueue[i].front());
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i].front());
             return message;
         }
     }

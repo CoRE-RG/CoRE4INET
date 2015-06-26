@@ -22,8 +22,7 @@
 #include "CoRE4INET_Defs.h"
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_TTBuffer.h"
-//INET
-#include "ModuleAccess.h"
+#include "CoRE4INET_ModuleAccess.h"
 //Auto-generated Messages
 #include "TTBufferEmpty_m.h"
 
@@ -178,7 +177,7 @@ class TTShaper : public TC, public virtual Timed
          * @param message The message that should be transmitted
          * @returns true if transmission is allowed else false
          */
-        virtual bool isTransmissionAllowed(EtherFrame *message);
+        virtual bool isTransmissionAllowed(inet::EtherFrame *message);
 
         /**
          * @brief Registers a time-triggered buffer that feeds the module.
@@ -288,7 +287,8 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
         {
             if (TC::getNumPendingRequests())
             {
-                cMessage* lowPrioFrame = TC::pop();
+                EV_TRACE << "TT Buffer was empty, allow lower priority frame" << endl;
+                cMessage* lowPrioFrame = pop();
                 if (lowPrioFrame)
                 {
                     TC::framesRequested--;
@@ -307,14 +307,17 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
             }
             else
             {
-                ASSERT2(isTTBufferRegistered(ttBuffer) == false, "TTFrame was delayed without permission");
+                if(isTTBufferRegistered(ttBuffer) != false){
+                    EV_ERROR << "TTFrame was delayed without permission at " << getTimer()->getTotalTicks() << endl;
+                    throw cRuntimeError("TTFrame was delayed without permission");
+                }
                 enqueueMessage(msg);
             }
         }
     }
     else
     {
-        if (TC::getNumPendingRequests() && isTransmissionAllowed(dynamic_cast<EtherFrame*>(msg)))
+        if (TC::getNumPendingRequests() && isTransmissionAllowed(dynamic_cast<inet::EtherFrame*>(msg)))
         {
             TC::handleMessage(msg);
         }
@@ -333,6 +336,7 @@ void TTShaper<TC>::enqueueMessage(cMessage *msg)
         ttQueue.insert(msg);
         cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.length()));
         TC::notifyListeners();
+        EV_TRACE << "Interface not idle queuing TT frame" << endl;
     }
     else
     {
@@ -375,7 +379,7 @@ cMessage* TTShaper<TC>::pop()
     }
     else
     {
-        EtherFrame *frontMsg = static_cast<EtherFrame*>(front());
+        inet::EtherFrame *frontMsg = static_cast<inet::EtherFrame*>(front());
         if (isTransmissionAllowed(frontMsg))
         {
             return TC::pop();
@@ -421,163 +425,172 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
     std::map<uint64_t, TTBuffer*>::iterator buf = ttBuffers.find(sendWindowStart);
     if (buf != ttBuffers.end())
     {
-        throw
-    cRuntimeError("ERROR! You cannot schedule two messages with the same send window (%d)! Buffers are %s and %s", sendWindowStart, ttBuffer->getName(), buf->second->getName());
-}
-else
-{
-    //The following tests are only trivial. A complex check of the windows should be done with a suitable scheduling
-    //tool. as it is takes too much computation time for a runtime check!
-
-    //Check for overlapping windows only when new buffer has a sendWindowEnd set
-    if (ttBuffer->par("sendWindowEnd").longValue())
+        throw cRuntimeError(
+                "ERROR! You cannot schedule two messages with the same send window (%d)! Buffers are %s and %s",
+                sendWindowStart, ttBuffer->getName(), buf->second->getName());
+    }
+    else
     {
-        for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end(); ++buffer)
+        //The following tests are only trivial. A complex check of the windows should be done with a suitable scheduling
+        //tool. as it is takes too much computation time for a runtime check!
+
+        //Check for overlapping windows only when new buffer has a sendWindowEnd set
+        if (ttBuffer->par("sendWindowEnd").longValue())
         {
-            //Check for overlapping windows only when other buffer has a sendWindowEnd set
-            if ((*buffer).second->par("sendWindowEnd").longValue())
+            for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();
+                    ++buffer)
             {
-                uint64_t other_offset = (*buffer).second->getPeriod()->getOffsetTicks();
-                uint64_t other_sendWindowStart = (*buffer).second->getSendWindowStart() + other_offset;
-                uint64_t other_sendWindowEnd = (*buffer).second->getSendWindowEnd() + other_offset;
-                uint64_t this_offset = ttBuffer->getPeriod()->getOffsetTicks();
-                uint64_t this_sendWindowStart = ttBuffer->getSendWindowStart() + this_offset;
-                uint64_t this_sendWindowEnd = ttBuffer->getSendWindowEnd() + this_offset;
-                //For simplification one cycle is added to the WindowEnd if it is in the next cycle
-                if (other_sendWindowEnd < other_sendWindowStart)
+                //Check for overlapping windows only when other buffer has a sendWindowEnd set
+                if ((*buffer).second->par("sendWindowEnd").longValue())
                 {
-                    other_sendWindowEnd += (*buffer).second->getPeriod()->getCycleTicks();
-                }
-                if (this_sendWindowEnd < this_sendWindowStart)
-                {
-                    this_sendWindowEnd += ttBuffer->getPeriod()->getCycleTicks();
-                }
-                //Now that we have everything together do the check!
-                if (other_sendWindowStart < this_sendWindowStart && other_sendWindowEnd > this_sendWindowStart)
-                {
-                    throw cRuntimeError(
-                            "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
-                            ttBuffer->getFullPath().c_str(), (*buffer).second->getFullPath().c_str());
-                }
-                if (this_sendWindowStart < other_sendWindowStart && this_sendWindowEnd > other_sendWindowStart)
-                {
-                    throw cRuntimeError(
-                            "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
-                            (*buffer).second->getFullPath().c_str(), ttBuffer->getFullPath().c_str());
+                    uint64_t other_offset = (*buffer).second->getPeriod()->getOffsetTicks();
+                    uint64_t other_sendWindowStart = (*buffer).second->getSendWindowStart() + other_offset;
+                    uint64_t other_sendWindowEnd = (*buffer).second->getSendWindowEnd() + other_offset;
+                    uint64_t this_offset = ttBuffer->getPeriod()->getOffsetTicks();
+                    uint64_t this_sendWindowStart = ttBuffer->getSendWindowStart() + this_offset;
+                    uint64_t this_sendWindowEnd = ttBuffer->getSendWindowEnd() + this_offset;
+                    //For simplification one cycle is added to the WindowEnd if it is in the next cycle
+                    if (other_sendWindowEnd < other_sendWindowStart)
+                    {
+                        other_sendWindowEnd += (*buffer).second->getPeriod()->getCycleTicks();
+                    }
+                    if (this_sendWindowEnd < this_sendWindowStart)
+                    {
+                        this_sendWindowEnd += ttBuffer->getPeriod()->getCycleTicks();
+                    }
+                    //Now that we have everything together do the check!
+                    if (other_sendWindowStart < this_sendWindowStart && other_sendWindowEnd > this_sendWindowStart)
+                    {
+                        throw cRuntimeError(
+                                "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
+                                ttBuffer->getFullPath().c_str(), (*buffer).second->getFullPath().c_str());
+                    }
+                    if (this_sendWindowStart < other_sendWindowStart && this_sendWindowEnd > other_sendWindowStart)
+                    {
+                        throw cRuntimeError(
+                                "ERROR! You cannot schedule two messages with overlapping send windows! Window of %s starts before window of %s ends",
+                                (*buffer).second->getFullPath().c_str(), ttBuffer->getFullPath().c_str());
+                    }
                 }
             }
         }
+        ttBuffers[sendWindowStart] = ttBuffer;
     }
-    ttBuffers[sendWindowStart] = ttBuffer;
-}
 
 }
 
 template<class TC>
 bool TTShaper<TC>::isTTBufferRegistered(const TTBuffer *ttBuffer) const
 {
-for (std::map<uint64_t, TTBuffer*>::const_iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end(); ++buffer)
-{
-    if ((*buffer).second == ttBuffer)
+    for (std::map<uint64_t, TTBuffer*>::const_iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end(); ++buffer)
     {
-        return true;
+        if ((*buffer).second == ttBuffer)
+        {
+            return true;
+        }
     }
-}
-return false;
+    return false;
 }
 
 template<class TC>
 void TTShaper<TC>::handleParameterChange(const char* parname)
 {
-TC::handleParameterChange(parname);
-Timed::handleParameterChange(parname);
+    TC::handleParameterChange(parname);
+    Timed::handleParameterChange(parname);
 
-if (initialize_ttBuffers)
-{
-    ttBuffers.clear();
-    std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(),
-    DELIMITERS).asVector();
-    for (std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin(); ttBufferPath != ttBufferPaths.end();
-            ttBufferPath++)
+    if (initialize_ttBuffers)
     {
-        cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
-        if (!module)
+        ttBuffers.clear();
+        std::vector<std::string> ttBufferPaths = cStringTokenizer(cComponent::par("tt_buffers").stringValue(),
+        DELIMITERS).asVector();
+        for (std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
+                ttBufferPath != ttBufferPaths.end(); ttBufferPath++)
         {
-            module = findModuleWhereverInNode((*ttBufferPath).c_str(), this);
-        }
-        if (module)
-        {
-            if (findContainingNode(module) != findContainingNode(this))
+            cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
+            if (!module)
             {
-                opp_error(
-                        "Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        (*ttBufferPath).c_str(), findContainingNode(this)->getFullName());
+                module = findModuleWhereverInNode((*ttBufferPath).c_str(), this);
             }
-            else
+            if (module)
             {
-                TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(module);
-                if (ttBuffer)
+                if (inet::findContainingNode(module) != inet::findContainingNode(this))
                 {
-                    if(ttBuffer->par("enabled").boolValue())
+                    opp_error(
+                            "Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
+                            (*ttBufferPath).c_str(), findContainingNode(this)->getFullName());
+                }
+                else
+                {
+                    TTBuffer *ttBuffer = dynamic_cast<TTBuffer*>(module);
+                    if (ttBuffer)
                     {
-                        if (!isTTBufferRegistered(ttBuffer))
+                        if (ttBuffer->par("enabled").boolValue())
                         {
-                            registerTTBuffer(ttBuffer);
+                            if (!isTTBufferRegistered(ttBuffer))
+                            {
+                                registerTTBuffer(ttBuffer);
+                            }
+                            else
+                            {
+                                throw cRuntimeError(
+                                        "Configuration problem of tt_buffers: Module: %s is in the list more than once!",
+                                        (*ttBufferPath).c_str());
+                            }
                         }
                         else
                         {
-                            throw cRuntimeError(
-                                    "Configuration problem of tt_buffers: Module: %s is in the list more than once!",
-                                    (*ttBufferPath).c_str());
+                            EV_INFO << "Buffer " << ttBuffer->getName() << "is disabled and not added to shaper!"
+                                    << endl;
                         }
                     }
                     else
                     {
-                        EV_INFO << "Buffer "<< ttBuffer->getName() << "is disabled and not added to shaper!" << endl;
+                        throw cRuntimeError("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!",
+                                (*ttBufferPath).c_str());
                     }
                 }
-                else
-                {
-                    throw cRuntimeError("Configuration problem of tt_buffers: Module: %s is no TT-Buffer!",
-                            (*ttBufferPath).c_str());
-                }
             }
-        }
-        else
-        {
-            throw cRuntimeError("Configuration problem of tt_buffers: Module: %s could not be resolved!",
-                    (*ttBufferPath).c_str());
+            else
+            {
+                throw cRuntimeError("Configuration problem of tt_buffers: Module: %s could not be resolved!",
+                        (*ttBufferPath).c_str());
+            }
         }
     }
 }
-}
 
 template<class TC>
-bool TTShaper<TC>::isTransmissionAllowed(EtherFrame *message)
+bool TTShaper<TC>::isTransmissionAllowed(inet::EtherFrame *message)
 {
-if (!message || !TC::outChannel)
-{
-    return false;
-}
+    if (!message || !TC::outChannel)
+    {
+        return false;
+    }
 //If there are no ttBuffers everything is fine
-if (ttBuffers.size() == 0)
-{
-    return true;
-}
+    if (ttBuffers.size() == 0)
+    {
+        return true;
+    }
 //SimTime sendTime = (message->getBitLength()+INTERFRAME_GAP_BITS)/txRate;
-SimTime sendTime = TC::outChannel->calculateDuration(message);
+    SimTime sendTime = TC::outChannel->calculateDuration(message);
 //Don't know if that is right, but it works!
-sendTime += (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate();
-uint64_t sendTicks = static_cast<uint64_t>(ceil((sendTime.dbl() / getOscillator()->par("tick").doubleValue())));
-uint64_t startTicks = ttBuffers.begin()->first;
+    sendTime += SimTime(
+            (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate());
+    uint64_t sendTicks = static_cast<uint64_t>(ceil((sendTime.dbl() / getOscillator()->par("tick").doubleValue())));
+    sendTicks += par("safety_margin").longValue();
+    uint64_t startTicks = ttBuffers.begin()->first;
 
-if ((getTimer()->getTotalTicks() + sendTicks) >= startTicks)
-{
-    EV_DETAIL << "transmission not allowed! Send time would be from " << getTimer()->getTotalTicks() << " to "
-            << getTimer()->getTotalTicks() + sendTicks << " tt_window starts at: " << startTicks << endl;
-    return false;
-}
-return true;
+    if ((getTimer()->getTotalTicks() + sendTicks) >= startTicks)
+    {
+        EV_DETAIL << "transmission not allowed! Send time would be " << sendTime.dbl() << "s from "
+                << getTimer()->getTotalTicks() << "ticks to " << getTimer()->getTotalTicks() + sendTicks
+                << "ticks including safety margin tt_window starts at: " << startTicks << "ticks" << endl;
+        return false;
+    }
+    EV_TRACE << "transmission allowed! Send time is " << sendTime.dbl() << "s from " << getTimer()->getTotalTicks()
+            << "ticks to " << getTimer()->getTotalTicks() + sendTicks << "ticks including safety margin next tt_window starts at: "
+            << startTicks << "ticks" << endl;
+    return true;
 }
 
 }

@@ -29,8 +29,9 @@
 #include "CoRE4INET_Incoming.h"
 #include "CoRE4INET_NotifierConsts.h"
 #include "SyncNotification_m.h"
-#include "IPvXAddress.h"
-#include "IPvXAddressResolver.h"
+#include "L3Address.h"
+#include "L3AddressResolver.h"
+#include "Ieee802Ctrl.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
 #include "cstringtokenizer.h"
@@ -94,7 +95,7 @@ void IPv4oTT<Base>::initialize(int stage)
 //==============================================================================
 
 template<class Base>
-void IPv4oTT<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
+void IPv4oTT<Base>::sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie)
 {
     // Check for matching filters
     std::list<IPoREFilter*> matchingFilters;
@@ -117,7 +118,7 @@ void IPv4oTT<Base>::sendPacketToNIC(cPacket *packet, const InterfaceEntry *ie)
 template<class Base>
 void IPv4oTT<Base>::configureFilters(cXMLElement *config)
 {
-    IPvXAddressResolver addressResolver;
+    inet::L3AddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
     for (size_t i = 0; i < filterElements.size(); i++)
     {
@@ -227,13 +228,13 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 if (srcPrefixLengthAttr)
                     tp->setSrcPrefixLength(Base::parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
                 else if (srcAddrAttr)
-                    tp->setSrcPrefixLength(tp->getSrcAddr().isIPv6() ? 128 : 32);
+                    tp->setSrcPrefixLength(tp->getSrcAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
                 if (destAddrAttr)
                     tp->setDestAddr(addressResolver.resolve(destAddrAttr));
                 if (destPrefixLengthAttr)
                     tp->setDestPrefixLength(Base::parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
                 else if (destAddrAttr)
-                    tp->setDestPrefixLength(tp->getDestAddr().isIPv6() ? 128 : 32);
+                    tp->setDestPrefixLength(tp->getDestAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
                 if (protocolAttr)
                     tp->setProtocol(Base::parseProtocol(protocolAttr, "protocol"));
                 if (tosAttr)
@@ -314,13 +315,17 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 
         // decapsulate and send up
         cPacket* ipPacket = ttFrame->decapsulate();
-        Ieee802Ctrl *etherctrl = new Ieee802Ctrl();
+        inet::Ieee802Ctrl *etherctrl = new inet::Ieee802Ctrl();
         etherctrl->setSrc(ttFrame->getSrc());
         etherctrl->setDest(ttFrame->getDest());
         etherctrl->setEtherType(ttFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
 
+#if OMNETPP_VERSION < 0x0500
         ipPacket->setArrival(this, Base::gate("TTIn")->getId());
+#else
+        ipPacket->setArrival(this->getId(), Base::gate("TTIn")->getId());
+#endif
 
         delete ttFrame;
         Base::handleMessage(ipPacket);
@@ -339,7 +344,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused))  const InterfaceEntry *ie,
+void IPv4oTT<Base>::sendPacketToBuffers(cPacket *packet, __attribute__((unused))  const inet::InterfaceEntry *ie,
         std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)

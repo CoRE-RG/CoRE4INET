@@ -20,7 +20,7 @@ import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-import inet.linklayer.INic;
+import inet.linklayer.contract.INic;
 
 
 //
@@ -36,8 +36,10 @@ module TTEAVBEtherNic like INic
 {
     parameters:
         @display("i=block/ifcard");
+        string interfaceTableModule;
         double hardware_delay @unit(s) = default(0us);
         bool promiscuous = default(true); // TODO: sinnvoller default
+        *.interfaceTableModule = default(absPath(interfaceTableModule));
     gates:
 
         // Connection to the physical ethernet gate
@@ -91,7 +93,7 @@ module TTEAVBEtherNic like INic
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true;
-                queueModule = "shaper";
+                queueModule = "^.shaper";
                 @display("p=127,227");
         }
 

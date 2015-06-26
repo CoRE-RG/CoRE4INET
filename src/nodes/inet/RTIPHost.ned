@@ -26,18 +26,16 @@ import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.nodes.inet.RTNetworkLayer;
 
-import inet.base.NotificationBoard;
 import inet.linklayer.loopback.LoopbackInterface;
 import inet.networklayer.common.InterfaceTable;
-import inet.networklayer.ipv4.RoutingTable;
-import inet.nodes.inet.NetworkLayer;
-import inet.applications.IPingApp;
-import inet.applications.ISCTPApp;
-import inet.applications.ITCPApp;
-import inet.applications.IUDPApp;
-import inet.transport.ISCTP;
-import inet.transport.ITCP;
-import inet.transport.IUDP;
+import inet.networklayer.ipv4.IPv4RoutingTable;
+import inet.applications.contract.IPingApp;
+import inet.applications.contract.ISCTPApp;
+import inet.applications.contract.ITCPApp;
+import inet.applications.contract.IUDPApp;
+import inet.transportlayer.contract.ISCTP;
+import inet.transportlayer.contract.ITCP;
+import inet.transportlayer.contract.IUDP;
 
 
 //
@@ -52,11 +50,11 @@ import inet.transport.IUDP;
 module RTIPHost
 {
     parameters:
-        @node;
+        @networkNode;
         @labels(node,ethernet-node,wireless-node);
         string routingFile = default("");
-        bool IPForward = default(true);
-        bool forwardMulticast = default(false);
+        bool forwarding = default(true);
+        bool multicastForwarding = default(false);
         int numTcpApps = default(0);  // no of TCP apps. Specify the app types in INI file with tcpApp[0..1].typename="TCPEchoApp" syntax
         int numUdpApps = default(0);  // no of UDP apps. Specify the app types in INI file with udpApp[0..1].typename="UDPVideoStreamCli" syntax
         int numSctpApps = default(0); // no of SCTP apps. Specify the app types in INI file with sctpApp[0..1].typename="SCTPServer" syntax
@@ -69,14 +67,11 @@ module RTIPHost
         string sctpType = default(firstAvailable("SCTP","SCTP_None"));
         int numApps = default(0); //default(1) ? ListenerApp
         double hardware_delay @unit(s) = default(0us);
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
+        *.routingTableModule = default(absPath(".routingTable"));
     gates:
         inout ethg @labels(EtherFrame-conn);
     submodules:
-
-        notificationBoard: NotificationBoard {
-            parameters:
-                @display("p=63,34;is=s");
-        }
 
         // application Layer
         tcpApp[numTcpApps]: <> like ITCPApp {
@@ -124,11 +119,11 @@ module RTIPHost
                 @display("p=498,232;q=queue");
         }
 
-        routingTable: RoutingTable {
+        routingTable: IPv4RoutingTable {
             parameters:
                 @display("p=63,104;is=s");
-                IPForward = IPForward;
-                forwardMulticast = forwardMulticast;
+                forwarding = forwarding;
+                multicastForwarding = multicastForwarding;
                 routingFile = routingFile;
         }
 

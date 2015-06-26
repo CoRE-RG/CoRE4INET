@@ -34,9 +34,9 @@ public:
 
 
 public:
-    MACAddress* getDestMac() const { return destMAC; }
+    inet::MACAddress* getDestMac() const { return destMAC; }
 
-    void setDestMac(MACAddress* destMac) { destMAC = destMac; }
+    void setDestMac(inet::MACAddress* destMac) { destMAC = destMac; }
 
     AVBIncoming* getDestModule() const { return destModule; }
 
@@ -64,7 +64,7 @@ public:
 
 private:
     AVBIncoming *destModule;
-    MACAddress  *destMAC;
+    inet::MACAddress  *destMAC;
     uint64_t    streamId;
     SR_CLASS    srClass;
     uint32_t    frameSize;

@@ -111,7 +111,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
-        EtherFrame *frame = dynamic_cast<EtherFrame *>(msg);
+        inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame *>(msg);
 
         //Auf CTCs verteilen oder BE traffic
         if (frame && isCT(frame, ctMarker, ctMask))
@@ -182,11 +182,11 @@ void CTInControl<IC>::handleParameterChange(const char* parname)
         std::vector<cModule*> modules = parameterToModuleList(cComponent::par("ct_incomings"), DELIMITERS);
         for (std::vector<cModule*>::const_iterator module = modules.begin(); module != modules.end(); ++module)
         {
-            if (findContainingNode(*module) != findContainingNode(this))
+            if (inet::findContainingNode(*module) != inet::findContainingNode(this))
             {
                 throw cRuntimeError(
                         "Configuration problem of parameter ct_incomings in module %s: Module: %s is not in node %s! Maybe a copy-paste problem?",
-                        this->getFullName(), (*module)->getFullName(), findContainingNode(this)->getFullName());
+                        this->getFullName(), (*module)->getFullName(), inet::findContainingNode(this)->getFullName());
             }
             if (CTIncoming *ct_incoming = dynamic_cast<CTIncoming*>(*module))
             {

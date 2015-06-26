@@ -19,8 +19,8 @@ import core4inet.nodes.inet.RTIPHost;
 import core4inet.examples.inet.small_network.Node1;
 import core4inet.examples.inet.small_network.Node3;
 
-import inet.nodes.ethernet.Eth100M;
-import inet.networklayer.autorouting.ipv4.IPv4NetworkConfigurator;
+import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
+import inet.node.ethernet.Eth100M;
 
 //
 // Small sample network with three hosts and one switch that shows how to 

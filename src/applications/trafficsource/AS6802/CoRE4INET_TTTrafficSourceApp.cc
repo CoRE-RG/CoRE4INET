@@ -56,7 +56,7 @@ void TTTrafficSourceApp::initialize()
     }
     synchronized = false;
 
-    findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
+    inet::findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
 }
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg)

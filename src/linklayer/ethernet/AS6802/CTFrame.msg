@@ -17,7 +17,7 @@ cplusplus {{
     #include "EtherFrame_m.h"
 }}
 
-class ::EthernetIIFrame;
+class inet::EthernetIIFrame;
 
 namespace CoRE4INET;
 

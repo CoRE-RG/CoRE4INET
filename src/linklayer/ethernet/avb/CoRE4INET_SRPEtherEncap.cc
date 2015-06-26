@@ -52,7 +52,7 @@ void SRPEtherEncap::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("lowerLayerIn"))
     {
-        EtherFrame * frame = check_and_cast<EtherFrame*>(msg);
+        inet::EtherFrame * frame = check_and_cast<inet::EtherFrame*>(msg);
         if (frame->getDest() == SRP_ADDRESS)
         {
             EV_DETAIL << "Deliver SRPFrame to the SRP module" << endl;
@@ -76,12 +76,12 @@ void SRPEtherEncap::dispatchSRP(SRPFrame * srp)
     ExtendedIeee802Ctrl * controlInfo = dynamic_cast<ExtendedIeee802Ctrl *>(srp->removeControlInfo());
     int portNum = controlInfo->getSwitchPort();
     int notPortNum = controlInfo->getNotSwitchPort();
-    MACAddress address = controlInfo->getDest();
+    inet::MACAddress address = controlInfo->getDest();
 
     if (portNum >= 1)
         throw cRuntimeError("Output port %d doesn't exist!", portNum);
 
-    EthernetIIFrame * frame = new EthernetIIFrame(srp->getName());
+    inet::EthernetIIFrame * frame = new inet::EthernetIIFrame(srp->getName());
     frame->setDest(address);
     frame->setSrc(controlInfo->getSrc());
     frame->setByteLength(ETHER_MAC_FRAME_BYTES);
@@ -107,11 +107,11 @@ void SRPEtherEncap::dispatchSRP(SRPFrame * srp)
 
 //==============================================================================
 
-void SRPEtherEncap::deliverSRP(EtherFrame * frame)
+void SRPEtherEncap::deliverSRP(inet::EtherFrame * frame)
 {
     SRPFrame * srp = check_and_cast<SRPFrame *>(frame->decapsulate());
 
-    Ieee802Ctrl * controlInfo = new Ieee802Ctrl();
+    inet::Ieee802Ctrl * controlInfo = new inet::Ieee802Ctrl();
     controlInfo->setSrc(frame->getSrc());
     controlInfo->setSwitchPort(0);
     controlInfo->setDest(frame->getDest());

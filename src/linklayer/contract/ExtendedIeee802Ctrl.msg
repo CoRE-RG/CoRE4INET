@@ -18,13 +18,13 @@
 
 cplusplus {{
     //INET
-	#include "Ieee802Ctrl_m.h"
+	#include "Ieee802Ctrl.h"
 	
 	#define SWITCH_PORT_BROADCAST -1
 }}
 
 
-class noncobject ::Ieee802Ctrl;
+class noncobject inet::Ieee802Ctrl;
 
 namespace CoRE4INET;
 

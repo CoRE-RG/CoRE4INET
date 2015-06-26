@@ -15,8 +15,8 @@
 
 #include "CoRE4INET_AVBBuffer.h"
 
-//INET
-#include "ModuleAccess.h"
+//CoRE4INET
+#include "CoRE4INET_ModuleAccess.h"
 
 namespace CoRE4INET {
 

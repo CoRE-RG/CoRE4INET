@@ -33,7 +33,7 @@ simple TicApp extends CTApplicationBase like IScheduled
         @class(TicApp);
         @display("i=block/routing,cyan");
 		//Signal emitted when a frame is received, contains received EtherFrame
-        @signal[rxPk](type=EtherFrame);
+        @signal[rxPk](type=inet::EtherFrame);
         //Signal emitted when a frame is received, contains roundtrip time
         @signal[roundtrip](type=simtime_t);
 		//Statistic of the amount of packets that were received by the application

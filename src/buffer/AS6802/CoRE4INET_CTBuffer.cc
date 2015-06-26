@@ -37,7 +37,7 @@ CTBuffer::~CTBuffer()
 {
 }
 
-void CTBuffer::putFrame(EtherFrame* frame)
+void CTBuffer::putFrame(inet::EtherFrame* frame)
 {
     if (frame && priority >= 0)
     {

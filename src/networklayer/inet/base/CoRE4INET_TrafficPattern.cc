@@ -11,8 +11,8 @@
 
 //==============================================================================
 
-#include "IPvXAddress.h"
-#include "IPvXAddressResolver.h"
+#include "L3Address.h"
+#include "L3AddressResolver.h"
 #include "IPv4Datagram.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
@@ -48,14 +48,14 @@ TrafficPattern::~TrafficPattern() {
 
 bool TrafficPattern::matches(const cPacket *packet)
 {
-    const IPv4Datagram *datagram = dynamic_cast<const IPv4Datagram*>(packet);
+    const inet::IPv4Datagram *datagram = dynamic_cast<const inet::IPv4Datagram*>(packet);
     if (!datagram)
         return false;
 
 
-    if (srcPrefixLength > 0 && (srcAddr.isIPv6() || !datagram->getSrcAddress().prefixMatches(srcAddr.get4(), srcPrefixLength)))
+    if (srcPrefixLength > 0 && ((srcAddr.getType()==inet::L3Address::IPv6) || !datagram->getSrcAddress().prefixMatches(srcAddr.toIPv4(), srcPrefixLength)))
         return false;
-    if (destPrefixLength > 0 && (destAddr.isIPv6() || !datagram->getDestAddress().prefixMatches(destAddr.get4(), destPrefixLength)))
+    if (destPrefixLength > 0 && ((destAddr.getType()==inet::L3Address::IPv6) || !datagram->getDestAddress().prefixMatches(destAddr.toIPv4(), destPrefixLength)))
         return false;
     if (protocol >= 0 && datagram->getTransportProtocol() != protocol)
         return false;
@@ -65,13 +65,13 @@ bool TrafficPattern::matches(const cPacket *packet)
     {
         int srcPort = -1, destPort = -1;
         const cPacket *encPacket = packet->getEncapsulatedPacket();
-        const UDPPacket *udpPacket = dynamic_cast<const UDPPacket*>(encPacket);
+        const inet::UDPPacket *udpPacket = dynamic_cast<const inet::UDPPacket*>(encPacket);
         if (udpPacket)
         {
             srcPort = udpPacket->getSourcePort();
             destPort = udpPacket->getDestinationPort();
         }
-        const TCPSegment *tcpSegment = dynamic_cast<const TCPSegment*>(encPacket);
+        const inet::tcp::TCPSegment *tcpSegment = dynamic_cast<const inet::tcp::TCPSegment*>(encPacket);
         if (tcpSegment)
         {
             srcPort = tcpSegment->getSrcPort();

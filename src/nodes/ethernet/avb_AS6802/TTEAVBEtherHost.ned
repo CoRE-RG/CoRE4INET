@@ -26,6 +26,7 @@ import core4inet.scheduler.ITTEScheduler;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.synchronisation.base.ISync;
+import inet.networklayer.common.InterfaceTable;
 
 
 //
@@ -39,12 +40,13 @@ module TTEAVBEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
-        @node;
+        @networkNode;
         int numApps = default(0); //default(1) ? ListenerApp
         int numBuffer = default(0);
         int numPorts = default(1);
         double hardware_delay @unit(s) = default(0us);
         string configurationManagerType = default("");
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
         bool be_promiscuous = default(true);
     gates:
         inout ethg;
@@ -113,7 +115,10 @@ module TTEAVBEtherHost
         srpProtocol: SRProtocol {
             @display("p=141,169");
         }
-
+        
+        interfaceTable: InterfaceTable {
+            @display("p=447,313");
+        }
     connections allowunconnected:
         phy[0].phys <--> ethg;
         encap.lowerLayerOut --> phy[0].upperLayerIn;

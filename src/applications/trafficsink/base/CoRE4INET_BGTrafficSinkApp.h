@@ -35,7 +35,7 @@ namespace CoRE4INET {
 class BGTrafficSinkApp : public virtual TrafficSinkApp
 {
     private:
-        MACAddress address;
+        inet::MACAddress address;
         unsigned int received;
     public:
         BGTrafficSinkApp();

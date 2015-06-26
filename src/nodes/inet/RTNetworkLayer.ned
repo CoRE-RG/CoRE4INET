@@ -15,8 +15,8 @@
 
 package core4inet.nodes.inet;
 
-import inet.networklayer.arp.ARP;
-import inet.networklayer.autorouting.ipv4.IPv4NodeConfigurator;
+import inet.networklayer.arp.ipv4.ARP;
+import inet.networklayer.configurator.ipv4.IPv4NodeConfigurator;
 import inet.networklayer.ipv4.ErrorHandling;
 import inet.networklayer.ipv4.ICMP;
 import inet.networklayer.ipv4.IIGMP;
@@ -37,7 +37,13 @@ module RTNetworkLayer
     parameters:
         bool proxyARP = default(true);
         string igmpType = default("IGMPv2");
-        *.routingTableModule = default("^.^.routingTable");
+        string interfaceTableModule;
+        string routingTableModule;
+        *.interfaceTableModule = default(absPath(interfaceTableModule));
+        *.routingTableModule = default(absPath(routingTableModule));
+        *.arpModule = default(absPath(".arp"));
+        *.icmpModule = default(absPath(".icmp"));
+        arp.respondToProxyARP = proxyARP;
         @display("i=block/fork");
     gates:
         input ifIn[] @labels(IPv4Datagram);
@@ -66,7 +72,6 @@ module RTNetworkLayer
         }
         arp: ARP {
             parameters:
-                respondToProxyARP = proxyARP;
                 @display("p=202,142;q=pendingQueue");
         }
         icmp: ICMP {

@@ -32,7 +32,7 @@ Incoming::Incoming()
     parametersInitialized = false;
 }
 
-void Incoming::recordPacketReceived(EtherFrame *frame)
+void Incoming::recordPacketReceived(inet::EtherFrame *frame)
 {
     emit(rxPkSignal, frame);
 }
@@ -41,7 +41,7 @@ void Incoming::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
-        if(EtherFrame* ef = dynamic_cast<EtherFrame*>(msg))
+        if(inet::EtherFrame* ef = dynamic_cast<inet::EtherFrame*>(msg))
         {
             recordPacketReceived(ef);
             sendDelayed(msg, this->hardware_delay, "out");

@@ -15,7 +15,7 @@
 
 package core4inet.examples.AS6802.rt_tictoc;
 
-import inet.nodes.ethernet.Eth100M;
+import inet.node.ethernet.Eth100M;
 
 //
 // Small sample network with two hosts and one switch that shows how to 

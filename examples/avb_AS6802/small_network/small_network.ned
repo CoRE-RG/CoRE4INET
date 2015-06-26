@@ -15,7 +15,7 @@
 
 package core4inet.examples.avb_AS6802.small_network;
 
-import inet.nodes.ethernet.Eth100M;
+import inet.node.ethernet.Eth100M;
 
 //
 // Small sample network with three hosts and one switch that shows how to 

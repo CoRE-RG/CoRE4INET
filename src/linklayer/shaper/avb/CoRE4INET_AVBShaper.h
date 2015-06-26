@@ -201,6 +201,7 @@ void AVBShaper<SRCLASS, TC>::enqueueMessage(cMessage *msg)
         avbQueue.insert(msg);
         cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.length()));
         TC::notifyListeners();
+        EV_TRACE << "Interface not idle queuing AVB frame" << endl;
     }
     else
     {
