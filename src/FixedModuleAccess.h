@@ -66,7 +66,7 @@ template<typename T>
 INET_API T *findModuleFromPar(cPar& par, cModule *from);
 
 template<typename T>
-*findModuleFromPar(cPar& par, cModule *from)
+T *findModuleFromPar(cPar& par, cModule *from)
 {
     const char *path = par.stringValue();
     if (path && *path) {
