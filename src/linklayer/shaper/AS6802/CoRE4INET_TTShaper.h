@@ -23,6 +23,7 @@
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_TTBuffer.h"
 #include "CoRE4INET_ModuleAccess.h"
+#include "CoRE4INET_ConfigFunctions.h"
 //Auto-generated Messages
 #include "TTBufferEmpty_m.h"
 
@@ -71,6 +72,11 @@ class TTShaper : public TC, public virtual Timed
          * @brief Current position of the next Buffer (action time) in the ttBuffers vector
          */
         size_t ttBuffersPos;
+
+        /**
+         * Caches the safetyMargin parameter
+         */
+        uint32_t safetyMargin;
 
     protected:
         /**
@@ -202,6 +208,7 @@ TTShaper<TC>::TTShaper()
     ttBuffersPos = 0;
     ttQueue.setName("TT Messages");
     initialize_ttBuffers = false;
+    safetyMargin = 0;
 }
 
 template<class TC>
@@ -307,7 +314,8 @@ void TTShaper<TC>::handleMessage(cMessage *msg)
             }
             else
             {
-                if(isTTBufferRegistered(ttBuffer) != false){
+                if (isTTBufferRegistered(ttBuffer) != false)
+                {
                     EV_ERROR << "TTFrame was delayed without permission at " << getTimer()->getTotalTicks() << endl;
                     throw cRuntimeError("TTFrame was delayed without permission");
                 }
@@ -557,6 +565,10 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
             }
         }
     }
+    if (!parname || !strcmp(parname, "safety_margin"))
+    {
+        this->safetyMargin = static_cast<uint32_t>(parameterULongCheckRange(par("safety_margin"), 0, UINT32_MAX));
+    }
 }
 
 template<class TC>
@@ -577,7 +589,7 @@ bool TTShaper<TC>::isTransmissionAllowed(inet::EtherFrame *message)
     sendTime += SimTime(
             (INTERFRAME_GAP_BITS + ((PREAMBLE_BYTES + SFD_BYTES) * 8)) / TC::outChannel->getNominalDatarate());
     uint64_t sendTicks = static_cast<uint64_t>(ceil((sendTime.dbl() / getOscillator()->par("tick").doubleValue())));
-    sendTicks += par("safety_margin").longValue();
+    sendTicks += this->safetyMargin;
     uint64_t startTicks = ttBuffers.begin()->first;
 
     if ((getTimer()->getTotalTicks() + sendTicks) >= startTicks)
@@ -588,8 +600,8 @@ bool TTShaper<TC>::isTransmissionAllowed(inet::EtherFrame *message)
         return false;
     }
     EV_TRACE << "transmission allowed! Send time is " << sendTime.dbl() << "s from " << getTimer()->getTotalTicks()
-            << "ticks to " << getTimer()->getTotalTicks() + sendTicks << "ticks including safety margin next tt_window starts at: "
-            << startTicks << "ticks" << endl;
+            << "ticks to " << getTimer()->getTotalTicks() + sendTicks
+            << "ticks including safety margin next tt_window starts at: " << startTicks << "ticks" << endl;
     return true;
 }
 

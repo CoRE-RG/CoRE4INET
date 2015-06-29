@@ -68,8 +68,8 @@ bool TrafficPattern::matches(const cPacket *packet)
         const inet::UDPPacket *udpPacket = dynamic_cast<const inet::UDPPacket*>(encPacket);
         if (udpPacket)
         {
-            srcPort = udpPacket->getSourcePort();
-            destPort = udpPacket->getDestinationPort();
+            srcPort = static_cast<int>(udpPacket->getSourcePort());
+            destPort = static_cast<int>(udpPacket->getDestinationPort());
         }
         const inet::tcp::TCPSegment *tcpSegment = dynamic_cast<const inet::tcp::TCPSegment*>(encPacket);
         if (tcpSegment)
