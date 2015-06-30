@@ -145,6 +145,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
 template<class TC>
 IEEE8021QShaper<TC>::IEEE8021QShaper()
 {
+    numQPriority = 8;
 }
 
 template<class TC>
@@ -160,7 +161,6 @@ void IEEE8021QShaper<TC>::initialize(int stage)
     {
         Timed::initialize();
 
-        numQPriority = 8;
         for (unsigned int i = 0; i < numQPriority; i++)
         {
             char strBuf[32];
@@ -273,12 +273,12 @@ cMessage* IEEE8021QShaper<TC>::pop()
     Enter_Method
     ("pop()");
 
-    for (unsigned int i = 0; i < numQPriority; i++)
+    for (unsigned int i = numQPriority; i > 0; i--)
     {
-        if (!qQueue[i].isEmpty())
+        if (!qQueue[i-1].isEmpty())
         {
-            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i].pop());
-            cComponent::emit(qQueueLengthSignals[i], static_cast<unsigned long>(qQueue[i].length()));
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i-1].pop());
+            cComponent::emit(qQueueLengthSignals[i-1], static_cast<unsigned long>(qQueue[i-1].length()));
             return message;
         }
     }
@@ -291,11 +291,11 @@ cMessage* IEEE8021QShaper<TC>::front()
     Enter_Method
     ("front()");
 
-    for (unsigned int i = 0; i < numQPriority; i++)
+    for (unsigned int i = numQPriority; i > 0; i--)
     {
-        if (!qQueue[i].isEmpty())
+        if (!qQueue[i-1].isEmpty())
         {
-            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i].front());
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i-1].front());
             return message;
         }
     }

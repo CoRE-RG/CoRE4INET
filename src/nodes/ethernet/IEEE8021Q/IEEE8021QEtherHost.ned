@@ -80,21 +80,27 @@ module IEEE8021QEtherHost
         scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
+        
         app[numApps]: < > like IApplication {
             @display("p=234,37,row,70");
         }
+        
         bgIn: BGQueueBuffer {
             @display("p=141,37");
         }
+        
         bgOut: BGQueueBuffer {
             @display("p=141,99");
         }
+        
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
         }
+        
         interfaceTable: InterfaceTable {
             @display("p=447,313");
         }
+        
     connections allowunconnected:
         phy[0].phys <--> ethg;
         encap.lowerLayerOut --> phy[0].upperLayerIn;

@@ -33,6 +33,8 @@ module IEEE8021QPHYPort
         bool promiscuous = default(false);
         //Static propagation delay for the port
         double static_tx_delay @unit(s) = default(0ns);
+        string interfaceTableModule;
+        *.interfaceTableModule = default(absPath(interfaceTableModule));
     gates:
         //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
@@ -56,7 +58,7 @@ module IEEE8021QPHYPort
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true; 
-                queueModule = "shaper";
+                queueModule = "^.shaper";
                 @display("p=87,139");
         }
     connections:
