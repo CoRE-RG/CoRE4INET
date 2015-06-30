@@ -21,6 +21,9 @@
 #include "inet/common/INETDefs.h"
 #include "inet/networklayer/contract/IInterfaceTable.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wattributes"
+
 namespace inet {
 
 /**
@@ -104,6 +107,9 @@ T *getModuleFromPar(cPar& par, cModule *from)
 }
 
 } // namespace inet
+
+
+#pragma GCC diagnostic pop
 
 #endif // ifndef __INET_MODULEACCESS_H
 
