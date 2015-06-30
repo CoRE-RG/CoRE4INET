@@ -26,6 +26,7 @@ Define_Module(BGTrafficSourceApp);
 BGTrafficSourceApp::BGTrafficSourceApp()
 {
     this->sendInterval = 0;
+    this->parametersInitialized = false;
 }
 
 void BGTrafficSourceApp::handleMessage(cMessage *msg)
