@@ -49,7 +49,7 @@ void BGBurstTrafficSourceApp::sendMessage()
             else
             {
                 payload_packet->setByteLength(static_cast<int64_t>(size_left));
-                size_left -= size_left;
+                size_left = 0;
             }
             frame->setByteLength(ETHER_MAC_FRAME_BYTES);
             frame->encapsulate(payload_packet);

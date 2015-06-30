@@ -105,6 +105,6 @@ void RCIncoming::handleParameterChange(const char* parname)
     }
 }
 
-#pragma GCC diagnostic pop
+#pragma clang diagnostic pop
 
 } //namespace

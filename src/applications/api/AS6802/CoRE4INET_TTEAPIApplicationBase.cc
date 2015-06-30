@@ -53,7 +53,13 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
     if (msg->isSelfMessage() && msg->getKind() == START_APPLICATION)
     {
         startApplication();
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunreachable-code"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunreachable-code"
         delete msg;
+#pragma clang diagnostic pop
+#pragma GCC diagnostic pop
     }
     if (msg->arrivedOn("schedulerIn"))
     {
