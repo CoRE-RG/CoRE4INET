@@ -25,11 +25,12 @@ namespace CoRE4INET;
 // Ethernet II headers contain a 16-bit ~EtherType to identify
 // the encapsulated protocol and 802.1Q Tag
 //
-// Header length: src(6)+dest(6)+etherType(2)+802.1QTag(4) = 18 bytes
+// Header length: src(6)+dest(6)+etherType(2)+802.1QTag(4) = 18 byte
+// Total overhead: 18 byte Header + 4 byte CRC = 22 byte
 //
 packet EthernetIIFrameWithQTag extends EthernetIIFrame
 {
-    byteLength = 18;
+    byteLength = 22;// Overhead without payload
     uint8_t pcp;    // Priority Code Point (PCP): a 3-bit field which refers to the IEEE 802.1p priority. It indicates the frame priority level.
                     // Values are from 0 (best effort) to 7 (highest); 1 represents the lowest priority.
     bool de;        // Drop Eligible (DE): a 1-bit field. May be used separately or in conjunction with PCP to indicate frames eligible to be dropped in the presence of congestion.
