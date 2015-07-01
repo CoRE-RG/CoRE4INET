@@ -273,7 +273,7 @@ cMessage* IEEE8021QShaper<TC>::pop()
     Enter_Method
     ("pop()");
 
-    for (unsigned int i = numQPriority; i > 0; i--)
+    for (size_t i = numQPriority; i > 0; i--)
     {
         if (!qQueue[i-1].isEmpty())
         {
@@ -291,7 +291,7 @@ cMessage* IEEE8021QShaper<TC>::front()
     Enter_Method
     ("front()");
 
-    for (unsigned int i = numQPriority; i > 0; i--)
+    for (size_t i = numQPriority; i > 0; i--)
     {
         if (!qQueue[i-1].isEmpty())
         {
