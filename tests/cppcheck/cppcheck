@@ -1,0 +1,1 @@
+cppcheck -i ../../src/synchronisation/AS6802 --enable=warning,style,performance,portability,information --suppressions cppcheck-suppressions.txt --inconclusive ../../src
