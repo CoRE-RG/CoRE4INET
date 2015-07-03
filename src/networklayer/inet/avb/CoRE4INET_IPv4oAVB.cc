@@ -395,7 +395,7 @@ void IPv4oAVB<base>::configureSubscriptions(cXMLElement *config)
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::registerTalker(const std::list<IPoREFilter*> filters, SRPTable *srpTable)
+void IPv4oAVB<base>::registerTalker(const std::list<IPoREFilter*> &filters, SRPTable *srpTable)
 {
     typename std::list<IPoREFilter*>::const_iterator filter = filters.begin();
     for (; filter != filters.end(); ++filter)
