@@ -3,4 +3,4 @@
 *:*_m.h
 
 
-style:applications/api/AS6802/CoRE4INET_TTEAPIApplicationBase.cc
+style:src/applications/api/AS6802/CoRE4INET_TTEAPIApplicationBase.cc
