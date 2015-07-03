@@ -45,6 +45,7 @@ namespace CoRE4INET {
 template<class Base>
 IPv4oTT<Base>::IPv4oTT()
 {
+    this->synchronized = false;
 }
 
 //==============================================================================

@@ -61,7 +61,7 @@ void TTEAPIApplicationBase::handleMessage(cMessage *msg)
 #pragma clang diagnostic pop
 #pragma GCC diagnostic pop
     }
-    if (msg->arrivedOn("schedulerIn"))
+    else if (msg->arrivedOn("schedulerIn"))
     {
         Task *task = static_cast<Task*>(msg->par("task").pointerValue());
         task->executeTask();
