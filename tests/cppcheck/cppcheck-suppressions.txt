@@ -4,4 +4,6 @@
 unmatchedSuppression:*_m.cc
 unmatchedSuppression:*_m.h
 
+missingInclude
+
 unreachableCode:src/applications/api/AS6802/CoRE4INET_TTEAPIApplicationBase.cc
