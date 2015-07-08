@@ -72,6 +72,8 @@
 	
 	
 	<node id="node3">
+		<filter srcAddress="10.0.0.3" destAddress="10.0.0.2" destPort="1000" protocol="TCP"
+		        destType="DestinationType_IEEE8021Q" VID="0" PCP="1" destModule="bgout"/>
 	</node>
 	
 	
