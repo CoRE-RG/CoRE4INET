@@ -51,6 +51,7 @@
  * Ethernet 802.1Q Header
  */
 #define ETHER_8021Q_TAG_BYTES 4
+#define MAX_ETHER_8021Q_FRAME_BYTES (MAX_ETHERNET_FRAME_BYTES + ETHER_8021Q_TAG_BYTES)
 
 /**
  * Defines for range checks

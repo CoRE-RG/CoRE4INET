@@ -66,7 +66,7 @@ simple Buffer like IBuffer
         //Comma seperated list of gates where the frames of the buffer are delivered
         string destination_gates = default("");
         //The maximum allowed message size for this buffer
-        int maxMessageSize @unit(B) = default(1518B);
+        int maxMessageSize @unit(B) = default(1522B);
         //Switch to enable and disable the buffer
         bool enabled = default(true);
     gates:
