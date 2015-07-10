@@ -34,14 +34,10 @@ simple BE_InControl extends Timed like IInControl
         @signal[rxPk](type=inet::EtherFrame);
        
         //Statistic of the End-to-end latency for each packet that is received by the buffer
-       	@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+       	@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector?; interpolationmode=none);
         
-        //Statistic of the End-to-end latency for each packet when it lefts the buffer
-        @statistic[jitterTransmit](title="Jitter for transmitted Packets"; source="SubtractActualFromLast(messageAge(txPk))"; unit=s; record=count,min,max,vector; interpolationmode=none);
-
 		//Statistic for the variance of the end-to-end latency for received and transmitted packets
-        @statistic[jitterReceive](title="Jitter for received Packets"; source="SubtractActualFromLast(messageAge(rxPk))"; unit=s; record=count,min,max,vector; interpolationmode=none);
-        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram,vector?; interpolationmode=none);
 
          //Statistic of the amount of packets that were receive for each interval
         @statistic[availableBandwidth](title="Available Bandwidth for each Interval in Percent"; source=rxPk; record=count,"IntervalAvailableBandwidthPercent(packetBits)?"; interpolationmode=none);

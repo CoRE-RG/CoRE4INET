@@ -34,23 +34,19 @@ simple Buffer like IBuffer
 
          //Statistic of the amount of packets that were received by the buffer
         @signal[rxPk](type=inet::EtherFrame);
-        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)?"; interpolationmode=none);
         //End-to-end latency
 //        @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
 
         //Statistic of the amount of packets that were sent by the buffer
         @signal[txPk](type=inet::EtherFrame);
-        @statistic[txPk](title="TX Packets"; source=txPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+        @statistic[txPk](title="TX Packets"; source=txPk; record=count,"sum(packetBytes)","vector(packetBytes)?"; interpolationmode=none);
 		
 		//Statistic of the End-to-end latency for each packet that is received by the buffer
-		@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
+		@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector?; interpolationmode=none);
         
         //Statistic of the End-to-end latency for each packet when it lefts the buffer
-        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
-        
-        //Statistic for the variance of the end-to-end latency for received and transmitted packets
-        @statistic[jitterReceive](title="Jitter for received Packets"; source="SubtractActualFromLast(messageAge(rxPk))"; unit=s; record=count,min,max,vector; interpolationmode=none);
-        @statistic[jitterTransmit](title="Jitter for transmitted Packets"; source="SubtractActualFromLast(messageAge(txPk))"; unit=s; record=count,min,max,vector; interpolationmode=none);
+        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram,vector?; interpolationmode=none);
         
         //Statistics the size of packets that were received for each interval
         @statistic[bandwidthInterval](title="Bandwidth for each Interval"; source=rxPk; record=count, "IntervalCountVector(packetBytes)?", "IntervalSumVector(packetBytes)?", "IntervalAvgVector(packetBytes)?", "IntervalMinVector(packetBytes)?", "IntervalMaxVector(packetBytes)?", "IntervalVarianceVector(packetBytes)?"; interpolationmode=none);
