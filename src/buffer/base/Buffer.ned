@@ -43,20 +43,20 @@ simple Buffer like IBuffer
         @statistic[txPk](title="TX Packets"; source=txPk; record=count,"sum(packetBytes)","vector(packetBytes)?"; interpolationmode=none);
 		
 		//Statistic of the End-to-end latency for each packet that is received by the buffer
-		@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector?; interpolationmode=none);
+		@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector?; interpolationmode=none);
         
         //Statistic of the End-to-end latency for each packet when it lefts the buffer
-        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram,vector?; interpolationmode=none);
+        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram?,vector?; interpolationmode=none);
         
         //Statistics the size of packets that were received for each interval
-        @statistic[bandwidthInterval](title="Bandwidth for each Interval"; source=rxPk; record=count, "IntervalCountVector(packetBytes)?", "IntervalSumVector(packetBytes)?", "IntervalAvgVector(packetBytes)?", "IntervalMinVector(packetBytes)?", "IntervalMaxVector(packetBytes)?", "IntervalVarianceVector(packetBytes)?"; interpolationmode=none);
+        @statistic[bandwidthInterval](title="Bandwidth for each Interval"; source=rxPk; record="IntervalCountVector(packetBytes)?", "IntervalSumVector(packetBytes)?", "IntervalAvgVector(packetBytes)?", "IntervalMinVector(packetBytes)?", "IntervalMaxVector(packetBytes)?", "IntervalVarianceVector(packetBytes)?"; interpolationmode=none);
         
         //Records the capacity for each packet that is received by the buffer. The Capacity is the relation between payload and packetsize
-        @statistic[capacityInterval](title="Capacity for each Interval"; source=rxPk; record=count,"IntervalCapacityRecorder(packetBytes(innerMessage))?","IntervalCountVector(packetBytes(innerMessage))?","IntervalSumVector(packetBytes(innerMessage))?","IntervalAvgVector(packetBytes(innerMessage))?","IntervalMinVector(packetBytes(innerMessage))?","IntervalMaxVector(packetBytes(innerMessage))?","IntervalVarianceVector(packetBytes(innerMessage))?"; interpolationmode=none);
+        @statistic[capacityInterval](title="Capacity for each Interval"; source=rxPk; record="IntervalCapacityRecorder(packetBytes(innerMessage))?","IntervalCountVector(packetBytes(innerMessage))?","IntervalSumVector(packetBytes(innerMessage))?","IntervalAvgVector(packetBytes(innerMessage))?","IntervalMinVector(packetBytes(innerMessage))?","IntervalMaxVector(packetBytes(innerMessage))?","IntervalVarianceVector(packetBytes(innerMessage))?"; interpolationmode=none);
         
         //Floating Statistics for bandwidth and capacity(Slower)
-        @statistic[bandwidthIntervalFloating](title="Fbaloating Bandwidth for each Interval"; source=rxPk; record=count,"sum(packetBytes)?","vector(packetBytes)?","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=sample-hold);
-        @statistic[capacityIntervalFloating](title="Floating Capacity for each Interval"; source=rxPk; record=count,"floatingIntervalCapacityRecorder(innerMessagePacketBytes)?","sum(innerMessagePacketBytes)?","vector(innerMessagePacketBytes)?","floatingIntervalCountVector(innerMessagePacketBytes)?","floatingIntervalSumVector(innerMessagePacketBytes)?","floatingIntervalAvgVector(innerMessagePacketBytes)?"; interpolationmode=sample-hold);
+        @statistic[bandwidthIntervalFloating](title="Fbaloating Bandwidth for each Interval"; source=rxPk; record="vector(packetBytes)?","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=sample-hold);
+        @statistic[capacityIntervalFloating](title="Floating Capacity for each Interval"; source=rxPk; record="floatingIntervalCapacityRecorder(innerMessagePacketBytes)?","vector(innerMessagePacketBytes)?","floatingIntervalCountVector(innerMessagePacketBytes)?","floatingIntervalSumVector(innerMessagePacketBytes)?","floatingIntervalAvgVector(innerMessagePacketBytes)?"; interpolationmode=sample-hold);
         
 
         //Comma seperated list of gates where the frames of the buffer are delivered
