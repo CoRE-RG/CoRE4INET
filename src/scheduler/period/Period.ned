@@ -26,9 +26,9 @@ simple Period
         //Signal emitted when a new cycle starts
         @signal[newCycle]();
         //Statistic of the beginning of a new cycle
-        @statistic[newCycle](title="Start of cycle"; record=vector; interpolationmode=none);
+        @statistic[newCycle](title="Start of cycle"; record=vector?; interpolationmode=none);
         //Statistic of the number of cycles 
-        @statistic[numberOfCycles](title="Number of cycle"; signal=newCycle; record=count; interpolationmode=none);
+        @statistic[numberOfCycles](title="Number of cycle"; source=newCycle; record=count; interpolationmode=none);
         // Number of ticks for one cycle
         int cycle_ticks @unit(tick) = default(37500tick);
         // Number of ticks offset
