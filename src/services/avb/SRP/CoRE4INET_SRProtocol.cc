@@ -133,12 +133,16 @@ void SRProtocol::handleMessage(cMessage *msg)
                             listenerReady->getVlan_identifier()).size() > 0)
                     {
                         bubble("Listener Ready Failed!");
-                        srp = new ListenerReadyFailed("Listener Ready Failed", inet::IEEE802CTRL_DATA);
+                        ListenerReadyFailed *lrf = new ListenerReadyFailed("Listener Ready Failed", inet::IEEE802CTRL_DATA);
+                        lrf->setVlan_identifier(listenerReady->getVlan_identifier());
+                        srp = lrf;
                     }
                     else
                     {
-                        bubble("Listener Failed!");
-                        srp = new ListenerAskingFailed("Listener Failed", inet::IEEE802CTRL_DATA);
+                        bubble("Listener Asking Failed!");
+                        ListenerAskingFailed *laf = new ListenerAskingFailed("Listener Asking Failed", inet::IEEE802CTRL_DATA);
+                        laf->setVlan_identifier(listenerReady->getVlan_identifier());
+                        srp = laf;
                     }
                     srp->setStreamID(listenerReady->getStreamID());
 
@@ -157,7 +161,7 @@ void SRProtocol::handleMessage(cMessage *msg)
             }
             else if (ListenerAskingFailed* listenerFailed = dynamic_cast<ListenerAskingFailed*>(msg))
             {
-                bubble("Listener Failed!");
+                bubble("Listener Asking Failed!");
                 ExtendedIeee802Ctrl *new_etherctrl = new ExtendedIeee802Ctrl();
                 new_etherctrl->setEtherType(MSRP_ETHERTYPE);
                 new_etherctrl->setDest(SRP_ADDRESS);
