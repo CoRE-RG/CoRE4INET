@@ -32,7 +32,7 @@ simple CT_BE_InControl extends BE_InControl
         @class(CT_BE_InControl);
         //Statistic of the amount of packets that were dropped due to no configured buffer/ctc
         @signal[ctDropped](type=inet::EtherFrame);
-        @statistic[ctDropped](title="Unconfigured CT dropped"; source=droppedPk; record=count; interpolationmode=none);
+        @statistic[dropped](title="Unconfigured CT dropped"; source=droppedPk; record=count; interpolationmode=none);
 
 		//Critical traffic marker of the buffer
         int ct_marker;
