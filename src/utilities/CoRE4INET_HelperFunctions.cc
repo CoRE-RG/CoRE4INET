@@ -94,7 +94,7 @@ uint64_t transparentClockToTicks(uint64_t transparentClock, simtime_t tick)
 inet::MACAddress generateAutoMulticastAddress()
 {
     inet::MACAddress multicastMAC = inet::MACAddress::generateAutoAddress();
-    multicastMAC.setAddressByte(1, (multicastMAC.getAddressByte(1) | 0x01));
+    multicastMAC.setAddressByte(0, (multicastMAC.getAddressByte(1) | 0x01));
     return multicastMAC;
 }
 
