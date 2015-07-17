@@ -38,7 +38,7 @@ simple TicApp extends CTApplicationBase like IScheduled
         //Signal emitted when a frame is received, contains roundtrip time
         @signal[roundtrip](type=simtime_t; unit=s;);
 		//Statistic of the amount of packets that were received by the application
-        @statistic[rxPk](title="Received Packets"; source=rxPk; record=count);
+        @statistic[rxPk](title="Received Packets"; source=rxPk; unit=packets; record=count);
         //Statistic of the amount of bytes that were received by the application
         @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?"; interpolationmode=none);
         //Statistic of the applications roundtrip time

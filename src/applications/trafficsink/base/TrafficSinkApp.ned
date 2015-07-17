@@ -33,11 +33,11 @@ simple TrafficSinkApp extends ApplicationBase
         //Signal emitted when a frame is received, contains received EtherFrame
         @signal[rxPk](type=inet::EtherFrame);
         //Statistic of the amount of packets that were received by the application
-        @statistic[rxPk](title="Received Packets"; source=rxPk; record=count);
+        @statistic[rxPk](title="Received Packets"; source=rxPk; record=count; unit=packets);
         //Statistic of the amount of bytes that were received by the application
         @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=linear); //possible parameter e.g.: measure_interval=50ms; for floatingIntervalRecorders
         //End-to-end latency
+        @statistic[rxLatency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=linear);
         //Uses encapsulated packet | Frame when nothing is encapsulated
-        @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=linear);
-        @statistic[innerLatency](title="End-to-end latency inner"; source="messageAge(innerMessage(rxPk))"; unit=s; record=stats,histogram?,vector; interpolationmode=linear);
+        @statistic[rxLatencyInner](title="End-to-end latency inner"; source="messageAge(innerMessage(rxPk))"; unit=s; record=stats,histogram?,vector; interpolationmode=linear);
 }
