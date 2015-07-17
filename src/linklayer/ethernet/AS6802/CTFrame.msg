@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 cplusplus {{
     //INET
     #include "EtherFrame_m.h"
@@ -21,28 +22,27 @@ class inet::EthernetIIFrame;
 
 namespace CoRE4INET;
 
-
 //
 // Represents a critical traffic frame
 //
 // CTFrames are displayed as small black rectangles in the GUI
 //
-// @see EtherFrame
+// @see ~EthernetIIFrame, ~EtherFrame
 //
 // @author Till Steinbach
+//
 packet CTFrame extends EthernetIIFrame
 {
     @customize(true);    
-    	// Set EthernetHeader Bytelength
-    	byteLength = 18;
-    	
-    	etherType = 0x891d;
-    	
-        // Critical traffic ID (from MAC) (for TT and RC messages). 
-        abstract uint16_t ctID;
-        
-        // Critical traffic marker (from MAC) (for TT and RC messages). 
-        abstract uint32_t ctMarker;
-        
-        string displayString="b=15,15,rect,black,kind,5";
+    
+	// Set EthernetHeader Bytelength
+	byteLength = 18;	
+	etherType = 0x891d;
+	
+    // Critical traffic ID (from MAC) (for TT and RC messages). 
+    abstract uint16_t ctID;  
+    // Critical traffic marker (from MAC) (for TT and RC messages). 
+    abstract uint32_t ctMarker;
+    
+    string displayString="b=15,15,rect,black,kind,5";
 }

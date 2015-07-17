@@ -37,20 +37,24 @@ class BEShaper : public TC
          * @brief Constructor
          */
         BEShaper();
+
         /**
          * @brief Destructor
          */
         virtual ~BEShaper();
+
     protected:
         /**
          * @brief Signal that is emitted when the queue length of best-effort messages changes.
          */
         static simsignal_t beQueueLengthSignal;
+
     private:
         /**
          * @brief Queue for best-effort messages
          */
         cQueue beQueue;
+
     protected:
         /**
          * Initializes the module

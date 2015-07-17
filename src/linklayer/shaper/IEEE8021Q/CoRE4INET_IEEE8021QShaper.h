@@ -16,7 +16,6 @@
 #ifndef __CoRE4INET_IEEE8021QShaper_H
 #define __CoRE4INET_IEEE8021QShaper_H
 
-
 //CoRE4INET
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_HelperFunctions.h"
@@ -27,21 +26,22 @@ namespace CoRE4INET {
 
 /**
  * @brief A Shaper for IEEE802.1Q-tagged Messages.
- * *
+ *
  * @ingroup IEEE8021Q
  *
- * @author Till Steinbach
- * @author Philipp Meyer
+ * @author Till Steinbach, Philipp Meyer
  */
 template<class TC>
 class IEEE8021QShaper : public TC, public virtual Timed
 {
-    using Timed::initialize;
+        using Timed::initialize;
+
     public:
         /**
          * @brief Constructor
          */
         IEEE8021QShaper();
+
         /**
          * @brief Destructor
          */
@@ -58,6 +58,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
          */
         std::vector<simsignal_t> qQueueLengthSignals;
+
     protected:
         /**
          * Initializes the module

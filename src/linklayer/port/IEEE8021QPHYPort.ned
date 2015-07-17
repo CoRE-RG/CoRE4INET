@@ -11,30 +11,37 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
+ 
 package core4inet.linklayer.port;
 
 import core4inet.linklayer.inControl.base.BE_InControl;
 import core4inet.linklayer.shaper.IEEE8021Q_Shaper;
+
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-
+//
 // The IEEE8021QPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a IEEE 802.1Q Ethernet device (Switch or Host)
 //
-// @see EtherMACFullDuplex, IEEE8021Q_Shaper, BE_Shaper, BE_InControl
+// @see ~EtherMACFullDuplex, ~IEEE8021Q_Shaper, ~BE_Shaper, ~BE_InControl
 //
 // @author Philipp Meyer
+//
 module IEEE8021QPHYPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
+        
         // if true, all packets are received, otherwise only the ones with matching destination MAC address
         bool promiscuous = default(false);
         //Static propagation delay for the port
         double static_tx_delay @unit(s) = default(0ns);
+        //Module holds Interfacenames
         string interfaceTableModule;
+        
         *.interfaceTableModule = default(absPath(interfaceTableModule));
+        
     gates:
         //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
@@ -48,12 +55,14 @@ module IEEE8021QPHYPort
         shaper: IEEE8021Q_Shaper {
             @display("p=48,45");
         }
+        
         //Module for the organisation of inbound traffic
         inControl: BE_InControl {
             parameters:
                 @display("p=142,45");
                 promiscuous = promiscuous;
         }
+        
         //MAC interface
         mac: EtherMACFullDuplex {
             parameters:
@@ -61,6 +70,7 @@ module IEEE8021QPHYPort
                 queueModule = "^.shaper";
                 @display("p=87,139");
         }
+        
     connections:
         upperLayerIn --> shaper.in;
         upperLayerOut <-- inControl.out;

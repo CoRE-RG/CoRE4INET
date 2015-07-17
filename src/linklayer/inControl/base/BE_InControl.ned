@@ -12,52 +12,42 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.linklayer.inControl.base;
 
 import core4inet.utilities.classes.Timed;
-
 
 //
 // Module for incoming traffic from MAC layer. The traffic is checked for
 // critical traffic ID and then forwarded either as best-effort traffic to
 // the upper layer or when critical traffic to the CTC module (via sendDirect).
 //
-// @see EtherLLC, IMacRelayUnit, IOutputQueue
+// @see ~Timed, ~IInControl, ~EtherLLC, ~IMacRelayUnit, ~IOutputQueue
 //
 // @author Till Steinbach
+//
 simple BE_InControl extends Timed like IInControl
 {
     parameters:
         @display("i=block/classifier");
         @class(BE_InControl);
         
-        @signal[rxPk](type=inet::EtherFrame);
-       
-        //Statistic of the End-to-end latency for each packet that is received by the buffer
-       	@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector?; interpolationmode=none);
-        
-		//Statistic for the variance of the end-to-end latency for received and transmitted packets
-        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram?,vector?; interpolationmode=none);
-
-         //Statistic of the amount of packets that were receive for each interval
-        @statistic[availableBandwidth](title="Available Bandwidth for each Interval in Percent"; source=rxPk; record="IntervalAvailableBandwidthPercent(packetBits)?"; interpolationmode=none);
-        @statistic[linkUtilization](title="Link usage for each Interval in Percent"; source=rxPk; record="IntervalSumVectorPercent( packetBits )?"; interpolationmode=none);
-        
-        //Statistics the size of packets that were received for each interval
-        @statistic[bandwidthInterval](title="Bandwidth for each Interval"; source=rxPk; record="IntervalCountVector(packetBytes)?", "IntervalSumVector(packetBytes)?", "IntervalAvgVector(packetBytes)?", "IntervalMinVector(packetBytes)?", "IntervalMaxVector(packetBytes)?", "IntervalVarianceVector(packetBytes)?"; interpolationmode=none);
-         //Records the capacity for each packet that is received by the buffer. The Capacity is the relation between payload and packetsize
-        @statistic[capacityInterval](title="Capacity for each Interval"; source=rxPk; record="IntervalCapacityRecorder(packetBytes(innerMessage))?","IntervalCountVector(packetBytes(innerMessage))?","IntervalSumVector(packetBytes(innerMessage))?","IntervalAvgVector(packetBytes(innerMessage))?","IntervalMinVector(packetBytes(innerMessage))?","IntervalMaxVector(packetBytes(innerMessage))?","IntervalVarianceVector(packetBytes(innerMessage))?"; interpolationmode=none);
-       
-        //Floating Statistics (Slower)
-        @statistic[bandwidthIntervalFloating](title="Floating Bandwidth for each Interval"; source=rxPk; record"vector(packetBytes)?","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=sample-hold);
-        @statistic[capacityIntervalFloating](title="Floating Capacity for each Interval"; source=rxPk; record="floatingIntervalCapacityRecorder(innerMessagePacketBytes)?","vector(innerMessagePacketBytes)?","floatingIntervalCountVector(innerMessagePacketBytes)?","floatingIntervalSumVector(innerMessagePacketBytes)?","floatingIntervalAvgVector(innerMessagePacketBytes)?"; interpolationmode=sample-hold);
-        @statistic[availableBandwidthFloating](title="Available Bandwidth for each Interval in Percent"; source=rxPk; record="floatingIntervalAvailableBandwidthPercent(packetBits)?"; interpolationmode=none);
-        @statistic[linkUtilizationFloating](title="Link usage for each Interval in Percent"; source=rxPk; record="floatingIntervalSumVectorPercent( packetBits )?"; interpolationmode=none);
-        
-        
+        //Signal is emitted when when frame is received. Contains the received frame.
+        @signal[rxPk](type=inet::EtherFrame; unit=packets);     
+        //End-to-end latency recorded when frame is received. Contains the time from frame creation until received in the Buffer
+        @statistic[rxLatency](title="End-to-end latency (received)"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);     
+        //Maximum packet size in Interval
+        @statistic[maxPacketSize](title="Maximum Packet Size in Interval"; source=rxPk; unit=B; record="IntervalMaxVector(packetBytes)?"; interpolationmode=linear);
+        //Minimum packet size in Interval
+        @statistic[minPacketSize](title="Minimum Packet Size in Interval"; source=rxPk; unit=B; record="IntervalMinVector(packetBytes)?"; interpolationmode=linear);
+        //Utilized Bandwidth over Interval
+        @statistic[bandwidth](title="Bandwidth used over Interval"; source=rxPk; unit=B; record="IntervalSumVector(packetBytes)?"; interpolationmode=linear);
+        //Floating utilized Bandwidth over Interval
+        @statistic[bandwidth](title="Floating Bandwidth for each Interval"; source=rxPk; unit=B; record="floatingIntervalSumVector(packetBytes)?"; interpolationmode=sample-hold);
         
         // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
         bool promiscuous = default(false);
+        
     gates:
         //Input from the lower layer (MAC layer)
         input in @labels(EtherFrame);

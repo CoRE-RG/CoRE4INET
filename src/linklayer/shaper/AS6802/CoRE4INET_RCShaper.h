@@ -39,11 +39,13 @@ template<class TC>
 class RCShaper : public TC, public virtual Timed
 {
         using Timed::initialize;
+
     public:
         /**
          * @brief Constructor
          */
         RCShaper();
+
         /**
          * @brief Destructor
          */
@@ -59,11 +61,13 @@ class RCShaper : public TC, public virtual Timed
          * @brief caches numRCpriority parameter for faster execution
          */
         size_t numRcPriority;
+
     protected:
         /**
          * @brief Signal that is emitted when the queue length of time-triggered messages changes.
          */
         std::vector<simsignal_t> rcQueueLengthSignals;
+
     protected:
         /**
          * Initializes the module

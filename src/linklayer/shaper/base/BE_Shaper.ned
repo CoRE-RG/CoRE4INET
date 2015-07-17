@@ -12,13 +12,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.linklayer.shaper.base;
 
+//
 //A Shaper for best-effort messages.
 //
 //The BE_Shaper only handles best-effort traffic
 //
-// @see IShaper
+// @see ~IShaper
 //
 // @author Till Steinbach
 //
@@ -27,10 +29,11 @@ simple BE_Shaper like IShaper
     parameters:
         @class(BE_Shaper);
         @display("i=block/classifier");
+        
         //Signal emitted when queue length of the be queue changes, contains new queue length
-        @signal[beQueueLength](type=unsigned long);
+        @signal[beQueueLength](type=unsigned long; unit=packets);
         //Statistic of the queue length of best-effort frames
-        @statistic[beQueueLength](title="BE-Queue Length"; record=vector; interpolationmode=sample-hold);
+        @statistic[beQueueLength](title="BE-Queue Length"; unit=packets; record=vector; interpolationmode=sample-hold);
 
     gates:
         //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)

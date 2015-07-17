@@ -24,7 +24,7 @@ import core4inet.linklayer.ethernet.base.BGEtherEncap;
 // Incoming SRP frames are forwarded as SRP messages through srpOut to the SRProtocol module.
 // Outgoing SRP messages coming through srpIn gate are forwarded according to the controlInfo as EtherFrame
 //
-// @see BGEtherEncap, SRProtocol
+// @see ~BGEtherEncap, ~SRProtocol
 // 
 // @author Kai-Uwe von Deylen
 //
@@ -33,6 +33,7 @@ simple SRPEtherEncap extends BGEtherEncap
     parameters:
         @class(SRPEtherEncap);
         @display("i=block/fork");
+        
     gates:
         //SRP message in from SRP protocol module
         input srpIn;

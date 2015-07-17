@@ -29,6 +29,7 @@ class AVBShaper : public TC
          * @brief Constructor
          */
         AVBShaper();
+
         /**
          * @brief Destructor
          */
@@ -40,10 +41,24 @@ class AVBShaper : public TC
          */
         cQueue avbQueue;
 
+        /**
+         * @brief Pointer to AVBBuffer
+         */
         AVBBuffer *avbBuffer;
 
+        /**
+         * @brief Name of the avbQueueLengthSignal
+         */
         std::string avbQueueLengthSignalName;
+
+        /**
+         * @brief Name of the avbBuffer
+         */
         std::string avbBufferName;
+
+        /**
+         * @brief Name of the avbIn
+         */
         std::string avbInName;
 
     protected:

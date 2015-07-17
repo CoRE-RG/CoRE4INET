@@ -12,8 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package core4inet.linklayer.port;
 
+package core4inet.linklayer.port;
 
 //
 // Interface of TTEthernet ports. A port is a virtual instance that can receive
@@ -21,9 +21,10 @@ package core4inet.linklayer.port;
 //
 // Modules implementing IPort are not necessarily physical ports.
 //
-// @see TTEPHYPort, Sync, IApplication
+// @see ~TTEPHYPort, ~Sync, ~IApplication
 //
 // @author Till Steinbach
+//
 moduleinterface IPort
 {
     gates:

@@ -26,7 +26,7 @@ namespace CoRE4INET {
 /**
  * @brief Represents the part of a port that receives messages (RX)
  *
- *Critical traffic arriving on in-gate is forwarded to the incoming modules
+ * AVB traffic arriving on in-gate is forwarded to the incoming module
  * or dropped if there is no module configured. Best-effort frames are
  * forwarded through the out-gate.
  *
@@ -38,7 +38,7 @@ class AVBInControl : public IC
 {
     protected:
         /**
-         * @brief Forwards frames to the appropriate incoming modules
+         * @brief Forwards frames to the appropriate incoming module
          *
          * An AVB frame arriving on in-gate is forwarded to the AVBctc module
          * or dropped if there is no module configured.

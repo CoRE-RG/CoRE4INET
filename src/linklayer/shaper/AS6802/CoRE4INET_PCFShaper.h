@@ -38,11 +38,13 @@ template<class TC>
 class PCFShaper : public TC, public virtual Timed
 {
         using Timed::initialize;
+
     public:
         /**
          * @brief Constructor
          */
         PCFShaper();
+
         /**
          * @brief Destructor
          */
@@ -53,11 +55,13 @@ class PCFShaper : public TC, public virtual Timed
          * @brief Queue for protocol control messages
          */
         cQueue pcfQueue;
+
     protected:
         /**
          * @brief Signal that is emitted when the queue length of time-triggered messages changes.
          */
         static simsignal_t pcfQueueLengthSignal;
+
     protected:
         /**
          * Initializes the module

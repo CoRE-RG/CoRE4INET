@@ -18,10 +18,9 @@ package core4inet.linklayer.ethernet;
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper;
+
 import inet.linklayer.ethernet.EtherMACFullDuplex;
-
 import inet.linklayer.contract.INic;
-
 
 //
 // Module for a TTE AVB BE Ethernet NIC
@@ -29,57 +28,48 @@ import inet.linklayer.contract.INic;
 //
 // @todo Kommentar
 //
-// @see SRPEtherEncap, TTEAVBPHYPort, Sync, Scheduler
+// @see ~INic, ~SRPEtherEncap, ~TTEAVBPHYPort, ~Sync, ~Scheduler
 //
 // @author Kai-Uwe von Deylen
+//
 module TTEAVBEtherNic like INic
 {
     parameters:
         @display("i=block/ifcard");
+        
         string interfaceTableModule;
         double hardware_delay @unit(s) = default(0us);
         bool promiscuous = default(true); // TODO: sinnvoller default
+        
         *.interfaceTableModule = default(absPath(interfaceTableModule));
+        
     gates:
-
         // Connection to the physical ethernet gate
         inout ethg;
-
         // best effort input from upper layer 
         input upperLayerIn;
-
         // best effort output to upper layer
-        output upperLayerOut;
-        
+        output upperLayerOut;        
         // background (BE) traffic input
-        input bgIn;
-        
+        input bgIn;        
         // background (BE) traffic out
         output bgOut;
-
         // time-triggered traffic input from upper layer
         input TTin @directIn @labels(TTFrame);
-
         // rate-constrained traffic input from upper layer
         input RCin @directIn @labels(RCFrame);
-
 		// audio-video bridging class A traffic from upper layer
         input AVBAin @directIn @labels(AVBFrame);
-
 		// audio-video bridging class B traffic from upper layer
         input AVBBin @directIn @labels(AVBFrame);
-
         // rate-constrained Protocol-Control-Frame traffic from upper layer
-        input PCFin @directIn @labels(PCFrame);
-        
+        input PCFin @directIn @labels(PCFrame);     
         // stream reservation protocol input
-        input srpIn;
-        
+        input srpIn;       
         // stream reservation protocol output
         output srpOut;
 
     submodules:
-
         shaper: TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper {
             @display("p=88,75");
         }
@@ -103,7 +93,6 @@ module TTEAVBEtherNic like INic
         }
 
     connections:
-
         mac.phys <--> ethg;
 
         mac.upperLayerIn <-- shaper.out;

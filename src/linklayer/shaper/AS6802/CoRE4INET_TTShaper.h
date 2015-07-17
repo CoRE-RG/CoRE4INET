@@ -43,11 +43,13 @@ template<class TC>
 class TTShaper : public TC, public virtual Timed
 {
         using Timed::initialize;
+
     public:
         /**
          * @brief Constructor
          */
         TTShaper();
+
         /**
          * @brief Destructor
          */

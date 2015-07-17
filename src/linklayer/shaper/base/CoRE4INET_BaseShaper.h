@@ -53,6 +53,7 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
          * Implementation of IPassiveQueue::removeListener().
          */
         virtual void removeListener(inet::IPassiveQueueListener *listener) override;
+
     private:
         /**
          * @brief List of TTBuffers.
@@ -66,10 +67,12 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
          * @brief Number of frames that were requested from lower layer
          */
         size_t framesRequested;
+
         /**
          * @brief Outgoing Channel used to calculate transmission duration.
          */
         cChannel *outChannel;
+
         /**
          * @brief Signal that is emitted when the queue length of best-effort messages changes.
          */

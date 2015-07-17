@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 cplusplus {{
     //INET Auto-generated Messages
 	#include "EtherFrame_m.h"
@@ -28,17 +29,29 @@ namespace CoRE4INET;
 // Header length: src(6)+dest(6)+etherType(2)+802.1QTag(4) = 18 byte
 // Total overhead: 18 byte Header + 4 byte CRC = 22 byte
 //
+// @see ~EthernetIIFrame
+//
+// @author Philipp Meyer
+//
 packet EthernetIIFrameWithQTag extends EthernetIIFrame
 {
-    byteLength = 22;// Overhead without payload
-    uint8_t pcp;    // Priority Code Point (PCP): a 3-bit field which refers to the IEEE 802.1p priority. It indicates the frame priority level.
-                    // Values are from 0 (best effort) to 7 (highest); 1 represents the lowest priority.
-    bool de;        // Drop Eligible (DE): a 1-bit field. May be used separately or in conjunction with PCP to indicate frames eligible to be dropped in the presence of congestion.
-    uint16_t VID = 0;   // VLAN Identifier (VID): a 12-bit field specifying the VLAN to which the frame belongs.
-                    // The hexadecimal values of 0x000 and 0xFFF are reserved. All other values may be used as VLAN identifiers, allowing up to 4,094 VLANs.
-                    // The reserved value 0x000 indicates that the frame does not belong to any VLAN; in this case,
-                    // the 802.1Q tag specifies only a priority and is referred to as a priority tag. On bridges,
-                    // VLAN 1 (the default VLAN ID) is often reserved for a management VLAN; this is vendor-specific.
+    // Overhead without payload
+    byteLength = 22;
+    
+    // Priority Code Point (PCP): a 3-bit field which refers to the IEEE 802.1p priority. 
+    // It indicates the frame priority level.
+    // Values are from 0 (best effort) to 7 (highest); 1 represents the lowest priority.
+    uint8_t pcp; 
+    // Drop Eligible (DE): a 1-bit field. May be used separately 
+    // or in conjunction with PCP to indicate frames eligible to be dropped in the presence of congestion.   
+    bool de;   
+    // VLAN Identifier (VID): a 12-bit field specifying the VLAN to which the frame belongs.
+    // The hexadecimal values of 0x000 and 0xFFF are reserved. 
+    // All other values may be used as VLAN identifiers, allowing up to 4,094 VLANs.
+    // The reserved value 0x000 indicates that the frame does not belong to any VLAN; in this case,
+    // the 802.1Q tag specifies only a priority and is referred to as a priority tag. On bridges,
+    // VLAN 1 (the default VLAN ID) is often reserved for a management VLAN; this is vendor-specific.     
+    uint16_t VID = 0;   
                     
     string displayString = "b=10,10,oval,blue";
 }

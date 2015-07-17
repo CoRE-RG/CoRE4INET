@@ -21,9 +21,21 @@
 
 namespace CoRE4INET {
 
+/**
+ * @brief This module forwards frames to the bg buffers
+ *
+ * @sa EtherLLC
+ *
+ * @author Till Steinbach
+ */
 class BGEtherLLC : public virtual inet::EtherLLC
 {
   protected:
+    /**
+     * @brief Handles incoming messages
+     *
+     * @param msg cMessage pointer
+     */
     virtual void handleMessage(cMessage *msg) override;
 };
 
