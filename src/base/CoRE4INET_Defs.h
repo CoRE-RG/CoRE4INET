@@ -58,6 +58,7 @@
  */
 #define MAX_VLAN_ID 4094
 #define MAX_TICK_LENGTH DBL_MAX
+#define MAX_CYCLE_TICKS UINT32_MAX
 
 /**
  * Scheduling Priorities

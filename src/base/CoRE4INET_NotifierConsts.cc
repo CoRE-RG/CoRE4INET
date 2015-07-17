@@ -20,9 +20,8 @@
 
 namespace CoRE4INET {
 
-#ifdef WITH_AS6802_COMMON
 simsignal_t NF_SYNC_STATE_CHANGE = cComponent::registerSignal("NF_SYNC_STATE_CHANGE");
-#endif
+
 
 #ifdef WITH_AVB_COMMON
 simsignal_t NF_AVB_TALKER_REGISTERED = cComponent::registerSignal("NF_AVB_TALKER_REGISTERED");
