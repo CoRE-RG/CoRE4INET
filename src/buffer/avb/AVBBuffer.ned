@@ -23,7 +23,7 @@ import core4inet.buffer.base.Buffer;
 //
 // @warning Do not instantiate the module. Use AVBDoubleBuffer or AVBQueueBuffer instead!
 //
-// @see AVBDoubleBuffer, AVBQueueBuffer, Buffer, SchedulerActionTimeEvent, Scheduler
+// @see AVBQueueBuffer, Buffer, SchedulerActionTimeEvent, Scheduler
 //
 // @author Philipp Meyer
 simple AVBBuffer extends Buffer like ITimed
