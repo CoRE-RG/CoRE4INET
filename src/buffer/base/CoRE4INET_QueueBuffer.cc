@@ -17,7 +17,7 @@
 
 namespace CoRE4INET {
 
-simsignal_t QueueBuffer::queueLengthSignal = registerSignal("queueLength");
+simsignal_t QueueBuffer::queueLengthSignal = registerSignal("length");
 simsignal_t QueueBuffer::droppedSignal = registerSignal("dropped");
 
 QueueBuffer::QueueBuffer()

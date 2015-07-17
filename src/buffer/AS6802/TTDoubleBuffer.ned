@@ -19,7 +19,7 @@ package core4inet.buffer.AS6802;
 // send window.
 //
 // The buffer stores only one message at a time that is overwritten on each insert.
-// The buffer sends a copy of the stored frame after each bag.
+// The buffer sends a copy of the stored frame at each actionpoint
 //
 // @see TTBuffer, Buffer,
 //

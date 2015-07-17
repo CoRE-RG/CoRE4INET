@@ -34,7 +34,7 @@ simple AVBBuffer extends Buffer like ITimed
         //Signal emitted when the credit of the CBS algorithm changes
         @signal[credit](type=long);
         //Statistic of the credit of the CBS algorithm
-        @statistic[credit](title="Credit"; record=vector);
+        @statistic[credit](title="Credit"; source=credit; record=vector; interpolationmode=linear;);
 
 		// Stream Reservation Class of the AVB Buffer
         string srClass = default("A");
