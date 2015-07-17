@@ -20,10 +20,8 @@
 
 namespace CoRE4INET {
 
-#ifdef WITH_AS6802_COMMON
 //Notification for changes in the synchronization state
 extern simsignal_t NF_SYNC_STATE_CHANGE; //Sync
-#endif
 
 #ifdef WITH_AVB_COMMON
 //Notifications for talker and listener management
