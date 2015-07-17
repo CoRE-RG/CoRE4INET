@@ -43,7 +43,7 @@ simple BE_InControl extends Timed like IInControl
         //Utilized Bandwidth over Interval
         @statistic[bandwidth](title="Bandwidth used over Interval"; source=rxPk; unit=B; record="IntervalSumVector(packetBytes)?"; interpolationmode=linear);
         //Floating utilized Bandwidth over Interval
-        @statistic[bandwidth](title="Floating Bandwidth for each Interval"; source=rxPk; unit=B; record="floatingIntervalSumVector(packetBytes)?"; interpolationmode=sample-hold);
+        @statistic[bandwidthFloating](title="Floating Bandwidth for each Interval"; source=rxPk; unit=B; record="floatingIntervalSumVector(packetBytes)?"; interpolationmode=sample-hold);
         
         // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
         bool promiscuous = default(false);
