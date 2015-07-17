@@ -20,9 +20,10 @@ import core4inet.incoming.base.Incoming;
 //
 // Module for the conformance checks of incoming audio-video bridging traffic.
 //
-// TODO: Inheritance: PArent should be base.Incoming
+// @see ~Incoming
 //
 // @author Philipp Meyer
+//
 simple AVBIncoming extends Incoming
 {
     parameters:
@@ -31,7 +32,8 @@ simple AVBIncoming extends Incoming
         @display("i=block/arrival,blue");
         
     gates:
-        //outputs for AVB Frames
+        //outputs for AVB Class A Frames
         output AVBAout[] @labels(AVBFrame);
+        //outputs for AVB Class B Frames
         output AVBBout[] @labels(AVBFrame);
 }

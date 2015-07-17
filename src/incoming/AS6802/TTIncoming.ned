@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.incoming.AS6802;
 
 import core4inet.incoming.base.Incoming;
@@ -24,15 +25,17 @@ import core4inet.utilities.classes.IScheduled;
 // delayed until the permanence point in time (permanence_pit). Therefore it registers a
 // timer message (SchedulerActionTimeEvent) with the schduler module (TTEScheduler)
 //
-// @see Incoming, SchedulerActionTimeEvent, TTEScheduler
+// @see ~Incoming, ~IScheduled, ~SchedulerActionTimeEvent, ~TTEScheduler
 //
 // @author Till Steinbach
+//
 simple TTIncoming extends Incoming like IScheduled
 {
     parameters:
         @display("i=,red");
         //TTIncoming is implemented by the TTIncoming C++ Class
         @class(TTIncoming);
+        
         //Beginning of the receive window in number of ticks (-1 means no receive window)
         int receive_window_start @unit(tick);
         //End of the receive window in number of ticks (-1 means no receive window)
@@ -45,9 +48,11 @@ simple TTIncoming extends Incoming like IScheduled
         string oscillator = default("oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("timer");
+        
         //Hardware delay is set to 0s as the forwarding is scheduled (permanence_pit)
         hardware_delay = 0s;
+        
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn @directIn;
+        input schedulerIn @directIn @label(SchedulerMessage);
 }

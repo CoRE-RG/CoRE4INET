@@ -29,6 +29,8 @@ namespace CoRE4INET {
  * @brief Class for the critical traffic conformance check of
  * audio-video bridging traffic.
  *
+ * @sa Incoming
+ *
  * @author Philipp Meyer
  */
 class AVBIncoming : public Incoming

@@ -12,29 +12,34 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.incoming.AS6802;
 
 import core4inet.incoming.base.Incoming;
 import core4inet.utilities.classes.ITimed;
+
 //
 // Module for the conformance checks of incoming rate-constrained traffic.
 //
 // The traffic is checked for conformance with the bag.
 //
-// @see Incoming,
+// @see ~Incoming, ~ITimed
 //
 // @author Till Steinbach
+//
 simple RCIncoming extends Incoming like ITimed
 {
     parameters:
         @display("i=,orange");
         //RCIncoming is implemented by the RCIncoming C++ Class
         @class(RCIncoming);
+        
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
         int bag @unit(tick) = default(0tick);
         // Maximum jitter for the bandwidth allocation gap in number of ticks
         int jitter @unit(tick) = default(0tick);
-
+		 //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("oscillator");
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("timer");
 }

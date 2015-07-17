@@ -19,9 +19,8 @@
 #include <string>
 using namespace std;
 
+//CoRE4INET auto-generated
 #include "AVBFrame_m.h"
-//INET
-//#include "EtherFrame_m.h"
 
 namespace CoRE4INET {
 
