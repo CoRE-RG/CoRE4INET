@@ -33,7 +33,7 @@ simple BGQueueBuffer extends BGBuffer
         @class(BGQueueBuffer);
         
         //Signal emitted when queuelength changes, contains new length
-        @signal[length](type=unsigned long);
+        @signal[length](type=unsigned long; unit=packets);
         //Signal emitted when frame is dropped due to buffer overflow, contains dropped EtherFrame
         @signal[dropped](type=inet::EtherFrame);
         

@@ -109,6 +109,11 @@ class CTBuffer : public virtual Buffer
          */
         void putFrame(inet::EtherFrame* frame);
 
+        /**
+         * @brief get critical traffic id
+         *
+         * @return critical traffic id
+         */
         uint16_t getCTID();
 
 };

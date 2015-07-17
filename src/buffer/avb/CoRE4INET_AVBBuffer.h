@@ -41,7 +41,13 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
 {
         using Timed::initialize;
     public:
+        /**
+         * @brief Constructor
+         */
         AVBBuffer();
+        /**
+         * @brief Destructor
+         */
         virtual ~AVBBuffer();
 
     public:
@@ -83,19 +89,61 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
          */
         void resetCredit();
 
-    protected:
+    private:
+        /**
+         * @brief Stream Reservation Class of the AVB Buffer
+         */
         SR_CLASS srClass;
-        int credit;
-        int maxCredit;
-        bool inTransmission;
-        //int msgCnt;
-        simtime_t newTime;
-        simtime_t oldTime;
-        simtime_t Wduration;
-        simtime_t tick;
-        SRPTable *srptable;
-        unsigned int portBandwith;
 
+        /**
+         * @brief Current credit of the CBS
+         */
+        int credit;
+
+        /**
+         * @brief Maximum credit (can be observed in the GUI)
+         */
+        int maxCredit;
+
+        /**
+         * @brief Is true when frame is currently in transmission
+         */
+        bool inTransmission;
+
+        /**
+         * @brief Time when credit is being calculated
+         */
+        simtime_t newTime;
+
+        /**
+         * @brief Time until the credit was previously calculated
+         */
+        simtime_t oldTime;
+
+        /**
+         * @brief Time until credit is zero
+         */
+        simtime_t Wduration;
+
+        /**
+         * @brief Length of one tick
+         */
+        simtime_t tick;
+
+        /**
+         * @brief Pointer to the SRP Table
+         */
+        SRPTable *srptable;
+
+        /**
+         * @brief Bandwidth of the port where the buffer is attached
+         */
+        unsigned int portBandwith;
+    protected:
+
+        /**
+         * Signal that is emitted every time the credit is recalculated.
+         */
         static simsignal_t creditSignal;
 
         /**

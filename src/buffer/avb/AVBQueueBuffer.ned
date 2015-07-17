@@ -30,9 +30,10 @@ simple AVBQueueBuffer extends AVBBuffer
         @class(AVBQueueBuffer);
         @display("q=frames");
         //Signal emitted when queuelength changes, contains new length
-        @signal[queueLength](type=unsigned long);
+        @signal[length](type=unsigned long; unit=packets);
+        
         //Statistic of the queue length of the buffer
-        @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
+        @statistic[length](title="Queue Length"; source=length; record=vector; unit=packets; interpolationmode=sample-hold);
 
         //Size of the buffer negative means infinite
         int size = default(-1);
