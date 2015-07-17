@@ -22,15 +22,16 @@ import core4inet.applications.AS6802.CTApplicationBase;
 // Receives TT messages with Tic-Request payload and answers
 // with RC messages with Toc-Response payload.
 //
-//
 // @see rt_tictoc, TicApp
 //
 // @author Till Steinbach
+//
 simple TocApp extends CTApplicationBase
 {
     parameters:
         @class(TocApp);
         @display("i=block/routing,gold");
+        
         //Counter is increased on incoming Tic messages
         int counter = 0;
         //CT-ID used for the messages to send

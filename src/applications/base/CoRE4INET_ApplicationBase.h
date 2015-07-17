@@ -26,7 +26,7 @@ namespace CoRE4INET {
 class BGBuffer;
 
 /**
- * @brief Base class for a real-time Ethernet-Application.
+ * @brief Base class for a Ethernet-Application.
  *
  * Containes the mapping to Buffers and the ability to execute Callbacks
  *

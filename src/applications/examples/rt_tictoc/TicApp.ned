@@ -23,23 +23,27 @@ import core4inet.utilities.classes.IScheduled;
 // Sends TT messages with Tic-Request payload and receives
 // RC messages with Toc-Response payload.
 //
-//
-// @see rt_tictoc, TocApp
+// @see rt_tictoc, ~TocApp
 //
 // @author Till Steinbach
+//
 simple TicApp extends CTApplicationBase like IScheduled
 {
     parameters:
         @class(TicApp);
         @display("i=block/routing,cyan");
+        
 		//Signal emitted when a frame is received, contains received EtherFrame
         @signal[rxPk](type=inet::EtherFrame);
         //Signal emitted when a frame is received, contains roundtrip time
-        @signal[roundtrip](type=simtime_t);
+        @signal[roundtrip](type=simtime_t; unit=s;);
 		//Statistic of the amount of packets that were received by the application
-        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interval=1s; interpolationmode=none);
+        @statistic[rxPk](title="Received Packets"; source=rxPk; record=count);
+        //Statistic of the amount of bytes that were received by the application
+        @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?"; interpolationmode=none);
         //Statistic of the applications roundtrip time
-        @statistic[roundtrip](title="Roundtrip time"; unit=s; record=stats,histogram,vector);
+        @statistic[roundtrip](title="Roundtrip time"; unit=s; record=stats,histogram?,vector);
+        
         //Counter is increased on incoming Tic messages
         int counter = 0;
         //CT-ID used for the messages to send

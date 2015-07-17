@@ -20,12 +20,13 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 //
 // Abstract base traffic source application used for various traffic generators.
 // Uses CTFrame with encapsulated cPacket as payload
-// Since this is an abstract module please do not instantiate it
 //
+// @warning Since this is an abstract module please do not instantiate it!
 //
-// @see TTTrafficSourceApp, RCTrafficSourceApp
+// @see ~TrafficSourceAppBase, ~TTTrafficSourceApp, ~RCTrafficSourceApp
 //
 // @author Till Steinbach
+//
 simple CTTrafficSourceAppBase extends TrafficSourceAppBase
 {
     parameters:

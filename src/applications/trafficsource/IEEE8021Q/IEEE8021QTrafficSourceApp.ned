@@ -20,11 +20,9 @@ import core4inet.applications.trafficsource.base.BGTrafficSourceApp;
 //
 // Traffic source application used for IEEE 802.1Q traffic.
 //
+// @see ~BGTrafficSourceApp, ~TTTrafficSourceApp, ~RCTrafficSourceApp
 //
-// @see TTTrafficSourceApp, RCTrafficSourceApp
-//
-// @author Till Steinbach
-// @author Philipp Meyer
+// @author Till Steinbach, Philipp Meyer
 //
 simple IEEE8021QTrafficSourceApp extends BGTrafficSourceApp
 {

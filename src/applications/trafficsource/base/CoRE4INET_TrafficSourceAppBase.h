@@ -28,6 +28,8 @@ namespace CoRE4INET {
  *
  * @sa ApplicationBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach
  */
 class TrafficSourceAppBase : public virtual ApplicationBase
 {

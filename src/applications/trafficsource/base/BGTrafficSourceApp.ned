@@ -22,10 +22,10 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 // Uses EtherFrame with encapsulated cPacket as payload
 // This generator generates frames with sendInterval distance
 //
-//
-// @see TTTrafficSourceApp, RCTrafficSourceApp
+// @see ~TrafficSourceAppBase, ~TTTrafficSourceApp, ~RCTrafficSourceApp
 //
 // @author Till Steinbach
+//
 simple BGTrafficSourceApp extends TrafficSourceAppBase
 {
     parameters:
@@ -34,11 +34,9 @@ simple BGTrafficSourceApp extends TrafficSourceAppBase
 
         // destination MAC address
         string destAddress = default("auto");
-
         // interval between sending requests
         volatile double sendInterval @unit(s) = default(uniform(0s,1s));
         
         //Default bgOut is best-effort buffer
         buffers = default("bgOut");
-
 }

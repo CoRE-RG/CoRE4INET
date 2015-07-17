@@ -25,7 +25,7 @@
 namespace CoRE4INET {
 
 /**
- * @brief Traffic sink application used for statistics collection.
+ * @brief Traffic sink application used for statistics collection of multiple different virtual links.
  *
  *
  * @sa ApplicationBase

@@ -20,10 +20,10 @@ package core4inet.applications.trafficsource.base;
 // Uses multiple EtherFrame with encapsulated cPacket as payload to generate bursts
 // This generator generates bursts with sendInterval distance
 //
-//
-// @see BGTrafficSourceApp
+// @see ~BGTrafficSourceApp
 //
 // @author Till Steinbach
+//
 simple BGBurstTrafficSourceApp extends BGTrafficSourceApp
 {
     parameters:

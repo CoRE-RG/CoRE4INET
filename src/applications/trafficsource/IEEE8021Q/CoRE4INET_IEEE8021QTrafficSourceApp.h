@@ -29,6 +29,8 @@ namespace CoRE4INET {
  *
  * @sa TrafficSourceAppBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach, Philipp Meyer
  */
 class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
 {
