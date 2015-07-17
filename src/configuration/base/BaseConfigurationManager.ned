@@ -22,9 +22,10 @@ import core4inet.configuration.IConfigurationManager;
 // If you use this BaseConfigurationManager you must configure the
 // node manually
 //
-// @see IConfigurationManager
+// @see ~IConfigurationManager
 //
 // @author Till Steinbach
+//
 simple BaseConfigurationManager like IConfigurationManager
 {
     @display("i=block/table2");

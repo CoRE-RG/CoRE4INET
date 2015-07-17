@@ -19,9 +19,10 @@ package core4inet.configuration;
 // Interface for a ConfigurationManager that configures a node according to its
 // configuration
 //
-// @see BaseConfigurationManager
+// @see ~BaseConfigurationManager
 //
 // @author Till Steinbach
+//
 moduleinterface IConfigurationManager
 {
 }
