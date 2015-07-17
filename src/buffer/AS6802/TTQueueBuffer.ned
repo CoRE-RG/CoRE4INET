@@ -41,5 +41,5 @@ simple TTQueueBuffer extends TTBuffer
         //Size of the buffer negative means infinite
         int size = default(-1);
         //Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)
-        bool drop_new = default(false);
+        bool dropNew = default(false);
 }
