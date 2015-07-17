@@ -36,9 +36,5 @@ simple TTTrafficSourceApp extends CTTrafficSourceAppBase like IScheduled
         //and so on. 0 means never
         int modulo = default(1);
         //Period of Scheduler this app is assigned to
-        string period = default("period[0]");
-        //Oscillator of Scheduler this app is assigned to
-        string oscillator = default("oscillator");
-        //Timer of Scheduler this app is assigned to
-        string timer = default("timer");
+        string period = default("^.scheduler.period[0]");
 }

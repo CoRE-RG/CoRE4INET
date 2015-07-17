@@ -45,10 +45,6 @@ simple RCBuffer extends CTBuffer like ITimed
         // Maximum jitter for the bandwidth allocation gap in number of ticks
         int jitter @unit(tick) = default(0tick);
 
-        //Oscillator this buffer is assigned to
-        string oscillator = default("oscillator");
-        //Timer this buffer is assigned to
-        string timer = default("timer");
     gates:
         //Input gate for the incoming SchedulerTimerEvent messages
         input schedulerIn @directIn;

@@ -43,11 +43,11 @@ simple TTIncoming extends Incoming like IScheduled
         //permanence point in time in number of ticks (-1 means no permanence point, frame is relayed immediately)
         int permanence_pit @unit(tick);
         //Period of Scheduler this ctc is assigned to
-        string period = default("period[0]");
+        string period = default("^.scheduler.period[0]");
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
-        string oscillator = default("oscillator");
+        string oscillator = default("^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
-        string timer = default("timer");
+        string timer = default("^.scheduler.timer");
         
         //Hardware delay is set to 0s as the forwarding is scheduled (permanence_pit)
         hardware_delay = 0s;

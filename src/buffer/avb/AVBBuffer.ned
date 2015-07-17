@@ -39,9 +39,9 @@ simple AVBBuffer extends Buffer like ITimed
 		// Stream Reservation Class of the AVB Buffer
         string srClass = default("A");
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
-        string oscillator = default("oscillator");
+        string oscillator = default("^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
-        string timer = default("timer");
+        string timer = default("^.scheduler.timer");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

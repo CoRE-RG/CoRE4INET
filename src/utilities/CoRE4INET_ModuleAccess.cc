@@ -32,7 +32,7 @@ static cModule *findSubmodRecursive(cModule *curmod, const char *name)
 
 cModule *findModuleWherever(const char *name, cModule *from)
 {
-    cModule *mod = NULL;
+    cModule *mod = nullptr;
     for (cModule *curmod = from; !mod && curmod; curmod = curmod->getParentModule())
         mod = findSubmodRecursive(curmod, name);
     return mod;
@@ -40,7 +40,7 @@ cModule *findModuleWherever(const char *name, cModule *from)
 
 cModule *findModuleWhereverInNode(const char *name, cModule *from)
 {
-    cModule *mod = NULL;
+    cModule *mod = nullptr;
     for (cModule *curmod = from; curmod; curmod = curmod->getParentModule()) {
         mod = findSubmodRecursive(curmod, name);
         if (mod || inet::isNetworkNode(curmod))

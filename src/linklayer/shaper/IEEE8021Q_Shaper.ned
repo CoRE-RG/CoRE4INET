@@ -37,9 +37,9 @@ simple IEEE8021Q_Shaper like IShaper
         @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; unit=packets; record=vector; interpolationmode=sample-hold);
 		
 		//Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
-		string oscillator = default("oscillator");
+		string oscillator = default("^.^.scheduler.oscillator");
 		//Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
-        string timer = default("timer");
+        string timer = default("^.^.scheduler.timer");
         
     gates:
         //Input for IEEE802.1Q frames from the upper layer (EtherLLC or IMacRelayUnit)

@@ -35,4 +35,8 @@ simple CTTrafficSourceAppBase extends TrafficSourceAppBase
 
         //Critical traffic identifier of the message that is being generated (-1) means don't set ID
         int ct_id = default(-1);
+        //Oscillator of Scheduler this app is assigned to
+        string oscillator = default("^.scheduler.oscillator");
+        //Timer of Scheduler this app is assigned to
+        string timer = default("^.scheduler.timer");
 }

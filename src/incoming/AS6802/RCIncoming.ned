@@ -39,7 +39,7 @@ simple RCIncoming extends Incoming like ITimed
         // Maximum jitter for the bandwidth allocation gap in number of ticks
         int jitter @unit(tick) = default(0tick);
 		 //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
-        string oscillator = default("oscillator");
+        string oscillator = default("^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
-        string timer = default("timer");
+        string timer = default("^.scheduler.timer");
 }

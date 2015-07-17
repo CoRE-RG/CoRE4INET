@@ -52,9 +52,9 @@ simple TicApp extends CTApplicationBase like IScheduled
         int action_time @unit(tick);
 
 		//Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator @see IScheduled
-        string oscillator = default("oscillator");
+        string oscillator = default("^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer @see IScheduled
-        string timer = default("timer");
+        string timer = default("^.scheduler.timer");
         //Period of the scheduled module (must be set to the name of a period module in the Node) when left empty: period[0] @see IScheduled
         string period = default("");
 }

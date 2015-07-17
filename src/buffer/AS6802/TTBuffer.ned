@@ -44,11 +44,7 @@ simple TTBuffer extends CTBuffer like IScheduled
         int sendWindowEnd @unit(tick) = default(0tick);
 
         //Period of Scheduler this buffer is assigned to
-        string period = default("period[0]");
-        //Oscillator this buffer is assigned to
-        string oscillator = default("oscillator");
-        //Timer this buffer is assigned to
-        string timer = default("timer");
+        string period = default("^.scheduler.period[0]");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

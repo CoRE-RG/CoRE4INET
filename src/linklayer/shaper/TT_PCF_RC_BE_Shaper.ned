@@ -45,9 +45,9 @@ simple TT_PCF_RC_BE_Shaper extends PCF_RC_BE_Shaper like ITimed
         //Safety margin for TT-Messages in ticks (musst be set according to maximum clock correction!)
         int safety_margin = default(5);
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
-        string oscillator = default("oscillator");
+        string oscillator = default("^.^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
-        string timer = default("timer");
+        string timer = default("^.^.scheduler.timer");
         
     gates:
         //Input for time-triggered frames from the buffers
