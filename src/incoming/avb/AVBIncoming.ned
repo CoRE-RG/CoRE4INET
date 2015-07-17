@@ -19,6 +19,7 @@ import core4inet.incoming.base.Incoming;
 
 //
 // Module for the conformance checks of incoming audio-video bridging traffic.
+// Routes AVBFrames to the correct buffers.
 //
 // @see ~Incoming
 //

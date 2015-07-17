@@ -18,7 +18,6 @@ package core4inet.nodes.ethernet.avb_AS6802;
 import core4inet.applications.base.IApplication;
 import core4inet.buffer.avb.AVBQueueBuffer;
 import core4inet.buffer.base.BGQueueBuffer;
-import core4inet.configuration.IConfigurationManager;
 import core4inet.incoming.avb.AVBIncoming;
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.port.TTEAVBPHYPort;
@@ -26,37 +25,48 @@ import core4inet.scheduler.ITTEScheduler;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.synchronisation.base.ISync;
-import inet.networklayer.common.InterfaceTable;
 
+import inet.networklayer.common.InterfaceTable;
 
 //
 // Module for a TTEAVBEthernet Host.
 // Contains handler for TT, AVB, RC and BE Messages.
 //
-// @see SRPEtherEncap, TTEAVBPHYPort, Sync, Scheduler
+// @see ~TTEAVBPHYPort, ~AVBIncoming, ~AVBQueueBuffer, ~SRPEtherEncap, ~ISync, ~ITTEScheduler, ~IApplication, ~BGQueueBuffer, ~SRPTable, ~SRProtocol, ~InterfaceTable
 //
 // @author Philipp Meyer
+//
 module TTEAVBEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
         @networkNode;
-        int numApps = default(0); //default(1) ? ListenerApp
+        
+        // Number of Applications running on the device
+        int numApps = default(0);
+        // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
+        // (When not manually declared in own deriving .ned file)
         int numBuffer = default(0);
+        // Number of Ports of the device
         int numPorts = default(1);
+        // Forwardingdelay of the device hardware
         double hardware_delay @unit(s) = default(0us);
-        string configurationManagerType = default("");
-        *.interfaceTableModule = default(absPath(".interfaceTable"));
+        // Promiscuous mode for best-efford traffic handling
         bool be_promiscuous = default(true);
+        
+        *.interfaceTableModule = default(absPath(".interfaceTable"));
+        
     gates:
         inout ethg;
 
     submodules:
+        // Physical port of the host
         phy[numPorts]: TTEAVBPHYPort {
             @display("p=380,255,c,50");
             promiscuous = be_promiscuous;
         }
 
+		// AVB critical traffic control
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=380,118");
@@ -66,59 +76,66 @@ module TTEAVBEtherHost
                 AVBBout[numPorts];
         }
 
+		// AVB class A buffer
         avbABuffer[numPorts]: AVBQueueBuffer {
             parameters:
                 srClass = "A";
                 @display("p=341,193");
         }
 
+        // AVB class B buffer
         avbBBuffer[numPorts]: AVBQueueBuffer {
             parameters:
                 srClass = "B";
                 @display("p=419,193");
         }
 
+		// Stream Reservation Protocol ethernet encapsulation
         encap: SRPEtherEncap {
             parameters:
                 @display("p=141,255");
         }
 
-        // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
-            @display("p=999,999");
-        }
-         // Sync module for synchronisation of the scheduler
+        // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             @display("p=208,169");
         }
+        
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=274,169");
         }
 
+		// Applications for the device
         app[numApps]: <> like IApplication {
             @display("p=380,37,row,70");
         }
 
+		// Best-efford buffer for incoming traffic 
         bgIn: BGQueueBuffer {
             @display("p=60,37");
         }
-
+        
+		// Best-efford buffer for outgoing traffic
         bgOut: BGQueueBuffer {
             @display("p=109,37");
         }
-
+		
+		// Stream Reservation Protocol table
         srpTable: SRPTable {
             @display("p=141,99");
         }
 
+		// Stream Reservation Protocol implementation
         srpProtocol: SRProtocol {
             @display("p=141,169");
         }
         
+        // Holds interface names
         interfaceTable: InterfaceTable {
             @display("p=447,313");
         }
+        
     connections allowunconnected:
         phy[0].phys <--> ethg;
         encap.lowerLayerOut --> phy[0].upperLayerIn;
