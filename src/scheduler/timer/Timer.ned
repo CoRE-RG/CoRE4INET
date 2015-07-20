@@ -19,7 +19,7 @@ package core4inet.scheduler.timer;
 // Timer Module:  Implements a timer with an attached oscillator with adjustable precision that may be synchronized by a
 // synchronization module
 //
-// @see IOscillator, IPeriod
+// @see ~IOscillator, ~IPeriod
 //
 // @author Till Steinbach
 //
@@ -27,10 +27,12 @@ simple Timer
 {
     parameters:
         @display("i=block/timer");
+        
         //Signal emitted when the clock is corrected, contains the signed number of ticks that is added to the clock
         @signal[clockCorrection](type=long);
         //Statistic of the clock correction in ticks
-        @statistic[clockCorrection](title="Clock correction"; unit=s; record=vector);
+        @statistic[clockCorrection](title="Clock correction"; unit=tick; record=vector);
+        
     gates:
         //Input from the period modules (currently unused)
         input period_in[];

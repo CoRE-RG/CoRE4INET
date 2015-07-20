@@ -12,23 +12,26 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 namespace CoRE4INET;
 
 //
 // abstract base message for TTEScheduler.
 //
-// @see TTEScheduler
+// @see ~TTEScheduler
 //
 // @author Till Steinbach
+//
 message SchedulerMessage {
 }
 
 //
 // Message used for events of TTEScheduler with SchedulerMessageKind = NEW_CYCLE
 //
-// @see SchedulerMessageKind
+// @see ~SchedulerMessageKind
 //
 // @author Till Steinbach
+//
 message SchedulerEvent extends SchedulerMessage {
     @customize(true);
 }
@@ -36,9 +39,10 @@ message SchedulerEvent extends SchedulerMessage {
 //
 // Enum for different SchedulerEvent messages 
 //
-// @see SchedulerEvent
+// @see ~SchedulerEvent
 //
 // @author Till Steinbach
+//
 enum SchedulerMessageKind {
     // Event that signals the beginning of a new cycle
     NEW_CYCLE=0;

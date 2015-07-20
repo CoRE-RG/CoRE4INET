@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
+
 #ifndef __CORE4INET_SCHEDULEREVENT_H_
 #define __CORE4INET_SCHEDULEREVENT_H_
 
@@ -28,29 +29,64 @@ namespace CoRE4INET {
 class SchedulerEvent : public SchedulerEvent_Base
 {
     private:
+        /**
+         * @brief Target gate for SchedulerEvent
+         */
         cGate *destinationGate_var;
+
     public:
+        /**
+         * @brief Constructor
+         *
+         * @param name name of the message
+         * @param kind type of the message
+         */
         SchedulerEvent(const char *name = nullptr, short kind = 0) :
                 SchedulerEvent_Base(name, kind)
         {
             destinationGate_var = nullptr;
         }
+
+        /**
+         * @brief Copy constructor
+         */
         SchedulerEvent(const SchedulerEvent& other) :
                 SchedulerEvent_Base(other.getName())
         {
             operator=(other);
         }
+
+        /**
+         * @brief Assignment operator
+         */
         SchedulerEvent& operator=(const SchedulerEvent& other)
         {
             SchedulerEvent_Base::operator=(other);
             return *this;
         }
+
+        /**
+         * @brief Duplication of SchedulerEvent message
+         */
         virtual SchedulerEvent *dup() const
         {
             return new SchedulerEvent(*this);
         }
+
         // ADD CODE HERE to redefine and implement pure virtual functions from SchedulerEvent_Base
+
+        /**
+         * @brief Get target gate for SchedulerEvent
+         *
+         * @return cGate pointer
+         */
         virtual cGate* getDestinationGate() const;
+
+        /*
+         * @brief Set target gate for SchedulerEvent
+         *
+         * @param new_destinationGate_var cGate pointer
+         */
         virtual void setDestinationGate(cGate *new_destinationGate_var);
 };
 }
