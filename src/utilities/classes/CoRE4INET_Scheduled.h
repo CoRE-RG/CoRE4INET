@@ -49,6 +49,7 @@ class Scheduled : public Timed
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname) override;
+
     public:
         /**
          * @brief Constructor of Scheduled

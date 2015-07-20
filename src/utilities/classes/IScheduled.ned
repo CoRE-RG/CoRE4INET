@@ -16,7 +16,9 @@
 package core4inet.utilities.classes;
 
 //
-// interface for a module that uses a scheduler to schedule actions at action points
+// Interface for a module that uses a scheduler to schedule actions at action points
+//
+// @see ~ITimed
 //
 // @author Till Steinbach
 //

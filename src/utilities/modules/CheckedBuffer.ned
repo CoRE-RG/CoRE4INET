@@ -18,15 +18,26 @@ package core4inet.utilities.modules;
 import core4inet.buffer.base.IBuffer;
 import core4inet.incoming.base.IIncoming;
 
+//
+// Module for Buffer with Incoming Module for TT and RC traffic
+//
+// @see ~IIncoming, IBuffer
+//
+// @author Till Steinbach
+//
 module CheckedBuffer
 {
     submodules:
+        // Implementing the conformance checks of incoming traffic
         incoming: <default("Incoming")> like IIncoming {
             @display("p=34,30");
         }
+        
+        // Representing a buffer module
         buffer: <default("Buffer")> like IBuffer {
             @display("p=108,30");
         }
+        
     connections:
         incoming.out --> buffer.in;
 }
