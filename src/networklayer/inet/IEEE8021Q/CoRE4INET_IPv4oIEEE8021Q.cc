@@ -65,7 +65,7 @@ void IPv4oIEEE8021Q<Base>::sendPacketToNIC(cPacket *packet, const inet::Interfac
 {
     // Check for matching filters
     std::list<IPoREFilter*> matchingFilters;
-    bool filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_IEEE8021Q);
+    bool filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_8021Q);
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
@@ -99,7 +99,7 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
             cEnum *destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
             DestinationType dt = DestinationType(destTypeEnum->lookup(destType));
 
-            if (dt == DestinationType_IEEE8021Q) {
+            if (dt == DestinationType_8021Q) {
                 // Destination Info
                 const char *destModules = Base::getRequiredAttribute(filterElement, "destModules");
                 const char *vid = Base::getRequiredAttribute(filterElement, "VID");
@@ -122,7 +122,7 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
 
                 // Fill destination info
                 IEEE8021QDestinationInfo *ieee8021QDestInfo = new IEEE8021QDestinationInfo();
-                ieee8021QDestInfo->setDestType(DestinationType_IEEE8021Q);
+                ieee8021QDestInfo->setDestType(DestinationType_8021Q);
                 std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
                 std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
                 std::list<BGBuffer*> destBgBuffers;
@@ -204,28 +204,23 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
 template<class Base>
 void IPv4oIEEE8021Q<Base>::handleMessage(cMessage* msg)
 {
-    if (dynamic_cast<RCFrame*>(msg)) {
-        RCFrame* rcFrame = dynamic_cast<RCFrame*>(msg);
-
-        //Reset Bag
-        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
-        if (rcBuffer)
-            rcBuffer->resetBag();
+    if (dynamic_cast<EthernetIIFrameWithQTag*>(msg)) {
+        EthernetIIFrameWithQTag* qFrame = dynamic_cast<EthernetIIFrameWithQTag*>(msg);
 
         // decapsulate and send up
-        cPacket* ipPacket = rcFrame->decapsulate();
+        cPacket* ipPacket = qFrame->decapsulate();
         inet::Ieee802Ctrl *etherctrl = new inet::Ieee802Ctrl();
-        etherctrl->setSrc(rcFrame->getSrc());
-        etherctrl->setDest(rcFrame->getDest());
-        etherctrl->setEtherType(rcFrame->getEtherType());
+        etherctrl->setSrc(qFrame->getSrc());
+        etherctrl->setDest(qFrame->getDest());
+        etherctrl->setEtherType(qFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
 #if OMNETPP_VERSION < 0x0500
-        ipPacket->setArrival(this, Base::gate("RCIn")->getId());
+        ipPacket->setArrival(this, Base::gate("In")->getId());
 #else
-        ipPacket->setArrival(this->getId(), Base::gate("RCIn")->getId());
+        ipPacket->setArrival(this->getId(), Base::gate("In")->getId());
 #endif
 
-        delete rcFrame;
+        delete qFrame;
         Base::handleMessage(ipPacket);
     }
     else {
@@ -243,7 +238,7 @@ void IPv4oIEEE8021Q<Base>::sendPacketToBuffers(cPacket *packet, const inet::Inte
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
     for ( ; filter != filters.end(); ++filter) {
-        if ((*filter)->getDestInfo()->getDestType() == DestinationType_IEEE8021Q) {
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_8021Q) {
             sendIEEE8021QFrame(packet->dup(), ie, (*filter));
         }
     }
@@ -268,8 +263,14 @@ void IPv4oIEEE8021Q<Base>::sendIEEE8021QFrame(cPacket* packet, __attribute__((un
     if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES) {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
-    outFrame->setVID(destInfo->getVID());
-    outFrame->setPcp(destInfo->getPCP());
+    if(destInfo->getVID() > 0)
+    {
+        outFrame->setVID(destInfo->getVID());
+    }
+    if(destInfo->getPCP() > 0)
+    {
+        outFrame->setPcp(destInfo->getPCP());
+    }
     outFrame->setName(packet->getName());
 
     std::list<BGBuffer*> destBuffers = destInfo->getDestModules();

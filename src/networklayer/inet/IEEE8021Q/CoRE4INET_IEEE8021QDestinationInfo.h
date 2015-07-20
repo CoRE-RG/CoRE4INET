@@ -46,11 +46,11 @@ class IEEE8021QDestinationInfo : public DestinationInfo
         {
             this->vid = new_vid;
         }
-        uint16_t getPCP() const
+        uint8_t getPCP() const
         {
             return pcp;
         }
-        void setPCP(uint16_t new_pcp)
+        void setPCP(uint8_t new_pcp)
         {
             this->pcp = new_pcp;
         }
