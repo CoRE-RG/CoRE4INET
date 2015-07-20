@@ -16,6 +16,7 @@
 #include "CoRE4INET_IEEE8021QTrafficSourceApp.h"
 
 //CoRE4INET
+#include "CoRE4INET_Defs.h"
 #include "CoRE4INET_BGBuffer.h"
 #include "CoRE4INET_ConfigFunctions.h"
 #include "EtherFrameWithQTag_m.h"
@@ -60,6 +61,7 @@ void IEEE8021QTrafficSourceApp::sendMessage()
         payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
         frame->encapsulate(payload_packet);
         frame->setPcp(priority);
+        frame->setSchedulingPriority(static_cast<short>(SCHEDULING_PRIORITY_OFFSET_8021Q-priority));
         //Padding
         if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
         {

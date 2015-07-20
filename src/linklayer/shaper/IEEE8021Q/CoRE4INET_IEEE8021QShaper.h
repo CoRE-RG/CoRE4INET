@@ -53,10 +53,6 @@ class IEEE8021QShaper : public TC, public virtual Timed
          */
         std::vector<cQueue> qQueue;
 
-        /**
-         * @brief caches numQpriority parameter for faster execution
-         */
-        size_t numQPriority;
     protected:
         /**
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
@@ -145,7 +141,6 @@ class IEEE8021QShaper : public TC, public virtual Timed
 template<class TC>
 IEEE8021QShaper<TC>::IEEE8021QShaper()
 {
-    numQPriority = 8;
 }
 
 template<class TC>
@@ -161,7 +156,7 @@ void IEEE8021QShaper<TC>::initialize(int stage)
     {
         Timed::initialize();
 
-        for (unsigned int i = 0; i < numQPriority; i++)
+        for (unsigned int i = 0; i < 8; i++)
         {
             char strBuf[32];
             cQueue queue;
@@ -232,7 +227,7 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
         if(EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg)){
             priority = qframe->getPcp();
         }
-        if (priority >= 0 && static_cast<size_t>(priority) < numQPriority)
+        if (priority >= 0 && static_cast<size_t>(priority) < 8)
         {
             qQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(qQueueLengthSignals[static_cast<size_t>(priority)],
@@ -273,7 +268,7 @@ cMessage* IEEE8021QShaper<TC>::pop()
     Enter_Method
     ("pop()");
 
-    for (size_t i = numQPriority; i > 0; i--)
+    for (size_t i = 8; i > 0; i--)
     {
         if (!qQueue[i-1].isEmpty())
         {
@@ -291,7 +286,7 @@ cMessage* IEEE8021QShaper<TC>::front()
     Enter_Method
     ("front()");
 
-    for (size_t i = numQPriority; i > 0; i--)
+    for (size_t i = 8; i > 0; i--)
     {
         if (!qQueue[i-1].isEmpty())
         {
@@ -306,7 +301,7 @@ template<class TC>
 bool IEEE8021QShaper<TC>::isEmpty()
 {
     bool empty = true;
-    for (unsigned int i = 0; i < numQPriority; i++)
+    for (unsigned int i = 0; i < 8; i++)
     {
         empty &= qQueue[i].isEmpty();
     }
@@ -318,7 +313,7 @@ template<class TC>
 void IEEE8021QShaper<TC>::clear()
 {
     TC::clear();
-    for (unsigned int i = 0; i < numQPriority; i++)
+    for (unsigned int i = 0; i < 8; i++)
     {
         qQueue[i].clear();
     }

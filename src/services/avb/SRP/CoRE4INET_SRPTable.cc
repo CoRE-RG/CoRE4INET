@@ -142,6 +142,11 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
     //get Talkers for this VLAN
     TalkerTable ttable = talkerTables[vid];
     TalkerEntry *tentry = ttable[streamId];
+
+    if(!tentry){
+        throw cRuntimeError("talkerTable entry not found");
+    }
+
     return bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames, getIntervalForClass(tentry->srClass));
 }
 

@@ -143,6 +143,28 @@ class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLA
 };
 #endif
 
+
+#if defined(WITH_AVB_COMMON) && defined(WITH_AS6802_COMMON) && defined(WITH_IEEE8021Q_COMMON)
+
+/**
+ * @brief Class representing the TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper module
+ *
+ * This shaper handles traffic in the following order (highest to lowest priority):
+ * - time-triggered
+ * - AVB
+ * - PCF
+ * - rate-constrained
+ * - IEEE 802.1Q
+ *
+ * @see TTShaper, AVBClassAShaper, AVBClassBShaper, PCFShaper, RCShaper, IEEE8021QShaper, BaseShaper
+ *
+ * @author Till Steinbach
+ */
+class TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, AVBShaper<SR_CLASS_B, PCFShaper<RCShaper<IEEE8021QShaper<BaseShaper> > > > > >
+{
+};
+#endif
+
 }
 
 #endif
