@@ -15,7 +15,7 @@
 
 package core4inet.nodes.inet;
 
-import core4inet.linklayer.ethernet.TTEAVBEtherNic;
+import core4inet.linklayer.ethernet.TTEAVB8021QEtherNic;
 import core4inet.synchronisation.base.ISync;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.buffer.base.BGQueueBuffer;
@@ -172,7 +172,7 @@ module RTIPHost
                 @display("p=63,166;is=s");
         }
 
-        phy[1]: TTEAVBEtherNic {
+        phy[1]: TTEAVB8021QEtherNic {
 
             @display("p=498,315");
         }

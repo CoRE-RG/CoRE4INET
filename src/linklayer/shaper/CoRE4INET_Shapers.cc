@@ -14,3 +14,7 @@ Define_Module(TT_PCF_RC_BE_Shaper);
 Define_Module(TT_AVBClassA_PCF_RC_BE_Shaper);
 Define_Module(TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper);
 #endif
+
+#if defined(WITH_AVB_COMMON) && defined(WITH_AS6802_COMMON) && defined(WITH_IEEE8021Q_COMMON)
+Define_Module(TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper);
+#endif
