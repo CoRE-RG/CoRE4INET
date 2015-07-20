@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.synchronisation.base;
 
 import core4inet.utilities.classes.Scheduled;
@@ -20,9 +21,10 @@ import core4inet.utilities.classes.Scheduled;
 // Dummy synchronisation module that corrects the clock with a certain imprecission.
 // It uses the simulation time as basis.
 //
-// @see ISync
+// @see ~Scheduled, ~ISync
 //
 // @author Till Steinbach
+//
 simple DummySync extends Scheduled like ISync
 {
     parameters:
@@ -34,7 +36,6 @@ simple DummySync extends Scheduled like ISync
 
         // The time in the cycle (in ticks) when the synchronisation is triggered
         int action_time = default(0);
-
         // The precission of the synchronisation
         double precission @unit(s) = default(500ns);
 

@@ -32,6 +32,7 @@ class SyncBase : public virtual Scheduled
 {
     protected:
         using Scheduled::initialize;
+
         /**
          * @brief Initializes the module
          *
