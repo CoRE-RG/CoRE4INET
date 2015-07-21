@@ -92,7 +92,7 @@ AVB send attributes:
 
  Each subscribe element has one single "streamId" attribute which defines the stream Id to subscribe to.
  */
-class TT_RC_AVB_8021Q_IPv4 : public IPv4oIEEE8021Q<TT_RC_AVB_IPv4>
+class TT_RC_AVB_8021Q_IPv4 : public IPv4oTT<IPv4oRC<IPv4oAVB<IPv4oIEEE8021Q<IPv4oREBase>>>>
 {
 };
 
