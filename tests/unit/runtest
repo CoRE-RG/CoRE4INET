@@ -24,6 +24,7 @@ echo
 (cd work; opp_makemake -f --deep -lCoRE4INET -lINET -L../../../../inet/src -L../../../src -P . $EXTRA_INCLUDES -i ../makefrag; $MAKE -e cleanall; $MAKE -e) || exit 1
 echo
 export NEDPATH=$NEDPATH:.:../../../../src:../../../../../inet/src
+export LD_LIBRARY_PATH=../../../../inet/src
 opp_test run $OPT -v $TESTFILES
 if [ $? -eq 0 ]
 then
