@@ -186,6 +186,8 @@ class FingerprintTestCase(SimulationTestCase):
         # CPU time limit is a safety guard: fingerprint checks shouldn't take forever
         global core4inetRoot, opp_run, nedPath, cpuTimeLimit
 
+        # add paths of other libraries
+        os.environ['LD_LIBRARY_PATH'] = inetRoot + os.sep + "src"
         # run the simulation
         workingdir = _iif(self.wd.startswith('/'), core4inetRoot + "/" + self.wd, self.wd)
         command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + inetLib + " -u Cmdenv " + self.args + \
