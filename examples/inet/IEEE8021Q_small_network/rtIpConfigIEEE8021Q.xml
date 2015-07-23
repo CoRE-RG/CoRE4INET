@@ -57,22 +57,21 @@
 	     
 	     
 	<node id="node1">
-		<filter srcAddress="10.0.0.1" destAddress="10.0.0.3" destPort="1000" protocol="TCP"
-		        destType="DestinationType_TT" ctId="101" destModule="vl_101" actionTime="980" alsoBE="0" />
-		<filter srcAddress="10.0.0.1" destAddress="10.0.0.3" destPort="1000" protocol="TCP"
-		        destType="DestinationType_RC" ctId="100" destModules="vl_100" alsoBE="0" />
-		<filter srcAddress="10.0.0.1" destAddress="10.0.0.2" destPort="1000" protocol="TCP"
-		        destType="DestinationType_AVB" destModule="avbCTC" destMAC="010203040506" alsoBE="0" streamId="27" trafficClass="B" frameSize="300" intervallFrames="1" vlanId="0" />
+		<filter srcAddress="10.0.0.1" destAddress="10.0.0.2" destPort="2000" protocol="TCP"
+		        destType="DestinationType_8021Q" destModules="bgOut" VID="0" PCP="1"/>
+		<filter srcAddress="10.0.0.1" destAddress="10.0.0.3" destPort="3000" protocol="TCP"
+		        destType="DestinationType_8021Q" destModules="bgOut" VID="0" PCP="3"/>
 	</node>
 	
 	
 	<node id="node2">
-		<subscribe streamId="27" />
+		<filter srcAddress="10.0.0.2" destAddress="10.0.0.2" srcPort="2000" protocol="TCP"
+		        destType="DestinationType_8021Q" destModules="bgOut" VID="0" PCP="1"/>
 	</node>
-	
 	
 	<node id="node3">
-	</node>
-	
+		<filter srcAddress="10.0.0.3" destAddress="10.0.0.3" srcPort="3000" protocol="TCP"
+		        destType="DestinationType_8021Q" destModules="bgOut" VID="0" PCP="3"/>
+	</node>	
 	
 </rtIpConfig>

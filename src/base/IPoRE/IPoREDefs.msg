@@ -21,5 +21,6 @@ enum DestinationType
 	DestinationType_AVB     = 0;
 	DestinationType_TT      = 1;
 	DestinationType_RC      = 2;
+	DestinationType_8021Q   = 3;
 	DestinationType_invalid = 0xFF;
 };

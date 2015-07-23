@@ -14,6 +14,9 @@
 // 
 //==============================================================================
 
+#ifndef CORE4INET_IPV4OIEEE8021Q_CC_
+#define CORE4INET_IPV4OIEEE8021Q_CC_
+
 #include "CoRE4INET_IPv4oIEEE8021Q.h"
 
 #include "CoRE4INET_Defs.h"
@@ -143,7 +146,7 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
                 }
                 ieee8021QDestInfo->setDestModules(destBgBuffers);
                 ieee8021QDestInfo->setVID(static_cast<uint16_t>(Base::parseIntAttribute(vid, "VID", false)));
-                ieee8021QDestInfo->setPCP(static_cast<uint16_t>(Base::parseIntAttribute(pcp, "PCP", false)));
+                ieee8021QDestInfo->setPCP(static_cast<uint8_t>(Base::parseIntAttribute(pcp, "PCP", false)));
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -284,5 +287,7 @@ void IPv4oIEEE8021Q<Base>::sendIEEE8021QFrame(cPacket* packet, __attribute__((un
 //==============================================================================
 
 } /* namespace CoRE4INET */
+
+#endif // CORE4INET_IPV4OIEEE8021Q_CC_
 
 //==============================================================================
