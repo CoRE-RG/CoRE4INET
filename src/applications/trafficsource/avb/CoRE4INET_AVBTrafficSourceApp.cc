@@ -76,7 +76,7 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
             srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, srClass, frameSize, intervalFrames,
                     vlan_id);
-            if (ev.isGUI())
+            if (getEnvir()->isGUI())
             {
                 getDisplayString().setTagArg("i2", 0, "status/hourglass");
             }
@@ -143,7 +143,7 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent 
         {
             EV_INFO << "Listener for stream " << lentry->streamId << " registered!" << std::endl;
 
-            if (ev.isGUI())
+            if (getEnvir()->isGUI())
             {
                 bubble("Listener registered, start streaming!");
                 getDisplayString().setTagArg("i2", 0, "status/active");
@@ -164,7 +164,7 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent 
             if (srpTable->getListenersForStreamId(streamID, vlan_id).size() == 0)
             {
                 isStreaming = false;
-                if (ev.isGUI())
+                if (getEnvir()->isGUI())
                 {
                     bubble("Last listener unregistered, stop streaming!");
                     getDisplayString().setTagArg("i2", 0, "status/hourglass");

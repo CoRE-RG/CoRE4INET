@@ -46,14 +46,14 @@ void TrafficSourceAppBase::initialize()
     if (isEnabled())
     {
         scheduleAt(simTime() + par("start_time").doubleValue(), new cMessage(START_MSG_NAME));
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             getDisplayString().setTagArg("i2", 0, "status/asleep");
         }
     }
     else
     {
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             getDisplayString().setTagArg("i2", 0, "status/stop");
         }

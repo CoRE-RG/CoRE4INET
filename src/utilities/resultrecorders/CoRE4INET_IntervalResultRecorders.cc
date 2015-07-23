@@ -49,12 +49,12 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
     cNumericResultRecorder::subscribedTo(prev);
     // we can register the vector here, because base class ensures we are subscribed only at once place
            opp_string_map attributes = getStatisticAttributes();
-           handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
+           handle = getEnvir()->registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
            ASSERT(handle != nullptr);
            //Attributes are title->interpolationmode ...
            for (opp_string_map::const_iterator it = attributes.begin(); it != attributes.end(); ++it)
            {
-               ev.setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
+               getEnvir()->setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
                if(opp_strcmp(it->first.c_str(), "measure_interval")==0)
                {
                    interval = SimTime::parse(it->second.c_str());
@@ -95,13 +95,13 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value)
     if (lastTime + interval == t)
     {
         addValueToInterval(t, value);
-        ev.recordInOutputVector(handle, lastTime+interval, calculate());
+        getEnvir()->recordInOutputVector(handle, lastTime+interval, calculate());
         inInterval.clear();
         lastTime = lastTime+interval;
     }
     else if (lastTime + interval < t)
     {
-        ev.recordInOutputVector(handle, lastTime+interval, calculate());
+        getEnvir()->recordInOutputVector(handle, lastTime+interval, calculate());
         inInterval.clear();
         addValueToInterval(t,value);
 
@@ -109,7 +109,7 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value)
         int i = 1;
         for (i = 1; i < ((t-lastTime)/interval)-1;i++)
         {
-            ev.recordInOutputVector(handle, lastTime+interval*(i+1), 0);
+            getEnvir()->recordInOutputVector(handle, lastTime+interval*(i+1), 0);
         }
         lastTime = lastTime+interval*i;
     }

@@ -38,7 +38,7 @@ void SubtractActualFromLastRecorder::subscribedTo(cResultFilter *prev)
 {
     cNumericResultRecorder::subscribedTo(prev);
     opp_string_map attributes = getStatisticAttributes();
-    handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
+    handle = getEnvir()->registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
     ASSERT(handle != nullptr);
 }
 
@@ -46,7 +46,7 @@ void SubtractActualFromLastRecorder::collect(simtime_t_cref t, double value)
 {
     lastValue = thisValue;
     thisValue = value;
-    ev.recordInOutputVector(handle, t, calculate());
+    getEnvir()->recordInOutputVector(handle, t, calculate());
 }
 
 Register_ResultRecorder("subtractActualFromLast", SubtractActualFromLastRecorder);

@@ -64,7 +64,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
 
     if (msg && msg->arrivedOn("schedulerIn"))
     {
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             getDisplayString().removeTag("i2");
         }

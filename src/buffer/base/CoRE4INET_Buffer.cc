@@ -51,7 +51,7 @@ void Buffer::initialize(int stage)
     {
         EV_DETAIL << "Initialize Buffer" << endl;
 
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             //Update displaystring
             getDisplayString().setTagArg("i", 0, "buffer/empty");

@@ -33,7 +33,7 @@ void DoubleBuffer::enqueue(inet::EtherFrame *newFrame)
         delete frame;
     else
     {
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             //Update displaystring
             if (newFrame != nullptr)
@@ -62,7 +62,7 @@ void DoubleBuffer::clear()
 {
     delete frame;
     frame = nullptr;
-    if (ev.isGUI())
+    if (getEnvir()->isGUI())
     {
         //Update displaystring
         getDisplayString().setTagArg("i", 0, "buffer/empty");

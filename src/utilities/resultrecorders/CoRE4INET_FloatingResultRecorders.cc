@@ -36,10 +36,10 @@ void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
     // we can register the vector here, because base class ensures we are subscribed only at once place
     opp_string_map attributes = getStatisticAttributes();
 
-    handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
+    handle = getEnvir()->registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
     ASSERT(handle != nullptr);
     for (opp_string_map::const_iterator it = attributes.begin(); it != attributes.end(); ++it){
-        ev.setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
+        getEnvir()->setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
         if(opp_strcmp(it->first.c_str(), "measure_interval")==0){
             interval = SimTime::parse(it->second.c_str());
         }
@@ -68,11 +68,11 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
     for(std::map<simtime_t, double>::iterator it= inInterval.begin(); it!=inInterval.lower_bound((t-interval));){
         simtime_t time = SimTime(it->first);
         inInterval.erase(it++);
-        ev.recordInOutputVector(handle, time+interval, calculate());
+        getEnvir()->recordInOutputVector(handle, time+interval, calculate());
     }
 
     if((t-lastTime)>(2*interval)){
-        ev.recordInOutputVector(handle, t-interval, 0);
+        getEnvir()->recordInOutputVector(handle, t-interval, 0);
     }
 
     //add value to interval, give hint for faster execution
@@ -85,7 +85,7 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
     //erase old values
     //inInterval.erase(inInterval.begin(), inInterval.lower_bound((t-interval)));
 
-    ev.recordInOutputVector(handle, t, calculate());
+    getEnvir()->recordInOutputVector(handle, t, calculate());
 
     lastTime = t;
 }

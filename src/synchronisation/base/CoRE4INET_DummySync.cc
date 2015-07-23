@@ -53,7 +53,7 @@ void DummySync::initialize(int stage)
     if (stage == 2)
     {
         notify(SYNC);
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             getDisplayString().setTagArg("i", 1, "green");
         }

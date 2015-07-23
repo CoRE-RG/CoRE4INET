@@ -41,7 +41,7 @@ void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
     if (max_size >= 0 && frames.length() >= max_size)
     {
         emit(droppedSignal, newFrame);
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             bubble("buffer overflow - dropping frame");
             getDisplayString().setTagArg("i2", 0, "status/excl3");
@@ -78,7 +78,7 @@ inet::EtherFrame * QueueBuffer::dequeue()
 
 void QueueBuffer::setFilled(size_t fillLevel)
 {
-    if (ev.isGUI())
+    if (getEnvir()->isGUI())
     {
         switch (fillLevel)
         {

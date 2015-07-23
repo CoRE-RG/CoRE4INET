@@ -32,7 +32,7 @@ void BGBuffer::initialize(int stage)
     Buffer::initialize(stage);
     if (stage == 0)
     {
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             //Update displaystring
             getDisplayString().setTagArg("i", 0, "buffer/empty");

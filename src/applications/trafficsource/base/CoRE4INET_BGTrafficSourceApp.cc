@@ -34,7 +34,7 @@ void BGTrafficSourceApp::handleMessage(cMessage *msg)
 
     if (msg->isSelfMessage())
     {
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             getDisplayString().removeTag("i2");
         }

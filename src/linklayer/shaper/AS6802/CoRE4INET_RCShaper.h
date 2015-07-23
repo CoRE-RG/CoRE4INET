@@ -175,7 +175,7 @@ void RCShaper<TC>::initialize(int stage)
             simsignal_t signal = registerSignal(strBuf);
 
             cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "rcQueueLength");
-            ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
+            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
 
             rcQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic

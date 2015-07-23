@@ -96,7 +96,7 @@ void Timer::sendOutEvents()
             }
             EV_WARN << "The delay was " << (ticks - (*it).first)
                     << "ticks. This may happen for events in the clock correction interval." << std::endl;
-            if (ev.isGUI())
+            if (getEnvir()->isGUI())
             {
                 getDisplayString().setTagArg("i2", 0, "status/excl3");
                 getDisplayString().setTagArg("tt", 0,

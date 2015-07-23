@@ -168,7 +168,7 @@ void IEEE8021QShaper<TC>::initialize(int stage)
             simsignal_t signal = registerSignal(strBuf);
 
             cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "qQueueLength");
-            ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
+            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
 
             qQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic

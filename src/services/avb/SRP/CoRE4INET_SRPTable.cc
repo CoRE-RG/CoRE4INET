@@ -471,7 +471,7 @@ size_t SRPTable::getNumListenerEntries()
 
 void SRPTable::updateDisplayString()
 {
-    if (!ev.isGUI())
+    if (!getEnvir()->isGUI())
         return;
 
     char buf[80];

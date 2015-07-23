@@ -51,7 +51,7 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg)
     CTTrafficSourceAppBase::handleMessage(msg);
     if (msg->arrivedOn("schedulerIn"))
     {
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             getDisplayString().removeTag("i2");
         }

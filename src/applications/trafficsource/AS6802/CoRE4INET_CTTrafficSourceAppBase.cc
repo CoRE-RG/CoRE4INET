@@ -60,7 +60,7 @@ void CTTrafficSourceAppBase::sendMessage()
     if (buffer.empty())
     {
         EV_ERROR << "No buffer with such CT " << endl;
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             bubble("No buffer with such CT");
             getDisplayString().setTagArg("i2", 0, "status/excl3");

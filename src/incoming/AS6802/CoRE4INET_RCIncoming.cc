@@ -55,7 +55,7 @@ void RCIncoming::handleMessage(cMessage *msg)
             {
                 emit(droppedSignal, etherframe);
                 EV_ERROR << "Received frame in " << getName() << " too early! Gap was " << (currentTotalTicks - lastArrived) << " Ticks, should have been between minimum " << bag << "!" << endl;
-                if (ev.isGUI())
+                if (getEnvir()->isGUI())
                 {
 
                     bubble("Frame to early");

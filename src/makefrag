@@ -8,6 +8,9 @@
 
 CFLAGS += -std=c++11
 
+# For compatibility (4.6 to 5.0)
+CFLAGS += -DAUTOIMPORT_NAMESPACE
+
 UNAME_S := $(shell uname -s)
 
 #Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang

@@ -105,7 +105,7 @@ void RCBuffer::handleMessage(cMessage *msg)
             else
             {
                 bagExpired = true;
-                if (ev.isGUI())
+                if (getEnvir()->isGUI())
                 {
                     getDisplayString().removeTag("i2");
                 }
@@ -145,7 +145,7 @@ void RCBuffer::resetBag()
     ("resetBag()");
 
     //Set icon:
-    if (ev.isGUI())
+    if (getEnvir()->isGUI())
     {
         getDisplayString().setTagArg("i2", 0, "status/hourglass");
     }

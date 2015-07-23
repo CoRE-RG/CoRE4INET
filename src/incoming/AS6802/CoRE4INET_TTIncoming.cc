@@ -66,7 +66,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                 emit(droppedSignal, etherframe);
                 hadError = true;
                 EV_ERROR << "Received frame before permanence point of previous frame" << endl;
-                if (ev.isGUI())
+                if (getEnvir()->isGUI())
                 {
 
                     bubble("Received frame before permanence point of previous frame");
@@ -84,7 +84,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                 emit(droppedSignal, etherframe);
                 hadError = true;
                 EV_ERROR << "Received frame in " << getName() << " too early! Receive Time was " << currentTicks << " Ticks, should have been between " << receive_window_start << " and " << receive_window_end << "!" << endl;
-                if (ev.isGUI())
+                if (getEnvir()->isGUI())
                 {
 
                     bubble("Frame to early");
@@ -103,7 +103,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                 emit(droppedSignal, etherframe);
                 hadError = true;
                 EV_ERROR <<"Received frame in " << getName() << " too late! Receive Time was " << currentTicks << " Ticks, should have been between " << receive_window_start << " and " << receive_window_end << "!" << endl;
-                if (ev.isGUI())
+                if (getEnvir()->isGUI())
                 {
 
                     bubble("Frame to late");
@@ -122,7 +122,7 @@ void TTIncoming::handleMessage(cMessage *msg)
                 //delay for permanence_pit if set
                 if (permanence_pit > 0)
                 {
-                    if (!hadError && ev.isGUI())
+                    if (!hadError && getEnvir()->isGUI())
                         getDisplayString().setTagArg("i2", 0, "status/hourglass");
                     frame = etherframe;
                     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("PIT Event", ACTION_TIME_EVENT);
@@ -148,7 +148,7 @@ void TTIncoming::handleMessage(cMessage *msg)
             throw cRuntimeError("Received schedule event for a non-existing frame");
         }
         delete msg;
-        if (!hadError && ev.isGUI())
+        if (!hadError && getEnvir()->isGUI())
             getDisplayString().removeTag("i2");
         sendDelayed(frame, getHardwareDelay(), "out");
         frame = nullptr;

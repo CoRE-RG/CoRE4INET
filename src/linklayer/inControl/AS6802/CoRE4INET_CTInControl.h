@@ -135,7 +135,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
             {
                 cComponent::emit(ctDroppedSignal, frame);
                 IC::hadError = true;
-                if (ev.isGUI())
+                if (getEnvir()->isGUI())
                 {
                     cComponent::bubble("No matching buffer configured");
                     cComponent::getDisplayString().setTagArg("i2", 0, "status/excl3");
