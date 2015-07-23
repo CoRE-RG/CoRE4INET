@@ -179,7 +179,7 @@ void RCShaper<TC>::initialize(int stage)
 
             rcQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
-            cComponent::emit(signal, static_cast<unsigned long>(queue.length()));
+            cComponent::emit(signal, static_cast<unsigned long>(queue.getLength()));
         }
     }
 }
@@ -246,7 +246,7 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
         {
             rcQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(rcQueueLengthSignals[static_cast<size_t>(priority)],
-                    static_cast<unsigned long>(rcQueue[static_cast<size_t>(priority)].length()));
+                    static_cast<unsigned long>(rcQueue[static_cast<size_t>(priority)].getLength()));
             TC::notifyListeners();
         }
         else
@@ -289,7 +289,7 @@ cMessage* RCShaper<TC>::pop()
         if (!rcQueue[i].isEmpty())
         {
             inet::EtherFrame *message = static_cast<inet::EtherFrame*>(rcQueue[i].pop());
-            cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].length()));
+            cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].getLength()));
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
             if (rcBuffer)

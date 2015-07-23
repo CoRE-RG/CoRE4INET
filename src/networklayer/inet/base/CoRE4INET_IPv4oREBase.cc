@@ -29,7 +29,6 @@
 #include "L3AddressResolver.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
-#include "cstringtokenizer.h"
 
 #include <algorithm>
 

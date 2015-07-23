@@ -33,7 +33,6 @@
 #include "Ieee802Ctrl.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
-#include "cstringtokenizer.h"
 
 //==============================================================================
 
@@ -133,7 +132,7 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                 std::list<RCBuffer*> destCtBuffers;
                 for (  ; bufferPath != bufferPaths.end(); ++bufferPath)
                 {
-                    cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
+                    cModule* module = getSimulation()->getModuleByPath((*bufferPath).c_str());
                     if (!module) {
                        module = findModuleWhereverInNode((*bufferPath).c_str(), this);
                     }

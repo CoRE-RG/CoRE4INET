@@ -225,7 +225,7 @@ void TTShaper<TC>::initialize(int stage)
     {
         Timed::initialize();
         //Send initial signal to create statistic
-        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.length()));
+        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.getLength()));
     }
     else if (stage == 2)
     {
@@ -342,7 +342,7 @@ void TTShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("TTin"))
     {
         ttQueue.insert(msg);
-        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.length()));
+        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.getLength()));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing TT frame" << endl;
     }
@@ -376,7 +376,7 @@ cMessage* TTShaper<TC>::pop()
     if (!ttQueue.isEmpty())
     {
         cMessage *msg = static_cast<cMessage*>(ttQueue.pop());
-        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.length()));
+        cComponent::emit(ttQueueLengthSignal, static_cast<unsigned long>(ttQueue.getLength()));
 
         if (ttBuffers.size() > 0)
         {
@@ -514,7 +514,7 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
         for (std::vector<std::string>::iterator ttBufferPath = ttBufferPaths.begin();
                 ttBufferPath != ttBufferPaths.end(); ttBufferPath++)
         {
-            cModule* module = simulation.getModuleByPath((*ttBufferPath).c_str());
+            cModule* module = getSimulation()->getModuleByPath((*ttBufferPath).c_str());
             if (!module)
             {
                 module = findModuleWhereverInNode((*ttBufferPath).c_str(), this);
@@ -523,7 +523,7 @@ void TTShaper<TC>::handleParameterChange(const char* parname)
             {
                 if (inet::findContainingNode(module) != inet::findContainingNode(this))
                 {
-                    opp_error(
+                    throw cRuntimeError(
                             "Configuration problem of tt_buffers: Module: %s is not in node %s! Maybe a copy-paste problem?",
                             (*ttBufferPath).c_str(), findContainingNode(this)->getFullName());
                 }

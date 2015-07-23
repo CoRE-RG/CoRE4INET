@@ -15,9 +15,6 @@
 
 #include "CoRE4INET_NotifierConsts.h"
 
-//OMNeT++
-#include "ccomponent.h"
-
 namespace CoRE4INET {
 
 #ifdef WITH_AS6802_COMMON

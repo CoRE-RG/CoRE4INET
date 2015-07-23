@@ -40,7 +40,7 @@ T recursiveFindByType(cModule *root)
     {
         for (cModule::SubmoduleIterator i(root); !i.end(); i++)
         {
-            cModule *submod = i();
+            cModule *submod = *i;
             module = recursiveFindByType<T>(submod);
             if (module)
             {

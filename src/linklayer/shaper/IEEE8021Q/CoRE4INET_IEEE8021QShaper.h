@@ -172,7 +172,7 @@ void IEEE8021QShaper<TC>::initialize(int stage)
 
             qQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
-            cComponent::emit(signal, static_cast<unsigned long>(queue.length()));
+            cComponent::emit(signal, static_cast<unsigned long>(queue.getLength()));
         }
     }
 }
@@ -231,7 +231,7 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
         {
             qQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(qQueueLengthSignals[static_cast<size_t>(priority)],
-                    static_cast<unsigned long>(qQueue[static_cast<size_t>(priority)].length()));
+                    static_cast<unsigned long>(qQueue[static_cast<size_t>(priority)].getLength()));
             TC::notifyListeners();
         }
         else
@@ -273,7 +273,7 @@ cMessage* IEEE8021QShaper<TC>::pop()
         if (!qQueue[i-1].isEmpty())
         {
             inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i-1].pop());
-            cComponent::emit(qQueueLengthSignals[i-1], static_cast<unsigned long>(qQueue[i-1].length()));
+            cComponent::emit(qQueueLengthSignals[i-1], static_cast<unsigned long>(qQueue[i-1].getLength()));
             return message;
         }
     }

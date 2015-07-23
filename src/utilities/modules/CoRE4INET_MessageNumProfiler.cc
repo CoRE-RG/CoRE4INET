@@ -99,7 +99,7 @@ size_t MessageNumProfiler::sumRecursiveMessages(cModule *root, bool onlyChild)
     }
     for (cModule::SubmoduleIterator i(root); !i.end(); i++)
     {
-        cModule *submod = i();
+        cModule *submod = *i;
         sumMsg += sumRecursiveMessages(submod, false);
     }
     return sumMsg;
@@ -114,7 +114,7 @@ size_t MessageNumProfiler::maxRecursiveMessages(cModule *root, bool onlyChild)
     }
     for (cModule::SubmoduleIterator i(root); !i.end(); i++)
     {
-        cModule *submod = i();
+        cModule *submod = *i;
         size_t childMax = maxRecursiveMessages(submod, false);
         if (childMax > maxMsg)
         {
@@ -147,7 +147,7 @@ size_t MessageNumProfiler::overModules(cModule *root, size_t limit)
     }
     for (cModule::SubmoduleIterator i(root); !i.end(); i++)
     {
-        cModule *submod = i();
+        cModule *submod = *i;
         over_modules += overModules(submod, limit);
     }
     return over_modules;
@@ -173,7 +173,7 @@ std::string MessageNumProfiler::printMessages(cModule *root, size_t limit, bool 
         }
         for (cModule::SubmoduleIterator i(root); !i.end(); i++)
         {
-            cModule *submod = i();
+            cModule *submod = *i;
             oss << printMessages(submod, print_msgs, level + 1);
         }
     }

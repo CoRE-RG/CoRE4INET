@@ -10,7 +10,6 @@
 
 
 #include "L3Address.h"
-#include "csimplemodule.h"
 
 namespace CoRE4INET {
 

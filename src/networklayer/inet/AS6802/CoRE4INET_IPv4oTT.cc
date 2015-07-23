@@ -34,7 +34,6 @@
 #include "Ieee802Ctrl.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
-#include "cstringtokenizer.h"
 
 //==============================================================================
 
@@ -163,7 +162,7 @@ void IPv4oTT<Base>::configureFilters(cXMLElement *config)
                 // Fill destination info
                 TTDestinationInfo *ttDestInfo = new TTDestinationInfo();
                 ttDestInfo->setDestType(DestinationType_TT);
-                cModule* module = simulation.getModuleByPath(destModule);
+                cModule* module = getSimulation()->getModuleByPath(destModule);
                 if (!module)
                 {
                     module = findModuleWhereverInNode(destModule, this);

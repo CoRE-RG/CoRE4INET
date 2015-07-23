@@ -153,7 +153,7 @@ void BEShaper<TC>::initialize(int stage)
     if (stage == 0)
     {
         //Send initial signal to create statistic
-        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.getLength()));
     }
 }
 
@@ -195,7 +195,7 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         beQueue.insert(msg);
-        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.getLength()));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing BE frame" << endl;
     }
@@ -229,7 +229,7 @@ cMessage* BEShaper<TC>::pop()
     if (!beQueue.isEmpty())
     {
         cMessage* message = static_cast<cMessage*>(beQueue.pop());
-        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
+        cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.getLength()));
         return message;
     }
     return TC::pop();

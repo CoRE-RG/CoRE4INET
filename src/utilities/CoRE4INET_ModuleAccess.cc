@@ -20,7 +20,7 @@ namespace CoRE4INET {
 static cModule *findSubmodRecursive(cModule *curmod, const char *name)
 {
     for (cModule::SubmoduleIterator i(curmod); !i.end(); i++) {
-        cModule *submod = i();
+        cModule *submod = *i;
         if (!strcmp(submod->getFullName(), name))
             return submod;
         cModule *foundmod = findSubmodRecursive(submod, name);

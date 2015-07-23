@@ -16,7 +16,6 @@
 #include "IPv4Datagram.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
-#include "cstringtokenizer.h"
 
 //==============================================================================
 

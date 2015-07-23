@@ -25,8 +25,6 @@
 #include "CoRE4INET_IPoREFilter.h"
 #include "IPoREDefs_m.h"
 
-#include "csimplemodule.h"
-
 namespace CoRE4INET {
 
 template<class base>

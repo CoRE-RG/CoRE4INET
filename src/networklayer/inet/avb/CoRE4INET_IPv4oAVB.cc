@@ -35,7 +35,6 @@
 #include "AVBFrame_m.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
-#include "cstringtokenizer.h"
 #include "L3AddressResolver.h"
 #include "Ieee802Ctrl.h"
 
@@ -273,7 +272,7 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 AVBDestinationInfo *avbDestInfo = new AVBDestinationInfo();
                 avbDestInfo->setDestType(DestinationType_AVB);
 
-                cModule* module = simulation.getModuleByPath(destModule);
+                cModule* module = getSimulation()->getModuleByPath(destModule);
                 if (!module)
                 {
                     module = findModuleWhereverInNode(destModule, this);
