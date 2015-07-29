@@ -236,9 +236,12 @@ void AVBBuffer::idleSlope(SimTime duration)
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
         credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
-        emit(creditSignal, credit);
-        if (credit > 0 && size() == 0 && !inTransmission)
+        //emit(creditSignal, credit);
+        if (credit > 0 && (size()-1) <= 0 && !inTransmission){
             resetCredit();
+        }else{
+            emit(creditSignal, credit);
+        }
     }
 }
 
@@ -271,6 +274,7 @@ void AVBBuffer::sendSlope(SimTime duration)
 
     emit(creditSignal, credit);
     credit -= static_cast<int>(ceil(static_cast<double>(portBandwith - reservedBandwith) * duration.dbl()));
+    emit(creditSignal, credit);
     inTransmission = false;
     if (size() > 0)
     {
