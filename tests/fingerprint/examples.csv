@@ -7,12 +7,12 @@
 #/examples/AS6802/synchronization/HighIntegrity_small/,           -f omnetpp.ini -c General -r 0,                        1s,              da3e-3e7b
 #/examples/AS6802/synchronization/StandardIntegrity_large/,       -f omnetpp.ini -c General -r 0,                        1s,              b23c-ebb5
 #/examples/AS6802/synchronization/StandardIntegrity_medium/,      -f omnetpp.ini -c General -r 0,                        1s,              e040-f0be
-/examples/avb_AS6802/small_network/,                           	  -f omnetpp.ini -c General -r 0,                        1s,              25af-5096
-/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              ec56-f897
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,      1s,              cab6-3449
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      1s,              2247-8fe2
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       1s,              c757-0960
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            a173-0502
-/examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              2b23-05fa
+/examples/avb_AS6802/small_network/,                           	  -f omnetpp.ini -c General -r 0,                        1s,              067c-5902
+/examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              dfdd-8a5e
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,      1s,              3814-bca5
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      1s,              a31f-ae18
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       1s,              b932-b4f7
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            f127-3192
+/examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              1be3-dc89
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c General -r 0,                        1s,              c29e-3858
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              c24c-28c3

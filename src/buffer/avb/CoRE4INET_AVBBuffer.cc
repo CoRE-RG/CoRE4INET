@@ -107,8 +107,6 @@ void AVBBuffer::initialize(int stage)
 
 void AVBBuffer::handleMessage(cMessage *msg)
 {
-    Buffer::handleMessage(msg);
-
     newTime = simTime();
 
     if (credit < 0)
@@ -118,6 +116,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
 
     if (msg->arrivedOn("in"))
     {
+        Buffer::handleMessage(msg);
         if (inTransmission)
         {
             interferenceSlope(newTime - oldTime);
@@ -178,7 +177,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
             }
             else if (credit < 0)
             {
-                emit(creditSignal, credit);
+                //emit(creditSignal, credit);
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                         getParentModule()->getSubmodule("phy", getIndex()), srClass);
                 //When there is no bandwidth reserved reset credit and delete all messages
@@ -200,8 +199,10 @@ void AVBBuffer::handleMessage(cMessage *msg)
         delete msg;
     }
 
-    if (newTime >= oldTime)
+    if (newTime >= oldTime){
         oldTime = simTime();
+        emit(creditSignal, credit);
+    }
 }
 
 void AVBBuffer::handleParameterChange(const char* parname)
@@ -236,11 +237,8 @@ void AVBBuffer::idleSlope(SimTime duration)
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
         credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
-        //emit(creditSignal, credit);
-        if (credit > 0 && (size()-1) <= 0 && !inTransmission){
+        if (credit > 0 && size() <= 0 && !inTransmission){
             resetCredit();
-        }else{
-            emit(creditSignal, credit);
         }
     }
 }
@@ -255,7 +253,6 @@ void AVBBuffer::interferenceSlope(SimTime duration)
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
         credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
-        emit(creditSignal, credit);
     }
 }
 
@@ -272,9 +269,7 @@ void AVBBuffer::sendSlope(SimTime duration)
     unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
             getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
-    emit(creditSignal, credit);
     credit -= static_cast<int>(ceil(static_cast<double>(portBandwith - reservedBandwith) * duration.dbl()));
-    emit(creditSignal, credit);
     inTransmission = false;
     if (size() > 0)
     {
@@ -296,6 +291,14 @@ void AVBBuffer::sendSlope(SimTime duration)
     else if (credit > 0)
     {
         resetCredit();
+    }
+    else if (credit < 0)
+    {
+        Wduration = duration.dbl();
+        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+        event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
+        event->setDestinationGate(gate("schedulerIn"));
+        getTimer()->registerEvent(event);
     }
 
     if (oldTime <= simTime())
@@ -320,8 +323,10 @@ void AVBBuffer::refresh()
             maxCredit = credit;
     }
 
-    if (newTime >= oldTime)
+    if (newTime >= oldTime){
         oldTime = simTime();
+        emit(creditSignal, credit);
+    }
 }
 
 int AVBBuffer::getCredit() const
