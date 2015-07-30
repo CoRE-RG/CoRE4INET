@@ -34,6 +34,9 @@ const unsigned short VLAN_ID_DEFAULT = 2;
 const unsigned char PRIOANDRANK_SRCLASSA = 0xD0; //0b11010000; //For more details see SRPFrame.msg
 const unsigned char PRIOANDRANK_SRCLASSB = 0xB0; //0b10110000;
 
+//According to Chapter 35.2.4.2 in IEEE Std 802.1Q™2011
+const unsigned short SRP_SAFETYBYTE = 1;
+
 /**
  * Defines for range checks
  */
