@@ -101,6 +101,8 @@ void AVBBuffer::initialize(int stage)
         WATCH(credit);
         WATCH(maxCredit);
         WATCH(inTransmission);
+        WATCH(newTime);
+        WATCH(oldTime);
         WATCH(Wduration);
     }
 }
@@ -292,14 +294,16 @@ void AVBBuffer::sendSlope(SimTime duration)
     {
         resetCredit();
     }
+    // -- Only for credit vector statistic accuracy:
     else if (credit < 0)
     {
-        Wduration = duration.dbl();
+        Wduration = duration.dbl() + CBS_CREDITEMITSTRETCHTIME;
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
         event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
         event->setDestinationGate(gate("schedulerIn"));
         getTimer()->registerEvent(event);
     }
+    // --
 
     if (oldTime <= simTime())
         oldTime = simTime() + duration;
