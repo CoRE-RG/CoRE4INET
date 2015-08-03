@@ -34,6 +34,8 @@ simple SRProtocol
         @class(SRProtocol);
         //Amount of total bandwidth that is reservable (0-1) default: 0.75 representing 75% 
         double reservableBandwidth = default(0.75); 
+        //SRP Table module, default name is srpTable
+        string srpTable = default("^.srpTable");
     gates:
         //Gate for incoming SRP messages
         input in @labels(EtherFrame);
