@@ -53,7 +53,7 @@ void SRPTable::initialize()
 {
     WATCH(nextAging);
     WATCH_PTRUMAPUMAP(talkerTables);
-    WATCH_PTRLISTUMAPUMAP(listenerTables);
+    WATCH_PTRUMAPUMAPUMAP(listenerTables);
     updateDisplayString();
 }
 
