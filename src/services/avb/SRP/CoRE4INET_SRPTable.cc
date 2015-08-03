@@ -32,7 +32,7 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
-            << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize, entry.intervalFrames,
+            << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize + static_cast<size_t>(SRP_SAFETYBYTE), entry.intervalFrames,
                     getIntervalForClass(entry.srClass))) / static_cast<double>(1000000) << "Mbps, insertionTime="
             << entry.insertionTime << "}";
     return os;
@@ -147,7 +147,7 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
         throw cRuntimeError("talkerTable entry not found");
     }
 
-    return bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames, getIntervalForClass(tentry->srClass));
+    return bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames, getIntervalForClass(tentry->srClass));
 }
 
 unsigned long SRPTable::getBandwidthForModule(const cModule *module)
@@ -170,7 +170,7 @@ unsigned long SRPTable::getBandwidthForModule(const cModule *module)
                     //get Talkers for this VLAN
                     TalkerTable ttable = talkerTables[(*i).first];
                     TalkerEntry *tentry = ttable[(*j).first];
-                    bandwidth += bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames,
+                    bandwidth += bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
                             getIntervalForClass(tentry->srClass));
                 }
             }
@@ -202,7 +202,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
                     TalkerEntry *tentry = ttable[(*j).first];
                     if (tentry->srClass == srClass)
                     {
-                        bandwidth += bandwidthFromSizeAndInterval(tentry->framesize, tentry->intervalFrames,
+                        bandwidth += bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
                                 getIntervalForClass(tentry->srClass));
                     }
                 }
@@ -385,7 +385,7 @@ void SRPTable::printState()
             EV_DETAIL << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
                     << (*j).second->address.str() << "   "
                     << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
-                    << static_cast<double>(bandwidthFromSizeAndInterval((*j).second->framesize,
+                    << static_cast<double>(bandwidthFromSizeAndInterval((*j).second->framesize + static_cast<size_t>(SRP_SAFETYBYTE),
                             (*j).second->intervalFrames, getIntervalForClass((*j).second->srClass)))
                             / static_cast<double>(1000000) << "   " << (*j).second->insertionTime << endl;
         }

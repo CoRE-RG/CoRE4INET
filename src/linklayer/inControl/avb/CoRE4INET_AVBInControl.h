@@ -67,6 +67,7 @@ void AVBInControl<IC>::handleMessage(cMessage *msg)
         //Is AVB Frame?
         if (frame && isAVB(frame))
         {
+            this->recordPacketReceived(frame);
             cSimpleModule::sendDirect(frame,
                     cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
         }
