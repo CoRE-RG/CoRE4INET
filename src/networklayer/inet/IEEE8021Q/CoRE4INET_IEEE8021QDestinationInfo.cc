@@ -13,16 +13,32 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <CoRE4INET_IPoRE.h>
+//==============================================================================
+
+#include <IEEE8021Q/CoRE4INET_IEEE8021QDestinationInfo.h>
+
+//==============================================================================
 
 namespace CoRE4INET {
 
-Define_Module(AVB_IPv4);
+//==============================================================================
 
-Define_Module(RC_AVB_IPv4);
+IEEE8021QDestinationInfo::IEEE8021QDestinationInfo()
+  : destModules(),
+    vid(0),
+    pcp(0)
+{
+}
 
-Define_Module(TT_RC_AVB_IPv4);
+//==============================================================================
 
-Define_Module(TT_RC_AVB_8021Q_IPv4);
+IEEE8021QDestinationInfo::~IEEE8021QDestinationInfo()
+{
+}
+
+//==============================================================================
 
 } /* namespace CoRE4INET */
+
+//==============================================================================
+//EOF

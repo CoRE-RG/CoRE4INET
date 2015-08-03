@@ -158,6 +158,10 @@ module RTIPHost
                 @display("p=135,232");
         }
 
+        bgOut: BGQueueBuffer {
+            @display("p=141,99");
+        }
+
         // linklayer
         srpTable: SRPTable {
             @display("p=420,150");
@@ -220,5 +224,7 @@ module RTIPHost
 
 		// link layer <--> outside
         phy[0].ethg <--> ethg;
+        
+        bgOut.out --> phy[0].bgIn;
 
 }
