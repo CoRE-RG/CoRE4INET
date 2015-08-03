@@ -39,13 +39,15 @@ namespace CoRE4INET {
 //==============================================================================
 
 template<class Base>
-IPv4oIEEE8021Q<Base>::IPv4oIEEE8021Q() {
+IPv4oIEEE8021Q<Base>::IPv4oIEEE8021Q()
+{
 }
 
 //==============================================================================
 
 template<class Base>
-IPv4oIEEE8021Q<Base>::~IPv4oIEEE8021Q() {
+IPv4oIEEE8021Q<Base>::~IPv4oIEEE8021Q()
+{
 }
 
 //==============================================================================
@@ -72,9 +74,12 @@ void IPv4oIEEE8021Q<Base>::sendPacketToNIC(cPacket *packet, const inet::Interfac
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
-    if(filterMatch) {
+    if (filterMatch)
+    {
         IPv4oIEEE8021Q<Base>::sendPacketToBuffers(packet, ie, matchingFilters);
-    } else {
+    }
+    else
+    {
         Base::sendPacketToNIC(packet, ie);
     }
 }
@@ -93,7 +98,6 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
         {
             const char *destType = Base::getRequiredAttribute(filterElement, "destType");
 
-
 //            if (!this->destTypeEnum) {
 //                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
 //            }
@@ -102,11 +106,14 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
             cEnum *destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
             DestinationType dt = DestinationType(destTypeEnum->lookup(destType));
 
-            if (dt == DestinationType_8021Q) {
+            if (dt == DestinationType_8021Q)
+            {
                 // Destination Info
                 const char *destModules = Base::getRequiredAttribute(filterElement, "destModules");
                 const char *vid = Base::getRequiredAttribute(filterElement, "VID");
                 const char *pcp = Base::getRequiredAttribute(filterElement, "PCP");
+
+                const char *destMAC = Base::getRequiredAttribute(filterElement, "destMAC");
 
                 // Traffic Pattern
                 const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
@@ -129,21 +136,30 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
                 std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
                 std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
                 std::list<BGBuffer*> destBgBuffers;
-                for (  ; bufferPath != bufferPaths.end(); ++bufferPath)
+                for (; bufferPath != bufferPaths.end(); ++bufferPath)
                 {
                     cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
-                    if (!module) {
-                       module = findModuleWhereverInNode((*bufferPath).c_str(), this);
+                    if (!module)
+                    {
+                        module = findModuleWhereverInNode((*bufferPath).c_str(), this);
                     }
-                    if (!module) {
-                       throw cRuntimeError("destModule \"%s\" could not be resolved!", (*bufferPath).c_str());
+                    if (!module)
+                    {
+                        throw cRuntimeError("destModule \"%s\" could not be resolved!", (*bufferPath).c_str());
                     }
-                    if (BGBuffer *bgBuf = dynamic_cast<BGBuffer*>(module)) {
+                    if (BGBuffer *bgBuf = dynamic_cast<BGBuffer*>(module))
+                    {
                         destBgBuffers.push_back(bgBuf);
-                    } else {
+                    }
+                    else
+                    {
                         throw cRuntimeError("destModule: %s is not a BGBuffer!", (*bufferPath).c_str());
                     }
                 }
+                if (destMAC)
+                    ieee8021QDestInfo->setDestMac(new inet::MACAddress(destMAC));
+                else
+                    throw cRuntimeError("destMAC not specified!");
                 ieee8021QDestInfo->setDestModules(destBgBuffers);
                 ieee8021QDestInfo->setVID(static_cast<uint16_t>(Base::parseIntAttribute(vid, "VID", false)));
                 ieee8021QDestInfo->setPCP(static_cast<uint8_t>(Base::parseIntAttribute(pcp, "PCP", false)));
@@ -155,20 +171,21 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
                 if (srcPrefixLengthAttr)
                     tp->setSrcPrefixLength(Base::parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
                 else if (srcAddrAttr)
-                    tp->setSrcPrefixLength(tp->getSrcAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
+                    tp->setSrcPrefixLength(tp->getSrcAddr().getType() == inet::L3Address::IPv6 ? 128 : 32);
                 if (destAddrAttr)
                     tp->setDestAddr(addressResolver.resolve(destAddrAttr));
                 if (destPrefixLengthAttr)
                     tp->setDestPrefixLength(Base::parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
                 else if (destAddrAttr)
-                    tp->setDestPrefixLength(tp->getDestAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
+                    tp->setDestPrefixLength(tp->getDestAddr().getType() == inet::L3Address::IPv6 ? 128 : 32);
                 if (protocolAttr)
                     tp->setProtocol(Base::parseProtocol(protocolAttr, "protocol"));
                 if (tosAttr)
                     tp->setTos(Base::parseIntAttribute(tosAttr, "tos"));
                 if (tosMaskAttr)
                     tp->setTosMask(Base::parseIntAttribute(tosAttr, "tosMask"));
-                if (srcPortAttr) {
+                if (srcPortAttr)
+                {
                     tp->setSrcPortMin(Base::parseIntAttribute(srcPortAttr, "srcPort"));
                     tp->setSrcPortMax(tp->getSrcPortMin());
                 }
@@ -176,7 +193,8 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
                     tp->setSrcPortMin(Base::parseIntAttribute(srcPortMinAttr, "srcPortMin"));
                 if (srcPortMaxAttr)
                     tp->setSrcPortMax(Base::parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
-                if (destPortAttr) {
+                if (destPortAttr)
+                {
                     tp->setDestPortMin(Base::parseIntAttribute(destPortAttr, "destPort"));
                     tp->setDestPortMax(tp->getDestPortMin());
                 }
@@ -192,11 +210,11 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
                 Base::addFilter(filter);
             }
 
-
         }
         catch (std::exception& e)
         {
-            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(), e.what());
+            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(),
+                    e.what());
         }
     }
 
@@ -207,7 +225,8 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
 template<class Base>
 void IPv4oIEEE8021Q<Base>::handleMessage(cMessage* msg)
 {
-    if (dynamic_cast<EthernetIIFrameWithQTag*>(msg)) {
+    if (dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+    {
         EthernetIIFrameWithQTag* qFrame = dynamic_cast<EthernetIIFrameWithQTag*>(msg);
 
         // decapsulate and send up
@@ -226,7 +245,8 @@ void IPv4oIEEE8021Q<Base>::handleMessage(cMessage* msg)
         delete qFrame;
         Base::handleMessage(ipPacket);
     }
-    else {
+    else
+    {
         Base::handleMessage(msg);
     }
 }
@@ -234,14 +254,18 @@ void IPv4oIEEE8021Q<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-void IPv4oIEEE8021Q<Base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+void IPv4oIEEE8021Q<Base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie,
+        std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
-        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
+        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)",
+                packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
-    for ( ; filter != filters.end(); ++filter) {
-        if ((*filter)->getDestInfo()->getDestType() == DestinationType_8021Q) {
+    for (; filter != filters.end(); ++filter)
+    {
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_8021Q)
+        {
             sendIEEE8021QFrame(packet->dup(), ie, (*filter));
         }
     }
@@ -253,32 +277,37 @@ void IPv4oIEEE8021Q<Base>::sendPacketToBuffers(cPacket *packet, const inet::Inte
 //==============================================================================
 
 template<class Base>
-void IPv4oIEEE8021Q<Base>::sendIEEE8021QFrame(cPacket* packet, __attribute__((unused)) const inet::InterfaceEntry* ie, const IPoREFilter* filter)
+void IPv4oIEEE8021Q<Base>::sendIEEE8021QFrame(cPacket* packet, __attribute__((unused))  const inet::InterfaceEntry* ie,
+        const IPoREFilter* filter)
 {
-        IEEE8021QDestinationInfo *destInfo = dynamic_cast<IEEE8021QDestinationInfo*>(filter->getDestInfo());
-    if (!destInfo){
+    IEEE8021QDestinationInfo *destInfo = dynamic_cast<IEEE8021QDestinationInfo*>(filter->getDestInfo());
+    if (!destInfo)
+    {
         Base::error("Wrong Destination Info Type. Filter invalid!");
         return;
     }
 
     EthernetIIFrameWithQTag *outFrame = new EthernetIIFrameWithQTag();
     outFrame->encapsulate(packet);
-    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES) {
+    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+    {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
-    if(destInfo->getVID() > 0)
+    if (destInfo->getVID() > 0)
     {
         outFrame->setVID(destInfo->getVID());
     }
-    if(destInfo->getPCP() > 0)
+    if (destInfo->getPCP() > 0)
     {
         outFrame->setPcp(destInfo->getPCP());
     }
+    outFrame->setDest(*destInfo->getDestMac());
     outFrame->setName(packet->getName());
 
     std::list<BGBuffer*> destBuffers = destInfo->getDestModules();
     std::list<BGBuffer*>::iterator destBuf = destBuffers.begin();
-    for (  ; destBuf != destBuffers.end(); ++destBuf) {
+    for (; destBuf != destBuffers.end(); ++destBuf)
+    {
         Base::sendDirect(outFrame, (*destBuf)->gate("in"));
     }
 

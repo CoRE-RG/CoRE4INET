@@ -38,6 +38,10 @@ class IEEE8021QDestinationInfo : public DestinationInfo
         virtual ~IEEE8021QDestinationInfo();
 
     public:
+        inet::MACAddress* getDestMac() const { return destMAC; }
+
+        void setDestMac(inet::MACAddress* destMac) { destMAC = destMac; }
+
         uint16_t getVID() const
         {
             return vid;
@@ -67,6 +71,7 @@ class IEEE8021QDestinationInfo : public DestinationInfo
         std::list<BGBuffer*> destModules;
         uint16_t vid;
         uint8_t pcp;
+        inet::MACAddress  *destMAC;
 
 };
 
