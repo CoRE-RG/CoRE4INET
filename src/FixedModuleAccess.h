@@ -66,7 +66,7 @@ INET_API cModule *findModuleUnderContainingNode(cModule *from);
  * or type mismatch.
  */
 template<typename T>
-INET_API T *findModuleFromPar(cPar& par, cModule *from);
+T *findModuleFromPar(cPar& par, cModule *from);
 
 template<typename T>
 T *findModuleFromPar(cPar& par, cModule *from)
@@ -91,7 +91,7 @@ T *findModuleFromPar(cPar& par, cModule *from)
  * or type mismatch.
  */
 template<typename T>
-INET_API T *getModuleFromPar(cPar& par, cModule *from);
+T *getModuleFromPar(cPar& par, cModule *from);
 
 template<typename T>
 T *getModuleFromPar(cPar& par, cModule *from)
