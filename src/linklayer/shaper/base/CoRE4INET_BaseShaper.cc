@@ -1,5 +1,10 @@
 #include "CoRE4INET_BaseShaper.h"
 
+#include "FixedModuleAccess.h"
+
+//INET
+#include "EtherMACFullDuplex.h"
+
 //Std
 #include <algorithm>
 
@@ -9,14 +14,16 @@ void BaseShaper::initialize(int stage)
 {
     if (stage == 0)
     {
-        if (getParentModule() && getParentModule()->getSubmodule("mac")
-                && getParentModule()->getSubmodule("mac")->gate("phys$o"))
+        inet::EtherMACFullDuplex* mac =
+                dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
+        if (mac->gate("phys$o"))
         {
-            cGate *physOutGate = getParentModule()->getSubmodule("mac")->gate("phys$o");
+            cGate *physOutGate = mac->gate("phys$o");
             outChannel = physOutGate->findTransmissionChannel();
         }
-        else{
-            throw cRuntimeError("A shaper can only be used within a port module with an attached EtherMac");
+        else
+        {
+            throw cRuntimeError("A shaper can only be used attached to an EtherMACFullDuplex");
         }
         WATCH(framesRequested);
     }
