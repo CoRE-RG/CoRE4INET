@@ -22,6 +22,7 @@ using namespace std;
 #include "AVBFrame_m.h"
 //INET
 //#include "EtherFrame_m.h"
+#include "FixedModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -34,7 +35,7 @@ AVBIncoming::AVBIncoming()
 
 void AVBIncoming::initialize()
 {
-    this->srptable = dynamic_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+    this->srptable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this);
     if(!srptable){
         throw cRuntimeError("Cannot find module srpTable in node. srpTable is required");
     }
