@@ -37,7 +37,8 @@ const unsigned char PRIOANDRANK_SRCLASSB = 0xB0; //0b10110000;
 //According to Chapter 35.2.4.2 in IEEE Std 802.1Q™2011
 const unsigned short SRP_SAFETYBYTE = 1;
 
-const double CBS_CREDITEMITSTRETCHTIME = 0.000000001;
+//For credit vector statistic
+const double CBS_CREDITEMITSTRETCHTIME = 0.00000001;
 /**
  * Defines for range checks
  */

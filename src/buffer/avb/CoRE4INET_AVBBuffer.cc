@@ -32,6 +32,7 @@ AVBBuffer::AVBBuffer()
     this->inTransmission = false;
     this->newTime = 0;
     this->oldTime = 0;
+    this->minCreditEmitTime = 0;
     this->Wduration = 0;
     this->tick = -1;
     this->srptable = nullptr;
@@ -165,7 +166,6 @@ void AVBBuffer::handleMessage(cMessage *msg)
         {
             if (credit >= 0)
             {
-                //if (msgCnt > 0)
                 if (size() > 0)
                 {
                     cMessage *outFrame = getFrame();
@@ -179,7 +179,6 @@ void AVBBuffer::handleMessage(cMessage *msg)
             }
             else if (credit < 0)
             {
-                //emit(creditSignal, credit);
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                         getParentModule()->getSubmodule("phy", getIndex()), srClass);
                 //When there is no bandwidth reserved reset credit and delete all messages
@@ -204,7 +203,12 @@ void AVBBuffer::handleMessage(cMessage *msg)
     if (newTime >= oldTime){
         oldTime = simTime();
         emit(creditSignal, credit);
+    // -- Only for credit vector statistic accuracy:
+    }else if(credit < 0 && minCreditEmitTime > 0 && (newTime.dbl() + CBS_CREDITEMITSTRETCHTIME) >= minCreditEmitTime.dbl()){
+        emit(creditSignal, credit);
     }
+    minCreditEmitTime = 0;
+    // --
 }
 
 void AVBBuffer::handleParameterChange(const char* parname)
@@ -297,7 +301,8 @@ void AVBBuffer::sendSlope(SimTime duration)
     // -- Only for credit vector statistic accuracy:
     else if (credit < 0)
     {
-        Wduration = duration.dbl() + CBS_CREDITEMITSTRETCHTIME;
+        minCreditEmitTime = simTime() + duration;
+        Wduration = duration.dbl();// + CBS_CREDITEMITSTRETCHTIME;
         SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
         event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
         event->setDestinationGate(gate("schedulerIn"));

@@ -91,6 +91,7 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
         //int msgCnt;
         simtime_t newTime;
         simtime_t oldTime;
+        simtime_t minCreditEmitTime;
         simtime_t Wduration;
         simtime_t tick;
         SRPTable *srptable;
