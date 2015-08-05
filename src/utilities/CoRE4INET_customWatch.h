@@ -19,7 +19,6 @@
 //Std
 #include <map>
 #include <unordered_map>
-
 //OMNeT++
 #include "omnetpp.h"
 
@@ -681,7 +680,7 @@ void createStdPtrUMapUMapUMapWatcher(const char *varname, std::unordered_map<Key
 #define WATCH_PTRLISTMAPMAP(m)      createStdPtrListMapMapWatcher(#m,(m))
 
 /**
- * Makes std::unordered_maps storing unordered_maps storing list of pointers inspectable in Tkenv.
+ * Makes std::unordered_maps storing unordered_maps storing std::unordered_maps of pointers inspectable in Tkenv.
  *
  * @hideinitializer
  */
