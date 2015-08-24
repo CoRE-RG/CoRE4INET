@@ -74,5 +74,9 @@ void BGBurstTrafficSourceApp::handleParameterChange(const char* parname)
     }
 }
 
+unsigned long BGBurstTrafficSourceApp::getBurstSize(){
+    return this->burstSize;
+}
+
 }
 //namespace
