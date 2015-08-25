@@ -46,6 +46,12 @@
  */
 #define DELIMITERS ",; \t\n\r\f"
 
+/**
+ * Definition of LONG_BIT for Windows
+ */
+#ifdef _WIN32
+#define LONG_BIT 32
+#endif
 
 /**
  * Ethernet 802.1Q Header
