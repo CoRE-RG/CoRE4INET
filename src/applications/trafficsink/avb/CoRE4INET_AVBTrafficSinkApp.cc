@@ -140,7 +140,7 @@ void AVBTrafficSinkApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "streamID"))
     {
-#if LONG_BIT == 32
+#if (LONG_BIT == 32 || _WIN32)
         this->streamID = parameterULongCheckRange(par("streamID"), 0, static_cast<unsigned long>(MAX_STREAM_ID));
 #else
         this->streamID = parameterULongCheckRange(par("streamID"), 0, MAX_STREAM_ID);
