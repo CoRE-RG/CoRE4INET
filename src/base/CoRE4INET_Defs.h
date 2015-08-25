@@ -47,13 +47,6 @@
 #define DELIMITERS ",; \t\n\r\f"
 
 /**
- * Definition of LONG_BIT for Windows
- */
-#if defined(_WIN32) && !defined(LONG_BIT)
-#define LONG_BIT 32
-#endif
-
-/**
  * Ethernet 802.1Q Header
  */
 #define ETHER_8021Q_TAG_BYTES 4
