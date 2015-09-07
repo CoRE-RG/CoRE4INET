@@ -29,7 +29,7 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 simple CTTrafficSourceAppBase extends TrafficSourceAppBase
 {
     parameters:
-        @class(CTTrafficSourceAppBase);
+        @class(AbstractSimpleModule);
         @display("i=block/source");
 
         //Critical traffic identifier of the message that is being generated (-1) means don't set ID

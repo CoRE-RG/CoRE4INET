@@ -26,7 +26,7 @@ package core4inet.applications.base;
 simple ApplicationBase like IApplication
 {
     parameters:
-        @class(ApplicationBase);
+        @class(AbstractSimpleModule);
         @display("i=block/app");
         
         //Name shown above the module

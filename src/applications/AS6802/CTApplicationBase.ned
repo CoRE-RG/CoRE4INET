@@ -28,7 +28,7 @@ import core4inet.applications.base.ApplicationBase;
 simple CTApplicationBase extends ApplicationBase
 {
     parameters:
-        @class(CTApplicationBase);
+        @class(AbstractSimpleModule);
         @display("i=block/app");
         
     gates:

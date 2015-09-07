@@ -19,8 +19,6 @@ package core4inet.incoming.base;
 // @warning Since this is an abstract module do not instantiate it! Use RCIncoming or
 // TTIncoming instead!
 //
-// @todo Since this is an abstract module it might be better to make an interface 
-//
 // @see RCIncoming, TTIncoming,
 //
 // @author Till Steinbach
@@ -28,7 +26,7 @@ simple Incoming like IIncoming
 {
     parameters:
     //Incoming is implemented by the Incoming C++ Class
-    @class(Incoming);
+    @class(AbstractSimpleModule);
     @display("i=block/arrival");
     //Signal emitted when frame is received, contains received EtherFrame
     @signal[rxPk](type=inet::EtherFrame);

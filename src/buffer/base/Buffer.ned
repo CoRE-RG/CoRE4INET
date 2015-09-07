@@ -21,15 +21,13 @@ package core4inet.buffer.base;
 // @warning Currently the out gate is not used. Instead the buffer sends its
 // message via sendDirect to all via addDestinationGate() registred gates.
 //
-// @todo The Buffer module should be converted to an interface since it should
-// not be used directly in simulation.
-//
 // @see IBuffer
 //
 // @author Till Steinbach
 simple Buffer like IBuffer
 {
     parameters:
+        @class(AbstractSimpleModule);
         @display("i=block/buffer");
 
          //Statistic of the amount of packets that were received by the buffer

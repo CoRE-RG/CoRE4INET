@@ -12,21 +12,17 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package core4inet.buffer.base;
 
-//
-// Represents an abstract Buffer for background traffic. Messages are sent immediatly to the LLC
-//
-//
-// @warning Do not instantiate the module. Use BGQueueBuffer instead!
-//
-// @see BGQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
-//
-// @author Till Steinbach
-simple BGBuffer extends Buffer
+#include "AbstractSimpleModule.h"
+
+namespace CoRE4INET {
+
+Define_Module(AbstractSimpleModule);
+
+void AbstractSimpleModule::initialize()
 {
-    parameters:
-        //BGBuffer is implemented by the BGBuffer C++ Class
-        @class(AbstractSimpleModule);
-        @display("i=,green");
+    throw cRuntimeError("You cannot use modules of type %s as it is an abstract simple module type",
+            this->getModuleType()->getFullName());
 }
+
+} //namespace

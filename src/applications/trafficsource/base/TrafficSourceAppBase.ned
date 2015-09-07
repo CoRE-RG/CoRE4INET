@@ -29,6 +29,7 @@ import core4inet.applications.base.ApplicationBase;
 simple TrafficSourceAppBase extends ApplicationBase
 {
     parameters:
+        @class(AbstractSimpleModule);
         @display("i=block/source");
 
         // Trafficsource enabled or disabled

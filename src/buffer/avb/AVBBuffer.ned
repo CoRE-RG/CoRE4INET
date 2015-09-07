@@ -29,7 +29,7 @@ import core4inet.buffer.base.Buffer;
 simple AVBBuffer extends Buffer like ITimed
 {
     parameters:
-        @class(AVBBuffer);
+        @class(AbstractSimpleModule);
         @display("i=,blue");
         //Signal emitted when the credit of the CBS algorithm changes
         @signal[credit](type=long);

@@ -25,9 +25,6 @@ import core4inet.utilities.classes.IScheduled;
 //
 // @warning Do not instantiate the module. Use TTDoubleBuffer or TTQueueBuffer instead!
 //
-// @todo The TTBuffer module should be converted to an interface since it should
-// not be used directly in simulation.
-//
 // @see TTDoubleBuffer, TTQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
 //
 // @author Till Steinbach
@@ -35,7 +32,7 @@ simple TTBuffer extends CTBuffer like IScheduled
 {
     parameters:
         //TTBuffer is implemented by the TTBuffer C++ Class
-        @class(TTBuffer);
+        @class(AbstractSimpleModule);
         @display("i=,red");
         //Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)
         int sendWindowStart @unit(tick);

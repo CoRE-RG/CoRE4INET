@@ -25,9 +25,6 @@ import core4inet.utilities.classes.ITimed;
 // @warning Do not instantiate the module. Use RCDoubleBuffer or RCQueueBuffer instead! 
 // Only the bag parameter is currently used!
 //
-// @todo The RCBuffer module should be converted to an interface since it should
-// not be used directly in simulation.
-//
 // @see RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
 //
 // @author Till Steinbach
@@ -35,7 +32,7 @@ simple RCBuffer extends CTBuffer like ITimed
 {
     parameters:
         //RCBuffer is implemented by the RCBuffer C++ Class
-        @class(RCBuffer);
+        @class(AbstractSimpleModule);
         @display("i=,orange");
         // Not used
         int max_dispatch_delay @unit(tick) = default(0tick);
