@@ -17,6 +17,8 @@
 
 namespace CoRE4INET {
 
+Register_Class(CTFrame);
+
 unsigned short CTFrame::getCtID() const
 {
     inet::MACAddress mac = getDest();
