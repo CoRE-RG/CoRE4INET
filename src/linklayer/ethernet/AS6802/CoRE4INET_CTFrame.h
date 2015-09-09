@@ -34,10 +34,6 @@ namespace CoRE4INET {
 class CTFrame : public CTFrame_Base
 {
     public:
-        CTFrame() :
-                CTFrame_Base()
-        {
-        }
         CTFrame(const CTFrame& other) :
                 CTFrame_Base(other)
         {
