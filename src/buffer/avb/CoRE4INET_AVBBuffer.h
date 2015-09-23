@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBBUFFER_H_
-#define __CORE4INET_AVBBUFFER_H_
+#ifndef CORE4INET_AVBBUFFER_H_
+#define CORE4INET_AVBBUFFER_H_
 
 //CoRE4INET
 #include "CoRE4INET_Buffer.h"
@@ -129,4 +129,4 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
 };
 
 } /* namespace CoRE4INET */
-#endif /* __CORE4INET_AVBBUFFER_H_ */
+#endif /* CORE4INET_AVBBUFFER_H_ */

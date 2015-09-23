@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CoRE4INET_SHAPERS_H_
-#define __CoRE4INET_SHAPERS_H_
+#ifndef CORE4INET_SHAPERS_H_
+#define CORE4INET_SHAPERS_H_
 
 //CoRE4INET
 #include "CoRE4INET_BaseShaper.h"

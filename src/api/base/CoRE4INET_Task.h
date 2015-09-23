@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TASK_H_
-#define __CORE4INET_TASK_H_
+#ifndef CORE4INET_TASK_H_
+#define CORE4INET_TASK_H_
 
 #include <stddef.h>
 
@@ -116,4 +116,4 @@ class APITask : public Task
 
 }
 
-#endif /* __CORE4INET_TASK_H_ */
+#endif /* CORE4INET_TASK_H_ */

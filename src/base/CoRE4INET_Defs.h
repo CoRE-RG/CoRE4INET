@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_DEFS_H
-#define __CORE4INET_DEFS_H
+#ifndef CORE4INET_DEFS_H
+#define CORE4INET_DEFS_H
 
 //OMNeT++
 #include "omnetpp.h"
