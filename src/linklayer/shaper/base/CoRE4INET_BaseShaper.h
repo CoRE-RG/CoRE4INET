@@ -117,14 +117,14 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
          * one. Else it saves the state and sends the message immediately when it is
          * received.
          */
-        virtual void requestPacket()
+        virtual void requestPacket() override
         {
         }
 
         /**
          * @brief Returns number of requested messages.
          */
-        virtual int getNumPendingRequests()
+        virtual int getNumPendingRequests() override
         {
             return static_cast<int>(framesRequested);
         }
@@ -134,7 +134,7 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty()
+        virtual bool isEmpty() override
         {
             return true;
         }
@@ -142,7 +142,7 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear()
+        virtual void clear() override
         {
         }
 
@@ -153,7 +153,7 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
          * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop()
+        virtual cMessage *pop() override
         {
             return nullptr;
         }

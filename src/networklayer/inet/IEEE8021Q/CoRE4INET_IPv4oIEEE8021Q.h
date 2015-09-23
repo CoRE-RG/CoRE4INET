@@ -38,7 +38,7 @@ public:
     virtual ~IPv4oIEEE8021Q();
 
     virtual void initialize(int stage) override;
-    virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie);
+    virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie) override;
     virtual void configureFilters(cXMLElement *config);
     virtual void handleMessage(cMessage* msg) override;
 

@@ -50,7 +50,7 @@ class IEEE8021QBurstTrafficSourceApp: public virtual BGBurstTrafficSourceApp
          * The message is sent to the bgbuffer.
          * The size is defined by the payload parameter of the module.
          */
-        virtual void sendMessage();
+        virtual void sendMessage() override;
 
         /**
          * @brief Indicates a parameter has changed.

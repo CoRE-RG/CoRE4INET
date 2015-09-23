@@ -49,7 +49,7 @@ class BGBurstTrafficSourceApp : public virtual BGTrafficSourceApp
          * The message kind is defined by the buffer-type (RC/TT) of the buffer the message is sent to.
          * The size is defined by the payload parameter of the module.
          */
-        virtual void sendMessage();
+        virtual void sendMessage() override;
 
         /**
          * @brief Indicates a parameter has changed.
