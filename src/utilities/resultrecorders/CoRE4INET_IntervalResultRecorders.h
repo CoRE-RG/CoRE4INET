@@ -12,8 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __TTE4INET_INTERVALRESULTRECORDERS_H
-#define __TTE4INET_INTERVALRESULTRECORDERS_H
+#ifndef CORE4INET_INTERVALRESULTRECORDERS_H
+#define CORE4INET_INTERVALRESULTRECORDERS_H
 
 //OMNeT++
 #include "omnetpp.h"
