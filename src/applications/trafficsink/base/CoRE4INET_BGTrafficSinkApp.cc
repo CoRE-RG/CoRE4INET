@@ -45,7 +45,7 @@ void BGTrafficSinkApp::handleMessage(cMessage *msg)
         if (address.isUnspecified() || frame->getSrc() == address)
         {
             if((!received && par("replyFirst").boolValue()) || par("reply").boolValue()){
-                inet::EtherFrame *reply = new inet::EthernetIIFrame("Reply");
+                inet::EtherFrame *reply = new inet::EthernetIIFrame("Reply",7);
                 reply->setDest(frame->getSrc());
                 reply->setByteLength(frame->getByteLength());
                 for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();
