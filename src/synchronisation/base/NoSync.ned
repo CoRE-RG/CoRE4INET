@@ -14,22 +14,29 @@
 // 
 package core4inet.synchronisation.base;
 
-import core4inet.linklayer.port.IPort;
+import core4inet.utilities.classes.Scheduled;
 
 //
-// Synchronisation module interface
+// Dummy synchronisation module that does not correct the clock.
+// It is used in simulations where no synchronisation is required
 //
-// @see IPort
+// @see ISync
 //
 // @author Till Steinbach
-moduleinterface ISync extends IPort
+simple NoSync like ISync
 {
     parameters:
+        @class(NoSync);
         @display("i=block/timer");
 
         //Signal emited when sync state changes (e.g. SYNC, ASYNC, ...)
-        @signal[syncStatus](type=CoRE4INET::SyncNotification);
+        @signal[NF_SYNC_STATE_CHANGE](type=CoRE4INET::SyncNotification);
+
     gates:
+        //Input for time-triggered traffic
+        input TTin @directIn @labels(CTFrame);
+        //Input for rate-constrained traffic
+        input RCin @directIn @labels(CTFrame);
         //Input for scheduler messages
         input schedulerIn @directIn;
 }
