@@ -82,7 +82,7 @@ module TTEEtherHost
         scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
-        app[numApps]: < > like IApplication {
+        app[numApps]: <> like IApplication {
             @display("p=234,37,row,70");
         }
         bgIn: BGQueueBuffer {
@@ -94,9 +94,9 @@ module TTEEtherHost
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
         }
-        
+
         interfaceTable: InterfaceTable {
-            @display("p=447,313");
+            @display("p=234,100");
         }
     connections allowunconnected:
         phy[0].phys <--> ethg;
