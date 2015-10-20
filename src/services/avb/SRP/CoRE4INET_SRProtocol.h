@@ -21,6 +21,11 @@
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
 
+namespace inet {
+template<typename T>
+OPP_DLLEXPORT T *getModuleFromPar(cPar& par, cModule *from);
+}
+
 namespace CoRE4INET {
 
 /**

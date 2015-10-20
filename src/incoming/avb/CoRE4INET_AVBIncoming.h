@@ -25,7 +25,7 @@
 
 namespace inet {
 template<typename T>
-T *findModuleFromPar(cPar& par, cModule *from);
+OPP_DLLEXPORT T *getModuleFromPar(cPar& par, cModule *from);
 }
 
 namespace CoRE4INET {
