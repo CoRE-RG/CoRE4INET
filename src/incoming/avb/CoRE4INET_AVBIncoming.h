@@ -20,6 +20,12 @@
 #include "CoRE4INET_Incoming.h"
 #include "CoRE4INET_SRPTable.h"
 
+//INET
+#include "ModuleAccess.h"
+
+template<typename T>
+INET_API CoRE4INET::SRPTable *findModuleFromPar(cPar& par, cModule *from);
+
 namespace CoRE4INET {
 
 //This disables the padding warning for this class! please recheck when adding new members!
