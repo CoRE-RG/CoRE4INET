@@ -115,9 +115,9 @@ module TTEAVBEtherHost
         srpProtocol: SRProtocol {
             @display("p=141,169");
         }
-        
+
         interfaceTable: InterfaceTable {
-            @display("p=447,313");
+            @display("p=208,99");
         }
     connections allowunconnected:
         phy[0].phys <--> ethg;
