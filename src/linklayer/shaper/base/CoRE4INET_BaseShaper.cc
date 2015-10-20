@@ -1,6 +1,6 @@
 #include "CoRE4INET_BaseShaper.h"
 
-#include "FixedModuleAccess.h"
+#include "ModuleAccess.h"
 
 //INET
 #include "EtherMACFullDuplex.h"

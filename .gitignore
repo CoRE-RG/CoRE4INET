@@ -39,3 +39,6 @@
 
 # ignore backup and temp files
 *.tmp*
+
+#ignore Apple files
+.DS_Store

@@ -22,7 +22,7 @@ using namespace std;
 #include "AVBFrame_m.h"
 //INET
 //#include "EtherFrame_m.h"
-#include "FixedModuleAccess.h"
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 

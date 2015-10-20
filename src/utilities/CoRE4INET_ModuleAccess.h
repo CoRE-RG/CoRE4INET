@@ -17,7 +17,7 @@
 #define CORE4INET_MODULEACCESS_H
 
 //INET
-#include "FixedModuleAccess.h"
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 
