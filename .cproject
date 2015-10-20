@@ -40,7 +40,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
@@ -100,12 +99,12 @@
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
@@ -145,7 +144,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.1282023526" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
@@ -179,7 +177,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.525932788" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
@@ -238,12 +235,12 @@
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
@@ -283,7 +280,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1556009094" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -296,7 +292,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="configuration/base|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -336,7 +332,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
@@ -389,19 +384,19 @@
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
+									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
@@ -416,8 +411,8 @@
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
@@ -447,7 +442,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.111423297" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
@@ -480,7 +474,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1534915787" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
@@ -532,19 +525,19 @@
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
 									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
-									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
+									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
@@ -559,8 +552,8 @@
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
 									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
@@ -589,7 +582,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_CONFIGURATION_MANAGER"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1331833399" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -602,7 +594,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+						<entry excluding="configuration/base|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

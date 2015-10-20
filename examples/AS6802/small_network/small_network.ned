@@ -26,7 +26,7 @@ import inet.node.ethernet.Eth100M;
 network small_network
 {
     parameters:
-        @display("bgb=,,white");
+        @display("bgb=,,white;bgi=background/CAR123");
         double measure_interval @unit(s) = default(1s);
     submodules:
         node1: Node1 {

@@ -3,5 +3,6 @@ simulations
 src
 tests/module/lib
 -core4inet.examples.AS6802.synchronization
+-core4inet.configuration.base
 -core4inet.synchronisation.AS6802
 -ttethernet.examples.synchronization.HighIntegrity_small
