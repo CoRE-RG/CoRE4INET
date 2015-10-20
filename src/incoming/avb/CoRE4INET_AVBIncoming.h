@@ -23,8 +23,10 @@
 //INET
 #include "ModuleAccess.h"
 
+namespace inet {
 template<typename T>
 INET_API CoRE4INET::SRPTable *findModuleFromPar(cPar& par, cModule *from);
+}
 
 namespace CoRE4INET {
 
