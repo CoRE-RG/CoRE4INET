@@ -53,6 +53,7 @@ void RCBurstTrafficSourceApp::handleMessage(cMessage *msg)
             event->setDestinationGate(gate("schedulerIn"));
             getTimer()->registerEvent(event);
         }
+        delete msg;
     }
     else if (msg->arrivedOn("schedulerIn"))
     {

@@ -65,6 +65,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
 
             getPeriod()->registerEvent(event);
         }
+        delete msg;
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
