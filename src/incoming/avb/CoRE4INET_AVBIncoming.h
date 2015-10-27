@@ -20,12 +20,9 @@
 #include "CoRE4INET_Incoming.h"
 #include "CoRE4INET_SRPTable.h"
 
-//INET
-#include "ModuleAccess.h"
-
 namespace inet {
 template<typename T>
-OPP_DLLEXPORT T *getModuleFromPar(cPar& par, cModule *from);
+T *getModuleFromPar(cPar& par, cModule *from);
 }
 
 namespace CoRE4INET {
