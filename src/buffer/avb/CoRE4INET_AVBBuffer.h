@@ -37,13 +37,14 @@ namespace CoRE4INET {
  *
  * @ingroup Buffer
  */
-class AVBBuffer : public virtual Buffer, public virtual Timed
+class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
 {
         using Timed::initialize;
     public:
         AVBBuffer();
         virtual ~AVBBuffer();
 
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l);
     public:
         /**
          * @brief caculates new credit for idleslope time.

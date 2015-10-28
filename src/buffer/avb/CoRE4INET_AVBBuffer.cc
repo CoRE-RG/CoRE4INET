@@ -15,6 +15,8 @@
 
 #include "CoRE4INET_AVBBuffer.h"
 
+//INET
+#include "EtherMACBase.h"
 //CoRE4INET
 #include "CoRE4INET_ModuleAccess.h"
 
@@ -44,6 +46,15 @@ AVBBuffer::~AVBBuffer()
 
 }
 
+void AVBBuffer::receiveSignal(cComponent *source, simsignal_t signalID, long l) {
+    (void)source;
+    (void)signalID;
+    inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
+    if(macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE){
+        emit(creditSignal, credit);
+    }
+}
+
 int AVBBuffer::numInitStages() const
 {
     return 1;
@@ -68,6 +79,7 @@ void AVBBuffer::initialize(int stage)
 
         if (cModule* phy = getParentModule()->getSubmodule("phy", getIndex()))
         {
+            phy->subscribe("transmitState", this);
             if (cModule* mac = phy->getSubmodule("mac"))
             {
                 if (cGate * macOutGate = mac->gate("phys$o"))
@@ -203,12 +215,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
     if (newTime >= oldTime){
         oldTime = simTime();
         emit(creditSignal, credit);
-    // -- Only for credit vector statistic accuracy:
-    }else if(credit < 0 && minCreditEmitTime > 0 && (newTime.dbl() + CBS_CREDITEMITSTRETCHTIME) >= minCreditEmitTime.dbl()){
-        emit(creditSignal, credit);
     }
-    minCreditEmitTime = 0;
-    // --
 }
 
 void AVBBuffer::handleParameterChange(const char* parname)
@@ -298,17 +305,6 @@ void AVBBuffer::sendSlope(SimTime duration)
     {
         resetCredit();
     }
-    // -- Only for credit vector statistic accuracy:
-    else if (credit < 0)
-    {
-        minCreditEmitTime = simTime() + duration;
-        Wduration = duration.dbl();// + CBS_CREDITEMITSTRETCHTIME;
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
-        event->setDestinationGate(gate("schedulerIn"));
-        getTimer()->registerEvent(event);
-    }
-    // --
 
     if (oldTime <= simTime())
         oldTime = simTime() + duration;
