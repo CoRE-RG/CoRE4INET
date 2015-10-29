@@ -88,12 +88,11 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
         SR_CLASS srClass;
         int credit;
         int maxCredit;
+        simtime_t lastCreditEmitTime;
         bool inTransmission;
-        //int msgCnt;
         simtime_t newTime;
         simtime_t oldTime;
-        simtime_t minCreditEmitTime;
-        simtime_t Wduration;
+        simtime_t wDuration;
         simtime_t tick;
         SRPTable *srptable;
         unsigned int portBandwith;
@@ -127,6 +126,10 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname) override;
+
+    private:
+        simtime_t getCurrentTime();
+        void emitCredit();
 };
 
 } /* namespace CoRE4INET */
