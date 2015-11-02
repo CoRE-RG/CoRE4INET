@@ -138,6 +138,7 @@ class Timer : public virtual cSimpleModule
          */
         uint64_t getTotalTicks();
 
+        simtime_t getTotalSimTime();
         /**
          * @brief Returns a pointer to the attached oscillator
          */

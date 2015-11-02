@@ -20,13 +20,13 @@
 #include "CoRE4INET_Incoming.h"
 #include "CoRE4INET_SRPTable.h"
 
-//INET
-#include "ModuleAccess.h"
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wattributes"
 namespace inet {
 template<typename T>
-OPP_DLLEXPORT T *getModuleFromPar(cPar& par, cModule *from);
+T *getModuleFromPar(cPar& par, cModule *from);
 }
+#pragma GCC diagnostic pop
 
 namespace CoRE4INET {
 
