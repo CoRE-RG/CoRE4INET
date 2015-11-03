@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_BGBURSTTRAFFICSOURCEAPP_H_
-#define __CORE4INET_BGBURSTTRAFFICSOURCEAPP_H_
+#ifndef CORE4INET_BGBURSTTRAFFICSOURCEAPP_H_
+#define CORE4INET_BGBURSTTRAFFICSOURCEAPP_H_
 
 //CoRE4INET
 #include "CoRE4INET_BGTrafficSourceApp.h"
@@ -51,7 +51,7 @@ class BGBurstTrafficSourceApp : public virtual BGTrafficSourceApp
          * The message kind is defined by the buffer-type (RC/TT) of the buffer the message is sent to.
          * The size is defined by the payload parameter of the module.
          */
-        virtual void sendMessage();
+        virtual void sendMessage() override;
 
         /**
          * @brief Indicates a parameter has changed.
