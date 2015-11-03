@@ -45,11 +45,19 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
          * @brief Constructor
          */
         AVBBuffer();
+
         /**
          * @brief Destructor
          */
         virtual ~AVBBuffer();
 
+        /**
+         * @brief Handles incoming signals
+         *
+         * @param source incoming signal source
+         * @param signalID id of the incoming signal
+         * @param l signal long value
+         */
         virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l) override;
     public:
         /**
