@@ -21,7 +21,7 @@
 //INET
 #include "ModuleAccess.h"
 
-namespace CoRE4INET{
+namespace CoRE4INET {
 
 Define_Module(RCBurstTrafficSourceApp);
 
@@ -37,23 +37,28 @@ void RCBurstTrafficSourceApp::initialize()
     CTTrafficSourceAppBase::initialize();
 
     handleParameterChange(nullptr);
-    if (isEnabled())
-    {
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-
-        event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
-        event->setDestinationGate(gate("schedulerIn"));
-        getTimer()->registerEvent(event);
-    }
 }
 
 void RCBurstTrafficSourceApp::handleMessage(cMessage *msg)
 {
 
     CTTrafficSourceAppBase::handleMessage(msg);
-    if (msg->arrivedOn("schedulerIn"))
+    if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
     {
-        if(framesBurstedCnt < static_cast<unsigned int>(par("nrOfFramesInOneBurst").longValue())){
+        if (isEnabled())
+        {
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+
+            event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
+        }
+        delete msg;
+    }
+    else if (msg->arrivedOn("schedulerIn"))
+    {
+        if (framesBurstedCnt < static_cast<unsigned int>(par("nrOfFramesInOneBurst").longValue()))
+        {
             getDisplayString().removeTag("i2");
             sendMessage();
             framesBurstedCnt++;
@@ -63,17 +68,21 @@ void RCBurstTrafficSourceApp::handleMessage(cMessage *msg)
                 event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
                 getTimer()->registerEvent(event);
             }
-            else{
+            else
+            {
                 throw cRuntimeError("Message on schedulerIn is of wrong type");
             }
-        }else{
+        }
+        else
+        {
             if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))
             {
                 event->setTimer(static_cast<uint64_t>(this->burstInterval / getOscillator()->getPreciseTick()));
                 getTimer()->registerEvent(event);
                 framesBurstedCnt = 0;
             }
-            else{
+            else
+            {
                 throw cRuntimeError("Message on schedulerIn is of wrong type");
             }
         }
@@ -99,7 +108,6 @@ void RCBurstTrafficSourceApp::handleParameterChange(const char* parname)
     }
 }
 
-} //namespace
-
-
+}
+ //namespace
 

@@ -51,7 +51,7 @@ void BGTrafficSourceApp::sendMessage()
 {
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
-        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic");
+        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic", 7); //kind 7 = black
 
         frame->setDest(this->destAddress);
 

@@ -31,7 +31,7 @@ simple Incoming like IIncoming
 {
     parameters:
     //Incoming is implemented by the Incoming C++ Class
-    @class(Incoming);
+    @class(AbstractSimpleModule);
     @display("i=block/arrival");
     
     //Signal emitted when frame is received, contains received EtherFrame

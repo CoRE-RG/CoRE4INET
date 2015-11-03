@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_CT_FRAME_H_
-#define __CORE4INET_CT_FRAME_H_
+#ifndef CORE4INET_CT_FRAME_H_
+#define CORE4INET_CT_FRAME_H_
 
 //Auto-generated Messages
 #include "CTFrame_m.h"
@@ -34,14 +34,6 @@ namespace CoRE4INET {
 class CTFrame : public CTFrame_Base
 {
     public:
-        /**
-         * @brief Constructor
-         */
-        CTFrame() :
-                CTFrame_Base()
-        {
-        }
-
         /**
          * @brief Copy Constructor
          */

@@ -12,6 +12,9 @@
 #include "AVBDefs_m.h"
 #include "CoRE4INET_AVBBuffer.h"
 
+//Auto-generated messages
+#include "AVBFrame_m.h"
+
 namespace CoRE4INET {
 
 /**
@@ -186,8 +189,11 @@ void AVBShaper<SRCLASS, TC>::handleMessage(cMessage *msg)
         if (TC::getNumPendingRequests() && avbBuffer->getCredit() >= 0)
         {
             TC::framesRequested--;
+            AVBFrame* sizeMsg = dynamic_cast<AVBFrame*>(msg->dup());
+            sizeMsg->setByteLength(sizeMsg->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
-            SimTime duration = TC::outChannel->calculateDuration(msg);
+            SimTime duration = TC::outChannel->calculateDuration(sizeMsg);
+            delete sizeMsg;
             avbBuffer->sendSlope(duration);
         }
         else
@@ -251,7 +257,10 @@ cMessage* AVBShaper<SRCLASS, TC>::pop()
     {
         cMessage *msg = static_cast<cMessage*>(avbQueue.pop());
         cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.length()));
-        SimTime duration = TC::outChannel->calculateDuration(msg);
+        AVBFrame* sizeMsg = dynamic_cast<AVBFrame*>(msg->dup());
+        sizeMsg->setByteLength(sizeMsg->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
+        SimTime duration = TC::outChannel->calculateDuration(sizeMsg);
+        delete sizeMsg;
         avbBuffer->sendSlope(duration);
         return msg;
     }

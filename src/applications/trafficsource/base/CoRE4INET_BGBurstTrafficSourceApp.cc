@@ -36,7 +36,7 @@ void BGBurstTrafficSourceApp::sendMessage()
         unsigned long size_left = this->burstSize;
         while (size_left > 0)
         {
-            inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic");
+            inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic", 7); //kind 7 = black
 
             frame->setDest(this->getDestAddress());
 
@@ -72,6 +72,10 @@ void BGBurstTrafficSourceApp::handleParameterChange(const char* parname)
     {
         this->burstSize = parameterULongCheckRange(par("burstSize"), 1, ULONG_MAX, true);
     }
+}
+
+unsigned long BGBurstTrafficSourceApp::getBurstSize(){
+    return this->burstSize;
 }
 
 }

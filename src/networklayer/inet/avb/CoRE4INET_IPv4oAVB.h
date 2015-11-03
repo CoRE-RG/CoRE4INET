@@ -16,7 +16,7 @@
 #ifndef CORE4INET_IPV4OAVB_H_
 #define CORE4INET_IPV4OAVB_H_
 
-#include "FixedModuleAccess.h"
+#include "ModuleAccess.h"
 #include "IPv4.h"
 #include "CoRE4INET_IPv4oREBase.h"
 #include "CoRE4INET_Buffer.h"

@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CoRE4INET_IEEE8021QShaper_H
-#define __CoRE4INET_IEEE8021QShaper_H
+#ifndef CORE4INET_IEEE8021QShaper_H
+#define CORE4INET_IEEE8021QShaper_H
 
 //CoRE4INET
 #include "CoRE4INET_Timed.h"

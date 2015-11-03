@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBINCONTROL_H_
-#define __CORE4INET_AVBINCONTROL_H_
+#ifndef CORE4INET_AVBINCONTROL_H_
+#define CORE4INET_AVBINCONTROL_H_
 
 //CoRE4INET Auto-generated Messages
 #include "AVBFrame_m.h"
@@ -67,6 +67,7 @@ void AVBInControl<IC>::handleMessage(cMessage *msg)
         //Is AVB Frame?
         if (frame && isAVB(frame))
         {
+            this->recordPacketReceived(frame);
             cSimpleModule::sendDirect(frame,
                     cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
         }

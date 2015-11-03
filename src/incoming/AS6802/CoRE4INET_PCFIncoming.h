@@ -12,8 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __CORE4INET_PCFINCOMING_H_
-#define __CORE4INET_PCFINCOMING_H_
+#ifndef CORE4INET_PCFINCOMING_H_
+#define CORE4INET_PCFINCOMING_H_
 
 //CoRE4INET
 #include "CoRE4INET_CTIncoming.h"

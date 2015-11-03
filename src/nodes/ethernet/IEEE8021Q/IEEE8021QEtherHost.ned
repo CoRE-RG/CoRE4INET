@@ -106,7 +106,7 @@ module IEEE8021QEtherHost
         
         // Holds interface names
         interfaceTable: InterfaceTable {
-            @display("p=447,313");
+            @display("p=234,100");
         }
         
     connections allowunconnected:

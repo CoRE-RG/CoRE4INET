@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_SRPETHERLLC_H
-#define __CORE4INET_SRPETHERLLC_H
+#ifndef CORE4INET_SRPETHERLLC_H
+#define CORE4INET_SRPETHERLLC_H
 
 //CoRE4INET
 #include "CoRE4INET_BGEtherLLC.h"

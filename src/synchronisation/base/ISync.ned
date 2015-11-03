@@ -16,7 +16,6 @@
 package core4inet.synchronisation.base;
 
 import core4inet.linklayer.port.IPort;
-import core4inet.utilities.classes.IScheduled;
 
 //
 // Synchronisation module interface
@@ -25,7 +24,7 @@ import core4inet.utilities.classes.IScheduled;
 //
 // @author Till Steinbach
 //
-moduleinterface ISync extends IPort, IScheduled
+moduleinterface ISync extends IPort
 {
     parameters:
         @display("i=block/timer");

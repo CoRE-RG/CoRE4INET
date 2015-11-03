@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_CALLBACK_H_
-#define __CORE4INET_CALLBACK_H_
+#ifndef CORE4INET_CALLBACK_H_
+#define CORE4INET_CALLBACK_H_
 
 //CoRE4INET
 #include "CoRE4INET_Buffer.h"
@@ -109,4 +109,4 @@ class Callback : public cListener
 
 }
 
-#endif /* __CORE4INET_CALLBACK_H_ */
+#endif /* CORE4INET_CALLBACK_H_ */

@@ -35,16 +35,16 @@ simple TTBuffer extends CTBuffer like IScheduled
 {
     parameters:
         //TTBuffer is implemented by the TTBuffer C++ Class
-        @class(TTBuffer);
+        @class(AbstractSimpleModule);
         @display("i=,red");
         
         //Beginning of the send window in number of ticks (Changes to this parameter will get active for future scheduled frames only)
         int sendWindowStart @unit(tick);
         //End of the send window in number of ticks
         int sendWindowEnd @unit(tick) = default(0tick);
-
         //Period of Scheduler this buffer is assigned to
-        string period = default("^.scheduler.period[0]");
+        string period = default("period[0]");
+
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

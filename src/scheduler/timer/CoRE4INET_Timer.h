@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TIMER_H_
-#define __CORE4INET_TIMER_H_
+#ifndef CORE4INET_TIMER_H_
+#define CORE4INET_TIMER_H_
 
 //OMNeT++
 #include "omnetpp.h"
@@ -146,6 +146,7 @@ class Timer : public virtual cSimpleModule
          */
         uint64_t getTotalTicks();
 
+        simtime_t getTotalSimTime();
         /**
          * @brief Returns a pointer to the attached oscillator
          */

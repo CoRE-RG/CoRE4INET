@@ -12,8 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __CoRE4INET_INCONTROLS_H_
-#define __CoRE4INET_INCONTROLS_H_
+#ifndef CORE4INET_INCONTROLS_H_
+#define CORE4INET_INCONTROLS_H_
 
 //CoRE4INET
 #include "CoRE4INET_BaseInControl.h"

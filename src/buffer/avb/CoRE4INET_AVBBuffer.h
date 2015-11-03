@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBBUFFER_H_
-#define __CORE4INET_AVBBUFFER_H_
+#ifndef CORE4INET_AVBBUFFER_H_
+#define CORE4INET_AVBBUFFER_H_
 
 //CoRE4INET
 #include "CoRE4INET_Buffer.h"
@@ -37,7 +37,7 @@ namespace CoRE4INET {
  *
  * @ingroup Buffer
  */
-class AVBBuffer : public virtual Buffer, public virtual Timed
+class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
 {
         using Timed::initialize;
     public:
@@ -50,6 +50,7 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
          */
         virtual ~AVBBuffer();
 
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l) override;
     public:
         /**
          * @brief caculates new credit for idleslope time.
@@ -104,6 +105,8 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
          * @brief Maximum credit (can be observed in the GUI)
          */
         int maxCredit;
+        
+        simtime_t lastCreditEmitTime;
 
         /**
          * @brief Is true when frame is currently in transmission
@@ -123,7 +126,7 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
         /**
          * @brief Time until credit is zero
          */
-        simtime_t Wduration;
+        simtime_t wDuration;
 
         /**
          * @brief Length of one tick
@@ -173,7 +176,11 @@ class AVBBuffer : public virtual Buffer, public virtual Timed
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname) override;
+
+    private:
+        simtime_t getCurrentTime();
+        void emitCredit();
 };
 
 } /* namespace CoRE4INET */
-#endif /* __CORE4INET_AVBBUFFER_H_ */
+#endif /* CORE4INET_AVBBUFFER_H_ */

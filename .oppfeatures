@@ -188,7 +188,7 @@
         name="IP over realtime ethernet"
         description = "The implementation of IPv4 over realtime ethernet (AS6802, avb)"
         initiallyEnabled = "true"
-        requires = ""
+        requires = "AVB_common AS6802_common IEEE8021Q_common"
         labels = ""
         nedPackages = "
 

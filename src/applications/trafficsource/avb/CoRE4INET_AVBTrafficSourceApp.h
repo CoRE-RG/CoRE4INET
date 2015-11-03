@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBTRAFFICSOURCEAPP_H_
-#define __CORE4INET_AVBTRAFFICSOURCEAPP_H_
+#ifndef CORE4INET_AVBTRAFFICSOURCEAPP_H_
+#define CORE4INET_AVBTRAFFICSOURCEAPP_H_
 
 //OMNeT++
 #include "omnetpp.h"
@@ -77,4 +77,4 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
 };
 
 } /* namespace CoRE4INET */
-#endif /* __CORE4INET_AVBTRAFFICSOURCEAPP_H_ */
+#endif /* CORE4INET_AVBTRAFFICSOURCEAPP_H_ */

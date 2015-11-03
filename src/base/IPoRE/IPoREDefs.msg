@@ -23,5 +23,6 @@ enum DestinationType
 	DestinationType_AVB     = 0; //Destination tyee for AVB traffic
 	DestinationType_TT      = 1; //Destination type for time-triggeres traffic
 	DestinationType_RC      = 2; //Destination type for rate-constrained traffic
+	DestinationType_8021Q   = 3; //Destination type for IEEE 802.1Q traffic
 	DestinationType_invalid = 0xFF; //Destination type for rate-constrained traffic
 };

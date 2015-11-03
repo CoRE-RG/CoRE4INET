@@ -60,6 +60,8 @@ class BGBurstTrafficSourceApp : public virtual BGTrafficSourceApp
          *         */
         virtual void handleParameterChange(const char* parname) override;
 
+
+        unsigned long getBurstSize();
 };
 
 } //namespace

@@ -33,7 +33,7 @@ AVBIncoming::AVBIncoming()
 
 void AVBIncoming::initialize()
 {
-    this->srptable = dynamic_cast<SRPTable*>(getParentModule()->getSubmodule("srpTable"));
+    this->srptable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this);
     if(!srptable){
         throw cRuntimeError("Cannot find module srpTable in node. srpTable is required");
     }

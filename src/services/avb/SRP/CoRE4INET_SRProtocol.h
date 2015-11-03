@@ -13,13 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SRPROTOCOL_H_
-#define __CORE4INET_SRPROTOCOL_H_
+#ifndef CORE4INET_SRPROTOCOL_H_
+#define CORE4INET_SRPROTOCOL_H_
 
 //OMNeT++
 #include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
+
+namespace inet {
+template<typename T>
+T *getModuleFromPar(cPar& par, cModule *from);
+}
 
 namespace CoRE4INET {
 

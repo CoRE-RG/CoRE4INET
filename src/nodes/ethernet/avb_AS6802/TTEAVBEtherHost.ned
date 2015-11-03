@@ -133,7 +133,7 @@ module TTEAVBEtherHost
         
         // Holds interface names
         interfaceTable: InterfaceTable {
-            @display("p=447,313");
+            @display("p=208,99");
         }
         
     connections allowunconnected:

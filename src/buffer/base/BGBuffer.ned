@@ -30,6 +30,6 @@ simple BGBuffer extends Buffer
 {
     parameters:
         //BGBuffer is implemented by the BGBuffer C++ Class
-        @class(BGBuffer);
+        @class(AbstractSimpleModule);
         @display("i=,green");
 }

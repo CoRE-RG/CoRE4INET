@@ -32,6 +32,8 @@ simple AVBIncoming extends Incoming
         @class(AVBIncoming);
         @display("i=block/arrival,blue");
         
+		//SRP Table module, default name is srpTable
+        string srpTable = default("^.srpTable");
     gates:
         //outputs for AVB Class A Frames
         output AVBAout[] @labels(AVBFrame);

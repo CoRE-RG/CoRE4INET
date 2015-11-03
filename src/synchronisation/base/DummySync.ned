@@ -16,6 +16,7 @@
 package core4inet.synchronisation.base;
 
 import core4inet.utilities.classes.Scheduled;
+import core4inet.utilities.classes.IScheduled;
 
 //
 // Dummy synchronisation module that corrects the clock with a certain imprecission.
@@ -25,7 +26,7 @@ import core4inet.utilities.classes.Scheduled;
 //
 // @author Till Steinbach
 //
-simple DummySync extends Scheduled like ISync
+simple DummySync extends Scheduled like ISync, IScheduled
 {
     parameters:
         @class(DummySync);

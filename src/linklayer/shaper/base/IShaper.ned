@@ -26,5 +26,6 @@ import inet.common.queue.IOutputQueue;
 //
 moduleinterface IShaper extends IOutputQueue
 {
-    @display("i=block/classifier");
+    parameters:
+        @display("i=block/classifier");
 }

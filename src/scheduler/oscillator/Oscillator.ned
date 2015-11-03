@@ -25,6 +25,7 @@ package core4inet.scheduler.oscillator;
 simple Oscillator like IOscillator
 {
     parameters:
+        @class(AbstractSimpleModule);
         @display("i=block/mac");
         
 	    //Signal emitted when drift changes, contains new drift

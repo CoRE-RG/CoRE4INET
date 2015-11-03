@@ -35,21 +35,25 @@ void RCTrafficSourceApp::initialize()
     CTTrafficSourceAppBase::initialize();
 
     handleParameterChange(nullptr);
-    if (isEnabled())
-    {
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-
-        event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
-        event->setDestinationGate(gate("schedulerIn"));
-        getTimer()->registerEvent(event);
-    }
 }
 
 void RCTrafficSourceApp::handleMessage(cMessage *msg)
 {
 
     CTTrafficSourceAppBase::handleMessage(msg);
-    if (msg->arrivedOn("schedulerIn"))
+    if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
+    {
+        if (isEnabled())
+        {
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+
+            event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
+        }
+        delete msg;
+    }
+    else if (msg->arrivedOn("schedulerIn"))
     {
         if (ev.isGUI())
         {
@@ -62,7 +66,8 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg)
             event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
             getTimer()->registerEvent(event);
         }
-        else{
+        else
+        {
             throw cRuntimeError("Message on schedulerIn is of wrong type");
         }
     }

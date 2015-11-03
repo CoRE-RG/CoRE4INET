@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_SCHEDULEREVENT_H_
-#define __CORE4INET_SCHEDULEREVENT_H_
+#ifndef CORE4INET_SCHEDULEREVENT_H_
+#define CORE4INET_SCHEDULEREVENT_H_
 
 //Auto-generated Messages
 #include "scheduler/SchedulerMessage_m.h"
