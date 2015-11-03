@@ -33,7 +33,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  *
- * @sa AVBQueueBuffer, Buffer
+ * @sa AVBQueueBuffer, Buffer, Timed, cListener
  *
  * @ingroup Buffer
  */
@@ -53,7 +53,7 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
         virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l) override;
     public:
         /**
-         * @brief caculates new credit for idleslope time.
+         * @brief calculates new credit for idleslope time.
          *
          * @param duration since last calculation.
          */
@@ -106,6 +106,9 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
          */
         int maxCredit;
         
+        /**
+         * @brief Last emit time of the credit signal
+         */
         simtime_t lastCreditEmitTime;
 
         /**
@@ -178,7 +181,16 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
         virtual void handleParameterChange(const char* parname) override;
 
     private:
+        /**
+         * @brief Get current Time of the Node
+         *
+         * @return returns current Time
+         */
         simtime_t getCurrentTime();
+
+        /**
+         * @brief Emit credit signal
+         */
         void emitCredit();
 };
 
