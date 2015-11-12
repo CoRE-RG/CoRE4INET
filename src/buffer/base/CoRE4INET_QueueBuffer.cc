@@ -24,6 +24,7 @@ simsignal_t QueueBuffer::droppedSignal = registerSignal("dropped");
 QueueBuffer::QueueBuffer()
 {
     initializeStatistics();
+    queueSize = 0;
     WATCH(queueSize);
 }
 
