@@ -18,11 +18,13 @@
 namespace CoRE4INET {
 
 simsignal_t QueueBuffer::queueLengthSignal = registerSignal("length");
+simsignal_t QueueBuffer::queueSizeSignal = registerSignal("size");
 simsignal_t QueueBuffer::droppedSignal = registerSignal("dropped");
 
 QueueBuffer::QueueBuffer()
 {
     initializeStatistics();
+    WATCH(queueSize);
 }
 
 QueueBuffer::~QueueBuffer()
@@ -62,6 +64,8 @@ void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
     frames.insert(newFrame);
     setFilled(static_cast<size_t>(frames.length()));
     emit(queueLengthSignal, static_cast<unsigned long>(frames.length()));
+    queueSize+=newFrame->getByteLength();
+    emit(queueSizeSignal, queueSize);
 }
 
 inet::EtherFrame * QueueBuffer::dequeue()
@@ -70,7 +74,13 @@ inet::EtherFrame * QueueBuffer::dequeue()
     {
         setFilled(static_cast<size_t>(frames.length() - 1));
         emit(queueLengthSignal, static_cast<unsigned long>(frames.length() - 1));
-        return static_cast<inet::EtherFrame*>(frames.pop());
+
+        inet::EtherFrame* dequeueFrame = static_cast<inet::EtherFrame*>(frames.pop());
+
+        ASSERT2(queueSize>=static_cast<size_t>(dequeueFrame->getByteLength()),"queueSize would become negative");
+        queueSize-=dequeueFrame->getByteLength();
+        emit(queueSizeSignal, queueSize);
+        return dequeueFrame;
     }
     else
         return nullptr;

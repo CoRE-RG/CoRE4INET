@@ -32,17 +32,21 @@ simple RCQueueBuffer extends RCBuffer
         //RCQueueBuffer is implemented by the RCQueueBuffer C++ Class
         @class(RCQueueBuffer);
         @display("q=frames");
-        
+
         //Signal emitted when queuelength changes, contains new length
         @signal[length](type=unsigned long; unit=packets);
+        //Signal emitted when queuelength changes, contains new size in bytes
+        @signal[size](type=unsigned long; unit=bytes);
         //Signal emitted when frame is dropped due to buffer overflow, contains dropped EtherFrame
         @signal[dropped](type=inet::EtherFrame);
-        
+
         //Statistic of the queue length of the buffer
         @statistic[length](title="Queue Length"; source=length; unit=packets; record=vector; interpolationmode=sample-hold);
+        //Statistic of the queue size of the buffer in bytes
+        @statistic[size](title="Queue Size"; source=size; record=vector; unit=bytes; interpolationmode=sample-hold);
         //Statistic of the number of packets that were dropped due to buffer overflows
         @statistic[dropped](title="Dropped packets"; source=dropped; unit=packets; record=count);
-        
+
         //Size of the buffer negative means infinite
         int size = default(-1);
         //Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)
