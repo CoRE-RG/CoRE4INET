@@ -64,7 +64,7 @@ void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
     frames.insert(newFrame);
     setFilled(static_cast<size_t>(frames.length()));
     emit(queueLengthSignal, static_cast<unsigned long>(frames.length()));
-    queueSize+=newFrame->getByteLength();
+    queueSize+=static_cast<size_t>(newFrame->getByteLength());
     emit(queueSizeSignal, queueSize);
 }
 
@@ -78,7 +78,7 @@ inet::EtherFrame * QueueBuffer::dequeue()
         inet::EtherFrame* dequeueFrame = static_cast<inet::EtherFrame*>(frames.pop());
 
         ASSERT2(queueSize>=static_cast<size_t>(dequeueFrame->getByteLength()),"queueSize would become negative");
-        queueSize-=dequeueFrame->getByteLength();
+        queueSize-=static_cast<size_t>(dequeueFrame->getByteLength());
         emit(queueSizeSignal, queueSize);
         return dequeueFrame;
     }
