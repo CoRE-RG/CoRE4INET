@@ -14,5 +14,5 @@
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       1s,              a208-6024
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            b25c-e5ad
 /examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              8b0e-1977
-/examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c General -r 0,                        1s,              f7e7-5fe7
-/examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              0a06-be47
+/examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c General -r 0,                        1s,              5d32-bd45
+/examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c With_Crosstraffic -r 0,              1s,              17d4-3a9f
