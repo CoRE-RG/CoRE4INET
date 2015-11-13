@@ -29,6 +29,7 @@ IEEE8021QTrafficSourceApp::IEEE8021QTrafficSourceApp()
 {
     this->sendInterval = 0;
     this->priority = 0;
+    this->vid = 0;
 }
 
 void IEEE8021QTrafficSourceApp::handleMessage(cMessage *msg)

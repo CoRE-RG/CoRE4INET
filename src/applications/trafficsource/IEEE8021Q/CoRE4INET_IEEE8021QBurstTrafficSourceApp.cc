@@ -29,6 +29,7 @@ Define_Module(IEEE8021QBurstTrafficSourceApp);
 IEEE8021QBurstTrafficSourceApp::IEEE8021QBurstTrafficSourceApp()
 {
     this->priority = 0;
+    this->vid = 0;
 }
 
 void IEEE8021QBurstTrafficSourceApp::sendMessage()
