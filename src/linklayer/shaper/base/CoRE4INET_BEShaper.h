@@ -16,6 +16,9 @@
 #ifndef CORE4INET_BESHAPER_H
 #define CORE4INET_BESHAPER_H
 
+//INET
+#include "EtherFrame.h"
+
 namespace CoRE4INET {
 
 /**
@@ -48,12 +51,21 @@ class BEShaper : public TC
          * @brief Signal that is emitted when the queue length of best-effort messages changes.
          */
         static simsignal_t beQueueLengthSignal;
+        /**
+         * @brief Signal that is emitted when the queue size (in bytes) of best-effort messages changes.
+         */
+        static simsignal_t beQueueSizeSignal;
 
     private:
         /**
          * @brief Queue for best-effort messages
          */
         cQueue beQueue;
+
+        /**
+         * @brief caches queue size in bytes
+         */
+        size_t beQueueSize;
 
     protected:
         /**
@@ -137,11 +149,15 @@ class BEShaper : public TC
 
 template<class TC>
 simsignal_t BEShaper<TC>::beQueueLengthSignal = cComponent::registerSignal("beQueueLength");
+template<class TC>
+simsignal_t BEShaper<TC>::beQueueSizeSignal = cComponent::registerSignal("beQueueSize");
 
 template<class TC>
 BEShaper<TC>::BEShaper()
 {
     beQueue.setName("BE Messages");
+    beQueueSize = 0;
+    WATCH(beQueueSize);
 }
 
 template<class TC>
@@ -158,6 +174,8 @@ void BEShaper<TC>::initialize(int stage)
     {
         //Send initial signal to create statistic
         cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
+        //Send initial signal to create statistic
+        cComponent::emit(beQueueSizeSignal, static_cast<unsigned long>(0));
     }
 }
 
@@ -200,6 +218,8 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
     {
         beQueue.insert(msg);
         cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
+        beQueueSize+=check_and_cast<inet::EtherFrame*>(msg)->getByteLength();
+        cComponent::emit(beQueueSizeSignal, static_cast<unsigned long>(beQueueSize));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing BE frame" << endl;
     }
@@ -212,8 +232,7 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
 template<class TC>
 void BEShaper<TC>::requestPacket()
 {
-    Enter_Method
-    ("requestPacket()");
+    Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -227,13 +246,15 @@ void BEShaper<TC>::requestPacket()
 template<class TC>
 cMessage* BEShaper<TC>::pop()
 {
-    Enter_Method
-    ("pop()");
+    Enter_Method("pop()");
     //BEFrames
     if (!beQueue.isEmpty())
     {
         cMessage* message = static_cast<cMessage*>(beQueue.pop());
         cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
+
+        beQueueSize-=check_and_cast<inet::EtherFrame*>(message)->getByteLength();
+        cComponent::emit(beQueueSizeSignal, static_cast<unsigned long>(beQueueSize));
         return message;
     }
     return TC::pop();
@@ -242,8 +263,7 @@ cMessage* BEShaper<TC>::pop()
 template<class TC>
 cMessage* BEShaper<TC>::front()
 {
-    Enter_Method
-    ("front()");
+    Enter_Method("front()");
     //BEFrames
     if (!beQueue.isEmpty())
     {

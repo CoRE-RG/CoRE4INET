@@ -40,6 +40,10 @@ simple IEEE8021Q_Shaper like IShaper
 		string oscillator = default("^.^.scheduler.oscillator");
 		//Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.^.scheduler.timer");
+        //Untagged VLAN. Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged
+        int untaggedVID = default(0);
+        //Interface allows frames with this VLAN to enter and leave the port
+        string taggedVIDs = default("0");
         
     gates:
         //Input for IEEE802.1Q frames from the upper layer (EtherLLC or IMacRelayUnit)

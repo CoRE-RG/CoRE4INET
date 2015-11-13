@@ -16,9 +16,13 @@
 #ifndef CORE4INET_IEEE8021QShaper_H
 #define CORE4INET_IEEE8021QShaper_H
 
+#include <algorithm>    // std::sort
+
 //CoRE4INET
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_HelperFunctions.h"
+#include "CoRE4INET_ConfigFunctions.h"
+#include "CoRE4INET_Defs.h"
 //Auto-generated Messages
 #include "EtherFrameWithQTag_m.h"
 
@@ -57,7 +61,12 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * @brief Untagged VLAN.
          * Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged.
          */
-        uint_16t untaggedVLAN;
+        uint16_t untaggedVID;
+        /**
+         * @brief Tagged VLANs.
+         * Only outgoing frames with one of the VLANs in this list are transmitted. Default is "0" to allow for untagged frames
+         */
+        std::vector<int> taggedVIDs;
     protected:
         /**
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
@@ -154,7 +163,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
 template<class TC>
 IEEE8021QShaper<TC>::IEEE8021QShaper()
 {
-    untaggedVLAN = 0;
+    untaggedVID = 0;
 }
 
 template<class TC>
@@ -237,6 +246,36 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
+        if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+        {
+            //VLAN untag if requested
+            if (this->untaggedVID && this->untaggedVID == qframe->getVID())
+            {
+                qframe->setVID(0);
+            }
+            //VLAN check if port is tagged with vlan
+            bool found = false;
+            for (std::vector<int>::iterator vid = this->taggedVIDs.begin(); vid != this->taggedVIDs.end(); ++vid)
+            {
+                //Shortcut due to sorted vector
+                if ((*vid) > qframe->getVID())
+                {
+                    break;
+                }
+                if ((*vid) == qframe->getVID())
+                {
+                    found = true;
+                    break;
+                }
+                if (!found)
+                {
+                    delete qframe;
+                    return;
+                }
+            }
+
+        }
+
         uint8_t priority = 0;
         if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
         {
@@ -268,7 +307,7 @@ void IEEE8021QShaper<TC>::requestPacket()
 {
     Enter_Method
     ("requestPacket()");
-    //Feed the MAC layer with the next frame
+//Feed the MAC layer with the next frame
     TC::framesRequested++;
 
     if (cMessage *msg = pop())
@@ -340,12 +379,16 @@ void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
 {
     TC::handleParameterChange(parname);
 
-    if (!parname || !strcmp(parname, "untaggedVLAN"))
+    if (!parname || !strcmp(parname, "untaggedVID"))
     {
-        this->untaggedVLAN = static_cast<uint16>(parameterULongCheckRange(par("untaggedVLAN"), 0, MAX_VLAN_NUMBER));
+        this->untaggedVID = static_cast<uint16>(parameterULongCheckRange(par("untaggedVID"), 0, MAX_VLAN_NUMBER));
+    }
+    if (!parname || !strcmp(parname, "taggedVIDs"))
+    {
+        taggedVIDs = cStringTokenizer(par("taggedVIDs"), ",").asIntVector();
+        std::sort(taggedVIDs.begin(), taggedVIDs.end());
     }
 }
-
 
 }
 

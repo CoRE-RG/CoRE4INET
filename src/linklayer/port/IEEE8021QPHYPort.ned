@@ -40,9 +40,9 @@ module IEEE8021QPHYPort
         //Module holds Interfacenames
         string interfaceTableModule;
         //Untagged VLAN. Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged
-        int untaggedVLAN = default(0);
+        int untaggedVID = default(0);
         //Interface allows frames with this VLAN to enter and leave the port
-        string taggedVLANs = default("0");
+        string taggedVIDs = default("0");
         
         *.interfaceTableModule = default(absPath(interfaceTableModule));
         
@@ -58,6 +58,8 @@ module IEEE8021QPHYPort
         //Module for the organisation of outbound traffic
         shaper: IEEE8021Q_Shaper {
             @display("p=48,45");
+            untaggedVID = untaggedVID;
+            taggedVIDs = taggedVIDs;
         }
         
         //Module for the organisation of inbound traffic
