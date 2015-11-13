@@ -61,7 +61,8 @@ void IEEE8021QTrafficSourceApp::sendMessage()
         payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
         frame->encapsulate(payload_packet);
         frame->setPcp(priority);
-        frame->setSchedulingPriority(static_cast<short>(SCHEDULING_PRIORITY_OFFSET_8021Q-priority));
+        frame->setVID(this->vid);
+        frame->setSchedulingPriority(static_cast<short>(SCHEDULING_PRIORITY_OFFSET_8021Q - priority));
         //Padding
         if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
         {
@@ -98,6 +99,10 @@ void IEEE8021QTrafficSourceApp::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "priority"))
     {
         this->priority = static_cast<uint8_t>(parameterLongCheckRange(par("priority"), 0, 7));
+    }
+    if (!parname || !strcmp(parname, "vid"))
+    {
+        this->vid = static_cast<uint16_t>(parameterLongCheckRange(par("vid"), 0, MAX_VLAN_ID));
     }
 }
 

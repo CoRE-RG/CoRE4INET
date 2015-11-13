@@ -36,7 +36,10 @@ class IEEE8021QBurstTrafficSourceApp: public virtual BGBurstTrafficSourceApp
          * @brief caches priority parameter
          */
         uint8_t priority;
-
+        /**
+         * @brief caches vid parameter
+         */
+        uint16_t vid;
     public:
         /**
          * @brief Constructor of IEEE8021QBurstTrafficSourceApp

@@ -32,4 +32,6 @@ simple IEEE8021QTrafficSourceApp extends BGTrafficSourceApp
         
         // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
     	int priority = default(0);
+    	// VLAN ID (0=untagged, 4094=Highest)
+    	int vid = default(0);
 }

@@ -30,7 +30,9 @@ simple IEEE8021QBurstTrafficSourceApp extends BGBurstTrafficSourceApp
     parameters:
         @class(IEEE8021QBurstTrafficSourceApp);
         @display("i=block/source,darkgreen");
-        
+
         // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
-    	int priority = default(0);
+        int priority = default(0);
+    	// VLAN ID (0=untagged, 4094=Highest)
+        int vid = default(0);
 }
