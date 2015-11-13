@@ -39,6 +39,10 @@ module IEEE8021QPHYPort
         double static_tx_delay @unit(s) = default(0ns);
         //Module holds Interfacenames
         string interfaceTableModule;
+        //Untagged VLAN. Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged
+        int untaggedVLAN = default(0);
+        //Interface allows frames with this VLAN to enter and leave the port
+        string taggedVLANs = default("0");
         
         *.interfaceTableModule = default(absPath(interfaceTableModule));
         

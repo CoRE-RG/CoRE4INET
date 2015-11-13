@@ -53,6 +53,11 @@ class IEEE8021QShaper : public TC, public virtual Timed
          */
         std::vector<cQueue> qQueue;
 
+        /**
+         * @brief Untagged VLAN.
+         * Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged.
+         */
+        uint_16t untaggedVLAN;
     protected:
         /**
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
@@ -137,11 +142,19 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * queues are empty
          */
         virtual cMessage *front() override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 template<class TC>
 IEEE8021QShaper<TC>::IEEE8021QShaper()
 {
+    untaggedVLAN = 0;
 }
 
 template<class TC>
@@ -225,7 +238,8 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         uint8_t priority = 0;
-        if(EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg)){
+        if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+        {
             priority = qframe->getPcp();
         }
         if (priority >= 0 && static_cast<size_t>(priority) < 8)
@@ -239,7 +253,8 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
         {
             qQueue[0].insert(msg);
             TC::notifyListeners();
-            EV_WARN << "Priority of message "<< msg->getFullName() <<" missing or not within range, using default priority 0!" << endl;
+            EV_WARN << "Priority of message " << msg->getFullName()
+                    << " missing or not within range, using default priority 0!" << endl;
         }
     }
     else
@@ -271,10 +286,10 @@ cMessage* IEEE8021QShaper<TC>::pop()
 
     for (size_t i = 8; i > 0; i--)
     {
-        if (!qQueue[i-1].isEmpty())
+        if (!qQueue[i - 1].isEmpty())
         {
-            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i-1].pop());
-            cComponent::emit(qQueueLengthSignals[i-1], static_cast<unsigned long>(qQueue[i-1].length()));
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].pop());
+            cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i - 1].length()));
             return message;
         }
     }
@@ -289,9 +304,9 @@ cMessage* IEEE8021QShaper<TC>::front()
 
     for (size_t i = 8; i > 0; i--)
     {
-        if (!qQueue[i-1].isEmpty())
+        if (!qQueue[i - 1].isEmpty())
         {
-            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i-1].front());
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].front());
             return message;
         }
     }
@@ -319,6 +334,18 @@ void IEEE8021QShaper<TC>::clear()
         qQueue[i].clear();
     }
 }
+
+template<class TC>
+void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
+{
+    TC::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "untaggedVLAN"))
+    {
+        this->untaggedVLAN = static_cast<uint16>(parameterULongCheckRange(par("untaggedVLAN"), 0, MAX_VLAN_NUMBER));
+    }
+}
+
 
 }
 
