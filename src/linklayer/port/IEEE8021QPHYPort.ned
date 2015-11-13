@@ -15,7 +15,7 @@
  
 package core4inet.linklayer.port;
 
-import core4inet.linklayer.inControl.base.BE_InControl;
+import core4inet.linklayer.inControl.IEEE8021Q.IEEE8021Q_InControl;
 import core4inet.linklayer.shaper.IEEE8021Q_Shaper;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
@@ -63,10 +63,12 @@ module IEEE8021QPHYPort
         }
         
         //Module for the organisation of inbound traffic
-        inControl: BE_InControl {
+        inControl: IEEE8021Q_InControl {
             parameters:
                 @display("p=142,45");
                 promiscuous = promiscuous;
+                untaggedVID = untaggedVID;
+            	taggedVIDs = taggedVIDs;
         }
         
         //MAC interface

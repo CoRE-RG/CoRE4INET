@@ -218,6 +218,35 @@ void IEEE8021QShaper<TC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
+        if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+        {
+            //VLAN untag if requested
+            if (this->untaggedVID && this->untaggedVID == qframe->getVID())
+            {
+                qframe->setVID(0);
+            }
+            //VLAN check if port is tagged with VLAN
+            bool found = false;
+            for (std::vector<int>::iterator vid = this->taggedVIDs.begin(); vid != this->taggedVIDs.end(); ++vid)
+            {
+                //Shortcut due to sorted vector
+                if ((*vid) > qframe->getVID())
+                {
+                    break;
+                }
+                if ((*vid) == qframe->getVID())
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                delete qframe;
+                return;
+            }
+        }
+
         if (TC::getNumPendingRequests())
         {
             TC::framesRequested--;
@@ -246,36 +275,6 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
-        {
-            //VLAN untag if requested
-            if (this->untaggedVID && this->untaggedVID == qframe->getVID())
-            {
-                qframe->setVID(0);
-            }
-            //VLAN check if port is tagged with vlan
-            bool found = false;
-            for (std::vector<int>::iterator vid = this->taggedVIDs.begin(); vid != this->taggedVIDs.end(); ++vid)
-            {
-                //Shortcut due to sorted vector
-                if ((*vid) > qframe->getVID())
-                {
-                    break;
-                }
-                if ((*vid) == qframe->getVID())
-                {
-                    found = true;
-                    break;
-                }
-                if (!found)
-                {
-                    delete qframe;
-                    return;
-                }
-            }
-
-        }
-
         uint8_t priority = 0;
         if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
         {
