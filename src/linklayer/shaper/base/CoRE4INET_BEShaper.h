@@ -218,7 +218,7 @@ void BEShaper<TC>::enqueueMessage(cMessage *msg)
     {
         beQueue.insert(msg);
         cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
-        beQueueSize+=check_and_cast<inet::EtherFrame*>(msg)->getByteLength();
+        beQueueSize+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
         cComponent::emit(beQueueSizeSignal, static_cast<unsigned long>(beQueueSize));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing BE frame" << endl;
@@ -253,7 +253,7 @@ cMessage* BEShaper<TC>::pop()
         cMessage* message = static_cast<cMessage*>(beQueue.pop());
         cComponent::emit(beQueueLengthSignal, static_cast<unsigned long>(beQueue.length()));
 
-        beQueueSize-=check_and_cast<inet::EtherFrame*>(message)->getByteLength();
+        beQueueSize-=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(message)->getByteLength());
         cComponent::emit(beQueueSizeSignal, static_cast<unsigned long>(beQueueSize));
         return message;
     }
