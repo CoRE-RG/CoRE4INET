@@ -39,7 +39,7 @@ simple Incoming like IIncoming
     //Signal emitted when frame is dropped due to implemented policy, contains dropped EtherFrame
     @signal[droppedPk](type=inet::EtherFrame);
     //Statistic of the number of packets that were dropped by the incoming module
-    @statistic[dropped](title="Packets Dropped"; source=droppedPk; record=count,"vector(sum(constant1))");
+    @statistic[dropped](title="Packets Dropped"; source=droppedPk; record=count,"vector(constant1)");
     //Statistic of the number of packets that were received by the incoming module
     @statistic[rxPk](title="Received Packets"; source=rxPk; record=count);
     //Statistic of the number of bytes that were recveived by the incoming module
