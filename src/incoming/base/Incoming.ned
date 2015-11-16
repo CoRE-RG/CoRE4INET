@@ -38,11 +38,11 @@ simple Incoming like IIncoming
     @signal[rxPk](type=inet::EtherFrame);
     //Signal emitted when frame is dropped due to implemented policy, contains dropped EtherFrame
     @signal[droppedPk](type=inet::EtherFrame);
-    //Statistic of the amount of packets that were dropped by the incoming module
-    @statistic[dropped](title="Packets Dropped"; source=droppedPk; record=count);
-    //Statistic of the amount of packets that were received by the incoming module
+    //Statistic of the number of packets that were dropped by the incoming module
+    @statistic[dropped](title="Packets Dropped"; source=droppedPk; record=count,"vector(sum(constant1))");
+    //Statistic of the number of packets that were received by the incoming module
     @statistic[rxPk](title="Received Packets"; source=rxPk; record=count);
-    //Statistic of the amount of bytes that were recveived by the incoming module
+    //Statistic of the number of bytes that were recveived by the incoming module
     @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
     //Statistic of the end-to-end latency
     @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
