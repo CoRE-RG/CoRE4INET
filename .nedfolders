@@ -2,7 +2,14 @@ examples
 simulations
 src
 tests/module/lib
--core4inet.examples.AS6802.synchronization
--core4inet.configuration.base
 -core4inet.synchronisation.AS6802
+-core4inet.api.AS6802
+-core4inet.nodes.inet
+-core4inet.examples.inet
+-core4inet.applications.api.AS6802
+-core4inet.networklayer.inet
 -ttethernet.examples.synchronization.HighIntegrity_small
+-core4inet.examples.AS6802.rt_tictoc
+-core4inet.configuration.base
+-core4inet.base.IPoRE
+-core4inet.examples.AS6802.synchronization

@@ -15,8 +15,12 @@
 
 package core4inet.applications.api.AS6802;
 
+// 
+// Simple Test-Application based on the TTEthernet-API.
 //
-// TODO auto-generated module
+// @see ~TTEAPIApplicationBase, ~ApplicationBase
+//
+// @author Till Steinbach
 //
 simple TTEAPITestApplication extends TTEAPIApplicationBase
 {

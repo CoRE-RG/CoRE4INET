@@ -34,9 +34,8 @@ namespace CoRE4INET {
  * @sa TTEApplicationBase
  * @ingroup Applications
  *
- * @author Philipp Meyer
+ * @author Philipp Meyer, Till Steinbach
  *
- * TODO Normal: Documentation
  */
 
 class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual Timed, public virtual cListener
@@ -61,11 +60,14 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
          * @brief Handles message generation
          */
         virtual void handleMessage(cMessage *msg) override;
-
+        /**
+         * @brief Sends an AVBFrame
+         */
         void sendAVBFrame();
-
+        /**
+         * @brief Receives Stream Reservation Protocol signals
+         */
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
-
         /**
          * @brief Indicates a parameter has changed.
          *

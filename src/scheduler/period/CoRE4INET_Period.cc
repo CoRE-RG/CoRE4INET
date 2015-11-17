@@ -19,7 +19,7 @@
 #include <exception>
 //CoRE4INET
 #include "CoRE4INET_Timer.h"
-#include "CoRE4INET_AS6802Defs.h"
+#include "CoRE4INET_Defs.h"
 #include "CoRE4INET_ConfigFunctions.h"
 
 namespace CoRE4INET {

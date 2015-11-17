@@ -23,20 +23,23 @@ package core4inet.scheduler.period;
 simple Period
 {
     parameters:
+        @display("i=block/table");
+        
         //Signal emitted when a new cycle starts
         @signal[newCycle]();
         //Statistic of the beginning of a new cycle
         @statistic[newCycle](title="Start of cycle"; record=vector?; interpolationmode=none);
         //Statistic of the number of cycles 
         @statistic[numberOfCycles](title="Number of cycle"; source=newCycle; record=count; interpolationmode=none);
+        
         // Number of ticks for one cycle
         int cycle_ticks @unit(tick) = default(37500tick);
         // Number of ticks offset
         int offset_ticks @unit(tick) = default(0tick);
-        @display("i=block/table");
+        
     gates:
         //Output to the timer module (currently unused)
         output out;
         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn @directIn;
+        input schedulerIn @directIn @label(SchedulerMessage);
 }

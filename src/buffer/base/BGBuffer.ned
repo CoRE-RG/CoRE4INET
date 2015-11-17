@@ -15,12 +15,15 @@
 package core4inet.buffer.base;
 
 //
-// Represents an abstract Buffer for background traffic. Messages are sent immediatly to the LLC
+// Represents an abstract Buffer for background traffic. Messages are immediatly forwarded.
 //
 //
 // @warning Do not instantiate the module. Use BGQueueBuffer instead!
 //
-// @see BGQueueBuffer, Buffer, SchedulerActionTimeEvent, TTEScheduler
+// @todo The BGBuffer module should be converted to an interface since it should
+// not be used directly in simulation.
+//
+// @see BGQueueBuffer, Buffer
 //
 // @author Till Steinbach
 simple BGBuffer extends Buffer

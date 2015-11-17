@@ -31,7 +31,7 @@ namespace CoRE4INET {
  * @sa ApplicationBase
  * @ingroup Applications
  *
- * @author Till Steinbach
+ * @author Till Steinbach, Philipp Meyer
  */
 class AVBTrafficSinkApp : public virtual TrafficSinkApp, public virtual cListener
 {

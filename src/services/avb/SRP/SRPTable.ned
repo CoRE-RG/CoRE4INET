@@ -18,7 +18,6 @@ package core4inet.services.avb.SRP;
 //
 // This module handles the mapping between ports and streams.
 //
-//
 // @todo If needed, srp tables can be pre-loaded from text files at the beginning
 // of the simulation; this controlled by the srpTableFile module parameter.
 //

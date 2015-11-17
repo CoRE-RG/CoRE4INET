@@ -15,21 +15,26 @@
 
 package core4inet.utilities.modules;
 
+//
 // The MessageNumProfiler is able to profile the number of messages each module
 // stores. In a configurable time interval it triggers a profile run which
 // recursively scans all modules starting at the root. This allows to find
 // misconfigured modules and memory leaks.
+//
+// @author Till Steinbach
+//
 simple MessageNumProfiler
 {
     parameters:
+        @display("i=block/cogwheel");
+        
         //Print messages to std::cerr instead of EV
         bool print_cerr = default(true);
         //Also print the messages residing in the module
         bool print_msgs = default(true);
         // Interval in which the profiler is run
         double interval @unit(s) = default(1s);
-        // Maximum allowed number of messages in the module (Modules with less
-        // messages are not evaluated
+        // Maximum allowed number of messages in the module (Modules with less messages are not evaluated)
         int max_messages = default(0);
         // Maximum messages in the whole system (-1 means do not check)
         int max_live_messages = default(-1);
@@ -37,5 +42,4 @@ simple MessageNumProfiler
         int max_scheduled_messages = default(-1);
         // Throw exceptionwhen limits are not met. Simulation is beeing stopped
         bool throw_error = default(false);
-        @display("i=block/cogwheel");
 }

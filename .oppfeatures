@@ -184,20 +184,6 @@
         linkerFlags = ""
         />
     <feature
-        id="ConfigurationManager"
-        name="Configuration Managers"
-        description = "Configuration Managers can read a Network Configuration in a specific file-format to configure the simulation"
-        initiallyEnabled = "false"
-        requires = ""
-        labels = ""
-        nedPackages = "
-                       core4inet.configuration.base
-                      "
-        extraSourceFolders = ""
-        compileFlags = "-DWITH_CONFIGURATION_MANAGER"
-        linkerFlags = ""
-        />
-    <feature
         id="IPoRE"
         name="IP over realtime ethernet"
         description = "The implementation of IPv4 over realtime ethernet (AS6802, avb)"

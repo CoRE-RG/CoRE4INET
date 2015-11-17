@@ -38,7 +38,7 @@ std::vector<cModule*> parameterToModuleList(const cPar &parameter, const std::st
     std::vector<std::string> paths = cStringTokenizer(parameter, delimiters.c_str()).asVector();
     for (std::vector<std::string>::const_iterator path = paths.begin(); path != paths.end(); ++path)
     {
-        cModule* module = simulation.getModuleByPath((*path).c_str());
+        cModule* module = owner->getModuleByPath((*path).c_str());
         if (!module)
         {
             module = findModuleWhereverInNode((*path).c_str(), owner);

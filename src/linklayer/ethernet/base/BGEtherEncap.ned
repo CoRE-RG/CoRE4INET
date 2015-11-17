@@ -20,8 +20,7 @@ import inet.linklayer.ethernet.EtherEncap;
 //
 // This module forwards frames (~EtherFrame) to the bg buffers
 //
-//
-// @see EtherEncap, SRProtocol
+// @see ~EtherEncap, ~SRProtocol
 // 
 // @author Kai-Uwe von Deylen
 //

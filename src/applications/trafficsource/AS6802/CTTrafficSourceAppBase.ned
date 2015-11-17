@@ -20,12 +20,13 @@ import core4inet.applications.trafficsource.base.TrafficSourceAppBase;
 //
 // Abstract base traffic source application used for various traffic generators.
 // Uses CTFrame with encapsulated cPacket as payload
-// Since this is an abstract module please do not instantiate it
 //
+// @warning Since this is an abstract module please do not instantiate it!
 //
-// @see TTTrafficSourceApp, RCTrafficSourceApp
+// @see ~TrafficSourceAppBase, ~TTTrafficSourceApp, ~RCTrafficSourceApp
 //
 // @author Till Steinbach
+//
 simple CTTrafficSourceAppBase extends TrafficSourceAppBase
 {
     parameters:
@@ -34,4 +35,8 @@ simple CTTrafficSourceAppBase extends TrafficSourceAppBase
 
         //Critical traffic identifier of the message that is being generated (-1) means don't set ID
         int ct_id = default(-1);
+        //Oscillator of Scheduler this app is assigned to
+        string oscillator = default("^.scheduler.oscillator");
+        //Timer of Scheduler this app is assigned to
+        string timer = default("^.scheduler.timer");
 }

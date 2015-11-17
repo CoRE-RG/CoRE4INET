@@ -22,10 +22,10 @@ import core4inet.applications.base.ApplicationBase;
 // Uses CTFrame with encapsulated cPacket as payload
 // Since this is an abstract module please do not instantiate it
 //
-//
-// @see TTTrafficSourceApp, RCTrafficSourceApp
+// @see ~ApplicationBase, ~TTTrafficSourceApp, ~RCTrafficSourceApp
 //
 // @author Till Steinbach
+//
 simple TrafficSourceAppBase extends ApplicationBase
 {
     parameters:
@@ -35,8 +35,7 @@ simple TrafficSourceAppBase extends ApplicationBase
         // Trafficsource enabled or disabled
         bool enabled = default(true);
         // Start time
-        double start_time @unit(s) = default(0s);
-
+        double startTime @unit(s) = default(0s);
         //Size of the payload of the message (size of encapsulated cPacket) that is being generated
         volatile int payload @unit(Byte) = default(46Byte);
         

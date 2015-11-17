@@ -18,18 +18,18 @@ package core4inet.applications.trafficsink.base;
 //
 // Traffic sink application used for statistics collection of best-effort traffic.
 //
-// @see TrafficSinkApp
+// @see ~TrafficSinkApp
 //
 // @author Till Steinbach
+//
 simple BGTrafficSinkApp extends TrafficSinkApp
 {
     parameters:
         @class(BGTrafficSinkApp);
         @display("i=block/sink,green");
 
-        // source MAC address empty or 00:00:00:00:00:00 means all
-        string srcAddress = default("00:00:00:00:00:00");
-        
+        //Source MAC address empty or 00:00:00:00:00:00 means all
+        string srcAddress = default("00:00:00:00:00:00");      
         //Replay each frame;
         bool reply = default(false);
         //Replay first frame to update tables in switches;

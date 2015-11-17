@@ -66,3 +66,24 @@ Define_NED_Function2(ned_tick_to_sec, "quantity tick_to_sec(quantity ticks, quan
         "Converts ticks to seconds. Uses ticklength specified in oscillator or ticklength parameter if specified");
 Define_NED_Function2(ned_tick_to_sec, "quantity t2s(quantity ticks, quantity ticklength?)", "units",
         "Alias for tick_to_sec");
+
+static cNEDValue ned_find_module_wherever_in_node(cComponent *context, cNEDValue argv[],
+        __attribute__((unused)) int argc)
+{
+    const char* name = argv[0].stringValue();
+    cModule* contextModule = dynamic_cast<cModule*>(context);
+    if(!contextModule)
+    {
+        throw cRuntimeError("find_in_node(): can only be used for parameters inside a networkNode!");
+    }
+    cModule* module = CoRE4INET::findModuleWhereverInNode(name, contextModule);
+    if (!module)
+    {
+        throw cRuntimeError("find_in_node(): cannot find a module with this name!");
+    }
+    return module->getFullPath();
+}
+
+Define_NED_Function2(ned_find_module_wherever_in_node, "string find_in_node(string name)", "ned",
+        "Tries to find a module with name name in the current node");
+Define_NED_Function2(ned_find_module_wherever_in_node, "string find(string name)", "ned", "Alias for find_in_node");

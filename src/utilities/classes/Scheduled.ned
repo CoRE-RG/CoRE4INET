@@ -16,7 +16,9 @@
 package core4inet.utilities.classes;
 
 //
-// abstract base for a module that uses a scheduler to schedule actions at action points
+// Abstract base for a module that uses a scheduler to schedule actions at action points
+//
+// @see ~Timed, ~IScheduled
 //
 // @author Till Steinbach
 //
@@ -25,6 +27,7 @@ simple Scheduled extends Timed like IScheduled
     parameters:
         //Is actually implemented by Scheduled C++ class
         @class(AbstractSimpleModule);
+        
         //Period of the scheduled module (must be set to the name of a period module in the Node) when left empty: period[0]
-        string period = default("");
+        string period = default("period[0]");
 }

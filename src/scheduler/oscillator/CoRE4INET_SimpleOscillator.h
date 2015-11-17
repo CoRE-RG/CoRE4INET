@@ -47,11 +47,13 @@ class SimpleOscillator : public Oscillator, Scheduled
          * Simulation time when the oscillator was recalculated the last time
          */
         simtime_t lastCorrection;
+
     protected:
         /**
          * @brief Initializes the module and registers the event for the recalculation of the drift
          */
         virtual void initialize(int stage);
+
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
@@ -70,6 +72,7 @@ class SimpleOscillator : public Oscillator, Scheduled
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname);
+
     public:
         /**
          * @brief constructor for SimpleOscillator

@@ -27,6 +27,8 @@ namespace CoRE4INET {
  * In a configurable time interval it triggers a profile run which recursively
  * scans all modules starting at the root. This allows to find misconfigured
  * modules and memory leaks.
+ *
+ * @author Till Steinbach
  */
 class MessageNumProfiler : public cSimpleModule
 {
@@ -42,6 +44,7 @@ class MessageNumProfiler : public cSimpleModule
          * @param msg Incoming self message
          */
         virtual void handleMessage(cMessage *msg) override;
+
     private:
         /**
          * @brief Calculates the sum of messages of the given module and its
@@ -93,7 +96,11 @@ class MessageNumProfiler : public cSimpleModule
          * @return String containing the tree of modules exceeding the limits
          */
         std::string printMessages(cModule *root, size_t limit, bool print_msgs = false, size_t level = 0);
+
     public:
+        /**
+         * @brief Constructor
+         */
         MessageNumProfiler();
 };
 

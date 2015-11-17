@@ -20,21 +20,24 @@ import core4inet.applications.base.ApplicationBase;
 //
 // Traffic sink application used for statistics collection.
 //
-// @see ApplicationBase
+// @see ~ApplicationBase
 //
 // @author Till Steinbach
+//
 simple TrafficSinkApp extends ApplicationBase
 {
     parameters:
         @class(TrafficSinkApp);
         @display("i=block/sink");
+        
         //Signal emitted when a frame is received, contains received EtherFrame
         @signal[rxPk](type=inet::EtherFrame);
         //Statistic of the amount of packets that were received by the application
-        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=linear); //possible parameter e.g.: measure_interval=50ms; for floatingIntervalRecorders
+        @statistic[rxPk](title="Received Packets"; source=rxPk; record=count; unit=packets);
+        //Statistic of the amount of bytes that were received by the application
+        @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=linear); //possible parameter e.g.: measure_interval=50ms; for floatingIntervalRecorders
         //End-to-end latency
-        //Uses encapsulated packet or frame when nothing is encapsulated
-        //@statistic[latency](title="End-to-end latency"; unit=s; record=stats,histogram,vector);
-        @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=linear);
-        @statistic[innerLatency](title="End-to-end latency inner"; source="messageAge(innerMessage(rxPk))"; unit=s; record=stats,histogram,vector; interpolationmode=linear);
+        @statistic[rxLatency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=linear);
+        //Uses encapsulated packet | Frame when nothing is encapsulated
+        @statistic[rxLatencyInner](title="End-to-end latency inner"; source="messageAge(innerMessage(rxPk))"; unit=s; record=stats,histogram?,vector; interpolationmode=linear);
 }

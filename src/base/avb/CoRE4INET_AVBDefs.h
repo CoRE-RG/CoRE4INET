@@ -26,9 +26,11 @@ const inet::MACAddress SRP_ADDRESS = inet::MACAddress("01:80:C2:00:00:0E");
 
 //Service class A interval is 125us
 const_simtime_t SR_CLASS_A_INTERVAL = 0.000125;
+
 //Service class B interval is 250us
 const_simtime_t SR_CLASS_B_INTERVAL = 0.000250;
 
+//Default VLAN ID for AVB
 const unsigned short VLAN_ID_DEFAULT = 2;
 
 const unsigned char PRIOANDRANK_SRCLASSA = 0xD0; //0b11010000; //For more details see SRPFrame.msg
@@ -42,7 +44,10 @@ const double CBS_CREDITEMITSTRETCHTIME = 0.00000001;
 /**
  * Defines for range checks
  */
+// Maximum ID for AVB streams
 #define MAX_STREAM_ID UINT64_MAX
+
+// Maximum number of frames in interval (implicitly also limited by bandwidth)
 #define MAX_INTERVAL_FRAMES UINT32_MAX
 
 }

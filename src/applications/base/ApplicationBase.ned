@@ -16,13 +16,14 @@
 package core4inet.applications.base;
 
 //
-// Abstract base application used for various application models.
-// Since this is an abstract module please do not instantiate it
+// Abstract base application used for Ethernet-Application application models.
 //
+// @warning Since this is an abstract module please do not instantiate it!
 //
-// @see TTEAPIApplicationBase.ned
+// @see ~IApplication, ~TTEAPIApplicationBase
 //
 // @author Till Steinbach
+//
 simple ApplicationBase like IApplication
 {
     parameters:
@@ -38,6 +39,6 @@ simple ApplicationBase like IApplication
         //If true, buffer management is not used. Applications use their own methods to locate buffers
         bool buffers_manual = default(false);
     gates:
-        //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn @directIn;
+        //Input gate for the incoming Scheduler messages
+        input schedulerIn @directIn @label(SchedulerMessage); 
 }

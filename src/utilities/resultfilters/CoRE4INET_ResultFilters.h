@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
+
 #ifndef CORE4INET_RESULTFILTERS_H
 #define CORE4INET_RESULTFILTERS_H
 

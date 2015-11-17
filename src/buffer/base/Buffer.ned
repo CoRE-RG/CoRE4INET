@@ -18,6 +18,7 @@ package core4inet.buffer.base;
 // Abstract base Buffer used for the various Buffers of (real-time) Ethernet.
 // Since this is an abstract module please do not instantiate it
 //
+//
 // @warning Currently the out gate is not used. Instead the buffer sends its
 // message via sendDirect to all via addDestinationGate() registred gates.
 //
@@ -30,36 +31,33 @@ simple Buffer like IBuffer
         @class(AbstractSimpleModule);
         @display("i=block/buffer");
 
-         //Statistic of the amount of packets that were received by the buffer
+        //Signal is emitted when when frame is received. Contains the received frame.
         @signal[rxPk](type=inet::EtherFrame);
-        @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)?"; interpolationmode=none);
-        //End-to-end latency
-//        @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram,vector; interpolationmode=none);
-
-        //Statistic of the amount of packets that were sent by the buffer
+        //Signal is emitted when when frame is transmitted. Contains the transmitted frame.
         @signal[txPk](type=inet::EtherFrame);
-        @statistic[txPk](title="TX Packets"; source=txPk; record=count,"sum(packetBytes)","vector(packetBytes)?"; interpolationmode=none);
-		
-		//Statistic of the End-to-end latency for each packet that is received by the buffer
-		@statistic[latencyReceive](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector?; interpolationmode=none);
-        
-        //Statistic of the End-to-end latency for each packet when it lefts the buffer
-        @statistic[latencyTransmit](title="End-to-end latency"; source="messageAge(txPk)"; unit=s; record=stats,histogram?,vector?; interpolationmode=none);
-        
-        //Statistics the size of packets that were received for each interval
-        @statistic[bandwidthInterval](title="Bandwidth for each Interval"; source=rxPk; record="IntervalCountVector(packetBytes)?", "IntervalSumVector(packetBytes)?", "IntervalAvgVector(packetBytes)?", "IntervalMinVector(packetBytes)?", "IntervalMaxVector(packetBytes)?", "IntervalVarianceVector(packetBytes)?"; interpolationmode=none);
-        
-        //Records the capacity for each packet that is received by the buffer. The Capacity is the relation between payload and packetsize
-        @statistic[capacityInterval](title="Capacity for each Interval"; source=rxPk; record="IntervalCapacityRecorder(packetBytes(innerMessage))?","IntervalCountVector(packetBytes(innerMessage))?","IntervalSumVector(packetBytes(innerMessage))?","IntervalAvgVector(packetBytes(innerMessage))?","IntervalMinVector(packetBytes(innerMessage))?","IntervalMaxVector(packetBytes(innerMessage))?","IntervalVarianceVector(packetBytes(innerMessage))?"; interpolationmode=none);
-        
-        //Floating Statistics for bandwidth and capacity(Slower)
-        @statistic[bandwidthIntervalFloating](title="Fbaloating Bandwidth for each Interval"; source=rxPk; record="vector(packetBytes)?","floatingIntervalCountVector(packetBytes)?","floatingIntervalSumVector(packetBytes)?","floatingIntervalAvgVector(packetBytes)?"; interpolationmode=sample-hold);
-        @statistic[capacityIntervalFloating](title="Floating Capacity for each Interval"; source=rxPk; record="floatingIntervalCapacityRecorder(innerMessagePacketBytes)?","vector(innerMessagePacketBytes)?","floatingIntervalCountVector(innerMessagePacketBytes)?","floatingIntervalSumVector(innerMessagePacketBytes)?","floatingIntervalAvgVector(innerMessagePacketBytes)?"; interpolationmode=sample-hold);
-        
+
+        //Statistic of the number of packets that were received by the buffer
+        @statistic[rxPk](title="Received Packets"; source=rxPk; unit=packets; record=count);
+        //Statistic of the number of Bytes that were received by the buffer
+        @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)","histogram(packetBytes)?"; interpolationmode=none);
+        //Statistic of the number of packets that were received by the buffer
+        @statistic[txPk](title="Transmitted Packets"; source=txPk; unit=packets; record=count);
+        //Statistic of the number of Bytes that were received by the buffer
+        @statistic[txBytes](title="Transmitted Bytes"; source=txPk; unit=B; record="sum(packetBytes)","vector(packetBytes)","histogram(packetBytes)?"; interpolationmode=none);
+        //End-to-end latency recorded when frame is received. Contains the time from frame creation until received in the Buffer
+        @statistic[rxLatency](title="End-to-end latency (received)"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
+        //End-to-end latency recorded when frame is transmitted. Contains the time from frame creation until transmitted from the Buffer
+        @statistic[txLatency](title="End-to-end latency (transmitted)"; source="messageAge(txPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
+        //Maximum packet size in Interval
+        @statistic[maxPacketSize](title="Maximum Packet Size in Interval"; source=rxPk; unit=B; record="IntervalMaxVector(packetBytes)?"; interpolationmode=linear);
+        //Minimum packet size in Interval
+        @statistic[minPacketSize](title="Minimum Packet Size in Interval"; source=rxPk; unit=B; record="IntervalMinVector(packetBytes)?"; interpolationmode=linear);
+        //Utilized Bandwidth over Interval
+        @statistic[bandwidth](title="Bandwidth used over Interval"; source=rxPk; unit=B; record="IntervalSumVector(packetBytes)?"; interpolationmode=linear);
 
         //Comma seperated list of gates where the frames of the buffer are delivered
         string destination_gates = default("");
-        //The maximum allowed message size for this buffer
+        //The maximum allowed message size for this buffer. Larger Frames are dropped.
         int maxMessageSize @unit(B) = default(1522B);
         //Switch to enable and disable the buffer
         bool enabled = default(true);

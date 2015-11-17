@@ -11,7 +11,8 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
+ 
 package core4inet.incoming.AS6802;
 
 import core4inet.incoming.base.Incoming;
@@ -23,15 +24,17 @@ import core4inet.incoming.base.Incoming;
 //
 // @warning Only the bag parameter is used!
 //
-// @see Incoming,
+// @see ~Incoming
 //
 // @author Lazar Todorov, Till Steinbach
+//
 simple PCFIncoming extends Incoming
 {
     parameters:
         @display("i=,green");
         //PCFIncoming is implemented by the PCFIncoming C++ Class
         @class(PCFIncoming);
+        
         //Allowed PCF-Type for this CTC (CS = 1; IN = 2; CA = 3)
         int pcfType = default(1);
 }

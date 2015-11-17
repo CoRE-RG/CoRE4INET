@@ -16,11 +16,13 @@
 namespace CoRE4INET;
 
 //Destination Types for IP traffic filter
+//
+// @author Kai v. Deylen
 enum DestinationType
 {
-	DestinationType_AVB     = 0;
-	DestinationType_TT      = 1;
-	DestinationType_RC      = 2;
-	DestinationType_8021Q   = 3;
-	DestinationType_invalid = 0xFF;
+	DestinationType_AVB     = 0; //Destination tyee for AVB traffic
+	DestinationType_TT      = 1; //Destination type for time-triggeres traffic
+	DestinationType_RC      = 2; //Destination type for rate-constrained traffic
+	DestinationType_8021Q   = 3; //Destination type for IEEE 802.1Q traffic
+	DestinationType_invalid = 0xFF; //Destination type for rate-constrained traffic
 };

@@ -20,10 +20,13 @@
 #include "CoRE4INET_Incoming.h"
 #include "CoRE4INET_SRPTable.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wattributes"
 namespace inet {
 template<typename T>
 T *getModuleFromPar(cPar& par, cModule *from);
 }
+#pragma GCC diagnostic pop
 
 namespace CoRE4INET {
 
@@ -33,6 +36,8 @@ namespace CoRE4INET {
 /**
  * @brief Class for the critical traffic conformance check of
  * audio-video bridging traffic.
+ *
+ * @sa Incoming
  *
  * @author Philipp Meyer
  */

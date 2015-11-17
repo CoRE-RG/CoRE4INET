@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
+
 package core4inet.linklayer.ethernet.base;
 
 import inet.linklayer.ethernet.EtherLLC;
@@ -19,8 +20,7 @@ import inet.linklayer.ethernet.EtherLLC;
 //
 // This module forwards frames (~EtherFrame) to the bg buffers
 //
-//
-// @see EtherLLC, SRProtocol
+// @see ~EtherLLC, ~SRProtocol
 // 
 // @author Till Steinbach
 //
@@ -29,6 +29,7 @@ simple BGEtherLLC extends EtherLLC
     parameters:
         @class(BGEtherLLC);
         @display("i=block/fork");
+        
     gates:
         //best-effort message in
         input bgIn @loose;

@@ -68,7 +68,7 @@ class CTInControl : public IC
          *
          * Frames may be dropped when no incoming module is configured.
          */
-        static simsignal_t ctDroppedSignal;
+        static simsignal_t droppedPkSignal;
 
     protected:
         /**
@@ -97,7 +97,7 @@ class CTInControl : public IC
 };
 
 template<class IC>
-simsignal_t CTInControl<IC>::ctDroppedSignal = cComponent::registerSignal("ctDropped");
+simsignal_t CTInControl<IC>::droppedPkSignal = cComponent::registerSignal("droppedPk");
 
 template<class IC>
 void CTInControl<IC>::initialize()
@@ -133,7 +133,7 @@ void CTInControl<IC>::handleMessage(cMessage *msg)
             }
             else
             {
-                cComponent::emit(ctDroppedSignal, frame);
+                cComponent::emit(droppedPkSignal, frame);
                 IC::hadError = true;
                 if (ev.isGUI())
                 {

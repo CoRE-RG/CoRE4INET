@@ -15,6 +15,8 @@
 
 #include "CoRE4INET_AVBBuffer.h"
 
+//INET
+#include "EtherMACBase.h"
 //CoRE4INET
 #include "CoRE4INET_ModuleAccess.h"
 
@@ -29,11 +31,11 @@ AVBBuffer::AVBBuffer()
     this->srClass = SR_CLASS_A;
     this->credit = 0;
     this->maxCredit = 0;
+    this->lastCreditEmitTime = 0;
     this->inTransmission = false;
     this->newTime = 0;
     this->oldTime = 0;
-    this->minCreditEmitTime = 0;
-    this->Wduration = 0;
+    this->wDuration = 0;
     this->tick = -1;
     this->srptable = nullptr;
     this->portBandwith = 0;
@@ -42,6 +44,19 @@ AVBBuffer::AVBBuffer()
 AVBBuffer::~AVBBuffer()
 {
 
+}
+
+void AVBBuffer::receiveSignal(cComponent *source, simsignal_t signalID, long l) {
+    (void)source;
+    (void)signalID;
+    inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
+    if(macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE){
+        refresh();
+        if (credit < 0)
+        {
+            emitCredit();
+        }
+    }
 }
 
 int AVBBuffer::numInitStages() const
@@ -57,7 +72,6 @@ void AVBBuffer::initialize(int stage)
     {
         Timed::initialize();
 
-
         this->tick = getOscillator()->getPreciseTick();
 
         this->srptable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", getParentModule()));
@@ -68,6 +82,7 @@ void AVBBuffer::initialize(int stage)
 
         if (cModule* phy = getParentModule()->getSubmodule("phy", getIndex()))
         {
+            phy->subscribe("transmitState", this);
             if (cModule* mac = phy->getSubmodule("mac"))
             {
                 if (cGate * macOutGate = mac->gate("phys$o"))
@@ -96,21 +111,21 @@ void AVBBuffer::initialize(int stage)
             throw cRuntimeError("Cannot find phy[%d]", getIndex());
         }
 
-        this->newTime = simTime();
-        this->oldTime = simTime();
+        this->newTime = getCurrentTime();
+        this->oldTime = getCurrentTime();
 
         WATCH(credit);
         WATCH(maxCredit);
         WATCH(inTransmission);
         WATCH(newTime);
         WATCH(oldTime);
-        WATCH(Wduration);
+        WATCH(wDuration);
     }
 }
 
 void AVBBuffer::handleMessage(cMessage *msg)
 {
-    newTime = simTime();
+    newTime = getCurrentTime();
 
     if (credit < 0)
     {
@@ -146,9 +161,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
             {
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
                         getParentModule()->getSubmodule("phy", getIndex()), srClass);
-                Wduration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
+                wDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
                 SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
+                event->setTimer(static_cast<uint64_t>(ceil(wDuration / tick)));
                 event->setDestinationGate(gate("schedulerIn"));
                 getTimer()->registerEvent(event);
             }
@@ -189,9 +204,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
                 }
                 else
                 {
-                    Wduration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
+                    wDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
                     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-                    event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
+                    event->setTimer(static_cast<uint64_t>(ceil(wDuration / tick)));
                     event->setDestinationGate(gate("schedulerIn"));
                     getTimer()->registerEvent(event);
                 }
@@ -201,14 +216,9 @@ void AVBBuffer::handleMessage(cMessage *msg)
     }
 
     if (newTime >= oldTime){
-        oldTime = simTime();
-        emit(creditSignal, credit);
-    // -- Only for credit vector statistic accuracy:
-    }else if(credit < 0 && minCreditEmitTime > 0 && (newTime.dbl() + CBS_CREDITEMITSTRETCHTIME) >= minCreditEmitTime.dbl()){
-        emit(creditSignal, credit);
+        oldTime = getCurrentTime();
+        emitCredit();
     }
-    minCreditEmitTime = 0;
-    // --
 }
 
 void AVBBuffer::handleParameterChange(const char* parname)
@@ -281,9 +291,9 @@ void AVBBuffer::sendSlope(SimTime duration)
     {
         if (credit < 0)
         {
-            Wduration = duration.dbl();
+            wDuration = duration.dbl();
             SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
+            event->setTimer(static_cast<uint64_t>(ceil(wDuration / tick)));
             event->setDestinationGate(gate("schedulerIn"));
             getTimer()->registerEvent(event);
         }
@@ -298,27 +308,20 @@ void AVBBuffer::sendSlope(SimTime duration)
     {
         resetCredit();
     }
-    // -- Only for credit vector statistic accuracy:
-    else if (credit < 0)
-    {
-        minCreditEmitTime = simTime() + duration;
-        Wduration = duration.dbl();// + CBS_CREDITEMITSTRETCHTIME;
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(static_cast<uint64_t>(ceil(Wduration / tick)));
-        event->setDestinationGate(gate("schedulerIn"));
-        getTimer()->registerEvent(event);
-    }
-    // --
 
-    if (oldTime <= simTime())
-        oldTime = simTime() + duration;
+    if(oldTime <= getCurrentTime())
+    {
+        oldTime = getCurrentTime() + duration;
+    }
     else
+    {
         oldTime = oldTime + duration;
+    }
 }
 
 void AVBBuffer::refresh()
 {
-    newTime = simTime();
+    newTime = getCurrentTime();
 
     if (credit < 0)
     {
@@ -333,8 +336,8 @@ void AVBBuffer::refresh()
     }
 
     if (newTime >= oldTime){
-        oldTime = simTime();
-        emit(creditSignal, credit);
+        oldTime = getCurrentTime();
+        emitCredit();
     }
 }
 
@@ -351,7 +354,18 @@ void AVBBuffer::resetCredit()
     if (newTime >= oldTime)
     {
         credit = 0;
+        emitCredit();
+    }
+}
+
+simtime_t AVBBuffer::getCurrentTime(){
+    return getTimer()->getTotalSimTime();
+}
+
+void AVBBuffer::emitCredit(){
+    if(simTime() > lastCreditEmitTime){
         emit(creditSignal, credit);
+        lastCreditEmitTime = simTime();
     }
 }
 

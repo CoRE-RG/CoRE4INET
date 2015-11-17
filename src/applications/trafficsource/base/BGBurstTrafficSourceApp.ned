@@ -21,9 +21,10 @@ package core4inet.applications.trafficsource.base;
 // This generator generates bursts with sendInterval distance
 //
 //
-// @see BGTrafficSourceApp
+// @see ~BGTrafficSourceApp
 //
 // @author Till Steinbach
+//
 simple BGBurstTrafficSourceApp extends BGTrafficSourceApp
 {
     parameters:

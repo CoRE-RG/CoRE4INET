@@ -20,11 +20,9 @@ import core4inet.applications.trafficsource.base.BGTrafficSourceApp;
 //
 // Traffic source application used for IEEE 802.1Q traffic.
 //
+// @see ~BGTrafficSourceApp, ~TTTrafficSourceApp, ~RCTrafficSourceApp
 //
-// @see TTTrafficSourceApp, RCTrafficSourceApp
-//
-// @author Till Steinbach
-// @author Philipp Meyer
+// @author Till Steinbach, Philipp Meyer
 //
 simple IEEE8021QTrafficSourceApp extends BGTrafficSourceApp
 {
@@ -34,4 +32,6 @@ simple IEEE8021QTrafficSourceApp extends BGTrafficSourceApp
         
         // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
     	int priority = default(0);
+    	// VLAN ID (0=untagged, 4094=Highest)
+    	int vid = default(0);
 }

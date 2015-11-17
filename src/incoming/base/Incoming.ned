@@ -12,32 +12,41 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.incoming.base;
+
 //
 // Abstract module for the conformance checks of incoming traffic.
 //
 // @warning Since this is an abstract module do not instantiate it! Use RCIncoming or
 // TTIncoming instead!
 //
-// @see RCIncoming, TTIncoming,
+// @todo Since this is an abstract module it might be better to make an interface 
+//
+// @see ~IIncoming, ~RCIncoming, ~TTIncoming,
 //
 // @author Till Steinbach
+//
 simple Incoming like IIncoming
 {
     parameters:
     //Incoming is implemented by the Incoming C++ Class
     @class(AbstractSimpleModule);
     @display("i=block/arrival");
+    
     //Signal emitted when frame is received, contains received EtherFrame
     @signal[rxPk](type=inet::EtherFrame);
     //Signal emitted when frame is dropped due to implemented policy, contains dropped EtherFrame
     @signal[droppedPk](type=inet::EtherFrame);
-    //Statistic of the amount of packets that were dropped by the incoming module
-    @statistic[dropped](title="Packets Dropped"; source=droppedPk; record=count; interpolationmode=none);
-    //Statistic of the amount of packets that were received by the incoming module
-    @statistic[rxPk](title="RX Packets"; source=rxPk; record=count,"sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
+    //Statistic of the number of packets that were dropped by the incoming module
+    @statistic[dropped](title="Packets Dropped"; source=droppedPk; record=count,"vector(constant1)");
+    //Statistic of the number of packets that were received by the incoming module
+    @statistic[rxPk](title="Received Packets"; source=rxPk; record=count);
+    //Statistic of the number of bytes that were recveived by the incoming module
+    @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)"; interpolationmode=none);
     //Statistic of the end-to-end latency
     @statistic[latency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
+    
 	//Hardware delay between incoming and outgoing buffer
 	double hardware_delay @unit(s) = default(0s);
 

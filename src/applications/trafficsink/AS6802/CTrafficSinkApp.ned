@@ -20,13 +20,15 @@ import core4inet.applications.trafficsink.base.TrafficSinkApp;
 //
 // Traffic sink application used for statistics collection of critical traffic.
 //
-// @see TrafficSinkApp
+// @see ~TrafficSinkApp
 //
 // @author Till Steinbach
+//
 simple CTTrafficSinkApp extends TrafficSinkApp
 {
     parameters:
         @class(CTTrafficSinkApp);
+        
     gates:
         //Input gate for the incoming time-triggered messages
         input TTin @directIn @labels(TTFrame);

@@ -30,9 +30,18 @@ simple AVBQueueBuffer extends AVBBuffer
         @class(AVBQueueBuffer);
         @display("q=frames");
         //Signal emitted when queuelength changes, contains new length
-        @signal[queueLength](type=unsigned long);
+        @signal[length](type=unsigned long; unit=packets);
+        //Signal emitted when queuelength changes, contains new size in bytes
+        @signal[size](type=unsigned long; unit=bytes);
+        //Signal emitted when frame is dropped due to buffer overflow, contains dropped EtherFrame
+        @signal[dropped](type=inet::EtherFrame);
+        
         //Statistic of the queue length of the buffer
-        @statistic[queueLength](title="Queue Length"; record=vector; interpolationmode=sample-hold);
+        @statistic[length](title="Queue Length"; source=length; record=vector; unit=packets; interpolationmode=sample-hold);
+        //Statistic of the queue size of the buffer in bytes
+        @statistic[size](title="Queue Size"; source=size; record=vector; unit=bytes; interpolationmode=sample-hold);
+        //Statistic of the amount of packets that were dropped due to buffer overflows
+        @statistic[dropped](title="Dropped frames"; source=dropped; unit=packets; record=sum);
 
         //Size of the buffer negative means infinite
         int size = default(-1);

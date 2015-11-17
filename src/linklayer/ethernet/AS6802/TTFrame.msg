@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 cplusplus {{
 	//CoRE4INET
 	#include "CoRE4INET_CTFrame.h"
@@ -22,12 +23,14 @@ class CoRE4INET::CTFrame;
 packet CTFrame;
 
 namespace CoRE4INET;
+
 //
 // Represents a TT frame
 //
-// @see CTFrame
+// @see ~CTFrame
 //
 // @author Till Steinbach
+//
 packet TTFrame extends CTFrame
 {    
 	string displayString="b=15,15,rect,black,red,5";

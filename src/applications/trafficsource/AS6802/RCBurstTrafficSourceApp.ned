@@ -20,9 +20,10 @@ import core4inet.applications.trafficsource.AS6802.RCTrafficSourceApp;
 //
 // Traffic source application used for rate-constrained traffic generators with burst behavior.
 //
-// @see RCTrafficSourceApp
+// @see ~RCTrafficSourceApp
 //
 // @author Philipp Meyer
+//
 simple RCBurstTrafficSourceApp extends RCTrafficSourceApp
 {
     parameters:

@@ -20,7 +20,9 @@ import core4inet.scheduler.oscillator.IOscillator;
 import core4inet.scheduler.period.Period;
 
 //
-// TODO auto-generated module
+// The Scheduler provides timing events for other modules. 
+//
+// @see ~ITTEScheduler, ~Timer, ~IOscillator, ~Period
 //
 // @author Till Steinbach
 //
@@ -28,23 +30,32 @@ module Scheduler like ITTEScheduler
 {
     parameters:
         @display("i=block/cogwheel;bgb=293,141");
+        
+        // Number of Periods
         int numPeriods = default(1);
         // Length of a tick
         double tick @unit(s) = default(80ns);
+        
     submodules:
+        // Implements a timer with adjustable precision that may be synchronized by a synchronization module
         timer: Timer {
             @display("p=160,40");
             gates:
                 period_in[numPeriods];
         }
+        
+        // Module representing an oscillator with a simple clock drift behavior.
         oscillator: <default("SimpleOscillator")> like IOscillator {
             parameters:
                 @display("p=70,40");
                 tick = tick;
         }
+        
+        // Periods define the cycles for events
         period[numPeriods]: Period {
             @display("p=70,100,row,60");
         }
+        
     connections:
         for i=0..sizeof(period)-1 {
             period[i].out --> timer.period_in[i];

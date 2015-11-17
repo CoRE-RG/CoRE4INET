@@ -32,16 +32,23 @@ namespace CoRE4INET {
  * @brief This module handles the Stream Reservation Protocol
  *
  * See the NED definition for details.
+ *
+ * @author Till Steinbach
  */
 class SRProtocol : public virtual cSimpleModule, public cListener
 {
     private:
         /**
-         * Module representing the srpTable
+         * @brief Module representing the srpTable
          */
         SRPTable *srpTable;
+
     public:
+        /**
+         * @brief Constructor
+         */
         SRProtocol();
+
     protected:
         /**
          * @brief Initialization, retrieves srpTable module and registers for signals

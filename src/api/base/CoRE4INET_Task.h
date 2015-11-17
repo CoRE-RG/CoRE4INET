@@ -61,7 +61,7 @@ class Task
         /**
          * @brief Setter for the function pointer.
          *
-         * @param functionPointer the funtion pointer to be invoked in the task
+         * @param functionPointer the function pointer to be invoked in the task
          */
         void setFunctionPointer(void (*functionPointer)(void*)){
             fn=functionPointer;
@@ -70,7 +70,7 @@ class Task
         /**
          * @brief Getter for the function pointer.
          *
-         * @return the funtion pointer that is invoked in the task
+         * @return the function pointer that is invoked in the task
          */
         cbFunc getFunctionPointer(){
             return fn;
@@ -79,7 +79,7 @@ class Task
         /**
          * @brief Setter for the function args.
          *
-         * @param functionArg the funtion arg to be used in the task
+         * @param functionArg the function arg to be used in the task
          */
         void setFunctionArg(void *functionArg){
             arg=functionArg;
@@ -89,7 +89,7 @@ class Task
         /**
          * @brief Getter for the function args.
          *
-         * @return the funtion arg used in the task
+         * @return the function arg used in the task
          */
         void* getFunctionArg(){
             return arg;

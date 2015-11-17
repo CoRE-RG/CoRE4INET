@@ -12,20 +12,23 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
+
 cplusplus {{
     //Auto-generated Messages
     #include "EtherFrameWithQTag_m.h"
 }}
 
+class CoRE4INET::EthernetIIFrameWithQTag;
+
 namespace CoRE4INET;
 
-class EthernetIIFrameWithQTag;
 //
 // Represents a AVB Frame
 //
-// @see CTFrame
+// @see ~EthernetIIFrameWithQTag
 //
 // @author Philipp Meyer 
+//
 packet AVBFrame extends EthernetIIFrameWithQTag
 {    
     // ID of the AVB Stream

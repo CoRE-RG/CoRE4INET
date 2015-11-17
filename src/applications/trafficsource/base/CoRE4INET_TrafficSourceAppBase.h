@@ -28,6 +28,8 @@ namespace CoRE4INET {
  *
  * @sa ApplicationBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach
  */
 class TrafficSourceAppBase : public virtual ApplicationBase
 {
@@ -63,9 +65,9 @@ class TrafficSourceAppBase : public virtual ApplicationBase
 
     protected:
         /**
-         * @brief Signal that is emitted each time the payload is requested.
+         * @brief Signal that is emitted each time the payload is used.
          */
-        static simsignal_t sigPayload;
+        static simsignal_t payloadSignal;
 
         /**
          * @brief Initialization of the module. Sends activator message

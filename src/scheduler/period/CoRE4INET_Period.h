@@ -44,6 +44,7 @@ class Period : public virtual cSimpleModule
          * @brief Connected timer module
          */
         Timer *timer;
+
         /**
          * @brief Event indicating a new cycle start
          *
@@ -76,6 +77,7 @@ class Period : public virtual cSimpleModule
          * Initialization of module, schedules new cycle message at timer
          */
         virtual void initialize() override;
+
         /**
          * Received new cycle message to count cycles
          * @param msg incoming new cycle message
@@ -88,11 +90,13 @@ class Period : public virtual cSimpleModule
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname) override;
+
     public:
         /**
          * Constructor, Initialization of members
          */
         Period();
+
         /**
          * Register a new event in the scheduler. May fail if ActionTimeEvent is out of schedule
          *
@@ -111,12 +115,14 @@ class Period : public virtual cSimpleModule
          * @return Number of ticks since cycle start
          */
         uint32_t getTicks();
+
         /**
          * @brief Returns the absolute number of ticks
          *
          * @return Number of ticks since simulation start
          */
         uint64_t getTotalTicks();
+
         /**
          * @brief Returns the current number of cycles
          *

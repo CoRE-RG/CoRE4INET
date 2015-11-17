@@ -16,31 +16,40 @@
 #ifndef BGETHERENCAP_H_
 #define BGETHERENCAP_H_
 
-
-// inet etherencap
+//INET
 #include "EtherEncap.h"
-
 
 namespace CoRE4INET {
 
-
-
-class BGEtherEncap : public virtual inet::EtherEncap {
-
-
+/**
+ * @brief This module forwards frames to the bg buffers
+ *
+ * @sa EtherEncap
+ *
+ * @author Kai-Uwe von Deylen
+ */
+class BGEtherEncap : public virtual inet::EtherEncap
+{
     public:
+        /**
+         * @brief Constructor
+         */
         BGEtherEncap();
+
+        /**
+         * @brief Destructor
+         */
         virtual ~BGEtherEncap();
 
-
     protected:
+        /**
+         * @brief Handles incoming messages
+         *
+         * @param msg cMessage pointer
+         */
         virtual void handleMessage(cMessage *msg) override;
-
-
 }; // class BGEtherEncap
 
 
 } /* namespace CoRE4INET */
-
-
 #endif /* BGETHERENCAP_H_ */

@@ -64,35 +64,42 @@ class Timer : public virtual cSimpleModule
          * Used to reregister after clock tick changes.
          */
         std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > > registredActionTimeEvents;
+
         /**
          * @brief List of registered SchedulerActionTimeEvent.
          *
          * Used to reregister after clock tick changes.
          */
         std::map<uint64_t, std::list<SchedulerTimerEvent*> > registredTimerEvents;
+
     protected:
         /**
          * Initialization of the module. Sets oscillator and registeres signals
          */
         virtual void initialize() override;
+
         /**
          * Incoming self message triggers sendOutEvents()
          */
         virtual void handleMessage(cMessage *msg) override;
+
     private:
         /**
          * @brief Method must be called after a clock drift change in the oscillator to reschedule messages with the new
          * drift
          */
         virtual void reschedule();
+
         /**
          * Calculates the point in ticks when the next action must be scheduled
          */
         virtual uint64_t nextAction() const;
+
         /**
          * Trigger the sending of all events that are due at this moment
          */
         virtual void sendOutEvents();
+
     public:
         /**
          * Constructor initializes members
@@ -103,6 +110,7 @@ class Timer : public virtual cSimpleModule
          * Destructor cleans up
          */
         virtual ~Timer();
+
         /**
          * @brief When called, the ticks since simulation start are recalculated using current simulation time
          */
@@ -138,6 +146,7 @@ class Timer : public virtual cSimpleModule
          */
         uint64_t getTotalTicks();
 
+        simtime_t getTotalSimTime();
         /**
          * @brief Returns a pointer to the attached oscillator
          */

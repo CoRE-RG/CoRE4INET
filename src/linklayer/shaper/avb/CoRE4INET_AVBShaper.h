@@ -11,6 +11,7 @@
 //CoRE4INET
 #include "AVBDefs_m.h"
 #include "CoRE4INET_AVBBuffer.h"
+
 //Auto-generated messages
 #include "AVBFrame_m.h"
 
@@ -31,6 +32,7 @@ class AVBShaper : public TC
          * @brief Constructor
          */
         AVBShaper();
+
         /**
          * @brief Destructor
          */
@@ -42,10 +44,24 @@ class AVBShaper : public TC
          */
         cQueue avbQueue;
 
+        /**
+         * @brief Pointer to AVBBuffer
+         */
         AVBBuffer *avbBuffer;
 
+        /**
+         * @brief Name of the avbQueueLengthSignal
+         */
         std::string avbQueueLengthSignalName;
+
+        /**
+         * @brief Name of the avbBuffer
+         */
         std::string avbBufferName;
+
+        /**
+         * @brief Name of the avbIn
+         */
         std::string avbInName;
 
     protected:

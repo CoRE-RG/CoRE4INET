@@ -15,7 +15,6 @@
 // along with this program; if not, see <http://www.gnu.org/licenses/>.
 //
 
-
 cplusplus {{
     //INET
 	#include "Ieee802Ctrl.h"
@@ -23,13 +22,16 @@ cplusplus {{
 	#define SWITCH_PORT_BROADCAST -1
 }}
 
-
 class noncobject inet::Ieee802Ctrl;
 
 namespace CoRE4INET;
 
 //
 // Control structure for communication between LLC and higher layers
+//
+// @see ~Ieee802Ctrl
+//
+// @author Till Steinbach
 //
 class ExtendedIeee802Ctrl extends Ieee802Ctrl
 {

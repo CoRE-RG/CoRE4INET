@@ -40,5 +40,10 @@ simple CTBuffer extends Buffer
         int ct_marker;
         //Critical traffic mask of the buffer
         int ct_mask;
+        
+        //Oscillator this buffer is assigned to
+        string oscillator = default("^.scheduler.oscillator");
+        //Timer this buffer is assigned to
+        string timer = default("^.scheduler.timer");
 
 }

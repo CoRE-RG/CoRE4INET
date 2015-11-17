@@ -12,14 +12,16 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.scheduler;
 
 //
 // TTEthernet scheduler module interface.
 //
-// @see TTEScheduler
+// @see ~TTEScheduler
 //
 // @author Till Steinbach
+//
 moduleinterface ITTEScheduler
 {
     parameters:

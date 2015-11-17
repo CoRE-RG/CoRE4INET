@@ -32,31 +32,34 @@
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0300
-#  error At least INET version 3.00 required
+#if INET_VERSION < 0x0301
+#  error At least INET version 3.1 required
 #endif
 
 /**
  * Definition of CORE4INET version
  */
-#define CoRE4INET_VERSION 0x0200
+#define CoRE4INET_VERSION 0x0100
 
 /**
  * Delimiters for vectors
  */
 #define DELIMITERS ",; \t\n\r\f"
 
+
 /**
  * Ethernet 802.1Q Header
  */
 #define ETHER_8021Q_TAG_BYTES 4
 #define MAX_ETHER_8021Q_FRAME_BYTES (MAX_ETHERNET_FRAME_BYTES + ETHER_8021Q_TAG_BYTES)
+#define MAX_VLAN_NUMBER 4095
 
 /**
  * Defines for range checks
  */
 #define MAX_VLAN_ID 4094
 #define MAX_TICK_LENGTH DBL_MAX
+#define MAX_CYCLE_TICKS UINT32_MAX
 
 /**
  * Scheduling Priorities
