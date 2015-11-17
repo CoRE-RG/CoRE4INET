@@ -40,5 +40,8 @@ simple BGTrafficSourceApp extends TrafficSourceAppBase
         
         //Default bgOut is best-effort buffer
         buffers = default("bgOut");
+        
+        @signal[intervalSignal];
+        @statistic[sendIntervalOverTime](title="send interval over time"; source=intervalSignal; unit=s; record=stats?,histogram?,vector?; interpolationmode=linear);
 
 }

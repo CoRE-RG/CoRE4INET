@@ -47,12 +47,23 @@ class BGTrafficSourceApp : public virtual TrafficSourceAppBase
          * @brief caches destAddress parameter
          */
         inet::MACAddress destAddress;
+
     public:
         /**
          * @brief Constructor of BGTrafficSourceApp
          */
         BGTrafficSourceApp();
+
     protected:
+        /**
+         * @brief Signal that is emitted each time the send interval is used.
+         */
+        static simsignal_t sigSendInterval;
+
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize() override;
 
         /**
          * @brief handle self messages to send frames

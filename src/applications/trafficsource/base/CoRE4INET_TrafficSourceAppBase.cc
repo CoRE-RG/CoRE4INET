@@ -25,6 +25,8 @@ namespace CoRE4INET {
 
 Define_Module(TrafficSourceAppBase);
 
+simsignal_t TrafficSourceAppBase::sigPayload = registerSignal("payloadSignal");
+
 TrafficSourceAppBase::TrafficSourceAppBase()
 {
     this->enabled = false;
@@ -36,6 +38,8 @@ bool TrafficSourceAppBase::isEnabled()
 }
 
 size_t TrafficSourceAppBase::getPayloadBytes(){
+    handleParameterChange("payload");
+    emit(sigPayload,this->payload);
     return this->payload;
 }
 

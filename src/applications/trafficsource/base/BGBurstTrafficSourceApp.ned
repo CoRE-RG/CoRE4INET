@@ -32,4 +32,7 @@ simple BGBurstTrafficSourceApp extends BGTrafficSourceApp
 
         // total size of the burst
         int burstSize @unit(byte) = default(1MiB);
+        
+        @signal[burstSizeSignal];
+        @statistic[burstSizeOverTime](title="burst size over time"; source=burstSizeSignal; unit=B; record=stats?,histogram?,vector?; interpolationmode=linear);
 }

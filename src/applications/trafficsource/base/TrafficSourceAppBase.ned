@@ -39,4 +39,7 @@ simple TrafficSourceAppBase extends ApplicationBase
 
         //Size of the payload of the message (size of encapsulated cPacket) that is being generated
         volatile int payload @unit(Byte) = default(46Byte);
+        
+        @signal[payloadSignal];
+        @statistic[payloadOverTime](title="payload over time"; source=payloadSignal; unit=B; record=stats?,histogram?,vector?; interpolationmode=linear);
 }

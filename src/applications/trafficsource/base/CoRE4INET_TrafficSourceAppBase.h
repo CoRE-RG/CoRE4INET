@@ -62,6 +62,10 @@ class TrafficSourceAppBase : public virtual ApplicationBase
         size_t getPayloadBytes();
 
     protected:
+        /**
+         * @brief Signal that is emitted each time the payload is requested.
+         */
+        static simsignal_t sigPayload;
 
         /**
          * @brief Initialization of the module. Sends activator message

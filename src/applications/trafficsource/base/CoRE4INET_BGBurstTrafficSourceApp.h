@@ -41,6 +41,10 @@ class BGBurstTrafficSourceApp : public virtual BGTrafficSourceApp
          */
         BGBurstTrafficSourceApp();
     protected:
+        /**
+         * @brief Signal that is emitted each time the burst size is requested.
+         */
+        static simsignal_t sigBurstSize;
 
         /**
          * @brief Generates and sends a new Message.
@@ -58,6 +62,9 @@ class BGBurstTrafficSourceApp : public virtual BGTrafficSourceApp
          *         */
         virtual void handleParameterChange(const char* parname) override;
 
+        /**
+         * @brief Returns the size of the next burst.
+         */
         unsigned long getBurstSize();
 };
 
