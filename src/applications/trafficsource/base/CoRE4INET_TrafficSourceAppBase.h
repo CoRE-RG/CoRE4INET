@@ -67,7 +67,7 @@ class TrafficSourceAppBase : public virtual ApplicationBase
         /**
          * @brief Signal that is emitted each time the payload is used.
          */
-        static simsignal_t payloadSignal;
+        static simsignal_t sigPayload;
 
         /**
          * @brief Initialization of the module. Sends activator message
