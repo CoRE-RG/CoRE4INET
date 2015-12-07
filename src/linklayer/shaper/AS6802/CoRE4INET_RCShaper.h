@@ -23,6 +23,12 @@
 //Auto-generated Messages
 #include "PCFrame_m.h"
 
+//INET
+#include "EtherMACFullDuplex.h"
+
+//Std
+#include <unordered_map>
+
 namespace CoRE4INET {
 
 /**
@@ -36,7 +42,7 @@ namespace CoRE4INET {
  * @author Till Steinbach
  */
 template<class TC>
-class RCShaper : public TC, public virtual Timed
+class RCShaper : public TC, public virtual Timed, public virtual cListener
 {
         using Timed::initialize;
 
@@ -51,6 +57,17 @@ class RCShaper : public TC, public virtual Timed
          */
         virtual ~RCShaper();
 
+        /**
+        * @brief receives signal from mac module and resets bag on rxPk signal from mac
+        *
+        * Checks if there is a buffer registered for this messages and if there is one resets the bag
+        *
+        * @param source source of the signal
+        * @param signalID id of the signal
+        * @param obj ptr to the object. In this case an EtherFrame currently under transmission
+        */
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj) override;
+
     private:
         /**
          * @brief Dedicated queue for each priority of rate-constrained messages
@@ -61,6 +78,11 @@ class RCShaper : public TC, public virtual Timed
          * @brief caches numRCpriority parameter for faster execution
          */
         size_t numRcPriority;
+
+        /**
+         * @brief map to store a pointer of a buffer to reset for a specific frame
+         */
+        std::unordered_map<cMessage *, RCBuffer* > resetPtrMap;
 
     protected:
         /**
@@ -156,6 +178,7 @@ RCShaper<TC>::RCShaper()
 template<class TC>
 RCShaper<TC>::~RCShaper()
 {
+        resetPtrMap.clear();
 }
 
 template<class TC>
@@ -165,6 +188,10 @@ void RCShaper<TC>::initialize(int stage)
     if (stage == 0)
     {
         Timed::initialize();
+
+        inet::EtherMACFullDuplex* mac =
+                dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
+        mac->subscribe("txPk", this);
 
         numRcPriority = static_cast<size_t>(par("numRCpriority").longValue());
         for (unsigned int i = 0; i < numRcPriority; i++)
@@ -211,8 +238,9 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
         {
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
-            if (rcBuffer)
-                rcBuffer->resetBag();
+            if (rcBuffer){
+                resetPtrMap[msg] = rcBuffer;
+            }
             //Set Transparent clock when frame is PCF
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if (pcf)
@@ -257,7 +285,8 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
         {
             rcQueue[0].insert(msg);
             TC::notifyListeners();
-            EV_WARN << "Priority of message "<< msg->getFullName() <<" missing or not within range, using default priority 0!" << endl;
+            EV_WARN << "Priority of message " << msg->getFullName()
+                    << " missing or not within range, using default priority 0!" << endl;
         }
         EV_TRACE << "Interface not idle queuing RC frame" << endl;
     }
@@ -296,8 +325,9 @@ cMessage* RCShaper<TC>::pop()
             cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].length()));
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
-            if (rcBuffer)
-                rcBuffer->resetBag();
+            if (rcBuffer){
+                resetPtrMap[message] = rcBuffer;
+            }
 
             PCFrame *pcf = dynamic_cast<PCFrame*>(message);
             if (pcf)
@@ -346,6 +376,17 @@ void RCShaper<TC>::clear()
     for (unsigned int i = 0; i < numRcPriority; i++)
     {
         rcQueue[i].clear();
+    }
+}
+
+template<class TC>
+void RCShaper<TC>::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj){
+    if(strncmp(getSignalName(signalID), "txPk", 5)==0){
+        std::unordered_map<cMessage *, RCBuffer* >::const_iterator result = resetPtrMap.find(check_and_cast<cMessage*>(obj));
+        if(result != resetPtrMap.end()){
+            (*result).second->resetBag();
+            resetPtrMap.erase(result);
+        }
     }
 }
 
