@@ -390,7 +390,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
                     return_size += (*j).second.size();
                 }
             }
-            return return_size;
+            return static_cast<int>(return_size);
         }
         virtual std::string at(int i) const
         {
@@ -402,7 +402,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
             this->it = this->m.begin();
             this->it2 = (*this->it).second.begin();
             it3 = (*this->it2).second.begin();
-            while (index <= i)
+            while (static_cast<int>(index) <= i)
             {
                 if (i > (index + (*this->it2).second.size()))
                 {
@@ -417,7 +417,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
                 }
                 else
                 {
-                    for (int k = 0; k < (static_cast<size_t>(i) - index); k++)
+                    for (int k = 0; k < (i - static_cast<int>(index)); k++)
                     {
                         ++this->it2;
                     }
