@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SCHEDULERTESTER_H_
-#define __CORE4INET_SCHEDULERTESTER_H_
+#ifndef CORE4INET_SCHEDULERTESTER_H_
+#define CORE4INET_SCHEDULERTESTER_H_
 
 #include "omnetpp.h"
 #include "CoRE4INET_Scheduled.h"

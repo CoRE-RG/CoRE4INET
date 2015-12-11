@@ -21,9 +21,10 @@ import core4inet.utilities.classes.ITimed;
 //
 // Traffic source application used for audio-video bridging traffic generators.
 //
-// @see TrafficSourceAppBase
+// @see ~TrafficSourceAppBase, ~ITimed
 //
 // @author Philipp Meyer, Till Steinbach
+//
 simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
 {
     parameters:
@@ -31,22 +32,17 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         @display("i=,blue");
 
         // ID of the AVB Stream
-        int streamID = default(0);
-        
+        int streamID = default(0);     
         // Stream Reservation Class of the AVB Stream
         string srClass = default("A");
-
         // Number of frames per interval
-        int intervalFrames = default(1);
-        
+        int intervalFrames = default(1);     
         // Variation of frame forwarding interval
-        volatile double intervalInaccurracy @unit(s) = default(0s);
-        
+        volatile double intervalInaccurracy @unit(s) = default(0s);      
         // VLAN identifier of the AVB Stream
         int vlan_id = default(2);
-
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
-        string oscillator = default("oscillator");
+        string oscillator = default("^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
-        string timer = default("timer");
+        string timer = default("^.scheduler.timer");
 }

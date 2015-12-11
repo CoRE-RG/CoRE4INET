@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_DEFS_H
-#define __CORE4INET_DEFS_H
+#ifndef CORE4INET_DEFS_H
+#define CORE4INET_DEFS_H
 
 //OMNeT++
 #include "omnetpp.h"
@@ -32,14 +32,14 @@
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0300
-#  error At least INET version 3.00 required
+#if INET_VERSION < 0x0301
+#  error At least INET version 3.1 required
 #endif
 
 /**
  * Definition of CORE4INET version
  */
-#define CoRE4INET_VERSION 0x0200
+#define CoRE4INET_VERSION 0x0100
 
 /**
  * Delimiters for vectors
@@ -52,12 +52,14 @@
  */
 #define ETHER_8021Q_TAG_BYTES 4
 #define MAX_ETHER_8021Q_FRAME_BYTES (MAX_ETHERNET_FRAME_BYTES + ETHER_8021Q_TAG_BYTES)
+#define MAX_VLAN_NUMBER 4095
 
 /**
  * Defines for range checks
  */
 #define MAX_VLAN_ID 4094
 #define MAX_TICK_LENGTH DBL_MAX
+#define MAX_CYCLE_TICKS UINT32_MAX
 
 /**
  * Scheduling Priorities

@@ -23,6 +23,8 @@ namespace CoRE4INET {
 
 Define_Module(BGBurstTrafficSourceApp);
 
+simsignal_t BGBurstTrafficSourceApp::sigBurstSize = registerSignal("burstSizeSignal");
+
 BGBurstTrafficSourceApp::BGBurstTrafficSourceApp()
 {
     this->burstSize = 0;
@@ -33,18 +35,19 @@ void BGBurstTrafficSourceApp::sendMessage()
 
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
-        unsigned long size_left = this->burstSize;
+        unsigned long size_left = getBurstSize();
         while (size_left > 0)
         {
-            inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic");
+            inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic", 7); //kind 7 = black
+            size_t payloadBytes = getPayloadBytes();
 
             frame->setDest(this->getDestAddress());
 
             cPacket *payload_packet = new cPacket();
-            if (size_left >= getPayloadBytes())
+            if (size_left >= payloadBytes)
             {
-                payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
-                size_left -= getPayloadBytes();
+                payload_packet->setByteLength(static_cast<int64_t>(payloadBytes));
+                size_left -= payloadBytes;
             }
             else
             {
@@ -72,6 +75,13 @@ void BGBurstTrafficSourceApp::handleParameterChange(const char* parname)
     {
         this->burstSize = parameterULongCheckRange(par("burstSize"), 1, ULONG_MAX, true);
     }
+}
+
+unsigned long BGBurstTrafficSourceApp::getBurstSize(){
+    handleParameterChange("burstSize");
+    emit(sigBurstSize,this->burstSize);
+    EV<<"burst size: " << this->burstSize<<"\n";
+    return this->burstSize;
 }
 
 }

@@ -19,6 +19,7 @@
 #include "CoRE4INET_IPv4oAVB.h"
 #include "CoRE4INET_IPv4oRC.h"
 #include "CoRE4INET_IPv4oTT.h"
+#include "CoRE4INET_IPv4oIEEE8021Q.h"
 
 namespace CoRE4INET {
 
@@ -29,6 +30,11 @@ class AVB_IPv4 : public IPv4oAVB<IPv4oREBase>
 class RC_AVB_IPv4 : public IPv4oRC<AVB_IPv4>
 {
 };
+
+class TT_RC_AVB_IPv4 : public IPv4oTT<RC_AVB_IPv4>
+{
+};
+
 
 /*!
 this parameter defines which traffic is sent via TT, RC or AVB
@@ -58,6 +64,7 @@ Destination Type (value of the "destType" attribute, which defines the Layer2)
 - destType="DestinationType_TT"
 - destType="DestinationType_RC"
 - destType="DestinationType_AVB"
+- destType="DestinationType_8021Q"
 
 TT send attributes:
 - destModule (mandatory)
@@ -79,9 +86,13 @@ AVB send attributes:
 - intervallFrames (mandatory)
 - vlanId          (mandatory)
 
+8021Q send attributes:
+- vid (optional, defaults to "0");
+- pcp (optional, defaults to "0");
+
  Each subscribe element has one single "streamId" attribute which defines the stream Id to subscribe to.
  */
-class TT_RC_AVB_IPv4 : public IPv4oTT<RC_AVB_IPv4>
+class TT_RC_AVB_8021Q_IPv4 : public IPv4oTT<IPv4oRC<IPv4oAVB<IPv4oIEEE8021Q<IPv4oREBase>>>>
 {
 };
 

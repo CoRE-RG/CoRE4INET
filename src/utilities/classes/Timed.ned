@@ -16,13 +16,17 @@
 package core4inet.utilities.classes;
 
 //
-// Base class for a module that uses a scheduler to set timers
+// Base for a module that uses a scheduler to set timers
+//
+// @see ~ITimed
 //
 // @author Till Steinbach
 //
 simple Timed like ITimed
 {
     parameters:
+        //Is actually implemented by Timed C++ class
+        @class(AbstractSimpleModule);
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer

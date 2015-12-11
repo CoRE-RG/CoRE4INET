@@ -22,7 +22,7 @@ import core4inet.utilities.classes.IScheduled;
 // The module schedules a message for every cycle at action_point 0 and then changes the drift by using the drift_change
 // parameter.
 //
-// @see IOscillator, Oscillator
+// @see ~Oscillator, ~IScheduled, ~IOscillator
 //
 // @author Till Steinbach
 //
@@ -30,6 +30,7 @@ simple SimpleOscillator extends Oscillator like IScheduled
 {
     parameters:
         @class(SimpleOscillator);
+        
         // Maximum clock drift
         double max_drift @unit(ppm) = default(200ppm);
         // Clock drift change intensity
@@ -40,7 +41,8 @@ simple SimpleOscillator extends Oscillator like IScheduled
         string oscillator = "this";
         //Timer of the timed module (must be set to the name of an timer module in the Node)
         string timer = default("timer");
+        
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
-        input schedulerIn @directIn;
+        input schedulerIn @directIn @label(SchedulerMessage);
 }

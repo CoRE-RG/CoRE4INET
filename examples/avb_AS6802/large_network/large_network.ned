@@ -4,7 +4,7 @@ import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
 
 network large_network
 {
-    @display("bgb=909,415;bgl=5");
+    @display("bgb=685,299;bgi=background/avb_AS6802_large_network,s");
     types:
         channel cable extends ned.DatarateChannel
         {
@@ -14,50 +14,50 @@ network large_network
 
     submodules:
         switch_1: Switch_1 {
-            @display("p=231,197");
+            @display("p=228,123");
             gates:
                 ethg[5];
         }
         switch_2: Switch_2 {
-            @display("p=367,197");
+            @display("p=364,123");
             gates:
                 ethg[5];
         }
         switch_3: Switch_3 {
-            @display("p=500,197");
+            @display("p=497,123");
             gates:
                 ethg[4];
         }
 
         node_1: TTEAVBEtherHost {
-            @display("p=43,109");
+            @display("p=40,35");
         }
         node_2: TTEAVBEtherHost {
-            @display("p=43,182");
+            @display("p=40,108");
         }
         node_3: Node_3 {
-            @display("p=43,257");
+            @display("p=40,183");
         }
         node_4: Node_4 {
-            @display("p=43,323");
+            @display("p=40,249");
         }
         node_5: Node_5 {
-            @display("p=270,323");
+            @display("p=267,249");
         }
         node_6: Node_6 {
-            @display("p=367,323");
+            @display("p=364,249");
         }
         node_7: Node_7 {
-            @display("p=461,323");
+            @display("p=458,249");
         }
         node_8: TTEAVBEtherHost {
-            @display("p=643,109");
+            @display("p=640,35");
         }
         node_9: Node_9 {
-            @display("p=643,197");
+            @display("p=640,123");
         }
         node_10: TTEAVBEtherHost {
-            @display("p=643,323");
+            @display("p=640,249");
         }
 
     connections:

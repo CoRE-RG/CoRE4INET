@@ -25,6 +25,8 @@ namespace CoRE4INET {
 
 Define_Module(TrafficSourceAppBase);
 
+simsignal_t TrafficSourceAppBase::sigPayload = registerSignal("payloadSignal");
+
 TrafficSourceAppBase::TrafficSourceAppBase()
 {
     this->enabled = false;
@@ -36,6 +38,8 @@ bool TrafficSourceAppBase::isEnabled()
 }
 
 size_t TrafficSourceAppBase::getPayloadBytes(){
+    handleParameterChange("payload");
+    emit(sigPayload,this->payload);
     return this->payload;
 }
 
@@ -45,7 +49,7 @@ void TrafficSourceAppBase::initialize()
     handleParameterChange(nullptr);
     if (isEnabled())
     {
-        scheduleAt(simTime() + par("start_time").doubleValue(), new cMessage(START_MSG_NAME));
+        scheduleAt(simTime() + par("startTime").doubleValue(), new cMessage(START_MSG_NAME));
         if (getEnvir()->isGUI())
         {
             getDisplayString().setTagArg("i2", 0, "status/asleep");
@@ -68,13 +72,13 @@ void TrafficSourceAppBase::handleParameterChange(const char* parname)
     {
         this->enabled = par("enabled").boolValue();
     }
-    if (!parname || !strcmp(parname, "start_time"))
+    if (!parname || !strcmp(parname, "startTime"))
     {
-        parameterDoubleCheckRange(par("start_time"), 0, MAXTIME.dbl());
+        parameterDoubleCheckRange(par("startTime"), 0, MAXTIME.dbl());
     }
     if (!parname || !strcmp(parname, "payload"))
     {
-        this->payload = parameterULongCheckRange(par("payload"), (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES),
+        this->payload = parameterULongCheckRange(par("payload"), 0,
                 MAX_ETHERNET_DATA_BYTES);
     }
 }

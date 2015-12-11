@@ -13,13 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CoRE4INET_IEEE8021QShaper_H
-#define __CoRE4INET_IEEE8021QShaper_H
+#ifndef CORE4INET_IEEE8021QShaper_H
+#define CORE4INET_IEEE8021QShaper_H
 
+#include <algorithm>    // std::sort
 
 //CoRE4INET
 #include "CoRE4INET_Timed.h"
 #include "CoRE4INET_HelperFunctions.h"
+#include "CoRE4INET_ConfigFunctions.h"
+#include "CoRE4INET_Defs.h"
 //Auto-generated Messages
 #include "EtherFrameWithQTag_m.h"
 
@@ -27,21 +30,22 @@ namespace CoRE4INET {
 
 /**
  * @brief A Shaper for IEEE802.1Q-tagged Messages.
- * *
+ *
  * @ingroup IEEE8021Q
  *
- * @author Till Steinbach
- * @author Philipp Meyer
+ * @author Till Steinbach, Philipp Meyer
  */
 template<class TC>
 class IEEE8021QShaper : public TC, public virtual Timed
 {
-    using Timed::initialize;
+        using Timed::initialize;
+
     public:
         /**
          * @brief Constructor
          */
         IEEE8021QShaper();
+
         /**
          * @brief Destructor
          */
@@ -53,11 +57,22 @@ class IEEE8021QShaper : public TC, public virtual Timed
          */
         std::vector<cQueue> qQueue;
 
+        /**
+         * @brief Untagged VLAN.
+         * Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged.
+         */
+        uint16_t untaggedVID;
+        /**
+         * @brief Tagged VLANs.
+         * Only outgoing frames with one of the VLANs in this list are transmitted. Default is "0" to allow for untagged frames
+         */
+        std::vector<int> taggedVIDs;
     protected:
         /**
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
          */
         std::vector<simsignal_t> qQueueLengthSignals;
+
     protected:
         /**
          * Initializes the module
@@ -136,11 +151,19 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * queues are empty
          */
         virtual cMessage *front() override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 template<class TC>
 IEEE8021QShaper<TC>::IEEE8021QShaper()
 {
+    untaggedVID = 0;
 }
 
 template<class TC>
@@ -195,6 +218,35 @@ void IEEE8021QShaper<TC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
+        if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+        {
+            //VLAN untag if requested
+            if (this->untaggedVID && this->untaggedVID == qframe->getVID())
+            {
+                qframe->setVID(0);
+            }
+            //VLAN check if port is tagged with VLAN
+            bool found = false;
+            for (std::vector<int>::iterator vid = this->taggedVIDs.begin(); vid != this->taggedVIDs.end(); ++vid)
+            {
+                //Shortcut due to sorted vector
+                if ((*vid) > qframe->getVID())
+                {
+                    break;
+                }
+                if ((*vid) == qframe->getVID())
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                delete qframe;
+                return;
+            }
+        }
+
         if (TC::getNumPendingRequests())
         {
             TC::framesRequested--;
@@ -224,7 +276,8 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("in"))
     {
         uint8_t priority = 0;
-        if(EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg)){
+        if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+        {
             priority = qframe->getPcp();
         }
         if (priority >= 0 && static_cast<size_t>(priority) < 8)
@@ -238,7 +291,8 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
         {
             qQueue[0].insert(msg);
             TC::notifyListeners();
-            EV_WARN << "Priority of message "<< msg->getFullName() <<" missing or not within range, using default priority 0!" << endl;
+            EV_WARN << "Priority of message " << msg->getFullName()
+                    << " missing or not within range, using default priority 0!" << endl;
         }
     }
     else
@@ -252,7 +306,7 @@ void IEEE8021QShaper<TC>::requestPacket()
 {
     Enter_Method
     ("requestPacket()");
-    //Feed the MAC layer with the next frame
+//Feed the MAC layer with the next frame
     TC::framesRequested++;
 
     if (cMessage *msg = pop())
@@ -270,10 +324,10 @@ cMessage* IEEE8021QShaper<TC>::pop()
 
     for (size_t i = 8; i > 0; i--)
     {
-        if (!qQueue[i-1].isEmpty())
+        if (!qQueue[i - 1].isEmpty())
         {
-            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i-1].pop());
-            cComponent::emit(qQueueLengthSignals[i-1], static_cast<unsigned long>(qQueue[i-1].getLength()));
+        inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].pop());
+        cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i-1].getLength()));
             return message;
         }
     }
@@ -288,9 +342,9 @@ cMessage* IEEE8021QShaper<TC>::front()
 
     for (size_t i = 8; i > 0; i--)
     {
-        if (!qQueue[i-1].isEmpty())
+        if (!qQueue[i - 1].isEmpty())
         {
-            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i-1].front());
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].front());
             return message;
         }
     }
@@ -316,6 +370,22 @@ void IEEE8021QShaper<TC>::clear()
     for (unsigned int i = 0; i < 8; i++)
     {
         qQueue[i].clear();
+    }
+}
+
+template<class TC>
+void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
+{
+    TC::handleParameterChange(parname);
+
+    if (!parname || !strcmp(parname, "untaggedVID"))
+    {
+        this->untaggedVID = static_cast<uint16>(parameterULongCheckRange(par("untaggedVID"), 0, MAX_VLAN_NUMBER));
+    }
+    if (!parname || !strcmp(parname, "taggedVIDs"))
+    {
+        taggedVIDs = cStringTokenizer(par("taggedVIDs"), ",").asIntVector();
+        std::sort(taggedVIDs.begin(), taggedVIDs.end());
     }
 }
 

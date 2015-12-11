@@ -62,7 +62,11 @@ cGate* gateByShortPath(const std::string &nameAndGate, cModule *from)
     {
         std::string modulePath = nameAndGate.substr(0, pos);
         std::string gateName = nameAndGate.substr(pos + 1);
-        cModule* module = findModuleWhereverInNode(modulePath.c_str(), from);
+        cModule* module = from->getModuleByPath(modulePath.c_str());
+        if (!module)
+        {
+            module = findModuleWhereverInNode(modulePath.c_str(), from);
+        }
         if (module)
         {
             return module->gate(gateName.c_str());

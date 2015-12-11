@@ -13,17 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_NOTIFIERCONSTS_H_
-#define __CORE4INET_NOTIFIERCONSTS_H_
+#ifndef CORE4INET_NOTIFIERCONSTS_H_
+#define CORE4INET_NOTIFIERCONSTS_H_
 
 #include "omnetpp.h"
 
 namespace CoRE4INET {
 
-#ifdef WITH_AS6802_COMMON
 //Notification for changes in the synchronization state
 extern simsignal_t NF_SYNC_STATE_CHANGE; //Sync
-#endif
 
 #ifdef WITH_AVB_COMMON
 //Notifications for talker and listener management
@@ -37,4 +35,4 @@ extern simsignal_t NF_AVB_LISTENER_REGISTRATION_TIMEOUT; //signal emitted when a
 
 }
 
-#endif /* __CORE4INET_NOTIFIERCONSTS_H_ */
+#endif /* CORE4INET_NOTIFIERCONSTS_H_ */

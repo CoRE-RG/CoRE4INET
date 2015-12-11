@@ -12,25 +12,27 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.synchronisation.base;
 
 import core4inet.linklayer.port.IPort;
-import core4inet.utilities.classes.IScheduled;
 
 //
 // Synchronisation module interface
 //
-// @see IPort
+// @see ~IPort, ~IScheduled
 //
 // @author Till Steinbach
-moduleinterface ISync extends IPort, IScheduled
+//
+moduleinterface ISync extends IPort
 {
     parameters:
         @display("i=block/timer");
 
         //Signal emited when sync state changes (e.g. SYNC, ASYNC, ...)
         @signal[syncStatus](type=CoRE4INET::SyncNotification);
+        
     gates:
         //Input for scheduler messages
-        input schedulerIn @directIn;
+        input schedulerIn @directIn @label(SchedulerMessage); 
 }

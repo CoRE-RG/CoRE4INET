@@ -40,20 +40,6 @@ void TTTrafficSourceApp::initialize()
     CTTrafficSourceAppBase::initialize();
 
     handleParameterChange(nullptr);
-    if (isEnabled())
-    {
-        SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-        event->setAction_time(static_cast<uint32_t>(par("action_time").doubleValue() / getOscillator()->getPreciseTick()));
-        event->setDestinationGate(gate("schedulerIn"));
-
-        if (event->getAction_time() >= getPeriod()->getCycleTicks())
-        {
-            throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)",
-                    event->getAction_time(), getPeriod()->getCycleTicks());
-        }
-
-        getPeriod()->registerEvent(event);
-    }
     synchronized = false;
 
     inet::findContainingNode(this)->subscribe(NF_SYNC_STATE_CHANGE, this);
@@ -61,8 +47,27 @@ void TTTrafficSourceApp::initialize()
 
 void TTTrafficSourceApp::handleMessage(cMessage *msg)
 {
+    if (msg->isSelfMessage() && (strcmp(msg->getName(), START_MSG_NAME) == 0))
+    {
+        if (isEnabled())
+        {
+            SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event",
+                    ACTION_TIME_EVENT);
+            event->setAction_time(
+                    static_cast<uint32_t>(par("action_time").doubleValue() / getOscillator()->getPreciseTick()));
+            event->setDestinationGate(gate("schedulerIn"));
 
-    if (msg && msg->arrivedOn("schedulerIn"))
+            if (event->getAction_time() >= getPeriod()->getCycleTicks())
+            {
+                throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)",
+                        event->getAction_time(), getPeriod()->getCycleTicks());
+            }
+
+            getPeriod()->registerEvent(event);
+        }
+        delete msg;
+    }
+    else if (msg && msg->arrivedOn("schedulerIn"))
     {
         if (getEnvir()->isGUI())
         {
@@ -85,7 +90,7 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
     }
 }
 
-void TTTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent *src, __attribute__((unused))      simsignal_t id,
+void TTTrafficSourceApp::receiveSignal(__attribute__((unused))        cComponent *src, __attribute__((unused))        simsignal_t id,
         cObject *obj)
 {
     Enter_Method_Silent

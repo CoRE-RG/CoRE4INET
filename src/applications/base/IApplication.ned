@@ -17,21 +17,23 @@ package core4inet.applications.base;
 
 //
 // Interface to be implemented by application models.
-// Since this is an abstract module please do not instantiate it
 //
+// @warning Since this is an abstract module please do not instantiate it!
 //
-// @see TTEAPIApplicationBase
+// @see ~TTEAPIApplicationBase
 //
 // @author Till Steinbach
+//
 moduleinterface IApplication
 {
     parameters:
         @display("i=block/app");
+        
         //Comma seperated list of buffer modules the application is allowed to use
         string buffers;
         //Name shown above the module
         string displayName;
     gates:
-         //Input gate for the incoming SchedulerActionTimeEvent messages
+         //Input gate for the incoming Scheduler messages
         input schedulerIn;
 }

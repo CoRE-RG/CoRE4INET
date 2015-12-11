@@ -13,17 +13,29 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_BGETHERLLC_H
-#define __CORE4INET_BGETHERLLC_H
+#ifndef CORE4INET_BGETHERLLC_H
+#define CORE4INET_BGETHERLLC_H
 
 //INET
 #include "EtherLLC.h"
 
 namespace CoRE4INET {
 
+/**
+ * @brief This module forwards frames to the bg buffers
+ *
+ * @sa EtherLLC
+ *
+ * @author Till Steinbach
+ */
 class BGEtherLLC : public virtual inet::EtherLLC
 {
   protected:
+    /**
+     * @brief Handles incoming messages
+     *
+     * @param msg cMessage pointer
+     */
     virtual void handleMessage(cMessage *msg) override;
 };
 

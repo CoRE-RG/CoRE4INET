@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TRAFFICSOURCEAPPBASE_H_
-#define __CORE4INET_TRAFFICSOURCEAPPBASE_H_
+#ifndef CORE4INET_TRAFFICSOURCEAPPBASE_H_
+#define CORE4INET_TRAFFICSOURCEAPPBASE_H_
 
 //CoRE4INET
 #include "CoRE4INET_ApplicationBase.h"
@@ -28,6 +28,8 @@ namespace CoRE4INET {
  *
  * @sa ApplicationBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach
  */
 class TrafficSourceAppBase : public virtual ApplicationBase
 {
@@ -62,6 +64,10 @@ class TrafficSourceAppBase : public virtual ApplicationBase
         size_t getPayloadBytes();
 
     protected:
+        /**
+         * @brief Signal that is emitted each time the payload is used.
+         */
+        static simsignal_t sigPayload;
 
         /**
          * @brief Initialization of the module. Sends activator message

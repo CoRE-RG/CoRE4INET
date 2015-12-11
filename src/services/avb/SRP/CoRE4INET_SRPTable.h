@@ -12,8 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __CoRE4INET_SRPTABLE_H_
-#define __CoRE4INET_SRPTABLE_H_
+#ifndef CORE4INET_SRPTABLE_H_
+#define CORE4INET_SRPTABLE_H_
 
 //Std
 #include <map>
@@ -34,6 +34,8 @@ namespace CoRE4INET {
  * @brief This module handles the mapping between ports and MAC addresses.
  *
  * See the NED definition for details.
+ *
+ * @author Till Steinbach, Philipp Meyer
  */
 class SRPTable : public virtual cSimpleModule
 {
@@ -44,14 +46,14 @@ class SRPTable : public virtual cSimpleModule
         class TalkerEntry : public virtual cObject
         {
             public:
-                uint64_t streamId;
-                SR_CLASS srClass;               // Stream Reservation Class
-                inet::MACAddress address;             // The talkers address
-                cModule *module;                // Input port or module
-                size_t framesize;         // framesize in byte
+                uint64_t streamId;          // Stream ID
+                SR_CLASS srClass;           // Stream Reservation Class
+                inet::MACAddress address;   // The talkers address
+                cModule *module;            // Input port or module
+                size_t framesize;           // Frame size in byte
                 uint16_t intervalFrames;    // interval frames
-                uint16_t vlan_id;         // VLAN identifier
-                simtime_t insertionTime;        // Arrival time of SRP entry
+                uint16_t vlan_id;           // VLAN identifier
+                simtime_t insertionTime;    // Arrival time of SRP entry
                 TalkerEntry()
                 {
                     streamId = 0;
@@ -78,9 +80,9 @@ class SRPTable : public virtual cSimpleModule
         class ListenerEntry : public virtual cObject
         {
             public:
-                uint64_t streamId;
+                uint64_t streamId;          // Stream ID
                 cModule *module;            // Listener port or module
-                uint16_t vlan_id;     // VLAN identifier
+                uint16_t vlan_id;           // VLAN identifier
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 ListenerEntry()
                 {
@@ -106,6 +108,7 @@ class SRPTable : public virtual cSimpleModule
          * map of talker entries for stream id
          */
         std::unordered_map<unsigned int, TalkerTable> talkerTables;
+
         /**
          * map of listener entries for stream id
          */
@@ -115,6 +118,7 @@ class SRPTable : public virtual cSimpleModule
          * Time when next entry is aging
          */
         simtime_t nextAging;
+
     protected:
 
         /**
@@ -132,6 +136,7 @@ class SRPTable : public virtual cSimpleModule
          *  @brief Constructor
          */
         SRPTable();
+
         /**
          *  @brief Destructor
          */

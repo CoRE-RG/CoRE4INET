@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
+
 package core4inet.linklayer.ethernet.avb;
 
 import core4inet.linklayer.ethernet.base.BGEtherLLC;
@@ -23,7 +24,7 @@ import core4inet.linklayer.ethernet.base.BGEtherLLC;
 // Incoming SRP frames are forwarded as SRP messages through srpOut to the SRProtocol module.
 // Outgoing SRP messages coming through srpIn gate are forwarded according to the controlInfo as EtherFrame
 //
-// @see BGEtherLLC, SRProtocol
+// @see ~BGEtherLLC, ~SRProtocol
 // 
 // @author Till Steinbach
 //
@@ -32,6 +33,7 @@ simple SRPEtherLLC extends BGEtherLLC
     parameters:
         @class(SRPEtherLLC);
         @display("i=block/fork");
+        
     gates:
         //SRP message in from SRP protocol module
         input srpIn;

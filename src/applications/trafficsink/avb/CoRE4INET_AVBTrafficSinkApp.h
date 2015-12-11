@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBTRAFFICSINK_H_
-#define __CORE4INET_AVBTRAFFICSINK_H_
+#ifndef CORE4INET_AVBTRAFFICSINK_H_
+#define CORE4INET_AVBTRAFFICSINK_H_
 
 //OMNeT++
 #include "omnetpp.h"
@@ -31,7 +31,7 @@ namespace CoRE4INET {
  * @sa ApplicationBase
  * @ingroup Applications
  *
- * @author Till Steinbach
+ * @author Till Steinbach, Philipp Meyer
  */
 class AVBTrafficSinkApp : public virtual TrafficSinkApp, public virtual cListener
 {

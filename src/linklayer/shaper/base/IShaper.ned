@@ -12,19 +12,20 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package core4inet.linklayer.shaper.base;
 
+package core4inet.linklayer.shaper.base;
 
 import inet.common.queue.IOutputQueue;
 
 //
 // Interface for real-time Ethernet traffic shapers
 //
-// @see BE_Shaper, PCF_RC_BE_Shaper, TT_PCF_RC_BE_Shaper, IOutputQueue
+// @see ~IOutputQueue, ~BE_Shaper, ~PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper 
 //
 // @author Till Steinbach
 //
 moduleinterface IShaper extends IOutputQueue
 {
-    @display("i=block/classifier");
+    parameters:
+        @display("i=block/classifier");
 }

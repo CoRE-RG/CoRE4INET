@@ -15,9 +15,11 @@
 
 namespace CoRE4INET;
 
-//Service clases of AVB
+// Service classes of AVB
+//
+// @author Till Steinbach, Philipp Meyer
 enum SR_CLASS
 {
-   SR_CLASS_A = 0;
-   SR_CLASS_B = 1;
+   SR_CLASS_A = 0; // AVB Service Class A
+   SR_CLASS_B = 1; // AVB Service Class B
 };

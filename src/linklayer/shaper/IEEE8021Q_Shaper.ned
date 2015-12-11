@@ -12,6 +12,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.linklayer.shaper;
 
 import core4inet.linklayer.shaper.base.IShaper;
@@ -20,25 +21,32 @@ import core4inet.linklayer.shaper.base.IShaper;
 //
 //The IEEE8021Q Shaper handles Q-tagged and best-effort traffic
 //
-// @see IShaper
+// @see ~IShaper
 //
-// @author Till Steinbach
-// @author Philipp Meyer
+// @author Till Steinbach, Philipp Meyer
 //
 simple IEEE8021Q_Shaper like IShaper
 {
     parameters:
         @display("i=block/classifier");
         @class(IEEE8021Q_Shaper);
-        //Signal emitted when queue length of the rc queue changes, contains new queue length
-        @signal[q*QueueLength](type=unsigned long);
-        //Statistic of the queue length of rate-constrained frames
-        @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; record=vector; interpolationmode=sample-hold);
+        
+        //Signal emitted when queue length of the IEEE802.1Q queue changes, contains new queue length
+        @signal[q*QueueLength](type=unsigned long; unit=packets);
+        //Statistic of the queue length of IEEE802.1Q frames
+        @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; unit=packets; record=vector; interpolationmode=sample-hold);
 		
-		string oscillator = default("oscillator");
-        string timer = default("timer");
+		//Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+		string oscillator = default("^.^.scheduler.oscillator");
+		//Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        string timer = default("^.^.scheduler.timer");
+        //Untagged VLAN. Outgoing frames with this VLAN get untagged
+        int untaggedVID = default(0);
+        //Interface allows frames with this VLAN to leave the port
+        string taggedVIDs = default("0");
+        
     gates:
-        //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)
+        //Input for IEEE802.1Q frames from the upper layer (EtherLLC or IMacRelayUnit)
         input in @labels(EtherFrame);
         //Output to the lower layer (MAC layer)
         output out @labels(EtherFrame);

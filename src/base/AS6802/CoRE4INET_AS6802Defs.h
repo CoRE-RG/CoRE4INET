@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_AS6802DEFS_H_
-#define __CORE4INET_AS6802DEFS_H_
+#ifndef CORE4INET_AS6802DEFS_H_
+#define CORE4INET_AS6802DEFS_H_
 
 namespace CoRE4INET {
 
@@ -26,7 +26,6 @@ namespace CoRE4INET {
 #define MAX_BAG UINT32_MAX
 #define MAX_JITTER UINT32_MAX
 #define MAX_SEND_WINDOW UINT32_MAX
-#define MAX_CYCLE_TICKS UINT32_MAX
 #define MAX_OFFSET_TICKS UINT32_MAX
 #define MAX_BAG_TICKS UINT32_MAX
 #define MAX_JITTER_TICKS UINT32_MAX

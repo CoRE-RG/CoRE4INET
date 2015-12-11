@@ -25,9 +25,6 @@ import core4inet.utilities.classes.ITimed;
 // @warning Do not instantiate the module. Use RCDoubleBuffer or RCQueueBuffer instead! 
 // Only the bag parameter is currently used!
 //
-// @todo The RCBuffer module should be converted to an interface since it should
-// not be used directly in simulation.
-//
 // @see RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
 //
 // @author Till Steinbach
@@ -35,8 +32,9 @@ simple RCBuffer extends CTBuffer like ITimed
 {
     parameters:
         //RCBuffer is implemented by the RCBuffer C++ Class
-        @class(RCBuffer);
+        @class(AbstractSimpleModule);
         @display("i=,orange");
+        
         // Not used
         int max_dispatch_delay @unit(tick) = default(0tick);
         // Bandwidth allocation gap in number of ticks (Changes to this parameter will get active for future frames only)
@@ -44,8 +42,6 @@ simple RCBuffer extends CTBuffer like ITimed
         // Maximum jitter for the bandwidth allocation gap in number of ticks
         int jitter @unit(tick) = default(0tick);
 
-        string oscillator = default("oscillator");
-        string timer = default("timer");
     gates:
         //Input gate for the incoming SchedulerTimerEvent messages
         input schedulerIn @directIn;

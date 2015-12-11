@@ -24,15 +24,13 @@ import core4inet.buffer.base.Buffer;
 // @warning Currently the out gate is not used. Instead the buffer sends its
 // message via sendDirect to all via addDestinationGate() registred gates.
 //
-// @todo The CTBuffer module should be converted to an interface since it should
-// not be used directly in simulation.
-//
 // @see Buffer
 //
 // @author Till Steinbach
 simple CTBuffer extends Buffer
 {
     parameters:
+        @class(AbstractSimpleModule);
         @display("i=block/buffer");
         //Priority of the buffer (currently only used for rate-constrained traffic)
         int priority = default(-1);
@@ -42,5 +40,10 @@ simple CTBuffer extends Buffer
         int ct_marker;
         //Critical traffic mask of the buffer
         int ct_mask;
+        
+        //Oscillator this buffer is assigned to
+        string oscillator = default("^.scheduler.oscillator");
+        //Timer this buffer is assigned to
+        string timer = default("^.scheduler.timer");
 
 }

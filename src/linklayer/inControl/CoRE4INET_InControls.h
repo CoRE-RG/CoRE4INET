@@ -12,8 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __CoRE4INET_INCONTROLS_H_
-#define __CoRE4INET_INCONTROLS_H_
+#ifndef CORE4INET_INCONTROLS_H_
+#define CORE4INET_INCONTROLS_H_
 
 //CoRE4INET
 #include "CoRE4INET_BaseInControl.h"
@@ -27,6 +27,11 @@
 #ifdef WITH_AVB_COMMON
 //CoRE4INET
 #include "CoRE4INET_AVBInControl.h"
+#endif
+
+#ifdef WITH_IEEE8021Q_COMMON
+//CoRE4INET
+#include "CoRE4INET_IEEE8021QInControl.h"
 #endif
 
 namespace CoRE4INET {
@@ -43,6 +48,22 @@ namespace CoRE4INET {
 class BE_InControl : public BEInControl<BaseInControl>
 {
 };
+
+
+#ifdef WITH_IEEE8021Q_COMMON
+/**
+ * @brief Class representing the BE_InControl module
+ *
+ * This module only handles incoming best-effort traffic.
+ *
+ * @see BaseInControl
+ *
+ * @author Till Steinbach
+ */
+class IEEE8021Q_InControl : public IEEE8021QInControl<BaseInControl>
+{
+};
+#endif
 
 
 #ifdef WITH_AS6802_COMMON

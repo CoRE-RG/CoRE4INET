@@ -13,19 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.configuration.base;
+#ifndef CORE4INET_ABSTRACTSIMPLEMODULE_H_
+#define CORE4INET_ABSTRACTSIMPLEMODULE_H_
 
-import core4inet.configuration.IConfigurationManager;
+#include <omnetpp.h>
 
-//
-// Dummy module for a ConfigurationManager that has no configuration.
-// If you use this BaseConfigurationManager you must configure the
-// node manually
-//
-// @see IConfigurationManager
-//
-// @author Till Steinbach
-simple BaseConfigurationManager like IConfigurationManager
+namespace CoRE4INET {
+
+/**
+ * TODO - Generated class
+ */
+class AbstractSimpleModule : public cSimpleModule
 {
-    @display("i=block/table2");
-}
+  protected:
+    virtual void initialize() __attribute__ ((noreturn));
+};
+
+} //namespace
+
+#endif

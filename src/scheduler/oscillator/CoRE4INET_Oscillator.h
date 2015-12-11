@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_OSCILLATOR_H_
-#define __CORE4INET_OSCILLATOR_H_
+#ifndef CORE4INET_OSCILLATOR_H_
+#define CORE4INET_OSCILLATOR_H_
 
 //OMNeT++
 #include "omnetpp.h"
@@ -52,6 +52,7 @@ class Oscillator : public virtual cSimpleModule
 
     protected:
         virtual void initialize(int stage) override;
+
         /**
          * @brief Returns the number of initialization stages this module needs.
          *
@@ -71,6 +72,7 @@ class Oscillator : public virtual cSimpleModule
          * @brief Constructor of Oscillator
          */
         Oscillator();
+
         /**
          * @brief Returns the current length of a tick
          *
@@ -84,6 +86,7 @@ class Oscillator : public virtual cSimpleModule
          * @param tick_length new length of a tick
          */
         void setCurrentTick(simtime_t tick_length);
+
         /**
          * @brief Returns the precise length of a tick (without drift)
          *

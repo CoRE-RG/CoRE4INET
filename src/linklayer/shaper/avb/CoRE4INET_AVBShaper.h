@@ -12,6 +12,9 @@
 #include "AVBDefs_m.h"
 #include "CoRE4INET_AVBBuffer.h"
 
+//Auto-generated messages
+#include "AVBFrame_m.h"
+
 namespace CoRE4INET {
 
 /**
@@ -29,6 +32,7 @@ class AVBShaper : public TC
          * @brief Constructor
          */
         AVBShaper();
+
         /**
          * @brief Destructor
          */
@@ -40,10 +44,24 @@ class AVBShaper : public TC
          */
         cQueue avbQueue;
 
+        /**
+         * @brief Pointer to AVBBuffer
+         */
         AVBBuffer *avbBuffer;
 
+        /**
+         * @brief Name of the avbQueueLengthSignal
+         */
         std::string avbQueueLengthSignalName;
+
+        /**
+         * @brief Name of the avbBuffer
+         */
         std::string avbBufferName;
+
+        /**
+         * @brief Name of the avbIn
+         */
         std::string avbInName;
 
     protected:
@@ -58,7 +76,7 @@ class AVBShaper : public TC
          *
          * @param stage The stages. Module initializes when stage==0
          */
-        virtual void initialize(int stage);
+        virtual void initialize(int stage) override;
 
         /**
          * @brief Forwards the messages from the different buffers and LLC
@@ -71,7 +89,7 @@ class AVBShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void handleMessage(cMessage *msg);
+        virtual void handleMessage(cMessage *msg) override;
 
         /**
          * @brief Queues messages in the correct queue
@@ -81,7 +99,7 @@ class AVBShaper : public TC
          *
          * @param msg the incoming message
          */
-        virtual void enqueueMessage(cMessage *msg);
+        virtual void enqueueMessage(cMessage *msg) override;
 
         /**
          * @brief this method is invoked when the underlying mac is idle.
@@ -91,19 +109,19 @@ class AVBShaper : public TC
          * received.
          *
          */
-        virtual void requestPacket();
+        virtual void requestPacket() override;
 
         /**
          * @brief Returns true when there are no pending messages.
          *
          * @return true if all queues are empty.
          */
-        virtual bool isEmpty();
+        virtual bool isEmpty() override;
 
         /**
          * @brief Clears all queued packets and stored requests.
          */
-        virtual void clear();
+        virtual void clear() override;
 
         /**
          * @brief Returns a frame directly from the queues, bypassing the primary,
@@ -112,7 +130,7 @@ class AVBShaper : public TC
          * @return the message with the highest priority from any queue. nullptr if the
          * queues are empty or cannot send due to the traffic policies.
          */
-        virtual cMessage *pop();
+        virtual cMessage *pop() override;
 
         /**
          * @brief Returns a pointer to a frame directly from the queues.
@@ -122,7 +140,7 @@ class AVBShaper : public TC
          * @return pointer to the message with the highest priority from any queue. nullptr if the
          * queues are empty
          */
-        virtual cMessage *front();
+        virtual cMessage *front() override;
 };
 
 template<int SRCLASS, class TC>
@@ -171,8 +189,11 @@ void AVBShaper<SRCLASS, TC>::handleMessage(cMessage *msg)
         if (TC::getNumPendingRequests() && avbBuffer->getCredit() >= 0)
         {
             TC::framesRequested--;
+            AVBFrame* sizeMsg = dynamic_cast<AVBFrame*>(msg->dup());
+            sizeMsg->setByteLength(sizeMsg->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
-            SimTime duration = TC::outChannel->calculateDuration(msg);
+            SimTime duration = TC::outChannel->calculateDuration(sizeMsg);
+            delete sizeMsg;
             avbBuffer->sendSlope(duration);
         }
         else
@@ -199,7 +220,7 @@ void AVBShaper<SRCLASS, TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn(avbInName.c_str()))
     {
         avbQueue.insert(msg);
-        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.getLength()));
+        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.length()));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing AVB frame" << endl;
     }
@@ -235,8 +256,11 @@ cMessage* AVBShaper<SRCLASS, TC>::pop()
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
         cMessage *msg = static_cast<cMessage*>(avbQueue.pop());
-        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.getLength()));
-        SimTime duration = TC::outChannel->calculateDuration(msg);
+        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.length()));
+        AVBFrame* sizeMsg = dynamic_cast<AVBFrame*>(msg->dup());
+        sizeMsg->setByteLength(sizeMsg->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
+        SimTime duration = TC::outChannel->calculateDuration(sizeMsg);
+        delete sizeMsg;
         avbBuffer->sendSlope(duration);
         return msg;
     }

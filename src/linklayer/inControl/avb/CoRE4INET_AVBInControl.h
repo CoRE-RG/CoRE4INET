@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBINCONTROL_H_
-#define __CORE4INET_AVBINCONTROL_H_
+#ifndef CORE4INET_AVBINCONTROL_H_
+#define CORE4INET_AVBINCONTROL_H_
 
 //CoRE4INET Auto-generated Messages
 #include "AVBFrame_m.h"
@@ -26,7 +26,7 @@ namespace CoRE4INET {
 /**
  * @brief Represents the part of a port that receives messages (RX)
  *
- *Critical traffic arriving on in-gate is forwarded to the incoming modules
+ * AVB traffic arriving on in-gate is forwarded to the incoming module
  * or dropped if there is no module configured. Best-effort frames are
  * forwarded through the out-gate.
  *
@@ -38,7 +38,7 @@ class AVBInControl : public IC
 {
     protected:
         /**
-         * @brief Forwards frames to the appropriate incoming modules
+         * @brief Forwards frames to the appropriate incoming module
          *
          * An AVB frame arriving on in-gate is forwarded to the AVBctc module
          * or dropped if there is no module configured.
@@ -67,6 +67,7 @@ void AVBInControl<IC>::handleMessage(cMessage *msg)
         //Is AVB Frame?
         if (frame && isAVB(frame))
         {
+            this->recordPacketReceived(frame);
             cSimpleModule::sendDirect(frame,
                     cModule::getParentModule()->getParentModule()->getSubmodule("avbCTC")->gate("in"));
         }

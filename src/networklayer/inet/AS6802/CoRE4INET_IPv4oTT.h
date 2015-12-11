@@ -45,14 +45,14 @@ public:
     virtual ~IPv4oTT();
 
     virtual void initialize(int stage) override;
-    virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie);
-    virtual void configureFilters(cXMLElement *config);
+    virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie) override;
+    virtual void configureFilters(cXMLElement *config) override;
     virtual void handleMessage(cMessage* msg) override;
 
     /**
      * Encapsulates packet in RC frame and sends to each destination buffers.
      */
-    virtual void sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
+    virtual void sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters) override;
 
     /**
      * Encapsulates packet in TT Frame and sends to destination Buffers.

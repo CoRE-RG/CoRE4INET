@@ -12,16 +12,17 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.linklayer.inControl.base;
 
-
 import inet.common.queue.IOutputQueue;
+
 import core4inet.utilities.classes.ITimed;
 
 //
 // Interface for a module that controls incoming real-time Ethernet traffic
 //
-// @see TTEInput, IOutputQueue
+// @see ~IOutputQueue, ~ITimed, ~TTEInput
 //
 // @author Till Steinbach
 //

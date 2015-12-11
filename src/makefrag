@@ -45,7 +45,7 @@ ifeq ($(CC),clang)
     CFLAGS += -Wno-c++98-compat-pedantic -Wno-unknown-pragmas
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
     CFLAGS += -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast
-    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command
+    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command -Wno-error=reserved-id-macro
 else ifeq ($(CC),gcc)
 	#gcc
 	ifdef EXTENDED_WARNINGS

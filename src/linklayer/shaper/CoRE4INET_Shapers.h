@@ -13,13 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CoRE4INET_SHAPERS_H_
-#define __CoRE4INET_SHAPERS_H_
+#ifndef CORE4INET_SHAPERS_H_
+#define CORE4INET_SHAPERS_H_
 
 //CoRE4INET
 #include "CoRE4INET_BaseShaper.h"
 #include "CoRE4INET_BEShaper.h"
+
+#ifdef WITH_IEEE8021Q_COMMON
 #include "CoRE4INET_IEEE8021QShaper.h"
+#endif
 
 #ifdef WITH_AS6802_COMMON
 //CoRE4INET
@@ -50,6 +53,7 @@ class BE_Shaper : public BEShaper<BaseShaper>
 {
 };
 
+#ifdef WITH_IEEE8021Q_COMMON
 /**
 * @brief Class representing the IEEE8021Q_Shaper module
  *
@@ -64,6 +68,7 @@ class BE_Shaper : public BEShaper<BaseShaper>
 class IEEE8021Q_Shaper : public IEEE8021QShaper<BaseShaper>
 {
 };
+#endif
 
 #ifdef WITH_AS6802_COMMON
 /**

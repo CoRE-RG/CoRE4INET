@@ -12,92 +12,104 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.nodes.ethernet.AS6802;
 
 import core4inet.applications.base.IApplication;
 import core4inet.buffer.base.BGQueueBuffer;
-import core4inet.configuration.IConfigurationManager;
 import core4inet.linklayer.port.TTEPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.linklayer.ethernet.base.BGEtherEncap;
+
 import inet.common.lifecycle.NodeStatus;
 import inet.networklayer.common.InterfaceTable;
 
-
 //
 // Module for a TTEthernet Host.
-// Contains a EtherEncap for best-effort traffic, a TTEPHYPort module as physical port,
+// Contains a BGEtherEncap for best-effort traffic, a TTEPHYPort module as physical port,
 // sync module (Sync) and a TTEScheduler module.
-// The Host is configured by the provided TTEthernet XML network configuration
-// (network_configuration parameter) and uses the device_name parameter to find its config.
-// The configuration is done by the BufferManager that deletes itself at runtime.
 //
-// @todo Ports for redundancy!
-// @todo Documentation for Applications!
-//
-// @see EtherEncap, TTEPHYPort, Sync, Scheduler, BufferManager
+// @see ~NodeStatus, ~TTEPHYPort, ~BGEtherEncap, ~IConfigurationManager, ~ISync, ~ITTEScheduler, ~IApplication, ~BGQueueBuffer, ~CheckedBuffer, ~InterfaceTable
 //
 // @author Till Steinbach
+//
 module TTEEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
         @networkNode;
         @labels(node,ethernet-node);
+        
+        // Number of Applications running on the device
         int numApps = default(0);
+        // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
+        // (When not manually declared in own deriving .ned file)
         int numBuffer = default(0);
+        // Number of Ports of the device
         int numPorts = default(1);
+        // Forwardingdelay of the device hardware
         double hardware_delay @unit(s) = default(0us);
-        string configurationManagerType = default("");
+        
         *.interfaceTableModule = default(absPath(".interfaceTable"));
+        
     gates:
         // Physical port of the host
         inout ethg @loose @labels(EtherFrame-conn);
 
     submodules:
+        // Keeps track of the status of network node (up, down, etc.)
         status: NodeStatus {
             @display("p=60,37;is=n");
         }
+        
         // Physical port of the host
         phy[numPorts]: TTEPHYPort {
             @display("p=235,255,c,50");
         }
+        
         // Encap for best-effort traffic
         encap: BGEtherEncap {
             parameters:
                 @display("p=141,256");
         }
 
-        // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
-            @display("p=999,999");
-        }
          // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             @display("p=141,169");
         }
+        
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
+        
+        // Applications for the device
         app[numApps]: < > like IApplication {
             @display("p=234,37,row,70");
         }
+        
+        // Best-efford buffer for incoming traffic 
         bgIn: BGQueueBuffer {
             @display("p=141,37");
         }
+        
+        // Best-efford buffer for outgoing traffic 
         bgOut: BGQueueBuffer {
             @display("p=141,99");
         }
+        
+        // Buffers with Incoming Module for TT and RC traffic (optional)
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
         }
         
+        // Holds interface names
         interfaceTable: InterfaceTable {
-            @display("p=447,313");
+            @display("p=234,100");
         }
+        
     connections allowunconnected:
         phy[0].phys <--> ethg;
         encap.lowerLayerOut --> phy[0].upperLayerIn;

@@ -21,9 +21,10 @@ package core4inet.applications.trafficsource.base;
 // This generator generates bursts with sendInterval distance
 //
 //
-// @see BGTrafficSourceApp
+// @see ~BGTrafficSourceApp
 //
 // @author Till Steinbach
+//
 simple BGBurstTrafficSourceApp extends BGTrafficSourceApp
 {
     parameters:
@@ -32,4 +33,7 @@ simple BGBurstTrafficSourceApp extends BGTrafficSourceApp
 
         // total size of the burst
         int burstSize @unit(byte) = default(1MiB);
+        
+        @signal[burstSizeSignal];
+        @statistic[burstSizeOverTime](title="burst size over time"; source=burstSizeSignal; unit=B; record=stats?,histogram?,vector?; interpolationmode=linear);
 }

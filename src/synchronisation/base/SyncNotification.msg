@@ -12,26 +12,28 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 namespace CoRE4INET;
 
 //
 // Message used to notify application layer about synchronisation state
 // uses SyncNotificationKind
 //
-// @see SyncNotificationKind
+// @see ~SyncNotificationKind
 //
 // @author Till Steinbach
+//
 message SyncNotification
 {
 }
 
-
 //
 // Enum for different SyncNotification messages 
 //
-// @see SyncNotification
+// @see ~SyncNotification
 //
 // @author Till Steinbach
+//
 enum SyncNotificationKind {
     // TBD
     SYNC=0;

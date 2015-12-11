@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QTRAFFICSOURCEAPP_H_
-#define __CORE4INET_IEEE8021QTRAFFICSOURCEAPP_H_
+#ifndef CORE4INET_IEEE8021QTRAFFICSOURCEAPP_H_
+#define CORE4INET_IEEE8021QTRAFFICSOURCEAPP_H_
 
 //CoRE4INET
 #include "CoRE4INET_TrafficSourceAppBase.h"
@@ -29,6 +29,8 @@ namespace CoRE4INET {
  *
  * @sa TrafficSourceAppBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach, Philipp Meyer
  */
 class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
 {
@@ -47,6 +49,10 @@ class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
          * @brief caches priority parameter
          */
         uint8_t priority;
+        /**
+         * @brief caches vid parameter
+         */
+        uint16_t vid;
     public:
         /**
          * @brief Constructor of IEEE8021QTrafficSourceApp

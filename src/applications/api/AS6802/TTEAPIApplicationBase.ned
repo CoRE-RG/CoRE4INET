@@ -17,8 +17,14 @@ package core4inet.applications.api.AS6802;
 
 import core4inet.applications.base.ApplicationBase;
 
+// 
+// Base module for a TTEthernet-Application based on the TTEthernet-API.
 //
-// TODO auto-generated module
+// @warning Please note that the TTEthernet-API functionality is not yet completely implemented.
+//
+// @see ~ApplicationBase, ~TTEAPITestApplication
+//
+// @author Till Steinbach
 //
 simple TTEAPIApplicationBase extends ApplicationBase
 {

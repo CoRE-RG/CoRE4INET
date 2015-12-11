@@ -17,12 +17,15 @@
 
 namespace CoRE4INET {
 
-simsignal_t QueueBuffer::queueLengthSignal = registerSignal("queueLength");
+simsignal_t QueueBuffer::queueLengthSignal = registerSignal("length");
+simsignal_t QueueBuffer::queueSizeSignal = registerSignal("size");
 simsignal_t QueueBuffer::droppedSignal = registerSignal("dropped");
 
 QueueBuffer::QueueBuffer()
 {
     initializeStatistics();
+    queueSize = 0;
+    WATCH(queueSize);
 }
 
 QueueBuffer::~QueueBuffer()
@@ -49,7 +52,7 @@ void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
             getParentModule()->getDisplayString().setTagArg("i2", 0, "status/excl3");
             getParentModule()->getDisplayString().setTagArg("tt", 0, "WARNING: buffer overflow");
         }
-        if (par("drop_new").boolValue())
+        if (par("dropNew").boolValue())
         {
             delete newFrame;
             return;
@@ -62,6 +65,8 @@ void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
     frames.insert(newFrame);
     setFilled(static_cast<size_t>(frames.getLength()));
     emit(queueLengthSignal, static_cast<unsigned long>(frames.getLength()));
+    queueSize+=static_cast<size_t>(newFrame->getByteLength());
+    emit(queueSizeSignal, queueSize);
 }
 
 inet::EtherFrame * QueueBuffer::dequeue()
@@ -70,7 +75,13 @@ inet::EtherFrame * QueueBuffer::dequeue()
     {
         setFilled(static_cast<size_t>(frames.getLength() - 1));
         emit(queueLengthSignal, static_cast<unsigned long>(frames.getLength() - 1));
-        return static_cast<inet::EtherFrame*>(frames.pop());
+
+        inet::EtherFrame* dequeueFrame = static_cast<inet::EtherFrame*>(frames.pop());
+
+        ASSERT2(queueSize>=static_cast<size_t>(dequeueFrame->getByteLength()),"queueSize would become negative");
+        queueSize-=static_cast<size_t>(dequeueFrame->getByteLength());
+        emit(queueSizeSignal, queueSize);
+        return dequeueFrame;
     }
     else
         return nullptr;

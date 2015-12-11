@@ -13,35 +13,49 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_BASECONFIGURATIONMANAGER_H_
-#define __CORE4INET_BASECONFIGURATIONMANAGER_H_
+#ifndef CORE4INET_NOSYNC_H_
+#define CORE4INET_NOSYNC_H_
 
 //OMNeT++
 #include "omnetpp.h"
+//Auto-generated Messages
+#include "SyncNotification_m.h"
 
 namespace CoRE4INET {
 
 /**
- * @brief Dummy module for a ConfigurationManager that has no configuration.
- * If you use this BaseConfigurationManager you must configure the node manually
+ * @brief No sync module.
  *
- * The module is deleted after simulation start
+ * This module does not correct the clock
  *
  * @author Till Steinbach
  */
-class BaseConfigurationManager : public virtual cSimpleModule
+class NoSync : public virtual cSimpleModule
 {
     protected:
         /**
-         * @brief Is called in initialization phase. The module creates a message for self destruction
+         * @brief Initializes the dummy synchronization module.
+         *
+         * registers an event in the scheduler to trigger the synchronization
+         *
+         * @param stage the stages. Module registers events when stage==1
          */
-        virtual void initialize() override;
+        virtual void initialize(int stage) override;
+
         /**
-         * @brief Destroys the module after reception of a message
+         * @brief Returns the number of initialization stages this module needs.
+         *
+         * @return always returns 2
+         */
+        virtual int numInitStages() const override;
+
+        /**
+         * @brief dummy synchronization function.
+         *
+         * @param msg Event of the scheduler that triggers the synchronization
          */
         virtual void handleMessage(cMessage *msg) override;
 };
-
-} //namespace
+}
 
 #endif

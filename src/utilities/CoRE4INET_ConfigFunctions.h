@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_CONFIGFUNCTIONS_H_
-#define __CORE4INET_CONFIGFUNCTIONS_H_
+#ifndef CORE4INET_CONFIGFUNCTIONS_H_
+#define CORE4INET_CONFIGFUNCTIONS_H_
 
 //Std
 #include <vector>
@@ -98,10 +98,14 @@ T extendedFindModuleWhereverInNode(const char *name, cModule *from, cModule *cal
         {
             throw cRuntimeError("Module is not inside a Node (Node must be marked by @node property in ned module)");
         }
-        cModule * cmod = findModuleWhereverInNode(name, from);
-        if (!cmod)
-        {
-            throw cRuntimeError("Cannot find a module with name %s", name);
+        cModule * cmod = caller->getModuleByPath(name);
+        if(!cmod){
+            cmod = findModuleWhereverInNode(name, from);
+
+            if (!cmod)
+            {
+                throw cRuntimeError("Cannot find a module with name %s", name);
+            }
         }
         module = dynamic_cast<T>(cmod);
         if (!module)

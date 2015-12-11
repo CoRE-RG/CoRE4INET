@@ -13,15 +13,26 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.configuration;
+package core4inet.applications.trafficsource.IEEE8021Q;
+
+import core4inet.applications.trafficsource.base.BGBurstTrafficSourceApp;
 
 //
-// Interface for a ConfigurationManager that configures a node according to its
-// configuration
+// Traffic source application used for IEEE 802.1Q burst traffic.
 //
-// @see BaseConfigurationManager
 //
-// @author Till Steinbach
-moduleinterface IConfigurationManager
+// @see ~BGBurstTrafficSourceApp, ~RCBurstTrafficSourceApp
+//
+// @author Philipp Meyer
+//
+simple IEEE8021QBurstTrafficSourceApp extends BGBurstTrafficSourceApp
 {
+    parameters:
+        @class(IEEE8021QBurstTrafficSourceApp);
+        @display("i=block/source,darkgreen");
+
+        // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
+        int priority = default(0);
+    	// VLAN ID (0=untagged, 4094=Highest)
+        int vid = default(0);
 }

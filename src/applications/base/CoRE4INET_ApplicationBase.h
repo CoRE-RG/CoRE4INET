@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_APPLICATIONBASE_H_
-#define __CORE4INET_APPLICATIONBASE_H_
+#ifndef CORE4INET_APPLICATIONBASE_H_
+#define CORE4INET_APPLICATIONBASE_H_
 
 //Std
 #include <list>
@@ -26,7 +26,7 @@ namespace CoRE4INET {
 class BGBuffer;
 
 /**
- * @brief Base class for a real-time Ethernet-Application.
+ * @brief Base class for a Ethernet-Application.
  *
  * Containes the mapping to Buffers and the ability to execute Callbacks
  *

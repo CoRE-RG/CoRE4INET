@@ -12,8 +12,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#ifndef __TTE4INET_COMPARERESULTRECORDERS_H
-#define __TTE4INET_COMPARERESULTRECORDERS_H
+
+#ifndef CORE4INET_COMPARERESULTRECORDERS_H
+#define CORE4INET_COMPARERESULTRECORDERS_H
 
 //OMNeT++
 #include "omnetpp.h"

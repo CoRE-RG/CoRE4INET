@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_CTBUFFER_H_
-#define __CORE4INET_CTBUFFER_H_
+#ifndef CORE4INET_CTBUFFER_H_
+#define CORE4INET_CTBUFFER_H_
 
 //CoRE4INET
 #include "CoRE4INET_Buffer.h"
@@ -109,6 +109,11 @@ class CTBuffer : public virtual Buffer
          */
         void putFrame(inet::EtherFrame* frame);
 
+        /**
+         * @brief get critical traffic id
+         *
+         * @return critical traffic id
+         */
         uint16_t getCTID();
 
 };

@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_SRPETHERLLC_H
-#define __CORE4INET_SRPETHERLLC_H
+#ifndef CORE4INET_SRPETHERLLC_H
+#define CORE4INET_SRPETHERLLC_H
 
 //CoRE4INET
 #include "CoRE4INET_BGEtherLLC.h"
@@ -25,14 +25,40 @@
 
 namespace CoRE4INET {
 
+/**
+ * @brief This module forwards frames based on their destination MAC addresses to appropriate ports.
+ *
+ * It can handle: AVBs SRP frames.
+ * Incoming SRP frames are forwarded as SRP messages through srpOut to the SRProtocol module.
+ * Outgoing SRP messages coming through srpIn gate are forwarded according to the controlInfo as EtherFrame
+ *
+ * @sa BGEtherLLC
+ *
+ * @author Till Steinbach
+ */
 class SRPEtherLLC : public BGEtherLLC
 {
     protected:
+        /**
+         * @brief Handles incoming messages
+         *
+         * @param msg cMessage pointer
+         */
         virtual void handleMessage(cMessage *msg) override;
-    private:
-        void dispatchSRP(SRPFrame * srp);
-        void deliverSRP(inet::EtherFrame * frame);
 
+    private:
+        /**
+         * @brief Forwards SRPFrame to outgoing Port
+         *
+         * @param srp SRPFrame pointer
+         */
+        void dispatchSRP(SRPFrame * srp);
+        /**
+         * @brief Delivers SRPFrame to SRProtocol module
+         *
+         * @param frame EtherFrame pointer
+         */
+        void deliverSRP(inet::EtherFrame * frame);
 };
 
 }

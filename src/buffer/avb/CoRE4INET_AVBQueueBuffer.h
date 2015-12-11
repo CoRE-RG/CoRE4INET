@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBQUEUEBUFFER_H_
-#define __CORE4INET_AVBQUEUEBUFFER_H_
+#ifndef CORE4INET_AVBQUEUEBUFFER_H_
+#define CORE4INET_AVBQUEUEBUFFER_H_
 
 //CoRE4INET
 #include "CoRE4INET_AVBBuffer.h"
@@ -27,4 +27,4 @@ class AVBQueueBuffer : public virtual AVBBuffer, public virtual QueueBuffer
 };
 
 } /* namespace CoRE4INET */
-#endif /* __CORE4INET_AVBQUEUEBUFFER_H_ */
+#endif /* CORE4INET_AVBQUEUEBUFFER_H_ */

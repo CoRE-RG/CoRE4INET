@@ -23,4 +23,6 @@ Define_Module(RC_AVB_IPv4);
 
 Define_Module(TT_RC_AVB_IPv4);
 
+Define_Module(TT_RC_AVB_8021Q_IPv4);
+
 } /* namespace CoRE4INET */

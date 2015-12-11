@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_CT_FRAME_H_
-#define __CORE4INET_CT_FRAME_H_
+#ifndef CORE4INET_CT_FRAME_H_
+#define CORE4INET_CT_FRAME_H_
 
 //Auto-generated Messages
 #include "CTFrame_m.h"
@@ -27,30 +27,44 @@ namespace CoRE4INET {
  * Basically implements the abstract CTID and CTMarker parameters
  * for the GUI that are extracted from the destination MAC
  *
- * @ingroup Frames AS6802
+ * @ingroup AS6802
  *
  * @author Till Steinbach
  */
 class CTFrame : public CTFrame_Base
 {
     public:
-        CTFrame() :
-                CTFrame_Base()
-        {
-        }
+        /**
+         * @brief Copy Constructor
+         */
         CTFrame(const CTFrame& other) :
                 CTFrame_Base(other)
         {
         }
+
+        /**
+         * @brief Constructor
+         *
+         * @param name message name
+         * @param kind message type
+         */
         CTFrame(const char *name = nullptr, short kind = 0) :
                 CTFrame_Base(name, kind)
         {
         }
+
+        /**
+         * @brief Assignment operator
+         */
         CTFrame& operator=(const CTFrame& other)
         {
             CTFrame_Base::operator=(other);
             return *this;
         }
+
+        /**
+         * @brief Duplicates CTFrame
+         */
         virtual CTFrame *dup() const
         {
             return new CTFrame(*this);

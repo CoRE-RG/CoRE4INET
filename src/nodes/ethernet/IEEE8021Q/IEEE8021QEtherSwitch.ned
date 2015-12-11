@@ -14,11 +14,11 @@
 // 
 package core4inet.nodes.ethernet.IEEE8021Q;
 
-import core4inet.configuration.IConfigurationManager;
 import core4inet.linklayer.port.IEEE8021QPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
+
 import inet.linklayer.contract.IMACAddressTable;
 import inet.linklayer.contract.IMACRelayUnit;
 import inet.common.lifecycle.NodeStatus;
@@ -27,10 +27,9 @@ import inet.networklayer.common.InterfaceTable;
 //
 // Module for a IEEE 802.1Q Ethernet Switch with variable number of ports.
 //
-// @see IMacRelayUnit, IEEE8021QPHYPort, Sync, Scheduler, BufferManager
+// @see ~NodeStatus, ~IMACRelayUnit, ~IMACAddressTable, ~InterfaceTable, ~IEEE8021QPHYPort, ~ISync, ~ITTEScheduler, ~CheckedBuffer
 //
-// @author Till Steinbach
-// @author Philipp Meyer
+// @author Till Steinbach, Philipp Meyerr 
 //
 module IEEE8021QEtherSwitch
 {
@@ -38,21 +37,30 @@ module IEEE8021QEtherSwitch
         @display("i=block/switch;bgb=514,312");
         @networkNode;
         @labels(node,ethernet-node);
-        double hardware_delay @unit(s) = default(8us);
+              
+        // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
+        // (When not manually declared in own deriving .ned file)
         int numBuffer = default(0);
-        string configurationManagerType = default("");
+        // Forwardingdelay of the device hardware
+        double hardware_delay @unit(s) = default(8us);
+        
         *.interfaceTableModule = default(absPath(".interfaceTable"));
+        
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
+        
     types:
         channel ProcessingDelay extends ned.DelayChannel
         {
         }
+        
     submodules:
+        // Keeps track of the status of network node (up, down, etc.)
         status: NodeStatus {
             @display("p=47,50;is=n");
         }
+        
         // Implementation of the forwarding part
         beswitch: <default("MACRelayUnit")> like IMACRelayUnit {
             parameters:
@@ -61,13 +69,17 @@ module IEEE8021QEtherSwitch
                 ifIn[sizeof(ethg)];
                 ifOut[sizeof(ethg)];
         }
+        
         //The mac table associated with the beswitch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
             @display("p=170,50");
         }
+        
+        // Holds interface names
         interfaceTable: InterfaceTable {
             @display("p=447,313");
         }
+        
         // Physical ports of the switch
         phy[sizeof(ethg)]: IEEE8021QPHYPort {
             parameters:
@@ -75,24 +87,24 @@ module IEEE8021QEtherSwitch
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
+        
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
                 @display("p=240,50");
         }
-        // Buffer manager that creates the buffers according to the configuration
-        configurationManager: <configurationManagerType> like IConfigurationManager if configurationManagerType != "" {
-            parameters:
-                @display("p=999,999");
-        }
+
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
                 @display("p=310,50");
         }
+        
+        // Buffers with Incoming Module for TT and RC traffic (optional)
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=170,130");
         }
+        
     connections:
         for i=0..sizeof(ethg)-1 {
             phy[i].phys <--> ethg[i];

@@ -18,17 +18,18 @@ package core4inet.applications.AS6802;
 import core4inet.applications.base.ApplicationBase;
 
 //
-// Abstract base application used for various application models.
-// Since this is an abstract module please do not instantiate it
+// Abstract base application used for real-time Ethernet-Application application models.
 //
+// @warning Since this is an abstract module please do not instantiate it!
 //
-// @see TTEAPIApplicationBase.ned
+// @see ~ApplicationBase, ~TTEAPIApplicationBase
 //
 // @author Till Steinbach
+//
 simple CTApplicationBase extends ApplicationBase
 {
     parameters:
-        @class(CTApplicationBase);
+        @class(AbstractSimpleModule);
         @display("i=block/app");
         
     gates:

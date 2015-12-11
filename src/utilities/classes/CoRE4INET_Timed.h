@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_TIMED_H_
-#define __CORE4INET_TIMED_H_
+#ifndef CORE4INET_TIMED_H_
+#define CORE4INET_TIMED_H_
 
 //CoRE4INET
 #include "CoRE4INET_Oscillator.h"
@@ -71,4 +71,4 @@ class Timed : public virtual cSimpleModule
 };
 
 }
-#endif /* __CORE4INET_TIMED_H_ */
+#endif /* CORE4INET_TIMED_H_ */

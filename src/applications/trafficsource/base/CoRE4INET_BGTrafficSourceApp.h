@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_BGTRAFFICSOURCEAPP_H_
-#define __CORE4INET_BGTRAFFICSOURCEAPP_H_
+#ifndef CORE4INET_BGTRAFFICSOURCEAPP_H_
+#define CORE4INET_BGTRAFFICSOURCEAPP_H_
 
 //CoRE4INET
 #include "CoRE4INET_TrafficSourceAppBase.h"
@@ -29,6 +29,8 @@ namespace CoRE4INET {
  *
  * @sa TrafficSourceAppBase
  * @ingroup Applications
+ *
+ * @author Till Steinbach
  */
 class BGTrafficSourceApp : public virtual TrafficSourceAppBase
 {
@@ -47,12 +49,23 @@ class BGTrafficSourceApp : public virtual TrafficSourceAppBase
          * @brief caches destAddress parameter
          */
         inet::MACAddress destAddress;
+
     public:
         /**
          * @brief Constructor of BGTrafficSourceApp
          */
         BGTrafficSourceApp();
+
     protected:
+        /**
+         * @brief Signal that is emitted each time the send interval is used.
+         */
+        static simsignal_t sigSendInterval;
+
+        /**
+         * @brief Initialization of the module.
+         */
+        virtual void initialize() override;
 
         /**
          * @brief handle self messages to send frames

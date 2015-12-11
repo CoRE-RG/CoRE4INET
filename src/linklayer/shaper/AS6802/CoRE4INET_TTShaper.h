@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CoRE4INET_TTSHAPER_H
-#define __CoRE4INET_TTSHAPER_H
+#ifndef CORE4INET_TTSHAPER_H
+#define CORE4INET_TTSHAPER_H
 
 //Std
 #include <map>
@@ -43,11 +43,13 @@ template<class TC>
 class TTShaper : public TC, public virtual Timed
 {
         using Timed::initialize;
+
     public:
         /**
          * @brief Constructor
          */
         TTShaper();
+
         /**
          * @brief Destructor
          */

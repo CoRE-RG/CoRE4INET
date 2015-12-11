@@ -23,10 +23,18 @@ namespace CoRE4INET {
 
 Define_Module(BGTrafficSourceApp);
 
+simsignal_t BGTrafficSourceApp::sigSendInterval = registerSignal("intervalSignal");
+
+
 BGTrafficSourceApp::BGTrafficSourceApp()
 {
     this->sendInterval = 0;
     this->parametersInitialized = false;
+}
+
+void BGTrafficSourceApp::initialize()
+{
+    TrafficSourceAppBase::initialize();
 }
 
 void BGTrafficSourceApp::handleMessage(cMessage *msg)
@@ -40,6 +48,8 @@ void BGTrafficSourceApp::handleMessage(cMessage *msg)
         }
         sendMessage();
         scheduleAt(simTime() + this->sendInterval, msg);
+        emit(sigSendInterval,this->sendInterval);
+        handleParameterChange("sendInterval");
     }
     else
     {
@@ -51,7 +61,7 @@ void BGTrafficSourceApp::sendMessage()
 {
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
-        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic");
+        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic", 7); //kind 7 = black
 
         frame->setDest(this->destAddress);
 

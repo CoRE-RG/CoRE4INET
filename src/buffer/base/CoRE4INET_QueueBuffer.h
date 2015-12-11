@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_QUEUEBUFFER_H_
-#define __CORE4INET_QUEUEBUFFER_H_
+#ifndef CORE4INET_QUEUEBUFFER_H_
+#define CORE4INET_QUEUEBUFFER_H_
 
 //CoRE4INET
 #include "CoRE4INET_Buffer.h"
@@ -58,6 +58,11 @@ class QueueBuffer : public virtual Buffer
          */
         cQueue frames;
 
+        /**
+         * @brief Caches the queuesize sum of all bytes of frames
+         * increased with incoming frame, decreased with outgoing frame
+         */
+        size_t queueSize;
     private:
         /**
          * Initializes the statistics for the Queue
@@ -108,6 +113,11 @@ class QueueBuffer : public virtual Buffer
          * was inserted or removed.
          */
         static simsignal_t queueLengthSignal;
+        /**
+         * @brief Signal containing the queue size in byte, that is emitted every time a frame
+         * was inserted or removed.
+         */
+        static simsignal_t queueSizeSignal;
         /**
          * @brief Signal that is emitted when a frame is dropped.
          *

@@ -313,6 +313,12 @@ uint64_t Timer::getTotalTicks()
     return ticks;
 }
 
+simtime_t Timer::getTotalSimTime()
+{
+    recalculate();
+    return lastRecalculation;
+}
+
 Oscillator* Timer::getOscillator() const
 {
     if (!oscillator)

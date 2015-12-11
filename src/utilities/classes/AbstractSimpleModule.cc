@@ -13,23 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CoRE4INET_BaseConfigurationManager.h"
+#include "AbstractSimpleModule.h"
 
 namespace CoRE4INET {
 
-Define_Module(BaseConfigurationManager);
+Define_Module(AbstractSimpleModule);
 
-void BaseConfigurationManager::initialize()
+void AbstractSimpleModule::initialize()
 {
-    //Generate start message to delete module
-    scheduleAt(simTime(), new cMessage("Delete Module"));
-}
-
-void BaseConfigurationManager::handleMessage(cMessage *msg)
-{
-    //delete module on first message, it is not needed anymore;
-    delete msg;
-    deleteModule();
+    throw cRuntimeError("You cannot use modules of type %s as it is an abstract simple module type",
+            this->getModuleType()->getFullName());
 }
 
 } //namespace

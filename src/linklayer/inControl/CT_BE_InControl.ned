@@ -12,27 +12,29 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 package core4inet.linklayer.inControl;
 
 import core4inet.linklayer.inControl.base.BE_InControl;
-
 
 //
 // Module for incoming traffic from MAC layer. The traffic is checked for
 // critical traffic ID and then forwarded either as best-effort traffic to
 // the upper layer or when critical traffic to the CTC module (via sendDirect).
 //
-// @see EtherLLC, IMacRelayUnit, IOutputQueue
+// @see ~BE_InControl, ~EtherLLC, ~IMacRelayUnit, ~IOutputQueue
 //
 // @author Till Steinbach
+//
 simple CT_BE_InControl extends BE_InControl
 {
     parameters:
         @display("i=block/classifier");
         @class(CT_BE_InControl);
+        
+        @signal[droppedPk](type=inet::EtherFrame; unit=packets);
         //Statistic of the amount of packets that were dropped due to no configured buffer/ctc
-        @signal[ctDropped](type=inet::EtherFrame);
-        @statistic[dropped](title="Unconfigured CT dropped"; source=droppedPk; record=count; interpolationmode=none);
+        @statistic[dropped](title="Unconfigured CT dropped"; source=droppedPk; record=count; unit=packets; interpolationmode=none);
 
 		//Critical traffic marker of the buffer
         int ct_marker;

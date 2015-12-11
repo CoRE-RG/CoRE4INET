@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_HELPERFUNCTIONS_H_
-#define __CORE4INET_HELPERFUNCTIONS_H_
+#ifndef CORE4INET_HELPERFUNCTIONS_H_
+#define CORE4INET_HELPERFUNCTIONS_H_
 
 //OMNeT++
 #include "omnetpp.h"
@@ -51,4 +51,18 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
  */
 static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc);
 
+/**
+ * @brief Implementation of NED function "string find_in_node(string name)"
+ *
+ * Implements a NED function that tries to find the module "name" in the current node and returns the full path
+ * There is also the alias "string find(string name)" available
+ *
+ * @param context module of the parameter to be converted
+ * @param argv array of incoming parameters
+ * @param argc number of parameters
+ * @return converted
+ *
+ * @author Till Steinbach
+ */
+static cNEDValue ned_find_module_wherever_in_node(cComponent *context, cNEDValue argv[], int argc);
 #endif

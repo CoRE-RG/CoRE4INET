@@ -13,13 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SRPROTOCOL_H_
-#define __CORE4INET_SRPROTOCOL_H_
+#ifndef CORE4INET_SRPROTOCOL_H_
+#define CORE4INET_SRPROTOCOL_H_
 
 //OMNeT++
 #include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
+
+namespace inet {
+template<typename T>
+T *getModuleFromPar(cPar& par, cModule *from);
+}
 
 namespace CoRE4INET {
 
@@ -27,16 +32,23 @@ namespace CoRE4INET {
  * @brief This module handles the Stream Reservation Protocol
  *
  * See the NED definition for details.
+ *
+ * @author Till Steinbach
  */
 class SRProtocol : public virtual cSimpleModule, public cListener
 {
     private:
         /**
-         * Module representing the srpTable
+         * @brief Module representing the srpTable
          */
         SRPTable *srpTable;
+
     public:
+        /**
+         * @brief Constructor
+         */
         SRProtocol();
+
     protected:
         /**
          * @brief Initialization, retrieves srpTable module and registers for signals

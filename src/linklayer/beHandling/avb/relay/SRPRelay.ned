@@ -17,7 +17,6 @@ package core4inet.linklayer.beHandling.avb.relay;
 
 import inet.linklayer.ieee8021d.relay.Ieee8021dRelay;
 
-
 //
 // This module forwards frames (~EtherFrame) based on their destination MAC addresses to appropriate ports.
 //
@@ -25,7 +24,7 @@ import inet.linklayer.ieee8021d.relay.Ieee8021dRelay;
 // Incoming SRP frames are forwarded as SRP messages through srpOut to the SRProtocol module.
 // Outgoing SRP messages coming through srpIn gate are forwarded according to the controlInfo as EtherFrame
 //
-// @see Ieee8021dRelay, SRProtocol
+// @see ~Ieee8021dRelay, ~SRProtocol
 // 
 // @author Till Steinbach
 //
@@ -34,6 +33,7 @@ simple SRPRelay extends Ieee8021dRelay
     parameters:
         @class(SRPRelay);
         @display("i=block/broadcast;bgb=425,114");
+        
     gates:
         //SRP message in from SRP protocol module
         input srpIn @loose;

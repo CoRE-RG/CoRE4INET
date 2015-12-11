@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_AVBTRAFFICSOURCEAPP_H_
-#define __CORE4INET_AVBTRAFFICSOURCEAPP_H_
+#ifndef CORE4INET_AVBTRAFFICSOURCEAPP_H_
+#define CORE4INET_AVBTRAFFICSOURCEAPP_H_
 
 //OMNeT++
 #include "omnetpp.h"
@@ -34,9 +34,8 @@ namespace CoRE4INET {
  * @sa TTEApplicationBase
  * @ingroup Applications
  *
- * @author Philipp Meyer
+ * @author Philipp Meyer, Till Steinbach
  *
- * TODO Normal: Documentation
  */
 
 class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual Timed, public virtual cListener
@@ -61,11 +60,14 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
          * @brief Handles message generation
          */
         virtual void handleMessage(cMessage *msg) override;
-
+        /**
+         * @brief Sends an AVBFrame
+         */
         void sendAVBFrame();
-
+        /**
+         * @brief Receives Stream Reservation Protocol signals
+         */
         virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
-
         /**
          * @brief Indicates a parameter has changed.
          *
@@ -75,4 +77,4 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
 };
 
 } /* namespace CoRE4INET */
-#endif /* __CORE4INET_AVBTRAFFICSOURCEAPP_H_ */
+#endif /* CORE4INET_AVBTRAFFICSOURCEAPP_H_ */

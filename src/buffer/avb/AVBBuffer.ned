@@ -23,25 +23,25 @@ import core4inet.buffer.base.Buffer;
 //
 // @warning Do not instantiate the module. Use AVBDoubleBuffer or AVBQueueBuffer instead!
 //
-// @see AVBDoubleBuffer, AVBQueueBuffer, Buffer, SchedulerActionTimeEvent, Scheduler
+// @see AVBQueueBuffer, Buffer, SchedulerActionTimeEvent, Scheduler
 //
 // @author Philipp Meyer
 simple AVBBuffer extends Buffer like ITimed
 {
     parameters:
-        @class(AVBBuffer);
+        @class(AbstractSimpleModule);
         @display("i=,blue");
         //Signal emitted when the credit of the CBS algorithm changes
         @signal[credit](type=long);
         //Statistic of the credit of the CBS algorithm
-        @statistic[credit](title="Credit"; record=vector);
+        @statistic[credit](title="Credit"; source=credit; record=vector; interpolationmode=linear;);
 
 		// Stream Reservation Class of the AVB Buffer
         string srClass = default("A");
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
-        string oscillator = default("oscillator");
+        string oscillator = default("^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
-        string timer = default("timer");
+        string timer = default("^.scheduler.timer");
     gates:
         //Input gate for the incoming SchedulerActionTimeEvent messages
         input schedulerIn @directIn;

@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_SCHEDULED_H_
-#define __CORE4INET_SCHEDULED_H_
+#ifndef CORE4INET_SCHEDULED_H_
+#define CORE4INET_SCHEDULED_H_
 
 //CoRE4INET
 #include "CoRE4INET_Timed.h"
@@ -49,6 +49,7 @@ class Scheduled : public Timed
          * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
          */
         virtual void handleParameterChange(const char* parname) override;
+
     public:
         /**
          * @brief Constructor of Scheduled
@@ -62,4 +63,4 @@ class Scheduled : public Timed
 };
 
 }
-#endif /* __CORE4INET_SCHEDULED_H_ */
+#endif /* CORE4INET_SCHEDULED_H_ */

@@ -13,11 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef __CORE4INET_MODULEACCESS_H
-#define __CORE4INET_MODULEACCESS_H
+#ifndef CORE4INET_MODULEACCESS_H
+#define CORE4INET_MODULEACCESS_H
 
 //INET
-#include "FixedModuleAccess.h"
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -40,5 +40,5 @@ cModule *findModuleWhereverInNode(const char *name, cModule *from);
 
 } // namespace CoRE4INET
 
-#endif // ifndef __CORE4INET_MODULEACCESS_H
+#endif // ifndef CORE4INET_MODULEACCESS_H
 
