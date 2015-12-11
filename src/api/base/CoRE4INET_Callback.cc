@@ -30,7 +30,7 @@ void Callback::setFunctionPointer(void (*functionPointer)(void*))
 }
 
 void Callback::receiveSignal(__attribute__((unused))   cComponent *src, __attribute__((unused))   simsignal_t id,
-        __attribute__((unused))   cObject *obj)
+        __attribute__((unused))   cObject *obj, __attribute__((unused)) cObject *details)
 {
     fn(arg);
 }

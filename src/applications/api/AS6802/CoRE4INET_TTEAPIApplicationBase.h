@@ -108,7 +108,7 @@ class TTEAPIApplicationBase : public virtual CTApplicationBase, public virtual S
         /**
          * @ Receives signal from sync module
          */
-        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj) override;
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details) override;
 
         /**
          * @brief Indicates a parameter has changed.

@@ -6,7 +6,6 @@
  */
 
 //#include <stdint.h>
-
 #include "CoRE4INET_APICallback.h"
 
 //TTE-API
@@ -18,32 +17,40 @@
 
 namespace CoRE4INET {
 
- void APICallback::receiveSignal(cComponent *src, __attribute__((unused))  simsignal_t id, __attribute__((unused))  cObject *obj){
-    if(argSet){
+void APICallback::receiveSignal(cComponent *src, __attribute__((unused)) simsignal_t id,
+        __attribute__((unused)) cObject *obj, __attribute__((unused)) cObject *details)
+{
+    if (argSet)
+    {
         fn(arg);
     }
-    else{
+    else
+    {
         tte_buffer_t buf;
-        if(dynamic_cast<TTBuffer*>(src) != nullptr){
-            buf.traffic_type= TTE_TT_TRAFFIC;
+        if (dynamic_cast<TTBuffer*>(src) != nullptr)
+        {
+            buf.traffic_type = TTE_TT_TRAFFIC;
         }
-        else if(dynamic_cast<RCBuffer*>(src) != nullptr){
-            buf.traffic_type= TTE_CT_TRAFFIC;
+        else if (dynamic_cast<RCBuffer*>(src) != nullptr)
+        {
+            buf.traffic_type = TTE_CT_TRAFFIC;
         }
-        else{
-            buf.traffic_type= TTE_BG_TRAFFIC;
+        else
+        {
+            buf.traffic_type = TTE_BG_TRAFFIC;
         }
-        buf.channel=0;
-        buf.ct_id=static_cast<uint16_t>(src->par("ct_id").longValue());
-        buf.shared=0;
+        buf.channel = 0;
+        buf.ct_id = static_cast<uint16_t>(src->par("ct_id").longValue());
+        buf.shared = 0;
 
         TTEAPIPriv *priv = new TTEAPIPriv();
         buf.priv = priv;
         priv->buffer = dynamic_cast<Buffer*>(src);
         fn(static_cast<void*>(&buf));
-        if(buf.priv){
+        if (buf.priv)
+        {
             delete priv;
-            buf.priv=0;
+            buf.priv = 0;
         }
     }
 }

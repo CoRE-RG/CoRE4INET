@@ -104,7 +104,7 @@ class Callback : public cListener
          *
          * If method is called the stored function pointer is invoked.
          */
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj, cObject *details) override;
 };
 
 }
