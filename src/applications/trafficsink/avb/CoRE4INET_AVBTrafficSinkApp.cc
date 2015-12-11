@@ -55,7 +55,8 @@ void AVBTrafficSinkApp::initialize()
     }
 }
 
-void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *obj,
+        __attribute__((unused)) cObject *details)
 {
     Enter_Method_Silent
     ();

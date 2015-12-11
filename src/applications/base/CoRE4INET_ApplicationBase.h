@@ -23,6 +23,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 class BGBuffer;
 
 /**

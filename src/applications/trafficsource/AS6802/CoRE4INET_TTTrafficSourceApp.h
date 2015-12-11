@@ -69,7 +69,7 @@ class TTTrafficSourceApp : public virtual CTTrafficSourceAppBase, public virtual
          * @param signalID ID of the signal
          * @param obj representation of the signal
          */
-        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj) override;
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details) override;
 
         /**
          * @brief Indicates a parameter has changed.

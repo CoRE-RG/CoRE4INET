@@ -67,7 +67,7 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
         /**
          * @brief Receives Stream Reservation Protocol signals
          */
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj, cObject *details) override;
         /**
          * @brief Indicates a parameter has changed.
          *

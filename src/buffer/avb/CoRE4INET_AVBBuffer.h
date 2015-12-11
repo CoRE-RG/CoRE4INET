@@ -58,7 +58,7 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
          * @param signalID id of the incoming signal
          * @param l signal long value
          */
-        virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l) override;
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details) override;
     public:
         /**
          * @brief calculates new credit for idleslope time.

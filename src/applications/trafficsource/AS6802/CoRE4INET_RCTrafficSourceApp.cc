@@ -84,7 +84,7 @@ void RCTrafficSourceApp::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "interval"))
     {
-        this->interval = parameterDoubleCheckRange(par("interval"), 0, MAXTIME.dbl(), true);
+        this->interval = parameterDoubleCheckRange(par("interval"), 0, SIMTIME_MAX.dbl(), true);
     }
 }
 

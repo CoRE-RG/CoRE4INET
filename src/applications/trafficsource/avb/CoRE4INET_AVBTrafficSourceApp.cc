@@ -122,7 +122,8 @@ void AVBTrafficSourceApp::sendAVBFrame()
     simtime_t tick =
             check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
     simtime_t interval = (getIntervalForClass(srClass) / intervalFrames) + par("intervalInaccurracy").doubleValue();
-    if(interval < 0) interval = 0;
+    if (interval < 0)
+        interval = 0;
 
     SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
     event->setTimer(static_cast<uint64_t>(ceil(interval / tick)));
@@ -130,7 +131,8 @@ void AVBTrafficSourceApp::sendAVBFrame()
     getTimer()->registerEvent(event);
 }
 
-void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))      cComponent *src, simsignal_t id, cObject *obj)
+void AVBTrafficSourceApp::receiveSignal(__attribute__((unused)) cComponent *src, simsignal_t id, cObject *obj,
+        __attribute__((unused)) cObject *details)
 {
     Enter_Method_Silent
     ();
@@ -206,7 +208,7 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "intervalFrames"))
     {
         this->intervalFrames = static_cast<uint16_t>(parameterULongCheckRange(par("intervalFrames"), 1,
-                MAX_INTERVAL_FRAMES));
+        MAX_INTERVAL_FRAMES));
     }
     if (!parname || !strcmp(parname, "vlan_id"))
     {

@@ -71,7 +71,7 @@ class AVBTrafficSinkApp : public virtual TrafficSinkApp, public virtual cListene
          */
         virtual void initialize() override;
 
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj, cObject *details) override;
 
         /**
          * @brief handles self message for srp registration updates

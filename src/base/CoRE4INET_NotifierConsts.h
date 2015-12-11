@@ -20,6 +20,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 //Notification for changes in the synchronization state
 extern simsignal_t NF_SYNC_STATE_CHANGE; //Sync
 

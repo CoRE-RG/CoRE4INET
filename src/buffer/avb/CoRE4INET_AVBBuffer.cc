@@ -46,11 +46,13 @@ AVBBuffer::~AVBBuffer()
 
 }
 
-void AVBBuffer::receiveSignal(cComponent *source, simsignal_t signalID, long l) {
-    (void)source;
-    (void)signalID;
+void AVBBuffer::receiveSignal(cComponent *source, simsignal_t signalID, long l, __attribute__((unused)) cObject *details)
+{
+    (void) source;
+    (void) signalID;
     inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
-    if(macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE){
+    if (macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE)
+    {
         refresh();
         if (credit < 0)
         {
@@ -215,7 +217,8 @@ void AVBBuffer::handleMessage(cMessage *msg)
         delete msg;
     }
 
-    if (newTime >= oldTime){
+    if (newTime >= oldTime)
+    {
         oldTime = getCurrentTime();
         emitCredit();
     }
@@ -253,7 +256,8 @@ void AVBBuffer::idleSlope(SimTime duration)
                 getParentModule()->getSubmodule("phy", getIndex()), srClass);
 
         credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
-        if (credit > 0 && size() <= 0 && !inTransmission){
+        if (credit > 0 && size() <= 0 && !inTransmission)
+        {
             resetCredit();
         }
     }
@@ -309,7 +313,7 @@ void AVBBuffer::sendSlope(SimTime duration)
         resetCredit();
     }
 
-    if(oldTime <= getCurrentTime())
+    if (oldTime <= getCurrentTime())
     {
         oldTime = getCurrentTime() + duration;
     }
@@ -335,7 +339,8 @@ void AVBBuffer::refresh()
             maxCredit = credit;
     }
 
-    if (newTime >= oldTime){
+    if (newTime >= oldTime)
+    {
         oldTime = getCurrentTime();
         emitCredit();
     }
@@ -358,12 +363,15 @@ void AVBBuffer::resetCredit()
     }
 }
 
-simtime_t AVBBuffer::getCurrentTime(){
+simtime_t AVBBuffer::getCurrentTime()
+{
     return getTimer()->getTotalSimTime();
 }
 
-void AVBBuffer::emitCredit(){
-    if(simTime() > lastCreditEmitTime){
+void AVBBuffer::emitCredit()
+{
+    if (simTime() > lastCreditEmitTime)
+    {
         emit(creditSignal, credit);
         lastCreditEmitTime = simTime();
     }

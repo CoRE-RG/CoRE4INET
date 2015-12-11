@@ -74,7 +74,7 @@ void TrafficSourceAppBase::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "startTime"))
     {
-        parameterDoubleCheckRange(par("startTime"), 0, MAXTIME.dbl());
+        parameterDoubleCheckRange(par("startTime"), 0, SIMTIME_MAX.dbl());
     }
     if (!parname || !strcmp(parname, "payload"))
     {
