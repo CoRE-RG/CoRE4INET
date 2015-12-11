@@ -152,7 +152,7 @@ void IEEE8021QInControl<IC>::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "untaggedVID"))
     {
-        this->untaggedVID = static_cast<uint16>(parameterULongCheckRange(cComponent::par("untaggedVID"), 0,
+        this->untaggedVID = static_cast<uint16_t>(parameterULongCheckRange(cComponent::par("untaggedVID"), 0,
                 MAX_VLAN_NUMBER));
     }
     if (!parname || !strcmp(parname, "taggedVIDs"))
