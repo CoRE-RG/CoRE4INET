@@ -43,7 +43,7 @@ void NoSync::initialize(int stage)
                 SyncNotification notification("SyncNotification", ASYNC);
                 emit(NF_SYNC_STATE_CHANGE, &notification);
             }
-        if (ev.isGUI())
+        if (getEnvir()->isGUI())
         {
             getDisplayString().setTagArg("i", 1, "red");
         }

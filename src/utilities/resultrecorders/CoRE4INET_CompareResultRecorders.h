@@ -19,7 +19,9 @@
 //OMNeT++
 #include "omnetpp.h"
 
-namespace TTEthernetModel {
+namespace CORE4INET {
+
+using namespace omnetpp;
 
 class SubtractActualFromLastRecorder : public cNumericResultRecorder
 {
@@ -31,7 +33,7 @@ class SubtractActualFromLastRecorder : public cNumericResultRecorder
         void *handle;        // identifies output vector for the output vector manager
         simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value);
+        virtual void collect(simtime_t_cref t, double value, cObject *details);
         virtual double calculate();
     public:
         SubtractActualFromLastRecorder();

@@ -20,7 +20,7 @@
 //OMNeT++
 #include "omnetpp.h"
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
 IntervalVectorRecorder::IntervalVectorRecorder()
 {
@@ -79,7 +79,7 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
            }
 }
 
-void IntervalVectorRecorder::collect(simtime_t_cref t, double value)
+void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute__((unused)) cObject *details)
 {
     if (uninitialized){
         initialize();

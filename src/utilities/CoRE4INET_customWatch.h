@@ -23,7 +23,7 @@
 #include "omnetpp.h"
 
 template<class KeyT, class ValueT, class CmpT>
-class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
+class cStdCollectionMapWatcherBase : public omnetpp::cStdVectorWatcherBase
 {
     protected:
         std::map<KeyT, ValueT, CmpT>& m;
@@ -35,8 +35,8 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
                 cStdVectorWatcherBase(name), m(var)
 
         {
-            classname = std::string("std::map<") + opp_typename(typeid(KeyT)) + "," + opp_typename(typeid(ValueT))
-                    + ">";
+            classname = std::string("std::map<") + omnetpp::opp_typename(typeid(KeyT)) + ","
+                    + omnetpp::opp_typename(typeid(ValueT)) + ">";
         }
         const char *getClassName() const
         {
@@ -89,7 +89,7 @@ class cStdCollectionMapWatcherBase : public cStdVectorWatcherBase
 };
 
 template<class KeyT, class ValueT>
-class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
+class cStdCollectionUMapWatcherBase : public omnetpp::cStdVectorWatcherBase
 {
     protected:
         std::unordered_map<KeyT, ValueT>& m;
@@ -101,8 +101,8 @@ class cStdCollectionUMapWatcherBase : public cStdVectorWatcherBase
                 cStdVectorWatcherBase(name), m(var)
 
         {
-            classname = std::string("std::unordered_map<") + opp_typename(typeid(KeyT)) + "," + opp_typename(typeid(ValueT))
-                    + ">";
+            classname = std::string("std::unordered_map<") + omnetpp::opp_typename(typeid(KeyT)) + ","
+                    + omnetpp::opp_typename(typeid(ValueT)) + ">";
         }
         const char *getClassName() const
         {

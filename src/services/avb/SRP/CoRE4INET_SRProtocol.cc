@@ -183,7 +183,7 @@ void SRProtocol::handleMessage(cMessage *msg)
     delete msg;
 }
 
-void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __attribute__((unused)) cObject *details)
 {
     Enter_Method_Silent
     ();

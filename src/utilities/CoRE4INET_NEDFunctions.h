@@ -33,7 +33,7 @@
  *
  * @author Till Steinbach
  */
-static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc);
+static omnetpp::cNEDValue ned_sec_to_tick(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc);
 
 /**
  * @brief Implementation of NED function "quantity tick_to_sec(quantity ticks, quantity ticklength?)"
@@ -49,7 +49,7 @@ static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc
  *
  * @author Till Steinbach
  */
-static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc);
+static omnetpp::cNEDValue ned_tick_to_sec(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc);
 
 /**
  * @brief Implementation of NED function "string find_in_node(string name)"
@@ -64,5 +64,5 @@ static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc
  *
  * @author Till Steinbach
  */
-static cNEDValue ned_find_module_wherever_in_node(cComponent *context, cNEDValue argv[], int argc);
+static omnetpp::cNEDValue ned_find_module_wherever_in_node(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc);
 #endif

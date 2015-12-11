@@ -20,6 +20,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * TODO - Generated class
  */

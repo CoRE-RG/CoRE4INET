@@ -17,7 +17,7 @@
 //CoRE4INET
 #include "CoRE4INET_ModuleAccess.h"
 
-static cNEDValue ned_sec_to_tick(cComponent *context, cNEDValue argv[], int argc)
+static omnetpp::cNEDValue ned_sec_to_tick(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc)
 {
     double ticklength;
     double seconds = argv[0].doubleValueInUnit("s");
@@ -42,7 +42,7 @@ Define_NED_Function2(ned_sec_to_tick, "quantity sec_to_tick(quantity seconds, qu
 Define_NED_Function2(ned_sec_to_tick, "quantity s2t(quantity seconds, quantity ticklength?)", "units",
         "Alias for sec_to_tick");
 
-static cNEDValue ned_tick_to_sec(cComponent *context, cNEDValue argv[], int argc)
+static omnetpp::cNEDValue ned_tick_to_sec(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc)
 {
     double ticklength;
     long ticks = argv[0].longValue();
@@ -67,7 +67,7 @@ Define_NED_Function2(ned_tick_to_sec, "quantity tick_to_sec(quantity ticks, quan
 Define_NED_Function2(ned_tick_to_sec, "quantity t2s(quantity ticks, quantity ticklength?)", "units",
         "Alias for tick_to_sec");
 
-static cNEDValue ned_find_module_wherever_in_node(cComponent *context, cNEDValue argv[],
+static omnetpp::cNEDValue ned_find_module_wherever_in_node(omnetpp::cComponent *context, omnetpp::cNEDValue argv[],
         __attribute__((unused)) int argc)
 {
     const char* name = argv[0].stringValue();

@@ -21,6 +21,8 @@
 
 namespace CoRE4INET{
 
+using namespace omnetpp;
+
 /**
  * @brief BaseClass for floating interval vector recorders
  *
@@ -47,7 +49,7 @@ class FloatingIntervalVectorRecorder: public cNumericResultRecorder
         void *handle;        // identifies output vector for the output vector manager
         simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value);
+        virtual void collect(simtime_t_cref t, double value, cObject *details) override;
         virtual double calculate() = 0;
     public:
         FloatingIntervalVectorRecorder();

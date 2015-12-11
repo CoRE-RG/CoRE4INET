@@ -61,7 +61,7 @@ class IPv4oAVB : public base {
         virtual void registerSrpCallbacks(SRPTable *srpTable);
         virtual void registerTalker(const std::list<IPoREFilter*> &filters, SRPTable *srpTable);
         virtual void registerTalker(const IPoREFilter* filter, SRPTable *srpTable);
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj);
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj, cObject *details);
         virtual void handleMessage(cMessage* msg);
 
         /**

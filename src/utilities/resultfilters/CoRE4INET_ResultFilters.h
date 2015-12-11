@@ -21,6 +21,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief Filter that expects a cPacket and outputs its encapsulated cPacket
  *
@@ -32,14 +34,14 @@ class InnerMessageFilter : public cObjectResultFilter
 {
         using cObjectResultFilter::receiveSignal;
     public:
-        virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object);
+        virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object, cObject *details);
 };
 
 class InnerMessagePacketBytesFilter : public cObjectResultFilter
 {
     public:
         using cObjectResultFilter::receiveSignal;
-        virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object);
+        virtual void receiveSignal(cResultFilter *prev, simtime_t_cref t, cObject *object, cObject *details);
 };
 
 class SubtractActualFromLastFilter : public cNumericResultFilter
@@ -48,7 +50,7 @@ class SubtractActualFromLastFilter : public cNumericResultFilter
         double difference;
     public:
         double lastValue;
-        virtual bool process(simtime_t &t, double& value);
+        virtual bool process(simtime_t &t, double& value, cObject *details) override;
         SubtractActualFromLastFilter()
         {
             this->difference = 0;
@@ -69,7 +71,7 @@ class FloatingIntervalFilter : public cNumericResultFilter
         simtime_t interval;
         std::map<simtime_t, double> inInterval;
     protected:
-        virtual bool process(simtime_t &t, double& value);
+        virtual bool process(simtime_t &t, double& value, cObject *details) override;
     public:
         FloatingIntervalFilter();
 };
@@ -84,7 +86,7 @@ class FloatingIntervalFilter : public cNumericResultFilter
 class FloatingIntervalCountFilter : public FloatingIntervalFilter
 {
     protected:
-        virtual bool process(simtime_t &t, double& value);
+        virtual bool process(simtime_t &t, double& value, cObject *details) override;
 };
 
 /**
@@ -97,7 +99,7 @@ class FloatingIntervalCountFilter : public FloatingIntervalFilter
 class FloatingIntervalSumFilter : public FloatingIntervalFilter
 {
     protected:
-        virtual bool process(simtime_t &t, double& value);
+        virtual bool process(simtime_t &t, double& value, cObject *details) override;
 };
 
 /**
@@ -110,7 +112,7 @@ class FloatingIntervalSumFilter : public FloatingIntervalFilter
 class FloatingIntervalAvgFilter : public FloatingIntervalFilter
 {
     protected:
-        virtual bool process(simtime_t &t, double& value);
+        virtual bool process(simtime_t &t, double& value, cObject *details) override;
 };
 
 }

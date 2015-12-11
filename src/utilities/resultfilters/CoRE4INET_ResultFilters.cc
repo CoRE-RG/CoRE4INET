@@ -17,11 +17,12 @@
 //OMNeT++
 #include "omnetpp.h"
 
+using namespace omnetpp;
 using namespace CoRE4INET;
 
 Register_ResultFilter("innerMessage", InnerMessageFilter)
 
-void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
+void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object, cObject *details)
 {
     if (cPacket *innerPacket = dynamic_cast<cPacket *>(object))
     {
@@ -29,7 +30,7 @@ void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev
         {
             innerPacket = innerPacket->getEncapsulatedPacket();
         }
-        fire(this, t, innerPacket);
+        fire(this, t, innerPacket, details);
     }
 }
 
@@ -38,7 +39,7 @@ void InnerMessageFilter::receiveSignal(__attribute((unused)) cResultFilter *prev
  */
 Register_ResultFilter("SubtractActualFromLast", SubtractActualFromLastFilter)
 
-bool SubtractActualFromLastFilter::process(__attribute__((unused)) simtime_t& t, double& value)
+bool SubtractActualFromLastFilter::process(__attribute__((unused)) simtime_t& t, double& value,__attribute__((unused)) cObject *details)
 {
     difference = value - lastValue;
     lastValue = value;
@@ -48,7 +49,7 @@ bool SubtractActualFromLastFilter::process(__attribute__((unused)) simtime_t& t,
 
 Register_ResultFilter("innerMessagePacketBytes", InnerMessagePacketBytesFilter)
 
-void InnerMessagePacketBytesFilter::receiveSignal(__attribute__((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object)
+void InnerMessagePacketBytesFilter::receiveSignal(__attribute__((unused)) cResultFilter *prev, simtime_t_cref t, cObject *object, cObject *details)
 {
     if (cPacket *innerPacket = dynamic_cast<cPacket *>(object))
     {
@@ -56,7 +57,7 @@ void InnerMessagePacketBytesFilter::receiveSignal(__attribute__((unused)) cResul
         {
             innerPacket = innerPacket->getEncapsulatedPacket();
         }
-        fire(this, t, static_cast<double>(innerPacket->getByteLength()));
+        fire(this, t, static_cast<double>(innerPacket->getByteLength()), details);
     }
 }
 
@@ -65,7 +66,7 @@ FloatingIntervalFilter::FloatingIntervalFilter()
     interval = SimTime(1);
 }
 
-bool FloatingIntervalFilter::process(simtime_t &t, double &value)
+bool FloatingIntervalFilter::process(simtime_t &t, double &value,__attribute__((unused)) cObject *details)
 {
     //first add new value to interval, give hint for faster execution
     if (inInterval.empty())
@@ -83,9 +84,9 @@ bool FloatingIntervalFilter::process(simtime_t &t, double &value)
 
 Register_ResultFilter("floatingIntervalCount", FloatingIntervalCountFilter)
 
-bool FloatingIntervalCountFilter::process(simtime_t &t, double &value)
+bool FloatingIntervalCountFilter::process(simtime_t &t, double &value, cObject *details)
 {
-    FloatingIntervalFilter::process(t, value);
+    FloatingIntervalFilter::process(t, value, details);
     //return size
     value = static_cast<double>(inInterval.size());
     return true;
@@ -93,9 +94,9 @@ bool FloatingIntervalCountFilter::process(simtime_t &t, double &value)
 
 Register_ResultFilter("floatingIntervalSum", FloatingIntervalSumFilter)
 
-bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
+bool FloatingIntervalSumFilter::process(simtime_t &t, double &value, cObject *details)
 {
-    FloatingIntervalFilter::process(t, value);
+    FloatingIntervalFilter::process(t, value, details);
     //build sum
     double newValue = 0;
     for (std::map<simtime_t, double>::const_iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)
@@ -108,9 +109,9 @@ bool FloatingIntervalSumFilter::process(simtime_t &t, double &value)
 
 Register_ResultFilter("floatingIntervalAvg", FloatingIntervalAvgFilter)
 
-bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value)
+bool FloatingIntervalAvgFilter::process(simtime_t &t, double &value, cObject *details)
 {
-    FloatingIntervalFilter::process(t, value);
+    FloatingIntervalFilter::process(t, value, details);
     //build average
     double newValue = 0;
     for (std::map<simtime_t, double>::const_iterator it2 = inInterval.begin(); it2 != inInterval.end(); ++it2)

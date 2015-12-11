@@ -20,6 +20,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief The MessageNumProfiler is able to profile the number of messages each
  * module stores.

@@ -442,7 +442,7 @@ void IPv4oTT<Base>::registerSendTimingEvent(TTDestinationInfo *destInfo)
 //==============================================================================
 
 template<class Base>
-void IPv4oTT<Base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void IPv4oTT<Base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, cObject *details)
 {
 
     if (SyncNotification *notification = dynamic_cast<SyncNotification *>(obj))
@@ -458,7 +458,7 @@ void IPv4oTT<Base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
     }
     else
     {
-        Base::receiveSignal(src, id, obj);
+        Base::receiveSignal(src, id, obj, details);
     }
 }
 

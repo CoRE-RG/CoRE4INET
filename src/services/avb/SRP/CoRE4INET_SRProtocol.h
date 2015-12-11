@@ -21,11 +21,6 @@
 //CoRE4INET
 #include "CoRE4INET_SRPTable.h"
 
-namespace inet {
-template<typename T>
-T *getModuleFromPar(cPar& par, cModule *from);
-}
-
 namespace CoRE4INET {
 
 /**
@@ -69,7 +64,7 @@ class SRProtocol : public virtual cSimpleModule, public cListener
          * @param id signal id
          * @param obj the related entry in the table
          */
-        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
+        virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj, cObject *details) override;
 };
 
 } /* namespace CoRE4INET */

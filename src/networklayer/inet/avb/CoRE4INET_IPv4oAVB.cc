@@ -164,7 +164,7 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class base>
-void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj)
+void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, cObject *details)
 {
     Enter_Method_Silent
     ();
@@ -218,7 +218,7 @@ void IPv4oAVB<base>::receiveSignal(cComponent *src, simsignal_t id, cObject *obj
     }
     else
     {
-        base::receiveSignal(src, id, obj);
+        base::receiveSignal(src, id, obj, details);
     }
 }
 

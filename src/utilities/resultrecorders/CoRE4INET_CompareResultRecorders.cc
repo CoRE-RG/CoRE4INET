@@ -18,7 +18,7 @@
 //OMNeT++
 #include "omnetpp.h"
 
-using namespace TTEthernetModel;
+using namespace CORE4INET;
 
 SubtractActualFromLastRecorder::SubtractActualFromLastRecorder()
 {
@@ -42,7 +42,7 @@ void SubtractActualFromLastRecorder::subscribedTo(cResultFilter *prev)
     ASSERT(handle != nullptr);
 }
 
-void SubtractActualFromLastRecorder::collect(simtime_t_cref t, double value)
+void SubtractActualFromLastRecorder::collect(simtime_t_cref t, double value,__attribute__((unused)) cObject *details)
 {
     lastValue = thisValue;
     thisValue = value;

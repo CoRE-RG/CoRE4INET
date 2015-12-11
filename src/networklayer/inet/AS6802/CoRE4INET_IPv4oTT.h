@@ -72,7 +72,7 @@ public:
     /**
      * Handles synchronized events
      */
-    virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj) override;
+    virtual void receiveSignal(cComponent *src, simsignal_t id, cObject *obj,  cObject *details) override;
 
 
 protected:

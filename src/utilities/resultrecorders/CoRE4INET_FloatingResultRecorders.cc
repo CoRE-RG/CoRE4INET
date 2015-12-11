@@ -57,7 +57,7 @@ void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
     }
 }
 
-void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value){
+void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value,__attribute__((unused)) cObject *details){
     if (t < lastTime)
     {
         throw cRuntimeError("%s: Cannot record data with an earlier timestamp (t=%s) "

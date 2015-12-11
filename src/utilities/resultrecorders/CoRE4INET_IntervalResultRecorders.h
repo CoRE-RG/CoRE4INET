@@ -19,7 +19,9 @@
 //OMNeT++
 #include "omnetpp.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
+
+using namespace omnetpp;
 
 class IntervalVectorRecorder : public cNumericResultRecorder
 {
@@ -30,7 +32,7 @@ class IntervalVectorRecorder : public cNumericResultRecorder
         void *handle;        // identifies output vector for the output vector manager
         simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value);
+        virtual void collect(simtime_t_cref t, double value, cObject *details);
         virtual void addValueToInterval(simtime_t_cref t, double value);
         virtual double calculate() = 0;
     public:

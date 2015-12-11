@@ -21,6 +21,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief Redefines SchedulerEvent_Base and adds destinationGate
  *
