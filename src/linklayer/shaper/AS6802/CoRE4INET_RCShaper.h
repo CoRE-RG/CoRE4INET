@@ -66,7 +66,7 @@ class RCShaper : public TC, public virtual Timed, public virtual cListener
         * @param signalID id of the signal
         * @param obj ptr to the object. In this case an EtherFrame currently under transmission
         */
-        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj) override;
+        virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details) override;
 
     private:
         /**
@@ -380,7 +380,7 @@ void RCShaper<TC>::clear()
 }
 
 template<class TC>
-void RCShaper<TC>::receiveSignal(__attribute__((unused)) cComponent *source, simsignal_t signalID, cObject *obj){
+void RCShaper<TC>::receiveSignal(__attribute__((unused)) cComponent *source, simsignal_t signalID, cObject *obj, __attribute__((unused)) cObject *details){
     if(strncmp(getSignalName(signalID), "txPk", 5)==0){
         std::unordered_map<cMessage *, RCBuffer* >::const_iterator result = resetPtrMap.find(check_and_cast<cMessage*>(obj));
         if(result != resetPtrMap.end()){

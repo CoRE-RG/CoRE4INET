@@ -220,7 +220,7 @@ void AVBShaper<SRCLASS, TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn(avbInName.c_str()))
     {
         avbQueue.insert(msg);
-        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.length()));
+        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.getLength()));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing AVB frame" << endl;
     }
@@ -256,7 +256,7 @@ cMessage* AVBShaper<SRCLASS, TC>::pop()
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
         cMessage *msg = static_cast<cMessage*>(avbQueue.pop());
-        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.length()));
+        cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.getLength()));
         AVBFrame* sizeMsg = dynamic_cast<AVBFrame*>(msg->dup());
         sizeMsg->setByteLength(sizeMsg->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
         SimTime duration = TC::outChannel->calculateDuration(sizeMsg);
