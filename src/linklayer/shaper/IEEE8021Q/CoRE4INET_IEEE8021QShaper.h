@@ -380,7 +380,7 @@ void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "untaggedVID"))
     {
-        this->untaggedVID = static_cast<uint16>(parameterULongCheckRange(par("untaggedVID"), 0, MAX_VLAN_NUMBER));
+        this->untaggedVID = static_cast<uint16_t>(parameterULongCheckRange(par("untaggedVID"), 0, MAX_VLAN_NUMBER));
     }
     if (!parname || !strcmp(parname, "taggedVIDs"))
     {
