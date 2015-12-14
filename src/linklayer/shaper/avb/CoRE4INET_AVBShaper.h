@@ -33,6 +33,8 @@ class AVBShaper : public TC, public virtual cListener
             TRANSMITTING_STATE = 1, IDLE_STATE, BLOCKED_STATE,
         };
     public:
+        using TC::receiveSignal;
+
         /**
          * @brief Constructor
          */
