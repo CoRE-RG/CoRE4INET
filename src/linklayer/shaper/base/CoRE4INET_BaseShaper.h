@@ -32,7 +32,7 @@ namespace CoRE4INET {
  *
  * @author Till Steinbach
  */
-class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQueue
+class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQueue, public virtual cListener
 {
     public:
         /**
@@ -54,6 +54,34 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
          */
         virtual void removeListener(inet::IPassiveQueueListener *listener) override;
 
+        virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
+                __attribute__((unused)) bool b) override
+        {
+        }
+        virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
+                __attribute__((unused)) long l) override
+        {
+        }
+        virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
+                __attribute__((unused)) unsigned long l) override
+        {
+        }
+        virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
+                __attribute__((unused)) double d) override
+        {
+        }
+        virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
+                __attribute__((unused))  const SimTime& t) override
+        {
+        }
+        virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
+                __attribute__((unused)) const char *s) override
+        {
+        }
+        virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
+                __attribute__((unused))  cObject *obj) override
+        {
+        }
     private:
         /**
          * @brief List of TTBuffers.
