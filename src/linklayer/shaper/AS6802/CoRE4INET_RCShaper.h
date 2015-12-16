@@ -191,9 +191,9 @@ void RCShaper<TC>::initialize(int stage)
     {
         Timed::initialize();
 
-        inet::EtherMACFullDuplex* mac =
+        /*inet::EtherMACFullDuplex* mac =
                 dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
-        mac->subscribe("txPk", this);
+        mac->subscribe("txPk", this);*/
 
         numRcPriority = static_cast<size_t>(par("numRCpriority").longValue());
         for (unsigned int i = 0; i < numRcPriority; i++)
@@ -243,6 +243,7 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
             if (rcBuffer){
                 resetPtrMap[msg] = rcBuffer;
             }
+            rcBuffer->resetBag();
             //Set Transparent clock when frame is PCF
             PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
             if (pcf)
@@ -330,6 +331,7 @@ cMessage* RCShaper<TC>::pop()
             if (rcBuffer){
                 resetPtrMap[message] = rcBuffer;
             }
+            rcBuffer->resetBag();
 
             PCFrame *pcf = dynamic_cast<PCFrame*>(message);
             if (pcf)
@@ -383,13 +385,13 @@ void RCShaper<TC>::clear()
 
 template<class TC>
 void RCShaper<TC>::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj){
-    if(strncmp(getSignalName(signalID), "txPk", 5)==0){
+    /*if(strncmp(getSignalName(signalID), "txPk", 5)==0){
         std::unordered_map<cMessage *, RCBuffer* >::const_iterator result = resetPtrMap.find(check_and_cast<cMessage*>(obj));
         if(result != resetPtrMap.end()){
             (*result).second->resetBag();
             resetPtrMap.erase(result);
         }
-    }
+    }*/
     TC::receiveSignal(source, signalID, obj);
 }
 
