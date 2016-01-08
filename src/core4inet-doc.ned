@@ -31,7 +31,7 @@
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.6)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a> (minimum version 3.1)
+// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a> (minimum version 3.2)
 //
 // <h2>Introductory material</h2>
 //  - For help with the installation see the <tt><a href="install.html">INSTALL</a></tt> page.
