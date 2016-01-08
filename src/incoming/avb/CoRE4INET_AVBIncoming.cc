@@ -24,15 +24,10 @@ using namespace std;
 
 //INET
 #ifdef INET_API
-#define INET_API_TMP INET_API
 #undef INET_API
 #define INET_API
 #endif
 #include "ModuleAccess.h"
-#ifdef INET_API_TMP
-#undef INET_API
-#define INET_API INET_API_TMP
-#endif
 
 namespace CoRE4INET {
 
