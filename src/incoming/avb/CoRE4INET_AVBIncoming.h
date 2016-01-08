@@ -20,14 +20,6 @@
 #include "CoRE4INET_Incoming.h"
 #include "CoRE4INET_SRPTable.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wattributes"
-namespace inet {
-template<typename T>
-T *getModuleFromPar(cPar& par, cModule *from, bool required);
-}
-#pragma GCC diagnostic pop
-
 namespace CoRE4INET {
 
 //This disables the padding warning for this class! please recheck when adding new members!
