@@ -24,6 +24,9 @@
 //Auto-generated Messages
 #include "SRPFrame_m.h"
 
+//INET
+#include "ModuleAccess.h"
+
 namespace CoRE4INET {
 
 Define_Module(SRProtocol);
