@@ -21,9 +21,11 @@
 #include "CoRE4INET_AVBDefs.h"
 #include "ExtendedIeee802Ctrl_m.h"
 #include "CoRE4INET_NotifierConsts.h"
-#include "ModuleAccess.h"
 //Auto-generated Messages
 #include "SRPFrame_m.h"
+
+//INET
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 
