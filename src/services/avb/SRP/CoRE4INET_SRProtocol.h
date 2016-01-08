@@ -25,7 +25,7 @@
 #pragma GCC diagnostic ignored "-Wattributes"
 namespace inet {
 template<typename T>
-T *getModuleFromPar(cPar& par, cModule *from, bool required = true);
+T *getModuleFromPar(cPar& par, cModule *from, bool required);
 }
 #pragma GCC diagnostic pop
 

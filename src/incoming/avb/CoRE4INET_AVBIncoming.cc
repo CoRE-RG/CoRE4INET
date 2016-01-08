@@ -22,9 +22,6 @@ using namespace std;
 //CoRE4INET auto-generated
 #include "AVBFrame_m.h"
 
-//INET
-#include "ModuleAccess.h"
-
 namespace CoRE4INET {
 
 Define_Module(AVBIncoming);
@@ -36,7 +33,7 @@ AVBIncoming::AVBIncoming()
 
 void AVBIncoming::initialize()
 {
-    this->srptable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this);
+    this->srptable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
     if(!srptable){
         throw cRuntimeError("Cannot find module srpTable in node. srpTable is required");
     }

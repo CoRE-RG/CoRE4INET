@@ -24,9 +24,6 @@
 //Auto-generated Messages
 #include "SRPFrame_m.h"
 
-//INET
-#include "ModuleAccess.h"
-
 namespace CoRE4INET {
 
 Define_Module(SRProtocol);
@@ -37,7 +34,7 @@ SRProtocol::SRProtocol(){
 
 void SRProtocol::initialize()
 {
-    srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this);
+    srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
     if (!srpTable)
     {
         throw cRuntimeError("srpTable module required for stream reservation");
