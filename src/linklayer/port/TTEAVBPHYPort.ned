@@ -16,7 +16,7 @@
 package core4inet.linklayer.port;
 
 import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
-import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper;
+import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
@@ -59,7 +59,7 @@ module TTEAVBPHYPort like IPort
         input AVBBin @directIn @labels(AVBFrame);
 
     submodules:
-        shaper: TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper {
+        shaper: TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper {
             @display("p=48,45");
         }
 
