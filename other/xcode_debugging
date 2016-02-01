@@ -1,0 +1,31 @@
+DEBUGGING UNDER OS X WITH Xcode
+===============================
+
+PROBLEM
+-------------------------------
+Currently there is no propper gdb support in OS X (since OS X release 10.10).
+You can install gdb by using port or homebrew but it does not work as expected.
+
+WORK AROUND
+-------------------------------
+You can use Xcode and the lldb debugger on OS X to debug OMNeT++.
+It is a bit less convenient, but at least it is a solution for the moment. 
+
+PREREQUISITES
+-------------------------------
+Install XCode on your system and open the Xcode project in CoRE4INET/other.
+You should see the source files in the "Project Navigator". If you are missing a source
+file you can add it.
+
+Build your OMNeT++ project in the OMNeT++ IDE and start it from the IDE or the commandline
+
+DEBUGGING
+-------------------------------
+To attach the opp_run process of you simulation change to XCode and open the Menu:
+"Debug"->"Attach to Process"->"opp_run"
+
+You can now use the debugging controls in the "Debug" menu e.g. "Pause", "Step", etc.
+If you want to set breakpoints open the desired source file in the "Project Navigator" and
+click in front of the line you want the debugger to stop. With a right-click you get more
+configuraion parameters using the "Edit Breakpoint..." option. You can also see all breakpoints
+in the "Breakpoint Navigator"

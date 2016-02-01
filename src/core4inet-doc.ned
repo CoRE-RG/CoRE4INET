@@ -100,6 +100,11 @@
 // @include ../INSTALL
 // </pre>
 //
+// @page xcode_debugging.html, Debugging under OS X using XCode
+// <pre>
+// @include ../other/xcode_debugging
+// </pre>
+//
 // @page license.html, License
 // <pre>
 // @include ../License
