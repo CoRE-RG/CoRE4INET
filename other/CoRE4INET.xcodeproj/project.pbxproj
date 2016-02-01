@@ -7,14 +7,36 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		A1A56C561C5BC224007DB77F /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		A118AE6E1C5F6EB40041AB6E /* api */ = {isa = PBXFileReference; lastKnownFileType = folder; name = api; path = ../src/api; sourceTree = "<group>"; };
+		A118AE6F1C5F6EB40041AB6E /* applications */ = {isa = PBXFileReference; lastKnownFileType = folder; name = applications; path = ../src/applications; sourceTree = "<group>"; };
+		A118AE701C5F6EB40041AB6E /* base */ = {isa = PBXFileReference; lastKnownFileType = folder; name = base; path = ../src/base; sourceTree = "<group>"; };
+		A118AE711C5F6EB40041AB6E /* buffer */ = {isa = PBXFileReference; lastKnownFileType = folder; name = buffer; path = ../src/buffer; sourceTree = "<group>"; };
+		A118AE721C5F6EB40041AB6E /* incoming */ = {isa = PBXFileReference; lastKnownFileType = folder; name = incoming; path = ../src/incoming; sourceTree = "<group>"; };
+		A118AE731C5F6EB40041AB6E /* linklayer */ = {isa = PBXFileReference; lastKnownFileType = folder; name = linklayer; path = ../src/linklayer; sourceTree = "<group>"; };
+		A118AE741C5F6EB40041AB6E /* networklayer */ = {isa = PBXFileReference; lastKnownFileType = folder; name = networklayer; path = ../src/networklayer; sourceTree = "<group>"; };
+		A118AE751C5F6EB40041AB6E /* nodes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nodes; path = ../src/nodes; sourceTree = "<group>"; };
+		A118AE761C5F6EB40041AB6E /* scheduler */ = {isa = PBXFileReference; lastKnownFileType = folder; name = scheduler; path = ../src/scheduler; sourceTree = "<group>"; };
+		A118AE771C5F6EB40041AB6E /* services */ = {isa = PBXFileReference; lastKnownFileType = folder; name = services; path = ../src/services; sourceTree = "<group>"; };
+		A118AE781C5F6EB40041AB6E /* synchronisation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = synchronisation; path = ../src/synchronisation; sourceTree = "<group>"; };
+		A118AE791C5F6EB40041AB6E /* utilities */ = {isa = PBXFileReference; lastKnownFileType = folder; name = utilities; path = ../src/utilities; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		A1A56C4A1C5BBC8B007DB77F = {
 			isa = PBXGroup;
 			children = (
-				A1A56C561C5BC224007DB77F /* src */,
+				A118AE6E1C5F6EB40041AB6E /* api */,
+				A118AE6F1C5F6EB40041AB6E /* applications */,
+				A118AE701C5F6EB40041AB6E /* base */,
+				A118AE711C5F6EB40041AB6E /* buffer */,
+				A118AE721C5F6EB40041AB6E /* incoming */,
+				A118AE731C5F6EB40041AB6E /* linklayer */,
+				A118AE741C5F6EB40041AB6E /* networklayer */,
+				A118AE751C5F6EB40041AB6E /* nodes */,
+				A118AE761C5F6EB40041AB6E /* scheduler */,
+				A118AE771C5F6EB40041AB6E /* services */,
+				A118AE781C5F6EB40041AB6E /* synchronisation */,
+				A118AE791C5F6EB40041AB6E /* utilities */,
 			);
 			sourceTree = "<group>";
 		};
@@ -28,7 +50,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = /Users/tillsteinbach/Documents/git/CoRE4INET/src;
+			buildWorkingDirectory = ../src;
 			dependencies = (
 			);
 			name = CoRE4INET;
@@ -53,6 +75,9 @@
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
 			mainGroup = A1A56C4A1C5BBC8B007DB77F;
 			projectDirPath = "";
 			projectRoot = "";
