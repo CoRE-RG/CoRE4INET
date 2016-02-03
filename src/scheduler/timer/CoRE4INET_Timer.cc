@@ -33,6 +33,7 @@ Timer::Timer()
     ticks = 0;
     selfMessage = new cMessage("Scheduler Message");
     oscillator = nullptr;
+    allowedEventDelay = nullptr;
 }
 
 void Timer::initialize()
@@ -366,7 +367,7 @@ void Timer::clockCorrection(int32_t correction_ticks)
     {
         if ((*it2).first < this->ticks)
         {
-            if (allowedEventDelay->longValue() < 0 || ((this->ticks - (*it2).first) < static_cast<uint64_t>(allowedEventDelay->longValue())))
+            if (allowedEventDelay && (allowedEventDelay->longValue() < 0 || ((this->ticks - (*it2).first) < static_cast<uint64_t>(allowedEventDelay->longValue()))))
             {
                 for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it4 =
                         (*it2).second.begin(); it4 != (*it2).second.end(); ++it4)
