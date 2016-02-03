@@ -72,6 +72,11 @@ class Timer : public virtual cSimpleModule
          */
         std::map<uint64_t, std::list<SchedulerTimerEvent*> > registredTimerEvents;
 
+        /**
+         * @brief Caches allowedEventDelay parameter
+         */
+        cPar* allowedEventDelay;
+
     protected:
         /**
          * Initialization of the module. Sets oscillator and registeres signals

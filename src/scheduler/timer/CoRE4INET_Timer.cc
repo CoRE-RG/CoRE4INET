@@ -44,6 +44,8 @@ void Timer::initialize()
 
     WATCH_PAIRLISTMAP(registredActionTimeEvents);
     WATCH_LISTMAP(registredTimerEvents);
+
+    allowedEventDelay = &par("allowedEventDelay");
 }
 
 Timer::~Timer()
@@ -166,7 +168,7 @@ void Timer::reschedule()
         simtime_t next_action = static_cast<double>(next_action_ticks - total_ticks) * oscillator->getCurrentTick();
         scheduleAt(simTime() + next_action, selfMessage);
     }
-    catch (__attribute__((unused))   const std::range_error& re)
+    catch (__attribute__((unused))       const std::range_error& re)
     {
         //No message should be scheduled as there are no messages registered
     }
@@ -233,7 +235,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
                 reschedule();
             }
         }
-        catch (__attribute((unused))             const std::range_error& re)
+        catch (__attribute((unused))                 const std::range_error& re)
         {
             registredTimerEvents[actionpoint].push_back(event);
             reschedule();
@@ -296,7 +298,7 @@ uint64_t Timer::registerEvent(SchedulerActionTimeEvent *actionTimeEvent, Period 
                 reschedule();
             }
         }
-        catch (__attribute((unused))             const std::range_error& re)
+        catch (__attribute((unused))                 const std::range_error& re)
         {
             registredActionTimeEvents[actionpoint].push_back(
                     std::pair<SchedulerActionTimeEvent*, Period*>(actionTimeEvent, period));
@@ -342,7 +344,8 @@ void Timer::clockCorrection(int32_t correction_ticks)
     {
         if (correctedTimerEvents.empty())
         {
-            correctedTimerEvents[static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)] = (*it2).second;
+            correctedTimerEvents[static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)] =
+                    (*it2).second;
             it = correctedTimerEvents.begin();
         }
         else
@@ -350,7 +353,8 @@ void Timer::clockCorrection(int32_t correction_ticks)
             //Better version with hint?
             it = correctedTimerEvents.insert(it,
                     std::pair<uint64_t, std::list<SchedulerTimerEvent*> >(
-                            (static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)), (*it2).second));
+                            (static_cast<uint64_t>(static_cast<int64_t>((*it2).first) + correction_ticks)),
+                            (*it2).second));
         }
     }
     registredTimerEvents = correctedTimerEvents;
@@ -360,20 +364,34 @@ void Timer::clockCorrection(int32_t correction_ticks)
     for (std::map<uint64_t, std::list<std::pair<SchedulerActionTimeEvent*, Period*> > >::const_iterator it2 =
             registredActionTimeEvents.begin(); it2 != registredActionTimeEvents.end(); ++it2)
     {
-
-        for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it4 = (*it2).second.begin();
-                it4 != (*it2).second.end(); ++it4)
+        if ((*it2).first < this->ticks)
         {
-            if ((*it2).first < this->ticks)
+            if (allowedEventDelay->longValue() < 0 || ((this->ticks - (*it2).first) < static_cast<uint64_t>(allowedEventDelay->longValue())))
             {
-                uint64_t corrected_tick = (*it2).first;
-                while (corrected_tick < this->ticks)
+                for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it4 =
+                        (*it2).second.begin(); it4 != (*it2).second.end(); ++it4)
                 {
-                    corrected_tick += (*it4).second->getCycleTicks();
+                    sendDirect((*it4).first, (*it4).first->getDestinationGate());
                 }
-                correctedActionTimeEvents[corrected_tick].push_back(*it4);
             }
             else
+            {
+                for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it4 =
+                        (*it2).second.begin(); it4 != (*it2).second.end(); ++it4)
+                {
+                    uint64_t corrected_tick = (*it2).first;
+                    while (corrected_tick < this->ticks)
+                    {
+                        corrected_tick += (*it4).second->getCycleTicks();
+                    }
+                    correctedActionTimeEvents[corrected_tick].push_back(*it4);
+                }
+            }
+        }
+        else
+        {
+            for (std::list<std::pair<SchedulerActionTimeEvent*, Period*> >::const_iterator it4 = (*it2).second.begin();
+                    it4 != (*it2).second.end(); ++it4)
             {
                 correctedActionTimeEvents[(*it2).first].push_back(*it4);
             }
