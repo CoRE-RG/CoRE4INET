@@ -1,0 +1,48 @@
+network small_network {
+	devices {
+		node node1;
+		node node2;
+		node node3;
+		switch switch1;
+	}
+
+
+	connections {
+		segment default {
+			node1 <--> { ethernetLink link1 {bandwidth 100Mb/s; length 20m; } } <--> switch1;
+			node2 <--> { ethernetLink link2 {bandwidth 100Mb/s; length 10m; } } <--> switch1;
+			node3 <--> { ethernetLink link3 {bandwidth 100Mb/s; length 5m; } } <--> switch1;
+		}
+	}
+
+
+	communication {
+		message stream1 {
+			sender node1;
+			receivers node3;
+			payload 350B;
+			period 125us;
+			mapping {
+				default : avb {id 1; srClass A;};
+			}
+		}
+		message stream2 {
+			sender node2;
+			receivers node3;
+			payload 350B;
+			period 250us;
+			mapping {
+				default : avb {id 2; srClass B;};
+			}
+		}
+		message vl_100 {
+			sender node1;
+			receivers node2, node3;
+			payload 46B;
+			period 5ms;
+			mapping {
+				default : tt { ctID 100; };
+			}
+		}
+	}
+}
