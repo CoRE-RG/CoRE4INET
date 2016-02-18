@@ -1,0 +1,17 @@
+types std {
+	ethernetLink ETH_100MBIT {
+		bandwidth 100Mb/s;
+	}
+	
+	canLink CANBUS_500KBIT {
+		bandwidth 500Kb/s;
+	}
+	
+    switch ETH_SWITCH {
+    	hardwareDelay 8us;
+    }
+    
+    message MAX_CANMSG {
+    	payload 8B;
+    }
+}

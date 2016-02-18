@@ -1,0 +1,11 @@
+ANDL README
+=========================
+
+These examples are configured in the .andl format.
+ANDL (Abstract Network Description Language) is a format to describe networks in a simple way.
+Using the ANDL Plugin for OMNeT++ you can translate the ANDL files to runnable OMNeT++ simulations.
+
+More info about ANDL and the ANDL-Plugin can be found here: http://core4inet.core-rg.de
+Information on how to install the Plugin can be found here: http://core4inet.core-rg.de/updates
+
+If everything was installed correctly you should find the generated examples in simulations/examples_andl

@@ -4,7 +4,7 @@
         name="AVB Common"
         description = "The common part of the AVB implementation"
         initiallyEnabled = "true"
-        requires = ""
+        requires = "IEEE8021Q_common"
         labels = ""
         nedPackages = "
                        core4inet.applications.trafficsource.avb
