@@ -38,15 +38,15 @@ moduleinterface IBuffer extends IOutputQueue
         //Statistic of the number of packets that were received by the buffer
         @statistic[rxPk](title="Received Packets"; source=rxPk; unit=packets; record=count);
         //Statistic of the number of Bytes that were received by the buffer
-        @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)","histogram(packetBytes)?"; interpolationmode=none);
+        @statistic[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)?","vector(packetBytes)?","histogram(packetBytes)?"; interpolationmode=none);
         //Statistic of the number of packets that were received by the buffer
         @statistic[txPk](title="Transmitted Packets"; source=txPk; unit=packets; record=count);
         //Statistic of the number of Bytes that were received by the buffer
         @statistic[txBytes](title="Transmitted Bytes"; source=txPk; unit=B; record="sum(packetBytes)","vector(packetBytes)","histogram(packetBytes)?"; interpolationmode=none);
         //End-to-end latency recorded when frame is received. Contains the time from frame creation until received in the Buffer
-        @statistic[rxLatency](title="End-to-end latency (received)"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
+        @statistic[rxLatency](title="End-to-end latency (received)"; source="messageAge(rxPk)"; unit=s; record=?stats,histogram?,vector?; interpolationmode=none);
         //End-to-end latency recorded when frame is transmitted. Contains the time from frame creation until transmitted from the Buffer
-        @statistic[txLatency](title="End-to-end latency (transmitted)"; source="messageAge(txPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
+        @statistic[txLatency](title="End-to-end latency (transmitted)"; source="messageAge(txPk)"; unit=s; record=stats?,histogram?,vector?; interpolationmode=none);
         //Maximum packet size in Interval
         @statistic[maxPacketSize](title="Maximum Packet Size in Interval"; source=rxPk; unit=B; record="IntervalMaxVector(packetBytes)?"; interpolationmode=linear);
         //Minimum packet size in Interval
