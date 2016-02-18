@@ -15,7 +15,7 @@
 
 package core4inet.linklayer.port;
 
-import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
+import core4inet.linklayer.inControl.CT_AVB_8021Q_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
@@ -37,6 +37,10 @@ module TTEAVBPHYPort like IPort
         bool promiscuous = default(false);
         //Module holds Interfacenames
         string interfaceTableModule;
+        //Untagged VLAN. Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged
+        int untaggedVID = default(0);
+        //Interface allows frames with this VLAN to enter and leave the port
+        string taggedVIDs = default("0");
         
         *.interfaceTableModule = default(absPath(interfaceTableModule));
         
@@ -63,10 +67,12 @@ module TTEAVBPHYPort like IPort
             @display("p=48,45");
         }
 
-        inControl: CT_AVB_BE_InControl {
+        inControl: CT_AVB_8021Q_InControl {
             parameters:
                 @display("p=142,45");
                 promiscuous = promiscuous;
+                untaggedVID = untaggedVID;
+            	taggedVIDs = taggedVIDs;
         }
 
         mac: EtherMACFullDuplex {
