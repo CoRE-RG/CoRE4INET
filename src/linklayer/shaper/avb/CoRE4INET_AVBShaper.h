@@ -25,9 +25,16 @@ namespace CoRE4INET {
  * @author Philipp Meyer
  */
 template<int SRCLASS, class TC>
-class AVBShaper : public TC
+class AVBShaper : public TC, public virtual cListener
 {
     public:
+        enum ShaperState
+        {
+            TRANSMITTING_STATE = 1, IDLE_STATE, BLOCKED_STATE,
+        };
+    public:
+        using TC::receiveSignal;
+
         /**
          * @brief Constructor
          */
@@ -37,6 +44,11 @@ class AVBShaper : public TC
          * @brief Destructor
          */
         ~AVBShaper();
+
+        /**
+         * @brief receives signals from mac for CBS calculations and state
+         */
+        void receiveSignal(cComponent *source, simsignal_t signalID, long l) override;
 
     private:
         /**
@@ -63,6 +75,11 @@ class AVBShaper : public TC
          * @brief Name of the avbIn
          */
         std::string avbInName;
+
+        /**
+         * @brief current state of the shaper;
+         */
+        ShaperState state;
 
     protected:
         /**
@@ -149,13 +166,17 @@ simsignal_t AVBShaper<SRCLASS, TC>::avbQueueLengthSignal;
 template<int SRCLASS, class TC>
 AVBShaper<SRCLASS, TC>::AVBShaper()
 {
+    state = IDLE_STATE;
+
     avbQueue.setName("AVB Messages");
-    if(SRCLASS == SR_CLASS_A){
+    if (SRCLASS == SR_CLASS_A)
+    {
         avbQueueLengthSignalName = "avbAQueueLength";
         avbBufferName = "avbABuffer";
         avbInName = "AVBAin";
     }
-    if(SRCLASS == SR_CLASS_B){
+    if (SRCLASS == SR_CLASS_B)
+    {
         avbQueueLengthSignalName = "avbBQueueLength";
         avbBufferName = "avbBBuffer";
         avbInName = "AVBBin";
@@ -176,8 +197,15 @@ void AVBShaper<SRCLASS, TC>::initialize(int stage)
     if (stage == 0)
     {
         int portIndex = cModule::getParentModule()->getIndex();
-        avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule(avbBufferName.c_str(),
-                portIndex));
+        avbBuffer = dynamic_cast<AVBBuffer*>(cModule::getParentModule()->getParentModule()->getSubmodule(
+                avbBufferName.c_str(), portIndex));
+        if (inet::EtherMACFullDuplex* mac =
+                dynamic_cast<inet::EtherMACFullDuplex*>(TC::gate("out")->getPathEndGate()->getOwner()))
+        {
+            if(!mac->isSubscribed("transmitState", this)){
+                mac->subscribe("transmitState", this);
+            }
+        }
     }
 }
 
@@ -192,6 +220,8 @@ void AVBShaper<SRCLASS, TC>::handleMessage(cMessage *msg)
             AVBFrame* sizeMsg = dynamic_cast<AVBFrame*>(msg->dup());
             sizeMsg->setByteLength(sizeMsg->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
             cSimpleModule::send(msg, cModule::gateBaseId("out"));
+            ASSERT(state == IDLE_STATE);
+            state = BLOCKED_STATE;
             SimTime duration = TC::outChannel->calculateDuration(sizeMsg);
             delete sizeMsg;
             avbBuffer->sendSlope(duration);
@@ -242,6 +272,8 @@ void AVBShaper<SRCLASS, TC>::requestPacket()
     {
         TC::framesRequested--;
         cSimpleModule::send(msg, cModule::gateBaseId("out"));
+        ASSERT(state == IDLE_STATE);
+        state = BLOCKED_STATE;
     }
 }
 
@@ -296,6 +328,26 @@ void AVBShaper<SRCLASS, TC>::clear()
 {
     TC::clear();
     avbQueue.clear();
+}
+
+template<int SRCLASS, class TC>
+void AVBShaper<SRCLASS, TC>::receiveSignal(cComponent *source, simsignal_t signalID, long l)
+{
+    if (strncmp(TC::getSignalName(signalID), "transmitState", 14) == 0)
+    {
+        inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
+        if (state == BLOCKED_STATE && macTransmitState == inet::EtherMACBase::MACTransmitState::TRANSMITTING_STATE)
+        {
+            state = TRANSMITTING_STATE;
+        }
+        else if (state == TRANSMITTING_STATE
+                && (macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE
+                        || macTransmitState == inet::EtherMACBase::MACTransmitState::WAIT_IFG_STATE))
+        {
+            state = IDLE_STATE;
+        }
+    }
+    TC::receiveSignal(source, signalID, l);
 }
 
 }

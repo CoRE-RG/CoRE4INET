@@ -33,6 +33,11 @@ simple Timer
         //Statistic of the clock correction in ticks
         @statistic[clockCorrection](title="Clock correction"; unit=tick; record=vector);
         
+        //Maximum delay in ticks that an time-triggered event is allowed to be "delayed" or off-schedule due to clock
+        //correction. This can occur if the clock is late and is being corrected. The timer may jump over upcoming events
+        //without triggering. This parameter allows to immediately schedule events that are in the past after clock correciton.
+        int allowedEventDelay @unit(tick) = default(-1tick);
+        
     gates:
         //Input from the period modules (currently unused)
         input period_in[];

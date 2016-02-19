@@ -21,6 +21,7 @@ cmdenv-express-mode=false
 **.max_drift = 0ppm
 **.drift_change = 0ppm
 **.period[0].cycle_ticks = 10000tick
+**.scheduler.timer.allowedEventDelay = 0tick
 
 #[Parameters]
 

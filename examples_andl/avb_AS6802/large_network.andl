@@ -1,0 +1,148 @@
+settings {
+	tteScheduling true;
+}
+
+
+
+network large_network {
+	inline ini{
+		**.node_*.app[*].reply = true
+	}
+	
+	devices {
+		node node1;
+		node node2;
+		node node3;
+		node node4;
+		node node5;
+		node node6;
+		node node7;
+		node node8;
+		node node9;
+		node node10;
+		switch switch1;
+		switch switch2;
+		switch switch3;
+	}
+
+
+	connections {
+		segment default {
+			switch1 <--> { new std.ETH_100MBIT } <--> switch2;
+			switch2 <--> { new std.ETH_100MBIT } <--> switch3;
+			node1 <--> { new std.ETH_100MBIT } <--> switch1;
+			node2 <--> { new std.ETH_100MBIT } <--> switch1;
+			node3 <--> { new std.ETH_100MBIT } <--> switch1;
+			node4 <--> { new std.ETH_100MBIT } <--> switch1;
+			node5 <--> { new std.ETH_100MBIT } <--> switch2;
+			node6 <--> { new std.ETH_100MBIT } <--> switch2;
+			node7 <--> { new std.ETH_100MBIT } <--> switch2;
+			node8 <--> { new std.ETH_100MBIT } <--> switch3;
+			node9 <--> { new std.ETH_100MBIT } <--> switch3;
+			node10 <--> { new std.ETH_100MBIT } <--> switch3;
+		}
+	}
+
+
+	communication {
+		message stream1 {
+			sender node1;
+			receivers node8;
+			payload 350B;
+			period 125us;
+			mapping {
+				default : avb{ id 1;};
+			}
+		}
+		message stream2 {
+			sender node2;
+			receivers node8;
+			payload 350B;
+			period 125us;
+			mapping {
+				default : avb{ id 2;};
+			}
+		}
+		message vl_210 {
+			sender node5;
+			receivers node9;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 210;};
+			}
+		}
+		message vl_211 {
+			sender node6;
+			receivers node9;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 211;};
+			}
+		}
+		message vl_212 {
+			sender node3;
+			receivers node7;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 212;};
+			}
+		}
+		message vl_213 {
+			sender node4;
+			receivers node7;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 213;};
+			}
+		}
+		message vl_220 {
+			sender node5;
+			receivers node9;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 220;};
+			}
+		}
+		message vl_221 {
+			sender node6;
+			receivers node9;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 221;};
+			}
+		}
+		message vl_222 {
+			sender node3;
+			receivers node7;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 222;};
+			}
+		}
+		message vl_223 {
+			sender node4;
+			receivers node7;
+			payload 1500B;
+			period 4ms;
+			mapping {
+				default : tt{ctID 223;};
+			}
+		}
+		message crosstraffic {
+			sender node10;
+			receivers node1, node2, node3, node4, node5, node6, node7, node8, node9;
+			payload 1500B;
+			period uniform(2ms,3ms);
+			mapping {
+				default : be;
+			}
+	}
+}
+}

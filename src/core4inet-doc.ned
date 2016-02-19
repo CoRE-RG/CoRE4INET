@@ -31,7 +31,7 @@
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.6)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a> (minimum version 3.1)
+// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a> (minimum version 3.2)
 //
 // <h2>Introductory material</h2>
 //  - For help with the installation see the <tt><a href="install.html">INSTALL</a></tt> page.
@@ -98,6 +98,11 @@
 // @page install.html, Install Help
 // <pre>
 // @include ../INSTALL
+// </pre>
+//
+// @page xcode_debugging.html, Debugging under OS X using XCode
+// <pre>
+// @include ../other/xcode_debugging
 // </pre>
 //
 // @page license.html, License

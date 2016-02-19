@@ -22,6 +22,13 @@ using namespace std;
 //CoRE4INET auto-generated
 #include "AVBFrame_m.h"
 
+//INET
+#ifdef INET_API
+#undef INET_API
+#define INET_API
+#endif
+#include "ModuleAccess.h"
+
 namespace CoRE4INET {
 
 Define_Module(AVBIncoming);

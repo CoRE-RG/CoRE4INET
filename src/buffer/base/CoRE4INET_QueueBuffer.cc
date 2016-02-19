@@ -59,7 +59,9 @@ void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
         }
         else
         {
-            delete frames.pop();
+            inet::EtherFrame *popFrame = static_cast<inet::EtherFrame*>(frames.pop());
+            queueSize-=static_cast<size_t>(popFrame->getByteLength());
+            delete popFrame;
         }
     }
     frames.insert(newFrame);

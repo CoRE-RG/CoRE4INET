@@ -21,9 +21,15 @@
 #include "CoRE4INET_AVBDefs.h"
 #include "ExtendedIeee802Ctrl_m.h"
 #include "CoRE4INET_NotifierConsts.h"
-#include "ModuleAccess.h"
 //Auto-generated Messages
 #include "SRPFrame_m.h"
+
+//INET
+#ifdef INET_API
+#undef INET_API
+#define INET_API
+#endif
+#include "ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -35,7 +41,7 @@ SRProtocol::SRProtocol(){
 
 void SRProtocol::initialize()
 {
-    srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this);
+    srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
     if (!srpTable)
     {
         throw cRuntimeError("srpTable module required for stream reservation");

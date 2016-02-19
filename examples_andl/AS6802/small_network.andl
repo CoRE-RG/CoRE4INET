@@ -1,0 +1,48 @@
+network smallNetworkTTE {
+	devices {
+		node node1;
+		node node2;
+		node node3;
+		switch switch1;
+	}
+
+
+	connections {
+		segment default {
+			node1 <--> { new std.ETH_100MBIT } <--> switch1;
+			node2 <--> { new std.ETH_100MBIT } <--> switch1;
+			node3 <--> { new std.ETH_100MBIT } <--> switch1;
+		}
+	}
+
+
+	communication {
+		message vl_100 {
+			sender node1;
+			receivers node2, node3;
+			payload 46B;
+			period 5ms;
+			mapping {
+				default : tt { ctID 100; };
+			}
+		}
+		message vl_101 {
+			sender node2;
+			receivers node3;
+			payload 46B;
+			period 1ms;
+			mapping {
+				default : rc { ctID 101; };
+			}
+		}
+		message vl_102 {
+			sender node1;
+			receivers node2;
+			payload 46B;
+			period 10ms;
+			mapping {
+				default : tt { ctID 102; };
+			}
+		}
+	}
+}
