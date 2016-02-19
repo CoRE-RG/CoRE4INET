@@ -55,31 +55,31 @@ class BaseShaper : public virtual cSimpleModule, public virtual inet::IPassiveQu
         virtual void removeListener(inet::IPassiveQueueListener *listener) override;
 
         virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
-                __attribute__((unused)) bool b) override
+                __attribute__((unused)) bool b, __attribute__((unused)) cObject *details) override
         {
         }
         virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
-                __attribute__((unused)) long l) override
+                __attribute__((unused)) long l, __attribute__((unused)) cObject *details) override
         {
         }
         virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
-                __attribute__((unused)) unsigned long l) override
+                __attribute__((unused)) unsigned long l, __attribute__((unused)) cObject *details) override
         {
         }
         virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
-                __attribute__((unused)) double d) override
+                __attribute__((unused)) double d, __attribute__((unused)) cObject *details) override
         {
         }
         virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
-                __attribute__((unused))  const SimTime& t) override
+                __attribute__((unused))  const SimTime& t, __attribute__((unused)) cObject *details) override
         {
         }
         virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
-                __attribute__((unused)) const char *s) override
+                __attribute__((unused)) const char *s, __attribute__((unused)) cObject *details) override
         {
         }
         virtual void receiveSignal(__attribute__((unused))  cComponent *source, __attribute__((unused))  simsignal_t signalID,
-                __attribute__((unused))  cObject *obj) override
+                __attribute__((unused))  cObject *obj, __attribute__((unused)) cObject *details) override
         {
         }
     private:

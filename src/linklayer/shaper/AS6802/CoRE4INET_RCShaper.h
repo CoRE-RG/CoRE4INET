@@ -384,7 +384,7 @@ void RCShaper<TC>::clear()
 }
 
 template<class TC>
-void RCShaper<TC>::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj){
+void RCShaper<TC>::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details){
     /*if(strncmp(getSignalName(signalID), "txPk", 5)==0){
         std::unordered_map<cMessage *, RCBuffer* >::const_iterator result = resetPtrMap.find(check_and_cast<cMessage*>(obj));
         if(result != resetPtrMap.end()){
@@ -392,7 +392,7 @@ void RCShaper<TC>::receiveSignal(cComponent *source, simsignal_t signalID, cObje
             resetPtrMap.erase(result);
         }
     }*/
-    TC::receiveSignal(source, signalID, obj);
+    TC::receiveSignal(source, signalID, obj, details);
 }
 
 }

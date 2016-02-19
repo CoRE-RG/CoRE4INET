@@ -53,7 +53,7 @@ class FloatingIntervalVectorRecorder: public cNumericResultRecorder
         virtual double calculate() = 0;
     public:
         FloatingIntervalVectorRecorder();
-        virtual void subscribedTo(cResultFilter *prev);
+        virtual void subscribedTo(cResultFilter *prev) override;
 };
 
 /**

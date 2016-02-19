@@ -48,7 +48,7 @@ class AVBShaper : public TC, public virtual cListener
         /**
          * @brief receives signals from mac for CBS calculations and state
          */
-        void receiveSignal(cComponent *source, simsignal_t signalID, long l) override;
+        void receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details) override;
 
     private:
         /**
@@ -331,7 +331,7 @@ void AVBShaper<SRCLASS, TC>::clear()
 }
 
 template<int SRCLASS, class TC>
-void AVBShaper<SRCLASS, TC>::receiveSignal(cComponent *source, simsignal_t signalID, long l)
+void AVBShaper<SRCLASS, TC>::receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details)
 {
     if (strncmp(TC::getSignalName(signalID), "transmitState", 14) == 0)
     {
@@ -347,7 +347,7 @@ void AVBShaper<SRCLASS, TC>::receiveSignal(cComponent *source, simsignal_t signa
             state = IDLE_STATE;
         }
     }
-    TC::receiveSignal(source, signalID, l);
+    TC::receiveSignal(source, signalID, l, details);
 }
 
 }
