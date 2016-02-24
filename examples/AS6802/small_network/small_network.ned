@@ -25,8 +25,6 @@ import inet.node.ethernet.Eth100M;
 //
 network small_network
 {
-    parameters:
-        double measure_interval @unit(s) = default(1s);
     submodules:
         node1: Node1 {
             @display("p=39,70");

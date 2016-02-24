@@ -22,6 +22,9 @@
 
 using namespace TTEthernetModel;
 
+Register_PerObjectConfigOptionU(CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL, "intervalvectorrecorder-measure-interval",
+        KIND_VECTOR, "s", "1s", "interval in which the value is calculated")
+
 IntervalVectorRecorder::IntervalVectorRecorder()
 {
     uninitialized = true;
@@ -31,57 +34,24 @@ IntervalVectorRecorder::IntervalVectorRecorder()
 
 }
 
-void IntervalVectorRecorder::initialize(){
-    bool notSet=true;
-    cComponent *comp = getComponent();
-    do
-    {
-        if (comp->hasPar("measure_interval") && notSet)
-        {
-            interval = SimTime(comp->par("measure_interval").doubleValue());
-            notSet = false;
-        }
-    } while ((comp = comp->getParentModule()));
+void IntervalVectorRecorder::initialize()
+{
+    handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
+
+    std::string vectorfullpath = getComponent()->getFullPath() + "." + getResultName();
+    this->interval = ev.getConfig()->getAsDouble(vectorfullpath.c_str(), CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL,
+            0);
 }
 
 void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
 {
     cNumericResultRecorder::subscribedTo(prev);
-    // we can register the vector here, because base class ensures we are subscribed only at once place
-           opp_string_map attributes = getStatisticAttributes();
-           handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
-           ASSERT(handle != nullptr);
-           //Attributes are title->interpolationmode ...
-           for (opp_string_map::const_iterator it = attributes.begin(); it != attributes.end(); ++it)
-           {
-               ev.setVectorAttribute(handle, it->first.c_str(), it->second.c_str());
-               if(opp_strcmp(it->first.c_str(), "measure_interval")==0)
-               {
-                   interval = SimTime::parse(it->second.c_str());
-               }
-           }
-           if (interval < SimTime(0))
-           {
-               bool notSet=true;
-               cComponent *comp = getComponent();
-               do
-               {
-                   if (comp->hasPar("measure_interval") && notSet)
-                   {
-                       interval = SimTime(comp->par("measure_interval").doubleValue());
-                       notSet = false;
-                   }
-               } while ((comp = comp->getParentModule()));
-           }
-           if (interval < SimTime(0))
-           {
-               interval = SimTime(1);
-           }
 }
 
 void IntervalVectorRecorder::collect(simtime_t_cref t, double value)
 {
-    if (uninitialized){
+    if (uninitialized)
+    {
         initialize();
         uninitialized = false;
     }
@@ -91,27 +61,26 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value)
                 "than the previously recorded value (t=%s)", getClassName(), SIMTIME_STR(t), SIMTIME_STR(lastTime));
     }
 
-
     if (lastTime + interval == t)
     {
         addValueToInterval(t, value);
-        ev.recordInOutputVector(handle, lastTime+interval, calculate());
+        ev.recordInOutputVector(handle, lastTime + interval, calculate());
         inInterval.clear();
-        lastTime = lastTime+interval;
+        lastTime = lastTime + interval;
     }
     else if (lastTime + interval < t)
     {
-        ev.recordInOutputVector(handle, lastTime+interval, calculate());
+        ev.recordInOutputVector(handle, lastTime + interval, calculate());
         inInterval.clear();
-        addValueToInterval(t,value);
+        addValueToInterval(t, value);
 
         //Calculate every point between
         int i = 1;
-        for (i = 1; i < ((t-lastTime)/interval)-1;i++)
+        for (i = 1; i < ((t - lastTime) / interval) - 1; i++)
         {
-            ev.recordInOutputVector(handle, lastTime+interval*(i+1), 0);
+            ev.recordInOutputVector(handle, lastTime + interval * (i + 1), 0);
         }
-        lastTime = lastTime+interval*i;
+        lastTime = lastTime + interval * i;
     }
     else
     {
@@ -261,10 +230,10 @@ double IntervalSumVectorRecorderPercent::calculate()
         sumValue += (*it).second;
     }
     cComponent *comp = getComponent();
-    double nominalDatarate = comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return sumValue /((interval / SimTime(1))* nominalDatarate / 100);
+    double nominalDatarate =
+            comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
+    return sumValue / ((interval / SimTime(1)) * nominalDatarate / 100);
 }
-
 
 /*
  * Sums the values up received for each interval
@@ -280,6 +249,7 @@ double IntervalAvailableBandwidthPercent::calculate()
         sumValue += (*it).second;
     }
     cComponent *comp = getComponent();
-    double nominalDatarate = comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return 100 - (sumValue /((interval / SimTime(1)) * nominalDatarate / 100)); // TODO Linkgeschwindigkeit
+    double nominalDatarate =
+            comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
+    return 100 - (sumValue / ((interval / SimTime(1)) * nominalDatarate / 100)); // TODO Linkgeschwindigkeit
 }

@@ -35,7 +35,7 @@ simple MultiCTTrafficSinkApp extends ApplicationBase
         //Statistic of the amount of packets that were received by the application
         @statisticTemplate[rxPk](title="Received Packets"; record=count; unit=packets); 
         //Statistic of the amount of bytes that were received by the application
-        @statisticTemplate[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=linear); //possible parameter e.g.: measure_interval=50ms; for floatingIntervalRecorders
+        @statisticTemplate[rxBytes](title="Received Bytes"; source=rxPk; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=linear); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms=50ms; for floatingIntervalRecorders
         //End-to-end latency
         @statisticTemplate[rxLatency](title="End-to-end latency"; source="messageAge(rxPk)"; unit=s; record=stats,histogram?,vector; interpolationmode=linear);
         //Uses encapsulated packet | Frame when nothing is encapsulated

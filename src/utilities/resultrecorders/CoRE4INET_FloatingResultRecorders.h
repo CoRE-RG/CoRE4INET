@@ -42,6 +42,7 @@ namespace CoRE4INET{
 class FloatingIntervalVectorRecorder: public cNumericResultRecorder
 {
     protected:
+        bool uninitialized;
         simtime_t interval;
         std::map<simtime_t, double> inInterval;
         void *handle;        // identifies output vector for the output vector manager
@@ -52,6 +53,7 @@ class FloatingIntervalVectorRecorder: public cNumericResultRecorder
     public:
         FloatingIntervalVectorRecorder();
         virtual void subscribedTo(cResultFilter *prev);
+        virtual void initialize();
 };
 
 /**
