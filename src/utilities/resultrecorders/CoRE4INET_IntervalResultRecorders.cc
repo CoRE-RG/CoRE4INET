@@ -23,7 +23,7 @@
 using namespace TTEthernetModel;
 
 Register_PerObjectConfigOptionU(CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL, "intervalvectorrecorder-measure-interval",
-        KIND_VECTOR, "s", "1s", "interval in which the value is calculated")
+        KIND_VECTOR, "s", "1s", "interval in which the value is calculated. Default is 1 second")
 
 IntervalVectorRecorder::IntervalVectorRecorder()
 {
