@@ -1,2 +1,2 @@
 cd ../..
-cppcheck -i src/synchronisation/AS6802 --enable=warning,style,performance,portability,information --suppressions tests/cppcheck/cppcheck-suppressions.txt --inconclusive src
+cppcheck -i src/core4inet/synchronisation/AS6802 --enable=warning,style,performance,portability,information --suppressions tests/cppcheck/cppcheck-suppressions.txt --inconclusive src
