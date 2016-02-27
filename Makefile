@@ -1,4 +1,4 @@
-all: checkmakefiles src/features.h 
+all: checkmakefiles src/core4inet/features.h 
 	cd src && $(MAKE)
 
 clean: checkmakefiles
@@ -12,7 +12,7 @@ cleanall: checkmakefiles
 INET_PROJ=../../inet
 MAKEMAKE_OPTIONS := -f --deep -o CoRE4INET -O out -pCoRE4INET --no-deep-includes -I. -DINET_IMPORT -L$(INET_PROJ)/inet/out/$$\(CONFIGNAME\)/src -lINET -KINET_PROJ=$(INET_PROJ)
 
-makefiles: src/features.h makefiles-so
+makefiles: src/core4inet/features.h makefiles-so
 
 makefiles-so:
 	@FEATURE_OPTIONS=$$(./core4inet_featuretool options -f -l) && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
@@ -34,8 +34,8 @@ checkmakefiles:
 	fi
 
 # generate an include file that contains all the WITH_FEATURE macros according to the current enablement of features
-src/features.h: $(wildcard .oppfeaturestate) .oppfeatures
-	@./core4inet_featuretool defines >src/features.h
+src/core4inet/features.h: $(wildcard .oppfeaturestate) .oppfeatures
+	@./core4inet_featuretool defines >src/core4inet/features.h
 
 doxy:
 	doxygen doxy.cfg
