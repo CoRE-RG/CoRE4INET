@@ -22,6 +22,8 @@
 //INET
 #include "INETDefs.h"
 
+#include "CoRE4INET_Dependencies.h"
+
 /**
  * Check for minimal OMNeT++ Version requirements
  */

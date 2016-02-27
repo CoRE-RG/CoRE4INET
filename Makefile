@@ -1,4 +1,4 @@
-all: checkmakefiles
+all: checkmakefiles src/features.h 
 	cd src && $(MAKE)
 
 clean: checkmakefiles
@@ -7,10 +7,20 @@ clean: checkmakefiles
 cleanall: checkmakefiles
 	cd src && $(MAKE) MODE=release clean
 	cd src && $(MAKE) MODE=debug clean
-	rm -f src/Makefile
+	rm -f src/Makefile src/features.h
 
-makefiles:
-	cd src && opp_makemake -f --deep
+MAKEMAKE_OPTIONS := -f --deep -o CoRE4INET -O out -pCoRE4INET --no-deep-includes -I.
+
+makefiles: src/features.h makefiles-so
+
+makefiles-so:
+	@FEATURE_OPTIONS=$$(./core4inet_featuretool options -f -l) && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+
+makefiles-lib:
+	@FEATURE_OPTIONS=$$(./core4inet_featuretool options -f -l) && cd src && opp_makemake --make-lib $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+
+makefiles-exe:
+	@FEATURE_OPTIONS=$$(./core4inet_featuretool options -f -l) && cd src && opp_makemake $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 checkmakefiles:
 	@if [ ! -f src/Makefile ]; then \
@@ -21,3 +31,10 @@ checkmakefiles:
 	echo; \
 	exit 1; \
 	fi
+
+# generate an include file that contains all the WITH_FEATURE macros according to the current enablement of features
+src/features.h: .oppfeatures
+	@./core4inet_featuretool defines >src/features.h
+
+doxy:
+	doxygen doxy.cfg
