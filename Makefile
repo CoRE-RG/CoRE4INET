@@ -9,7 +9,8 @@ cleanall: checkmakefiles
 	cd src && $(MAKE) MODE=debug clean
 	rm -f src/Makefile src/features.h
 
-MAKEMAKE_OPTIONS := -f --deep -o CoRE4INET -O out -pCoRE4INET --no-deep-includes -I.
+INET_PROJ=../../inet
+MAKEMAKE_OPTIONS := -f --deep -o CoRE4INET -O out -pCoRE4INET --no-deep-includes -I. -DINET_IMPORT -L$(INET_PROJ)/inet/out/$$\(CONFIGNAME\)/src -lINET -KINET_PROJ=$(INET_PROJ)
 
 makefiles: src/features.h makefiles-so
 
