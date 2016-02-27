@@ -34,7 +34,7 @@ checkmakefiles:
 	fi
 
 # generate an include file that contains all the WITH_FEATURE macros according to the current enablement of features
-src/features.h: .oppfeatures
+src/features.h: $(wildcard .oppfeaturestate) .oppfeatures
 	@./core4inet_featuretool defines >src/features.h
 
 doxy:

@@ -41,7 +41,7 @@
 /**
  * Definition of CORE4INET version
  */
-#define CoRE4INET_VERSION 0x0100
+#define CORE4INET_VERSION 0x0100
 
 /**
  * Delimiters for vectors
