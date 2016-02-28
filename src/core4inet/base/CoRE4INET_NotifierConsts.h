@@ -18,6 +18,8 @@
 
 #include "omnetpp.h"
 
+#include "CoRE4INET_Defs.h"
+
 namespace CoRE4INET {
 
 //Notification for changes in the synchronization state
