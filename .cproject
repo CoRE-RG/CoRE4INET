@@ -328,7 +328,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.2016080485" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
@@ -438,7 +437,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.111423297" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.298017280" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -470,7 +468,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1534915787" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
@@ -578,7 +575,6 @@
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1331833399" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -590,7 +586,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="core4inet/synchronisation/AS6802|api/AS6802|configuration/base|applications/api/AS6802|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+						<entry excluding="core4inet/applications/api/AS6802|core4inet/api/AS6802|core4inet/synchronisation/AS6802|api/AS6802|configuration/base|applications/api/AS6802|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

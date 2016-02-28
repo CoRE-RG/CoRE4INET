@@ -13,10 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "CoRE4INET_NotifierConsts.h"
-
-//OMNeT++
-#include "ccomponent.h"
+#include "./NotifierConsts.h"
 
 namespace CoRE4INET {
 

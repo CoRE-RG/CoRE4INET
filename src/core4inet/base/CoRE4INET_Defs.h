@@ -20,7 +20,7 @@
 #include "omnetpp.h"
 
 //INET
-#include "INETDefs.h"
+#include "inet/common/INETDefs.h"
 
 /**
  * Check for minimal OMNeT++ Version requirements

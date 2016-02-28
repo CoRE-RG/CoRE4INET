@@ -16,13 +16,13 @@
 #include "CoRE4INET_AVBTrafficSinkApp.h"
 
 //CoRE4INET
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_NotifierConsts.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/base/NotifierConsts.h"
 #include "CoRE4INET_SRPTable.h"
 #include "CoRE4INET_ConfigFunctions.h"
 
 //INET Auto-Generated Messages
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 
