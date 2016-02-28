@@ -18,7 +18,7 @@
 
 //CoRE4INET
 #include "core4inet/utilities/classes/Timed.h"
-#include "CoRE4INET_Period.h"
+#include "core4inet/scheduler/period/Period.h"
 
 namespace CoRE4INET {
 

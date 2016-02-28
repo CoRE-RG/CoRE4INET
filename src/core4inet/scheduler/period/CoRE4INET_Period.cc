@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CoRE4INET_Period.h"
+#include "core4inet/scheduler/period/Period.h"
 
 //Std
 #include <exception>

@@ -24,13 +24,13 @@
 //FIXME: Can be used when opp_makedep is able to use defines
 //#ifdef WITH_AS6802_COMMON
 //CoRE4INET
-#include "PCFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
 //#endif
 
 //FIXME: Can be used when opp_makedep is able to use defines
 //#ifdef WITH_AVB_COMMON
 //CoRE4INET
-#include "CoRE4INET_AVBDefs.h"
+#include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/base/avb/AVBDefs_m.h"
 //#endif
 

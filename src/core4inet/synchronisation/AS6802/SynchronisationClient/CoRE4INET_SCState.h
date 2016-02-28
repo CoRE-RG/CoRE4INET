@@ -32,7 +32,7 @@
 #include "SynchronisationEvents_m.h"
 #include <map>
 
-#include "PCFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
 
 
 using namespace std;

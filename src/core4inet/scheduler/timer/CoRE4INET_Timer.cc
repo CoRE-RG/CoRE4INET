@@ -18,7 +18,7 @@
 //Std
 #include <exception>
 //CoRE4INET
-#include "CoRE4INET_customWatch.h"
+#include "core4inet/utilities/customWatch.h"
 //INET
 #include "INETDefs.h"
 

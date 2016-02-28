@@ -29,7 +29,7 @@
 
 #include <stdio.h>
 #include "cmessage.h"
-#include "PCFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
 #include "CoRE4INET_SchedulerEvent.h"
 #include "SchedulerMessageEvents_m.h"
 #include "SynchronisationEvents_m.h"

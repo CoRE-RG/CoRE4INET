@@ -20,16 +20,16 @@
 #include "CoRE4INET_IPv4oIEEE8021Q.h"
 
 #include "core4inet/base/CoRE4INET_Defs.h"
-#include "IPoREDefs_m.h"
+#include "core4inet/base/IPoRE/IPoREDefs_m.h"
 #include "CoRE4INET_IEEE8021QDestinationInfo.h"
 #include "core4inet/buffer/base/BGBuffer.h"
 #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
-#include "CoRE4INET_IPoREFilter.h"
-#include "L3Address.h"
-#include "L3AddressResolver.h"
-#include "Ieee802Ctrl.h"
-#include "UDPPacket.h"
-#include "TCPSegment.h"
+#include "core4inet/networklayer/inet/base/IPoREFilter.h"
+#include "inet/networklayer/common/L3Address.h"
+#include "inet/networklayer/common/L3AddressResolver.h"
+#include "inet/linklayer/common/Ieee802Ctrl.h"
+#include "inet/transportlayer/udp/UDPPacket.h"
+#include "inet/transportlayer/tcp_common/UDPPacket.h"
 #include "cstringtokenizer.h"
 
 //==============================================================================

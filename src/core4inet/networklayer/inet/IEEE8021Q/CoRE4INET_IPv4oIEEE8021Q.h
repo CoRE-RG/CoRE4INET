@@ -18,7 +18,7 @@
 
 //==============================================================================
 
-#include "CoRE4INET_IPv4oREBase.h"
+#include "core4inet/networklayer/inet/base/IPv4oREBase.h"
 
 #include "core4inet/buffer/base/BGBuffer.h"
 

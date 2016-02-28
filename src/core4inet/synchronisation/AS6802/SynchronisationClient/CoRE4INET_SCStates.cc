@@ -28,7 +28,7 @@
 #include "SynchronisationEvents_m.h"
 #include <algorithm>
 #include "core4inet/utilities/HelperFunctions.h"
-#include "PCFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
 
 namespace CoRE4INET {
 

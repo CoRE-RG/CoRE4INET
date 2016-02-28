@@ -24,7 +24,7 @@
 //INET
 #include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
-#include "CoRE4INET_AVBDefs.h"
+#include "core4inet/base/avb/AVBDefs.h"
 //Auto-generated Messages
 #include "core4inet/base/avb/AVBDefs_m.h"
 

@@ -18,7 +18,7 @@
 //Std
 #include <stdexcept>
 //CoRE4INET
-#include "CoRE4INET_customWatch.h"
+#include "core4inet/utilities/customWatch.h"
 #include "core4inet/utilities/HelperFunctions.h"
 #include "core4inet/base/NotifierConsts.h"
 

@@ -18,11 +18,11 @@
 //Std
 #include <algorithm>
 //CoRE4INET
-#include "CoRE4INET_AVBDefs.h"
-#include "ExtendedIeee802Ctrl_m.h"
+#include "core4inet/base/avb/AVBDefs.h"
+#include "core4inet/linklayer/contract/ExtendedIeee802Ctrl_m.h"
 #include "core4inet/base/NotifierConsts.h"
 //Auto-generated Messages
-#include "SRPFrame_m.h"
+#include "core4inet/linklayer/ethernet/avb/SRPFrame_m.h"
 
 //INET
 #ifdef INET_API

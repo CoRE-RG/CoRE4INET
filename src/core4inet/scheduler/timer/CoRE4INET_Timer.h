@@ -20,7 +20,7 @@
 #include "omnetpp.h"
 //CoRE4INET
 #include "CoRE4INET_Oscillator.h"
-#include "CoRE4INET_Period.h"
+#include "core4inet/scheduler/period/Period.h"
 
 namespace CoRE4INET {
 

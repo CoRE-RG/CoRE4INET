@@ -31,7 +31,7 @@
 #include "core4inet/utilities/HelperFunctions.h"
 #include "SchedulerMessageEvents_m.h"
 #include "cmessage.h"
-#include "PCFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
 #include "cobject.h"
 class HICM;
 
