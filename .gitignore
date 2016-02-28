@@ -37,6 +37,11 @@
 *.o
 *.obj
 
+# local files not to be committed
+.oppfeaturestate
+.nedexclusions
+src/core4inet/features.h
+
 # ignore backup and temp files
 *.tmp*
 
