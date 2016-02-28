@@ -10,8 +10,7 @@ cleanall: checkmakefiles
 	rm -f src/Makefile src/features.h
 
 INET_PROJ=../../inet
-INET_INCLUDES= -I../../inet/src -I../../inet/src/inet/linklayer/ethernet -I../../inet/src/inet/common -I../../inet/src/inet/linklayer/common -I../../inet/src/inet/linklayer/ieee8021d/relay -I../../inet/src/inet/networklayer/common -I../../inet/src/inet/transportlayer/tcp_common -I../../inet/src/inet/transportlayer/udp -I../../inet/src/inet/networklayer/ipv4 -I../../inet/src/inet/common/queue
-MAKEMAKE_OPTIONS := -f --deep -o CoRE4INET -O out -pCoRE4INET -DINET_IMPORT $(INET_INCLUDES) -L$(INET_PROJ)/inet/out/$$\(CONFIGNAME\)/src -lINET -KINET_PROJ=$(INET_PROJ)
+MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -I. -I$(INET_PROJ)/src/ -DINET_IMPORT -L$(INET_PROJ)/inet/out/$$\(CONFIGNAME\)/src -lINET -KINET_PROJ=$(INET_PROJ)
 
 makefiles: src/core4inet/features.h makefiles-so
 

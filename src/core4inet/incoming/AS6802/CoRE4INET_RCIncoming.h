@@ -18,7 +18,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_CTIncoming.h"
-#include "CoRE4INET_Timed.h"
+#include "core4inet/utilities/classes/Timed.h"
 
 namespace CoRE4INET {
 

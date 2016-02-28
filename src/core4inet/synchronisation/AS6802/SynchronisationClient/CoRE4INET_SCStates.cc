@@ -20,14 +20,14 @@
  */
 
 #include "CoRE4INET_SCStates.h"
-#include "CoRE4INET_RCBuffer.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
 
 #include "omnetpp.h"
 #include <string>
 #include "CoRE4INET_SC.h"
 #include "SynchronisationEvents_m.h"
 #include <algorithm>
-#include "CoRE4INET_HelperFunctions.h"
+#include "core4inet/utilities/HelperFunctions.h"
 #include "PCFrame_m.h"
 
 namespace CoRE4INET {

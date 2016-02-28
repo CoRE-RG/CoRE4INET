@@ -19,12 +19,12 @@
 
 //==============================================================================
 
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_Buffer.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/buffer/base/Buffer.h"
 #include "CoRE4INET_IPoREFilter.h"
 #include "CoRE4INET_AVBDestinationInfo.h"
 #include "IPoREDefs_m.h"
-#include "AVBFrame_m.h"
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 #include "L3Address.h"
 #include "L3AddressResolver.h"
 #include "UDPPacket.h"

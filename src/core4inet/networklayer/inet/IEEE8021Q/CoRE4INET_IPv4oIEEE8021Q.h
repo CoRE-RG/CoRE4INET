@@ -20,7 +20,7 @@
 
 #include "CoRE4INET_IPv4oREBase.h"
 
-#include "CoRE4INET_BGBuffer.h"
+#include "core4inet/buffer/base/BGBuffer.h"
 
 //==============================================================================
 

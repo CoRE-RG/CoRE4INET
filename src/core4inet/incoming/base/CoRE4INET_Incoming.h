@@ -19,7 +19,7 @@
 //OMNeT++
 #include "omnetpp.h"
 //INET
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 

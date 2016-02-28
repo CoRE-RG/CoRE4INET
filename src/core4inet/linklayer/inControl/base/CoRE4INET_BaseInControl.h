@@ -19,9 +19,9 @@
 //OMNeT++
 #include "omnetpp.h"
 //CoRE4INET
-#include "CoRE4INET_Timed.h"
+#include "core4inet/utilities/classes/Timed.h"
 //INET Auto-generated Messages
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 

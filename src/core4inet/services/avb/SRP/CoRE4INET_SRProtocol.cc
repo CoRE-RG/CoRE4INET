@@ -20,7 +20,7 @@
 //CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
 #include "ExtendedIeee802Ctrl_m.h"
-#include "CoRE4INET_NotifierConsts.h"
+#include "core4inet/base/NotifierConsts.h"
 //Auto-generated Messages
 #include "SRPFrame_m.h"
 
@@ -29,7 +29,7 @@
 #undef INET_API
 #define INET_API
 #endif
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 
 namespace CoRE4INET {
 

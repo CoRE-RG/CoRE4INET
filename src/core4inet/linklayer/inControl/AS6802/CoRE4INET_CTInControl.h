@@ -21,12 +21,12 @@
 
 #include <list>
 //CoRE4INET
-#include "CoRE4INET_Defs.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "CoRE4INET_CTIncoming.h"
-#include "CoRE4INET_CTBuffer.h"
+#include "core4inet/buffer/AS6802/CTBuffer.h"
 #include "CoRE4INET_customWatch.h"
-#include "CoRE4INET_HelperFunctions.h"
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/utilities/HelperFunctions.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 //INET
 #include <ModuleAccess.h>
 //INET Auto-generated Messages

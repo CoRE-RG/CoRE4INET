@@ -19,12 +19,12 @@
 #include <algorithm>    // std::sort
 
 //CoRE4INET
-#include "CoRE4INET_Timed.h"
-#include "CoRE4INET_HelperFunctions.h"
-#include "CoRE4INET_ConfigFunctions.h"
-#include "CoRE4INET_Defs.h"
+#include "core4inet/utilities/classes/Timed.h"
+#include "core4inet/utilities/HelperFunctions.h"
+#include "core4inet/utilities/ConfigFunctions.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 //Auto-generated Messages
-#include "EtherFrameWithQTag_m.h"
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 
 namespace CoRE4INET {
 

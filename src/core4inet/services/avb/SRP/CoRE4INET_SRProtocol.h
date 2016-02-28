@@ -19,7 +19,7 @@
 //OMNeT++
 #include "omnetpp.h"
 //CoRE4INET
-#include "CoRE4INET_SRPTable.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
 
 namespace CoRE4INET {
 

@@ -19,13 +19,13 @@
 //Std
 #include <map>
 //CoRE4INET
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_Timed.h"
-#include "CoRE4INET_TTBuffer.h"
-#include "CoRE4INET_ModuleAccess.h"
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/utilities/classes/Timed.h"
+#include "core4inet/buffer/AS6802/TTBuffer.h"
+#include "core4inet/utilities/ModuleAccess.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 //Auto-generated Messages
-#include "TTBufferEmpty_m.h"
+#include "core4inet/buffer/AS6802/TTBufferEmpty_m.h"
 
 namespace CoRE4INET {
 

@@ -17,9 +17,9 @@
 #define CORE4INET_AVBINCONTROL_H_
 
 //CoRE4INET Auto-generated Messages
-#include "AVBFrame_m.h"
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 //INET Auto-generated Messages
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 

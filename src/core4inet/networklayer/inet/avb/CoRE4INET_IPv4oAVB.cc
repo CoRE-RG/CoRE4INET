@@ -24,15 +24,15 @@
 
 //==============================================================================
 
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_NotifierConsts.h"
-#include "CoRE4INET_Buffer.h"
-#include "CoRE4INET_SRPTable.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/base/NotifierConsts.h"
+#include "core4inet/buffer/base/Buffer.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
 #include "CoRE4INET_IPoREFilter.h"
 #include "CoRE4INET_AVBDestinationInfo.h"
-#include "CoRE4INET_ModuleAccess.h"
+#include "core4inet/utilities/ModuleAccess.h"
 #include "IPoREDefs_m.h"
-#include "AVBFrame_m.h"
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 #include "UDPPacket.h"
 #include "TCPSegment.h"
 #include "cstringtokenizer.h"

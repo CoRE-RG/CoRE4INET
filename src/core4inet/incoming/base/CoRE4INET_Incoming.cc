@@ -13,10 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CoRE4INET_Incoming.h"
+#include "core4inet/incoming/base/Incoming.h"
 
 //CoRE4INET
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 

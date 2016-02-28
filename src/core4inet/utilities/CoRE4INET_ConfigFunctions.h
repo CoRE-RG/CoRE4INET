@@ -24,7 +24,7 @@
 #include "omnetpp.h"
 
 //INET
-#include "CoRE4INET_ModuleAccess.h"
+#include "core4inet/utilities/ModuleAccess.h"
 
 namespace CoRE4INET {
 

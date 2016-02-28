@@ -20,7 +20,7 @@
 
 #include "CoRE4INET_IPv4oREBase.h"
 
-#include "CoRE4INET_CTBuffer.h"
+#include "core4inet/buffer/AS6802/CTBuffer.h"
 
 //==============================================================================
 

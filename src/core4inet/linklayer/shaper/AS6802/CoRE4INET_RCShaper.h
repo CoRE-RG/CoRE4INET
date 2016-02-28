@@ -17,14 +17,14 @@
 #define CORE4INET_RCSHAPER_H
 
 //CoRE4INET
-#include "CoRE4INET_Timed.h"
-#include "CoRE4INET_RCBuffer.h"
-#include "CoRE4INET_HelperFunctions.h"
+#include "core4inet/utilities/classes/Timed.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
+#include "core4inet/utilities/HelperFunctions.h"
 //Auto-generated Messages
 #include "PCFrame_m.h"
 
 //INET
-#include "EtherMACFullDuplex.h"
+#include "inet/linklayer/ethernet/EtherMACFullDuplex.h"
 
 //Std
 #include <unordered_map>

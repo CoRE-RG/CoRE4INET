@@ -17,9 +17,9 @@
 #define CORE4INET_SYNCBASE_H_
 
 //CoRE4INET
-#include "CoRE4INET_Scheduled.h"
+#include "core4inet/utilities/classes/Scheduled.h"
 //Auto-generated Messages
-#include "SyncNotification_m.h"
+#include "core4inet/synchronisation/base/SyncNotification_m.h"
 
 namespace CoRE4INET {
 

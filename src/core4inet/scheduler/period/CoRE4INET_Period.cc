@@ -18,9 +18,9 @@
 //Std
 #include <exception>
 //CoRE4INET
-#include "CoRE4INET_Timer.h"
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/scheduler/timer/Timer.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 

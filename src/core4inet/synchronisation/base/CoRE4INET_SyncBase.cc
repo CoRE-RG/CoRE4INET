@@ -14,7 +14,7 @@
 // 
 
 #include "CoRE4INET_SyncBase.h"
-#include "CoRE4INET_NotifierConsts.h"
+#include "core4inet/base/NotifierConsts.h"
 
 using namespace CoRE4INET;
 

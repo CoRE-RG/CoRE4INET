@@ -16,11 +16,11 @@
 #include "CoRE4INET_RCIncoming.h"
 
 //CoRE4INET
-#include "CoRE4INET_AS6802Defs.h"
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/base/AS6802/AS6802Defs.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 //INET
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 

@@ -17,8 +17,8 @@
 #define CORE4INET_PCFSHAPER_H
 
 //CoRE4INET
-#include "CoRE4INET_Timed.h"
-#include "CoRE4INET_HelperFunctions.h"
+#include "core4inet/utilities/classes/Timed.h"
+#include "core4inet/utilities/HelperFunctions.h"
 //Auto-generated Messages
 #include "PCFrame_m.h"
 

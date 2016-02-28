@@ -16,12 +16,12 @@
 #include "CoRE4INET_TTIncoming.h"
 
 //CoRE4INET
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 //INET
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 //Auto-generated Messages
-#include "scheduler/SchedulerMessageEvents_m.h"
+#include "core4inet/scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
 

@@ -1,9 +1,9 @@
 #include "CoRE4INET_BaseShaper.h"
 
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 
 //INET
-#include "EtherMACFullDuplex.h"
+#include "inet/linklayer/ethernet/EtherMACFullDuplex.h"
 
 //Std
 #include <algorithm>

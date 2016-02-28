@@ -36,7 +36,7 @@
 #include <list>
 #include <deque>
 #include "CoRE4INET_CoRE4INETDefs.h"
-#include "CoRE4INET_RCBuffer.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
 
 using namespace std;
 

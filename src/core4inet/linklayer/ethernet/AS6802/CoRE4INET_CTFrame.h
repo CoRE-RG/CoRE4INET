@@ -17,7 +17,7 @@
 #define CORE4INET_CT_FRAME_H_
 
 //Auto-generated Messages
-#include "CTFrame_m.h"
+#include "core4inet/linklayer/ethernet/As6802/CTFrame_m.h"
 
 namespace CoRE4INET {
 

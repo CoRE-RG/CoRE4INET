@@ -17,7 +17,7 @@
 #define CORE4INET_CTINCOMING_H_
 
 //CoRE4INET
-#include "CoRE4INET_Incoming.h"
+#include "core4inet/incoming/base/Incoming.h"
 
 namespace CoRE4INET {
 

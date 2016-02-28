@@ -17,8 +17,8 @@
 #define CORE4INET_AVBINCOMING_H_
 
 //CoRE4INET
-#include "CoRE4INET_Incoming.h"
-#include "CoRE4INET_SRPTable.h"
+#include "core4inet/incoming/base/Incoming.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
 
 namespace CoRE4INET {
 

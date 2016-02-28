@@ -17,7 +17,7 @@
 #define CORE4INET_SCHEDULED_H_
 
 //CoRE4INET
-#include "CoRE4INET_Timed.h"
+#include "core4inet/utilities/classes/Timed.h"
 #include "CoRE4INET_Period.h"
 
 namespace CoRE4INET {

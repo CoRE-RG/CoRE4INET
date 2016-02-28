@@ -21,7 +21,7 @@
 //Auto-generated Messages
 #include "SRPFrame_m.h"
 //INET Auto-generated Messages
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 

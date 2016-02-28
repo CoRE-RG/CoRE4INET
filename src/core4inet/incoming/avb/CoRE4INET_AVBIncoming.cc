@@ -20,14 +20,14 @@
 using namespace std;
 
 //CoRE4INET auto-generated
-#include "AVBFrame_m.h"
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 
 //INET
 #ifdef INET_API
 #undef INET_API
 #define INET_API
 #endif
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 
 namespace CoRE4INET {
 

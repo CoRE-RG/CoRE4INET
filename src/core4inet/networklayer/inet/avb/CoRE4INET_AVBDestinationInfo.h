@@ -19,8 +19,8 @@
 
 #include "CoRE4INET_DestinationInfo.h"
 #include "CoRE4INET_AVBIncoming.h"
-#include "MACAddress.h"
-#include "AVBDefs_m.h"
+#include "inet/linklayer/common/MACAddress.h"
+#include "core4inet/base/avb/AVBDefs_m.h"
 
 
 namespace CoRE4INET {

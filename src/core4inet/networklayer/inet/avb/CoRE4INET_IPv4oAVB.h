@@ -16,12 +16,12 @@
 #ifndef CORE4INET_IPV4OAVB_H_
 #define CORE4INET_IPV4OAVB_H_
 
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 #include "IPv4.h"
 #include "CoRE4INET_IPv4oREBase.h"
-#include "CoRE4INET_Buffer.h"
+#include "core4inet/buffer/base/Buffer.h"
 #include "CoRE4INET_AVBIncoming.h"
-#include "CoRE4INET_SRPTable.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
 #include "CoRE4INET_IPoREFilter.h"
 #include "IPoREDefs_m.h"
 

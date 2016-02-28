@@ -16,8 +16,8 @@
 #include "CoRE4INET_DummySync.h"
 
 //Auto-generated Messages
-#include "scheduler/SchedulerMessageEvents_m.h"
-#include "SyncNotification_m.h"
+#include "core4inet/scheduler/SchedulerMessageEvents_m.h"
+#include "core4inet/synchronisation/base/SyncNotification_m.h"
 
 //INET
 #include "Compat.h"

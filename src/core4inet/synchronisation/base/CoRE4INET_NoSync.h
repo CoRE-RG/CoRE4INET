@@ -19,7 +19,7 @@
 //OMNeT++
 #include "omnetpp.h"
 //Auto-generated Messages
-#include "SyncNotification_m.h"
+#include "core4inet/synchronisation/base/SyncNotification_m.h"
 
 namespace CoRE4INET {
 

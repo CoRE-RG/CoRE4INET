@@ -18,7 +18,7 @@
 
 //CoRE4INET
 #include "CoRE4INET_Oscillator.h"
-#include "CoRE4INET_Scheduled.h"
+#include "core4inet/utilities/classes/Scheduled.h"
 
 namespace CoRE4INET {
 

@@ -13,14 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "CoRE4INET_SRPTable.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
 
 //Std
 #include <stdexcept>
 //CoRE4INET
 #include "CoRE4INET_customWatch.h"
-#include "CoRE4INET_HelperFunctions.h"
-#include "CoRE4INET_NotifierConsts.h"
+#include "core4inet/utilities/HelperFunctions.h"
+#include "core4inet/base/NotifierConsts.h"
 
 namespace CoRE4INET {
 

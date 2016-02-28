@@ -22,11 +22,11 @@
 //OMNeT++
 #include "omnetpp.h"
 //INET
-#include "MACAddress.h"
+#include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
 //Auto-generated Messages
-#include "AVBDefs_m.h"
+#include "core4inet/base/avb/AVBDefs_m.h"
 
 namespace CoRE4INET {
 

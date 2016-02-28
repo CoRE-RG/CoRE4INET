@@ -23,7 +23,7 @@
 //Std
 #include <unordered_map>
 
-#include "CoRE4INET_CTBuffer.h"
+#include "core4inet/buffer/AS6802/CTBuffer.h"
 #include "CoRE4INET_TTDestinationInfo.h"
 #include "CoRE4INET_QueuedPacket.h"
 

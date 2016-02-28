@@ -16,10 +16,10 @@
 #include "CoRE4INET_SimpleOscillator.h"
 
 //CoRE4INET
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 //INET
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 
 namespace CoRE4INET {
 

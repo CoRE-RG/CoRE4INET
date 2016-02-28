@@ -21,13 +21,13 @@
 
 #include "CoRE4INET_IPv4oRC.h"
 
-#include "CoRE4INET_Defs.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "IPoREDefs_m.h"
-#include "RCFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/RCFrame_m.h"
 #include "CoRE4INET_RCDestinationInfo.h"
-#include "CoRE4INET_RCBuffer.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
 #include "CoRE4INET_IPoREFilter.h"
-#include "CoRE4INET_Incoming.h"
+#include "core4inet/incoming/base/Incoming.h"
 #include "L3Address.h"
 #include "L3AddressResolver.h"
 #include "Ieee802Ctrl.h"

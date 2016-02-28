@@ -37,8 +37,8 @@
 #include <map>
 #include <list>
 #include <deque>
-#include "CoRE4INET_Defs.h"
-#include "CoRE4INET_RCBuffer.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
 
 
 using namespace std;

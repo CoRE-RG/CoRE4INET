@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "CoRE4INET_ModuleAccess.h"
+#include "core4inet/utilities/ModuleAccess.h"
 
 namespace CoRE4INET {
 

@@ -22,7 +22,7 @@
 //INET
 #include "inet/common/INETDefs.h"
 
-#include "CoRE4INET_Dependencies.h"
+#include "core4inet/base/Dependencies.h"
 
 /**
  * Check for minimal OMNeT++ Version requirements

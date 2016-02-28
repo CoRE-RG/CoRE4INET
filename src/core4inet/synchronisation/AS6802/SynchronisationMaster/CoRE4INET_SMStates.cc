@@ -22,12 +22,12 @@
 #include "CoRE4INET_SM.h"
 #include <string>
 #include "omnetpp.h"
-#include "CoRE4INET_RCBuffer.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
 #include "SynchronisationEvents_m.h"
 
 #include "CoRE4INET_CoRE4INETDefs.h"
 #include "algorithm"
-#include "CoRE4INET_HelperFunctions.h"
+#include "core4inet/utilities/HelperFunctions.h"
 #include "CoRE4INET_TTEScheduler.h"
 #include "SchedulerMessageEvents_m.h"
 #include "PCFrame_m.h"

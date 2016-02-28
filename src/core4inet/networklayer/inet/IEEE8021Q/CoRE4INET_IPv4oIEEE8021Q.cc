@@ -19,11 +19,11 @@
 
 #include "CoRE4INET_IPv4oIEEE8021Q.h"
 
-#include "CoRE4INET_Defs.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "IPoREDefs_m.h"
 #include "CoRE4INET_IEEE8021QDestinationInfo.h"
-#include "CoRE4INET_BGBuffer.h"
-#include "EtherFrameWithQTag_m.h"
+#include "core4inet/buffer/base/BGBuffer.h"
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 #include "CoRE4INET_IPoREFilter.h"
 #include "L3Address.h"
 #include "L3AddressResolver.h"

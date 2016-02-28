@@ -18,9 +18,9 @@
 
 //CoRE4INET
 #include "CoRE4INET_CTIncoming.h"
-#include "CoRE4INET_Scheduled.h"
+#include "core4inet/utilities/classes/Scheduled.h"
 //INET
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 

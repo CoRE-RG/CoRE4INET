@@ -19,7 +19,7 @@
 //Std
 #include <vector>
 //CoRE4INET
-#include "CoRE4INET_Timer.h"
+#include "core4inet/scheduler/timer/Timer.h"
 
 //FIXME: Can be used when opp_makedep is able to use defines
 //#ifdef WITH_AS6802_COMMON
@@ -31,7 +31,7 @@
 //#ifdef WITH_AVB_COMMON
 //CoRE4INET
 #include "CoRE4INET_AVBDefs.h"
-#include "AVBDefs_m.h"
+#include "core4inet/base/avb/AVBDefs_m.h"
 //#endif
 
 namespace CoRE4INET {

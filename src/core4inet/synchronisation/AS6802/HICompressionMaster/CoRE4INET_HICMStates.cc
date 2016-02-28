@@ -24,11 +24,11 @@
 #include "CoRE4INET_HICM.h"
 #include <string>
 #include "omnetpp.h"
-#include "CoRE4INET_RCBuffer.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
 #include "SynchronisationEvents_m.h"
-#include "CoRE4INET_Defs.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include <algorithm>
-#include "CoRE4INET_HelperFunctions.h"
+#include "core4inet/utilities/HelperFunctions.h"
 #include "SchedulerMessageEvents_m.h"
 #include "cmessage.h"
 #include "PCFrame_m.h"

@@ -16,11 +16,11 @@
 #include "CoRE4INET_NoSync.h"
 
 //CoRE4INET
-#include "CoRE4INET_NotifierConsts.h"
+#include "core4inet/base/NotifierConsts.h"
 
 //Auto-generated Messages
-#include "scheduler/SchedulerMessageEvents_m.h"
-#include "SyncNotification_m.h"
+#include "core4inet/scheduler/SchedulerMessageEvents_m.h"
+#include "core4inet/synchronisation/base/SyncNotification_m.h"
 
 //INET
 #include "Compat.h"

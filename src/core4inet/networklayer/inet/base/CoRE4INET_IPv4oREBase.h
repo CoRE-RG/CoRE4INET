@@ -16,10 +16,10 @@
 #ifndef CORE4INET_IPV4OREBASE_H_
 #define CORE4INET_IPV4OREBASE_H_
 
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 #include "IPv4.h"
 
-#include "CoRE4INET_Buffer.h"
+#include "core4inet/buffer/base/Buffer.h"
 #include "CoRE4INET_IPoREFilter.h"
 #include "IPoREDefs_m.h"
 

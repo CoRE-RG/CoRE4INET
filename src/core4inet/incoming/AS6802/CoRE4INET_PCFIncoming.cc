@@ -16,7 +16,7 @@
 #include "CoRE4INET_PCFIncoming.h"
 
 //CoRE4INET
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 

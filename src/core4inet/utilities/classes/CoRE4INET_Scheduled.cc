@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "CoRE4INET_Scheduled.h"
+#include "core4inet/utilities/classes/Scheduled.h"
 
 //CoRE4INET
-#include "CoRE4INET_ConfigFunctions.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 //INET
-#include "ModuleAccess.h"
+#include "inet/common/ModuleAccess.h"
 
 using namespace CoRE4INET;
 
