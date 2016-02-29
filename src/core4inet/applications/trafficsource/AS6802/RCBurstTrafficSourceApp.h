@@ -17,7 +17,7 @@
 #define RCBURSTTRAFFICSOURCEAPP_H_
 
 //CoRE4INET
-#include "./CTTrafficSourceAppBase.h"
+#include "core4inet/applications/trafficsource/AS6802/CTTrafficSourceAppBase.h"
 #include "core4inet/utilities/classes/Timed.h"
 
 namespace CoRE4INET {
