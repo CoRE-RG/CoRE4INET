@@ -26,24 +26,26 @@ SubtractActualFromLastRecorder::SubtractActualFromLastRecorder()
     this->handle = nullptr;
 }
 
-void SubtractActualFromLastRecorder::initialize(){
+void SubtractActualFromLastRecorder::initialize()
+{
     lastValue = 0;
     thisValue = 0;
 }
 
-void SubtractActualFromLastRecorder::subscribedTo(cResultFilter *prev)
+void SubtractActualFromLastRecorder::subscribedTo(omnetpp::cResultFilter *prev)
 {
     cNumericResultRecorder::subscribedTo(prev);
-    opp_string_map attributes = getStatisticAttributes();
-    handle = getEnvir()->registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
+    omnetpp::opp_string_map attributes = getStatisticAttributes();
+    handle = omnetpp::getEnvir()->registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
     ASSERT(handle != nullptr);
 }
 
-void SubtractActualFromLastRecorder::collect(simtime_t_cref t, double value,__attribute__((unused)) cObject *details)
+void SubtractActualFromLastRecorder::collect(simtime_t_cref t, double value,
+        __attribute__((unused))  omnetpp::cObject *details)
 {
     lastValue = thisValue;
     thisValue = value;
-    getEnvir()->recordInOutputVector(handle, t, calculate());
+    omnetpp::getEnvir()->recordInOutputVector(handle, t, calculate());
 }
 
 Register_ResultRecorder("subtractActualFromLast", SubtractActualFromLastRecorder);
@@ -64,7 +66,10 @@ Register_ResultRecorder("subtractActualFromLastMax", SubtractActualFromLastRecor
 
 double SubtractActualFromLastRecorderMax::calculate()
 {
-    if ((thisValue - lastValue ) > max){
+    if ((thisValue - lastValue) > max)
+    {
         return thisValue - lastValue;
-    } else return 0;
+    }
+    else
+        return 0;
 }

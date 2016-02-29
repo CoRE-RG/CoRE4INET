@@ -20,7 +20,8 @@
 using namespace CoRE4INET;
 
 Register_PerObjectConfigOptionU(CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL,
-        "floatingintervalvectorrecorder-measure-interval", KIND_VECTOR, "s", "1s", "Time over which the floating interval is calculated. Default is 1 second")
+        "floatingintervalvectorrecorder-measure-interval", KIND_VECTOR, "s", "1s",
+        "Time over which the floating interval is calculated. Default is 1 second")
 
 FloatingIntervalVectorRecorder::FloatingIntervalVectorRecorder()
 {
@@ -32,10 +33,10 @@ FloatingIntervalVectorRecorder::FloatingIntervalVectorRecorder()
 
 void FloatingIntervalVectorRecorder::initialize()
 {
-    handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
+    handle = omnetpp::getEnvir()->registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
 
     std::string vectorfullpath = getComponent()->getFullPath() + "." + getResultName();
-    this->interval = ev.getConfig()->getAsDouble(vectorfullpath.c_str(),
+    this->interval = omnetpp::getEnvir()->getConfig()->getAsDouble(vectorfullpath.c_str(),
             CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL, 0);
 }
 
@@ -44,7 +45,8 @@ void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
     cNumericResultRecorder::subscribedTo(prev);
 }
 
-void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value)
+void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value,
+        __attribute__((unused))   omnetpp::cObject *details)
 {
     if (uninitialized)
     {
@@ -61,12 +63,12 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value)
     {
         simtime_t time = SimTime(it->first);
         inInterval.erase(it++);
-        ev.recordInOutputVector(handle, time + interval, calculate());
+        omnetpp::getEnvir()->recordInOutputVector(handle, time + interval, calculate());
     }
 
     if ((t - lastTime) > (2 * interval))
     {
-        ev.recordInOutputVector(handle, t - interval, 0);
+        omnetpp::getEnvir()->recordInOutputVector(handle, t - interval, 0);
     }
 
     //add value to interval, give hint for faster execution

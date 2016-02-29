@@ -22,7 +22,7 @@
 
 namespace CoRE4INET {
 
-class SubtractActualFromLastRecorder : public cNumericResultRecorder
+class SubtractActualFromLastRecorder : public omnetpp::cNumericResultRecorder
 {
     protected:
         double min;
@@ -32,11 +32,11 @@ class SubtractActualFromLastRecorder : public cNumericResultRecorder
         void *handle;        // identifies output vector for the output vector manager
         simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value, cObject *details);
+        virtual void collect(simtime_t_cref t, double value, omnetpp::cObject *details);
         virtual double calculate();
     public:
         SubtractActualFromLastRecorder();
-        virtual void subscribedTo(cResultFilter *prev);
+        virtual void subscribedTo(omnetpp::cResultFilter *prev);
         virtual void initialize();
 };
 

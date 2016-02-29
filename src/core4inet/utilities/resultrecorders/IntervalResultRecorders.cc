@@ -34,11 +34,11 @@ IntervalVectorRecorder::IntervalVectorRecorder()
 
 void IntervalVectorRecorder::initialize()
 {
-    handle = ev.registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
+    handle = omnetpp::getEnvir()->registerOutputVector(getComponent()->getFullPath().c_str(), getResultName().c_str());
 
     std::string vectorfullpath = getComponent()->getFullPath() + "." + getResultName();
-    this->interval = ev.getConfig()->getAsDouble(vectorfullpath.c_str(), CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL,
-            0);
+    this->interval = omnetpp::getEnvir()->getConfig()->getAsDouble(vectorfullpath.c_str(),
+            CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL, 0);
 }
 
 void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
@@ -46,7 +46,7 @@ void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
     cNumericResultRecorder::subscribedTo(prev);
 }
 
-void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute__((unused)) cObject *details)
+void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute__((unused))   cObject *details)
 {
     if (uninitialized)
     {
@@ -62,13 +62,13 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute
     if (lastTime + interval == t)
     {
         addValueToInterval(t, value);
-        ev.recordInOutputVector(handle, lastTime + interval, calculate());
+        omnetpp::getEnvir()->recordInOutputVector(handle, lastTime + interval, calculate());
         inInterval.clear();
         lastTime = lastTime + interval;
     }
     else if (lastTime + interval < t)
     {
-        ev.recordInOutputVector(handle, lastTime + interval, calculate());
+        omnetpp::getEnvir()->recordInOutputVector(handle, lastTime + interval, calculate());
         inInterval.clear();
         addValueToInterval(t, value);
 
@@ -76,7 +76,7 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute
         int i = 1;
         for (i = 1; i < ((t - lastTime) / interval) - 1; i++)
         {
-            ev.recordInOutputVector(handle, lastTime + interval * (i + 1), 0);
+            omnetpp::getEnvir()->recordInOutputVector(handle, lastTime + interval * (i + 1), 0);
         }
         lastTime = lastTime + interval * i;
     }

@@ -67,5 +67,5 @@ else
 endif
 $(info Replaced COPTS -I directives with -isystem directive: $(COPTS))
 
-override COPTS := $(subst -I/,-isystem /,$(subst -Iapi/AS6802/tte_api,-isystem api/AS6802/tte_api,$(COPTS)))
+override COPTS := $(subst -I/,-isystem /,$(subst -Icore4inet/api/AS6802/tte_api,-isystem core4inet/api/AS6802/tte_api,$(COPTS)))
 endif

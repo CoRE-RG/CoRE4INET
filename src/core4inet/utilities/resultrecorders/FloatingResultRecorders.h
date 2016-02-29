@@ -50,11 +50,11 @@ class FloatingIntervalVectorRecorder: public cNumericResultRecorder
         void *handle;        // identifies output vector for the output vector manager
         simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value, cObject *details) override;
+        virtual void collect(simtime_t_cref t, double value, omnetpp::cObject *details) override;
         virtual double calculate() = 0;
     public:
         FloatingIntervalVectorRecorder();
-        virtual void subscribedTo(cResultFilter *prev);
+        virtual void subscribedTo(omnetpp::cResultFilter *prev) override;
         virtual void initialize();
 };
 
