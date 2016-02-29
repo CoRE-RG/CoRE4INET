@@ -58,4 +58,6 @@ public:
 
 } /* namespace CoRE4INET */
 
+#include "core4inet/networklayer/inet/IEEE8021Q/IPv4oIEEE8021Q.cc"
+
 #endif /* CORE4INET_IPV4ORC_H_ */

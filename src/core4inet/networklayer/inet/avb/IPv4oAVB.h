@@ -90,4 +90,7 @@ class IPv4oAVB : public base {
 
 } /* namespace CoRE4INET */
 
+#include "core4inet/networklayer/inet/avb/IPv4oAVB.cc"
+
+
 #endif /* CORE4INET_IPV4OAVB_H_ */
