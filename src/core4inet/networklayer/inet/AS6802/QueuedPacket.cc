@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./QueuedPacket.h"
+#include "core4inet/networklayer/inet/AS6802/QueuedPacket.h"
 
 namespace CoRE4INET {
 

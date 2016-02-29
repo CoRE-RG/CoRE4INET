@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./CTApplicationBase.h"
+#include "core4inet/applications/AS6802/CTApplicationBase.h"
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"

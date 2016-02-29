@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "AbstractSimpleModule.h"
+#include "core4inet/utilities/classes/AbstractSimpleModule.h"
 
 namespace CoRE4INET {
 

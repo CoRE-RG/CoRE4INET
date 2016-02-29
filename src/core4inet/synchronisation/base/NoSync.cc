@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./NoSync.h"
+#include "core4inet/synchronisation/base/NoSync.h"
 
 //CoRE4INET
 #include "core4inet/base/NotifierConsts.h"

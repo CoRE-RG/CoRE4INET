@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TocApp.h"
+#include "core4inet/applications/examples/rt_tictoc/TocApp.h"
 
 //CoRE4INET
 #include "core4inet/incoming/base/Incoming.h"

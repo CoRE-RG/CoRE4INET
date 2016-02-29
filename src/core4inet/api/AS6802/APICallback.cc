@@ -7,7 +7,7 @@
 
 //#include <stdint.h>
 
-#include "./APICallback.h"
+#include "core4inet/api/AS6802/APICallback.h"
 
 //TTE-API
 #include "tte_api.h"

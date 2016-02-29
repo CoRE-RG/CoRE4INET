@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./DestinationInfo.h"
+#include "core4inet/networklayer/inet/base/DestinationInfo.h"
 
 namespace CoRE4INET {
 

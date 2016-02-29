@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./RCIncoming.h"
+#include "core4inet/incoming/AS6802/RCIncoming.h"
 
 //CoRE4INET
 #include "core4inet/base/AS6802/AS6802Defs.h"

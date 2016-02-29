@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TTIncoming.h"
+#include "core4inet/incoming/AS6802/TTIncoming.h"
 
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"

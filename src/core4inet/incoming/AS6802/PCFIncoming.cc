@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./PCFIncoming.h"
+#include "core4inet/incoming/AS6802/PCFIncoming.h"
 
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"

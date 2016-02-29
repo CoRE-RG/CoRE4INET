@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TTQueueBuffer.h"
+#include "core4inet/buffer/AS6802/TTQueueBuffer.h"
 
 using namespace ::CoRE4INET;
 

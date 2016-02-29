@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./Oscillator.h"
+#include "core4inet/scheduler/oscillator/Oscillator.h"
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"

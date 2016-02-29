@@ -15,7 +15,7 @@
 
 //==============================================================================
 
-#include "./SRPEtherEncap.h"
+#include "core4inet/linklayer/ethernet/avb/SRPEtherEncap.h"
 
 #include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/linklayer/contract/ExtendedIeee802Ctrl_m.h"

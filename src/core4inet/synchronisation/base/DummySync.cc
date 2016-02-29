@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./DummySync.h"
+#include "core4inet/synchronisation/base/DummySync.h"
 
 //Auto-generated Messages
 #include "core4inet/scheduler/SchedulerMessageEvents_m.h"

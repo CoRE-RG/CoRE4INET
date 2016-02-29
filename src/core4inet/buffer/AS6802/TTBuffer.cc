@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TTBuffer.h"
+#include "core4inet/buffer/AS6802/TTBuffer.h"
 
 //Auto-generated MEssages
 #include "core4inet/buffer/AS6802/TTBufferEmpty_m.h"

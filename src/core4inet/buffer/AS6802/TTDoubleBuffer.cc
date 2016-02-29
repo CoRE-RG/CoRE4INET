@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TTDoubleBuffer.h"
+#include "core4inet/buffer/AS6802/TTDoubleBuffer.h"
 
 using namespace ::CoRE4INET;
 

@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TTEAPITestApplication.h"
+#include "core4inet/applications/api/AS6802/TTEAPITestApplication.h"
 
 //TTE-API
 #include "tte_api.h"

@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./BGTrafficSourceApp.h"
+#include "core4inet/applications/trafficsource/base/BGTrafficSourceApp.h"
 
 //CoRE4INET
 #include "core4inet/buffer/base/BGBuffer.h"

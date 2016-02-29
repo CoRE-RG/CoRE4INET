@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./Scheduled.h"
+#include "core4inet/utilities/classes/Scheduled.h"
 
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"

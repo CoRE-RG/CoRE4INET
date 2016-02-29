@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./SRPRelay.h"
+#include "core4inet/linklayer/beHandling/avb/relay/SRPRelay.h"
 
 //CoRE4INET
 #include "core4inet/base/avb/AVBDefs.h"

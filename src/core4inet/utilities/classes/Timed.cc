@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./Timed.h"
+#include "core4inet/utilities/classes/Timed.h"
 
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"

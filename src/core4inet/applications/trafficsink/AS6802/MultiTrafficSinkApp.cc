@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./MultiTrafficSinkApp.h"
+#include "core4inet/applications/trafficsink/AS6802/MultiTrafficSinkApp.h"
 
 //CoRE4INET
 #include "core4inet/linklayer/ethernet/AS6802/CTFrame.h"

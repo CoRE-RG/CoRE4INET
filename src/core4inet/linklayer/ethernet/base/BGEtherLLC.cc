@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./BGEtherLLC.h"
+#include "core4inet/linklayer/ethernet/base/BGEtherLLC.h"
 
 namespace CoRE4INET {
 

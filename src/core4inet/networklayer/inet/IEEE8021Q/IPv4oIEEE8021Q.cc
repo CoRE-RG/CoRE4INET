@@ -17,7 +17,7 @@
 #ifndef CORE4INET_IPV4OIEEE8021Q_CC_
 #define CORE4INET_IPV4OIEEE8021Q_CC_
 
-#include "./IPv4oIEEE8021Q.h"
+#include "core4inet/networklayer/inet/IEEE8021Q/IPv4oIEEE8021Q.h"
 
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/IPoRE/IPoREDefs_m.h"

@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./SRProtocol.h"
+#include "core4inet/services/avb/SRP/SRProtocol.h"
 
 //Std
 #include <algorithm>

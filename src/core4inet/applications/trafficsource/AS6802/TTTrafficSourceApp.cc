@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TTTrafficSourceApp.h"
+#include "core4inet/applications/trafficsource/AS6802/TTTrafficSourceApp.h"
 
 //CoRE4INET
 #include "core4inet/base/NotifierConsts.h"

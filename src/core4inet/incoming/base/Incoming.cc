@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./Incoming.h"
+#include "core4inet/incoming/base/Incoming.h"
 
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"

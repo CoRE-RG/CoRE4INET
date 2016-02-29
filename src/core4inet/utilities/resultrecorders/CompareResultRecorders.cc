@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./CompareResultRecorders.h"
+#include "core4inet/utilities/resultrecorders/CompareResultRecorders.h"
 
 using namespace CoRE4INET;
 

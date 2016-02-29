@@ -14,7 +14,7 @@
 // 
 
 //CoRE4INET
-#include "./MessageNumProfiler.h"
+#include "core4inet/utilities/modules/MessageNumProfiler.h"
 
 //Std
 #include <ostream>

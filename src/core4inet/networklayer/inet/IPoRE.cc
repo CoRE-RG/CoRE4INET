@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./IPoRE.h"
+#include "core4inet/networklayer/inet/IPoRE.h"
 
 namespace CoRE4INET {
 

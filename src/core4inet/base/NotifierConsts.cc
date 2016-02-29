@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./NotifierConsts.h"
+#include "core4inet/base/NotifierConsts.h"
 
 namespace CoRE4INET {
 

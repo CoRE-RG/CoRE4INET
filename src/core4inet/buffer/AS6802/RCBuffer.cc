@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./RCBuffer.h"
+#include "core4inet/buffer/AS6802/RCBuffer.h"
 
 //Auto-generated Messages
 #include "core4inet/linklayer/ethernet/AS6802/CTFrame_m.h"

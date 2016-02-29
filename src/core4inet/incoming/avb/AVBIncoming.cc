@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./AVBIncoming.h"
+#include "core4inet/incoming/avb/AVBIncoming.h"
 
 //Std
 #include <string>

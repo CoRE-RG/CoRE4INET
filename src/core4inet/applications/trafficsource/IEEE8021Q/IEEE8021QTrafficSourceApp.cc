@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./IEEE8021QTrafficSourceApp.h"
+#include "core4inet/applications/trafficsource/IEEE8021Q/IEEE8021QTrafficSourceApp.h"
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"

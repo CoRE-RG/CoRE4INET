@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TrafficSinkApp.h"
+#include "core4inet/applications/trafficsink/base/TrafficSinkApp.h"
 
 //INET Auto-Generated Messages
 #include "inet/linklayer/ethernet/EtherFrame_m.h"

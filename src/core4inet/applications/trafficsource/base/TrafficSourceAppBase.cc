@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./TrafficSourceAppBase.h"
+#include "core4inet/applications/trafficsource/base/TrafficSourceAppBase.h"
 
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"

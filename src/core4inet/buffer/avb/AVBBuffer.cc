@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./AVBBuffer.h"
+#include "core4inet/buffer/avb/AVBBuffer.h"
 
 //INET
 #include "inet/linklayer/ethernet/EtherMACBase.h"

@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./CTTrafficSinkApp.h"
+#include "core4inet/applications/trafficsink/AS6802/CTTrafficSinkApp.h"
 
 namespace CoRE4INET {
 

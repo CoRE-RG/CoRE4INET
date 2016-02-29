@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./AVBTrafficSinkApp.h"
+#include "core4inet/applications/trafficsink/avb/AVBTrafficSinkApp.h"
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"

@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./SyncBase.h"
+#include "core4inet/synchronisation/base/SyncBase.h"
 
 #include "core4inet/base/NotifierConsts.h"
 

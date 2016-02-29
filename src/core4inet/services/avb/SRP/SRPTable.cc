@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./SRPTable.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
 
 //Std
 #include <stdexcept>

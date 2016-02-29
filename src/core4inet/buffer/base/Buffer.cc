@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./Buffer.h"
+#include "core4inet/buffer/base/Buffer.h"
 
 //CORE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"

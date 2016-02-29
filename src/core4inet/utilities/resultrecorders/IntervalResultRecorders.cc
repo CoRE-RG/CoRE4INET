@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./IntervalResultRecorders.h"
+#include "core4inet/utilities/resultrecorders/IntervalResultRecorders.h"
 
 //Std
 #include <limits>

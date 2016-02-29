@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./AVBDestinationInfo.h"
+#include "core4inet/networklayer/inet/avb/AVBDestinationInfo.h"
 
 namespace CoRE4INET {
 

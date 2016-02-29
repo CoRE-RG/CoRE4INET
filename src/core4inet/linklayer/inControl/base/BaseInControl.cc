@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "./BaseInControl.h"
+#include "core4inet/linklayer/inControl/base/BaseInControl.h"
 
 namespace CoRE4INET {
 
