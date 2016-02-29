@@ -15,7 +15,7 @@
 
 cplusplus {{
     //Auto-generated Messages
-	#include "RCFrame_m.h"
+	#include "core4inet/linklayer/ethernet/AS6802/RCFrame_m.h"
 }}
 
 class CoRE4INET::RCFrame;

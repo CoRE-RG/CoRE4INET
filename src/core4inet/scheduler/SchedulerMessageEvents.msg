@@ -15,7 +15,7 @@
 
 cplusplus {{
     //CoRE4INET
-    #include "CoRE4INET_SchedulerEvent.h"
+    #include "core4inet/scheduler/SchedulerEvent.h"
 }}
 
 namespace CoRE4INET;

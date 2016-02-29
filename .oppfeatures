@@ -1,4 +1,4 @@
-<features cppSourceRoots="src/core4inet">
+<features cppSourceRoots="src">
     <feature
         id="AVB_common"
         name="AVB Common"

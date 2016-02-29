@@ -35,7 +35,6 @@
 #include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 
 #include "inet/transportlayer/udp/UDPPacket.h"
-#include "inet/transportlayer/tcp_common/UDPPacket.h"
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/linklayer/common/Ieee802Ctrl.h"
 

@@ -15,6 +15,7 @@
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/networklayer/ipv4/IPv4Datagram.h"
 #include "inet/transportlayer/udp/UDPPacket.h"
+#include "inet/transportlayer/tcp_common/TCPSegment.h"
 
 //==============================================================================
 

@@ -12,22 +12,20 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-
-
-#ifndef CORE4INET_IPV4ORC_CC_
-#define CORE4INET_IPV4ORC_CC_
-
 //==============================================================================
 
-#include "./IPv4oRC.h"
+#ifndef CORE4INET_IPV4OIEEE8021Q_CC_
+#define CORE4INET_IPV4OIEEE8021Q_CC_
+
+#include "./IPv4oIEEE8021Q.h"
 
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/IPoRE/IPoREDefs_m.h"
-#include "core4inet/linklayer/ethernet/AS6802/RCFrame_m.h"
-#include "core4inet/networklayer/inet/AS6802/RCDestinationInfo.h"
-#include "core4inet/buffer/AS6802/RCBuffer.h"
+#include "core4inet/buffer/base/BGBuffer.h"
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 #include "core4inet/networklayer/inet/base/IPoREFilter.h"
-#include "core4inet/incoming/base/Incoming.h"
+#include "core4inet/networklayer/inet/IEEE8021Q/IEEE8021QDestinationInfo.h"
+
 #include "inet/networklayer/common/L3Address.h"
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/linklayer/common/Ieee802Ctrl.h"
@@ -40,42 +38,47 @@ namespace CoRE4INET {
 //==============================================================================
 
 template<class Base>
-IPv4oRC<Base>::IPv4oRC() {
+IPv4oIEEE8021Q<Base>::IPv4oIEEE8021Q()
+{
 }
 
 //==============================================================================
 
 template<class Base>
-IPv4oRC<Base>::~IPv4oRC() {
+IPv4oIEEE8021Q<Base>::~IPv4oIEEE8021Q()
+{
 }
 
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::initialize(int stage)
+void IPv4oIEEE8021Q<Base>::initialize(int stage)
 {
     Base::initialize(stage);
     if (stage == 0)
     {
         cXMLElement *filters = Base::par("filters").xmlValue();
-        IPv4oRC<Base>::configureFilters(filters);
+        IPv4oIEEE8021Q<Base>::configureFilters(filters);
     }
 }
 
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie)
+void IPv4oIEEE8021Q<Base>::sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie)
 {
     // Check for matching filters
     std::list<IPoREFilter*> matchingFilters;
-    bool filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_RC);
+    bool filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_8021Q);
 
     // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
-    if(filterMatch) {
-        IPv4oRC<Base>::sendPacketToBuffers(packet, ie, matchingFilters);
-    } else {
+    if (filterMatch)
+    {
+        IPv4oIEEE8021Q<Base>::sendPacketToBuffers(packet, ie, matchingFilters);
+    }
+    else
+    {
         Base::sendPacketToNIC(packet, ie);
     }
 }
@@ -83,7 +86,7 @@ void IPv4oRC<Base>::sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry 
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::configureFilters(cXMLElement *config)
+void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
 {
     inet::L3AddressResolver addressResolver;
     cXMLElementList filterElements = config->getChildrenByTagName("filter");
@@ -94,7 +97,6 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
         {
             const char *destType = Base::getRequiredAttribute(filterElement, "destType");
 
-
 //            if (!this->destTypeEnum) {
 //                this->destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
 //            }
@@ -103,10 +105,14 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
             cEnum *destTypeEnum = cEnum::get("CoRE4INET::DestinationType");
             DestinationType dt = DestinationType(destTypeEnum->lookup(destType));
 
-            if (dt == DestinationType_RC) {
+            if (dt == DestinationType_8021Q)
+            {
                 // Destination Info
                 const char *destModules = Base::getRequiredAttribute(filterElement, "destModules");
-                const char *ctId = Base::getRequiredAttribute(filterElement, "ctId");
+                const char *vid = Base::getRequiredAttribute(filterElement, "VID");
+                const char *pcp = Base::getRequiredAttribute(filterElement, "PCP");
+
+                const char *destMAC = Base::getRequiredAttribute(filterElement, "destMAC");
 
                 // Traffic Pattern
                 const char *srcAddrAttr = filterElement->getAttribute("srcAddress");
@@ -124,28 +130,38 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                 const char *destPortMaxAttr = filterElement->getAttribute("destPortMax");
 
                 // Fill destination info
-                RCDestinationInfo *rcDestInfo = new RCDestinationInfo();
-                rcDestInfo->setDestType(DestinationType_RC);
+                IEEE8021QDestinationInfo *ieee8021QDestInfo = new IEEE8021QDestinationInfo();
+                ieee8021QDestInfo->setDestType(DestinationType_8021Q);
                 std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
                 std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
-                std::list<RCBuffer*> destCtBuffers;
-                for (  ; bufferPath != bufferPaths.end(); ++bufferPath)
+                std::list<BGBuffer*> destBgBuffers;
+                for (; bufferPath != bufferPaths.end(); ++bufferPath)
                 {
                     cModule* module = simulation.getModuleByPath((*bufferPath).c_str());
-                    if (!module) {
-                       module = findModuleWhereverInNode((*bufferPath).c_str(), this);
+                    if (!module)
+                    {
+                        module = findModuleWhereverInNode((*bufferPath).c_str(), this);
                     }
-                    if (!module) {
-                       throw cRuntimeError("destModule \"%s\" could not be resolved!", (*bufferPath).c_str());
+                    if (!module)
+                    {
+                        throw cRuntimeError("destModule \"%s\" could not be resolved!", (*bufferPath).c_str());
                     }
-                    if (RCBuffer *rcBuf = dynamic_cast<RCBuffer*>(module)) {
-                        destCtBuffers.push_back(rcBuf);
-                    } else {
-                        throw cRuntimeError("destModule: %s is not a RCBuffer!", (*bufferPath).c_str());
+                    if (BGBuffer *bgBuf = dynamic_cast<BGBuffer*>(module))
+                    {
+                        destBgBuffers.push_back(bgBuf);
+                    }
+                    else
+                    {
+                        throw cRuntimeError("destModule: %s is not a BGBuffer!", (*bufferPath).c_str());
                     }
                 }
-                rcDestInfo->setDestModules(destCtBuffers);
-                rcDestInfo->setCtId(static_cast<uint16_t>(Base::parseIntAttribute(ctId, "ctId", false)));
+                if (destMAC)
+                    ieee8021QDestInfo->setDestMac(new inet::MACAddress(destMAC));
+                else
+                    throw cRuntimeError("destMAC not specified!");
+                ieee8021QDestInfo->setDestModules(destBgBuffers);
+                ieee8021QDestInfo->setVID(static_cast<uint16_t>(Base::parseIntAttribute(vid, "VID", false)));
+                ieee8021QDestInfo->setPCP(static_cast<uint8_t>(Base::parseIntAttribute(pcp, "PCP", false)));
 
                 // Fill traffic pattern
                 TrafficPattern *tp = new TrafficPattern();
@@ -154,20 +170,21 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                 if (srcPrefixLengthAttr)
                     tp->setSrcPrefixLength(Base::parseIntAttribute(srcPrefixLengthAttr, "srcPrefixLength"));
                 else if (srcAddrAttr)
-                    tp->setSrcPrefixLength(tp->getSrcAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
+                    tp->setSrcPrefixLength(tp->getSrcAddr().getType() == inet::L3Address::IPv6 ? 128 : 32);
                 if (destAddrAttr)
                     tp->setDestAddr(addressResolver.resolve(destAddrAttr));
                 if (destPrefixLengthAttr)
                     tp->setDestPrefixLength(Base::parseIntAttribute(destPrefixLengthAttr, "destPrefixLength"));
                 else if (destAddrAttr)
-                    tp->setDestPrefixLength(tp->getDestAddr().getType()==inet::L3Address::IPv6 ? 128 : 32);
+                    tp->setDestPrefixLength(tp->getDestAddr().getType() == inet::L3Address::IPv6 ? 128 : 32);
                 if (protocolAttr)
                     tp->setProtocol(Base::parseProtocol(protocolAttr, "protocol"));
                 if (tosAttr)
                     tp->setTos(Base::parseIntAttribute(tosAttr, "tos"));
                 if (tosMaskAttr)
                     tp->setTosMask(Base::parseIntAttribute(tosAttr, "tosMask"));
-                if (srcPortAttr) {
+                if (srcPortAttr)
+                {
                     tp->setSrcPortMin(Base::parseIntAttribute(srcPortAttr, "srcPort"));
                     tp->setSrcPortMax(tp->getSrcPortMin());
                 }
@@ -175,7 +192,8 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
                     tp->setSrcPortMin(Base::parseIntAttribute(srcPortMinAttr, "srcPortMin"));
                 if (srcPortMaxAttr)
                     tp->setSrcPortMax(Base::parseIntAttribute(srcPortMaxAttr, "srcPortMax"));
-                if (destPortAttr) {
+                if (destPortAttr)
+                {
                     tp->setDestPortMin(Base::parseIntAttribute(destPortAttr, "destPort"));
                     tp->setDestPortMax(tp->getDestPortMin());
                 }
@@ -186,16 +204,16 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
 
                 // Add filter
                 IPoREFilter *filter = new IPoREFilter();
-                filter->setDestInfo(rcDestInfo);
+                filter->setDestInfo(ieee8021QDestInfo);
                 filter->setTrafficPattern(tp);
                 Base::addFilter(filter);
             }
 
-
         }
         catch (std::exception& e)
         {
-            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(), e.what());
+            throw cRuntimeError("Error in XML <filter> element at %s: %s", filterElement->getSourceLocation(),
+                    e.what());
         }
     }
 
@@ -204,33 +222,30 @@ void IPv4oRC<Base>::configureFilters(cXMLElement *config)
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::handleMessage(cMessage* msg)
+void IPv4oIEEE8021Q<Base>::handleMessage(cMessage* msg)
 {
-    if (dynamic_cast<RCFrame*>(msg)) {
-        RCFrame* rcFrame = dynamic_cast<RCFrame*>(msg);
-
-        //Reset Bag
-        RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
-        if (rcBuffer)
-            rcBuffer->resetBag();
+    if (dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+    {
+        EthernetIIFrameWithQTag* qFrame = dynamic_cast<EthernetIIFrameWithQTag*>(msg);
 
         // decapsulate and send up
-        cPacket* ipPacket = rcFrame->decapsulate();
+        cPacket* ipPacket = qFrame->decapsulate();
         inet::Ieee802Ctrl *etherctrl = new inet::Ieee802Ctrl();
-        etherctrl->setSrc(rcFrame->getSrc());
-        etherctrl->setDest(rcFrame->getDest());
-        etherctrl->setEtherType(rcFrame->getEtherType());
+        etherctrl->setSrc(qFrame->getSrc());
+        etherctrl->setDest(qFrame->getDest());
+        etherctrl->setEtherType(qFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
 #if OMNETPP_VERSION < 0x0500
-        ipPacket->setArrival(this, Base::gate("RCIn")->getId());
+        ipPacket->setArrival(this, Base::gate("In")->getId());
 #else
-        ipPacket->setArrival(this->getId(), Base::gate("RCIn")->getId());
+        ipPacket->setArrival(this->getId(), Base::gate("In")->getId());
 #endif
 
-        delete rcFrame;
+        delete qFrame;
         Base::handleMessage(ipPacket);
     }
-    else {
+    else
+    {
         Base::handleMessage(msg);
     }
 }
@@ -238,15 +253,19 @@ void IPv4oRC<Base>::handleMessage(cMessage* msg)
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters)
+void IPv4oIEEE8021Q<Base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie,
+        std::list<IPoREFilter*> &filters)
 {
     if (packet->getByteLength() > MAX_ETHERNET_DATA_BYTES)
-        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)", packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
+        Base::error("packet from higher layer (%d bytes) exceeds maximum Ethernet payload length (%d)",
+                packet->getByteLength(), MAX_ETHERNET_DATA_BYTES);
 
     typename std::list<IPoREFilter*>::iterator filter = filters.begin();
-    for ( ; filter != filters.end(); ++filter) {
-        if ((*filter)->getDestInfo()->getDestType() == DestinationType_RC) {
-            sendRCFrame(packet->dup(), ie, (*filter));
+    for (; filter != filters.end(); ++filter)
+    {
+        if ((*filter)->getDestInfo()->getDestType() == DestinationType_8021Q)
+        {
+            sendIEEE8021QFrame(packet->dup(), ie, (*filter));
         }
     }
 
@@ -257,43 +276,38 @@ void IPv4oRC<Base>::sendPacketToBuffers(cPacket *packet, const inet::InterfaceEn
 //==============================================================================
 
 template<class Base>
-void IPv4oRC<Base>::sendRCFrame(cPacket* packet, __attribute__((unused)) const inet::InterfaceEntry* ie, const IPoREFilter* filter)
+void IPv4oIEEE8021Q<Base>::sendIEEE8021QFrame(cPacket* packet, __attribute__((unused))  const inet::InterfaceEntry* ie,
+        const IPoREFilter* filter)
 {
-    RCDestinationInfo *destInfo = dynamic_cast<RCDestinationInfo*>(filter->getDestInfo());
-    if (!destInfo){
+    IEEE8021QDestinationInfo *destInfo = dynamic_cast<IEEE8021QDestinationInfo*>(filter->getDestInfo());
+    if (!destInfo)
+    {
         Base::error("Wrong Destination Info Type. Filter invalid!");
         return;
     }
 
-    RCFrame *outFrame = new RCFrame();
+    EthernetIIFrameWithQTag *outFrame = new EthernetIIFrameWithQTag();
     outFrame->encapsulate(packet);
-    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES) {
+    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+    {
         outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
     }
-    outFrame->setCtID(destInfo->getCtId());
+    if (destInfo->getVID() > 0)
+    {
+        outFrame->setVID(destInfo->getVID());
+    }
+    if (destInfo->getPCP() > 0)
+    {
+        outFrame->setPcp(destInfo->getPCP());
+    }
+    outFrame->setDest(*destInfo->getDestMac());
     outFrame->setName(packet->getName());
 
-    std::list<RCBuffer*> destBuffers = destInfo->getDestModules();
-    std::list<RCBuffer*>::iterator destBuf = destBuffers.begin();
-    for (  ; destBuf != destBuffers.end(); ++destBuf) {
-        if ((*destBuf)->gate("in")->getPathStartGate())
-        {
-            Incoming* in = dynamic_cast<Incoming *>((*destBuf)->gate("in")->getPathStartGate()->getOwner());
-            if (in)
-            {
-                Base::sendDirect(outFrame, in->gate("in"));
-            }
-            else
-            {
-                throw cRuntimeError("You can only connect an Incoming module to a Buffer (Buffer:%s, Attached Module:%s)",
-                        (*destBuf)->getFullPath().c_str(),
-                        (*destBuf)->gate("in")->getPathStartGate()->getOwner()->getFullPath().c_str());
-            }
-        }
-        else //It is ok to directly send a frame to a buffer if no incoming is attached!
-        {
-            Base::sendDirect(outFrame, (*destBuf)->gate("in"));
-        }
+    std::list<BGBuffer*> destBuffers = destInfo->getDestModules();
+    std::list<BGBuffer*>::iterator destBuf = destBuffers.begin();
+    for (; destBuf != destBuffers.end(); ++destBuf)
+    {
+        Base::sendDirect(outFrame, (*destBuf)->gate("in"));
     }
 
 }
@@ -302,6 +316,6 @@ void IPv4oRC<Base>::sendRCFrame(cPacket* packet, __attribute__((unused)) const i
 
 } /* namespace CoRE4INET */
 
-//==============================================================================
+#endif // CORE4INET_IPV4OIEEE8021Q_CC_
 
-#endif // CORE4INET_IPV4ORC_CC_
+//==============================================================================

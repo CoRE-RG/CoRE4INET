@@ -18,7 +18,7 @@
 
 //==============================================================================
 
-#include "CoRE4INET_IPv4oTT.h"
+#include "./IPv4oTT.h"
 
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/IPoRE/IPoREDefs_m.h"

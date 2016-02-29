@@ -10,7 +10,8 @@ cleanall: checkmakefiles
 	rm -f src/Makefile src/features.h
 
 INET_PROJ=../../inet
-MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -I. -I$(INET_PROJ)/src/ -DINET_IMPORT -L$(INET_PROJ)/inet/out/$$\(CONFIGNAME\)/src -lINET -KINET_PROJ=$(INET_PROJ)
+EXTRA_INCLUDES= -I./core4inet/api/AS6802/tte_api
+MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -I. $(EXTRA_INCLUDES) -I$(INET_PROJ)/src/ -DINET_IMPORT -L$(INET_PROJ)/inet/out/$$\(CONFIGNAME\)/src -lINET -KINET_PROJ=$(INET_PROJ)
 
 makefiles: src/core4inet/features.h makefiles-so
 

@@ -15,7 +15,7 @@
 
 cplusplus {{
     //Auto-generated Messages
-    #include "EtherFrameWithQTag_m.h"
+    #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 }}
 
 class CoRE4INET::EthernetIIFrameWithQTag;

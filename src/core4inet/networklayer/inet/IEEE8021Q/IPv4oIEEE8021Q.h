@@ -13,14 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef CORE4INET_IPV4ORC_H_
-#define CORE4INET_IPV4ORC_H_
+#ifndef CORE4INET_IPV4OIEEE8021Q_H_
+#define CORE4INET_IPV4OIEEE8021Q_H_
 
 //==============================================================================
 
 #include "core4inet/networklayer/inet/base/IPv4oREBase.h"
-
-#include "core4inet/buffer/AS6802/CTBuffer.h"
+#include "core4inet/buffer/base/BGBuffer.h"
 
 //==============================================================================
 
@@ -29,28 +28,28 @@ namespace CoRE4INET {
 //==============================================================================
 
 template<class Base>
-class IPv4oRC : public Base {
+class IPv4oIEEE8021Q : public Base {
 
 
 public:
 
-    IPv4oRC();
-    virtual ~IPv4oRC();
+    IPv4oIEEE8021Q();
+    virtual ~IPv4oIEEE8021Q();
 
     virtual void initialize(int stage) override;
     virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie) override;
-    virtual void configureFilters(cXMLElement *config) override;
+    virtual void configureFilters(cXMLElement *config);
     virtual void handleMessage(cMessage* msg) override;
 
     /**
      * Encapsulates packet in RC frame and sends to each destination buffers.
      */
-    virtual void sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters) override;
+    virtual void sendPacketToBuffers(cPacket *packet, const inet::InterfaceEntry *ie, std::list<IPoREFilter*> &filters);
 
     /**
      * Encapsulates packet in RC Frame and sends to destination Buffers.
      */
-    void sendRCFrame(cPacket* packet, const inet::InterfaceEntry* ie, const IPoREFilter* filter);
+    void sendIEEE8021QFrame(cPacket* packet, const inet::InterfaceEntry* ie, const IPoREFilter* filter);
 
 
 };
@@ -58,9 +57,5 @@ public:
 //==============================================================================
 
 } /* namespace CoRE4INET */
-
-//==============================================================================
-
-//==============================================================================
 
 #endif /* CORE4INET_IPV4ORC_H_ */

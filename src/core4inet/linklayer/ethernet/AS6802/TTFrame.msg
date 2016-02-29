@@ -15,7 +15,7 @@
 
 cplusplus {{
 	//CoRE4INET
-	#include "CoRE4INET_CTFrame.h"
+	#include "core4inet/linklayer/ethernet/AS6802/CTFrame.h"
 }}
 
 class CoRE4INET::CTFrame;

@@ -15,7 +15,7 @@
 
 cplusplus {{
     //INET Auto-generated Messages
-	#include "EtherFrame_m.h"
+	#include "inet/linklayer/ethernet/EtherFrame_m.h"
 }}
 
 class inet::EthernetIIFrame;

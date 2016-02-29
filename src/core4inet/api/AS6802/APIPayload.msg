@@ -14,7 +14,7 @@
 // 
 
 cplusplus {{
-#include "INETDefs.h"
+#include "inet/common/INETDefs.h"
 
 //This disables warnings for this class!
 #pragma GCC system_header

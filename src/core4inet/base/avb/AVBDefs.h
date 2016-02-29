@@ -16,6 +16,8 @@
 #ifndef CORE4INET_AVBDEFS_H_
 #define CORE4INET_AVBDEFS_H_
 
+#include "inet/linklayer/ethernet/EtherMAC.h"
+
 namespace CoRE4INET {
 
 //Ethertype for MSRP Protocol

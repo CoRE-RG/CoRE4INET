@@ -15,7 +15,7 @@
 
 cplusplus {{
     //INET
-    #include "MACAddress.h"
+    #include "inet/linklayer/common/MACAddress.h"
 }}
 
 class noncobject inet::MACAddress;

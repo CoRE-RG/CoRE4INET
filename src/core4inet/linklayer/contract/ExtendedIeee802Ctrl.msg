@@ -17,7 +17,7 @@
 
 cplusplus {{
     //INET
-	#include "Ieee802Ctrl.h"
+	#include "inet/linklayer/common/Ieee802Ctrl.h"
 	
 	#define SWITCH_PORT_BROADCAST -1
 }}
