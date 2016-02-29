@@ -4,10 +4,7 @@
 		<cconfiguration id="org.omnetpp.cdt.gnu.config.debug.884168226">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.omnetpp.cdt.gnu.config.debug.884168226" moduleId="org.eclipse.cdt.core.settings" name="gcc-debug">
 				<externalSettings>
-					<externalSetting>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="libraryPath" name="/CORE4INET/emf4cpp-0.0.2/lib"/>
-						<entry flags="RESOLVED" kind="libraryFile" name="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so" srcPrefixMapping="" srcRootPath=""/>
-					</externalSetting>
+					<externalSetting/>
 				</externalSettings>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -33,16 +30,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.870144984" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1592839142" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1246268161" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../src"/>
+									<listOptionValue builtIn="false" value="../../src/core4inet/api/AS6802/tte_api"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
@@ -100,8 +96,8 @@
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
@@ -138,13 +134,11 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.507054474" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1164351677" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.1282023526" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1006037084" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -170,13 +164,11 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1476902079" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.870144984"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1609836974" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.1592839142">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.662052049" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.525932788" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
@@ -234,8 +226,8 @@
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
@@ -272,13 +264,11 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.436307686" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.507054474">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.303544471" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1556009094" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -290,7 +280,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="core4inet/applications/api/AS6802|core4inet/api/AS6802|core4inet/synchronisation/AS6802|api/AS6802|configuration/base|applications/api/AS6802|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="core4inet/synchronisation/AS6802|api/AS6802|configuration/base|applications/api/AS6802|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -323,16 +313,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1552812456" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1001670330" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.276427390" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../src"/>
+									<listOptionValue builtIn="false" value="../../src/core4inet/api/AS6802/tte_api"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.2016080485" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
@@ -381,27 +370,27 @@
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
-									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
+									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_MAX__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
@@ -409,38 +398,36 @@
 									<listOptionValue builtIn="false" value="__FLT_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
+									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MANT_DIG__"/>
-									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
+									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_TYPE__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
-									<listOptionValue builtIn="false" value="__FINITE_MATH_ONLY__"/>
 									<listOptionValue builtIn="false" value="__DEPRECATED"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__FINITE_MATH_ONLY__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1187564988" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.202645042" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.40412148" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
 									<listOptionValue builtIn="false" value="_LARGEFILE_SOURCE=1"/>
 									<listOptionValue builtIn="false" value="HAVE_PCAP=1"/>
 									<listOptionValue builtIn="false" value="WITH_NETBUILDER=1"/>
 									<listOptionValue builtIn="false" value="XMLPARSER=libxml"/>
 									<listOptionValue builtIn="false" value="WITH_PARSIM=1"/>
 									<listOptionValue builtIn="false" value="_FILE_OFFSET_BITS=64"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFIC"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.111423297" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.298017280" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -466,12 +453,11 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1295153564" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1552812456"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.731673426" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.1001670330">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1649563841" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.undef.1534915787" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
@@ -520,27 +506,27 @@
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
-									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
+									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
-									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_MAX__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
@@ -548,37 +534,36 @@
 									<listOptionValue builtIn="false" value="__FLT_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
+									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
-									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MANT_DIG__"/>
-									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
+									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_TYPE__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
-									<listOptionValue builtIn="false" value="__FINITE_MATH_ONLY__"/>
 									<listOptionValue builtIn="false" value="__DEPRECATED"/>
-									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__FINITE_MATH_ONLY__"/>
 									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.988053013" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.249552564" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.202645042">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1094067383" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="WITH_TTE_COMMON"/>
 									<listOptionValue builtIn="false" value="_LARGEFILE_SOURCE=1"/>
 									<listOptionValue builtIn="false" value="HAVE_PCAP=1"/>
 									<listOptionValue builtIn="false" value="WITH_NETBUILDER=1"/>
 									<listOptionValue builtIn="false" value="XMLPARSER=libxml"/>
 									<listOptionValue builtIn="false" value="WITH_PARSIM=1"/>
 									<listOptionValue builtIn="false" value="_FILE_OFFSET_BITS=64"/>
-									<listOptionValue builtIn="false" value="WITH_TTE_TRAFFICSOURCE"/>
 									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+									<listOptionValue builtIn="false" value="WITH_TTE_API"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1331833399" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -590,7 +575,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="core4inet/applications/api/AS6802|core4inet/api/AS6802|core4inet/synchronisation/AS6802|api/AS6802|configuration/base|applications/api/AS6802|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+						<entry excluding="core4inet/synchronisation/AS6802|api/AS6802|configuration/base|applications/api/AS6802|synchronisation/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -603,12 +588,6 @@
 		<project id="CORE4INET.org.omnetpp.cdt.omnetppProjectType.1512183933" name="OMNeT++ Simulation" projectType="org.omnetpp.cdt.omnetppProjectType"/>
 	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration configurationName="gcc-release">
-			<resource resourceType="PROJECT" workspacePath="/TTEthernetModel"/>
-		</configuration>
-		<configuration configurationName="gcc-debug">
-			<resource resourceType="PROJECT" workspacePath="/TTEthernetModel"/>
-		</configuration>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
