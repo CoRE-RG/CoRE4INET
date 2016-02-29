@@ -26,7 +26,6 @@ network small_network
 {
     parameters:
         @display("bgb=,,white");
-        double measure_interval @unit(s) = default(1s);
     submodules:
         node1: Node1 {
             @display("p=39,70");
