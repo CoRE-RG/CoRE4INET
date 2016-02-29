@@ -2,9 +2,9 @@
 Test SRPTable
 
 %includes:
-#include "CoRE4INET_SRPTable.h"
-#include "MACAddress.h"
-#include "CoRE4INET_AVBDefs.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
+#include "inet/linklayer/common/MACAddress.h"
+#include "core4inet/base/avb/AVBDefs.h"
 
 %inifile: test.ini
 [General]

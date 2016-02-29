@@ -2,7 +2,7 @@
 Test HelperFunctions
 
 %includes:
-#include "CoRE4INET_HelperFunctions.h"
+#include "core4inet/utilities/HelperFunctions.h"
 #include "simtime.h"
 
 %inifile: test.ini
