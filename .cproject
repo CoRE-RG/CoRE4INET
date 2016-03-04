@@ -96,8 +96,8 @@
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
@@ -226,8 +226,8 @@
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
@@ -370,27 +370,27 @@
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
+									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_MAX__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
@@ -398,20 +398,20 @@
 									<listOptionValue builtIn="false" value="__FLT_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
-									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
+									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MANT_DIG__"/>
-									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_TYPE__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
-									<listOptionValue builtIn="false" value="__DEPRECATED"/>
 									<listOptionValue builtIn="false" value="__FINITE_MATH_ONLY__"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__DEPRECATED"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1187564988" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -506,27 +506,27 @@
 									<listOptionValue builtIn="false" value="__DBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__UINTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__CHAR_BIT__"/>
+									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DIG__"/>
 									<listOptionValue builtIn="false" value="__LDBL_DENORM_MIN__"/>
-									<listOptionValue builtIn="false" value="__LONG_LONG_MAX__"/>
 									<listOptionValue builtIn="false" value="__LDBL_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__FLT_MANT_DIG__"/>
 									<listOptionValue builtIn="false" value="__GNUC_PATCHLEVEL__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MIN_EXP__"/>
-									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
-									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__FLT_EVAL_METHOD__"/>
+									<listOptionValue builtIn="false" value="__DBL_HAS_DENORM__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_LONG__"/>
 									<listOptionValue builtIn="false" value="__cplusplus"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_INT__"/>
 									<listOptionValue builtIn="false" value="__FLT_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__VERSION__"/>
-									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WCHAR_T__"/>
 									<listOptionValue builtIn="false" value="__SHRT_MAX__"/>
 									<listOptionValue builtIn="false" value="__INTMAX_MAX__"/>
+									<listOptionValue builtIn="false" value="__SIZEOF_LONG_DOUBLE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MAX__"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX_EXP__"/>
 									<listOptionValue builtIn="false" value="__STDC_HOSTED__"/>
@@ -534,20 +534,20 @@
 									<listOptionValue builtIn="false" value="__FLT_EPSILON__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_QUIET_NAN__"/>
 									<listOptionValue builtIn="false" value="__NO_INLINE__"/>
-									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__DBL_HAS_INFINITY__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_WINT_T__"/>
+									<listOptionValue builtIn="false" value="__PTRDIFF_TYPE__"/>
 									<listOptionValue builtIn="false" value="__LDBL_MANT_DIG__"/>
-									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__DBL_MIN_10_EXP__"/>
+									<listOptionValue builtIn="false" value="__DBL_MIN__"/>
 									<listOptionValue builtIn="false" value="__WCHAR_TYPE__"/>
 									<listOptionValue builtIn="false" value="__REGISTER_PREFIX__"/>
 									<listOptionValue builtIn="false" value="__GNUC_MINOR__"/>
 									<listOptionValue builtIn="false" value="__SIZEOF_POINTER__"/>
-									<listOptionValue builtIn="false" value="__DEPRECATED"/>
 									<listOptionValue builtIn="false" value="__FINITE_MATH_ONLY__"/>
-									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
+									<listOptionValue builtIn="false" value="__DEPRECATED"/>
 									<listOptionValue builtIn="false" value="__DBL_MAX__"/>
+									<listOptionValue builtIn="false" value="__FLT_HAS_DENORM__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.988053013" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -588,6 +588,12 @@
 		<project id="CORE4INET.org.omnetpp.cdt.omnetppProjectType.1512183933" name="OMNeT++ Simulation" projectType="org.omnetpp.cdt.omnetppProjectType"/>
 	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="gcc-release">
+			<resource resourceType="PROJECT" workspacePath="/TTEthernetModel"/>
+		</configuration>
+		<configuration configurationName="gcc-debug">
+			<resource resourceType="PROJECT" workspacePath="/CoRE4INET"/>
+		</configuration>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
@@ -629,4 +635,9 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings">
+		<doc-comment-owner id="org.eclipse.cdt.ui.doxygen">
+			<path value=""/>
+		</doc-comment-owner>
+	</storageModule>
 </cproject>

@@ -21,7 +21,7 @@
 
 namespace CoRE4INET{
 
-using namespace omnetpp;
+extern omnetpp::cConfigOption *CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL;
 
 /**
  * @brief BaseClass for floating interval vector recorders
@@ -41,7 +41,7 @@ using namespace omnetpp;
  *
  * @author Till Steinbach
  */
-class FloatingIntervalVectorRecorder: public cNumericResultRecorder
+class FloatingIntervalVectorRecorder: public omnetpp::cNumericResultRecorder
 {
     protected:
         bool uninitialized;

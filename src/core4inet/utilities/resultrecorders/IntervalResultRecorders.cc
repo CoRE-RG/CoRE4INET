@@ -20,13 +20,14 @@
 
 using namespace CoRE4INET;
 
-Register_PerObjectConfigOptionU(CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL, "intervalvectorrecorder-measure-interval",
-        KIND_VECTOR, "s", "1s", "interval in which the value is calculated. Default is 1 second")
+Register_PerObjectConfigOptionU(CoRE4INET::CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL,
+        "intervalvectorrecorder-measure-interval", KIND_VECTOR, "s", "1s",
+        "interval in which the value is calculated. Default is 1 second")
 
 IntervalVectorRecorder::IntervalVectorRecorder()
 {
     uninitialized = true;
-    interval = SimTime(-1);
+    interval = omnetpp::SimTime(-1);
     handle = nullptr;
     lastTime = 0;
 
@@ -41,12 +42,12 @@ void IntervalVectorRecorder::initialize()
             CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL, 0);
 }
 
-void IntervalVectorRecorder::subscribedTo(cResultFilter *prev)
+void IntervalVectorRecorder::subscribedTo(omnetpp::cResultFilter *prev)
 {
     cNumericResultRecorder::subscribedTo(prev);
 }
 
-void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute__((unused))   cObject *details)
+void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute__((unused)) omnetpp::cObject *details)
 {
     if (uninitialized)
     {
@@ -55,7 +56,7 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute
     }
     if (t < lastTime)
     {
-        throw cRuntimeError("%s: Cannot record data with an earlier timestamp (t=%s) "
+        throw omnetpp::cRuntimeError("%s: Cannot record data with an earlier timestamp (t=%s) "
                 "than the previously recorded value (t=%s)", getClassName(), SIMTIME_STR(t), SIMTIME_STR(lastTime));
     }
 
@@ -227,10 +228,10 @@ double IntervalSumVectorRecorderPercent::calculate()
     {
         sumValue += (*it).second;
     }
-    cComponent *comp = getComponent();
+    omnetpp::cComponent *comp = getComponent();
     double nominalDatarate =
             comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return sumValue / ((interval / SimTime(1)) * nominalDatarate / 100);
+    return sumValue / ((interval / omnetpp::SimTime(1)) * nominalDatarate / 100);
 }
 
 /*
@@ -246,8 +247,8 @@ double IntervalAvailableBandwidthPercent::calculate()
     {
         sumValue += (*it).second;
     }
-    cComponent *comp = getComponent();
+    omnetpp::cComponent *comp = getComponent();
     double nominalDatarate =
             comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return 100 - (sumValue / ((interval / SimTime(1)) * nominalDatarate / 100)); // TODO Linkgeschwindigkeit
+    return 100 - (sumValue / ((interval / omnetpp::SimTime(1)) * nominalDatarate / 100)); // TODO Linkgeschwindigkeit
 }

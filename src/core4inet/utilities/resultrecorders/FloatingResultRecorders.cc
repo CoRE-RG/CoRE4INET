@@ -19,14 +19,14 @@
 
 using namespace CoRE4INET;
 
-Register_PerObjectConfigOptionU(CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL,
+Register_PerObjectConfigOptionU(CoRE4INET::CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL,
         "floatingintervalvectorrecorder-measure-interval", KIND_VECTOR, "s", "1s",
         "Time over which the floating interval is calculated. Default is 1 second")
 
 FloatingIntervalVectorRecorder::FloatingIntervalVectorRecorder()
 {
     uninitialized = true;
-    interval = SimTime(-1);
+    interval = omnetpp::SimTime(-1);
     handle = nullptr;
     lastTime = 0;
 }
@@ -40,13 +40,13 @@ void FloatingIntervalVectorRecorder::initialize()
             CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL, 0);
 }
 
-void FloatingIntervalVectorRecorder::subscribedTo(cResultFilter *prev)
+void FloatingIntervalVectorRecorder::subscribedTo(omnetpp::cResultFilter *prev)
 {
     cNumericResultRecorder::subscribedTo(prev);
 }
 
 void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value,
-        __attribute__((unused))   omnetpp::cObject *details)
+        __attribute__((unused))    omnetpp::cObject *details)
 {
     if (uninitialized)
     {
@@ -55,13 +55,13 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value,
     }
     if (t < lastTime)
     {
-        throw cRuntimeError("%s: Cannot record data with an earlier timestamp (t=%s) "
+        throw omnetpp::cRuntimeError("%s: Cannot record data with an earlier timestamp (t=%s) "
                 "than the previously recorded value (t=%s)", getClassName(), SIMTIME_STR(t), SIMTIME_STR(lastTime));
     }
 
     for (std::map<simtime_t, double>::iterator it = inInterval.begin(); it != inInterval.lower_bound((t - interval));)
     {
-        simtime_t time = SimTime(it->first);
+        simtime_t time = omnetpp::SimTime(it->first);
         inInterval.erase(it++);
         omnetpp::getEnvir()->recordInOutputVector(handle, time + interval, calculate());
     }
@@ -83,7 +83,7 @@ void FloatingIntervalVectorRecorder::collect(simtime_t_cref t, double value,
     //erase old values
     //inInterval.erase(inInterval.begin(), inInterval.lower_bound((t-interval)));
 
-    getEnvir()->recordInOutputVector(handle, t, calculate());
+    omnetpp::getEnvir()->recordInOutputVector(handle, t, calculate());
 
     lastTime = t;
 }
@@ -129,11 +129,11 @@ double FloatingIntervalSumVectorRecorderPercent::calculate()
     {
         sumValue += (*it).second;
     }
-    cComponent *comp = getComponent();
+    omnetpp::cComponent *comp = getComponent();
     //    if (comp->getParentModule()->getFullName())
     double nominalDatarate =
             comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return sumValue / ((interval / SimTime(1)) * nominalDatarate / 100);
+    return sumValue / ((interval / omnetpp::SimTime(1)) * nominalDatarate / 100);
 }
 
 //Register_ResultRecorder("floatingIntervalSumVectorPercent", FloatingIntervalSumVectorRecorderPercent);
@@ -221,8 +221,8 @@ double FloatingIntervalAvailableBandwidthPercent::calculate()
     {
         sumValue += (*it).second;
     }
-    cComponent *comp = getComponent();
+    omnetpp::cComponent *comp = getComponent();
     double nominalDatarate =
             comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return 100 - (sumValue / ((interval / SimTime(1)) * nominalDatarate / 100));
+    return 100 - (sumValue / ((interval / omnetpp::SimTime(1)) * nominalDatarate / 100));
 }
