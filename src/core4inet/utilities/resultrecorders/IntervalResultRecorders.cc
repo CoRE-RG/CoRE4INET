@@ -18,9 +18,9 @@
 //Std
 #include <limits>
 
-using namespace TTEthernetModel;
+using namespace CoRE4INET;
 
-Register_PerObjectConfigOptionU(CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL, "intervalvectorrecorder-measure-interval",
+Register_PerObjectConfigOptionU(CoRE4INET::CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL, "intervalvectorrecorder-measure-interval",
         KIND_VECTOR, "s", "1s", "interval in which the value is calculated. Default is 1 second")
 
 IntervalVectorRecorder::IntervalVectorRecorder()

@@ -19,7 +19,7 @@
 
 using namespace CoRE4INET;
 
-Register_PerObjectConfigOptionU(CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL,
+Register_PerObjectConfigOptionU(CoRE4INET::CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL,
         "floatingintervalvectorrecorder-measure-interval", KIND_VECTOR, "s", "1s", "Time over which the floating interval is calculated. Default is 1 second")
 
 FloatingIntervalVectorRecorder::FloatingIntervalVectorRecorder()

@@ -19,7 +19,9 @@
 //OMNeT++
 #include "omnetpp.h"
 
-namespace TTEthernetModel {
+namespace CoRE4INET {
+
+extern cConfigOption *CFGID_INTERVALVECTORRECORDER_MEASUREINTERVAL;
 
 class IntervalVectorRecorder : public cNumericResultRecorder
 {
