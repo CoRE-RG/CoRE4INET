@@ -25,20 +25,6 @@
 #include "core4inet/base/Dependencies.h"
 
 /**
- * Check for minimal OMNeT++ Version requirements
- */
-#if OMNETPP_VERSION < 0x0406
-#  error At least OMNeT++/OMNEST version 4.6 required
-#endif
-
-/**
- * Check for minimal INET Version requirements
- */
-#if INET_VERSION < 0x0301
-#  error At least INET version 3.1 required
-#endif
-
-/**
  * Definition of CORE4INET version
  */
 #define CORE4INET_VERSION 0x0100
