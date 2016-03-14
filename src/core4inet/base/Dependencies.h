@@ -1,6 +1,5 @@
 #include "../features.h"
 
-/* THIS CAN BE ENABLED WITH UPCOMING INET RELEASE!
 #include "inet/features.h"
 
 #ifndef WITH_ETHERNET
@@ -35,5 +34,5 @@
 #ifndef WITH_SCTP
 #  error You must enable the SCTP feature in INET framework
 #endif
-#endif*/
+#endif
 
