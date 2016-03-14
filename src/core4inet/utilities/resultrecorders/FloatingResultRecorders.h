@@ -21,6 +21,8 @@
 
 namespace CoRE4INET{
 
+extern cConfigOption *CFGID_FLOATINGINTERVALVECTORRECORDER_MEASUREINTERVAL;
+
 /**
  * @brief BaseClass for floating interval vector recorders
  *
