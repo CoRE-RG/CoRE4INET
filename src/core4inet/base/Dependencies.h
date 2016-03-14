@@ -2,6 +2,20 @@
 
 #include "inet/features.h"
 
+/**
+ * Check for minimal OMNeT++ Version requirements
+ */
+#if OMNETPP_VERSION < 0x0406
+#  error At least OMNeT++/OMNEST version 4.6 required
+#endif
+
+/**
+ * Check for minimal INET Version requirements
+ */
+#if INET_VERSION < 0x0302
+#  error At least INET version 3.2 required
+#endif
+
 #ifndef WITH_ETHERNET
 #  error You must enable the Ethernet feature in INET framework
 #endif

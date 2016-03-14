@@ -6,6 +6,8 @@
 # WARNINGS_ERROR=1
 # for -Werror
 
+include dependencies_makefrag
+
 CFLAGS += -std=c++11
 
 UNAME_S := $(shell uname -s)
