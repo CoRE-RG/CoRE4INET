@@ -48,8 +48,8 @@ class CTFrame : public CTFrame_Base
          * @param name message name
          * @param kind message type
          */
-        CTFrame(const char *name = nullptr, short kind = 0) :
-                CTFrame_Base(name, kind)
+        CTFrame(const char *newName = nullptr, short kind = 0) :
+                CTFrame_Base(newName, kind)
         {
         }
 

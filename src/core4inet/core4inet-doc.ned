@@ -92,22 +92,22 @@
 
 // @page whatsnew.html, What's New
 // <pre>
-// @include ../WHATSNEW
+// @include ../../WHATSNEW
 // </pre>
 // 
 // @page install.html, Install Help
 // <pre>
-// @include ../INSTALL
+// @include ../../INSTALL
 // </pre>
 //
 // @page xcode_debugging.html, Debugging under OS X using XCode
 // <pre>
-// @include ../other/xcode_debugging
+// @include ../../other/xcode_debugging
 // </pre>
 //
 // @page license.html, License
 // <pre>
-// @include ../License
+// @include ../../License
 // </pre>
 //
 // @page feature_ipore.html, IP over Realtime Ethernet

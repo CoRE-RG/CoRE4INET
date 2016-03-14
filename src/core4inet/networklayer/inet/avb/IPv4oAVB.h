@@ -35,8 +35,8 @@ class IPv4oAVB : public base {
     private:
         class UpdateListenerMsg : public cMessage {
             public:
-                UpdateListenerMsg(const char *name=nullptr, short kind=0)
-                : cMessage(name, kind)
+                UpdateListenerMsg(const char *newName=nullptr, short kind=0)
+                : cMessage(newName, kind)
                 {
                     this->streamId = 0;
                     this->vlanId = 0;

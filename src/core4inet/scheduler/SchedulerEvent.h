@@ -43,8 +43,8 @@ class SchedulerEvent : public SchedulerEvent_Base
          * @param name name of the message
          * @param kind type of the message
          */
-        SchedulerEvent(const char *name = nullptr, short kind = 0) :
-                SchedulerEvent_Base(name, kind)
+        SchedulerEvent(const char *newName = nullptr, short kind = 0) :
+                SchedulerEvent_Base(newName, kind)
         {
             destinationGate_var = nullptr;
         }

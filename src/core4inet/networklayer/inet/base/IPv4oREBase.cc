@@ -134,14 +134,14 @@ int IPv4oREBase::parseProtocol(const char *attrValue, const char *attrName)
     if (isdigit(*attrValue))
         return parseIntAttribute(attrValue, attrName);
     m_protocolEnum = cEnum::get("inet::IPProtocolId");
-    char name[20];
-    strcpy(name, "IP_PROT_");
+    char protoName[20];
+    strcpy(protoName, "IP_PROT_");
     char *dest;
-    for (dest = name+8; *attrValue; ++dest, ++attrValue)
+    for (dest = protoName+8; *attrValue; ++dest, ++attrValue)
         *dest = static_cast<char>(toupper(*attrValue));
     *dest = '\0';
 
-    return m_protocolEnum->lookup(name);
+    return m_protocolEnum->lookup(protoName);
 }
 
 //==============================================================================

@@ -454,9 +454,9 @@ void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))     c
         const IPoREFilter* filter)
 {
     AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
-    std::stringstream name;
-    name << "Stream " << avbDestInfo->getStreamId();
-    AVBFrame *outFrame = new AVBFrame(name.str().c_str());
+    std::stringstream frameNname;
+    frameNname << "Stream " << avbDestInfo->getStreamId();
+    AVBFrame *outFrame = new AVBFrame(frameNname.str().c_str());
     outFrame->setStreamID(static_cast<unsigned long>(avbDestInfo->getStreamId()));
     outFrame->setVID(avbDestInfo->getVlanId());
     outFrame->setDest(*(avbDestInfo->getDestMac()));
