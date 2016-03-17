@@ -51,6 +51,8 @@ namespace CoRE4INET {
  */
 class BE_Shaper : public BEShaper<BaseShaper>
 {
+    public:
+        virtual ~BE_Shaper();
 };
 
 #ifdef WITH_IEEE8021Q_COMMON
@@ -67,6 +69,8 @@ class BE_Shaper : public BEShaper<BaseShaper>
  */
 class IEEE8021Q_Shaper : public IEEE8021QShaper<BaseShaper>
 {
+    public:
+        virtual ~IEEE8021Q_Shaper();
 };
 #endif
 
@@ -87,6 +91,8 @@ class IEEE8021Q_Shaper : public IEEE8021QShaper<BaseShaper>
  */
 class PCF_RC_BE_Shaper : public PCFShaper<RCShaper<BEShaper<BaseShaper> > >
 {
+    public:
+        virtual ~PCF_RC_BE_Shaper();
 };
 
 /**
@@ -106,6 +112,8 @@ class PCF_RC_BE_Shaper : public PCFShaper<RCShaper<BEShaper<BaseShaper> > >
  */
 class TT_PCF_RC_BE_Shaper : public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShaper> > > >
 {
+    public:
+        virtual ~TT_PCF_RC_BE_Shaper();
 };
 #endif
 
@@ -127,6 +135,8 @@ class TT_PCF_RC_BE_Shaper : public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShap
  */
 class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >
 {
+    public:
+        virtual ~TT_AVBClassA_PCF_RC_BE_Shaper();
 };
 
 /**
@@ -145,6 +155,8 @@ class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, PCFS
  */
 class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, AVBShaper<SR_CLASS_B, PCFShaper<RCShaper<BEShaper<BaseShaper> > > > > >
 {
+    public:
+        virtual ~TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper();
 };
 #endif
 
@@ -167,6 +179,8 @@ class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLA
  */
 class TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, AVBShaper<SR_CLASS_B, PCFShaper<RCShaper<IEEE8021QShaper<BaseShaper> > > > > >
 {
+    public:
+        virtual ~TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper();
 };
 #endif
 

@@ -37,7 +37,8 @@ namespace CoRE4INET {
  */
 class RCDoubleBuffer : public virtual RCBuffer, public virtual DoubleBuffer
 {
-
+    public:
+        virtual ~RCDoubleBuffer();
 };
 }
 

@@ -40,7 +40,7 @@ ifeq ($(CC),clang)
 	ifdef EXTENDED_WARNINGS
     CFLAGS += -Wall -Wunused -Wextra -Weverything
     endif
-    CFLAGS += -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors -Wno-weak-vtables
+    CFLAGS += -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors
     CFLAGS += -Wno-c++98-compat-pedantic -Wno-unknown-pragmas
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
     CFLAGS += -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast

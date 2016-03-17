@@ -47,8 +47,9 @@ namespace CoRE4INET {
  */
 class BE_InControl : public BEInControl<BaseInControl>
 {
+    public:
+        virtual ~BE_InControl();
 };
-
 
 #ifdef WITH_IEEE8021Q_COMMON
 /**
@@ -62,9 +63,10 @@ class BE_InControl : public BEInControl<BaseInControl>
  */
 class IEEE8021Q_InControl : public IEEE8021QInControl<BaseInControl>
 {
+    public:
+        virtual ~IEEE8021Q_InControl();
 };
 #endif
-
 
 #ifdef WITH_AS6802_COMMON
 /**
@@ -80,9 +82,10 @@ class IEEE8021Q_InControl : public IEEE8021QInControl<BaseInControl>
  */
 class CT_BE_InControl : public CTInControl<BEInControl<BaseInControl> >
 {
+    public:
+        virtual ~CT_BE_InControl();
 };
 #endif
-
 
 #if defined(WITH_AVB_COMMON) && defined(WITH_AS6802_COMMON)
 /**
@@ -96,6 +99,8 @@ class CT_BE_InControl : public CTInControl<BEInControl<BaseInControl> >
  */
 class CT_AVB_BE_InControl : public CTInControl<AVBInControl<BEInControl<BaseInControl> > >
 {
+    public:
+        virtual ~CT_AVB_BE_InControl();
 };
 #endif
 
@@ -111,6 +116,8 @@ class CT_AVB_BE_InControl : public CTInControl<AVBInControl<BEInControl<BaseInCo
  */
 class CT_AVB_8021Q_InControl : public CTInControl<AVBInControl<IEEE8021QInControl<BaseInControl> > >
 {
+    public:
+        virtual ~CT_AVB_8021Q_InControl();
 };
 #endif
 

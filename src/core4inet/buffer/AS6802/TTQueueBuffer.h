@@ -38,6 +38,8 @@ namespace CoRE4INET {
  */
 class TTQueueBuffer : public virtual TTBuffer, public virtual QueueBuffer
 {
+    public:
+        virtual ~TTQueueBuffer();
 };
 }
 #endif

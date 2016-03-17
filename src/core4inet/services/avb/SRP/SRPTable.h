@@ -44,7 +44,7 @@ class SRPTable : public virtual cSimpleModule
         /**
          * @brief Entry for Talker
          */
-        class TalkerEntry : public virtual cObject
+        class TalkerEntry : public cObject
         {
             public:
                 uint64_t streamId;          // Stream ID
@@ -55,48 +55,32 @@ class SRPTable : public virtual cSimpleModule
                 uint16_t intervalFrames;    // interval frames
                 uint16_t vlan_id;           // VLAN identifier
                 simtime_t insertionTime;    // Arrival time of SRP entry
-                TalkerEntry()
-                {
-                    streamId = 0;
-                    srClass = SR_CLASS_A;
-                    module = nullptr;
-                    framesize = 0;
-                    intervalFrames = 0;
-                    vlan_id = VLAN_ID_DEFAULT;
-                }
-                TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address, cModule *new_module,
-                        size_t new_framesize, unsigned short new_intervalFrames, unsigned short new_vlan_id,
-                        simtime_t new_insertionTime) :
-                        streamId(new_streamId), srClass(new_srClass), address(new_address), module(new_module), framesize(
-                                new_framesize), intervalFrames(new_intervalFrames), vlan_id(new_vlan_id), insertionTime(
-                                new_insertionTime)
-                {
-                }
+
+                TalkerEntry();
+                TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address,
+                        cModule *new_module, size_t new_framesize, unsigned short new_intervalFrames,
+                        unsigned short new_vlan_id, simtime_t new_insertionTime);
+                virtual ~TalkerEntry();
+
         };
         friend std::ostream& operator<<(std::ostream& os, const TalkerEntry& entry);
 
         /**
          * @brief Entry for Listener
          */
-        class ListenerEntry : public virtual cObject
+        class ListenerEntry : public cObject
         {
             public:
                 uint64_t streamId;          // Stream ID
                 cModule *module;            // Listener port or module
                 uint16_t vlan_id;           // VLAN identifier
                 simtime_t insertionTime;    // Arrival time of SRP entry
-                ListenerEntry()
-                {
-                    streamId = 0;
-                    module = nullptr;
-                    vlan_id = VLAN_ID_DEFAULT;
-                }
+
+                ListenerEntry();
                 ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,
-                        simtime_t new_insertionTime) :
-                        streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
-                                new_insertionTime)
-                {
-                }
+                        simtime_t new_insertionTime);
+                virtual ~ListenerEntry();
+
         };
         friend std::ostream& operator<<(std::ostream& os, const ListenerEntry& entry);
 
@@ -151,7 +135,8 @@ class SRPTable : public virtual cSimpleModule
          * @param vid VLAN ID
          * @return streamId related to talkerAddress
          */
-        virtual uint64_t getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid = VLAN_ID_DEFAULT);
+        virtual uint64_t getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid =
+                VLAN_ID_DEFAULT);
 
         /**
          * @brief For a known talker address and V-TAG it finds out the SR-Class of the Stream
@@ -160,7 +145,8 @@ class SRPTable : public virtual cSimpleModule
          * @param vid VLAN ID
          * @return SR-Class related to the Stream of the talkerAddress
          */
-        virtual SR_CLASS getSrClassForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid = VLAN_ID_DEFAULT);
+        virtual SR_CLASS getSrClassForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid =
+                VLAN_ID_DEFAULT);
 
         /**
          * @brief For a known streamId and V-TAG it finds out the port where relay component should deliver the message

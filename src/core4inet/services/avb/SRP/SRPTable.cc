@@ -28,13 +28,53 @@ Define_Module(SRPTable);
 Register_Class(SRPTable::TalkerEntry);
 Register_Class(SRPTable::ListenerEntry);
 
+SRPTable::TalkerEntry::TalkerEntry()
+{
+    streamId = 0;
+    srClass = SR_CLASS_A;
+    module = nullptr;
+    framesize = 0;
+    intervalFrames = 0;
+    vlan_id = VLAN_ID_DEFAULT;
+}
+SRPTable::TalkerEntry::TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address, cModule *new_module,
+        size_t new_framesize, unsigned short new_intervalFrames, unsigned short new_vlan_id,
+        simtime_t new_insertionTime) :
+        streamId(new_streamId), srClass(new_srClass), address(new_address), module(new_module), framesize(
+                new_framesize), intervalFrames(new_intervalFrames), vlan_id(new_vlan_id), insertionTime(
+                new_insertionTime)
+{
+}
+
+SRPTable::TalkerEntry::~TalkerEntry()
+{
+}
+
+SRPTable::ListenerEntry::ListenerEntry()
+{
+    streamId = 0;
+    module = nullptr;
+    vlan_id = VLAN_ID_DEFAULT;
+}
+
+SRPTable::ListenerEntry::ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,
+        simtime_t new_insertionTime) :
+streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
+        new_insertionTime)
+{
+}
+
+SRPTable::ListenerEntry::~ListenerEntry()
+{
+}
+
 std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
-            << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize + static_cast<size_t>(SRP_SAFETYBYTE), entry.intervalFrames,
-                    getIntervalForClass(entry.srClass))) / static_cast<double>(1000000) << "Mbps, insertionTime="
-            << entry.insertionTime << "}";
+            << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize + static_cast<size_t>(SRP_SAFETYBYTE),
+                    entry.intervalFrames, getIntervalForClass(entry.srClass))) / static_cast<double>(1000000)
+            << "Mbps, insertionTime=" << entry.insertionTime << "}";
     return os;
 }
 
@@ -64,8 +104,7 @@ void SRPTable::handleMessage(cMessage *)
 
 std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, uint16_t vid)
 {
-    Enter_Method
-    ("SRPTable::getListenersForStreamId()");
+    Enter_Method("SRPTable::getListenersForStreamId()");
 
     removeAgedEntriesIfNeeded();
 
@@ -87,15 +126,13 @@ std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, uint16_
 
 std::list<cModule*> SRPTable::getListenersForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
 {
-    Enter_Method
-    ("SRPTable::getListenersForTalkerAddress()");
+    Enter_Method("SRPTable::getListenersForTalkerAddress()");
     return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
 }
 
 uint64_t SRPTable::getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
 {
-    Enter_Method
-    ("SRPTable::getStreamIdForTalkerAddress()");
+    Enter_Method("SRPTable::getStreamIdForTalkerAddress()");
     TalkerTable talkerTable = talkerTables[vid];
     for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); ++talkerEntry)
     {
@@ -109,8 +146,7 @@ uint64_t SRPTable::getStreamIdForTalkerAddress(const inet::MACAddress &talkerAdd
 
 SR_CLASS SRPTable::getSrClassForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
 {
-    Enter_Method
-    ("SRPTable::getSrClassForTalkerAddress()");
+    Enter_Method("SRPTable::getSrClassForTalkerAddress()");
     TalkerTable talkerTable = talkerTables[vid];
     for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); ++talkerEntry)
     {
@@ -143,11 +179,13 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
     TalkerTable ttable = talkerTables[vid];
     TalkerEntry *tentry = ttable[streamId];
 
-    if(!tentry){
+    if (!tentry)
+    {
         throw cRuntimeError("talkerTable entry not found");
     }
 
-    return bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames, getIntervalForClass(tentry->srClass));
+    return bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
+            getIntervalForClass(tentry->srClass));
 }
 
 unsigned long SRPTable::getBandwidthForModule(const cModule *module)
@@ -170,8 +208,8 @@ unsigned long SRPTable::getBandwidthForModule(const cModule *module)
                     //get Talkers for this VLAN
                     TalkerTable ttable = talkerTables[(*i).first];
                     TalkerEntry *tentry = ttable[(*j).first];
-                    bandwidth += bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
-                            getIntervalForClass(tentry->srClass));
+                    bandwidth += bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE),
+                            tentry->intervalFrames, getIntervalForClass(tentry->srClass));
                 }
             }
         }
@@ -202,7 +240,8 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
                     TalkerEntry *tentry = ttable[(*j).first];
                     if (tentry->srClass == srClass)
                     {
-                        bandwidth += bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
+                        bandwidth += bandwidthFromSizeAndInterval(
+                                tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
                                 getIntervalForClass(tentry->srClass));
                     }
                 }
@@ -213,11 +252,10 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
     return bandwidth;
 }
 
-bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address, SR_CLASS srClass,
-        size_t framesize, uint16_t intervalFrames, uint16_t vid)
+bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
+        SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid)
 {
-    Enter_Method
-    ("SRPTable::updateTalkerWithStreamId()");
+    Enter_Method("SRPTable::updateTalkerWithStreamId()");
 
     bool updated = true;
     TalkerTable &talkerTable = talkerTables[vid];
@@ -238,7 +276,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
         }
         updated = false;
         if (talkerTable[streamId])
-            throw cRuntimeError("talkerTable already contained entry");
+        throw cRuntimeError("talkerTable already contained entry");
         talkerTable[streamId] = new SRPTable::TalkerEntry();
     }
     else
@@ -274,8 +312,8 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
     return updated;
 }
 
-bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __attribute__((unused)) const inet::MACAddress address,
-        uint16_t vid)
+bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module,
+        __attribute__((unused))  const inet::MACAddress address, uint16_t vid)
 {
 
     TalkerTable &talkerTable = talkerTables[vid];
@@ -297,8 +335,7 @@ bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module, __at
 
 bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid)
 {
-    Enter_Method
-    ("SRPTable::updateListenerWithStreamId()");
+    Enter_Method("SRPTable::updateListenerWithStreamId()");
 
     TalkerTable ttable = talkerTables[vid];
     if (ttable.find(streamId) == ttable.end())
@@ -345,8 +382,7 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
 
 bool SRPTable::removeListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid)
 {
-    Enter_Method
-    ("SRPTable::removeListenerWithStreamId()");
+    Enter_Method("SRPTable::removeListenerWithStreamId()");
     ListenerTable &listenerTable = listenerTables[vid];
 
     ListenerTable::iterator listeners = listenerTable.find(streamId);
@@ -385,9 +421,10 @@ void SRPTable::printState()
             EV_DETAIL << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
                     << (*j).second->address.str() << "   "
                     << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
-                    << static_cast<double>(bandwidthFromSizeAndInterval((*j).second->framesize + static_cast<size_t>(SRP_SAFETYBYTE),
-                            (*j).second->intervalFrames, getIntervalForClass((*j).second->srClass)))
-                            / static_cast<double>(1000000) << "   " << (*j).second->insertionTime << endl;
+                    << static_cast<double>(bandwidthFromSizeAndInterval(
+                            (*j).second->framesize + static_cast<size_t>(SRP_SAFETYBYTE), (*j).second->intervalFrames,
+                            getIntervalForClass((*j).second->srClass))) / static_cast<double>(1000000) << "   "
+                    << (*j).second->insertionTime << endl;
         }
     }
 

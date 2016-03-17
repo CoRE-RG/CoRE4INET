@@ -19,3 +19,6 @@ using namespace ::CoRE4INET;
 
 Define_Module(BGQueueBuffer);
 
+BGQueueBuffer::~BGQueueBuffer()
+{
+}

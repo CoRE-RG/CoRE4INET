@@ -33,6 +33,8 @@ namespace CoRE4INET {
  */
 class CTIncoming : public virtual Incoming
 {
+    public:
+        virtual ~CTIncoming();
 };
 
 }

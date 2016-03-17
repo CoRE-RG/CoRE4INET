@@ -18,3 +18,7 @@
 using namespace ::CoRE4INET;
 
 Define_Module(AVBQueueBuffer);
+
+AVBQueueBuffer::~AVBQueueBuffer()
+{
+}

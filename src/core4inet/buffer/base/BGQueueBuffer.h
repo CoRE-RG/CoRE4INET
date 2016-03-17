@@ -33,6 +33,8 @@ namespace CoRE4INET {
  */
 class BGQueueBuffer : public virtual BGBuffer, public virtual QueueBuffer
 {
+    public:
+        virtual ~BGQueueBuffer();
 };
 }
 #endif

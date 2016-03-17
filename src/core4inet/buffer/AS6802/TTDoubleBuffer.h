@@ -36,6 +36,8 @@ namespace CoRE4INET {
  */
 class TTDoubleBuffer : public virtual TTBuffer, public virtual DoubleBuffer
 {
+    public:
+        virtual ~TTDoubleBuffer();
 };
 }
 #endif

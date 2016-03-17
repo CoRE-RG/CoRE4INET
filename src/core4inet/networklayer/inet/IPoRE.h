@@ -25,14 +25,20 @@ namespace CoRE4INET {
 
 class AVB_IPv4 : public IPv4oAVB<IPv4oREBase>
 {
+    public:
+        virtual ~AVB_IPv4();
 };
 
 class RC_AVB_IPv4 : public IPv4oRC<AVB_IPv4>
 {
+    public:
+        virtual ~RC_AVB_IPv4();
 };
 
 class TT_RC_AVB_IPv4 : public IPv4oTT<RC_AVB_IPv4>
 {
+    public:
+        virtual ~TT_RC_AVB_IPv4();
 };
 
 
@@ -94,6 +100,8 @@ AVB send attributes:
  */
 class TT_RC_AVB_8021Q_IPv4 : public IPv4oTT<IPv4oRC<IPv4oAVB<IPv4oIEEE8021Q<IPv4oREBase>>>>
 {
+    public:
+        virtual ~TT_RC_AVB_8021Q_IPv4();
 };
 
 } /* namespace CoRE4INET */

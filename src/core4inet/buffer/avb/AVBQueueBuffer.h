@@ -24,6 +24,8 @@ namespace CoRE4INET {
 
 class AVBQueueBuffer : public virtual AVBBuffer, public virtual QueueBuffer
 {
+    public:
+        virtual ~AVBQueueBuffer();
 };
 
 } /* namespace CoRE4INET */

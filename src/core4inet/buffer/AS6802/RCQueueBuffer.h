@@ -39,6 +39,8 @@ namespace CoRE4INET {
  */
 class RCQueueBuffer : public virtual RCBuffer, public virtual QueueBuffer
 {
+    public:
+        virtual ~RCQueueBuffer();
 };
 }
 #endif
