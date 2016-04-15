@@ -40,7 +40,7 @@ class SchedulerEvent : public SchedulerEvent_Base
         /**
          * @brief Constructor
          *
-         * @param name name of the message
+         * @param newName name of the message
          * @param kind type of the message
          */
         SchedulerEvent(const char *newName = nullptr, short kind = 0) :

@@ -45,7 +45,7 @@ class CTFrame : public CTFrame_Base
         /**
          * @brief Constructor
          *
-         * @param name message name
+         * @param newName message name
          * @param kind message type
          */
         CTFrame(const char *newName = nullptr, short kind = 0) :
