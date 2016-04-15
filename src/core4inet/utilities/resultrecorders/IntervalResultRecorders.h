@@ -27,13 +27,13 @@ class IntervalVectorRecorder : public omnetpp::cNumericResultRecorder
 {
     protected:
         bool uninitialized;
-        simtime_t interval;
-        std::map<simtime_t, double> inInterval;
+        omnetpp::simtime_t interval;
+        std::map<omnetpp::simtime_t, double> inInterval;
         void *handle;        // identifies output vector for the output vector manager
-        simtime_t lastTime;  // to ensure increasing timestamp order
+        omnetpp::simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value, omnetpp::cObject *details);
-        virtual void addValueToInterval(simtime_t_cref t, double value);
+        virtual void collect(omnetpp::simtime_t_cref t, double value, omnetpp::cObject *details);
+        virtual void addValueToInterval(omnetpp::simtime_t_cref t, double value);
         virtual double calculate() = 0;
     public:
         IntervalVectorRecorder();

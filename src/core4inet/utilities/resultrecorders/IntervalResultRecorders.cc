@@ -47,7 +47,7 @@ void IntervalVectorRecorder::subscribedTo(omnetpp::cResultFilter *prev)
     cNumericResultRecorder::subscribedTo(prev);
 }
 
-void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute__((unused)) omnetpp::cObject *details)
+void IntervalVectorRecorder::collect(omnetpp::simtime_t_cref t, double value, __attribute__((unused)) omnetpp::cObject *details)
 {
     if (uninitialized)
     {
@@ -87,7 +87,7 @@ void IntervalVectorRecorder::collect(simtime_t_cref t, double value, __attribute
     }
 }
 
-void IntervalVectorRecorder::addValueToInterval(simtime_t_cref t, double value)
+void IntervalVectorRecorder::addValueToInterval(omnetpp::simtime_t_cref t, double value)
 {
     if (inInterval.empty())
     {
@@ -95,7 +95,7 @@ void IntervalVectorRecorder::addValueToInterval(simtime_t_cref t, double value)
     }
     else
     {
-        inInterval.insert(--inInterval.end(), std::pair<simtime_t, double>(t, value));
+        inInterval.insert(--inInterval.end(), std::pair<omnetpp::simtime_t, double>(t, value));
     }
 }
 
@@ -117,7 +117,7 @@ Register_ResultRecorder("IntervalSumVector", IntervalSumVectorRecorder)
 double IntervalSumVectorRecorder::calculate()
 {
     double sumValue = 0;
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }
@@ -134,7 +134,7 @@ double IntervalCapacityRecorder::calculate()
     static int ETHERNETHEADERSIZE = 38;
     double sumValue = 0;
     double frameUsedSumValue = 0;
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
         frameUsedSumValue += (*it).second + ETHERNETHEADERSIZE;
@@ -150,7 +150,7 @@ Register_ResultRecorder("IntervalAvgVector", IntervalAvgVectorRecorder)
 double IntervalAvgVectorRecorder::calculate()
 {
     double sumValue = 0;
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }
@@ -165,7 +165,7 @@ Register_ResultRecorder("IntervalMinVector", IntervalMinVectorRecorder)
 double IntervalMinVectorRecorder::calculate()
 {
     double minValue = std::numeric_limits<double>::max();
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         if ((*it).second < minValue)
         {
@@ -183,7 +183,7 @@ Register_ResultRecorder("IntervalMaxVector", IntervalMaxVectorRecorder)
 double IntervalMaxVectorRecorder::calculate()
 {
     double maxValue = std::numeric_limits<double>::min();
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         if ((*it).second > maxValue)
         {
@@ -202,7 +202,7 @@ double IntervalVarianceVectorRecorder::calculate()
 {
     double minValue = std::numeric_limits<double>::max();
     double maxValue = std::numeric_limits<double>::min();
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         if ((*it).second < minValue)
         {
@@ -224,7 +224,7 @@ double IntervalSumVectorRecorderPercent::calculate()
 {
     //  Byte / ( (20 / 1000) * 1024 * 1024)
     double sumValue = 0;
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }
@@ -243,7 +243,7 @@ double IntervalAvailableBandwidthPercent::calculate()
 {
     //  Byte / ( (20 / 1000) * 1024 * 1024)
     double sumValue = 0;
-    for (std::map<simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
+    for (std::map<omnetpp::simtime_t, double>::const_iterator it = inInterval.begin(); it != inInterval.end(); ++it)
     {
         sumValue += (*it).second;
     }

@@ -45,12 +45,12 @@ class FloatingIntervalVectorRecorder: public omnetpp::cNumericResultRecorder
 {
     protected:
         bool uninitialized;
-        simtime_t interval;
-        std::map<simtime_t, double> inInterval;
+        omnetpp::simtime_t interval;
+        std::map<omnetpp::simtime_t, double> inInterval;
         void *handle;        // identifies output vector for the output vector manager
-        simtime_t lastTime;  // to ensure increasing timestamp order
+        omnetpp::simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value, omnetpp::cObject *details) override;
+        virtual void collect(omnetpp::simtime_t_cref t, double value, omnetpp::cObject *details) override;
         virtual double calculate() = 0;
     public:
         FloatingIntervalVectorRecorder();

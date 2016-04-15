@@ -40,7 +40,7 @@ void SubtractActualFromLastRecorder::subscribedTo(omnetpp::cResultFilter *prev)
     ASSERT(handle != nullptr);
 }
 
-void SubtractActualFromLastRecorder::collect(simtime_t_cref t, double value,
+void SubtractActualFromLastRecorder::collect(omnetpp::simtime_t_cref t, double value,
         __attribute__((unused))  omnetpp::cObject *details)
 {
     lastValue = thisValue;

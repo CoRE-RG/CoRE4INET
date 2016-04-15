@@ -30,9 +30,9 @@ class SubtractActualFromLastRecorder : public omnetpp::cNumericResultRecorder
         double lastValue;
         double thisValue;
         void *handle;        // identifies output vector for the output vector manager
-        simtime_t lastTime;  // to ensure increasing timestamp order
+        omnetpp::simtime_t lastTime;  // to ensure increasing timestamp order
     protected:
-        virtual void collect(simtime_t_cref t, double value, omnetpp::cObject *details);
+        virtual void collect(omnetpp::simtime_t_cref t, double value, omnetpp::cObject *details);
         virtual double calculate();
     public:
         SubtractActualFromLastRecorder();
