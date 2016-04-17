@@ -16,13 +16,13 @@ MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -I. $(EXTRA_INCLUDES) -I$(INET_
 makefiles: src/core4inet/features.h makefiles-so
 
 makefiles-so:
-	@FEATURE_OPTIONS=$$(./core4inet_featuretool options -f -l) && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l) && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 makefiles-lib:
-	@FEATURE_OPTIONS=$$(./core4inet_featuretool options -f -l) && cd src && opp_makemake --make-lib $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l) && cd src && opp_makemake --make-lib $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 makefiles-exe:
-	@FEATURE_OPTIONS=$$(./core4inet_featuretool options -f -l) && cd src && opp_makemake $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l) && cd src && opp_makemake $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 checkmakefiles:
 	@if [ ! -f src/Makefile ]; then \
