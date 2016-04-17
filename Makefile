@@ -36,7 +36,7 @@ checkmakefiles:
 
 # generate an include file that contains all the WITH_FEATURE macros according to the current enablement of features
 src/core4inet/features.h: $(wildcard .oppfeaturestate) .oppfeatures
-	@./core4inet_featuretool defines >src/core4inet/features.h
+	@opp_featuretool defines >src/core4inet/features.h
 
 doxy:
 	doxygen doxy.cfg
