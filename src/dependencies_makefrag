@@ -1,37 +1,37 @@
 
 
-INET_ETHERNET_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled Ethernet; echo $$?)
+INET_ETHERNET_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled Ethernet; echo $$?)
 ifneq ($(INET_ETHERNET_ENABLED),0)
     $(error "INETs Ethernet feature is required, but not enabled. See INSTALL file for details.")
 endif
-INET_8021D_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled Ieee8021d; echo $$?)
+INET_8021D_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled Ieee8021d; echo $$?)
 ifneq ($(INET_8021D_ENABLED),0)
     $(error "INETs Ieee8021d feature is required, but not enabled. See INSTALL file for details.")
 endif
 
-CORE4INET_IPORE_ENABLED := $(shell cd ..; ./core4inet_featuretool -q isenabled IPoRE; echo $$?)
+CORE4INET_IPORE_ENABLED := $(shell cd ..; opp_featuretool -q isenabled IPoRE; echo $$?)
 ifeq ($(CORE4INET_IPORE_ENABLED),0)
-	INET_IPV4_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled IPv4; echo $$?)
+	INET_IPV4_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled IPv4; echo $$?)
 	ifneq ($(INET_IPV4_ENABLED),0)
     	$(error "INETs IPv4 feature is required for CORE4INETs IPoRE feature, but it is not enabled. Enable IPv4 or disable IPoRE. See INSTALL file for details.")
 	endif
-	INET_IPV6_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled IPv6; echo $$?)
+	INET_IPV6_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled IPv6; echo $$?)
 	ifneq ($(INET_IPV6_ENABLED),0)
     	$(error "INETs IPv6 feature is required for CORE4INETs IPoRE feature, but it is not enabled. Enable IPv6 or disable IPoRE. See INSTALL file for details.")
 	endif
-	INET_TCPCOMMON_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled TCP_common; echo $$?)
+	INET_TCPCOMMON_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled TCP_common; echo $$?)
 	ifneq ($(INET_TCPCOMMON_ENABLED),0)
     	$(error "INETs TCP_common feature is required for CORE4INETs IPoRE feature, but it is not enabled. Enable TCP_common or disable IPoRE. See INSTALL file for details.")
 	endif
-	INET_TCPINET_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled TCP_INET; echo $$?)
+	INET_TCPINET_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled TCP_INET; echo $$?)
 	ifneq ($(INET_TCPINET_ENABLED),0)
     	$(error "INETs TCP_INET feature is required for CORE4INETs IPoRE feature, but it is not enabled. Enable TCP_INET or disable IPoRE. See INSTALL file for details.")
 	endif
-	INET_UDP_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled UDP; echo $$?)
+	INET_UDP_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled UDP; echo $$?)
 	ifneq ($(INET_UDP_ENABLED),0)
     	$(error "INETs UDP feature is required for CORE4INETs IPoRE feature, but it is not enabled. Enable UDP or disable IPoRE. See INSTALL file for details.")
 	endif
-	INET_SCTP_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled SCTP; echo $$?)
+	INET_SCTP_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled SCTP; echo $$?)
 	ifneq ($(INET_SCTP_ENABLED),0)
     	$(error "INETs SCTP feature is required for CORE4INETs IPoRE feature, but it is not enabled. Enable SCTP or disable IPoRE. See INSTALL file for details.")
 	endif
