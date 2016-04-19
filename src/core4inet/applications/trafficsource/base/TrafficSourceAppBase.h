@@ -50,6 +50,12 @@ class TrafficSourceAppBase : public virtual ApplicationBase
         TrafficSourceAppBase();
 
         /**
+         * @brief pure virtual destructor making the class abstract
+         *
+         */
+        virtual ~TrafficSourceAppBase() = 0;
+
+        /**
          * @brief Indicated that TrafficSource is enabled
          *
          * @return true when enabled, otherwise false

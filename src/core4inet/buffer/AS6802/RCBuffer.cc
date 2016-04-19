@@ -25,8 +25,6 @@
 
 namespace CoRE4INET {
 
-//Define_Module(RCBuffer);
-
 RCBuffer::RCBuffer()
 {
     this->bagExpired = true;

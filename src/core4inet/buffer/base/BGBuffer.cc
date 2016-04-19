@@ -17,7 +17,10 @@
 
 namespace CoRE4INET {
 
-//Define_Module(BGBuffer);
+BGBuffer::~BGBuffer()
+{
+
+}
 
 int BGBuffer::numInitStages() const
 {
@@ -49,8 +52,8 @@ void BGBuffer::handleMessage(cMessage *msg)
         if (inet::EtherFrame *outgoingMessage = dequeue())
         {
             //Send Message
-            for (std::list<cGate*>::const_iterator destGate = destinationGates.begin(); destGate != destinationGates.end();
-                    ++destGate)
+            for (std::list<cGate*>::const_iterator destGate = destinationGates.begin();
+                    destGate != destinationGates.end(); ++destGate)
             {
                 sendDirect(outgoingMessage->dup(), *destGate);
             }

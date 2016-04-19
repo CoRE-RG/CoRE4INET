@@ -34,6 +34,8 @@ namespace CoRE4INET {
  */
 class BGBuffer : public virtual Buffer
 {
+    public:
+        virtual ~BGBuffer() = 0;
     protected:
         /**
          * Initializes the module

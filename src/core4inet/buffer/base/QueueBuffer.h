@@ -47,10 +47,11 @@ class QueueBuffer : public virtual Buffer
          * @sa initializeStatistics()
          */
         QueueBuffer();
+
         /**
          * @brief Destructor for the class.
          */
-        virtual ~QueueBuffer();
+        virtual ~QueueBuffer() = 0;
 
     private:
         /**

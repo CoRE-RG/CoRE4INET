@@ -20,8 +20,6 @@
 
 namespace CoRE4INET {
 
-Define_Module(Incoming);
-
 simsignal_t Incoming::droppedSignal = registerSignal("droppedPk");
 simsignal_t Incoming::rxPkSignal = registerSignal("rxPk");
 
@@ -30,6 +28,10 @@ Incoming::Incoming()
     hadError = false;
     this->hardware_delay = 0;
     parametersInitialized = false;
+}
+
+Incoming::~Incoming(){
+
 }
 
 void Incoming::recordPacketReceived(inet::EtherFrame *frame)

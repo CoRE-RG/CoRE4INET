@@ -25,7 +25,9 @@
 
 namespace CoRE4INET {
 
-Define_Module(ApplicationBase);
+ApplicationBase::~ApplicationBase()
+{
+}
 
 void ApplicationBase::initialize()
 {
@@ -38,7 +40,7 @@ void ApplicationBase::initialize()
     }
 }
 
-void ApplicationBase::handleMessage(__attribute__((unused))  cMessage *msg)
+void ApplicationBase::handleMessage(__attribute__((unused))   cMessage *msg)
 {
 }
 

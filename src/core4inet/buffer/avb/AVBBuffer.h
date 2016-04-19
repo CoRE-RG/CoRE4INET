@@ -49,7 +49,7 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
         /**
          * @brief Destructor
          */
-        virtual ~AVBBuffer();
+        virtual ~AVBBuffer() = 0;
 
         /**
          * @brief Handles incoming signals

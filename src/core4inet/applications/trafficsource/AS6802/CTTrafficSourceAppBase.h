@@ -42,6 +42,12 @@ class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtu
          */
         CTTrafficSourceAppBase();
 
+        /**
+         * @brief pure virtual destructor making the class abstract
+         *
+         */
+        virtual ~CTTrafficSourceAppBase() = 0;
+
     protected:
         /**
          * @brief Initialization of the module.

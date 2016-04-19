@@ -46,6 +46,10 @@ class ApplicationBase : public virtual cSimpleModule
          * @brief List of Buffers for best-effor messages
          */
         std::list<BGBuffer*> bgbuffers;
+
+    public:
+        virtual ~ApplicationBase() = 0;
+
     protected:
         /**
          * @brief Initialization of the module.

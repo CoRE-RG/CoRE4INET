@@ -59,7 +59,7 @@ class CTBuffer : public virtual Buffer
         /**
          * @brief Destructor
          */
-        ~CTBuffer();
+        virtual ~CTBuffer() = 0;
 
         /**
          * @brief Indicates a parameter has changed.

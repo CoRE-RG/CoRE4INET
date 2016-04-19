@@ -66,6 +66,11 @@ class Incoming : public virtual cSimpleModule
         Incoming();
 
         /**
+         * @brief pure virtual destructor making the class abstract
+         */
+        virtual ~Incoming() = 0;
+
+        /**
          * @brief returns the configured hardware delay
          *
          * return Hardware delay in simtime

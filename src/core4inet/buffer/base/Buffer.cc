@@ -23,8 +23,6 @@
 
 using namespace CoRE4INET;
 
-//Define_Module(Buffer);
-
 simsignal_t Buffer::txPkSignal = registerSignal("txPk");
 simsignal_t Buffer::rxPkSignal = registerSignal("rxPk");
 

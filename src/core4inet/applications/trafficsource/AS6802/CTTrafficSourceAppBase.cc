@@ -28,11 +28,15 @@
 
 namespace CoRE4INET {
 
-Define_Module(CTTrafficSourceAppBase);
 
 CTTrafficSourceAppBase::CTTrafficSourceAppBase()
 {
     this->ct_id = -1;
+}
+
+CTTrafficSourceAppBase::~CTTrafficSourceAppBase()
+{
+
 }
 
 void CTTrafficSourceAppBase::initialize()
