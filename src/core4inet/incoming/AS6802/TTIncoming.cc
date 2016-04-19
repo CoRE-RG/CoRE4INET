@@ -163,15 +163,15 @@ void TTIncoming::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "receive_window_start"))
     {
-        this->receive_window_start = parameterLongCheckRange(par("receive_window_start"), -1, getPeriod()->getCycleTicks());
+        this->receive_window_start = parameterLongCheckRange(par("receive_window_start"), -1, static_cast<long>(getPeriod()->getCycleTicks()));
     }
     if (!parname || !strcmp(parname, "receive_window_end"))
     {
-        this->receive_window_end = parameterLongCheckRange(par("receive_window_end"), -1, getPeriod()->getCycleTicks());
+        this->receive_window_end = parameterLongCheckRange(par("receive_window_end"), -1, static_cast<long>(getPeriod()->getCycleTicks()));
     }
     if (!parname || !strcmp(parname, "permanence_pit"))
     {
-        this->permanence_pit = parameterLongCheckRange(par("permanence_pit"), -1, getPeriod()->getCycleTicks());
+        this->permanence_pit = parameterLongCheckRange(par("permanence_pit"), -1, static_cast<long>(getPeriod()->getCycleTicks()));
     }
 
 }
