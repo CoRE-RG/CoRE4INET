@@ -25,10 +25,6 @@
 #include "core4inet/linklayer/ethernet/avb/SRPFrame_m.h"
 
 //INET
-#ifdef INET_API
-#undef INET_API
-#define INET_API
-#endif
 #include "inet/common/ModuleAccess.h"
 
 namespace CoRE4INET {
