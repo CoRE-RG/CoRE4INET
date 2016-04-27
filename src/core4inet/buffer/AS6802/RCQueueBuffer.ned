@@ -36,7 +36,7 @@ simple RCQueueBuffer extends RCBuffer
         //Signal emitted when queuelength changes, contains new length
         @signal[length](type=unsigned long; unit=packets);
         //Signal emitted when queuelength changes, contains new size in bytes
-        @signal[size](type=unsigned long; unit=bytes);
+        @signal[size](type=unsigned long; unit=B);
         //Signal emitted when frame is dropped due to buffer overflow, contains dropped EtherFrame
         @signal[dropped](type=inet::EtherFrame);
 
