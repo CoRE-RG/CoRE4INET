@@ -33,12 +33,12 @@ simple BE_Shaper like IShaper
         //Signal emitted when queue length of the be queue changes, contains new queue length
         @signal[beQueueLength](type=unsigned long; unit=packets);
         //Signal emitted when queue size of the be queue changes, contains new queue size in bytes
-        @signal[beQueueSize](type=unsigned long; unit=bytes);
+        @signal[beQueueSize](type=unsigned long; unit=B);
         
         //Statistic of the queue length of best-effort frames
         @statistic[beQueueLength](title="BE-Queue Length"; unit=packets; record=vector; interpolationmode=sample-hold);
 		//Statistic of the queue length of best-effort frames
-        @statistic[beQueueSize](title="BE-Queue Size"; unit=bytes; record=vector; interpolationmode=sample-hold);
+        @statistic[beQueueSize](title="BE-Queue Size"; unit=B; record=vector; interpolationmode=sample-hold);
         
     gates:
         //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)
