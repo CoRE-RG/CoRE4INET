@@ -47,7 +47,15 @@ void BGTrafficSinkApp::handleMessage(cMessage *msg)
             if((!received && par("replyFirst").boolValue()) || par("reply").boolValue()){
                 inet::EtherFrame *reply = new inet::EthernetIIFrame("Reply",7);
                 reply->setDest(frame->getSrc());
-                reply->setByteLength(frame->getByteLength());
+                cPacket* payload = new cPacket("Reply");
+                //Payloadsize:
+                if(frame->hasEncapsulatedPacket()){
+                    payload->setByteLength(frame->getEncapsulatedPacket()->getByteLength());
+                }
+                else{
+                    payload->setByteLength(frame->getByteLength()-ETHER_MAC_FRAME_BYTES);
+                }
+                reply->encapsulate(payload);
                 for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin();
                             buf != bgbuffers.end(); ++buf) {
                     sendDirect(reply->dup(), (*buf)->gate("in"));
