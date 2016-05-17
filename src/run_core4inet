@@ -6,8 +6,18 @@ if [ -z "$INETPATH" ]; then
 	exit 1
 fi
 
-if [ -x $DIR/CoRE4INET -o -x $DIR/CoRE4INET.exe ]; then
-  $DIR/CoRE4INET -n $DIR/../examples:$DIR $*
+# start with valgrind if the first argument is --valgrind
+VALGRIND=""
+VALGRIND_OPTIONS="-v --tool=memcheck --leak-check=yes --show-reachable=no --leak-resolution=high --num-callers=40 --freelist-vol=4000000"
+
+if [ "$1" = "--valgrind" ] ; then
+   echo "##### Running with Valgrind! ######"
+   VALGRIND="valgrind $VALGRIND_OPTIONS"
+   shift
+fi
+
+if [ -f $DIR/CoRE4INET -o -f $DIR/CoRE4INET.exe ]; then
+  $VALGRIND $DIR/CoRE4INET -n $DIR/../tutorials:$DIR/../examples:$DIR "$@"
 else
-  opp_run -l $DIR/CoRE4INET -n $DIR/../examples:$DIR:$INETPATH/src $*
+  $VALGRIND opp_run -l $DIR/CoRE4INET -n $DIR/../examples:$DIR:$INETPATH/src "$@"
 fi
