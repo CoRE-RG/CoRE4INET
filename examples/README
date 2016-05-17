@@ -1,11 +1,10 @@
-TTEthernet Model for INET Framework (CoRE4INET)
+CoRE4INET Model for INET Framework
 ==============================================
 
 CoRE4INET is an extension to the INET-Framework for the event-based
-simulation of time-triggered Ethernet (TTEthernet) in the OMNEST/OMNeT++
-simulation system. It was created by the CoRE (Communication over Realtime
-Ethernet) research group at the HAW-Hamburg (Hamburg University of Applied
-Sciences).
+simulation of real-time Ethernet in the OMNEST/OMNeT++ simulation system.
+It was created by the CoRE (Communication over Realtime Ethernet) research
+group at the HAW-Hamburg (Hamburg University of Applied Sciences).
 
 Example simulations are grouped into the following subdirectories:
 
