@@ -1,6 +1,11 @@
 #! /bin/sh
 DIR=`dirname $0`
 
+if [ -z "$INETPATH" ]; then
+	echo "ou have to specify the path to INET framework in $INETPATH variable (export INETPATH=/your/path)"
+	exit 1
+fi
+
 if [ -x $DIR/CoRE4INET -o -x $DIR/CoRE4INET.exe ]; then
   $DIR/CoRE4INET -n $DIR/../examples:$DIR $*
 else
