@@ -19,5 +19,5 @@ fi
 if [ -f $DIR/CoRE4INET -o -f $DIR/CoRE4INET.exe ]; then
   $VALGRIND $DIR/CoRE4INET -n $DIR/../tutorials:$DIR/../examples:$DIR "$@"
 else
-  $VALGRIND opp_run -l $DIR/CoRE4INET -n $DIR/../examples:$DIR:$INETPATH/src "$@"
+  $VALGRIND opp_run -l $DIR/CoRE4INET -l$INETPATH/src/INET -n $DIR/../examples:$DIR:$INETPATH/src "$@"
 fi
