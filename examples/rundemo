@@ -30,7 +30,7 @@ set unixbrowser "firefox"
 # readme line:  {"name" "readme-file"}
 # docu line:    {"name" "readme-file"  "html-file"}
 # separator:    {}
-#
+
 set i 0
 set first ""
 foreach line {
@@ -40,11 +40,10 @@ foreach line {
    {"Examples"}
    {"AS6802 Real-Time Tic-Toc"                                    "AS6802/rt_tictoc"                                  "./run"               "run"}
    {"AS6802 Small Network"                                        "AS6802/small_network"                              "./run"               "run"}
-   {"AS6802 Synchronization with high integrity (small)"          "AS6802/synchronization/HighIntegrity_small"        "./run"               "run"}
-   {"AS6802 Synchronization with standard integrity (medium)"     "AS6802/synchronization/StandardIntegrity_medium"   "./run"               "run"}
-   {"AS6802 Synchronization with standard integrity (large)"      "AS6802/synchronization/StandardIntegrity_large"    "./run"               "run"}
    {"AVB with AS6802 (time-triggered traffic) Small Network"      "avb_AS6802/small_network"                          "./run"               "run"}
    {"AVB with AS6802 (time-triggered traffic) Large Network"      "avb_AS6802/large_network"                          "./run"               "run"}
+   {"IEEE 802.1Q Small Network"                                   "IEEE8021Q/small_network"                           "./run"               "run"}
+   {"IP over AS6802 and AVB"                                      "inet/small_network"                                "./run"               "run"}
 } {
    lappend samples $i
    if {[llength $line]==0} {
