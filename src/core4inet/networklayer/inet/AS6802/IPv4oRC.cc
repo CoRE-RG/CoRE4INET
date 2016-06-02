@@ -221,11 +221,7 @@ void IPv4oRC<Base>::handleMessage(cMessage* msg)
         etherctrl->setDest(rcFrame->getDest());
         etherctrl->setEtherType(rcFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
-#if OMNETPP_VERSION < 0x0500
-        ipPacket->setArrival(this, Base::gate("RCIn")->getId());
-#else
         ipPacket->setArrival(this->getId(), Base::gate("RCIn")->getId());
-#endif
 
         delete rcFrame;
         Base::handleMessage(ipPacket);

@@ -319,12 +319,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
         etherctrl->setDest(ttFrame->getDest());
         etherctrl->setEtherType(ttFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
-
-#if OMNETPP_VERSION < 0x0500
-        ipPacket->setArrival(this, Base::gate("TTIn")->getId());
-#else
         ipPacket->setArrival(this->getId(), Base::gate("TTIn")->getId());
-#endif
 
         delete ttFrame;
         Base::handleMessage(ipPacket);

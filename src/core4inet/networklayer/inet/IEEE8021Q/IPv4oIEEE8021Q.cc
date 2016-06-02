@@ -235,11 +235,7 @@ void IPv4oIEEE8021Q<Base>::handleMessage(cMessage* msg)
         etherctrl->setDest(qFrame->getDest());
         etherctrl->setEtherType(qFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
-#if OMNETPP_VERSION < 0x0500
-        ipPacket->setArrival(this, Base::gate("In")->getId());
-#else
         ipPacket->setArrival(this->getId(), Base::gate("In")->getId());
-#endif
 
         delete qFrame;
         Base::handleMessage(ipPacket);

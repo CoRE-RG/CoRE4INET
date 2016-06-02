@@ -145,12 +145,7 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
         etherctrl->setDest(avbFrame->getDest());
         etherctrl->setEtherType(avbFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
-
-#if OMNETPP_VERSION < 0x0500
-        ipPacket->setArrival(this, base::gate("AVBin")->getId());
-#else
         ipPacket->setArrival(this->getId(), base::gate("AVBin")->getId());
-#endif
 
         delete avbFrame;
         base::handleMessage(ipPacket);
