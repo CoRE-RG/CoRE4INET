@@ -5,15 +5,15 @@
 /**
  * Check for minimal OMNeT++ Version requirements
  */
-#if OMNETPP_VERSION < 0x0406
-#  error At least OMNeT++/OMNEST version 4.6 required
+#if OMNETPP_VERSION < 0x0500
+#  error At least OMNeT++/OMNEST version 5.0 required
 #endif
 
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0302
-#  error At least INET version 3.2 required
+#if INET_VERSION < 0x0303
+#  error At least INET version 3.3 required
 #endif
 
 #ifndef WITH_ETHERNET
