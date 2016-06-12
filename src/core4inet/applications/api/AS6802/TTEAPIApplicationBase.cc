@@ -42,7 +42,7 @@ void TTEAPIApplicationBase::initialize()
 {
     ApplicationBase::initialize();
     Scheduled::initialize();
-    scheduleAt(simTime(), new cMessage("Start Application", START_APPLICATION));
+    scheduleAt(simTime(), new cMessage("Start Application", static_cast<short>(MessageKind::START_APPLICATION)));
     inet::findContainingNode(this)->subscribe("syncStatus", this);
     WATCH_MAP(receiveCallbacks);
     WATCH_MAP(transmitCallbacks);
@@ -50,7 +50,7 @@ void TTEAPIApplicationBase::initialize()
 
 void TTEAPIApplicationBase::handleMessage(cMessage *msg)
 {
-    if (msg->isSelfMessage() && msg->getKind() == START_APPLICATION)
+    if (msg->isSelfMessage() && msg->getKind() == static_cast<short>(MessageKind::START_APPLICATION))
     {
         startApplication();
 #pragma clang diagnostic push

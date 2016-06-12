@@ -66,15 +66,15 @@ void SRProtocol::handleMessage(cMessage *msg)
                 SR_CLASS srClass;
                 if (talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSA)
                 {
-                    srClass = SR_CLASS_A;
+                    srClass = SR_CLASS::A;
                 }
                 else if (talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSB)
                 {
-                    srClass = SR_CLASS_B;
+                    srClass = SR_CLASS::B;
                 }
                 else
                 {
-                    srClass = SR_CLASS_A;
+                    srClass = SR_CLASS::A;
                 }
                 srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port,
                         talkerAdvertise->getDestination_address(), srClass, talkerAdvertise->getMaxFrameSize(),
@@ -200,9 +200,9 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
             talkerAdvertise->setMaxIntervalFrames(tentry->intervalFrames);
             talkerAdvertise->setDestination_address(tentry->address);
             talkerAdvertise->setVlan_identifier(tentry->vlan_id);
-            if (tentry->srClass == SR_CLASS_A)
+            if (tentry->srClass == SR_CLASS::A)
                 talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
-            if (tentry->srClass == SR_CLASS_B)
+            if (tentry->srClass == SR_CLASS::B)
                 talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
 
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();

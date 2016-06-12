@@ -180,9 +180,9 @@ const simtime_t getIntervalForClass(SR_CLASS srClass)
 {
     switch (srClass)
     {
-        case SR_CLASS_A:
+        case SR_CLASS::A:
             return SR_CLASS_A_INTERVAL;
-        case SR_CLASS_B:
+        case SR_CLASS::B:
             return SR_CLASS_B_INTERVAL;
     }
     return SR_CLASS_B_INTERVAL;

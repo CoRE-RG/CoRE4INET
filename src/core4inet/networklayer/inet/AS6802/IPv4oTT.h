@@ -37,7 +37,7 @@ template<class Base>
 class IPv4oTT : public Base {
 
 protected:
-    enum MsgKind { MSGKIND_START = 0xBEEF };
+    enum class MsgKind { START = 0xBEEF };
 
 public:
 

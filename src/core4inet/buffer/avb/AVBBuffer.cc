@@ -28,7 +28,7 @@ simsignal_t AVBBuffer::creditSignal = registerSignal("credit");
 
 AVBBuffer::AVBBuffer()
 {
-    this->srClass = SR_CLASS_A;
+    this->srClass = SR_CLASS::A;
     this->credit = 0;
     this->maxCredit = 0;
     this->lastCreditEmitTime = 0;
@@ -232,11 +232,11 @@ void AVBBuffer::handleParameterChange(const char* parname)
     {
         if (strcmp(par("srClass").stringValue(), "A") == 0)
         {
-            this->srClass = SR_CLASS_A;
+            this->srClass = SR_CLASS::A;
         }
         else if (strcmp(par("srClass").stringValue(), "B") == 0)
         {
-            this->srClass = SR_CLASS_B;
+            this->srClass = SR_CLASS::B;
         }
         else
         {

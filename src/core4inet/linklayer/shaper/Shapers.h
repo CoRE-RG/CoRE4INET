@@ -133,7 +133,7 @@ class TT_PCF_RC_BE_Shaper : public TTShaper<PCFShaper<RCShaper<BEShaper<BaseShap
  *
  * @author Philipp Meyer
  */
-class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >
+class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS::A, PCFShaper<RCShaper<BEShaper<BaseShaper> > > > >
 {
     public:
         virtual ~TT_AVBClassA_PCF_RC_BE_Shaper();
@@ -153,7 +153,7 @@ class TT_AVBClassA_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, PCFS
  *
  * @author Philipp Meyer
  */
-class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, AVBShaper<SR_CLASS_B, PCFShaper<RCShaper<BEShaper<BaseShaper> > > > > >
+class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLASS::A, AVBShaper<SR_CLASS::B, PCFShaper<RCShaper<BEShaper<BaseShaper> > > > > >
 {
     public:
         virtual ~TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper();
@@ -177,7 +177,7 @@ class TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper : public TTShaper<AVBShaper<SR_CLA
  *
  * @author Till Steinbach
  */
-class TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper : public TTShaper<AVBShaper<SR_CLASS_A, AVBShaper<SR_CLASS_B, PCFShaper<RCShaper<IEEE8021QShaper<BaseShaper> > > > > >
+class TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper : public TTShaper<AVBShaper<SR_CLASS::A, AVBShaper<SR_CLASS::B, PCFShaper<RCShaper<IEEE8021QShaper<BaseShaper> > > > > >
 {
     public:
         virtual ~TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper();

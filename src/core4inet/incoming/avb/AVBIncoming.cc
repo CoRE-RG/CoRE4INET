@@ -63,9 +63,9 @@ void AVBIncoming::handleMessage(cMessage* msg)
                     if (strcmp((*listener)->getName(), "phy") == 0)
                     {
                         string outputStr;
-                        if (srClass == SR_CLASS_A)
+                        if (srClass == SR_CLASS::A)
                             outputStr = "AVBAout";
-                        else if (srClass == SR_CLASS_B)
+                        else if (srClass == SR_CLASS::B)
                             outputStr = "AVBBout";
                         sendDelayed(inFrame->dup(), getHardwareDelay(),
                                 gate(outputStr.c_str(), (*listener)->getIndex()));

@@ -207,7 +207,7 @@ class SRPTable : public virtual cSimpleModule
          * @return True if refreshed. False if it is new.
          */
         virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
-                SR_CLASS srClass = SR_CLASS_A, size_t framesize = 0, uint16_t intervalFrames = 0, uint16_t vid =
+                SR_CLASS srClass = SR_CLASS::A, size_t framesize = 0, uint16_t intervalFrames = 0, uint16_t vid =
                         VLAN_ID_DEFAULT);
 
         /**

@@ -24,7 +24,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 class AVBShaper : public TC, public virtual cListener
 {
     public:
@@ -160,22 +160,22 @@ class AVBShaper : public TC, public virtual cListener
         virtual cMessage *front() override;
 };
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 simsignal_t AVBShaper<SRCLASS, TC>::avbQueueLengthSignal;
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 AVBShaper<SRCLASS, TC>::AVBShaper()
 {
     state = IDLE_STATE;
 
     avbQueue.setName("AVB Messages");
-    if (SRCLASS == SR_CLASS_A)
+    if (SRCLASS == SR_CLASS::A)
     {
         avbQueueLengthSignalName = "avbAQueueLength";
         avbBufferName = "avbABuffer";
         avbInName = "AVBAin";
     }
-    if (SRCLASS == SR_CLASS_B)
+    if (SRCLASS == SR_CLASS::B)
     {
         avbQueueLengthSignalName = "avbBQueueLength";
         avbBufferName = "avbBBuffer";
@@ -184,13 +184,13 @@ AVBShaper<SRCLASS, TC>::AVBShaper()
     avbQueueLengthSignal = cComponent::registerSignal(avbQueueLengthSignalName.c_str());
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 AVBShaper<SRCLASS, TC>::~AVBShaper()
 {
     avbQueue.clear();
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 void AVBShaper<SRCLASS, TC>::initialize(int stage)
 {
     TC::initialize(stage);
@@ -209,7 +209,7 @@ void AVBShaper<SRCLASS, TC>::initialize(int stage)
     }
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 void AVBShaper<SRCLASS, TC>::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn(avbInName.c_str()))
@@ -244,7 +244,7 @@ void AVBShaper<SRCLASS, TC>::handleMessage(cMessage *msg)
     }
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 void AVBShaper<SRCLASS, TC>::enqueueMessage(cMessage *msg)
 {
     if (msg->arrivedOn(avbInName.c_str()))
@@ -260,7 +260,7 @@ void AVBShaper<SRCLASS, TC>::enqueueMessage(cMessage *msg)
     }
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 void AVBShaper<SRCLASS, TC>::requestPacket()
 {
     Enter_Method
@@ -277,7 +277,7 @@ void AVBShaper<SRCLASS, TC>::requestPacket()
     }
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 cMessage* AVBShaper<SRCLASS, TC>::pop()
 {
     Enter_Method
@@ -303,7 +303,7 @@ cMessage* AVBShaper<SRCLASS, TC>::pop()
     return nullptr;
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 cMessage* AVBShaper<SRCLASS, TC>::front()
 {
     Enter_Method
@@ -317,20 +317,20 @@ cMessage* AVBShaper<SRCLASS, TC>::front()
     return TC::front();
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 bool AVBShaper<SRCLASS, TC>::isEmpty()
 {
     return avbQueue.isEmpty() && TC::isEmpty();
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 void AVBShaper<SRCLASS, TC>::clear()
 {
     TC::clear();
     avbQueue.clear();
 }
 
-template<int SRCLASS, class TC>
+template<SR_CLASS SRCLASS, class TC>
 void AVBShaper<SRCLASS, TC>::receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details)
 {
     if (strncmp(TC::getSignalName(signalID), "transmitState", 14) == 0)

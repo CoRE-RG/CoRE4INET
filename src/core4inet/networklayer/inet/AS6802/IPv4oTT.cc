@@ -83,7 +83,7 @@ void IPv4oTT<Base>::initialize(int stage)
         IPv4oTT<Base>::configureFilters(filters);
 
         Base::scheduleAt(simTime(),
-                new cMessage("IPv4oTT register action time events", static_cast<short>(MSGKIND_START)));
+                new cMessage("IPv4oTT register action time events", static_cast<short>(MsgKind::START)));
 
         ASSERT2(findContainingNode(this)!=nullptr,
                 "TrafficSource is not inside a Node (Node must be marked by @node property in ned module)");

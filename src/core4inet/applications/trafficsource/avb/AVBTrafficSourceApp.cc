@@ -35,7 +35,7 @@ Define_Module(AVBTrafficSourceApp);
 AVBTrafficSourceApp::AVBTrafficSourceApp()
 {
     this->isStreaming = false;
-    this->srClass = SR_CLASS_A;
+    this->srClass = SR_CLASS::A;
     this->streamID = 0;
     this->frameSize = 0;
     this->intervalFrames = 0;
@@ -185,11 +185,11 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     {
         if (strcmp(par("srClass").stringValue(), "A") == 0)
         {
-            this->srClass = SR_CLASS_A;
+            this->srClass = SR_CLASS::A;
         }
         else if (strcmp(par("srClass").stringValue(), "B") == 0)
         {
-            this->srClass = SR_CLASS_B;
+            this->srClass = SR_CLASS::B;
         }
         else
         {

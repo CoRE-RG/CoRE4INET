@@ -31,7 +31,7 @@ Register_Class(SRPTable::ListenerEntry);
 SRPTable::TalkerEntry::TalkerEntry()
 {
     streamId = 0;
-    srClass = SR_CLASS_A;
+    srClass = SR_CLASS::A;
     module = nullptr;
     framesize = 0;
     intervalFrames = 0;
@@ -71,7 +71,7 @@ SRPTable::ListenerEntry::~ListenerEntry()
 std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
-            << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor(entry.srClass) << ", Bandwidth="
+            << SR_CLASStoString[entry.srClass] << ", Bandwidth="
             << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize + static_cast<size_t>(SRP_SAFETYBYTE),
                     entry.intervalFrames, getIntervalForClass(entry.srClass))) / static_cast<double>(1000000)
             << "Mbps, insertionTime=" << entry.insertionTime << "}";
@@ -420,7 +420,7 @@ void SRPTable::printState()
         {
             EV_DETAIL << (*i).first << "   " << (*j).first << "   " << (*j).second->module->getName() << "   "
                     << (*j).second->address.str() << "   "
-                    << cEnum::get("CoRE4INET::SR_CLASS")->getStringFor((*j).second->srClass) << "    "
+                    << SR_CLASStoString[(*j).second->srClass] << "    "
                     << static_cast<double>(bandwidthFromSizeAndInterval(
                             (*j).second->framesize + static_cast<size_t>(SRP_SAFETYBYTE), (*j).second->intervalFrames,
                             getIntervalForClass((*j).second->srClass))) / static_cast<double>(1000000) << "   "

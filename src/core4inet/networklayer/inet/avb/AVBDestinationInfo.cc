@@ -21,7 +21,7 @@ AVBDestinationInfo::AVBDestinationInfo()
   : destModule(nullptr),
     destMAC(nullptr),
     streamId(0),
-    srClass(SR_CLASS_A),
+    srClass(SR_CLASS::A),
     frameSize(0),
     intervallFrames(0),
     vlanId(0)

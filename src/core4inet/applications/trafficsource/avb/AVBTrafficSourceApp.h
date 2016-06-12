@@ -20,7 +20,7 @@
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/applications/trafficsource/base/TrafficSourceAppBase.h"
 #include "core4inet/utilities/classes/Timed.h"
-#include "core4inet/base/avb/AVBDefs_m.h"
+#include "core4inet/base/avb/AVBDefs.h"
 //INET
 #include "inet/linklayer/common/MACAddress.h"
 
@@ -41,7 +41,7 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
 {
     private:
         bool isStreaming;
-        enum SR_CLASS srClass;
+        SR_CLASS srClass;
         unsigned long streamID;
         size_t frameSize;
         uint16_t intervalFrames;

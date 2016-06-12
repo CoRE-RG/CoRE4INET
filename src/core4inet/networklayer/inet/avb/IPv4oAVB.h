@@ -48,7 +48,7 @@ class IPv4oAVB : public base {
 
 
     protected:
-        enum MsgKind { MSGKIND_START = 0xBEEF };
+        enum class MsgKind { START = 0xBEEF };
 
 
     public:

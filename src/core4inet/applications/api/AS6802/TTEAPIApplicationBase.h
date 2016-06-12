@@ -30,21 +30,6 @@
 namespace CoRE4INET {
 
 /**
- * @brief Message kinds for application control messages
- *
- * @ingroup Applications AS6802
- *
- * @author Till Steinbach
- */
-enum TTEAPIApplicationMessageKind
-{
-    /**
-     * @brief Message to trigger the application start.
-     */
-    START_APPLICATION
-};
-
-/**
  * @brief Class that contains different pointers. Internally used for TTEthernet-API
  *
  * @author Till Steinbach
@@ -82,6 +67,21 @@ class TTEAPIPriv
  */
 class TTEAPIApplicationBase : public virtual CTApplicationBase, public virtual Scheduled, public cListener
 {
+        /**
+         * @brief Message kinds for application control messages
+         *
+         * @ingroup Applications AS6802
+         *
+         * @author Till Steinbach
+         */
+        enum class MessageKind
+        {
+            /**
+             * @brief Message to trigger the application start.
+             */
+            START_APPLICATION
+        };
+
     private:
         bool synchronized;
         std::map<Buffer*, APICallback*> receiveCallbacks;

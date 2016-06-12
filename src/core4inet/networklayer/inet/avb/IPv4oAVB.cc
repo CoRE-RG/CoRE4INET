@@ -71,7 +71,7 @@ void IPv4oAVB<base>::initialize(int stage)
         IPv4oAVB<base>::configureSubscriptions(filters);
         SRPTable *srpTable = check_and_cast<SRPTable *>(findModuleWhereverInNode("srpTable", this));
         IPv4oAVB<base>::registerSrpCallbacks(srpTable);
-        base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", static_cast<short>(MSGKIND_START)));
+        base::scheduleAt(simTime(), new cMessage("IPv4oAVB registerTalker", static_cast<short>(MsgKind::START)));
     }
 }
 
@@ -291,11 +291,11 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 avbDestInfo->setStreamId(static_cast<uint64_t>(base::parseIntAttribute(streamId, "streamId", false)));
                 if (strcmp(srClass, "B") == 0)
                 {
-                    avbDestInfo->setSrClass(SR_CLASS_B);
+                    avbDestInfo->setSrClass(SR_CLASS::B);
                 }
                 else
                 {
-                    avbDestInfo->setSrClass(SR_CLASS_A);
+                    avbDestInfo->setSrClass(SR_CLASS::A);
                 }
                 avbDestInfo->setFrameSize(
                         static_cast<uint32_t>(base::parseIntAttribute(frameSize, "frameSize", false)));
