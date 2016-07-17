@@ -16,13 +16,13 @@
 #ifndef CORE4INET_DEFS_H
 #define CORE4INET_DEFS_H
 
-//OMNeT++
-#include "omnetpp.h"
-
 //INET
 #include "inet/common/INETDefs.h"
 
 #include "core4inet/base/Dependencies.h"
+
+//OMNeT++
+#include "omnetpp.h"
 
 /**
  * Definition of CORE4INET version

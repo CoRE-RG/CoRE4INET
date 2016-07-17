@@ -12,10 +12,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
-#include "core4inet/utilities/NEDFunctions.h"
-
 //CoRE4INET
 #include "core4inet/utilities/ModuleAccess.h"
+
+#include "core4inet/utilities/NEDFunctions.h"
 
 static omnetpp::cNEDValue ned_sec_to_tick(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc)
 {

@@ -20,11 +20,11 @@
 #include <vector>
 #include <string>
 
-//OMNeT++
-#include "omnetpp.h"
-
 //INET
 #include "core4inet/utilities/ModuleAccess.h"
+
+//OMNeT++
+#include "omnetpp.h"
 
 namespace CoRE4INET {
 
