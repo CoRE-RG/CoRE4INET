@@ -33,6 +33,7 @@ import inet.applications.contract.IPingApp;
 import inet.applications.contract.ISCTPApp;
 import inet.applications.contract.ITCPApp;
 import inet.applications.contract.IUDPApp;
+import inet.applications.contract.INetPerfMeterApp;
 import inet.transportlayer.contract.ISCTP;
 import inet.transportlayer.contract.ITCP;
 import inet.transportlayer.contract.IUDP;
@@ -55,13 +56,14 @@ module RTIPHost
         string routingFile = default("");
         bool forwarding = default(true);
         bool multicastForwarding = default(false);
+        int numNetPerfMeterApps = default(0);  // no of netPerfMeter apps. Specify the app types in INI file with netPerfMeterApp[0..1].typename="NetPerfMeter" syntax
         int numTcpApps = default(0);  // no of TCP apps. Specify the app types in INI file with tcpApp[0..1].typename="TCPEchoApp" syntax
         int numUdpApps = default(0);  // no of UDP apps. Specify the app types in INI file with udpApp[0..1].typename="UDPVideoStreamCli" syntax
         int numSctpApps = default(0); // no of SCTP apps. Specify the app types in INI file with sctpApp[0..1].typename="SCTPServer" syntax
         int numPingApps = default(0);  // no of PING apps. Specify the app types in INI file with pingApp[0..1].typename="PingApp" syntax
-        bool hasTcp = default(numTcpApps>0);
-        bool hasUdp = default(numUdpApps>0);
-        bool hasSctp = default(numSctpApps>0);
+        bool hasTcp = default(numTcpApps>0 || numNetPerfMeterApps>0);
+        bool hasUdp = default(numUdpApps>0 || numNetPerfMeterApps>0);
+        bool hasSctp = default(numSctpApps>0 || numNetPerfMeterApps>0);
         string tcpType = default(firstAvailable("TCP", "TCP_lwIP", "TCP_NSC", "TCP_None"));  // tcp implementation (e.g. ~TCP, ~TCP_lwIP, ~TCP_NSC) or ~TCPSpoof
         string udpType = default(firstAvailable("UDP","UDP_None"));
         string sctpType = default(firstAvailable("SCTP","SCTP_None"));
@@ -72,7 +74,10 @@ module RTIPHost
     gates:
         inout ethg @labels(EtherFrame-conn);
     submodules:
-
+        netPerfMeterApp[numNetPerfMeterApps]: <default("NetPerfMeter")> like INetPerfMeterApp {  // T.D. 17.11.09
+            parameters:
+                @display("p=849,65");
+        }
         // application Layer
         tcpApp[numTcpApps]: <> like ITCPApp {
             parameters:
@@ -183,6 +188,15 @@ module RTIPHost
     connections allowunconnected:
 
         // application Layer <--> transport Layer
+        for i=0..numNetPerfMeterApps-1 {
+            netPerfMeterApp[i].tcpOut --> tcp.appIn++;
+            netPerfMeterApp[i].tcpIn <-- tcp.appOut++;
+            netPerfMeterApp[i].sctpOut --> sctp.from_appl++;
+            netPerfMeterApp[i].sctpIn <-- sctp.to_appl++;
+            netPerfMeterApp[i].udpOut --> udp.appIn++;
+            netPerfMeterApp[i].udpIn <-- udp.appOut++;
+        }
+        
         for i=0..numTcpApps-1 {
             tcpApp[i].tcpOut --> tcp.appIn++;
             tcpApp[i].tcpIn <-- tcp.appOut++;
@@ -224,7 +238,7 @@ module RTIPHost
 
 		// link layer <--> outside
         phy[0].ethg <--> ethg;
-        
+
         bgOut.out --> phy[0].bgIn;
 
 }

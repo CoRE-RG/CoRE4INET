@@ -6,7 +6,6 @@
  */
 
 //==============================================================================
-
 #include "core4inet/networklayer/inet/base/TrafficPattern.h"
 
 //==============================================================================
@@ -16,6 +15,7 @@
 #include "inet/networklayer/ipv4/IPv4Datagram.h"
 #include "inet/transportlayer/udp/UDPPacket.h"
 #include "inet/transportlayer/tcp_common/TCPSegment.h"
+#include "inet/transportlayer/sctp/SCTPMessage.h"
 
 //==============================================================================
 
@@ -23,24 +23,16 @@ namespace CoRE4INET {
 
 //==============================================================================
 
-TrafficPattern::TrafficPattern()
-  : srcAddr(),
-    srcPrefixLength(-1),
-    destAddr(),
-    destPrefixLength(-1),
-    protocol(-1),
-    tos(-1),
-    tosMask(0),
-    srcPortMin(-1),
-    srcPortMax(-1),
-    destPortMin(-1),
-    destPortMax(-1)
+TrafficPattern::TrafficPattern() :
+        srcAddr(), srcPrefixLength(-1), destAddr(), destPrefixLength(-1), protocol(-1), tos(-1), tosMask(0), srcPortMin(
+                -1), srcPortMax(-1), destPortMin(-1), destPortMax(-1)
 {
 }
 
 //==============================================================================
 
-TrafficPattern::~TrafficPattern() {
+TrafficPattern::~TrafficPattern()
+{
 }
 
 //==============================================================================
@@ -51,10 +43,13 @@ bool TrafficPattern::matches(const cPacket *packet)
     if (!datagram)
         return false;
 
-
-    if (srcPrefixLength > 0 && ((srcAddr.getType()==inet::L3Address::IPv6) || !datagram->getSrcAddress().prefixMatches(srcAddr.toIPv4(), srcPrefixLength)))
+    if (srcPrefixLength > 0
+            && ((srcAddr.getType() == inet::L3Address::IPv6)
+                    || !datagram->getSrcAddress().prefixMatches(srcAddr.toIPv4(), srcPrefixLength)))
         return false;
-    if (destPrefixLength > 0 && ((destAddr.getType()==inet::L3Address::IPv6) || !datagram->getDestAddress().prefixMatches(destAddr.toIPv4(), destPrefixLength)))
+    if (destPrefixLength > 0
+            && ((destAddr.getType() == inet::L3Address::IPv6)
+                    || !datagram->getDestAddress().prefixMatches(destAddr.toIPv4(), destPrefixLength)))
         return false;
     if (protocol >= 0 && datagram->getTransportProtocol() != protocol)
         return false;
@@ -75,6 +70,12 @@ bool TrafficPattern::matches(const cPacket *packet)
         {
             srcPort = tcpSegment->getSrcPort();
             destPort = tcpSegment->getDestPort();
+        }
+        const inet::sctp::SCTPMessage *sctpPacket = dynamic_cast<const inet::sctp::SCTPMessage*>(encPacket);
+        if (sctpPacket)
+        {
+            srcPort = static_cast<int>(sctpPacket->getSrcPort());
+            destPort = static_cast<int>(sctpPacket->getDestPort());
         }
 
         if (srcPortMin >= 0 && (srcPort < srcPortMin || srcPort > srcPortMax))
