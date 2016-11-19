@@ -67,6 +67,12 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * Only outgoing frames with one of the VLANs in this list are transmitted. Default is "0" to allow for untagged frames
          */
         std::vector<int> taggedVIDs;
+
+        /**
+         * @brief Default priority.
+         * Frames without Q-tag will be treated with this priority (must be larger or equal 0 and smaller or equal 7)
+         */
+        uint16_t defaultPriority;
     protected:
         /**
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
@@ -275,12 +281,38 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        uint8_t priority = 0;
+        uint8_t priority = this->defaultPriority;
         if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
         {
+            //VLAN untag if requested
+            if (this->untaggedVID && this->untaggedVID == qframe->getVID())
+            {
+                qframe->setVID(0);
+            }
+            //VLAN check if port is tagged with VLAN
+            bool found = false;
+            for (std::vector<int>::iterator vid = this->taggedVIDs.begin(); vid != this->taggedVIDs.end(); ++vid)
+            {
+                //Shortcut due to sorted vector
+                if ((*vid) > qframe->getVID())
+                {
+                    break;
+                }
+                if ((*vid) == qframe->getVID())
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                delete qframe;
+                return;
+            }
+
             priority = qframe->getPcp();
         }
-        if (priority >= 0 && static_cast<size_t>(priority) < 8)
+        if (priority >= 0 && static_cast<size_t>(priority) <= MAX_Q_PRIORITY)
         {
             qQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(qQueueLengthSignals[static_cast<size_t>(priority)],
@@ -289,10 +321,10 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
         }
         else
         {
-            qQueue[0].insert(msg);
+            qQueue[this->defaultPriority].insert(msg);
             TC::notifyListeners();
             EV_WARN << "Priority of message " << msg->getFullName()
-                    << " missing or not within range, using default priority 0!" << endl;
+                    << " missing or not within range, using default priority " << this->defaultPriority << "!" <<endl;
         }
     }
     else
@@ -304,8 +336,7 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
 template<class TC>
 void IEEE8021QShaper<TC>::requestPacket()
 {
-    Enter_Method
-    ("requestPacket()");
+    Enter_Method("requestPacket()");
 //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -319,15 +350,14 @@ void IEEE8021QShaper<TC>::requestPacket()
 template<class TC>
 cMessage* IEEE8021QShaper<TC>::pop()
 {
-    Enter_Method
-    ("pop()");
+    Enter_Method("pop()");
 
     for (size_t i = 8; i > 0; i--)
     {
         if (!qQueue[i - 1].isEmpty())
         {
-        inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].pop());
-        cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i-1].getLength()));
+            inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].pop());
+            cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i-1].getLength()));
             return message;
         }
     }
@@ -337,8 +367,7 @@ cMessage* IEEE8021QShaper<TC>::pop()
 template<class TC>
 cMessage* IEEE8021QShaper<TC>::front()
 {
-    Enter_Method
-    ("front()");
+    Enter_Method("front()");
 
     for (size_t i = 8; i > 0; i--)
     {
@@ -386,6 +415,10 @@ void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
     {
         taggedVIDs = cStringTokenizer(par("taggedVIDs"), ",").asIntVector();
         std::sort(taggedVIDs.begin(), taggedVIDs.end());
+    }
+    if (!parname || !strcmp(parname, "defaultPriority"))
+    {
+        this->defaultPriority = static_cast<uint16_t>(parameterULongCheckRange(par("defaultPriority"), 0, MAX_Q_PRIORITY));
     }
 }
 

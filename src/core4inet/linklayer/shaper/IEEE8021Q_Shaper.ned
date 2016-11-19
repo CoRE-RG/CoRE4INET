@@ -44,6 +44,8 @@ simple IEEE8021Q_Shaper like IShaper
         int untaggedVID = default(0);
         //Interface allows frames with this VLAN to leave the port
         string taggedVIDs = default("0");
+         //Default Priority. Frames without Q-tag will be treated with this priority
+        int defaultPriority = default(0);
         
     gates:
         //Input for IEEE802.1Q frames from the upper layer (EtherLLC or IMacRelayUnit)

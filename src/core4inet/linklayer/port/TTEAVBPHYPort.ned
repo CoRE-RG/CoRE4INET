@@ -65,6 +65,8 @@ module TTEAVBPHYPort like IPort
     submodules:
         shaper: TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper {
             @display("p=48,45");
+            untaggedVID = untaggedVID;
+            taggedVIDs = taggedVIDs;
         }
 
         inControl: CT_AVB_8021Q_InControl {
