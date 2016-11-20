@@ -72,7 +72,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * @brief Default priority.
          * Frames without Q-tag will be treated with this priority (must be larger or equal 0 and smaller or equal 7)
          */
-        uint16_t defaultPriority;
+        uint8_t defaultPriority;
     protected:
         /**
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
@@ -418,7 +418,7 @@ void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "defaultPriority"))
     {
-        this->defaultPriority = static_cast<uint16_t>(parameterULongCheckRange(par("defaultPriority"), 0, MAX_Q_PRIORITY));
+        this->defaultPriority = static_cast<uint8_t>(parameterULongCheckRange(par("defaultPriority"), 0, MAX_Q_PRIORITY));
     }
 }
 
