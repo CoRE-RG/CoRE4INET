@@ -152,6 +152,10 @@ uint16_t getCTID(const inet::EtherFrame *frame);
 #endif
 
 #ifdef WITH_AVB_COMMON
+
+extern omnetpp::cConfigOption *CFGID_AVB_OBSERVATION_WINDOW_A;
+extern omnetpp::cConfigOption *CFGID_AVB_OBSERVATION_WINDOW_B;
+
 /**
  * @brief Calculates required bandwidth from given interval and framesize
  *

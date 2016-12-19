@@ -35,10 +35,10 @@ static std::map<SR_CLASS, const char*> SR_CLASStoString = {{SR_CLASS::A,"A"},{SR
 const inet::MACAddress SRP_ADDRESS = inet::MACAddress("01:80:C2:00:00:0E");
 
 //Service class A interval is 125us
-const_simtime_t SR_CLASS_A_INTERVAL = 0.000125;
+#define SR_CLASS_A_INTERVAL "0.000125s"
 
 //Service class B interval is 250us
-const_simtime_t SR_CLASS_B_INTERVAL = 0.000250;
+#define SR_CLASS_B_INTERVAL "0.000250s"
 
 //Default VLAN ID for AVB
 const unsigned short VLAN_ID_DEFAULT = 2;

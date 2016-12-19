@@ -176,16 +176,21 @@ unsigned long bandwidthFromSizeAndInterval(size_t framesize, size_t intervalFram
                     * static_cast<double>(((framesize + PREAMBLE_BYTES + SFD_BYTES) * 8) + INTERFRAME_GAP_BITS)));
 }
 
+Register_PerRunConfigOptionU(CFGID_AVB_OBSERVATION_WINDOW_A, "AVB-ObservationWindow-A", "s",
+        SR_CLASS_A_INTERVAL, "length of observation window for SR class A, default=125us");
+Register_PerRunConfigOptionU(CFGID_AVB_OBSERVATION_WINDOW_B, "AVB-ObservationWindow-B", "s",
+        SR_CLASS_B_INTERVAL, "length of observation window for SR class B, default=250us");
+
 const simtime_t getIntervalForClass(SR_CLASS srClass)
 {
     switch (srClass)
     {
         case SR_CLASS::A:
-            return SR_CLASS_A_INTERVAL;
+            return SimTime(omnetpp::getEnvir()->getConfig()->getAsDouble(CFGID_AVB_OBSERVATION_WINDOW_A));
         case SR_CLASS::B:
-            return SR_CLASS_B_INTERVAL;
+            return SimTime(omnetpp::getEnvir()->getConfig()->getAsDouble(CFGID_AVB_OBSERVATION_WINDOW_B));
     }
-    return SR_CLASS_B_INTERVAL;
+    return SimTime(omnetpp::getEnvir()->getConfig()->getAsDouble(CFGID_AVB_OBSERVATION_WINDOW_A));
 }
 #endif
 
