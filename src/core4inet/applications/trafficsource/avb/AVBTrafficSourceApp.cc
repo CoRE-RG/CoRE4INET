@@ -118,10 +118,15 @@ void AVBTrafficSourceApp::sendAVBFrame()
     }
     sendDirect(outFrame, avbOutCTC->gate("in"));
 
+    scheduleInterval();
+}
+
+void AVBTrafficSourceApp::scheduleInterval()
+{
     //class measurement interval A=125us B=250us
     simtime_t tick =
             check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
-    simtime_t interval = (getIntervalForClass(srClass) / intervalFrames) + par("intervalInaccurracy").doubleValue();
+    simtime_t interval = (getIntervalForClass(srClass) / getIntervalFrames()) + par("intervalInaccurracy").doubleValue();
     if (interval < 0)
         interval = 0;
 
@@ -131,11 +136,10 @@ void AVBTrafficSourceApp::sendAVBFrame()
     getTimer()->registerEvent(event);
 }
 
-void AVBTrafficSourceApp::receiveSignal(__attribute__((unused)) cComponent *src, simsignal_t id, cObject *obj,
-        __attribute__((unused)) cObject *details)
+void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))  cComponent *src, simsignal_t id, cObject *obj,
+        __attribute__((unused))  cObject *details)
 {
-    Enter_Method_Silent
-    ();
+    Enter_Method_Silent();
     if (id == NF_AVB_LISTENER_REGISTERED)
     {
         SRPTable::ListenerEntry *lentry = dynamic_cast<SRPTable::ListenerEntry*>(obj);

@@ -50,6 +50,10 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
         inet::MACAddress multicastMAC;
     public:
         AVBTrafficSourceApp();
+
+        uint16_t getIntervalFrames(){
+            return this->intervalFrames;
+        }
     protected:
         /**
          * @brief Initialization of the module. Sends activator message
@@ -63,6 +67,10 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
          * @brief Sends an AVBFrame
          */
         void sendAVBFrame();
+        /**
+         * @brief Schedule next send interval
+         */
+        virtual void scheduleInterval();
         /**
          * @brief Receives Stream Reservation Protocol signals
          */
