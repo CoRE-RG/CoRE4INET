@@ -49,7 +49,7 @@ void AVBCustomIntervalTrafficSourceApp::handleParameterChange(const char* parnam
 
     if (!parname || !strcmp(parname, "interval"))
     {
-        this->interval = SimTime(parameterDoubleCheckRange(par("intervalFrames"), 0, std::numeric_limits<double>::max(), true, false));
+        this->interval = SimTime(parameterDoubleCheckRange(par("interval"), 0, std::numeric_limits<double>::max(), true, false));
     }
 }
 
