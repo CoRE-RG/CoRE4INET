@@ -16,7 +16,7 @@ simple TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper extends TT_AVBClassA_AVBClassB
         //Signal emitted when queue length of the rc queue changes, contains new queue length
         @signal[q*QueueLength](type=unsigned long);
         //Statistic of the queue length of rate-constrained frames
-        @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; record=vector; interpolationmode=sample-hold);
+        @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; record=vector,stats; interpolationmode=sample-hold);
         
 		//Untagged VLAN. Outgoing frames with this VLAN get untagged
         int untaggedVID = default(0);

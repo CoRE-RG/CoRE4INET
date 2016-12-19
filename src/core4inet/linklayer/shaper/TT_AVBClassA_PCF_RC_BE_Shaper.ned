@@ -37,7 +37,7 @@ simple TT_AVBClassA_PCF_RC_BE_Shaper extends TT_PCF_RC_BE_Shaper
         //Signal emitted when queue length of the avb queue changes, contains new queue length
         @signal[avbAQueueLength](type=unsigned long; unit=packets);
         //Statistic of the queue length of time-triggered frames
-        @statistic[avbAQueueLength](title="AVBA-Queue Length"; unit=packets; record=vector; interpolationmode=sample-hold);
+        @statistic[avbAQueueLength](title="AVBA-Queue Length"; unit=packets; record=vector,stats; interpolationmode=sample-hold);
 
         // Bandwidth of the TT bandwith on this port
         int AVBHigherPriorityBandwidth @unit(bps) = default(0bps);

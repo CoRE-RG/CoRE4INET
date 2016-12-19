@@ -38,7 +38,7 @@ simple TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper extends TT_AVBClassA_PCF_RC_BE_Sh
         //Signal emitted when queue length of the avb queue changes, contains new queue length
         @signal[avbBQueueLength](type=unsigned long; unit=packets);
         //Statistic of the queue length of time-triggered frames
-        @statistic[avbBQueueLength](title="AVBB-Queue Length"; unit=packets; record=vector; interpolationmode=sample-hold);
+        @statistic[avbBQueueLength](title="AVBB-Queue Length"; unit=packets; record=vector,stats; interpolationmode=sample-hold);
 
     gates:
         //Input for AVB class B frames from the buffers

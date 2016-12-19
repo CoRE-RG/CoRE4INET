@@ -34,7 +34,7 @@ simple IEEE8021Q_Shaper like IShaper
         //Signal emitted when queue length of the IEEE802.1Q queue changes, contains new queue length
         @signal[q*QueueLength](type=unsigned long; unit=packets);
         //Statistic of the queue length of IEEE802.1Q frames
-        @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; unit=packets; record=vector; interpolationmode=sample-hold);
+        @statisticTemplate[qQueueLength](title="Q-Queue Length ($name)"; unit=packets; record=vector,stats; interpolationmode=sample-hold);
 		
 		//Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
 		string oscillator = default("^.^.scheduler.oscillator");

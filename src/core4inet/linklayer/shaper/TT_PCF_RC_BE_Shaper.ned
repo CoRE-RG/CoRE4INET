@@ -38,7 +38,7 @@ simple TT_PCF_RC_BE_Shaper extends PCF_RC_BE_Shaper like ITimed
         //Signal emitted when queue length of the tt queue changes, contains new queue length
         @signal[ttQueueLength](type=unsigned long; unit=packets);
         //Statistic of the queue length of time-triggered frames
-        @statistic[ttQueueLength](title="TT-Queue Length"; unit=packets; record=vector; interpolationmode=sample-hold);
+        @statistic[ttQueueLength](title="TT-Queue Length"; unit=packets; record=vector,stats; interpolationmode=sample-hold);
         
         //Comma seperated list of TTBuffers that send messages to this port
         string tt_buffers = default("");

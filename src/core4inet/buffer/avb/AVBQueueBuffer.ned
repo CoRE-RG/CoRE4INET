@@ -37,9 +37,9 @@ simple AVBQueueBuffer extends AVBBuffer
         @signal[dropped](type=inet::EtherFrame);
         
         //Statistic of the queue length of the buffer
-        @statistic[length](title="Queue Length"; source=length; record=vector; unit=packets; interpolationmode=sample-hold);
+        @statistic[length](title="Queue Length"; source=length; record=vector,stats; unit=packets; interpolationmode=sample-hold);
         //Statistic of the queue size of the buffer in bytes
-        @statistic[size](title="Queue Size"; source=size; record=vector; unit=B; interpolationmode=sample-hold);
+        @statistic[size](title="Queue Size"; source=size; record=vector,stats; unit=B; interpolationmode=sample-hold);
         //Statistic of the amount of packets that were dropped due to buffer overflows
         @statistic[dropped](title="Dropped frames"; source=dropped; unit=packets; record=sum);
 
