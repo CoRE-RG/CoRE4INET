@@ -10,6 +10,7 @@
 /FeatureBuildTest
 
 # settings
+*.qtenvrc
 *.tkenvrc
 *.tkenvlog
 *.cmdenv-log
