@@ -21,6 +21,9 @@
 
 #include "inet/common/ModuleAccess.h"
 
+//std
+#include <algorithm>
+
 using namespace CoRE4INET;
 
 simsignal_t Buffer::txPkSignal = registerSignal("txPk");
