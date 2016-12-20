@@ -149,6 +149,14 @@ void Buffer::handleParameterChange(const char* parname)
                         "Configuration problem of parameter destination_gates in module %s: Gate: %s is not in node %s! Maybe a copy-paste problem?",
                         this->getFullName(), (*gate_it)->getFullName(), inet::findContainingNode(this)->getFullName());
             }
+            std::list<cGate*>::iterator findIter = std::find(destinationGates.begin(), destinationGates.end(),
+                    *gate_it);
+            if (findIter != destinationGates.end())
+            {
+                throw cRuntimeError(
+                        "Configuration problem of parameter destination_gates in module %s: Gate: %s is multiple times in list! Maybe a copy-paste problem?",
+                        this->getFullName(), (*gate_it)->getFullName());
+            }
             destinationGates.push_back(*gate_it);
         }
     }
