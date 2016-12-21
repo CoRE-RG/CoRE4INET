@@ -56,6 +56,10 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * @brief Dedicated queue for each priority of Q-tagged messages
          */
         std::vector<cQueue> qQueue;
+        /**
+         * @brief caches queue size in bytes
+         */
+        std::vector<size_t> qQueueSize;
 
         /**
          * @brief Untagged VLAN.
@@ -78,6 +82,10 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
          */
         std::vector<simsignal_t> qQueueLengthSignals;
+        /**
+         * @brief Signal that is emitted when the queue size of rate-constrained messages changes.
+         */
+        std::vector<simsignal_t> qQueueSizeSignals;
 
     protected:
         /**
@@ -192,6 +200,7 @@ void IEEE8021QShaper<TC>::initialize(int stage)
             snprintf(strBuf, 32, "Q Priority %d Messages", i);
             queue.setName(strBuf);
             qQueue.push_back(queue);
+            qQueueSize.push_back(0);
 
             snprintf(strBuf, 32, "q%dQueueLength", i);
             simsignal_t signal = registerSignal(strBuf);
@@ -202,6 +211,16 @@ void IEEE8021QShaper<TC>::initialize(int stage)
             qQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
             cComponent::emit(signal, static_cast<unsigned long>(queue.getLength()));
+
+            snprintf(strBuf, 32, "q%dQueueSize", i);
+            signal = registerSignal(strBuf);
+
+            statisticTemplate = getProperties()->get("statisticTemplate", "qQueueSize");
+            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
+
+            qQueueSizeSignals.push_back(signal);
+            //Send initial signal to create statistic
+            cComponent::emit(signal, static_cast<unsigned long>(0));
         }
     }
 }
@@ -317,6 +336,8 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
             qQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(qQueueLengthSignals[static_cast<size_t>(priority)],
                     static_cast<unsigned long>(qQueue[static_cast<size_t>(priority)].getLength()));
+            qQueueSize[static_cast<size_t>(priority)]+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+            cComponent::emit(qQueueSizeSignals[static_cast<size_t>(priority)], static_cast<unsigned long>(qQueueSize[static_cast<size_t>(priority)]));
             TC::notifyListeners();
         }
         else
@@ -357,7 +378,9 @@ cMessage* IEEE8021QShaper<TC>::pop()
         if (!qQueue[i - 1].isEmpty())
         {
             inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].pop());
-            cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i-1].getLength()));
+            cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i - 1].getLength()));
+            qQueueSize[i - 1]-=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(message)->getByteLength());
+            cComponent::emit(qQueueSizeSignals[i - 1], static_cast<unsigned long>(qQueueSize[i - 1]));
             return message;
         }
     }

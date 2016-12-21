@@ -56,11 +56,20 @@ class PCFShaper : public TC, public virtual Timed
          */
         cQueue pcfQueue;
 
+        /**
+         * @brief caches queue size in bytes
+         */
+        size_t pcfQueueSize;
+
     protected:
         /**
-         * @brief Signal that is emitted when the queue length of time-triggered messages changes.
+         * @brief Signal that is emitted when the queue length of pcf messages changes.
          */
         static simsignal_t pcfQueueLengthSignal;
+        /**
+         * @brief Signal that is emitted when the queue size (in bytes) of pcf messages changes.
+         */
+        static simsignal_t pcfQueueSizeSignal;
 
     protected:
         /**
@@ -144,6 +153,8 @@ class PCFShaper : public TC, public virtual Timed
 
 template<class TC>
 simsignal_t PCFShaper<TC>::pcfQueueLengthSignal = cComponent::registerSignal("pcfQueueLength");
+template<class TC>
+simsignal_t PCFShaper<TC>::pcfQueueSizeSignal = cComponent::registerSignal("pcfQueueSize");
 
 template<class TC>
 PCFShaper<TC>::PCFShaper()
@@ -165,6 +176,8 @@ void PCFShaper<TC>::initialize(int stage)
         Timed::initialize();
         //Send initial signal to create statistic
         cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.getLength()));
+        //Send initial signal to create statistic
+        cComponent::emit(pcfQueueSizeSignal, static_cast<unsigned long>(0));
     }
 }
 
@@ -220,6 +233,9 @@ void PCFShaper<TC>::enqueueMessage(cMessage *msg)
     if (msg->arrivedOn("PCFin"))
     {
         pcfQueue.insert(msg);
+        cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.getLength()));
+        pcfQueueSize+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+        cComponent::emit(pcfQueueSizeSignal, static_cast<unsigned long>(pcfQueueSize));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing PCF" << endl;
     }
@@ -232,8 +248,7 @@ void PCFShaper<TC>::enqueueMessage(cMessage *msg)
 template<class TC>
 void PCFShaper<TC>::requestPacket()
 {
-    Enter_Method
-    ("requestPacket()");
+    Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -247,13 +262,15 @@ void PCFShaper<TC>::requestPacket()
 template<class TC>
 cMessage* PCFShaper<TC>::pop()
 {
-    Enter_Method
-    ("pop()");
+    Enter_Method("pop()");
     //RCFrames
     if (!pcfQueue.isEmpty())
     {
         cMessage *msg = static_cast<cMessage*>(pcfQueue.pop());
         cComponent::emit(pcfQueueLengthSignal, static_cast<unsigned long>(pcfQueue.getLength()));
+
+        pcfQueueSize-=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+        cComponent::emit(pcfQueueSizeSignal, static_cast<unsigned long>(pcfQueueSize));
 
         PCFrame *pcf = dynamic_cast<PCFrame*>(msg);
         if (pcf)
@@ -268,8 +285,7 @@ cMessage* PCFShaper<TC>::pop()
 template<class TC>
 cMessage* PCFShaper<TC>::front()
 {
-    Enter_Method
-    ("front()");
+    Enter_Method("front()");
     //RCFrames
     if (!pcfQueue.isEmpty())
     {

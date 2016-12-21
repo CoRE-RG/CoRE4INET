@@ -55,6 +55,10 @@ class AVBShaper : public TC, public virtual cListener
          * @brief Queue for AVB-Messages. Will be only filled when there AVB bursts possible.
          */
         cQueue avbQueue;
+        /**
+         * @brief caches queue size in bytes
+         */
+        size_t avbQueueSize;
 
         /**
          * @brief Pointer to AVBBuffer
@@ -65,6 +69,10 @@ class AVBShaper : public TC, public virtual cListener
          * @brief Name of the avbQueueLengthSignal
          */
         std::string avbQueueLengthSignalName;
+        /**
+         * @brief Name of the avbQueueSizeSignal
+         */
+        std::string avbQueueSizeSignalName;
 
         /**
          * @brief Name of the avbBuffer
@@ -83,9 +91,13 @@ class AVBShaper : public TC, public virtual cListener
 
     protected:
         /**
-         * @brief Signal that is emitted when the queue length of time-triggered messages changes.
+         * @brief Signal that is emitted when the queue length of AVB messages changes.
          */
         static simsignal_t avbQueueLengthSignal;
+        /**
+         * @brief Signal that is emitted when the queue size (in bytes) of AVB messages changes.
+         */
+        static simsignal_t avbQueueSizeSignal;
 
     protected:
         /**
@@ -162,6 +174,8 @@ class AVBShaper : public TC, public virtual cListener
 
 template<SR_CLASS SRCLASS, class TC>
 simsignal_t AVBShaper<SRCLASS, TC>::avbQueueLengthSignal;
+template<SR_CLASS SRCLASS, class TC>
+simsignal_t AVBShaper<SRCLASS, TC>::avbQueueSizeSignal;
 
 template<SR_CLASS SRCLASS, class TC>
 AVBShaper<SRCLASS, TC>::AVBShaper()
@@ -172,16 +186,19 @@ AVBShaper<SRCLASS, TC>::AVBShaper()
     if (SRCLASS == SR_CLASS::A)
     {
         avbQueueLengthSignalName = "avbAQueueLength";
+        avbQueueSizeSignalName = "avbAQueueSize";
         avbBufferName = "avbABuffer";
         avbInName = "AVBAin";
     }
     if (SRCLASS == SR_CLASS::B)
     {
         avbQueueLengthSignalName = "avbBQueueLength";
+        avbQueueSizeSignalName = "avbBQueueSize";
         avbBufferName = "avbBBuffer";
         avbInName = "AVBBin";
     }
     avbQueueLengthSignal = cComponent::registerSignal(avbQueueLengthSignalName.c_str());
+    avbQueueSizeSignal = cComponent::registerSignal(avbQueueSizeSignalName.c_str());
 }
 
 template<SR_CLASS SRCLASS, class TC>
@@ -202,7 +219,8 @@ void AVBShaper<SRCLASS, TC>::initialize(int stage)
         if (inet::EtherMACFullDuplex* mac =
                 dynamic_cast<inet::EtherMACFullDuplex*>(TC::gate("out")->getPathEndGate()->getOwner()))
         {
-            if(!mac->isSubscribed("transmitState", this)){
+            if (!mac->isSubscribed("transmitState", this))
+            {
                 mac->subscribe("transmitState", this);
             }
         }
@@ -251,6 +269,8 @@ void AVBShaper<SRCLASS, TC>::enqueueMessage(cMessage *msg)
     {
         avbQueue.insert(msg);
         cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.getLength()));
+        avbQueueSize+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+        cComponent::emit(avbQueueSizeSignal, static_cast<unsigned long>(avbQueueSize));
         TC::notifyListeners();
         EV_TRACE << "Interface not idle queuing AVB frame" << endl;
     }
@@ -263,8 +283,7 @@ void AVBShaper<SRCLASS, TC>::enqueueMessage(cMessage *msg)
 template<SR_CLASS SRCLASS, class TC>
 void AVBShaper<SRCLASS, TC>::requestPacket()
 {
-    Enter_Method
-    ("requestPacket()");
+    Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -280,15 +299,16 @@ void AVBShaper<SRCLASS, TC>::requestPacket()
 template<SR_CLASS SRCLASS, class TC>
 cMessage* AVBShaper<SRCLASS, TC>::pop()
 {
-    Enter_Method
-    ("pop()");
+    Enter_Method("pop()");
     //AVBFrames
     if (avbBuffer->initialized())
-        avbBuffer->refresh();
+    avbBuffer->refresh();
     if (!avbQueue.isEmpty() && avbBuffer->getCredit() >= 0)
     {
         cMessage *msg = static_cast<cMessage*>(avbQueue.pop());
         cComponent::emit(avbQueueLengthSignal, static_cast<unsigned long>(avbQueue.getLength()));
+        avbQueueSize-=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+        cComponent::emit(avbQueueSizeSignal, static_cast<unsigned long>(avbQueueSize));
         AVBFrame* sizeMsg = dynamic_cast<AVBFrame*>(msg->dup());
         sizeMsg->setByteLength(sizeMsg->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
         SimTime duration = TC::outChannel->calculateDuration(sizeMsg);
@@ -306,8 +326,7 @@ cMessage* AVBShaper<SRCLASS, TC>::pop()
 template<SR_CLASS SRCLASS, class TC>
 cMessage* AVBShaper<SRCLASS, TC>::front()
 {
-    Enter_Method
-    ("front()");
+    Enter_Method("front()");
     //AVBFrames
     if (!avbQueue.isEmpty())
     {

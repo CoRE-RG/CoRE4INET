@@ -60,14 +60,14 @@ class RCShaper : public TC, public virtual Timed
         virtual ~RCShaper();
 
         /**
-        * @brief receives signal from mac module and resets bag on rxPk signal from mac
-        *
-        * Checks if there is a buffer registered for this messages and if there is one resets the bag
-        *
-        * @param source source of the signal
-        * @param signalID id of the signal
-        * @param obj ptr to the object. In this case an EtherFrame currently under transmission
-        */
+         * @brief receives signal from mac module and resets bag on rxPk signal from mac
+         *
+         * Checks if there is a buffer registered for this messages and if there is one resets the bag
+         *
+         * @param source source of the signal
+         * @param signalID id of the signal
+         * @param obj ptr to the object. In this case an EtherFrame currently under transmission
+         */
         virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details) override;
 
     private:
@@ -75,6 +75,10 @@ class RCShaper : public TC, public virtual Timed
          * @brief Dedicated queue for each priority of rate-constrained messages
          */
         std::vector<cQueue> rcQueue;
+        /**
+         * @brief caches queue size in bytes
+         */
+        std::vector<size_t> rcQueueSize;
 
         /**
          * @brief caches numRCpriority parameter for faster execution
@@ -84,13 +88,17 @@ class RCShaper : public TC, public virtual Timed
         /**
          * @brief map to store a pointer of a buffer to reset for a specific frame
          */
-        std::unordered_map<cMessage *, RCBuffer* > resetPtrMap;
+        std::unordered_map<cMessage *, RCBuffer*> resetPtrMap;
 
     protected:
         /**
-         * @brief Signal that is emitted when the queue length of time-triggered messages changes.
+         * @brief Signal that is emitted when the queue length of rate-constrained messages changes.
          */
         std::vector<simsignal_t> rcQueueLengthSignals;
+        /**
+         * @brief Signal that is emitted when the queue size of rate-constrained messages changes.
+         */
+        std::vector<simsignal_t> rcQueueSizeSignals;
 
     protected:
         /**
@@ -180,7 +188,7 @@ RCShaper<TC>::RCShaper()
 template<class TC>
 RCShaper<TC>::~RCShaper()
 {
-        resetPtrMap.clear();
+    resetPtrMap.clear();
 }
 
 template<class TC>
@@ -192,8 +200,8 @@ void RCShaper<TC>::initialize(int stage)
         Timed::initialize();
 
         /*inet::EtherMACFullDuplex* mac =
-                dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
-        mac->subscribe("txPk", this);*/
+         dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
+         mac->subscribe("txPk", this);*/
 
         numRcPriority = static_cast<size_t>(par("numRCpriority").longValue());
         for (unsigned int i = 0; i < numRcPriority; i++)
@@ -203,6 +211,7 @@ void RCShaper<TC>::initialize(int stage)
             snprintf(strBuf, 32, "RC Priority %d Messages", i);
             queue.setName(strBuf);
             rcQueue.push_back(queue);
+            rcQueueSize.push_back(0);
 
             snprintf(strBuf, 32, "rc%dQueueLength", i);
             simsignal_t signal = registerSignal(strBuf);
@@ -213,6 +222,16 @@ void RCShaper<TC>::initialize(int stage)
             rcQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
             cComponent::emit(signal, static_cast<unsigned long>(queue.getLength()));
+
+            snprintf(strBuf, 32, "rc%dQueueSize", i);
+            signal = registerSignal(strBuf);
+
+            statisticTemplate = getProperties()->get("statisticTemplate", "rcQueueSize");
+            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
+
+            rcQueueSizeSignals.push_back(signal);
+            //Send initial signal to create statistic
+            cComponent::emit(signal, static_cast<unsigned long>(0));
         }
     }
 }
@@ -240,7 +259,8 @@ void RCShaper<TC>::handleMessage(cMessage *msg)
         {
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(msg->getSenderModule());
-            if (rcBuffer){
+            if (rcBuffer)
+            {
                 resetPtrMap[msg] = rcBuffer;
             }
             rcBuffer->resetBag();
@@ -282,6 +302,10 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
             rcQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(rcQueueLengthSignals[static_cast<size_t>(priority)],
                     static_cast<unsigned long>(rcQueue[static_cast<size_t>(priority)].getLength()));
+            rcQueueSize[static_cast<size_t>(priority)]+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+            cComponent::emit(rcQueueSizeSignals[static_cast<size_t>(priority)], static_cast<unsigned long>(rcQueueSize[static_cast<size_t>(priority)]));
+
+
             TC::notifyListeners();
         }
         else
@@ -302,8 +326,7 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
 template<class TC>
 void RCShaper<TC>::requestPacket()
 {
-    Enter_Method
-    ("requestPacket()");
+    Enter_Method("requestPacket()");
     //Feed the MAC layer with the next frame
     TC::framesRequested++;
 
@@ -317,8 +340,7 @@ void RCShaper<TC>::requestPacket()
 template<class TC>
 cMessage* RCShaper<TC>::pop()
 {
-    Enter_Method
-    ("pop()");
+    Enter_Method("pop()");
     //RCFrames
     for (unsigned int i = 0; i < numRcPriority; i++)
     {
@@ -326,9 +348,12 @@ cMessage* RCShaper<TC>::pop()
         {
             inet::EtherFrame *message = static_cast<inet::EtherFrame*>(rcQueue[i].pop());
             cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].getLength()));
+            rcQueueSize[i]-=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(message)->getByteLength());
+            cComponent::emit(rcQueueSizeSignals[i], static_cast<unsigned long>(rcQueueSize[i]));
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
-            if (rcBuffer){
+            if (rcBuffer)
+            {
                 resetPtrMap[message] = rcBuffer;
             }
             rcBuffer->resetBag();
@@ -347,8 +372,7 @@ cMessage* RCShaper<TC>::pop()
 template<class TC>
 cMessage* RCShaper<TC>::front()
 {
-    Enter_Method
-    ("front()");
+    Enter_Method("front()");
     //RCFrames
     for (unsigned int i = 0; i < numRcPriority; i++)
     {
@@ -384,14 +408,15 @@ void RCShaper<TC>::clear()
 }
 
 template<class TC>
-void RCShaper<TC>::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details){
+void RCShaper<TC>::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details)
+{
     /*if(strncmp(getSignalName(signalID), "txPk", 5)==0){
-        std::unordered_map<cMessage *, RCBuffer* >::const_iterator result = resetPtrMap.find(check_and_cast<cMessage*>(obj));
-        if(result != resetPtrMap.end()){
-            (*result).second->resetBag();
-            resetPtrMap.erase(result);
-        }
-    }*/
+     std::unordered_map<cMessage *, RCBuffer* >::const_iterator result = resetPtrMap.find(check_and_cast<cMessage*>(obj));
+     if(result != resetPtrMap.end()){
+     (*result).second->resetBag();
+     resetPtrMap.erase(result);
+     }
+     }*/
     TC::receiveSignal(source, signalID, obj, details);
 }
 

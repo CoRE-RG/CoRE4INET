@@ -36,9 +36,9 @@ simple BE_Shaper like IShaper
         @signal[beQueueSize](type=unsigned long; unit=B);
         
         //Statistic of the queue length of best-effort frames
-        @statistic[beQueueLength](title="BE-Queue Length"; unit=packets; record=vector; interpolationmode=sample-hold);
+        @statistic[beQueueLength](title="BE-Queue Length"; unit=packets; record=vector,stats; interpolationmode=sample-hold);
 		//Statistic of the queue length of best-effort frames
-        @statistic[beQueueSize](title="BE-Queue Size"; unit=B; record=vector; interpolationmode=sample-hold);
+        @statistic[beQueueSize](title="BE-Queue Size"; unit=B; record=vector,stats; interpolationmode=sample-hold);
         
     gates:
         //Input for best-effort frames from the upper layer (EtherLLC or IMacRelayUnit)

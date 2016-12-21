@@ -36,11 +36,19 @@ simple PCF_RC_BE_Shaper extends BE_Shaper
         //Signal emitted when queue length of the pcf queue changes, contains new queue length
         @signal[pcfQueueLength](type=unsigned long; unit=packets);
 		//Statistic of the queue length of protocol control frames
-        @statistic[pcfQueueLength](title="PCF-Queue Length"; unit=packets; record=vector; interpolationmode=sample-hold);
+        @statistic[pcfQueueLength](title="PCF-Queue Length"; unit=packets; record=vector,stats; interpolationmode=sample-hold);
         //Signal emitted when queue length of the rc queue changes, contains new queue length
         @signal[rc*QueueLength](type=unsigned long; unit=packets);
         //Statistic of the queue length of rate-constrained frames
         @statisticTemplate[rcQueueLength](title="RC-Queue Length ($name)"; unit=packets; record=vector,stats; interpolationmode=sample-hold);
+        //Signal emitted when queue size of the pcf queue changes, contains new queue size in bytes
+        @signal[pcfQueueSize](type=unsigned long; unit=B);
+        //Statistic of the queue length of pcf frames
+        @statistic[pcfQueueSize](title="BE-Queue Size"; unit=B; record=vector,stats; interpolationmode=sample-hold);
+        //Signal emitted when queue size of the rc queue changes, contains new queue size in bytes
+        @signal[rc*QueueSize](type=unsigned long; unit=B);
+        //Statistic of the queue size of rate-constrained frames in bytes
+        @statisticTemplate[rcQueueSize](title="RC-Queue Size ($name)"; unit=B; record=vector,stats; interpolationmode=sample-hold);
 
 		//Number of rate-constrained priorities
         int numRCpriority = default(10);
