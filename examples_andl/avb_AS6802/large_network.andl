@@ -5,8 +5,10 @@ settings {
 
 
 network large_network {
-	inline ini{
+	inline ini {
+```
 		**.node_*.app[*].reply = true
+```
 	}
 	
 	devices {
