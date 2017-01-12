@@ -23,7 +23,8 @@
 #ifndef SM_H_
 #define SM_H_
 
-#include "omnetpp.h"
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "CoRE4INET_SMStateContex.h"
 #include "CoRE4INET_SMStates.h"
 

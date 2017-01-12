@@ -25,7 +25,8 @@
 #ifndef HICM_H_
 #define HICM_H_
 
-#include "omnetpp.h"
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "CoRE4INET_HICMStateContex.h"
 #include "CoRE4INET_HICMStates.h"
 

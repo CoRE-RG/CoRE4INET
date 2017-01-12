@@ -25,7 +25,8 @@
 #ifndef SICM_H_
 #define SICM_H_
 
-#include "omnetpp.h"
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "CoRE4INET_SICMStateContex.h"
 #include "CoRE4INET_SICMStates.h"
 

@@ -23,9 +23,10 @@
 #ifndef SC_H_
 #define SC_H_
 
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "CoRE4INET_SCStateContex.h"
 #include "CoRE4INET_SCStates.h"
-#include "omnetpp.h"
 
 namespace CoRE4INET {
 
