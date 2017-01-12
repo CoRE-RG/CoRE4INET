@@ -65,18 +65,16 @@ else ifeq ($(CC),gcc)
 endif
 
 ifdef EXTENDED_WARNINGS
-OLD_INCLUDE_PATH := $(INCLUDE_PATH)
-override MSGCOPTS = $(OLD_INCLUDE_PATH)
 # use -isystem instead of -I flag, to hide warnings in these files
 RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))
 ifneq (,$(findstring MSYS,$(shell uname -s)))
     # on windows we need this hack for pathes like -Id:/...
-    override INCLUDE_PATH := $(shell echo '$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(INCLUDE_PATH))' |sed -e 's/-I\($(subst \| ,\|,$(addsuffix \|,$(filter %:,$(subst :,: ,$(patsubst -I%,%,$(INCLUDE_PATH))))) \/)\)/-isystem \1/g')
+    override COPTS := $(shell echo '$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(COPTS))' |sed -e 's/-I\($(subst \| ,\|,$(addsuffix \|,$(filter %:,$(subst :,: ,$(patsubst -I%,%,$(COPTS))))) \/)\)/-isystem \1/g')
 else
     # on unix we can use this
-    override INCLUDE_PATH := $(subst -I/,-isystem /,$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(INCLUDE_PATH)))
+    override COPTS := $(subst -I/,-isystem /,$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(COPTS)))
 endif
 $(info Replaced COPTS -I directives with -isystem directive: $(COPTS))
 
-override INCLUDE_PATH := $(subst -I/,-isystem /,$(subst -Icore4inet/api/AS6802/tte_api,-isystem core4inet/api/AS6802/tte_api,$(INCLUDE_PATH)))
+override COPTS := $(subst -I/,-isystem /,$(subst -Icore4inet/api/AS6802/tte_api,-isystem core4inet/api/AS6802/tte_api,$(COPTS)))
 endif
