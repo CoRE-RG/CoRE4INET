@@ -6,6 +6,13 @@
 # WARNINGS_ERROR=1
 # for -Werror
 
+#check for existing INET-Framework
+ifeq ("$(wildcard $(INET_PROJ)/src/inet/common/INETDefs.h)","")
+    $(error "Cannot find INET-Framework in the provided path: $(INET_PROJ). \
+    If you need to set the location of the INET-Framework set INET_PROJ variable accordingly (e.g. "make makefiles INET_PROJ=../../path/to/inet"). \
+    INET_PROJ path must be an absolute path, or a path relative to CoRE4INETs src directory")
+endif
+
 include dependencies_makefrag
 
 CFLAGS += -std=c++11
