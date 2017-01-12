@@ -16,7 +16,7 @@
 #ifndef CORE4INET_ABSTRACTSIMPLEMODULE_H_
 #define CORE4INET_ABSTRACTSIMPLEMODULE_H_
 
-#include <omnetpp.h>
+#include "core4inet/base/CoRE4INET_Defs.h"
 
 namespace CoRE4INET {
 

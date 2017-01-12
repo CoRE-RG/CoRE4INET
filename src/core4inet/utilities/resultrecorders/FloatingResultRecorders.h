@@ -16,8 +16,7 @@
 #ifndef CORE4INET_FLOATINGRESULTRECORDERS_H
 #define CORE4INET_FLOATINGRESULTRECORDERS_H
 
-//OMNeT++
-#include "omnetpp.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 
 namespace CoRE4INET{
 
