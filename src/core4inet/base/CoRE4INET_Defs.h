@@ -16,9 +16,6 @@
 #ifndef CORE4INET_DEFS_H
 #define CORE4INET_DEFS_H
 
-//OMNeT++
-#include "omnetpp.h"
-
 //INET
 #include "inet/common/INETDefs.h"
 
