@@ -74,4 +74,6 @@ else
     # on unix we can use this	
 	SYSINCLUDES := $(subst -I/,-isystem /,$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(INCLUDE_PATH)))
 endif
-COPTS += $(SYSINCLUDES)
+override SYSINCLUDES := $(subst -I/,-isystem /,$(subst -Icore4inet/api/AS6802/tte_api,-isystem core4inet/api/AS6802/tte_api,$(SYSINCLUDES)))
+
+COPTS += $(SYSINCLUDES) -isystem $(OMNETPP_INCL_DIR)
