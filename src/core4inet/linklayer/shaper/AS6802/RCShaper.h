@@ -300,11 +300,18 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
         if (priority >= 0 && static_cast<size_t>(priority) < numRcPriority)
         {
             rcQueue[static_cast<size_t>(priority)].insert(msg);
-            cComponent::emit(rcQueueLengthSignals[static_cast<size_t>(priority)],
-                    static_cast<unsigned long>(rcQueue[static_cast<size_t>(priority)].getLength()));
-            rcQueueSize[static_cast<size_t>(priority)]+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
-            cComponent::emit(rcQueueSizeSignals[static_cast<size_t>(priority)], static_cast<unsigned long>(rcQueueSize[static_cast<size_t>(priority)]));
-
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(rcQueueLengthSignals[static_cast<size_t>(priority)],
+                        static_cast<unsigned long>(rcQueue[static_cast<size_t>(priority)].getLength()));
+            }
+            rcQueueSize[static_cast<size_t>(priority)] +=
+                    static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(rcQueueSizeSignals[static_cast<size_t>(priority)],
+                        static_cast<unsigned long>(rcQueueSize[static_cast<size_t>(priority)]));
+            }
 
             TC::notifyListeners();
         }
@@ -347,9 +354,16 @@ cMessage* RCShaper<TC>::pop()
         if (!rcQueue[i].isEmpty())
         {
             inet::EtherFrame *message = static_cast<inet::EtherFrame*>(rcQueue[i].pop());
-            cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].getLength()));
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(rcQueueLengthSignals[i], static_cast<unsigned long>(rcQueue[i].getLength()));
+            }
             rcQueueSize[i]-=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(message)->getByteLength());
-            cComponent::emit(rcQueueSizeSignals[i], static_cast<unsigned long>(rcQueueSize[i]));
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(rcQueueSizeSignals[i], static_cast<unsigned long>(rcQueueSize[i]));
+
+            }
             //Reset Bag
             RCBuffer *rcBuffer = dynamic_cast<RCBuffer*>(message->getSenderModule());
             if (rcBuffer)
