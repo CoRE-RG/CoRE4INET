@@ -336,16 +336,24 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
             qQueue[static_cast<size_t>(priority)].insert(msg);
             cComponent::emit(qQueueLengthSignals[static_cast<size_t>(priority)],
                     static_cast<unsigned long>(qQueue[static_cast<size_t>(priority)].getLength()));
-            qQueueSize[static_cast<size_t>(priority)]+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
-            cComponent::emit(qQueueSizeSignals[static_cast<size_t>(priority)], static_cast<unsigned long>(qQueueSize[static_cast<size_t>(priority)]));
+            qQueueSize[static_cast<size_t>(priority)] +=
+                    static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+            cComponent::emit(qQueueSizeSignals[static_cast<size_t>(priority)],
+                    static_cast<unsigned long>(qQueueSize[static_cast<size_t>(priority)]));
             TC::notifyListeners();
         }
         else
         {
             qQueue[this->defaultPriority].insert(msg);
+            cComponent::emit(qQueueLengthSignals[this->defaultPriority],
+                    static_cast<unsigned long>(qQueue[this->defaultPriority].getLength()));
+            qQueueSize[this->defaultPriority] +=
+                    static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+            cComponent::emit(qQueueSizeSignals[this->defaultPriority],
+                    static_cast<unsigned long>(qQueueSize[this->defaultPriority]));
             TC::notifyListeners();
             EV_WARN << "Priority of message " << msg->getFullName()
-                    << " missing or not within range, using default priority " << this->defaultPriority << "!" <<endl;
+                    << " missing or not within range, using default priority " << this->defaultPriority << "!" << endl;
         }
     }
     else
@@ -441,7 +449,8 @@ void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "defaultPriority"))
     {
-        this->defaultPriority = static_cast<uint8_t>(parameterULongCheckRange(par("defaultPriority"), 0, MAX_Q_PRIORITY));
+        this->defaultPriority =
+                static_cast<uint8_t>(parameterULongCheckRange(par("defaultPriority"), 0, MAX_Q_PRIORITY));
     }
 }
 
