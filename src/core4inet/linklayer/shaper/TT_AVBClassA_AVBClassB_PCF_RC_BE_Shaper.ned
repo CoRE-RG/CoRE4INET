@@ -46,5 +46,5 @@ simple TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper extends TT_AVBClassA_PCF_RC_BE_Sh
 
     gates:
         //Input for AVB class B frames from the buffers
-        input AVBBin @labels(TTFrame);
+        input AVBBin @labels(AVBFrame);
 }
