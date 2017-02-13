@@ -14,8 +14,14 @@
 //
 
 cplusplus {{
-    //Auto-generated Messages
-    #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
+//Auto-generated Messages
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
+
+#if defined(__clang__)
+#  pragma clang diagnostic ignored "-Winconsistent-missing-override"
+#elif defined(__GNUC__)
+#  pragma GCC diagnostic ignored "-Winconsistent-missing-override"
+#endif
 }}
 
 class CoRE4INET::EthernetIIFrameWithQTag;

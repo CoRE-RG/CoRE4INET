@@ -14,8 +14,14 @@
 // 
 
 cplusplus {{
-    //INET Auto-generated Messages
-	#include "inet/linklayer/ethernet/EtherFrame_m.h"
+//INET Auto-generated Messages
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
+
+#if defined(__clang__)
+#  pragma clang diagnostic ignored "-Winconsistent-missing-override"
+#elif defined(__GNUC__)
+#  pragma GCC diagnostic ignored "-Winconsistent-missing-override"
+#endif
 }}
 
 class inet::EthernetIIFrame;

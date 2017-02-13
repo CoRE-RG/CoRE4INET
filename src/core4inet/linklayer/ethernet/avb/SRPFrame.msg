@@ -14,8 +14,14 @@
 //
 
 cplusplus {{
-    //INET
-    #include "inet/linklayer/common/MACAddress.h"
+//INET
+#include "inet/linklayer/common/MACAddress.h"
+
+#if defined(__clang__)
+#  pragma clang diagnostic ignored "-Winconsistent-missing-override"
+#elif defined(__GNUC__)
+#  pragma GCC diagnostic ignored "-Winconsistent-missing-override"
+#endif
 }}
 
 class noncobject inet::MACAddress;
