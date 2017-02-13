@@ -47,5 +47,5 @@ simple TT_AVBClassA_PCF_RC_BE_Shaper extends TT_PCF_RC_BE_Shaper
         int AVBHigherPriorityBandwidth @unit(bps) = default(0bps);
     gates:
         //Input for AVB class A frames from the buffers
-        input AVBAin @labels(TTFrame);
+        input AVBAin @labels(AVBFrame);
 }

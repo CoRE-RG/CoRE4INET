@@ -334,18 +334,38 @@ void IEEE8021QShaper<TC>::enqueueMessage(cMessage *msg)
         if (priority >= 0 && static_cast<size_t>(priority) <= MAX_Q_PRIORITY)
         {
             qQueue[static_cast<size_t>(priority)].insert(msg);
-            cComponent::emit(qQueueLengthSignals[static_cast<size_t>(priority)],
-                    static_cast<unsigned long>(qQueue[static_cast<size_t>(priority)].getLength()));
-            qQueueSize[static_cast<size_t>(priority)]+=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
-            cComponent::emit(qQueueSizeSignals[static_cast<size_t>(priority)], static_cast<unsigned long>(qQueueSize[static_cast<size_t>(priority)]));
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(qQueueLengthSignals[static_cast<size_t>(priority)],
+                        static_cast<unsigned long>(qQueue[static_cast<size_t>(priority)].getLength()));
+            }
+            qQueueSize[static_cast<size_t>(priority)] +=
+                    static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(qQueueSizeSignals[static_cast<size_t>(priority)],
+                        static_cast<unsigned long>(qQueueSize[static_cast<size_t>(priority)]));
+            }
             TC::notifyListeners();
         }
         else
         {
             qQueue[this->defaultPriority].insert(msg);
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(qQueueLengthSignals[this->defaultPriority],
+                        static_cast<unsigned long>(qQueue[this->defaultPriority].getLength()));
+            }
+            qQueueSize[this->defaultPriority] +=
+                    static_cast<size_t>(check_and_cast<inet::EtherFrame*>(msg)->getByteLength());
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(qQueueSizeSignals[this->defaultPriority],
+                        static_cast<unsigned long>(qQueueSize[this->defaultPriority]));
+            }
             TC::notifyListeners();
             EV_WARN << "Priority of message " << msg->getFullName()
-                    << " missing or not within range, using default priority " << this->defaultPriority << "!" <<endl;
+                    << " missing or not within range, using default priority " << this->defaultPriority << "!" << endl;
         }
     }
     else
@@ -378,9 +398,15 @@ cMessage* IEEE8021QShaper<TC>::pop()
         if (!qQueue[i - 1].isEmpty())
         {
             inet::EtherFrame *message = static_cast<inet::EtherFrame*>(qQueue[i - 1].pop());
-            cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i - 1].getLength()));
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(qQueueLengthSignals[i - 1], static_cast<unsigned long>(qQueue[i - 1].getLength()));
+            }
             qQueueSize[i - 1]-=static_cast<size_t>(check_and_cast<inet::EtherFrame*>(message)->getByteLength());
-            cComponent::emit(qQueueSizeSignals[i - 1], static_cast<unsigned long>(qQueueSize[i - 1]));
+            if (simTime() > getSimulation()->getWarmupPeriod())
+            {
+                cComponent::emit(qQueueSizeSignals[i - 1], static_cast<unsigned long>(qQueueSize[i - 1]));
+            }
             return message;
         }
     }
@@ -441,7 +467,8 @@ void IEEE8021QShaper<TC>::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "defaultPriority"))
     {
-        this->defaultPriority = static_cast<uint8_t>(parameterULongCheckRange(par("defaultPriority"), 0, MAX_Q_PRIORITY));
+        this->defaultPriority =
+                static_cast<uint8_t>(parameterULongCheckRange(par("defaultPriority"), 0, MAX_Q_PRIORITY));
     }
 }
 

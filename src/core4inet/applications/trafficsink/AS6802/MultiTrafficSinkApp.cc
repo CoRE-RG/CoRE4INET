@@ -31,7 +31,7 @@ void MultiTrafficSinkApp::handleMessage(cMessage *msg)
     if (msg->arrivedOn("RCin") || msg->arrivedOn("TTin"))
     {
         CTFrame *ctframe = dynamic_cast<CTFrame*>(msg);
-        if (ctframe)
+        if (ctframe && (simTime() > getSimulation()->getWarmupPeriod()))
         {
             uint16_t ctID = ctframe->getCtID();
             std::unordered_map<uint16_t, simsignal_t>::const_iterator entry = rxPkSignal.find(ctID);

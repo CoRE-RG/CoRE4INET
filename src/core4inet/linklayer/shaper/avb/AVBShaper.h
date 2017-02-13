@@ -182,20 +182,24 @@ AVBShaper<SRCLASS, TC>::AVBShaper()
 {
     state = IDLE_STATE;
 
-    avbQueue.setName("AVB Messages");
     if (SRCLASS == SR_CLASS::A)
     {
+        avbQueue.setName("AVBA Messages");
         avbQueueLengthSignalName = "avbAQueueLength";
         avbQueueSizeSignalName = "avbAQueueSize";
         avbBufferName = "avbABuffer";
         avbInName = "AVBAin";
     }
-    if (SRCLASS == SR_CLASS::B)
+    else if (SRCLASS == SR_CLASS::B)
     {
+        avbQueue.setName("AVBB Messages");
         avbQueueLengthSignalName = "avbBQueueLength";
         avbQueueSizeSignalName = "avbBQueueSize";
         avbBufferName = "avbBBuffer";
         avbInName = "AVBBin";
+    }
+    else{
+        throw cRuntimeError("No valid SR-Class specified for shaper");
     }
     avbQueueLengthSignal = cComponent::registerSignal(avbQueueLengthSignalName.c_str());
     avbQueueSizeSignal = cComponent::registerSignal(avbQueueSizeSignalName.c_str());
