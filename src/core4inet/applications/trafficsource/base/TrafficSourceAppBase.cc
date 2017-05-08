@@ -44,7 +44,7 @@ bool TrafficSourceAppBase::isEnabled()
 
 size_t TrafficSourceAppBase::getPayloadBytes(){
     handleParameterChange("payload");
-    emit(sigPayload,this->payload);
+    emit(sigPayload,static_cast<unsigned long>(this->payload));
     return this->payload;
 }
 
