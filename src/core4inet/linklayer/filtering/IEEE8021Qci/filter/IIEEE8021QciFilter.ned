@@ -21,7 +21,12 @@ package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 // @author Philipp Meyer
 //
 moduleinterface IIEEE8021QciFilter
-{        
+{
+    parameters:
+        int streamID;
+        int gateID;
+        int meterID;
+        
     gates:
         input in;
         output out;
