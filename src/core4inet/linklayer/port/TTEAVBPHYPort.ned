@@ -17,6 +17,7 @@ package core4inet.linklayer.port;
 
 import core4inet.linklayer.inControl.CT_AVB_8021Q_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
+import core4inet.linklayer.filtering.IFiltering;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
@@ -32,7 +33,7 @@ module TTEAVBPHYPort like IPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
-        
+
         // if true, all packets are received, otherwise only the ones with matching destination MAC address (This does not affect CT-Frames)
         bool promiscuous = default(false);
         //Module holds Interfacenames
@@ -41,9 +42,9 @@ module TTEAVBPHYPort like IPort
         int untaggedVID = default(0);
         //Interface allows frames with this VLAN to enter and leave the port
         string taggedVIDs = default("0");
-        
+
         *.interfaceTableModule = default(absPath(interfaceTableModule));
-        
+
     gates:
         //Input from the upper layer for best-effort Traffic
         input upperLayerIn @loose @labels(EtherFrame);
@@ -74,7 +75,11 @@ module TTEAVBPHYPort like IPort
                 @display("p=142,45");
                 promiscuous = promiscuous;
                 untaggedVID = untaggedVID;
-            	taggedVIDs = taggedVIDs;
+                taggedVIDs = taggedVIDs;
+        }
+
+        filtering: <default("NoFiltering")> like IFiltering {
+            @display("p=141.44,90.24");
         }
 
         mac: EtherMACFullDuplex {
@@ -83,12 +88,13 @@ module TTEAVBPHYPort like IPort
                 queueModule = "^.shaper";
                 @display("p=87,139");
         }
-        
+
     connections:
         upperLayerIn --> shaper.in;
         upperLayerOut <-- inControl.out;
         shaper.out --> mac.upperLayerIn;
-        inControl.in <-- mac.upperLayerOut;
+        inControl.in <-- filtering.out;
+        filtering.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
 
         TTin --> shaper.TTin;
