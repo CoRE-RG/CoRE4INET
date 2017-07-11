@@ -18,7 +18,7 @@ package core4inet.linklayer.filtering;
 //
 // Interface for the filtering module.
 //
-// @see ~NoFiltering
+// @see ~NoFiltering, ~IEEE8021Qci
 //
 // @author Philipp Meyer
 //
