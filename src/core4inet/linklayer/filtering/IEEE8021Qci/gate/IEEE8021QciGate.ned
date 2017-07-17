@@ -13,19 +13,20 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.filtering.IEEE8021Qci.filter;
+package core4inet.linklayer.filtering.IEEE8021Qci.gate;
 
 //
-// Interface for the stream filter module.
+// Base module for IEEE 802.1Qci gate. A incoming message is dropped when the gate is closed and forwarded to the configured flow meter if the gate is in state open.
+//
+// @see ~IIEEE8021QciGate
 //
 // @author Philipp Meyer
 //
-moduleinterface IIEEE8021QciFilter
+simple IEEE8021QciGate like IIEEE8021QciGate
 {
     parameters:
-        int streamID;
-        int gateID;
-        int meterID;
+        // State of the gate. O (Open) or C (Closed).
+        string state = default("O");
         
     gates:
         input in;

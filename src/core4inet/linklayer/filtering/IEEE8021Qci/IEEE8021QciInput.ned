@@ -16,7 +16,7 @@
 package core4inet.linklayer.filtering.IEEE8021Qci;
 
 //
-// TODO auto-generated module
+// @author Philipp Meyer
 //
 simple IEEE8021QciInput
 {

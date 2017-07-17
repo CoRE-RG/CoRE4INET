@@ -24,5 +24,4 @@ moduleinterface IIEEE8021QciMeter
 {        
     gates:
         input in;
-        output out;
 }

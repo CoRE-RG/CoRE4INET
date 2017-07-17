@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "IEEE8021QciOutput.h"
+#include "core4inet/linklayer/filtering/IEEE8021Qci/IEEE8021QciOutput.h"
 
 namespace CoRE4INET {
 

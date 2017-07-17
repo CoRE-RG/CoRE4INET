@@ -16,14 +16,13 @@
 #ifndef __CORE4INET_IEEE8021QCIOUTPUT_H_
 #define __CORE4INET_IEEE8021QCIOUTPUT_H_
 
-#include <omnetpp.h>
-
-using namespace omnetpp;
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
 
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @author Philipp Meyer
  */
 class IEEE8021QciOutput : public cSimpleModule
 {

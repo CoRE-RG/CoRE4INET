@@ -44,15 +44,15 @@ module IEEE8021Qci like IFiltering
             @display("p=50,75");
         }
 
-        streamFilter[numStreamFilter]: <> like IIEEE8021QciFilter {
+        streamFilter[numStreamFilter]: <default("IEEE8021QciFilter")> like IIEEE8021QciFilter {
             @display("p=250,100,c,130");
         }
 
-        streamGates[numStreamGates]: <> like IIEEE8021QciGate {
+        streamGates[numStreamGates]: <default("IEEE8021QciGate")> like IIEEE8021QciGate {
             @display("p=500,100,c,130");
         }
 
-        flowMeters[numFlowMeters]: <> like IIEEE8021QciMeter {
+        flowMeters[numFlowMeters]: <default("IEEE8021QciMeter")> like IIEEE8021QciMeter {
             @display("p=750,100,c,130");
         }
 

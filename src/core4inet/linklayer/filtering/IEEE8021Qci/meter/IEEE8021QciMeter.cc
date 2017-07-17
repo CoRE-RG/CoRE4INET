@@ -13,20 +13,20 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.filtering.IEEE8021Qci.filter;
+#include "core4inet/linklayer/filtering/IEEE8021Qci/meter/IEEE8021QciMeter.h"
 
-//
-// Interface for the stream filter module.
-//
-// @author Philipp Meyer
-//
-moduleinterface IIEEE8021QciFilter
+namespace CoRE4INET {
+
+Define_Module(IEEE8021QciMeter);
+
+void IEEE8021QciMeter::initialize()
 {
-    parameters:
-        int streamID;
-        int gateID;
-        int meterID;
-        
-    gates:
-        input in;
+    // TODO - Generated method body
 }
+
+void IEEE8021QciMeter::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
+}
+
+} //namespace

@@ -16,16 +16,16 @@
 package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 
 //
-// Interface for the stream filter module.
+// Base module for IEEE 802.1Qci filter. Forwards all messages to the configured stream gate.
 //
 // @author Philipp Meyer
 //
-moduleinterface IIEEE8021QciFilter
+simple IEEE8021QciFilter like IIEEE8021QciFilter
 {
     parameters:
-        int streamID;
-        int gateID;
-        int meterID;
+        int streamID = default(-1);
+        int gateID = default(-1);
+        int meterID = default(-1);
         
     gates:
         input in;

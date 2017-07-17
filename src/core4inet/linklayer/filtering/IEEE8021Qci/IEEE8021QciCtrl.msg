@@ -13,20 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.filtering.IEEE8021Qci.filter;
+namespace CoRE4INET;
 
 //
-// Interface for the stream filter module.
+// Control message for the IEEE 802.1Qci implementation.
 //
 // @author Philipp Meyer
 //
-moduleinterface IIEEE8021QciFilter
-{
-    parameters:
-        int streamID;
-        int gateID;
-        int meterID;
-        
-    gates:
-        input in;
+packet IEEE8021QciCtrl {
+    unsigned long streamID;
+    unsigned int gateID;
+    unsigned int meterID;
 }

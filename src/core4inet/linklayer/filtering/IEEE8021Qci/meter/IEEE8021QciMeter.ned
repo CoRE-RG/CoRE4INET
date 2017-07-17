@@ -13,20 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.filtering.IEEE8021Qci.filter;
+package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 
 //
-// Interface for the stream filter module.
+// Base module for IEEE 802.1Qci meter.
 //
 // @author Philipp Meyer
 //
-moduleinterface IIEEE8021QciFilter
+simple IEEE8021QciMeter like IIEEE8021QciMeter
 {
-    parameters:
-        int streamID;
-        int gateID;
-        int meterID;
-        
     gates:
         input in;
 }

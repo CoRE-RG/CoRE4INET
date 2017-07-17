@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "NoFiltering.h"
+#include "core4inet/linklayer/filtering/NoFiltering.h"
 
 namespace CoRE4INET {
 
