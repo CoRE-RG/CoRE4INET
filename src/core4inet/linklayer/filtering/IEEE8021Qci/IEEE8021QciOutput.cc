@@ -26,7 +26,21 @@ void IEEE8021QciOutput::initialize()
 
 void IEEE8021QciOutput::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    if (msg && msg->arrivedOn("in"))
+    {
+        send(msg, "upperLayerOut");
+    }
+    else if (msg && msg->arrivedOn("filterIn"))
+    {
+        IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg);
+        if (!ctrl)
+        {
+            throw cRuntimeError("No filtering ctrl header");
+        }
+        cMessage *data = ctrl->decapsulate();
+        delete ctrl;
+        send(data, "upperLayerOut");
+    }
 }
 
 } //namespace

@@ -31,7 +31,7 @@ import core4inet.linklayer.filtering.IEEE8021Qci.meter.IIEEE8021QciMeter;
 module IEEE8021Qci like IFiltering
 {
     parameters:
-        int numStreamFilter = default(0);
+        int numStreamFilters = default(0);
         int numStreamGates = default(0);
         int numFlowMeters = default(0);
 
@@ -44,15 +44,15 @@ module IEEE8021Qci like IFiltering
             @display("p=50,75");
         }
 
-        streamFilter[numStreamFilter]: <default("IEEE8021QciFilter")> like IIEEE8021QciFilter {
+        streamFilter[numStreamFilters]: <default("IEEE8021QciFilter")> like IIEEE8021QciFilter {
             @display("p=250,100,c,130");
         }
 
-        streamGates[numStreamGates]: <default("IEEE8021QciGate")> like IIEEE8021QciGate {
+        streamGate[numStreamGates]: <default("IEEE8021QciGate")> like IIEEE8021QciGate {
             @display("p=500,100,c,130");
         }
 
-        flowMeters[numFlowMeters]: <default("IEEE8021QciMeter")> like IIEEE8021QciMeter {
+        flowMeter[numFlowMeters]: <default("IEEE8021QciMeter")> like IIEEE8021QciMeter {
             @display("p=750,100,c,130");
         }
 

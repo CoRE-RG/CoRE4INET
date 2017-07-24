@@ -21,12 +21,54 @@ Define_Module(IEEE8021QciInput);
 
 void IEEE8021QciInput::initialize()
 {
-    // TODO - Generated method body
+    refreshStreamFilters();
 }
 
 void IEEE8021QciInput::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    if (msg && msg->arrivedOn("upperLayerIn"))
+    {
+        if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(msg))
+        {
+            //First filtering implementation just for AVB frames
+            if (AVBFrame *avbFrame = dynamic_cast<AVBFrame*>(frame))
+            {
+                bool filterFound = false;
+                for(std::vector<IEEE8021QciFilter*>::iterator it = streamFilters.begin(); it != streamFilters.end(); ++it) {
+                    IEEE8021QciFilter *streamFilter = *it;
+                    if(!streamFilter){
+                        throw cRuntimeError("StreamFilter is null");
+                    }
+                    if(streamFilter->getStreamID() == avbFrame->getStreamID()){
+                        filterFound = true;
+                        sendDirect(avbFrame, streamFilter->gate("in"));
+                        break;
+                    }
+                }
+                if(!filterFound){
+                    send(avbFrame, "out");
+                }
+            }
+            else
+            {
+                send(frame, "out");
+            }
+        }
+        else
+        {
+            throw cRuntimeError("Received message on gate upperLayerIn that is no EtherFrame");
+        }
+    }
+}
+
+void IEEE8021QciInput::refreshStreamFilters()
+{
+    int numStreamFilters = parameterULongCheckRange(getParentModule()->par("numStreamFilters"), 0, UINT32_MAX);
+    streamFilters.clear();
+    for (int i = 0; i < numStreamFilters; i++)
+    {
+        streamFilters.push_back(dynamic_cast<IEEE8021QciFilter*>(getParentModule()->getSubmodule("streamFilter", i)));
+    }
 }
 
 } //namespace

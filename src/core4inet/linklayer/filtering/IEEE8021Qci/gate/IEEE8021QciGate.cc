@@ -29,17 +29,17 @@ void IEEE8021QciGate::handleMessage(cMessage *msg)
 {
     if (state == IEEE8021QciGateState::OPEN)
     {
-        IEEE8021QciCtrl* ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg);
+        IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg);
         if (!ctrl)
         {
             throw cRuntimeError("No filtering ctrl header");
         }
-        IEEE8021QciMeter* meter = dynamic_cast<IEEE8021QciMeter*>(getParentModule()->getSubmodule("flowmeters", ctrl->getMeterID()));
+        IEEE8021QciMeter *meter = dynamic_cast<IEEE8021QciMeter*>(getParentModule()->getSubmodule("flowMeter", ctrl->getMeterID()));
         if (!meter)
         {
             throw cRuntimeError("Cannot find meter %d configured in filter for stream %d", ctrl->getMeterID(), ctrl->getStreamID());
         }
-        sendDirect(msg, meter->gate("input"));
+        sendDirect(msg, meter->gate("in"));
     }
     else if (state == IEEE8021QciGateState::CLOSE)
     {
@@ -47,7 +47,7 @@ void IEEE8021QciGate::handleMessage(cMessage *msg)
     }
 }
 
-void IEEE8021QciGate::handleParameterChange(const char* parname)
+void IEEE8021QciGate::handleParameterChange(const char *parname)
 {
     if (!parname || !strcmp(parname, "state"))
     {

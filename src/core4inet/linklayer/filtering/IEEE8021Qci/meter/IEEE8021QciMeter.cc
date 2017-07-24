@@ -26,7 +26,12 @@ void IEEE8021QciMeter::initialize()
 
 void IEEE8021QciMeter::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    IEEE8021QciOutput *streamOutput = dynamic_cast<IEEE8021QciOutput*>(getParentModule()->getSubmodule("streamOutput"));
+    if (!streamOutput)
+    {
+        throw cRuntimeError("Cannot find stream output module");
+    }
+    sendDirect(msg, streamOutput->gate("filterIn"));
 }
 
 } //namespace

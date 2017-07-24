@@ -18,6 +18,11 @@
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/linklayer/filtering/IEEE8021Qci/filter/IEEE8021QciFilter.h"
+//CoRE4INET Auto-generated Messages
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
+//INET Auto-generated Messages
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 
@@ -26,9 +31,15 @@ namespace CoRE4INET {
  */
 class IEEE8021QciInput : public cSimpleModule
 {
+  private:
+    std::vector<IEEE8021QciFilter*> streamFilters;
+
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+
+  private:
+    void refreshStreamFilters();
 };
 
 } //namespace

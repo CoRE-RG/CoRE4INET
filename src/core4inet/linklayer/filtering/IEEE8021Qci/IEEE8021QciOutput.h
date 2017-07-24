@@ -18,6 +18,8 @@
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
+//Auto-generated Messages
+#include "core4inet/linklayer/filtering/IEEE8021Qci/IEEE8021QciCtrl_m.h"
 
 namespace CoRE4INET {
 

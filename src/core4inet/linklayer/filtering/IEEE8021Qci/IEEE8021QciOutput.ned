@@ -22,5 +22,6 @@ simple IEEE8021QciOutput
 {
     gates:
         input in;
+        input filterIn;
         output upperLayerOut;
 }

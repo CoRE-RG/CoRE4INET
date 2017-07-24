@@ -63,7 +63,7 @@ class IEEE8021QciGate : public cSimpleModule
      *
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
-    virtual void handleParameterChange(const char* parname);
+    virtual void handleParameterChange(const char *parname);
 };
 
 } //namespace

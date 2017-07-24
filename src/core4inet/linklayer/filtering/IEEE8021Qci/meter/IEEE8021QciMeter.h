@@ -18,6 +18,7 @@
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
+#include "core4inet/linklayer/filtering/IEEE8021Qci/IEEE8021QciOutput.h"
 
 namespace CoRE4INET {
 
