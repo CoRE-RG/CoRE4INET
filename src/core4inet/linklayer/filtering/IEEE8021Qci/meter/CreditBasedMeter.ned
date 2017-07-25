@@ -15,12 +15,19 @@
 
 package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 
+import core4inet.utilities.classes.ITimed;
 //
 // @author Philipp Meyer
 //
-simple CreditBasedMeter extends IEEE8021QciMeter
+simple CreditBasedMeter extends IEEE8021QciMeter like ITimed
 {
     parameters:
+        @class(CreditBasedMeter);
+        
         int maxBurst = default(4);
         string srClass = default("A");
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        string oscillator = default("^.^.^.scheduler.oscillator");
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        string timer = default("^.^.^.scheduler.timer");
 }

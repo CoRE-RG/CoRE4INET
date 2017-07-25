@@ -27,7 +27,7 @@ namespace CoRE4INET {
 /**
  * @author Philipp Meyer
  */
-class IEEE8021QciMeter : public cSimpleModule
+class IEEE8021QciMeter : public virtual cSimpleModule
 {
   private:
     IEEE8021QciOutput *streamOutput;

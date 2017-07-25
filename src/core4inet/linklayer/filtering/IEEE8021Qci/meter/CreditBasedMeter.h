@@ -22,6 +22,7 @@
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/utilities/ConfigFunctions.h"
+#include "core4inet/utilities/classes/Timed.h"
 #include "core4inet/services/avb/SRP/SRPTable.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/filter/IEEE8021QciFilter.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/meter/IEEE8021QciMeter.h"
@@ -37,8 +38,10 @@ namespace CoRE4INET {
  *
  * @sa IEEE8021QciMeter
  */
-class CreditBasedMeter : public virtual IEEE8021QciMeter
+class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed
 {
+    using Timed::initialize;
+
   public:
     /**
      * @brief CBM state
@@ -106,7 +109,7 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter
      *
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
-    virtual void handleParameterChange(const char* parname);
+    virtual void handleParameterChange(const char* parname) override;
 
     /**
      * @brief Components that contain visualization-related code are expected to override refreshDisplay()
@@ -143,6 +146,8 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter
     void refreshReservedBandwidthAndMaxCredit();
 
     SimTime calculateTransmissionDuration(inet::EtherFrame *frame);
+
+    SimTime getCurrentTime();
 };
 
 } //namespace

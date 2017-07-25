@@ -22,6 +22,7 @@ Define_Module(CreditBasedMeter);
 void CreditBasedMeter::initialize()
 {
     IEEE8021QciMeter::initialize();
+    Timed::initialize();
     inet::EtherMACFullDuplex* mac =  dynamic_cast<inet::EtherMACFullDuplex*>(this->getParentModule()->getParentModule()->getSubmodule("mac"));
     if (!mac->gate("phys$o"))
     {
@@ -32,7 +33,7 @@ void CreditBasedMeter::initialize()
     this->state = this->State::R_RA;
     this->reservedBandwidth = 0;
     this->maxCredit = 0;
-    this->inChannel = mac->gate("phys$o")->findIncomingTransmissionChannel();
+    this->inChannel = mac->gate("phys$o")->findTransmissionChannel();
     this->lastCalcTime = 0;
     this->srptable = dynamic_cast<SRPTable*>(this->getParentModule()->getParentModule()->getParentModule()->getSubmodule("srpTable"));
     this->streamFilters.clear();
@@ -74,24 +75,25 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
 
 void CreditBasedMeter::handleParameterChange(const char* parname)
 {
+    Timed::handleParameterChange(parname);
     if(!parname || !strcmp(parname, "maxBurst"))
     {
-        this->maxBurst = parameterULongCheckRange(par("maxBurst"), 0, UINT32_MAX);
+        this->maxBurst = parameterULongCheckRange(this->par("maxBurst"), 0, UINT32_MAX);
     }
     if (!parname || !strcmp(parname, "srClass"))
     {
-        if (!strcmp(par("srClass").stringValue(), "A"))
+        if (!strcmp(this->par("srClass").stringValue(), "A"))
         {
             this->srClass = SR_CLASS::A;
         }
-        else if (!strcmp(par("srClass").stringValue(), "B"))
+        else if (!strcmp(this->par("srClass").stringValue(), "B"))
         {
             this->srClass = SR_CLASS::B;
         }
         else
         {
-            throw cRuntimeError("Parameter srClass of %s is %s and is only allowed to be A or B", getFullPath().c_str(),
-                    par("srClass").stringValue());
+            throw cRuntimeError("Parameter srClass of %s is %s and is only allowed to be A or B", this->getFullPath().c_str(),
+                    this->par("srClass").stringValue());
         }
     }
 }
@@ -110,7 +112,7 @@ void CreditBasedMeter::refreshDisplay() const
 
 void CreditBasedMeter::idleSlope(inet::EtherFrame *frame)
 {
-    SimTime currentTime = GetCurrentTime();
+    SimTime currentTime = this->getCurrentTime();
     SimTime transmissionDuration = calculateTransmissionDuration(frame);
     SimTime incomingTime = currentTime - transmissionDuration;
     SimTime idleDuration = incomingTime - lastCalcTime;
@@ -124,7 +126,7 @@ void CreditBasedMeter::idleSlope(inet::EtherFrame *frame)
 
 void CreditBasedMeter::sendSlope(inet::EtherFrame *frame)
 {
-    SimTime currentTime = GetCurrentTime();
+    SimTime currentTime = this->getCurrentTime();
     SimTime transmissionDuration = calculateTransmissionDuration(frame);
     this->credit -= static_cast<int>(ceil((inChannel->getNominalDatarate() - this->reservedBandwidth) * transmissionDuration.dbl()));
     this->lastCalcTime = currentTime;
@@ -193,6 +195,11 @@ SimTime CreditBasedMeter::calculateTransmissionDuration(inet::EtherFrame *frame)
     SimTime frameDuration = inChannel->calculateDuration(sizeFrame);
     delete sizeFrame;
     return frameDuration;
+}
+
+SimTime CreditBasedMeter::getCurrentTime()
+{
+    return this->getTimer()->getTotalSimTime();
 }
 
 } //namespace
