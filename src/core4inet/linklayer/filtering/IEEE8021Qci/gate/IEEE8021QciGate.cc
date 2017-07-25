@@ -21,13 +21,13 @@ Define_Module(IEEE8021QciGate);
 
 void IEEE8021QciGate::initialize()
 {
-    handleParameterChange(nullptr);
-    WATCH(state);
+    this->handleParameterChange(nullptr);
+    WATCH(this->state);
 }
 
 void IEEE8021QciGate::handleMessage(cMessage *msg)
 {
-    if (state == IEEE8021QciGateState::OPEN)
+    if (this->state == this->State::OPEN)
     {
         IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg);
         if (!ctrl)
@@ -41,7 +41,7 @@ void IEEE8021QciGate::handleMessage(cMessage *msg)
         }
         sendDirect(msg, meter->gate("in"));
     }
-    else if (state == IEEE8021QciGateState::CLOSE)
+    else if (this->state == this->State::CLOSE)
     {
         delete msg;
     }
@@ -53,16 +53,28 @@ void IEEE8021QciGate::handleParameterChange(const char *parname)
     {
         if (!strcmp(par("state").stringValue(), "O"))
         {
-            this->state = IEEE8021QciGateState::OPEN;
+            this->state = this->State::OPEN;
         }
         else if (!strcmp(par("state").stringValue(), "C"))
         {
-            this->state = IEEE8021QciGateState::CLOSE;
+            this->state = this->State::CLOSE;
         }
         else
         {
             throw cRuntimeError("Parameter state of %s is %s and is only allowed to be O or C", getFullPath().c_str(), par("state").stringValue());
         }
+    }
+}
+
+void IEEE8021QciGate::refreshDisplay() const
+{
+    if (this->state == this->State::OPEN)
+    {
+        this->getDisplayString().setTagArg("b",3,"green");
+    }
+    else if (this->state == this->State::CLOSE)
+    {
+        this->getDisplayString().setTagArg("b",3,"red");
     }
 }
 

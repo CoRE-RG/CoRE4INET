@@ -22,6 +22,7 @@ package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 //
 simple IEEE8021QciMeter like IIEEE8021QciMeter
 {
+    @display("b=,,,green");
     gates:
         input in;
 }

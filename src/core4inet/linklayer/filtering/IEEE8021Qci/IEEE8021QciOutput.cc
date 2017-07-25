@@ -32,14 +32,7 @@ void IEEE8021QciOutput::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("filterIn"))
     {
-        IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg);
-        if (!ctrl)
-        {
-            throw cRuntimeError("No filtering ctrl header");
-        }
-        cMessage *data = ctrl->decapsulate();
-        delete ctrl;
-        send(data, "upperLayerOut");
+        send(msg, "upperLayerOut");
     }
 }
 

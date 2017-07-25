@@ -34,16 +34,20 @@ namespace CoRE4INET {
 class IEEE8021QciGate : public cSimpleModule
 {
   public:
-    enum IEEE8021QciGateState
+    /**
+     * @brief State of the IEEE8021QciGate
+     */
+    enum State
     {
-        CLOSE = 0, OPEN = 1
+        CLOSE = 0,//!< CLOSE
+        OPEN = 1  //!< OPEN
     };
 
   private:
     /**
-     * @brief State of the gate.
+     * @brief Current state of the IEEE8021QciGate.
      */
-    IEEE8021QciGateState state;
+    State state;
 
   protected:
     /**
@@ -64,6 +68,11 @@ class IEEE8021QciGate : public cSimpleModule
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char *parname);
+
+    /**
+     * @brief Components that contain visualization-related code are expected to override refreshDisplay()
+     */
+    virtual void refreshDisplay() const;
 };
 
 } //namespace

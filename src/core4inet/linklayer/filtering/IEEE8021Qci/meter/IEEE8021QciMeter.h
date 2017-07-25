@@ -19,6 +19,8 @@
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/IEEE8021QciOutput.h"
+//Auto-generated Messages
+#include "core4inet/linklayer/filtering/IEEE8021Qci/IEEE8021QciCtrl_m.h"
 
 namespace CoRE4INET {
 
@@ -27,6 +29,9 @@ namespace CoRE4INET {
  */
 class IEEE8021QciMeter : public cSimpleModule
 {
+  private:
+    IEEE8021QciOutput *streamOutput;
+
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);

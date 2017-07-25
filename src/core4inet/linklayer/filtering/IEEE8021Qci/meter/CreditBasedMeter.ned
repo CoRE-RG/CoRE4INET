@@ -13,32 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QCIINPUT_H_
-#define __CORE4INET_IEEE8021QCIINPUT_H_
+package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 
-//CoRE4INET
-#include "core4inet/base/CoRE4INET_Defs.h"
-#include "core4inet/linklayer/filtering/IEEE8021Qci/filter/IEEE8021QciFilter.h"
-//CoRE4INET Auto-generated Messages
-#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
-//INET Auto-generated Messages
-#include "inet/linklayer/ethernet/EtherFrame_m.h"
-
-namespace CoRE4INET {
-
-/**
- * @author Philipp Meyer
- */
-class IEEE8021QciInput : public cSimpleModule
+//
+// @author Philipp Meyer
+//
+simple CreditBasedMeter extends IEEE8021QciMeter
 {
-  private:
-    std::vector<IEEE8021QciFilter*> streamFilters;
-
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-} //namespace
-
-#endif
+    parameters:
+        int maxBurst = default(4);
+        string srClass = default("A");
+}
