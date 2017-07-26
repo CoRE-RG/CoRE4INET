@@ -22,6 +22,8 @@ package core4inet.linklayer.filtering;
 //
 simple NoFiltering like IFiltering
 {
+    parameters:
+        @display("i=block/tunnel");
     gates:
         input in;
         output out;

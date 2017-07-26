@@ -29,7 +29,7 @@ namespace CoRE4INET {
 /**
  * @author Philipp Meyer
  */
-class IEEE8021QciFilter : public cSimpleModule
+class IEEE8021QciFilter : public virtual cSimpleModule
 {
   private:
     unsigned long streamID;

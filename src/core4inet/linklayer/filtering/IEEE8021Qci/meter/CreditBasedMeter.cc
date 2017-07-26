@@ -19,11 +19,28 @@ namespace CoRE4INET {
 
 Define_Module(CreditBasedMeter);
 
+simsignal_t CreditBasedMeter::creditSignal = registerSignal("credit");
+
+void CreditBasedMeter::receiveSignal(cComponent *source, simsignal_t signalID, long l, __attribute__((unused)) cObject *details)
+{
+    (void) source;
+    (void) signalID;
+    inet::EtherMACBase::MACReceiveState macReceiveState = static_cast<inet::EtherMACBase::MACReceiveState>(l);
+    if (macReceiveState == inet::EtherMACBase::MACReceiveState::RECEIVING_STATE) //NOT IMPLEMENTED IN INET 3.5
+    {
+        this->refreshReservedBandwidthAndMaxCredit();
+        this->idleSlope(SimTime{0});
+        this->refreshState();
+        emit(creditSignal, credit);
+    }
+}
+
 void CreditBasedMeter::initialize()
 {
     IEEE8021QciMeter::initialize();
     Timed::initialize();
     inet::EtherMACFullDuplex* mac =  dynamic_cast<inet::EtherMACFullDuplex*>(this->getParentModule()->getParentModule()->getSubmodule("mac"));
+    mac->subscribe("receiveState", this);
     if (!mac->gate("phys$o"))
     {
         throw cRuntimeError("A filtering can only be used attached to an EtherMACFullDuplex");
@@ -46,6 +63,7 @@ void CreditBasedMeter::initialize()
     WATCH(this->state);
     WATCH(this->reservedBandwidth);
     WATCH(this->maxCredit);
+    emit(creditSignal, credit);
 }
 
 void CreditBasedMeter::handleMessage(cMessage *msg)
@@ -61,7 +79,7 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
         if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(data))
         {
             this->refreshReservedBandwidthAndMaxCredit();
-            this->idleSlope(frame);
+            this->idleSlope(calculateTransmissionDuration(frame));
             this->refreshState();
             this->meter(frame);
         }
@@ -70,6 +88,14 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
             throw cRuntimeError("Encapsulated packet of received message on gate in that is no EtherFrame");
         }
         delete ctrl;
+    }
+    else if (msg && msg->arrivedOn("schedulerIn"))
+    {
+        this->refreshReservedBandwidthAndMaxCredit();
+        this->idleSlope(SimTime{0});
+        this->refreshState();
+        emit(creditSignal, credit);
+        delete msg;
     }
 }
 
@@ -110,18 +136,20 @@ void CreditBasedMeter::refreshDisplay() const
     }
 }
 
-void CreditBasedMeter::idleSlope(inet::EtherFrame *frame)
+void CreditBasedMeter::idleSlope(SimTime delta)
 {
     SimTime currentTime = this->getCurrentTime();
-    SimTime transmissionDuration = calculateTransmissionDuration(frame);
-    SimTime incomingTime = currentTime - transmissionDuration;
-    SimTime idleDuration = incomingTime - lastCalcTime;
-    this->credit += static_cast<int>(ceil(this->reservedBandwidth * idleDuration.dbl()));
-    if (this->credit > this->maxCredit)
+    SimTime calcTime = currentTime - delta;
+    SimTime idleDuration = calcTime - lastCalcTime;
+    if (idleDuration.dbl() > 0)
     {
-        this->credit = this->maxCredit;
+        this->credit += static_cast<int>(ceil(this->reservedBandwidth * idleDuration.dbl()));
+        if (this->credit > this->maxCredit)
+        {
+            this->credit = this->maxCredit;
+        }
+        this->lastCalcTime = calcTime;
     }
-    this->lastCalcTime = incomingTime;
 }
 
 void CreditBasedMeter::sendSlope(inet::EtherFrame *frame)
@@ -130,6 +158,8 @@ void CreditBasedMeter::sendSlope(inet::EtherFrame *frame)
     SimTime transmissionDuration = calculateTransmissionDuration(frame);
     this->credit -= static_cast<int>(ceil((inChannel->getNominalDatarate() - this->reservedBandwidth) * transmissionDuration.dbl()));
     this->lastCalcTime = currentTime;
+    emit(creditSignal, credit);
+    this->scheduleCreditReachZero();
 }
 
 void CreditBasedMeter::refreshState()
@@ -200,6 +230,18 @@ SimTime CreditBasedMeter::calculateTransmissionDuration(inet::EtherFrame *frame)
 SimTime CreditBasedMeter::getCurrentTime()
 {
     return this->getTimer()->getTotalSimTime();
+}
+
+void CreditBasedMeter::scheduleCreditReachZero()
+{
+    if (this->credit < 0)
+    {
+        SimTime duration = SimTime{static_cast<double>(abs(this->credit)) / this->reservedBandwidth};
+        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+        event->setTimer(static_cast<uint64_t>(ceil(duration / this->getOscillator()->getPreciseTick())));
+        event->setDestinationGate(gate("schedulerIn"));
+        this->getTimer()->registerEvent(event);
+    }
 }
 
 } //namespace

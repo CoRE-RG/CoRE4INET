@@ -31,6 +31,7 @@ import core4inet.linklayer.filtering.IEEE8021Qci.meter.IIEEE8021QciMeter;
 module IEEE8021Qci like IFiltering
 {
     parameters:
+        @display("i=block/filter");  
         int numStreamFilters = default(0);
         int numStreamGates = default(0);
         int numFlowMeters = default(0);

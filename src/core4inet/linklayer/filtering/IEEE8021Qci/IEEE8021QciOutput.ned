@@ -20,6 +20,8 @@ package core4inet.linklayer.filtering.IEEE8021Qci;
 //
 simple IEEE8021QciOutput
 {
+    parameters:
+        @display("i=block/join");  
     gates:
         input in;
         input filterIn;

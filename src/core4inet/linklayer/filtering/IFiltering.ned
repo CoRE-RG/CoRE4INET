@@ -23,7 +23,9 @@ package core4inet.linklayer.filtering;
 // @author Philipp Meyer
 //
 moduleinterface IFiltering
-{        
+{
+    parameters:
+        @display("i=block/filter");
     gates:
         input in;
         output out;

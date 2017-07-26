@@ -23,6 +23,10 @@ simple CreditBasedMeter extends IEEE8021QciMeter like ITimed
 {
     parameters:
         @class(CreditBasedMeter);
+        //Signal emitted when the credit of the CBM algorithm changes
+        @signal[credit](type=long);
+        //Statistic of the credit of the CBM algorithm
+        @statistic[credit](title="Credit"; source=credit; unit=b; record=vector; interpolationmode=linear;);
         
         int maxBurst = default(4);
         string srClass = default("A");
@@ -30,4 +34,7 @@ simple CreditBasedMeter extends IEEE8021QciMeter like ITimed
         string oscillator = default("^.^.^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.^.^.scheduler.timer");
+    gates:
+        //Input gate for the incoming SchedulerActionTimeEvent messages
+        input schedulerIn @directIn;
 }

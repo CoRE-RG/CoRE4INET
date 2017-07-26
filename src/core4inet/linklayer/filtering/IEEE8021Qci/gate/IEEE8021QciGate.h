@@ -31,7 +31,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class IEEE8021QciGate : public cSimpleModule
+class IEEE8021QciGate : public virtual cSimpleModule
 {
   public:
     /**

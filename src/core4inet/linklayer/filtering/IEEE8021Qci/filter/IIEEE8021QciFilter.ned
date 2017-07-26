@@ -23,6 +23,7 @@ package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 moduleinterface IIEEE8021QciFilter
 {
     parameters:
+        @display("i=block/table");
         int streamID;
         int gateID;
         int meterID;

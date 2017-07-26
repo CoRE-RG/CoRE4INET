@@ -36,9 +36,9 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  *
- * @sa IEEE8021QciMeter
+ * @sa IEEE8021QciMeter, Timed, cListener
  */
-class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed
+class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, cListener
 {
     using Timed::initialize;
 
@@ -51,6 +51,12 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed
         R_RA,//!< Running Receiving Allowed
         R_RF //!< Running Receiving Forbidden
     };
+
+  protected:
+    /**
+     * Signal that is emitted every time the credit is recalculated.
+     */
+    static simsignal_t creditSignal;
 
   private:
     /**
@@ -91,6 +97,16 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed
 
     SR_CLASS srClass;
 
+  public:
+    /**
+     * @brief Handles incoming signals
+     *
+     * @param source incoming signal source
+     * @param signalID id of the incoming signal
+     * @param l signal long value
+     */
+    virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details) override;
+
   protected:
     /**
      * @brief Initializes the CBM
@@ -118,11 +134,11 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed
 
   private:
     /**
-     * @brief Refresh to past credit value of the CBM
+     * @brief Calculates the credit with idle slope till current SimTime - delta
      *
-     * @param frame The incoming inet EtherFrame
+     * @param delta SimTime to be subtracted from current SimTime
      */
-    void idleSlope(inet::EtherFrame *frame);
+    void idleSlope(SimTime delta);
 
     /**
      * @brief Refresh to current credit value of the CBM
@@ -148,6 +164,8 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed
     SimTime calculateTransmissionDuration(inet::EtherFrame *frame);
 
     SimTime getCurrentTime();
+
+    void scheduleCreditReachZero();
 };
 
 } //namespace
