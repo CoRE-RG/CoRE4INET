@@ -184,6 +184,7 @@ void CreditBasedMeter::meter(inet::EtherFrame *frame)
     }
     else if (this->state == this->State::R_RF)
     {
+        bubble("Frame dropped!");
         delete frame;
     }
 }

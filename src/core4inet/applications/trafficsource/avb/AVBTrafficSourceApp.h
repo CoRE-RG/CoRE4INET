@@ -18,11 +18,20 @@
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
-#include "core4inet/applications/trafficsource/base/TrafficSourceAppBase.h"
-#include "core4inet/utilities/classes/Timed.h"
 #include "core4inet/base/avb/AVBDefs.h"
+#include "core4inet/base/NotifierConsts.h"
+#include "core4inet/utilities/ConfigFunctions.h"
+#include "core4inet/utilities/HelperFunctions.h"
+#include "core4inet/utilities/classes/Timed.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
+#include "core4inet/applications/trafficsource/base/TrafficSourceAppBase.h"
 //INET
+#include "inet/common/ModuleAccess.h"
 #include "inet/linklayer/common/MACAddress.h"
+#include "inet/linklayer/ethernet/Ethernet.h"
+#include "inet/linklayer/ethernet/EtherMACFullDuplex.h"
+//Auto-generated Messages
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 
 namespace CoRE4INET {
 
@@ -39,7 +48,7 @@ namespace CoRE4INET {
 
 class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual Timed, public virtual cListener
 {
-    private:
+    protected:
         bool isStreaming;
         SR_CLASS srClass;
         unsigned long streamID;
@@ -66,7 +75,7 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
         /**
          * @brief Sends an AVBFrame
          */
-        void sendAVBFrame();
+        virtual void sendAVBFrame();
         /**
          * @brief Schedule next send interval
          */
