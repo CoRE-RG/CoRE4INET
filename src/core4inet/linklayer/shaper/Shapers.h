@@ -19,6 +19,7 @@
 //CoRE4INET
 #include "core4inet/linklayer/shaper/base/BaseShaper.h"
 #include "core4inet/linklayer/shaper/base/BEShaper.h"
+#include "core4inet/linklayer/shaper/base/BackdoorShaper.h"
 
 #ifdef WITH_IEEE8021Q_COMMON
 #include "core4inet/linklayer/shaper/IEEE8021Q/IEEE8021QShaper.h"
@@ -181,6 +182,27 @@ class TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper : public TTShaper<AVBShaper<SR_
 {
     public:
         virtual ~TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper();
+};
+
+/**
+ * @brief Class representing the Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper module
+ *
+ * This shaper handles traffic in the following order (highest to lowest priority):
+ * - Backdoor
+ * - time-triggered
+ * - AVB
+ * - PCF
+ * - rate-constrained
+ * - IEEE 802.1Q
+ *
+ * @see TTShaper, AVBClassAShaper, AVBClassBShaper, PCFShaper, RCShaper, IEEE8021QShaper, BaseShaper
+ *
+ * @author Philipp Meyer
+ */
+class Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper : public BackdoorShaper<TTShaper<AVBShaper<SR_CLASS::A, AVBShaper<SR_CLASS::B, PCFShaper<RCShaper<IEEE8021QShaper<BaseShaper> > > > > > >
+{
+    public:
+        virtual ~Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper();
 };
 #endif
 

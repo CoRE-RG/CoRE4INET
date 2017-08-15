@@ -19,6 +19,30 @@ namespace CoRE4INET {
 
 Define_Module(AVBAttackTrafficSourceApp);
 
+void AVBAttackTrafficSourceApp::sendAVBFrame()
+{
+    char frameNname[10];
+    sprintf(frameNname, "Stream %lu", streamID);
+    AVBFrame *outFrame = new AVBFrame(frameNname);
+    outFrame->setTimestamp();
+    outFrame->setStreamID(streamID);
+    outFrame->setDest(multicastMAC);
+    outFrame->setVID(vlan_id);
+
+    cPacket *payloadPacket = new cPacket;
+    payloadPacket->setTimestamp();
+    payloadPacket->setByteLength(static_cast<int64_t>(getPayloadBytes()));
+    outFrame->encapsulate(payloadPacket);
+    //Padding
+    if (outFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+    {
+        outFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+    }
+    sendDirect(outFrame, this->getParentModule()->getSubmodule("phy", 0)->gate("Backdoorin"));
+
+    scheduleInterval();
+}
+
 void AVBAttackTrafficSourceApp::scheduleInterval()
 {
     //class measurement interval A=125us B=250us

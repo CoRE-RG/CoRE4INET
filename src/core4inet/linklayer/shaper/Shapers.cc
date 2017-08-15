@@ -41,4 +41,8 @@ Define_Module(TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper);
 TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper::~TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper()
 {
 }
+Define_Module(Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper);
+Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper::~Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper()
+{
+}
 #endif

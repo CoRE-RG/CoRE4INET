@@ -1,6 +1,7 @@
 package core4inet.examples.avb_AS6802.large_network;
 
 import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
+import core4inet.nodes.ethernet.avb_AS6802.CorruptedTTEAVBEtherHost;
 
 network large_network
 {
@@ -29,7 +30,7 @@ network large_network
                 ethg[4];
         }
 
-        node_1: TTEAVBEtherHost {
+        node_1: CorruptedTTEAVBEtherHost {
             @display("p=40,35");
         }
         node_2: TTEAVBEtherHost {

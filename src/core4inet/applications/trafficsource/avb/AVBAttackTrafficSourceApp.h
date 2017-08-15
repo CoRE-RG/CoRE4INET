@@ -28,6 +28,10 @@ class AVBAttackTrafficSourceApp : public virtual AVBTrafficSourceApp
 {
     protected:
         /**
+         * @brief Sends an AVBFrame
+         */
+        virtual void sendAVBFrame() override;
+        /**
          * @brief Schedule next send interval
          */
         virtual void scheduleInterval() override;
