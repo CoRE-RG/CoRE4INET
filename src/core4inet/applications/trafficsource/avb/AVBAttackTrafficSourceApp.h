@@ -26,7 +26,14 @@ namespace CoRE4INET {
  */
 class AVBAttackTrafficSourceApp : public virtual AVBTrafficSourceApp
 {
+    private:
+        unsigned int attackPattern;
+
     protected:
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize() override;
         /**
          * @brief Sends an AVBFrame
          */
@@ -35,6 +42,12 @@ class AVBAttackTrafficSourceApp : public virtual AVBTrafficSourceApp
          * @brief Schedule next send interval
          */
         virtual void scheduleInterval() override;
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

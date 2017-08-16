@@ -78,6 +78,8 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
         cPacket *data = ctrl->decapsulate();
         if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(data))
         {
+            this->numFramesReceived++;
+            this->numBytesReceived += frame->getByteLength();
             this->refreshReservedBandwidthAndMaxCredit();
             this->idleSlope(calculateTransmissionDuration(frame));
             this->refreshState();

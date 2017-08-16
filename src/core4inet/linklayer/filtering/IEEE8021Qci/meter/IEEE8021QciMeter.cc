@@ -26,22 +26,44 @@ void IEEE8021QciMeter::initialize()
     {
         throw cRuntimeError("Cannot find stream output module");
     }
+    WATCH(this->numFramesReceived);
+    WATCH(this->numFramesSent);
+    WATCH(this->numBytesReceived);
+    WATCH(this->numBytesSent);
 }
 
 void IEEE8021QciMeter::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
+        this->numFramesSent++;
         if (IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg))
         {
             cPacket *data = ctrl->decapsulate();
             delete ctrl;
+            this->numBytesSent += data->getByteLength();
             sendDirect(data, streamOutput->gate("filterIn"));
         }
         else
         {
+            this->numBytesSent += dynamic_cast<cPacket*>(msg)->getByteLength();
             sendDirect(msg, streamOutput->gate("filterIn"));
         }
+    }
+}
+
+void IEEE8021QciMeter::finish()
+{
+    simtime_t t = simTime();
+    if (t > 0)
+    {
+        if (numFramesReceived > 0)
+        {
+            recordScalar("frames/sec rcvd", this->numFramesReceived / t);
+            recordScalar("bits/sec rcvd", (8.0 * this->numBytesReceived) / t);
+        }
+        recordScalar("frames/sec passed", this->numFramesSent / t);
+        recordScalar("bits/sec passed", (8.0 * this->numBytesSent) / t);
     }
 }
 

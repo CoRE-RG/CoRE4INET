@@ -24,5 +24,5 @@ simple AVBAttackTrafficSourceApp extends AVBTrafficSourceApp
         @class(AVBAttackTrafficSourceApp);
         @display("i=,blue");
         
-        
+        string attackPattern = default("No");
 }

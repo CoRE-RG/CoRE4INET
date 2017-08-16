@@ -29,12 +29,19 @@ namespace CoRE4INET {
  */
 class IEEE8021QciMeter : public virtual cSimpleModule
 {
+  protected:
+    unsigned long numFramesReceived = 0;
+    unsigned long numFramesSent = 0;
+    unsigned long numBytesReceived = 0;
+    unsigned long numBytesSent = 0;
+
   private:
     IEEE8021QciOutput *streamOutput;
 
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+    virtual void finish() override;
 };
 
 } //namespace
