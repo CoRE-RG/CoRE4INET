@@ -30,7 +30,7 @@ void CreditBasedMeter::receiveSignal(cComponent *source, simsignal_t signalID, l
     if (macReceiveState == inet::EtherMACBase::MACReceiveState::RECEIVING_STATE) //NOT IMPLEMENTED IN INET 3.5
     {
         this->refreshReservedBandwidthAndMaxCredit();
-        this->idleSlope(SimTime{0});
+        this->idleSlope(simtime_t{0});
         this->refreshState();
         emit(creditSignal, credit);
     }
@@ -83,7 +83,7 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
             this->numBytesReceived += frame->getByteLength();
             emit(frameReceivedSignal, static_cast<long>(frame->getByteLength()));
             this->refreshReservedBandwidthAndMaxCredit();
-            this->idleSlope(SimTime{0});
+            this->idleSlope(simtime_t{0});
             this->refreshState();
             this->meter(frame);
         }
@@ -95,12 +95,9 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
-        if (!strcmp(msg->getName(), "Sendslope End"))
-        {
-            this->scheduleCreditReachZero();
-        }
         this->refreshReservedBandwidthAndMaxCredit();
-        this->idleSlope(SimTime{0});
+        this->idleSlope(simtime_t{0});
+        this->scheduleCreditReachZero();
         this->refreshState();
         emit(creditSignal, credit);
         delete msg;
@@ -144,11 +141,11 @@ void CreditBasedMeter::refreshDisplay() const
     }
 }
 
-void CreditBasedMeter::idleSlope(SimTime delta)
+void CreditBasedMeter::idleSlope(simtime_t delta)
 {
-    SimTime currentTime = this->getCurrentTime();
-    SimTime calcTime = currentTime - delta;
-    SimTime idleDuration = calcTime - lastCalcTime;
+    simtime_t currentTime = this->getCurrentTime();
+    simtime_t calcTime = currentTime - delta;
+    simtime_t idleDuration = calcTime - lastCalcTime;
     if (idleDuration.dbl() > 0)
     {
         this->credit += static_cast<int>(ceil(this->reservedBandwidth * idleDuration.dbl()));
@@ -162,11 +159,11 @@ void CreditBasedMeter::idleSlope(SimTime delta)
 
 void CreditBasedMeter::sendSlope(inet::EtherFrame *frame)
 {
-    SimTime currentTime = this->getCurrentTime();
-    SimTime transmissionDuration = calculateTransmissionDuration(frame);
+    simtime_t currentTime = this->getCurrentTime();
+    simtime_t transmissionDuration = calculateTransmissionDuration(frame);
     this->credit -= static_cast<int>(ceil((inChannel->getNominalDatarate() - this->reservedBandwidth) * transmissionDuration.dbl()));
     this->lastCalcTime = currentTime + transmissionDuration;
-    this->scheduleEvent(transmissionDuration, "Sendslope End");
+    this->scheduleEvent(transmissionDuration);
 }
 
 void CreditBasedMeter::refreshState()
@@ -214,29 +211,29 @@ void CreditBasedMeter::refreshReservedBandwidthAndMaxCredit()
             }
         }
     }
-    SimTime maxDuration;
+    simtime_t maxDuration;
     if (this->srClass == SR_CLASS::A)
     {
-        maxDuration = SimTime{125, SIMTIME_US};
+        maxDuration = simtime_t{125, SIMTIME_US};
     }
     else if (this->srClass == SR_CLASS::B)
     {
-        maxDuration = SimTime{250, SIMTIME_US};
+        maxDuration = simtime_t{250, SIMTIME_US};
     }
-    SimTime duration = (maxSingleStreamBandwidth / inChannel->getNominalDatarate()) * maxDuration;
+    simtime_t duration = (maxSingleStreamBandwidth / inChannel->getNominalDatarate()) * maxDuration;
     this->maxCredit = static_cast<int>(ceil((inChannel->getNominalDatarate() - this->reservedBandwidth) * duration.dbl() * (this->maxBurst - 1)));
 }
 
-SimTime CreditBasedMeter::calculateTransmissionDuration(inet::EtherFrame *frame)
+simtime_t CreditBasedMeter::calculateTransmissionDuration(inet::EtherFrame *frame)
 {
     inet::EtherFrame *sizeFrame = frame->dup();
     sizeFrame->setByteLength(sizeFrame->getByteLength() + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
-    SimTime frameDuration = inChannel->calculateDuration(sizeFrame);
+    simtime_t frameDuration = inChannel->calculateDuration(sizeFrame);
     delete sizeFrame;
     return frameDuration;
 }
 
-SimTime CreditBasedMeter::getCurrentTime()
+simtime_t CreditBasedMeter::getCurrentTime()
 {
     return this->getTimer()->getTotalSimTime();
 }
@@ -245,14 +242,14 @@ void CreditBasedMeter::scheduleCreditReachZero()
 {
     if (this->credit < 0)
     {
-        SimTime duration = SimTime{static_cast<double>(abs(this->credit)) / this->reservedBandwidth};
-        this->scheduleEvent(duration, "Credit reach zero");
+        simtime_t duration = simtime_t{static_cast<double>(abs(this->credit)) / this->reservedBandwidth};
+        this->scheduleEvent(duration);
     }
 }
 
-void CreditBasedMeter::scheduleEvent(SimTime duration, const char* name)
+void CreditBasedMeter::scheduleEvent(simtime_t duration)
 {
-    SchedulerTimerEvent *event = new SchedulerTimerEvent(name, TIMER_EVENT);
+    SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
     event->setTimer(static_cast<uint64_t>(ceil(duration / this->getOscillator()->getPreciseTick())));
     event->setDestinationGate(gate("schedulerIn"));
     this->getTimer()->registerEvent(event);

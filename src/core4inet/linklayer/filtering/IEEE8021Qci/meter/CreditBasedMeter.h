@@ -139,7 +139,7 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
      *
      * @param delta SimTime to be subtracted from current SimTime
      */
-    void idleSlope(SimTime delta);
+    void idleSlope(simtime_t delta);
 
     /**
      * @brief Refresh to current credit value of the CBM
@@ -162,13 +162,13 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
 
     void refreshReservedBandwidthAndMaxCredit();
 
-    SimTime calculateTransmissionDuration(inet::EtherFrame *frame);
+    simtime_t calculateTransmissionDuration(inet::EtherFrame *frame);
 
-    SimTime getCurrentTime();
+    simtime_t getCurrentTime();
 
     void scheduleCreditReachZero();
 
-    void scheduleEvent(SimTime duration, const char* name);
+    void scheduleEvent(simtime_t duration);
 };
 
 } //namespace
