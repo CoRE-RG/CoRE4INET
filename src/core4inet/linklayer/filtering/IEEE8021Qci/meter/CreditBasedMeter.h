@@ -57,6 +57,7 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
      * Signal that is emitted every time the credit is recalculated.
      */
     static simsignal_t creditSignal;
+    static simsignal_t frameReceivedSignal;
 
   private:
     /**
@@ -93,7 +94,7 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
     /**
      * @brief Max number of frames in a burst
      */
-    unsigned int maxBurst;
+    size_t maxBurst;
 
     SR_CLASS srClass;
 
@@ -166,6 +167,8 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
     SimTime getCurrentTime();
 
     void scheduleCreditReachZero();
+
+    void scheduleEvent(SimTime duration, const char* name);
 };
 
 } //namespace

@@ -19,6 +19,8 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QciMeter);
 
+simsignal_t IEEE8021QciMeter::framePassedSignal = registerSignal("framePassed");
+
 void IEEE8021QciMeter::initialize()
 {
     streamOutput = dynamic_cast<IEEE8021QciOutput*>(getParentModule()->getSubmodule("streamOutput"));
@@ -42,11 +44,13 @@ void IEEE8021QciMeter::handleMessage(cMessage *msg)
             cPacket *data = ctrl->decapsulate();
             delete ctrl;
             this->numBytesSent += data->getByteLength();
+            emit(framePassedSignal, static_cast<long>(data->getByteLength()));
             sendDirect(data, streamOutput->gate("filterIn"));
         }
         else
         {
             this->numBytesSent += dynamic_cast<cPacket*>(msg)->getByteLength();
+            emit(framePassedSignal, static_cast<long>(dynamic_cast<cPacket*>(msg)->getByteLength()));
             sendDirect(msg, streamOutput->gate("filterIn"));
         }
     }

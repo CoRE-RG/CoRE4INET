@@ -20,6 +20,7 @@ namespace CoRE4INET {
 Define_Module(CreditBasedMeter);
 
 simsignal_t CreditBasedMeter::creditSignal = registerSignal("credit");
+simsignal_t CreditBasedMeter::frameReceivedSignal = registerSignal("frameReceived");
 
 void CreditBasedMeter::receiveSignal(cComponent *source, simsignal_t signalID, long l, __attribute__((unused)) cObject *details)
 {
@@ -80,8 +81,9 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
         {
             this->numFramesReceived++;
             this->numBytesReceived += frame->getByteLength();
+            emit(frameReceivedSignal, static_cast<long>(frame->getByteLength()));
             this->refreshReservedBandwidthAndMaxCredit();
-            this->idleSlope(calculateTransmissionDuration(frame));
+            this->idleSlope(SimTime{0});
             this->refreshState();
             this->meter(frame);
         }
@@ -93,6 +95,10 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
+        if (!strcmp(msg->getName(), "Sendslope End"))
+        {
+            this->scheduleCreditReachZero();
+        }
         this->refreshReservedBandwidthAndMaxCredit();
         this->idleSlope(SimTime{0});
         this->refreshState();
@@ -159,9 +165,8 @@ void CreditBasedMeter::sendSlope(inet::EtherFrame *frame)
     SimTime currentTime = this->getCurrentTime();
     SimTime transmissionDuration = calculateTransmissionDuration(frame);
     this->credit -= static_cast<int>(ceil((inChannel->getNominalDatarate() - this->reservedBandwidth) * transmissionDuration.dbl()));
-    this->lastCalcTime = currentTime;
-    emit(creditSignal, credit);
-    this->scheduleCreditReachZero();
+    this->lastCalcTime = currentTime + transmissionDuration;
+    this->scheduleEvent(transmissionDuration, "Sendslope End");
 }
 
 void CreditBasedMeter::refreshState()
@@ -181,6 +186,7 @@ void CreditBasedMeter::meter(inet::EtherFrame *frame)
     if (this->state == this->State::R_RA)
     {
         IEEE8021QciMeter::handleMessage(frame);
+        emit(creditSignal, credit);
         this->sendSlope(frame);
         this->refreshState();
     }
@@ -240,11 +246,16 @@ void CreditBasedMeter::scheduleCreditReachZero()
     if (this->credit < 0)
     {
         SimTime duration = SimTime{static_cast<double>(abs(this->credit)) / this->reservedBandwidth};
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(static_cast<uint64_t>(ceil(duration / this->getOscillator()->getPreciseTick())));
-        event->setDestinationGate(gate("schedulerIn"));
-        this->getTimer()->registerEvent(event);
+        this->scheduleEvent(duration, "Credit reach zero");
     }
+}
+
+void CreditBasedMeter::scheduleEvent(SimTime duration, const char* name)
+{
+    SchedulerTimerEvent *event = new SchedulerTimerEvent(name, TIMER_EVENT);
+    event->setTimer(static_cast<uint64_t>(ceil(duration / this->getOscillator()->getPreciseTick())));
+    event->setDestinationGate(gate("schedulerIn"));
+    this->getTimer()->registerEvent(event);
 }
 
 } //namespace

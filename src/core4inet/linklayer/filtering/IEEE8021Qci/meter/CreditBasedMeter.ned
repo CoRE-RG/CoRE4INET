@@ -25,8 +25,10 @@ simple CreditBasedMeter extends IEEE8021QciMeter like ITimed
         @class(CreditBasedMeter);
         //Signal emitted when the credit of the CBM algorithm changes
         @signal[credit](type=long);
+        @signal[frameReceived](type=long);
         //Statistic of the credit of the CBM algorithm
         @statistic[credit](title="Credit"; source=credit; unit=b; record=vector; interpolationmode=linear;);
+        @statistic[framesReceived](title="Frames Received"; source=frameReceived; unit=B; record=vector; interpolationmode=none;);
         
         int maxBurst = default(4);
         string srClass = default("A");

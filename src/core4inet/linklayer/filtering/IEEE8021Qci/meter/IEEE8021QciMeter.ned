@@ -22,7 +22,12 @@ package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 //
 simple IEEE8021QciMeter like IIEEE8021QciMeter
 {
-    @display("b=,,,green");
+    parameters:
+    	@display("b=,,,green");
+    	@signal[framePassed](type=long);
+        //Statistic of the credit of the CBM algorithm
+        @statistic[framesPassed](title="Frames Passed"; source=framePassed; unit=B; record=vector; interpolationmode=none;);
+        
     gates:
         input in;
 }
