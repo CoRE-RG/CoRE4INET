@@ -21,6 +21,7 @@ Define_Module(CreditBasedMeter);
 
 simsignal_t CreditBasedMeter::creditSignal = registerSignal("credit");
 simsignal_t CreditBasedMeter::frameReceivedSignal = registerSignal("frameReceived");
+simsignal_t CreditBasedMeter::frameDroppedSignal = registerSignal("frameDropped");
 
 void CreditBasedMeter::receiveSignal(cComponent *source, simsignal_t signalID, long l, __attribute__((unused)) cObject *details)
 {
@@ -190,6 +191,7 @@ void CreditBasedMeter::meter(inet::EtherFrame *frame)
     else if (this->state == this->State::R_RF)
     {
         bubble("Frame dropped!");
+        emit(frameDroppedSignal, static_cast<long>(frame->getByteLength()));
         delete frame;
     }
 }

@@ -57,7 +57,14 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
      * Signal that is emitted every time the credit is recalculated.
      */
     static simsignal_t creditSignal;
+    /**
+     * Signal that is emitted every time a frame is received
+     */
     static simsignal_t frameReceivedSignal;
+    /**
+     * Signal that is emitted every time a frame is dropped.
+     */
+    static simsignal_t frameDroppedSignal;
 
   private:
     /**
