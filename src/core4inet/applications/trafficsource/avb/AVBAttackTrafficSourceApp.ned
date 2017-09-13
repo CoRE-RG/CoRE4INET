@@ -25,4 +25,7 @@ simple AVBAttackTrafficSourceApp extends AVBTrafficSourceApp
         @display("i=,blue");
         
         string attackPattern = default("No");
+        int spamSize = default(0);
+        volatile double spamWaitInterval @unit(s) = default(125us);
+        
 }

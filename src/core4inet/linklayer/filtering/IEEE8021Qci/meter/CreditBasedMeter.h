@@ -105,6 +105,10 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
 
     SR_CLASS srClass;
 
+    simtime_t lastEmitCredit;
+
+    bool isSendSlopeActive;
+
   public:
     /**
      * @brief Handles incoming signals
@@ -175,7 +179,13 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
 
     void scheduleCreditReachZero();
 
+    void scheduleCreditReachMax();
+
     void scheduleEvent(simtime_t duration);
+
+    void scheduleEvent(simtime_t duration, const char *name);
+
+    void emitCredit();
 };
 
 } //namespace

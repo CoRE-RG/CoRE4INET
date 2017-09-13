@@ -33,7 +33,7 @@ void CreditBasedMeter::receiveSignal(cComponent *source, simsignal_t signalID, l
         this->refreshReservedBandwidthAndMaxCredit();
         this->idleSlope(simtime_t{0});
         this->refreshState();
-        emit(creditSignal, credit);
+        this->emitCredit();
     }
 }
 
@@ -60,12 +60,13 @@ void CreditBasedMeter::initialize()
     {
         this->streamFilters.push_back(dynamic_cast<IEEE8021QciFilter*>(this->getParentModule()->getSubmodule("streamFilter", i)));
     }
+    this->lastEmitCredit = 0;
+    this->isSendSlopeActive = false;
     this->handleParameterChange(nullptr);
     WATCH(this->credit);
     WATCH(this->state);
     WATCH(this->reservedBandwidth);
     WATCH(this->maxCredit);
-    emit(creditSignal, credit);
 }
 
 void CreditBasedMeter::handleMessage(cMessage *msg)
@@ -96,11 +97,18 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
-        this->refreshReservedBandwidthAndMaxCredit();
-        this->idleSlope(simtime_t{0});
-        this->scheduleCreditReachZero();
-        this->refreshState();
-        emit(creditSignal, credit);
+        if (!strcmp(msg->getName(), "CBM_SENDSLOPE_END"))
+            isSendSlopeActive = false;
+        if (!isSendSlopeActive)
+        {
+            this->refreshReservedBandwidthAndMaxCredit();
+            this->idleSlope(simtime_t{0});
+            this->scheduleCreditReachZero();
+            this->scheduleCreditReachMax();
+            this->refreshState();
+            this->emitCredit();
+        }
+
         delete msg;
     }
 }
@@ -164,7 +172,8 @@ void CreditBasedMeter::sendSlope(inet::EtherFrame *frame)
     simtime_t transmissionDuration = calculateTransmissionDuration(frame);
     this->credit -= static_cast<int>(ceil((inChannel->getNominalDatarate() - this->reservedBandwidth) * transmissionDuration.dbl()));
     this->lastCalcTime = currentTime + transmissionDuration;
-    this->scheduleEvent(transmissionDuration);
+    this->scheduleEvent(transmissionDuration, "CBM_SENDSLOPE_END");
+    this->isSendSlopeActive = true;
 }
 
 void CreditBasedMeter::refreshState()
@@ -184,7 +193,7 @@ void CreditBasedMeter::meter(inet::EtherFrame *frame)
     if (this->state == this->State::R_RA)
     {
         IEEE8021QciMeter::handleMessage(frame);
-        emit(creditSignal, credit);
+        this->emitCredit();
         this->sendSlope(frame);
         this->refreshState();
     }
@@ -249,12 +258,36 @@ void CreditBasedMeter::scheduleCreditReachZero()
     }
 }
 
+void CreditBasedMeter::scheduleCreditReachMax()
+{
+    if (this->credit < this->maxCredit && credit >= 0)
+    {
+        simtime_t duration = simtime_t{static_cast<double>(maxCredit - credit) / this->reservedBandwidth};
+        this->scheduleEvent(duration);
+    }
+}
+
 void CreditBasedMeter::scheduleEvent(simtime_t duration)
 {
-    SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+    this->scheduleEvent(duration, "API Scheduler Task Event");
+
+}
+
+void CreditBasedMeter::scheduleEvent(simtime_t duration, const char *name)
+{
+    SchedulerTimerEvent *event = new SchedulerTimerEvent(name, TIMER_EVENT);
     event->setTimer(static_cast<uint64_t>(ceil(duration / this->getOscillator()->getPreciseTick())));
     event->setDestinationGate(gate("schedulerIn"));
     this->getTimer()->registerEvent(event);
+}
+
+void CreditBasedMeter::emitCredit()
+{
+    if (this->getCurrentTime() > this->lastEmitCredit)
+    {
+        emit(creditSignal, credit);
+        this->lastEmitCredit = this->getCurrentTime();
+    }
 }
 
 } //namespace

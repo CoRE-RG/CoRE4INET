@@ -28,6 +28,9 @@ class AVBAttackTrafficSourceApp : public virtual AVBTrafficSourceApp
 {
     private:
         unsigned int attackPattern;
+        unsigned int spamSize;
+        simtime_t spamWaitInterval;
+        unsigned int counter;
 
     protected:
         /**
