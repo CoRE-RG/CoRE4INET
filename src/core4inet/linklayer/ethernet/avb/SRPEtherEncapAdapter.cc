@@ -22,7 +22,7 @@ Define_Module(SRPEtherEncapAdapter);
 
 void SRPEtherEncapAdapter::initialize()
 {
-    portCount = gate("encapOut", 0)->size();
+    portCount = static_cast<size_t>(gate("encapOut", 0)->size());
     WATCH(portCount);
 }
 

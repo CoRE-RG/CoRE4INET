@@ -13,21 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_SRPETHERENCAPADAPTER_H_
-#define __CORE4INET_SRPETHERENCAPADAPTER_H_
+#ifndef CORE4INET_SRPETHERENCAPADAPTER_H_
+#define CORE4INET_SRPETHERENCAPADAPTER_H_
 
 #include <omnetpp.h>
 //Auto-generated Messages
 #include "core4inet/linklayer/contract/ExtendedIeee802Ctrl_m.h"
 #include "core4inet/linklayer/ethernet/avb/SRPFrame_m.h"
 
-using namespace omnetpp;
-
 namespace CoRE4INET {
 
-/**
- * TODO - Generated class
- */
 class SRPEtherEncapAdapter : public cSimpleModule
 {
   protected:
