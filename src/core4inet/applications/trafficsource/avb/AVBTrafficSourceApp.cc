@@ -155,7 +155,10 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))  cComponent *src
                 getDisplayString().setTagArg("i2", 0, "status/active");
             }
             isStreaming = true;
-            sendAVBFrame();
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+            event->setTimer(0);
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
         }
     }
     else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT || id == NF_AVB_LISTENER_UNREGISTERED)
