@@ -13,21 +13,23 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef CORE4INET_ABSTRACTSIMPLEMODULE_H_
-#define CORE4INET_ABSTRACTSIMPLEMODULE_H_
+package core4inet.linklayer.ethernet.avb;
 
-#include "core4inet/base/CoRE4INET_Defs.h"
-
-namespace CoRE4INET {
-
-using namespace omnetpp;
-
-class AbstractSimpleModule : public cSimpleModule
+//
+// TODO auto-generated module
+//
+simple SRPEtherEncapAdapter
 {
-  protected:
-    virtual void initialize() __attribute__ ((noreturn));
-};
-
-} //namespace
-
-#endif
+    parameters:
+        @class(SRPEtherEncapAdapter);
+        @display("i=block/join");
+        
+    gates:
+        //SRP message in from SRP protocol module
+        input srpIn;
+        //SRP message out to SRP protocol module
+        output srpOut;
+        
+        input encapIn[];
+        output encapOut[];
+}

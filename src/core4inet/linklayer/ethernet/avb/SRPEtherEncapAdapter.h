@@ -13,19 +13,24 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef CORE4INET_ABSTRACTSIMPLEMODULE_H_
-#define CORE4INET_ABSTRACTSIMPLEMODULE_H_
+#ifndef CORE4INET_SRPETHERENCAPADAPTER_H_
+#define CORE4INET_SRPETHERENCAPADAPTER_H_
 
-#include "core4inet/base/CoRE4INET_Defs.h"
+#include <omnetpp.h>
+//Auto-generated Messages
+#include "core4inet/linklayer/contract/ExtendedIeee802Ctrl_m.h"
+#include "core4inet/linklayer/ethernet/avb/SRPFrame_m.h"
 
 namespace CoRE4INET {
 
-using namespace omnetpp;
-
-class AbstractSimpleModule : public cSimpleModule
+class SRPEtherEncapAdapter : public cSimpleModule
 {
   protected:
-    virtual void initialize() __attribute__ ((noreturn));
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+
+  private:
+    size_t portCount;
 };
 
 } //namespace
