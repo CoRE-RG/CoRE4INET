@@ -49,7 +49,6 @@ void AVBTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
     Timed::initialize();
 
-    //TODO: Minor: Check these values
     if (getPayloadBytes() <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
     {
         frameSize = MIN_ETHERNET_FRAME_BYTES;

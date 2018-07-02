@@ -39,7 +39,7 @@ namespace CoRE4INET {
 
 class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual Timed, public virtual cListener
 {
-    private:
+    protected:
         bool isStreaming;
         SR_CLASS srClass;
         unsigned long streamID;
@@ -66,7 +66,7 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
         /**
          * @brief Sends an AVBFrame
          */
-        void sendAVBFrame();
+        virtual void sendAVBFrame();
         /**
          * @brief Schedule next send interval
          */

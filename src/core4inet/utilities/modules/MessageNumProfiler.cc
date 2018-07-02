@@ -67,7 +67,7 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
         }
         else
         {
-            //TODO
+            // TODO
         }
     }
     /*if (par("max_scheduled_messages").longValue() > 0 &&  > par("max_scheduled_messages").longValue())
@@ -80,7 +80,7 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
      }
      else
      {
-     //TODO
+     // TODO
      }
      }*/
 

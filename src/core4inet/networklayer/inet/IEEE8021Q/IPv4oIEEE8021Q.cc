@@ -71,7 +71,7 @@ void IPv4oIEEE8021Q<Base>::sendPacketToNIC(cPacket *packet, const inet::Interfac
     std::list<IPoREFilter*> matchingFilters;
     bool filterMatch = Base::getMatchingFilters(packet, matchingFilters, DestinationType_8021Q);
 
-    // TODO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
+    // INFO: if you want to send packages to different buffers (e.g. TT and AVB) you have to check for the "alsoBE" filter element and call base::sendPacketToNIC()
     // send to corresponding modules
     if (filterMatch)
     {
