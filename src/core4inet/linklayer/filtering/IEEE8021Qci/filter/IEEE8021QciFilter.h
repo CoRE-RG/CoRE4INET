@@ -27,33 +27,65 @@
 namespace CoRE4INET {
 
 /**
+ * @brief Class representing the IEEE 802.1Qci stream filter module
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QciFilter : public virtual cSimpleModule
 {
   private:
+    /**
+     * @brief Stream ID of the stream filter
+     */
     unsigned long streamID;
+    /**
+     * @brief Gate ID responsible for the stream
+     */
     unsigned int gateID;
+    /**
+     * @brief Meter ID responsible for the stream
+     */
     unsigned int meterID;
 
   public:
+    /**
+     * @brief Get stream ID
+     *
+     * @return stream ID
+     */
     unsigned long getStreamID()
     {
         return this->streamID;
     }
-
+    /**
+    * @brief Get gate ID
+    *
+    * @return gate ID
+    */
     unsigned int getGateID()
     {
         return this->gateID;
     }
-
+    /**
+    * @brief Get meter ID
+    *
+    * @return meter ID
+    */
     unsigned int getMeterID()
     {
         return this->meterID;
     }
 
   protected:
+    /**
+     * @brief Initialize the module
+     */
     virtual void initialize();
+    /**
+     * @brief Reveives messages from the IEEE 802.1Qci input module encapsulates control data and forwards them to the responsible stream gate
+     *
+     * @param msg the incoming message
+     */
     virtual void handleMessage(cMessage *msg);
     /**
      * @brief Indicates a parameter has changed.

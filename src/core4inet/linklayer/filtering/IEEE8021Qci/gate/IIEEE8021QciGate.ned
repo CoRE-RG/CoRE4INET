@@ -18,6 +18,8 @@ package core4inet.linklayer.filtering.IEEE8021Qci.gate;
 //
 // Interface for the IEEE 802.1Qci gate module.
 //
+// @see ~IEEE8021QciGate
+//
 // @author Philipp Meyer
 //
 moduleinterface IIEEE8021QciGate
@@ -27,5 +29,6 @@ moduleinterface IIEEE8021QciGate
         string state;
         
     gates:
+        // The Input of the gate
         input in;
 }

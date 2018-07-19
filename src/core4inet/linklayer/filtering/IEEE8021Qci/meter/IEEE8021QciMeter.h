@@ -25,23 +25,51 @@
 namespace CoRE4INET {
 
 /**
+ * @brief Class representing the IEEE 802.1Qci base meter
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QciMeter : public virtual cSimpleModule
 {
   protected:
+    /**
+     * @brief Variable for counting the number of received frames
+     */
     unsigned long numFramesReceived = 0;
+    /**
+     * @brief Variable for counting the number of sent frames
+     */
     unsigned long numFramesSent = 0;
+    /**
+     * @brief Variable for counting the number of received bytes
+     */
     unsigned long numBytesReceived = 0;
+    /**
+     * @brief Variable for counting the number of sent bytes
+     */
     unsigned long numBytesSent = 0;
+    /**
+     * @brief Signal emitted when frame passes the meter
+     */
     static simsignal_t framePassedSignal;
 
   private:
     IEEE8021QciOutput *streamOutput;
 
   protected:
+    /**
+     * @brief Initializes the module
+     */
     virtual void initialize();
+    /**
+     * @brief Meters the message
+     *
+     * @param msg the incoming message
+     */
     virtual void handleMessage(cMessage *msg);
+    /**
+     * @brief Records simulation results
+     */
     virtual void finish() override;
 };
 

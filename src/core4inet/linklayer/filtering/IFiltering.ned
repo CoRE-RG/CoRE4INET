@@ -27,6 +27,8 @@ moduleinterface IFiltering
     parameters:
         @display("i=block/filter");
     gates:
+        // Input of the filter
         input in;
+        // Output of the filter
         output out;
 }

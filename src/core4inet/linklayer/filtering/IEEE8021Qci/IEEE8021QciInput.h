@@ -27,15 +27,28 @@
 namespace CoRE4INET {
 
 /**
+ * @brief Class representing the IEEE 802.1Qci input module
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QciInput : public cSimpleModule
 {
   private:
+    /**
+     * @brief Caches pointers to stream filters contained in the IEEE 802.1Qci filter module
+     */
     std::vector<IEEE8021QciFilter*> streamFilters;
 
   protected:
+    /**
+     * @brief Initializes the module
+     */
     virtual void initialize();
+    /**
+     * @brief Receives messages from higher layer and looks up if a stream filter is requesting it
+     *
+     * @param msg the incoming message
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

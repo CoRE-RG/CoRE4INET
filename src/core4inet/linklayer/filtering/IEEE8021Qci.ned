@@ -24,20 +24,25 @@ import core4inet.linklayer.filtering.IEEE8021Qci.meter.IIEEE8021QciMeter;
 //
 // IEEE8021Qci is a compound filtering module implementing the TSN IEEE 802.1Qci Per-Stream Filtering and Policing.
 //
-// @see ~IFiltering
+// @see ~IFiltering, ~NoFiltering
 // 
 // @author Philipp Meyer
 //
 module IEEE8021Qci like IFiltering
 {
     parameters:
-        @display("i=block/filter");  
+        @display("i=block/filter");
+        // Number of contained stream filters
         int numStreamFilters = default(0);
+        // Number of contained stream gates
         int numStreamGates = default(0);
+        // Number of contained flow meters
         int numFlowMeters = default(0);
 
     gates:
+        // Input of the filter
         input in;
+        // Ouput of the filter
         output out;
 
     submodules:

@@ -21,7 +21,6 @@ Define_Module(NoFiltering);
 
 void NoFiltering::initialize()
 {
-    // TODO - Generated method body
 }
 
 void NoFiltering::handleMessage(cMessage *msg)

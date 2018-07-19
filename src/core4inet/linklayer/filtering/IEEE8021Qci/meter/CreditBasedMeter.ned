@@ -16,6 +16,12 @@
 package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 
 import core4inet.utilities.classes.ITimed;
+
+//
+// The CreditBasedMeter (CBM) is a simple module
+// It represents a meter that filters traffic in dependency of a credit value
+//
+// @see ~IIEEE8021QciMeter, ~IEEE8021QciMeter
 //
 // @author Philipp Meyer
 //
@@ -23,16 +29,22 @@ simple CreditBasedMeter extends IEEE8021QciMeter like ITimed
 {
     parameters:
         @class(CreditBasedMeter);
-        //Signal emitted when the credit of the CBM algorithm changes
+        // Signal emitted when the credit of the CBM algorithm changes
         @signal[credit](type=long);
+        // Signal that is emitted when the CBM receives a frame
         @signal[frameReceived](type=long);
+        // Signal that is emitted when the CBM drops a frame
         @signal[frameDropped](type=long);
-        //Statistic of the credit of the CBM algorithm
+        // Statistic for the credit of the CBM algorithm
         @statistic[credit](title="Credit"; source=credit; unit=b; record=vector; interpolationmode=linear;);
+        // Statistic for received frames
         @statistic[framesReceived](title="Frames Received"; source=frameReceived; unit=B; record=vector; interpolationmode=none;);
+        // Statistic for dropped frames
         @statistic[framesDropped](title="Frames Dropped"; source=frameDropped; unit=B; record=vector; interpolationmode=none;);
         
+        // Maximum burst length allowed by the CBM in number of frames
         int maxBurst = default(4);
+        // SRClass of the CBM
         string srClass = default("A");
         //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("^.^.^.scheduler.oscillator");

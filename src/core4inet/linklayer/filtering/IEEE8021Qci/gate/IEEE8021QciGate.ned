@@ -29,5 +29,6 @@ simple IEEE8021QciGate like IIEEE8021QciGate
         string state = default("O");
         
     gates:
+        // The Input of the gate
         input in;
 }

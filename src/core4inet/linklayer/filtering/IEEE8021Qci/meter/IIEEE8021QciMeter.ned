@@ -18,10 +18,13 @@ package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 //
 // Interface for the metering module.
 //
+// @see ~IEEE8021QciMeter, ~CreditBasedMeter
+//
 // @author Philipp Meyer
 //
 moduleinterface IIEEE8021QciMeter
 {        
     gates:
+        // Input of the meter module
         input in;
 }

@@ -29,5 +29,6 @@ simple IEEE8021QciMeter like IIEEE8021QciMeter
         @statistic[framesPassed](title="Frames Passed"; source=framePassed; unit=B; record=vector; interpolationmode=none;);
         
     gates:
+        // Input of the meter module
         input in;
 }

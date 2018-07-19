@@ -22,12 +22,20 @@
 namespace CoRE4INET {
 
 /**
+ * @brief Class representing the IEEE 802.1Qci output module
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QciOutput : public cSimpleModule
 {
   protected:
+    /**
+     * @brief Initializes the module
+     */
     virtual void initialize();
+    /**
+     * @brief Forwards the message to higher layer
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

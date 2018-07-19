@@ -17,6 +17,8 @@ package core4inet.linklayer.filtering;
 
 //
 // This module forwards all incoming messages. No filter is applied
+//
+// @see ~IFiltering, ~IEEE8021Qci
 // 
 // @author Philipp Meyer
 //
@@ -25,6 +27,8 @@ simple NoFiltering like IFiltering
     parameters:
         @display("i=block/tunnel");
     gates:
+        // Input of the filter
         input in;
+        // Ouput of the filter
         output out;
 }

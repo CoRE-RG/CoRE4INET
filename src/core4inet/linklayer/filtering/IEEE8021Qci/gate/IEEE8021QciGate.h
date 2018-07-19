@@ -54,21 +54,18 @@ class IEEE8021QciGate : public virtual cSimpleModule
      * @brief Initializes the gate
      */
     virtual void initialize();
-
     /**
      * @brief handles the incoming and outgoing messages of the gate.
      *
      * @param msg incoming inet::EtherFrame for the gate.
      */
     virtual void handleMessage(cMessage *msg);
-
     /**
      * @brief Indicates a parameter has changed.
      *
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char *parname);
-
     /**
      * @brief Components that contain visualization-related code are expected to override refreshDisplay()
      */

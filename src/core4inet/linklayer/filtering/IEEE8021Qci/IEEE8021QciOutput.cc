@@ -21,7 +21,6 @@ Define_Module(IEEE8021QciOutput);
 
 void IEEE8021QciOutput::initialize()
 {
-    // TODO - Generated method body
 }
 
 void IEEE8021QciOutput::handleMessage(cMessage *msg)

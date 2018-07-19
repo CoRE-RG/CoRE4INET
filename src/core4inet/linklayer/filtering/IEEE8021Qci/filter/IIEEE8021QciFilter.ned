@@ -18,16 +18,22 @@ package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 //
 // Interface for the stream filter module.
 //
+// @see ~IEEE8021QciFilter
+//
 // @author Philipp Meyer
 //
 moduleinterface IIEEE8021QciFilter
 {
     parameters:
         @display("i=block/table");
+        // Stream ID of the stream filter
         int streamID;
+        // Gate ID responsible for the stream
         int gateID;
+        // Meter ID responsible for the stream
         int meterID;
         
     gates:
+        // Input of the stream filter
         input in;
 }

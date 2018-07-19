@@ -16,6 +16,10 @@
 package core4inet.linklayer.filtering.IEEE8021Qci;
 
 //
+// Ouput module of the IEEE 802.1Qci filter
+//
+// @see ~IEEE8021QciInput
+//
 // @author Philipp Meyer
 //
 simple IEEE8021QciOutput
@@ -23,7 +27,10 @@ simple IEEE8021QciOutput
     parameters:
         @display("i=block/join");  
     gates:
+        // Input from the input module of the IEEE 802.1Qci filter
         input in;
+        // Input from the flow meter of the IEEE 802.1Qci filter
         input filterIn;
+        // Output to upper layer
         output upperLayerOut;
 }

@@ -22,7 +22,7 @@
 namespace CoRE4INET {
 
 /**
- * @brief Class representation for no filtering.
+ * @brief Class representing no filtering.
  *
  * Forwards all incoming messages.
  *
@@ -32,7 +32,15 @@ namespace CoRE4INET {
 class NoFiltering : public cSimpleModule
 {
   protected:
+    /**
+     * @brief Initializes the module
+     */
     virtual void initialize();
+    /**
+     * @brief Forwards the messages to the connected module
+     *
+     * @param msg the incoming message
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

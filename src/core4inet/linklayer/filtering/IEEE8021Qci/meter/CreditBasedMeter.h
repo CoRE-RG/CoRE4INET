@@ -32,7 +32,7 @@
 namespace CoRE4INET {
 
 /**
- * @brief Class for a Credit Based Meter (CBM)
+ * @brief Class representing the Credit Based Meter (CBM) module
  *
  * @author Philipp Meyer
  *
@@ -71,42 +71,49 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
      * @brief Current credit of the CBM
      */
     int credit;
-
     /**
      * @brief Current state of the CBM
      */
     State state;
-
+    /**
+     * @brief Caches the reserved bandwidth
+     */
     unsigned long reservedBandwidth;
-
+    /**
+     * @brief Maximum credit value allowed
+     */
     int maxCredit;
-
     /**
      * @brief The Channel connected to this Port
      */
     cChannel *inChannel;
-
     /**
      * @brief Time until the credit was previously calculated
      */
     simtime_t lastCalcTime;
-
     /**
      * @brief Pointer to the SRP Table
      */
     SRPTable *srptable;
-
+    /**
+     * @brief Caches pointers to the stream filters
+     */
     std::vector<IEEE8021QciFilter*> streamFilters;
-
     /**
      * @brief Max number of frames in a burst
      */
     size_t maxBurst;
-
+    /**
+     * @brief Caches configured SRClass
+     */
     SR_CLASS srClass;
-
+    /**
+     * @brief Last time the credit value was emitted
+     */
     simtime_t lastEmitCredit;
-
+    /**
+     * @brief Is sendslope active
+     */
     bool isSendSlopeActive;
 
   public:
@@ -124,21 +131,18 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
      * @brief Initializes the CBM
      */
     virtual void initialize() override;
-
     /**
      * @brief Handles the incoming and outgoing messages of the CBM
      *
      * @param msg incoming IEE8021QciCtrl for the CBM
      */
     virtual void handleMessage(cMessage *msg) override;
-
     /**
      * @brief Indicates a parameter has changed.
      *
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char* parname) override;
-
     /**
      * @brief Components that contain visualization-related code are expected to override refreshDisplay()
      */
@@ -151,40 +155,65 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
      * @param delta SimTime to be subtracted from current SimTime
      */
     void idleSlope(simtime_t delta);
-
     /**
      * @brief Refresh to current credit value of the CBM
      *
      * @param frame The incoming inet EtherFrame
      */
     void sendSlope(inet::EtherFrame *frame);
-
     /**
      * @brief Refresh the current state of the CBM
      */
     void refreshState();
-
     /**
      * @brief Meter the message
      *
-     * @param msg The incoming cMessage
+     * @param frame the incoming Ethernet frame
      */
     void meter(inet::EtherFrame *frame);
-
+    /**
+     * @brief Calculates the reserved bandwidth and maximum credit value
+     */
     void refreshReservedBandwidthAndMaxCredit();
-
+    /**
+     * @brief Calculates the duration a frame would be transmitted on link
+     *
+     * @param frame the frame for which the duration should be calculated
+     *
+     * @return the transmission duration
+     */
     simtime_t calculateTransmissionDuration(inet::EtherFrame *frame);
-
+    /**
+     * @brief Get current simulation time
+     *
+     * @return current simulation time
+     */
     simtime_t getCurrentTime();
-
+    /**
+     * @brief Order to get a schedule message when the credit value reach zero
+     */
     void scheduleCreditReachZero();
-
+    /**
+     * @brief Order to get a schedule message when the credit value reaches its maximum
+     */
     void scheduleCreditReachMax();
-
+    /**
+     * @brief Order to get a schedule message in specified simulation time delta
+     *
+     * @param duration the specified delta
+     */
     void scheduleEvent(simtime_t duration);
-
+    /**
+     * @brief Order to get a schedule message in specified simulation time delta
+     *
+     * @param duration the specified delta
+     *
+     * @param name the name of the schedule message
+     */
     void scheduleEvent(simtime_t duration, const char *name);
-
+    /**
+     * @brief Emit the credit value
+     */
     void emitCredit();
 };
 
