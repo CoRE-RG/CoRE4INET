@@ -22,13 +22,24 @@
 namespace CoRE4INET {
 
 /**
+ * @brief Class representing a AVBAttackTrafficSourceApp. Implements attack pattern stimuli. Also supports valid behavior.
+ *
  * @author Philipp Meyer
  */
 class AVBAttackTrafficSourceApp : public virtual AVBTrafficSourceApp
 {
     private:
+        /**
+         * @brief Specified attack pattern
+         */
         unsigned int attackPattern;
+        /**
+         * @brief Spam size
+         */
         unsigned int spamSize;
+        /**
+         * @brief Spam wait interval
+         */
         simtime_t spamWaitInterval;
         unsigned int counter;
 

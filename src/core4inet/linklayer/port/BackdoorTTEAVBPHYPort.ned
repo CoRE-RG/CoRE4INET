@@ -24,8 +24,9 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 //
 // The BackdoorTTEAVBPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a real-time Ethernet device (Switch or Host)
+// It has a backdoor that bypasses all inputs with highest priority
 //
-// @see ~IPort, ~EtherMACFullDuplex, ~TTEInput, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
+// @see ~IPort, ~EtherMACFullDuplex, ~TTEInput, ~Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
 //
 // @author Philipp Meyer
 //

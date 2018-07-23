@@ -16,6 +16,10 @@
 package core4inet.applications.trafficsource.avb;
 
 //
+// Module that generates attack pattern stimuli. Also supports valid behavior
+//
+// @see ~AVBTrafficSourceApp
+//
 // @author Philipp Meyer
 //
 simple AVBAttackTrafficSourceApp extends AVBTrafficSourceApp
@@ -24,7 +28,10 @@ simple AVBAttackTrafficSourceApp extends AVBTrafficSourceApp
         @class(AVBAttackTrafficSourceApp);
         @display("i=,blue");
         
+        // One of the attack pattern: No, SimpleSpam, IntervalSpam, WaitAndSpam
         string attackPattern = default("No");
+        // Size of spam in number of frames
         int spamSize = default(0);
+        // Wait interval between spams
         volatile double spamWaitInterval @unit(s) = default(125us);        
 }

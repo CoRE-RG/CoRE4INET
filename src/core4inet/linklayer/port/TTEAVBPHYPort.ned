@@ -22,10 +22,10 @@ import core4inet.linklayer.filtering.IFiltering;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 //
-// The TTEAVBPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
+// The TTEAVBPHYPort is a compund module that contains the input Shaper, input Filtering, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a real-time Ethernet device (Switch or Host)
 //
-// @see ~IPort, ~EtherMACFullDuplex, ~TTEInput, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
+// @see ~IPort, ~IFiltering, ~NoFiltering, ~EtherMACFullDuplex, ~TTEInput, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
 //
 // @author Philipp Meyer
 //

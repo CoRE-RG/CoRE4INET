@@ -29,10 +29,10 @@ import core4inet.synchronisation.base.ISync;
 import inet.networklayer.common.InterfaceTable;
 
 //
-// Module for a TTEAVBEthernet Host.
+// Module for a corrupted TTEAVBEthernet Host. Contains port modules with backdoor.
 // Contains handler for TT, AVB, RC and BE Messages.
 //
-// @see ~TTEAVBPHYPort, ~AVBIncoming, ~AVBQueueBuffer, ~SRPEtherEncap, ~ISync, ~ITTEScheduler, ~IApplication, ~BGQueueBuffer, ~SRPTable, ~SRProtocol, ~InterfaceTable
+// @see ~BackdoorTTEAVBPHYPort, ~AVBIncoming, ~AVBQueueBuffer, ~SRPEtherEncap, ~ISync, ~ITTEScheduler, ~IApplication, ~BGQueueBuffer, ~SRPTable, ~SRProtocol, ~InterfaceTable
 //
 // @author Philipp Meyer
 //
