@@ -29,11 +29,9 @@
 namespace CoRE4INET {
 
 /**
- * @brief A Shaper for IEEE802.1Q-tagged Messages.
+ * @brief A Shaper for direct forwarding of Messages.
  *
- * @ingroup IEEE8021Q
- *
- * @author Till Steinbach, Philipp Meyer
+ * @author Philipp Meyer
  */
 template<class TC>
 class BackdoorShaper : public TC, public virtual Timed
