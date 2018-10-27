@@ -1,7 +1,8 @@
 package core4inet.linklayer.shaper;
 
-//A Shaper that handles TT, AVB, PCF, RC and IEEE 802.1Q traffic
+// A Shaper that handles TT, AVB, PCF, RC and IEEE 802.1Q traffic with an additional backdoor
 // This shaper handles traffic in the following order (highest to lowest priority):
+// - messages arriving through backdoor
 // - time-triggered
 // - AVB Class A
 // - AVB Class B
