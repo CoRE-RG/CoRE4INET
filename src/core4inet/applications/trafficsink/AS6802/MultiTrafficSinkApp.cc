@@ -42,11 +42,10 @@ void MultiTrafficSinkApp::handleMessage(cMessage *msg)
             }
             else
             {
-                char strBuf[16];
-                snprintf(strBuf, sizeof(strBuf), "rxPk:%d", ctID);
-                signal = registerSignal(strBuf);
+                std::string signalName = "rxPk:" + std::to_string(ctID);
+                signal = registerSignal(signalName.c_str());
                 cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "rxPk");
-                getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
+                getEnvir()->addResultRecorders(this, signal, signalName.c_str(), statisticTemplate);
                 //statisticTemplate = getProperties()->get("statisticTemplate", "latency");
                 //cResultFilter *messageAgeFilter = cResultFilterDescriptor::get("messageAge")->create();
                 //subscribe(signal, messageAgeFilter);

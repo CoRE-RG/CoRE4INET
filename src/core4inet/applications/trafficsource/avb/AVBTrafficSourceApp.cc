@@ -98,9 +98,8 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
 void AVBTrafficSourceApp::sendAVBFrame()
 {
-    char frameNname[10];
-    sprintf(frameNname, "Stream %lu", streamID);
-    AVBFrame *outFrame = new AVBFrame(frameNname);
+    std::string frameName = "Stream " + std::to_string(streamID);
+    AVBFrame *outFrame = new AVBFrame(frameName.c_str());
     outFrame->setTimestamp();
     outFrame->setStreamID(streamID);
     outFrame->setDest(multicastMAC);
