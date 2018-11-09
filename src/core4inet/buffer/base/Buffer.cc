@@ -169,20 +169,20 @@ void Buffer::handleParameterChange(const char* parname)
     }
 }
 
-//#pragma GCC diagnostic push
-//#pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
 
-[[noreturn]] void Buffer::enqueue(__attribute__((unused)) inet::EtherFrame *newFrame)
+void Buffer::enqueue(__attribute__((unused)) inet::EtherFrame *newFrame)
 {
     throw cRuntimeError("Buffer::enqueue not implemented");
 }
 
-[[noreturn]] inet::EtherFrame * Buffer::dequeue()
+inet::EtherFrame * Buffer::dequeue()
 {
     throw cRuntimeError("Buffer::dequeue not implemented");
 }
 
-//#pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 
 long Buffer::getRequiredBandwidth()
 {
