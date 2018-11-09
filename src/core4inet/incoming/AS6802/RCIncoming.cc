@@ -79,11 +79,6 @@ void RCIncoming::handleMessage(cMessage *msg)
     }
 }
 
-#if defined(__clang__)
-#  pragma clang diagnostic push
-#  pragma clang diagnostic ignored "-Wuseless-cast"
-#endif
-
 void RCIncoming::handleParameterChange(const char* parname)
 {
     CTIncoming::handleParameterChange(parname);
@@ -107,8 +102,5 @@ void RCIncoming::handleParameterChange(const char* parname)
     }
 }
 
-#if defined(__clang__)
-#  pragma clang diagnostic pop
-#endif
 
 } //namespace

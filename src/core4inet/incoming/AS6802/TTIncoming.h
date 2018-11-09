@@ -64,7 +64,7 @@ class TTIncoming : public virtual CTIncoming, public virtual Scheduled
         /**
          * @brief Destructor
          */
-        virtual ~TTIncoming();
+        virtual ~TTIncoming() override;
 
     protected:
 
