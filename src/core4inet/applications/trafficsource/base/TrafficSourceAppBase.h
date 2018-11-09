@@ -53,7 +53,7 @@ class TrafficSourceAppBase : public virtual ApplicationBase
          * @brief pure virtual destructor making the class abstract
          *
          */
-        virtual ~TrafficSourceAppBase() = 0;
+        virtual ~TrafficSourceAppBase() override = 0;
 
         /**
          * @brief Indicated that TrafficSource is enabled

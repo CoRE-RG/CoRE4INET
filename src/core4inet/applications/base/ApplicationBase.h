@@ -48,7 +48,7 @@ class ApplicationBase : public virtual cSimpleModule
         std::list<BGBuffer*> bgbuffers;
 
     public:
-        virtual ~ApplicationBase() = 0;
+        virtual ~ApplicationBase() override = 0;
 
     protected:
         /**

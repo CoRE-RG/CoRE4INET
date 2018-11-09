@@ -125,7 +125,7 @@ class SRPTable : public virtual cSimpleModule
         /**
          *  @brief Destructor
          */
-        virtual ~SRPTable();
+        virtual ~SRPTable() override;
 
     public:
         /**

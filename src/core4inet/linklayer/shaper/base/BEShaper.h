@@ -44,7 +44,7 @@ class BEShaper : public TC
         /**
          * @brief Destructor
          */
-        virtual ~BEShaper();
+        virtual ~BEShaper() override;
 
     protected:
         /**

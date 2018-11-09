@@ -113,7 +113,7 @@ class Timer : public virtual cSimpleModule
         /**
          * Destructor cleans up
          */
-        virtual ~Timer();
+        virtual ~Timer() override;
 
         /**
          * @brief When called, the ticks since simulation start are recalculated using current simulation time

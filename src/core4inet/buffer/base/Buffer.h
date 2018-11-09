@@ -68,7 +68,7 @@ class Buffer : public virtual cSimpleModule
         /**
          * @brief Destructor
          */
-        virtual ~Buffer() = 0;
+        virtual ~Buffer() override = 0;
 
         /**
          * @brief Indicated that TrafficSource is enabled

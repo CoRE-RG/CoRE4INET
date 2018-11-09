@@ -57,7 +57,7 @@ class RCShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        virtual ~RCShaper();
+        virtual ~RCShaper() override;
 
         /**
          * @brief receives signal from mac module and resets bag on rxPk signal from mac

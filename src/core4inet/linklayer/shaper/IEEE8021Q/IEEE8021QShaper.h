@@ -49,7 +49,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        virtual ~IEEE8021QShaper();
+        virtual ~IEEE8021QShaper() override;
 
     private:
         /**
