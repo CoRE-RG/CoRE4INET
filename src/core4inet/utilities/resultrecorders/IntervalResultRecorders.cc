@@ -250,5 +250,5 @@ double IntervalAvailableBandwidthPercent::calculate()
     omnetpp::cComponent *comp = getComponent();
     double nominalDatarate =
             comp->getParentModule()->getSubmodule("mac")->gate("phys$i")->findIncomingTransmissionChannel()->getNominalDatarate();
-    return 100 - (sumValue / ((interval / omnetpp::SimTime(1)) * nominalDatarate / 100)); // TODO Linkgeschwindigkeit
+    return 100 - (sumValue / ((interval / omnetpp::SimTime(1)) * nominalDatarate / 100));
 }

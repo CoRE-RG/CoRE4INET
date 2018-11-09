@@ -49,7 +49,6 @@
    #define  TTE_TIMER_TYPE          uint32_t
    typedef  signed   int            dma_addr_t;
 
-   // meine eigenen kleinen defines TODO
    #define  TARGET_CONTROLLER_COUNT 1
 
 #else

@@ -21,13 +21,13 @@
 //CoRE4INET
 #include "core4inet/scheduler/timer/Timer.h"
 
-//FIXME: Can be used when opp_makedep is able to use defines
+//TODO: Can be used when opp_makedep is able to use defines
 //#ifdef WITH_AS6802_COMMON
 //CoRE4INET
 #include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
 //#endif
 
-//FIXME: Can be used when opp_makedep is able to use defines
+//TODO: Can be used when opp_makedep is able to use defines
 //#ifdef WITH_AVB_COMMON
 //CoRE4INET
 #include "core4inet/base/avb/AVBDefs.h"
