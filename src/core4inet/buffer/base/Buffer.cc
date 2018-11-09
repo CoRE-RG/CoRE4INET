@@ -169,7 +169,8 @@ void Buffer::handleParameterChange(const char* parname)
     }
 }
 
-#if defined(__GNUC__)
+#if defined(__clang__)
+#elif defined(__GNUC__)
 #  pragma GCC diagnostic push
 #  pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
 #endif
@@ -184,7 +185,8 @@ inet::EtherFrame * Buffer::dequeue()
     throw cRuntimeError("Buffer::dequeue not implemented");
 }
 
-#if defined(__GNUC__)
+#if defined(__clang__)
+#elif defined(__GNUC__)
 #  pragma GCC diagnostic pop
 #endif
 
