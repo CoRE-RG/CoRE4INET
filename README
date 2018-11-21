@@ -1,3 +1,4 @@
+<div>
 <table>
   <tr>
     <th></th>
@@ -21,5 +22,6 @@
     <td><a href="https://jenkins.inet.haw-hamburg.de/job/CoRE4INET_Jobs/job/CoRE4INET_tests/Nodes=inet161/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=CoRE4INET_Jobs/CoRE4INET_tests/Nodes=inet161"></a></td>
   </tr>
 </table>
-
 For further informations please see doc/index.html
+</div>
+
