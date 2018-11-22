@@ -2,7 +2,11 @@
 
 ## Continuous Integration
 
-Jenkins build and test results.
+The build state of the master branch is monitored for OS X, Windows 10 and Linux:
+* Building:
+<a href="https://jenkins.inet.haw-hamburg.de/job/CoRE4INET_Jobs/job/CoRE4INET/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=CoRE4INET_Jobs/CoRE4INET"></a>
+* Tests:
+<a href="https://jenkins.inet.haw-hamburg.de/job/CoRE4INET_Jobs/job/CoRE4INET_tests/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=CoRE4INET_Jobs/CoRE4INET_tests"></a>
 
 <table>
   <tr>
