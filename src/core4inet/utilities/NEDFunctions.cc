@@ -34,7 +34,7 @@ static omnetpp::cNEDValue ned_sec_to_tick(omnetpp::cComponent *context, omnetpp:
     }
 
     long ticks = static_cast<long>(round(seconds / ticklength));
-    argv[0].set(static_cast<double>(ticks), "tick");
+    argv[0].set(static_cast<intpar_t>(ticks), "tick");
     return argv[0];
 }
 Define_NED_Function2(ned_sec_to_tick, "quantity sec_to_tick(quantity seconds, quantity ticklength?)", "units",
