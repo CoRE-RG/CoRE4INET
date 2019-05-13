@@ -1,6 +1,6 @@
 # CoRE4INET
 
-CoRE4INET is an extension to the [INET-Framework](https://inet.omnetpp.org/) for the event-based simulation of real-time Ethernet in the [OMNEST/OMNeT++](https://omnetpp.org/) simulation system. It provides real-time Ethernet protocols like AS6802 and AVB. It was created by the [CoRE (Communication over Realtime Ethernet)](https://core-researchgroup.de/) research group at the [HAW-Hamburg (Hamburg University of Applied Sciences)](https://www.haw-hamburg.de/english.html).
+CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnetpp.org/) for the event-based simulation of real-time Ethernet in the [OMNEST/OMNeT++](https://omnetpp.org/) simulation system. It provides real-time Ethernet protocols like AS6802 and AVB. It was created by the [CoRE (Communication over Realtime Ethernet)](https://core-researchgroup.de/) research group at the [HAW-Hamburg (Hamburg University of Applied Sciences)](https://www.haw-hamburg.de/english.html).
 
 <img src="/doc/images/core4inet.png" alt="CoRE4INET Environment" width="35%">
 
@@ -21,7 +21,7 @@ CoRE4INET is an extension to the [INET-Framework](https://inet.omnetpp.org/) for
     * CoRE Simulation Model Installer: OMNEST/OMNeT++ -> Help -> Install CoRE Simulation Models...
 6. Working with the framework
     * See the documentation in [doc/](/doc)
-    * Start the examples in the framwork
+    * Start the examples in the framework
 
 
 ## Continuous Integration
