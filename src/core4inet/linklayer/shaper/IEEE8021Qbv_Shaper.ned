@@ -30,6 +30,10 @@ module IEEE8021Qbv_Shaper like IShaper
 {
     parameters:
         @display("i=block/classifier");
+        //Untagged VLAN. Outgoing frames with this VLAN get untagged
+        int untaggedVID = default(0);
+        //Interface allows frames with this VLAN to leave the port
+        string taggedVIDs = default("0");
         int numPCP = default(8);
         
     gates:
@@ -37,8 +41,12 @@ module IEEE8021Qbv_Shaper like IShaper
         output out @labels(EtherFrame);
         
     submodules:
-        queueing: <default("TODO")> like IIEEE8021QbvQueueing {
-         	@display("p=75,150");   
+        queueing: <default("IEEE8021QbvQueueing")> like IIEEE8021QbvQueueing {
+          	parameters:
+             	@display("p=75,150");
+             	untaggedVID = untaggedVID;
+                taggedVIDs = taggedVIDs;   
+             	numPCP = numPCP;
         }
         
         queue[numPCP]: <default("QueueBuffer")> like IBuffer {

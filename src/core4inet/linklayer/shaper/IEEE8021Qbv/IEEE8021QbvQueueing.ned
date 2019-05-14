@@ -15,15 +15,19 @@
 
 package core4inet.linklayer.shaper.IEEE8021Qbv;
 
-moduleinterface IIEEE8021QbvQueueing {
-    
+//
+// @author Philipp Meyer
+//
+simple IEEE8021QbvQueueing like IIEEE8021QbvQueueing
+{
     parameters:
-        @display("i=block/classifier");
+        @class(IEEE8021QbvQueueing);
         //Untagged VLAN. Outgoing frames with this VLAN get untagged
-        int untaggedVID;
+        int untaggedVID = default(0);
         //Interface allows frames with this VLAN to leave the port
-        string taggedVIDs;
-        int numPCP;
+        string taggedVIDs = default("0");
+        int numPCP = default(8);
+        int defaultPCP = default(0);      
         
     gates:
         input in @labels(EtherFrame);
