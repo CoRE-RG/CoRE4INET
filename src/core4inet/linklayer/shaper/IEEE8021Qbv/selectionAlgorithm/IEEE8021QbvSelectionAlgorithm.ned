@@ -16,11 +16,12 @@
 package core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm;
 
 //
-// @author Philipp Meyer
+// TODO auto-generated module
 //
-moduleinterface IIEEE8021QbvSelectionAlgorithm
+simple IEEE8021QbvSelectionAlgorithm like IIEEE8021QbvSelectionAlgorithm
 {
-  	parameters:
+    parameters:
+        @class(IEEE8021QbvSelectionAlgorithm);
         // State of the gate. O (Open) or C (Closed).
-        string state;
+        string state = default("O");
 }

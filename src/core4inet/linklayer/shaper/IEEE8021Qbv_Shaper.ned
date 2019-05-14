@@ -53,7 +53,7 @@ module IEEE8021Qbv_Shaper like IShaper
             @display("p=375,150,c,130");
         }
         
-        transmissionSelectionAlgorithm[numPCP]: <default("TODO")> like IIEEE8021QbvSelectionAlgorithm {
+        transmissionSelectionAlgorithm[numPCP]: <default("IEEE8021QbvSelectionAlgorithm")> like IIEEE8021QbvSelectionAlgorithm {
             @display("p=675,150,c,130");
         }
         

@@ -21,6 +21,7 @@ package core4inet.linklayer.shaper.IEEE8021Qbv.gate;
 simple IEEE8021QbvGate like IIEEE8021QbvGate
 {
     parameters:
+        @class(IEEE8021QbvGate);
         // State of the gate. O (Open) or C (Closed).
         string state = default("O");
 }
