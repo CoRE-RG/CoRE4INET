@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.shaper.IEEE8021Qbv;
+package core4inet.linklayer.shaper.IEEE8021Qbv.selection;
 
 moduleinterface IIEEE8021QbvSelection {
     

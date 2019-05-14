@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.shaper.IEEE8021Qbv;
+package core4inet.linklayer.shaper.IEEE8021Qbv.queueing;
 
 moduleinterface IIEEE8021QbvQueueing {
     

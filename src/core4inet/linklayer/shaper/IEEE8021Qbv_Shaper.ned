@@ -16,11 +16,11 @@
 package core4inet.linklayer.shaper;
 
 import core4inet.linklayer.shaper.base.IShaper;
-import core4inet.linklayer.shaper.IEEE8021Qbv.IIEEE8021QbvQueueing;
+import core4inet.linklayer.shaper.IEEE8021Qbv.queueing.IIEEE8021QbvQueueing;
 import core4inet.buffer.base.IBuffer;
 import core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm.IIEEE8021QbvSelectionAlgorithm;
 import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGate;
-import core4inet.linklayer.shaper.IEEE8021Qbv.IIEEE8021QbvSelection;
+import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IIEEE8021QbvSelection;
 
 // @see ~IShaper
 //
