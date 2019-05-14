@@ -57,7 +57,7 @@ module IEEE8021Qbv_Shaper like IShaper
             @display("p=675,150,c,130");
         }
         
-        transmissionGate[numPCP]: <default("TODO")> like IIEEE8021QbvGate {
+        transmissionGate[numPCP]: <default("IEEE8021QbvGate")> like IIEEE8021QbvGate {
         	@display("p=975,150,c,130");
         }
         
