@@ -19,6 +19,21 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QbvGate);
 
+bool IEEE8021QbvGate::isOpen()
+{
+    return this->state == this->State::OPEN;
+}
+
+void IEEE8021QbvGate::open()
+{
+    this->state = this->State::OPEN;
+}
+
+void IEEE8021QbvGate::close()
+{
+    this->state = this->State::CLOSE;
+}
+
 void IEEE8021QbvGate::initialize()
 {
     this->handleParameterChange(nullptr);

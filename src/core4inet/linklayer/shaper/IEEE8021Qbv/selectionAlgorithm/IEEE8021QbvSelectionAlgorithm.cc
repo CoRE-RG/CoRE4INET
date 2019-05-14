@@ -19,6 +19,11 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QbvSelectionAlgorithm);
 
+bool IEEE8021QbvSelectionAlgorithm::isOpen()
+{
+    return this->state == this->State::OPEN;
+}
+
 void IEEE8021QbvSelectionAlgorithm::initialize()
 {
     this->handleParameterChange(nullptr);

@@ -43,6 +43,11 @@ class IEEE8021QbvGate : public cSimpleModule
      */
     State state;
 
+  public:
+    virtual bool isOpen();
+    virtual void open();
+    virtual void close();
+
   protected:
     /**
      * @brief Initializes the gate

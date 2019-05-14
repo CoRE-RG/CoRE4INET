@@ -43,6 +43,9 @@ class IEEE8021QbvSelectionAlgorithm : public cSimpleModule
      */
     State state;
 
+  public:
+      virtual bool isOpen();
+
   protected:
     /**
      * @brief Initializes the selection algorithm

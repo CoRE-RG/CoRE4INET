@@ -21,6 +21,7 @@ import core4inet.buffer.base.IBuffer;
 import core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm.IIEEE8021QbvSelectionAlgorithm;
 import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGate;
 import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IIEEE8021QbvSelection;
+import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGateControlList;
 
 // @see ~IShaper
 //
@@ -34,6 +35,7 @@ module IEEE8021Qbv_Shaper like IShaper
         int untaggedVID = default(0);
         //Interface allows frames with this VLAN to leave the port
         string taggedVIDs = default("0");
+        // Number of priorities
         int numPCP = default(8);
         
     gates:
@@ -61,8 +63,14 @@ module IEEE8021Qbv_Shaper like IShaper
         	@display("p=975,150,c,130");
         }
         
-        transmissionSelection: <default("TODO")> like IIEEE8021QbvSelection {
+        transmissionSelection: <default("IEEE8021QbvSelection")> like IIEEE8021QbvSelection {
             @display("p=1275,150");
+        }
+        
+        gateControlList: <default("IEEE8021QbvGateControlList")> like IIEEE8021QbvGateControlList {
+            parameters:
+            	@display("p=975,75");
+            	numGates = numPCP;
         }
         
     connections:
