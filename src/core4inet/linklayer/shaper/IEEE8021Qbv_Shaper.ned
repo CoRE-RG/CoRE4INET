@@ -16,6 +16,7 @@
 package core4inet.linklayer.shaper;
 
 import core4inet.linklayer.shaper.base.IShaper;
+import core4inet.linklayer.shaper.IEEE8021Qbv.IIEEE8021QbvQueueing;
 import core4inet.buffer.base.IBuffer;
 import core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm.IIEEE8021QbvSelectionAlgorithm;
 import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGate;
@@ -32,29 +33,34 @@ module IEEE8021Qbv_Shaper like IShaper
         int numPCP = default(8);
         
     gates:
-        input in[numPCP] @labels(EtherFrame);
+        input in @labels(EtherFrame);
         output out @labels(EtherFrame);
         
     submodules:
+        queueing: <default("TODO")> like IIEEE8021QbvQueueing {
+         	@display("p=75,150");   
+        }
+        
         queue[numPCP]: <default("QueueBuffer")> like IBuffer {
-            @display("p=75,100,c,130");
+            @display("p=375,150,c,130");
         }
         
         transmissionSelectionAlgorithm[numPCP]: <default("TODO")> like IIEEE8021QbvSelectionAlgorithm {
-            @display("p=275,100,c,130");
+            @display("p=675,150,c,130");
         }
         
         transmissionGate[numPCP]: <default("TODO")> like IIEEE8021QbvGate {
-        	@display("p=525,100,c,130");
+        	@display("p=975,150,c,130");
         }
         
         transmissionSelection: <default("TODO")> like IIEEE8021QbvSelection {
-            @display("p=775,100");
+            @display("p=1275,150");
         }
         
     connections:
+        in --> queueing.in;
         for i=0..numPCP-1 {
-            in[i] --> queue[i].in;
+            queueing.out[i] --> queue[i].in;
         }
         transmissionSelection.out --> out;     
 }
