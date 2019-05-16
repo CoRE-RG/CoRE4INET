@@ -30,18 +30,15 @@ Define_Module(IEEE8021QbvSelection);
 IEEE8021QbvSelection::IEEE8021QbvSelection()
 {
     this->framesRequested = 0;
+    this->numPCP = 0;
 }
 
-void IEEE8021QbvSelection::reportPacket()
+void IEEE8021QbvSelection::reportChange()
 {
-    Enter_Method("reportPacket()");
+    Enter_Method("reportChange()");
     if (this->framesRequested > 0)
     {
-        if (cMessage* msg = selectFrame())
-        {
-            this->framesRequested--;
-            this->send(msg, "out");
-        }
+        selectFrame();
     }
 }
 
@@ -58,30 +55,43 @@ void IEEE8021QbvSelection::handleParameterChange(const char* parname)
     }
 }
 
+void IEEE8021QbvSelection::handleMessage(cMessage* msg)
+{
+    if (msg->arrivedOn("in"))
+    {
+        if (this->framesRequested > 0)
+        {
+            this->framesRequested--;
+            this->send(msg, "out");
+        }
+        else
+        {
+            throw cRuntimeError("Received frame without pending request!");
+        }
+
+    }
+}
+
 void IEEE8021QbvSelection::requestPacket()
 {
     Enter_Method("requestPacket()");
     this->framesRequested++;
-    if (cMessage* msg = selectFrame())
-    {
-        this->framesRequested--;
-        this->send(msg, "out");
-    }
+    selectFrame();
 }
 
-cMessage* IEEE8021QbvSelection::selectFrame()
+void IEEE8021QbvSelection::selectFrame()
 {
-    for(unsigned int i=numPCP-1; i>=0; i--)
+    for(long i=static_cast<long>(numPCP)-1; i>=0; i--)
     {
         Buffer* queue = dynamic_cast<Buffer*>(this->getParentModule()->getSubmodule("queue", i));
         IEEE8021QbvSelectionAlgorithm* tsa = dynamic_cast<IEEE8021QbvSelectionAlgorithm*>(this->getParentModule()->getSubmodule("transmissionSelectionAlgorithm", i));
         IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
-        if (queue->size() > 0 && tsa->isOpen() && tg->isOpen())
+        if (queue && queue->size() > 0 && tsa && tsa->isOpen() && tg && tg->isOpen())
         {
-            return queue->getFrame();
+            queue->getFrame();
+            return;
         }
     }
-    return nullptr;
 }
 
 } //namespace

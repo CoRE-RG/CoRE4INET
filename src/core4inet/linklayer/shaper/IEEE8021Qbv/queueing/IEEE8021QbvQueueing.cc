@@ -30,7 +30,6 @@ Define_Module(IEEE8021QbvQueueing);
 
 void IEEE8021QbvQueueing::initialize()
 {
-    this->ts = dynamic_cast<IEEE8021QbvSelection*>(this->getParentModule()->getSubmodule("transmissionSelection"));
     this->handleParameterChange(nullptr);
 }
 
@@ -87,12 +86,10 @@ void IEEE8021QbvQueueing::handleMessage(cMessage *msg)
                 return;
             }
             this->send(qframe, "out", qframe->getPcp());
-            this->ts->reportPacket();
         }
         else
         {
             this->send(msg, "out", this->defaultPCP);
-            this->ts->reportPacket();
         }
     }
 }

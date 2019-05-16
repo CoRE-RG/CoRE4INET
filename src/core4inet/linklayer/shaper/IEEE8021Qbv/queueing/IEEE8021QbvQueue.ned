@@ -13,17 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.shaper.IEEE8021Qbv.selection;
+package core4inet.linklayer.shaper.IEEE8021Qbv.queueing;
+
+import core4inet.buffer.base.BGQueueBuffer;
 
 //
 // @author Philipp Meyer
 //
-simple IEEE8021QbvSelection like IIEEE8021QbvSelection
+simple IEEE8021QbvQueue extends BGQueueBuffer
 {
     parameters:
-        @display("i=block/join");
-        int numPCP = default(8);
-    gates:
-        input in @label(EtherFrame) @directIn;
-        output out @labels(EtherFrame);
+        @class(IEEE8021QbvQueue);
 }

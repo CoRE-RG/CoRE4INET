@@ -51,7 +51,7 @@ module IEEE8021Qbv_Shaper like IShaper
              	numPCP = numPCP;
         }
         
-        queue[numPCP]: <default("QueueBuffer")> like IBuffer {
+        queue[numPCP]: <default("IEEE8021QbvQueue")> like IBuffer {
             @display("p=375,150,c,130");
         }
         
@@ -69,11 +69,11 @@ module IEEE8021Qbv_Shaper like IShaper
             	numPCP = numPCP;
         }
         
-        gateControlList: <default("IEEE8021QbvGateControlList")> like IIEEE8021QbvGateControlList {
-            parameters:
-            	@display("p=975,75");
-            	numGates = numPCP;
-        }
+//        gateControlList: <default("IEEE8021QbvGateControlList")> like IIEEE8021QbvGateControlList {
+//            parameters:
+//            	@display("p=975,75");
+//            	numGates = numPCP;
+//        }
         
     connections:
         in --> queueing.in;

@@ -13,17 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.shaper.IEEE8021Qbv.selection;
+package core4inet.examples.IEEE8021Qbv.small_network;
+
+import core4inet.nodes.ethernet.IEEE8021Qbv.IEEE8021QbvEtherHost;
 
 //
-// @author Philipp Meyer
+// Node3: configuration in node3.ini.
 //
-simple IEEE8021QbvSelection like IIEEE8021QbvSelection
+module Node3 extends IEEE8021QbvEtherHost
 {
-    parameters:
-        @display("i=block/join");
-        int numPCP = default(8);
-    gates:
-        input in @label(EtherFrame) @directIn;
-        output out @labels(EtherFrame);
+    @display("bgb=487,314");
 }

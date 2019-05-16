@@ -1,0 +1,4 @@
+#!/bin/sh
+DIR=`dirname "$0"`
+cd $DIR
+../../../src/run_core4inet $*

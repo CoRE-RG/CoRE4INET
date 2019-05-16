@@ -21,6 +21,7 @@ Define_Module(IEEE8021QbvSelectionAlgorithm);
 
 bool IEEE8021QbvSelectionAlgorithm::isOpen()
 {
+    Enter_Method("isOpen()");
     return this->state == this->State::OPEN;
 }
 

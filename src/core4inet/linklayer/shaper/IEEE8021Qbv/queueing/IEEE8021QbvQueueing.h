@@ -43,7 +43,6 @@ class IEEE8021QbvQueueing : public cSimpleModule
     std::vector<int> taggedVIDs;
     unsigned int numPCP;
     unsigned int defaultPCP;
-    IEEE8021QbvSelection* ts;
 
   protected:
     virtual void initialize();

@@ -21,6 +21,7 @@ Define_Module(IEEE8021QbvGate);
 
 bool IEEE8021QbvGate::isOpen()
 {
+    Enter_Method("isOpen()");
     return this->state == this->State::OPEN;
 }
 

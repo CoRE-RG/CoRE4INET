@@ -18,7 +18,7 @@ package core4inet.linklayer.shaper.IEEE8021Qbv.queueing;
 moduleinterface IIEEE8021QbvQueueing {
     
     parameters:
-        @display("i=block/classifier");
+        @display("i=block/fork");
         //Untagged VLAN. Outgoing frames with this VLAN get untagged
         int untaggedVID;
         //Interface allows frames with this VLAN to leave the port

@@ -22,6 +22,7 @@ simple IEEE8021QbvQueueing like IIEEE8021QbvQueueing
 {
     parameters:
         @class(IEEE8021QbvQueueing);
+        @display("i=block/fork");
         //Untagged VLAN. Outgoing frames with this VLAN get untagged
         int untaggedVID = default(0);
         //Interface allows frames with this VLAN to leave the port

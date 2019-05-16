@@ -18,7 +18,9 @@ package core4inet.linklayer.shaper.IEEE8021Qbv.selection;
 moduleinterface IIEEE8021QbvSelection {
     
     parameters:
+        @display("i=block/join");
         int numPCP;
     gates:
+        input in @label(EtherFrame) @directIn;
         output out @labels(EtherFrame);
 }

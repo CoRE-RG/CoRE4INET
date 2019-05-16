@@ -16,7 +16,10 @@
 #ifndef __CORE4INET_IEEE8021QBVSELECTION_H_
 #define __CORE4INET_IEEE8021QBVSELECTION_H_
 
+//std
 #include <omnetpp.h>
+//CoRE4INET
+#include "core4inet/linklayer/shaper/base/BaseShaper.h"
 
 using namespace omnetpp;
 
@@ -25,7 +28,7 @@ namespace CoRE4INET {
 /**
  * @author Philipp Meyer
  */
-class IEEE8021QbvSelection : public cSimpleModule
+class IEEE8021QbvSelection : public virtual BaseShaper
 {
   private:
     unsigned int numPCP;
@@ -36,7 +39,8 @@ class IEEE8021QbvSelection : public cSimpleModule
      * @brief Constructor
      */
     IEEE8021QbvSelection();
-    virtual void reportPacket();
+
+    virtual void reportChange();
 
   protected:
     virtual void initialize();
@@ -46,6 +50,7 @@ class IEEE8021QbvSelection : public cSimpleModule
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char* parname);
+    virtual void handleMessage(cMessage *msg);
     /**
      * @brief this method is invoked when the underlying mac is idle.
      *
@@ -54,10 +59,10 @@ class IEEE8021QbvSelection : public cSimpleModule
      * received.
      *
      */
-    virtual void requestPacket();
+    virtual void requestPacket() override;
 
   private:
-    cMessage* selectFrame();
+    void selectFrame();
 };
 
 } //namespace
