@@ -30,7 +30,29 @@ Define_Module(IEEE8021QbvQueueing);
 
 void IEEE8021QbvQueueing::initialize()
 {
+    this->ts = dynamic_cast<IEEE8021QbvSelection*>(this->getParentModule()->getSubmodule("transmissionSelection"));
     this->handleParameterChange(nullptr);
+}
+
+void IEEE8021QbvQueueing::handleParameterChange(const char* parname)
+{
+    if (!parname || !strcmp(parname, "untaggedVID"))
+    {
+        this->untaggedVID = static_cast<uint16_t>(parameterULongCheckRange(par("untaggedVID"), 0, MAX_VLAN_NUMBER));
+    }
+    if (!parname || !strcmp(parname, "taggedVIDs"))
+    {
+        this->taggedVIDs = cStringTokenizer(par("taggedVIDs"), ",").asIntVector();
+        std::sort(taggedVIDs.begin(), taggedVIDs.end());
+    }
+    if (!parname || !strcmp(parname, "numPCP"))
+    {
+        this->numPCP = parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<unsigned int>::max());
+    }
+    if (!parname || !strcmp(parname, "defaultPCP"))
+    {
+        this->defaultPCP = parameterULongCheckRange(par("defaultPCP"), 0, this->numPCP-1);
+    }
 }
 
 void IEEE8021QbvQueueing::handleMessage(cMessage *msg)
@@ -65,34 +87,15 @@ void IEEE8021QbvQueueing::handleMessage(cMessage *msg)
                 return;
             }
             this->send(qframe, "out", qframe->getPcp());
+            this->ts->reportPacket();
         }
         else
         {
             this->send(msg, "out", this->defaultPCP);
+            this->ts->reportPacket();
         }
-        // TODO: Trigger Selection
     }
 }
 
-void IEEE8021QbvQueueing::handleParameterChange(const char* parname)
-{
-    if (!parname || !strcmp(parname, "untaggedVID"))
-    {
-        this->untaggedVID = static_cast<uint16_t>(parameterULongCheckRange(par("untaggedVID"), 0, MAX_VLAN_NUMBER));
-    }
-    if (!parname || !strcmp(parname, "taggedVIDs"))
-    {
-        this->taggedVIDs = cStringTokenizer(par("taggedVIDs"), ",").asIntVector();
-        std::sort(taggedVIDs.begin(), taggedVIDs.end());
-    }
-    if (!parname || !strcmp(parname, "numPCP"))
-    {
-        this->numPCP = parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<unsigned int>::max());
-    }
-    if (!parname || !strcmp(parname, "defaultPCP"))
-    {
-        this->defaultPCP = parameterULongCheckRange(par("defaultPCP"), 0, this->numPCP-1);
-    }
-}
 
 } //namespace

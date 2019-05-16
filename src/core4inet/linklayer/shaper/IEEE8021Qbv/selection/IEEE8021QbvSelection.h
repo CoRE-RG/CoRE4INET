@@ -36,6 +36,7 @@ class IEEE8021QbvSelection : public cSimpleModule
      * @brief Constructor
      */
     IEEE8021QbvSelection();
+    virtual void reportPacket();
 
   protected:
     virtual void initialize();
@@ -45,9 +46,6 @@ class IEEE8021QbvSelection : public cSimpleModule
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char* parname);
-    virtual void handleMessage(cMessage *msg);
-
-    virtual void reportPacket();
     /**
      * @brief this method is invoked when the underlying mac is idle.
      *

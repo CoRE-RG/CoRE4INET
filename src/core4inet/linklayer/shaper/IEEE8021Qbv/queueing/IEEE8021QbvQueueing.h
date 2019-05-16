@@ -16,7 +16,10 @@
 #ifndef __CORE4INET_IEEE8021QBVQUEUEING_H_
 #define __CORE4INET_IEEE8021QBVQUEUEING_H_
 
+//std
 #include <omnetpp.h>
+//CoRE4INET
+#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
 
 using namespace omnetpp;
 
@@ -40,10 +43,12 @@ class IEEE8021QbvQueueing : public cSimpleModule
     std::vector<int> taggedVIDs;
     unsigned int numPCP;
     unsigned int defaultPCP;
+    IEEE8021QbvSelection* ts;
+
   protected:
     virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
     virtual void handleParameterChange(const char* parname);
+    virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

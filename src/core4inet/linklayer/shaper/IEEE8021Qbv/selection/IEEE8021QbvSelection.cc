@@ -32,24 +32,6 @@ IEEE8021QbvSelection::IEEE8021QbvSelection()
     this->framesRequested = 0;
 }
 
-void IEEE8021QbvSelection::initialize()
-{
-    this->handleParameterChange(nullptr);
-}
-
-void IEEE8021QbvSelection::handleParameterChange(const char* parname)
-{
-    if (!parname || !strcmp(parname, "numPCP"))
-    {
-        this->numPCP = parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<unsigned int>::max());
-    }
-}
-
-void IEEE8021QbvSelection::handleMessage(cMessage *msg)
-{
-    // TODO - Generated method body
-}
-
 void IEEE8021QbvSelection::reportPacket()
 {
     Enter_Method("reportPacket()");
@@ -60,6 +42,19 @@ void IEEE8021QbvSelection::reportPacket()
             this->framesRequested--;
             this->send(msg, "out");
         }
+    }
+}
+
+void IEEE8021QbvSelection::initialize()
+{
+    this->handleParameterChange(nullptr);
+}
+
+void IEEE8021QbvSelection::handleParameterChange(const char* parname)
+{
+    if (!parname || !strcmp(parname, "numPCP"))
+    {
+        this->numPCP = parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<unsigned int>::max());
     }
 }
 
