@@ -59,16 +59,7 @@ void IEEE8021QbvSelection::handleMessage(cMessage* msg)
 {
     if (msg->arrivedOn("in"))
     {
-        if (this->framesRequested > 0)
-        {
-            this->framesRequested--;
-            this->send(msg, "out");
-        }
-        else
-        {
-            throw cRuntimeError("Received frame without pending request!");
-        }
-
+        this->send(msg, "out");
     }
 }
 
@@ -89,6 +80,7 @@ void IEEE8021QbvSelection::selectFrame()
         if (queue && queue->size() > 0 && tsa && tsa->isOpen() && tg && tg->isOpen())
         {
             queue->getFrame();
+            this->framesRequested--;
             return;
         }
     }

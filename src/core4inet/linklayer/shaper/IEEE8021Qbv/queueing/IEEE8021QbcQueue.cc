@@ -48,4 +48,16 @@ size_t IEEE8021QbvQueue::size() const
     return BGQueueBuffer::size();
 }
 
+void IEEE8021QbvQueue::refreshDisplay() const
+{
+    if (this->size() > 0)
+    {
+        this->getDisplayString().setTagArg("i",1,"green");
+    }
+    else if (this->size() == 0)
+    {
+        this->getDisplayString().setTagArg("i",1,"red");
+    }
+}
+
 } //namespace
