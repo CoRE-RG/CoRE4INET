@@ -33,8 +33,10 @@ void IEEE8021QbvGateControlList::initialize(int stage)
         this->tick = getOscillator()->getPreciseTick();
         this->handleParameterChange(nullptr);
         this->controlElement = this->controlList.begin();
-        this->propagteCurrentControlElement();
-        this->scheduleCurrentControlElementTime();
+        SchedulerTimerEvent* event = new SchedulerTimerEvent("First control element", TIMER_EVENT);
+        event->setTimer(static_cast<uint64_t>(0));
+        event->setDestinationGate(this->gate("schedulerIn"));
+        getTimer()->registerEvent(event);
     }
 }
 
@@ -52,6 +54,7 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "controlList"))
     {
+        controlList.clear();
         vector<string> controlRows = cStringTokenizer(par("controlList"), ";").asVector();
         for (vector<string>::const_iterator controlRow = controlRows.begin(); controlRow != controlRows.end(); ++controlRow)
         {
@@ -71,15 +74,23 @@ void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("schedulerIn"))
     {
-        this->switchToNextControlElement();
-        this->propagteCurrentControlElement();
-        this->scheduleCurrentControlElementTime();
+        if (!strcmp(msg->getName(), "First control element"))
+        {
+            this->propagteCurrentControlElement();
+            this->scheduleCurrentControlElementTime();
+        }
+        else
+        {
+            this->switchToNextControlElement();
+            this->propagteCurrentControlElement();
+            this->scheduleCurrentControlElementTime();
+        }
     }
 }
 
 void IEEE8021QbvGateControlList::scheduleCurrentControlElementTime()
 {
-    SchedulerTimerEvent* event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+    SchedulerTimerEvent* event = new SchedulerTimerEvent("Next control element", TIMER_EVENT);
     event->setTimer(static_cast<uint64_t>(ceil((*(this->controlElement)).second / this->tick)));
     event->setDestinationGate(this->gate("schedulerIn"));
     getTimer()->registerEvent(event);
@@ -87,7 +98,7 @@ void IEEE8021QbvGateControlList::scheduleCurrentControlElementTime()
 
 void IEEE8021QbvGateControlList::propagteCurrentControlElement()
 {
-    for (unsigned int i=0; i<numGates; i++)
+    for (long i=static_cast<long>(numGates)-1; i>=0; i--)
     {
         IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
         if ( !strcmp((*(this->controlElement)).first[i].c_str(), "o"))

@@ -27,17 +27,25 @@ bool IEEE8021QbvGate::isOpen()
 
 void IEEE8021QbvGate::open()
 {
+    Enter_Method("open()");
+    State oldState = this->state;
     this->state = this->State::OPEN;
+    if (this->state != oldState)
+    {
+        ts->reportChange();
+    }
 }
 
 void IEEE8021QbvGate::close()
 {
+    Enter_Method("close()");
     this->state = this->State::CLOSE;
 }
 
 void IEEE8021QbvGate::initialize()
 {
     this->handleParameterChange(nullptr);
+    this->ts = dynamic_cast<IEEE8021QbvSelection*>(this->getParentModule()->getSubmodule("transmissionSelection"));
     WATCH(this->state);
 }
 

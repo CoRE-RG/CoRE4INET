@@ -16,7 +16,10 @@
 #ifndef __CORE4INET_IEEE8021QBVGATE_H_
 #define __CORE4INET_IEEE8021QBVGATE_H_
 
+//std
 #include <omnetpp.h>
+//CoRE4INET
+#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
 
 using namespace omnetpp;
 
@@ -42,6 +45,7 @@ class IEEE8021QbvGate : public cSimpleModule
      * @brief Current state of the IEEE8021QbvGate.
      */
     State state;
+    IEEE8021QbvSelection* ts;
 
   public:
     virtual bool isOpen();
