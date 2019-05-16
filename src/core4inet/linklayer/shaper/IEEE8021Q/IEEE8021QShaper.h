@@ -106,7 +106,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * @brief Forwards the messages from the different buffers and LLC
          * according to the specification for RCMessages.
          *
-         * Rate-constrained messages are send immediately, lower priority frames are queued
+         * IEEE 802.1Q messages are send immediately, lower priority frames are queued
          * as long as there are rate-constrained messages waiting.
          * If the mac layer is idle, messages are picked from the queues according
          * to the priorities, using the template class.
@@ -118,7 +118,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
         /**
          * @brief Queues messages in the correct queue
          *
-         * Rate-constrained messages are queued in this module, other messages are forwarded to the
+         * IEEE 802.1Q messages are queued in this module, other messages are forwarded to the
          * template classes enqueueMessage method
          *
          * @param msg the incoming message

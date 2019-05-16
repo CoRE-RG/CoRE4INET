@@ -64,7 +64,9 @@ module IEEE8021Qbv_Shaper like IShaper
         }
         
         transmissionSelection: <default("IEEE8021QbvSelection")> like IIEEE8021QbvSelection {
-            @display("p=1275,150");
+            parameters:
+            	@display("p=1275,150");
+            	numPCP = numPCP;
         }
         
         gateControlList: <default("IEEE8021QbvGateControlList")> like IIEEE8021QbvGateControlList {

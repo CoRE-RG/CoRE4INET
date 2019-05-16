@@ -15,10 +15,11 @@
 
 package core4inet.linklayer.shaper.IEEE8021Qbv.selection;
 
-moduleinterface IIEEE8021QbvSelection {
-    
+//
+// @author Philipp Meyer
+//
+simple IEEE8021QbvSelection like IIEEE8021QbvSelection
+{
     parameters:
-        int numPCP;
-    gates:
-        output out @labels(EtherFrame);
+        int numPCP = default(8);
 }
