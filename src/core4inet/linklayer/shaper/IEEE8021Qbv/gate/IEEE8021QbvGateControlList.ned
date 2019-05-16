@@ -15,11 +15,21 @@
 
 package core4inet.linklayer.shaper.IEEE8021Qbv.gate;
 
-moduleinterface IIEEE8021QbvGateControlList
+//
+// @author Philipp Meyer
+//
+simple IEEE8021QbvGateControlList like IIEEE8021QbvGateControlList
 {
     parameters:
+        @class(IEEE8021QbvGateControlList);
         @display("i=block/table");
-        int numGates;
+        int numGates = default(8);
+        string controlList = default("o,o,o,o,o,o,o,o:0.0001;");
+        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        string oscillator = default("^.^.^.scheduler.oscillator");
+        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        string timer = default("^.^.^.scheduler.timer");
+        
     gates:
-        input schedulerIn @directIn;
+    	input schedulerIn @directIn;
 }
