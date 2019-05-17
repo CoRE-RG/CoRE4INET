@@ -86,6 +86,7 @@ void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
             this->scheduleCurrentControlElementTime();
         }
     }
+    delete msg;
 }
 
 void IEEE8021QbvGateControlList::scheduleCurrentControlElementTime()
