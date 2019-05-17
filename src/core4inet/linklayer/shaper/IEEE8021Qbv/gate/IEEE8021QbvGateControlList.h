@@ -27,28 +27,74 @@ using namespace std;
 namespace CoRE4INET {
 
 /**
+ * @brief IEEE 802.1Qbv gate control list implementation.
+ *
+ * Stores control list and propagates its states over time.
+ *
+ * @ingroup IEEE8021Qbv
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QbvGateControlList : public virtual Timed
 {
   private:
+    /**
+     * @brief Number of gates for control.
+     */
     unsigned int numGates;
     /**
-     * @brief Length of one tick
+     * @brief Length of one tick.
      */
     simtime_t tick;
+    /**
+     * @brief Data structure containing the complete control list.
+     */
     vector<pair<vector<string>, double>> controlList;
+    /**
+     * @brief Iterator of control list data structure. Stores a pointer to the current control list element.
+     */
     vector<pair<vector<string>, double>>::iterator controlElement;
 
   protected:
+    /**
+     * @brief Initializes the module.
+     *
+     * @param stage The stages. Module initializes when stage==0
+     */
     virtual void initialize(int stage);
+    /**
+     * @brief Returns the number of initialization stages this module needs.
+     *
+     * @return returns 2
+     */
     virtual int numInitStages() const;
+    /**
+     * @brief Indicates a parameter has changed.
+     *
+     * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+     */
     virtual void handleParameterChange(const char* parname);
+    /**
+     * @brief Receives SchedulerTimerEvent messages from scheduler indicating the expiration of the current control element.
+     *
+     * Switches to next control element, propagate its gate states and schedule the next SchedulerTimerEvent message.
+     *
+     * @param msg the incoming message
+     */
     virtual void handleMessage(cMessage *msg);
 
   private:
+    /**
+     * @brief Schedule the next SchedulerTimerEvent message.
+     */
     void scheduleCurrentControlElementTime();
+    /**
+     * @brief Propagate the gate states of the current control element.
+     */
     void propagteCurrentControlElement();
+    /**
+     * @brief Switch to next control element of the control list.
+     */
     void switchToNextControlElement();
 };
 

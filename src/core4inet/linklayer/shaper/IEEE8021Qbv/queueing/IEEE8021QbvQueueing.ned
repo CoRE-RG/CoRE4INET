@@ -16,6 +16,12 @@
 package core4inet.linklayer.shaper.IEEE8021Qbv.queueing;
 
 //
+// A Queueing module for IEEE 802.1Qbv transmission selection.
+//
+// Handles incoming frames and forwards them to the corresponding queues.
+//
+// @see ~IIEEE8021QbvQueueing
+//
 // @author Philipp Meyer
 //
 simple IEEE8021QbvQueueing like IIEEE8021QbvQueueing
@@ -23,14 +29,18 @@ simple IEEE8021QbvQueueing like IIEEE8021QbvQueueing
     parameters:
         @class(IEEE8021QbvQueueing);
         @display("i=block/fork");
-        //Untagged VLAN. Outgoing frames with this VLAN get untagged
-        int untaggedVID = default(0);
-        //Interface allows frames with this VLAN to leave the port
-        string taggedVIDs = default("0");
+        // Number of priorities.
         int numPCP = default(8);
-        int defaultPCP = default(0);      
+        // Default priority for frames without PCP.
+        int defaultPCP = default(0);  
+        // Untagged VLAN. Outgoing frames with this VLAN get untagged
+        int untaggedVID = default(0);
+        // Interface allows frames with this VLAN to leave the port
+        string taggedVIDs = default("0");        
         
     gates:
+        // Input for incoming inet::EtherFrame messages.
         input in @labels(EtherFrame);
+        // Ouput to the corresponding queues.
         output out[numPCP] @labels(EtherFrame);
 }

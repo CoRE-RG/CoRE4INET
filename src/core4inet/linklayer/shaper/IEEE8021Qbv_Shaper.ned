@@ -23,23 +23,28 @@ import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGate;
 import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IIEEE8021QbvSelection;
 import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGateControlList;
 
-// @see ~IShaper
+//
+// IEEE 802.1Qbv transmission selection shaper compound module.
+//
+// @see ~IShaper, ~IIEEE8021QbvQueueing, ~IEEE8021QbvQueueing, ~IBuffer, ~IEEE8021QbvQueue, ~IIEEE8021QbvSelectionAlgorithm, ~IEEE8021QbvSelectionAlgorithm, ~IIEEE8021QbvGate, ~IEEE8021QbvGate, ~IIEEE8021QbvSelection, ~IEEE8021QbvSelection, ~IIEEE8021QbvGateControlList, ~IEEE8021QbvGateControlList  
 //
 // @author Philipp Meyer
-
+//
 module IEEE8021Qbv_Shaper like IShaper
 {
     parameters:
         @display("i=block/classifier");
-        //Untagged VLAN. Outgoing frames with this VLAN get untagged
+        //Untagged VLAN. Outgoing frames with this VLAN get untagged.
         int untaggedVID = default(0);
-        //Interface allows frames with this VLAN to leave the port
+        //Interface allows frames with this VLAN to leave the port.
         string taggedVIDs = default("0");
-        // Number of priorities
+        // Number of priorities.
         int numPCP = default(8);
         
     gates:
+        // Input of the IEEE 802.1Qbv shaper.
         input in @labels(EtherFrame);
+        // Output of the IEEE 802.1Qbv shaper.
         output out @labels(EtherFrame);
         
     submodules:

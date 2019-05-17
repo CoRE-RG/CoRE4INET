@@ -17,6 +17,9 @@ package core4inet.linklayer.shaper.IEEE8021Qbv.queueing;
 
 import core4inet.buffer.base.BGQueueBuffer;
 
+// A queue buffer module for IEEE 802.1Qbv transmission selection.
+//
+// @see ~IBuffer, ~BGQueueBuffer
 //
 // @author Philipp Meyer
 //

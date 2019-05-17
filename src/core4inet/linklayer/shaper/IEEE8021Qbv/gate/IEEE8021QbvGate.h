@@ -26,17 +26,21 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
+ * @brief A Shaper implementing IEEE 802.1Qbv transmission selection with gates.
+ *
+ * @ingroup IEEE8021Qbv
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QbvGate : public cSimpleModule
 {
   public:
     /**
-     * @brief State of the IEEE8021QbvGate
+     * @brief State of the IEEE8021QbvGate.
      */
     enum State
     {
-      CLOSE = 0,//!< CLOSE
+      CLOSED = 0,//!< CLOSED
       OPEN = 1  //!< OPEN
     };
 
@@ -45,16 +49,30 @@ class IEEE8021QbvGate : public cSimpleModule
      * @brief Current state of the IEEE8021QbvGate.
      */
     State state;
+    /**
+     * @brief Pointer to IEEE 802.1Qbv transmission selection module.
+     */
     IEEE8021QbvSelection* ts;
 
   public:
+    /**
+     * @brief Checks if gate is open.
+     *
+     * @return true if gate is open
+     */
     virtual bool isOpen();
+    /**
+     * @brief Open the gate!
+     */
     virtual void open();
+    /**
+     * @brief Close the gate!
+     */
     virtual void close();
 
   protected:
     /**
-     * @brief Initializes the gate
+     * @brief Initializes the gate.
      */
     virtual void initialize();
     /**
@@ -64,7 +82,7 @@ class IEEE8021QbvGate : public cSimpleModule
      */
     virtual void handleParameterChange(const char *parname);
     /**
-     * @brief Components that contain visualization-related code are expected to override refreshDisplay()
+     * @brief Components that contain visualization-related code are expected to override refreshDisplay().
      */
     virtual void refreshDisplay() const;
 };

@@ -15,12 +15,22 @@
 
 package core4inet.linklayer.shaper.IEEE8021Qbv.selection;
 
+//
+// Interface to be implemented by IEEE 802.1Qbv transmission selection modules.
+//
+// @see ~ IEEE8021QbvSelection
+//
+// @author Philipp Meyer
+//
 moduleinterface IIEEE8021QbvSelection {
     
     parameters:
         @display("i=block/join");
+        // Number of priorities.
         int numPCP;
     gates:
+        // Input for selected inet::EtherFrame messages.
         input in @label(EtherFrame) @directIn;
+        // Output to the MAC module.
         output out @labels(EtherFrame);
 }

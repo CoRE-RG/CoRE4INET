@@ -23,6 +23,12 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
+ * @brief A simple IEEE 802.1Qbv transmission selection algorithm (tsa) implementation.
+ *
+ * This tsa is always open. Can be used as base class for tsa impelemtations.
+ *
+ * @ingroup IEEE8021Qbv
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QbvSelectionAlgorithm : public cSimpleModule
@@ -33,7 +39,7 @@ class IEEE8021QbvSelectionAlgorithm : public cSimpleModule
     */
     enum State
     {
-    CLOSE = 0,//!< CLOSE
+    CLOSED = 0,//!< CLOSED
     OPEN = 1  //!< OPEN
     };
 
@@ -44,7 +50,12 @@ class IEEE8021QbvSelectionAlgorithm : public cSimpleModule
     State state;
 
   public:
-      virtual bool isOpen();
+    /**
+     * @brief Check if tsa is state is open.
+     *
+     * @return true if state is open
+     */
+    virtual bool isOpen();
 
   protected:
     /**

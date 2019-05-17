@@ -26,12 +26,22 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
+ * @brief IEEE 802.1Qbv transmission selection.
+ *
+ * @ingroup IEEE8021Qbv
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QbvSelection : public virtual BaseShaper
 {
   private:
+    /**
+     * @brief Number of priorities.
+     */
     unsigned int numPCP;
+    /**
+     * @brief Number of frames requested by MAC module.
+     */
     size_t framesRequested;
 
   public:
@@ -39,10 +49,17 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * @brief Constructor
      */
     IEEE8021QbvSelection();
-
+    /**
+     * @brief Report change to transmission selection.
+     *
+     * The frame selection process gets triggered.
+     */
     virtual void reportChange();
 
   protected:
+    /**
+     * @brief Initializes the module.
+     */
     virtual void initialize();
     /**
      * @brief Indicates a parameter has changed.
@@ -50,6 +67,11 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char* parname);
+    /**
+     * @brief Handles incoming messages and forwards them to the MAC module.
+     *
+     * @param msg incoming inet::EtherFrame
+     */
     virtual void handleMessage(cMessage *msg);
     /**
      * @brief this method is invoked when the underlying mac is idle.
@@ -57,11 +79,15 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * When this method is invoked the module sends a new message when there is
      * one. Else it saves the state and sends the message immediately when it is
      * received.
-     *
      */
     virtual void requestPacket() override;
 
   private:
+    /**
+     * @brief Implements IEEE 802.1Qbv transmission frame selection.
+     *
+     * For each priority starting with the highest (default 7): If queue is not empty and transmission selection algorithm is open and transmission gate is open frame will be selected.
+     */
     void selectFrame();
 };
 

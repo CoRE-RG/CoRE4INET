@@ -16,11 +16,17 @@
 package core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm;
 
 //
+// Interface to be implemented by IEEE 802.1Qbv transmission selection algorithm (tsa) modules.
+//
+// @warning Since this is an abstract module please do not instantiate it!
+//
+// @see ~IEEE8021QbvSelectionAlgorithm
+//
 // @author Philipp Meyer
 //
 moduleinterface IIEEE8021QbvSelectionAlgorithm
 {
   	parameters:
-        // State of the gate. O (Open) or C (Closed).
+        // State of the gate. 'o' (OPEN) or 'C' (CLOSED).
         string state;
 }

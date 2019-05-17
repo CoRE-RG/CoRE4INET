@@ -15,11 +15,22 @@
 
 package core4inet.linklayer.shaper.IEEE8021Qbv.gate;
 
+//
+// Interface to be implemented by IEEE 802.1Qbv gate control list modules.
+//
+// @warning Since this is an abstract module please do not instantiate it!
+//
+// @see ~IEEE8021QbvGateControlList
+//
+// @author Philipp Meyer
+//
 moduleinterface IIEEE8021QbvGateControlList
 {
     parameters:
         @display("i=block/table");
+        // Number of gates controled by the module
         int numGates;
     gates:
+        // Input gate for the incoming SchedulerTimerEvent messages
         input schedulerIn @directIn;
 }

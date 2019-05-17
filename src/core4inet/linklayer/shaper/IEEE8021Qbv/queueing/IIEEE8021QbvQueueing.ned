@@ -15,17 +15,29 @@
 
 package core4inet.linklayer.shaper.IEEE8021Qbv.queueing;
 
+//
+// Interface to be implemented by IEEE 802.1Qbv queueing modules.
+//
+// @warning Since this is an abstract module please do not instantiate it!
+//
+// @see ~IEEE8021QbvQueueing
+//
+// @author Philipp Meyer
+//
 moduleinterface IIEEE8021QbvQueueing {
     
     parameters:
         @display("i=block/fork");
+        // Number of priorities.
+        int numPCP;
         //Untagged VLAN. Outgoing frames with this VLAN get untagged
         int untaggedVID;
         //Interface allows frames with this VLAN to leave the port
-        string taggedVIDs;
-        int numPCP;
+        string taggedVIDs;   
         
     gates:
+        // Input for incoming inet::EtherFrame messages.
         input in @labels(EtherFrame);
+        // Ouput to the corresponding queues.
         output out[numPCP] @labels(EtherFrame);
 }

@@ -16,12 +16,18 @@
 package core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm;
 
 //
-// TODO auto-generated module
+// Simple IEEE 802.1Qbv transmission selection algorithm (tsa) module.
+//
+// This tsa is always open. Can be used as base module for tsa modules.
+//
+// @see ~IIEEE8021QbvSelectionAlgorithm
+//
+// @author Philipp Meyer
 //
 simple IEEE8021QbvSelectionAlgorithm like IIEEE8021QbvSelectionAlgorithm
 {
     parameters:
         @class(IEEE8021QbvSelectionAlgorithm);
-        // State of the gate. O (Open) or C (Closed).
-        string state = default("O");
+        // State of the gate. 'o' (OPEN) or 'C' (CLOSED).
+        string state = default("o");
 }

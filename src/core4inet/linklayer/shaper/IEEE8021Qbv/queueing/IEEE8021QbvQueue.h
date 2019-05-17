@@ -27,16 +27,23 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
+ * @brief A queue buffer for IEEE 802.1Qbv transmission selection with gates.
+ *
+ * @ingroup IEEE8021Qbv
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QbvQueue : public virtual BGQueueBuffer
 {
   private:
+    /**
+     * @brief Pointer to IEEE 802.1Qbv transmission selection module.
+     */
     IEEE8021QbvSelection* ts;
 
   protected:
     /**
-     * @brief Initializes the module
+     * @brief Initializes the module.
      *
      * @param stage The stages. Module initializes when stage==0
      */
@@ -44,32 +51,25 @@ class IEEE8021QbvQueue : public virtual BGQueueBuffer
     /**
      * @brief Is called when a new Frame is received in the buffer.
      *
-     * When a frame is received on the in-Gate it is processed. If the destination
-     * address is unspecified it is set according to the ct marker of the buffer.
-     * Afterwards it is enqueued using the buffer specific enqueue(inet::EtherFrame *newFrame)
-     * method. In the end all registered receive callbacks are executed.
-     *
      * @param msg The incoming message
      */
     virtual void handleMessage(cMessage *msg) override;
     /**
      * @brief Is called to get an inet::EtherFrame from the buffer.
      *
-     * This method must be implemented according to the buffer strategy.
+     * Sends the inet::EtherFrame to the transmission selection module.
      *
-     * @return A pointer to the next EtherFrame from the buffer. Returns
-     * nullptr if there is no EtherFrame in the buffer
+     * @return nullptr
      */
     virtual inet::EtherFrame* dequeue() override;
     /**
-     * @brief Returns the used size of the buffer
+     * @brief Returns the used size of the buffer.
      *
      * @return number of messages in the buffer
-     *
      */
     virtual size_t size() const override;
     /**
-     * @brief Components that contain visualization-related code are expected to override refreshDisplay()
+     * @brief Components that contain visualization-related code are expected to override refreshDisplay().
      */
     virtual void refreshDisplay() const;
 

@@ -16,12 +16,16 @@
 package core4inet.linklayer.shaper.IEEE8021Qbv.gate;
 
 //
-// TODO auto-generated module
+// A gate for the IEEE 802.1Qbv transmission selection with gates
+//
+// @see ~IIEEE8021QbvGate
+//
+// @author Philipp Meyer
 //
 simple IEEE8021QbvGate like IIEEE8021QbvGate
 {
     parameters:
         @class(IEEE8021QbvGate);
-        // State of the gate. O (Open) or C (Closed).
-        string state = default("O");
+        // State of the gate. 'o' (OPEN) or 'C' (CLOSED).
+        string state = default("o");
 }

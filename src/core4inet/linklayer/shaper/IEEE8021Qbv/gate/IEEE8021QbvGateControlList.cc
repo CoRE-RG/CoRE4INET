@@ -64,6 +64,13 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
             {
                 throw cRuntimeError("controlList row size is not %d", this->numGates);
             }
+            for (size_t i=0; i<controlRowGates.size(); i++)
+            {
+                if (strcmp(controlRowGates[i].c_str(), "o") && strcmp(controlRowGates[i].c_str(), "C"))
+                {
+                    throw cRuntimeError("controlList contains unexpected character \'%s\'. Allowed are \'o' (OPEN) or \'C\' (CLOSED).", controlRowGates[i].c_str());
+                }
+            }
             double controlRowTime = stod(controlRowTupel[1]);
             controlList.push_back(make_pair(controlRowGates, controlRowTime));
         }

@@ -16,6 +16,10 @@
 package core4inet.linklayer.shaper.IEEE8021Qbv.gate;
 
 //
+// Module that stores a IEEE 802.1Qbv gate control list and propagates its states to the gates over time.
+//
+// @see ~IIEEE8021QbvGateControlList, ~IIEEE8021QbvGate, ~IEEE8021QbvGate
+//
 // @author Philipp Meyer
 //
 simple IEEE8021QbvGateControlList like IIEEE8021QbvGateControlList
@@ -23,13 +27,16 @@ simple IEEE8021QbvGateControlList like IIEEE8021QbvGateControlList
     parameters:
         @class(IEEE8021QbvGateControlList);
         @display("i=block/table");
+        // Number of gates controled by the module
         int numGates = default(8);
+        // Control list (Syntax: <controlListRow[0]{<gate[0]State>,...,<gate[numGates]State>:<agingTimeInSeconds>}>;<controlListRow[1]>;...;<controlListRow[n];)
         string controlList = default("o,o,o,o,o,o,o,o:0.0001;");
-        //Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
+        // Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("^.^.^.scheduler.oscillator");
-        //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
+        // Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.^.^.scheduler.timer");
         
     gates:
+        // Input gate for the incoming SchedulerTimerEvent messages
     	input schedulerIn @directIn;
 }

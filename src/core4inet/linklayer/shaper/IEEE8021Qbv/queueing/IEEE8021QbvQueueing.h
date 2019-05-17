@@ -26,11 +26,25 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
+ * @brief A Queueing module for the IEEE 802.1Qbv transmission selection.
+ *
+ * Forwards incoming frames to the corresponding queues and handles VLANs.
+ *
+ * @ingroup IEEE8021Qbv
+ *
  * @author Philipp Meyer
  */
 class IEEE8021QbvQueueing : public cSimpleModule
 {
-  private:
+private:
+    /**
+     * @brief Number of priorities.
+     */
+    unsigned int numPCP;
+    /**
+     * @brief Default priority for frames without PCP.
+     */
+    unsigned int defaultPCP;
     /**
      * @brief Untagged VLAN.
      * Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged.
@@ -41,12 +55,23 @@ class IEEE8021QbvQueueing : public cSimpleModule
      * Only outgoing frames with one of the VLANs in this list are transmitted. Default is "0" to allow for untagged frames
      */
     std::vector<int> taggedVIDs;
-    unsigned int numPCP;
-    unsigned int defaultPCP;
 
   protected:
+    /**
+     * @brief Initializes the module.
+     */
     virtual void initialize();
+    /**
+     * @brief Indicates a parameter has changed.
+     *
+     * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+     */
     virtual void handleParameterChange(const char* parname);
+    /**
+     * @brief Handles the incoming message of the IEEE 802.1Qbv transmission selection.
+     *
+     * @param msg incoming inet::EtherFrame.
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

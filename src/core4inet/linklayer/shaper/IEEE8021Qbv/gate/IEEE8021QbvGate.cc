@@ -39,7 +39,7 @@ void IEEE8021QbvGate::open()
 void IEEE8021QbvGate::close()
 {
     Enter_Method("close()");
-    this->state = this->State::CLOSE;
+    this->state = this->State::CLOSED;
 }
 
 void IEEE8021QbvGate::initialize()
@@ -53,17 +53,17 @@ void IEEE8021QbvGate::handleParameterChange(const char *parname)
 {
     if (!parname || !strcmp(parname, "state"))
     {
-        if (!strcmp(par("state").stringValue(), "O"))
+        if (!strcmp(par("state").stringValue(), "o"))
         {
             this->state = this->State::OPEN;
         }
         else if (!strcmp(par("state").stringValue(), "C"))
         {
-            this->state = this->State::CLOSE;
+            this->state = this->State::CLOSED;
         }
         else
         {
-            throw cRuntimeError("Parameter state of %s is %s and is only allowed to be O or C", getFullPath().c_str(), par("state").stringValue());
+            throw cRuntimeError("Parameter state of %s is \'%s\' and is only allowed to be \'o\' (OPEN) or \'C\' (CLOSED)", getFullPath().c_str(), par("state").stringValue());
         }
     }
 }
@@ -74,7 +74,7 @@ void IEEE8021QbvGate::refreshDisplay() const
     {
         this->getDisplayString().setTagArg("b",3,"green");
     }
-    else if (this->state == this->State::CLOSE)
+    else if (this->state == this->State::CLOSED)
     {
         this->getDisplayString().setTagArg("b",3,"red");
     }
