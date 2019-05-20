@@ -22,25 +22,27 @@ import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.linklayer.ethernet.base.BGEtherEncap;
+import core4inet.services.avb.SRP.SRPTable;
+import core4inet.services.avb.SRP.SRProtocol;
+import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 
 import inet.common.lifecycle.NodeStatus;
 import inet.networklayer.common.InterfaceTable;
 
 //
-// Module for a IEEE 802.1Q Host.
-// Contains a EtherEncap for best-effort traffic and a IEEE8021QPHYPort module as physical port.
+// Module for a IEEE 802.1Qbv Host.
+// Contains a EtherEncap for best-effort traffic and a IEEE8021QbvPHYPort module as physical port.
 //
-// @see ~NodeStatus, ~IEEE8021QPHYPort, ~BGEtherEncap, ~ISync, ~ITTEScheduler, ~IApplication, ~BGQueueBuffer, ~CheckedBuffer, ~InterfaceTable
+// @see ~NodeStatus, ~IEEE8021QbvPHYPort, ~BGEtherEncap, ~ISync, ~ITTEScheduler, ~IApplication, ~BGQueueBuffer, ~CheckedBuffer, ~InterfaceTable, ~SRPEtherEncap, ~SRPTable, ~SRProtocol
 //
-// @author Till Steinbach, Philipp Meyer
+// @author Philipp Meyer
 //
 module IEEE8021QbvEtherHost
 {
     parameters:
         @display("bgb=894,314;i=device/device");
         @networkNode;
-        @labels(node,ethernet-node);
-        
+        @labels(node,ethernet-node);    
         // Number of Applications running on the device
         int numApps = default(0);
         // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
@@ -49,8 +51,7 @@ module IEEE8021QbvEtherHost
         // Number of Ports of the device
         int numPorts = default(1);
         // Forwardingdelay of the device hardware
-        double hardware_delay @unit(s) = default(0us);
-        
+        double hardware_delay @unit(s) = default(0us);       
         *.interfaceTableModule = default(absPath(".interfaceTable"));
         
     gates:
@@ -69,7 +70,7 @@ module IEEE8021QbvEtherHost
         }
         
         // Encap for best-effort traffic
-        encap: BGEtherEncap {
+        encap: SRPEtherEncap {
             parameters:
                 @display("p=141,256");
         }
@@ -109,6 +110,16 @@ module IEEE8021QbvEtherHost
             @display("p=234,100");
         }
         
+        // Stream Reservation Protocol table
+        srpTable: SRPTable {
+            @display("p=141,99");
+        }
+
+		// Stream Reservation Protocol implementation
+        srpProtocol: SRProtocol {
+            @display("p=141,169");
+        }
+        
     connections allowunconnected:
         phy[0].phys <--> ethg;
         encap.lowerLayerOut --> phy[0].upperLayerIn;
@@ -116,5 +127,8 @@ module IEEE8021QbvEtherHost
 
         encap.bgOut --> bgIn.in;
         bgOut.out --> encap.bgIn;
+        
+        srpProtocol.out --> encap.srpIn;
+        srpProtocol.in <-- encap.srpOut;
 }
 

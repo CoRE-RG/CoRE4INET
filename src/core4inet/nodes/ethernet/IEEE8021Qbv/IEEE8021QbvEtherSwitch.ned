@@ -18,6 +18,9 @@ import core4inet.linklayer.port.IEEE8021QbvPHYPort;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.utilities.modules.CheckedBuffer;
+import core4inet.services.avb.SRP.SRPTable;
+import core4inet.services.avb.SRP.SRProtocol;
+import core4inet.linklayer.beHandling.avb.relay.SRPRelay;
 
 import inet.linklayer.contract.IMACAddressTable;
 import inet.linklayer.contract.IMACRelayUnit;
@@ -25,25 +28,23 @@ import inet.common.lifecycle.NodeStatus;
 import inet.networklayer.common.InterfaceTable;
 
 //
-// Module for a IEEE 802.1Q Ethernet Switch with variable number of ports.
+// Module for a IEEE 802.1Qbv Ethernet Switch with variable number of ports.
 //
-// @see ~NodeStatus, ~IMACRelayUnit, ~IMACAddressTable, ~InterfaceTable, ~IEEE8021QPHYPort, ~ISync, ~ITTEScheduler, ~CheckedBuffer
+// @see ~NodeStatus, ~IMACRelayUnit, ~IMACAddressTable, ~InterfaceTable, ~IEEE8021QPHYPort, ~ISync, ~ITTEScheduler, ~CheckedBuffer, ~SRPTable, ~SRProtocol, ~SRPRelay
 //
-// @author Till Steinbach, Philipp Meyerr 
+// @author Philipp Meyer
 //
 module IEEE8021QbvEtherSwitch
 {
     parameters:
         @display("i=block/switch;bgb=514,312");
         @networkNode;
-        @labels(node,ethernet-node);
-              
+        @labels(node,ethernet-node);           
         // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
         // (When not manually declared in own deriving .ned file)
         int numBuffer = default(0);
         // Forwardingdelay of the device hardware
-        double hardware_delay @unit(s) = default(8us);
-        
+        double hardware_delay @unit(s) = default(8us);        
         *.interfaceTableModule = default(absPath(".interfaceTable"));
         
     gates:
@@ -62,7 +63,7 @@ module IEEE8021QbvEtherSwitch
         }
         
         // Implementation of the forwarding part
-        beswitch: <default("MACRelayUnit")> like IMACRelayUnit {
+        beswitch: SRPRelay {
             parameters:
                 @display("p=100,50");
             gates:
@@ -105,11 +106,24 @@ module IEEE8021QbvEtherSwitch
             @display("p=170,130");
         }
         
+        // Stream Reservation Protocol table
+        srpTable: SRPTable {
+            @display("p=346,238");
+        }
+        
+        // Stream Reservation Protocol implementation
+        srpProtocol: SRProtocol {
+            @display("p=346,50");
+        }
+        
     connections:
         for i=0..sizeof(ethg)-1 {
             phy[i].phys <--> ethg[i];
             phy[i].upperLayerIn <-- ProcessingDelay{ delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
             phy[i].upperLayerOut --> ProcessingDelay{ delay = (hardware_delay/2); } --> beswitch.ifIn[i];
         }
+        
+        srpProtocol.out --> beswitch.srpIn;
+        srpProtocol.in <-- beswitch.srpOut;
 }
 
