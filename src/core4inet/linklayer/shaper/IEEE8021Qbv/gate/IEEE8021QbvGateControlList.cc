@@ -32,7 +32,6 @@ void IEEE8021QbvGateControlList::initialize(int stage)
         Timed::initialize();
         this->tick = getOscillator()->getPreciseTick();
         this->handleParameterChange(nullptr);
-        this->controlElement = this->controlList.begin();
         SchedulerTimerEvent* event = new SchedulerTimerEvent("First control element", TIMER_EVENT);
         event->setTimer(static_cast<uint64_t>(0));
         event->setDestinationGate(this->gate("schedulerIn"));
@@ -74,6 +73,7 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
             double controlRowTime = stod(controlRowTupel[1]);
             controlList.push_back(make_pair(controlRowGates, controlRowTime));
         }
+        this->controlElement = this->controlList.begin();
     }
 }
 
