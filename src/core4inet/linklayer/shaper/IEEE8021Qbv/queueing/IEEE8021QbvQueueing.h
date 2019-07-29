@@ -34,7 +34,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class IEEE8021QbvQueueing : public cSimpleModule
+class IEEE8021QbvQueueing : public virtual cSimpleModule
 {
 private:
     /**

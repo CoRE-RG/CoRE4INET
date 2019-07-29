@@ -16,6 +16,10 @@
 package core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm;
 
 //
+// Represents a Credit Based Shaper (CBS) implemenation for IEEE 802.1Qbv
+//
+// @see ~IEEE8021QbvSelectionAlgorithm
+//
 // @author Philipp Meyer
 //
 simple CreditBasedShaper extends IEEE8021QbvSelectionAlgorithm
@@ -25,9 +29,15 @@ simple CreditBasedShaper extends IEEE8021QbvSelectionAlgorithm
     	// Signal emitted when the credit of the CBS algorithm changes
         @signal[credit](type=long);
         // Statistic of the credit of the CBS algorithm
-        @statistic[credit](title="Credit"; source=credit; unit=b; record=vector; interpolationmode=linear;);
+        @statistic[credit](title="Credit"; source=credit; unit=b; record=vector; interpolationmode=linear;);   	
+    	// Stream Reservation Class of the Shaper
+        string srClass = default("A");
     	// Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("^.^.^.scheduler.oscillator");
         // Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.^.^.scheduler.timer");
+        
+     gates:
+         //Input gate for the incoming SchedulerActionTimeEvent messages
+         input schedulerIn @directIn;
 }

@@ -31,7 +31,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class IEEE8021QbvSelectionAlgorithm : public cSimpleModule
+class IEEE8021QbvSelectionAlgorithm : public virtual cSimpleModule
 {
   public:
     /**

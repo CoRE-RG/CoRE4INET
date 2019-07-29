@@ -22,7 +22,7 @@ import core4inet.utilities.classes.IScheduled;
 //
 // @warning Since this is an abstract module please do not instantiate it!
 //
-// @see ~IEEE8021QbvGateControlList
+// @see ~IEEE8021QbvGateControlList, ~IScheduled
 //
 // @author Philipp Meyer
 //

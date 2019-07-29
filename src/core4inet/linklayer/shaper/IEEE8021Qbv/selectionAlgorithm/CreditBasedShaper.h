@@ -19,16 +19,23 @@
 //std
 #include <omnetpp.h>
 //CoRE4INET
+#include "core4inet/linklayer/shaper/IEEE8021Qbv/selectionAlgorithm/IEEE8021QbvSelectionAlgorithm.h"
 #include "core4inet/utilities/classes/Timed.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
+#include "core4inet/base/avb/AVBDefs.h"
 
 using namespace omnetpp;
 
 namespace CoRE4INET {
 
 /**
+ * @brief TODO
+ *
  * @author Philipp Meyer
+ *
+ * @sa IEEE8021QbvSelectionAlgorithm, Timed, cListener
  */
-class CreditBasedShaper : public virtual Timed, cListener
+class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, cListener
 {
   protected:
     /**
@@ -41,6 +48,14 @@ class CreditBasedShaper : public virtual Timed, cListener
      * @brief Current credit of the CBS
      */
     int credit;
+    /**
+     * @brief Stream Reservation Class of the Shaper
+     */
+    SR_CLASS srClass;
+    /**
+     * @brief Pointer to SRPTable module
+     */
+    SRPTable* srpTable;
 
   public:
     /**

@@ -41,12 +41,16 @@ void CreditBasedShaper::handleParameterChange(const char* parname)
 
 void CreditBasedShaper::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    // TODO
 }
 
 void CreditBasedShaper::receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details)
 {
-    // TODO
+    if (strncmp(getSignalName(signalID), "transmitState", 14) == 0)
+    {
+        inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
+        // TODO
+    }
 }
 
 } //namespace
