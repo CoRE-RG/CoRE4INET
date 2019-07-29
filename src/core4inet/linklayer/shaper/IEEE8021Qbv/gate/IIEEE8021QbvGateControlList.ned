@@ -15,6 +15,8 @@
 
 package core4inet.linklayer.shaper.IEEE8021Qbv.gate;
 
+import core4inet.utilities.classes.IScheduled;
+
 //
 // Interface to be implemented by IEEE 802.1Qbv gate control list modules.
 //
@@ -24,7 +26,7 @@ package core4inet.linklayer.shaper.IEEE8021Qbv.gate;
 //
 // @author Philipp Meyer
 //
-moduleinterface IIEEE8021QbvGateControlList
+moduleinterface IIEEE8021QbvGateControlList extends IScheduled
 {
     parameters:
         @display("i=block/table");

@@ -30,11 +30,13 @@ simple IEEE8021QbvGateControlList like IIEEE8021QbvGateControlList
         // Number of gates controled by the module
         int numGates = default(8);
         // Control list (Syntax: <controlListRow[0]{<gate[0]State>,...,<gate[numGates]State>:<agingTimeInSeconds>}>;<controlListRow[1]>;...;<controlListRow[n];)
-        string controlList = default("o,o,o,o,o,o,o,o:0.0001;");
+        string controlList = default("");
         // Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("^.^.^.scheduler.oscillator");
         // Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.^.^.scheduler.timer");
+        //Period of Scheduler this gate control list is assigned to
+        string period = default("period[0]");
         
     gates:
         // Input gate for the incoming SchedulerTimerEvent messages

@@ -20,6 +20,8 @@
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"
 #include "core4inet/linklayer/shaper/IEEE8021Qbv/gate/IEEE8021QbvGate.h"
+//Auto-generated Messages
+#include "core4inet/scheduler/SchedulerMessageEvents_m.h"
 
 namespace CoRE4INET {
 
@@ -29,13 +31,12 @@ void IEEE8021QbvGateControlList::initialize(int stage)
 {
     if (stage == 1)
     {
-        Timed::initialize();
-        this->tick = getOscillator()->getPreciseTick();
+        Scheduled::initialize();
         this->handleParameterChange(nullptr);
-        SchedulerTimerEvent* event = new SchedulerTimerEvent("First control element", TIMER_EVENT);
-        event->setTimer(static_cast<uint64_t>(0));
-        event->setDestinationGate(this->gate("schedulerIn"));
-        getTimer()->registerEvent(event);
+        if (this->gateControlList.size() > 0)
+        {
+            this->scheduleCurrentGateControlElementTime();
+        }
     }
 }
 
@@ -46,14 +47,14 @@ int IEEE8021QbvGateControlList::numInitStages() const
 
 void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
 {
-    Timed::handleParameterChange(parname);
+    Scheduled::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "numGates"))
     {
         this->numGates = parameterULongCheckRange(par("numGates"), 1, std::numeric_limits<unsigned int>::max());
     }
     if (!parname || !strcmp(parname, "controlList"))
     {
-        controlList.clear();
+        gateControlList.clear();
         vector<string> controlRows = cStringTokenizer(par("controlList"), ";").asVector();
         for (vector<string>::const_iterator controlRow = controlRows.begin(); controlRow != controlRows.end(); ++controlRow)
         {
@@ -71,61 +72,63 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
                 }
             }
             double controlRowTime = stod(controlRowTupel[1]);
-            controlList.push_back(make_pair(controlRowGates, controlRowTime));
+            gateControlList.push_back(make_pair(controlRowGates, controlRowTime));
         }
-        this->controlElement = this->controlList.begin();
+        this->gateControlElement = this->gateControlList.begin();
     }
 }
 
 void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("schedulerIn"))
+    if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
-        if (!strcmp(msg->getName(), "First control element"))
+        this->propagteGateControlElement((*(this->gateControlElement)).first);
+        if (this->gateControlList.size() > 1)
         {
-            this->propagteCurrentControlElement();
-            this->scheduleCurrentControlElementTime();
-        }
-        else
-        {
-            this->switchToNextControlElement();
-            this->propagteCurrentControlElement();
-            this->scheduleCurrentControlElementTime();
+            this->switchToNextGateControlElement();
+            this->scheduleCurrentGateControlElementTime();
         }
     }
     delete msg;
 }
 
-void IEEE8021QbvGateControlList::scheduleCurrentControlElementTime()
+void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime()
 {
-    SchedulerTimerEvent* event = new SchedulerTimerEvent("Next control element", TIMER_EVENT);
-    event->setTimer(static_cast<uint64_t>(ceil((*(this->controlElement)).second / this->tick)));
-    event->setDestinationGate(this->gate("schedulerIn"));
-    getTimer()->registerEvent(event);
+
+    SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent("Gate Control List Scheduler Event", ACTION_TIME_EVENT);
+    uint32_t actionTime = ceil((*(this->gateControlElement)).second / getOscillator()->getPreciseTick());
+    if (actionTime >= getPeriod()->getCycleTicks())
+    {
+        throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
+                actionTime, getPeriod()->getCycleTicks());
+    }
+    actionTimeEvent->setAction_time(actionTime);
+    actionTimeEvent->setDestinationGate(this->gate("schedulerIn"));
+    getPeriod()->registerEvent(actionTimeEvent);
 }
 
-void IEEE8021QbvGateControlList::propagteCurrentControlElement()
+void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateStates)
 {
     for (long i=static_cast<long>(numGates)-1; i>=0; i--)
     {
         IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
-        if ( !strcmp((*(this->controlElement)).first[i].c_str(), "o"))
+        if ( !strcmp(gateStates[i].c_str(), "o"))
         {
             tg->open();
         }
-        if ( !strcmp((*(this->controlElement)).first[i].c_str(), "C"))
+        if ( !strcmp(gateStates[i].c_str(), "C"))
         {
             tg->close();
         }
     }
 }
 
-void IEEE8021QbvGateControlList::switchToNextControlElement()
+void IEEE8021QbvGateControlList::switchToNextGateControlElement()
 {
-    ++(this->controlElement);
-    if (this->controlElement == this->controlList.end())
+    ++(this->gateControlElement);
+    if (this->gateControlElement == this->gateControlList.end())
     {
-        this->controlElement = this->controlList.begin();
+        this->gateControlElement = this->gateControlList.begin();
     }
 }
 

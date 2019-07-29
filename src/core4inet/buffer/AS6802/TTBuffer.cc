@@ -15,7 +15,7 @@
 
 #include "core4inet/buffer/AS6802/TTBuffer.h"
 
-//Auto-generated MEssages
+//Auto-generated Messages
 #include "core4inet/buffer/AS6802/TTBufferEmpty_m.h"
 #include "core4inet/scheduler/SchedulerMessageEvents_m.h"
 

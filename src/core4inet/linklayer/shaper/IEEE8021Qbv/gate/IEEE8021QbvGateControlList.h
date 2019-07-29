@@ -19,7 +19,7 @@
 //std
 #include <omnetpp.h>
 //CoRE4INET
-#include "core4inet/utilities/classes/Timed.h"
+#include "core4inet/utilities/classes/Scheduled.h"
 
 using namespace omnetpp;
 using namespace std;
@@ -35,7 +35,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class IEEE8021QbvGateControlList : public virtual Timed
+class IEEE8021QbvGateControlList : public virtual Scheduled
 {
   private:
     /**
@@ -47,13 +47,17 @@ class IEEE8021QbvGateControlList : public virtual Timed
      */
     simtime_t tick;
     /**
-     * @brief Data structure containing the complete control list.
+     * @brief Vector containing the initial gate states.
      */
-    vector<pair<vector<string>, double>> controlList;
+    vector<string> initalGateStates;
+    /**
+     * @brief Data structure containing the complete gate control list.
+     */
+    vector<pair<vector<string>, double>> gateControlList;
     /**
      * @brief Iterator of control list data structure. Stores a pointer to the current control list element.
      */
-    vector<pair<vector<string>, double>>::iterator controlElement;
+    vector<pair<vector<string>, double>>::iterator gateControlElement;
 
   protected:
     /**
@@ -87,15 +91,15 @@ class IEEE8021QbvGateControlList : public virtual Timed
     /**
      * @brief Schedule the next SchedulerTimerEvent message.
      */
-    void scheduleCurrentControlElementTime();
+    void scheduleCurrentGateControlElementTime();
     /**
      * @brief Propagate the gate states of the current control element.
      */
-    void propagteCurrentControlElement();
+    void propagteGateControlElement(vector<string> gateStates);
     /**
      * @brief Switch to next control element of the control list.
      */
-    void switchToNextControlElement();
+    void switchToNextGateControlElement();
 };
 
 } //namespace
