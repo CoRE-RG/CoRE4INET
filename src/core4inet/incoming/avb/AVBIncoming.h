@@ -35,11 +35,18 @@ namespace CoRE4INET {
  */
 class AVBIncoming : public Incoming
 {
-    private:
+    protected:
         /**
          * @brief Caches srpTable module
          */
         SRPTable *srptable;
+
+    public:
+        /**
+         * @brief Constructor.
+         */
+        AVBIncoming();
+
     protected:
         /**
          * @brief Initialization of the module
@@ -52,12 +59,6 @@ class AVBIncoming : public Incoming
          * @param msg the incoming message.
          */
         virtual void handleMessage(cMessage *msg) override;
-
-    public:
-        /**
-         * @brief Constructor.
-         */
-        AVBIncoming();
 };
 
 } /* namespace CoRE4INET */

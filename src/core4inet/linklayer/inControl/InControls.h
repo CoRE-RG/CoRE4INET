@@ -87,6 +87,23 @@ class CT_BE_InControl : public CTInControl<BEInControl<BaseInControl> >
 };
 #endif
 
+#if defined(WITH_AVB_COMMON) && defined(WITH_IEEE8021Q_COMMON)
+/**
+ * @brief Class representing the AVB_8021Q_InControl
+ *
+ * This module handles incoming AVB and IEEE 802.1Q traffic
+ *
+ * @see BaseInControl, IEEE8021Q_InControl
+ *
+ * @author Philipp Meyer
+ */
+class AVB_8021Q_InControl : public AVBInControl<IEEE8021QInControl<BaseInControl> >
+{
+    public:
+        virtual ~AVB_8021Q_InControl();
+};
+#endif
+
 #if defined(WITH_AVB_COMMON) && defined(WITH_AS6802_COMMON)
 /**
  * @brief Class representing the CT_AVB_BE_InControl module

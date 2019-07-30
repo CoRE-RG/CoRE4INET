@@ -56,7 +56,7 @@ void IEEE8021QbvQueueing::handleParameterChange(const char* parname)
 
 void IEEE8021QbvQueueing::handleMessage(cMessage *msg)
 {
-    if (msg->arrivedOn("in"))
+    if (msg->arrivedOn("in",0) || msg->arrivedOn("in",1))
     {
         if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
         {

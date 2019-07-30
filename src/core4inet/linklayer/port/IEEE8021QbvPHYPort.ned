@@ -15,7 +15,7 @@
  
 package core4inet.linklayer.port;
 
-import core4inet.linklayer.inControl.IEEE8021Q.IEEE8021Q_InControl;
+import core4inet.linklayer.inControl.AVB_8021Q_InControl;
 import core4inet.linklayer.shaper.IEEE8021Qbv_Shaper;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
@@ -47,10 +47,12 @@ module IEEE8021QbvPHYPort
         *.interfaceTableModule = default(absPath(interfaceTableModule));
         
     gates:
-        //Input from the upper layer for best-effort Traffic
+        //Input from the upper layer
         input upperLayerIn @loose @labels(EtherFrame);
-        //Output to the upper layer for best-effort Traffic
+        //Output to the upper layer
         output upperLayerOut @loose @labels(EtherFrame);
+        //Direct input from the upper layer
+        input upperLayerDirectIn @directIn @labels(EtherFrame);
         //Connection to the physical layer
         inout phys @labels(EtherFrame);
 
@@ -63,7 +65,7 @@ module IEEE8021QbvPHYPort
         }
         
         //Module for the organisation of inbound traffic
-        inControl: IEEE8021Q_InControl {
+        inControl: AVB_8021Q_InControl {
             parameters:
                 @display("p=142,45");
                 promiscuous = promiscuous;
@@ -81,6 +83,7 @@ module IEEE8021QbvPHYPort
         
     connections:
         upperLayerIn --> shaper.in;
+        upperLayerDirectIn --> shaper.inD;
         upperLayerOut <-- inControl.out;
         shaper.out --> mac.upperLayerIn;
         inControl.in <-- mac.upperLayerOut;

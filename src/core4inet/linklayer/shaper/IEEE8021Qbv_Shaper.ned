@@ -40,10 +40,14 @@ module IEEE8021Qbv_Shaper like IShaper
         string taggedVIDs = default("0");
         // Number of priorities.
         int numPCP = default(8);
+        // Bandwidth of the TDMA traffic with higher priority than the CBS on this port (for compability with SRProtocol module)
+        int AVBHigherPriorityBandwidth @unit(bps) = default(0bps);
         
     gates:
         // Input of the IEEE 802.1Qbv shaper.
         input in @labels(EtherFrame);
+        // Input of the IEEE 802.1Qbv shaper for the direct in of the Port.
+        input inD @labels(EtherFrame);
         // Output of the IEEE 802.1Qbv shaper.
         output out @labels(EtherFrame);
         
@@ -81,7 +85,8 @@ module IEEE8021Qbv_Shaper like IShaper
         }
         
     connections:
-        in --> queueing.in;
+        in --> queueing.in[0];
+        inD --> queueing.in[1];
         for i=0..numPCP-1 {
             queueing.out[i] --> queue[i].in;
         }

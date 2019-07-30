@@ -21,6 +21,7 @@ import core4inet.utilities.modules.CheckedBuffer;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.linklayer.beHandling.avb.relay.SRPRelay;
+import core4inet.incoming.IEEE8021Qbv.IEEE8021QbvIncoming;
 
 import inet.linklayer.contract.IMACAddressTable;
 import inet.linklayer.contract.IMACRelayUnit;
@@ -39,29 +40,29 @@ module IEEE8021QbvEtherSwitch
     parameters:
         @display("i=block/switch;bgb=514,312");
         @networkNode;
-        @labels(node,ethernet-node);           
+        @labels(node,ethernet-node);
         // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
         // (When not manually declared in own deriving .ned file)
         int numBuffer = default(0);
         // Forwardingdelay of the device hardware
-        double hardware_delay @unit(s) = default(8us);        
+        double hardware_delay @unit(s) = default(8us);
         *.interfaceTableModule = default(absPath(".interfaceTable"));
-        
+
     gates:
         // Physical ports of the switch
         inout ethg[] @loose @labels(EtherFrame-conn);
-        
+
     types:
         channel ProcessingDelay extends ned.DelayChannel
         {
         }
-        
+
     submodules:
         // Keeps track of the status of network node (up, down, etc.)
         status: NodeStatus {
             @display("p=47,50;is=n");
         }
-        
+
         // Implementation of the forwarding part
         beswitch: SRPRelay {
             parameters:
@@ -70,17 +71,17 @@ module IEEE8021QbvEtherSwitch
                 ifIn[sizeof(ethg)];
                 ifOut[sizeof(ethg)];
         }
-        
+
         //The mac table associated with the beswitch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
             @display("p=170,50");
         }
-        
+
         // Holds interface names
         interfaceTable: InterfaceTable {
-            @display("p=447,313");
+            @display("p=310,130");
         }
-        
+
         // Physical ports of the switch
         phy[sizeof(ethg)]: IEEE8021QbvPHYPort {
             parameters:
@@ -88,7 +89,14 @@ module IEEE8021QbvEtherSwitch
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
-        
+
+        // AVB critical traffic control
+        avbCTC: IEEE8021QbvIncoming {
+            parameters:
+                @display("p=385,201");
+                hardware_delay = hardware_delay;
+        }
+
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
@@ -100,29 +108,29 @@ module IEEE8021QbvEtherSwitch
             parameters:
                 @display("p=310,50");
         }
-        
+
         // Buffers with Incoming Module for TT and RC traffic (optional)
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=170,130");
         }
-        
+
         // Stream Reservation Protocol table
         srpTable: SRPTable {
-            @display("p=346,238");
+            @display("p=385,130");
         }
-        
+
         // Stream Reservation Protocol implementation
         srpProtocol: SRProtocol {
-            @display("p=346,50");
+            @display("p=385,50");
         }
-        
+
     connections:
         for i=0..sizeof(ethg)-1 {
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- ProcessingDelay{ delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
-            phy[i].upperLayerOut --> ProcessingDelay{ delay = (hardware_delay/2); } --> beswitch.ifIn[i];
+            phy[i].upperLayerIn <-- ProcessingDelay {  delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> ProcessingDelay {  delay = (hardware_delay/2); } --> beswitch.ifIn[i];
         }
-        
+
         srpProtocol.out --> beswitch.srpIn;
         srpProtocol.in <-- beswitch.srpOut;
 }

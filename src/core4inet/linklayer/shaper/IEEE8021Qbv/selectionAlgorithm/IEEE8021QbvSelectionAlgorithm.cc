@@ -28,6 +28,7 @@ bool IEEE8021QbvSelectionAlgorithm::isOpen()
 void IEEE8021QbvSelectionAlgorithm::initialize()
 {
     this->handleParameterChange(nullptr);
+    this->ts = dynamic_cast<IEEE8021QbvSelection*>(this->getParentModule()->getSubmodule("transmissionSelection"));
     WATCH(this->state);
 }
 
@@ -60,6 +61,21 @@ void IEEE8021QbvSelectionAlgorithm::refreshDisplay() const
     {
         this->getDisplayString().setTagArg("b",3,"red");
     }
+}
+
+void IEEE8021QbvSelectionAlgorithm::open()
+{
+    State oldState = this->state;
+    this->state = this->State::OPEN;
+    if (this->state != oldState)
+    {
+        ts->reportChange();
+    }
+}
+
+void IEEE8021QbvSelectionAlgorithm::close()
+{
+    this->state = this->State::CLOSED;
 }
 
 } //namespace

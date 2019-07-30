@@ -40,7 +40,7 @@ simple IEEE8021QbvQueueing like IIEEE8021QbvQueueing
         
     gates:
         // Input for incoming inet::EtherFrame messages.
-        input in @labels(EtherFrame);
+        input in[2] @labels(EtherFrame);
         // Ouput to the corresponding queues.
         output out[numPCP] @labels(EtherFrame);
 }

@@ -25,6 +25,7 @@ import core4inet.linklayer.ethernet.base.BGEtherEncap;
 import core4inet.services.avb.SRP.SRPTable;
 import core4inet.services.avb.SRP.SRProtocol;
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
+import core4inet.incoming.IEEE8021Qbv.IEEE8021QbvIncoming;
 
 import inet.common.lifecycle.NodeStatus;
 import inet.networklayer.common.InterfaceTable;
@@ -42,7 +43,7 @@ module IEEE8021QbvEtherHost
     parameters:
         @display("bgb=894,314;i=device/device");
         @networkNode;
-        @labels(node,ethernet-node);    
+        @labels(node,ethernet-node);
         // Number of Applications running on the device
         int numApps = default(0);
         // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
@@ -51,9 +52,9 @@ module IEEE8021QbvEtherHost
         // Number of Ports of the device
         int numPorts = default(1);
         // Forwardingdelay of the device hardware
-        double hardware_delay @unit(s) = default(0us);       
+        double hardware_delay @unit(s) = default(0us);
         *.interfaceTableModule = default(absPath(".interfaceTable"));
-        
+
     gates:
         // Physical port of the host
         inout ethg @loose @labels(EtherFrame-conn);
@@ -63,12 +64,19 @@ module IEEE8021QbvEtherHost
         status: NodeStatus {
             @display("p=60,37;is=n");
         }
-        
+
         // Physical port of the host
         phy[numPorts]: IEEE8021QbvPHYPort {
             @display("p=235,255,c,50");
         }
-        
+
+        // AVB critical traffic control
+        avbCTC: IEEE8021QbvIncoming {
+            parameters:
+                @display("p=349.0975,168.375");
+                hardware_delay = hardware_delay;
+        }
+
         // Encap for best-effort traffic
         encap: SRPEtherEncap {
             parameters:
@@ -79,37 +87,37 @@ module IEEE8021QbvEtherHost
         sync: <default("DummySync")> like ISync {
             @display("p=141,169");
         }
-        
+
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             @display("p=235,169");
         }
-        
+
         // Applications for the device
-        app[numApps]: < > like IApplication {
+        app[numApps]: <> like IApplication {
             @display("p=234,37,row,70");
         }
-        
+
         // Best-efford buffer for incoming traffic
         bgIn: BGQueueBuffer {
             @display("p=141,37");
         }
-        
+
         // Best-efford buffer for outgoing traffic
         bgOut: BGQueueBuffer {
             @display("p=141,99");
         }
-        
+
         // Buffers with Incoming Module for TT and RC traffic (optional)
         checkedBuffer[numBuffer]: CheckedBuffer {
             @display("p=350,100");
         }
-        
+
         // Holds interface names
         interfaceTable: InterfaceTable {
             @display("p=234,100");
         }
-        
+
         // Stream Reservation Protocol table
         srpTable: SRPTable {
             @display("p=141,99");
@@ -119,7 +127,7 @@ module IEEE8021QbvEtherHost
         srpProtocol: SRProtocol {
             @display("p=141,169");
         }
-        
+
     connections allowunconnected:
         phy[0].phys <--> ethg;
         encap.lowerLayerOut --> phy[0].upperLayerIn;
@@ -127,7 +135,7 @@ module IEEE8021QbvEtherHost
 
         encap.bgOut --> bgIn.in;
         bgOut.out --> encap.bgIn;
-        
+
         srpProtocol.out --> encap.srpIn;
         srpProtocol.in <-- encap.srpOut;
 }

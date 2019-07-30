@@ -37,6 +37,13 @@ CT_BE_InControl::~CT_BE_InControl()
 }
 #endif
 
+#if defined(WITH_AVB_COMMON) && defined(WITH_IEEE8021Q_COMMON)
+Define_Module(AVB_8021Q_InControl);
+AVB_8021Q_InControl::~AVB_8021Q_InControl()
+{
+}
+#endif
+
 #if defined(WITH_AVB_COMMON) && defined(WITH_AS6802_COMMON)
 Define_Module(CT_AVB_BE_InControl);
 CT_AVB_BE_InControl::~CT_AVB_BE_InControl()

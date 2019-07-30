@@ -49,6 +49,10 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      */
     int credit;
     /**
+     * @brief Length the corresponding queue
+     */
+    unsigned long queueLength;
+    /**
      * @brief Stream Reservation Class of the Shaper
      */
     SR_CLASS srClass;
@@ -62,6 +66,10 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      * @brief Constructor
      */
     CreditBasedShaper();
+    /**
+     * @brief Destructor
+     */
+    virtual ~CreditBasedShaper(){}
 
   protected:
     virtual void initialize();
@@ -71,11 +79,32 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char* parname);
+    /**
+     * @brief TODO
+     */
     virtual void handleMessage(cMessage *msg);
     /**
      * @brief Receives signals from mac for CBS calculations and state.
      */
-    void receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details) override;
+    virtual void receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details) override;
+    /**
+     * @brief Receives signals from queue for CBS calculations and state.
+     */
+    virtual void receiveSignal(cComponent *source, simsignal_t signalID, unsigned long l, cObject *details) override;
+
+  private:
+    /**
+     * @brief TODO
+     *
+     * @param duration
+     */
+    void idleSlope(simtime_t duration);
+    /**
+     * @brief TODO
+     *
+     * @param duration
+     */
+    void sendSlope(simtime_t duration);
 };
 
 } //namespace
