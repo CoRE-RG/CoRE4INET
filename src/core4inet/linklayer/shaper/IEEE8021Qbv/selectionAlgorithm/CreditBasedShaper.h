@@ -29,7 +29,7 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
- * @brief TODO
+ * @brief Implementation of the Credit Based Shaper (CBS) traffic selection algorithm.
  *
  * @author Philipp Meyer
  *
@@ -39,42 +39,41 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
 {
   protected:
     /**
-     * Signal that is emitted every time the credit is recalculated.
+     * @brief Signal that is emitted every time the credit is recalculated.
      */
     static simsignal_t creditSignal;
 
   private:
     /**
-     * @brief Current credit of the CBS
+     * @brief Current credit of the CBS.
      */
     int credit;
     /**
-     * @brief Size the corresponding queue
+     * @brief Size the corresponding queue.
      */
     unsigned long queueSize;
     /**
-     * @brief Previous Size the corresponding queue
+     * @brief Previous Size the corresponding queue.
      */
     unsigned long previousQueueSize;
     /**
-     * @brief Time when credit is being calculated
+     * @brief Time when credit is being calculated.
      */
     simtime_t newTime;
-
     /**
-     * @brief Time until the credit was previously calculated
+     * @brief Time until the credit was previously calculated.
      */
     simtime_t oldTime;
     /**
-     * @brief Bandwidth of the port where the CBS is attached
+     * @brief Bandwidth of the port where the CBS is attached.
      */
     unsigned int portBandwidth;
     /**
-     * @brief Stream Reservation Class of the Shaper
+     * @brief Stream Reservation Class of the Shaper.
      */
     SR_CLASS srClass;
     /**
-     * @brief Pointer to SRPTable module
+     * @brief Pointer to SRPTable module.
      */
     SRPTable* srpTable;
     /**
@@ -107,9 +106,9 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      */
     virtual void handleParameterChange(const char* parname);
     /**
-     * @brief TODO
+     * @brief Handles incoming SchedulerTimerEvents.
      *
-     * @param msg
+     * @param msg incoming SchedulerTimerEvent
      */
     virtual void handleMessage(cMessage *msg);
     /**
@@ -123,23 +122,23 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
 
   private:
     /**
-     * @brief TODO
+     * @brief Calculates the idleslope of the CBS.
      *
-     * @param maxCreditZero
+     * @param maxCreditZero true if the credit should not be incremented above zero
      */
     void idleSlope(bool maxCreditZero);
     /**
-     * @brief TODO
+     * @brief Calculates the sendslope of the CBS.
      *
-     * @param duration
+     * @param duration sending duration of a frame
      */
     void sendSlope(simtime_t duration);
     /**
-     * @brief TODO
+     * @brief Get the current time from the timer module.
      */
     simtime_t getCurrentTime();
     /**
-     * @brief
+     * @brief Refresh the IEEE8021QbvSelectionAlgorithm state.
      */
     void refreshState();
 };

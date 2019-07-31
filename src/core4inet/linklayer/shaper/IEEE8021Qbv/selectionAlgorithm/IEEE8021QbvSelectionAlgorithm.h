@@ -66,7 +66,7 @@ class IEEE8021QbvSelectionAlgorithm : public virtual cSimpleModule
 
   protected:
     /**
-     * @brief Initializes the selection algorithm
+     * @brief Initializes the selection algorithm.
      */
     virtual void initialize();
     /**
@@ -76,15 +76,15 @@ class IEEE8021QbvSelectionAlgorithm : public virtual cSimpleModule
      */
     virtual void handleParameterChange(const char *parname);
     /**
-     * @brief Components that contain visualization-related code are expected to override refreshDisplay()
+     * @brief Components that contain visualization-related code are expected to override refreshDisplay().
      */
     virtual void refreshDisplay() const;
     /**
-     * @brief TODO
+     * @brief Change the state to OPEN.
      */
     virtual void open();
     /**
-     * @brief TODO
+     * @brief Change the state to CLOSED.
      */
     virtual void close();
 };
