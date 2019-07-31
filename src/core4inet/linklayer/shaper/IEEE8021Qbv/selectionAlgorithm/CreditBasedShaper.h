@@ -49,9 +49,26 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      */
     int credit;
     /**
-     * @brief Length the corresponding queue
+     * @brief Size the corresponding queue
      */
-    unsigned long queueLength;
+    unsigned long queueSize;
+    /**
+     * @brief Previous Size the corresponding queue
+     */
+    unsigned long previousQueueSize;
+    /**
+     * @brief Time when credit is being calculated
+     */
+    simtime_t newTime;
+
+    /**
+     * @brief Time until the credit was previously calculated
+     */
+    simtime_t oldTime;
+    /**
+     * @brief Bandwidth of the port where the CBS is attached
+     */
+    unsigned int portBandwidth;
     /**
      * @brief Stream Reservation Class of the Shaper
      */
@@ -60,6 +77,10 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      * @brief Pointer to SRPTable module
      */
     SRPTable* srpTable;
+    /**
+     * @brief Outgoing Channel used to calculate transmission duration.
+     */
+    cChannel *outChannel;
 
   public:
     /**
@@ -70,6 +91,12 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      * @brief Destructor
      */
     virtual ~CreditBasedShaper(){}
+    /**
+     * @brief Check if CBS state is open.
+     *
+     * @return true if state is open
+     */
+    virtual bool isOpen();
 
   protected:
     virtual void initialize();
@@ -81,6 +108,8 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
     virtual void handleParameterChange(const char* parname);
     /**
      * @brief TODO
+     *
+     * @param msg
      */
     virtual void handleMessage(cMessage *msg);
     /**
@@ -96,15 +125,23 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
     /**
      * @brief TODO
      *
-     * @param duration
+     * @param maxCreditZero
      */
-    void idleSlope(simtime_t duration);
+    void idleSlope(bool maxCreditZero);
     /**
      * @brief TODO
      *
      * @param duration
      */
     void sendSlope(simtime_t duration);
+    /**
+     * @brief TODO
+     */
+    simtime_t getCurrentTime();
+    /**
+     * @brief
+     */
+    void refreshState();
 };
 
 } //namespace

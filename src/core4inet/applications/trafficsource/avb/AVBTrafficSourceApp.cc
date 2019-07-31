@@ -104,6 +104,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
     outFrame->setStreamID(streamID);
     outFrame->setDest(multicastMAC);
     outFrame->setVID(vlan_id);
+    outFrame->setPcp(pcp);
 
     cPacket *payloadPacket = new cPacket;
     payloadPacket->setTimestamp();
@@ -218,6 +219,10 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "vlan_id"))
     {
         this->vlan_id = static_cast<uint16_t>(parameterULongCheckRange(par("vlan_id"), 0, MAX_VLAN_ID));
+    }
+    if (!parname || !strcmp(parname, "pcp"))
+    {
+        this->pcp = static_cast<uint8_t>(parameterULongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
     }
 
 }

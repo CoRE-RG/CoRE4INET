@@ -25,6 +25,7 @@ package core4inet.buffer.base;
 // @see BGBuffer, Buffer,
 //
 // @author Till Steinbach
+//
 simple BGQueueBuffer extends BGBuffer
 {
     parameters:
