@@ -18,7 +18,11 @@ package core4inet.applications.trafficsink.IEEE8021Q;
 import core4inet.applications.trafficsink.base.BGTrafficSinkApp;
 
 //
-// TODO auto-generated module
+// Traffic sink application used for statistics collection of traffic with q-priorities.
+//
+// @see ~BGTrafficSinkApp
+//
+// @author Sandra Reider
 //
 simple IEEE8021QTrafficSinkApp extends BGTrafficSinkApp
 {
@@ -26,7 +30,7 @@ simple IEEE8021QTrafficSinkApp extends BGTrafficSinkApp
         @class(IEEE8021QTrafficSinkApp);
         @display("i=block/sink,darkgreen");
         
-        //Signal emitted when a frame is received, contains received EtherFrame
+        //Signal emitted when a frame with corresponding q-priority is received, contains received EtherFrame
         @signal[rxPkQ0](type=inet::EtherFrame);
         @signal[rxPkQ1](type=inet::EtherFrame);
         @signal[rxPkQ2](type=inet::EtherFrame);
@@ -35,7 +39,7 @@ simple IEEE8021QTrafficSinkApp extends BGTrafficSinkApp
         @signal[rxPkQ5](type=inet::EtherFrame);
         @signal[rxPkQ6](type=inet::EtherFrame);
         @signal[rxPkQ7](type=inet::EtherFrame);
-        //Statistic of the amount of packets that were received by the application
+        //Statistic of the amount of packets that were received by the application for each q-priority
         @statistic[rxPkQ0](title="Received Packets"; source=rxPkQ0; record=count; unit=packets; );
         @statistic[rxPkQ1](title="Received Packets"; source=rxPkQ1; record=count; unit=packets; );
         @statistic[rxPkQ2](title="Received Packets"; source=rxPkQ2; record=count; unit=packets; );
@@ -44,16 +48,16 @@ simple IEEE8021QTrafficSinkApp extends BGTrafficSinkApp
         @statistic[rxPkQ5](title="Received Packets"; source=rxPkQ5; record=count; unit=packets; );
         @statistic[rxPkQ6](title="Received Packets"; source=rxPkQ6; record=count; unit=packets; );
         @statistic[rxPkQ7](title="Received Packets"; source=rxPkQ7; record=count; unit=packets; );
-        //Statistic of the amount of bytes that were received by the application
+        //Statistic of the amount of bytes that were received by the application for each q-priority
         @statistic[rxBytesQ0](title="Received Bytes"; source=rxPkQ0; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        @statistic[rxBytesQ1](title="Received Bytes"; source=rxPkQ1; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        @statistic[rxBytesQ2](title="Received Bytes"; source=rxPkQ2; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        @statistic[rxBytesQ3](title="Received Bytes"; source=rxPkQ3; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        @statistic[rxBytesQ4](title="Received Bytes"; source=rxPkQ4; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        @statistic[rxBytesQ5](title="Received Bytes"; source=rxPkQ5; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        @statistic[rxBytesQ6](title="Received Bytes"; source=rxPkQ6; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        @statistic[rxBytesQ7](title="Received Bytes"; source=rxPkQ7; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
-        //End-to-end latency
+        @statistic[rxBytesQ1](title="Received Bytes"; source=rxPkQ1; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none);
+        @statistic[rxBytesQ2](title="Received Bytes"; source=rxPkQ2; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none);
+        @statistic[rxBytesQ3](title="Received Bytes"; source=rxPkQ3; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none);
+        @statistic[rxBytesQ4](title="Received Bytes"; source=rxPkQ4; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none);
+        @statistic[rxBytesQ5](title="Received Bytes"; source=rxPkQ5; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none);
+        @statistic[rxBytesQ6](title="Received Bytes"; source=rxPkQ6; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none);
+        @statistic[rxBytesQ7](title="Received Bytes"; source=rxPkQ7; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none);
+        //End-to-end latency for each q-priority
         @statistic[rxLatencyQ0](title="End-to-end latency"; source="messageAge(rxPkQ0)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
         @statistic[rxLatencyQ1](title="End-to-end latency"; source="messageAge(rxPkQ1)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);
         @statistic[rxLatencyQ2](title="End-to-end latency"; source="messageAge(rxPkQ2)"; unit=s; record=stats,histogram?,vector; interpolationmode=none);

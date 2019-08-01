@@ -25,7 +25,13 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Traffic sink application used for statistics collection of traffic with q-priorities.
+ *
+ *
+ * @sa BGTrafficSinkApp
+ * @ingroup Applications
+ *
+ * @author Sandra Reider
  */
 class IEEE8021QTrafficSinkApp : public virtual BGTrafficSinkApp
 {
