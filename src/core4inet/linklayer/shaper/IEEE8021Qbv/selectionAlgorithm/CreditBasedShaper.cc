@@ -87,8 +87,6 @@ void CreditBasedShaper::receiveSignal(cComponent *source, simsignal_t signalID, 
     if (strncmp(getSignalName(signalID), "transmitState", 14) == 0)
     {
         inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
-        std::string macts = "MACts:= " + std::to_string(macTransmitState);
-        this->bubble(macts.c_str());
         if (macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE)
         {
             this->idleSlope(this->queueSize == 0);
@@ -102,8 +100,6 @@ void CreditBasedShaper::receiveSignal(cComponent *source, simsignal_t signalID, 
     {
         this->previousQueueSize = this->queueSize;
         this->queueSize = l;
-        std::string qs = "qs:= " + std::to_string(this->queueSize);
-        this->bubble(qs.c_str());
         // Frame arrived in queue
         if (this->queueSize > this->previousQueueSize)
         {

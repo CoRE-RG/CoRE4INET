@@ -27,6 +27,11 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QbvGateControlList);
 
+IEEE8021QbvGateControlList::IEEE8021QbvGateControlList()
+{
+    this->configNo = 0;
+}
+
 void IEEE8021QbvGateControlList::initialize(int stage)
 {
     if (stage == 1)
@@ -35,8 +40,10 @@ void IEEE8021QbvGateControlList::initialize(int stage)
         this->handleParameterChange(nullptr);
         if (this->gateControlList.size() > 0)
         {
-            this->scheduleCurrentGateControlElementTime();
+            this->scheduleCurrentGateControlElementTime(false);
         }
+        WATCH(this->configNo);
+        WATCH(this->timerEventName);
     }
 }
 
@@ -75,6 +82,12 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
             gateControlList.push_back(make_pair(controlRowGates, controlRowTime));
         }
         this->gateControlElement = this->gateControlList.begin();
+        if (this->gateControlList.size() > 0)
+        {
+            this->configNo++;
+            this->timerEventName = "Gate Control List Config " + to_string(this->configNo) + " Scheduler Event";
+            this->scheduleCurrentGateControlElementTime(false);
+        }
     }
 }
 
@@ -82,20 +95,22 @@ void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("schedulerIn") && msg->getKind() == ACTION_TIME_EVENT)
     {
-        this->propagteGateControlElement((*(this->gateControlElement)).first);
-        if (this->gateControlList.size() > 1)
+        if (!strcmp(this->timerEventName.c_str(), msg->getName()))
         {
-            this->switchToNextGateControlElement();
-            this->scheduleCurrentGateControlElementTime();
+            this->propagteGateControlElement((*(this->gateControlElement)).first);
+            if (this->gateControlList.size() > 1)
+            {
+                this->switchToNextGateControlElement();
+                this->scheduleCurrentGateControlElementTime(false);
+            }
         }
     }
     delete msg;
 }
 
-void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime()
+void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool nextCycle)
 {
-
-    SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent("Gate Control List Scheduler Event", ACTION_TIME_EVENT);
+    SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent(this->timerEventName.c_str(), ACTION_TIME_EVENT);
     uint32_t actionTime = ceil((*(this->gateControlElement)).second / getOscillator()->getPreciseTick());
     if (actionTime >= getPeriod()->getCycleTicks())
     {
@@ -103,6 +118,7 @@ void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime()
                 actionTime, getPeriod()->getCycleTicks());
     }
     actionTimeEvent->setAction_time(actionTime);
+    actionTimeEvent->setNext_cycle(nextCycle);
     actionTimeEvent->setDestinationGate(this->gate("schedulerIn"));
     getPeriod()->registerEvent(actionTimeEvent);
 }

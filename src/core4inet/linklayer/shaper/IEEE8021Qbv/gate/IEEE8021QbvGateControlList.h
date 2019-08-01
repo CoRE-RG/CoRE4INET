@@ -43,10 +43,6 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
      */
     unsigned int numGates;
     /**
-     * @brief Length of one tick.
-     */
-    simtime_t tick;
-    /**
      * @brief Vector containing the initial gate states.
      */
     vector<string> initalGateStates;
@@ -58,6 +54,20 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
      * @brief Iterator of control list data structure. Stores a pointer to the current control list element.
      */
     vector<pair<vector<string>, double>>::iterator gateControlElement;
+    /**
+     * @brief TODO
+     */
+    unsigned int configNo;
+    /**
+     * @brief TODO
+     */
+    string timerEventName;
+
+  public:
+    /**
+     * @brief Constructor
+     */
+    IEEE8021QbvGateControlList();
 
   protected:
     /**
@@ -91,7 +101,7 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
     /**
      * @brief Schedule the next SchedulerTimerEvent message.
      */
-    void scheduleCurrentGateControlElementTime();
+    void scheduleCurrentGateControlElementTime(bool nextCycle);
     /**
      * @brief Propagate the gate states of the current control element.
      */
