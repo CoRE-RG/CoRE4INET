@@ -50,4 +50,14 @@ The build state of the master branch is monitored:
   </tr>
 </table>
 
-For further informations please see [INSTALL](/INSTALL) and [doc/](/doc)
+
+## Further Information
+
+### Installation
+Please see [INSTALL](/INSTALL)
+
+### Documentation
+Please see [doc/](/doc)
+
+### Changelog
+Please see [WHATSNEW](/WHATSNEW)

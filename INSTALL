@@ -64,15 +64,6 @@ Note:
   re-create your makefile. Run "make makefiles" again if you are building
   from the command line. (The IDE does it for you automatically)
 
-
-
 Hit Ctrl+B to build.
 
 Run the example simulations to check everything works fine.
-
-Known Problems:
--------------------------
-
-
----
-Till
