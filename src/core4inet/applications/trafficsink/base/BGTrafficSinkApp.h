@@ -35,11 +35,11 @@ namespace CoRE4INET {
 class BGTrafficSinkApp : public virtual TrafficSinkApp
 {
     private:
-        inet::MACAddress address;
         unsigned int received;
     public:
         BGTrafficSinkApp();
     protected:
+        inet::MACAddress address;
         /**
          * @brief Initialization of the module.
          */
