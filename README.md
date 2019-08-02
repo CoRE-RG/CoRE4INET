@@ -5,6 +5,10 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 <img src="/doc/images/core4inet.png" alt="CoRE4INET Environment" width="35%">
 
 
+## News
+Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
+
+
 ## Quick Start
 1. Download OMNeT++ 5.1.1
     * [https://omnetpp.org/download/old](https://omnetpp.org/download/old)
