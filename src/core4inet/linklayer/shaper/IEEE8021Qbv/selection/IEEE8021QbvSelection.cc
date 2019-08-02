@@ -42,9 +42,31 @@ void IEEE8021QbvSelection::reportChange()
     }
 }
 
-void IEEE8021QbvSelection::initialize()
+void IEEE8021QbvSelection::initialize(int stage)
 {
-    this->handleParameterChange(nullptr);
+    if (stage == 0)
+    {
+        this->handleParameterChange(nullptr);
+        for (unsigned int i=0; i<this->numPCP; i++)
+        {
+            simsignal_t signalPk = registerSignal(("qPcp" + std::to_string(i) + "Pk").c_str());
+            cProperty* statisticTemplate = getProperties()->get("statisticTemplate", "qPcpPk");
+            getEnvir()->addResultRecorders(this, signalPk, ("qPcp" + std::to_string(i) + "Pk").c_str(), statisticTemplate);
+            statisticTemplate = getProperties()->get("statisticTemplate", "qPcpBytes");
+            getEnvir()->addResultRecorders(this, signalPk, ("qPcp" + std::to_string(i) + "Bytes").c_str(), statisticTemplate);
+            simsignal_t signalPkAge = registerSignal(("qPcp" + std::to_string(i) + "PkAge").c_str());
+            statisticTemplate = getProperties()->get("statisticTemplate", "qPcpLatency");
+            getEnvir()->addResultRecorders(this, signalPkAge, ("qPcp" + std::to_string(i) + "Latency").c_str(), statisticTemplate);
+            this->qPcpPkSignals.push_back(signalPk);
+            this->qPcpPkAgeSignals.push_back(signalPkAge);
+            //Send initial signal to create statistic
+            inet::EtherFrame* initFrame = new inet::EtherFrame();
+            initFrame->setByteLength(0);
+            emit(signalPk, initFrame);
+            emit(signalPkAge, initFrame->getArrivalTime() - initFrame->getCreationTime());
+            delete initFrame;
+        }
+    }
 }
 
 void IEEE8021QbvSelection::handleParameterChange(const char* parname)
@@ -59,7 +81,16 @@ void IEEE8021QbvSelection::handleMessage(cMessage* msg)
 {
     if (msg->arrivedOn("in"))
     {
-        this->send(msg, "out");
+        if (inet::EtherFrame* frame = dynamic_cast<inet::EtherFrame*>(msg))
+        {
+            emit(this->qPcpPkSignals[frame->getSenderModule()->getIndex()], frame);
+            emit(this->qPcpPkAgeSignals[frame->getSenderModule()->getIndex()], frame->getArrivalTime() - frame->getCreationTime());
+            this->send(frame, "out");
+        }
+        else
+        {
+            throw cRuntimeError("Selected frame type is not inet::EtherFrame");
+        }
     }
 }
 

@@ -34,6 +34,16 @@ namespace CoRE4INET {
  */
 class IEEE8021QbvSelection : public virtual BaseShaper
 {
+  protected:
+    /**
+     * @brief Signals that are emitted when a frame is chosen for forwarding.
+     */
+    std::vector<simsignal_t> qPcpPkSignals;
+    /**
+     * @brief Signals that are emitted when a frame is chosen for forwarding.
+     */
+    std::vector<simsignal_t> qPcpPkAgeSignals;
+
   private:
     /**
      * @brief Number of priorities.
@@ -58,9 +68,11 @@ class IEEE8021QbvSelection : public virtual BaseShaper
 
   protected:
     /**
-     * @brief Initializes the module.
+     * @brief Initializes the module
+     *
+     * @param stage The stages. Module initializes when stage==0
      */
-    virtual void initialize();
+    virtual void initialize(int stage);
     /**
      * @brief Indicates a parameter has changed.
      *
