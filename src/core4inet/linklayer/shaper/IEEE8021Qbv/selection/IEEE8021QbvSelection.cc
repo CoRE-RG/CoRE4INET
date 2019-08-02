@@ -65,6 +65,8 @@ void IEEE8021QbvSelection::initialize(int stage)
             emit(signalPk, initFrame);
             emit(signalPkAge, initFrame->getArrivalTime() - initFrame->getCreationTime());
             delete initFrame;
+            this->numFrames.push_back(0);
+            this->numBytes.push_back(0);
         }
     }
 }
@@ -83,8 +85,11 @@ void IEEE8021QbvSelection::handleMessage(cMessage* msg)
     {
         if (inet::EtherFrame* frame = dynamic_cast<inet::EtherFrame*>(msg))
         {
-            emit(this->qPcpPkSignals[frame->getSenderModule()->getIndex()], frame);
-            emit(this->qPcpPkAgeSignals[frame->getSenderModule()->getIndex()], frame->getArrivalTime() - frame->getCreationTime());
+            int pcp = frame->getSenderModule()->getIndex();
+            emit(this->qPcpPkSignals[pcp], frame);
+            emit(this->qPcpPkAgeSignals[pcp], frame->getArrivalTime() - frame->getCreationTime());
+            this->numFrames[pcp] = this->numFrames[pcp] + 1;
+            this->numBytes[pcp] = this->numBytes[pcp] + frame->getByteLength();
             this->send(frame, "out");
         }
         else
@@ -99,6 +104,19 @@ void IEEE8021QbvSelection::requestPacket()
     Enter_Method("requestPacket()");
     this->framesRequested++;
     selectFrame();
+}
+
+void IEEE8021QbvSelection::finish()
+{
+    simtime_t t = simTime();
+    if (t > 0)
+    {
+        for (unsigned int i=0; i<this->numPCP; i++)
+        {
+            recordScalar(("qPcp" + std::to_string(i) + " frames/sec").c_str(), this->numFrames[i] / t);
+            recordScalar(("qPcp" + std::to_string(i) + " bits/sec").c_str(), (8.0 * this->numBytes[i]) / t);
+        }
+    }
 }
 
 void IEEE8021QbvSelection::selectFrame()

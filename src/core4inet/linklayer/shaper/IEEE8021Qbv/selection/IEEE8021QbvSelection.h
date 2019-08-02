@@ -53,6 +53,14 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * @brief Number of frames requested by MAC module.
      */
     size_t framesRequested;
+    /**
+     * @brief Counts number of frames per pcp.
+     */
+    std::vector<unsigned long> numFrames;
+    /**
+     * @brief Counts number of bytes per pcp.
+     */
+    std::vector<unsigned long> numBytes;
 
   public:
     /**
@@ -93,6 +101,10 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * received.
      */
     virtual void requestPacket() override;
+    /**
+     * @brief Called at the end of simulation. Records frames + bytes per second results.
+     */
+    virtual void finish();
 
   private:
     /**
