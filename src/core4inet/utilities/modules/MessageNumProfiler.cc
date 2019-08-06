@@ -67,23 +67,9 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
         }
         else
         {
-            //TODO
+            // TODO
         }
     }
-    /*if (par("max_scheduled_messages").longValue() > 0 &&  > par("max_scheduled_messages").longValue())
-     {
-     if (par("throw_error").boolValue())
-     {
-     delete msg;
-     throw cRuntimeError("Profiler found %d live messages, more than the configured maximum of %d messages",
-     msg->getLiveMessageCount(), par("max_live_messages").longValue());
-     }
-     else
-     {
-     //TODO
-     }
-     }*/
-
     scheduleAt(simTime() + SimTime(par("interval").doubleValue()), msg);
 }
 

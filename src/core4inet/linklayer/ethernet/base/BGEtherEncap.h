@@ -39,7 +39,7 @@ class BGEtherEncap : public virtual inet::EtherEncap
         /**
          * @brief Destructor
          */
-        virtual ~BGEtherEncap();
+        virtual ~BGEtherEncap() override;
 
     protected:
         /**

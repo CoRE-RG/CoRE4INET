@@ -51,7 +51,7 @@ class QueueBuffer : public virtual Buffer
         /**
          * @brief Destructor for the class.
          */
-        virtual ~QueueBuffer() = 0;
+        virtual ~QueueBuffer() override = 0;
 
     private:
         /**

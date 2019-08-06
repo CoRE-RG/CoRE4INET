@@ -109,7 +109,7 @@ class TTBuffer : public virtual CTBuffer, public virtual Scheduled
         /**
          * @brief Destructor
          */
-        virtual ~TTBuffer() = 0;
+        virtual ~TTBuffer() override = 0;
 
         uint64_t nextSendWindowStart() const;
 

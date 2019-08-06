@@ -34,7 +34,7 @@ class IPv4oIEEE8021Q : public Base {
 public:
 
     IPv4oIEEE8021Q();
-    virtual ~IPv4oIEEE8021Q();
+    virtual ~IPv4oIEEE8021Q() override;
 
     virtual void initialize(int stage) override;
     virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie) override;

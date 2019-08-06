@@ -152,7 +152,7 @@ class SmokeTestCase(SimulationTestCase):
         os.environ['LD_LIBRARY_PATH'] = inetRoot + os.sep + "src" 
         # run the simulation
         workingdir = os.path.normpath(_iif(self.wd.startswith('/'), core4inetRoot + "/" + self.wd, self.wd))
-        command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + inetLib + " -u Cmdenv " + self.args + \
+        command = opp_run + " -n " + nedPath + " -l " + inetLib + " -l " + core4inetLib + " -u Cmdenv " + self.args + \
             " --cpu-time-limit=" + cpuTimeLimit + \
             " --vector-recording=false --scalar-recording=false"
         

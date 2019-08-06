@@ -53,7 +53,7 @@ class CTApplicationBase : public virtual ApplicationBase
         /**
          * @brief Destructor for CTApplicationBase
          */
-        virtual ~CTApplicationBase() = 0;
+        virtual ~CTApplicationBase() override = 0;
 
     protected:
         /**

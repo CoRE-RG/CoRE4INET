@@ -2,9 +2,9 @@
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c General -r 0
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0
 /examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0
-#/examples/AS6802/synchronization/HighIntegrity_small/,            -f omnetpp.ini -c General -r 0
-#/examples/AS6802/synchronization/StandardIntegrity_large/,        -f omnetpp.ini -c General -r 0
-#/examples/AS6802/synchronization/StandardIntegrity_medium/,       -f omnetpp.ini -c General -r 0
+#/examples/AS6802/synchronization/HighIntegrity_small/,           -f omnetpp.ini -c General -r 0
+#/examples/AS6802/synchronization/StandardIntegrity_large/,       -f omnetpp.ini -c General -r 0
+#/examples/AS6802/synchronization/StandardIntegrity_medium/,      -f omnetpp.ini -c General -r 0
 /examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c General -r 0
 /examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,
@@ -13,3 +13,8 @@
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r 6,
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid_with_Filtering_and_Attack -r 0,
 /examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,
+/examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c General -r 0,
+/examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c With_Crosstraffic -r 0,
+/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c General -r 0,
+/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c With_Crosstraffic -r 0,
+/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c Without_TDMA -r 0,

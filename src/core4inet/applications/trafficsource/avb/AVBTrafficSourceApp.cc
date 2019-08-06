@@ -49,7 +49,6 @@ void AVBTrafficSourceApp::initialize()
     TrafficSourceAppBase::initialize();
     Timed::initialize();
 
-    //TODO: Minor: Check these values
     if (getPayloadBytes() <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
     {
         frameSize = MIN_ETHERNET_FRAME_BYTES;
@@ -99,13 +98,13 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
 void AVBTrafficSourceApp::sendAVBFrame()
 {
-    char frameNname[10];
-    sprintf(frameNname, "Stream %lu", streamID);
-    AVBFrame *outFrame = new AVBFrame(frameNname);
+    std::string frameName = "Stream " + std::to_string(streamID);
+    AVBFrame *outFrame = new AVBFrame(frameName.c_str());
     outFrame->setTimestamp();
     outFrame->setStreamID(streamID);
     outFrame->setDest(multicastMAC);
     outFrame->setVID(vlan_id);
+    outFrame->setPcp(pcp);
 
     cPacket *payloadPacket = new cPacket;
     payloadPacket->setTimestamp();
@@ -155,7 +154,10 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))  cComponent *src
                 getDisplayString().setTagArg("i2", 0, "status/active");
             }
             isStreaming = true;
-            sendAVBFrame();
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+            event->setTimer(0);
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
         }
     }
     else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT || id == NF_AVB_LISTENER_UNREGISTERED)
@@ -217,6 +219,10 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "vlan_id"))
     {
         this->vlan_id = static_cast<uint16_t>(parameterULongCheckRange(par("vlan_id"), 0, MAX_VLAN_ID));
+    }
+    if (!parname || !strcmp(parname, "pcp"))
+    {
+        this->pcp = static_cast<uint8_t>(parameterULongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
     }
 
 }

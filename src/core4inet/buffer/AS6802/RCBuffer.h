@@ -72,7 +72,7 @@ class RCBuffer : public virtual CTBuffer, public virtual Timed
         /**
          * @brief Destructor
          */
-        virtual ~RCBuffer() = 0;
+        virtual ~RCBuffer() override = 0;
 
         /**
          * @brief resets the bag for a destination gate.

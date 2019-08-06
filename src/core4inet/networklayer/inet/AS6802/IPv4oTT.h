@@ -42,7 +42,7 @@ protected:
 public:
 
     IPv4oTT();
-    virtual ~IPv4oTT();
+    virtual ~IPv4oTT() override;
 
     virtual void initialize(int stage) override;
     virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie) override;

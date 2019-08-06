@@ -1,0 +1,11 @@
+Demonstrates a small IEEE 802.1Qbv Network. Traffic generators send Ethernet frames directly.
+
+- The small network contains three hosts (node1, node2, node3) and a switch, which 
+  connects these hosts.
+  The cycle time 500us (see omnetpp.ini)
+
+- Node 1 sends Q traffic in vlan 0 with pcp 7. The Qbv gates in the devices are configured to handle it like TDMA traffic.
+
+- Node 2 sends AVB Class B Stream 1 in vlan 2 with pcp 6. The switch uses a CBS to shape this traffic.
+  
+- Cross traffic may be send via all nodes. Use the configuration With_Crosstraffic.

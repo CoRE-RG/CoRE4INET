@@ -53,7 +53,7 @@ class TTShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        virtual ~TTShaper();
+        virtual ~TTShaper() override;
 
     private:
         /**

@@ -46,7 +46,7 @@ class CTTrafficSourceAppBase : public virtual TrafficSourceAppBase, public virtu
          * @brief pure virtual destructor making the class abstract
          *
          */
-        virtual ~CTTrafficSourceAppBase() = 0;
+        virtual ~CTTrafficSourceAppBase() override = 0;
 
     protected:
         /**

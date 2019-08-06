@@ -205,8 +205,7 @@ uint64_t Timer::registerEvent(SchedulerTimerEvent *event)
 #ifdef DEBUG
     Enter_Method("registerEvent(SchedulerTimerEvent %s)",event->getName());
 #else
-    Enter_Method_Silent
-    ();
+    Enter_Method_Silent();
 #endif
     if (event->getTimer() > (SimTime::getMaxTime() / oscillator->getCurrentTick()))
     {

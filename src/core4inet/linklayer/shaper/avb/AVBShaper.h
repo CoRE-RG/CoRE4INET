@@ -43,7 +43,7 @@ class AVBShaper : public TC, public virtual cListener
         /**
          * @brief Destructor
          */
-        ~AVBShaper();
+        virtual ~AVBShaper() override;
 
         /**
          * @brief receives signals from mac for CBS calculations and state

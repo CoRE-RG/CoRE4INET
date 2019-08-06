@@ -184,6 +184,35 @@
         linkerFlags = ""
         />
     <feature
+        id="IEEE8021Qbv_common"
+        name="IEEE 802.1Qbv Common"
+        description = "The common part of the IEEE 802.1Qbv implementation"
+        initiallyEnabled = "true"
+        requires = "IEEE8021Q_common AVB_common"
+        labels = ""
+        nedPackages = "
+                       core4inet.incoming.IEEE8021Qbv
+                       core4inet.linklayer.shaper.IEEE8021Qbv
+                       core4inet.nodes.ethernet.IEEE8021Qbv
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_IEEE8021QBV_COMMON"
+        linkerFlags = ""
+        />
+    <feature
+        id="IEEE8021Qbv_examples"
+        name="IEEE 802.1Qbv examples"
+        description = "Examples for the IEEE 802.1Qbv implementation"
+        initiallyEnabled = "true"
+        requires = "IEEE8021Qbv_common"
+        labels = ""
+        nedPackages = "
+        				core4inet.examples.IEEE8021Qbv.small_network
+                      "
+        extraSourceFolders = ""
+        linkerFlags = ""
+        />
+    <feature
         id="IPoRE"
         name="IP over realtime ethernet"
         description = "The implementation of IPv4 over realtime ethernet (AS6802, avb)"

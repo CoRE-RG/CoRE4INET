@@ -104,7 +104,6 @@ void CTTrafficSourceAppBase::sendMessage()
             {
                 frame->setCtID(static_cast<uint16_t>(this->ct_id));
             }
-            //TODO Minor: Better name for Frame
             frame->setName((*buf)->getName());
             if ((*buf)->gate("in")->getPathStartGate())
             {

@@ -353,7 +353,11 @@ class cStdPtrUMapUMapWatcher : public cStdUMapUMapWatcher<KeyT, ValueT>
         virtual std::string atIt2() const
         {
             std::stringstream out;
-            out << this->atIt() << this->it2->first << " ==> " << *(this->it2->second);
+            out << this->atIt();
+            if (this->it2 != (*cStdCollectionUMapWatcherBase<KeyT, ValueT>::it).second.end())
+            {
+                out << this->it2->first << " ==> " << *(this->it2->second);
+            }
             return out.str();
         }
 };

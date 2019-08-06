@@ -511,9 +511,7 @@ void SRPTable::updateDisplayString()
     if (!getEnvir()->isGUI())
         return;
 
-    char buf[80];
-    sprintf(buf, "%zu talkers\n%zu listeners", getNumTalkerEntries(), getNumListenerEntries());
-    getDisplayString().setTagArg("t", 0, buf);
+    getDisplayString().setTagArg("t", 0, (std::to_string(getNumTalkerEntries()) + " talkers\n" + std::to_string(getNumListenerEntries()) + " listeners").c_str());
 }
 
 void SRPTable::removeAgedEntries()

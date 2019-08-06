@@ -35,7 +35,7 @@ class IPv4oRC : public Base {
 public:
 
     IPv4oRC();
-    virtual ~IPv4oRC();
+    virtual ~IPv4oRC() override;
 
     virtual void initialize(int stage) override;
     virtual void sendPacketToNIC(cPacket *packet, const inet::InterfaceEntry *ie) override;

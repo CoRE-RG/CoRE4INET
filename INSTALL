@@ -3,7 +3,7 @@ INSTALLATION INSTRUCTIONS
 
 PREREQUISITES
 
-You should have a working OMNeT++ installation, version 5.0 or later with the INET-Framework 3.3
+You should have a working OMNeT++ installation, version 5.1.1 with the INET-Framework 3.5
 
 In INET you have to enable at least the following features:
 - Ethernet
@@ -64,15 +64,6 @@ Note:
   re-create your makefile. Run "make makefiles" again if you are building
   from the command line. (The IDE does it for you automatically)
 
-
-
 Hit Ctrl+B to build.
 
 Run the example simulations to check everything works fine.
-
-Known Problems:
--------------------------
-
-
----
-Till

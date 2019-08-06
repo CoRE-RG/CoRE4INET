@@ -49,7 +49,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        virtual ~IEEE8021QShaper();
+        virtual ~IEEE8021QShaper() override;
 
     private:
         /**
@@ -106,7 +106,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * @brief Forwards the messages from the different buffers and LLC
          * according to the specification for RCMessages.
          *
-         * Rate-constrained messages are send immediately, lower priority frames are queued
+         * IEEE 802.1Q messages are send immediately, lower priority frames are queued
          * as long as there are rate-constrained messages waiting.
          * If the mac layer is idle, messages are picked from the queues according
          * to the priorities, using the template class.
@@ -118,7 +118,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
         /**
          * @brief Queues messages in the correct queue
          *
-         * Rate-constrained messages are queued in this module, other messages are forwarded to the
+         * IEEE 802.1Q messages are queued in this module, other messages are forwarded to the
          * template classes enqueueMessage method
          *
          * @param msg the incoming message
@@ -195,28 +195,24 @@ void IEEE8021QShaper<TC>::initialize(int stage)
 
         for (unsigned int i = 0; i < 8; i++)
         {
-            char strBuf[32];
             cQueue queue;
-            snprintf(strBuf, 32, "Q Priority %d Messages", i);
-            queue.setName(strBuf);
+            queue.setName(("Q Priority " + std::to_string(i) + " Messages").c_str());
             qQueue.push_back(queue);
             qQueueSize.push_back(0);
 
-            snprintf(strBuf, 32, "q%dQueueLength", i);
-            simsignal_t signal = registerSignal(strBuf);
+            simsignal_t signal = registerSignal(("q" + std::to_string(i) + "QueueLength").c_str());
 
             cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "qQueueLength");
-            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
+            getEnvir()->addResultRecorders(this, signal, ("q" + std::to_string(i) + "QueueLength").c_str(), statisticTemplate);
 
             qQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
             cComponent::emit(signal, static_cast<unsigned long>(queue.getLength()));
 
-            snprintf(strBuf, 32, "q%dQueueSize", i);
-            signal = registerSignal(strBuf);
+            signal = registerSignal(("q" + std::to_string(i) + "QueueSize").c_str());
 
             statisticTemplate = getProperties()->get("statisticTemplate", "qQueueSize");
-            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
+            getEnvir()->addResultRecorders(this, signal, ("q" + std::to_string(i) + "QueueSize").c_str(), statisticTemplate);
 
             qQueueSizeSignals.push_back(signal);
             //Send initial signal to create statistic

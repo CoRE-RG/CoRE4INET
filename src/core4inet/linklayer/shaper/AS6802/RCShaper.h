@@ -57,7 +57,7 @@ class RCShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        virtual ~RCShaper();
+        virtual ~RCShaper() override;
 
         /**
          * @brief receives signal from mac module and resets bag on rxPk signal from mac
@@ -206,28 +206,24 @@ void RCShaper<TC>::initialize(int stage)
         numRcPriority = static_cast<size_t>(par("numRCpriority").longValue());
         for (unsigned int i = 0; i < numRcPriority; i++)
         {
-            char strBuf[32];
             cQueue queue;
-            snprintf(strBuf, 32, "RC Priority %d Messages", i);
-            queue.setName(strBuf);
+            queue.setName(("RC Priority " + std::to_string(i) + " Messages").c_str());
             rcQueue.push_back(queue);
             rcQueueSize.push_back(0);
 
-            snprintf(strBuf, 32, "rc%dQueueLength", i);
-            simsignal_t signal = registerSignal(strBuf);
+            simsignal_t signal = registerSignal(("rc" + std::to_string(i) + "QueueLength").c_str());
 
             cProperty *statisticTemplate = getProperties()->get("statisticTemplate", "rcQueueLength");
-            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
+            getEnvir()->addResultRecorders(this, signal, ("rc" + std::to_string(i) + "QueueLength").c_str(), statisticTemplate);
 
             rcQueueLengthSignals.push_back(signal);
             //Send initial signal to create statistic
             cComponent::emit(signal, static_cast<unsigned long>(queue.getLength()));
 
-            snprintf(strBuf, 32, "rc%dQueueSize", i);
-            signal = registerSignal(strBuf);
+            signal = registerSignal(("rc" + std::to_string(i) + "QueueSize").c_str());
 
             statisticTemplate = getProperties()->get("statisticTemplate", "rcQueueSize");
-            getEnvir()->addResultRecorders(this, signal, strBuf, statisticTemplate);
+            getEnvir()->addResultRecorders(this, signal, ("rc" + std::to_string(i) + "QueueSize").c_str(), statisticTemplate);
 
             rcQueueSizeSignals.push_back(signal);
             //Send initial signal to create statistic

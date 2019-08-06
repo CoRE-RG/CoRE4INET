@@ -47,7 +47,7 @@ class SRPEtherEncap : public virtual BGEtherEncap
         /**
          * @brief Destructor
          */
-        virtual ~SRPEtherEncap();
+        virtual ~SRPEtherEncap() override;
 
     protected:
         /**

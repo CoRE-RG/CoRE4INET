@@ -44,7 +44,7 @@ class DoubleBuffer : public virtual Buffer
         /**
          * @brief Destructor
          */
-        virtual ~DoubleBuffer();
+        virtual ~DoubleBuffer() override;
 
     private:
         /**

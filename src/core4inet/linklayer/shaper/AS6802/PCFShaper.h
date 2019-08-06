@@ -48,7 +48,7 @@ class PCFShaper : public TC, public virtual Timed
         /**
          * @brief Destructor
          */
-        virtual ~PCFShaper();
+        virtual ~PCFShaper() override;
 
     private:
         /**

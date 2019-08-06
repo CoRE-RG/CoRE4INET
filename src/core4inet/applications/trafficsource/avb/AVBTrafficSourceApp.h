@@ -55,6 +55,7 @@ class AVBTrafficSourceApp : public virtual TrafficSourceAppBase, public virtual 
         size_t frameSize;
         uint16_t intervalFrames;
         uint16_t vlan_id;
+        uint8_t pcp;
         cModule *avbOutCTC;
         inet::MACAddress multicastMAC;
     public:
