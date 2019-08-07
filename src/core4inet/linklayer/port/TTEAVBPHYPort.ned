@@ -17,7 +17,6 @@ package core4inet.linklayer.port;
 
 import core4inet.linklayer.inControl.CT_AVB_8021Q_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
-import core4inet.linklayer.filtering.IFiltering;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
@@ -25,7 +24,7 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 // The TTEAVBPHYPort is a compund module that contains the input Shaper, input Filtering, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a real-time Ethernet device (Switch or Host)
 //
-// @see ~IPort, ~IFiltering, ~NoFiltering, ~EtherMACFullDuplex, ~TTEInput, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
+// @see ~IPort, ~EtherMACFullDuplex, ~TTEInput, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
 //
 // @author Philipp Meyer
 //
@@ -78,10 +77,6 @@ module TTEAVBPHYPort like IPort
                 taggedVIDs = taggedVIDs;
         }
 
-        filtering: <default("NoFiltering")> like IFiltering {
-            @display("p=141.44,90.24");
-        }
-
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true;
@@ -93,8 +88,7 @@ module TTEAVBPHYPort like IPort
         upperLayerIn --> shaper.in;
         upperLayerOut <-- inControl.out;
         shaper.out --> mac.upperLayerIn;
-        inControl.in <-- filtering.out;
-        filtering.in <-- mac.upperLayerOut;
+        inControl.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
 
         TTin --> shaper.TTin;

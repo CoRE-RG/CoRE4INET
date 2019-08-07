@@ -7,7 +7,6 @@
 #/examples/AS6802/synchronization/HighIntegrity_small/,           -f omnetpp.ini -c General -r 0,                        1s,              da3e-3e7b
 #/examples/AS6802/synchronization/StandardIntegrity_large/,       -f omnetpp.ini -c General -r 0,                        1s,              b23c-ebb5
 #/examples/AS6802/synchronization/StandardIntegrity_medium/,      -f omnetpp.ini -c General -r 0,                        1s,              e040-f0be
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid_with_Filtering_and_Attack,0.1s,46e8-cf4b
 /examples/avb_AS6802/small_network/,                           	  -f omnetpp.ini -c General -r 0,                        1s,              7f34-671d
 /examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            e23c-75a8
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,      0.1s,            5e8a-7065
@@ -20,3 +19,4 @@
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c General -r 0,                        1s,              b88d-a79a
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            91c1-f70d
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            5e44-88fb
+/examples/IEEE8021Qci/large_network/,                             -f omnetpp.ini -c Timespan_between_TT_valid_with_Filtering_and_Attack,0.1s,46e8-cf4b

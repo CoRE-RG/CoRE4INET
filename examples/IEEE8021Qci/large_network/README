@@ -1,0 +1,5 @@
+Extends the original network in examples/avb_AS6802 with IEEE802.1Qci filtering and policing in all switches.
+Node_1 is a corrupted node which can execute DoS attacks.
+
+
+

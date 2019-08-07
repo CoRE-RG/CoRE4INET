@@ -16,20 +16,20 @@
 package core4inet.linklayer.port;
 
 import core4inet.linklayer.inControl.CT_AVB_8021Q_InControl;
-import core4inet.linklayer.shaper.Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
+import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
+import core4inet.linklayer.filtering.IFiltering;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 //
-// The BackdoorTTEAVBPHYPort is a compund module that contains the input Shaper, output Shaper and MAC (EtherMACFullDuplex)
+// The TTEAVBPHYPort is a compund module that contains the input Shaper, input Filtering, output Shaper and MAC (EtherMACFullDuplex)
 // It represents a physical port for a real-time Ethernet device (Switch or Host)
-// It has a backdoor that bypasses all inputs with highest priority
 //
-// @see ~IPort, ~EtherMACFullDuplex, ~TTEInput, ~Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
+// @see ~IPort, ~IFiltering, ~NoFiltering, ~EtherMACFullDuplex, ~TTEInput, ~TT_AVBClassA_PCF_RC_BE_Shaper, ~TT_PCF_RC_BE_Shaper, ~PCF_RC_BE_Shaper, ~BE_Shaper
 //
 // @author Philipp Meyer
 //
-module BackdoorTTEAVBPHYPort like IPort
+module TTEAVBFilterPHYPort like IPort
 {
     parameters:
         @display("bgb=188,180;i=device/port");
@@ -52,7 +52,6 @@ module BackdoorTTEAVBPHYPort like IPort
         output upperLayerOut @loose @labels(EtherFrame);
         //Connection to the physical layer
         inout phys @labels(EtherFrame);
-        input Backdoorin @directIn @labels(EtherFrame);
         //Input from the upper layer for time-triggered traffic
         input TTin @directIn @labels(TTFrame);
         //Input from the upper layer for rate-constrained traffic
@@ -65,7 +64,7 @@ module BackdoorTTEAVBPHYPort like IPort
         input AVBBin @directIn @labels(AVBFrame);
 
     submodules:
-        shaper: Backdoor_TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper {
+        shaper: TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper {
             @display("p=48,45");
             untaggedVID = untaggedVID;
             taggedVIDs = taggedVIDs;
@@ -79,6 +78,10 @@ module BackdoorTTEAVBPHYPort like IPort
                 taggedVIDs = taggedVIDs;
         }
 
+        filtering: <default("NoFiltering")> like IFiltering {
+            @display("p=141.44,90.24");
+        }
+
         mac: EtherMACFullDuplex {
             parameters:
                 promiscuous = true;
@@ -90,10 +93,10 @@ module BackdoorTTEAVBPHYPort like IPort
         upperLayerIn --> shaper.in;
         upperLayerOut <-- inControl.out;
         shaper.out --> mac.upperLayerIn;
-        inControl.in <-- mac.upperLayerOut;
+        inControl.in <-- filtering.out;
+        filtering.in <-- mac.upperLayerOut;
         phys <--> mac.phys;
 
-		Backdoorin --> shaper.Backdoorin;
         TTin --> shaper.TTin;
         RCin --> shaper.RCin;
         PCFin --> shaper.PCFin;
