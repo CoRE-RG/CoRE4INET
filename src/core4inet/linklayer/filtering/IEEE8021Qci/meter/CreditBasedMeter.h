@@ -32,7 +32,7 @@
 namespace CoRE4INET {
 
 /**
- * @brief Class representing the Credit Based Meter (CBM) module
+ * @brief Class representing the experimental Credit Based Meter (CBM) module
  *
  * @author Philipp Meyer
  *

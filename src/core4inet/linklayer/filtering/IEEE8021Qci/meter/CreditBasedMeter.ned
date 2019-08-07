@@ -18,8 +18,8 @@ package core4inet.linklayer.filtering.IEEE8021Qci.meter;
 import core4inet.utilities.classes.ITimed;
 
 //
-// The CreditBasedMeter (CBM) is a simple module
-// It represents a meter that filters traffic in dependency of a credit value
+// The experimental CreditBasedMeter (CBM) is a simple module.
+// It represents a meter concept that filters traffic in dependency of a credit value.
 //
 // @see ~IIEEE8021QciMeter, ~IEEE8021QciMeter
 //
