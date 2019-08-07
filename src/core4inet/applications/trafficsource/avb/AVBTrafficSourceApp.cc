@@ -74,7 +74,18 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
             srpTable->subscribe(NF_AVB_LISTENER_UNREGISTERED, this);
             srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
             srpTable->updateTalkerWithStreamId(streamID, this, multicastMAC, srClass, frameSize, intervalFrames,
-                    vlan_id);
+                    vlan_id, isStatic);
+
+            //Is static config active and listeners already registered for this stream?
+            if(isStatic){
+                if(srpTable->getListenersForStreamId(streamID, vlan_id).empty()){
+                    //add a listener
+                    srpTable->updateListenerWithStreamId(streamID, getParentModule()->getSubmodule("phy", 0), vlan_id, isStatic);
+                }
+                isStreaming = true;
+                scheduleInterval();
+            }
+
             if (getEnvir()->isGUI())
             {
                 getDisplayString().setTagArg("i2", 0, "status/hourglass");
@@ -223,6 +234,22 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "pcp"))
     {
         this->pcp = static_cast<uint8_t>(parameterULongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
+    }
+    if (!parname || !strcmp(parname, "multicastMAC"))
+    {
+        const char* macStr = par("multicastMAC").stringValue();
+        // if string is not empty or set to auto load the address and hope its valid.
+        if(!(!strcmp(macStr, "") || !strcmp(macStr, "auto"))) {
+            this->multicastMAC = inet::MACAddress(macStr);
+        }
+        //check if still unspecified.
+        if(multicastMAC.isUnspecified()){
+            this->multicastMAC = generateAutoMulticastAddress();
+        }
+    }
+    if (!parname || !strcmp(parname, "isStatic"))
+    {
+        this->isStatic = par("isStatic").boolValue();
     }
 
 }

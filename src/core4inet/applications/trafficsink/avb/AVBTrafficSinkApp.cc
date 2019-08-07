@@ -49,6 +49,11 @@ void AVBTrafficSinkApp::initialize()
     srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, this);
 
+    if (isStatic)
+    {
+        retryInterval = 0;
+    }
+
     if (getEnvir()->isGUI())
     {
         getDisplayString().setTagArg("i2", 0, "status/hourglass");
@@ -71,7 +76,7 @@ void AVBTrafficSinkApp::receiveSignal(cComponent *src, simsignal_t id, cObject *
         {
             SRPTable *signal_srpTable = check_and_cast<SRPTable *>(src);
 
-            signal_srpTable->updateListenerWithStreamId(tentry->streamId, this, tentry->vlan_id);
+            signal_srpTable->updateListenerWithStreamId(tentry->streamId, this, tentry->vlan_id, isStatic);
             if (getEnvir()->isGUI())
             {
                 getDisplayString().setTagArg("i2", 0, "status/hourglass");
@@ -108,7 +113,7 @@ void AVBTrafficSinkApp::handleMessage(cMessage *msg)
     if (msg && msg->isSelfMessage())
     {
         srpTable->updateListenerWithStreamId(static_cast<uint64_t>(par("streamID").longValue()), this,
-                static_cast<uint16_t>(par("vlan_id").longValue()));
+                static_cast<uint16_t>(par("vlan_id").longValue()), isStatic);
         if (getEnvir()->isGUI())
         {
             getDisplayString().setTagArg("i2", 0, "status/active");
@@ -150,6 +155,10 @@ void AVBTrafficSinkApp::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "vlan_id"))
     {
         this->vlan_id = static_cast<unsigned short>(parameterULongCheckRange(par("vlan_id"), 0, MAX_VLAN_ID));
+    }
+    if (!parname || !strcmp(parname, "isStatic"))
+    {
+        this->isStatic = par("isStatic").boolValue();
     }
 }
 

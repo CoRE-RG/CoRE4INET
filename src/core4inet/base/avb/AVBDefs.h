@@ -27,6 +27,8 @@ enum class SR_CLASS {
 
 static std::map<SR_CLASS, const char*> SR_CLASStoString = {{SR_CLASS::A,"A"},{SR_CLASS::B,"B"}};
 
+//Ethertype for MSRP Protocol
+#define AVB_ETHERTYPE 0x88B5
 
 //Ethertype for MSRP Protocol
 #define MSRP_ETHERTYPE 0x22EA

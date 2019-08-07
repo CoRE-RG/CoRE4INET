@@ -41,6 +41,8 @@ simple AVBTrafficSinkApp extends TrafficSinkApp
         double updateInterval @unit("s") = default(6s);
         //Interval in which a subscription is reregistered after a registration failed
         double retryInterval @unit("s") = default(1s);
+        // Is Static
+        bool isStatic = default(false);
     gates:
         // Gate for incoming AVB frames
         input AVBin @directIn @label(AVBFrame);

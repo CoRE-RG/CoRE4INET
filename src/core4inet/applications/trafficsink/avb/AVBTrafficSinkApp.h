@@ -59,6 +59,11 @@ class AVBTrafficSinkApp : public virtual TrafficSinkApp, public virtual cListene
          * @brief Caches retryInterval parameter
          */
         simtime_t retryInterval;
+
+        /**
+         * @brief Caches isStatic parameter
+         */
+        bool isStatic;
     public:
         /**
          * @brief Constructor of AVBTrafficSinkApp

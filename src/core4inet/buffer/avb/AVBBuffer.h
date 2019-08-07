@@ -98,7 +98,7 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
          */
         void resetCredit();
 
-    private:
+    protected:
         /**
          * @brief Stream Reservation Class of the AVB Buffer
          */
@@ -153,9 +153,13 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
          * @brief Bandwidth of the port where the buffer is attached
          */
         unsigned int portBandwith;
-    protected:
 
         /**
+         * @brief Module for SRP Reservations for this port.
+         */
+        cModule* srpModule;
+
+         /**
          * Signal that is emitted every time the credit is recalculated.
          */
         static simsignal_t creditSignal;
@@ -188,7 +192,6 @@ class AVBBuffer : public virtual Buffer, public virtual Timed, cListener
          */
         virtual void handleParameterChange(const char* parname) override;
 
-    private:
         /**
          * @brief Get current Time of the Node
          *

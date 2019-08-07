@@ -55,11 +55,12 @@ class SRPTable : public virtual cSimpleModule
                 uint16_t intervalFrames;    // interval frames
                 uint16_t vlan_id;           // VLAN identifier
                 simtime_t insertionTime;    // Arrival time of SRP entry
+                bool isStatic;              // Is static entry
 
                 TalkerEntry();
                 TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address,
                         cModule *new_module, size_t new_framesize, unsigned short new_intervalFrames,
-                        unsigned short new_vlan_id, simtime_t new_insertionTime);
+                        unsigned short new_vlan_id, simtime_t new_insertionTime, bool new_isStatic = false);
                 virtual ~TalkerEntry();
 
         };
@@ -75,10 +76,11 @@ class SRPTable : public virtual cSimpleModule
                 cModule *module;            // Listener port or module
                 uint16_t vlan_id;           // VLAN identifier
                 simtime_t insertionTime;    // Arrival time of SRP entry
+                bool isStatic;              // Is static entry
 
                 ListenerEntry();
                 ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,
-                        simtime_t new_insertionTime);
+                        simtime_t new_insertionTime, bool new_isStatic = false);
                 virtual ~ListenerEntry();
 
         };
@@ -115,6 +117,11 @@ class SRPTable : public virtual cSimpleModule
          *  @brief Table does not receive messages, throws cRuntimeError when handleMessage is called
          */
         virtual void handleMessage(cMessage *msg) override __attribute__ ((noreturn));
+
+        /**
+         *  @brief Finish method to export XML config if needed.
+         */
+        virtual void finish() override;
 
     public:
         /**
@@ -208,7 +215,7 @@ class SRPTable : public virtual cSimpleModule
          */
         virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
                 SR_CLASS srClass = SR_CLASS::A, size_t framesize = 0, uint16_t intervalFrames = 0, uint16_t vid =
-                        VLAN_ID_DEFAULT);
+                        VLAN_ID_DEFAULT, bool isStatic = false);
 
         /**
          * @brief Unregister a streamId at talkerTable.
@@ -221,7 +228,7 @@ class SRPTable : public virtual cSimpleModule
          * @brief Register a new streamId at listenerTable.
          * @return True if refreshed. False if it is new.
          */
-        virtual bool updateListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid = VLAN_ID_DEFAULT);
+        virtual bool updateListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid = VLAN_ID_DEFAULT, bool isStatic = false);
 
         /**
          * @brief Unregister a streamId at listenerTable.
@@ -243,6 +250,18 @@ class SRPTable : public virtual cSimpleModule
          * @brief Remove entries that were not updated during agingTime if necessary
          */
         void removeAgedEntriesIfNeeded();
+
+        /**
+         * @brief creates an XML string with the contents of the SRP Table.
+         * This string can be used to fill the SRP Table with importFromXML.
+         */
+        std::string exportToXML();
+
+        /**
+         * @brief Imports entries from an XMLdocument.
+         * The root element needs to be <srpTable>
+         */
+        bool importFromXML(cXMLElement* xml);
 
     protected:
         /**
