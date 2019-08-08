@@ -38,12 +38,23 @@ class IEEE8021QciInput : public cSimpleModule
      * @brief Caches pointers to stream filters contained in the IEEE 802.1Qci filter module
      */
     std::vector<IEEE8021QciFilter*> streamFilters;
+    /**
+     * @brief Store if all frames without filter match are dropped
+     */
+    bool isWhiteList;
+
 
   protected:
     /**
      * @brief Initializes the module
      */
     virtual void initialize();
+    /**
+     * @brief Indicates a parameter has changed.
+     *
+     * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+     */
+    virtual void handleParameterChange(const char *parname);
     /**
      * @brief Receives messages from higher layer and looks up if a stream filter is requesting it
      *

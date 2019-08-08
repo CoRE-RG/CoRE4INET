@@ -21,7 +21,6 @@ namespace CoRE4INET;
 // @author Philipp Meyer
 //
 packet IEEE8021QciCtrl {
-    unsigned long streamID;
     unsigned int gateID;
     unsigned int meterID;
 }

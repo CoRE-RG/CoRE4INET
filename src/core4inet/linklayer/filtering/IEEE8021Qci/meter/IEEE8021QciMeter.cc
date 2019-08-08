@@ -61,7 +61,7 @@ void IEEE8021QciMeter::finish()
     simtime_t t = simTime();
     if (t > 0)
     {
-        if (numFramesReceived > 0)
+        if (this->numFramesReceived > 0)
         {
             recordScalar("frames/sec rcvd", this->numFramesReceived / t);
             recordScalar("bits/sec rcvd", (8.0 * this->numBytesReceived) / t);

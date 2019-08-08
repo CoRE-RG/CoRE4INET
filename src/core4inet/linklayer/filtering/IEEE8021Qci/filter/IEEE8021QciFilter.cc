@@ -26,18 +26,17 @@ void IEEE8021QciFilter::initialize()
 
 void IEEE8021QciFilter::handleMessage(cMessage *msg)
 {
-    IEEE8021QciGate *gate = dynamic_cast<IEEE8021QciGate*>(getParentModule()->getSubmodule("streamGate", this->gateID));
-    if (!gate)
-    {
-        throw cRuntimeError("Cannot find gate %d configured in filter for stream %d", this->gateID, this->streamID);
-    }
     IEEE8021QciCtrl* ctrl = new IEEE8021QciCtrl;
-    ctrl->setStreamID(this->streamID);
     ctrl->setGateID(this->gateID);
     ctrl->setMeterID(this->meterID);
     ctrl->encapsulate(PK(msg));
     std::string ctrlName = "sID:" + std::to_string(this->streamID) + "|gID:" + std::to_string(this->gateID) + "|mID:" + std::to_string(this->meterID);
     ctrl->setName(ctrlName.c_str());
+    IEEE8021QciGate *gate = dynamic_cast<IEEE8021QciGate*>(getParentModule()->getSubmodule("streamGate", ctrl->getGateID()));
+    if (!gate)
+    {
+        throw cRuntimeError("Cannot find gate %d configured in filter for stream %d", this->gateID, this->streamID);
+    }
     sendDirect(ctrl, gate->gate("in"));
 }
 

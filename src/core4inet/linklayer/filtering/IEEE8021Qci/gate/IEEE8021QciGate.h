@@ -39,15 +39,35 @@ class IEEE8021QciGate : public virtual cSimpleModule
      */
     enum State
     {
-        CLOSE = 0,//!< CLOSE
+        CLOSED = 0,//!< CLOSE
         OPEN = 1  //!< OPEN
     };
+
+  protected:
+    /**
+     * @brief Variable for counting the number of dropped frames
+     */
+    unsigned long numFramesDropped = 0;
 
   private:
     /**
      * @brief Current state of the IEEE8021QciGate.
      */
     State state;
+    /**
+     * @brief Signal emitted when frame is dropped by the gate
+     */
+    static simsignal_t frameDroppedSignal;
+
+  public:
+    /**
+     * @brief Open the gate!
+     */
+    virtual void open();
+    /**
+     * @brief Close the gate!
+     */
+    virtual void close();
 
   protected:
     /**
@@ -70,6 +90,10 @@ class IEEE8021QciGate : public virtual cSimpleModule
      * @brief Components that contain visualization-related code are expected to override refreshDisplay()
      */
     virtual void refreshDisplay() const;
+    /**
+     * @brief Records simulation results
+     */
+    virtual void finish();
 };
 
 } //namespace

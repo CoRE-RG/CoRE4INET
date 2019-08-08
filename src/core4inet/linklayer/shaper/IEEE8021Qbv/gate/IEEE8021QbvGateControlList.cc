@@ -29,6 +29,7 @@ Define_Module(IEEE8021QbvGateControlList);
 
 IEEE8021QbvGateControlList::IEEE8021QbvGateControlList()
 {
+    this->numGates = 0;
     this->configNo = 0;
 }
 
@@ -108,6 +109,22 @@ void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
     delete msg;
 }
 
+void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateStates)
+{
+    for (long i=static_cast<long>(this->numGates)-1; i>=0; i--)
+    {
+        IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
+        if ( !strcmp(gateStates[i].c_str(), "o"))
+        {
+            tg->open();
+        }
+        if ( !strcmp(gateStates[i].c_str(), "C"))
+        {
+            tg->close();
+        }
+    }
+}
+
 void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool nextCycle)
 {
     SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent(this->timerEventName.c_str(), ACTION_TIME_EVENT);
@@ -123,22 +140,6 @@ void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool next
     getPeriod()->registerEvent(actionTimeEvent);
 }
 
-void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateStates)
-{
-    for (long i=static_cast<long>(numGates)-1; i>=0; i--)
-    {
-        IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
-        if ( !strcmp(gateStates[i].c_str(), "o"))
-        {
-            tg->open();
-        }
-        if ( !strcmp(gateStates[i].c_str(), "C"))
-        {
-            tg->close();
-        }
-    }
-}
-
 void IEEE8021QbvGateControlList::switchToNextGateControlElement()
 {
     ++(this->gateControlElement);
@@ -147,6 +148,5 @@ void IEEE8021QbvGateControlList::switchToNextGateControlElement()
         this->gateControlElement = this->gateControlList.begin();
     }
 }
-
 
 } //namespace

@@ -13,24 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.filtering.IEEE8021Qci;
+package core4inet.examples.tsn.small_network;
+
+import core4inet.nodes.ethernet.tsn.TSNEtherHost;
 
 //
-// Input module of the IEEE 802.1Qci filter
+// Node3: configuration in node3.ini.
 //
-// @see ~IEEE8021QciOutput
-//
-// @author Philipp Meyer
-//
-simple IEEE8021QciInput
+module Node3 extends TSNEtherHost
 {
-    parameters:
-        @display("i=block/fork"); 
-        // If all frames that are not matched with a stream filter are dropped
-        bool isWhiteList = default(false); 
-    gates:
-        // Input from upper layer
-        input upperLayerIn;
-        // Ouput to the ouput module of the IEEE 802.1Qci filter
-        output out;
+    @display("bgb=487,314");
 }

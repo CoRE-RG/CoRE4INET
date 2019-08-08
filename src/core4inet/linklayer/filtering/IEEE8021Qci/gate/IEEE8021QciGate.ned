@@ -25,8 +25,10 @@ package core4inet.linklayer.filtering.IEEE8021Qci.gate;
 simple IEEE8021QciGate like IIEEE8021QciGate
 {
     parameters:
-        // State of the gate. O (Open) or C (Closed).
-        string state = default("O");
+        @signal[frameDropped](type=long);
+        @statistic[framesDropped](title="Frames Dropped"; source=frameDropped; unit=B; record=vector; interpolationmode=none;);
+        // State of the gate. o (Open) or C (Closed).
+        string state = default("o");
         
     gates:
         // The Input of the gate

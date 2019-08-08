@@ -20,6 +20,7 @@ import core4inet.linklayer.filtering.IEEE8021Qci.IEEE8021QciOutput;
 import core4inet.linklayer.filtering.IEEE8021Qci.filter.IIEEE8021QciFilter;
 import core4inet.linklayer.filtering.IEEE8021Qci.gate.IIEEE8021QciGate;
 import core4inet.linklayer.filtering.IEEE8021Qci.meter.IIEEE8021QciMeter;
+import core4inet.linklayer.filtering.IEEE8021Qci.gate.IIEEE8021QciGateControlList;
 
 //
 // IEEE8021Qci is a compound filtering module implementing the TSN IEEE 802.1Qci Per-Stream Filtering and Policing.
@@ -38,6 +39,8 @@ module IEEE8021Qci like IFiltering
         int numStreamGates = default(0);
         // Number of contained flow meters
         int numFlowMeters = default(0);
+        // If all frames that are not matched with a stream filter are dropped
+        bool isWhiteList = default(false);
 
     gates:
         // Input of the filter
@@ -48,6 +51,7 @@ module IEEE8021Qci like IFiltering
     submodules:
         streamInput: IEEE8021QciInput {
             @display("p=50,75");
+            isWhiteList = isWhiteList;
         }
 
         streamFilter[numStreamFilters]: <default("IEEE8021QciFilter")> like IIEEE8021QciFilter {
@@ -64,6 +68,10 @@ module IEEE8021Qci like IFiltering
 
         streamOutput: IEEE8021QciOutput {
             @display("p=950,75");
+        }
+
+        gateControlList: <default("IEEE8021QciGateControlList")> like IIEEE8021QciGateControlList {
+            @display("p=500,25");
         }
 
     connections allowunconnected:

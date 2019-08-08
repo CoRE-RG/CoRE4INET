@@ -37,11 +37,13 @@ namespace CoRE4INET {
  */
 class IEEE8021QbvGateControlList : public virtual Scheduled
 {
-  private:
+  protected:
     /**
      * @brief Number of gates for control.
      */
     unsigned int numGates;
+
+  private:
     /**
      * @brief Vector containing the initial gate states.
      */
@@ -96,16 +98,16 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
      * @param msg the incoming message
      */
     virtual void handleMessage(cMessage *msg);
+    /**
+     * @brief Propagate the gate states of the current control element.
+     */
+    virtual void propagteGateControlElement(vector<string> gateStates);
 
   private:
     /**
      * @brief Schedule the next SchedulerTimerEvent message.
      */
     void scheduleCurrentGateControlElementTime(bool nextCycle);
-    /**
-     * @brief Propagate the gate states of the current control element.
-     */
-    void propagteGateControlElement(vector<string> gateStates);
     /**
      * @brief Switch to next control element of the control list.
      */

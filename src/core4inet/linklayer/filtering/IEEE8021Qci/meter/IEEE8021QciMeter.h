@@ -70,7 +70,7 @@ class IEEE8021QciMeter : public virtual cSimpleModule
     /**
      * @brief Records simulation results
      */
-    virtual void finish() override;
+    virtual void finish();
 };
 
 } //namespace

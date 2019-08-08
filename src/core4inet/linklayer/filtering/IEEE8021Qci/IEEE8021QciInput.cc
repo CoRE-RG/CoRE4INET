@@ -29,6 +29,14 @@ void IEEE8021QciInput::initialize()
     }
 }
 
+void IEEE8021QciInput::handleParameterChange(const char *parname)
+{
+    if (!parname || !strcmp(parname, "isWhiteList"))
+    {
+        this->isWhiteList = this->par("isWhiteList").boolValue();
+    }
+}
+
 void IEEE8021QciInput::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("upperLayerIn"))
@@ -51,13 +59,27 @@ void IEEE8021QciInput::handleMessage(cMessage *msg)
                         break;
                     }
                 }
-                if(!filterFound){
+                if(!filterFound && !this->isWhiteList){
                     send(avbFrame, "out");
+                }
+                else
+                {
+                    this->bubble("Drop frame");
+                    delete avbFrame;
                 }
             }
             else
             {
-                send(frame, "out");
+                // TODO: Other Traffic
+                if (!this->isWhiteList)
+                {
+                    send(frame, "out");
+                }
+                else
+                {
+                    this->bubble("Drop frame");
+                    delete frame;
+                }
             }
         }
         else

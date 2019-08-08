@@ -19,31 +19,51 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QciGate);
 
+simsignal_t IEEE8021QciGate::frameDroppedSignal = registerSignal("frameDropped");
+
+void IEEE8021QciGate::open()
+{
+    Enter_Method("open()");
+    this->state = this->State::OPEN;
+}
+
+void IEEE8021QciGate::close()
+{
+    Enter_Method("close()");
+    this->state = this->State::CLOSED;
+}
+
 void IEEE8021QciGate::initialize()
 {
     this->handleParameterChange(nullptr);
     WATCH(this->state);
+    WATCH(this->numFramesDropped);
 }
 
 void IEEE8021QciGate::handleMessage(cMessage *msg)
 {
-    if (this->state == this->State::OPEN)
+    if (IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg))
     {
-        IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg);
-        if (!ctrl)
+        if (this->state == this->State::OPEN)
         {
-            throw cRuntimeError("No filtering ctrl header");
+            IEEE8021QciMeter *meter = dynamic_cast<IEEE8021QciMeter*>(getParentModule()->getSubmodule("flowMeter", ctrl->getMeterID()));
+            if (!meter)
+            {
+                throw cRuntimeError("Cannot find meter %d!", ctrl->getMeterID());
+            }
+            sendDirect(msg, meter->gate("in"));
         }
-        IEEE8021QciMeter *meter = dynamic_cast<IEEE8021QciMeter*>(getParentModule()->getSubmodule("flowMeter", ctrl->getMeterID()));
-        if (!meter)
+        else if (this->state == this->State::CLOSED)
         {
-            throw cRuntimeError("Cannot find meter %d configured in filter for stream %d", ctrl->getMeterID(), ctrl->getStreamID());
+            this->bubble("Drop frame");
+            this->emit(frameDroppedSignal, ctrl->getEncapsulatedPacket()->getByteLength());
+            delete ctrl;
+            this->numFramesDropped++;
         }
-        sendDirect(msg, meter->gate("in"));
     }
-    else if (this->state == this->State::CLOSE)
+    else
     {
-        delete msg;
+        throw cRuntimeError("No filtering ctrl header");
     }
 }
 
@@ -51,17 +71,17 @@ void IEEE8021QciGate::handleParameterChange(const char *parname)
 {
     if (!parname || !strcmp(parname, "state"))
     {
-        if (!strcmp(par("state").stringValue(), "O"))
+        if (!strcmp(par("state").stringValue(), "o"))
         {
             this->state = this->State::OPEN;
         }
         else if (!strcmp(par("state").stringValue(), "C"))
         {
-            this->state = this->State::CLOSE;
+            this->state = this->State::CLOSED;
         }
         else
         {
-            throw cRuntimeError("Parameter state of %s is %s and is only allowed to be O or C", getFullPath().c_str(), par("state").stringValue());
+            throw cRuntimeError("Parameter state of %s is %s and is only allowed to be o or C", getFullPath().c_str(), par("state").stringValue());
         }
     }
 }
@@ -72,9 +92,22 @@ void IEEE8021QciGate::refreshDisplay() const
     {
         this->getDisplayString().setTagArg("b",3,"green");
     }
-    else if (this->state == this->State::CLOSE)
+    else if (this->state == this->State::CLOSED)
     {
         this->getDisplayString().setTagArg("b",3,"red");
+    }
+}
+
+void IEEE8021QciGate::finish()
+{
+    recordScalar("frames dropped", this->numFramesDropped);
+    simtime_t t = simTime();
+    if (t > 0)
+    {
+        if (this->numFramesDropped > 0)
+        {
+            recordScalar("frames/sec dropped", this->numFramesDropped / t);
+        }
     }
 }
 
