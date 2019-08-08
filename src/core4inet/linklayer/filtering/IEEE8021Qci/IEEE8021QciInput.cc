@@ -22,6 +22,7 @@ Define_Module(IEEE8021QciInput);
 void IEEE8021QciInput::initialize()
 {
     int numStreamFilters = parameterULongCheckRange(getParentModule()->par("numStreamFilters"), 0, UINT32_MAX);
+    this->srpTable = dynamic_cast<SRPTable*>(this->getParentModule()->getParentModule()->getParentModule()->getSubmodule("srpTable"));
     streamFilters.clear();
     for (int i = 0; i < numStreamFilters; i++)
     {
@@ -43,43 +44,33 @@ void IEEE8021QciInput::handleMessage(cMessage *msg)
     {
         if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(msg))
         {
-            //First filtering implementation just for AVB frames
             if (AVBFrame *avbFrame = dynamic_cast<AVBFrame*>(frame))
             {
-                bool filterFound = false;
                 for(std::vector<IEEE8021QciFilter*>::iterator it = streamFilters.begin(); it != streamFilters.end(); ++it)
                 {
                     IEEE8021QciFilter *streamFilter = *it;
                     if(!streamFilter){
                         throw cRuntimeError("StreamFilter is null");
                     }
-                    if(streamFilter->getStreamID() == avbFrame->getStreamID()){
-                        filterFound = true;
+                    if(streamFilter->getStreamID() == this->srpTable->getStreamIdForTalkerAddress(avbFrame->getDest(), avbFrame->getVID()))
+                    {
                         sendDirect(avbFrame, streamFilter->gate("in"));
-                        break;
+                        return;
                     }
-                }
-                if(!filterFound && !this->isWhiteList){
-                    send(avbFrame, "out");
-                }
-                else
-                {
-                    this->bubble("Drop frame");
-                    delete avbFrame;
                 }
             }
             else
             {
                 // TODO: Other Traffic
-                if (!this->isWhiteList)
-                {
-                    send(frame, "out");
-                }
-                else
-                {
-                    this->bubble("Drop frame");
-                    delete frame;
-                }
+            }
+            if (!this->isWhiteList)
+            {
+                send(frame, "out");
+            }
+            else
+            {
+                this->bubble("Drop frame");
+                delete frame;
             }
         }
         else

@@ -19,6 +19,7 @@
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/filter/IEEE8021QciFilter.h"
+#include "core4inet/services/avb/SRP/SRPTable.h"
 //CoRE4INET Auto-generated Messages
 #include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 //INET Auto-generated Messages
@@ -42,6 +43,10 @@ class IEEE8021QciInput : public cSimpleModule
      * @brief Store if all frames without filter match are dropped
      */
     bool isWhiteList;
+    /**
+     * @brief Pointer to the SRP Table
+     */
+    SRPTable *srpTable;
 
 
   protected:

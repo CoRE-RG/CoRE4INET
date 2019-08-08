@@ -44,6 +44,7 @@ void AVBAttackTrafficSourceApp::sendAVBFrame()
             outFrame->setStreamID(streamID);
             outFrame->setDest(multicastMAC);
             outFrame->setVID(vlan_id);
+            outFrame->setPcp(pcp);
             cPacket *payloadPacket = new cPacket;
             payloadPacket->setTimestamp();
             payloadPacket->setByteLength(static_cast<int64_t>(getPayloadBytes()));
