@@ -19,25 +19,47 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QciFilter);
 
+bool IEEE8021QciFilter::isMatching(inet::EtherFrame* frame)
+{
+    bool match = false;
+    if (AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(frame)) // TODO: Change to srpTable contains qframe
+    {
+        if(this->streamID == MAX_STREAM_ID || this->streamID == this->srpTable->getStreamIdForTalkerAddress(avbFrame->getDest(), avbFrame->getVID()))
+        {
+            match = true;
+        }
+    }
+    return match;
+}
+
+long IEEE8021QciFilter::getStreamId() const {
+    return streamID;
+}
+
+void IEEE8021QciFilter::setStreamId(long streamId) {
+    streamID = streamId;
+}
+
+unsigned int IEEE8021QciFilter::getGateId() const {
+    return gateID;
+}
+
+void IEEE8021QciFilter::setGateId(unsigned int gateId) {
+    gateID = gateId;
+}
+
+unsigned int IEEE8021QciFilter::getMeterId() const {
+    return meterID;
+}
+
+void IEEE8021QciFilter::setMeterId(unsigned int meterId) {
+    meterID = meterId;
+}
+
 void IEEE8021QciFilter::initialize()
 {
     handleParameterChange(nullptr);
-}
-
-void IEEE8021QciFilter::handleMessage(cMessage *msg)
-{
-    IEEE8021QciCtrl* ctrl = new IEEE8021QciCtrl;
-    ctrl->setGateID(this->gateID);
-    ctrl->setMeterID(this->meterID);
-    ctrl->encapsulate(PK(msg));
-    std::string ctrlName = "sID:" + std::to_string(this->streamID) + "|gID:" + std::to_string(this->gateID) + "|mID:" + std::to_string(this->meterID);
-    ctrl->setName(ctrlName.c_str());
-    IEEE8021QciGate *gate = dynamic_cast<IEEE8021QciGate*>(getParentModule()->getSubmodule("streamGate", ctrl->getGateID()));
-    if (!gate)
-    {
-        throw cRuntimeError("Cannot find gate %d configured in filter for stream %d", this->gateID, this->streamID);
-    }
-    sendDirect(ctrl, gate->gate("in"));
+    this->srpTable = dynamic_cast<SRPTable*>(this->getParentModule()->getParentModule()->getParentModule()->getSubmodule("srpTable"));
 }
 
 void IEEE8021QciFilter::handleParameterChange(const char *parname)
@@ -58,6 +80,22 @@ void IEEE8021QciFilter::handleParameterChange(const char *parname)
     {
         this->meterID = parameterULongCheckRange(par("meterID"), 0, UINT32_MAX);
     }
+}
+
+void IEEE8021QciFilter::handleMessage(cMessage *msg)
+{
+    IEEE8021QciCtrl* ctrl = new IEEE8021QciCtrl;
+    ctrl->setGateID(this->gateID);
+    ctrl->setMeterID(this->meterID);
+    ctrl->encapsulate(PK(msg));
+    std::string ctrlName = "sID:" + std::to_string(this->streamID) + "|gID:" + std::to_string(this->gateID) + "|mID:" + std::to_string(this->meterID);
+    ctrl->setName(ctrlName.c_str());
+    IEEE8021QciGate *gate = dynamic_cast<IEEE8021QciGate*>(getParentModule()->getSubmodule("streamGate", ctrl->getGateID()));
+    if (!gate)
+    {
+        throw cRuntimeError("Cannot find gate %d configured in filter for stream %d", this->gateID, this->streamID);
+    }
+    sendDirect(ctrl, gate->gate("in"));
 }
 
 } //namespace

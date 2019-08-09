@@ -21,7 +21,9 @@
 #include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/utilities/ConfigFunctions.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/gate/IEEE8021QciGate.h"
-//Auto-generated Messages
+#include "core4inet/services/avb/SRP/SRPTable.h"
+//CoRE4INET Auto-generated Messages
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/IEEE8021QciCtrl_m.h"
 
 namespace CoRE4INET {
@@ -46,35 +48,26 @@ class IEEE8021QciFilter : public virtual cSimpleModule
      * @brief Meter ID responsible for the stream
      */
     unsigned int meterID;
+    /**
+     * @brief Pointer to the SRP Table
+     */
+    SRPTable *srpTable;
 
   public:
     /**
-     * @brief Get stream ID
+     * @brief Match frame against stream filter
      *
-     * @return stream ID
+     * @param frame to match
+     *
+     * @return true if frame matches with stream filter
      */
-    unsigned long getStreamID()
-    {
-        return this->streamID;
-    }
-    /**
-    * @brief Get gate ID
-    *
-    * @return gate ID
-    */
-    unsigned int getGateID()
-    {
-        return this->gateID;
-    }
-    /**
-    * @brief Get meter ID
-    *
-    * @return meter ID
-    */
-    unsigned int getMeterID()
-    {
-        return this->meterID;
-    }
+    virtual bool isMatching(inet::EtherFrame* frame);
+    long getStreamId() const;
+    void setStreamId(long streamId);
+    unsigned int getGateId() const;
+    void setGateId(unsigned int gateId);
+    unsigned int getMeterId() const;
+    void setMeterId(unsigned int meterId);
 
   protected:
     /**
@@ -82,17 +75,20 @@ class IEEE8021QciFilter : public virtual cSimpleModule
      */
     virtual void initialize();
     /**
-     * @brief Reveives messages from the IEEE 802.1Qci input module encapsulates control data and forwards them to the responsible stream gate
-     *
-     * @param msg the incoming message
-     */
-    virtual void handleMessage(cMessage *msg);
-    /**
      * @brief Indicates a parameter has changed.
      *
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char *parname);
+    /**
+     * @brief Reveives messages from the IEEE 802.1Qci input module encapsulates control data and forwards them to the responsible stream gate
+     *
+     * @param msg the incoming message
+     */
+    virtual void handleMessage(cMessage *msg);
+
+
+
 };
 
 } //namespace

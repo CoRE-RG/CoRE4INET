@@ -13,52 +13,48 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QCIINPUT_H_
-#define __CORE4INET_IEEE8021QCIINPUT_H_
+#ifndef __CORE4INET_DESTMACFILTER_H_
+#define __CORE4INET_DESTMACFILTER_H_
 
+//OMNeT++
+#include <omnetpp.h>
+//INET
+#include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
-#include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/filter/IEEE8021QciFilter.h"
-//INET Auto-generated Messages
-#include "inet/linklayer/ethernet/EtherFrame_m.h"
+
+using namespace omnetpp;
 
 namespace CoRE4INET {
 
 /**
- * @brief Class representing the IEEE 802.1Qci input module
- *
- * @author Philipp Meyer
+ * TODO - Generated class
  */
-class IEEE8021QciInput : public cSimpleModule
+class DestMACFilter : public virtual IEEE8021QciFilter
 {
   private:
     /**
-     * @brief Caches pointers to stream filters contained in the IEEE 802.1Qci filter module
+     * @brief Destination MAC address of the stream filter
      */
-    std::vector<IEEE8021QciFilter*> streamFilters;
-    /**
-     * @brief Store if all frames without filter match are dropped
-     */
-    bool isWhiteList;
+    inet::MACAddress destAddress;
 
+  public:
+    /**
+     * @brief Match frame against stream filter
+     *
+     * @param frame to match
+     *
+     * @return true if frame matches with stream filter
+     */
+    virtual bool isMatching(inet::EtherFrame* frame);
 
   protected:
-    /**
-     * @brief Initializes the module
-     */
-    virtual void initialize();
     /**
      * @brief Indicates a parameter has changed.
      *
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
     virtual void handleParameterChange(const char *parname);
-    /**
-     * @brief Receives messages from higher layer and looks up if a stream filter is requesting it
-     *
-     * @param msg the incoming message
-     */
-    virtual void handleMessage(cMessage *msg);
 };
 
 } //namespace

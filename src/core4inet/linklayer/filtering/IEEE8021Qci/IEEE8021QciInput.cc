@@ -22,7 +22,6 @@ Define_Module(IEEE8021QciInput);
 void IEEE8021QciInput::initialize()
 {
     int numStreamFilters = parameterULongCheckRange(getParentModule()->par("numStreamFilters"), 0, UINT32_MAX);
-    this->srpTable = dynamic_cast<SRPTable*>(this->getParentModule()->getParentModule()->getParentModule()->getSubmodule("srpTable"));
     streamFilters.clear();
     for (int i = 0; i < numStreamFilters; i++)
     {
@@ -42,26 +41,19 @@ void IEEE8021QciInput::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("upperLayerIn"))
     {
-        if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(msg))
+        if (inet::EtherFrame* frame = dynamic_cast<inet::EtherFrame*>(msg))
         {
-            if (AVBFrame *avbFrame = dynamic_cast<AVBFrame*>(frame))
+            for(std::vector<IEEE8021QciFilter*>::iterator it = streamFilters.begin(); it != streamFilters.end(); ++it)
             {
-                for(std::vector<IEEE8021QciFilter*>::iterator it = streamFilters.begin(); it != streamFilters.end(); ++it)
-                {
-                    IEEE8021QciFilter *streamFilter = *it;
-                    if(!streamFilter){
-                        throw cRuntimeError("StreamFilter is null");
-                    }
-                    if(streamFilter->getStreamID() == this->srpTable->getStreamIdForTalkerAddress(avbFrame->getDest(), avbFrame->getVID()))
-                    {
-                        sendDirect(avbFrame, streamFilter->gate("in"));
-                        return;
-                    }
+                IEEE8021QciFilter* streamFilter = *it;
+                if(!streamFilter){
+                    throw cRuntimeError("StreamFilter is null");
                 }
-            }
-            else
-            {
-                // TODO: Other Traffic
+                if(streamFilter->isMatching(frame))
+                {
+                    sendDirect(frame, streamFilter->gate("in"));
+                    return;
+                }
             }
             if (!this->isWhiteList)
             {
