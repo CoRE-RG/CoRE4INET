@@ -45,6 +45,9 @@ const inet::MACAddress SRP_ADDRESS = inet::MACAddress("01:80:C2:00:00:0E");
 //Default VLAN ID for AVB
 const unsigned short VLAN_ID_DEFAULT = 2;
 
+const char PCP_DEFAULT_SRCLASSA = 6;
+const char PCP_DEFAULT_SRCLASSB = 5;
+
 const unsigned char PRIOANDRANK_SRCLASSA = 0xD0; //0b11010000; //For more details see SRPFrame.msg
 const unsigned char PRIOANDRANK_SRCLASSB = 0xB0; //0b10110000;
 

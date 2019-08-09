@@ -40,14 +40,26 @@ SRPTable::TalkerEntry::TalkerEntry()
     framesize = 0;
     intervalFrames = 0;
     vlan_id = VLAN_ID_DEFAULT;
+    pcp = PCP_DEFAULT_SRCLASSA;
 }
 SRPTable::TalkerEntry::TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address, cModule *new_module,
-        size_t new_framesize, unsigned short new_intervalFrames, unsigned short new_vlan_id,
+        size_t new_framesize, uint16_t new_intervalFrames, uint16_t new_vlan_id, uint8_t new_pcp,
         simtime_t new_insertionTime, bool new_isStatic) :
         streamId(new_streamId), srClass(new_srClass), address(new_address), module(new_module), framesize(
-                new_framesize), intervalFrames(new_intervalFrames), vlan_id(new_vlan_id), insertionTime(
-                new_insertionTime), isStatic(new_isStatic)
+                new_framesize), intervalFrames(new_intervalFrames), vlan_id(new_vlan_id), pcp(new_pcp),
+                insertionTime(new_insertionTime), isStatic(new_isStatic)
 {
+}
+
+SRPTable::TalkerEntry::TalkerEntry(const TalkerEntry& other) :
+                streamId(other.streamId), srClass(other.srClass), address(other.address), module(other.module), framesize(
+                        other.framesize), intervalFrames(other.intervalFrames), vlan_id(other.vlan_id), pcp(other.pcp),
+                        insertionTime(other.insertionTime), isStatic(other.isStatic)
+{
+}
+
+cObject* SRPTable::TalkerEntry::dup() const {
+    return new TalkerEntry(*this);
 }
 
 SRPTable::TalkerEntry::~TalkerEntry()
@@ -61,7 +73,7 @@ SRPTable::ListenerEntry::ListenerEntry()
     vlan_id = VLAN_ID_DEFAULT;
 }
 
-SRPTable::ListenerEntry::ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,
+SRPTable::ListenerEntry::ListenerEntry(uint64_t new_streamId, cModule *new_module, uint16_t new_vlan_id,
         simtime_t new_insertionTime, bool new_isStatic) :
 streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
         new_insertionTime), isStatic(new_isStatic)
@@ -75,7 +87,7 @@ SRPTable::ListenerEntry::~ListenerEntry()
 std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
-            << SR_CLASStoString[entry.srClass] << ", Bandwidth="
+            << SR_CLASStoString[entry.srClass] << ", PCP=" << entry.pcp << ", Bandwidth="
             << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize + static_cast<size_t>(SRP_SAFETYBYTE),
                     entry.intervalFrames, getIntervalForClass(entry.srClass))) / static_cast<double>(1000000)
             << "Mbps, insertionTime=" << entry.insertionTime << "}";
@@ -184,6 +196,19 @@ cModule* SRPTable::getTalkerForStreamId(uint64_t streamId, uint16_t vid)
     return nullptr;
 }
 
+SRPTable::TalkerEntry* SRPTable::getTalkerEntryForStreamId(uint64_t streamId,
+        uint16_t vid) {
+    removeAgedEntriesIfNeeded();
+
+    TalkerTable talkerTable = talkerTables[vid];
+    TalkerTable::const_iterator entry = talkerTable.find(streamId);
+    if (entry != talkerTable.end())
+    {
+        return dynamic_cast<TalkerEntry*>((*entry).second->dup());
+    }
+    return nullptr;
+}
+
 unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
 {
     removeAgedEntriesIfNeeded();
@@ -266,7 +291,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
 }
 
 bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
-        SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid, bool isStatic)
+        SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid, uint8_t pcp, bool isStatic)
 {
     Enter_Method("SRPTable::updateTalkerWithStreamId()");
 
@@ -312,6 +337,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
     }
     talkerTable[streamId]->address = address;
     talkerTable[streamId]->vlan_id = vid;
+    talkerTable[streamId]->pcp = pcp;
     talkerTable[streamId]->insertionTime = simTime();
     talkerTable[streamId]->isStatic = isStatic;
     if (!isStatic)
@@ -621,6 +647,7 @@ string SRPTable::exportToXML() {
             oss << " module=\"" << talker->module->getFullPath() << "\"";
             oss << " framesize=\"" << talker->framesize << "\"";
             oss << " intervalFrames=\"" << talker->intervalFrames << "\"";
+            oss << " pcp=\"" << talker->pcp << "\"";
             oss << " />" << endl;
         }
         oss << tab << "</talkerTable>" << endl;
@@ -688,9 +715,13 @@ bool SRPTable::importFromXML(cXMLElement* xml) {
                                         if(const char* value = (*talkerEntryIter)->getAttribute("intervalFrames")){
                                             uint16_t intervalFrames = atoi(value);
 
-                                            //all values are set correctly --> insert talker.
-                                            updateTalkerWithStreamId(stream_id, module, address, srClass, framesize, intervalFrames, vlan_id,true);
-                                            updated = true;
+                                            if(const char* value = (*talkerEntryIter)->getAttribute("pcp")){
+                                                uint8_t pcp = atoi(value);
+
+                                                //all values are set correctly --> insert talker.
+                                                updateTalkerWithStreamId(stream_id, module, address, srClass, framesize, intervalFrames, vlan_id, pcp, true);
+                                                updated = true;
+                                            }
                                         }
                                     }
                                 }
