@@ -21,6 +21,10 @@
 #include "core4inet/utilities/customWatch.h"
 #include "core4inet/utilities/HelperFunctions.h"
 #include "core4inet/base/NotifierConsts.h"
+#include <string>
+#include <sstream>
+
+using namespace std;
 
 namespace CoRE4INET {
 
@@ -39,10 +43,10 @@ SRPTable::TalkerEntry::TalkerEntry()
 }
 SRPTable::TalkerEntry::TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address, cModule *new_module,
         size_t new_framesize, unsigned short new_intervalFrames, unsigned short new_vlan_id,
-        simtime_t new_insertionTime) :
+        simtime_t new_insertionTime, bool new_isStatic) :
         streamId(new_streamId), srClass(new_srClass), address(new_address), module(new_module), framesize(
                 new_framesize), intervalFrames(new_intervalFrames), vlan_id(new_vlan_id), insertionTime(
-                new_insertionTime)
+                new_insertionTime), isStatic(new_isStatic)
 {
 }
 
@@ -58,9 +62,9 @@ SRPTable::ListenerEntry::ListenerEntry()
 }
 
 SRPTable::ListenerEntry::ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,
-        simtime_t new_insertionTime) :
+        simtime_t new_insertionTime, bool new_isStatic) :
 streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
-        new_insertionTime)
+        new_insertionTime), isStatic(new_isStatic)
 {
 }
 
@@ -95,6 +99,15 @@ void SRPTable::initialize()
     WATCH_PTRUMAPUMAP(talkerTables);
     WATCH_PTRUMAPUMAPUMAP(listenerTables);
     updateDisplayString();
+    //load XML config if specified.
+    cXMLElement* xmlDoc = par("srpTableFile").xmlValue();
+    if(xmlDoc){
+        if(strcmp(xmlDoc->getName(), "srpTable") == 0){
+            if(importFromXML(xmlDoc)){
+                EV_DETAIL << "XML Table imported from srpTableFile." << endl;
+            }
+        }
+    }
 }
 
 void SRPTable::handleMessage(cMessage *)
@@ -253,7 +266,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
 }
 
 bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
-        SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid)
+        SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid, bool isStatic)
 {
     Enter_Method("SRPTable::updateTalkerWithStreamId()");
 
@@ -300,13 +313,17 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
     talkerTable[streamId]->address = address;
     talkerTable[streamId]->vlan_id = vid;
     talkerTable[streamId]->insertionTime = simTime();
-    if (updated)
+    talkerTable[streamId]->isStatic = isStatic;
+    if (!isStatic)
     {
-        emit(NF_AVB_TALKER_UPDATED, talkerTable[streamId]);
-    }
-    else
-    {
-        emit(NF_AVB_TALKER_REGISTERED, talkerTable[streamId]);
+        if (updated)
+        {
+            emit(NF_AVB_TALKER_UPDATED, talkerTable[streamId]);
+        }
+        else
+        {
+            emit(NF_AVB_TALKER_REGISTERED, talkerTable[streamId]);
+        }
     }
     updateDisplayString();
     return updated;
@@ -333,7 +350,7 @@ bool SRPTable::removeTalkerWithStreamId(uint64_t streamId, cModule *module,
     return false;
 }
 
-bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid)
+bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid, bool isStatic)
 {
     Enter_Method("SRPTable::updateListenerWithStreamId()");
 
@@ -362,15 +379,17 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
     llist[module]->streamId = streamId;
     llist[module]->module = module;
     llist[module]->vlan_id = vid;
-    llist[module]->insertionTime = simTime();
-
-    if (updated)
+    llist[module]->insertionTime = simTime();llist[module]->isStatic = isStatic;
+    if (!isStatic)
     {
-        emit(NF_AVB_LISTENER_UPDATED, llist[module]);
-    }
-    else
-    {
-        emit(NF_AVB_LISTENER_REGISTERED, llist[module]);
+        if (updated)
+        {
+            emit(NF_AVB_LISTENER_UPDATED, llist[module]);
+        }
+        else
+        {
+            emit(NF_AVB_LISTENER_REGISTERED, llist[module]);
+        }
     }
     updateDisplayString();
     if (nextAging == 0)
@@ -532,8 +551,9 @@ void SRPTable::removeAgedEntries()
             for (ListenerList::iterator listenerEntry = (*listenerList).second.begin();
                     listenerEntry != (*listenerList).second.end();)
             {
+                bool isStatic = (*listenerEntry).second->isStatic;
                 simtime_t entryAging = ((*listenerEntry).second->insertionTime + agingTime);
-                if (now >= entryAging)
+                if (!isStatic && now >= entryAging)
                 {
                     ListenerEntry *lentry = (*listenerEntry).second;
                     (*listenerList).second.erase(listenerEntry++);
@@ -544,7 +564,7 @@ void SRPTable::removeAgedEntries()
                 else
                 {
                     ++listenerEntry;
-                    if (nextAging > entryAging)
+                    if (!isStatic && nextAging > entryAging)
                     {
                         nextAging = entryAging;
                     }
@@ -573,6 +593,146 @@ void SRPTable::removeAgedEntriesIfNeeded()
 SRPTable::~SRPTable()
 {
     clear();
+}
+
+void SRPTable::finish() {
+    if(par("exportTableOnFinish").boolValue()){
+        cout << exportToXML() << endl;
+    }
+}
+
+string SRPTable::exportToXML() {
+    ostringstream oss;
+    string tab = "    ";
+
+    //begin srp table
+    oss << "<srpTable>" << endl;
+
+    //export talkerTables:
+    for(auto talkerTableIter =talkerTables.begin();talkerTableIter != talkerTables.end();++talkerTableIter){
+        //one table / vlan
+        oss << tab << "<talkerTable vlan_id=\"" << (*talkerTableIter).first << "\">" << endl;
+        for(auto talkerEntryIter = talkerTableIter->second.begin();talkerEntryIter != talkerTableIter->second.end();++talkerEntryIter){
+            oss << tab << tab << "<talkerEntry";
+            oss << " stream_id=\"" << (*talkerEntryIter).first << "\"";
+            TalkerEntry* talker = talkerEntryIter->second;
+            oss << " srClass=\"" << SR_CLASStoString[talker->srClass] << "\"";
+            oss << " address=\"" << talker->address.str() << "\"";
+            oss << " module=\"" << talker->module->getFullPath() << "\"";
+            oss << " framesize=\"" << talker->framesize << "\"";
+            oss << " intervalFrames=\"" << talker->intervalFrames << "\"";
+            oss << " />" << endl;
+        }
+        oss << tab << "</talkerTable>" << endl;
+    }
+
+    //export listenerTables:
+    for(auto listenerTableIter =listenerTables.begin();listenerTableIter != listenerTables.end();++listenerTableIter){
+        //one table / vlan
+        oss << tab << "<listenerTable vlan_id=\"" << (*listenerTableIter).first << "\">" << endl;
+        for(auto listenersIter = listenerTableIter->second.begin();listenersIter != listenerTableIter->second.end();++listenersIter){
+            oss << tab << tab << "<listeners stream_id=\"" << (*listenersIter).first << "\">" << endl;
+            for(auto listenerEntryIter = listenersIter->second.begin();listenerEntryIter != listenersIter->second.end();++listenerEntryIter){
+                oss << tab << tab << tab << "<listenerEntry ";
+                oss << " module=\"" << (*listenerEntryIter).first->getFullPath() << "\" ";
+                oss << " />" << endl;
+            }
+            oss << tab << tab << "</listeners>" << endl;
+        }
+        oss << tab << "</listenerTable>" << endl;
+    }
+
+    //end srp table
+    oss << "</srpTable>" << endl;
+    return oss.str();
+}
+
+bool SRPTable::importFromXML(cXMLElement* xml) {
+    bool updated = false;
+    //get talker tables
+    omnetpp::cXMLElementList talkerTablesXML = xml->getChildrenByTagName(
+            "talkerTable");
+    for(auto talkerTableIter =talkerTablesXML.begin();talkerTableIter != talkerTablesXML.end();++talkerTableIter){
+        if(const char* value = (*talkerTableIter)->getAttribute("vlan_id")){
+            uint16_t vlan_id = atoi(value);
+            //get talker entries
+            omnetpp::cXMLElementList talkerEntriesXML = (*talkerTableIter)->getChildrenByTagName("talkerEntry");
+            for(auto talkerEntryIter = talkerEntriesXML.begin();talkerEntryIter != talkerEntriesXML.end();++talkerEntryIter){
+                //check if all values are set and get them step by step.
+                if(const char* value = (*talkerEntryIter)->getAttribute("stream_id")){
+                    uint64_t stream_id = atoi(value);
+
+                    if(const char* value = (*talkerEntryIter)->getAttribute("srClass")){
+                        SR_CLASS srClass;
+                        if (strcmp(value, "A")){
+                            srClass = SR_CLASS::A;
+                        } else if (strcmp(value, "B")){
+                            srClass = SR_CLASS::B;
+                        } else {
+                            break;
+                        }
+
+                        if(const char* value = (*talkerEntryIter)->getAttribute("address")){
+                            inet::MACAddress address = inet::MACAddress(value);
+                            if(address.isUnspecified()){
+                                break;
+                            }
+
+                            if(const char* value = (*talkerEntryIter)->getAttribute("module")){
+                                cModule* module = getModuleByPath(value);
+
+                                if(module){
+                                    if(const char* value = (*talkerEntryIter)->getAttribute("framesize")){
+                                        size_t framesize = atoi(value);
+
+                                        if(const char* value = (*talkerEntryIter)->getAttribute("intervalFrames")){
+                                            uint16_t intervalFrames = atoi(value);
+
+                                            //all values are set correctly --> insert talker.
+                                            updateTalkerWithStreamId(stream_id, module, address, srClass, framesize, intervalFrames, vlan_id,true);
+                                            updated = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //get listener tables
+    omnetpp::cXMLElementList listenerTablesXML = xml->getChildrenByTagName(
+            "listenerTable");
+    for(auto listenerTableIter =listenerTablesXML.begin();listenerTableIter != listenerTablesXML.end();++listenerTableIter){
+        if(const char* value = (*listenerTableIter)->getAttribute("vlan_id")){
+            uint16_t vlan_id = atoi(value);
+            //get listeners streamid
+            omnetpp::cXMLElementList listenersXML = (*listenerTableIter)->getChildrenByTagName("listeners");
+            for(auto listenersIter =listenersXML.begin();listenersIter != listenersXML.end();++listenersIter){
+                if(const char* value = (*listenersIter)->getAttribute("stream_id")){
+                    uint64_t stream_id = atoi(value);
+
+                    //get listener entries
+                    omnetpp::cXMLElementList listenerEntriesXML = (*listenersIter)->getChildrenByTagName("listenerEntry");
+                    for(auto listenerEntryIter = listenerEntriesXML.begin();listenerEntryIter != listenerEntriesXML.end();++listenerEntryIter){
+                        if(const char* value = (*listenerEntryIter)->getAttribute("module")){
+                            cModule* module = getModuleByPath(value);
+
+                            if(module){
+                                //all values are set correctly --> insert listener.
+                                updateListenerWithStreamId(stream_id, module, vlan_id,true);
+                                updated = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return updated;
 }
 
 }

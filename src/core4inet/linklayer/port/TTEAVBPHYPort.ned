@@ -19,6 +19,7 @@ import core4inet.linklayer.inControl.CT_AVB_8021Q_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
+import inet.linklayer.contract.IEtherMAC;
 
 //
 // The TTEAVBPHYPort is a compund module that contains the input Shaper, input Filtering, output Shaper and MAC (EtherMACFullDuplex)
@@ -77,7 +78,7 @@ module TTEAVBPHYPort like IPort
                 taggedVIDs = taggedVIDs;
         }
 
-        mac: EtherMACFullDuplex {
+        mac: <default("EtherMACFullDuplex")> like IEtherMAC{
             parameters:
                 promiscuous = true;
                 queueModule = "^.shaper";

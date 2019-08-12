@@ -47,4 +47,8 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         string oscillator = default("^.scheduler.oscillator");
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.scheduler.timer");
+        //Predifined MulticastMAC as stream destination address. will be generated if "" empty string or "auto".
+        string multicastMAC = default("auto");
+        // Is Static
+        bool isStatic = default(false);
 }

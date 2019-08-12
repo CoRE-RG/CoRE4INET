@@ -19,6 +19,7 @@ import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
+import inet.linklayer.contract.IEtherMAC;
 
 import inet.linklayer.contract.INic;
 
@@ -90,7 +91,7 @@ module TTEAVB8021QEtherNic like INic
                 promiscuous = promiscuous;
         }
 
-        mac: EtherMACFullDuplex {
+        mac: <default("EtherMACFullDuplex")> like IEtherMAC {
             parameters:
                 promiscuous = true;
                 queueModule = "^.shaper";

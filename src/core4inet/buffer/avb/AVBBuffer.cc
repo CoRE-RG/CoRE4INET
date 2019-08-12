@@ -39,6 +39,7 @@ AVBBuffer::AVBBuffer()
     this->tick = -1;
     this->srptable = nullptr;
     this->portBandwith = 0;
+    this->srpModule = nullptr;
 }
 
 AVBBuffer::~AVBBuffer()
@@ -76,7 +77,7 @@ void AVBBuffer::initialize(int stage)
 
         this->tick = getOscillator()->getPreciseTick();
 
-        this->srptable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", getParentModule()));
+        this->srptable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
         if (!this->srptable)
         {
             throw cRuntimeError("Cannot find srpTable");
@@ -122,6 +123,16 @@ void AVBBuffer::initialize(int stage)
         WATCH(newTime);
         WATCH(oldTime);
         WATCH(wDuration);
+        if (strcmp(par("srpModule").stringValue(), "")==0) {
+            this->srpModule=getParentModule()->getSubmodule("phy", getIndex());
+        } else {
+            this->srpModule = inet::getModuleFromPar<cModule>(par("srpModule"), this, true);
+        }
+
+        if (!this->srpModule)
+        {
+            throw cRuntimeError("No srpModule found.");
+        }
     }
 }
 
@@ -162,7 +173,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
             else if (credit < 0)
             {
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
-                        getParentModule()->getSubmodule("phy", getIndex()), srClass);
+                        srpModule, srClass);
                 wDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwith);
                 SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
                 event->setTimer(static_cast<uint64_t>(ceil(wDuration / tick)));
@@ -197,7 +208,7 @@ void AVBBuffer::handleMessage(cMessage *msg)
             else if (credit < 0)
             {
                 unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
-                        getParentModule()->getSubmodule("phy", getIndex()), srClass);
+                        srpModule, srClass);
                 //When there is no bandwidth reserved reset credit and delete all messages
                 if (reservedBandwith == 0)
                 {
@@ -253,7 +264,7 @@ void AVBBuffer::idleSlope(SimTime duration)
         Enter_Method
         ("idleSlope()");
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
-                getParentModule()->getSubmodule("phy", getIndex()), srClass);
+                srpModule, srClass);
 
         credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
         if (credit > 0 && size() <= 0 && !inTransmission)
@@ -270,7 +281,7 @@ void AVBBuffer::interferenceSlope(SimTime duration)
         Enter_Method
         ("interferenceSlope()");
         unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
-                getParentModule()->getSubmodule("phy", getIndex()), srClass);
+                srpModule, srClass);
 
         credit += static_cast<int>(ceil(static_cast<double>(reservedBandwith) * duration.dbl()));
     }
@@ -287,7 +298,7 @@ void AVBBuffer::sendSlope(SimTime duration)
     }
 
     unsigned long reservedBandwith = srptable->getBandwidthForModuleAndSRClass(
-            getParentModule()->getSubmodule("phy", getIndex()), srClass);
+            srpModule, srClass);
 
     credit -= static_cast<int>(ceil(static_cast<double>(portBandwith - reservedBandwith) * duration.dbl()));
     inTransmission = false;
