@@ -145,6 +145,14 @@ class SRPTable : public virtual cSimpleModule
 
     public:
         /**
+         * @brief For a known address and vid it proofs if it is contained in the table
+         *
+         * @param address address of the stream
+         * @param vid VLAN id
+         * @return true if table contains stream
+         */
+        virtual bool containsStream(const inet::MACAddress &address, uint16_t vid);
+        /**
          * @brief For a known talker address and V-TAG it finds out the streamId
          *
          * @param talkerAddress address

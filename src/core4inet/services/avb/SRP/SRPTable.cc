@@ -155,6 +155,22 @@ std::list<cModule*> SRPTable::getListenersForTalkerAddress(const inet::MACAddres
     return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
 }
 
+bool SRPTable::containsStream(const inet::MACAddress &address, uint16_t vid)
+{
+    Enter_Method("SRPTable::containsStream()");
+    bool contained = false;
+    TalkerTable talkerTable = talkerTables[vid];
+    for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); ++talkerEntry)
+    {
+        if ((*talkerEntry).second->address == address)
+        {
+            contained = true;
+            break;
+        }
+    }
+    return contained;
+}
+
 uint64_t SRPTable::getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
 {
     Enter_Method("SRPTable::getStreamIdForTalkerAddress()");

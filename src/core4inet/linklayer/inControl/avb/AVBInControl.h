@@ -16,6 +16,8 @@
 #ifndef CORE4INET_AVBINCONTROL_H_
 #define CORE4INET_AVBINCONTROL_H_
 
+//CoRE4INET
+#include "core4inet/services/avb/SRP/SRPTable.h"
 //CoRE4INET Auto-generated Messages
 #include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 //INET Auto-generated Messages
@@ -85,10 +87,11 @@ void AVBInControl<IC>::handleMessage(cMessage *msg)
 template<class IC>
 bool AVBInControl<IC>::isAVB(const inet::EtherFrame *frame) const
 {
-    //TODO: Major: Detect AVB frame only using priority
-    if (dynamic_cast<const EthernetIIFrameWithQTag*>(frame))
+    //TODO: Detect Q frame using ethertype
+    if (const EthernetIIFrameWithQTag* qframe = dynamic_cast<const EthernetIIFrameWithQTag*>(frame))
     {
-        if (dynamic_cast<const AVBFrame*>(frame))
+        SRPTable* srpTable = dynamic_cast<SRPTable*>(cModule::getParentModule()->getParentModule()->getSubmodule("srpTable"));
+        if (srpTable->containsStream(qframe->getDest(), qframe->getVID()))
         {
             return true;
         }
