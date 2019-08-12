@@ -258,7 +258,7 @@
         name="TSN examples"
         description = "Examples for the TSN"
         initiallyEnabled = "true"
-        requires = "TSN_common"
+        requires = "TSN_nodes"
         labels = ""
         nedPackages = "
         				core4inet.examples.tsn.small_network
