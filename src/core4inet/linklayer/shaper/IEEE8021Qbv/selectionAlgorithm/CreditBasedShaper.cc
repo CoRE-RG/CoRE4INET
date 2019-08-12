@@ -45,7 +45,7 @@ void CreditBasedShaper::initialize()
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
     this->srpTable = dynamic_cast<SRPTable*>(this->getParentModule()->getParentModule()->getParentModule()->getSubmodule("srpTable"));
     this->outChannel = this->getParentModule()->getParentModule()->getSubmodule("mac")->gate("phys$o")->findTransmissionChannel();
-    this->portBandwidth = ceil(outChannel->getNominalDatarate());
+    this->portBandwidth = static_cast<unsigned int>(ceil(outChannel->getNominalDatarate()));
     WATCH(this->credit);
     WATCH(this->queueSize);
     WATCH(this->portBandwidth);
@@ -82,7 +82,7 @@ void CreditBasedShaper::handleMessage(cMessage *msg)
     delete msg;
 }
 
-void CreditBasedShaper::receiveSignal(cComponent *source, simsignal_t signalID, long l, cObject *details)
+void CreditBasedShaper::receiveSignal(__attribute__ ((unused)) cComponent *source, simsignal_t signalID, long l, __attribute__ ((unused)) cObject *details)
 {
     if (strncmp(getSignalName(signalID), "transmitState", 14) == 0)
     {
@@ -94,7 +94,7 @@ void CreditBasedShaper::receiveSignal(cComponent *source, simsignal_t signalID, 
     }
 }
 
-void CreditBasedShaper::receiveSignal(cComponent *source, simsignal_t signalID, unsigned long l, cObject *details)
+void CreditBasedShaper::receiveSignal(__attribute__ ((unused)) cComponent *source, simsignal_t signalID, unsigned long l, __attribute__ ((unused)) cObject *details)
 {
     if (strncmp(getSignalName(signalID), "size", 18) == 0)
     {

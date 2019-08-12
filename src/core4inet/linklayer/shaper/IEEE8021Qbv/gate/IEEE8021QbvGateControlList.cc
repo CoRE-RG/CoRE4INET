@@ -57,7 +57,7 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
     Scheduled::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "numGates"))
     {
-        this->numGates = parameterULongCheckRange(par("numGates"), 1, std::numeric_limits<unsigned int>::max());
+        this->numGates = static_cast<unsigned int>(parameterULongCheckRange(par("numGates"), 1, std::numeric_limits<int>::max()));
     }
     if (!parname || !strcmp(parname, "controlList"))
     {
@@ -111,7 +111,7 @@ void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
 void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool nextCycle)
 {
     SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent(this->timerEventName.c_str(), ACTION_TIME_EVENT);
-    uint32_t actionTime = ceil((*(this->gateControlElement)).second / getOscillator()->getPreciseTick());
+    uint32_t actionTime = static_cast<uint32_t>(ceil((*(this->gateControlElement)).second / getOscillator()->getPreciseTick()));
     if (actionTime >= getPeriod()->getCycleTicks())
     {
         throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
@@ -125,7 +125,7 @@ void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool next
 
 void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateStates)
 {
-    for (long i=static_cast<long>(numGates)-1; i>=0; i--)
+    for (int i=numGates-1; i>=0; i--)
     {
         IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
         if ( !strcmp(gateStates[i].c_str(), "o"))

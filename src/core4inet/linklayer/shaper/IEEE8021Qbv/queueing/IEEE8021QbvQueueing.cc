@@ -46,11 +46,11 @@ void IEEE8021QbvQueueing::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "numPCP"))
     {
-        this->numPCP = parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<unsigned int>::max());
+        this->numPCP = static_cast<unsigned int>(parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<int>::max()));
     }
     if (!parname || !strcmp(parname, "defaultPCP"))
     {
-        this->defaultPCP = parameterULongCheckRange(par("defaultPCP"), 0, this->numPCP-1);
+        this->defaultPCP = static_cast<unsigned int>(parameterULongCheckRange(par("defaultPCP"), 0, this->numPCP-1));
     }
 }
 
