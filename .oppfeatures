@@ -213,6 +213,60 @@
         linkerFlags = ""
         />
     <feature
+        id="IEEE8021Qci_common"
+        name="IEEE 802.1Qci Common"
+        description = "The common part of the IEEE 802.1Qci implementation"
+        initiallyEnabled = "true"
+        requires = "IEEE8021Q_common AVB_common"
+        labels = ""
+        nedPackages = "
+                       core4inet.linklayer.filtering.IEEE8021Qci
+                      "
+        extraSourceFolders = ""
+        compileFlags = "-DWITH_IEEE8021QCI_COMMON"
+        linkerFlags = ""
+        />
+    <feature
+        id="IEEE8021Qci_examples"
+        name="IEEE 802.1Qci examples"
+        description = "Examples for the IEEE 802.1Qci implementation"
+        initiallyEnabled = "true"
+        requires = "IEEE8021Qci_common AVB_AS6802_nodes"
+        labels = ""
+        nedPackages = "
+        				core4inet.examples.IEEE8021Qci.large_network
+                      "
+        extraSourceFolders = ""
+        linkerFlags = ""
+        />
+    <feature
+        id="TSN_nodes"
+        name="TSN Nodes"
+        description = "Nodes with combined Qbv and Qci functionallity"
+        initiallyEnabled = "true"
+        requires = "IEEE8021Qbv_common IEEE8021Qci_common"
+        labels = ""
+        nedPackages = "
+                       core4inet.nodes.ethernet.tsn
+                      "
+        extraSourceFolders = ""
+        compileFlags = ""
+        linkerFlags = ""
+        />
+	<feature
+        id="TSN_examples"
+        name="TSN examples"
+        description = "Examples for the TSN"
+        initiallyEnabled = "true"
+        requires = "TSN_common"
+        labels = ""
+        nedPackages = "
+        				core4inet.examples.tsn.small_network
+                      "
+        extraSourceFolders = ""
+        linkerFlags = ""
+        />
+    <feature
         id="IPoRE"
         name="IP over realtime ethernet"
         description = "The implementation of IPv4 over realtime ethernet (AS6802, avb)"
