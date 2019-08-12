@@ -66,5 +66,5 @@ Please see [doc/](/doc)
 ### Changelog
 Please see [WHATSNEW](/WHATSNEW)
 
-### IMPORTANT
+## IMPORTANT
 The CoRE4INET model is under continuous development: new parts are added, bugs are corrected, and so on. We cannot assert that the implementation will work fully according to the specifications. YOU ARE RESPONSIBLE YOURSELF TO MAKE SURE THAT THE MODELS YOU USE IN YOUR SIMULATIONS WORK CORRECTLY, AND YOU'RE GETTING VALID RESULTS. 
