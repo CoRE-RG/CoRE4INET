@@ -17,6 +17,7 @@
 #define CORE4INET_AVBINCONTROL_H_
 
 //CoRE4INET
+#include "core4inet/utilities/ModuleAccess.h"
 #include "core4inet/services/avb/SRP/SRPTable.h"
 //CoRE4INET Auto-generated Messages
 #include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
@@ -90,7 +91,7 @@ bool AVBInControl<IC>::isAVB(const inet::EtherFrame *frame) const
     //TODO: Detect Q frame using ethertype
     if (const EthernetIIFrameWithQTag* qframe = dynamic_cast<const EthernetIIFrameWithQTag*>(frame))
     {
-        SRPTable* srpTable = dynamic_cast<SRPTable*>(cModule::getParentModule()->getParentModule()->getSubmodule("srpTable"));
+        SRPTable* srpTable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", cModule::getParentModule()));
         if (srpTable->containsStream(qframe->getDest(), qframe->getVID()))
         {
             return true;
