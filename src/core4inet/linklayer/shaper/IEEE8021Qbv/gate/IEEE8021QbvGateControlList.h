@@ -69,6 +69,13 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
      */
     IEEE8021QbvGateControlList();
 
+    /**
+     * Exchange the current gate control list with a new one.
+     * This function calls handle parameter change to perform the changes.
+     * @param gcl the new gate control list to set.
+     */
+    virtual void setGateControlList (string gcl);
+
   protected:
     /**
      * @brief Initializes the module.

@@ -32,6 +32,11 @@ IEEE8021QbvGateControlList::IEEE8021QbvGateControlList()
     this->configNo = 0;
 }
 
+void IEEE8021QbvGateControlList::setGateControlList(string gcl) {
+    this->par("controlList").setStringValue(gcl);
+    this->handleParameterChange("controlList");
+}
+
 void IEEE8021QbvGateControlList::initialize(int stage)
 {
     if (stage == 1)
