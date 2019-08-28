@@ -57,7 +57,7 @@ void RCBurstTrafficSourceApp::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("schedulerIn"))
     {
-        if (framesBurstedCnt < static_cast<unsigned int>(par("nrOfFramesInOneBurst").longValue()))
+        if (framesBurstedCnt < static_cast<unsigned int>(par("nrOfFramesInOneBurst")))
         {
             getDisplayString().removeTag("i2");
             sendMessage();

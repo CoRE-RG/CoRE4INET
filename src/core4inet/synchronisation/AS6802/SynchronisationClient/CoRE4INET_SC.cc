@@ -39,7 +39,7 @@ void SC::initialize(int stage){
         path="client";
         //path = "/home/pcman/from_thinkpad/TTEthernetModel/examples/SICM_TEST_AS6802_sync/results/client";
 
-        ss<<this->par("id").longValue();
+        ss<<this->par("id").intValue();
         path+=ss.str();
 
         fp = NULL;

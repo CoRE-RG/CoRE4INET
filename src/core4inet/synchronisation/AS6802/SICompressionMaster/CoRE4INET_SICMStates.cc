@@ -69,7 +69,7 @@ SI_CM_INIT::SI_CM_INIT(SICM *pointer, FILE *f) {
 
 	} //read handle
 
-	ctid = sicm->par("id").longValue();
+	ctid = sicm->par("id");
 	local_timer = false;
 	flood_receive = false;
 	closed_window = false;
@@ -84,8 +84,8 @@ SI_CM_INIT::SI_CM_INIT(SICM *pointer, FILE *f) {
 	clock_corr = 0;
 	stable_cycle_counter = 0;
 
-	duration = sicm->par("cm_listen_timeout").longValue();
-	max_transmision_delay = sicm->par("max_transmission_delay").longValue();
+	duration = sicm->par("cm_listen_timeout");
+	max_transmision_delay = sicm->par("max_transmission_delay");
 
 	tteScheduler = (TTEScheduler*) sicm->getParentModule()->getSubmodule(
 			"scheduler");
@@ -114,28 +114,28 @@ SI_CM_INIT::SI_CM_INIT(SICM *pointer, FILE *f) {
 	//cm_sync_eval_pit
 	event2 = new SchedulerActionTimeEvent("cm_sync_eval_pit",
 			ACTION_TIME_EVENT);
-	event2->setAction_time(sicm->par("cm_sync_eval_pit").longValue());
+	event2->setAction_time(sicm->par("cm_sync_eval_pit"));
 	event2->setDestinationGate(sicm->gate("schedulerIn"));
 	event2->setSchedulingPriority(4);
 	//cm_clock_corr_pit
 	event3 = new SchedulerActionTimeEvent("cm_clock_corr_pit",
 			ACTION_TIME_EVENT);
 	event3->setAction_time(
-			(unsigned int) sicm->par("cm_clock_corr_pit").longValue());
+			(unsigned int) sicm->par("cm_clock_corr_pit"));
 	event3->setDestinationGate(sicm->gate("schedulerIn"));
 	event3->setSchedulingPriority(4);
 
 	//event4 is used to update/increment/ the "local_integration_cycle" value
 	event4 = new SchedulerActionTimeEvent("cm_inc_pit", ACTION_TIME_EVENT);
 	event4->setAction_time(
-			sicm->par("cm_scheduled_pit").longValue()
-					- (sicm->par("acceptance_window").longValue() / 2));
+			sicm->par("cm_scheduled_pit").intValue()
+					- (sicm->par("acceptance_window").intValue() / 2));
 	event4->setDestinationGate(sicm->gate("schedulerIn"));
 	event4->setSchedulingPriority(1);
 	//cm_scheduled_pit
 	event5 = new SchedulerActionTimeEvent("cm_scheduled_pit",
 			ACTION_TIME_EVENT);
-	event5->setAction_time(sicm->par("cm_scheduled_pit").longValue());
+	event5->setAction_time(sicm->par("cm_scheduled_pit"));
 	event5->setDestinationGate(sicm->gate("schedulerIn"));
 	event5->setSchedulingPriority(4);
 
@@ -174,7 +174,7 @@ void SI_CM_PSEUDOSYNC::handleMessage(cMessage *message) {
 				<< local_integration_cycle << endl;
 
 		local_integration_cycle = (local_integration_cycle + 1)
-				% (sicm->par("max_integration_cycles").longValue());
+				% (sicm->par("max_integration_cycles").intValue());
 
 		ev << "local_integration_cycle updated" << local_integration_cycle
 				<< endl;
@@ -219,16 +219,16 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == sicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == sicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== sicm->par("syncPriority").longValue()) {
+					== sicm->par("syncPriority").intValue()) {
 
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (sicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (sicm->par("max_transmission_delay"))) {
 
 					ev
 							<< "WARNING: SI_CM_INTEGRATE: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -251,7 +251,7 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 															pf->getTransparent_clock(),
 															tteScheduler->par("tick").doubleValue())
 															+ (tteScheduler->getTotalTicks()
-																	- pf->par("received_total").longValue()));
+																	- pf->par("received_total").intValue()));
 
 									unsigned int member = pf->getMembership_new();
 
@@ -351,10 +351,10 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 			int currentTime = tteScheduler->getTicks();
 			//local_clock = cm_sceduled_receive_pit
 			tteScheduler->clockCorrection(
-					currentTime - sicm->par("cm_scheduled_pit").longValue());
+					currentTime - sicm->par("cm_scheduled_pit").intValue());
 
 			if (getValue(local_sync_membership, 32)
-					>= sicm->par("cm_integrate_to_sync_thrld").longValue()) {
+					>= sicm->par("cm_integrate_to_sync_thrld").intValue()) {
 
 				PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 				compressedFrame->setCtID(0);
@@ -363,9 +363,9 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
-						sicm->par("syncDomain").longValue());
+						sicm->par("syncDomain"));
 				compressedFrame->setSync_priority(
-						sicm->par("syncPriority").longValue());
+						sicm->par("syncPriority"));
 				compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 				compressedFrame->setIntegration_cycle(
 						cp->getIntegrationCycle());
@@ -398,7 +398,7 @@ void SI_CM_INTEGRATE::handleMessage(cMessage *message) {
 				DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 				dd->setDestinationGate(sicm->gate("schedulerIn"));
 				dd->setMembership_new(cp->getMembership_new());
-				dd->setTimer(sicm->par("dispatch_delay").longValue());
+				dd->setTimer(sicm->par("dispatch_delay"));
 				dd->setSchedulingPriority(3);
 
 				tteScheduler->registerEvent(dd);
@@ -545,16 +545,16 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == sicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == sicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== sicm->par("syncPriority").longValue()) {
+					== sicm->par("syncPriority").intValue()) {
 
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (sicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (sicm->par("max_transmission_delay"))) {
 
 					ev
 							<< "WARNING: SI_CM_STABLE: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -578,7 +578,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 															pf->getTransparent_clock(),
 															tteScheduler->par("tick").doubleValue())
 															+ (tteScheduler->getTotalTicks()
-																	- pf->par("received_total").longValue()));
+																	- pf->par("received_total").intValue()));
 
 									unsigned int member = pf->getMembership_new();
 
@@ -649,15 +649,15 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 			int compressed_pit = tteScheduler->getTicks();
 
 			if (inSchedule2(compressed_pit,
-					sicm->par("cm_scheduled_pit").longValue(),
-					sicm->par("acceptance_window").longValue())) {
+					sicm->par("cm_scheduled_pit"),
+					sicm->par("acceptance_window"))) {
 
 				int roundMember = getValue(cp->getMembership_new(), 32);
 
 				DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 				dd->setDestinationGate(sicm->gate("schedulerIn"));
 				dd->setMembership_new(roundMember);
-				dd->setTimer(sicm->par("dispatch_delay").longValue());
+				dd->setTimer(sicm->par("dispatch_delay"));
 				dd->setSchedulingPriority(3);
 
 				if (!clock_stack->empty()) {
@@ -713,9 +713,9 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 							compressedFrame->setMembership_new(
 									cp->getMembership_new());
 							compressedFrame->setSync_domain(
-									sicm->par("syncDomain").longValue());
+									sicm->par("syncDomain"));
 							compressedFrame->setSync_priority(
-									sicm->par("syncPriority").longValue());
+									sicm->par("syncPriority"));
 							compressedFrame->setByteLength(
 									46 + ETHER_MAC_FRAME_BYTES);
 							compressedFrame->setIntegration_cycle(
@@ -774,9 +774,9 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 						compressedFrame->setMembership_new(
 								cp->getMembership_new());
 						compressedFrame->setSync_domain(
-								sicm->par("syncDomain").longValue());
+								sicm->par("syncDomain"));
 						compressedFrame->setSync_priority(
-								sicm->par("syncPriority").longValue());
+								sicm->par("syncPriority"));
 						compressedFrame->setByteLength(
 								46 + ETHER_MAC_FRAME_BYTES);
 						compressedFrame->setIntegration_cycle(
@@ -815,9 +815,9 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 					compressedFrame->setTransparent_clock(0);
 					compressedFrame->setMembership_new(cp->getMembership_new());
 					compressedFrame->setSync_domain(
-							sicm->par("syncDomain").longValue());
+							sicm->par("syncDomain"));
 					compressedFrame->setSync_priority(
-							sicm->par("syncPriority").longValue());
+							sicm->par("syncPriority"));
 					compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 					compressedFrame->setIntegration_cycle(
 							cp->getIntegrationCycle());
@@ -889,7 +889,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 		if (string(message->getName()).compare("cm_clock_corr_pit") == 0) {
 
 			clock_corr = ((int) clock_stack->front().second)
-					- (int) (sicm->par("cm_scheduled_pit").longValue());
+					- (int) (sicm->par("cm_scheduled_pit"));
 
 			tteScheduler->clockCorrection(clock_corr);
 
@@ -906,7 +906,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 		if (string(message->getName()).compare("cm_inc_pit") == 0) {
 
 			local_integration_cycle = (local_integration_cycle + 1)
-					% (sicm->par("max_integration_cycles").longValue());
+					% (sicm->par("max_integration_cycles").intValue());
 
 			tteScheduler->registerEvent(event4, true);
 		}
@@ -925,8 +925,8 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if (getValue(local_async_membership, 32)
-					>= sicm->par("cm_stable_threshold_async").longValue()) {
-				duration = sicm->par("cm_restart_timeout").longValue();
+					>= sicm->par("cm_stable_threshold_async").intValue()) {
+				duration = sicm->par("cm_restart_timeout");
 				event->setTimer(duration);
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -981,9 +981,9 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((getValue(local_sync_membership, 32)
-					< sicm->par("cm_stable_threshold_sync").longValue())
+					< sicm->par("cm_stable_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							< sicm->par("num_unstable_cycles").longValue())) {
+							< sicm->par("num_unstable_cycles").intValue())) {
 
 				stable_cycle_counter++;
 
@@ -994,11 +994,11 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((getValue(local_sync_membership, 32)
-					< sicm->par("cm_stable_threshold_sync").longValue())
+					< sicm->par("cm_stable_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							>= sicm->par("num_unstable_cycles").longValue())) {
+							>= sicm->par("num_unstable_cycles").intValue())) {
 
-				duration = sicm->par("cm_restart_timeout").longValue();
+				duration = sicm->par("cm_restart_timeout");
 				event->setTimer(duration);
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -1044,7 +1044,7 @@ void SI_CM_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if (getValue(local_sync_membership, 32)
-					>= sicm->par("cm_stable_threshold_sync").longValue()) {
+					>= sicm->par("cm_stable_threshold_sync").intValue()) {
 				tteScheduler->registerEvent(event2, true);
 				return;
 
@@ -1131,16 +1131,16 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == sicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == sicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== sicm->par("syncPriority").longValue()) {
+					== sicm->par("syncPriority").intValue()) {
 
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (sicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (sicm->par("max_transmission_delay"))) {
 
 					ev
 							<< "WARNING: SI_CM_UNSYNC: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -1169,7 +1169,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -1238,12 +1238,12 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 
 			//local_clock = cm_sceduled_receive_pit
 			tteScheduler->clockCorrection(
-					currentTime - sicm->par("cm_scheduled_pit").longValue());
+					currentTime - sicm->par("cm_scheduled_pit").intValue());
 			local_integration_cycle = cp->getIntegrationCycle();
 			local_sync_membership = cp->getMembership_new();
 
 			if (getValue(local_sync_membership, 32)
-					>= sicm->par("cm_unsync_to_sync_thrld").longValue()) {
+					>= sicm->par("cm_unsync_to_sync_thrld").intValue()) {
 
 				PCFrame *compressedFrame = new PCFrame("IN_FRAME");
 				compressedFrame->setCtID(0);
@@ -1252,9 +1252,9 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
-						sicm->par("syncDomain").longValue());
+						sicm->par("syncDomain"));
 				compressedFrame->setSync_priority(
-						sicm->par("syncPriority").longValue());
+						sicm->par("syncPriority"));
 				compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 				compressedFrame->setIntegration_cycle(
 						cp->getIntegrationCycle());
@@ -1280,7 +1280,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 				dd->setDestinationGate(sicm->gate("schedulerIn"));
 				dd->setMembership_new(cp->getMembership_new());
-				dd->setTimer(sicm->par("dispatch_delay").longValue());
+				dd->setTimer(sicm->par("dispatch_delay"));
 				dd->setSchedulingPriority(3);
 
 				tteScheduler->registerEvent(dd);
@@ -1355,8 +1355,8 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(sicm->par("syncDomain").longValue());
-				frame->setSync_priority(sicm->par("syncPriority").longValue());
+				frame->setSync_domain(sicm->par("syncDomain"));
+				frame->setSync_priority(sicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -1385,7 +1385,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 						sicm->getParentModule()->getSubmodule("pcf_out", 2)->gate(
 								"in"));
 
-				duration = sicm->par("cm_ca_enabled_timeout").longValue();
+				duration = sicm->par("cm_ca_enabled_timeout");
 				event->setTimer(duration);
 
 				//local_clock=0
@@ -1411,9 +1411,9 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 			CompressedPIT *cp = dynamic_cast<CompressedPIT *>(message);
 
 			if (getValue(cp->getMembership_new(), 32)
-					> sicm->par("cm_sync_threshold_sync").longValue()) {
+					> sicm->par("cm_sync_threshold_sync").intValue()) {
 
-				duration = sicm->par("cm_ca_enabled_timeout").longValue();
+				duration = sicm->par("cm_ca_enabled_timeout");
 				event->setTimer(duration);
 
 				//local_clock=0
@@ -1432,9 +1432,9 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
-						sicm->par("syncDomain").longValue());
+						sicm->par("syncDomain"));
 				compressedFrame->setSync_priority(
-						sicm->par("syncPriority").longValue());
+						sicm->par("syncPriority"));
 				compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 				compressedFrame->setIntegration_cycle(local_integration_cycle);
 				//Padding
@@ -1452,7 +1452,7 @@ void SI_CM_UNSYNC::handleMessage(cMessage *message) {
 				DispatchDelay *dd = new DispatchDelay("DPCA", TIMER_EVENT);
 				dd->setDestinationGate(sicm->gate("schedulerIn"));
 				dd->setMembership_new(cp->getMembership_new());
-				dd->setTimer(sicm->par("dispatch_delay").longValue());
+				dd->setTimer(sicm->par("dispatch_delay"));
 				dd->setSchedulingPriority(3);
 
 				tteScheduler->registerEvent(dd);
@@ -1523,16 +1523,16 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == sicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == sicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== sicm->par("syncPriority").longValue()) {
+					== sicm->par("syncPriority").intValue()) {
 
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (sicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (sicm->par("max_transmission_delay"))) {
 
 					ev
 							<< "WARNING: SI_CM_SYNC: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -1554,7 +1554,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 															pf->getTransparent_clock(),
 															tteScheduler->par("tick").doubleValue())
 															+ (tteScheduler->getTotalTicks()
-																	- pf->par("received_total").longValue()));
+																	- pf->par("received_total").intValue()));
 
 									unsigned int member = pf->getMembership_new();
 
@@ -1623,15 +1623,15 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 			int compressed_pit = tteScheduler->getTicks();
 
 			if (inSchedule2(compressed_pit,
-					sicm->par("cm_scheduled_pit").longValue(),
-					sicm->par("acceptance_window").longValue())) {
+					sicm->par("cm_scheduled_pit"),
+					sicm->par("acceptance_window"))) {
 
 				int roundMember = getValue(cp->getMembership_new(), 32);
 
 				DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 				dd->setDestinationGate(sicm->gate("schedulerIn"));
 				dd->setMembership_new(roundMember);
-				dd->setTimer(sicm->par("dispatch_delay").longValue());
+				dd->setTimer(sicm->par("dispatch_delay"));
 				dd->setSchedulingPriority(3);
 
 				if (!clock_stack->empty()) {
@@ -1686,9 +1686,9 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 							compressedFrame->setMembership_new(
 									cp->getMembership_new());
 							compressedFrame->setSync_domain(
-									sicm->par("syncDomain").longValue());
+									sicm->par("syncDomain"));
 							compressedFrame->setSync_priority(
-									sicm->par("syncPriority").longValue());
+									sicm->par("syncPriority"));
 							compressedFrame->setByteLength(
 									46 + ETHER_MAC_FRAME_BYTES);
 							compressedFrame->setIntegration_cycle(
@@ -1747,9 +1747,9 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 						compressedFrame->setMembership_new(
 								cp->getMembership_new());
 						compressedFrame->setSync_domain(
-								sicm->par("syncDomain").longValue());
+								sicm->par("syncDomain"));
 						compressedFrame->setSync_priority(
-								sicm->par("syncPriority").longValue());
+								sicm->par("syncPriority"));
 						compressedFrame->setByteLength(
 								46 + ETHER_MAC_FRAME_BYTES);
 						compressedFrame->setIntegration_cycle(
@@ -1789,9 +1789,9 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 					compressedFrame->setTransparent_clock(0);
 					compressedFrame->setMembership_new(cp->getMembership_new());
 					compressedFrame->setSync_domain(
-							sicm->par("syncDomain").longValue());
+							sicm->par("syncDomain"));
 					compressedFrame->setSync_priority(
-							sicm->par("syncPriority").longValue());
+							sicm->par("syncPriority"));
 					compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 					compressedFrame->setIntegration_cycle(
 							cp->getIntegrationCycle());
@@ -1866,7 +1866,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 		if (string(message->getName()).compare("cm_clock_corr_pit") == 0) {
 
 			clock_corr = ((int) clock_stack->front().second)
-					- (int) (sicm->par("cm_scheduled_pit").longValue());
+					- (int) (sicm->par("cm_scheduled_pit"));
 
 			tteScheduler->clockCorrection(clock_corr);
 
@@ -1877,7 +1877,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 		if (string(message->getName()).compare("cm_inc_pit") == 0) {
 
 			local_integration_cycle = (local_integration_cycle + 1)
-					% (sicm->par("max_integration_cycles").longValue());
+					% (sicm->par("max_integration_cycles").intValue());
 
 			tteScheduler->registerEvent(event4, true);
 		}
@@ -1896,8 +1896,8 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if (getValue(local_async_membership, 32)
-					>= sicm->par("cm_sync_threshold_async").longValue()) {
-				duration = sicm->par("cm_restart_timeout").longValue();
+					>= sicm->par("cm_sync_threshold_async").intValue()) {
+				duration = sicm->par("cm_restart_timeout");
 				event->setTimer(duration);
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -1951,9 +1951,9 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if (getValue(local_sync_membership, 32)
-					< sicm->par("cm_sync_threshold_sync").longValue()) {
+					< sicm->par("cm_sync_threshold_sync").intValue()) {
 
-				duration = sicm->par("cm_restart_timeout").longValue();
+				duration = sicm->par("cm_restart_timeout");
 				;
 				event->setTimer(duration);
 				//local_clock=0;
@@ -2002,9 +2002,9 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 			tteScheduler->registerEvent(event2, true);
 
 			if (((getValue(local_sync_membership, 32)
-					>= sicm->par("cm_sync_threshold_sync").longValue())
+					>= sicm->par("cm_sync_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							< sicm->par("num_stable_cycles").longValue())
+							< sicm->par("num_stable_cycles").intValue())
 					&& (sicm->par("cm_sync_to_stable_enabled").boolValue()))) {
 
 				stable_cycle_counter++;
@@ -2012,9 +2012,9 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if (((getValue(local_sync_membership, 32)
-					>= sicm->par("cm_sync_threshold_sync").longValue())
+					>= sicm->par("cm_sync_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							>= sicm->par("num_stable_cycles").longValue())
+							>= sicm->par("num_stable_cycles").intValue())
 					&& (sicm->par("cm_sync_to_stable_enabled").boolValue()))) {
 
 				stable_cycle_counter = 0;
@@ -2023,7 +2023,7 @@ void SI_CM_SYNC::handleMessage(cMessage *message) {
 				return;
 			}
 			if ((getValue(local_sync_membership, 32)
-					>= sicm->par("cm_sync_threshold_sync").longValue())
+					>= sicm->par("cm_sync_threshold_sync").intValue())
 					&& (sicm->par("cm_sync_to_stable_enabled").boolValue())) {
 
 				stable_cycle_counter++;
@@ -2108,7 +2108,7 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 
 		if (string(message->getName()).compare("ASYNCHRON") == 0) {
 			duration = 0;
-			duration = sicm->par("cm_wait_4_in_timeout").longValue();
+			duration = sicm->par("cm_wait_4_in_timeout");
 			event->setTimer(duration);
 
 			//local_clock=0;
@@ -2154,7 +2154,7 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 			DispatchDelay *dd = new DispatchDelay("DPCA", TIMER_EVENT);
 			dd->setDestinationGate(sicm->gate("schedulerIn"));
 			dd->setMembership_new(member);
-			dd->setTimer(sicm->par("dispatch_delay").longValue());
+			dd->setTimer(sicm->par("dispatch_delay"));
 			dd->setSchedulingPriority(3);
 
 			//create the new frame
@@ -2165,9 +2165,9 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(member);
 			compressedFrame->setSync_domain(
-					sicm->par("syncDomain").longValue());
+					sicm->par("syncDomain"));
 			compressedFrame->setSync_priority(
-					sicm->par("syncPriority").longValue());
+					sicm->par("syncPriority"));
 			compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 			compressedFrame->setIntegration_cycle(local_integration_cycle);
 			//Padding
@@ -2264,10 +2264,10 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == sicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == sicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== sicm->par("syncPriority").longValue()) {
+					== sicm->par("syncPriority").intValue()) {
 
 				ev << "DEBUG: SI_CM_ENABLED membership new value"
 						<< pf->getMembership_new() << endl;
@@ -2279,8 +2279,8 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) sicm->par("max_transmission_delay").longValue()) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) sicm->par("max_transmission_delay")) {
 
 					ev
 							<< "WARNING: SI_CM_ENABLED: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -2292,7 +2292,7 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 							<< endl;
 					ev << "WARNING: Receive delay: "
 							<< (tteScheduler->getTotalTicks()
-									- pf->par("received_total").longValue())
+									- pf->par("received_total").intValue())
 							<< endl;
 					ev << "WARNING: TYPE: " << pf->getType() << endl;
 				}
@@ -2310,7 +2310,7 @@ void SI_CM_ENABLED::handleMessage(cMessage *message) {
 			 											pf->getTransparent_clock(),
 			 											tteScheduler->par("tick").doubleValue())
 			 											+ (tteScheduler->getTotalTicks()
-			 													- pf->par("received_total").longValue()));
+			 													- pf->par("received_total").intValue()));
 
 			 					unsigned int member = pf->getMembership_new();
 
@@ -2385,16 +2385,16 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == sicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == sicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== sicm->par("syncPriority").longValue()) {
+					== sicm->par("syncPriority").intValue()) {
 
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int)sicm->par("max_transmission_delay").longValue()) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int)sicm->par("max_transmission_delay")) {
 
 					ev
 							<< "WARNING: SI_CM_WAIT_4_IN: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -2406,7 +2406,7 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 							<< endl;
 					ev << "WARNING: Receive delay: "
 							<< (tteScheduler->getTotalTicks()
-									- pf->par("received_total").longValue())
+									- pf->par("received_total").intValue())
 							<< endl;
 					ev << "WARNING: TYPE: " << pf->getType() << endl;
 				}
@@ -2427,7 +2427,7 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 															pf->getTransparent_clock(),
 															tteScheduler->par("tick").doubleValue())
 															+ (tteScheduler->getTotalTicks()
-																	- pf->par("received_total").longValue()));
+																	- pf->par("received_total").intValue()));
 
 									unsigned int member = pf->getMembership_new();
 
@@ -2527,10 +2527,10 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 			int currentTime = tteScheduler->getTicks();
 			//local_clock = cm_sceduled_receive_pit
 			tteScheduler->clockCorrection(
-					currentTime - sicm->par("cm_scheduled_pit").longValue());
+					currentTime - sicm->par("cm_scheduled_pit").intValue());
 
 			if (getValue(local_sync_membership, 32)
-					>= sicm->par("cm_sync_threshold_sync").longValue()) {
+					>= sicm->par("cm_sync_threshold_sync").intValue()) {
 
 				//create the new frame
 				PCFrame *compressedFrame = new PCFrame("IN_FRAME");
@@ -2540,9 +2540,9 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 				compressedFrame->setTransparent_clock(0);
 				compressedFrame->setMembership_new(cp->getMembership_new());
 				compressedFrame->setSync_domain(
-						sicm->par("syncDomain").longValue());
+						sicm->par("syncDomain"));
 				compressedFrame->setSync_priority(
-						sicm->par("syncPriority").longValue());
+						sicm->par("syncPriority"));
 				compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 				compressedFrame->setIntegration_cycle(
 						cp->getIntegrationCycle());
@@ -2575,7 +2575,7 @@ void SI_CM_WAIT_4_IN::handleMessage(cMessage *message) {
 				DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 				dd->setDestinationGate(sicm->gate("schedulerIn"));
 				dd->setMembership_new(cp->getMembership_new());
-				dd->setTimer(sicm->par("dispatch_delay").longValue());
+				dd->setTimer(sicm->par("dispatch_delay"));
 				dd->setSchedulingPriority(3);
 
 				tteScheduler->registerEvent(dd);
@@ -2681,7 +2681,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -2748,7 +2748,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size").intValue());
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -2789,24 +2789,24 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead").intValue()
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -2828,7 +2828,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -2837,10 +2837,10 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -2866,7 +2866,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -2874,7 +2874,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -2886,7 +2886,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -2896,10 +2896,10 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -2925,7 +2925,7 @@ void SI_CM_WAIT_4_IN::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -2958,7 +2958,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//CA FRAME ?
 		if (pf->getType() == CA_FRAME) {
@@ -3028,7 +3028,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -3072,24 +3072,24 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3113,7 +3113,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3122,10 +3122,10 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3150,7 +3150,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -3158,7 +3158,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -3170,7 +3170,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3180,10 +3180,10 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3208,7 +3208,7 @@ void SI_CM_WAIT_4_IN::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -3238,7 +3238,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -3305,7 +3305,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -3344,24 +3344,24 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 					//stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3384,7 +3384,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3393,10 +3393,10 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3422,7 +3422,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -3430,7 +3430,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -3442,7 +3442,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3452,10 +3452,10 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3483,7 +3483,7 @@ void SI_CM_SYNC::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -3516,7 +3516,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//CA FRAME ?
 		if ((pf)->getType() == CA_FRAME) {
@@ -3593,7 +3593,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -3635,24 +3635,24 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3677,7 +3677,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3686,10 +3686,10 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3713,7 +3713,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -3721,7 +3721,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -3733,7 +3733,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3743,10 +3743,10 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3771,7 +3771,7 @@ void SI_CM_SYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -3801,7 +3801,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -3869,7 +3869,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -3908,24 +3908,24 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3947,7 +3947,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3956,10 +3956,10 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3985,7 +3985,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_INTEGRATE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -3993,7 +3993,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -4005,7 +4005,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4015,10 +4015,10 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4045,7 +4045,7 @@ void SI_CM_INTEGRATE::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_INTEGRATE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -4078,7 +4078,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//CA FRAME ?
 		if (pf->getType() == CA_FRAME) {
@@ -4164,7 +4164,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -4212,24 +4212,24 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4256,7 +4256,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4265,10 +4265,10 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4294,7 +4294,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_INTEGRATE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -4302,7 +4302,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -4314,7 +4314,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4324,10 +4324,10 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4353,7 +4353,7 @@ void SI_CM_INTEGRATE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_INTEGRATE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -4383,7 +4383,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -4449,7 +4449,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -4487,24 +4487,24 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4527,7 +4527,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4536,10 +4536,10 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4565,7 +4565,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_ENABLED: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -4573,7 +4573,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -4585,7 +4585,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4595,10 +4595,10 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4625,7 +4625,7 @@ void SI_CM_ENABLED::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -4658,7 +4658,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 		//CA FRAME ?
 		if (pf->getType() == CA_FRAME) {
 			ev << "COMP FNCT SICM ENABLED MEMBER" << (pf)->getMembership_new()
@@ -4739,7 +4739,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -4783,24 +4783,24 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4824,7 +4824,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4833,10 +4833,10 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4862,7 +4862,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -4870,7 +4870,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -4882,7 +4882,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4892,10 +4892,10 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4921,7 +4921,7 @@ void SI_CM_ENABLED::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -4951,7 +4951,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -5020,7 +5020,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -5059,24 +5059,24 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5100,7 +5100,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5109,10 +5109,10 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5138,7 +5138,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_UNSYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -5146,7 +5146,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -5158,7 +5158,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -5168,10 +5168,10 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5197,7 +5197,7 @@ void SI_CM_UNSYNC::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_UNSYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -5230,7 +5230,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//CA FRAME ?
 		if (pf->getType() == CA_FRAME) {
@@ -5310,7 +5310,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -5355,24 +5355,24 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5399,7 +5399,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5408,10 +5408,10 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5438,7 +5438,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_UNSYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -5446,7 +5446,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -5458,7 +5458,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -5468,10 +5468,10 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5498,7 +5498,7 @@ void SI_CM_UNSYNC::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_UNSYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -5528,7 +5528,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		ev << "CF STABLE permanence_delay: " << permanence_delay << endl;
 		ev << "CF STABLE CLOCK: " << tteScheduler->getTicks() << endl;
@@ -5597,7 +5597,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -5636,27 +5636,27 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						ev << "compression_correction "
 								<< compression_correction << endl;
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5681,7 +5681,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5690,13 +5690,13 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						ev << "compression_correction "
 								<< compression_correction << endl;
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5725,7 +5725,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_STABLE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -5733,7 +5733,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -5745,7 +5745,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -5755,10 +5755,10 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5786,7 +5786,7 @@ void SI_CM_STABLE::compressionFunction(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_STABLE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -5819,7 +5819,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//CA FRAME ?
 		if (pf->getType() == CA_FRAME) {
@@ -5897,7 +5897,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 
 				ow->setDestinationGate(sicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(sicm->par("observation_window_size").longValue());
+				ow->setTimer(sicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -5941,24 +5941,24 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(sicm->par("max_observation_window").longValue()
+								(sicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* sicm->par("observation_window_size").longValue();
+										* sicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ sicm->par("calculation_overhead").longValue()
+								+ sicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -5984,7 +5984,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						return;
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -5993,10 +5993,10 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -6022,7 +6022,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_STABLE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -6030,7 +6030,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						< ca_compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)sicm->par("max_observation_window").longValue()) {
+							< (unsigned int)sicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = ca_compression_stack->find(
@@ -6042,7 +6042,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)sicm->par("max_observation_window").longValue()) {
+							== (unsigned int)sicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -6052,10 +6052,10 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 										ca_compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										sicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = sicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -6081,7 +6081,7 @@ void SI_CM_STABLE::compressionFunctionCA(cMessage *message, SICM *sicm) {
 								<< "Compression Function SI_CM_STABLE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< sicm->par("max_observation_window").longValue()
+								<< sicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}

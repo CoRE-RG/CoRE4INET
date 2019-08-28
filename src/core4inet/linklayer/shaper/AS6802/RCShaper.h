@@ -203,7 +203,7 @@ void RCShaper<TC>::initialize(int stage)
          dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
          mac->subscribe("txPk", this);*/
 
-        numRcPriority = static_cast<size_t>(par("numRCpriority").longValue());
+        numRcPriority = static_cast<size_t>(par("numRCpriority"));
         for (unsigned int i = 0; i < numRcPriority; i++)
         {
             cQueue queue;
@@ -292,7 +292,7 @@ void RCShaper<TC>::enqueueMessage(cMessage *msg)
 {
     if (msg->arrivedOn("RCin"))
     {
-        long priority = msg->getSenderModule()->par("priority").longValue();
+        long priority = msg->getSenderModule()->par("priority");
         if (priority >= 0 && static_cast<size_t>(priority) < numRcPriority)
         {
             rcQueue[static_cast<size_t>(priority)].insert(msg);

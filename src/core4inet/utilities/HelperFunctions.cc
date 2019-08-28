@@ -121,7 +121,7 @@ void setTransparentClock(PCFrame *pcf, double static_tx_delay, Timer* timer)
             if (strncmp(parameter->getName(), "received_total", 15) == 0
                     || strncmp(parameter->getName(), "created_total", 15) == 0)
             {
-                start = parameter->longValue();
+                start = *parameter;
             }
         }
     }

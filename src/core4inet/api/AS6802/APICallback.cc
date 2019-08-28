@@ -41,7 +41,7 @@ void APICallback::receiveSignal(cComponent *src, __attribute__((unused)) simsign
             buf.traffic_type = TTE_BG_TRAFFIC;
         }
         buf.channel = 0;
-        buf.ct_id = static_cast<uint16_t>(src->par("ct_id").longValue());
+        buf.ct_id = src->par("ct_id");
         buf.shared = 0;
 
         TTEAPIPriv *priv = new TTEAPIPriv();

@@ -38,32 +38,32 @@ void MessageNumProfiler::handleMessage(cMessage *msg)
 
     if (par("print_cerr").boolValue())
     {
-        std::cerr << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
+        std::cerr << "Now profiling modules with more than " << par("max_messages").intValue() << " messages" << endl;
         std::cerr
-                << printMessages(sysmod, static_cast<size_t>(par("max_messages").longValue()), par("print_msgs").boolValue());
+                << printMessages(sysmod, static_cast<size_t>(par("max_messages")), par("print_msgs").boolValue());
         std::cerr << "Profiling done!" << endl;
     }
     else
     {
-        EV_TRACE << "Now profiling modules with more than " << par("max_messages").longValue() << " messages" << endl;
-        EV_TRACE << printMessages(sysmod, static_cast<size_t>(par("max_messages").longValue()), par("print_msgs").boolValue());
+        EV_TRACE << "Now profiling modules with more than " << par("max_messages").intValue() << " messages" << endl;
+        EV_TRACE << printMessages(sysmod, static_cast<size_t>(par("max_messages")), par("print_msgs").boolValue());
         EV_TRACE << "Profiling done!" << endl;
     }
 
-    if (par("throw_error").boolValue() && overModules(sysmod, static_cast<size_t>(par("max_messages").longValue())))
+    if (par("throw_error").boolValue() && overModules(sysmod, static_cast<size_t>(par("max_messages"))))
     {
         delete msg;
         throw cRuntimeError("Profiler found %d modules with more than the configured maximum of %d messages",
-                overModules(sysmod, static_cast<size_t>(par("max_messages").longValue())), par("max_messages").longValue());
+                overModules(sysmod, static_cast<size_t>(par("max_messages").intValue())), par("max_messages").intValue());
     }
 
-    if (par("max_live_messages").longValue() > 0 && msg->getLiveMessageCount() > par("max_live_messages").longValue())
+    if (par("max_live_messages").intValue() > 0 && msg->getLiveMessageCount() > par("max_live_messages").intValue())
     {
         if (par("throw_error").boolValue())
         {
             delete msg;
             throw cRuntimeError("Profiler found %d live messages, more than the configured maximum of %d messages",
-                    msg->getLiveMessageCount(), par("max_live_messages").longValue());
+                    msg->getLiveMessageCount(), par("max_live_messages").intValue());
         }
         else
         {

@@ -445,13 +445,13 @@ void TTShaper<TC>::registerTTBuffer(TTBuffer *ttBuffer)
         //tool. as it is takes too much computation time for a runtime check!
 
         //Check for overlapping windows only when new buffer has a sendWindowEnd set
-        if (ttBuffer->par("sendWindowEnd").longValue())
+        if (ttBuffer->par("sendWindowEnd").intValue())
         {
             for (std::map<uint64_t, TTBuffer*>::iterator buffer = ttBuffers.begin(); buffer != ttBuffers.end();
                     ++buffer)
             {
                 //Check for overlapping windows only when other buffer has a sendWindowEnd set
-                if ((*buffer).second->par("sendWindowEnd").longValue())
+                if ((*buffer).second->par("sendWindowEnd").intValue())
                 {
                     uint64_t other_offset = (*buffer).second->getPeriod()->getOffsetTicks();
                     uint64_t other_sendWindowStart = (*buffer).second->getSendWindowStart() + other_offset;

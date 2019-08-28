@@ -45,7 +45,7 @@ Define_NED_Function2(ned_sec_to_tick, "quantity s2t(quantity seconds, quantity t
 static omnetpp::cNEDValue ned_tick_to_sec(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc)
 {
     double ticklength;
-    long ticks = argv[0].longValue();
+    long ticks = argv[0].intValue();
     if (argc <= 1)
     {
         cModule* module = CoRE4INET::findModuleWhereverInNode("scheduler", context->getParentModule());
