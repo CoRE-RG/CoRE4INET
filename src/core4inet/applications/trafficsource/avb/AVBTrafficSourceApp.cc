@@ -203,14 +203,14 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
         if (strcmp(par("srClass").stringValue(), "A") == 0)
         {
             this->srClass = SR_CLASS::A;
-            if(par("pcp").longValue() == -1){
+            if(par("pcp").intValue() == -1){
                 this->pcp = PCP_DEFAULT_SRCLASSA;
             }
         }
         else if (strcmp(par("srClass").stringValue(), "B") == 0)
         {
             this->srClass = SR_CLASS::B;
-            if(par("pcp").longValue() == -1){
+            if(par("pcp").intValue() == -1){
                 this->pcp = PCP_DEFAULT_SRCLASSB;
             }
         }
@@ -239,7 +239,7 @@ void AVBTrafficSourceApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "pcp"))
     {
-        if(par("pcp").longValue() != -1){
+        if(par("pcp").intValue() != -1){
             this->pcp = static_cast<uint8_t>(parameterULongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
         }
     }
