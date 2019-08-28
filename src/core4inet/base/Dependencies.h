@@ -5,15 +5,19 @@
 /**
  * Check for minimal OMNeT++ Version requirements
  */
-#if OMNETPP_VERSION < 0x0500
-#  error At least OMNeT++/OMNEST version 5.0 required
+#if OMNETPP_VERSION < 0x0504 || OMNETPP_BUILDNUM < 1020
+#  error At least OMNeT++/OMNEST version 5.4.1 required
 #endif
 
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0303
-#  error At least INET version 3.3 required
+#if INET_VERSION < 0x0306 || (INET_VERSION == 0x0306 && INET_PATCH_LEVEL < 0x05)
+#  error At least INET version 3.6.5 required
+#endif
+
+#if INET_VERSION >= 0x0363
+#  error The INET 3.99 or newer versions are incompatible with this CoRE4INET version
 #endif
 
 #ifndef WITH_ETHERNET
