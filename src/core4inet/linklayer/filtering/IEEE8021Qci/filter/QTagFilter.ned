@@ -16,7 +16,11 @@
 package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 
 //
-// TODO auto-generated module
+// @brief Module that matches on the VLAN id and pcp in  a IEEE 802.1Qci stream filter.
+//
+// @see ~DestMACFilter, ~IEEE8021QciFilter
+//
+// @author Philipp Meyer
 //
 simple QTagFilter extends DestMACFilter
 {

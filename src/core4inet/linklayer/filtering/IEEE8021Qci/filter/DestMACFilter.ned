@@ -16,7 +16,11 @@
 package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 
 //
-// TODO auto-generated module
+// Module that matches on the destination MAC address in a IEEE 802.1Qci stream filter.
+//
+// @see ~IEEE8021QciFilter
+//
+// @author Philipp Meyer
 //
 simple DestMACFilter extends IEEE8021QciFilter
 {

@@ -28,7 +28,9 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Class representing the DestMacFilter stream filter module
+ *
+ * @author Philipp Meyer
  */
 class DestMACFilter : public virtual IEEE8021QciFilter
 {

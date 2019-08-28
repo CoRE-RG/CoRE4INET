@@ -26,7 +26,9 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Classs representing the QTagFilter module
+ *
+ * @author Philipp Meyer
  */
 class QTagFilter : public virtual DestMACFilter
 {
