@@ -31,7 +31,7 @@ namespace CoRE4INET {
  */
 class SRProtocol : public virtual cSimpleModule, public cListener
 {
-    private:
+    protected:
         /**
          * @brief Module representing the srpTable
          */

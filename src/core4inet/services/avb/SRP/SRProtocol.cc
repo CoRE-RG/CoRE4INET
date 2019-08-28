@@ -76,9 +76,11 @@ void SRProtocol::handleMessage(cMessage *msg)
                 {
                     srClass = SR_CLASS::A;
                 }
+                //only take first 3 bit and shift them to fit the uint8_t
+                uint8_t pcp = (talkerAdvertise->getPriorityAndRank() & 0xE0) >> 5;
                 srpTable->updateTalkerWithStreamId(talkerAdvertise->getStreamID(), port,
                         talkerAdvertise->getDestination_address(), srClass, talkerAdvertise->getMaxFrameSize(),
-                        talkerAdvertise->getMaxIntervalFrames(), talkerAdvertise->getVlan_identifier());
+                        talkerAdvertise->getMaxIntervalFrames(), talkerAdvertise->getVlan_identifier(), pcp);
             }
             else if (ListenerReady* listenerReady = dynamic_cast<ListenerReady*>(msg))
             {

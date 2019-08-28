@@ -75,7 +75,7 @@ void IEEE8021QbvSelection::handleParameterChange(const char* parname)
 {
     if (!parname || !strcmp(parname, "numPCP"))
     {
-        this->numPCP = parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<unsigned int>::max());
+        this->numPCP = static_cast<unsigned int>(parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<int>::max()));
     }
 }
 
@@ -89,7 +89,7 @@ void IEEE8021QbvSelection::handleMessage(cMessage* msg)
             emit(this->qPcpPkSignals[pcp], frame);
             emit(this->qPcpPkAgeSignals[pcp], frame->getArrivalTime() - frame->getCreationTime());
             this->numFrames[pcp] = this->numFrames[pcp] + 1;
-            this->numBytes[pcp] = this->numBytes[pcp] + frame->getByteLength();
+            this->numBytes[pcp] = this->numBytes[pcp] + static_cast<unsigned long>(frame->getByteLength());
             this->send(frame, "out");
         }
         else
@@ -121,7 +121,7 @@ void IEEE8021QbvSelection::finish()
 
 void IEEE8021QbvSelection::selectFrame()
 {
-    for(long i=static_cast<long>(numPCP)-1; i>=0; i--)
+    for(int i=this->numPCP-1; i>=0; i--)
     {
         Buffer* queue = dynamic_cast<Buffer*>(this->getParentModule()->getSubmodule("queue", i));
         IEEE8021QbvSelectionAlgorithm* tsa = dynamic_cast<IEEE8021QbvSelectionAlgorithm*>(this->getParentModule()->getSubmodule("transmissionSelectionAlgorithm", i));

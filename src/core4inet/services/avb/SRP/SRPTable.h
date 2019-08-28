@@ -54,13 +54,22 @@ class SRPTable : public virtual cSimpleModule
                 size_t framesize;           // Frame size in byte
                 uint16_t intervalFrames;    // interval frames
                 uint16_t vlan_id;           // VLAN identifier
+                uint8_t pcp;                // 802.1Q priority code point
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 bool isStatic;              // Is static entry
 
                 TalkerEntry();
                 TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address,
-                        cModule *new_module, size_t new_framesize, unsigned short new_intervalFrames,
-                        unsigned short new_vlan_id, simtime_t new_insertionTime, bool new_isStatic = false);
+                        cModule *new_module, size_t new_framesize, uint16_t new_intervalFrames,
+                        uint16_t new_vlan_id, uint8_t new_pcp, simtime_t new_insertionTime, bool new_isStatic = false);
+                TalkerEntry(const TalkerEntry& other);
+
+                /**
+                 * Creating a deep copy by using the copy constructor.
+                 * @return A duplicate of the original.
+                 */
+                virtual cObject* dup() const override;
+
                 virtual ~TalkerEntry();
 
         };
@@ -79,7 +88,7 @@ class SRPTable : public virtual cSimpleModule
                 bool isStatic;              // Is static entry
 
                 ListenerEntry();
-                ListenerEntry(uint64_t new_streamId, cModule *new_module, unsigned short new_vlan_id,
+                ListenerEntry(uint64_t new_streamId, cModule *new_module, uint16_t new_vlan_id,
                         simtime_t new_insertionTime, bool new_isStatic = false);
                 virtual ~ListenerEntry();
 
@@ -136,6 +145,14 @@ class SRPTable : public virtual cSimpleModule
 
     public:
         /**
+         * @brief For a known address and vid it proofs if it is contained in the table
+         *
+         * @param address address of the stream
+         * @param vid VLAN id
+         * @return true if table contains stream
+         */
+        virtual bool containsStream(const inet::MACAddress &address, uint16_t vid);
+        /**
          * @brief For a known talker address and V-TAG it finds out the streamId
          *
          * @param talkerAddress address
@@ -184,6 +201,15 @@ class SRPTable : public virtual cSimpleModule
         virtual cModule* getTalkerForStreamId(uint64_t streamId, uint16_t vid = VLAN_ID_DEFAULT);
 
         /**
+         * @brief Retrieve a copy of a complete talker entry with a given streamId and vid.
+         *
+         * @param streamId the streams id
+         * @param vid VLAN ID
+         * @return A copy of the requested TalkerEntry, nullptr if unknown
+         */
+        virtual TalkerEntry* getTalkerEntryForStreamId(uint64_t streamId, uint16_t vid = VLAN_ID_DEFAULT);
+
+        /**
          * @brief Retrieve the required bandwidth for a module with registered listeners
          *
          * @param module the module registered as listener
@@ -215,7 +241,7 @@ class SRPTable : public virtual cSimpleModule
          */
         virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
                 SR_CLASS srClass = SR_CLASS::A, size_t framesize = 0, uint16_t intervalFrames = 0, uint16_t vid =
-                        VLAN_ID_DEFAULT, bool isStatic = false);
+                        VLAN_ID_DEFAULT, uint8_t pcp=PCP_DEFAULT_SRCLASSA, bool isStatic = false);
 
         /**
          * @brief Unregister a streamId at talkerTable.

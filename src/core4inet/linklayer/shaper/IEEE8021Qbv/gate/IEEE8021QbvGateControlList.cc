@@ -33,6 +33,11 @@ IEEE8021QbvGateControlList::IEEE8021QbvGateControlList()
     this->configNo = 0;
 }
 
+void IEEE8021QbvGateControlList::setGateControlList(string gcl) {
+    this->par("controlList").setStringValue(gcl);
+    this->handleParameterChange("controlList");
+}
+
 void IEEE8021QbvGateControlList::initialize(int stage)
 {
     if (stage == 1)
@@ -58,7 +63,7 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
     Scheduled::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "numGates"))
     {
-        this->numGates = parameterULongCheckRange(par("numGates"), 1, std::numeric_limits<unsigned int>::max());
+        this->numGates = static_cast<unsigned int>(parameterULongCheckRange(par("numGates"), 1, std::numeric_limits<int>::max()));
     }
     if (!parname || !strcmp(parname, "controlList"))
     {
@@ -128,7 +133,7 @@ void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateS
 void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool nextCycle)
 {
     SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent(this->timerEventName.c_str(), ACTION_TIME_EVENT);
-    uint32_t actionTime = ceil((*(this->gateControlElement)).second / getOscillator()->getPreciseTick());
+    uint32_t actionTime = static_cast<uint32_t>(ceil((*(this->gateControlElement)).second / getOscillator()->getPreciseTick()));
     if (actionTime >= getPeriod()->getCycleTicks())
     {
         throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
@@ -138,6 +143,22 @@ void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool next
     actionTimeEvent->setNext_cycle(nextCycle);
     actionTimeEvent->setDestinationGate(this->gate("schedulerIn"));
     getPeriod()->registerEvent(actionTimeEvent);
+}
+
+void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateStates)
+{
+    for (int i=numGates-1; i>=0; i--)
+    {
+        IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
+        if ( !strcmp(gateStates[i].c_str(), "o"))
+        {
+            tg->open();
+        }
+        if ( !strcmp(gateStates[i].c_str(), "C"))
+        {
+            tg->close();
+        }
+    }
 }
 
 void IEEE8021QbvGateControlList::switchToNextGateControlElement()
