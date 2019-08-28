@@ -3,21 +3,61 @@
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c General -r 0,                        1s,              b28d-f81a/tplx
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            0abd-6584/tplx
 /examples/AS6802/small_network/,                                  -f omnetpp.ini -c With_Crossbursts -r 0,               0.1s,            0699-646e/tplx
+
 /examples/AS6802/rt_tictoc/,                                      -f omnetpp.ini -c General -r 0,                        1s,              269c-8493/tplx
+
 #/examples/AS6802/synchronization/HighIntegrity_small/,           -f omnetpp.ini -c General -r 0,                        1s,              da3e-3e7b/tplx
 #/examples/AS6802/synchronization/StandardIntegrity_large/,       -f omnetpp.ini -c General -r 0,                        1s,              b23c-ebb5/tplx
 #/examples/AS6802/synchronization/StandardIntegrity_medium/,      -f omnetpp.ini -c General -r 0,                        1s,              e040-f0be/tplx
+
 /examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c General -r 0,                        1s,              7f34-671d/tplx
 /examples/avb_AS6802/small_network/,                              -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            e23c-75a8/tplx
+
 /examples/avb_AS6802/static_network/,                             -f omnetpp.ini -c General -r 0,                        1s,              d495-5c54/tplx
 /examples/avb_AS6802/static_network/,                             -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            c5bd-f0db/tplx
+
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short -r 0,      0.1s,            5e8a-7065/tplx
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_valid -r 0,      0.1s,            cd8e-8645/tplx
 /examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Half_framesize_BE_and_TT -r 0,       0.1s,            be71-ca31/tplx
-/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study,                 0.1s,            5fb4-7346/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  0,           0.1s,            249e-c6e5/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  1,           0.1s,            971b-bcf2/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  2,           0.1s,            9286-b593/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  3,           0.1s,            f4b2-bdf9/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  4,           0.1s,            4d9c-3a53/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  5,           0.1s,            e6ec-4efd/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  6,           0.1s,            7b0d-73bf/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  7,           0.1s,            e4b0-aebd/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  8,           0.1s,            04ea-f40a/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r  9,           0.1s,            0d19-140c/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r 10,           0.1s,            c490-9836/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r 11,           0.1s,            b27c-ae8a/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r 12,           0.1s,            c849-69dc/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r 13,           0.1s,            a456-b6cb/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study -r 14,           0.1s,            5fb4-7346/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c Timespan_between_TT_short_no_AVB -r 0, 0.1s,          78d0-3af9/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  0,          0.1s,            fc01-eda9/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  1,          0.1s,            7e53-c815/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  2,          0.1s,            e636-f6e4/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  3,          0.1s,            6dd4-13eb/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  4,          0.1s,            37ea-9b62/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  5,          0.1s,            de1e-eb2b/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  6,          0.1s,            2d6d-d7ab/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  7,          0.1s,            540a-a5c9/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  8,          0.1s,            45b4-d255/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r  9,          0.1s,            f0ea-0c3e/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r 10,          0.1s,            6a20-b9a6/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r 11,          0.1s,            6d5d-6803/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r 12,          0.1s,            8779-a144/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r 13,          0.1s,            b9a9-88cc/tplx
+/examples/avb_AS6802/large_network/,                              -f omnetpp.ini -c MTU_parameter_study2 -r 14,          0.1s,            2baa-0db8/tplx
+
+/examples/inet/IEEE8021Q_small_network/,                          -f omnetpp.ini -c General -r 0,                        1s,              b0d6-51ff/tplx
+
 /examples/inet/small_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              0379-11b3/tplx
+
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c General -r 0,                        1s,              38ee-0636/tplx
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            a9cd-ce55/tplx
+
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c General -r 0,                        1s,              b88d-a79a/tplx
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            91c1-f70d/tplx
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            5e44-88fb/tplx
