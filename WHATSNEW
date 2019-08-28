@@ -1,3 +1,4 @@
 Recent changes in CoRE4INET
 ====================================
 02.08.2019: Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
+28.08.2019: Added IEEE 802.1Qci filtering and TSN nodes.

@@ -6,7 +6,8 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 
 
 ## News
-Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
+* Added IEEE 802.1Qci filtering and TSN nodes.
+* Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
 
 
 ## Quick Start
@@ -32,9 +33,9 @@ Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit b
 
 The build state of the master branch is monitored:
 * Building:
-<a href="https://jenkins.core-rg.de/job/CoRE4INET/job/CoRE4INET/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET"></a>
+<img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET">
 * Tests:
-<a href="https://jenkins.core-rg.de/job/CoRE4INET/job/CoRE4INET_tests/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests"></a>
+<img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests">
 
 <table>
   <tr>
@@ -44,13 +45,13 @@ The build state of the master branch is monitored:
   </tr>
   <tr>
     <td>Building</td>
-    <td><a href="https://jenkins.core-rg.de/job/CoRE4INET/job/CoRE4INET/Nodes=Ubuntu_18.04/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Ubuntu_18.04"></a></td>
-    <td><a href="https://jenkins.core-rg.de/job/CoRE4INET/job/CoRE4INET/Nodes=Windows_10/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Windows_10"></a></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Ubuntu_18.04"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Windows_10"></td>
   </tr>
   <tr>
     <td>Tests</td>
-    <td><a href="https://jenkins.core-rg.de/job/CoRE4INET/job/CoRE4INET_tests/Nodes=Ubuntu_18.04/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Ubuntu_18.04"></a></td>
-    <td><a href="https://jenkins.core-rg.de/job/CoRE4INET/job/CoRE4INET_tests/Nodes=Windows_10/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Windows_10"></a></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Ubuntu_18.04"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Windows_10"></td>
   </tr>
 </table>
 
