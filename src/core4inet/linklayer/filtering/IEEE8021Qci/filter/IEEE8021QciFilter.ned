@@ -27,7 +27,7 @@ simple IEEE8021QciFilter like IIEEE8021QciFilter
     parameters:
         @display("i=block/table");
         // Stream ID of the stream filter
-        int streamID = default(-1);
+        int streamID = default(0);
         // Gate ID responsible for the stream
         int gateID = default(-1);
         // Meter ID responsible for the stream

@@ -22,9 +22,14 @@ Define_Module(IEEE8021QciFilter);
 bool IEEE8021QciFilter::isMatching(inet::EtherFrame* frame)
 {
     bool match = false;
-    if (AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(frame)) // TODO: Change to srpTable contains qframe
+    if (this->streamID == 0)
     {
-        if(this->streamID == MAX_STREAM_ID || this->streamID == this->srpTable->getStreamIdForTalkerAddress(avbFrame->getDest(), avbFrame->getVID()))
+        match = true;
+    }
+    //TODO: Detect Q frame using ethertype
+    else if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(frame))
+    {
+        if(this->srpTable->containsStream(qframe->getDest(), qframe->getVID()) && this->streamID == this->srpTable->getStreamIdForTalkerAddress(qframe->getDest(), qframe->getVID()))
         {
             match = true;
         }
