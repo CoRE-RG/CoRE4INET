@@ -12,8 +12,8 @@
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0306 || (INET_VERSION == 0x0306 && INET_PATCH_LEVEL < 0x05)
-#  error At least INET version 3.6.5 required
+#if INET_VERSION < 0x0306 || (INET_VERSION == 0x0306 && INET_PATCH_LEVEL < 0x06)
+#  error At least INET version 3.6.6 required
 #endif
 
 #if INET_VERSION >= 0x0363
