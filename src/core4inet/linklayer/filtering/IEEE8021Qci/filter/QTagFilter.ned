@@ -16,7 +16,7 @@
 package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 
 //
-// @brief Module that matches on the VLAN id and pcp in  a IEEE 802.1Qci stream filter.
+// Module that matches on the VLAN id and pcp in  a IEEE 802.1Qci stream filter.
 //
 // @see ~DestMACFilter, ~IEEE8021QciFilter
 //
