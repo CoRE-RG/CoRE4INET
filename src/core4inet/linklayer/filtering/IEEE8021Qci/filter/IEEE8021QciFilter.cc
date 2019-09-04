@@ -26,12 +26,21 @@ bool IEEE8021QciFilter::isMatching(inet::EtherFrame* frame)
     {
         match = true;
     }
-    //TODO: Detect Q frame using ethertype
-    else if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(frame))
+    else if (const inet::EthernetIIFrame* ether2frame = dynamic_cast<const inet::EthernetIIFrame*>(frame))
     {
-        if(this->srpTable->containsStream(qframe->getDest(), qframe->getVID()) && this->streamID == this->srpTable->getStreamIdForTalkerAddress(qframe->getDest(), qframe->getVID()))
+        if (ether2frame->getEtherType() == 0x8100)
         {
-            match = true;
+            if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(frame))
+            {
+                if(this->srpTable->containsStream(qframe->getDest(), qframe->getVID()) && this->streamID == this->srpTable->getStreamIdForTalkerAddress(qframe->getDest(), qframe->getVID()))
+                {
+                    match = true;
+                }
+            }
+            else
+            {
+                throw cRuntimeError("Ethertype is 0x8100 but message type is not EthernetIIFrameWithQTag");
+            }
         }
     }
     return match;

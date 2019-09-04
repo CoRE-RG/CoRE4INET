@@ -43,6 +43,8 @@ packet EthernetIIFrameWithQTag extends EthernetIIFrame
 {
     // Overhead without payload
     byteLength = 22;
+    // Set ethertype for Q frame
+    etherType = 0x8100;
     
     // Priority Code Point (PCP): a 3-bit field which refers to the IEEE 802.1p priority. 
     // It indicates the frame priority level.

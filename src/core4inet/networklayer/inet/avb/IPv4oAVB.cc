@@ -455,7 +455,7 @@ void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))     c
     outFrame->setStreamID(static_cast<unsigned long>(avbDestInfo->getStreamId()));
     outFrame->setVID(avbDestInfo->getVlanId());
     outFrame->setDest(*(avbDestInfo->getDestMac()));
-    outFrame->setEtherType(inet::ETHERTYPE_IPv4);
+    //outFrame->setEtherType(inet::ETHERTYPE_IPv4); // TODO: Set ETHERTYPE_IPv4 inside qtag
 
     outFrame->encapsulate(packet);
 

@@ -88,16 +88,26 @@ void AVBInControl<IC>::handleMessage(cMessage *msg)
 template<class IC>
 bool AVBInControl<IC>::isAVB(const inet::EtherFrame *frame) const
 {
-    //TODO: Detect Q frame using ethertype
-    if (const EthernetIIFrameWithQTag* qframe = dynamic_cast<const EthernetIIFrameWithQTag*>(frame))
+    bool result = false;
+    if (const inet::EthernetIIFrame* ether2frame = dynamic_cast<const inet::EthernetIIFrame*>(frame))
     {
-        SRPTable* srpTable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", cModule::getParentModule()));
-        if (srpTable->containsStream(qframe->getDest(), qframe->getVID()))
+        if (ether2frame->getEtherType() == 0x8100)
         {
-            return true;
+            if (const EthernetIIFrameWithQTag* qframe = dynamic_cast<const EthernetIIFrameWithQTag*>(frame))
+            {
+                SRPTable* srpTable = dynamic_cast<SRPTable*>(findModuleWhereverInNode("srpTable", cModule::getParentModule()));
+                if (srpTable->containsStream(qframe->getDest(), qframe->getVID()))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                throw cRuntimeError("Ethertype is 0x8100 but message type is not EthernetIIFrameWithQTag");
+            }
         }
     }
-    return false;
+    return result;
 }
 
 }
