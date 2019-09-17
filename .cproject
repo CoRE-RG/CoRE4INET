@@ -30,11 +30,11 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.870144984" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1592839142" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1246268161" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false"/>
-								<option id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1119209497" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CoRE4INET/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CoRE4INET/src/core4inet/api/AS6802/tte_api}&quot;"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" useByScannerDiscovery="false" valueType="undefDefinedSymbols">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.undef.1177217810" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" useByScannerDiscovery="false" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_QUIET_NAN__"/>
@@ -151,7 +151,7 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1476902079" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.870144984"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1609836974" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.1592839142">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.662052049" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
-								<option id="gnu.cpp.compiler.option.preprocessor.undef.525932788" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.undef.525932788" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_QUIET_NAN__"/>
@@ -287,11 +287,11 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1552812456" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1001670330" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.276427390" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false"/>
-								<option id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1226114237" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../core4inet/api/AS6802/tte_api"/>
 									<listOptionValue builtIn="false" value=".././"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.preprocessor.undef.2016080485" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" useByScannerDiscovery="false" valueType="undefDefinedSymbols">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.undef.2016080485" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" useByScannerDiscovery="false" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_QUIET_NAN__"/>
@@ -383,7 +383,7 @@
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1187564988" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.202645042" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
-								<option id="gnu.c.compiler.option.preprocessor.def.symbols.40412148" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.40412148" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="_LARGEFILE_SOURCE=1"/>
 									<listOptionValue builtIn="false" value="HAVE_PCAP=1"/>
 									<listOptionValue builtIn="false" value="WITH_NETBUILDER=1"/>
@@ -415,7 +415,7 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1295153564" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1552812456"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.731673426" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.1001670330">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1649563841" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
-								<option id="gnu.cpp.compiler.option.preprocessor.undef.1534915787" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.undef.1534915787" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__CHAR16_TYPE__"/>
 									<listOptionValue builtIn="false" value="__STDC__"/>
 									<listOptionValue builtIn="false" value="__LDBL_HAS_QUIET_NAN__"/>
@@ -507,7 +507,7 @@
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.988053013" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.249552564" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.202645042">
-								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1094067383" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1094067383" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="_LARGEFILE_SOURCE=1"/>
 									<listOptionValue builtIn="false" value="HAVE_PCAP=1"/>
 									<listOptionValue builtIn="false" value="WITH_NETBUILDER=1"/>

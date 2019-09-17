@@ -36,7 +36,7 @@ void TicApp::initialize()
     Scheduled::initialize();
 
     SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("API Scheduler Task Event", ACTION_TIME_EVENT);
-    event->setAction_time(static_cast<uint32_t>(par("action_time").longValue()));
+    event->setAction_time(par("action_time"));
     event->setDestinationGate(gate("schedulerIn"));
     getPeriod()->registerEvent(event);
 }
@@ -50,10 +50,10 @@ void TicApp::handleMessage(cMessage *msg)
         Tic *tic = new Tic();
         tic->setTimestamp();
         tic->setRoundtrip_start(simTime());
-        tic->setCount(static_cast<unsigned int>(par("counter").longValue()));
+        tic->setCount(par("counter"));
         CTFrame *frame = new TTFrame("Tic");
         frame->setTimestamp();
-        frame->setCtID(static_cast<uint16_t>(par("ct_id").longValue()));
+        frame->setCtID(par("ct_id"));
         frame->encapsulate(tic);
 
         EV_DETAIL << "Sending Tic Message\n";
@@ -80,7 +80,7 @@ void TicApp::handleMessage(cMessage *msg)
         RCFrame *rcframe = dynamic_cast<RCFrame*>(msg);
         Toc *toc = dynamic_cast<Toc*>(rcframe->decapsulate());
         bubble(toc->getResponse());
-        par("counter").setLongValue(static_cast<long>(toc->getCount()));
+        par("counter").setIntValue(static_cast<long>(toc->getCount()));
         emit(rxPkSignal, rcframe);
         emit(roundtripSignal, toc->getRoundtrip_start() - simTime());
         delete toc;

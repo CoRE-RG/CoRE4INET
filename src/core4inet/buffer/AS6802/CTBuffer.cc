@@ -82,11 +82,11 @@ void CTBuffer::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "ct_mask"))
     {
-        this->ctMask = static_cast<uint32_t>(par("ct_mask").longValue());
+        this->ctMask = par("ct_mask");
     }
     if (!parname || !strcmp(parname, "ct_marker"))
     {
-        this->ctMarker = static_cast<uint32_t>(par("ct_marker").longValue());
+        this->ctMarker = par("ct_marker");
     }
     if (!parname || !strcmp(parname, "priority"))
     {

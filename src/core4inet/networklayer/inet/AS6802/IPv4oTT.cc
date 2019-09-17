@@ -423,10 +423,10 @@ void IPv4oTT<Base>::registerSendTimingEvent(TTDestinationInfo *destInfo)
             static_cast<uint32_t>(destInfo->getActionTime() / destInfo->getOscillator()->par("tick").doubleValue()));
     event->setDestinationGate(Base::gate("schedulerIn"));
 
-    if (event->getAction_time() >= static_cast<uint32_t>(destInfo->getPeriod()->par("cycle_ticks").longValue()))
+    if (event->getAction_time() >= static_cast<uint32_t>(destInfo->getPeriod()->par("cycle_ticks").intValue()))
     {
         throw cRuntimeError("The action_time (%d ticks) starts outside of the period (%d ticks)",
-                event->getAction_time(), destInfo->getPeriod()->par("cycle_ticks").longValue());
+                event->getAction_time(), destInfo->getPeriod()->par("cycle_ticks").intValue());
     }
 
     destInfo->getPeriod()->registerEvent(event);

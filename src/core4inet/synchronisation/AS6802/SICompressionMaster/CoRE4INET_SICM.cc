@@ -43,7 +43,7 @@ void SICM::initialize(int stage){
         path="compmaster";
         //path="/home/pcman/from_thinkpad/TTEthernetModel/examples/SICM_TEST_AS6802_sync/results/compmaster";
 
-        ss<<this->par("id").longValue();
+        ss<<this->par("id").intValue();
         path+=ss.str();
         fp = NULL;
         if(this->par("read").boolValue()){

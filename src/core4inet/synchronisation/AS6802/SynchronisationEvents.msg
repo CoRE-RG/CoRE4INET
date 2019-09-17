@@ -1,6 +1,6 @@
 cplusplus {{
-        #include "SchedulerMessageEvents_m.h"
-        #include "PCFrame_m.h"
+        #include "core4inet/scheduler/SchedulerMessageEvents_m.h"
+        #include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
 }}
 
 namespace CoRE4INET;
