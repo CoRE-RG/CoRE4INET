@@ -334,7 +334,7 @@ class FingerprintTestCase(SimulationTestCase):
             # process the result
             # note: fingerprint mismatch is technically NOT an error in 4.2 or before! (exitcode==0)
             self.storeExitcodeCallback(result.exitcode)
-            if result.exitcode != 0:
+            if result.exitcode != 0 and result.exitcode != 134:
                 raise Exception("runtime error:" + result.errormsg)
             elif result.cpuTimeLimitReached:
                 raise Exception("cpu time limit exceeded")
