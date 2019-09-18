@@ -26,16 +26,15 @@
 #include <iostream>
 
 #include <stdio.h>
-#include <cmessage.h>
-#include <PCFrame_m.h>
-#include <SchedulerEvent.h>
-#include <SchedulerMessageEvents_m.h>
-#include <SynchronisationEvents_m.h>
-#include "CoRE4INET_TTEScheduler.h"
+#include "core4inet/linklayer/ethernet/AS6802/PCFrame_m.h"
+#include "core4inet/scheduler/SchedulerEvent.h"
+#include "core4inet/scheduler/SchedulerMessageEvents_m.h"
+#include "core4inet/synchronisation/AS6802/SynchronisationEvents_m.h"
+#include "core4inet/TTEScheduler.h"
 #include <map>
 #include <list>
 #include <deque>
-#include "CoRE4INET_CoRE4INETDefs.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/buffer/AS6802/RCBuffer.h"
 
 using namespace std;

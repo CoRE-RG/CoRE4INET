@@ -43,7 +43,7 @@ void DummySync::initialize(int stage)
         Scheduled::initialize();
 
         SchedulerActionTimeEvent *event = new SchedulerActionTimeEvent("Sync Task Event", ACTION_TIME_EVENT);
-        event->setAction_time(static_cast<uint32_t>(par("action_time").longValue()));
+        event->setAction_time(par("action_time"));
         event->setDestinationGate(gate("schedulerIn"));
         getPeriod()->registerEvent(event);
     }
@@ -71,7 +71,7 @@ void DummySync::handleMessage(cMessage *msg)
                 uint32_t cycleTicks = getPeriod()->getCycleTicks();
                 simtime_t tick = getOscillator()->par("tick").doubleValue();
 
-                int64_t modticks = (static_cast<int64_t>(simTime() / tick) - par("action_time").longValue()) % cycleTicks;
+                int64_t modticks = (static_cast<int64_t>(simTime() / tick) - par("action_time").intValue()) % cycleTicks;
                 if (modticks > (static_cast<int64_t>(cycleTicks) / 2))
                     modticks = modticks - cycleTicks;
                 modticks += static_cast<int64_t>(round(

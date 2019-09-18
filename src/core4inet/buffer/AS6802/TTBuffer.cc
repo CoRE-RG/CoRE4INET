@@ -49,7 +49,7 @@ void TTBuffer::initialize(int stage)
     CTBuffer::initialize(stage);
     if (stage == 0)
     {
-        nextAction = static_cast<uint64_t>(par("sendWindowStart").longValue());
+        nextAction = par("sendWindowStart");
     }
     if (stage == 1)
     {
@@ -59,13 +59,13 @@ void TTBuffer::initialize(int stage)
         Scheduled::initialize();
 
         actionTimeEvent = new SchedulerActionTimeEvent("TTBuffer Scheduler Event", ACTION_TIME_EVENT);
-        actionTimeEvent->setAction_time(static_cast<uint32_t>(par("sendWindowStart").longValue()));
+        actionTimeEvent->setAction_time(par("sendWindowStart"));
         actionTimeEvent->setDestinationGate(gate("schedulerIn"));
 
-        if (static_cast<uint32_t>(par("sendWindowStart").longValue()) >= getPeriod()->getCycleTicks())
+        if (static_cast<uint32_t>(par("sendWindowStart")) >= getPeriod()->getCycleTicks())
         {
             throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
-                    par("sendWindowStart").longValue(), getPeriod()->getCycleTicks());
+                    par("sendWindowStart").intValue(), getPeriod()->getCycleTicks());
         }
 
         nextAction = getPeriod()->registerEvent(actionTimeEvent);

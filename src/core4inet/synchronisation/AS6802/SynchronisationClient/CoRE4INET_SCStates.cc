@@ -59,11 +59,11 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 
 	outVector = new cOutVector("client");
 
-	syncDomainId = sc->par("syncDomain").longValue();
-	local_current_sync_priority = sc->par("syncPriority").longValue();
+	syncDomainId = sc->par("syncDomain");
+	local_current_sync_priority = sc->par("syncPriority");
 
 	MembershipAcceptanceRange =
-			sc->par("MembershipAcceptanceRange").longValue();
+			sc->par("MembershipAcceptanceRange");
 
 	local_timer = false;
 	flood_receive = false;
@@ -84,7 +84,7 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 	stable_cycle_counter = 0;
 	duration = 0;
 	powerUp = true;
-	max_transmission_delay = sc->par("max_transmission_delay").longValue();
+	max_transmission_delay = sc->par("max_transmission_delay");
 
 	event = new SchedulerTimerEvent("ASYNCHRON", TIMER_EVENT);
 	event->setSchedulingPriority(3);
@@ -104,7 +104,7 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
         event1 = new SchedulerActionTimeEvent("smc_async_eval_pit",
                 ACTION_TIME_EVENT);
         //sm_dispatch_pit=smc_async_eval_pit
-        // event1->setAction_time(sc->par("smc_async_eval_pit").longValue() - sc->par("smc_async_eval_pit").longValue());
+        // event1->setAction_time(sc->par("smc_async_eval_pit").intValue() - sc->par("smc_async_eval_pit").intValue());
         event1->setAction_time(0);
         event1->setDestinationGate(sc->gate("schedulerIn"));
         event1->setSchedulingPriority(4);
@@ -113,15 +113,14 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
                 ACTION_TIME_EVENT);
 
         event2->setAction_time(
-                sc->par("smc_sync_eval_pit").longValue());
+                sc->par("smc_sync_eval_pit"));
         event2->setDestinationGate(sc->gate("schedulerIn"));
         event2->setSchedulingPriority(4);
 
         event3 = new SchedulerActionTimeEvent("smc_clock_corr_pit",
                 ACTION_TIME_EVENT);
 
-        event3->setAction_time(
-                (unsigned int) sc->par("smc_clock_corr_pit").longValue());
+        event3->setAction_time(sc->par("smc_clock_corr_pit"));
         event3->setDestinationGate(sc->gate("schedulerIn"));
         event3->setSchedulingPriority(4);
 
@@ -129,16 +128,16 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
         event4 = new SchedulerActionTimeEvent("smc_inc_pit",
                 ACTION_TIME_EVENT);
         event4->setAction_time(
-                sc->par("smc_scheduled_receive_pit").longValue()
-                        - sc->par("precision").longValue());
+                sc->par("smc_scheduled_receive_pit").intValue()
+                        - sc->par("precision").intValue());
         event4->setDestinationGate(sc->gate("schedulerIn"));
         event4->setSchedulingPriority(3);
 
         event5 = new SchedulerActionTimeEvent("smc_async_up",
                 ACTION_TIME_EVENT);
         event5->setAction_time(
-                (unsigned int) (sc->par("int_cycle_duration").longValue()
-                        - sc->par("acceptance_window").longValue()));
+                (unsigned int) (sc->par("int_cycle_duration").intValue()
+                        - sc->par("acceptance_window").intValue()));
         event5->setDestinationGate(sc->gate("schedulerIn"));
         event5->setSchedulingPriority(4);
 
@@ -148,16 +147,15 @@ SC_INIT::SC_INIT(SC *sc_ref, FILE *f) {
 		event3 = new SchedulerActionTimeEvent("smc_clock_corr_pit",
 				ACTION_TIME_EVENT);
 
-		event3->setAction_time(
-				(unsigned int) sc->par("smc_clock_corr_pit").longValue());
+		event3->setAction_time(sc->par("smc_clock_corr_pit"));
 		event3->setDestinationGate(sc->gate("schedulerIn"));
 		event3->setSchedulingPriority(4);
 
 		//event4 is used to update/increment/ the "local_integration_cycle" value
 		event4 = new SchedulerActionTimeEvent("smc_inc_pit", ACTION_TIME_EVENT);
 		event4->setAction_time(
-				sc->par("smc_scheduled_receive_pit").longValue()
-						- sc->par("precision").longValue());
+				sc->par("smc_scheduled_receive_pit").intValue()
+						- sc->par("precision").intValue());
 		event4->setDestinationGate(sc->gate("schedulerIn"));
 		event4->setSchedulingPriority(3);
 
@@ -187,7 +185,7 @@ void SC_PSEUDOSYNC::handleMessage(cMessage *message) {
 				<< local_integration_cycle << endl;
 
 		local_integration_cycle = (local_integration_cycle + 1)
-				% (sc->par("max_integration_cycles").longValue());
+				% (sc->par("max_integration_cycles").intValue());
 
 		ev << "DEBUG SC_PSEUDOSYNC: local_integration_cycle after "
 				<< local_integration_cycle << endl;
@@ -217,8 +215,7 @@ SC_INTEGRATE::SC_INTEGRATE() {
 
 	if (powerUp) {
 
-		event->setTimer(
-				(unsigned int) sc->par("sm_listen_timeout").longValue());
+		event->setTimer(sc->par("sm_listen_timeout"));
 		event->setDestinationGate(sc->gate("schedulerIn"));
 		event->setSchedulingPriority(3);
 
@@ -253,7 +250,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 			if ((transparentClockToTicks(pf->getTransparent_clock(),
 					tteScheduler->par("tick").doubleValue())
 					+ (tteScheduler->getTotalTicks()
-							- pf->par("received_total").longValue())
+							- pf->par("received_total").intValue())
 					> max_transmission_delay)) {
 
 				ev
@@ -275,7 +272,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 										pf->getTransparent_clock(),
 										tteScheduler->par("tick").doubleValue())
 										+ (tteScheduler->getTotalTicks()
-												- pf->par("received_total").longValue()));
+												- pf->par("received_total").intValue()));
 				uint64_t permanence_pit = tteScheduler->getTotalTicks()
 						+ permanence_delay;
 
@@ -301,7 +298,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 						FrameEvent *f_event = new FrameEvent("IN_FRAME",
 								TIMER_EVENT);
 						f_event->setReceivedPort(
-								pf->par("received_port").longValue());
+								pf->par("received_port"));
 						f_event->setPcfType(IN_FRAME);
 						f_event->setIntegrationCycle(
 								pf->getIntegration_cycle());
@@ -337,7 +334,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 							FrameEvent *f_event = new FrameEvent("IN_FRAME",
 									TIMER_EVENT);
 							f_event->setReceivedPort(
-									pf->par("received_port").longValue());
+									pf->par("received_port"));
 							f_event->setPcfType(IN_FRAME);
 							f_event->setIntegrationCycle(
 									pf->getIntegration_cycle());
@@ -364,7 +361,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 					FrameEvent *f_event = new FrameEvent("IN_FRAME",
 							TIMER_EVENT);
 					f_event->setReceivedPort(
-							pf->par("received_port").longValue());
+							pf->par("received_port"));
 					f_event->setPcfType(IN_FRAME);
 					f_event->setMember(pf->getMembership_new());
 					f_event->setIntegrationCycle(pf->getIntegration_cycle());
@@ -420,7 +417,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 				int64_t temp =
 						(int64_t)(
 								tteScheduler->getTicks()
-										- sc->par("smc_scheduled_receive_pit").longValue());
+										- sc->par("smc_scheduled_receive_pit").intValue());
 				//local_clock=smc_scheduled_receive_pit;
 				tteScheduler->clockCorrection(temp);
 
@@ -429,7 +426,7 @@ void SC_INTEGRATE::handleMessage(cMessage *message) {
 				local_async_membership = 0;
 
 				if (local_sync_membership
-						>= (unsigned int)sc->par("sc_integrate_to_sync_thrld").longValue()) {
+						>= (unsigned int)sc->par("sc_integrate_to_sync_thrld")) {
 					//the synchronous clique detection return false and the device has synchronized to the current set of devices
 					//
 					if (!timeOutExpierd) {
@@ -518,14 +515,14 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			if (int_cycle == local_integration_cycle) {
 
 				if (inSchedule(permanence_pit,
-						sc->par("smc_scheduled_receive_pit").longValue(),
-						sc->par("precision").longValue())) {
+						sc->par("smc_scheduled_receive_pit"),
+						sc->par("precision"))) {
 
 					if ((unsigned int)getValue(member, 32)
-							>= (unsigned int)(sc->par("max_pcf_membership").longValue()
+							>= (unsigned int)(sc->par("max_pcf_membership")
 									- MembershipAcceptanceRange)
 							&& (getValue(member, 32)
-									<= (sc->par("max_pcf_membership").longValue()))) {
+									<= (sc->par("max_pcf_membership").intValue()))) {
 
 						uint32_t key_ = getValue(member, 32);
 
@@ -630,7 +627,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 
 			if ((getValue(local_async_membership, 32)
-					>= sc->par("sm_sync_threshold_async").longValue())) {
+					>= sc->par("sm_sync_threshold_async").intValue())) {
 
 				ev << "DEBUG: SYNC: ASYNCHRONUS CLIQUE DETECTION -> TRUE"
 						<< endl;
@@ -638,7 +635,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 				//event = new SchedulerTimerEvent("ASYNCHRON", TIMER_EVENT);
 				event->setTimer(
-						sc->par("sm_restart_timeout_async").longValue());
+						sc->par("sm_restart_timeout_async"));
 				event->setDestinationGate(sc->gate("schedulerIn"));
 				event->setSchedulingPriority(3);
 				//duration=sm_restart_timeout_async;
@@ -671,7 +668,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((!(getValue(local_async_membership, 32)
-					>= sc->par("sm_sync_threshold_async").longValue()))) {
+					>= sc->par("sm_sync_threshold_async").intValue()))) {
 
 				tteScheduler->registerEvent(event1, true);
 
@@ -681,7 +678,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 		if (string(message->getName()).compare("smc_inc_pit") == 0) {
 
 			local_integration_cycle = (local_integration_cycle + 1)
-					% (sc->par("max_integration_cycles").longValue());
+					% (sc->par("max_integration_cycles").intValue());
 
 			tteScheduler->registerEvent(event4, true);
 		}
@@ -730,7 +727,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 
 			}
 
-			int dummy = sc->par("sc_sync_threshold_sync").longValue();
+			int dummy = sc->par("sc_sync_threshold_sync");
 
 			ev << "DEBUG SYNC  smc_sync_eval_pit local_sync_membership"
 					<< local_sync_membership << endl;
@@ -741,9 +738,9 @@ void SC_SYNC::handleMessage(cMessage *message) {
 					<< local_integration_cycle << endl;
 
 			if (local_sync_membership
-					< (unsigned int)sc->par("sc_sync_threshold_sync").longValue()) {
+					< (unsigned int)sc->par("sc_sync_threshold_sync")) {
 
-				event->setTimer(sc->par("sm_restart_timeout_sync").longValue());
+				event->setTimer(sc->par("sm_restart_timeout_sync"));
 				event->setDestinationGate(sc->gate("schedulerIn"));
 				event->setSchedulingPriority(3);
 				//local_clock=0;
@@ -773,7 +770,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= (unsigned int)sc->par("sc_sync_threshold_sync").longValue())
+					>= (unsigned int)sc->par("sc_sync_threshold_sync"))
 					&& (!sc->par("sc_sync_to_stable_enabled").boolValue())) {
 
 				stable_cycle_counter++;
@@ -784,10 +781,10 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= (unsigned int)sc->par("sc_sync_threshold_sync").longValue())
+					>= (unsigned int)sc->par("sc_sync_threshold_sync"))
 					&& (sc->par("sc_sync_to_stable_enabled").boolValue())
 					&& (stable_cycle_counter
-							< (unsigned int)sc->par("num_stable_cycles").longValue())) {
+							< (unsigned int)sc->par("num_stable_cycles"))) {
 
 				stable_cycle_counter++;
 
@@ -797,10 +794,10 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					>= (unsigned int)sc->par("sc_sync_threshold_sync").longValue())
+					>= (unsigned int)sc->par("sc_sync_threshold_sync"))
 					&& (sc->par("sc_sync_to_stable_enabled").boolValue())
 					&& (stable_cycle_counter
-							>= (unsigned int)sc->par("num_stable_cycles").longValue())) {
+							>= (unsigned int)sc->par("num_stable_cycles"))) {
 
 				tteScheduler->registerEvent(event2, true);
 
@@ -823,7 +820,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 				map<uint32_t, pair<uint32_t, uint64_t> >::iterator iter =
 						clock_stack->begin();
 				clock_corr = iter->second.second
-						- sc->par("smc_scheduled_receive_pit").longValue();
+						- sc->par("smc_scheduled_receive_pit");
 				tteScheduler->clockCorrection(clock_corr);
 				//outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
@@ -848,7 +845,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 							temp
 									+ (iter->second.second
 											- sc->par(
-													"smc_scheduled_receive_pit").longValue());
+													"smc_scheduled_receive_pit").intValue());
 
 					iter++;
 				}
@@ -906,7 +903,7 @@ void SC_SYNC::handleMessage(cMessage *message) {
 			if ((transparentClockToTicks(copy_->getTransparent_clock(),
 					tteScheduler->par("tick").doubleValue())
 					+ (tteScheduler->getTotalTicks()
-							- copy_->par("received_total").longValue())
+							- copy_->par("received_total").intValue())
 					> max_transmission_delay)) {
 
 				ev
@@ -924,13 +921,13 @@ void SC_SYNC::handleMessage(cMessage *message) {
 										copy_->getTransparent_clock(),
 										tteScheduler->par("tick").doubleValue())
 										+ (tteScheduler->getTotalTicks()
-												- copy_->par("received_total").longValue()));
+												- copy_->par("received_total").intValue()));
 				uint64_t permanence_pit = tteScheduler->getTotalTicks()
 						+ permanence_delay;
 
 				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 				f_event->setReceivedPort(
-						copy_->par("received_port").longValue());
+						copy_->par("received_port"));
 				f_event->setPcfType(IN_FRAME);
 				f_event->setIntegrationCycle(copy_->getIntegration_cycle());
 				f_event->setMember(copy_->getMembership_new());
@@ -1001,14 +998,14 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			if (int_cycle == local_integration_cycle) {
 
 				if (inSchedule(permanence_pit,
-						sc->par("smc_scheduled_receive_pit").longValue(),
-						sc->par("precision").longValue())) {
+						sc->par("smc_scheduled_receive_pit"),
+						sc->par("precision"))) {
 
 					if ((unsigned int)getValue(member, 32)
-							>= (unsigned int)(sc->par("max_pcf_membership").longValue()
+							>= (unsigned int)(sc->par("max_pcf_membership")
 									- MembershipAcceptanceRange)
 							&& (getValue(member, 32)
-									<= (sc->par("max_pcf_membership").longValue()))) {
+									<= (sc->par("max_pcf_membership").intValue()))) {
 
 						uint32_t key_ = getValue(member, 32);
 
@@ -1115,7 +1112,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			tteScheduler->registerEvent(event1, true);
 
 			if (getValue(local_async_membership, 32)
-					>= sc->par("sc_stable_threshold_async").longValue()) {
+					>= sc->par("sc_stable_threshold_async").intValue()) {
 
 				ev << "DEBUG STABLE  smc_async_eval_pit local_sync_membership"
 						<< local_sync_membership << endl;
@@ -1129,7 +1126,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 				//event = new SchedulerTimerEvent("ASYNCHRON", TIMER_EVENT);
 				//duration=sm_restart_timeout_async;
 				event->setTimer(
-						sc->par("sm_restart_timeout_async").longValue());
+						sc->par("sm_restart_timeout_async"));
 				event->setDestinationGate(sc->gate("schedulerIn"));
 
 				//local clock=0
@@ -1162,7 +1159,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 		if (string(message->getName()).compare("smc_inc_pit") == 0) {
 
 			local_integration_cycle = (local_integration_cycle + 1)
-					% (sc->par("max_integration_cycles").longValue());
+					% (sc->par("max_integration_cycles").intValue());
 
 			tteScheduler->registerEvent(event4, true);
 		}
@@ -1211,9 +1208,9 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					< (unsigned int)sc->par("sc_stable_threshold_sync").longValue())
+					< (unsigned int)sc->par("sc_stable_threshold_sync"))
 					&& (stable_cycle_counter
-							< (unsigned int)sc->par("num_unstable_cycles").longValue())) {
+							< (unsigned int)sc->par("num_unstable_cycles"))) {
 
 				stable_cycle_counter++;
 
@@ -1223,14 +1220,14 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if ((local_sync_membership
-					< (unsigned int)sc->par("sc_stable_threshold_sync").longValue())
+					< (unsigned int)sc->par("sc_stable_threshold_sync"))
 					&& (stable_cycle_counter
-							>= (unsigned int)sc->par("num_unstable_cycles").longValue())) {
+							>= (unsigned int)sc->par("num_unstable_cycles"))) {
 
 				ev << "SC_STABLE:: SYNCHRONUS CLIQUE DETECTION TRUE" << endl;
 
 				event->setSchedulingPriority(3);
-				event->setTimer(sc->par("sm_restart_timeout_sync").longValue());
+				event->setTimer(sc->par("sm_restart_timeout_sync"));
 				event->setDestinationGate(sc->gate("schedulerIn"));
 
 				//local_clock=0;
@@ -1262,7 +1259,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			}
 
 			if (local_sync_membership
-					>= (unsigned int)sc->par("sc_stable_threshold_sync").longValue()) {
+					>= (unsigned int)sc->par("sc_stable_threshold_sync")) {
 
 				stable_cycle_counter = 0;
 
@@ -1285,7 +1282,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 				map<uint32_t, pair<uint32_t, uint64_t> >::iterator iter =
 						clock_stack->begin();
 				clock_corr = iter->second.second
-						- sc->par("smc_scheduled_receive_pit").longValue();
+						- sc->par("smc_scheduled_receive_pit");
 				tteScheduler->clockCorrection(clock_corr);
 				// outVector->recordWithTimestamp(simTime(),(double)clock_corr);
 
@@ -1310,7 +1307,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 							temp
 									+ (iter->second.second
 											- sc->par(
-													"smc_scheduled_receive_pit").longValue());
+													"smc_scheduled_receive_pit").intValue());
 
 					iter++;
 				}
@@ -1372,7 +1369,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 			if ((transparentClockToTicks(copy_->getTransparent_clock(),
 					tteScheduler->par("tick").doubleValue())
 					+ (tteScheduler->getTotalTicks()
-							- copy_->par("received_total").longValue())
+							- copy_->par("received_total").intValue())
 					> max_transmission_delay)) {
 
 				ev
@@ -1388,7 +1385,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 									copy_->getTransparent_clock(),
 									tteScheduler->par("tick").doubleValue())
 									+ (tteScheduler->getTotalTicks()
-											- copy_->par("received_total").longValue()));
+											- copy_->par("received_total").intValue()));
 			uint64_t permanence_pit = tteScheduler->getTotalTicks()
 					+ permanence_delay;
 
@@ -1396,7 +1393,7 @@ void SC_STABLE::handleMessage(cMessage *message) {
 
 				FrameEvent *f_event = new FrameEvent("IN_FRAME", TIMER_EVENT);
 				f_event->setReceivedPort(
-						copy_->par("received_port").longValue());
+						copy_->par("received_port"));
 				f_event->setPcfType(IN_FRAME);
 				f_event->setIntegrationCycle(copy_->getIntegration_cycle());
 				f_event->setMember(copy_->getMembership_new());

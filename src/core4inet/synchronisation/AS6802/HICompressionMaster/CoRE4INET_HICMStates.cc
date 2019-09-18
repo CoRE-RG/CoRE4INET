@@ -76,7 +76,7 @@ HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 
 	} //read handle
 
-	ctid = hicm->par("id").longValue();
+	ctid = hicm->par("id");
 	local_timer = false;
 	flood_receive = false;
 	closed_window = false;
@@ -91,8 +91,8 @@ HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 	clock_corr = 0;
 	stable_cycle_counter = 0;
 
-	duration = hicm->par("cm_listen_timeout").longValue();
-	max_transmision_delay = hicm->par("max_transmission_delay").longValue();
+	duration = hicm->par("cm_listen_timeout");
+	max_transmision_delay = hicm->par("max_transmission_delay");
 
 	tteScheduler = (TTEScheduler*) hicm->getParentModule()->getSubmodule(
 			"scheduler");
@@ -116,28 +116,28 @@ HI_CM_INIT::HI_CM_INIT(HICM *pointer, FILE *f) {
 	//cm_sync_eval_pit
 	event2 = new SchedulerActionTimeEvent("cm_sync_eval_pit",
 			ACTION_TIME_EVENT);
-	event2->setAction_time(hicm->par("cm_sync_eval_pit").longValue());
+	event2->setAction_time(hicm->par("cm_sync_eval_pit"));
 	event2->setDestinationGate(hicm->gate("schedulerIn"));
 	event2->setSchedulingPriority(4);
 	//cm_clock_corr_pit
 	event3 = new SchedulerActionTimeEvent("cm_clock_corr_pit",
 			ACTION_TIME_EVENT);
 	event3->setAction_time(
-			(unsigned int) hicm->par("cm_clock_corr_pit").longValue());
+			(unsigned int) hicm->par("cm_clock_corr_pit"));
 	event3->setDestinationGate(hicm->gate("schedulerIn"));
 	event3->setSchedulingPriority(4);
 
 	//event4 is used to update/increment/ the "local_integration_cycle" value
 	event4 = new SchedulerActionTimeEvent("cm_inc_pit", ACTION_TIME_EVENT);
 	event4->setAction_time(
-			hicm->par("cm_scheduled_pit").longValue()
-					- (hicm->par("acceptance_window").longValue() / 2));
+			hicm->par("cm_scheduled_pit").intValue()
+					- (hicm->par("acceptance_window").intValue() / 2));
 	event4->setDestinationGate(hicm->gate("schedulerIn"));
 	event4->setSchedulingPriority(1);
 	//cm_scheduled_pit
 	event5 = new SchedulerActionTimeEvent("cm_scheduled_pit",
 			ACTION_TIME_EVENT);
-	event5->setAction_time(hicm->par("cm_scheduled_pit").longValue());
+	event5->setAction_time(hicm->par("cm_scheduled_pit"));
 	event5->setDestinationGate(hicm->gate("schedulerIn"));
 	event5->setSchedulingPriority(4);
 
@@ -175,7 +175,7 @@ void HI_CM_PSEUDOSYNC::handleMessage(cMessage *message) {
 		ev << "local_integration_cycle" << local_integration_cycle << endl;
 
 		local_integration_cycle = (local_integration_cycle + 1)
-				% (hicm->par("max_integration_cycles").longValue());
+				% (hicm->par("max_integration_cycles").intValue());
 
 		ev << "local_integration_cycle updated" << local_integration_cycle
 				<< endl;
@@ -216,10 +216,10 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == hicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == hicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== hicm->par("syncPriority").longValue()) {
+					== hicm->par("syncPriority").intValue()) {
 
 				ev << "DEBUG: HI_CM_INTEGRATE membership new value"
 						<< pf->getMembership_new() << endl;
@@ -229,8 +229,8 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (hicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (hicm->par("max_transmission_delay").intValue())) {
 
 					ev
 							<< "WARNING: HI_CM_INTEGRATE: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -257,7 +257,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -294,7 +294,7 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -387,8 +387,8 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -444,9 +444,9 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
-					hicm->par("syncDomain").longValue());
+					hicm->par("syncDomain"));
 			compressedFrame->setSync_priority(
-					hicm->par("syncPriority").longValue());
+					hicm->par("syncPriority"));
 			compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 			compressedFrame->setIntegration_cycle(cp->getIntegrationCycle());
 
@@ -476,19 +476,19 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
 			//dd->setMembership_new(cp->getMembership_new());
-			dd->setTimer(hicm->par("dispatch_delay").longValue());
+			dd->setTimer(hicm->par("dispatch_delay"));
 			dd->setSchedulingPriority(3);
 			dd->setFrameID(compressedFrame->getId());
 			tteScheduler->registerEvent(dd);
 
 			if (getValue(local_sync_membership, 32)
-					>= hicm->par("cm_integrate_to_sync_thrld").longValue()) {
+					>= hicm->par("cm_integrate_to_sync_thrld").intValue()) {
 
 				int currentTime = tteScheduler->getTicks();
 				//local_clock = cm_sceduled_receive_pit
 				tteScheduler->clockCorrection(
 						currentTime
-								- hicm->par("cm_scheduled_pit").longValue());
+								- hicm->par("cm_scheduled_pit").intValue());
 
 				tteScheduler->registerEvent(event2);
 				//tteScheduler->registerEvent(event3);
@@ -512,19 +512,19 @@ void HI_CM_INTEGRATE::handleMessage(cMessage* message) {
 			}
 
 			if (getValue(local_sync_membership, 32)
-					>= hicm->par("cm_integrate_to_wait_thrld").longValue()
+					>= hicm->par("cm_integrate_to_wait_thrld").intValue()
 					&& getValue(local_sync_membership, 32)
-							< hicm->par("cm_integrate_to_wait_thrld").longValue()) {
+							< hicm->par("cm_integrate_to_wait_thrld").intValue()) {
 				int currentTime = tteScheduler->getTicks();
 				//local_clock = cm_sceduled_receive_pit
 				tteScheduler->clockCorrection(
 						currentTime
-								- hicm->par("cm_scheduled_pit").longValue());
+								- hicm->par("cm_scheduled_pit").intValue());
 
 				tteScheduler->unregisterEvent(event);
 
-				duration = hicm->par("int_cycle_duration").longValue()
-						+ (hicm->par("acceptance_window").longValue() / 2);
+				duration = hicm->par("int_cycle_duration").intValue()
+						+ (hicm->par("acceptance_window").intValue() / 2);
 
 				delete cp;
 
@@ -587,7 +587,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -655,7 +655,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 
 				ow->setDestinationGate(hicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(hicm->par("observation_window_size").longValue());
+				ow->setTimer(hicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -694,24 +694,24 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 					//stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(hicm->par("max_observation_window").longValue()
+								(hicm->par("max_observation_window")
 										- owc->getNumberOfObservationWindow())
-										* hicm->par("observation_window_size").longValue();
+										* hicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ hicm->par("calculation_overhead").longValue()
+								+ hicm->par("calculation_overhead").intValue()
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -733,7 +733,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -742,10 +742,10 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
 						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead").intValue()
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -771,7 +771,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_INTEGRATE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -779,7 +779,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -791,7 +791,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -801,10 +801,9 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
-						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+						int compression_funktion_delay = hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -831,7 +830,7 @@ void HI_CM_INTEGRATE::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_INTEGRATE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -881,10 +880,10 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == hicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == hicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== hicm->par("syncPriority").longValue()) {
+					== hicm->par("syncPriority").intValue()) {
 
 				ev << "DEBUG: HI_CM_STABLE membership new value"
 						<< pf->getMembership_new() << endl;
@@ -894,8 +893,8 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (hicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (hicm->par("max_transmission_delay").intValue())) {
 
 					ev
 							<< "WARNING: HI_CM_STABLE: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -922,7 +921,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -957,7 +956,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -1027,8 +1026,8 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -1083,10 +1082,8 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			compressedFrame->setType(IN_FRAME);
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
-			compressedFrame->setSync_domain(
-					hicm->par("syncDomain").longValue());
-			compressedFrame->setSync_priority(
-					hicm->par("syncPriority").longValue());
+			compressedFrame->setSync_domain(hicm->par("syncDomain"));
+			compressedFrame->setSync_priority(hicm->par("syncPriority"));
 			compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 			compressedFrame->setIntegration_cycle(cp->getIntegrationCycle());
 
@@ -1110,7 +1107,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
 
-			dd->setTimer(hicm->par("dispatch_delay").longValue());
+			dd->setTimer(hicm->par("dispatch_delay"));
 			dd->setSchedulingPriority(3);
 			dd->setFrameID(compressedFrame->getId());
 			tteScheduler->registerEvent(dd);
@@ -1124,8 +1121,8 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			delete cp;
 
 			if (inSchedule2(compressed_pit,
-					hicm->par("cm_scheduled_pit").longValue(),
-					hicm->par("acceptance_window").longValue())) {
+					hicm->par("cm_scheduled_pit"),
+					hicm->par("acceptance_window"))) {
 				//in Schedule
 				if (!clock_stack->empty()) {
 
@@ -1229,7 +1226,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("cm_clock_corr_pit") == 0) {
 
 			clock_corr = ((int) clock_stack->front().second)
-					- (int) (hicm->par("cm_scheduled_pit").longValue());
+					- (int) (hicm->par("cm_scheduled_pit").intValue());
 
 			tteScheduler->clockCorrection(clock_corr);
 
@@ -1247,7 +1244,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("cm_inc_pit") == 0) {
 
 			local_integration_cycle = (local_integration_cycle + 1)
-					% (hicm->par("max_integration_cycles").longValue());
+					% (hicm->par("max_integration_cycles").intValue());
 
 			tteScheduler->registerEvent(event4, true);
 			return;
@@ -1268,8 +1265,8 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			}
 
 			if (getValue(local_async_membership, 32)
-					>= hicm->par("cm_stable_threshold_async").longValue()) {
-				duration = hicm->par("cm_restart_timeout").longValue();
+					>= hicm->par("cm_stable_threshold_async").intValue()) {
+				duration = hicm->par("cm_restart_timeout");
 
 				event->setTimer(duration);
 				//local_clock=0;
@@ -1306,9 +1303,9 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			}
 
 			if ((getValue(local_sync_membership, 32)
-					< hicm->par("cm_stable_threshold_sync").longValue())
+					< hicm->par("cm_stable_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							< hicm->par("num_unstable_cycles").longValue())) {
+							< hicm->par("num_unstable_cycles").intValue())) {
 
 				stable_cycle_counter++;
 
@@ -1319,11 +1316,11 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			}
 
 			if ((getValue(local_sync_membership, 32)
-					< hicm->par("cm_stable_threshold_sync").longValue())
+					< hicm->par("cm_stable_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							>= hicm->par("num_unstable_cycles").longValue())) {
+							>= hicm->par("num_unstable_cycles").intValue())) {
 
-				duration = hicm->par("cm_restart_timeout").longValue();
+				duration = hicm->par("cm_restart_timeout");
 				event->setTimer(duration);
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -1348,7 +1345,7 @@ void HI_CM_STABLE::handleMessage(cMessage* message) {
 			}
 
 			if (getValue(local_sync_membership, 32)
-					>= hicm->par("cm_stable_threshold_sync").longValue()) {
+					>= hicm->par("cm_stable_threshold_sync").intValue()) {
 				tteScheduler->registerEvent(event2, true);
 				return;
 
@@ -1386,7 +1383,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -1454,7 +1451,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 
 				ow->setDestinationGate(hicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(hicm->par("observation_window_size").longValue());
+				ow->setTimer(hicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -1493,24 +1490,24 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(hicm->par("max_observation_window").longValue()
+								(hicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* hicm->par("observation_window_size").longValue();
+										* hicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ hicm->par("calculation_overhead").longValue()
+								+ hicm->par("calculation_overhead").intValue()
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -1532,7 +1529,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -1541,10 +1538,9 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
-						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+						int compression_funktion_delay = hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -1570,7 +1566,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_STABLE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -1578,7 +1574,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -1590,7 +1586,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -1600,10 +1596,9 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
-						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+						int compression_funktion_delay = hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -1630,7 +1625,7 @@ void HI_CM_STABLE::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_STABLE: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -1669,16 +1664,16 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == hicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == hicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== hicm->par("syncPriority").longValue()) {
+					== hicm->par("syncPriority").intValue()) {
 
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (hicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (hicm->par("max_transmission_delay").intValue())) {
 
 					ev
 							<< "WARNING: HI_CM_UNSYNC: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -1705,7 +1700,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -1733,7 +1728,7 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -1799,8 +1794,8 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -1846,8 +1841,8 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -1895,9 +1890,9 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
-					hicm->par("syncDomain").longValue());
+					hicm->par("syncDomain"));
 			compressedFrame->setSync_priority(
-					hicm->par("syncPriority").longValue());
+					hicm->par("syncPriority"));
 			compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 			compressedFrame->setIntegration_cycle(cp->getIntegrationCycle());
 
@@ -1922,19 +1917,19 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
 
-			dd->setTimer(hicm->par("dispatch_delay").longValue());
+			dd->setTimer(hicm->par("dispatch_delay"));
 			dd->setSchedulingPriority(3);
 			dd->setFrameID(compressedFrame->getId());
 			tteScheduler->registerEvent(dd);
 
 			if (getValue(cp->getMembership_new(), 32)
-					>= hicm->par("cm_unsync_to_sync_thrld").longValue()) {
+					>= hicm->par("cm_unsync_to_sync_thrld").intValue()) {
 
 				int currentTime = tteScheduler->getTicks();
 				//local_clock = cm_sceduled_receive_pit
 				tteScheduler->clockCorrection(
 						currentTime
-								- hicm->par("cm_scheduled_pit").longValue());
+								- hicm->par("cm_scheduled_pit").intValue());
 
 				local_sync_membership = cp->getMembership_new();
 				local_integration_cycle = cp->getIntegrationCycle();
@@ -1964,14 +1959,14 @@ void HI_CM_UNSYNC::handleMessage(cMessage* message) {
 			}
 
 			if (getValue(cp->getMembership_new(), 32)
-					< hicm->par("cm_unsync_to_sync_thrld").longValue()
+					< hicm->par("cm_unsync_to_sync_thrld").intValue()
 					&& getValue(cp->getMembership_new(), 32)
-							>= hicm->par("cm_unsync_to_tentative_thrld").longValue()) {
+							>= hicm->par("cm_unsync_to_tentative_thrld").intValue()) {
 				int currentTime = tteScheduler->getTicks();
 				//local_clock = cm_sceduled_receive_pit
 				tteScheduler->clockCorrection(
 						currentTime
-								- hicm->par("cm_scheduled_pit").longValue());
+								- hicm->par("cm_scheduled_pit").intValue());
 
 				local_sync_membership = cp->getMembership_new();
 				local_integration_cycle = cp->getIntegrationCycle();
@@ -2056,7 +2051,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -2124,7 +2119,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 
 				ow->setDestinationGate(hicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(hicm->par("observation_window_size").longValue());
+				ow->setTimer(hicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -2163,24 +2158,24 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(hicm->par("max_observation_window").longValue()
+								(hicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* hicm->par("observation_window_size").longValue();
+										* hicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
 						int compression_funktion_delay = restOW
-								+ hicm->par("calculation_overhead").longValue()
+								+ hicm->par("calculation_overhead").intValue()
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -2202,7 +2197,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -2211,10 +2206,9 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
-						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+						int compression_funktion_delay = hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -2240,7 +2234,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_UNSYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -2248,7 +2242,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -2260,7 +2254,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -2270,10 +2264,9 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
-						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+						int compression_funktion_delay = hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -2300,7 +2293,7 @@ void HI_CM_UNSYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_UNSYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -2346,10 +2339,10 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == hicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == hicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== hicm->par("syncPriority").longValue()) {
+					== hicm->par("syncPriority").intValue()) {
 
 				ev << "DEBUG: HI_CM_SYNC membership new value"
 						<< pf->getMembership_new() << endl;
@@ -2359,8 +2352,8 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (hicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (hicm->par("max_transmission_delay"))) {
 
 					ev
 							<< "WARNING: HI_CM_SYNC: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -2387,7 +2380,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -2422,7 +2415,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -2492,8 +2485,8 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -2549,9 +2542,9 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
-					hicm->par("syncDomain").longValue());
+					hicm->par("syncDomain"));
 			compressedFrame->setSync_priority(
-					hicm->par("syncPriority").longValue());
+					hicm->par("syncPriority"));
 			compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 			compressedFrame->setIntegration_cycle(cp->getIntegrationCycle());
 
@@ -2575,7 +2568,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
 
-			dd->setTimer(hicm->par("dispatch_delay").longValue());
+			dd->setTimer(hicm->par("dispatch_delay"));
 			dd->setSchedulingPriority(3);
 			dd->setFrameID(compressedFrame->getId());
 			tteScheduler->registerEvent(dd);
@@ -2589,8 +2582,8 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			delete cp;
 
 			if (inSchedule2(compressed_pit,
-					hicm->par("cm_scheduled_pit").longValue(),
-					hicm->par("acceptance_window").longValue())) {
+					hicm->par("cm_scheduled_pit"),
+					hicm->par("acceptance_window"))) {
 				//in Schedule
 				if (!clock_stack->empty()) {
 
@@ -2696,7 +2689,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("cm_clock_corr_pit") == 0) {
 
 			clock_corr = ((int) clock_stack->front().second)
-					- (int) (hicm->par("cm_scheduled_pit").longValue());
+					- (int) (hicm->par("cm_scheduled_pit"));
 
 			tteScheduler->clockCorrection(clock_corr);
 
@@ -2707,7 +2700,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("cm_inc_pit") == 0) {
 
 			local_integration_cycle = (local_integration_cycle + 1)
-					% (hicm->par("max_integration_cycles").longValue());
+					% (hicm->par("max_integration_cycles").intValue());
 
 			tteScheduler->registerEvent(event4, true);
 		}
@@ -2727,8 +2720,8 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			}
 
 			if (getValue(local_async_membership, 32)
-					>= hicm->par("cm_sync_threshold_async").longValue()) {
-				duration = hicm->par("cm_restart_timeout").longValue();
+					>= hicm->par("cm_sync_threshold_async").intValue()) {
+				duration = hicm->par("cm_restart_timeout");
 				event->setTimer(duration);
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -2767,7 +2760,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			tteScheduler->registerEvent(event2, true);
 
 			if (getValue(local_sync_membership, 32)
-					< hicm->par("cm_sync_threshold_sync").longValue()) {
+					< hicm->par("cm_sync_threshold_sync").intValue()) {
 
 				stable_cycle_counter = 0;
 				new (this) HI_CM_TENTATIVE_SYNC();
@@ -2776,9 +2769,9 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			}
 
 			if (((getValue(local_sync_membership, 32)
-					>= hicm->par("cm_sync_threshold_sync").longValue())
+					>= hicm->par("cm_sync_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							< hicm->par("num_stable_cycles").longValue())
+							< hicm->par("num_stable_cycles").intValue())
 					&& (hicm->par("cm_sync_to_stable_enabled").boolValue()))) {
 
 				stable_cycle_counter++;
@@ -2786,9 +2779,9 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 			}
 
 			if (((getValue(local_sync_membership, 32)
-					>= hicm->par("cm_sync_threshold_sync").longValue())
+					>= hicm->par("cm_sync_threshold_sync").intValue())
 					&& (stable_cycle_counter
-							>= hicm->par("num_stable_cycles").longValue())
+							>= hicm->par("num_stable_cycles").intValue())
 					&& (hicm->par("cm_sync_to_stable_enabled").boolValue()))) {
 
 				stable_cycle_counter = 0;
@@ -2797,7 +2790,7 @@ void HI_CM_SYNC::handleMessage(cMessage* message) {
 				return;
 			}
 			if ((getValue(local_sync_membership, 32)
-					>= hicm->par("cm_sync_threshold_sync").longValue())
+					>= hicm->par("cm_sync_threshold_sync").intValue())
 					&& (hicm->par("cm_sync_to_stable_enabled").boolValue())) {
 
 				stable_cycle_counter++;
@@ -2835,7 +2828,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -2903,7 +2896,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 
 				ow->setDestinationGate(hicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(hicm->par("observation_window_size").longValue());
+				ow->setTimer(hicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -2942,24 +2935,24 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(hicm->par("max_observation_window").longValue()
+								(hicm->par("max_observation_window")
 										- owc->getNumberOfObservationWindow())
-										* hicm->par("observation_window_size").longValue();
+										* hicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ hicm->par("calculation_overhead").longValue()
+								+ hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -2981,7 +2974,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -2990,10 +2983,10 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters").intValue());
 
 						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3019,7 +3012,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_SYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -3027,7 +3020,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -3039,7 +3032,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window").intValue()) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3049,10 +3042,10 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3079,7 +3072,7 @@ void HI_CM_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_SYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -3126,10 +3119,10 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == hicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == hicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== hicm->par("syncPriority").longValue()) {
+					== hicm->par("syncPriority").intValue()) {
 
 				ev << "DEBUG: HI_CM_TENTATIVE_SYNC membership new value"
 						<< pf->getMembership_new() << endl;
@@ -3139,8 +3132,8 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (hicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (hicm->par("max_transmission_delay").intValue())) {
 
 					ev
 							<< "WARNING: HI_CM_TENTATIVE_SYNC: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -3167,7 +3160,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -3204,7 +3197,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -3275,8 +3268,8 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -3322,8 +3315,8 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -3370,9 +3363,9 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
-					hicm->par("syncDomain").longValue());
+					hicm->par("syncDomain"));
 			compressedFrame->setSync_priority(
-					hicm->par("syncPriority").longValue());
+					hicm->par("syncPriority"));
 			compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 			compressedFrame->setIntegration_cycle(cp->getIntegrationCycle());
 
@@ -3396,7 +3389,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
 			//dd->setMembership_new(cp->getMembership_new());
-			dd->setTimer(hicm->par("dispatch_delay").longValue());
+			dd->setTimer(hicm->par("dispatch_delay"));
 			dd->setSchedulingPriority(3);
 			dd->setFrameID(compressedFrame->getId());
 			tteScheduler->registerEvent(dd);
@@ -3410,8 +3403,8 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			delete cp;
 
 			if (inSchedule2(compressed_pit,
-					hicm->par("cm_scheduled_pit").longValue(),
-					hicm->par("acceptance_window").longValue())) {
+					hicm->par("cm_scheduled_pit"),
+					hicm->par("acceptance_window"))) {
 				//in Schedule
 				if (!clock_stack->empty()) {
 
@@ -3517,7 +3510,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("cm_clock_corr_pit") == 0) {
 
 			clock_corr = ((int) clock_stack->front().second)
-					- (int) (hicm->par("cm_scheduled_pit").longValue());
+					- (int) (hicm->par("cm_scheduled_pit"));
 
 			tteScheduler->clockCorrection(clock_corr);
 
@@ -3528,7 +3521,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 		if (string(message->getName()).compare("cm_inc_pit") == 0) {
 
 			local_integration_cycle = (local_integration_cycle + 1)
-					% (hicm->par("max_integration_cycles").longValue());
+					% (hicm->par("max_integration_cycles").intValue());
 
 			tteScheduler->registerEvent(event4, true);
 		}
@@ -3547,7 +3540,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			}
 
 			if (getValue(local_async_membership, 32)
-					>= hicm->par("cm_tentative_sync_threshold_async").longValue()) {
+					>= hicm->par("cm_tentative_sync_threshold_async").intValue()) {
 
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -3584,7 +3577,7 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			}
 
 			if (getValue(local_sync_membership, 32)
-					< hicm->par("cm_tentative_sync_threshold_sync").longValue()) {
+					< hicm->par("cm_tentative_sync_threshold_sync").intValue()) {
 
 				//local_clock=0;
 				tteScheduler->clockCorrection(tteScheduler->getTicks());
@@ -3612,15 +3605,15 @@ void HI_CM_TENTATIVE_SYNC::handleMessage(cMessage* message) {
 			tteScheduler->registerEvent(event2, true);
 
 			if (((getValue(local_sync_membership, 32)
-					>= hicm->par("cm_tentative_sync_threshold_sync").longValue())
+					>= hicm->par("cm_tentative_sync_threshold_sync").intValue())
 					&& (getValue(local_sync_membership, 32)
-							< hicm->par("cm_tentative_to_sync_thrld").longValue()))) {
+							< hicm->par("cm_tentative_to_sync_thrld").intValue()))) {
 
 				return;
 			}
 
 			if ((getValue(local_sync_membership, 32)
-					>= hicm->par("cm_tentative_to_sync_thrld").longValue()))
+					>= hicm->par("cm_tentative_to_sync_thrld").intValue()))
 
 			{
 
@@ -3661,7 +3654,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -3731,7 +3724,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 
 				ow->setDestinationGate(hicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(hicm->par("observation_window_size").longValue());
+				ow->setTimer(hicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -3770,24 +3763,24 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window").intValue()) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(hicm->par("max_observation_window").longValue()
+								(hicm->par("max_observation_window")
 										- owc->getNumberOfObservationWindow())
-										* hicm->par("observation_window_size").longValue();
+										* hicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ hicm->par("calculation_overhead").longValue()
+								+ hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3809,7 +3802,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -3818,10 +3811,10 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3847,7 +3840,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_TENTATIVE_SYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -3855,7 +3848,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -3867,7 +3860,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -3877,10 +3870,10 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -3907,7 +3900,7 @@ void HI_CM_TENTATIVE_SYNC::compressionFunction(cMessage* message, HICM *hicm) {
 								<< "Compression Function HI_CM_TENTATIVE_SYNC: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}
@@ -3952,10 +3945,10 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 		PCFrame *pf = dynamic_cast<PCFrame *>(message);
 
-		if (pf->getSync_domain() == hicm->par("syncDomain").longValue()) {
+		if (pf->getSync_domain() == hicm->par("syncDomain").intValue()) {
 
 			if (pf->getSync_priority()
-					== hicm->par("syncPriority").longValue()) {
+					== hicm->par("syncPriority").intValue()) {
 
 				ev << "DEBUG: HI_CM_WAIT_4_CYCLE_START membership  value"
 						<< pf->getMembership_new() << endl;
@@ -3965,8 +3958,8 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 				if ((transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()))
-						> (unsigned int) (hicm->par("max_transmission_delay").longValue())) {
+								- pf->par("received_total").intValue()))
+						> (unsigned int) (hicm->par("max_transmission_delay").intValue())) {
 
 					ev
 							<< "WARNING: HI_CM_WAIT_4_CYCLE_START: (pkt->getTransparent_clock()) > max_transmission_delay "
@@ -3993,7 +3986,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -4026,7 +4019,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 											pf->getTransparent_clock(),
 											tteScheduler->par("tick").doubleValue())
 											+ (tteScheduler->getTotalTicks()
-													- pf->par("received_total").longValue()));
+													- pf->par("received_total").intValue()));
 
 					unsigned int member = pf->getMembership_new();
 
@@ -4115,7 +4108,7 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 				//local_clock = cm_sceduled_receive_pit
 				tteScheduler->clockCorrection(
 						currentTime
-								- hicm->par("cm_scheduled_pit").longValue());
+								- hicm->par("cm_scheduled_pit").intValue());
 
 				tteScheduler->registerEvent(event2);
 				//tteScheduler->registerEvent(event3);
@@ -4144,8 +4137,8 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -4192,8 +4185,8 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 				cMsgPar *par = &frame->addPar("created_total");
 				par->setLongValue(tteScheduler->getTotalTicks());
 
-				frame->setSync_domain(hicm->par("syncDomain").longValue());
-				frame->setSync_priority(hicm->par("syncPriority").longValue());
+				frame->setSync_domain(hicm->par("syncDomain"));
+				frame->setSync_priority(hicm->par("syncPriority"));
 				frame->setIntegration_cycle(et->getIntegrationCycle());
 				frame->setMembership_new(et->getMember());
 				frame->setTransparent_clock(0);
@@ -4241,9 +4234,9 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 			compressedFrame->setTransparent_clock(0);
 			compressedFrame->setMembership_new(cp->getMembership_new());
 			compressedFrame->setSync_domain(
-					hicm->par("syncDomain").longValue());
+					hicm->par("syncDomain"));
 			compressedFrame->setSync_priority(
-					hicm->par("syncPriority").longValue());
+					hicm->par("syncPriority"));
 			compressedFrame->setByteLength(46 + ETHER_MAC_FRAME_BYTES);
 			compressedFrame->setIntegration_cycle(cp->getIntegrationCycle());
 
@@ -4267,28 +4260,28 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 			DispatchDelay *dd = new DispatchDelay("DP", TIMER_EVENT);
 			dd->setDestinationGate(hicm->gate("schedulerIn"));
 
-			dd->setTimer(hicm->par("dispatch_delay").longValue());
+			dd->setTimer(hicm->par("dispatch_delay"));
 			dd->setSchedulingPriority(3);
 			dd->setFrameID(compressedFrame->getId());
 
 			tteScheduler->registerEvent(dd);
 
 			if (!((tteScheduler->getTicks()
-					>= (unsigned int)(hicm->par("cm_scheduled_pit").longValue()
-							- hicm->par("acceptance_window").longValue() / 2))
+					>= (unsigned int)(hicm->par("cm_scheduled_pit")
+							- hicm->par("acceptance_window").intValue() / 2))
 					&& (tteScheduler->getTicks()
-							<= (unsigned int)(hicm->par("cm_scheduled_pit").longValue()
-									+ hicm->par("acceptance_window").longValue()
+							<= (unsigned int)(hicm->par("cm_scheduled_pit")
+									+ hicm->par("acceptance_window").intValue()
 											/ 2)))) {
 
 				if (getValue(cp->getMembership_new(), 32)
-						>= hicm->par("cm_wait_threshold_sync").longValue()) {
+						>= hicm->par("cm_wait_threshold_sync").intValue()) {
 
 					int currentTime = tteScheduler->getTicks();
 					//local_clock = cm_sceduled_receive_pit
 					tteScheduler->clockCorrection(
 							currentTime
-									- hicm->par("cm_scheduled_pit").longValue());
+									- hicm->par("cm_scheduled_pit").intValue());
 
 					local_sync_membership = cp->getMembership_new();
 
@@ -4300,8 +4293,8 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 					tteScheduler->unregisterEvent(event);
 
-					duration = hicm->par("int_cycle_duration").longValue()
-							+ (hicm->par("acceptance_window").longValue() / 2);
+					duration = hicm->par("int_cycle_duration").intValue()
+							+ (hicm->par("acceptance_window").intValue() / 2);
 
 					delete cp;
 
@@ -4314,13 +4307,13 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 			if (cp->getIntegrationCycle() != local_integration_cycle) {
 
 				if (getValue(cp->getMembership_new(), 32)
-						>= hicm->par("cm_wait_threshold_sync").longValue()) {
+						>= hicm->par("cm_wait_threshold_sync").intValue()) {
 
 					int currentTime = tteScheduler->getTicks();
 					//local_clock = cm_sceduled_receive_pit
 					tteScheduler->clockCorrection(
 							currentTime
-									- hicm->par("cm_scheduled_pit").longValue());
+									- hicm->par("cm_scheduled_pit").intValue());
 
 					local_sync_membership = cp->getMembership_new();
 
@@ -4332,8 +4325,8 @@ void HI_CM_WAIT_4_CYCLE_START::handleMessage(cMessage* message) {
 
 					tteScheduler->unregisterEvent(event);
 
-					duration = hicm->par("int_cycle_duration").longValue()
-							+ (hicm->par("acceptance_window").longValue() / 2);
+					duration = hicm->par("int_cycle_duration").intValue()
+							+ (hicm->par("acceptance_window").intValue() / 2);
 
 					delete cp;
 
@@ -4396,7 +4389,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 				- (transparentClockToTicks(pf->getTransparent_clock(),
 						tteScheduler->par("tick").doubleValue())
 						+ (tteScheduler->getTotalTicks()
-								- pf->par("received_total").longValue()));
+								- pf->par("received_total").intValue()));
 
 		//IN FRAME ?
 		if (pf->getType() == IN_FRAME) {
@@ -4464,7 +4457,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 
 				ow->setDestinationGate(hicm->gate("schedulerIn"));
 				ow->setSchedulingPriority(3);
-				ow->setTimer(hicm->par("observation_window_size").longValue());
+				ow->setTimer(hicm->par("observation_window_size"));
 
 				ow->setNumberOfObservationWindow(1);
 				ow->setLastNumberOfFrames(1);
@@ -4503,24 +4496,24 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 					// stop collecting
 					//check reaching max_observation_window
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
 						int restOW =
-								(hicm->par("max_observation_window").longValue()
+								(hicm->par("max_observation_window").intValue()
 										- owc->getNumberOfObservationWindow())
-										* hicm->par("observation_window_size").longValue();
+										* hicm->par("observation_window_size").intValue();
 
 						int compression_correction =
 								compress(
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = restOW
-								+ hicm->par("calculation_overhead").longValue()
+								+ hicm->par("calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4542,7 +4535,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 						delete owc;
 						return;
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window")) {
 
 						//calculate the compression_funktion_delay and register the event for compressed pit
 
@@ -4551,10 +4544,10 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4580,7 +4573,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 								<< "Compression Function HI_CM_WAIT_4_CYCLE_START: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 					}
 
@@ -4588,7 +4581,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 						< compression_stack->find(owc->getIntegrationCycle())->second->size()) {
 					//pcf became permanent during the last observation window, check max ow reached
 					if (owc->getNumberOfObservationWindow()
-							< (unsigned int)hicm->par("max_observation_window").longValue()) {
+							< (unsigned int)hicm->par("max_observation_window")) {
 						//open another ow
 						int new_ow = (owc->getNumberOfObservationWindow()) + 1;
 						int new_number_frames = compression_stack->find(
@@ -4600,7 +4593,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 						tteScheduler->registerEvent(owc);
 
 					} else if (owc->getNumberOfObservationWindow()
-							== (unsigned int)hicm->par("max_observation_window").longValue()) {
+							== (unsigned int)hicm->par("max_observation_window")) {
 						//max_ow_reached
 						//stop collecting
 						//calculate the compression_funktion_delay and register the event for compressed pit
@@ -4610,10 +4603,10 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 										compression_stack->find(
 												owc->getIntegrationCycle())->second,
 										hicm->par(
-												"faulty_synchronisatzation_masters").longValue());
+												"faulty_synchronisatzation_masters"));
 
 						int compression_funktion_delay = hicm->par(
-								"calculation_overhead").longValue()
+								"calculation_overhead")
 								+ compression_correction;
 
 						unsigned int roundMember = setBits(
@@ -4640,7 +4633,7 @@ void HI_CM_WAIT_4_CYCLE_START::compressionFunction(cMessage* message,
 								<< "Compression Function HI_CM_WAIT_4_CYCLE_START: Error END OBSERVATION WINDOW:"
 								<< owc->getNumberOfObservationWindow() << endl;
 						ev << "MAX Observation Window: "
-								<< hicm->par("max_observation_window").longValue()
+								<< hicm->par("max_observation_window").intValue()
 								<< endl;
 
 					}

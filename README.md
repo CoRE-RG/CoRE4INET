@@ -6,16 +6,17 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 
 
 ## News
+* Update dependencies to OMNeT++ 5.5.1 and INET 3.6.6 
 * Added IEEE 802.1Qci filtering and TSN nodes.
 * Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
 
 
 ## Quick Start
-1. Download OMNeT++ 5.1.1
-    * [https://omnetpp.org/download/old](https://omnetpp.org/download/old)
+1. Download OMNeT++ 5.5.1
+    * [https://omnetpp.org/download/](https://omnetpp.org/download/)
 2. Install OMNeT++
     * [https://doc.omnetpp.org/omnetpp/InstallGuide.pdf](https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)
-3. Get INET framework 3.5
+3. Get INET framework 3.6.6
     * [https://inet.omnetpp.org/Download.html](https://inet.omnetpp.org/Download.html)
 4. Install CoRE plugins (optional)
     * OMNEST/OMNeT++ -> Help -> Install New Software...
@@ -33,9 +34,9 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 
 The build state of the master branch is monitored:
 * Building:
-<img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET">
+<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET"></p>
 * Tests:
-<img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests">
+<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests"></p>
 
 <table>
   <tr>

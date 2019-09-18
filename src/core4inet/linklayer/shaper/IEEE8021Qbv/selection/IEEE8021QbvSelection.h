@@ -80,19 +80,19 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      *
      * @param stage The stages. Module initializes when stage==0
      */
-    virtual void initialize(int stage);
+    virtual void initialize(int stage) override;
     /**
      * @brief Indicates a parameter has changed.
      *
      * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
      */
-    virtual void handleParameterChange(const char* parname);
+    virtual void handleParameterChange(const char* parname) override;
     /**
      * @brief Handles incoming messages and forwards them to the MAC module.
      *
      * @param msg incoming inet::EtherFrame
      */
-    virtual void handleMessage(cMessage *msg);
+    virtual void handleMessage(cMessage *msg) override;
     /**
      * @brief this method is invoked when the underlying mac is idle.
      *
@@ -104,7 +104,9 @@ class IEEE8021QbvSelection : public virtual BaseShaper
     /**
      * @brief Called at the end of simulation. Records frames + bytes per second results.
      */
-    virtual void finish();
+    virtual void finish() override;
+
+    using omnetpp::cIListener::finish;
 
   private:
     /**

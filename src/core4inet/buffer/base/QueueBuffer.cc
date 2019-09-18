@@ -40,7 +40,7 @@ void QueueBuffer::initializeStatistics()
 
 void QueueBuffer::enqueue(inet::EtherFrame *newFrame)
 {
-    int max_size = static_cast<int>(par("size").longValue());
+    int max_size = par("size");
     if (max_size >= 0 && frames.getLength() >= max_size)
     {
         emit(droppedSignal, newFrame);

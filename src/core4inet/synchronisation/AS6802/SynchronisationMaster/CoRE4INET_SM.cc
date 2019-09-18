@@ -39,7 +39,7 @@ void SM::initialize(int stage){
 
         //str= "/home/pcman/from_thinkpad/TTEthernetModel/examples/SICM_TEST_AS6802_sync/results/syncmaster";
         str = "syncmaster";
-        ss<<this->par("bit_index").longValue();
+        ss<<this->par("bit_index").intValue();
         str+=ss.str();
         fp = NULL;
         if(this->par("read").boolValue()){

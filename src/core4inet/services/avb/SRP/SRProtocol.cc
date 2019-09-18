@@ -95,8 +95,7 @@ void SRProtocol::handleMessage(cMessage *msg)
 
                 unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
                 //Add Higher Priority Bandwidth
-                utilizedBandwidth += static_cast<unsigned long>(port->getSubmodule("shaper")->par(
-                        "AVBHigherPriorityBandwidth").longValue());
+                utilizedBandwidth += static_cast<unsigned long>(port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth"));
                 unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(),
                         listenerReady->getVlan_identifier());
 

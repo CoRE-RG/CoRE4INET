@@ -43,7 +43,7 @@ void TocApp::handleMessage(cMessage *msg)
             Tic *tic = dynamic_cast<Tic*>(ttframe->decapsulate());
             delete msg;
             bubble(tic->getRequest());
-            par("counter").setLongValue(static_cast<long>(tic->getCount()));
+            par("counter").setIntValue(static_cast<long>(tic->getCount()));
 
             Toc *toc = new Toc();
             toc->setTimestamp();
@@ -53,7 +53,7 @@ void TocApp::handleMessage(cMessage *msg)
 
             CTFrame *frame = new RCFrame("Toc");
             frame->setTimestamp();
-            frame->setCtID(static_cast<uint16_t>(par("ct_id").longValue()));
+            frame->setCtID(par("ct_id"));
             frame->encapsulate(toc);
 
             EV_DETAIL << "Answering Tic Message with Toc Message\n";

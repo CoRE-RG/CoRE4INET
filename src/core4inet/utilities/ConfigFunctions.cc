@@ -104,7 +104,7 @@ long parameterLongCheckRange(const cPar &parameter, long min, long max, bool exc
         throw cRuntimeError("Parameter %s of %s is not of type long", parameter.getFullName(),
                 parameter.getOwner()->getFullPath().c_str());
     }
-    long value = parameter.longValue();
+    long value = parameter;
     if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
             || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
     {
@@ -127,11 +127,11 @@ unsigned long parameterULongCheckRange(const cPar &parameter, unsigned long min,
         throw cRuntimeError("Parameter %s of %s is not of type long", parameter.getFullName(),
                 parameter.getOwner()->getFullPath().c_str());
     }
-    if(parameter.longValue()<0){
+    if(parameter.intValue()<0){
         throw cRuntimeError("Parameter %s of %s is not allowed to be negative", parameter.getFullName(),
                         parameter.getOwner()->getFullPath().c_str());
     }
-    unsigned long value = static_cast<unsigned long>(parameter.longValue());
+    unsigned long value = parameter;
     if (((exclude_min && (value <= min)) || (!exclude_min && (value < min)))
             || ((exclude_max && (value >= max)) || (!exclude_max && (value > max))))
     {

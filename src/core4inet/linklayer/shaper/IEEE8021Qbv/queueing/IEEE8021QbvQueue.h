@@ -71,7 +71,7 @@ class IEEE8021QbvQueue : public virtual BGQueueBuffer
     /**
      * @brief Components that contain visualization-related code are expected to override refreshDisplay().
      */
-    virtual void refreshDisplay() const;
+    virtual void refreshDisplay() const  override;
 
 };
 
