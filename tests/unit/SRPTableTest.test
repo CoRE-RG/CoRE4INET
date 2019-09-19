@@ -13,7 +13,7 @@ network = Test
 cmdenv-express-mode = false
 output-vector-file = test.vec
 output-scalar-file = test.sca
-simtime-scale = -12
+simtime-resolution = -12
 
 %global:
 #define PrintModulelist(X)  for (std::list<cModule*>::iterator module = X.begin(); module!=X.end();module++){EV_TRACE<<(*module)->getName()<< " ";}

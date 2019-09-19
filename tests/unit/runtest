@@ -4,9 +4,9 @@
 # without args, runs all *.test files in the current directory
 #
 
-MAKE="make MODE=debug"
+MAKE="make"
 
-DBG_SUFFIX="_dbg"
+DBG_SUFFIX=""
 
 TESTFILES=$*
 if [ "x$TESTFILES" = "x" ]; then TESTFILES='*.test'; fi
