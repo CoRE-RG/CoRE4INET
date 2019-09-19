@@ -8,10 +8,15 @@ cleanall: checkmakefiles
 	cd src && $(MAKE) MODE=release clean
 	cd src && $(MAKE) MODE=debug clean
 	rm -f src/Makefile src/features.h
-
+	
+DBG_SUFFIX=""
+ifneq (,$(findstring debug, $(MODE)))
+	DBG_SUFFIX="_dbg"
+endif
+	
 INET_PROJ=../../inet
 EXTRA_INCLUDES= -Icore4inet/api/AS6802/tte_api
-MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=../../inet -I. $(EXTRA_INCLUDES) -I$(INET_PROJ)/src/ -L$$\(INET_PROJ\)/out/$$\(CONFIGNAME\)/src -lINET_dbg 
+MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=../../inet -I. $(EXTRA_INCLUDES) -I$(INET_PROJ)/src/ -L$$\(INET_PROJ\)/out/$$\(CONFIGNAME\)/src -lINET$(DBG_SUFFIX)
 
 
 makefiles: src/core4inet/features.h makefiles-so
