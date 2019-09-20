@@ -34,9 +34,9 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 
 The build state of the master branch is monitored:
 * Building:
-<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET"></p>
+<a><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET"></a>
 * Tests:
-<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests"></p>
+<a><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests"></a>
 
 <table>
   <tr>
