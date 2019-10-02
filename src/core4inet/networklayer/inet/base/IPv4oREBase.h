@@ -75,6 +75,9 @@ class IPv4oREBase : public inet::IPv4 {
         std::list<IPoREFilter*> getFilters(DestinationType destType);
 
     protected:
+
+        virtual void handleMessage(cMessage* msg);
+
         std::list<IPoREFilter*> m_filterList;
         cEnum *m_protocolEnum;
 };

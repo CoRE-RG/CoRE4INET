@@ -29,6 +29,8 @@
 #include "inet/networklayer/common/L3Address.h"
 #include "inet/networklayer/common/L3AddressResolver.h"
 #include "inet/transportlayer/udp/UDPPacket.h"
+#include "inet/networklayer/ipv4/IPv4Datagram.h"
+#include "inet/networklayer/arp/ipv4/ARPPacket_m.h"
 
 #include <algorithm>
 
@@ -53,6 +55,24 @@ IPv4oREBase::~IPv4oREBase()
     }
     m_filterList.clear();
 }
+
+void IPv4oREBase::handleMessage(cMessage* msg) {
+    if (msg->arrivedOn("queueIn"))
+    {
+        if (dynamic_cast<inet::ARPPacket *>(msg) || dynamic_cast<inet::IPv4Datagram *>(msg))
+            inet::IPv4::handleMessage(msg);
+        else {
+            //message type will not be known by upper layer so drop it...
+            delete msg;
+        }
+    }
+    else
+    {
+        inet::IPv4::handleMessage(msg);
+    }
+}
+
+//==============================================================================
 
 //==============================================================================
 

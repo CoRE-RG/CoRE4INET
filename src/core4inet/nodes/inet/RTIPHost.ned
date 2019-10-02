@@ -164,7 +164,7 @@ module RTIPHost
         }
 
         bgOut: BGQueueBuffer {
-            @display("p=141,99");
+            @display("p=269,232");
         }
 
         // linklayer
@@ -196,7 +196,7 @@ module RTIPHost
             netPerfMeterApp[i].udpOut --> udp.appIn++;
             netPerfMeterApp[i].udpIn <-- udp.appOut++;
         }
-        
+
         for i=0..numTcpApps-1 {
             tcpApp[i].tcpOut --> tcp.appIn++;
             tcpApp[i].tcpIn <-- tcp.appOut++;

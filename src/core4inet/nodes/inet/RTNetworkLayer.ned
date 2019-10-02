@@ -15,6 +15,7 @@
 
 package core4inet.nodes.inet;
 
+import inet.networklayer.contract.IARP;
 import inet.networklayer.arp.ipv4.ARP;
 import inet.networklayer.configurator.ipv4.IPv4NodeConfigurator;
 import inet.networklayer.ipv4.ErrorHandling;
@@ -37,6 +38,7 @@ module RTNetworkLayer
     parameters:
         bool proxyARP = default(true);
         string igmpType = default("IGMPv2");
+        string arpType = default("ARP");
         string interfaceTableModule;
         string routingTableModule;
         *.interfaceTableModule = default(absPath(interfaceTableModule));
@@ -70,7 +72,7 @@ module RTNetworkLayer
                 queueIn[sizeof(ifIn)];
                 queueOut[sizeof(ifOut)];
         }
-        arp: ARP {
+        arp: <arpType> like IARP {
             parameters:
                 @display("p=202,142;q=pendingQueue");
         }
