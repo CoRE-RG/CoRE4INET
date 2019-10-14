@@ -12,27 +12,27 @@ network = Test
 cmdenv-express-mode = false
 output-vector-file = test.vec
 output-scalar-file = test.sca
-simtime-scale = -12
+simtime-resolution = -12
 
 %global:
-#define S2TC(X)  EV_TRACE << std::dec << X << "s-->" << "0x" << std::hex<< CoRE4INET::secondsToTransparentClock(X) << std::dec << "\n"
-#define T2TC(X,Y)  EV_TRACE << std::dec << X << "ticks-->"  "0x" << std::hex<< CoRE4INET::ticksToTransparentClock(X, Y) << std::dec << "\n"
-#define TC2T(X,Y)  EV_TRACE << "0x" << std::hex << X << "-->" << std::dec << CoRE4INET::transparentClockToTicks(X, Y) << "ticks" << std::dec <<"\n"
+#define S2TC(X)  EV_INFO << std::dec << X << "s-->" << "0x" << std::hex<< CoRE4INET::secondsToTransparentClock(X) << std::dec << "\n"
+#define T2TC(X,Y)  EV_INFO << std::dec << X << "ticks-->"  "0x" << std::hex<< CoRE4INET::ticksToTransparentClock(X, Y) << std::dec << "\n"
+#define TC2T(X,Y)  EV_INFO << "0x" << std::hex << X << "-->" << std::dec << CoRE4INET::transparentClockToTicks(X, Y) << "ticks" << std::dec <<"\n"
 
 %activity:
 S2TC(0);
 S2TC(0.000000001);
 S2TC(0.0000000025);
 S2TC(1);
-EV_TRACE << ".\n";
+EV_INFO << ".\n";
 T2TC(0,0.00000008);
 T2TC(1,0.00000008);
 T2TC(12500,0.00000008);
-EV_TRACE << ".\n";
+EV_INFO << ".\n";
 TC2T(0x0,0.00000008);
 TC2T(0x500000,0.00000008);
 TC2T(0xf42400000,0.00000008);
-EV_TRACE << ".\n";
+EV_INFO << ".\n";
 
 %contains-regex: stdout
 0s-->0x0
