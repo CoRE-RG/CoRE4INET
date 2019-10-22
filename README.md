@@ -21,7 +21,7 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 4. Install CoRE plugins (optional)
     * OMNEST/OMNeT++ -> Help -> Install New Software...
     * URL `http://sim.core-rg.de/updates/`
-    * Check [Abstract Network Description Language] | [CoRE Simulation Model Installer] | [Gantt Chart Timing Analyzer]
+    * Check [[Abstract Network Description Language](https://core-researchgroup.de/projects/simulation/abstract-network-description-language.html)] | [CoRE Simulation Model Installer] | [Gantt Chart Timing Analyzer]
 5. Get CoRE framework (GitHub or CoRE Simulation Model Installer)
     * GitHub: Clone framework and import it in OMNEST/OMNeT++
     * CoRE Simulation Model Installer: OMNEST/OMNeT++ -> Help -> Install CoRE Simulation Models...
@@ -58,6 +58,8 @@ The build state of the master branch is monitored:
 
 
 ## Further Information
+* [CoRE simulation models overview](https://core-researchgroup.de/projects/simulation.html)
+* [Abstract Network Description Language (ANDL) overview](https://core-researchgroup.de/projects/simulation/abstract-network-description-language.html)
 
 ### Installation
 Please see [INSTALL](/INSTALL)
