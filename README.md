@@ -11,6 +11,27 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 * Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
 
 
+## Features
+* Best Efford Crosstraffic
+* IEEE 802.1Q / IEEE P802.1p VLANs and Priorities
+* Time-Sensitive Networking (TSN)
+* IEEE 802.1 Audio/Video Bridging (AVB)
+* TTEthernet (AS6802)
+* IP over Realtime-Ethernet
+
+
+## History
+CoRE4INET was first introduced as TTE4INET at the [4th International Workshop on OMNeT++ (2011)](http://www.omnet-workshop.org/2011/) along with the [4th International ICST Conference on Simulation Tools and Techniques (2011)](http://www.simutools.org/2011/). You can find the [publication](http://core.informatik.haw-hamburg.de/images/publications/papers/sdkks-eifre-11a.pdf) and [slides](http://core.informatik.haw-hamburg.de/images/publications/papers/sdkks-eifre-11b.pdf) here.
+
+Since there were changes necessary to support OMNeT++ 4.2 and INET 2.0, it was completely redesigned. When more real-time Ethernet protocols were added the project was renamed from TTE4INET to CoRE4INET to show that it does not only contain time-triggered protocols.
+
+
+## References
+If you would like to reference this project please use the following [publication](http://core.informatik.haw-hamburg.de/images/publications/papers/sdkks-eifre-11a.pdf):
+
+T. Steinbach, H. Dieumo Kenfack, F. Korf, and T. C. Schmidt. An Extension of the OMNeT++ INET Framework for Simulating Real-time Ethernet with High Accuracy. In Proceedings of the 4th International ICST Conference on Simulation Tools and Techniques, SIMUTools '11, pages 375-382, ICST, Brussels, Belgium, Belgium, 2011. ICST (Institute for Computer Sciences, Social-Informatics and Telecommunications Engineering).
+
+
 ## Quick Start
 1. Download OMNeT++ 5.5.1
     * [https://omnetpp.org/download/](https://omnetpp.org/download/)
