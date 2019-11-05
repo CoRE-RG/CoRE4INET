@@ -30,39 +30,49 @@ void IEEE8021QbvIncoming::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
-        if (AVBFrame *inFrame = dynamic_cast<AVBFrame*>(msg))
+        if (const inet::EthernetIIFrame* ether2frame = dynamic_cast<const inet::EthernetIIFrame*>(msg))
         {
-            std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(inFrame->getDest(),
-                    inFrame->getVID());
-            if (listeners.empty())
+            if (ether2frame->getEtherType() == 0x8100)
             {
-                emit(droppedSignal, inFrame);
-            }
-            else
-            {
-                for (std::list<cModule*>::const_iterator listener = listeners.begin(); listener != listeners.end();
-                        ++listener)
+                if (const EthernetIIFrameWithQTag* qframe = dynamic_cast<const EthernetIIFrameWithQTag*>(ether2frame))
                 {
-                    if (strcmp((*listener)->getName(), "phy") == 0)
+                    std::list<cModule*> listeners = srptable->getListenersForTalkerAddress(qframe->getDest(),
+                            qframe->getVID());
+                    if (listeners.empty())
                     {
-                        sendDirect(inFrame->dup(), 0, getHardwareDelay(), (*listener)->gate("upperLayerDirectIn"));
-                        emit(rxPkSignal, inFrame);
+                        emit(droppedSignal, qframe);
                     }
                     else
                     {
-                        if ((*listener)->hasGate("AVBin"))
+                        for (std::list<cModule*>::const_iterator listener = listeners.begin(); listener != listeners.end();
+                                ++listener)
                         {
-                            sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
-                            emit(rxPkSignal, inFrame);
+                            if (strcmp((*listener)->getName(), "phy") == 0)
+                            {
+                                sendDirect(qframe->dup(), 0, getHardwareDelay(), (*listener)->gate("upperLayerDirectIn"));
+                                emit(rxPkSignal, qframe);
+                            }
+                            else
+                            {
+                                if ((*listener)->hasGate("AVBin"))
+                                {
+                                    sendDirect(qframe->dup(), (*listener)->gate("AVBin"));
+                                    emit(rxPkSignal, qframe);
+                                }
+                            }
                         }
                     }
+                    delete qframe;
+                }
+                else
+                {
+                    throw cRuntimeError("Ethertype is 0x8100 but message type is not EthernetIIFrameWithQTag");
                 }
             }
-            delete inFrame;
-        }
-        else
-        {
-            throw cRuntimeError("Received non-AVBFrame frame");
+            else
+            {
+                throw cRuntimeError("Received non-AVBFrame frame");
+            }
         }
     }
     else
