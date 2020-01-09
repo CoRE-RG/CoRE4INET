@@ -123,6 +123,7 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
     if (duration > 0)
     {
         unsigned long reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+        // TODO Add Warning when reservedBandwidth is zero.
         this->credit += static_cast<int>(ceil(static_cast<double>(reservedBandwidth) * duration.dbl()));
         if (maxCreditZero && this->credit > 0)
         {

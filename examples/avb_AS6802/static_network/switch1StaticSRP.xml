@@ -1,7 +1,7 @@
 <srpTable>
     <talkerTable vlan_id="2">
-        <talkerEntry stream_id="2" srClass="A" address="AB-AA-00-00-00-02" module="static_network.switch1.phy[1]" framesize="372" intervalFrames="1" pcp="6"/>
-        <talkerEntry stream_id="1" srClass="B" address="AB-AA-00-00-00-01" module="static_network.switch1.phy[0]" framesize="372" intervalFrames="1" pcp="5"/>
+        <talkerEntry stream_id="2" srClass="B" address="AB-AA-00-00-00-02" module="static_network.switch1.phy[1]" framesize="372" intervalFrames="1" pcp="5"/>
+        <talkerEntry stream_id="1" srClass="A" address="AB-AA-00-00-00-01" module="static_network.switch1.phy[0]" framesize="372" intervalFrames="1" pcp="6"/>
     </talkerTable>
     <listenerTable vlan_id="2">
         <listeners stream_id="2">

@@ -707,9 +707,9 @@ bool SRPTable::importFromXML(cXMLElement* xml) {
 
                     if(const char* value = (*talkerEntryIter)->getAttribute("srClass")){
                         SR_CLASS srClass;
-                        if (strcmp(value, "A")){
+                        if (!strcmp(value, "A")){
                             srClass = SR_CLASS::A;
-                        } else if (strcmp(value, "B")){
+                        } else if (!strcmp(value, "B")){
                             srClass = SR_CLASS::B;
                         } else {
                             break;
