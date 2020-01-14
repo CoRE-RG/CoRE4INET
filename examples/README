@@ -17,7 +17,7 @@ Example simulations are grouped into the following subdirectories:
    avb_AS6802/small_network/                             example that shows a small network with avb and AS6802 traffic
    avb_AS6802/large_network/                             example that shows a larger network with avb and AS6802 traffic
    inet/small_network                                    example that shows a small network with IP traffic sent over AS6802 and avb
-
+   ...
 
 The package's main README file contains links to additional info to help you
 get started with the model.
