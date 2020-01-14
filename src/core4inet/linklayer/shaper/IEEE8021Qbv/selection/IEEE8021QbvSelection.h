@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QBVSELECTION_H_
-#define __CORE4INET_IEEE8021QBVSELECTION_H_
+#ifndef CORE4INET_IEEE8021QBVSELECTION_H_
+#define CORE4INET_IEEE8021QBVSELECTION_H_
 
 //std
 #include <omnetpp.h>
@@ -88,7 +88,7 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      *
      * @param src src module
      * @param id signal id
-     * @param obj the related state
+     * @param l the related state
      */
     virtual void receiveSignal(cComponent *src, simsignal_t id, long l, cObject *details) override;
     /**
@@ -103,8 +103,6 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * @brief Called at the end of simulation. Records frames + bytes per second results.
      */
     virtual void finish() override;
-
-    //using omnetpp::cIListener::finish;
 
   private:
     /**

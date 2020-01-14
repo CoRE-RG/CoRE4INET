@@ -13,16 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QBVGATECONTROLLIST_H_
-#define __CORE4INET_IEEE8021QBVGATECONTROLLIST_H_
+#ifndef CORE4INET_IEEE8021QBVGATECONTROLLIST_H_
+#define CORE4INET_IEEE8021QBVGATECONTROLLIST_H_
 
 //std
 #include <omnetpp.h>
 //CoRE4INET
 #include "core4inet/utilities/classes/Scheduled.h"
 
-using namespace omnetpp;
 using namespace std;
+using namespace omnetpp;
 
 namespace CoRE4INET {
 

@@ -13,14 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QBVQUEUEING_H_
-#define __CORE4INET_IEEE8021QBVQUEUEING_H_
+#ifndef CORE4INET_IEEE8021QBVQUEUEING_H_
+#define CORE4INET_IEEE8021QBVQUEUEING_H_
 
 //std
 #include <omnetpp.h>
 //CoRE4INET
 #include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
 
+using namespace std;
 using namespace omnetpp;
 
 namespace CoRE4INET {

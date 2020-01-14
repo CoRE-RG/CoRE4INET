@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_CREDITBASEDSHAPER_H_
-#define __CORE4INET_CREDITBASEDSHAPER_H_
+#ifndef CORE4INET_CREDITBASEDSHAPER_H_
+#define CORE4INET_CREDITBASEDSHAPER_H_
 
 //std
 #include <omnetpp.h>
@@ -89,7 +89,7 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
     /**
      * @brief Destructor
      */
-    virtual ~CreditBasedShaper(){}
+    virtual ~CreditBasedShaper() override {}
     /**
      * @brief Check if CBS state is open.
      *
