@@ -692,6 +692,12 @@ string SRPTable::exportToXML() {
 
 bool SRPTable::importFromXML(cXMLElement* xml) {
     bool updated = false;
+    string modulePrefix = "";
+    if(const char* value = xml->getAttribute("modulePrefix")){
+        modulePrefix = value;
+        modulePrefix += ".";
+    }
+
     //get talker tables
     omnetpp::cXMLElementList talkerTablesXML = xml->getChildrenByTagName(
             "talkerTable");
@@ -722,7 +728,8 @@ bool SRPTable::importFromXML(cXMLElement* xml) {
                             }
 
                             if(const char* value = (*talkerEntryIter)->getAttribute("module")){
-                                cModule* module = getModuleByPath(value);
+                                string modulePath = modulePrefix + value;
+                                cModule* module = getModuleByPath(modulePath.c_str());
 
                                 if(module){
                                     if(const char* value = (*talkerEntryIter)->getAttribute("framesize")){
@@ -765,7 +772,8 @@ bool SRPTable::importFromXML(cXMLElement* xml) {
                     omnetpp::cXMLElementList listenerEntriesXML = (*listenersIter)->getChildrenByTagName("listenerEntry");
                     for(auto listenerEntryIter = listenerEntriesXML.begin();listenerEntryIter != listenerEntriesXML.end();++listenerEntryIter){
                         if(const char* value = (*listenerEntryIter)->getAttribute("module")){
-                            cModule* module = getModuleByPath(value);
+                            string modulePath = modulePrefix + value;
+                            cModule* module = getModuleByPath(modulePath.c_str());
 
                             if(module){
                                 //all values are set correctly --> insert listener.
