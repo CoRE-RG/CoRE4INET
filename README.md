@@ -6,7 +6,7 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 
 
 ## News
-* Switch to OMNeT++ 5.5.1 and INET 3.6.6 
+* Updated to support OMNeT++ 5.5.1 and INET 3.6.6 
 * Added IEEE 802.1Qci filtering and TSN nodes.
 * Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
 
