@@ -36,6 +36,11 @@ extern simsignal_t NF_AVB_LISTENER_UNREGISTERED; //signal emitted when a listene
 extern simsignal_t NF_AVB_LISTENER_REGISTRATION_TIMEOUT; //signal emitted when a listeners registration failed
 #endif
 
+
+#ifdef WITH_IEEE8021QBV_COMMON
+extern simsignal_t NF_QBV_STATE_CHANGED; //emitted when a IEEE 802.1Qbv shaping submodule state is changed
+#endif
+
 }
 
 #endif /* CORE4INET_NOTIFIERCONSTS_H_ */

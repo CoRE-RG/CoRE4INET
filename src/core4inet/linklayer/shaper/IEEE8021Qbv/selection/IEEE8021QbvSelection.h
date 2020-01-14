@@ -50,10 +50,6 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      */
     unsigned int numPCP;
     /**
-     * @brief Number of frames requested by MAC module.
-     */
-    size_t framesRequested;
-    /**
      * @brief Counts number of frames per pcp.
      */
     std::vector<unsigned long> numFrames;
@@ -67,12 +63,6 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * @brief Constructor
      */
     IEEE8021QbvSelection();
-    /**
-     * @brief Report change to transmission selection.
-     *
-     * The frame selection process gets triggered.
-     */
-    virtual void reportChange();
 
   protected:
     /**
@@ -94,6 +84,14 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      */
     virtual void handleMessage(cMessage *msg) override;
     /**
+     * @brief handles signals containing qbv state changes
+     *
+     * @param src src module
+     * @param id signal id
+     * @param obj the related state
+     */
+    virtual void receiveSignal(cComponent *src, simsignal_t id, long l, cObject *details) override;
+    /**
      * @brief this method is invoked when the underlying mac is idle.
      *
      * When this method is invoked the module sends a new message when there is
@@ -106,7 +104,7 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      */
     virtual void finish() override;
 
-    using omnetpp::cIListener::finish;
+    //using omnetpp::cIListener::finish;
 
   private:
     /**

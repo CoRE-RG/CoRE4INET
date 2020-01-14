@@ -27,4 +27,7 @@ simple IEEE8021QbvQueue extends BGQueueBuffer
 {
     parameters:
         @class(IEEE8021QbvQueue);
+        
+        //Signal emitted when state changes
+        @signal[NF_QBV_STATE_CHANGED](type=long);
 }

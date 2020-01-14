@@ -28,4 +28,9 @@ simsignal_t NF_AVB_LISTENER_UPDATED = cComponent::registerSignal("NF_AVB_LISTENE
 simsignal_t NF_AVB_LISTENER_UNREGISTERED = cComponent::registerSignal("NF_AVB_LISTENER_UNREGISTERED");
 simsignal_t NF_AVB_LISTENER_REGISTRATION_TIMEOUT = cComponent::registerSignal("NF_AVB_LISTENER_REGISTRATION_TIMEOUT");
 #endif
+
+
+#ifdef WITH_IEEE8021QBV_COMMON
+simsignal_t NF_QBV_STATE_CHANGED = cComponent::registerSignal("NF_QBV_STATE_CHANGED");
+#endif
 }

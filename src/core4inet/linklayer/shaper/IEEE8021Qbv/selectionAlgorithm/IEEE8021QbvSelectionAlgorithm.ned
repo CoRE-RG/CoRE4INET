@@ -28,6 +28,10 @@ simple IEEE8021QbvSelectionAlgorithm like IIEEE8021QbvSelectionAlgorithm
 {
     parameters:
         @class(IEEE8021QbvSelectionAlgorithm);
+        
+        //Signal emitted when state changes
+        @signal[NF_QBV_STATE_CHANGED](type=long);
+        
         // State of the gate. 'o' (OPEN) or 'C' (CLOSED).
         string state = default("o");
 }

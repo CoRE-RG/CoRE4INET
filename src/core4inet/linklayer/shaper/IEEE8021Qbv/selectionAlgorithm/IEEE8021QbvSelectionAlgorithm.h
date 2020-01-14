@@ -51,10 +51,6 @@ class IEEE8021QbvSelectionAlgorithm : public virtual cSimpleModule
      * @brief Current state of the IEEE8021QbvSelectionAlgorithm.
      */
     State state;
-    /**
-     * @brief Pointer to IEEE 802.1Qbv transmission selection module.
-     */
-    IEEE8021QbvSelection* ts;
 
   public:
     /**

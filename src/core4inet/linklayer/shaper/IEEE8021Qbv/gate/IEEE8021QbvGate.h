@@ -19,7 +19,7 @@
 //std
 #include <omnetpp.h>
 //CoRE4INET
-#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
+//#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
 
 using namespace omnetpp;
 
@@ -49,10 +49,6 @@ class IEEE8021QbvGate : public virtual cSimpleModule
      * @brief Current state of the IEEE8021QbvGate.
      */
     State state;
-    /**
-     * @brief Pointer to IEEE 802.1Qbv transmission selection module.
-     */
-    IEEE8021QbvSelection* ts;
 
   public:
     /**

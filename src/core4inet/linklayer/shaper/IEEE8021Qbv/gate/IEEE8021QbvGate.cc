@@ -15,6 +15,9 @@
 
 #include "IEEE8021QbvGate.h"
 
+//CoRE4INET
+#include "core4inet/base/NotifierConsts.h"
+
 namespace CoRE4INET {
 
 Define_Module(IEEE8021QbvGate);
@@ -32,7 +35,7 @@ void IEEE8021QbvGate::open()
     this->state = this->State::OPEN;
     if (this->state != oldState)
     {
-        ts->reportChange();
+        emit(NF_QBV_STATE_CHANGED, this->state);
     }
 }
 
@@ -45,7 +48,6 @@ void IEEE8021QbvGate::close()
 void IEEE8021QbvGate::initialize()
 {
     this->handleParameterChange(nullptr);
-    this->ts = dynamic_cast<IEEE8021QbvSelection*>(this->getParentModule()->getSubmodule("transmissionSelection"));
     WATCH(this->state);
 }
 

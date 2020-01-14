@@ -15,6 +15,9 @@
 
 #include <core4inet/linklayer/shaper/IEEE8021Qbv/queueing/IEEE8021QbvQueue.h>
 
+//CoRE4INET
+#include "core4inet/base/NotifierConsts.h"
+
 namespace CoRE4INET {
 
 Define_Module(IEEE8021QbvQueue);
@@ -31,7 +34,7 @@ void IEEE8021QbvQueue::initialize(int stage)
 void IEEE8021QbvQueue::handleMessage(cMessage *msg)
 {
     BGQueueBuffer::handleMessage(msg);
-    ts->reportChange();
+    emit(NF_QBV_STATE_CHANGED, static_cast<long>(BGQueueBuffer::size()));
 }
 
 inet::EtherFrame* IEEE8021QbvQueue::dequeue()

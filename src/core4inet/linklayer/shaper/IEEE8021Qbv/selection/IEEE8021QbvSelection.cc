@@ -19,6 +19,7 @@
 #include <limits>
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"
+#include "core4inet/base/NotifierConsts.h"
 #include "core4inet/buffer/base/Buffer.h"
 #include "core4inet/linklayer/shaper/IEEE8021Qbv/selectionAlgorithm/IEEE8021QbvSelectionAlgorithm.h"
 #include "core4inet/linklayer/shaper/IEEE8021Qbv/gate/IEEE8021QbvGate.h"
@@ -29,26 +30,20 @@ Define_Module(IEEE8021QbvSelection);
 
 IEEE8021QbvSelection::IEEE8021QbvSelection()
 {
-    this->framesRequested = 0;
     this->numPCP = 0;
-}
-
-void IEEE8021QbvSelection::reportChange()
-{
-    Enter_Method("reportChange()");
-    if (this->framesRequested > 0)
-    {
-        selectFrame();
-    }
 }
 
 void IEEE8021QbvSelection::initialize(int stage)
 {
+    BaseShaper::initialize(stage);
     if (stage == 0)
     {
         this->handleParameterChange(nullptr);
         for (unsigned int i=0; i<this->numPCP; i++)
         {
+            this->getParentModule()->getSubmodule("queue", i)->subscribe(NF_QBV_STATE_CHANGED, this);
+            this->getParentModule()->getSubmodule("transmissionSelectionAlgorithm", i)->subscribe(NF_QBV_STATE_CHANGED, this);
+            this->getParentModule()->getSubmodule("transmissionGate", i)->subscribe(NF_QBV_STATE_CHANGED, this);
             simsignal_t signalPk = registerSignal(("qPcp" + std::to_string(i) + "Pk").c_str());
             cProperty* statisticTemplate = getProperties()->get("statisticTemplate", "qPcpPk");
             getEnvir()->addResultRecorders(this, signalPk, ("qPcp" + std::to_string(i) + "Pk").c_str(), statisticTemplate);
@@ -81,7 +76,12 @@ void IEEE8021QbvSelection::handleParameterChange(const char* parname)
 
 void IEEE8021QbvSelection::handleMessage(cMessage* msg)
 {
-    if (msg->arrivedOn("in"))
+    if (msg->isSelfMessage())
+    {
+        this->selectFrame();
+        delete msg;
+    }
+    else if (msg->arrivedOn("in"))
     {
         if (inet::EtherFrame* frame = dynamic_cast<inet::EtherFrame*>(msg))
         {
@@ -99,11 +99,26 @@ void IEEE8021QbvSelection::handleMessage(cMessage* msg)
     }
 }
 
+void IEEE8021QbvSelection::receiveSignal(cComponent *src, simsignal_t id, long l, __attribute__((unused)) cObject *details)
+{
+    Enter_Method_Silent();
+    if (id == NF_QBV_STATE_CHANGED)
+    {
+        this->bubble("State changed.");
+        cMessage* msg = new cMessage();
+        scheduleAt(simTime(), msg);
+    }
+}
+
 void IEEE8021QbvSelection::requestPacket()
 {
     Enter_Method("requestPacket()");
     this->framesRequested++;
-    selectFrame();
+    if (this->framesRequested > 1)
+    {
+        throw cRuntimeError("Frames requested counter is higher than 1.");
+    }
+    this->selectFrame();
 }
 
 void IEEE8021QbvSelection::finish()
@@ -121,16 +136,23 @@ void IEEE8021QbvSelection::finish()
 
 void IEEE8021QbvSelection::selectFrame()
 {
-    for(int i=this->numPCP-1; i>=0; i--)
+    if (this->framesRequested > 0)
     {
-        Buffer* queue = dynamic_cast<Buffer*>(this->getParentModule()->getSubmodule("queue", i));
-        IEEE8021QbvSelectionAlgorithm* tsa = dynamic_cast<IEEE8021QbvSelectionAlgorithm*>(this->getParentModule()->getSubmodule("transmissionSelectionAlgorithm", i));
-        IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
-        if (queue && queue->size() > 0 && tsa && tsa->isOpen() && tg && tg->isOpen())
+        for(int i=this->numPCP-1; i>=0; i--)
         {
-            queue->getFrame();
-            this->framesRequested--;
-            return;
+            Buffer* queue = dynamic_cast<Buffer*>(this->getParentModule()->getSubmodule("queue", i));
+            IEEE8021QbvSelectionAlgorithm* tsa = dynamic_cast<IEEE8021QbvSelectionAlgorithm*>(this->getParentModule()->getSubmodule("transmissionSelectionAlgorithm", i));
+            IEEE8021QbvGate* tg = dynamic_cast<IEEE8021QbvGate*>(this->getParentModule()->getSubmodule("transmissionGate", i));
+            if (queue && queue->size() > 0 && tsa && tsa->isOpen() && tg && tg->isOpen())
+            {
+                this->framesRequested--;
+                if (this->framesRequested > 1)
+                {
+                    throw cRuntimeError("Frames requested counter is higher than 1.");
+                }
+                queue->getFrame();
+                return;
+            }
         }
     }
 }

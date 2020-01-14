@@ -26,6 +26,10 @@ simple IEEE8021QbvGate like IIEEE8021QbvGate
 {
     parameters:
         @class(IEEE8021QbvGate);
+        
+        //Signal emitted when state changes
+        @signal[NF_QBV_STATE_CHANGED](type=long);
+        
         // State of the gate. 'o' (OPEN) or 'C' (CLOSED).
         string state = default("o");
 }

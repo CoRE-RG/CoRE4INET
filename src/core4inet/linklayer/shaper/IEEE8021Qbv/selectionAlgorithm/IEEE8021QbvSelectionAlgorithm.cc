@@ -15,6 +15,9 @@
 
 #include <core4inet/linklayer/shaper/IEEE8021Qbv/selectionAlgorithm/IEEE8021QbvSelectionAlgorithm.h>
 
+//CoRE4INET
+#include "core4inet/base/NotifierConsts.h"
+
 namespace CoRE4INET {
 
 Define_Module(IEEE8021QbvSelectionAlgorithm);
@@ -28,7 +31,6 @@ bool IEEE8021QbvSelectionAlgorithm::isOpen()
 void IEEE8021QbvSelectionAlgorithm::initialize()
 {
     this->handleParameterChange(nullptr);
-    this->ts = dynamic_cast<IEEE8021QbvSelection*>(this->getParentModule()->getSubmodule("transmissionSelection"));
     WATCH(this->state);
 }
 
@@ -69,7 +71,7 @@ void IEEE8021QbvSelectionAlgorithm::open()
     this->state = this->State::OPEN;
     if (this->state != oldState)
     {
-        ts->reportChange();
+        emit(NF_QBV_STATE_CHANGED, this->state);
     }
 }
 

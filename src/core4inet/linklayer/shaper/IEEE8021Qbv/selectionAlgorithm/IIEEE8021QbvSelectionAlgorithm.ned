@@ -27,6 +27,9 @@ package core4inet.linklayer.shaper.IEEE8021Qbv.selectionAlgorithm;
 moduleinterface IIEEE8021QbvSelectionAlgorithm
 {
   	parameters:
+        //Signal emitted when state changes
+        @signal[NF_QBV_STATE_CHANGED](type=long);
+        
         // State of the gate. 'o' (OPEN) or 'C' (CLOSED).
         string state;
 }
