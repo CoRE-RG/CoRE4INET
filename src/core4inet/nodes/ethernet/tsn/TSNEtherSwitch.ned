@@ -38,7 +38,7 @@ import inet.networklayer.common.InterfaceTable;
 module TSNEtherSwitch
 {
     parameters:
-        @display("i=block/switch;bgb=514,312");
+        @display("i=block/switch;bgb=900,500");
         @networkNode;
         @labels(node,ethernet-node);
         // Optional: Number of Buffers with Incoming Module for TT and RC traffic 
@@ -60,13 +60,13 @@ module TSNEtherSwitch
     submodules:
         // Keeps track of the status of network node (up, down, etc.)
         status: NodeStatus {
-            @display("p=47,50;is=n");
+            @display("p=100,50;is=n");
         }
 
         // Implementation of the forwarding part
         beswitch: SRPRelay {
             parameters:
-                @display("p=100,50");
+                @display("p=100,350");
             gates:
                 ifIn[sizeof(ethg)];
                 ifOut[sizeof(ethg)];
@@ -74,18 +74,18 @@ module TSNEtherSwitch
 
         //The mac table associated with the beswitch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
-            @display("p=170,50");
+            @display("p=100,250");
         }
 
         // Holds interface names
         interfaceTable: InterfaceTable {
-            @display("p=310,130");
+            @display("p=200,250");
         }
 
         // Physical ports of the switch
         phy[sizeof(ethg)]: TSNPHYPort {
             parameters:
-                @display("p=50,100,column,50");
+                @display("p=100,450,row,100");
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
@@ -93,35 +93,35 @@ module TSNEtherSwitch
         // AVB critical traffic control
         avbCTC: IEEE8021QbvIncoming {
             parameters:
-                @display("p=385,201");
+                @display("p=500,250");
                 hardware_delay = hardware_delay;
         }
 
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=240,50");
+                @display("p=300,50");
         }
 
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
-                @display("p=310,50");
+                @display("p=200,50");
         }
 
         // Buffers with Incoming Module for TT and RC traffic (optional)
         checkedBuffer[numBuffer]: CheckedBuffer {
-            @display("p=170,130");
+            @display("p=600,150");
         }
 
         // Stream Reservation Protocol table
         srpTable: SRPTable {
-            @display("p=385,130");
+            @display("p=400,250");
         }
 
         // Stream Reservation Protocol implementation
         srpProtocol: SRProtocol {
-            @display("p=385,50");
+            @display("p=300,250");
         }
 
     connections:
