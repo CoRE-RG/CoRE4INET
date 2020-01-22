@@ -41,7 +41,7 @@ import inet.networklayer.common.InterfaceTable;
 module TSNEtherHost
 {
     parameters:
-        @display("bgb=900,500;i=device/device");
+        @display("bgb=,;i=device/device");
         @networkNode;
         @labels(node,ethernet-node);
         // Number of Applications running on the device

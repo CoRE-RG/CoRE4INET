@@ -38,7 +38,7 @@ import inet.networklayer.common.InterfaceTable;
 module TSNEtherSwitch
 {
     parameters:
-        @display("i=block/switch;bgb=900,500");
+        @display("bgb=,;i=block/switch");
         @networkNode;
         @labels(node,ethernet-node);
         // Optional: Number of Buffers with Incoming Module for TT and RC traffic 

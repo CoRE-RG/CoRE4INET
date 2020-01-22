@@ -34,7 +34,7 @@ import inet.networklayer.common.InterfaceTable;
 module IEEE8021QEtherSwitch
 {
     parameters:
-        @display("i=block/switch;bgb=514,312");
+        @display("bgb=,;i=block/switch");
         @networkNode;
         @labels(node,ethernet-node);
               
@@ -58,13 +58,13 @@ module IEEE8021QEtherSwitch
     submodules:
         // Keeps track of the status of network node (up, down, etc.)
         status: NodeStatus {
-            @display("p=47,50;is=n");
+            @display("p=100,50;is=n");
         }
         
         // Implementation of the forwarding part
         beswitch: <default("MACRelayUnit")> like IMACRelayUnit {
             parameters:
-                @display("p=100,50");
+                @display("p=100,350");
             gates:
                 ifIn[sizeof(ethg)];
                 ifOut[sizeof(ethg)];
@@ -72,18 +72,18 @@ module IEEE8021QEtherSwitch
         
         //The mac table associated with the beswitch
         macTable: <default("MACAddressTable")> like IMACAddressTable {
-            @display("p=170,50");
+            @display("p=100,250");
         }
         
         // Holds interface names
         interfaceTable: InterfaceTable {
-            @display("p=447,313");
+            @display("p=200,250");
         }
         
         // Physical ports of the switch
         phy[sizeof(ethg)]: IEEE8021QPHYPort {
             parameters:
-                @display("p=50,100,column,50");
+                @display("p=100,450,row,100");
                 //For the switch it is necessary to have promiscuous mode enabled
                 promiscuous = true;
         }
@@ -91,18 +91,18 @@ module IEEE8021QEtherSwitch
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
             parameters:
-                @display("p=240,50");
+                @display("p=300,50");
         }
 
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
             parameters:
-                @display("p=310,50");
+                @display("p=200,50");
         }
         
         // Buffers with Incoming Module for TT and RC traffic (optional)
         checkedBuffer[numBuffer]: CheckedBuffer {
-            @display("p=170,130");
+            @display("p=400,150");
         }
         
     connections:

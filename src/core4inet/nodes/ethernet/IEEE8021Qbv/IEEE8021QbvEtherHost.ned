@@ -41,7 +41,7 @@ import inet.networklayer.common.InterfaceTable;
 module IEEE8021QbvEtherHost
 {
     parameters:
-        @display("bgb=894,314;i=device/device");
+        @display("bgb=,;i=device/device");
         @networkNode;
         @labels(node,ethernet-node);
         // Number of Applications running on the device
@@ -62,70 +62,70 @@ module IEEE8021QbvEtherHost
     submodules:
         // Keeps track of the status of network node (up, down, etc.)
         status: NodeStatus {
-            @display("p=60,37;is=n");
+            @display("p=100,50;is=n");
         }
 
         // Physical port of the host
         phy[numPorts]: IEEE8021QbvPHYPort {
-            @display("p=235,255,c,50");
+            @display("p=100,450,c,50");
         }
 
         // AVB critical traffic control
         avbCTC: IEEE8021QbvIncoming {
             parameters:
-                @display("p=349.0975,168.375");
+                @display("p=500,250");
                 hardware_delay = hardware_delay;
         }
 
         // Encap for best-effort traffic
         encap: SRPEtherEncap {
             parameters:
-                @display("p=141,256");
+                @display("p=100,350");
         }
 
          // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
-            @display("p=141,169");
+            @display("p=300,50");
         }
 
         // Scheduler for the device
         scheduler: <default("Scheduler")> like ITTEScheduler {
-            @display("p=235,169");
+            @display("p=200,50");
         }
 
         // Applications for the device
         app[numApps]: <> like IApplication {
-            @display("p=234,37,row,70");
+            @display("p=400,50,row,100");
         }
 
         // Best-efford buffer for incoming traffic
         bgIn: BGQueueBuffer {
-            @display("p=141,37");
+            @display("p=100,150");
         }
 
         // Best-efford buffer for outgoing traffic
         bgOut: BGQueueBuffer {
-            @display("p=141,99");
+            @display("p=200,150");
         }
 
         // Buffers with Incoming Module for TT and RC traffic (optional)
         checkedBuffer[numBuffer]: CheckedBuffer {
-            @display("p=350,100");
+            @display("p=600,150");
         }
 
         // Holds interface names
         interfaceTable: InterfaceTable {
-            @display("p=234,100");
+            @display("p=200,250");
         }
 
         // Stream Reservation Protocol table
         srpTable: SRPTable {
-            @display("p=141,99");
+            @display("p=400,250");
         }
 
 		// Stream Reservation Protocol implementation
         srpProtocol: SRProtocol {
-            @display("p=141,169");
+            @display("p=300,250");
         }
 
     connections allowunconnected:
