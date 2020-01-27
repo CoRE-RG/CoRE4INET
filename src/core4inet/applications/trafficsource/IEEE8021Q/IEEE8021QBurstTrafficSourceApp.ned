@@ -29,7 +29,7 @@ simple IEEE8021QBurstTrafficSourceApp extends BGBurstTrafficSourceApp
 {
     parameters:
         @class(IEEE8021QBurstTrafficSourceApp);
-        @display("i=block/source,darkgreen");
+        @display("i=block/source,blue");
 
         // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
         int priority = default(0);

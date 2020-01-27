@@ -42,7 +42,7 @@ void IEEE8021QTrafficSourceApp::handleMessage(cMessage *msg)
             getDisplayString().removeTag("i2");
         }
         sendMessage();
-        scheduleAt(simTime() + this->sendInterval, msg);
+        scheduleAt(simTime() + this->sendInterval, msg); //TODO: Use scheduler of the node to support its modeled inaccuracy
     }
     else
     {

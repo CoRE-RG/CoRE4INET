@@ -28,7 +28,7 @@ simple IEEE8021QTrafficSourceApp extends BGTrafficSourceApp
 {
     parameters:
         @class(IEEE8021QTrafficSourceApp);
-        @display("i=block/source,darkgreen");
+        @display("i=block/source,blue");
         
         // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
     	int priority = default(0);
