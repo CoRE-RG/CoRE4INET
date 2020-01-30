@@ -34,14 +34,31 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class IEEE8021QSyncTrafficSourceApp : public virtual IEEE8021QTrafficSourceApp, public virtual Scheduled
+class IEEE8021QSyncTrafficSourceApp : public virtual IEEE8021QTrafficSourceApp, public virtual Scheduled, public virtual cListener
 {
   private:
     /**
      * @brief caches action_time parameter
      */
     double actionTime;
+    /**
+     * @brief Caches modulo parameter
+     */
+    unsigned int modulo;
+    /**
+     * @brief frame is only sent every modulo cycle
+     */
+    unsigned int moduloCycle;
+    /**
+     * @brief true when node is synchronized (Frames will be only sent when node runs synchronous)
+     */
+    bool synchronized;
+
+  public:
+    IEEE8021QSyncTrafficSourceApp();
+
   protected:
+    virtual void initialize() override;
     /**
      * @brief Indicates a parameter has changed.
      *
@@ -54,6 +71,14 @@ class IEEE8021QSyncTrafficSourceApp : public virtual IEEE8021QTrafficSourceApp, 
      * @param msg incoming self messages
      */
     virtual void handleMessage(cMessage *msg) override;
+    /**
+     * @ Receives signal from sync module
+     *
+     * @param source signal emitting  component
+     * @param signalID ID of the signal
+     * @param obj representation of the signal
+     */
+    virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details) override;
 };
 
 } //namespace

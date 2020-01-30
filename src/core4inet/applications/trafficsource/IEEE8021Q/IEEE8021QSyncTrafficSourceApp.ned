@@ -32,6 +32,9 @@ simple IEEE8021QSyncTrafficSourceApp extends IEEE8021QTrafficSourceApp like ISch
         
         //Time in the period at which the message is being send to the connected buffers
         double actionTime @unit(s);
+        //Modulo cycles: 1 means message is being send in each cycle, 2 means in every second cycle,
+        //and so on. 0 means never
+        int modulo = default(1);
         //Oscillator of Scheduler this app is assigned to
         string oscillator = default("^.scheduler.oscillator");
         //Timer of Scheduler this app is assigned to

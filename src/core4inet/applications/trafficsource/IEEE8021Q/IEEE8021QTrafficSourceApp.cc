@@ -55,9 +55,7 @@ void IEEE8021QTrafficSourceApp::sendMessage()
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
         EthernetIIFrameWithQTag *frame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic");
-
         frame->setDest(this->destAddress);
-
         cPacket *payload_packet = new cPacket();
         payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
         frame->encapsulate(payload_packet);
