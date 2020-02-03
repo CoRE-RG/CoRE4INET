@@ -20,13 +20,13 @@
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c General -r 0,                        1s,              38ee-0636/tplx
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            a9cd-ce55/tplx
 
-/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c General -r 0,                        1s,              7e05-9074/tplx
-/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            4775-3131/tplx
-/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            85f5-9982/tplx
+/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c General -r 0,                        1s,              75c8-9687/tplx
+/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            a754-d659/tplx
+/examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            a2be-ed2f/tplx
 
 /examples/IEEE8021Qci/large_network/,                             -f omnetpp.ini -c Timespan_between_TT_valid_with_Filtering_and_Attack,0.1s,7582-e7c2/tplx
 
-/examples/tsn/small_network/,                                     -f omnetpp.ini -c General -r 0,                        0.1s,            3ef6-01ca/tplx
-/examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            7b48-bba7/tplx
-/examples/tsn/small_network/,                                     -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            caf8-0aff/tplx
-/examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Qci -r 0,                       1s,              08b6-6633/tplx
+/examples/tsn/small_network/,                                     -f omnetpp.ini -c General -r 0,                        0.1s,            9dc5-2b01/tplx
+/examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            f86a-3a6e/tplx
+/examples/tsn/small_network/,                                     -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            e05b-1661/tplx
+/examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Qci -r 0,                       1s,              917d-6b60/tplx
