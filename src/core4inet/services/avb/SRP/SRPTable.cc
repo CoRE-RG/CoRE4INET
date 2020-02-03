@@ -105,26 +105,25 @@ SRPTable::SRPTable()
     nextAging = 0;
 }
 
-void SRPTable::initialize()
+SRPTable::~SRPTable()
 {
-    WATCH(nextAging);
-    WATCH_PTRUMAPUMAP(talkerTables);
-    WATCH_PTRUMAPUMAPUMAP(listenerTables);
-    updateDisplayString();
-    //load XML config if specified.
-    cXMLElement* xmlDoc = par("srpTableFile").xmlValue();
-    if(xmlDoc){
-        if(strcmp(xmlDoc->getName(), "srpTable") == 0){
-            if(importFromXML(xmlDoc)){
-                EV_DETAIL << "XML Table imported from srpTableFile." << endl;
-            }
-        }
-    }
+    clear();
 }
 
-void SRPTable::handleMessage(cMessage *)
+bool SRPTable::containsStream(const inet::MACAddress &address, uint16_t vid)
 {
-    throw cRuntimeError("This module doesn't process messages");
+    Enter_Method("SRPTable::containsStream()");
+    bool contained = false;
+    TalkerTable talkerTable = talkerTables[vid];
+    for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); ++talkerEntry)
+    {
+        if ((*talkerEntry).second->address == address)
+        {
+            contained = true;
+            break;
+        }
+    }
+    return contained;
 }
 
 std::list<cModule*> SRPTable::getListenersForStreamId(uint64_t streamId, uint16_t vid)
@@ -153,22 +152,6 @@ std::list<cModule*> SRPTable::getListenersForTalkerAddress(const inet::MACAddres
 {
     Enter_Method("SRPTable::getListenersForTalkerAddress()");
     return getListenersForStreamId(getStreamIdForTalkerAddress(talkerAddress, vid), vid);
-}
-
-bool SRPTable::containsStream(const inet::MACAddress &address, uint16_t vid)
-{
-    Enter_Method("SRPTable::containsStream()");
-    bool contained = false;
-    TalkerTable talkerTable = talkerTables[vid];
-    for (TalkerTable::const_iterator talkerEntry = talkerTable.begin(); talkerEntry != talkerTable.end(); ++talkerEntry)
-    {
-        if ((*talkerEntry).second->address == address)
-        {
-            contained = true;
-            break;
-        }
-    }
-    return contained;
 }
 
 uint64_t SRPTable::getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid)
@@ -223,23 +206,6 @@ SRPTable::TalkerEntry* SRPTable::getTalkerEntryForStreamId(uint64_t streamId,
         return dynamic_cast<TalkerEntry*>((*entry).second->dup());
     }
     return nullptr;
-}
-
-unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
-{
-    removeAgedEntriesIfNeeded();
-
-    //get Talkers for this VLAN
-    TalkerTable ttable = talkerTables[vid];
-    TalkerEntry *tentry = ttable[streamId];
-
-    if (!tentry)
-    {
-        throw cRuntimeError("talkerTable entry not found");
-    }
-
-    return bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
-            getIntervalForClass(tentry->srClass));
 }
 
 unsigned long SRPTable::getBandwidthForModule(const cModule *module)
@@ -306,6 +272,41 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
     return bandwidth;
 }
 
+unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
+{
+    removeAgedEntriesIfNeeded();
+
+    //get Talkers for this VLAN
+    TalkerTable ttable = talkerTables[vid];
+    TalkerEntry *tentry = ttable[streamId];
+
+    if (!tentry)
+    {
+        throw cRuntimeError("talkerTable entry not found");
+    }
+
+    return bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
+            getIntervalForClass(tentry->srClass));
+}
+
+std::list<uint16_t> SRPTable::getVidsForStreamId(uint64_t streamId)
+{
+    removeAgedEntriesIfNeeded();
+
+    std::list<uint16_t> vids;
+    for (std::unordered_map<unsigned int, TalkerTable>::iterator iter = talkerTables.begin();
+                iter != talkerTables.end(); ++iter)
+    {
+        TalkerTable talkerTable = (*iter).second;
+        TalkerTable::const_iterator entry = talkerTable.find(streamId);
+        if (entry != talkerTable.end())
+        {
+            vids.push_back((*iter).first);
+        }
+    }
+    return vids;
+}
+
 bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
         SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid, uint8_t pcp, bool isStatic)
 {
@@ -330,7 +331,9 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
         }
         updated = false;
         if (talkerTable[streamId])
-        throw cRuntimeError("talkerTable already contained entry");
+        {
+            throw cRuntimeError("talkerTable already contained entry");
+        }
         talkerTable[streamId] = new SRPTable::TalkerEntry();
     }
     else
@@ -539,107 +542,11 @@ void SRPTable::clear()
     }
 }
 
-size_t SRPTable::getNumTalkerEntries()
-{
-    removeAgedEntriesIfNeeded();
-
-    size_t entries = 0;
-    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin();
-            i != talkerTables.end(); ++i)
-    {
-        entries += (*i).second.size();
-    }
-    return entries;
-}
-size_t SRPTable::getNumListenerEntries()
-{
-    removeAgedEntriesIfNeeded();
-
-    size_t entries = 0;
-    for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
-            i != listenerTables.end(); ++i)
-    {
-        for (ListenerTable::const_iterator j = (*i).second.begin(); j != (*i).second.end(); ++j)
-        {
-            entries += (*j).second.size();
-        }
-    }
-    return entries;
-}
-
-void SRPTable::updateDisplayString()
-{
-    if (!getEnvir()->isGUI())
-        return;
-
-    getDisplayString().setTagArg("t", 0, (std::to_string(getNumTalkerEntries()) + " talkers\n" + std::to_string(getNumListenerEntries()) + " listeners").c_str());
-}
-
-void SRPTable::removeAgedEntries()
-{
-    simtime_t agingTime = par("agingTime").doubleValue();
-    if (agingTime == 0)
-    {
-        return;
-    }
-    simtime_t now = simTime();
-    nextAging = 0;
-    for (std::unordered_map<unsigned int, ListenerTable>::iterator listenerTable = listenerTables.begin();
-            listenerTable != listenerTables.end(); ++listenerTable)
-    {
-        for (ListenerTable::iterator listenerList = (*listenerTable).second.begin();
-                listenerList != (*listenerTable).second.end();)
-        {
-            for (ListenerList::iterator listenerEntry = (*listenerList).second.begin();
-                    listenerEntry != (*listenerList).second.end();)
-            {
-                bool isStatic = (*listenerEntry).second->isStatic;
-                simtime_t entryAging = ((*listenerEntry).second->insertionTime + agingTime);
-                if (!isStatic && now >= entryAging)
-                {
-                    ListenerEntry *lentry = (*listenerEntry).second;
-                    (*listenerList).second.erase(listenerEntry++);
-                    emit(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, lentry);
-                    delete lentry;
-                    updateDisplayString();
-                }
-                else
-                {
-                    ++listenerEntry;
-                    if (!isStatic && nextAging > entryAging)
-                    {
-                        nextAging = entryAging;
-                    }
-                }
-            }
-            if ((*listenerList).second.size() == 0)
-            {
-                (*listenerTable).second.erase(listenerList++);
-            }
-            else
-            {
-                ++listenerList;
-            }
-        }
-    }
-}
-
 void SRPTable::removeAgedEntriesIfNeeded()
 {
     if (nextAging != 0 && simTime() >= nextAging)
     {
         removeAgedEntries();
-    }
-}
-
-SRPTable::~SRPTable()
-{
-    clear();
-}
-
-void SRPTable::finish() {
-    if(par("exportTableOnFinish").boolValue()){
-        cout << exportToXML() << endl;
     }
 }
 
@@ -788,6 +695,120 @@ bool SRPTable::importFromXML(cXMLElement* xml) {
     }
 
     return updated;
+}
+
+void SRPTable::initialize()
+{
+    WATCH(nextAging);
+    WATCH_PTRUMAPUMAP(talkerTables);
+    WATCH_PTRUMAPUMAPUMAP(listenerTables);
+    updateDisplayString();
+    //load XML config if specified.
+    cXMLElement* xmlDoc = par("srpTableFile").xmlValue();
+    if(xmlDoc){
+        if(strcmp(xmlDoc->getName(), "srpTable") == 0){
+            if(importFromXML(xmlDoc)){
+                EV_DETAIL << "XML Table imported from srpTableFile." << endl;
+            }
+        }
+    }
+}
+
+void SRPTable::handleMessage(cMessage *)
+{
+    throw cRuntimeError("This module doesn't process messages");
+}
+
+void SRPTable::finish() {
+    if(par("exportTableOnFinish").boolValue()){
+        cout << exportToXML() << endl;
+    }
+}
+
+void SRPTable::updateDisplayString()
+{
+    if (!getEnvir()->isGUI())
+        return;
+
+    getDisplayString().setTagArg("t", 0, (std::to_string(getNumTalkerEntries()) + " talkers\n" + std::to_string(getNumListenerEntries()) + " listeners").c_str());
+}
+
+void SRPTable::removeAgedEntries()
+{
+    simtime_t agingTime = par("agingTime").doubleValue();
+    if (agingTime == 0)
+    {
+        return;
+    }
+    simtime_t now = simTime();
+    nextAging = 0;
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator listenerTable = listenerTables.begin();
+            listenerTable != listenerTables.end(); ++listenerTable)
+    {
+        for (ListenerTable::iterator listenerList = (*listenerTable).second.begin();
+                listenerList != (*listenerTable).second.end();)
+        {
+            for (ListenerList::iterator listenerEntry = (*listenerList).second.begin();
+                    listenerEntry != (*listenerList).second.end();)
+            {
+                bool isStatic = (*listenerEntry).second->isStatic;
+                simtime_t entryAging = ((*listenerEntry).second->insertionTime + agingTime);
+                if (!isStatic && now >= entryAging)
+                {
+                    ListenerEntry *lentry = (*listenerEntry).second;
+                    (*listenerList).second.erase(listenerEntry++);
+                    emit(NF_AVB_LISTENER_REGISTRATION_TIMEOUT, lentry);
+                    delete lentry;
+                    updateDisplayString();
+                }
+                else
+                {
+                    ++listenerEntry;
+                    if (!isStatic && nextAging > entryAging)
+                    {
+                        nextAging = entryAging;
+                    }
+                }
+            }
+            if ((*listenerList).second.size() == 0)
+            {
+                (*listenerTable).second.erase(listenerList++);
+            }
+            else
+            {
+                ++listenerList;
+            }
+        }
+    }
+}
+
+size_t SRPTable::getNumTalkerEntries()
+{
+    removeAgedEntriesIfNeeded();
+
+    size_t entries = 0;
+    for (std::unordered_map<unsigned int, TalkerTable>::const_iterator i = talkerTables.begin();
+            i != talkerTables.end(); ++i)
+    {
+        entries += (*i).second.size();
+    }
+    return entries;
+}
+
+size_t SRPTable::getNumListenerEntries()
+{
+    removeAgedEntriesIfNeeded();
+
+    size_t entries = 0;
+    for (std::unordered_map<unsigned int, ListenerTable>::const_iterator i = listenerTables.begin();
+            i != listenerTables.end(); ++i)
+    {
+        for (ListenerTable::const_iterator j = (*i).second.begin(); j != (*i).second.end(); ++j)
+        {
+            entries += (*j).second.size();
+        }
+    }
+    return entries;
 }
 
 }

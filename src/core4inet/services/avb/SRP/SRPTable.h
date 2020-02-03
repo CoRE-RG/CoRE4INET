@@ -74,7 +74,6 @@ class SRPTable : public virtual cSimpleModule
 
         };
         friend std::ostream& operator<<(std::ostream& os, const TalkerEntry& entry);
-
         /**
          * @brief Entry for Listener
          */
@@ -94,9 +93,17 @@ class SRPTable : public virtual cSimpleModule
 
         };
         friend std::ostream& operator<<(std::ostream& os, const ListenerEntry& entry);
-
+        /**
+         * @brief TalkerTable type definition
+         */
         typedef std::unordered_map<uint64_t, TalkerEntry*> TalkerTable;
+        /**
+         * @brief ListenerList type definition
+         */
         typedef std::unordered_map<cModule*, ListenerEntry*> ListenerList;
+        /**
+         * @brief ListenerTable type definition
+         */
         typedef std::unordered_map<uint64_t, ListenerList> ListenerTable;
 
     private:
@@ -104,46 +111,24 @@ class SRPTable : public virtual cSimpleModule
          * map of talker entries for stream id
          */
         std::unordered_map<unsigned int, TalkerTable> talkerTables;
-
         /**
          * map of listener entries for stream id
          */
         std::unordered_map<unsigned int, ListenerTable> listenerTables;
-
         /**
          * Time when next entry is aging
          */
         simtime_t nextAging;
-
-    protected:
-
-        /**
-         *  @brief Initialization, registers WATCH and updates display string
-         */
-        virtual void initialize() override;
-
-        /**
-         *  @brief Table does not receive messages, throws cRuntimeError when handleMessage is called
-         */
-        virtual void handleMessage(cMessage *msg) override __attribute__ ((noreturn));
-
-        /**
-         *  @brief Finish method to export XML config if needed.
-         */
-        virtual void finish() override;
 
     public:
         /**
          *  @brief Constructor
          */
         SRPTable();
-
         /**
          *  @brief Destructor
          */
         virtual ~SRPTable() override;
-
-    public:
         /**
          * @brief For a known address and vid it proofs if it is contained in the table
          *
@@ -161,7 +146,6 @@ class SRPTable : public virtual cSimpleModule
          */
         virtual uint64_t getStreamIdForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid =
                 VLAN_ID_DEFAULT);
-
         /**
          * @brief For a known talker address and V-TAG it finds out the SR-Class of the Stream
          *
@@ -171,7 +155,6 @@ class SRPTable : public virtual cSimpleModule
          */
         virtual SR_CLASS getSrClassForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid =
                 VLAN_ID_DEFAULT);
-
         /**
          * @brief For a known streamId and V-TAG it finds out the port where relay component should deliver the message
          *
@@ -180,7 +163,6 @@ class SRPTable : public virtual cSimpleModule
          * @return listeners for the stream
          */
         virtual std::list<cModule*> getListenersForStreamId(uint64_t streamId, uint16_t vid = VLAN_ID_DEFAULT);
-
         /**
          * @brief For a known talker address and V-TAG it finds out the port where relay component should deliver the message
          *
@@ -190,7 +172,6 @@ class SRPTable : public virtual cSimpleModule
          */
         virtual std::list<cModule*> getListenersForTalkerAddress(const inet::MACAddress &talkerAddress, uint16_t vid =
                 VLAN_ID_DEFAULT);
-
         /**
          * @brief Retrieve the module a message with a given streamId will come from (required for listener ready messages)
          *
@@ -199,7 +180,6 @@ class SRPTable : public virtual cSimpleModule
          * @return Output port for address, or -1 if unknown.
          */
         virtual cModule* getTalkerForStreamId(uint64_t streamId, uint16_t vid = VLAN_ID_DEFAULT);
-
         /**
          * @brief Retrieve a copy of a complete talker entry with a given streamId and vid.
          *
@@ -208,7 +188,6 @@ class SRPTable : public virtual cSimpleModule
          * @return A copy of the requested TalkerEntry, nullptr if unknown
          */
         virtual TalkerEntry* getTalkerEntryForStreamId(uint64_t streamId, uint16_t vid = VLAN_ID_DEFAULT);
-
         /**
          * @brief Retrieve the required bandwidth for a module with registered listeners
          *
@@ -216,7 +195,6 @@ class SRPTable : public virtual cSimpleModule
          * @return bandwidth in bps
          */
         virtual unsigned long getBandwidthForModule(const cModule *module);
-
         /**
          * @brief Retrieve the required bandwidth for a module with registered listeners per SR-Class
          *
@@ -225,7 +203,6 @@ class SRPTable : public virtual cSimpleModule
          * @return bandwidth in bps
          */
         virtual unsigned long getBandwidthForModuleAndSRClass(const cModule *module, SR_CLASS srClass);
-
         /**
          * @brief Retrieve the required bandwidth for a stream
          *
@@ -234,7 +211,13 @@ class SRPTable : public virtual cSimpleModule
          * @return bandwidth in bps
          */
         virtual unsigned long getBandwidthForStream(uint64_t streamId, uint16_t vid = VLAN_ID_DEFAULT);
-
+        /**
+         * @brief Retrieve all VLAN IDs in which a Stream ID has a talker entry
+         *
+         * @param streamId the streams id
+         * @return VLAN IDs
+         */
+        virtual std::list<uint16_t> getVidsForStreamId(uint64_t streamId);
         /**
          * @brief Register a new streamId at talkerTable.
          * @return True if refreshed. False if it is new.
@@ -242,47 +225,39 @@ class SRPTable : public virtual cSimpleModule
         virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
                 SR_CLASS srClass = SR_CLASS::A, size_t framesize = 0, uint16_t intervalFrames = 0, uint16_t vid =
                         VLAN_ID_DEFAULT, uint8_t pcp=PCP_DEFAULT_SRCLASSA, bool isStatic = false);
-
         /**
          * @brief Unregister a streamId at talkerTable.
          * @return True if removed. False if not registered.
          */
         virtual bool removeTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
                 uint16_t vid = VLAN_ID_DEFAULT);
-
         /**
          * @brief Register a new streamId at listenerTable.
          * @return True if refreshed. False if it is new.
          */
         virtual bool updateListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid = VLAN_ID_DEFAULT, bool isStatic = false);
-
         /**
          * @brief Unregister a streamId at listenerTable.
          * @return True if removed. False if not registered.
          */
         virtual bool removeListenerWithStreamId(uint64_t streamId, cModule *module, uint16_t vid = VLAN_ID_DEFAULT);
-
         /**
          *  @brief Prints cached data
          */
         virtual void printState();
-
         /**
          * @brief For lifecycle: clears all entries from the table.
          */
         virtual void clear();
-
         /**
          * @brief Remove entries that were not updated during agingTime if necessary
          */
         void removeAgedEntriesIfNeeded();
-
         /**
          * @brief creates an XML string with the contents of the SRP Table.
          * This string can be used to fill the SRP Table with importFromXML.
          */
         std::string exportToXML();
-
         /**
          * @brief Imports entries from an XMLdocument.
          * The root element needs to be <srpTable>
@@ -291,10 +266,21 @@ class SRPTable : public virtual cSimpleModule
 
     protected:
         /**
+         *  @brief Initialization, registers WATCH and updates display string
+         */
+        virtual void initialize() override;
+        /**
+         *  @brief Table does not receive messages, throws cRuntimeError when handleMessage is called
+         */
+        virtual void handleMessage(cMessage *msg) override __attribute__ ((noreturn));
+        /**
+         *  @brief Finish method to export XML config if needed.
+         */
+        virtual void finish() override;
+        /**
          * @brief Remove entries that were not updated during agingTime
          */
         void removeAgedEntries();
-
         /**
          * @brief updates the displaystring of talkers and listeners
          */
@@ -305,7 +291,6 @@ class SRPTable : public virtual cSimpleModule
          * @return number of talkers
          */
         size_t getNumTalkerEntries();
-
         /**
          * @brief get the number of registered listeners
          *
