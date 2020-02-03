@@ -214,11 +214,16 @@ void CreditBasedMeter::refreshReservedBandwidthAndMaxCredit()
         IEEE8021QciFilter *streamFilter = *it;
         if (streamFilter->getMeterId() == static_cast<unsigned int>(this->getIndex()))
         {
-            unsigned long streamBandwidth = this->srptable->getBandwidthForStream(streamFilter->getStreamId());
-            this->reservedBandwidth += streamBandwidth;
-            if (streamBandwidth > maxSingleStreamBandwidth)
+            std::list<uint16_t> vids = this->srptable->getVidsForStreamId(streamFilter->getStreamId());
+            for (std::list<uint16_t>::iterator it2 = vids.begin(); it2 != vids.end(); ++it2)
             {
-                maxSingleStreamBandwidth = streamBandwidth;
+                uint16_t vid = *it2;
+                unsigned long streamBandwidth = this->srptable->getBandwidthForStream(streamFilter->getStreamId(), vid);
+                this->reservedBandwidth += streamBandwidth;
+                if (streamBandwidth > maxSingleStreamBandwidth)
+                {
+                    maxSingleStreamBandwidth = streamBandwidth;
+                }
             }
         }
     }
