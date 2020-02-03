@@ -22,5 +22,4 @@ import core4inet.nodes.ethernet.IEEE8021Qbv.IEEE8021QbvEtherSwitch;
 //
 module Switch1 extends IEEE8021QbvEtherSwitch
 {
-    @display("bgb=351,311");
 }

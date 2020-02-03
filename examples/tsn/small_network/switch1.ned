@@ -22,5 +22,4 @@ import core4inet.nodes.ethernet.tsn.TSNEtherSwitch;
 //
 module Switch1 extends TSNEtherSwitch
 {
-    @display("bgb=351,311");
 }
