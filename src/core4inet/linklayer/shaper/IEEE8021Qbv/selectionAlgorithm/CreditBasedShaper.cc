@@ -15,6 +15,9 @@
 
 #include "CreditBasedShaper.h"
 
+//INET
+#include "inet/linklayer/ethernet/Ethernet.h"
+
 namespace CoRE4INET {
 
 Define_Module(CreditBasedShaper);
@@ -24,7 +27,10 @@ simsignal_t CreditBasedShaper::creditSignal = registerSignal("credit");
 CreditBasedShaper::CreditBasedShaper()
 {
     this->credit = 0;
+    this->isScheduled = false;
+    this->inTransmission = false;
     this->queueSize = 0;
+    this->previousQueueSize = 0;
     this->newTime = 0;
     this->oldTime = 0;
     this->portBandwidth = 0;
@@ -77,6 +83,7 @@ void CreditBasedShaper::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("schedulerIn"))
     {
+        this->isScheduled = false;
         this->idleSlope(this->queueSize == 0);
     }
     delete msg;
@@ -89,6 +96,11 @@ void CreditBasedShaper::receiveSignal(__attribute__ ((unused)) cComponent *sourc
         inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
         if (macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE)
         {
+            if (this->inTransmission)
+            {
+                this->inTransmission = false;
+                emit(this->creditSignal, this->credit);
+            }
             this->idleSlope(this->queueSize == 0);
         }
     }
@@ -109,7 +121,7 @@ void CreditBasedShaper::receiveSignal(__attribute__ ((unused)) cComponent *sourc
         if (this->queueSize < this->previousQueueSize)
         {
             cPacket* sizeMsg = new cPacket();
-            sizeMsg->setByteLength(this->previousQueueSize - this->queueSize);
+            sizeMsg->setByteLength((this->previousQueueSize - this->queueSize) + PREAMBLE_BYTES + SFD_BYTES + (INTERFRAME_GAP_BITS / 8));
             this->sendSlope(this->outChannel->calculateDuration(sizeMsg));
             delete sizeMsg;
         }
@@ -120,26 +132,27 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
 {
     this->newTime = this->getCurrentTime();
     simtime_t duration = this->newTime - this->oldTime;
+    unsigned long reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+    // TODO Add Warning when reservedBandwidth is zero.
     if (duration > 0)
     {
-        unsigned long reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
-        // TODO Add Warning when reservedBandwidth is zero.
         this->credit += static_cast<int>(ceil(static_cast<double>(reservedBandwidth) * duration.dbl()));
         if (maxCreditZero && this->credit > 0)
         {
             this->credit = 0;
         }
-        this->oldTime = this->getCurrentTime();
         emit(this->creditSignal, this->credit);
+        this->oldTime = this->getCurrentTime();
         this->refreshState();
-        if (credit < 0)
-        {
-            double tillZeroDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwidth);
-            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer(static_cast<uint64_t>(ceil(tillZeroDuration / getOscillator()->getPreciseTick())));
-            event->setDestinationGate(gate("schedulerIn"));
-            getTimer()->registerEvent(event);
-        }
+    }
+    if (this->credit < 0 && !(this->isScheduled))
+    {
+        double tillZeroDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwidth);
+        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+        event->setTimer(static_cast<uint64_t>(ceil(tillZeroDuration / getOscillator()->getPreciseTick())));
+        event->setDestinationGate(gate("schedulerIn"));
+        getTimer()->registerEvent(event);
+        this->isScheduled = true;
     }
 }
 
@@ -151,6 +164,7 @@ void CreditBasedShaper::sendSlope(simtime_t duration)
         credit -= static_cast<int>(ceil(static_cast<double>(this->portBandwidth - reservedBandwidth) * duration.dbl()));
         this->oldTime = this->getCurrentTime() + duration;
         this->refreshState();
+        this->inTransmission = true;
     }
 }
 

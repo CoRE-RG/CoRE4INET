@@ -49,6 +49,14 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      */
     int credit;
     /**
+     * @brief Task Event is Scheduled
+     */
+    bool isScheduled;
+    /**
+     * @brief Frame is in Transmission
+     */
+    bool inTransmission;
+    /**
      * @brief Size the corresponding queue.
      */
     unsigned long queueSize;
