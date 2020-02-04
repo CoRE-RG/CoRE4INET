@@ -13,16 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "DestMACFilter.h"
+#include <core4inet/linklayer/filtering/IEEE8021Qci/filter/MACFilter.h>
 
 namespace CoRE4INET {
 
-Define_Module(DestMACFilter);
+Define_Module(MACFilter);
 
-bool DestMACFilter::isMatching(inet::EtherFrame* frame)
+bool MACFilter::isMatching(inet::EtherFrame* frame)
 {
     bool match = false;
-    if ((this->destAddress.isUnspecified() || this->destAddress.getInt() == frame->getDest().getInt())
+    if ((this->srcAddress.isUnspecified() || this->srcAddress.getInt() == frame->getSrc().getInt())
+            && (this->destAddress.isUnspecified() || this->destAddress.getInt() == frame->getDest().getInt())
             && IEEE8021QciFilter::isMatching(frame))
     {
         match = true;
@@ -30,9 +31,16 @@ bool DestMACFilter::isMatching(inet::EtherFrame* frame)
     return match;
 }
 
-void DestMACFilter::handleParameterChange(const char* parname)
+void MACFilter::handleParameterChange(const char* parname)
 {
     IEEE8021QciFilter::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "srcAddress"))
+    {
+        if (strcmp(par("srcAddress").stdstringValue().c_str(), ""))
+        {
+            this->srcAddress.setAddress(par("srcAddress").stringValue());
+        }
+    }
     if (!parname || !strcmp(parname, "destAddress"))
     {
         if (strcmp(par("destAddress").stdstringValue().c_str(), ""))

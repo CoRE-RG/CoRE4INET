@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_DESTMACFILTER_H_
-#define __CORE4INET_DESTMACFILTER_H_
+#ifndef CORE4INET_MACFILTER_H_
+#define CORE4INET_MACFILTER_H_
 
 //OMNeT++
 #include <omnetpp.h>
@@ -32,9 +32,13 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class DestMACFilter : public virtual IEEE8021QciFilter
+class MACFilter : public virtual IEEE8021QciFilter
 {
   private:
+    /**
+     * @brief Source MAC address of the stream filter
+     */
+    inet::MACAddress srcAddress;
     /**
      * @brief Destination MAC address of the stream filter
      */

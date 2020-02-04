@@ -22,10 +22,12 @@ package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 //
 // @author Philipp Meyer
 //
-simple DestMACFilter extends IEEE8021QciFilter
+simple MACFilter extends IEEE8021QciFilter
 {
     parameters:
-        @class(DestMACFilter);
+        @class(MACFilter);
+        // Source MAC address of the stream filter
+        string srcAddress = default("00:00:00:00:00:00");
         // Destination MAC address of the stream filter
         string destAddress = default("00:00:00:00:00:00");
 }
