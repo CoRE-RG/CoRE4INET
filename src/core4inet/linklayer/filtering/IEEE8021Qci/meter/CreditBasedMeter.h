@@ -18,6 +18,8 @@
 
 //INET
 #include "inet/linklayer/ethernet/EtherMACFullDuplex.h"
+//INET Auto-generated Messages
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/avb/AVBDefs.h"
@@ -26,8 +28,6 @@
 #include "core4inet/services/avb/SRP/SRPTable.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/filter/IEEE8021QciFilter.h"
 #include "core4inet/linklayer/filtering/IEEE8021Qci/meter/IEEE8021QciMeter.h"
-//INET Auto-generated Messages
-#include "inet/linklayer/ethernet/EtherFrame_m.h"
 
 namespace CoRE4INET {
 
@@ -54,17 +54,9 @@ class CreditBasedMeter : public virtual IEEE8021QciMeter, public virtual Timed, 
 
   protected:
     /**
-     * Signal that is emitted every time the credit is recalculated.
+     * @brief Signal that is emitted every time the credit is recalculated.
      */
     static simsignal_t creditSignal;
-    /**
-     * Signal that is emitted every time a frame is received
-     */
-    static simsignal_t frameReceivedSignal;
-    /**
-     * Signal that is emitted every time a frame is dropped.
-     */
-    static simsignal_t frameDroppedSignal;
 
   private:
     /**

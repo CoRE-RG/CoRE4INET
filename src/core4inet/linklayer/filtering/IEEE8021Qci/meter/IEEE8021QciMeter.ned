@@ -24,9 +24,18 @@ simple IEEE8021QciMeter like IIEEE8021QciMeter
 {
     parameters:
     	@display("b=,,,green");
-    	@signal[framePassed](type=long);
-        //Statistic of the credit of the CBM algorithm
-        @statistic[framesPassed](title="Frames Passed"; source=framePassed; unit=B; record=vector; interpolationmode=none;);
+    	// Signal that is emitted when the module receives a frame
+    	@signal[frameReceived](type=long);
+        // Signal that is emmitted when the module sends a frame 
+    	@signal[frameSent](type=long);
+    	// Signal that is emitted when the module drops a frame
+        @signal[frameDropped](type=long);
+        // Statistic for received frames
+        @statistic[framesReceived](title="Frames Received"; source=frameReceived; unit=B; record=vector; interpolationmode=none;);
+        // Statistic for send frames
+        @statistic[framesSent](title="Frames Send"; source=frameSent; unit=B; record=vector; interpolationmode=none;);
+        // Statistic for dropped frames
+        @statistic[framesDropped](title="Frames Dropped"; source=frameDropped; unit=B; record=vector; interpolationmode=none;);
         
     gates:
         // Input of the meter module

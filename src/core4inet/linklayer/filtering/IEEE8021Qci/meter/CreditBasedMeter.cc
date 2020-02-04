@@ -20,8 +20,6 @@ namespace CoRE4INET {
 Define_Module(CreditBasedMeter);
 
 simsignal_t CreditBasedMeter::creditSignal = registerSignal("credit");
-simsignal_t CreditBasedMeter::frameReceivedSignal = registerSignal("frameReceived");
-simsignal_t CreditBasedMeter::frameDroppedSignal = registerSignal("frameDropped");
 
 void CreditBasedMeter::receiveSignal(cComponent *source, simsignal_t signalID, long l, __attribute__((unused)) cObject *details)
 {
@@ -73,17 +71,12 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
-        IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg);
-        if (!ctrl)
-        {
-            throw cRuntimeError("No filtering ctrl header");
-        }
-        cPacket *data = ctrl->decapsulate();
-        if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(data))
+        cPacket *packet = IEEE8021QciMeter::checkAndRemoveCtrlInfo(msg);
+        if (inet::EtherFrame *frame = dynamic_cast<inet::EtherFrame*>(packet))
         {
             this->numFramesReceived++;
             this->numBytesReceived += frame->getByteLength();
-            emit(frameReceivedSignal, static_cast<long>(frame->getByteLength()));
+            this->emit(frameReceivedSignal, static_cast<long>(frame->getByteLength()));
             this->refreshReservedBandwidthAndMaxCredit();
             this->idleSlope(simtime_t{0});
             this->refreshState();
@@ -91,9 +84,8 @@ void CreditBasedMeter::handleMessage(cMessage *msg)
         }
         else
         {
-            throw cRuntimeError("Encapsulated packet of received message on gate in that is no EtherFrame");
+            throw cRuntimeError("Packet type is not EtherFrame");
         }
-        delete ctrl;
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
@@ -192,7 +184,7 @@ void CreditBasedMeter::meter(inet::EtherFrame *frame)
 {
     if (this->state == this->State::R_RA)
     {
-        IEEE8021QciMeter::handleMessage(frame);
+        IEEE8021QciMeter::sendMessage(frame);
         this->emitCredit();
         this->sendSlope(frame);
         this->refreshState();
@@ -200,7 +192,7 @@ void CreditBasedMeter::meter(inet::EtherFrame *frame)
     else if (this->state == this->State::R_RF)
     {
         this->bubble("Frame dropped!");
-        emit(frameDroppedSignal, static_cast<long>(frame->getByteLength()));
+        this->emit(frameDroppedSignal, static_cast<long>(frame->getByteLength()));
         delete frame;
     }
 }
@@ -290,7 +282,7 @@ void CreditBasedMeter::emitCredit()
 {
     if (this->getCurrentTime() > this->lastEmitCredit)
     {
-        emit(creditSignal, credit);
+        this->emit(creditSignal, credit);
         this->lastEmitCredit = this->getCurrentTime();
     }
 }

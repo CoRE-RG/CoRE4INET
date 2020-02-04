@@ -19,7 +19,9 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QciMeter);
 
-simsignal_t IEEE8021QciMeter::framePassedSignal = registerSignal("framePassed");
+simsignal_t IEEE8021QciMeter::frameSendSignal = registerSignal("frameSent");
+simsignal_t IEEE8021QciMeter::frameReceivedSignal = registerSignal("frameReceived");
+simsignal_t IEEE8021QciMeter::frameDroppedSignal = registerSignal("frameDropped");
 
 void IEEE8021QciMeter::initialize()
 {
@@ -38,21 +40,10 @@ void IEEE8021QciMeter::handleMessage(cMessage *msg)
 {
     if (msg && msg->arrivedOn("in"))
     {
-        this->numFramesSent++;
-        if (IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg))
-        {
-            cPacket *data = ctrl->decapsulate();
-            delete ctrl;
-            this->numBytesSent += data->getByteLength();
-            emit(framePassedSignal, static_cast<long>(data->getByteLength()));
-            sendDirect(data, streamOutput->gate("filterIn"));
-        }
-        else
-        {
-            this->numBytesSent += dynamic_cast<cPacket*>(msg)->getByteLength();
-            emit(framePassedSignal, static_cast<long>(dynamic_cast<cPacket*>(msg)->getByteLength()));
-            sendDirect(msg, streamOutput->gate("filterIn"));
-        }
+        cPacket *packet = this->checkAndRemoveCtrlInfo(msg);
+        this->numBytesReceived += packet->getByteLength();
+        emit(frameReceivedSignal, static_cast<long>(packet->getByteLength()));
+        this->sendMessage(packet);
     }
 }
 
@@ -66,8 +57,44 @@ void IEEE8021QciMeter::finish()
             recordScalar("frames/sec rcvd", this->numFramesReceived / t);
             recordScalar("bits/sec rcvd", (8.0 * this->numBytesReceived) / t);
         }
-        recordScalar("frames/sec passed", this->numFramesSent / t);
-        recordScalar("bits/sec passed", (8.0 * this->numBytesSent) / t);
+        recordScalar("frames/sec sent", this->numFramesSent / t);
+        recordScalar("bits/sec sent", (8.0 * this->numBytesSent) / t);
+    }
+}
+
+cPacket* IEEE8021QciMeter::checkAndRemoveCtrlInfo(cMessage *msg)
+{
+    if (cPacket *packet = dynamic_cast<cPacket*>(msg))
+    {
+        if (IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(packet))
+        {
+            packet = ctrl->decapsulate();
+            delete ctrl;
+        }
+        return packet;
+    }
+    else
+    {
+        throw cRuntimeError("Message type is not cPacket");
+    }
+}
+
+void IEEE8021QciMeter::sendMessage(cMessage *msg)
+{
+    this->numFramesSent++;
+    if (IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg))
+    {
+        cPacket *data = ctrl->decapsulate();
+        delete ctrl;
+        this->numBytesSent += data->getByteLength();
+        emit(frameSendSignal, static_cast<long>(data->getByteLength()));
+        sendDirect(data, streamOutput->gate("filterIn"));
+    }
+    else
+    {
+        this->numBytesSent += dynamic_cast<cPacket*>(msg)->getByteLength();
+        emit(frameSendSignal, static_cast<long>(dynamic_cast<cPacket*>(msg)->getByteLength()));
+        sendDirect(msg, streamOutput->gate("filterIn"));
     }
 }
 

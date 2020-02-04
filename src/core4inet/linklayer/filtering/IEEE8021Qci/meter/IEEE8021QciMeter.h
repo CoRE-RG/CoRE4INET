@@ -49,9 +49,17 @@ class IEEE8021QciMeter : public virtual cSimpleModule
      */
     unsigned long numBytesSent = 0;
     /**
-     * @brief Signal emitted when frame passes the meter
+     * @brief Signal that is emitted every time a frame is received
      */
-    static simsignal_t framePassedSignal;
+    static simsignal_t frameReceivedSignal;
+    /**
+     * @brief Signal emitted when frame send by the module
+     */
+    static simsignal_t frameSendSignal;
+    /**
+     * @brief Signal that is emitted every time a frame is dropped.
+     */
+    static simsignal_t frameDroppedSignal;
 
   private:
     IEEE8021QciOutput *streamOutput;
@@ -71,6 +79,16 @@ class IEEE8021QciMeter : public virtual cSimpleModule
      * @brief Records simulation results
      */
     virtual void finish();
+    /**
+     * @brief Check and remove IEEE8021QciCtrl
+     */
+    virtual cPacket* checkAndRemoveCtrlInfo(cMessage *msg);
+    /**
+     * @brief Send the message to the output
+     *
+     * @param msg the message to be sent
+     */
+    virtual void sendMessage(cMessage *msg);
 };
 
 } //namespace
