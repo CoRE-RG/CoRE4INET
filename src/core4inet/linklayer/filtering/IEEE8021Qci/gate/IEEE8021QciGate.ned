@@ -25,7 +25,9 @@ package core4inet.linklayer.filtering.IEEE8021Qci.gate;
 simple IEEE8021QciGate like IIEEE8021QciGate
 {
     parameters:
+        // Signal that is emitted when the module drops a frame
         @signal[frameDropped](type=unsigned long);
+        // Statistic for dropped frames
         @statistic[framesDropped](title="Frames Dropped"; source=frameDropped; unit=B; record=vector; interpolationmode=none;);
         // State of the gate. o (Open) or C (Closed).
         string state = default("o");

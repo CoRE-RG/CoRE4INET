@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QCIGATECONTROLLIST_H_
-#define __CORE4INET_IEEE8021QCIGATECONTROLLIST_H_
+#ifndef CORE4INET_IEEE8021QCIGATECONTROLLIST_H_
+#define CORE4INET_IEEE8021QCIGATECONTROLLIST_H_
 
 //std
 #include <omnetpp.h>

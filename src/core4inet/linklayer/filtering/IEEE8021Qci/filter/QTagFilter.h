@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_QTAGFILTER_H_
-#define __CORE4INET_QTAGFILTER_H_
+#ifndef CORE4INET_QTAGFILTER_H_
+#define CORE4INET_QTAGFILTER_H_
 
 //OMNeT++
+#include <core4inet/linklayer/filtering/IEEE8021Qci/filter/MACFilter.h>
 #include <omnetpp.h>
 //CoRE4INET
-#include "core4inet/linklayer/filtering/IEEE8021Qci/filter/DestMACFilter.h"
 
 using namespace omnetpp;
 
@@ -30,7 +30,7 @@ namespace CoRE4INET {
  *
  * @author Philipp Meyer
  */
-class QTagFilter : public virtual DestMACFilter
+class QTagFilter : public virtual MACFilter
 {
   private:
     /**

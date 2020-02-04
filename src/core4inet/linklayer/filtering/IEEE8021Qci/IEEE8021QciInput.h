@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_IEEE8021QCIINPUT_H_
-#define __CORE4INET_IEEE8021QCIINPUT_H_
+#ifndef CORE4INET_IEEE8021QCIINPUT_H_
+#define CORE4INET_IEEE8021QCIINPUT_H_
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
@@ -31,6 +31,12 @@ namespace CoRE4INET {
  */
 class IEEE8021QciInput : public cSimpleModule
 {
+  protected:
+    /**
+     * Signal that is emitted every time a frame is dropped.
+     */
+    static simsignal_t frameDroppedSignal;
+
   private:
     /**
      * @brief Caches pointers to stream filters contained in the IEEE 802.1Qci filter module
@@ -40,7 +46,6 @@ class IEEE8021QciInput : public cSimpleModule
      * @brief Store if all frames without filter match are dropped
      */
     bool isWhiteList;
-
 
   protected:
     /**

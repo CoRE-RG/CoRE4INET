@@ -25,7 +25,11 @@ package core4inet.linklayer.filtering.IEEE8021Qci;
 simple IEEE8021QciInput
 {
     parameters:
-        @display("i=block/fork"); 
+        @display("i=block/fork");
+        // Signal that is emitted when the module drops a frame
+        @signal[frameDropped](type=long);
+        // Statistic for dropped frames
+        @statistic[framesDropped](title="Frames Dropped"; source=frameDropped; unit=B; record=vector; interpolationmode=none;);
         // If all frames that are not matched with a stream filter are dropped
         bool isWhiteList = default(false); 
     gates:

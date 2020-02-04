@@ -55,7 +55,7 @@ void IEEE8021QciGate::handleMessage(cMessage *msg)
         }
         else if (this->state == this->State::CLOSED)
         {
-            this->bubble("Drop frame");
+            this->bubble("Frame dropped!");
             this->emit(frameDroppedSignal, static_cast<unsigned long>(ctrl->getEncapsulatedPacket()->getByteLength()));
             delete ctrl;
             this->numFramesDropped++;

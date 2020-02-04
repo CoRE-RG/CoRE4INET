@@ -26,7 +26,7 @@ bool QTagFilter::isMatching(inet::EtherFrame* frame)
     {
         if ((this->vid == -1 || this->vid == qframe->getVID())
                 && (this->pcp == -1 || this->pcp == qframe->getPcp())
-                && DestMACFilter::isMatching(frame))
+                && MACFilter::isMatching(frame))
         {
             match = true;
         }
@@ -36,7 +36,7 @@ bool QTagFilter::isMatching(inet::EtherFrame* frame)
 
 void QTagFilter::handleParameterChange(const char* parname)
 {
-    DestMACFilter::handleParameterChange(parname);
+    MACFilter::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "vID"))
     {
         this->vid = static_cast<uint16_t>(parameterLongCheckRange(par("vID"), -1, MAX_VLAN_ID));

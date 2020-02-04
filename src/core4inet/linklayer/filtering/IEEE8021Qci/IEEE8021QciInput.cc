@@ -19,6 +19,8 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QciInput);
 
+simsignal_t IEEE8021QciInput::frameDroppedSignal = registerSignal("frameDropped");
+
 void IEEE8021QciInput::initialize()
 {
     int numStreamFilters = parameterULongCheckRange(getParentModule()->par("numStreamFilters"), 0, UINT32_MAX);
@@ -61,7 +63,8 @@ void IEEE8021QciInput::handleMessage(cMessage *msg)
             }
             else
             {
-                this->bubble("Drop frame");
+                this->bubble("Frame dropped!");
+                emit(frameDroppedSignal, static_cast<long>(frame->getByteLength()));
                 delete frame;
             }
         }

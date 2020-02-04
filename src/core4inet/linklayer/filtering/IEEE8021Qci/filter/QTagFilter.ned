@@ -22,7 +22,7 @@ package core4inet.linklayer.filtering.IEEE8021Qci.filter;
 //
 // @author Philipp Meyer
 //
-simple QTagFilter extends DestMACFilter
+simple QTagFilter extends MACFilter
 {
     parameters:
         @class(QTagFilter);
