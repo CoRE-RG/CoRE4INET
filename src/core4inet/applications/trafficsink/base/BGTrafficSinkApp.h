@@ -30,7 +30,7 @@ namespace CoRE4INET {
  * @sa TrafficSinkApp
  * @ingroup Applications
  *
- * @author Till Steinbach
+ * @author Till Steinbach, Sandra Reider
  */
 class BGTrafficSinkApp : public virtual TrafficSinkApp
 {
@@ -51,6 +51,13 @@ class BGTrafficSinkApp : public virtual TrafficSinkApp
          * @param msg incoming frame
          */
         virtual void handleMessage(cMessage *msg) override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         **/
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

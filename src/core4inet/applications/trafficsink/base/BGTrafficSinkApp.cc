@@ -30,12 +30,21 @@ void BGTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
 
-    if (par("srcAddress").stdstringValue() == "auto")
+    handleParameterChange(nullptr);
+}
+
+void BGTrafficSinkApp::handleParameterChange(const char* parname)
+{
+    TrafficSinkApp::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "srcAddress"))
     {
-        // change module parameter from "auto" to concrete address
-        par("srcAddress").setStringValue(inet::MACAddress::UNSPECIFIED_ADDRESS.str());
+        if (par("srcAddress").stdstringValue() == "auto")
+        {
+            // change module parameter from "auto" to concrete address
+            par("srcAddress").setStringValue(inet::MACAddress::UNSPECIFIED_ADDRESS.str());
+        }
+        address = inet::MACAddress(par("srcAddress").stringValue());
     }
-    address = inet::MACAddress(par("srcAddress").stringValue());
 }
 
 void BGTrafficSinkApp::handleMessage(cMessage *msg)
