@@ -17,54 +17,48 @@
 
 #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 
+//CoRE4INET
+#include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 
 Define_Module(IEEE8021QTrafficSinkApp);
 
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ0Signal = registerSignal("rxPkQ0");
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ1Signal = registerSignal("rxPkQ1");
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ2Signal = registerSignal("rxPkQ2");
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ3Signal = registerSignal("rxPkQ3");
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ4Signal = registerSignal("rxPkQ4");
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ5Signal = registerSignal("rxPkQ5");
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ6Signal = registerSignal("rxPkQ6");
-simsignal_t IEEE8021QTrafficSinkApp::rxPkQ7Signal = registerSignal("rxPkQ7");
+void IEEE8021QTrafficSinkApp::initialize()
+{
+    BGTrafficSinkApp::initialize();
+    handleParameterChange(nullptr);
+    for (unsigned int i = 0; i < this->numPCP; i++)
+    {
+        simsignal_t signalPk = registerSignal(("rxQPcp" + std::to_string(i) + "Pk").c_str());
+        cProperty* statisticTemplate = getProperties()->get("statisticTemplate", "rxQPcpPk");
+        getEnvir()->addResultRecorders(this, signalPk, ("rxQPcp" + std::to_string(i) + "Pk").c_str(), statisticTemplate);
+        statisticTemplate = getProperties()->get("statisticTemplate", "rxQPcpBytes");
+        getEnvir()->addResultRecorders(this, signalPk, ("rxQPcp" + std::to_string(i) + "Bytes").c_str(), statisticTemplate);
+
+        this->rxQPcpPkSignals.push_back(signalPk);
+    }
+}
 
 void IEEE8021QTrafficSinkApp::handleMessage(cMessage *msg)
 {
     if (EthernetIIFrameWithQTag *qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg)){
         if (address.isUnspecified() || qframe->getSrc() == address){
             int pcp = qframe->getPcp();
-            switch(pcp){
-            case 0:
-                emit(rxPkQ0Signal, qframe);
-            break;
-            case 1:
-                emit(rxPkQ1Signal, qframe);
-            break;
-            case 2:
-                emit(rxPkQ2Signal, qframe);
-                break;
-            case 3:
-                emit(rxPkQ3Signal, qframe);
-                break;
-            case 4:
-                emit(rxPkQ4Signal, qframe);
-                break;
-            case 5:
-                emit(rxPkQ5Signal, qframe);
-                break;
-            case 6:
-                emit(rxPkQ6Signal, qframe);
-                break;
-            case 7:
-                emit(rxPkQ7Signal, qframe);
-                break;
-            }
+            emit(this->rxQPcpPkSignals[pcp], qframe);
         }
     }
     BGTrafficSinkApp::handleMessage(msg);
 }
+
+void IEEE8021QTrafficSinkApp::handleParameterChange(const char* parname)
+{
+    BGTrafficSinkApp::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "numPCP"))
+    {
+        this->numPCP = static_cast<unsigned int>(parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<int>::max()));
+    }
+}
+
 
 } //namespace

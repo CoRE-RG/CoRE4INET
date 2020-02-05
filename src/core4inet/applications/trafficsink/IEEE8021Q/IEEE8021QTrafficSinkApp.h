@@ -35,26 +35,36 @@ namespace CoRE4INET {
  */
 class IEEE8021QTrafficSinkApp : public virtual BGTrafficSinkApp
 {
-private:
+    private:
         /**
-         * Signal that is emitted every time a frame was sent.
+         * @brief Number of priorities.
          */
-        static simsignal_t rxPkQ0Signal;
-        static simsignal_t rxPkQ1Signal;
-        static simsignal_t rxPkQ2Signal;
-        static simsignal_t rxPkQ3Signal;
-        static simsignal_t rxPkQ4Signal;
-        static simsignal_t rxPkQ5Signal;
-        static simsignal_t rxPkQ6Signal;
-        static simsignal_t rxPkQ7Signal;
+        unsigned int numPCP;
 
     protected:
+        /**
+         * @brief Signals that are emitted when a frame is received.
+         */
+        std::vector<simsignal_t> rxQPcpPkSignals;
+
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize() override;
+
         /**
          * @brief collects incoming message and writes statistics.
          *
          * @param msg incoming frame
          */
         virtual void handleMessage(cMessage *msg) override;
+
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
 };
 
 } //namespace

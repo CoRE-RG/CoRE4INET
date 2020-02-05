@@ -32,6 +32,21 @@ IEEE8021QTrafficSourceApp::IEEE8021QTrafficSourceApp()
     this->vid = 0;
 }
 
+void IEEE8021QTrafficSourceApp::initialize()
+{
+    TrafficSourceAppBase::initialize();
+    for (unsigned int i = 0; i < this->numPCP; i++)
+    {
+        simsignal_t signalPk = registerSignal(("txQPcp" + std::to_string(i) + "Pk").c_str());
+        cProperty* statisticTemplate = getProperties()->get("statisticTemplate", "txQPcpPk");
+        getEnvir()->addResultRecorders(this, signalPk, ("txQPcp" + std::to_string(i) + "Pk").c_str(), statisticTemplate);
+        statisticTemplate = getProperties()->get("statisticTemplate", "txQPcpBytes");
+        getEnvir()->addResultRecorders(this, signalPk, ("txQPcp" + std::to_string(i) + "Bytes").c_str(), statisticTemplate);
+
+        this->txQPcpPkSignals.push_back(signalPk);
+    }
+}
+
 void IEEE8021QTrafficSourceApp::handleMessage(cMessage *msg)
 {
 
@@ -67,6 +82,7 @@ void IEEE8021QTrafficSourceApp::sendMessage()
         {
             frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
         }
+        emit(this->txQPcpPkSignals[priority], frame);
         sendDirect(frame, (*buf)->gate("in"));
     }
 
@@ -97,11 +113,15 @@ void IEEE8021QTrafficSourceApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "priority"))
     {
-        this->priority = static_cast<uint8_t>(parameterLongCheckRange(par("priority"), 0, 7));
+        this->priority = static_cast<uint8_t>(parameterLongCheckRange(par("priority"), 0, MAX_Q_PRIORITY));
     }
     if (!parname || !strcmp(parname, "vid"))
     {
         this->vid = static_cast<uint16_t>(parameterLongCheckRange(par("vid"), 0, MAX_VLAN_ID));
+    }
+    if (!parname || !strcmp(parname, "numPCP"))
+    {
+        this->numPCP = static_cast<unsigned int>(parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<int>::max()));
     }
 }
 

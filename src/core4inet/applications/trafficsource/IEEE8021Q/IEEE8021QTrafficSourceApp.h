@@ -53,12 +53,28 @@ class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
          * @brief caches vid parameter
          */
         uint16_t vid;
+
+        /**
+         * @brief Number of priorities.
+         */
+        unsigned int numPCP;
+
     public:
         /**
          * @brief Constructor of IEEE8021QTrafficSourceApp
          */
         IEEE8021QTrafficSourceApp();
+
     protected:
+        /**
+         * @brief Signals that are emitted when a frame is send.
+         */
+        std::vector<simsignal_t> txQPcpPkSignals;
+
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize() override;
 
         /**
          * @brief handle self messages to send frames

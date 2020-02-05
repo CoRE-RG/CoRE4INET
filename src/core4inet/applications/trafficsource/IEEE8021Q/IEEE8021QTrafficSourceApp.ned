@@ -34,4 +34,13 @@ simple IEEE8021QTrafficSourceApp extends BGTrafficSourceApp
     	int priority = default(0);
     	// VLAN ID (0=untagged, 4094=Highest)
     	int vid = default(0);
+    	// Number of priorities.
+        int numPCP = default(8);
+    	
+    	//Signal emitted when a frame with corresponding q-priority is send for each q-priority
+        @signal[txQPcp*Pk](type=inet::EtherFrame);
+        //Statistic of the amount of packets that were send by the application for each q-priority
+        @statisticTemplate[txQPcpPk](title="Send Packets"; record=count; unit=packets);
+        //Statistic of the amount of bytes that were send by the application
+        @statisticTemplate[txQPcpBytes](title="Send Bytes"; unit=B; record="sum(packetBytes)","vector(packetBytes)", "histogram(packetBytes)?","floatingIntervalSumVector(packetBytes)?"; interpolationmode=none); //possible parameter e.g.: **.floatingintervalvectorrecorder-measure-interval = 20ms for floatingIntervalRecorders
 }

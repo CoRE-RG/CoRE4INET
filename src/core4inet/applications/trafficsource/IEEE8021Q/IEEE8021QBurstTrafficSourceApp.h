@@ -40,6 +40,12 @@ class IEEE8021QBurstTrafficSourceApp: public virtual BGBurstTrafficSourceApp
          * @brief caches vid parameter
          */
         uint16_t vid;
+
+        /**
+         * @brief Number of priorities.
+         */
+        unsigned int numPCP;
+
     public:
         /**
          * @brief Constructor of IEEE8021QBurstTrafficSourceApp
@@ -47,6 +53,16 @@ class IEEE8021QBurstTrafficSourceApp: public virtual BGBurstTrafficSourceApp
         IEEE8021QBurstTrafficSourceApp();
 
     protected:
+        /**
+         * @brief Signals that are emitted when a frame is send.
+         */
+        std::vector<simsignal_t> txQPcpPkSignals;
+
+        /**
+         * @brief Initialization of the module. Sends activator message
+         */
+        virtual void initialize() override;
+
         /**
          * @brief Generates and sends a new Message.
          *
