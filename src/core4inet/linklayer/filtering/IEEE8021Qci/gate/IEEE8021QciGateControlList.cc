@@ -25,7 +25,7 @@ Define_Module(IEEE8021QciGateControlList);
 void IEEE8021QciGateControlList::handleParameterChange(const char* parname)
 {
     Scheduled::handleParameterChange(parname);
-    this->numGates = this->getParentModule()->par("numStreamGates").longValue();
+    this->numGates = this->getParentModule()->par("numStreamGates").intValue();
     if (!parname || !strcmp(parname, "controlList"))
     {
         IEEE8021QbvGateControlList::handleParameterChange("controlList");

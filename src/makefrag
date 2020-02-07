@@ -6,6 +6,8 @@
 # WARNINGS_ERROR=1
 # for -Werror
 
+MSGCOPTS += --msg4
+
 #check for existing INET-Framework
 ifeq ("$(wildcard $(INET_PROJ)/src/inet/common/INETDefs.h)","")
     $(error "Cannot find INET-Framework in the provided path: $(INET_PROJ). \
