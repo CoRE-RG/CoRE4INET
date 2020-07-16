@@ -25,22 +25,25 @@ package core4inet.services.avb.SRP;
 //
 // @see SRPEtherLLC, SRPRelay
 //
-// @author Till Steinbach
+// @author Till Steinbach, Philipp Meyer
 //
 simple SRProtocol
 {
     parameters:
         @display("i=block/network2,blue");
-        @class(SRProtocol);
-        
-        //Amount of total bandwidth that is reservable (0-1) default: 0.75 representing 75% 
+        @class(SRProtocol);     
+        // Amount of total bandwidth that is reservable (0-1) default: 0.75 representing 75% 
         double reservableBandwidth = default(0.75); 
-        
-        //SRP Table module, default name is srpTable
+        // PCP value (0-7) that represents AVB SRClass A
+        int pcpSRClassA = default(6);
+        // PCP value (0-7) that represents AVB SRClass B
+        int pcpSRClassB = default(5);
+        // SRP Table module, default name is srpTable
         string srpTable = default("^.srpTable");
+        
     gates:
-        //Gate for incoming SRP messages
+        // Gate for incoming SRP messages
         input in @labels(EtherFrame);
-        //Gate for outgoing SRP messages
+        // Gate for outgoing SRP messages
         output out @labels(EtherFrame);
 }
