@@ -13,13 +13,20 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.examples.tsn.filter_network;
+#include <core4inet/linklayer/manipulation/Manipulator.h>
 
-import core4inet.nodes.ethernet.tsn.CorruptedTSNEtherHost;
+namespace CoRE4INET {
 
-//
-// Node1: configuration in node1.ini.
-//
-module Node1 extends CorruptedTSNEtherHost
+Define_Module(Manipulator);
+
+void Manipulator::initialize()
 {
+    // TODO - Generated method body
 }
+
+void Manipulator::handleMessage(cMessage *msg)
+{
+    this->send(msg,"out");
+}
+
+} //namespace

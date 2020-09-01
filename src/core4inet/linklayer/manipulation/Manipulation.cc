@@ -13,13 +13,27 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.examples.tsn.filter_network;
+#include "Manipulation.h"
 
-import core4inet.nodes.ethernet.tsn.CorruptedTSNEtherHost;
+namespace CoRE4INET {
 
-//
-// Node1: configuration in node1.ini.
-//
-module Node1 extends CorruptedTSNEtherHost
+Define_Module(Manipulation);
+
+void Manipulation::initialize()
 {
+    // TODO - Generated method body
 }
+
+void Manipulation::handleMessage(cMessage *msg)
+{
+    if(msg->arrivedOn("in"))
+    {
+        if(inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
+        {
+            frame->setSrc(inet::MACAddress("FF-FF-FF-FF-FF-FF"));
+        }
+    }
+    Manipulator::handleMessage(msg);
+}
+
+} //namespace

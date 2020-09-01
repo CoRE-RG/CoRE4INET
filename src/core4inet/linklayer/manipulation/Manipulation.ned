@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.examples.tsn.filter_network;
-
-import core4inet.nodes.ethernet.tsn.CorruptedTSNEtherHost;
+package core4inet.linklayer.manipulation;
 
 //
-// Node1: configuration in node1.ini.
+// TODO auto-generated module
 //
-module Node1 extends CorruptedTSNEtherHost
+simple Manipulation extends Manipulator
 {
+    parameters:
+        @class(Manipulation);
 }

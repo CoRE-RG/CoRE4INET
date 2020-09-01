@@ -13,13 +13,38 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.examples.tsn.filter_network;
+#ifndef __CORE4INET_INJECTION_H_
+#define __CORE4INET_INJECTION_H_
 
-import core4inet.nodes.ethernet.tsn.CorruptedTSNEtherHost;
+//std
+#include <deque>
+//OMNeT++
+#include <omnetpp.h>
+//CoRE4INET
+#include "core4inet/linklayer/manipulation/Manipulator.h"
 
-//
-// Node1: configuration in node1.ini.
-//
-module Node1 extends CorruptedTSNEtherHost
+using namespace omnetpp;
+
+namespace CoRE4INET {
+
+/**
+ * TODO - Generated class
+ */
+class Injection : public virtual Manipulator
 {
-}
+  private:
+    std::deque<cMessage*> savedMessages;
+    size_t numberOfSavedMessages;
+
+  public:
+    Injection();
+    virtual ~Injection();
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
+
+} //namespace
+
+#endif

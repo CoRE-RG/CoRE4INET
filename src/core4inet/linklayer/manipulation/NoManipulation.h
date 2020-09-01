@@ -13,13 +13,24 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.examples.tsn.filter_network;
+#ifndef __CORE4INET_NOMANIPULATION_H_
+#define __CORE4INET_NOMANIPULATION_H_
 
-import core4inet.nodes.ethernet.tsn.CorruptedTSNEtherHost;
+#include <omnetpp.h>
 
-//
-// Node1: configuration in node1.ini.
-//
-module Node1 extends CorruptedTSNEtherHost
+using namespace omnetpp;
+
+namespace CoRE4INET {
+
+/**
+ * TODO - Generated class
+ */
+class NoManipulation : public cSimpleModule
 {
-}
+  protected:
+    virtual void handleMessage(cMessage *msg);
+};
+
+} //namespace
+
+#endif

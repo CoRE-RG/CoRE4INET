@@ -33,7 +33,7 @@ import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGateControlList;
 module IEEE8021Qbv_Shaper like IShaper
 {
     parameters:
-        @display("i=block/classifier");
+        @display("i=block/classifier;bgb=1365,246");
         //Untagged VLAN. Outgoing frames with this VLAN get untagged.
         int untaggedVID = default(0);
         //Interface allows frames with this VLAN to leave the port.
@@ -42,7 +42,7 @@ module IEEE8021Qbv_Shaper like IShaper
         int numPCP = default(8);
         // Bandwidth of the TDMA traffic with higher priority than the CBS on this port (for compability with SRProtocol module)
         int AVBHigherPriorityBandwidth @unit(bps) = default(0bps);
-        
+
     gates:
         // Input of the IEEE 802.1Qbv shaper.
         input in @labels(EtherFrame);
@@ -50,45 +50,45 @@ module IEEE8021Qbv_Shaper like IShaper
         input inD @labels(EtherFrame);
         // Output of the IEEE 802.1Qbv shaper.
         output out @labels(EtherFrame);
-        
+
     submodules:
         queueing: <default("IEEE8021QbvQueueing")> like IIEEE8021QbvQueueing {
-          	parameters:
-             	@display("p=75,150");
-             	untaggedVID = untaggedVID;
-                taggedVIDs = taggedVIDs;   
-             	numPCP = numPCP;
+            parameters:
+                @display("p=75,150");
+                untaggedVID = untaggedVID;
+                taggedVIDs = taggedVIDs;
+                numPCP = numPCP;
         }
-        
+
         queue[numPCP]: <default("IEEE8021QbvQueue")> like IBuffer {
             @display("p=375,150,c,130");
         }
-        
+
         transmissionSelectionAlgorithm[numPCP]: <default("IEEE8021QbvSelectionAlgorithm")> like IIEEE8021QbvSelectionAlgorithm {
             @display("p=675,150,c,130");
         }
-        
+
         transmissionGate[numPCP]: <default("IEEE8021QbvGate")> like IIEEE8021QbvGate {
-        	@display("p=975,150,c,130");
+            @display("p=975,150,c,130");
         }
-        
+
         transmissionSelection: <default("IEEE8021QbvSelection")> like IIEEE8021QbvSelection {
             parameters:
-            	@display("p=1275,150");
-            	numPCP = numPCP;
+                @display("p=1275,150");
+                numPCP = numPCP;
         }
-        
+
         gateControlList: <default("IEEE8021QbvGateControlList")> like IIEEE8021QbvGateControlList {
             parameters:
-            	@display("p=975,75");
-            	numGates = numPCP;
+                @display("p=975,75");
+                numGates = numPCP;
         }
-        
+
     connections:
         in --> queueing.in[0];
         inD --> queueing.in[1];
         for i=0..numPCP-1 {
             queueing.out[i] --> queue[i].in;
         }
-        transmissionSelection.out --> out;     
+        transmissionSelection.out --> out;
 }

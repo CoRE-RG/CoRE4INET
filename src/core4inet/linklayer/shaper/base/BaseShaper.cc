@@ -14,9 +14,11 @@
 //
 #include "core4inet/linklayer/shaper/base/BaseShaper.h"
 
-#include "inet/common/ModuleAccess.h"
+//CoRE4INET
+#include "core4inet/utilities/ModuleAccess.h"
 
 //INET
+#include "inet/common/ModuleAccess.h"
 #include "inet/linklayer/ethernet/EtherMACFullDuplex.h"
 
 //Std
@@ -29,7 +31,7 @@ void BaseShaper::initialize(int stage)
     if (stage == 0)
     {
         inet::EtherMACFullDuplex* mac =
-                dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
+                dynamic_cast<inet::EtherMACFullDuplex*>(findModuleWhereverInNode("mac", this));
         if (mac->gate("phys$o"))
         {
             cGate *physOutGate = mac->gate("phys$o");
