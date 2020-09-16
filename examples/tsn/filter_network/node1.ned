@@ -15,11 +15,11 @@
 
 package core4inet.examples.tsn.filter_network;
 
-import core4inet.nodes.ethernet.tsn.CorruptedTSNEtherHost;
+import core4inet.nodes.ethernet.tsn.TSNEtherHost;
 
 //
 // Node1: configuration in node1.ini.
 //
-module Node1 extends CorruptedTSNEtherHost
+module Node1 extends TSNEtherHost
 {
 }

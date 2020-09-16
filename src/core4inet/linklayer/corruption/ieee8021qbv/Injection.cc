@@ -59,7 +59,7 @@ void Injection::handleMessage(cMessage *msg)
             delete this->savedMessages.front();
             savedMessages.pop_front();
         }
-        Manipulator::handleMessage(msg);
+        IEEE8021QbvSelection::handleMessage(msg);
     }
 }
 

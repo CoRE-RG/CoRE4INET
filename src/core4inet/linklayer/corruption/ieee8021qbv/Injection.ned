@@ -13,13 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.manipulation;
+package core4inet.linklayer.corruption.ieee8021qbv;
+
+import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IEEE8021QbvSelection;
 
 //
 // TODO auto-generated module
 //
-simple Manipulation extends Manipulator
+simple Injection extends IEEE8021QbvSelection
 {
     parameters:
-        @class(Manipulation);
+        @class(Injection);
 }

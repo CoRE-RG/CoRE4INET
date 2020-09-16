@@ -13,38 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_INJECTION_H_
-#define __CORE4INET_INJECTION_H_
+package core4inet.linklayer.corruption.ieee8021qbv;
 
-//std
-#include <deque>
-//OMNeT++
-#include <omnetpp.h>
-//CoRE4INET
-#include "core4inet/linklayer/manipulation/Manipulator.h"
+import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IEEE8021QbvSelection;
 
-using namespace omnetpp;
-
-namespace CoRE4INET {
-
-/**
- * TODO - Generated class
- */
-class Injection : public virtual Manipulator
+//
+// TODO auto-generated module
+//
+simple Manipulation extends IEEE8021QbvSelection
 {
-  private:
-    std::deque<cMessage*> savedMessages;
-    size_t numberOfSavedMessages;
-
-  public:
-    Injection();
-    virtual ~Injection();
-
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-} //namespace
-
-#endif
+    parameters:
+        @class(Manipulation);
+}

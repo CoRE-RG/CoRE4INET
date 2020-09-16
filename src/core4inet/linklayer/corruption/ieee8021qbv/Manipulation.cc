@@ -13,13 +13,31 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.manipulation;
+#include "Manipulation.h"
 
-//
-// TODO auto-generated module
-//
-simple Injection extends Manipulator
+//INET
+#include "inet/linklayer/common/MACAddress.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
+
+namespace CoRE4INET {
+
+Define_Module(Manipulation);
+
+void Manipulation::initialize(int stage)
 {
-    parameters:
-        @class(Injection);
+    IEEE8021QbvSelection::initialize(stage);
 }
+
+void Manipulation::handleMessage(cMessage *msg)
+{
+    if(msg->arrivedOn("in"))
+    {
+        if(inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
+        {
+            frame->setSrc(inet::MACAddress("FF-FF-FF-FF-FF-FF"));
+        }
+    }
+    IEEE8021QbvSelection::handleMessage(msg);
+}
+
+} //namespace

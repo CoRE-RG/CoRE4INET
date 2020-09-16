@@ -16,9 +16,10 @@
 #ifndef __CORE4INET_MANIPULATION_H_
 #define __CORE4INET_MANIPULATION_H_
 
-#include "core4inet/linklayer/manipulation/Manipulator.h"
-
+//OMNeT++
 #include <omnetpp.h>
+//CoRE4INET
+#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
 
 using namespace omnetpp;
 
@@ -27,11 +28,11 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Manipulation : public virtual Manipulator
+class Manipulation : public virtual IEEE8021QbvSelection
 {
   protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    virtual void initialize(int stage) override;
+    virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

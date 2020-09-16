@@ -13,27 +13,38 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Manipulation.h"
+#ifndef __CORE4INET_INJECTION_H_
+#define __CORE4INET_INJECTION_H_
+
+//std
+#include <deque>
+//OMNeT++
+#include <omnetpp.h>
+//CoRE4INET
+#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
+
+using namespace omnetpp;
 
 namespace CoRE4INET {
 
-Define_Module(Manipulation);
-
-void Manipulation::initialize()
+/**
+ * TODO - Generated class
+ */
+class Injection : public virtual IEEE8021QbvSelection
 {
-    // TODO - Generated method body
-}
+  private:
+    std::deque<cMessage*> savedMessages;
+    size_t numberOfSavedMessages;
 
-void Manipulation::handleMessage(cMessage *msg)
-{
-    if(msg->arrivedOn("in"))
-    {
-        if(inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
-        {
-            frame->setSrc(inet::MACAddress("FF-FF-FF-FF-FF-FF"));
-        }
-    }
-    Manipulator::handleMessage(msg);
-}
+  public:
+    Injection();
+    virtual ~Injection();
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
 
 } //namespace
+
+#endif
