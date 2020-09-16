@@ -53,7 +53,6 @@ void Injection::handleMessage(cMessage *msg)
         {
             cMessage* injectMsg = this->savedMessages[rand() % this->savedMessages.size()]->dup();
             injectMsg->setName((std::string(injectMsg->getName()) + "(Injected)").c_str());
-            //this->send(injectMsg, "out");
             messages.push(injectMsg);
         }
         scheduleAt(simTime() + 0.001, msg);
