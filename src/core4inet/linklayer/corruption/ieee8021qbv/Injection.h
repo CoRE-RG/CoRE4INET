@@ -17,6 +17,7 @@
 #define __CORE4INET_INJECTION_H_
 
 //std
+#include <queue>
 #include <deque>
 //OMNeT++
 #include <omnetpp.h>
@@ -33,16 +34,19 @@ namespace CoRE4INET {
 class Injection : public virtual IEEE8021QbvSelection
 {
   private:
+    std::queue<cMessage*> messages;
     std::deque<cMessage*> savedMessages;
     size_t numberOfSavedMessages;
+    uint64_t selfMessageId;
 
   public:
     Injection();
     virtual ~Injection();
 
   protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    virtual void initialize(int stage) override;
+    virtual void handleMessage(cMessage *msg) override;
+    virtual void selectFrame() override;
 };
 
 } //namespace

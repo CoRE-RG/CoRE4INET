@@ -103,14 +103,12 @@ class IEEE8021QbvSelection : public virtual BaseShaper
      * @brief Called at the end of simulation. Records frames + bytes per second results.
      */
     virtual void finish() override;
-
-  private:
     /**
      * @brief Implements IEEE 802.1Qbv transmission frame selection.
      *
      * For each priority starting with the highest (default 7): If queue is not empty and transmission selection algorithm is open and transmission gate is open frame will be selected.
      */
-    void selectFrame();
+    virtual void selectFrame();
 };
 
 } //namespace

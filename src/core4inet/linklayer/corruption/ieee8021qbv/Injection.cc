@@ -33,21 +33,28 @@ Injection::~Injection()
     }
 }
 
-void Injection::initialize()
+void Injection::initialize(int stage)
 {
-    this->numberOfSavedMessages = 10;
-    scheduleAt(simTime() + 0.001, new cMessage("Trigger injection"));
+    IEEE8021QbvSelection::initialize(stage);
+    if (stage == 0)
+    {
+        this->numberOfSavedMessages = 10;
+        cMessage* msg = new cMessage("Trigger injection");
+        this->selfMessageId = msg->getId();
+        scheduleAt(simTime() + 0.001, msg);
+    }
 }
 
 void Injection::handleMessage(cMessage *msg)
 {
-    if (msg->isSelfMessage())
+    if (msg->isSelfMessage() && msg->getId() == this->selfMessageId)
     {
         if (!this->savedMessages.empty())
         {
-            this->bubble("Injection");
             cMessage* injectMsg = this->savedMessages[rand() % this->savedMessages.size()]->dup();
-            this->send(injectMsg, "out");
+            injectMsg->setName((std::string(injectMsg->getName()) + "(Injected)").c_str());
+            //this->send(injectMsg, "out");
+            messages.push(injectMsg);
         }
         scheduleAt(simTime() + 0.001, msg);
     }
@@ -60,6 +67,25 @@ void Injection::handleMessage(cMessage *msg)
             savedMessages.pop_front();
         }
         IEEE8021QbvSelection::handleMessage(msg);
+    }
+    else
+    {
+        IEEE8021QbvSelection::handleMessage(msg);
+    }
+}
+
+void Injection::selectFrame()
+{
+    if (this->framesRequested > 0 && this->messages.size() > 0)
+    {
+        this->framesRequested--;
+        cMessage* msg = messages.front();
+        messages.pop();
+        this->send(msg, "out");
+    }
+    else
+    {
+        IEEE8021QbvSelection::selectFrame();
     }
 }
 

@@ -35,6 +35,7 @@ void Manipulation::handleMessage(cMessage *msg)
         if(inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
         {
             frame->setSrc(inet::MACAddress("FF-FF-FF-FF-FF-FF"));
+            frame->setName((std::string(frame->getName()) + "(Manipulated)").c_str());
         }
     }
     IEEE8021QbvSelection::handleMessage(msg);
