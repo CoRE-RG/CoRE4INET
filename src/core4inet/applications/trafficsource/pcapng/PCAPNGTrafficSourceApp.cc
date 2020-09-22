@@ -19,6 +19,7 @@
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/utilities/ConfigFunctions.h"
 #include "core4inet/buffer/base/BGBuffer.h"
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 
 namespace CoRE4INET {
 
@@ -30,8 +31,9 @@ PCAPNGTrafficSourceApp::PCAPNGTrafficSourceApp() {
     this->startTime = 0;
     this->pcapngFilename = "";
     this->pcapngReader = PCAPNGReader();
-    this->overrideDestAddress = inet::MACAddress();
-    this->overrideSrcAddress = inet::MACAddress();
+    this->filterDestAddress = inet::MACAddress();
+    this->filterSrcAddress = inet::MACAddress();
+    this->pcp = -1;
 
 }
 
@@ -84,13 +86,21 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
     {
         this->destAddress.setAddress(par("destAddress").stringValue());
     }
-    if (!parname || !strcmp(parname, "overrideDestAddress"))
+    if (!parname || !strcmp(parname, "filterDestAddress"))
     {
-        this->overrideDestAddress.setAddress(par("overrideDestAddress").stringValue());
+        this->filterDestAddress.setAddress(par("filterDestAddress").stringValue());
     }
-    if (!parname || !strcmp(parname, "overrideSrcAddress"))
+    if (!parname || !strcmp(parname, "filterSrcAddress"))
     {
-        this->overrideSrcAddress.setAddress(par("overrideSrcAddress").stringValue());
+        this->filterSrcAddress.setAddress(par("filterSrcAddress").stringValue());
+    }
+    if (!parname || !strcmp(parname, "pcp"))
+    {
+        if (par("pcp").intValue() == -1) {
+            this->pcp = -1;
+        } else {
+            this->pcp = static_cast<int8_t>(parameterLongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
+        }
     }
 }
 
@@ -118,27 +128,43 @@ void PCAPNGTrafficSourceApp::handleMessage(cMessage *msg)
 
 void PCAPNGTrafficSourceApp::sendMessage()
 {
-    inet::EthernetIIFrame *nextEtherFrame = pcapngReader.getNextEthernetIIFrame();
-    if (nextEtherFrame == nullptr) {
-        return;
-    }
-
-    nextEtherFrame->setDest(this->destAddress);
-    //nextEtherFrame->setSrc(this->srcAddress);
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
-        // TODO statistiken
-        //emit(this->..., nextEtherFrame);
-        sendDirect(nextEtherFrame, (*buf)->gate("in"));
+        inet::EthernetIIFrame *nextEtherFrame = pcapngReader.getNextEthernetIIFrame();
+        if (nextEtherFrame == nullptr) {
+            return;
+        }
+
+        if (pcp == -1) {
+            nextEtherFrame->setDest(this->destAddress);
+            // TODO statistiken
+            //emit(this->..., nextEtherFrame);
+            sendDirect(nextEtherFrame, (*buf)->gate("in"));
+        } else {
+            cPacket *payloadPacket = nextEtherFrame->decapsulate();
+            EthernetIIFrameWithQTag *qFrame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic");
+            qFrame->setDest(this->destAddress);
+            qFrame->setPcp(this->pcp);
+            //qFrame->setVID(this->vid);
+            qFrame->setSchedulingPriority(static_cast<short>(SCHEDULING_PRIORITY_OFFSET_8021Q - pcp));
+            qFrame->encapsulate(payloadPacket);
+            //Padding
+            if (qFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+            {
+                qFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+            }
+            // TODO statistiken
+            //emit(this->..., qFrame);
+            sendDirect(qFrame, (*buf)->gate("in"));
+            delete(nextEtherFrame);
+        }
     }
 }
 
 void PCAPNGTrafficSourceApp::scheduleNextMessage(cMessage *msg)
 {
-    simtime_t nextSendTime = pcapngReader.getNextSimTime();
-    simtime_t currentTime = simTime();
     if (!pcapngReader.endOfFileReached()) {
-        scheduleAt(nextSendTime + startTime, msg); //TODO: Use scheduler of the node to support its modeled inaccuracy
+        scheduleAt(pcapngReader.getNextSimTime() + startTime, msg); //TODO: Use scheduler of the node to support its modeled inaccuracy
     }
 }
 

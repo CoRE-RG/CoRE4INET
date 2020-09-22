@@ -40,8 +40,10 @@ simple PCAPNGTrafficSourceApp extends ApplicationBase
         // destination MAC address
         string destAddress = default("auto");
         // destination MAC address
-        string overrideDestAddress = default("auto");
+        string filterDestAddress = default("auto");
         // source MAC address
-        string overrideSrcAddress = default("auto");
+        string filterSrcAddress = default("auto");
+        // priority of q-Frames
+        int pcp = default(-1); 
     
 }

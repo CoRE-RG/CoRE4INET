@@ -66,11 +66,15 @@ private:
     /**
      * @brief caches destAddress parameter
      */
-    inet::MACAddress overrideDestAddress;
+    inet::MACAddress filterDestAddress;
     /**
      * @brief caches srcAddress parameter
      */
-    inet::MACAddress overrideSrcAddress;
+    inet::MACAddress filterSrcAddress;
+    /**
+     * @brief caches pcp parameter
+     */
+    int8_t pcp;
     // pcp, ethertype override und filter parameter
 
 protected:
