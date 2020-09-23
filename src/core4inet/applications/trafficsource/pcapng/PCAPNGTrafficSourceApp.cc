@@ -84,15 +84,45 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "destAddress"))
     {
-        this->destAddress.setAddress(par("destAddress").stringValue());
+        if (par("destAddress").stdstringValue() == "auto")
+        {
+            // assign automatic address
+            this->destAddress = inet::MACAddress::generateAutoAddress();
+            // change module parameter from "auto" to concrete address
+            par("destAddress").setStringValue(this->destAddress.str());
+        }
+        else
+        {
+            this->destAddress.setAddress(par("destAddress").stringValue());
+        }
     }
     if (!parname || !strcmp(parname, "filterDestAddress"))
     {
-        this->filterDestAddress.setAddress(par("filterDestAddress").stringValue());
+        if (par("filterDestAddress").stdstringValue() == "auto")
+        {
+            // assign automatic address
+            this->filterDestAddress = inet::MACAddress::generateAutoAddress();
+            // change module parameter from "auto" to concrete address
+            par("filterDestAddress").setStringValue(this->filterDestAddress.str());
+        }
+        else
+        {
+            this->filterDestAddress.setAddress(par("filterDestAddress").stringValue());
+        }
     }
     if (!parname || !strcmp(parname, "filterSrcAddress"))
     {
-        this->filterSrcAddress.setAddress(par("filterSrcAddress").stringValue());
+        if (par("filterSrcAddress").stdstringValue() == "auto")
+        {
+            // assign automatic address
+            this->filterSrcAddress = inet::MACAddress::generateAutoAddress();
+            // change module parameter from "auto" to concrete address
+            par("filterSrcAddress").setStringValue(this->filterSrcAddress.str());
+        }
+        else
+        {
+            this->filterSrcAddress.setAddress(par("filterSrcAddress").stringValue());
+        }
     }
     if (!parname || !strcmp(parname, "pcp"))
     {
