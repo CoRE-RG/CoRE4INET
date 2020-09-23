@@ -194,7 +194,13 @@ void PCAPNGTrafficSourceApp::sendMessage()
 void PCAPNGTrafficSourceApp::scheduleNextMessage(cMessage *msg)
 {
     if (!pcapngReader.endOfFileReached()) {
-        scheduleAt(pcapngReader.getNextSimTime() + startTime, msg); //TODO: Use scheduler of the node to support its modeled inaccuracy
+        simtime_t nextTime = pcapngReader.getNextSimTime() + startTime;
+        simtime_t currentTime = simTime();
+        if (nextTime < currentTime) {
+            scheduleAt(currentTime, msg);
+        } else {
+            scheduleAt(nextTime, msg);
+        }
     }
 }
 
