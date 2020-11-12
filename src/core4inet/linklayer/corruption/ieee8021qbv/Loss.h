@@ -33,6 +33,7 @@ class Loss : public IEEE8021QbvSelection
   protected:
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
+
   private:
     bool drop();
 };

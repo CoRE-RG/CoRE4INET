@@ -34,7 +34,7 @@ namespace CoRE4INET {
 class Injection : public virtual IEEE8021QbvSelection
 {
   private:
-    std::queue<cMessage*> messages;
+    std::queue<cMessage*> outMessages;
     std::deque<cMessage*> savedMessages;
     size_t numberOfSavedMessages;
     uint64_t selfMessageId;

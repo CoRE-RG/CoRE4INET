@@ -16,6 +16,9 @@
 #ifndef __CORE4INET_REORDERING_H_
 #define __CORE4INET_REORDERING_H_
 
+//std
+#include <queue>
+#include <deque>
 //OMNeT++
 #include <omnetpp.h>
 //CoRE4INET
@@ -30,9 +33,22 @@ namespace CoRE4INET {
  */
 class Reordering : public virtual IEEE8021QbvSelection
 {
+  private:
+    std::queue<cMessage*> outMessages;
+    std::deque<cMessage*> savedMessages;
+    uint64_t selfMessageId;
+
+  public:
+    Reordering();
+    virtual ~Reordering();
+
   protected:
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
+    virtual void selectFrame() override;
+
+  private:
+    bool reorder();
 };
 
 } //namespace

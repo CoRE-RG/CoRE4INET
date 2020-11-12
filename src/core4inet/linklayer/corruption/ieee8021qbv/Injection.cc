@@ -21,11 +21,17 @@ Define_Module(Injection);
 
 Injection::Injection()
 {
+    this->outMessages = std::queue<cMessage*>();
     this->savedMessages = std::deque<cMessage*>();
 }
 
 Injection::~Injection()
 {
+    while(!this->outMessages.empty())
+    {
+        delete this->outMessages.front();
+        outMessages.pop();
+    }
     while(!this->savedMessages.empty())
     {
         delete this->savedMessages.front();
@@ -53,7 +59,7 @@ void Injection::handleMessage(cMessage *msg)
         {
             cMessage* injectMsg = this->savedMessages[rand() % this->savedMessages.size()]->dup();
             injectMsg->setName((std::string(injectMsg->getName()) + "(Injected)").c_str());
-            messages.push(injectMsg);
+            outMessages.push(injectMsg);
         }
         scheduleAt(simTime() + 0.001, msg);
     }
@@ -75,11 +81,11 @@ void Injection::handleMessage(cMessage *msg)
 
 void Injection::selectFrame()
 {
-    if (this->framesRequested > 0 && this->messages.size() > 0)
+    if (this->framesRequested > 0 && this->outMessages.size() > 0)
     {
         this->framesRequested--;
-        cMessage* msg = messages.front();
-        messages.pop();
+        cMessage* msg = outMessages.front();
+        outMessages.pop();
         this->send(msg, "out");
     }
     else
