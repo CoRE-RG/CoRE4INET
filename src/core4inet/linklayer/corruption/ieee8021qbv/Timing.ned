@@ -24,4 +24,6 @@ simple Timing extends IEEE8021QbvSelection
 {
     parameters:
         @class(Timing);
+        
+        volatile double delayTime @unit(s) = default(0s);
 }

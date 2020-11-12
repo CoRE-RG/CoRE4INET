@@ -16,6 +16,9 @@
 #ifndef __CORE4INET_TIMING_H_
 #define __CORE4INET_TIMING_H_
 
+//std
+#include <queue>
+#include <deque>
 //OMNeT++
 #include <omnetpp.h>
 //CoRE4INET
@@ -30,9 +33,25 @@ namespace CoRE4INET {
  */
 class Timing : public virtual IEEE8021QbvSelection
 {
+  private:
+    simtime_t delayTime;
+    std::queue<cMessage*> outMessages;
+    std::deque<cMessage*> savedMessages;
+    uint64_t selfMessageId;
+
+  public:
+    Timing();
+    virtual ~Timing();
+
   protected:
+    virtual void handleParameterChange(const char* parname) override;
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
+    virtual void selectFrame() override;
+
+  private:
+    simtime_t getDelayTime();
+    bool delay();
 };
 
 } //namespace

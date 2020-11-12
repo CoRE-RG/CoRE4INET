@@ -36,7 +36,6 @@ class Reordering : public virtual IEEE8021QbvSelection
   private:
     std::queue<cMessage*> outMessages;
     std::deque<cMessage*> savedMessages;
-    uint64_t selfMessageId;
 
   public:
     Reordering();
