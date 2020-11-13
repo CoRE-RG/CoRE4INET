@@ -54,6 +54,10 @@ void Timing::handleParameterChange(const char* parname)
 void Timing::initialize(int stage)
 {
     IEEE8021QbvSelection::initialize(stage);
+    if (stage == 0)
+    {
+        this->handleParameterChange(nullptr);
+    }
 }
 
 void Timing::handleMessage(cMessage *msg)
@@ -64,7 +68,7 @@ void Timing::handleMessage(cMessage *msg)
         {
             cMessage* delayedMsg = this->savedMessages.front();
             this->savedMessages.pop_front();
-            delayedMsg->setName((std::string(delayedMsg->getName()) + "(Delayed)").c_str());
+            delayedMsg->setName((std::string(delayedMsg->getName()) + " (Delayed)").c_str());
             //this->outMessages.push(delayedMsg);
             this->send(delayedMsg, "out");
         }

@@ -15,6 +15,12 @@
 
 #include "Injection.h"
 
+//CoRE4INET
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
+#include "core4inet/utilities/ConfigFunctions.h"
+//INET
+#include "inet/linklayer/ethernet/Ethernet.h"
+
 namespace CoRE4INET {
 
 Define_Module(Injection);
@@ -22,7 +28,6 @@ Define_Module(Injection);
 Injection::Injection()
 {
     this->outMessages = std::queue<cMessage*>();
-    this->savedMessages = std::deque<cMessage*>();
 }
 
 Injection::~Injection()
@@ -32,10 +37,42 @@ Injection::~Injection()
         delete this->outMessages.front();
         outMessages.pop();
     }
-    while(!this->savedMessages.empty())
+}
+
+void Injection::handleParameterChange(const char* parname)
+{
+    IEEE8021QbvSelection::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "destAddress"))
     {
-        delete this->savedMessages.front();
-        savedMessages.pop_front();
+        if (par("destAddress").stdstringValue() == "auto")
+        {
+            this->destAddress = inet::MACAddress::generateAutoAddress();
+            par("destAddress").setStringValue(this->destAddress.str());
+        }
+        else
+        {
+            this->destAddress.setAddress(par("destAddress").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "addQTag"))
+    {
+        this->addQTag = par("addQTag").boolValue();
+    }
+    if (!parname || !strcmp(parname, "priority"))
+    {
+        this->priority = static_cast<uint8_t>(parameterLongCheckRange(par("priority"), 0, MAX_Q_PRIORITY));
+    }
+    if (!parname || !strcmp(parname, "vid"))
+    {
+        this->vid = static_cast<uint16_t>(parameterLongCheckRange(par("vid"), 0, MAX_VLAN_ID));
+    }
+    if (!parname || !strcmp(parname, "injectionInterval"))
+    {
+        this->injectionInterval = parameterDoubleCheckRange(par("injectionInterval"), 0, SIMTIME_MAX.dbl());
+    }
+    if (!parname || !strcmp(parname, "payload"))
+    {
+        this->payload = parameterULongCheckRange(par("payload"), 0, MAX_ETHERNET_DATA_BYTES);
     }
 }
 
@@ -44,10 +81,10 @@ void Injection::initialize(int stage)
     IEEE8021QbvSelection::initialize(stage);
     if (stage == 0)
     {
-        this->numberOfSavedMessages = 10;
+        this->handleParameterChange(nullptr);
         cMessage* msg = new cMessage("Trigger injection");
         this->selfMessageId = msg->getId();
-        scheduleAt(simTime() + 0.001, msg);
+        scheduleAt(simTime() + this->getInjectionInterval(), msg);
     }
 }
 
@@ -55,23 +92,10 @@ void Injection::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage() && msg->getId() == this->selfMessageId)
     {
-        if (!this->savedMessages.empty())
-        {
-            cMessage* injectMsg = this->savedMessages[rand() % this->savedMessages.size()]->dup();
-            injectMsg->setName((std::string(injectMsg->getName()) + "(Injected)").c_str());
-            outMessages.push(injectMsg);
-        }
-        scheduleAt(simTime() + 0.001, msg);
-    }
-    else if (msg->arrivedOn("in"))
-    {
-        this->savedMessages.push_back(msg->dup());
-        if(this->savedMessages.size() > this->numberOfSavedMessages)
-        {
-            delete this->savedMessages.front();
-            savedMessages.pop_front();
-        }
-        IEEE8021QbvSelection::handleMessage(msg);
+        this->bubble("Inject");
+        this->getParentModule()->bubble("Inject");
+        outMessages.push(this->createInjectionMessage());
+        scheduleAt(simTime() + this->getInjectionInterval(), msg);
     }
     else
     {
@@ -92,6 +116,47 @@ void Injection::selectFrame()
     {
         IEEE8021QbvSelection::selectFrame();
     }
+}
+
+simtime_t Injection::getInjectionInterval()
+{
+    this->handleParameterChange("injectionInterval");
+    return this->injectionInterval;
+}
+
+size_t  Injection::getPayloadBytes()
+{
+    this->handleParameterChange("payload");
+    return this->payload;
+}
+
+cMessage* Injection::createInjectionMessage()
+{
+    cPacket* msg;
+    cPacket *payload_packet = new cPacket();
+    payload_packet->setByteLength(static_cast<int64_t>(this->getPayloadBytes()));
+    if (this->addQTag)
+    {
+        EthernetIIFrameWithQTag *frame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic (Injected)");
+        frame->setDest(this->destAddress);
+        frame->encapsulate(payload_packet);
+        frame->setPcp(priority);
+        frame->setVID(this->vid);
+        msg = frame;
+    }
+    else
+    {
+        inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic (Injected)", 7);
+        frame->setDest(this->destAddress);
+        frame->encapsulate(payload_packet);
+        msg = frame;
+    }
+    //Padding
+    if (msg->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+    {
+        msg->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+    }
+    return msg;
 }
 
 } //namespace

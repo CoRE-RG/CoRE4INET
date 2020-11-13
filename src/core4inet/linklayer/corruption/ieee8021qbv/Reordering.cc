@@ -63,7 +63,7 @@ void Reordering::handleMessage(cMessage *msg)
             {
                 cMessage* reorderedMsg = this->savedMessages.front();
                 this->savedMessages.pop_front();
-                reorderedMsg->setName((std::string(reorderedMsg->getName()) + "(Reordered)").c_str());
+                reorderedMsg->setName((std::string(reorderedMsg->getName()) + " (Reordered)").c_str());
                 this->outMessages.push(reorderedMsg);
             }
         }
