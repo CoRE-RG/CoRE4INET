@@ -25,20 +25,23 @@ Define_Module(Manipulation);
 
 void Manipulation::initialize(int stage)
 {
-    IEEE8021QbvSelection::initialize(stage);
+    CorruptIEEE8021QbvSelectionBase::initialize(stage);
 }
 
 void Manipulation::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in"))
     {
-        if(inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
+        if (this->performCorruption())
         {
-            frame->setSrc(inet::MACAddress("FF-FF-FF-FF-FF-FF"));
-            frame->setName((std::string(frame->getName()) + " (Manipulated)").c_str());
+            if(inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
+            {
+                frame->setSrc(inet::MACAddress("FF-FF-FF-FF-FF-FF"));
+                frame->setName((std::string(frame->getName()) + " (Manipulated)").c_str());
+            }
         }
     }
-    IEEE8021QbvSelection::handleMessage(msg);
+    CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
 }
 
 } //namespace

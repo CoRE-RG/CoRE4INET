@@ -25,23 +25,9 @@ namespace CoRE4INET {
 
 Define_Module(Injection);
 
-Injection::Injection()
-{
-    this->outMessages = std::queue<cMessage*>();
-}
-
-Injection::~Injection()
-{
-    while(!this->outMessages.empty())
-    {
-        delete this->outMessages.front();
-        outMessages.pop();
-    }
-}
-
 void Injection::handleParameterChange(const char* parname)
 {
-    IEEE8021QbvSelection::handleParameterChange(parname);
+    CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "destAddress"))
     {
         if (par("destAddress").stdstringValue() == "auto")
@@ -78,7 +64,7 @@ void Injection::handleParameterChange(const char* parname)
 
 void Injection::initialize(int stage)
 {
-    IEEE8021QbvSelection::initialize(stage);
+    CorruptIEEE8021QbvSelectionBase::initialize(stage);
     if (stage == 0)
     {
         this->handleParameterChange(nullptr);
@@ -94,27 +80,12 @@ void Injection::handleMessage(cMessage *msg)
     {
         this->bubble("Inject");
         this->getParentModule()->bubble("Inject");
-        outMessages.push(this->createInjectionMessage());
+        outMessages.push_back(this->createInjectionMessage());
         scheduleAt(simTime() + this->getInjectionInterval(), msg);
     }
     else
     {
-        IEEE8021QbvSelection::handleMessage(msg);
-    }
-}
-
-void Injection::selectFrame()
-{
-    if (this->framesRequested > 0 && this->outMessages.size() > 0)
-    {
-        this->framesRequested--;
-        cMessage* msg = outMessages.front();
-        outMessages.pop();
-        this->send(msg, "out");
-    }
-    else
-    {
-        IEEE8021QbvSelection::selectFrame();
+        CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
     }
 }
 

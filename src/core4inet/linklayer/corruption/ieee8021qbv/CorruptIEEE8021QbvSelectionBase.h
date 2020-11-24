@@ -13,11 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_TIMING_H_
-#define __CORE4INET_TIMING_H_
+#ifndef __CORE4INET_CORRUPTIEEE8021QBVSELECTIONBASE_H_
+#define __CORE4INET_CORRUPTIEEE8021QBVSELECTIONBASE_H_
 
+//std
+#include <list>
 //CoRE4INET
-#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
+#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
 
 using namespace omnetpp;
 
@@ -26,19 +28,27 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Timing : public virtual CorruptIEEE8021QbvSelectionBase
+class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
 {
+  protected:
+    std::list<cMessage*> outMessages;
+    std::list<cMessage*> savedMessages;
+
   private:
-    simtime_t delayTime;
-    uint64_t selfMessageId;
+    double corruptionProbability;
+
+  public:
+    CorruptIEEE8021QbvSelectionBase();
+    virtual ~CorruptIEEE8021QbvSelectionBase();
 
   protected:
     virtual void handleParameterChange(const char* parname) override;
     virtual void initialize(int stage) override;
-    virtual void handleMessage(cMessage *msg) override;
+    virtual void selectFrame() override;
+    virtual bool performCorruption();
 
   private:
-    simtime_t getDelayTime();
+    double getCorruptionProbability();
 };
 
 } //namespace

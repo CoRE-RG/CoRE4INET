@@ -19,36 +19,16 @@ namespace CoRE4INET {
 
 Define_Module(Reordering);
 
-Reordering::Reordering()
-{
-    this->outMessages = std::queue<cMessage*>();
-    this->savedMessages = std::deque<cMessage*>();
-}
-
-Reordering::~Reordering()
-{
-    while(!this->outMessages.empty())
-    {
-        delete this->outMessages.front();
-        outMessages.pop();
-    }
-    while(!this->savedMessages.empty())
-    {
-        delete this->savedMessages.front();
-        savedMessages.pop_front();
-    }
-}
-
 void Reordering::initialize(int stage)
 {
-    IEEE8021QbvSelection::initialize(stage);
+    CorruptIEEE8021QbvSelectionBase::initialize(stage);
 }
 
 void Reordering::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        if (this->reorder())
+        if (this->performCorruption())
         {
             this->bubble("Reorder");
             this->getParentModule()->bubble("Reorder");
@@ -58,41 +38,20 @@ void Reordering::handleMessage(cMessage *msg)
         }
         else
         {
-            IEEE8021QbvSelection::handleMessage(msg);
-            if (!this->savedMessages.empty())
+            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+            while (!this->savedMessages.empty())
             {
                 cMessage* reorderedMsg = this->savedMessages.front();
                 this->savedMessages.pop_front();
                 reorderedMsg->setName((std::string(reorderedMsg->getName()) + " (Reordered)").c_str());
-                this->outMessages.push(reorderedMsg);
+                this->outMessages.push_back(reorderedMsg);
             }
         }
     }
     else
     {
-        IEEE8021QbvSelection::handleMessage(msg);
+        CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
     }
-}
-
-void Reordering::selectFrame()
-{
-    if (this->framesRequested > 0 && this->outMessages.size() > 0)
-    {
-        this->framesRequested--;
-        cMessage* msg = outMessages.front();
-        outMessages.pop();
-        this->send(msg, "out");
-    }
-    else
-    {
-        IEEE8021QbvSelection::selectFrame();
-    }
-}
-
-bool Reordering::reorder()
-{
-    uint32_t value = rand() % 100 + 1;
-    return value > 90;
 }
 
 } //namespace

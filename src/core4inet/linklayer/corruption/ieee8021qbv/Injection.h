@@ -16,13 +16,8 @@
 #ifndef __CORE4INET_INJECTION_H_
 #define __CORE4INET_INJECTION_H_
 
-//std
-#include <queue>
-#include <deque>
-//OMNeT++
-#include <omnetpp.h>
 //CoRE4INET
-#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
+#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
 //INET
 #include "inet/linklayer/common/MACAddress.h"
 
@@ -33,7 +28,7 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Injection : public virtual IEEE8021QbvSelection
+class Injection : public virtual CorruptIEEE8021QbvSelectionBase
 {
   private:
     inet::MACAddress destAddress;
@@ -42,18 +37,12 @@ class Injection : public virtual IEEE8021QbvSelection
     uint16_t vid;
     simtime_t injectionInterval;
     size_t payload;
-    std::queue<cMessage*> outMessages;
     uint64_t selfMessageId;
-
-  public:
-    Injection();
-    virtual ~Injection();
 
   protected:
     virtual void handleParameterChange(const char* parname) override;
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
-    virtual void selectFrame() override;
 
   private:
     simtime_t getInjectionInterval();

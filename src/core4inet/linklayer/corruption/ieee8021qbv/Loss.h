@@ -16,10 +16,8 @@
 #ifndef __CORE4INET_LOSS_H_
 #define __CORE4INET_LOSS_H_
 
-//OMNeT++
-#include <omnetpp.h>
 //CoRE4INET
-#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
+#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
 
 using namespace omnetpp;
 
@@ -28,14 +26,11 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Loss : public IEEE8021QbvSelection
+class Loss : public virtual CorruptIEEE8021QbvSelectionBase
 {
   protected:
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
-
-  private:
-    bool drop();
 };
 
 } //namespace

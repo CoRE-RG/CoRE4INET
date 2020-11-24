@@ -15,15 +15,16 @@
 
 package core4inet.linklayer.corruption.ieee8021qbv;
 
-import core4inet.linklayer.corruption.ieee8021qbv.CorruptIEEE8021QbvSelectionBase;
+import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IEEE8021QbvSelection;
 
 //
 // TODO auto-generated module
 //
-simple Timing extends CorruptIEEE8021QbvSelectionBase
+simple CorruptIEEE8021QbvSelectionBase extends IEEE8021QbvSelection
 {
-    parameters:
-        @class(Timing);
-        
-        volatile double delayTime @unit(s) = default(0s);
+	parameters:
+	    @class(CorruptIEEE8021QbvSelectionBase);
+	    
+	    volatile double corruptionProbability = default(0);
+	    // TODO filter parameter
 }

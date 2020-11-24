@@ -22,29 +22,9 @@ namespace CoRE4INET {
 
 Define_Module(Timing);
 
-Timing::Timing()
-{
-    this->outMessages = std::queue<cMessage*>();
-    this->savedMessages = std::deque<cMessage*>();
-}
-
-Timing::~Timing()
-{
-    while(!this->outMessages.empty())
-    {
-        delete this->outMessages.front();
-        outMessages.pop();
-    }
-    while(!this->savedMessages.empty())
-    {
-        delete this->savedMessages.front();
-        savedMessages.pop_front();
-    }
-}
-
 void Timing::handleParameterChange(const char* parname)
 {
-    IEEE8021QbvSelection::handleParameterChange(parname);
+    CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "delayTime"))
     {
         this->delayTime = parameterDoubleCheckRange(par("delayTime"), 0, SIMTIME_MAX.dbl());
@@ -53,7 +33,7 @@ void Timing::handleParameterChange(const char* parname)
 
 void Timing::initialize(int stage)
 {
-    IEEE8021QbvSelection::initialize(stage);
+    CorruptIEEE8021QbvSelectionBase::initialize(stage);
     if (stage == 0)
     {
         this->handleParameterChange(nullptr);
@@ -76,7 +56,7 @@ void Timing::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("in"))
     {
-        if (this->delay())
+        if (this->performCorruption())
         {
             this->bubble("Delay");
             this->getParentModule()->bubble("Delay");
@@ -89,27 +69,12 @@ void Timing::handleMessage(cMessage *msg)
         }
         else
         {
-            IEEE8021QbvSelection::handleMessage(msg);
+            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
         }
     }
     else
     {
-        IEEE8021QbvSelection::handleMessage(msg);
-    }
-}
-
-void Timing::selectFrame()
-{
-    if (this->framesRequested > 0 && this->outMessages.size() > 0)
-    {
-        this->framesRequested--;
-        cMessage* msg = outMessages.front();
-        outMessages.pop();
-        this->send(msg, "out");
-    }
-    else
-    {
-        IEEE8021QbvSelection::selectFrame();
+        CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
     }
 }
 
@@ -117,12 +82,6 @@ simtime_t Timing::getDelayTime()
 {
     this->handleParameterChange("delayTime");
     return this->delayTime;
-}
-
-bool Timing::delay()
-{
-    uint32_t value = rand() % 100 + 1;
-    return value > 90;
 }
 
 } //namespace

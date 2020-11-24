@@ -15,12 +15,12 @@
 
 package core4inet.linklayer.corruption.ieee8021qbv;
 
-import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IEEE8021QbvSelection;
+import core4inet.linklayer.corruption.ieee8021qbv.CorruptIEEE8021QbvSelectionBase;
 
 //
 // TODO auto-generated module
 //
-simple Injection extends IEEE8021QbvSelection
+simple Injection extends CorruptIEEE8021QbvSelectionBase
 {
     parameters:
         @class(Injection);

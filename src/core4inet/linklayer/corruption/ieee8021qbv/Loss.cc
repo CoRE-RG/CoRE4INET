@@ -21,14 +21,14 @@ Define_Module(Loss);
 
 void Loss::initialize(int stage)
 {
-    IEEE8021QbvSelection::initialize(stage);
+    CorruptIEEE8021QbvSelectionBase::initialize(stage);
 }
 
 void Loss::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        if (this->drop())
+        if (this->performCorruption())
         {
             this->bubble("Loss");
             this->getParentModule()->bubble("Loss");
@@ -38,19 +38,13 @@ void Loss::handleMessage(cMessage *msg)
         }
         else
         {
-            IEEE8021QbvSelection::handleMessage(msg);
+            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
         }
     }
     else
     {
-        IEEE8021QbvSelection::handleMessage(msg);
+        CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
     }
-}
-
-bool Loss::drop()
-{
-    uint32_t value = rand() % 100 + 1;
-    return value > 90;
 }
 
 } //namespace

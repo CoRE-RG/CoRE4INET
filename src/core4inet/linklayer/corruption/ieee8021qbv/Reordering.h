@@ -16,13 +16,8 @@
 #ifndef __CORE4INET_REORDERING_H_
 #define __CORE4INET_REORDERING_H_
 
-//std
-#include <queue>
-#include <deque>
-//OMNeT++
-#include <omnetpp.h>
 //CoRE4INET
-#include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
+#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
 
 using namespace omnetpp;
 
@@ -31,23 +26,11 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Reordering : public virtual IEEE8021QbvSelection
+class Reordering : public virtual CorruptIEEE8021QbvSelectionBase
 {
-  private:
-    std::queue<cMessage*> outMessages;
-    std::deque<cMessage*> savedMessages;
-
-  public:
-    Reordering();
-    virtual ~Reordering();
-
   protected:
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
-    virtual void selectFrame() override;
-
-  private:
-    bool reorder();
 };
 
 } //namespace
