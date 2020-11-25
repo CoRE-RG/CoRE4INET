@@ -26,5 +26,9 @@ simple CorruptIEEE8021QbvSelectionBase extends IEEE8021QbvSelection
 	    @class(CorruptIEEE8021QbvSelectionBase);
 	    
 	    volatile double corruptionProbability = default(0);
-	    // TODO filter parameter
+	    string corruptionDestAddress = default("");
+	    string corruptionSrcAddress = default("");
+	    int corruptionPriority = default(-1);
+	    int corruptionVid = default(-1);
+	    volatile int corruptionPayload @unit(Byte) = default(0Byte);
 }

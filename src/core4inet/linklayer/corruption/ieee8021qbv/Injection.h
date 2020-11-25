@@ -16,10 +16,10 @@
 #ifndef __CORE4INET_INJECTION_H_
 #define __CORE4INET_INJECTION_H_
 
-//CoRE4INET
-#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
 //INET
 #include "inet/linklayer/common/MACAddress.h"
+//CoRE4INET
+#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
 
 using namespace omnetpp;
 
@@ -31,12 +31,7 @@ namespace CoRE4INET {
 class Injection : public virtual CorruptIEEE8021QbvSelectionBase
 {
   private:
-    inet::MACAddress destAddress;
-    bool addQTag;
-    uint8_t priority;
-    uint16_t vid;
     simtime_t injectionInterval;
-    size_t payload;
     uint64_t selfMessageId;
 
   protected:
@@ -46,7 +41,6 @@ class Injection : public virtual CorruptIEEE8021QbvSelectionBase
 
   private:
     simtime_t getInjectionInterval();
-    size_t  getPayloadBytes();
     cMessage* createInjectionMessage();
 };
 

@@ -18,6 +18,8 @@
 
 //std
 #include <list>
+//INET
+#include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
 #include "core4inet/linklayer/shaper/IEEE8021Qbv/selection/IEEE8021QbvSelection.h"
 
@@ -33,9 +35,15 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
   protected:
     std::list<cMessage*> outMessages;
     std::list<cMessage*> savedMessages;
+    inet::MACAddress corruptionDestAddress;
+    inet::MACAddress corruptionSrcAddress;
+    bool corruptionWithQTag;
+    uint8_t corruptionPriority;
+    uint16_t corruptionVid;
 
   private:
     double corruptionProbability;
+    size_t corruptionPayload;
 
   public:
     CorruptIEEE8021QbvSelectionBase();
@@ -46,6 +54,7 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
     virtual void initialize(int stage) override;
     virtual void selectFrame() override;
     virtual bool performCorruption();
+    virtual size_t getCorruptionPayloadBytes();
 
   private:
     double getCorruptionProbability();

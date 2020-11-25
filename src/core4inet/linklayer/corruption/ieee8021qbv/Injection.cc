@@ -15,11 +15,11 @@
 
 #include "Injection.h"
 
+//INET
+#include "inet/linklayer/ethernet/Ethernet.h"
 //CoRE4INET
 #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 #include "core4inet/utilities/ConfigFunctions.h"
-//INET
-#include "inet/linklayer/ethernet/Ethernet.h"
 
 namespace CoRE4INET {
 
@@ -28,37 +28,9 @@ Define_Module(Injection);
 void Injection::handleParameterChange(const char* parname)
 {
     CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
-    if (!parname || !strcmp(parname, "destAddress"))
-    {
-        if (par("destAddress").stdstringValue() == "auto")
-        {
-            this->destAddress = inet::MACAddress::generateAutoAddress();
-            par("destAddress").setStringValue(this->destAddress.str());
-        }
-        else
-        {
-            this->destAddress.setAddress(par("destAddress").stringValue());
-        }
-    }
-    if (!parname || !strcmp(parname, "addQTag"))
-    {
-        this->addQTag = par("addQTag").boolValue();
-    }
-    if (!parname || !strcmp(parname, "priority"))
-    {
-        this->priority = static_cast<uint8_t>(parameterLongCheckRange(par("priority"), 0, MAX_Q_PRIORITY));
-    }
-    if (!parname || !strcmp(parname, "vid"))
-    {
-        this->vid = static_cast<uint16_t>(parameterLongCheckRange(par("vid"), 0, MAX_VLAN_ID));
-    }
     if (!parname || !strcmp(parname, "injectionInterval"))
     {
         this->injectionInterval = parameterDoubleCheckRange(par("injectionInterval"), 0, SIMTIME_MAX.dbl());
-    }
-    if (!parname || !strcmp(parname, "payload"))
-    {
-        this->payload = parameterULongCheckRange(par("payload"), 0, MAX_ETHERNET_DATA_BYTES);
     }
 }
 
@@ -95,31 +67,27 @@ simtime_t Injection::getInjectionInterval()
     return this->injectionInterval;
 }
 
-size_t  Injection::getPayloadBytes()
-{
-    this->handleParameterChange("payload");
-    return this->payload;
-}
-
 cMessage* Injection::createInjectionMessage()
 {
     cPacket* msg;
-    cPacket *payload_packet = new cPacket();
-    payload_packet->setByteLength(static_cast<int64_t>(this->getPayloadBytes()));
-    if (this->addQTag)
+    cPacket *payloadPacket = new cPacket();
+    payloadPacket->setByteLength(static_cast<int64_t>(this->getCorruptionPayloadBytes()));
+    if (this->corruptionWithQTag)
     {
         EthernetIIFrameWithQTag *frame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic (Injected)");
-        frame->setDest(this->destAddress);
-        frame->encapsulate(payload_packet);
-        frame->setPcp(priority);
-        frame->setVID(this->vid);
+        frame->setDest(this->corruptionDestAddress);
+        frame->setSrc(this->corruptionSrcAddress);
+        frame->encapsulate(payloadPacket);
+        frame->setPcp(this->corruptionPriority);
+        frame->setVID(this->corruptionVid);
         msg = frame;
     }
     else
     {
         inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic (Injected)", 7);
-        frame->setDest(this->destAddress);
-        frame->encapsulate(payload_packet);
+        frame->setDest(this->corruptionDestAddress);
+        frame->setSrc(this->corruptionSrcAddress);
+        frame->encapsulate(payloadPacket);
         msg = frame;
     }
     //Padding

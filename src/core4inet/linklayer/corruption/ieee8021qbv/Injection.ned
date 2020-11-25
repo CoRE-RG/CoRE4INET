@@ -25,10 +25,5 @@ simple Injection extends CorruptIEEE8021QbvSelectionBase
     parameters:
         @class(Injection);
         
-        string destAddress = default("auto");
-        bool addQTag = default(false);
-        int priority = default(0);
-        int vid = default(0);
         volatile double injectionInterval @unit(s) = default(uniform(0s,1s));
-        volatile int payload @unit(Byte) = default(46Byte);
 }

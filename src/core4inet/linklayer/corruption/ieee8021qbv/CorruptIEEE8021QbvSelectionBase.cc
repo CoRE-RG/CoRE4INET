@@ -15,6 +15,8 @@
 
 #include "CorruptIEEE8021QbvSelectionBase.h"
 
+//INET
+#include "inet/linklayer/ethernet/Ethernet.h"
 //CoRE4INET
 #include "core4inet/utilities/ConfigFunctions.h"
 
@@ -49,6 +51,45 @@ void CorruptIEEE8021QbvSelectionBase::handleParameterChange(const char* parname)
     {
         this->corruptionProbability = parameterDoubleCheckRange(par("corruptionProbability"), 0, 1);
     }
+    if (!parname || !strcmp(parname, "corruptionDestAddress"))
+    {
+        if (par("corruptionDestAddress").stdstringValue().empty())
+        {
+            this->corruptionDestAddress = inet::MACAddress::UNSPECIFIED_ADDRESS;
+        }
+        else
+        {
+            this->corruptionDestAddress.setAddress(par("corruptionDestAddress").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "corruptionSrcAddress"))
+    {
+        if (par("corruptionSrcAddress").stdstringValue().empty())
+        {
+            this->corruptionSrcAddress = inet::MACAddress::UNSPECIFIED_ADDRESS;
+        }
+        else
+        {
+            this->corruptionSrcAddress.setAddress(par("corruptionSrcAddress").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "corruptionPriority") || !strcmp(parname, "corruptionVid"))
+    {
+        if (par("corruptionPriority").intValue() >= 0 && par("corruptionVid").intValue() >= 0)
+        {
+            this->corruptionPriority = static_cast<uint8_t>(parameterLongCheckRange(par("corruptionPriority"), 0, MAX_Q_PRIORITY));
+            this->corruptionVid = static_cast<uint16_t>(parameterLongCheckRange(par("corruptionVid"), 0, MAX_VLAN_ID));
+            this->corruptionWithQTag = true;
+        }
+        else
+        {
+            this->corruptionWithQTag = false;
+        }
+    }
+    if (!parname || !strcmp(parname, "corruptionPayload"))
+    {
+        this->corruptionPayload = parameterULongCheckRange(par("corruptionPayload"), 0, MAX_ETHERNET_DATA_BYTES);
+    }
 }
 
 void CorruptIEEE8021QbvSelectionBase::initialize(int stage)
@@ -81,6 +122,12 @@ bool CorruptIEEE8021QbvSelectionBase::performCorruption()
 {
     double value = (static_cast<double>(rand()) / (RAND_MAX)); // TODO: OMNeT++ Random funktion benutzen -> fingerprints
     return value <= this->getCorruptionProbability();
+}
+
+size_t CorruptIEEE8021QbvSelectionBase::getCorruptionPayloadBytes()
+{
+    this->handleParameterChange("corruptionPayload");
+    return this->corruptionPayload;
 }
 
 double CorruptIEEE8021QbvSelectionBase::getCorruptionProbability()
