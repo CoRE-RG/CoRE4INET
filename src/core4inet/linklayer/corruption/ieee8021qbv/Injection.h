@@ -16,8 +16,6 @@
 #ifndef __CORE4INET_INJECTION_H_
 #define __CORE4INET_INJECTION_H_
 
-//INET
-#include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
 #include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
 

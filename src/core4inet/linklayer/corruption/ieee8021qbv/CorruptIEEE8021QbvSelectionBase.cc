@@ -18,6 +18,7 @@
 //INET
 #include "inet/linklayer/ethernet/Ethernet.h"
 //CoRE4INET
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
 #include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
@@ -128,6 +129,52 @@ size_t CorruptIEEE8021QbvSelectionBase::getCorruptionPayloadBytes()
 {
     this->handleParameterChange("corruptionPayload");
     return this->corruptionPayload;
+}
+
+bool CorruptIEEE8021QbvSelectionBase::match(cMessage *msg)
+{
+    if (inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(frame))
+    {
+        if (this->corruptionDestAddress != inet::MACAddress::UNSPECIFIED_ADDRESS && this->corruptionDestAddress != frame->getDest())
+        {
+            return false;
+        }
+        if (this->corruptionSrcAddress != inet::MACAddress::UNSPECIFIED_ADDRESS && this->corruptionSrcAddress != frame->getSrc())
+        {
+            return false;
+        }
+        if (this->corruptionWithQTag)
+        {
+            if (frame->getEtherType() == 0x8100)
+            {
+                if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(frame))
+                {
+                    if (this->corruptionPriority != qframe->getPcp())
+                    {
+                        return false;
+                    }
+                    if (this->corruptionVid != qframe->getVID())
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    throw cRuntimeError("Ethertype is 0x8100 but message type is not EthernetIIFrameWithQTag");
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        if (this->corruptionPayload > 0 && this->corruptionPayload != frame->getEncapsulatedPacket()->getByteLength())
+        {
+            return false;
+        }
+        return true;
+    }
+    return false;
 }
 
 double CorruptIEEE8021QbvSelectionBase::getCorruptionProbability()

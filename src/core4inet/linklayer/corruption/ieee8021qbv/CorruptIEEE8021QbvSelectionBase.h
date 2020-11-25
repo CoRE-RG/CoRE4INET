@@ -55,6 +55,7 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
     virtual void selectFrame() override;
     virtual bool performCorruption();
     virtual size_t getCorruptionPayloadBytes();
+    virtual bool match(cMessage *msg);
 
   private:
     double getCorruptionProbability();
