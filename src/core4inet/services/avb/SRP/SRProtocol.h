@@ -19,6 +19,7 @@
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/services/avb/SRP/SRPTable.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 
@@ -27,7 +28,7 @@ namespace CoRE4INET {
  *
  * See the NED definition for details.
  *
- * @author Till Steinbach
+ * @author Till Steinbach, Philipp Meyer
  */
 class SRProtocol : public virtual cSimpleModule, public cListener
 {
@@ -36,6 +37,22 @@ class SRProtocol : public virtual cSimpleModule, public cListener
          * @brief Module representing the srpTable
          */
         SRPTable *srpTable;
+        /**
+         * @brief PCP value representing SRClass A
+         */
+        uint8_t pcpSRClassA;
+        /**
+         * @brief PCP value representing SRClass B
+         */
+        uint8_t pcpSRClassB;
+        /**
+         * @brief PriortyAndRank of SRClass A
+         */
+        uint8_t priortyAndRankSRClassA;
+        /**
+         * @brief PriortyAndRank of SRClass B
+         */
+        uint8_t priortyAndRankSRClassB;
 
     public:
         /**
@@ -48,14 +65,18 @@ class SRProtocol : public virtual cSimpleModule, public cListener
          * @brief Initialization, retrieves srpTable module and registers for signals
          */
         virtual void initialize() override;
-
+        /**
+         * @brief Indicates a parameter has changed.
+         *
+         * @param parname Name of the changed parameter or nullptr if multiple parameter changed.
+         */
+        virtual void handleParameterChange(const char* parname) override;
         /**
          * @brief handles incoming SRP Messages
          *
          * @param msg the incoming message
          */
         virtual void handleMessage(cMessage *msg) override;
-
         /**
          * @brief handles signals containing srpTable changes
          *

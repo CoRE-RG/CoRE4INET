@@ -570,7 +570,7 @@ string SRPTable::exportToXML() {
             oss << " module=\"" << talker->module->getFullPath() << "\"";
             oss << " framesize=\"" << talker->framesize << "\"";
             oss << " intervalFrames=\"" << talker->intervalFrames << "\"";
-            oss << " pcp=\"" << talker->pcp << "\"";
+            oss << " pcp=\"" << static_cast<int>(talker->pcp) << "\"";
             oss << " />" << endl;
         }
         oss << tab << "</talkerTable>" << endl;
