@@ -28,9 +28,22 @@ namespace CoRE4INET {
  */
 class Manipulation : public virtual CorruptIEEE8021QbvSelectionBase
 {
+  private:
+    inet::MACAddress manipulationDestAddress;
+    inet::MACAddress manipulationSrcAddress;
+    bool manipulationWithQTagPriority;
+    uint8_t manipulationPriority;
+    bool manipulationWithQTagVid;
+    uint16_t manipulationVid;
+    size_t manipulationPayload;
+
   protected:
+    virtual void handleParameterChange(const char* parname) override;
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
+
+  private:
+    size_t getManipulationPayloadBytes();
 };
 
 } //namespace

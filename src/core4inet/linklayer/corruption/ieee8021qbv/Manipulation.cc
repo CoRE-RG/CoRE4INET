@@ -16,12 +16,70 @@
 #include "Manipulation.h"
 
 //INET
-#include "inet/linklayer/common/MACAddress.h"
-#include "inet/linklayer/ethernet/EtherFrame_m.h"
+#include "inet/linklayer/ethernet/Ethernet.h"
+//CoRE4INET
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 
 Define_Module(Manipulation);
+
+void Manipulation::handleParameterChange(const char* parname)
+{
+    CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "manipulationDestAddress"))
+    {
+        if (par("manipulationDestAddress").stdstringValue().empty())
+        {
+            this->manipulationDestAddress = inet::MACAddress::UNSPECIFIED_ADDRESS;
+        }
+        else
+        {
+            this->manipulationDestAddress.setAddress(par("manipulationDestAddress").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "manipulationSrcAddress"))
+    {
+        if (par("manipulationSrcAddress").stdstringValue().empty())
+        {
+            this->manipulationSrcAddress = inet::MACAddress::UNSPECIFIED_ADDRESS;
+        }
+        else
+        {
+            this->manipulationSrcAddress.setAddress(par("manipulationSrcAddress").stringValue());
+        }
+    }
+    if (!parname || !strcmp(parname, "manipulationPriority"))
+    {
+        if (par("manipulationPriority").intValue() >= 0)
+        {
+            this->manipulationPriority = static_cast<uint8_t>(parameterLongCheckRange(par("manipulationPriority"), 0, MAX_Q_PRIORITY));
+
+            this->manipulationWithQTagPriority = true;
+        }
+        else
+        {
+            this->manipulationWithQTagPriority = false;
+        }
+    }
+    if (!parname || !strcmp(parname, "manipulationPriority"))
+    {
+        if (par("manipulationVid").intValue() >= 0)
+        {
+            this->manipulationVid = static_cast<uint16_t>(parameterLongCheckRange(par("manipulationVid"), 0, MAX_VLAN_ID));
+            this->manipulationWithQTagVid = true;
+        }
+        else
+        {
+            this->manipulationWithQTagVid = false;
+        }
+    }
+    if (!parname || !strcmp(parname, "manipulationPayload"))
+    {
+        this->manipulationPayload = parameterULongCheckRange(par("manipulationPayload"), 0, MAX_ETHERNET_DATA_BYTES);
+    }
+}
 
 void Manipulation::initialize(int stage)
 {
@@ -32,16 +90,65 @@ void Manipulation::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in"))
     {
-        if (this->performCorruption())
+        if (this->match(msg) && this->performCorruption())
         {
-            if(inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
+            this->bubble("Manipulation");
+            this->getParentModule()->bubble("Manipulation");
+            if (inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
             {
-                frame->setSrc(inet::MACAddress("FF-FF-FF-FF-FF-FF"));
+                cPacket* payload = frame->decapsulate();
+                if (this->manipulationDestAddress != inet::MACAddress::UNSPECIFIED_ADDRESS)
+                {
+                    frame->setDest(this->manipulationDestAddress);
+                }
+                if (this->manipulationSrcAddress != inet::MACAddress::UNSPECIFIED_ADDRESS)
+                {
+                    frame->setSrc(this->manipulationSrcAddress);
+                }
+                if (frame->getEtherType() == 0x8100)
+                {
+                    if (EthernetIIFrameWithQTag* qframe = dynamic_cast<EthernetIIFrameWithQTag*>(frame))
+                    {
+                        if (this->manipulationWithQTagPriority)
+                        {
+                            qframe->setPcp(this->manipulationPriority);
+                        }
+                        if (this->manipulationWithQTagVid)
+                        {
+                            qframe->setVID(this->manipulationVid);
+                        }
+                        qframe->setByteLength(ETHER_MAC_FRAME_BYTES+4);
+                    }
+                    else
+                    {
+                        throw cRuntimeError("Ethertype is 0x8100 but message type is not EthernetIIFrameWithQTag");
+                    }
+                }
+                else
+                {
+                    frame->setByteLength(ETHER_MAC_FRAME_BYTES);
+                }
+                if (this->getManipulationPayloadBytes() > 0)
+                {
+                    payload->setByteLength(this->manipulationPayload);
+                }
+                frame->encapsulate(payload);
+                //Padding
+                if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+                {
+                    frame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+                }
                 frame->setName((std::string(frame->getName()) + " (Manipulated)").c_str());
             }
         }
     }
     CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+}
+
+size_t Manipulation::getManipulationPayloadBytes()
+{
+    this->handleParameterChange("manipulationPayload");
+    return this->manipulationPayload;
 }
 
 } //namespace

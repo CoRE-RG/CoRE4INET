@@ -167,7 +167,7 @@ bool CorruptIEEE8021QbvSelectionBase::match(cMessage *msg)
                 return false;
             }
         }
-        if (this->corruptionPayload > 0 && this->corruptionPayload != frame->getEncapsulatedPacket()->getByteLength())
+        if (this->getCorruptionPayloadBytes() > 0 && this->corruptionPayload != frame->getEncapsulatedPacket()->getByteLength())
         {
             return false;
         }

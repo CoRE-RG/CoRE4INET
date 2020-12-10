@@ -24,4 +24,10 @@ simple Manipulation extends CorruptIEEE8021QbvSelectionBase
 {
     parameters:
         @class(Manipulation);
+        
+        string manipulationDestAddress = default("");
+	    string manipulationSrcAddress = default("");
+	    int manipulationPriority = default(-1);
+	    int manipulationVid = default(-1);
+	    volatile int manipulationPayload @unit(Byte) = default(0Byte);
 }
