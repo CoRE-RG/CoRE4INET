@@ -33,7 +33,7 @@ import core4inet.linklayer.shaper.IEEE8021Qbv.gate.IIEEE8021QbvGateControlList;
 module IEEE8021Qbv_Shaper like IShaper
 {
     parameters:
-        @display("i=block/classifier;bgb=1365,246");
+        @display("i=block/classifier");
         //Untagged VLAN. Outgoing frames with this VLAN get untagged.
         int untaggedVID = default(0);
         //Interface allows frames with this VLAN to leave the port.
