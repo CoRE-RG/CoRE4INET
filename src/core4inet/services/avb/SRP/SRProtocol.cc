@@ -53,12 +53,12 @@ void SRProtocol::handleParameterChange(const char* parname)
     if(!parname || !strcmp(parname, "pcpSRClassA"))
     {
         this->pcpSRClassA = static_cast<uint8_t>(parameterULongCheckRange(par("pcpSRClassA"), 0, 7));
-        this->priortyAndRankSRClassA = 0x10 | (this->pcpSRClassA << 5);
+        this->priortyAndRankSRClassA = static_cast<uint8_t>(0x10 | (this->pcpSRClassA << 5));
     }
     if(!parname || !strcmp(parname, "pcpSRClassB"))
     {
         this->pcpSRClassB = static_cast<uint8_t>(parameterULongCheckRange(par("pcpSRClassB"), 0, 7));
-        this->priortyAndRankSRClassB = 0x10 | (this->pcpSRClassB << 5);
+        this->priortyAndRankSRClassB = static_cast<uint8_t>(0x10 | (this->pcpSRClassB << 5));
     }
     if(this->pcpSRClassA == this->pcpSRClassB)
     {
@@ -126,7 +126,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                 double reservableBandwidth = par("reservableBandwidth").doubleValue();
 
                 if (update
-                        || ((utilizedBandwidth + requiredBandwidth)
+                        || (static_cast<double>(utilizedBandwidth + requiredBandwidth)
                                 <= (static_cast<double>(totalBandwidth) * reservableBandwidth)))
                 {
                     srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port,

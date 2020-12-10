@@ -22,5 +22,4 @@ import core4inet.nodes.ethernet.tsn.TSNEtherHost;
 //
 module Node2 extends TSNEtherHost
 {
-    @display("bgb=484,314");
 }
