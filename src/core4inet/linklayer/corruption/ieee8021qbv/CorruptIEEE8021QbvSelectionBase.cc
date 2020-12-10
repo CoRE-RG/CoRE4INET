@@ -121,8 +121,7 @@ void CorruptIEEE8021QbvSelectionBase::selectFrame()
 
 bool CorruptIEEE8021QbvSelectionBase::performCorruption()
 {
-    double value = (static_cast<double>(rand()) / (RAND_MAX)); // TODO: OMNeT++ Random funktion benutzen -> fingerprints
-    return value <= this->getCorruptionProbability();
+    return this->getRNG(0)->doubleRandIncl1() <= this->getCorruptionProbability();
 }
 
 size_t CorruptIEEE8021QbvSelectionBase::getCorruptionPayloadBytes()
@@ -133,7 +132,7 @@ size_t CorruptIEEE8021QbvSelectionBase::getCorruptionPayloadBytes()
 
 bool CorruptIEEE8021QbvSelectionBase::match(cMessage *msg)
 {
-    if (inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(frame))
+    if (inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
     {
         if (this->corruptionDestAddress != inet::MACAddress::UNSPECIFIED_ADDRESS && this->corruptionDestAddress != frame->getDest())
         {

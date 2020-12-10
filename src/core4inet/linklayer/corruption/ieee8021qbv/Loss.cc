@@ -28,7 +28,7 @@ void Loss::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        if (this->performCorruption())
+        if (this->match(msg) && this->performCorruption())
         {
             this->bubble("Loss");
             this->getParentModule()->bubble("Loss");
