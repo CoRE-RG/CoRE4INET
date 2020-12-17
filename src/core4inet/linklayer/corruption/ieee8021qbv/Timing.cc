@@ -47,7 +47,7 @@ void Timing::handleMessage(cMessage *msg)
         if (!this->savedMessages.empty())
         {
             cMessage* delayedMsg = this->savedMessages.front();
-            this->savedMessages.pop_front();
+            this->savedMessages.erase(this->savedMessages.begin());
             delayedMsg->setName((std::string(delayedMsg->getName()) + " (Delayed)").c_str());
             //this->outMessages.push(delayedMsg);
             this->send(delayedMsg, "out");

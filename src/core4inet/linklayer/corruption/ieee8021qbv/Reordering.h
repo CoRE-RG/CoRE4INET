@@ -16,6 +16,8 @@
 #ifndef __CORE4INET_REORDERING_H_
 #define __CORE4INET_REORDERING_H_
 
+//std
+#include <map>
 //CoRE4INET
 #include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
 
@@ -28,9 +30,25 @@ namespace CoRE4INET {
  */
 class Reordering : public virtual CorruptIEEE8021QbvSelectionBase
 {
+  private:
+    std::map<cMessage*, uint32_t> takenMessages;
+    uint32_t numberOfFramesBeforeInjection;
+    bool matchStreamForFrameCounting;
+    bool injectTakenFramesWithRandomOrder;
+
+  public:
+    Reordering();
+    virtual ~Reordering();
+
   protected:
+    virtual void handleParameterChange(const char* parname) override;
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
+
+  private:
+    uint32_t getNumberOfFramesBeforeInjection();
+    void incrementPassedFramesCounters();
+    void injectReadyMessages(uint32_t minPassedFrames);
 };
 
 } //namespace

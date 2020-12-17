@@ -27,8 +27,8 @@ Define_Module(CorruptIEEE8021QbvSelectionBase);
 
 CorruptIEEE8021QbvSelectionBase::CorruptIEEE8021QbvSelectionBase()
 {
-    this->outMessages = std::list<cMessage*>();
-    this->savedMessages = std::list<cMessage*>();
+    this->outMessages = std::vector<cMessage*>();
+    this->savedMessages = std::vector<cMessage*>();
 }
 
 CorruptIEEE8021QbvSelectionBase::~CorruptIEEE8021QbvSelectionBase()
@@ -36,12 +36,12 @@ CorruptIEEE8021QbvSelectionBase::~CorruptIEEE8021QbvSelectionBase()
     while(!this->outMessages.empty())
     {
         delete this->outMessages.front();
-        outMessages.pop_front();
+        this->outMessages.erase(this->outMessages.begin());
     }
     while(!this->savedMessages.empty())
     {
         delete this->savedMessages.front();
-        savedMessages.pop_front();
+        this->savedMessages.erase(this->savedMessages.begin());
     }
 }
 
@@ -98,9 +98,8 @@ void CorruptIEEE8021QbvSelectionBase::initialize(int stage)
     IEEE8021QbvSelection::initialize(stage);
     if (stage == 0)
     {
-        this->handleParameterChange(nullptr);
-        WATCH_PTRLIST(this->outMessages);
-        WATCH_PTRLIST(this->savedMessages);
+        WATCH_PTRVECTOR(this->outMessages);
+        WATCH_PTRVECTOR(this->savedMessages);
     }
 }
 
@@ -109,8 +108,8 @@ void CorruptIEEE8021QbvSelectionBase::selectFrame()
     if (this->framesRequested > 0 && this->outMessages.size() > 0)
     {
         this->framesRequested--;
-        cMessage* msg = outMessages.front();
-        outMessages.pop_front();
+        cMessage* msg = this->outMessages.front();
+        this->outMessages.erase(this->outMessages.begin());
         this->send(msg, "out");
     }
     else

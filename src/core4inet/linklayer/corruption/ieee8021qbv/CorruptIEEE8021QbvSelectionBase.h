@@ -17,7 +17,7 @@
 #define __CORE4INET_CORRUPTIEEE8021QBVSELECTIONBASE_H_
 
 //std
-#include <list>
+#include <vector>
 //INET
 #include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
@@ -33,8 +33,8 @@ namespace CoRE4INET {
 class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
 {
   protected:
-    std::list<cMessage*> outMessages;
-    std::list<cMessage*> savedMessages;
+    std::vector<cMessage*> outMessages;
+    std::vector<cMessage*> savedMessages;
     inet::MACAddress corruptionDestAddress;
     inet::MACAddress corruptionSrcAddress;
     bool corruptionWithQTag;

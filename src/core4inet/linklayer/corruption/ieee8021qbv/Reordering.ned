@@ -24,4 +24,8 @@ simple Reordering extends CorruptIEEE8021QbvSelectionBase
 {
     parameters:
     	@class(Reordering);
+    	
+    	volatile int numberOfFramesBeforeInjection = default(1);
+    	bool matchStreamForFrameCounting = default(true);
+    	bool injectTakenFramesWithRandomOrder = default(false);
 }

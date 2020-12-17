@@ -155,6 +155,24 @@ class cStdCollectionUMapWatcherBase : public omnetpp::cStdVectorWatcherBase
 };
 
 template<class KeyT, class ValueT, class CmpT>
+class cStdKeyPointerMapWatcher : public cStdMapWatcher<KeyT,ValueT,CmpT>
+{
+  public:
+    cStdKeyPointerMapWatcher(const char *name, std::map<KeyT,ValueT,CmpT>& var) : cStdMapWatcher<KeyT,ValueT,CmpT>(name, var) {}
+    virtual std::string atIt() const {
+        std::stringstream out;
+        out << *(this->it->first) << "  ==>  " << this->it->second;
+        return out.str();
+    }
+};
+
+template<class KeyT, class ValueT, class CmpT>
+void createStdKeyPointerMapWatcher(const char *varname, std::map<KeyT,ValueT,CmpT>& m)
+{
+    new cStdKeyPointerMapWatcher<KeyT,ValueT,CmpT>(varname, m);
+}
+
+template<class KeyT, class ValueT, class CmpT>
 class cStdListMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
 {
     public:
@@ -626,6 +644,12 @@ void createStdPtrUMapUMapUMapWatcher(const char *varname, std::unordered_map<Key
  * @defgroup MacrosWatch WATCH macros
  */
 //@{
+/**
+ * Makes std::maps storing pointer as key inspectable in Tknev/Qtnev. See also WATCH_MAP() and WATCH_PTRMAP().
+ *
+ * @hideinitializer
+ */
+#define WATCH_KEYPTRMAP(m) createStdKeyPointerMapWatcher(#m,(m));
 /**
  * Makes std::maps storing lists inspectable in Tkenv. See also WATCH_MAP(), WATCH_PTRMAP() and WATCH_MAPMAP().
  *

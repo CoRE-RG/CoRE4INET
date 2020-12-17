@@ -15,42 +15,125 @@
 
 #include "Reordering.h"
 
+//CoRE4INET
+#include "core4inet/utilities/ConfigFunctions.h"
+#include "core4inet/utilities/customWatch.h"
+
 namespace CoRE4INET {
 
 Define_Module(Reordering);
 
+Reordering::Reordering()
+{
+    this->takenMessages = std::map<cMessage*, uint32_t>();
+}
+
+Reordering::~Reordering()
+{
+    for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end();) // TODO: Random?
+    {
+        delete it->first;
+        this->takenMessages.erase(it++);
+    }
+}
+
+void Reordering::handleParameterChange(const char* parname)
+{
+    CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "numberOfFramesBeforeInjection"))
+    {
+        this->numberOfFramesBeforeInjection = parameterULongCheckRange(par("numberOfFramesBeforeInjection"), 0, std::numeric_limits<uint32_t>::max());
+    }
+    if (!parname || !strcmp(parname, "matchStreamForFrameCounting"))
+    {
+        this->matchStreamForFrameCounting = par("matchStreamForFrameCounting").boolValue();
+    }
+    if (!parname || !strcmp(parname, "injectTakenFramesWithRandomOrder"))
+    {
+        this->injectTakenFramesWithRandomOrder = par("injectTakenFramesWithRandomOrder").boolValue();
+    }
+}
+
 void Reordering::initialize(int stage)
 {
     CorruptIEEE8021QbvSelectionBase::initialize(stage);
+    if (stage == 0)
+    {
+        WATCH_KEYPTRMAP(this->takenMessages);
+    }
 }
 
 void Reordering::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
-        if (this->performCorruption())
+        if (this->match(msg) && this->performCorruption())
         {
             this->bubble("Reorder");
             this->getParentModule()->bubble("Reorder");
-            this->savedMessages.push_back(msg);
+            msg->setName((std::string(msg->getName()) + " (Reordered)").c_str());
+            this->takenMessages[msg] = 0;
             this->framesRequested++;
             this->selectFrame();
         }
         else
         {
-            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
-            while (!this->savedMessages.empty())
+            if (this->matchStreamForFrameCounting && this->match(msg))
             {
-                cMessage* reorderedMsg = this->savedMessages.front();
-                this->savedMessages.pop_front();
-                reorderedMsg->setName((std::string(reorderedMsg->getName()) + " (Reordered)").c_str());
-                this->outMessages.push_back(reorderedMsg);
+                this->incrementPassedFramesCounters();
             }
+            else if (!this->matchStreamForFrameCounting)
+            {
+                this->incrementPassedFramesCounters();
+            }
+            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+            this->injectReadyMessages(this->getNumberOfFramesBeforeInjection());
         }
     }
     else
     {
         CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+    }
+}
+
+uint32_t Reordering::getNumberOfFramesBeforeInjection()
+{
+    this->handleParameterChange("numberOfFramesBeforeInjection");
+    return this->numberOfFramesBeforeInjection;
+}
+
+void Reordering::incrementPassedFramesCounters()
+{
+    for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end(); it++)
+    {
+        it->second++;
+    }
+}
+
+void Reordering::injectReadyMessages(uint32_t minPassedFrames)
+{
+    for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end();)
+    {
+        if (it->second >= minPassedFrames)
+        {
+            this->outMessages.push_back(it->first);
+            this->takenMessages.erase(it++);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+    if (this->injectTakenFramesWithRandomOrder)
+    {
+        // Fisher–Yates shuffle:
+        for (int i = this->outMessages.size()-1; i > 0; i--)
+        {
+            int j = this->getRNG(0)->intRand(i+1);
+            cMessage* msg = this->outMessages[i];
+            this->outMessages[i] = this->outMessages[j];
+            this->outMessages[j] = msg;
+        }
     }
 }
 
