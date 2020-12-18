@@ -28,7 +28,6 @@ Define_Module(CorruptIEEE8021QbvSelectionBase);
 CorruptIEEE8021QbvSelectionBase::CorruptIEEE8021QbvSelectionBase()
 {
     this->outMessages = std::vector<cMessage*>();
-    this->savedMessages = std::vector<cMessage*>();
 }
 
 CorruptIEEE8021QbvSelectionBase::~CorruptIEEE8021QbvSelectionBase()
@@ -37,11 +36,6 @@ CorruptIEEE8021QbvSelectionBase::~CorruptIEEE8021QbvSelectionBase()
     {
         delete this->outMessages.front();
         this->outMessages.erase(this->outMessages.begin());
-    }
-    while(!this->savedMessages.empty())
-    {
-        delete this->savedMessages.front();
-        this->savedMessages.erase(this->savedMessages.begin());
     }
 }
 
@@ -99,7 +93,6 @@ void CorruptIEEE8021QbvSelectionBase::initialize(int stage)
     if (stage == 0)
     {
         WATCH_PTRVECTOR(this->outMessages);
-        WATCH_PTRVECTOR(this->savedMessages);
     }
 }
 

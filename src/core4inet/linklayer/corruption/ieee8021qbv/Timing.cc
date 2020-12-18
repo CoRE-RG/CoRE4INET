@@ -22,12 +22,25 @@ namespace CoRE4INET {
 
 Define_Module(Timing);
 
+Timing::Timing()
+{
+    this->selfMessageIds = std::vector<uint64_t>();
+}
+
 void Timing::handleParameterChange(const char* parname)
 {
     CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "delayTime"))
     {
         this->delayTime = parameterDoubleCheckRange(par("delayTime"), 0, SIMTIME_MAX.dbl());
+    }
+    if (!parname || !strcmp(parname, "allowOtherTrafficDuringDelay"))
+    {
+        this->allowOtherTrafficDuringDelay = par("allowOtherTrafficDuringDelay").boolValue();
+    }
+    if (!parname || !strcmp(parname, "maxOtherTrafficDelayTime"))
+    {
+        this->maxOtherTrafficDelayTime = parameterDoubleCheckRange(par("maxOtherTrafficDelayTime"), 0, SIMTIME_MAX.dbl());
     }
 }
 
@@ -36,36 +49,39 @@ void Timing::initialize(int stage)
     CorruptIEEE8021QbvSelectionBase::initialize(stage);
     if (stage == 0)
     {
-        this->handleParameterChange(nullptr);
+        WATCH(this->delayTime);
+        WATCH_VECTOR(this->selfMessageIds);
     }
 }
 
 void Timing::handleMessage(cMessage *msg)
 {
-    if (msg->isSelfMessage() && msg->getId() == this->selfMessageId)
+    if (msg->isSelfMessage() && this->removeDelayedMessageId(msg->getId()))
     {
-        if (!this->savedMessages.empty())
+        if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
         {
-            cMessage* delayedMsg = this->savedMessages.front();
-            this->savedMessages.erase(this->savedMessages.begin());
-            delayedMsg->setName((std::string(delayedMsg->getName()) + " (Delayed)").c_str());
-            //this->outMessages.push(delayedMsg);
-            this->send(delayedMsg, "out");
+            this->outMessages.push_back(msg);
         }
-        delete msg;
+        else
+        {
+            this->send(msg, "out");
+        }
     }
     else if (msg->arrivedOn("in"))
     {
-        if (this->performCorruption())
+        if (this->match(msg) && this->performCorruption())
         {
             this->bubble("Delay");
             this->getParentModule()->bubble("Delay");
-            this->savedMessages.push_back(msg);
-            //this->framesRequested++; All following frames have to wait?
-            //this->selectFrame();
-            cMessage* msg = new cMessage("Trigger delayed message");
-            this->selfMessageId = msg->getId();
-            scheduleAt(simTime() + this->getDelayTime(), msg);
+            msg->setName((std::string(msg->getName()) + " (Delayed)").c_str());
+            if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
+            {
+                this->framesRequested++;
+                this->selectFrame();
+            }
+            this->selfMessageIds.push_back(msg->getId());
+            msg->setTimestamp(this->getDelayTime());
+            scheduleAt(simTime() + msg->getTimestamp(), msg);
         }
         else
         {
@@ -82,6 +98,26 @@ simtime_t Timing::getDelayTime()
 {
     this->handleParameterChange("delayTime");
     return this->delayTime;
+}
+
+bool Timing::removeDelayedMessageId(uint64_t messageId)
+{
+    bool messageIdFound = false;
+    bool index = 0;
+    for (uint64_t selfMessageId : this->selfMessageIds)
+    {
+        if (selfMessageId == messageId)
+        {
+            messageIdFound = true;
+            break;
+        }
+        index++;
+    }
+    if (messageIdFound)
+    {
+        this->selfMessageIds.erase(this->selfMessageIds.begin() + index);
+    }
+    return messageIdFound;
 }
 
 } //namespace

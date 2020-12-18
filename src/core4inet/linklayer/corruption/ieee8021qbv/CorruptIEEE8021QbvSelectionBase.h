@@ -34,7 +34,6 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
 {
   protected:
     std::vector<cMessage*> outMessages;
-    std::vector<cMessage*> savedMessages;
     inet::MACAddress corruptionDestAddress;
     inet::MACAddress corruptionSrcAddress;
     bool corruptionWithQTag;

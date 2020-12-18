@@ -26,4 +26,6 @@ simple Timing extends CorruptIEEE8021QbvSelectionBase
         @class(Timing);
         
         volatile double delayTime @unit(s) = default(0s);
+        bool allowOtherTrafficDuringDelay = default(false);
+        double maxOtherTrafficDelayTime @unit(s) = default(0s);
 }

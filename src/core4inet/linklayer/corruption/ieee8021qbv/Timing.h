@@ -30,7 +30,13 @@ class Timing : public virtual CorruptIEEE8021QbvSelectionBase
 {
   private:
     simtime_t delayTime;
-    uint64_t selfMessageId;
+    bool allowOtherTrafficDuringDelay;
+    simtime_t maxOtherTrafficDelayTime;
+    std::vector<uint64_t> selfMessageIds;
+
+  public:
+    Timing();
+    virtual ~Timing(){};
 
   protected:
     virtual void handleParameterChange(const char* parname) override;
@@ -39,6 +45,8 @@ class Timing : public virtual CorruptIEEE8021QbvSelectionBase
 
   private:
     simtime_t getDelayTime();
+    bool removeDelayedMessageId(uint64_t messageId);
+
 };
 
 } //namespace
