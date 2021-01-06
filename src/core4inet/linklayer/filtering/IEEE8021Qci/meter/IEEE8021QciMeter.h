@@ -41,6 +41,10 @@ class IEEE8021QciMeter : public virtual cSimpleModule
      */
     unsigned long numFramesSent = 0;
     /**
+     * @brief Variable for counting the number of dropped frames
+     */
+    unsigned long numFramesDropped = 0;
+    /**
      * @brief Variable for counting the number of received bytes
      */
     unsigned long numBytesReceived = 0;
@@ -89,6 +93,12 @@ class IEEE8021QciMeter : public virtual cSimpleModule
      * @param msg the message to be sent
      */
     virtual void sendMessage(cMessage *msg);
+    /**
+     * @brief Drop the message
+     *
+     * @param msg the message to be dropped
+     */
+    virtual void dropMessage(cMessage *msg);
 };
 
 } //namespace

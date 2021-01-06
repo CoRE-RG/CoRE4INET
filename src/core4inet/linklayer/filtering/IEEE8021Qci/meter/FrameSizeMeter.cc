@@ -44,9 +44,7 @@ void FrameSizeMeter::handleMessage(cMessage *msg)
             this->emit(frameReceivedSignal, static_cast<long>(frame->getByteLength()));
             if (frame->getByteLength() < this->minFrameSize || frame->getByteLength() > this->maxFrameSize)
             {
-                this->bubble("Frame dropped!");
-                this->emit(frameDroppedSignal, static_cast<long>(frame->getByteLength()));
-                delete frame;
+                IEEE8021QciMeter::dropMessage(frame);
             }
             else
             {

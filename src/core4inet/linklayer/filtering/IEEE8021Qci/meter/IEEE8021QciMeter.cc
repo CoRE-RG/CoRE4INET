@@ -32,6 +32,7 @@ void IEEE8021QciMeter::initialize()
     }
     WATCH(this->numFramesReceived);
     WATCH(this->numFramesSent);
+    WATCH(this->numFramesDropped);
     WATCH(this->numBytesReceived);
     WATCH(this->numBytesSent);
 }
@@ -49,9 +50,14 @@ void IEEE8021QciMeter::handleMessage(cMessage *msg)
 
 void IEEE8021QciMeter::finish()
 {
+    recordScalar("frames dropped", this->numFramesDropped);
     simtime_t t = simTime();
     if (t > 0)
     {
+        if (this->numFramesDropped > 0)
+        {
+            recordScalar("frames/sec dropped", this->numFramesDropped / t);
+        }
         if (this->numFramesReceived > 0)
         {
             recordScalar("frames/sec rcvd", this->numFramesReceived / t);
@@ -90,12 +96,38 @@ void IEEE8021QciMeter::sendMessage(cMessage *msg)
         emit(frameSendSignal, static_cast<long>(data->getByteLength()));
         sendDirect(data, streamOutput->gate("filterIn"));
     }
+    else if (cPacket *packet = dynamic_cast<cPacket*>(msg))
+    {
+        this->numBytesSent += packet->getByteLength();
+        emit(frameSendSignal, static_cast<long>(packet->getByteLength()));
+        sendDirect(packet, streamOutput->gate("filterIn"));
+    }
     else
     {
-        this->numBytesSent += dynamic_cast<cPacket*>(msg)->getByteLength();
-        emit(frameSendSignal, static_cast<long>(dynamic_cast<cPacket*>(msg)->getByteLength()));
-        sendDirect(msg, streamOutput->gate("filterIn"));
+        throw cRuntimeError("Message type is not cPacket");
     }
+}
+
+void IEEE8021QciMeter::dropMessage(cMessage *msg)
+{
+    if (IEEE8021QciCtrl *ctrl = dynamic_cast<IEEE8021QciCtrl*>(msg))
+    {
+        cPacket *data = ctrl->decapsulate();
+        delete ctrl;
+        this->emit(frameDroppedSignal, static_cast<long>(data->getByteLength()));
+        delete data;
+    }
+    else if (cPacket *packet = dynamic_cast<cPacket*>(msg))
+    {
+        this->emit(frameDroppedSignal, static_cast<long>(packet->getByteLength()));
+        delete packet;
+    }
+    else
+    {
+        throw cRuntimeError("Message type is not cPacket");
+    }
+    this->bubble("Frame dropped!");
+    this->numFramesDropped++;
 }
 
 } //namespace
