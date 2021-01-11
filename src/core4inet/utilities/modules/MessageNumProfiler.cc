@@ -110,9 +110,9 @@ size_t MessageNumProfiler::maxRecursiveMessages(cModule *root, bool onlyChild)
 size_t MessageNumProfiler::numMessages(cModule *module)
 {
     size_t numMsg = 0;
-    for (int i = 0; i < module->defaultListSize(); i++)
+    for (int i = 0; i < module->getNumOwnedObjects(); i++)
     {
-        cOwnedObject *owned = module->defaultListGet(i);
+        cOwnedObject *owned = module->getOwnedObject(i);
         if (dynamic_cast<cMessage*>(owned))
         {
             numMsg++;
@@ -145,9 +145,9 @@ std::string MessageNumProfiler::printMessages(cModule *root, size_t limit, bool 
                 << sumRecursiveMessages(root, true) << " in children)" << endl;
         if (print_msgs)
         {
-            for (int i = 0; i < root->defaultListSize(); i++)
+            for (int i = 0; i < root->getNumOwnedObjects(); i++)
             {
-                cOwnedObject *owned = root->defaultListGet(i);
+                cOwnedObject *owned = root->getOwnedObject(i);
                 if (cMessage *msg = dynamic_cast<cMessage*>(owned))
                 {
                     oss << "***" << msg->getClassName() << "(" << msg->getFullName() << ")"<< endl;
