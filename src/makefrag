@@ -1,10 +1,5 @@
-# USAGE:
-# Set Environment Variables:
-# EXTENDED_WARNINGS=1
-# for stricter warnings and
-#
-# WARNINGS_ERROR=1
-# for -Werror
+.DEFAULT_GOAL := all
+
 
 #check for existing INET-Framework
 ifeq ("$(wildcard $(INET_PROJ)/src/inet/common/INETDefs.h)","")
@@ -13,10 +8,13 @@ ifeq ("$(wildcard $(INET_PROJ)/src/inet/common/INETDefs.h)","")
     INET_PROJ path must be an absolute path, or a path relative to CoRE4INETs src directory")
 endif
 
+
 include dependencies_makefrag
+
 
 CFLAGS += -std=c++14
 MSGCOPTS += --msg4
+
 
 UNAME_S := $(shell uname -s)
 
@@ -32,15 +30,23 @@ ifeq ($(UNAME_S),Darwin)
     LDFLAGS += -headerpad_max_install_names 
 endif
 
+
 #detect 64/32bit
 LBITS := $(shell getconf LONG_BIT)
 CFLAGS += -DLONG_BIT=$(LBITS)
+
+
+# USAGE:
+# Set Environment Variables:
+# EXTENDED_WARNINGS=1
+# for stricter warnings and
+# WARNINGS_ERROR=1
+# for -Werror
 
 #Warnings generate errors
 ifdef WARNINGS_ERROR
 	CFLAGS += -Werror
 endif
-
 
 #Stricter warnings in clang and gcc:
 ifeq ($(CC),clang)
@@ -78,3 +84,13 @@ endif
 override SYSINCLUDES := $(subst -I/,-isystem /,$(subst -Icore4inet/api/AS6802/tte_api,-isystem core4inet/api/AS6802/tte_api,$(SYSINCLUDES)))
 
 COPTS += $(SYSINCLUDES) -isystem $(OMNETPP_INCL_DIR)
+
+
+# dump out the actual compiler and linker command line for easier debugging
+ifneq ($(MAKECMDGOALS),clean)
+$(info *** COMPILING with:)
+$(info $(CXX) -c $(CXXFLAGS) $(COPTS))
+$(info *** LINKING with:)
+$(info $(SHLIB_LD) -o $O/$(TARGET) $(AS_NEEDED_OFF) $(WHOLE_ARCHIVE_ON) $(LIBS) $(WHOLE_ARCHIVE_OFF) $(OMNETPP_LIBS) $(LDFLAGS))
+$(info Building...)
+endif
