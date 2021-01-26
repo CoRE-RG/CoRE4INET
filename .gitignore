@@ -32,6 +32,7 @@
 *.so
 *.dylib
 *.dll
+*.def
 *.a
 *.lib
 *.exe
