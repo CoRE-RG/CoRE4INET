@@ -1,4 +1,4 @@
-# ignore generated files
+# generated files
 .settings/
 *_m.h
 *_m.cc
@@ -15,7 +15,7 @@
 *.tkenvlog
 *.cmdenv-log
 
-#results
+# results
 /examples/*/results/
 /examples/*/*/results/
 /examples/*/*/*/results/
@@ -24,10 +24,10 @@
 *.sca
 *.anf
 
-#tests
+# tests
 /tests/*/work/
 
-# ignore binary files
+# binary files
 /out
 *.so
 *.dylib
@@ -44,8 +44,8 @@
 .nedexclusions
 src/core4inet/features.h
 
-# ignore backup and temp files
+# backup and temp files
 *.tmp*
 
-#ignore Apple files
+# apple files
 .DS_Store
