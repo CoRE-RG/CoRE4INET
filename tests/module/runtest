@@ -10,18 +10,17 @@ DBG_SUFFIX=""
 
 TESTFILES=$*
 if [ "x$TESTFILES" = "x" ]; then TESTFILES='*.test'; fi
-echo "Testing: $TESTFILES"
-rm -rf work
-mkdir work
+if [ ! -d work ];  then mkdir work; fi
+
 cp -pPR lib work/       # OSX dos not support cp -a
-#EXTRA_INCLUDES=`find ../../src/ -type d | sed s!^!-I../!`
-EXTRA_INCLUDES="$EXTRA_INCLUDES -I./lib -I../../../src -I../../../../inet/src"
+
 opp_test gen $OPT -v $TESTFILES || exit 1
+
 echo
-(cd work; opp_makemake -f --deep -lCoRE4INET$DBG_SUFFIX -lINET$DBG_SUFFIX -L../../../../inet/src -L../../../src -P . --no-deep-includes $EXTRA_INCLUDES -i ../makefrag; $MAKE -e cleanall; $MAKE -e) || exit 1
+(cd work; opp_makemake -f --deep -lCoRE4INET$DBG_SUFFIX -lINET$DBG_SUFFIX -L../../../../inet/src -L../../../src -P . --no-deep-includes -I../../../src -I../../../../inet/src -i ../makefrag; $MAKE -e cleanall; $MAKE -e) || exit 1
+
 echo
-export LD_LIBRARY_PATH=../../../../inet/src
-opp_test run $OPT -p work$DBG_SUFFIX -v $TESTFILES
+PATH=$PATH:../../../inet/src:../../src opp_test run -p work$DBG_SUFFIX $OPT -v $TESTFILES -a "--check-signals=false -lCoRE4INET -lINET " || exit 1
 
 if [ $? -eq 0 ]
 then

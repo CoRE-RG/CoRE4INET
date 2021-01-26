@@ -1,1 +1,6 @@
-CFLAGS += -std=c++11
+CFLAGS += -std=c++14
+
+#Workaround for https://github.com/msys2/MINGW-packages/issues/6855
+ifeq ($(PLATFORM),win32.x86_64)
+	LDFLAGS += -Wl,-Xlink=-force:multiple
+endif
