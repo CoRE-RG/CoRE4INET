@@ -154,7 +154,7 @@ bool CorruptIEEE8021QbvSelectionBase::match(cMessage *msg)
                     throw cRuntimeError("Ethertype is 0x8100 but message type is not EthernetIIFrameWithQTag");
                 }
             }
-            else
+            else if (!(this->corruptionPriority == 0 && this->corruptionVid == 0))
             {
                 return false;
             }
