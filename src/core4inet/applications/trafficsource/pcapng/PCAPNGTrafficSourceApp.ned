@@ -33,6 +33,8 @@ simple PCAPNGTrafficSourceApp extends ApplicationBase
 
         // Trafficsource enabled or disabled
         bool enabled = default(true);
+        // restart after end of file
+        bool loop = default(false);
         // Start time
         double startTime @unit(s) = default(0s);
         // name of pcapng-file
@@ -43,7 +45,9 @@ simple PCAPNGTrafficSourceApp extends ApplicationBase
         string filterDestAddress = default("auto");
         // source MAC address
         string filterSrcAddress = default("auto");
-        // priority of q-Frames
-        int pcp = default(-1); 
+        // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
+        int pcp = default(-1);
+        // VLAN ID (0=untagged, 4094=Highest)
+        int vid = default(0);
     
 }

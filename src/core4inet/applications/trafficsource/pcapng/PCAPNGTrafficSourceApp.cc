@@ -28,6 +28,7 @@ Define_Module(PCAPNGTrafficSourceApp);
 
 PCAPNGTrafficSourceApp::PCAPNGTrafficSourceApp() {
     this->enabled = false;
+    this->loop = false;
     this->startTime = 0;
     this->pcapngFilename = "";
     this->pcapngReader = PCAPNGReader();
@@ -73,6 +74,10 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
     {
         this->enabled = par("enabled").boolValue();
     }
+    if (!parname || !strcmp(parname, "loop"))
+    {
+        this->loop = par("loop").boolValue();
+    }
     if (!parname || !strcmp(parname, "startTime"))
     {
         this->startTime = SimTime(parameterDoubleCheckRange(par("startTime"), 0, SIMTIME_MAX.dbl()));
@@ -88,7 +93,7 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
         {
             // assign automatic address
             this->destAddress = inet::MACAddress::generateAutoAddress();
-            // change module parameter from "auto" to concrete address
+            // change module parameter from "auto" to specific address
             par("destAddress").setStringValue(this->destAddress.str());
         }
         else
@@ -102,7 +107,7 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
         {
             // assign automatic address
             this->filterDestAddress = inet::MACAddress::generateAutoAddress();
-            // change module parameter from "auto" to concrete address
+            // change module parameter from "auto" to specific address
             par("filterDestAddress").setStringValue(this->filterDestAddress.str());
         }
         else
@@ -116,7 +121,7 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
         {
             // assign automatic address
             this->filterSrcAddress = inet::MACAddress::generateAutoAddress();
-            // change module parameter from "auto" to concrete address
+            // change module parameter from "auto" to specific address
             par("filterSrcAddress").setStringValue(this->filterSrcAddress.str());
         }
         else
@@ -131,6 +136,10 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
         } else {
             this->pcp = static_cast<int8_t>(parameterLongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
         }
+    }
+    if (!parname || !strcmp(parname, "vid"))
+    {
+        this->vid = static_cast<uint16_t>(parameterLongCheckRange(par("vid"), 0, MAX_VLAN_ID));
     }
 }
 
@@ -148,7 +157,6 @@ void PCAPNGTrafficSourceApp::handleMessage(cMessage *msg)
         }
         sendMessage();
         scheduleNextMessage(msg);
-
     }
     else
     {
@@ -164,18 +172,17 @@ void PCAPNGTrafficSourceApp::sendMessage()
         if (nextEtherFrame == nullptr) {
             return;
         }
+        // todo: filter the etherframes based on their filter src and dst addresses
 
         if (pcp == -1) {
             nextEtherFrame->setDest(this->destAddress);
-            // TODO statistiken
-            //emit(this->..., nextEtherFrame);
             sendDirect(nextEtherFrame, (*buf)->gate("in"));
         } else {
             cPacket *payloadPacket = nextEtherFrame->decapsulate();
             EthernetIIFrameWithQTag *qFrame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic");
             qFrame->setDest(this->destAddress);
             qFrame->setPcp(this->pcp);
-            //qFrame->setVID(this->vid);
+            qFrame->setVID(this->vid);
             qFrame->setSchedulingPriority(static_cast<short>(SCHEDULING_PRIORITY_OFFSET_8021Q - pcp));
             qFrame->encapsulate(payloadPacket);
             //Padding
@@ -183,8 +190,6 @@ void PCAPNGTrafficSourceApp::sendMessage()
             {
                 qFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
             }
-            // TODO statistiken
-            //emit(this->..., qFrame);
             sendDirect(qFrame, (*buf)->gate("in"));
             delete(nextEtherFrame);
         }
@@ -193,6 +198,10 @@ void PCAPNGTrafficSourceApp::sendMessage()
 
 void PCAPNGTrafficSourceApp::scheduleNextMessage(cMessage *msg)
 {
+    if (pcapngReader.endOfFileReached() && loop) {
+        pcapngReader.reset();
+        startTime = simTime();
+    }
     if (!pcapngReader.endOfFileReached()) {
         simtime_t nextTime = pcapngReader.getNextSimTime() + startTime;
         simtime_t currentTime = simTime();

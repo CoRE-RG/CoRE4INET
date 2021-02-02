@@ -43,43 +43,52 @@ public:
 
 private:
     /**
-     * TODO
+     * whether the app is enabled.
      */
     bool enabled;
     /**
-     * @brief caches the startTime parameter of the simulation
+     * whether the file will be read in a loop.
+     */
+    bool loop;
+    /**
+     * @brief the start-time of the simulation.
      */
     simtime_t startTime;
     /**
-     * @brief caches pcapngFilename parameter
+     * @brief the name of the pcapng file.
      */
     std::string pcapngFilename;
     /**
-     * @brief the reader for the pcapng file
+     * @brief the reader for the pcapng file.
      */
     CoRE4INET::PCAPNGReader pcapngReader;
 
     /**
-     * @brief caches destAddress parameter
+     * @brief caches destAddress parameter.
      */
     inet::MACAddress destAddress;
     /**
-     * @brief caches destAddress parameter
+     * @brief caches destAddress parameter.
      */
     inet::MACAddress filterDestAddress;
     /**
-     * @brief caches srcAddress parameter
+     * @brief caches srcAddress parameter.
      */
     inet::MACAddress filterSrcAddress;
+
     /**
-     * @brief caches pcp parameter
+     * @brief caches pcp parameter.
      */
     int8_t pcp;
+    /**
+     * @brief caches vid parameter.
+     */
+    uint16_t vid;
     // pcp, ethertype override und filter parameter
 
 protected:
     /**
-     * @brief Initialization of the module. Sends activator message
+     * @brief Initialization of the module. Sends activator message.
      */
     virtual void initialize() override;
 
@@ -91,23 +100,23 @@ protected:
     virtual void handleParameterChange(const char* parname) override;
 
     /**
-     * @brief handle self messages to send frames
+     * @brief handle self messages to send frames.
      *
-     *
-     * @param msg incoming self messages
+     * @param msg incoming self messages.
      */
     virtual void handleMessage(cMessage *msg) override;
 
     /**
      * @brief Generates and sends a new Message.
      *
+     * The message is requested from the pcapng reader.
+     * The addresses and priority are adjusted to match the simulation.
      * The message is sent to the buffer.
-     * The size is defined by the payload parameter of the module.
      */
     virtual void sendMessage();
 
     /**
-     * TODO
+     * @brief schedules when the next message will be sent.
      */
     virtual void scheduleNextMessage(cMessage *msg);
 
