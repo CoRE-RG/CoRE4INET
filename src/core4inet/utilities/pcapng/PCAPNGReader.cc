@@ -26,8 +26,10 @@ PCAPNGReader::PCAPNGReader() { // @suppress("Class members should be properly in
 
     this->endReached = false;
     this->correctEndianess = false;
-    this->initialTimestamp = 0;
+    this->initialTimestampNano = 0;
     this->currentBlockSize = 0;
+    this->interfaceCount = 0;
+    this->timeResolutions = {};
 
     this->currentSectionHeader = new section_header_block;
     this->currentPacketHeader = new enhanced_packet_block;
@@ -55,6 +57,19 @@ void PCAPNGReader::initialize(const char *fileName) {
     fseek(file, 0, SEEK_END);
     filesize = ftell(file);
     fseek(file, 0, SEEK_SET);
+
+    // check first block
+    uint32_t blockType = readNextBlock();
+    if (blockType != BT_SHB) {
+        // every pcapng-file has to start with a section header
+        throw std::invalid_argument("file doesn't begin with a section header.");
+    }
+}
+
+void PCAPNGReader::reset() {
+    fseek(file, 0, SEEK_SET);
+    this->endReached = false;
+    initialTimestampNano = 0;
 
     // check first block
     uint32_t blockType = readNextBlock();
@@ -97,8 +112,6 @@ uint32_t PCAPNGReader::readNextBlock() {
 
     // skip general block trailer
     fseek(file, sizeof(block_trailer), SEEK_CUR);
-    //block_trailer* trailer = new block_trailer;
-    //fread(trailer, 1, sizeof(block_trailer), file);
 
     return header->block_type;
 }
@@ -113,6 +126,11 @@ void PCAPNGReader::readSectionHeaderBlock() {
         convertEndianess(sectionHeader);
     }
     currentSectionHeader = sectionHeader;
+
+    // reset section specific variables
+    timeResolutions.clear();
+    interfaceCount = 0;
+
     // check for options
     if (currentBlockSize > sizeof(section_header_block)) {
         fseek(file, currentBlockSize - sizeof(section_header_block), SEEK_CUR);
@@ -120,17 +138,39 @@ void PCAPNGReader::readSectionHeaderBlock() {
 }
 
 void PCAPNGReader::readInterfaceDescriptionBlock() {
-    // TODO: global list? for all current IDBs, currently not used/necessary
     interface_description_block* interfaceDescription = new interface_description_block;
     fread(interfaceDescription, 1, sizeof(interface_description_block), file);
     if (!correctEndianess) {
         convertEndianess(interfaceDescription);
     }
+    int8_t resolution = 0;
+
     // check for options
-    if (currentBlockSize > sizeof(interface_description_block)) {
-        // TODO: check for if_tsresol option and save resolution for simtime
-        fseek(file, currentBlockSize - sizeof(interface_description_block), SEEK_CUR);
+    uint32_t remainingOptionsSize = currentBlockSize - sizeof(interface_description_block);
+    while (remainingOptionsSize > 0) {
+        option_header* option = new option_header;
+        fread(option, 1, sizeof(option_header), file);
+
+        // check if time resolution is set
+        if (option->option_code == IF_TSRESOL) {
+            int8_t tResol;
+            fread(&tResol, 1, option->option_length, file);
+            resolution = tResol;
+        } else {
+            // other options are currently not relevant
+            fseek(file, option->option_length, SEEK_CUR);
+        }
+
+        // skip padding bytes
+        uint8_t numberOfUnalignedBytes = option->option_length % 4;
+        uint8_t paddingBytes = (4 - numberOfUnalignedBytes) % 4;
+        fseek(file, paddingBytes, SEEK_CUR);
+
+        remainingOptionsSize -= (sizeof(option_header) + option->option_length + paddingBytes);
     }
+
+    timeResolutions[interfaceCount] = resolution;
+    interfaceCount++;
 }
 
 void PCAPNGReader::readPacketBlock() {
@@ -142,9 +182,12 @@ void PCAPNGReader::readPacketBlock() {
         convertEndianess(header);
     }
     currentPacketHeader = header;
-    if (initialTimestamp == 0) {
-        initialTimestamp = ((uint64_t)currentPacketHeader->timestamp_high << 32)
-                           + (currentPacketHeader->timestamp_low);;
+
+    // set initial simulation time for the first packet of the file
+    if (initialTimestampNano == 0) {
+        uint64_t initialTimestamp = ((uint64_t)currentPacketHeader->timestamp_high << 32)
+                           + (currentPacketHeader->timestamp_low);
+        calculateSimTime(initialTimestamp, timeResolutions.at(currentPacketHeader->interface_id));
     }
 
     // read and process packet
@@ -178,7 +221,14 @@ bool PCAPNGReader::getNextPacketBlock() {
 
 void PCAPNGReader::convertEndianess(void* blockBuffer) {
     // TODO with current pcapng-files not necessary
+    throw std::invalid_argument("endianess of the section doesn't match endianess of the operating system.");
 }
+
+#define DESTADDRESS_BEGIN 0         /* begin of the destination address in an ethernet-packet-block */
+#define SRCADDRESS_BEGIN 6          /* begin of the source address in an ethernet-packet-block */
+#define ETHERTYPE_FIRSTBYTE_POS 12  /* position of the first ethertype-byte in an ethernet-packet-block */
+#define ETHERTYPE_SECONDBYTE_POS 13 /* position of the second ethertype-byte in an ethernet-packet-block */
+#define PAYLOAD_BEGIN 14            /* begin of the payload in an ethernet-packet-block */
 
 void PCAPNGReader::createEthernetIIFrame(unsigned char* packetBlock) {
     inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic", 7);
@@ -192,24 +242,24 @@ void PCAPNGReader::createEthernetIIFrame(unsigned char* packetBlock) {
      *      - CRC:          4 Bytes
      */
 
-    //uint16_t firstEtherTypeByte = ((uint16_t) *(packetBlock + 12)) << 8;
-    //uint16_t secondEtherTypeByte = (uint16_t) *(packetBlock + 13);
-    //uint16_t etherType = firstEtherTypeByte + secondEtherTypeByte;
-    uint16_t etherType = (uint16_t)((*(packetBlock + 12) << 8) + *(packetBlock + 13));
+    uint16_t firstEtherTypeByte = ((uint16_t) *(packetBlock + ETHERTYPE_FIRSTBYTE_POS)) << 8;
+    uint16_t secondEtherTypeByte = (uint16_t) *(packetBlock + ETHERTYPE_SECONDBYTE_POS);
+    uint16_t etherType = firstEtherTypeByte + secondEtherTypeByte;
 
     inet::MACAddress destAddress = inet::MACAddress();
     inet::MACAddress srcAddress = inet::MACAddress();
-    destAddress.setAddressBytes(&packetBlock[0]);
-    srcAddress.setAddressBytes(&packetBlock[6]);
+    destAddress.setAddressBytes(&packetBlock[DESTADDRESS_BEGIN]);
+    srcAddress.setAddressBytes(&packetBlock[SRCADDRESS_BEGIN]);
 
     frame->setDest(destAddress);
     frame->setSrc(srcAddress);
     frame->setEtherType(etherType);
 
     cPacket *payload_packet = new cPacket();
-    payload_packet->setByteLength(static_cast<int64_t>(currentPacketHeader->caplen - 14)); // TODO magic numbers
+    payload_packet->setByteLength(static_cast<int64_t>(currentPacketHeader->caplen - PAYLOAD_BEGIN));
     frame->setByteLength(ETHER_MAC_FRAME_BYTES);
-    frame->encapsulate(payload_packet); // TODO: use actual payload (this->currentPacketBlock + 14)
+    frame->encapsulate(payload_packet);
+    //TODO: use actual payload from file (currently not relevant for the simulation)
 
     //Padding
     if (frame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
@@ -234,12 +284,39 @@ inet::EthernetIIFrame* PCAPNGReader::getNextEthernetIIFrame() {
     return frame;
 }
 
+simtime_t PCAPNGReader::calculateSimTime(uint64_t timestamp, int8_t timeResolution) {
+    double timestampNano = 0;
+    double base = 0;
+
+    // the most significant bit decides whether the resolution is a negative power of 2 or 10
+    // the remaining bits define the specific resolution
+    if (timeResolution < 0) {
+        // negative power of 2
+        timeResolution &= 0111111;
+        base = 2.0;
+    }else if (timeResolution >= 0) {
+        // negative power of 10
+        base = 10.0;
+    }
+
+    double oldResolution = pow(base, (double)-timeResolution);
+    double newResolution = pow(10, -9);
+    double resolutionChangeFactor = newResolution / oldResolution;
+    timestampNano = timestamp * resolutionChangeFactor;
+
+    if (initialTimestampNano == 0) {
+        initialTimestampNano = timestampNano;
+    }
+
+    simtime_t simulationTime = SimTime(timestampNano - initialTimestampNano, SIMTIME_NS);
+    return simulationTime;
+}
+
 simtime_t PCAPNGReader::getNextSimTime() {
     if (!endReached && getNextPacketBlock()) {
         uint64_t timestamp = ((uint64_t)currentPacketHeader->timestamp_high << 32)
                              + (currentPacketHeader->timestamp_low);
-        // TODO: richtige Größe (ns, us...) verwenden -> aus tsresol-option vom interface description block auslesen
-        return SimTime(timestamp - initialTimestamp, SIMTIME_NS);
+        return calculateSimTime(timestamp, timeResolutions[currentPacketHeader->interface_id]);
     }
     return SimTime(0, SIMTIME_NS);
 }
@@ -249,4 +326,3 @@ bool PCAPNGReader::endOfFileReached() {
 }
 
 } /* namespace CoRE4INET */
-
