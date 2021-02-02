@@ -45,6 +45,25 @@ void SRProtocol::initialize()
     srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_UPDATED, this);
+    this->handleParameterChange(nullptr);
+}
+
+void SRProtocol::handleParameterChange(const char* parname)
+{
+    if(!parname || !strcmp(parname, "pcpSRClassA"))
+    {
+        this->pcpSRClassA = static_cast<uint8_t>(parameterULongCheckRange(par("pcpSRClassA"), 0, 7));
+        this->priortyAndRankSRClassA = static_cast<uint8_t>(0x10 | (this->pcpSRClassA << 5));
+    }
+    if(!parname || !strcmp(parname, "pcpSRClassB"))
+    {
+        this->pcpSRClassB = static_cast<uint8_t>(parameterULongCheckRange(par("pcpSRClassB"), 0, 7));
+        this->priortyAndRankSRClassB = static_cast<uint8_t>(0x10 | (this->pcpSRClassB << 5));
+    }
+    if(this->pcpSRClassA == this->pcpSRClassB)
+    {
+        throw cRuntimeError("PCP value for SRClass A and B are the same!");
+    }
 }
 
 void SRProtocol::handleMessage(cMessage *msg)
@@ -64,11 +83,11 @@ void SRProtocol::handleMessage(cMessage *msg)
             if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
             {
                 SR_CLASS srClass;
-                if (talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSA)
+                if (talkerAdvertise->getPriorityAndRank() == this->priortyAndRankSRClassA)
                 {
                     srClass = SR_CLASS::A;
                 }
-                else if (talkerAdvertise->getPriorityAndRank() == PRIOANDRANK_SRCLASSB)
+                else if (talkerAdvertise->getPriorityAndRank() == this->priortyAndRankSRClassB)
                 {
                     srClass = SR_CLASS::B;
                 }
@@ -107,7 +126,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                 double reservableBandwidth = par("reservableBandwidth").doubleValue();
 
                 if (update
-                        || ((utilizedBandwidth + requiredBandwidth)
+                        || (static_cast<double>(utilizedBandwidth + requiredBandwidth)
                                 <= (static_cast<double>(totalBandwidth) * reservableBandwidth)))
                 {
                     srpTable->updateListenerWithStreamId(listenerReady->getStreamID(), port,
@@ -202,17 +221,15 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
             talkerAdvertise->setDestination_address(tentry->address);
             talkerAdvertise->setVlan_identifier(tentry->vlan_id);
             if (tentry->srClass == SR_CLASS::A)
-                talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSA);
-            if (tentry->srClass == SR_CLASS::B)
-                talkerAdvertise->setPriorityAndRank(PRIOANDRANK_SRCLASSB);
-
+               talkerAdvertise->setPriorityAndRank(this->priortyAndRankSRClassA);
+           if (tentry->srClass == SR_CLASS::B)
+               talkerAdvertise->setPriorityAndRank(this->priortyAndRankSRClassB);
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);
             etherctrl->setDest(SRP_ADDRESS);
             etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
             talkerAdvertise->setControlInfo(etherctrl);
-
-            //If talker was received from phy we have to exclude the incoming port
+            // If talker was received from phy we have to exclude the incoming port
             if (strcmp(tentry->module->getName(), "phy") == 0)
             {
                 etherctrl->setNotSwitchPort(tentry->module->getIndex());

@@ -19,7 +19,7 @@ import core4inet.utilities.classes.ITimed;
 import core4inet.buffer.base.Buffer;
 
 //
-// Represents an abstract Buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper Algorithm.
+// Represents an abstract buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper algorithm.
 //
 // @warning Do not instantiate the module. Use AVBDoubleBuffer or AVBQueueBuffer instead!
 //

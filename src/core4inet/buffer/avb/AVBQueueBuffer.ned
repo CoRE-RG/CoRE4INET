@@ -16,7 +16,7 @@
 package core4inet.buffer.avb;
 
 //
-// Represents a queue buffer for time-triggered traffic. Messages are sent using the Credit Based Shaper Algorithm.
+// Represents an queue buffer for audio-video bridging traffic. Messages are sent using the Credit Based Shaper algorithm.
 //
 // The buffer stores infinit messages in a fifo queue.
 // The buffer removes and sends the first message in the queue.
