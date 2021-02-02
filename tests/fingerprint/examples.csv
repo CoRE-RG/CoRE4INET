@@ -30,3 +30,5 @@
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            f86a-3a6e/tplx
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            e05b-1661/tplx
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Qci -r 0,                       1s,              917d-6b60/tplx
+
+/examples/PCAPNG/small_network/,                                  -f omnetpp.ini -c General -r 0,                        11s,             fccb-14e4/tplx
