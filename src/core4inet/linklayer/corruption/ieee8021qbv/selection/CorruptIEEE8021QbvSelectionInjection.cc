@@ -13,9 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Injection.h"
+#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionInjection.h>
 
-//INET
 #include "inet/linklayer/ethernet/Ethernet.h"
 //CoRE4INET
 #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
@@ -23,9 +22,9 @@
 
 namespace CoRE4INET {
 
-Define_Module(Injection);
+Define_Module(CorruptIEEE8021QbvSelectionInjection);
 
-void Injection::handleParameterChange(const char* parname)
+void CorruptIEEE8021QbvSelectionInjection::handleParameterChange(const char* parname)
 {
     CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "injectionInterval"))
@@ -34,7 +33,7 @@ void Injection::handleParameterChange(const char* parname)
     }
 }
 
-void Injection::initialize(int stage)
+void CorruptIEEE8021QbvSelectionInjection::initialize(int stage)
 {
     CorruptIEEE8021QbvSelectionBase::initialize(stage);
     if (stage == 0)
@@ -46,7 +45,7 @@ void Injection::initialize(int stage)
     }
 }
 
-void Injection::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvSelectionInjection::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage() && msg->getId() == this->selfMessageId)
     {
@@ -61,13 +60,13 @@ void Injection::handleMessage(cMessage *msg)
     }
 }
 
-simtime_t Injection::getInjectionInterval()
+simtime_t CorruptIEEE8021QbvSelectionInjection::getInjectionInterval()
 {
     this->handleParameterChange("injectionInterval");
     return this->injectionInterval;
 }
 
-cMessage* Injection::createInjectionMessage()
+cMessage* CorruptIEEE8021QbvSelectionInjection::createInjectionMessage()
 {
     cPacket* msg;
     cPacket *payloadPacket = new cPacket();

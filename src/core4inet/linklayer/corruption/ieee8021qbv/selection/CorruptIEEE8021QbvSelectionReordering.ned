@@ -13,19 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.corruption.ieee8021qbv;
+package core4inet.linklayer.corruption.ieee8021qbv.selection;
 
-import core4inet.linklayer.corruption.ieee8021qbv.CorruptIEEE8021QbvSelectionBase;
+import core4inet.linklayer.corruption.ieee8021qbv.selection.CorruptIEEE8021QbvSelectionBase;
 
 //
 // TODO auto-generated module
 //
-simple Timing extends CorruptIEEE8021QbvSelectionBase
+simple CorruptIEEE8021QbvSelectionReordering extends CorruptIEEE8021QbvSelectionBase
 {
     parameters:
-        @class(Timing);
-        
-        volatile double delayTime @unit(s) = default(0s);
-        bool allowOtherTrafficDuringDelay = default(false);
-        double maxOtherTrafficDelayTime @unit(s) = default(0s);
+    	@class(CorruptIEEE8021QbvSelectionReordering);
+    	
+    	volatile int numberOfFramesBeforeInjection = default(1);
+    	bool matchStreamForFrameCounting = default(true);
+    	bool injectTakenFramesWithRandomOrder = default(false);
 }

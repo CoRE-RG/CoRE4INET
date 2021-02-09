@@ -13,18 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Loss.h"
+#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionLoss.h>
 
 namespace CoRE4INET {
 
-Define_Module(Loss);
+Define_Module(CorruptIEEE8021QbvSelectionLoss);
 
-void Loss::initialize(int stage)
+void CorruptIEEE8021QbvSelectionLoss::initialize(int stage)
 {
     CorruptIEEE8021QbvSelectionBase::initialize(stage);
 }
 
-void Loss::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvSelectionLoss::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {

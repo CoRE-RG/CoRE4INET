@@ -13,9 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Manipulation.h"
+#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionManipulation.h>
 
-//INET
 #include "inet/linklayer/ethernet/Ethernet.h"
 //CoRE4INET
 #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
@@ -23,9 +22,9 @@
 
 namespace CoRE4INET {
 
-Define_Module(Manipulation);
+Define_Module(CorruptIEEE8021QbvSelectionManipulation);
 
-void Manipulation::handleParameterChange(const char* parname)
+void CorruptIEEE8021QbvSelectionManipulation::handleParameterChange(const char* parname)
 {
     CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "manipulationDestAddress"))
@@ -81,12 +80,12 @@ void Manipulation::handleParameterChange(const char* parname)
     }
 }
 
-void Manipulation::initialize(int stage)
+void CorruptIEEE8021QbvSelectionManipulation::initialize(int stage)
 {
     CorruptIEEE8021QbvSelectionBase::initialize(stage);
 }
 
-void Manipulation::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvSelectionManipulation::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in"))
     {
@@ -145,7 +144,7 @@ void Manipulation::handleMessage(cMessage *msg)
     CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
 }
 
-size_t Manipulation::getManipulationPayloadBytes()
+size_t CorruptIEEE8021QbvSelectionManipulation::getManipulationPayloadBytes()
 {
     this->handleParameterChange("manipulationPayload");
     return this->manipulationPayload;

@@ -13,15 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.corruption.ieee8021qbv;
+package core4inet.linklayer.corruption.ieee8021qbv.selection;
 
-import core4inet.linklayer.corruption.ieee8021qbv.CorruptIEEE8021QbvSelectionBase;
+import core4inet.linklayer.corruption.ieee8021qbv.selection.CorruptIEEE8021QbvSelectionBase;
 
 //
 // TODO auto-generated module
 //
-simple Loss extends CorruptIEEE8021QbvSelectionBase
+simple CorruptIEEE8021QbvSelectionInjection extends CorruptIEEE8021QbvSelectionBase
 {
     parameters:
-        @class(Loss);
+        @class(CorruptIEEE8021QbvSelectionInjection);
+        
+        volatile double injectionInterval @unit(s) = default(uniform(0s,1s));
 }

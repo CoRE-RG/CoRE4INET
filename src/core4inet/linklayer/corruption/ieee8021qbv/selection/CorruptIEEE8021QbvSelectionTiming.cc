@@ -13,21 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Timing.h"
-
-//CoRE4INET
+#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionTiming.h>
 #include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 
-Define_Module(Timing);
+Define_Module(CorruptIEEE8021QbvSelectionTiming);
 
-Timing::Timing()
+CorruptIEEE8021QbvSelectionTiming::CorruptIEEE8021QbvSelectionTiming()
 {
     this->selfMessageIds = std::vector<uint64_t>();
 }
 
-void Timing::handleParameterChange(const char* parname)
+void CorruptIEEE8021QbvSelectionTiming::handleParameterChange(const char* parname)
 {
     CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "delayTime"))
@@ -44,7 +42,7 @@ void Timing::handleParameterChange(const char* parname)
     }
 }
 
-void Timing::initialize(int stage)
+void CorruptIEEE8021QbvSelectionTiming::initialize(int stage)
 {
     CorruptIEEE8021QbvSelectionBase::initialize(stage);
     if (stage == 0)
@@ -54,7 +52,7 @@ void Timing::initialize(int stage)
     }
 }
 
-void Timing::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage() && this->removeDelayedMessageId(msg->getId()))
     {
@@ -94,13 +92,13 @@ void Timing::handleMessage(cMessage *msg)
     }
 }
 
-simtime_t Timing::getDelayTime()
+simtime_t CorruptIEEE8021QbvSelectionTiming::getDelayTime()
 {
     this->handleParameterChange("delayTime");
     return this->delayTime;
 }
 
-bool Timing::removeDelayedMessageId(uint64_t messageId)
+bool CorruptIEEE8021QbvSelectionTiming::removeDelayedMessageId(uint64_t messageId)
 {
     bool messageIdFound = false;
     bool index = 0;

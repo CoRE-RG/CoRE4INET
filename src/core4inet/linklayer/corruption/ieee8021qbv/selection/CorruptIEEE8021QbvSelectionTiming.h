@@ -13,11 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_INJECTION_H_
-#define __CORE4INET_INJECTION_H_
+#ifndef __CORE4INET_TIMING_H_
+#define __CORE4INET_TIMING_H_
 
 //CoRE4INET
-#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
+#include "core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionBase.h"
 
 using namespace omnetpp;
 
@@ -26,11 +26,17 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Injection : public virtual CorruptIEEE8021QbvSelectionBase
+class CorruptIEEE8021QbvSelectionTiming : public virtual CorruptIEEE8021QbvSelectionBase
 {
   private:
-    simtime_t injectionInterval;
-    uint64_t selfMessageId;
+    simtime_t delayTime;
+    bool allowOtherTrafficDuringDelay;
+    simtime_t maxOtherTrafficDelayTime;
+    std::vector<uint64_t> selfMessageIds;
+
+  public:
+    CorruptIEEE8021QbvSelectionTiming();
+    virtual ~CorruptIEEE8021QbvSelectionTiming(){};
 
   protected:
     virtual void handleParameterChange(const char* parname) override;
@@ -38,8 +44,9 @@ class Injection : public virtual CorruptIEEE8021QbvSelectionBase
     virtual void handleMessage(cMessage *msg) override;
 
   private:
-    simtime_t getInjectionInterval();
-    cMessage* createInjectionMessage();
+    simtime_t getDelayTime();
+    bool removeDelayedMessageId(uint64_t messageId);
+
 };
 
 } //namespace

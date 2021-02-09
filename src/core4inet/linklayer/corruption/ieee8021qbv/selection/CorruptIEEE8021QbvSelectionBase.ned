@@ -13,21 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.corruption.ieee8021qbv;
+package core4inet.linklayer.corruption.ieee8021qbv.selection;
 
-import core4inet.linklayer.corruption.ieee8021qbv.CorruptIEEE8021QbvSelectionBase;
+import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IEEE8021QbvSelection;
 
 //
 // TODO auto-generated module
 //
-simple Manipulation extends CorruptIEEE8021QbvSelectionBase
+simple CorruptIEEE8021QbvSelectionBase extends IEEE8021QbvSelection
 {
-    parameters:
-        @class(Manipulation);
-        
-        string manipulationDestAddress = default("");
-	    string manipulationSrcAddress = default("");
-	    int manipulationPriority = default(-1);
-	    int manipulationVid = default(-1);
-	    volatile int manipulationPayload @unit(Byte) = default(0Byte);
+	parameters:
+	    @class(CorruptIEEE8021QbvSelectionBase);
+	    
+	    volatile double corruptionProbability = default(0);
+	    string corruptionDestAddress = default("");
+	    string corruptionSrcAddress = default("");
+	    int corruptionPriority = default(-1);
+	    int corruptionVid = default(-1);
+	    volatile int corruptionPayload @unit(Byte) = default(0Byte);
 }

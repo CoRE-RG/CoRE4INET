@@ -13,22 +13,26 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.corruption.ieee8021qbv;
+#ifndef __CORE4INET_LOSS_H_
+#define __CORE4INET_LOSS_H_
 
-import core4inet.linklayer.shaper.IEEE8021Qbv.selection.IEEE8021QbvSelection;
+//CoRE4INET
+#include "core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionBase.h"
 
-//
-// TODO auto-generated module
-//
-simple CorruptIEEE8021QbvSelectionBase extends IEEE8021QbvSelection
+using namespace omnetpp;
+
+namespace CoRE4INET {
+
+/**
+ * TODO - Generated class
+ */
+class CorruptIEEE8021QbvSelectionLoss : public virtual CorruptIEEE8021QbvSelectionBase
 {
-	parameters:
-	    @class(CorruptIEEE8021QbvSelectionBase);
-	    
-	    volatile double corruptionProbability = default(0);
-	    string corruptionDestAddress = default("");
-	    string corruptionSrcAddress = default("");
-	    int corruptionPriority = default(-1);
-	    int corruptionVid = default(-1);
-	    volatile int corruptionPayload @unit(Byte) = default(0Byte);
-}
+  protected:
+    virtual void initialize(int stage) override;
+    virtual void handleMessage(cMessage *msg) override;
+};
+
+} //namespace
+
+#endif

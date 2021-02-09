@@ -13,22 +13,20 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "Reordering.h"
-
-//CoRE4INET
+#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionReordering.h>
 #include "core4inet/utilities/ConfigFunctions.h"
 #include "core4inet/utilities/customWatch.h"
 
 namespace CoRE4INET {
 
-Define_Module(Reordering);
+Define_Module(CorruptIEEE8021QbvSelectionReordering);
 
-Reordering::Reordering()
+CorruptIEEE8021QbvSelectionReordering::CorruptIEEE8021QbvSelectionReordering()
 {
     this->takenMessages = std::map<cMessage*, uint32_t>();
 }
 
-Reordering::~Reordering()
+CorruptIEEE8021QbvSelectionReordering::~CorruptIEEE8021QbvSelectionReordering()
 {
     for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end();) // TODO: Random?
     {
@@ -37,7 +35,7 @@ Reordering::~Reordering()
     }
 }
 
-void Reordering::handleParameterChange(const char* parname)
+void CorruptIEEE8021QbvSelectionReordering::handleParameterChange(const char* parname)
 {
     CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "numberOfFramesBeforeInjection"))
@@ -54,7 +52,7 @@ void Reordering::handleParameterChange(const char* parname)
     }
 }
 
-void Reordering::initialize(int stage)
+void CorruptIEEE8021QbvSelectionReordering::initialize(int stage)
 {
     CorruptIEEE8021QbvSelectionBase::initialize(stage);
     if (stage == 0)
@@ -63,7 +61,7 @@ void Reordering::initialize(int stage)
     }
 }
 
-void Reordering::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvSelectionReordering::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
@@ -96,13 +94,13 @@ void Reordering::handleMessage(cMessage *msg)
     }
 }
 
-uint32_t Reordering::getNumberOfFramesBeforeInjection()
+uint32_t CorruptIEEE8021QbvSelectionReordering::getNumberOfFramesBeforeInjection()
 {
     this->handleParameterChange("numberOfFramesBeforeInjection");
     return this->numberOfFramesBeforeInjection;
 }
 
-void Reordering::incrementPassedFramesCounters()
+void CorruptIEEE8021QbvSelectionReordering::incrementPassedFramesCounters()
 {
     for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end(); it++)
     {
@@ -110,7 +108,7 @@ void Reordering::incrementPassedFramesCounters()
     }
 }
 
-void Reordering::injectReadyMessages(uint32_t minPassedFrames)
+void CorruptIEEE8021QbvSelectionReordering::injectReadyMessages(uint32_t minPassedFrames)
 {
     for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end();)
     {

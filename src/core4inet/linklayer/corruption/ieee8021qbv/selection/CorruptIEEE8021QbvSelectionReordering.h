@@ -13,11 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __CORE4INET_LOSS_H_
-#define __CORE4INET_LOSS_H_
+#ifndef __CORE4INET_REORDERING_H_
+#define __CORE4INET_REORDERING_H_
 
+//std
+#include <map>
 //CoRE4INET
-#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
+#include "core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionBase.h"
 
 using namespace omnetpp;
 
@@ -26,11 +28,27 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Loss : public virtual CorruptIEEE8021QbvSelectionBase
+class CorruptIEEE8021QbvSelectionReordering : public virtual CorruptIEEE8021QbvSelectionBase
 {
+  private:
+    std::map<cMessage*, uint32_t> takenMessages;
+    uint32_t numberOfFramesBeforeInjection;
+    bool matchStreamForFrameCounting;
+    bool injectTakenFramesWithRandomOrder;
+
+  public:
+    CorruptIEEE8021QbvSelectionReordering();
+    virtual ~CorruptIEEE8021QbvSelectionReordering();
+
   protected:
+    virtual void handleParameterChange(const char* parname) override;
     virtual void initialize(int stage) override;
     virtual void handleMessage(cMessage *msg) override;
+
+  private:
+    uint32_t getNumberOfFramesBeforeInjection();
+    void incrementPassedFramesCounters();
+    void injectReadyMessages(uint32_t minPassedFrames);
 };
 
 } //namespace

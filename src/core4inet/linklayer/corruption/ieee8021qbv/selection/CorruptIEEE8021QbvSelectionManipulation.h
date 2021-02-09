@@ -17,7 +17,7 @@
 #define __CORE4INET_MANIPULATION_H_
 
 //CoRE4INET
-#include "core4inet/linklayer/corruption/ieee8021qbv/CorruptIEEE8021QbvSelectionBase.h"
+#include "core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionBase.h"
 
 using namespace omnetpp;
 
@@ -26,7 +26,7 @@ namespace CoRE4INET {
 /**
  * TODO - Generated class
  */
-class Manipulation : public virtual CorruptIEEE8021QbvSelectionBase
+class CorruptIEEE8021QbvSelectionManipulation : public virtual CorruptIEEE8021QbvSelectionBase
 {
   private:
     inet::MACAddress manipulationDestAddress;
