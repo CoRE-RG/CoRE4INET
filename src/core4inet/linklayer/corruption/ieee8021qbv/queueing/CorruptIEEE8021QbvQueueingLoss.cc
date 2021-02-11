@@ -13,18 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionLoss.h>
+#include <core4inet/linklayer/corruption/ieee8021qbv/queueing/CorruptIEEE8021QbvQueueingLoss.h>
 
 namespace CoRE4INET {
 
-Define_Module(CorruptIEEE8021QbvSelectionLoss);
+Define_Module(CorruptIEEE8021QbvQueueingLoss);
 
-void CorruptIEEE8021QbvSelectionLoss::initialize(int stage)
+void CorruptIEEE8021QbvQueueingLoss::initialize()
 {
-    CorruptIEEE8021QbvSelectionBase::initialize(stage);
+    CorruptIEEE8021QbvQueueingBase::initialize();
 }
 
-void CorruptIEEE8021QbvSelectionLoss::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvQueueingLoss::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
@@ -34,17 +34,15 @@ void CorruptIEEE8021QbvSelectionLoss::handleMessage(cMessage *msg)
             this->getParentModule()->bubble("Loss");
             this->corruptionCount++;
             delete msg;
-            this->framesRequested++;
-            this->selectFrame();
         }
         else
         {
-            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+            CorruptIEEE8021QbvQueueingBase::handleMessage(msg);
         }
     }
     else
     {
-        CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+        CorruptIEEE8021QbvQueueingBase::handleMessage(msg);
     }
 }
 

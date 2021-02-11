@@ -75,6 +75,14 @@ void CorruptIEEE8021QbvQueueingBase::handleParameterChange(const char* parname)
 void CorruptIEEE8021QbvQueueingBase::initialize()
 {
     IEEE8021QbvQueueing::initialize();
+    this->corruptionCount = 0;
+    WATCH(this->corruptionCount);
+}
+
+void CorruptIEEE8021QbvQueueingBase::finish()
+{
+    IEEE8021QbvQueueing::finish();
+    this->recordScalar("corruptions", this->corruptionCount);
 }
 
 bool CorruptIEEE8021QbvQueueingBase::performCorruption()

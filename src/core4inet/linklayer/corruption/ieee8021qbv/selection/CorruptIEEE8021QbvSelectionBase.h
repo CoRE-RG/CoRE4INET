@@ -39,6 +39,7 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
     bool corruptionWithQTag;
     uint8_t corruptionPriority;
     uint16_t corruptionVid;
+    size_t corruptionCount;
 
   private:
     double corruptionProbability;
@@ -51,6 +52,7 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
   protected:
     virtual void handleParameterChange(const char* parname) override;
     virtual void initialize(int stage) override;
+    virtual void finish() override;
     virtual void selectFrame() override;
     virtual bool performCorruption();
     virtual size_t getCorruptionPayloadBytes();

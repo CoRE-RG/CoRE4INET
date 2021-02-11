@@ -38,6 +38,7 @@ class CorruptIEEE8021QbvQueueingBase : public virtual IEEE8021QbvQueueing
     bool corruptionWithQTag;
     uint8_t corruptionPriority;
     uint16_t corruptionVid;
+    size_t corruptionCount;
 
   private:
     double corruptionProbability;
@@ -46,6 +47,7 @@ class CorruptIEEE8021QbvQueueingBase : public virtual IEEE8021QbvQueueing
   protected:
     virtual void handleParameterChange(const char* parname) override;
     virtual void initialize() override;
+    virtual void finish() override;
     virtual bool performCorruption();
     virtual size_t getCorruptionPayloadBytes();
     virtual bool match(cMessage *msg);

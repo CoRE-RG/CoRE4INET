@@ -47,6 +47,7 @@ void CorruptIEEE8021QbvQueueingInjection::handleMessage(cMessage *msg)
     {
         this->bubble("Inject");
         this->getParentModule()->bubble("Inject");
+        this->corruptionCount++;
         cMessage* injectMsg = this->createInjectionMessage();
         injectMsg->setArrival(this->getId(), this->gate("in", 0)->getId());
         CorruptIEEE8021QbvQueueingBase::handleMessage(injectMsg);

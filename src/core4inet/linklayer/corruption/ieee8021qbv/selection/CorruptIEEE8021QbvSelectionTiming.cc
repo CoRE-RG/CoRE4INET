@@ -71,6 +71,7 @@ void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
         {
             this->bubble("Delay");
             this->getParentModule()->bubble("Delay");
+            this->corruptionCount++;
             msg->setName((std::string(msg->getName()) + " (Delayed)").c_str());
             if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
             {

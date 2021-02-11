@@ -92,8 +92,16 @@ void CorruptIEEE8021QbvSelectionBase::initialize(int stage)
     IEEE8021QbvSelection::initialize(stage);
     if (stage == 0)
     {
+        this->corruptionCount = 0;
+        WATCH(this->corruptionCount);
         WATCH_PTRVECTOR(this->outMessages);
     }
+}
+
+void CorruptIEEE8021QbvSelectionBase::finish()
+{
+    IEEE8021QbvSelection::finish();
+    this->recordScalar("corruptions", this->corruptionCount);
 }
 
 void CorruptIEEE8021QbvSelectionBase::selectFrame()

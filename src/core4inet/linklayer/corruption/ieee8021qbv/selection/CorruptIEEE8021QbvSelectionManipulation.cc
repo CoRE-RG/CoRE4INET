@@ -93,6 +93,7 @@ void CorruptIEEE8021QbvSelectionManipulation::handleMessage(cMessage *msg)
         {
             this->bubble("Manipulation");
             this->getParentModule()->bubble("Manipulation");
+            this->corruptionCount++;
             if (inet::EthernetIIFrame* frame = dynamic_cast<inet::EthernetIIFrame*>(msg))
             {
                 cPacket* payload = frame->decapsulate();
