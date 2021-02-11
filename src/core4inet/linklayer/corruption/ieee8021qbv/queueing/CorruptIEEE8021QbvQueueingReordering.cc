@@ -13,21 +13,27 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionReordering.h>
+#include <core4inet/linklayer/corruption/ieee8021qbv/queueing/CorruptIEEE8021QbvQueueingReordering.h>
 #include "core4inet/utilities/ConfigFunctions.h"
 #include "core4inet/utilities/customWatch.h"
 
 namespace CoRE4INET {
 
-Define_Module(CorruptIEEE8021QbvSelectionReordering);
+Define_Module(CorruptIEEE8021QbvQueueingReordering);
 
-CorruptIEEE8021QbvSelectionReordering::CorruptIEEE8021QbvSelectionReordering()
+CorruptIEEE8021QbvQueueingReordering::CorruptIEEE8021QbvQueueingReordering()
 {
+    this->outMessages = std::vector<cMessage*>();
     this->takenMessages = std::map<cMessage*, uint32_t>();
 }
 
-CorruptIEEE8021QbvSelectionReordering::~CorruptIEEE8021QbvSelectionReordering()
+CorruptIEEE8021QbvQueueingReordering::~CorruptIEEE8021QbvQueueingReordering()
 {
+    while(!this->outMessages.empty())
+    {
+        delete this->outMessages.front();
+        this->outMessages.erase(this->outMessages.begin());
+    }
     for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end();)
     {
         delete it->first;
@@ -35,9 +41,9 @@ CorruptIEEE8021QbvSelectionReordering::~CorruptIEEE8021QbvSelectionReordering()
     }
 }
 
-void CorruptIEEE8021QbvSelectionReordering::handleParameterChange(const char* parname)
+void CorruptIEEE8021QbvQueueingReordering::handleParameterChange(const char* parname)
 {
-    CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
+    CorruptIEEE8021QbvQueueingBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "numberOfFramesBeforeInjection"))
     {
         this->numberOfFramesBeforeInjection = parameterULongCheckRange(par("numberOfFramesBeforeInjection"), 0, std::numeric_limits<uint32_t>::max());
@@ -52,16 +58,13 @@ void CorruptIEEE8021QbvSelectionReordering::handleParameterChange(const char* pa
     }
 }
 
-void CorruptIEEE8021QbvSelectionReordering::initialize(int stage)
+void CorruptIEEE8021QbvQueueingReordering::initialize()
 {
-    CorruptIEEE8021QbvSelectionBase::initialize(stage);
-    if (stage == 0)
-    {
-        WATCH_KEYPTRMAP(this->takenMessages);
-    }
+    CorruptIEEE8021QbvQueueingBase::initialize();
+    WATCH_KEYPTRMAP(this->takenMessages);
 }
 
-void CorruptIEEE8021QbvSelectionReordering::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvQueueingReordering::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("in"))
     {
@@ -72,8 +75,6 @@ void CorruptIEEE8021QbvSelectionReordering::handleMessage(cMessage *msg)
             this->corruptionCount++;
             msg->setName((std::string(msg->getName()) + " (Reordered)").c_str());
             this->takenMessages[msg] = 0;
-            this->framesRequested++;
-            this->selectFrame();
         }
         else
         {
@@ -85,23 +86,23 @@ void CorruptIEEE8021QbvSelectionReordering::handleMessage(cMessage *msg)
             {
                 this->incrementPassedFramesCounters();
             }
-            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+            CorruptIEEE8021QbvQueueingBase::handleMessage(msg);
             this->injectReadyMessages(this->getNumberOfFramesBeforeInjection());
         }
     }
     else
     {
-        CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+        CorruptIEEE8021QbvQueueingBase::handleMessage(msg);
     }
 }
 
-uint32_t CorruptIEEE8021QbvSelectionReordering::getNumberOfFramesBeforeInjection()
+uint32_t CorruptIEEE8021QbvQueueingReordering::getNumberOfFramesBeforeInjection()
 {
     this->handleParameterChange("numberOfFramesBeforeInjection");
     return this->numberOfFramesBeforeInjection;
 }
 
-void CorruptIEEE8021QbvSelectionReordering::incrementPassedFramesCounters()
+void CorruptIEEE8021QbvQueueingReordering::incrementPassedFramesCounters()
 {
     for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end(); it++)
     {
@@ -109,7 +110,7 @@ void CorruptIEEE8021QbvSelectionReordering::incrementPassedFramesCounters()
     }
 }
 
-void CorruptIEEE8021QbvSelectionReordering::injectReadyMessages(uint32_t minPassedFrames)
+void CorruptIEEE8021QbvQueueingReordering::injectReadyMessages(uint32_t minPassedFrames)
 {
     for (std::map<cMessage*, uint32_t>::iterator it = this->takenMessages.begin(); it != this->takenMessages.end();)
     {
@@ -133,6 +134,11 @@ void CorruptIEEE8021QbvSelectionReordering::injectReadyMessages(uint32_t minPass
             this->outMessages[i] = this->outMessages[j];
             this->outMessages[j] = msg;
         }
+    }
+    while(!this->outMessages.empty())
+    {
+        CorruptIEEE8021QbvQueueingBase::handleMessage(this->outMessages.front());
+        this->outMessages.erase(this->outMessages.begin());
     }
 }
 

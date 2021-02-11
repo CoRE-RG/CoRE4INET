@@ -13,57 +13,40 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <core4inet/linklayer/corruption/ieee8021qbv/selection/CorruptIEEE8021QbvSelectionTiming.h>
+#include <core4inet/linklayer/corruption/ieee8021qbv/queueing/CorruptIEEE8021QbvQueueingTiming.h>
 #include "core4inet/utilities/ConfigFunctions.h"
 
 namespace CoRE4INET {
 
-Define_Module(CorruptIEEE8021QbvSelectionTiming);
+Define_Module(CorruptIEEE8021QbvQueueingTiming);
 
-CorruptIEEE8021QbvSelectionTiming::CorruptIEEE8021QbvSelectionTiming()
+CorruptIEEE8021QbvQueueingTiming::CorruptIEEE8021QbvQueueingTiming()
 {
     this->selfMessageIds = std::vector<uint64_t>();
 }
 
-void CorruptIEEE8021QbvSelectionTiming::handleParameterChange(const char* parname)
+void CorruptIEEE8021QbvQueueingTiming::handleParameterChange(const char* parname)
 {
-    CorruptIEEE8021QbvSelectionBase::handleParameterChange(parname);
+    CorruptIEEE8021QbvQueueingBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "delayTime"))
     {
         this->delayTime = parameterDoubleCheckRange(par("delayTime"), 0, SIMTIME_MAX.dbl());
     }
-    if (!parname || !strcmp(parname, "allowOtherTrafficDuringDelay"))
-    {
-        this->allowOtherTrafficDuringDelay = par("allowOtherTrafficDuringDelay").boolValue();
-    }
-    if (!parname || !strcmp(parname, "maxOtherTrafficDelayTime"))
-    {
-        this->maxOtherTrafficDelayTime = parameterDoubleCheckRange(par("maxOtherTrafficDelayTime"), 0, SIMTIME_MAX.dbl());
-    }
 }
 
-void CorruptIEEE8021QbvSelectionTiming::initialize(int stage)
+void CorruptIEEE8021QbvQueueingTiming::initialize()
 {
-    CorruptIEEE8021QbvSelectionBase::initialize(stage);
-    if (stage == 0)
-    {
-        WATCH(this->delayTime);
-        WATCH_VECTOR(this->selfMessageIds);
-    }
+    CorruptIEEE8021QbvQueueingBase::initialize();
+    WATCH(this->delayTime);
+    WATCH_VECTOR(this->selfMessageIds);
 }
 
-void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
+void CorruptIEEE8021QbvQueueingTiming::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage() && this->removeDelayedMessageId(msg->getId()))
     {
-        if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
-        {
-            this->outMessages.push_back(msg);
-        }
-        else
-        {
-            this->send(msg, "out");
-        }
+        msg->setArrival(this->getId(), this->gate("in", 0)->getId());
+        CorruptIEEE8021QbvQueueingBase::handleMessage(msg);
     }
     else if (msg->arrivedOn("in"))
     {
@@ -73,33 +56,28 @@ void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
             this->getParentModule()->bubble("Delay");
             this->corruptionCount++;
             msg->setName((std::string(msg->getName()) + " (Delayed)").c_str());
-            if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
-            {
-                this->framesRequested++;
-                this->selectFrame();
-            }
             this->selfMessageIds.push_back(msg->getId());
             msg->setTimestamp(this->getDelayTime());
             scheduleAt(simTime() + msg->getTimestamp(), msg);
         }
         else
         {
-            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+            CorruptIEEE8021QbvQueueingBase::handleMessage(msg);
         }
     }
     else
     {
-        CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
+        CorruptIEEE8021QbvQueueingBase::handleMessage(msg);
     }
 }
 
-simtime_t CorruptIEEE8021QbvSelectionTiming::getDelayTime()
+simtime_t CorruptIEEE8021QbvQueueingTiming::getDelayTime()
 {
     this->handleParameterChange("delayTime");
     return this->delayTime;
 }
 
-bool CorruptIEEE8021QbvSelectionTiming::removeDelayedMessageId(uint64_t messageId)
+bool CorruptIEEE8021QbvQueueingTiming::removeDelayedMessageId(uint64_t messageId)
 {
     bool messageIdFound = false;
     uint64_t index = 0;
