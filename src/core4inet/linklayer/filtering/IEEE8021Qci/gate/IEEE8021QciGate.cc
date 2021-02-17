@@ -19,6 +19,7 @@ namespace CoRE4INET {
 
 Define_Module(IEEE8021QciGate);
 
+simsignal_t IEEE8021QciGate::framePassedSignal = registerSignal("framePassed");
 simsignal_t IEEE8021QciGate::frameDroppedSignal = registerSignal("frameDropped");
 
 void IEEE8021QciGate::open()
@@ -37,6 +38,7 @@ void IEEE8021QciGate::initialize()
 {
     this->handleParameterChange(nullptr);
     WATCH(this->state);
+    WATCH(this->numFramesPassed);
     WATCH(this->numFramesDropped);
 }
 
@@ -51,12 +53,14 @@ void IEEE8021QciGate::handleMessage(cMessage *msg)
             {
                 throw cRuntimeError("Cannot find meter %d!", ctrl->getMeterID());
             }
+            this->emit(this->framePassedSignal, static_cast<unsigned long>(ctrl->getEncapsulatedPacket()->getByteLength()));
             sendDirect(msg, meter->gate("in"));
+            this->numFramesPassed++;
         }
         else if (this->state == this->State::CLOSED)
         {
             this->bubble("Frame dropped!");
-            this->emit(frameDroppedSignal, static_cast<unsigned long>(ctrl->getEncapsulatedPacket()->getByteLength()));
+            this->emit(this->frameDroppedSignal, static_cast<unsigned long>(ctrl->getEncapsulatedPacket()->getByteLength()));
             delete ctrl;
             this->numFramesDropped++;
         }
@@ -100,6 +104,7 @@ void IEEE8021QciGate::refreshDisplay() const
 
 void IEEE8021QciGate::finish()
 {
+    recordScalar("frames passed", this->numFramesPassed);
     recordScalar("frames dropped", this->numFramesDropped);
     simtime_t t = simTime();
     if (t > 0)
@@ -107,6 +112,10 @@ void IEEE8021QciGate::finish()
         if (this->numFramesDropped > 0)
         {
             recordScalar("frames/sec dropped", this->numFramesDropped / t);
+        }
+        if (this->numFramesPassed > 0)
+        {
+            recordScalar("frames/sec passed", this->numFramesPassed / t);
         }
     }
 }
