@@ -26,6 +26,7 @@ package core4inet.buffer.AS6802;
 // @see RCBuffer, Buffer,
 //
 // @author Till Steinbach
+//
 simple RCQueueBuffer extends RCBuffer
 {
     parameters:

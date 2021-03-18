@@ -26,6 +26,7 @@ package core4inet.buffer.AS6802;
 // @see TTBuffer, Buffer,
 //
 // @author Till Steinbach
+//
 simple TTQueueBuffer extends TTBuffer
 {
     parameters:

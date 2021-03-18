@@ -24,6 +24,7 @@ package core4inet.buffer.avb;
 // @see AVBBuffer, Buffer,
 //
 // @author Philipp Meyer
+//
 simple AVBQueueBuffer extends AVBBuffer
 {
     parameters:

@@ -25,6 +25,7 @@ package core4inet.buffer.base;
 // @see IBuffer
 //
 // @author Till Steinbach
+//
 simple Buffer like IBuffer
 {
     parameters:

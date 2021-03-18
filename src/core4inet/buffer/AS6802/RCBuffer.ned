@@ -28,6 +28,7 @@ import core4inet.utilities.classes.ITimed;
 // @see RCDoubleBuffer, RCQueueBuffer, Buffer, SchedulerTimerEvent, TTEScheduler
 //
 // @author Till Steinbach
+//
 simple RCBuffer extends CTBuffer like ITimed
 {
     parameters:
