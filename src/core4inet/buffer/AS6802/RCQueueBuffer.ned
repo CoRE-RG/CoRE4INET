@@ -41,11 +41,11 @@ simple RCQueueBuffer extends RCBuffer
         @signal[dropped](type=inet::EtherFrame);
 
         //Statistic of the queue length of the buffer
-        @statistic[length](title="Queue Length"; source=length; unit=packets; record=vector,stats; interpolationmode=sample-hold);
+        @statistic[length](title="Queue Length"; source=length; record=vector,stats; unit=packets; interpolationmode=sample-hold);
         //Statistic of the queue size of the buffer in bytes
         @statistic[size](title="Queue Size"; source=size; record=vector,stats; unit=B; interpolationmode=sample-hold);
         //Statistic of the number of packets that were dropped due to buffer overflows
-        @statistic[dropped](title="Dropped packets"; source=dropped; unit=packets; record=count);
+        @statistic[dropped](title="Dropped frames"; source=dropped; record=count; unit=packets);
 
         //Size of the buffer negative means infinite
         int size = default(-1);
