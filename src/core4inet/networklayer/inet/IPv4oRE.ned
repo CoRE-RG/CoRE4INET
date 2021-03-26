@@ -82,7 +82,8 @@ simple IPv4oRE extends IPv4 {
         //  
 	    // 	Each subscribe element has one single "streamId" attribute which defines the stream Id to subscribe to.
 	    // 
-        xml filters = default(xmldoc("filters.xml"));
+	    // <root/> is just a place holder insert ".xml" file
+        xml filters = default(xml("<root/>"));
         //Interval in which an avb subscription is updated
         double avbUpdateInterval @unit("s") = default(6s);
         //Interval in which an avb subscription is reregistered after a timeout
