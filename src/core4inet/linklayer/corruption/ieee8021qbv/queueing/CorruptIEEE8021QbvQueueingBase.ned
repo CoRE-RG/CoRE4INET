@@ -26,6 +26,7 @@ simple CorruptIEEE8021QbvQueueingBase extends IEEE8021QbvQueueing
 	    @class(CorruptIEEE8021QbvQueueingBase);
 	    
 	    volatile double corruptionProbability = default(0);
+	    volatile double corruptionMinInterval @unit(s) = default(0s);
 	    string corruptionDestAddress = default("");
 	    string corruptionSrcAddress = default("");
 	    int corruptionPriority = default(-1);

@@ -54,15 +54,22 @@ void CorruptIEEE8021QbvSelectionTiming::initialize(int stage)
 
 void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
 {
-    if (msg->isSelfMessage() && this->removeDelayedMessageId(msg->getId()))
+    if (msg->isSelfMessage())
     {
-        if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
+        if (this->removeDelayedMessageId(msg->getId()))
         {
-            this->outMessages.push_back(msg);
+            if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
+            {
+                this->outMessages.push_back(msg);
+            }
+            else
+            {
+                this->send(msg, "out");
+            }
         }
         else
         {
-            this->send(msg, "out");
+            CorruptIEEE8021QbvSelectionBase::handleMessage(msg);
         }
     }
     else if (msg->arrivedOn("in"))
@@ -73,14 +80,14 @@ void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
             this->getParentModule()->bubble("Delay");
             this->corruptionCount++;
             msg->setName((std::string(msg->getName()) + " (Delayed)").c_str());
+            this->selfMessageIds.push_back(msg->getId());
+            msg->setTimestamp(this->getDelayTime());
+            scheduleAt(simTime() + msg->getTimestamp(), msg);
             if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
             {
                 this->framesRequested++;
                 this->selectFrame();
             }
-            this->selfMessageIds.push_back(msg->getId());
-            msg->setTimestamp(this->getDelayTime());
-            scheduleAt(simTime() + msg->getTimestamp(), msg);
         }
         else
         {

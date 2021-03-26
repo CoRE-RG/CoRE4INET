@@ -28,6 +28,7 @@ Define_Module(CorruptIEEE8021QbvSelectionBase);
 CorruptIEEE8021QbvSelectionBase::CorruptIEEE8021QbvSelectionBase()
 {
     this->outMessages = std::vector<cMessage*>();
+    this->lastCorruptionTime = 0;
 }
 
 CorruptIEEE8021QbvSelectionBase::~CorruptIEEE8021QbvSelectionBase()
@@ -45,6 +46,10 @@ void CorruptIEEE8021QbvSelectionBase::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "corruptionProbability"))
     {
         this->corruptionProbability = parameterDoubleCheckRange(par("corruptionProbability"), 0, 1);
+    }
+    if (!parname || !strcmp(parname, "corruptionMinInterval"))
+    {
+        this->corruptionMinInterval = parameterDoubleCheckRange(par("corruptionMinInterval"), 0, SIMTIME_MAX.dbl());
     }
     if (!parname || !strcmp(parname, "corruptionDestAddress"))
     {
@@ -121,7 +126,16 @@ void CorruptIEEE8021QbvSelectionBase::selectFrame()
 
 bool CorruptIEEE8021QbvSelectionBase::performCorruption()
 {
-    return this->getRNG(0)->doubleRandIncl1() <= this->getCorruptionProbability();
+    bool performCorruption = false;
+    if ((simTime() - this->lastCorruptionTime) >= this->getCorruptionMinInterval())
+    {
+        if (this->getRNG(0)->doubleRandIncl1() <= this->getCorruptionProbability())
+        {
+            performCorruption = true;
+            this->lastCorruptionTime = simTime();
+        }
+    }
+    return performCorruption;
 }
 
 size_t CorruptIEEE8021QbvSelectionBase::getCorruptionPayloadBytes()
@@ -180,6 +194,12 @@ double CorruptIEEE8021QbvSelectionBase::getCorruptionProbability()
 {
     this->handleParameterChange("corruptionProbability");
     return this->corruptionProbability;
+}
+
+double CorruptIEEE8021QbvSelectionBase::getCorruptionMinInterval()
+{
+    this->handleParameterChange("corruptionMinInterval");
+    return this->corruptionMinInterval;
 }
 
 } //namespace

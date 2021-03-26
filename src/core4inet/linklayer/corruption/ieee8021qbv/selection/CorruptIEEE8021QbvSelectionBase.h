@@ -43,6 +43,8 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
 
   private:
     double corruptionProbability;
+    double corruptionMinInterval;
+    simtime_t lastCorruptionTime;
     size_t corruptionPayload;
 
   public:
@@ -60,6 +62,7 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
 
   private:
     double getCorruptionProbability();
+    double getCorruptionMinInterval();
 };
 
 } //namespace

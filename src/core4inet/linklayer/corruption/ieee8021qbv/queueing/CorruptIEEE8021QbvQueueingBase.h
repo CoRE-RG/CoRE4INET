@@ -42,6 +42,8 @@ class CorruptIEEE8021QbvQueueingBase : public virtual IEEE8021QbvQueueing
 
   private:
     double corruptionProbability;
+    double corruptionMinInterval;
+    simtime_t lastCorruptionTime;
     size_t corruptionPayload;
 
   protected:
@@ -54,6 +56,7 @@ class CorruptIEEE8021QbvQueueingBase : public virtual IEEE8021QbvQueueing
 
   private:
     double getCorruptionProbability();
+    double getCorruptionMinInterval();
 };
 
 } //namespace

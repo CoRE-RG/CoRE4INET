@@ -31,6 +31,10 @@ void CorruptIEEE8021QbvQueueingBase::handleParameterChange(const char* parname)
     {
         this->corruptionProbability = parameterDoubleCheckRange(par("corruptionProbability"), 0, 1);
     }
+    if (!parname || !strcmp(parname, "corruptionMinInterval"))
+    {
+        this->corruptionMinInterval = parameterDoubleCheckRange(par("corruptionMinInterval"), 0, SIMTIME_MAX.dbl());
+    }
     if (!parname || !strcmp(parname, "corruptionDestAddress"))
     {
         if (par("corruptionDestAddress").stdstringValue().empty())
@@ -87,7 +91,16 @@ void CorruptIEEE8021QbvQueueingBase::finish()
 
 bool CorruptIEEE8021QbvQueueingBase::performCorruption()
 {
-    return this->getRNG(0)->doubleRandIncl1() <= this->getCorruptionProbability();
+    bool performCorruption = false;
+    if ((simTime() - this->lastCorruptionTime) >= this->getCorruptionMinInterval())
+    {
+        if (this->getRNG(0)->doubleRandIncl1() <= this->getCorruptionProbability())
+        {
+            performCorruption = true;
+            this->lastCorruptionTime = simTime();
+        }
+    }
+    return performCorruption;
 }
 
 size_t CorruptIEEE8021QbvQueueingBase::getCorruptionPayloadBytes()
@@ -146,6 +159,12 @@ double CorruptIEEE8021QbvQueueingBase::getCorruptionProbability()
 {
     this->handleParameterChange("corruptionProbability");
     return this->corruptionProbability;
+}
+
+double CorruptIEEE8021QbvQueueingBase::getCorruptionMinInterval()
+{
+    this->handleParameterChange("corruptionMinInterval");
+    return this->corruptionMinInterval;
 }
 
 } //namespace
