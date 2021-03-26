@@ -72,7 +72,6 @@ void CorruptIEEE8021QbvQueueingReordering::handleMessage(cMessage *msg)
         {
             this->bubble("Reorder");
             this->getParentModule()->bubble("Reorder");
-            this->corruptionCount++;
             msg->setName((std::string(msg->getName()) + " (Reordered)").c_str());
             this->takenMessages[msg] = 0;
         }

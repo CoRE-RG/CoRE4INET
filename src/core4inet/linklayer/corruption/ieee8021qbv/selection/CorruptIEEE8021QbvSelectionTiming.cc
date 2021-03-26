@@ -78,7 +78,6 @@ void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
         {
             this->bubble("Delay");
             this->getParentModule()->bubble("Delay");
-            this->corruptionCount++;
             msg->setName((std::string(msg->getName()) + " (Delayed)").c_str());
             this->selfMessageIds.push_back(msg->getId());
             msg->setTimestamp(this->getDelayTime());

@@ -51,7 +51,7 @@ void CorruptIEEE8021QbvSelectionInjection::handleMessage(cMessage *msg)
     {
         this->bubble("Inject");
         this->getParentModule()->bubble("Inject");
-        this->corruptionCount++;
+        this->performCorruption();
         outMessages.push_back(this->createInjectionMessage());
         scheduleAt(simTime() + this->getInjectionInterval(), msg);
     }

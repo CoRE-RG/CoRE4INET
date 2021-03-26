@@ -25,6 +25,8 @@ namespace CoRE4INET {
 
 Define_Module(CorruptIEEE8021QbvSelectionBase);
 
+simsignal_t CorruptIEEE8021QbvSelectionBase::corruptionSignal = registerSignal("corruption");
+
 CorruptIEEE8021QbvSelectionBase::CorruptIEEE8021QbvSelectionBase()
 {
     this->outMessages = std::vector<cMessage*>();
@@ -133,6 +135,8 @@ bool CorruptIEEE8021QbvSelectionBase::performCorruption()
         {
             performCorruption = true;
             this->lastCorruptionTime = simTime();
+            this->corruptionCount++;
+            this->emit(this->corruptionSignal, true);
         }
     }
     return performCorruption;

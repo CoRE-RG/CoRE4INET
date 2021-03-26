@@ -45,6 +45,7 @@ class CorruptIEEE8021QbvQueueingBase : public virtual IEEE8021QbvQueueing
     double corruptionMinInterval;
     simtime_t lastCorruptionTime;
     size_t corruptionPayload;
+    static simsignal_t corruptionSignal;
 
   protected:
     virtual void handleParameterChange(const char* parname) override;

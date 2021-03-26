@@ -32,7 +32,6 @@ void CorruptIEEE8021QbvSelectionLoss::handleMessage(cMessage *msg)
         {
             this->bubble("Loss");
             this->getParentModule()->bubble("Loss");
-            this->corruptionCount++;
             delete msg;
             this->framesRequested++;
             this->selectFrame();

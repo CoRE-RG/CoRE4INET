@@ -24,6 +24,8 @@ namespace CoRE4INET {
 
 Define_Module(CorruptIEEE8021QbvQueueingBase);
 
+simsignal_t CorruptIEEE8021QbvQueueingBase::corruptionSignal = registerSignal("corruption");
+
 void CorruptIEEE8021QbvQueueingBase::handleParameterChange(const char* parname)
 {
     IEEE8021QbvQueueing::handleParameterChange(parname);
@@ -98,6 +100,8 @@ bool CorruptIEEE8021QbvQueueingBase::performCorruption()
         {
             performCorruption = true;
             this->lastCorruptionTime = simTime();
+            this->corruptionCount++;
+            this->emit(this->corruptionSignal, true);
         }
     }
     return performCorruption;

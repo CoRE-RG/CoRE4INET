@@ -32,7 +32,6 @@ void CorruptIEEE8021QbvQueueingLoss::handleMessage(cMessage *msg)
         {
             this->bubble("Loss");
             this->getParentModule()->bubble("Loss");
-            this->corruptionCount++;
             delete msg;
         }
         else

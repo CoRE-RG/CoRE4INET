@@ -46,6 +46,7 @@ class CorruptIEEE8021QbvSelectionBase : public virtual IEEE8021QbvSelection
     double corruptionMinInterval;
     simtime_t lastCorruptionTime;
     size_t corruptionPayload;
+    static simsignal_t corruptionSignal;
 
   public:
     CorruptIEEE8021QbvSelectionBase();

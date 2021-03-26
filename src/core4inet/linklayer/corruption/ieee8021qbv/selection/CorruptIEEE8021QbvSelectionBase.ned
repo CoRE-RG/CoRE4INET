@@ -25,7 +25,10 @@ simple CorruptIEEE8021QbvSelectionBase extends IEEE8021QbvSelection
 	parameters:
 	    @class(CorruptIEEE8021QbvSelectionBase);
 	    
-	    volatile double corruptionProbability = default(0);
+	    @signal[corruption](type=bool);
+	    @statistic[corruptionsPerformed](title="Corruptions Performed"; source=corruption; record=vector; interpolationmode=none;);
+	    
+	    volatile double corruptionProbability = default(1);
 	    volatile double corruptionMinInterval @unit(s) = default(0s);
 	    string corruptionDestAddress = default("");
 	    string corruptionSrcAddress = default("");
