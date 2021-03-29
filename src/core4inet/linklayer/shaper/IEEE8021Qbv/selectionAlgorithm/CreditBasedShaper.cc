@@ -18,6 +18,9 @@
 //INET
 #include "inet/linklayer/ethernet/Ethernet.h"
 
+//INET
+#include "inet/common/ModuleAccess.h"
+
 namespace CoRE4INET {
 
 Define_Module(CreditBasedShaper);
@@ -49,7 +52,7 @@ void CreditBasedShaper::initialize()
     this->handleParameterChange(nullptr);
     this->getParentModule()->getSubmodule("queue", this->getIndex())->subscribe("size", this);
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
-    this->srpTable = dynamic_cast<SRPTable*>(this->getParentModule()->getParentModule()->getParentModule()->getSubmodule("srpTable"));
+    this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
     this->outChannel = this->getParentModule()->getParentModule()->getSubmodule("mac")->gate("phys$o")->findTransmissionChannel();
     this->portBandwidth = static_cast<unsigned int>(ceil(outChannel->getNominalDatarate()));
     WATCH(this->credit);
