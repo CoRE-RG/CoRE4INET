@@ -1,0 +1,66 @@
+simulation                               corruptions          TruePositives        FalseNegatives       Recall              
+With_BE_Queueing_Injection-#0            9408                 8201                 1207                 0.8717049319727891    ->  8201 / 1207 / 0.87
+With_BE_Queueing_Loss-#0                 5935                 0                    5935                 0.0                   ->  0 / 5935 / 0.0
+With_BE_Queueing_Manipulation-#0         6662                 5778                 884                  0.8673071149804863    ->  5778 / 884 / 0.87
+With_BE_Queueing_Reordering-#0           5965                 0                    5965                 0.0                   ->  0 / 5965 / 0.0
+With_BE_Queueing_Timing-#0               5984                 0                    5984                 0.0                   ->  0 / 5984 / 0.0
+With_BE_Selection_Injection-#0           9411                 9155                 256                  0.9727977898204229    ->  9155 / 256 / 0.97
+With_BE_Selection_Loss-#0                5002                 0                    5002                 0.0                   ->  0 / 5002 / 0.0
+With_BE_Selection_Manipulation-#0        5749                 4983                 766                  0.8667594364237259    ->  4983 / 766 / 0.87
+With_BE_Selection_Reordering-#0          5091                 0                    5091                 0.0                   ->  0 / 5091 / 0.0
+With_BE_Selection_Timing-#0              5062                 0                    5062                 0.0                   ->  0 / 5062 / 0.0
+With_CBS_Queueing_Injection-#0           8363                 0                    8363                 0.0                   ->  0 / 8363 / 0.0
+With_CBS_Queueing_Injection_GUI-#0       452                  0                    452                  0.0                   ->  0 / 452 / 0.0
+With_CBS_Queueing_Loss-#0                7932                 0                    7932                 0.0                   ->  0 / 7932 / 0.0
+With_CBS_Queueing_Manipulation-#0        7887                 0                    7887                 0.0                   ->  0 / 7887 / 0.0
+With_CBS_Queueing_Reordering-#0          7944                 0                    7944                 0.0                   ->  0 / 7944 / 0.0
+With_CBS_Queueing_Timing-#0              7949                 0                    7949                 0.0                   ->  0 / 7949 / 0.0
+With_CBS_Selection_Injection-#0          9409                 8132                 1277                 0.8642788819215644    ->  8132 / 1277 / 0.86
+With_CBS_Selection_Injection_GUI-#0      380                  359                  21                   0.9447368421052632    ->  359 / 21 / 0.94
+With_CBS_Selection_Loss-#0               7445                 0                    7445                 0.0                   ->  0 / 7445 / 0.0
+With_CBS_Selection_Manipulation-#0       8375                 5218                 3157                 0.623044776119403     ->  5218 / 3157 / 0.62
+With_CBS_Selection_Reordering-#0         7514                 2                    7512                 0.00026616981634282674  ->  2 / 7512 / 0.0
+With_CBS_Selection_Timing-#0             7069                 1                    7068                 0.00014146272457207527  ->  1 / 7068 / 0.0
+With_TDMA_Queueing_Injection-#0          9409                 8305                 1104                 0.8826655330003188    ->  8305 / 1104 / 0.88
+With_TDMA_Queueing_Loss-#0               6646                 0                    6646                 0.0                   ->  0 / 6646 / 0.0
+With_TDMA_Queueing_Manipulation-#0       6610                 5356                 1254                 0.8102874432677761    ->  5356 / 1254 / 0.81
+With_TDMA_Queueing_Reordering-#0         6658                 5946                 712                  0.893060979273055     ->  5946 / 712 / 0.89
+With_TDMA_Queueing_Timing-#0             6004                 0                    6004                 0.0                   ->  0 / 6004 / 0.0
+With_TDMA_Selection_Injection-#0         9415                 8940                 475                  0.9495485926712692    ->  8940 / 475 / 0.95
+With_TDMA_Selection_Loss-#0              5656                 0                    5656                 0.0                   ->  0 / 5656 / 0.0
+With_TDMA_Selection_Manipulation-#0      5679                 4606                 1073                 0.811058284909315     ->  4606 / 1073 / 0.81
+With_TDMA_Selection_Reordering-#0        5617                 5003                 614                  0.8906889798824995    ->  5003 / 614 / 0.89
+With_TDMA_Selection_Timing-#0            5635                 3924                 1711                 0.6963620230700976    ->  3924 / 1711 / 0.7
+
+With_BE_Queueing_Injection-#0 -> {'corruptions': 9408, 'drops': 8201, 'singleDrops': 8201, 'multiDrops': 0, 'detections': 8201, 'singleDetections': 8201, 'multiDetections': 0, 'TruePositives': 8201, 'FalseNegatives': 1207, 'Recall': 0.8717049319727891}
+With_BE_Queueing_Loss-#0 -> {'corruptions': 5935, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 5935, 'Recall': 0.0}
+With_BE_Queueing_Manipulation-#0 -> {'corruptions': 6662, 'drops': 5778, 'singleDrops': 5778, 'multiDrops': 0, 'detections': 5778, 'singleDetections': 5778, 'multiDetections': 0, 'TruePositives': 5778, 'FalseNegatives': 884, 'Recall': 0.8673071149804863}
+With_BE_Queueing_Reordering-#0 -> {'corruptions': 5965, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 5965, 'Recall': 0.0}
+With_BE_Queueing_Timing-#0 -> {'corruptions': 5984, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 5984, 'Recall': 0.0}
+With_BE_Selection_Injection-#0 -> {'corruptions': 9411, 'drops': 10523, 'singleDrops': 7787, 'multiDrops': 2736, 'detections': 9155, 'singleDetections': 7787, 'multiDetections': 1368, 'multiDropsPerMultiDetection': 2.0, 'TruePositives': 9155, 'FalseNegatives': 256, 'Recall': 0.9727977898204229}
+With_BE_Selection_Loss-#0 -> {'corruptions': 5002, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 5002, 'Recall': 0.0}
+With_BE_Selection_Manipulation-#0 -> {'corruptions': 5749, 'drops': 4983, 'singleDrops': 4983, 'multiDrops': 0, 'detections': 4983, 'singleDetections': 4983, 'multiDetections': 0, 'TruePositives': 4983, 'FalseNegatives': 766, 'Recall': 0.8667594364237259}
+With_BE_Selection_Reordering-#0 -> {'corruptions': 5091, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 5091, 'Recall': 0.0}
+With_BE_Selection_Timing-#0 -> {'corruptions': 5062, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 5062, 'Recall': 0.0}
+With_CBS_Queueing_Injection-#0 -> {'corruptions': 8363, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 8363, 'Recall': 0.0}
+With_CBS_Queueing_Injection_GUI-#0 -> {'corruptions': 452, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 452, 'Recall': 0.0}
+With_CBS_Queueing_Loss-#0 -> {'corruptions': 7932, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 7932, 'Recall': 0.0}
+With_CBS_Queueing_Manipulation-#0 -> {'corruptions': 7887, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 7887, 'Recall': 0.0}
+With_CBS_Queueing_Reordering-#0 -> {'corruptions': 7944, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 7944, 'Recall': 0.0}
+With_CBS_Queueing_Timing-#0 -> {'corruptions': 7949, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 7949, 'Recall': 0.0}
+With_CBS_Selection_Injection-#0 -> {'corruptions': 9409, 'drops': 22775, 'singleDrops': 2109, 'multiDrops': 20666, 'detections': 8132, 'singleDetections': 2109, 'multiDetections': 6023, 'multiDropsPerMultiDetection': 3.431180474846422, 'TruePositives': 8132, 'FalseNegatives': 1277, 'Recall': 0.8642788819215644}
+With_CBS_Selection_Injection_GUI-#0 -> {'corruptions': 380, 'drops': 1024, 'singleDrops': 84, 'multiDrops': 940, 'detections': 359, 'singleDetections': 84, 'multiDetections': 275, 'multiDropsPerMultiDetection': 3.418181818181818, 'TruePositives': 359, 'FalseNegatives': 21, 'Recall': 0.9447368421052632}
+With_CBS_Selection_Loss-#0 -> {'corruptions': 7445, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 7445, 'Recall': 0.0}
+With_CBS_Selection_Manipulation-#0 -> {'corruptions': 8375, 'drops': 12085, 'singleDrops': 1555, 'multiDrops': 10530, 'detections': 5218, 'singleDetections': 1555, 'multiDetections': 3663, 'multiDropsPerMultiDetection': 2.8746928746928746, 'TruePositives': 5218, 'FalseNegatives': 3157, 'Recall': 0.623044776119403}
+With_CBS_Selection_Reordering-#0 -> {'corruptions': 7514, 'drops': 2, 'singleDrops': 2, 'multiDrops': 0, 'detections': 2, 'singleDetections': 2, 'multiDetections': 0, 'TruePositives': 2, 'FalseNegatives': 7512, 'Recall': 0.00026616981634282674}
+With_CBS_Selection_Timing-#0 -> {'corruptions': 7069, 'drops': 1, 'singleDrops': 1, 'multiDrops': 0, 'detections': 1, 'singleDetections': 1, 'multiDetections': 0, 'TruePositives': 1, 'FalseNegatives': 7068, 'Recall': 0.00014146272457207527}
+With_TDMA_Queueing_Injection-#0 -> {'corruptions': 9409, 'drops': 10554, 'singleDrops': 6056, 'multiDrops': 4498, 'detections': 8305, 'singleDetections': 6056, 'multiDetections': 2249, 'multiDropsPerMultiDetection': 2.0, 'TruePositives': 8305, 'FalseNegatives': 1104, 'Recall': 0.8826655330003188}
+With_TDMA_Queueing_Loss-#0 -> {'corruptions': 6646, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 6646, 'Recall': 0.0}
+With_TDMA_Queueing_Manipulation-#0 -> {'corruptions': 6610, 'drops': 5356, 'singleDrops': 5356, 'multiDrops': 0, 'detections': 5356, 'singleDetections': 5356, 'multiDetections': 0, 'TruePositives': 5356, 'FalseNegatives': 1254, 'Recall': 0.8102874432677761}
+With_TDMA_Queueing_Reordering-#0 -> {'corruptions': 6658, 'drops': 5946, 'singleDrops': 5946, 'multiDrops': 0, 'detections': 5946, 'singleDetections': 5946, 'multiDetections': 0, 'TruePositives': 5946, 'FalseNegatives': 712, 'Recall': 0.893060979273055}
+With_TDMA_Queueing_Timing-#0 -> {'corruptions': 6004, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 6004, 'Recall': 0.0}
+With_TDMA_Selection_Injection-#0 -> {'corruptions': 9415, 'drops': 10101, 'singleDrops': 7779, 'multiDrops': 2322, 'detections': 8940, 'singleDetections': 7779, 'multiDetections': 1161, 'multiDropsPerMultiDetection': 2.0, 'TruePositives': 8940, 'FalseNegatives': 475, 'Recall': 0.9495485926712692}
+With_TDMA_Selection_Loss-#0 -> {'corruptions': 5656, 'drops': 0, 'singleDrops': 0, 'multiDrops': 0, 'detections': 0, 'singleDetections': 0, 'multiDetections': 0, 'TruePositives': 0, 'FalseNegatives': 5656, 'Recall': 0.0}
+With_TDMA_Selection_Manipulation-#0 -> {'corruptions': 5679, 'drops': 4606, 'singleDrops': 4606, 'multiDrops': 0, 'detections': 4606, 'singleDetections': 4606, 'multiDetections': 0, 'TruePositives': 4606, 'FalseNegatives': 1073, 'Recall': 0.811058284909315}
+With_TDMA_Selection_Reordering-#0 -> {'corruptions': 5617, 'drops': 5003, 'singleDrops': 5003, 'multiDrops': 0, 'detections': 5003, 'singleDetections': 5003, 'multiDetections': 0, 'TruePositives': 5003, 'FalseNegatives': 614, 'Recall': 0.8906889798824995}
+With_TDMA_Selection_Timing-#0 -> {'corruptions': 5635, 'drops': 3924, 'singleDrops': 3924, 'multiDrops': 0, 'detections': 3924, 'singleDetections': 3924, 'multiDetections': 0, 'TruePositives': 3924, 'FalseNegatives': 1711, 'Recall': 0.6963620230700976}

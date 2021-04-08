@@ -117,12 +117,18 @@ bar.finish()
 
 print("Write results:")
 i = 0
-bar = progressbar.ProgressBar(max_value=len(results), redirect_stdout=True).start()
+bar = progressbar.ProgressBar(max_value=len(results)*2, redirect_stdout=True).start()
 time.sleep(1)
-file = open("analysis_results_" + time.strftime("%Y%m%d-%H%M%S") + ".txt", "w")
+file = open("./examples/tsn/filter_network/analysis_results_" + time.strftime("%Y%m%d-%H%M%S") + ".txt", "w")
+file.write("{:<40} {:<20} {:<20} {:<20} {:<20}\n".format('simulation', 'corruptions', 'TruePositives', 'FalseNegatives', 'Recall'))
 for resultkey in results:
-    #print(resultkey + " -> " + str(results[resultkey]))  
-    file.write(resultkey + " -> " + str(results[resultkey]))
+    file.write("{:<40} {:<20} {:<20} {:<20} {:<20}".format(resultkey, results[resultkey]["corruptions"], results[resultkey]["TruePositives"], results[resultkey]["FalseNegatives"], results[resultkey]["Recall"]))
+    file.write("  ->  " + str(results[resultkey]["TruePositives"]) + " / " + str(results[resultkey]["FalseNegatives"]) + " / " + str(round(results[resultkey]["Recall"], 2)) + "\n")
+    i += 1
+    bar.update(i)
+file.write("\n")
+for resultkey in results:
+    file.write(resultkey + " -> " + str(results[resultkey]) + "\n")
     i += 1
     bar.update(i)
 file.close()
