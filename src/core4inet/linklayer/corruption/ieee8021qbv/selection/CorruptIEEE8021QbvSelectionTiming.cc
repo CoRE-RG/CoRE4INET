@@ -76,11 +76,11 @@ void CorruptIEEE8021QbvSelectionTiming::handleMessage(cMessage *msg)
     {
         if (this->match(msg) && this->performCorruption())
         {
-            this->bubble("Delay");
-            this->getParentModule()->bubble("Delay");
-            msg->setName((std::string(msg->getName()) + " (Delayed)").c_str());
             this->selfMessageIds.push_back(msg->getId());
             msg->setTimestamp(this->getDelayTime());
+            this->bubble(std::string("Delay " + msg->getTimestamp().str() + "s").c_str());
+            this->getParentModule()->bubble(std::string("Delay " + msg->getTimestamp().str() + "s").c_str());
+            msg->setName((std::string(msg->getName()) + " (Delayed " + msg->getTimestamp().str() + "s)").c_str());
             scheduleAt(simTime() + msg->getTimestamp(), msg);
             if (this->allowOtherTrafficDuringDelay || (this->maxOtherTrafficDelayTime > 0 && msg->getTimestamp() > this->maxOtherTrafficDelayTime))
             {
