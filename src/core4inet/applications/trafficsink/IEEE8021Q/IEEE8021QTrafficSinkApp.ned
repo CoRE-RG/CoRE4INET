@@ -22,7 +22,7 @@ import core4inet.applications.trafficsink.base.BGTrafficSinkApp;
 //
 // @see ~BGTrafficSinkApp
 //
-// @author Sandra Reider
+// @author Sandra Reider, Mohammad Fazel Soltani
 //
 simple IEEE8021QTrafficSinkApp extends BGTrafficSinkApp
 {
@@ -31,9 +31,11 @@ simple IEEE8021QTrafficSinkApp extends BGTrafficSinkApp
         @display("i=block/sink,darkgreen");
         // number of priorities
         int numPCP = default(8);
-        
+
         //Signal emitted when a frame with corresponding q-priority is received, contains received EtherFrame
         @signal[rxQPcp*Pk](type=inet::EtherFrame);
+        @signal[rxQPcp*PkAge](type=simtime_t);
+        @signal[rxQPcp*PkAgeInner](type=simtime_t);
         //Statistic of the amount of packets that were received by the application for each q-priority
         @statisticTemplate[rxQPcpPk](title="Received Packets"; record=count; unit=packets);
         //Statistic of the amount of bytes that were received by the application for each q-priority

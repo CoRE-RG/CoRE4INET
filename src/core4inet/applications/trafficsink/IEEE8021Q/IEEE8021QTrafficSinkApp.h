@@ -31,7 +31,7 @@ namespace CoRE4INET {
  * @sa BGTrafficSinkApp
  * @ingroup Applications
  *
- * @author Sandra Reider
+ * @author Sandra Reider, Mohammad Fazel Soltani
  */
 class IEEE8021QTrafficSinkApp : public virtual BGTrafficSinkApp
 {
@@ -46,6 +46,16 @@ class IEEE8021QTrafficSinkApp : public virtual BGTrafficSinkApp
          * @brief Signals that are emitted when a frame is received.
          */
         std::vector<simsignal_t> rxQPcpPkSignals;
+
+        /**
+         * @brief Signals that are emitted when a frame is received.
+         */
+        std::vector<simsignal_t> rxQPcpPkAgeSignals;
+
+        /**
+         * @brief Signals that are emitted when a frame is received.
+         */
+        std::vector<simsignal_t> rxQPcpPkAgeInnerSignals;
 
         /**
          * @brief Initialization of the module. Sends activator message
