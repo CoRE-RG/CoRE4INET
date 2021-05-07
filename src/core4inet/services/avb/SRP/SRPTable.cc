@@ -424,7 +424,8 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
     llist[module]->streamId = streamId;
     llist[module]->module = module;
     llist[module]->vlan_id = vid;
-    llist[module]->insertionTime = simTime();llist[module]->isStatic = isStatic;
+    llist[module]->insertionTime = simTime();
+    llist[module]->isStatic = isStatic;
     if (!isStatic)
     {
         if (updated)
@@ -695,6 +696,35 @@ bool SRPTable::importFromXML(cXMLElement* xml) {
     }
 
     return updated;
+}
+
+std::vector<SRPTable::ListenerEntry> SRPTable::getListenerEntries()
+{
+    vector<SRPTable::ListenerEntry> entries;
+    for (auto i = listenerTables.begin(); i != listenerTables.end(); ++i)
+    {
+        for (auto j = (*i).second.begin(); j != (*i).second.end(); ++j)
+        {
+            for (auto k = (*j).second.begin(); k != (*j).second.end(); ++k)
+            {
+                entries.push_back(*((*k).second));
+            }
+        }
+    }
+    return entries;
+}
+
+std::vector<SRPTable::TalkerEntry> SRPTable::getTalkerEntries()
+{
+    vector<SRPTable::TalkerEntry> entries;
+    for (auto i = talkerTables.begin(); i != talkerTables.end(); ++i)
+    {
+        for (auto j = (*i).second.begin(); j != (*i).second.end(); ++j)
+        {
+            entries.push_back(*((*j).second));
+        }
+    }
+    return entries;
 }
 
 void SRPTable::initialize()
