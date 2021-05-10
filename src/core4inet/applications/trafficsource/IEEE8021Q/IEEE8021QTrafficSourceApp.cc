@@ -94,7 +94,7 @@ void IEEE8021QTrafficSourceApp::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "sendInterval"))
     {
-        this->sendInterval = parameterDoubleCheckRange(par("sendInterval"), 0, SIMTIME_MAX.dbl(), true);
+        this->sendInterval = parameterDoubleCheckRange(par("sendInterval"), 0, SIMTIME_MAX.dbl());
     }
     if (!parname || !strcmp(parname, "destAddress"))
     {
