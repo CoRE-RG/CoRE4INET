@@ -75,19 +75,23 @@ void IEEE8021QSyncTrafficSourceApp::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
+        uint32_t currentCycle = getPeriod()->getCycles();
         if (getEnvir()->isGUI())
         {
             getDisplayString().removeTag("i2");
         }
-        this->moduloCycle++;
-        if (this->synchronized && this->moduloCycle == this->modulo)
-        {
-            IEEE8021QTrafficSourceApp::sendMessage();
-            this->moduloCycle = 0;
+        if(this->lastCycle < currentCycle) {
+            this->moduloCycle++;
+            if (this->synchronized && this->moduloCycle == this->modulo)
+            {
+                IEEE8021QTrafficSourceApp::sendMessage();
+                this->moduloCycle = 0;
+            }
         }
         SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent*>(msg);
         event->setNext_cycle(true);
         getPeriod()->registerEvent(event);
+        this->lastCycle = currentCycle;
     }
     else
     {
