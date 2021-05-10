@@ -134,8 +134,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
 void AVBTrafficSourceApp::scheduleInterval()
 {
     //class measurement interval A=125us B=250us
-    simtime_t tick =
-            check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
+    simtime_t tick = getOscillator()->getPreciseTick();
     simtime_t interval = (getIntervalForClass(srClass) / getIntervalFrames()) + par("intervalInaccurracy").doubleValue();
     if (interval < 0)
         interval = 0;
