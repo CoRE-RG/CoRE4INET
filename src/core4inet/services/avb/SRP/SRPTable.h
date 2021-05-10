@@ -16,8 +16,8 @@
 #define CORE4INET_SRPTABLE_H_
 
 //Std
-#include <map>
 #include <unordered_map>
+#include <vector>
 
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
@@ -263,6 +263,18 @@ class SRPTable : public virtual cSimpleModule
          * The root element needs to be <srpTable>
          */
         bool importFromXML(cXMLElement* xml);
+
+        /**
+         * @brief collects all ListenerEntries
+         * @return get's a copy of all ListenerEntries
+         */
+        std::vector<ListenerEntry> getListenerEntries();
+
+        /**
+         * @brief collects all TalkerEntries
+         * @return get's a copy of all TalkerEntries
+         */
+        std::vector<TalkerEntry> getTalkerEntries();
 
     protected:
         /**
