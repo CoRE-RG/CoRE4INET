@@ -46,17 +46,15 @@ class IEEE8021QSyncTrafficSourceApp : public virtual IEEE8021QTrafficSourceApp, 
      */
     unsigned int modulo;
     /**
-     * @brief frame is only sent every modulo cycle
-     */
-    unsigned int moduloCycle;
-    /**
      * @brief true when node is synchronized (Frames will be only sent when node runs synchronous)
      */
     bool synchronized;
     /**
-     * @brief last scheduled cycle, prevents multiple messages being send in the same cycle, e.g. through clock sync
+     * @brief next scheduled cycle to send a message
+     * prevents multiple messages being send in the same cycle, e.g. through clock sync
+     * uses modulo parameter to skip cycles if needed
      */
-    uint32_t lastCycle;
+    uint32_t nextCycle;
 
   public:
     IEEE8021QSyncTrafficSourceApp();
