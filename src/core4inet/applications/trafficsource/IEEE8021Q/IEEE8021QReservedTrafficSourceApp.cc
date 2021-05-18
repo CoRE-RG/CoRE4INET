@@ -35,13 +35,18 @@ void IEEE8021QReservedTrafficSourceApp::initialize()
     IEEE8021QTrafficSourceApp::initialize();
     Timed::initialize();
 
-    if (getPayloadBytes() <= (MIN_ETHERNET_FRAME_BYTES - ETHER_MAC_FRAME_BYTES - ETHER_8021Q_TAG_BYTES))
+    this->frameSize = getPayloadBytes() + ETHER_MAC_FRAME_BYTES + ETHER_8021Q_TAG_BYTES;
+    if (this->frameSize < MIN_ETHERNET_FRAME_BYTES)
     {
         this->frameSize = MIN_ETHERNET_FRAME_BYTES;
     }
-    else
+
+    simtime_t interval = par("sendInterval").doubleValue();
+    if(!interval.isZero())
     {
-        this->frameSize = getPayloadBytes() + ETHER_MAC_FRAME_BYTES + ETHER_8021Q_TAG_BYTES;
+        //calculate framesize used per class measurement interval.
+        double interval_cmi_ratio = interval / getIntervalForClass(this->srClass);
+        this->frameSize = this->frameSize / interval_cmi_ratio;
     }
 
     this->srpTable = dynamic_cast<SRPTable *>(getModuleByPath(par("srpTable")));
@@ -98,8 +103,9 @@ simtime_t IEEE8021QReservedTrafficSourceApp::getSendInterval()
     simtime_t interval = par("sendInterval").doubleValue();
     if(interval.isZero())
     {
-        interval = (getIntervalForClass(this->srClass) / this->intervalFrames) + par("intervalInaccurracy").doubleValue();
+        interval = getIntervalForClass(this->srClass);
     }
+    interval = interval / this->intervalFrames + par("intervalInaccurracy").doubleValue();
     if (interval < 0)
     {
             interval = 0;

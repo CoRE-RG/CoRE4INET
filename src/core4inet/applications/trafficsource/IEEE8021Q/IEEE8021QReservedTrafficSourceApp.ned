@@ -30,7 +30,9 @@ simple IEEE8021QReservedTrafficSourceApp extends IEEE8021QTrafficSourceApp like 
     parameters:
         @class(IEEE8021QReservedTrafficSourceApp);
         // interval between sending frames
-        sendInterval = default(0s); // if sendInterval is 0, intervalFrames and srClass interval will define it
+        sendInterval = default(0s); // if sendInterval is 0, srClass interval will define it
+    	// VLAN ID (0=untagged, 4094=Highest)
+        vid = default(2); // same default as with previous avb for compatibility
         // ID of the AVB Stream
         int streamID = default(0);     
         // Stream Reservation Class of the AVB Stream
