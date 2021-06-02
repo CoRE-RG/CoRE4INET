@@ -40,14 +40,8 @@ void IEEE8021QbvGateControlList::setGateControlList(string gcl) {
 
 void IEEE8021QbvGateControlList::initialize(int stage)
 {
-    if (stage == 1)
+    if (stage == 0)
     {
-        Scheduled::initialize();
-        this->handleParameterChange(nullptr);
-        if (this->gateControlList.size() > 0)
-        {
-            this->scheduleCurrentGateControlElementTime(false);
-        }
         WATCH(this->configNo);
         WATCH(this->timerEventName);
     }
@@ -81,13 +75,13 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
             {
                 if (strcmp(controlRowGates[i].c_str(), "o") && strcmp(controlRowGates[i].c_str(), "C"))
                 {
-                    throw cRuntimeError("controlList contains unexpected character \'%s\'. Allowed are \'o' (OPEN) or \'C\' (CLOSED).", controlRowGates[i].c_str());
+                    throw cRuntimeError("controlList contains unexpected character \'%s\'. Allowed are \'o\' (OPEN) or \'C\' (CLOSED).", controlRowGates[i].c_str());
                 }
             }
             double controlRowTime = stod(controlRowTupel[1]);
             gateControlList.push_back(make_pair(controlRowGates, controlRowTime));
         }
-        this->gateControlElement = this->gateControlList.begin();
+        this->switchToFirstGateControlElement();
         if (this->gateControlList.size() > 0)
         {
             this->configNo++;
@@ -133,16 +127,29 @@ void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateS
 void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool nextCycle)
 {
     SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent(this->timerEventName.c_str(), ACTION_TIME_EVENT);
-    uint32_t actionTime = static_cast<uint32_t>(ceil((*(this->gateControlElement)).second / getOscillator()->getPreciseTick()));
-    if (actionTime >= getPeriod()->getCycleTicks())
+    uint32_t actionTime = static_cast<uint32_t>(ceil((*(this->gateControlElement)).second / this->getOscillator()->getPreciseTick()));
+    if (actionTime >= this->getPeriod()->getCycleTicks())
     {
         throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
-                actionTime, getPeriod()->getCycleTicks());
+                actionTime, this->getPeriod()->getCycleTicks());
     }
     actionTimeEvent->setAction_time(actionTime);
     actionTimeEvent->setNext_cycle(nextCycle);
     actionTimeEvent->setDestinationGate(this->gate("schedulerIn"));
-    getPeriod()->registerEvent(actionTimeEvent);
+    this->getPeriod()->registerEvent(actionTimeEvent);
+}
+
+void IEEE8021QbvGateControlList::switchToFirstGateControlElement()
+{
+    simtime_t currentTimeInPeriod = this->getPeriod()->getTicks() * this->getOscillator()->getPreciseTick();
+    for (auto candidateGateControlElement = this->gateControlList.begin(); candidateGateControlElement != this->gateControlList.end(); ++candidateGateControlElement)
+    {
+        if ((*(candidateGateControlElement)).second >= currentTimeInPeriod.dbl())
+        {
+            this->gateControlElement = candidateGateControlElement;
+            break;
+        }
+    }
 }
 
 void IEEE8021QbvGateControlList::switchToNextGateControlElement()

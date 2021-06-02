@@ -116,6 +116,10 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
      */
     void scheduleCurrentGateControlElementTime(bool nextCycle);
     /**
+     * @brief Switch to the first control element of the control list.
+     */
+    void switchToFirstGateControlElement();
+    /**
      * @brief Switch to next control element of the control list.
      */
     void switchToNextGateControlElement();
