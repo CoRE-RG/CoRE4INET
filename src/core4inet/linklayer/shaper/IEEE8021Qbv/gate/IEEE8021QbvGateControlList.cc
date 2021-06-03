@@ -141,6 +141,7 @@ void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool next
 
 void IEEE8021QbvGateControlList::switchToFirstGateControlElement()
 {
+    this->gateControlElement = this->gateControlList.begin();
     simtime_t currentTimeInPeriod = this->getPeriod()->getTicks() * this->getOscillator()->getPreciseTick();
     for (auto candidateGateControlElement = this->gateControlList.begin(); candidateGateControlElement != this->gateControlList.end(); ++candidateGateControlElement)
     {
