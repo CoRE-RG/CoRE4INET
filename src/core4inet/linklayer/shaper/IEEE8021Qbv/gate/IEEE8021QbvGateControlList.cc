@@ -81,9 +81,9 @@ void IEEE8021QbvGateControlList::handleParameterChange(const char* parname)
             double controlRowTime = stod(controlRowTupel[1]);
             gateControlList.push_back(make_pair(controlRowGates, controlRowTime));
         }
-        this->switchToFirstGateControlElement();
         if (this->gateControlList.size() > 0)
         {
+            this->switchToFirstGateControlElement();
             this->configNo++;
             this->timerEventName = "Gate Control List Config " + to_string(this->configNo) + " Scheduler Event";
             this->scheduleCurrentGateControlElementTime(false);
@@ -97,7 +97,7 @@ void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
     {
         if (!strcmp(this->timerEventName.c_str(), msg->getName()))
         {
-            this->propagteGateControlElement((*(this->gateControlElement)).first);
+            this->propagateGateControlElement(this->gateControlElement->first);
             if (this->gateControlList.size() > 1)
             {
                 this->switchToNextGateControlElement();
@@ -108,7 +108,7 @@ void IEEE8021QbvGateControlList::handleMessage(cMessage *msg)
     delete msg;
 }
 
-void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateStates)
+void IEEE8021QbvGateControlList::propagateGateControlElement(vector<string> gateStates)
 {
     for (long i=static_cast<long>(this->numGates)-1; i>=0; i--)
     {
@@ -127,7 +127,7 @@ void IEEE8021QbvGateControlList::propagteGateControlElement(vector<string> gateS
 void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool nextCycle)
 {
     SchedulerActionTimeEvent* actionTimeEvent = new SchedulerActionTimeEvent(this->timerEventName.c_str(), ACTION_TIME_EVENT);
-    uint32_t actionTime = static_cast<uint32_t>(ceil((*(this->gateControlElement)).second / this->getOscillator()->getPreciseTick()));
+    uint32_t actionTime = static_cast<uint32_t>(ceil(this->gateControlElement->second / this->getOscillator()->getPreciseTick()));
     if (actionTime >= this->getPeriod()->getCycleTicks())
     {
         throw cRuntimeError("The send window (%d ticks) starts outside of the period (%d ticks)",
@@ -141,14 +141,31 @@ void IEEE8021QbvGateControlList::scheduleCurrentGateControlElementTime(bool next
 
 void IEEE8021QbvGateControlList::switchToFirstGateControlElement()
 {
-    this->gateControlElement = this->gateControlList.begin();
-    simtime_t currentTimeInPeriod = this->getPeriod()->getTicks() * this->getOscillator()->getPreciseTick();
-    for (auto candidateGateControlElement = this->gateControlList.begin(); candidateGateControlElement != this->gateControlList.end(); ++candidateGateControlElement)
+    if (this->gateControlList.size() > 0)
     {
-        if ((*(candidateGateControlElement)).second >= currentTimeInPeriod.dbl())
+        this->gateControlElement = this->gateControlList.begin();
+        simtime_t currentTimeInPeriod = this->getPeriod()->getTicks() * this->getOscillator()->getPreciseTick();
+        for (auto candidateGateControlElement = this->gateControlList.begin(); candidateGateControlElement != this->gateControlList.end(); ++candidateGateControlElement)
         {
-            this->gateControlElement = candidateGateControlElement;
-            break;
+            if (candidateGateControlElement->second >= currentTimeInPeriod.dbl())
+            {
+                this->gateControlElement = candidateGateControlElement;
+                break;
+            }
+        }
+        if (this->gateControlElement->second != currentTimeInPeriod.dbl())
+        {
+            vector<pair<vector<string>, double>>::iterator preGateControlElement;
+            if (this->gateControlElement == this->gateControlList.begin())
+            {
+                preGateControlElement = this->gateControlList.end();
+            }
+            else
+            {
+                preGateControlElement = this->gateControlElement;
+            }
+            --preGateControlElement;
+            this->propagateGateControlElement(preGateControlElement->first);
         }
     }
 }
