@@ -108,7 +108,7 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
     /**
      * @brief Propagate the gate states of the current control element.
      */
-    virtual void propagteGateControlElement(vector<string> gateStates);
+    virtual void propagateGateControlElement(vector<string> gateStates);
 
   private:
     /**

@@ -32,7 +32,7 @@ void IEEE8021QciGateControlList::handleParameterChange(const char* parname)
     }
 }
 
-void IEEE8021QciGateControlList::propagteGateControlElement(vector<string> gateStates)
+void IEEE8021QciGateControlList::propagateGateControlElement(vector<string> gateStates)
 {
     for (long i=static_cast<long>(this->numGates)-1; i>=0; i--)
     {
