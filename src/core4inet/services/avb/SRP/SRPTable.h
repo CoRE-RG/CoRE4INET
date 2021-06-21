@@ -89,6 +89,13 @@ class SRPTable : public virtual cSimpleModule
                 ListenerEntry();
                 ListenerEntry(uint64_t new_streamId, cModule *new_module, uint16_t new_vlan_id,
                         simtime_t new_insertionTime, bool new_isStatic = false);
+                ListenerEntry(const ListenerEntry& other);
+
+                /**
+                 * Creating a deep copy by using the copy constructor.
+                 * @return A duplicate of the original.
+                 */
+                virtual cObject* dup() const override;
                 virtual ~ListenerEntry();
 
         };
