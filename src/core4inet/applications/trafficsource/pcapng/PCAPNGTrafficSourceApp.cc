@@ -89,7 +89,12 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "destAddress"))
     {
-        if (par("destAddress").stdstringValue() == "auto")
+        if (par("destAddress").stdstringValue() == "unspecified")
+        {
+            this->destAddress = inet::MACAddress::UNSPECIFIED_ADDRESS;
+            par("destAddress").setStringValue(this->destAddress.str());
+        }
+        else if (par("destAddress").stdstringValue() == "auto")
         {
             // assign automatic address
             this->destAddress = inet::MACAddress::generateAutoAddress();
@@ -103,7 +108,12 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "filterDestAddress"))
     {
-        if (par("filterDestAddress").stdstringValue() == "auto")
+        if (par("filterDestAddress").stdstringValue() == "unspecified")
+        {
+            this->filterDestAddress = inet::MACAddress::UNSPECIFIED_ADDRESS;
+            par("filterDestAddress").setStringValue(this->filterDestAddress.str());
+        }
+        else if (par("filterDestAddress").stdstringValue() == "auto")
         {
             // assign automatic address
             this->filterDestAddress = inet::MACAddress::generateAutoAddress();
@@ -117,7 +127,12 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "filterSrcAddress"))
     {
-        if (par("filterSrcAddress").stdstringValue() == "auto")
+        if (par("filterSrcAddress").stdstringValue() == "unspecified")
+        {
+            this->filterSrcAddress = inet::MACAddress::UNSPECIFIED_ADDRESS;
+            par("filterSrcAddress").setStringValue(this->filterSrcAddress.str());
+        }
+        else if (par("filterSrcAddress").stdstringValue() == "auto")
         {
             // assign automatic address
             this->filterSrcAddress = inet::MACAddress::generateAutoAddress();
@@ -131,11 +146,7 @@ void PCAPNGTrafficSourceApp::handleParameterChange(const char* parname)
     }
     if (!parname || !strcmp(parname, "pcp"))
     {
-        if (par("pcp").intValue() == -1) {
-            this->pcp = -1;
-        } else {
-            this->pcp = static_cast<int8_t>(parameterLongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
-        }
+        this->pcp = static_cast<int8_t>(parameterLongCheckRange(par("pcp"), 0, MAX_Q_PRIORITY));
     }
     if (!parname || !strcmp(parname, "vid"))
     {
@@ -151,8 +162,8 @@ void PCAPNGTrafficSourceApp::handleMessage(cMessage *msg)
         {
             getDisplayString().removeTag("i2");
         }
-
-        if (msg->getKind() == 0) { // StartMessage
+        if (msg->getKind() == 0) // StartMessage
+        {
             msg->setKind(1);
         }
         sendMessage();
@@ -169,45 +180,54 @@ void PCAPNGTrafficSourceApp::sendMessage()
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
         inet::EthernetIIFrame *nextEtherFrame = pcapngReader.getNextEthernetIIFrame();
-        if (nextEtherFrame == nullptr) {
-            return;
-        }
-        // todo: filter the etherframes based on their filter src and dst addresses
-
-        if (pcp == -1) {
-            nextEtherFrame->setDest(this->destAddress);
-            sendDirect(nextEtherFrame, (*buf)->gate("in"));
-        } else {
-            cPacket *payloadPacket = nextEtherFrame->decapsulate();
-            EthernetIIFrameWithQTag *qFrame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic");
-            qFrame->setDest(this->destAddress);
-            qFrame->setPcp(this->pcp);
-            qFrame->setVID(this->vid);
-            qFrame->setSchedulingPriority(static_cast<short>(SCHEDULING_PRIORITY_OFFSET_8021Q - pcp));
-            qFrame->encapsulate(payloadPacket);
-            //Padding
-            if (qFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+        if (nextEtherFrame) {
+            if (this->destAddress != inet::MACAddress::UNSPECIFIED_ADDRESS)
             {
-                qFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+                nextEtherFrame->setDest(this->destAddress);
             }
-            sendDirect(qFrame, (*buf)->gate("in"));
-            delete(nextEtherFrame);
+            // todo: filter the etherframes based on their filter src and dst addresses
+            if (this->pcp == 0 && this->vid == 0)
+            {
+                sendDirect(nextEtherFrame, (*buf)->gate("in"));
+            }
+            else
+            {
+                cPacket *payloadPacket = nextEtherFrame->decapsulate();
+                EthernetIIFrameWithQTag *qFrame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic");
+                qFrame->setDest(nextEtherFrame->getDest());
+                qFrame->setPcp(this->pcp);
+                qFrame->setVID(this->vid);
+                qFrame->setSchedulingPriority(static_cast<short>(SCHEDULING_PRIORITY_OFFSET_8021Q - pcp));
+                qFrame->encapsulate(payloadPacket);
+                //Padding
+                if (qFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES)
+                {
+                    qFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+                }
+                sendDirect(qFrame, (*buf)->gate("in"));
+                delete(nextEtherFrame);
+            }
         }
     }
 }
 
 void PCAPNGTrafficSourceApp::scheduleNextMessage(cMessage *msg)
 {
-    if (pcapngReader.endOfFileReached() && loop) {
+    if (pcapngReader.endOfFileReached() && loop)
+    {
         pcapngReader.reset();
         startTime = simTime();
     }
-    if (!pcapngReader.endOfFileReached()) {
+    if (!pcapngReader.endOfFileReached())
+    {
         simtime_t nextTime = pcapngReader.getNextSimTime() + startTime;
         simtime_t currentTime = simTime();
-        if (nextTime < currentTime) {
+        if (nextTime < currentTime)
+        {
             scheduleAt(currentTime, msg);
-        } else {
+        }
+        else
+        {
             scheduleAt(nextTime, msg);
         }
     }
