@@ -180,12 +180,12 @@ void PCAPNGTrafficSourceApp::sendMessage()
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
         inet::EthernetIIFrame *nextEtherFrame = pcapngReader.getNextEthernetIIFrame();
+        // TODO: filter the etherframes based on their filter src and dst addresses
         if (nextEtherFrame) {
             if (this->destAddress != inet::MACAddress::UNSPECIFIED_ADDRESS)
             {
                 nextEtherFrame->setDest(this->destAddress);
             }
-            // todo: filter the etherframes based on their filter src and dst addresses
             if (this->pcp == 0 && this->vid == 0)
             {
                 sendDirect(nextEtherFrame, (*buf)->gate("in"));
@@ -193,7 +193,7 @@ void PCAPNGTrafficSourceApp::sendMessage()
             else
             {
                 cPacket *payloadPacket = nextEtherFrame->decapsulate();
-                EthernetIIFrameWithQTag *qFrame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic");
+                EthernetIIFrameWithQTag *qFrame = new EthernetIIFrameWithQTag(nextEtherFrame->getName());
                 qFrame->setDest(nextEtherFrame->getDest());
                 qFrame->setPcp(this->pcp);
                 qFrame->setVID(this->vid);
