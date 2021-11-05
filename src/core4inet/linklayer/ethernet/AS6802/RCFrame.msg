@@ -15,6 +15,10 @@
 
 import core4inet.linklayer.ethernet.AS6802.CTFrame;
 
+cplusplus {{
+	#include "core4inet/linklayer/ethernet/AS6802/CTFrame.h"
+}}
+
 namespace CoRE4INET;
 
 //
