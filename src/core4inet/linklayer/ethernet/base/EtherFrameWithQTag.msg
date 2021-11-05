@@ -11,20 +11,17 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
+
+import inet.linklayer.ethernet.EtherFrame;
 
 cplusplus {{
-//INET Auto-generated Messages
-#include "inet/linklayer/ethernet/EtherFrame_m.h"
-
 #if defined(__clang__)
 #  pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #elif defined(__GNUC__) && __GNUC__ >= 5
 #  pragma GCC diagnostic ignored "-Wsuggest-override"
 #endif
 }}
-
-class inet::EthernetIIFrame;
 
 namespace CoRE4INET;
 
@@ -39,7 +36,7 @@ namespace CoRE4INET;
 //
 // @author Philipp Meyer
 //
-packet EthernetIIFrameWithQTag extends EthernetIIFrame
+packet EthernetIIFrameWithQTag extends inet::EthernetIIFrame
 {
     // Overhead without payload
     byteLength = 22;

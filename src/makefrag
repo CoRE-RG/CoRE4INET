@@ -13,7 +13,7 @@ include dependencies_makefrag
 
 
 CFLAGS += -std=c++14
-MSGCOPTS += --msg4
+MSGCOPTS += -I.
 
 
 #Workaround for https://github.com/msys2/MINGW-packages/issues/6855

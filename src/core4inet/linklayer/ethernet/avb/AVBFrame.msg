@@ -13,18 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-cplusplus {{
-//Auto-generated Messages
-#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
+import core4inet.linklayer.ethernet.base.EtherFrameWithQTag;
 
+cplusplus {{
 #if defined(__clang__)
 #  pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #elif defined(__GNUC__) && __GNUC__ >= 5
 #  pragma GCC diagnostic ignored "-Wsuggest-override"
 #endif
 }}
-
-class CoRE4INET::EthernetIIFrameWithQTag;
 
 namespace CoRE4INET;
 
