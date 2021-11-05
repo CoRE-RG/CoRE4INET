@@ -61,9 +61,9 @@ module RTIPHost
         int numUdpApps = default(0);  // no of UDP apps. Specify the app types in INI file with udpApp[0..1].typename="UDPVideoStreamCli" syntax
         int numSctpApps = default(0); // no of SCTP apps. Specify the app types in INI file with sctpApp[0..1].typename="SCTPServer" syntax
         int numPingApps = default(0);  // no of PING apps. Specify the app types in INI file with pingApp[0..1].typename="PingApp" syntax
-        bool hasTcp = default(numTcpApps>0 || numNetPerfMeterApps>0);
-        bool hasUdp = default(numUdpApps>0 || numNetPerfMeterApps>0);
-        bool hasSctp = default(numSctpApps>0 || numNetPerfMeterApps>0);
+        bool hasTcp = default(this.numTcpApps>0 || this.numNetPerfMeterApps>0);
+        bool hasUdp = default(this.numUdpApps>0 || this.numNetPerfMeterApps>0);
+        bool hasSctp = default(this.numSctpApps>0 || this.numNetPerfMeterApps>0);
         string tcpType = default(firstAvailable("TCP", "TCP_lwIP", "TCP_NSC", "TCP_None"));  // tcp implementation (e.g. ~TCP, ~TCP_lwIP, ~TCP_NSC) or ~TCPSpoof
         string udpType = default(firstAvailable("UDP","UDP_None"));
         string sctpType = default(firstAvailable("SCTP","SCTP_None"));
@@ -71,8 +71,10 @@ module RTIPHost
         double hardware_delay @unit(s) = default(0us);
         *.interfaceTableModule = default(absPath(".interfaceTable"));
         *.routingTableModule = default(absPath(".routingTable"));
+        
     gates:
         inout ethg @labels(EtherFrame-conn);
+        
     submodules:
         netPerfMeterApp[numNetPerfMeterApps]: <default("NetPerfMeter")> like INetPerfMeterApp {  // T.D. 17.11.09
             parameters:
@@ -127,9 +129,9 @@ module RTIPHost
         routingTable: IPv4RoutingTable {
             parameters:
                 @display("p=63,104;is=s");
-                forwarding = forwarding;
-                multicastForwarding = multicastForwarding;
-                routingFile = routingFile;
+                forwarding = parent.forwarding;
+                multicastForwarding = parent.multicastForwarding;
+                routingFile = parent.routingFile;
         }
 
         // Sync module for synchronisation of the scheduler
@@ -151,13 +153,13 @@ module RTIPHost
                 AVBBout[1];
         }
 
-        avbABuffer: AVBQueueBuffer {
+        avbABuffer[1]: AVBQueueBuffer {
             parameters:
                 srClass = "A";
                 @display("p=201,232");
         }
 
-        avbBBuffer: AVBQueueBuffer {
+        avbBBuffer[1]: AVBQueueBuffer {
             parameters:
                 srClass = "B";
                 @display("p=135,232");
@@ -182,9 +184,9 @@ module RTIPHost
         }
 
         phy[1]: TTEAVB8021QEtherNic {
-
             @display("p=498,315");
         }
+        
     connections allowunconnected:
 
         // application Layer <--> transport Layer
@@ -229,10 +231,10 @@ module RTIPHost
         // network Layer <--> link Layer
         networkLayer.ifOut++ --> phy[0].upperLayerIn;
         phy[0].upperLayerOut --> networkLayer.ifIn++;
-        avbABuffer.out --> phy[0].AVBAin;
-        avbBBuffer.out --> phy[0].AVBBin;
-        avbCTC.AVBAout[0] --> avbABuffer.in;
-        avbCTC.AVBBout[0] --> avbBBuffer.in;
+        avbABuffer[0].out --> phy[0].AVBAin;
+        avbBBuffer[0].out --> phy[0].AVBBin;
+        avbCTC.AVBAout[0] --> avbABuffer[0].in;
+        avbCTC.AVBBout[0] --> avbBBuffer[0].in;
         srpProtocol.out --> phy[0].srpIn;
         phy[0].srpOut --> srpProtocol.in;
 

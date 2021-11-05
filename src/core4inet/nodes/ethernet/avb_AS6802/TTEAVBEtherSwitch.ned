@@ -65,8 +65,8 @@ module TTEAVBEtherSwitch
             parameters:
                 @display("p=141,50");
             gates:
-                ifIn[sizeof(ethg)];
-                ifOut[sizeof(ethg)];
+                ifIn[sizeof(parent.ethg)];
+                ifOut[sizeof(parent.ethg)];
         }
         
 		//The mac table associated with the be switch
@@ -96,10 +96,10 @@ module TTEAVBEtherSwitch
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=346,111");
-                hardware_delay = hardware_delay;
+                hardware_delay = parent.hardware_delay;
             gates:
-                AVBAout[sizeof(ethg)];
-                AVBBout[sizeof(ethg)];
+                AVBAout[sizeof(parent.ethg)];
+                AVBBout[sizeof(parent.ethg)];
         }
 
 		// AVB class A buffer
@@ -146,8 +146,8 @@ module TTEAVBEtherSwitch
             avbBBuffer[i].out --> phy[i].AVBBin;
 
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- ProcessingDelay{ delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
-            phy[i].upperLayerOut --> ProcessingDelay{ delay = (hardware_delay/2); } --> beswitch.ifIn[i];
+            phy[i].upperLayerIn <-- ProcessingDelay{ delay = (parent.hardware_delay/2); } <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> ProcessingDelay{ delay = (parent.hardware_delay/2); } --> beswitch.ifIn[i];
         }
 
         srpProtocol.out --> beswitch.srpIn;

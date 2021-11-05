@@ -40,7 +40,7 @@ module TTEAVB8021QEtherNic like INic
         string interfaceTableModule;
         double hardware_delay @unit(s) = default(0us);
         bool promiscuous = default(true); // TODO: sinnvoller default
-        *.interfaceTableModule = default(absPath(interfaceTableModule));
+        *.interfaceTableModule = default(absPath(this.interfaceTableModule));
     gates:
 
         // Connection to the physical ethernet gate
@@ -88,7 +88,7 @@ module TTEAVB8021QEtherNic like INic
         inControl: CT_AVB_BE_InControl {
             parameters:
                 @display("p=166,144");
-                promiscuous = promiscuous;
+                promiscuous = parent.promiscuous;
         }
 
         mac: <default("EtherMACFullDuplex")> like IEtherMAC {

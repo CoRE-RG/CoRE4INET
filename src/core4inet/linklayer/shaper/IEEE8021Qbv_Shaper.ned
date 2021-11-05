@@ -55,9 +55,9 @@ module IEEE8021Qbv_Shaper like IShaper
         queueing: <default("IEEE8021QbvQueueing")> like IIEEE8021QbvQueueing {
           	parameters:
              	@display("p=75,150");
-             	untaggedVID = untaggedVID;
-                taggedVIDs = taggedVIDs;   
-             	numPCP = numPCP;
+             	untaggedVID = parent.untaggedVID;
+                taggedVIDs = parent.taggedVIDs;   
+             	numPCP = parent.numPCP;
         }
         
         queue[numPCP]: <default("IEEE8021QbvQueue")> like IBuffer {
@@ -75,13 +75,13 @@ module IEEE8021Qbv_Shaper like IShaper
         transmissionSelection: <default("IEEE8021QbvSelection")> like IIEEE8021QbvSelection {
             parameters:
             	@display("p=1275,150");
-            	numPCP = numPCP;
+            	numPCP = parent.numPCP;
         }
         
         gateControlList: <default("IEEE8021QbvGateControlList")> like IIEEE8021QbvGateControlList {
             parameters:
             	@display("p=975,75");
-            	numGates = numPCP;
+            	numGates = parent.numPCP;
         }
         
     connections:

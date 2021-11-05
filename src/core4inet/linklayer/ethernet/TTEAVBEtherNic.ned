@@ -41,7 +41,7 @@ module TTEAVBEtherNic like INic
         double hardware_delay @unit(s) = default(0us);
         bool promiscuous = default(true); // TODO: sinnvoller default
         
-        *.interfaceTableModule = default(absPath(interfaceTableModule));
+        *.interfaceTableModule = default(absPath(this.interfaceTableModule));
         
     gates:
         // Connection to the physical ethernet gate
@@ -77,7 +77,7 @@ module TTEAVBEtherNic like INic
         inControl: CT_AVB_BE_InControl {
             parameters:
                 @display("p=166,144");
-                promiscuous = promiscuous;
+                promiscuous = parent.promiscuous;
         }
 
         mac: EtherMACFullDuplex {

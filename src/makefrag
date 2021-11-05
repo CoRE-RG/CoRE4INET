@@ -77,6 +77,9 @@ else ifeq ($(CC),gcc)
     CFLAGS += -Wno-error=shadow
 endif
 
+#Autoimport omnetpp namespace
+CFLAGS += -DAUTOIMPORT_OMNETPP_NAMESPACE
+
 
 # add -isystem for referenced projects (-I will be ignored for those also provided with -Isystem
 RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))

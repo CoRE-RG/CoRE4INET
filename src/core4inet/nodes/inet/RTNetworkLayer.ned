@@ -41,11 +41,11 @@ module RTNetworkLayer
         string arpType = default("ARP");
         string interfaceTableModule;
         string routingTableModule;
-        *.interfaceTableModule = default(absPath(interfaceTableModule));
-        *.routingTableModule = default(absPath(routingTableModule));
+        *.interfaceTableModule = default(absPath(this.interfaceTableModule));
+        *.routingTableModule = default(absPath(this.routingTableModule));
         *.arpModule = default(absPath(".arp"));
         *.icmpModule = default(absPath(".icmp"));
-        arp.respondToProxyARP = proxyARP;
+        arp.respondToProxyARP = this.proxyARP;
         @display("i=block/fork");
     gates:
         input ifIn[] @labels(IPv4Datagram);
@@ -69,8 +69,8 @@ module RTNetworkLayer
                 useProxyARP = true; // as routes with unspecified next-hop addr are quite common
                 @display("p=85,95;q=queue");
             gates:
-                queueIn[sizeof(ifIn)];
-                queueOut[sizeof(ifOut)];
+                queueIn[sizeof(parent.ifIn)];
+                queueOut[sizeof(parent.ifOut)];
         }
         arp: <arpType> like IARP {
             parameters:

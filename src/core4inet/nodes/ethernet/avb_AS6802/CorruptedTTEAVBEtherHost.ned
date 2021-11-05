@@ -63,17 +63,17 @@ module CorruptedTTEAVBEtherHost
         // Physical port of the host
         phy[numPorts]: BackdoorTTEAVBPHYPort {
             @display("p=380,255,c,50");
-            promiscuous = be_promiscuous;
+            promiscuous = parent.be_promiscuous;
         }
 
 		// AVB critical traffic control
         avbCTC: AVBIncoming {
             parameters:
                 @display("p=380,118");
-                hardware_delay = hardware_delay;
+                hardware_delay = parent.hardware_delay;
             gates:
-                AVBAout[numPorts];
-                AVBBout[numPorts];
+                AVBAout[parent.numPorts];
+                AVBBout[parent.numPorts];
         }
 
 		// AVB class A buffer

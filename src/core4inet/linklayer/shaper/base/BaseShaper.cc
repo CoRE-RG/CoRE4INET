@@ -28,6 +28,7 @@ void BaseShaper::initialize(int stage)
 {
     if (stage == 0)
     {
+        this->handleParameterChange(nullptr);
         inet::EtherMACFullDuplex* mac =
                 dynamic_cast<inet::EtherMACFullDuplex*>(gate("out")->getPathEndGate()->getOwner());
         if (mac->gate("phys$o"))

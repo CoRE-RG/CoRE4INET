@@ -68,8 +68,8 @@ module IEEE8021QbvEtherSwitch
             parameters:
                 @display("p=100,350");
             gates:
-                ifIn[sizeof(ethg)];
-                ifOut[sizeof(ethg)];
+                ifIn[sizeof(parent.ethg)];
+                ifOut[sizeof(parent.ethg)];
         }
 
         //The mac table associated with the beswitch
@@ -94,7 +94,7 @@ module IEEE8021QbvEtherSwitch
         avbCTC: IEEE8021QbvIncoming {
             parameters:
                 @display("p=500,250");
-                hardware_delay = hardware_delay;
+                hardware_delay = parent.hardware_delay;
         }
 
         // Sync module for synchronisation of the scheduler
@@ -127,8 +127,8 @@ module IEEE8021QbvEtherSwitch
     connections:
         for i=0..sizeof(ethg)-1 {
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- ProcessingDelay {  delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
-            phy[i].upperLayerOut --> ProcessingDelay {  delay = (hardware_delay/2); } --> beswitch.ifIn[i];
+            phy[i].upperLayerIn <-- ProcessingDelay {  delay = (parent.hardware_delay/2); } <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> ProcessingDelay {  delay = (parent.hardware_delay/2); } --> beswitch.ifIn[i];
         }
 
         srpProtocol.out --> beswitch.srpIn;
