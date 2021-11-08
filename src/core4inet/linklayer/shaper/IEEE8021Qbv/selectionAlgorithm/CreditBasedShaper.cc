@@ -49,7 +49,7 @@ void CreditBasedShaper::initialize()
 {
     IEEE8021QbvSelectionAlgorithm::initialize();
     Timed::initialize();
-    this->handleParameterChange(nullptr);
+    //this->handleParameterChange(nullptr);
     this->getParentModule()->getSubmodule("queue", this->getIndex())->subscribe("size", this);
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
     this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
@@ -136,26 +136,28 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
     this->newTime = this->getCurrentTime();
     simtime_t duration = this->newTime - this->oldTime;
     unsigned long reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
-    // TODO Add Warning when reservedBandwidth is zero.
-    if (duration > 0)
+    if (reservedBandwidth > 0)
     {
-        this->credit += static_cast<int>(ceil(static_cast<double>(reservedBandwidth) * duration.dbl()));
-        if (maxCreditZero && this->credit > 0)
+        if (duration > 0)
         {
-            this->credit = 0;
+            this->credit += static_cast<int>(ceil(static_cast<double>(reservedBandwidth) * duration.dbl()));
+            if (maxCreditZero && this->credit > 0)
+            {
+                this->credit = 0;
+            }
+            emit(this->creditSignal, this->credit);
+            this->oldTime = this->getCurrentTime();
+            this->refreshState();
         }
-        emit(this->creditSignal, this->credit);
-        this->oldTime = this->getCurrentTime();
-        this->refreshState();
-    }
-    if (this->credit < 0 && !(this->isScheduled))
-    {
-        double tillZeroDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwidth);
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(static_cast<uint64_t>(ceil(tillZeroDuration / getOscillator()->getPreciseTick())));
-        event->setDestinationGate(gate("schedulerIn"));
-        getTimer()->registerEvent(event);
-        this->isScheduled = true;
+        if (this->credit < 0 && !(this->isScheduled))
+        {
+            double tillZeroDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwidth);
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+            event->setTimer(static_cast<uint64_t>(ceil(tillZeroDuration / getOscillator()->getPreciseTick())));
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
+            this->isScheduled = true;
+        }
     }
 }
 
