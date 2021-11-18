@@ -40,9 +40,11 @@ module TSNInetHost extends StandardHost
     parameters:
         eth[0].typename = "TSNEtherNic";
         networkLayerType = default("RTNetworkLayer");
+        string pathEth = default(absPath(".eth[0]"));
         int numApps = default(0); // CoRE4INET apps
         // Forwardingdelay of the device hardware
         double hardware_delay @unit(s) = default(0us);
+        *.portModule = default("eth");
     submodules:
 		// CoRE4INET app support (currently only 802.1Q Apps!)
         app[numApps]: <> like IApplication {
@@ -85,12 +87,18 @@ module TSNInetHost extends StandardHost
 
 		// Stream Reservation Protocol implementation
         srpProtocol: SRProtocol {
-            @display("p=441,287");
+            parameters:
+                @display("p=441,287");
+                srpEncap = pathEth;
         }
-        
+
     connections allowunconnected:
-		//this only throws an error in the IDE but works in the current omnet version!
-        srpProtocol.out --> eth[0].srpIn;
-        srpProtocol.in <-- eth[0].srpOut;
+		// The srp gates will be connected during initialization by the SRProtocol 
+		// as the direct connection below gives an error in the IDE.
+//        srpProtocol.out --> eth[0].srpIn;
+//        srpProtocol.in <-- eth[0].srpOut;
+
+        bgOut.out --> eth[0].bgIn;
+        eth[0].bgOut --> bgIn.in;
 
 }
