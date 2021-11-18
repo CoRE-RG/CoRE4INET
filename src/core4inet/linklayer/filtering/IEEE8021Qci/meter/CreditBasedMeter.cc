@@ -248,7 +248,7 @@ simtime_t CreditBasedMeter::getCurrentTime()
 
 void CreditBasedMeter::scheduleCreditReachZero()
 {
-    if (this->credit < 0)
+    if (this->credit < 0 && this->reservedBandwidth > 0)
     {
         simtime_t duration = simtime_t{static_cast<double>(abs(this->credit)) / this->reservedBandwidth};
         this->scheduleEvent(duration);

@@ -75,9 +75,19 @@ SRPTable::ListenerEntry::ListenerEntry()
 
 SRPTable::ListenerEntry::ListenerEntry(uint64_t new_streamId, cModule *new_module, uint16_t new_vlan_id,
         simtime_t new_insertionTime, bool new_isStatic) :
-streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
+        streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
         new_insertionTime), isStatic(new_isStatic)
 {
+}
+
+SRPTable::ListenerEntry::ListenerEntry(const ListenerEntry& other) :
+        streamId(other.streamId), module(other.module), vlan_id(other.vlan_id), insertionTime(
+        other.insertionTime), isStatic(other.isStatic)
+{
+}
+
+cObject* SRPTable::ListenerEntry::dup() const {
+    return new ListenerEntry(*this);
 }
 
 SRPTable::ListenerEntry::~ListenerEntry()
@@ -842,3 +852,4 @@ size_t SRPTable::getNumListenerEntries()
 }
 
 }
+
