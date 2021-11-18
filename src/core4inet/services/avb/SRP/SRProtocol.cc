@@ -98,7 +98,7 @@ void SRProtocol::handleMessage(cMessage *msg)
         else
         {
             int arrivedOn = etherctrl->getSwitchPort();
-            cModule *port = getParentModule()->getSubmodule("phy", arrivedOn);
+            cModule *port = getParentModule()->getSubmodule(par("portModule").stringValue(), arrivedOn);
 
             if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
             {
@@ -194,7 +194,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                     new_etherctrl->setDest(SRP_ADDRESS);
                     cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(),
                             listenerReady->getVlan_identifier());
-                    if (talker && talker->isName("phy"))
+                    if (talker && talker->isName(par("portModule").stringValue()))
                     {
                         new_etherctrl->setSwitchPort(talker->getIndex());
                         srp->setControlInfo(new_etherctrl);
@@ -210,7 +210,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                 new_etherctrl->setDest(SRP_ADDRESS);
                 cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(),
                         listenerFailed->getVlan_identifier());
-                if (talker && talker->isName("phy"))
+                if (talker && talker->isName(par("portModule").stringValue()))
                 {
                     new_etherctrl->setSwitchPort(talker->getIndex());
                     //Necessary because controlInfo is not duplicated
@@ -250,7 +250,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
             etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
             talkerAdvertise->setControlInfo(etherctrl);
             // If talker was received from phy we have to exclude the incoming port
-            if (strcmp(tentry->module->getName(), "phy") == 0)
+            if (strcmp(tentry->module->getName(), par("portModule").stringValue()) == 0)
             {
                 etherctrl->setNotSwitchPort(tentry->module->getIndex());
             }
@@ -276,7 +276,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
             }
             cModule* talker = signal_srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
             //Send listener ready only when talker is not a local application
-            if (talker && talker->isName("phy"))
+            if (talker && talker->isName(par("portModule").stringValue()))
             {
                 ListenerReady *listenerReady = new ListenerReady("Listener Ready", inet::IEEE802CTRL_DATA);
                 listenerReady->setStreamID(lentry->streamId);
