@@ -42,6 +42,26 @@ void SRProtocol::initialize()
     {
         throw cRuntimeError("srpTable module required for stream reservation");
     }
+
+    //this part is optional
+    if(!this->gate("in")->isConnected() && !this->gate("out")->isConnected())
+    {
+        if(strcmp(par("srpEncap"),"") !=0)
+        {
+            if(cModule* interface = dynamic_cast<cModule*> (getModuleByPath(par("srpEncap"))))
+            {
+                this->gate("out")->connectTo(interface->gate("srpIn"));
+                interface->gate("srpOut")->connectTo(this->gate("in"));
+            }else
+            {
+                throw cRuntimeError("could not get interface module");
+            }
+        }else
+        {
+            throw cRuntimeError("could not find path to interface module in param <srcEncap>");
+        }
+    }
+
     srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_UPDATED, this);
