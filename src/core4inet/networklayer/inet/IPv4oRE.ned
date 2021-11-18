@@ -72,6 +72,7 @@ simple IPv4oRE extends IPv4 {
         // - destMAC         (mandatory)
         // - streamId        (mandatory)
         // - trafficClass    (optional, defaults to "A")
+        // - pcp 			 (optional, defaults to pcp of trafficClass set in pcpSRClassA/B)
         // - frameSize       (mandatory)
         // - intervallFrames (mandatory)
         // - vlanId          (mandatory)
@@ -88,6 +89,11 @@ simple IPv4oRE extends IPv4 {
         double avbUpdateInterval @unit("s") = default(6s);
         //Interval in which an avb subscription is reregistered after a timeout
         double avbRetryInterval @unit("s") = default(1s);
+        // PCP value (0-7) that represents AVB SRClass A
+        int pcpSRClassA = default(6);
+        // PCP value (0-7) that represents AVB SRClass B
+        int pcpSRClassB = default(5);
+        
     gates:
         input AVBin;
         input RCIn;
