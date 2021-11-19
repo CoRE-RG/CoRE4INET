@@ -31,7 +31,7 @@ import inet.linklayer.contract.IWiredNic;
 // @see SRPEtherEncap, TTEAVBPHYPort, Sync, Scheduler
 //
 // @author Kai-Uwe von Deylen, Till Steinbach, Timo Haeckel
-module TSNEtherNic like IWiredNic
+module TSNEtherNic like ICoRE4INETEtherNic, IWiredNic
 {
     parameters:
         @display("i=block/ifcard");
