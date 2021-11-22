@@ -76,7 +76,8 @@ module TSNIPHost like INetworkNode
         string etherNicType = default("TSNEtherNic");
         // Forwardingdelay of the device hardware
         double hardware_delay @unit(s) = default(0us);
-        *.portModule = default("eth");
+        *.portModule = default("eth"); // rename port module from default "phy" to "eth"
+        *.buffers = default("bgOut[0]"); // rename buffers as we have an array now
 
         // CoRE4INET extensions for TSN overriding INET::StandardHost
 
