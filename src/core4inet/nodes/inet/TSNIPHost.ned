@@ -67,7 +67,7 @@ module TSNIPHost like INetworkNode
 {
     parameters:
         // Annotations 
-        @display("i=device/pc2");
+        @display("i=device/device");
         @networkNode;
         @labels(node,ethernet-node,wireless-node);
 
@@ -134,7 +134,7 @@ module TSNIPHost like INetworkNode
         // CoRE4INET extensions for TSN
         // CoRE4INET app support (currently only 802.1Q, BG, and AVB Apps!)
         app[numApps]: <> like IApplication {
-            @display("p=635,287,row,60");
+            @display("p=635,258,row,60");
         }
         // Sync module for synchronisation of the scheduler
         sync: <default("DummySync")> like ISync {
@@ -148,31 +148,31 @@ module TSNIPHost like INetworkNode
         }
         // CORE4INET BGApps
         bgOut[sizeof(ethg)]: BGQueueBuffer {
-            @display("p=216,287,c,50");
+            @display("p=635,396,row,60");
         }
         // Best-efford buffer for incoming traffic
         bgIn[sizeof(ethg)]: BGQueueBuffer {
-            @display("p=149,287,c,50");
+            @display("p=635,329,row,60");
         }
         // AVB critical traffic control
         avbCTC: IEEE8021QbvIncoming {
             parameters:
-                @display("p=558,287");
+                @display("p=558,258");
                 hardware_delay = hardware_delay;
         }
         // Stream Reservation Protocol table
         srpTable: SRPTable {
-            @display("p=480,287");
+            @display("p=480,258");
         }
 		// Stream Reservation Protocol implementation
         srpProtocol: SRProtocol {
             parameters:
-                @display("p=407,287");
+                @display("p=407,258");
         }
         // Adapter to support multiple Ethernet ports in one host with SRP
         srpAdapter: SRPEtherEncapAdapter {
             parameters:
-                @display("p=407,342");
+                @display("p=407,329");
             gates:
                 encapIn[sizeof(ethg)];
                 encapOut[sizeof(ethg)];
@@ -180,21 +180,21 @@ module TSNIPHost like INetworkNode
         // use the CoRE4INET specific EtherNic for srp and bg gates
         eth[sizeof(ethg)]: <etherNicType> like ICoRE4INETEtherNic {
             parameters:
-                @display("p=368,406,row,60;q=txQueue");
+                @display("p=407,476,row,60;q=txQueue");
         }
 
         // from INET::StandardHost
         tunApp[numTunInterfaces]: <> like ITunApp {
             parameters:
-                @display("p=280,40");
+                @display("p=128,54");
         }
         tcpApp[numTcpApps]: <> like ITCPApp {
             parameters:
-                @display("p=147,54,row,60");
+                @display("p=226,54,row,60");
         }
         tcp: <tcpType> like ITCP if hasTcp {
             parameters:
-                @display("p=147,141");
+                @display("p=226,141");
         }
         udpApp[numUdpApps]: <> like IUDPApp {
             parameters:
@@ -240,7 +240,7 @@ module TSNIPHost like INetworkNode
         // network layer
         networkLayer: <networkLayerType> like INetworkLayer {
             parameters:
-                @display("p=329,287;q=queue");
+                @display("p=329,258;q=queue");
         }
         // routing table
         routingTable: <routingTableType> like IRoutingTable if routingTableType != "" {
@@ -256,11 +256,11 @@ module TSNIPHost like INetworkNode
             @display("p=53,350,r,10");
         }
         lo0: LoopbackInterface {
-            @display("p=78,406");
+            @display("p=181,476");
         }
         wlan[numRadios]: <default("Ieee80211Nic")> like IWirelessNic {
             parameters:
-                @display("p=216,406,row,60;q=queue");
+                @display("p=290,476,row,60;q=queue");
         }
         //        eth[sizeof(ethg)]: <default("EthernetInterface")> like IWiredNic {
         //            parameters:
@@ -268,15 +268,15 @@ module TSNIPHost like INetworkNode
         //        }
         ppp[sizeof(pppg)]: <default("PPPInterface")> like IWiredNic {
             parameters:
-                @display("p=558,406,row,60;q=txQueue");
+                @display("p=344,476,row,60;q=txQueue");
         }
         ext[numExtInterfaces]: <default("ExtInterface")> like IExternalNic {
             parameters:
-                @display("p=149,406,row,10;q=txQueue;i=block/ifcard");
+                @display("p=235,476,row,10;q=txQueue;i=block/ifcard");
         }
         tun[numTunInterfaces]: <default("TunInterface")> like ITunNic {
             parameters:
-                @display("p=213,406,row,10;q=txQueue;i=block/ifcard");
+                @display("p=128,476,row,10;q=txQueue;i=block/ifcard");
         }
 
     connections allowunconnected:
