@@ -245,7 +245,7 @@ module RTIPHost
 
 
 		// link layer <--> outside
-        phy[0].ethg <--> ethg;
+        phy[0].phys <--> ethg;
 
         bgOut.out --> phy[0].bgIn;
 
