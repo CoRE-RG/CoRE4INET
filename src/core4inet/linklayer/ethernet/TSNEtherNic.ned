@@ -15,13 +15,13 @@
 
 package core4inet.linklayer.ethernet;
 
+import core4inet.linklayer.ethernet.base.ICoRE4INETEtherNic;
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.inControl.AVB_8021Q_InControl;
 import core4inet.linklayer.shaper.IEEE8021Qbv_Shaper;
 import core4inet.linklayer.filtering.IFiltering;
 import inet.linklayer.contract.IEtherMAC;
 
-import inet.linklayer.contract.IWiredNic;
 
 
 //

@@ -44,7 +44,7 @@ import inet.transportlayer.contract.IUDP;
 import inet.applications.contract.ITunApp;
 
 //CoRE4INET
-import core4inet.linklayer.ethernet.ICoRE4INETEtherNic;
+import core4inet.linklayer.ethernet.base.ICoRE4INETEtherNic;
 import core4inet.scheduler.ITTEScheduler;
 import core4inet.synchronisation.base.ISync;
 import core4inet.incoming.avb.AVBIncoming;

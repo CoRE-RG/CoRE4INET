@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package core4inet.linklayer.ethernet;
+package core4inet.linklayer.ethernet.base;
 
 import inet.linklayer.contract.IWiredNic;
 
