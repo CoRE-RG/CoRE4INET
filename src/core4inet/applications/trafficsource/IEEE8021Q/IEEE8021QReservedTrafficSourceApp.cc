@@ -142,11 +142,13 @@ void IEEE8021QReservedTrafficSourceApp::receiveSignal(cComponent* src,
                 bubble("Listener registered, start streaming!");
                 getDisplayString().setTagArg("i2", 0, "status/active");
             }
-            this->isStreaming = true;
-            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer(0);
-            event->setDestinationGate(gate("schedulerIn"));
-            getTimer()->registerEvent(event);
+            if(!isStreaming){
+                this->isStreaming = true;
+                SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+                event->setTimer(0);
+                event->setDestinationGate(gate("schedulerIn"));
+                getTimer()->registerEvent(event);
+            }
         }
     }
     else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT || id == NF_AVB_LISTENER_UNREGISTERED)
