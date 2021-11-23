@@ -19,11 +19,12 @@ import inet.node.ethernet.Eth100M;
 import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
 
 //
-// Small sample network with three hosts and one switch that shows how to 
-// configure the IEEE 802.1Q Model. Configuration in omnetpp.ini
+// Small sample network with four hosts and one switch that shows how to 
+// configure the tsn ip model. Configuration in omnetpp.ini
 // - 80ns Tick length
+// @author Timo Haeckel
 //
-network inet_tsn_small_network
+network tsn_ip_small_network
 {
     parameters:
         @display("bgb=,,white");
@@ -56,13 +57,11 @@ network inet_tsn_small_network
                 ethg[3];
         }
     connections:
-        //
-        // The example uses a simple star topology
-        //
+        // The example uses a star topology...
         node1.ethg++ <--> Eth100M {  length = 20m; } <--> switch1.ethg[0];
         node2.ethg++ <--> Eth100M {  length = 10m; } <--> switch1.ethg[1];
         node3.ethg++ <--> Eth100M {  length = 5m; } <--> switch1.ethg[2];
 
-
+		// ...that is extended with a point to point connection to show how a host can have multiple ports.
         node2.ethg++ <--> Eth100M {  length = 5m; } <--> node4.ethg++;
 }

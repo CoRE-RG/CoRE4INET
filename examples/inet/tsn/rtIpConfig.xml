@@ -54,8 +54,7 @@
 	     <!--
 	     	Each subscribe element has one single "streamId" attribute which defines the stream Id to subscribe to.
 	     -->
-	     
-	     
+	      
 	<node id="node1">
 		<filter srcAddress="10.0.0.1" destAddress="10.0.0.3" destPort="1000" protocol="TCP"
 		        destType="DestinationType_8021Q" destModules="bgOut[0]" VID="0" PCP="3" destMAC="0A-00-00-00-00-03" />
@@ -63,20 +62,16 @@
 		        destType="DestinationType_AVB" destModule="avbCTC" destMAC="010203040506" alsoBE="0" streamId="27" trafficClass="B" frameSize="300" intervallFrames="1" vlanId="0" />
 	</node>
 	
-	
 	<node id="node2">
 		<subscribe streamId="27" />
 	</node>
 	
-	
 	<node id="node3">
 	</node>	
-	
 	
 	<node id="node4">
 		<filter srcAddress="10.0.0.1" destAddress="10.0.0.2" destPort="1000" protocol="TCP"
 		        destType="DestinationType_8021Q" destModules="bgOut[0]" VID="0" PCP="3" destMAC="0A-00-00-00-00-12" />
 	</node>
-	
 	
 </rtIpConfig>

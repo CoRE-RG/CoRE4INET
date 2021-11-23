@@ -1,13 +1,15 @@
-Demonstrates a small IEEE 802.1Qbv Network. Traffic generators send Ethernet frames directly.
+Demonstrates a small TSN IP Network. 
 
-- The small network contains three hosts (node1, node2, node3) and a switch, which 
-  connects these hosts.
-  The cycle time 500us (see omnetpp.ini)
+- The ip tsn small network contains node1, node2, node3, and a switch, which 
+  connects these hosts. Additionally, there is node 4, which is directly connected to node 2.
+  The cycle time 1000us (see omnetpp.ini)
 
 - Node 1 sends Q traffic in vlan 0 with pcp 7. The Qbv gates in the devices are configured to handle it like TDMA traffic.
-
-- Node 2 sends AVB Class B Stream 1 in vlan 2 with pcp 6. The switch uses a CBS to shape this traffic.
+- Node 1 sends TCP traffic via AVB Class B Stream 27 with pcp 6 and TCP traffic via Q priority 3 in vlan 0
+- Node 2 sends AVB Class B Stream 1 in vlan 2 with pcp 6. 
+- Switch 1 uses a CBS to shape this traffic.
+- Node 4 sends TCP traffic with pcp 3 in vlan 0 to node2
   
 - Cross traffic may be send via all nodes. Use the configuration With_Crosstraffic.
 
-- Switch uses IEEE 802.1 Qci per stream filtering and policing on its ports.
+- Switch uses IEEE 802.1 Qci per stream filtering and policing on its ports. Use the configuration With_Qci

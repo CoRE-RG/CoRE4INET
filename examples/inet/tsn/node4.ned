@@ -18,7 +18,7 @@ package core4inet.examples.inet.tsn;
 import core4inet.nodes.inet.TSNIPHost;
 
 //
-// Node1: configuration in node1.ini.
+// Node4: configuration in node4.ini.
 //
 module Node4 extends TSNIPHost
 {
