@@ -1,11 +1,32 @@
-network mediumNetworkQ {
+types dev {
+	node TSN_NODE {
+		moduleType TSNEtherHost;
+	}
+	switch TSN_SWITCH {
+		moduleType TSNEtherSwitch;
+	}
+}
+
+network medium_network {
 	devices {
-		node node1;
-		node node2;
-		node node3;
-		node node4;
-		node node5;
-		switch switch1;
+		node node1 extends dev.TSN_NODE {
+			position(43,55);
+		}
+		node node2 extends dev.TSN_NODE {
+			position(43,111);
+		}
+		node node3 extends dev.TSN_NODE {
+			position(43,168);
+		}
+		node node4 extends dev.TSN_NODE {
+			position(43,226);
+		}
+		node node5 extends dev.TSN_NODE {
+			position(247,136);
+		}
+		switch switch1 extends dev.TSN_SWITCH{
+			position(147,136);
+		}
 	}
 	
 	connections {
@@ -55,7 +76,7 @@ network mediumNetworkQ {
 			payload 1500B;
 			period 125us;
 			mapping {
-				default : q { priority 0; };
+				default : be;
 			}
 		}
 	}
