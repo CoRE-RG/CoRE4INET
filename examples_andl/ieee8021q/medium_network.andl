@@ -1,4 +1,4 @@
-network smallNetworkQ {
+network mediumNetworkQ {
 	devices {
 		node node1;
 		node node2;
