@@ -48,3 +48,6 @@ src/core4inet/features.h
 
 #ignore Apple files
 .DS_Store
+
+#ignore VSCODE files
+.vscode*

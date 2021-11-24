@@ -1,0 +1,62 @@
+network smallNetworkQ {
+	devices {
+		node node1;
+		node node2;
+		node node3;
+		node node4;
+		node node5;
+		switch switch1;
+	}
+	
+	connections {
+		segment default {
+			node1 <--> { new std.ETH_100MBIT } <--> switch1;
+			node2 <--> { new std.ETH_100MBIT } <--> switch1;
+			node3 <--> { new std.ETH_100MBIT } <--> switch1;
+			node4 <--> { new std.ETH_100MBIT } <--> switch1;
+			node5 <--> { new std.ETH_100MBIT } <--> switch1;
+		}
+	}
+	
+	communication {
+		message CRITICAL {
+			sender node1;
+			receivers node5;
+			payload 1500B;
+			period 300us;
+			mapping {
+				default : q { priority 7; };
+			}
+		}
+		
+		message HIGH {
+			sender node2;
+			receivers node5;
+			payload 300B;
+			period 125us;
+			mapping {
+				default : q { priority 6; };
+			}
+		}
+		
+		message MEDIUM {
+			sender node3;
+			receivers node5;
+			payload 300B;
+			period 250us;
+			mapping {
+				default : q { priority 5; };
+			}
+		}
+		
+		message BEST_EFFORT {
+			sender node4;
+			receivers node5;
+			payload 1500B;
+			period 125us;
+			mapping {
+				default : q { priority 0; };
+			}
+		}
+	}
+}
