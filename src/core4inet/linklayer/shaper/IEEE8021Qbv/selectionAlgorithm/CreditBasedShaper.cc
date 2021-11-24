@@ -31,7 +31,6 @@ CreditBasedShaper::CreditBasedShaper()
 {
     this->credit = 0;
     this->isScheduled = false;
-    this->inTransmission = false;
     this->queueSize = 0;
     this->previousQueueSize = 0;
     this->newTime = 0;
@@ -49,7 +48,6 @@ void CreditBasedShaper::initialize()
 {
     IEEE8021QbvSelectionAlgorithm::initialize();
     Timed::initialize();
-    //this->handleParameterChange(nullptr);
     this->getParentModule()->getSubmodule("queue", this->getIndex())->subscribe("size", this);
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
     this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
@@ -99,11 +97,6 @@ void CreditBasedShaper::receiveSignal(__attribute__ ((unused)) cComponent *sourc
         inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
         if (macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE)
         {
-            if (this->inTransmission)
-            {
-                this->inTransmission = false;
-                emit(this->creditSignal, this->credit);
-            }
             this->idleSlope(this->queueSize == 0);
         }
     }
@@ -145,9 +138,12 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
             {
                 this->credit = 0;
             }
-            emit(this->creditSignal, this->credit);
             this->oldTime = this->getCurrentTime();
             this->refreshState();
+        }
+        if (duration >= 0 - getOscillator()->getCurrentTick())
+        {
+            emit(this->creditSignal, this->credit);
         }
         if (this->credit < 0 && !(this->isScheduled))
         {
@@ -169,7 +165,14 @@ void CreditBasedShaper::sendSlope(simtime_t duration)
         credit -= static_cast<int>(ceil(static_cast<double>(this->portBandwidth - reservedBandwidth) * duration.dbl()));
         this->oldTime = this->getCurrentTime() + duration;
         this->refreshState();
-        this->inTransmission = true;
+        if (!(this->isScheduled))
+        {
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+            event->setTimer(static_cast<uint64_t>(ceil(duration / getOscillator()->getPreciseTick())));
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
+            this->isScheduled = true;
+        }
     }
 }
 
