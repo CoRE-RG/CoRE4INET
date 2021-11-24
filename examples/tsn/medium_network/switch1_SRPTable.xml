@@ -1,0 +1,14 @@
+<srpTable>
+    <talkerTable vlan_id="0">
+    	<talkerEntry stream_id="1" srClass="A" address="AB-AA-00-00-00-01" module="medium_network.switch1.phy[1]" framesize="300" intervalFrames="1" pcp="6"/>
+    	<talkerEntry stream_id="2" srClass="B" address="AB-AA-00-00-00-02" module="medium_network.switch1.phy[2]" framesize="300" intervalFrames="1" pcp="5"/>   
+    </talkerTable>
+    <listenerTable vlan_id="0">
+        <listeners stream_id="1">
+            <listenerEntry  module="medium_network.switch1.phy[4]"/>
+        </listeners>
+        <listeners stream_id="2">
+            <listenerEntry  module="medium_network.switch1.phy[4]"/>
+        </listeners>
+    </listenerTable>
+</srpTable>
