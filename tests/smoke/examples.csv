@@ -24,4 +24,5 @@
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Crosstraffic -r 0,
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c Without_TDMA -r 0,
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Qci -r 0,
+/examples/tsn/medium_network/,                                    -f omnetpp.ini -c General -r 0,
 /examples/PCAPNG/small_network/,                                  -f omnetpp.ini -c General -r 0,
