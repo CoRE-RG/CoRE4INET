@@ -29,6 +29,8 @@ simple IEEE8021QbvGate like IIEEE8021QbvGate
         
         //Signal emitted when state changes
         @signal[NF_QBV_STATE_CHANGED](type=long);
+        //Statistic of the state
+        @statistic[state](title="State"; source=NF_QBV_STATE_CHANGED; record=vector; interpolationmode=sample-hold;);
         
         // State of the gate. 'o' (OPEN) or 'C' (CLOSED).
         string state = default("o");

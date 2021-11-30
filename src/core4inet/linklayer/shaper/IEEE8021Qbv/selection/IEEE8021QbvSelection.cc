@@ -102,7 +102,7 @@ void IEEE8021QbvSelection::handleMessage(cMessage* msg)
 void IEEE8021QbvSelection::receiveSignal(cComponent *src, simsignal_t id, long l, __attribute__((unused)) cObject *details)
 {
     Enter_Method_Silent();
-    if (id == NF_QBV_STATE_CHANGED)
+    if (id == NF_QBV_STATE_CHANGED && l > 0)
     {
         this->bubble("State changed.");
         cMessage* msg = new cMessage();

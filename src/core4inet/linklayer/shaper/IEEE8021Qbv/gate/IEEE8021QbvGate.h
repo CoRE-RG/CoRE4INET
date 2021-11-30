@@ -81,6 +81,9 @@ class IEEE8021QbvGate : public virtual cSimpleModule
      * @brief Components that contain visualization-related code are expected to override refreshDisplay().
      */
     virtual void refreshDisplay() const;
+
+  private:
+    void changeState(State newState);
 };
 
 } //namespace
