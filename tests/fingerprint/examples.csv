@@ -30,6 +30,6 @@
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            4a00-a8ae/tplx
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            fdd7-ac49/tplx
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Qci -r 0,                       1s,              750b-48ef/tplx
-/examples/tsn/medium_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              3543-ffa6/tplx
+/examples/tsn/medium_network/,                                    -f omnetpp.ini -c General -r 0,                        1s,              70ba-c762/tplx
 
 /examples/PCAPNG/small_network/,                                  -f omnetpp.ini -c General -r 0,                        11s,             fccb-14e4/tplx
