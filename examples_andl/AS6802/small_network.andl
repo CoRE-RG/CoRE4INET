@@ -1,4 +1,4 @@
-network smallNetworkTTE {
+network small_network {
 	devices {
 		node node1;
 		node node2;

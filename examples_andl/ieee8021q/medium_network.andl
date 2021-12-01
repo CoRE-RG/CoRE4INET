@@ -1,0 +1,83 @@
+types dev {
+	node TSN_NODE {
+		moduleType TSNEtherHost;
+	}
+	switch TSN_SWITCH {
+		moduleType TSNEtherSwitch;
+	}
+}
+
+network medium_network {
+	devices {
+		node node1 extends dev.TSN_NODE {
+			position(43,55);
+		}
+		node node2 extends dev.TSN_NODE {
+			position(43,111);
+		}
+		node node3 extends dev.TSN_NODE {
+			position(43,168);
+		}
+		node node4 extends dev.TSN_NODE {
+			position(43,226);
+		}
+		node node5 extends dev.TSN_NODE {
+			position(247,136);
+		}
+		switch switch1 extends dev.TSN_SWITCH{
+			position(147,136);
+		}
+	}
+	
+	connections {
+		segment default {
+			node1 <--> { new std.ETH_100MBIT } <--> switch1;
+			node2 <--> { new std.ETH_100MBIT } <--> switch1;
+			node3 <--> { new std.ETH_100MBIT } <--> switch1;
+			node4 <--> { new std.ETH_100MBIT } <--> switch1;
+			node5 <--> { new std.ETH_100MBIT } <--> switch1;
+		}
+	}
+	
+	communication {
+		message CRITICAL {
+			sender node1;
+			receivers node5;
+			payload 1500B;
+			period 300us;
+			mapping {
+				default : q { priority 7; };
+			}
+		}
+		
+		message HIGH {
+			sender node2;
+			receivers node5;
+			payload 300B;
+			period 125us;
+			mapping {
+				default : q { priority 6; };
+			}
+		}
+		
+		message MEDIUM {
+			sender node3;
+			receivers node5;
+			payload 300B;
+			period 250us;
+			mapping {
+				default : q { priority 5; };
+			}
+		}
+		
+		message BEST_EFFORT {
+			sender node4;
+			receivers node5;
+			payload 1500B;
+			period 125us;
+			mapping {
+				default : be;
+			}
+		}
+	}
+}

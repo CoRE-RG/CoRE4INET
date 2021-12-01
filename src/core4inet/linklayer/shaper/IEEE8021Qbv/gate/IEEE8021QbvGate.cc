@@ -31,18 +31,13 @@ bool IEEE8021QbvGate::isOpen()
 void IEEE8021QbvGate::open()
 {
     Enter_Method("open()");
-    State oldState = this->state;
-    this->state = this->State::OPEN;
-    if (this->state != oldState)
-    {
-        emit(NF_QBV_STATE_CHANGED, this->state);
-    }
+    this->changeState(this->State::OPEN);
 }
 
 void IEEE8021QbvGate::close()
 {
     Enter_Method("close()");
-    this->state = this->State::CLOSED;
+    this->changeState(this->State::CLOSED);
 }
 
 void IEEE8021QbvGate::initialize()
@@ -79,6 +74,16 @@ void IEEE8021QbvGate::refreshDisplay() const
     else if (this->state == this->State::CLOSED)
     {
         this->getDisplayString().setTagArg("b",3,"red");
+    }
+}
+
+void IEEE8021QbvGate::changeState(State newState)
+{
+    State oldState = this->state;
+    this->state = newState;
+    if (this->state != oldState)
+    {
+        emit(NF_QBV_STATE_CHANGED, this->state);
     }
 }
 
