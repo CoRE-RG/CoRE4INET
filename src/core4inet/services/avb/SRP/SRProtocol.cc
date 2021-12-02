@@ -18,14 +18,12 @@
 //Std
 #include <algorithm>
 //CoRE4INET
+#include "core4inet/utilities/ModuleAccess.h"
 #include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/linklayer/contract/ExtendedIeee802Ctrl_m.h"
 #include "core4inet/base/NotifierConsts.h"
 //Auto-generated Messages
 #include "core4inet/linklayer/ethernet/avb/SRPFrame_m.h"
-
-//INET
-#include "inet/common/ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -134,11 +132,11 @@ void SRProtocol::handleMessage(cMessage *msg)
 
                 unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
                 //Add Higher Priority Bandwidth
-                utilizedBandwidth += static_cast<unsigned long>(port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth"));
+                utilizedBandwidth += static_cast<unsigned long>(findModuleWherever("shaper", port)->par("AVBHigherPriorityBandwidth"));
                 unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(),
                         listenerReady->getVlan_identifier());
 
-                cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
+                cGate *physOutGate = findModuleWherever("mac", port)->gate("phys$o");
                 cChannel *outChannel = physOutGate->findTransmissionChannel();
 
                 unsigned long totalBandwidth = static_cast<unsigned long>(outChannel->getNominalDatarate());
