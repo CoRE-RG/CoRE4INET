@@ -28,6 +28,7 @@ Define_Module(IEEE8021QReservedTrafficSourceApp);
 
 IEEE8021QReservedTrafficSourceApp::IEEE8021QReservedTrafficSourceApp()
 {
+    this->isStreaming = false;
 }
 
 void IEEE8021QReservedTrafficSourceApp::initialize()
