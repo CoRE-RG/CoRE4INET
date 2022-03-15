@@ -55,20 +55,31 @@ void RCTrafficSourceApp::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("schedulerIn"))
     {
-        if (getEnvir()->isGUI())
+        if (isEnabled())
         {
-            getDisplayString().removeTag("i2");
-        }
-        sendMessage();
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().removeTag("i2");
+            }
+            sendMessage();
 
-        if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))
-        {
-            event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
-            getTimer()->registerEvent(event);
+            if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))
+            {
+                event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
+                getTimer()->registerEvent(event);
+            }
+            else
+            {
+                throw cRuntimeError("Message on schedulerIn is of wrong type");
+            }
         }
         else
         {
-            throw cRuntimeError("Message on schedulerIn is of wrong type");
+            delete msg;
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
         }
     }
     else

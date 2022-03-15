@@ -75,18 +75,29 @@ void IEEE8021QSyncTrafficSourceApp::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
-        if (getEnvir()->isGUI())
+        if (this->isEnabled())
         {
-            getDisplayString().removeTag("i2");
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().removeTag("i2");
+            }
+            uint32_t currentCycle = getPeriod()->getCycles();
+            if(this->synchronized && this->nextCycle <= currentCycle) {
+                IEEE8021QTrafficSourceApp::sendMessage();
+                this->nextCycle = currentCycle + this->modulo;
+            }
+            SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent*>(msg);
+            event->setNext_cycle(true);
+            getPeriod()->registerEvent(event);
         }
-        uint32_t currentCycle = getPeriod()->getCycles();
-        if(this->synchronized && this->nextCycle <= currentCycle) {
-            IEEE8021QTrafficSourceApp::sendMessage();
-            this->nextCycle = currentCycle + this->modulo;
+        else
+        {
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
+            delete msg;
         }
-        SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent*>(msg);
-        event->setNext_cycle(true);
-        getPeriod()->registerEvent(event);
     }
     else
     {

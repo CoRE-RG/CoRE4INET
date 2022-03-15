@@ -36,6 +36,8 @@ simple TrafficSourceAppBase extends ApplicationBase
         bool enabled = default(true);
         // Start time
         double startTime @unit(s) = default(0s);
+        // Stop time
+        double stopTime @unit(s) = default(-1s);  // time of finishing sending, -1s means forever
         //Size of the payload of the message (size of encapsulated cPacket) that is being generated
         volatile int payload @unit(Byte) = default(46Byte);
         
