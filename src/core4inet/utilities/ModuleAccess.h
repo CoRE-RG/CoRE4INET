@@ -37,6 +37,9 @@ cModule *findModuleWherever(const char *name, cModule *from);
  */
 cModule *findModuleWhereverInNode(const char *name, cModule *from);
 
+/**
+ * Workaround for duplicate symbol linking error in Windows when using inet::getModuleFromPar<cModule>()
+ */
 template<typename T>
 T *getModuleFromPar(cPar& par, const cModule *from, bool required)
 {
