@@ -13,10 +13,10 @@ include dependencies_makefrag
 
 
 CFLAGS += -std=c++14
-MSGCOPTS += -I.
+MSGC += -I.
 
 
-#Workaround for https://github.com/msys2/MINGW-packages/issues/6855
+# Workaround for https://github.com/msys2/MINGW-packages/issues/6855
 #ifneq (,$(findstring win32,$(PLATFORM)))
 #	LDFLAGS += -Wl,-Xlink=-force:multiple
 #endif
@@ -24,20 +24,20 @@ MSGCOPTS += -I.
 
 UNAME_S := $(shell uname -s)
 
-#Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
+# Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
 ifeq ($(UNAME_S),Darwin)
 	CC = clang
 	CXX = clang++
 	SHLIB_LD = clang++ -shared -fPIC
 endif
 
-#Special Flags for OS X
+# Special Flags for OS X
 ifeq ($(UNAME_S),Darwin)
     LDFLAGS += -headerpad_max_install_names 
 endif
 
 
-#detect 64/32bit
+# detect 64/32bit
 LBITS := $(shell getconf LONG_BIT)
 CFLAGS += -DLONG_BIT=$(LBITS)
 
@@ -49,12 +49,12 @@ CFLAGS += -DLONG_BIT=$(LBITS)
 # WARNINGS_ERROR=1
 # for -Werror
 
-#Warnings generate errors
+# Warnings generate errors
 ifdef WARNINGS_ERROR
 	CFLAGS += -Werror
 endif
 
-#Stricter warnings in clang and gcc:
+# Stricter warnings in clang and gcc:
 ifeq ($(CC),clang)
 	#clang
 	ifdef EXTENDED_WARNINGS
