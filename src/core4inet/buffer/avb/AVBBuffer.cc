@@ -126,7 +126,7 @@ void AVBBuffer::initialize(int stage)
         if (strcmp(par("srpModule").stringValue(), "")==0) {
             this->srpModule=getParentModule()->getSubmodule("phy", getIndex());
         } else {
-            this->srpModule = inet::getModuleFromPar<cModule>(par("srpModule"), this, true);
+            this->srpModule = getModuleFromPar<cModule>(par("srpModule"), this, true);
         }
 
         if (!this->srpModule)

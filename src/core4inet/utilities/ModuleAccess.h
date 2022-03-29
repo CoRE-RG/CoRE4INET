@@ -37,6 +37,22 @@ cModule *findModuleWherever(const char *name, cModule *from);
  */
 cModule *findModuleWhereverInNode(const char *name, cModule *from);
 
+template<typename T>
+T *getModuleFromPar(cPar& par, const cModule *from, bool required)
+{
+    const char *path = par.stringValue();
+    cModule *mod = from->getModuleByPath(path);
+    if (!mod) {
+        if (required)
+            throw cRuntimeError("Module not found on path '%s' defined by par '%s'", path, par.getFullPath().c_str());
+        else
+            return nullptr;
+    }
+    T *m = dynamic_cast<T *>(mod);
+    if (!m)
+        throw cRuntimeError("Module can not cast to '%s' on path '%s' defined by par '%s'", opp_typename(typeid(T)), path, par.getFullPath().c_str());
+    return m;
+}
 
 } // namespace CoRE4INET
 
