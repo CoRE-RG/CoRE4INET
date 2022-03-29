@@ -17,7 +17,7 @@ MSGCOPTS += -I.
 
 
 #Workaround for https://github.com/msys2/MINGW-packages/issues/6855
-ifeq ($(PLATFORM),win32.x86_64)
+ifneq (,$(findstring win32,$(PLATFORM)))
 	LDFLAGS += -Wl,-Xlink=-force:multiple
 endif
 
