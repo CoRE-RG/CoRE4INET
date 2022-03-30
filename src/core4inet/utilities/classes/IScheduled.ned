@@ -26,5 +26,5 @@ moduleinterface IScheduled extends ITimed
 {
     parameters:
         //Period of the scheduled module (must be set to the name of a period module in the Node)
-        string period;
+        string period @mutable;
 }

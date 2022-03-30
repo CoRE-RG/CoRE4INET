@@ -45,7 +45,7 @@ simple TicApp extends CTApplicationBase like IScheduled
         @statistic[roundtrip](title="Roundtrip time"; unit=s; record=stats,histogram?,vector);
         
         //Counter is increased on incoming Tic messages
-        int counter = 0;
+        int counter = 0 @mutable;
         //CT-ID used for the messages to send
         int ct_id;
         //Time in cycle when the tic message is generated
@@ -56,5 +56,5 @@ simple TicApp extends CTApplicationBase like IScheduled
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer @see IScheduled
         string timer = default("^.scheduler.timer");
         //Period of the scheduled module (must be set to the name of a period module in the Node) when left empty: period[0] @see IScheduled
-        string period = default("");
+        string period = default("") @mutable;
 }
