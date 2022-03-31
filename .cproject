@@ -254,7 +254,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="api/AS6802|synchronisation/AS6802|configuration/base|core4inet/synchronisation/AS6802|applications/api/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="core4inet/applications/api/AS6802|core4inet/api/AS6802|api/AS6802|synchronisation/AS6802|configuration/base|core4inet/synchronisation/AS6802|applications/api/AS6802" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -525,7 +525,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="api/AS6802|synchronisation/AS6802|configuration/base|core4inet/synchronisation/AS6802|applications/api/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+						<entry excluding="core4inet/applications/api/AS6802|core4inet/api/AS6802|api/AS6802|synchronisation/AS6802|configuration/base|core4inet/synchronisation/AS6802|applications/api/AS6802" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

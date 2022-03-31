@@ -16,12 +16,6 @@ CFLAGS += -std=c++14
 MSGC += -I.
 
 
-# Workaround for https://github.com/msys2/MINGW-packages/issues/6855
-#ifneq (,$(findstring win32,$(PLATFORM)))
-#	LDFLAGS += -Wl,-Xlink=-force:multiple
-#endif
-
-
 UNAME_S := $(shell uname -s)
 
 # Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
