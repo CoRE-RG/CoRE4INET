@@ -88,8 +88,8 @@ simple IPv4oRE extends IPv4 {
         //Interval in which an avb subscription is reregistered after a timeout
         double avbRetryInterval @unit("s") = default(1s);
     gates:
-        input AVBin;
-        input RCIn;
-        input TTIn;
+        input AVBin[];
+        input RCIn[];
+        input TTIn[];
         input schedulerIn;
 }

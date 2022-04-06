@@ -145,7 +145,7 @@ void IPv4oAVB<base>::handleMessage(cMessage* msg)
         etherctrl->setDest(avbFrame->getDest());
         etherctrl->setEtherType(avbFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
-        ipPacket->setArrival(this->getId(), base::gate("AVBin")->getId());
+        ipPacket->setArrival(this->getId(), base::gate("AVBin", 0)->getId());
 
         delete avbFrame;
         base::handleMessage(ipPacket);

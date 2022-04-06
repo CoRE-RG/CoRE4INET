@@ -71,6 +71,9 @@ module RTNetworkLayer
             gates:
                 queueIn[sizeof(parent.ifIn)];
                 queueOut[sizeof(parent.ifOut)];
+                AVBin[1];
+                RCIn[1];
+                TTIn[1];
         }
         arp: <arpType> like IARP {
             parameters:
@@ -125,7 +128,7 @@ module RTNetworkLayer
             ip.queueOut[i] --> { @display("m=s"); } --> ifOut[i];
         }
         
-        RCin --> ip.RCIn;
-        TTin --> ip.TTIn;
+        RCin --> ip.RCIn[0];
+        TTin --> ip.TTIn[0];
 }
 

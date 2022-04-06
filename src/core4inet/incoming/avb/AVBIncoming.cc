@@ -73,11 +73,20 @@ void AVBIncoming::handleMessage(cMessage* msg)
                     }
                     else
                     {
-                        if ((*listener)->hasGate("AVBin"))
+
+                        if ((*listener)->hasGate("AVBin", 0))
+                        {
+                            sendDirect(inFrame->dup(), (*listener)->gate("AVBin", 0));
+                        }
+                        else if ((*listener)->hasGate("AVBin"))
                         {
                             sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
-                            emit(rxPkSignal, inFrame);
                         }
+                        else
+                        {
+                            throw cRuntimeError("Missing AVBin gate");
+                        }
+                        emit(rxPkSignal, inFrame);
                     }
                 }
             }
