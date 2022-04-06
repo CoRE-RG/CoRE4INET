@@ -33,9 +33,12 @@ import core4inet.networklayer.inet.IPv4oRE;
 //
 // This Module is mainly cloned from the inet.nodes.inet.NetworkLayer module
 //
+// @author Kai-Uwe von Deylen, Philipp Meyer
+//
 module RTNetworkLayer
 {
     parameters:
+        @display("i=block/fork");
         bool proxyARP = default(true);
         string igmpType = default("IGMPv2");
         string arpType = default("ARP");
@@ -45,8 +48,8 @@ module RTNetworkLayer
         *.routingTableModule = default(absPath(this.routingTableModule));
         *.arpModule = default(absPath(".arp"));
         *.icmpModule = default(absPath(".icmp"));
-        arp.respondToProxyARP = this.proxyARP;
-        @display("i=block/fork");
+        arp.respondToProxyARP = this.proxyARP;   
+        
     gates:
         input ifIn[] @labels(IPv4Datagram);
         output ifOut[] @labels(IPv4Datagram);
