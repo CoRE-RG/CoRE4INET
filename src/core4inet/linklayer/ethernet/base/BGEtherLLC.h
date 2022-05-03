@@ -21,6 +21,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief This module forwards frames to the bg buffers
  *

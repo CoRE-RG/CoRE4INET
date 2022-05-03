@@ -31,6 +31,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief This module handles the mapping between ports and MAC addresses.
  *

@@ -21,6 +21,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * Find a module with given name, and "closest" to module "from".
  *

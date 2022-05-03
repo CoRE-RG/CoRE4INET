@@ -24,6 +24,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief Class for a simple IEEE 802.1Qci gate
  *

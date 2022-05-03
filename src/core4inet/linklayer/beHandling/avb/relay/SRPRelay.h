@@ -24,6 +24,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief This module forwards frames (~inet::EtherFrame) based on their destination MAC addresses to appropriate ports.
  *

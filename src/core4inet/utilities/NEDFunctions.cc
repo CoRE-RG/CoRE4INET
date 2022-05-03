@@ -17,6 +17,8 @@
 //CoRE4INET
 #include "core4inet/utilities/ModuleAccess.h"
 
+using namespace omnetpp;
+
 static omnetpp::cNEDValue ned_sec_to_tick(omnetpp::cComponent *context, omnetpp::cNEDValue argv[], int argc)
 {
     double ticklength;

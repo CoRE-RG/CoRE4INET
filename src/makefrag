@@ -16,77 +16,9 @@ CFLAGS += -std=c++14
 MSGC += -I.
 
 
-UNAME_S := $(shell uname -s)
-
-# Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
-ifeq ($(UNAME_S),Darwin)
-	CC = clang
-	CXX = clang++
-	SHLIB_LD = clang++ -shared -fPIC
-endif
-
-# Special Flags for OS X
-ifeq ($(UNAME_S),Darwin)
-    LDFLAGS += -headerpad_max_install_names 
-endif
-
-
 # detect 64/32bit
 LBITS := $(shell getconf LONG_BIT)
 CFLAGS += -DLONG_BIT=$(LBITS)
-
-
-# USAGE:
-# Set Environment Variables:
-# EXTENDED_WARNINGS=1
-# for stricter warnings and
-# WARNINGS_ERROR=1
-# for -Werror
-
-# Warnings generate errors
-ifdef WARNINGS_ERROR
-	CFLAGS += -Werror
-endif
-
-# Stricter warnings in clang and gcc:
-ifeq ($(CC),clang)
-	#clang
-	ifdef EXTENDED_WARNINGS
-    CFLAGS += -Wall -Wunused -Wextra -Weverything
-    endif
-    CFLAGS += -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors
-    CFLAGS += -Wno-c++98-compat-pedantic -Wno-unknown-pragmas
-    CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
-    CFLAGS += -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast
-    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command -Wno-error=reserved-id-macro -Wno-error=unknown-warning-option
-else ifeq ($(CC),gcc)
-	#gcc
-	ifdef EXTENDED_WARNINGS
-    CFLAGS += -Wall -Wunused -Wextra -Winit-self -Wswitch-enum -Wuninitialized -Wfloat-equal -Wsuggest-attribute=pure
-    CFLAGS += -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wconversion -Wuseless-cast
-    CFLAGS += -Wshadow
-    #CFLAGS += -ansi -pedantic-errors
-    endif
-    CFLAGS += -Wno-unknown-pragmas -Wno-error=unused-parameter -Wno-error=conversion -Wno-error=suggest-attribute=noreturn
-    CFLAGS += -Wno-error=shadow
-endif
-
-#Autoimport omnetpp namespace
-CFLAGS += -DAUTOIMPORT_OMNETPP_NAMESPACE
-
-
-# add -isystem for referenced projects (-I will be ignored for those also provided with -Isystem
-RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))
-ifneq (,$(findstring MSYS,$(shell uname -s)))
-	# on windows we need this hack for pathes like -Id:/...
-	SYSINCLUDES := $(shell echo '$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(INCLUDE_PATH))' |sed -e 's/-I\($(subst \| ,\|,$(addsuffix \|,$(filter %:,$(subst :,: ,$(patsubst -I%,%,$(INCLUDE_PATH))))) \/)\)/-isystem \1/g')
-else
-    # on unix we can use this	
-	SYSINCLUDES := $(subst -I/,-isystem /,$(subst -I$(RELPRJDOTS)/.,-isystem $(RELPRJDOTS)/.,$(INCLUDE_PATH)))
-endif
-override SYSINCLUDES := $(subst -I/,-isystem /,$(subst -Icore4inet/api/AS6802/tte_api,-isystem core4inet/api/AS6802/tte_api,$(SYSINCLUDES)))
-
-COPTS += $(SYSINCLUDES) -isystem $(OMNETPP_INCL_DIR)
 
 
 # dump out the actual compiler and linker command line for easier debugging

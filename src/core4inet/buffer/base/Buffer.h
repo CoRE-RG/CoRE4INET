@@ -25,6 +25,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 class ApplicationBase;
 class TTEAPIPriv;
 class Callback;
