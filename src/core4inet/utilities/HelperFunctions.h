@@ -16,6 +16,7 @@
 #ifndef CORE4INET_HELPERFUNCTIONS_H_
 #define CORE4INET_HELPERFUNCTIONS_H_
 
+
 //Std
 #include <vector>
 //CoRE4INET
@@ -31,8 +32,8 @@
 //#ifdef WITH_AVB_COMMON
 //CoRE4INET
 #include "core4inet/base/avb/AVBDefs.h"
-#include "core4inet/base/avb/AVBDefs_m.h"
 //#endif
+
 
 namespace CoRE4INET {
 

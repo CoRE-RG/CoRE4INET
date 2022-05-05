@@ -15,19 +15,16 @@
 #ifndef CORE4INET_SRPTABLE_H_
 #define CORE4INET_SRPTABLE_H_
 
+
 //Std
 #include <map>
 #include <unordered_map>
-
+//INET
+#include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/avb/AVBDefs.h"
 
-//INET
-#include "inet/linklayer/common/MACAddress.h"
-
-//Auto-generated Messages
-#include "core4inet/base/avb/AVBDefs_m.h"
 
 namespace CoRE4INET {
 

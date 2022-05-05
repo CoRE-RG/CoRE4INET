@@ -16,13 +16,14 @@
 #ifndef CORE4INET_AVBDESTINATIONINFO_H_
 #define CORE4INET_AVBDESTINATIONINFO_H_
 
-//CoRE4INET
-#include "core4inet/networklayer/inet/base/DestinationInfo.h"
-#include "core4inet/incoming/avb/AVBIncoming.h"
-#include "core4inet/base/avb/AVBDefs_m.h"
 
 //INET
 #include "inet/linklayer/common/MACAddress.h"
+
+//CoRE4INET
+#include "core4inet/base/avb/AVBDefs.h"
+#include "core4inet/networklayer/inet/base/DestinationInfo.h"
+#include "core4inet/incoming/avb/AVBIncoming.h"
 
 
 namespace CoRE4INET {
