@@ -1,3 +1,10 @@
+types std {
+	ethernetLink ETH_100MBIT {
+		bandwidth 100Mb/s;
+	}
+}
+
+
 types dev {
 	node TSN_NODE {
 		moduleType TSNEtherHost;
@@ -6,6 +13,7 @@ types dev {
 		moduleType TSNEtherSwitch;
 	}
 }
+
 
 network medium_network {
 	devices {
@@ -48,8 +56,7 @@ network medium_network {
 			mapping {
 				default : q { priority 7; };
 			}
-		}
-		
+		}	
 		message HIGH {
 			sender node2;
 			receivers node5;
@@ -58,8 +65,7 @@ network medium_network {
 			mapping {
 				default : q { priority 6; };
 			}
-		}
-		
+		}		
 		message MEDIUM {
 			sender node3;
 			receivers node5;
@@ -68,8 +74,7 @@ network medium_network {
 			mapping {
 				default : q { priority 5; };
 			}
-		}
-		
+		}	
 		message BEST_EFFORT {
 			sender node4;
 			receivers node5;
