@@ -2,26 +2,12 @@ types std {
 	ethernetLink ETH_100MBIT {
 		bandwidth 100Mb/s;
 	}
-	
-	canLink CANBUS_500KBIT {
-		bandwidth 500Kb/s;
-	}
-	
-    switch ETH_SWITCH {
-    	hardwareDelay 8us;
-    }
-    
-    message MAX_CANMSG {
-    	payload 8B;
-    }
 }
-
 
 
 settings {
 	tteScheduling true;
 }
-
 
 
 network large_network {
@@ -47,7 +33,6 @@ network large_network {
 		switch switch3;
 	}
 
-
 	connections {
 		segment default {
 			switch1 <--> { new std.ETH_100MBIT } <--> switch2;
@@ -64,7 +49,6 @@ network large_network {
 			node10 <--> { new std.ETH_100MBIT } <--> switch3;
 		}
 	}
-
 
 	communication {
 		message stream1 {
@@ -165,6 +149,6 @@ network large_network {
 			mapping {
 				default : be;
 			}
+		}
 	}
-}
 }
