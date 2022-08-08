@@ -51,7 +51,7 @@ void IEEE8021QTrafficSinkApp::handleMessage(cMessage *msg)
 {
     if (EthernetIIFrameWithQTag *qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
     {
-        if (address.isUnspecified() || qframe->getSrc() == address)
+        if ((address.isUnspecified() || qframe->getSrc() == address) && qframe->getVID() == vid)
         {
             int pcp = qframe->getPcp();
             emit(this->rxQPcpPkSignals[pcp], qframe);
@@ -72,6 +72,10 @@ void IEEE8021QTrafficSinkApp::handleMessage(cMessage *msg)
 void IEEE8021QTrafficSinkApp::handleParameterChange(const char* parname)
 {
     BGTrafficSinkApp::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "vid"))
+    {
+        this->vid = static_cast<unsigned int>(parameterULongCheckRange(par("vid"), 0, MAX_VLAN_NUMBER));
+    }
     if (!parname || !strcmp(parname, "numPCP"))
     {
         this->numPCP = static_cast<unsigned int>(parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<int>::max()));

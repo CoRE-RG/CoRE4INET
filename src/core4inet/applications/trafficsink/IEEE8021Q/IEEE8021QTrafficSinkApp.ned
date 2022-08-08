@@ -29,6 +29,8 @@ simple IEEE8021QTrafficSinkApp extends BGTrafficSinkApp
     parameters:
         @class(IEEE8021QTrafficSinkApp);
         @display("i=block/sink,darkgreen");
+        // vlan id
+        int vid = default(0);
         // number of priorities
         int numPCP = default(8);
 
