@@ -74,7 +74,7 @@ void IEEE8021QTrafficSinkApp::handleParameterChange(const char* parname)
     BGTrafficSinkApp::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "vid"))
     {
-        this->vid = static_cast<unsigned int>(parameterULongCheckRange(par("vid"), 0, MAX_VLAN_NUMBER));
+        this->vid = static_cast<uint16_t>(parameterULongCheckRange(par("vid"), 0, MAX_VLAN_NUMBER));
     }
     if (!parname || !strcmp(parname, "numPCP"))
     {

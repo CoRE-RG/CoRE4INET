@@ -39,7 +39,7 @@ class IEEE8021QTrafficSinkApp : public virtual BGTrafficSinkApp
         /**
          * @brief vlan id.
          */
-        unsigned int vid;
+        uint16_t vid;
         /**
          * @brief Number of priorities.
          */
