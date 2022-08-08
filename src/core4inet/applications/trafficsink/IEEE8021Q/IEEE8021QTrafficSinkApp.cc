@@ -64,9 +64,17 @@ void IEEE8021QTrafficSinkApp::handleMessage(cMessage *msg)
             {
                 emit(this->rxQPcpPkAgeInnerSignals[pcp], simTime() - qframe->getCreationTime());
             }
+            BGTrafficSinkApp::handleMessage(msg);
+        }
+        else
+        {
+            delete msg;
         }
     }
-    BGTrafficSinkApp::handleMessage(msg);
+    else
+    {
+        delete msg;
+    }
 }
 
 void IEEE8021QTrafficSinkApp::handleParameterChange(const char* parname)
