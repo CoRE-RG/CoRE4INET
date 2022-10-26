@@ -90,10 +90,18 @@ void IEEE8021QReservedTrafficSourceApp::handleMessage(cMessage* msg)
 
     if (msg->arrivedOn("schedulerIn"))
     {
-        if (this->isStreaming)
+        if (this->isStreaming && this->isEnabled())
         {
             sendMessage();
             scheduleInterval();
+        }
+        else
+        {
+            // todo implement stop mechanism
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
         }
     }
     delete msg;
@@ -159,8 +167,8 @@ void IEEE8021QReservedTrafficSourceApp::receiveSignal(cComponent* src,
         //If talker for the desired stream, unregister Listener
         if (lentry && lentry->streamId == this->streamID && lentry->vlan_id == this->vid)
         {
-            //check whether there are listeners left
-            if (srpTable->getListenersForStreamId(this->streamID, this->vid).size() == 0)
+            //check whether we have stopped or if there are no listeners left
+            if (!isEnabled() || srpTable->getListenersForStreamId(this->streamID, this->vid).size() == 0)
             {
                 this->isStreaming = false;
                 if (getEnvir()->isGUI())

@@ -39,7 +39,7 @@ TrafficSourceAppBase::~TrafficSourceAppBase()
 
 bool TrafficSourceAppBase::isEnabled()
 {
-    return this->enabled;
+    return par("enabled").boolValue() && (stopTime < SIMTIME_ZERO || stopTime > simTime());
 }
 
 size_t TrafficSourceAppBase::getPayloadBytes(){
@@ -52,9 +52,15 @@ void TrafficSourceAppBase::initialize()
 {
     ApplicationBase::initialize();
     handleParameterChange(nullptr);
+    startTime = par("startTime").doubleValue();
+    stopTime = par("stopTime").doubleValue();
+    if (stopTime > SIMTIME_ZERO && stopTime < startTime)
+    {
+        throw cRuntimeError("Invalid startTime/stopTime parameters");
+    }
     if (isEnabled())
     {
-        scheduleAt(simTime() + par("startTime").doubleValue(), new cMessage(START_MSG_NAME));
+        scheduleAt(simTime() + startTime, new cMessage(START_MSG_NAME));
         if (getEnvir()->isGUI())
         {
             getDisplayString().setTagArg("i2", 0, "status/asleep");
