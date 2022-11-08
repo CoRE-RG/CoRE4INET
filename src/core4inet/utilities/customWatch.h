@@ -408,7 +408,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
             it3 = (*this->it2).second.begin();
             while (static_cast<int>(index) <= i)
             {
-                if (i > (index + (*this->it2).second.size()))
+                if (i >= (index + (*this->it2).second.size()))
                 {
                     index += (*this->it2).second.size();
                     ++this->it2;
