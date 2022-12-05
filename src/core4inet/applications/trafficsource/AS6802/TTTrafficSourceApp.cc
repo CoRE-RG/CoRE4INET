@@ -69,20 +69,31 @@ void TTTrafficSourceApp::handleMessage(cMessage *msg)
     }
     else if (msg && msg->arrivedOn("schedulerIn"))
     {
-        if (getEnvir()->isGUI())
+        if (this->isEnabled())
         {
-            getDisplayString().removeTag("i2");
-        }
-        moduloCycle++;
-        if (synchronized && moduloCycle == this->modulo)
-        {
-            sendMessage();
-            moduloCycle = 0;
-        }
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().removeTag("i2");
+            }
+            moduloCycle++;
+            if (synchronized && moduloCycle == this->modulo)
+            {
+                sendMessage();
+                moduloCycle = 0;
+            }
 
-        SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
-        event->setNext_cycle(true);
-        getPeriod()->registerEvent(event);
+            SchedulerActionTimeEvent *event = check_and_cast<SchedulerActionTimeEvent *>(msg);
+            event->setNext_cycle(true);
+            getPeriod()->registerEvent(event);
+        }
+        else
+        {
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
+            delete msg;
+        }
     }
     else
     {

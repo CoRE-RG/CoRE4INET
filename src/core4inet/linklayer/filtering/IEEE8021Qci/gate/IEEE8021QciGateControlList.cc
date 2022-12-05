@@ -25,14 +25,14 @@ Define_Module(IEEE8021QciGateControlList);
 void IEEE8021QciGateControlList::handleParameterChange(const char* parname)
 {
     Scheduled::handleParameterChange(parname);
-    this->numGates = this->getParentModule()->par("numStreamGates").longValue();
+    this->numGates = this->getParentModule()->par("numStreamGates").intValue();
     if (!parname || !strcmp(parname, "controlList"))
     {
         IEEE8021QbvGateControlList::handleParameterChange("controlList");
     }
 }
 
-void IEEE8021QciGateControlList::propagteGateControlElement(vector<string> gateStates)
+void IEEE8021QciGateControlList::propagateGateControlElement(vector<string> gateStates)
 {
     for (long i=static_cast<long>(this->numGates)-1; i>=0; i--)
     {

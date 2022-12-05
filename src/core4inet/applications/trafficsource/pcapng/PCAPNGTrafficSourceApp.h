@@ -33,7 +33,7 @@ namespace CoRE4INET {
  * @sa ApplicationBase
  * @ingroup Applications
  *
- * @author Sandra Reider
+ * @author Sandra Reider, Philipp Meyer
  */
 class PCAPNGTrafficSourceApp : public virtual CoRE4INET::ApplicationBase
 {

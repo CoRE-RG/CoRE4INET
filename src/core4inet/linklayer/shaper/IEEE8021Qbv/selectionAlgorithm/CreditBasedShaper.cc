@@ -18,6 +18,9 @@
 //INET
 #include "inet/linklayer/ethernet/Ethernet.h"
 
+//INET
+#include "inet/common/ModuleAccess.h"
+
 namespace CoRE4INET {
 
 Define_Module(CreditBasedShaper);
@@ -28,7 +31,6 @@ CreditBasedShaper::CreditBasedShaper()
 {
     this->credit = 0;
     this->isScheduled = false;
-    this->inTransmission = false;
     this->queueSize = 0;
     this->previousQueueSize = 0;
     this->newTime = 0;
@@ -46,10 +48,9 @@ void CreditBasedShaper::initialize()
 {
     IEEE8021QbvSelectionAlgorithm::initialize();
     Timed::initialize();
-    this->handleParameterChange(nullptr);
     this->getParentModule()->getSubmodule("queue", this->getIndex())->subscribe("size", this);
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
-    this->srpTable = dynamic_cast<SRPTable*>(this->getParentModule()->getParentModule()->getParentModule()->getSubmodule("srpTable"));
+    this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
     this->outChannel = this->getParentModule()->getParentModule()->getSubmodule("mac")->gate("phys$o")->findTransmissionChannel();
     this->portBandwidth = static_cast<unsigned int>(ceil(outChannel->getNominalDatarate()));
     WATCH(this->credit);
@@ -96,11 +97,6 @@ void CreditBasedShaper::receiveSignal(__attribute__ ((unused)) cComponent *sourc
         inet::EtherMACBase::MACTransmitState macTransmitState = static_cast<inet::EtherMACBase::MACTransmitState>(l);
         if (macTransmitState == inet::EtherMACBase::MACTransmitState::TX_IDLE_STATE)
         {
-            if (this->inTransmission)
-            {
-                this->inTransmission = false;
-                emit(this->creditSignal, this->credit);
-            }
             this->idleSlope(this->queueSize == 0);
         }
     }
@@ -133,26 +129,31 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
     this->newTime = this->getCurrentTime();
     simtime_t duration = this->newTime - this->oldTime;
     unsigned long reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
-    // TODO Add Warning when reservedBandwidth is zero.
-    if (duration > 0)
+    if (reservedBandwidth > 0)
     {
-        this->credit += static_cast<int>(ceil(static_cast<double>(reservedBandwidth) * duration.dbl()));
-        if (maxCreditZero && this->credit > 0)
+        if (duration > 0)
         {
-            this->credit = 0;
+            this->credit += static_cast<int>(ceil(static_cast<double>(reservedBandwidth) * duration.dbl()));
+            if (maxCreditZero && this->credit > 0)
+            {
+                this->credit = 0;
+            }
+            this->oldTime = this->getCurrentTime();
+            this->refreshState();
         }
-        emit(this->creditSignal, this->credit);
-        this->oldTime = this->getCurrentTime();
-        this->refreshState();
-    }
-    if (this->credit < 0 && !(this->isScheduled))
-    {
-        double tillZeroDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwidth);
-        SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-        event->setTimer(static_cast<uint64_t>(ceil(tillZeroDuration / getOscillator()->getPreciseTick())));
-        event->setDestinationGate(gate("schedulerIn"));
-        getTimer()->registerEvent(event);
-        this->isScheduled = true;
+        if (duration >= 0 - getOscillator()->getCurrentTick())
+        {
+            emit(this->creditSignal, this->credit);
+        }
+        if (this->credit < 0 && !(this->isScheduled))
+        {
+            double tillZeroDuration = static_cast<double>(-credit) / static_cast<double>(reservedBandwidth);
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+            event->setTimer(static_cast<uint64_t>(ceil(tillZeroDuration / getOscillator()->getPreciseTick())));
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
+            this->isScheduled = true;
+        }
     }
 }
 
@@ -164,7 +165,14 @@ void CreditBasedShaper::sendSlope(simtime_t duration)
         credit -= static_cast<int>(ceil(static_cast<double>(this->portBandwidth - reservedBandwidth) * duration.dbl()));
         this->oldTime = this->getCurrentTime() + duration;
         this->refreshState();
-        this->inTransmission = true;
+        if (!(this->isScheduled))
+        {
+            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+            event->setTimer(static_cast<uint64_t>(ceil(duration / getOscillator()->getPreciseTick())));
+            event->setDestinationGate(gate("schedulerIn"));
+            getTimer()->registerEvent(event);
+            this->isScheduled = true;
+        }
     }
 }
 

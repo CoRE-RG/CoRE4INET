@@ -40,6 +40,10 @@ simple SRProtocol
         int pcpSRClassB = default(5);
         // SRP Table module, default name is srpTable
         string srpTable = default("^.srpTable");
+        // custom path to SRP encap or eth interface of encap to be connected during runtime
+        string srpEncap= default("");
+        //Path to port modules
+        string portModule = default("phy");
         
     gates:
         // Gate for incoming SRP messages

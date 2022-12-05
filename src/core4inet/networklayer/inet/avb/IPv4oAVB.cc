@@ -246,6 +246,7 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 const char *destMAC = base::getRequiredAttribute(filterElement, "destMAC");
                 const char *streamId = filterElement->getAttribute("streamId");
                 const char *srClass = filterElement->getAttribute("trafficClass");
+                const char *pcp = filterElement->getAttribute("pcp");
                 const char *frameSize = filterElement->getAttribute("frameSize");
                 const char *intFrames = filterElement->getAttribute("intervallFrames");
                 const char *vlanId = filterElement->getAttribute("vlanId");
@@ -289,14 +290,22 @@ void IPv4oAVB<base>::configureFilters(cXMLElement *config)
                 else
                     throw cRuntimeError("destMAC not specified!");
                 avbDestInfo->setStreamId(static_cast<uint64_t>(base::parseIntAttribute(streamId, "streamId", false)));
+                int pcp_val = base::parseIntAttribute(pcp, "pcp", true);
                 if (strcmp(srClass, "B") == 0)
                 {
                     avbDestInfo->setSrClass(SR_CLASS::B);
+                    if(pcp_val < 0) {
+                        pcp_val = base::par("pcpSRClassB").intValue();
+                    }
                 }
                 else
                 {
                     avbDestInfo->setSrClass(SR_CLASS::A);
+                    if(pcp_val < 0) {
+                        pcp_val = base::par("pcpSRClassA").intValue();
+                    }
                 }
+                avbDestInfo->setPcp(static_cast<uint8_t>(pcp_val));
                 avbDestInfo->setFrameSize(
                         static_cast<uint32_t>(base::parseIntAttribute(frameSize, "frameSize", false)));
                 avbDestInfo->setIntervallFrames(
@@ -412,7 +421,7 @@ void IPv4oAVB<base>::registerTalker(const IPoREFilter* filter, SRPTable *srpTabl
         AVBDestinationInfo *avbDestInfo = dynamic_cast<AVBDestinationInfo *>(filter->getDestInfo());
         srpTable->updateTalkerWithStreamId(avbDestInfo->getStreamId(), this, *(avbDestInfo->getDestMac()),
                 avbDestInfo->getSrClass(), avbDestInfo->getFrameSize(), avbDestInfo->getIntervallFrames(),
-                avbDestInfo->getVlanId());
+                avbDestInfo->getVlanId(),avbDestInfo->getPcp());
     }
     else
     {
@@ -454,6 +463,7 @@ void IPv4oAVB<base>::sendAVBFrame(cPacket* packet, __attribute__((unused))     c
     AVBFrame *outFrame = new AVBFrame(frameNname.str().c_str());
     outFrame->setStreamID(static_cast<unsigned long>(avbDestInfo->getStreamId()));
     outFrame->setVID(avbDestInfo->getVlanId());
+    outFrame->setPcp(avbDestInfo->getPcp());
     outFrame->setDest(*(avbDestInfo->getDestMac()));
     //outFrame->setEtherType(inet::ETHERTYPE_IPv4); // TODO: Set ETHERTYPE_IPv4 inside qtag
 

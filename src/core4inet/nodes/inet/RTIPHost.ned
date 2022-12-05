@@ -100,7 +100,7 @@ module RTIPHost
 
         pingApp[numPingApps]: <default("PingApp")> like IPingApp {
             parameters:
-                @display("p=849,141,row,60");
+                @display("p=849,150,row,60");
         }
 
         // transport Layer
@@ -115,7 +115,7 @@ module RTIPHost
         }
 
         sctp: <sctpType> like ISCTP if hasSctp {
-            @display("p=732,141");
+            @display("p=732,150");
         }
 
         // network layer
@@ -145,7 +145,7 @@ module RTIPHost
 		// Buffers
         avbCTC: AVBIncoming {
             parameters:
-                @display("p=186,150");
+                @display("p=185,150");
             gates:
                 AVBAout[1];
                 AVBBout[1];
@@ -179,6 +179,10 @@ module RTIPHost
         interfaceTable: InterfaceTable {
             parameters:
                 @display("p=63,166;is=s");
+        }
+
+        lo0: LoopbackInterface {
+            @display("p=615,315");
         }
 
         phy[1]: TTEAVB8021QEtherNic {
@@ -221,7 +225,6 @@ module RTIPHost
             networkLayer.pingOut++ --> pingApp[i].pingIn;
             networkLayer.pingIn++ <-- pingApp[i].pingOut;
         }
-
 		// transport Layer <--> network Layer
         tcp.ipOut --> networkLayer.transportIn++ if hasTcp;
         tcp.ipIn <-- networkLayer.transportOut++ if hasTcp;
@@ -236,8 +239,13 @@ module RTIPHost
         srpProtocol.out --> phy[0].srpIn;
         phy[0].srpOut --> srpProtocol.in;
 
+        // network Layer <--> loopback interface        
+        networkLayer.ifOut++ --> lo0.upperLayerIn;
+        lo0.upperLayerOut --> networkLayer.ifIn++;
+
+
 		// link layer <--> outside
-        phy[0].ethg <--> ethg;
+        phy[0].phys <--> ethg;
 
         bgOut.out --> phy[0].bgIn;
 

@@ -39,17 +39,27 @@ void BGTrafficSourceApp::initialize()
 
 void BGTrafficSourceApp::handleMessage(cMessage *msg)
 {
-
     if (msg->isSelfMessage())
     {
-        if (getEnvir()->isGUI())
+        if(this->isEnabled())
         {
-            getDisplayString().removeTag("i2");
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().removeTag("i2");
+            }
+            sendMessage();
+            scheduleAt(simTime() + this->sendInterval, msg);
+            emit(sigSendInterval,this->sendInterval);
+            handleParameterChange("sendInterval");
         }
-        sendMessage();
-        scheduleAt(simTime() + this->sendInterval, msg);
-        emit(sigSendInterval,this->sendInterval);
-        handleParameterChange("sendInterval");
+        else
+        {
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
+            delete msg;
+        }
     }
     else
     {

@@ -28,6 +28,7 @@
 
 #include "inet/networklayer/common/L3Address.h"
 #include "inet/networklayer/common/L3AddressResolver.h"
+#include "inet/common/InitStages.h"
 #include "inet/linklayer/common/Ieee802Ctrl.h"
 #include "inet/transportlayer/udp/UDPPacket.h"
 
@@ -55,7 +56,7 @@ template<class Base>
 void IPv4oIEEE8021Q<Base>::initialize(int stage)
 {
     Base::initialize(stage);
-    if (stage == 0)
+    if (stage == inet::INITSTAGE_LAST)// wait utill nodes have been initialized for address resolving
     {
         cXMLElement *filters = Base::par("filters").xmlValue();
         IPv4oIEEE8021Q<Base>::configureFilters(filters);
@@ -134,7 +135,7 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
                 ieee8021QDestInfo->setDestType(DestinationType_8021Q);
                 std::vector<std::string> bufferPaths = cStringTokenizer(destModules, DELIMITERS).asVector();
                 std::vector<std::string>::const_iterator bufferPath = bufferPaths.begin();
-                std::list<BGBuffer*> destBgBuffers;
+                std::list<cGate*> destGates;
                 for (; bufferPath != bufferPaths.end(); ++bufferPath)
                 {
                     cModule* module = getSimulation()->getModuleByPath((*bufferPath).c_str());
@@ -148,18 +149,30 @@ void IPv4oIEEE8021Q<Base>::configureFilters(cXMLElement *config)
                     }
                     if (BGBuffer *bgBuf = dynamic_cast<BGBuffer*>(module))
                     {
-                        destBgBuffers.push_back(bgBuf);
+                        destGates.push_back(bgBuf->gate("in"));
                     }
                     else
                     {
-                        throw cRuntimeError("destModule: %s is not a BGBuffer!", (*bufferPath).c_str());
+                        //not a BGBuffer, check if xml has a gate than it might still be a valid output
+                        const char *destGateAttr = filterElement->getAttribute("destGate");
+                        if (destGateAttr) {
+                            cGate* destGate = module->gate(destGateAttr);
+                            if(!destGate){
+                                throw cRuntimeError("destGate \"%s\" could not be resolved!", destAddrAttr);
+                            }
+                            else {
+                                destGates.push_back(destGate);
+                            }
+                        } else {
+                            throw cRuntimeError("destModule: %s is not a BGBuffer and alternative destGate could not be resolved!!", (*bufferPath).c_str());
+                        }
                     }
                 }
                 if (destMAC)
                     ieee8021QDestInfo->setDestMac(new inet::MACAddress(destMAC));
                 else
                     throw cRuntimeError("destMAC not specified!");
-                ieee8021QDestInfo->setDestModules(destBgBuffers);
+                ieee8021QDestInfo->setDestGates(destGates);
                 ieee8021QDestInfo->setVID(static_cast<uint16_t>(Base::parseIntAttribute(vid, "VID", false)));
                 ieee8021QDestInfo->setPCP(static_cast<uint8_t>(Base::parseIntAttribute(pcp, "PCP", false)));
 
@@ -299,11 +312,10 @@ void IPv4oIEEE8021Q<Base>::sendIEEE8021QFrame(cPacket* packet, __attribute__((un
     outFrame->setDest(*destInfo->getDestMac());
     outFrame->setName(packet->getName());
 
-    std::list<BGBuffer*> destBuffers = destInfo->getDestModules();
-    std::list<BGBuffer*>::iterator destBuf = destBuffers.begin();
-    for (; destBuf != destBuffers.end(); ++destBuf)
+    std::list<cGate*> destGates = destInfo->getDestGates();
+    for (auto destGate = destGates.begin(); destGate != destGates.end(); ++destGate)
     {
-        Base::sendDirect(outFrame, (*destBuf)->gate("in"));
+        Base::sendDirect(outFrame, (*destGate));
     }
 
 }

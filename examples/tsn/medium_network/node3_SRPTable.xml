@@ -1,0 +1,10 @@
+<srpTable>
+    <talkerTable vlan_id="0">
+    	<talkerEntry stream_id="2" srClass="A" address="AB-AA-00-00-00-02" module="medium_network.node3.app[0]" framesize="322" intervalFrames="1" pcp="5"/>       
+    </talkerTable>
+    <listenerTable vlan_id="0">
+        <listeners stream_id="2">
+            <listenerEntry  module="medium_network.node3.phy[0]"/>
+        </listeners>
+    </listenerTable>
+</srpTable>

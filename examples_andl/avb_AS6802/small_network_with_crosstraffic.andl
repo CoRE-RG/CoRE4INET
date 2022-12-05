@@ -6,7 +6,6 @@ network small_network_with_crosstraffic {
 		switch switch1;
 	}
 
-
 	connections {
 		segment default {
 			node1 <--> { ethernetLink link1 {bandwidth 100Mb/s; length 20m; } } <--> switch1;
@@ -14,7 +13,6 @@ network small_network_with_crosstraffic {
 			node3 <--> { ethernetLink link3 {bandwidth 100Mb/s; length 5m; } } <--> switch1;
 		}
 	}
-
 
 	communication {
 		message stream1 {

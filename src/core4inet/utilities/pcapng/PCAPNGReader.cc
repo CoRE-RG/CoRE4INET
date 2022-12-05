@@ -29,6 +29,7 @@ PCAPNGReader::PCAPNGReader() { // @suppress("Class members should be properly in
     this->initialTimestampNano = 0;
     this->currentBlockSize = 0;
     this->interfaceCount = 0;
+    this->currentPackeBlockNo = 0;
     this->timeResolutions = {};
 
     this->currentSectionHeader = new section_header_block;
@@ -69,7 +70,8 @@ void PCAPNGReader::initialize(const char *fileName) {
 void PCAPNGReader::reset() {
     fseek(file, 0, SEEK_SET);
     this->endReached = false;
-    initialTimestampNano = 0;
+    this->initialTimestampNano = 0;
+    this->currentPackeBlockNo = 0;
 
     // check first block
     uint32_t blockType = readNextBlock();
@@ -143,7 +145,7 @@ void PCAPNGReader::readInterfaceDescriptionBlock() {
     if (!correctEndianess) {
         convertEndianess(interfaceDescription);
     }
-    int8_t resolution = 0;
+    int8_t resolution = 0b00000110; //If IF_TSRESOL option is not present, a resolution of 10^-6 is assumed
 
     // check for options
     uint32_t remainingOptionsSize = currentBlockSize - sizeof(interface_description_block);
@@ -193,7 +195,8 @@ void PCAPNGReader::readPacketBlock() {
     // read and process packet
     unsigned char packetBlock[currentPacketHeader->caplen];
     fread(packetBlock, 1, currentPacketHeader->caplen, file);
-    createEthernetIIFrame(packetBlock);
+    this->currentPackeBlockNo++;
+    createEthernetIIFrame(this->currentPackeBlockNo, packetBlock);
 
     // skip padding bytes
     uint8_t numberOfUnalignedBytes = currentPacketHeader->caplen % 4;
@@ -230,8 +233,8 @@ void PCAPNGReader::convertEndianess(void* blockBuffer) {
 #define ETHERTYPE_SECONDBYTE_POS 13 /* position of the second ethertype-byte in an ethernet-packet-block */
 #define PAYLOAD_BEGIN 14            /* begin of the payload in an ethernet-packet-block */
 
-void PCAPNGReader::createEthernetIIFrame(unsigned char* packetBlock) {
-    inet::EthernetIIFrame *frame = new inet::EthernetIIFrame("Best-Effort Traffic", 7);
+void PCAPNGReader::createEthernetIIFrame(uint64_t packetBlockNo, unsigned char* packetBlock) {
+    inet::EthernetIIFrame *frame = new inet::EthernetIIFrame(("No." + std::to_string(packetBlockNo) + " of " + this->filename).c_str());
 
     /*
      * packetBlock: contains EthernetHeader and payload
@@ -259,6 +262,7 @@ void PCAPNGReader::createEthernetIIFrame(unsigned char* packetBlock) {
     payload_packet->setByteLength(static_cast<int64_t>(currentPacketHeader->caplen - PAYLOAD_BEGIN));
     frame->setByteLength(ETHER_MAC_FRAME_BYTES);
     frame->encapsulate(payload_packet);
+
     //TODO: use actual payload from file (currently not relevant for the simulation)
 
     //Padding
@@ -300,9 +304,9 @@ simtime_t PCAPNGReader::calculateSimTime(uint64_t timestamp, int8_t timeResoluti
     }
 
     double oldResolution = pow(base, (double)-timeResolution);
-    double newResolution = pow(10, -9);
+    double newResolution = pow(10, -9); // convertion target is ns
     double resolutionChangeFactor = newResolution / oldResolution;
-    timestampNano = timestamp * resolutionChangeFactor;
+    timestampNano = timestamp / resolutionChangeFactor;
 
     if (initialTimestampNano == 0) {
         initialTimestampNano = timestampNano;

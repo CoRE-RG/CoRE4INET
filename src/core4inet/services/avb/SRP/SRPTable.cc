@@ -75,9 +75,19 @@ SRPTable::ListenerEntry::ListenerEntry()
 
 SRPTable::ListenerEntry::ListenerEntry(uint64_t new_streamId, cModule *new_module, uint16_t new_vlan_id,
         simtime_t new_insertionTime, bool new_isStatic) :
-streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
+        streamId(new_streamId), module(new_module), vlan_id(new_vlan_id), insertionTime(
         new_insertionTime), isStatic(new_isStatic)
 {
+}
+
+SRPTable::ListenerEntry::ListenerEntry(const ListenerEntry& other) :
+        streamId(other.streamId), module(other.module), vlan_id(other.vlan_id), insertionTime(
+        other.insertionTime), isStatic(other.isStatic)
+{
+}
+
+cObject* SRPTable::ListenerEntry::dup() const {
+    return new ListenerEntry(*this);
 }
 
 SRPTable::ListenerEntry::~ListenerEntry()
@@ -424,7 +434,8 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
     llist[module]->streamId = streamId;
     llist[module]->module = module;
     llist[module]->vlan_id = vid;
-    llist[module]->insertionTime = simTime();llist[module]->isStatic = isStatic;
+    llist[module]->insertionTime = simTime();
+    llist[module]->isStatic = isStatic;
     if (!isStatic)
     {
         if (updated)
@@ -697,6 +708,35 @@ bool SRPTable::importFromXML(cXMLElement* xml) {
     return updated;
 }
 
+std::vector<SRPTable::ListenerEntry> SRPTable::getListenerEntries()
+{
+    vector<SRPTable::ListenerEntry> entries;
+    for (auto i = listenerTables.begin(); i != listenerTables.end(); ++i)
+    {
+        for (auto j = (*i).second.begin(); j != (*i).second.end(); ++j)
+        {
+            for (auto k = (*j).second.begin(); k != (*j).second.end(); ++k)
+            {
+                entries.push_back(*((*k).second));
+            }
+        }
+    }
+    return entries;
+}
+
+std::vector<SRPTable::TalkerEntry> SRPTable::getTalkerEntries()
+{
+    vector<SRPTable::TalkerEntry> entries;
+    for (auto i = talkerTables.begin(); i != talkerTables.end(); ++i)
+    {
+        for (auto j = (*i).second.begin(); j != (*i).second.end(); ++j)
+        {
+            entries.push_back(*((*j).second));
+        }
+    }
+    return entries;
+}
+
 void SRPTable::initialize()
 {
     WATCH(nextAging);
@@ -812,3 +852,4 @@ size_t SRPTable::getNumListenerEntries()
 }
 
 }
+

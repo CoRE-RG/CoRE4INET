@@ -24,6 +24,7 @@ package core4inet.buffer.avb;
 // @see AVBBuffer, Buffer,
 //
 // @author Philipp Meyer
+//
 simple AVBQueueBuffer extends AVBBuffer
 {
     parameters:
@@ -41,8 +42,10 @@ simple AVBQueueBuffer extends AVBBuffer
         //Statistic of the queue size of the buffer in bytes
         @statistic[size](title="Queue Size"; source=size; record=vector,stats; unit=B; interpolationmode=sample-hold);
         //Statistic of the amount of packets that were dropped due to buffer overflows
-        @statistic[dropped](title="Dropped frames"; source=dropped; unit=packets; record=sum);
+        @statistic[dropped](title="Dropped frames"; source=dropped; record=count; unit=packets);
 
         //Size of the buffer negative means infinite
         int size = default(-1);
+        //Dropping policy, Should the newest frame instead of the oldest frame be dropped when the buffer is full (see size parameter)
+        bool dropNew = default(false);
 }

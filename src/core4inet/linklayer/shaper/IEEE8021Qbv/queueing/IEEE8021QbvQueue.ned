@@ -30,4 +30,6 @@ simple IEEE8021QbvQueue extends BGQueueBuffer
         
         //Signal emitted when state changes
         @signal[NF_QBV_STATE_CHANGED](type=long);
+        //Statistic of the state
+        @statistic[state](title="State"; source=NF_QBV_STATE_CHANGED; record=vector; interpolationmode=sample-hold;);
 }

@@ -20,7 +20,7 @@ import core4inet.applications.base.ApplicationBase;
 //
 // Traffic source application used for pre-recorded traffic from pcap- and pcapng-files.
 //
-// @author Sandra Reider
+// @author Sandra Reider, Philipp Meyer
 //
 simple PCAPNGTrafficSourceApp extends ApplicationBase
 {
@@ -39,15 +39,15 @@ simple PCAPNGTrafficSourceApp extends ApplicationBase
         double startTime @unit(s) = default(0s);
         // name of pcapng-file
         string pcapngFilename = default("");
-        // destination MAC address
-        string destAddress = default("auto");
-        // destination MAC address
-        string filterDestAddress = default("auto");
-        // source MAC address
-        string filterSrcAddress = default("auto");
-        // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest)
-        int pcp = default(-1);
-        // VLAN ID (0=untagged, 4094=Highest)
+        // destination MAC address to overwrite
+        string destAddress = default("unspecified");
+        // destination MAC address to filter from file
+        string filterDestAddress = default("unspecified");
+        // source MAC address to filter from file
+        string filterSrcAddress = default("unspecified");
+        // IEEE 802.1q priority (0=None, 1=Lowest, 7=Highest) to overwrite
+        int pcp = default(0);
+        // VLAN ID (0=untagged, 4094=Highest) to overwrite
         int vid = default(0);
     
 }

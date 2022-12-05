@@ -35,7 +35,7 @@ namespace CoRE4INET {
  * @brief Class that reads ethernetIIframes from pcapng files.
  *
  * @ingroup Utilities
- * @author Sandra Reider
+ * @author Sandra Reider, Philipp Meyer
  */
 class PCAPNGReader {
 
@@ -74,6 +74,10 @@ private:
      * the number of interface blocks in the current section.
      */
     uint32_t interfaceCount;
+    /**
+     * the number of the current packet block.
+     */
+    uint64_t currentPackeBlockNo;
     /**
      * the time resolution of the interfaces in the current section.
      */
@@ -128,9 +132,10 @@ private:
 
     /**
      * creates an ethernet-frame from the packet block.
+     * @param packetBlockNo the number of the packet block.
      * @param packetBlock the block that contains an ethernet frame.
      */
-    void createEthernetIIFrame(unsigned char* packetBlock);
+    void createEthernetIIFrame(uint64_t packetBlockNo, unsigned char* packetBlock);
 
     /**
      * calculates the simulation time for a timestamp and resolution.

@@ -49,15 +49,24 @@ void IEEE8021QTrafficSourceApp::initialize()
 
 void IEEE8021QTrafficSourceApp::handleMessage(cMessage *msg)
 {
-
     if (msg->isSelfMessage())
     {
-        if (getEnvir()->isGUI())
-        {
-            getDisplayString().removeTag("i2");
+        if (isEnabled()) {
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().removeTag("i2");
+            }
+            sendMessage();
+            scheduleAt(simTime() + this->sendInterval, msg); //TODO: Use scheduler of the node to support its modeled inaccuracy
         }
-        sendMessage();
-        scheduleAt(simTime() + this->sendInterval, msg); //TODO: Use scheduler of the node to support its modeled inaccuracy
+        else
+        {
+            delete msg;
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
+        }
     }
     else
     {
@@ -94,7 +103,7 @@ void IEEE8021QTrafficSourceApp::handleParameterChange(const char* parname)
 
     if (!parname || !strcmp(parname, "sendInterval"))
     {
-        this->sendInterval = parameterDoubleCheckRange(par("sendInterval"), 0, SIMTIME_MAX.dbl(), true);
+        this->sendInterval = parameterDoubleCheckRange(par("sendInterval"), 0, SIMTIME_MAX.dbl());
     }
     if (!parname || !strcmp(parname, "destAddress"))
     {

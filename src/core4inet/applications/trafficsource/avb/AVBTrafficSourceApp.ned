@@ -49,6 +49,6 @@ simple AVBTrafficSourceApp extends TrafficSourceAppBase like ITimed
         string timer = default("^.scheduler.timer");
         //Predifined MulticastMAC as stream destination address. will be generated if "" empty string or "auto".
         string multicastMAC = default("auto");
-        // Is Static
-        bool isStatic = default(false);
+        // Is statically reserved, if true no talker advertise will be sent 
+        bool isStatic = default(false);   
 }

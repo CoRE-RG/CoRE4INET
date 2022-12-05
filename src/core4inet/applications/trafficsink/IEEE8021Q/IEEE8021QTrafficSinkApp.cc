@@ -35,25 +35,55 @@ void IEEE8021QTrafficSinkApp::initialize()
         getEnvir()->addResultRecorders(this, signalPk, ("rxQPcp" + std::to_string(i) + "Pk").c_str(), statisticTemplate);
         statisticTemplate = getProperties()->get("statisticTemplate", "rxQPcpBytes");
         getEnvir()->addResultRecorders(this, signalPk, ("rxQPcp" + std::to_string(i) + "Bytes").c_str(), statisticTemplate);
-
         this->rxQPcpPkSignals.push_back(signalPk);
+        simsignal_t signalPkAge = registerSignal(("rxQPcp" + std::to_string(i) + "PkAge").c_str());
+        statisticTemplate = getProperties()->get("statisticTemplate", "rxQPcpLatency");
+        getEnvir()->addResultRecorders(this, signalPkAge, ("rxQPcp" + std::to_string(i) + "Latency").c_str(), statisticTemplate);
+        this->rxQPcpPkAgeSignals.push_back(signalPkAge);
+        simsignal_t signalPkAgeInner = registerSignal(("rxQPcp" + std::to_string(i) + "PkAgeInner").c_str());
+        statisticTemplate = getProperties()->get("statisticTemplate", "rxQPcpLatencyInner");
+        getEnvir()->addResultRecorders(this, signalPkAgeInner, ("rxQPcp" + std::to_string(i) + "LatencyInner").c_str(), statisticTemplate);
+        this->rxQPcpPkAgeInnerSignals.push_back(signalPkAgeInner);
     }
 }
 
 void IEEE8021QTrafficSinkApp::handleMessage(cMessage *msg)
 {
-    if (EthernetIIFrameWithQTag *qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg)){
-        if (address.isUnspecified() || qframe->getSrc() == address){
+    if (EthernetIIFrameWithQTag *qframe = dynamic_cast<EthernetIIFrameWithQTag*>(msg))
+    {
+        if ((address.isUnspecified() || qframe->getSrc() == address) && qframe->getVID() == vid)
+        {
             int pcp = qframe->getPcp();
             emit(this->rxQPcpPkSignals[pcp], qframe);
+            emit(this->rxQPcpPkAgeSignals[pcp], qframe->getArrivalTime() - qframe->getCreationTime());
+            if(qframe->hasEncapsulatedPacket())
+            {
+                emit(this->rxQPcpPkAgeInnerSignals[pcp], simTime() - qframe->getEncapsulatedPacket()->getCreationTime());
+            }
+            else
+            {
+                emit(this->rxQPcpPkAgeInnerSignals[pcp], simTime() - qframe->getCreationTime());
+            }
+            BGTrafficSinkApp::handleMessage(msg);
+        }
+        else
+        {
+            delete msg;
         }
     }
-    BGTrafficSinkApp::handleMessage(msg);
+    else
+    {
+        delete msg;
+    }
 }
 
 void IEEE8021QTrafficSinkApp::handleParameterChange(const char* parname)
 {
     BGTrafficSinkApp::handleParameterChange(parname);
+    if (!parname || !strcmp(parname, "vid"))
+    {
+        this->vid = static_cast<uint16_t>(parameterULongCheckRange(par("vid"), 0, MAX_VLAN_NUMBER));
+    }
     if (!parname || !strcmp(parname, "numPCP"))
     {
         this->numPCP = static_cast<unsigned int>(parameterULongCheckRange(par("numPCP"), 1, std::numeric_limits<int>::max()));

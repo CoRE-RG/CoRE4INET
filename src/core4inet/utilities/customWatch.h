@@ -62,7 +62,7 @@ class cStdCollectionMapWatcherBase : public omnetpp::cStdVectorWatcherBase
             it2 = (*it).second.begin();
             while (index <= static_cast<size_t>(i))
             {
-                if (static_cast<size_t>(i) > (index + (*it).second.size()))
+                if (static_cast<size_t>(i) >= (index + (*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -128,7 +128,7 @@ class cStdCollectionUMapWatcherBase : public omnetpp::cStdVectorWatcherBase
             it2 = (*it).second.begin();
             while (index <= static_cast<size_t>(i))
             {
-                if (static_cast<size_t>(i) > (index + (*it).second.size()))
+                if (static_cast<size_t>(i) >= (index + (*it).second.size()))
                 {
                     index += (*it).second.size();
                     ++it;
@@ -426,7 +426,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
             it3 = (*this->it2).second.begin();
             while (static_cast<int>(index) <= i)
             {
-                if (i > (index + (*this->it2).second.size()))
+                if (i >= (index + (*this->it2).second.size()))
                 {
                     index += (*this->it2).second.size();
                     ++this->it2;
@@ -441,7 +441,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
                 {
                     for (int k = 0; k < (i - static_cast<int>(index)); k++)
                     {
-                        ++this->it2;
+                        ++this->it3;
                     }
                     return atIt3();
                 }
@@ -460,7 +460,7 @@ class cStdListMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, 
             out << this->atIt2();
             if (this->it3 != (*this->it2).second.end())
             {
-                out << this->it3->first << " ==> " << this->it3->second;
+                out << *(this->it3); //->first << " ==> " << this->it3->second;
             }
             else
             {

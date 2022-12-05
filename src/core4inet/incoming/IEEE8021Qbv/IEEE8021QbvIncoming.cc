@@ -47,7 +47,7 @@ void IEEE8021QbvIncoming::handleMessage(cMessage *msg)
                         for (std::list<cModule*>::const_iterator listener = listeners.begin(); listener != listeners.end();
                                 ++listener)
                         {
-                            if (strcmp((*listener)->getName(), "phy") == 0)
+                            if (strcmp((*listener)->getName(), par("portModule")) == 0)
                             {
                                 sendDirect(qframe->dup(), 0, getHardwareDelay(), (*listener)->gate("upperLayerDirectIn"));
                                 emit(rxPkSignal, qframe);

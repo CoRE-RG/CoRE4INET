@@ -24,7 +24,7 @@ namespace CoRE4INET {
 //==============================================================================
 
 IEEE8021QDestinationInfo::IEEE8021QDestinationInfo()
-  : destModules(),
+  : destGates(),
     vid(0),
     pcp(0)
 {

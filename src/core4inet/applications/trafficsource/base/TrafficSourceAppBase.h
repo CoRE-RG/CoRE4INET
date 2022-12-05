@@ -22,6 +22,7 @@
 namespace CoRE4INET {
 
 #define START_MSG_NAME "Start Message"
+#define STOP_MSG_NAME "Stop Message"
 
 /**
  * @brief Base class for a traffic generator application.
@@ -42,6 +43,18 @@ class TrafficSourceAppBase : public virtual ApplicationBase
          * Caches payload parameter
          */
         size_t payload;
+        /**
+         * Caches startTime parameter
+         */
+        simtime_t startTime;
+        /**
+         * Caches stopTime parameter
+         */
+        simtime_t stopTime;
+        /**
+         * Caches packetName parameter
+         */
+        const char *packetName = nullptr;
     public:
         /**
          * @brief Constructor of TrafficSourceAppBase

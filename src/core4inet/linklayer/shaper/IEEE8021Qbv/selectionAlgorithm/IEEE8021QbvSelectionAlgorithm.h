@@ -83,6 +83,9 @@ class IEEE8021QbvSelectionAlgorithm : public virtual cSimpleModule
      * @brief Change the state to CLOSED.
      */
     virtual void close();
+
+  private:
+    void changeState(State newState);
 };
 
 } //namespace

@@ -15,25 +15,25 @@
 
 package core4inet.linklayer.ethernet;
 
+import core4inet.linklayer.ethernet.base.ICoRE4INETEtherNic;
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper;
+
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 import inet.linklayer.contract.IEtherMAC;
-
-import inet.linklayer.contract.INic;
-
 
 //
 // Module for a TTE AVB BE Ethernet NIC
 // Contains handler for TT, AVB, RC and BE Messages using IEEE 802.1Q.
 //
-// @todo Kommentar
+// Changes: This module now implements the ICoRE4INETEtherNic module interface.
+// 			Therefore, the inout gate ethg was renamed to phys.
 //
 // @see SRPEtherEncap, TTEAVBPHYPort, Sync, Scheduler
 //
-// @author Kai-Uwe von Deylen, Till Steinbach
-module TTEAVB8021QEtherNic like INic
+// @author Kai-Uwe von Deylen, Till Steinbach, Timo Haeckel
+module TTEAVB8021QEtherNic like ICoRE4INETEtherNic
 {
     parameters:
         @display("i=block/ifcard");
@@ -44,7 +44,7 @@ module TTEAVB8021QEtherNic like INic
     gates:
 
         // Connection to the physical ethernet gate
-        inout ethg;
+        inout phys; // renamed from ethg
 
         // best effort input from upper layer 
         input upperLayerIn;
@@ -105,7 +105,7 @@ module TTEAVB8021QEtherNic like INic
 
     connections:
 
-        mac.phys <--> ethg;
+        mac.phys <--> phys;
 
         mac.upperLayerIn <-- shaper.out;
         mac.upperLayerOut --> inControl.in;

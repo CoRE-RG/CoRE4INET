@@ -31,6 +31,7 @@ import core4inet.utilities.classes.IScheduled;
 // @see ~TTDoubleBuffer, ~TTQueueBuffer, ~Buffer, ~SchedulerActionTimeEvent, ~TTEScheduler
 //
 // @author Till Steinbach
+//
 simple TTBuffer extends CTBuffer like IScheduled
 {
     parameters:
