@@ -24,7 +24,9 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Class for delaying network traffic at IEEE 802.1Qbv queueing level
+ *
+ * @author Philipp Meyer
  */
 class CorruptIEEE8021QbvQueueingTiming : public virtual CorruptIEEE8021QbvQueueingBase
 {

@@ -24,7 +24,9 @@ using namespace omnetpp;
 namespace CoRE4INET {
 
 /**
- * TODO - Generated class
+ * @brief Class for manipulation of network traffic at IEEE 802.1Qbv traffic selection level
+ *
+ * @author Philipp Meyer
  */
 class CorruptIEEE8021QbvSelectionManipulation : public virtual CorruptIEEE8021QbvSelectionBase
 {

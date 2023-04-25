@@ -18,7 +18,9 @@ package core4inet.linklayer.corruption.ieee8021qbv.selection;
 import core4inet.linklayer.corruption.ieee8021qbv.selection.CorruptIEEE8021QbvSelectionBase;
 
 //
-// TODO auto-generated module
+// Module for the reordering of network traffic at IEEE 802.1Qbv traffic selection level
+//
+// @author Philipp Meyer
 //
 simple CorruptIEEE8021QbvSelectionReordering extends CorruptIEEE8021QbvSelectionBase
 {

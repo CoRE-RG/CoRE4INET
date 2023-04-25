@@ -18,7 +18,9 @@ package core4inet.linklayer.corruption.ieee8021qbv.queueing;
 import core4inet.linklayer.shaper.IEEE8021Qbv.queueing.IEEE8021QbvQueueing;
 
 //
-// TODO auto-generated module
+// Base module for the corruption of network traffic at IEEE 802.1Qbv queueing level
+//
+// @author Philipp Meyer
 //
 simple CorruptIEEE8021QbvQueueingBase extends IEEE8021QbvQueueing
 {
