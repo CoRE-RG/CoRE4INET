@@ -36,6 +36,8 @@ simple CreditBasedShaper extends IEEE8021QbvSelectionAlgorithm
         string oscillator = default("^.^.^.scheduler.oscillator");
         // Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.^.^.scheduler.timer");
+        // Path to the srpTable
+        string srpTable = default("^.^.^.srpTable");
         
      gates:
          //Input gate for the incoming SchedulerActionTimeEvent messages

@@ -24,6 +24,7 @@ package core4inet.buffer.AS6802;
 // @see TTBuffer, Buffer,
 //
 // @author Till Steinbach
+//
 simple TTDoubleBuffer extends TTBuffer
 {
     //TTDoubleBuffer is implemented by the TTDoubleBuffer C++ Class

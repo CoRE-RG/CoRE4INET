@@ -27,6 +27,7 @@ import core4inet.buffer.base.Buffer;
 // @see Buffer
 //
 // @author Till Steinbach
+//
 simple CTBuffer extends Buffer
 {
     parameters:

@@ -34,7 +34,7 @@ namespace CoRE4INET {
  */
 class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
 {
-    private:
+    protected:
         /**
          * @brief caches sendInterval parameter
          */
@@ -59,6 +59,11 @@ class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
          */
         unsigned int numPCP;
 
+        /**
+         * @brief Signals that are emitted when a frame is send.
+         */
+        std::vector<simsignal_t> txQPcpPkSignals;
+
     public:
         /**
          * @brief Constructor of IEEE8021QTrafficSourceApp
@@ -66,10 +71,6 @@ class IEEE8021QTrafficSourceApp : public virtual TrafficSourceAppBase
         IEEE8021QTrafficSourceApp();
 
     protected:
-        /**
-         * @brief Signals that are emitted when a frame is send.
-         */
-        std::vector<simsignal_t> txQPcpPkSignals;
 
         /**
          * @brief Initialization of the module. Sends activator message

@@ -21,6 +21,7 @@ import inet.networklayer.configurator.ipv4.IPv4NodeConfigurator;
 import inet.networklayer.ipv4.ErrorHandling;
 import inet.networklayer.ipv4.ICMP;
 import inet.networklayer.ipv4.IIGMP;
+import inet.networklayer.contract.INetworkLayer;
 import core4inet.networklayer.inet.IPv4oRE;
 
 
@@ -33,9 +34,7 @@ import core4inet.networklayer.inet.IPv4oRE;
 //
 // This Module is mainly cloned from the inet.nodes.inet.NetworkLayer module
 //
-// @author Kai-Uwe von Deylen, Philipp Meyer
-//
-module RTNetworkLayer
+module RTNetworkLayer like INetworkLayer
 {
     parameters:
         @display("i=block/fork");

@@ -25,6 +25,7 @@ import inet.common.queue.IOutputQueue;
 // @see Buffer
 //
 // @author Till Steinbach
+//
 moduleinterface IBuffer extends IOutputQueue
 {
     parameters:

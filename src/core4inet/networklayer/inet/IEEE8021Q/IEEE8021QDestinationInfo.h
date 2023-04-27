@@ -22,9 +22,12 @@
 
 //==============================================================================
 
-#include "core4inet/buffer/base/BGBuffer.h"
+#include "inet/linklayer/common/MACAddress.h"
+#include <list>
 
 //==============================================================================
+
+using namespace omnetpp;
 
 namespace CoRE4INET {
 
@@ -58,17 +61,17 @@ class IEEE8021QDestinationInfo : public DestinationInfo
         {
             this->pcp = new_pcp;
         }
-        std::list<BGBuffer*>& getDestModules()
+        std::list<cGate*>& getDestGates()
         {
-            return destModules;
+            return destGates;
         }
-        void setDestModules(std::list<BGBuffer*>& new_destModules)
+        void setDestGates(std::list<cGate*>& new_destModules)
         {
-            this->destModules = new_destModules;
+            this->destGates = new_destModules;
         }
 
     private:
-        std::list<BGBuffer*> destModules;
+        std::list<cGate*> destGates;
         uint16_t vid;
         uint8_t pcp;
         inet::MACAddress  *destMAC;

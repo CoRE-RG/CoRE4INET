@@ -24,6 +24,7 @@ package core4inet.buffer.AS6802;
 // @see RCBuffer, Buffer,
 //
 // @author Till Steinbach
+//
 simple RCDoubleBuffer extends RCBuffer
 {
     //RCDoubleBuffer is implemented by the RCDoubleBuffer C++ Class

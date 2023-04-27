@@ -17,10 +17,9 @@
 
 
 //Std
-#include <map>
 #include <unordered_map>
-//INET
-#include "inet/linklayer/common/MACAddress.h"
+#include <vector>
+
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/avb/AVBDefs.h"
@@ -88,6 +87,13 @@ class SRPTable : public virtual cSimpleModule
                 ListenerEntry();
                 ListenerEntry(uint64_t new_streamId, cModule *new_module, uint16_t new_vlan_id,
                         simtime_t new_insertionTime, bool new_isStatic = false);
+                ListenerEntry(const ListenerEntry& other);
+
+                /**
+                 * Creating a deep copy by using the copy constructor.
+                 * @return A duplicate of the original.
+                 */
+                virtual cObject* dup() const override;
                 virtual ~ListenerEntry();
 
         };
@@ -262,6 +268,18 @@ class SRPTable : public virtual cSimpleModule
          * The root element needs to be <srpTable>
          */
         bool importFromXML(cXMLElement* xml);
+
+        /**
+         * @brief collects all ListenerEntries
+         * @return get's a copy of all ListenerEntries
+         */
+        std::vector<ListenerEntry> getListenerEntries();
+
+        /**
+         * @brief collects all TalkerEntries
+         * @return get's a copy of all TalkerEntries
+         */
+        std::vector<TalkerEntry> getTalkerEntries();
 
     protected:
         /**

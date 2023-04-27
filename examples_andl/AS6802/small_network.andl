@@ -1,11 +1,17 @@
-network smallNetworkTTE {
+types std {
+	ethernetLink ETH_100MBIT {
+		bandwidth 100Mb/s;
+	}
+}
+
+
+network small_network {
 	devices {
 		node node1;
 		node node2;
 		node node3;
 		switch switch1;
 	}
-
 
 	connections {
 		segment default {
@@ -14,7 +20,6 @@ network smallNetworkTTE {
 			node3 <--> { new std.ETH_100MBIT } <--> switch1;
 		}
 	}
-
 
 	communication {
 		message vl_100 {

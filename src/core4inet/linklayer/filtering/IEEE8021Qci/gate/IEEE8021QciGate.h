@@ -47,6 +47,10 @@ class IEEE8021QciGate : public virtual cSimpleModule
 
   protected:
     /**
+     * @brief Variable for counting the number of passed frames
+     */
+    unsigned long numFramesPassed = 0;
+    /**
      * @brief Variable for counting the number of dropped frames
      */
     unsigned long numFramesDropped = 0;
@@ -56,6 +60,10 @@ class IEEE8021QciGate : public virtual cSimpleModule
      * @brief Current state of the IEEE8021QciGate.
      */
     State state;
+    /**
+     * @brief Signal emitted when a frame passed the gate
+     */
+    static simsignal_t framePassedSignal;
     /**
      * @brief Signal emitted when frame is dropped by the gate
      */

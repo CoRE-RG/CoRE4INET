@@ -65,6 +65,10 @@ public:
 
     void setVlanId(uint16_t new_vlanId) { this->vlanId = new_vlanId; }
 
+    uint8_t getPcp() const { return pcp; }
+
+    void setPcp(uint8_t pcp) { this->pcp = pcp; }
+
 private:
     AVBIncoming *destModule;
     inet::MACAddress  *destMAC;
@@ -73,6 +77,7 @@ private:
     uint32_t    frameSize;
     uint16_t    intervallFrames;
     uint16_t    vlanId;
+    uint8_t     pcp;
 
 
 };

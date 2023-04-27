@@ -57,33 +57,44 @@ void RCBurstTrafficSourceApp::handleMessage(cMessage *msg)
     }
     else if (msg->arrivedOn("schedulerIn"))
     {
-        if (framesBurstedCnt < static_cast<unsigned int>(par("nrOfFramesInOneBurst")))
+        if (isEnabled())
         {
-            getDisplayString().removeTag("i2");
-            sendMessage();
-            framesBurstedCnt++;
-
-            if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))
+            if (framesBurstedCnt < static_cast<unsigned int>(par("nrOfFramesInOneBurst")))
             {
-                event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
-                getTimer()->registerEvent(event);
+                getDisplayString().removeTag("i2");
+                sendMessage();
+                framesBurstedCnt++;
+
+                if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))
+                {
+                    event->setTimer(static_cast<uint64_t>(this->interval / getOscillator()->getPreciseTick()));
+                    getTimer()->registerEvent(event);
+                }
+                else
+                {
+                    throw cRuntimeError("Message on schedulerIn is of wrong type");
+                }
             }
             else
             {
-                throw cRuntimeError("Message on schedulerIn is of wrong type");
+                if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))
+                {
+                    event->setTimer(static_cast<uint64_t>(this->burstInterval / getOscillator()->getPreciseTick()));
+                    getTimer()->registerEvent(event);
+                    framesBurstedCnt = 0;
+                }
+                else
+                {
+                    throw cRuntimeError("Message on schedulerIn is of wrong type");
+                }
             }
         }
         else
         {
-            if (SchedulerTimerEvent *event = dynamic_cast<SchedulerTimerEvent *>(msg))
+            delete msg;
+            if (getEnvir()->isGUI())
             {
-                event->setTimer(static_cast<uint64_t>(this->burstInterval / getOscillator()->getPreciseTick()));
-                getTimer()->registerEvent(event);
-                framesBurstedCnt = 0;
-            }
-            else
-            {
-                throw cRuntimeError("Message on schedulerIn is of wrong type");
+                getDisplayString().setTagArg("i2", 0, "status/stop");
             }
         }
     }

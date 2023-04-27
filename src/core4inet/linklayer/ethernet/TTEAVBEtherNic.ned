@@ -15,24 +15,25 @@
 
 package core4inet.linklayer.ethernet;
 
+import core4inet.linklayer.ethernet.base.ICoRE4INETEtherNic;
 import core4inet.linklayer.ethernet.avb.SRPEtherEncap;
 import core4inet.linklayer.inControl.CT_AVB_BE_InControl;
 import core4inet.linklayer.shaper.TT_AVBClassA_AVBClassB_PCF_RC_BE_Shaper;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
-import inet.linklayer.contract.INic;
 
 //
 // Module for a TTE AVB BE Ethernet NIC
 // Contains handler for TT, AVB, RC and BE Messages.
 //
-// @todo Kommentar
+// Changes: This module now implements the ICoRE4INETEtherNic module interface.
+// 			Therefore, the inout gate ethg was renamed to phys.
 //
 // @see ~INic, ~SRPEtherEncap, ~TTEAVBPHYPort, ~Sync, ~Scheduler
 //
-// @author Kai-Uwe von Deylen
+// @author Kai-Uwe von Deylen, Timo Haeckel
 //
-module TTEAVBEtherNic like INic
+module TTEAVBEtherNic like ICoRE4INETEtherNic
 {
     parameters:
         @display("i=block/ifcard");
@@ -45,7 +46,7 @@ module TTEAVBEtherNic like INic
         
     gates:
         // Connection to the physical ethernet gate
-        inout ethg;
+        inout phys; // renamed from ethg
         // best effort input from upper layer 
         input upperLayerIn;
         // best effort output to upper layer
@@ -93,7 +94,7 @@ module TTEAVBEtherNic like INic
         }
 
     connections:
-        mac.phys <--> ethg;
+        mac.phys <--> phys;
 
         mac.upperLayerIn <-- shaper.out;
         mac.upperLayerOut --> inControl.in;

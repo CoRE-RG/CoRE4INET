@@ -67,17 +67,22 @@ void IEEE8021QbvSelectionAlgorithm::refreshDisplay() const
 
 void IEEE8021QbvSelectionAlgorithm::open()
 {
-    State oldState = this->state;
-    this->state = this->State::OPEN;
-    if (this->state != oldState)
-    {
-        emit(NF_QBV_STATE_CHANGED, this->state);
-    }
+    this->changeState(this->State::OPEN);
 }
 
 void IEEE8021QbvSelectionAlgorithm::close()
 {
-    this->state = this->State::CLOSED;
+    this->changeState(this->State::CLOSED);
+}
+
+void IEEE8021QbvSelectionAlgorithm::changeState(State newState)
+{
+    State oldState = this->state;
+    this->state = newState;
+    if (this->state != oldState)
+    {
+        emit(NF_QBV_STATE_CHANGED, this->state);
+    }
 }
 
 } //namespace

@@ -108,13 +108,17 @@ class IEEE8021QbvGateControlList : public virtual Scheduled
     /**
      * @brief Propagate the gate states of the current control element.
      */
-    virtual void propagteGateControlElement(vector<string> gateStates);
+    virtual void propagateGateControlElement(vector<string> gateStates);
 
   private:
     /**
      * @brief Schedule the next SchedulerTimerEvent message.
      */
     void scheduleCurrentGateControlElementTime(bool nextCycle);
+    /**
+     * @brief Switch to the first control element of the control list.
+     */
+    void switchToFirstGateControlElement();
     /**
      * @brief Switch to next control element of the control list.
      */

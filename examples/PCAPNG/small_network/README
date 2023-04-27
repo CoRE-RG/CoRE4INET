@@ -1,0 +1,8 @@
+Demonstrates a small IEEE 802.1Q Network. Traffic generators send Ethernet frames directly.
+
+- The small network contains three hosts (node1, node2, node3) and a switch, which 
+  connects these hosts.
+  
+- node1 sends Q traffic in vlan 0 with pcp 0 to node3.
+
+- node2 sends BE traffic to node3, that is read from the examples.pcapng file.

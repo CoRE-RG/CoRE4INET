@@ -29,7 +29,7 @@ import inet.networklayer.common.InterfaceTable;
 //
 // @see ~NodeStatus, ~IMACRelayUnit, ~IMACAddressTable, ~InterfaceTable, ~IEEE8021QPHYPort, ~ISync, ~ITTEScheduler, ~CheckedBuffer
 //
-// @author Till Steinbach, Philipp Meyerr 
+// @author Till Steinbach, Philipp Meyer 
 //
 module IEEE8021QEtherSwitch
 {

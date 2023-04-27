@@ -49,3 +49,6 @@ src/core4inet/features.h
 
 # apple files
 .DS_Store
+
+#ignore VSCODE files
+.vscode*

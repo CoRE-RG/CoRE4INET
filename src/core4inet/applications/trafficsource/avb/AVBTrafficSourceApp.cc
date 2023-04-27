@@ -99,9 +99,18 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
 
     if (msg->arrivedOn("schedulerIn"))
     {
-        if (isStreaming)
+        if (isStreaming && this->isEnabled())
         {
             sendAVBFrame();
+        }
+        else
+        {
+            // todo implement stop mechanism
+            delete msg;
+            if (getEnvir()->isGUI())
+            {
+                getDisplayString().setTagArg("i2", 0, "status/stop");
+            }
         }
     }
     delete msg;
@@ -134,8 +143,7 @@ void AVBTrafficSourceApp::sendAVBFrame()
 void AVBTrafficSourceApp::scheduleInterval()
 {
     //class measurement interval A=125us B=250us
-    simtime_t tick =
-            check_and_cast<Oscillator*>(findModuleWhereverInNode("oscillator", getParentModule()))->getPreciseTick();
+    simtime_t tick = getOscillator()->getPreciseTick();
     simtime_t interval = (getIntervalForClass(srClass) / getIntervalFrames()) + par("intervalInaccurracy").doubleValue();
     if (interval < 0)
         interval = 0;
@@ -164,11 +172,13 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))  cComponent *src
                 bubble("Listener registered, start streaming!");
                 getDisplayString().setTagArg("i2", 0, "status/active");
             }
-            isStreaming = true;
-            SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
-            event->setTimer(0);
-            event->setDestinationGate(gate("schedulerIn"));
-            getTimer()->registerEvent(event);
+            if(!isStreaming){
+                isStreaming = true;
+                SchedulerTimerEvent *event = new SchedulerTimerEvent("API Scheduler Task Event", TIMER_EVENT);
+                event->setTimer(0);
+                event->setDestinationGate(gate("schedulerIn"));
+                getTimer()->registerEvent(event);
+            }
         }
     }
     else if (id == NF_AVB_LISTENER_REGISTRATION_TIMEOUT || id == NF_AVB_LISTENER_UNREGISTERED)
@@ -178,9 +188,9 @@ void AVBTrafficSourceApp::receiveSignal(__attribute__((unused))  cComponent *src
         //If talker for the desired stream, unregister Listener
         if (lentry && lentry->streamId == streamID && lentry->vlan_id == vlan_id)
         {
-            //check whether there are listeners left
+            //check whether we have stopped or if there are no listeners left
             SRPTable *srpTable = check_and_cast<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
-            if (srpTable->getListenersForStreamId(streamID, vlan_id).size() == 0)
+            if (!isEnabled() || srpTable->getListenersForStreamId(streamID, vlan_id).size() == 0)
             {
                 isStreaming = false;
                 if (getEnvir()->isGUI())

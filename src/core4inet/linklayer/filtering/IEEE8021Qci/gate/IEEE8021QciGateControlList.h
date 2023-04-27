@@ -46,7 +46,7 @@ class IEEE8021QciGateControlList : public virtual IEEE8021QbvGateControlList
     /**
      * @brief Propagate the gate states of the current control element.
      */
-    virtual void propagteGateControlElement(vector<string> gateStates);
+    virtual void propagateGateControlElement(vector<string> gateStates);
 };
 
 } //namespace

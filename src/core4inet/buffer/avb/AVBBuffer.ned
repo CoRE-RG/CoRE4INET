@@ -26,6 +26,7 @@ import core4inet.buffer.base.Buffer;
 // @see AVBQueueBuffer, Buffer, SchedulerActionTimeEvent, Scheduler
 //
 // @author Philipp Meyer
+//
 simple AVBBuffer extends Buffer like ITimed
 {
     parameters:

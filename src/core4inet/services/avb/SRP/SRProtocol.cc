@@ -17,15 +17,15 @@
 
 //Std
 #include <algorithm>
+#include <iostream>
+#include <string.h>
 //CoRE4INET
+#include "core4inet/utilities/ModuleAccess.h"
 #include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/linklayer/contract/ExtendedIeee802Ctrl_m.h"
 #include "core4inet/base/NotifierConsts.h"
 //Auto-generated Messages
 #include "core4inet/linklayer/ethernet/avb/SRPFrame_m.h"
-
-//INET
-#include "inet/common/ModuleAccess.h"
 
 namespace CoRE4INET {
 
@@ -42,6 +42,26 @@ void SRProtocol::initialize()
     {
         throw cRuntimeError("srpTable module required for stream reservation");
     }
+
+    //this part is optional
+    if(!this->gate("in")->isConnected() && !this->gate("out")->isConnected())
+    {
+        if(strcmp(par("srpEncap"),"") !=0)
+        {
+            if(cModule* interface = dynamic_cast<cModule*> (getModuleByPath(par("srpEncap"))))
+            {
+                this->gate("out")->connectTo(interface->gate("srpIn"));
+                interface->gate("srpOut")->connectTo(this->gate("in"));
+            }else
+            {
+                throw cRuntimeError("could not get interface module");
+            }
+        }else
+        {
+            throw cRuntimeError("could not find path to interface module in param <srcEncap>");
+        }
+    }
+
     srpTable->subscribe(NF_AVB_TALKER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_REGISTERED, this);
     srpTable->subscribe(NF_AVB_LISTENER_UPDATED, this);
@@ -78,7 +98,7 @@ void SRProtocol::handleMessage(cMessage *msg)
         else
         {
             int arrivedOn = etherctrl->getSwitchPort();
-            cModule *port = getParentModule()->getSubmodule("phy", arrivedOn);
+            cModule *port = getParentModule()->getSubmodule(par("portModule").stringValue(), arrivedOn);
 
             if (TalkerAdvertise* talkerAdvertise = dynamic_cast<TalkerAdvertise*>(msg))
             {
@@ -114,11 +134,11 @@ void SRProtocol::handleMessage(cMessage *msg)
 
                 unsigned long utilizedBandwidth = srpTable->getBandwidthForModule(port);
                 //Add Higher Priority Bandwidth
-                utilizedBandwidth += static_cast<unsigned long>(port->getSubmodule("shaper")->par("AVBHigherPriorityBandwidth"));
+                utilizedBandwidth += static_cast<unsigned long>(findModuleWherever("shaper", port)->par("AVBHigherPriorityBandwidth"));
                 unsigned long requiredBandwidth = srpTable->getBandwidthForStream(listenerReady->getStreamID(),
                         listenerReady->getVlan_identifier());
 
-                cGate *physOutGate = port->getSubmodule("mac")->gate("phys$o");
+                cGate *physOutGate = findModuleWherever("mac", port)->gate("phys$o");
                 cChannel *outChannel = physOutGate->findTransmissionChannel();
 
                 unsigned long totalBandwidth = static_cast<unsigned long>(outChannel->getNominalDatarate());
@@ -174,7 +194,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                     new_etherctrl->setDest(SRP_ADDRESS);
                     cModule* talker = srpTable->getTalkerForStreamId(listenerReady->getStreamID(),
                             listenerReady->getVlan_identifier());
-                    if (talker && talker->isName("phy"))
+                    if (talker && talker->isName(par("portModule").stringValue()))
                     {
                         new_etherctrl->setSwitchPort(talker->getIndex());
                         srp->setControlInfo(new_etherctrl);
@@ -190,7 +210,7 @@ void SRProtocol::handleMessage(cMessage *msg)
                 new_etherctrl->setDest(SRP_ADDRESS);
                 cModule* talker = srpTable->getTalkerForStreamId(listenerFailed->getStreamID(),
                         listenerFailed->getVlan_identifier());
-                if (talker && talker->isName("phy"))
+                if (talker && talker->isName(par("portModule").stringValue()))
                 {
                     new_etherctrl->setSwitchPort(talker->getIndex());
                     //Necessary because controlInfo is not duplicated
@@ -207,8 +227,8 @@ void SRProtocol::handleMessage(cMessage *msg)
 
 void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __attribute__((unused)) cObject *details)
 {
-    Enter_Method_Silent
-    ();
+    Enter_Method_Silent();
+    std::string log_msg = "log:\n";
     if (id == NF_AVB_TALKER_REGISTERED)
     {
         if (SRPTable::TalkerEntry *tentry = dynamic_cast<SRPTable::TalkerEntry*>(obj))
@@ -230,7 +250,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
             etherctrl->setSwitchPort(SWITCH_PORT_BROADCAST);
             talkerAdvertise->setControlInfo(etherctrl);
             // If talker was received from phy we have to exclude the incoming port
-            if (strcmp(tentry->module->getName(), "phy") == 0)
+            if (strcmp(tentry->module->getName(), par("portModule").stringValue()) == 0)
             {
                 etherctrl->setNotSwitchPort(tentry->module->getIndex());
             }
@@ -244,9 +264,9 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
     }
     else if (id == NF_AVB_LISTENER_REGISTERED || id == NF_AVB_LISTENER_UPDATED)
     {
+        log_msg.append("stage_1\n");
         if (SRPTable::ListenerEntry *lentry = dynamic_cast<SRPTable::ListenerEntry*>(obj))
         {
-
             //Get Talker Port
             SRPTable *signal_srpTable = dynamic_cast<SRPTable *>(src);
             if (!signal_srpTable)
@@ -255,8 +275,9 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
                         "listenerRegistered or listenerUpdated signal received, from module that is not a SRPTable");
             }
             cModule* talker = signal_srpTable->getTalkerForStreamId(lentry->streamId, lentry->vlan_id);
+            log_msg.append("stage_2\n");
             //Send listener ready only when talker is not a local application
-            if (talker && talker->isName("phy"))
+            if (talker && talker->isName(par("portModule").stringValue()))
             {
                 ListenerReady *listenerReady = new ListenerReady("Listener Ready", inet::IEEE802CTRL_DATA);
                 listenerReady->setStreamID(lentry->streamId);
@@ -269,6 +290,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
                 listenerReady->setControlInfo(etherctrl);
 
                 send(listenerReady, gate("out"));
+                log_msg.append("stage_3\n");
             }
         }
         else
@@ -276,6 +298,12 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
             throw cRuntimeError("Received signal with wrong object type");
         }
 
+    }
+    if(!this->getFullPath().compare("small_network.node3.srpProtocol")){
+        std::cout<<this->getFullPath()<<std::endl;
+        std::cout<<"NF_AVB_LISTENER_REGISTERED == "<<NF_AVB_LISTENER_REGISTERED<<"\t"<<"NF_AVB_LISTENER_UPDATED == "<<NF_AVB_LISTENER_UPDATED<<std::endl;
+        std::cout<<"ID == "<<id<<std::endl;
+        std::cout<<log_msg<<std::endl;
     }
 }
 

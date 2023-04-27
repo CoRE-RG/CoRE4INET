@@ -27,4 +27,6 @@ simple IEEE8021QbvIncoming extends Incoming
     	@display("i=block/arrival,blue");
     	//SRP Table module, default name is srpTable
         string srpTable = default("^.srpTable");
+        //Path to port modules
+        string portModule = default("phy");        
 }
