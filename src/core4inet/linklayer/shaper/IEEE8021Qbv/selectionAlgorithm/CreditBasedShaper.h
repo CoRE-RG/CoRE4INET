@@ -73,6 +73,10 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      */
     unsigned int portBandwidth;
     /**
+     * The reserved bandwidth of the CBS set in the idle slope parameter.
+     */
+    unsigned long reservedBandwidth;
+    /**
      * @brief Stream Reservation Class of the Shaper.
      */
     SR_CLASS srClass;

@@ -15,10 +15,10 @@
 
 #include "CreditBasedShaper.h"
 
-//INET
-#include "inet/linklayer/ethernet/Ethernet.h"
+#include "core4inet/utilities/ConfigFunctions.h"
 
 //INET
+#include "inet/linklayer/ethernet/Ethernet.h"
 #include "inet/common/ModuleAccess.h"
 
 namespace CoRE4INET {
@@ -46,17 +46,18 @@ bool CreditBasedShaper::isOpen()
 
 void CreditBasedShaper::initialize()
 {
+    this->outChannel = this->getParentModule()->getParentModule()->getSubmodule("mac")->gate("phys$o")->findTransmissionChannel();
+    this->portBandwidth = static_cast<unsigned int>(ceil(this->outChannel->getNominalDatarate()));
     IEEE8021QbvSelectionAlgorithm::initialize();
     Timed::initialize();
     this->handleParameterChange(nullptr);
     this->getParentModule()->getSubmodule("queue", this->getIndex())->subscribe("size", this);
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
-    this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);
-    this->outChannel = this->getParentModule()->getParentModule()->getSubmodule("mac")->gate("phys$o")->findTransmissionChannel();
-    this->portBandwidth = static_cast<unsigned int>(ceil(outChannel->getNominalDatarate()));
+    this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, this->par("useSRTable").boolValue());
     WATCH(this->credit);
     WATCH(this->queueSize);
     WATCH(this->portBandwidth);
+    WATCH(this->reservedBandwidth);
 }
 
 void CreditBasedShaper::handleParameterChange(const char* parname)
@@ -79,6 +80,12 @@ void CreditBasedShaper::handleParameterChange(const char* parname)
                     par("srClass").stringValue());
         }
     }
+    if(!parname || !strcmp(parname, "staticIdleSlope")) {
+        if (!this->par("useSRTable").boolValue()) {
+            this->reservedBandwidth = static_cast<unsigned long>(parameterULongCheckRange(this->par("staticIdleSlope"), 0, this->portBandwidth));
+        }       
+    }
+
 }
 
 void CreditBasedShaper::handleMessage(cMessage *msg)
@@ -129,7 +136,9 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
 {
     this->newTime = this->getCurrentTime();
     simtime_t duration = this->newTime - this->oldTime;
-    unsigned long reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+    if(this->par("useSRTable").boolValue()) {
+        this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+    }     
     if (reservedBandwidth > 0)
     {
         if (duration > 0)
@@ -162,7 +171,9 @@ void CreditBasedShaper::sendSlope(simtime_t duration)
 {
     if (duration > 0)
     {
-        unsigned long reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+        if(this->par("useSRTable").boolValue()) {
+            this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+        } 
         credit -= static_cast<int>(ceil(static_cast<double>(this->portBandwidth - reservedBandwidth) * duration.dbl()));
         this->oldTime = this->getCurrentTime() + duration;
         this->refreshState();
