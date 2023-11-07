@@ -104,6 +104,12 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      * @return true if state is open
      */
     virtual bool isOpen() override;
+    /**
+     * @brief Set the idle slope (reserved bandwidth) of this cbs to a specific value.
+     * @note this will override reservations in the SRTable
+     * @param bandwidth
+     */
+    virtual void setIdleSlope(unsigned long bandwidth);
 
   protected:
     virtual void initialize() override;

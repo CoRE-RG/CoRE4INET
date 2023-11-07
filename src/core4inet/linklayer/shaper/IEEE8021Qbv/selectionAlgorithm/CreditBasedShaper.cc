@@ -88,6 +88,11 @@ void CreditBasedShaper::handleParameterChange(const char* parname)
 
 }
 
+void CreditBasedShaper::setIdleSlope(unsigned long bandwidth) {
+    this->reservedBandwidth = static_cast<unsigned long>(parameterULongCheckRange(bandwidth, 0, this->portBandwidth));
+    this->par("useSRTable").setBoolValue(false);
+}
+
 void CreditBasedShaper::handleMessage(cMessage *msg)
 {
     if (msg->arrivedOn("schedulerIn"))
