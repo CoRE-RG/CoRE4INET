@@ -89,7 +89,10 @@ void CreditBasedShaper::handleParameterChange(const char* parname)
 }
 
 void CreditBasedShaper::setIdleSlope(unsigned long bandwidth) {
-    this->reservedBandwidth = static_cast<unsigned long>(parameterULongCheckRange(bandwidth, 0, this->portBandwidth));
+    if(bandwidth >= this->portBandwidth) {
+        throw cRuntimeError("Bandwidth to reserve is larger than the available port bandwidth");
+    }
+    this->reservedBandwidth = bandwidth;
     this->par("useSRTable").setBoolValue(false);
 }
 
