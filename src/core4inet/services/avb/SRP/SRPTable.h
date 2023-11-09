@@ -209,6 +209,14 @@ class SRPTable : public virtual cSimpleModule
          */
         virtual unsigned long getBandwidthForModuleAndSRClass(const cModule *module, SR_CLASS srClass);
         /**
+         * @brief Retrieve the required bandwidth for a module with registered listeners per SR-Class
+         *
+         * @param module the module registered as listener
+         * @param pcp the vlan pcp
+         * @return bandwidth in bps
+         */
+        virtual unsigned long getBandwidthForModuleAndPcp(const cModule *module, uint8_t pcp);
+        /**
          * @brief Retrieve the required bandwidth for a stream
          *
          * @param streamId the streams id

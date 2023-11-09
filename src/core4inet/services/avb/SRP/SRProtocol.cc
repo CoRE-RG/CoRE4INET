@@ -242,7 +242,7 @@ void SRProtocol::receiveSignal(cComponent *src, simsignal_t id, cObject *obj, __
             talkerAdvertise->setVlan_identifier(tentry->vlan_id);
             if (tentry->srClass == SR_CLASS::A)
                talkerAdvertise->setPriorityAndRank(this->priortyAndRankSRClassA);
-           if (tentry->srClass == SR_CLASS::B)
+            if (tentry->srClass == SR_CLASS::B)
                talkerAdvertise->setPriorityAndRank(this->priortyAndRankSRClassB);
             ExtendedIeee802Ctrl *etherctrl = new ExtendedIeee802Ctrl();
             etherctrl->setEtherType(MSRP_ETHERTYPE);

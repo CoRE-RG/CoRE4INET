@@ -30,8 +30,6 @@ simple CreditBasedShaper extends IEEE8021QbvSelectionAlgorithm
         @signal[credit](type=long);
         // Statistic of the credit of the CBS algorithm
         @statistic[credit](title="Credit"; source=credit; unit=b; record=vector; interpolationmode=linear;);   	
-    	// Stream Reservation Class of the Shaper
-        string srClass = default("A");
     	// Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator
         string oscillator = default("^.^.^.scheduler.oscillator");
         // Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer

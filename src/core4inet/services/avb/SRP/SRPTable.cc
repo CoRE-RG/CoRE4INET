@@ -97,7 +97,7 @@ SRPTable::ListenerEntry::~ListenerEntry()
 std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
 {
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
-            << SR_CLASStoString[entry.srClass] << ", PCP=" << entry.pcp << ", Bandwidth="
+            << SR_CLASStoString[entry.srClass] << ", PCP=" << static_cast<int>(entry.pcp) << ", Bandwidth="
             << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize + static_cast<size_t>(SRP_SAFETYBYTE),
                     entry.intervalFrames, getIntervalForClass(entry.srClass))) / static_cast<double>(1000000)
             << "Mbps, insertionTime=" << entry.insertionTime << "}";
@@ -270,6 +270,39 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
                     TalkerEntry *tentry = ttable[(*j).first];
                     if (tentry->srClass == srClass)
                     {
+                        bandwidth += bandwidthFromSizeAndInterval(
+                                tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
+                                getIntervalForClass(tentry->srClass));
+                    }
+                }
+            }
+        }
+    }
+
+    return bandwidth;
+}
+
+unsigned long SRPTable::getBandwidthForModuleAndPcp(const cModule* module, uint8_t pcp) {
+    removeAgedEntriesIfNeeded();
+
+    unsigned long bandwidth = 0;
+
+    for (std::unordered_map<unsigned int, ListenerTable>::iterator i = listenerTables.begin();
+            i != listenerTables.end(); ++i)
+    {
+        ListenerTable table = i->second;
+        for (ListenerTable::const_iterator j = table.begin(); j != table.end(); ++j)
+        {
+            ListenerList llist = (*j).second;
+            for (ListenerList::const_iterator k = llist.begin(); k != llist.end(); ++k)
+            {
+                if ((*k).first == module)
+                {
+                    //get Talkers for this VLAN
+                    TalkerTable ttable = talkerTables[(*i).first];
+                    TalkerEntry *tentry = ttable[(*j).first];
+                    if (tentry->pcp == pcp)
+                    { // TODO @Philipp ist das Richtig?
                         bandwidth += bandwidthFromSizeAndInterval(
                                 tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
                                 getIntervalForClass(tentry->srClass));
@@ -860,4 +893,3 @@ size_t SRPTable::getNumListenerEntries()
 }
 
 }
-

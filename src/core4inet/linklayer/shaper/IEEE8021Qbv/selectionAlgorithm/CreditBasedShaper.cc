@@ -54,6 +54,7 @@ void CreditBasedShaper::initialize()
     this->getParentModule()->getSubmodule("queue", this->getIndex())->subscribe("size", this);
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
     this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, this->par("useSRTable").boolValue());
+    this->pcp = this->getIndex();
     WATCH(this->credit);
     WATCH(this->queueSize);
     WATCH(this->portBandwidth);
@@ -64,22 +65,6 @@ void CreditBasedShaper::handleParameterChange(const char* parname)
 {
     IEEE8021QbvSelectionAlgorithm::handleParameterChange(parname);
     Timed::handleParameterChange(parname);
-    if (!parname || !strcmp(parname, "srClass"))
-    {
-        if (strcmp(par("srClass").stringValue(), "A") == 0)
-        {
-            this->srClass = SR_CLASS::A;
-        }
-        else if (strcmp(par("srClass").stringValue(), "B") == 0)
-        {
-            this->srClass = SR_CLASS::B;
-        }
-        else
-        {
-            throw cRuntimeError("Parameter srClass of %s is %s and is only allowed to be A or B", getFullPath().c_str(),
-                    par("srClass").stringValue());
-        }
-    }
     if(!parname || !strcmp(parname, "staticIdleSlope")) {
         if (!this->par("useSRTable").boolValue()) {
             this->reservedBandwidth = static_cast<unsigned long>(parameterULongCheckRange(this->par("staticIdleSlope"), 0, this->portBandwidth));
@@ -145,7 +130,7 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
     this->newTime = this->getCurrentTime();
     simtime_t duration = this->newTime - this->oldTime;
     if(this->par("useSRTable").boolValue()) {
-        this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+        this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndPcp(this->getParentModule()->getParentModule(), this->pcp);
     }     
     if (reservedBandwidth > 0)
     {
@@ -180,7 +165,7 @@ void CreditBasedShaper::sendSlope(simtime_t duration)
     if (duration > 0)
     {
         if(this->par("useSRTable").boolValue()) {
-            this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndSRClass(this->getParentModule()->getParentModule(), this->srClass);
+            this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndPcp(this->getParentModule()->getParentModule(), this->pcp);
         } 
         credit -= static_cast<int>(ceil(static_cast<double>(this->portBandwidth - reservedBandwidth) * duration.dbl()));
         this->oldTime = this->getCurrentTime() + duration;

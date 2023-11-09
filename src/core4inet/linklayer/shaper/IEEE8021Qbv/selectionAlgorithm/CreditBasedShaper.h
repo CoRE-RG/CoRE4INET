@@ -77,9 +77,9 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      */
     unsigned long reservedBandwidth;
     /**
-     * @brief Stream Reservation Class of the Shaper.
+     * @brieg VLAN Priority code point of the shaper.
      */
-    SR_CLASS srClass;
+    uint8_t pcp;
     /**
      * @brief Pointer to SRPTable module.
      */
