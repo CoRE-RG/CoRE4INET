@@ -302,7 +302,7 @@ unsigned long SRPTable::getBandwidthForModuleAndPcp(const cModule* module, uint8
                     TalkerTable ttable = talkerTables[(*i).first];
                     TalkerEntry *tentry = ttable[(*j).first];
                     if (tentry->pcp == pcp)
-                    { // TODO @Philipp ist das Richtig?
+                    {
                         bandwidth += bandwidthFromSizeAndInterval(
                                 tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
                                 getIntervalForClass(tentry->srClass));

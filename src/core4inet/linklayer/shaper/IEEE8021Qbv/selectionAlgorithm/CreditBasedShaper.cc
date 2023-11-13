@@ -26,6 +26,7 @@ namespace CoRE4INET {
 Define_Module(CreditBasedShaper);
 
 simsignal_t CreditBasedShaper::creditSignal = registerSignal("credit");
+simsignal_t CreditBasedShaper::reservedBandwidthSignal = registerSignal("reservedBandwidth");
 
 CreditBasedShaper::CreditBasedShaper()
 {
@@ -68,6 +69,7 @@ void CreditBasedShaper::handleParameterChange(const char* parname)
     if(!parname || !strcmp(parname, "staticIdleSlope")) {
         if (!this->par("useSRTable").boolValue()) {
             this->reservedBandwidth = static_cast<unsigned long>(parameterULongCheckRange(this->par("staticIdleSlope"), 0, this->portBandwidth));
+            emit(reservedBandwidthSignal, this->reservedBandwidth);
         }       
     }
 
@@ -79,6 +81,7 @@ void CreditBasedShaper::setIdleSlope(unsigned long bandwidth) {
     }
     this->reservedBandwidth = bandwidth;
     this->par("useSRTable").setBoolValue(false);
+    emit(reservedBandwidthSignal, this->reservedBandwidth);
 }
 
 void CreditBasedShaper::handleMessage(cMessage *msg)
@@ -131,6 +134,7 @@ void CreditBasedShaper::idleSlope(bool maxCreditZero)
     simtime_t duration = this->newTime - this->oldTime;
     if(this->par("useSRTable").boolValue()) {
         this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndPcp(this->getParentModule()->getParentModule(), this->pcp);
+        emit(reservedBandwidthSignal, this->reservedBandwidth);
     }     
     if (reservedBandwidth > 0)
     {
@@ -166,6 +170,7 @@ void CreditBasedShaper::sendSlope(simtime_t duration)
     {
         if(this->par("useSRTable").boolValue()) {
             this->reservedBandwidth = this->srpTable->getBandwidthForModuleAndPcp(this->getParentModule()->getParentModule(), this->pcp);
+            emit(reservedBandwidthSignal, this->reservedBandwidth);
         } 
         credit -= static_cast<int>(ceil(static_cast<double>(this->portBandwidth - reservedBandwidth) * duration.dbl()));
         this->oldTime = this->getCurrentTime() + duration;

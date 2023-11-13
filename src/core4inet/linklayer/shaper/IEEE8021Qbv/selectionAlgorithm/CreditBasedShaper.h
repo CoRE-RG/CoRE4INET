@@ -42,6 +42,10 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
      * @brief Signal that is emitted every time the credit is recalculated.
      */
     static simsignal_t creditSignal;
+    /**
+     * @brief Signal that is emitted every time the reserved bandwidth is updated.
+     */
+    static simsignal_t reservedBandwidthSignal;
 
   private:
     /**
