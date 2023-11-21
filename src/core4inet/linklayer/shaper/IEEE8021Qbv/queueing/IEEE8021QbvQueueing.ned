@@ -33,6 +33,8 @@ simple IEEE8021QbvQueueing like IIEEE8021QbvQueueing
         int numPCP = default(8);
         // Default priority for frames without PCP.
         int defaultPCP = default(0);  
+        // Use default PCP as outgoing queue for every qframe
+        bool defaultPcpOnly = default(false);
         // Untagged VLAN. Outgoing frames with this VLAN get untagged
         int untaggedVID = default(0);
         // Interface allows frames with this VLAN to leave the port

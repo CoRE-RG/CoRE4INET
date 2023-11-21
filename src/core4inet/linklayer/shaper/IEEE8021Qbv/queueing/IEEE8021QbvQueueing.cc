@@ -52,6 +52,10 @@ void IEEE8021QbvQueueing::handleParameterChange(const char* parname)
     {
         this->defaultPCP = static_cast<unsigned int>(parameterULongCheckRange(par("defaultPCP"), 0, this->numPCP-1));
     }
+    if (!parname || !strcmp(parname, "defaultPcpOnly"))
+    {
+        this->defaultPcpOnly = this->par("defaultPcpOnly");
+    }
 }
 
 void IEEE8021QbvQueueing::handleMessage(cMessage *msg)
@@ -85,7 +89,11 @@ void IEEE8021QbvQueueing::handleMessage(cMessage *msg)
                 delete qframe;
                 return;
             }
-            this->send(qframe, "out", qframe->getPcp());
+            int queue_pcp = qframe->getPcp();
+            if (defaultPcpOnly) {
+                queue_pcp = this->defaultPCP;
+            }
+            this->send(qframe, "out", queue_pcp);
         }
         else
         {

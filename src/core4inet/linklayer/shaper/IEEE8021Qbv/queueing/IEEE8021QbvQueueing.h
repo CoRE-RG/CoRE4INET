@@ -47,6 +47,10 @@ private:
      */
     unsigned int defaultPCP;
     /**
+     * Only use default pcp queue for all traffic.
+     */
+    bool defaultPcpOnly;
+    /**
      * @brief Untagged VLAN.
      * Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged.
      */
