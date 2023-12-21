@@ -40,6 +40,7 @@ AVBTrafficSinkApp::AVBTrafficSinkApp()
 void AVBTrafficSinkApp::initialize()
 {
     TrafficSinkApp::initialize();
+    this->handleParameterChange(nullptr);
 
     srpTable = check_and_cast<SRPTable *>(getParentModule()->getSubmodule("srpTable"));
     if (!srpTable)
