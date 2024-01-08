@@ -38,6 +38,7 @@ RCIncoming::RCIncoming() :
 void RCIncoming::initialize()
 {
     Timed::initialize();
+    this->handleParameterChange(nullptr);
 }
 
 void RCIncoming::handleMessage(cMessage *msg)

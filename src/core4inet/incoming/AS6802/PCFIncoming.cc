@@ -28,6 +28,7 @@ PCFIncoming::PCFIncoming()
 
 void PCFIncoming::initialize()
 {
+    this->handleParameterChange(nullptr);
 }
 
 void PCFIncoming::handleMessage(cMessage *msg)

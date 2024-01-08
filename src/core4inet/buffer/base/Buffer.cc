@@ -43,7 +43,7 @@ Buffer::~Buffer()
 
 int Buffer::numInitStages() const
 {
-    return 1;
+    return 14;
 }
 
 void Buffer::initialize(int stage)
@@ -61,6 +61,10 @@ void Buffer::initialize(int stage)
                 getDisplayString().setTagArg("i2", 0, "status/stop");
             }
         }
+    }
+    if (stage == 13)
+    {
+        this->handleParameterChange(nullptr);
     }
 }
 

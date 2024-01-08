@@ -29,6 +29,7 @@ void IEEE8021QciInput::initialize()
     {
         streamFilters.push_back(dynamic_cast<IEEE8021QciFilter*>(getParentModule()->getSubmodule("streamFilter", i)));
     }
+    this->handleParameterChange(nullptr);
 }
 
 void IEEE8021QciInput::handleParameterChange(const char *parname)

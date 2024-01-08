@@ -69,7 +69,7 @@ void TTBuffer::initialize(int stage)
         }
 
         nextAction = getPeriod()->registerEvent(actionTimeEvent);
-
+        this->handleParameterChange(nullptr);
         return;
     }
 }

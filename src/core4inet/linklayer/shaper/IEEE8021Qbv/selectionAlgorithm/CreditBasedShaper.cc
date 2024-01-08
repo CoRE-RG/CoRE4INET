@@ -48,6 +48,7 @@ void CreditBasedShaper::initialize()
 {
     IEEE8021QbvSelectionAlgorithm::initialize();
     Timed::initialize();
+    this->handleParameterChange(nullptr);
     this->getParentModule()->getSubmodule("queue", this->getIndex())->subscribe("size", this);
     this->getParentModule()->getParentModule()->subscribe("transmitState", this);
     this->srpTable = inet::getModuleFromPar<SRPTable>(par("srpTable"), this, true);

@@ -52,6 +52,7 @@ void RCBuffer::initialize(int stage)
     if (stage == 0)
     {
         Timed::initialize();
+        this->handleParameterChange(nullptr);
     }
 }
 

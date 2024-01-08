@@ -34,6 +34,7 @@ Oscillator::Oscillator()
 
 void Oscillator::initialize(int stage)
 {
+    this->handleParameterChange(nullptr);
     if (stage == 0)
     {
         WATCH(this->current_tick);

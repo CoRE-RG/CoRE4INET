@@ -70,7 +70,6 @@ int AVBBuffer::numInitStages() const
 void AVBBuffer::initialize(int stage)
 {
     Buffer::initialize(stage);
-
     if (stage == 0)
     {
         Timed::initialize();
@@ -133,6 +132,7 @@ void AVBBuffer::initialize(int stage)
         {
             throw cRuntimeError("No srpModule found.");
         }
+        this->handleParameterChange(nullptr);
     }
 }
 
