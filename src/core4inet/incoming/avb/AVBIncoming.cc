@@ -73,14 +73,12 @@ void AVBIncoming::handleMessage(cMessage* msg)
                     }
                     else
                     {
-
-                        if ((*listener)->hasGate("AVBin", 0))
+                        if ((*listener)->hasGate("AVBin"))
                         {
-                            sendDirect(inFrame->dup(), (*listener)->gate("AVBin", 0));
-                        }
-                        else if ((*listener)->hasGate("AVBin"))
-                        {
-                            sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
+                            if ((*listener)->isGateVector("AVBin"))
+                                sendDirect(inFrame->dup(), (*listener)->gate("AVBin", 0));
+                            else
+                                sendDirect(inFrame->dup(), (*listener)->gate("AVBin"));
                         }
                         else
                         {

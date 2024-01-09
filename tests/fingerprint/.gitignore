@@ -1,5 +1,6 @@
 /results
 /test.out
-/examples.csv.UPDATED
-/examples.csv.ERROR
+/*.csv.UPDATED
+/*.csv.FAILED
+/*.csv.ERROR
 /*.elog
