@@ -20,7 +20,7 @@
 /examples/inet/tsn/,                                              -f omnetpp.ini -c General -r 0,                        0.5s,            014b-dde4/tplx
 /examples/inet/tsn/,                                              -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            ab4c-0988/tplx
 /examples/inet/tsn/,                                              -f omnetpp.ini -c Without_TDMA -r 0,                   0.1s,            51ca-9990/tplx
-/examples/inet/tsn/,                                              -f omnetpp.ini -c With_Qci -r 0,                       0.5s,            b2af-2c04/tplx   
+/examples/inet/tsn/,                                              -f omnetpp.ini -c With_Qci -r 0,                       0.5s,            b2af-2c04/tplx
 
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c General -r 0,                        1s,              38ee-0636/tplx
 /examples/IEEE8021Q/small_network/,                               -f omnetpp.ini -c With_Crosstraffic -r 0,              0.1s,            a9cd-ce55/tplx
