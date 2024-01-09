@@ -56,7 +56,10 @@ void IEEE8021QbvIncoming::handleMessage(cMessage *msg)
                             {
                                 if ((*listener)->hasGate("AVBin"))
                                 {
-                                    sendDirect(qframe->dup(), (*listener)->gate("AVBin"));
+                                    if ((*listener)->isGateVector("AVBin"))
+                                        sendDirect(qframe->dup(), (*listener)->gate("AVBin", 0));
+                                    else
+                                        sendDirect(qframe->dup(), (*listener)->gate("AVBin"));
                                     emit(rxPkSignal, qframe);
                                 }
                                 else if ((*listener)->hasGate("in"))
