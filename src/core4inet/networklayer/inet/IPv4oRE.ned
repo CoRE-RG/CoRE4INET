@@ -96,8 +96,8 @@ simple IPv4oRE extends IPv4
         int pcpSRClassB = default(5);
         
     gates:
-        input AVBin[];
-        input RCIn[];
-        input TTIn[];
+        input AVBin[1];
+        input RCIn[1];
+        input TTIn[1];
         input schedulerIn;
 }

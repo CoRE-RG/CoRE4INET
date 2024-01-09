@@ -67,6 +67,10 @@ void IEEE8021QbvIncoming::handleMessage(cMessage *msg)
                                     sendDirect(qframe->dup(), (*listener)->gate("in"));
                                     emit(rxPkSignal, qframe);
                                 }
+                                else
+                                {
+                                    throw cRuntimeError("Missing AVBin or in gate");
+                                }
                             }
                         }
                     }
