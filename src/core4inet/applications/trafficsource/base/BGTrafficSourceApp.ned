@@ -33,7 +33,7 @@ simple BGTrafficSourceApp extends TrafficSourceAppBase
         @display("i=block/source,green");
 
         // destination MAC address
-        string destAddress = default("auto");
+        string destAddress @mutable = default("auto");
         // interval between sending requests
         volatile double sendInterval @unit(s) = default(uniform(0s,1s));
         
