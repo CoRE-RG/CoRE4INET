@@ -26,7 +26,7 @@ import subprocess
 import sys
 import time
 import unittest
-from distutils import spawn
+import shutil
 
 core4inetRoot = os.path.abspath("../..")
 inetRoot = os.path.abspath("../../../inet")
@@ -39,11 +39,11 @@ opp_run = "opp_run"
 cpuTimeLimit = "3s"
 logFile = "test.out"
 
-if spawn.find_executable("opp_run_dbg"):
+if shutil.which("opp_run_dbg"):
     opp_run = "opp_run_dbg"
-if spawn.find_executable("opp_run"):
+if shutil.which("opp_run"):
     opp_run = "opp_run"
-if spawn.find_executable("opp_run_release"):
+if shutil.which("opp_run_release"):
     opp_run = "opp_run_release"
 
 
