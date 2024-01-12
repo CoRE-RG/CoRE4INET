@@ -23,7 +23,7 @@
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c General -r 0,
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c With_Crosstraffic -r 0,
 /examples/IEEE8021Qbv/small_network/,                             -f omnetpp.ini -c Without_TDMA -r 0,
-/examples/IEEE8021Qci/large_network/,                             -f omnetpp.ini -c Timespan_between_TT_valid_with_Filtering_and_Attack -r 0,
+/examples/IEEE8021Qci/large_network/,                             -f omnetpp.ini -c Timespan_b_TT_valid_w_Filtering_and_Attack -r 0,
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c General -r 0,
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c With_Crosstraffic -r 0,
 /examples/tsn/small_network/,                                     -f omnetpp.ini -c Without_TDMA -r 0,
