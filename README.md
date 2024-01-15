@@ -5,6 +5,12 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 <img src="/doc/images/core4inet.png" alt="CoRE4INET Environment" width="35%">
 
 
+## History
+CoRE4INET was first introduced as TTE4INET at the 4th International Workshop on OMNeT++ (2011) along with the 4th International ICST Conference on Simulation Tools and Techniques (2011). You can find the [publication](https://core.inet.haw-hamburg.de/assets/bibliography/eigene/sdkks-eifre-11.pdf) and [slides](https://core.inet.haw-hamburg.de/assets/bibliography/eigene/sdkks-eifre-11_Slides.pdf) here.
+
+Since there were changes necessary to support OMNeT++ 4.2 and INET 2.0, it was completely redesigned. When more real-time Ethernet protocols were added the project was renamed from TTE4INET to CoRE4INET to show that it does not only contain time-triggered protocols.
+
+
 ## News
 * Updated to support OMNeT++ 5.5.1 and INET 3.6.6 
 * Added IEEE 802.1Qci filtering and TSN nodes.
@@ -20,16 +26,12 @@ CoRE4INET is an open source extension to the [INET-Framework](https://inet.omnet
 * IP over Realtime-Ethernet
 
 
-## History
-CoRE4INET was first introduced as TTE4INET at the [4th International Workshop on OMNeT++ (2011)](http://www.omnet-workshop.org/2011/) along with the [4th International ICST Conference on Simulation Tools and Techniques (2011)](http://www.simutools.org/2011/). You can find the [publication](http://core.informatik.haw-hamburg.de/images/publications/papers/sdkks-eifre-11a.pdf) and [slides](http://core.informatik.haw-hamburg.de/images/publications/papers/sdkks-eifre-11b.pdf) here.
+## Reference
+If you would like to reference this project please use the following [publication](https://link.springer.com/chapter/10.1007/978-3-030-12842-5_10):
 
-Since there were changes necessary to support OMNeT++ 4.2 and INET 2.0, it was completely redesigned. When more real-time Ethernet protocols were added the project was renamed from TTE4INET to CoRE4INET to show that it does not only contain time-triggered protocols.
+Philipp Meyer, Franz Korf, Till Steinbach, Thomas C. Schmidt, Simulation of Mixed Critical In-vehicular Networks, In: Recent Advances in Network Simulation, (Antonio Virdis, Michael Kirsche Ed.), ser. EAI/Springer Innovations in Communication and Computing, May 2019. [https://doi.org/10.1007/978-3-030-12842-5_10](https://doi.org/10.1007/978-3-030-12842-5_10) 
 
-
-## References
-If you would like to reference this project please use the following [publication](http://core.informatik.haw-hamburg.de/images/publications/papers/sdkks-eifre-11a.pdf):
-
-T. Steinbach, H. Dieumo Kenfack, F. Korf, and T. C. Schmidt. An Extension of the OMNeT++ INET Framework for Simulating Real-time Ethernet with High Accuracy. In Proceedings of the 4th International ICST Conference on Simulation Tools and Techniques, SIMUTools '11, pages 375-382, ICST, Brussels, Belgium, Belgium, 2011. ICST (Institute for Computer Sciences, Social-Informatics and Telecommunications Engineering).
+* [arXiv preprint](https://arxiv.org/abs/1808.03081)
 
 
 ## Quick Start
