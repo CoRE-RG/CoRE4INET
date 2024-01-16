@@ -39,7 +39,7 @@ module TSNEtherNic like ICoRE4INETEtherNic
         double hardware_delay @unit(s) = default(0us);
         // if true, all packets are received, otherwise only the ones with matching destination MAC address
         bool promiscuous = default(false);
-        *.interfaceTableModule = default(absPath(interfaceTableModule));
+        *.interfaceTableModule = default(absPath(this.interfaceTableModule));
         //Untagged VLAN. Untagged incoming frames get tagged with this VLAN. Outgoing frames with this VLAN get untagged
         int untaggedVID = default(0);
         //Interface allows frames with this VLAN to enter and leave the port
@@ -75,17 +75,17 @@ module TSNEtherNic like ICoRE4INETEtherNic
         //Module for the organisation of outbound traffic
         shaper: IEEE8021Qbv_Shaper {
             @display("p=63,120");
-            untaggedVID = untaggedVID;
-            taggedVIDs = taggedVIDs;
+            untaggedVID = parent.untaggedVID;
+            taggedVIDs = parent.taggedVIDs;
         }
 
         //Module for the organisation of inbound traffic
         inControl: AVB_8021Q_InControl {
             parameters:
                 @display("p=191,120");
-                promiscuous = promiscuous;
-                untaggedVID = untaggedVID;
-                taggedVIDs = taggedVIDs;
+                promiscuous = parent.promiscuous;
+                untaggedVID = parent.untaggedVID;
+                taggedVIDs = parent.taggedVIDs;
         }
 
         filtering: <default("NoFiltering")> like IFiltering {

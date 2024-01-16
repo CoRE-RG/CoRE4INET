@@ -13,14 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-cplusplus {{
-    //Auto-generated Messages
-	#include "core4inet/linklayer/ethernet/AS6802/RCFrame_m.h"
-}}
-
-class CoRE4INET::RCFrame;
-
-packet RCFrame;
+import core4inet.linklayer.ethernet.AS6802.RCFrame;
 
 namespace CoRE4INET;
 

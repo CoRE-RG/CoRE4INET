@@ -23,6 +23,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief Base class for the critical traffic conformance check.
  *

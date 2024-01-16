@@ -1,4 +1,15 @@
-all: checkmakefiles src/core4inet/features.h 
+#Try to detect INET if variable is not set
+ifndef INET_PROJ
+    ifneq ($(wildcard ../inet),)
+        INET_PROJ=../../inet
+    else
+        $(error "Cannot find INET framework in the usual location. You have to set the PATH to INET in the INET_PROJ variable")
+    endif
+endif
+
+FEATURES_H = src/core4inet/features.h
+
+all: checkmakefiles $(FEATURES_H)
 	cd src && $(MAKE)
 
 clean: checkmakefiles
@@ -7,7 +18,7 @@ clean: checkmakefiles
 cleanall: checkmakefiles
 	cd src && $(MAKE) MODE=release clean
 	cd src && $(MAKE) MODE=debug clean
-	rm -f src/Makefile src/core4inet/features.h
+	rm -f src/Makefile $(FEATURES_H)
 	
 ifeq ($(MODE), debug)
     DBG_SUFFIX=_dbg
@@ -15,19 +26,18 @@ else
     DBG_SUFFIX=
 endif
 
-INET_PROJ=../../inet
 EXTRA_INCLUDES= -Icore4inet/api/AS6802/tte_api
-MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=../../inet -I. $(EXTRA_INCLUDES) -I$(INET_PROJ)/src/ -L$$\(INET_PROJ\)/out/$$\(CONFIGNAME\)/src -lINET$(DBG_SUFFIX) 
+MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=$(INET_PROJ) -I. $(EXTRA_INCLUDES) -I$(INET_PROJ)/src/ -L$$\(INET_PROJ\)/out/$$\(CONFIGNAME\)/src -lINET$(DBG_SUFFIX) 
 
-makefiles: src/core4inet/features.h makefiles-so 
+makefiles: makefiles-so 
 
-makefiles-so:
+makefiles-so: $(FEATURES_H)
 	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
-makefiles-lib:
+makefiles-lib: $(FEATURES_H)
 	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake --make-lib $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
-makefiles-exe:
+makefiles-exe: $(FEATURES_H)
 	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 checkmakefiles:
@@ -41,8 +51,8 @@ checkmakefiles:
 	fi
 
 # generate an include file that contains all the WITH_FEATURE macros according to the current enablement of features
-src/core4inet/features.h: $(wildcard .oppfeaturestate) .oppfeatures
-	@opp_featuretool defines >src/core4inet/features.h
+$(FEATURES_H): $(wildcard .oppfeaturestate) .oppfeatures
+	@opp_featuretool defines >$(FEATURES_H)
 
-doxy:
+doc:
 	doxygen doxy.cfg

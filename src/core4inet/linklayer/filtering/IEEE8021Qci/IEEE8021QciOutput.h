@@ -21,6 +21,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief Class representing the IEEE 802.1Qci output module
  *

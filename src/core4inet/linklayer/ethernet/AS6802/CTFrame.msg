@@ -13,18 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-cplusplus {{
-    //INET
-#include "inet/linklayer/ethernet/EtherFrame_m.h"
-    
+import inet.linklayer.ethernet.EtherFrame;
+
+cplusplus {{ 
 #if defined(__clang__)
 #  pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #elif defined(__GNUC__) && __GNUC__ >= 5
 #  pragma GCC diagnostic ignored "-Wsuggest-override"
 #endif
 }}
-
-class inet::EthernetIIFrame;
 
 namespace CoRE4INET;
 
@@ -37,7 +34,7 @@ namespace CoRE4INET;
 //
 // @author Till Steinbach
 //
-packet CTFrame extends EthernetIIFrame
+packet CTFrame extends inet::EthernetIIFrame
 {
     @customize(true);    
     

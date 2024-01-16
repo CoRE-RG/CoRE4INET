@@ -45,6 +45,11 @@ void IEEE8021QbvGateControlList::initialize(int stage)
         WATCH(this->configNo);
         WATCH(this->timerEventName);
     }
+    else if (stage == 1)
+    {
+        Scheduled::initialize();
+        this->handleParameterChange(nullptr);
+    }
 }
 
 int IEEE8021QbvGateControlList::numInitStages() const

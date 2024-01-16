@@ -13,18 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-cplusplus {{
-//INET
-#include "inet/linklayer/common/MACAddress.h"
+import inet.linklayer.common.MACAddress;
 
+cplusplus {{
 #if defined(__clang__)
 #  pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #elif defined(__GNUC__) && __GNUC__ >= 5
 #  pragma GCC diagnostic ignored "-Wsuggest-override"
 #endif
 }}
-
-class noncobject inet::MACAddress;
 
 namespace CoRE4INET;
 

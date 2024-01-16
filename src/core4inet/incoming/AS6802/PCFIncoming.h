@@ -22,6 +22,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief Class for the critical traffic conformance check of
  * pcf traffic.

@@ -51,7 +51,7 @@ module IEEE8021Qci like IFiltering
     submodules:
         streamInput: IEEE8021QciInput {
             @display("p=50,75");
-            isWhiteList = isWhiteList;
+            isWhiteList = parent.isWhiteList;
         }
 
         streamFilter[numStreamFilters]: <default("IEEE8021QciFilter")> like IIEEE8021QciFilter {

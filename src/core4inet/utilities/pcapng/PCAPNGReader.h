@@ -28,6 +28,7 @@
 #include "inet/linklayer/ethernet/Ethernet.h"
 #include "inet/linklayer/ethernet/EtherFrame_m.h"
 #include "inet/linklayer/common/MACAddress.h"
+using namespace inet;
 
 namespace CoRE4INET {
 

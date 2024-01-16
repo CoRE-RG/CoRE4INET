@@ -106,7 +106,6 @@ void AVBTrafficSourceApp::handleMessage(cMessage* msg)
         else
         {
             // todo implement stop mechanism
-            delete msg;
             if (getEnvir()->isGUI())
             {
                 getDisplayString().setTagArg("i2", 0, "status/stop");

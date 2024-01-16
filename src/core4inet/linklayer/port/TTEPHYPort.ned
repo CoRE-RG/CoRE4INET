@@ -40,7 +40,7 @@ module TTEPHYPort like IPort
         //Module holds Interfacenames
         string interfaceTableModule;
         
-        *.interfaceTableModule = default(absPath(interfaceTableModule));
+        *.interfaceTableModule = default(absPath(this.interfaceTableModule));
         
     gates:
         //Input from the upper layer for best-effort Traffic
@@ -66,7 +66,7 @@ module TTEPHYPort like IPort
         inControl: CT_BE_InControl {
             parameters:
                 @display("p=142,45");
-                promiscuous = promiscuous;
+                promiscuous = parent.promiscuous;
         }
         
         //MAC interface

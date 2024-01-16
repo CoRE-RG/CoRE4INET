@@ -47,6 +47,7 @@ TTIncoming::~TTIncoming()
 void TTIncoming::initialize()
 {
     Scheduled::initialize();
+    this->handleParameterChange(nullptr);
 }
 
 void TTIncoming::handleMessage(cMessage *msg)

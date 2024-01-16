@@ -319,8 +319,7 @@ void IPv4oTT<Base>::handleMessage(cMessage* msg)
         etherctrl->setDest(ttFrame->getDest());
         etherctrl->setEtherType(ttFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
-        ipPacket->setArrival(this->getId(), Base::gate("TTIn")->getId());
-
+        ipPacket->setArrival(this->getId(), Base::gate("TTIn", 0)->getId());
         delete ttFrame;
         Base::handleMessage(ipPacket);
     }

@@ -12,6 +12,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 class TrafficPattern {
 
 public:

@@ -16,6 +16,7 @@
 #include <core4inet/utilities/pcapng/PCAPNGReader.h>
 
 #include <cstring>
+using namespace inet;
 
 namespace CoRE4INET {
 

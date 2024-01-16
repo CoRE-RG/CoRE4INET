@@ -74,7 +74,7 @@ module TSNEtherHost
         avbCTC: IEEE8021QbvIncoming {
             parameters:
                 @display("p=500,250");
-                hardware_delay = hardware_delay;
+                hardware_delay = parent.hardware_delay;
         }
 
         // Encap for best-effort traffic

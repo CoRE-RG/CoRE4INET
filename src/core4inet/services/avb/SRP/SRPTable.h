@@ -15,6 +15,7 @@
 #ifndef CORE4INET_SRPTABLE_H_
 #define CORE4INET_SRPTABLE_H_
 
+
 //Std
 #include <unordered_map>
 #include <vector>
@@ -23,13 +24,10 @@
 #include "core4inet/base/CoRE4INET_Defs.h"
 #include "core4inet/base/avb/AVBDefs.h"
 
-//INET
-#include "inet/linklayer/common/MACAddress.h"
-
-//Auto-generated Messages
-#include "core4inet/base/avb/AVBDefs_m.h"
 
 namespace CoRE4INET {
+
+using namespace omnetpp;
 
 /**
  * @brief This module handles the mapping between ports and MAC addresses.

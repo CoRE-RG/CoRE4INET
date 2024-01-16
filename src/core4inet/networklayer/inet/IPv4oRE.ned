@@ -21,9 +21,10 @@ import inet.networklayer.ipv4.IPv4;
 // Module for sending IP traffic over RTEthernet.
 // Which packets are send over TT, RC, AVB or IEEE 802.1Q and which are sent as BE is defined via the "filters" parameter
 //
-// @author Kai-Uwe von Deylen
-simple IPv4oRE extends IPv4 {
-    
+// @author Kai-Uwe von Deylen, Philipp Meyer
+//
+simple IPv4oRE extends IPv4
+{    
     parameters:
         @class("TT_RC_AVB_8021Q_IPv4");
         //
@@ -95,8 +96,8 @@ simple IPv4oRE extends IPv4 {
         int pcpSRClassB = default(5);
         
     gates:
-        input AVBin;
-        input RCIn;
-        input TTIn;
+        input AVBin[1];
+        input RCIn[1];
+        input TTIn[1];
         input schedulerIn;
 }

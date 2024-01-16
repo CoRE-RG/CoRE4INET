@@ -44,7 +44,7 @@ simple AVBBuffer extends Buffer like ITimed
         //Timer of the timed module (must be set to the name of an timer module in the Node) when left empty: timer
         string timer = default("^.scheduler.timer");
         
-	//SRP Table module, default name is srpTable
+	    //SRP Table module, default name is srpTable
         string srpTable = default("^.srpTable");
         
         //SRP Module path, default not found --> getParentModule()->getSubmodule("phy", getIndex())

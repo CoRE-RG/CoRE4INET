@@ -21,6 +21,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 typedef void (*cbFunc)(void *);
 
 //This disables the padding warning for this class!

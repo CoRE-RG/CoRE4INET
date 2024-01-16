@@ -24,6 +24,8 @@
 
 namespace CoRE4INET {
 
+using namespace omnetpp;
+
 /**
  * @brief An abstract base Shaper.
  *

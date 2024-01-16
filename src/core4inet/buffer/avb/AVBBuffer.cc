@@ -70,7 +70,6 @@ int AVBBuffer::numInitStages() const
 void AVBBuffer::initialize(int stage)
 {
     Buffer::initialize(stage);
-
     if (stage == 0)
     {
         Timed::initialize();
@@ -126,13 +125,14 @@ void AVBBuffer::initialize(int stage)
         if (strcmp(par("srpModule").stringValue(), "")==0) {
             this->srpModule=getParentModule()->getSubmodule("phy", getIndex());
         } else {
-            this->srpModule = inet::getModuleFromPar<cModule>(par("srpModule"), this, true);
+            this->srpModule = getModuleFromPar<cModule>(par("srpModule"), this, true); // Workaround for duplicate symbol linking error in Windows when using inet::getModuleFromPar<cModule>()
         }
 
         if (!this->srpModule)
         {
             throw cRuntimeError("No srpModule found.");
         }
+        this->handleParameterChange(nullptr);
     }
 }
 

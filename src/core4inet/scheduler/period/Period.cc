@@ -41,7 +41,6 @@ Period::Period()
 void Period::initialize()
 {
     WATCH(cycles);
-
     timer = dynamic_cast<Timer *>(gate("out")->getPathEndGate()->getOwnerModule());
     ASSERT(timer);
 
@@ -49,6 +48,8 @@ void Period::initialize()
     newCycleEvent->setDestinationGate(gate("schedulerIn"));
     newCycleEvent->setNext_cycle(true);
     timer->registerEvent(newCycleEvent, this);
+
+    this->handleParameterChange(nullptr);
 }
 
 void Period::handleMessage(cMessage *msg)

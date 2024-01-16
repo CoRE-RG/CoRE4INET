@@ -37,17 +37,18 @@ import core4inet.networklayer.inet.IPv4oRE;
 module RTNetworkLayer like INetworkLayer
 {
     parameters:
+        @display("i=block/fork");
         bool proxyARP = default(true);
         string igmpType = default("IGMPv2");
         string arpType = default("ARP");
         string interfaceTableModule;
         string routingTableModule;
-        *.interfaceTableModule = default(absPath(interfaceTableModule));
-        *.routingTableModule = default(absPath(routingTableModule));
+        *.interfaceTableModule = default(absPath(this.interfaceTableModule));
+        *.routingTableModule = default(absPath(this.routingTableModule));
         *.arpModule = default(absPath(".arp"));
         *.icmpModule = default(absPath(".icmp"));
-        arp.respondToProxyARP = proxyARP;
-        @display("i=block/fork");
+        arp.respondToProxyARP = this.proxyARP;   
+        
     gates:
         input ifIn[] @labels(IPv4Datagram);
         output ifOut[] @labels(IPv4Datagram);
@@ -70,8 +71,8 @@ module RTNetworkLayer like INetworkLayer
                 useProxyARP = true; // as routes with unspecified next-hop addr are quite common
                 @display("p=85,95;q=queue");
             gates:
-                queueIn[sizeof(ifIn)];
-                queueOut[sizeof(ifOut)];
+                queueIn[sizeof(parent.ifIn)];
+                queueOut[sizeof(parent.ifOut)];
         }
         arp: <arpType> like IARP {
             parameters:
@@ -126,7 +127,7 @@ module RTNetworkLayer like INetworkLayer
             ip.queueOut[i] --> { @display("m=s"); } --> ifOut[i];
         }
         
-        RCin --> ip.RCIn;
-        TTin --> ip.TTIn;
+        RCin --> ip.RCIn[0];
+        TTin --> ip.TTIn[0];
 }
 

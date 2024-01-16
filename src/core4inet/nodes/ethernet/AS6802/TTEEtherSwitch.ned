@@ -69,8 +69,8 @@ module TTEEtherSwitch
             parameters:
                 @display("p=100,50");
             gates:
-                ifIn[sizeof(ethg)];
-                ifOut[sizeof(ethg)];
+                ifIn[sizeof(parent.ethg)];
+                ifOut[sizeof(parent.ethg)];
         }
         
         //The mac table associated with the be switch
@@ -111,8 +111,8 @@ module TTEEtherSwitch
     connections:
         for i=0..sizeof(ethg)-1 {
             phy[i].phys <--> ethg[i];
-            phy[i].upperLayerIn <-- ProcessingDelay{ delay = (hardware_delay/2); } <-- beswitch.ifOut[i];
-            phy[i].upperLayerOut --> ProcessingDelay{ delay = (hardware_delay/2); } --> beswitch.ifIn[i];
+            phy[i].upperLayerIn <-- ProcessingDelay{ delay = (parent.hardware_delay/2); } <-- beswitch.ifOut[i];
+            phy[i].upperLayerOut --> ProcessingDelay{ delay = (parent.hardware_delay/2); } --> beswitch.ifIn[i];
         }
 }
 

@@ -32,12 +32,13 @@ ApplicationBase::~ApplicationBase()
 void ApplicationBase::initialize()
 {
     WATCH_LIST(bgbuffers);
-
     std::string displayName = par("displayName").stdstringValue();
     if (getEnvir()->isGUI() && displayName.length())
     {
         getDisplayString().setTagArg("t", 0, displayName.c_str());
     }
+
+    this->handleParameterChange(nullptr);
 }
 
 void ApplicationBase::handleMessage(__attribute__((unused))   cMessage *msg)

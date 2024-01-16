@@ -16,14 +16,18 @@
 #ifndef CORE4INET_BUFFER_H_
 #define CORE4INET_BUFFER_H_
 
+
 //Std
 #include <list>
-//CoRE4INET
-#include "core4inet/base/CoRE4INET_Defs.h"
 //INET Auto-generated Messages
 #include "inet/linklayer/ethernet/EtherFrame_m.h"
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
+
 
 namespace CoRE4INET {
+
+using namespace omnetpp;
 
 class ApplicationBase;
 class TTEAPIPriv;

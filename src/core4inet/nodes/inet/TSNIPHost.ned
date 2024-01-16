@@ -117,8 +117,8 @@ module TSNIPHost like INetworkNode
         string energyStorageType = default("");
         string energyManagementType = default("");
         string energyGeneratorType = default("");
-        routingTable.forwarding = forwarding;
-        routingTable.multicastForwarding = multicastForwarding;   // for IPv4, IPv6, Generic
+        routingTable.forwarding = this.forwarding;
+        routingTable.multicastForwarding = this.multicastForwarding;   // for IPv4, IPv6, Generic
         *.interfaceTableModule = default(absPath(".interfaceTable"));
         *.routingTableModule = default(routingTableType != "" ? absPath(".routingTable") : "");
         *.energySourceModule = default(energyStorageType != "" ? absPath(".energyStorage") : "");
@@ -158,7 +158,7 @@ module TSNIPHost like INetworkNode
         avbCTC: IEEE8021QbvIncoming {
             parameters:
                 @display("p=558,258");
-                hardware_delay = hardware_delay;
+                hardware_delay = parent.hardware_delay;
         }
         // Stream Reservation Protocol table
         srpTable: SRPTable {
@@ -174,8 +174,8 @@ module TSNIPHost like INetworkNode
             parameters:
                 @display("p=407,329");
             gates:
-                encapIn[sizeof(ethg)];
-                encapOut[sizeof(ethg)];
+                encapIn[sizeof(parent.ethg)];
+                encapOut[sizeof(parent.ethg)];
         }
         // use the CoRE4INET specific EtherNic for srp and bg gates
         eth[sizeof(ethg)]: <etherNicType> like ICoRE4INETEtherNic {

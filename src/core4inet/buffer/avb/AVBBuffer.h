@@ -16,11 +16,13 @@
 #ifndef CORE4INET_AVBBUFFER_H_
 #define CORE4INET_AVBBUFFER_H_
 
+
 //CoRE4INET
+#include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/buffer/base/Buffer.h"
-#include "core4inet/utilities/classes/Timed.h"
-#include "core4inet/base/avb/AVBDefs_m.h"
 #include "core4inet/services/avb/SRP/SRPTable.h"
+#include "core4inet/utilities/classes/Timed.h"
+
 
 namespace CoRE4INET {
 

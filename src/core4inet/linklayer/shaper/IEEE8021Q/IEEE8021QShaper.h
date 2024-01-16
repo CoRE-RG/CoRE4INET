@@ -77,6 +77,7 @@ class IEEE8021QShaper : public TC, public virtual Timed
          * Frames without Q-tag will be treated with this priority (must be larger or equal 0 and smaller or equal 7)
          */
         uint8_t defaultPriority;
+
     protected:
         /**
          * @brief Signal that is emitted when the queue length of Q-tagged messages changes.
@@ -192,7 +193,7 @@ void IEEE8021QShaper<TC>::initialize(int stage)
     if (stage == 0)
     {
         Timed::initialize();
-
+        //this->handleParameterChange("defaultPriority");
         for (unsigned int i = 0; i < 8; i++)
         {
             cQueue queue;

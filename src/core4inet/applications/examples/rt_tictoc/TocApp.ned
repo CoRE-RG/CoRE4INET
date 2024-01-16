@@ -33,7 +33,7 @@ simple TocApp extends CTApplicationBase
         @display("i=block/routing,gold");
         
         //Counter is increased on incoming Tic messages
-        int counter = 0;
+        int counter = 0 @mutable;
         //CT-ID used for the messages to send
         int ct_id;
 }

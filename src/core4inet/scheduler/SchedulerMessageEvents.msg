@@ -13,14 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
+import core4inet.scheduler.SchedulerMessage;
+
 cplusplus {{
-    //CoRE4INET
     #include "core4inet/scheduler/SchedulerEvent.h"
 }}
 
 namespace CoRE4INET;
-
-class SchedulerEvent;
 
 //
 // Message used for events of TTEScheduler that are triggered at a specified time in cycle (action_time).

@@ -22,6 +22,7 @@ simsignal_t BaseInControl::rxPkSignal = registerSignal("rxPk");
 void BaseInControl::initialize()
 {
     Timed::initialize();
+    this->handleParameterChange(nullptr);
 }
 
 void BaseInControl::setParameters(inet::EtherFrame *frame)

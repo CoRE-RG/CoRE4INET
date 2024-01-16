@@ -43,7 +43,7 @@ module TTEAVBFilterPHYPort like IPort
         //Interface allows frames with this VLAN to enter and leave the port
         string taggedVIDs = default("0");
 
-        *.interfaceTableModule = default(absPath(interfaceTableModule));
+        *.interfaceTableModule = default(absPath(this.interfaceTableModule));
 
     gates:
         //Input from the upper layer for best-effort Traffic
@@ -66,16 +66,16 @@ module TTEAVBFilterPHYPort like IPort
     submodules:
         shaper: TT_AVBClassA_AVBClassB_PCF_RC_8021Q_Shaper {
             @display("p=48,45");
-            untaggedVID = untaggedVID;
-            taggedVIDs = taggedVIDs;
+            untaggedVID = parent.untaggedVID;
+            taggedVIDs = parent.taggedVIDs;
         }
 
         inControl: CT_AVB_8021Q_InControl {
             parameters:
                 @display("p=142,45");
-                promiscuous = promiscuous;
-                untaggedVID = untaggedVID;
-                taggedVIDs = taggedVIDs;
+                promiscuous = parent.promiscuous;
+                untaggedVID = parent.untaggedVID;
+                taggedVIDs = parent.taggedVIDs;
         }
 
         filtering: <default("NoFiltering")> like IFiltering {

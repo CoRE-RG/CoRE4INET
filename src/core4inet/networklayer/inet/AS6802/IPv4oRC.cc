@@ -221,7 +221,7 @@ void IPv4oRC<Base>::handleMessage(cMessage* msg)
         etherctrl->setDest(rcFrame->getDest());
         etherctrl->setEtherType(rcFrame->getEtherType());
         ipPacket->setControlInfo(etherctrl);
-        ipPacket->setArrival(this->getId(), Base::gate("RCIn")->getId());
+        ipPacket->setArrival(this->getId(), Base::gate("RCIn", 0)->getId());
 
         delete rcFrame;
         Base::handleMessage(ipPacket);

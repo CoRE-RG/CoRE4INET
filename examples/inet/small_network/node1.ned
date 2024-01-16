@@ -38,9 +38,9 @@ module Node1 extends RTIPHost
             @display("p=342,34");
         }
         vl_101: TTQueueBuffer {
-
             @display("p=420,34");
         }
+        
     connections:
         vl_100_ctc.out --> vl_100.in;
         vl_101_ctc.out --> vl_101.in;

@@ -321,7 +321,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
         SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid, uint8_t pcp, bool isStatic)
 {
     Enter_Method("SRPTable::updateTalkerWithStreamId()");
-
+    std::string log_msg = "log:\n";
     bool updated = true;
     TalkerTable &talkerTable = talkerTables[vid];
 
@@ -381,6 +381,10 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
         }
     }
     updateDisplayString();
+    if(!this->getFullPath().compare("small_network.node3.srpTable")){
+            std::cout<<this->getFullPath()<<std::endl;
+            std::cout<<log_msg<<std::endl;
+    }
     return updated;
 }
 
@@ -444,6 +448,10 @@ bool SRPTable::updateListenerWithStreamId(uint64_t streamId, cModule *module, ui
         }
         else
         {
+            int doNothing = 0;
+            if(!this->getFullPath().compare("small_network.node3.srpTable")){
+                doNothing++;
+            }
             emit(NF_AVB_LISTENER_REGISTERED, llist[module]);
         }
     }

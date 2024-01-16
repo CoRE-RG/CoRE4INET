@@ -41,14 +41,14 @@ module Scheduler like ITTEScheduler
         timer: Timer {
             @display("p=160,40");
             gates:
-                period_in[numPeriods];
+                period_in[parent.numPeriods];
         }
         
         // Module representing an oscillator with a simple clock drift behavior.
         oscillator: <default("SimpleOscillator")> like IOscillator {
             parameters:
                 @display("p=70,40");
-                tick = tick;
+                tick = parent.tick;
         }
         
         // Periods define the cycles for events

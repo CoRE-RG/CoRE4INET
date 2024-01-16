@@ -16,11 +16,13 @@
 #ifndef CORE4INET_AVBSHAPER_H_
 #define CORE4INET_AVBSHAPER_H_
 
+
 //CoRE4INET
-#include "core4inet/base/avb/AVBDefs_m.h"
+#include "core4inet/base/avb/AVBDefs.h"
 #include "core4inet/buffer/avb/AVBBuffer.h"
 //Auto-generated messages
 #include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
+
 
 namespace CoRE4INET {
 
