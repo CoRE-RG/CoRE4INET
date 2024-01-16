@@ -12,10 +12,7 @@ Since there were changes necessary to support OMNeT++ 4.2 and INET 2.0, it was c
 
 
 ## News
-* Updated to support OMNeT++ 6.0.2 and INET 3.8.3
-* Updated to support OMNeT++ 5.5.1 and INET 3.6.6 
-* Added IEEE 802.1Qci filtering and TSN nodes.
-* Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
+* Updated dependencies to OMNeT++ 6.0.2 and INET 3.8.3
 
 
 ## Features
@@ -70,13 +67,13 @@ The build state of the master branch is monitored:
   </tr>
   <tr>
     <td>Building</td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Ubuntu_18.04"></td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Windows_10"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Ubuntu_22.04"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Windows_11"></td>
   </tr>
   <tr>
     <td>Tests</td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Ubuntu_18.04"></td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Windows_10"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Ubuntu_22.04"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Windows_11"></td>
   </tr>
 </table>
 
