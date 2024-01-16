@@ -12,6 +12,7 @@ Since there were changes necessary to support OMNeT++ 4.2 and INET 2.0, it was c
 
 
 ## News
+* Updated to support OMNeT++ 6.0.2 and INET 3.8.3
 * Updated to support OMNeT++ 5.5.1 and INET 3.6.6 
 * Added IEEE 802.1Qci filtering and TSN nodes.
 * Added IEEE 802.1Qbv shaping. (Including scheduled gate control list and credit based shaper)
@@ -35,11 +36,11 @@ Philipp Meyer, Franz Korf, Till Steinbach, Thomas C. Schmidt, Simulation of Mixe
 
 
 ## Quick Start
-1. Download OMNeT++ 5.5.1
+1. Download OMNeT++ 6.0.2
     * [https://omnetpp.org/download/](https://omnetpp.org/download/)
 2. Install OMNeT++
     * [https://doc.omnetpp.org/omnetpp/InstallGuide.pdf](https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)
-3. Get INET framework 3.6.6
+3. Get INET framework 3.8.3
     * [https://inet.omnetpp.org/Download.html](https://inet.omnetpp.org/Download.html)
 4. Install CoRE plugins (optional)
     * OMNEST/OMNeT++ -> Help -> Install New Software...
@@ -64,8 +65,8 @@ The build state of the master branch is monitored:
 <table>
   <tr>
     <th></th>
-    <th>Ubuntu 18.04</th>
-    <th>Windows 10</th>
+    <th>Ubuntu 22.04</th>
+    <th>Windows 11</th>
   </tr>
   <tr>
     <td>Building</td>
