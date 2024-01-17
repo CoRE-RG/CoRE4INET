@@ -32,13 +32,13 @@ MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=$(INET_PROJ)
 makefiles: makefiles-so 
 
 makefiles-so: $(FEATURES_H)
-	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c | tr '\\' '/') && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 makefiles-lib: $(FEATURES_H)
-	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake --make-lib $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c | tr '\\' '/') && cd src && opp_makemake --make-lib $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 makefiles-exe: $(FEATURES_H)
-	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
+	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c | tr '\\' '/') && cd src && opp_makemake $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 checkmakefiles:
 	@if [ ! -f src/Makefile ]; then \
