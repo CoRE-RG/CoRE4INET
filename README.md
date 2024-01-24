@@ -39,14 +39,9 @@ Philipp Meyer, Franz Korf, Till Steinbach, Thomas C. Schmidt, Simulation of Mixe
     * [https://doc.omnetpp.org/omnetpp/InstallGuide.pdf](https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)
 3. Get INET framework 3.8.3
     * [https://inet.omnetpp.org/Download.html](https://inet.omnetpp.org/Download.html)
-4. Install CoRE plugins (optional)
-    * OMNEST/OMNeT++ -> Help -> Install New Software...
-    * URL `http://sim.core-rg.de/updates/`
-    * Check [[Abstract Network Description Language](https://core-researchgroup.de/projects/simulation/abstract-network-description-language.html)] | [CoRE Simulation Model Installer] | [Gantt Chart Timing Analyzer]
-5. Get CoRE framework (GitHub or CoRE Simulation Model Installer)
-    * GitHub: Clone framework and import it in OMNEST/OMNeT++
-    * CoRE Simulation Model Installer: OMNEST/OMNeT++ -> Help -> Install CoRE Simulation Models...
-6. Working with the framework
+4. Get CoRE framework
+    * GitHub: Clone this repository and import it in OMNEST/OMNeT++
+5. Working with the framework
     * See the documentation in [doc/](/doc)
     * Start the examples in the framework
 
