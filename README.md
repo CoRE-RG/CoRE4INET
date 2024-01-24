@@ -39,6 +39,7 @@ Philipp Meyer, Franz Korf, Till Steinbach, Thomas C. Schmidt, Simulation of Mixe
     * [https://doc.omnetpp.org/omnetpp/InstallGuide.pdf](https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)
 3. Get INET framework 3.8.3
     * [https://inet.omnetpp.org/Download.html](https://inet.omnetpp.org/Download.html)
+    * Disable the feature 'visualization' and all dependent features (causes build issues)
 4. Get CoRE framework
     * GitHub: Clone this repository and import it in OMNEST/OMNeT++
 5. Working with the framework
