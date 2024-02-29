@@ -41,9 +41,9 @@ simple CreditBasedShaper extends IEEE8021QbvSelectionAlgorithm
         // Path to the srpTable
         string srpTable = default("^.^.^.srpTable");
         // initial static idle slope value 
-        int staticIdleSlope @unit(bps) = default(-1bps);
+        int staticIdleSlope @unit(bps) @mutable = default(-1bps);
         // use stream reservation from table to define idle and send slope
-        bool useSRTable = default(staticIdleSlope < 0bps); // default is true if staticIdleSlope is not set
+        bool useSRTable @mutable = default(staticIdleSlope < 0bps); // default is true if staticIdleSlope is not set
      gates:
          //Input gate for the incoming SchedulerActionTimeEvent messages
          input schedulerIn @directIn;
