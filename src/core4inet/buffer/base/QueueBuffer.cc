@@ -20,6 +20,7 @@ namespace CoRE4INET {
 simsignal_t QueueBuffer::queueLengthSignal = registerSignal("length");
 simsignal_t QueueBuffer::queueSizeSignal = registerSignal("size");
 simsignal_t QueueBuffer::droppedSignal = registerSignal("dropped");
+simsignal_t QueueBuffer::queueTimeSignal = registerSignal("delay");
 
 QueueBuffer::QueueBuffer()
 {
@@ -83,6 +84,9 @@ inet::EtherFrame * QueueBuffer::dequeue()
         ASSERT2(queueSize>=static_cast<size_t>(dequeueFrame->getByteLength()),"queueSize would become negative");
         queueSize-=static_cast<size_t>(dequeueFrame->getByteLength());
         emit(queueSizeSignal, static_cast<unsigned long>(queueSize));
+
+        emit(queueTimeSignal, (simTime() - dequeueFrame->getArrivalTime()).dbl());
+
         return dequeueFrame;
     }
     else

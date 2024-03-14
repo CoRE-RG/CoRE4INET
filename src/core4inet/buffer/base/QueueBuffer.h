@@ -125,6 +125,11 @@ class QueueBuffer : public virtual Buffer
          * Frames may be dropped when frame arrives at a full buffer.
          */
         static simsignal_t droppedSignal;
+
+        /**
+         * @brief Signal containing the time spent in the queue, that is emitted when a frame is dequeued.
+         */
+        static simsignal_t queueTimeSignal;
 };
 
 } //namespace

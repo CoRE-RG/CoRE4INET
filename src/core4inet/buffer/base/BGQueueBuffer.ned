@@ -39,6 +39,8 @@ simple BGQueueBuffer extends BGBuffer
         @signal[size](type=unsigned long; unit=B);
         //Signal emitted when frame is dropped due to buffer overflow, contains dropped EtherFrame
         @signal[dropped](type=inet::EtherFrame);
+        //Signal emitted when a frame is dequeued, contains the time spent in the queue
+        @signal[delay](type=double; unit=s);
         
         //Statistic of the queue length of the buffer
         @statistic[length](title="Queue Length"; source=length; record=vector; unit=packets; interpolationmode=sample-hold);
@@ -46,6 +48,8 @@ simple BGQueueBuffer extends BGBuffer
         @statistic[size](title="Queue Size"; source=size; record=vector; unit=B; interpolationmode=sample-hold);
         //Statistic of the amount of packets that were dropped due to buffer overflows
         @statistic[dropped](title="Dropped frames"; source=dropped; record=count; unit=packets);
+        //Statistic of the queueing delay of packets that were dropped due to buffer overflows
+        @statistic[delay](title="Queueing delay"; source=delay; record=vector,stats; unit=s);
         
         //Maximum size of the buffer negative means infinite
         int size = default(-1);
