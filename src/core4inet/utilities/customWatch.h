@@ -621,6 +621,104 @@ void createStdPtrUMapUMapUMapWatcher(const char *varname, std::unordered_map<Key
     new cStdPtrUMapUMapUMapWatcher<KeyT, ValueT>(varname, m);
 }
 
+template<class KeyT, class ValueT, class CmpT>
+class cStdMapMapMapWatcher : public cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>
+{
+    protected:
+        mutable typename ValueT::mapped_type::iterator it3;
+    public:
+
+        cStdMapMapMapWatcher(const char *newName, std::map<KeyT, ValueT, CmpT>& var) :
+                cStdCollectionMapWatcherBase<KeyT, ValueT, CmpT>(newName, var)
+
+        {
+        }
+        virtual const char *getElemTypeName() const
+        {
+            return "struct std::map<*, std::map<*, std::map<*,*>>>";
+        }
+        virtual int size() const
+        {
+            size_t return_size = 0;
+            for (typename std::map<KeyT, ValueT>::iterator i = this->m.begin(); i != this->m.end(); i++)
+            {
+                for (typename ValueT::iterator j = (*i).second.begin(); j != (*i).second.end(); j++)
+                {
+                    return_size += (*j).second.size();
+                }
+            }
+            return static_cast<int>(return_size);
+        }
+        virtual std::string at(int i) const
+        {
+            if (i < 0)
+            {
+                throw std::invalid_argument("i must be positive");
+            }
+            size_t index = 0;
+            this->it = this->m.begin();
+            this->it2 = (*this->it).second.begin();
+            it3 = (*this->it2).second.begin();
+            while (index <= static_cast<size_t>(i))
+            {
+                if (static_cast<size_t>(i) >= (index + (*this->it2).second.size()))
+                {
+                    index += (*this->it2).second.size();
+                    ++this->it2;
+                    if (this->it2 == (*this->it).second.end())
+                    {
+                        ++this->it;
+                        this->it2 = (*this->it).second.begin();
+                    }
+                    it3 = (*this->it2).second.begin();
+                }
+                else
+                {
+                    for (size_t k = 0; k < (static_cast<size_t>(i) - index); k++)
+                    {
+                        ++this->it3;
+                    }
+                    return atIt3();
+                }
+            }
+            return std::string("out of bounds");
+        }
+        virtual std::string atIt2() const
+        {
+            std::stringstream out;
+            out << this->atIt();
+            if (this->it2 != (*this->it).second.end())
+            {
+                out << this->it2->first << " ==> ";
+            }
+            else
+            {
+                out << "(empty)";
+            }
+            return out.str();
+        }
+        virtual std::string atIt3() const
+        {
+            std::stringstream out;
+            out << this->atIt2();
+            if (this->it3 != (*this->it2).second.end())
+            {
+                out << this->it3->first << " ==> " << this->it3->second;
+            }
+            else
+            {
+                out << "(empty)";
+            }
+            return out.str();
+        }
+};
+
+template<class KeyT, class ValueT, class CmpT>
+void createStdMapMapMapWatcher(const char *varname, std::map<KeyT, ValueT, CmpT>& m)
+{
+    new cStdMapMapMapWatcher<KeyT, ValueT, CmpT>(varname, m);
+}
+
 /**
  * @ingroup Macros
  * @defgroup MacrosWatch WATCH macros
@@ -689,6 +787,13 @@ void createStdPtrUMapUMapUMapWatcher(const char *varname, std::unordered_map<Key
  * @hideinitializer
  */
 #define WATCH_PTRUMAPUMAPUMAP(m)    createStdPtrUMapUMapUMapWatcher(#m,(m))
+
+/**
+ * Makes std::maps storing maps storing maps inspectable in Tkenv.
+ * 
+ * @hideinitializer
+ */
+#define WATCH_MAPMAPMAP(m)          createStdMapMapMapWatcher(#m,(m))
 
 //@}
 
