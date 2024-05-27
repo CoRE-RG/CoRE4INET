@@ -41,21 +41,34 @@ SRPTable::TalkerEntry::TalkerEntry()
     intervalFrames = 0;
     vlan_id = VLAN_ID_DEFAULT;
     pcp = PCP_DEFAULT_SRCLASSA;
+    isStatic = false;
+    customStreamInterval = -1;
 }
 SRPTable::TalkerEntry::TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address, cModule *new_module,
         size_t new_framesize, uint16_t new_intervalFrames, uint16_t new_vlan_id, uint8_t new_pcp,
-        simtime_t new_insertionTime, bool new_isStatic) :
+        simtime_t new_insertionTime, bool new_isStatic, double customStreamInterval) :
         streamId(new_streamId), srClass(new_srClass), address(new_address), module(new_module), framesize(
                 new_framesize), intervalFrames(new_intervalFrames), vlan_id(new_vlan_id), pcp(new_pcp),
-                insertionTime(new_insertionTime), isStatic(new_isStatic)
+                insertionTime(new_insertionTime), isStatic(new_isStatic), customStreamInterval(customStreamInterval)
 {
 }
 
 SRPTable::TalkerEntry::TalkerEntry(const TalkerEntry& other) :
                 streamId(other.streamId), srClass(other.srClass), address(other.address), module(other.module), framesize(
                         other.framesize), intervalFrames(other.intervalFrames), vlan_id(other.vlan_id), pcp(other.pcp),
-                        insertionTime(other.insertionTime), isStatic(other.isStatic)
+                        insertionTime(other.insertionTime), isStatic(other.isStatic), customStreamInterval(other.customStreamInterval)
 {
+}
+
+simtime_t SRPTable::TalkerEntry::getTalkerMeasurementInterval() const
+{
+    if (customStreamInterval > 0) {
+        return customStreamInterval;
+    }
+    else
+    {
+        return getIntervalForClass(srClass);
+    }
 }
 
 cObject* SRPTable::TalkerEntry::dup() const {
@@ -99,7 +112,7 @@ std::ostream& operator<<(std::ostream& os, const SRPTable::TalkerEntry& entry)
     os << "{TalkerAddress=" << entry.address.str() << ", Module=" << entry.module->getFullName() << ", SRClass="
             << SR_CLASStoString[entry.srClass] << ", PCP=" << static_cast<int>(entry.pcp) << ", Bandwidth="
             << static_cast<double>(bandwidthFromSizeAndInterval(entry.framesize + static_cast<size_t>(SRP_SAFETYBYTE),
-                    entry.intervalFrames, getIntervalForClass(entry.srClass))) / static_cast<double>(1000000)
+                    entry.intervalFrames, entry.getTalkerMeasurementInterval())) / static_cast<double>(1000000)
             << "Mbps, insertionTime=" << entry.insertionTime << "}";
     return os;
 }
@@ -239,7 +252,7 @@ unsigned long SRPTable::getBandwidthForModule(const cModule *module)
                     TalkerTable ttable = talkerTables[(*i).first];
                     TalkerEntry *tentry = ttable[(*j).first];
                     bandwidth += bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE),
-                            tentry->intervalFrames, getIntervalForClass(tentry->srClass));
+                            tentry->intervalFrames, tentry->getTalkerMeasurementInterval());
                 }
             }
         }
@@ -272,7 +285,7 @@ unsigned long SRPTable::getBandwidthForModuleAndSRClass(const cModule *module, S
                     {
                         bandwidth += bandwidthFromSizeAndInterval(
                                 tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
-                                getIntervalForClass(tentry->srClass));
+                                tentry->getTalkerMeasurementInterval());
                     }
                 }
             }
@@ -305,7 +318,7 @@ unsigned long SRPTable::getBandwidthForModuleAndPcp(const cModule* module, uint8
                     {
                         bandwidth += bandwidthFromSizeAndInterval(
                                 tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
-                                getIntervalForClass(tentry->srClass));
+                                tentry->getTalkerMeasurementInterval());
                     }
                 }
             }
@@ -329,7 +342,7 @@ unsigned long SRPTable::getBandwidthForStream(uint64_t streamId, uint16_t vid)
     }
 
     return bandwidthFromSizeAndInterval(tentry->framesize + static_cast<size_t>(SRP_SAFETYBYTE), tentry->intervalFrames,
-            getIntervalForClass(tentry->srClass));
+            tentry->getTalkerMeasurementInterval());
 }
 
 std::list<uint16_t> SRPTable::getVidsForStreamId(uint64_t streamId)
@@ -351,7 +364,8 @@ std::list<uint16_t> SRPTable::getVidsForStreamId(uint64_t streamId)
 }
 
 bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
-        SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid, uint8_t pcp, bool isStatic)
+        SR_CLASS srClass, size_t framesize, uint16_t intervalFrames, uint16_t vid, uint8_t pcp, bool isStatic,
+        double customStreamIntervalSecs)
 {
     Enter_Method("SRPTable::updateTalkerWithStreamId()");
     std::string log_msg = "log:\n";
@@ -402,6 +416,7 @@ bool SRPTable::updateTalkerWithStreamId(uint64_t streamId, cModule *module, cons
     talkerTable[streamId]->pcp = pcp;
     talkerTable[streamId]->insertionTime = simTime();
     talkerTable[streamId]->isStatic = isStatic;
+    talkerTable[streamId]->customStreamInterval = customStreamIntervalSecs;
     if (!isStatic)
     {
         if (updated)
@@ -539,7 +554,7 @@ void SRPTable::printState()
                     << SR_CLASStoString[(*j).second->srClass] << "    "
                     << static_cast<double>(bandwidthFromSizeAndInterval(
                             (*j).second->framesize + static_cast<size_t>(SRP_SAFETYBYTE), (*j).second->intervalFrames,
-                            getIntervalForClass((*j).second->srClass))) / static_cast<double>(1000000) << "   "
+                            (*j).second->getTalkerMeasurementInterval())) / static_cast<double>(1000000) << "   "
                     << (*j).second->insertionTime << endl;
         }
     }

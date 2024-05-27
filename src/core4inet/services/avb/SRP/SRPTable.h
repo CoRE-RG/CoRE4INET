@@ -55,12 +55,24 @@ class SRPTable : public virtual cSimpleModule
                 uint8_t pcp;                // 802.1Q priority code point
                 simtime_t insertionTime;    // Arrival time of SRP entry
                 bool isStatic;              // Is static entry
+                // NOTE: experimental parameter, ignored if left as default.
+                // If set, the custom stream interval is used instead of the CMI for the bandwidth calculation.
+                // Will not be forwarded in stream reservation.
+                double customStreamInterval; // Stream transmission interval in seconds, if <= 0 srClass intervals are used
 
                 TalkerEntry();
                 TalkerEntry(uint64_t new_streamId, SR_CLASS new_srClass, inet::MACAddress new_address,
                         cModule *new_module, size_t new_framesize, uint16_t new_intervalFrames,
-                        uint16_t new_vlan_id, uint8_t new_pcp, simtime_t new_insertionTime, bool new_isStatic = false);
+                        uint16_t new_vlan_id, uint8_t new_pcp, simtime_t new_insertionTime, bool new_isStatic = false,
+                        double customStreamInterval = -1);
                 TalkerEntry(const TalkerEntry& other);
+
+                /**
+                 * Get the interval to use for stream bandwidth calculation.
+                 * Checks if a custom stream measurement interval has been set.
+                 * @return The custom stream measurement interval or the class measurement interval
+                 */
+                simtime_t getTalkerMeasurementInterval() const;
 
                 /**
                  * Creating a deep copy by using the copy constructor.
@@ -233,11 +245,21 @@ class SRPTable : public virtual cSimpleModule
         virtual std::list<uint16_t> getVidsForStreamId(uint64_t streamId);
         /**
          * @brief Register a new streamId at talkerTable.
+         * @param streamId Stream ID
+         * @param module Module that sends the stream
+         * @param address MAC address of the talker
+         * @param srClass Stream Reservation Class
+         * @param framesize Frame size in byte
+         * @param intervalFrames Interval frames
+         * @param vid VLAN identifier
+         * @param pcp 802.1Q priority code point
+         * @param isStatic Is static entry
+         * @param customStreamIntervalSecs Custom stream interval in seconds, if <= 0 srClass intervals are used
          * @return True if refreshed. False if it is new.
          */
         virtual bool updateTalkerWithStreamId(uint64_t streamId, cModule *module, const inet::MACAddress address,
                 SR_CLASS srClass = SR_CLASS::A, size_t framesize = 0, uint16_t intervalFrames = 0, uint16_t vid =
-                        VLAN_ID_DEFAULT, uint8_t pcp=PCP_DEFAULT_SRCLASSA, bool isStatic = false);
+                        VLAN_ID_DEFAULT, uint8_t pcp=PCP_DEFAULT_SRCLASSA, bool isStatic = false, double customStreamIntervalSecs = -1);
         /**
          * @brief Unregister a streamId at talkerTable.
          * @return True if removed. False if not registered.
