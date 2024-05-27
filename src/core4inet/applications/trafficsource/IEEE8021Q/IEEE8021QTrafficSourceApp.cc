@@ -76,9 +76,15 @@ void IEEE8021QTrafficSourceApp::handleMessage(cMessage *msg)
 
 void IEEE8021QTrafficSourceApp::sendMessage()
 {
+    static size_t sequenceNumber = 0;
     for (std::list<BGBuffer*>::const_iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf)
     {
         EthernetIIFrameWithQTag *frame = new EthernetIIFrameWithQTag("IEEE 802.1Q Traffic");
+        std::string name = par("displayName").stdstringValue();
+        if (name != "") {
+            name += "-" + std::to_string(sequenceNumber++);
+            frame->setName(name.c_str());
+        }
         frame->setDest(this->destAddress);
         cPacket *payload_packet = new cPacket();
         payload_packet->setByteLength(static_cast<int64_t>(getPayloadBytes()));
