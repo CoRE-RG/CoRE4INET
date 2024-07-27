@@ -31,7 +31,7 @@ simple CreditBasedShaper extends IEEE8021QbvSelectionAlgorithm
         // Statistic of the credit of the CBS algorithm
         @statistic[credit](title="Credit"; source=credit; unit=b; record=vector; interpolationmode=linear;);
         // Signal emitted when the reserved bandwidth is updated    	
-        @signal[reservedBandwidth](type=unsigned long);
+        @signal[reservedBandwidth](type=double);
         // Statistic of the reserved bandwidth of the CBS shaped priority
         @statistic[reservedBandwidth](title="Reserved Bandwidth"; source=reservedBandwidth; unit=bps; record=vector;);
         // Oscillator of the timed module (must be set to the name of an oscillator module in the Node) when left empty: oscillator

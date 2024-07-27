@@ -75,11 +75,11 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
     /**
      * @brief Bandwidth of the port where the CBS is attached.
      */
-    unsigned int portBandwidth;
+    double portBandwidth;
     /**
      * The reserved bandwidth of the CBS set in the idle slope parameter.
      */
-    unsigned long reservedBandwidth;
+    double reservedBandwidth;
     /**
      * @brieg VLAN Priority code point of the shaper.
      */
@@ -91,7 +91,7 @@ class CreditBasedShaper : public virtual IEEE8021QbvSelectionAlgorithm, Timed, c
     /**
      * @brief Outgoing Channel used to calculate transmission duration.
      */
-    cChannel *outChannel;
+    cDatarateChannel *outChannel;
 
   public:
     /**

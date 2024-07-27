@@ -47,8 +47,8 @@ bool CreditBasedShaper::isOpen()
 
 void CreditBasedShaper::initialize()
 {
-    this->outChannel = this->getParentModule()->getParentModule()->getSubmodule("mac")->gate("phys$o")->findTransmissionChannel();
-    this->portBandwidth = static_cast<unsigned int>(ceil(this->outChannel->getNominalDatarate()));
+    this->outChannel = dynamic_cast<cDatarateChannel*>(this->getParentModule()->getParentModule()->getSubmodule("mac")->gate("phys$o")->findTransmissionChannel());
+    this->portBandwidth = this->outChannel->getDatarate();
     IEEE8021QbvSelectionAlgorithm::initialize();
     Timed::initialize();
     this->handleParameterChange(nullptr);
