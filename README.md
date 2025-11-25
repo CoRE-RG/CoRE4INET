@@ -47,31 +47,8 @@ Philipp Meyer, Franz Korf, Till Steinbach, Thomas C. Schmidt, Simulation of Mixe
     * Start the examples in the framework
 
 
-## Continuous Integration
-
-The build state of the master branch is monitored:
-* Building:
-<a><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET"></a>
-* Tests:
-<a><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests"></a>
-
-<table>
-  <tr>
-    <th></th>
-    <th>Ubuntu 22.04</th>
-    <th>Windows 11</th>
-  </tr>
-  <tr>
-    <td>Building</td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Ubuntu_22.04"></td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET/Nodes=Windows_11"></td>
-  </tr>
-  <tr>
-    <td>Tests</td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Ubuntu_22.04"></td>
-    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=CoRE4INET/CoRE4INET_tests/Nodes=Windows_11"></td>
-  </tr>
-</table>
+## Status
+The project has been tested on Ubuntu 22.04 (+WSL) and Windows 11. 
 
 
 ## Further Information
