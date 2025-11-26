@@ -11,10 +11,6 @@ CoRE4INET was first introduced as TTE4INET at the 4th International Workshop on 
 Since there were changes necessary to support OMNeT++ 4.2 and INET 2.0, it was completely redesigned. When more real-time Ethernet protocols were added the project was renamed from TTE4INET to CoRE4INET to show that it does not only contain time-triggered protocols.
 
 
-## News
-* Updated dependencies to OMNeT++ 6.0.2 and INET 3.8.3
-
-
 ## Features
 * Best Efford Crosstraffic
 * IEEE 802.1Q / IEEE P802.1p VLANs and Priorities
